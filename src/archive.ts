@@ -7,7 +7,8 @@
  */
 
 import { execFile } from 'node:child_process'
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
+import { access, mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
+import { pathToFileURL } from 'node:url'
 import { join, resolve } from 'node:path'
 import { promisify } from 'node:util'
 import type { Region } from './region.ts'
@@ -45,16 +46,37 @@ const gitInfo = async (): Promise<BuildMeta['git']> => {
   }
 }
 
-/** Rasterise a thumbnail with whatever is installed; null when nothing is. */
-const thumbnail = async (svg: string, png: string, width = 360): Promise<boolean> => {
-  const tries: [string, string[]][] = [
-    ['rsvg-convert', ['-w', String(width), '-o', png, svg]],
-    ['magick', ['-density', '24', svg, '-resize', `${width}x`, png]],
-    ['convert', ['-density', '24', svg, '-resize', `${width}x`, png]],
-  ]
-  for (const [cmd, args] of tries) {
+const CHROMES = [
+  process.env.CHROME,
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  '/Applications/Chromium.app/Contents/MacOS/Chromium',
+  'google-chrome',
+  'chromium',
+  'chromium-browser',
+].filter((c): c is string => typeof c === 'string' && c.length > 0)
+
+/**
+ * Rasterise a thumbnail with whatever is installed: rsvg-convert, else headless Chrome (which
+ * draws the SVG exactly as the explorer will). ImageMagick's own SVG renderer is not tried: it
+ * ignores clip paths and stylesheets and draws these blank. False when nothing worked.
+ */
+const thumbnail = async (svg: string, png: string, viewBox: readonly number[], width = 360): Promise<boolean> => {
+  try {
+    await run('rsvg-convert', ['-w', String(width), '-o', png, svg], { timeout: 60_000 })
+    return true
+  } catch {
+    // fall through to Chrome
+  }
+  const height = Math.max(40, Math.round((width * viewBox[3]) / viewBox[2]))
+  for (const chrome of CHROMES) {
     try {
-      await run(cmd, args, { timeout: 60_000 })
+      await run(
+        chrome,
+        ['--headless=new', '--no-sandbox', '--disable-gpu', '--hide-scrollbars', '--no-first-run', '--no-default-browser-check',
+          `--window-size=${width},${height}`, `--screenshot=${png}`, pathToFileURL(svg).href],
+        { timeout: 60_000 },
+      )
+      await access(png)
       return true
     } catch {
       // try the next one
@@ -79,7 +101,7 @@ export const archiveBuild = async (
   const dir = resolve(outDir, 'builds', id)
   await mkdir(dir, { recursive: true })
   await writeFile(join(dir, 'image.svg'), svg)
-  const hasThumb = await thumbnail(join(dir, 'image.svg'), join(dir, 'thumb.png'))
+  const hasThumb = await thumbnail(join(dir, 'image.svg'), join(dir, 'thumb.png'), meta.viewBox)
   const git = override ? override.git : await gitInfo()
   const full: BuildMeta = {
     ...meta,
