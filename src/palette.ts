@@ -23,6 +23,16 @@ export interface Palette {
   readonly fascia: string
   readonly pier: string
   readonly ink: string
+  /** Whitewater: rapids marks and weir crests. */
+  readonly foam: string
+  /** Rock standing clear of the river. */
+  readonly boulder: string
+  /** Hillshade: what slopes turned to the light are washed with, and what turned away. */
+  readonly shadeLight: string
+  readonly shadeDark: string
+  /** Contour ink opacity, minor and major. */
+  readonly contourMinor: number
+  readonly contourMajor: number
   /** Wall tones: the face turned to the light, and the face turned away. */
   readonly wallLit: string
   readonly wallShade: string
@@ -53,6 +63,12 @@ const paper: Palette = {
   fascia: '#a49b8a',
   pier: '#8d8576',
   ink: '#2c2b33',
+  foam: '#ffffff',
+  boulder: '#cbbfa8',
+  shadeLight: '#fffaf0',
+  shadeDark: '#4a3b26',
+  contourMinor: 0.16,
+  contourMajor: 0.34,
   wallLit: '#ece7dc',
   wallShade: '#c3bbac',
   roofs: {
@@ -88,6 +104,12 @@ const night: Palette = {
   fascia: '#40465a',
   pier: '#3c4150',
   ink: '#c9d1e6',
+  foam: '#b7d3e2',
+  boulder: '#4a4d58',
+  shadeLight: '#46526e',
+  shadeDark: '#000000',
+  contourMinor: 0.14,
+  contourMajor: 0.3,
   wallLit: '#363b4a',
   wallShade: '#272b37',
   roofs: {

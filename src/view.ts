@@ -10,13 +10,15 @@
  */
 
 import type { Rect, Vec2 } from './geom.ts'
-import { localMetres, type Region } from './region.ts'
+import { localMetres, lonLatFromLocal, type Region } from './region.ts'
 
 export interface View {
   /** The bearing actually used, after any snap. */
   readonly bearing: number
   /** lon/lat → view metres. */
   readonly toView: (lon: number, lat: number) => Vec2
+  /** view metres → lon/lat. */
+  readonly fromView: (p: Vec2) => Vec2
   /** view metres + height → screen px. */
   readonly toScreen: (p: Vec2, z?: number) => Vec2
   /** The ground rectangle the frame shows, in view metres. */
@@ -66,6 +68,7 @@ export const snapBearing = (bearing: number, gridAngle: number): number => {
 
 export const makeView = (region: Region, bearing: number): View => {
   const local = localMetres(region)
+  const unlocal = lonLatFromLocal(region)
   const b = rad(bearing)
   const cos = Math.cos(b)
   const sin = Math.sin(b)
@@ -79,6 +82,7 @@ export const makeView = (region: Region, bearing: number): View => {
       // Counter-clockwise by the bearing brings the direction the camera faces to +N'.
       return [e * cos - n * sin, e * sin + n * cos]
     },
+    fromView: ([x, y]) => unlocal(x * cos + y * sin, -x * sin + y * cos),
     toScreen: ([e, n], z = 0) => [e * scale, -n * scale * squash - z * scale * zScale],
     frame: { minX: -region.width / 2, maxX: region.width / 2, minY: -region.depth / 2, maxY: region.depth / 2 },
     scale,

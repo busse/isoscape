@@ -49,6 +49,25 @@ export interface Region {
   readonly minBuildingArea?: number
   /** Which vertices get dots: every visible corner, roof corners only, or none. */
   readonly dots?: 'all' | 'roof' | 'none'
+  /** Use another region's cached data (data/<name>/) instead of this region's own. */
+  readonly data?: string
+  /** Draw the ground with relief from data/<region>/dem.bin.gz. Omit for a flat plate. */
+  readonly terrain?: TerrainOptions
+}
+
+export interface TerrainOptions {
+  /** Draw terrain at all, given elevation data. Default true. */
+  readonly enabled?: boolean
+  /** Vertical exaggeration of the ground (buildings keep their true heights). */
+  readonly exaggeration?: number
+  /** Grid spacing in metres for the draped surface, shading and contours. */
+  readonly cell?: number
+  /** Contour interval in metres; 0 for none. */
+  readonly contour?: number
+  /** Every n-th contour is drawn heavier. */
+  readonly majorEvery?: number
+  /** Water-surface gradient (m/m) above which a stretch of river reads as rapids. */
+  readonly rapids?: number
 }
 
 export const loadRegion = async (name: string, root = process.cwd()): Promise<Region> => {
@@ -79,4 +98,10 @@ export const localMetres = (r: Region) => {
   const [lon0, lat0] = r.center
   const kx = 111_320 * Math.cos((lat0 * Math.PI) / 180)
   return (lon: number, lat: number): [number, number] => [(lon - lon0) * kx, (lat - lat0) * M_PER_DEG_LAT]
+}
+
+export const lonLatFromLocal = (r: Region) => {
+  const [lon0, lat0] = r.center
+  const kx = 111_320 * Math.cos((lat0 * Math.PI) / 180)
+  return (e: number, n: number): [number, number] => [lon0 + e / kx, lat0 + n / M_PER_DEG_LAT]
 }

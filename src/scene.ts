@@ -19,6 +19,7 @@ import { mix, type Palette } from './palette.ts'
 import type { Region } from './region.ts'
 import { dominantGridAngle, makeView, snapBearing, type View } from './view.ts'
 import { localMetres } from './region.ts'
+import { makeTerrain, rasterize, settleWater, type Terrain } from './terrain.ts'
 
 /** A filled, optionally inked, polygon in screen pixels. */
 export interface Shape {
@@ -56,10 +57,10 @@ export interface GroundPolygon {
 }
 
 export interface Ribbon {
-  readonly kind: 'road' | 'path' | 'rail' | 'canal'
-  /** Screen-space quads. */
+  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir'
+  /** View-metre quads, draped over the terrain when drawn. */
   readonly quads: Vec2[][]
-  /** Screen-space centre lines, for rail ties. */
+  /** View-metre centre segments, for rail ties and weir crests. */
   readonly centre: Vec2[][]
 }
 
@@ -67,6 +68,7 @@ export interface Scene {
   readonly region: Region
   readonly view: View
   readonly palette: Palette
+  readonly terrain: Terrain
   readonly ground: GroundPolygon[]
   readonly ribbons: Ribbon[]
   readonly items: Item[]
@@ -90,11 +92,19 @@ export const chooseBearing = (region: Region, features: readonly Feature[]): num
   return angle === null ? region.bearing : snapBearing(region.bearing, angle)
 }
 
-export const buildScene = (region: Region, features: readonly Feature[], pal: Palette): Scene => {
+export const buildScene = (
+  region: Region,
+  features: readonly Feature[],
+  pal: Palette,
+  elevation: ((lon: number, lat: number) => number) | null = null,
+): Scene => {
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)
   const frame = view.frame
   const stats: Record<string, number> = { features: features.length }
+  const opts = region.terrain ?? {}
+  const useTerrain = elevation !== null && region.terrain !== undefined && opts.enabled !== false
+  const terrain = makeTerrain(view, opts.cell ?? 5, useTerrain ? (opts.exaggeration ?? 2) : 1, useTerrain ? elevation : null)
 
   // ---- ground ----------------------------------------------------------------------------
   const ground: GroundPolygon[] = []
@@ -104,12 +114,24 @@ export const buildScene = (region: Region, features: readonly Feature[], pal: Pa
     if (f.type !== 'polygon') continue
     const kind = groundKind(f.tags)
     if (kind === null) continue
-    const rings = [...f.outers, ...f.inners]
-      .map((r) => clipRingToRect(toViewRing(view, r), wide))
-      .filter((r) => r.length >= 3 && Math.abs(signedArea(r)) > 1)
+    // Outers counter-clockwise and holes clockwise, so many features can share one path
+    // with a nonzero fill: overlaps union, holes stay holes.
+    const rings = [
+      ...f.outers.map((r) => orient(clipRingToRect(toViewRing(view, r), wide), true)),
+      ...f.inners.map((r) => orient(clipRingToRect(toViewRing(view, r), wide), false)),
+    ].filter((r) => r.length >= 3 && Math.abs(signedArea(r)) > 1)
     if (rings.length > 0) ground.push({ kind, rings })
   }
   stats.ground = ground.length
+  rasterize(terrain, ground.filter((g) => g.kind === 'water').map((g) => g.rings), 1)
+  rasterize(terrain, ground.filter((g) => g.kind === 'island').map((g) => g.rings), 0)
+  settleWater(terrain)
+  if (!terrain.flat) {
+    stats.elevationDatum = Number(terrain.datum.toFixed(1))
+    let hi = -Infinity
+    for (const v of terrain.elev) hi = Math.max(hi, v)
+    stats.elevationTop = Number(hi.toFixed(1))
+  }
 
   // ---- ribbons -----------------------------------------------------------------------------
   const ribbons: Ribbon[] = []
@@ -122,8 +144,8 @@ export const buildScene = (region: Region, features: readonly Feature[], pal: Pa
       if (seg === null) continue
       const q = segmentQuad(seg[0], seg[1], width / 2, width / 2)
       if (q === null) continue
-      quads.push(q.map((p) => view.toScreen(p)))
-      centre.push([view.toScreen(seg[0]), view.toScreen(seg[1])])
+      quads.push(q)
+      centre.push([seg[0], seg[1]])
     }
     return quads.length === 0 ? null : { kind, quads, centre }
   }
@@ -142,6 +164,9 @@ export const buildScene = (region: Region, features: readonly Feature[], pal: Pa
       if (r) ribbons.push(r)
     } else if (isRail(t)) {
       const r = ribbonOf('rail', f, 3.2)
+      if (r) ribbons.push(r)
+    } else if (t.waterway === 'weir' || t.waterway === 'dam') {
+      const r = ribbonOf('weir', f, t.waterway === 'dam' ? 6 : 3)
       if (r) ribbons.push(r)
     } else {
       const ww = waterwayWidth(t)
@@ -188,10 +213,18 @@ export const buildScene = (region: Region, features: readonly Feature[], pal: Pa
     const inners = s.inners.map((h) => orient(simplifyRing(h, 0.45), false)).filter((h) => h.length >= 3)
     const h = buildingHeights(s.tags, area)
     heightSources[h.source]++
+    // Seat the building on the ground under it: walls reach down to the lowest corner, so a
+    // building on a slope shows its full height on the downhill side.
+    const grounds = outer.map((p) => terrain.z(p))
+    const gMin = Math.min(...grounds)
+    const gMax = Math.max(...grounds)
+    const gMean = grounds.reduce((a, b) => a + b, 0) / grounds.length
+    const base = gMin + h.base
+    const top = Math.max(gMean + h.top, gMax + 2.5, base + 2.5)
     const cls = buildingClass(s.tags)
     const roofs = pal.roofs[cls]
     const roof = roofs[hash(s.id) % roofs.length]
-    items.push(extrude(view, pal, s.id, outer, inners, h.base, h.top, roof, dotsMode, s.tags.name))
+    items.push(extrude(view, pal, s.id, outer, inners, base, top, roof, dotsMode, s.tags.name))
   }
   stats.buildings = items.length
   stats.heightFromTag = heightSources.height
@@ -201,13 +234,13 @@ export const buildScene = (region: Region, features: readonly Feature[], pal: Pa
   // ---- bridges -----------------------------------------------------------------------------
   let spans = 0
   for (const chain of chainBridges(bridgeLines)) {
-    const pieces = bridgePieces(view, pal, region, chain, wide)
+    const pieces = bridgePieces(view, pal, region, terrain, chain)
     spans += pieces.length
     items.push(...pieces)
   }
   stats.bridgePieces = spans
 
-  return { region, view, palette: pal, ground, ribbons, items, stats }
+  return { region, view, palette: pal, terrain, ground, ribbons, items, stats }
 }
 
 /** The rectangle either side of a segment, as a ring: left offset `l`, right offset `r`. */
@@ -380,22 +413,67 @@ const deckHeight = (region: Region, chain: BridgeChain): number => {
  * A bridge, cut into short spans so each can take its own place in the paint order. The deck
  * ramps up from the ground at both ends; piers drop from it at a fixed spacing.
  */
-const bridgePieces = (
-  view: View, pal: Palette, region: Region, chain: BridgeChain, wide: { minX: number; maxX: number; minY: number; maxY: number },
-): Item[] => {
+const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain): Item[] => {
   const line = chain.line
   const t = line.tags
   const rail = isRail(t)
   const width = rail ? 4.5 : (roadWidth(t) ?? 6) + 1.5
   const deck = deckHeight(region, chain)
   const pts = line.points.map(([lon, lat]) => view.toView(lon, lat))
-  const total = pts.reduce((s, p, i) => (i === 0 ? 0 : s + Math.hypot(p[0] - pts[i - 1][0], p[1] - pts[i - 1][1])), 0)
-  const ramp = Math.min(70, total / ((chain.rampStart ? 1 : 0) + (chain.rampEnd ? 1 : 0) + 1))
-  const zAt = (s: number) => {
+  const cum = [0]
+  for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]))
+  const total = cum[cum.length - 1]
+  const pointAt = (s: number): Vec2 => {
+    let i = 1
+    while (i < cum.length - 1 && cum[i] < s) i++
+    const u = (s - cum[i - 1]) / Math.max(1e-9, cum[i] - cum[i - 1])
+    return [pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * u, pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * u]
+  }
+  const ground = (s: number) => terrain.z(pointAt(s))
+
+  // The deck profile. A bridge runs fairly straight between its abutments, and never closer to
+  // what is under it than its clearance — except where it comes down to meet the ground.
+  const ramp = Math.min(70, total / 3)
+  const clearance = (s: number) => {
     const e = Math.min(chain.rampStart ? s : Infinity, chain.rampEnd ? total - s : Infinity)
     if (ramp <= 0 || e >= ramp) return deck
     const u = Math.max(0, e / ramp)
     return deck * (u * u * (3 - 2 * u))
+  }
+  const startLevel = ground(0) + (chain.rampStart ? 0 : deck)
+  const endLevel = ground(total) + (chain.rampEnd ? 0 : deck)
+  const step = 5
+  const samples = Math.max(2, Math.ceil(total / step) + 1)
+  const raw: number[] = []
+  for (let k = 0; k < samples; k++) {
+    const s = (total * k) / (samples - 1)
+    const chord = startLevel + (endLevel - startLevel) * (s / Math.max(1e-9, total))
+    raw.push(Math.max(chord, ground(s) + clearance(s)))
+  }
+  // Decks run straight: pull a taut line over the obstacles (the upper hull of the profile),
+  // so a bridge rises in straight runs to clear what is under it and never dips between.
+  const hull: number[] = []
+  for (let k = 0; k < samples; k++) {
+    while (hull.length >= 2) {
+      const a = hull[hull.length - 2]
+      const b = hull[hull.length - 1]
+      const cross = (b - a) * (raw[k] - raw[a]) - (raw[b] - raw[a]) * (k - a)
+      if (cross >= 0) hull.pop()
+      else break
+    }
+    hull.push(k)
+  }
+  const smooth = raw.slice()
+  for (let h = 0; h + 1 < hull.length; h++) {
+    const a = hull[h]
+    const b = hull[h + 1]
+    for (let k = a; k <= b; k++) smooth[k] = raw[a] + ((raw[b] - raw[a]) * (k - a)) / Math.max(1, b - a)
+  }
+  const zAt = (s: number) => {
+    const f = (s / Math.max(1e-9, total)) * (samples - 1)
+    const k = Math.min(samples - 2, Math.max(0, Math.floor(f)))
+    const u = f - k
+    return smooth[k] * (1 - u) + smooth[k + 1] * u
   }
   const items: Item[] = []
   let travelled = 0
@@ -410,7 +488,10 @@ const bridgePieces = (
       const s1 = travelled + (len * (k + 1)) / n
       const p0: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
       const p1: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 1)) / n, a[1] + ((b[1] - a[1]) * (k + 1)) / n]
-      if (!insideRect(p0, view.frame) || !insideRect(p1, view.frame)) continue
+      if (!insideRect(p0, view.frame) || !insideRect(p1, view.frame)) {
+        while (nextPier <= s1) nextPier += PIER_SPACING
+        continue
+      }
       const quad = segmentQuad(p0, p1, width / 2, width / 2)
       if (quad === null) continue
       const z0 = zAt(s0)
@@ -420,14 +501,16 @@ const bridgePieces = (
       while (nextPier <= s1) {
         const u = (nextPier - s0) / Math.max(1e-6, s1 - s0)
         const pz = z0 + (z1 - z0) * u
-        if (pz > 3) {
+        const c0: Vec2 = [p0[0] + (p1[0] - p0[0]) * u, p0[1] + (p1[1] - p0[1]) * u]
+        const footZ = terrain.z(c0)
+        if (pz - footZ > 3) {
           const c: Vec2 = [p0[0] + (p1[0] - p0[0]) * u, p0[1] + (p1[1] - p0[1]) * u]
           const dx = (p1[0] - p0[0]) / Math.max(1e-6, s1 - s0)
           const dy = (p1[1] - p0[1]) / Math.max(1e-6, s1 - s0)
           const half = width / 2 - 0.6
           const l: Vec2 = [c[0] - dy * half, c[1] + dx * half]
           const r: Vec2 = [c[0] + dy * half, c[1] - dx * half]
-          shapes.push({ pts: [view.toScreen(l, 0), view.toScreen(r, 0), view.toScreen(r, pz - FASCIA), view.toScreen(l, pz - FASCIA)], fill: pal.pier, ink: true })
+          shapes.push({ pts: [view.toScreen(l, footZ), view.toScreen(r, footZ), view.toScreen(r, pz - FASCIA), view.toScreen(l, pz - FASCIA)], fill: pal.pier, ink: true })
         }
         nextPier += PIER_SPACING
       }
@@ -462,7 +545,7 @@ const bridgePieces = (
         id: `${line.id}.${i}.${k}`,
         kind: 'bridge',
         hull: convexHull(quad),
-        zMin: 0,
+        zMin: Math.min(terrain.z(p0), terrain.z(p1)),
         zMax: Math.max(z0, z1),
         key: (p0[1] + p1[1]) / 2,
         shapes,
