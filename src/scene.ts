@@ -212,6 +212,7 @@ export const buildScene = (
     if (outer.length < 3) continue
     const inners = s.inners.map((h) => orient(simplifyRing(h, 0.45), false)).filter((h) => h.length >= 3)
     const h = buildingHeights(s.tags, area)
+    if (!Number.isFinite(h.base) || !Number.isFinite(h.top)) continue
     heightSources[h.source]++
     // Seat the building on the ground under it: walls reach down to the lowest corner, so a
     // building on a slope shows its full height on the downhill side.

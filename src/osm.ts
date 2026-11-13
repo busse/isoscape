@@ -8,8 +8,8 @@
  */
 
 import { execFile } from 'node:child_process'
-import { mkdir, writeFile } from 'node:fs/promises'
-import { dirname } from 'node:path'
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
 import { promisify } from 'node:util'
 import type { Vec2 } from './geom.ts'
 import { openRing, samePoint } from './geom.ts'
@@ -44,8 +44,9 @@ export const MIRRORS = [
   'https://overpass.kumi.systems/api/interpreter',
 ]
 
-export const overpassQuery = (r: Region): string => {
-  const b = fetchBounds(r)
+export interface Bounds { readonly south: number; readonly west: number; readonly north: number; readonly east: number }
+
+export const overpassQuery = (r: Region, b: Bounds = fetchBounds(r)): string => {
   const bbox = [b.south, b.west, b.north, b.east].map((n) => n.toFixed(5)).join(',')
   return `[out:json][timeout:170][bbox:${bbox}];
 (
@@ -87,26 +88,104 @@ const postQuery = async (url: string, query: string): Promise<string> => {
 }
 
 /** Ask each mirror in turn, backing off between rounds; Overpass is often at capacity. */
-export const fetchOsm = async (r: Region, out: string, rounds = 6, log = console.error): Promise<void> => {
-  const query = overpassQuery(r)
+const askOverpass = async (query: string, rounds: number, log: (m: string) => void): Promise<string> => {
   for (let round = 0; round < rounds; round++) {
     for (const url of MIRRORS) {
       try {
         const body = await postQuery(url, query)
-        if (!body.trimStart().startsWith('{') || !body.includes('"elements"')) throw new Error('not an Overpass JSON answer')
-        await mkdir(dirname(out), { recursive: true })
-        await writeFile(out, body)
-        log(`fetched ${(body.length / 1e6).toFixed(1)} MB from ${new URL(url).host}`)
-        return
+        // A timed-out transfer can arrive with a 200 and a truncated body: parse to be sure.
+        const parsed = JSON.parse(body) as { elements?: unknown }
+        if (!Array.isArray(parsed.elements)) throw new Error('not an Overpass JSON answer')
+        log(`  ${(body.length / 1e6).toFixed(1)} MB from ${new URL(url).host}`)
+        return body
       } catch (error) {
-        log(`${new URL(url).host}: ${(error as Error).message.split('\n')[0]}`)
+        log(`  ${new URL(url).host}: ${(error as Error).message.split('\n')[0]}`)
       }
     }
-    const wait = 15 * (round + 1)
-    log(`all mirrors busy; retrying in ${wait}s`)
-    await new Promise((done) => setTimeout(done, wait * 1000))
+    if (round + 1 < rounds) {
+      const wait = 15 * (round + 1)
+      log(`  all mirrors busy; retrying in ${wait}s`)
+      await new Promise((done) => setTimeout(done, wait * 1000))
+    }
   }
-  throw new Error('Overpass did not answer. Try again later, or save a query result to the cache path by hand.')
+  throw new Error('Overpass did not answer. Run fetch again later; finished tiles are kept.')
+}
+
+/** Cut the fetch bounds into tiles no bigger than `size` metres a side. */
+export const tilesFor = (b: Bounds, size = 1600): Bounds[] => {
+  const kx = 111_320 * Math.cos((((b.north + b.south) / 2) * Math.PI) / 180)
+  const cols = Math.max(1, Math.ceil(((b.east - b.west) * kx) / size))
+  const rows = Math.max(1, Math.ceil(((b.north - b.south) * 110_574) / size))
+  const out: Bounds[] = []
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
+      out.push({
+        south: b.south + ((b.north - b.south) * j) / rows,
+        north: b.south + ((b.north - b.south) * (j + 1)) / rows,
+        west: b.west + ((b.east - b.west) * i) / cols,
+        east: b.west + ((b.east - b.west) * (i + 1)) / cols,
+      })
+    }
+  }
+  return out
+}
+
+/**
+ * Fetch a region's OSM data tile by tile into `<dir>/osm-tiles/`, keeping every finished tile,
+ * then merge them into `<dir>/osm.json`. A big region takes several minutes and Overpass is
+ * often busy, so this resumes: run it again and only the missing tiles are asked for.
+ * With `budgetSeconds`, it stops starting new tiles once that much time has passed.
+ */
+export const fetchOsm = async (
+  r: Region,
+  dir: string,
+  options: { budgetSeconds?: number; rounds?: number; log?: (m: string) => void } = {},
+): Promise<{ done: number; total: number }> => {
+  const log = options.log ?? console.error
+  const tiles = tilesFor(fetchBounds(r))
+  const tileDir = join(dir, 'osm-tiles')
+  await mkdir(tileDir, { recursive: true })
+  const t0 = Date.now()
+  let done = 0
+  // A tile's cache file is named by its bounds, so changing the frame never reuses a tile
+  // that covers somewhere else.
+  const nameOf = (t: Bounds) => [t.south, t.west, t.north, t.east].map((n) => n.toFixed(5)).join('_') + '.json'
+  for (let k = 0; k < tiles.length; k++) {
+    const path = join(tileDir, nameOf(tiles[k]))
+    if (await exists(path)) { done++; continue }
+    if (options.budgetSeconds !== undefined && (Date.now() - t0) / 1000 > options.budgetSeconds) break
+    log(`tile ${k + 1}/${tiles.length}`)
+    await writeFile(path, await askOverpass(overpassQuery(r, tiles[k]), options.rounds ?? 3, log))
+    done++
+  }
+  if (done === tiles.length) {
+    // Merge, keeping one copy of anything that more than one tile returned.
+    const seen = new Set<string>()
+    const elements: unknown[] = []
+    for (let k = 0; k < tiles.length; k++) {
+      const part = JSON.parse(await readFile(join(tileDir, nameOf(tiles[k])), 'utf8')) as { elements: { type: string; id: number }[] }
+      for (const e of part.elements) {
+        const key = `${e.type}/${e.id}`
+        if (seen.has(key)) continue
+        seen.add(key)
+        elements.push(e)
+      }
+    }
+    await writeFile(join(dir, 'osm.json'), JSON.stringify({ version: 0.6, generator: 'isoscape (merged Overpass tiles)', copyright: 'OpenStreetMap contributors, ODbL', elements }))
+    log(`merged ${tiles.length} tiles: ${elements.length} elements`)
+  } else {
+    log(`${done} of ${tiles.length} tiles fetched; run fetch again to continue`)
+  }
+  return { done, total: tiles.length }
+}
+
+const exists = async (path: string) => {
+  try {
+    await access(path)
+    return true
+  } catch {
+    return false
+  }
 }
 
 interface RawGeom {

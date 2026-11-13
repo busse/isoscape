@@ -16,11 +16,70 @@ import type { Item, Scene, Shape } from './scene.ts'
 import { cellNormal, contours, dampCell, riverFall, type ContourSegment } from './terrain.ts'
 
 const f = (n: number) => (Math.round(n * 10) / 10).toString()
-const pathOf = (pts: readonly Vec2[], close = true) =>
-  pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${f(p[0])} ${f(p[1])}`).join('') + (close ? 'Z' : '')
 
-let r = 1
-const dot = ([x, y]: Vec2) => `M${f(x - r)} ${f(y)}a${r} ${r} 0 1 0 ${f(2 * r)} 0a${r} ${r} 0 1 0 ${f(-2 * r)} 0`
+/** A number in tenths, as short as SVG allows: no leading zero, no "-0". */
+const num = (tenths: number): string => {
+  if (tenths === 0) return '0'
+  const neg = tenths < 0
+  const a = Math.abs(tenths)
+  const whole = Math.floor(a / 10)
+  const frac = a % 10
+  const body = whole === 0 ? `.${frac}` : frac === 0 ? `${whole}` : `${whole}.${frac}`
+  return neg ? `-${body}` : body
+}
+/** Join numbers, leaving out the separator where a sign or a leading dot already parts them. */
+const pair = (a: string, b: string) => (b.startsWith('-') || (b.startsWith('.') && a.includes('.')) ? a + b : `${a} ${b}`)
+
+/**
+ * Drop points that lie within `tol` pixels of the line through their neighbours. Draped edges
+ * carry a point per grid node; on screen most of them are straight.
+ */
+const simplify = (pts: readonly Vec2[], tol: number): Vec2[] => {
+  if (pts.length <= 3) return pts.slice()
+  const out: Vec2[] = [pts[0]]
+  for (let i = 1; i < pts.length - 1; i++) {
+    const a = out[out.length - 1]
+    const p = pts[i]
+    const b = pts[i + 1]
+    const dx = b[0] - a[0]
+    const dy = b[1] - a[1]
+    const len = Math.hypot(dx, dy)
+    const d = len < 1e-9 ? Math.hypot(p[0] - a[0], p[1] - a[1]) : Math.abs(dx * (a[1] - p[1]) - dy * (a[0] - p[0])) / len
+    if (d > tol) out.push(p)
+  }
+  out.push(pts[pts.length - 1])
+  return out
+}
+
+/** Path data, relative after the first point, in tenths of a unit. */
+const pathOf = (input: readonly Vec2[], close = true, tol = 0) => {
+  const pts = tol > 0 ? simplify(input, tol) : input
+  let d = ''
+  let px = 0
+  let py = 0
+  let lines = 0
+  pts.forEach((p, i) => {
+    const x = Math.round(p[0] * 10)
+    const y = Math.round(p[1] * 10)
+    if (i === 0) d += 'M' + pair(num(x), num(y))
+    else {
+      const dx = x - px
+      const dy = y - py
+      if (dx === 0 && dy === 0) return
+      // After the first relative lineto, further pairs continue it implicitly.
+      d += (lines === 0 ? 'l' : ' ') + pair(num(dx), num(dy))
+      lines++
+    }
+    px = x
+    py = y
+  })
+  return d + (close ? 'z' : '')
+}
+/** Draped ground: simplified to a quarter pixel. */
+const groundPath = (pts: readonly Vec2[], close = true) => pathOf(pts, close, 0.25)
+
+/** A dot is a zero-length stroke with round caps: the shortest circle SVG has. */
+const dot = ([x, y]: Vec2) => 'M' + pair(num(Math.round(x * 10)), num(Math.round(y * 10))) + 'h0'
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;')
 
@@ -49,6 +108,9 @@ const densify = (ring: readonly Vec2[], step: number, closed = true): Vec2[] => 
   return out
 }
 
+/** Layers drawn on the water's surface rather than the ground's. */
+const WATERY = new Set(['W', 'canal', 'weir'])
+
 interface Entry { rings: Ring[]; minN: number; maxN: number }
 interface Layer { cls: string; entries: Entry[] }
 
@@ -68,9 +130,10 @@ export const renderSvg = (scene: Scene): Rendered => {
   const stats: Record<string, number> = {}
   const P = (pt: Vec2, z = 0) => view.toScreen(pt, z)
   const drape = (pt: Vec2) => P(pt, T.z(pt))
+  /** Water lies on the river's surface, wherever its outline reaches. */
+  const drapeWater = (pt: Vec2) => P(pt, T.waterZ(pt))
 
   const items = paintOrder(scene.items)
-  r = p.dotRadius
 
   // ---- the frame on screen -------------------------------------------------------------------
   const xs: number[] = []
@@ -80,8 +143,9 @@ export const renderSvg = (scene: Scene): Rendered => {
   const [x0] = P([fr.minX, 0])
   const [x1] = P([fr.maxX, 0])
   let top = Infinity
-  for (const it of items) for (const s of it.shapes) for (const pt of s.pts) top = Math.min(top, pt[1])
-  for (let n = fr.minY; n <= fr.maxY + 1e-6; n += c) for (const e of xs) top = Math.min(top, drape([e, n])[1])
+  // One bad coordinate must not take the whole frame with it: skip anything not finite.
+  for (const it of items) for (const s of it.shapes) for (const pt of s.pts) if (pt[1] < top) top = pt[1]
+  for (let n = fr.minY; n <= fr.maxY + 1e-6; n += c) for (const e of xs) { const y = drape([e, n])[1]; if (y < top) top = y }
   const bottom = P([0, fr.minY], -slab)[1]
   const pad = 24
   const vb: [number, number, number, number] = [x0 - pad, top - pad, x1 - x0 + 2 * pad, bottom - top + 2 * pad]
@@ -93,7 +157,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     `<title>${esc(region.title)}</title>`,
     `<desc>Map data © OpenStreetMap contributors (ODbL).${T.flat ? '' : ' Elevation: USGS 3DEP.'} Bearing ${view.bearing.toFixed(1)}°.</desc>`,
     `<style>`,
-    `.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}.d{fill:${p.ink}}`,
+    `.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}.d{fill:none;stroke:${p.ink};stroke-width:${f(p.dotRadius * 2)};stroke-linecap:round}`,
     `.td{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth};stroke-dasharray:1.2 1.8}`,
     sealed('L', p.land), sealed('Lw', p.water), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('rock', p.rock),
     sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('canal', p.water), sealed('path', p.path),
@@ -106,6 +170,8 @@ export const renderSvg = (scene: Scene): Rendered => {
     `.froth{fill:${p.foam}}`,
     `.boulder{fill:${p.boulder};stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:.7;stroke-linejoin:round}`,
     `.edge{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth}}`,
+    // Hillshade levels: hp1… lit, hm1… shaded.
+    ...Array.from({ length: 12 }, (_, k) => `.hp${k + 1}{fill:${p.shadeLight};fill-opacity:${Math.min(0.55, (k + 1) * 0.045).toFixed(3)}}.hm${k + 1}{fill:${p.shadeDark};fill-opacity:${Math.min(0.55, (k + 1) * 0.04).toFixed(3)}}`),
     `</style>`,
     `<rect x="${f(vb[0])}" y="${f(vb[1])}" width="${f(vb[2])}" height="${f(vb[3])}" fill="${p.sky}"/>`,
   )
@@ -155,8 +221,9 @@ export const renderSvg = (scene: Scene): Rendered => {
   })
   const layers: Layer[] = [
     ...coverLayers(false),
-    { cls: 'W', entries: water.map((g) => entryOf(g.rings)) },
-    { cls: 'I', entries: islands.map((g) => entryOf(g.rings)) },
+    // OSM's water outline draws a flat scene's shore; with terrain the water grid does.
+    { cls: 'W', entries: T.flat ? water.map((g) => entryOf(g.rings)) : [] },
+    { cls: 'I', entries: T.flat ? islands.map((g) => entryOf(g.rings)) : [] },
     ...coverLayers(true),
     ribbonLayer('canal'),
     ribbonLayer('weir'),
@@ -199,9 +266,56 @@ export const renderSvg = (scene: Scene): Rendered => {
   // Light from the left and a little towards the camera, so the slopes we look at are lit and
   // the backs of hills fall into shade.
   const light = normalise([-0.85, -0.35, 1.0])
-  /** Is cell (i, j) mostly water? */
-  const baseWet = (i: number, j: number) =>
-    T.water[j * T.nx + i] + T.water[j * T.nx + i + 1] + T.water[(j + 1) * T.nx + i] + T.water[(j + 1) * T.nx + i + 1] >= 2
+  const wetCorners = (i: number, j: number) =>
+    T.water[j * T.nx + i] + T.water[j * T.nx + i + 1] + T.water[(j + 1) * T.nx + i] + T.water[(j + 1) * T.nx + i + 1]
+  /**
+   * Is cell (i, j) water in the strip base? With terrain, only cells wholly in the water: the
+   * shoreline is traced separately. Flat, a majority will do, and OSM's outline draws the shore.
+   */
+  const baseWet = (i: number, j: number) => wetCorners(i, j) >= (T.flat ? 2 : 4)
+  // The shoreline, for terrain: a lightly smoothed water mask, traced at one half.
+  const wetness = new Float32Array(T.water.length)
+  if (!T.flat) {
+    for (let j = 0; j < T.ny; j++) {
+      for (let i = 0; i < T.nx; i++) {
+        let sum = 0
+        let wsum = 0
+        for (let dj = -1; dj <= 1; dj++) {
+          for (let di = -1; di <= 1; di++) {
+            const ii = i + di
+            const jj = j + dj
+            if (ii < 0 || jj < 0 || ii >= T.nx || jj >= T.ny) continue
+            const w = di === 0 && dj === 0 ? 4 : di === 0 || dj === 0 ? 2 : 1
+            sum += T.water[jj * T.nx + ii] * w
+            wsum += w
+          }
+        }
+        wetness[j * T.nx + i] = sum / wsum
+      }
+    }
+  }
+  /** The part of cell (i, j) on the wet side of the shoreline, as a polygon in view metres. */
+  const shoreCell = (i: number, j: number, yLo: number, yHi: number): Vec2[] | null => {
+    const xa = nodeX(i)
+    const xb = nodeX(i + 1)
+    const corners: [Vec2, number][] = [
+      [[xa, yLo], wetness[j * T.nx + i]],
+      [[xb, yLo], wetness[j * T.nx + i + 1]],
+      [[xb, yHi], wetness[(j + 1) * T.nx + i + 1]],
+      [[xa, yHi], wetness[(j + 1) * T.nx + i]],
+    ]
+    const out: Vec2[] = []
+    for (let k = 0; k < 4; k++) {
+      const [pa, va] = corners[k]
+      const [pb, vb] = corners[(k + 1) % 4]
+      if (va >= 0.5) out.push(pa)
+      if ((va >= 0.5) !== (vb >= 0.5)) {
+        const u = (0.5 - va) / (vb - va)
+        out.push([pa[0] + (pb[0] - pa[0]) * u, pa[1] + (pb[1] - pa[1]) * u])
+      }
+    }
+    return out.length >= 3 ? out : null
+  }
 
   const paintStrip = (s: Strip) => {
     // Strips overlap their neighbours so no background shows between them, and no two edges
@@ -209,9 +323,13 @@ export const renderSvg = (scene: Scene): Rendered => {
     // scaling the image down shows a faint stripe. So the bare ground reaches a little past the
     // far edge, everything on it reaches further, and everything but the ground reaches past
     // the near edge too; each edge then falls inside something painted later.
-    const lapNear = s.n0 > fr.minY ? 0.8 : 0
+    // The base laps toward the camera, by most of a strip (more than a pixel even zoomed
+    // right out), into ground the next strip
+    // always repaints; it never laps away from the camera, where it could cover a building
+    // standing in the strip before.
+    const lapNear = s.n0 > fr.minY ? Math.min(8, (s.n1 - s.n0) * 0.8) : 0
     const lapFar = s.n1 < fr.maxY ? 0.6 : 0
-    const groundFar = s.n1 < fr.maxY ? 0.3 : 0
+    const groundFar = 0
     const band: Rect = { minX: fr.minX, maxX: fr.maxX, minY: s.n0 - lapNear, maxY: s.n1 + lapFar }
     const parts: string[] = []
     // The strip's base: its own surface, cell row by cell row, coloured water where the grid
@@ -220,7 +338,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     let landBase = ''
     let waterBase = ''
     for (let j = s.j0; j < s.j1; j++) {
-      const yLo = Math.max(s.n0, T.y0 + j * c)
+      const yLo = j === s.j0 ? s.n0 - lapNear : T.y0 + j * c
       const yHi = j === s.j1 - 1 ? s.n1 + groundFar : T.y0 + (j + 1) * c
       let start = iMin
       let wet = baseWet(start, j)
@@ -229,11 +347,12 @@ export const renderSvg = (scene: Scene): Rendered => {
         if (w === wet) continue
         const top: Vec2[] = []
         const bottom: Vec2[] = []
+        const lay = wet ? drapeWater : drape
         for (let k = start; k <= i; k++) {
-          top.push(drape([nodeX(k), yHi]))
-          bottom.push(drape([nodeX(k), yLo]))
+          top.push(lay([nodeX(k), yHi]))
+          bottom.push(lay([nodeX(k), yLo]))
         }
-        const d = pathOf([...top, ...bottom.reverse()])
+        const d = groundPath([...top, ...bottom.reverse()])
         if (wet) waterBase += d
         else landBase += d
         start = i
@@ -242,6 +361,21 @@ export const renderSvg = (scene: Scene): Rendered => {
     }
     if (landBase) parts.push(`<path class="L" d="${landBase}"/>`)
     if (waterBase) parts.push(`<path class="Lw" d="${waterBase}"/>`)
+    // With terrain, the water's edge comes from the lidar-corrected water grid, not from OSM's
+    // outline: the two disagree by metres, and on a steep bank metres become cliffs.
+    if (!T.flat) {
+      let shore = ''
+      for (let j = s.j0; j < s.j1; j++) {
+        const yLo = j === s.j0 ? s.n0 - lapNear : T.y0 + j * c
+        const yHi = j === s.j1 - 1 ? s.n1 + groundFar : T.y0 + (j + 1) * c
+        for (let i = iMin; i < iMax; i++) {
+          if (wetCorners(i, j) === 4) continue
+          const poly = shoreCell(i, j, yLo, yHi)
+          if (poly !== null) shore += groundPath(poly.map(drapeWater))
+        }
+      }
+      if (shore) parts.push(`<path class="W" d="${shore}"/>`)
+    }
     for (const layer of layers) {
       let d = ''
       for (const e of layer.entries) {
@@ -249,7 +383,7 @@ export const renderSvg = (scene: Scene): Rendered => {
         for (const ring of e.rings) {
           const clipped = clipRingToRect(ring, band)
           if (clipped.length < 3) continue
-          d += pathOf(densify(clipped, c).map(drape))
+          d += groundPath(densify(clipped, c).map(WATERY.has(layer.cls) ? drapeWater : drape))
         }
       }
       if (d) parts.push(`<path class="${layer.cls}" d="${d}"/>`)
@@ -259,13 +393,15 @@ export const renderSvg = (scene: Scene): Rendered => {
       for (const [a, b] of ll.segs) {
         const seg = clipSegmentToRect(a, b, band)
         if (seg === null) continue
-        d += pathOf(densify(seg, c, false).map(drape), false)
+        d += groundPath(densify(seg, c, false).map(drape), false)
       }
       if (d) parts.push(`<path class="${ll.cls}" d="${d}"/>`)
     }
     if (!T.flat) {
       // Hillshade: runs of cells along each row that share a shade level, washed light or dark.
       const flatShade = light[2]
+      // One path per shade level per strip: runs of a level share a class.
+      const shades = new Map<number, string>()
       for (let j = s.j0; j < s.j1; j++) {
         let runStart = -1
         let runLevel = 0
@@ -277,9 +413,7 @@ export const renderSvg = (scene: Scene): Rendered => {
             topEdge.push(drape([nodeX(i), T.y0 + (j + 1) * c]))
             bottomEdge.push(drape([nodeX(i), T.y0 + j * c]))
           }
-          const colour = runLevel > 0 ? p.shadeLight : p.shadeDark
-          const alpha = Math.min(0.55, Math.abs(runLevel) * (runLevel > 0 ? 0.045 : 0.04))
-          parts.push(`<path fill="${colour}" fill-opacity="${alpha.toFixed(2)}" d="${pathOf([...topEdge, ...bottomEdge.reverse()])}"/>`)
+          shades.set(runLevel, (shades.get(runLevel) ?? '') + groundPath([...topEdge, ...bottomEdge.reverse()]))
         }
         for (let i = iMin; i < iMax; i++) {
           let level = 0
@@ -296,6 +430,7 @@ export const renderSvg = (scene: Scene): Rendered => {
         }
         emit(iMax)
       }
+      for (const [level, d] of [...shades].sort((a, b) => a[0] - b[0])) parts.push(`<path class="h${level < 0 ? 'm' : 'p'}${Math.abs(level)}" d="${d}"/>`)
       // Contours.
       let minor = ''
       let major = ''

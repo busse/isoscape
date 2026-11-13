@@ -72,7 +72,10 @@ export const parseLength = (v: string | undefined): number | null => {
   const ftIn = s.match(/^(\d+)'\s*(\d+)"?$/)
   if (ftIn) return parseInt(ftIn[1], 10) * 0.3048 + parseInt(ftIn[2], 10) * 0.0254
   const m = s.match(/^([\d.]+)\s*m?$/)
-  if (m) return parseFloat(m[1])
+  if (m) {
+    const n = parseFloat(m[1])
+    return Number.isFinite(n) ? n : null
+  }
   return null
 }
 
@@ -89,18 +92,26 @@ export const buildingClass = (t: Tags): BuildingClass => {
 
 const METRES_PER_LEVEL = 3.4
 
+/** A tag as a finite number, or null. OSM holds anything (one building's min_level is "federal"). */
+const finite = (v: string | undefined): number | null => {
+  if (v === undefined) return null
+  const n = parseFloat(v)
+  return Number.isFinite(n) ? n : null
+}
+
 /**
  * Height and base of a building, in metres. OSM's own `height` wins, then levels; failing
  * both, a guess from the building's type and footprint, which is what most of a city will be
  * until lidar heights are joined in.
  */
 export const buildingHeights = (t: Tags, footprintArea: number): { base: number; top: number; source: 'height' | 'levels' | 'guess' } => {
-  const base = parseLength(t.min_height) ?? (t['building:min_level'] !== undefined ? parseFloat(t['building:min_level']) * METRES_PER_LEVEL : 0)
+  const minLevel = finite(t['building:min_level'])
+  const base = Math.max(0, parseLength(t.min_height) ?? (minLevel !== null ? minLevel * METRES_PER_LEVEL : 0))
   const height = parseLength(t.height)
   if (height !== null && height > base) return { base, top: height, source: 'height' }
-  const levels = t['building:levels'] !== undefined ? parseFloat(t['building:levels']) : NaN
+  const levels = finite(t['building:levels']) ?? NaN
   if (Number.isFinite(levels) && levels > 0) {
-    const roof = t['roof:levels'] !== undefined ? parseFloat(t['roof:levels']) || 0 : 0
+    const roof = finite(t['roof:levels']) ?? 0
     return { base, top: Math.max(base + 2.5, (levels + roof * 0.5) * METRES_PER_LEVEL + 0.8), source: 'levels' }
   }
   const b = t.building ?? t['building:part'] ?? 'yes'

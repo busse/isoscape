@@ -68,6 +68,8 @@ export interface TerrainOptions {
   readonly majorEvery?: number
   /** Water-surface gradient (m/m) above which a stretch of river reads as rapids. */
   readonly rapids?: number
+  /** Metres per pixel to fetch the elevation at. Default 1; coarser keeps big regions small. */
+  readonly demResolution?: number
 }
 
 export const loadRegion = async (name: string, root = process.cwd()): Promise<Region> => {
@@ -82,15 +84,26 @@ export const loadRegion = async (name: string, root = process.cwd()): Promise<Re
 const M_PER_DEG_LAT = 110_574
 
 /**
- * The lon/lat box that covers the frame at *any* bearing, so a snapped camera never looks
- * past the data. It is the bounding box of the frame's circumscribed circle.
+ * The lon/lat box the data must cover. With a fixed bearing it is the box around the rotated
+ * frame; with `snap` the bearing is not known until the data is in, so it is the box around
+ * the frame's circumscribed circle, which covers any bearing.
  */
 export const fetchBounds = (r: Region): { south: number; west: number; north: number; east: number } => {
-  const radius = Math.hypot(r.width, r.depth) / 2 + 50
   const [lon, lat] = r.center
-  const dLat = radius / M_PER_DEG_LAT
-  const dLon = radius / (111_320 * Math.cos((lat * Math.PI) / 180))
-  return { south: lat - dLat, west: lon - dLon, north: lat + dLat, east: lon + dLon }
+  const kx = 111_320 * Math.cos((lat * Math.PI) / 180)
+  const margin = 60
+  let halfE: number
+  let halfN: number
+  if (r.snap === false) {
+    const b = (r.bearing * Math.PI) / 180
+    const w = r.width / 2 + margin
+    const d = r.depth / 2 + margin
+    halfE = Math.abs(w * Math.cos(b)) + Math.abs(d * Math.sin(b))
+    halfN = Math.abs(w * Math.sin(b)) + Math.abs(d * Math.cos(b))
+  } else {
+    halfE = halfN = Math.hypot(r.width, r.depth) / 2 + margin
+  }
+  return { south: lat - halfN / M_PER_DEG_LAT, west: lon - halfE / kx, north: lat + halfN / M_PER_DEG_LAT, east: lon + halfE / kx }
 }
 
 /** Local east/north metres about the region centre: equirectangular, fine at city scale. */

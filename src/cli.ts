@@ -4,7 +4,7 @@ import { resolve } from 'node:path'
 import { parseArgs, promisify } from 'node:util'
 import { archiveBuild, listBuilds } from './archive.ts'
 import { backfill } from './backfill.ts'
-import { fetchDem, loadDem, sampler } from './dem.ts'
+import { cleanDem, fetchDem, loadDem, sampler } from './dem.ts'
 import { renderExplorer } from './explorer.ts'
 import { fetchOsm, overpassQuery, parseOsm } from './osm.ts'
 import { palette } from './palette.ts'
@@ -27,6 +27,7 @@ const HELP = `isoscape — isometric dot-and-line views of real places
                                    build a region with an earlier commit's code and archive it
 
   --osm-only / --dem-only   fetch just one of the two
+  --budget <seconds>        stop starting new OSM tiles after this long (fetch resumes)
   --palette <name>   override the region's palette (paper, night)
   --png [width]      also rasterise out/<region>.png (needs rsvg-convert)
   --note "<text>"    say what this build is trying, shown in the explorer
@@ -49,7 +50,11 @@ const loadScene = async (name: string, paletteName?: string) => {
   if (region.terrain !== undefined && region.terrain.enabled !== false) {
     const dem = await loadDem(resolve(dataDir(region), 'dem.bin.gz'))
     if (dem === null) console.error(`no elevation for "${name}"; drawing it flat. Run: isoscape fetch ${region.data ?? name} --dem-only`)
-    else elevation = sampler(dem)
+    else {
+      const voids = cleanDem(dem)
+      if (voids > 0) console.error(`elevation: ${voids} implausible samples treated as missing`)
+      elevation = sampler(dem)
+    }
   }
   return buildScene(region, features, palette(paletteName ?? region.palette), elevation)
 }
@@ -67,6 +72,7 @@ export const main = async (argv: string[]): Promise<void> => {
       'osm-only': { type: 'boolean' },
       'dem-only': { type: 'boolean' },
       note: { type: 'string' },
+      budget: { type: 'string' },
       'no-archive': { type: 'boolean' },
     },
   })
@@ -109,8 +115,16 @@ export const main = async (argv: string[]): Promise<void> => {
       const region = await loadRegion(name)
       const b = fetchBounds(region)
       console.error(`fetching ${b.south.toFixed(4)},${b.west.toFixed(4)} → ${b.north.toFixed(4)},${b.east.toFixed(4)}`)
-      if (!values['dem-only']) await fetchOsm(region, resolve(dataDir(region), 'osm.json'))
-      if (!values['osm-only']) await fetchDem(region, resolve(dataDir(region), 'dem.bin.gz'))
+      let osmDone = true
+      if (!values['dem-only']) {
+        const budget = values.budget === undefined ? undefined : Number(values.budget)
+        const { done, total } = await fetchOsm(region, dataDir(region), budget === undefined ? {} : { budgetSeconds: budget })
+        osmDone = done === total
+      }
+      if (!values['osm-only'] && osmDone) {
+        const budget = values.budget === undefined ? undefined : Number(values.budget)
+        await fetchDem(region, dataDir(region), budget === undefined ? {} : { budgetSeconds: budget })
+      }
       return
     }
     case 'info': {

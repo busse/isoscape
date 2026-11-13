@@ -112,3 +112,29 @@ test('heights come from tags first, then levels, then a guess', () => {
   assert.equal(buildingHeights({ 'building:levels': '10' }, 100).source, 'levels')
   assert.equal(buildingHeights({ building: 'house' }, 100).source, 'guess')
 })
+
+test('render: a flat region renders, paths are well formed', async () => {
+  const { renderSvg } = await import('../src/render.ts')
+  const { buildScene } = await import('../src/scene.ts')
+  const sq = (x: number, y: number) => [{ lat: y, lon: x }, { lat: y, lon: x + 0.0002 }, { lat: y + 0.0002, lon: x + 0.0002 }, { lat: y + 0.0002, lon: x }, { lat: y, lon: x }]
+  const json = JSON.stringify({ elements: [
+    { type: 'way', id: 1, tags: { building: 'yes', height: '20' }, geometry: sq(0, 0) },
+    { type: 'way', id: 2, tags: { natural: 'water' }, geometry: sq(-0.0005, -0.0005).map((p) => ({ lat: p.lat * 2, lon: p.lon * 2 })) },
+  ] })
+  const { parseOsm } = await import('../src/osm.ts')
+  const scene = buildScene({ ...region, snap: false, width: 300, depth: 200 }, parseOsm(json), pal)
+  const { svg } = renderSvg(scene)
+  assert.ok(svg.startsWith('<svg'))
+  // Every path's data starts with a move, and a move is never followed by a bare pair.
+  for (const m of svg.matchAll(/ d="([^"]*)"/g)) {
+    assert.match(m[1], /^M/)
+    // The first pair after a move is followed by a command, never by a bare (absolute) pair.
+    assert.match(m[1], /^M-?[\d.]+(?: |(?=-))-?[\d.]+(?:[lhz]|$)/, m[1].slice(0, 60))
+  }
+})
+
+test('nonsense numeric tags fall back instead of poisoning heights', () => {
+  const h = buildingHeights({ building: 'yes', 'building:min_level': 'federal', 'building:levels': 'two', 'roof:levels': '?' }, 100)
+  assert.ok(Number.isFinite(h.base) && Number.isFinite(h.top))
+  assert.equal(h.base, 0)
+})

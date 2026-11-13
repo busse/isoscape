@@ -23,6 +23,12 @@ export interface Terrain {
   readonly water: Uint8Array
   /** 1 where a water node is rock standing clear of the river's surface. */
   readonly rocks: Uint8Array
+  /** 1 where a water node is at least two cells from any shore: where rocks and rapids are read. */
+  readonly interior: Uint8Array
+  /** The river's surface elevation, carried a few cells inland past the shore; NaN beyond. */
+  readonly level: Float32Array
+  /** Scene z of the water surface at a point; the ground's own z where there is no water near. */
+  readonly waterZ: (p: Vec2) => number
   readonly datum: number
   readonly exaggeration: number
   readonly flat: boolean
@@ -74,21 +80,41 @@ export const makeTerrain = (
     const d = elev[(j + 1) * nx + i + 1]
     return a * (1 - tx) * (1 - ty) + b * tx * (1 - ty) + c * (1 - tx) * ty + d * tx * ty
   }
+  const level = new Float32Array(nx * ny).fill(NaN)
+  const z = (p: Vec2) => (elevation(p) - datum) * exaggeration
+  const waterZ = ([e, n]: Vec2): number => {
+    const fx = Math.min(nx - 1.001, Math.max(0, (e - x0) / cell))
+    const fy = Math.min(ny - 1.001, Math.max(0, (n - y0) / cell))
+    const i = Math.floor(fx)
+    const j = Math.floor(fy)
+    const tx = fx - i
+    const ty = fy - j
+    let s = 0
+    let w = 0
+    for (const [di, dj, wt] of [[0, 0, (1 - tx) * (1 - ty)], [1, 0, tx * (1 - ty)], [0, 1, (1 - tx) * ty], [1, 1, tx * ty]] as const) {
+      const v = level[(j + dj) * nx + i + di]
+      if (!Number.isNaN(v) && wt > 0) { s += v * wt; w += wt }
+    }
+    return w > 0 ? (s / w - datum) * exaggeration : z([e, n])
+  }
   return {
     cell, nx, ny, x0, y0, elev,
     water: new Uint8Array(nx * ny),
     rocks: new Uint8Array(nx * ny),
+    interior: new Uint8Array(nx * ny),
+    level,
+    waterZ,
     datum,
     exaggeration,
     flat: sample === null,
     elevation,
-    z: (p) => (elevation(p) - datum) * exaggeration,
+    z,
   }
 }
 
 /** Replace missing samples by the mean of their present neighbours, repeatedly. */
 const fillGaps = (a: Float32Array, nx: number, ny: number): void => {
-  for (let pass = 0; pass < 64; pass++) {
+  for (let pass = 0; pass < 256; pass++) {
     let missing = 0
     for (let j = 0; j < ny; j++) {
       for (let i = 0; i < nx; i++) {
@@ -264,7 +290,7 @@ const blur = (a: Float32Array, nx: number, ny: number, passes: number, mask?: Ui
  * replaced by the surface, so the river drapes as water — level across, falling along its
  * course, steeply only where it really drops.
  */
-export const settleWater = (t: Terrain, radius = 25, rockHeight = 1.0): void => {
+export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0): void => {
   if (t.flat) return
   const { nx, ny, elev, water } = t
   const reach = Math.max(1, Math.round(radius / t.cell))
@@ -286,14 +312,63 @@ export const settleWater = (t: Terrain, radius = 25, rockHeight = 1.0): void => 
         }
       }
       values.sort((a, b) => a - b)
-      surface[k] = values[Math.floor(values.length * 0.2)]
+      surface[k] = values[Math.floor(values.length * 0.15)]
     }
   }
-  blur(surface, nx, ny, 3, water)
+  blur(surface, nx, ny, 4, water)
+  // Interior: water two cells from any shore. A mapped outline rarely matches the lidar to
+  // the metre, so near the edge "rock" and "falls" are mostly the bank.
+  const margin = 2
+  const markInterior = () => {
+    t.interior.fill(0)
+    for (let j = 0; j < ny; j++) {
+      for (let i = 0; i < nx; i++) {
+        if (water[j * nx + i] !== 1) continue
+        let inside = true
+        for (let dj = -margin; dj <= margin && inside; dj++) {
+          for (let di = -margin; di <= margin; di++) {
+            const ii = i + di
+            const jj = j + dj
+            if (ii < 0 || jj < 0 || ii >= nx || jj >= ny || water[jj * nx + ii] !== 1) { inside = false; break }
+          }
+        }
+        if (inside) t.interior[j * nx + i] = 1
+      }
+    }
+  }
+  markInterior()
+  // Near the shore, ground standing clear of the river is bank the outline overlaps: give it
+  // back to the land, at its own height, so the shoreline follows the lidar.
+  for (let k = 0; k < elev.length; k++) {
+    if (water[k] === 1 && t.interior[k] !== 1 && elev[k] - surface[k] > rockHeight) water[k] = 0
+  }
+  markInterior()
   for (let k = 0; k < elev.length; k++) {
     if (water[k] !== 1) continue
-    if (elev[k] - surface[k] > rockHeight) t.rocks[k] = 1
+    if (t.interior[k] === 1 && elev[k] - surface[k] > rockHeight) t.rocks[k] = 1
     elev[k] = surface[k]
+    t.level[k] = surface[k]
+  }
+  // Carry the surface a few cells past the shore, so water drawn to its mapped outline lies on
+  // the river and does not climb a bank the outline happens to overlap.
+  let frontier: number[] = []
+  for (let k = 0; k < elev.length; k++) if (water[k] === 1) frontier.push(k)
+  for (let step = 0; step < 4; step++) {
+    const next: number[] = []
+    for (const k of frontier) {
+      const i = k % nx
+      const j = (k - i) / nx
+      for (const [di, dj] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const ii = i + di
+        const jj = j + dj
+        if (ii < 0 || jj < 0 || ii >= nx || jj >= ny) continue
+        const kk = jj * nx + ii
+        if (!Number.isNaN(t.level[kk])) continue
+        t.level[kk] = t.level[k]
+        next.push(kk)
+      }
+    }
+    frontier = next
   }
 }
 
@@ -304,14 +379,14 @@ export const settleWater = (t: Terrain, radius = 25, rockHeight = 1.0): void => 
 export const riverFall = (t: Terrain, i: number, j: number, span = 20): { slope: number; down: Vec2 } | null => {
   const k = Math.max(1, Math.round(span / t.cell))
   if (i < k || j < k || i >= t.nx - k || j >= t.ny - k) return null
-  if (t.water[j * t.nx + i] !== 1) return null
+  if (t.interior[j * t.nx + i] !== 1) return null
   let gx = 0
   let gy = 0
   let best = 0
   for (const [di, dj] of [[1, 0], [0, 1], [1, 1], [1, -1]] as const) {
     const a = (j + dj * k) * t.nx + (i + di * k)
     const b = (j - dj * k) * t.nx + (i - di * k)
-    if (t.water[a] !== 1 || t.water[b] !== 1) continue
+    if (t.interior[a] !== 1 || t.interior[b] !== 1) continue
     const run = 2 * k * t.cell * Math.hypot(di, dj)
     const g = (t.elev[a] - t.elev[b]) / run
     if (Math.abs(g) > best) best = Math.abs(g)

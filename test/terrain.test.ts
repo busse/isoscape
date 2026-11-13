@@ -50,7 +50,7 @@ test('water is found under the rocks, and the drop reads as rapids', () => {
   const i = Math.round((10 - t.x0) / t.cell)
   const j = Math.round((0 - t.y0) / t.cell)
   const fall = riverFall(t, i, j)!
-  assert.ok(fall.slope > 0.05, `slope ${fall.slope}`)
+  assert.ok(fall.slope > 0.035, `slope ${fall.slope}`)
   assert.ok(fall.down[0] > 0.9, 'falls eastward')
   const calm = riverFall(t, Math.round((-180 - t.x0) / t.cell), j)
   assert.ok(calm === null || calm.slope < 0.01)

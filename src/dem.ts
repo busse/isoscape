@@ -12,12 +12,12 @@
  */
 
 import { execFile } from 'node:child_process'
-import { readFile, writeFile, mkdir, mkdtemp, rm } from 'node:fs/promises'
-import { tmpdir } from 'node:os'
-import { dirname, join } from 'node:path'
+import { access, readFile, rename, writeFile, mkdir, rm } from 'node:fs/promises'
+import { join } from 'node:path'
 import { promisify } from 'node:util'
 import { gunzipSync, gzipSync } from 'node:zlib'
 import { fetchBounds, type Region } from './region.ts'
+import type { Bounds } from './osm.ts'
 
 const run = promisify(execFile)
 
@@ -34,18 +34,19 @@ export interface Dem {
 
 const SERVICE = 'https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/exportImage'
 
-/** Ask for a grid at about `metresPerPixel` over the region's fetch bounds. */
-export const demUrl = (r: Region, metresPerPixel = 1): string => {
-  const b = fetchBounds(r)
+const SIZE = (b: Bounds, metresPerPixel: number) => {
   const wm = (b.east - b.west) * 111_320 * Math.cos((((b.north + b.south) / 2) * Math.PI) / 180)
   const hm = (b.north - b.south) * 110_574
-  const w = Math.min(8000, Math.round(wm / metresPerPixel))
-  const h = Math.min(8000, Math.round(hm / metresPerPixel))
+  return { width: Math.round(wm / metresPerPixel), height: Math.round(hm / metresPerPixel) }
+}
+
+/** The service's URL for a `width` × `height` grid over `b`. */
+export const demUrl = (b: Bounds, width: number, height: number): string => {
   const q = new URLSearchParams({
-    bbox: [b.west, b.south, b.east, b.north].map((n) => n.toFixed(6)).join(','),
+    bbox: [b.west, b.south, b.east, b.north].map((n) => n.toFixed(7)).join(','),
     bboxSR: '4326',
     imageSR: '4326',
-    size: `${w},${h}`,
+    size: `${width},${height}`,
     format: 'tiff',
     pixelType: 'F32',
     noData: '-9999',
@@ -57,31 +58,85 @@ export const demUrl = (r: Region, metresPerPixel = 1): string => {
   return `${SERVICE}?${q}`
 }
 
-export const fetchDem = async (r: Region, out: string, log = console.error): Promise<void> => {
-  const dir = await mkdtemp(join(tmpdir(), 'isoscape-'))
-  const tif = join(dir, 'dem.tif')
-  try {
-    let lastError: unknown
-    for (let attempt = 0; attempt < 3; attempt++) {
+/** Largest tile the service reliably answers, in pixels a side. */
+const TILE = 1500
+
+/**
+ * Fetch the region's elevation as a mosaic of tiles (the service refuses large images), each
+ * cached under `<dir>/dem-tiles/` so a failed or interrupted fetch resumes. When every tile is
+ * in, they are stitched, stored as `<dir>/dem.bin.gz`, and the tile cache is removed.
+ */
+export const fetchDem = async (
+  r: Region,
+  dir: string,
+  options: { budgetSeconds?: number; log?: (m: string) => void } = {},
+): Promise<{ done: number; total: number }> => {
+  const log = options.log ?? console.error
+  const b = fetchBounds(r)
+  const { width, height } = SIZE(b, r.terrain?.demResolution ?? 1)
+  const cols = Math.ceil(width / TILE)
+  const rows = Math.ceil(height / TILE)
+  const dLon = (b.east - b.west) / width
+  const dLat = (b.north - b.south) / height
+  const tileDir = join(dir, 'dem-tiles')
+  await mkdir(tileDir, { recursive: true })
+  const t0 = Date.now()
+  let done = 0
+  const plan: { path: string; x0: number; y0: number; w: number; h: number; bounds: Bounds }[] = []
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
+      const x0 = i * TILE
+      const y0 = j * TILE
+      const w = Math.min(TILE, width - x0)
+      const h = Math.min(TILE, height - y0)
+      plan.push({
+        path: join(tileDir, `${j}-${i}.tif`),
+        x0, y0, w, h,
+        bounds: { west: b.west + x0 * dLon, east: b.west + (x0 + w) * dLon, north: b.north - y0 * dLat, south: b.north - (y0 + h) * dLat },
+      })
+    }
+  }
+  for (const [k, t] of plan.entries()) {
+    try {
+      await access(t.path)
+      done++
+      continue
+    } catch {
+      // not fetched yet
+    }
+    if (options.budgetSeconds !== undefined && (Date.now() - t0) / 1000 > options.budgetSeconds) break
+    log(`elevation tile ${k + 1}/${plan.length}`)
+    let ok = false
+    for (let attempt = 0; attempt < 3 && !ok; attempt++) {
       try {
-        await run('curl', ['-sS', '-f', '-m', '170', '-A', 'isoscape/0.1', '-o', tif, demUrl(r)])
-        lastError = undefined
-        break
+        await run('curl', ['-sS', '-f', '-m', '90', '-A', 'isoscape/0.1', '-o', `${t.path}.part`, demUrl(t.bounds, t.w, t.h)])
+        readTiff(await readFile(`${t.path}.part`), t.bounds)
+        await rename(`${t.path}.part`, t.path)
+        ok = true
       } catch (error) {
-        lastError = error
-        log(`3DEP: ${(error as Error).message.split('\n')[0]}; retrying`)
-        await new Promise((done) => setTimeout(done, 5000 * (attempt + 1)))
+        log(`  3DEP: ${(error as Error).message.split('\n').pop()}; retrying`)
+        await new Promise((wake) => setTimeout(wake, 4000 * (attempt + 1)))
       }
     }
-    if (lastError !== undefined) throw lastError
-    const b = fetchBounds(r)
-    const dem = readTiff(await readFile(tif), b)
-    await mkdir(dirname(out), { recursive: true })
-    await writeFile(out, encodeDem(dem))
-    log(`elevation ${dem.width}×${dem.height}, ${describe(dem)}`)
-  } finally {
-    await rm(dir, { recursive: true, force: true })
+    if (!ok) throw new Error('3DEP did not answer. Run fetch again later; finished tiles are kept.')
+    done++
   }
+  if (done < plan.length) {
+    log(`${done} of ${plan.length} elevation tiles fetched; run fetch again to continue`)
+    return { done, total: plan.length }
+  }
+  const data = new Float32Array(width * height).fill(NaN)
+  for (const t of plan) {
+    const tile = readTiff(await readFile(t.path), t.bounds)
+    for (let y = 0; y < Math.min(t.h, tile.height); y++) {
+      for (let x = 0; x < Math.min(t.w, tile.width); x++) data[(t.y0 + y) * width + t.x0 + x] = tile.data[y * tile.width + x]
+    }
+  }
+  const dem: Dem = { ...b, width, height, data }
+  await writeFile(join(dir, 'dem.bin.gz'), encodeDem(dem))
+  await rm(tileDir, { recursive: true, force: true })
+  log(`elevation ${width}×${height} from ${plan.length} tiles, ${describe(dem)}`)
+  return { done, total: plan.length }
 }
 
 const describe = (d: Dem) => {
@@ -183,6 +238,35 @@ export const loadDem = async (path: string): Promise<Dem | null> => {
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null
     throw error
   }
+}
+
+/**
+ * Mark implausible samples as missing. 3DEP occasionally carries a void patch filled with a
+ * large negative value (one patch near Shockoe Bottom reads −88 m); left in, it would drag
+ * the datum down and lift the whole scene. Missing samples are filled from their neighbours
+ * when the terrain is built.
+ */
+export const cleanDem = (d: Dem, floor = -5, grow = 3): number => {
+  // Mark the void, then grow the mark a few pixels: the service's resampling blends the
+  // void's edge with real ground, leaving a rim of values that are wrong but not absurd.
+  const bad = new Uint8Array(d.data.length)
+  for (let i = 0; i < d.data.length; i++) if (d.data[i] < floor) bad[i] = 1
+  let n = 0
+  for (let y = 0; y < d.height; y++) {
+    for (let x = 0; x < d.width; x++) {
+      if (bad[y * d.width + x] !== 1) continue
+      for (let dy = -grow; dy <= grow; dy++) {
+        for (let dx = -grow; dx <= grow; dx++) {
+          const xx = x + dx
+          const yy = y + dy
+          if (xx < 0 || yy < 0 || xx >= d.width || yy >= d.height) continue
+          const k = yy * d.width + xx
+          if (!Number.isNaN(d.data[k])) { d.data[k] = NaN; n++ }
+        }
+      }
+    }
+  }
+  return n
 }
 
 /** Bilinear elevation at lon/lat, ignoring missing samples. NaN outside the grid. */

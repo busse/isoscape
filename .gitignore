@@ -2,3 +2,5 @@ node_modules/
 out/
 *.tmp
 .DS_Store
+data/*/osm-tiles/
+data/*/dem-tiles/

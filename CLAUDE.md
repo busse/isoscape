@@ -17,6 +17,9 @@ Read README.md for what this is. This file is the rules for changing it.
 - **Two heights.** `terrain.elevation(p)` is metres above sea level, used for contours, slopes
   and rapids. `terrain.z(p)` is scene height: (elevation − datum) × exaggeration, used for
   drawing. Building heights and bridge clearances are true metres added to scene z.
+- **Strip seams.** Strips lap toward the camera only (by up to 8 m), into ground the next strip
+  repaints, so no seam shows at any zoom and no lap covers a standing item. Never lap away from
+  the camera.
 - **Ground paints in strips, far to near,** and items slot in after the strip holding their
   near edge (`flushTo` in `render.ts`). Anything new on the ground goes into `paintStrip`,
   clipped to the strip, densified and draped, never painted as one whole polygon.
@@ -58,8 +61,12 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 ## Known limits
 
 - The hillshade is quantised per 5 m cell, so very steep ground can look stepped.
-- Rapids come from the lidar's water surface; where a mapped water polygon is off from the
-  real channel, its edges can read as falls.
+- Rapids come from the lidar's water surface, read only 10 m or more from shore; a polygon
+  far off from the real channel can still produce false falls.
+- Big regions make big SVGs (the I-195 to Rocketts view is 25 MB and takes a browser 10–20 s
+  to open). Use the `--png` render for quick looks.
+- One bad OSM tag must never break a build: parse every numeric tag defensively (one
+  building's `building:min_level` is "federal").
 - Bridge ways that fork at a junction ramp at the fork if no other bridge way touches it.
 - Buildings must sit wholly inside the frame to be drawn. Bridges are cut at the plate's
   edges.

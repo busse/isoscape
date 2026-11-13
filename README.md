@@ -16,6 +16,12 @@ under bluffs that rise 50 m to downtown, Oregon Hill and Church Hill.
 
 ![Downtown Richmond and the James River on the Fall Line, isometric with terrain](docs/richmond-downtown-topo.png)
 
+The widest view, `richmond-i195-rocketts`, follows the James for 7.85 km, from I-195 to
+Rocketts Landing. Every mapped building is drawn (about 6,750), as are all bridges, rapids
+and the bluffs on both banks. It is a 25 MB SVG, and `--png` renders it at 18,840 px wide.
+
+![The James through Richmond from I-195 to Rocketts Landing](docs/richmond-i195-rocketts.png)
+
 ```sh
 node bin/isoscape.js fetch richmond-downtown        # OSM + elevation → data/richmond-downtown/
 node bin/isoscape.js build richmond-downtown-topo   # → out/richmond-downtown-topo.{svg,html}
@@ -78,8 +84,14 @@ types itself. `--png` shells out to `rsvg-convert` (`brew install librsvg`).
 `build` flags: `--palette <paper\|night>`, `--note "<text>"`, `--no-archive`, `--png`,
 `--width <px>` (PNG width), `--out <dir>`.
 
-Overpass is often at capacity. `fetch` retries across four mirrors with backoff. If it still
-fails, run `isoscape query <region>`, paste the query into
+Big regions are fetched in tiles. OSM comes in tiles of at most 1.6 km a side and elevation
+in tiles of at most 1,500 px, because both services refuse or time out on large requests.
+Every finished tile is cached under `data/<region>/osm-tiles/` or `dem-tiles/`, so an
+interrupted `fetch` resumes where it stopped. `--budget <seconds>` stops it starting new
+tiles after that long. A tile cache is named by its bounds, so a changed frame never reuses
+the wrong tile. Overpass is often at capacity. `fetch` retries across four mirrors with
+backoff, and checks that every answer parses (a timed-out transfer can arrive as HTTP 200
+with a truncated body). If it still fails, run `isoscape query <region>`, paste the query into
 [overpass-turbo](https://overpass-turbo.eu), export the raw JSON, and save it as
 `data/<region>/osm.json`.
 
@@ -138,13 +150,23 @@ grit. Elevation above the frame's lowest point, times `terrain.exaggeration`, be
 height. Buildings and bridge clearances add true metres on top, so the hills are
 exaggerated but the towers are not.
 
+**Elevation voids.** 3DEP sometimes fills a void with a large negative value: one patch near
+Shockoe Bottom read −88 m. Samples below −5 m, plus a few pixels around them, are treated as
+missing and filled from their neighbours.
+
 **The river.** Lidar over mapped water is not the water: rocks, ledges and overlapped banks
 stand above it. The surface at each water node is taken as a low percentile of the wet ground
 within 25 m, then smoothed along the water. Anything a metre or more above that surface is
 drawn as exposed rock, which gives the boulder fields. The water drapes on the surface, so
 it lies level across the river and falls along it. **Rapids** are drawn where that surface
 falls faster than `terrain.rapids` (m/m) measured over 40 m: white strokes across the
-current, with froth where it drops hardest. OSM weirs are drawn as white crests.
+current, with froth where it drops hardest. OSM weirs are drawn as white crests. Rocks and
+rapids are only read at least two cells (10 m) from shore. **The shoreline follows the
+lidar, not OSM's outline:** near-shore "water" standing more than a metre above the river is
+given back to the land at its own height. The water's edge is then traced through the
+corrected water grid (marching squares over a lightly smoothed mask) and drawn at the
+river's surface. Where an outline overlaps a steep bank, this gives a bank sloping into the
+water rather than water climbing the bank. Flat scenes still use OSM's outline.
 
 **Ground with relief paints in strips.** A height field hides itself: a bank falling away from
 the camera covers the water behind it. So the ground is painted in 10 m strips across the
