@@ -23,6 +23,43 @@ node bin/isoscape.js build richmond-downtown        # the flat version
 node bin/isoscape.js build richmond-downtown-topo --palette night --png
 ```
 
+Then open `out/index.html`, the explorer.
+
+## The explorer
+
+Every `build` is archived under `out/builds/<timestamp>-<name>/`: the SVG, a thumbnail, and
+a `meta.json` holding the commit (and whether the source had uncommitted changes), the
+region's settings, the timings, and every number the build measured. Each build then
+rewrites `out/index.html`, a single local page over all of them:
+
+- **Left column:** builds grouped by region, newest first, each with its thumbnail, palette,
+  age, note and commit. Type to filter.
+- **Middle:** the selected build. Drag to pan, scroll to zoom, double-click to fit. Stepping
+  between builds of the same frame keeps the view, so you can flick back and forth.
+- **Bottom:** when and from what it was built, its measures, and its settings.
+- **Compare** (`C`, or ⌥-click a second build): B is laid over A in the same scene
+  coordinates, with a divider to drag. The info panel shows the change in every measure and
+  every setting that differs.
+
+Keys: `↑`/`↓` step through builds, `F` fits, `1` shows actual size, `C` compares, `I`
+toggles the info panel, `/` filters. The URL hash holds the selection, so a reload (after
+the next build) keeps your place.
+
+```sh
+node bin/isoscape.js build richmond-downtown-topo --note "lighter foam"   # say what you tried
+node bin/isoscape.js build richmond-downtown --no-archive                 # a throwaway build
+node bin/isoscape.js backfill 2b8f86d richmond-downtown                   # an older commit's output
+node bin/isoscape.js explorer                                             # just rewrite the page
+```
+
+`backfill` exports the commit's tree to a temporary directory, gives it this checkout's
+cached data, runs its own CLI, and archives the result dated to the commit. That puts
+outputs from before the archive existed in the explorer alongside new ones. Thumbnails use
+`rsvg-convert` if installed, else ImageMagick, else a colour swatch. `out/` is git-ignored:
+the archive is local.
+
+## Requirements
+
 Node 22.18 or newer. No runtime dependencies and no build step: Node strips the TypeScript
 types itself. `--png` shells out to `rsvg-convert` (`brew install librsvg`).
 
@@ -34,9 +71,12 @@ types itself. `--png` shells out to `rsvg-convert` (`brew install librsvg`).
 | `isoscape query <region>` | print the Overpass query a fetch would send |
 | `isoscape fetch <region>` | download OSM data (`osm.json`) and elevation (`dem.bin.gz`) into `data/<region>/`; `--osm-only`, `--dem-only` |
 | `isoscape info <region>` | the chosen bearing, feature counts, and where building heights came from |
-| `isoscape build <region>` | write `out/<region>.svg` and `out/<region>.html` |
+| `isoscape build <region>` | write `out/<region>.svg` and `out/<region>.html`, archive the build, refresh the explorer |
+| `isoscape explorer` | rewrite `out/index.html` from the archive |
+| `isoscape backfill <commit> <region>` | build a region with an earlier commit's code and archive it |
 
-`build` flags: `--palette <paper\|night>`, `--png`, `--width <px>` (PNG width), `--out <dir>`.
+`build` flags: `--palette <paper\|night>`, `--note "<text>"`, `--no-archive`, `--png`,
+`--width <px>` (PNG width), `--out <dir>`.
 
 Overpass is often at capacity. `fetch` retries across four mirrors with backoff. If it still
 fails, run `isoscape query <region>`, paste the query into

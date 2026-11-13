@@ -32,6 +32,10 @@ node bin/isoscape.js info <region>     # counts and height sources
 npm test && npm run typecheck
 ```
 
+Every build lands in the explorer (`out/index.html`). When iterating, pass
+`--note "<what changed>"` so the explorer says what each build was for, and compare against
+the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
+
 ## Where to change what
 
 | To change | Edit |
@@ -47,6 +51,9 @@ npm test && npm run typecheck
 | height grid, river surface, rocks, rapids, contours | `terrain.ts` |
 | hillshade light, rapids marks, strip painting | `paintStrip` in `render.ts` |
 | a place | `regions/<name>.json` |
+| the build archive, git stamping, thumbnails | `archive.ts` |
+| the explorer page | `explorer.ts` |
+| building an old commit into the archive | `backfill.ts` |
 
 ## Known limits
 

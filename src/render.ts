@@ -95,7 +95,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     `<style>`,
     `.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}.d{fill:${p.ink}}`,
     `.td{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth};stroke-dasharray:1.2 1.8}`,
-    `.L{fill:${p.land}}`, sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('rock', p.rock),
+    sealed('L', p.land), sealed('Lw', p.water), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('rock', p.rock),
     sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('canal', p.water), sealed('path', p.path),
     sealed('road', p.road), sealed('rail', p.rail), sealed('weir', p.foam),
     `.ties{fill:none;stroke:${p.railTie};stroke-width:${p.groundLineWidth * 2};stroke-dasharray:1 2.2}`,
@@ -199,17 +199,49 @@ export const renderSvg = (scene: Scene): Rendered => {
   // Light from the left and a little towards the camera, so the slopes we look at are lit and
   // the backs of hills fall into shade.
   const light = normalise([-0.85, -0.35, 1.0])
+  /** Is cell (i, j) mostly water? */
+  const baseWet = (i: number, j: number) =>
+    T.water[j * T.nx + i] + T.water[j * T.nx + i + 1] + T.water[(j + 1) * T.nx + i] + T.water[(j + 1) * T.nx + i + 1] >= 2
 
   const paintStrip = (s: Strip) => {
-    // Each strip reaches a little past its near edge, under the next strip, so no hairline of
-    // background shows between them; the next strip paints over the overlap.
-    const lap = s.n0 > fr.minY ? 0.8 : 0
-    const band: Rect = { minX: fr.minX, maxX: fr.maxX, minY: s.n0 - lap, maxY: s.n1 }
+    // Strips overlap their neighbours so no background shows between them, and no two edges
+    // may coincide: where two anti-aliased edges land on the same pixel row, a browser
+    // scaling the image down shows a faint stripe. So the bare ground reaches a little past the
+    // far edge, everything on it reaches further, and everything but the ground reaches past
+    // the near edge too; each edge then falls inside something painted later.
+    const lapNear = s.n0 > fr.minY ? 0.8 : 0
+    const lapFar = s.n1 < fr.maxY ? 0.6 : 0
+    const groundFar = s.n1 < fr.maxY ? 0.3 : 0
+    const band: Rect = { minX: fr.minX, maxX: fr.maxX, minY: s.n0 - lapNear, maxY: s.n1 + lapFar }
     const parts: string[] = []
-    // Bare ground first: the strip's own surface, far edge left to right, near edge back.
-    const far = xs.map((e) => drape([e, s.n1]))
-    const near = xs.map((e) => drape([e, s.n0 - lap])).reverse()
-    parts.push(`<path class="L" d="${pathOf([...far, ...near])}"/>`)
+    // The strip's base: its own surface, cell row by cell row, coloured water where the grid
+    // is water and land elsewhere. It hides what lies behind a rise, and because it already
+    // matches what is drawn on it, no seam can leak a wrong colour through.
+    let landBase = ''
+    let waterBase = ''
+    for (let j = s.j0; j < s.j1; j++) {
+      const yLo = Math.max(s.n0, T.y0 + j * c)
+      const yHi = j === s.j1 - 1 ? s.n1 + groundFar : T.y0 + (j + 1) * c
+      let start = iMin
+      let wet = baseWet(start, j)
+      for (let i = iMin + 1; i <= iMax; i++) {
+        const w = i < iMax ? baseWet(i, j) : !wet
+        if (w === wet) continue
+        const top: Vec2[] = []
+        const bottom: Vec2[] = []
+        for (let k = start; k <= i; k++) {
+          top.push(drape([nodeX(k), yHi]))
+          bottom.push(drape([nodeX(k), yLo]))
+        }
+        const d = pathOf([...top, ...bottom.reverse()])
+        if (wet) waterBase += d
+        else landBase += d
+        start = i
+        wet = w
+      }
+    }
+    if (landBase) parts.push(`<path class="L" d="${landBase}"/>`)
+    if (waterBase) parts.push(`<path class="Lw" d="${waterBase}"/>`)
     for (const layer of layers) {
       let d = ''
       for (const e of layer.entries) {
