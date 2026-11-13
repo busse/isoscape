@@ -1,0 +1,25 @@
+{
+  "name": "isoscape",
+  "version": "0.1.0",
+  "description": "Isometric dot-and-line views of real places, built from open map data",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "bin": {
+    "isoscape": "./bin/isoscape.js"
+  },
+  "scripts": {
+    "fetch": "node bin/isoscape.js fetch",
+    "build": "node bin/isoscape.js build",
+    "info": "node bin/isoscape.js info",
+    "test": "node --test test/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}

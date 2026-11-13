@@ -1,0 +1,23 @@
+{
+  "title": "Richmond, VA — Tredegar to the Mayo Bridge",
+  "center": [-77.4400, 37.5338],
+  "width": 1700,
+  "depth": 950,
+  "bearing": 0,
+  "snap": true,
+  "scale": 2.4,
+  "squash": 0.5,
+  "exaggeration": 1.0,
+  "slab": 16,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+    { "match": "Lee", "deck": 28 },
+    { "match": "Manchester", "deck": 24 },
+    { "match": "Belle Isle", "deck": 14 },
+    { "match": "Mayo", "deck": 6 },
+    { "match": "Potterfield", "deck": 3 }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all"
+}
