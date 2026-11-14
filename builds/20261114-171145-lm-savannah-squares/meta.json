@@ -1,0 +1,76 @@
+{
+ "name": "lm-savannah-squares",
+ "region": "lm-savannah-squares",
+ "title": "Savannah's Squares \u2014 Savannah, Georgia",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3023.75,
+  -2075.0060860150097,
+  6047.5,
+  4096.804072876592
+ ],
+ "bearing": -27.50022235415784,
+ "ms": 1197,
+ "stats": {
+  "features": 6544,
+  "ground": 222,
+  "elevationDatum": -3.7,
+  "elevationTop": 16.7,
+  "ribbons": 2150,
+  "footprintsAdded": 0,
+  "buildings": 1443,
+  "heightFromTag": 6,
+  "heightFromModel": 0,
+  "heightFromLevels": 89,
+  "heightGuessed": 1348,
+  "bridgePieces": 17,
+  "contourSegments": 7859,
+  "rapidCells": 0,
+  "strips": 169
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Savannah's Squares \u2014 Savannah, Georgia",
+  "center": [
+   -81.09314,
+   32.07584
+  ],
+  "width": 1300,
+  "depth": 1690,
+  "scale": 4.615,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-savannah-squares"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171145-lm-savannah-squares",
+ "createdAt": "2026-11-14T17:11:45.422Z",
+ "bytes": 3203594,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171145-lm-savannah-squares/image.svg",
+  "thumb": "builds/20261114-171145-lm-savannah-squares/thumb.png",
+  "social": "builds/20261114-171145-lm-savannah-squares/social.png"
+ }
+}

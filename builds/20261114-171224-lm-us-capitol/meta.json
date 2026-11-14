@@ -1,0 +1,76 @@
+{
+ "name": "lm-us-capitol",
+ "region": "lm-us-capitol",
+ "title": "U.S. Capitol \u2014 Washington, D.C.",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3023.75,
+  -2248.2036173673782,
+  6047.5,
+  4270.001604228961
+ ],
+ "bearing": 44.50455688761443,
+ "ms": 1236,
+ "stats": {
+  "features": 13374,
+  "ground": 787,
+  "elevationDatum": -4,
+  "elevationTop": 31.5,
+  "ribbons": 2978,
+  "footprintsAdded": 0,
+  "buildings": 1183,
+  "heightFromTag": 47,
+  "heightFromModel": 0,
+  "heightFromLevels": 53,
+  "heightGuessed": 1083,
+  "bridgePieces": 229,
+  "contourSegments": 12759,
+  "rapidCells": 0,
+  "strips": 169
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "U.S. Capitol \u2014 Washington, D.C.",
+  "center": [
+   -77.00902,
+   38.88981
+  ],
+  "width": 1300,
+  "depth": 1690,
+  "scale": 4.615,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-us-capitol"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171224-lm-us-capitol",
+ "createdAt": "2026-11-14T17:12:24.944Z",
+ "bytes": 4306748,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171224-lm-us-capitol/image.svg",
+  "thumb": "builds/20261114-171224-lm-us-capitol/thumb.png",
+  "social": "builds/20261114-171224-lm-us-capitol/social.png"
+ }
+}

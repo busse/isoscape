@@ -1,0 +1,76 @@
+{
+ "name": "lm-texas-capitol",
+ "region": "lm-texas-capitol",
+ "title": "Texas State Capitol \u2014 Austin",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2331.540274566942,
+  6048,
+  4357.501798794008
+ ],
+ "bearing": -27.87621761536809,
+ "ms": 991,
+ "stats": {
+  "features": 9113,
+  "ground": 394,
+  "elevationDatum": 138.9,
+  "elevationTop": 180.2,
+  "ribbons": 3357,
+  "footprintsAdded": 0,
+  "buildings": 622,
+  "heightFromTag": 274,
+  "heightFromModel": 0,
+  "heightFromLevels": 97,
+  "heightGuessed": 251,
+  "bridgePieces": 92,
+  "contourSegments": 15590,
+  "rapidCells": 0,
+  "strips": 156
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Texas State Capitol \u2014 Austin",
+  "center": [
+   -97.74052,
+   30.27469
+  ],
+  "width": 1200,
+  "depth": 1560,
+  "scale": 5,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-texas-capitol"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171218-lm-texas-capitol",
+ "createdAt": "2026-11-14T17:12:18.083Z",
+ "bytes": 3520374,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171218-lm-texas-capitol/image.svg",
+  "thumb": "builds/20261114-171218-lm-texas-capitol/thumb.png",
+  "social": "builds/20261114-171218-lm-texas-capitol/social.png"
+ }
+}

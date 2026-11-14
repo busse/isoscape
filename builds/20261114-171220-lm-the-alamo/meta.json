@@ -1,0 +1,76 @@
+{
+ "name": "lm-the-alamo",
+ "region": "lm-the-alamo",
+ "title": "The Alamo \u2014 San Antonio",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.15,
+  -2552.478464387538,
+  6048.3,
+  4595.861460791908
+ ],
+ "bearing": -37.65589833593907,
+ "ms": 1610,
+ "stats": {
+  "features": 3500,
+  "ground": 82,
+  "elevationDatum": 192.6,
+  "elevationTop": 209.7,
+  "ribbons": 1269,
+  "footprintsAdded": 0,
+  "buildings": 269,
+  "heightFromTag": 9,
+  "heightFromModel": 0,
+  "heightFromLevels": 45,
+  "heightGuessed": 215,
+  "bridgePieces": 115,
+  "contourSegments": 5797,
+  "rapidCells": 0,
+  "strips": 117
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "The Alamo \u2014 San Antonio",
+  "center": [
+   -98.4861,
+   29.4259
+  ],
+  "width": 900,
+  "depth": 1170,
+  "scale": 6.667,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-the-alamo"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171220-lm-the-alamo",
+ "createdAt": "2026-11-14T17:12:20.394Z",
+ "bytes": 1783120,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171220-lm-the-alamo/image.svg",
+  "thumb": "builds/20261114-171220-lm-the-alamo/thumb.png",
+  "social": "builds/20261114-171220-lm-the-alamo/social.png"
+ }
+}

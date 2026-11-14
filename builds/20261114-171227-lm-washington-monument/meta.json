@@ -1,0 +1,76 @@
+{
+ "name": "lm-washington-monument",
+ "region": "lm-washington-monument",
+ "title": "Washington Monument \u2014 Washington, D.C.",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.2,
+  -2284.2433427183905,
+  6048.4,
+  4302.914761285831
+ ],
+ "bearing": 44.723934889747056,
+ "ms": 1126,
+ "stats": {
+  "features": 8321,
+  "ground": 1000,
+  "elevationDatum": -1.8,
+  "elevationTop": 19.9,
+  "ribbons": 2150,
+  "footprintsAdded": 0,
+  "buildings": 140,
+  "heightFromTag": 41,
+  "heightFromModel": 0,
+  "heightFromLevels": 25,
+  "heightGuessed": 74,
+  "bridgePieces": 80,
+  "contourSegments": 11650,
+  "rapidCells": 0,
+  "strips": 182
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Washington Monument \u2014 Washington, D.C.",
+  "center": [
+   -77.03524,
+   38.88948
+  ],
+  "width": 1400,
+  "depth": 1820,
+  "scale": 4.286,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-washington-monument"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171227-lm-washington-monument",
+ "createdAt": "2026-11-14T17:12:27.061Z",
+ "bytes": 3374364,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171227-lm-washington-monument/image.svg",
+  "thumb": "builds/20261114-171227-lm-washington-monument/thumb.png",
+  "social": "builds/20261114-171227-lm-washington-monument/social.png"
+ }
+}

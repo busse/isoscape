@@ -1,0 +1,77 @@
+{
+ "name": "lm-plymouth-rock",
+ "region": "lm-plymouth-rock",
+ "title": "Plymouth Rock \u2014 Plymouth, Massachusetts",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.25,
+  -1981.3842153962842,
+  6048.5,
+  4012.2367383280134
+ ],
+ "bearing": -1.2940109417080237,
+ "ms": 732,
+ "stats": {
+  "features": 2326,
+  "coastWays": 1,
+  "ground": 73,
+  "elevationDatum": -2.2,
+  "elevationTop": 37.3,
+  "ribbons": 531,
+  "footprintsAdded": 0,
+  "buildings": 629,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 2,
+  "heightGuessed": 627,
+  "bridgePieces": 35,
+  "contourSegments": 12181,
+  "rapidCells": 0,
+  "strips": 143
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Plymouth Rock \u2014 Plymouth, Massachusetts",
+  "center": [
+   -70.66196,
+   41.95784
+  ],
+  "width": 1100,
+  "depth": 1430,
+  "scale": 5.455,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-plymouth-rock"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171143-lm-plymouth-rock",
+ "createdAt": "2026-11-14T17:11:43.340Z",
+ "bytes": 2480370,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171143-lm-plymouth-rock/image.svg",
+  "thumb": "builds/20261114-171143-lm-plymouth-rock/thumb.png",
+  "social": "builds/20261114-171143-lm-plymouth-rock/social.png"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "name": "lm-statue-of-liberty",
+ "region": "lm-statue-of-liberty",
+ "title": "Statue of Liberty \u2014 New York Harbor",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3023.88,
+  -1986.9383380370193,
+  6047.76,
+  4080.766751343398
+ ],
+ "bearing": 9.409742982641035,
+ "ms": 291,
+ "stats": {
+  "features": 569,
+  "coastWays": 9,
+  "ground": 30,
+  "elevationDatum": -1.6,
+  "elevationTop": 12.2,
+  "ribbons": 81,
+  "footprintsAdded": 0,
+  "buildings": 47,
+  "heightFromTag": 43,
+  "heightFromModel": 0,
+  "heightFromLevels": 0,
+  "heightGuessed": 4,
+  "bridgePieces": 2,
+  "contourSegments": 589,
+  "rapidCells": 0,
+  "strips": 68
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Statue of Liberty \u2014 New York Harbor",
+  "center": [
+   -74.0445,
+   40.6892
+  ],
+  "width": 520,
+  "depth": 676,
+  "scale": 11.538,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-statue-of-liberty"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171146-lm-statue-of-liberty",
+ "createdAt": "2026-11-14T17:11:46.724Z",
+ "bytes": 195075,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171146-lm-statue-of-liberty/image.svg",
+  "thumb": "builds/20261114-171146-lm-statue-of-liberty/thumb.png",
+  "social": "builds/20261114-171146-lm-statue-of-liberty/social.png"
+ }
+}

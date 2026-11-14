@@ -1,0 +1,76 @@
+{
+ "name": "lm-white-house",
+ "region": "lm-white-house",
+ "title": "The White House \u2014 Washington, D.C.",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.25,
+  -2296.045101590664,
+  6048.5,
+  4326.897624522394
+ ],
+ "bearing": 44.9852228590035,
+ "ms": 848,
+ "stats": {
+  "features": 6672,
+  "ground": 474,
+  "elevationDatum": -0.3,
+  "elevationTop": 27,
+  "ribbons": 2089,
+  "footprintsAdded": 0,
+  "buildings": 312,
+  "heightFromTag": 37,
+  "heightFromModel": 0,
+  "heightFromLevels": 142,
+  "heightGuessed": 133,
+  "bridgePieces": 9,
+  "contourSegments": 7382,
+  "rapidCells": 0,
+  "strips": 143
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "The White House \u2014 Washington, D.C.",
+  "center": [
+   -77.03655,
+   38.89764
+  ],
+  "width": 1100,
+  "depth": 1430,
+  "scale": 5.455,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-white-house"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171229-lm-white-house",
+ "createdAt": "2026-11-14T17:12:29.225Z",
+ "bytes": 2271405,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171229-lm-white-house/image.svg",
+  "thumb": "builds/20261114-171229-lm-white-house/thumb.png",
+  "social": "builds/20261114-171229-lm-white-house/social.png"
+ }
+}
