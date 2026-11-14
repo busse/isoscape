@@ -1,0 +1,320 @@
+[
+ {
+  "id": "sanborn-1886-212",
+  "length": 267,
+  "width": 10.1,
+  "edition": 1886
+ },
+ {
+  "id": "sanborn-1886-284",
+  "length": 116,
+  "width": 8.7,
+  "edition": 1886
+ },
+ {
+  "id": "sanborn-1886-304",
+  "length": 69,
+  "width": 5.7,
+  "edition": 1886
+ },
+ {
+  "id": "sanborn-1886-389",
+  "length": 97,
+  "width": 6.0,
+  "edition": 1886
+ },
+ {
+  "id": "sanborn-1886-390",
+  "length": 116,
+  "width": 10.2,
+  "edition": 1886
+ },
+ {
+  "id": "sanborn-1886-398",
+  "length": 75,
+  "width": 5.1,
+  "edition": 1886
+ },
+ {
+  "id": "sanborn-1886-449",
+  "length": 400,
+  "width": 11.1,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1895-602",
+  "length": 74,
+  "width": 7.6,
+  "edition": 1895
+ },
+ {
+  "id": "sanborn-1895-824",
+  "length": 118,
+  "width": 9.9,
+  "edition": 1895
+ },
+ {
+  "id": "sanborn-1895-912",
+  "length": 120,
+  "width": 8.5,
+  "edition": 1895
+ },
+ {
+  "id": "sanborn-1905-1103",
+  "length": 68,
+  "width": 7.1,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1737",
+  "length": 112,
+  "width": 6.8,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1738",
+  "length": 48,
+  "width": 5.4,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1746",
+  "length": 82,
+  "width": 8.0,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1778",
+  "length": 57,
+  "width": 5.9,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1803",
+  "length": 125,
+  "width": 6.3,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1817",
+  "length": 81,
+  "width": 5.2,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1850",
+  "length": 172,
+  "width": 9.3,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1851",
+  "length": 113,
+  "width": 7.3,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1856",
+  "length": 51,
+  "width": 5.2,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1858",
+  "length": 149,
+  "width": 7.0,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1863",
+  "length": 102,
+  "width": 10.8,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1869",
+  "length": 90,
+  "width": 6.1,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1917",
+  "length": 89,
+  "width": 10.9,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1918",
+  "length": 61,
+  "width": 4.7,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1919",
+  "length": 35,
+  "width": 3.8,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1927",
+  "length": 226,
+  "width": 4.4,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1928",
+  "length": 161,
+  "width": 7.5,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-1937",
+  "length": 47,
+  "width": 4.5,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2005",
+  "length": 199,
+  "width": 6.8,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2019",
+  "length": 52,
+  "width": 4.9,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2028",
+  "length": 89,
+  "width": 5.8,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2040",
+  "length": 90,
+  "width": 6.3,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2053",
+  "length": 77,
+  "width": 6.8,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2062",
+  "length": 52,
+  "width": 5.7,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2090",
+  "length": 189,
+  "width": 9.7,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2091",
+  "length": 163,
+  "width": 8.7,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2188",
+  "length": 400,
+  "width": 9.5,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2195",
+  "length": 400,
+  "width": 9.5,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2205",
+  "length": 400,
+  "width": 11.3,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2272",
+  "length": 52,
+  "width": 4.4,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2276",
+  "length": 46,
+  "width": 5.0,
+  "edition": 1950
+ },
+ {
+  "id": "sanborn-1924-2295",
+  "length": 89,
+  "width": 5.4,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2296",
+  "length": 66,
+  "width": 4.4,
+  "edition": 1924
+ },
+ {
+  "id": "sanborn-1924-2297",
+  "length": 86,
+  "width": 5.6,
+  "edition": 1950
+ },
+ {
+  "id": "sanborn-1924-2305",
+  "length": 160,
+  "width": 10.3,
+  "edition": 1950
+ },
+ {
+  "id": "sanborn-1950-2715",
+  "length": 105,
+  "width": 9.2,
+  "edition": 1950
+ },
+ {
+  "id": "sanborn-1950-2719",
+  "length": 80,
+  "width": 4.9,
+  "edition": 1950
+ },
+ {
+  "id": "sanborn-1950-2742",
+  "length": 61,
+  "width": 5.1,
+  "edition": 1950
+ },
+ {
+  "id": "sanborn-1950-2743",
+  "length": 60,
+  "width": 4.3,
+  "edition": 1950
+ },
+ {
+  "id": "sanborn-1950-2746",
+  "length": 203,
+  "width": 12.0,
+  "edition": 1950
+ },
+ {
+  "id": "sanborn-1950-2765",
+  "length": 77,
+  "width": 4.8,
+  "edition": 1950
+ },
+ {
+  "id": "sanborn-1950-2768",
+  "length": 58,
+  "width": 5.7,
+  "edition": 1950
+ }
+]

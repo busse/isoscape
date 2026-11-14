@@ -361,6 +361,10 @@ Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
    on its site today went up; the opening of an expressway through it. Failing all of those,
    it is *assumed* gone by 1960, when clearing for parking and highways began
    (`lifespans.py`).
+4. **Clean.** A last pass drops slivers, any footprint more than 8 times longer than it is
+   wide and under 12 m wide: on the sheets these are rail viaducts, track-side sheds and street
+   edges, and extruded they would stand as walls. It then smooths each outline to within 1.5 m,
+   so pixel stair-steps do not draw as striped walls (`clean.py`; 54 slivers dropped).
 
 Traced buildings keep the maps' colours, so they read apart from today's. Their heights are
 guessed from their material (brick and stone three storeys, frame two): the storey counts
