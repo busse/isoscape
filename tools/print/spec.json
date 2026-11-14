@@ -1,0 +1,277 @@
+{
+ "regions": {
+  "downtown": {
+   "box": [
+    -3024,
+    -1060,
+    4524,
+    1960
+   ],
+   "focus": [
+    -1000,
+    -250
+   ]
+  },
+  "panorama": {
+   "box": [
+    -3024,
+    -1200,
+    6048,
+    2040
+   ]
+  },
+  "gwynns": {
+   "box": [
+    1000,
+    -3000,
+    8500,
+    6800
+   ],
+   "focus": [
+    6400,
+    300
+   ]
+  }
+ },
+ "designs": {
+  "richmond-through-time": {
+   "title": "Richmond, 1737–2026",
+   "subtitle": "Downtown and the James, as it stood in twelve years",
+   "region": "downtown",
+   "grid": [
+    4,
+    3
+   ],
+   "labels": true,
+   "band": 0.1,
+   "sizes": [
+    [
+     24,
+     36
+    ]
+   ],
+   "panels": [
+    {
+     "build": "richmond-downtown-time-1737",
+     "label": "1737",
+     "sub": "Byrd's plat"
+    },
+    {
+     "build": "richmond-downtown-time-1788",
+     "label": "1788",
+     "sub": "the Capitol"
+    },
+    {
+     "build": "richmond-downtown-time-1820",
+     "label": "1820"
+    },
+    {
+     "build": "richmond-downtown-time-1850",
+     "label": "1850"
+    },
+    {
+     "build": "richmond-downtown-time-1865",
+     "label": "1865",
+     "sub": "after the Evacuation Fire"
+    },
+    {
+     "build": "richmond-downtown-time-1886",
+     "label": "1886",
+     "sub": "first Sanborn atlas"
+    },
+    {
+     "build": "richmond-downtown-time-1905",
+     "label": "1905"
+    },
+    {
+     "build": "richmond-downtown-time-1925",
+     "label": "1925"
+    },
+    {
+     "build": "richmond-downtown-time-1950",
+     "label": "1950"
+    },
+    {
+     "build": "richmond-downtown-time-1970",
+     "label": "1970",
+     "sub": "the expressways"
+    },
+    {
+     "build": "richmond-downtown-time-1990",
+     "label": "1990"
+    },
+    {
+     "build": "richmond-downtown-time-2026",
+     "label": "2026",
+     "sub": "today"
+    }
+   ]
+  },
+  "then-and-now": {
+   "title": "Richmond, Then & Now",
+   "subtitle": "1886 and 2026, the same blocks from the same spot",
+   "region": "downtown",
+   "grid": [
+    2,
+    1
+   ],
+   "labels": true,
+   "orientation": "portrait",
+   "sizes": [
+    [
+     24,
+     36
+    ]
+   ],
+   "panels": [
+    {
+     "build": "richmond-downtown-time-1886",
+     "label": "1886"
+    },
+    {
+     "build": "richmond-downtown-time-2026",
+     "label": "2026"
+    }
+   ]
+  },
+  "richmond-panorama-2026": {
+   "title": "Richmond and the James",
+   "subtitle": "Downtown to Church Hill, 2026",
+   "region": "panorama",
+   "band": 0.16,
+   "margin": 0.06,
+   "sizes": [
+    [
+     10,
+     24
+    ]
+   ],
+   "panels": [
+    {
+     "build": "richmond-downtown-time-2026"
+    }
+   ]
+  },
+  "richmond-1865": {
+   "title": "Richmond, 1865",
+   "subtitle": "After the Evacuation Fire · downtown and the James",
+   "region": "downtown",
+   "sizes": [
+    [
+     24,
+     36
+    ]
+   ],
+   "panels": [
+    {
+     "build": "richmond-downtown-time-1865"
+    }
+   ]
+  },
+  "richmond-1886": {
+   "title": "Richmond, 1886",
+   "subtitle": "The first Sanborn atlas · downtown and the James",
+   "region": "downtown",
+   "sizes": [
+    [
+     24,
+     36
+    ]
+   ],
+   "panels": [
+    {
+     "build": "richmond-downtown-time-1886"
+    }
+   ]
+  },
+  "richmond-1925": {
+   "title": "Richmond, 1925",
+   "subtitle": "Between the wars · downtown and the James",
+   "region": "downtown",
+   "sizes": [
+    [
+     24,
+     36
+    ]
+   ],
+   "panels": [
+    {
+     "build": "richmond-downtown-time-1925"
+    }
+   ]
+  },
+  "richmond-1950": {
+   "title": "Richmond, 1950",
+   "subtitle": "Before the Turnpike · downtown and the James",
+   "region": "downtown",
+   "sizes": [
+    [
+     24,
+     36
+    ]
+   ],
+   "panels": [
+    {
+     "build": "richmond-downtown-time-1950"
+    }
+   ]
+  },
+  "richmond-2026": {
+   "title": "Richmond, 2026",
+   "subtitle": "Today · downtown and the James",
+   "region": "downtown",
+   "sizes": [
+    [
+     24,
+     36
+    ]
+   ],
+   "panels": [
+    {
+     "build": "richmond-downtown-time-2026"
+    }
+   ]
+  },
+  "gwynns-island": {
+   "title": "Gwynn's Island",
+   "subtitle": "Mathews County, Virginia · between the Piankatank and Milford Haven",
+   "region": "gwynns",
+   "sizes": [
+    [
+     24,
+     36
+    ]
+   ],
+   "panels": [
+    {
+     "build": "gwynns-island"
+    }
+   ]
+  }
+ },
+ "serves": {
+  "24x36": {
+   "Print": [
+    "8x12",
+    "12x18",
+    "20x30",
+    "24x36"
+   ],
+   "Framed Print": [
+    "12x18",
+    "20x30",
+    "24x36"
+   ],
+   "Framed Canvas": [
+    "12x18",
+    "20x30",
+    "24x36"
+   ]
+  },
+  "10x24": {
+   "Print": [
+    "10x24"
+   ]
+  }
+ }
+}
