@@ -400,3 +400,27 @@ export const riverFall = (t: Terrain, i: number, j: number, span = 20): { slope:
   if (best === 0 || len === 0) return null
   return { slope: best, down: [-gx / len, -gy / len] }
 }
+
+/**
+ * Still water drawn where the ground is now dry (a filled canal basin): its cells become water
+ * at one level, the lowest ground under it, with no rocks and no rapids read in it.
+ */
+export const stillWater = (t: Terrain, rings: Vec2[][][]): void => {
+  if (rings.length === 0) return
+  const before = t.water.slice()
+  t.water.fill(0)
+  rasterize(t, rings, 1)
+  const mask = t.water.slice()
+  t.water.set(before)
+  let low = Infinity
+  for (let k = 0; k < mask.length; k++) if (mask[k] === 1) low = Math.min(low, t.elev[k])
+  if (!Number.isFinite(low)) return
+  for (let k = 0; k < mask.length; k++) {
+    if (mask[k] !== 1) continue
+    t.water[k] = 1
+    t.rocks[k] = 0
+    t.interior[k] = 0
+    t.elev[k] = low
+    t.level[k] = low
+  }
+}

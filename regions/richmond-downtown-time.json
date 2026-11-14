@@ -1,0 +1,49 @@
+{
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+    -77.4268,
+    37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "bearing": -8.7,
+  "snap": false,
+  "scale": 2.0,
+  "squash": 0.5,
+  "exaggeration": 1.0,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+    {
+      "match": "Manchester",
+      "deck": 24
+    },
+    {
+      "match": "Mayo",
+      "deck": 6
+    },
+    {
+      "match": "Potterfield",
+      "deck": 3
+    }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+    "exaggeration": 2.5,
+    "cell": 5,
+    "contour": 2,
+    "majorEvery": 5,
+    "rapids": 0.035,
+    "demResolution": 2
+  },
+  "time": {
+    "history": "history/richmond-downtown.json",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  }
+}

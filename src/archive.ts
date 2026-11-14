@@ -33,6 +33,15 @@ export interface BuildMeta {
   readonly files: { readonly svg: string; readonly thumb?: string }
   /** The page colour, for a swatch where there is no thumbnail. */
   readonly sky: string
+  /** A dated build: its year, its place in the series, and the curated features drawn in it. */
+  readonly time?: {
+    readonly year: number
+    readonly series: string
+    readonly title?: string
+    readonly note?: string
+    readonly previous?: number
+    readonly curated: readonly { readonly id: string; readonly name: string; readonly kind: string; readonly from: number; readonly to?: number; readonly note: string; readonly sources: readonly string[] }[]
+  }
 }
 
 const gitInfo = async (): Promise<BuildMeta['git']> => {

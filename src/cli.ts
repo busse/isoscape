@@ -13,7 +13,9 @@ import { loadPages } from './pages.ts'
 import { palette } from './palette.ts'
 import { fetchBounds, loadRegion, type Region } from './region.ts'
 import { renderPage, renderSvg } from './render.ts'
-import { buildScene } from './scene.ts'
+import { buildScene, type TimeContext } from './scene.ts'
+import { dateBuildings, fetchYearBuilt, loadHistory, parseParcels, type History } from './history.ts'
+import type { PolygonFeature } from './osm.ts'
 
 const run = promisify(execFile)
 
@@ -25,6 +27,8 @@ const HELP = `isoscape — isometric dot-and-line views of real places
   isoscape info <region>           camera, counts and height coverage, as JSON
   isoscape build <region>          write out/<region>.svg and .html, archive the build,
                                    and refresh the explorer at out/index.html
+  isoscape series <region>         build every epoch of a dated region (see regions/*.json
+                                   "time"), each as <region>-<year>
   isoscape explorer                rebuild out/index.html from the archived builds
   isoscape backfill <commit> <region>
                                    build a region with an earlier commit's code and archive it
@@ -36,13 +40,14 @@ const HELP = `isoscape — isometric dot-and-line views of real places
   --palette <name>   override the region's palette (paper, night)
   --png [width]      also rasterise out/<region>.png (needs rsvg-convert)
   --note "<text>"    say what this build is trying, shown in the explorer
+  --year <yyyy>      build a dated region as it stood in that year
   --no-archive       do not keep this build in out/builds/
   --out <dir>        output directory (default: out)
 `
 
 const dataDir = (r: Region) => resolve('data', r.data ?? r.name)
 
-const loadScene = async (name: string, paletteName?: string) => {
+const loadInputs = async (name: string) => {
   const region = await loadRegion(name)
   let json: string
   try {
@@ -72,8 +77,40 @@ const loadScene = async (name: string, paletteName?: string) => {
     if (lc === null) console.error(`no land cover for "${name}"; run: isoscape fetch ${region.data ?? name} --extras-only`)
     else extra.cover = coverSampler(lc)
   }
-  return buildScene(region, features, palette(paletteName ?? region.palette), elevation, extra)
+  let history: History | null = null
+  let dates: TimeContext['dates'] = new Map()
+  if (region.time !== undefined) {
+    history = await loadHistory(resolve(region.time.history))
+    let parcels: ReturnType<typeof parseParcels> = []
+    if (region.time.yearBuilt !== undefined) {
+      try {
+        parcels = parseParcels(await readFile(resolve('data', region.name, 'yearbuilt.json'), 'utf8'), region.time.yearBuilt.field)
+      } catch {
+        console.error(`no year-built data for "${name}"; run: isoscape fetch ${name} --extras-only`)
+      }
+    }
+    dates = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates)
+  }
+  return { region, features, elevation, extra, history, dates }
 }
+
+type Inputs = Awaited<ReturnType<typeof loadInputs>>
+
+const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number) => {
+  const extra = { ...inp.extra }
+  if (inp.history !== null) {
+    const y = year ?? inp.history.present
+    const epoch = inp.history.epochs.find((e) => e.year === y)
+    extra.time = {
+      year: y, history: inp.history, dates: inp.dates,
+      ...(previous === undefined ? {} : { previous }),
+      ...(epoch === undefined ? {} : { title: epoch.title }),
+    }
+  } else if (year !== undefined) throw new Error(`"${inp.region.name}" has no "time" section; --year needs one`)
+  return buildScene(inp.region, inp.features, palette(paletteName ?? inp.region.palette), inp.elevation, extra)
+}
+
+const loadScene = async (name: string, paletteName?: string, year?: number) => sceneOf(await loadInputs(name), paletteName, year)
 
 export const main = async (argv: string[]): Promise<void> => {
   const { positionals, values } = parseArgs({
@@ -91,6 +128,7 @@ export const main = async (argv: string[]): Promise<void> => {
       note: { type: 'string' },
       budget: { type: 'string' },
       'no-archive': { type: 'boolean' },
+      year: { type: 'string' },
     },
   })
   const [command, name] = positionals
@@ -137,6 +175,7 @@ export const main = async (argv: string[]): Promise<void> => {
       if (!only || values['extras-only']) {
         if (region.sources?.buildings?.includes('microsoft')) await fetchFootprints(region, dataDir(region))
         if (region.sources?.landcover === 'nlcd') await fetchLandcover(region, dataDir(region))
+        if (region.time?.yearBuilt !== undefined) await fetchYearBuilt(region, region.time.yearBuilt, resolve('data', region.name))
         if (values['extras-only']) return
       }
       if (!values['dem-only']) {
@@ -151,47 +190,20 @@ export const main = async (argv: string[]): Promise<void> => {
       return
     }
     case 'info': {
-      const scene = await loadScene(name, values.palette)
+      const scene = await loadScene(name, values.palette, values.year === undefined ? undefined : Number(values.year))
       console.log(JSON.stringify({ region: scene.region.name, bearing: Number(scene.view.bearing.toFixed(2)), ...scene.stats }, null, 2))
       return
     }
     case 'build': {
-      const t0 = performance.now()
-      const scene = await loadScene(name, values.palette)
-      const rendered = renderSvg(scene)
-      const outDir = resolve(values.out ?? 'out')
-      await mkdir(outDir, { recursive: true })
-      const suffix = values.palette !== undefined ? `-${values.palette}` : ''
-      const base = resolve(outDir, `${name}${suffix}`)
-      await writeFile(`${base}.svg`, rendered.svg)
-      await writeFile(`${base}.html`, renderPage(scene, rendered))
-      const mb = (rendered.svg.length / 1e6).toFixed(2)
-      const relief = scene.terrain.flat ? 'flat' : `terrain ${scene.stats.elevationDatum}–${scene.stats.elevationTop} m ×${scene.terrain.exaggeration}, ${rendered.stats.rapidCells} rapid cells`
-      console.error(`${name}: bearing ${scene.view.bearing.toFixed(1)}°, ${scene.stats.buildings} buildings, ${scene.stats.bridgePieces} bridge spans, ${relief}, ${mb} MB svg, ${Math.round(performance.now() - t0)} ms`)
-      if (values.png) {
-        const width = values.width ?? String(Math.round(Math.min(6000, rendered.viewBox[2])))
-        await run('rsvg-convert', ['-w', width, '-o', `${base}.png`, `${base}.svg`], { maxBuffer: 1 << 26 })
-        console.error(`wrote ${base}.png`)
-      }
-      console.error(`wrote ${base}.svg and ${base}.html`)
-      if (!values['no-archive']) {
-        const paletteName = values.palette ?? scene.region.palette ?? 'paper'
-        const meta = await archiveBuild(outDir, rendered.svg, {
-          name: `${name}${suffix}`,
-          region: name,
-          title: scene.region.title,
-          palette: paletteName,
-          ...(values.note === undefined ? {} : { note: values.note }),
-          viewBox: rendered.viewBox,
-          bearing: scene.view.bearing,
-          ms: Math.round(performance.now() - t0),
-          stats: { ...scene.stats, ...rendered.stats },
-          config: scene.region,
-          sky: scene.palette.sky,
-        })
-        const n = await writeExplorer(outDir)
-        console.error(`archived ${meta.id}; explorer has ${n} builds: ${resolve(outDir, 'index.html')}`)
-      }
+      const inp = await loadInputs(name)
+      await buildOne(inp, name, values, values.year === undefined ? undefined : Number(values.year))
+      return
+    }
+    case 'series': {
+      const inp = await loadInputs(name)
+      if (inp.history === null || inp.history.epochs.length === 0) throw new Error(`"${name}" has no epochs; add a "time" section with a history file`)
+      const epochs = [...inp.history.epochs].sort((a, b) => a.year - b.year)
+      for (let k = 0; k < epochs.length; k++) await buildOne(inp, name, values, epochs[k].year, k > 0 ? epochs[k - 1].year : undefined)
       return
     }
     default:
@@ -204,4 +216,55 @@ const writeExplorer = async (outDir: string): Promise<number> => {
   await mkdir(outDir, { recursive: true })
   await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, loadPages()))
   return builds.length
+}
+
+type Values = { palette?: string; png?: boolean; width?: string; out?: string; note?: string; 'no-archive'?: boolean }
+
+const buildOne = async (inp: Inputs, name: string, values: Values, year?: number, previous?: number): Promise<void> => {
+  const t0 = performance.now()
+  const scene = sceneOf(inp, values.palette, year, previous)
+  const rendered = renderSvg(scene)
+  const outDir = resolve(values.out ?? 'out')
+  await mkdir(outDir, { recursive: true })
+  const dated = scene.time === undefined || year === undefined ? '' : `-${scene.time.year}`
+  const suffix = `${dated}${values.palette !== undefined ? `-${values.palette}` : ''}`
+  const base = resolve(outDir, `${name}${suffix}`)
+  await writeFile(`${base}.svg`, rendered.svg)
+  await writeFile(`${base}.html`, renderPage(scene, rendered))
+  const mb = (rendered.svg.length / 1e6).toFixed(2)
+  const relief = scene.terrain.flat ? 'flat' : `terrain ${scene.stats.elevationDatum}–${scene.stats.elevationTop} m ×${scene.terrain.exaggeration}, ${rendered.stats.rapidCells} rapid cells`
+  console.error(`${name}${dated}: bearing ${scene.view.bearing.toFixed(1)}°, ${scene.stats.buildings} buildings, ${scene.stats.bridgePieces} bridge spans, ${relief}, ${mb} MB svg, ${Math.round(performance.now() - t0)} ms`)
+  if (values.png) {
+    const width = values.width ?? String(Math.round(Math.min(6000, rendered.viewBox[2])))
+    await run('rsvg-convert', ['-w', width, '-o', `${base}.png`, `${base}.svg`], { maxBuffer: 1 << 26 })
+    console.error(`wrote ${base}.png`)
+  }
+  console.error(`wrote ${base}.svg and ${base}.html`)
+  if (values['no-archive']) return
+  const paletteName = values.palette ?? scene.region.palette ?? 'paper'
+  const epoch = inp.history?.epochs.find((e) => e.year === scene.time?.year)
+  const meta = await archiveBuild(outDir, rendered.svg, {
+    name: `${name}${suffix}`,
+    region: name,
+    title: scene.time === undefined ? scene.region.title : `${scene.region.title}, ${scene.time.year}`,
+    palette: paletteName,
+    ...(values.note === undefined ? {} : { note: values.note }),
+    viewBox: rendered.viewBox,
+    bearing: scene.view.bearing,
+    ms: Math.round(performance.now() - t0),
+    stats: { ...scene.stats, ...rendered.stats },
+    config: scene.region,
+    sky: scene.palette.sky,
+    ...(scene.time === undefined ? {} : {
+      time: {
+        year: scene.time.year,
+        series: name,
+        ...(epoch === undefined ? {} : { title: epoch.title, ...(epoch.note === undefined ? {} : { note: epoch.note }) }),
+        ...(previous === undefined ? {} : { previous }),
+        curated: scene.time.curated.map((h) => ({ id: h.id, name: h.name, kind: h.kind, from: h.from, ...(h.to === undefined ? {} : { to: h.to }), note: h.note, sources: h.sources })),
+      },
+    }),
+  })
+  const n = await writeExplorer(outDir)
+  console.error(`archived ${meta.id}; explorer has ${n} builds: ${resolve(outDir, 'index.html')}`)
 }

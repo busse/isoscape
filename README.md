@@ -22,6 +22,14 @@ and the bluffs on both banks. It is a 25 MB SVG, and `--png` renders it at 18,84
 
 ![The James through Richmond from I-195 to Rocketts Landing](docs/richmond-i195-rocketts.png)
 
+`gwynns-island` is tidewater: Gwynn's Island and Mathews County, from the Route 3 bridge over
+the Piankatank to Milford Haven, with Deltaville and Stingray Point across the river. Here the
+water comes from OSM's coastline. OSM maps few buildings and little land cover here, so
+footprints come from Microsoft's model and woods and fields from NLCD (see
+[Extra sources](#extra-sources)).
+
+![Gwynn's Island, Mathews County, VA](docs/gwynns-island.png)
+
 ```sh
 node bin/isoscape.js fetch richmond-downtown        # OSM + elevation → data/richmond-downtown/
 node bin/isoscape.js build richmond-downtown-topo   # → out/richmond-downtown-topo.{svg,html}
@@ -121,7 +129,8 @@ types itself. `--png` shells out to `rsvg-convert` (`brew install librsvg`).
 | `isoscape query <region>` | print the Overpass query a fetch would send |
 | `isoscape fetch <region>` | download OSM data (`osm.json`) and elevation (`dem.bin.gz`) into `data/<region>/`; `--osm-only`, `--dem-only` |
 | `isoscape info <region>` | the chosen bearing, feature counts, and where building heights came from |
-| `isoscape build <region>` | write `out/<region>.svg` and `out/<region>.html`, archive the build, refresh the explorer |
+| `isoscape build <region>` | write `out/<region>.svg` and `out/<region>.html`, archive the build, refresh the explorer; `--year <yyyy>` for one scene of a dated region |
+| `isoscape series <region>` | build every year of a dated region, each as `<region>-<year>` |
 | `isoscape explorer` | rewrite `out/index.html` from the archive |
 | `isoscape backfill <commit> <region>` | build a region with an earlier commit's code and archive it |
 
@@ -276,6 +285,29 @@ in the countryside:
 `fetch` gets them along with everything else; `fetch <region> --extras-only` gets just these.
 For tidal water, set `terrain.rocks: false` and `terrain.rapids: 0`: river logic has nothing to
 find there.
+
+## Time
+
+A region with a `time` section is drawn as a series of years:
+
+```jsonc
+"time": {
+  "history": "history/richmond-downtown.json",
+  "yearBuilt": { "url": "https://…/Year_of_Construction/FeatureServer/0", "field": "Year_Built" }
+}
+```
+
+`fetch <region> --extras-only` pages the assessor's year-built parcels into
+`data/<region>/yearbuilt.json`. The history file lists the series' `epochs` (year, title,
+note), its curated `features` (a filled basin, a burned district, lost landmarks, a buried
+creek, the town plan), the era `rules` that date roads, rail and water, and curated `dates`
+for particular buildings. Every item cites its sources. `isoscape series richmond-downtown-time`
+builds all ten scenes from 1737 to today. In the explorer, a series reads in year order: the
+year chips above the picture and the `[` `]` keys step through it, and Compare defaults to the
+year before. The method and its limits are in the *How it's made* page, under "Time".
+
+`regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
+and elevation and keeps only its year-built parcels in its own `data/` folder.
 
 ## Roadmap
 

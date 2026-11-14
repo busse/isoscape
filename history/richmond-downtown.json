@@ -1,0 +1,627 @@
+{
+ "title": "Downtown Richmond through time",
+ "method": "Curated outlines are placed from today's OpenStreetMap street intersections (e.g. the corner of 20th and Cary) and the dimensions the sources give; they are not surveyed. Era rules match OSM names, refs and tags; the first match wins.",
+ "present": 2026,
+ "about": "Each scene draws the buildings standing today that had been built by its year (dated by OSM start_date, else the City of Richmond assessor's year built), plus the curated features below. Buildings since demolished appear only where curated. The ground is today's.",
+ "epochs": [
+  {
+   "year": 1737,
+   "title": "The town plan",
+   "note": "William Mayo lays out Richmond for William Byrd II: a grid of squares east of Shockoe Creek, sold by lottery. Almost nothing standing today is this old."
+  },
+  {
+   "year": 1788,
+   "title": "A new capital",
+   "note": "The capital has moved from Williamsburg; Jefferson's Capitol is finished on Shockoe Hill, and John Mayo's toll bridge first crosses the James."
+  },
+  {
+   "year": 1840,
+   "title": "Canal and mills",
+   "note": "The James River and Kanawha Canal ends in the Great Basin; flour mills and ironworks line the canal and the falls."
+  },
+  {
+   "year": 1860,
+   "title": "Antebellum peak",
+   "note": "Richmond is among the South's most industrial cities, its flour mills among the largest in the world, and Shockoe Bottom the centre of a slave trade that sends people south by the thousand."
+  },
+  {
+   "year": 1865,
+   "title": "After the Evacuation Fire",
+   "note": "Retreating Confederates fire the warehouses on 2–3 April; some 35 blocks of the business district burn."
+  },
+  {
+   "year": 1900,
+   "title": "Rail and tobacco",
+   "note": "Railroads have taken over the canal; tobacco factories and warehouses fill Shockoe Bottom and Tobacco Row. Main Street Station and the river viaduct are about to open."
+  },
+  {
+   "year": 1930,
+   "title": "The first skyscrapers",
+   "note": "The first office towers rise downtown; Shockoe Creek runs underground; the Mayo Bridge has been rebuilt in concrete (1913)."
+  },
+  {
+   "year": 1960,
+   "title": "The interstate cut",
+   "note": "The Richmond-Petersburg Turnpike, now I-95, opened in 1958 through Shockoe Valley."
+  },
+  {
+   "year": 1990,
+   "title": "Expressway and office core",
+   "note": "The Downtown Expressway (1976) runs along the old canal bed; the James Center stands on the Great Basin's site."
+  },
+  {
+   "year": 2026,
+   "title": "Today",
+   "note": "The floodwall (1994) and the Canal Walk (1999) have brought the riverfront back; Tobacco Row is apartments."
+  }
+ ],
+ "features": [
+  {
+   "id": "great-basin",
+   "name": "Great Turning Basin, James River & Kanawha Canal",
+   "kind": "water",
+   "from": 1800,
+   "to": 1885,
+   "ring": [
+    [
+     -77.438082,
+     37.5378411
+    ],
+    [
+     -77.4346994,
+     37.5358123
+    ],
+    [
+     -77.4354483,
+     37.5350414
+    ],
+    [
+     -77.4388481,
+     37.5369982
+    ]
+   ],
+   "note": "The canal's Great Basin covered three blocks between Cary and Canal Streets, from 8th to 12th Street. Completed about 1800; later filled and used as a rail yard after the railroad took over the canal (the end date here is approximate). The James Center stands on the site.",
+   "sources": [
+    "https://www.hmdb.org/m.asp?m=286691",
+    "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf",
+    "https://en.wikipedia.org/wiki/James_Center"
+   ]
+  },
+  {
+   "id": "burned-1865",
+   "name": "Burned district, Evacuation Fire of 3 April 1865",
+   "kind": "burned",
+   "from": 1865,
+   "to": 1866,
+   "ring": [
+    [
+     -77.4403852,
+     37.541331
+    ],
+    [
+     -77.4291976,
+     37.5345111
+    ],
+    [
+     -77.4316504,
+     37.5317272
+    ],
+    [
+     -77.4440788,
+     37.5374452
+    ]
+   ],
+   "note": "Some 35 blocks burned as the Confederate government left the city, from 4th Street east to 16th Street and from the river north, in places, as far as Capitol Square. Drawn simplified: 4th to 16th Streets, from midway between Main and Franklin Streets to the river. The mills and warehouses along the canal burned with it.",
+   "sources": [
+    "https://www.hmdb.org/m.asp?m=8161",
+    "https://tclf.org/places/view-city-and-regional-guides/national-park-service-guides/richmond/richmonds-landscape"
+   ]
+  },
+  {
+   "id": "plan-1737",
+   "name": "Byrd and Mayo's plan of Richmond, 1737",
+   "kind": "plan",
+   "from": 1737,
+   "to": 1769,
+   "limitsStreets": true,
+   "ring": [
+    [
+     -77.429399,
+     37.5366707
+    ],
+    [
+     -77.4187978,
+     37.5316448
+    ],
+    [
+     -77.4227183,
+     37.5273918
+    ],
+    [
+     -77.431236,
+     37.5319443
+    ]
+   ],
+   "note": "William Mayo laid out the town for William Byrd II in 1737: a grid of two-acre squares east of Shockoe Creek, bounded by the river, today's 15th Street, Broad Street and 25th Street. (Encyclopedia Virginia gives 17th to 25th Street for the original blocks.) In the 1737 scene only the streets inside it are drawn.",
+   "sources": [
+    "https://sah-archipedia.org/node/311",
+    "https://encyclopediavirginia.org/entries/richmond-during-the-colonial-period/",
+    "https://lva-virginia.libguides.com/richmond-maps/history",
+    "https://richmondmagazine.com/news/richmond-history/surveyor-william-mayo/"
+   ]
+  },
+  {
+   "id": "libby-prison",
+   "name": "Libby Prison (warehouses, 1845–52; prison 1862–65)",
+   "kind": "landmark",
+   "from": 1845,
+   "to": 1889,
+   "height": 15,
+   "ring": [
+    [
+     -77.4266034,
+     37.5308823
+    ],
+    [
+     -77.4262443,
+     37.5306587
+    ],
+    [
+     -77.4263355,
+     37.5303646
+    ],
+    [
+     -77.4266946,
+     37.5305883
+    ]
+   ],
+   "note": "Three brick warehouses, each 110 × 44 ft and four storeys, on the east side of 20th Street between Cary and Dock. Used as a Confederate prison 1862–65; dismantled in 1889 and re-erected in Chicago. Footprint from the published dimensions, placed at the corner; not surveyed.",
+   "sources": [
+    "https://www.hmdb.org/m.asp?m=35933"
+   ]
+  },
+  {
+   "id": "gallego-mills",
+   "name": "Gallego Mills, the great mill of 1854",
+   "kind": "landmark",
+   "from": 1855,
+   "to": 1866,
+   "height": 40,
+   "ruin": 1865,
+   "ring": [
+    [
+     -77.435563,
+     37.5350094
+    ],
+    [
+     -77.4358922,
+     37.5350433
+    ],
+    [
+     -77.4362884,
+     37.5347164
+    ],
+    [
+     -77.4359592,
+     37.5346825
+    ]
+   ],
+   "note": "Twelve storeys, 96 ft on Canal Street and 165 ft deep, at the southwest corner of 12th and Canal: by 1860 the largest building in Richmond and claimed as the largest flour mill in the world. Burned in the Evacuation Fire. Footprint from the published dimensions; position from the marker; height assumes about 3.3 m a storey.",
+   "sources": [
+    "https://www.hmdb.org/m.asp?m=23880",
+    "https://www.mdgorman.com/Written_Accounts/Whig/1865/richmond_whig_4251865b.htm",
+    "https://emergingcivilwar.com/2026/02/23/flour-power-richmonds-gallego-mills/"
+   ]
+  },
+  {
+   "id": "lumpkins-jail",
+   "name": "Lumpkin's Jail (slave-trading complex)",
+   "kind": "landmark",
+   "from": 1835,
+   "to": 1876,
+   "height": 8,
+   "ring": [
+    [
+     -77.4286704,
+     37.5363651
+    ],
+    [
+     -77.4285491,
+     37.5363069
+    ],
+    [
+     -77.4286017,
+     37.5362371
+    ],
+    [
+     -77.428723,
+     37.5362954
+    ]
+   ],
+   "note": "The largest of Richmond's slave jails, in the slave-trading district of Shockoe Bottom: a two-and-a-half-storey brick building about 41 ft long, operated from the 1830s until 1865 and demolished by 1876. Its foundations were excavated in 2008 beside Main Street Station. Footprint approximate; position from the historical marker.",
+   "sources": [
+    "https://encyclopediavirginia.org/entries/lumpkins-jail/",
+    "https://www.hmdb.org/m.asp?m=40679"
+   ]
+  },
+  {
+   "id": "shockoe-creek",
+   "name": "Shockoe Creek (open stream)",
+   "kind": "creek",
+   "from": 1737,
+   "to": 1877,
+   "width": 8,
+   "line": [
+    [
+     -77.4289971,
+     37.5364203
+    ],
+    [
+     -77.4297231,
+     37.5354571
+    ],
+    [
+     -77.4299717,
+     37.5342975
+    ],
+    [
+     -77.4307592,
+     37.5334905
+    ],
+    [
+     -77.4315971,
+     37.5326512
+    ],
+    [
+     -77.4323198,
+     37.5315242
+    ]
+   ],
+   "note": "The creek ran open between present-day 15th and 16th Streets, dividing the town, until it was enclosed in a culvert in 1877. Course approximated as midway between the two streets.",
+   "sources": [
+    "https://sah-archipedia.org/node/285"
+   ]
+  }
+ ],
+ "rules": [
+  {
+   "where": {
+    "name": "Richmond-Petersburg Turnpike"
+   },
+   "eras": [
+    [
+     1958,
+     null
+    ]
+   ],
+   "note": "Opened 1 July 1958; designated I-95 a month later.",
+   "sources": [
+    "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/interstate-highways"
+   ]
+  },
+  {
+   "where": {
+    "name": "I 95"
+   },
+   "eras": [
+    [
+     1958,
+     null
+    ]
+   ],
+   "sources": [
+    "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/interstate-highways"
+   ]
+  },
+  {
+   "where": {
+    "name": "Downtown Expressway"
+   },
+   "eras": [
+    [
+     1976,
+     null
+    ]
+   ],
+   "note": "Opened 3 February 1976.",
+   "sources": [
+    "https://www.aaroads.com/guides/i-195-va"
+   ]
+  },
+  {
+   "where": {
+    "name": "VA 195"
+   },
+   "eras": [
+    [
+     1976,
+     null
+    ]
+   ],
+   "sources": [
+    "https://www.aaroads.com/guides/i-195-va"
+   ]
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "motorway",
+     "motorway_link"
+    ]
+   },
+   "eras": [
+    [
+     1958,
+     null
+    ]
+   ],
+   "note": "Unnamed ramps are dated with I-95."
+  },
+  {
+   "where": {
+    "name": "Manchester Bridge"
+   },
+   "eras": [
+    [
+     1973,
+     null
+    ]
+   ],
+   "note": "The 9th Street (Manchester) Bridge was completed in 1973.",
+   "sources": [
+    "https://rvamag.com/news/community/rva-5x5-the-history-of-the-mayo-bridge.html"
+   ]
+  },
+  {
+   "where": {
+    "name": "Leigh Street Viaduct"
+   },
+   "eras": [
+    [
+     1976,
+     null
+    ]
+   ],
+   "sources": [
+    "https://roadstothefuture.com/Richmond_Aerial.html"
+   ]
+  },
+  {
+   "where": {
+    "name": "Mayo Bridge"
+   },
+   "eras": [
+    [
+     1788,
+     null
+    ]
+   ],
+   "note": "A bridge has stood here since John Mayo Jr.'s of 1788; today's dates from 1913.",
+   "sources": [
+    "https://historicrichmond.com/property/mayo-bridge/"
+   ]
+  },
+  {
+   "where": {
+    "name": "Canal Walk"
+   },
+   "eras": [
+    [
+     1999,
+     null
+    ]
+   ],
+   "sources": [
+    "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf"
+   ]
+  },
+  {
+   "where": {
+    "name": "Floodwall"
+   },
+   "eras": [
+    [
+     1994,
+     null
+    ]
+   ],
+   "note": "The floodwall was dedicated on 21 October 1994.",
+   "sources": [
+    "https://www.hmdb.org/m.asp?m=23953"
+   ]
+  },
+  {
+   "where": {
+    "name": "James River and Kanawha Canal"
+   },
+   "eras": [
+    [
+     1800,
+     1890
+    ],
+    [
+     1999,
+     null
+    ]
+   ],
+   "note": "The canal's downtown end, from about 1800 until the railroad took it over (end date approximate); the stretch seen today was re-watered for the Canal Walk in 1999.",
+   "sources": [
+    "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf"
+   ]
+  },
+  {
+   "where": {
+    "name": "Haxall Canal"
+   },
+   "eras": [
+    [
+     1790,
+     null
+    ]
+   ],
+   "note": "David Ross built the mill canal in 1790.",
+   "sources": [
+    "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf"
+   ]
+  },
+  {
+   "where": {
+    "tag": "railway",
+    "bridge": true
+   },
+   "eras": [
+    [
+     1901,
+     null
+    ]
+   ],
+   "note": "The elevated viaducts and the Triple Crossing were built with Main Street Station, opened 1901.",
+   "sources": [
+    "https://www.richmondrailroadmuseum.com/railroad-history",
+    "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
+   ]
+  },
+  {
+   "where": {
+    "tag": "railway"
+   },
+   "eras": [
+    [
+     1836,
+     null
+    ]
+   ],
+   "note": "Railroads reach Richmond from 1836 (the RF&P); lines at grade are dated from then, although today's alignments are later.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Richmond,_Fredericksburg_and_Potomac_Railroad"
+   ]
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "footway",
+     "path",
+     "cycleway",
+     "steps",
+     "pedestrian",
+     "track",
+     "bridleway"
+    ]
+   },
+   "eras": [],
+   "note": "Paths are not dated: drawn in today's view only."
+  },
+  {
+   "where": {
+    "name": "Fountain"
+   },
+   "eras": [],
+   "note": "Fountains are not dated: drawn in today's view only."
+  },
+  {
+   "where": {
+    "tag": "amenity",
+    "is": [
+     "parking"
+    ]
+   },
+   "eras": [
+    [
+     1950,
+     null
+    ]
+   ],
+   "note": "Surface parking: an approximate date, not sourced."
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "bridge": true
+   },
+   "eras": [
+    [
+     1901,
+     null
+    ]
+   ],
+   "note": "Road bridges not named above (over the rail lines and the interstate) are dated with the viaducts: approximate."
+  }
+ ],
+ "dates": [
+  {
+   "id": "w45088494",
+   "name": "Virginia State Capitol",
+   "year": 1788,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "Completed 1788; the wings of 1904–06 are not drawn apart."
+  },
+  {
+   "id": "w400327565",
+   "name": "St. John's Church",
+   "year": 1741,
+   "source": "https://lva-virginia.libguides.com/richmond-maps/history"
+  },
+  {
+   "id": "w365615571",
+   "name": "Old Stone House",
+   "year": 1754,
+   "source": "https://en.wikipedia.org/wiki/Old_Stone_House_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w207696511",
+   "name": "Masons Hall",
+   "year": 1787,
+   "source": "https://en.wikipedia.org/wiki/History_of_Richmond,_Virginia"
+  },
+  {
+   "id": "w224601769",
+   "name": "Wickham House",
+   "year": 1812,
+   "source": "https://en.wikipedia.org/wiki/Wickham_House"
+  },
+  {
+   "id": "w658620667",
+   "name": "Executive Mansion",
+   "year": 1813,
+   "source": "https://en.wikipedia.org/wiki/Virginia_Governor%27s_Mansion"
+  },
+  {
+   "id": "w224530979",
+   "name": "Monumental Church",
+   "year": 1814,
+   "source": "https://en.wikipedia.org/wiki/Monumental_Church"
+  },
+  {
+   "id": "w224601753",
+   "name": "White House of the Confederacy",
+   "year": 1818,
+   "source": "https://en.wikipedia.org/wiki/White_House_of_the_Confederacy"
+  },
+  {
+   "id": "w224530980",
+   "name": "Egyptian Building",
+   "year": 1845,
+   "source": "https://en.wikipedia.org/wiki/Egyptian_Building"
+  },
+  {
+   "id": "r19918536",
+   "name": "St. Paul's Episcopal Church",
+   "year": 1845,
+   "source": "https://en.wikipedia.org/wiki/St._Paul%27s_Episcopal_Church_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w113023444",
+   "name": "Old City Hall",
+   "year": 1894,
+   "source": "https://en.wikipedia.org/wiki/Old_City_Hall_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w113030476",
+   "name": "Main Street Station",
+   "year": 1901,
+   "source": "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
+  }
+ ]
+}

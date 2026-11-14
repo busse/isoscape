@@ -70,6 +70,14 @@ kbd { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding: 0 4px;
 .tag { font-size: 10.5px; padding: 0 6px; border-radius: 9px; background: var(--chip); color: var(--dim); }
 .tag.ab { background: var(--accent); color: var(--panel); font-weight: 600; }
 time { color: var(--dim); margin-left: auto; font-size: 11px; }
+.tag.yr { background: var(--accent-soft); color: var(--ink); font-weight: 600; }
+#timeline { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; pointer-events: none; }
+#timeline[hidden] { display: none; }
+#timeline button { pointer-events: auto; font: 600 12px ui-sans-serif, system-ui, sans-serif; padding: 3px 8px; border-radius: 12px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
+#timeline button:hover { border-color: var(--accent); }
+#timeline button.on { background: var(--accent); border-color: var(--accent); color: var(--panel); }
+#timeline .hint { pointer-events: none; font-size: 11px; color: var(--faint); margin-left: 6px; }
+.story ul.sources { font-size: 12px; color: var(--dim); }
 #nav footer { padding: 10px 14px; border-top: 1px solid var(--line); color: var(--faint); font-size: 11px; line-height: 1.7; }
 
 /* ---- main ---------------------------------------------------------------- */
@@ -198,7 +206,7 @@ body.reading main { grid-template-rows: 1fr; }
   <div id="pages"></div>
   <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false">
   <div id="list"></div>
-  <footer>Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back</footer>
+  <footer>Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back<br><kbd>[</kbd><kbd>]</kbd> step through a dated series</footer>
 </nav>
 <main>
   <div id="stage">
@@ -207,6 +215,7 @@ body.reading main { grid-template-rows: 1fr; }
     <div id="divider"></div>
     <div id="empty"></div>
     <div id="loading">loading…</div>
+    <div id="timeline" hidden></div>
     <div id="toolbar">
       <span class="zoom" id="zoom">–</span>
       <button id="fit" title="Fit (F)">Fit</button>
@@ -264,6 +273,8 @@ body.reading main { grid-template-rows: 1fr; }
     }
     let html = ''
     for (const [region, items] of groups) {
+      // A dated series reads in time order, oldest first.
+      if (items[0].time) items.sort((x, y) => ((x.time ? x.time.year : 1e9) - (y.time ? y.time.year : 1e9)) || y.createdAt.localeCompare(x.createdAt))
       html += '<h2>' + esc((items[0].config && items[0].config.title) || items[0].title || region) + '<small>' + esc(region) + '</small></h2>'
       for (const b of items) {
         const cls = 'build' + (state.a === b.id ? ' a' : '') + (state.compare && state.b === b.id ? ' b' : '')
@@ -272,7 +283,7 @@ body.reading main { grid-template-rows: 1fr; }
           : '<div class="swatch" style="background:' + esc(b.sky) + '">' + esc(b.palette) + '</div>'
         const ab = state.a === b.id ? '<span class="tag ab">A</span>' : state.compare && state.b === b.id ? '<span class="tag ab">B</span>' : ''
         html += '<button class="' + cls + '" data-id="' + esc(b.id) + '">' + pic +
-          '<div><div class="top">' + ab + '<span class="tag">' + esc(b.palette) + '</span>' +
+          '<div><div class="top">' + ab + (b.time ? '<span class="tag yr">' + esc(b.time.year) + '</span>' : '') + '<span class="tag">' + esc(b.palette) + '</span>' +
           (b.config && b.config.terrain && b.config.terrain.enabled !== false ? '<span class="tag">terrain</span>' : '') +
           '<time datetime="' + esc(b.createdAt) + '">' + ago(b.createdAt) + '</time></div>' +
           '<div class="note" title="' + esc(label(b)) + '">' + esc(label(b)) + '</div>' +
@@ -450,7 +461,7 @@ body.reading main { grid-template-rows: 1fr; }
   // A build's own story, written from its meta.json. Anything an older build did not record is
   // said to be unknown rather than guessed.
   const how = (id, text) => pageBySlug.has('how-its-made') ? '<a href="#/how-its-made/' + id + '">' + text + '</a>' : text
-  const KNOWN = new Set(['features', 'ground', 'ribbons', 'buildings', 'heightFromTag', 'heightFromModel', 'heightFromLevels', 'heightGuessed', 'footprintsAdded', 'bridgePieces', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'coastWays'])
+  const KNOWN = new Set(['features', 'ground', 'ribbons', 'buildings', 'heightFromTag', 'heightFromModel', 'heightFromLevels', 'heightGuessed', 'footprintsAdded', 'bridgePieces', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'coastWays', 'year', 'newSincePrevious', 'landmarks', 'curated', 'datedCurated', 'datedOsm', 'datedParcel', 'undatedToday'])
   const POINTS = ['north', 'north-northeast', 'northeast', 'east-northeast', 'east', 'east-southeast', 'southeast', 'south-southeast', 'south', 'south-southwest', 'southwest', 'west-southwest', 'west', 'west-northwest', 'northwest', 'north-northwest']
   const isNum = (v) => typeof v === 'number' && Number.isFinite(v)
   const int = (v) => Math.round(v).toLocaleString()
@@ -485,6 +496,29 @@ body.reading main { grid-template-rows: 1fr; }
       lede += '.'
     }
     out.push('<p class="lede">' + lede + '</p>')
+
+    // Time: what is measured and what is curated in a dated scene.
+    if (x.time) {
+      const tm = x.time
+      head('The year ' + esc(tm.year) + (tm.title ? ': ' + esc(tm.title) : ''), how('time', 'how time is drawn →'))
+      if (tm.note) out.push('<p>' + esc(tm.note) + '</p>')
+      if (has('buildings')) {
+        const dated = (s.datedCurated || 0) + (s.datedOsm || 0) + (s.datedParcel || 0)
+        let p = '<b>Measured:</b> ' + plural(s.buildings, 'building') + ' standing today that had been built by ' + esc(tm.year) + '. '
+        if (dated > 0) p += 'Their years: ' + int(s.datedParcel || 0) + ' from the city assessor’s year built, ' + int(s.datedOsm || 0) + ' from OpenStreetMap’s <code>start_date</code>' + (s.datedCurated ? ', ' + int(s.datedCurated) + ' curated' : '') + '. '
+        if (s.undatedToday > 0) p += int(s.undatedToday) + ' more have no recorded year and appear only in today’s scene. '
+        if (isNum(s.newSincePrevious) && isNum(tm.previous)) p += '<b>' + int(s.newSincePrevious) + '</b> are new since ' + esc(tm.previous) + ', roofed in gold. '
+        p += 'Anything demolished since is missing unless curated below.'
+        out.push('<p>' + p + '</p>')
+      }
+      const cur = Array.isArray(tm.curated) ? tm.curated : []
+      if (cur.length) {
+        out.push('<p><b>Curated</b> for this year, from published sources; positions are drawn from today’s street grid and published dimensions, not surveyed:</p><ul>' +
+          cur.map((h) => '<li><b>' + esc(h.name) + '</b> (' + esc(h.from) + (h.to ? '–' + esc(h.to) : '') + '). ' + esc(h.note) +
+            (h.sources && h.sources.length ? ' <span class="sources">' + h.sources.map((u, k) => '<a href="' + esc(u) + '" target="_blank" rel="noopener">[' + (k + 1) + ']</a>').join(' ') + '</span>' : '') + '</li>').join('') + '</ul>')
+      } else out.push('<p>No curated features stand in this year; roads, rail and water follow the series’ era rules.</p>')
+      out.push('<p>The ground is today’s: cuts and fills since (the interstate, the floodwall) are in the elevation.</p>')
+    }
 
     // The camera.
     head('Camera', how('camera', 'how the camera works →'))
@@ -607,6 +641,13 @@ body.reading main { grid-template-rows: 1fr; }
   // ---- compare --------------------------------------------------------------------------------
   const defaultB = (aId) => {
     const a = byId.get(aId)
+    // In a dated series, compare with the year before.
+    if (a.time) {
+      const ser = seriesOf(a)
+      const i = ser.findIndex((x) => x.id === aId)
+      if (i > 0) return ser[i - 1].id
+      if (ser.length > 1) return ser[1].id
+    }
     const same = builds.filter((x) => x.id !== aId && x.region === a.region && x.palette === a.palette)
     const older = same.find((x) => x.createdAt < a.createdAt)
     return (older || same[0] || builds.find((x) => x.id !== aId) || {}).id || null
@@ -642,10 +683,43 @@ body.reading main { grid-template-rows: 1fr; }
   }
   const viewerHash = () => '#' + state.a + (state.compare && state.b ? '..' + state.b : '') + (state.tab === 'made' ? '/made' : '')
   // Redraw the viewer. With push, make a history entry (coming back from a page); else replace the hash.
+  // A dated series: the newest build of each year, in time order.
+  const seriesOf = (b) => {
+    if (!b || !b.time) return []
+    const last = new Map()
+    for (const x of builds) {
+      if (!x.time || x.time.series !== b.time.series || x.palette !== b.palette) continue
+      const cur = last.get(x.time.year)
+      if (!cur || x.createdAt > cur.createdAt) last.set(x.time.year, x)
+    }
+    return [...last.values()].sort((x, y) => x.time.year - y.time.year)
+  }
+  const renderTimeline = (a) => {
+    const el = $('timeline')
+    const ser = seriesOf(a)
+    el.hidden = ser.length < 2
+    if (el.hidden) return
+    el.innerHTML = ser.map((x) => '<button data-id="' + esc(x.id) + '" class="' + (x.time.year === a.time.year ? 'on' : '') + '" title="' + esc(x.time.title || '') + '">' + esc(x.time.year) + '</button>').join('') +
+      '<span class="hint">[ ] to step</span>'
+  }
+  $('timeline').addEventListener('click', (e) => {
+    const t = e.target.closest('button')
+    if (!t) return
+    select(t.dataset.id, false)
+    update(true)
+  })
+  const stepYear = (d) => {
+    const a = byId.get(state.a)
+    const ser = seriesOf(a)
+    const i = ser.findIndex((x) => x.time.year === (a && a.time && a.time.year))
+    const next = ser[i + d]
+    if (next) { select(next.id, false); update(true) }
+  }
   const update = (push) => {
     const a = byId.get(state.a)
     $('empty').style.display = a ? 'none' : 'grid'
     if (!a) return
+    renderTimeline(a)
     load(imgA, a)
     if (state.compare && byId.get(state.b)) load(imgB, byId.get(state.b))
     // The info panel first: its height sets the stage's, which the fit depends on.
@@ -760,6 +834,8 @@ body.reading main { grid-template-rows: 1fr; }
     const i = list.findIndex((b) => b.id === state.a)
     if (e.key === 'ArrowDown' || e.key === 'j') { if (i < list.length - 1) { select(list[i + 1].id); update() } e.preventDefault() }
     else if (e.key === 'ArrowUp' || e.key === 'k') { if (i > 0) { select(list[i - 1].id); update() } e.preventDefault() }
+    else if (e.key === '[') stepYear(-1)
+    else if (e.key === ']') stepYear(1)
     else if (e.key === 'f' || e.key === 'F') fit()
     else if (e.key === '1') actual()
     else if (e.key === 'c' || e.key === 'C') toggleCompare()

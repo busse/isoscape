@@ -19,9 +19,19 @@ import { mix, type Palette } from './palette.ts'
 import type { Region } from './region.ts'
 import { dominantGridAngle, makeView, snapBearing, type View } from './view.ts'
 import { localMetres } from './region.ts'
-import { makeTerrain, rasterize, settleWater, type Terrain } from './terrain.ts'
+import { makeTerrain, rasterize, settleWater, stillWater, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
+import { alive, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
+
+/** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
+export interface TimeContext {
+  readonly year: number
+  readonly previous?: number
+  readonly title?: string
+  readonly history: History
+  readonly dates: ReadonlyMap<string, Dated>
+}
 
 /** A filled, optionally inked, polygon in screen pixels. */
 export interface Shape {
@@ -75,6 +85,8 @@ export interface Scene {
   readonly ribbons: Ribbon[]
   readonly items: Item[]
   readonly stats: Record<string, number>
+  /** For a dated scene: the year, its title, and the curated features drawn in it. */
+  readonly time?: { readonly year: number; readonly title?: string; readonly curated: readonly HistoryFeature[] }
 }
 
 const toViewRing = (view: View, ring: readonly Vec2[]): Ring => ring.map(([lon, lat]) => view.toView(lon, lat))
@@ -99,8 +111,11 @@ export const buildScene = (
   features: readonly Feature[],
   pal: Palette,
   elevation: ((lon: number, lat: number) => number) | null = null,
-  extra: { footprints?: readonly Footprint[]; cover?: (lon: number, lat: number) => number } = {},
+  extra: { footprints?: readonly Footprint[]; cover?: (lon: number, lat: number) => number; time?: TimeContext } = {},
 ): Scene => {
+  const time = extra.time
+  const curated = time === undefined ? [] : time.history.features.filter((h) => alive(h.from, h.to, time.year))
+  if (time !== undefined) features = asOf(features, time)
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)
   const frame = view.frame
@@ -133,10 +148,25 @@ export const buildScene = (
     if (sea !== null) ground.unshift({ kind: 'water', rings: sea })
     stats.coastWays = coastWays.length
   }
+  const curatedRings = (h: HistoryFeature) => [orient(clipRingToRect(toViewRing(view, h.ring ?? []), wide), true)].filter((r) => r.length >= 3)
+  if (curated.some((h) => h.kind === 'water')) {
+    const wet = curated.filter((h) => h.kind === 'water' && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
+    for (let k = ground.length - 1; k >= 0; k--) {
+      const g = ground[k]
+      if (g.kind !== 'water' && wet.some((r) => pointInRing(centroid(g.rings[0]), r))) ground.splice(k, 1)
+    }
+  }
+  for (const h of curated) {
+    if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan') && h.ring !== undefined) {
+      const rings = curatedRings(h)
+      if (rings.length > 0) ground.push({ kind: h.kind, rings })
+    }
+  }
   stats.ground = ground.length
   rasterize(terrain, ground.filter((g) => g.kind === 'water').map((g) => g.rings), 1)
   rasterize(terrain, ground.filter((g) => g.kind === 'island').map((g) => g.rings), 0)
   settleWater(terrain, 30, 1.0, opts.rocks !== false)
+  if (!terrain.flat) stillWater(terrain, curated.filter((h) => h.kind === 'water').map(curatedRings))
   if (extra.cover !== undefined) {
     for (let j = 0; j < terrain.ny; j++) {
       for (let i = 0; i < terrain.nx; i++) {
@@ -154,6 +184,14 @@ export const buildScene = (
 
   // ---- ribbons -----------------------------------------------------------------------------
   const ribbons: Ribbon[] = []
+  // A town plan, while it is the whole town, keeps only the streets inside it.
+  const plans = curated.filter((h) => h.kind === 'plan' && h.limitsStreets && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
+  // Curated water (a filled basin) was not yet built over: nothing of today's runs across it.
+  const basins = curated.filter((h) => h.kind === 'water' && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
+  const inTown = (a: Vec2, b: Vec2) => {
+    const mid: Vec2 = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]
+    return (plans.length === 0 || plans.some((r) => pointInRing(mid, r))) && !basins.some((r) => pointInRing(mid, r))
+  }
   const ribbonOf = (kind: Ribbon['kind'], line: LineFeature, width: number): Ribbon | null => {
     const pts = line.points.map(([lon, lat]) => view.toView(lon, lat))
     const quads: Vec2[][] = []
@@ -161,6 +199,7 @@ export const buildScene = (
     for (let i = 0; i + 1 < pts.length; i++) {
       const seg = clipSegmentToRect(pts[i], pts[i + 1], wide)
       if (seg === null) continue
+      if ((kind === 'road' || kind === 'path' || kind === 'rail') && !inTown(seg[0], seg[1])) continue
       const q = segmentQuad(seg[0], seg[1], width / 2, width / 2)
       if (q === null) continue
       quads.push(q)
@@ -195,6 +234,11 @@ export const buildScene = (
       }
     }
   }
+  for (const h of curated) {
+    if (h.kind !== 'creek' || h.line === undefined) continue
+    const r = ribbonOf('canal', { type: 'line', id: h.id, tags: {}, points: h.line }, h.width ?? 6)
+    if (r) ribbons.push(r)
+  }
   stats.ribbons = ribbons.length
 
   // ---- buildings ---------------------------------------------------------------------------
@@ -227,6 +271,9 @@ export const buildScene = (
   const shown = solids.filter((s) => !partCentres.some((c) => pointInRing(c, s.outer))).concat(parts)
 
   let heightSources = { height: 0, model: 0, levels: 0, guess: 0 }
+  let fresh = 0
+  let undated = 0
+  const datedBy = { curated: 0, osm: 0, parcel: 0 }
   for (const s of shown) {
     if (!s.outer.every((p) => insideRect(p, frame))) continue
     const area = Math.abs(signedArea(s.outer)) - s.inners.reduce((a, h) => a + Math.abs(signedArea(h)), 0)
@@ -247,7 +294,16 @@ export const buildScene = (
     const top = Math.max(gMean + h.top, gMax + 2.5, base + 2.5)
     const cls = buildingClass(s.tags)
     const roofs = pal.roofs[cls]
-    const roof = roofs[hash(s.id) % roofs.length]
+    let roof = roofs[hash(s.id) % roofs.length]
+    const dated = time?.dates.get(s.id.split('.')[0])
+    if (time !== undefined) {
+      if (dated === undefined) undated++
+      else datedBy[dated.source]++
+    }
+    if (time?.previous !== undefined && dated !== undefined && dated.year > time.previous) {
+      roof = pal.fresh
+      fresh++
+    }
     items.push(extrude(view, pal, s.id, outer, inners, base, top, roof, dotsMode, s.tags.name))
   }
   stats.buildings = items.length
@@ -255,18 +311,56 @@ export const buildScene = (
   stats.heightFromModel = heightSources.model
   stats.heightFromLevels = heightSources.levels
   stats.heightGuessed = heightSources.guess
+  if (time !== undefined) {
+    stats.year = time.year
+    stats.newSincePrevious = fresh
+    stats.datedCurated = datedBy.curated
+    stats.datedOsm = datedBy.osm
+    stats.datedParcel = datedBy.parcel
+    stats.undatedToday = undated
+    // Curated landmarks: lost buildings, from published dimensions, in their own tone.
+    let landmarks = 0
+    for (const h of curated) {
+      if (h.kind !== 'landmark' || h.ring === undefined) continue
+      const outer = orient(toViewRing(view, h.ring), true)
+      if (!outer.every((p) => insideRect(p, frame))) continue
+      const ruined = h.ruin !== undefined && time.year >= h.ruin
+      const grounds = outer.map((p) => terrain.z(p))
+      const base = Math.min(...grounds)
+      const top = Math.max(...grounds) + (h.height ?? 10) * (ruined ? 0.45 : 1)
+      items.push(extrude(view, pal, `history:${h.id}`, outer, [], base, top, ruined ? pal.ash : pal.lost, dotsMode, h.name))
+      landmarks++
+    }
+    stats.landmarks = landmarks
+    stats.curated = curated.length
+  }
 
   // ---- bridges -----------------------------------------------------------------------------
   let spans = 0
-  for (const chain of chainBridges(bridgeLines)) {
+  for (const chain of chainBridges(plans.length > 0 ? [] : bridgeLines)) {
     const pieces = bridgePieces(view, pal, region, terrain, chain)
     spans += pieces.length
     items.push(...pieces)
   }
   stats.bridgePieces = spans
 
-  return { region, view, palette: pal, terrain, ground, ribbons, items, stats }
+  return {
+    region, view, palette: pal, terrain, ground, ribbons, items, stats,
+    ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated } }),
+  }
 }
+
+/**
+ * The features that stood in a year. Buildings by their dates (undated ones only in the
+ * present); everything else by the history's era rules.
+ */
+export const asOf = (features: readonly Feature[], time: TimeContext): Feature[] =>
+  features.filter((f) => {
+    const isBuilding = f.type === 'polygon' && (f.tags.building !== undefined || f.tags['building:part'] !== undefined)
+    if (!isBuilding) return featureAlive(f, time.year, time.history)
+    const d = time.dates.get(f.id)
+    return d === undefined ? time.year >= time.history.present : d.year <= time.year
+  })
 
 /** The rectangle either side of a segment, as a ring: left offset `l`, right offset `r`. */
 const segmentQuad = (a: Vec2, b: Vec2, l: number, r: number, extend = 0): Vec2[] | null => {

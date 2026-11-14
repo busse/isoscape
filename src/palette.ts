@@ -41,6 +41,13 @@ export interface Palette {
   readonly wallLit: string
   readonly wallShade: string
   /** Roof tones by building class; a building picks one deterministically by its id. */
+  /** Dated scenes: roofs of buildings new since the previous scene, landmarks now lost, burned
+   * shells, the burned district's ground, and a town plan's outline tint. */
+  readonly fresh: string
+  readonly lost: string
+  readonly ash: string
+  readonly burned: string
+  readonly plan: string
   readonly roofs: Readonly<Record<'residential' | 'commercial' | 'industrial' | 'civic' | 'other', readonly string[]>>
   readonly lineWidth: number
   readonly groundLineWidth: number
@@ -87,6 +94,11 @@ const paper: Palette = {
   contourMajor: 0.34,
   wallLit: '#ece7dc',
   wallShade: '#c3bbac',
+  fresh: '#f2c879',
+  lost: '#c98f7a',
+  ash: '#6d6259',
+  burned: '#d3c3ad',
+  plan: '#e4dcc4',
   roofs: {
     residential: ['#f6e9d8', '#f1e2cf', '#f7efe2', '#efd9c5'],
     commercial: ['#fbfaf6', '#f0eee8', '#e9e7e1', '#f6f4ee'],
@@ -140,6 +152,11 @@ const night: Palette = {
   contourMajor: 0.3,
   wallLit: '#363b4a',
   wallShade: '#272b37',
+  fresh: '#8a6f3c',
+  lost: '#7a4a3e',
+  ash: '#121114',
+  burned: '#3a2f2a',
+  plan: '#252836',
   roofs: {
     residential: ['#3d3f4c', '#42434f'],
     commercial: ['#454a5a', '#3f4453'],

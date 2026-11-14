@@ -63,6 +63,7 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | how pages are loaded and linked; the Markdown subset | `pages.ts`, `markdown.ts` |
 | the per-build "How this view was made" text | `story` in `explorer.ts` (it links to `pages/how-its-made.md` section ids) |
 | building an old commit into the archive | `backfill.ts` |
+| dated series: year built, era rules, curated history | `history.ts`, `asOf` in `scene.ts`, `history/<series>.json` |
 
 ## Known limits
 
@@ -76,4 +77,6 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 - Bridge ways that fork at a junction ramp at the fork if no other bridge way touches it.
 - Buildings must sit wholly inside the frame to be drawn. Bridges are cut at the plate's
   edges.
+- A dated series shows only surviving buildings plus what is curated in `history/`; every
+  curated item and era rule must cite a source (or say plainly that it is approximate).
 - Concave footprints that interlock can form an ordering cycle, which is broken by depth.

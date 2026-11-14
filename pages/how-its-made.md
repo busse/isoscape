@@ -28,6 +28,8 @@ Where to start:
   [Measured, inferred, guessed](#measured-inferred-guessed).
 - **Art and illustration:** [Camera](#camera), [Drawing](#drawing) and
   [Paint order](#paint-order).
+- **History:** [Time](#time) covers the dated series: what is measured, what is curated, and
+  what a series cannot show.
 - **Development:** every section names the file that does the work. The
   [archive and explorer](#archive-and-explorer) section covers the build loop.
 
@@ -313,6 +315,55 @@ or `night`).
 
 Code: `src/render.ts`, `src/palette.ts`.
 
+## Time
+
+A region with a `time` section is drawn as a **series**: one scene for each year (epoch) in its
+history file, built with `isoscape series <region>`. The downtown Richmond series runs from
+the 1737 town plan to today. Each scene combines two kinds of evidence, and the explorer says
+which is which.
+
+**Measured: buildings standing today, by the year each was built.** A building appears in
+every scene from its year on. The year comes from:
+
+1. a curated year, for a few landmarks whose records are known to be wrong or missing (the
+   Capitol, St. John's Church, the Old Stone House and so on), each with a source;
+2. else OpenStreetMap's `start_date` tag;
+3. else the city assessor's *year built* for the parcel under the building's centre.
+
+The assessor records one year per parcel, the year of its main building. Up to four buildings
+on a lot (a row split in OSM, a house and its shed) all take that year. With more buildings,
+only one clearly larger than the rest takes it. A parcel with eight or more (a campus, Capitol
+Square) gives its year to none of them. Buildings with no year appear only in today's scene.
+
+**Curated: what is gone or was different.** A short list per series, each item with its
+years and sources: a filled canal basin, a burned district, a buried creek, demolished
+landmarks drawn from published dimensions in a red-brown tone (a burned shell in ash grey), and
+the town plan, which limits the earliest scene's streets to the original grid. Positions come
+from today's street grid. They are not surveyed.
+
+**Era rules** date everything else that OSM maps: the first rule matching a feature's name,
+`ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
+Downtown Expressway from 1976, the river viaducts from 1901. The James River and Kanawha Canal
+appears from 1800 until the railroad took it over, and again from the Canal Walk of 1999.
+Features no rule matches are drawn in every year, which suits the street grid. Paths and other
+undated features are drawn only today.
+
+In every scene after the first, buildings **new since the previous scene** have gold roofs.
+
+**What the series cannot show:**
+
+- **Survivorship.** Only buildings standing today are measured. Downtown Richmond in 1900 had
+  far more buildings than the 1900 scene, because most of them were torn down later. The
+  scenes show what survives, plus the few curated losses.
+- **Heaped years.** Assessors often round: in this data, many buildings are dated to exactly
+  1900 or 1910. Read the decades loosely.
+- **Today's ground.** The elevation is today's lidar, so the I-95 cut through Shockoe Valley
+  is there in 1737. Curated water is laid flat at the lowest ground beneath it.
+- **The jump to today.** Undated buildings appear only in today's scene, so the last step of a
+  series adds many more buildings than really went up in that interval.
+
+Code: `src/history.ts`; the history file is `history/<series>.json`.
+
 ## Archive and explorer
 
 Every build is kept under `out/builds/<timestamp>-<name>/` as the SVG, a thumbnail and a
@@ -324,7 +375,9 @@ Every build is kept under `out/builds/<timestamp>-<name>/` as the SVG, a thumbna
   spans, rapid cells, contour segments, strips);
 - the build's time and file size;
 - the git commit, its subject, and whether `src/` or `regions/` had uncommitted changes;
-- an optional `--note` saying what the build was trying.
+- an optional `--note` saying what the build was trying;
+- for a dated scene, its year, the year before it in the series, and the curated features
+  drawn in it, with their sources.
 
 `backfill` builds an older commit's code against today's cached data, so the archive can
 include outputs from before it existed.
@@ -339,5 +392,6 @@ Code: `src/archive.ts`, `src/explorer.ts`, `src/pages.ts`.
 
 Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, available
 under the Open Database License. Elevation from the [USGS 3D Elevation
-Program](https://www.usgs.gov/3d-elevation-program), public domain. See [About](about.md) for
+Program](https://www.usgs.gov/3d-elevation-program), public domain. Years built for the
+Richmond series from the City of Richmond's open data. See [About](about.md) for
 what that means when you use or share a picture.

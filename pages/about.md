@@ -33,6 +33,11 @@ A view that uses them should credit Microsoft as well.
 (NLCD 2021) from the USGS and the Multi-Resolution Land Characteristics Consortium. It is in
 the public domain.
 
+**Years built (dated series).** The Richmond series uses the City of Richmond's *Year of
+Construction* layer, published on the city's ArcGIS open data service. Check the city's terms
+before redistributing `data/*/yearbuilt.json`. The curated history in `history/` cites its
+sources item by item.
+
 ## Sharing a picture
 
 Put this line with the picture. Drop the second part for a view drawn without terrain:

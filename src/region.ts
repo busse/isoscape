@@ -61,6 +61,14 @@ export interface Region {
   readonly dots?: 'all' | 'roof' | 'none'
   /** Use another region's cached data (data/<name>/) instead of this region's own. */
   readonly data?: string
+  /**
+   * A dated series: a history file (epochs, cited curated features, era rules for roads and
+   * water) and where each building's year built comes from beyond OSM's own start_date.
+   */
+  readonly time?: {
+    readonly history: string
+    readonly yearBuilt?: { readonly url: string; readonly field: string }
+  }
   /** Draw the ground with relief from data/<region>/dem.bin.gz. Omit for a flat plate. */
   readonly terrain?: TerrainOptions
 }

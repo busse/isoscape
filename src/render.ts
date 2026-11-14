@@ -149,7 +149,10 @@ export const renderSvg = (scene: Scene): Rendered => {
   for (let n = fr.minY; n <= fr.maxY + 1e-6; n += c) for (const e of xs) { const y = drape([e, n])[1]; if (y < top) top = y }
   const bottom = P([0, fr.minY], -slab)[1]
   const pad = 24
-  const vb: [number, number, number, number] = [x0 - pad, top - pad, x1 - x0 + 2 * pad, bottom - top + 2 * pad]
+  // A dated scene carries its year as a caption above the plate, in room of its own.
+  const capSize = scene.time === undefined ? 0 : Math.max(28, (x1 - x0) * 0.022)
+  const capRoom = scene.time === undefined ? 0 : capSize * 2.4
+  const vb: [number, number, number, number] = [x0 - pad, top - pad - capRoom, x1 - x0 + 2 * pad, bottom - top + 2 * pad + capRoom]
 
   const out: string[] = []
   const sealed = (cls: string, fill: string) => `.${cls}{fill:${fill};stroke:${fill};stroke-width:.6;stroke-linejoin:round}`
@@ -162,7 +165,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     `.td{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth};stroke-dasharray:1.2 1.8}`,
     sealed('L', p.land), sealed('Lw', p.water),
     ...Object.entries(p.cover).map(([g, colour]) => sealed(`cv-${g}`, colour)), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
-    sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('canal', p.water), sealed('path', p.path),
+    sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('plan', p.plan), sealed('burned', p.burned), sealed('canal', p.water), sealed('path', p.path),
     sealed('road', p.road), sealed('rail', p.rail), sealed('weir', p.foam),
     `.ties{fill:none;stroke:${p.railTie};stroke-width:${p.groundLineWidth * 2};stroke-dasharray:1 2.2}`,
     `.crest{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:.6}`,
@@ -591,6 +594,16 @@ export const renderSvg = (scene: Scene): Rendered => {
   flushTo(-Infinity)
   // A crisp ink line along the front ground.
   out.push(`<path class="edge" d="${pathOf(front, false)}"/>`)
+  if (scene.time !== undefined) {
+    const tx = vb[0] + pad
+    const ty = vb[1] + pad + capSize
+    out.push(
+      `<g class="caption" font-family="Georgia, 'Times New Roman', serif" fill="${p.ink}">`,
+      `<text x="${f(tx)}" y="${f(ty)}" font-size="${f(capSize)}" font-weight="bold">${scene.time.year}</text>`,
+      scene.time.title === undefined ? '' : `<text x="${f(tx + capSize * 2.6)}" y="${f(ty)}" font-size="${f(capSize * 0.62)}" font-style="italic">${esc(scene.time.title)}</text>`,
+      `</g>`,
+    )
+  }
   out.push(`</svg>`)
   stats.rapidCells = rapidCells
   stats.strips = strips.length
