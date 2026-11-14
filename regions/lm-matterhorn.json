@@ -1,0 +1,31 @@
+{
+ "title": "Matterhorn — Zermatt, Switzerland",
+ "center": [
+  7.6586,
+  45.9763
+ ],
+ "width": 4000,
+ "depth": 5200,
+ "bearing": 225,
+ "snap": false,
+ "scale": 1.5,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 27,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "roof",
+ "fetchTile": 6000,
+ "terrain": {
+  "source": "swisstopo",
+  "fillFrom": "copernicus",
+  "exaggeration": 1.0,
+  "cell": 8,
+  "contour": 25,
+  "majorEvery": 4,
+  "rapids": 0,
+  "demResolution": 4
+ }
+}

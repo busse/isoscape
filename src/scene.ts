@@ -266,9 +266,16 @@ export const buildScene = (
       ;(isPart ? parts : solids).push({ id: f.outers.length > 1 ? `${f.id}.${i}` : f.id, tags: f.tags, outer, inners: mine })
     })
   }
+  // A lattice tower (the Eiffel Tower, Tokyo Tower) is drawn whole as a tapering spire from
+  // its outline, so the platforms mapped inside it as parts are dropped.
+  const lattice = solids.filter((s) => isLatticeTower(s.tags))
+  // (The test is against the tower's hull: its outline is cut away by the arches between the
+  // legs, and a leg's centroid can fall in an arch.)
+  const latticeHulls = lattice.map((t) => convexHull(t.outer))
+  const keptParts = parts.filter((p) => !latticeHulls.some((h) => pointInRing(centroid(p.outer), h)))
   // Simple 3D Buildings: where parts describe a building, draw the parts, not the outline.
-  const partCentres = parts.map((p) => centroid(p.outer))
-  const shown = solids.filter((s) => !partCentres.some((c) => pointInRing(c, s.outer))).concat(parts)
+  const partCentres = keptParts.map((p) => centroid(p.outer))
+  const shown = solids.filter((s) => lattice.includes(s) || !partCentres.some((c) => pointInRing(c, s.outer))).concat(keptParts)
 
   let heightSources = { height: 0, model: 0, levels: 0, guess: 0 }
   let fresh = 0
@@ -304,7 +311,8 @@ export const buildScene = (
       roof = pal.fresh
       fresh++
     }
-    items.push(extrude(view, pal, s.id, outer, inners, base, top, roof, dotsMode, s.tags.name))
+    if (lattice.includes(s)) items.push(spire(view, pal, s.id, outer, base, gMean + h.top, dotsMode, s.tags.name))
+    else items.push(extrude(view, pal, s.id, outer, inners, base, top, roof, dotsMode, s.tags.name))
   }
   stats.buildings = items.length
   stats.heightFromTag = heightSources.height
@@ -451,6 +459,67 @@ export const extrude = (
     key: centroid(outer)[1],
     shapes,
     dots: dedupe(roofDots),
+    ...(name === undefined ? {} : { name }),
+  }
+}
+
+/** OSM's lattice towers: tagged as such, or a building whose pyramidal roof is its whole height. */
+export const isLatticeTower = (t: Readonly<Record<string, string>>): boolean =>
+  t.building !== undefined && (t['tower:construction'] === 'lattice' || (t['roof:shape'] === 'pyramidal' && t['roof:height'] !== undefined && t['roof:height'] === t.height))
+
+/**
+ * Half-width of a lattice tower at fraction `t` of its height, as a fraction of the base: the
+ * Eiffel Tower's curve, which narrows roughly exponentially (0.56 at the first platform, 0.32
+ * at the second), then runs out to a mast over the top sixth.
+ */
+export const spireProfile = (t: number): number => (t <= 0.84 ? Math.exp(-3.3 * t) : Math.exp(-3.3 * 0.84) * (1 - (t - 0.84) / 0.16) * 0.9 + 0.01)
+
+/**
+ * A tapering tower: stacked frustums following `spireProfile`, each one's walls then its cap,
+ * bottom to top (an upper piece always sits inside and above the one below it). The walls are
+ * darkened towards the ink, for iron.
+ */
+export const spire = (
+  view: View, pal: Palette, id: string, outer: Ring, base: number, top: number, dots: 'all' | 'roof' | 'none', name?: string,
+): Item => {
+  const c = centroid(outer)
+  const at = (p: Vec2, k: number): Vec2 => [c[0] + (p[0] - c[0]) * k, c[1] + (p[1] - c[1]) * k]
+  const STEPS = 16
+  const shapes: Shape[] = []
+  for (let i = 0; i < STEPS; i++) {
+    const t0 = i / STEPS
+    const t1 = (i + 1) / STEPS
+    const k0 = spireProfile(t0)
+    const k1 = spireProfile(t1)
+    const z0 = base + (top - base) * t0
+    const z1 = base + (top - base) * t1
+    const walls: { key: number; shape: Shape }[] = []
+    for (let j = 0; j < outer.length; j++) {
+      const a = outer[j]
+      const b = outer[(j + 1) % outer.length]
+      const dx = b[0] - a[0]
+      const dy = b[1] - a[1]
+      const len = Math.hypot(dx, dy)
+      if (len < 1e-6 || -dx / len >= -1e-6) continue
+      const tone = mix(mix(pal.wallLit, pal.wallShade, (dy / len + 1) / 2), pal.ink, 0.35)
+      walls.push({
+        key: (a[1] + b[1]) / 2,
+        shape: { pts: [view.toScreen(at(a, k0), z0), view.toScreen(at(b, k0), z0), view.toScreen(at(b, k1), z1), view.toScreen(at(a, k1), z1)], fill: tone, ink: true },
+      })
+    }
+    walls.sort((x, y) => y.key - x.key)
+    shapes.push(...walls.map((w) => w.shape))
+  }
+  shapes.push({ pts: outer.map((p) => view.toScreen(at(p, spireProfile(1)), top)), fill: mix(pal.wallShade, pal.ink, 0.35), ink: true })
+  return {
+    id,
+    kind: 'building',
+    hull: convexHull(outer),
+    zMin: base,
+    zMax: top,
+    key: c[1],
+    shapes,
+    dots: dots === 'all' ? dedupe(outer.map((p) => view.toScreen(p, base))) : [],
     ...(name === undefined ? {} : { name }),
   }
 }

@@ -43,6 +43,7 @@
 
 import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
+import { DEM_SOURCES } from './dem-sources.ts'
 import { escAttr, siteTags, type SiteCard } from './social.ts'
 
 // The isoscape mark (one isometric building), for the browser tab.
@@ -370,6 +371,7 @@ body.reading main { grid-template-rows: 1fr; }
 </main>
 <script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: site.shop ?? null, home: site.home ?? null, latestPages: site.latestPages !== false })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
+<script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, licence: d.licence, link: d.link }])))}</script>
 <script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2) })))}</script>
 <script>
 (() => {
@@ -381,6 +383,7 @@ body.reading main { grid-template-rows: 1fr; }
   const pages = JSON.parse(document.getElementById('pagesData').textContent)
   const pageBySlug = new Map(pages.map((p) => [p.slug, p]))
   const site = JSON.parse(document.getElementById('site').textContent)
+  const demSources = JSON.parse(document.getElementById('demSources').textContent)
   const home = site.home
   state.home = false
   state.secOpen = {}
@@ -802,7 +805,8 @@ body.reading main { grid-template-rows: 1fr; }
       (c.data && c.data !== x.region ? ', shared with region <code>' + esc(c.data) + '</code>' : '') +
       (has('coastWays') ? '; the sea and tidal water come from ' + plural(s.coastWays, 'coastline way') : '') + '.</li>')
     if (relief) {
-      src.push('<li><b>USGS 3DEP elevation</b>, fetched at ' + (t.demResolution ?? 1) + ' m per pixel and resampled to a ' + (t.cell ?? 5) + ' m grid. The ground runs from ' +
+      const dem = demSources[t.source || '3dep'] || demSources['3dep']
+      src.push('<li><b>' + esc(dem.name) + ' elevation</b> (' + esc(dem.coverage) + '; ' + esc(dem.about.charAt(0).toLowerCase() + dem.about.slice(1)) + '), fetched at ' + (t.demResolution ?? 1) + ' m per pixel and resampled to a ' + (t.cell ?? 5) + ' m grid. The ground runs from ' +
         s.elevationDatum.toFixed(1) + ' m to ' + s.elevationTop.toFixed(1) + ' m above sea level (' + (s.elevationTop - s.elevationDatum).toFixed(1) + ' m of relief), drawn ' +
         (t.exaggeration ?? 2) + '× taller than life. Buildings and bridges keep their true heights.</li>')
     } else if (t && t.enabled !== false) {
@@ -884,7 +888,7 @@ body.reading main { grid-template-rows: 1fr; }
     if (other.length) out.push('<p>Other measures: ' + other.map((k) => esc(k) + ' ' + fmt(s[k])).join(', ') + '.</p>')
 
     out.push('</section><p class="credit">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors (ODbL)' +
-      (relief ? ' · Elevation: USGS 3DEP (public domain)' : '') + (pageBySlug.has('about') ? ' · <a href="#/about">credits and licences</a>' : '') + '</p>')
+      (relief ? ' · ' + esc((demSources[t.source || '3dep'] || demSources['3dep']).credit) + ' (' + esc((demSources[t.source || '3dep'] || demSources['3dep']).licence) + ')' : '') + (pageBySlug.has('about') ? ' · <a href="#/about">credits and licences</a>' : '') + '</p>')
     return '<div class="story">' + out.join('') + '</div>'
   }
   $('toggleInfo').addEventListener('click', () => toggleInfo())

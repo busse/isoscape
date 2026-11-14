@@ -1,0 +1,37 @@
+{
+ "title": "Sydney Opera House and Harbour Bridge — Sydney",
+ "center": [
+  151.2132,
+  -33.8547
+ ],
+ "width": 2000,
+ "depth": 2600,
+ "bearing": -45,
+ "snap": false,
+ "scale": 3.0,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 14,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [
+  {
+   "match": "Harbour Bridge",
+   "deck": 49,
+   "pierSpacing": 100000
+  }
+ ],
+ "minBuildingArea": 12,
+ "dots": "roof",
+ "fetchTile": 2000,
+ "terrain": {
+  "source": "terrain-tiles",
+  "exaggeration": 2.0,
+  "cell": 5,
+  "contour": 5,
+  "majorEvery": 5,
+  "rapids": 0,
+  "rocks": false,
+  "demResolution": 3
+ }
+}

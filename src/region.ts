@@ -90,8 +90,16 @@ export interface TerrainOptions {
   readonly rapids?: number
   /** Mark rock standing clear of the water. Default true; off for tidal flats and shoals. */
   readonly rocks?: boolean
-  /** Metres per pixel to fetch the elevation at. Default 1; coarser keeps big regions small. */
+  /** Metres per pixel to fetch the elevation at. Default 1 (or the source's native spacing, if coarser); coarser keeps big regions small. */
   readonly demResolution?: number
+  /**
+   * Where the heights come from (see `dem-sources.ts`): `3dep` (USGS, the US; the default),
+   * `ign` (France), `swisstopo` (Switzerland), `gsi` (Japan), `copernicus` (worldwide, 30 m)
+   * or `terrain-tiles` (worldwide mosaic of national models, on AWS).
+   */
+  readonly source?: '3dep' | 'ign' | 'swisstopo' | 'gsi' | 'copernicus' | 'terrain-tiles'
+  /** A second source for whatever the first leaves empty (a national model stops at the border). */
+  readonly fillFrom?: '3dep' | 'ign' | 'swisstopo' | 'gsi' | 'copernicus' | 'terrain-tiles'
 }
 
 export const loadRegion = async (name: string, root = process.cwd()): Promise<Region> => {
