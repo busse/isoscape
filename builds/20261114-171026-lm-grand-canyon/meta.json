@@ -1,0 +1,82 @@
+{
+ "name": "lm-grand-canyon",
+ "region": "lm-grand-canyon",
+ "title": "Grand Canyon \u2014 Arizona",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3023.5,
+  -2830.47515665491,
+  6047,
+  4839.032793893943
+ ],
+ "bearing": 0,
+ "ms": 7887,
+ "stats": {
+  "features": 1570,
+  "ground": 937,
+  "elevationDatum": 724.6,
+  "elevationTop": 2221.2,
+  "ribbons": 410,
+  "footprintsAdded": 0,
+  "buildings": 125,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 10,
+  "heightGuessed": 115,
+  "bridgePieces": 23,
+  "contourSegments": 219947,
+  "rapidCells": 0,
+  "strips": 325
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Grand Canyon \u2014 Arizona",
+  "center": [
+   -112.105,
+   36.098
+  ],
+  "width": 7000,
+  "depth": 9100,
+  "scale": 0.857,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 47,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "roof",
+  "fetchTile": 8000,
+  "terrain": {
+   "exaggeration": 1,
+   "cell": 14,
+   "contour": 20,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 7
+  },
+  "sources": {
+   "buildings": [
+    "osm"
+   ],
+   "landcover": "nlcd"
+  },
+  "name": "lm-grand-canyon"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171026-lm-grand-canyon",
+ "createdAt": "2026-11-14T17:10:26.664Z",
+ "bytes": 19935041,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171026-lm-grand-canyon/image.svg",
+  "thumb": "builds/20261114-171026-lm-grand-canyon/thumb.png",
+  "social": "builds/20261114-171026-lm-grand-canyon/social.png"
+ }
+}

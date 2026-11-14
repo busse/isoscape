@@ -1,0 +1,83 @@
+{
+ "name": "lm-golden-gate-bridge",
+ "region": "lm-golden-gate-bridge",
+ "title": "Golden Gate Bridge \u2014 San Francisco",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2787.594200742556,
+  6048,
+  4795.6939510165685
+ ],
+ "bearing": -41.53895364175213,
+ "ms": 3011,
+ "stats": {
+  "features": 4023,
+  "coastWays": 39,
+  "ground": 157,
+  "elevationDatum": -4.8,
+  "elevationTop": 285.3,
+  "ribbons": 1014,
+  "footprintsAdded": 0,
+  "buildings": 340,
+  "heightFromTag": 199,
+  "heightFromModel": 0,
+  "heightFromLevels": 7,
+  "heightGuessed": 134,
+  "bridgePieces": 590,
+  "contourSegments": 81677,
+  "rapidCells": 0,
+  "strips": 347
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Golden Gate Bridge \u2014 San Francisco",
+  "center": [
+   -122.4783,
+   37.8199
+  ],
+  "width": 3200,
+  "depth": 4160,
+  "scale": 1.875,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 21,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Golden Gate",
+    "deck": 67,
+    "pierSpacing": 100000
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "roof",
+  "fetchTile": 4000,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 6,
+   "contour": 5,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 3
+  },
+  "name": "lm-golden-gate-bridge"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171017-lm-golden-gate-bridge",
+ "createdAt": "2026-11-14T17:10:17.696Z",
+ "bytes": 9346621,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171017-lm-golden-gate-bridge/image.svg",
+  "thumb": "builds/20261114-171017-lm-golden-gate-bridge/thumb.png",
+  "social": "builds/20261114-171017-lm-golden-gate-bridge/social.png"
+ }
+}

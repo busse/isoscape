@@ -1,0 +1,76 @@
+{
+ "name": "lm-hearst-castle",
+ "region": "lm-hearst-castle",
+ "title": "Hearst Castle \u2014 San Simeon, California",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3023.7000000000003,
+  -3262.5004667065286,
+  6047.400000000001,
+  5270.943018756291
+ ],
+ "bearing": 30.43362376087103,
+ "ms": 1760,
+ "stats": {
+  "features": 152,
+  "ground": 7,
+  "elevationDatum": 103.4,
+  "elevationTop": 491,
+  "ribbons": 75,
+  "footprintsAdded": 0,
+  "buildings": 24,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 2,
+  "heightGuessed": 22,
+  "bridgePieces": 0,
+  "contourSegments": 225018,
+  "rapidCells": 0,
+  "strips": 234
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Hearst Castle \u2014 San Simeon, California",
+  "center": [
+   -121.1675,
+   35.6853
+  ],
+  "width": 1800,
+  "depth": 2340,
+  "scale": 3.333,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-hearst-castle"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171043-lm-hearst-castle",
+ "createdAt": "2026-11-14T17:10:43.194Z",
+ "bytes": 12027375,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171043-lm-hearst-castle/image.svg",
+  "thumb": "builds/20261114-171043-lm-hearst-castle/thumb.png",
+  "social": "builds/20261114-171043-lm-hearst-castle/social.png"
+ }
+}

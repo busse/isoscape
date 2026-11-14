@@ -1,0 +1,76 @@
+{
+ "name": "lm-griffith-observatory",
+ "region": "lm-griffith-observatory",
+ "title": "Griffith Observatory \u2014 Los Angeles",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3023.7000000000003,
+  -3935.2188671999656,
+  6047.400000000001,
+  5943.661419249728
+ ],
+ "bearing": 39.08340753169787,
+ "ms": 3062,
+ "stats": {
+  "features": 7328,
+  "ground": 86,
+  "elevationDatum": 120.9,
+  "elevationTop": 493.3,
+  "ribbons": 686,
+  "footprintsAdded": 0,
+  "buildings": 1399,
+  "heightFromTag": 1385,
+  "heightFromModel": 0,
+  "heightFromLevels": 4,
+  "heightGuessed": 10,
+  "bridgePieces": 21,
+  "contourSegments": 214001,
+  "rapidCells": 0,
+  "strips": 234
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Griffith Observatory \u2014 Los Angeles",
+  "center": [
+   -118.30029,
+   34.11822
+  ],
+  "width": 1800,
+  "depth": 2340,
+  "scale": 3.333,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-griffith-observatory"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171031-lm-griffith-observatory",
+ "createdAt": "2026-11-14T17:10:31.304Z",
+ "bytes": 15592707,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171031-lm-griffith-observatory/image.svg",
+  "thumb": "builds/20261114-171031-lm-griffith-observatory/thumb.png",
+  "social": "builds/20261114-171031-lm-griffith-observatory/social.png"
+ }
+}

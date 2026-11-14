@@ -1,0 +1,76 @@
+{
+ "name": "lm-gettysburg",
+ "region": "lm-gettysburg",
+ "title": "Gettysburg Battlefield \u2014 Gettysburg, Pennsylvania",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2275.888558047386,
+  6048,
+  4284.529574198764
+ ],
+ "bearing": -44.48201662184863,
+ "ms": 1731,
+ "stats": {
+  "features": 2452,
+  "ground": 141,
+  "elevationDatum": 87.6,
+  "elevationTop": 202.7,
+  "ribbons": 952,
+  "footprintsAdded": 0,
+  "buildings": 247,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 14,
+  "heightGuessed": 233,
+  "bridgePieces": 6,
+  "contourSegments": 32203,
+  "rapidCells": 0,
+  "strips": 325
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Gettysburg Battlefield \u2014 Gettysburg, Pennsylvania",
+  "center": [
+   -77.2357,
+   39.8127
+  ],
+  "width": 3000,
+  "depth": 3900,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 20,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 6,
+   "contour": 5,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 3
+  },
+  "name": "lm-gettysburg"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171013-lm-gettysburg",
+ "createdAt": "2026-11-14T17:10:13.336Z",
+ "bytes": 5498736,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171013-lm-gettysburg/image.svg",
+  "thumb": "builds/20261114-171013-lm-gettysburg/thumb.png",
+  "social": "builds/20261114-171013-lm-gettysburg/social.png"
+ }
+}

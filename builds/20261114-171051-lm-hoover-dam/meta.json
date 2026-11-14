@@ -1,0 +1,82 @@
+{
+ "name": "lm-hoover-dam",
+ "region": "lm-hoover-dam",
+ "title": "Hoover Dam \u2014 Nevada and Arizona",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.3999999999996,
+  -2726.9591614295896,
+  6048.799999999999,
+  4735.198534172476
+ ],
+ "bearing": 0,
+ "ms": 6481,
+ "stats": {
+  "features": 378,
+  "ground": 26,
+  "elevationDatum": 196.5,
+  "elevationTop": 693.7,
+  "ribbons": 225,
+  "footprintsAdded": 0,
+  "buildings": 34,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 1,
+  "heightGuessed": 33,
+  "bridgePieces": 254,
+  "contourSegments": 262245,
+  "rapidCells": 0,
+  "strips": 338
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Hoover Dam \u2014 Nevada and Arizona",
+  "center": [
+   -114.73749,
+   36.01572
+  ],
+  "width": 2600,
+  "depth": 3380,
+  "scale": 2.308,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 17,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 1,
+   "cell": 5,
+   "contour": 5,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "sources": {
+   "buildings": [
+    "osm"
+   ],
+   "landcover": "nlcd"
+  },
+  "name": "lm-hoover-dam"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171051-lm-hoover-dam",
+ "createdAt": "2026-11-14T17:10:51.172Z",
+ "bytes": 19793160,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171051-lm-hoover-dam/image.svg",
+  "thumb": "builds/20261114-171051-lm-hoover-dam/thumb.png",
+  "social": "builds/20261114-171051-lm-hoover-dam/social.png"
+ }
+}
