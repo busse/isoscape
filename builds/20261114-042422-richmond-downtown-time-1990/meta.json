@@ -1,0 +1,117 @@
+{
+ "name": "richmond-downtown-time-1990",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1990",
+ "palette": "paper",
+ "note": "Sanborn clean: sprawls dropped, duplicates merged",
+ "viewBox": [
+  -3024,
+  -1675.6364183057992,
+  6048,
+  2730.813332842039
+ ],
+ "bearing": -8.7,
+ "ms": 1479,
+ "stats": {
+  "features": 10705,
+  "ground": 309,
+  "elevationDatum": -0.1,
+  "elevationTop": 57.2,
+  "ribbons": 1620,
+  "footprintsAdded": 0,
+  "buildings": 2136,
+  "heightFromTag": 62,
+  "heightFromModel": 0,
+  "heightFromLevels": 339,
+  "heightGuessed": 1735,
+  "year": 1990,
+  "newSincePrevious": 61,
+  "datedCurated": 11,
+  "datedOsm": 625,
+  "datedParcel": 1500,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 23,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 23,
+  "tracedEndHighway": 0,
+  "tracedEndAssumed": 0,
+  "curated": 0,
+  "bridgePieces": 1042,
+  "contourSegments": 49756,
+  "rapidCells": 4553,
+  "strips": 200
+ },
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1990,
+  "series": "richmond-downtown-time",
+  "title": "Expressway and office core",
+  "note": "The Downtown Expressway (1976) runs along the old canal bed; the James Center stands on the Great Basin's site.",
+  "previous": 1980,
+  "curated": []
+ },
+ "id": "20261114-042422-richmond-downtown-time-1990",
+ "createdAt": "2026-11-14T04:24:22.940Z",
+ "bytes": 7971134,
+ "git": {
+  "commit": "8a9f63c",
+  "dirty": false,
+  "subject": "Sanborn: drop sliver footprints and smooth outlines"
+ },
+ "files": {
+  "svg": "builds/20261114-042422-richmond-downtown-time-1990/image.svg",
+  "thumb": "builds/20261114-042422-richmond-downtown-time-1990/thumb.png",
+  "social": "builds/20261114-042422-richmond-downtown-time-1990/social.png"
+ }
+}

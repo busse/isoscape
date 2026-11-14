@@ -1,0 +1,117 @@
+{
+ "name": "richmond-downtown-time-1920",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1920",
+ "palette": "paper",
+ "note": "Sanborn clean: sprawls dropped, duplicates merged",
+ "viewBox": [
+  -3024,
+  -1675.6364183057992,
+  6048,
+  2730.813332842039
+ ],
+ "bearing": -8.7,
+ "ms": 1114,
+ "stats": {
+  "features": 9317,
+  "ground": 216,
+  "elevationDatum": -0.1,
+  "elevationTop": 57.2,
+  "ribbons": 1561,
+  "footprintsAdded": 0,
+  "buildings": 1726,
+  "heightFromTag": 30,
+  "heightFromModel": 0,
+  "heightFromLevels": 279,
+  "heightGuessed": 1417,
+  "year": 1920,
+  "newSincePrevious": 251,
+  "datedCurated": 11,
+  "datedOsm": 600,
+  "datedParcel": 1115,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 922,
+  "tracedEndMap": 735,
+  "tracedEndRebuilt": 27,
+  "tracedEndHighway": 29,
+  "tracedEndAssumed": 131,
+  "curated": 0,
+  "bridgePieces": 496,
+  "contourSegments": 49756,
+  "rapidCells": 4553,
+  "strips": 200
+ },
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1920,
+  "series": "richmond-downtown-time",
+  "title": "Two cities joined",
+  "note": "The new Mayo Bridge (1913) joins Richmond and Manchester, annexed in 1910.",
+  "previous": 1910,
+  "curated": []
+ },
+ "id": "20261114-042408-richmond-downtown-time-1920",
+ "createdAt": "2026-11-14T04:24:08.604Z",
+ "bytes": 8094167,
+ "git": {
+  "commit": "8a9f63c",
+  "dirty": false,
+  "subject": "Sanborn: drop sliver footprints and smooth outlines"
+ },
+ "files": {
+  "svg": "builds/20261114-042408-richmond-downtown-time-1920/image.svg",
+  "thumb": "builds/20261114-042408-richmond-downtown-time-1920/thumb.png",
+  "social": "builds/20261114-042408-richmond-downtown-time-1920/social.png"
+ }
+}

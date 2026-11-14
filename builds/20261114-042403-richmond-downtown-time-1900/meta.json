@@ -1,0 +1,117 @@
+{
+ "name": "richmond-downtown-time-1900",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1900",
+ "palette": "paper",
+ "note": "Sanborn clean: sprawls dropped, duplicates merged",
+ "viewBox": [
+  -3024,
+  -1598.078189284056,
+  6048,
+  2653.255103820296
+ ],
+ "bearing": -8.7,
+ "ms": 1136,
+ "stats": {
+  "features": 8214,
+  "ground": 216,
+  "elevationDatum": -0.1,
+  "elevationTop": 57.2,
+  "ribbons": 1561,
+  "footprintsAdded": 0,
+  "buildings": 1009,
+  "heightFromTag": 10,
+  "heightFromModel": 0,
+  "heightFromLevels": 162,
+  "heightGuessed": 837,
+  "year": 1900,
+  "newSincePrevious": 384,
+  "datedCurated": 11,
+  "datedOsm": 411,
+  "datedParcel": 587,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 585,
+  "tracedEndMap": 481,
+  "tracedEndRebuilt": 16,
+  "tracedEndHighway": 15,
+  "tracedEndAssumed": 73,
+  "curated": 0,
+  "bridgePieces": 21,
+  "contourSegments": 49756,
+  "rapidCells": 4553,
+  "strips": 200
+ },
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1900,
+  "series": "richmond-downtown-time",
+  "title": "Rail and tobacco",
+  "note": "Railroads have taken over the canal; tobacco factories and warehouses fill Shockoe Bottom and Tobacco Row. Main Street Station and the river viaduct are about to open.",
+  "previous": 1895,
+  "curated": []
+ },
+ "id": "20261114-042403-richmond-downtown-time-1900",
+ "createdAt": "2026-11-14T04:24:03.600Z",
+ "bytes": 7154348,
+ "git": {
+  "commit": "8a9f63c",
+  "dirty": false,
+  "subject": "Sanborn: drop sliver footprints and smooth outlines"
+ },
+ "files": {
+  "svg": "builds/20261114-042403-richmond-downtown-time-1900/image.svg",
+  "thumb": "builds/20261114-042403-richmond-downtown-time-1900/thumb.png",
+  "social": "builds/20261114-042403-richmond-downtown-time-1900/social.png"
+ }
+}
