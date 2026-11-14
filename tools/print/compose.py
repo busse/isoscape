@@ -6,6 +6,10 @@ laid out on a sheet at an exact Printful size, at 300 dpi, with a paper margin, 
 and the credit line every print must carry (OpenStreetMap is ODbL: produced works must credit
 it). The art is vector, so each panel is rasterised straight to the pixels it fills.
 
+A design with "contain": true shows its region whole, letterboxed in the panel area, instead of
+cropping it to the panel's shape (for very long views on a panorama sheet). "credit" overrides the
+credit line (a modern view has no Sanborn maps).
+
 Usage: compose.py <spec.json> <builds-dir> <out-dir> [--only <design>] [--dpi 300] [--proof]
 --proof writes 1/6-scale JPEGs instead, for checking layouts quickly.
 """
@@ -94,6 +98,13 @@ def compose(design, size, builds, regions, dpi, scale=1.0):
         r, c = divmod(k, cols)
         x0 = round(m + c * (cw + gap)); y0 = round(m + r * (ch + label_h + gap))
         reg = regions[p.get('region', design.get('region'))]
+        if design.get('contain'):
+            # The whole region, not a crop: a very long view stays whole and sits centred in its area.
+            ra = reg['box'][2] / reg['box'][3]
+            if ra > cw / ch:
+                nh = cw / ra; y0 = round(y0 + (ch - nh) / 2); ch = nh
+            else:
+                nw = ch * ra; x0 = round(x0 + (cw - nw) / 2); cw = nw
         vb = fit(reg['box'], cw / ch, reg.get('focus'))
         img = raster(builds[p['build']], vb, round(cw), round(ch))
         sheet.paste(img, (x0, y0))
@@ -142,7 +153,10 @@ def main():
         for size in design['sizes']:
             w, h = size if design.get('orientation', 'landscape') == 'portrait' else (max(size), min(size))
             if design.get('orientation') == 'portrait': w, h = min(size), max(size)
+            global CREDIT
+            saved = CREDIT; CREDIT = design.get('credit', CREDIT)
             img = compose(design, (w, h), builds, spec['regions'], o.dpi, 1 / 6 if o.proof else 1.0)
+            CREDIT = saved
             fn = os.path.join(o.out, f"{name}_{w:g}x{h:g}{'_proof' if o.proof else ''}.jpg")
             img.save(fn, quality=80 if o.proof else 93, dpi=(o.dpi, o.dpi), subsampling=0 if not o.proof else 2)
             print(fn, img.size)

@@ -31,6 +31,14 @@
     6400,
     300
    ]
+  },
+  "james": {
+   "box": [
+    -9444,
+    -1771.6,
+    18888,
+    2828.2
+   ]
   }
  },
  "designs": {
@@ -245,6 +253,26 @@
    "panels": [
     {
      "build": "gwynns-island"
+    }
+   ]
+  },
+  "richmond-james-2026": {
+   "title": "The James, I-195 to Rocketts Landing",
+   "subtitle": "Richmond, Virginia, 2026",
+   "region": "james",
+   "band": 0.16,
+   "margin": 0.06,
+   "contain": true,
+   "sizes": [
+    [
+     10,
+     24
+    ]
+   ],
+   "credit": "isoscape by Chris Busse  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP",
+   "panels": [
+    {
+     "build": "richmond-i195-rocketts"
     }
    ]
   }
