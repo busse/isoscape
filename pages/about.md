@@ -11,6 +11,22 @@ sibling of [dotscene](https://github.com/busse/dotscene). The two share a visual
 but dotscene is for drawing a scene by hand, and isoscape *surveys* one: you choose a frame on
 the world, and the data decides the rest. [How it's made](how-its-made.md) explains each step.
 
+## How it was made
+
+isoscape was built, and the holiday shop is run, in chats with Claude, Anthropic's AI, using
+Claude Opus 5.5, directed and reviewed by Chris Busse. Claude wrote the code, traced the
+historic buildings, laid out the prints, and set up the shop. The maps are drawn by software
+from open data, not by hand. The historic years are machine-traced sketches.
+
+## Try it yourself
+
+Open a chat with Claude (we used Claude Opus 5.5) and say:
+
+> Use the GitHub repo busse/isoscape to make an isometric map of *your place*.
+
+It takes a few minutes. It works best for places in the US, where USGS elevation data gives
+the terrain; elsewhere the map is flat.
+
 ## Contact
 
 isoscape is by Chris Busse.

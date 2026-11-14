@@ -41,21 +41,25 @@ Then open `out/index.html`, the explorer.
 
 ## Make your own
 
-isoscape is free and open source. The easiest way to use it is to ask a coding agent
-(Claude, or any agent that can run Node and read a repo):
+isoscape is free and open source. Open a chat with Claude (we used Claude Opus 5.5) and say:
 
-> Use the busse/isoscape repo on GitHub to render a map of *the place you want*.
+> Use the GitHub repo busse/isoscape to make an isometric map of *your place*.
 
-The agent clones the repo, writes a region file for your place (`regions/<name>.json`: a centre,
+Claude clones the repo, writes a region file for your place (`regions/<name>.json`: a centre,
 a width and depth in metres, see [Region config](#region-config)), fetches OpenStreetMap and
-elevation, and builds the SVG and the pan-and-zoom page. Elevation comes from USGS 3DEP, so
-terrain works in the US; elsewhere, leave `terrain` out for a flat map. Your map is yours to
-print and share; credit OpenStreetMap (see [LICENSE-maps.md](LICENSE-maps.md)).
+elevation, and builds the SVG and the pan-and-zoom page. It takes a few minutes. Elevation
+comes from USGS 3DEP, so terrain works best for places in the US; elsewhere, leave `terrain`
+out for a flat map. Your map is yours to print and share; credit OpenStreetMap (see
+[LICENSE-maps.md](LICENSE-maps.md)).
 
-Prints of the maps drawn here (Richmond through time, Gwynn's Island, and fifty American
-landmarks) are in a holiday shop at [chrisbusse.com](https://chrisbusse.com) through
+**How isoscape was made.** isoscape was built, and the holiday shop is run, in chats with
+Claude, Anthropic's AI, using Claude Opus 5.5, directed and reviewed by Chris Busse. Claude wrote
+the code, traced the historic buildings, laid out the prints, and set up the shop. The maps are
+drawn by software from open data, not by hand; the historic years are machine-traced sketches.
+
+Prints of the maps on the isoscape site (Richmond through time, Gwynn's Island, and fifty
+American landmarks) are in a holiday shop at [chrisbusse.com](https://chrisbusse.com) through
 December 31, 2026. The tool stays here for good.
-
 
 ## The explorer
 
