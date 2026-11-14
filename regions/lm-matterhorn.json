@@ -1,17 +1,17 @@
 {
  "title": "Matterhorn and Zermatt — Switzerland",
  "center": [
-  7.706,
-  45.999
+  7.7035,
+  45.9982
  ],
- "width": 3200,
- "depth": 9000,
- "bearing": 225,
+ "width": 5000,
+ "depth": 8400,
+ "bearing": 235,
  "snap": false,
- "scale": 1.875,
+ "scale": 1.2,
  "squash": 0.5,
  "exaggeration": 1.0,
- "slab": 21,
+ "slab": 24,
  "palette": "paper",
  "bridgeDeck": 7,
  "bridges": [],
