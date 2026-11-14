@@ -182,7 +182,7 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
 #pages a.home::before { content: "⌂"; }
 
 /* ---- phones: the build list becomes a drawer, under a slim top bar ------------------ */
-#mbar, #scrim { display: none; }
+#mbar, #scrim, #mwarn { display: none; }
 @media (max-width: 760px) {
   body { display: block; }
   main { display: flex; flex-direction: column; height: 100%; }
@@ -191,6 +191,8 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
   #mbar .brand { color: inherit; text-decoration: none; font-size: 16px; }
   #mbar .mshop { margin-left: auto; background: var(--accent); color: var(--panel); text-decoration: none; font-weight: 600; padding: 5px 12px; border-radius: 14px; font-size: 13px; white-space: nowrap; }
   #stage { flex: 1; min-height: 0; }
+  #mwarn:not([hidden]) { display: block; position: relative; flex: none; padding: 9px 36px 10px 12px; background: var(--warn); color: #1d1c20; font-size: 13px; line-height: 1.4; }
+  #mwarn button { position: absolute; top: 4px; right: 6px; border: none; background: none; font-size: 20px; line-height: 1; color: inherit; cursor: pointer; padding: 4px; }
   #info { flex: none; max-height: 45vh; }
   #info.made { max-height: 62vh; }
   #info .bar { flex-wrap: wrap; row-gap: 4px; padding: 8px 12px; }
@@ -340,6 +342,7 @@ body.reading main { grid-template-rows: 1fr; }
 <div id="scrim"></div>
 <main>
   <div id="mbar"><button id="menu" title="Maps and pages" aria-label="Maps and pages">☰</button><a class="brand" href="${site.home ? '#home' : '#'}"><b>isoscape</b></a>${site.shop ? `<a class="mshop" href="${escAttr(site.shop.url)}" target="_blank" rel="noopener">Shop prints ↗</a>` : ''}</div>
+  <div id="mwarn" hidden><b>Best on a big screen.</b> These maps are large, detailed drawings. On a phone you see a lighter picture of each; for the full detail, open this page on a laptop or desktop.<button id="mwarnClose" aria-label="Dismiss">×</button></div>
   <div id="stage">
     <img id="imgA" alt="">
     <div id="clipB"><img id="imgB" alt=""></div>
@@ -635,12 +638,14 @@ body.reading main { grid-template-rows: 1fr; }
     layout()
   }).observe(stage)
 
+  const phone = () => window.matchMedia('(max-width: 760px)').matches
   const load = (img, b) => {
     if (img.dataset.id === b.id) return
     img.dataset.id = b.id
     $('loading').style.display = 'block'
     img.onload = img.onerror = () => { $('loading').style.display = 'none' }
-    img.src = b.files.svg
+    // A phone runs out of memory on a big SVG: show the build's preview.jpg there when it has one.
+    img.src = phone() && b.files.preview ? b.files.preview : b.files.svg
   }
 
   // ---- info -------------------------------------------------------------------------------------
@@ -657,7 +662,7 @@ body.reading main { grid-template-rows: 1fr; }
     if (!a) { $('infoTitle').textContent = ''; $('infoBody').innerHTML = ''; $('links').innerHTML = ''; return }
     const b = state.compare ? byId.get(state.b) : null
     $('infoTitle').textContent = b ? a.title + '  ·  A vs B' : a.title
-    $('links').innerHTML = '<a href="' + esc(a.files.svg) + '" target="_blank">Open A’s SVG ↗</a>' +
+    $('links').innerHTML = '<a href="' + esc(a.files.svg) + '" target="_blank"' + (phone() ? ' title="The full drawing: large, may not open on a phone"' : '') + '>' + (phone() ? 'Full drawing ↗' : 'Open A’s SVG ↗') + '</a>' +
       (b ? '<a href="' + esc(b.files.svg) + '" target="_blank">Open B’s SVG ↗</a>' : '') +
       (site.latestPages ? '<a href="' + esc(a.name) + '.html" target="_blank" title="The latest build of this region, with hover labels">Latest page ↗</a>' : '') +
       (buy ? '<a class="buy" href="' + esc(buy) + '" target="_blank" rel="noopener">' + esc(buyLabel(a)) + '</a>' : '')
@@ -888,6 +893,11 @@ body.reading main { grid-template-rows: 1fr; }
   $('menu').addEventListener('click', () => document.body.classList.toggle('navopen'))
   $('scrim').addEventListener('click', closeDrawer)
   if (window.matchMedia('(max-width: 760px)').matches) { $('info').classList.add('closed'); $('toggleInfo').textContent = '▸' }
+  // Phones: say up front that the maps are best on a big screen (until dismissed, for this visit).
+  let warned = false
+  try { warned = sessionStorage.getItem('isoscape-mwarn') === '1' } catch (err) { warned = false }
+  $('mwarn').hidden = warned
+  $('mwarnClose').addEventListener('click', () => { $('mwarn').hidden = true; try { sessionStorage.setItem('isoscape-mwarn', '1') } catch (err) { /* private mode */ } })
   const toggleInfo = () => {
     $('info').classList.toggle('closed')
     $('toggleInfo').textContent = $('info').classList.contains('closed') ? '▸' : '▾'

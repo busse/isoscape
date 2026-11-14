@@ -31,7 +31,7 @@ export interface BuildMeta {
   readonly bytes: number
   readonly stats: Readonly<Record<string, number>>
   readonly config: Region
-  readonly files: { readonly svg: string; readonly thumb?: string; readonly social?: string }
+  readonly files: { readonly svg: string; readonly thumb?: string; readonly social?: string; readonly preview?: string }
   /** The page colour, for a swatch where there is no thumbnail. */
   readonly sky: string
   /** A dated build: its year, its place in the series, and the curated features drawn in it. */
