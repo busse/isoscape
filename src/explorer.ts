@@ -37,8 +37,9 @@
 
 import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
-import { siteTags, type SiteCard } from './social.ts'
+import { escAttr, siteTags, type SiteCard } from './social.ts'
 
+const escHtml = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string)
 const json = (v: unknown) => JSON.stringify(v).replace(/</g, '\\u003c')
 
 export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Page[] = [], site: SiteCard = {}): string => `<!doctype html>
@@ -70,6 +71,8 @@ kbd { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding: 0 4px;
 #nav header b { font-size: 15px; letter-spacing: -.01em; }
 #nav header span { color: var(--dim); }
 #nav header .count { margin-left: auto; font-size: 12px; color: var(--faint); }
+#nav a.shop { display: block; margin: 0 16px 8px; padding: 6px 10px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); text-decoration: none; font-weight: 600; }
+#nav a.shop:hover { background: var(--accent); color: var(--panel); }
 #filter { margin: 0 12px 10px; padding: 6px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); font: inherit; outline: none; }
 #filter:focus { border-color: var(--accent); }
 #list { overflow-y: auto; flex: 1; padding: 0 8px 16px; }
@@ -221,7 +224,8 @@ body.reading main { grid-template-rows: 1fr; }
 </head>
 <body>
 <nav id="nav">
-  <header><b>isoscape</b><span>explorer</span><span class="count" id="count"></span></header>
+  <header><b>isoscape</b><span>explorer</span><span class="count" id="count"></span></header>${site.shop ? `
+  <a class="shop" href="${escAttr(site.shop.url)}" target="_blank" rel="noopener">${escHtml(site.shop.label)} ↗</a>` : ''}
   <div id="pages"></div>
   <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false">
   <div id="list"></div>
@@ -252,7 +256,7 @@ body.reading main { grid-template-rows: 1fr; }
   </section>
   <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
 </main>
-<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null })}</script>
+<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: site.shop ?? null, latestPages: site.latestPages !== false })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2) })))}</script>
 <script>
@@ -456,7 +460,8 @@ body.reading main { grid-template-rows: 1fr; }
     $('infoTitle').textContent = b ? a.title + '  ·  A vs B' : a.title
     $('links').innerHTML = '<a href="' + esc(a.files.svg) + '" target="_blank">Open A’s SVG ↗</a>' +
       (b ? '<a href="' + esc(b.files.svg) + '" target="_blank">Open B’s SVG ↗</a>' : '') +
-      '<a href="' + esc(a.name) + '.html" target="_blank" title="The latest build of this region, with hover labels">Latest page ↗</a>'
+      (site.latestPages ? '<a href="' + esc(a.name) + '.html" target="_blank" title="The latest build of this region, with hover labels">Latest page ↗</a>' : '') +
+      (() => { const L = site.shop && site.shop.links; if (!L) return ''; const k = Object.keys(L).filter((p) => a.region.startsWith(p)).sort((x, y) => y.length - x.length)[0]; return k ? '<a class="buy" href="' + esc(L[k]) + '" target="_blank" rel="noopener">Buy a print ↗</a>' : '' })()
     $('info').classList.toggle('made', state.tab === 'made')
     for (const t of $('tabs').children) t.classList.toggle('on', t.dataset.tab === state.tab)
     if (state.tab === 'made') {

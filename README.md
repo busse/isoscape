@@ -39,6 +39,24 @@ node bin/isoscape.js build richmond-downtown-topo --palette night --png
 
 Then open `out/index.html`, the explorer.
 
+## Make your own
+
+isoscape is free and open source. The easiest way to use it is to ask a coding agent
+(Claude, or any agent that can run Node and read a repo):
+
+> Use the busse/isoscape repo on GitHub to render a map of *the place you want*.
+
+The agent clones the repo, writes a region file for your place (`regions/<name>.json`: a centre,
+a width and depth in metres, see [Region config](#region-config)), fetches OpenStreetMap and
+elevation, and builds the SVG and the pan-and-zoom page. Elevation comes from USGS 3DEP, so
+terrain works in the US; elsewhere, leave `terrain` out for a flat map. Your map is yours to
+print and share; credit OpenStreetMap (see [LICENSE-maps.md](LICENSE-maps.md)).
+
+Prints of the maps drawn here (Richmond through time, Gwynn's Island, and fifty American
+landmarks) are in a holiday shop at [chrisbusse.com](https://chrisbusse.com) through
+December 31, 2026. The tool stays here for good.
+
+
 ## The explorer
 
 Every `build` is archived under `out/builds/<timestamp>-<name>/`: the SVG, a thumbnail, and

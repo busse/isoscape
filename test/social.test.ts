@@ -107,7 +107,7 @@ test('the explorer carries the site card and copies share-page links', () => {
   const html = renderExplorer(builds, [], { siteUrl: 'https://x.org/iso/', image: { path: 'builds/new/social.png', width: 1200, height: 630 } })
   assert.match(html, /<meta property="og:image" content="https:\/\/x.org\/iso\/builds\/new\/social.png">/)
   assert.match(html, /<meta property="og:url" content="https:\/\/x.org\/iso\/">/)
-  assert.match(html, /<script type="application\/json" id="site">\{"siteUrl":"https:\/\/x.org\/iso\/"\}<\/script>/)
+  assert.match(html, /<script type="application\/json" id="site">\{"siteUrl":"https:\/\/x.org\/iso\/","shop":null,"latestPages":true\}<\/script>/)
   assert.match(html, /'s\/' \+ encodeURIComponent\(file\) \+ '\.html' \+ location\.hash/)
   const bare = renderExplorer(builds)
   assert.doesNotMatch(bare, /og:url|canonical/)

@@ -37,6 +37,10 @@ export interface SiteConfig {
   readonly siteUrl?: string
   /** Region name or build id whose newest build is the site's preview image. */
   readonly flagship?: string
+  /** Optional shop for prints: a header link, plus a "Buy a print" link on views whose region starts with a key of `links`. */
+  readonly shop?: { readonly label: string; readonly url: string; readonly links?: Readonly<Record<string, string>> }
+  /** False on a published site that does not carry out/<region>.html, to hide the "Latest page" link. */
+  readonly latestPages?: boolean
 }
 
 /** A site URL as given, made to end in '/'; undefined when empty. Throws if not http(s). */
@@ -55,9 +59,12 @@ export const normaliseSiteUrl = (raw: string | undefined): string | undefined =>
   return u.href.endsWith('/') ? u.href : `${u.href}/`
 }
 
+const isShop = (v: unknown): v is NonNullable<SiteConfig['shop']> =>
+  typeof v === 'object' && v !== null && typeof (v as { label?: unknown }).label === 'string' && typeof (v as { url?: unknown }).url === 'string'
+
 /** `--site-url`, else ISOSCAPE_SITE_URL, else isoscape.config.json in `root`. */
 export const loadSiteConfig = async (flag?: string, root = process.cwd(), env = process.env): Promise<SiteConfig> => {
-  let file: { siteUrl?: unknown; flagship?: unknown } = {}
+  let file: { siteUrl?: unknown; flagship?: unknown; shop?: unknown; latestPages?: unknown } = {}
   try {
     file = JSON.parse(await readFile(resolve(root, 'isoscape.config.json'), 'utf8')) as typeof file
   } catch (err) {
@@ -68,6 +75,8 @@ export const loadSiteConfig = async (flag?: string, root = process.cwd(), env = 
   return {
     ...(siteUrl === undefined ? {} : { siteUrl }),
     ...(typeof file.flagship === 'string' && file.flagship !== '' ? { flagship: file.flagship } : {}),
+    ...(isShop(file.shop) ? { shop: file.shop } : {}),
+    ...(file.latestPages === false ? { latestPages: false } : {}),
   }
 }
 
@@ -332,6 +341,8 @@ export const flagshipOf = (builds: readonly BuildMeta[], flagship?: string): Bui
 /** What index.html needs to carry the site-wide card. */
 export interface SiteCard {
   readonly siteUrl?: string
+  readonly shop?: SiteConfig['shop']
+  readonly latestPages?: boolean
   readonly image?: Preview
   readonly imageAlt?: string
 }

@@ -18,7 +18,7 @@
   {
    "match": "Golden Gate",
    "deck": 67,
-   "pierSpacing": 640
+   "pierSpacing": 100000
   }
  ],
  "minBuildingArea": 12,

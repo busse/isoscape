@@ -1,0 +1,14 @@
+{
+  "siteUrl": "https://busse.github.io/isoscape/",
+  "flagship": "richmond-downtown-time-1925",
+  "latestPages": false,
+  "shop": {
+    "label": "Holiday shop: prints of these maps (through Dec 31, 2026)",
+    "url": "https://chrisbusse.com/",
+    "links": {
+      "richmond": "https://chrisbusse.com/collections/richmond-through-time",
+      "gwynns-island": "https://chrisbusse.com/collections/gwynns-island",
+      "lm-": "https://chrisbusse.com/collections/american-landmarks"
+    }
+  }
+}
