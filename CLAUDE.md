@@ -54,6 +54,8 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | SVG structure, layers, the viewer page | `render.ts` |
 | colours, weights, dot size | `palette.ts` |
 | elevation fetch and storage | `dem.ts` |
+| an elevation source (URL, decoding, reprojection, credit) | `dem-sources.ts`; TIFF decoding in `rasters.ts` |
+| lattice towers, roof shells | `spire`, `isLatticeTower`, `isShellRoof` in `scene.ts` |
 | height grid, river surface, rocks, rapids, contours | `terrain.ts` |
 | hillshade light, rapids marks, strip painting | `paintStrip` in `render.ts` |
 | a place | `regions/<name>.json` |
@@ -80,4 +82,7 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
   edges.
 - A dated series shows only surviving buildings plus what is curated in `history/`; every
   curated item and era rule must cite a source (or say plainly that it is approximate).
+- Outside the US, terrain is only as fine as its source: Copernicus is a 30 m *surface* model
+  (trees and roofs included), and Terrain Tiles is 30 m SRTM in much of the world. Every source
+  must carry its credit and licence in `dem-sources.ts`; the maps, explorer and prints use them.
 - Concave footprints that interlock can form an ordering cycle, which is broken by depth.

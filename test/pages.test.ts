@@ -81,3 +81,9 @@ test('the explorer embeds the pages, safely', () => {
   assert.ok(script)
   assert.doesNotThrow(() => new Function(script[1]))
 })
+
+test('a link to a map on the public site stays inside the explorer', async () => {
+  const { pageLink } = await import('../src/pages.ts')
+  assert.equal(pageLink('world-landmarks', 'https://busse.github.io/isoscape/#lm-eiffel-tower', 'https://busse.github.io/isoscape/'), '#lm-eiffel-tower')
+  assert.equal(pageLink('world-landmarks', 'https://example.com/#x', 'https://busse.github.io/isoscape/'), 'https://example.com/#x')
+})

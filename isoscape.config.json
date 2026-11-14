@@ -6,6 +6,11 @@
     "label": "Holiday shop, open through December 31, 2026",
     "url": "https://chrisbusse.com/",
     "links": {
+      "lm-eiffel-tower": "https://chrisbusse.com/collections/world-landmarks",
+      "lm-matterhorn": "https://chrisbusse.com/collections/world-landmarks",
+      "lm-sydney-opera-house": "https://chrisbusse.com/collections/world-landmarks",
+      "lm-himeji-castle": "https://chrisbusse.com/collections/world-landmarks",
+      "lm-machu-picchu": "https://chrisbusse.com/collections/world-landmarks",
       "richmond": "https://chrisbusse.com/collections/richmond-through-time",
       "gwynns-island": "https://chrisbusse.com/collections/gwynns-island",
       "lm-": "https://chrisbusse.com/collections/american-landmarks"
@@ -48,6 +53,28 @@
         ],
         "shop": "https://chrisbusse.com/collections/gwynns-island",
         "shopLabel": "Shop Gwynn's Island prints ↗"
+      },
+      {
+        "title": "Landmarks around the world",
+        "prefixes": [
+          "lm-eiffel-tower",
+          "lm-matterhorn",
+          "lm-sydney-opera-house",
+          "lm-himeji-castle",
+          "lm-machu-picchu"
+        ],
+        "blurb": "Five landmarks outside the US, each drawn from a different country's open elevation data. The landing page tells the story of each dataset.",
+        "page": "#/world-landmarks",
+        "shop": "https://chrisbusse.com/collections/world-landmarks",
+        "shopLabel": "Shop world landmark prints ↗",
+        "order": [
+          "lm-eiffel-tower",
+          "lm-matterhorn",
+          "lm-sydney-opera-house",
+          "lm-himeji-castle",
+          "lm-machu-picchu"
+        ],
+        "pageLabel": "How these were made: five datasets"
       },
       {
         "title": "American landmarks",
@@ -116,6 +143,10 @@
       {
         "label": "Make your own, free (GitHub)",
         "href": "https://github.com/busse/isoscape"
+      },
+      {
+        "label": "Landmarks around the world: five elevation datasets",
+        "href": "#/world-landmarks"
       },
       {
         "label": "Artist statement",

@@ -228,9 +228,9 @@ export const main = async (argv: string[]): Promise<void> => {
  */
 const writeExplorer = async (outDir: string, siteUrl?: string, verbose = false): Promise<number> => {
   const builds = await listBuilds(outDir)
-  const pages = loadPages()
-  await mkdir(outDir, { recursive: true })
   const config = await loadSiteConfig(siteUrl)
+  const pages = loadPages(undefined, config.siteUrl)
+  await mkdir(outDir, { recursive: true })
   const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined)
   await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, pages, { ...site, ...(config.shop ? { shop: config.shop } : {}), ...(config.home ? { home: config.home } : {}), ...(config.latestPages === false ? { latestPages: false } : {}) }))
   if (verbose) {

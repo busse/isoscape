@@ -235,12 +235,12 @@ const terrainTiles: MosaicSource = {
   id: 'terrain-tiles',
   kind: 'mosaic',
   name: 'Terrain Tiles',
-  coverage: 'Worldwide (Mapzen/Tilezen, on AWS Open Data), the best open source per country',
-  about: 'A mosaic of national bare-earth models; in Australia, Geoscience Australia’s 5 m lidar DEM where flown, SRTM elsewhere',
-  credit: 'Elevation: Terrain Tiles (Mapzen/Tilezen, AWS Open Data); Australia terrain data © Commonwealth of Australia (Geoscience Australia) 2017',
-  licence: 'per source; see the Tilezen attribution list (Geoscience Australia: CC BY 4.0)',
+  coverage: 'Worldwide (Mapzen/Tilezen, on AWS Open Data), the best open model per place',
+  about: 'A mosaic of open models: national lidar in the US, UK, Austria and a few other countries, and NASA’s 30 m SRTM radar survey elsewhere, which is what covers Sydney',
+  credit: 'Elevation: Terrain Tiles (Mapzen/Tilezen, AWS Open Data); SRTM courtesy of the U.S. Geological Survey; ETOPO1 courtesy of NOAA',
+  licence: 'open data from each source, credited as Tilezen’s attribution list asks',
   link: 'https://registry.opendata.aws/terrain-tiles/',
-  native: 5,
+  native: 30,
   pieces: async (b, m) => {
     const z = zoomFor(m, (b.north + b.south) / 2, 15)
     return tilesOver(b, z).map(({ x, y }) => ({
@@ -345,4 +345,10 @@ export const demSource = (id: string | undefined): DemSource => {
   const s = DEM_SOURCES[(id ?? '3dep') as DemSourceId]
   if (s === undefined) throw new Error(`unknown elevation source "${id}"; one of ${Object.keys(DEM_SOURCES).join(', ')}`)
   return s
+}
+
+/** The elevation credit line for a region: its source's, plus its fill source's. */
+export const demCredit = (r: { readonly terrain?: { readonly source?: string; readonly fillFrom?: string } }): string => {
+  const main = demSource(r.terrain?.source).credit
+  return r.terrain?.fillFrom === undefined ? main : `${main}; ${demSource(r.terrain.fillFrom).credit.replace(/^Elevation: /, '')}`
 }

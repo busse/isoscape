@@ -806,7 +806,9 @@ body.reading main { grid-template-rows: 1fr; }
       (has('coastWays') ? '; the sea and tidal water come from ' + plural(s.coastWays, 'coastline way') : '') + '.</li>')
     if (relief) {
       const dem = demSources[t.source || '3dep'] || demSources['3dep']
-      src.push('<li><b>' + esc(dem.name) + ' elevation</b> (' + esc(dem.coverage) + '; ' + esc(dem.about.charAt(0).toLowerCase() + dem.about.slice(1)) + '), fetched at ' + (t.demResolution ?? 1) + ' m per pixel and resampled to a ' + (t.cell ?? 5) + ' m grid. The ground runs from ' +
+      const fill = t.fillFrom ? demSources[t.fillFrom] : null
+      src.push('<li><b>' + esc(dem.name) + ' elevation</b> (' + esc(dem.coverage) + '; ' + esc(dem.about.charAt(0).toLowerCase() + dem.about.slice(1)) + ')' +
+        (fill ? ', with gaps beyond its coverage filled from <b>' + esc(fill.name) + '</b>' : '') + ', fetched at ' + (t.demResolution ?? 1) + ' m per pixel and resampled to a ' + (t.cell ?? 5) + ' m grid. The ground runs from ' +
         s.elevationDatum.toFixed(1) + ' m to ' + s.elevationTop.toFixed(1) + ' m above sea level (' + (s.elevationTop - s.elevationDatum).toFixed(1) + ' m of relief), drawn ' +
         (t.exaggeration ?? 2) + '× taller than life. Buildings and bridges keep their true heights.</li>')
     } else if (t && t.enabled !== false) {
@@ -888,7 +890,7 @@ body.reading main { grid-template-rows: 1fr; }
     if (other.length) out.push('<p>Other measures: ' + other.map((k) => esc(k) + ' ' + fmt(s[k])).join(', ') + '.</p>')
 
     out.push('</section><p class="credit">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors (ODbL)' +
-      (relief ? ' · ' + esc((demSources[t.source || '3dep'] || demSources['3dep']).credit) + ' (' + esc((demSources[t.source || '3dep'] || demSources['3dep']).licence) + ')' : '') + (pageBySlug.has('about') ? ' · <a href="#/about">credits and licences</a>' : '') + '</p>')
+      (relief ? ' · ' + esc((demSources[t.source || '3dep'] || demSources['3dep']).credit) + ' (' + esc((demSources[t.source || '3dep'] || demSources['3dep']).licence) + ')' + (t.fillFrom && demSources[t.fillFrom] ? ' · ' + esc(demSources[t.fillFrom].credit) : '') : '') + (pageBySlug.has('about') ? ' · <a href="#/about">credits and licences</a>' : '') + '</p>')
     return '<div class="story">' + out.join('') + '</div>'
   }
   $('toggleInfo').addEventListener('click', () => toggleInfo())
@@ -1128,6 +1130,7 @@ body.reading main { grid-template-rows: 1fr; }
         .sort((x, y) => orderIndex(sec, x.region) - orderIndex(sec, y.region) || titleOf(x).localeCompare(titleOf(y)))
       if (cards.length === 0) return
       out.push('<section class="sec"><header><h2>' + esc(sec.homeTitle || sec.title) + '</h2>' + (sec.blurb ? '<p>' + esc(sec.blurb) + '</p>' : '') +
+        (sec.page ? '<a class="btn" href="' + esc(sec.page) + '">' + esc(sec.pageLabel || 'Read the story') + '</a> ' : '') +
         (sec.shop ? '<a class="btn" href="' + esc(sec.shop) + '" target="_blank" rel="noopener">' + esc(sec.shopLabel || 'Buy prints ↗') + '</a>' : '') + '</header>' +
         '<div class="cards">' + cards.map((b) => '<a class="card" href="#' + esc(b.id) + '"><img loading="lazy" src="' + esc(b.files.thumb || '') + '" alt=""><b>' + esc(titleOf(b)) + '</b></a>').join('') + '</div></section>')
     })

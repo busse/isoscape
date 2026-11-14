@@ -58,7 +58,9 @@ const SLUG = /^[a-z0-9][a-z0-9-]*$/
 const MIME: Readonly<Record<string, string>> = { '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp' }
 
 /** Turn a link as written for GitHub into an explorer route. */
-export const pageLink = (slug: string, href: string): string => {
+export const pageLink = (slug: string, href: string, siteUrl?: string): string => {
+  // A link to a map on the public site (written so it also works on GitHub) stays in the explorer.
+  if (siteUrl !== undefined && href.startsWith(siteUrl + '#')) return href.slice(siteUrl.length)
   if (href.startsWith('#/')) return href
   if (href.startsWith('#')) return href.length > 1 ? `#/${slug}/${href.slice(1)}` : `#/${slug}`
   const md = href.match(/^(?:\.\/)?([a-z0-9][a-z0-9-]*)\.md(?:#(.*))?$/)
@@ -70,14 +72,14 @@ export const pageLink = (slug: string, href: string): string => {
  * Compile one page. `readAsset` returns the bytes of a file beside the page, or null; it is
  * only ever asked for plain file names with a known image extension.
  */
-export const compilePage = (src: string, fileName: string, readAsset: (name: string) => Buffer | null = () => null): Page => {
+export const compilePage = (src: string, fileName: string, readAsset: (name: string) => Buffer | null = () => null, siteUrl?: string): Page => {
   const { data, body } = frontMatter(src)
   const slug = data.slug ?? basename(fileName, extname(fileName))
   if (!SLUG.test(slug)) throw new Error(`pages/${fileName}: slug "${slug}" must be lower-case letters, digits and hyphens`)
   const order = data.order === undefined ? 100 : Number(data.order)
   const result = markdown(body, {
     idPrefix: `p-${slug}-`,
-    link: (href) => pageLink(slug, href),
+    link: (href) => pageLink(slug, href, siteUrl),
     image: (src) => {
       const name = src.replace(/^\.\//, '')
       const mime = MIME[extname(name).toLowerCase()]
@@ -99,7 +101,7 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
 }
 
 /** Every `*.md` in the pages folder, in nav order. A missing folder is no pages. */
-export const loadPages = (dir: string = PAGES_DIR): Page[] => {
+export const loadPages = (dir: string = PAGES_DIR, siteUrl?: string): Page[] => {
   let files: string[]
   try {
     files = readdirSync(dir).filter((f) => f.endsWith('.md') && !f.startsWith('_') && f.toLowerCase() !== 'readme.md')
@@ -113,7 +115,7 @@ export const loadPages = (dir: string = PAGES_DIR): Page[] => {
       } catch {
         return null
       }
-    }),
+    }, siteUrl),
   )
   const seen = new Set<string>()
   for (const p of pages) {

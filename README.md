@@ -47,9 +47,9 @@ isoscape is free and open source. Open a chat with Claude (we used Claude Opus 5
 
 Claude clones the repo, writes a region file for your place (`regions/<name>.json`: a centre,
 a width and depth in metres, see [Region config](#region-config)), fetches OpenStreetMap and
-elevation, and builds the SVG and the pan-and-zoom page. It takes a few minutes. Elevation
-comes from USGS 3DEP, so terrain works best for places in the US; elsewhere, leave `terrain`
-out for a flat map. Your map is yours to print and share; credit OpenStreetMap (see
+elevation, and builds the SVG and the pan-and-zoom page. It takes a few minutes. Terrain works
+anywhere: USGS 3DEP in the US, IGN in France, swisstopo in Switzerland, GSI in Japan, and
+Copernicus's 30 m model for the rest of the world (see [Elevation sources](#elevation-sources)). Your map is yours to print and share; credit OpenStreetMap (see
 [LICENSE-maps.md](LICENSE-maps.md)).
 
 **How isoscape was made.** isoscape was built, and the holiday shop is run, in chats with
@@ -57,8 +57,8 @@ Claude, Anthropic's AI, using Claude Opus 5.5, directed and reviewed by Chris Bu
 the code, traced the historic buildings, laid out the prints, and set up the shop. The maps are
 drawn by software from open data, not by hand; the historic years are machine-traced sketches.
 
-Prints of the maps on the isoscape site (Richmond through time, Gwynn's Island, and fifty
-American landmarks) are in a holiday shop at [chrisbusse.com](https://chrisbusse.com) through
+Prints of the maps on the isoscape site (Richmond through time, Gwynn's Island, fifty American
+landmarks, and [five landmarks around the world](pages/world-landmarks.md)) are in a holiday shop at [chrisbusse.com](https://chrisbusse.com) through
 December 31, 2026. The tool stays here for good.
 
 ## The explorer
@@ -238,8 +238,9 @@ line is in front. If they overlap, a part entirely above the other is in front. 
 centroid depth decides. A topological sort turns those facts into one order, and the rare
 cycle is broken by depth.
 
-**Terrain** (`dem.ts`, `terrain.ts`). Elevation comes from USGS 3DEP, the National Map's
-seamless bare-earth model, which is 1 m lidar across Richmond. `fetch` asks its
+**Terrain** (`dem.ts`, `dem-sources.ts`, `rasters.ts`, `terrain.ts`). In the US, elevation
+comes from USGS 3DEP, the National Map's seamless bare-earth model, which is 1 m lidar across
+Richmond; elsewhere from the source the region names (see [Elevation sources](#elevation-sources)). `fetch` asks its
 `exportImage` service for an uncompressed float GeoTIFF over the region. A minimal reader
 parses it, and it is stored as gzipped int16 centimetres (about 4 MB for this slice). The
 build resamples it onto a 5 m grid in view metres and blurs it lightly to lose the lidar
@@ -303,13 +304,34 @@ same pipeline on a flat plate.
     "cell": 5,                    // grid spacing, metres
     "contour": 2,                 // contour interval, metres (0 for none)
     "majorEvery": 5,              // every 5th contour heavier
-    "rapids": 0.035               // water-surface fall (m/m over 40 m) that reads as rapids
+    "rapids": 0.035,              // water-surface fall (m/m over 40 m) that reads as rapids
+    "demResolution": 1,           // metres per pixel to fetch (default 1, or the source's own spacing)
+    "source": "3dep",             // where the heights come from; see Elevation sources
+    "fillFrom": "copernicus"      // optional: a second source for gaps (a national model stops at the border)
   }
 }
 ```
 
 The fetch covers the frame's circumscribed circle, so a snapped camera never looks past the
 data.
+
+## Elevation sources
+
+`terrain.source` picks where the heights come from. Every source ends as the same cached grid,
+so nothing after `fetch` changes. `isoscape sources` prints them all, with credits and
+licences; the maps, the explorer and the prints credit whichever one a region used.
+
+| `source` | Covers | Data | Detail |
+|---|---|---|---|
+| `3dep` (default) | United States | USGS 3D Elevation Program, bare earth | 1 m lidar where flown |
+| `ign` | France | IGN RGE ALTI®, bare earth | 1 m |
+| `swisstopo` | Switzerland, Liechtenstein | swissALTI3D, bare earth (1 km squares, Swiss grid) | 2 m |
+| `gsi` | Japan | GSI elevation tiles, bare earth | 5 m lidar, else 10 m |
+| `copernicus` | The whole world | Copernicus DEM GLO-30, a *surface* model (trees and roofs included) | 30 m |
+| `terrain-tiles` | The whole world | Mapzen/Tilezen Terrain Tiles on AWS, a mosaic of open models | 1–30 m, by country |
+
+All of them allow commercial use with credit. [Landmarks around the
+world](pages/world-landmarks.md) has one map for each, and explains how they are read.
 
 ## Extra sources
 
@@ -382,7 +404,8 @@ and elevation and keeps only its year-built parcels in its own `data/` folder.
 Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, available
 under the Open Database License. The cached `data/*/osm.json` files carry that licence, and
 every rendered SVG and page carries the attribution. Elevation is from the
-[USGS 3D Elevation Program](https://www.usgs.gov/3d-elevation-program), public domain;
+[USGS 3D Elevation Program](https://www.usgs.gov/3d-elevation-program), public domain, or,
+outside the US, from the source each region names (see [Elevation sources](#elevation-sources));
 `data/*/dem.bin.gz` is a resampled copy.
 
 ## Inspiration

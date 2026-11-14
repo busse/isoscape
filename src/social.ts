@@ -70,6 +70,9 @@ export interface HomeSection {
   readonly collapsed?: boolean
   readonly shop?: string
   readonly shopLabel?: string
+  /** A page that tells the section's story ('#/<slug>'), linked beside the shop button. */
+  readonly page?: string
+  readonly pageLabel?: string
 }
 
 export interface HomeConfig {

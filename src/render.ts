@@ -15,7 +15,7 @@ import { paintOrder } from './order.ts'
 import type { Item, Scene, Shape } from './scene.ts'
 import { cellNormal, contours, dampCell, riverFall, type ContourSegment } from './terrain.ts'
 import { COVER_OF, COVER_ORDER, type CoverGroup } from './landcover.ts'
-import { demSource } from './dem-sources.ts'
+import { demCredit } from './dem-sources.ts'
 
 const f = (n: number) => (Math.round(n * 10) / 10).toString()
 
@@ -160,7 +160,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   out.push(
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.map(f).join(' ')}" class="isoscape" data-region="${esc(region.name)}" role="img">`,
     `<title>${esc(region.title)}</title>`,
-    `<desc>Map data © OpenStreetMap contributors (ODbL).${T.flat ? '' : ` ${esc(demSource(region.terrain?.source).credit)}.`} Bearing ${view.bearing.toFixed(1)}°.</desc>`,
+    `<desc>Map data © OpenStreetMap contributors (ODbL).${T.flat ? '' : ` ${esc(demCredit(region))}.`} Bearing ${view.bearing.toFixed(1)}°.</desc>`,
     `<style>`,
     `.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}.d{fill:none;stroke:${p.ink};stroke-width:${f(p.dotRadius * 2)};stroke-linecap:round}`,
     `.td{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth};stroke-dasharray:1.2 1.8}`,
@@ -654,7 +654,7 @@ export const renderPage = (scene: Scene, rendered: Rendered): string => `<!docty
 <body>
 <div id="stage">${rendered.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid meet" ')}</div>
 <header><h1>${esc(scene.region.title)}</h1><div>drag to pan · scroll to zoom · double-click to reset</div></header>
-<footer>Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors${scene.terrain.flat ? '' : ` · ${esc(demSource(scene.region.terrain?.source).credit)}`}</footer>
+<footer>Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors${scene.terrain.flat ? '' : ` · ${esc(demCredit(scene.region))}`}</footer>
 <div id="tip"></div>
 <script>
 (() => {
