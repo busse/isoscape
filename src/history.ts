@@ -78,7 +78,7 @@ export interface TracedBuilding {
   readonly to: number
   /** How `to` was found: a later map without it, a building on its site, a highway, or assumed. */
   readonly end: 'map' | 'rebuilt' | 'highway' | 'assumed'
-  readonly material: 'brick' | 'frame' | 'stone' | 'iron' | 'special'
+  readonly material: 'brick' | 'frame' | 'stone' | 'iron' | 'special' | 'fireproof'
   readonly storeys: number
   readonly edition: number
   readonly sheet: number
