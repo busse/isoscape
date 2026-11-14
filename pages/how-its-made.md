@@ -364,9 +364,16 @@ Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
 
 Traced buildings keep the maps' colours, so they read apart from today's. Their heights are
 guessed from their material (brick and stone three storeys, frame two): the storey counts
-printed on the sheets are not read yet. The explorer counts, for each scene, how many traced
-buildings stand and how each one's end date was found. The 1886 edition is traced. Later
-editions only need their sheets' corners read, and each one makes "assumed" rarer.
+printed on the sheets are not read yet; later editions add olive-brown for fire-proof
+construction, drawn six storeys. The explorer counts, for each scene, how many traced
+buildings stand and how each one's end date was found.
+
+Three editions are traced: **1886**; **1924–25**, whose first volume opens with a single
+"congested district" map of the whole business district (fitted with a rubber sheet
+through sixteen street corners, each snapped to the city's block outlines); and
+**1950–52**, a corrected reprint whose sheets were matched feature by feature to their
+1924–25 versions where those were fitted, and read by eye otherwise. Each later edition turns
+"assumed" end dates into ones read from a map.
 
 **Era rules** date everything else that OSM maps: the first rule matching a feature's name,
 `ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
@@ -422,5 +429,9 @@ Code: `src/archive.ts`, `src/explorer.ts`, `src/pages.ts`.
 Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, available
 under the Open Database License. Elevation from the [USGS 3D Elevation
 Program](https://www.usgs.gov/3d-elevation-program), public domain. Years built for the
-Richmond series from the City of Richmond's open data. See [About](about.md) for
-what that means when you use or share a picture.
+Richmond series from the City of Richmond's open data. Fire-insurance maps from the Library
+of Congress Sanborn Maps Collection. See [About](about.md) for what that means when you use
+or share a picture.
+
+Inspired by [Isometric SF](https://isometricsf.com), Justin Chavez's isometric pixel-art map
+of San Francisco ([how it was made](https://www.justinchavez.com/blog/isometric-sf-how/)).

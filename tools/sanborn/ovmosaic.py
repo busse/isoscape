@@ -8,7 +8,7 @@ sheets = sys.argv[4:]
 pts = blocks('../../data/sanborn/blocks.json', 1.0)
 tiles = []
 for sh in sheets:
-    im = np.asarray(Image.open(imgfmt.format(sh=int(sh))).convert('RGB')).astype(np.int16)
+    im = np.asarray(Image.open(imgfmt.format(sh=int(sh) if sh.isdigit() else sh)).convert('RGB')).astype(np.int16)
     overlay(im, pts, geo[sh]['params'], '/tmp/t.png', width=640, thick=2, grid=True)
     tiles.append(Image.open('/tmp/t.png').copy())
 W = max(t.width for t in tiles); H = max(t.height for t in tiles)

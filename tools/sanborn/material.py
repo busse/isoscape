@@ -1,17 +1,18 @@
-"""Sanborn colours, read relative to each sheet's own paper (scans differ in tone): pink is
+"""Sanborn colours (later editions add olive-brown for fire-proof), read relative to each sheet's own paper (scans differ in tone): pink is
 brick, yellow frame, blue stone (and water), grey iron, green 'special' (fire-resistive)."""
 import numpy as np
 
-CLASSES = ['none', 'brick', 'frame', 'stone', 'iron', 'special']
+CLASSES = ['none', 'brick', 'frame', 'stone', 'iron', 'special', 'fireproof']
 
 
-def classify(im):
+def classify(im, fireproof=False):
     im = im.astype(np.int16)
     R, G, B = im[..., 0], im[..., 1], im[..., 2]
     V = im.max(2)
-    ink = V < 105
+    # printed lines: dark relative to the paper (scans differ in exposure)
+    ink = V < 0.6 * np.percentile(V, 90)
     # paper: the commonest light colour
-    light = ~ink & (V > np.percentile(V, 40))
+    light = ~ink & (V >= np.percentile(V, 40))
     q = (im[light] // 6).reshape(-1, 3).astype(np.int64)
     vals, counts = np.unique(q[:, 0] * 10000 + q[:, 1] * 100 + q[:, 2], return_counts=True)
     m = vals[counts.argmax()]
@@ -28,4 +29,9 @@ def classify(im):
     # On aged paper the yellow wash reads green; true green specials lean blue.
     out[greenish & (br <= 10)] = 2
     out[greenish & (br > 10)] = 5
+    if fireproof:
+        # Later editions add an olive-brown for fire-proof construction (steel and concrete).
+        olive = (bg > -38) & (bg < -10) & (rg > 5) & (lum < -35) & ~ink
+        out[olive] = 6
+        out[(bg <= -38) & ~ink] = 2
     return out, ink, P

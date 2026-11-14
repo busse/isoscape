@@ -11,6 +11,23 @@ sibling of [dotscene](https://github.com/busse/dotscene). The two share a visual
 but dotscene is for drawing a scene by hand, and isoscape *surveys* one: you choose a frame on
 the world, and the data decides the rest. [How it's made](how-its-made.md) explains each step.
 
+## Contact
+
+isoscape is by Chris Busse.
+
+- Website: [fullbacklog.com](https://fullbacklog.com) (Substack)
+- LinkedIn: [linkedin.com/in/chrisbusse](https://linkedin.com/in/chrisbusse)
+- Threads: [@busse](https://www.threads.net/@busse)
+- Instagram: [@busse](https://www.instagram.com/busse)
+
+## Inspiration
+
+isoscape began as an attempt to draw Richmond the way [Isometric SF](https://isometricsf.com)
+draws San Francisco: Justin Chavez's isometric pixel-art map of the city. His write-up,
+[how it was made](https://www.justinchavez.com/blog/isometric-sf-how/), set out the idea
+this project follows: an isometric city view drawn from open map data. isoscape's code and
+drawing style are its own, but the idea came from his work.
+
 ## Data
 
 **OpenStreetMap.** Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright)

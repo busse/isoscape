@@ -310,8 +310,8 @@ year before. The method and its limits are in the *How it's made* page, under "T
 footprints of buildings since lost. It downloads the sheets from the Library of Congress,
 fits each sheet to the ground from two or three street corners read off it, traces the
 coloured fills, and follows each building until a later map, a newer building or a highway
-shows it gone. The steps are in *How it's made*, under "Time". The 1886 edition is traced
-into `history/sanborn/`.
+shows it gone. The steps are in *How it's made*, under "Time". The 1886, 1924–25 and
+1950–52 editions are traced into `history/sanborn/`.
 
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
 and elevation and keeps only its year-built parcels in its own `data/` folder.
@@ -339,3 +339,15 @@ under the Open Database License. The cached `data/*/osm.json` files carry that l
 every rendered SVG and page carries the attribution. Elevation is from the
 [USGS 3D Elevation Program](https://www.usgs.gov/3d-elevation-program), public domain;
 `data/*/dem.bin.gz` is a resampled copy.
+
+## Inspiration
+
+Inspired by [Isometric SF](https://isometricsf.com), Justin Chavez's isometric pixel-art map
+of San Francisco, and his write-up of
+[how it was made](https://www.justinchavez.com/blog/isometric-sf-how/).
+
+## Contact
+
+isoscape is by Chris Busse: [fullbacklog.com](https://fullbacklog.com) (Substack),
+[LinkedIn](https://linkedin.com/in/chrisbusse), and @busse on
+[Threads](https://www.threads.net/@busse) and [Instagram](https://www.instagram.com/busse).

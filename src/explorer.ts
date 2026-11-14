@@ -17,6 +17,19 @@
  *
  * Routes (the URL hash): `#<id>` one build, `#<idA>..<idB>` compare, either with `/made` for
  * the "How this view was made" tab; `#/<slug>` a page, `#/<slug>/<section>` a section of it.
+ *
+ * A build route can also carry the window view, so a link reopens the same part of the picture:
+ *
+ *   #<idA>[..<idB>][@<cx>,<cy>,<z>][~<split>][/made]
+ *
+ * `cx,cy` is the centre of the visible area in the image's own SVG viewBox units (1 decimal),
+ * and `z` the zoom relative to "fit" (3 significant digits; 1 is fit, 2 twice as close), so the
+ * same link frames the same part of the picture on any screen size. `~<split>` is the compare
+ * divider's position as a fraction of the stage width (only when comparing and not centred).
+ * The view is left out while it is the fitted view. Anything malformed falls back to fit. The
+ * hash follows panning and zooming (debounced, with replaceState, so Back is not flooded);
+ * choosing a build, comparing or changing tab still makes a history entry. The Link button
+ * (or L) copies the full URL.
  */
 
 import type { BuildMeta } from './archive.ts'
@@ -80,6 +93,7 @@ time { color: var(--dim); margin-left: auto; font-size: 11px; }
 #timeline .hint { pointer-events: none; font-size: 11px; color: var(--faint); margin-left: 6px; }
 .story ul.sources { font-size: 12px; color: var(--dim); }
 #nav footer { padding: 10px 14px; border-top: 1px solid var(--line); color: var(--faint); font-size: 11px; line-height: 1.7; }
+#nav footer a { color: var(--dim); }
 
 /* ---- main ---------------------------------------------------------------- */
 main { display: grid; grid-template-rows: 1fr auto; min-height: 0; min-width: 0; }
@@ -207,7 +221,7 @@ body.reading main { grid-template-rows: 1fr; }
   <div id="pages"></div>
   <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false">
   <div id="list"></div>
-  <footer>Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back<br><kbd>[</kbd><kbd>]</kbd> step through a dated series</footer>
+  <footer>Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare · <kbd>L</kbd> copy link<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back<br><kbd>[</kbd><kbd>]</kbd> step through a dated series<br>By Chris Busse · <a href="#/about/contact">Contact</a></footer>
 </nav>
 <main>
   <div id="stage">
@@ -222,6 +236,7 @@ body.reading main { grid-template-rows: 1fr; }
       <button id="fit" title="Fit (F)">Fit</button>
       <button id="actual" title="Actual size (1)">1:1</button>
       <button id="compare" title="Compare (C)">Compare</button>
+      <button id="link" title="Copy a link to this view (L)">Link</button>
       <select id="pickB" title="Compare with" hidden></select>
     </div>
   </div>
@@ -241,7 +256,7 @@ body.reading main { grid-template-rows: 1fr; }
   const byId = new Map(builds.map((b) => [b.id, b]))
   const $ = (id) => document.getElementById(id)
   const stage = $('stage'), imgA = $('imgA'), imgB = $('imgB'), clipB = $('clipB'), divider = $('divider')
-  const state = { a: null, b: null, compare: false, zoom: 1, panX: 0, panY: 0, split: 0.5, filter: '', tab: 'details', page: null }
+  const state = { a: null, b: null, compare: false, zoom: 1, panX: 0, panY: 0, split: 0.5, filter: '', tab: 'details', page: null, refit: false, pendingView: null }
   const pages = JSON.parse(document.getElementById('pagesData').textContent)
   const pageBySlug = new Map(pages.map((p) => [p.slug, p]))
 
@@ -328,6 +343,25 @@ body.reading main { grid-template-rows: 1fr; }
       divider.style.left = x + 'px'
     }
     $('zoom').textContent = Math.round(state.zoom * 100) + '%'
+    scheduleHash()
+  }
+  // The zoom at which the whole image fits the stage; the URL's zoom is relative to it.
+  const fitZoom = (vb) => Math.min(stage.clientWidth / vb[2], stage.clientHeight / vb[3]) * 0.94
+  // The current view, resolution-independent: the visible centre in viewBox units, zoom / fit.
+  const viewOf = () => {
+    const a = byId.get(state.a)
+    const w = stage.clientWidth, h = stage.clientHeight
+    if (!a || w === 0 || h === 0) return null
+    return { cx: (w / 2 - state.panX) / state.zoom, cy: (h / 2 - state.panY) / state.zoom, z: state.zoom / fitZoom(a.viewBox) }
+  }
+  const applyView = (v) => {
+    const a = byId.get(state.a)
+    const w = stage.clientWidth, h = stage.clientHeight
+    if (!a || w === 0 || h === 0) return
+    state.zoom = Math.min(40, Math.max(0.02, fitZoom(a.viewBox) * v.z))
+    state.panX = w / 2 - v.cx * state.zoom
+    state.panY = h / 2 - v.cy * state.zoom
+    layout()
   }
   const fit = () => {
     const a = byId.get(state.a)
@@ -336,7 +370,7 @@ body.reading main { grid-template-rows: 1fr; }
     const w = stage.clientWidth, h = stage.clientHeight
     // Hidden behind a page: fit when the viewer is next shown.
     if (w === 0 || h === 0) { state.refit = true; return }
-    state.zoom = Math.min(w / vb[2], h / vb[3]) * 0.94
+    state.zoom = fitZoom(vb)
     state.panX = (w - vb[2] * state.zoom) / 2 - vb[0] * state.zoom
     state.panY = (h - vb[3] * state.zoom) / 2 - vb[1] * state.zoom
     layout()
@@ -677,6 +711,38 @@ body.reading main { grid-template-rows: 1fr; }
   $('fit').addEventListener('click', fit)
   $('actual').addEventListener('click', actual)
 
+  // ---- links ----------------------------------------------------------------------------------
+  // Copy the full URL of what is on screen, view included.
+  const copied = (text) => {
+    const btn = $('link')
+    btn.textContent = text
+    btn.classList.add('on')
+    clearTimeout(copied.t)
+    copied.t = setTimeout(() => { btn.textContent = 'Link'; btn.classList.remove('on') }, 1400)
+  }
+  const copyFallback = (url) => {
+    const ta = document.createElement('textarea')
+    ta.value = url
+    ta.setAttribute('readonly', '')
+    ta.style.position = 'fixed'
+    ta.style.opacity = '0'
+    document.body.appendChild(ta)
+    ta.select()
+    let ok = false
+    try { ok = document.execCommand('copy') } catch (err) { ok = false }
+    ta.remove()
+    if (ok) copied('Copied')
+    else window.prompt('Copy this link:', url)
+  }
+  const copyLink = () => {
+    writeHash()
+    const url = location.href
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => copied('Copied'), () => copyFallback(url))
+    } else copyFallback(url)
+  }
+  $('link').addEventListener('click', copyLink)
+
   // ---- selection, history, keys ------------------------------------------------------------------
   const select = (id, refit) => {
     const prev = byId.get(state.a)
@@ -687,7 +753,34 @@ body.reading main { grid-template-rows: 1fr; }
     // through; refit when the frame changes.
     if (refit || !prev || prev.region !== next.region || prev.viewBox.join() !== next.viewBox.join()) state.refit = true
   }
-  const viewerHash = () => '#' + state.a + (state.compare && state.b ? '..' + state.b : '') + (state.tab === 'made' ? '/made' : '')
+  // The view part of the hash: '@cx,cy,z', or '' while the view is the fitted one.
+  const viewPart = () => {
+    const a = byId.get(state.a)
+    // A view asked for but not yet shown (the viewer is hidden): keep it in the URL.
+    const v = state.pendingView || (state.refit ? null : viewOf())
+    if (!a || !v) return ''
+    const vb = a.viewBox
+    const z = Number(v.z.toPrecision(3))
+    const cx = Math.round(v.cx * 10) / 10, cy = Math.round(v.cy * 10) / 10
+    const tol = Math.max(vb[2], vb[3]) * 0.001
+    if (Math.abs(z - 1) < 0.005 && Math.abs(cx - (vb[0] + vb[2] / 2)) < tol && Math.abs(cy - (vb[1] + vb[3] / 2)) < tol) return ''
+    return '@' + cx + ',' + cy + ',' + z
+  }
+  const splitPart = () => (state.compare && state.b && Math.abs(state.split - 0.5) > 0.0005 ? '~' + Math.round(state.split * 1000) / 1000 : '')
+  const viewerHash = () => '#' + state.a + (state.compare && state.b ? '..' + state.b : '') + viewPart() + splitPart() + (state.tab === 'made' ? '/made' : '')
+  // Follow panning and zooming in the URL, without making history entries.
+  let hashTimer = 0
+  const writeHash = () => {
+    clearTimeout(hashTimer)
+    if (state.page !== null || !byId.has(state.a)) return
+    const hash = viewerHash()
+    if (location.hash !== hash) history.replaceState(null, '', hash)
+    routed = location.hash
+  }
+  const scheduleHash = () => {
+    clearTimeout(hashTimer)
+    hashTimer = setTimeout(writeHash, 300)
+  }
   // Redraw the viewer. With push, make a history entry (coming back from a page); else replace the hash.
   // A dated series: the newest build of each year, in time order.
   const seriesOf = (b) => {
@@ -732,7 +825,13 @@ body.reading main { grid-template-rows: 1fr; }
     renderList()
     renderPick()
     renderInfo()
-    if (state.refit) { state.refit = false; fit() } else layout()
+    // A view from the URL is applied once the stage's size is known, on top of the fit.
+    if (state.refit || state.pendingView) {
+      state.refit = false
+      fit()
+      if (!state.refit && state.pendingView) { const v = state.pendingView; state.pendingView = null; applyView(v) }
+    } else layout()
+    clearTimeout(hashTimer)
     const hash = viewerHash()
     if (location.hash !== hash) history[push ? 'pushState' : 'replaceState'](null, '', hash)
     routed = location.hash
@@ -798,9 +897,22 @@ body.reading main { grid-template-rows: 1fr; }
       const parts = h.slice(1).split('/')
       return { page: parts[0] || (pages[0] ? pages[0].slug : ''), section: parts.slice(1).join('/') }
     }
-    const [sel, tab] = h.split('/')
-    const [a, b] = (sel || '').split('..')
-    return { a, b, tab }
+    const [whole, tab] = h.split('/')
+    let sel = whole || '', view = null, split = null
+    const t = sel.indexOf('~')
+    if (t >= 0) {
+      const s = Number(sel.slice(t + 1))
+      if (sel.slice(t + 1) !== '' && Number.isFinite(s) && s >= 0 && s <= 1) split = s
+      sel = sel.slice(0, t)
+    }
+    const at = sel.indexOf('@')
+    if (at >= 0) {
+      const n = sel.slice(at + 1).split(',').map((x) => (x.trim() === '' ? NaN : Number(x)))
+      if (n.length === 3 && n.every(Number.isFinite) && n[2] > 0) view = { cx: n[0], cy: n[1], z: n[2] }
+      sel = sel.slice(0, at)
+    }
+    const [a, b] = sel.split('..')
+    return { a, b, tab, view, split }
   }
   const route = () => {
     routed = location.hash
@@ -812,6 +924,11 @@ body.reading main { grid-template-rows: 1fr; }
       if (r.a !== state.a) select(r.a, false)
       if (r.b && byId.has(r.b)) { state.b = r.b; state.compare = true } else state.compare = false
       state.tab = r.tab === 'made' ? 'made' : 'details'
+      if (state.compare) state.split = r.split !== null ? r.split : 0.5
+      // A link with a view lands on it; one without opens fitted, unless it only names what
+      // is already shown (the view is then simply not in it yet).
+      if (r.view) state.pendingView = r.view
+      else if (location.hash !== viewerHash()) state.refit = true
     }
     update()
   }
@@ -845,6 +962,7 @@ body.reading main { grid-template-rows: 1fr; }
     else if (e.key === 'f' || e.key === 'F') fit()
     else if (e.key === '1') actual()
     else if (e.key === 'c' || e.key === 'C') toggleCompare()
+    else if (e.key === 'l' || e.key === 'L') copyLink()
     else if (e.key === 'i' || e.key === 'I') toggleInfo()
     else if (e.key === 'm' || e.key === 'M') setTab(state.tab === 'made' ? 'details' : 'made')
     else if (e.key === '/') { $('filter').focus(); e.preventDefault() }
@@ -860,6 +978,8 @@ body.reading main { grid-template-rows: 1fr; }
     select(start.a && byId.has(start.a) ? start.a : builds[0].id, true)
     if (start.b && byId.has(start.b)) { state.b = start.b; state.compare = true }
     if (start.tab === 'made') state.tab = 'made'
+    if (start.split !== null && start.split !== undefined) state.split = start.split
+    if (start.view && byId.has(start.a)) state.pendingView = start.view
     if (start.page === undefined) update()
   }
   if (start.page !== undefined) route()

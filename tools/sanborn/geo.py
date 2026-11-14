@@ -63,14 +63,55 @@ def sim(params):
     return np.array([[s * c, -s * si], [s * si, s * c]]), np.array([tu, tv])
 
 
+def affine(params):
+    """Six numbers (a, b, c, d, tu, tv): u = a*x' + b*y' + tu, v = c*x' + d*y' + tv, with y' = -y."""
+    a, b, c, d, tu, tv = params
+    return np.array([[a, b], [c, d]]), np.array([tu, tv])
+
+
+def mat(params):
+    return affine(params) if len(params) == 6 else sim(params)
+
+
+def _warp(params):
+    """A rubber sheet: an affine plus thin-plate corrections that make each control point exact."""
+    from scipy.interpolate import RBFInterpolator
+    key = id(params)
+    if key not in _WARPS:
+        A = params['affine']; xy = np.asarray(params['xy'], float); uv = np.asarray(params['uv'], float)
+        du = uv - _w2i_lin(A, xy)
+        dx = xy - _i2w_lin(A, uv)
+        _WARPS[key] = (RBFInterpolator(xy, du, kernel='thin_plate_spline', smoothing=1.0),
+                       RBFInterpolator(uv, dx, kernel='thin_plate_spline', smoothing=1.0))
+    return _WARPS[key]
+
+
+_WARPS = {}
+
+
 def w2i(params, xy):
-    M, t = sim(params)
+    if isinstance(params, dict):
+        f, _ = _warp(params)
+        return _w2i_lin(params['affine'], xy) + f(np.asarray(xy, float))
+    return _w2i_lin(params, xy)
+
+
+def i2w(params, uv):
+    if isinstance(params, dict):
+        _, g = _warp(params)
+        uv = np.asarray(uv, float)
+        return _i2w_lin(params['affine'], uv) + g(uv)
+    return _i2w_lin(params, uv)
+
+
+def _w2i_lin(params, xy):
+    M, t = mat(params)
     q = np.stack([xy[:, 0], -xy[:, 1]], 1)
     return q @ M.T + t
 
 
-def i2w(params, uv):
-    M, t = sim(params)
+def _i2w_lin(params, uv):
+    M, t = mat(params)
     q = (np.asarray(uv, float) - t) @ np.linalg.inv(M).T
     return np.stack([q[:, 0], -q[:, 1]], 1)
 
@@ -90,3 +131,19 @@ def fit_sim(xy, uv):
     th = math.atan2(R[1, 0], R[0, 0])
     t = mb - s * (R @ ma)
     return (t[0], t[1], th, s)
+
+
+def fit_affine(xy, uv):
+    """Least-squares affine from world points to image points: for small-scale key maps, whose
+    drawing stretches a little differently along and across the grid."""
+    a = np.stack([xy[:, 0], -xy[:, 1], np.ones(len(xy))], 1)
+    cu, *_ = np.linalg.lstsq(a, uv[:, 0], rcond=None)
+    cv, *_ = np.linalg.lstsq(a, uv[:, 1], rcond=None)
+    return (cu[0], cu[1], cv[0], cv[1], cu[2], cv[2])
+
+
+def px_per_m(params):
+    if isinstance(params, dict):
+        params = params['affine']
+    M, _ = mat(params)
+    return float(np.sqrt(abs(np.linalg.det(M))))
