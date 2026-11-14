@@ -1,23 +1,23 @@
 {
- "title": "Matterhorn — Zermatt, Switzerland",
+ "title": "Matterhorn and Zermatt — Switzerland",
  "center": [
-  7.6641,
-  45.9801
+  7.706,
+  45.999
  ],
- "width": 4000,
- "depth": 4200,
+ "width": 3200,
+ "depth": 9000,
  "bearing": 225,
  "snap": false,
- "scale": 1.5,
+ "scale": 1.875,
  "squash": 0.5,
  "exaggeration": 1.0,
- "slab": 27,
+ "slab": 21,
  "palette": "paper",
  "bridgeDeck": 7,
  "bridges": [],
  "minBuildingArea": 12,
  "dots": "roof",
- "fetchTile": 6000,
+ "fetchTile": 3000,
  "terrain": {
   "source": "swisstopo",
   "fillFrom": "copernicus",

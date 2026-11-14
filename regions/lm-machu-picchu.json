@@ -1,14 +1,14 @@
 {
- "title": "Machu Picchu — Cusco, Peru",
+ "title": "Machu Picchu and Aguas Calientes — Peru",
  "center": [
-  -72.544,
-  -13.161
+  -72.5352,
+  -13.158
  ],
- "width": 2400,
- "depth": 2400,
- "bearing": 160,
+ "width": 2600,
+ "depth": 3600,
+ "bearing": 240,
  "snap": false,
- "scale": 2.5,
+ "scale": 2.3,
  "squash": 0.5,
  "exaggeration": 1.0,
  "slab": 16,
@@ -17,7 +17,7 @@
  "bridges": [],
  "minBuildingArea": 12,
  "dots": "roof",
- "fetchTile": 4000,
+ "fetchTile": 2000,
  "terrain": {
   "source": "copernicus",
   "exaggeration": 1.0,
