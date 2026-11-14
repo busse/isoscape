@@ -483,7 +483,7 @@ export const isLatticeTower = (t: Readonly<Record<string, string>>): boolean =>
  */
 export const isShellRoof = (t: Readonly<Record<string, string>>): boolean =>
   t['building:part'] === 'roof' && ['round', 'spherical', 'circular'].includes(t['roof:shape'] ?? '') && t.height === undefined && t['min_height'] === undefined
-export const SHELL_RISE = 1.1
+export const SHELL_RISE = 1.6
 
 /**
  * Half-width of a lattice tower at fraction `t` of its height, as a fraction of the base: the
