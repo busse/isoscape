@@ -14,3 +14,19 @@ _004 1908, _005 1919, _006–_009 1924–25 vols 1–4, _011 1950 vol 2, _016 19
 
 Corner readings are made from `mosaic.py` contact sheets (grid labels are scan pixels), and
 their world positions come from OSM intersections (see `cps*.json`).
+
+## Other sources looked at
+
+- **Beers, Illustrated Atlas of the City of Richmond (1876–77)**, Library of Congress
+  item 2005630891 (public domain; also VCU Libraries). Sections J–M cover the frame. Buildings
+  are drawn as grey hatching under owners' names, so colour tracing does not work: a
+  hatching-density test catches the lettering as well and misses lightly hatched buildings.
+  Needs an orientation-aware texture classifier or hand tracing. Not traced.
+- **Baist atlas (1889)**, VCU Libraries: same era as the 1886 Sanborn; not used.
+- **Library of Virginia**: Young 1809, Bates 1835 plans show lots and few buildings; useful for
+  curated landmarks, not for footprints. Not fetched.
+- **Sanborn 1908** (sanborn09064_004, 44 sheets) and **1919** (_005, 65 sheets) cover the
+  city's outer wards, not downtown; not used.
+- **City of Richmond ArcGIS**: Structures layer has an empty demolition-permit field
+  downtown; Former_Commercial_Footprints and Sanborn_1924 sites are points (39 and 80 in the
+  frame), already covered by the traced 1924–25 edition.
