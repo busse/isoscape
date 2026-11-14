@@ -1,17 +1,17 @@
 {
  "title": "Himeji Castle — Hyōgo, Japan",
  "center": [
-  134.6939,
-  34.8394
+  134.6936,
+  34.839
  ],
- "width": 1500,
- "depth": 1950,
+ "width": 1000,
+ "depth": 1300,
  "bearing": 0,
  "snap": true,
- "scale": 4.0,
+ "scale": 6.0,
  "squash": 0.5,
  "exaggeration": 1.0,
- "slab": 12,
+ "slab": 8,
  "palette": "paper",
  "bridgeDeck": 7,
  "bridges": [],

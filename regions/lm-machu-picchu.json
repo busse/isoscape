@@ -1,12 +1,12 @@
 {
  "title": "Machu Picchu — Cusco, Peru",
  "center": [
-  -72.5447,
-  -13.16
+  -72.544,
+  -13.161
  ],
  "width": 2400,
- "depth": 3120,
- "bearing": -30,
+ "depth": 2400,
+ "bearing": 160,
  "snap": false,
  "scale": 2.5,
  "squash": 0.5,

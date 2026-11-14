@@ -1,11 +1,11 @@
 {
  "title": "Matterhorn — Zermatt, Switzerland",
  "center": [
-  7.6586,
-  45.9763
+  7.6641,
+  45.9801
  ],
  "width": 4000,
- "depth": 5200,
+ "depth": 4200,
  "bearing": 225,
  "snap": false,
  "scale": 1.5,
