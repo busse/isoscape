@@ -104,8 +104,8 @@ Previews need absolute URLs: before publishing, give the public address of `out/
 page. `"flagship": "<region>"` there picks the site's own preview image (default: the newest build).
 
 The same file can give the explorer a front page. `"home"` has a `title`, an `intro`, `heroes`
-(featured views, each a `region`, optional `year` in a dated series, `title`, `blurb` and
-`shop` link), `sections` (each a `title`, the region-name `prefixes` it holds, and optionally
+(featured views, each a `region`, optional `year` in a dated series, `title`, `blurb`, and
+`shop` link with optional `shopLabel`), `sections` (each a `title`, the region-name `prefixes` it holds, and optionally
 `homeTitle`, `blurb`, `order` (region names to show first), `collapsed`, `shop` and `shopLabel`), and `links` shown at the bottom.
 The page then opens on the front page (`#home`). The build list is grouped by the same
 sections, with featured regions first and folded sections closed. `"shop"` (`label`, `url`,

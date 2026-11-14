@@ -53,6 +53,8 @@ export interface HomeHero {
   readonly blurb?: string
   /** Where "Buy a print" goes for this view; else the shop's `links` by region prefix. */
   readonly shop?: string
+  /** The shop button's text for this view (default "Buy a print ↗"), e.g. when the link is a collection rather than this map. */
+  readonly shopLabel?: string
 }
 
 /** A group of regions, by name prefix, in the build list and on the front page. */

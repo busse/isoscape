@@ -422,6 +422,7 @@ body.reading main { grid-template-rows: 1fr; }
     const k = Object.keys(L).filter((p) => b.region.startsWith(p)).sort((x, y) => y.length - x.length)[0]
     return k ? L[k] : null
   }
+  const buyLabel = (b) => { const h = home && home.heroes[heroIndex(b.region)]; return (h && h.shopLabel) || 'Buy a print ↗' }
   const renderList = () => {
     const list = visible()
     $('count').textContent = builds.length + (builds.length === 1 ? ' build' : ' builds')
@@ -652,7 +653,7 @@ body.reading main { grid-template-rows: 1fr; }
     $('links').innerHTML = '<a href="' + esc(a.files.svg) + '" target="_blank">Open A’s SVG ↗</a>' +
       (b ? '<a href="' + esc(b.files.svg) + '" target="_blank">Open B’s SVG ↗</a>' : '') +
       (site.latestPages ? '<a href="' + esc(a.name) + '.html" target="_blank" title="The latest build of this region, with hover labels">Latest page ↗</a>' : '') +
-      (buy ? '<a class="buy" href="' + esc(buy) + '" target="_blank" rel="noopener">Buy a print ↗</a>' : '')
+      (buy ? '<a class="buy" href="' + esc(buy) + '" target="_blank" rel="noopener">' + esc(buyLabel(a)) + '</a>' : '')
     $('info').classList.toggle('made', state.tab === 'made')
     for (const t of $('tabs').children) t.classList.toggle('on', t.dataset.tab === state.tab)
     if (state.tab === 'made') {
@@ -1097,7 +1098,7 @@ body.reading main { grid-template-rows: 1fr; }
         '<div class="tx"><h2>' + esc(h.title) + '</h2>' + (h.blurb ? '<p>' + esc(h.blurb) + '</p>' : '') +
         (ser.length > 1 ? '<div class="years">' + ser.map((y) => '<a href="#' + esc(y.id) + '" title="' + esc(y.time.title || '') + '">' + esc(y.time.year) + '</a>').join('') + '</div>' : '') +
         '<div class="acts"><a class="btn ghost" href="#' + esc(b.id) + '">' + (ser.length > 1 ? 'Step through ' + ser.length + ' years' : 'Explore the map') + '</a>' +
-        (buy ? '<a class="btn" href="' + esc(buy) + '" target="_blank" rel="noopener">Buy a print ↗</a>' : '') + '</div></div></article>'
+        (buy ? '<a class="btn" href="' + esc(buy) + '" target="_blank" rel="noopener">' + esc(buyLabel(b)) + '</a>' : '') + '</div></div></article>'
     }).join('') + '</div>')
     const featured = new Set(home.heroes.map((h) => h.region))
     const regions = [...new Set(builds.map((b) => b.region))].filter((r) => !featured.has(r))
