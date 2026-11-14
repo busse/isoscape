@@ -1,0 +1,93 @@
+{
+  "name": "gwynns-island",
+  "region": "gwynns-island",
+  "title": "Gwynn's Island, Mathews County, VA \u2014 the Piankatank to Milford Haven",
+  "palette": "paper",
+  "note": "Tidewater: coastline water, Microsoft footprints, NLCD land cover",
+  "viewBox": [
+    -9786.9,
+    -4915.694054804687,
+    19573.8,
+    9730.693281588265
+  ],
+  "bearing": 0,
+  "ms": 7430,
+  "stats": {
+    "features": 2972,
+    "coastWays": 29,
+    "ground": 196,
+    "elevationDatum": -0.1,
+    "elevationTop": 26.8,
+    "ribbons": 2129,
+    "footprintsAdded": 5937,
+    "buildings": 6244,
+    "heightFromTag": 0,
+    "heightFromModel": 2692,
+    "heightFromLevels": 4,
+    "heightGuessed": 3548,
+    "bridgePieces": 51,
+    "contourSegments": 221656,
+    "rapidCells": 0,
+    "strips": 683
+  },
+  "config": {
+    "bearing": 0,
+    "snap": false,
+    "title": "Gwynn's Island, Mathews County, VA \u2014 the Piankatank to Milford Haven",
+    "center": [
+      -76.34203,
+      37.49788
+    ],
+    "width": 13947,
+    "depth": 13647,
+    "scale": 1.4,
+    "squash": 0.5,
+    "exaggeration": 1,
+    "slab": 12,
+    "palette": "paper",
+    "bridgeDeck": 6,
+    "bridges": [
+      {
+        "match": "Twiggs Ferry",
+        "deck": 16
+      },
+      {
+        "match": "Cricket Hill",
+        "deck": 5
+      }
+    ],
+    "minBuildingArea": 10,
+    "dots": "all",
+    "fetchTile": 4000,
+    "terrain": {
+      "exaggeration": 4,
+      "cell": 10,
+      "contour": 1,
+      "majorEvery": 5,
+      "rapids": 0,
+      "demResolution": 5,
+      "rocks": false
+    },
+    "sources": {
+      "buildings": [
+        "osm",
+        "microsoft"
+      ],
+      "landcover": "nlcd"
+    },
+    "name": "gwynns-island"
+  },
+  "sky": "#f4f1ea",
+  "id": "20261114-003001-gwynns-island",
+  "createdAt": "2026-11-14T00:30:01.143Z",
+  "bytes": 36539486,
+  "git": {
+    "commit": "d09fdf9",
+    "dirty": false,
+    "subject": "Gwynn's Island: tidewater, with footprints and land cover beyond OSM"
+  },
+  "files": {
+    "svg": "builds/20261114-003001-gwynns-island/image.svg",
+    "thumb": "builds/20261114-003001-gwynns-island/thumb.png"
+  }
+}
