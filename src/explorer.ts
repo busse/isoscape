@@ -1009,6 +1009,7 @@ body.reading main { grid-template-rows: 1fr; }
   }
   $('page').addEventListener('scroll', markToc, { passive: true })
   // ---- front page -------------------------------------------------------------------------------
+  const orderIndex = (sec, region) => { const i = (sec.order || []).indexOf(region); return i < 0 ? 1e6 : i }
   const renderHome = () => {
     const out = []
     if (site.shop) out.push('<div class="banner"><b>' + esc(site.shop.cta || 'Prints of these maps') + '</b><span>' + esc(site.shop.label) + '</span>' +
@@ -1030,7 +1031,8 @@ body.reading main { grid-template-rows: 1fr; }
     const featured = new Set(home.heroes.map((h) => h.region))
     const regions = [...new Set(builds.map((b) => b.region))].filter((r) => !featured.has(r))
     home.sections.forEach((sec, i) => {
-      const cards = regions.filter((r) => sectionOf(r) === i).map((r) => latestOf(r)).sort((x, y) => titleOf(x).localeCompare(titleOf(y)))
+      const cards = regions.filter((r) => sectionOf(r) === i).map((r) => latestOf(r))
+        .sort((x, y) => orderIndex(sec, x.region) - orderIndex(sec, y.region) || titleOf(x).localeCompare(titleOf(y)))
       if (cards.length === 0) return
       out.push('<section class="sec"><header><h2>' + esc(sec.homeTitle || sec.title) + '</h2>' + (sec.blurb ? '<p>' + esc(sec.blurb) + '</p>' : '') +
         (sec.shop ? '<a class="btn" href="' + esc(sec.shop) + '" target="_blank" rel="noopener">' + esc(sec.shopLabel || 'Buy prints ↗') + '</a>' : '') + '</header>' +

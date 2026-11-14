@@ -62,6 +62,8 @@ export interface HomeSection {
   /** Heading on the front page, if it differs from `title`. */
   readonly homeTitle?: string
   readonly blurb?: string
+  /** Region names to show first on the front page, in this order; the rest follow by title. */
+  readonly order?: readonly string[]
   /** Start folded in the build list. */
   readonly collapsed?: boolean
   readonly shop?: string
