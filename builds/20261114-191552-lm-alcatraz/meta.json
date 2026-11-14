@@ -1,0 +1,68 @@
+{
+ "name": "lm-alcatraz",
+ "region": "lm-alcatraz",
+ "title": "Alcatraz Island \u2014 San Francisco Bay",
+ "palette": "paper",
+ "note": "landmark: reframed with the shore, flat",
+ "viewBox": [
+  -3024,
+  -2024,
+  6048,
+  4082.6410161513777
+ ],
+ "bearing": 0,
+ "ms": 843,
+ "stats": {
+  "features": 6360,
+  "coastWays": 5,
+  "ground": 210,
+  "ribbons": 2432,
+  "footprintsAdded": 0,
+  "buildings": 2231,
+  "heightFromTag": 1757,
+  "heightFromModel": 0,
+  "heightFromLevels": 36,
+  "heightGuessed": 438,
+  "bridgePieces": 61,
+  "contourSegments": 0,
+  "rapidCells": 0,
+  "strips": 320
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Alcatraz Island \u2014 San Francisco Bay",
+  "center": [
+   -122.4215,
+   37.8155
+  ],
+  "width": 2400,
+  "depth": 3200,
+  "scale": 2.5,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 16,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "name": "lm-alcatraz"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-191552-lm-alcatraz",
+ "createdAt": "2026-11-14T19:15:52.073Z",
+ "bytes": 3202719,
+ "git": {
+  "commit": "69023cd",
+  "dirty": true,
+  "subject": "Front page: the James view links to Richmond prints (it is not itself in the shop)"
+ },
+ "files": {
+  "svg": "builds/20261114-191552-lm-alcatraz/image.svg",
+  "thumb": "builds/20261114-191552-lm-alcatraz/thumb.png",
+  "social": "builds/20261114-191552-lm-alcatraz/social.png",
+  "preview": "builds/20261114-191552-lm-alcatraz/preview.jpg"
+ }
+}
