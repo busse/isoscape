@@ -37,6 +37,8 @@ if __name__ == '__main__':
     cps = json.load(open(sys.argv[1])); s = 1 / float(sys.argv[2]); out = sys.argv[3]
     res = {}
     for sh, rows in cps.items():
+        if len(rows) < 2:
+            continue
         (_, worst), p, r, sub = best_fit(rows, s)
         res[sh] = dict(params=p, used=[rows[i][4] for i in sub], resid_m=[round(float(v), 1) for v in r], ok=bool(-worst <= 6 and len(sub) >= 2))
         print(sh, res[sh]['resid_m'], 'used', len(sub), 'ok' if res[sh]['ok'] else 'CHECK')

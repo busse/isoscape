@@ -368,7 +368,7 @@ printed on the sheets are not read yet; later editions add olive-brown for fire-
 construction, drawn six storeys. The explorer counts, for each scene, how many traced
 buildings stand and how each one's end date was found.
 
-Three editions are traced: **1886**; **1924–25**, whose first volume opens with a single
+Five editions are traced: **1886**; **1895** and **1905** (sheets read by eye); **1924–25**, whose first volume opens with a single
 "congested district" map of the whole business district (fitted with a rubber sheet
 through sixteen street corners, each snapped to the city's block outlines); and
 **1950–52**, a corrected reprint whose sheets were matched feature by feature to their

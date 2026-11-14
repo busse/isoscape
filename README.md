@@ -310,7 +310,7 @@ year before. The method and its limits are in the *How it's made* page, under "T
 footprints of buildings since lost. It downloads the sheets from the Library of Congress,
 fits each sheet to the ground from two or three street corners read off it, traces the
 coloured fills, and follows each building until a later map, a newer building or a highway
-shows it gone. The steps are in *How it's made*, under "Time". The 1886, 1924–25 and
+shows it gone. The steps are in *How it's made*, under "Time". The 1886, 1895, 1905, 1924–25 and
 1950–52 editions are traced into `history/sanborn/`.
 
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM

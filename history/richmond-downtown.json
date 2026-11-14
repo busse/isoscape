@@ -55,9 +55,19 @@
    "note": "The earliest fire-insurance map of the city. Its buildings now gone are traced here in the map's own colours."
   },
   {
+   "year": 1895,
+   "title": "The 1895 Sanborn map",
+   "note": "Tobacco factories and warehouses crowd Shockoe Bottom; the canal basin is still open."
+  },
+  {
    "year": 1900,
    "title": "Rail and tobacco",
    "note": "Railroads have taken over the canal; tobacco factories and warehouses fill Shockoe Bottom and Tobacco Row. Main Street Station and the river viaduct are about to open."
+  },
+  {
+   "year": 1905,
+   "title": "The 1905 Sanborn map",
+   "note": "The second fire-insurance map traced here: the business district at its densest before the office towers."
   },
   {
    "year": 1910,
@@ -68,6 +78,11 @@
    "year": 1920,
    "title": "Two cities joined",
    "note": "The new Mayo Bridge (1913) joins Richmond and Manchester, annexed in 1910."
+  },
+  {
+   "year": 1925,
+   "title": "The 1924–25 Sanborn map",
+   "note": "Downtown at the height of the tobacco and rail city, as the fire-insurance maps drew it."
   },
   {
    "year": 1930,
@@ -694,6 +709,8 @@
   "lost": "history/sanborn/lost.geojson",
   "editions": [
    1886,
+   1895,
+   1905,
    1924,
    1950
   ],
