@@ -29,21 +29,25 @@
  * The view is left out while it is the fitted view. Anything malformed falls back to fit. The
  * hash follows panning and zooming (debounced, with replaceState, so Back is not flooded);
  * choosing a build, comparing or changing tab still makes a history entry. The Link button
- * (or L) copies the full URL.
+ * (or L) copies the URL of the build's (or page's) share page, `s/<id>.html` or
+ * `s/page-<slug>.html`, with the current fragment: link previews then show that build, and
+ * the share page passes the fragment on, so the link still opens this exact view (see
+ * social.ts). Under the site URL when one is set, else beside this file.
  */
 
 import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
+import { siteTags, type SiteCard } from './social.ts'
 
 const json = (v: unknown) => JSON.stringify(v).replace(/</g, '\\u003c')
 
-export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Page[] = []): string => `<!doctype html>
+export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Page[] = [], site: SiteCard = {}): string => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>isoscape explorer</title>
-<style>
+${siteTags(site, builds.length)}<style>
 :root {
   --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
   --accent: #2f6f8f; --accent-soft: #dcebf2; --stage: #e7e4dc; --chip: #efece5; --good: #3c7a4a; --bad: #a3473a; --warn: #b8860b;
@@ -236,7 +240,7 @@ body.reading main { grid-template-rows: 1fr; }
       <button id="fit" title="Fit (F)">Fit</button>
       <button id="actual" title="Actual size (1)">1:1</button>
       <button id="compare" title="Compare (C)">Compare</button>
-      <button id="link" title="Copy a link to this view (L)">Link</button>
+      <button id="link" title="Copy a link to this view, with a link preview (L)">Link</button>
       <select id="pickB" title="Compare with" hidden></select>
     </div>
   </div>
@@ -248,6 +252,7 @@ body.reading main { grid-template-rows: 1fr; }
   </section>
   <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
 </main>
+<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2) })))}</script>
 <script>
@@ -259,6 +264,7 @@ body.reading main { grid-template-rows: 1fr; }
   const state = { a: null, b: null, compare: false, zoom: 1, panX: 0, panY: 0, split: 0.5, filter: '', tab: 'details', page: null, refit: false, pendingView: null }
   const pages = JSON.parse(document.getElementById('pagesData').textContent)
   const pageBySlug = new Map(pages.map((p) => [p.slug, p]))
+  const site = JSON.parse(document.getElementById('site').textContent)
 
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
   const ago = (iso) => {
@@ -734,9 +740,17 @@ body.reading main { grid-template-rows: 1fr; }
     if (ok) copied('Copied')
     else window.prompt('Copy this link:', url)
   }
+  // The share page (s/<id>.html, s/page-<slug>.html) carries the link preview and passes the
+  // fragment on to this page, so the link both previews well and opens this exact view.
+  const shareUrl = () => {
+    const file = state.page !== null ? 'page-' + state.page : state.a
+    if (!file) return location.href
+    const root = site.siteUrl || location.href.replace(/[#?].*$/, '').replace(/[^/]*$/, '')
+    return root + 's/' + encodeURIComponent(file) + '.html' + location.hash
+  }
   const copyLink = () => {
     writeHash()
-    const url = location.href
+    const url = shareUrl()
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(url).then(() => copied('Copied'), () => copyFallback(url))
     } else copyFallback(url)
@@ -951,6 +965,7 @@ body.reading main { grid-template-rows: 1fr; }
       // Reading: the arrows scroll the page. Esc goes back to the viewer.
       if (e.key === 'Escape' && byId.has(state.a)) { history.pushState(null, '', viewerHash()); route() }
       else if (e.key === '/') { $('filter').focus(); e.preventDefault() }
+      else if (e.key === 'l' || e.key === 'L') copyLink()
       return
     }
     const list = visible()

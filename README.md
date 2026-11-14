@@ -68,6 +68,19 @@ page for the viewer. The URL hash holds the selection: `#<id>`, `#<idA>..<idB>` 
 `/made` on either for the tab, `#/<page>` or `#/<page>/<section>` for a page. A reload (after
 the next build) keeps your place, and Back and Forward move between pages and the viewer.
 
+### Link previews
+
+Chat apps and social sites ignore the `#…` part of a link and run no script, so each build
+also gets a share page, `out/s/<id>.html` (and each page `out/s/page-<slug>.html`), with its
+own title, description and a 1200×630 preview image, `out/builds/<id>/social.png` (the picture
+cropped to fit; `rsvg-convert` or Chrome renders it, else the thumbnail stands in). A share
+page forwards to the explorer and keeps the fragment, so the **Link** button (`L`) copies
+`s/<id>.html#<the exact view>`. `isoscape explorer` makes any missing images and pages.
+Previews need absolute URLs: before publishing, give the public address of `out/` in
+`isoscape.config.json` (`{ "siteUrl": "https://example.org/isoscape/" }`), in
+`ISOSCAPE_SITE_URL`, or as `--site-url` on `build`, `series` or `explorer`, and rebuild the
+page. `"flagship": "<region>"` there picks the site's own preview image (default: the newest build).
+
 ### Adding a page
 
 Pages are Markdown files in `pages/`, compiled into `out/index.html` whenever it is

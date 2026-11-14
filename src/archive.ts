@@ -1,9 +1,9 @@
 /**
  * Every build is kept, so the explorer can show how a view has changed.
  *
- * A build is archived under out/builds/<id>/ as its SVG, a small PNG thumbnail when a
- * rasteriser is available, and meta.json: what was built, from which commit, with which
- * settings, what it measured, and an optional note saying what was being tried.
+ * A build is archived under out/builds/<id>/ as its SVG, a small PNG thumbnail and a 1200×630
+ * link-preview image (social.png) when a rasteriser is available, and meta.json: what was
+ * built, from which commit, with which settings, what it measured, and an optional note saying what was being tried.
  */
 
 import { execFile } from 'node:child_process'
@@ -12,6 +12,7 @@ import { pathToFileURL } from 'node:url'
 import { join, resolve } from 'node:path'
 import { promisify } from 'node:util'
 import type { Region } from './region.ts'
+import { CHROMES, renderSocial } from './social.ts'
 
 const run = promisify(execFile)
 
@@ -30,7 +31,7 @@ export interface BuildMeta {
   readonly bytes: number
   readonly stats: Readonly<Record<string, number>>
   readonly config: Region
-  readonly files: { readonly svg: string; readonly thumb?: string }
+  readonly files: { readonly svg: string; readonly thumb?: string; readonly social?: string }
   /** The page colour, for a swatch where there is no thumbnail. */
   readonly sky: string
   /** A dated build: its year, its place in the series, and the curated features drawn in it. */
@@ -54,15 +55,6 @@ const gitInfo = async (): Promise<BuildMeta['git']> => {
     return undefined
   }
 }
-
-const CHROMES = [
-  process.env.CHROME,
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-  '/Applications/Chromium.app/Contents/MacOS/Chromium',
-  'google-chrome',
-  'chromium',
-  'chromium-browser',
-].filter((c): c is string => typeof c === 'string' && c.length > 0)
 
 /**
  * Rasterise a thumbnail with whatever is installed: rsvg-convert, else headless Chrome (which
@@ -111,6 +103,8 @@ export const archiveBuild = async (
   await mkdir(dir, { recursive: true })
   await writeFile(join(dir, 'image.svg'), svg)
   const hasThumb = await thumbnail(join(dir, 'image.svg'), join(dir, 'thumb.png'), meta.viewBox)
+  // The 1200×630 link-preview image (see social.ts).
+  const hasSocial = await renderSocial(join(dir, 'image.svg'), join(dir, 'social.png'), meta.viewBox)
   const git = override ? override.git : await gitInfo()
   const full: BuildMeta = {
     ...meta,
@@ -118,7 +112,7 @@ export const archiveBuild = async (
     createdAt: now.toISOString(),
     bytes: svg.length,
     ...(git === undefined ? {} : { git }),
-    files: { svg: `builds/${id}/image.svg`, ...(hasThumb ? { thumb: `builds/${id}/thumb.png` } : {}) },
+    files: { svg: `builds/${id}/image.svg`, ...(hasThumb ? { thumb: `builds/${id}/thumb.png` } : {}), ...(hasSocial ? { social: `builds/${id}/social.png` } : {}) },
   }
   await writeFile(join(dir, 'meta.json'), JSON.stringify(full, null, 2))
   return full

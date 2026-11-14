@@ -14,6 +14,7 @@ import { palette } from './palette.ts'
 import { fetchBounds, loadRegion, type Region } from './region.ts'
 import { renderPage, renderSvg } from './render.ts'
 import { buildScene, type TimeContext } from './scene.ts'
+import { loadSiteConfig, writeSocial } from './social.ts'
 import { dateBuildings, fetchYearBuilt, loadHistory, parseParcels, type History } from './history.ts'
 import type { PolygonFeature } from './osm.ts'
 
@@ -43,6 +44,8 @@ const HELP = `isoscape — isometric dot-and-line views of real places
   --year <yyyy>      build a dated region as it stood in that year
   --no-archive       do not keep this build in out/builds/
   --out <dir>        output directory (default: out)
+  --site-url <url>   the public address of out/, for absolute link-preview URLs
+                     (else ISOSCAPE_SITE_URL, else "siteUrl" in isoscape.config.json)
 `
 
 const dataDir = (r: Region) => resolve('data', r.data ?? r.name)
@@ -129,6 +132,7 @@ export const main = async (argv: string[]): Promise<void> => {
       budget: { type: 'string' },
       'no-archive': { type: 'boolean' },
       year: { type: 'string' },
+      'site-url': { type: 'string' },
     },
   })
   const [command, name] = positionals
@@ -146,7 +150,7 @@ export const main = async (argv: string[]): Promise<void> => {
   }
   if (command === 'explorer') {
     const outDir = resolve(values.out ?? 'out')
-    const n = await writeExplorer(outDir)
+    const n = await writeExplorer(outDir, values['site-url'], true)
     console.error(`wrote ${resolve(outDir, 'index.html')} (${n} builds)`)
     return
   }
@@ -155,7 +159,7 @@ export const main = async (argv: string[]): Promise<void> => {
     if (commit === undefined || region === undefined) throw new Error('usage: isoscape backfill <commit> <region> [--palette p] [--note text]')
     const outDir = resolve(values.out ?? 'out')
     const meta = await backfill(commit, region, outDir, values.palette, values.note)
-    const n = await writeExplorer(outDir)
+    const n = await writeExplorer(outDir, values['site-url'])
     console.error(`archived ${meta.id} (${meta.git?.commit}); explorer has ${n} builds`)
     return
   }
@@ -211,14 +215,27 @@ export const main = async (argv: string[]): Promise<void> => {
   }
 }
 
-const writeExplorer = async (outDir: string): Promise<number> => {
+/**
+ * Rewrite out/index.html, and the link-preview share pages in out/s/, rendering any missing
+ * social images first (see social.ts). `verbose` reports on previews (the explorer command).
+ */
+const writeExplorer = async (outDir: string, siteUrl?: string, verbose = false): Promise<number> => {
   const builds = await listBuilds(outDir)
+  const pages = loadPages()
   await mkdir(outDir, { recursive: true })
-  await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, loadPages()))
+  const config = await loadSiteConfig(siteUrl)
+  const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined)
+  await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, pages, site))
+  if (verbose) {
+    if (site.rendered > 0) console.error(`rendered ${site.rendered} social preview image${site.rendered === 1 ? '' : 's'}`)
+    if (site.missing > 0) console.error(`${site.missing} build${site.missing === 1 ? ' has' : 's have'} no social image (no rsvg-convert or Chrome found); their previews use the thumbnail`)
+    console.error(`wrote ${builds.length + pages.length} share pages in ${resolve(outDir, 's')}/`)
+    if (config.siteUrl === undefined) console.error('link previews use relative URLs: set "siteUrl" in isoscape.config.json (or ISOSCAPE_SITE_URL, or --site-url) to the public address of out/ before publishing')
+  }
   return builds.length
 }
 
-type Values = { palette?: string; png?: boolean; width?: string; out?: string; note?: string; 'no-archive'?: boolean }
+type Values = { palette?: string; png?: boolean; width?: string; out?: string; note?: string; 'no-archive'?: boolean; 'site-url'?: string }
 
 const buildOne = async (inp: Inputs, name: string, values: Values, year?: number, previous?: number): Promise<void> => {
   const t0 = performance.now()
@@ -265,6 +282,6 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
       },
     }),
   })
-  const n = await writeExplorer(outDir)
+  const n = await writeExplorer(outDir, values['site-url'])
   console.error(`archived ${meta.id}; explorer has ${n} builds: ${resolve(outDir, 'index.html')}`)
 }
