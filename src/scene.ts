@@ -312,6 +312,7 @@ export const buildScene = (
       fresh++
     }
     if (lattice.includes(s)) items.push(spire(view, pal, s.id, outer, base, gMean + h.top, dotsMode, s.tags.name))
+    else if (isShellRoof(s.tags)) items.push(spire(view, pal, s.id, outer, base, gMean + SHELL_RISE * Math.sqrt(area), dotsMode, s.tags.name, (t) => 1 - t * 0.97, false))
     else items.push(extrude(view, pal, s.id, outer, inners, base, top, roof, dotsMode, s.tags.name))
   }
   stats.buildings = items.length
@@ -468,6 +469,15 @@ export const isLatticeTower = (t: Readonly<Record<string, string>>): boolean =>
   t.building !== undefined && (t['tower:construction'] === 'lattice' || (t['roof:shape'] === 'pyramidal' && t['roof:height'] !== undefined && t['roof:height'] === t.height))
 
 /**
+ * A curved roof shell mapped with no height (the Sydney Opera House's sails): a roof part whose
+ * shape is round, spherical or circular. It is drawn as a sail rising to a point, its height
+ * `SHELL_RISE` × √area, an approximation that grows with the shell like the real ones do.
+ */
+export const isShellRoof = (t: Readonly<Record<string, string>>): boolean =>
+  t['building:part'] === 'roof' && ['round', 'spherical', 'circular'].includes(t['roof:shape'] ?? '') && t.height === undefined && t['min_height'] === undefined
+export const SHELL_RISE = 1.4
+
+/**
  * Half-width of a lattice tower at fraction `t` of its height, as a fraction of the base: the
  * Eiffel Tower's curve, which narrows roughly exponentially (0.56 at the first platform, 0.32
  * at the second), then runs out to a mast over the top sixth.
@@ -481,6 +491,7 @@ export const spireProfile = (t: number): number => (t <= 0.84 ? Math.exp(-3.3 * 
  */
 export const spire = (
   view: View, pal: Palette, id: string, outer: Ring, base: number, top: number, dots: 'all' | 'roof' | 'none', name?: string,
+  profile: (t: number) => number = spireProfile, iron = true,
 ): Item => {
   const c = centroid(outer)
   const at = (p: Vec2, k: number): Vec2 => [c[0] + (p[0] - c[0]) * k, c[1] + (p[1] - c[1]) * k]
@@ -489,8 +500,8 @@ export const spire = (
   for (let i = 0; i < STEPS; i++) {
     const t0 = i / STEPS
     const t1 = (i + 1) / STEPS
-    const k0 = spireProfile(t0)
-    const k1 = spireProfile(t1)
+    const k0 = profile(t0)
+    const k1 = profile(t1)
     const z0 = base + (top - base) * t0
     const z1 = base + (top - base) * t1
     const walls: { key: number; shape: Shape }[] = []
@@ -501,7 +512,7 @@ export const spire = (
       const dy = b[1] - a[1]
       const len = Math.hypot(dx, dy)
       if (len < 1e-6 || -dx / len >= -1e-6) continue
-      const tone = mix(mix(pal.wallLit, pal.wallShade, (dy / len + 1) / 2), pal.ink, 0.35)
+      const tone = mix(mix(pal.wallLit, pal.wallShade, (dy / len + 1) / 2), pal.ink, iron ? 0.35 : 0)
       walls.push({
         key: (a[1] + b[1]) / 2,
         shape: { pts: [view.toScreen(at(a, k0), z0), view.toScreen(at(b, k0), z0), view.toScreen(at(b, k1), z1), view.toScreen(at(a, k1), z1)], fill: tone, ink: true },
@@ -510,7 +521,7 @@ export const spire = (
     walls.sort((x, y) => y.key - x.key)
     shapes.push(...walls.map((w) => w.shape))
   }
-  shapes.push({ pts: outer.map((p) => view.toScreen(at(p, spireProfile(1)), top)), fill: mix(pal.wallShade, pal.ink, 0.35), ink: true })
+  shapes.push({ pts: outer.map((p) => view.toScreen(at(p, profile(1)), top)), fill: mix(pal.wallShade, pal.ink, iron ? 0.35 : 0), ink: true })
   return {
     id,
     kind: 'building',
