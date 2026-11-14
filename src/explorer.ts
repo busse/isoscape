@@ -20,7 +20,8 @@
  * from disk: `open out/index.html`. It is rewritten after every build; reloading keeps the
  * selection.
  *
- * Routes (the URL hash): `#<id>` one build, `#<idA>..<idB>` compare, either with `/made` for
+ * Routes (the URL hash): `#<id>` one build (or `#<region>`, its newest build, and `#<region>:<year>`
+ * in a dated series: lasting links for outside pages), `#<idA>..<idB>` compare, either with `/made` for
  * the "How this view was made" tab; `#/<slug>` a page, `#/<slug>/<section>` a section of it.
  *
  * A build route can also carry the window view, so a link reopens the same part of the picture:
@@ -44,6 +45,11 @@ import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
 import { escAttr, siteTags, type SiteCard } from './social.ts'
 
+// The isoscape mark (one isometric building), for the browser tab.
+const MARK = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><g stroke="#2c2b33" stroke-width="3" stroke-linejoin="round">' +
+  '<path d="M60 18 L100 41 L60 64 L20 41 Z" fill="#f2c879"/><path d="M20 41 L60 64 L60 104 L20 81 Z" fill="#ece7dc"/><path d="M100 41 L60 64 L60 104 L100 81 Z" fill="#c3bbac"/></g>' +
+  '<g fill="#2c2b33"><circle cx="60" cy="18" r="4"/><circle cx="100" cy="41" r="4"/><circle cx="20" cy="41" r="4"/><circle cx="60" cy="64" r="4"/><circle cx="20" cy="81" r="4"/><circle cx="100" cy="81" r="4"/><circle cx="60" cy="104" r="4"/></g></svg>'
+
 const escHtml = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string)
 const json = (v: unknown) => JSON.stringify(v).replace(/</g, '\\u003c')
 
@@ -53,6 +59,7 @@ export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Pag
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>isoscape explorer</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(MARK)}">
 ${siteTags(site, builds.length)}<style>
 :root {
   --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
@@ -1163,6 +1170,14 @@ body.reading main { grid-template-rows: 1fr; }
     document.title = 'isoscape explorer'
     renderPages()
   }
+  // A build id, or a lasting name for one: '<region>' is its newest build, '<region>:<year>'
+  // the newest of that year in a dated series. Links from outside (the shop) use these.
+  const resolveRef = (x) => {
+    if (!x || byId.has(x)) return x
+    const m = /^(.+):([0-9]{1,4})$/.exec(x)
+    const b = m ? latestOf(m[1], Number(m[2])) : latestOf(x)
+    return b ? b.id : x
+  }
   const parseHash = () => {
     let h = location.hash.slice(1)
     try { h = decodeURIComponent(h) } catch (err) { /* keep it raw */ }
@@ -1185,7 +1200,7 @@ body.reading main { grid-template-rows: 1fr; }
       sel = sel.slice(0, at)
     }
     const [a, b] = sel.split('..')
-    return { a, b, tab, view, split }
+    return { a: resolveRef(a), b: resolveRef(b), tab, view, split }
   }
   const route = () => {
     closeDrawer()

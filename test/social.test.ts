@@ -122,6 +122,8 @@ test('a front page comes from the config, and a malformed one is ignored', async
   assert.deepEqual(config.home, home)
   const html = renderExplorer([build('a')], [], { home: config.home, shop: config.shop })
   assert.match(html, /<section id="home"/)
+  assert.match(html, /<link rel="icon" type="image\/svg\+xml" href="data:image\/svg\+xml,/)
+  assert.match(html, /const resolveRef = /)
   assert.match(html, /"home":\{"title":"T"/)
   assert.match(html, /<a class="shop" href="https:\/\/s\/"[^>]*><b>Buy ↗<\/b><span>L<\/span><\/a>/)
   await writeFile(join(dir, 'isoscape.config.json'), JSON.stringify({ home: { title: 'T', heroes: 'no', sections: [] } }))
