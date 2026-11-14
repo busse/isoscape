@@ -103,6 +103,15 @@ Previews need absolute URLs: before publishing, give the public address of `out/
 `ISOSCAPE_SITE_URL`, or as `--site-url` on `build`, `series` or `explorer`, and rebuild the
 page. `"flagship": "<region>"` there picks the site's own preview image (default: the newest build).
 
+The same file can give the explorer a front page. `"home"` has a `title`, an `intro`, `heroes`
+(featured views, each a `region`, optional `year` in a dated series, `title`, `blurb` and
+`shop` link), `sections` (each a `title`, the region-name `prefixes` it holds, and optionally
+`homeTitle`, `blurb`, `collapsed`, `shop` and `shopLabel`), and `links` shown at the bottom.
+The page then opens on the front page (`#home`). The build list is grouped by the same
+sections, with featured regions first and folded sections closed. `"shop"` (`label`, `url`,
+`cta`, and `links` keyed by region prefix) adds the shop button and a "Buy a print" button on
+matching views. See this repo's own `isoscape.config.json`.
+
 ### Adding a page
 
 Pages are Markdown files in `pages/`, compiled into `out/index.html` whenever it is

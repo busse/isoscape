@@ -7,6 +7,11 @@
  * over each other in the same coordinates with a divider to drag, and the info panel shows
  * how their numbers differ.
  *
+ * With a `home` in isoscape.config.json, the page opens on a front page instead (`#home`, or no
+ * hash): the featured views large, then the other regions as cards in their sections, with the
+ * shop's links. The same sections group the build list, featured regions first, and a section
+ * can start folded (the landmarks do).
+ *
  * Content pages (Markdown in `pages/`, compiled by `pages.ts`) are listed above the builds and
  * open in a reading view at `#/<slug>`. Each build also gets a "How this view was made" tab,
  * written from its meta.json, that links into those pages.
@@ -71,8 +76,24 @@ kbd { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding: 0 4px;
 #nav header b { font-size: 15px; letter-spacing: -.01em; }
 #nav header span { color: var(--dim); }
 #nav header .count { margin-left: auto; font-size: 12px; color: var(--faint); }
-#nav a.shop { display: block; margin: 0 16px 8px; padding: 6px 10px; border-radius: 6px; background: var(--accent-soft); color: var(--accent); text-decoration: none; font-weight: 600; }
-#nav a.shop:hover { background: var(--accent); color: var(--panel); }
+#nav header a.brand { display: flex; align-items: baseline; gap: 8px; color: inherit; text-decoration: none; }
+#nav a.shop { display: flex; flex-direction: column; gap: 1px; margin: 0 12px 10px; padding: 9px 12px; border-radius: 8px; background: var(--accent); color: var(--panel); text-decoration: none; }
+#nav a.shop b { font-size: 13.5px; }
+#nav a.shop span { font-size: 11.5px; opacity: .85; }
+#nav a.shop:hover { filter: brightness(1.08); }
+#list details.sec { border-top: 1px solid var(--line); }
+#list details.sec:first-child { border-top: none; }
+#list summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 8px; padding: 10px 8px 4px; font-size: 13px; font-weight: 650; }
+#list summary::-webkit-details-marker { display: none; }
+#list summary::before { content: "▸"; color: var(--faint); font-size: 10px; width: 10px; }
+#list details[open] > summary::before { content: "▾"; }
+#list summary small { margin-left: auto; font-weight: 400; color: var(--faint); font-size: 11px; }
+.yrs { display: flex; flex-wrap: wrap; gap: 4px; padding: 2px 8px 10px; }
+.yrb { font-size: 11.5px; font-weight: 600; padding: 2px 7px; border-radius: 10px; border: 1px solid var(--line); background: var(--panel); cursor: pointer; }
+.yrb:hover { border-color: var(--accent); }
+.yrb.a { background: var(--accent); border-color: var(--accent); color: var(--panel); }
+.yrb.b { border-color: var(--accent); border-style: dashed; }
+.tag.feat { background: var(--warn); color: var(--panel); font-weight: 600; }
 #filter { margin: 0 12px 10px; padding: 6px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); font: inherit; outline: none; }
 #filter:focus { border-color: var(--accent); }
 #list { overflow-y: auto; flex: 1; padding: 0 8px 16px; }
@@ -125,6 +146,12 @@ main { display: grid; grid-template-rows: 1fr auto; min-height: 0; min-width: 0;
 #info .bar h1 { font-size: 14px; margin: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #info .bar .links { margin-left: auto; display: flex; gap: 12px; white-space: nowrap; }
 #info .bar a { color: var(--accent); text-decoration: none; font-size: 12px; }
+#info .bar a.buy { background: var(--accent); color: var(--panel); padding: 3px 11px; border-radius: 12px; font-weight: 600; }
+#buyFloat { position: absolute; left: 12px; bottom: 12px; display: none; flex-direction: column; padding: 8px 14px; border-radius: 10px; background: var(--accent); color: var(--panel); text-decoration: none; box-shadow: 0 2px 10px rgba(0, 0, 0, .18); }
+#buyFloat b { font-size: 13.5px; }
+#buyFloat span { font-size: 11px; opacity: .85; }
+#buyFloat.on { display: flex; }
+#buyFloat:hover { filter: brightness(1.08); }
 #info .bar button { border: none; background: none; cursor: pointer; color: var(--dim); }
 #info .body { display: grid; grid-template-columns: minmax(240px, 1fr) minmax(280px, 1.4fr) minmax(240px, 1fr); gap: 22px; padding: 12px 16px 16px; }
 #info h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 0 0 6px; }
@@ -150,6 +177,49 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
 #pages a.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
 #pages a::before { content: "§"; color: var(--faint); font-weight: 400; width: 10px; }
 #pages a.on::before { color: var(--accent); }
+#pages a.home::before { content: "⌂"; }
+
+/* ---- front page ------------------------------------------------------------------ */
+#home { display: none; overflow-y: auto; background: var(--bg); min-height: 0; }
+body.home #stage, body.home #info, body.home #page { display: none; }
+body.home #home { display: block; }
+body.home main { grid-template-rows: 1fr; }
+#home:focus { outline: none; }
+.hm { max-width: 1240px; margin: 0 auto; padding: 22px 36px 80px; }
+.hm .banner { display: flex; align-items: center; gap: 6px 14px; flex-wrap: wrap; padding: 12px 18px; border-radius: 10px; background: var(--accent-soft); margin-bottom: 26px; }
+.hm .banner b { font-size: 14.5px; }
+.hm .banner span { color: var(--dim); }
+.hm .btn { display: inline-block; padding: 7px 15px; border-radius: 18px; background: var(--accent); color: var(--panel); border: 1px solid var(--accent); text-decoration: none; font-weight: 600; font-size: 13px; white-space: nowrap; }
+.hm .btn.ghost { background: transparent; color: var(--accent); }
+.hm .btn:hover { filter: brightness(1.08); }
+.hm .banner .btn { margin-left: auto; }
+.hm h1 { font-size: 34px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 10px; font-weight: 650; }
+.hm .intro { font-size: 16px; line-height: 1.6; max-width: 74ch; margin: 0 0 26px; }
+.heroes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 26px; }
+.hero { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; }
+.hero > a.pic { display: block; aspect-ratio: 1200 / 630; background: var(--stage); overflow: hidden; }
+.hero > a.pic img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+.hero > a.pic:hover img { transform: scale(1.02); }
+.hero .tx { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.hero h2 { font-size: 21px; line-height: 1.25; margin: 0; letter-spacing: -.01em; }
+.hero p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--dim); }
+.hero .years { display: flex; flex-wrap: wrap; gap: 4px; }
+.hero .years a { font-size: 11.5px; font-weight: 600; padding: 2px 7px; border-radius: 10px; border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.hero .years a:hover { border-color: var(--accent); color: var(--accent); }
+.hero .acts { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; }
+.hm section.sec { margin-top: 44px; }
+.hm section.sec header { display: flex; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 14px; }
+.hm section.sec h2 { font-size: 19px; margin: 0; }
+.hm section.sec header p { margin: 0; color: var(--dim); }
+.hm section.sec header .btn { margin-left: auto; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+.card { display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 9px; padding: 8px; }
+.card:hover { border-color: var(--accent); }
+.card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center 60%; border-radius: 5px; background: var(--stage); display: block; }
+.card b { font-size: 13px; font-weight: 600; line-height: 1.3; }
+.hm .more { margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; gap: 8px 22px; flex-wrap: wrap; font-size: 14px; }
+.hm .more a { color: var(--accent); }
+@media (max-width: 760px) { .hm { padding: 16px 16px 60px; } .hm h1 { font-size: 27px; } }
 
 /* ---- pages: reading view --------------------------------------------------------- */
 #page { display: none; overflow-y: auto; background: var(--panel); min-height: 0; }
@@ -224,8 +294,8 @@ body.reading main { grid-template-rows: 1fr; }
 </head>
 <body>
 <nav id="nav">
-  <header><b>isoscape</b><span>explorer</span><span class="count" id="count"></span></header>${site.shop ? `
-  <a class="shop" href="${escAttr(site.shop.url)}" target="_blank" rel="noopener">${escHtml(site.shop.label)} ↗</a>` : ''}
+  <header>${site.home ? '<a class="brand" href="#home" title="Front page">' : ''}<b>isoscape</b><span>explorer</span>${site.home ? '</a>' : ''}<span class="count" id="count"></span></header>${site.shop ? `
+  <a class="shop" href="${escAttr(site.shop.url)}" target="_blank" rel="noopener"><b>${escHtml(site.shop.cta ?? 'Prints of these maps')} ↗</b><span>${escHtml(site.shop.label)}</span></a>` : ''}
   <div id="pages"></div>
   <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false">
   <div id="list"></div>
@@ -239,6 +309,7 @@ body.reading main { grid-template-rows: 1fr; }
     <div id="empty"></div>
     <div id="loading">loading…</div>
     <div id="timeline" hidden></div>
+    <a id="buyFloat" target="_blank" rel="noopener"></a>
     <div id="toolbar">
       <span class="zoom" id="zoom">–</span>
       <button id="fit" title="Fit (F)">Fit</button>
@@ -254,9 +325,10 @@ body.reading main { grid-template-rows: 1fr; }
       <div class="links" id="links"></div></div>
     <div class="body" id="infoBody"></div>
   </section>
+  <section id="home" tabindex="-1"><div class="hm" id="homeBody"></div></section>
   <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
 </main>
-<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: site.shop ?? null, latestPages: site.latestPages !== false })}</script>
+<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: site.shop ?? null, home: site.home ?? null, latestPages: site.latestPages !== false })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2) })))}</script>
 <script>
@@ -269,6 +341,9 @@ body.reading main { grid-template-rows: 1fr; }
   const pages = JSON.parse(document.getElementById('pagesData').textContent)
   const pageBySlug = new Map(pages.map((p) => [p.slug, p]))
   const site = JSON.parse(document.getElementById('site').textContent)
+  const home = site.home
+  state.home = false
+  state.secOpen = {}
 
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
   const ago = (iso) => {
@@ -289,6 +364,34 @@ body.reading main { grid-template-rows: 1fr; }
     if (!q) return builds
     return builds.filter((b) => [b.region, b.title, b.palette, b.note, b.git && b.git.commit, b.git && b.git.subject, b.name].join(' ').toLowerCase().includes(q))
   }
+  // The newest build of a region (of one year, in a dated series).
+  const latestOf = (region, year) => {
+    let best = null
+    for (const b of builds) {
+      if (b.region !== region || (year !== undefined && (!b.time || b.time.year !== year))) continue
+      if (!best || b.createdAt > best.createdAt) best = b
+    }
+    return best
+  }
+  const titleOf = (b) => (b.config && b.config.title) || b.title || b.region
+  const heroIndex = (region) => (home ? home.heroes.findIndex((h) => h.region === region) : -1)
+  const prefixIndex = (sec, region) => { const i = (sec.prefixes || []).findIndex((p) => region.startsWith(p)); return i < 0 ? 99 : i }
+  // The front-page section a region belongs to: the first whose prefixes match; past the end if none.
+  const sectionOf = (region) => {
+    if (!home) return 0
+    const i = home.sections.findIndex((x) => prefixIndex(x, region) < 99)
+    return i < 0 ? home.sections.length : i
+  }
+  // Where "Buy a print" goes for a build: its featured view's own link, else the shop's links by region prefix.
+  const shopFor = (b) => {
+    if (!site.shop || !b) return null
+    const h = home && home.heroes[heroIndex(b.region)]
+    if (h && h.shop) return h.shop
+    const L = site.shop.links
+    if (!L) return null
+    const k = Object.keys(L).filter((p) => b.region.startsWith(p)).sort((x, y) => y.length - x.length)[0]
+    return k ? L[k] : null
+  }
   const renderList = () => {
     const list = visible()
     $('count').textContent = builds.length + (builds.length === 1 ? ' build' : ' builds')
@@ -297,34 +400,64 @@ body.reading main { grid-template-rows: 1fr; }
       if (!groups.has(b.region)) groups.set(b.region, [])
       groups.get(b.region).push(b)
     }
-    let html = ''
-    for (const [region, items] of groups) {
+    const row = (b, solo) => {
+      const cls = 'build' + (state.a === b.id ? ' a' : '') + (state.compare && state.b === b.id ? ' b' : '')
+      const pic = b.files.thumb
+        ? '<img class="thumb" loading="lazy" src="' + esc(b.files.thumb) + '" alt="">'
+        : '<div class="swatch" style="background:' + esc(b.sky) + '">' + esc(b.palette) + '</div>'
+      const ab = state.a === b.id ? '<span class="tag ab">A</span>' : state.compare && state.b === b.id ? '<span class="tag ab">B</span>' : ''
+      // A region with one build has no heading: its row carries the title.
+      const text = solo ? titleOf(b) : label(b)
+      return '<button class="' + cls + '" data-id="' + esc(b.id) + '">' + pic +
+        '<div><div class="top">' + ab + (heroIndex(b.region) >= 0 && solo ? '<span class="tag feat">featured</span>' : '') + (b.time ? '<span class="tag yr">' + esc(b.time.year) + '</span>' : '') + '<span class="tag">' + esc(b.palette) + '</span>' +
+        (b.config && b.config.terrain && b.config.terrain.enabled !== false ? '<span class="tag">terrain</span>' : '') +
+        '<time datetime="' + esc(b.createdAt) + '">' + ago(b.createdAt) + '</time></div>' +
+        '<div class="note" title="' + esc(label(b)) + '">' + esc(text) + '</div>' +
+        '<div class="sub">' + (b.git ? esc(b.git.commit) + (b.git.dirty ? '<span class="dirty">*</span>' : '') : '') + ' · ' + mb(b.bytes) + '</div></div></button>'
+    }
+    const group = (region, items) => {
       // A dated series reads in time order, oldest first.
       if (items[0].time) items.sort((x, y) => ((x.time ? x.time.year : 1e9) - (y.time ? y.time.year : 1e9)) || y.createdAt.localeCompare(x.createdAt))
-      html += '<h2>' + esc((items[0].config && items[0].config.title) || items[0].title || region) + '<small>' + esc(region) + '</small></h2>'
-      for (const b of items) {
-        const cls = 'build' + (state.a === b.id ? ' a' : '') + (state.compare && state.b === b.id ? ' b' : '')
-        const pic = b.files.thumb
-          ? '<img class="thumb" loading="lazy" src="' + esc(b.files.thumb) + '" alt="">'
-          : '<div class="swatch" style="background:' + esc(b.sky) + '">' + esc(b.palette) + '</div>'
-        const ab = state.a === b.id ? '<span class="tag ab">A</span>' : state.compare && state.b === b.id ? '<span class="tag ab">B</span>' : ''
-        html += '<button class="' + cls + '" data-id="' + esc(b.id) + '">' + pic +
-          '<div><div class="top">' + ab + (b.time ? '<span class="tag yr">' + esc(b.time.year) + '</span>' : '') + '<span class="tag">' + esc(b.palette) + '</span>' +
-          (b.config && b.config.terrain && b.config.terrain.enabled !== false ? '<span class="tag">terrain</span>' : '') +
-          '<time datetime="' + esc(b.createdAt) + '">' + ago(b.createdAt) + '</time></div>' +
-          '<div class="note" title="' + esc(label(b)) + '">' + esc(label(b)) + '</div>' +
-          '<div class="sub">' + (b.git ? esc(b.git.commit) + (b.git.dirty ? '<span class="dirty">*</span>' : '') : '') + ' · ' + mb(b.bytes) + '</div></div></button>'
+      const solo = items.length === 1
+      // A long dated series: one row for the year on show (or the featured year), then the years as chips.
+      if (items[0].time && items.length > 6) {
+        const h = home && home.heroes[heroIndex(region)]
+        const pick = items.find((b) => b.id === state.a) || (h && h.year !== undefined && items.find((b) => b.time.year === h.year)) || items[items.length - 1]
+        return '<h2>' + (heroIndex(region) >= 0 ? '<span class="tag feat">featured</span> ' : '') + esc(titleOf(items[0])) + '<small>' + esc(region) + ' · ' + items.length + ' years</small></h2>' + row(pick, false) +
+          '<div class="yrs">' + items.map((b) => '<button class="yrb' + (state.a === b.id ? ' a' : '') + (state.compare && state.b === b.id ? ' b' : '') + '" data-id="' + esc(b.id) + '" title="' + esc(label(b)) + '">' + esc(b.time.year) + '</button>').join('') + '</div>'
       }
+      return (solo ? '' : '<h2>' + (heroIndex(region) >= 0 ? '<span class="tag feat">featured</span> ' : '') + esc(titleOf(items[0])) + '<small>' + esc(region) + '</small></h2>') + items.map((b) => row(b, solo)).join('')
+    }
+    let html = ''
+    if (!home) for (const [region, items] of groups) html += group(region, items)
+    else {
+      const secs = [...home.sections, { title: 'Other', prefixes: [] }].map((sec) => ({ sec, groups: [] }))
+      for (const [region, items] of groups) secs[sectionOf(region)].groups.push([region, items])
+      const rank = (r) => { const i = heroIndex(r); return i < 0 ? 99 : i }
+      secs.forEach((x, i) => {
+        if (x.groups.length === 0) return
+        // Featured regions first, then in the order of the section's prefixes, then by title.
+        x.groups.sort((p, q) => rank(p[0]) - rank(q[0]) || prefixIndex(x.sec, p[0]) - prefixIndex(x.sec, q[0]) || titleOf(p[1][0]).localeCompare(titleOf(q[1][0])))
+        const holds = x.groups.some(([, items]) => items.some((b) => b.id === state.a))
+        const open = state.filter.trim() !== '' || holds || (state.secOpen[i] ?? !x.sec.collapsed)
+        const n = x.groups.reduce((k, [, items]) => k + items.length, 0)
+        html += '<details class="sec" data-i="' + i + '"' + (open ? ' open' : '') + '><summary>' + esc(x.sec.title) + '<small>' + n + '</small></summary>' +
+          x.groups.map(([region, items]) => group(region, items)).join('') + '</details>'
+      })
     }
     $('list').innerHTML = html || '<p style="padding:12px;color:var(--dim)">No builds match.</p>'
     const cur = $('list').querySelector('.build.a')
     if (cur) cur.scrollIntoView({ block: 'nearest' })
   }
   $('list').addEventListener('click', (e) => {
-    const el = e.target.closest('.build')
+    // Remember a section folded or unfolded by hand.
+    const sum = e.target.closest('summary')
+    if (sum) { const d = sum.parentElement; state.secOpen[d.dataset.i] = !d.open; return }
+    const el = e.target.closest('.build, .yrb')
     if (!el) return
-    const leaving = state.page !== null
-    if (leaving) closePage()
+    const leaving = state.page !== null || state.home
+    if (state.page !== null) closePage()
+    if (state.home) closeHome()
     if (e.altKey || e.metaKey || e.shiftKey) { state.b = el.dataset.id; state.compare = true }
     else select(el.dataset.id, false)
     update(leaving)
@@ -455,13 +588,19 @@ body.reading main { grid-template-rows: 1fr; }
   const fmt = (v) => (v === undefined ? '–' : typeof v === 'number' ? (Number.isInteger(v) ? v.toLocaleString() : v.toFixed(2)) : esc(v))
   const renderInfo = () => {
     const a = byId.get(state.a)
+    const buy = shopFor(a)
+    $('buyFloat').classList.toggle('on', !!buy)
+    if (buy) {
+      $('buyFloat').href = buy
+      $('buyFloat').innerHTML = '<b>Buy a print of this map ↗</b><span>' + esc(site.shop.label) + '</span>'
+    }
     if (!a) { $('infoTitle').textContent = ''; $('infoBody').innerHTML = ''; $('links').innerHTML = ''; return }
     const b = state.compare ? byId.get(state.b) : null
     $('infoTitle').textContent = b ? a.title + '  ·  A vs B' : a.title
     $('links').innerHTML = '<a href="' + esc(a.files.svg) + '" target="_blank">Open A’s SVG ↗</a>' +
       (b ? '<a href="' + esc(b.files.svg) + '" target="_blank">Open B’s SVG ↗</a>' : '') +
       (site.latestPages ? '<a href="' + esc(a.name) + '.html" target="_blank" title="The latest build of this region, with hover labels">Latest page ↗</a>' : '') +
-      (() => { const L = site.shop && site.shop.links; if (!L) return ''; const k = Object.keys(L).filter((p) => a.region.startsWith(p)).sort((x, y) => y.length - x.length)[0]; return k ? '<a class="buy" href="' + esc(L[k]) + '" target="_blank" rel="noopener">Buy a print ↗</a>' : '' })()
+      (buy ? '<a class="buy" href="' + esc(buy) + '" target="_blank" rel="noopener">Buy a print ↗</a>' : '')
     $('info').classList.toggle('made', state.tab === 'made')
     for (const t of $('tabs').children) t.classList.toggle('on', t.dataset.tab === state.tab)
     if (state.tab === 'made') {
@@ -791,7 +930,7 @@ body.reading main { grid-template-rows: 1fr; }
   let hashTimer = 0
   const writeHash = () => {
     clearTimeout(hashTimer)
-    if (state.page !== null || !byId.has(state.a)) return
+    if (state.page !== null || state.home || !byId.has(state.a)) return
     const hash = viewerHash()
     if (location.hash !== hash) history.replaceState(null, '', hash)
     routed = location.hash
@@ -866,8 +1005,8 @@ body.reading main { grid-template-rows: 1fr; }
   // #/<slug> and #/<slug>/<section> open a page; anything else is a build selection.
   let routed = null
   const renderPages = () => {
-    $('pages').hidden = pages.length === 0
-    $('pages').innerHTML = pages.map((p) => '<a href="#/' + esc(p.slug) + '"' + (state.page === p.slug ? ' class="on"' : '') +
+    $('pages').hidden = pages.length === 0 && !home
+    $('pages').innerHTML = (home ? '<a class="home' + (state.home ? ' on' : '') + '" href="#home">Front page</a>' : '') + pages.map((p) => '<a href="#/' + esc(p.slug) + '"' + (state.page === p.slug ? ' class="on"' : '') +
       (p.summary ? ' title="' + esc(p.summary) + '"' : '') + '>' + esc(p.title) + '</a>').join('')
   }
   const markToc = () => {
@@ -880,9 +1019,61 @@ body.reading main { grid-template-rows: 1fr; }
     for (const a of $('toc').querySelectorAll('a')) a.classList.toggle('on', a === current)
   }
   $('page').addEventListener('scroll', markToc, { passive: true })
+  // ---- front page -------------------------------------------------------------------------------
+  const renderHome = () => {
+    const out = []
+    if (site.shop) out.push('<div class="banner"><b>' + esc(site.shop.cta || 'Prints of these maps') + '</b><span>' + esc(site.shop.label) + '</span>' +
+      '<a class="btn" href="' + esc(site.shop.url) + '" target="_blank" rel="noopener">Visit the shop ↗</a></div>')
+    out.push('<h1>' + esc(home.title) + '</h1>' + (home.intro ? '<p class="intro">' + esc(home.intro) + '</p>' : ''))
+    out.push('<div class="heroes">' + home.heroes.map((h) => {
+      const b = latestOf(h.region, h.year) || latestOf(h.region)
+      if (!b) return ''
+      const ser = seriesOf(b)
+      const buy = shopFor(b)
+      // The link-preview image (from tools/print/thumbs.py) when there is one, else the thumbnail.
+      const big = b.files.svg.replace(/[^/]*$/, 'social.png')
+      return '<article class="hero"><a class="pic" href="#' + esc(b.id) + '"><img src="' + esc(big) + '" data-fallback="' + esc(b.files.thumb || '') + '" alt="' + esc(h.title) + '"></a>' +
+        '<div class="tx"><h2>' + esc(h.title) + '</h2>' + (h.blurb ? '<p>' + esc(h.blurb) + '</p>' : '') +
+        (ser.length > 1 ? '<div class="years">' + ser.map((y) => '<a href="#' + esc(y.id) + '" title="' + esc(y.time.title || '') + '">' + esc(y.time.year) + '</a>').join('') + '</div>' : '') +
+        '<div class="acts"><a class="btn ghost" href="#' + esc(b.id) + '">' + (ser.length > 1 ? 'Step through ' + ser.length + ' years' : 'Explore the map') + '</a>' +
+        (buy ? '<a class="btn" href="' + esc(buy) + '" target="_blank" rel="noopener">Buy a print ↗</a>' : '') + '</div></div></article>'
+    }).join('') + '</div>')
+    const featured = new Set(home.heroes.map((h) => h.region))
+    const regions = [...new Set(builds.map((b) => b.region))].filter((r) => !featured.has(r))
+    home.sections.forEach((sec, i) => {
+      const cards = regions.filter((r) => sectionOf(r) === i).map((r) => latestOf(r)).sort((x, y) => titleOf(x).localeCompare(titleOf(y)))
+      if (cards.length === 0) return
+      out.push('<section class="sec"><header><h2>' + esc(sec.homeTitle || sec.title) + '</h2>' + (sec.blurb ? '<p>' + esc(sec.blurb) + '</p>' : '') +
+        (sec.shop ? '<a class="btn" href="' + esc(sec.shop) + '" target="_blank" rel="noopener">' + esc(sec.shopLabel || 'Buy prints ↗') + '</a>' : '') + '</header>' +
+        '<div class="cards">' + cards.map((b) => '<a class="card" href="#' + esc(b.id) + '"><img loading="lazy" src="' + esc(b.files.thumb || '') + '" alt=""><b>' + esc(titleOf(b)) + '</b></a>').join('') + '</div></section>')
+    })
+    if (home.links && home.links.length) out.push('<div class="more">' + home.links.map((l) => '<a href="' + esc(l.href) + '"' + (l.href.startsWith('#') ? '' : ' target="_blank" rel="noopener"') + '>' + esc(l.label) + '</a>').join('') + '</div>')
+    $('homeBody').innerHTML = out.join('')
+    for (const img of $('homeBody').querySelectorAll('img[data-fallback]')) img.addEventListener('error', () => { if (img.dataset.fallback) img.src = img.dataset.fallback }, { once: true })
+  }
+  const openHome = () => {
+    if (state.page !== null) closePage()
+    const was = state.home
+    state.home = true
+    document.body.classList.add('home')
+    if (!$('homeBody').dataset.done) { renderHome(); $('homeBody').dataset.done = '1' }
+    document.title = 'isoscape explorer'
+    $('buyFloat').classList.remove('on')
+    renderPages()
+    renderList()
+    if (!was) $('home').scrollTop = 0
+    $('home').focus({ preventScroll: true })
+  }
+  const closeHome = () => {
+    state.home = false
+    document.body.classList.remove('home')
+    renderPages()
+  }
+
   const openPage = (slug, section) => {
     const p = pageBySlug.get(slug) || pages[0]
     if (!p) return
+    if (state.home) closeHome()
     state.page = p.slug
     document.body.classList.add('reading')
     if ($('article').dataset.slug !== p.slug) {
@@ -892,8 +1083,9 @@ body.reading main { grid-template-rows: 1fr; }
         '<a href="#/' + esc(p.slug) + '/' + esc(h.id) + '" data-id="' + esc(h.id) + '">' + esc(h.text) + '</a>').join('')
     }
     const a = byId.get(state.a)
-    $('back').hidden = !a
+    $('back').hidden = !a && !home
     if (a) { $('back').href = viewerHash(); $('back').textContent = '← Back to the viewer' + (state.compare ? '' : ': ' + label(a)) }
+    else if (home) { $('back').href = '#home'; $('back').textContent = '← Front page' }
     document.title = p.title + ' · isoscape explorer'
     renderPages()
     renderList()
@@ -937,7 +1129,9 @@ body.reading main { grid-template-rows: 1fr; }
     routed = location.hash
     const r = parseHash()
     if (r.page !== undefined && pageBySlug.size > 0) { openPage(r.page, r.section); return }
+    if (home && (r.a === 'home' || !r.a)) { openHome(); return }
     if (state.page !== null) closePage()
+    if (state.home) closeHome()
     if (builds.length === 0) return
     if (r.a && byId.has(r.a)) {
       if (r.a !== state.a) select(r.a, false)
@@ -966,9 +1160,14 @@ body.reading main { grid-template-rows: 1fr; }
   document.addEventListener('keydown', (e) => {
     if (e.target === $('filter')) { if (e.key === 'Escape') e.target.blur(); return }
     if (e.metaKey || e.ctrlKey || e.altKey) return
+    if (state.home) {
+      if (e.key === '/') { $('filter').focus(); e.preventDefault() }
+      return
+    }
     if (state.page !== null) {
       // Reading: the arrows scroll the page. Esc goes back to the viewer.
       if (e.key === 'Escape' && byId.has(state.a)) { history.pushState(null, '', viewerHash()); route() }
+      else if (e.key === 'Escape' && home) { history.pushState(null, '', '#home'); route() }
       else if (e.key === '/') { $('filter').focus(); e.preventDefault() }
       else if (e.key === 'l' || e.key === 'L') copyLink()
       return
@@ -994,6 +1193,9 @@ body.reading main { grid-template-rows: 1fr; }
     $('empty').innerHTML = '<div><b>No builds yet.</b><br>Run <code>node bin/isoscape.js build &lt;region&gt;</code> and reload.' +
       (pages.length ? '<br><br>Meanwhile: <a href="#/' + esc(pages[0].slug) + '">' + esc(pages[0].title) + '</a>' : '') + '</div>'
     renderList()
+  } else if (home && start.page === undefined && !(start.a && byId.has(start.a))) {
+    routed = location.hash
+    openHome()
   } else {
     select(start.a && byId.has(start.a) ? start.a : builds[0].id, true)
     if (start.b && byId.has(start.b)) { state.b = start.b; state.compare = true }

@@ -225,7 +225,7 @@ const writeExplorer = async (outDir: string, siteUrl?: string, verbose = false):
   await mkdir(outDir, { recursive: true })
   const config = await loadSiteConfig(siteUrl)
   const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined)
-  await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, pages, { ...site, ...(config.shop ? { shop: config.shop } : {}), ...(config.latestPages === false ? { latestPages: false } : {}) }))
+  await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, pages, { ...site, ...(config.shop ? { shop: config.shop } : {}), ...(config.home ? { home: config.home } : {}), ...(config.latestPages === false ? { latestPages: false } : {}) }))
   if (verbose) {
     if (site.rendered > 0) console.error(`rendered ${site.rendered} social preview image${site.rendered === 1 ? '' : 's'}`)
     if (site.missing > 0) console.error(`${site.missing} build${site.missing === 1 ? ' has' : 's have'} no social image (no rsvg-convert or Chrome found); their previews use the thumbnail`)

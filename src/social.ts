@@ -38,9 +38,43 @@ export interface SiteConfig {
   /** Region name or build id whose newest build is the site's preview image. */
   readonly flagship?: string
   /** Optional shop for prints: a header link, plus a "Buy a print" link on views whose region starts with a key of `links`. */
-  readonly shop?: { readonly label: string; readonly url: string; readonly links?: Readonly<Record<string, string>> }
+  readonly shop?: { readonly label: string; readonly url: string; readonly cta?: string; readonly links?: Readonly<Record<string, string>> }
+  /** Optional front page for the explorer: featured views, then the rest in sections. */
+  readonly home?: HomeConfig
   /** False on a published site that does not carry out/<region>.html, to hide the "Latest page" link. */
   readonly latestPages?: boolean
+}
+
+/** A featured view on the explorer's front page: the newest build of `region` (or its `year`, in a dated series). */
+export interface HomeHero {
+  readonly region: string
+  readonly year?: number
+  readonly title: string
+  readonly blurb?: string
+  /** Where "Buy a print" goes for this view; else the shop's `links` by region prefix. */
+  readonly shop?: string
+}
+
+/** A group of regions, by name prefix, in the build list and on the front page. */
+export interface HomeSection {
+  readonly title: string
+  readonly prefixes: readonly string[]
+  /** Heading on the front page, if it differs from `title`. */
+  readonly homeTitle?: string
+  readonly blurb?: string
+  /** Start folded in the build list. */
+  readonly collapsed?: boolean
+  readonly shop?: string
+  readonly shopLabel?: string
+}
+
+export interface HomeConfig {
+  readonly title: string
+  readonly intro?: string
+  readonly heroes: readonly HomeHero[]
+  readonly sections: readonly HomeSection[]
+  /** Links under the sections: label and href (a page as '#/<slug>', or a URL). */
+  readonly links?: readonly { readonly label: string; readonly href: string }[]
 }
 
 /** A site URL as given, made to end in '/'; undefined when empty. Throws if not http(s). */
@@ -62,9 +96,17 @@ export const normaliseSiteUrl = (raw: string | undefined): string | undefined =>
 const isShop = (v: unknown): v is NonNullable<SiteConfig['shop']> =>
   typeof v === 'object' && v !== null && typeof (v as { label?: unknown }).label === 'string' && typeof (v as { url?: unknown }).url === 'string'
 
+const isHome = (v: unknown): v is HomeConfig => {
+  if (typeof v !== 'object' || v === null) return false
+  const h = v as { title?: unknown; heroes?: unknown; sections?: unknown }
+  return typeof h.title === 'string' && Array.isArray(h.heroes) && Array.isArray(h.sections) &&
+    h.heroes.every((x) => typeof x === 'object' && x !== null && typeof (x as HomeHero).region === 'string' && typeof (x as HomeHero).title === 'string') &&
+    h.sections.every((x) => typeof x === 'object' && x !== null && typeof (x as HomeSection).title === 'string' && Array.isArray((x as HomeSection).prefixes))
+}
+
 /** `--site-url`, else ISOSCAPE_SITE_URL, else isoscape.config.json in `root`. */
 export const loadSiteConfig = async (flag?: string, root = process.cwd(), env = process.env): Promise<SiteConfig> => {
-  let file: { siteUrl?: unknown; flagship?: unknown; shop?: unknown; latestPages?: unknown } = {}
+  let file: { siteUrl?: unknown; flagship?: unknown; shop?: unknown; home?: unknown; latestPages?: unknown } = {}
   try {
     file = JSON.parse(await readFile(resolve(root, 'isoscape.config.json'), 'utf8')) as typeof file
   } catch (err) {
@@ -76,6 +118,7 @@ export const loadSiteConfig = async (flag?: string, root = process.cwd(), env = 
     ...(siteUrl === undefined ? {} : { siteUrl }),
     ...(typeof file.flagship === 'string' && file.flagship !== '' ? { flagship: file.flagship } : {}),
     ...(isShop(file.shop) ? { shop: file.shop } : {}),
+    ...(isHome(file.home) ? { home: file.home } : {}),
     ...(file.latestPages === false ? { latestPages: false } : {}),
   }
 }
@@ -342,6 +385,7 @@ export const flagshipOf = (builds: readonly BuildMeta[], flagship?: string): Bui
 export interface SiteCard {
   readonly siteUrl?: string
   readonly shop?: SiteConfig['shop']
+  readonly home?: HomeConfig
   readonly latestPages?: boolean
   readonly image?: Preview
   readonly imageAlt?: string

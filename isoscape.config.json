@@ -3,12 +3,80 @@
   "flagship": "richmond-downtown-time-1925",
   "latestPages": false,
   "shop": {
-    "label": "Holiday shop: prints of these maps (through Dec 31, 2026)",
+    "label": "Holiday shop, open through December 31, 2026",
     "url": "https://chrisbusse.com/",
     "links": {
       "richmond": "https://chrisbusse.com/collections/richmond-through-time",
       "gwynns-island": "https://chrisbusse.com/collections/gwynns-island",
       "lm-": "https://chrisbusse.com/collections/american-landmarks"
-    }
+    },
+    "cta": "Buy prints of these maps"
+  },
+  "home": {
+    "title": "Richmond, drawn from open data",
+    "intro": "Small isometric maps of Richmond, Virginia: the James River through the city in one long view, and downtown block by block from 1737 to today. Pan and zoom any map, or compare two side by side. The tool that draws them is free and open source, and prints are in the holiday shop.",
+    "heroes": [
+      {
+        "region": "richmond-i195-rocketts",
+        "title": "The James, from I-195 to Rocketts Landing",
+        "blurb": "The river through the heart of Richmond in one long view: Belle Isle and the falls, the bridges, Hollywood Cemetery, and downtown on the hill.",
+        "shop": "https://chrisbusse.com/products/richmond-and-the-james-panorama-print"
+      },
+      {
+        "region": "richmond-downtown-time",
+        "year": 1925,
+        "title": "Downtown Richmond through time, 1737–2026",
+        "blurb": "The same blocks, from the Capitol to Tobacco Row, year by year. Buildings come from fire-insurance maps and other dated sources. Pick a year below, or press [ and ] in the viewer to step through them.",
+        "shop": "https://chrisbusse.com/collections/richmond-through-time"
+      }
+    ],
+    "sections": [
+      {
+        "title": "Richmond",
+        "homeTitle": "More of Richmond",
+        "prefixes": [
+          "richmond"
+        ],
+        "shop": "https://chrisbusse.com/collections/richmond-through-time",
+        "shopLabel": "Shop Richmond prints ↗"
+      },
+      {
+        "title": "Virginia",
+        "homeTitle": "Elsewhere in Virginia",
+        "prefixes": [
+          "gwynns-island"
+        ],
+        "shop": "https://chrisbusse.com/collections/gwynns-island",
+        "shopLabel": "Shop Gwynn's Island prints ↗"
+      },
+      {
+        "title": "American landmarks",
+        "prefixes": [
+          "lm-"
+        ],
+        "collapsed": true,
+        "blurb": "Fifty well-known American places, each drawn in its surroundings.",
+        "shop": "https://chrisbusse.com/collections/american-landmarks",
+        "shopLabel": "Shop landmark prints ↗"
+      }
+    ],
+    "links": [
+      {
+        "label": "Make your own, free (GitHub)",
+        "href": "https://github.com/busse/isoscape"
+      },
+      {
+        "label": "Artist statement",
+        "href": "#/artist-statement"
+      },
+      {
+        "label": "How it's made",
+        "href": "#/how-its-made"
+      },
+      {
+        "label": "About, credits and licences",
+        "href": "#/about"
+      }
+    ]
   }
 }
