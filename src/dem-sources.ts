@@ -198,7 +198,7 @@ const gsi: MosaicSource = {
   name: 'GSI elevation tiles',
   coverage: 'Japan (Geospatial Information Authority of Japan, 国土地理院)',
   about: 'Bare-earth 5 m lidar where it has been flown, filled from the 10 m national model elsewhere',
-  credit: 'Elevation: 地理院タイル (標高タイル) を加工して作成 — GSI elevation tiles, processed',
+  credit: 'Elevation: GSI elevation tiles (Geospatial Information Authority of Japan), processed',
   licence: 'GSI content terms (国土地理院コンテンツ利用規約), compatible with CC BY 4.0',
   link: 'https://maps.gsi.go.jp/development/ichiran.html',
   native: 5,

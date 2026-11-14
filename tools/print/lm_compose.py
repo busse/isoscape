@@ -44,7 +44,17 @@ def content_box(svg, zoom=True):
         return [bx0, by0, bx1 - bx0, by1 - by0]
     return [x0, y0, x1 - x0, y1 - y0]
 
-def make(slug, title, place, svg, out_dir, landscape=True, zoom=True, anchor=None):
+def elevation_credit(region_path):
+    """The print's elevation credit for a region: its terrain source's credit (`isoscape sources`)."""
+    try: t = json.load(open(region_path)).get('terrain') or {}
+    except FileNotFoundError: t = {}
+    root = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
+    S = {x['id']: x for x in json.loads(subprocess.run(['node', 'bin/isoscape.js', 'sources'], cwd=root, capture_output=True, text=True, check=True).stdout)}
+    credit = S.get(t.get('source', '3dep'), S['3dep'])['credit']
+    if t.get('fillFrom') in S: credit += '; ' + S[t['fillFrom']]['credit'].replace('Elevation: ', '')
+    return credit
+
+def make(slug, title, place, svg, out_dir, landscape=True, zoom=True, anchor=None, credit=None):
     """zoom=False keeps the whole scene even when it is mostly water (a frame drawn to hold shore and
     water together); anchor='left' or 'top' keeps that edge when the panel crops the scene; a number 0-1 is the share of a vertical crop taken from the top."""
     box = content_box(svg, zoom)
@@ -56,7 +66,7 @@ def make(slug, title, place, svg, out_dir, landscape=True, zoom=True, anchor=Non
         vis = min(box[3], box[2] / PANEL); cy = box[1] + anchor * (box[3] - vis) + vis / 2
     design = {'title': title, 'subtitle': place, 'region': slug, 'panels': [{'build': slug}], 'margin': 0.045, 'band': 0.1}
     regions = {slug: {'box': box, 'focus': [cx, cy]}}
-    C.CREDIT = CREDIT
+    C.CREDIT = CREDIT if credit is None else CREDIT.replace('Elevation: USGS 3DEP', credit)
     size = (36, 24) if landscape else (24, 36)
     for dpi, q in ((165, 92), (165, 86), (150, 86), (150, 80)):   # 24x36 at 165 dpi = 23.5 MP, under Shopify's 25 MP image cap
         img = C.compose(design, size, {slug: svg}, regions, dpi)

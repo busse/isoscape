@@ -17,6 +17,7 @@ for slug in L:
     if slug not in built or os.path.exists(os.path.join(OUT, f'lm-{slug}_canvas-36x24.jpg')): continue
     if time.time() - T0 > B: print('OUT OF TIME'); break
     t = time.time()
-    fn, size, dpi, q, b = M.make(slug, L[slug][1], L[slug][2], os.path.join(SVG, f'lm-{slug}.svg'), OUT)
+    credit = M.elevation_credit(os.path.join(os.path.dirname(SVG), '..', 'regions', f'lm-{slug}.json'))
+    fn, size, dpi, q, b = M.make(slug, L[slug][1], L[slug][2], os.path.join(SVG, f'lm-{slug}.svg'), OUT, credit=credit)
     M.make_canvas(fn, OUT, f'lm-{slug}')
     print('composed', slug, size, dpi, round(b / 1e6, 1), 'MB', round(time.time() - t), 's', flush=True)
