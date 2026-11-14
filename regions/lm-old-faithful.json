@@ -1,0 +1,35 @@
+{
+ "title": "Old Faithful — Yellowstone National Park",
+ "center": [
+  -110.8281,
+  44.4605
+ ],
+ "width": 2400,
+ "depth": 3120,
+ "bearing": 0,
+ "snap": false,
+ "scale": 2.5,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 16,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "all",
+ "fetchTile": 1600,
+ "terrain": {
+  "exaggeration": 1.0,
+  "cell": 5,
+  "contour": 5,
+  "majorEvery": 5,
+  "rapids": 0,
+  "demResolution": 2
+ },
+ "sources": {
+  "buildings": [
+   "osm"
+  ],
+  "landcover": "nlcd"
+ }
+}

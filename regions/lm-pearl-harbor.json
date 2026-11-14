@@ -1,0 +1,21 @@
+{
+ "title": "Pearl Harbor — Honolulu, Hawaii",
+ "center": [
+  -157.95003,
+  21.36491
+ ],
+ "width": 2600,
+ "depth": 3380,
+ "bearing": 0,
+ "snap": true,
+ "scale": 2.308,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 17,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "all",
+ "fetchTile": 1600
+}

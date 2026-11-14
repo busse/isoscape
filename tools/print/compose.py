@@ -44,6 +44,16 @@ def fit(region, aspect, focus=None):
     return nx, ny, w2, h2
 
 
+import shutil
+def svg_to_png(src, png, width, height=None, background=None):
+    """rsvg-convert when installed, else cairosvg (pip install cairosvg)."""
+    if shutil.which('rsvg-convert'):
+        cmd = ['rsvg-convert', '-w', str(width)] + (['-h', str(height)] if height else []) + (['-b', background] if background else []) + [src, '-o', png]
+        subprocess.run(cmd, check=True)
+    else:
+        import cairosvg
+        cairosvg.svg2png(url=src, write_to=png, output_width=width, output_height=height, background_color=background, unsafe=True)
+
 def raster(svg_path, vb, px_w, px_h):
     s = open(svg_path, encoding='utf-8').read()
     s = re.sub(r'viewBox="[^"]+"', 'viewBox="%.2f %.2f %.2f %.2f"' % vb, s, count=1)
@@ -53,7 +63,7 @@ def raster(svg_path, vb, px_w, px_h):
     with tempfile.TemporaryDirectory() as t:
         src, png = os.path.join(t, 'a.svg'), os.path.join(t, 'a.png')
         open(src, 'w', encoding='utf-8').write(s)
-        subprocess.run(['rsvg-convert', '-w', str(px_w), '-h', str(px_h), '-b', PAPER, src, '-o', png], check=True)
+        svg_to_png(src, png, px_w, px_h, PAPER)
         return Image.open(png).convert('RGB')
 
 

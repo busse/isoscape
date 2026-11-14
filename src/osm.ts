@@ -37,12 +37,15 @@ export interface LineFeature {
 
 export type Feature = PolygonFeature | LineFeature
 
-export const MIRRORS = [
+const ALL_MIRRORS = [
   'https://overpass-api.de/api/interpreter',
   'https://overpass.private.coffee/api/interpreter',
   'https://maps.mail.ru/osm/tools/overpass/api/interpreter',
   'https://overpass.kumi.systems/api/interpreter',
 ]
+/** Mirrors in the order tried. ISOSCAPE_OVERPASS_FIRST=<n> starts at the n-th, so parallel fetches can spread out. */
+const first = Number(process.env.ISOSCAPE_OVERPASS_FIRST ?? 0) % ALL_MIRRORS.length
+export const MIRRORS = [...ALL_MIRRORS.slice(first), ...ALL_MIRRORS.slice(0, first)]
 
 export interface Bounds { readonly south: number; readonly west: number; readonly north: number; readonly east: number }
 

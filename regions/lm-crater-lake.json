@@ -1,0 +1,35 @@
+{
+ "title": "Crater Lake — Oregon",
+ "center": [
+  -122.108,
+  42.944
+ ],
+ "width": 11000,
+ "depth": 14300,
+ "bearing": 0,
+ "snap": false,
+ "scale": 0.545,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 73,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "roof",
+ "fetchTile": 8000,
+ "terrain": {
+  "exaggeration": 1.0,
+  "cell": 22,
+  "contour": 40,
+  "majorEvery": 5,
+  "rapids": 0,
+  "demResolution": 11
+ },
+ "sources": {
+  "buildings": [
+   "osm"
+  ],
+  "landcover": "nlcd"
+ }
+}

@@ -1,0 +1,35 @@
+{
+ "title": "Mount St. Helens — Washington",
+ "center": [
+  -122.19553,
+  46.19139
+ ],
+ "width": 9000,
+ "depth": 11700,
+ "bearing": 0,
+ "snap": false,
+ "scale": 0.667,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 60,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "roof",
+ "fetchTile": 8000,
+ "terrain": {
+  "exaggeration": 1.0,
+  "cell": 18,
+  "contour": 40,
+  "majorEvery": 5,
+  "rapids": 0,
+  "demResolution": 9
+ },
+ "sources": {
+  "buildings": [
+   "osm"
+  ],
+  "landcover": "nlcd"
+ }
+}

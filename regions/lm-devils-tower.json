@@ -1,0 +1,35 @@
+{
+ "title": "Devils Tower — Crook County, Wyoming",
+ "center": [
+  -104.7151,
+  44.59061
+ ],
+ "width": 3200,
+ "depth": 4160,
+ "bearing": 0,
+ "snap": false,
+ "scale": 1.875,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 21,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "roof",
+ "fetchTile": 4000,
+ "terrain": {
+  "exaggeration": 1.0,
+  "cell": 6,
+  "contour": 5,
+  "majorEvery": 5,
+  "rapids": 0,
+  "demResolution": 3
+ },
+ "sources": {
+  "buildings": [
+   "osm"
+  ],
+  "landcover": "nlcd"
+ }
+}

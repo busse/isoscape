@@ -1,0 +1,21 @@
+{
+ "title": "Waikiki and Diamond Head — Honolulu, Hawaii",
+ "center": [
+  -157.8215,
+  21.264
+ ],
+ "width": 3600,
+ "depth": 4680,
+ "bearing": 0,
+ "snap": true,
+ "scale": 1.667,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 24,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "roof",
+ "fetchTile": 4000
+}

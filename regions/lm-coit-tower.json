@@ -1,0 +1,29 @@
+{
+ "title": "Coit Tower — San Francisco",
+ "center": [
+  -122.40583,
+  37.80238
+ ],
+ "width": 1100,
+ "depth": 1430,
+ "bearing": 0,
+ "snap": true,
+ "scale": 5.455,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 12,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "all",
+ "fetchTile": 1600,
+ "terrain": {
+  "exaggeration": 2.0,
+  "cell": 5,
+  "contour": 2,
+  "majorEvery": 5,
+  "rapids": 0,
+  "demResolution": 2
+ }
+}

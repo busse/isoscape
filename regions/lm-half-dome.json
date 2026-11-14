@@ -1,0 +1,35 @@
+{
+ "title": "Half Dome and Yosemite Valley — Yosemite National Park",
+ "center": [
+  -119.565,
+  37.738
+ ],
+ "width": 8000,
+ "depth": 10400,
+ "bearing": 0,
+ "snap": false,
+ "scale": 0.75,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 53,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "roof",
+ "fetchTile": 8000,
+ "terrain": {
+  "exaggeration": 1.0,
+  "cell": 16,
+  "contour": 40,
+  "majorEvery": 5,
+  "rapids": 0,
+  "demResolution": 8
+ },
+ "sources": {
+  "buildings": [
+   "osm"
+  ],
+  "landcover": "nlcd"
+ }
+}

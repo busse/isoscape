@@ -1,0 +1,40 @@
+{
+ "title": "Brooklyn Bridge — New York City",
+ "center": [
+  -73.99628,
+  40.70575
+ ],
+ "width": 1600,
+ "depth": 2080,
+ "bearing": 0,
+ "snap": true,
+ "scale": 3.75,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 12,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [
+  {
+   "match": "Brooklyn Bridge",
+   "deck": 41,
+   "pierSpacing": 486
+  },
+  {
+   "match": "Manhattan Bridge",
+   "deck": 41,
+   "pierSpacing": 448
+  }
+ ],
+ "minBuildingArea": 12,
+ "dots": "all",
+ "fetchTile": 1600,
+ "terrain": {
+  "exaggeration": 2.0,
+  "cell": 5,
+  "contour": 2,
+  "majorEvery": 5,
+  "rapids": 0,
+  "demResolution": 2
+ }
+}

@@ -11,6 +11,8 @@ export interface BridgeRule {
   readonly match: string
   /** Deck height above the water or ground, in metres. */
   readonly deck: number
+  /** Metres between piers (default 38). Suspension bridges want a long spacing: two towers, not a wall of piers. */
+  readonly pierSpacing?: number
 }
 
 export interface Region {

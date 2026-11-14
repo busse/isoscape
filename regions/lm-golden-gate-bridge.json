@@ -1,0 +1,35 @@
+{
+ "title": "Golden Gate Bridge — San Francisco",
+ "center": [
+  -122.4783,
+  37.8199
+ ],
+ "width": 3200,
+ "depth": 4160,
+ "bearing": 0,
+ "snap": true,
+ "scale": 1.875,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 21,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [
+  {
+   "match": "Golden Gate",
+   "deck": 67,
+   "pierSpacing": 640
+  }
+ ],
+ "minBuildingArea": 12,
+ "dots": "roof",
+ "fetchTile": 4000,
+ "terrain": {
+  "exaggeration": 2.0,
+  "cell": 6,
+  "contour": 5,
+  "majorEvery": 5,
+  "rapids": 0,
+  "demResolution": 3
+ }
+}

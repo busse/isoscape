@@ -1,0 +1,29 @@
+{
+ "title": "Cape Hatteras Lighthouse — Outer Banks, North Carolina",
+ "center": [
+  -75.5288,
+  35.2507
+ ],
+ "width": 2000,
+ "depth": 2600,
+ "bearing": 0,
+ "snap": true,
+ "scale": 3.0,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 13,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "all",
+ "fetchTile": 1600,
+ "terrain": {
+  "exaggeration": 2.0,
+  "cell": 5,
+  "contour": 5,
+  "majorEvery": 5,
+  "rapids": 0,
+  "demResolution": 2
+ }
+}

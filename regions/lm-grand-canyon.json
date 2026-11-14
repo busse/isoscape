@@ -1,0 +1,35 @@
+{
+ "title": "Grand Canyon — Arizona",
+ "center": [
+  -112.105,
+  36.098
+ ],
+ "width": 7000,
+ "depth": 9100,
+ "bearing": 0,
+ "snap": false,
+ "scale": 0.857,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 47,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "roof",
+ "fetchTile": 8000,
+ "terrain": {
+  "exaggeration": 1.0,
+  "cell": 14,
+  "contour": 20,
+  "majorEvery": 5,
+  "rapids": 0,
+  "demResolution": 7
+ },
+ "sources": {
+  "buildings": [
+   "osm"
+  ],
+  "landcover": "nlcd"
+ }
+}

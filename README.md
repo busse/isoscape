@@ -263,7 +263,7 @@ same pipeline on a flat plate.
   "slab": 16,                     // ground slab thickness, metres
   "palette": "paper",             // paper | night
   "bridgeDeck": 7,                // default deck height per OSM layer
-  "bridges": [{ "match": "Manchester", "deck": 24 }],
+  "bridges": [{ "match": "Manchester", "deck": 24 }],  // + "pierSpacing": metres (default 38; long for suspension bridges)
   "minBuildingArea": 12,          // m²
   "dots": "all",                  // all | roof | none
   "data": "richmond-downtown",    // optional: share another region's cached data

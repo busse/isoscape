@@ -549,7 +549,13 @@ const deckHeight = (region: Region, chain: BridgeChain): number => {
  * A bridge, cut into short spans so each can take its own place in the paint order. The deck
  * ramps up from the ground at both ends; piers drop from it at a fixed spacing.
  */
+const pierSpacing = (region: Region, chain: BridgeChain): number => {
+  for (const rule of region.bridges ?? []) if (chain.names.includes(rule.match.toLowerCase())) return rule.pierSpacing ?? PIER_SPACING
+  return PIER_SPACING
+}
+
 const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain): Item[] => {
+  const spacing = pierSpacing(region, chain)
   const line = chain.line
   const t = line.tags
   const rail = isRail(t)
@@ -613,7 +619,7 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
   }
   const items: Item[] = []
   let travelled = 0
-  let nextPier = PIER_SPACING / 2
+  let nextPier = spacing / 2
   for (let i = 0; i + 1 < pts.length; i++) {
     const a = pts[i]
     const b = pts[i + 1]
@@ -625,7 +631,7 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
       const p0: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
       const p1: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 1)) / n, a[1] + ((b[1] - a[1]) * (k + 1)) / n]
       if (!insideRect(p0, view.frame) || !insideRect(p1, view.frame)) {
-        while (nextPier <= s1) nextPier += PIER_SPACING
+        while (nextPier <= s1) nextPier += spacing
         continue
       }
       const quad = segmentQuad(p0, p1, width / 2, width / 2)
@@ -648,7 +654,7 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
           const r: Vec2 = [c[0] + dy * half, c[1] - dx * half]
           shapes.push({ pts: [view.toScreen(l, footZ), view.toScreen(r, footZ), view.toScreen(r, pz - FASCIA), view.toScreen(l, pz - FASCIA)], fill: pal.pier, ink: true })
         }
-        nextPier += PIER_SPACING
+        nextPier += spacing
       }
       // Fascia on whichever long side faces the camera.
       const [ql0, ql1, qr1, qr0] = quad

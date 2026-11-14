@@ -1,0 +1,35 @@
+{
+ "title": "Delicate Arch — Arches National Park, Utah",
+ "center": [
+  -109.4993,
+  38.7436
+ ],
+ "width": 2200,
+ "depth": 2860,
+ "bearing": 0,
+ "snap": false,
+ "scale": 2.727,
+ "squash": 0.5,
+ "exaggeration": 1.0,
+ "slab": 15,
+ "palette": "paper",
+ "bridgeDeck": 7,
+ "bridges": [],
+ "minBuildingArea": 12,
+ "dots": "all",
+ "fetchTile": 1600,
+ "terrain": {
+  "exaggeration": 1.0,
+  "cell": 5,
+  "contour": 5,
+  "majorEvery": 5,
+  "rapids": 0,
+  "demResolution": 2
+ },
+ "sources": {
+  "buildings": [
+   "osm"
+  ],
+  "landcover": "nlcd"
+ }
+}
