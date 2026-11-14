@@ -340,6 +340,7 @@ const blocks = (lines: readonly string[], ctx: Ctx): string => {
 
 export const markdown = (src: string, opts: MarkdownOptions = {}): MarkdownResult => {
   const ctx: Ctx = { opts, headings: [], used: new Map() }
-  const lines = src.replace(/\r\n?/g, '\n').replace(/\t/g, '    ').split('\n')
+  // HTML comments are notes for whoever edits the page, never shown.
+  const lines = src.replace(/\r\n?/g, '\n').replace(/<!--[\s\S]*?-->\n?/g, '').replace(/\t/g, '    ').split('\n')
   return { html: blocks(lines, ctx), headings: ctx.headings }
 }
