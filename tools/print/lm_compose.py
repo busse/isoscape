@@ -11,7 +11,7 @@ Image.MAX_IMAGE_PIXELS = None
 MAX = 15_000_000
 CREDIT = 'isoscape by Chris Busse  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP'
 
-def content_box(svg):
+def content_box(svg, zoom=True):
     s = open(svg, encoding='utf-8').read(3000)
     vb = list(map(float, re.search(r'viewBox="([^"]+)"', s).group(1).split()))
     with tempfile.TemporaryDirectory() as t:
@@ -34,7 +34,7 @@ def content_box(svg):
     y1 -= (y1 - y0) * 0.01
     water = (rgb[..., 2] > rgb[..., 0] + 25) & mask
     land = mask & ~water
-    if land.sum() < 0.25 * mask.sum():   # mostly water: zoom to the land, with room around it
+    if zoom and land.sum() < 0.25 * mask.sum():   # mostly water: zoom to the land, with room around it
         ly, lx = np.where(land)
         cx, cy = vb[0] + lx.mean() * k, vb[1] + ly.mean() * k
         lw = (np.percentile(lx, 97) - np.percentile(lx, 3)) * k; lh = (np.percentile(ly, 97) - np.percentile(ly, 3)) * k
@@ -44,9 +44,16 @@ def content_box(svg):
         return [bx0, by0, bx1 - bx0, by1 - by0]
     return [x0, y0, x1 - x0, y1 - y0]
 
-def make(slug, title, place, svg, out_dir, landscape=True):
-    box = content_box(svg)
+def make(slug, title, place, svg, out_dir, landscape=True, zoom=True, anchor=None):
+    """zoom=False keeps the whole scene even when it is mostly water (a frame drawn to hold shore and
+    water together); anchor='left' or 'top' keeps that edge when the panel crops the scene; a number 0-1 is the share of a vertical crop taken from the top."""
+    box = content_box(svg, zoom)
     cx, cy = box[0] + box[2] / 2, box[1] + box[3] * 0.55
+    PANEL = 1.73   # the 36x24 layout's map panel, width / height
+    if anchor == 'left': cx = box[0] + min(box[2], box[3] * PANEL) / 2
+    if anchor == 'top': anchor = 0.0
+    if isinstance(anchor, float):   # share of the cropped height taken from the top (0 keeps the top edge)
+        vis = min(box[3], box[2] / PANEL); cy = box[1] + anchor * (box[3] - vis) + vis / 2
     design = {'title': title, 'subtitle': place, 'region': slug, 'panels': [{'build': slug}], 'margin': 0.045, 'band': 0.1}
     regions = {slug: {'box': box, 'focus': [cx, cy]}}
     C.CREDIT = CREDIT

@@ -1,29 +1,21 @@
 {
  "title": "Statue of Liberty — New York Harbor",
  "center": [
-  -74.0445,
-  40.6892
+  -74.034,
+  40.702
  ],
- "width": 520,
- "depth": 676,
- "bearing": 0,
- "snap": true,
- "scale": 11.538,
+ "width": 3600,
+ "depth": 3600,
+ "bearing": -34,
+ "snap": false,
+ "scale": 1.667,
  "squash": 0.5,
  "exaggeration": 1.0,
- "slab": 12,
+ "slab": 24,
  "palette": "paper",
  "bridgeDeck": 7,
  "bridges": [],
  "minBuildingArea": 12,
- "dots": "all",
- "fetchTile": 1600,
- "terrain": {
-  "exaggeration": 2.0,
-  "cell": 5,
-  "contour": 2,
-  "majorEvery": 5,
-  "rapids": 0,
-  "demResolution": 2
- }
+ "dots": "roof",
+ "fetchTile": 4000
 }
