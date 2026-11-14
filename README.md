@@ -258,6 +258,25 @@ same pipeline on a flat plate.
 The fetch covers the frame's circumscribed circle, so a snapped camera never looks past the
 data.
 
+## Extra sources
+
+OSM and 3DEP are always used. A region can ask for more where OSM is thin, which is usually
+in the countryside:
+
+```jsonc
+"sources": { "buildings": ["osm", "microsoft"], "landcover": "nlcd" }
+```
+
+- `"microsoft"` adds [Microsoft's Global ML Building
+  Footprints](https://github.com/microsoft/GlobalMLBuildingFootprints) (ODbL) where OSM has no
+  building, with the model's height where it gave one.
+- `"nlcd"` draws woods, wetlands, fields and crops from the [National Land Cover
+  Database](https://www.mrlc.gov/) (NLCD 2021, 30 m, public domain), under OSM's own land use.
+
+`fetch` gets them along with everything else; `fetch <region> --extras-only` gets just these.
+For tidal water, set `terrain.rocks: false` and `terrain.rapids: 0`: river logic has nothing to
+find there.
+
 ## Roadmap
 
 1. **Lidar heights.** About 40% of downtown heights are guesses. 3DEP's bare-earth model is

@@ -13,6 +13,8 @@ export interface Palette {
   readonly green: string
   readonly wood: string
   readonly marsh: string
+  /** Land cover groups (NLCD), drawn under OSM's own land use. */
+  readonly cover: Readonly<Record<'forest' | 'evergreen' | 'swamp' | 'marsh' | 'field' | 'crop' | 'scrub' | 'barren', string>>
   readonly sand: string
   readonly rock: string
   readonly parking: string
@@ -55,6 +57,16 @@ const paper: Palette = {
   green: '#d3dfb9',
   wood: '#bccf9e',
   marsh: '#c9d6ae',
+  cover: {
+    forest: '#c3d3a3',
+    evergreen: '#b3c697',
+    swamp: '#bdd0b0',
+    marsh: '#d0dcb6',
+    field: '#e5e4c3',
+    crop: '#ebdfc2',
+    scrub: '#dcd8b4',
+    barren: '#ece4cc',
+  },
   sand: '#efe4c4',
   rock: '#d9d2c3',
   parking: '#e2ddd1',
@@ -98,6 +110,16 @@ const night: Palette = {
   green: '#22302a',
   wood: '#1f2d25',
   marsh: '#26332b',
+  cover: {
+    forest: '#203027',
+    evergreen: '#1b2a22',
+    swamp: '#1f2e2e',
+    marsh: '#25322c',
+    field: '#262a26',
+    crop: '#2a2a25',
+    scrub: '#272a24',
+    barren: '#2b2b2a',
+  },
   sand: '#33322b',
   rock: '#2a2c33',
   parking: '#24272f',

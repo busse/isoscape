@@ -14,6 +14,7 @@ import { GROUND_ORDER } from './classify.ts'
 import { paintOrder } from './order.ts'
 import type { Item, Scene, Shape } from './scene.ts'
 import { cellNormal, contours, dampCell, riverFall, type ContourSegment } from './terrain.ts'
+import { COVER_OF, COVER_ORDER, type CoverGroup } from './landcover.ts'
 
 const f = (n: number) => (Math.round(n * 10) / 10).toString()
 
@@ -159,7 +160,8 @@ export const renderSvg = (scene: Scene): Rendered => {
     `<style>`,
     `.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}.d{fill:none;stroke:${p.ink};stroke-width:${f(p.dotRadius * 2)};stroke-linecap:round}`,
     `.td{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth};stroke-dasharray:1.2 1.8}`,
-    sealed('L', p.land), sealed('Lw', p.water), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
+    sealed('L', p.land), sealed('Lw', p.water),
+    ...Object.entries(p.cover).map(([g, colour]) => sealed(`cv-${g}`, colour)), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
     sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('canal', p.water), sealed('path', p.path),
     sealed('road', p.road), sealed('rail', p.rail), sealed('weir', p.foam),
     `.ties{fill:none;stroke:${p.railTie};stroke-width:${p.groundLineWidth * 2};stroke-dasharray:1 2.2}`,
@@ -294,15 +296,45 @@ export const renderSvg = (scene: Scene): Rendered => {
       }
     }
   }
-  /** The part of cell (i, j) on the wet side of the shoreline, as a polygon in view metres. */
-  const shoreCell = (i: number, j: number, yLo: number, yHi: number): Vec2[] | null => {
+  /** Smooth a 0/1 mask over the grid (3×3, weighted), for tracing at one half. */
+  const smoothMask = (on: (k: number) => boolean): Float32Array => {
+    const out = new Float32Array(T.water.length)
+    for (let j = 0; j < T.ny; j++) {
+      for (let i = 0; i < T.nx; i++) {
+        let sum = 0
+        let wsum = 0
+        for (let dj = -1; dj <= 1; dj++) {
+          for (let di = -1; di <= 1; di++) {
+            const ii = i + di
+            const jj = j + dj
+            if (ii < 0 || jj < 0 || ii >= T.nx || jj >= T.ny) continue
+            const w = di === 0 && dj === 0 ? 4 : di === 0 || dj === 0 ? 2 : 1
+            if (on(jj * T.nx + ii)) sum += w
+            wsum += w
+          }
+        }
+        out[j * T.nx + i] = sum / wsum
+      }
+    }
+    return out
+  }
+  // Land cover, one smoothed mask per group, on land only.
+  const coverFields = new Map<CoverGroup, Float32Array>()
+  if (T.cover.some((v) => v !== 0)) {
+    for (const g of COVER_ORDER) {
+      const field = smoothMask((k) => T.water[k] === 0 && COVER_OF[T.cover[k]] === g)
+      if (field.some((v) => v >= 0.5)) coverFields.set(g, field)
+    }
+  }
+  /** The part of cell (i, j) where `field` is at least one half, as a polygon in view metres. */
+  const traceCell = (field: Float32Array, i: number, j: number, yLo: number, yHi: number): Vec2[] | null => {
     const xa = nodeX(i)
     const xb = nodeX(i + 1)
     const corners: [Vec2, number][] = [
-      [[xa, yLo], wetness[j * T.nx + i]],
-      [[xb, yLo], wetness[j * T.nx + i + 1]],
-      [[xb, yHi], wetness[(j + 1) * T.nx + i + 1]],
-      [[xa, yHi], wetness[(j + 1) * T.nx + i]],
+      [[xa, yLo], field[j * T.nx + i]],
+      [[xb, yLo], field[j * T.nx + i + 1]],
+      [[xb, yHi], field[(j + 1) * T.nx + i + 1]],
+      [[xa, yHi], field[(j + 1) * T.nx + i]],
     ]
     const out: Vec2[] = []
     for (let k = 0; k < 4; k++) {
@@ -329,6 +361,13 @@ export const renderSvg = (scene: Scene): Rendered => {
     // standing in the strip before.
     const lapNear = s.n0 > fr.minY ? Math.min(8, (s.n1 - s.n0) * 0.8) : 0
     const lapFar = s.n1 < fr.maxY ? 0.6 : 0
+    // Rows within a strip overlap a little too: their shared edges are simplified separately,
+    // so they no longer meet exactly, and a hairline would show between them.
+    const rowLap = c * 0.3
+    // The bases stop short of the far edge, in ground the strip before has already lapped
+    // over; what is drawn on them still reaches the edge. Their edges then never meet over
+    // a different colour, which is what shows as a hairline.
+    const baseInset = s.n1 < fr.maxY ? Math.min(lapNear * 0.4, c * 0.25) : 0
     const groundFar = 0
     const band: Rect = { minX: fr.minX, maxX: fr.maxX, minY: s.n0 - lapNear, maxY: s.n1 + lapFar }
     const parts: string[] = []
@@ -338,8 +377,8 @@ export const renderSvg = (scene: Scene): Rendered => {
     let landBase = ''
     let waterBase = ''
     for (let j = s.j0; j < s.j1; j++) {
-      const yLo = j === s.j0 ? s.n0 - lapNear : T.y0 + j * c
-      const yHi = j === s.j1 - 1 ? s.n1 + groundFar : T.y0 + (j + 1) * c
+      const yLo = j === s.j0 ? s.n0 - lapNear : T.y0 + j * c - rowLap
+      const yHi = j === s.j1 - 1 ? s.n1 - baseInset : T.y0 + (j + 1) * c
       let start = iMin
       let wet = baseWet(start, j)
       for (let i = iMin + 1; i <= iMax; i++) {
@@ -352,7 +391,8 @@ export const renderSvg = (scene: Scene): Rendered => {
           top.push(lay([nodeX(k), yHi]))
           bottom.push(lay([nodeX(k), yLo]))
         }
-        const d = groundPath([...top, ...bottom.reverse()])
+        // Wound like the traced cells (along the near edge first), so overlaps add, not cancel.
+        const d = groundPath([...bottom, ...top.reverse()])
         if (wet) waterBase += d
         else landBase += d
         start = i
@@ -360,6 +400,38 @@ export const renderSvg = (scene: Scene): Rendered => {
       }
     }
     if (landBase) parts.push(`<path class="L" d="${landBase}"/>`)
+    // Land cover over the bare ground: whole cells merged into runs, edges traced through.
+    for (const [g, field] of coverFields) {
+      let d = ''
+      for (let j = s.j0; j < s.j1; j++) {
+        const yLo = j === s.j0 ? s.n0 - lapNear : T.y0 + j * c - rowLap
+        const yHi = j === s.j1 - 1 ? s.n1 + groundFar : T.y0 + (j + 1) * c
+        let runStart = -1
+        const full = (i: number) => field[j * T.nx + i] >= 0.5 && field[j * T.nx + i + 1] >= 0.5 && field[(j + 1) * T.nx + i] >= 0.5 && field[(j + 1) * T.nx + i + 1] >= 0.5
+        const flushRun = (iEnd: number) => {
+          if (runStart < 0) return
+          const top: Vec2[] = []
+          const bottom: Vec2[] = []
+          for (let k = runStart; k <= iEnd; k++) {
+            top.push(drape([nodeX(k), yHi]))
+            bottom.push(drape([nodeX(k), yLo]))
+          }
+          d += groundPath([...bottom, ...top.reverse()])
+          runStart = -1
+        }
+        for (let i = iMin; i < iMax; i++) {
+          if (full(i)) {
+            if (runStart < 0) runStart = i
+            continue
+          }
+          flushRun(i)
+          const poly = traceCell(field, i, j, yLo, yHi)
+          if (poly !== null) d += groundPath(poly.map(drape))
+        }
+        flushRun(iMax)
+      }
+      if (d) parts.push(`<path class="cv-${g}" d="${d}"/>`)
+    }
     if (waterBase) parts.push(`<path class="Lw" d="${waterBase}"/>`)
     // With terrain, the water's edge comes from the lidar-corrected water grid, not from OSM's
     // outline: the two disagree by metres, and on a steep bank metres become cliffs.
@@ -370,7 +442,7 @@ export const renderSvg = (scene: Scene): Rendered => {
         const yHi = j === s.j1 - 1 ? s.n1 + groundFar : T.y0 + (j + 1) * c
         for (let i = iMin; i < iMax; i++) {
           if (wetCorners(i, j) === 4) continue
-          const poly = shoreCell(i, j, yLo, yHi)
+          const poly = traceCell(wetness, i, j, yLo, yHi)
           if (poly !== null) shore += groundPath(poly.map(drapeWater))
         }
       }
@@ -450,6 +522,7 @@ export const renderSvg = (scene: Scene): Rendered => {
       let froth = ''
       for (let j = s.j0; j < s.j1; j++) {
         for (let i = iMin; i < iMax; i++) {
+          if (rapidsThreshold <= 0) continue
           const fall = riverFall(T, i, j)
           if (fall === null || fall.slope < rapidsThreshold) continue
           const slope = fall.slope

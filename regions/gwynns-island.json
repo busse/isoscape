@@ -1,0 +1,46 @@
+{
+  "title": "Gwynn's Island, Mathews County, VA \u2014 the Piankatank to Milford Haven",
+  "center": [
+    -76.34203,
+    37.49788
+  ],
+  "width": 13947,
+  "depth": 13647,
+  "bearing": 0,
+  "snap": false,
+  "scale": 1.4,
+  "squash": 0.5,
+  "exaggeration": 1.0,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 6,
+  "bridges": [
+    {
+      "match": "Twiggs Ferry",
+      "deck": 16
+    },
+    {
+      "match": "Cricket Hill",
+      "deck": 5
+    }
+  ],
+  "minBuildingArea": 10,
+  "dots": "all",
+  "fetchTile": 4000,
+  "terrain": {
+    "exaggeration": 4,
+    "cell": 10,
+    "contour": 1,
+    "majorEvery": 5,
+    "rapids": 0,
+    "demResolution": 5,
+    "rocks": false
+  },
+  "sources": {
+    "buildings": [
+      "osm",
+      "microsoft"
+    ],
+    "landcover": "nlcd"
+  }
+}

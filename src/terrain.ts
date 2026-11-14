@@ -27,6 +27,8 @@ export interface Terrain {
   readonly interior: Uint8Array
   /** The river's surface elevation, carried a few cells inland past the shore; NaN beyond. */
   readonly level: Float32Array
+  /** Land cover class (NLCD code) at each node; 0 where unknown. */
+  readonly cover: Uint8Array
   /** Scene z of the water surface at a point; the ground's own z where there is no water near. */
   readonly waterZ: (p: Vec2) => number
   readonly datum: number
@@ -102,6 +104,7 @@ export const makeTerrain = (
     water: new Uint8Array(nx * ny),
     rocks: new Uint8Array(nx * ny),
     interior: new Uint8Array(nx * ny),
+    cover: new Uint8Array(nx * ny),
     level,
     waterZ,
     datum,
@@ -290,7 +293,7 @@ const blur = (a: Float32Array, nx: number, ny: number, passes: number, mask?: Ui
  * replaced by the surface, so the river drapes as water — level across, falling along its
  * course, steeply only where it really drops.
  */
-export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0): void => {
+export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0, markRocks = true): void => {
   if (t.flat) return
   const { nx, ny, elev, water } = t
   const reach = Math.max(1, Math.round(radius / t.cell))
@@ -345,7 +348,7 @@ export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0): void => 
   markInterior()
   for (let k = 0; k < elev.length; k++) {
     if (water[k] !== 1) continue
-    if (t.interior[k] === 1 && elev[k] - surface[k] > rockHeight) t.rocks[k] = 1
+    if (markRocks && t.interior[k] === 1 && elev[k] - surface[k] > rockHeight) t.rocks[k] = 1
     elev[k] = surface[k]
     t.level[k] = surface[k]
   }

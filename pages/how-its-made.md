@@ -36,7 +36,9 @@ Where to start:
 | Part of the picture | Comes from | How sure |
 |---|---|---|
 | Building footprints, roads, rail, parks, water outlines | OpenStreetMap | Mapped by volunteers, mostly traced from aerial imagery. Usually good, sometimes stale |
-| Building heights | OSM `height`, else `building:levels`, else a guess | Mixed. In downtown Richmond about 40% are guesses. Each build reports its own split |
+| Extra footprints (where a region asks) | Microsoft's ML building footprints | Traced by a model from imagery. Good outlines, sometimes merged or missing |
+| Building heights | OSM `height`, else Microsoft's model, else `building:levels`, else a guess | Mixed. In downtown Richmond about 40% are guesses; around Gwynn's Island, a little over half. Each build reports its own split |
+| Woods, wetlands, fields, crops (where a region asks) | USGS National Land Cover Database (NLCD 2021) | Classified from satellite imagery at 30 m. Right in the large, coarse at the edges |
 | Ground elevation | USGS 3DEP bare-earth model | Measured. 1 m lidar where it has been flown |
 | River surface | The lowest lidar returns over mapped water, smoothed | Inferred |
 | Exposed rock and rapids | Height above, and fall of, that surface | Inferred |
@@ -70,7 +72,22 @@ The download covers the frame's circumscribed circle plus a 60 m margin. The cam
 after the data arrives (see [Camera](#camera)), and the data still covers the frame. **Builds
 never touch the network**, so a build can be repeated exactly.
 
-Code: `src/osm.ts`, `src/dem.ts`.
+**Building footprints, beyond OSM.** OSM is thorough in cities and thin in the country.
+Around Gwynn's Island it maps 417 buildings, while Microsoft's
+[Global ML Building Footprints](https://github.com/microsoft/GlobalMLBuildingFootprints)
+find over 6,000. A region can list `"microsoft"` in `sources.buildings`. `fetch` then
+downloads the dataset's parts for the region's zoom-9 quadkeys, keeps the footprints whose
+centres fall in the region, and stores them in `data/<region>/footprints.json`. The model
+estimates a height for many of them, and that height is kept.
+
+**Land cover.** Rural OSM rarely maps woods and fields. A region with `sources.landcover:
+"nlcd"` gets the [National Land Cover Database](https://www.mrlc.gov/) (NLCD 2021) through
+the MRLC's map service. That's a 30 m classification of the whole country: forest, wetland,
+pasture, crops, scrub and so on. The map image comes back with each class in its legend
+colour, and each colour is matched back to its class. The result is stored in
+`data/<region>/landcover.bin.gz`.
+
+Code: `src/osm.ts`, `src/dem.ts`, `src/footprints.ts`, `src/landcover.ts`.
 
 ## Region
 
@@ -118,7 +135,13 @@ otherwise from its class: 14 m for a motorway, 7 m for a residential street, 1.8
 footway. Tunnels are left out. Railways are 3.2 m ribbons with dashed ties. Weirs and dams
 are drawn as white crests.
 
-Code: `src/classify.ts`, `buildScene` in `src/scene.ts`.
+**Land cover from NLCD**, where a region uses it, goes down first, between the bare ground
+and OSM's own areas. Each 30 m class is resampled onto the terrain grid and grouped as woods,
+evergreen woods, swamp, marsh, field, crop, scrub or barren. Each group's edge is traced
+smoothly through the grid, the same way as the shoreline, so the blocks don't show as
+squares. OSM's parks, woods and marshes are drawn on top of it, so mapped detail wins.
+
+Code: `src/classify.ts`, `buildScene` in `src/scene.ts`, cover in `paintStrip` in `src/render.ts`.
 
 ## Coastline
 
@@ -211,11 +234,16 @@ commerce, industry or civic. Where a building is mapped as Simple 3D Buildings p
 (`building:part`), the parts are drawn instead of the outline. Open canopies
 (`building=roof`) are left out.
 
+**Footprints from Microsoft's model** fill in where OSM has none. Wherever an OSM building
+and a footprint overlap, OSM wins and the footprint is dropped. A footprint is dropped if its
+centre lies in an OSM building, or if it holds an OSM building's centre.
+
 **Heights** are taken from the first of these that the building has:
 
 1. a `height` tag, from a survey or a mapper's estimate;
-2. `building:levels`, at 3.4 m a floor, plus half a floor for each roof level;
-3. **a guess** from the building's type and size: 3.2 m for a shed or anything under 40 m²,
+2. **an estimate from Microsoft's model**, for its own footprints, where it made one;
+3. `building:levels`, at 3.4 m a floor, plus half a floor for each roof level;
+4. **a guess** from the building's type and size: 3.2 m for a shed or anything under 40 m²,
    8 m for a house, 10 m for a terrace, 16 m for apartments or a hotel, 13 m for an office
    (24 m over 1,500 m²), 11 m for industry, 16 m for a church, and 8–14 m by footprint for
    anything else.

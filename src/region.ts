@@ -45,6 +45,13 @@ export interface Region {
   /** Default deck height for bridges with no matching rule, metres per OSM `layer`. */
   readonly bridgeDeck?: number
   readonly bridges?: readonly BridgeRule[]
+  /**
+   * Extra data, beyond OSM and elevation. `buildings` lists where footprints come from:
+   * OpenStreetMap and/or Microsoft's ML footprints (OSM wins where both have a building).
+   * `landcover: 'nlcd'` draws woods, wetlands, fields and crops from the National Land Cover
+   * Database, where OSM's own land use is thin.
+   */
+  readonly sources?: { readonly buildings?: readonly ('osm' | 'microsoft')[]; readonly landcover?: 'nlcd' }
   /** OSM is fetched in tiles no bigger than this, in metres a side. Default 1600; sparse
    * rural regions can take much bigger tiles. */
   readonly fetchTile?: number
@@ -71,6 +78,8 @@ export interface TerrainOptions {
   readonly majorEvery?: number
   /** Water-surface gradient (m/m) above which a stretch of river reads as rapids. */
   readonly rapids?: number
+  /** Mark rock standing clear of the water. Default true; off for tidal flats and shoals. */
+  readonly rocks?: boolean
   /** Metres per pixel to fetch the elevation at. Default 1; coarser keeps big regions small. */
   readonly demResolution?: number
 }

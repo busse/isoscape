@@ -185,7 +185,7 @@ body.reading main { grid-template-rows: 1fr; }
 .story .credit { margin-top: 14px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12px; color: var(--dim); }
 .mixbar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 6px 0 4px; max-width: 360px; background: var(--chip); }
 .mixbar span { display: block; height: 100%; }
-.m-tag { background: var(--good); } .m-lev { background: var(--accent); } .m-guess { background: var(--faint); }
+.m-tag { background: var(--good); } .m-model { background: #8a7bb8; } .m-lev { background: var(--accent); } .m-guess { background: var(--faint); }
 .doc .back[hidden] { display: none; }
 #page:focus { outline: none; }
 .story ul.keyed { list-style: none; padding-left: 0; }
@@ -390,7 +390,7 @@ body.reading main { grid-template-rows: 1fr; }
   }
 
   // ---- info -------------------------------------------------------------------------------------
-  const STAT_ORDER = ['buildings', 'heightFromTag', 'heightFromLevels', 'heightGuessed', 'bridgePieces', 'ground', 'ribbons', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'features']
+  const STAT_ORDER = ['buildings', 'footprintsAdded', 'heightFromTag', 'heightFromModel', 'heightFromLevels', 'heightGuessed', 'bridgePieces', 'ground', 'ribbons', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'features']
   const statKeys = (...bs) => {
     const keys = new Set()
     for (const b of bs) for (const k of Object.keys(b.stats || {})) keys.add(k)
@@ -450,7 +450,7 @@ body.reading main { grid-template-rows: 1fr; }
   // A build's own story, written from its meta.json. Anything an older build did not record is
   // said to be unknown rather than guessed.
   const how = (id, text) => pageBySlug.has('how-its-made') ? '<a href="#/how-its-made/' + id + '">' + text + '</a>' : text
-  const KNOWN = new Set(['features', 'ground', 'ribbons', 'buildings', 'heightFromTag', 'heightFromLevels', 'heightGuessed', 'bridgePieces', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'coastWays'])
+  const KNOWN = new Set(['features', 'ground', 'ribbons', 'buildings', 'heightFromTag', 'heightFromModel', 'heightFromLevels', 'heightGuessed', 'footprintsAdded', 'bridgePieces', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'coastWays'])
   const POINTS = ['north', 'north-northeast', 'northeast', 'east-northeast', 'east', 'east-southeast', 'southeast', 'south-southeast', 'south', 'south-southwest', 'southwest', 'west-southwest', 'west', 'west-northwest', 'northwest', 'north-northwest']
   const isNum = (v) => typeof v === 'number' && Number.isFinite(v)
   const int = (v) => Math.round(v).toLocaleString()
@@ -553,13 +553,17 @@ body.reading main { grid-template-rows: 1fr; }
     // Buildings.
     head('Buildings', how('buildings', 'where heights come from →'))
     if (has('buildings')) {
-      out.push('<p>' + plural(s.buildings, 'building') + ', extruded from OpenStreetMap footprints of at least ' + (c.minBuildingArea ?? 12) + ' m² that lie wholly inside the frame.</p>')
+      const added = s.footprintsAdded > 0 ? s.footprintsAdded : 0
+      out.push('<p>' + plural(s.buildings, 'building') + ', extruded from footprints of at least ' + (c.minBuildingArea ?? 12) + ' m² that lie wholly inside the frame' +
+        (added > 0 ? ': OpenStreetMap’s, plus ' + int(added) + ' traced by <a href="https://github.com/microsoft/GlobalMLBuildingFootprints">Microsoft’s building model</a> where OpenStreetMap has none.' : ', from OpenStreetMap.') + '</p>')
       if (has('heightFromTag') && has('heightFromLevels') && has('heightGuessed')) {
-        const tot = s.heightFromTag + s.heightFromLevels + s.heightGuessed
+        const model = s.heightFromModel > 0 ? s.heightFromModel : 0
+        const tot = s.heightFromTag + model + s.heightFromLevels + s.heightGuessed
         const seg = (cls, n) => (n > 0 ? '<span class="' + cls + '" style="width:' + ((100 * n) / tot).toFixed(2) + '%"></span>' : '')
-        out.push('<div class="mixbar" title="Where the heights came from">' + seg('m-tag', s.heightFromTag) + seg('m-lev', s.heightFromLevels) + seg('m-guess', s.heightGuessed) + '</div>')
+        out.push('<div class="mixbar" title="Where the heights came from">' + seg('m-tag', s.heightFromTag) + seg('m-model', model) + seg('m-lev', s.heightFromLevels) + seg('m-guess', s.heightGuessed) + '</div>')
         out.push('<ul class="keyed">' +
           '<li><span class="key m-tag"></span>' + int(s.heightFromTag) + ' (' + pct(s.heightFromTag, tot) + ') from a <code>height</code> tag</li>' +
+          (model > 0 ? '<li><span class="key m-model"></span>' + int(model) + ' (' + pct(model, tot) + ') from Microsoft’s model, <b>estimated</b> from imagery</li>' : '') +
           '<li><span class="key m-lev"></span>' + int(s.heightFromLevels) + ' (' + pct(s.heightFromLevels, tot) + ') from the number of floors, at 3.4 m a floor</li>' +
           '<li><span class="key m-guess"></span>' + int(s.heightGuessed) + ' (' + pct(s.heightGuessed, tot) + ') <b>guessed</b> from the building’s type and size</li></ul>')
       } else out.push('<p>' + unknown('Where the heights came from was not recorded for this build.') + '</p>')

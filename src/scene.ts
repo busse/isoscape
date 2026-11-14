@@ -21,6 +21,7 @@ import { dominantGridAngle, makeView, snapBearing, type View } from './view.ts'
 import { localMetres } from './region.ts'
 import { makeTerrain, rasterize, settleWater, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
+import { mergeFootprints, type Footprint } from './footprints.ts'
 
 /** A filled, optionally inked, polygon in screen pixels. */
 export interface Shape {
@@ -98,6 +99,7 @@ export const buildScene = (
   features: readonly Feature[],
   pal: Palette,
   elevation: ((lon: number, lat: number) => number) | null = null,
+  extra: { footprints?: readonly Footprint[]; cover?: (lon: number, lat: number) => number } = {},
 ): Scene => {
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)
@@ -134,7 +136,15 @@ export const buildScene = (
   stats.ground = ground.length
   rasterize(terrain, ground.filter((g) => g.kind === 'water').map((g) => g.rings), 1)
   rasterize(terrain, ground.filter((g) => g.kind === 'island').map((g) => g.rings), 0)
-  settleWater(terrain)
+  settleWater(terrain, 30, 1.0, opts.rocks !== false)
+  if (extra.cover !== undefined) {
+    for (let j = 0; j < terrain.ny; j++) {
+      for (let i = 0; i < terrain.nx; i++) {
+        const [lon, lat] = view.fromView([terrain.x0 + i * terrain.cell, terrain.y0 + j * terrain.cell])
+        terrain.cover[j * terrain.nx + i] = extra.cover(lon, lat)
+      }
+    }
+  }
   if (!terrain.flat) {
     stats.elevationDatum = Number(terrain.datum.toFixed(1))
     let hi = -Infinity
@@ -192,11 +202,15 @@ export const buildScene = (
   const minArea = region.minBuildingArea ?? 12
   const dotsMode = region.dots ?? 'all'
 
+  // Buildings from OSM, then any footprints from other sources that OSM does not already have.
+  const wanted = region.sources?.buildings ?? ['osm']
+  const osmBuildings = wanted.includes('osm') ? features.filter((f): f is PolygonFeature => f.type === 'polygon') : []
+  const extraBuildings = extra.footprints !== undefined && wanted.includes('microsoft') ? mergeFootprints(osmBuildings, extra.footprints) : []
+  stats.footprintsAdded = extraBuildings.length
   interface Solid { id: string; tags: PolygonFeature['tags']; outer: Ring; inners: Ring[] }
   const solids: Solid[] = []
   const parts: Solid[] = []
-  for (const f of features) {
-    if (f.type !== 'polygon') continue
+  for (const f of [...osmBuildings, ...extraBuildings]) {
     const isPart = f.tags['building:part'] !== undefined && f.tags.building === undefined
     if (f.tags.building === undefined && !isPart) continue
     // Canopies (`building=roof`) are open underneath; a solid prism would misdraw them.
@@ -212,7 +226,7 @@ export const buildScene = (
   const partCentres = parts.map((p) => centroid(p.outer))
   const shown = solids.filter((s) => !partCentres.some((c) => pointInRing(c, s.outer))).concat(parts)
 
-  let heightSources = { height: 0, levels: 0, guess: 0 }
+  let heightSources = { height: 0, model: 0, levels: 0, guess: 0 }
   for (const s of shown) {
     if (!s.outer.every((p) => insideRect(p, frame))) continue
     const area = Math.abs(signedArea(s.outer)) - s.inners.reduce((a, h) => a + Math.abs(signedArea(h)), 0)
@@ -238,6 +252,7 @@ export const buildScene = (
   }
   stats.buildings = items.length
   stats.heightFromTag = heightSources.height
+  stats.heightFromModel = heightSources.model
   stats.heightFromLevels = heightSources.levels
   stats.heightGuessed = heightSources.guess
 

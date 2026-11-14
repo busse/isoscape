@@ -106,11 +106,11 @@ const finite = (v: string | undefined): number | null => {
  * both, a guess from the building's type and footprint, which is what most of a city will be
  * until lidar heights are joined in.
  */
-export const buildingHeights = (t: Tags, footprintArea: number): { base: number; top: number; source: 'height' | 'levels' | 'guess' } => {
+export const buildingHeights = (t: Tags, footprintArea: number): { base: number; top: number; source: 'height' | 'model' | 'levels' | 'guess' } => {
   const minLevel = finite(t['building:min_level'])
   const base = Math.max(0, parseLength(t.min_height) ?? (minLevel !== null ? minLevel * METRES_PER_LEVEL : 0))
   const height = parseLength(t.height)
-  if (height !== null && height > base) return { base, top: height, source: 'height' }
+  if (height !== null && height > base) return { base, top: height, source: t['height:source'] === 'model' ? 'model' : 'height' }
   const levels = finite(t['building:levels']) ?? NaN
   if (Number.isFinite(levels) && levels > 0) {
     const roof = finite(t['roof:levels']) ?? 0

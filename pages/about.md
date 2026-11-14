@@ -25,11 +25,21 @@ credit in its description, and every page shows it.
 public domain. The USGS asks for, but does not require, a credit. `data/*/dem.bin.gz` is a
 resampled copy.
 
+**Building footprints (some regions).** [Microsoft Global ML Building
+Footprints](https://github.com/microsoft/GlobalMLBuildingFootprints), under the ODbL like OSM.
+A view that uses them should credit Microsoft as well.
+
+**Land cover (some regions).** The [National Land Cover Database](https://www.mrlc.gov/)
+(NLCD 2021) from the USGS and the Multi-Resolution Land Characteristics Consortium. It is in
+the public domain.
+
 ## Sharing a picture
 
 Put this line with the picture. Drop the second part for a view drawn without terrain:
 
 > Map data © OpenStreetMap contributors (ODbL) · Elevation: USGS 3DEP
+
+and, where a region draws on them, add: · Building footprints: Microsoft (ODbL) · Land cover: NLCD 2021
 
 Say what is estimated as well as what is measured. Many building heights are guesses, deck
 heights are rules of thumb, and rapids are inferred from the lidar (see

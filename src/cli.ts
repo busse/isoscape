@@ -5,6 +5,8 @@ import { parseArgs, promisify } from 'node:util'
 import { archiveBuild, listBuilds } from './archive.ts'
 import { backfill } from './backfill.ts'
 import { cleanDem, fetchDem, loadDem, sampler } from './dem.ts'
+import { fetchFootprints, loadFootprints } from './footprints.ts'
+import { coverSampler, fetchLandcover, loadLandcover } from './landcover.ts'
 import { renderExplorer } from './explorer.ts'
 import { fetchOsm, overpassQuery, parseOsm } from './osm.ts'
 import { loadPages } from './pages.ts'
@@ -27,7 +29,9 @@ const HELP = `isoscape — isometric dot-and-line views of real places
   isoscape backfill <commit> <region>
                                    build a region with an earlier commit's code and archive it
 
-  --osm-only / --dem-only   fetch just one of the two
+  --osm-only / --dem-only / --extras-only
+                            fetch just OSM, just elevation, or just the region's
+                            other sources (footprints, land cover)
   --budget <seconds>        stop starting new OSM tiles after this long (fetch resumes)
   --palette <name>   override the region's palette (paper, night)
   --png [width]      also rasterise out/<region>.png (needs rsvg-convert)
@@ -57,7 +61,18 @@ const loadScene = async (name: string, paletteName?: string) => {
       elevation = sampler(dem)
     }
   }
-  return buildScene(region, features, palette(paletteName ?? region.palette), elevation)
+  const extra: Parameters<typeof buildScene>[4] = {}
+  if (region.sources?.buildings?.includes('microsoft')) {
+    const fp = await loadFootprints(resolve(dataDir(region), 'footprints.json'))
+    if (fp === null) console.error(`no footprints for "${name}"; run: isoscape fetch ${region.data ?? name} --extras-only`)
+    else extra.footprints = fp
+  }
+  if (region.sources?.landcover === 'nlcd') {
+    const lc = await loadLandcover(resolve(dataDir(region), 'landcover.bin.gz'))
+    if (lc === null) console.error(`no land cover for "${name}"; run: isoscape fetch ${region.data ?? name} --extras-only`)
+    else extra.cover = coverSampler(lc)
+  }
+  return buildScene(region, features, palette(paletteName ?? region.palette), elevation, extra)
 }
 
 export const main = async (argv: string[]): Promise<void> => {
@@ -72,6 +87,7 @@ export const main = async (argv: string[]): Promise<void> => {
       help: { type: 'boolean', short: 'h' },
       'osm-only': { type: 'boolean' },
       'dem-only': { type: 'boolean' },
+      'extras-only': { type: 'boolean' },
       note: { type: 'string' },
       budget: { type: 'string' },
       'no-archive': { type: 'boolean' },
@@ -117,6 +133,12 @@ export const main = async (argv: string[]): Promise<void> => {
       const b = fetchBounds(region)
       console.error(`fetching ${b.south.toFixed(4)},${b.west.toFixed(4)} → ${b.north.toFixed(4)},${b.east.toFixed(4)}`)
       let osmDone = true
+      const only = values['osm-only'] || values['dem-only'] || values['extras-only']
+      if (!only || values['extras-only']) {
+        if (region.sources?.buildings?.includes('microsoft')) await fetchFootprints(region, dataDir(region))
+        if (region.sources?.landcover === 'nlcd') await fetchLandcover(region, dataDir(region))
+        if (values['extras-only']) return
+      }
       if (!values['dem-only']) {
         const budget = values.budget === undefined ? undefined : Number(values.budget)
         const { done, total } = await fetchOsm(region, dataDir(region), budget === undefined ? {} : { budgetSeconds: budget })
