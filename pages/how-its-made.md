@@ -362,9 +362,18 @@ Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
    it is *assumed* gone by 1960, when clearing for parking and highways began
    (`lifespans.py`).
 4. **Clean.** A last pass drops slivers, any footprint more than 8 times longer than it is
-   wide and under 12 m wide: on the sheets these are rail viaducts, track-side sheds and street
+   wide and under 12 m wide, or over 100 m long and under 8 m wide on average: on the sheets these are rail viaducts, track-side sheds and street
    edges, and extruded they would stand as walls. It then smooths each outline to within 1.5 m,
-   so pixel stair-steps do not draw as striped walls (`clean.py`; 54 slivers dropped).
+   so pixel stair-steps do not draw as striped walls. It also drops sprawls (over 2,000 m² and
+   filling under 45% of their convex hull: river shading, not buildings) and merges footprints
+   traced in two editions that overlap by more than 85%, keeping the earlier start and the later
+   end (`clean.py`: 68 dropped, 170 merged).
+
+The historic buildings are sketches, not a survey. A machine traced them from scans of
+fire-insurance maps, so outlines are approximate, heights are guessed from material, and some
+buildings are missing, misplaced or merged. The 1924 overview ("congested district") sheet is
+the least precise source. The historic scenes show the city's shape and density, not each
+building exactly.
 
 Traced buildings keep the maps' colours, so they read apart from today's. Their heights are
 guessed from their material (brick and stone three storeys, frame two): the storey counts

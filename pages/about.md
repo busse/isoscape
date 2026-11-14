@@ -37,6 +37,10 @@ OSM data and carry that licence. A rendered picture is a *produced work*. You ma
 it must credit OpenStreetMap wherever it is shown. Every SVG isoscape writes carries the
 credit in its description, and every page shows it.
 
+**Historic scenes are sketches.** Their lost buildings are traced by machine from Sanborn
+fire-insurance maps, so outlines and heights are approximate. They show the city's shape, not
+a building-by-building survey.
+
 **Elevation.** From the [USGS 3D Elevation Program
 (3DEP)](https://www.usgs.gov/3d-elevation-program), served by the National Map. It is in the
 public domain. The USGS asks for, but does not require, a credit. `data/*/dem.bin.gz` is a
