@@ -20,6 +20,9 @@ Read README.md for what this is. This file is the rules for changing it.
 - **Strip seams.** Strips lap toward the camera only (by up to 8 m), into ground the next strip
   repaints, so no seam shows at any zoom and no lap covers a standing item. Never lap away from
   the camera.
+- **Pages say what the code does.** `pages/how-its-made.md` describes the pipeline with real
+  numbers (thresholds, defaults, distances). When you change one of those in the code, change
+  the page in the same commit.
 - **Ground paints in strips, far to near,** and items slot in after the strip holding their
   near edge (`flushTo` in `render.ts`). Anything new on the ground goes into `paintStrip`,
   clipped to the strip, densified and draped, never painted as one whole polygon.
@@ -56,6 +59,9 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | a place | `regions/<name>.json` |
 | the build archive, git stamping, thumbnails | `archive.ts` |
 | the explorer page | `explorer.ts` |
+| a content page (How it's made, About, a new one) | `pages/<slug>.md`; see "Adding a page" in the README |
+| how pages are loaded and linked; the Markdown subset | `pages.ts`, `markdown.ts` |
+| the per-build "How this view was made" text | `story` in `explorer.ts` (it links to `pages/how-its-made.md` section ids) |
 | building an old commit into the archive | `backfill.ts` |
 
 ## Known limits

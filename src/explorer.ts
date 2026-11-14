@@ -7,15 +7,24 @@
  * over each other in the same coordinates with a divider to drag, and the info panel shows
  * how their numbers differ.
  *
- * The page is self-contained (the build list is embedded), so it opens straight from disk:
- * `open out/index.html`. It is rewritten after every build; reloading keeps the selection.
+ * Content pages (Markdown in `pages/`, compiled by `pages.ts`) are listed above the builds and
+ * open in a reading view at `#/<slug>`. Each build also gets a "How this view was made" tab,
+ * written from its meta.json, that links into those pages.
+ *
+ * The page is self-contained (the build list and the pages are embedded), so it opens straight
+ * from disk: `open out/index.html`. It is rewritten after every build; reloading keeps the
+ * selection.
+ *
+ * Routes (the URL hash): `#<id>` one build, `#<idA>..<idB>` compare, either with `/made` for
+ * the "How this view was made" tab; `#/<slug>` a page, `#/<slug>/<section>` a section of it.
  */
 
 import type { BuildMeta } from './archive.ts'
+import type { Page } from './pages.ts'
 
 const json = (v: unknown) => JSON.stringify(v).replace(/</g, '\\u003c')
 
-export const renderExplorer = (builds: readonly BuildMeta[]): string => `<!doctype html>
+export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Page[] = []): string => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -103,14 +112,93 @@ td.up { color: var(--good); } td.down { color: var(--bad); }
 pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; max-height: 26vh; overflow: auto; }
 .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
 .dirty { color: var(--bad); }
+
+/* ---- pages: nav ---------------------------------------------------------------- */
+#pages { padding: 0 8px 8px; }
+#pages a { display: flex; align-items: baseline; gap: 8px; padding: 5px 8px; border-radius: 6px; color: var(--ink); text-decoration: none; font-size: 13px; }
+#pages a:hover { background: var(--chip); }
+#pages a.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+#pages a::before { content: "§"; color: var(--faint); font-weight: 400; width: 10px; }
+#pages a.on::before { color: var(--accent); }
+
+/* ---- pages: reading view --------------------------------------------------------- */
+#page { display: none; overflow-y: auto; background: var(--panel); min-height: 0; }
+body.reading #stage, body.reading #info { display: none; }
+body.reading #page { display: block; }
+body.reading main { grid-template-rows: 1fr; }
+.doc { display: grid; grid-template-columns: minmax(0, 70ch) 220px; gap: 56px; justify-content: center; padding: 28px 40px 80px; }
+@media (max-width: 1180px) { .doc { grid-template-columns: minmax(0, 70ch); } #toc { display: none; } }
+.doc .back { display: inline-block; margin-bottom: 18px; font-size: 12.5px; color: var(--accent); text-decoration: none; border: 1px solid var(--line); border-radius: 14px; padding: 3px 11px; background: var(--bg); cursor: pointer; }
+.doc .back:hover { border-color: var(--accent); }
+.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; }
+.prose h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 18px; font-weight: 650; }
+.prose h2 { font-size: 20px; letter-spacing: -.01em; margin: 2.2em 0 .5em; padding-top: .6em; border-top: 1px solid var(--line); font-weight: 650; }
+.prose h3 { font-size: 16px; margin: 1.6em 0 .4em; }
+.prose h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin: 1.5em 0 .3em; }
+.prose h2, .prose h3 { scroll-margin-top: 16px; }
+.prose p, .prose ul, .prose ol, .prose blockquote, .prose .table, .prose pre { margin: 0 0 1em; }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose li { margin: .25em 0; }
+.prose li::marker { color: var(--faint); }
+.prose a { color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); text-underline-offset: 2px; }
+.prose a:hover { text-decoration-color: var(--accent); }
+.prose code { font: .86em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: .05em .25em; border-radius: 4px; }
+.prose pre { max-height: none; font-size: 12.5px; }
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+.prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 0 6px 6px 0; }
+.prose blockquote p:last-child { margin-bottom: 0; }
+.prose img { display: block; max-width: 100%; height: auto; margin: 1.4em auto; }
+.prose hr { border: none; border-top: 1px solid var(--line); margin: 2em 0; }
+.prose .table { overflow-x: auto; }
+.prose table { font-size: 13.5px; font-variant-numeric: normal; }
+.prose th, .prose td { text-align: left; white-space: normal; vertical-align: top; padding: 6px 10px 6px 0; color: var(--ink); }
+.prose th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); border-bottom: 1.5px solid var(--line); }
+.prose td:first-child { color: var(--ink); font-weight: 500; }
+.prose .source { margin-top: 3em; padding-top: 1em; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--faint); }
+#toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
+#toc h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 6px 0 8px; }
+#toc a { display: block; padding: 3px 0 3px 10px; border-left: 2px solid var(--line); color: var(--dim); text-decoration: none; }
+#toc a:hover { color: var(--ink); }
+#toc a.on { color: var(--accent); border-left-color: var(--accent); }
+
+/* ---- info: tabs and the per-build story ---------------------------------------- */
+#info .tabs { display: flex; gap: 2px; margin-left: 8px; }
+#info .bar .tabs button { padding: 2px 10px; border-radius: 12px; font-size: 12px; color: var(--dim); }
+#info .bar .tabs button:hover { color: var(--ink); background: var(--chip); }
+#info .bar .tabs button.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+#info.made { max-height: 52vh; }
+#info .body.stories { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 14px 24px 22px; }
+.story { font-size: 13.5px; line-height: 1.6; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 0 36px; align-content: start; }
+.story > h3, .story > .lede, .story > .credit { grid-column: 1 / -1; }
+.story section { max-width: 72ch; }
+.story h3 { margin: 0 0 8px; }
+.story h4 { font-size: 13px; margin: 12px 0 3px; font-weight: 600; }
+.story h4 a { font-weight: 400; font-size: 11.5px; margin-left: 6px; }
+.story p { margin: 0 0 6px; }
+.story ul { margin: 0 0 6px; padding-left: 1.2em; }
+.story li { margin: 2px 0; }
+.story a { color: var(--accent); text-decoration: none; }
+.story a:hover { text-decoration: underline; }
+.story .lede { font-size: 14.5px; max-width: 110ch; margin-bottom: 2px; }
+.story .unknown { color: var(--faint); }
+.story code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: 0 4px; border-radius: 3px; }
+.story .credit { margin-top: 14px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12px; color: var(--dim); }
+.mixbar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 6px 0 4px; max-width: 360px; background: var(--chip); }
+.mixbar span { display: block; height: 100%; }
+.m-tag { background: var(--good); } .m-lev { background: var(--accent); } .m-guess { background: var(--faint); }
+.doc .back[hidden] { display: none; }
+#page:focus { outline: none; }
+.story ul.keyed { list-style: none; padding-left: 0; }
+.key { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
 </style>
 </head>
 <body>
 <nav id="nav">
   <header><b>isoscape</b><span>explorer</span><span class="count" id="count"></span></header>
+  <div id="pages"></div>
   <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false">
   <div id="list"></div>
-  <footer>Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare · <kbd>I</kbd> info</footer>
+  <footer>Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back</footer>
 </nav>
 <main>
   <div id="stage">
@@ -128,18 +216,24 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
     </div>
   </div>
   <section id="info">
-    <div class="bar"><button id="toggleInfo" title="Info (I)">▾</button><h1 id="infoTitle"></h1><div class="links" id="links"></div></div>
+    <div class="bar"><button id="toggleInfo" title="Info (I)">▾</button><h1 id="infoTitle"></h1>
+      <div class="tabs" id="tabs"><button data-tab="details" title="Details (I)">Details</button><button data-tab="made" title="How this view was made (M)">How this view was made</button></div>
+      <div class="links" id="links"></div></div>
     <div class="body" id="infoBody"></div>
   </section>
+  <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
 </main>
 <script type="application/json" id="builds">${json(builds)}</script>
+<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2) })))}</script>
 <script>
 (() => {
   const builds = JSON.parse(document.getElementById('builds').textContent)
   const byId = new Map(builds.map((b) => [b.id, b]))
   const $ = (id) => document.getElementById(id)
   const stage = $('stage'), imgA = $('imgA'), imgB = $('imgB'), clipB = $('clipB'), divider = $('divider')
-  const state = { a: null, b: null, compare: false, zoom: 1, panX: 0, panY: 0, split: 0.5, filter: '' }
+  const state = { a: null, b: null, compare: false, zoom: 1, panX: 0, panY: 0, split: 0.5, filter: '', tab: 'details', page: null }
+  const pages = JSON.parse(document.getElementById('pagesData').textContent)
+  const pageBySlug = new Map(pages.map((p) => [p.slug, p]))
 
   const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
   const ago = (iso) => {
@@ -170,7 +264,7 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
     }
     let html = ''
     for (const [region, items] of groups) {
-      html += '<h2>' + esc(items[0].config.title || region) + '<small>' + esc(region) + '</small></h2>'
+      html += '<h2>' + esc((items[0].config && items[0].config.title) || items[0].title || region) + '<small>' + esc(region) + '</small></h2>'
       for (const b of items) {
         const cls = 'build' + (state.a === b.id ? ' a' : '') + (state.compare && state.b === b.id ? ' b' : '')
         const pic = b.files.thumb
@@ -179,7 +273,7 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
         const ab = state.a === b.id ? '<span class="tag ab">A</span>' : state.compare && state.b === b.id ? '<span class="tag ab">B</span>' : ''
         html += '<button class="' + cls + '" data-id="' + esc(b.id) + '">' + pic +
           '<div><div class="top">' + ab + '<span class="tag">' + esc(b.palette) + '</span>' +
-          (b.config.terrain ? '<span class="tag">terrain</span>' : '') +
+          (b.config && b.config.terrain && b.config.terrain.enabled !== false ? '<span class="tag">terrain</span>' : '') +
           '<time datetime="' + esc(b.createdAt) + '">' + ago(b.createdAt) + '</time></div>' +
           '<div class="note" title="' + esc(label(b)) + '">' + esc(label(b)) + '</div>' +
           '<div class="sub">' + (b.git ? esc(b.git.commit) + (b.git.dirty ? '<span class="dirty">*</span>' : '') : '') + ' · ' + mb(b.bytes) + '</div></div></button>'
@@ -192,9 +286,11 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
   $('list').addEventListener('click', (e) => {
     const el = e.target.closest('.build')
     if (!el) return
+    const leaving = state.page !== null
+    if (leaving) closePage()
     if (e.altKey || e.metaKey || e.shiftKey) { state.b = el.dataset.id; state.compare = true }
     else select(el.dataset.id, false)
-    update()
+    update(leaving)
   })
   $('filter').addEventListener('input', (e) => { state.filter = e.target.value; renderList() })
 
@@ -226,6 +322,8 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
     if (!a) return
     const vb = a.viewBox
     const w = stage.clientWidth, h = stage.clientHeight
+    // Hidden behind a page: fit when the viewer is next shown.
+    if (w === 0 || h === 0) { state.refit = true; return }
     state.zoom = Math.min(w / vb[2], h / vb[3]) * 0.94
     state.panX = (w - vb[2] * state.zoom) / 2 - vb[0] * state.zoom
     state.panY = (h - vb[3] * state.zoom) / 2 - vb[1] * state.zoom
@@ -270,7 +368,18 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
   })
   stage.addEventListener('pointerup', () => { drag = null; stage.classList.remove('dragging') })
   stage.addEventListener('dblclick', (e) => { if (!e.target.closest('#toolbar')) fit() })
-  new ResizeObserver(() => layout()).observe(stage)
+  // When the stage changes size (the info panel opens, closes or changes tab), keep the point at
+  // its centre where it was.
+  let stageSize = null
+  new ResizeObserver(() => {
+    const w = stage.clientWidth, h = stage.clientHeight
+    if (stageSize && stageSize[0] > 0 && stageSize[1] > 0 && w > 0 && h > 0) {
+      state.panX += (w - stageSize[0]) / 2
+      state.panY += (h - stageSize[1]) / 2
+    }
+    stageSize = [w, h]
+    layout()
+  }).observe(stage)
 
   const load = (img, b) => {
     if (img.dataset.id === b.id) return
@@ -284,7 +393,7 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
   const STAT_ORDER = ['buildings', 'heightFromTag', 'heightFromLevels', 'heightGuessed', 'bridgePieces', 'ground', 'ribbons', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'features']
   const statKeys = (...bs) => {
     const keys = new Set()
-    for (const b of bs) for (const k of Object.keys(b.stats)) keys.add(k)
+    for (const b of bs) for (const k of Object.keys(b.stats || {})) keys.add(k)
     return [...STAT_ORDER.filter((k) => keys.has(k)), ...[...keys].filter((k) => !STAT_ORDER.includes(k)).sort()]
   }
   const fmt = (v) => (v === undefined ? '–' : typeof v === 'number' ? (Number.isInteger(v) ? v.toLocaleString() : v.toFixed(2)) : esc(v))
@@ -296,6 +405,14 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
     $('links').innerHTML = '<a href="' + esc(a.files.svg) + '" target="_blank">Open A’s SVG ↗</a>' +
       (b ? '<a href="' + esc(b.files.svg) + '" target="_blank">Open B’s SVG ↗</a>' : '') +
       '<a href="' + esc(a.name) + '.html" target="_blank" title="The latest build of this region, with hover labels">Latest page ↗</a>'
+    $('info').classList.toggle('made', state.tab === 'made')
+    for (const t of $('tabs').children) t.classList.toggle('on', t.dataset.tab === state.tab)
+    if (state.tab === 'made') {
+      $('infoBody').className = 'body stories'
+      $('infoBody').innerHTML = story(a, b ? 'A' : '') + (b ? story(b, 'B') : '')
+      return
+    }
+    $('infoBody').className = 'body'
     const about = (x, tag) =>
       '<dl>' +
       (tag ? '<dt>' + tag + '</dt><dd><b>' + esc(label(x)) + '</b></dd>' : '<dt>note</dt><dd>' + (x.note ? '<b>' + esc(x.note) + '</b>' : '<span style="color:var(--faint)">none</span>') + '</dd>') +
@@ -303,13 +420,13 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
       '<dt>commit</dt><dd class="mono">' + (x.git ? esc(x.git.commit) + (x.git.dirty ? ' <span class="dirty">+ uncommitted changes</span>' : '') + '<br><span style="color:var(--dim)">' + esc(x.git.subject) + '</span>' : '–') + '</dd>' +
       '<dt>region</dt><dd class="mono">' + esc(x.region) + '</dd>' +
       '<dt>palette</dt><dd>' + esc(x.palette) + '</dd>' +
-      '<dt>bearing</dt><dd>' + x.bearing.toFixed(1) + '°</dd>' +
+      '<dt>bearing</dt><dd>' + (typeof x.bearing === 'number' ? x.bearing.toFixed(1) + '°' : '–') + '</dd>' +
       '<dt>size</dt><dd>' + mb(x.bytes) + ' · ' + Math.round(x.viewBox[2]) + '×' + Math.round(x.viewBox[3]) + ' · ' + x.ms + ' ms</dd>' +
       '</dl>'
     let stats
     if (b) {
       stats = '<table><tr><th>stat</th><th>A</th><th>B</th><th>Δ</th></tr>' + statKeys(a, b).map((k) => {
-        const va = a.stats[k], vb = b.stats[k]
+        const va = (a.stats || {})[k], vb = (b.stats || {})[k]
         const d = typeof va === 'number' && typeof vb === 'number' ? vb - va : undefined
         const cls = d === undefined || d === 0 ? '' : d > 0 ? 'up' : 'down'
         return '<tr><td>' + esc(k) + '</td><td>' + fmt(va) + '</td><td>' + fmt(vb) + '</td><td class="' + cls + '">' + (d === undefined || d === 0 ? '' : (d > 0 ? '+' : '') + fmt(d)) + '</td></tr>'
@@ -328,6 +445,154 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
       '<div><h3>' + (b ? 'A' : 'Build') + '</h3>' + about(a, b ? 'A' : '') + (b ? '<h3 style="margin-top:12px">B</h3>' + about(b, 'B') : '') + '</div>' +
       '<div><h3>Measures</h3>' + stats + '</div>' +
       '<div class="settings"><h3>' + (b ? 'Settings that differ' : 'Settings') + '</h3>' + (b ? configDiff(a, b) : '<pre>' + esc(JSON.stringify(a.config, null, 2)) + '</pre>') + '</div>'
+  }
+  // ---- how this view was made ------------------------------------------------------------------
+  // A build's own story, written from its meta.json. Anything an older build did not record is
+  // said to be unknown rather than guessed.
+  const how = (id, text) => pageBySlug.has('how-its-made') ? '<a href="#/how-its-made/' + id + '">' + text + '</a>' : text
+  const KNOWN = new Set(['features', 'ground', 'ribbons', 'buildings', 'heightFromTag', 'heightFromLevels', 'heightGuessed', 'bridgePieces', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'coastWays'])
+  const POINTS = ['north', 'north-northeast', 'northeast', 'east-northeast', 'east', 'east-southeast', 'southeast', 'south-southeast', 'south', 'south-southwest', 'southwest', 'west-southwest', 'west', 'west-northwest', 'northwest', 'north-northwest']
+  const isNum = (v) => typeof v === 'number' && Number.isFinite(v)
+  const int = (v) => Math.round(v).toLocaleString()
+  const dist = (m) => (m >= 1000 ? +(m / 1000).toFixed(2) + ' km' : Math.round(m) + ' m')
+  const deg360 = (d) => Math.round(((d % 360) + 360) % 360) % 360
+  const compass = (d) => POINTS[Math.round((((d % 360) + 360) % 360) / 22.5) % 16]
+  const plural = (n, one, many) => int(n) + ' ' + (Math.round(n) === 1 ? one : many || one + 's')
+  const ordinal = (n) => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : n % 10 === 1 ? 'st' : n % 10 === 2 ? 'nd' : n % 10 === 3 ? 'rd' : 'th')
+  const pct = (part, whole) => (whole > 0 ? Math.round((100 * part) / whole) + '%' : '–')
+  const areaText = (m2) => (m2 >= 10000 ? (m2 / 10000).toFixed(1) + ' ha' : int(m2) + ' m²')
+  const latlon = (c) => Math.abs(c[1]).toFixed(4) + '°' + (c[1] >= 0 ? 'N' : 'S') + ', ' + Math.abs(c[0]).toFixed(4) + '°' + (c[0] >= 0 ? 'E' : 'W')
+  const unknown = (text) => '<span class="unknown">' + text + '</span>'
+  const story = (x, tag) => {
+    const c = x.config || {}, s = x.stats || {}, t = c.terrain || null
+    const has = (k) => isNum(s[k])
+    const relief = !!t && t.enabled !== false && has('elevationTop') && has('elevationDatum')
+    const out = []
+    // Each heading opens a section; the sections flow into as many columns as fit.
+    let inSection = false
+    const head = (title, link) => {
+      out.push((inSection ? '</section>' : '') + '<section><h4>' + title + (link ? ' ' + link : '') + '</h4>')
+      inSection = true
+    }
+    out.push(tag ? '<h3>' + tag + ' · ' + esc(label(x)) + '</h3>' : '')
+
+    // The place and the frame.
+    let lede = '<b>' + esc(x.title || c.title || x.region) + '.</b> '
+    if (isNum(c.width) && isNum(c.depth)) {
+      lede += 'A frame ' + dist(c.width) + ' across and ' + dist(c.depth) + ' deep (' + ((c.width * c.depth) / 1e6).toFixed(2) + ' km²)'
+      const ctr = Array.isArray(c.center) && isNum(c.center[0]) && isNum(c.center[1]) ? c.center : null
+      if (ctr) lede += ', centred on <a href="https://www.openstreetmap.org/?mlat=' + ctr[1] + '&amp;mlon=' + ctr[0] + '#map=16/' + ctr[1] + '/' + ctr[0] + '" target="_blank" rel="noopener" title="Open this point on openstreetmap.org">' + latlon(ctr) + '</a>'
+      lede += '.'
+    }
+    out.push('<p class="lede">' + lede + '</p>')
+
+    // The camera.
+    head('Camera', how('camera', 'how the camera works →'))
+    const cam = []
+    if (isNum(x.bearing)) {
+      let p = 'Looking ' + compass(x.bearing) + ' (bearing ' + deg360(x.bearing) + '°)'
+      if (c.snap !== false && isNum(c.bearing)) {
+        const turn = x.bearing - c.bearing
+        p += Math.abs(turn) < 0.05
+          ? ', where snapping to the street grid left it'
+          : ', turned ' + Math.abs(turn).toFixed(1) + '° ' + (turn < 0 ? 'counter-clockwise' : 'clockwise') + ' from the configured ' + deg360(c.bearing) + '° so the street grid runs along the diagonals'
+      } else if (c.snap === false) p += ', a fixed bearing with no snapping'
+      cam.push(p + '.')
+    }
+    const squash = isNum(c.squash) ? Math.min(1, Math.max(0.01, c.squash)) : 0.5
+    const tilt = (Math.asin(squash) * 180) / Math.PI
+    cam.push('Orthographic, tilted ' + Math.round(tilt) + '° down from the horizon: ground running into the picture is drawn at ' + +squash.toFixed(2) + '× its length and heights at ' + Math.cos(Math.asin(squash)).toFixed(2) + '×' +
+      (isNum(c.exaggeration) && c.exaggeration !== 1 ? ', then ×' + c.exaggeration + ' for every height' : '') + '.')
+    if (isNum(c.scale)) cam.push(c.scale + ' px per metre across the frame' + (Array.isArray(x.viewBox) ? '; the whole drawing is ' + int(x.viewBox[2]) + ' × ' + int(x.viewBox[3]) + ' px at 1:1' : '') + '.')
+    out.push('<p>' + cam.join(' ') + '</p>')
+
+    // What went in.
+    head('Sources', how('inputs', 'where the data comes from →'))
+    const src = []
+    src.push('<li><b>OpenStreetMap</b>: ' + (has('features') ? int(s.features) + ' features read from the cached download' : unknown('feature count not recorded')) +
+      (c.data && c.data !== x.region ? ', shared with region <code>' + esc(c.data) + '</code>' : '') +
+      (has('coastWays') ? '; the sea and tidal water come from ' + plural(s.coastWays, 'coastline way') : '') + '.</li>')
+    if (relief) {
+      src.push('<li><b>USGS 3DEP elevation</b>, fetched at ' + (t.demResolution ?? 1) + ' m per pixel and resampled to a ' + (t.cell ?? 5) + ' m grid. The ground runs from ' +
+        s.elevationDatum.toFixed(1) + ' m to ' + s.elevationTop.toFixed(1) + ' m above sea level (' + (s.elevationTop - s.elevationDatum).toFixed(1) + ' m of relief), drawn ' +
+        (t.exaggeration ?? 2) + '× taller than life. Buildings and bridges keep their true heights.</li>')
+    } else if (t && t.enabled !== false) {
+      src.push('<li><b>Elevation</b>: ' + unknown('the region asks for terrain, but this build recorded no elevation range. Either the elevation was not fetched yet (the build then falls back to a flat plate), or the build predates that measure.') + '</li>')
+    } else {
+      src.push('<li><b>No elevation</b>: drawn on a flat plate' + (t && t.enabled === false ? ' (terrain is switched off for this region)' : '') + '.</li>')
+    }
+    out.push('<ul>' + src.join('') + '</ul>')
+
+    // Ground.
+    head('Ground', how('ground', 'what the ground is made of →'))
+    const g = []
+    if (has('ground')) g.push(plural(s.ground, 'mapped area') + ' of water, islands, parks, woods and other cover')
+    if (has('ribbons')) g.push(plural(s.ribbons, 'ribbon') + ' of road, path, rail, canal and weir')
+    let gp = g.length ? 'From the map, ' + g.join(', and ') + '.' : unknown('Ground counts were not recorded.')
+    if (has('strips')) gp += ' Painted in ' + int(s.strips) + ' strips from back to front, ' + 2 * ((t && t.cell) ?? 5) + ' m deep each, so hills hide what is behind them (' + how('drawing', 'why') + ').'
+    if (relief && has('contourSegments')) {
+      const iv = t.contour ?? 2
+      gp += iv > 0 ? ' Contours every ' + iv + ' m with every ' + ordinal(t.majorEvery ?? 5) + ' line heavier: ' + int(s.contourSegments) + ' segments.' : ' No contours.'
+    }
+    out.push('<p>' + gp + '</p>')
+
+    // Rivers and rapids.
+    head('Rivers and rapids', how('rapids', 'how rapids are read →'))
+    if (relief) {
+      const thr = t.rapids ?? 0.035
+      if (has('rapidCells')) {
+        const cell = t.cell ?? 5
+        out.push('<p>' + (s.rapidCells > 0 ? int(s.rapidCells) + ' grid cells (about ' + areaText(s.rapidCells * cell * cell) + ') read as rapids' : 'No stretch of water read as rapids') +
+          ': places where the river’s surface, recovered from the lidar, falls faster than ' + +(thr * 100).toFixed(2) + ' m per 100 m, measured over 40 m. Rock standing more than 1 m clear of that surface is drawn as boulders. Both are ' +
+          how('rivers', 'inferred') + ' from the lidar, not observed.</p>')
+      } else out.push('<p>' + unknown('Rapids were not counted for this build.') + '</p>')
+    } else {
+      out.push('<p>Without elevation, water is drawn from OpenStreetMap’s outlines as they are. No river surface, rocks or rapids are inferred.</p>')
+    }
+
+    // Buildings.
+    head('Buildings', how('buildings', 'where heights come from →'))
+    if (has('buildings')) {
+      out.push('<p>' + plural(s.buildings, 'building') + ', extruded from OpenStreetMap footprints of at least ' + (c.minBuildingArea ?? 12) + ' m² that lie wholly inside the frame.</p>')
+      if (has('heightFromTag') && has('heightFromLevels') && has('heightGuessed')) {
+        const tot = s.heightFromTag + s.heightFromLevels + s.heightGuessed
+        const seg = (cls, n) => (n > 0 ? '<span class="' + cls + '" style="width:' + ((100 * n) / tot).toFixed(2) + '%"></span>' : '')
+        out.push('<div class="mixbar" title="Where the heights came from">' + seg('m-tag', s.heightFromTag) + seg('m-lev', s.heightFromLevels) + seg('m-guess', s.heightGuessed) + '</div>')
+        out.push('<ul class="keyed">' +
+          '<li><span class="key m-tag"></span>' + int(s.heightFromTag) + ' (' + pct(s.heightFromTag, tot) + ') from a <code>height</code> tag</li>' +
+          '<li><span class="key m-lev"></span>' + int(s.heightFromLevels) + ' (' + pct(s.heightFromLevels, tot) + ') from the number of floors, at 3.4 m a floor</li>' +
+          '<li><span class="key m-guess"></span>' + int(s.heightGuessed) + ' (' + pct(s.heightGuessed, tot) + ') <b>guessed</b> from the building’s type and size</li></ul>')
+      } else out.push('<p>' + unknown('Where the heights came from was not recorded for this build.') + '</p>')
+    } else out.push('<p>' + unknown('Buildings were not counted for this build.') + '</p>')
+
+    // Bridges.
+    head('Bridges', how('bridges', 'how decks are placed →'))
+    const rules = Array.isArray(c.bridges) ? c.bridges : []
+    let bp = has('bridgePieces') ? (s.bridgePieces > 0 ? plural(s.bridgePieces, 'bridge span') + ' of up to 22 m, so long bridges sort among the buildings.' : 'No bridges in the frame.') : unknown('Bridge spans were not counted for this build.')
+    if (!has('bridgePieces') || s.bridgePieces > 0) {
+      bp += ' Deck heights are rules of thumb' + (rules.length ? ': ' + rules.map((r) => esc(r.match) + ' ' + esc(r.deck) + ' m').join(', ') + ', and any other bridge ' : ': every bridge ') + (c.bridgeDeck ?? 7) + ' m per OSM layer.'
+    }
+    out.push('<p>' + bp + '</p>')
+
+    // Drawing.
+    head('Drawing', how('paint-order', 'paint order →'))
+    const dots = { all: 'a dot on every visible corner', roof: 'dots on roof corners only', none: 'no dots' }[c.dots || 'all'] || 'dots: ' + esc(c.dots)
+    out.push('<p>The <code>' + esc(x.palette || c.palette || 'paper') + '</code> palette, ' + dots + ', on a ground slab ' + (c.slab ?? 14) + ' m thick.</p>')
+
+    // This build.
+    head('This build', how('archive-and-explorer', 'the archive →'))
+    const bl = []
+    bl.push('Built ' + (x.createdAt ? when(x.createdAt) : unknown('at an unrecorded time')) + (isNum(x.ms) ? ' in ' + (x.ms / 1000).toFixed(1) + ' s' : '') + (isNum(x.bytes) ? ', ' + mb(x.bytes) + ' of SVG' : '') + '.')
+    if (x.git) bl.push('From commit <code>' + esc(x.git.commit) + '</code>, “' + esc(x.git.subject) + '”' + (x.git.dirty ? ', <span class="dirty">with uncommitted changes in src/ or regions/</span>' : '') + '.')
+    else bl.push(unknown('No commit was recorded; it was not built inside a git checkout.'))
+    if (x.note) bl.push('Note: <b>' + esc(x.note) + '</b>.')
+    out.push('<p>' + bl.join(' ') + '</p>')
+    const other = Object.keys(s).filter((k) => !KNOWN.has(k)).sort()
+    if (other.length) out.push('<p>Other measures: ' + other.map((k) => esc(k) + ' ' + fmt(s[k])).join(', ') + '.</p>')
+
+    out.push('</section><p class="credit">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors (ODbL)' +
+      (relief ? ' · Elevation: USGS 3DEP (public domain)' : '') + (pageBySlug.has('about') ? ' · <a href="#/about">credits and licences</a>' : '') + '</p>')
+    return '<div class="story">' + out.join('') + '</div>'
   }
   $('toggleInfo').addEventListener('click', () => toggleInfo())
   const toggleInfo = () => {
@@ -371,21 +636,122 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
     // through; refit when the frame changes.
     if (refit || !prev || prev.region !== next.region || prev.viewBox.join() !== next.viewBox.join()) state.refit = true
   }
-  const update = () => {
+  const viewerHash = () => '#' + state.a + (state.compare && state.b ? '..' + state.b : '') + (state.tab === 'made' ? '/made' : '')
+  // Redraw the viewer. With push, make a history entry (coming back from a page); else replace the hash.
+  const update = (push) => {
     const a = byId.get(state.a)
     $('empty').style.display = a ? 'none' : 'grid'
     if (!a) return
     load(imgA, a)
     if (state.compare && byId.get(state.b)) load(imgB, byId.get(state.b))
-    if (state.refit) { state.refit = false; fit() } else layout()
+    // The info panel first: its height sets the stage's, which the fit depends on.
     renderList()
     renderPick()
     renderInfo()
-    const hash = '#' + state.a + (state.compare && state.b ? '..' + state.b : '')
-    if (location.hash !== hash) history.replaceState(null, '', hash)
+    if (state.refit) { state.refit = false; fit() } else layout()
+    const hash = viewerHash()
+    if (location.hash !== hash) history[push ? 'pushState' : 'replaceState'](null, '', hash)
+    routed = location.hash
   }
+  const setTab = (tab) => {
+    state.tab = tab
+    if ($('info').classList.contains('closed')) toggleInfo()
+    update()
+  }
+  $('tabs').addEventListener('click', (e) => { const t = e.target.closest('button'); if (t) setTab(t.dataset.tab) })
+
+  // ---- pages and routing ----------------------------------------------------------------------
+  // #/<slug> and #/<slug>/<section> open a page; anything else is a build selection.
+  let routed = null
+  const renderPages = () => {
+    $('pages').hidden = pages.length === 0
+    $('pages').innerHTML = pages.map((p) => '<a href="#/' + esc(p.slug) + '"' + (state.page === p.slug ? ' class="on"' : '') +
+      (p.summary ? ' title="' + esc(p.summary) + '"' : '') + '>' + esc(p.title) + '</a>').join('')
+  }
+  const markToc = () => {
+    const page = $('page')
+    let current = null
+    for (const a of $('toc').querySelectorAll('a')) {
+      const el = document.getElementById('p-' + state.page + '-' + a.dataset.id)
+      if (el && el.offsetTop - page.scrollTop <= 80) current = a
+    }
+    for (const a of $('toc').querySelectorAll('a')) a.classList.toggle('on', a === current)
+  }
+  $('page').addEventListener('scroll', markToc, { passive: true })
+  const openPage = (slug, section) => {
+    const p = pageBySlug.get(slug) || pages[0]
+    if (!p) return
+    state.page = p.slug
+    document.body.classList.add('reading')
+    if ($('article').dataset.slug !== p.slug) {
+      $('article').dataset.slug = p.slug
+      $('article').innerHTML = p.html + '<p class="source">This page is <code>' + esc(p.file) + '</code>. Edit it there; the next build, or <code>isoscape explorer</code>, puts the change here.</p>'
+      $('toc').innerHTML = p.headings.length < 2 ? '' : '<h3>On this page</h3>' + p.headings.map((h) =>
+        '<a href="#/' + esc(p.slug) + '/' + esc(h.id) + '" data-id="' + esc(h.id) + '">' + esc(h.text) + '</a>').join('')
+    }
+    const a = byId.get(state.a)
+    $('back').hidden = !a
+    if (a) { $('back').href = viewerHash(); $('back').textContent = '← Back to the viewer' + (state.compare ? '' : ': ' + label(a)) }
+    document.title = p.title + ' · isoscape explorer'
+    renderPages()
+    renderList()
+    const target = section ? document.getElementById('p-' + p.slug + '-' + section) : null
+    if (target) target.scrollIntoView({ block: 'start' })
+    else $('page').scrollTop = 0
+    $('page').focus({ preventScroll: true })
+    markToc()
+  }
+  const closePage = () => {
+    state.page = null
+    document.body.classList.remove('reading')
+    document.title = 'isoscape explorer'
+    renderPages()
+  }
+  const parseHash = () => {
+    let h = location.hash.slice(1)
+    try { h = decodeURIComponent(h) } catch (err) { /* keep it raw */ }
+    if (h.startsWith('/')) {
+      const parts = h.slice(1).split('/')
+      return { page: parts[0] || (pages[0] ? pages[0].slug : ''), section: parts.slice(1).join('/') }
+    }
+    const [sel, tab] = h.split('/')
+    const [a, b] = (sel || '').split('..')
+    return { a, b, tab }
+  }
+  const route = () => {
+    routed = location.hash
+    const r = parseHash()
+    if (r.page !== undefined && pageBySlug.size > 0) { openPage(r.page, r.section); return }
+    if (state.page !== null) closePage()
+    if (builds.length === 0) return
+    if (r.a && byId.has(r.a)) {
+      if (r.a !== state.a) select(r.a, false)
+      if (r.b && byId.has(r.b)) { state.b = r.b; state.compare = true } else state.compare = false
+      state.tab = r.tab === 'made' ? 'made' : 'details'
+    }
+    update()
+  }
+  // In-page links (pages, sections, "back to the viewer") make history entries, so Back works.
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]')
+    if (!link || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+    e.preventDefault()
+    const href = link.getAttribute('href')
+    if (href !== location.hash) history.pushState(null, '', href)
+    route()
+  })
+  const onNavigate = () => { if (location.hash !== routed) route() }
+  window.addEventListener('popstate', onNavigate)
+  window.addEventListener('hashchange', onNavigate)
   document.addEventListener('keydown', (e) => {
     if (e.target === $('filter')) { if (e.key === 'Escape') e.target.blur(); return }
+    if (e.metaKey || e.ctrlKey || e.altKey) return
+    if (state.page !== null) {
+      // Reading: the arrows scroll the page. Esc goes back to the viewer.
+      if (e.key === 'Escape' && byId.has(state.a)) { history.pushState(null, '', viewerHash()); route() }
+      else if (e.key === '/') { $('filter').focus(); e.preventDefault() }
+      return
+    }
     const list = visible()
     const i = list.findIndex((b) => b.id === state.a)
     if (e.key === 'ArrowDown' || e.key === 'j') { if (i < list.length - 1) { select(list[i + 1].id); update() } e.preventDefault() }
@@ -394,18 +760,23 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
     else if (e.key === '1') actual()
     else if (e.key === 'c' || e.key === 'C') toggleCompare()
     else if (e.key === 'i' || e.key === 'I') toggleInfo()
+    else if (e.key === 'm' || e.key === 'M') setTab(state.tab === 'made' ? 'details' : 'made')
     else if (e.key === '/') { $('filter').focus(); e.preventDefault() }
   })
 
+  renderPages()
+  const start = parseHash()
   if (builds.length === 0) {
-    $('empty').innerHTML = '<div><b>No builds yet.</b><br>Run <code>node bin/isoscape.js build &lt;region&gt;</code> and reload.</div>'
+    $('empty').innerHTML = '<div><b>No builds yet.</b><br>Run <code>node bin/isoscape.js build &lt;region&gt;</code> and reload.' +
+      (pages.length ? '<br><br>Meanwhile: <a href="#/' + esc(pages[0].slug) + '">' + esc(pages[0].title) + '</a>' : '') + '</div>'
     renderList()
-    return
+  } else {
+    select(start.a && byId.has(start.a) ? start.a : builds[0].id, true)
+    if (start.b && byId.has(start.b)) { state.b = start.b; state.compare = true }
+    if (start.tab === 'made') state.tab = 'made'
+    if (start.page === undefined) update()
   }
-  const [ha, hb] = location.hash.slice(1).split('..')
-  select(byId.has(ha) ? ha : builds[0].id, true)
-  if (hb && byId.has(hb)) { state.b = hb; state.compare = true }
-  update()
+  if (start.page !== undefined) route()
 })()
 </script>
 </body>

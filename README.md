@@ -46,10 +46,54 @@ rewrites `out/index.html`, a single local page over all of them:
 - **Compare** (`C`, or ⌥-click a second build): B is laid over A in the same scene
   coordinates, with a divider to drag. The info panel shows the change in every measure and
   every setting that differs.
+- **How this view was made** (`M`, a tab in the info panel): the selected build explained in
+  sentences, written from its `meta.json`: the frame and camera, which data went in, the
+  elevation range, where the building heights came from, bridge rules, rapids, the commit.
+  Each part links to the matching section of the site's pages. Measures an older build did
+  not record are marked as unknown. When comparing, A and B are shown side by side.
+- **Pages** (top of the left column): longer reading, such as *How it's made* (the whole
+  pipeline, and what is measured, inferred or guessed) and *About, credits and licences*.
 
 Keys: `↑`/`↓` step through builds, `F` fits, `1` shows actual size, `C` compares, `I`
-toggles the info panel, `/` filters. The URL hash holds the selection, so a reload (after
-the next build) keeps your place.
+toggles the info panel, `M` switches to "How this view was made", `/` filters, `Esc` leaves a
+page for the viewer. The URL hash holds the selection: `#<id>`, `#<idA>..<idB>` to compare,
+`/made` on either for the tab, `#/<page>` or `#/<page>/<section>` for a page. A reload (after
+the next build) keeps your place, and Back and Forward move between pages and the viewer.
+
+### Adding a page
+
+Pages are Markdown files in `pages/`, compiled into `out/index.html` whenever it is
+written (after every build, or with `isoscape explorer`). To add one, create
+`pages/<slug>.md`:
+
+```markdown
+---
+title: Reading the contours
+order: 30
+summary: One line, shown as the nav link's tooltip.
+---
+
+# Reading the contours
+
+Text, **emphasis**, `code`, lists, tables, fenced code and block quotes.
+Link a section of this page as [rapids](#rapids), another page as [About](about.md),
+or a section of it as [data](about.md#data). Images beside the page are inlined:
+![The pipeline](pipeline.svg)
+```
+
+- `title` is the nav label (default: the first `#` heading). `order` sorts the nav, lowest
+  first (default 100); the shipped pages use 10 and 90. `slug` overrides the file name.
+- Section ids follow GitHub's rule (lower case, punctuation dropped, spaces to hyphens), and
+  links are written as they would be for GitHub, so the files read the same on GitHub as in
+  the explorer.
+- Images must be `.svg`, `.png`, `.jpg` or `.webp` files in `pages/` itself, and are
+  embedded as data URIs so the explorer stays one file. An SVG can follow light and dark
+  mode with a `prefers-color-scheme` media query, as `pipeline.svg` does.
+- The converter (`src/markdown.ts`) escapes all text and drops raw HTML and unsafe link
+  schemes. Files starting with `_` (drafts) and `README.md` are skipped.
+- `npm test` checks that every in-page link in `pages/` lands on a real section, and that the
+  sections the "How this view was made" tab links to exist in `how-its-made.md`. If you
+  rename a heading there, update `story` in `src/explorer.ts` too.
 
 ```sh
 node bin/isoscape.js build richmond-downtown-topo --note "lighter foam"   # say what you tried
@@ -156,7 +200,7 @@ missing and filled from their neighbours.
 
 **The river.** Lidar over mapped water is not the water: rocks, ledges and overlapped banks
 stand above it. The surface at each water node is taken as a low percentile of the wet ground
-within 25 m, then smoothed along the water. Anything a metre or more above that surface is
+within 30 m, then smoothed along the water. Anything a metre or more above that surface is
 drawn as exposed rock, which gives the boulder fields. The water drapes on the surface, so
 it lies level across the river and falls along it. **Rapids** are drawn where that surface
 falls faster than `terrain.rapids` (m/m) measured over 40 m: white strokes across the

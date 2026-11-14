@@ -7,6 +7,7 @@ import { backfill } from './backfill.ts'
 import { cleanDem, fetchDem, loadDem, sampler } from './dem.ts'
 import { renderExplorer } from './explorer.ts'
 import { fetchOsm, overpassQuery, parseOsm } from './osm.ts'
+import { loadPages } from './pages.ts'
 import { palette } from './palette.ts'
 import { fetchBounds, loadRegion, type Region } from './region.ts'
 import { renderPage, renderSvg } from './render.ts'
@@ -179,6 +180,6 @@ export const main = async (argv: string[]): Promise<void> => {
 const writeExplorer = async (outDir: string): Promise<number> => {
   const builds = await listBuilds(outDir)
   await mkdir(outDir, { recursive: true })
-  await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds))
+  await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, loadPages()))
   return builds.length
 }

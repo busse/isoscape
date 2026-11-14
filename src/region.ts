@@ -30,7 +30,7 @@ export interface Region {
   /**
    * Turn the camera (by at most 45°) so the dominant street grid runs along the isometric
    * diagonals, which is what makes a city read as a SimCity-style grid of diamonds.
-   * Pass a number instead to fix the bearing exactly and skip the search.
+   * Set it to false to keep `bearing` exactly as given.
    */
   readonly snap?: boolean
   /** Pixels per metre across the frame. */
@@ -45,6 +45,9 @@ export interface Region {
   /** Default deck height for bridges with no matching rule, metres per OSM `layer`. */
   readonly bridgeDeck?: number
   readonly bridges?: readonly BridgeRule[]
+  /** OSM is fetched in tiles no bigger than this, in metres a side. Default 1600; sparse
+   * rural regions can take much bigger tiles. */
+  readonly fetchTile?: number
   /** Smallest building footprint kept, in square metres. */
   readonly minBuildingArea?: number
   /** Which vertices get dots: every visible corner, roof corners only, or none. */
