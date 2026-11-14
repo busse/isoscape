@@ -1,0 +1,76 @@
+{
+ "name": "lm-chicago-river",
+ "region": "lm-chicago-river",
+ "title": "The Chicago River \u2014 Chicago",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3023.75,
+  -2630.2422659248914,
+  6047.5,
+  4652.0402527864735
+ ],
+ "bearing": 43.90049076469796,
+ "ms": 1316,
+ "stats": {
+  "features": 13082,
+  "ground": 953,
+  "elevationDatum": 175.4,
+  "elevationTop": 194.4,
+  "ribbons": 3687,
+  "footprintsAdded": 0,
+  "buildings": 725,
+  "heightFromTag": 158,
+  "heightFromModel": 0,
+  "heightFromLevels": 382,
+  "heightGuessed": 185,
+  "bridgePieces": 2048,
+  "contourSegments": 11356,
+  "rapidCells": 0,
+  "strips": 169
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "The Chicago River \u2014 Chicago",
+  "center": [
+   -87.62439,
+   41.88882
+  ],
+  "width": 1300,
+  "depth": 1690,
+  "scale": 4.615,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-chicago-river"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-170942-lm-chicago-river",
+ "createdAt": "2026-11-14T17:09:42.691Z",
+ "bytes": 4485428,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-170942-lm-chicago-river/image.svg",
+  "thumb": "builds/20261114-170942-lm-chicago-river/thumb.png",
+  "social": "builds/20261114-170942-lm-chicago-river/social.png"
+ }
+}

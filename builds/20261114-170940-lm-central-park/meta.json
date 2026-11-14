@@ -1,0 +1,76 @@
+{
+ "name": "lm-central-park",
+ "region": "lm-central-park",
+ "title": "Central Park \u2014 New York City",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.2,
+  -2219.1820480604183,
+  6048.4,
+  4237.853466627859
+ ],
+ "bearing": -16.125637935013287,
+ "ms": 1643,
+ "stats": {
+  "features": 12128,
+  "ground": 409,
+  "elevationDatum": 9.2,
+  "elevationTop": 42.9,
+  "ribbons": 2017,
+  "footprintsAdded": 0,
+  "buildings": 1649,
+  "heightFromTag": 1621,
+  "heightFromModel": 0,
+  "heightFromLevels": 12,
+  "heightGuessed": 16,
+  "bridgePieces": 68,
+  "contourSegments": 22608,
+  "rapidCells": 0,
+  "strips": 182
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Central Park \u2014 New York City",
+  "center": [
+   -73.9709,
+   40.774
+  ],
+  "width": 1400,
+  "depth": 1820,
+  "scale": 4.286,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-central-park"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-170940-lm-central-park",
+ "createdAt": "2026-11-14T17:09:40.308Z",
+ "bytes": 5909468,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-170940-lm-central-park/image.svg",
+  "thumb": "builds/20261114-170940-lm-central-park/thumb.png",
+  "social": "builds/20261114-170940-lm-central-park/social.png"
+ }
+}

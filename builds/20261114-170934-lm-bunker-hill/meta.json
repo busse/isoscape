@@ -1,0 +1,77 @@
+{
+ "name": "lm-bunker-hill",
+ "region": "lm-bunker-hill",
+ "title": "Bunker Hill Monument \u2014 Boston",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2202.7047166512793,
+  6048,
+  4239.058545723759
+ ],
+ "bearing": -12.308576877241421,
+ "ms": 770,
+ "stats": {
+  "features": 5566,
+  "coastWays": 10,
+  "ground": 95,
+  "elevationDatum": -1.6,
+  "elevationTop": 34,
+  "ribbons": 1696,
+  "footprintsAdded": 0,
+  "buildings": 1841,
+  "heightFromTag": 10,
+  "heightFromModel": 0,
+  "heightFromLevels": 19,
+  "heightGuessed": 1812,
+  "bridgePieces": 228,
+  "contourSegments": 11293,
+  "rapidCells": 0,
+  "strips": 130
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Bunker Hill Monument \u2014 Boston",
+  "center": [
+   -71.06077,
+   42.37635
+  ],
+  "width": 1000,
+  "depth": 1300,
+  "scale": 6,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-bunker-hill"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-170934-lm-bunker-hill",
+ "createdAt": "2026-11-14T17:09:34.566Z",
+ "bytes": 3439341,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-170934-lm-bunker-hill/image.svg",
+  "thumb": "builds/20261114-170934-lm-bunker-hill/thumb.png",
+  "social": "builds/20261114-170934-lm-bunker-hill/social.png"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "name": "lm-cape-hatteras-lighthouse",
+ "region": "lm-cape-hatteras-lighthouse",
+ "title": "Cape Hatteras Lighthouse \u2014 Outer Banks, North Carolina",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2006.2082815342806,
+  6048,
+  4013.9832722818737
+ ],
+ "bearing": 40.74832649813527,
+ "ms": 1111,
+ "stats": {
+  "features": 1909,
+  "coastWays": 4,
+  "ground": 76,
+  "elevationDatum": 0,
+  "elevationTop": 8.3,
+  "ribbons": 279,
+  "footprintsAdded": 0,
+  "buildings": 216,
+  "heightFromTag": 1,
+  "heightFromModel": 0,
+  "heightFromLevels": 3,
+  "heightGuessed": 212,
+  "bridgePieces": 18,
+  "contourSegments": 881,
+  "rapidCells": 0,
+  "strips": 260
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Cape Hatteras Lighthouse \u2014 Outer Banks, North Carolina",
+  "center": [
+   -75.5288,
+   35.2507
+  ],
+  "width": 2000,
+  "depth": 2600,
+  "scale": 3,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 13,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 5,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-cape-hatteras-lighthouse"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-170936-lm-cape-hatteras-lighthouse",
+ "createdAt": "2026-11-14T17:09:36.576Z",
+ "bytes": 1833158,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-170936-lm-cape-hatteras-lighthouse/image.svg",
+  "thumb": "builds/20261114-170936-lm-cape-hatteras-lighthouse/thumb.png",
+  "social": "builds/20261114-170936-lm-cape-hatteras-lighthouse/social.png"
+ }
+}
