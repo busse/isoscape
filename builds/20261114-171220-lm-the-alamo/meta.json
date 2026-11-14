@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171220-lm-the-alamo/image.svg",
   "thumb": "builds/20261114-171220-lm-the-alamo/thumb.png",
-  "social": "builds/20261114-171220-lm-the-alamo/social.png"
+  "social": "builds/20261114-171220-lm-the-alamo/social.png",
+  "preview": "builds/20261114-171220-lm-the-alamo/preview.jpg"
  }
 }

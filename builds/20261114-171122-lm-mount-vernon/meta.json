@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171122-lm-mount-vernon/image.svg",
   "thumb": "builds/20261114-171122-lm-mount-vernon/thumb.png",
-  "social": "builds/20261114-171122-lm-mount-vernon/social.png"
+  "social": "builds/20261114-171122-lm-mount-vernon/social.png",
+  "preview": "builds/20261114-171122-lm-mount-vernon/preview.jpg"
  }
 }

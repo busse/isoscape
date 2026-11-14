@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171102-lm-lincoln-memorial/image.svg",
   "thumb": "builds/20261114-171102-lm-lincoln-memorial/thumb.png",
-  "social": "builds/20261114-171102-lm-lincoln-memorial/social.png"
+  "social": "builds/20261114-171102-lm-lincoln-memorial/social.png",
+  "preview": "builds/20261114-171102-lm-lincoln-memorial/preview.jpg"
  }
 }

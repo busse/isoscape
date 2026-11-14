@@ -72,6 +72,7 @@
  "files": {
   "svg": "builds/20261114-171232-lm-wright-brothers/image.svg",
   "thumb": "builds/20261114-171232-lm-wright-brothers/thumb.png",
-  "social": "builds/20261114-171232-lm-wright-brothers/social.png"
+  "social": "builds/20261114-171232-lm-wright-brothers/social.png",
+  "preview": "builds/20261114-171232-lm-wright-brothers/preview.jpg"
  }
 }

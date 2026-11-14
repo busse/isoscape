@@ -72,6 +72,7 @@
  "files": {
   "svg": "builds/20261114-171146-lm-statue-of-liberty/image.svg",
   "thumb": "builds/20261114-171146-lm-statue-of-liberty/thumb.png",
-  "social": "builds/20261114-171146-lm-statue-of-liberty/social.png"
+  "social": "builds/20261114-171146-lm-statue-of-liberty/social.png",
+  "preview": "builds/20261114-171146-lm-statue-of-liberty/preview.jpg"
  }
 }

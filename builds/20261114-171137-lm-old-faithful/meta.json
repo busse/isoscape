@@ -77,6 +77,7 @@
  "files": {
   "svg": "builds/20261114-171137-lm-old-faithful/image.svg",
   "thumb": "builds/20261114-171137-lm-old-faithful/thumb.png",
-  "social": "builds/20261114-171137-lm-old-faithful/social.png"
+  "social": "builds/20261114-171137-lm-old-faithful/social.png",
+  "preview": "builds/20261114-171137-lm-old-faithful/preview.jpg"
  }
 }

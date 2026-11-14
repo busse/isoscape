@@ -83,6 +83,7 @@
  "files": {
   "svg": "builds/20261114-170931-lm-brooklyn-bridge/image.svg",
   "thumb": "builds/20261114-170931-lm-brooklyn-bridge/thumb.png",
-  "social": "builds/20261114-170931-lm-brooklyn-bridge/social.png"
+  "social": "builds/20261114-170931-lm-brooklyn-bridge/social.png",
+  "preview": "builds/20261114-170931-lm-brooklyn-bridge/preview.jpg"
  }
 }

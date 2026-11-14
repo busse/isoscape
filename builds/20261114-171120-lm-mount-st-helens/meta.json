@@ -77,6 +77,7 @@
  "files": {
   "svg": "builds/20261114-171120-lm-mount-st-helens/image.svg",
   "thumb": "builds/20261114-171120-lm-mount-st-helens/thumb.png",
-  "social": "builds/20261114-171120-lm-mount-st-helens/social.png"
+  "social": "builds/20261114-171120-lm-mount-st-helens/social.png",
+  "preview": "builds/20261114-171120-lm-mount-st-helens/preview.jpg"
  }
 }

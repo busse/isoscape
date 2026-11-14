@@ -72,6 +72,7 @@
  "files": {
   "svg": "builds/20261114-170944-lm-coit-tower/image.svg",
   "thumb": "builds/20261114-170944-lm-coit-tower/thumb.png",
-  "social": "builds/20261114-170944-lm-coit-tower/social.png"
+  "social": "builds/20261114-170944-lm-coit-tower/social.png",
+  "preview": "builds/20261114-170944-lm-coit-tower/preview.jpg"
  }
 }

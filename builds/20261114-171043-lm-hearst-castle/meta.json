@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171043-lm-hearst-castle/image.svg",
   "thumb": "builds/20261114-171043-lm-hearst-castle/thumb.png",
-  "social": "builds/20261114-171043-lm-hearst-castle/social.png"
+  "social": "builds/20261114-171043-lm-hearst-castle/social.png",
+  "preview": "builds/20261114-171043-lm-hearst-castle/preview.jpg"
  }
 }

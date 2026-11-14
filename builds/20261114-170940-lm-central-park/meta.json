@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-170940-lm-central-park/image.svg",
   "thumb": "builds/20261114-170940-lm-central-park/thumb.png",
-  "social": "builds/20261114-170940-lm-central-park/social.png"
+  "social": "builds/20261114-170940-lm-central-park/social.png",
+  "preview": "builds/20261114-170940-lm-central-park/preview.jpg"
  }
 }

@@ -72,6 +72,7 @@
  "files": {
   "svg": "builds/20261114-171231-lm-world-trade-center/image.svg",
   "thumb": "builds/20261114-171231-lm-world-trade-center/thumb.png",
-  "social": "builds/20261114-171231-lm-world-trade-center/social.png"
+  "social": "builds/20261114-171231-lm-world-trade-center/social.png",
+  "preview": "builds/20261114-171231-lm-world-trade-center/preview.jpg"
  }
 }

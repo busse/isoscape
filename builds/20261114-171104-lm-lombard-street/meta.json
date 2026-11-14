@@ -72,6 +72,7 @@
  "files": {
   "svg": "builds/20261114-171104-lm-lombard-street/image.svg",
   "thumb": "builds/20261114-171104-lm-lombard-street/thumb.png",
-  "social": "builds/20261114-171104-lm-lombard-street/social.png"
+  "social": "builds/20261114-171104-lm-lombard-street/social.png",
+  "preview": "builds/20261114-171104-lm-lombard-street/preview.jpg"
  }
 }

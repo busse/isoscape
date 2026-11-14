@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171229-lm-white-house/image.svg",
   "thumb": "builds/20261114-171229-lm-white-house/thumb.png",
-  "social": "builds/20261114-171229-lm-white-house/social.png"
+  "social": "builds/20261114-171229-lm-white-house/social.png",
+  "preview": "builds/20261114-171229-lm-white-house/preview.jpg"
  }
 }

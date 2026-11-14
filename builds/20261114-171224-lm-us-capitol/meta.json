@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171224-lm-us-capitol/image.svg",
   "thumb": "builds/20261114-171224-lm-us-capitol/thumb.png",
-  "social": "builds/20261114-171224-lm-us-capitol/social.png"
+  "social": "builds/20261114-171224-lm-us-capitol/social.png",
+  "preview": "builds/20261114-171224-lm-us-capitol/preview.jpg"
  }
 }

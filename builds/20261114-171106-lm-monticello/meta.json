@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171106-lm-monticello/image.svg",
   "thumb": "builds/20261114-171106-lm-monticello/thumb.png",
-  "social": "builds/20261114-171106-lm-monticello/social.png"
+  "social": "builds/20261114-171106-lm-monticello/social.png",
+  "preview": "builds/20261114-171106-lm-monticello/preview.jpg"
  }
 }

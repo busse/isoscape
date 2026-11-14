@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171055-lm-jackson-square/image.svg",
   "thumb": "builds/20261114-171055-lm-jackson-square/thumb.png",
-  "social": "builds/20261114-171055-lm-jackson-square/social.png"
+  "social": "builds/20261114-171055-lm-jackson-square/social.png",
+  "preview": "builds/20261114-171055-lm-jackson-square/preview.jpg"
  }
 }

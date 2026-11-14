@@ -72,6 +72,7 @@
  "files": {
   "svg": "builds/20261114-170936-lm-cape-hatteras-lighthouse/image.svg",
   "thumb": "builds/20261114-170936-lm-cape-hatteras-lighthouse/thumb.png",
-  "social": "builds/20261114-170936-lm-cape-hatteras-lighthouse/social.png"
+  "social": "builds/20261114-170936-lm-cape-hatteras-lighthouse/social.png",
+  "preview": "builds/20261114-170936-lm-cape-hatteras-lighthouse/preview.jpg"
  }
 }

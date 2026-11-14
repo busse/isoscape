@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171013-lm-gettysburg/image.svg",
   "thumb": "builds/20261114-171013-lm-gettysburg/thumb.png",
-  "social": "builds/20261114-171013-lm-gettysburg/social.png"
+  "social": "builds/20261114-171013-lm-gettysburg/social.png",
+  "preview": "builds/20261114-171013-lm-gettysburg/preview.jpg"
  }
 }

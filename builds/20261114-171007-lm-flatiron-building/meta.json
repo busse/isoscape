@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171007-lm-flatiron-building/image.svg",
   "thumb": "builds/20261114-171007-lm-flatiron-building/thumb.png",
-  "social": "builds/20261114-171007-lm-flatiron-building/social.png"
+  "social": "builds/20261114-171007-lm-flatiron-building/social.png",
+  "preview": "builds/20261114-171007-lm-flatiron-building/preview.jpg"
  }
 }

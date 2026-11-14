@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-170933-lm-buckingham-fountain/image.svg",
   "thumb": "builds/20261114-170933-lm-buckingham-fountain/thumb.png",
-  "social": "builds/20261114-170933-lm-buckingham-fountain/social.png"
+  "social": "builds/20261114-170933-lm-buckingham-fountain/social.png",
+  "preview": "builds/20261114-170933-lm-buckingham-fountain/preview.jpg"
  }
 }

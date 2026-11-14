@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171053-lm-independence-hall/image.svg",
   "thumb": "builds/20261114-171053-lm-independence-hall/thumb.png",
-  "social": "builds/20261114-171053-lm-independence-hall/social.png"
+  "social": "builds/20261114-171053-lm-independence-hall/social.png",
+  "preview": "builds/20261114-171053-lm-independence-hall/preview.jpg"
  }
 }

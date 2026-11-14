@@ -72,6 +72,7 @@
  "files": {
   "svg": "builds/20261114-171008-lm-fort-sumter/image.svg",
   "thumb": "builds/20261114-171008-lm-fort-sumter/thumb.png",
-  "social": "builds/20261114-171008-lm-fort-sumter/social.png"
+  "social": "builds/20261114-171008-lm-fort-sumter/social.png",
+  "preview": "builds/20261114-171008-lm-fort-sumter/preview.jpg"
  }
 }

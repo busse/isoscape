@@ -1,83 +1,84 @@
 {
-  "name": "richmond-downtown",
-  "region": "richmond-downtown",
+ "name": "richmond-downtown",
+ "region": "richmond-downtown",
+ "title": "Richmond, VA \u2014 Tredegar to the Mayo Bridge",
+ "palette": "paper",
+ "note": "Flat plate",
+ "viewBox": [
+  -2064,
+  -730.0394505279783,
+  4128,
+  1357.2948260333008
+ ],
+ "bearing": -8.66854870958187,
+ "ms": 476,
+ "stats": {
+  "features": 4520,
+  "ground": 158,
+  "ribbons": 1116,
+  "buildings": 190,
+  "heightFromTag": 34,
+  "heightFromLevels": 74,
+  "heightGuessed": 82,
+  "bridgePieces": 817,
+  "contourSegments": 0,
+  "rapidCells": 0,
+  "strips": 95
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
   "title": "Richmond, VA \u2014 Tredegar to the Mayo Bridge",
-  "palette": "paper",
-  "note": "Flat plate",
-  "viewBox": [
-    -2064,
-    -730.0394505279783,
-    4128,
-    1357.2948260333008
+  "center": [
+   -77.44,
+   37.5338
   ],
-  "bearing": -8.66854870958187,
-  "ms": 476,
-  "stats": {
-    "features": 4520,
-    "ground": 158,
-    "ribbons": 1116,
-    "buildings": 190,
-    "heightFromTag": 34,
-    "heightFromLevels": 74,
-    "heightGuessed": 82,
-    "bridgePieces": 817,
-    "contourSegments": 0,
-    "rapidCells": 0,
-    "strips": 95
-  },
-  "config": {
-    "bearing": 0,
-    "snap": true,
-    "title": "Richmond, VA \u2014 Tredegar to the Mayo Bridge",
-    "center": [
-      -77.44,
-      37.5338
-    ],
-    "width": 1700,
-    "depth": 950,
-    "scale": 2.4,
-    "squash": 0.5,
-    "exaggeration": 1,
-    "slab": 16,
-    "palette": "paper",
-    "bridgeDeck": 7,
-    "bridges": [
-      {
-        "match": "Lee",
-        "deck": 28
-      },
-      {
-        "match": "Manchester",
-        "deck": 24
-      },
-      {
-        "match": "Belle Isle",
-        "deck": 14
-      },
-      {
-        "match": "Mayo",
-        "deck": 6
-      },
-      {
-        "match": "Potterfield",
-        "deck": 3
-      }
-    ],
-    "minBuildingArea": 12,
-    "dots": "all",
-    "name": "richmond-downtown"
-  },
-  "sky": "#f4f1ea",
-  "id": "20261113-215112-richmond-downtown",
-  "createdAt": "2026-11-13T21:51:12.637Z",
-  "bytes": 3533213,
-  "git": {
-    "commit": "00a3589",
-    "dirty": false,
-    "subject": "Explorer: one local page over every build, with A/B compare"
-  },
-  "files": {
-    "svg": "builds/20261113-215112-richmond-downtown/image.svg",
-    "thumb": "builds/20261113-215112-richmond-downtown/thumb.png"
-  }
+  "width": 1700,
+  "depth": 950,
+  "scale": 2.4,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 16,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Lee",
+    "deck": 28
+   },
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Belle Isle",
+    "deck": 14
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "name": "richmond-downtown"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261113-215112-richmond-downtown",
+ "createdAt": "2026-11-13T21:51:12.637Z",
+ "bytes": 3533213,
+ "git": {
+  "commit": "00a3589",
+  "dirty": false,
+  "subject": "Explorer: one local page over every build, with A/B compare"
+ },
+ "files": {
+  "svg": "builds/20261113-215112-richmond-downtown/image.svg",
+  "thumb": "builds/20261113-215112-richmond-downtown/thumb.png",
+  "preview": "builds/20261113-215112-richmond-downtown/preview.jpg"
+ }
 }

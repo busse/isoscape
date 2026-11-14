@@ -62,6 +62,7 @@
  "files": {
   "svg": "builds/20261114-171003-lm-diamond-head/image.svg",
   "thumb": "builds/20261114-171003-lm-diamond-head/thumb.png",
-  "social": "builds/20261114-171003-lm-diamond-head/social.png"
+  "social": "builds/20261114-171003-lm-diamond-head/social.png",
+  "preview": "builds/20261114-171003-lm-diamond-head/preview.jpg"
  }
 }

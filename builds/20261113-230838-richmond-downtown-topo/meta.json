@@ -1,93 +1,94 @@
 {
-  "name": "richmond-downtown-topo",
-  "region": "richmond-downtown-topo",
+ "name": "richmond-downtown-topo",
+ "region": "richmond-downtown-topo",
+ "title": "Richmond, VA \u2014 the Fall Line, Tredegar to the Mayo Bridge",
+ "palette": "paper",
+ "note": "Terrain: lidar shoreline, water on the river surface",
+ "viewBox": [
+  -2064,
+  -934.167525905792,
+  4128,
+  1573.8936672256104
+ ],
+ "bearing": -8.66854870958187,
+ "ms": 952,
+ "stats": {
+  "features": 4520,
+  "ground": 158,
+  "elevationDatum": 0.1,
+  "elevationTop": 51.1,
+  "ribbons": 1116,
+  "buildings": 190,
+  "heightFromTag": 34,
+  "heightFromLevels": 74,
+  "heightGuessed": 82,
+  "bridgePieces": 817,
+  "contourSegments": 15271,
+  "rapidCells": 832,
+  "strips": 95
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
   "title": "Richmond, VA \u2014 the Fall Line, Tredegar to the Mayo Bridge",
-  "palette": "paper",
-  "note": "Terrain: lidar shoreline, water on the river surface",
-  "viewBox": [
-    -2064,
-    -934.167525905792,
-    4128,
-    1573.8936672256104
+  "data": "richmond-downtown",
+  "center": [
+   -77.44,
+   37.5338
   ],
-  "bearing": -8.66854870958187,
-  "ms": 952,
-  "stats": {
-    "features": 4520,
-    "ground": 158,
-    "elevationDatum": 0.1,
-    "elevationTop": 51.1,
-    "ribbons": 1116,
-    "buildings": 190,
-    "heightFromTag": 34,
-    "heightFromLevels": 74,
-    "heightGuessed": 82,
-    "bridgePieces": 817,
-    "contourSegments": 15271,
-    "rapidCells": 832,
-    "strips": 95
+  "width": 1700,
+  "depth": 950,
+  "scale": 2.4,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 22,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Lee",
+    "deck": 28
+   },
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Belle Isle",
+    "deck": 14
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0.035
   },
-  "config": {
-    "bearing": 0,
-    "snap": true,
-    "title": "Richmond, VA \u2014 the Fall Line, Tredegar to the Mayo Bridge",
-    "data": "richmond-downtown",
-    "center": [
-      -77.44,
-      37.5338
-    ],
-    "width": 1700,
-    "depth": 950,
-    "scale": 2.4,
-    "squash": 0.5,
-    "exaggeration": 1,
-    "slab": 22,
-    "palette": "paper",
-    "bridgeDeck": 7,
-    "bridges": [
-      {
-        "match": "Lee",
-        "deck": 28
-      },
-      {
-        "match": "Manchester",
-        "deck": 24
-      },
-      {
-        "match": "Belle Isle",
-        "deck": 14
-      },
-      {
-        "match": "Mayo",
-        "deck": 6
-      },
-      {
-        "match": "Potterfield",
-        "deck": 3
-      }
-    ],
-    "minBuildingArea": 12,
-    "dots": "all",
-    "terrain": {
-      "exaggeration": 2.5,
-      "cell": 5,
-      "contour": 2,
-      "majorEvery": 5,
-      "rapids": 0.035
-    },
-    "name": "richmond-downtown-topo"
-  },
-  "sky": "#f4f1ea",
-  "id": "20261113-230838-richmond-downtown-topo",
-  "createdAt": "2026-11-13T23:08:38.754Z",
-  "bytes": 2469395,
-  "git": {
-    "commit": "73e1696",
-    "dirty": false,
-    "subject": "The James from I-195 to Rocketts Landing: 7.85 km, every building"
-  },
-  "files": {
-    "svg": "builds/20261113-230838-richmond-downtown-topo/image.svg",
-    "thumb": "builds/20261113-230838-richmond-downtown-topo/thumb.png"
-  }
+  "name": "richmond-downtown-topo"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261113-230838-richmond-downtown-topo",
+ "createdAt": "2026-11-13T23:08:38.754Z",
+ "bytes": 2469395,
+ "git": {
+  "commit": "73e1696",
+  "dirty": false,
+  "subject": "The James from I-195 to Rocketts Landing: 7.85 km, every building"
+ },
+ "files": {
+  "svg": "builds/20261113-230838-richmond-downtown-topo/image.svg",
+  "thumb": "builds/20261113-230838-richmond-downtown-topo/thumb.png",
+  "preview": "builds/20261113-230838-richmond-downtown-topo/preview.jpg"
+ }
 }

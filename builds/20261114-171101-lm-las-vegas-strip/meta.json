@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171101-lm-las-vegas-strip/image.svg",
   "thumb": "builds/20261114-171101-lm-las-vegas-strip/thumb.png",
-  "social": "builds/20261114-171101-lm-las-vegas-strip/social.png"
+  "social": "builds/20261114-171101-lm-las-vegas-strip/social.png",
+  "preview": "builds/20261114-171101-lm-las-vegas-strip/preview.jpg"
  }
 }

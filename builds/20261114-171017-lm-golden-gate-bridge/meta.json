@@ -78,6 +78,7 @@
  "files": {
   "svg": "builds/20261114-171017-lm-golden-gate-bridge/image.svg",
   "thumb": "builds/20261114-171017-lm-golden-gate-bridge/thumb.png",
-  "social": "builds/20261114-171017-lm-golden-gate-bridge/social.png"
+  "social": "builds/20261114-171017-lm-golden-gate-bridge/social.png",
+  "preview": "builds/20261114-171017-lm-golden-gate-bridge/preview.jpg"
  }
 }

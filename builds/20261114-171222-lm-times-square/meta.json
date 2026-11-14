@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171222-lm-times-square/image.svg",
   "thumb": "builds/20261114-171222-lm-times-square/thumb.png",
-  "social": "builds/20261114-171222-lm-times-square/social.png"
+  "social": "builds/20261114-171222-lm-times-square/social.png",
+  "preview": "builds/20261114-171222-lm-times-square/preview.jpg"
  }
 }

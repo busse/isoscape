@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171145-lm-savannah-squares/image.svg",
   "thumb": "builds/20261114-171145-lm-savannah-squares/thumb.png",
-  "social": "builds/20261114-171145-lm-savannah-squares/social.png"
+  "social": "builds/20261114-171145-lm-savannah-squares/social.png",
+  "preview": "builds/20261114-171145-lm-savannah-squares/preview.jpg"
  }
 }

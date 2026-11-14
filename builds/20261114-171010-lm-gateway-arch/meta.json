@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171010-lm-gateway-arch/image.svg",
   "thumb": "builds/20261114-171010-lm-gateway-arch/thumb.png",
-  "social": "builds/20261114-171010-lm-gateway-arch/social.png"
+  "social": "builds/20261114-171010-lm-gateway-arch/social.png",
+  "preview": "builds/20261114-171010-lm-gateway-arch/preview.jpg"
  }
 }

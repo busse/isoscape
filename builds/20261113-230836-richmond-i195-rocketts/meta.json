@@ -1,97 +1,98 @@
 {
-  "name": "richmond-i195-rocketts",
-  "region": "richmond-i195-rocketts",
-  "title": "Richmond, VA \u2014 the James from I-195 to Rocketts Landing",
-  "palette": "paper",
-  "note": "I-195 to Rocketts Landing: every building",
-  "viewBox": [
-    -9444,
-    -1771.6097160766315,
-    18888,
-    3191.3358573964497
-  ],
+ "name": "richmond-i195-rocketts",
+ "region": "richmond-i195-rocketts",
+ "title": "Richmond, VA \u2014 the James from I-195 to Rocketts Landing",
+ "palette": "paper",
+ "note": "I-195 to Rocketts Landing: every building",
+ "viewBox": [
+  -9444,
+  -1771.6097160766315,
+  18888,
+  3191.3358573964497
+ ],
+ "bearing": 10,
+ "ms": 6553,
+ "stats": {
+  "features": 47912,
+  "ground": 450,
+  "elevationDatum": -0.1,
+  "elevationTop": 76.8,
+  "ribbons": 7354,
+  "buildings": 6758,
+  "heightFromTag": 50,
+  "heightFromLevels": 459,
+  "heightGuessed": 6249,
+  "bridgePieces": 1964,
+  "contourSegments": 158251,
+  "rapidCells": 13603,
+  "strips": 225
+ },
+ "config": {
   "bearing": 10,
-  "ms": 6553,
-  "stats": {
-    "features": 47912,
-    "ground": 450,
-    "elevationDatum": -0.1,
-    "elevationTop": 76.8,
-    "ribbons": 7354,
-    "buildings": 6758,
-    "heightFromTag": 50,
-    "heightFromLevels": 459,
-    "heightGuessed": 6249,
-    "bridgePieces": 1964,
-    "contourSegments": 158251,
-    "rapidCells": 13603,
-    "strips": 225
+  "snap": false,
+  "title": "Richmond, VA \u2014 the James from I-195 to Rocketts Landing",
+  "center": [
+   -77.45512,
+   37.52948
+  ],
+  "width": 7850,
+  "depth": 2250,
+  "scale": 2.4,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 22,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Lee",
+    "deck": 28
+   },
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Boulevard",
+    "deck": 22
+   },
+   {
+    "match": "Belle Isle",
+    "deck": 14
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 2
   },
-  "config": {
-    "bearing": 10,
-    "snap": false,
-    "title": "Richmond, VA \u2014 the James from I-195 to Rocketts Landing",
-    "center": [
-      -77.45512,
-      37.52948
-    ],
-    "width": 7850,
-    "depth": 2250,
-    "scale": 2.4,
-    "squash": 0.5,
-    "exaggeration": 1,
-    "slab": 22,
-    "palette": "paper",
-    "bridgeDeck": 7,
-    "bridges": [
-      {
-        "match": "Lee",
-        "deck": 28
-      },
-      {
-        "match": "Manchester",
-        "deck": 24
-      },
-      {
-        "match": "Boulevard",
-        "deck": 22
-      },
-      {
-        "match": "Belle Isle",
-        "deck": 14
-      },
-      {
-        "match": "Mayo",
-        "deck": 6
-      },
-      {
-        "match": "Potterfield",
-        "deck": 3
-      }
-    ],
-    "minBuildingArea": 12,
-    "dots": "all",
-    "terrain": {
-      "exaggeration": 2.5,
-      "cell": 5,
-      "contour": 2,
-      "majorEvery": 5,
-      "rapids": 0.035,
-      "demResolution": 2
-    },
-    "name": "richmond-i195-rocketts"
-  },
-  "sky": "#f4f1ea",
-  "id": "20261113-230836-richmond-i195-rocketts",
-  "createdAt": "2026-11-13T23:08:36.963Z",
-  "bytes": 25660760,
-  "git": {
-    "commit": "73e1696",
-    "dirty": false,
-    "subject": "The James from I-195 to Rocketts Landing: 7.85 km, every building"
-  },
-  "files": {
-    "svg": "builds/20261113-230836-richmond-i195-rocketts/image.svg",
-    "thumb": "builds/20261113-230836-richmond-i195-rocketts/thumb.png"
-  }
+  "name": "richmond-i195-rocketts"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261113-230836-richmond-i195-rocketts",
+ "createdAt": "2026-11-13T23:08:36.963Z",
+ "bytes": 25660760,
+ "git": {
+  "commit": "73e1696",
+  "dirty": false,
+  "subject": "The James from I-195 to Rocketts Landing: 7.85 km, every building"
+ },
+ "files": {
+  "svg": "builds/20261113-230836-richmond-i195-rocketts/image.svg",
+  "thumb": "builds/20261113-230836-richmond-i195-rocketts/thumb.png",
+  "preview": "builds/20261113-230836-richmond-i195-rocketts/preview.jpg"
+ }
 }

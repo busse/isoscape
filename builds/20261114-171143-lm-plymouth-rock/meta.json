@@ -72,6 +72,7 @@
  "files": {
   "svg": "builds/20261114-171143-lm-plymouth-rock/image.svg",
   "thumb": "builds/20261114-171143-lm-plymouth-rock/thumb.png",
-  "social": "builds/20261114-171143-lm-plymouth-rock/social.png"
+  "social": "builds/20261114-171143-lm-plymouth-rock/social.png",
+  "preview": "builds/20261114-171143-lm-plymouth-rock/preview.jpg"
  }
 }

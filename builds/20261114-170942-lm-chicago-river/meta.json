@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-170942-lm-chicago-river/image.svg",
   "thumb": "builds/20261114-170942-lm-chicago-river/thumb.png",
-  "social": "builds/20261114-170942-lm-chicago-river/social.png"
+  "social": "builds/20261114-170942-lm-chicago-river/social.png",
+  "preview": "builds/20261114-170942-lm-chicago-river/preview.jpg"
  }
 }

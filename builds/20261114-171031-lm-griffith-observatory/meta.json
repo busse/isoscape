@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171031-lm-griffith-observatory/image.svg",
   "thumb": "builds/20261114-171031-lm-griffith-observatory/thumb.png",
-  "social": "builds/20261114-171031-lm-griffith-observatory/social.png"
+  "social": "builds/20261114-171031-lm-griffith-observatory/social.png",
+  "preview": "builds/20261114-171031-lm-griffith-observatory/preview.jpg"
  }
 }

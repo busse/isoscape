@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171227-lm-washington-monument/image.svg",
   "thumb": "builds/20261114-171227-lm-washington-monument/thumb.png",
-  "social": "builds/20261114-171227-lm-washington-monument/social.png"
+  "social": "builds/20261114-171227-lm-washington-monument/social.png",
+  "preview": "builds/20261114-171227-lm-washington-monument/preview.jpg"
  }
 }

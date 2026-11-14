@@ -72,6 +72,7 @@
  "files": {
   "svg": "builds/20261114-170934-lm-bunker-hill/image.svg",
   "thumb": "builds/20261114-170934-lm-bunker-hill/thumb.png",
-  "social": "builds/20261114-170934-lm-bunker-hill/social.png"
+  "social": "builds/20261114-170934-lm-bunker-hill/social.png",
+  "preview": "builds/20261114-170934-lm-bunker-hill/preview.jpg"
  }
 }

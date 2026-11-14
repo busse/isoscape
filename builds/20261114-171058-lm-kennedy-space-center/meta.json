@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171058-lm-kennedy-space-center/image.svg",
   "thumb": "builds/20261114-171058-lm-kennedy-space-center/thumb.png",
-  "social": "builds/20261114-171058-lm-kennedy-space-center/social.png"
+  "social": "builds/20261114-171058-lm-kennedy-space-center/social.png",
+  "preview": "builds/20261114-171058-lm-kennedy-space-center/preview.jpg"
  }
 }

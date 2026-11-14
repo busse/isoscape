@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171056-lm-jefferson-memorial/image.svg",
   "thumb": "builds/20261114-171056-lm-jefferson-memorial/thumb.png",
-  "social": "builds/20261114-171056-lm-jefferson-memorial/social.png"
+  "social": "builds/20261114-171056-lm-jefferson-memorial/social.png",
+  "preview": "builds/20261114-171056-lm-jefferson-memorial/preview.jpg"
  }
 }

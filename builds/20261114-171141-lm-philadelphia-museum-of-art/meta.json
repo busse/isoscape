@@ -71,6 +71,7 @@
  "files": {
   "svg": "builds/20261114-171141-lm-philadelphia-museum-of-art/image.svg",
   "thumb": "builds/20261114-171141-lm-philadelphia-museum-of-art/thumb.png",
-  "social": "builds/20261114-171141-lm-philadelphia-museum-of-art/social.png"
+  "social": "builds/20261114-171141-lm-philadelphia-museum-of-art/social.png",
+  "preview": "builds/20261114-171141-lm-philadelphia-museum-of-art/preview.jpg"
  }
 }
