@@ -143,6 +143,40 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
 #pages a.on::before { color: var(--accent); }
 #pages a.home::before { content: "⌂"; }
 
+/* ---- phones: the build list becomes a drawer, under a slim top bar ------------------ */
+#mbar, #scrim { display: none; }
+@media (max-width: 760px) {
+  body { display: block; }
+  main { display: flex; flex-direction: column; height: 100%; }
+  #mbar { display: flex; align-items: center; gap: 10px; flex: none; padding: 8px 12px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  #mbar button { border: 1px solid var(--line); background: var(--bg); border-radius: 6px; padding: 3px 10px; font-size: 17px; line-height: 1.3; cursor: pointer; }
+  #mbar .brand { color: inherit; text-decoration: none; font-size: 16px; }
+  #mbar .mshop { margin-left: auto; background: var(--accent); color: var(--panel); text-decoration: none; font-weight: 600; padding: 5px 12px; border-radius: 14px; font-size: 13px; white-space: nowrap; }
+  #stage { flex: 1; min-height: 0; }
+  #info { flex: none; max-height: 45vh; }
+  #info.made { max-height: 62vh; }
+  #info .bar { flex-wrap: wrap; row-gap: 4px; padding: 8px 12px; }
+  #info .bar h1 { flex: 1 1 0; min-width: 0; }
+  #info .bar .links { margin-left: 0; width: 100%; flex-wrap: wrap; gap: 6px 12px; }
+  #info .tabs { margin-left: 0; }
+  #info .body, #info .body.stories { grid-template-columns: 1fr; gap: 16px; padding: 12px 14px 16px; }
+  #home, #page { flex: 1; min-height: 0; }
+  .doc { padding: 18px 16px 60px; }
+  .prose h1 { font-size: 25px; }
+  #nav { position: fixed; top: 0; bottom: 0; left: 0; width: min(86vw, 320px); z-index: 20; transform: translateX(-100%); transition: transform .2s ease; }
+  body.navopen #nav { transform: none; box-shadow: 0 0 28px rgba(0, 0, 0, .3); }
+  body.navopen #scrim { display: block; position: fixed; inset: 0; z-index: 19; background: rgba(0, 0, 0, .3); }
+  #nav footer .keys { display: none; }
+  #toolbar { top: 8px; right: 8px; }
+  #toolbar #actual, #toolbar #compare, #toolbar .zoom, #toolbar select { display: none; }
+  #timeline { top: auto; bottom: 8px; left: 8px; right: 8px; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  #timeline .hint { display: none; }
+  .hm .banner .btn { margin-left: 0; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .card b { font-size: 12px; }
+  .hm section.sec header .btn { margin-left: 0; }
+}
+
 /* ---- front page ------------------------------------------------------------------ */
 #home { display: none; overflow-y: auto; background: var(--bg); min-height: 0; }
 body.home #stage, body.home #info, body.home #page { display: none; }
@@ -263,9 +297,11 @@ body.reading main { grid-template-rows: 1fr; }
   <div id="pages"></div>
   <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false">
   <div id="list"></div>
-  <footer>Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare · <kbd>L</kbd> copy link<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back<br><kbd>[</kbd><kbd>]</kbd> step through a dated series<br>By Chris Busse · <a href="#/about/contact">Contact</a></footer>
+  <footer><span class="keys">Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare · <kbd>L</kbd> copy link<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back<br><kbd>[</kbd><kbd>]</kbd> step through a dated series<br></span>By Chris Busse · <a href="#/about/contact">Contact</a></footer>
 </nav>
+<div id="scrim"></div>
 <main>
+  <div id="mbar"><button id="menu" title="Maps and pages" aria-label="Maps and pages">☰</button><a class="brand" href="#home"><b>isoscape</b></a><a class="mshop" href="https://chrisbusse.com/" target="_blank" rel="noopener">Shop prints ↗</a></div>
   <div id="stage">
     <img id="imgA" alt="">
     <div id="clipB"><img id="imgB" alt=""></div>
@@ -418,6 +454,7 @@ body.reading main { grid-template-rows: 1fr; }
     if (sum) { const d = sum.parentElement; state.secOpen[d.dataset.i] = !d.open; return }
     const el = e.target.closest('.build, .yrb')
     if (!el) return
+    closeDrawer()
     const leaving = state.page !== null || state.home
     if (state.page !== null) closePage()
     if (state.home) closeHome()
@@ -499,13 +536,32 @@ body.reading main { grid-template-rows: 1fr; }
     zoomAt(e.clientX - r.left, e.clientY - r.top, Math.exp(-e.deltaY * 0.0015))
   }, { passive: false })
   let drag = null
+  // Two fingers on a touch screen: pinch to zoom, about the point between them.
+  const touches = new Map()
+  let pinch = null
+  const spread = () => { const [p, q] = [...touches.values()]; return { d: Math.hypot(p.x - q.x, p.y - q.y), x: (p.x + q.x) / 2, y: (p.y + q.y) / 2 } }
   stage.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('#toolbar')) return
-    drag = { x: e.clientX, y: e.clientY, divider: e.target === divider }
+    // Controls on the stage keep their clicks: capturing the pointer would take them.
+    if (e.target.closest('#toolbar, #timeline button')) return
     stage.setPointerCapture(e.pointerId)
+    if (e.pointerType === 'touch') {
+      touches.set(e.pointerId, { x: e.clientX, y: e.clientY })
+      if (touches.size === 2) { drag = null; pinch = spread(); return }
+    }
+    drag = { x: e.clientX, y: e.clientY, divider: e.target === divider }
     if (!drag.divider) stage.classList.add('dragging')
   })
   stage.addEventListener('pointermove', (e) => {
+    if (touches.has(e.pointerId)) touches.set(e.pointerId, { x: e.clientX, y: e.clientY })
+    if (pinch && touches.size === 2) {
+      const now = spread()
+      const r = stage.getBoundingClientRect()
+      state.panX += now.x - pinch.x
+      state.panY += now.y - pinch.y
+      zoomAt(now.x - r.left, now.y - r.top, pinch.d > 0 ? now.d / pinch.d : 1)
+      pinch = now
+      return
+    }
     if (!drag) return
     if (drag.divider) {
       const r = stage.getBoundingClientRect()
@@ -518,7 +574,14 @@ body.reading main { grid-template-rows: 1fr; }
     }
     layout()
   })
-  stage.addEventListener('pointerup', () => { drag = null; stage.classList.remove('dragging') })
+  const lift = (e) => {
+    touches.delete(e.pointerId)
+    if (touches.size < 2) pinch = null
+    drag = null
+    stage.classList.remove('dragging')
+  }
+  stage.addEventListener('pointerup', lift)
+  stage.addEventListener('pointercancel', lift)
   stage.addEventListener('dblclick', (e) => { if (!e.target.closest('#toolbar')) fit() })
   // When the stage changes size (the info panel opens, closes or changes tab), keep the point at
   // its centre where it was.
@@ -781,6 +844,11 @@ body.reading main { grid-template-rows: 1fr; }
     return '<div class="story">' + out.join('') + '</div>'
   }
   $('toggleInfo').addEventListener('click', () => toggleInfo())
+  // Phones: the build list is a drawer behind the menu button; the info panel starts folded.
+  const closeDrawer = () => document.body.classList.remove('navopen')
+  $('menu').addEventListener('click', () => document.body.classList.toggle('navopen'))
+  $('scrim').addEventListener('click', closeDrawer)
+  if (window.matchMedia('(max-width: 760px)').matches) { $('info').classList.add('closed'); $('toggleInfo').textContent = '▸' }
   const toggleInfo = () => {
     $('info').classList.toggle('closed')
     $('toggleInfo').textContent = $('info').classList.contains('closed') ? '▸' : '▾'
@@ -916,6 +984,9 @@ body.reading main { grid-template-rows: 1fr; }
     if (el.hidden) return
     el.innerHTML = ser.map((x) => '<button data-id="' + esc(x.id) + '" class="' + (x.time.year === a.time.year ? 'on' : '') + '" title="' + esc(x.time.title || '') + '">' + esc(x.time.year) + '</button>').join('') +
       '<span class="hint">[ ] to step</span>'
+    // On a phone the years scroll sideways: keep the one on show in view.
+    const on = el.querySelector('button.on')
+    if (on && el.scrollWidth > el.clientWidth) el.scrollLeft = on.offsetLeft - el.clientWidth / 2 + on.offsetWidth / 2
   }
   $('timeline').addEventListener('click', (e) => {
     const t = e.target.closest('button')
@@ -1085,6 +1156,7 @@ body.reading main { grid-template-rows: 1fr; }
     return { a, b, tab, view, split }
   }
   const route = () => {
+    closeDrawer()
     routed = location.hash
     const r = parseHash()
     if (r.page !== undefined && pageBySlug.size > 0) { openPage(r.page, r.section); return }
