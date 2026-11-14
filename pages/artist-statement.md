@@ -6,9 +6,9 @@ summary: Why Chris Busse makes these maps, in his own words.
 
 # Artist statement
 
-I've loved maps and charts for as long as I can remember. I have a framed copy of an 1876 map of Richmond at home, and I can still lose twenty minutes in it.
+I've been drawn to maps for as long as I can remember. I collect historic maps of Richmond and the counties around it. As a kid I spent a lot of time exploring the swamps of western Henrico, with USGS topo maps and old coal field, mine and railroad maps to find my way. The contours of the land, and what covers it, have fascinated me ever since.
 
-Place is a big part of my photography. Where I took a picture is usually tied up with why I took it. Over time I've come to see maps as a way of sorting the world. They put things into kinds, like which road is bigger, which building is a church and which is a warehouse. They also lend that order to other things. Every photo on my phone knows where it was taken, and that's often how I find it again.
+Place is part of the context for my photography too, both digital and film. Over time I've come to see maps as a way of sorting the world. They put things into kinds, like which road is bigger, which building is a church and which is a warehouse. They also lend that order to other things, including where a photograph was made.
 
 isoscape started as a way to draw places I know from open map data, in a small isometric style that lets you take in a whole neighborhood at once. For Richmond I also traced old fire-insurance maps, so you can watch blocks change over more than a hundred years. The drawings are sketches. Buildings are approximate, and some are missing.
 
