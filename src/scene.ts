@@ -274,7 +274,9 @@ export const buildScene = (
   const latticeHulls = lattice.map((t) => convexHull(t.outer))
   const keptParts = parts.filter((p) => !latticeHulls.some((h) => pointInRing(centroid(p.outer), h)))
   // Simple 3D Buildings: where parts describe a building, draw the parts, not the outline.
-  const partCentres = keptParts.map((p) => centroid(p.outer))
+  // Parts that are only roofs (building:part=roof) do not replace the building under them: it
+  // stays, as their podium.
+  const partCentres = keptParts.filter((p) => p.tags['building:part'] !== 'roof').map((p) => centroid(p.outer))
   const shown = solids.filter((s) => lattice.includes(s) || !partCentres.some((c) => pointInRing(c, s.outer))).concat(keptParts)
 
   let heightSources = { height: 0, model: 0, levels: 0, guess: 0 }
@@ -312,7 +314,13 @@ export const buildScene = (
       fresh++
     }
     if (lattice.includes(s)) items.push(spire(view, pal, s.id, outer, base, gMean + h.top, dotsMode, s.tags.name))
-    else if (isShellRoof(s.tags)) items.push(spire(view, pal, s.id, outer, base, gMean + SHELL_RISE * Math.sqrt(area), dotsMode, s.tags.name, (t) => 1 - t * 0.97, false))
+    else if (isShellRoof(s.tags)) {
+      // Seat the shell on the roof of the building it stands on, if any.
+      const c = centroid(outer)
+      const under = solids.find((o) => o !== s && pointInRing(c, o.outer) && shown.includes(o))
+      const podium = under === undefined ? 0 : buildingHeights(under.tags, Math.abs(signedArea(under.outer))).top
+      items.push(spire(view, pal, s.id, outer, gMin + podium, gMean + podium + SHELL_RISE * Math.sqrt(area), dotsMode, s.tags.name, (t) => 1 - t * 0.97, false, 4))
+    }
     else items.push(extrude(view, pal, s.id, outer, inners, base, top, roof, dotsMode, s.tags.name))
   }
   stats.buildings = items.length
@@ -475,7 +483,7 @@ export const isLatticeTower = (t: Readonly<Record<string, string>>): boolean =>
  */
 export const isShellRoof = (t: Readonly<Record<string, string>>): boolean =>
   t['building:part'] === 'roof' && ['round', 'spherical', 'circular'].includes(t['roof:shape'] ?? '') && t.height === undefined && t['min_height'] === undefined
-export const SHELL_RISE = 1.4
+export const SHELL_RISE = 1.1
 
 /**
  * Half-width of a lattice tower at fraction `t` of its height, as a fraction of the base: the
@@ -491,11 +499,10 @@ export const spireProfile = (t: number): number => (t <= 0.84 ? Math.exp(-3.3 * 
  */
 export const spire = (
   view: View, pal: Palette, id: string, outer: Ring, base: number, top: number, dots: 'all' | 'roof' | 'none', name?: string,
-  profile: (t: number) => number = spireProfile, iron = true,
+  profile: (t: number) => number = spireProfile, iron = true, STEPS = 16,
 ): Item => {
   const c = centroid(outer)
   const at = (p: Vec2, k: number): Vec2 => [c[0] + (p[0] - c[0]) * k, c[1] + (p[1] - c[1]) * k]
-  const STEPS = 16
   const shapes: Shape[] = []
   for (let i = 0; i < STEPS; i++) {
     const t0 = i / STEPS
