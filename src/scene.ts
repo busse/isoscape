@@ -20,6 +20,7 @@ import type { Region } from './region.ts'
 import { dominantGridAngle, makeView, snapBearing, type View } from './view.ts'
 import { localMetres } from './region.ts'
 import { makeTerrain, rasterize, settleWater, type Terrain } from './terrain.ts'
+import { chainCoast, waterFromCoast } from './coast.ts'
 
 /** A filled, optionally inked, polygon in screen pixels. */
 export interface Shape {
@@ -121,6 +122,14 @@ export const buildScene = (
       ...f.inners.map((r) => orient(clipRingToRect(toViewRing(view, r), wide), false)),
     ].filter((r) => r.length >= 3 && Math.abs(signedArea(r)) > 1)
     if (rings.length > 0) ground.push({ kind, rings })
+  }
+  // The sea and tidal water come as coastline, land on its left: the frame minus the land.
+  const coastWays = features.filter((f): f is LineFeature => f.type === 'line' && f.tags.natural === 'coastline').map((f) => f.points)
+  if (coastWays.length > 0) {
+    const chains = chainCoast(coastWays).map((c) => c.map(([lon, lat]) => view.toView(lon, lat)))
+    const sea = waterFromCoast(chains, wide)
+    if (sea !== null) ground.unshift({ kind: 'water', rings: sea })
+    stats.coastWays = coastWays.length
   }
   stats.ground = ground.length
   rasterize(terrain, ground.filter((g) => g.kind === 'water').map((g) => g.rings), 1)

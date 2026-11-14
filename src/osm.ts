@@ -60,6 +60,7 @@ export const overpassQuery = (r: Region, b: Bounds = fetchBounds(r)): string => 
  nwr["landuse"~"^(grass|forest|cemetery|recreation_ground|meadow|railway|village_green)$"];
  nwr["natural"~"^(wood|scrub|grassland|wetland|bare_rock|sand|beach)$"];
  nwr["place"~"^(island|islet)$"];
+ way["natural"="coastline"];
  nwr["amenity"="parking"];
  way["man_made"~"^(bridge|pier|dyke|embankment)$"];
  way["barrier"="wall"];
@@ -142,7 +143,7 @@ export const fetchOsm = async (
   options: { budgetSeconds?: number; rounds?: number; log?: (m: string) => void } = {},
 ): Promise<{ done: number; total: number }> => {
   const log = options.log ?? console.error
-  const tiles = tilesFor(fetchBounds(r))
+  const tiles = tilesFor(fetchBounds(r), r.fetchTile)
   const tileDir = join(dir, 'osm-tiles')
   await mkdir(tileDir, { recursive: true })
   const t0 = Date.now()

@@ -159,7 +159,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     `<style>`,
     `.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}.d{fill:none;stroke:${p.ink};stroke-width:${f(p.dotRadius * 2)};stroke-linecap:round}`,
     `.td{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth};stroke-dasharray:1.2 1.8}`,
-    sealed('L', p.land), sealed('Lw', p.water), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('rock', p.rock),
+    sealed('L', p.land), sealed('Lw', p.water), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
     sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('canal', p.water), sealed('path', p.path),
     sealed('road', p.road), sealed('rail', p.rail), sealed('weir', p.foam),
     `.ties{fill:none;stroke:${p.railTie};stroke-width:${p.groundLineWidth * 2};stroke-dasharray:1 2.2}`,

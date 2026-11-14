@@ -5,14 +5,16 @@
 
 import type { Tags } from './osm.ts'
 
-export type GroundKind = 'water' | 'island' | 'green' | 'wood' | 'rock' | 'parking' | 'cemetery'
+export type GroundKind = 'water' | 'island' | 'green' | 'wood' | 'marsh' | 'sand' | 'rock' | 'parking' | 'cemetery'
 
 export const groundKind = (t: Tags): GroundKind | null => {
   if (t.building !== undefined || t['building:part'] !== undefined) return null
   if (t.natural === 'water' || t.water !== undefined || t.waterway === 'riverbank' || t.waterway === 'dock') return 'water'
   if (t.place === 'island' || t.place === 'islet') return 'island'
-  if (t.landuse === 'forest' || t.natural === 'wood' || t.natural === 'scrub' || t.natural === 'wetland') return 'wood'
-  if (t.natural === 'bare_rock' || t.natural === 'sand' || t.natural === 'beach') return 'rock'
+  if (t.natural === 'wetland') return 'marsh'
+  if (t.landuse === 'forest' || t.natural === 'wood' || t.natural === 'scrub') return 'wood'
+  if (t.natural === 'sand' || t.natural === 'beach') return 'sand'
+  if (t.natural === 'bare_rock') return 'rock'
   if (t.landuse === 'cemetery') return 'cemetery'
   if (t.amenity === 'parking') return 'parking'
   if (
@@ -26,7 +28,7 @@ export const groundKind = (t: Tags): GroundKind | null => {
 }
 
 /** Paint order of the ground layers, bottom first. Water and islands are handled apart. */
-export const GROUND_ORDER: readonly GroundKind[] = ['green', 'cemetery', 'wood', 'rock', 'parking']
+export const GROUND_ORDER: readonly GroundKind[] = ['green', 'cemetery', 'marsh', 'wood', 'sand', 'rock', 'parking']
 
 /** Carriageway widths in metres. Missing means "do not draw". */
 const ROAD_WIDTH: Readonly<Record<string, number>> = {

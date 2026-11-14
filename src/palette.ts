@@ -12,6 +12,8 @@ export interface Palette {
   readonly waterLine: string
   readonly green: string
   readonly wood: string
+  readonly marsh: string
+  readonly sand: string
   readonly rock: string
   readonly parking: string
   readonly cemetery: string
@@ -52,6 +54,8 @@ const paper: Palette = {
   waterLine: '#7fa9bc',
   green: '#d3dfb9',
   wood: '#bccf9e',
+  marsh: '#c9d6ae',
+  sand: '#efe4c4',
   rock: '#d9d2c3',
   parking: '#e2ddd1',
   cemetery: '#cbd9b4',
@@ -93,6 +97,8 @@ const night: Palette = {
   waterLine: '#2c4a5c',
   green: '#22302a',
   wood: '#1f2d25',
+  marsh: '#26332b',
+  sand: '#33322b',
   rock: '#2a2c33',
   parking: '#24272f',
   cemetery: '#223027',
