@@ -209,14 +209,18 @@ export const readTiff = (buf: Buffer, bounds: { west: number; south: number; eas
 
 export const encodeDem = (d: Dem): Buffer => {
   let lo = Infinity
-  for (const v of d.data) if (!Number.isNaN(v) && v < lo) lo = v
-  if (!Number.isFinite(lo)) lo = 0
+  let hi = -Infinity
+  for (const v of d.data) if (!Number.isNaN(v)) { if (v < lo) lo = v; if (v > hi) hi = v }
+  if (!Number.isFinite(lo)) { lo = 0; hi = 0 }
+  // Centimetres while the relief fits in int16 (327 m); coarser steps beyond, so a canyon or a
+  // mountain is never clipped flat at 327 m above its lowest point.
+  const scale = Math.max(0.01, Math.ceil(((hi - lo) / 32767) * 100) / 100)
   const q = new Int16Array(d.data.length)
   for (let i = 0; i < q.length; i++) {
     const v = d.data[i]
-    q[i] = Number.isNaN(v) ? -32768 : Math.max(-32767, Math.min(32767, Math.round((v - lo) * 100)))
+    q[i] = Number.isNaN(v) ? -32768 : Math.max(-32767, Math.min(32767, Math.round((v - lo) / scale)))
   }
-  const header = JSON.stringify({ west: d.west, south: d.south, east: d.east, north: d.north, width: d.width, height: d.height, offset: lo, scale: 0.01 })
+  const header = JSON.stringify({ west: d.west, south: d.south, east: d.east, north: d.north, width: d.width, height: d.height, offset: lo, scale })
   return gzipSync(Buffer.concat([Buffer.from(header + '\n'), Buffer.from(q.buffer)]), { level: 9 })
 }
 
