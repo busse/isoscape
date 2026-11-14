@@ -33,13 +33,13 @@ export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Pag
 <style>
 :root {
   --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
-  --accent: #2f6f8f; --accent-soft: #dcebf2; --stage: #e7e4dc; --chip: #efece5; --good: #3c7a4a; --bad: #a3473a;
+  --accent: #2f6f8f; --accent-soft: #dcebf2; --stage: #e7e4dc; --chip: #efece5; --good: #3c7a4a; --bad: #a3473a; --warn: #b8860b;
   font: 13px/1.45 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   color-scheme: light dark;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #15161b; --panel: #1b1d23; --line: #2b2e37; --ink: #e5e6ec; --dim: #9497a3; --faint: #646875;
-    --accent: #7fb6d4; --accent-soft: #22323d; --stage: #101115; --chip: #252831; --good: #7fc28f; --bad: #e08c7e; }
+    --accent: #7fb6d4; --accent-soft: #22323d; --stage: #101115; --chip: #252831; --good: #7fc28f; --bad: #e08c7e; --warn: #f2c94c; }
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); }
@@ -67,6 +67,7 @@ kbd { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding: 0 4px;
 .build .top { display: flex; gap: 6px; align-items: center; font-size: 12px; }
 .build .note { font-size: 12px; color: var(--ink); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .build .sub { font-size: 11px; color: var(--faint); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.big { color: var(--warn); cursor: help; }
 .tag { font-size: 10.5px; padding: 0 6px; border-radius: 9px; background: var(--chip); color: var(--dim); }
 .tag.ab { background: var(--accent); color: var(--panel); font-weight: 600; }
 time { color: var(--dim); margin-left: auto; font-size: 11px; }
@@ -254,7 +255,7 @@ body.reading main { grid-template-rows: 1fr; }
     return new Date(iso).toLocaleDateString()
   }
   const when = (iso) => new Date(iso).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })
-  const mb = (n) => (n / 1e6).toFixed(2) + ' MB'
+  const mb = (n) => (n / 1e6).toFixed(2) + ' MB' + (n > 9e6 ? ' <span class="big" title="Over 9 MB: slow to open in a browser">⚠️</span>' : '')
   const label = (b) => b.note || (b.git ? b.git.subject : b.region)
 
   // ---- nav ------------------------------------------------------------------------------------
@@ -461,7 +462,7 @@ body.reading main { grid-template-rows: 1fr; }
   // A build's own story, written from its meta.json. Anything an older build did not record is
   // said to be unknown rather than guessed.
   const how = (id, text) => pageBySlug.has('how-its-made') ? '<a href="#/how-its-made/' + id + '">' + text + '</a>' : text
-  const KNOWN = new Set(['features', 'ground', 'ribbons', 'buildings', 'heightFromTag', 'heightFromModel', 'heightFromLevels', 'heightGuessed', 'footprintsAdded', 'bridgePieces', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'coastWays', 'year', 'newSincePrevious', 'landmarks', 'curated', 'datedCurated', 'datedOsm', 'datedParcel', 'undatedToday'])
+  const KNOWN = new Set(['features', 'ground', 'ribbons', 'buildings', 'heightFromTag', 'heightFromModel', 'heightFromLevels', 'heightGuessed', 'footprintsAdded', 'bridgePieces', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'coastWays', 'year', 'newSincePrevious', 'landmarks', 'curated', 'datedCurated', 'datedOsm', 'datedParcel', 'undatedToday', 'traced', 'tracedEndMap', 'tracedEndRebuilt', 'tracedEndHighway', 'tracedEndAssumed'])
   const POINTS = ['north', 'north-northeast', 'northeast', 'east-northeast', 'east', 'east-southeast', 'southeast', 'south-southeast', 'south', 'south-southwest', 'southwest', 'west-southwest', 'west', 'west-northwest', 'northwest', 'north-northwest']
   const isNum = (v) => typeof v === 'number' && Number.isFinite(v)
   const int = (v) => Math.round(v).toLocaleString()
@@ -508,8 +509,13 @@ body.reading main { grid-template-rows: 1fr; }
         if (dated > 0) p += 'Their years: ' + int(s.datedParcel || 0) + ' from the city assessor’s year built, ' + int(s.datedOsm || 0) + ' from OpenStreetMap’s <code>start_date</code>' + (s.datedCurated ? ', ' + int(s.datedCurated) + ' curated' : '') + '. '
         if (s.undatedToday > 0) p += int(s.undatedToday) + ' more have no recorded year and appear only in today’s scene. '
         if (isNum(s.newSincePrevious) && isNum(tm.previous)) p += '<b>' + int(s.newSincePrevious) + '</b> are new since ' + esc(tm.previous) + ', roofed in gold. '
-        p += 'Anything demolished since is missing unless curated below.'
+        p += 'Anything demolished since is missing unless traced or curated below.'
         out.push('<p>' + p + '</p>')
+      }
+      if (s.traced > 0) {
+        out.push('<p><b>Traced:</b> ' + plural(s.traced, 'building') + ' that no longer stand, traced from Sanborn fire-insurance maps and drawn in the maps’ own colours (pink brick, yellow frame, blue stone, grey iron). Each appears from the first map that shows it, though it may be older. When it went: ' +
+          int(s.tracedEndMap || 0) + ' by a later map that no longer shows it, ' + int(s.tracedEndRebuilt || 0) + ' by the year the building now on the site went up, ' +
+          int(s.tracedEndHighway || 0) + ' by an expressway through the site, and ' + int(s.tracedEndAssumed || 0) + ' <b>assumed</b> gone by 1960. Heights are <b>guessed</b> from the material: brick and stone three storeys, frame two.</p>')
       }
       const cur = Array.isArray(tm.curated) ? tm.curated : []
       if (cur.length) {

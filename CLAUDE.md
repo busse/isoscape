@@ -64,6 +64,7 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | the per-build "How this view was made" text | `story` in `explorer.ts` (it links to `pages/how-its-made.md` section ids) |
 | building an old commit into the archive | `backfill.ts` |
 | dated series: year built, era rules, curated history | `history.ts`, `asOf` in `scene.ts`, `history/<series>.json` |
+| tracing fire-insurance maps (georeference, trace, lifespans) | `tools/sanborn/*.py` → `history/sanborn/` |
 
 ## Known limits
 

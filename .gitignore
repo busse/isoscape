@@ -4,3 +4,4 @@ out/
 .DS_Store
 data/*/osm-tiles/
 data/*/dem-tiles/
+data/sanborn/buildings.json

@@ -332,6 +332,23 @@ export const buildScene = (
       landmarks++
     }
     stats.landmarks = landmarks
+    // Buildings traced from fire-insurance maps that are gone today, in the maps' colours.
+    const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
+    for (const b of time.history.traced) {
+      if (!alive(b.from, b.to, time.year)) continue
+      const outer = orient(simplifyRing(toViewRing(view, b.ring), 0.3), true)
+      if (outer.length < 3 || !outer.every((p) => insideRect(p, frame))) continue
+      const grounds = outer.map((p) => terrain.z(p))
+      const base = Math.min(...grounds)
+      const top = Math.max(...grounds) + b.storeys * 3.6
+      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, pal.traced[b.material], dotsMode))
+      ends[b.end]++
+    }
+    stats.traced = ends.map + ends.rebuilt + ends.highway + ends.assumed
+    stats.tracedEndMap = ends.map
+    stats.tracedEndRebuilt = ends.rebuilt
+    stats.tracedEndHighway = ends.highway
+    stats.tracedEndAssumed = ends.assumed
     stats.curated = curated.length
   }
 

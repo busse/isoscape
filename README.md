@@ -306,6 +306,13 @@ builds all ten scenes from 1737 to today. In the explorer, a series reads in yea
 year chips above the picture and the `[` `]` keys step through it, and Compare defaults to the
 year before. The method and its limits are in the *How it's made* page, under "Time".
 
+**Traced buildings.** `tools/sanborn/` turns Sanborn fire-insurance map sheets into dated
+footprints of buildings since lost. It downloads the sheets from the Library of Congress,
+fits each sheet to the ground from two or three street corners read off it, traces the
+coloured fills, and follows each building until a later map, a newer building or a highway
+shows it gone. The steps are in *How it's made*, under "Time". The 1886 edition is traced
+into `history/sanborn/`.
+
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
 and elevation and keeps only its year-built parcels in its own `data/` folder.
 

@@ -341,6 +341,33 @@ landmarks drawn from published dimensions in a red-brown tone (a burned shell in
 the town plan, which limits the earliest scene's streets to the original grid. Positions come
 from today's street grid. They are not surveyed.
 
+**Traced: buildings from fire-insurance maps.** The Sanborn Map Company drew every building
+in a city's business district for insurers, block by block. Each building appears as a
+footprint coloured by material: pink brick, yellow frame, blue stone, grey iron. The Library of
+Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
+
+1. **Georeference.** Each sheet is placed on the ground by a rotation and shift: at one scale
+   per edition, two or three named street corners read off the sheet are enough. A third
+   corner checks the first two. The block outlines from the city's GIS are drawn over each
+   sheet to confirm the fit (`tools/sanborn/rigid.py`, `ovmosaic.py`).
+2. **Trace.** The coloured fills are separated from the paper and the printed lines, read for
+   material, closed over the lettering, and traced as polygons. Near-rectangles are squared
+   up, and outlines and thin strips (river banks, rails) are dropped (`extract.py`).
+3. **Follow through time.** A traced footprint mostly covered by a building standing today is
+   taken to be that building, or its replacement on the same footprint, and today's data
+   already draws it. The rest are **lost buildings**. Each is drawn from the first edition
+   that shows it, though it may be older. It is drawn until it is known to be gone, in this
+   order of preference: a later edition that maps the spot without it; the year the building
+   on its site today went up; the opening of an expressway through it. Failing all of those,
+   it is *assumed* gone by 1960, when clearing for parking and highways began
+   (`lifespans.py`).
+
+Traced buildings keep the maps' colours, so they read apart from today's. Their heights are
+guessed from their material (brick and stone three storeys, frame two): the storey counts
+printed on the sheets are not read yet. The explorer counts, for each scene, how many traced
+buildings stand and how each one's end date was found. The 1886 edition is traced. Later
+editions only need their sheets' corners read, and each one makes "assumed" rarer.
+
 **Era rules** date everything else that OSM maps: the first rule matching a feature's name,
 `ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
 Downtown Expressway from 1976, the river viaducts from 1901. The James River and Kanawha Canal
@@ -362,7 +389,9 @@ In every scene after the first, buildings **new since the previous scene** have 
 - **The jump to today.** Undated buildings appear only in today's scene, so the last step of a
   series adds many more buildings than really went up in that interval.
 
-Code: `src/history.ts`; the history file is `history/<series>.json`.
+Code: `src/history.ts`; the history file is `history/<series>.json`; the tracing tools are in
+`tools/sanborn/` (Python: NumPy, SciPy, OpenCV, Shapely), and their output is
+`history/sanborn/`.
 
 ## Archive and explorer
 

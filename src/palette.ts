@@ -48,6 +48,8 @@ export interface Palette {
   readonly ash: string
   readonly burned: string
   readonly plan: string
+  /** Roofs of buildings traced from fire-insurance maps, in the maps' own colour code. */
+  readonly traced: Readonly<Record<'brick' | 'frame' | 'stone' | 'iron' | 'special', string>>
   readonly roofs: Readonly<Record<'residential' | 'commercial' | 'industrial' | 'civic' | 'other', readonly string[]>>
   readonly lineWidth: number
   readonly groundLineWidth: number
@@ -99,6 +101,7 @@ const paper: Palette = {
   ash: '#6d6259',
   burned: '#d3c3ad',
   plan: '#e4dcc4',
+  traced: { brick: '#e9c2b8', frame: '#efe0a6', stone: '#c3d3e2', iron: '#cfcdc8', special: '#c5dcc0' },
   roofs: {
     residential: ['#f6e9d8', '#f1e2cf', '#f7efe2', '#efd9c5'],
     commercial: ['#fbfaf6', '#f0eee8', '#e9e7e1', '#f6f4ee'],
@@ -157,6 +160,7 @@ const night: Palette = {
   ash: '#121114',
   burned: '#3a2f2a',
   plan: '#252836',
+  traced: { brick: '#5a3c3a', frame: '#5a5236', stone: '#34465a', iron: '#45454a', special: '#3a4f3c' },
   roofs: {
     residential: ['#3d3f4c', '#42434f'],
     commercial: ['#454a5a', '#3f4453'],

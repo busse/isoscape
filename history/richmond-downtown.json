@@ -15,9 +15,24 @@
    "note": "The capital has moved from Williamsburg; Jefferson's Capitol is finished on Shockoe Hill, and John Mayo's toll bridge first crosses the James."
   },
   {
+   "year": 1800,
+   "title": "The Great Basin",
+   "note": "The canal's Great Basin is finished below Shockoe Hill, about 1800; Mayo's toll bridge crosses the James."
+  },
+  {
+   "year": 1820,
+   "title": "The Federal town",
+   "note": "The Wickham House (1812), the Governor's Mansion (1813) and Monumental Church (1814) stand on the hill."
+  },
+  {
    "year": 1840,
    "title": "Canal and mills",
    "note": "The James River and Kanawha Canal ends in the Great Basin; flour mills and ironworks line the canal and the falls."
+  },
+  {
+   "year": 1850,
+   "title": "Mills and rail",
+   "note": "The railroads have reached the city; the canal and mills line the river below Main Street."
   },
   {
    "year": 1860,
@@ -30,9 +45,29 @@
    "note": "Retreating Confederates fire the warehouses on 2–3 April; some 35 blocks of the business district burn."
   },
   {
+   "year": 1870,
+   "title": "Rebuilding",
+   "note": "The burned district is rebuilding; Shockoe Creek still runs open, until 1877."
+  },
+  {
+   "year": 1886,
+   "title": "The first Sanborn map",
+   "note": "The earliest fire-insurance map of the city. Its buildings now gone are traced here in the map's own colours."
+  },
+  {
    "year": 1900,
    "title": "Rail and tobacco",
    "note": "Railroads have taken over the canal; tobacco factories and warehouses fill Shockoe Bottom and Tobacco Row. Main Street Station and the river viaduct are about to open."
+  },
+  {
+   "year": 1910,
+   "title": "The rail city",
+   "note": "Main Street Station and the river viaducts (1901) carry trains above the streets."
+  },
+  {
+   "year": 1920,
+   "title": "Two cities joined",
+   "note": "The new Mayo Bridge (1913) joins Richmond and Manchester, annexed in 1910."
   },
   {
    "year": 1930,
@@ -40,14 +75,44 @@
    "note": "The first office towers rise downtown; Shockoe Creek runs underground; the Mayo Bridge has been rebuilt in concrete (1913)."
   },
   {
+   "year": 1940,
+   "title": "Before the highways",
+   "note": "Downtown before the expressways."
+  },
+  {
+   "year": 1950,
+   "title": "Mid-century",
+   "note": "The last scene before the turnpike."
+  },
+  {
    "year": 1960,
    "title": "The interstate cut",
    "note": "The Richmond-Petersburg Turnpike, now I-95, opened in 1958 through Shockoe Valley."
   },
   {
+   "year": 1970,
+   "title": "After the turnpike",
+   "note": "I-95, opened in 1958, runs through Shockoe Valley."
+  },
+  {
+   "year": 1980,
+   "title": "The expressway",
+   "note": "The Downtown Expressway (1976) runs along the river."
+  },
+  {
    "year": 1990,
    "title": "Expressway and office core",
    "note": "The Downtown Expressway (1976) runs along the old canal bed; the James Center stands on the Great Basin's site."
+  },
+  {
+   "year": 2000,
+   "title": "The Canal Walk",
+   "note": "The floodwall (1994) and the Canal Walk (1999) have reopened the riverfront."
+  },
+  {
+   "year": 2010,
+   "title": "Living downtown",
+   "note": "The decade before today."
   },
   {
    "year": 2026,
@@ -61,7 +126,7 @@
    "name": "Great Turning Basin, James River & Kanawha Canal",
    "kind": "water",
    "from": 1800,
-   "to": 1885,
+   "to": 1895,
    "ring": [
     [
      -77.438082,
@@ -80,11 +145,12 @@
      37.5369982
     ]
    ],
-   "note": "The canal's Great Basin covered three blocks between Cary and Canal Streets, from 8th to 12th Street. Completed about 1800; later filled and used as a rail yard after the railroad took over the canal (the end date here is approximate). The James Center stands on the site.",
+   "note": "The canal's Great Basin covered three blocks between Cary and Canal Streets, from 8th to 12th Street. Completed about 1800, and still drawn on the 1886 Sanborn map; later filled and used as a rail yard after the railroad took over the canal (the end date here is approximate). The James Center stands on the site.",
    "sources": [
     "https://www.hmdb.org/m.asp?m=286691",
     "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf",
-    "https://en.wikipedia.org/wiki/James_Center"
+    "https://en.wikipedia.org/wiki/James_Center",
+    "https://www.loc.gov/item/sanborn09064_001/"
    ]
   },
   {
@@ -623,5 +689,12 @@
    "year": 1901,
    "source": "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
   }
- ]
+ ],
+ "sanborn": {
+  "lost": "history/sanborn/lost.geojson",
+  "editions": [
+   1886
+  ],
+  "source": "https://www.loc.gov/collections/sanborn-maps/?q=richmond+virginia"
+ }
 }

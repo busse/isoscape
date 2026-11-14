@@ -68,6 +68,22 @@ export interface Rule {
   readonly sources?: readonly string[]
 }
 
+/** A building traced from a historic map that no longer stands, with the span it is drawn for. */
+export interface TracedBuilding {
+  readonly id: string
+  readonly ring: Vec2[]
+  /** First edition it appears on; it may be older. */
+  readonly from: number
+  /** First year it is known (or assumed) to be gone. */
+  readonly to: number
+  /** How `to` was found: a later map without it, a building on its site, a highway, or assumed. */
+  readonly end: 'map' | 'rebuilt' | 'highway' | 'assumed'
+  readonly material: 'brick' | 'frame' | 'stone' | 'iron' | 'special'
+  readonly storeys: number
+  readonly edition: number
+  readonly sheet: number
+}
+
 export interface History {
   readonly epochs: readonly Epoch[]
   readonly features: readonly HistoryFeature[]
@@ -76,11 +92,22 @@ export interface History {
   readonly present: number
   /** Curated years built for particular OSM buildings, which win over every other date. */
   readonly dates: readonly { readonly id: string; readonly name?: string; readonly year: number; readonly source: string; readonly note?: string }[]
+  /** Fire-insurance maps traced into footprints: the editions used, and the buildings since lost. */
+  readonly sanborn?: { readonly lost: string; readonly editions: readonly number[]; readonly source: string }
+  readonly traced: readonly TracedBuilding[]
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
   const raw = JSON.parse(await readFile(path, 'utf8')) as Partial<History>
-  return { epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(), dates: raw.dates ?? [] }
+  let traced: TracedBuilding[] = []
+  if (raw.sanborn !== undefined) {
+    const fc = JSON.parse(await readFile(raw.sanborn.lost, 'utf8')) as { features: { properties: Omit<TracedBuilding, 'ring'>; geometry: { coordinates: number[][][] } }[] }
+    traced = fc.features.map((f) => ({ ...f.properties, ring: f.geometry.coordinates[0].slice(0, -1).map(([x, y]) => [x, y] as Vec2) }))
+  }
+  return {
+    epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(),
+    dates: raw.dates ?? [], ...(raw.sanborn === undefined ? {} : { sanborn: raw.sanborn }), traced,
+  }
 }
 
 export const alive = (from: number | null | undefined, to: number | null | undefined, year: number): boolean =>

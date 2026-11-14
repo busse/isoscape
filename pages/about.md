@@ -33,6 +33,12 @@ A view that uses them should credit Microsoft as well.
 (NLCD 2021) from the USGS and the Multi-Resolution Land Characteristics Consortium. It is in
 the public domain.
 
+**Fire-insurance maps (dated series).** Sanborn Fire Insurance Maps of Richmond, as digitised
+by the [Library of Congress](https://www.loc.gov/collections/sanborn-maps/). The editions used
+were published long enough ago to be out of US copyright. Check each item's rights statement
+on the Library's site before reusing the scans. The traced footprints in `history/sanborn/`
+are derived from them.
+
 **Years built (dated series).** The Richmond series uses the City of Richmond's *Year of
 Construction* layer, published on the city's ArcGIS open data service. Check the city's terms
 before redistributing `data/*/yearbuilt.json`. The curated history in `history/` cites its

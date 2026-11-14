@@ -9,7 +9,7 @@ const building = (id: string, x: number, y: number, s = 0.0001, tags: Record<str
   ({ type: 'polygon', id, tags: { building: 'yes', ...tags }, outers: [square(x, y, s)], inners: [] })
 const road = (id: string, tags: Record<string, string>): LineFeature => ({ type: 'line', id, tags: { highway: 'residential', ...tags }, points: [[0, 0], [1, 1]] })
 
-const history = (over: Partial<History> = {}): History => ({ epochs: [], features: [], rules: [], present: 2026, dates: [], ...over })
+const history = (over: Partial<History> = {}): History => ({ epochs: [], features: [], rules: [], present: 2026, dates: [], traced: [], ...over })
 
 test('years from OSM dates', () => {
   assert.equal(parseYear('1885'), 1885)
