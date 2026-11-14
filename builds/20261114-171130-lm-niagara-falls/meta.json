@@ -1,0 +1,82 @@
+{
+ "name": "lm-niagara-falls",
+ "region": "lm-niagara-falls",
+ "title": "Niagara Falls \u2014 New York and Ontario",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.3999999999996,
+  -2229.2424254777065,
+  6048.799999999999,
+  4237.481798220592
+ ],
+ "bearing": 0,
+ "ms": 7149,
+ "stats": {
+  "features": 6519,
+  "ground": 685,
+  "elevationDatum": 68.8,
+  "elevationTop": 204.9,
+  "ribbons": 3453,
+  "footprintsAdded": 0,
+  "buildings": 1344,
+  "heightFromTag": 63,
+  "heightFromModel": 0,
+  "heightFromLevels": 226,
+  "heightGuessed": 1055,
+  "bridgePieces": 494,
+  "contourSegments": 27640,
+  "rapidCells": 23564,
+  "strips": 338
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Niagara Falls \u2014 New York and Ontario",
+  "center": [
+   -79.0712,
+   43.0803
+  ],
+  "width": 2600,
+  "depth": 3380,
+  "scale": 2.308,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 17,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 1,
+   "cell": 5,
+   "contour": 5,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 2
+  },
+  "sources": {
+   "buildings": [
+    "osm"
+   ],
+   "landcover": "nlcd"
+  },
+  "name": "lm-niagara-falls"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171130-lm-niagara-falls",
+ "createdAt": "2026-11-14T17:11:30.023Z",
+ "bytes": 9438900,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171130-lm-niagara-falls/image.svg",
+  "thumb": "builds/20261114-171130-lm-niagara-falls/thumb.png",
+  "social": "builds/20261114-171130-lm-niagara-falls/social.png"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "name": "lm-lombard-street",
+ "region": "lm-lombard-street",
+ "title": "Lombard Street \u2014 San Francisco",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.15,
+  -2132.8641021950552,
+  6048.3,
+  4176.247098599425
+ ],
+ "bearing": 36.003875727789506,
+ "ms": 857,
+ "stats": {
+  "features": 7447,
+  "coastWays": 2,
+  "ground": 96,
+  "elevationDatum": -1.1,
+  "elevationTop": 101.7,
+  "ribbons": 1453,
+  "footprintsAdded": 0,
+  "buildings": 1863,
+  "heightFromTag": 1546,
+  "heightFromModel": 0,
+  "heightFromLevels": 18,
+  "heightGuessed": 299,
+  "bridgePieces": 31,
+  "contourSegments": 20720,
+  "rapidCells": 0,
+  "strips": 117
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Lombard Street \u2014 San Francisco",
+  "center": [
+   -122.4188,
+   37.8021
+  ],
+  "width": 900,
+  "depth": 1170,
+  "scale": 6.667,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-lombard-street"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171104-lm-lombard-street",
+ "createdAt": "2026-11-14T17:11:04.500Z",
+ "bytes": 4458754,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171104-lm-lombard-street/image.svg",
+  "thumb": "builds/20261114-171104-lm-lombard-street/thumb.png",
+  "social": "builds/20261114-171104-lm-lombard-street/social.png"
+ }
+}

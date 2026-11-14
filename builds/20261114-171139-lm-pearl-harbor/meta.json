@@ -1,0 +1,67 @@
+{
+ "name": "lm-pearl-harbor",
+ "region": "lm-pearl-harbor",
+ "title": "Pearl Harbor \u2014 Honolulu, Hawaii",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.3999999999996,
+  -2016.7265500975268,
+  6048.799999999999,
+  4024.9659228404125
+ ],
+ "bearing": -12.82731696837186,
+ "ms": 1025,
+ "stats": {
+  "features": 6495,
+  "coastWays": 42,
+  "ground": 137,
+  "ribbons": 975,
+  "footprintsAdded": 0,
+  "buildings": 554,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 19,
+  "heightGuessed": 535,
+  "bridgePieces": 279,
+  "contourSegments": 0,
+  "rapidCells": 0,
+  "strips": 338
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Pearl Harbor \u2014 Honolulu, Hawaii",
+  "center": [
+   -157.95003,
+   21.36491
+  ],
+  "width": 2600,
+  "depth": 3380,
+  "scale": 2.308,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 17,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "name": "lm-pearl-harbor"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171139-lm-pearl-harbor",
+ "createdAt": "2026-11-14T17:11:39.156Z",
+ "bytes": 1439684,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171139-lm-pearl-harbor/image.svg",
+  "thumb": "builds/20261114-171139-lm-pearl-harbor/thumb.png",
+  "social": "builds/20261114-171139-lm-pearl-harbor/social.png"
+ }
+}

@@ -1,0 +1,82 @@
+{
+ "name": "lm-old-faithful",
+ "region": "lm-old-faithful",
+ "title": "Old Faithful \u2014 Yellowstone National Park",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2521.531664191727,
+  6048,
+  4530.172680343105
+ ],
+ "bearing": 0,
+ "ms": 5880,
+ "stats": {
+  "features": 1003,
+  "ground": 358,
+  "elevationDatum": 2225.9,
+  "elevationTop": 2478.9,
+  "ribbons": 400,
+  "footprintsAdded": 0,
+  "buildings": 177,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 4,
+  "heightGuessed": 173,
+  "bridgePieces": 377,
+  "contourSegments": 59999,
+  "rapidCells": 0,
+  "strips": 312
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Old Faithful \u2014 Yellowstone National Park",
+  "center": [
+   -110.8281,
+   44.4605
+  ],
+  "width": 2400,
+  "depth": 3120,
+  "scale": 2.5,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 16,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 1,
+   "cell": 5,
+   "contour": 5,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "sources": {
+   "buildings": [
+    "osm"
+   ],
+   "landcover": "nlcd"
+  },
+  "name": "lm-old-faithful"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171137-lm-old-faithful",
+ "createdAt": "2026-11-14T17:11:37.005Z",
+ "bytes": 8663421,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171137-lm-old-faithful/image.svg",
+  "thumb": "builds/20261114-171137-lm-old-faithful/thumb.png",
+  "social": "builds/20261114-171137-lm-old-faithful/social.png"
+ }
+}

@@ -1,0 +1,76 @@
+{
+ "name": "lm-kennedy-space-center",
+ "region": "lm-kennedy-space-center",
+ "title": "Kennedy Space Center \u2014 Cape Canaveral, Florida",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -1979.1970074729556,
+  6048,
+  3987.296757746968
+ ],
+ "bearing": 33.28834173719241,
+ "ms": 1318,
+ "stats": {
+  "features": 1985,
+  "ground": 673,
+  "elevationDatum": -0.5,
+  "elevationTop": 4.6,
+  "ribbons": 594,
+  "footprintsAdded": 0,
+  "buildings": 267,
+  "heightFromTag": 14,
+  "heightFromModel": 0,
+  "heightFromLevels": 1,
+  "heightGuessed": 252,
+  "bridgePieces": 2,
+  "contourSegments": 661,
+  "rapidCells": 0,
+  "strips": 347
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Kennedy Space Center \u2014 Cape Canaveral, Florida",
+  "center": [
+   -80.6509,
+   28.5864
+  ],
+  "width": 3200,
+  "depth": 4160,
+  "scale": 1.875,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 21,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "roof",
+  "fetchTile": 4000,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 6,
+   "contour": 5,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 3
+  },
+  "name": "lm-kennedy-space-center"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171058-lm-kennedy-space-center",
+ "createdAt": "2026-11-14T17:10:58.456Z",
+ "bytes": 4149958,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171058-lm-kennedy-space-center/image.svg",
+  "thumb": "builds/20261114-171058-lm-kennedy-space-center/thumb.png",
+  "social": "builds/20261114-171058-lm-kennedy-space-center/social.png"
+ }
+}

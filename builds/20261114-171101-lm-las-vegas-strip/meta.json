@@ -1,0 +1,76 @@
+{
+ "name": "lm-las-vegas-strip",
+ "region": "lm-las-vegas-strip",
+ "title": "The Las Vegas Strip \u2014 Las Vegas",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2175.271484711475,
+  6048,
+  4183.0464754590685
+ ],
+ "bearing": -43.83016125896299,
+ "ms": 1523,
+ "stats": {
+  "features": 10094,
+  "ground": 121,
+  "elevationDatum": 626.3,
+  "elevationTop": 663.6,
+  "ribbons": 3811,
+  "footprintsAdded": 0,
+  "buildings": 507,
+  "heightFromTag": 68,
+  "heightFromModel": 0,
+  "heightFromLevels": 180,
+  "heightGuessed": 259,
+  "bridgePieces": 744,
+  "contourSegments": 10582,
+  "rapidCells": 0,
+  "strips": 260
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "The Las Vegas Strip \u2014 Las Vegas",
+  "center": [
+   -115.17413,
+   36.11279
+  ],
+  "width": 2000,
+  "depth": 2600,
+  "scale": 3,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 13,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 5,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-las-vegas-strip"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171101-lm-las-vegas-strip",
+ "createdAt": "2026-11-14T17:11:01.380Z",
+ "bytes": 4899301,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT licence, map licences, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171101-lm-las-vegas-strip/image.svg",
+  "thumb": "builds/20261114-171101-lm-las-vegas-strip/thumb.png",
+  "social": "builds/20261114-171101-lm-las-vegas-strip/social.png"
+ }
+}
