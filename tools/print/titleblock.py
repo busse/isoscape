@@ -112,8 +112,8 @@ def content_mask(sheet, face=None, step=4, tol=14):
 def find_spot(sheet, bw, bh, face=None, pad=None, step=4, where='foot'):
     """Top-left (x, y) for a bw x bh block, or None if it won't fit.
 
-    The block's right edge lines up with the right edge of the art (the rows that run more than
-    half the sheet's width: the map, the rows of boxes, the rules) and it never touches anything
+    The block's right edge lines up with the right edge of the art (the rows that run across at
+    least 80% of the sheet: the map, the rows of boxes, the rules) and it never touches anything
     already printed, keeping `pad` of clear paper around it.
       foot: in the band below the art, as low as the art's side margin allows (the same margin
             below as at the side). Every layout but the set sheets.
@@ -124,7 +124,7 @@ def find_spot(sheet, bw, bh, face=None, pad=None, step=4, where='foot'):
     mask = content_mask(sheet, face, step)
     h, w = mask.shape
     rows = mask.sum(axis=1)
-    wide = rows > 0.5 * w
+    wide = rows > 0.8 * w                              # the art and rules, not a long line of text
     if not wide.any():
         return None
     right = int(np.nonzero(mask[wide].any(axis=0))[0].max()) + 1
