@@ -150,9 +150,9 @@ def find_spot(sheet, bw, bh, face=None, pad=None, step=4, where='foot'):
 def stamp(sheet, info, u, face=None, shrink=(1.0, 0.9, 0.8, 0.7, 0.6), where=('foot', 'head')):
     """Stamp the block on a copy of `sheet`; returns (sheet, (x, y, w, h, u)). Tries smaller sizes
     if the corner is too full; raises if nothing fits."""
-    for place in where:
-        for s in shrink:
-            b = block(info, u * s)
+    for s in shrink:                    # full size in the header beats a shrunken block in the foot
+        b = block(info, u * s)
+        for place in where:
             at = find_spot(sheet, b.width, b.height, face, where=place)
             if at:
                 out = sheet.convert('RGB').copy()
