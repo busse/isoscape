@@ -9,7 +9,7 @@ lm_batch_device.py reads; a landmark with no match is reported, not guessed.
 
     python3 tools/release/landmark_params.py <store-dir> [<seconds>] [slug...]
 """
-import itertools, json, os, sys, tempfile, time
+import json, os, sys, time
 from PIL import Image, ImageChops, ImageStat
 
 Image.MAX_IMAGE_PIXELS = None
@@ -21,11 +21,27 @@ import lm_compose as M  # noqa: E402
 OUT = os.path.join(ISO, 'tools', 'print', 'lm_params.json')
 
 
-def diff(a, b):
-    A = Image.open(a).convert('RGB'); B = Image.open(b).convert('RGB')
-    if A.size != B.size: return 999.0
-    d = ImageStat.Stat(ImageChops.difference(A.resize((900, 600)), B.resize((900, 600))))
+def diff(A, B):
+    A = A.convert('RGB').resize((900, 600)); B = B.convert('RGB').resize((900, 600))
+    d = ImageStat.Stat(ImageChops.difference(A, B))
     return sum(d.mean) / 3
+
+
+BOXES = {}
+def quick(slug, title, place, svg, landscape, zoom=True, anchor=None, trim=True, credit=None, dpi=24):
+    """lm_compose.make's layout at a low resolution, for comparing settings quickly."""
+    k = (svg, zoom, trim)
+    if k not in BOXES: BOXES[k] = M.content_box(svg, zoom, trim)
+    box = BOXES[k]
+    cx, cy = box[0] + box[2] / 2, box[1] + box[3] * 0.55
+    PANEL = 1.73
+    if anchor == 'left': cx = box[0] + min(box[2], box[3] * PANEL) / 2
+    if anchor == 'top': anchor = 0.0
+    if isinstance(anchor, float):
+        vis = min(box[3], box[2] / PANEL); cy = box[1] + anchor * (box[3] - vis) + vis / 2
+    design = {'title': title, 'subtitle': place, 'region': slug, 'panels': [{'build': slug}], 'margin': 0.045, 'band': 0.1}
+    M.C.CREDIT = M.CREDIT if credit is None else M.CREDIT.replace('Elevation: USGS 3DEP', credit)
+    return M.C.compose(design, (36, 24) if landscape else (24, 36), {slug: svg}, {slug: {'box': box, 'focus': [cx, cy]}}, dpi)
 
 
 def main():
@@ -48,16 +64,15 @@ def main():
         landscape = 'x'.join(sorted(os.path.basename(sold).rsplit('_', 1)[1][:-4].split('x'), key=int, reverse=True)) == os.path.basename(sold).rsplit('_', 1)[1][:-4]
         credit = M.elevation_credit(os.path.join(ISO, 'regions', f'{key}.json'))
         best = None
+        S = Image.open(sold)
         for t in tries:
             opts = {**base.get(slug, {}), **t}
-            with tempfile.TemporaryDirectory() as d:
-                try: M.make(slug, L[slug][1], L[slug][2], svg, d, credit=credit, landscape=landscape, **opts)
-                except Exception as e: continue
-                f = [x for x in os.listdir(d) if x.endswith('.jpg') and '_canvas' not in x][0]
-                s = diff(os.path.join(d, f), sold)
-            if best is None or s < best[0]: best = (s, opts)
-            if s < 1.0: break
-        got[slug] = {'opts': best[1], 'landscape': landscape, 'mean_diff': round(best[0], 3), 'match': best[0] < 1.0}
+            try: img = quick(slug, L[slug][1], L[slug][2], svg, landscape, credit=credit, **opts)
+            except Exception: continue
+            d = diff(img, S)
+            if best is None or d < best[0]: best = (d, opts)
+            if d < 2.0: break
+        got[slug] = {'opts': best[1], 'landscape': landscape, 'mean_diff': round(best[0], 3), 'match': best[0] < 2.0}
         json.dump(got, open(OUT, 'w'), indent=1)
         print(slug, got[slug], flush=True)
 
