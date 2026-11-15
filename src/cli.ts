@@ -48,6 +48,7 @@ const HELP = `isoscape — isometric dot-and-line views of real places
   --year <yyyy>      build a dated region as it stood in that year
   --streetcar-scale <n>  draw streetcar lines and cars at n times life size
                      (else the history's own streetcarScale)
+  --rail-scale <n>   draw railroad track at n times its width (else the history's railScale)
   --no-archive       do not keep this build in out/builds/
   --out <dir>        output directory (default: out)
   --site-url <url>   the public address of out/, for absolute link-preview URLs
@@ -107,6 +108,8 @@ type Inputs = Awaited<ReturnType<typeof loadInputs>>
 
 /** `--streetcar-scale`: draw a series' streetcar lines and cars at this scale instead of its own. */
 let streetcarScale: number | undefined
+/** `--rail-scale`: likewise for railroad track. */
+let railScale: number | undefined
 
 const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number) => {
   const extra = { ...inp.extra }
@@ -114,7 +117,7 @@ const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: nu
     const y = year ?? inp.history.present
     const epoch = inp.history.epochs.find((e) => e.year === y)
     extra.time = {
-      year: y, history: streetcarScale === undefined ? inp.history : { ...inp.history, streetcarScale }, dates: inp.dates,
+      year: y, history: { ...inp.history, ...(streetcarScale === undefined ? {} : { streetcarScale }), ...(railScale === undefined ? {} : { railScale }) }, dates: inp.dates,
       ...(previous === undefined ? {} : { previous }),
       ...(epoch === undefined ? {} : { title: epoch.title }),
     }
@@ -142,10 +145,12 @@ export const main = async (argv: string[]): Promise<void> => {
       'no-archive': { type: 'boolean' },
       year: { type: 'string' },
       'streetcar-scale': { type: 'string' },
+      'rail-scale': { type: 'string' },
       'site-url': { type: 'string' },
     },
   })
   if (values['streetcar-scale'] !== undefined) streetcarScale = Number(values['streetcar-scale'])
+  if (values['rail-scale'] !== undefined) railScale = Number(values['rail-scale'])
   const [command, name] = positionals
   if (command === undefined || values.help) {
     console.log(HELP)

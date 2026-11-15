@@ -1,0 +1,33 @@
+{
+  "title": "Broad Street Station, 1943: the front",
+  "data": "broad-street-station",
+  "center": [
+    -77.465857,
+    37.561145
+  ],
+  "width": 300,
+  "depth": 250,
+  "bearing": 20,
+  "snap": false,
+  "scale": 11.3,
+  "squash": 0.6,
+  "exaggeration": 1.0,
+  "slab": 12,
+  "palette": "paper",
+  "minBuildingArea": 12,
+  "dots": "none",
+  "terrain": {
+    "exaggeration": 1.2,
+    "cell": 2,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 1
+  },
+  "time": {
+    "history": "history/broad-street-station.json",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  }
+}

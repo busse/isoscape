@@ -6,6 +6,7 @@
     "label": "Holiday shop, open through December 31, 2026",
     "url": "https://chrisbusse.com/",
     "links": {
+      "broad-street": "https://chrisbusse.com/collections/broad-street-station-1943",
       "richmond-streetcars": "https://chrisbusse.com/collections/richmond-streetcars-1925",
       "lm-eiffel-tower": "https://chrisbusse.com/collections/world-landmarks",
       "lm-matterhorn": "https://chrisbusse.com/collections/world-landmarks",
@@ -47,6 +48,23 @@
         "shopLabel": "Shop Richmond prints ↗",
         "page": "#/streetcars",
         "pageLabel": "Richmond's streetcars, 1925: the lines and fourteen stops"
+      },
+      {
+        "title": "Buildings in their time",
+        "prefixes": [
+          "broad-street"
+        ],
+        "blurb": "One building drawn close up in its own time, from its plans, photographs and fire-insurance maps, with the places around it. The first is Broad Street Station in 1943, at its wartime height.",
+        "page": "#/broad-street",
+        "pageLabel": "Broad Street Station, 1943: the railroads and fourteen places",
+        "shop": "https://chrisbusse.com/collections/buildings-in-their-time",
+        "shopLabel": "Shop Buildings in their time ↗",
+        "order": [
+          "broad-street-lines",
+          "broad-street-station",
+          "broad-street-station-front",
+          "broad-street-station-loop"
+        ]
       },
       {
         "title": "Virginia",

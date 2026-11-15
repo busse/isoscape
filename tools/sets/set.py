@@ -110,9 +110,11 @@ def prepare(S):
 class Scene:
     """One built SVG: its viewBox, and windows of it rendered to pixels."""
 
-    def __init__(self, path, region):
+    def __init__(self, path, region, labels=True):
         src = open(path, encoding='utf-8').read()
         self.src = re.sub(r'<g class="caption".*?</g>', '', src, flags=re.S)
+        # Map labels name the lines on the big map; a close view of one place goes without them.
+        if not labels: self.src = re.sub(r'<g class="labels".*?</g>', '', self.src, flags=re.S)
         self.vb = list(map(float, re.search(r'viewBox="([^"]+)"', self.src).group(1).split()))
         self.scale = json.load(open(os.path.join(ROOT, 'regions', f'{region}.json')))['scale']
         self._content = None
@@ -162,7 +164,7 @@ class Scenes:
         region, year = self.S.scene_of(s)
         fine = fine and bool(self.S.cfg.get('fine'))
         k = (region, year, fine)
-        if k not in self.cache: self.cache[k] = Scene(self.S.svg(region, year, fine), region)
+        if k not in self.cache: self.cache[k] = Scene(self.S.svg(region, year, fine), region, labels=not fine)
         return self.cache[k]
 
 
@@ -241,7 +243,9 @@ def compose_menu(dpi, S, sc, pts):
     ih = cw / BOX_ASPECT
     for s, (c, r) in zip(S.boxes, frame_order(len(S.boxes))):
         x, y = cell(c, r)
-        scene = sc.get(s)
+        # A set whose big map is drawn bolder than life (wide track, big cars) can draw its menu
+        # boxes from the fine scenes too: `"fine_menu": true`.
+        scene = sc.get(s, fine=bool(S.cfg.get('fine_menu')))
         img.paste(scene.render(scene.window(pts['box'][s['id']], s.get('ground', S.ground['menu']), BOX_ASPECT), round(cw), round(ih)), (round(x), round(y)))
         d.rectangle((x, y, x + cw, y + ih), outline=INK, width=max(1, round(I(0.01))))
         box_text(d, S, s, x, y + ih + I(0.1), cw, ch - ih - I(0.1), dpi)

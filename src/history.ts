@@ -31,7 +31,7 @@ export interface Epoch {
 export interface HistoryFeature {
   readonly id: string
   readonly name: string
-  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track'
+  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label'
   readonly from: number
   readonly to?: number
   /** lon/lat outline (open), for areas and landmarks. */
@@ -41,9 +41,28 @@ export interface HistoryFeature {
   readonly lines?: Vec2[][]
   /** Streetcar lines: the line's name, for the explorer, and the operator. */
   readonly route?: string
-  /** Landmark height in meters. */
+  /** Landmark height in meters; for a canopy, the height of its roof. */
   readonly height?: number
-  /** Creek width in meters. */
+  /**
+   * A landmark drawn as one part of a modeled building: it stands `base` meters above its seat,
+   * the lowest ground under it (`seat: 'max'`: the highest, for a part carried over lower
+   * ground, such as a concourse over tracks); `shape: 'dome'` rounds it to a dome; `tone`
+   * paints it from the palette's `parts` instead of the lost-landmark tone.
+   */
+  readonly base?: number
+  readonly seat?: 'min' | 'max'
+  readonly shape?: 'prism' | 'dome'
+  readonly tone?: PartTone
+  /**
+   * A label written on the map: `name` at the point `at` (lon/lat), with an optional second
+   * line, `caption`, set from its start, middle or end.
+   */
+  readonly at?: Vec2
+  readonly caption?: string
+  readonly anchor?: 'start' | 'middle' | 'end'
+  /** A rail line: a train standing on it, `at` meters from the line's start. */
+  readonly train?: Train
+  /** Width in meters: a creek's, a curated rail line's ballast (default 3.2), a canopy's roof. */
   readonly width?: number
   /** From this year a landmark stands as a burned shell. */
   readonly ruin?: number
@@ -51,6 +70,20 @@ export interface HistoryFeature {
   readonly limitsStreets?: boolean
   readonly note: string
   readonly sources: readonly string[]
+}
+
+export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight'
+
+/**
+ * A train on a curated rail line: an engine (unless `engine` is false) and `cars` cars behind
+ * it, from `at` meters along the line, running toward its end (or its start, with `reverse`).
+ */
+export interface Train {
+  readonly cars: number
+  readonly at: number
+  readonly engine?: boolean
+  readonly kind?: 'coach' | 'freight'
+  readonly reverse?: boolean
 }
 
 /** Which years a kind of map feature existed: the first rule that matches decides. */
@@ -64,6 +97,8 @@ export interface Rule {
     readonly type?: 'line' | 'polygon'
     /** Only bridges (true) or only what is not a bridge (false). */
     readonly bridge?: boolean
+    /** OSM ids, such as "w1485004507": for a way a curated feature stands in for. */
+    readonly id?: readonly string[]
   }
   /** Spans [from, to): null for an open end. An empty list means "not dated: today only". */
   readonly eras: readonly (readonly [number | null, number | null])[]
@@ -96,7 +131,7 @@ export interface History {
   /** Curated years built for particular OSM buildings, which win over every other date. */
   readonly dates: readonly { readonly id: string; readonly name?: string; readonly year: number; readonly source: string; readonly note?: string }[]
   /** Fire-insurance maps traced into footprints: the editions used, and the buildings since lost. */
-  readonly sanborn?: { readonly lost: string; readonly editions: readonly number[]; readonly source: string }
+  readonly sanborn?: { readonly lost: string | readonly string[]; readonly editions: readonly number[]; readonly source: string }
   readonly traced: readonly TracedBuilding[]
   /**
    * Minor streets (tertiary, residential, service, unclassified, living streets and paths) drawn only
@@ -109,20 +144,25 @@ export interface History {
    * (default 1).
    */
   readonly streetcarScale?: number
+  /** Draw railroad tracks this many times their width, and in the ties' darker tone, so the network reads from afar (default 1). */
+  readonly railScale?: number
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
   const raw = JSON.parse(await readFile(path, 'utf8')) as Partial<History>
   let traced: TracedBuilding[] = []
   if (raw.sanborn !== undefined) {
-    const fc = JSON.parse(await readFile(raw.sanborn.lost, 'utf8')) as { features: { properties: Omit<TracedBuilding, 'ring'>; geometry: { coordinates: number[][][] } }[] }
-    traced = fc.features.map((f) => ({ ...f.properties, ring: f.geometry.coordinates[0].slice(0, -1).map(([x, y]) => [x, y] as Vec2) }))
+    for (const file of typeof raw.sanborn.lost === 'string' ? [raw.sanborn.lost] : raw.sanborn.lost) {
+      const fc = JSON.parse(await readFile(file, 'utf8')) as { features: { properties: Omit<TracedBuilding, 'ring'>; geometry: { coordinates: number[][][] } }[] }
+      traced = traced.concat(fc.features.map((f) => ({ ...f.properties, ring: f.geometry.coordinates[0].slice(0, -1).map(([x, y]) => [x, y] as Vec2) })))
+    }
   }
   return {
     epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(),
     dates: raw.dates ?? [], ...(raw.sanborn === undefined ? {} : { sanborn: raw.sanborn }), traced,
     ...(raw.streetsNearBuildings === undefined ? {} : { streetsNearBuildings: raw.streetsNearBuildings }),
     ...(raw.streetcarScale === undefined ? {} : { streetcarScale: raw.streetcarScale }),
+    ...(raw.railScale === undefined ? {} : { railScale: raw.railScale }),
   }
 }
 
@@ -143,6 +183,7 @@ export const parseYear = (s: string | undefined): number | null => {
 
 const matches = (r: Rule, f: Feature): boolean => {
   const w = r.where
+  if (w.id !== undefined && !w.id.includes(f.id)) return false
   if (w.type !== undefined && w.type !== f.type) return false
   if (w.bridge !== undefined && (f.tags.bridge !== undefined && f.tags.bridge !== 'no') !== w.bridge) return false
   if (w.name !== undefined) {

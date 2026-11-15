@@ -338,7 +338,7 @@ body.reading main { grid-template-rows: 1fr; }
   <div id="pages"></div>
   <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false">
   <div id="list"></div>
-  <footer><span class="keys">Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare · <kbd>L</kbd> copy link<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back<br><kbd>[</kbd><kbd>]</kbd> step through a dated series<br></span>By Chris Busse · <a href="#/about/contact">Contact</a></footer>
+  <footer><span class="keys">Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare · <kbd>L</kbd> copy link<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back<br><kbd>[</kbd><kbd>]</kbd> step through a dated series<br></span>By Chris Busse · <a href="#/about/contact">Contact</a> · <a href="#/changes">Changes</a></footer>
 </nav>
 <div id="scrim"></div>
 <main>
@@ -773,6 +773,11 @@ body.reading main { grid-template-rows: 1fr; }
         out.push('<p><b>Streetcars:</b> ' + plural(s.streetcarLines, 'car line') + ' in red, each placed on today’s streets from the corners its sources name (listed below), with ' + plural(s.streetcars || 0, 'car') + ' along them' +
           (isNum(s.streetcarScale) && s.streetcarScale !== 1 ? ', all drawn ' + esc(s.streetcarScale) + ' times life size so they read at this scale' : '') + '.' +
           (isNum(s.unbuiltStreets) && s.unbuiltStreets > 0 ? ' Small streets are drawn only where a house of the year stood nearby: ' + int(s.unbuiltStreets) + ' laid out since are left off.' : '') + '</p>')
+      }
+      if (s.parts > 0 || s.canopyPieces > 0 || s.trainPieces > 0) {
+        out.push('<p><b>Modeled close up:</b> ' + plural(s.parts || 0, 'part') + ' of one building, each from its plans and photographs, in the building’s own colors' +
+          (s.canopyPieces > 0 ? '; ' + plural(s.canopyPieces, 'piece') + ' of platform canopy' : '') +
+          (s.trainPieces > 0 ? '; and ' + plural(s.trainPieces, 'car') + ' of standing trains, their number and makeup illustrative' : '') + '. Heights are <b>approximate</b>. ' + how('one-building-close-up', 'how the station is modeled →') + '</p>')
       }
       const cur = Array.isArray(tm.curated) ? tm.curated : []
       if (cur.length) {

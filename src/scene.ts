@@ -22,6 +22,7 @@ import { localMetres } from './region.ts'
 import { makeTerrain, rasterize, settleWater, stillWater, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
+import { canopyItems, dome, toned, trainItems } from './parts.ts'
 import { alive, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
@@ -87,6 +88,18 @@ export interface Scene {
   readonly stats: Record<string, number>
   /** For a dated scene: the year, its title, and the curated features drawn in it. */
   readonly time?: { readonly year: number; readonly title?: string; readonly curated: readonly HistoryFeature[] }
+  /** Track drawn wider than life (a history's `railScale` over 1) is inked dark, to read from afar. */
+  readonly boldRail?: boolean
+  /** Words on the map: curated labels, at view meters and the ground height there. */
+  readonly labels?: readonly MapLabel[]
+}
+
+export interface MapLabel {
+  readonly text: string
+  readonly caption?: string
+  readonly at: Vec2
+  readonly z: number
+  readonly anchor: 'start' | 'middle' | 'end'
 }
 
 const toViewRing = (view: View, ring: readonly Vec2[]): Ring => ring.map(([lon, lat]) => view.toView(lon, lat))
@@ -164,7 +177,7 @@ export const buildScene = (
     }
   }
   for (const h of curated) {
-    if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan' || h.kind === 'grounds') && h.ring !== undefined) {
+    if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan' || h.kind === 'grounds' || h.kind === 'platform' || h.kind === 'wood') && h.ring !== undefined) {
       // Pleasure grounds that are gone (a fairground, an amusement park) take a tint of their own.
       const rings = curatedRings(h)
       if (rings.length > 0) ground.push({ kind: h.kind, rings })
@@ -194,20 +207,21 @@ export const buildScene = (
   const ribbons: Ribbon[] = []
   // A town plan, while it is the whole town, keeps only the streets inside it.
   const plans = curated.filter((h) => h.kind === 'plan' && h.limitsStreets && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
-  // Curated water (a filled basin) was not yet built over: nothing of today's runs across it.
-  const basins = curated.filter((h) => h.kind === 'water' && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
+  // Curated water (a filled basin) was not yet built over, and a site (a station's grounds) was
+  // laid out otherwise: nothing of today's runs across either.
+  const basins = curated.filter((h) => (h.kind === 'water' || h.kind === 'site') && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
   const inTown = (a: Vec2, b: Vec2) => {
     const mid: Vec2 = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]
     return (plans.length === 0 || plans.some((r) => pointInRing(mid, r))) && !basins.some((r) => pointInRing(mid, r))
   }
-  const ribbonOf = (kind: Ribbon['kind'], line: LineFeature, width: number): Ribbon | null => {
+  const ribbonOf = (kind: Ribbon['kind'], line: LineFeature, width: number, today = true): Ribbon | null => {
     const pts = line.points.map(([lon, lat]) => view.toView(lon, lat))
     const quads: Vec2[][] = []
     const center: Vec2[][] = []
     for (let i = 0; i + 1 < pts.length; i++) {
       const seg = clipSegmentToRect(pts[i], pts[i + 1], wide)
       if (seg === null) continue
-      if ((kind === 'road' || kind === 'path' || kind === 'rail') && !inTown(seg[0], seg[1])) continue
+      if (today && (kind === 'road' || kind === 'path' || kind === 'rail') && !inTown(seg[0], seg[1])) continue
       const q = segmentQuad(seg[0], seg[1], width / 2, width / 2)
       if (q === null) continue
       quads.push(q)
@@ -216,6 +230,7 @@ export const buildScene = (
     return quads.length === 0 ? null : { kind, quads, center }
   }
 
+  const railScale = time?.history.railScale ?? 1
   const bridgeLines: LineFeature[] = []
   for (const f of features) {
     if (f.type !== 'line') continue
@@ -229,7 +244,7 @@ export const buildScene = (
       const r = ribbonOf(isPath(t) ? 'path' : 'road', f, w)
       if (r) ribbons.push(r)
     } else if (isRail(t)) {
-      const r = ribbonOf('rail', f, 3.2)
+      const r = ribbonOf('rail', f, 3.2 * railScale)
       if (r) ribbons.push(r)
     } else if (t.waterway === 'weir' || t.waterway === 'dam') {
       const r = ribbonOf('weir', f, t.waterway === 'dam' ? 6 : 3)
@@ -246,6 +261,14 @@ export const buildScene = (
     if (h.kind !== 'creek' || h.line === undefined) continue
     const r = ribbonOf('canal', { type: 'line', id: h.id, tags: {}, points: h.line }, h.width ?? 6)
     if (r) ribbons.push(r)
+  }
+  // Curated track (a station's loop, long since taken up), drawn as rail.
+  for (const h of curated) {
+    if (h.kind !== 'rail') continue
+    for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
+      const r = ribbonOf('rail', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, (h.width ?? 3.2) * railScale, false)
+      if (r) ribbons.push(r)
+    }
   }
   // A racecourse or promenade that is gone: a closed loop drawn as a path.
   for (const h of curated) {
@@ -310,8 +333,12 @@ export const buildScene = (
   let fresh = 0
   let undated = 0
   const datedBy = { curated: 0, osm: 0, parcel: 0 }
+  // A curated site (a station's grounds, a fairground) was laid out otherwise while it stood:
+  // today's buildings on it are not drawn.
+  const sites = curated.filter((h) => h.kind === 'site' && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
   for (const s of shown) {
     if (!s.outer.every((p) => insideRect(p, frame))) continue
+    if (sites.length > 0 && sites.some((r) => pointInRing(centroid(s.outer), r))) continue
     const area = Math.abs(signedArea(s.outer)) - s.inners.reduce((a, h) => a + Math.abs(signedArea(h)), 0)
     if (area < minArea) continue
     const outer = orient(simplifyRing(s.outer, 0.45), true)
@@ -402,18 +429,49 @@ export const buildScene = (
     stats.undatedToday = undated
     // Curated landmarks: lost buildings, from published dimensions, in their own tone.
     let landmarks = 0
+    let parts = 0
     for (const h of curated) {
       if (h.kind !== 'landmark' || h.ring === undefined) continue
       const outer = orient(toViewRing(view, h.ring), true)
       if (!outer.every((p) => insideRect(p, frame))) continue
       const ruined = h.ruin !== undefined && time.year >= h.ruin
       const grounds = outer.map((p) => terrain.z(p))
+      if (h.tone !== undefined) {
+        // A part of a modeled building: from its seat, in its own tone.
+        const seat = (h.seat === 'max' ? Math.max(...grounds) : Math.min(...grounds)) + (h.base ?? 0)
+        const t = toned(pal, h.tone)
+        items.push(h.shape === 'dome'
+          ? dome(view, pal, `history:${h.id}`, outer, seat, seat + (h.height ?? 10), h.name)
+          : extrude(view, t.pal, `history:${h.id}`, outer, [], seat, seat + (h.height ?? 10), t.roof, 'none', h.name))
+        parts++
+        continue
+      }
       const base = Math.min(...grounds)
       const top = Math.max(...grounds) + (h.height ?? 10) * (ruined ? 0.45 : 1)
       items.push(extrude(view, pal, `history:${h.id}`, outer, [], base, top, ruined ? pal.ash : pal.lost, dotsMode, h.name))
       landmarks++
     }
     stats.landmarks = landmarks
+    if (parts > 0) stats.parts = parts
+    // Platform canopies and standing trains, set on the ground under them.
+    const inFrame = (p: Vec2) => p[0] > frame.minX + 5 && p[0] < frame.maxX - 5 && p[1] > frame.minY + 5 && p[1] < frame.maxY - 5
+    const keep = (list: Item[]) => list.filter((it) => it.hull.every(inFrame))
+    let canopies = 0
+    let cars = 0
+    for (const h of curated) {
+      if (h.kind === 'canopy' && h.line !== undefined) {
+        const got = keep(canopyItems(view, pal, `history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.width ?? 9, h.height ?? 5, (p) => terrain.z(p)))
+        items.push(...got)
+        canopies += got.length / 2
+      }
+      if (h.kind === 'rail' && h.train !== undefined && h.line !== undefined) {
+        const got = keep(trainItems(view, pal, `history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.train, (p) => terrain.z(p)))
+        items.push(...got)
+        cars += got.length
+      }
+    }
+    if (canopies > 0) stats.canopyPieces = canopies
+    if (cars > 0) stats.trainPieces = cars
     // Buildings traced from fire-insurance maps that are gone today, in the maps' colors.
     const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
     for (const b of time.history.traced) {
@@ -443,9 +501,20 @@ export const buildScene = (
   }
   stats.bridgePieces = spans
 
+  const labels: MapLabel[] = []
+  for (const h of curated) {
+    if (h.kind !== 'label' || h.at === undefined) continue
+    const at = view.toView(h.at[0], h.at[1])
+    if (!insideRect(at, frame)) continue
+    labels.push({ text: h.name, ...(h.caption === undefined ? {} : { caption: h.caption }), at, z: terrain.z(at), anchor: h.anchor ?? 'middle' })
+  }
+  if (labels.length > 0) stats.labels = labels.length
+
   return {
     region, view, palette: pal, terrain, ground, ribbons, items, stats,
     ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated } }),
+    ...(labels.length === 0 ? {} : { labels }),
+    ...(railScale > 1 ? { boldRail: true } : {}),
   }
 }
 

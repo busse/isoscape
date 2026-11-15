@@ -1,0 +1,299 @@
+{
+ "about": "Broad Street Station in 1943 and the lines out of Richmond: the railroad map framed by fourteen places. Made with tools/sets/set.py; see 'Making a set' in the README.",
+ "slug": "broad-street-1943",
+ "title": "Broad Street Station, 1943",
+ "subtitle": "Richmond's union station at its wartime height, and the railroads that ran from it",
+ "note": "Track is today's, dated by the era rules, with the station loop traced from the USGS quadrangles of 1934 and 1956; the station is modeled from its plans, postcards and the 1925 Sanborn sheets, its heights approximate. Buildings are those standing in 1943. Trains are illustrative.",
+ "credit": "isoscape by Chris Busse  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Buildings dated from City of Richmond assessor records and traced from Sanborn maps (Library of Congress)  ·  Station loop after the USGS Richmond quadrangles of 1934 and 1956",
+ "map": {
+  "region": "broad-street-lines",
+  "year": 1943
+ },
+ "fine": [
+  "--rail-scale",
+  "1"
+ ],
+ "fine_menu": true,
+ "ground": {
+  "menu": 1500,
+  "box": 1600
+ },
+ "box_label": "Broad Street Station, 1943",
+ "boxes": [
+  {
+   "n": 1,
+   "id": "ay-tower",
+   "title": "AY Tower",
+   "subtitle": "Where the Coast Line met the RF&P",
+   "at": [
+    -77.473166,
+    37.578283
+   ],
+   "ground": 900,
+   "note": "About a mile northwest of the station, the RF&P main line from Washington met the Atlantic Coast Line's Belt Line at a wye worked from AY Tower. Trains for the Coast Line swung south onto the Belt Line here; Broad Street trains took the third leg down to the station.",
+   "sources": [
+    "https://chicagorailfan.com/stbrric.html",
+    "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad",
+    "https://www.richmondrailroadmuseum.com/railroad-history"
+   ]
+  },
+  {
+   "n": 2,
+   "id": "fair-grounds",
+   "title": "The State Fair grounds",
+   "subtitle": "North Boulevard, 1940",
+   "at": [
+    -77.463987,
+    37.5715
+   ],
+   "year": 1940,
+   "ground": 1500,
+   "note": "From 1906 the State Fair filled these grounds north of the tracks every fall, and Parker Field went up on them for baseball in 1934. The fair association bought Strawberry Hill in 1941 and held its first fair there after the war, in 1946. The Diamond stands on the site.",
+   "sources": [
+    "https://richmondmagazine.com/news/news/a-fair-history/",
+    "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm",
+    "https://urbanscalerichmondvirginia.blogspot.com/2014/12/a-brief-history-of-sports-complex-in.html"
+   ]
+  },
+  {
+   "n": 3,
+   "id": "hermitage-road",
+   "title": "Hermitage Road",
+   "subtitle": "Industry along the tracks",
+   "at": [
+    -77.460587,
+    37.566164
+   ],
+   "ground": 1300,
+   "note": "Once the Seaboard Air Line joined the RF&P here in 1900, firms lined Hermitage Road for the sidings: the Richmond Foundry and Manufacturing Company built at 2300 Hermitage Road in 1906, and the Putney shoe works bought part of the old fair grounds. The warehouses are a historic district today.",
+   "sources": [
+    "https://dhr.virginia.gov/?p=28752",
+    "https://richmondmagazine.com/arts-entertainment/whole-foods-richmond/"
+   ]
+  },
+  {
+   "n": 4,
+   "id": "seaboard-junction",
+   "title": "Seaboard Junction",
+   "subtitle": "Where the Seaboard left the RF&P",
+   "at": [
+    -77.461834,
+    37.564265
+   ],
+   "ground": 1300,
+   "note": "Just north of the station the Seaboard Air Line's main line left the RF&P and ran southeast to Main Street Station. Seaboard trains between Washington and the South passed Broad Street by; only from 1959 did they call there, backing in. The Seaboard and the Coast Line merged in 1967.",
+   "sources": [
+    "https://chicagorailfan.com/stbrric.html",
+    "https://www.richmondrailroadmuseum.com/railroad-history"
+   ]
+  },
+  {
+   "n": 5,
+   "id": "loop",
+   "title": "The loop and the sheds",
+   "subtitle": "Nine tracks under butterfly sheds",
+   "at": [
+    -77.46614,
+    37.562457
+   ],
+   "region": "broad-street-station-loop",
+   "ground": 520,
+   "note": "Trains ran in off the RF&P at one end of the loop and out at the other. Seven passenger tracks and two express tracks lay along 1,200 feet of cast-iron butterfly sheds, with ramps up to the concourse. In 1943 the station averaged 57 trains a day; on April 22 it handled a record 33,324 passengers.",
+   "sources": [
+    "https://scholarscompass.vcu.edu/postcard/190",
+    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+    "https://www.chicagorailfan.com/stbcric.html",
+    "https://www.hmdb.org/m.asp?m=9209"
+   ]
+  },
+  {
+   "n": 6,
+   "id": "sauer",
+   "title": "C.F. Sauer Company",
+   "subtitle": "Broad Street at Hermitage Road",
+   "at": [
+    -77.46,
+    37.5572
+   ],
+   "ground": 1100,
+   "note": "The extract house Conrad Sauer founded at 17th and Broad in 1887 moved to Broad and Hermitage in 1911, by the rail sidings. When Sauer died in 1927 it was the country's largest producer of extracts and spices. The headquarters is on the National Register, and the Sauer's Vanilla sign still lights Broad Street.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Sauer_Brands",
+    "https://rictoday.6amcity.com/business/history-sauer-company-richmond-va",
+    "https://www.dhr.virginia.gov/?p=16671"
+   ]
+  },
+  {
+   "n": 7,
+   "id": "main-street-station",
+   "title": "Main Street Station",
+   "subtitle": "The Seaboard and the C&O",
+   "at": [
+    -77.4292,
+    37.5318
+   ],
+   "ground": 750,
+   "note": "Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened in 1901 under its clock tower, with a gable-roofed train shed 530 feet long behind. The Seaboard moved its trains to Broad Street in 1959; the C&O stayed until Amtrak took over in 1971. Amtrak trains call here again.",
+   "sources": [
+    "https://www.dhr.virginia.gov/?p=15225",
+    "https://www.greatamericanstations.com/stations/RVM",
+    "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
+   ]
+  },
+  {
+   "n": 8,
+   "id": "triple-crossing",
+   "title": "The Triple Crossing",
+   "subtitle": "Three railroads, three levels",
+   "at": [
+    -77.4302,
+    37.5326
+   ],
+   "ground": 550,
+   "note": "Just east of 14th and Dock streets the C&O's viaduct crossed over the Seaboard, which crossed over the Southern on the ground: three railroads at three levels, built in 1900 and 1901. Now and then the railroads staged photographs with a train on every level. CSX and Norfolk Southern trains still cross here.",
+   "sources": [
+    "https://www.richmondrailroadmuseum.com/railroad-history",
+    "https://www.virginiaplaces.org/rail/seaboardairline.html",
+    "https://en.wikipedia.org/wiki/Triple_Crossing"
+   ]
+  },
+  {
+   "n": 9,
+   "id": "co-viaduct",
+   "title": "The C&O viaduct",
+   "subtitle": "Three miles along the river",
+   "at": [
+    -77.4465,
+    37.5338
+   ],
+   "ground": 1500,
+   "note": "In 1901 the C&O raised its line on a viaduct along the north bank of the James, three miles of trestle past Tredegar and down Dock Street, so trains of coal for Newport News bypassed the crowded route through the city. CSX coal trains still run on it.",
+   "sources": [
+    "https://www.virginiaplaces.org/rail/cando.html",
+    "https://www.railpictures.net/photoexif/391125",
+    "https://industrialscenery.blogspot.com/2021/11/csxc-james-river-viaduct-and-tredegar.html"
+   ]
+  },
+  {
+   "n": 10,
+   "id": "hull-street",
+   "title": "Hull Street Station",
+   "subtitle": "The Southern in Manchester",
+   "at": [
+    -77.43694,
+    37.52639
+   ],
+   "ground": 800,
+   "note": "Across the river, the Southern Railway's trains for Danville left from Hull Street Station, built in 1915 when the Southern gave up its passenger depot on 14th Street. Passenger service ended in 1957. The station reopened in 2011 as the Richmond Railroad Museum.",
+   "sources": [
+    "https://www.american-rails.com/varrms.html",
+    "https://en.wikipedia.org/wiki/Southern_Railway_Depot_(Richmond,_Virginia)",
+    "https://en.wikipedia.org/wiki/Hull_Street_Station"
+   ]
+  },
+  {
+   "n": 11,
+   "id": "belt-line-bridge",
+   "title": "The Belt Line bridge",
+   "subtitle": "The Coast Line over the James",
+   "at": [
+    -77.49389,
+    37.53639
+   ],
+   "ground": 1400,
+   "note": "Coast Line trains for Petersburg and Florida crossed the James on the Belt Line's double-track concrete bridge, opened with Broad Street Station in 1919; the stone piers of the single-track bridge of 1891 stood in the river beside it. It carries CSX trains today.",
+   "sources": [
+    "https://virginiaplaces.org/rail/atlanticcoastline.html",
+    "https://en.wikipedia.org/wiki/CSX_A-Line_Bridge",
+    "https://www.richmondrailroadmuseum.com/railroad-history"
+   ]
+  },
+  {
+   "n": 12,
+   "id": "william-byrd",
+   "title": "Hotel William Byrd",
+   "subtitle": "Across Broad from the station",
+   "at": [
+    -77.46694,
+    37.56
+   ],
+   "region": "broad-street-station",
+   "ground": 380,
+   "note": "Built in 1925 for the passengers across the street, the eleven-story William Byrd, designed by Marcellus Wright, had nearly 200 rooms; with the station it made the traveler's first picture of Richmond. It closed in the 1980s and has been apartments for older residents since 1996.",
+   "sources": [
+    "https://www.dhr.virginia.gov/?p=15215",
+    "https://richmondbizsense.com/2017/03/23/5m-renovation-wraps-up-at-william-byrd/"
+   ]
+  },
+  {
+   "n": 13,
+   "id": "from-the-fan",
+   "title": "Broad Street Station",
+   "subtitle": "From over the Fan",
+   "at": [
+    -77.4658,
+    37.560919
+   ],
+   "region": "broad-street-station",
+   "ground": 850,
+   "note": "John Russell Pope set the station back from Broad Street on a built-up mound that screened the tracks behind it, facing the Fan's rowhouse blocks. The last train left on November 15, 1975; the Commonwealth bought the building, and the Science Museum of Virginia opened in it.",
+   "sources": [
+    "https://sah-archipedia.org/node/20518",
+    "https://www.hmdb.org/m.asp?m=9209",
+    "https://www.dhr.virginia.gov/historic-registers/127-0226/"
+   ]
+  },
+  {
+   "n": 14,
+   "id": "front",
+   "title": "Pope's front",
+   "subtitle": "Colonnade and dome",
+   "at": [
+    -77.465823,
+    37.561055
+   ],
+   "region": "broad-street-station-front",
+   "ground": 250,
+   "note": "Opened January 6, 1919, the station was faced in Indiana limestone behind a colonnade after the Doric of St. Peter's Square, under the first dome on a major railroad station, its rotunda 100 feet high. In 1943 the dome was still tile; copper replaced it in 1955.",
+   "sources": [
+    "https://sah-archipedia.org/node/20518",
+    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+    "https://rvanews.com/?p=17011"
+   ]
+  }
+ ],
+ "page": {
+  "slug": "broad-street",
+  "noun": "place",
+  "title": "Broad Street Station, 1943",
+  "order": 46,
+  "summary": "Richmond's union station at its wartime peak, the loop of tracks it stood on, and fourteen places along the railroads that ran from it.",
+  "intro": "John Russell Pope's Broad Street Station opened in January 1919 for the RF&P and the Atlantic Coast Line, and was never busier than in the Second World War: in 1943 it averaged 57 trains a day. This map draws Richmond's railroads as they ran that year, with the station's loop of tracks and its umbrella sheds, and frames it with fourteen places along the lines, from the wye at AY Tower to the Triple Crossing.",
+  "image_alt": "The 1943 railroad map, framed by its fourteen places",
+  "boxes_heading": "The places",
+  "how": "The station is modeled from its 1919 plan, period postcards and the 1925 Sanborn fire-insurance sheet, its heights scaled from photographs and approximate. Its loop of tracks, long since taken up, is traced from the USGS Richmond quadrangles of 1934 and 1956 and fitted to the platforms that survive. The rest of the track is today's, as era rules date it. Buildings are those standing today that the city assessor dates to 1943 or before, with those traced from Sanborn maps around the station and downtown. On the big map the track is drawn four times its width; on the prints of single places, at its own.",
+  "shop": "https://chrisbusse.com/collections/broad-street-station-1943"
+ },
+ "store": {
+  "place": "Broad Street Station",
+  "tag": "broad-street-1943",
+  "collection": {
+   "handle": "broad-street-station-1943",
+   "title": "Broad Street Station, 1943",
+   "description": "Richmond's Broad Street Station at its wartime height in 1943, the loop of tracks it stood on, and fourteen places along the railroads that ran from it, from AY Tower to the Triple Crossing. The railroad map framed by every place, the map alone, and a print for each place. <a href=\"https://busse.github.io/isoscape/#/broad-street\">The places, their stories and sources ↗</a>",
+   "menu_label": "Broad Street Station, 1943"
+  },
+  "menu": {
+   "title": "Broad Street Station, 1943: The Railroads and Fourteen Places",
+   "blurb": "Richmond's railroads as they ran in 1943, when Broad Street Station averaged 57 trains a day, drawn over the buildings then standing and framed by fourteen places along the lines, each with a short history: the station and its loop, the junctions, the depots downtown and across the river, and the bridges over the James."
+  },
+  "map": {
+   "title": "Broad Street Station, 1943: The Railroad Map",
+   "blurb": "Richmond's railroads in 1943, from AY Tower to Main Street Station and across the James, with each line labeled where it left town and fourteen places numbered."
+  },
+  "box_title": "{title}, Broad Street Station 1943",
+  "box_line": "{subtitle}. Place {n} of fourteen on Broad Street Station, 1943.",
+  "credit_extra": "Station loop after the USGS Richmond quadrangles of 1934 and 1956, with the sources cited for each place on the <a href=\"https://busse.github.io/isoscape/#/broad-street\">Broad Street page ↗</a>.",
+  "print_dir": "print-files/broad-street-1943"
+ }
+}
