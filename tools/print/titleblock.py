@@ -52,8 +52,19 @@ def taxonomy(info):
     return f'{info["collection"]} › {info["set"]} › {info["piece"]}'
 
 
+def check_glyphs(text):
+    """Raise if the print face lacks a character (Pillow would draw an empty box)."""
+    from fontTools.ttLib import TTFont
+    cmap = check_glyphs.cmap = getattr(check_glyphs, 'cmap', None) or TTFont(FONT['regular']).getBestCmap()
+    missing = sorted({c for c in text if ord(c) not in cmap})
+    if missing:
+        raise ValueError(f'the print face has no glyph for {missing!r} in {text!r}')
+
+
 def block(info, u=1.0):
     """The title block for one print, as an RGBA image with a paper ground."""
+    for v in list(info.values()) + [taxonomy(info)]:
+        check_glyphs(str(v))
     W, Hh = round(WIDTH * u), round(H * u)
     im = Image.new('RGBA', (W, Hh), PAPER + (255,))
     d = ImageDraw.Draw(im)

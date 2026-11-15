@@ -28,9 +28,8 @@ def by_design(reg=None):
 
 
 def dms(v, pos, neg):
-    d = abs(v); deg = int(d); mins = round((d - deg) * 60)
-    if mins == 60: deg, mins = deg + 1, 0
-    return f'{deg}°{mins:02d}′{pos if v >= 0 else neg}'
+    """Decimal degrees to three places (about 100 m): 37.534° N. (The print face has no prime.)"""
+    return f'{abs(v):.3f}° {pos if v >= 0 else neg}'
 
 
 def where(design):
