@@ -58,7 +58,7 @@
   {
    "id": "car-lakeside", "name": "Brookland and Lakeside line", "route": "1st Street – North Avenue – Brookland Park – Chamberlayne – Laburnum – Hermitage Road", "from": 1891, "to": 1949,
    "runs": [[
-    ["1st Street", "Broad Street"], ["1st Street", "Monteiro Street"], ["Monteiro Street", "North Avenue"], ["North Avenue", "Brookland Park Boulevard"],
+    ["1st Street", "Broad Street"], ["1st Street", "Monteiro Street"], ["Monteiro Street", "Dove Street"], ["North Avenue", "Dove Street"], ["North Avenue", "Brookland Park Boulevard"],
     ["Brookland Park Boulevard", "Chamberlayne Avenue"], ["Chamberlayne Avenue", "Laburnum Avenue"], ["Laburnum Avenue", "Hermitage Road"],
     ["Hermitage Road", "Lakeside Avenue"], {"at": [-77.4690, 37.6110], "on": "Lakeside Avenue"}
    ]],
