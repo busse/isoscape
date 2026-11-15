@@ -1,6 +1,5 @@
 {
   "title": "Broad Street Station, 1943",
-  "data": "richmond-streetcars",
   "center": [
     -77.465687,
     37.561643
@@ -21,7 +20,7 @@
     "cell": 3,
     "contour": 0,
     "majorEvery": 5,
-    "demResolution": 5
+    "demResolution": 1
   },
   "time": {
     "history": "history/broad-street-station.json",

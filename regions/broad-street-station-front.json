@@ -1,6 +1,6 @@
 {
   "title": "Broad Street Station, 1943: the front",
-  "data": "richmond-streetcars",
+  "data": "broad-street-station",
   "center": [
     -77.465913,
     37.561281
@@ -18,10 +18,10 @@
   "dots": "none",
   "terrain": {
     "exaggeration": 1.5,
-    "cell": 3,
+    "cell": 2,
     "contour": 0,
     "majorEvery": 5,
-    "demResolution": 5
+    "demResolution": 1
   },
   "time": {
     "history": "history/broad-street-station.json",
