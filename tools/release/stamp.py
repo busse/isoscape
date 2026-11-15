@@ -65,7 +65,10 @@ def files_of(store, d, key):
 def stamp_file(src, dst, info):
     im = Image.open(src)
     face, long_in, dpi = sheet_geometry(os.path.basename(src), im)
-    out, at = titleblock.stamp(im, info, size_u(long_in, dpi), face)
+    try:
+        out, at = titleblock.stamp(im, info, size_u(long_in, dpi), face)
+    except ValueError as e:
+        raise ValueError(f'{os.path.basename(src)}: {e}') from None
     kw = {k: im.info[k] for k in ('dpi', 'icc_profile') if k in im.info}
     if im.format == 'JPEG':   # the source's own quantization and chroma subsampling
         from PIL import JpegImagePlugin
