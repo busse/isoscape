@@ -1,4 +1,4 @@
-"""Contact sheets for picking control points by eye: each sheet scaled down with a labelled
+"""Contact sheets for picking control points by eye: each sheet scaled down with a labeled
 pixel grid (in the 25% scan's own pixels), four to an image."""
 import sys
 from PIL import Image, ImageDraw, ImageFont

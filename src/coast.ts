@@ -171,8 +171,8 @@ export const landFromCoast = (chains: readonly Vec2[][], rect: Rect): { land: Ri
   if (pieces.length === 0) {
     // No coast crosses the frame: it is all land if a ring surrounds it, or if there is no
     // coast at all; it is water with islands if all the coast lies inside it.
-    const centre: Vec2 = [(rect.minX + rect.maxX) / 2, (rect.minY + rect.maxY) / 2]
-    const surrounded = outsideRings.some((r) => pointInRing(centre, r))
+    const center: Vec2 = [(rect.minX + rect.maxX) / 2, (rect.minY + rect.maxY) / 2]
+    const surrounded = outsideRings.some((r) => pointInRing(center, r))
     if (surrounded || land.length === 0) return { land: [rectRing(rect)], allLand: true }
   }
   return { land, allLand: false }

@@ -11,9 +11,9 @@ It has a scale bar of 0–200–400 ft, a compass rose, and "G.P.C. 8/67" in the
 
 It is a 1967 photographic copy of part of F. W. Beers, *Illustrated Atlas of the City of Richmond, Va.* (1876). The atlas plates are 1 in = 200 ft. This print is a reduced stitch of several plates. At 3 ft for about 2½ miles, it is roughly 1 in ≈ 350 ft. It runs from Gamble's Hill, Tredegar and Belle Isle to Rocketts. It shows Capitol Square, the canal basin, Mayo's Bridge, Brown's Island and the sand bar.
 
-The project's notes (PROGRESS.md) say atlas sections J–M cover the downtown frame. This print probably joins those sections and their neighbours to the east and west. That is a guess from the photo, not checked plate by plate.
+The project's notes (PROGRESS.md) say atlas sections J–M cover the downtown frame. This print probably joins those sections and their neighbors to the east and west. That is a guess from the photo, not checked plate by plate.
 
-**Who "G.P.C." is: unknown.** I found no catalogue record for a 1967 "Capitol Square and Environs" reproduction. Searches covered the Library of Virginia's Richmond map guide, the LoC and HAER canal records, and VCU. The HAER survey of the canal locks (VA-23) dates from after 1968, so it is a different project. Possible makers include a city or state planning office, a canal-history group, or a printer. To find out:
+**Who "G.P.C." is: unknown.** I found no catalog record for a 1967 "Capitol Square and Environs" reproduction. Searches covered the Library of Virginia's Richmond map guide, the LoC and HAER canal records, and VCU. The HAER survey of the canal locks (VA-23) dates from after 1968, so it is a different project. Possible makers include a city or state planning office, a canal-history group, or a printer. To find out:
 
 - Check the back of the frame and the mat for a label.
 - Ask the Library of Virginia map desk, or the Valentine, to search "Capitol Square and Environs".
@@ -34,7 +34,7 @@ The framed copy is a photo of those plates. It is a generation further from the 
 - The Tredegar works, the canal basin and the Haxall Canal as they stood, and Mayo's Bridge.
 - Property lines.
 
-**The blocker is the drawing style, not getting a copy.** Beers draws buildings as grey hatching under the lettering. Our tracer reads Sanborn colour classes, so it cannot read hatching (see PROGRESS.md). That is equally true of this print and of the scans.
+**The blocker is the drawing style, not getting a copy.** Beers draws buildings as gray hatching under the lettering. Our tracer reads Sanborn color classes, so it cannot read hatching (see PROGRESS.md). That is equally true of this print and of the scans.
 
 **What the photos show:**
 
@@ -51,7 +51,7 @@ The framed copy is a photo of those plates. It is a generation further from the 
 ## If you want a good digital copy of the framed print anyway
 
 1. **Take it out of the frame.** Glass adds glare and warping. If it can't come out, shoot through the glass with a polarizing filter on the lens and polarizing film on two lights set at 45°, in a dark room.
-2. **Light it flat and even.** Use two daylight-balanced lights at 45°, no raking light (it shows paper texture, not hatching). Put a grey card or colour card in the first frame.
+2. **Light it flat and even.** Use two daylight-balanced lights at 45°, no raking light (it shows paper texture, not hatching). Put a gray card or color card in the first frame.
 3. **Shoot overlapping tiles from straight above.** Use a phone or camera on a copy stand or tripod, lens parallel to the paper, and the longest lens that fits. Overlap tiles by about 30%. Aim for 400–600 dpi at print size, which is about 15–20 tiles of 24 MP for a 3 × 1.5 ft sheet. A flatbed in A3 sections also works if the print is loose and flat.
 4. **Stitch.** Use Hugin (free) or PTGui with the "mosaic" or planar setting, not a panorama projection. Microsoft ICE is discontinued but still works offline. Save a 16-bit TIFF master and a JPG.
 5. **Check the scale.** Measure the 400 ft scale bar and a few known block lengths in the stitch. If the stitch bends, re-shoot those tiles.
@@ -60,11 +60,11 @@ The framed copy is a photo of those plates. It is a generation further from the 
 ## How 1876 would plug into tools/sanborn
 
 - **Control points:** the same as the other editions. Read street corners by eye into a `cps1876.json` per plate. Fit with `rigid.py`, then rubber-sheet with `snap.py`.
-- **Extraction:** this is the new part. `extract.py` and `material.py` sort pixels by Sanborn colour, and Beers is mostly monochrome. They need a hatching mode:
-  - Find hatched areas by texture rather than colour. Use local line density, with orientation from a structure tensor or Gabor filters, so lettering (no single direction, small strokes) is rejected and hatching (long parallel strokes) is kept.
+- **Extraction:** this is the new part. `extract.py` and `material.py` sort pixels by Sanborn color, and Beers is mostly monochrome. They need a hatching mode:
+  - Find hatched areas by texture rather than color. Use local line density, with orientation from a structure tensor or Gabor filters, so lettering (no single direction, small strokes) is rejected and hatching (long parallel strokes) is kept.
   - Close the hatching into solid fills with morphological closing, then drop small connected parts (letters, numbers).
   - Recover outlines from the black building edges where they are drawn.
-  - Material is unknown from Beers. Default to brick at 3 storeys, or carry material from the nearest Sanborn match in 1886.
+  - Material is unknown from Beers. Default to brick at 3 stories, or carry material from the nearest Sanborn match in 1886.
 - **Fallback:** if texture classification stays noisy, hand-trace the blocks that matter most: the canal basin, Shockoe Slip, the Tredegar and the waterfront. A simple click tool over the warped plate would do; the sketch standard applies.
 - **Dates:** add `1876` to `history/richmond-downtown.json` as a traced edition. Run `lifespans.py` as before, since 1886 then confirms or ends each 1876 building.
 

@@ -115,7 +115,7 @@ const askOverpass = async (query: string, rounds: number, log: (m: string) => vo
   throw new Error('Overpass did not answer. Run fetch again later; finished tiles are kept.')
 }
 
-/** Cut the fetch bounds into tiles no bigger than `size` metres a side. */
+/** Cut the fetch bounds into tiles no bigger than `size` meters a side. */
 export const tilesFor = (b: Bounds, size = 1600): Bounds[] => {
   const kx = 111_320 * Math.cos((((b.north + b.south) / 2) * Math.PI) / 180)
   const cols = Math.max(1, Math.ceil(((b.east - b.west) * kx) / size))

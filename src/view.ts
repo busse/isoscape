@@ -1,5 +1,5 @@
 /**
- * The camera. Turns lon/lat into view metres (E' across, N' into the frame) and view metres
+ * The camera. Turns lon/lat into view meters (E' across, N' into the frame) and view meters
  * plus a height into screen pixels.
  *
  * The camera is orthographic, tilted down from the horizon and looking along +N'. Ground
@@ -15,13 +15,13 @@ import { localMetres, lonLatFromLocal, type Region } from './region.ts'
 export interface View {
   /** The bearing actually used, after any snap. */
   readonly bearing: number
-  /** lon/lat → view metres. */
+  /** lon/lat → view meters. */
   readonly toView: (lon: number, lat: number) => Vec2
-  /** view metres → lon/lat. */
+  /** view meters → lon/lat. */
   readonly fromView: (p: Vec2) => Vec2
-  /** view metres + height → screen px. */
+  /** view meters + height → screen px. */
   readonly toScreen: (p: Vec2, z?: number) => Vec2
-  /** The ground rectangle the frame shows, in view metres. */
+  /** The ground rectangle the frame shows, in view meters. */
   readonly frame: Rect
   readonly scale: number
   readonly squash: number
@@ -32,7 +32,7 @@ const rad = (deg: number) => (deg * Math.PI) / 180
 
 /**
  * Dominant orientation (mod 90°, in degrees counter-clockwise from east) of a set of edges in
- * local metres, weighted by length. Angles are folded with 4θ so 0°, 90°, 180° and 270° all
+ * local meters, weighted by length. Angles are folded with 4θ so 0°, 90°, 180° and 270° all
  * vote for the same grid.
  */
 export const dominantGridAngle = (rings: readonly (readonly Vec2[])[]): number | null => {

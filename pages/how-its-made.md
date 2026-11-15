@@ -64,17 +64,17 @@ place: 1 m lidar where it has been flown, coarser models elsewhere. Bare earth m
 buildings and trees have been removed. isoscape requests uncompressed 32-bit float GeoTIFFs
 in tiles of at most 1,500 pixels a side, at 1 m per pixel unless the region sets
 `demResolution`. The tiles are stitched together and stored as `data/<region>/dem.bin.gz`:
-gzipped 16-bit integers in centimetres, so heights are kept to the nearest centimetre.
+gzipped 16-bit integers in centimeters, so heights are kept to the nearest centimeter.
 
 Outside the US, a region names another source in `terrain.source`; `isoscape sources` lists
-them with their credits and licences, and [Landmarks around the world](world-landmarks.md)
+them with their credits and licenses, and [Landmarks around the world](world-landmarks.md)
 shows one map for each. `ign` (France, 1 m) is cut to order like 3DEP, by IGN's WMS server,
 as raw 32-bit heights. The rest are published in fixed pieces that isoscape downloads and
-resamples onto its own grid. `swisstopo` (Switzerland, 2 m) comes as one-kilometre squares in
-the Swiss grid, found through swisstopo's STAC catalogue and converted with swisstopo's
-published formulas, good to about a metre. `gsi` (Japan) comes as web-map tiles with heights
-packed into their colours: 5 m lidar first, then 5 m photogrammetry, then the 10 m national
-model. `copernicus` (worldwide, 30 m) comes as one-degree squares of cloud-optimised GeoTIFF,
+resamples onto its own grid. `swisstopo` (Switzerland, 2 m) comes as one-kilometer squares in
+the Swiss grid, found through swisstopo's STAC catalog and converted with swisstopo's
+published formulas, good to about a meter. `gsi` (Japan) comes as web-map tiles with heights
+packed into their colors: 5 m lidar first, then 5 m photogrammetry, then the 10 m national
+model. `copernicus` (worldwide, 30 m) comes as one-degree squares of cloud-optimized GeoTIFF,
 read with Deflate and the floating-point predictor. `terrain-tiles` (worldwide) is a mosaic
 of open models in web-map tiles. Copernicus is a *surface* model, so forest and roofs are in
 its heights. `terrain.fillFrom` names a second source for whatever the first leaves empty,
@@ -84,7 +84,7 @@ Copernicus and Terrain Tiles). The cache records which source it came from.
 
 3DEP sometimes fills a gap in its coverage with a large negative number. One patch near
 Shockoe Bottom reads −88 m. Any sample below −5 m is treated as missing, along with a
-three-pixel rim around it, and filled from its neighbours.
+three-pixel rim around it, and filled from its neighbors.
 
 The download covers the frame's circumscribed circle plus a 60 m margin. The camera can turn
 after the data arrives (see [Camera](#camera)), and the data still covers the frame. **Builds
@@ -95,27 +95,27 @@ Around Gwynn's Island it maps 417 buildings, while Microsoft's
 [Global ML Building Footprints](https://github.com/microsoft/GlobalMLBuildingFootprints)
 find over 6,000. A region can list `"microsoft"` in `sources.buildings`. `fetch` then
 downloads the dataset's parts for the region's zoom-9 quadkeys, keeps the footprints whose
-centres fall in the region, and stores them in `data/<region>/footprints.json`. The model
+centers fall in the region, and stores them in `data/<region>/footprints.json`. The model
 estimates a height for many of them, and that height is kept.
 
 **Land cover.** Rural OSM rarely maps woods and fields. A region with `sources.landcover:
 "nlcd"` gets the [National Land Cover Database](https://www.mrlc.gov/) (NLCD 2021) through
 the MRLC's map service. That's a 30 m classification of the whole country: forest, wetland,
 pasture, crops, scrub and so on. The map image comes back with each class in its legend
-colour, and each colour is matched back to its class. The result is stored in
+color, and each color is matched back to its class. The result is stored in
 `data/<region>/landcover.bin.gz`.
 
 Code: `src/osm.ts`, `src/dem.ts`, `src/dem-sources.ts`, `src/rasters.ts`, `src/footprints.ts`, `src/landcover.ts`.
 
 ## Region
 
-A place is one JSON file in `regions/`. It sets the centre (longitude, latitude), the frame's
-width and depth in metres, the camera's bearing and whether it may snap, the scale in pixels
-per metre, the tilt, the terrain settings, rules for bridge decks, and the palette. The
+A place is one JSON file in `regions/`. It sets the center (longitude, latitude), the frame's
+width and depth in meters, the camera's bearing and whether it may snap, the scale in pixels
+per meter, the tilt, the terrain settings, rules for bridge decks, and the palette. The
 README's "Region config" section lists every key.
 
-Positions are converted to local metres east and north of the centre. This simple
-equirectangular approximation is accurate to a fraction of a metre across a city-sized frame.
+Positions are converted to local meters east and north of the center. This simple
+equirectangular approximation is accurate to a fraction of a meter across a city-sized frame.
 
 Code: `src/region.ts`.
 
@@ -125,7 +125,7 @@ The camera is **orthographic**: no perspective, so a building is the same size n
 and lengths across the picture can be measured with a ruler. It looks down at a fixed tilt.
 The region sets `squash`, the sine of that tilt:
 
-- Ground across the picture is drawn at full scale (`scale` pixels per metre).
+- Ground across the picture is drawn at full scale (`scale` pixels per meter).
 - Ground running into the picture is drawn at `squash` of its length. At 0.5 the tilt is 30°,
   the classic 2:1 view of isometric games.
 - Heights are drawn at the cosine of the tilt (0.87 at 30°), times any `exaggeration`.
@@ -145,7 +145,7 @@ Code: `src/view.ts`, `chooseBearing` in `src/scene.ts`.
 
 Each OSM area is classified by its tags as water, island, park or grass, wood, marsh, sand,
 bare rock, parking or cemetery, and drawn as a flat fill in that order. Rivers are drawn from
-their mapped area, never from their centre line. Canals, streams and ditches are drawn as
+their mapped area, never from their center line. Canals, streams and ditches are drawn as
 ribbons of a typical width.
 
 **Roads and rail** become ribbons. A road's width comes from its `width` tag if it has one,
@@ -184,7 +184,7 @@ of the exaggerated ground, so a 2.5× hill does not stretch the towers standing 
 
 Shading and contours are computed from the true elevation, not the exaggerated one:
 
-- **Hillshade.** Each cell is lit from the left and a little towards the camera. The result is
+- **Hillshade.** Each cell is lit from the left and a little toward the camera. The result is
   rounded to one of 12 steps lighter or darker, which keeps the SVG small. Very steep ground
   can look stepped.
 - **Contours.** Marching squares every 2 m by default (`contour`), with every fifth line
@@ -196,7 +196,7 @@ Code: `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 
 Lidar over a river is not the river. 3DEP's bare-earth surfaces are mostly hydro-flattened,
 level across the water and stepping down along it. But OSM's water outline never matches
-them to the metre, and rocks, ledges and overlapped banks stand above the water. Draped
+them to the meter, and rocks, ledges and overlapped banks stand above the water. Draped
 naively, the river would climb its own banks.
 
 So the river's surface is **recovered**. At each water point on the grid, it is taken as a
@@ -247,7 +247,7 @@ Code: `paintStrip` in `src/render.ts`.
 Every OSM building that lies **wholly inside the frame** and covers at least
 `minBuildingArea` (12 m² by default) becomes a prism. Walls are drawn on the sides facing the
 camera, and the roof goes on top. Courtyards work. Wall shading follows which way each wall
-faces, with the light from the left. Roof colour follows the building's type: homes,
+faces, with the light from the left. Roof color follows the building's type: homes,
 commerce, industry or civic. Where a building is mapped as Simple 3D Buildings parts
 (`building:part`), the parts are drawn instead of the outline, except parts that are only
 roofs (`building:part=roof`), which sit on the outline as their podium. Open canopies
@@ -259,12 +259,12 @@ darker iron tone. Its width follows the Eiffel Tower's curve: e^(−3.3·t) of t
 height fraction t, so 0.56 at the first platform and 0.32 at the second, running out to a
 mast over the top sixth. The parts mapped inside it are dropped. A **curved roof shell with
 no height** (a roof part shaped `round`, `spherical` or `circular`, such as the Sydney Opera
-House's sails) is drawn as a sail rising to a point, 1.6 × √area metres above its podium.
+House's sails) is drawn as a sail rising to a point, 1.6 × √area meters above its podium.
 That height is an approximation, not a survey.
 
 **Footprints from Microsoft's model** fill in where OSM has none. Wherever an OSM building
 and a footprint overlap, OSM wins and the footprint is dropped. A footprint is dropped if its
-centre lies in an OSM building, or if it holds an OSM building's centre.
+center lies in an OSM building, or if it holds an OSM building's center.
 
 **Heights** are taken from the first of these that the building has:
 
@@ -294,7 +294,7 @@ ramps down at an end that touches no other bridge.
 
 **Deck height is a rule of thumb.** OSM rarely records it. A region can name a height for a
 bridge, for example `{ "match": "Manchester", "deck": 24 }`. Otherwise the deck sits
-`bridgeDeck` metres (7 by default) above the ground for each OSM `layer`. The deck is a taut
+`bridgeDeck` meters (7 by default) above the ground for each OSM `layer`. The deck is a taut
 line over whatever it crosses: never closer to the ground than its clearance, rising in
 straight runs, and easing down over at most 70 m at a free end. Piers drop to the real ground
 or water every 38 m where the deck is more than 3 m up.
@@ -314,7 +314,7 @@ on screen:
 - If their footprints can be separated by a line, the one on the camera's side of that line
   is in front.
 - If the footprints overlap (stacked building parts), the one entirely above is in front.
-- Otherwise the nearer centre wins.
+- Otherwise the nearer center wins.
 
 A topological sort turns these pairwise results into one order. The rare cycle, from concave
 footprints that interlock, is broken by depth.
@@ -336,7 +336,7 @@ with water where the cut crosses the river.
 **The SVG is compact.** Coordinates are rounded to a tenth of a pixel and written relative to
 the previous point. Draped edges are simplified to a quarter pixel. Each dot is a zero-length
 line with round caps. Even so, a big region can produce a 25 MB file. The `--png` option
-renders a raster with `rsvg-convert`. Colours and line weights come from a palette (`paper`
+renders a raster with `rsvg-convert`. Colors and line weights come from a palette (`paper`
 or `night`).
 
 Code: `src/render.ts`, `src/palette.ts`.
@@ -354,7 +354,7 @@ every scene from its year on. The year comes from:
 1. a curated year, for a few landmarks whose records are known to be wrong or missing (the
    Capitol, St. John's Church, the Old Stone House and so on), each with a source;
 2. else OpenStreetMap's `start_date` tag;
-3. else the city assessor's *year built* for the parcel under the building's centre.
+3. else the city assessor's *year built* for the parcel under the building's center.
 
 The assessor records one year per parcel, the year of its main building. Up to four buildings
 on a lot (a row split in OSM, a house and its shed) all take that year. With more buildings,
@@ -363,20 +363,20 @@ Square) gives its year to none of them. Buildings with no year appear only in to
 
 **Curated: what is gone or was different.** A short list per series, each item with its
 years and sources: a filled canal basin, a burned district, a buried creek, demolished
-landmarks drawn from published dimensions in a red-brown tone (a burned shell in ash grey), and
+landmarks drawn from published dimensions in a red-brown tone (a burned shell in ash gray), and
 the town plan, which limits the earliest scene's streets to the original grid. Positions come
 from today's street grid. They are not surveyed.
 
 **Traced: buildings from fire-insurance maps.** The Sanborn Map Company drew every building
 in a city's business district for insurers, block by block. Each building appears as a
-footprint coloured by material: pink brick, yellow frame, blue stone, grey iron. The Library of
+footprint colored by material: pink brick, yellow frame, blue stone, gray iron. The Library of
 Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
 
 1. **Georeference.** Each sheet is placed on the ground by a rotation and shift: at one scale
    per edition, two or three named street corners read off the sheet are enough. A third
    corner checks the first two. The block outlines from the city's GIS are drawn over each
    sheet to confirm the fit (`tools/sanborn/rigid.py`, `ovmosaic.py`).
-2. **Trace.** The coloured fills are separated from the paper and the printed lines, read for
+2. **Trace.** The colored fills are separated from the paper and the printed lines, read for
    material, closed over the lettering, and traced as polygons. Near-rectangles are squared
    up, and outlines and thin strips (river banks, rails) are dropped (`extract.py`).
 3. **Follow through time.** A traced footprint mostly covered by a building standing today is
@@ -401,10 +401,10 @@ buildings are missing, misplaced or merged. The 1924 overview ("congested distri
 the least precise source. The historic scenes show the city's shape and density, not each
 building exactly.
 
-Traced buildings keep the maps' colours, so they read apart from today's. Their heights are
-guessed from their material (brick and stone three storeys, frame two): the storey counts
+Traced buildings keep the maps' colors, so they read apart from today's. Their heights are
+guessed from their material (brick and stone three stories, frame two): the story counts
 printed on the sheets are not read yet; later editions add olive-brown for fire-proof
-construction, drawn six storeys. The explorer counts, for each scene, how many traced
+construction, drawn six stories. The explorer counts, for each scene, how many traced
 buildings stand and how each one's end date was found.
 
 Five editions are traced: **1886**; **1895** and **1905** (sheets read by eye); **1924–25**, whose first volume opens with a single
@@ -422,6 +422,34 @@ Features no rule matches are drawn in every year, which suits the street grid. P
 undated features are drawn only today.
 
 In every scene after the first, buildings **new since the previous scene** have gold roofs.
+
+**Streets before the houses.** A series can say that minor streets (tertiary and smaller,
+service roads and paths) are drawn only where a building of the year stands within so many
+meters of them: 75 m in the 1925 streetcar scene. Each street is walked every half that
+distance and kept if any building (standing today and built by then, or traced from a Sanborn
+sheet and still standing) has a corner within one grid cell of a step. A suburb whose streets
+were laid out but not yet built on shows its main roads only.
+
+**Streetcar lines.** A curated `streetcar` item is a line drawn as a bold red ribbon down the
+street, 9 m wide, with a car every 900 m along it: 14 m long and 3.6 m tall like a 1920s
+double-truck car, but 5.4 m wide (about twice a real car's width) so its pale roof reads
+against the line. A series can scale both up so they read across a whole city: the 1925 scene
+draws them three times life size (27 m lines, 42 m cars). The lines come from
+`tools/streetcars/build.py`, which reads each line as a list of street corners (from the
+1925 plate of the city's early transit routes and the sources cited per line), finds each
+corner in OpenStreetMap, and follows the streets between them, preferring the streets the two
+corners name (any other street costs six times as much per meter). Two streets that meet
+without sharing a node take their closest points, up to 150 m apart. A run over a viaduct
+since torn down is drawn straight. Vanished pleasure grounds (a fairground) take a sandy tint of
+their own, and a racetrack is a closed dirt-colored ribbon. `--streetcar-scale` overrides the
+series' scale for one build: the single-stop prints of the streetcar series use 1.5, so the
+lines read thinner up close.
+
+**The streetcar prints.** `tools/streetcars/menu.py` frames the 1925 map with fourteen numbered
+boxes, one per stop or attraction, each 1,800 m of ground across, cut from the same scene and
+rasterized from the vector at the pixels it fills, with a note written from the sources stored
+beside it (`tools/streetcars/stops.json`). The same tool makes the map alone and a print per
+stop (2,100 m across). `isoscape locate` tells it where each stop falls in the picture.
 
 **What the series cannot show:**
 

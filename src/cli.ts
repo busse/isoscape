@@ -24,10 +24,12 @@ const run = promisify(execFile)
 const HELP = `isoscape — isometric dot-and-line views of real places
 
   isoscape regions                 list region configs in regions/
-  isoscape sources                 list the elevation sources, with credits and licences, as JSON
+  isoscape sources                 list the elevation sources, with credits and licenses, as JSON
   isoscape query <region>          print the Overpass query for a region
   isoscape fetch <region>          download OSM data and elevation to data/<region>/
   isoscape info <region>           camera, counts and height coverage, as JSON
+  isoscape locate <region> <lon,lat>...
+                                   where places fall in the built picture (SVG units)
   isoscape build <region>          write out/<region>.svg and .html, archive the build,
                                    and refresh the explorer at out/index.html
   isoscape series <region>         build every epoch of a dated region (see regions/*.json
@@ -41,9 +43,11 @@ const HELP = `isoscape — isometric dot-and-line views of real places
                             other sources (footprints, land cover)
   --budget <seconds>        stop starting new OSM tiles after this long (fetch resumes)
   --palette <name>   override the region's palette (paper, night)
-  --png [width]      also rasterise out/<region>.png (needs rsvg-convert)
+  --png [width]      also rasterize out/<region>.png (needs rsvg-convert)
   --note "<text>"    say what this build is trying, shown in the explorer
   --year <yyyy>      build a dated region as it stood in that year
+  --streetcar-scale <n>  draw streetcar lines and cars at n times life size
+                     (else the history's own streetcarScale)
   --no-archive       do not keep this build in out/builds/
   --out <dir>        output directory (default: out)
   --site-url <url>   the public address of out/, for absolute link-preview URLs
@@ -89,7 +93,7 @@ const loadInputs = async (name: string) => {
     let parcels: ReturnType<typeof parseParcels> = []
     if (region.time.yearBuilt !== undefined) {
       try {
-        parcels = parseParcels(await readFile(resolve('data', region.name, 'yearbuilt.json'), 'utf8'), region.time.yearBuilt.field)
+        parcels = parseParcels(await readFile(resolve(dataDir(region), 'yearbuilt.json'), 'utf8'), region.time.yearBuilt.field)
       } catch {
         console.error(`no year-built data for "${name}"; run: isoscape fetch ${name} --extras-only`)
       }
@@ -101,13 +105,16 @@ const loadInputs = async (name: string) => {
 
 type Inputs = Awaited<ReturnType<typeof loadInputs>>
 
+/** `--streetcar-scale`: draw a series' streetcar lines and cars at this scale instead of its own. */
+let streetcarScale: number | undefined
+
 const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number) => {
   const extra = { ...inp.extra }
   if (inp.history !== null) {
     const y = year ?? inp.history.present
     const epoch = inp.history.epochs.find((e) => e.year === y)
     extra.time = {
-      year: y, history: inp.history, dates: inp.dates,
+      year: y, history: streetcarScale === undefined ? inp.history : { ...inp.history, streetcarScale }, dates: inp.dates,
       ...(previous === undefined ? {} : { previous }),
       ...(epoch === undefined ? {} : { title: epoch.title }),
     }
@@ -134,9 +141,11 @@ export const main = async (argv: string[]): Promise<void> => {
       budget: { type: 'string' },
       'no-archive': { type: 'boolean' },
       year: { type: 'string' },
+      'streetcar-scale': { type: 'string' },
       'site-url': { type: 'string' },
     },
   })
+  if (values['streetcar-scale'] !== undefined) streetcarScale = Number(values['streetcar-scale'])
   const [command, name] = positionals
   if (command === undefined || values.help) {
     console.log(HELP)
@@ -151,8 +160,8 @@ export const main = async (argv: string[]): Promise<void> => {
     return
   }
   if (command === 'sources') {
-    // The elevation sources, with their credits and licences, as JSON (the print and shop tools read it).
-    console.log(JSON.stringify(Object.values(DEM_SOURCES).map(({ id, name, coverage, about, credit, licence, link, native }) => ({ id, name, coverage, about, credit, licence, link, native })), null, 1))
+    // The elevation sources, with their credits and licenses, as JSON (the print and shop tools read it).
+    console.log(JSON.stringify(Object.values(DEM_SOURCES).map(({ id, name, coverage, about, credit, license, link, native }) => ({ id, name, coverage, about, credit, license, link, native })), null, 1))
     return
   }
   if (command === 'explorer') {
@@ -203,6 +212,18 @@ export const main = async (argv: string[]): Promise<void> => {
     case 'info': {
       const scene = await loadScene(name, values.palette, values.year === undefined ? undefined : Number(values.year))
       console.log(JSON.stringify({ region: scene.region.name, bearing: Number(scene.view.bearing.toFixed(2)), ...scene.stats }, null, 2))
+      return
+    }
+    case 'locate': {
+      // Where places fall in the built picture: lon,lat pairs → SVG coordinates on the ground.
+      const scene = await loadScene(name, values.palette, values.year === undefined ? undefined : Number(values.year))
+      const out = positionals.slice(2).map((arg) => {
+        const [lon, lat] = arg.split(',').map(Number)
+        const p = scene.view.toView(lon, lat)
+        const [x, y] = scene.view.toScreen(p, scene.terrain.z(p))
+        return { lon, lat, x: Number(x.toFixed(1)), y: Number(y.toFixed(1)) }
+      })
+      console.log(JSON.stringify(out, null, 1))
       return
     }
     case 'build': {

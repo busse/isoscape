@@ -33,7 +33,7 @@ const num = (tenths: number): string => {
 const pair = (a: string, b: string) => (b.startsWith('-') || (b.startsWith('.') && a.includes('.')) ? a + b : `${a} ${b}`)
 
 /**
- * Drop points that lie within `tol` pixels of the line through their neighbours. Draped edges
+ * Drop points that lie within `tol` pixels of the line through their neighbors. Draped edges
  * carry a point per grid node; on screen most of them are straight.
  */
 const simplify = (pts: readonly Vec2[], tol: number): Vec2[] => {
@@ -165,9 +165,9 @@ export const renderSvg = (scene: Scene): Rendered => {
     `.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}.d{fill:none;stroke:${p.ink};stroke-width:${f(p.dotRadius * 2)};stroke-linecap:round}`,
     `.td{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth};stroke-dasharray:1.2 1.8}`,
     sealed('L', p.land), sealed('Lw', p.water),
-    ...Object.entries(p.cover).map(([g, colour]) => sealed(`cv-${g}`, colour)), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
-    sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('plan', p.plan), sealed('burned', p.burned), sealed('canal', p.water), sealed('path', p.path),
-    sealed('road', p.road), sealed('rail', p.rail), sealed('weir', p.foam),
+    ...Object.entries(p.cover).map(([g, color]) => sealed(`cv-${g}`, color)), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
+    sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('plan', p.plan), sealed('grounds', p.grounds), sealed('racetrack', p.racetrack), sealed('burned', p.burned), sealed('canal', p.water), sealed('path', p.path),
+    sealed('road', p.road), sealed('rail', p.rail), sealed('tram', p.tram), sealed('weir', p.foam),
     `.ties{fill:none;stroke:${p.railTie};stroke-width:${p.groundLineWidth * 2};stroke-dasharray:1 2.2}`,
     `.crest{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:.6}`,
     `.cm{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:${p.contourMinor}}`,
@@ -234,12 +234,14 @@ export const renderSvg = (scene: Scene): Rendered => {
     ribbonLayer('canal'),
     ribbonLayer('weir'),
     ribbonLayer('path'),
+    ribbonLayer('racetrack'),
     ribbonLayer('road'),
     ribbonLayer('rail'),
+    ribbonLayer('tram'),
   ]
   const lineLayer = (kind: string, cls: string) => ({
     cls,
-    segs: scene.ribbons.filter((rb) => rb.kind === kind).flatMap((rb) => rb.centre),
+    segs: scene.ribbons.filter((rb) => rb.kind === kind).flatMap((rb) => rb.center),
   })
   const lineLayers = [lineLayer('rail', 'ties'), lineLayer('weir', 'crest')]
 
@@ -269,9 +271,9 @@ export const renderSvg = (scene: Scene): Rendered => {
   const nodeX = (i: number) => Math.min(fr.maxX, Math.max(fr.minX, T.x0 + i * c))
   const iMin = Math.round((fr.minX - T.x0) / c)
   const iMax = Math.ceil((fr.maxX - T.x0) / c)
-  // Light from the left and a little towards the camera, so the slopes we look at are lit and
+  // Light from the left and a little toward the camera, so the slopes we look at are lit and
   // the backs of hills fall into shade.
-  const light = normalise([-0.85, -0.35, 1.0])
+  const light = normalize([-0.85, -0.35, 1.0])
   const wetCorners = (i: number, j: number) =>
     T.water[j * T.nx + i] + T.water[j * T.nx + i + 1] + T.water[(j + 1) * T.nx + i] + T.water[(j + 1) * T.nx + i + 1]
   /**
@@ -330,7 +332,7 @@ export const renderSvg = (scene: Scene): Rendered => {
       if (field.some((v) => v >= 0.5)) coverFields.set(g, field)
     }
   }
-  /** The part of cell (i, j) where `field` is at least one half, as a polygon in view metres. */
+  /** The part of cell (i, j) where `field` is at least one half, as a polygon in view meters. */
   const traceCell = (field: Float32Array, i: number, j: number, yLo: number, yHi: number): Vec2[] | null => {
     const xa = nodeX(i)
     const xb = nodeX(i + 1)
@@ -354,7 +356,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   }
 
   const paintStrip = (s: Strip) => {
-    // Strips overlap their neighbours so no background shows between them, and no two edges
+    // Strips overlap their neighbors so no background shows between them, and no two edges
     // may coincide: where two anti-aliased edges land on the same pixel row, a browser
     // scaling the image down shows a faint stripe. So the bare ground reaches a little past the
     // far edge, everything on it reaches further, and everything but the ground reaches past
@@ -370,14 +372,14 @@ export const renderSvg = (scene: Scene): Rendered => {
     const rowLap = c * 0.3
     // The bases stop short of the far edge, in ground the strip before has already lapped
     // over; what is drawn on them still reaches the edge. Their edges then never meet over
-    // a different colour, which is what shows as a hairline.
+    // a different color, which is what shows as a hairline.
     const baseInset = s.n1 < fr.maxY ? Math.min(lapNear * 0.4, c * 0.25) : 0
     const groundFar = 0
     const band: Rect = { minX: fr.minX, maxX: fr.maxX, minY: s.n0 - lapNear, maxY: s.n1 + lapFar }
     const parts: string[] = []
-    // The strip's base: its own surface, cell row by cell row, coloured water where the grid
+    // The strip's base: its own surface, cell row by cell row, colored water where the grid
     // is water and land elsewhere. It hides what lies behind a rise, and because it already
-    // matches what is drawn on it, no seam can leak a wrong colour through.
+    // matches what is drawn on it, no seam can leak a wrong color through.
     let landBase = ''
     let waterBase = ''
     for (let j = s.j0; j < s.j1; j++) {
@@ -438,7 +440,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     }
     if (waterBase) parts.push(`<path class="Lw" d="${waterBase}"/>`)
     // With terrain, the water's edge comes from the lidar-corrected water grid, not from OSM's
-    // outline: the two disagree by metres, and on a steep bank metres become cliffs.
+    // outline: the two disagree by meters, and on a steep bank meters become cliffs.
     if (!T.flat) {
       let shore = ''
       for (let j = s.j0; j < s.j1; j++) {
@@ -611,7 +613,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   return { svg: out.join('\n'), viewBox: vb, stats }
 }
 
-const normalise = (v: [number, number, number]): [number, number, number] => {
+const normalize = (v: [number, number, number]): [number, number, number] => {
   const l = Math.hypot(...v)
   return [v[0] / l, v[1] / l, v[2] / l]
 }

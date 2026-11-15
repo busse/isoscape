@@ -3,7 +3,7 @@
  *
  * The heights come from one of several sources (`dem-sources.ts`), chosen by the region's
  * `terrain.source`: USGS 3DEP in the US (the default), or a national or global model
- * elsewhere. Whatever the source, the result is the same: a grid of metres above sea level on
+ * elsewhere. Whatever the source, the result is the same: a grid of meters above sea level on
  * the region's lon/lat box, stored compactly as gzipped int16 steps above the grid's minimum,
  * with a one-line JSON header. Nothing after the fetch knows which source it was.
  *
@@ -30,14 +30,14 @@ export interface Dem {
   readonly north: number
   readonly width: number
   readonly height: number
-  /** Row-major, row 0 at the north edge; metres; NaN where there is no data. */
+  /** Row-major, row 0 at the north edge; meters; NaN where there is no data. */
   readonly data: Float32Array
 }
 
-const SIZE = (b: Bounds, metresPerPixel: number) => {
+const SIZE = (b: Bounds, metersPerPixel: number) => {
   const wm = (b.east - b.west) * 111_320 * Math.cos((((b.north + b.south) / 2) * Math.PI) / 180)
   const hm = (b.north - b.south) * 110_574
-  return { width: Math.round(wm / metresPerPixel), height: Math.round(hm / metresPerPixel) }
+  return { width: Math.round(wm / metersPerPixel), height: Math.round(hm / metersPerPixel) }
 }
 
 /** Kept for callers that only want the 3DEP URL. */
@@ -217,7 +217,7 @@ export const encodeDem = (d: Dem, source?: string): Buffer => {
   let hi = -Infinity
   for (const v of d.data) if (!Number.isNaN(v)) { if (v < lo) lo = v; if (v > hi) hi = v }
   if (!Number.isFinite(lo)) { lo = 0; hi = 0 }
-  // Centimetres while the relief fits in int16 (327 m); coarser steps beyond, so a canyon or a
+  // Centimeters while the relief fits in int16 (327 m); coarser steps beyond, so a canyon or a
   // mountain is never clipped flat at 327 m above its lowest point.
   const scale = Math.max(0.01, Math.ceil(((hi - lo) / 32767) * 100) / 100)
   const q = new Int16Array(d.data.length)
@@ -252,7 +252,7 @@ export const loadDem = async (path: string): Promise<Dem | null> => {
 /**
  * Mark implausible samples as missing. 3DEP occasionally carries a void patch filled with a
  * large negative value (one patch near Shockoe Bottom reads −88 m); left in, it would drag
- * the datum down and lift the whole scene. Missing samples are filled from their neighbours
+ * the datum down and lift the whole scene. Missing samples are filled from their neighbors
  * when the terrain is built.
  */
 export const cleanDem = (d: Dem, floor = -5, grow = 3): number => {

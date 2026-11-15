@@ -1,0 +1,45 @@
+{
+  "title": "Richmond's streetcars",
+  "center": [
+    -77.4705,
+    37.5605
+  ],
+  "width": 13600,
+  "depth": 12400,
+  "bearing": 0,
+  "snap": false,
+  "scale": 0.44,
+  "squash": 0.65,
+  "exaggeration": 1.0,
+  "slab": 40,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+    {
+      "match": "Mayo",
+      "deck": 6
+    },
+    {
+      "match": "Boulevard Bridge",
+      "deck": 20
+    }
+  ],
+  "minBuildingArea": 20,
+  "dots": "none",
+  "fetchTile": 3000,
+  "terrain": {
+    "exaggeration": 3.0,
+    "cell": 12,
+    "contour": 0,
+    "majorEvery": 5,
+    "rapids": 0.035,
+    "demResolution": 5
+  },
+  "time": {
+    "history": "history/richmond-streetcars.json",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  }
+}

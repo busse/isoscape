@@ -22,7 +22,7 @@ import { localMetres } from './region.ts'
 import { makeTerrain, rasterize, settleWater, stillWater, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
-import { alive, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
+import { alive, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
 export interface TimeContext {
@@ -38,11 +38,11 @@ export interface Shape {
   readonly pts: readonly Vec2[]
   readonly fill: string
   readonly ink?: boolean
-  /** Dashed centre line, for track on a bridge. */
+  /** Dashed center line, for track on a bridge. */
   readonly dash?: boolean
   /** Draw as an open polyline instead of a filled polygon. */
   readonly line?: boolean
-  /** Stroke in its own fill colour, to close hairline seams between abutting pieces. */
+  /** Stroke in its own fill color, to close hairline seams between abutting pieces. */
   readonly seal?: boolean
   /** Dots painted with this shape, so whatever paints later can cover them. */
   readonly dots?: readonly Vec2[]
@@ -51,7 +51,7 @@ export interface Shape {
 export interface Item {
   readonly id: string
   readonly kind: 'building' | 'bridge'
-  /** Convex hull of the footprint, view metres. */
+  /** Convex hull of the footprint, view meters. */
   readonly hull: Ring
   readonly zMin: number
   readonly zMax: number
@@ -64,16 +64,16 @@ export interface Item {
 
 export interface GroundPolygon {
   readonly kind: GroundKind
-  /** View-metre rings, already clipped to the frame. Even-odd fill. */
+  /** View-meter rings, already clipped to the frame. Even-odd fill. */
   readonly rings: Ring[]
 }
 
 export interface Ribbon {
-  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir'
-  /** View-metre quads, draped over the terrain when drawn. */
+  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir' | 'tram' | 'racetrack'
+  /** View-meter quads, draped over the terrain when drawn. */
   readonly quads: Vec2[][]
-  /** View-metre centre segments, for rail ties and weir crests. */
-  readonly centre: Vec2[][]
+  /** View-meter center segments, for rail ties and weir crests. */
+  readonly center: Vec2[][]
 }
 
 export interface Scene {
@@ -116,10 +116,17 @@ export const buildScene = (
   const time = extra.time
   const curated = time === undefined ? [] : time.history.features.filter((h) => alive(h.from, h.to, time.year))
   if (time !== undefined) features = asOf(features, time)
+  let unbuiltStreets = 0
+  if (time !== undefined && time.history.streetsNearBuildings !== undefined) {
+    const traced = time.history.traced.filter((b) => alive(b.from, b.to, time.year)).map((b) => b.ring[0])
+    const r = dropUnbuiltStreets(features, time.history.streetsNearBuildings, traced)
+    features = r.kept
+    unbuiltStreets = r.dropped
+  }
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)
   const frame = view.frame
-  const stats: Record<string, number> = { features: features.length }
+  const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}) }
   const opts = region.terrain ?? {}
   const useTerrain = elevation !== null && region.terrain !== undefined && opts.enabled !== false
   const terrain = makeTerrain(view, opts.cell ?? 5, useTerrain ? (opts.exaggeration ?? 2) : 1, useTerrain ? elevation : null)
@@ -157,7 +164,8 @@ export const buildScene = (
     }
   }
   for (const h of curated) {
-    if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan') && h.ring !== undefined) {
+    if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan' || h.kind === 'grounds') && h.ring !== undefined) {
+      // Pleasure grounds that are gone (a fairground, an amusement park) take a tint of their own.
       const rings = curatedRings(h)
       if (rings.length > 0) ground.push({ kind: h.kind, rings })
     }
@@ -195,7 +203,7 @@ export const buildScene = (
   const ribbonOf = (kind: Ribbon['kind'], line: LineFeature, width: number): Ribbon | null => {
     const pts = line.points.map(([lon, lat]) => view.toView(lon, lat))
     const quads: Vec2[][] = []
-    const centre: Vec2[][] = []
+    const center: Vec2[][] = []
     for (let i = 0; i + 1 < pts.length; i++) {
       const seg = clipSegmentToRect(pts[i], pts[i + 1], wide)
       if (seg === null) continue
@@ -203,9 +211,9 @@ export const buildScene = (
       const q = segmentQuad(seg[0], seg[1], width / 2, width / 2)
       if (q === null) continue
       quads.push(q)
-      centre.push([seg[0], seg[1]])
+      center.push([seg[0], seg[1]])
     }
-    return quads.length === 0 ? null : { kind, quads, centre }
+    return quads.length === 0 ? null : { kind, quads, center }
   }
 
   const bridgeLines: LineFeature[] = []
@@ -239,6 +247,25 @@ export const buildScene = (
     const r = ribbonOf('canal', { type: 'line', id: h.id, tags: {}, points: h.line }, h.width ?? 6)
     if (r) ribbons.push(r)
   }
+  // A racecourse or promenade that is gone: a closed loop drawn as a path.
+  for (const h of curated) {
+    if (h.kind !== 'track' || h.line === undefined) continue
+    const r = ribbonOf('racetrack', { type: 'line', id: h.id, tags: {}, points: [...h.line, h.line[0]] }, h.width ?? 12)
+    if (r) ribbons.push(r)
+  }
+  // Streetcar lines: a bold ribbon down the street, wider than the track, so it reads at a
+  // city-wide scale.
+  const tramRuns: { id: string; pts: Vec2[] }[] = []
+  const tramScale = time?.history.streetcarScale ?? 1
+  for (const h of curated) {
+    if (h.kind !== 'streetcar') continue
+    for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
+      const r = ribbonOf('tram', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, (h.width ?? 9) * tramScale)
+      if (r) ribbons.push(r)
+      tramRuns.push({ id: `${h.id}:${k}`, pts: run.map(([lon, lat]) => view.toView(lon, lat)) })
+    }
+  }
+  stats.streetcarLines = curated.filter((h) => h.kind === 'streetcar').length
   stats.ribbons = ribbons.length
 
   // ---- buildings ---------------------------------------------------------------------------
@@ -324,6 +351,44 @@ export const buildScene = (
     else items.push(extrude(view, pal, s.id, outer, inners, base, top, roof, dotsMode, s.tags.name))
   }
   stats.buildings = items.length
+  // Streetcars on their lines: a car every `TRAM_SPACING` meters along each run, 14 m long and
+  // 3.6 m tall (a 1920s double-truck car) but 5.4 m wide, about twice a real car's width so its
+  // pale roof reads against the line, all times the history's `streetcarScale`; set on the
+  // ground and turned with the street. Their spacing is for the picture, not a timetable.
+  let cars = 0
+  for (const run of tramRuns) {
+    let along = TRAM_SPACING / 2
+    let walked = 0
+    for (let i = 0; i + 1 < run.pts.length; i++) {
+      const a = run.pts[i]
+      const b = run.pts[i + 1]
+      const len = Math.hypot(b[0] - a[0], b[1] - a[1])
+      while (along <= walked + len) {
+        const t = (along - walked) / len
+        const c: Vec2 = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]
+        along += TRAM_SPACING
+        if (c[0] < frame.minX + 20 || c[0] > frame.maxX - 20 || c[1] < frame.minY + 20 || c[1] > frame.maxY - 20) continue
+        const ux = (b[0] - a[0]) / len
+        const uy = (b[1] - a[1]) / len
+        const hl = 7 * tramScale
+        const hw = 2.7 * tramScale
+        let ring: Vec2[] = [
+          [c[0] - ux * hl + uy * hw, c[1] - uy * hl - ux * hw],
+          [c[0] + ux * hl + uy * hw, c[1] + uy * hl - ux * hw],
+          [c[0] + ux * hl - uy * hw, c[1] + uy * hl + ux * hw],
+          [c[0] - ux * hl - uy * hw, c[1] - uy * hl + ux * hw],
+        ]
+        if (signedArea(ring) < 0) ring = ring.reverse()
+        const base = terrain.z(c)
+        const carPal = { ...pal, wallLit: pal.tramCar[0], wallShade: pal.tramCar[1] }
+        items.push(extrude(view, carPal, `tram:${run.id}:${cars}`, ring, [], base + 0.4, base + 0.4 + 3.6 * tramScale, pal.tramCar[2], 'none'))
+        cars++
+      }
+      walked += len
+    }
+  }
+  stats.streetcars = cars
+  if (cars > 0 || tramRuns.length > 0) stats.streetcarScale = tramScale
   stats.heightFromTag = heightSources.height
   stats.heightFromModel = heightSources.model
   stats.heightFromLevels = heightSources.levels
@@ -349,7 +414,7 @@ export const buildScene = (
       landmarks++
     }
     stats.landmarks = landmarks
-    // Buildings traced from fire-insurance maps that are gone today, in the maps' colours.
+    // Buildings traced from fire-insurance maps that are gone today, in the maps' colors.
     const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
     for (const b of time.history.traced) {
       if (!alive(b.from, b.to, time.year)) continue
@@ -418,8 +483,8 @@ const segmentQuad = (a: Vec2, b: Vec2, l: number, r: number, extend = 0): Vec2[]
 }
 
 /**
- * A prism: walls on every edge turned towards the camera, painted far to near, then the roof.
- * Rings are view metres; the outer runs counter-clockwise and holes clockwise, so the outward
+ * A prism: walls on every edge turned toward the camera, painted far to near, then the roof.
+ * Rings are view meters; the outer runs counter-clockwise and holes clockwise, so the outward
  * normal of edge a→b is (dy, −dx) on both, pointing away from the solid.
  */
 export const extrude = (
@@ -484,6 +549,8 @@ export const isLatticeTower = (t: Readonly<Record<string, string>>): boolean =>
 export const isShellRoof = (t: Readonly<Record<string, string>>): boolean =>
   t['building:part'] === 'roof' && ['round', 'spherical', 'circular'].includes(t['roof:shape'] ?? '') && t.height === undefined && t['min_height'] === undefined
 export const SHELL_RISE = 1.6
+/** Meters between the streetcars drawn on a line. */
+export const TRAM_SPACING = 900
 
 /**
  * Half-width of a lattice tower at fraction `t` of its height, as a fraction of the base: the
@@ -495,7 +562,7 @@ export const spireProfile = (t: number): number => (t <= 0.84 ? Math.exp(-3.3 * 
 /**
  * A tapering tower: stacked frustums following `spireProfile`, each one's walls then its cap,
  * bottom to top (an upper piece always sits inside and above the one below it). The walls are
- * darkened towards the ink, for iron.
+ * darkened toward the ink, for iron.
  */
 export const spire = (
   view: View, pal: Palette, id: string, outer: Ring, base: number, top: number, dots: 'all' | 'roof' | 'none', name?: string,
@@ -705,7 +772,7 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
     return smooth[k] * (1 - u) + smooth[k + 1] * u
   }
   const items: Item[] = []
-  let travelled = 0
+  let traveled = 0
   let nextPier = spacing / 2
   for (let i = 0; i + 1 < pts.length; i++) {
     const a = pts[i]
@@ -713,8 +780,8 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
     const len = Math.hypot(b[0] - a[0], b[1] - a[1])
     const n = Math.max(1, Math.ceil(len / PIECE))
     for (let k = 0; k < n; k++) {
-      const s0 = travelled + (len * k) / n
-      const s1 = travelled + (len * (k + 1)) / n
+      const s0 = traveled + (len * k) / n
+      const s1 = traveled + (len * (k + 1)) / n
       const p0: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
       const p1: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 1)) / n, a[1] + ((b[1] - a[1]) * (k + 1)) / n]
       if (!insideRect(p0, view.frame) || !insideRect(p1, view.frame)) {
@@ -758,7 +825,7 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
         const hi0 = view.toScreen(u0, zu0)
         const hi1 = view.toScreen(u1, zu1)
         // Filled and sealed, but inked only along its length: a span is one bridge, not a
-        // stack of 22-metre slabs.
+        // stack of 22-meter slabs.
         shapes.push({ pts: [lo0, lo1, hi1, hi0], fill: pal.fascia, seal: true })
         shapes.push({ pts: [lo0, lo1], fill: 'none', line: true })
       }
@@ -782,12 +849,12 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
         ...(t.name === undefined ? {} : { name: t.name }),
       })
     }
-    travelled += len
+    traveled += len
   }
   return items
 }
 
-/** Is this view-metre point on open water (inside water, outside every island)? */
+/** Is this view-meter point on open water (inside water, outside every island)? */
 export const onWater = (scene: Scene, p: Vec2): boolean => {
   let wet = false
   for (const g of scene.ground) {

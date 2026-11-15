@@ -9,20 +9,20 @@ import { resolve } from 'node:path'
 export interface BridgeRule {
   /** Case-insensitive substring of the way's `name` (or `bridge:name`). */
   readonly match: string
-  /** Deck height above the water or ground, in metres. */
+  /** Deck height above the water or ground, in meters. */
   readonly deck: number
-  /** Metres between piers (default 38). Suspension bridges want a long spacing: two towers, not a wall of piers. */
+  /** Meters between piers (default 38). Suspension bridges want a long spacing: two towers, not a wall of piers. */
   readonly pierSpacing?: number
 }
 
 export interface Region {
   readonly name: string
   readonly title: string
-  /** [lon, lat] of the frame's centre. */
+  /** [lon, lat] of the frame's center. */
   readonly center: readonly [number, number]
-  /** Metres across the frame (left to right on screen). */
+  /** Meters across the frame (left to right on screen). */
   readonly width: number
-  /** Metres into the frame (near edge to far edge). */
+  /** Meters into the frame (near edge to far edge). */
   readonly depth: number
   /**
    * Compass direction the camera faces, in degrees: 0 looks north, so north is up the
@@ -35,16 +35,16 @@ export interface Region {
    * Set it to false to keep `bearing` exactly as given.
    */
   readonly snap?: boolean
-  /** Pixels per metre across the frame. */
+  /** Pixels per meter across the frame. */
   readonly scale: number
   /** Ground foreshortening, the sine of the camera's tilt: 0.5 is the classic 2:1 view. */
   readonly squash?: number
   /** Vertical exaggeration on top of the true value for this tilt. */
   readonly exaggeration?: number
-  /** Thickness of the diorama's ground slab, in metres. 0 for none. */
+  /** Thickness of the diorama's ground slab, in meters. 0 for none. */
   readonly slab?: number
   readonly palette?: string
-  /** Default deck height for bridges with no matching rule, metres per OSM `layer`. */
+  /** Default deck height for bridges with no matching rule, meters per OSM `layer`. */
   readonly bridgeDeck?: number
   readonly bridges?: readonly BridgeRule[]
   /**
@@ -54,10 +54,10 @@ export interface Region {
    * Database, where OSM's own land use is thin.
    */
   readonly sources?: { readonly buildings?: readonly ('osm' | 'microsoft')[]; readonly landcover?: 'nlcd' }
-  /** OSM is fetched in tiles no bigger than this, in metres a side. Default 1600; sparse
+  /** OSM is fetched in tiles no bigger than this, in meters a side. Default 1600; sparse
    * rural regions can take much bigger tiles. */
   readonly fetchTile?: number
-  /** Smallest building footprint kept, in square metres. */
+  /** Smallest building footprint kept, in square meters. */
   readonly minBuildingArea?: number
   /** Which vertices get dots: every visible corner, roof corners only, or none. */
   readonly dots?: 'all' | 'roof' | 'none'
@@ -80,9 +80,9 @@ export interface TerrainOptions {
   readonly enabled?: boolean
   /** Vertical exaggeration of the ground (buildings keep their true heights). */
   readonly exaggeration?: number
-  /** Grid spacing in metres for the draped surface, shading and contours. */
+  /** Grid spacing in meters for the draped surface, shading and contours. */
   readonly cell?: number
-  /** Contour interval in metres; 0 for none. */
+  /** Contour interval in meters; 0 for none. */
   readonly contour?: number
   /** Every n-th contour is drawn heavier. */
   readonly majorEvery?: number
@@ -90,7 +90,7 @@ export interface TerrainOptions {
   readonly rapids?: number
   /** Mark rock standing clear of the water. Default true; off for tidal flats and shoals. */
   readonly rocks?: boolean
-  /** Metres per pixel to fetch the elevation at. Default 1 (or the source's native spacing, if coarser); coarser keeps big regions small. */
+  /** Meters per pixel to fetch the elevation at. Default 1 (or the source's native spacing, if coarser); coarser keeps big regions small. */
   readonly demResolution?: number
   /**
    * Where the heights come from (see `dem-sources.ts`): `3dep` (USGS, the US; the default),
@@ -136,7 +136,7 @@ export const fetchBounds = (r: Region): { south: number; west: number; north: nu
   return { south: lat - halfN / M_PER_DEG_LAT, west: lon - halfE / kx, north: lat + halfN / M_PER_DEG_LAT, east: lon + halfE / kx }
 }
 
-/** Local east/north metres about the region centre: equirectangular, fine at city scale. */
+/** Local east/north meters about the region center: equirectangular, fine at city scale. */
 export const localMetres = (r: Region) => {
   const [lon0, lat0] = r.center
   const kx = 111_320 * Math.cos((lat0 * Math.PI) / 180)

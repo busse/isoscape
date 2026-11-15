@@ -1,5 +1,5 @@
 """Snap eyeballed control points: around each corner, slide today's block outlines (a 120 m
-patch) over the sheet's ink by up to `reach` metres, keep the best shift, and refit. A local
+patch) over the sheet's ink by up to `reach` meters, keep the best shift, and refit. A local
 patch is small enough to carry the corner's own shape, so the grid's repetition cannot fool it."""
 import json, sys
 import numpy as np

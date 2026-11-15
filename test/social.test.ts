@@ -87,7 +87,7 @@ test('a build card says where, when and what it holds', () => {
   assert.ok(clip('word '.repeat(100), 50).endsWith('…'))
 })
 
-test('the social crop fills 1.91:1 around the centre, and the SVG is reframed to it', () => {
+test('the social crop fills 1.91:1 around the center, and the SVG is reframed to it', () => {
   const wide = socialCrop([0, 0, 4000, 1000])
   assert.ok(Math.abs(wide[2] / wide[3] - 1200 / 630) < 1e-9)
   assert.equal(wide[3], 1000)

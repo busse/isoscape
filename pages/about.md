@@ -1,10 +1,10 @@
 ---
-title: About, credits and licences
+title: About, credits and licenses
 order: 90
 summary: What isoscape is, whose data it draws, and what to credit when you share a picture.
 ---
 
-# About, credits and licences
+# About, credits and licenses
 
 isoscape makes isometric dot-and-line views of real places from open map data. It is a
 sibling of [dotscene](https://github.com/busse/dotscene). The two share a visual language,
@@ -51,7 +51,7 @@ drawing style are its own, but the idea came from his work.
 **OpenStreetMap.** Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright)
 contributors, available under the [Open Database License
 (ODbL)](https://opendatacommons.org/licenses/odbl/). The cached `data/*/osm.json` files are
-OSM data and carry that licence. A rendered picture is a *produced work*. You may use it, but
+OSM data and carry that license. A rendered picture is a *produced work*. You may use it, but
 it must credit OpenStreetMap wherever it is shown. Every SVG isoscape writes carries the
 credit in its description, and every page shows it.
 
@@ -66,12 +66,12 @@ resampled copy.
 
 **Elevation outside the US.** Each of these allows commercial use, and each asks for a credit:
 
-| Source | Licence | Credit to carry |
+| Source | License | Credit to carry |
 |---|---|---|
 | [IGN RGE ALTI®](https://geoservices.ign.fr/rgealti) (France) | Licence Ouverte 2.0 (Etalab) | RGE ALTI® © IGN |
 | [swisstopo swissALTI3D](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) (Switzerland) | swisstopo free geodata (OGD) terms | swissALTI3D © Federal Office of Topography swisstopo |
 | [GSI elevation tiles](https://maps.gsi.go.jp/development/ichiran.html) (Japan) | GSI content terms (compatible with CC BY 4.0) | GSI elevation tiles, processed (地理院タイル（標高タイル）を加工して作成) |
-| [Copernicus DEM GLO-30](https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM) (worldwide) | Copernicus WorldDEM-30 licence | produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved |
+| [Copernicus DEM GLO-30](https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM) (worldwide) | Copernicus WorldDEM-30 license | produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved |
 | [Terrain Tiles](https://registry.opendata.aws/terrain-tiles/) (worldwide) | each source's own; see [Tilezen's attribution list](https://github.com/tilezen/joerd/blob/master/docs/attribution.md) | Terrain Tiles (Mapzen/Tilezen); SRTM courtesy of the U.S. Geological Survey; ETOPO1 courtesy of NOAA |
 
 `isoscape sources` prints the same list. Every map names its own source in its caption.
@@ -84,7 +84,7 @@ A view that uses them should credit Microsoft as well.
 (NLCD 2021) from the USGS and the Multi-Resolution Land Characteristics Consortium. It is in
 the public domain.
 
-**Fire-insurance maps (dated series).** Sanborn Fire Insurance Maps of Richmond, as digitised
+**Fire-insurance maps (dated series).** Sanborn Fire Insurance Maps of Richmond, as digitized
 by the [Library of Congress](https://www.loc.gov/collections/sanborn-maps/). The editions used
 were published long enough ago to be out of US copyright. Check each item's rights statement
 on the Library's site before reusing the scans. The traced footprints in `history/sanborn/`
@@ -112,5 +112,5 @@ planning or teaching should not be read as a survey.
 ## Code
 
 isoscape is written in TypeScript and runs directly on Node 22.18 or newer, with no runtime
-dependencies and no build step. `package.json` declares the MIT licence. `CLAUDE.md` sets out the conventions for changing the code, and the README covers
+dependencies and no build step. `package.json` declares the MIT license. `CLAUDE.md` sets out the conventions for changing the code, and the README covers
 commands, region configs and adding a page like this one.

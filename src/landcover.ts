@@ -3,7 +3,7 @@
  *
  * OSM maps woods and fields patchily, and in rural places hardly at all; NLCD classifies every
  * 30 m of the country from satellite imagery. It is read through the MRLC's WMS as a palette
- * PNG, and each colour is matched back to its class by the published legend. Stored as gzipped
+ * PNG, and each color is matched back to its class by the published legend. Stored as gzipped
  * class codes with a one-line JSON header.
  */
 
@@ -17,7 +17,7 @@ import { fetchBounds, type Region } from './region.ts'
 
 const run = promisify(execFile)
 
-/** NLCD classes and their legend colours. */
+/** NLCD classes and their legend colors. */
 export const NLCD: Readonly<Record<number, { name: string; rgb: [number, number, number] }>> = {
   11: { name: 'open water', rgb: [70, 107, 159] },
   12: { name: 'perennial ice/snow', rgb: [209, 222, 248] },
@@ -66,7 +66,7 @@ const nearestClass = ([r, g, b]: readonly [number, number, number]): number => {
     const d = (rgb[0] - r) ** 2 + (rgb[1] - g) ** 2 + (rgb[2] - b) ** 2
     if (d < bestD) { bestD = d; best = Number(code) }
   }
-  // Anything far from every legend colour (a no-data fill) is unknown.
+  // Anything far from every legend color (a no-data fill) is unknown.
   return bestD > 40 * 40 ? 0 : best
 }
 

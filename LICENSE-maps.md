@@ -1,4 +1,4 @@
-# Licences for maps and data
+# Licenses for maps and data
 
 **Code.** The isoscape code is MIT-licensed (see `LICENSE`). Use it for anything.
 
@@ -14,10 +14,10 @@ and adapt them with credit, but not for sale. Prints of them are in the holiday 
 **Data.**
 - Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, under the
   [Open Database License](https://opendatacommons.org/licenses/odbl/). The cached `data/*/osm.json`
-  files are OSM data and carry that licence. A rendered map is a produced work: credit OSM.
+  files are OSM data and carry that license. A rendered map is a produced work: credit OSM.
 - Elevation: [USGS 3D Elevation Program](https://www.usgs.gov/3d-elevation-program), public domain.
   Outside the US: IGN RGE ALTI® (Licence Ouverte 2.0), swisstopo swissALTI3D (OGD terms), GSI
-  elevation tiles (GSI content terms), Copernicus DEM GLO-30 (Copernicus WorldDEM-30 licence) and
+  elevation tiles (GSI content terms), Copernicus DEM GLO-30 (Copernicus WorldDEM-30 license) and
   Terrain Tiles (per source). All allow commercial use with credit; the exact credits are in
   [About](pages/about.md) and `isoscape sources`.
 - Land cover: [NLCD](https://www.mrlc.gov/), public domain. Building footprints where OSM has few:

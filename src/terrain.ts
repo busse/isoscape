@@ -1,10 +1,10 @@
 /**
- * The ground as a height field, resampled onto a regular grid in view metres.
+ * The ground as a height field, resampled onto a regular grid in view meters.
  *
- * Two heights live here. *Elevation* is metres above sea level, straight from the DEM: it is
+ * Two heights live here. *Elevation* is meters above sea level, straight from the DEM: it is
  * what contours are drawn at and what slopes are measured in. *Scene z* is elevation above the
  * frame's lowest point, times the terrain exaggeration: it is what gets drawn. Buildings and
- * bridge clearances add true metres on top of scene z, so a hill can be exaggerated without
+ * bridge clearances add true meters on top of scene z, so a hill can be exaggerated without
  * stretching the towers on it.
  */
 
@@ -17,7 +17,7 @@ export interface Terrain {
   readonly ny: number
   readonly x0: number
   readonly y0: number
-  /** Elevation in metres at grid nodes, row-major from the near edge (row 0 = frame.minY). */
+  /** Elevation in meters at grid nodes, row-major from the near edge (row 0 = frame.minY). */
   readonly elev: Float32Array
   /** 1 where a node is on open water. */
   readonly water: Uint8Array
@@ -34,9 +34,9 @@ export interface Terrain {
   readonly datum: number
   readonly exaggeration: number
   readonly flat: boolean
-  /** Scene z at a view-metre point. */
+  /** Scene z at a view-meter point. */
   readonly z: (p: Vec2) => number
-  /** Elevation in metres at a view-metre point. */
+  /** Elevation in meters at a view-meter point. */
   readonly elevation: (p: Vec2) => number
 }
 
@@ -115,7 +115,7 @@ export const makeTerrain = (
   }
 }
 
-/** Replace missing samples by the mean of their present neighbours, repeatedly. */
+/** Replace missing samples by the mean of their present neighbors, repeatedly. */
 const fillGaps = (a: Float32Array, nx: number, ny: number): void => {
   for (let pass = 0; pass < 256; pass++) {
     let missing = 0
@@ -195,7 +195,7 @@ export const dampCell = (t: Terrain, i: number, j: number): boolean =>
   t.water[j * t.nx + i] === 1 || t.water[j * t.nx + i + 1] === 1 ||
   t.water[(j + 1) * t.nx + i] === 1 || t.water[(j + 1) * t.nx + i + 1] === 1
 
-/** Gradient of true elevation over a cell, metres per metre, pointing uphill. */
+/** Gradient of true elevation over a cell, meters per meter, pointing uphill. */
 export const cellGradient = (t: Terrain, i: number, j: number): Vec2 => {
   const at = (ii: number, jj: number) => t.elev[jj * t.nx + ii]
   const a = at(i, j)
@@ -214,7 +214,7 @@ export interface ContourSegment {
 }
 
 /**
- * Marching squares over true elevation, every `interval` metres, skipping cells that touch
+ * Marching squares over true elevation, every `interval` meters, skipping cells that touch
  * water (a hydro-flattened river has no meaningful contours; its drops are drawn as rapids).
  */
 export const contours = (t: Terrain, interval: number, majorEvery: number): ContourSegment[] => {
@@ -288,7 +288,7 @@ const blur = (a: Float32Array, nx: number, ny: number, passes: number, mask?: Ui
  *
  * Elevation over mapped water is not the water: lidar returns from rocks, ledges and the edges
  * of banks the polygon overlaps all stand above it. The surface at a node is taken as a low
- * percentile of the water nodes within `radius` metres, then smoothed along the water. Nodes
+ * percentile of the water nodes within `radius` meters, then smoothed along the water. Nodes
  * standing more than `rockHeight` above that surface are rock. The water nodes' elevation is
  * replaced by the surface, so the river drapes as water — level across, falling along its
  * course, steeply only where it really drops.
@@ -320,7 +320,7 @@ export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0, markRocks
   }
   blur(surface, nx, ny, 4, water)
   // Interior: water two cells from any shore. A mapped outline rarely matches the lidar to
-  // the metre, so near the edge "rock" and "falls" are mostly the bank.
+  // the meter, so near the edge "rock" and "falls" are mostly the bank.
   const margin = 2
   const markInterior = () => {
     t.interior.fill(0)
@@ -376,7 +376,7 @@ export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0, markRocks
 }
 
 /**
- * How fast the river's surface falls at a water node, measured across `span` metres so that one
+ * How fast the river's surface falls at a water node, measured across `span` meters so that one
  * noisy node cannot fake a rapid, with the direction it falls in (unit vector, downhill).
  */
 export const riverFall = (t: Terrain, i: number, j: number, span = 20): { slope: number; down: Vec2 } | null => {

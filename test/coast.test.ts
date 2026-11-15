@@ -7,7 +7,7 @@ const rect = { minX: 0, minY: 0, maxX: 100, maxY: 100 }
 const area = (rings: Vec2[][]) => rings.reduce((a, r) => a + signedArea(r), 0)
 
 test('a coast running east across the frame leaves land to the north', () => {
-  // Travelling east, the land is on the left: north.
+  // Traveling east, the land is on the left: north.
   const { land } = landFromCoast([[[-10, 40], [50, 45], [110, 40]]], rect)
   assert.equal(land.length, 1)
   const a = signedArea(land[0])

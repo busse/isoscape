@@ -5,7 +5,7 @@
 
 import type { Tags } from './osm.ts'
 
-export type GroundKind = 'water' | 'island' | 'green' | 'wood' | 'marsh' | 'sand' | 'rock' | 'parking' | 'cemetery' | 'plan' | 'burned'
+export type GroundKind = 'water' | 'island' | 'green' | 'wood' | 'marsh' | 'sand' | 'rock' | 'parking' | 'cemetery' | 'plan' | 'grounds' | 'burned'
 
 export const groundKind = (t: Tags): GroundKind | null => {
   if (t.building !== undefined || t['building:part'] !== undefined) return null
@@ -28,9 +28,9 @@ export const groundKind = (t: Tags): GroundKind | null => {
 }
 
 /** Paint order of the ground layers, bottom first. Water and islands are handled apart. */
-export const GROUND_ORDER: readonly GroundKind[] = ['green', 'cemetery', 'marsh', 'wood', 'sand', 'rock', 'parking', 'plan', 'burned']
+export const GROUND_ORDER: readonly GroundKind[] = ['green', 'cemetery', 'marsh', 'wood', 'sand', 'rock', 'parking', 'plan', 'grounds', 'burned']
 
-/** Carriageway widths in metres. Missing means "do not draw". */
+/** Carriageway widths in meters. Missing means "do not draw". */
 const ROAD_WIDTH: Readonly<Record<string, number>> = {
   motorway: 14, trunk: 12, primary: 11, secondary: 10, tertiary: 8.5,
   motorway_link: 7, trunk_link: 7, primary_link: 7, secondary_link: 6.5, tertiary_link: 6,
@@ -65,7 +65,7 @@ export const waterwayWidth = (t: Tags): number | null => {
 
 export const isBridge = (t: Tags): boolean => t.bridge !== undefined && t.bridge !== 'no'
 
-/** "12", "12 m", "40'", "40 ft", "12.5m" → metres. */
+/** "12", "12 m", "40'", "40 ft", "12.5m" → meters. */
 export const parseLength = (v: string | undefined): number | null => {
   if (v === undefined) return null
   const s = v.trim().toLowerCase()
@@ -102,7 +102,7 @@ const finite = (v: string | undefined): number | null => {
 }
 
 /**
- * Height and base of a building, in metres. OSM's own `height` wins, then levels; failing
+ * Height and base of a building, in meters. OSM's own `height` wins, then levels; failing
  * both, a guess from the building's type and footprint, which is what most of a city will be
  * until lidar heights are joined in.
  */
