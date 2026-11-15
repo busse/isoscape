@@ -275,6 +275,7 @@ def save(img, out_dir, name, dpi):
 
 
 SITE = 'https://busse.github.io/isoscape/'
+SHOP = 'https://chrisbusse.com/collections/richmond-streetcars-1925'
 BUILD = f'{REGION}:{YEAR}'
 
 
@@ -288,7 +289,8 @@ def write_page(pts):
            'stood in 1925: sixteen car lines over the buildings then standing, with fourteen places the cars',
            'ran to framed around it, from the suburbs they made to the trolley parks at the ends of the line.', '',
            '![The 1925 map, framed by its fourteen stops](streetcars-menu.jpg)', '',
-           f'[Open the map]({SITE}#{BUILD}) to pan and zoom, or jump to a stop below.', '', '## The stops', '']
+           f'[Open the map]({SITE}#{BUILD}) to pan and zoom, or jump to a stop below. Prints of the whole set, the map',
+           f'alone and each stop are in the [shop]({SHOP}).', '', '## The stops', '']
     for s in stops():
         x, y = pts[s['id']]
         out += [f"### {s['n']}. {s['title']}", '', f"*{s['line']}*", '', s['note'], '',

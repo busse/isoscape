@@ -14,7 +14,8 @@ ran to framed around it, from the suburbs they made to the trolley parks at the 
 
 ![The 1925 map, framed by its fourteen stops](streetcars-menu.jpg)
 
-[Open the map](https://busse.github.io/isoscape/#richmond-streetcars:1925) to pan and zoom, or jump to a stop below.
+[Open the map](https://busse.github.io/isoscape/#richmond-streetcars:1925) to pan and zoom, or jump to a stop below. Prints of the whole set, the map
+alone and each stop are in the [shop](https://chrisbusse.com/collections/richmond-streetcars-1925).
 
 ## The stops
 
