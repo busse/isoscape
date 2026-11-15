@@ -389,7 +389,7 @@ history = {
     ],
     # Buildings on the 1924–25 Sanborn sheets (vol. 4, sheets 405–407 and 460) that are gone
     # today, traced by tools/sanborn (corners in cps1925v4.json); taken to stand until the 1950s.
-    'sanborn': {'lost': 'history/sanborn/broad-street-lost.geojson', 'editions': [1925],
+    'sanborn': {'lost': ['history/sanborn/broad-street-lost.geojson', 'history/sanborn/fair-grounds.geojson'], 'editions': [1925],
                 'source': 'https://www.loc.gov/item/sanborn09064_009/'},
     'streetsNearBuildings': 60,
     'streetcarScale': 1,
@@ -417,6 +417,6 @@ labels = [{
 } for k, (at, anchor, name, caption) in enumerate(LABELS)]
 lines = {**history, 'title': 'The lines from Broad Street Station, 1943', 'features': features + labels, 'railScale': 4,
          'epochs': [{'year': 1943, 'title': 'The lines from Broad Street Station', 'note': history['epochs'][0]['note']}],
-         'sanborn': {**history['sanborn'], 'lost': ['history/sanborn/lost.geojson', history['sanborn']['lost']], 'editions': [1925]}}
+         'sanborn': {**history['sanborn'], 'lost': ['history/sanborn/lost.geojson', *history['sanborn']['lost']], 'editions': [1925]}}
 (ROOT / 'history' / 'broad-street-lines.json').write_text(json.dumps(lines, indent=1, ensure_ascii=False) + '\n')
 print(f'{OUT.relative_to(ROOT)}: {len(features)} features; loop {total:.0f} m, straight {L_END - L_START:.0f} m')
