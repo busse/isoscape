@@ -338,7 +338,7 @@ body.reading main { grid-template-rows: 1fr; }
   <div id="pages"></div>
   <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false">
   <div id="list"></div>
-  <footer><span class="keys">Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare · <kbd>L</kbd> copy link<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back<br><kbd>[</kbd><kbd>]</kbd> step through a dated series<br></span>By Chris Busse · <a href="#/about/contact">Contact</a></footer>
+  <footer><span class="keys">Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare · <kbd>L</kbd> copy link<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back<br><kbd>[</kbd><kbd>]</kbd> step through a dated series<br></span>By Chris Busse · <a href="#/about/contact">Contact</a> · <a href="#/changes">Changes</a></footer>
 </nav>
 <div id="scrim"></div>
 <main>
