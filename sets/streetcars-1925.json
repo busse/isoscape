@@ -76,6 +76,7 @@
   },
   "box_title": "{title}, Richmond Streetcars 1925",
   "box_line": "{subtitle}. Stop {n} of fourteen on Richmond's Streetcars, 1925.",
-  "credit_extra": "Routes after Harland Bartholomew &amp; Associates for the City Planning Commission, plate 53 (1943), with the sources cited for each stop on the <a href=\"https://busse.github.io/isoscape/#/streetcars\">streetcars page ↗</a>."
+  "credit_extra": "Routes after Harland Bartholomew &amp; Associates for the City Planning Commission, plate 53 (1943), with the sources cited for each stop on the <a href=\"https://busse.github.io/isoscape/#/streetcars\">streetcars page ↗</a>.",
+  "print_dir": "print-files/streetcars"
  }
 }
