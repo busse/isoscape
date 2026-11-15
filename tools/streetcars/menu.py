@@ -37,6 +37,10 @@ CREDIT = ('isoscape by Chris Busse  ·  Map data © OpenStreetMap contributors (
           'Lines from the 1925 transit plate of the City Planning Commission (Harland Bartholomew & Associates, 1943)')
 TITLE = "Richmond's Streetcars, 1925"
 SUBTITLE = 'The city the trolley built: sixteen car lines and the places they served'
+NOTE = ("Lines are placed on today's streets from the 1925 plate and the sources cited for each; some ends are "
+        'approximate. Buildings are those standing by 1925. Lines and cars are drawn three times life size.')
+MAP_TOP_SHARE = 0.55        # when the map is cut to fit, the share of the cut taken from the top
+BOX_ASPECT = 1.6
 
 
 def font(kind, px):
@@ -154,56 +158,46 @@ def compose_menu(dpi):
     # Clockwise from the top left: five along the top, two down the right, five back along the
     # bottom, two up the left.
     order = [(c, 0) for c in range(5)] + [(4, 1), (4, 2)] + [(c, 3) for c in range(4, -1, -1)] + [(0, 2), (0, 1)]
-    img_h = cw * 9 / 16
+    img_h = cw / BOX_ASPECT
     for s, (c, r) in zip(sorted(S, key=lambda s: s['n']), order):
         x, y = cell(c, r)
-        box = M.crop(pts[s['id']], BOX_GROUND, 16 / 9, (round(cw), round(img_h)))
+        box = M.crop(pts[s['id']], BOX_GROUND, BOX_ASPECT, (round(cw), round(img_h)))
         img.paste(box, (round(x), round(y)))
         d.rectangle((x, y, x + cw, y + img_h), outline=INK, width=max(1, dpi // 60))
         text_block(d, s, x, y + img_h + 0.14 * dpi, cw, ch - img_h - 0.14 * dpi, dpi)
-    # The map: the middle three columns by two rows, letterboxed, with a key of the lines beside.
+    # The map fills the middle three columns by two rows: cut to that shape, keeping the lines.
     mx, my = cell(1, 1)
     mw, mh = 3 * cw + 2 * g, 2 * ch + g
     x0, y0, x1, y1 = M.content
-    aspect = (x1 - x0) / (y1 - y0)
-    key_w = 2.9 * dpi
-    fw = min(mw - key_w - g, mh * aspect)
-    fh = fw / aspect
-    fx, fy = mx + key_w + g + (mw - key_w - g - fw) / 2, my + (mh - fh) / 2
-    big = M.img.crop((x0, y0, x1, y1)).resize((round(fw), round(fh)), Image.LANCZOS)
-    img.paste(big, (round(fx), round(fy)))
-    sc = fw / (x1 - x0)
+    want = mw / mh
+    if (x1 - x0) / (y1 - y0) < want:
+        keep = (x1 - x0) / want
+        y0 = y0 + (y1 - y0 - keep) * MAP_TOP_SHARE
+        y1 = y0 + keep
+    big = M.img.crop((round(x0), round(y0), round(x1), round(y1))).resize((round(mw), round(mh)), Image.LANCZOS)
+    img.paste(big, (round(mx), round(my)))
+    sc = mw / (x1 - x0)
     for s in S:
         px, py = M.px(*pts[s['id']])
-        marker(d, fx + (px - x0) * sc, fy + (py - y0) * sc, s['n'], 0.14 * dpi)
-    draw_key(d, mx, my, key_w, mh, dpi)
-    # Credit.
+        marker(d, mx + (px - x0) * sc, my + (py - y0) * sc, s['n'], 0.15 * dpi)
+    draw_key(d, W - m - 23.5 * dpi, m + 0.05 * dpi, 23.5 * dpi, dpi)
+    # Credit, after a word on what is approximate.
     cf = font('regular', 0.105 * dpi)
-    cy = H - m - foot + 0.2 * dpi
-    for ln in wrap(d, CREDIT, cf, W - 2 * m):
+    cy = H - m - foot + 0.12 * dpi
+    for ln in wrap(d, NOTE + '  ' + CREDIT, cf, W - 2 * m):
         d.text((m, cy), ln, font=cf, fill=DIM); cy += cf.size * 1.4
     return img
 
 
-def draw_key(d, x, y, w, h, dpi):
+def draw_key(d, x, y, w, dpi):
+    """The sixteen lines, four columns of four, in the title band."""
     routes = json.load(open(os.path.join(HERE, 'routes.json')))['routes']
-    hf = font('bold', 0.2 * dpi)
-    d.text((x, y), 'The lines in 1925', font=hf, fill=INK)
-    nf, rf = font('regular', 0.125 * dpi), font('italic', 0.105 * dpi)
-    yy = y + 0.42 * dpi
-    for r in routes:
-        d.line((x, yy + 0.09 * dpi, x + 0.3 * dpi, yy + 0.09 * dpi), fill=TRAM, width=max(2, round(0.06 * dpi)))
-        d.text((x + 0.42 * dpi, yy), r['name'], font=nf, fill=INK)
-        yy += nf.size * 1.25
-        for ln in wrap(d, r['route'], rf, w - 0.42 * dpi)[:2]:
-            d.text((x + 0.42 * dpi, yy), ln, font=rf, fill=DIM); yy += rf.size * 1.3
-        yy += 0.07 * dpi
-        if yy > y + h - 0.6 * dpi: break
-    note = ('Lines are placed on today\'s streets from the 1925 plate and the sources cited for each; '
-            'some ends are approximate. Buildings are those standing by 1925. Cars and lines are drawn three times life size.')
-    yy = max(yy + 0.1 * dpi, y + h - 1.1 * dpi)
-    for ln in wrap(d, note, rf, w):
-        d.text((x, yy), ln, font=rf, fill=DIM); yy += rf.size * 1.35
+    nf = font('regular', 0.15 * dpi)
+    col = w / 4
+    for i, r in enumerate(routes):
+        cx, cy = x + (i // 4) * col, y + (i % 4) * 0.3 * dpi
+        d.line((cx, cy + 0.1 * dpi, cx + 0.32 * dpi, cy + 0.1 * dpi), fill=TRAM, width=max(2, round(0.07 * dpi)))
+        d.text((cx + 0.45 * dpi, cy), r['name'], font=nf, fill=INK)
 
 
 def compose_map(dpi):
