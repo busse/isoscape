@@ -1,0 +1,350 @@
+{
+ "design": "broad-street-1943-map",
+ "title": "Broad Street Station, 1943: The Railroad Map",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:38+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> broad-street-1943-map --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/broad-street-1943-map/v1.json",
+  "base_kind": "set",
+  "block": {
+   "collection": "Buildings in their time",
+   "set": "Broad Street Station, 1943",
+   "piece": "The map",
+   "plate": "BSS-M",
+   "version": "2",
+   "drawn": "2026",
+   "location": "37.554° N 77.462° W",
+   "facing": "0°"
+  },
+  "files": {
+   "broad-street-1943-map-v2_36x24.jpg": {
+    "base": "print-files/broad-street-1943/broad-street-1943-map_36x24.jpg",
+    "base_sha256": "9a300cbc099b07929048378fef966a4eb2838894a973afdb4888164123534ed3",
+    "at": {
+     "x": 8886,
+     "y": 6736,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   },
+   "broad-street-1943-map-v2_canvas-18x12.jpg": {
+    "base": "print-files/broad-street-1943/canvas/broad-street-1943-map_canvas-18x12.jpg",
+    "base_sha256": "772c7fdba0a33efc0fd8713074cf94b99e97cbdd0d3e9b47a214ed3a232a2a18",
+    "at": {
+     "x": 4543,
+     "y": 3766,
+     "w": 1195,
+     "h": 169,
+     "u": 0.9192,
+     "where": "foot"
+    }
+   },
+   "broad-street-1943-map-v2_canvas-30x20.jpg": {
+    "base": "print-files/broad-street-1943/canvas/broad-street-1943-map_canvas-30x20.jpg",
+    "base_sha256": "ae450e8ab087108284f9977f7aa7d7cc5d25f86ebd634510023a8ce5710de2fd",
+    "at": {
+     "x": 7723,
+     "y": 6046,
+     "w": 1543,
+     "h": 218,
+     "u": 1.1867,
+     "where": "foot"
+    }
+   },
+   "broad-street-1943-map-v2_canvas-36x24.jpg": {
+    "base": "print-files/broad-street-1943/canvas/broad-street-1943-map_canvas-36x24.jpg",
+    "base_sha256": "a546ce17fe9898c32da2359698e43b1170589867ae9cf852eb307a1ffe22c204",
+    "at": {
+     "x": 9336,
+     "y": 7186,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "broad-street-lines",
+   "year": 1940,
+   "flags": [],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-lines-1940.svg",
+   "sha256": "97b43f870161b96ab6bc487885361d7cbbd446a3aba94299203e1721e2625955",
+   "frozen": "data/_releases/scenes/97b43f870161b96ab6bc487885361d7cbbd446a3aba94299203e1721e2625955.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "broad-street-lines",
+   "year": 1940,
+   "flags": [
+    "--rail-scale",
+    "1"
+   ],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-lines-1940-fine.svg",
+   "sha256": "6b2228775a394184893572855eee5179892095c506d75647c3dd58d3d67314fc",
+   "frozen": "data/_releases/scenes/6b2228775a394184893572855eee5179892095c506d75647c3dd58d3d67314fc.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "broad-street-lines",
+   "year": 1943,
+   "flags": [],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-lines-1943.svg",
+   "sha256": "a8904f8f6f06b64d3c2cc88d8b77ac9fb3c7fe84f41b29b5d8e1a5718b564b62",
+   "frozen": "data/_releases/scenes/a8904f8f6f06b64d3c2cc88d8b77ac9fb3c7fe84f41b29b5d8e1a5718b564b62.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "broad-street-lines",
+   "year": 1943,
+   "flags": [
+    "--rail-scale",
+    "1"
+   ],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-lines-1943-fine.svg",
+   "sha256": "5d0d5f03bd5aa423ce29d35518074cb2cac2c6118437768fe2ecaf33fe72bac1",
+   "frozen": "data/_releases/scenes/5d0d5f03bd5aa423ce29d35518074cb2cac2c6118437768fe2ecaf33fe72bac1.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "broad-street-station",
+   "year": 1943,
+   "flags": [],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-1943.svg",
+   "sha256": "16d80141f4efdf5bf020e65d35e010bfaa91c863636dfd6075d3a0b7d3693142",
+   "frozen": "data/_releases/scenes/16d80141f4efdf5bf020e65d35e010bfaa91c863636dfd6075d3a0b7d3693142.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "broad-street-station",
+   "year": 1943,
+   "flags": [
+    "--rail-scale",
+    "1"
+   ],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-1943-fine.svg",
+   "sha256": "16d80141f4efdf5bf020e65d35e010bfaa91c863636dfd6075d3a0b7d3693142",
+   "frozen": "data/_releases/scenes/16d80141f4efdf5bf020e65d35e010bfaa91c863636dfd6075d3a0b7d3693142.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "broad-street-station-front",
+   "year": 1943,
+   "flags": [],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-front-1943.svg",
+   "sha256": "4c2ec18ca80275020d1c5ec0725a471b5b09516ea68432f553f83c8ca4671300",
+   "frozen": "data/_releases/scenes/4c2ec18ca80275020d1c5ec0725a471b5b09516ea68432f553f83c8ca4671300.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "broad-street-station-front",
+   "year": 1943,
+   "flags": [
+    "--rail-scale",
+    "1"
+   ],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-front-1943-fine.svg",
+   "sha256": "4c2ec18ca80275020d1c5ec0725a471b5b09516ea68432f553f83c8ca4671300",
+   "frozen": "data/_releases/scenes/4c2ec18ca80275020d1c5ec0725a471b5b09516ea68432f553f83c8ca4671300.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "broad-street-station-loop",
+   "year": 1943,
+   "flags": [],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-loop-1943.svg",
+   "sha256": "7da029a37d0ef22058d046d68a7822e35eed57f84fbbbcb34278bc535c3a3006",
+   "frozen": "data/_releases/scenes/7da029a37d0ef22058d046d68a7822e35eed57f84fbbbcb34278bc535c3a3006.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "broad-street-station-loop",
+   "year": 1943,
+   "flags": [
+    "--rail-scale",
+    "1"
+   ],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-loop-1943-fine.svg",
+   "sha256": "7da029a37d0ef22058d046d68a7822e35eed57f84fbbbcb34278bc535c3a3006",
+   "frozen": "data/_releases/scenes/7da029a37d0ef22058d046d68a7822e35eed57f84fbbbcb34278bc535c3a3006.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/broad-street-1943-map/v1.json": "a993f150ca5e321197ec80c2ef0e2ed6a6d928d43c77561897ca7d4c3dd7fb14"
+ },
+ "data": {
+  "richmond-streetcars": {
+   "snapshot": "data/_releases/richmond-streetcars@6e9297a3959e",
+   "files": {
+    "dem.bin.gz": "84786d9e1fa5ccdb10f4a551a77100fdc1704b71d3f782290e89356111a4a9d0",
+    "osm.json": "7dbe53ef18944a9c025a688b68194b30502add174241cfc70fa4eaf80e967eee",
+    "yearbuilt.json": "add6087d440260fbde74ce64208d372e2520dabf6e52130c350c8fa2c79b4e63"
+   }
+  },
+  "broad-street-station": {
+   "snapshot": "data/_releases/broad-street-station@1fd3a2bb6c6b",
+   "files": {
+    "dem.bin.gz": "106ea02c5229b62aba8bc21e8b0bd12ab257722d6eec25f4527dbbdca5184b8b",
+    "osm.json": "3aab8a8a78c342097c9e6ffd1f6d8d20f9f7c0be297426475e529d434b72ef7f",
+    "yearbuilt.json": "5f9cb8d05b4edfd7209390b3482fd26ee3ab4283f984fc233792f3d8b228def7"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/broad-street-1943/broad-street-1943-map-v2_36x24.jpg",
+   "sha256": "af0c69ed7ac8e58252d9c81607b7d0d9ef5e75d81d29cd53a4dbf1e07df3b808",
+   "bytes": 12850098,
+   "printful_file_id": 1112751758
+  },
+  "canvas": [
+   {
+    "file": "print-files/broad-street-1943/canvas/broad-street-1943-map-v2_canvas-18x12.jpg",
+    "sha256": "ca2e6c60e4b8337dfc7a89ed350442d8adb643d626d576fac7248465728fc6db",
+    "bytes": 6298845,
+    "printful_file_id": 1112751939
+   },
+   {
+    "file": "print-files/broad-street-1943/canvas/broad-street-1943-map-v2_canvas-30x20.jpg",
+    "sha256": "914ef7490fe8a878776098b139379d347bbb3e28095b420e789e795bc2d51456",
+    "bytes": 12156737,
+    "printful_file_id": 1112752150
+   },
+   {
+    "file": "print-files/broad-street-1943/canvas/broad-street-1943-map-v2_canvas-36x24.jpg",
+    "sha256": "b8c7a261193c3676742af3d32f557d408fea320fafc92407339a001cedcfe90c",
+    "bytes": 13273528,
+    "printful_file_id": 1112752518
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "place": "Broad Street Station",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print_dir": "print-files/broad-street-1943",
+   "tags": [
+    "broad-street-1943"
+   ],
+   "credit_extra": "Station loop after the USGS Richmond quadrangles of 1934 and 1956, with the sources cited for each place on the <a href=\"https://busse.github.io/isoscape/#/broad-street\">Broad Street page ↗</a>.",
+   "one_mockup": true,
+   "title": "Broad Street Station, 1943: The Railroad Map",
+   "sizes": [
+    "12x18",
+    "20x30",
+    "24x36"
+   ],
+   "print": "broad-street-1943-map-v2_36x24.jpg",
+   "canvas": "broad-street-1943-map-v2_canvas-{w}x{h}.jpg",
+   "explore": "broad-street-lines:1943",
+   "detail": [
+    0.55,
+    0.25,
+    0.75,
+    0.55
+   ],
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "BSS-M",
+   "plate_box": [
+    0.82278,
+    0.93556,
+    0.97926,
+    0.96875
+   ]
+  },
+  "products": [
+   {
+    "handle": "broad-street-station-1943-the-railroad-map-print",
+    "id": "gid://shopify/Product/9136440672374",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "broad-street-station-1943-the-railroad-map-framed-print",
+    "id": "gid://shopify/Product/9136440705142",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "broad-street-station-1943-the-railroad-map-framed-canvas",
+    "id": "gid://shopify/Product/9136440737910",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-map-v2_36x24-print.jpg?v=1794775480",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-map-v2_36x24-detail.jpg?v=1794775484",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-map-v2_36x24-plate.jpg?v=1794775488"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-map-v2_36x24-framed-print-black.jpg?v=1794775493",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-map-v2_36x24-framed-print-white.jpg?v=1794775498",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-map-v2_36x24-detail.jpg?v=1794775484",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-map-v2_36x24-plate.jpg?v=1794775488"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-map-v2_36x24-framed-canvas-black.jpg?v=1794775502",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-map-v2_36x24-framed-canvas-white.jpg?v=1794775507",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-map-v2_36x24-detail.jpg?v=1794775484",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-map-v2_36x24-plate.jpg?v=1794775488"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "broad-street-lines:1943"
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 10,
+  "matched": 10
+ }
+}

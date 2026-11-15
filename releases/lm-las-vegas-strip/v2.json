@@ -1,0 +1,217 @@
+{
+ "design": "lm-las-vegas-strip",
+ "title": "The Las Vegas Strip",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:33+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-las-vegas-strip --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-las-vegas-strip/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "The Las Vegas Strip",
+   "plate": "LMA-30",
+   "version": "2",
+   "drawn": "2026",
+   "location": "36.113° N 115.174° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-las-vegas-strip-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-las-vegas-strip_36x24.jpg",
+    "base_sha256": "b49b010f05e280e3c06a31cacb3a77661a9e878f798cadd2594812e88f0c791b",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-las-vegas-strip-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-las-vegas-strip_canvas-18x12.jpg",
+    "base_sha256": "b0e4cb527023dbc7fe1e5bc3a221840959b59dda0243dc136b709543f165a5ee",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-las-vegas-strip-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-las-vegas-strip_canvas-30x20.jpg",
+    "base_sha256": "b2524d6941e4b4dd9b5227b90c2d82f638ac45fd44c17858a62c7aa26a55665b",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-las-vegas-strip-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-las-vegas-strip_canvas-36x24.jpg",
+    "base_sha256": "19bf5b33367f6e89b780c112607c403976ab39065ff81c568da5218338b8a24b",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-las-vegas-strip",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-las-vegas-strip.svg",
+   "sha256": "f5b3731c378a2352300711559554149c5fcc1f3ff5e8b31575ae055701de990f",
+   "frozen": "data/_releases/scenes/f5b3731c378a2352300711559554149c5fcc1f3ff5e8b31575ae055701de990f.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-las-vegas-strip/v1.json": "e2f1f901375abc3bbca887fcac5b5f322014d09aeb87a239163c710a93b2b0e8"
+ },
+ "data": {
+  "lm-las-vegas-strip": {
+   "snapshot": "data/_releases/lm-las-vegas-strip@8d9ad30b03b8",
+   "files": {
+    "dem.bin.gz": "f4587dad04343c50bf0d2e7480bc0796ee8be8e6f318ad01eb8de96e783d92be",
+    "osm.json": "4769e747aed97c297e3011034deee30d5fe2899e1d4f365995aee4f43a63c978"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-las-vegas-strip-v2_36x24.jpg",
+   "sha256": "b84f58acce8eee4165e77bd3350bfc51ee7eb9eae87f7a6847af8387ec746ae2",
+   "bytes": 2852334,
+   "printful_file_id": 1112728717
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-las-vegas-strip-v2_canvas-18x12.jpg",
+    "sha256": "af1169bf87957c5e6fc0b502153be6b09eda8b78b112db7da5b8c07942cd34bc",
+    "bytes": 1053488,
+    "printful_file_id": 1112728846
+   },
+   {
+    "file": "print-files/landmarks/lm-las-vegas-strip-v2_canvas-30x20.jpg",
+    "sha256": "3744d450a49194f34eaa3b5fb9a2d2607617da99f63b0183b4a154e9384da3ab",
+    "bytes": 1969635,
+    "printful_file_id": 1112728940
+   },
+   {
+    "file": "print-files/landmarks/lm-las-vegas-strip-v2_canvas-36x24.jpg",
+    "sha256": "94f6bba85d6eaeacf69474cf5165893c3294e10a75b30ee187dcbb3eb9578757",
+    "bytes": 2517848,
+    "printful_file_id": 1112729070
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "The Las Vegas Strip",
+   "place": "Las Vegas",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-las-vegas-strip-v2_36x24.jpg",
+   "canvas": "lm-las-vegas-strip-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-30",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "the-las-vegas-strip-print",
+    "id": "gid://shopify/Product/9133279903862",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "the-las-vegas-strip-framed-print",
+    "id": "gid://shopify/Product/9133279936630",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "the-las-vegas-strip-framed-canvas",
+    "id": "gid://shopify/Product/9133279969398",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-las-vegas-strip-v2_36x24-print.jpg?v=1794774229",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-las-vegas-strip-v2_36x24-plate.jpg?v=1794774233"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-las-vegas-strip-v2_36x24-framed-print-black.jpg?v=1794774237",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-las-vegas-strip-v2_36x24-framed-print-white.jpg?v=1794774241",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-las-vegas-strip-v2_36x24-plate.jpg?v=1794774233"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-las-vegas-strip-v2_36x24-framed-canvas-black.jpg?v=1794774245",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-las-vegas-strip-v2_36x24-framed-canvas-white.jpg?v=1794774250",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-las-vegas-strip-v2_36x24-plate.jpg?v=1794774233"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

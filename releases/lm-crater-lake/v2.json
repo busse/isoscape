@@ -1,0 +1,218 @@
+{
+ "design": "lm-crater-lake",
+ "title": "Crater Lake",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:34+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-crater-lake --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-crater-lake/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Crater Lake",
+   "plate": "LMA-40",
+   "version": "2",
+   "drawn": "2026",
+   "location": "42.944° N 122.108° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-crater-lake-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-crater-lake_36x24.jpg",
+    "base_sha256": "f503d36b3533b182b026e59c9fe7d847937941f6c8b44c80ba164ff56c4fff02",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-crater-lake-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-crater-lake_canvas-18x12.jpg",
+    "base_sha256": "820bfdbe50242325c30b3c28a18a647496367586ebcee286649ca89cb5bea2a6",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-crater-lake-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-crater-lake_canvas-30x20.jpg",
+    "base_sha256": "3d220e131bca2a0c8995136ef5ab19567e0680fa4378720795ffd99cb1b2307a",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-crater-lake-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-crater-lake_canvas-36x24.jpg",
+    "base_sha256": "acf71e6ad9f13d66124385c1616ea4f291e7e8b4abf5ce46b16ef5fcdceab681",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-crater-lake",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-crater-lake.svg",
+   "sha256": "8095e65d67971a4815b46af9ee79e8886b139428d6bea836493c894bcf003412",
+   "frozen": "data/_releases/scenes/8095e65d67971a4815b46af9ee79e8886b139428d6bea836493c894bcf003412.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-crater-lake/v1.json": "94582e9660662e487c0f812bc595084a03e71cf23212ea38976d9ed4dcc2c552"
+ },
+ "data": {
+  "lm-crater-lake": {
+   "snapshot": "data/_releases/lm-crater-lake@3edbf5b70762",
+   "files": {
+    "dem.bin.gz": "d7acfae60a52c0a1dd427c8d8a7c3f15d7b3b5beb6fbbbd49e17ef25a2c1764d",
+    "landcover.bin.gz": "27d7ff2271e37cf9627d7455f7425040fc8f4280c9191ac3a8cc0ba34accf886",
+    "osm.json": "a172ae9c990143a76bd607db5abcb05f80e27c7bac4ba956bff665e8530ad6aa"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-crater-lake-v2_36x24.jpg",
+   "sha256": "1afa8006477a91c459d643e52a7d8d9728b97865e6b35c0ce671cf032ca3bfd6",
+   "bytes": 2323194,
+   "printful_file_id": 1112734176
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-crater-lake-v2_canvas-18x12.jpg",
+    "sha256": "0ebea4a874a805667f77a1b81504ac8c02ace39ebd30abe7723a45d9bfa022a3",
+    "bytes": 654419,
+    "printful_file_id": 1112734314
+   },
+   {
+    "file": "print-files/landmarks/lm-crater-lake-v2_canvas-30x20.jpg",
+    "sha256": "0cc9ff96ef6897f38af92bb4eb003e2e4b40de929b4a6a138ba13eec667c441b",
+    "bytes": 1416301,
+    "printful_file_id": 1112734460
+   },
+   {
+    "file": "print-files/landmarks/lm-crater-lake-v2_canvas-36x24.jpg",
+    "sha256": "5eadc04acab37de4c02ee7c688fe29fce5f801c150f231102ffef04cb0783c19",
+    "bytes": 1900323,
+    "printful_file_id": 1112734544
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Crater Lake",
+   "place": "Oregon",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-crater-lake-v2_36x24.jpg",
+   "canvas": "lm-crater-lake-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-40",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "crater-lake-print",
+    "id": "gid://shopify/Product/9133378732150",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "crater-lake-framed-print",
+    "id": "gid://shopify/Product/9133378764918",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "crater-lake-framed-canvas",
+    "id": "gid://shopify/Product/9133378797686",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-crater-lake-v2_36x24-print.jpg?v=1794774491",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-crater-lake-v2_36x24-plate.jpg?v=1794774494"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-crater-lake-v2_36x24-framed-print-black.jpg?v=1794774498",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-crater-lake-v2_36x24-framed-print-white.jpg?v=1794774503",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-crater-lake-v2_36x24-plate.jpg?v=1794774494"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-crater-lake-v2_36x24-framed-canvas-black.jpg?v=1794774507",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-crater-lake-v2_36x24-framed-canvas-white.jpg?v=1794774511",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-crater-lake-v2_36x24-plate.jpg?v=1794774494"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

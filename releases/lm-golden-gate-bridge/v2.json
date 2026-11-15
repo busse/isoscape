@@ -1,0 +1,217 @@
+{
+ "design": "lm-golden-gate-bridge",
+ "title": "Golden Gate Bridge",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:33+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-golden-gate-bridge --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-golden-gate-bridge/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Golden Gate Bridge",
+   "plate": "LMA-37",
+   "version": "2",
+   "drawn": "2026",
+   "location": "37.820° N 122.478° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-golden-gate-bridge-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-golden-gate-bridge_36x24.jpg",
+    "base_sha256": "e04c1971aaa0cac205421cc91e55177233b27001d5297139eab686b17e3fbf52",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-golden-gate-bridge-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-golden-gate-bridge_canvas-18x12.jpg",
+    "base_sha256": "24d9e395a168ecdd50c5d4ef4f52753928c52cd56737aa7c69b5997fe3fcee80",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-golden-gate-bridge-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-golden-gate-bridge_canvas-30x20.jpg",
+    "base_sha256": "fec038ed7382cb8eb1ce6ad4a049e1574dc64171ce18737b060454d9561df522",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-golden-gate-bridge-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-golden-gate-bridge_canvas-36x24.jpg",
+    "base_sha256": "e8dcade04953d2bafb56885e64faf25a94b992242cb28de5521f25437c619c59",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-golden-gate-bridge",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-golden-gate-bridge.svg",
+   "sha256": "e90de0a2b809e9f69820647858d75907f3b6f3704fa03b85b296b7c69f2e0ab8",
+   "frozen": "data/_releases/scenes/e90de0a2b809e9f69820647858d75907f3b6f3704fa03b85b296b7c69f2e0ab8.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-golden-gate-bridge/v1.json": "6a49eadd31a7cd7ae6bd593706536eb7458406033fa8912bec1c02319104efa0"
+ },
+ "data": {
+  "lm-golden-gate-bridge": {
+   "snapshot": "data/_releases/lm-golden-gate-bridge@dedc56d19a2a",
+   "files": {
+    "dem.bin.gz": "d2911582057170a67dfc3b717e21f4f19eb0306cf812a4bbebc16862fa51f165",
+    "osm.json": "c457a359c56aebc327fe7e1b450aeaffc68406d3c94c86fd82cfe999dd3f5ec4"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-golden-gate-bridge-v2_36x24.jpg",
+   "sha256": "2ebf0e8f3478e1d0c12176bd4f42dc4fdb6eada1bd7082b0fcdfac6c0520e8e5",
+   "bytes": 2664956,
+   "printful_file_id": 1112732364
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-golden-gate-bridge-v2_canvas-18x12.jpg",
+    "sha256": "5abec4a14cdadbfc8852dd75ba0ecb8617a1600ed73bd1d720d257e91252e74f",
+    "bytes": 800229,
+    "printful_file_id": 1112732479
+   },
+   {
+    "file": "print-files/landmarks/lm-golden-gate-bridge-v2_canvas-30x20.jpg",
+    "sha256": "d0c4a72f3e858ee55cb63f07d602d805234bb9f3e9b9b147a1c3faf958bf11fb",
+    "bytes": 1664897,
+    "printful_file_id": 1112732640
+   },
+   {
+    "file": "print-files/landmarks/lm-golden-gate-bridge-v2_canvas-36x24.jpg",
+    "sha256": "2def842781c54e76c5e96b72226698baba6dd9ea81a3710ac8a7a3337774d49a",
+    "bytes": 2223703,
+    "printful_file_id": 1112732789
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Golden Gate Bridge",
+   "place": "San Francisco",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-golden-gate-bridge-v2_36x24.jpg",
+   "canvas": "lm-golden-gate-bridge-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-37",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "golden-gate-bridge-print",
+    "id": "gid://shopify/Product/9133296681078",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "golden-gate-bridge-framed-print",
+    "id": "gid://shopify/Product/9133296844918",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "golden-gate-bridge-framed-canvas",
+    "id": "gid://shopify/Product/9133297139830",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-v2_36x24-print.jpg?v=1794774413",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-v2_36x24-plate.jpg?v=1794774418"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-v2_36x24-framed-print-black.jpg?v=1794774422",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-v2_36x24-framed-print-white.jpg?v=1794774426",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-v2_36x24-plate.jpg?v=1794774418"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-v2_36x24-framed-canvas-black.jpg?v=1794774430",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-v2_36x24-framed-canvas-white.jpg?v=1794774434",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-v2_36x24-plate.jpg?v=1794774418"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

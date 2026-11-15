@@ -1,0 +1,219 @@
+{
+ "design": "lm-sydney-opera-house",
+ "title": "Sydney Opera House and Harbour Bridge",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:35+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-sydney-opera-house --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-sydney-opera-house/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "World Landmarks",
+   "piece": "Sydney Opera House and Harbour Bridge",
+   "plate": "LMW-04",
+   "version": "2",
+   "drawn": "2026",
+   "location": "33.860° S 151.211° E",
+   "facing": "20°"
+  },
+  "files": {
+   "lm-sydney-opera-house-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-sydney-opera-house_36x24.jpg",
+    "base_sha256": "309e361d74862640c3bbd4cf50d42fbb343d913a5c817c50e85b87ec4c11c2b3",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-sydney-opera-house-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-sydney-opera-house_canvas-18x12.jpg",
+    "base_sha256": "d92dbb76e9fccb8768daf4a2645eaafcc7b0771519d88a7a255b3e543c4f908c",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-sydney-opera-house-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-sydney-opera-house_canvas-30x20.jpg",
+    "base_sha256": "8bafcdd866919c7605a84e719416b25d8d2bc86a887dfb602a6b68ea07352c82",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-sydney-opera-house-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-sydney-opera-house_canvas-36x24.jpg",
+    "base_sha256": "6085af73aa3d23685a59983b8b96df9718021af412eb782970fc6f1275114fdb",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-sydney-opera-house",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-sydney-opera-house.svg",
+   "sha256": "a24559ccf0f56d9f93315b6e7d62c25b74aad5eeac6c4e82392762c7bc82294e",
+   "frozen": "data/_releases/scenes/a24559ccf0f56d9f93315b6e7d62c25b74aad5eeac6c4e82392762c7bc82294e.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-sydney-opera-house/v1.json": "a99752106e6dc32649140ea4a521216b5b832d3ea529b8e02ebee8319c8ccd33"
+ },
+ "data": {
+  "lm-sydney-opera-house": {
+   "snapshot": "data/_releases/lm-sydney-opera-house@c69f91624248",
+   "files": {
+    "dem.bin.gz": "e2980a290abfa7b08b61d54070f536d07e884fbe8fccaa10d079dbecd7695ac3",
+    "osm.json": "0c970657b45ab73054d6f9988c00e45ed94596fe1b1cfe95c7c171985639e790"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-sydney-opera-house-v2_36x24.jpg",
+   "sha256": "f713b3ea035c18e476e202fdf7a64175536c05e7a040e5d0dc6941f262be10fe",
+   "bytes": 2236955,
+   "printful_file_id": 1112741666
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-sydney-opera-house-v2_canvas-18x12.jpg",
+    "sha256": "328616e7025752bce595a9449af17907f2bd921c4b87105b9e875a1c7c4994fa",
+    "bytes": 786930,
+    "printful_file_id": 1112741797
+   },
+   {
+    "file": "print-files/landmarks/lm-sydney-opera-house-v2_canvas-30x20.jpg",
+    "sha256": "1483dec81062393ce628cbba7b8ef79071ab1834edc1c4be432a4ce1518cdef4",
+    "bytes": 1508297,
+    "printful_file_id": 1112741875
+   },
+   {
+    "file": "print-files/landmarks/lm-sydney-opera-house-v2_canvas-36x24.jpg",
+    "sha256": "ddfeabf8b9f36a49e37d4bbdbda3fffaaefe7964c6c7b4e9823e3d892caefeb5",
+    "bytes": 1967020,
+    "printful_file_id": 1112741956
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Sydney Opera House and Harbour Bridge",
+   "place": "Sydney",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-sydney-opera-house-v2_36x24.jpg",
+   "canvas": "lm-sydney-opera-house-v2_canvas-{w}x{h}.jpg",
+   "world": true,
+   "elevation_credit": "Elevation: Terrain Tiles (Mapzen/Tilezen, AWS Open Data); SRTM courtesy of the U.S. Geological Survey; ETOPO1 courtesy of NOAA",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMW-04",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "sydney-opera-house-and-harbour-bridge-print",
+    "id": "gid://shopify/Product/9135212462198",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "sydney-opera-house-and-harbour-bridge-framed-print",
+    "id": "gid://shopify/Product/9135212527734",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "sydney-opera-house-and-harbour-bridge-framed-canvas",
+    "id": "gid://shopify/Product/9135212560502",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-sydney-opera-house-v2_36x24-print.jpg?v=1794774875",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-sydney-opera-house-v2_36x24-plate.jpg?v=1794774879"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-sydney-opera-house-v2_36x24-framed-print-black.jpg?v=1794774883",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-sydney-opera-house-v2_36x24-framed-print-white.jpg?v=1794774887",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-sydney-opera-house-v2_36x24-plate.jpg?v=1794774879"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-sydney-opera-house-v2_36x24-framed-canvas-black.jpg?v=1794774892",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-sydney-opera-house-v2_36x24-framed-canvas-white.jpg?v=1794774896",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-sydney-opera-house-v2_36x24-plate.jpg?v=1794774879"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

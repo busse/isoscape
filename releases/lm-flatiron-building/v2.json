@@ -1,0 +1,217 @@
+{
+ "design": "lm-flatiron-building",
+ "title": "Flatiron Building",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:31+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-flatiron-building --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-flatiron-building/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Flatiron Building",
+   "plate": "LMA-05",
+   "version": "2",
+   "drawn": "2026",
+   "location": "40.741° N 73.990° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-flatiron-building-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-flatiron-building_36x24.jpg",
+    "base_sha256": "f3c1bcaa8c2b1d7106fce323012bdbaee8af2f7822544f840c0767c28f48f90f",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-flatiron-building-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-flatiron-building_canvas-18x12.jpg",
+    "base_sha256": "e2340c7fae563a4bfcc7505f7fad6e8215808a1e5923fbd4b70061f97fc28e3b",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-flatiron-building-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-flatiron-building_canvas-30x20.jpg",
+    "base_sha256": "daceca4e07da2e79b9b61e95655f04538abde3497aefefca6a4affabeee39cdd",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-flatiron-building-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-flatiron-building_canvas-36x24.jpg",
+    "base_sha256": "4aeab870c14bb2365536915bb5306db666a00c79b205968920a7465b613415a9",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-flatiron-building",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-flatiron-building.svg",
+   "sha256": "bee61d2ee36ff987ad086bbee959ba47925923b94244005fd2a46b4ee3c74947",
+   "frozen": "data/_releases/scenes/bee61d2ee36ff987ad086bbee959ba47925923b94244005fd2a46b4ee3c74947.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-flatiron-building/v1.json": "d687a5c2b19d418f137f4f4338176054bdedf24f648873978def42ec35b0268e"
+ },
+ "data": {
+  "lm-flatiron-building": {
+   "snapshot": "data/_releases/lm-flatiron-building@a5ff8e5a0493",
+   "files": {
+    "dem.bin.gz": "64eaf983bbf99d26129d497f133e9e8ee735d2aeca04e807ed4e9d76bfe7d4fb",
+    "osm.json": "8932835843960ad543f0cd53c156215624f4952e5407dea01b395b17ee0bf747"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-flatiron-building-v2_36x24.jpg",
+   "sha256": "dfacdeecdeabc942ca75f18fd3a5511a1c263fc2eb97cb9fb3d4b294814351d2",
+   "bytes": 2404729,
+   "printful_file_id": 1112714124
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-flatiron-building-v2_canvas-18x12.jpg",
+    "sha256": "0d120077cc896d8271613dbcc7964858b4a820c8bb26dfbf077d7938fa044da6",
+    "bytes": 938824,
+    "printful_file_id": 1112714235
+   },
+   {
+    "file": "print-files/landmarks/lm-flatiron-building-v2_canvas-30x20.jpg",
+    "sha256": "0f999b8cd210caddc2fddb6bf9f96cbf3f5c8d784ee1cbd8c5a6a5cc64357afb",
+    "bytes": 1721703,
+    "printful_file_id": 1112714393
+   },
+   {
+    "file": "print-files/landmarks/lm-flatiron-building-v2_canvas-36x24.jpg",
+    "sha256": "d446e0b80456c612a956c0c42f4355a5a65a0409a623e5f45750039b0c11bff9",
+    "bytes": 2192491,
+    "printful_file_id": 1112714516
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Flatiron Building",
+   "place": "New York City",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-flatiron-building-v2_36x24.jpg",
+   "canvas": "lm-flatiron-building-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-05",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "flatiron-building-print",
+    "id": "gid://shopify/Product/9132840484982",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "flatiron-building-framed-print",
+    "id": "gid://shopify/Product/9132840550518",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "flatiron-building-framed-canvas",
+    "id": "gid://shopify/Product/9132840648822",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-flatiron-building-v2_36x24-print.jpg?v=1794773436",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-flatiron-building-v2_36x24-plate.jpg?v=1794773439"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-flatiron-building-v2_36x24-framed-print-black.jpg?v=1794773443",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-flatiron-building-v2_36x24-framed-print-white.jpg?v=1794773447",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-flatiron-building-v2_36x24-plate.jpg?v=1794773439"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-flatiron-building-v2_36x24-framed-canvas-black.jpg?v=1794773452",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-flatiron-building-v2_36x24-framed-canvas-white.jpg?v=1794773456",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-flatiron-building-v2_36x24-plate.jpg?v=1794773439"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

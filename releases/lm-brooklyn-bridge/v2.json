@@ -1,0 +1,217 @@
+{
+ "design": "lm-brooklyn-bridge",
+ "title": "Brooklyn Bridge",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:31+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-brooklyn-bridge --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-brooklyn-bridge/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Brooklyn Bridge",
+   "plate": "LMA-02",
+   "version": "2",
+   "drawn": "2026",
+   "location": "40.706° N 73.996° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-brooklyn-bridge-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-brooklyn-bridge_36x24.jpg",
+    "base_sha256": "4eaa847fc71012d4f5d69d48cf1c40dc246f83b822b4ce0b2513450e06156e36",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-brooklyn-bridge-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-brooklyn-bridge_canvas-18x12.jpg",
+    "base_sha256": "6679ba08e4637edf53b57efe12380c674c7a036cfcd11c38db9064e1fa212909",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-brooklyn-bridge-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-brooklyn-bridge_canvas-30x20.jpg",
+    "base_sha256": "68c5644e6dd55030e9a136f5f7bf0cd31a40fd9a2e0ec01417ae76fee115f240",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-brooklyn-bridge-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-brooklyn-bridge_canvas-36x24.jpg",
+    "base_sha256": "f577d61b95a5f7a259e95274dc185982efe441a3795d377fd8df58e0d35c5ce3",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-brooklyn-bridge",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-brooklyn-bridge.svg",
+   "sha256": "c9845368401f76b5d70a0cf3b390166e5776af04489895812c2a56742d5b054d",
+   "frozen": "data/_releases/scenes/c9845368401f76b5d70a0cf3b390166e5776af04489895812c2a56742d5b054d.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-brooklyn-bridge/v1.json": "24502ace76ccde70880d78e6628e6780373ace9419d01416bc3a6b45aa31614a"
+ },
+ "data": {
+  "lm-brooklyn-bridge": {
+   "snapshot": "data/_releases/lm-brooklyn-bridge@5b1bbc5bc68c",
+   "files": {
+    "dem.bin.gz": "2c58ec418d8ed3ba23a9c0c8cb90bdaa1c1620f8aa2bf2e05466e247130407b5",
+    "osm.json": "7034c762ad80d2c753fddaee931630c872c5819bb30ebd5a8c796bdbc216b30a"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-brooklyn-bridge-v2_36x24.jpg",
+   "sha256": "8425901b540830ee4296c70a030182822c277c2c23a25dfe583e70aac499e4f3",
+   "bytes": 3160502,
+   "printful_file_id": 1112712039
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-brooklyn-bridge-v2_canvas-18x12.jpg",
+    "sha256": "fe3489673a216366d6652333be6298942e98328737244d166ed536e3bd5732c6",
+    "bytes": 1109583,
+    "printful_file_id": 1112712189
+   },
+   {
+    "file": "print-files/landmarks/lm-brooklyn-bridge-v2_canvas-30x20.jpg",
+    "sha256": "800204b95e5f876d0977706d60388e4eb32cbf7e729ff2db4a702d72914aac5f",
+    "bytes": 2150655,
+    "printful_file_id": 1112712536
+   },
+   {
+    "file": "print-files/landmarks/lm-brooklyn-bridge-v2_canvas-36x24.jpg",
+    "sha256": "b302bff237d22729acb2a7f077b30a50e14d2dfeeeb7574bf8ab1effaafa320b",
+    "bytes": 2769472,
+    "printful_file_id": 1112712667
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Brooklyn Bridge",
+   "place": "New York City",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-brooklyn-bridge-v2_36x24.jpg",
+   "canvas": "lm-brooklyn-bridge-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-02",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "brooklyn-bridge-print",
+    "id": "gid://shopify/Product/9132839862390",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "brooklyn-bridge-framed-print",
+    "id": "gid://shopify/Product/9132839895158",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "brooklyn-bridge-framed-canvas",
+    "id": "gid://shopify/Product/9132929712246",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-brooklyn-bridge-v2_36x24-print.jpg?v=1794773354",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-brooklyn-bridge-v2_36x24-plate.jpg?v=1794773358"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-brooklyn-bridge-v2_36x24-framed-print-black.jpg?v=1794773363",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-brooklyn-bridge-v2_36x24-framed-print-white.jpg?v=1794773367",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-brooklyn-bridge-v2_36x24-plate.jpg?v=1794773358"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-brooklyn-bridge-v2_36x24-framed-canvas-black.jpg?v=1794773371",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-brooklyn-bridge-v2_36x24-framed-canvas-white.jpg?v=1794773375",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-brooklyn-bridge-v2_36x24-plate.jpg?v=1794773358"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

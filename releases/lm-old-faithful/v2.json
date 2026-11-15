@@ -1,0 +1,218 @@
+{
+ "design": "lm-old-faithful",
+ "title": "Old Faithful",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:34+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-old-faithful --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-old-faithful/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Old Faithful",
+   "plate": "LMA-46",
+   "version": "2",
+   "drawn": "2026",
+   "location": "44.461° N 110.828° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-old-faithful-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-old-faithful_36x24.jpg",
+    "base_sha256": "0e2c66b8dc15acb1cc9013646baed0f9d4f7d1c0895dc5e8945bc37e15e2b2f2",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-old-faithful-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-old-faithful_canvas-18x12.jpg",
+    "base_sha256": "3d78bbaab6061fe3de2f7fd169191e501016ae20c3268492de128e9d5519016b",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-old-faithful-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-old-faithful_canvas-30x20.jpg",
+    "base_sha256": "f1e5804209be519a05ede154cd1e97bcfea23ae697687c05e61458ce684ecb96",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-old-faithful-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-old-faithful_canvas-36x24.jpg",
+    "base_sha256": "e59f6bcf263efc11d4da0243d80aac5990154cbbd2d35477852811c5fedf4b7a",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-old-faithful",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-old-faithful.svg",
+   "sha256": "3a7e43a7288d532b68f7a317466ce145d3b53d81fb9b6af5fd765ad8ec62106d",
+   "frozen": "data/_releases/scenes/3a7e43a7288d532b68f7a317466ce145d3b53d81fb9b6af5fd765ad8ec62106d.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-old-faithful/v1.json": "f52aa152c9f0dcfc44f6669bde9d4c6a63dbfdd1522cba32b10b476f2aebc9fd"
+ },
+ "data": {
+  "lm-old-faithful": {
+   "snapshot": "data/_releases/lm-old-faithful@a1a0489edf0b",
+   "files": {
+    "dem.bin.gz": "6e11c20a73adab25d3148af86aeab453fab3bb70eb259b9d0635749bdeb63f32",
+    "landcover.bin.gz": "74287e154a74552a86140c1ab55547f6254c4000590a3e3504a8dd019e238b46",
+    "osm.json": "b0ae071512dd153b8f67bbe98c356ff1d17b638d664581c05f5fc115740f2986"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-old-faithful-v2_36x24.jpg",
+   "sha256": "09bfd14e38cc3f403bf5d3199dc1a37da3bd393fbac2cb673d3382f39b1a7034",
+   "bytes": 2345192,
+   "printful_file_id": 1112736922
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-old-faithful-v2_canvas-18x12.jpg",
+    "sha256": "0db95fe57d135725e09d166f88fe0b85862c6060037239c728f5b74a6f2bd662",
+    "bytes": 739305,
+    "printful_file_id": 1112737051
+   },
+   {
+    "file": "print-files/landmarks/lm-old-faithful-v2_canvas-30x20.jpg",
+    "sha256": "c67c78b68599820547d72dad24a809ad2e2ca630f8dcbbfeb3f1337ecafeca90",
+    "bytes": 1516847,
+    "printful_file_id": 1112737196
+   },
+   {
+    "file": "print-files/landmarks/lm-old-faithful-v2_canvas-36x24.jpg",
+    "sha256": "8ca558d0c550a4e5ce7aa3cf4e514a68a464b52d2abc7ddb3b174429153dc2e5",
+    "bytes": 1993423,
+    "printful_file_id": 1112737371
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Old Faithful",
+   "place": "Yellowstone National Park",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-old-faithful-v2_36x24.jpg",
+   "canvas": "lm-old-faithful-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-46",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "old-faithful-print",
+    "id": "gid://shopify/Product/9133508526198",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "old-faithful-framed-print",
+    "id": "gid://shopify/Product/9133508558966",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "old-faithful-framed-canvas",
+    "id": "gid://shopify/Product/9133567705206",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-v2_36x24-print.jpg?v=1794774646",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-v2_36x24-plate.jpg?v=1794774650"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-v2_36x24-framed-print-black.jpg?v=1794774654",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-v2_36x24-framed-print-white.jpg?v=1794774658",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-v2_36x24-plate.jpg?v=1794774650"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-v2_36x24-framed-canvas-black.jpg?v=1794774663",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-v2_36x24-framed-canvas-white.jpg?v=1794774667",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-v2_36x24-plate.jpg?v=1794774650"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

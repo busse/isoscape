@@ -1,0 +1,217 @@
+{
+ "design": "lm-times-square",
+ "title": "Times Square",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:31+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-times-square --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-times-square/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Times Square",
+   "plate": "LMA-01",
+   "version": "2",
+   "drawn": "2026",
+   "location": "40.757° N 73.986° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-times-square-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-times-square_36x24.jpg",
+    "base_sha256": "1b2eeb9f7b90d04f31d878d86841ccac3d0f07df8f7fb766be5ba6ae9348f4b4",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-times-square-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-times-square_canvas-18x12.jpg",
+    "base_sha256": "184ce18109dfd4882550680bf63cdabf213060c246a318a57be6c049083c9fd1",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-times-square-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-times-square_canvas-30x20.jpg",
+    "base_sha256": "86ed2353304d7775bab2b7d7938d931f6451e4d9d94a63098da0c0342df792e8",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-times-square-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-times-square_canvas-36x24.jpg",
+    "base_sha256": "9ca19194d39bacfeadbcd6dd6c19473c502ff9decb10500c78d06a9218b83a88",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-times-square",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-times-square.svg",
+   "sha256": "49888b4815a7e2eaeaeaba2b894b656627547a329adda4724da09f866d325ece",
+   "frozen": "data/_releases/scenes/49888b4815a7e2eaeaeaba2b894b656627547a329adda4724da09f866d325ece.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-times-square/v1.json": "0140cde45254a2c9081c9b2e6b6d96ad6ea2b43625019cbf8713410e64468934"
+ },
+ "data": {
+  "lm-times-square": {
+   "snapshot": "data/_releases/lm-times-square@0b36bcde6901",
+   "files": {
+    "dem.bin.gz": "3c0c42704fc5c2999a5182216b36c1936feb4e3cc198bd8dca034801c9d7e030",
+    "osm.json": "ef802dc5e00ead29257a491b965db291877175760f6d7842e31df3c8881f3e71"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-times-square-v2_36x24.jpg",
+   "sha256": "4d885ae99ce6ed7f6eea7d498005a67f7f35d41b3273b2e32f74679d206e2222",
+   "bytes": 2246098,
+   "printful_file_id": 1112711611
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-times-square-v2_canvas-18x12.jpg",
+    "sha256": "69a77c3d92f8aee8843c68a58520953c706669a9ad72835c76438d6d92a7108a",
+    "bytes": 872219,
+    "printful_file_id": 1112711748
+   },
+   {
+    "file": "print-files/landmarks/lm-times-square-v2_canvas-30x20.jpg",
+    "sha256": "ff6dff94758be04a17f7ab972a90996452b751a986ec4dcb143deb48e3f7e082",
+    "bytes": 1624939,
+    "printful_file_id": 1112711844
+   },
+   {
+    "file": "print-files/landmarks/lm-times-square-v2_canvas-36x24.jpg",
+    "sha256": "a2802b78c947ce6167ac3af28c86b939cbb6138cbe6a2ea0131696482f3ec074",
+    "bytes": 2067322,
+    "printful_file_id": 1112711944
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Times Square",
+   "place": "New York City",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-times-square-v2_36x24.jpg",
+   "canvas": "lm-times-square-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-01",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "times-square-print",
+    "id": "gid://shopify/Product/9132839567478",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "times-square-framed-print",
+    "id": "gid://shopify/Product/9132839665782",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "times-square-framed-canvas",
+    "id": "gid://shopify/Product/9132839731318",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-times-square-v2_36x24-print.jpg?v=1794773329",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-times-square-v2_36x24-plate.jpg?v=1794773333"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-times-square-v2_36x24-framed-print-black.jpg?v=1794773337",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-times-square-v2_36x24-framed-print-white.jpg?v=1794773342",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-times-square-v2_36x24-plate.jpg?v=1794773333"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-times-square-v2_36x24-framed-canvas-black.jpg?v=1794773346",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-times-square-v2_36x24-framed-canvas-white.jpg?v=1794773350",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-times-square-v2_36x24-plate.jpg?v=1794773333"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

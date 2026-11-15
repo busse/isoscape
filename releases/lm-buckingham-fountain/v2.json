@@ -1,0 +1,217 @@
+{
+ "design": "lm-buckingham-fountain",
+ "title": "Buckingham Fountain",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:32+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-buckingham-fountain --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-buckingham-fountain/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Buckingham Fountain",
+   "plate": "LMA-16",
+   "version": "2",
+   "drawn": "2026",
+   "location": "41.876° N 87.619° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-buckingham-fountain-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-buckingham-fountain_36x24.jpg",
+    "base_sha256": "94b25c194f2b57e53fe044b1cd4165db7596efc2116789a146e88dc45bb3ce71",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-buckingham-fountain-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-buckingham-fountain_canvas-18x12.jpg",
+    "base_sha256": "e3f280946cffbc53e114280e34414bdf6a8eb5112e64bf3c8fb8a1c740153e74",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-buckingham-fountain-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-buckingham-fountain_canvas-30x20.jpg",
+    "base_sha256": "be37413ea3804fba0d1b82dfc18fa2bfc05f2530281282c54f90e97b8bc381b9",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-buckingham-fountain-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-buckingham-fountain_canvas-36x24.jpg",
+    "base_sha256": "170f22f192c5d3251f18dd343f3c73df433bca4aabadc71564d5d8a813770681",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-buckingham-fountain",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-buckingham-fountain.svg",
+   "sha256": "e282ebca0a501850ece2fd184761cd4813d237e5c125d555af3b76f8842c00e5",
+   "frozen": "data/_releases/scenes/e282ebca0a501850ece2fd184761cd4813d237e5c125d555af3b76f8842c00e5.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-buckingham-fountain/v1.json": "08b7c7c664b45106db216fbecc8218f7373679d3aa7e7f1a47d9642197d4ed65"
+ },
+ "data": {
+  "lm-buckingham-fountain": {
+   "snapshot": "data/_releases/lm-buckingham-fountain@06b7b000719b",
+   "files": {
+    "dem.bin.gz": "b9f1987af4caab2bf114e764037e586fd6d4dc4fff0f5592469a4ad9023252fc",
+    "osm.json": "1bcebf7d43036af52a2d2f44aae106d089ed73b3e8cae72cdfeda210fea6afef"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-buckingham-fountain-v2_36x24.jpg",
+   "sha256": "ef8f491da9c04ff72a753c4738c5b87f3fc5bca631ff6681cda746917b122282",
+   "bytes": 2258558,
+   "printful_file_id": 1112720870
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-buckingham-fountain-v2_canvas-18x12.jpg",
+    "sha256": "2910a5c0553603e4ae07b08412f00a44e65587794465095637c09e31cea2f3da",
+    "bytes": 800967,
+    "printful_file_id": 1112721001
+   },
+   {
+    "file": "print-files/landmarks/lm-buckingham-fountain-v2_canvas-30x20.jpg",
+    "sha256": "9a7cd62dfd96b222cc8ef1c02e2df29da1f958dcf200f221e4109fd335b96869",
+    "bytes": 1529913,
+    "printful_file_id": 1112721105
+   },
+   {
+    "file": "print-files/landmarks/lm-buckingham-fountain-v2_canvas-36x24.jpg",
+    "sha256": "6bfa4ddb606e72064c91131f34c56376d55f251b1247c0bc8020644c9eda08f2",
+    "bytes": 1975854,
+    "printful_file_id": 1112721242
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Buckingham Fountain",
+   "place": "Chicago",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-buckingham-fountain-v2_36x24.jpg",
+   "canvas": "lm-buckingham-fountain-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-16",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "buckingham-fountain-print",
+    "id": "gid://shopify/Product/9133101449334",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "buckingham-fountain-framed-print",
+    "id": "gid://shopify/Product/9133101514870",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "buckingham-fountain-framed-canvas",
+    "id": "gid://shopify/Product/9133101613174",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-buckingham-fountain-v2_36x24-print.jpg?v=1794773863",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-buckingham-fountain-v2_36x24-plate.jpg?v=1794773868"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-buckingham-fountain-v2_36x24-framed-print-black.jpg?v=1794773872",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-buckingham-fountain-v2_36x24-framed-print-white.jpg?v=1794773876",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-buckingham-fountain-v2_36x24-plate.jpg?v=1794773868"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-buckingham-fountain-v2_36x24-framed-canvas-black.jpg?v=1794773880",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-buckingham-fountain-v2_36x24-framed-canvas-white.jpg?v=1794773884",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-buckingham-fountain-v2_36x24-plate.jpg?v=1794773868"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

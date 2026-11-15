@@ -1,0 +1,232 @@
+{
+ "design": "streetcars-1925-07-church-hill",
+ "title": "Church Hill and Jefferson Park, Richmond Streetcars 1925",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:36+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> streetcars-1925-07-church-hill --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/streetcars-1925-07-church-hill/v1.json",
+  "base_kind": "set",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond's Streetcars, 1925",
+   "piece": "Box 7",
+   "plate": "STC-07",
+   "version": "2",
+   "drawn": "2026",
+   "location": "37.533° N 77.418° W",
+   "facing": "0°"
+  },
+  "files": {
+   "streetcars-1925-07-church-hill-v2_24x18.jpg": {
+    "base": "print-files/streetcars/streetcars-1925-07-church-hill_24x18.jpg",
+    "base_sha256": "dce8b2ac8bfb4828cc7bb5f1d047008f6d170753cae756ed3fb5885017e0e00e",
+    "at": {
+     "x": 5596,
+     "y": 4980,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-07-church-hill-v2_canvas-16x12.jpg": {
+    "base": "print-files/streetcars/canvas/streetcars-1925-07-church-hill_canvas-16x12.jpg",
+    "base_sha256": "6a1a1b9793dacd5912ee59ce33e9268eba1e74217d8b67344de885bfafcc3f05",
+    "at": {
+     "x": 3975,
+     "y": 3742,
+     "w": 1127,
+     "h": 159,
+     "u": 0.8667,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-07-church-hill-v2_canvas-24x18.jpg": {
+    "base": "print-files/streetcars/canvas/streetcars-1925-07-church-hill_canvas-24x18.jpg",
+    "base_sha256": "c83ff2881dd38fda0b0a4ca69978d823778bae6478d6d98567b21aa4113a897b",
+    "at": {
+     "x": 6046,
+     "y": 5430,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925.svg",
+   "sha256": "0e1eb6dd1ffabf78e4a0c264b071d10c35936546b0e6d6765fb231b587679e3d",
+   "frozen": "data/_releases/scenes/0e1eb6dd1ffabf78e4a0c264b071d10c35936546b0e6d6765fb231b587679e3d.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [
+    "--streetcar-scale",
+    "1.5"
+   ],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925-fine.svg",
+   "sha256": "cde4c4c25ffb003ae4ee0202386b79ada618276d5df2b0bc66e19a3a0fb2f9ab",
+   "frozen": "data/_releases/scenes/cde4c4c25ffb003ae4ee0202386b79ada618276d5df2b0bc66e19a3a0fb2f9ab.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/streetcars-1925-07-church-hill/v1.json": "62d68756fc24e25707b1e10a813ad13d32f5ca4bf5b41e6c21e0d97c49dcabcb"
+ },
+ "data": {
+  "richmond-streetcars": {
+   "snapshot": "data/_releases/richmond-streetcars@6e9297a3959e",
+   "files": {
+    "dem.bin.gz": "84786d9e1fa5ccdb10f4a551a77100fdc1704b71d3f782290e89356111a4a9d0",
+    "osm.json": "7dbe53ef18944a9c025a688b68194b30502add174241cfc70fa4eaf80e967eee",
+    "yearbuilt.json": "add6087d440260fbde74ce64208d372e2520dabf6e52130c350c8fa2c79b4e63"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/streetcars/streetcars-1925-07-church-hill-v2_24x18.jpg",
+   "sha256": "9dbaa6fca267e95439ba670feffdb5985bc60b30755552995a0a67dceb1b1169",
+   "bytes": 6907168,
+   "printful_file_id": 1112747838
+  },
+  "canvas": [
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-07-church-hill-v2_canvas-16x12.jpg",
+    "sha256": "9b5541729d4af580a38ea402749039c82c1aa3a9b61aeb5707b3a58b8a3a8c5b",
+    "bytes": 4176771,
+    "printful_file_id": 1112748058
+   },
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-07-church-hill-v2_canvas-24x18.jpg",
+    "sha256": "07cc5262e26079e97d7c8bd7c616a4210a7a350eacc18dac922581497bfc9591",
+    "bytes": 6890591,
+    "printful_file_id": 1112748215
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "place": "Richmond streetcars",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print_dir": "print-files/streetcars",
+   "tags": [
+    "streetcars-1925"
+   ],
+   "credit_extra": "Routes after Harland Bartholomew &amp; Associates for the City Planning Commission, plate 53 (1943), with the sources cited for each stop on the <a href=\"https://busse.github.io/isoscape/#/streetcars\">streetcars page ↗</a>.",
+   "one_mockup": true,
+   "title": "Church Hill and Jefferson Park, Richmond Streetcars 1925",
+   "ratio": "3x4",
+   "sizes": [
+    "12x16",
+    "18x24"
+   ],
+   "print": "streetcars-1925-07-church-hill-v2_24x18.jpg",
+   "canvas": "streetcars-1925-07-church-hill-v2_canvas-{w}x{h}.jpg",
+   "explore": "richmond-streetcars:1925@2019,826,6",
+   "detail": [
+    0.35,
+    0.2,
+    0.65,
+    0.6
+   ],
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "STC-07",
+   "plate_box": [
+    0.77722,
+    0.92222,
+    0.96889,
+    0.95833
+   ]
+  },
+  "products": [
+   {
+    "handle": "church-hill-and-jefferson-park-richmond-streetcars-1925-print",
+    "id": "gid://shopify/Product/9135596634230",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "church-hill-and-jefferson-park-richmond-streetcars-1925-framed-print",
+    "id": "gid://shopify/Product/9135596699766",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "church-hill-and-jefferson-park-richmond-streetcars-1925-framed-canvas",
+    "id": "gid://shopify/Product/9135596798070",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-07-church-hill-v2_24x18-print.jpg?v=1794775193",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-07-church-hill-v2_24x18-detail.jpg?v=1794775197",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-07-church-hill-v2_24x18-plate.jpg?v=1794775201"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-07-church-hill-v2_24x18-framed-print-black.jpg?v=1794775206",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-07-church-hill-v2_24x18-framed-print-white.jpg?v=1794775210",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-07-church-hill-v2_24x18-detail.jpg?v=1794775197",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-07-church-hill-v2_24x18-plate.jpg?v=1794775201"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-07-church-hill-v2_24x18-framed-canvas-black.jpg?v=1794775214",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-07-church-hill-v2_24x18-framed-canvas-white.jpg?v=1794775219",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-07-church-hill-v2_24x18-detail.jpg?v=1794775197",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-07-church-hill-v2_24x18-plate.jpg?v=1794775201"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-streetcars:1925@2019,826,6"
+ },
+ "restamped": {
+  "files": 3,
+  "matched": 3
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 2
+ }
+}

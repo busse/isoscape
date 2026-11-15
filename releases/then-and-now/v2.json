@@ -1,0 +1,228 @@
+{
+ "design": "then-and-now",
+ "title": "Richmond, Then & Now",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:30+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> then-and-now --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/then-and-now/v1.json",
+  "base_kind": "compose",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond",
+   "piece": "Then & Now",
+   "plate": "RVA-07",
+   "version": "2",
+   "drawn": "2026",
+   "location": "37.534° N 77.427° W",
+   "facing": "351°"
+  },
+  "files": {
+   "then-and-now-v2_24x36.jpg": {
+    "base": "print-files/then-and-now_24x36.jpg",
+    "base_sha256": "44aa6a8a1bb5aaf7e780e3b7413a67e351f954674c856edab8c5aeb4148d16c2",
+    "at": {
+     "x": 5154,
+     "y": 10204,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   },
+   "then-and-now-v2_canvas-12x18.jpg": {
+    "base": "print-files/canvas/then-and-now_canvas-12x18.jpg",
+    "base_sha256": "656c8385e1822951e08f5f511e31ece1b94f2353190f56ef652d2fa18c778c49",
+    "at": {
+     "x": 2675,
+     "y": 5498,
+     "w": 1195,
+     "h": 169,
+     "u": 0.9192,
+     "where": "foot"
+    }
+   },
+   "then-and-now-v2_canvas-20x30.jpg": {
+    "base": "print-files/canvas/then-and-now_canvas-20x30.jpg",
+    "base_sha256": "94c52d6dd6bf46a9966f3a6ef197f57bc84697f33ac3f1d8860013519860b5e8",
+    "at": {
+     "x": 4611,
+     "y": 8934,
+     "w": 1543,
+     "h": 218,
+     "u": 1.1867,
+     "where": "foot"
+    }
+   },
+   "then-and-now-v2_canvas-24x36.jpg": {
+    "base": "print-files/canvas/then-and-now_canvas-24x36.jpg",
+    "base_sha256": "e93934903eab59beed82d511b6b05a7ee7a4e813e504cbb3ab9afeca0b7fabf4",
+    "at": {
+     "x": 5604,
+     "y": 10654,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-downtown-time",
+   "year": 1886,
+   "flags": [],
+   "svg": "out/builds/20261114-042400-richmond-downtown-time-1886/image.svg",
+   "sha256": "12b54a226f19f9d988b6bfbed3ce8cf419d767224fba29e3dbe5bf7324ba6c46",
+   "frozen": "data/_releases/scenes/12b54a226f19f9d988b6bfbed3ce8cf419d767224fba29e3dbe5bf7324ba6c46.svg",
+   "build": "20261114-042400-richmond-downtown-time-1886",
+   "commit": "8a9f63c",
+   "reproduces": false
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 2026,
+   "flags": [],
+   "svg": "out/builds/20261114-042428-richmond-downtown-time-2026/image.svg",
+   "sha256": "29f60a3eb9ffac24926d2bbda042aa27dd29024d83f4fb5362fb965cdbecea30",
+   "frozen": "data/_releases/scenes/29f60a3eb9ffac24926d2bbda042aa27dd29024d83f4fb5362fb965cdbecea30.svg",
+   "build": "20261114-042428-richmond-downtown-time-2026",
+   "commit": "8a9f63c",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/then-and-now/v1.json": "36af58c957f9f62db1355c2fae76c45727b3bf042ee5acfa78928fb05cac9785"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/then-and-now-v2_24x36.jpg",
+   "sha256": "117f981f024adab3b4fa12957dac70d8a69fcd2d08457d04180d059d5baea75b",
+   "bytes": 12720467,
+   "printful_file_id": 1112710184
+  },
+  "canvas": [
+   {
+    "file": "print-files/canvas/then-and-now-v2_canvas-12x18.jpg",
+    "sha256": "bbc4a546ea2a121da77a4526f9a5c87065c9771309c7fe94d7798b40f76291ce",
+    "bytes": 4447981,
+    "printful_file_id": 1112710334
+   },
+   {
+    "file": "print-files/canvas/then-and-now-v2_canvas-20x30.jpg",
+    "sha256": "84412ee1469c0c8ed8db1f5c7e0ce28ec45d004dfff09c3f12b3ed7de41d35ee",
+    "bytes": 8295770,
+    "printful_file_id": 1112710484
+   },
+   {
+    "file": "print-files/canvas/then-and-now-v2_canvas-24x36.jpg",
+    "sha256": "3d4e422b29ce76f9085a5333bebb92b0614986f526ab4ffff321d389a9e87cb0",
+    "bytes": 10546497,
+    "printful_file_id": 1112710594
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Richmond, Then & Now",
+   "place": "Richmond",
+   "orientation": "vertical",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "then-and-now-v2_24x36.jpg",
+   "canvas": "then-and-now-v2_canvas-{w}x{h}.jpg",
+   "explore": "richmond-downtown-time:2026",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "RVA-07",
+   "plate_box": [
+    0.71583,
+    0.94481,
+    0.95056,
+    0.96694
+   ]
+  },
+  "products": [
+   {
+    "handle": "richmond-then-and-now-print",
+    "id": "gid://shopify/Product/9132813090934",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "richmond-then-and-now-framed-print",
+    "id": "gid://shopify/Product/9132813123702",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "richmond-then-and-now-framed-canvas",
+    "id": "gid://shopify/Product/9132813156470",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v2_24x36-print.jpg?v=1794773266",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v2_24x36-plate.jpg?v=1794773270"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v2_24x36-framed-print-black.jpg?v=1794773274",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v2_24x36-framed-print-white.jpg?v=1794773279",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v2_24x36-plate.jpg?v=1794773270"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v2_24x36-framed-canvas-black.jpg?v=1794773284",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v2_24x36-framed-canvas-white.jpg?v=1794773288",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v2_24x36-plate.jpg?v=1794773270"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-downtown-time:2026"
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 0
+ }
+}

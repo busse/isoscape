@@ -1,0 +1,232 @@
+{
+ "design": "streetcars-1925-13-the-fan",
+ "title": "The Fan, Richmond Streetcars 1925",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:37+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> streetcars-1925-13-the-fan --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/streetcars-1925-13-the-fan/v1.json",
+  "base_kind": "set",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond's Streetcars, 1925",
+   "piece": "Box 13",
+   "plate": "STC-13",
+   "version": "2",
+   "drawn": "2026",
+   "location": "37.550° N 77.463° W",
+   "facing": "0°"
+  },
+  "files": {
+   "streetcars-1925-13-the-fan-v2_24x18.jpg": {
+    "base": "print-files/streetcars/streetcars-1925-13-the-fan_24x18.jpg",
+    "base_sha256": "5c3e133b35591bc9870054fab1f9d7276388bb10ac91b004d100634739679134",
+    "at": {
+     "x": 5596,
+     "y": 4980,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-13-the-fan-v2_canvas-16x12.jpg": {
+    "base": "print-files/streetcars/canvas/streetcars-1925-13-the-fan_canvas-16x12.jpg",
+    "base_sha256": "f3409659bc76edeae8fb2ea8514883f5a8e5c9cc9946e4812fcde9566bdedc01",
+    "at": {
+     "x": 3975,
+     "y": 3742,
+     "w": 1127,
+     "h": 159,
+     "u": 0.8667,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-13-the-fan-v2_canvas-24x18.jpg": {
+    "base": "print-files/streetcars/canvas/streetcars-1925-13-the-fan_canvas-24x18.jpg",
+    "base_sha256": "7c8ed634f57ee75d0fd82d917f37dde26b7579b9855bbc00a1b709fc45a05d1f",
+    "at": {
+     "x": 6046,
+     "y": 5430,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925.svg",
+   "sha256": "0e1eb6dd1ffabf78e4a0c264b071d10c35936546b0e6d6765fb231b587679e3d",
+   "frozen": "data/_releases/scenes/0e1eb6dd1ffabf78e4a0c264b071d10c35936546b0e6d6765fb231b587679e3d.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [
+    "--streetcar-scale",
+    "1.5"
+   ],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925-fine.svg",
+   "sha256": "cde4c4c25ffb003ae4ee0202386b79ada618276d5df2b0bc66e19a3a0fb2f9ab",
+   "frozen": "data/_releases/scenes/cde4c4c25ffb003ae4ee0202386b79ada618276d5df2b0bc66e19a3a0fb2f9ab.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/streetcars-1925-13-the-fan/v1.json": "0d2784a7a849afa60ae5586e750c2523d5aba7982fe99d2aba6906f3713c8567"
+ },
+ "data": {
+  "richmond-streetcars": {
+   "snapshot": "data/_releases/richmond-streetcars@6e9297a3959e",
+   "files": {
+    "dem.bin.gz": "84786d9e1fa5ccdb10f4a551a77100fdc1704b71d3f782290e89356111a4a9d0",
+    "osm.json": "7dbe53ef18944a9c025a688b68194b30502add174241cfc70fa4eaf80e967eee",
+    "yearbuilt.json": "add6087d440260fbde74ce64208d372e2520dabf6e52130c350c8fa2c79b4e63"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/streetcars/streetcars-1925-13-the-fan-v2_24x18.jpg",
+   "sha256": "0e9286ff7961e314aa0f1c298db02f906a17a75adb2ff8b244dfdc631b7ad36e",
+   "bytes": 7579840,
+   "printful_file_id": 1112750358
+  },
+  "canvas": [
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-13-the-fan-v2_canvas-16x12.jpg",
+    "sha256": "3d0f5a252dc45371460610fa168f4ba8033fc90eaf2fe665771fa9e925181a9b",
+    "bytes": 4637513,
+    "printful_file_id": 1112750488
+   },
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-13-the-fan-v2_canvas-24x18.jpg",
+    "sha256": "4bcf95b3b9d2656993ab74e1bbaf4fcbb584825f2e3c1f36f5d3bd99061e7812",
+    "bytes": 7585776,
+    "printful_file_id": 1112750633
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "place": "Richmond streetcars",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print_dir": "print-files/streetcars",
+   "tags": [
+    "streetcars-1925"
+   ],
+   "credit_extra": "Routes after Harland Bartholomew &amp; Associates for the City Planning Commission, plate 53 (1943), with the sources cited for each stop on the <a href=\"https://busse.github.io/isoscape/#/streetcars\">streetcars page ↗</a>.",
+   "one_mockup": true,
+   "title": "The Fan, Richmond Streetcars 1925",
+   "ratio": "3x4",
+   "sizes": [
+    "12x16",
+    "18x24"
+   ],
+   "print": "streetcars-1925-13-the-fan-v2_24x18.jpg",
+   "canvas": "streetcars-1925-13-the-fan-v2_canvas-{w}x{h}.jpg",
+   "explore": "richmond-streetcars:1925@311,270,6",
+   "detail": [
+    0.35,
+    0.2,
+    0.65,
+    0.6
+   ],
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "STC-13",
+   "plate_box": [
+    0.77722,
+    0.92222,
+    0.96889,
+    0.95833
+   ]
+  },
+  "products": [
+   {
+    "handle": "the-fan-richmond-streetcars-1925-print",
+    "id": "gid://shopify/Product/9135598370934",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "the-fan-richmond-streetcars-1925-framed-print",
+    "id": "gid://shopify/Product/9135598502006",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "the-fan-richmond-streetcars-1925-framed-canvas",
+    "id": "gid://shopify/Product/9135598567542",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-v2_24x18-print.jpg?v=1794775378",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-v2_24x18-detail.jpg?v=1794775382",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-v2_24x18-plate.jpg?v=1794775387"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-v2_24x18-framed-print-black.jpg?v=1794775391",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-v2_24x18-framed-print-white.jpg?v=1794775395",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-v2_24x18-detail.jpg?v=1794775382",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-v2_24x18-plate.jpg?v=1794775387"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-v2_24x18-framed-canvas-black.jpg?v=1794775400",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-v2_24x18-framed-canvas-white.jpg?v=1794775404",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-v2_24x18-detail.jpg?v=1794775382",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-v2_24x18-plate.jpg?v=1794775387"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-streetcars:1925@311,270,6"
+ },
+ "restamped": {
+  "files": 3,
+  "matched": 3
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 2
+ }
+}

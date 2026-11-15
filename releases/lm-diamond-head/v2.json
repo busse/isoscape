@@ -1,0 +1,218 @@
+{
+ "design": "lm-diamond-head",
+ "title": "Waikiki and Diamond Head",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:34+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-diamond-head --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-diamond-head/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Waikiki and Diamond Head",
+   "plate": "LMA-48",
+   "version": "2",
+   "drawn": "2026",
+   "location": "21.264° N 157.821° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-diamond-head-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-diamond-head_36x24.jpg",
+    "base_sha256": "1562aea4cc1614773227d61e345ab6212cff0feb220aea9397c6f84b2be083d9",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-diamond-head-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-diamond-head_canvas-18x12.jpg",
+    "base_sha256": "26672dbc69b434125273b4d8b3eda9f2c1a0a5c0e0f8a55ef7e0c48cc60533d0",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-diamond-head-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-diamond-head_canvas-30x20.jpg",
+    "base_sha256": "b528d7b9b4c7d6ca40d505383f6433c35616ee308f3f03cdc31fae7b14d117e1",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-diamond-head-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-diamond-head_canvas-36x24.jpg",
+    "base_sha256": "bfa3383c06cb4a448771e0d0142d886668df6adaf5049d33c91f7e0e588623b1",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-diamond-head",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-diamond-head.svg",
+   "sha256": "ab714558e40fd9cf357717bf79c6f2cd74aca1b67bba39ffe37a697be482ef77",
+   "frozen": "data/_releases/scenes/ab714558e40fd9cf357717bf79c6f2cd74aca1b67bba39ffe37a697be482ef77.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-diamond-head/v1.json": "4c117399329ba6ca342e23e4aa38a946f0e8d88192abb50cced9c61985263f77"
+ },
+ "data": {
+  "lm-diamond-head": {
+   "snapshot": "data/_releases/lm-diamond-head@31c45a62eef3",
+   "files": {
+    "dem-tiles/0-0.tif": "9434b4ae2e1b4438bd9661ec68832304e2989c51924d1879b776044d51752d46",
+    "dem-tiles/1-0.tif.part": "63f08a99343100cfa757dfa1f0993a75b6d3b40ac8f0f1b657caa91bf3494aa4",
+    "osm.json": "d1f82c061b910cbb1dc0b6ef07f97a855559b3e2e7f9d18d52371a07f234afa7"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-diamond-head-v2_36x24.jpg",
+   "sha256": "c9fa13e3860b1cdf820bdf1722523b7194c896177941bd2ade6dc5e798e85554",
+   "bytes": 2195703,
+   "printful_file_id": 1112738034
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-diamond-head-v2_canvas-18x12.jpg",
+    "sha256": "8a34e79ac65dd1221f90bcf6ba6840eb8f1697b57cf01f1f87d2cd7ed82468c3",
+    "bytes": 719609,
+    "printful_file_id": 1112738308
+   },
+   {
+    "file": "print-files/landmarks/lm-diamond-head-v2_canvas-30x20.jpg",
+    "sha256": "c9461a8171484ab023c4d5240b4377f4b1f0316349729524845dc189837bc07b",
+    "bytes": 1428705,
+    "printful_file_id": 1112738448
+   },
+   {
+    "file": "print-files/landmarks/lm-diamond-head-v2_canvas-36x24.jpg",
+    "sha256": "533fdbc50ce7c4362471316f2084dcf1f669271f8e962aeea12f57cc3fd58eb1",
+    "bytes": 1871015,
+    "printful_file_id": 1112738589
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Waikiki and Diamond Head",
+   "place": "Honolulu, Hawaii",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-diamond-head-v2_36x24.jpg",
+   "canvas": "lm-diamond-head-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-48",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "waikiki-and-diamond-head-print",
+    "id": "gid://shopify/Product/9133949943926",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "waikiki-and-diamond-head-framed-print",
+    "id": "gid://shopify/Product/9133949976694",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "waikiki-and-diamond-head-framed-canvas",
+    "id": "gid://shopify/Product/9133950042230",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-v2_36x24-print.jpg?v=1794774697",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-v2_36x24-plate.jpg?v=1794774701"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-v2_36x24-framed-print-black.jpg?v=1794774705",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-v2_36x24-framed-print-white.jpg?v=1794774709",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-v2_36x24-plate.jpg?v=1794774701"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-v2_36x24-framed-canvas-black.jpg?v=1794774714",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-v2_36x24-framed-canvas-white.jpg?v=1794774718",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-v2_36x24-plate.jpg?v=1794774701"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

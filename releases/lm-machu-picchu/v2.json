@@ -1,0 +1,219 @@
+{
+ "design": "lm-machu-picchu",
+ "title": "Machu Picchu and Aguas Calientes",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:35+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-machu-picchu --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-machu-picchu/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "World Landmarks",
+   "piece": "Machu Picchu and Aguas Calientes",
+   "plate": "LMW-03",
+   "version": "2",
+   "drawn": "2026",
+   "location": "13.159° S 72.535° W",
+   "facing": "155°"
+  },
+  "files": {
+   "lm-machu-picchu-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-machu-picchu_36x24.jpg",
+    "base_sha256": "c305c239a26be97a3ee7c5fe998810ae66f23fb6c3715ad0740edd9a83556112",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-machu-picchu-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-machu-picchu_canvas-18x12.jpg",
+    "base_sha256": "d8e9e05c1dbaa89d8290b265468a216ba2a82407885d4b31b5306b20a849abe6",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-machu-picchu-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-machu-picchu_canvas-30x20.jpg",
+    "base_sha256": "716fcd4a222858a9bfe67d380be15bbacf55df2bdd6837b2f23ba7d5a76b06ba",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-machu-picchu-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-machu-picchu_canvas-36x24.jpg",
+    "base_sha256": "744c1866a7dbb9733b46f4ffb18dde9a247fd741b2a997758f04cd3711aec68a",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-machu-picchu",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-machu-picchu.svg",
+   "sha256": "c065ab203cf54f8e1d14e1a5fc93ca59112359a9136fb4e8e3887d9b15d013d0",
+   "frozen": "data/_releases/scenes/c065ab203cf54f8e1d14e1a5fc93ca59112359a9136fb4e8e3887d9b15d013d0.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-machu-picchu/v1.json": "a81885495cd7cec53ed67b932d1a04e25692a2cce324b91b8bd4b5b6cac864a8"
+ },
+ "data": {
+  "lm-machu-picchu": {
+   "snapshot": "data/_releases/lm-machu-picchu@6116beb5c4a4",
+   "files": {
+    "dem.bin.gz": "6a72dc7a9460bcbcd81cc18bf9109f6358f9801695a5f13b9ec08a9921493644",
+    "osm.json": "4be767b0f08620bc8417a1e5aad5fd079e279f17d5d9787032c0a0f6c18486d9"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-machu-picchu-v2_36x24.jpg",
+   "sha256": "de4c88cae52377a978d1e6fedea5599eb08fef0e7731149637b0f723774d2ac3",
+   "bytes": 2189685,
+   "printful_file_id": 1112740920
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-machu-picchu-v2_canvas-18x12.jpg",
+    "sha256": "e9b3b08a81f62f49d440c9b076d1937cc466c78ab03a5a768b0f307aac144204",
+    "bytes": 754093,
+    "printful_file_id": 1112741036
+   },
+   {
+    "file": "print-files/landmarks/lm-machu-picchu-v2_canvas-30x20.jpg",
+    "sha256": "059b7d37d1e6d93ade32d667ee8efecc39043f555cbfd43bbfb377fb6dd8df5c",
+    "bytes": 1464974,
+    "printful_file_id": 1112741231
+   },
+   {
+    "file": "print-files/landmarks/lm-machu-picchu-v2_canvas-36x24.jpg",
+    "sha256": "2e39db475e1b913766985b6da12a0a38bf7b819444d390520db572775b826a46",
+    "bytes": 1898168,
+    "printful_file_id": 1112741465
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Machu Picchu and Aguas Calientes",
+   "place": "Cusco, Peru",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-machu-picchu-v2_36x24.jpg",
+   "canvas": "lm-machu-picchu-v2_canvas-{w}x{h}.jpg",
+   "world": true,
+   "elevation_credit": "Elevation: produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMW-03",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "machu-picchu-and-aguas-calientes-print",
+    "id": "gid://shopify/Product/9135212331126",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "machu-picchu-and-aguas-calientes-framed-print",
+    "id": "gid://shopify/Product/9135212363894",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "machu-picchu-and-aguas-calientes-framed-canvas",
+    "id": "gid://shopify/Product/9135212429430",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-v2_36x24-print.jpg?v=1794774850",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-v2_36x24-plate.jpg?v=1794774853"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-v2_36x24-framed-print-black.jpg?v=1794774857",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-v2_36x24-framed-print-white.jpg?v=1794774862",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-v2_36x24-plate.jpg?v=1794774853"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-v2_36x24-framed-canvas-black.jpg?v=1794774866",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-v2_36x24-framed-canvas-white.jpg?v=1794774871",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-v2_36x24-plate.jpg?v=1794774853"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

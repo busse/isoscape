@@ -1,0 +1,250 @@
+{
+ "design": "streetcars-1925-map",
+ "title": "Richmond's Streetcars, 1925: The System Map",
+ "version": 3,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:35+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> streetcars-1925-map --version 3   # from the v2 files below"
+  ],
+  "base_version": 2,
+  "base_record": "releases/streetcars-1925-map/v2.json",
+  "base_kind": "set",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond's Streetcars, 1925",
+   "piece": "The map",
+   "plate": "STC-M",
+   "version": "3",
+   "drawn": "2026",
+   "location": "37.560° N 77.471° W",
+   "facing": "0°"
+  },
+  "files": {
+   "streetcars-1925-map-v3_36x24.jpg": {
+    "base": "print-files/streetcars/streetcars-1925-map-v2_36x24.jpg",
+    "base_sha256": "ff63f92abb64398118eca87b8840e92de9bfad7bb371eba25a00b652a0fcab72",
+    "at": {
+     "x": 8886,
+     "y": 6736,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-map-v3_canvas-18x12.jpg": {
+    "base": "print-files/streetcars/canvas/streetcars-1925-map-v2_canvas-18x12.jpg",
+    "base_sha256": "7dc214299f889aa298cc08949cde1e2df58a1a4fd23461a50d00eabde7635ded",
+    "at": {
+     "x": 4543,
+     "y": 3766,
+     "w": 1195,
+     "h": 169,
+     "u": 0.9192,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-map-v3_canvas-30x20.jpg": {
+    "base": "print-files/streetcars/canvas/streetcars-1925-map-v2_canvas-30x20.jpg",
+    "base_sha256": "f63eadacadc7397e3303cdde2f1e674429858c14a9d87c5feecda22e81115415",
+    "at": {
+     "x": 7723,
+     "y": 6046,
+     "w": 1543,
+     "h": 218,
+     "u": 1.1867,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-map-v3_canvas-36x24.jpg": {
+    "base": "print-files/streetcars/canvas/streetcars-1925-map-v2_canvas-36x24.jpg",
+    "base_sha256": "40e180395c251a8cd18bb489c2df39777d57f0903ff7dc6b42e08469ddb2ff94",
+    "at": {
+     "x": 9336,
+     "y": 7186,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925.svg",
+   "sha256": "0e1eb6dd1ffabf78e4a0c264b071d10c35936546b0e6d6765fb231b587679e3d",
+   "frozen": "data/_releases/scenes/0e1eb6dd1ffabf78e4a0c264b071d10c35936546b0e6d6765fb231b587679e3d.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [
+    "--streetcar-scale",
+    "1.5"
+   ],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925-fine.svg",
+   "sha256": "cde4c4c25ffb003ae4ee0202386b79ada618276d5df2b0bc66e19a3a0fb2f9ab",
+   "frozen": "data/_releases/scenes/cde4c4c25ffb003ae4ee0202386b79ada618276d5df2b0bc66e19a3a0fb2f9ab.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/streetcars-1925-map/v2.json": "73c219d64bb574ccff3f3c182013e9d9d36b9b72ec912276b7c9584ca9d58bc5"
+ },
+ "data": {
+  "richmond-streetcars": {
+   "snapshot": "data/_releases/richmond-streetcars@6e9297a3959e",
+   "files": {
+    "dem.bin.gz": "84786d9e1fa5ccdb10f4a551a77100fdc1704b71d3f782290e89356111a4a9d0",
+    "osm.json": "7dbe53ef18944a9c025a688b68194b30502add174241cfc70fa4eaf80e967eee",
+    "yearbuilt.json": "add6087d440260fbde74ce64208d372e2520dabf6e52130c350c8fa2c79b4e63"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/streetcars/streetcars-1925-map-v3_36x24.jpg",
+   "sha256": "2a70f00a9821a772424c5fca6112bdb51a2ebe9e2c566af2c234c4c6b1aa5551",
+   "bytes": 13269597,
+   "printful_file_id": 1112743657
+  },
+  "canvas": [
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-map-v3_canvas-18x12.jpg",
+    "sha256": "50f7002b902ee29ce8d1772c50212b85d83e5d969230df64c3499fcb631747e8",
+    "bytes": 4674890,
+    "printful_file_id": 1112743881
+   },
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-map-v3_canvas-30x20.jpg",
+    "sha256": "771523697c6bcdd1e3bf87bea4d6118f936c93ee6d3b1de39461b5b8c48e4084",
+    "bytes": 9519297,
+    "printful_file_id": 1112744049
+   },
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-map-v3_canvas-36x24.jpg",
+    "sha256": "67801466676e546708509ddd88b47127ff1e3cfa94fc2000675208eefde41b56",
+    "bytes": 12505311,
+    "printful_file_id": 1112744262
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "place": "Richmond streetcars",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print_dir": "print-files/streetcars",
+   "tags": [
+    "streetcars-1925"
+   ],
+   "credit_extra": "Routes after Harland Bartholomew &amp; Associates for the City Planning Commission, plate 53 (1943), with the sources cited for each stop on the <a href=\"https://busse.github.io/isoscape/#/streetcars\">streetcars page ↗</a>.",
+   "one_mockup": true,
+   "title": "Richmond's Streetcars, 1925: The System Map",
+   "sizes": [
+    "12x18",
+    "20x30",
+    "24x36"
+   ],
+   "print": "streetcars-1925-map-v3_36x24.jpg",
+   "canvas": "streetcars-1925-map-v3_canvas-{w}x{h}.jpg",
+   "explore": "richmond-streetcars:1925",
+   "detail": [
+    0.55,
+    0.25,
+    0.75,
+    0.55
+   ],
+   "version": 3,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "STC-M",
+   "plate_box": [
+    0.82278,
+    0.93556,
+    0.97926,
+    0.96875
+   ]
+  },
+  "products": [
+   {
+    "handle": "richmonds-streetcars-1925-the-system-map-print",
+    "id": "gid://shopify/Product/9135594668150",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "richmonds-streetcars-1925-the-system-map-framed-print",
+    "id": "gid://shopify/Product/9135594733686",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "richmonds-streetcars-1925-the-system-map-framed-canvas",
+    "id": "gid://shopify/Product/9135594831990",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-map-v3_36x24-print.jpg?v=1794774964",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-map-v3_36x24-detail.jpg?v=1794774968",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-map-v3_36x24-plate.jpg?v=1794774972"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-map-v3_36x24-framed-print-black.jpg?v=1794774977",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-map-v3_36x24-framed-print-white.jpg?v=1794774982",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-map-v3_36x24-detail.jpg?v=1794774968",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-map-v3_36x24-plate.jpg?v=1794774972"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-map-v3_36x24-framed-canvas-black.jpg?v=1794774987",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-map-v3_36x24-framed-canvas-white.jpg?v=1794774991",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-map-v3_36x24-detail.jpg?v=1794774968",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-map-v3_36x24-plate.jpg?v=1794774972"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-streetcars:1925"
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 2
+ }
+}

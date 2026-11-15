@@ -1,0 +1,216 @@
+{
+ "design": "lm-statue-of-liberty",
+ "title": "Statue of Liberty",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:31+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-statue-of-liberty --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-statue-of-liberty/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Statue of Liberty",
+   "plate": "LMA-04",
+   "version": "2",
+   "drawn": "2026",
+   "location": "40.702° N 74.034° W",
+   "facing": "326°"
+  },
+  "files": {
+   "lm-statue-of-liberty-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-statue-of-liberty_36x24.jpg",
+    "base_sha256": "e8f9392e79b40c40271b81df5db7f6644b171267d5aee2dc8ce9cf2bc3f171f1",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-statue-of-liberty-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-statue-of-liberty_canvas-18x12.jpg",
+    "base_sha256": "235070a035d5b73ed692f888af38fab90718d4724d39d30fab943d8ceeb934be",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-statue-of-liberty-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-statue-of-liberty_canvas-30x20.jpg",
+    "base_sha256": "67550a761489e2237a4c2a2209e83567e4ebaeb4ccfa1b479e6795a5e750d651",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-statue-of-liberty-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-statue-of-liberty_canvas-36x24.jpg",
+    "base_sha256": "b7bf6cc9722ffc603d9f4638b0926950aa89d1d810df58c9247b22a66c8ae940",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-statue-of-liberty",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-statue-of-liberty.svg",
+   "sha256": "d56a56cab6d2b03de87550f079bd1e349c91ccdc6c6b73790cd0ebc79966a03e",
+   "frozen": "data/_releases/scenes/d56a56cab6d2b03de87550f079bd1e349c91ccdc6c6b73790cd0ebc79966a03e.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-statue-of-liberty/v1.json": "7ad1f8a5dd52075b3165672f4d692823cb76b532b9fc3ec5e77f4410030c786e"
+ },
+ "data": {
+  "lm-statue-of-liberty": {
+   "snapshot": "data/_releases/lm-statue-of-liberty@8f9528cf1947",
+   "files": {
+    "osm.json": "91dcd25d83ab58e03102f7af8df5ec7021d87a7e52d4291c9694ad985b393779"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-statue-of-liberty-v2_36x24.jpg",
+   "sha256": "5a48b7b2d5ddf38fefb4f7b1398023f13f7df10f9c10c51665c19af1ac1ead84",
+   "bytes": 1748593,
+   "printful_file_id": 1112713592
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-statue-of-liberty-v2_canvas-18x12.jpg",
+    "sha256": "46304fd96a12317d1dc57749f71d0bec52bde7ab72bf12e5dbf2aa7e83fe29c1",
+    "bytes": 559229,
+    "printful_file_id": 1112713752
+   },
+   {
+    "file": "print-files/landmarks/lm-statue-of-liberty-v2_canvas-30x20.jpg",
+    "sha256": "edda315efd849da66c48815369c22b96e03714e62e2a3e931f84402c347d481a",
+    "bytes": 1113681,
+    "printful_file_id": 1112713815
+   },
+   {
+    "file": "print-files/landmarks/lm-statue-of-liberty-v2_canvas-36x24.jpg",
+    "sha256": "0f67543c21018c4042769f7c56178c136ea972fd9771268ab63d39869cba1f11",
+    "bytes": 1484144,
+    "printful_file_id": 1112713965
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Statue of Liberty",
+   "place": "New York Harbor",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-statue-of-liberty-v2_36x24.jpg",
+   "canvas": "lm-statue-of-liberty-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-04",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "statue-of-liberty-print",
+    "id": "gid://shopify/Product/9132840222838",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "statue-of-liberty-framed-print",
+    "id": "gid://shopify/Product/9132840321142",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "statue-of-liberty-framed-canvas",
+    "id": "gid://shopify/Product/9132840353910",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-v2_36x24-print.jpg?v=1794773405",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-v2_36x24-plate.jpg?v=1794773410"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-v2_36x24-framed-print-black.jpg?v=1794773414",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-v2_36x24-framed-print-white.jpg?v=1794773418",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-v2_36x24-plate.jpg?v=1794773410"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-v2_36x24-framed-canvas-black.jpg?v=1794773422",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-v2_36x24-framed-canvas-white.jpg?v=1794773427",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-v2_36x24-plate.jpg?v=1794773410"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

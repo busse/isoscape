@@ -1,0 +1,232 @@
+{
+ "design": "streetcars-1925-06-nine-mile",
+ "title": "Nine Mile Road, Richmond Streetcars 1925",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:36+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> streetcars-1925-06-nine-mile --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/streetcars-1925-06-nine-mile/v1.json",
+  "base_kind": "set",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond's Streetcars, 1925",
+   "piece": "Box 6",
+   "plate": "STC-06",
+   "version": "2",
+   "drawn": "2026",
+   "location": "37.542° N 77.401° W",
+   "facing": "0°"
+  },
+  "files": {
+   "streetcars-1925-06-nine-mile-v2_24x18.jpg": {
+    "base": "print-files/streetcars/streetcars-1925-06-nine-mile_24x18.jpg",
+    "base_sha256": "cad9c3a5c3c9a7def5d3f1ffbbb34001c3e91e9866ae3e7b800da2fb4240d4d7",
+    "at": {
+     "x": 5596,
+     "y": 4980,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-06-nine-mile-v2_canvas-16x12.jpg": {
+    "base": "print-files/streetcars/canvas/streetcars-1925-06-nine-mile_canvas-16x12.jpg",
+    "base_sha256": "6acafada911b5aeb2d1115b95c4e8eb5639b9cd2941db2ba554f1199e87fa5dd",
+    "at": {
+     "x": 3975,
+     "y": 3742,
+     "w": 1127,
+     "h": 159,
+     "u": 0.8667,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-06-nine-mile-v2_canvas-24x18.jpg": {
+    "base": "print-files/streetcars/canvas/streetcars-1925-06-nine-mile_canvas-24x18.jpg",
+    "base_sha256": "a8453c287ece6a7e4d6ec5bef5616b2060f8648dfd21242945f78c8490cb715f",
+    "at": {
+     "x": 6046,
+     "y": 5430,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925.svg",
+   "sha256": "0e1eb6dd1ffabf78e4a0c264b071d10c35936546b0e6d6765fb231b587679e3d",
+   "frozen": "data/_releases/scenes/0e1eb6dd1ffabf78e4a0c264b071d10c35936546b0e6d6765fb231b587679e3d.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  },
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [
+    "--streetcar-scale",
+    "1.5"
+   ],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925-fine.svg",
+   "sha256": "cde4c4c25ffb003ae4ee0202386b79ada618276d5df2b0bc66e19a3a0fb2f9ab",
+   "frozen": "data/_releases/scenes/cde4c4c25ffb003ae4ee0202386b79ada618276d5df2b0bc66e19a3a0fb2f9ab.svg",
+   "reproduces": true,
+   "commit": "42e7fdb9a737e41523725244b18706196ecc8d86"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/streetcars-1925-06-nine-mile/v1.json": "f8052dc04a7cf0295a4953b729ef2306232a6d4e9e9c53fa0bd3d8cef593fe14"
+ },
+ "data": {
+  "richmond-streetcars": {
+   "snapshot": "data/_releases/richmond-streetcars@6e9297a3959e",
+   "files": {
+    "dem.bin.gz": "84786d9e1fa5ccdb10f4a551a77100fdc1704b71d3f782290e89356111a4a9d0",
+    "osm.json": "7dbe53ef18944a9c025a688b68194b30502add174241cfc70fa4eaf80e967eee",
+    "yearbuilt.json": "add6087d440260fbde74ce64208d372e2520dabf6e52130c350c8fa2c79b4e63"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/streetcars/streetcars-1925-06-nine-mile-v2_24x18.jpg",
+   "sha256": "7e7de678474965261f841ee9a29726c47bf45ff480423f85a37fb586135a18ee",
+   "bytes": 3785944,
+   "printful_file_id": 1112747145
+  },
+  "canvas": [
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-06-nine-mile-v2_canvas-16x12.jpg",
+    "sha256": "140a09499f738f4d7c10ac872971d0b683d227a63e6e630e8b8b7316dd023147",
+    "bytes": 2433490,
+    "printful_file_id": 1112747440
+   },
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-06-nine-mile-v2_canvas-24x18.jpg",
+    "sha256": "b2cdcf492ed7d31057cb72c38978f3ba8d920c16b907b37eb24bc944d7139d27",
+    "bytes": 3917710,
+    "printful_file_id": 1112747616
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "place": "Richmond streetcars",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print_dir": "print-files/streetcars",
+   "tags": [
+    "streetcars-1925"
+   ],
+   "credit_extra": "Routes after Harland Bartholomew &amp; Associates for the City Planning Commission, plate 53 (1943), with the sources cited for each stop on the <a href=\"https://busse.github.io/isoscape/#/streetcars\">streetcars page ↗</a>.",
+   "one_mockup": true,
+   "title": "Nine Mile Road, Richmond Streetcars 1925",
+   "ratio": "3x4",
+   "sizes": [
+    "12x16",
+    "18x24"
+   ],
+   "print": "streetcars-1925-06-nine-mile-v2_24x18.jpg",
+   "canvas": "streetcars-1925-06-nine-mile-v2_canvas-{w}x{h}.jpg",
+   "explore": "richmond-streetcars:1925@2698,520,6",
+   "detail": [
+    0.35,
+    0.2,
+    0.65,
+    0.6
+   ],
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "STC-06",
+   "plate_box": [
+    0.77722,
+    0.92222,
+    0.96889,
+    0.95833
+   ]
+  },
+  "products": [
+   {
+    "handle": "nine-mile-road-richmond-streetcars-1925-print",
+    "id": "gid://shopify/Product/9135596339318",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "nine-mile-road-richmond-streetcars-1925-framed-print",
+    "id": "gid://shopify/Product/9135596437622",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "nine-mile-road-richmond-streetcars-1925-framed-canvas",
+    "id": "gid://shopify/Product/9135596535926",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-06-nine-mile-v2_24x18-print.jpg?v=1794775162",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-06-nine-mile-v2_24x18-detail.jpg?v=1794775166",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-06-nine-mile-v2_24x18-plate.jpg?v=1794775170"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-06-nine-mile-v2_24x18-framed-print-black.jpg?v=1794775175",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-06-nine-mile-v2_24x18-framed-print-white.jpg?v=1794775179",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-06-nine-mile-v2_24x18-detail.jpg?v=1794775166",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-06-nine-mile-v2_24x18-plate.jpg?v=1794775170"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-06-nine-mile-v2_24x18-framed-canvas-black.jpg?v=1794775184",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-06-nine-mile-v2_24x18-framed-canvas-white.jpg?v=1794775188",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-06-nine-mile-v2_24x18-detail.jpg?v=1794775166",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-06-nine-mile-v2_24x18-plate.jpg?v=1794775170"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-streetcars:1925@2698,520,6"
+ },
+ "restamped": {
+  "files": 3,
+  "matched": 3
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 2
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "design": "lm-jefferson-memorial",
+ "title": "Jefferson Memorial",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:32+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-jefferson-memorial --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-jefferson-memorial/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Jefferson Memorial",
+   "plate": "LMA-11",
+   "version": "2",
+   "drawn": "2026",
+   "location": "38.881° N 77.037° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-jefferson-memorial-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-jefferson-memorial_36x24.jpg",
+    "base_sha256": "1c7eb67dd2be013a903ba87281304d4d7533dd7f3670c2bdb1f431cc5f718436",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-jefferson-memorial-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-jefferson-memorial_canvas-18x12.jpg",
+    "base_sha256": "316d33843f46cbeb2b1e3dfc4c7689e4fbba32b7b1237bc275a2d19f5d621fb4",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-jefferson-memorial-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-jefferson-memorial_canvas-30x20.jpg",
+    "base_sha256": "4152a874f8da0171785a33e0aad481647b3c6986a7df67d9a19bdb7f078bec93",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-jefferson-memorial-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-jefferson-memorial_canvas-36x24.jpg",
+    "base_sha256": "ed2c38088876b1247fdb56f6cd73d84ab80710f4f12aa2e5a7baa6500403ca91",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-jefferson-memorial",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-jefferson-memorial.svg",
+   "sha256": "40b6d60cdeebc6d4301c1ea199576c21a3b45877fc300bb1ab53f05cbe2de185",
+   "frozen": "data/_releases/scenes/40b6d60cdeebc6d4301c1ea199576c21a3b45877fc300bb1ab53f05cbe2de185.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-jefferson-memorial/v1.json": "af5f671d4f59d054bc8de279ff1b3501c3a10ce084a6da5c77e47be6d20992da"
+ },
+ "data": {
+  "lm-jefferson-memorial": {
+   "snapshot": "data/_releases/lm-jefferson-memorial@55b39f8fbc05",
+   "files": {
+    "dem.bin.gz": "4036a4a35d18ddaef0dcb38fdee9fa9b1259ca80d9ea161acb5e12bff73c539e",
+    "osm.json": "356a95e427bd43ff88637cd6fc61f3be16d825e8131a62762bc9b5bea0203634"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-jefferson-memorial-v2_36x24.jpg",
+   "sha256": "617f0e1945e3f48137f943dba692f9be13c4649ea87f1ff33204794ff20aa432",
+   "bytes": 1799411,
+   "printful_file_id": 1112717976
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-jefferson-memorial-v2_canvas-18x12.jpg",
+    "sha256": "bf9b52295a47757c3be891e51d08923a2a933d836be9b1ca3a6239303c6eb898",
+    "bytes": 692358,
+    "printful_file_id": 1112718164
+   },
+   {
+    "file": "print-files/landmarks/lm-jefferson-memorial-v2_canvas-30x20.jpg",
+    "sha256": "60ab9ed10d8176f510d98688fbc96babc3ba3bded03f427f460dde99f82cfb95",
+    "bytes": 1266988,
+    "printful_file_id": 1112718361
+   },
+   {
+    "file": "print-files/landmarks/lm-jefferson-memorial-v2_canvas-36x24.jpg",
+    "sha256": "d0c366971031bbd62db972358967de61126434a87c40b53fffdd298841a6f82b",
+    "bytes": 1617939,
+    "printful_file_id": 1112718540
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Jefferson Memorial",
+   "place": "Washington, D.C.",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-jefferson-memorial-v2_36x24.jpg",
+   "canvas": "lm-jefferson-memorial-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-11",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "jefferson-memorial-print",
+    "id": "gid://shopify/Product/9132929777782",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "jefferson-memorial-framed-print",
+    "id": "gid://shopify/Product/9132929810550",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "jefferson-memorial-framed-canvas",
+    "id": "gid://shopify/Product/9133043712118",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-jefferson-memorial-v2_36x24-print.jpg?v=1794773732",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-jefferson-memorial-v2_36x24-plate.jpg?v=1794773736"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-jefferson-memorial-v2_36x24-framed-print-black.jpg?v=1794773741",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-jefferson-memorial-v2_36x24-framed-print-white.jpg?v=1794773744",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-jefferson-memorial-v2_36x24-plate.jpg?v=1794773736"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-jefferson-memorial-v2_36x24-framed-canvas-black.jpg?v=1794773749",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-jefferson-memorial-v2_36x24-framed-canvas-white.jpg?v=1794773753",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-jefferson-memorial-v2_36x24-plate.jpg?v=1794773736"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

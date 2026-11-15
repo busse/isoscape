@@ -1,0 +1,218 @@
+{
+ "design": "lm-half-dome",
+ "title": "Half Dome and Yosemite Valley",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:34+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-half-dome --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-half-dome/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Half Dome and Yosemite Valley",
+   "plate": "LMA-41",
+   "version": "2",
+   "drawn": "2026",
+   "location": "37.738° N 119.565° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-half-dome-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-half-dome_36x24.jpg",
+    "base_sha256": "78ba54c6635916fd409955df20e0792e36e1a068da3af487351e800d731a556c",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-half-dome-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-half-dome_canvas-18x12.jpg",
+    "base_sha256": "a1a3f95e1acc4f8fe2fe0f9a04ec0b1802c610c1de7ddffca199202f3986d9ed",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-half-dome-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-half-dome_canvas-30x20.jpg",
+    "base_sha256": "c0145a63bb529754e14e403fe4d3b566400384f6985a95fb855dc776bfe3aae5",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-half-dome-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-half-dome_canvas-36x24.jpg",
+    "base_sha256": "08ea8688ae71d3b078e6055256de6877754646f87ae1134a00d5421145e16ae6",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-half-dome",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-half-dome.svg",
+   "sha256": "9dacec991bc35e0fe874f22daa702338818f8cd136ae4a8b3a4a38e13c39f439",
+   "frozen": "data/_releases/scenes/9dacec991bc35e0fe874f22daa702338818f8cd136ae4a8b3a4a38e13c39f439.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-half-dome/v1.json": "4f5ba3d0e429b385f8c36c9ac0809bba79cee5a94cf19bc339c5a55f14953e03"
+ },
+ "data": {
+  "lm-half-dome": {
+   "snapshot": "data/_releases/lm-half-dome@380071c22a7c",
+   "files": {
+    "dem.bin.gz": "8e05ae68f2a95742cff116628f1ccc9acc628ac3f58f6f76050fbfda4f4111d5",
+    "landcover.bin.gz": "393a7f27b3fbacaa61c4fe69b5fa55d77e1429055855ab60d445fa72126f3dbb",
+    "osm.json": "e6d3739de5dbcedc65fbd6360e9e8d23ed26a6fcca033acfe5610368bf3636c0"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-half-dome-v2_36x24.jpg",
+   "sha256": "26bd88ff912564bd7781f4a8a5b979a05b83db53c889752da3efc007c75b4075",
+   "bytes": 3116156,
+   "printful_file_id": 1112734611
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-half-dome-v2_canvas-18x12.jpg",
+    "sha256": "211f3efbe220995325c0e1b072027f7729dee5cb4c983d09649e083863829280",
+    "bytes": 939190,
+    "printful_file_id": 1112734741
+   },
+   {
+    "file": "print-files/landmarks/lm-half-dome-v2_canvas-30x20.jpg",
+    "sha256": "3fe21691dcfa5776538ac3689a266382b885610bc13eba4425f4f443cf58f343",
+    "bytes": 1959342,
+    "printful_file_id": 1112734816
+   },
+   {
+    "file": "print-files/landmarks/lm-half-dome-v2_canvas-36x24.jpg",
+    "sha256": "b362f696d8315f440d1253b8eb7a3dd3073dde98e10252ac288244d62b3e8dde",
+    "bytes": 2602079,
+    "printful_file_id": 1112734876
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Half Dome and Yosemite Valley",
+   "place": "Yosemite National Park",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-half-dome-v2_36x24.jpg",
+   "canvas": "lm-half-dome-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-41",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "half-dome-and-yosemite-valley-print",
+    "id": "gid://shopify/Product/9133393248374",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "half-dome-and-yosemite-valley-framed-print",
+    "id": "gid://shopify/Product/9133393281142",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "half-dome-and-yosemite-valley-framed-canvas",
+    "id": "gid://shopify/Product/9133393313910",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-half-dome-v2_36x24-print.jpg?v=1794774515",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-half-dome-v2_36x24-plate.jpg?v=1794774519"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-half-dome-v2_36x24-framed-print-black.jpg?v=1794774524",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-half-dome-v2_36x24-framed-print-white.jpg?v=1794774528",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-half-dome-v2_36x24-plate.jpg?v=1794774519"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-half-dome-v2_36x24-framed-canvas-black.jpg?v=1794774532",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-half-dome-v2_36x24-framed-canvas-white.jpg?v=1794774536",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-half-dome-v2_36x24-plate.jpg?v=1794774519"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

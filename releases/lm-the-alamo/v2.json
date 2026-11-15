@@ -1,0 +1,217 @@
+{
+ "design": "lm-the-alamo",
+ "title": "The Alamo",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:33+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-the-alamo --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-the-alamo/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "The Alamo",
+   "plate": "LMA-35",
+   "version": "2",
+   "drawn": "2026",
+   "location": "29.426° N 98.486° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-the-alamo-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-the-alamo_36x24.jpg",
+    "base_sha256": "abb0f07010ce1d8daaa117e51de3631b127f9594a8cf33a72bf093e389759592",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-the-alamo-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-the-alamo_canvas-18x12.jpg",
+    "base_sha256": "79eb84037300657127c6068b9e2931a1a584279afce92c692a7908d81779024a",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-the-alamo-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-the-alamo_canvas-30x20.jpg",
+    "base_sha256": "54d0d9be59a800df537d94c9682a333b1e21b81f29328ee5fd68d8b5248452cb",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-the-alamo-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-the-alamo_canvas-36x24.jpg",
+    "base_sha256": "1b41e74879dfd13c3ac48be30b870d6915681a9bc17cb763db0b8deca9b31892",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-the-alamo",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-the-alamo.svg",
+   "sha256": "6f34447655452116ce82d4d72cbc9819a90d303f0fccf3e7a653edcb363d82bd",
+   "frozen": "data/_releases/scenes/6f34447655452116ce82d4d72cbc9819a90d303f0fccf3e7a653edcb363d82bd.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-the-alamo/v1.json": "d71ea35d7c569a1d1e64a9d0f72a7a02a27bb87f138917684bdd913bb9ec01a2"
+ },
+ "data": {
+  "lm-the-alamo": {
+   "snapshot": "data/_releases/lm-the-alamo@d4ff4e3c4def",
+   "files": {
+    "dem.bin.gz": "b69b64e8318abef16db0afedd2827aecc5b6a12c1266f10bed944ec7efb099b0",
+    "osm.json": "8fe13c7268d23eba6ee29f3c08c3a4a7f7fcaabd85aaecb303d7dfa9006de7d3"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-the-alamo-v2_36x24.jpg",
+   "sha256": "ab5f74873039abb6e49f02fe0f19f81c7bdb19cf0aecfeda4200106b36d1dc4f",
+   "bytes": 2233263,
+   "printful_file_id": 1112731485
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-the-alamo-v2_canvas-18x12.jpg",
+    "sha256": "1cf454b773f2155d16ffc365a66eb757f05b2c453d2f276b16d84ae832fd5d4a",
+    "bytes": 849463,
+    "printful_file_id": 1112731570
+   },
+   {
+    "file": "print-files/landmarks/lm-the-alamo-v2_canvas-30x20.jpg",
+    "sha256": "ba49fc770101dc03d70fcda4341b96855020be68c358b901bba77d1089669d93",
+    "bytes": 1568888,
+    "printful_file_id": 1112731664
+   },
+   {
+    "file": "print-files/landmarks/lm-the-alamo-v2_canvas-36x24.jpg",
+    "sha256": "3dd9685e609e414fcd796bc300e62fbcb377708a17b88f93bd88aecc26f2b63f",
+    "bytes": 1998902,
+    "printful_file_id": 1112731823
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "The Alamo",
+   "place": "San Antonio",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-the-alamo-v2_36x24.jpg",
+   "canvas": "lm-the-alamo-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-35",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "the-alamo-print",
+    "id": "gid://shopify/Product/9133283672182",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "the-alamo-framed-print",
+    "id": "gid://shopify/Product/9133283704950",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "the-alamo-framed-canvas",
+    "id": "gid://shopify/Product/9133284524150",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-v2_36x24-print.jpg?v=1794774356",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-v2_36x24-plate.jpg?v=1794774360"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-v2_36x24-framed-print-black.jpg?v=1794774364",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-v2_36x24-framed-print-white.jpg?v=1794774368",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-v2_36x24-plate.jpg?v=1794774360"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-v2_36x24-framed-canvas-black.jpg?v=1794774379",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-v2_36x24-framed-canvas-white.jpg?v=1794774384",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-v2_36x24-plate.jpg?v=1794774360"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

@@ -1,0 +1,219 @@
+{
+ "design": "lm-matterhorn",
+ "title": "Matterhorn and Zermatt",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:35+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-matterhorn --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-matterhorn/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "World Landmarks",
+   "piece": "Matterhorn and Zermatt",
+   "plate": "LMW-05",
+   "version": "2",
+   "drawn": "2026",
+   "location": "45.998° N 7.704° E",
+   "facing": "235°"
+  },
+  "files": {
+   "lm-matterhorn-v2_24x36.jpg": {
+    "base": "print-files/landmarks/lm-matterhorn_24x36.jpg",
+    "base_sha256": "f1eed663622ef6ce552a195b4278d405a7d6454eda466afaa16096ea07bcb61e",
+    "at": {
+     "x": 2854,
+     "y": 5632,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-matterhorn-v2_canvas-12x18.jpg": {
+    "base": "print-files/landmarks/lm-matterhorn_canvas-12x18.jpg",
+    "base_sha256": "cceaefbe887816782d6b64bfe4901b30b3500127676c2c0556f1698ffd0b4386",
+    "at": {
+     "x": 1348,
+     "y": 2757,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-matterhorn-v2_canvas-20x30.jpg": {
+    "base": "print-files/landmarks/lm-matterhorn_canvas-20x30.jpg",
+    "base_sha256": "6363a2dae4073cf8cbb13fb395e6d0839f95de94fa7cf51546648138e77b40ae",
+    "at": {
+     "x": 2322,
+     "y": 4481,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-matterhorn-v2_canvas-24x36.jpg": {
+    "base": "print-files/landmarks/lm-matterhorn_canvas-24x36.jpg",
+    "base_sha256": "da597cb3079eabf2bbc72f2e87b86d227b16b75f44474bb88a8da33d47e5a091",
+    "at": {
+     "x": 2820,
+     "y": 5345,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-matterhorn",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-matterhorn.svg",
+   "sha256": "9125df3994830e5aec4d394e6198d775973f34366d11f2163964b2189876efac",
+   "frozen": "data/_releases/scenes/9125df3994830e5aec4d394e6198d775973f34366d11f2163964b2189876efac.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-matterhorn/v1.json": "798bd13d337d37c22f368d328a536308268404beec3eceb8846680ad6dc3fbe5"
+ },
+ "data": {
+  "lm-matterhorn": {
+   "snapshot": "data/_releases/lm-matterhorn@b8d2d61870c6",
+   "files": {
+    "dem.bin.gz": "27c84a87d1aed6e8926c89dd6d821397667ef2638733e26628da9bd866d39b7a",
+    "osm.json": "e8594e8cf9a6f9c0f2230a6b0187beb15b13e2c21c519b0860177618cac7b90c"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-matterhorn-v2_24x36.jpg",
+   "sha256": "ea6de11d190d1da7ee4f48dc8469c039cd493af997965e663867053d8f23f04f",
+   "bytes": 3358077,
+   "printful_file_id": 1112742069
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-matterhorn-v2_canvas-12x18.jpg",
+    "sha256": "892319c2aa9ef5e5144d8c6edbe99deefde1837f46f32a8222d8d08b810edbd8",
+    "bytes": 883644,
+    "printful_file_id": 1112742306
+   },
+   {
+    "file": "print-files/landmarks/lm-matterhorn-v2_canvas-20x30.jpg",
+    "sha256": "a2dfd4a61ff86381f1486afd0dad4ec03a0ef41a10f85392f74b6408c0e5d30c",
+    "bytes": 1987685,
+    "printful_file_id": 1112742560
+   },
+   {
+    "file": "print-files/landmarks/lm-matterhorn-v2_canvas-24x36.jpg",
+    "sha256": "5dfcf76f6ec6ebd3e5ff2e4995d96abf19946a9d3bb8884aaf32d90a4f7cbc92",
+    "bytes": 2710599,
+    "printful_file_id": 1112742782
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Matterhorn and Zermatt",
+   "place": "Switzerland",
+   "orientation": "vertical",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-matterhorn-v2_24x36.jpg",
+   "canvas": "lm-matterhorn-v2_canvas-{w}x{h}.jpg",
+   "world": true,
+   "elevation_credit": "Elevation: swissALTI3D © Federal Office of Topography swisstopo; produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMW-05",
+   "plate_box": [
+    0.72071,
+    0.94815,
+    0.95556,
+    0.97037
+   ]
+  },
+  "products": [
+   {
+    "handle": "matterhorn-and-zermatt-print",
+    "id": "gid://shopify/Product/9135238054006",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "matterhorn-and-zermatt-framed-print",
+    "id": "gid://shopify/Product/9135238086774",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "matterhorn-and-zermatt-framed-canvas",
+    "id": "gid://shopify/Product/9135238119542",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-v2_24x36-print.jpg?v=1794774900",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-v2_24x36-plate.jpg?v=1794774905"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-v2_24x36-framed-print-black.jpg?v=1794774913",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-v2_24x36-framed-print-white.jpg?v=1794774918",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-v2_24x36-plate.jpg?v=1794774905"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-v2_24x36-framed-canvas-black.jpg?v=1794774922",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-v2_24x36-framed-canvas-white.jpg?v=1794774926",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-v2_24x36-plate.jpg?v=1794774905"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

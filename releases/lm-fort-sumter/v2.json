@@ -1,0 +1,217 @@
+{
+ "design": "lm-fort-sumter",
+ "title": "Fort Sumter",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:34+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-fort-sumter --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-fort-sumter/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Fort Sumter",
+   "plate": "LMA-50",
+   "version": "2",
+   "drawn": "2026",
+   "location": "32.752° N 79.875° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-fort-sumter-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-fort-sumter_36x24.jpg",
+    "base_sha256": "47c1f481a1d9aed60d7c942f6f266c1be87e6709591385bab234dfd9a4b1762d",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-fort-sumter-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-fort-sumter_canvas-18x12.jpg",
+    "base_sha256": "b82fc8619c5f996bbac671bed1e3d3ebc031594a69c30db37adff8e7932fba47",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-fort-sumter-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-fort-sumter_canvas-30x20.jpg",
+    "base_sha256": "2b9380b3a02fce2033dee81335742c251e037a081f8c12903d9bb39ea1fcd8f3",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-fort-sumter-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-fort-sumter_canvas-36x24.jpg",
+    "base_sha256": "e452deb334db1394858805e7e973c55adbc0c418ba00c7889f24753aff1a5545",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-fort-sumter",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-fort-sumter.svg",
+   "sha256": "837e721b580f248b758aac960e82d7ab30b37569a0d1e195ee5c2414c27c7b31",
+   "frozen": "data/_releases/scenes/837e721b580f248b758aac960e82d7ab30b37569a0d1e195ee5c2414c27c7b31.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-fort-sumter/v1.json": "be3eed011ae9ec664435d08f671fe1a8aafd28ccc1589097e7639dc6163ac2a6"
+ },
+ "data": {
+  "lm-fort-sumter": {
+   "snapshot": "data/_releases/lm-fort-sumter@5ae1f93e5f23",
+   "files": {
+    "dem.bin.gz": "4cae12189a23764df97ea921e0a0bcb7eb9af14f075b51c988c6bd1a26120c9f",
+    "osm.json": "0475e794ab73aa7a63939577b23acabd6fe6ba6f901f82252e5bb0f854d9b3fc"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-fort-sumter-v2_36x24.jpg",
+   "sha256": "64f5eed68024742aca9b43350ca9f5e9fae9f06dae9b52e12fb0401327feb028",
+   "bytes": 859982,
+   "printful_file_id": 1112739195
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-fort-sumter-v2_canvas-18x12.jpg",
+    "sha256": "82c0e81b25d9d5716c4e9ce3e547f64ecf018cb45a0988779f97391ab664a9ad",
+    "bytes": 327533,
+    "printful_file_id": 1112739315
+   },
+   {
+    "file": "print-files/landmarks/lm-fort-sumter-v2_canvas-30x20.jpg",
+    "sha256": "aae49a2f31ffff3def210a37e7e70ee3678123213951abfffe8a800885a07912",
+    "bytes": 634236,
+    "printful_file_id": 1112739453
+   },
+   {
+    "file": "print-files/landmarks/lm-fort-sumter-v2_canvas-36x24.jpg",
+    "sha256": "22da95068070565d14e56f54b5ed33b4953f7647c91b5e9ed4149927a6e3a7c8",
+    "bytes": 825944,
+    "printful_file_id": 1112739570
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Fort Sumter",
+   "place": "Charleston Harbor, South Carolina",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-fort-sumter-v2_36x24.jpg",
+   "canvas": "lm-fort-sumter-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-50",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "fort-sumter-print",
+    "id": "gid://shopify/Product/9133950238838",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "fort-sumter-framed-print",
+    "id": "gid://shopify/Product/9133989822582",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "fort-sumter-framed-canvas",
+    "id": "gid://shopify/Product/9133989888118",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-v2_36x24-print.jpg?v=1794774765",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-v2_36x24-plate.jpg?v=1794774769"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-v2_36x24-framed-print-black.jpg?v=1794774773",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-v2_36x24-framed-print-white.jpg?v=1794774777",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-v2_36x24-plate.jpg?v=1794774769"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-v2_36x24-framed-canvas-black.jpg?v=1794774782",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-v2_36x24-framed-canvas-white.jpg?v=1794774786",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-v2_36x24-plate.jpg?v=1794774769"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

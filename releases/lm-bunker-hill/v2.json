@@ -1,0 +1,217 @@
+{
+ "design": "lm-bunker-hill",
+ "title": "Bunker Hill Monument",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:32+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-bunker-hill --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-bunker-hill/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Bunker Hill Monument",
+   "plate": "LMA-17",
+   "version": "2",
+   "drawn": "2026",
+   "location": "42.376° N 71.061° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-bunker-hill-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-bunker-hill_36x24.jpg",
+    "base_sha256": "8f2540fe76e4a5cc8c4f986b81d1fe3935f6712a3d671c41f4d243c8715b13f3",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-bunker-hill-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-bunker-hill_canvas-18x12.jpg",
+    "base_sha256": "708f52dd0cbe011ebba53d1f84b0cf0d1c61fdf88afd8ddc3dfba7a0ed840a1d",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-bunker-hill-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-bunker-hill_canvas-30x20.jpg",
+    "base_sha256": "58e8ecd65857f0d8a9be9a89ffd0c8788518efb13ed2b758ff77412bc7140ada",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-bunker-hill-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-bunker-hill_canvas-36x24.jpg",
+    "base_sha256": "d68ff385d9649fc5cbfc66c20375789bf6d79db6a9cdb3bd07149af321517985",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-bunker-hill",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-bunker-hill.svg",
+   "sha256": "61dbbdecffc083b3a3ed287a8e6c608bf9a20c9f1b45946dc1907a3de5842251",
+   "frozen": "data/_releases/scenes/61dbbdecffc083b3a3ed287a8e6c608bf9a20c9f1b45946dc1907a3de5842251.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-bunker-hill/v1.json": "d5d35df21f482d9284bdde7d55cceabdc939561924843359afd5f7d75a8fc2ce"
+ },
+ "data": {
+  "lm-bunker-hill": {
+   "snapshot": "data/_releases/lm-bunker-hill@582f40d2cea7",
+   "files": {
+    "dem.bin.gz": "da835c21285c67362110c9a5f36c70b9fd850905d53e01971f837c51420627fa",
+    "osm.json": "912e88eb1cbc823755589827387d168e4826c9685681f7d50cc2a609d4fce715"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-bunker-hill-v2_36x24.jpg",
+   "sha256": "e2816241d0c5cc27479f02083e5ca631b4980a8d53a6c48b743a1ffc867b9b18",
+   "bytes": 3664484,
+   "printful_file_id": 1112721415
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-bunker-hill-v2_canvas-18x12.jpg",
+    "sha256": "457eb5dc18425076533c161924c6161229f35bd77bd291ef88fb21449a295b26",
+    "bytes": 1279716,
+    "printful_file_id": 1112721559
+   },
+   {
+    "file": "print-files/landmarks/lm-bunker-hill-v2_canvas-30x20.jpg",
+    "sha256": "abd72e44f388ad89ae6ae6e20ff429248f974ffee6d33c4a296f3d34f04f5ceb",
+    "bytes": 2477138,
+    "printful_file_id": 1112721653
+   },
+   {
+    "file": "print-files/landmarks/lm-bunker-hill-v2_canvas-36x24.jpg",
+    "sha256": "79fc8c2bb3f1328e220ad199fb73225cb9fe833a4762d282f688744834d8d366",
+    "bytes": 3187003,
+    "printful_file_id": 1112721942
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Bunker Hill Monument",
+   "place": "Boston",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-bunker-hill-v2_36x24.jpg",
+   "canvas": "lm-bunker-hill-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-17",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "bunker-hill-monument-print",
+    "id": "gid://shopify/Product/9133101678710",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "bunker-hill-monument-framed-print",
+    "id": "gid://shopify/Product/9133135724662",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "bunker-hill-monument-framed-canvas",
+    "id": "gid://shopify/Product/9133135757430",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-bunker-hill-v2_36x24-print.jpg?v=1794773889",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-bunker-hill-v2_36x24-plate.jpg?v=1794773893"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-bunker-hill-v2_36x24-framed-print-black.jpg?v=1794773897",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-bunker-hill-v2_36x24-framed-print-white.jpg?v=1794773902",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-bunker-hill-v2_36x24-plate.jpg?v=1794773893"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-bunker-hill-v2_36x24-framed-canvas-black.jpg?v=1794773906",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-bunker-hill-v2_36x24-framed-canvas-white.jpg?v=1794773911",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-bunker-hill-v2_36x24-plate.jpg?v=1794773893"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

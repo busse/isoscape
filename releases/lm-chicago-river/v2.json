@@ -1,0 +1,217 @@
+{
+ "design": "lm-chicago-river",
+ "title": "The Chicago River",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:33+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-chicago-river --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-chicago-river/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "The Chicago River",
+   "plate": "LMA-24",
+   "version": "2",
+   "drawn": "2026",
+   "location": "41.889° N 87.624° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-chicago-river-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-chicago-river_36x24.jpg",
+    "base_sha256": "973bb6a040707e6057068a3f5b79f11b698ba8bc7fd64ded7f1d5f144b056179",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-chicago-river-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-chicago-river_canvas-18x12.jpg",
+    "base_sha256": "77558656059c4c5d823f673298c6c339022f8243e2a9ccd8ea3b98dcf8ed4a06",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-chicago-river-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-chicago-river_canvas-30x20.jpg",
+    "base_sha256": "1d9cea70cb1839f82ec6ae39308069df83a3cdfc4a4230982113781d5f3fdb23",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-chicago-river-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-chicago-river_canvas-36x24.jpg",
+    "base_sha256": "686cfdb66db836c27a68a421d3d042cba891fd4ded5e5d3dbbdbb97e21cf2f58",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-chicago-river",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-chicago-river.svg",
+   "sha256": "8121b97a703fedcb60d3dd38e7c1b488f95791a5597ed892d04c24866371cfb2",
+   "frozen": "data/_releases/scenes/8121b97a703fedcb60d3dd38e7c1b488f95791a5597ed892d04c24866371cfb2.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-chicago-river/v1.json": "a422cc020d5d2551ae1379d45beefa6ea524f78bf9683e6d97133c6edfbbaba4"
+ },
+ "data": {
+  "lm-chicago-river": {
+   "snapshot": "data/_releases/lm-chicago-river@48af79af2102",
+   "files": {
+    "dem.bin.gz": "42be056a5717c10a80e10b00ad875e015cec583f1bfb4d58d16d4afd09ddc162",
+    "osm.json": "cb6496bb7e8ca894a011c8d5a2b42a6dc152093c522d1a1d3b0eb8796c20fe40"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-chicago-river-v2_36x24.jpg",
+   "sha256": "d2569bc0cb175e6169b219dbc71cac0e018d5e0ed9f0fff0f4c45fd1e6902b8f",
+   "bytes": 2268757,
+   "printful_file_id": 1112725534
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-chicago-river-v2_canvas-18x12.jpg",
+    "sha256": "d7b9553853779d2af0f5e7f52c863021fb2a37b8ec48a0dccb2be71760e7e35c",
+    "bytes": 876667,
+    "printful_file_id": 1112725691
+   },
+   {
+    "file": "print-files/landmarks/lm-chicago-river-v2_canvas-30x20.jpg",
+    "sha256": "0bd67159b843ab64855ca8ce2f31e22e8201162964a2a223ee8023fbb80c0cd9",
+    "bytes": 1620384,
+    "printful_file_id": 1112725824
+   },
+   {
+    "file": "print-files/landmarks/lm-chicago-river-v2_canvas-36x24.jpg",
+    "sha256": "545bf29996ca008540d8868a8e5aa8e82450481162d979df7645a30e38105c7c",
+    "bytes": 2068542,
+    "printful_file_id": 1112725919
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "The Chicago River",
+   "place": "Chicago",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-chicago-river-v2_36x24.jpg",
+   "canvas": "lm-chicago-river-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-24",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "the-chicago-river-print",
+    "id": "gid://shopify/Product/9133210173558",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "the-chicago-river-framed-print",
+    "id": "gid://shopify/Product/9133235175542",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "the-chicago-river-framed-canvas",
+    "id": "gid://shopify/Product/9133235241078",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-chicago-river-v2_36x24-print.jpg?v=1794774073",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-chicago-river-v2_36x24-plate.jpg?v=1794774077"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-chicago-river-v2_36x24-framed-print-black.jpg?v=1794774081",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-chicago-river-v2_36x24-framed-print-white.jpg?v=1794774086",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-chicago-river-v2_36x24-plate.jpg?v=1794774077"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-chicago-river-v2_36x24-framed-canvas-black.jpg?v=1794774090",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-chicago-river-v2_36x24-framed-canvas-white.jpg?v=1794774094",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-chicago-river-v2_36x24-plate.jpg?v=1794774077"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

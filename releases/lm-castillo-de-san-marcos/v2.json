@@ -1,0 +1,217 @@
+{
+ "design": "lm-castillo-de-san-marcos",
+ "title": "Castillo de San Marcos",
+ "version": 2,
+ "version_note": "its plate number and title block added; the art is unchanged.",
+ "recorded": "2026-11-15T21:11:32+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "aa8c1c8e13c25c17bd1d8720cfa4fff2871950ea",
+  "subject": "Plates: README section, how-it's-made section with the block's sizes, CLAUDE.md row; changes entry",
+  "dirty": false
+ },
+ "kind": "stamp",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/release/stamp.py <store> lm-castillo-de-san-marcos --version 2   # from the v1 files below"
+  ],
+  "base_version": 1,
+  "base_record": "releases/lm-castillo-de-san-marcos/v1.json",
+  "base_kind": "landmark",
+  "block": {
+   "collection": "Landmarks",
+   "set": "American Landmarks",
+   "piece": "Castillo de San Marcos",
+   "plate": "LMA-21",
+   "version": "2",
+   "drawn": "2026",
+   "location": "29.898° N 81.312° W",
+   "facing": "0°"
+  },
+  "files": {
+   "lm-castillo-de-san-marcos-v2_36x24.jpg": {
+    "base": "print-files/landmarks/lm-castillo-de-san-marcos_36x24.jpg",
+    "base_sha256": "d213af53997c3bee4656a6e2e4ce03cb9d86cc9537398296154c1627a67362ed",
+    "at": {
+     "x": 4834,
+     "y": 3652,
+     "w": 930,
+     "h": 132,
+     "u": 0.715,
+     "where": "foot"
+    }
+   },
+   "lm-castillo-de-san-marcos-v2_canvas-18x12.jpg": {
+    "base": "print-files/landmarks/lm-castillo-de-san-marcos_canvas-18x12.jpg",
+    "base_sha256": "6669442fe4a7fab2c92ad6942a5e43609cda18e6027b7ca5c383bf97354d9a97",
+    "at": {
+     "x": 2248,
+     "y": 1857,
+     "w": 597,
+     "h": 85,
+     "u": 0.4596,
+     "where": "foot"
+    }
+   },
+   "lm-castillo-de-san-marcos-v2_canvas-30x20.jpg": {
+    "base": "print-files/landmarks/lm-castillo-de-san-marcos_canvas-30x20.jpg",
+    "base_sha256": "06b648d076d26afe7d5d42a4d21f1e3e0b20d43a8c94cb274aa3b1809ae581b7",
+    "at": {
+     "x": 3822,
+     "y": 2981,
+     "w": 771,
+     "h": 109,
+     "u": 0.5934,
+     "where": "foot"
+    }
+   },
+   "lm-castillo-de-san-marcos-v2_canvas-36x24.jpg": {
+    "base": "print-files/landmarks/lm-castillo-de-san-marcos_canvas-36x24.jpg",
+    "base_sha256": "4732737d5d44447e8ede3c9f18a1ef84882d48bf4d7ce6b32428d419a3c70127",
+    "at": {
+     "x": 4620,
+     "y": 3545,
+     "w": 845,
+     "h": 120,
+     "u": 0.65,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "lm-castillo-de-san-marcos",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-castillo-de-san-marcos.svg",
+   "sha256": "5b161246d4ebeb1703748a40384982b2536a559c19eebfadefffe8440fbd0462",
+   "frozen": "data/_releases/scenes/5b161246d4ebeb1703748a40384982b2536a559c19eebfadefffe8440fbd0462.svg",
+   "reproduces": false,
+   "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30"
+  }
+ ],
+ "inputs": {
+  "tools/print/titleblock.py": "95126c60915bc53f77eca3217f823026a5a138c7f5117d5e7a213b59145da3f5",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "930152ae811c92b73bbbedc3723e018088d2c39f59f633b2a920c3c9e86fd7eb",
+  "releases/lm-castillo-de-san-marcos/v1.json": "e191fabda50fb0c178d577a061a2cb527e399934919fba453cd84e7d79aa4781"
+ },
+ "data": {
+  "lm-castillo-de-san-marcos": {
+   "snapshot": "data/_releases/lm-castillo-de-san-marcos@3992ae086da5",
+   "files": {
+    "dem.bin.gz": "4ee432ae4e1bacc508353238fb8717d75f625a257b33fedd2cbd712dde503054",
+    "osm.json": "05f89cb9ff6c3c00a15a944ae96ff8f0a5be9a6922e1507075884be4aed9f25d"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-castillo-de-san-marcos-v2_36x24.jpg",
+   "sha256": "4609b538188d699d21bf11fa163392f516d36d7b0f72ea8f6fc279ca38001260",
+   "bytes": 2420677,
+   "printful_file_id": 1112723826
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-castillo-de-san-marcos-v2_canvas-18x12.jpg",
+    "sha256": "affc80c4cf4d01b3eb484dc68d58c314506e3d92abacb1794de85debb42c608f",
+    "bytes": 869702,
+    "printful_file_id": 1112724241
+   },
+   {
+    "file": "print-files/landmarks/lm-castillo-de-san-marcos-v2_canvas-30x20.jpg",
+    "sha256": "77f355f633617623ef1745d91d1a4a0e5f2b5f855499d6ecaec7054edfc7e0ca",
+    "bytes": 1649687,
+    "printful_file_id": 1112724336
+   },
+   {
+    "file": "print-files/landmarks/lm-castillo-de-san-marcos-v2_canvas-36x24.jpg",
+    "sha256": "7e969355ae5e97b45c5c9fe99b029282e2a6c19b371ddf80a57c723dbfdf8bc9",
+    "bytes": 2130079,
+    "printful_file_id": 1112724440
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Castillo de San Marcos",
+   "place": "St. Augustine, Florida",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-castillo-de-san-marcos-v2_36x24.jpg",
+   "canvas": "lm-castillo-de-san-marcos-v2_canvas-{w}x{h}.jpg",
+   "version": 2,
+   "version_date": "November 15, 2026",
+   "version_note": "its plate number and title block added; the art is unchanged.",
+   "plate": "LMA-21",
+   "plate_box": [
+    0.8138,
+    0.92222,
+    0.97037,
+    0.95556
+   ]
+  },
+  "products": [
+   {
+    "handle": "castillo-de-san-marcos-print",
+    "id": "gid://shopify/Product/9133170622582",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "castillo-de-san-marcos-framed-print",
+    "id": "gid://shopify/Product/9133170655350",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "castillo-de-san-marcos-framed-canvas",
+    "id": "gid://shopify/Product/9133170688118",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-castillo-de-san-marcos-v2_36x24-print.jpg?v=1794773992",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-castillo-de-san-marcos-v2_36x24-plate.jpg?v=1794773996"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-castillo-de-san-marcos-v2_36x24-framed-print-black.jpg?v=1794774000",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-castillo-de-san-marcos-v2_36x24-framed-print-white.jpg?v=1794774005",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-castillo-de-san-marcos-v2_36x24-plate.jpg?v=1794773996"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-castillo-de-san-marcos-v2_36x24-framed-canvas-black.jpg?v=1794774009",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-castillo-de-san-marcos-v2_36x24-framed-canvas-white.jpg?v=1794774013",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-castillo-de-san-marcos-v2_36x24-plate.jpg?v=1794773996"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

@@ -1,778 +1,875 @@
 {
  "broad-street-1943-01-ay-tower": {
   "title": "AY Tower, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-02-fair-grounds": {
   "title": "The State Fair grounds, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-03-hermitage-road": {
   "title": "Hermitage Road, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-04-seaboard-junction": {
   "title": "Seaboard Junction, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-05-loop": {
   "title": "The loop and the sheds, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-06-sauer": {
   "title": "C.F. Sauer Company, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-07-main-street-station": {
   "title": "Main Street Station, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-08-triple-crossing": {
   "title": "The Triple Crossing, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-09-co-viaduct": {
   "title": "The C&O viaduct, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-10-hull-street": {
   "title": "Hull Street Station, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-11-belt-line-bridge": {
   "title": "The Belt Line bridge, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-12-william-byrd": {
   "title": "Hotel William Byrd, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-13-from-the-fan": {
   "title": "Broad Street Station, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-14-front": {
   "title": "Pope's front, Broad Street Station 1943",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-map": {
   "title": "Broad Street Station, 1943: The Railroad Map",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "broad-street-1943-menu": {
   "title": "Broad Street Station, 1943: The Railroads and Fourteen Places",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "gwynns-island": {
   "title": "Gwynn's Island",
-  "current": 1,
-  "kind": "compose",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-alcatraz": {
   "title": "Alcatraz Island",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-brooklyn-bridge": {
   "title": "Brooklyn Bridge",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-buckingham-fountain": {
   "title": "Buckingham Fountain",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-bunker-hill": {
   "title": "Bunker Hill Monument",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-cape-hatteras-lighthouse": {
   "title": "Cape Hatteras Lighthouse",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-castillo-de-san-marcos": {
   "title": "Castillo de San Marcos",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-central-park": {
   "title": "Central Park",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-chicago-river": {
   "title": "The Chicago River",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-coit-tower": {
   "title": "Coit Tower",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-crater-lake": {
   "title": "Crater Lake",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-delicate-arch": {
   "title": "Delicate Arch",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-devils-tower": {
   "title": "Devils Tower",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-diamond-head": {
   "title": "Waikiki and Diamond Head",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-eiffel-tower": {
   "title": "Eiffel Tower",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-faneuil-hall": {
   "title": "Faneuil Hall",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-flatiron-building": {
   "title": "Flatiron Building",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-fort-sumter": {
   "title": "Fort Sumter",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-gateway-arch": {
   "title": "Gateway Arch",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-gettysburg": {
   "title": "Gettysburg Battlefield",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-golden-gate-bridge": {
   "title": "Golden Gate Bridge",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-grand-canyon": {
   "title": "Grand Canyon",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-griffith-observatory": {
   "title": "Griffith Observatory",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-half-dome": {
   "title": "Half Dome and Yosemite Valley",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-hearst-castle": {
   "title": "Hearst Castle",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-himeji-castle": {
   "title": "Himeji Castle",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-hoover-dam": {
   "title": "Hoover Dam",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-independence-hall": {
   "title": "Independence Hall",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-jackson-square": {
   "title": "Jackson Square",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-jefferson-memorial": {
   "title": "Jefferson Memorial",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-kennedy-space-center": {
   "title": "Kennedy Space Center",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-las-vegas-strip": {
   "title": "The Las Vegas Strip",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-lincoln-memorial": {
   "title": "Lincoln Memorial",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-lombard-street": {
   "title": "Lombard Street",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-machu-picchu": {
   "title": "Machu Picchu and Aguas Calientes",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-matterhorn": {
   "title": "Matterhorn and Zermatt",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-monticello": {
   "title": "Monticello",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-mount-rushmore": {
   "title": "Mount Rushmore",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-mount-st-helens": {
   "title": "Mount St. Helens",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-mount-vernon": {
   "title": "Mount Vernon",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-niagara-falls": {
   "title": "Niagara Falls",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-old-faithful": {
   "title": "Old Faithful",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-pearl-harbor": {
   "title": "Pearl Harbor",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-philadelphia-museum-of-art": {
   "title": "Philadelphia Museum of Art",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-plymouth-rock": {
   "title": "Plymouth Rock",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-savannah-squares": {
   "title": "Savannah's Squares",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-statue-of-liberty": {
   "title": "Statue of Liberty",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-sydney-opera-house": {
   "title": "Sydney Opera House and Harbour Bridge",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-texas-capitol": {
   "title": "Texas State Capitol",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-the-alamo": {
   "title": "The Alamo",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-times-square": {
   "title": "Times Square",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-us-capitol": {
   "title": "U.S. Capitol",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-washington-monument": {
   "title": "Washington Monument",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-white-house": {
   "title": "The White House",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-world-trade-center": {
   "title": "One World Trade Center",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "lm-wright-brothers": {
   "title": "Wright Brothers National Memorial",
-  "current": 1,
-  "kind": "landmark",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "richmond-1865": {
   "title": "Richmond, 1865",
-  "current": 1,
-  "kind": "compose",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "richmond-1886": {
   "title": "Richmond, 1886",
-  "current": 1,
-  "kind": "compose",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "richmond-1925": {
   "title": "Richmond, 1925",
-  "current": 1,
-  "kind": "compose",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "richmond-1950": {
   "title": "Richmond, 1950",
-  "current": 1,
-  "kind": "compose",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "richmond-2026": {
   "title": "Richmond, 2026",
-  "current": 1,
-  "kind": "compose",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "richmond-james-2026": {
   "title": "The James, I-195 to Rocketts Landing",
-  "current": 1,
-  "kind": "compose",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "richmond-panorama-2026": {
   "title": "Richmond and the James",
-  "current": 1,
-  "kind": "compose",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "richmond-through-time": {
   "title": "Richmond, 1737–2026",
-  "current": 1,
-  "kind": "compose",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-01-westhampton": {
   "title": "Westhampton Park, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-02-fair-grounds": {
   "title": "State Fair Grounds, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "set",
+  "current": 3,
+  "kind": "stamp",
   "records": [
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-03-ginter-park": {
   "title": "Ginter Park, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-04-barton-heights": {
   "title": "Barton Heights, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-05-highland-park": {
   "title": "Highland Park, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-06-nine-mile": {
   "title": "Nine Mile Road, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-07-church-hill": {
   "title": "Church Hill and Jefferson Park, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-08-broad-street": {
   "title": "Seventh and Broad, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-09-manchester": {
   "title": "Manchester, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-10-woodland-heights": {
   "title": "Woodland Heights, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-11-forest-hill": {
   "title": "Forest Hill Park, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-12-byrd-park": {
   "title": "Byrd Park, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-13-the-fan": {
   "title": "The Fan, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-14-broad-laurel": {
   "title": "Broad and Laurel, Richmond Streetcars 1925",
-  "current": 1,
-  "kind": "set",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  },
  "streetcars-1925-map": {
   "title": "Richmond's Streetcars, 1925: The System Map",
-  "current": 2,
-  "kind": "set",
+  "current": 3,
+  "kind": "stamp",
   "records": [
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-menu": {
   "title": "Richmond's Streetcars, 1925: The Lines and Fourteen Stops",
-  "current": 2,
-  "kind": "set",
+  "current": 3,
+  "kind": "stamp",
   "records": [
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "then-and-now": {
   "title": "Richmond, Then & Now",
-  "current": 1,
-  "kind": "compose",
+  "current": 2,
+  "kind": "stamp",
   "records": [
-   "v1.json"
+   "v1.json",
+   "v2.json"
   ]
  }
 }
