@@ -14,6 +14,10 @@ import argparse, hashlib, json, os, shutil, subprocess, sys, tempfile, time
 HERE = os.path.dirname(os.path.abspath(__file__))
 ISO = os.path.normpath(os.path.join(HERE, '..', '..'))
 REL = os.path.join(ISO, 'releases')
+# Scenes already rebuilt (commit, region, year, flags, frozen data) -> SHA-256, so a scene shared
+# by many designs (every print of a set) is rebuilt once.
+MEMO_P = os.path.join(ISO, 'data', '_releases', 'rebuilt.json')
+MEMO = json.load(open(MEMO_P)) if os.path.exists(MEMO_P) else {}
 
 
 def sha(p):
@@ -67,12 +71,18 @@ def rebuild(r, keep):
     for s in r['scenes']:
         if not s.get('region') or not s.get('sha256'): continue
         n += 1
-        wt = worktree(s.get('commit') or r['isoscape']['commit'], r, keep)
+        c = s.get('commit') or r['isoscape']['commit']
+        memo_key = json.dumps([c, s['region'], s.get('year'), s.get('flags', []), sorted((k, v['snapshot']) for k, v in r['data'].items())])
+        if memo_key in MEMO:
+            s['reproduces'] = MEMO[memo_key] == s['sha256']; ok += s['reproduces']; continue
+        wt = worktree(c, r, keep)
         with tempfile.TemporaryDirectory() as t:
             cmd = ['node', 'bin/isoscape.js', 'build', s['region'], '--no-archive', '--out', t] + (['--year', str(s['year'])] if s.get('year') is not None else []) + s.get('flags', [])
             subprocess.run(cmd, cwd=wt, capture_output=True)
             out = os.path.join(t, (f"{s['region']}-{s['year']}" if s.get('year') is not None else s['region']) + '.svg')
             got = sha(out) if os.path.exists(out) else None
+        MEMO[memo_key] = got
+        json.dump(MEMO, open(MEMO_P, 'w'))
         s['reproduces'] = got == s['sha256']
         ok += s['reproduces']
     return ok, n
