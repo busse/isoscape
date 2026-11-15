@@ -2,14 +2,14 @@
   "title": "Broad Street Station, 1943: the front",
   "data": "broad-street-station",
   "center": [
-    -77.465913,
-    37.561281
+    -77.465857,
+    37.561145
   ],
-  "width": 380,
-  "depth": 330,
+  "width": 300,
+  "depth": 250,
   "bearing": 20,
   "snap": false,
-  "scale": 9.0,
+  "scale": 11.3,
   "squash": 0.6,
   "exaggeration": 1.0,
   "slab": 12,
@@ -17,7 +17,7 @@
   "minBuildingArea": 12,
   "dots": "none",
   "terrain": {
-    "exaggeration": 1.5,
+    "exaggeration": 1.2,
     "cell": 2,
     "contour": 0,
     "majorEvery": 5,
