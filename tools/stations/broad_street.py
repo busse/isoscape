@@ -134,10 +134,10 @@ part('bss-dome', 'Broad Street Station dome', poly_ab(-2, 0.5, 13.5, 24), 8.0, '
 
 # ---- the concourse, bridged over the tracks ----------------------------------------------------
 C_SRC = [SRC['osm-station'], SRC['photo-1969'], SRC['platforms']]
-part('bss-concourse', 'Broad Street Station concourse', rect_ab(-16, 1, 35, 95), 12, 'stone',
+part('bss-concourse', 'Broad Street Station concourse', rect_ab(-16, 1, 35, 95), 14, 'stone',
      'The long concourse, carried from the head house out over the station tracks at the level of the waiting room; ramps led down from it to each platform. Outline from OSM; height approximate.',
      C_SRC, seat='max')
-part('bss-concourse-end', 'Broad Street Station concourse', rect_ab(-30, 8.5, 95, 152), 19, 'stone',
+part('bss-concourse-end', 'Broad Street Station concourse', rect_ab(-30, 8.5, 95, 152), 16, 'stone',
      'The concourse\'s far block, beyond the platforms, with its tall windows. Outline from OSM; height approximate.', C_SRC)
 
 # ---- tracks, platforms, canopies ---------------------------------------------------------------
