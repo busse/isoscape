@@ -463,3 +463,27 @@ of San Francisco, and his write-up of
 isoscape is by Chris Busse: [fullbacklog.com](https://fullbacklog.com) (Substack),
 [LinkedIn](https://linkedin.com/in/chrisbusse), and @busse on
 [Threads](https://www.threads.net/@busse) and [Instagram](https://www.instagram.com/busse).
+
+## Release records
+
+Every design for sale has a record in `releases/<design>/v<N>.json`, so it can always be
+revisited, remade, or changed with confidence. A record pins the isoscape commit, the recipe
+(tool and arguments), every input by SHA-256 (regions, histories, traced Sanborn files, the set
+or print spec, and each cached data file, with a frozen copy in `data/_releases/` that `fetch`
+never overwrites), every scene SVG the print was cut from (frozen by hash: builds are
+deterministic, so the same commit and data give the same bytes), every output with its
+Printful file ID, and the Shopify products, mockups and explorer view. `releases/index.json`
+lists them.
+
+- `python3 tools/release/record.py <store-dir> [design...] --release`: write the record when a
+  design is published or redrawn (a redrawn design is a new version: see `pages/changes.md`).
+- `python3 tools/release/check.py <store-dir> [--rebuild]`: verify every pinned file, and
+  rebuild every scene from its commit and frozen data, byte for byte.
+- `python3 tools/release/remake.py <design> [--compose <store-dir>]`: put a design's frozen
+  scenes back where its recipe reads them, and remake the print.
+
+Designs published before records existed (November 15, 2026) were recorded afterwards: their
+prints and scenes are frozen as sold, the landmarks' framing is recovered as an explicit window
+(`tools/print/lm_params.json`, by `tools/release/landmark_params.py`, checked by eye), and
+`check.py --rebuild` reports which of their scenes the current code still draws identically.
+Frozen data and scenes are large and stay out of git; keep them backed up with the print files.

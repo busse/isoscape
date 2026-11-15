@@ -61,7 +61,13 @@ def main():
         want = r['outputs']['print']
         got = os.path.join(out, os.path.basename(want['file']))
         if os.path.exists(got):
-            print('print', 'IDENTICAL to the one sold' if sha(got) == want['sha256'] else 'differs from the one sold (compare by eye)', got)
+            if sha(got) == want['sha256']: print('print IDENTICAL to the one sold', got)
+            else:
+                from PIL import Image, ImageChops, ImageStat
+                Image.MAX_IMAGE_PIXELS = None
+                A, B = Image.open(got).convert('RGB'), Image.open(os.path.join(a.compose, want['file'])).convert('RGB')
+                d = sum(ImageStat.Stat(ImageChops.difference(A.resize((1800, 1200)), B.resize((1800, 1200)))).mean) / 3 if A.size == B.size else None
+                print(f'print differs from the one sold in its bytes; mean pixel difference {d:.2f} of 255 (under 5 is the same picture: compare by eye)' if d is not None else f'print size differs: {A.size} vs {B.size}', got)
         else:
             print('no print at', got, '; files:', os.listdir(out))
 

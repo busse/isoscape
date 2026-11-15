@@ -69,8 +69,17 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | tracing fire-insurance maps (georeference, trace, lifespans) | `tools/sanborn/*.py` → `history/sanborn/` |
 | a set: a big map framed by numbered boxes, its prints and page | `sets/<name>.json`, `tools/sets/set.py`; "Making a set" in the README |
 | one building modeled close up (parts, tracks, canopies, trains) | `tools/stations/<name>.py` → `history/<name>.json`; `src/parts.ts` |
+| release records: what each sold design was made from, and how to remake it | `tools/release/` → `releases/` |
 | a published piece corrected or redrawn | `pages/changes.md` (and the store's `changes_page.py`): every change, dated, with the piece's version |
 | placing streetcar lines from named corners | `tools/streetcars/build.py` (routes in `tools/streetcars/routes.json`) |
+
+## Release records
+
+Every design for sale must stay revisitable. Publishing or redrawing one is not done until
+`tools/release/record.py <store> <design> --release` has written its record and
+`tools/release/check.py <store> <design> --rebuild` passes; commit `releases/`. Never change a
+published print in place: redraw it as the next version (`-vN` files, catalog `version`,
+`pages/changes.md`). See "Release records" in the README.
 
 ## Known limits
 
