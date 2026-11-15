@@ -256,10 +256,11 @@ export const buildScene = (
   // Streetcar lines: a bold ribbon down the street, wider than the track, so it reads at a
   // city-wide scale.
   const tramRuns: { id: string; pts: Vec2[] }[] = []
+  const tramScale = time?.history.streetcarScale ?? 1
   for (const h of curated) {
     if (h.kind !== 'streetcar') continue
     for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
-      const r = ribbonOf('tram', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, h.width ?? 9)
+      const r = ribbonOf('tram', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, (h.width ?? 9) * tramScale)
       if (r) ribbons.push(r)
       tramRuns.push({ id: `${h.id}:${k}`, pts: run.map(([lon, lat]) => view.toView(lon, lat)) })
     }
@@ -351,8 +352,9 @@ export const buildScene = (
   }
   stats.buildings = items.length
   // Streetcars on their lines: a car every `TRAM_SPACING` metres along each run, 14 m long,
-  // 2.6 m wide and 3.6 m tall (a 1920s double-truck car), set on the ground and turned with
-  // the street. Their spacing is for the picture, not a timetable.
+  // 2.6 m wide and 3.6 m tall (a 1920s double-truck car) times the history's `streetcarScale`,
+  // set on the ground and turned with the street. Their spacing is for the picture, not a
+  // timetable.
   let cars = 0
   for (const run of tramRuns) {
     let along = TRAM_SPACING / 2
@@ -368,8 +370,8 @@ export const buildScene = (
         if (c[0] < frame.minX + 20 || c[0] > frame.maxX - 20 || c[1] < frame.minY + 20 || c[1] > frame.maxY - 20) continue
         const ux = (b[0] - a[0]) / len
         const uy = (b[1] - a[1]) / len
-        const hl = 7
-        const hw = 1.3
+        const hl = 7 * tramScale
+        const hw = 1.3 * tramScale
         let ring: Vec2[] = [
           [c[0] - ux * hl + uy * hw, c[1] - uy * hl - ux * hw],
           [c[0] + ux * hl + uy * hw, c[1] + uy * hl - ux * hw],
@@ -379,7 +381,7 @@ export const buildScene = (
         if (signedArea(ring) < 0) ring = ring.reverse()
         const base = terrain.z(c)
         const carPal = { ...pal, wallLit: pal.tramCar[0], wallShade: pal.tramCar[1] }
-        items.push(extrude(view, carPal, `tram:${run.id}:${cars}`, ring, [], base + 0.4, base + 4, pal.tramCar[2], 'none'))
+        items.push(extrude(view, carPal, `tram:${run.id}:${cars}`, ring, [], base + 0.4, base + 0.4 + 3.6 * tramScale, pal.tramCar[2], 'none'))
         cars++
       }
       walked += len

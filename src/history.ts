@@ -99,11 +99,16 @@ export interface History {
   readonly sanborn?: { readonly lost: string; readonly editions: readonly number[]; readonly source: string }
   readonly traced: readonly TracedBuilding[]
   /**
-   * Minor streets (residential, service, unclassified, living streets and paths) drawn only
+   * Minor streets (tertiary, residential, service, unclassified, living streets and paths) drawn only
    * where a building of the year stands within this many metres: a street with no house on it
    * yet is taken as not yet laid out. Larger roads follow the era rules as usual.
    */
   readonly streetsNearBuildings?: number
+  /**
+   * Draw streetcar lines and cars this many times life size, so they read in a city-wide view
+   * (default 1).
+   */
+  readonly streetcarScale?: number
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
@@ -117,6 +122,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(),
     dates: raw.dates ?? [], ...(raw.sanborn === undefined ? {} : { sanborn: raw.sanborn }), traced,
     ...(raw.streetsNearBuildings === undefined ? {} : { streetsNearBuildings: raw.streetsNearBuildings }),
+    ...(raw.streetcarScale === undefined ? {} : { streetcarScale: raw.streetcarScale }),
   }
 }
 
@@ -162,7 +168,7 @@ export const featureAlive = (f: Feature, year: number, h: History): boolean => {
   return true
 }
 
-const MINOR_STREETS = new Set(['residential', 'service', 'unclassified', 'living_street', 'track', 'footway', 'path', 'cycleway', 'pedestrian', 'steps', 'bridleway'])
+const MINOR_STREETS = new Set(['tertiary', 'tertiary_link', 'residential', 'service', 'unclassified', 'living_street', 'track', 'footway', 'path', 'cycleway', 'pedestrian', 'steps', 'bridleway'])
 
 /**
  * Drop minor streets with no building within `metres` (of the buildings still in `features`,
