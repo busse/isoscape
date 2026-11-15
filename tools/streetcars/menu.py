@@ -221,8 +221,8 @@ def compose_map(dpi):
     by = H - m - band + 0.3 * dpi
     d.text((m, by), TITLE, font=font('bold', 0.5 * dpi), fill=INK)
     d.text((m, by + 0.68 * dpi), SUBTITLE, font=font('italic', 0.22 * dpi), fill=DIM)
-    names = '   '.join(f"{s['n']} {s['title']}" for s in sorted(S, key=lambda s: s['n']))
-    kf = font('regular', 0.12 * dpi)
+    names = '  ·  '.join(f"{s['n']}\u00a0{s['title'].replace(' ', '\u00a0')}" for s in sorted(S, key=lambda s: s['n']))
+    kf = font('regular', 0.16 * dpi)
     ky = by + 1.02 * dpi
     for ln in wrap(d, names, kf, W - 2 * m):
         d.text((m, ky), ln, font=kf, fill=INK); ky += kf.size * 1.4
@@ -239,8 +239,8 @@ def compose_box(dpi, s, pt, M):
     img = Image.new('RGB', (W, H), PAPER)
     d = ImageDraw.Draw(img)
     iw = W - 2 * m
-    ih = iw * 9 / 16
-    pic = M.crop(pt, BOX_GROUND * 1.2, 16 / 9, (round(iw), round(ih)))
+    ih = iw / 1.65
+    pic = M.crop(pt, BOX_GROUND * 1.2, 1.65, (round(iw), round(ih)))
     img.paste(pic, (round(m), round(m)))
     d.rectangle((m, m, m + iw, m + ih), outline=INK, width=max(1, dpi // 60))
     ty = m + ih + 0.35 * dpi
@@ -248,7 +248,7 @@ def compose_box(dpi, s, pt, M):
     marker(d, m + r, ty + r, s['n'], r)
     d.text((m + 2 * r + 0.2 * dpi, ty - 0.02 * dpi), s['title'], font=font('bold', 0.5 * dpi), fill=INK)
     d.text((m + 2 * r + 0.2 * dpi, ty + 0.68 * dpi), f"{s['line']}  ·  Richmond's streetcars, 1925", font=font('italic', 0.2 * dpi), fill=TRAM)
-    nf = font('regular', 0.2 * dpi)
+    nf = font('regular', 0.24 * dpi)
     ny = ty + 1.15 * dpi
     for ln in wrap(d, s['note'], nf, iw * 0.78):
         d.text((m, ny), ln, font=nf, fill=INK); ny += nf.size * 1.5
