@@ -7,15 +7,11 @@ social: streetcars-social.jpg
 
 # Richmond's streetcars, 1925
 
-In May 1888 Frank Sprague's electric cars began running on Richmond's hills, the first big electric
-street railway that worked, and the city grew out along the lines. This map draws the system as it
-stood in 1925: sixteen car lines over the buildings then standing, with fourteen places the cars
-ran to framed around it, from the suburbs they made to the trolley parks at the ends of the line.
+In May 1888 Frank Sprague's electric cars began running on Richmond's hills, the first big electric street railway that worked, and the city grew out along the lines. This map draws the system as it stood in 1925: sixteen car lines over the buildings then standing, with fourteen places the cars ran to framed around it, from the suburbs they made to the trolley parks at the ends of the line.
 
 ![The 1925 map, framed by its fourteen stops](streetcars-menu.jpg)
 
-[Open the map](https://busse.github.io/isoscape/#richmond-streetcars:1925) to pan and zoom, or jump to a stop below. Prints of the whole set, the map
-alone and each stop are in the [shop](https://chrisbusse.com/collections/richmond-streetcars-1925).
+[Open the map](https://busse.github.io/isoscape/#richmond-streetcars:1925) to pan and zoom, or jump to a stop below. Prints of the whole set, the map alone and each stop are in the [shop](https://chrisbusse.com/collections/richmond-streetcars-1925).
 
 ## The stops
 
@@ -133,8 +129,7 @@ Board the interurban here for Lakeside and Ashland. Opened in July 1907 for big,
 
 ## The lines
 
-Each line follows the streets its sources name, placed on today's streets. Where a
-source is silent, the ends are approximate.
+Each line follows the streets its sources name, placed on today's streets. Where a source is silent, the ends are approximate.
 
 | Line | Route | Ran |
 |---|---|---|
@@ -157,12 +152,6 @@ source is silent, the ends are approximate.
 
 ## How it was drawn
 
-The routes come from plate 53 of Harland Bartholomew & Associates' 1943 report to the City
-Planning Commission, *Early Transit Routes, 1888 & 1925*, with the details from the sources
-listed for each line. Buildings are the ones standing today that the city assessor dates to
-1925 or before, plus those traced from Sanborn fire-insurance maps downtown; small streets are
-drawn only where a house of the year stood nearby. Henrico County keeps no such dates online,
-so the suburbs across the 1925 county line look emptier than they were. On the big map, lines
-and cars are drawn three times life size; on the single-stop prints, one and a half.
+The routes come from plate 53 of Harland Bartholomew & Associates' 1943 report to the City Planning Commission, *Early Transit Routes, 1888 & 1925*, with the details from the sources listed for each line. Buildings are the ones standing today that the city assessor dates to 1925 or before, plus those traced from Sanborn fire-insurance maps downtown; small streets are drawn only where a house of the year stood nearby. Henrico County keeps no such dates online, so the suburbs across the 1925 county line look emptier than they were. On the big map, lines and cars are drawn three times life size; on the single-stop prints, one and a half.
 
 More in [How it's made](how-its-made.md#time).

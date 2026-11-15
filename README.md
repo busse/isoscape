@@ -388,6 +388,45 @@ heights are approximate, and some buildings are missing, misplaced or merged.
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
 and elevation and keeps only its year-built parcels in its own `data/` folder.
 
+## Making a set
+
+A **set** is one big map framed by numbered boxes, each a close view of a place (or of the same
+place in another year) with a title, a subtitle and a short sourced note, laid out like a menu.
+One description makes every product: the framed set (32×24 in), the map alone (36×24), one
+print per box (24×18), framed-canvas files for each, and a page in the explorer.
+`sets/streetcars-1925.json` is the worked example: Richmond's streetcar lines in 1925 and
+fourteen places they ran to.
+
+1. **The map.** A region with a `time` section (see Time), its history file holding what the
+   set is about: curated features, era rules, the series' epochs. Build it and look at it.
+2. **The boxes.** A JSON list, inline or in a file, up to fourteen, numbered clockwise from the
+   top left:
+   ```jsonc
+   { "n": 5, "id": "highland-park", "title": "Highland Park",
+     "subtitle": "Highland Park line, over the Fifth Street viaduct",   // or "line"
+     "at": [-77.42, 37.5765],      // lon, lat the box is centered on
+     "year": 1925,                 // optional: draw this box from another year of the series
+     "ground": 1800,               // optional: meters across (menu 1,800, single print 2,100)
+     "note": "About 50 words, written from the sources…",
+     "sources": ["https://…", "https://…"] }
+   ```
+   Write each note from its sources, in the set's voice: the streetcar set invites you to ride
+   ("Over the Fifth Street viaduct and round the loop…") and then says what became of the place.
+   American spelling. A box with no source does not go in.
+3. **The set file**, `sets/<name>.json`: `slug` (the print files' prefix), `title`, `subtitle`,
+   `note` (what is approximate), `credit`, `map` (`region`, `year`), `boxes`, an optional
+   `key` (up to sixteen names in the title band, from a list in a JSON file), optional `fine`
+   (extra `build` flags for the single prints, e.g. `["--streetcar-scale", "1.5"]`), and `page`
+   (`slug`, `title`, `summary`, `intro`, `how`, `noun`, an optional `table`, and `shop` once
+   the prints are for sale).
+4. **Scenes**, where the region's data is cached: `python3 tools/sets/set.py <name> prepare`
+   builds each year's SVG into `out/sets/<name>/scenes/` and writes `points.json`.
+5. **Prints**, anywhere with `rsvg-convert`: `set.py <name> menu`, `map`, `boxes`, `canvas`
+   (300 dpi into `out/sets/<name>/print/`; `--dpi 40` for a quick proof). Look at every one.
+6. **The page**: `set.py <name> page` writes `pages/<page.slug>.md` and its two images from the
+   menu print. Link it from a section of `isoscape.config.json` (`page`, `pageLabel`) and, once
+   the prints sell, point `shop.links` at the collection for the region.
+
 ## Roadmap
 
 1. **Lidar heights.** About 40% of downtown heights are guesses. 3DEP's bare-earth model is

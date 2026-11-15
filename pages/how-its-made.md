@@ -445,11 +445,13 @@ their own, and a racetrack is a closed dirt-colored ribbon. `--streetcar-scale` 
 series' scale for one build: the single-stop prints of the streetcar series use 1.5, so the
 lines read thinner up close.
 
-**The streetcar prints.** `tools/streetcars/menu.py` frames the 1925 map with fourteen numbered
-boxes, one per stop or attraction, each 1,800 m of ground across, cut from the same scene and
-rasterized from the vector at the pixels it fills, with a note written from the sources stored
-beside it (`tools/streetcars/stops.json`). The same tool makes the map alone and a print per
-stop (2,100 m across). `isoscape locate` tells it where each stop falls in the picture.
+**Sets: a map framed by its places.** `tools/sets/set.py` frames a big map with up to fourteen
+numbered boxes (the 1925 streetcars use one per stop), each 1,800 m of ground across, cut from
+the scene of its own year and rasterized from the vector at the pixels it fills, with a note
+written from the sources stored beside it. The same tool makes the map alone, a print per box
+(2,100 m across), canvas files with 1.5 in of mirrored wrap, and the box's page in the explorer.
+`isoscape locate` tells it where each box falls in the picture. A set is one file,
+`sets/<name>.json`; "Making a set" in the README walks through one.
 
 **What the series cannot show:**
 
