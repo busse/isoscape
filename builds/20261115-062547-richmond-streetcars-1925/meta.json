@@ -1,0 +1,342 @@
+{
+ "name": "richmond-streetcars-1925",
+ "region": "richmond-streetcars",
+ "title": "Richmond's streetcars, 1925",
+ "palette": "paper",
+ "note": "Richmond's streetcars, 1925: sixteen lines, fourteen stops, fair grounds and track",
+ "viewBox": [
+  -3016,
+  -2212.2672111497122,
+  6032,
+  4022.8420532048544
+ ],
+ "bearing": 0,
+ "ms": 5398,
+ "stats": {
+  "features": 31182,
+  "unbuiltStreets": 9525,
+  "ground": 1938,
+  "elevationDatum": -2.2,
+  "elevationTop": 100,
+  "streetcarLines": 16,
+  "ribbons": 12536,
+  "footprintsAdded": 0,
+  "buildings": 14456,
+  "streetcars": 78,
+  "streetcarScale": 3,
+  "heightFromTag": 51,
+  "heightFromModel": 0,
+  "heightFromLevels": 510,
+  "heightGuessed": 13895,
+  "year": 1925,
+  "newSincePrevious": 0,
+  "datedCurated": 11,
+  "datedOsm": 647,
+  "datedParcel": 13798,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 1221,
+  "tracedEndMap": 385,
+  "tracedEndRebuilt": 56,
+  "tracedEndHighway": 84,
+  "tracedEndAssumed": 696,
+  "curated": 18,
+  "bridgePieces": 1281,
+  "contourSegments": 0,
+  "rapidCells": 4019,
+  "strips": 517
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Richmond's streetcars",
+  "center": [
+   -77.4705,
+   37.5605
+  ],
+  "width": 13600,
+  "depth": 12400,
+  "scale": 0.44,
+  "squash": 0.65,
+  "exaggeration": 1,
+  "slab": 40,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Boulevard Bridge",
+    "deck": 20
+   }
+  ],
+  "minBuildingArea": 20,
+  "dots": "none",
+  "fetchTile": 3000,
+  "terrain": {
+   "exaggeration": 3,
+   "cell": 12,
+   "contour": 0,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 5
+  },
+  "time": {
+   "history": "history/richmond-streetcars.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-streetcars"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1925,
+  "series": "richmond-streetcars",
+  "title": "The streetcar city",
+  "note": "Car lines as Harland Bartholomew & Associates mapped them for 1925: within the city limits of the day, with the Lakeside and Westhampton lines running on beyond.",
+  "curated": [
+   {
+    "id": "car-westhampton",
+    "name": "Westhampton line",
+    "kind": "streetcar",
+    "from": 1901,
+    "to": 1947,
+    "note": "West on Floyd Avenue from Robinson Street to the belt line railroad, under it in a tunnel, then a little north to Grove Avenue; out Grove to Three Chopt Road; then on its own right-of-way beside Three Chopt to Towana Road, and on (the line of today's Campus Drive) to Westhampton Park, which became the University of Richmond's campus in 1914. The right-of-way beside Three Chopt is drawn along the road itself.",
+    "sources": [
+     "https://dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6064_Three_Chopt_Road_HD_2012_NR_FINAL.pdf",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-belmont",
+    "name": "Belmont line",
+    "kind": "streetcar",
+    "from": 1895,
+    "to": 1949,
+    "note": "The Broad Street line's extension west from Robinson Street to Sheppard, south to Cary, later carried on eleven blocks to Garrett Street. Which street carried the last stretch is read from the 1925 plate's 'Belmont' label.",
+    "sources": [
+     "https://museumdistrict.org/history",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-broad",
+    "name": "Broad Street line",
+    "kind": "streetcar",
+    "from": 1888,
+    "to": 1949,
+    "note": "Broad Street, the spine of the system, from the Belmont line's turn at Sheppard Street east to Church Hill. The east end is approximate.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://museumdistrict.org/history"
+    ]
+   },
+   {
+    "id": "car-fairgrounds",
+    "name": "State Fair Grounds spur",
+    "kind": "streetcar",
+    "from": 1906,
+    "to": 1941,
+    "note": "The 1925 plate shows a short spur north from Broad Street ending in a loop. It is drawn here up the Boulevard to the State Fair Grounds (1906–1941, on the site of The Diamond); which street the spur took is not certain.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
+     "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm"
+    ]
+   },
+   {
+    "id": "car-main",
+    "name": "Main Street line",
+    "kind": "streetcar",
+    "from": 1888,
+    "to": 1949,
+    "note": "West Main Street, which the line turned into a commercial street through the Fan, east to Shockoe. The west end is approximate.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://dhr.virginia.gov/?p=16894"
+    ]
+   },
+   {
+    "id": "car-harrison",
+    "name": "Harrison Street line",
+    "kind": "streetcar",
+    "from": 1890,
+    "to": 1949,
+    "note": "A crosstown link on Harrison Street between the Main, Floyd and Broad lines, as the 1925 plate shows it.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-byrd-park",
+    "name": "Reservoir (Byrd) Park line",
+    "kind": "streetcar",
+    "from": 1895,
+    "to": 1949,
+    "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. The far end is approximate.",
+    "sources": [
+     "https://museumdistrict.org/history",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"
+    ]
+   },
+   {
+    "id": "car-clay",
+    "name": "Clay Street line",
+    "kind": "streetcar",
+    "from": 1888,
+    "to": 1949,
+    "note": "Sprague's first line of 1888 ran from Church Hill to Clay and Hancock Streets; the 1925 plate still shows Clay Street. The ends are approximate.",
+    "sources": [
+     "https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-lakeside",
+    "name": "Brookland and Lakeside line",
+    "kind": "streetcar",
+    "from": 1891,
+    "to": 1949,
+    "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate.",
+    "sources": [
+     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://lewisginter.org/?p=11566"
+    ]
+   },
+   {
+    "id": "car-highland-park",
+    "name": "Highland Park line",
+    "kind": "streetcar",
+    "from": 1893,
+    "to": 1949,
+    "note": "North on Fifth Street over the Northside Viaduct (1892) to Chestnut Hill and Highland Park, and after 1908 round a loop by Meadowbridge Road, Milton Street and Highland Street (the cross street joining them, Second Avenue here, is approximate). The Hull Street–Highland Park line was Richmond's last: the last car ran on 25 November 1949.",
+    "sources": [
+     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
+     "https://rvanews.com/?p=20453",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-marshall",
+    "name": "Marshall Street line (Fulton)",
+    "kind": "streetcar",
+    "from": 1911,
+    "to": 1949,
+    "note": "Across Shockoe Valley on the Marshall Street Viaduct (1911, since demolished: drawn straight) from College Street to 21st Street at Jefferson Park, out Marshall Street, and down to Fulton along Williamsburg Avenue. The route from Marshall Street down to Fulton is approximate.",
+    "sources": [
+     "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-venable",
+    "name": "Venable Street line",
+    "kind": "streetcar",
+    "from": 1888,
+    "to": 1949,
+    "note": "North on 17th Street, east along Venable Street through Union Hill, and up 25th Street to Nine Mile Road, the road the Seven Pines line took out of the city (chartered along 25th to 29th Streets and Nine Mile Road). The federal government bought the Seven Pines line in 1918 for a wartime plant; how far cars ran out Nine Mile Road in 1925 is not certain.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://henrico.us/locations/nine-mile-road/",
+     "https://modelingjimcrow.virginia.edu/node/91936"
+    ]
+   },
+   {
+    "id": "car-jefferson",
+    "name": "Jefferson Avenue line",
+    "kind": "streetcar",
+    "from": 1890,
+    "to": 1949,
+    "note": "Up 21st Street and out Jefferson Avenue past Jefferson Park, one of the trolley's pleasure grounds, as the 1925 plate shows it.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"
+    ]
+   },
+   {
+    "id": "car-hull",
+    "name": "Hull Street line",
+    "kind": "streetcar",
+    "from": 1888,
+    "to": 1949,
+    "note": "Over the Mayo Bridge into Manchester and out Hull Street. Its last car, No. 408 on the Hull Street–Highland Park run, ended Richmond's streetcars on 25 November 1949. The outer end is approximate.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://richmondmagazine.com/news/richmond-history/richmond-trolley-system/"
+    ]
+   },
+   {
+    "id": "car-forest-hill",
+    "name": "Forest Hill line",
+    "kind": "streetcar",
+    "from": 1890,
+    "to": 1934,
+    "note": "South over the river (the free bridge at Ninth Street), down the median of Semmes Avenue through Woodland Heights, and out Forest Hill Avenue to Forest Hill Park and its amusement park, the most popular trolley destination of all. VEPCO proposed taking up the Semmes Avenue tracks in 1933.",
+    "sources": [
+     "https://sah-archipedia.org/node/1321",
+     "https://rvamag.com/politics/richmond-politics/grtc-connects-route-2-northside-to-forest-hill.html",
+     "https://rvanews.com/?p=117440",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-ashland",
+    "name": "Richmond–Ashland Railway",
+    "kind": "streetcar",
+    "from": 1907,
+    "to": 1938,
+    "note": "The interurban to Ashland, built as the Richmond and Chesapeake Bay Railway (1907) and run as the Richmond–Ashland Railway from 1919 to 1938: from its terminal at Broad and Laurel Streets (814 West Broad), over a half-mile concrete trestle across Bacon's Quarter Branch (drawn straight), then up Brook Road and on to Ashland.",
+    "sources": [
+     "https://pantographblog.blogspot.com/2009/08/richmond-and-chesapeake-bay-railway.html",
+     "https://varails.com/trolley-lines/the-richmond-ashland-railway",
+     "https://richmondmagazine.com/news/richmond-history/by-train-to-the-center-of-the-universe/"
+    ]
+   },
+   {
+    "id": "fair-grounds",
+    "name": "Virginia State Fair Grounds",
+    "kind": "grounds",
+    "from": 1906,
+    "to": 1941,
+    "note": "The State Fair grounds at the tip of the Boulevard, reached by streetcar, from the revived fair of 1906 until the fair moved out in 1941; The Diamond stands there now. The outline is approximate.",
+    "sources": [
+     "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
+     "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm"
+    ]
+   },
+   {
+    "id": "fair-track",
+    "name": "Fair Grounds racetrack",
+    "kind": "track",
+    "from": 1906,
+    "to": 1941,
+    "note": "The fair's half-mile racetrack, drawn as an approximate oval at the center of the grounds.",
+    "sources": [
+     "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
+     "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm",
+     "https://www.purethunderracing.com/?p=6184"
+    ]
+   }
+  ]
+ },
+ "id": "20261115-062547-richmond-streetcars-1925",
+ "createdAt": "2026-11-15T06:25:47.352Z",
+ "bytes": 28447166,
+ "git": {
+  "commit": "70ef06f",
+  "dirty": false,
+  "subject": "American spelling throughout; streetcar page, story and prints in their final voice"
+ },
+ "files": {
+  "svg": "builds/20261115-062547-richmond-streetcars-1925/image.svg",
+  "thumb": "builds/20261115-062547-richmond-streetcars-1925/thumb.png",
+  "social": "builds/20261115-062547-richmond-streetcars-1925/social.png",
+  "preview": "builds/20261115-062547-richmond-streetcars-1925/preview.jpg"
+ }
+}
