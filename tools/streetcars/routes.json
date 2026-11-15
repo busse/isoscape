@@ -78,7 +78,7 @@
    "id": "car-marshall", "name": "Marshall Street line (Fulton)", "route": "Marshall Street Viaduct – Church Hill – Fulton", "from": 1911, "to": 1949,
    "runs": [[
     ["College Street", "Marshall Street"], {"straight": ["Marshall Street", "21st Street"]}, ["Marshall Street", "31st Street"],
-    ["31st Street", "Main Street"], ["Main Street", "Williamsburg Avenue"], ["Williamsburg Avenue", "Government Road"]
+    {"at": [-77.4140, 37.5245], "on": "Williamsburg Avenue"}, ["Williamsburg Avenue", "Government Road"]
    ]],
    "note": "Across Shockoe Valley on the Marshall Street Viaduct (1911, since demolished: drawn straight) from College Street to 21st Street at Jefferson Park, out Marshall Street, and down to Fulton along Williamsburg Avenue. The route from Marshall Street down to Fulton is approximate.",
    "sources": ["https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts", "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"]
