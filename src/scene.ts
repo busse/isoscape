@@ -351,10 +351,10 @@ export const buildScene = (
     else items.push(extrude(view, pal, s.id, outer, inners, base, top, roof, dotsMode, s.tags.name))
   }
   stats.buildings = items.length
-  // Streetcars on their lines: a car every `TRAM_SPACING` metres along each run, 14 m long,
-  // 2.6 m wide and 3.6 m tall (a 1920s double-truck car) times the history's `streetcarScale`,
-  // set on the ground and turned with the street. Their spacing is for the picture, not a
-  // timetable.
+  // Streetcars on their lines: a car every `TRAM_SPACING` metres along each run, 14 m long and
+  // 3.6 m tall (a 1920s double-truck car) but 5.4 m wide, about twice a real car's width so its
+  // pale roof reads against the line, all times the history's `streetcarScale`; set on the
+  // ground and turned with the street. Their spacing is for the picture, not a timetable.
   let cars = 0
   for (const run of tramRuns) {
     let along = TRAM_SPACING / 2
@@ -371,7 +371,7 @@ export const buildScene = (
         const ux = (b[0] - a[0]) / len
         const uy = (b[1] - a[1]) / len
         const hl = 7 * tramScale
-        const hw = 1.3 * tramScale
+        const hw = 2.7 * tramScale
         let ring: Vec2[] = [
           [c[0] - ux * hl + uy * hw, c[1] - uy * hl - ux * hw],
           [c[0] + ux * hl + uy * hw, c[1] + uy * hl - ux * hw],
