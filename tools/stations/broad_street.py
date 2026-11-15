@@ -368,7 +368,7 @@ sc = json.loads(STREETCARS.read_text())
 # At this scale a car line is drawn at the width of its double track, not the bold city-map ribbon.
 features += [{**f, 'width': 4.0} for f in sc['features'] if f['kind'] == 'streetcar' and f.get('from', 0) <= 1943 < f.get('to', 9999)]
 # The fair grounds north of the tracks (1906–1941), for views of the years before 1943.
-features += [f for f in sc['features'] if f['kind'] in ('grounds', 'track')]
+features += [f for f in sc['features'] if f['kind'] in ('grounds', 'track') or f['id'] == 'fair-grounds-site']
 
 rules = [
     {'where': {'id': ['w1485004507', 'w1485004508', 'w1089070999']}, 'eras': [],

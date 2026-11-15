@@ -333,8 +333,12 @@ export const buildScene = (
   let fresh = 0
   let undated = 0
   const datedBy = { curated: 0, osm: 0, parcel: 0 }
+  // A curated site (a station's grounds, a fairground) was laid out otherwise while it stood:
+  // today's buildings on it are not drawn.
+  const sites = curated.filter((h) => h.kind === 'site' && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
   for (const s of shown) {
     if (!s.outer.every((p) => insideRect(p, frame))) continue
+    if (sites.length > 0 && sites.some((r) => pointInRing(centroid(s.outer), r))) continue
     const area = Math.abs(signedArea(s.outer)) - s.inners.reduce((a, h) => a + Math.abs(signedArea(h)), 0)
     if (area < minArea) continue
     const outer = orient(simplifyRing(s.outer, 0.45), true)

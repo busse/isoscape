@@ -445,6 +445,30 @@ their own, and a racetrack is a closed dirt-colored ribbon. `--streetcar-scale` 
 series' scale for one build: the single-stop prints of the streetcar series use 1.5, so the
 lines read thinner up close.
 
+The fair grounds are traced from sheet 468 of the 1924–25 Sanborn atlas (100 feet to the inch,
+0.403 m per pixel of the scan, north up, fixed at Hermitage Road and Sherwood Avenue): the
+outline follows the Boulevard and Hermitage Road to the tip where they meet, the one-mile
+track's south turn (a radius of 83 m) is taken off the sheet with its straights parallel to
+the Boulevard, and the north turn is drawn to make up the mile. Forty of the fair's buildings
+come from the same sheet. A curated *site* (the fair grounds while the fair stood, a station's
+loop of tracks) clears today's streets, lots and buildings from within it.
+
+**One building, close up.** Broad Street Station in 1943 is modeled from parts
+(`tools/stations/broad_street.py`): wings, center pavilion, porch, six columns and two piers,
+entablature, drum and a dome (a quarter circle in ten steps), each with a height above its
+seat, and the concourse seated on the high side of the ground so it bridges the tracks. The
+station's own colors live in the palette's `parts`: limestone, the dome's tile, the iron and
+roofing of the platform canopies, ramp houses, and the trains. Nine tracks follow the
+surviving platforms through the station and the USGS quadrangles of 1934 and 1956 around the
+loop, gathering into four and then two within 110 m of each end. Canopies are cut into 12 m
+pieces, each on a column, 8 m wide and 5.4 m up; trains are a steam engine (18 m, with a
+cab), its tender (11 m) and 26 m heavyweight cars, 1 m apart. At 1.5 pixels per meter or
+closer, track is drawn with its ties (0.25 m every 0.67 m) and its two rails, 1.44 m apart.
+A series can draw track wider than life (`railScale`, or `--rail-scale` for one build) and in
+the ties' darker tone, so a network reads across a city: the wide railroad map uses four
+times. Curated labels name places on the map; the single-place prints of a set leave them
+out.
+
 **Sets: a map framed by its places.** `tools/sets/set.py` frames a big map with up to fourteen
 numbered boxes (the 1925 streetcars use one per stop), each 1,800 m of ground across, cut from
 the scene of its own year and rasterized from the vector at the pixels it fills, with a note
