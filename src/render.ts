@@ -616,6 +616,17 @@ export const renderSvg = (scene: Scene): Rendered => {
   flushTo(-Infinity)
   // A crisp ink line along the front ground.
   out.push(`<path class="edge" d="${pathOf(front, false)}"/>`)
+  // Labels over everything, haloed in the land color so they read across lines and roofs.
+  if (scene.labels !== undefined) {
+    const size = Math.max(14, capSize * 0.42)
+    out.push(`<g class="labels" font-family="Georgia, 'Times New Roman', serif" fill="${p.ink}" stroke="${p.land}" stroke-width="${f(size * 0.22)}" stroke-linejoin="round" paint-order="stroke">`)
+    for (const l of scene.labels) {
+      const [sx, sy] = P(l.at, l.z)
+      out.push(`<text x="${f(sx)}" y="${f(sy)}" font-size="${f(size)}" text-anchor="${l.anchor}" font-weight="bold">${esc(l.text)}</text>`)
+      if (l.caption !== undefined) out.push(`<text x="${f(sx)}" y="${f(sy + size * 1.05)}" font-size="${f(size * 0.72)}" text-anchor="${l.anchor}" font-style="italic">${esc(l.caption)}</text>`)
+    }
+    out.push(`</g>`)
+  }
   if (scene.time !== undefined) {
     const tx = vb[0] + pad
     const ty = vb[1] + pad + capSize

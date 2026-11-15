@@ -88,6 +88,16 @@ export interface Scene {
   readonly stats: Record<string, number>
   /** For a dated scene: the year, its title, and the curated features drawn in it. */
   readonly time?: { readonly year: number; readonly title?: string; readonly curated: readonly HistoryFeature[] }
+  /** Words on the map: curated labels, at view meters and the ground height there. */
+  readonly labels?: readonly MapLabel[]
+}
+
+export interface MapLabel {
+  readonly text: string
+  readonly caption?: string
+  readonly at: Vec2
+  readonly z: number
+  readonly anchor: 'start' | 'middle' | 'end'
 }
 
 const toViewRing = (view: View, ring: readonly Vec2[]): Ring => ring.map(([lon, lat]) => view.toView(lon, lat))
@@ -218,6 +228,7 @@ export const buildScene = (
     return quads.length === 0 ? null : { kind, quads, center }
   }
 
+  const railScale = time?.history.railScale ?? 1
   const bridgeLines: LineFeature[] = []
   for (const f of features) {
     if (f.type !== 'line') continue
@@ -231,7 +242,7 @@ export const buildScene = (
       const r = ribbonOf(isPath(t) ? 'path' : 'road', f, w)
       if (r) ribbons.push(r)
     } else if (isRail(t)) {
-      const r = ribbonOf('rail', f, 3.2)
+      const r = ribbonOf('rail', f, 3.2 * railScale)
       if (r) ribbons.push(r)
     } else if (t.waterway === 'weir' || t.waterway === 'dam') {
       const r = ribbonOf('weir', f, t.waterway === 'dam' ? 6 : 3)
@@ -253,7 +264,7 @@ export const buildScene = (
   for (const h of curated) {
     if (h.kind !== 'rail') continue
     for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
-      const r = ribbonOf('rail', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, h.width ?? 3.2, false)
+      const r = ribbonOf('rail', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, (h.width ?? 3.2) * railScale, false)
       if (r) ribbons.push(r)
     }
   }
@@ -484,9 +495,19 @@ export const buildScene = (
   }
   stats.bridgePieces = spans
 
+  const labels: MapLabel[] = []
+  for (const h of curated) {
+    if (h.kind !== 'label' || h.at === undefined) continue
+    const at = view.toView(h.at[0], h.at[1])
+    if (!insideRect(at, frame)) continue
+    labels.push({ text: h.name, ...(h.caption === undefined ? {} : { caption: h.caption }), at, z: terrain.z(at), anchor: h.anchor ?? 'middle' })
+  }
+  if (labels.length > 0) stats.labels = labels.length
+
   return {
     region, view, palette: pal, terrain, ground, ribbons, items, stats,
     ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated } }),
+    ...(labels.length === 0 ? {} : { labels }),
   }
 }
 

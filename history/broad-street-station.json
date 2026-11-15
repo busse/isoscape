@@ -917,56 +917,24 @@
      37.5613337
     ],
     [
-     -77.465088,
-     37.5617445
+     -77.4650658,
+     37.561765
     ],
     [
-     -77.4652338,
-     37.5618449
+     -77.4652116,
+     37.5618655
     ]
    ],
    "height": 14,
    "tone": "stone",
-   "note": "The long concourse, carried from the head house out over the station tracks at the level of the waiting room; ramps led down from it to each platform. Outline from OSM; height approximate.",
+   "note": "The long concourse, carried from the head house out over the station tracks at the level of the waiting room; ramps led down from it to each platform. It ends past the last platform on the 1925 Sanborn sheet; the block beyond it today is later. Outline from OSM; height approximate.",
    "sources": [
     "https://www.openstreetmap.org/way/252997396",
     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg",
-    "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg"
+    "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+    "https://www.loc.gov/resource/g3884rm.g3884rm_g09064192504/?sp=93"
    ],
    "seat": "max"
-  },
-  {
-   "id": "bss-concourse-end",
-   "name": "Broad Street Station concourse",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4653539,
-     37.5619277
-    ],
-    [
-     -77.4650236,
-     37.5617001
-    ],
-    [
-     -77.4646016,
-     37.5620904
-    ],
-    [
-     -77.4649318,
-     37.5623179
-    ]
-   ],
-   "height": 14,
-   "tone": "stone",
-   "note": "The concourse's far block, beyond the platforms, with its tall windows. Outline from OSM; height approximate.",
-   "sources": [
-    "https://www.openstreetmap.org/way/252997396",
-    "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg",
-    "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg"
-   ]
   },
   {
    "id": "bss-track-1",
@@ -19671,6 +19639,13 @@
    "note": "Today's outline, with the museum's 1971 dome theater, is drawn from 1976, when the Science Museum took the building; before that the station is drawn from its curated parts."
   }
  ],
+ "sanborn": {
+  "lost": "history/sanborn/broad-street-lost.geojson",
+  "editions": [
+   1925
+  ],
+  "source": "https://www.loc.gov/item/sanborn09064_009/"
+ },
  "streetsNearBuildings": 60,
  "streetcarScale": 1
 }

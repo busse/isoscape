@@ -71,6 +71,8 @@ def to_ab(p):
 
 # ---- sources ---------------------------------------------------------------------------------
 
+SANBORN_475 = 'https://www.loc.gov/resource/g3884rm.g3884rm_g09064192504/?sp=93'
+
 SRC = {
     'archipedia': 'https://sah-archipedia.org/node/20518',
     'dhr': 'https://www.dhr.virginia.gov/historic-registers/127-0226/',
@@ -134,11 +136,9 @@ part('bss-dome', 'Broad Street Station dome', poly_ab(-2, 0.5, 13.5, 24), 8.0, '
 
 # ---- the concourse, bridged over the tracks ----------------------------------------------------
 C_SRC = [SRC['osm-station'], SRC['photo-1969'], SRC['platforms']]
-part('bss-concourse', 'Broad Street Station concourse', rect_ab(-16, 1, 35, 95), 14, 'stone',
-     'The long concourse, carried from the head house out over the station tracks at the level of the waiting room; ramps led down from it to each platform. Outline from OSM; height approximate.',
-     C_SRC, seat='max')
-part('bss-concourse-end', 'Broad Street Station concourse', rect_ab(-30, 8.5, 95, 152), 14, 'stone',
-     'The concourse\'s far block, beyond the platforms, with its tall windows. Outline from OSM; height approximate.', C_SRC)
+part('bss-concourse', 'Broad Street Station concourse', rect_ab(-16, 1, 35, 98), 14, 'stone',
+     'The long concourse, carried from the head house out over the station tracks at the level of the waiting room; ramps led down from it to each platform. It ends past the last platform on the 1925 Sanborn sheet; the block beyond it today is later. Outline from OSM; height approximate.',
+     C_SRC + [SANBORN_475], seat='max')
 
 # ---- tracks, platforms, canopies ---------------------------------------------------------------
 # Platforms (OSM): four, 13.8 m apart, centers at t = 29.5, 43.3, 57.1, 70.9, 6.6 m wide. Two
@@ -385,8 +385,35 @@ history = {
         {'id': 'w252997396', 'name': 'Broad Street Station (Science Museum of Virginia)', 'year': 1976, 'source': SRC['smv'],
          'note': 'Today\'s outline, with the museum\'s 1971 dome theater, is drawn from 1976, when the Science Museum took the building; before that the station is drawn from its curated parts.'},
     ],
+    # Buildings on the 1924–25 Sanborn sheets (vol. 4, sheets 405–407 and 460) that are gone
+    # today, traced by tools/sanborn (corners in cps1925v4.json); taken to stand until the 1950s.
+    'sanborn': {'lost': 'history/sanborn/broad-street-lost.geojson', 'editions': [1925],
+                'source': 'https://www.loc.gov/item/sanborn09064_009/'},
     'streetsNearBuildings': 60,
     'streetcarScale': 1,
 }
 OUT.write_text(json.dumps(history, indent=1, ensure_ascii=False) + '\n')
+
+# ---- the wider view: where the lines go --------------------------------------------------------
+# The same scene, with the railroads drawn three times their width and each line's way out of
+# town labeled at the edge of the frame. Places in meters east and north of the station.
+LINES_SRC = ['https://chicagorailfan.com/stbrric.html', 'https://www.richmondrailroadmuseum.com/railroad-history']
+LABELS = [
+    ((-850, 2250), 'start', 'To Washington', 'RF&P main line: Fredericksburg, Washington, New York'),
+    ((-480, 1930), 'start', 'AY Tower', "The RF&P main meets the Atlantic Coast Line's Belt Line"),
+    ((450, 420), 'start', 'Seaboard Junction', 'The Seaboard Air Line leaves the RF&P for Main Street Station'),
+    ((-120, -60), 'end', 'Broad Street Station', 'RF&P, Atlantic Coast Line and N&W trains'),
+    ((-2650, -3300), 'start', 'To Petersburg and Florida', 'ACL Belt Line over the James; N&W trains by way of Petersburg'),
+    ((3200, -3150), 'end', 'Main Street Station', 'Seaboard Air Line south to Raleigh and Florida; C&O'),
+    ((-3050, -1600), 'start', 'C&O James River line', 'west to Lynchburg'),
+    ((-3050, -2780), 'start', 'Southern Railway', 'from Hull Street station, southwest to Danville'),
+]
+labels = [{
+    'id': f'lines-label-{k + 1}', 'name': name, 'kind': 'label', 'from': 1919, 'to': 1976, 'at': lonlat(at), 'anchor': anchor, 'caption': caption,
+    'note': 'Where the line went in 1943. Main Street Station served the Seaboard Air Line and the C&O, Hull Street station the Southern; AY Tower, about a mile northwest of Broad Street, was the wye of the RF&P main and the ACL; Seaboard Junction, just north of the station, was where the SAL left the RF&P.',
+    'sources': LINES_SRC,
+} for k, (at, anchor, name, caption) in enumerate(LABELS)]
+lines = {**history, 'title': 'The lines from Broad Street Station, 1943', 'features': features + labels, 'railScale': 3,
+         'sanborn': {**history['sanborn'], 'lost': ['history/sanborn/lost.geojson', history['sanborn']['lost']], 'editions': [1925]}}
+(ROOT / 'history' / 'broad-street-lines.json').write_text(json.dumps(lines, indent=1, ensure_ascii=False) + '\n')
 print(f'{OUT.relative_to(ROOT)}: {len(features)} features; loop {total:.0f} m, straight {L_END - L_START:.0f} m')

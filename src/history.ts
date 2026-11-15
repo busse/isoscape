@@ -31,7 +31,7 @@ export interface Epoch {
 export interface HistoryFeature {
   readonly id: string
   readonly name: string
-  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood'
+  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label'
   readonly from: number
   readonly to?: number
   /** lon/lat outline (open), for areas and landmarks. */
@@ -53,6 +53,13 @@ export interface HistoryFeature {
   readonly seat?: 'min' | 'max'
   readonly shape?: 'prism' | 'dome'
   readonly tone?: PartTone
+  /**
+   * A label written on the map: `name` at the point `at` (lon/lat), with an optional second
+   * line, `caption`, set from its start, middle or end.
+   */
+  readonly at?: Vec2
+  readonly caption?: string
+  readonly anchor?: 'start' | 'middle' | 'end'
   /** A rail line: a train standing on it, `at` meters from the line's start. */
   readonly train?: Train
   /** Width in meters: a creek's, a curated rail line's ballast (default 3.2), a canopy's roof. */
@@ -124,7 +131,7 @@ export interface History {
   /** Curated years built for particular OSM buildings, which win over every other date. */
   readonly dates: readonly { readonly id: string; readonly name?: string; readonly year: number; readonly source: string; readonly note?: string }[]
   /** Fire-insurance maps traced into footprints: the editions used, and the buildings since lost. */
-  readonly sanborn?: { readonly lost: string; readonly editions: readonly number[]; readonly source: string }
+  readonly sanborn?: { readonly lost: string | readonly string[]; readonly editions: readonly number[]; readonly source: string }
   readonly traced: readonly TracedBuilding[]
   /**
    * Minor streets (tertiary, residential, service, unclassified, living streets and paths) drawn only
@@ -137,20 +144,25 @@ export interface History {
    * (default 1).
    */
   readonly streetcarScale?: number
+  /** Draw railroad tracks this many times their width, so the network reads from afar (default 1). */
+  readonly railScale?: number
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
   const raw = JSON.parse(await readFile(path, 'utf8')) as Partial<History>
   let traced: TracedBuilding[] = []
   if (raw.sanborn !== undefined) {
-    const fc = JSON.parse(await readFile(raw.sanborn.lost, 'utf8')) as { features: { properties: Omit<TracedBuilding, 'ring'>; geometry: { coordinates: number[][][] } }[] }
-    traced = fc.features.map((f) => ({ ...f.properties, ring: f.geometry.coordinates[0].slice(0, -1).map(([x, y]) => [x, y] as Vec2) }))
+    for (const file of typeof raw.sanborn.lost === 'string' ? [raw.sanborn.lost] : raw.sanborn.lost) {
+      const fc = JSON.parse(await readFile(file, 'utf8')) as { features: { properties: Omit<TracedBuilding, 'ring'>; geometry: { coordinates: number[][][] } }[] }
+      traced = traced.concat(fc.features.map((f) => ({ ...f.properties, ring: f.geometry.coordinates[0].slice(0, -1).map(([x, y]) => [x, y] as Vec2) })))
+    }
   }
   return {
     epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(),
     dates: raw.dates ?? [], ...(raw.sanborn === undefined ? {} : { sanborn: raw.sanborn }), traced,
     ...(raw.streetsNearBuildings === undefined ? {} : { streetsNearBuildings: raw.streetsNearBuildings }),
     ...(raw.streetcarScale === undefined ? {} : { streetcarScale: raw.streetcarScale }),
+    ...(raw.railScale === undefined ? {} : { railScale: raw.railScale }),
   }
 }
 
