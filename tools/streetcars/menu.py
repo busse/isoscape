@@ -221,7 +221,8 @@ def compose_map(dpi):
     by = H - m - band + 0.3 * dpi
     d.text((m, by), TITLE, font=font('bold', 0.5 * dpi), fill=INK)
     d.text((m, by + 0.68 * dpi), SUBTITLE, font=font('italic', 0.22 * dpi), fill=DIM)
-    names = '  ·  '.join(f"{s['n']}\u00a0{s['title'].replace(' ', '\u00a0')}" for s in sorted(S, key=lambda s: s['n']))
+    nb = '\u00a0'
+    names = '  ·  '.join(str(s['n']) + nb + s['title'].replace(' ', nb) for s in sorted(S, key=lambda s: s['n']))
     kf = font('regular', 0.16 * dpi)
     ky = by + 1.02 * dpi
     for ln in wrap(d, names, kf, W - 2 * m):
