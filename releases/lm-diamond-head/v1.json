@@ -1,0 +1,145 @@
+{
+ "design": "lm-diamond-head",
+ "title": "Waikiki and Diamond Head",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:53+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-diamond-head   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 diamond-head   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2984.6,
+    -1612.59,
+    5977.85,
+    3432.86
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.57,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-diamond-head",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-diamond-head.svg",
+   "sha256": "ab714558e40fd9cf357717bf79c6f2cd74aca1b67bba39ffe37a697be482ef77",
+   "frozen": "data/_releases/scenes/ab714558e40fd9cf357717bf79c6f2cd74aca1b67bba39ffe37a697be482ef77.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-diamond-head.json": "d102b57d7084abe06bb6da19f5e14af4a6bc84b5c2e0e9aebacb7225ea440946"
+ },
+ "data": {
+  "lm-diamond-head": {
+   "snapshot": "data/_releases/lm-diamond-head@31c45a62eef3",
+   "files": {
+    "dem-tiles/0-0.tif": "9434b4ae2e1b4438bd9661ec68832304e2989c51924d1879b776044d51752d46",
+    "dem-tiles/1-0.tif.part": "63f08a99343100cfa757dfa1f0993a75b6d3b40ac8f0f1b657caa91bf3494aa4",
+    "osm.json": "d1f82c061b910cbb1dc0b6ef07f97a855559b3e2e7f9d18d52371a07f234afa7"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-diamond-head_36x24.jpg",
+   "sha256": "1562aea4cc1614773227d61e345ab6212cff0feb220aea9397c6f84b2be083d9",
+   "bytes": 1889520,
+   "printful_file_id": 1111557883
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-diamond-head_canvas-18x12.jpg",
+    "sha256": "26672dbc69b434125273b4d8b3eda9f2c1a0a5c0e0f8a55ef7e0c48cc60533d0",
+    "bytes": 702400,
+    "printful_file_id": 1111563036
+   },
+   {
+    "file": "print-files/landmarks/lm-diamond-head_canvas-30x20.jpg",
+    "sha256": "b528d7b9b4c7d6ca40d505383f6433c35616ee308f3f03cdc31fae7b14d117e1",
+    "bytes": 1404234,
+    "printful_file_id": 1111563118
+   },
+   {
+    "file": "print-files/landmarks/lm-diamond-head_canvas-36x24.jpg",
+    "sha256": "bfa3383c06cb4a448771e0d0142d886668df6adaf5049d33c91f7e0e588623b1",
+    "bytes": 1842771,
+    "printful_file_id": 1111563223
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Waikiki and Diamond Head",
+   "place": "Honolulu, Hawaii",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-diamond-head_36x24.jpg",
+   "canvas": "lm-diamond-head_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "waikiki-and-diamond-head-print",
+    "id": "gid://shopify/Product/9133949943926",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "waikiki-and-diamond-head-framed-print",
+    "id": "gid://shopify/Product/9133949976694",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "waikiki-and-diamond-head-framed-canvas",
+    "id": "gid://shopify/Product/9133950042230",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-print.jpg?v=1794671157"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-framed-print-black.jpg?v=1794671161",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-framed-print-white.jpg?v=1794671165"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-framed-canvas-black.jpg?v=1794671170",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-diamond-head-framed-canvas-white.jpg?v=1794671174"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

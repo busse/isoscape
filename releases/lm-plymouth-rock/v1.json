@@ -1,0 +1,144 @@
+{
+ "design": "lm-plymouth-rock",
+ "title": "Plymouth Rock",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:47+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-plymouth-rock   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 plymouth-rock   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2992.85,
+    -1842.04,
+    5977.16,
+    3432.47
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.31,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-plymouth-rock",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-plymouth-rock.svg",
+   "sha256": "7ef4b99c61c47093a30bb79c54b2a8001296017dbdc3faa33faae1831a9b699c",
+   "frozen": "data/_releases/scenes/7ef4b99c61c47093a30bb79c54b2a8001296017dbdc3faa33faae1831a9b699c.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-plymouth-rock.json": "d3d387caf98ff8591338861f79e4a2640d6838abdf5c768ab48960dfdb64e2fe"
+ },
+ "data": {
+  "lm-plymouth-rock": {
+   "snapshot": "data/_releases/lm-plymouth-rock@8e88c2bc97e3",
+   "files": {
+    "dem.bin.gz": "731131c7934697f4579261d2bbc9741c4a1a49d6d0a55ad4d1a8e8315ae7d613",
+    "osm.json": "9b1aafcec86451ca2ce6c1b7f698e1df9b8dc69ebe5fa0ab20b6482776a62c42"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-plymouth-rock_36x24.jpg",
+   "sha256": "0131add03c2ec5c71edfb0b6880bdc7b0bec67844b09a8a6d930558eed7bcd59",
+   "bytes": 2274421,
+   "printful_file_id": 1111592137
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-plymouth-rock_canvas-18x12.jpg",
+    "sha256": "f1546a89491d246ec06ec4dbff77bbf992f7c2127d318ae335063cd668a2a5bb",
+    "bytes": 817964,
+    "printful_file_id": 1111592283
+   },
+   {
+    "file": "print-files/landmarks/lm-plymouth-rock_canvas-30x20.jpg",
+    "sha256": "00e7b786d135e46c4243c814f1906049934fb3531edb9161a0fda1ad9d38020d",
+    "bytes": 1608024,
+    "printful_file_id": 1111592404
+   },
+   {
+    "file": "print-files/landmarks/lm-plymouth-rock_canvas-36x24.jpg",
+    "sha256": "051b2f785b3ba5b346533b178201655d60cedacb170ad26af8ae33893a9fa5f3",
+    "bytes": 2088383,
+    "printful_file_id": 1111592536
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Plymouth Rock",
+   "place": "Plymouth, Massachusetts",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-plymouth-rock_36x24.jpg",
+   "canvas": "lm-plymouth-rock_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "plymouth-rock-print",
+    "id": "gid://shopify/Product/9133101285494",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "plymouth-rock-framed-print",
+    "id": "gid://shopify/Product/9133101351030",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "plymouth-rock-framed-canvas",
+    "id": "gid://shopify/Product/9133282590838",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-plymouth-rock-print.jpg?v=1794668319"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-plymouth-rock-framed-print-black.jpg?v=1794668323",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-plymouth-rock-framed-print-white.jpg?v=1794668327"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-plymouth-rock-framed-canvas-black_a736224e-7ac7-460e-ac9e-2043987fb445.jpg?v=1794668332",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-plymouth-rock-framed-canvas-white_0abd0343-ee98-46b9-a333-17c8cf982dde.jpg?v=1794668336"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

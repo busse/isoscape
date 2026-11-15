@@ -1,0 +1,144 @@
+{
+ "design": "lm-cape-hatteras-lighthouse",
+ "title": "Cape Hatteras Lighthouse",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:51+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-cape-hatteras-lighthouse   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 cape-hatteras-lighthouse   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2992.65,
+    -1581.73,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.3,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-cape-hatteras-lighthouse",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-cape-hatteras-lighthouse.svg",
+   "sha256": "188eff5a76aa75ffffee0fbfd46caa821efc9891379584f9396afce029c1e3a0",
+   "frozen": "data/_releases/scenes/188eff5a76aa75ffffee0fbfd46caa821efc9891379584f9396afce029c1e3a0.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-cape-hatteras-lighthouse.json": "2cb2a61888a4b9501697f385990dc56fae8e4e59434c5f72c0c20bd3c2d7baeb"
+ },
+ "data": {
+  "lm-cape-hatteras-lighthouse": {
+   "snapshot": "data/_releases/lm-cape-hatteras-lighthouse@1bea9f42bc7e",
+   "files": {
+    "dem.bin.gz": "47c372284afb78102f94b250fa9d15aa49f1d5c8d090599808f1f2cf6ee61187",
+    "osm.json": "e2f2be00969fb05a8b485811d2f2693359196a82bd9c47417bf4bdb9462ddcca"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-cape-hatteras-lighthouse_36x24.jpg",
+   "sha256": "c0a64c6cfc2749058f42d380ec5993af65a2a57349109155eb61eda41dee1f26",
+   "bytes": 1270948,
+   "printful_file_id": 1111467740
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-cape-hatteras-lighthouse_canvas-18x12.jpg",
+    "sha256": "749a603762f1f2013252d442032cdc3d547bc6024e33c047f9216d8376472de1",
+    "bytes": 519274,
+    "printful_file_id": 1111467830
+   },
+   {
+    "file": "print-files/landmarks/lm-cape-hatteras-lighthouse_canvas-30x20.jpg",
+    "sha256": "c450a45cd74c71965eea2f53c2758d7b86c5e17d9c79d6c2cfb7c4224791726f",
+    "bytes": 998070,
+    "printful_file_id": 1111467906
+   },
+   {
+    "file": "print-files/landmarks/lm-cape-hatteras-lighthouse_canvas-36x24.jpg",
+    "sha256": "203346c971452b8422123d13e90a9cdf703c7b4898105c84c64a23c220b1fb61",
+    "bytes": 1298856,
+    "printful_file_id": 1111467988
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Cape Hatteras Lighthouse",
+   "place": "Outer Banks, North Carolina",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-cape-hatteras-lighthouse_36x24.jpg",
+   "canvas": "lm-cape-hatteras-lighthouse_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "cape-hatteras-lighthouse-print",
+    "id": "gid://shopify/Product/9133284556918",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "cape-hatteras-lighthouse-framed-print",
+    "id": "gid://shopify/Product/9133284589686",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "cape-hatteras-lighthouse-framed-canvas",
+    "id": "gid://shopify/Product/9133284622454",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-cape-hatteras-lighthouse-print.jpg?v=1794658377"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-cape-hatteras-lighthouse-framed-print-black.jpg?v=1794658381",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-cape-hatteras-lighthouse-framed-print-white.jpg?v=1794658386"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-cape-hatteras-lighthouse-framed-canvas-black.jpg?v=1794658390",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-cape-hatteras-lighthouse-framed-canvas-white.jpg?v=1794658394"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

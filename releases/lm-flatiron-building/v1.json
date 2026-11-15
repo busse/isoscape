@@ -1,0 +1,151 @@
+{
+ "design": "lm-flatiron-building",
+ "title": "Flatiron Building",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:45+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-flatiron-building   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 flatiron-building   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2988.43,
+    -2025.42,
+    5976.96,
+    3432.35
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 2.11,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-flatiron-building",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-flatiron-building.svg",
+   "sha256": "bee61d2ee36ff987ad086bbee959ba47925923b94244005fd2a46b4ee3c74947",
+   "frozen": "data/_releases/scenes/bee61d2ee36ff987ad086bbee959ba47925923b94244005fd2a46b4ee3c74947.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-flatiron-building.json": "f4c3b80c505787595caf38185dac14b9a07bd17acb620a074abae694537523a0"
+ },
+ "data": {
+  "lm-flatiron-building": {
+   "snapshot": "data/_releases/lm-flatiron-building@a5ff8e5a0493",
+   "files": {
+    "dem.bin.gz": "64eaf983bbf99d26129d497f133e9e8ee735d2aeca04e807ed4e9d76bfe7d4fb",
+    "osm.json": "8932835843960ad543f0cd53c156215624f4952e5407dea01b395b17ee0bf747"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-flatiron-building_36x24.jpg",
+   "sha256": "f3c1bcaa8c2b1d7106fce323012bdbaee8af2f7822544f840c0767c28f48f90f",
+   "bytes": 2170198,
+   "printful_file_id": 1111332755
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-flatiron-building_canvas-18x12.jpg",
+    "sha256": "e2340c7fae563a4bfcc7505f7fad6e8215808a1e5923fbd4b70061f97fc28e3b",
+    "bytes": 927844,
+    "printful_file_id": 1111332822
+   },
+   {
+    "file": "print-files/landmarks/lm-flatiron-building_canvas-30x20.jpg",
+    "sha256": "daceca4e07da2e79b9b61e95655f04538abde3497aefefca6a4affabeee39cdd",
+    "bytes": 1705025,
+    "printful_file_id": 1111332858
+   },
+   {
+    "file": "print-files/landmarks/lm-flatiron-building_canvas-36x24.jpg",
+    "sha256": "4aeab870c14bb2365536915bb5306db666a00c79b205968920a7465b613415a9",
+    "bytes": 2174110,
+    "printful_file_id": 1111332932
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Flatiron Building",
+   "place": "New York City",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-flatiron-building_36x24.jpg",
+   "canvas": "lm-flatiron-building_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "flatiron-building-print",
+    "id": "gid://shopify/Product/9132840484982",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "flatiron-building-framed-print",
+    "id": "gid://shopify/Product/9132840550518",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "flatiron-building-framed-canvas",
+    "id": "gid://shopify/Product/9132840648822",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/933567bfbb83f48b5ffedc7543185bf2/enhanced-matte-paper-poster-(in)-12x18-front-6af80d4a41733.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/0e7845cb960e75633b62928bd18a7aec/enhanced-matte-paper-poster-(in)-20x30-front-6af80d4a418b0.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/4542381540781a563c5115f491f67f5a/enhanced-matte-paper-poster-(in)-24x36-front-6af80d4a418d4.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/ba6d2c198a172f3f7cb8bb5139770ba2/enhanced-matte-paper-poster-(in)-8x12-front-6af80d4a418ee.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/057ee51832e9a839e0c1a429109eb8c0/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af80d4a22833.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f367056c139c4c2f82f5c553dc2f4709/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af80d4a2288b.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/49b24cd98587902cd7d13dd988ad8b96/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af80d4a228a8.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/48d1246fe7f9cca7d1c2c45c1f8e78bf/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af80d4a228bf.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/15fa6c33434f43ca271c1943d84d1ca0/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af80d4a228d3.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f7e634e2616b97298cc34b6180fc311d/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af80d4a228e8.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f15aa9c363233fd1dbed6ea091dbba59/framed-canvas-(in)-black-24x36-front-6af80da6547dc.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/974d438bd49bd003c07a3a3092d006ba/framed-canvas-(in)-white-24x36-front-6af80da654960.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

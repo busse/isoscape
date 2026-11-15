@@ -1,0 +1,145 @@
+{
+ "design": "lm-grand-canyon",
+ "title": "Grand Canyon",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:52+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-grand-canyon   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 grand-canyon   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2875.41,
+    -2829.27,
+    5750.83,
+    3301.79
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 2.01,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-grand-canyon",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-grand-canyon.svg",
+   "sha256": "f58911473d0888c1bf3a976d758b45cdcdca18af1da6beabbf16eb9dd5cc1c3e",
+   "frozen": "data/_releases/scenes/f58911473d0888c1bf3a976d758b45cdcdca18af1da6beabbf16eb9dd5cc1c3e.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-grand-canyon.json": "18df7887ff56e0f280162c2aa35047b49d7f2993070c297704ad1f32ef886f49"
+ },
+ "data": {
+  "lm-grand-canyon": {
+   "snapshot": "data/_releases/lm-grand-canyon@9d09c6dd95e3",
+   "files": {
+    "dem.bin.gz": "567a88419ea6efaf5aebe7231ca7c9315a48fe0e90440663ae024bc2f2c27c5c",
+    "landcover.bin.gz": "be4f3a6d5c89e7ca8bff0a3801840adc6554e29300070585390c7ff887646cb7",
+    "osm.json": "3f4c02d99797bd8b75daddcf4208144b12338cc3556e7589727835c881267187"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-grand-canyon_36x24.jpg",
+   "sha256": "706226ef00336c482f79ec0d3fbcfbad825d6d11f6fb24f686bc69dc51034b3c",
+   "bytes": 3030196,
+   "printful_file_id": 1111565246
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-grand-canyon_canvas-18x12.jpg",
+    "sha256": "19e529e6595b30bba157ee29614388144c66bfd4817b8e042886ef8edf105411",
+    "bytes": 871037,
+    "printful_file_id": 1111565330
+   },
+   {
+    "file": "print-files/landmarks/lm-grand-canyon_canvas-30x20.jpg",
+    "sha256": "ff2199527321aecd7e6e67a0e6b6748f41491385df19c00b152e81b693f4ee51",
+    "bytes": 1869366,
+    "printful_file_id": 1111565457
+   },
+   {
+    "file": "print-files/landmarks/lm-grand-canyon_canvas-36x24.jpg",
+    "sha256": "791855462efe8ed971900363865c36c9c3cf7c805c8928224bcc9420803ec367",
+    "bytes": 2522761,
+    "printful_file_id": 1111567624
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Grand Canyon",
+   "place": "Arizona",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-grand-canyon_36x24.jpg",
+   "canvas": "lm-grand-canyon_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "grand-canyon-print",
+    "id": "gid://shopify/Product/9133417857142",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "grand-canyon-framed-print",
+    "id": "gid://shopify/Product/9133418086518",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "grand-canyon-framed-canvas",
+    "id": "gid://shopify/Product/9133418119286",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-grand-canyon-print_88f2415c-f767-4e1e-bca7-d4a749a9bedf.jpg?v=1794670107"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-grand-canyon-framed-print-black_3d451555-100c-446f-a585-e519f25e9f00.jpg?v=1794670111",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-grand-canyon-framed-print-white_88ab1d69-af61-499b-bc81-cd8c385e945e.jpg?v=1794670115"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-grand-canyon-framed-canvas-black_1f102969-d2c8-4e6d-8401-f1f0d93f7605.jpg?v=1794670119",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-grand-canyon-framed-canvas-white_fc5fcd7d-40d7-439c-b908-1cee92269110.jpg?v=1794670124"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

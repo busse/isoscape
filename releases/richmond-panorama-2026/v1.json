@@ -1,0 +1,91 @@
+{
+ "design": "richmond-panorama-2026",
+ "title": "Richmond and the James",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:14:27+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "42e7fdb9a737e41523725244b18706196ecc8d86",
+  "subject": "Release records freeze each scene SVG by hash and pin a scene's own commit; check.py resumes rebuilds within a time budget",
+  "dirty": false
+ },
+ "kind": "compose",
+ "recipe": {
+  "tool": "tools/print/compose.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <out> --only richmond-panorama-2026"
+  ],
+  "pinned": "panels use the builds named in scenes[].build, not the newest"
+ },
+ "scenes": [
+  {
+   "region": "richmond-downtown-time",
+   "year": 2026,
+   "flags": [],
+   "svg": "out/builds/20261114-042428-richmond-downtown-time-2026/image.svg",
+   "sha256": "29f60a3eb9ffac24926d2bbda042aa27dd29024d83f4fb5362fb965cdbecea30",
+   "frozen": "data/_releases/scenes/29f60a3eb9ffac24926d2bbda042aa27dd29024d83f4fb5362fb965cdbecea30.svg",
+   "build": "20261114-042428-richmond-downtown-time-2026",
+   "commit": "8a9f63c",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "7454855d277d47779f8b7b9a457322e74d488766f2ae7747e5f320e59e1baceb",
+  "regions/richmond-downtown-time.json": "0f67ad5e288c11dffcb730aaed0d641cb0e22a92d21d8c600724edde6525d9c1",
+  "history/richmond-downtown.json": "04d2b883d95045dd868f32a0bb7bd122822fd95bc07e909fc757c1a135e99df9",
+  "history/sanborn/lost.geojson": "298b5ac0f674499f65ff8474d06beb17fb78b417a1e8362b46ed7adb1ecdced9"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/richmond-panorama-2026_24x10.jpg",
+   "sha256": "1fc93ea1ffd0907dc9c7889380ccb94c4f1fff0e5ecf47a46ca863da9d1469d7",
+   "bytes": 5915480,
+   "printful_file_id": 1111268852
+  },
+  "canvas": []
+ },
+ "store": {
+  "catalog": {
+   "title": "Richmond and the James",
+   "place": "Richmond",
+   "orientation": "horizontal",
+   "modern": true,
+   "formats": [
+    "Panorama Print"
+   ],
+   "print": "richmond-panorama-2026_24x10.jpg",
+   "explore": "richmond-downtown-time:2026"
+  },
+  "products": [
+   {
+    "handle": "richmond-and-the-james-panorama-print",
+    "id": "gid://shopify/Product/9132813320310",
+    "format": "Panorama Print",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Panorama Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/6e9a9d6294e857c564ad8ee6c605d6e9/enhanced-matte-paper-poster-(in)-10x24-front-6af80074af78b.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-downtown-time:2026"
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

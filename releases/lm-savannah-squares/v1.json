@@ -1,0 +1,144 @@
+{
+ "design": "lm-savannah-squares",
+ "title": "Savannah's Squares",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:50+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-savannah-squares   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 savannah-squares   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2988.03,
+    -1603.05,
+    5976.17,
+    3431.9
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.66,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-savannah-squares",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-savannah-squares.svg",
+   "sha256": "f62064aa90e306d4a06c2249e5bf90b6ef223c00ac14f2daacc76e6fb4599e9e",
+   "frozen": "data/_releases/scenes/f62064aa90e306d4a06c2249e5bf90b6ef223c00ac14f2daacc76e6fb4599e9e.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-savannah-squares.json": "d18d7245ea931dbbec566818deab56044e414bbd62675f7f71f5bc20c61a2f06"
+ },
+ "data": {
+  "lm-savannah-squares": {
+   "snapshot": "data/_releases/lm-savannah-squares@4d831f60e4d1",
+   "files": {
+    "dem.bin.gz": "968ee2143d8a44d275e4d24bf9117e82d83fb56a951f7bba3e190f6cc1b5fe5b",
+    "osm.json": "4c1b3be0854845508ad53a73038bbeb2fac3c2f7097e74dbff54c18cb53ab182"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-savannah-squares_36x24.jpg",
+   "sha256": "cc26cea3c4f42643df4ee0219b25c3d3d739ae61b53fe7e9ddd37fac3bea9a4d",
+   "bytes": 3781240,
+   "printful_file_id": 1111451745
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-savannah-squares_canvas-18x12.jpg",
+    "sha256": "55f3ec22ccc613efbe39355a734b8bf98fb5e9bba92dc8738554862fd76c1e6e",
+    "bytes": 1350426,
+    "printful_file_id": 1111451808
+   },
+   {
+    "file": "print-files/landmarks/lm-savannah-squares_canvas-30x20.jpg",
+    "sha256": "8d79b8188b8368cc218d158943fb302668e1ed9b18981d994b3b6507f516bfa9",
+    "bytes": 2620482,
+    "printful_file_id": 1111451871
+   },
+   {
+    "file": "print-files/landmarks/lm-savannah-squares_canvas-36x24.jpg",
+    "sha256": "c47613ae4c76c028b9b71e87b6f936d67a98560d3529d9578e4d47b7ac5f2d83",
+    "bytes": 3381058,
+    "printful_file_id": 1111451951
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Savannah's Squares",
+   "place": "Savannah, Georgia",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-savannah-squares_36x24.jpg",
+   "canvas": "lm-savannah-squares_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "savannahs-squares-print",
+    "id": "gid://shopify/Product/9133282754678",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "savannahs-squares-framed-print",
+    "id": "gid://shopify/Product/9133282787446",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "savannahs-squares-framed-canvas",
+    "id": "gid://shopify/Product/9133282820214",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-savannah-squares-print.jpg?v=1794656790"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-savannah-squares-framed-print-black.jpg?v=1794656795",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-savannah-squares-framed-print-white.jpg?v=1794656799"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-savannah-squares-framed-canvas-black.jpg?v=1794656804",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-savannah-squares-framed-canvas-white.jpg?v=1794656808"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

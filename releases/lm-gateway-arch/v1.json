@@ -1,0 +1,151 @@
+{
+ "design": "lm-gateway-arch",
+ "title": "Gateway Arch",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:48+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-gateway-arch   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 gateway-arch   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -3009.93,
+    -1751.57,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.89,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-gateway-arch",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-gateway-arch.svg",
+   "sha256": "9fc4479c3f27cd5f823538af5459c97812a20b30b908a4e9f5423ff1201cc5aa",
+   "frozen": "data/_releases/scenes/9fc4479c3f27cd5f823538af5459c97812a20b30b908a4e9f5423ff1201cc5aa.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-gateway-arch.json": "c0a2a327756c5cf3e0d1ba7bbd9903f7fb4bf1c99f5d6783b6f5c57f7e47a55a"
+ },
+ "data": {
+  "lm-gateway-arch": {
+   "snapshot": "data/_releases/lm-gateway-arch@1dd8f38e54c4",
+   "files": {
+    "dem.bin.gz": "602180e1c29219df058c2277b695fe5e14c56596cab3c0f5fc41dbfaf7c1baa9",
+    "osm.json": "065904285ba733d63dafe569723c7a4a050104d1e6c2211bf3c889957c0cef6a"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-gateway-arch_36x24.jpg",
+   "sha256": "8422267a37dca15954a0368a1bc5ea4a99ad081b1b9ce3e2c9f6a0d06510d1f1",
+   "bytes": 2375940,
+   "printful_file_id": 1111411358
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-gateway-arch_canvas-18x12.jpg",
+    "sha256": "0ed0b8c26528dfa19290141340d717d53c7e1240a2d33d9a3bd67d8a1f51ce32",
+    "bytes": 882776,
+    "printful_file_id": 1111411436
+   },
+   {
+    "file": "print-files/landmarks/lm-gateway-arch_canvas-30x20.jpg",
+    "sha256": "cf55a5a05b65c2e4cce6e7aea6a409de83b29b18d353e566d719705eefa0b293",
+    "bytes": 1673674,
+    "printful_file_id": 1111415621
+   },
+   {
+    "file": "print-files/landmarks/lm-gateway-arch_canvas-36x24.jpg",
+    "sha256": "d2289cf8a928fe5dc1e6c28bf0ee54ef23e3e25d5aef56ba420ff57865279e3e",
+    "bytes": 2159384,
+    "printful_file_id": 1111415685
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Gateway Arch",
+   "place": "St. Louis",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-gateway-arch_36x24.jpg",
+   "canvas": "lm-gateway-arch_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "gateway-arch-print",
+    "id": "gid://shopify/Product/9133136085110",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "gateway-arch-framed-print",
+    "id": "gid://shopify/Product/9133136183414",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "gateway-arch-framed-canvas",
+    "id": "gid://shopify/Product/9133170557046",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7eec4b744cf9d3383d087ecd6f825b39/enhanced-matte-paper-poster-(in)-12x18-front-6af82fd980c20.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2b2b8870822d7203cacc4b8ee94cb11a/enhanced-matte-paper-poster-(in)-20x30-front-6af82fd980c81.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2b08e265dd9a6f28e3e05746a480f14b/enhanced-matte-paper-poster-(in)-24x36-front-6af82fd980ca4.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/b1b5a1f7506c82ff05ee5049b765966e/enhanced-matte-paper-poster-(in)-8x12-front-6af82fd980cbd.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/97b87909fd7a05c488cf79d07af88956/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af8303314ef8.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f881a10a8a672219652d6c48fa4291d5/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af8303314f5b.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/211a2f928534849dba1d9e41b2c68129/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af8303314f79.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/54392a5dd7bb8d5ec639329a2fea7e81/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af8303314fa3.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7a770304d14b48deb0bb1b9f1916b181/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af8303314fb9.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/67364807ac003251c58373321dcc6eb3/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af8303314fce.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3bc871a5e7c02120e4d7696a31a58681/framed-canvas-(in)-black-24x36-front-6af834041e107.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/020f5c3c2b5782f1e7b0c620d4fbf855/framed-canvas-(in)-white-24x36-front-6af834041e153.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

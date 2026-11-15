@@ -1,0 +1,144 @@
+{
+ "design": "lm-hearst-castle",
+ "title": "Hearst Castle",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:49+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-hearst-castle   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 hearst-castle   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2988.03,
+    -2833.75,
+    5976.07,
+    3431.84
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 3.0,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-hearst-castle",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-hearst-castle.svg",
+   "sha256": "8d35284b8117030113d11815190f49fa3fd158a652a4c53acd5eddb2a73470f5",
+   "frozen": "data/_releases/scenes/8d35284b8117030113d11815190f49fa3fd158a652a4c53acd5eddb2a73470f5.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-hearst-castle.json": "f0fdbdbe8b5eecdf24a8ad9a5fb8d9205be885dfba21fdf2d6b0e26aba9be891"
+ },
+ "data": {
+  "lm-hearst-castle": {
+   "snapshot": "data/_releases/lm-hearst-castle@ad353ddac598",
+   "files": {
+    "dem.bin.gz": "c542f3bde25573559d488f663a530257a9bc1796c6e3dcb13358a02fe029e87c",
+    "osm.json": "9503f254b4019aca1ae6eb254a5850aa7b07b93cdb96abe95fe74c77c60c0c4f"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-hearst-castle_36x24.jpg",
+   "sha256": "73f9dd971df6df7d008554fb537b57be3bd3abc11c8262fae1521e69a633ff10",
+   "bytes": 2694883,
+   "printful_file_id": 1111573160
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-hearst-castle_canvas-18x12.jpg",
+    "sha256": "f063bc9e160d95e8ffccb61709f09e3abcbdf5cfa5cb2c481060d332bde5894a",
+    "bytes": 822806,
+    "printful_file_id": 1111573299
+   },
+   {
+    "file": "print-files/landmarks/lm-hearst-castle_canvas-30x20.jpg",
+    "sha256": "7376693a9ea4a759d45548ef52f4957da3efd73f0a8754e4f04f1fbeb20d5b6c",
+    "bytes": 1765037,
+    "printful_file_id": 1111573506
+   },
+   {
+    "file": "print-files/landmarks/lm-hearst-castle_canvas-36x24.jpg",
+    "sha256": "b84994efcf4042e5a9a0fbcd1f5e27ac822dad2ea0e828a52471249dfd214351",
+    "bytes": 2351668,
+    "printful_file_id": 1111573608
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Hearst Castle",
+   "place": "San Simeon, California",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-hearst-castle_36x24.jpg",
+   "canvas": "lm-hearst-castle_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "hearst-castle-print",
+    "id": "gid://shopify/Product/9133235470454",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "hearst-castle-framed-print",
+    "id": "gid://shopify/Product/9133235535990",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "hearst-castle-framed-canvas",
+    "id": "gid://shopify/Product/9133254901878",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-hearst-castle-print_2e3f9aca-c7e2-4ea2-8b86-2f5df201b395.jpg?v=1794669393"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-hearst-castle-framed-print-black_4ee722d1-b443-438d-9395-25f1d8e056f8.jpg?v=1794669397",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-hearst-castle-framed-print-white_c1b1ec23-a11f-4b66-87a0-6eeb300c48d0.jpg?v=1794669401"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-hearst-castle-framed-canvas-black_fb84ea41-a846-4d62-a2b7-7c98dd865b72.jpg?v=1794669406",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-hearst-castle-framed-canvas-white_255c5860-af23-49ae-9dbe-b95eeb8d1130.jpg?v=1794669410"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

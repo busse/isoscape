@@ -1,0 +1,151 @@
+{
+ "design": "lm-us-capitol",
+ "title": "U.S. Capitol",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:45+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-us-capitol   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 us-capitol   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2983.71,
+    -1685.54,
+    5976.17,
+    3431.9
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.7,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-us-capitol",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-us-capitol.svg",
+   "sha256": "7c38f9c2ac4894f63371ee8e514a84d58c57a4a8172cad5a6d002cd535e1db42",
+   "frozen": "data/_releases/scenes/7c38f9c2ac4894f63371ee8e514a84d58c57a4a8172cad5a6d002cd535e1db42.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-us-capitol.json": "e0c9369f9534f7c3dbd8a1171176ebed690b0c102e302abb05e7372d5f4fa830"
+ },
+ "data": {
+  "lm-us-capitol": {
+   "snapshot": "data/_releases/lm-us-capitol@f8b9e476aa93",
+   "files": {
+    "dem.bin.gz": "15e2de296f186ee889f0cff2d45e9b5edc9aff106c4db36d6876dbd10ce0d7d7",
+    "osm.json": "ed1695d462088ed371b126ebb03b53c053780af9a574162bc15c0be1c82f506f"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-us-capitol_36x24.jpg",
+   "sha256": "43bed2b9381a1b9c1a3fab99738224ccb661367e68db6ee7db5b19c7b54ee232",
+   "bytes": 2775673,
+   "printful_file_id": 1111333445
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-us-capitol_canvas-18x12.jpg",
+    "sha256": "0a5ae58701a2250a4ae3005d8a0fa0d54e3938d4245fd632a414c04935391ace",
+    "bytes": 1060113,
+    "printful_file_id": 1111333515
+   },
+   {
+    "file": "print-files/landmarks/lm-us-capitol_canvas-30x20.jpg",
+    "sha256": "70b32121383aab0cae8dc9e621f26d571755fcf4c95c384404e9e96a4f7534f5",
+    "bytes": 1987384,
+    "printful_file_id": 1111333620
+   },
+   {
+    "file": "print-files/landmarks/lm-us-capitol_canvas-36x24.jpg",
+    "sha256": "62566810af4649dd9cbdf9bdaff96ad4d3514b250d4ed659f269f35045a20482",
+    "bytes": 2528556,
+    "printful_file_id": 1111333723
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "U.S. Capitol",
+   "place": "Washington, D.C.",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-us-capitol_36x24.jpg",
+   "canvas": "lm-us-capitol_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "us-capitol-print",
+    "id": "gid://shopify/Product/9132915458166",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "us-capitol-framed-print",
+    "id": "gid://shopify/Product/9132915490934",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "us-capitol-framed-canvas",
+    "id": "gid://shopify/Product/9132915622006",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/bb438d2739c5e0202df35a16227a9fb8/enhanced-matte-paper-poster-(in)-12x18-front-6af8104e0df3b.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c6eb6ae12d35c381e11823505f55e8e7/enhanced-matte-paper-poster-(in)-20x30-front-6af8104e0dfa2.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/051a0956ad16aa0b591cebb225346d10/enhanced-matte-paper-poster-(in)-24x36-front-6af8104e0dfbe.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/5b951ae87044c9c57e147f7a24c47ad3/enhanced-matte-paper-poster-(in)-8x12-front-6af8104e0dfee.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/1fafca0e89581470106b56c2631b505b/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af8104e3cf43.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/92aad275407916535ecaad9fd8fec537/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af8104e3d0fc.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2c891d49ad2926d930f17891c4eb204f/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af8104e3d128.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/8030ebf12637baca56f9dc2f84b738d2/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af8104e3d143.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/656ff3f7f434b95267fd64f30139c6c7/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af8104e3d159.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a8d2fb8b65f1536007b89acfca6c9a21/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af8104e3d16f.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/5d16e3bb5b73a235701149aaebcab39b/framed-canvas-(in)-black-24x36-front-6af810a9d2631.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/152f9847753d253667fd5cd9246ea45c/framed-canvas-(in)-white-24x36-front-6af810a9d26bb.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "design": "lm-washington-monument",
+ "title": "Washington Monument",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:45+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-washington-monument   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 washington-monument   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2975.57,
+    -1699.85,
+    5977.06,
+    3432.41
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.44,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-washington-monument",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-washington-monument.svg",
+   "sha256": "faf4562c9d92f394b348d5ae98babcf4fb6d33e6dce8b00d1e5f105545346e18",
+   "frozen": "data/_releases/scenes/faf4562c9d92f394b348d5ae98babcf4fb6d33e6dce8b00d1e5f105545346e18.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-washington-monument.json": "0f6c3f084a97e450f8c5cb28e0bc9976a283415600c1fd7db2f4af0c7e12ad8a"
+ },
+ "data": {
+  "lm-washington-monument": {
+   "snapshot": "data/_releases/lm-washington-monument@900d353e7beb",
+   "files": {
+    "dem.bin.gz": "d954fd6ab9e4498705286ba2267dafb7f68f7e1e72bbee2c39ed8fabd4048726",
+    "osm.json": "4f1ada3119f15c48204dae68ecd327ce9db415fc8dbec2777b56bab9e71fbc7e"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-washington-monument_36x24.jpg",
+   "sha256": "8b211c241257972d75f2e117b68f88d10d24e53a7d91d93d748ff0a0d8ce807b",
+   "bytes": 2152003,
+   "printful_file_id": 1111345498
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-washington-monument_canvas-18x12.jpg",
+    "sha256": "6b4308c6d0b31ee5ec75d047753c857828f2df99844a953516f2f47a8aa98d6f",
+    "bytes": 833664,
+    "printful_file_id": 1111345546
+   },
+   {
+    "file": "print-files/landmarks/lm-washington-monument_canvas-30x20.jpg",
+    "sha256": "254c94d6b171972d2f5ff476951af33c503bdcde8d179a61520b2e82bba24764",
+    "bytes": 1551646,
+    "printful_file_id": 1111345623
+   },
+   {
+    "file": "print-files/landmarks/lm-washington-monument_canvas-36x24.jpg",
+    "sha256": "3e26bd9dd36a797224a358786960d5d0220f59c234084ea38812b2a03524fec3",
+    "bytes": 1985975,
+    "printful_file_id": 1111473121
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Washington Monument",
+   "place": "Washington, D.C.",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-washington-monument_36x24.jpg",
+   "canvas": "lm-washington-monument_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "washington-monument-print",
+    "id": "gid://shopify/Product/9132929056886",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "washington-monument-framed-print",
+    "id": "gid://shopify/Product/9132929745014",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "washington-monument-framed-canvas",
+    "id": "gid://shopify/Product/9133296550006",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a6c90292292221bed18a1a5362b77daa/enhanced-matte-paper-poster-(in)-12x18-front-6af81a5851d6c.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/eb490dc633320bace8be0e5d7d13631c/enhanced-matte-paper-poster-(in)-20x30-front-6af81a5851dc0.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/bef2059967578d9072eba4e20388cc6f/enhanced-matte-paper-poster-(in)-24x36-front-6af81a5851ddd.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/12ec5cc9aaf962fdff215d06ee3c7c7f/enhanced-matte-paper-poster-(in)-8x12-front-6af81a5851df4.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/85a1a6c23ab369b2855e285890c08c9b/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af81c4cabb19.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a95a971ca778c2d0b3ee1234d0391001/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af81c4cabba3.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/fffc321a6a36efc1ed7b7004e2bc3fc8/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af81c4cabbc2.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/5bc12e960b3ce638dc1bee68f2bbad5d/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af81c4cabbd9.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/8ecd554f98f06b67aa1db8a2833f0c10/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af81c4cabbee.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a21140a8337fe678ffcebe8db5d4908d/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af81c4cabc01.jpg"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-washington-monument-framed-canvas-black.jpg?v=1794659099",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-washington-monument-framed-canvas-white.jpg?v=1794659103"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

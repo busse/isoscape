@@ -1,0 +1,151 @@
+{
+ "design": "lm-buckingham-fountain",
+ "title": "Buckingham Fountain",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:47+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-buckingham-fountain   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 buckingham-fountain   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -3000.99,
+    -1734.32,
+    5976.17,
+    3431.9
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.69,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-buckingham-fountain",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-buckingham-fountain.svg",
+   "sha256": "e282ebca0a501850ece2fd184761cd4813d237e5c125d555af3b76f8842c00e5",
+   "frozen": "data/_releases/scenes/e282ebca0a501850ece2fd184761cd4813d237e5c125d555af3b76f8842c00e5.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-buckingham-fountain.json": "52accd0fbb9136c2a0eaf4d6fb4459b4e28a45bb464e89e8572310e48e433b89"
+ },
+ "data": {
+  "lm-buckingham-fountain": {
+   "snapshot": "data/_releases/lm-buckingham-fountain@06b7b000719b",
+   "files": {
+    "dem.bin.gz": "b9f1987af4caab2bf114e764037e586fd6d4dc4fff0f5592469a4ad9023252fc",
+    "osm.json": "1bcebf7d43036af52a2d2f44aae106d089ed73b3e8cae72cdfeda210fea6afef"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-buckingham-fountain_36x24.jpg",
+   "sha256": "94b25c194f2b57e53fe044b1cd4165db7596efc2116789a146e88dc45bb3ce71",
+   "bytes": 2124376,
+   "printful_file_id": 1111396877
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-buckingham-fountain_canvas-18x12.jpg",
+    "sha256": "e3f280946cffbc53e114280e34414bdf6a8eb5112e64bf3c8fb8a1c740153e74",
+    "bytes": 784790,
+    "printful_file_id": 1111396962
+   },
+   {
+    "file": "print-files/landmarks/lm-buckingham-fountain_canvas-30x20.jpg",
+    "sha256": "be37413ea3804fba0d1b82dfc18fa2bfc05f2530281282c54f90e97b8bc381b9",
+    "bytes": 1507654,
+    "printful_file_id": 1111397033
+   },
+   {
+    "file": "print-files/landmarks/lm-buckingham-fountain_canvas-36x24.jpg",
+    "sha256": "170f22f192c5d3251f18dd343f3c73df433bca4aabadc71564d5d8a813770681",
+    "bytes": 1951884,
+    "printful_file_id": 1111397111
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Buckingham Fountain",
+   "place": "Chicago",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-buckingham-fountain_36x24.jpg",
+   "canvas": "lm-buckingham-fountain_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "buckingham-fountain-print",
+    "id": "gid://shopify/Product/9133101449334",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "buckingham-fountain-framed-print",
+    "id": "gid://shopify/Product/9133101514870",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "buckingham-fountain-framed-canvas",
+    "id": "gid://shopify/Product/9133101613174",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/70d697580755f73e4bec2ba4b6529483/enhanced-matte-paper-poster-(in)-12x18-front-6af82b55dfff7.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/747a70b8e9c215314cfac5f6ea89c7e6/enhanced-matte-paper-poster-(in)-20x30-front-6af82b55e0056.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a08554853ee6e46105656577165dc707/enhanced-matte-paper-poster-(in)-24x36-front-6af82b55e0073.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/093beb2b08863b0c59bd7415398a9781/enhanced-matte-paper-poster-(in)-8x12-front-6af82b55e008a.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/35495ee97ffcab2ada1b8d4361f2de7d/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af82b55bb75b.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/d5addcb36172eb3fa3e4f6450b3de866/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af82b55bb7c7.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/6d3cb2726184fd4173b5a62432090eb7/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af82b55bb7e6.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/b261c7318396755900599cd3e0a23647/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af82b55bb7fc.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3b89654418e7ab0e330c30e323042546/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af82b55bb810.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/64be9eb71f74f69a6de1d4cb85ac33d2/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af82b55bb823.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9f9bf3183893f62ed74e4244c3f7e19e/framed-canvas-(in)-black-24x36-front-6af82cd7507f8.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/709b91e7cfc00192eb077a0f5a3ee32c/framed-canvas-(in)-white-24x36-front-6af82cd750854.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

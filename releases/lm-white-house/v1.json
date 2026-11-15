@@ -1,0 +1,151 @@
+{
+ "design": "lm-white-house",
+ "title": "The White House",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:45+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-white-house   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 white-house   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2992.85,
+    -1703.0,
+    5977.16,
+    3432.47
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.74,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-white-house",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-white-house.svg",
+   "sha256": "d139ee93664069c8abe28310b68f212fdbf8761ddb06eda8c0e5c469835399b5",
+   "frozen": "data/_releases/scenes/d139ee93664069c8abe28310b68f212fdbf8761ddb06eda8c0e5c469835399b5.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-white-house.json": "e2b54671ae8813fd2278b464f65fe3913f9eda610a4ba98754105c99c01cc002"
+ },
+ "data": {
+  "lm-white-house": {
+   "snapshot": "data/_releases/lm-white-house@fdac0aaeffff",
+   "files": {
+    "dem.bin.gz": "10a034033c57715519dd9cdcd1c94d4a8ada3c5b9992c798ff6bb14a8f98beca",
+    "osm.json": "91ce52f00c7bb022d3f664d2d70c5f23aaa861c0d0391e87df465d2827ea7b49"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-white-house_36x24.jpg",
+   "sha256": "effb9ff78038884bce65361c50652d50ec878e88928bc51fb857aafed4260839",
+   "bytes": 2158675,
+   "printful_file_id": 1111333794
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-white-house_canvas-18x12.jpg",
+    "sha256": "47789b5c0fb82e55d86735dcb016eac0b7764adc11c5641f8fa2638295c9367a",
+    "bytes": 863911,
+    "printful_file_id": 1111336591
+   },
+   {
+    "file": "print-files/landmarks/lm-white-house_canvas-30x20.jpg",
+    "sha256": "11174baf563b6449e3aff7693f195e4725259eb9bbbd37f702bbc43f5ff03fb0",
+    "bytes": 1596059,
+    "printful_file_id": 1111336638
+   },
+   {
+    "file": "print-files/landmarks/lm-white-house_canvas-36x24.jpg",
+    "sha256": "827cea3da75ebe1fb489d77ad8830bd97cedcb4f45ea3174b40d37a283e2eb1f",
+    "bytes": 2038916,
+    "printful_file_id": 1111336703
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "The White House",
+   "place": "Washington, D.C.",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-white-house_36x24.jpg",
+   "canvas": "lm-white-house_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "the-white-house-print",
+    "id": "gid://shopify/Product/9132915687542",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "the-white-house-framed-print",
+    "id": "gid://shopify/Product/9132915720310",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "the-white-house-framed-canvas",
+    "id": "gid://shopify/Product/9132915785846",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/76c778ce53590aa9b8a90a17531d8ecf/enhanced-matte-paper-poster-(in)-12x18-front-6af810a9ce78f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7b7c6910498e520be7d8c18cfaba37e4/enhanced-matte-paper-poster-(in)-20x30-front-6af810a9ce7dc.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2b5d2f3c8fd0cafc2d1967b8e12c0da4/enhanced-matte-paper-poster-(in)-24x36-front-6af810a9ce7f8.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/8954018ab8b60c41b64a36b7cee01384/enhanced-matte-paper-poster-(in)-8x12-front-6af810a9ce80f.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/ac9d0b71449beee05b0e32aa0c595ae8/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af8121db35b6.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c47681260ec74a8d5deb999057ac275a/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af8121db3610.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/ffe61f1f9512d543d4083ded4cfe379d/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af8121db362e.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3cd38f5e51d7bd64544bb7cdbd61c462/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af8121db3645.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/ddde16a45a0310ef573e302c82cff6dc/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af8121db365b.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/176d038dcc379c312022b8bbf08e444b/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af8121db366f.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/b085f682897f8879f15ef33939f48a54/framed-canvas-(in)-black-24x36-front-6af8121f541cd.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/d7ff12a2baa34501c4bdc1131070aedf/framed-canvas-(in)-white-24x36-front-6af8121f54232.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

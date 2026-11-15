@@ -1,0 +1,146 @@
+{
+ "design": "lm-machu-picchu",
+ "title": "Machu Picchu and Aguas Calientes",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:53+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-machu-picchu   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 machu-picchu   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2186.54,
+    -2462.29,
+    4368.71,
+    2508.42
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.08,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-machu-picchu",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-machu-picchu.svg",
+   "sha256": "c065ab203cf54f8e1d14e1a5fc93ca59112359a9136fb4e8e3887d9b15d013d0",
+   "frozen": "data/_releases/scenes/c065ab203cf54f8e1d14e1a5fc93ca59112359a9136fb4e8e3887d9b15d013d0.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-machu-picchu.json": "4b6a81c94a43f1d1b028dbb31a9cfe7c3d299a40f409efdd04566135c75e655a"
+ },
+ "data": {
+  "lm-machu-picchu": {
+   "snapshot": "data/_releases/lm-machu-picchu@6116beb5c4a4",
+   "files": {
+    "dem.bin.gz": "6a72dc7a9460bcbcd81cc18bf9109f6358f9801695a5f13b9ec08a9921493644",
+    "osm.json": "4be767b0f08620bc8417a1e5aad5fd079e279f17d5d9787032c0a0f6c18486d9"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-machu-picchu_36x24.jpg",
+   "sha256": "c305c239a26be97a3ee7c5fe998810ae66f23fb6c3715ad0740edd9a83556112",
+   "bytes": 2045396,
+   "printful_file_id": 1111951354
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-machu-picchu_canvas-18x12.jpg",
+    "sha256": "d8e9e05c1dbaa89d8290b265468a216ba2a82407885d4b31b5306b20a849abe6",
+    "bytes": 737674,
+    "printful_file_id": 1111951469
+   },
+   {
+    "file": "print-files/landmarks/lm-machu-picchu_canvas-30x20.jpg",
+    "sha256": "716fcd4a222858a9bfe67d380be15bbacf55df2bdd6837b2f23ba7d5a76b06ba",
+    "bytes": 1443027,
+    "printful_file_id": 1111951562
+   },
+   {
+    "file": "print-files/landmarks/lm-machu-picchu_canvas-36x24.jpg",
+    "sha256": "744c1866a7dbb9733b46f4ffb18dde9a247fd741b2a997758f04cd3711aec68a",
+    "bytes": 1875086,
+    "printful_file_id": 1111951691
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Machu Picchu and Aguas Calientes",
+   "place": "Cusco, Peru",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-machu-picchu_36x24.jpg",
+   "canvas": "lm-machu-picchu_canvas-{w}x{h}.jpg",
+   "world": true,
+   "elevation_credit": "Elevation: produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved"
+  },
+  "products": [
+   {
+    "handle": "machu-picchu-and-aguas-calientes-print",
+    "id": "gid://shopify/Product/9135212331126",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "machu-picchu-and-aguas-calientes-framed-print",
+    "id": "gid://shopify/Product/9135212363894",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "machu-picchu-and-aguas-calientes-framed-canvas",
+    "id": "gid://shopify/Product/9135212429430",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-print.jpg?v=1794701488"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-framed-print-black.jpg?v=1794701493",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-framed-print-white.jpg?v=1794701497"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-framed-canvas-black.jpg?v=1794701501",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-machu-picchu-framed-canvas-white.jpg?v=1794701505"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

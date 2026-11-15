@@ -1,0 +1,151 @@
+{
+ "design": "lm-castillo-de-san-marcos",
+ "title": "Castillo de San Marcos",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:48+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-castillo-de-san-marcos   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 castillo-de-san-marcos   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2988.53,
+    -1555.41,
+    5977.16,
+    3432.47
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.35,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-castillo-de-san-marcos",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-castillo-de-san-marcos.svg",
+   "sha256": "5b161246d4ebeb1703748a40384982b2536a559c19eebfadefffe8440fbd0462",
+   "frozen": "data/_releases/scenes/5b161246d4ebeb1703748a40384982b2536a559c19eebfadefffe8440fbd0462.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-castillo-de-san-marcos.json": "f986d9f4a390b6c54de31062b7101cc176a1881ffbca6abce94611a8ed1c9c15"
+ },
+ "data": {
+  "lm-castillo-de-san-marcos": {
+   "snapshot": "data/_releases/lm-castillo-de-san-marcos@3992ae086da5",
+   "files": {
+    "dem.bin.gz": "4ee432ae4e1bacc508353238fb8717d75f625a257b33fedd2cbd712dde503054",
+    "osm.json": "05f89cb9ff6c3c00a15a944ae96ff8f0a5be9a6922e1507075884be4aed9f25d"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-castillo-de-san-marcos_36x24.jpg",
+   "sha256": "d213af53997c3bee4656a6e2e4ce03cb9d86cc9537398296154c1627a67362ed",
+   "bytes": 2268010,
+   "printful_file_id": 1111419672
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-castillo-de-san-marcos_canvas-18x12.jpg",
+    "sha256": "6669442fe4a7fab2c92ad6942a5e43609cda18e6027b7ca5c383bf97354d9a97",
+    "bytes": 852834,
+    "printful_file_id": 1111419769
+   },
+   {
+    "file": "print-files/landmarks/lm-castillo-de-san-marcos_canvas-30x20.jpg",
+    "sha256": "06b648d076d26afe7d5d42a4d21f1e3e0b20d43a8c94cb274aa3b1809ae581b7",
+    "bytes": 1627480,
+    "printful_file_id": 1111419849
+   },
+   {
+    "file": "print-files/landmarks/lm-castillo-de-san-marcos_canvas-36x24.jpg",
+    "sha256": "4732737d5d44447e8ede3c9f18a1ef84882d48bf4d7ce6b32428d419a3c70127",
+    "bytes": 2105997,
+    "printful_file_id": 1111422329
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Castillo de San Marcos",
+   "place": "St. Augustine, Florida",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-castillo-de-san-marcos_36x24.jpg",
+   "canvas": "lm-castillo-de-san-marcos_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "castillo-de-san-marcos-print",
+    "id": "gid://shopify/Product/9133170622582",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "castillo-de-san-marcos-framed-print",
+    "id": "gid://shopify/Product/9133170655350",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "castillo-de-san-marcos-framed-canvas",
+    "id": "gid://shopify/Product/9133170688118",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/df82aa0c4fa645d85b0ea073728e902c/enhanced-matte-paper-poster-(in)-12x18-front-6af83404a4a39.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/aee1362897fe4ef61f1395bb7e55204d/enhanced-matte-paper-poster-(in)-20x30-front-6af83404a4a90.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2566506f720d12d375a70d400c23d48b/enhanced-matte-paper-poster-(in)-24x36-front-6af83404a4aad.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/e43cca2e761a792f9ac2c1dfe5148def/enhanced-matte-paper-poster-(in)-8x12-front-6af83404a4ac4.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/8ec2e5e089072624b163670bb65c6a0a/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af8360e3df55.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/082a5ae8033328e69d0b7d145d2acbde/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af8360e3dfb2.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2fe20070cb08b24a8a02462dc887ff33/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af8360e3dfe1.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f553bfdaeb58040b24978042cdfe171f/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af8360e3dffa.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f4b0ca938bca2f8d270fd20e57fd2670/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af8360e3e00f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/cca695441a50b5fc3a5cbf493489e304/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af8360e3e022.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/72353dd971a3e29317031f75ff49a5de/framed-canvas-(in)-black-24x36-front-6af83610a73bc.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/b4e44ed88e84dae97a92ae84679824bf/framed-canvas-(in)-white-24x36-front-6af83610a753b.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

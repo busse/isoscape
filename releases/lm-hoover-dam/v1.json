@@ -1,0 +1,145 @@
+{
+ "design": "lm-hoover-dam",
+ "title": "Hoover Dam",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:52+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-hoover-dam   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 hoover-dam   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2997.37,
+    -1917.94,
+    5977.45,
+    3432.64
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 2.85,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-hoover-dam",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-hoover-dam.svg",
+   "sha256": "2c3ff946b5880ca2b371e32c4c2cedeedb099eba5120f494e10a657eef022633",
+   "frozen": "data/_releases/scenes/2c3ff946b5880ca2b371e32c4c2cedeedb099eba5120f494e10a657eef022633.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-hoover-dam.json": "cf4e72486e85a21efbda1be9e4ef34c241f897cb78ae693a8dc91dbe9b8682a8"
+ },
+ "data": {
+  "lm-hoover-dam": {
+   "snapshot": "data/_releases/lm-hoover-dam@5e5457b8848b",
+   "files": {
+    "dem.bin.gz": "e4c9b091c43e5464b0bff67f0080bb24c22d68b472fde1b9422400f56fdbb586",
+    "landcover.bin.gz": "c7dc27182262df67d8ee85bb3ae95a1bc1ff5771d7e4e239b5ec2edf67843115",
+    "osm.json": "87f95cfc85fdffbbdb5180a2dc90051095f912da1d850c7baf442d44cec34a8c"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-hoover-dam_36x24.jpg",
+   "sha256": "c5eeb4c22354118acccf145cbcd37c2ee4e6a37c2287a2aa5df427fd96da9060",
+   "bytes": 3178967,
+   "printful_file_id": 1111576373
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-hoover-dam_canvas-18x12.jpg",
+    "sha256": "2b9c92a47eb3b7bcac2cc455015bad75d390e421f5600dc61b779f3303d70820",
+    "bytes": 889857,
+    "printful_file_id": 1111576502
+   },
+   {
+    "file": "print-files/landmarks/lm-hoover-dam_canvas-30x20.jpg",
+    "sha256": "2468aed852010763138a8714ac782dd92ca5e6da7c39bf1ca06d1f1b2f0f758f",
+    "bytes": 1972928,
+    "printful_file_id": 1111576583
+   },
+   {
+    "file": "print-files/landmarks/lm-hoover-dam_canvas-36x24.jpg",
+    "sha256": "c635c117d5186b3ce4331a0178d4179ba5c2b3b2ea518d61e0ba740950a63b0f",
+    "bytes": 2664109,
+    "printful_file_id": 1111576674
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Hoover Dam",
+   "place": "Nevada and Arizona",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-hoover-dam_36x24.jpg",
+   "canvas": "lm-hoover-dam_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "hoover-dam-print",
+    "id": "gid://shopify/Product/9133680296054",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "hoover-dam-framed-print",
+    "id": "gid://shopify/Product/9133680459894",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "hoover-dam-framed-canvas",
+    "id": "gid://shopify/Product/9133680525430",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-hoover-dam-print_b4e60c9e-de2c-41e1-bc4a-8b515fd417cb.jpg?v=1794670395"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-hoover-dam-framed-print-black_0530f3af-ea60-4ff9-a99d-5fbea3b0aee7.jpg?v=1794670399",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-hoover-dam-framed-print-white_d0775f8a-e613-4aea-8de6-b4a3d7d58a31.jpg?v=1794670403"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-hoover-dam-framed-canvas-black_2076cc1b-328b-49af-a66e-f76c3e3414e8.jpg?v=1794670407",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-hoover-dam-framed-canvas-white_f0e86644-c454-4951-b331-2a69b59d42d7.jpg?v=1794670411"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

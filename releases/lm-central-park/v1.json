@@ -1,0 +1,151 @@
+{
+ "design": "lm-central-park",
+ "title": "Central Park",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:44+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-central-park   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 central-park   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2975.57,
+    -1665.09,
+    5977.06,
+    3432.41
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 2.01,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-central-park",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-central-park.svg",
+   "sha256": "8a09f4606d40009f4685a542a83ef7facf1ee5fa8248003e9b7595ef76f5b214",
+   "frozen": "data/_releases/scenes/8a09f4606d40009f4685a542a83ef7facf1ee5fa8248003e9b7595ef76f5b214.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-central-park.json": "9880bf91ac681bac807a687e87f0439c822dbff6759768ba64823f579bb54022"
+ },
+ "data": {
+  "lm-central-park": {
+   "snapshot": "data/_releases/lm-central-park@86a564e5925e",
+   "files": {
+    "dem.bin.gz": "c0872c01d985f736e54c625639b3898a6fe6ba68161f0aafce388e144ef4ee4f",
+    "osm.json": "8f3d92f33a0e4915f2fc3c3ad823fa49b0ce62b3d57afb0fec9c974483c5f34c"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-central-park_36x24.jpg",
+   "sha256": "c851e0603ac9842398d698d65838ae797930303030dc0bf54580369ed42a6209",
+   "bytes": 2894103,
+   "printful_file_id": 1111319480
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-central-park_canvas-18x12.jpg",
+    "sha256": "8cee4de282eb0b5a1da7c06623f105ab1ded2234dac146aba4b61c860633d032",
+    "bytes": 1060720,
+    "printful_file_id": 1111319594
+   },
+   {
+    "file": "print-files/landmarks/lm-central-park_canvas-30x20.jpg",
+    "sha256": "ab2ef525f308e10e402d36b47082b23cf91a4a83b334416be0f72439a9869df4",
+    "bytes": 2058802,
+    "printful_file_id": 1111319698
+   },
+   {
+    "file": "print-files/landmarks/lm-central-park_canvas-36x24.jpg",
+    "sha256": "2ff4286f579a9f9168749f8b5f284b9d251aa06458f466e29a57bc5205b1452f",
+    "bytes": 2654549,
+    "printful_file_id": 1111319805
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Central Park",
+   "place": "New York City",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-central-park_36x24.jpg",
+   "canvas": "lm-central-park_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "central-park-print",
+    "id": "gid://shopify/Product/9132839993462",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "central-park-framed-print",
+    "id": "gid://shopify/Product/9132840058998",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "central-park-framed-canvas",
+    "id": "gid://shopify/Product/9132840124534",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/8416788067e1a74b0a0a4cbafedfe988/enhanced-matte-paper-poster-(in)-12x18-front-6af80ae63db1b.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c13c51d5273cf94809511114da3578c4/enhanced-matte-paper-poster-(in)-20x30-front-6af80ae63db70.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3ce9ecf13ffd48b0e342f6b3fc872f4e/enhanced-matte-paper-poster-(in)-24x36-front-6af80ae63db8d.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/083e091d2112cc9741a4f8d33c4912cf/enhanced-matte-paper-poster-(in)-8x12-front-6af80ae63dba6.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/65b99ce06714adabd380406b36df2d13/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af80b40be98a.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c058eb9934fe9d34f4cc4418c1f4a86b/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af80b40beae4.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/8a822bf62ddc80aacdc3f404fc92fdbf/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af80b40beb0c.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/4ec4e3c76f46e462cba9e89c796491b0/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af80b40beb4e.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/75366440364f69f4b90001ea461b3af2/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af80b40beb64.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/6ad7623ed8af747fbe2becce431f41d5/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af80b40beb78.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/54ad13968329a1d5e81ffbd381b3994c/framed-canvas-(in)-black-24x36-front-6af80c925479a.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/29f1a2e04029fb2f6533fecfc1cffc27/framed-canvas-(in)-white-24x36-front-6af80c9254803.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "design": "lm-mount-rushmore",
+ "title": "Mount Rushmore",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:52+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-mount-rushmore   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 mount-rushmore   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2988.73,
+    -1730.77,
+    5977.45,
+    3432.64
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 3.05,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-mount-rushmore",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-mount-rushmore.svg",
+   "sha256": "a3dd80927cf48f88c4e56f970a08674d74c29d05b3c12fcd302a9fe63989231d",
+   "frozen": "data/_releases/scenes/a3dd80927cf48f88c4e56f970a08674d74c29d05b3c12fcd302a9fe63989231d.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-mount-rushmore.json": "b00f8507cfdda3923d9e2d091359f6d37548832d445f8be07dcea62c7722271d"
+ },
+ "data": {
+  "lm-mount-rushmore": {
+   "snapshot": "data/_releases/lm-mount-rushmore@945b2f3cb89a",
+   "files": {
+    "dem.bin.gz": "08d2c327cad2a8bf00da4aaab7375f6d4e1b0a06f6419a74550576286e27be28",
+    "landcover.bin.gz": "64a958f55f10addf969ae2c7fe9512f31c51bc1bf4f9f1a1bd75b18f7a8457e9",
+    "osm.json": "f358dbc421f4105e588895703863d95dbde372841c65b96fd42c1bc580900944"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-mount-rushmore_36x24.jpg",
+   "sha256": "d262982e86c2d3d4e7b516ca716c6cd7518d9ab1819351d413942050ae26fa6d",
+   "bytes": 3424237,
+   "printful_file_id": 1111578254
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-mount-rushmore_canvas-18x12.jpg",
+    "sha256": "e346a044f8e21329db11f2316e3ade92031ffdb467deaca86bdef83ebb82c3ee",
+    "bytes": 980005,
+    "printful_file_id": 1111578328
+   },
+   {
+    "file": "print-files/landmarks/lm-mount-rushmore_canvas-30x20.jpg",
+    "sha256": "ca42de6613fc498acde582ef02717875aead0e34c195a6de8c08e93ce6229f01",
+    "bytes": 2142060,
+    "printful_file_id": 1111578426
+   },
+   {
+    "file": "print-files/landmarks/lm-mount-rushmore_canvas-36x24.jpg",
+    "sha256": "5f45e65f8dacc00f1a91665276d9e0dc5835b0602746b7f74adb6779da4a46b4",
+    "bytes": 2879132,
+    "printful_file_id": 1111578538
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Mount Rushmore",
+   "place": "Black Hills, South Dakota",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-mount-rushmore_36x24.jpg",
+   "canvas": "lm-mount-rushmore_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "mount-rushmore-print",
+    "id": "gid://shopify/Product/9133508329590",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "mount-rushmore-framed-print",
+    "id": "gid://shopify/Product/9133508362358",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "mount-rushmore-framed-canvas",
+    "id": "gid://shopify/Product/9133508427894",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-rushmore-print_8bf3cb27-a748-4c0e-9082-ddd1190fb17e.jpg?v=1794670373"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-rushmore-framed-print-black_1e699738-4f40-4b26-947c-04d390f47af4.jpg?v=1794670377",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-rushmore-framed-print-white_deee4816-c8dd-48dc-a93c-04838c93d726.jpg?v=1794670382"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-rushmore-framed-canvas-black_1517b5e5-0256-4759-9744-255c7ff25624.jpg?v=1794670386",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-rushmore-framed-canvas-white_4b773e8b-0b34-4e51-bf63-ade046a56112.jpg?v=1794670390"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

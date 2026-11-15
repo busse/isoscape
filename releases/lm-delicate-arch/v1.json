@@ -1,0 +1,145 @@
+{
+ "design": "lm-delicate-arch",
+ "title": "Delicate Arch",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:50+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-delicate-arch   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 delicate-arch   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2979.4,
+    -1780.22,
+    5976.07,
+    3431.84
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.48,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-delicate-arch",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-delicate-arch.svg",
+   "sha256": "20d7a59d1f75f58dbc56465b63f2041c6fe783cd209a96c6e22d0591b953952b",
+   "frozen": "data/_releases/scenes/20d7a59d1f75f58dbc56465b63f2041c6fe783cd209a96c6e22d0591b953952b.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-delicate-arch.json": "426b1432c09a01e5c09040afed639666890020c51d355de4f2bd267e47ee42c9"
+ },
+ "data": {
+  "lm-delicate-arch": {
+   "snapshot": "data/_releases/lm-delicate-arch@2ad0b9a684c5",
+   "files": {
+    "dem.bin.gz": "325c1d4a5e21ada07b7c1e2e9b7481c6123f9f04519e23b55a74fdce63d47d9b",
+    "landcover.bin.gz": "ccd5b2391115109e3b2f9febc7c59a30e472c3afaf8143d66dccd900dc9116fa",
+    "osm.json": "2b94193367cae25151bc39c82b2e8cea204f3cdea702114a0c9f9f2eb17d4939"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-delicate-arch_36x24.jpg",
+   "sha256": "b3ba57d93b5a5741c18fc671cb4c6f5c0c571e4e2c502cb4a89efbcc2e0f20c6",
+   "bytes": 1775957,
+   "printful_file_id": 1111451163
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-delicate-arch_canvas-18x12.jpg",
+    "sha256": "175536b06476b0984cc445e724929d2f7c6e3232aaa800bd22105bb43eda820c",
+    "bytes": 602526,
+    "printful_file_id": 1111451225
+   },
+   {
+    "file": "print-files/landmarks/lm-delicate-arch_canvas-30x20.jpg",
+    "sha256": "dea41fd554496c55a942952cbd9a6f6cf7520a9ba2ca8f1b60e961f32858d972",
+    "bytes": 1236922,
+    "printful_file_id": 1111451266
+   },
+   {
+    "file": "print-files/landmarks/lm-delicate-arch_canvas-36x24.jpg",
+    "sha256": "c1d88bf52f44ef36c98d7493031196a88e9e41bd83727f88dfe60b3f7f1788df",
+    "bytes": 1639214,
+    "printful_file_id": 1111451337
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Delicate Arch",
+   "place": "Arches National Park, Utah",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-delicate-arch_36x24.jpg",
+   "canvas": "lm-delicate-arch_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "delicate-arch-print",
+    "id": "gid://shopify/Product/9133282623606",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "delicate-arch-framed-print",
+    "id": "gid://shopify/Product/9133282656374",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "delicate-arch-framed-canvas",
+    "id": "gid://shopify/Product/9133282689142",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-delicate-arch-print.jpg?v=1794656769"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-delicate-arch-framed-print-black.jpg?v=1794656774",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-delicate-arch-framed-print-white.jpg?v=1794656778"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-delicate-arch-framed-canvas-black.jpg?v=1794656782",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-delicate-arch-framed-canvas-white.jpg?v=1794656786"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

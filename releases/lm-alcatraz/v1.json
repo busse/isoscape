@@ -1,0 +1,144 @@
+{
+ "design": "lm-alcatraz",
+ "title": "Alcatraz Island",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:49+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-alcatraz   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 alcatraz   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2984.01,
+    -1901.93,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 0.72,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-alcatraz",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-alcatraz.svg",
+   "sha256": "fc268bd79643c49bce5536f8d790aaab1fcfe033d0a8829684ee1ba4c3e33f58",
+   "frozen": "data/_releases/scenes/fc268bd79643c49bce5536f8d790aaab1fcfe033d0a8829684ee1ba4c3e33f58.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-alcatraz.json": "9ac3e888dc9771b9f8e55dacc4d1e190f0cc10f896117c5ab8871b92cc82f6a3"
+ },
+ "data": {
+  "lm-alcatraz": {
+   "snapshot": "data/_releases/lm-alcatraz@8e76dca7a106",
+   "files": {
+    "dem.bin.gz": "a26245aa4b74e7ebc415a8daf1584d026a30f95673b02e626f8fcb6b7d5911aa",
+    "osm.json": "9c76e22e2875330fcaa4b363b01b6194f574359ba20d4403fc0dd6aa5241cb7e"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-alcatraz_36x24.jpg",
+   "sha256": "3c17678663699ec6431b8be3fbf6b61852320ac57ebef5e2409baabdb6ed9fcc",
+   "bytes": 1221625,
+   "printful_file_id": 1111718684
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-alcatraz_canvas-18x12.jpg",
+    "sha256": "6620a7b08713edd742891b840dcba4e0d486abbd411d415e0582691cebd89649",
+    "bytes": 471695,
+    "printful_file_id": 1111718790
+   },
+   {
+    "file": "print-files/landmarks/lm-alcatraz_canvas-30x20.jpg",
+    "sha256": "6acf65e88266e161435b6a60fbce61875368a4640fd20010d2a1ecb7b1734989",
+    "bytes": 950778,
+    "printful_file_id": 1111718959
+   },
+   {
+    "file": "print-files/landmarks/lm-alcatraz_canvas-36x24.jpg",
+    "sha256": "d229a87f958a209be5e207502228b9f7194377c8e4884636bbb99a8d3bdc2e9b",
+    "bytes": 1255028,
+    "printful_file_id": 1111719035
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Alcatraz Island",
+   "place": "San Francisco Bay",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-alcatraz_36x24.jpg",
+   "canvas": "lm-alcatraz_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "alcatraz-island-print",
+    "id": "gid://shopify/Product/9133235273846",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "alcatraz-island-framed-print",
+    "id": "gid://shopify/Product/9133235306614",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "alcatraz-island-framed-canvas",
+    "id": "gid://shopify/Product/9133235339382",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-alcatraz-print_afaafac8-01ed-4cce-b9e0-0a7052e0e993.jpg?v=1794684039"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-alcatraz-framed-print-black_0044d07d-abb9-4cbb-85e8-e35217d21626.jpg?v=1794684042",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-alcatraz-framed-print-white_d50d8554-0296-4d17-bb83-e4ce3cb704b9.jpg?v=1794684047"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-alcatraz-framed-canvas-black_44acdcc3-0fc0-4f38-be7b-95d2d6f62a19.jpg?v=1794684051",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-alcatraz-framed-canvas-white_ddaf165c-ada3-4331-a3e0-964a8746f5fb.jpg?v=1794684055"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

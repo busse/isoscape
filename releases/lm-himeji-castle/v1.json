@@ -1,0 +1,146 @@
+{
+ "design": "lm-himeji-castle",
+ "title": "Himeji Castle",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:53+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-himeji-castle   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 himeji-castle   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2992.65,
+    -1622.33,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.89,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-himeji-castle",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-himeji-castle.svg",
+   "sha256": "093b7bd18e1a365e84de2134019330b53834c3f4149d0af584635b001f4a830a",
+   "frozen": "data/_releases/scenes/093b7bd18e1a365e84de2134019330b53834c3f4149d0af584635b001f4a830a.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-himeji-castle.json": "b55d910f726603c12f32da84023e048c63dc3859c45318f5cce0852f6a0da533"
+ },
+ "data": {
+  "lm-himeji-castle": {
+   "snapshot": "data/_releases/lm-himeji-castle@2754d9cddc54",
+   "files": {
+    "dem.bin.gz": "b1b10c176598e9fd3b57c76c78e94148643b2c1a4c4b8395cb1c6838e8acdd38",
+    "osm.json": "de68a3870586cd44c37e869b8ff8bfaf378343c7935761bfd8ca482b36305676"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-himeji-castle_36x24.jpg",
+   "sha256": "edd79d5f3b4ea218e17599da53edbd7e4894c329cfb34a7bd43fa33dd30223d2",
+   "bytes": 3117574,
+   "printful_file_id": 1111950822
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-himeji-castle_canvas-18x12.jpg",
+    "sha256": "7d0d544d9dee0a737fb714abb83ca2124647625d65d1b4a2a638fa97ecca38d8",
+    "bytes": 1169893,
+    "printful_file_id": 1111950940
+   },
+   {
+    "file": "print-files/landmarks/lm-himeji-castle_canvas-30x20.jpg",
+    "sha256": "a5b21fb93916f6c4bc452b66dea78955d679e38ec1ea9e23f51bf523b9742e14",
+    "bytes": 2196814,
+    "printful_file_id": 1111951100
+   },
+   {
+    "file": "print-files/landmarks/lm-himeji-castle_canvas-36x24.jpg",
+    "sha256": "080d8b82d55d01a1c7e654f59f28069770da938aebfd7023a6be5accc9e68350",
+    "bytes": 2810873,
+    "printful_file_id": 1111951257
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Himeji Castle",
+   "place": "Hyōgo, Japan",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-himeji-castle_36x24.jpg",
+   "canvas": "lm-himeji-castle_canvas-{w}x{h}.jpg",
+   "world": true,
+   "elevation_credit": "Elevation: GSI elevation tiles (Geospatial Information Authority of Japan), processed"
+  },
+  "products": [
+   {
+    "handle": "himeji-castle-print",
+    "id": "gid://shopify/Product/9135212134518",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "himeji-castle-framed-print",
+    "id": "gid://shopify/Product/9135212200054",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "himeji-castle-framed-canvas",
+    "id": "gid://shopify/Product/9135212232822",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-himeji-castle-print.jpg?v=1794701342"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-himeji-castle-framed-print-black.jpg?v=1794701346",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-himeji-castle-framed-print-white.jpg?v=1794701476"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-himeji-castle-framed-canvas-black.jpg?v=1794701480",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-himeji-castle-framed-canvas-white.jpg?v=1794701484"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "design": "lm-devils-tower",
+ "title": "Devils Tower",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:47+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-devils-tower   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 devils-tower   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2996.97,
+    -1787.41,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 2.52,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-devils-tower",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-devils-tower.svg",
+   "sha256": "17d54db1834a70823a7abc9ea0eac32613a81009032e5605ba861c0a814185a6",
+   "frozen": "data/_releases/scenes/17d54db1834a70823a7abc9ea0eac32613a81009032e5605ba861c0a814185a6.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-devils-tower.json": "81dae3b26e87082c94b15d117a9c88af1d86156fb2126201ab335370349f616b"
+ },
+ "data": {
+  "lm-devils-tower": {
+   "snapshot": "data/_releases/lm-devils-tower@d55e2edae8f4",
+   "files": {
+    "dem.bin.gz": "d3d7797c7972bb7d6a62849d3e48bc3a7ca09e6762c1f70bf64e7672b2bc9803",
+    "landcover.bin.gz": "fa46b54442a86af41b4fc3d0c9ad43c0b154eb8e6bafaa1d1758bb9057c8e0db",
+    "osm.json": "9a2e7cbdee6fcdb3ca79e185480b5cc939659fd33708e11a4d1fc4dad0bbddc4"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-devils-tower_36x24.jpg",
+   "sha256": "febbf5b6531d90153b430699b40d89a674dcc6ea301e77c2b9da71ebb2465514",
+   "bytes": 2430390,
+   "printful_file_id": 1111552156
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-devils-tower_canvas-18x12.jpg",
+    "sha256": "3244cffc5e32b346eb3d533ff315df72f92db9f7c8b91122fef990466cad5dd7",
+    "bytes": 766897,
+    "printful_file_id": 1111557529
+   },
+   {
+    "file": "print-files/landmarks/lm-devils-tower_canvas-30x20.jpg",
+    "sha256": "5dcee2da107a1998d03b03fbfd3367557d8b17cf77415262c89d40b64197ef9b",
+    "bytes": 1596356,
+    "printful_file_id": 1111557623
+   },
+   {
+    "file": "print-files/landmarks/lm-devils-tower_canvas-36x24.jpg",
+    "sha256": "3e817d66f29d949051d8b19b841cb41309b0e18869a12875f49e51a245f196e6",
+    "bytes": 2122056,
+    "printful_file_id": 1111557749
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Devils Tower",
+   "place": "Crook County, Wyoming",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-devils-tower_36x24.jpg",
+   "canvas": "lm-devils-tower_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "devils-tower-print",
+    "id": "gid://shopify/Product/9133135822966",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "devils-tower-framed-print",
+    "id": "gid://shopify/Product/9133135921270",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "devils-tower-framed-canvas",
+    "id": "gid://shopify/Product/9133135986806",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-devils-tower-print.jpg?v=1794668340"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-devils-tower-framed-print-black.jpg?v=1794668344",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-devils-tower-framed-print-white.jpg?v=1794668348"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-devils-tower-framed-canvas-black.jpg?v=1794668353",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-devils-tower-framed-canvas-white.jpg?v=1794668357"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

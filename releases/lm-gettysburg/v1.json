@@ -1,0 +1,151 @@
+{
+ "design": "lm-gettysburg",
+ "title": "Gettysburg Battlefield",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:48+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-gettysburg   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 gettysburg   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2979.69,
+    -1708.87,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 2.09,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-gettysburg",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-gettysburg.svg",
+   "sha256": "803effed357a9f4ceaec5615e1d3deee2201916496e245cdd377859ab71c1b4b",
+   "frozen": "data/_releases/scenes/803effed357a9f4ceaec5615e1d3deee2201916496e245cdd377859ab71c1b4b.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-gettysburg.json": "f622063ac5f346b9eba8bf5e1a921baf2d1565c89d97d9a6c9e68ea82194efae"
+ },
+ "data": {
+  "lm-gettysburg": {
+   "snapshot": "data/_releases/lm-gettysburg@f59b80f82c48",
+   "files": {
+    "dem.bin.gz": "431c249f3b23cac6b95b78afe426294eb86ff37c66138022fb409de7d58f6f4b",
+    "osm.json": "1421850c023702cf53924993655f3eafdf01aac5dcde3313c909042e2c13e05f"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-gettysburg_36x24.jpg",
+   "sha256": "e62dc81e4994f2057e53c91b43c47f8e926ae680d1fb62a770ee8f7c717b31d7",
+   "bytes": 2185735,
+   "printful_file_id": 1111422391
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-gettysburg_canvas-18x12.jpg",
+    "sha256": "023ce1418b3d80db6b4fa7c78a456e21210bb0e06f9418470f532e5b3f9a7ab2",
+    "bytes": 795784,
+    "printful_file_id": 1111422449
+   },
+   {
+    "file": "print-files/landmarks/lm-gettysburg_canvas-30x20.jpg",
+    "sha256": "c7d6d9fb0c87be081f54999daf93530a2f0937dd5acee302aa8176a1cf79ffcd",
+    "bytes": 1525155,
+    "printful_file_id": 1111422493
+   },
+   {
+    "file": "print-files/landmarks/lm-gettysburg_canvas-36x24.jpg",
+    "sha256": "086fd6857d2398f16e194183f252101632e70674106b0f0741da93a1d0e7a499",
+    "bytes": 1971278,
+    "printful_file_id": 1111422536
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Gettysburg Battlefield",
+   "place": "Gettysburg, Pennsylvania",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-gettysburg_36x24.jpg",
+   "canvas": "lm-gettysburg_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "gettysburg-battlefield-print",
+    "id": "gid://shopify/Product/9133170720886",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "gettysburg-battlefield-framed-print",
+    "id": "gid://shopify/Product/9133190479990",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "gettysburg-battlefield-framed-canvas",
+    "id": "gid://shopify/Product/9133190545526",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/841c7ac5a520553670a7ede7c0f6882a/enhanced-matte-paper-poster-(in)-12x18-front-6af8366b8229b.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c4ec050b64d133a8e40e9a009fe6fad3/enhanced-matte-paper-poster-(in)-20x30-front-6af8366b82409.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9dd40c805951d81a27165dfd7504c8a5/enhanced-matte-paper-poster-(in)-24x36-front-6af8366b8242c.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/b5d4e52a30697440a49287e5f5fd543a/enhanced-matte-paper-poster-(in)-8x12-front-6af8366b82446.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/6bb84db9956e51a598bb49c469d3647f/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af8382d5f60a.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/da1c4177d70f9d25c445ce126e0c77a9/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af8382d5f66c.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/30f806c3f5e08387dbdadafe4cbb0e40/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af8382d5f68a.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/5fb9f423b180ae01ae2c5499a05a1330/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af8382d5f6a1.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/5d1cfba4da20287ddf8e42d67eaed846/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af8382d5f6b7.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/06dc54fed58763961041b703adc85a34/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af8382d5f6cb.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/ff7f4ab98245b2927bba709837875cca/framed-canvas-(in)-black-24x36-front-6af8382f02093.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9e1662503e7ba86024541c3cbd71921c/framed-canvas-(in)-white-24x36-front-6af8382f020ef.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

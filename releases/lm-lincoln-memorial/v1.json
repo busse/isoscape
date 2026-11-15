@@ -1,0 +1,151 @@
+{
+ "design": "lm-lincoln-memorial",
+ "title": "Lincoln Memorial",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:45+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-lincoln-memorial   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 lincoln-memorial   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2988.33,
+    -1661.79,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.18,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-lincoln-memorial",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-lincoln-memorial.svg",
+   "sha256": "5451fc9853d8999a950353f7121f44688e2edb6000028fb6c28cb2856d24122a",
+   "frozen": "data/_releases/scenes/5451fc9853d8999a950353f7121f44688e2edb6000028fb6c28cb2856d24122a.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-lincoln-memorial.json": "dc255b98deea65d698e58c244a10720e3cd9d5b3f4e6fda7bcaea958baeab626"
+ },
+ "data": {
+  "lm-lincoln-memorial": {
+   "snapshot": "data/_releases/lm-lincoln-memorial@1180f08e676f",
+   "files": {
+    "dem.bin.gz": "6a4f88877f9eb72b3b73da03f35c0ad702174ba6233f8a83af9f791d5388bd56",
+    "osm.json": "c24082b5f64e166f79c2f10455c52815d41ee9dc92abe429384f277cac7f98b6"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-lincoln-memorial_36x24.jpg",
+   "sha256": "c9624c3acb234603102e0bd2c65e1fda6b1cf8c5c759aca8d85445b2495b766a",
+   "bytes": 1590108,
+   "printful_file_id": 1111345226
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-lincoln-memorial_canvas-18x12.jpg",
+    "sha256": "2e363de8d5049b0beecd8d08f5c60f12ba67ea009a9883dde500893732f7e6a0",
+    "bytes": 644677,
+    "printful_file_id": 1111345320
+   },
+   {
+    "file": "print-files/landmarks/lm-lincoln-memorial_canvas-30x20.jpg",
+    "sha256": "5e0a324dc818815e0230b76e435fc569399ee64f3dc6ddf7da1a5911928a4e01",
+    "bytes": 1195649,
+    "printful_file_id": 1111345384
+   },
+   {
+    "file": "print-files/landmarks/lm-lincoln-memorial_canvas-36x24.jpg",
+    "sha256": "dd041e57f77ff356b646c550bf68e662640cada1933d70a1ff54c3e8f0c336ca",
+    "bytes": 1534539,
+    "printful_file_id": 1111345445
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Lincoln Memorial",
+   "place": "Washington, D.C.",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-lincoln-memorial_36x24.jpg",
+   "canvas": "lm-lincoln-memorial_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "lincoln-memorial-print",
+    "id": "gid://shopify/Product/9132916146294",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "lincoln-memorial-framed-print",
+    "id": "gid://shopify/Product/9132928991350",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "lincoln-memorial-framed-canvas",
+    "id": "gid://shopify/Product/9132929024118",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/627eede47dd115bf47875f549a1da490/enhanced-matte-paper-poster-(in)-12x18-front-6af81699663dd.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7cd863edbaaafe7c0ce53e2444a3b051/enhanced-matte-paper-poster-(in)-20x30-front-6af8169966437.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/43c040d5c19d85fd01f526267897f633/enhanced-matte-paper-poster-(in)-24x36-front-6af8169966455.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/520e680e7f33987c9f0424096746d1e2/enhanced-matte-paper-poster-(in)-8x12-front-6af816996646d.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a48ce2fba2cacc719a1ca33296a1ce7b/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af819fab17a4.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c82671ddaf6fcaffcfd3211d81179646/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af819fab1806.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/da2dec06dd7eb526f7dc0732f27a687e/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af819fab1824.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/4577cdac10556a50e9347380fcce877f/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af819fab183a.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/ac11b225a1c5d3a1723cb028053a6603/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af819fab184f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7d96db663d543228671d85ed5ca7286b/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af819fab1862.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/540d869c1aa46d2145670ac6dad35002/framed-canvas-(in)-black-24x36-front-6af819fc61070.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9ae218513e91bdccc817118e48b2958a/framed-canvas-(in)-white-24x36-front-6af819fc611dc.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

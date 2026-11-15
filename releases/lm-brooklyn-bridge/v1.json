@@ -1,0 +1,151 @@
+{
+ "design": "lm-brooklyn-bridge",
+ "title": "Brooklyn Bridge",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:44+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-brooklyn-bridge   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 brooklyn-bridge   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2966.73,
+    -1889.49,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.95,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-brooklyn-bridge",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-brooklyn-bridge.svg",
+   "sha256": "c9845368401f76b5d70a0cf3b390166e5776af04489895812c2a56742d5b054d",
+   "frozen": "data/_releases/scenes/c9845368401f76b5d70a0cf3b390166e5776af04489895812c2a56742d5b054d.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-brooklyn-bridge.json": "66081a13afd40a6eb67c6fe0935e5a594582b4a7910d5ca406bea3d8ea608bbc"
+ },
+ "data": {
+  "lm-brooklyn-bridge": {
+   "snapshot": "data/_releases/lm-brooklyn-bridge@5b1bbc5bc68c",
+   "files": {
+    "dem.bin.gz": "2c58ec418d8ed3ba23a9c0c8cb90bdaa1c1620f8aa2bf2e05466e247130407b5",
+    "osm.json": "7034c762ad80d2c753fddaee931630c872c5819bb30ebd5a8c796bdbc216b30a"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-brooklyn-bridge_36x24.jpg",
+   "sha256": "4eaa847fc71012d4f5d69d48cf1c40dc246f83b822b4ce0b2513450e06156e36",
+   "bytes": 2995890,
+   "printful_file_id": 1111318949
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-brooklyn-bridge_canvas-18x12.jpg",
+    "sha256": "6679ba08e4637edf53b57efe12380c674c7a036cfcd11c38db9064e1fa212909",
+    "bytes": 1099575,
+    "printful_file_id": 1111319118
+   },
+   {
+    "file": "print-files/landmarks/lm-brooklyn-bridge_canvas-30x20.jpg",
+    "sha256": "68c5644e6dd55030e9a136f5f7bf0cd31a40fd9a2e0ec01417ae76fee115f240",
+    "bytes": 2134294,
+    "printful_file_id": 1111319237
+   },
+   {
+    "file": "print-files/landmarks/lm-brooklyn-bridge_canvas-36x24.jpg",
+    "sha256": "f577d61b95a5f7a259e95274dc185982efe441a3795d377fd8df58e0d35c5ce3",
+    "bytes": 2751116,
+    "printful_file_id": 1111319353
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Brooklyn Bridge",
+   "place": "New York City",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-brooklyn-bridge_36x24.jpg",
+   "canvas": "lm-brooklyn-bridge_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "brooklyn-bridge-print",
+    "id": "gid://shopify/Product/9132839862390",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "brooklyn-bridge-framed-print",
+    "id": "gid://shopify/Product/9132839895158",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "brooklyn-bridge-framed-canvas",
+    "id": "gid://shopify/Product/9132929712246",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/e88c431c7a53b51e4160fbd115aa94cd/enhanced-matte-paper-poster-(in)-12x18-front-6af809c5b1374.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/87c7fbb0cfaa1fdc1de9e2b537f07824/enhanced-matte-paper-poster-(in)-20x30-front-6af809c5b13dc.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/279dea44639bea516abe47ac2ca12bba/enhanced-matte-paper-poster-(in)-24x36-front-6af809c5b13fa.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/8feb60392277275bafc5504602e3fff0/enhanced-matte-paper-poster-(in)-8x12-front-6af809c5b1414.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/73a8bfb4dd2add6aed832b5fcc742a6b/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af809c5c0995.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/35e26bc83f22c8a161388b4f852e12f0/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af809c5c09f3.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/645957ad40263bf13b22ce586558be36/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af809c5c0a20.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/29a0688d7f50da429a95a332366b057e/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af809c5c0a38.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2137e8576ec9cbaeea817a308ce212d4/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af809c5c0a53.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/45a7e8658435de005b3d42fdeff0447c/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af809c5c0a69.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/24ab8dcf4ec4c2854178ce2a495a673b/framed-canvas-(in)-black-24x36-front-6af80ae578965.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a965a31333ea832b7e13f60368fb625c/framed-canvas-(in)-white-24x36-front-6af80ae578af6.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

@@ -1,0 +1,162 @@
+{
+ "design": "streetcars-1925-13-the-fan",
+ "title": "The Fan, Richmond Streetcars 1925",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:14:14+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "42e7fdb9a737e41523725244b18706196ecc8d86",
+  "subject": "Release records freeze each scene SVG by hash and pin a scene's own commit; check.py resumes rebuilds within a time budget",
+  "dirty": false
+ },
+ "kind": "set",
+ "recipe": {
+  "tool": "tools/sets/set.py",
+  "run": [
+   "python3 tools/sets/set.py streetcars-1925 prepare   # where data/ is cached",
+   "python3 tools/sets/set.py streetcars-1925 boxes the-fan",
+   "python3 tools/sets/set.py streetcars-1925 canvas"
+  ],
+  "renames": "print files with a -vN suffix are the same output renamed for the store (see pages/changes.md)"
+ },
+ "scenes": [
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925.svg",
+   "sha256": "0e1eb6dd1ffabf78e4a0c264b071d10c35936546b0e6d6765fb231b587679e3d",
+   "frozen": "data/_releases/scenes/0e1eb6dd1ffabf78e4a0c264b071d10c35936546b0e6d6765fb231b587679e3d.svg",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [
+    "--streetcar-scale",
+    "1.5"
+   ],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925-fine.svg",
+   "sha256": "cde4c4c25ffb003ae4ee0202386b79ada618276d5df2b0bc66e19a3a0fb2f9ab",
+   "frozen": "data/_releases/scenes/cde4c4c25ffb003ae4ee0202386b79ada618276d5df2b0bc66e19a3a0fb2f9ab.svg",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "sets/streetcars-1925.json": "bc790593ab4d47c2647c4a85bbf6667fb14aa9a475378426302148b319eab293",
+  "tools/streetcars/stops.json": "44c34b801eb8bbfc5ad7830520c431e3cfd836eae6a615824532828736c0088e",
+  "out/sets/streetcars-1925/points.json": "7125217f2c35e0afd545f521cad25012eca58c5b094394f77a621424d7f3bae5",
+  "regions/richmond-streetcars.json": "5c3bbcd5926d7f41a7c988ad839305f27d1c7766961698622c110ac1c64c5cd6",
+  "history/richmond-streetcars.json": "aafacc7bbfdc407968b416c90ebff1d4b7db3ffa4eddbd0e701a92ddf6e3ef5b",
+  "history/sanborn/lost.geojson": "298b5ac0f674499f65ff8474d06beb17fb78b417a1e8362b46ed7adb1ecdced9",
+  "history/sanborn/fair-grounds.geojson": "ccab37978983fdf8008d49ee3a453e0259a10b51a3587d945b6fe9a8c3a8abd6"
+ },
+ "data": {
+  "richmond-streetcars": {
+   "snapshot": "data/_releases/richmond-streetcars@6e9297a3959e",
+   "files": {
+    "dem.bin.gz": "84786d9e1fa5ccdb10f4a551a77100fdc1704b71d3f782290e89356111a4a9d0",
+    "osm.json": "7dbe53ef18944a9c025a688b68194b30502add174241cfc70fa4eaf80e967eee",
+    "yearbuilt.json": "add6087d440260fbde74ce64208d372e2520dabf6e52130c350c8fa2c79b4e63"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/streetcars/streetcars-1925-13-the-fan_24x18.jpg",
+   "sha256": "5c3e133b35591bc9870054fab1f9d7276388bb10ac91b004d100634739679134",
+   "bytes": 7020705,
+   "printful_file_id": 1112235196
+  },
+  "canvas": [
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-13-the-fan_canvas-16x12.jpg",
+    "sha256": "f3409659bc76edeae8fb2ea8514883f5a8e5c9cc9946e4812fcde9566bdedc01",
+    "bytes": 4379138,
+    "printful_file_id": 1112239166
+   },
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-13-the-fan_canvas-24x18.jpg",
+    "sha256": "7c8ed634f57ee75d0fd82d917f37dde26b7579b9855bbc00a1b709fc45a05d1f",
+    "bytes": 7157161,
+    "printful_file_id": 1112239371
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "place": "Richmond streetcars",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print_dir": "print-files/streetcars",
+   "tags": [
+    "streetcars-1925"
+   ],
+   "credit_extra": "Routes after Harland Bartholomew &amp; Associates for the City Planning Commission, plate 53 (1943), with the sources cited for each stop on the <a href=\"https://busse.github.io/isoscape/#/streetcars\">streetcars page ↗</a>.",
+   "one_mockup": true,
+   "title": "The Fan, Richmond Streetcars 1925",
+   "ratio": "3x4",
+   "sizes": [
+    "12x16",
+    "18x24"
+   ],
+   "print": "streetcars-1925-13-the-fan_24x18.jpg",
+   "canvas": "streetcars-1925-13-the-fan_canvas-{w}x{h}.jpg",
+   "explore": "richmond-streetcars:1925@311,270,6",
+   "detail": [
+    0.35,
+    0.2,
+    0.65,
+    0.6
+   ]
+  },
+  "products": [
+   {
+    "handle": "the-fan-richmond-streetcars-1925-print",
+    "id": "gid://shopify/Product/9135598370934",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "the-fan-richmond-streetcars-1925-framed-print",
+    "id": "gid://shopify/Product/9135598502006",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "the-fan-richmond-streetcars-1925-framed-canvas",
+    "id": "gid://shopify/Product/9135598567542",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-print.jpg?v=1794726126",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-detail.jpg?v=1794726131"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-framed-print-black.jpg?v=1794726135",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-framed-print-white.jpg?v=1794726139",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-detail.jpg?v=1794726131"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-framed-canvas-black.jpg?v=1794726144",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-framed-canvas-white.jpg?v=1794726148",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-13-the-fan-detail.jpg?v=1794726131"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-streetcars:1925@311,270,6"
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 2
+ }
+}

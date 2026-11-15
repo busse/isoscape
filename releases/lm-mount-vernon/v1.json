@@ -1,0 +1,144 @@
+{
+ "design": "lm-mount-vernon",
+ "title": "Mount Vernon",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:49+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-mount-vernon   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 mount-vernon   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2992.65,
+    -1673.19,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.19,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-mount-vernon",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-mount-vernon.svg",
+   "sha256": "e685e39931dc7d56c0ff1c4578bd1eec8aca837da322cf805e0b22636ff14b15",
+   "frozen": "data/_releases/scenes/e685e39931dc7d56c0ff1c4578bd1eec8aca837da322cf805e0b22636ff14b15.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-mount-vernon.json": "f936529e1813fc9e1e2fc7d378a4b791a99d084e6c4b211719cc00dd1b5a6723"
+ },
+ "data": {
+  "lm-mount-vernon": {
+   "snapshot": "data/_releases/lm-mount-vernon@987060b02dbc",
+   "files": {
+    "dem.bin.gz": "4f3f10e88df1a032fa213c9961e57b4c957d977a86e407f7923361532d718736",
+    "osm.json": "12ddff8f25419c4b5b15bb980ec513f1e123a65e6ee26f5507fc3d7af5fe9287"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-mount-vernon_36x24.jpg",
+   "sha256": "5ccbce51ed2dd3942117f9e086d2e5278130d3f0e21beaa3dfefacaf849a2de3",
+   "bytes": 1541957,
+   "printful_file_id": 1111441016
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-mount-vernon_canvas-18x12.jpg",
+    "sha256": "663072921e6cd4d84a7cf8f1517dc12088e0bde506a18db469dc00b197bab663",
+    "bytes": 602717,
+    "printful_file_id": 1111441061
+   },
+   {
+    "file": "print-files/landmarks/lm-mount-vernon_canvas-30x20.jpg",
+    "sha256": "e57d2d8faea021c5539a306609de8ce0ca2deabcd540c7ca652514c5aa106f27",
+    "bytes": 1151566,
+    "printful_file_id": 1111441146
+   },
+   {
+    "file": "print-files/landmarks/lm-mount-vernon_canvas-36x24.jpg",
+    "sha256": "5486197d2a03fdfbc78e4884e117e648dbaa8363b3b08fc90823999c90d5bfbf",
+    "bytes": 1489679,
+    "printful_file_id": 1111441224
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Mount Vernon",
+   "place": "Fairfax County, Virginia",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-mount-vernon_36x24.jpg",
+   "canvas": "lm-mount-vernon_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "mount-vernon-print",
+    "id": "gid://shopify/Product/9133255164022",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "mount-vernon-framed-print",
+    "id": "gid://shopify/Product/9133279838326",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "mount-vernon-framed-canvas",
+    "id": "gid://shopify/Product/9133279871094",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-vernon-print.jpg?v=1794654378"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-vernon-framed-print-black.jpg?v=1794655370",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-vernon-framed-print-white.jpg?v=1794655374"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-vernon-framed-canvas-black.jpg?v=1794655378",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-vernon-framed-canvas-white.jpg?v=1794655382"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

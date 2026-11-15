@@ -1,0 +1,151 @@
+{
+ "design": "lm-jefferson-memorial",
+ "title": "Jefferson Memorial",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:46+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-jefferson-memorial   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 jefferson-memorial   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2975.37,
+    -1842.47,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.26,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-jefferson-memorial",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-jefferson-memorial.svg",
+   "sha256": "40b6d60cdeebc6d4301c1ea199576c21a3b45877fc300bb1ab53f05cbe2de185",
+   "frozen": "data/_releases/scenes/40b6d60cdeebc6d4301c1ea199576c21a3b45877fc300bb1ab53f05cbe2de185.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-jefferson-memorial.json": "ccf924b1486ccacddf9c3ce9a1f8aff1572d82a7828128496d2dae1851956aca"
+ },
+ "data": {
+  "lm-jefferson-memorial": {
+   "snapshot": "data/_releases/lm-jefferson-memorial@55b39f8fbc05",
+   "files": {
+    "dem.bin.gz": "4036a4a35d18ddaef0dcb38fdee9fa9b1259ca80d9ea161acb5e12bff73c539e",
+    "osm.json": "356a95e427bd43ff88637cd6fc61f3be16d825e8131a62762bc9b5bea0203634"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-jefferson-memorial_36x24.jpg",
+   "sha256": "1c7eb67dd2be013a903ba87281304d4d7533dd7f3670c2bdb1f431cc5f718436",
+   "bytes": 1639749,
+   "printful_file_id": 1111344890
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-jefferson-memorial_canvas-18x12.jpg",
+    "sha256": "316d33843f46cbeb2b1e3dfc4c7689e4fbba32b7b1237bc275a2d19f5d621fb4",
+    "bytes": 675749,
+    "printful_file_id": 1111344961
+   },
+   {
+    "file": "print-files/landmarks/lm-jefferson-memorial_canvas-30x20.jpg",
+    "sha256": "4152a874f8da0171785a33e0aad481647b3c6986a7df67d9a19bdb7f078bec93",
+    "bytes": 1244498,
+    "printful_file_id": 1111345012
+   },
+   {
+    "file": "print-files/landmarks/lm-jefferson-memorial_canvas-36x24.jpg",
+    "sha256": "ed2c38088876b1247fdb56f6cd73d84ab80710f4f12aa2e5a7baa6500403ca91",
+    "bytes": 1592918,
+    "printful_file_id": 1111345147
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Jefferson Memorial",
+   "place": "Washington, D.C.",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-jefferson-memorial_36x24.jpg",
+   "canvas": "lm-jefferson-memorial_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "jefferson-memorial-print",
+    "id": "gid://shopify/Product/9132929777782",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "jefferson-memorial-framed-print",
+    "id": "gid://shopify/Product/9132929810550",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "jefferson-memorial-framed-canvas",
+    "id": "gid://shopify/Product/9133043712118",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/d181d2ea3fa5a014eff8ef4254d25d98/enhanced-matte-paper-poster-(in)-12x18-front-6af81c4dd7e2a.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/dc5c8bdd4312c734d6e3bced2ab28e54/enhanced-matte-paper-poster-(in)-20x30-front-6af81c4dd7e8d.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/77aa400bc6134cdb9694d6092a8c0317/enhanced-matte-paper-poster-(in)-24x36-front-6af81c4dd7ea9.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2961045af65606b0b3fd2f38f91421ba/enhanced-matte-paper-poster-(in)-8x12-front-6af81c4dd7ec0.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/0c264d97f7c6068877dff722e9ea1d6a/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af81ca847864.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/4ca3c7ac39227857092211d706825bfa/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af81ca8478c7.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/19b8927dbd60c4bd0ae00166ac922216/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af81ca8478ed.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/1327ae30f5ea1ffedffafcca59c51ee3/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af81ca847907.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/65cbadec4d06998caccd8e5441bb557d/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af81ca84791c.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/1c7ca5e376a7fd508f95cab7d24e5ca4/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af81ca847931.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f29d6f3d35fd72a395a3772e787c832c/framed-canvas-(in)-black-24x36-front-6af824688f359.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/221ad56c7e52a3c4c7ecd884b50f324f/framed-canvas-(in)-white-24x36-front-6af824688f3b4.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

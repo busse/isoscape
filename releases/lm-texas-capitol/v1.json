@@ -1,0 +1,144 @@
+{
+ "design": "lm-texas-capitol",
+ "title": "Texas State Capitol",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:51+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-texas-capitol   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 texas-capitol   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2988.33,
+    -1725.59,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.88,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-texas-capitol",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-texas-capitol.svg",
+   "sha256": "9234d17f88638f737d2e48a26c84ed3f690e212a10e5a730bf9fc9a6457188f1",
+   "frozen": "data/_releases/scenes/9234d17f88638f737d2e48a26c84ed3f690e212a10e5a730bf9fc9a6457188f1.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-texas-capitol.json": "016381285f69f63a3642c1f5ed18020cfb98cd63c3e30be13d611b34c5245828"
+ },
+ "data": {
+  "lm-texas-capitol": {
+   "snapshot": "data/_releases/lm-texas-capitol@14c7c8c56c1b",
+   "files": {
+    "dem.bin.gz": "978afc6898b03ec5d0bb49916a69546b72f37331ac7963df6a2becc3ba86917a",
+    "osm.json": "96860d3e7d95679389cab7a47ace129fe3b55981e018a33184a5a36b7d0162d9"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-texas-capitol_36x24.jpg",
+   "sha256": "223d0443bb9bb9723fe105ebec7114edb037f72b1519858f0b38659b0a072d22",
+   "bytes": 2635626,
+   "printful_file_id": 1111456603
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-texas-capitol_canvas-18x12.jpg",
+    "sha256": "e4b88b0e36b2ca798ecf147a93e09bc8176c76e189f6072659b90b7f604a25d5",
+    "bytes": 1010075,
+    "printful_file_id": 1111462055
+   },
+   {
+    "file": "print-files/landmarks/lm-texas-capitol_canvas-30x20.jpg",
+    "sha256": "437bcec32002d957f97d3bf2e48114285be62a9506699b2fee4d43eb0940cea0",
+    "bytes": 1894229,
+    "printful_file_id": 1111462105
+   },
+   {
+    "file": "print-files/landmarks/lm-texas-capitol_canvas-36x24.jpg",
+    "sha256": "18d00b45de6f37f53186c22ef7261c519c7091b7f913f66eef17528d9b0eccfa",
+    "bytes": 2437679,
+    "printful_file_id": 1111462268
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Texas State Capitol",
+   "place": "Austin",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-texas-capitol_36x24.jpg",
+   "canvas": "lm-texas-capitol_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "texas-state-capitol-print",
+    "id": "gid://shopify/Product/9133283573878",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "texas-state-capitol-framed-print",
+    "id": "gid://shopify/Product/9133283606646",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "texas-state-capitol-framed-canvas",
+    "id": "gid://shopify/Product/9133283639414",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-texas-capitol-print.jpg?v=1794657545"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-texas-capitol-framed-print-black.jpg?v=1794657549",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-texas-capitol-framed-print-white.jpg?v=1794657553"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-texas-capitol-framed-canvas-black.jpg?v=1794657557",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-texas-capitol-framed-canvas-white.jpg?v=1794657562"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

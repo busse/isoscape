@@ -1,0 +1,144 @@
+{
+ "design": "lm-griffith-observatory",
+ "title": "Griffith Observatory",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:50+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-griffith-observatory   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 griffith-observatory   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2992.35,
+    -2478.4,
+    5976.07,
+    3431.84
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 3.24,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-griffith-observatory",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-griffith-observatory.svg",
+   "sha256": "bb02d74555730c4cab531107278f72d4acc1d8a07656276c242afbce04b7f260",
+   "frozen": "data/_releases/scenes/bb02d74555730c4cab531107278f72d4acc1d8a07656276c242afbce04b7f260.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-griffith-observatory.json": "6f5385c2f97fae065ccf9f714ec978e41127991e25055fb5f5ca624e5a26ccb9"
+ },
+ "data": {
+  "lm-griffith-observatory": {
+   "snapshot": "data/_releases/lm-griffith-observatory@f89d91b85e80",
+   "files": {
+    "dem.bin.gz": "330cd3187bd6e80eb0a9ea91a52b92835cd8be85369442c9d1037b3b34588f1e",
+    "osm.json": "388fa9e9ba1142cdf1bf4dcae5408cd0ac7a913d451d7b7b6dec8d7dd30cf73c"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-griffith-observatory_36x24.jpg",
+   "sha256": "a267b481e0a011f5e800604c0e9fc97db9bda227090fdf125937e2113c379bb1",
+   "bytes": 4367829,
+   "printful_file_id": 1111567828
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-griffith-observatory_canvas-18x12.jpg",
+    "sha256": "26c3c6cd7db1188f3e5f74220645129117c6847054847905902c806832a55849",
+    "bytes": 1418776,
+    "printful_file_id": 1111567917
+   },
+   {
+    "file": "print-files/landmarks/lm-griffith-observatory_canvas-30x20.jpg",
+    "sha256": "7126b09483eeab03d481f9e4e9968f8909a54be6238d1ae4cdbc1c2f5ba82a08",
+    "bytes": 2879270,
+    "printful_file_id": 1111568025
+   },
+   {
+    "file": "print-files/landmarks/lm-griffith-observatory_canvas-36x24.jpg",
+    "sha256": "5c2f54abcc3b3fe2ccb5826d287413b9c03c6dfdd5108cc7b0596fd5c6b16c77",
+    "bytes": 3739400,
+    "printful_file_id": 1111570458
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Griffith Observatory",
+   "place": "Los Angeles",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-griffith-observatory_36x24.jpg",
+   "canvas": "lm-griffith-observatory_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "griffith-observatory-print",
+    "id": "gid://shopify/Product/9133282852982",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "griffith-observatory-framed-print",
+    "id": "gid://shopify/Product/9133282885750",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "griffith-observatory-framed-canvas",
+    "id": "gid://shopify/Product/9133283541110",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-griffith-observatory-print_81042dbe-082f-4267-b126-c7f2491037b1.jpg?v=1794669580"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-griffith-observatory-framed-print-black_e7483b26-2b72-4c73-bc74-4e8b5338d4e4.jpg?v=1794669584",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-griffith-observatory-framed-print-white_298c3526-b3c9-42c0-b272-521f854bafcc.jpg?v=1794669588"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-griffith-observatory-framed-canvas-black_d8705a17-9578-4ccb-9109-7c9f1c0f3bb4.jpg?v=1794669593",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-griffith-observatory-framed-canvas-white_2d8312de-b06b-430c-8c30-d0204bf7adaf.jpg?v=1794669597"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

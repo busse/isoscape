@@ -1,0 +1,146 @@
+{
+ "design": "lm-matterhorn",
+ "title": "Matterhorn and Zermatt",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:53+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-matterhorn   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 matterhorn   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2765.08,
+    -5502.92,
+    5525.84,
+    7953.68
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 2.94,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-matterhorn",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-matterhorn.svg",
+   "sha256": "9125df3994830e5aec4d394e6198d775973f34366d11f2163964b2189876efac",
+   "frozen": "data/_releases/scenes/9125df3994830e5aec4d394e6198d775973f34366d11f2163964b2189876efac.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-matterhorn.json": "d989e33b6cacd23d776a06b4a0ae2d7cd7cf7dc49a682edf487836d73e704638"
+ },
+ "data": {
+  "lm-matterhorn": {
+   "snapshot": "data/_releases/lm-matterhorn@b8d2d61870c6",
+   "files": {
+    "dem.bin.gz": "27c84a87d1aed6e8926c89dd6d821397667ef2638733e26628da9bd866d39b7a",
+    "osm.json": "e8594e8cf9a6f9c0f2230a6b0187beb15b13e2c21c519b0860177618cac7b90c"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-matterhorn_24x36.jpg",
+   "sha256": "f1eed663622ef6ce552a195b4278d405a7d6454eda466afaa16096ea07bcb61e",
+   "bytes": 3271505,
+   "printful_file_id": 1111971141
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-matterhorn_canvas-12x18.jpg",
+    "sha256": "cceaefbe887816782d6b64bfe4901b30b3500127676c2c0556f1698ffd0b4386",
+    "bytes": 869305,
+    "printful_file_id": 1111971260
+   },
+   {
+    "file": "print-files/landmarks/lm-matterhorn_canvas-20x30.jpg",
+    "sha256": "6363a2dae4073cf8cbb13fb395e6d0839f95de94fa7cf51546648138e77b40ae",
+    "bytes": 1965385,
+    "printful_file_id": 1111971430
+   },
+   {
+    "file": "print-files/landmarks/lm-matterhorn_canvas-24x36.jpg",
+    "sha256": "da597cb3079eabf2bbc72f2e87b86d227b16b75f44474bb88a8da33d47e5a091",
+    "bytes": 2685535,
+    "printful_file_id": 1111971551
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Matterhorn and Zermatt",
+   "place": "Switzerland",
+   "orientation": "vertical",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-matterhorn_24x36.jpg",
+   "canvas": "lm-matterhorn_canvas-{w}x{h}.jpg",
+   "world": true,
+   "elevation_credit": "Elevation: swissALTI3D © Federal Office of Topography swisstopo; produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved"
+  },
+  "products": [
+   {
+    "handle": "matterhorn-and-zermatt-print",
+    "id": "gid://shopify/Product/9135238054006",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "matterhorn-and-zermatt-framed-print",
+    "id": "gid://shopify/Product/9135238086774",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "matterhorn-and-zermatt-framed-canvas",
+    "id": "gid://shopify/Product/9135238119542",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-print.jpg?v=1794702748"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-framed-print-black.jpg?v=1794702752",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-framed-print-white.jpg?v=1794702756"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-framed-canvas-black.jpg?v=1794702760",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-matterhorn-framed-canvas-white.jpg?v=1794702764"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

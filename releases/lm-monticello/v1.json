@@ -1,0 +1,144 @@
+{
+ "design": "lm-monticello",
+ "title": "Monticello",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:49+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-monticello   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 monticello   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2119.07,
+    -2269.95,
+    4233.83,
+    2428.07
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 0.8,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-monticello",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-monticello.svg",
+   "sha256": "6dca9859028fc15fa42eeaf1b73209d563ae1e2189b0116204eb355e303795d4",
+   "frozen": "data/_releases/scenes/6dca9859028fc15fa42eeaf1b73209d563ae1e2189b0116204eb355e303795d4.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-monticello.json": "5bd4664a92550a8171b0ce0267f2822d4abd2218307aba8c79a52882b684c9d1"
+ },
+ "data": {
+  "lm-monticello": {
+   "snapshot": "data/_releases/lm-monticello@02b6840ae779",
+   "files": {
+    "dem.bin.gz": "eacbc71cdbc351d7b3ed47897dc8edfc76a9083c511920541db27c8e095d92c7",
+    "osm.json": "54f3a2eab38e451eb59ff9485ddd01f6c369dd26e38759d3a73564ad7e16bc60"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-monticello_36x24.jpg",
+   "sha256": "9c3c1948cd5e77e8666b030462b6dabb127225a4f349d996983c5dd05fc2d74a",
+   "bytes": 2357750,
+   "printful_file_id": 1111577340
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-monticello_canvas-18x12.jpg",
+    "sha256": "9cee5b5ddc89086c2a9dbb1b1d5d72b8f16a1c8dd9d5cab37842836180f2eae7",
+    "bytes": 789731,
+    "printful_file_id": 1111577451
+   },
+   {
+    "file": "print-files/landmarks/lm-monticello_canvas-30x20.jpg",
+    "sha256": "1876489164ae4e6af096164ff87a92a473ce6e26db5642765dc4d00fa7e83a3a",
+    "bytes": 1595563,
+    "printful_file_id": 1111578029
+   },
+   {
+    "file": "print-files/landmarks/lm-monticello_canvas-36x24.jpg",
+    "sha256": "916a8f239b73f32fad40b1ffb0b2cb63e4a1992ac3b440101894d33fba5281ef",
+    "bytes": 2096865,
+    "printful_file_id": 1111578151
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Monticello",
+   "place": "Charlottesville, Virginia",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-monticello_36x24.jpg",
+   "canvas": "lm-monticello_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "monticello-print",
+    "id": "gid://shopify/Product/9133254967414",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "monticello-framed-print",
+    "id": "gid://shopify/Product/9133255032950",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "monticello-framed-canvas",
+    "id": "gid://shopify/Product/9133255065718",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-monticello-print_d77e6ab6-cfc0-4e54-8bba-dbe047cac558.jpg?v=1794669415"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-monticello-framed-print-black_699ae2bb-4cfa-4ed9-a25e-cbbed517dad2.jpg?v=1794669419",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-monticello-framed-print-white_f5075b93-68d6-40d6-adb6-ca3cfa649c7c.jpg?v=1794669423"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-monticello-framed-canvas-black_11a579bf-60ad-49cd-ade2-b1b9587de2b3.jpg?v=1794669428",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-monticello-framed-canvas-white_51d9cd0e-874f-4461-80af-2efd7d44e6e1.jpg?v=1794669432"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

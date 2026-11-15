@@ -1,0 +1,142 @@
+{
+ "design": "richmond-1950",
+ "title": "Richmond, 1950",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:14:23+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "42e7fdb9a737e41523725244b18706196ecc8d86",
+  "subject": "Release records freeze each scene SVG by hash and pin a scene's own commit; check.py resumes rebuilds within a time budget",
+  "dirty": false
+ },
+ "kind": "compose",
+ "recipe": {
+  "tool": "tools/print/compose.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <out> --only richmond-1950"
+  ],
+  "pinned": "panels use the builds named in scenes[].build, not the newest"
+ },
+ "scenes": [
+  {
+   "region": "richmond-downtown-time",
+   "year": 1950,
+   "flags": [],
+   "svg": "out/builds/20261114-042415-richmond-downtown-time-1950/image.svg",
+   "sha256": "862427e303083797a533bc43b24f06c17a62358c41fc37ff682c073b4438d9c5",
+   "frozen": "data/_releases/scenes/862427e303083797a533bc43b24f06c17a62358c41fc37ff682c073b4438d9c5.svg",
+   "build": "20261114-042415-richmond-downtown-time-1950",
+   "commit": "8a9f63c",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "7454855d277d47779f8b7b9a457322e74d488766f2ae7747e5f320e59e1baceb",
+  "regions/richmond-downtown-time.json": "0f67ad5e288c11dffcb730aaed0d641cb0e22a92d21d8c600724edde6525d9c1",
+  "history/richmond-downtown.json": "04d2b883d95045dd868f32a0bb7bd122822fd95bc07e909fc757c1a135e99df9",
+  "history/sanborn/lost.geojson": "298b5ac0f674499f65ff8474d06beb17fb78b417a1e8362b46ed7adb1ecdced9"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/richmond-1950_36x24.jpg",
+   "sha256": "f7c23beee13f6d07ea312bd61556deecd622f7cdf72c31a70ea758010ce9dec6",
+   "bytes": 11877609,
+   "printful_file_id": 1111268833
+  },
+  "canvas": [
+   {
+    "file": "print-files/canvas/richmond-1950_canvas-18x12.jpg",
+    "sha256": "4d3a549071f4146945f404e136e1718d268b88540fc0e0998c62d024d5776397",
+    "bytes": 4192580,
+    "printful_file_id": 1111269645
+   },
+   {
+    "file": "print-files/canvas/richmond-1950_canvas-30x20.jpg",
+    "sha256": "eef38e75ccc973a8356b863dc9afa817b1dad76a1ebe671bbaee594e650d84c5",
+    "bytes": 7821326,
+    "printful_file_id": 1111269758
+   },
+   {
+    "file": "print-files/canvas/richmond-1950_canvas-36x24.jpg",
+    "sha256": "f45c259696217a28153d69d931ac39cd25df8f61c14070a15d869317e81b1e9f",
+    "bytes": 9901453,
+    "printful_file_id": 1111269748
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Richmond, 1950",
+   "place": "Richmond",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "richmond-1950_36x24.jpg",
+   "canvas": "richmond-1950_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "richmond-1950-print",
+    "id": "gid://shopify/Product/9132812697718",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-1950-framed-print",
+    "id": "gid://shopify/Product/9132812763254",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-1950-framed-canvas",
+    "id": "gid://shopify/Product/9132812828790",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/5b814bd6454d7a347dc3992ee44df2d8/enhanced-matte-paper-poster-(in)-12x18-front-6af7f121f1cdf.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/98c7995d8dacb2d9ae7b23d1556306d8/enhanced-matte-paper-poster-(in)-20x30-front-6af7f121f1d34.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7ab3667471f73469fd5ea114c8793189/enhanced-matte-paper-poster-(in)-24x36-front-6af7f121f1d50.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/e86c68827cd2980bfb988574e23de608/enhanced-matte-paper-poster-(in)-8x12-front-6af7f121f1d68.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/ac945d6fafceb0f6a600178baeed7c0a/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af7f127a537f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/48c46feb637799cf7a36825ec3c8cbf0/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af7f127a53d7.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/49d0617dc1f3be6de1bdca8f012e8dff/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af7f127a53f5.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/433d88b87af7a609c31ff0ce8bf4db96/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af7f127a540c.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/02ea08b6f6095feec09749477a406c30/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af7f127a5422.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/818baa884746a241fb3f50e38b0568e6/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af7f127a5436.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/1f719fe2f004aa6eaf3511133337517f/framed-canvas-(in)-black-12x18-front-6af7f18bd73f5.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/0344e7d4fd753b8c3e5fdc9904782494/framed-canvas-(in)-white-12x18-front-6af7f18bd7572.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3a567f9b793446137800e7334e763ce1/framed-canvas-(in)-black-20x30-front-6af7f76f07f1d.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/8598f3bd50edfdc80ee6b7f52afd9d22/framed-canvas-(in)-white-20x30-front-6af7f76f07f8a.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/df37dddeefa75926b449b1b7b7e2d1c0/framed-canvas-(in)-black-24x36-front-6af7f77597526.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/1428759c81babde2b2d1393746244086/framed-canvas-(in)-white-24x36-front-6af7f77597583.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

@@ -1,0 +1,144 @@
+{
+ "design": "lm-lombard-street",
+ "title": "Lombard Street",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:49+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-lombard-street   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 lombard-street   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2914.9,
+    -2136.03,
+    5825.59,
+    3345.79
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 0.85,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-lombard-street",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-lombard-street.svg",
+   "sha256": "6144ac51088c4989c966fa3ef8febfa976096ebdef6ea97c406e0a8915b5fd7f",
+   "frozen": "data/_releases/scenes/6144ac51088c4989c966fa3ef8febfa976096ebdef6ea97c406e0a8915b5fd7f.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-lombard-street.json": "c37348327ac8ff7dbd091adfdb78fbe6631c3aa2cf5d292d4497e89188288165"
+ },
+ "data": {
+  "lm-lombard-street": {
+   "snapshot": "data/_releases/lm-lombard-street@3af2fe7de97e",
+   "files": {
+    "dem.bin.gz": "abb3285e3936bd63db63a5f116188b2e6fe19bb7601db6d2a46d952e749b84b0",
+    "osm.json": "c038fe2b4bce96f05447243811906cc66b8d89d89e7d3e1288d174bf79c920e0"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-lombard-street_36x24.jpg",
+   "sha256": "f5ffb9be7bb55c5b93f9dfd4116b76aaa3d701c21e2eb8d3c60d073679cbadfd",
+   "bytes": 3654188,
+   "printful_file_id": 1111576753
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-lombard-street_canvas-18x12.jpg",
+    "sha256": "f9954ac61568751caa217f4cb8fd42483360dccec081b565d83e6112f7c0b521",
+    "bytes": 1321711,
+    "printful_file_id": 1111576862
+   },
+   {
+    "file": "print-files/landmarks/lm-lombard-street_canvas-30x20.jpg",
+    "sha256": "790d3222dbb6865d69c7a103166cab31e394f7c81aedb77ad2d6c43e1d21437a",
+    "bytes": 2567746,
+    "printful_file_id": 1111576992
+   },
+   {
+    "file": "print-files/landmarks/lm-lombard-street_canvas-36x24.jpg",
+    "sha256": "0673d958cdf25a005b34526cf81bd0ea274c2deeaf8ef23ee1aff97b66e66e97",
+    "bytes": 3342951,
+    "printful_file_id": 1111577181
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Lombard Street",
+   "place": "San Francisco",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-lombard-street_36x24.jpg",
+   "canvas": "lm-lombard-street_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "lombard-street-print",
+    "id": "gid://shopify/Product/9133235372150",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "lombard-street-framed-print",
+    "id": "gid://shopify/Product/9133235404918",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "lombard-street-framed-canvas",
+    "id": "gid://shopify/Product/9133235437686",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-lombard-street-print_08f9b246-51e7-4242-9e92-8f4c5f4a77c6.jpg?v=1794668878"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-lombard-street-framed-print-black_87d2cb16-460b-400e-a043-01859aa295a2.jpg?v=1794668882",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-lombard-street-framed-print-white_8fefa12c-3511-4f02-b0d0-c3f888097fbc.jpg?v=1794668886"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-lombard-street-framed-canvas-black_85514974-a801-4366-94e7-22d3d644b2b3.jpg?v=1794668891",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-lombard-street-framed-canvas-white_1edbaa58-0e6d-4a8a-a792-105241455ace.jpg?v=1794668895"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

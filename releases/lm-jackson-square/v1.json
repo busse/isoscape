@@ -1,0 +1,151 @@
+{
+ "design": "lm-jackson-square",
+ "title": "Jackson Square",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:48+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-jackson-square   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 jackson-square   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2988.53,
+    -1594.81,
+    5977.16,
+    3432.47
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.19,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-jackson-square",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-jackson-square.svg",
+   "sha256": "8c00a4dc85575adf33e0544d0f0e8beb66932c2989eded305549c21540c5bf25",
+   "frozen": "data/_releases/scenes/8c00a4dc85575adf33e0544d0f0e8beb66932c2989eded305549c21540c5bf25.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-jackson-square.json": "0faafaea93010d8e56b2fab0f40f62decc2e1059780eb60151d8d3ae5c794007"
+ },
+ "data": {
+  "lm-jackson-square": {
+   "snapshot": "data/_releases/lm-jackson-square@d53e83192601",
+   "files": {
+    "dem.bin.gz": "5fc7f5a1a7360bc0b7a8e68223ead94d890d4d338c44866df722530b2051e7a1",
+    "osm.json": "e9a11ac957a4038a6fe0e2cb2faf81d99eaa9a76ae462fee7357c161a3977812"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-jackson-square_36x24.jpg",
+   "sha256": "7eb7a07ecb7844e503363121bf46ab42499b4cec1029e2811ef08a4107c9d47f",
+   "bytes": 2934628,
+   "printful_file_id": 1111422638
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-jackson-square_canvas-18x12.jpg",
+    "sha256": "55a87facf3e4fabda4017467b6f26a685bb09a33a5c8cb9999086f1a73fd9ee9",
+    "bytes": 1107999,
+    "printful_file_id": 1111422698
+   },
+   {
+    "file": "print-files/landmarks/lm-jackson-square_canvas-30x20.jpg",
+    "sha256": "ca70128c886b027b90c7d3611c46fb8d6219226a1d04ce5a08875250b908ba09",
+    "bytes": 2115404,
+    "printful_file_id": 1111422748
+   },
+   {
+    "file": "print-files/landmarks/lm-jackson-square_canvas-36x24.jpg",
+    "sha256": "9e8d1c79672818a938265a3708af882debf37eef013e339151fd4c239ab5e4c3",
+    "bytes": 2734314,
+    "printful_file_id": 1111422811
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Jackson Square",
+   "place": "New Orleans",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-jackson-square_36x24.jpg",
+   "canvas": "lm-jackson-square_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "jackson-square-print",
+    "id": "gid://shopify/Product/9133190611062",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "jackson-square-framed-print",
+    "id": "gid://shopify/Product/9133210042486",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "jackson-square-framed-canvas",
+    "id": "gid://shopify/Product/9133210108022",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/6a1d017763b83018807db6125c02d3b4/enhanced-matte-paper-poster-(in)-12x18-front-6af8388b17372.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/877f689b34c5a1e0c2a35cacd275ab40/enhanced-matte-paper-poster-(in)-20x30-front-6af8388b174d9.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c98fece360873fceabe2fe2cd7801822/enhanced-matte-paper-poster-(in)-24x36-front-6af8388b174ff.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/0bb248e2d565e82a9cc2390b1e6a54d6/enhanced-matte-paper-poster-(in)-8x12-front-6af8388b1751a.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/33da861713f4d7d1455eedbf72cea02f/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af83a41afaf3.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/fbd47c49788eac44e666db5959e3ab97/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af83a41afb57.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/522bbb004c53fb4e63b6ca18b34b2552/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af83a41afb75.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/17a45df96a9cb03ece7b6fdbec1d8254/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af83a41afb8c.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/63538f17879419b87c6fa644af4e82a4/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af83a41afba1.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/528b65af12ae729faa8d1135d552c2af/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af83a41afbb5.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/d1df2059a9892c446b91bffeaeb2d73e/framed-canvas-(in)-black-24x36-front-6af83a42b0a1a.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2157e64e047b93dd9a4d3b655a8aef30/framed-canvas-(in)-white-24x36-front-6af83a42b0a94.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

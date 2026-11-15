@@ -1,0 +1,144 @@
+{
+ "design": "gwynns-island",
+ "title": "Gwynn's Island",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:14:27+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "42e7fdb9a737e41523725244b18706196ecc8d86",
+  "subject": "Release records freeze each scene SVG by hash and pin a scene's own commit; check.py resumes rebuilds within a time budget",
+  "dirty": false
+ },
+ "kind": "compose",
+ "recipe": {
+  "tool": "tools/print/compose.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <out> --only gwynns-island"
+  ],
+  "pinned": "panels use the builds named in scenes[].build, not the newest"
+ },
+ "scenes": [
+  {
+   "region": "gwynns-island",
+   "year": null,
+   "flags": [],
+   "svg": "out/builds/20261114-003001-gwynns-island/image.svg",
+   "sha256": "3322be4aed6d51534e730b1e68a435c66786cef3f727bf116aef07003c55c4d2",
+   "frozen": "data/_releases/scenes/3322be4aed6d51534e730b1e68a435c66786cef3f727bf116aef07003c55c4d2.svg",
+   "build": "20261114-003001-gwynns-island",
+   "commit": "d09fdf9",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "7454855d277d47779f8b7b9a457322e74d488766f2ae7747e5f320e59e1baceb",
+  "regions/gwynns-island.json": "f352b0134124ffa82ee172753c8134d50d8a054e7412e67b428e3c02d74170f3"
+ },
+ "data": {
+  "gwynns-island": {
+   "snapshot": "data/_releases/gwynns-island@539ba2b17aee",
+   "files": {
+    "dem.bin.gz": "dcf538a8e096441d534170c7edf97eb2712213d31782548ad383f025fc2d7d07",
+    "footprints.json": "7f41d1acd1993f20f370ac6316d4a39138171992164912649828baf625023e6b",
+    "landcover.bin.gz": "a8a74eed686f2f2c46f9ac3302cc983b53e15deaaa194b57ab9c1103fb9610d6",
+    "osm.json": "7918ef9f6beec34688d267cd9864c8609cb5b7df3b1eb6b284abc60a0e623e08"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/gwynns-island_36x24.jpg",
+   "sha256": "51f718300122b843317d4d324058ad9e808d59a667c02c239fd25d710ed5bf46",
+   "bytes": 5927590,
+   "printful_file_id": 1111268867
+  },
+  "canvas": [
+   {
+    "file": "print-files/canvas/gwynns-island_canvas-18x12.jpg",
+    "sha256": "413f12ec186b5f24b03ffcdc970e9a098c34372b6212101e9bbdcbaa6f2b061a",
+    "bytes": 1885100,
+    "printful_file_id": 1111269804
+   },
+   {
+    "file": "print-files/canvas/gwynns-island_canvas-30x20.jpg",
+    "sha256": "37b57fa30db30441f8e87177ee2420bd6cb530491c9dc33e349697fac0147261",
+    "bytes": 3712664,
+    "printful_file_id": 1111269855
+   },
+   {
+    "file": "print-files/canvas/gwynns-island_canvas-36x24.jpg",
+    "sha256": "08b19c987ade3142092bb19b626f18c4d72963c54a4ca2047541e2bf2d299b0e",
+    "bytes": 4764464,
+    "printful_file_id": 1111269873
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Gwynn's Island",
+   "place": "Gwynn's Island",
+   "orientation": "horizontal",
+   "modern": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "gwynns-island_36x24.jpg",
+   "canvas": "gwynns-island_canvas-{w}x{h}.jpg",
+   "explore": "gwynns-island"
+  },
+  "products": [
+   {
+    "handle": "gwynns-island-print",
+    "id": "gid://shopify/Product/9132813189238",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "gwynns-island-framed-print",
+    "id": "gid://shopify/Product/9132813222006",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "gwynns-island-framed-canvas",
+    "id": "gid://shopify/Product/9132813254774",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/761dc72c925272e9847d2c49d19cb43c/enhanced-matte-paper-poster-(in)-12x18-front-6af7fd6f1db01.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7545001ebe0c74275d25892c225da41f/enhanced-matte-paper-poster-(in)-20x30-front-6af7fd6f1db71.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7a309f258cd79a4f46fa87804113a532/enhanced-matte-paper-poster-(in)-24x36-front-6af7fd6f1db8f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/d9d20bfe6ee8194a1803927383d1b827/enhanced-matte-paper-poster-(in)-8x12-front-6af7fd6f1dba7.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/500555d872ead158044953755fd49abe/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af7fdd030b79.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/49d75ea84a33112f691caf2786904ac5/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af7fdd030bd4.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/727c9fd66cae0c8081f9aca2b2966a7d/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af7fdd030bf3.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/fc54469f55ada7dfe6ec3daedc2a4725/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af7fdd030c0a.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/14bd6909a54326b061a30fafec7ca9a5/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af7fdd030c1e.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/b3226b061747a51f07a1926f1be5fabe/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af7fdd030c32.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3c515868ab3e3e35d7147c9187ac1d04/framed-canvas-(in)-black-12x18-front-6af7feb312aa6.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/bd936cf6f8d5c95388df4e8a92308e6e/framed-canvas-(in)-white-12x18-front-6af7feb312be7.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/edbf287d0fec608745eb553892eca5d1/framed-canvas-(in)-black-20x30-front-6af7feb9cd48a.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/e758e5e5ee53f24431e687dee1816412/framed-canvas-(in)-white-20x30-front-6af7feb9cd4f0.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/712e9b0a89aa30bc6f60912cd1af7e9e/framed-canvas-(in)-black-24x36-front-6af7ff1bef220.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/bff1165fbe5961bb6359915d74370687/framed-canvas-(in)-white-24x36-front-6af7ff1bef284.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "gwynns-island"
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 1
+ }
+}

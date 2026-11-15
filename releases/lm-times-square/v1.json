@@ -1,0 +1,155 @@
+{
+ "design": "lm-times-square",
+ "title": "Times Square",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:43+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-times-square   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 times-square   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2984.01,
+    -2125.71,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 2.16,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-times-square",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-times-square.svg",
+   "sha256": "49888b4815a7e2eaeaeaba2b894b656627547a329adda4724da09f866d325ece",
+   "frozen": "data/_releases/scenes/49888b4815a7e2eaeaeaba2b894b656627547a329adda4724da09f866d325ece.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-times-square.json": "02f8a0affa1786e1e6350a028b28c09596884f16715b620e1f322af7288307c0"
+ },
+ "data": {
+  "lm-times-square": {
+   "snapshot": "data/_releases/lm-times-square@0b36bcde6901",
+   "files": {
+    "dem.bin.gz": "3c0c42704fc5c2999a5182216b36c1936feb4e3cc198bd8dca034801c9d7e030",
+    "osm.json": "ef802dc5e00ead29257a491b965db291877175760f6d7842e31df3c8881f3e71"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-times-square_36x24.jpg",
+   "sha256": "1b2eeb9f7b90d04f31d878d86841ccac3d0f07df8f7fb766be5ba6ae9348f4b4",
+   "bytes": 1985622,
+   "printful_file_id": 1111297939
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-times-square_canvas-18x12.jpg",
+    "sha256": "184ce18109dfd4882550680bf63cdabf213060c246a318a57be6c049083c9fd1",
+    "bytes": 861652,
+    "printful_file_id": 1111319860
+   },
+   {
+    "file": "print-files/landmarks/lm-times-square_canvas-30x20.jpg",
+    "sha256": "86ed2353304d7775bab2b7d7938d931f6451e4d9d94a63098da0c0342df792e8",
+    "bytes": 1607992,
+    "printful_file_id": 1111319896
+   },
+   {
+    "file": "print-files/landmarks/lm-times-square_canvas-36x24.jpg",
+    "sha256": "9ca19194d39bacfeadbcd6dd6c19473c502ff9decb10500c78d06a9218b83a88",
+    "bytes": 2049272,
+    "printful_file_id": 1111320011
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Times Square",
+   "place": "New York City",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-times-square_36x24.jpg",
+   "canvas": "lm-times-square_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "times-square-print",
+    "id": "gid://shopify/Product/9132839567478",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "times-square-framed-print",
+    "id": "gid://shopify/Product/9132839665782",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "times-square-framed-canvas",
+    "id": "gid://shopify/Product/9132839731318",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/174a0ed263089e32e954cff5a6453cef/enhanced-matte-paper-poster-(in)-12x18-front-6af800752b176.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/16ee61857fb9ff68156adf77ffd070a7/enhanced-matte-paper-poster-(in)-20x30-front-6af800752b1d1.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/6d40f88718263858a79f79a974ce78f7/enhanced-matte-paper-poster-(in)-24x36-front-6af800752b1ee.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/00128170a49cdcf8fc1e69cfe123b160/enhanced-matte-paper-poster-(in)-8x12-front-6af800752b206.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f70710e2208c63ee88e7e2d14038635c/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af800cfa81e7.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/d8b7c8b8e80cc7da0a100c9c67a3d9a6/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af800cfa8232.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/454df2003bf01fde05bad772d80f6821/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af800cfa824f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3b45374a4088ddcb217077dca3c28385/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af800cfa8266.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/07172ffb00ea6a64a654f54d90960bcb/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af800cfa827f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/191a79e9c1cfcfa8ed45d17f93af3c5f/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af800cfa8292.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7a7eabe4879f8d7f7bed9185d6687438/framed-canvas-(in)-black-12x18-front-6af808a8a433a.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/e37899cb6c617597e8f49cbe58ce99b5/framed-canvas-(in)-white-12x18-front-6af808a8a43b6.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/d20442f4b4c00ebe0dc7b6e9adc18341/framed-canvas-(in)-black-20x30-front-6af808a8dfaed.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c7a603ff405c32ee2426833f374d3524/framed-canvas-(in)-white-20x30-front-6af808a8dfc5c.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/abe59b8025ba9bd2e3bec915e175d338/framed-canvas-(in)-black-24x36-front-6af8090478d5b.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9524605e4bdc28f5832dd31d4b897740/framed-canvas-(in)-white-24x36-front-6af8090478f0b.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

@@ -1,0 +1,154 @@
+{
+ "design": "then-and-now",
+ "title": "Richmond, Then & Now",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:14:26+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "42e7fdb9a737e41523725244b18706196ecc8d86",
+  "subject": "Release records freeze each scene SVG by hash and pin a scene's own commit; check.py resumes rebuilds within a time budget",
+  "dirty": false
+ },
+ "kind": "compose",
+ "recipe": {
+  "tool": "tools/print/compose.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <out> --only then-and-now"
+  ],
+  "pinned": "panels use the builds named in scenes[].build, not the newest"
+ },
+ "scenes": [
+  {
+   "region": "richmond-downtown-time",
+   "year": 1886,
+   "flags": [],
+   "svg": "out/builds/20261114-042400-richmond-downtown-time-1886/image.svg",
+   "sha256": "12b54a226f19f9d988b6bfbed3ce8cf419d767224fba29e3dbe5bf7324ba6c46",
+   "frozen": "data/_releases/scenes/12b54a226f19f9d988b6bfbed3ce8cf419d767224fba29e3dbe5bf7324ba6c46.svg",
+   "build": "20261114-042400-richmond-downtown-time-1886",
+   "commit": "8a9f63c",
+   "reproduces": false
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 2026,
+   "flags": [],
+   "svg": "out/builds/20261114-042428-richmond-downtown-time-2026/image.svg",
+   "sha256": "29f60a3eb9ffac24926d2bbda042aa27dd29024d83f4fb5362fb965cdbecea30",
+   "frozen": "data/_releases/scenes/29f60a3eb9ffac24926d2bbda042aa27dd29024d83f4fb5362fb965cdbecea30.svg",
+   "build": "20261114-042428-richmond-downtown-time-2026",
+   "commit": "8a9f63c",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "7454855d277d47779f8b7b9a457322e74d488766f2ae7747e5f320e59e1baceb",
+  "regions/richmond-downtown-time.json": "0f67ad5e288c11dffcb730aaed0d641cb0e22a92d21d8c600724edde6525d9c1",
+  "history/richmond-downtown.json": "04d2b883d95045dd868f32a0bb7bd122822fd95bc07e909fc757c1a135e99df9",
+  "history/sanborn/lost.geojson": "298b5ac0f674499f65ff8474d06beb17fb78b417a1e8362b46ed7adb1ecdced9"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/then-and-now_24x36.jpg",
+   "sha256": "44aa6a8a1bb5aaf7e780e3b7413a67e351f954674c856edab8c5aeb4148d16c2",
+   "bytes": 12649276,
+   "printful_file_id": 1111268846
+  },
+  "canvas": [
+   {
+    "file": "print-files/canvas/then-and-now_canvas-12x18.jpg",
+    "sha256": "656c8385e1822951e08f5f511e31ece1b94f2353190f56ef652d2fa18c778c49",
+    "bytes": 4422898,
+    "printful_file_id": 1111269739
+   },
+   {
+    "file": "print-files/canvas/then-and-now_canvas-20x30.jpg",
+    "sha256": "94c52d6dd6bf46a9966f3a6ef197f57bc84697f33ac3f1d8860013519860b5e8",
+    "bytes": 8263155,
+    "printful_file_id": 1111269572
+   },
+   {
+    "file": "print-files/canvas/then-and-now_canvas-24x36.jpg",
+    "sha256": "e93934903eab59beed82d511b6b05a7ee7a4e813e504cbb3ab9afeca0b7fabf4",
+    "bytes": 10512024,
+    "printful_file_id": 1111269674
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Richmond, Then & Now",
+   "place": "Richmond",
+   "orientation": "vertical",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "then-and-now_24x36.jpg",
+   "canvas": "then-and-now_canvas-{w}x{h}.jpg",
+   "explore": "richmond-downtown-time:2026"
+  },
+  "products": [
+   {
+    "handle": "richmond-then-and-now-print",
+    "id": "gid://shopify/Product/9132813090934",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-then-and-now-framed-print",
+    "id": "gid://shopify/Product/9132813123702",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-then-and-now-framed-canvas",
+    "id": "gid://shopify/Product/9132813156470",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/0de26200b8199813da344dab4f3471e3/enhanced-matte-paper-poster-(in)-12x18-front-6af7fbb24239d.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/b55e27623e20559f639d6b7f87931248/enhanced-matte-paper-poster-(in)-20x30-front-6af7fbb2423ea.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/97de9ebe1fff1abd9696c149edecefe4/enhanced-matte-paper-poster-(in)-24x36-front-6af7fbb242406.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c21ef8a105a284a583a45210a788b884/enhanced-matte-paper-poster-(in)-8x12-front-6af7fbb242420.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/ae1abf39bb8287765b9e537306d28d30/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af7fc50e2b37.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c959651092cf9f11360c1824be2e1415/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af7fc50e2b9f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/bc5792b00d27020913dbbe276861912f/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af7fc50e2bcb.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/8cb7d96095da49d72f6c691ba5cfca1d/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af7fc50e2be3.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/df71d1ec81da31c1d84829d30f9db9ee/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af7fc50e2bf8.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2f95aa122364ef008102c87a2c679cc4/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af7fc50e2c0b.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/50ce05aa506a4d662e107c52d2c51d79/framed-canvas-(in)-black-12x18-front-6af7fc59e3630.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/45460e8fcbc89d98fcc78f9f1a3eb360/framed-canvas-(in)-white-12x18-front-6af7fc59e3697.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3f11f3f84a3d031c00df31fb2d9de612/framed-canvas-(in)-black-20x30-front-6af7fcbc202f7.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3ef51c5eb5d4fcaeeb5bf775ed908227/framed-canvas-(in)-white-20x30-front-6af7fcbc20362.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/abbba42fcfda74e1f7b9926c56e3824d/framed-canvas-(in)-black-24x36-front-6af7fd67abd66.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/728f90f6b333d33bd2e30fb923502b10/framed-canvas-(in)-white-24x36-front-6af7fd67abdc2.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-downtown-time:2026"
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 0
+ }
+}

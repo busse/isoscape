@@ -1,0 +1,151 @@
+{
+ "design": "lm-philadelphia-museum-of-art",
+ "title": "Philadelphia Museum of Art",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:46+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-philadelphia-museum-of-art   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 philadelphia-museum-of-art   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -3010.13,
+    -1709.58,
+    5977.16,
+    3432.47
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 2.55,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-philadelphia-museum-of-art",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-philadelphia-museum-of-art.svg",
+   "sha256": "d6a55abf9d688c8e9c2d8df1be582907800ea5719f3521b66f47708852fe3f40",
+   "frozen": "data/_releases/scenes/d6a55abf9d688c8e9c2d8df1be582907800ea5719f3521b66f47708852fe3f40.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-philadelphia-museum-of-art.json": "1f7e84aa32dc1d821edfa3dbb7f7b998f962c887a04b90b6a2e70ecc3552ede1"
+ },
+ "data": {
+  "lm-philadelphia-museum-of-art": {
+   "snapshot": "data/_releases/lm-philadelphia-museum-of-art@c99e4ea0f4c3",
+   "files": {
+    "dem.bin.gz": "66feb7438690f260669668e3ad85c0451231d0c10c2fbb7cc17ce425eb90fb5b",
+    "osm.json": "03b1260c5b51fafe0ef2b0e4d74345938219edd76dabbec00d6da4016a29317f"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-philadelphia-museum-of-art_36x24.jpg",
+   "sha256": "aad9f22e517b91d35d7188872601f7b7ae50b9087fcab26071e95106de757450",
+   "bytes": 3466706,
+   "printful_file_id": 1111390914
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-philadelphia-museum-of-art_canvas-18x12.jpg",
+    "sha256": "d5ffd8b769dd6c950f68eae84c6b48fc596229cff7d5803b8c55b55c0a2a82f2",
+    "bytes": 1245077,
+    "printful_file_id": 1111391015
+   },
+   {
+    "file": "print-files/landmarks/lm-philadelphia-museum-of-art_canvas-30x20.jpg",
+    "sha256": "2e921af2bbb0ec7ef65d3249cc240b77e82baaf5b212a8cb2331a670c6f4a280",
+    "bytes": 2388546,
+    "printful_file_id": 1111391102
+   },
+   {
+    "file": "print-files/landmarks/lm-philadelphia-museum-of-art_canvas-36x24.jpg",
+    "sha256": "84eac0acc15a38ab7db9cd9e5039fae8e9e50e79dadaf55478ff955838d5aa28",
+    "bytes": 3078411,
+    "printful_file_id": 1111391187
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Philadelphia Museum of Art",
+   "place": "Philadelphia",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-philadelphia-museum-of-art_36x24.jpg",
+   "canvas": "lm-philadelphia-museum-of-art_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "philadelphia-museum-of-art-print",
+    "id": "gid://shopify/Product/9133044170870",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "philadelphia-museum-of-art-framed-print",
+    "id": "gid://shopify/Product/9133044269174",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "philadelphia-museum-of-art-framed-canvas",
+    "id": "gid://shopify/Product/9133044400246",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9e9792b4b74e9e429a9c323ec0f9d412/enhanced-matte-paper-poster-(in)-12x18-front-6af826892a2b7.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/0fb65c7b2f8c125b6e311ef440dc1f88/enhanced-matte-paper-poster-(in)-20x30-front-6af826892a312.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9b9d66e661390cb99ddd20a545b10a2e/enhanced-matte-paper-poster-(in)-24x36-front-6af826892a32f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/e6c34463357f4f1c6067a5474314f730/enhanced-matte-paper-poster-(in)-8x12-front-6af826892a347.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2e7ad574ff000dc85ea0c66d20fa4941/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af826892ee7e.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/456077752a0594d7f5635de07fa9f5a1/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af826892eee3.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/dbb10f04466c92e70df82cb46948864e/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af826892ef01.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7f58bfd91dfc396c7067de7bc5c2010c/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af826892ef18.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7e158cc7e82056dc700bba6fad30e0f2/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af826892ef2d.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/d49bb6ddb4f11071400034a7295c18f8/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af826892ef40.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/5b28fe264b5dec0c96fa5a88d2ad0071/framed-canvas-(in)-black-24x36-front-6af826e57f646.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a4da23d32e9d74f1b2d69d10ba805d4b/framed-canvas-(in)-white-24x36-front-6af826e57f80c.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

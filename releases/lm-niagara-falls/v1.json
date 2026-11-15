@@ -1,0 +1,145 @@
+{
+ "design": "lm-niagara-falls",
+ "title": "Niagara Falls",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:51+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-niagara-falls   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 niagara-falls   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -3014.65,
+    -1688.02,
+    5977.45,
+    3432.64
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.75,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-niagara-falls",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-niagara-falls.svg",
+   "sha256": "4aa905fd86714e101d567cb72446cda1382af94514bd4d4dacba1d6653958f95",
+   "frozen": "data/_releases/scenes/4aa905fd86714e101d567cb72446cda1382af94514bd4d4dacba1d6653958f95.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-niagara-falls.json": "ea214b873c6a558609d8e04ebb09ff6211d3ff7c0b6598dd17f6a1e79047b435"
+ },
+ "data": {
+  "lm-niagara-falls": {
+   "snapshot": "data/_releases/lm-niagara-falls@8bd0727803a3",
+   "files": {
+    "dem.bin.gz": "8727a0dfc1a4157fd9ee253f96776fe8f52ac75a7a3a30f98b30585cd3ac0b9d",
+    "landcover.bin.gz": "c16f632879116cddd84a483f81497b18c0dab3da93b4f8166a546911bf8d8bab",
+    "osm.json": "b926ea2bff92cf4b540b0838d18b6e2e24f56b601e9ed6b991096f5dac60c69e"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-niagara-falls_36x24.jpg",
+   "sha256": "4ee03d25cecafb0b1703e58e9346eb9e9c265121c2bd9976271d6b9e57bdde4a",
+   "bytes": 3042576,
+   "printful_file_id": 1111487250
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-niagara-falls_canvas-18x12.jpg",
+    "sha256": "f17efd6450e674104ec879c0a346867826ef8c06b44a87778e6bc62a675a6d8a",
+    "bytes": 1040212,
+    "printful_file_id": 1111487343
+   },
+   {
+    "file": "print-files/landmarks/lm-niagara-falls_canvas-30x20.jpg",
+    "sha256": "6072e907a824d6ace0077d9b2d8b1ed7620534f10527b2ede76a74935b516265",
+    "bytes": 2049001,
+    "printful_file_id": 1111492737
+   },
+   {
+    "file": "print-files/landmarks/lm-niagara-falls_canvas-36x24.jpg",
+    "sha256": "9b5ae3b0670a29c5e1b631cf70e420dcf95a38f001cf038f711a199b4e39a097",
+    "bytes": 2663057,
+    "printful_file_id": 1111492810
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Niagara Falls",
+   "place": "New York and Ontario",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-niagara-falls_36x24.jpg",
+   "canvas": "lm-niagara-falls_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "niagara-falls-print",
+    "id": "gid://shopify/Product/9133378666614",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "niagara-falls-framed-print",
+    "id": "gid://shopify/Product/9133378699382",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "niagara-falls-framed-canvas",
+    "id": "gid://shopify/Product/9133393215606",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-niagara-falls-print.jpg?v=1794661181"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-niagara-falls-framed-print-black.jpg?v=1794661185",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-niagara-falls-framed-print-white.jpg?v=1794661189"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-niagara-falls-framed-canvas-black.jpg?v=1794661970",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-niagara-falls-framed-canvas-white.jpg?v=1794661974"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

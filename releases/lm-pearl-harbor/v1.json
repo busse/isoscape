@@ -1,0 +1,143 @@
+{
+ "design": "lm-pearl-harbor",
+ "title": "Pearl Harbor",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:53+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-pearl-harbor   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 pearl-harbor   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2958.48,
+    -1574.89,
+    5977.45,
+    3432.64
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.11,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-pearl-harbor",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-pearl-harbor.svg",
+   "sha256": "b873f060c074843920e3aa224624ea79df61c657097a9792cf7000be34e56e80",
+   "frozen": "data/_releases/scenes/b873f060c074843920e3aa224624ea79df61c657097a9792cf7000be34e56e80.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-pearl-harbor.json": "f6e42ffcc4cb4f8ba6db77ccb1af85a34ce6c757ee5b71255814bb36f5bd8b55"
+ },
+ "data": {
+  "lm-pearl-harbor": {
+   "snapshot": "data/_releases/lm-pearl-harbor@c32bcb0626ef",
+   "files": {
+    "osm.json": "26073f9ec6608725e11048fbbb3f2a23b4988a56e6399e3b4ed9cd73d921753d"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-pearl-harbor_36x24.jpg",
+   "sha256": "247386270b6c9982358257bf7bc0b6324d421cf4c60de00914007662a40733a0",
+   "bytes": 1783345,
+   "printful_file_id": 1111579048
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-pearl-harbor_canvas-18x12.jpg",
+    "sha256": "0ab19c49d0a60f25ff384f51f92e8fa5240923e77207d4b136e5cde6f57e5590",
+    "bytes": 647233,
+    "printful_file_id": 1111579117
+   },
+   {
+    "file": "print-files/landmarks/lm-pearl-harbor_canvas-30x20.jpg",
+    "sha256": "c34e39f789b81c4783f87df0a146feec20c54311396060a975871c9f29ed107a",
+    "bytes": 1303002,
+    "printful_file_id": 1111591890
+   },
+   {
+    "file": "print-files/landmarks/lm-pearl-harbor_canvas-36x24.jpg",
+    "sha256": "4243f49c37f87e6dd40831d995c57a6e6ffcba2ee97765dbde9a26d4657f6777",
+    "bytes": 1712864,
+    "printful_file_id": 1111592013
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Pearl Harbor",
+   "place": "Honolulu, Hawaii",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-pearl-harbor_36x24.jpg",
+   "canvas": "lm-pearl-harbor_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "pearl-harbor-print",
+    "id": "gid://shopify/Product/9133950107766",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "pearl-harbor-framed-print",
+    "id": "gid://shopify/Product/9133950173302",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "pearl-harbor-framed-canvas",
+    "id": "gid://shopify/Product/9133989724278",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-pearl-harbor-print.jpg?v=1794671178"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-pearl-harbor-framed-print-black.jpg?v=1794671182",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-pearl-harbor-framed-print-white.jpg?v=1794671186"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-pearl-harbor-framed-canvas-black.jpg?v=1794672121",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-pearl-harbor-framed-canvas-white.jpg?v=1794672125"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

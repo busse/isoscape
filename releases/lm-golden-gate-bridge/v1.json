@@ -1,0 +1,144 @@
+{
+ "design": "lm-golden-gate-bridge",
+ "title": "Golden Gate Bridge",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:51+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-golden-gate-bridge   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 golden-gate-bridge   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2979.69,
+    -2021.85,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.94,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-golden-gate-bridge",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-golden-gate-bridge.svg",
+   "sha256": "e90de0a2b809e9f69820647858d75907f3b6f3704fa03b85b296b7c69f2e0ab8",
+   "frozen": "data/_releases/scenes/e90de0a2b809e9f69820647858d75907f3b6f3704fa03b85b296b7c69f2e0ab8.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-golden-gate-bridge.json": "23e79e215912f28ffa26e5ce9a17b70f9c5c076994a5f7f79f58caf5cdb3c378"
+ },
+ "data": {
+  "lm-golden-gate-bridge": {
+   "snapshot": "data/_releases/lm-golden-gate-bridge@dedc56d19a2a",
+   "files": {
+    "dem.bin.gz": "d2911582057170a67dfc3b717e21f4f19eb0306cf812a4bbebc16862fa51f165",
+    "osm.json": "c457a359c56aebc327fe7e1b450aeaffc68406d3c94c86fd82cfe999dd3f5ec4"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-golden-gate-bridge_36x24.jpg",
+   "sha256": "e04c1971aaa0cac205421cc91e55177233b27001d5297139eab686b17e3fbf52",
+   "bytes": 2514120,
+   "printful_file_id": 1111602696
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-golden-gate-bridge_canvas-18x12.jpg",
+    "sha256": "24d9e395a168ecdd50c5d4ef4f52753928c52cd56737aa7c69b5997fe3fcee80",
+    "bytes": 785472,
+    "printful_file_id": 1111602825
+   },
+   {
+    "file": "print-files/landmarks/lm-golden-gate-bridge_canvas-30x20.jpg",
+    "sha256": "fec038ed7382cb8eb1ce6ad4a049e1574dc64171ce18737b060454d9561df522",
+    "bytes": 1645558,
+    "printful_file_id": 1111602931
+   },
+   {
+    "file": "print-files/landmarks/lm-golden-gate-bridge_canvas-36x24.jpg",
+    "sha256": "e8dcade04953d2bafb56885e64faf25a94b992242cb28de5521f25437c619c59",
+    "bytes": 2201496,
+    "printful_file_id": 1111602988
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Golden Gate Bridge",
+   "place": "San Francisco",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-golden-gate-bridge_36x24.jpg",
+   "canvas": "lm-golden-gate-bridge_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "golden-gate-bridge-print",
+    "id": "gid://shopify/Product/9133296681078",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "golden-gate-bridge-framed-print",
+    "id": "gid://shopify/Product/9133296844918",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "golden-gate-bridge-framed-canvas",
+    "id": "gid://shopify/Product/9133297139830",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-print.jpg?v=1794673202"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-framed-print-black.jpg?v=1794673206",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-framed-print-white.jpg?v=1794673211"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-framed-canvas-black.jpg?v=1794673215",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-golden-gate-bridge-framed-canvas-white.jpg?v=1794673219"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

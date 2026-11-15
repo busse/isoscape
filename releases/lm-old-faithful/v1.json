@@ -1,0 +1,145 @@
+{
+ "design": "lm-old-faithful",
+ "title": "Old Faithful",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:52+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-old-faithful   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 old-faithful   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2988.33,
+    -1811.91,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.81,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-old-faithful",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-old-faithful.svg",
+   "sha256": "3a7e43a7288d532b68f7a317466ce145d3b53d81fb9b6af5fd765ad8ec62106d",
+   "frozen": "data/_releases/scenes/3a7e43a7288d532b68f7a317466ce145d3b53d81fb9b6af5fd765ad8ec62106d.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-old-faithful.json": "db172c598a8187d448b792e244803afc3cb6ed4361705baa07e6a1dfac1730d8"
+ },
+ "data": {
+  "lm-old-faithful": {
+   "snapshot": "data/_releases/lm-old-faithful@a1a0489edf0b",
+   "files": {
+    "dem.bin.gz": "6e11c20a73adab25d3148af86aeab453fab3bb70eb259b9d0635749bdeb63f32",
+    "landcover.bin.gz": "74287e154a74552a86140c1ab55547f6254c4000590a3e3504a8dd019e238b46",
+    "osm.json": "b0ae071512dd153b8f67bbe98c356ff1d17b638d664581c05f5fc115740f2986"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-old-faithful_36x24.jpg",
+   "sha256": "0e2c66b8dc15acb1cc9013646baed0f9d4f7d1c0895dc5e8945bc37e15e2b2f2",
+   "bytes": 2192977,
+   "printful_file_id": 1111510507
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-old-faithful_canvas-18x12.jpg",
+    "sha256": "3d78bbaab6061fe3de2f7fd169191e501016ae20c3268492de128e9d5519016b",
+    "bytes": 721460,
+    "printful_file_id": 1111510599
+   },
+   {
+    "file": "print-files/landmarks/lm-old-faithful_canvas-30x20.jpg",
+    "sha256": "f1e5804209be519a05ede154cd1e97bcfea23ae697687c05e61458ce684ecb96",
+    "bytes": 1491813,
+    "printful_file_id": 1111516893
+   },
+   {
+    "file": "print-files/landmarks/lm-old-faithful_canvas-36x24.jpg",
+    "sha256": "e59f6bcf263efc11d4da0243d80aac5990154cbbd2d35477852811c5fedf4b7a",
+    "bytes": 1966171,
+    "printful_file_id": 1111517040
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Old Faithful",
+   "place": "Yellowstone National Park",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-old-faithful_36x24.jpg",
+   "canvas": "lm-old-faithful_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "old-faithful-print",
+    "id": "gid://shopify/Product/9133508526198",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "old-faithful-framed-print",
+    "id": "gid://shopify/Product/9133508558966",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "old-faithful-framed-canvas",
+    "id": "gid://shopify/Product/9133567705206",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-print.jpg?v=1794664109"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-framed-print-black.jpg?v=1794664113",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-framed-print-white.jpg?v=1794664118"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-framed-canvas-black.jpg?v=1794664785",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-old-faithful-framed-canvas-white.jpg?v=1794664789"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

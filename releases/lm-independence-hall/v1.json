@@ -1,0 +1,151 @@
+{
+ "design": "lm-independence-hall",
+ "title": "Independence Hall",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:46+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-independence-hall   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 independence-hall   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2984.11,
+    -1700.38,
+    5976.96,
+    3432.35
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.9,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-independence-hall",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-independence-hall.svg",
+   "sha256": "57f210df88791a5add13058629f36cd789b96bb3de45f7236e164695c62f97f6",
+   "frozen": "data/_releases/scenes/57f210df88791a5add13058629f36cd789b96bb3de45f7236e164695c62f97f6.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-independence-hall.json": "88ed8c55d94154b1a2bf092243c2b5809c6d07abe656c696233979f8c6f978bb"
+ },
+ "data": {
+  "lm-independence-hall": {
+   "snapshot": "data/_releases/lm-independence-hall@3d76890acb1e",
+   "files": {
+    "dem.bin.gz": "5d90914b5a865ec4671fa25870720b346bf56d0f465370acd3a9652011cd1821",
+    "osm.json": "3aaa653191c8bd39b2ae5bc7534b1f42d54c0ec3f41cab5d6cc7e399606c1bae"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-independence-hall_36x24.jpg",
+   "sha256": "2567dcacdd6cac40736c940e4f8b400437db3a95f4c7e913ff7c1192424e1f6b",
+   "bytes": 2777665,
+   "printful_file_id": 1111390575
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-independence-hall_canvas-18x12.jpg",
+    "sha256": "ddf8def45084364b91c15dbad5006346f6ea1a96372dc8248b5b974da4fb905f",
+    "bytes": 1059202,
+    "printful_file_id": 1111390663
+   },
+   {
+    "file": "print-files/landmarks/lm-independence-hall_canvas-30x20.jpg",
+    "sha256": "23b10919d0842d24236f38d4cd81dca38aa7d55531561c8c1588778ffd4bdbbd",
+    "bytes": 2015283,
+    "printful_file_id": 1111390732
+   },
+   {
+    "file": "print-files/landmarks/lm-independence-hall_canvas-36x24.jpg",
+    "sha256": "c559d39917bb58efaa7644c465f69da4323dedd92f4078d0d7865fa3b7813e46",
+    "bytes": 2591649,
+    "printful_file_id": 1111390827
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Independence Hall",
+   "place": "Philadelphia",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-independence-hall_36x24.jpg",
+   "canvas": "lm-independence-hall_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "independence-hall-print",
+    "id": "gid://shopify/Product/9133043843190",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "independence-hall-framed-print",
+    "id": "gid://shopify/Product/9133043908726",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "independence-hall-framed-canvas",
+    "id": "gid://shopify/Product/9133044039798",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/d038a73d9edd73caef3d316e82299cc6/enhanced-matte-paper-poster-(in)-12x18-front-6af8246988c7c.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7f4843fed2ce9e9ea55a30202089db01/enhanced-matte-paper-poster-(in)-20x30-front-6af8246988df3.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2f072c416bcff513aab623c3247b4c21/enhanced-matte-paper-poster-(in)-24x36-front-6af8246988e18.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c50ee7dc11c37dbe7121955fe884bcd2/enhanced-matte-paper-poster-(in)-8x12-front-6af8246988e31.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/d20bb9a3284e64ec5c77d49f7eb2bc07/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af8263a09386.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f69d1a6a8322b56ad24b45e9ff939e53/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af8263a09525.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/564ff3684d509356991b7f0ca827762f/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af8263a0954f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2e65c02ac687f3768fb3c9fc0233ba89/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af8263a09569.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/24dfd003add946ad417a2c43455995a5/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af8263a0957f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/60205b4f5ca6fb156a09ae0b7ff53128/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af8263a09593.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/20a77dcb9b487bdac7fc9de562933d74/framed-canvas-(in)-black-24x36-front-6af8263ba0c2b.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/a2051faec4f754b962693a0ed2a9cf1f/framed-canvas-(in)-white-24x36-front-6af8263ba0c89.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "design": "lm-mount-st-helens",
+ "title": "Mount St. Helens",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:52+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-mount-st-helens   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 mount-st-helens   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2271.57,
+    -2376.54,
+    4543.13,
+    2606.81
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.36,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-mount-st-helens",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-mount-st-helens.svg",
+   "sha256": "c9e0d2adbcf69417df9315aae1523386492d8bddec15e8eb7d4f1626921176b4",
+   "frozen": "data/_releases/scenes/c9e0d2adbcf69417df9315aae1523386492d8bddec15e8eb7d4f1626921176b4.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-mount-st-helens.json": "7b347842eaf57b4f5045fdb39c1f94df488caa834019843e80cbf032874facbc"
+ },
+ "data": {
+  "lm-mount-st-helens": {
+   "snapshot": "data/_releases/lm-mount-st-helens@982e9b77d982",
+   "files": {
+    "dem.bin.gz": "3d216e43fe41ef6c2812fdd64a28e6e8dea56eee2ad85d2518279a5ab21be5d3",
+    "landcover.bin.gz": "fbac295fcc10f3216395662d3db04d8b13825cb797169535ee95c95d5a0e58c2",
+    "osm.json": "5c424f11e125f10eeabb5f93f70f38b458715cdc8b7d691201ac2a6f663654fe"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-mount-st-helens_36x24.jpg",
+   "sha256": "5f2b343b4451d08171428275cc758c78fa02c76a537875a587074d928020803f",
+   "bytes": 2173833,
+   "printful_file_id": 1111578685
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-mount-st-helens_canvas-18x12.jpg",
+    "sha256": "7312479bc43b11125fa965640bc235651cb6be5f009145c3eb9116be5ac85d41",
+    "bytes": 706494,
+    "printful_file_id": 1111578779
+   },
+   {
+    "file": "print-files/landmarks/lm-mount-st-helens_canvas-30x20.jpg",
+    "sha256": "5968f1ba47ad9f9706ce817f338ce9ae9d2986f8fe00db2504bb6a3fbc1860a3",
+    "bytes": 1432922,
+    "printful_file_id": 1111578914
+   },
+   {
+    "file": "print-files/landmarks/lm-mount-st-helens_canvas-36x24.jpg",
+    "sha256": "917d74635c3eb37b25911c08c3b1d929b513707364b0963824e0400d1e9c001f",
+    "bytes": 1908420,
+    "printful_file_id": 1111578975
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Mount St. Helens",
+   "place": "Washington",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-mount-st-helens_36x24.jpg",
+   "canvas": "lm-mount-st-helens_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "mount-st-helens-print",
+    "id": "gid://shopify/Product/9133456457846",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "mount-st-helens-framed-print",
+    "id": "gid://shopify/Product/9133456654454",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "mount-st-helens-framed-canvas",
+    "id": "gid://shopify/Product/9133508231286",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-st-helens-print_131e8608-291d-40e4-bd95-ca9824c92911.jpg?v=1794670128"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-st-helens-framed-print-black_d7260e40-9219-48aa-b337-be69b884c0fb.jpg?v=1794670132",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-st-helens-framed-print-white_d66d7562-b6d0-4a70-ab56-70c461613c53.jpg?v=1794670136"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-st-helens-framed-canvas-black_bbe8e66e-8bd1-4dac-a18d-897425afbe22.jpg?v=1794670141",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-mount-st-helens-framed-canvas-white_7c40a749-3370-4e9b-b992-d456c5898923.jpg?v=1794670145"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

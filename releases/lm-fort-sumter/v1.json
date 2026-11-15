@@ -1,0 +1,144 @@
+{
+ "design": "lm-fort-sumter",
+ "title": "Fort Sumter",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:53+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-fort-sumter   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 fort-sumter   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -3022.89,
+    -1533.15,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 0.66,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-fort-sumter",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-fort-sumter.svg",
+   "sha256": "837e721b580f248b758aac960e82d7ab30b37569a0d1e195ee5c2414c27c7b31",
+   "frozen": "data/_releases/scenes/837e721b580f248b758aac960e82d7ab30b37569a0d1e195ee5c2414c27c7b31.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-fort-sumter.json": "0971c779d262755b44e9c1645c68052974ab074c4815b4c58cadc3e40b2273e5"
+ },
+ "data": {
+  "lm-fort-sumter": {
+   "snapshot": "data/_releases/lm-fort-sumter@5ae1f93e5f23",
+   "files": {
+    "dem.bin.gz": "4cae12189a23764df97ea921e0a0bcb7eb9af14f075b51c988c6bd1a26120c9f",
+    "osm.json": "0475e794ab73aa7a63939577b23acabd6fe6ba6f901f82252e5bb0f854d9b3fc"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-fort-sumter_36x24.jpg",
+   "sha256": "47c1f481a1d9aed60d7c942f6f266c1be87e6709591385bab234dfd9a4b1762d",
+   "bytes": 603681,
+   "printful_file_id": 1111581491
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-fort-sumter_canvas-18x12.jpg",
+    "sha256": "b82fc8619c5f996bbac671bed1e3d3ebc031594a69c30db37adff8e7932fba47",
+    "bytes": 310626,
+    "printful_file_id": 1111581584
+   },
+   {
+    "file": "print-files/landmarks/lm-fort-sumter_canvas-30x20.jpg",
+    "sha256": "2b9380b3a02fce2033dee81335742c251e037a081f8c12903d9bb39ea1fcd8f3",
+    "bytes": 611990,
+    "printful_file_id": 1111581732
+   },
+   {
+    "file": "print-files/landmarks/lm-fort-sumter_canvas-36x24.jpg",
+    "sha256": "e452deb334db1394858805e7e973c55adbc0c418ba00c7889f24753aff1a5545",
+    "bytes": 801409,
+    "printful_file_id": 1111581881
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Fort Sumter",
+   "place": "Charleston Harbor, South Carolina",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-fort-sumter_36x24.jpg",
+   "canvas": "lm-fort-sumter_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "fort-sumter-print",
+    "id": "gid://shopify/Product/9133950238838",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "fort-sumter-framed-print",
+    "id": "gid://shopify/Product/9133989822582",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "fort-sumter-framed-canvas",
+    "id": "gid://shopify/Product/9133989888118",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-print.jpg?v=1794671191"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-framed-print-black.jpg?v=1794672130",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-framed-print-white.jpg?v=1794672134"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-framed-canvas-black.jpg?v=1794672138",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-fort-sumter-framed-canvas-white_65791c40-7141-4bda-a8a2-af7ddcdcc870.jpg?v=1794672147"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

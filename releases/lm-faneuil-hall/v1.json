@@ -1,0 +1,151 @@
+{
+ "design": "lm-faneuil-hall",
+ "title": "Faneuil Hall",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:47+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-faneuil-hall   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 faneuil-hall   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2988.43,
+    -1738.16,
+    5976.96,
+    3432.35
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.95,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-faneuil-hall",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-faneuil-hall.svg",
+   "sha256": "9a26ea418629fd1f388c8d9777bb6e459ba114538f4a49c24ed73bba4aa1fe40",
+   "frozen": "data/_releases/scenes/9a26ea418629fd1f388c8d9777bb6e459ba114538f4a49c24ed73bba4aa1fe40.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-faneuil-hall.json": "96fbeef993dca3eee9e668c99277115243764797c482a1a80c4c0a672cc8b4d6"
+ },
+ "data": {
+  "lm-faneuil-hall": {
+   "snapshot": "data/_releases/lm-faneuil-hall@c6d1b1309559",
+   "files": {
+    "dem.bin.gz": "2baa38d1af0a509986b359c4062e8618eb53acdcbde7bf4ac66e572aafc532ba",
+    "osm.json": "c929f7fc5361f06afe932221a400f751e58f58b8c72fea9f0cfdfd64375e06d5"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-faneuil-hall_36x24.jpg",
+   "sha256": "7df9d935684462e140e36f71d77a6ffdd389e2f3a8618a4368f5d9e9cc06f674",
+   "bytes": 2024925,
+   "printful_file_id": 1111389906
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-faneuil-hall_canvas-18x12.jpg",
+    "sha256": "a35cff6de31433dfdd8fc45ee23653ed20cd78c962bdec765d4c962245fd9221",
+    "bytes": 888168,
+    "printful_file_id": 1111389991
+   },
+   {
+    "file": "print-files/landmarks/lm-faneuil-hall_canvas-30x20.jpg",
+    "sha256": "84222cda94978433c1d607c2691e39b2198b72679aab0f005de1fe82f1546d77",
+    "bytes": 1611391,
+    "printful_file_id": 1111390147
+   },
+   {
+    "file": "print-files/landmarks/lm-faneuil-hall_canvas-36x24.jpg",
+    "sha256": "0e3c4a467feb4a33d018f9809aafa62ccd1e0566962ca0692f0c6859118150db",
+    "bytes": 2041350,
+    "printful_file_id": 1111390289
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Faneuil Hall",
+   "place": "Boston",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-faneuil-hall_36x24.jpg",
+   "canvas": "lm-faneuil-hall_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "faneuil-hall-print",
+    "id": "gid://shopify/Product/9133044564086",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "faneuil-hall-framed-print",
+    "id": "gid://shopify/Product/9133101121654",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "faneuil-hall-framed-canvas",
+    "id": "gid://shopify/Product/9133101219958",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9b989a59ebb62fd2511eb013be0105e1/enhanced-matte-paper-poster-(in)-12x18-front-6af826e527682.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9b6a7e029f4e5c4d6b66bd7b58d1e63f/enhanced-matte-paper-poster-(in)-20x30-front-6af826e5276e9.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/0c9ffc454a6adbcf9a97f21b9c9fc59c/enhanced-matte-paper-poster-(in)-24x36-front-6af826e527708.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/23738be71a5ebe1b7bdf42313274bf39/enhanced-matte-paper-poster-(in)-8x12-front-6af826e527721.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3b8be62f4508a274a7e228a7eddd7c9a/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af828b8750bd.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/f86eb3e6cba92c45c8b9c40fdee4c5e2/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af828b87522f.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/b460da7f6a1b8f84d551eb521819c785/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af828b875254.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/4a9c7ef7ff4fe4e6064825889ebdc0f8/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af828b87526d.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/c35cca29c853957adbaca01fde22cd66/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af828b875283.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/0638afc7faf81352aa5c6ffb4f4447fc/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af828b875297.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2ebd3e7d4e48e31eebe7899a9d747100/framed-canvas-(in)-black-24x36-front-6af828b9a8abd.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/3d52888a674d12aa72659e31968c6e40/framed-canvas-(in)-white-24x36-front-6af828b9a8b2b.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

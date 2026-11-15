@@ -1,0 +1,89 @@
+{
+ "design": "richmond-james-2026",
+ "title": "The James, I-195 to Rocketts Landing",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:14:42+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "42e7fdb9a737e41523725244b18706196ecc8d86",
+  "subject": "Release records freeze each scene SVG by hash and pin a scene's own commit; check.py resumes rebuilds within a time budget",
+  "dirty": false
+ },
+ "kind": "compose",
+ "recipe": {
+  "tool": "tools/print/compose.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <out> --only richmond-james-2026"
+  ],
+  "pinned": "panels use the builds named in scenes[].build, not the newest"
+ },
+ "scenes": [
+  {
+   "region": "richmond-i195-rocketts",
+   "year": null,
+   "flags": [],
+   "svg": "out/builds/20261113-230836-richmond-i195-rocketts/image.svg",
+   "sha256": "35511bfda0a84bc31299b195bde4dea49c3c21ed5824e9fa182a8ad3e31f8dce",
+   "frozen": "data/_releases/scenes/35511bfda0a84bc31299b195bde4dea49c3c21ed5824e9fa182a8ad3e31f8dce.svg",
+   "build": "20261113-230836-richmond-i195-rocketts",
+   "commit": "73e1696",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "7454855d277d47779f8b7b9a457322e74d488766f2ae7747e5f320e59e1baceb",
+  "regions/richmond-i195-rocketts.json": "67978d5b99c9f6adbc8eb86fa3721cfacf877c703243c916e361a6b2794b603f"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/richmond-james-2026_24x10.jpg",
+   "sha256": "acb2011556e6d799e508c40e1215beed4268e0ca9f6acd0cf731f0aafe844bf4",
+   "bytes": 2356171,
+   "printful_file_id": 1111724215
+  },
+  "canvas": []
+ },
+ "store": {
+  "catalog": {
+   "title": "The James, I-195 to Rocketts Landing",
+   "place": "Richmond",
+   "orientation": "horizontal",
+   "modern": true,
+   "formats": [
+    "Panorama Print"
+   ],
+   "print": "richmond-james-2026_24x10.jpg",
+   "explore": "richmond-i195-rocketts"
+  },
+  "products": [
+   {
+    "handle": "the-james-i-195-to-rocketts-landing-panorama-print",
+    "id": "gid://shopify/Product/9134767767670",
+    "format": "Panorama Print",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Panorama Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-james-2026-panorama-print.jpg?v=1794684472"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-i195-rocketts"
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 1
+ }
+}

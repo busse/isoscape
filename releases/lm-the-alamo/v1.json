@@ -1,0 +1,144 @@
+{
+ "design": "lm-the-alamo",
+ "title": "The Alamo",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:51+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-the-alamo   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 the-alamo   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -3001.39,
+    -1816.95,
+    5976.96,
+    3432.35
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.87,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-the-alamo",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-the-alamo.svg",
+   "sha256": "6f34447655452116ce82d4d72cbc9819a90d303f0fccf3e7a653edcb363d82bd",
+   "frozen": "data/_releases/scenes/6f34447655452116ce82d4d72cbc9819a90d303f0fccf3e7a653edcb363d82bd.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-the-alamo.json": "4bfd3bcbff644b4289e1fac90a6160ba6d4860acf7aa5f722ece0633a4759a00"
+ },
+ "data": {
+  "lm-the-alamo": {
+   "snapshot": "data/_releases/lm-the-alamo@d4ff4e3c4def",
+   "files": {
+    "dem.bin.gz": "b69b64e8318abef16db0afedd2827aecc5b6a12c1266f10bed944ec7efb099b0",
+    "osm.json": "8fe13c7268d23eba6ee29f3c08c3a4a7f7fcaabd85aaecb303d7dfa9006de7d3"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-the-alamo_36x24.jpg",
+   "sha256": "abb0f07010ce1d8daaa117e51de3631b127f9594a8cf33a72bf093e389759592",
+   "bytes": 2078530,
+   "printful_file_id": 1111462344
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-the-alamo_canvas-18x12.jpg",
+    "sha256": "79eb84037300657127c6068b9e2931a1a584279afce92c692a7908d81779024a",
+    "bytes": 832476,
+    "printful_file_id": 1111462417
+   },
+   {
+    "file": "print-files/landmarks/lm-the-alamo_canvas-30x20.jpg",
+    "sha256": "54d0d9be59a800df537d94c9682a333b1e21b81f29328ee5fd68d8b5248452cb",
+    "bytes": 1546397,
+    "printful_file_id": 1111468022
+   },
+   {
+    "file": "print-files/landmarks/lm-the-alamo_canvas-36x24.jpg",
+    "sha256": "1b41e74879dfd13c3ac48be30b870d6915681a9bc17cb763db0b8deca9b31892",
+    "bytes": 1974682,
+    "printful_file_id": 1111468119
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "The Alamo",
+   "place": "San Antonio",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-the-alamo_36x24.jpg",
+   "canvas": "lm-the-alamo_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "the-alamo-print",
+    "id": "gid://shopify/Product/9133283672182",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "the-alamo-framed-print",
+    "id": "gid://shopify/Product/9133283704950",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "the-alamo-framed-canvas",
+    "id": "gid://shopify/Product/9133284524150",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-print.jpg?v=1794657566"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-framed-print-black.jpg?v=1794657570",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-framed-print-white.jpg?v=1794657574"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-framed-canvas-black.jpg?v=1794658369",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-the-alamo-framed-canvas-white.jpg?v=1794658373"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

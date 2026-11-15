@@ -1,0 +1,143 @@
+{
+ "design": "lm-statue-of-liberty",
+ "title": "Statue of Liberty",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:44+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-statue-of-liberty   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 statue-of-liberty   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2993.08,
+    -1788.91,
+    5675.06,
+    3259.7
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 0.83,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-statue-of-liberty",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-statue-of-liberty.svg",
+   "sha256": "d56a56cab6d2b03de87550f079bd1e349c91ccdc6c6b73790cd0ebc79966a03e",
+   "frozen": "data/_releases/scenes/d56a56cab6d2b03de87550f079bd1e349c91ccdc6c6b73790cd0ebc79966a03e.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-statue-of-liberty.json": "88042073ef8bb3a279bc8781b1d7934eb13485b08f86ad4b48323d108880db8b"
+ },
+ "data": {
+  "lm-statue-of-liberty": {
+   "snapshot": "data/_releases/lm-statue-of-liberty@8f9528cf1947",
+   "files": {
+    "osm.json": "91dcd25d83ab58e03102f7af8df5ec7021d87a7e52d4291c9694ad985b393779"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-statue-of-liberty_36x24.jpg",
+   "sha256": "e8f9392e79b40c40271b81df5db7f6644b171267d5aee2dc8ce9cf2bc3f171f1",
+   "bytes": 1524428,
+   "printful_file_id": 1111718110
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-statue-of-liberty_canvas-18x12.jpg",
+    "sha256": "235070a035d5b73ed692f888af38fab90718d4724d39d30fab943d8ceeb934be",
+    "bytes": 544002,
+    "printful_file_id": 1111718284
+   },
+   {
+    "file": "print-files/landmarks/lm-statue-of-liberty_canvas-30x20.jpg",
+    "sha256": "67550a761489e2237a4c2a2209e83567e4ebaeb4ccfa1b479e6795a5e750d651",
+    "bytes": 1090400,
+    "printful_file_id": 1111718414
+   },
+   {
+    "file": "print-files/landmarks/lm-statue-of-liberty_canvas-36x24.jpg",
+    "sha256": "b7bf6cc9722ffc603d9f4638b0926950aa89d1d810df58c9247b22a66c8ae940",
+    "bytes": 1458161,
+    "printful_file_id": 1111718517
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Statue of Liberty",
+   "place": "New York Harbor",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-statue-of-liberty_36x24.jpg",
+   "canvas": "lm-statue-of-liberty_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "statue-of-liberty-print",
+    "id": "gid://shopify/Product/9132840222838",
+    "format": "Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "statue-of-liberty-framed-print",
+    "id": "gid://shopify/Product/9132840321142",
+    "format": "Framed Print",
+    "status": "ACTIVE"
+   },
+   {
+    "handle": "statue-of-liberty-framed-canvas",
+    "id": "gid://shopify/Product/9132840353910",
+    "format": "Framed Canvas",
+    "status": "ACTIVE"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-print.jpg?v=1794684017"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-framed-print-black.jpg?v=1794684021",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-framed-print-white.jpg?v=1794684025"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-framed-canvas-black.jpg?v=1794684030",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-statue-of-liberty-framed-canvas-white.jpg?v=1794684034"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

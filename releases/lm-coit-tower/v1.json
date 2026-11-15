@@ -1,0 +1,144 @@
+{
+ "design": "lm-coit-tower",
+ "title": "Coit Tower",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:48+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-coit-tower   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 coit-tower   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2646.85,
+    -1977.15,
+    5298.13,
+    3042.9
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 0.7,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-coit-tower",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-coit-tower.svg",
+   "sha256": "4ce9ecd75621ff2e31b6d5b3064d1d812cd4b2b892c6c13b95f3dd92f8e78fb7",
+   "frozen": "data/_releases/scenes/4ce9ecd75621ff2e31b6d5b3064d1d812cd4b2b892c6c13b95f3dd92f8e78fb7.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-coit-tower.json": "dd7e3cc4682c1fd4577a648423156148623497f43178ad4e049230cf087b196d"
+ },
+ "data": {
+  "lm-coit-tower": {
+   "snapshot": "data/_releases/lm-coit-tower@eb0fc060a92a",
+   "files": {
+    "dem.bin.gz": "8f77b069fc386ac9f5bb7232abc2897ae7227f14a58f55e19a3a29f8b256ef8e",
+    "osm.json": "6b35ad98fb417f245d439d0dd331eae57cc7966332ccaa7270a1348f170342dc"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-coit-tower_36x24.jpg",
+   "sha256": "889d86b05cd67af3d117894808142be7f15beebd76852cca814337965dd62605",
+   "bytes": 3317083,
+   "printful_file_id": 1111550416
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-coit-tower_canvas-18x12.jpg",
+    "sha256": "f4715666757b036f52868d09335c104e2883a2a48903e3929ef59b626717265c",
+    "bytes": 1129430,
+    "printful_file_id": 1111550518
+   },
+   {
+    "file": "print-files/landmarks/lm-coit-tower_canvas-30x20.jpg",
+    "sha256": "95bce4efbf8ffc83c02dc746c70bea1e0e006d20b587584ac136673f98205af4",
+    "bytes": 2309013,
+    "printful_file_id": 1111550694
+   },
+   {
+    "file": "print-files/landmarks/lm-coit-tower_canvas-36x24.jpg",
+    "sha256": "6d6e893d2f6516610fab050eea8c397af4dc90ddc71529f21cea8ac1f09fbbeb",
+    "bytes": 3022254,
+    "printful_file_id": 1111550839
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Coit Tower",
+   "place": "San Francisco",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-coit-tower_36x24.jpg",
+   "canvas": "lm-coit-tower_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "coit-tower-print",
+    "id": "gid://shopify/Product/9133136248950",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "coit-tower-framed-print",
+    "id": "gid://shopify/Product/9133136347254",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "coit-tower-framed-canvas",
+    "id": "gid://shopify/Product/9133136412790",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-coit-tower-print.jpg?v=1794668856"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-coit-tower-framed-print-black.jpg?v=1794668861",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-coit-tower-framed-print-white.jpg?v=1794668865"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-coit-tower-framed-canvas-black.jpg?v=1794668869",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/lm-coit-tower-framed-canvas-white.jpg?v=1794668873"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}

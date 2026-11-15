@@ -1,0 +1,151 @@
+{
+ "design": "lm-bunker-hill",
+ "title": "Bunker Hill Monument",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-15T17:55:47+00:00",
+ "provenance": "reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce",
+ "isoscape": {
+  "commit": "641c8f6b7be61ec05b645067491c44398b5e4b30",
+  "subject": "Landmarks: each print's framing recovered as an explicit window (tools/print/lm_params.json, all 55 matched and checked by eye); lm_compose takes a window; records and remake use it",
+  "dirty": false
+ },
+ "kind": "landmark",
+ "recipe": {
+  "tool": "tools/print/lm_batch_device.py",
+  "run": [
+   "python3 tools/release/remake.py lm-bunker-hill   # restores the frozen scene",
+   "python3 tools/print/lm_batch_device.py 600 bunker-hill   # composes with tools/print/lm_params.json"
+  ],
+  "composer_settings": {
+   "window": [
+    -2979.69,
+    -1661.59,
+    5976.66,
+    3432.18
+   ]
+  },
+  "settings_checked": {
+   "mean_diff": 1.86,
+   "match": true,
+   "checked_by_eye": "2026-11-15"
+  }
+ },
+ "scenes": [
+  {
+   "region": "lm-bunker-hill",
+   "year": null,
+   "flags": [],
+   "svg": "out/landmarks/lm-bunker-hill.svg",
+   "sha256": "61dbbdecffc083b3a3ed287a8e6c608bf9a20c9f1b45946dc1907a3de5842251",
+   "frozen": "data/_releases/scenes/61dbbdecffc083b3a3ed287a8e6c608bf9a20c9f1b45946dc1907a3de5842251.svg",
+   "reproduces": false
+  }
+ ],
+ "inputs": {
+  "tools/print/lm_compose.py": "ceaad77b5b0a3b1f309daf42abb7907dffac4a0814f356da14896cb6937fe3ec",
+  "tools/print/compose.py": "3be5c03747953b93e26699c288d74caa48875b0d2a36041c154a0411fe23f441",
+  "tools/print/lm_params.json": "9aa1688fcec2dd8897c2abba059f1c01b69ab2c97c29b6f62e18ce4d3b0be6e5",
+  "regions/lm-bunker-hill.json": "a8d34526b6b26b56a92bf88740eef59d0175745a5f2ed2af3ccea0d8c2cfbe46"
+ },
+ "data": {
+  "lm-bunker-hill": {
+   "snapshot": "data/_releases/lm-bunker-hill@582f40d2cea7",
+   "files": {
+    "dem.bin.gz": "da835c21285c67362110c9a5f36c70b9fd850905d53e01971f837c51420627fa",
+    "osm.json": "912e88eb1cbc823755589827387d168e4826c9685681f7d50cc2a609d4fce715"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/landmarks/lm-bunker-hill_36x24.jpg",
+   "sha256": "8f2540fe76e4a5cc8c4f986b81d1fe3935f6712a3d671c41f4d243c8715b13f3",
+   "bytes": 3497739,
+   "printful_file_id": 1111400252
+  },
+  "canvas": [
+   {
+    "file": "print-files/landmarks/lm-bunker-hill_canvas-18x12.jpg",
+    "sha256": "708f52dd0cbe011ebba53d1f84b0cf0d1c61fdf88afd8ddc3dfba7a0ed840a1d",
+    "bytes": 1263215,
+    "printful_file_id": 1111400315
+   },
+   {
+    "file": "print-files/landmarks/lm-bunker-hill_canvas-30x20.jpg",
+    "sha256": "58e8ecd65857f0d8a9be9a89ffd0c8788518efb13ed2b758ff77412bc7140ada",
+    "bytes": 2454829,
+    "printful_file_id": 1111400420
+   },
+   {
+    "file": "print-files/landmarks/lm-bunker-hill_canvas-36x24.jpg",
+    "sha256": "d68ff385d9649fc5cbfc66c20375789bf6d79db6a9cdb3bd07149af321517985",
+    "bytes": 3163763,
+    "printful_file_id": 1111400526
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Bunker Hill Monument",
+   "place": "Boston",
+   "orientation": "horizontal",
+   "modern": true,
+   "landmark": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "lm-bunker-hill_36x24.jpg",
+   "canvas": "lm-bunker-hill_canvas-{w}x{h}.jpg"
+  },
+  "products": [
+   {
+    "handle": "bunker-hill-monument-print",
+    "id": "gid://shopify/Product/9133101678710",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "bunker-hill-monument-framed-print",
+    "id": "gid://shopify/Product/9133135724662",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "bunker-hill-monument-framed-canvas",
+    "id": "gid://shopify/Product/9133135757430",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/5126d286fd8fffb9e8a554901e4d7720/enhanced-matte-paper-poster-(in)-12x18-front-6af82cd921e66.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/7a3c9b812d1e2f82890d6a529cb96eb8/enhanced-matte-paper-poster-(in)-20x30-front-6af82cd921fc1.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/e6c0de41760d062ad99730419a313103/enhanced-matte-paper-poster-(in)-24x36-front-6af82cd921fe8.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/61ff54eacc7f233b6a1fd5d7e02e0d3e/enhanced-matte-paper-poster-(in)-8x12-front-6af82cd922002.jpg"
+   ],
+   "Framed Print": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/1b99e89e9bd5c44197166c22472ff1bf/enhanced-matte-paper-framed-poster-(in)-black-12x18-front-6af82e819e062.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/2ff5752f75ab5604b6f3a3beeca65eba/enhanced-matte-paper-framed-poster-(in)-black-20x30-front-6af82e819e0c1.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9718b68331eb1dbf5df152df21a9d654/enhanced-matte-paper-framed-poster-(in)-black-24x36-front-6af82e819e0df.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/823219ccca478a610f8ccff76c5453a8/enhanced-matte-paper-framed-poster-(in)-white-12x18-front-6af82e819e0f7.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/9eb3d31a54ef2c3daef306dca5fb25f8/enhanced-matte-paper-framed-poster-(in)-white-20x30-front-6af82e819e10c.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/1ddfdb8ab97d6e1f7a8bc554449fe022/enhanced-matte-paper-framed-poster-(in)-white-24x36-front-6af82e819e11f.jpg"
+   ],
+   "Framed Canvas": [
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/d770bb62cb4fee0f95ad883fb6509746/framed-canvas-(in)-black-24x36-front-6af82e826316c.jpg",
+    "https://printful-upload.s3-accelerate.amazonaws.com/tmp/22265b6788715ddea7c3df96cd4727ce/framed-canvas-(in)-white-24x36-front-6af82e82631d2.jpg"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 0
+ }
+}
