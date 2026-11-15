@@ -1,0 +1,366 @@
+{
+ "title": "Richmond's streetcar system at its height, 1925",
+ "method": "Today's buildings are dated by OSM start_date or the City of Richmond's recorded year built; buildings since lost downtown come from the 1924–25 Sanborn tracing. The car lines are placed on today's OpenStreetMap streets, following Harland Bartholomew & Associates' plate 'Early Transit Routes, 1888 & 1925' (City Planning Commission, 1943). Curated outlines are placed from today's street intersections and published descriptions; they are not surveyed. Era rules match OSM names, refs and tags; the first match wins.",
+ "present": 2026,
+ "about": "Richmond opened the first practical electric streetcar system in 1888; by the 1920s it reached the suburbs it had created, from Westhampton to Fulton and from Lakeside to Forest Hill Park.",
+ "epochs": [
+  {
+   "year": 1925,
+   "title": "The streetcar city",
+   "note": "Car lines as Harland Bartholomew & Associates mapped them for 1925: within the city limits of the day, with the Lakeside and Westhampton lines running on beyond."
+  }
+ ],
+ "features": [],
+ "rules": [
+  {
+   "where": {
+    "name": "Richmond-Petersburg Turnpike"
+   },
+   "eras": [
+    [
+     1958,
+     null
+    ]
+   ],
+   "note": "Opened 1 July 1958; designated I-95 a month later.",
+   "sources": [
+    "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/interstate-highways"
+   ]
+  },
+  {
+   "where": {
+    "name": "I 95"
+   },
+   "eras": [
+    [
+     1958,
+     null
+    ]
+   ],
+   "sources": [
+    "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/interstate-highways"
+   ]
+  },
+  {
+   "where": {
+    "name": "Downtown Expressway"
+   },
+   "eras": [
+    [
+     1976,
+     null
+    ]
+   ],
+   "note": "Opened 3 February 1976.",
+   "sources": [
+    "https://www.aaroads.com/guides/i-195-va"
+   ]
+  },
+  {
+   "where": {
+    "name": "VA 195"
+   },
+   "eras": [
+    [
+     1976,
+     null
+    ]
+   ],
+   "sources": [
+    "https://www.aaroads.com/guides/i-195-va"
+   ]
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "motorway",
+     "motorway_link"
+    ]
+   },
+   "eras": [
+    [
+     1958,
+     null
+    ]
+   ],
+   "note": "Unnamed ramps are dated with I-95."
+  },
+  {
+   "where": {
+    "name": "Manchester Bridge"
+   },
+   "eras": [
+    [
+     1973,
+     null
+    ]
+   ],
+   "note": "The 9th Street (Manchester) Bridge was completed in 1973.",
+   "sources": [
+    "https://rvamag.com/news/community/rva-5x5-the-history-of-the-mayo-bridge.html"
+   ]
+  },
+  {
+   "where": {
+    "name": "Leigh Street Viaduct"
+   },
+   "eras": [
+    [
+     1976,
+     null
+    ]
+   ],
+   "sources": [
+    "https://roadstothefuture.com/Richmond_Aerial.html"
+   ]
+  },
+  {
+   "where": {
+    "name": "Mayo Bridge"
+   },
+   "eras": [
+    [
+     1788,
+     null
+    ]
+   ],
+   "note": "A bridge has stood here since John Mayo Jr.'s of 1788; today's dates from 1913.",
+   "sources": [
+    "https://historicrichmond.com/property/mayo-bridge/"
+   ]
+  },
+  {
+   "where": {
+    "name": "Canal Walk"
+   },
+   "eras": [
+    [
+     1999,
+     null
+    ]
+   ],
+   "sources": [
+    "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf"
+   ]
+  },
+  {
+   "where": {
+    "name": "Floodwall"
+   },
+   "eras": [
+    [
+     1994,
+     null
+    ]
+   ],
+   "note": "The floodwall was dedicated on 21 October 1994.",
+   "sources": [
+    "https://www.hmdb.org/m.asp?m=23953"
+   ]
+  },
+  {
+   "where": {
+    "name": "James River and Kanawha Canal"
+   },
+   "eras": [
+    [
+     1800,
+     1890
+    ],
+    [
+     1999,
+     null
+    ]
+   ],
+   "note": "The canal's downtown end, from about 1800 until the railroad took it over (end date approximate); the stretch seen today was re-watered for the Canal Walk in 1999.",
+   "sources": [
+    "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf"
+   ]
+  },
+  {
+   "where": {
+    "name": "Haxall Canal"
+   },
+   "eras": [
+    [
+     1790,
+     null
+    ]
+   ],
+   "note": "David Ross built the mill canal in 1790.",
+   "sources": [
+    "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf"
+   ]
+  },
+  {
+   "where": {
+    "tag": "railway",
+    "bridge": true
+   },
+   "eras": [
+    [
+     1901,
+     null
+    ]
+   ],
+   "note": "The elevated viaducts and the Triple Crossing were built with Main Street Station, opened 1901.",
+   "sources": [
+    "https://www.richmondrailroadmuseum.com/railroad-history",
+    "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
+   ]
+  },
+  {
+   "where": {
+    "tag": "railway"
+   },
+   "eras": [
+    [
+     1836,
+     null
+    ]
+   ],
+   "note": "Railroads reach Richmond from 1836 (the RF&P); lines at grade are dated from then, although today's alignments are later.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Richmond,_Fredericksburg_and_Potomac_Railroad"
+   ]
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "footway",
+     "path",
+     "cycleway",
+     "steps",
+     "pedestrian",
+     "track",
+     "bridleway"
+    ]
+   },
+   "eras": [],
+   "note": "Paths are not dated: drawn in today's view only."
+  },
+  {
+   "where": {
+    "name": "Fountain"
+   },
+   "eras": [],
+   "note": "Fountains are not dated: drawn in today's view only."
+  },
+  {
+   "where": {
+    "tag": "amenity",
+    "is": [
+     "parking"
+    ]
+   },
+   "eras": [
+    [
+     1950,
+     null
+    ]
+   ],
+   "note": "Surface parking: an approximate date, not sourced."
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "bridge": true
+   },
+   "eras": [
+    [
+     1901,
+     null
+    ]
+   ],
+   "note": "Road bridges not named above (over the rail lines and the interstate) are dated with the viaducts: approximate."
+  }
+ ],
+ "dates": [
+  {
+   "id": "w45088494",
+   "name": "Virginia State Capitol",
+   "year": 1788,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "Completed 1788; the wings of 1904–06 are not drawn apart."
+  },
+  {
+   "id": "w400327565",
+   "name": "St. John's Church",
+   "year": 1741,
+   "source": "https://lva-virginia.libguides.com/richmond-maps/history"
+  },
+  {
+   "id": "w365615571",
+   "name": "Old Stone House",
+   "year": 1754,
+   "source": "https://en.wikipedia.org/wiki/Old_Stone_House_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w207696511",
+   "name": "Masons Hall",
+   "year": 1787,
+   "source": "https://en.wikipedia.org/wiki/History_of_Richmond,_Virginia"
+  },
+  {
+   "id": "w224601769",
+   "name": "Wickham House",
+   "year": 1812,
+   "source": "https://en.wikipedia.org/wiki/Wickham_House"
+  },
+  {
+   "id": "w658620667",
+   "name": "Executive Mansion",
+   "year": 1813,
+   "source": "https://en.wikipedia.org/wiki/Virginia_Governor%27s_Mansion"
+  },
+  {
+   "id": "w224530979",
+   "name": "Monumental Church",
+   "year": 1814,
+   "source": "https://en.wikipedia.org/wiki/Monumental_Church"
+  },
+  {
+   "id": "w224601753",
+   "name": "White House of the Confederacy",
+   "year": 1818,
+   "source": "https://en.wikipedia.org/wiki/White_House_of_the_Confederacy"
+  },
+  {
+   "id": "w224530980",
+   "name": "Egyptian Building",
+   "year": 1845,
+   "source": "https://en.wikipedia.org/wiki/Egyptian_Building"
+  },
+  {
+   "id": "r19918536",
+   "name": "St. Paul's Episcopal Church",
+   "year": 1845,
+   "source": "https://en.wikipedia.org/wiki/St._Paul%27s_Episcopal_Church_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w113023444",
+   "name": "Old City Hall",
+   "year": 1894,
+   "source": "https://en.wikipedia.org/wiki/Old_City_Hall_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w113030476",
+   "name": "Main Street Station",
+   "year": 1901,
+   "source": "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
+  }
+ ],
+ "sanborn": {
+  "lost": "history/sanborn/lost.geojson",
+  "editions": [
+   1886,
+   1895,
+   1905,
+   1924,
+   1950
+  ],
+  "source": "https://www.loc.gov/collections/sanborn-maps/?q=richmond+virginia"
+ }
+}
