@@ -97,6 +97,7 @@ def rebuild(r, keep):
 def restamp(store, r, keep):
     """(matched, total) files of a stamped version made again from their base files with the
     recorded commit's stamp.py and title block, compared by SHA-256."""
+    store = os.path.abspath(store)
     files = r['recipe']['files']; outs = {os.path.basename(o['file']): o for o in [r['outputs']['print']] + r['outputs']['canvas']}
     wt = worktree(r['isoscape']['commit'], {'data': {}}, keep)
     ok = 0
