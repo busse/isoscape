@@ -50,6 +50,9 @@ export interface Palette {
   readonly plan: string
   /** Roofs of buildings traced from fire-insurance maps, in the maps' own colour code. */
   readonly traced: Readonly<Record<'brick' | 'frame' | 'stone' | 'iron' | 'special' | 'fireproof', string>>
+  /** Streetcar lines on the ground, and the cars on them: side lit, side in shade, roof. */
+  readonly tram: string
+  readonly tramCar: readonly [string, string, string]
   readonly roofs: Readonly<Record<'residential' | 'commercial' | 'industrial' | 'civic' | 'other', readonly string[]>>
   readonly lineWidth: number
   readonly groundLineWidth: number
@@ -102,6 +105,8 @@ const paper: Palette = {
   burned: '#d3c3ad',
   plan: '#e4dcc4',
   traced: { brick: '#e9c2b8', frame: '#efe0a6', stone: '#c3d3e2', iron: '#cfcdc8', special: '#c5dcc0', fireproof: '#cfc6a4' },
+  tram: '#b8362c',
+  tramCar: ['#c9473a', '#8f2a22', '#e8d9b0'],
   roofs: {
     residential: ['#f6e9d8', '#f1e2cf', '#f7efe2', '#efd9c5'],
     commercial: ['#fbfaf6', '#f0eee8', '#e9e7e1', '#f6f4ee'],
@@ -161,6 +166,8 @@ const night: Palette = {
   burned: '#3a2f2a',
   plan: '#252836',
   traced: { brick: '#5a3c3a', frame: '#5a5236', stone: '#34465a', iron: '#45454a', special: '#3a4f3c', fireproof: '#4f4a36' },
+  tram: '#e0614f',
+  tramCar: ['#f07a5f', '#b04a3a', '#f2e2b8'],
   roofs: {
     residential: ['#3d3f4c', '#42434f'],
     commercial: ['#454a5a', '#3f4453'],

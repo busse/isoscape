@@ -22,7 +22,7 @@ import { localMetres } from './region.ts'
 import { makeTerrain, rasterize, settleWater, stillWater, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
-import { alive, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
+import { alive, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
 export interface TimeContext {
@@ -69,7 +69,7 @@ export interface GroundPolygon {
 }
 
 export interface Ribbon {
-  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir'
+  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir' | 'tram'
   /** View-metre quads, draped over the terrain when drawn. */
   readonly quads: Vec2[][]
   /** View-metre centre segments, for rail ties and weir crests. */
@@ -116,10 +116,17 @@ export const buildScene = (
   const time = extra.time
   const curated = time === undefined ? [] : time.history.features.filter((h) => alive(h.from, h.to, time.year))
   if (time !== undefined) features = asOf(features, time)
+  let unbuiltStreets = 0
+  if (time !== undefined && time.history.streetsNearBuildings !== undefined) {
+    const traced = time.history.traced.filter((b) => alive(b.from, b.to, time.year)).map((b) => b.ring[0])
+    const r = dropUnbuiltStreets(features, time.history.streetsNearBuildings, traced)
+    features = r.kept
+    unbuiltStreets = r.dropped
+  }
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)
   const frame = view.frame
-  const stats: Record<string, number> = { features: features.length }
+  const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}) }
   const opts = region.terrain ?? {}
   const useTerrain = elevation !== null && region.terrain !== undefined && opts.enabled !== false
   const terrain = makeTerrain(view, opts.cell ?? 5, useTerrain ? (opts.exaggeration ?? 2) : 1, useTerrain ? elevation : null)
@@ -157,9 +164,10 @@ export const buildScene = (
     }
   }
   for (const h of curated) {
-    if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan') && h.ring !== undefined) {
+    if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan' || h.kind === 'grounds') && h.ring !== undefined) {
+      // Pleasure grounds that are gone (a fairground, an amusement park) take the plan's tint.
       const rings = curatedRings(h)
-      if (rings.length > 0) ground.push({ kind: h.kind, rings })
+      if (rings.length > 0) ground.push({ kind: h.kind === 'grounds' ? 'plan' : h.kind, rings })
     }
   }
   stats.ground = ground.length
@@ -239,6 +247,24 @@ export const buildScene = (
     const r = ribbonOf('canal', { type: 'line', id: h.id, tags: {}, points: h.line }, h.width ?? 6)
     if (r) ribbons.push(r)
   }
+  // A racecourse or promenade that is gone: a closed loop drawn as a path.
+  for (const h of curated) {
+    if (h.kind !== 'track' || h.line === undefined) continue
+    const r = ribbonOf('path', { type: 'line', id: h.id, tags: {}, points: [...h.line, h.line[0]] }, h.width ?? 12)
+    if (r) ribbons.push(r)
+  }
+  // Streetcar lines: a bold ribbon down the street, wider than the track, so it reads at a
+  // city-wide scale.
+  const tramRuns: { id: string; pts: Vec2[] }[] = []
+  for (const h of curated) {
+    if (h.kind !== 'streetcar') continue
+    for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
+      const r = ribbonOf('tram', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, h.width ?? 9)
+      if (r) ribbons.push(r)
+      tramRuns.push({ id: `${h.id}:${k}`, pts: run.map(([lon, lat]) => view.toView(lon, lat)) })
+    }
+  }
+  stats.streetcarLines = curated.filter((h) => h.kind === 'streetcar').length
   stats.ribbons = ribbons.length
 
   // ---- buildings ---------------------------------------------------------------------------
@@ -324,6 +350,42 @@ export const buildScene = (
     else items.push(extrude(view, pal, s.id, outer, inners, base, top, roof, dotsMode, s.tags.name))
   }
   stats.buildings = items.length
+  // Streetcars on their lines: a car every `TRAM_SPACING` metres along each run, 14 m long,
+  // 2.6 m wide and 3.6 m tall (a 1920s double-truck car), set on the ground and turned with
+  // the street. Their spacing is for the picture, not a timetable.
+  let cars = 0
+  for (const run of tramRuns) {
+    let along = TRAM_SPACING / 2
+    let walked = 0
+    for (let i = 0; i + 1 < run.pts.length; i++) {
+      const a = run.pts[i]
+      const b = run.pts[i + 1]
+      const len = Math.hypot(b[0] - a[0], b[1] - a[1])
+      while (along <= walked + len) {
+        const t = (along - walked) / len
+        const c: Vec2 = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]
+        along += TRAM_SPACING
+        if (c[0] < frame.minX + 20 || c[0] > frame.maxX - 20 || c[1] < frame.minY + 20 || c[1] > frame.maxY - 20) continue
+        const ux = (b[0] - a[0]) / len
+        const uy = (b[1] - a[1]) / len
+        const hl = 7
+        const hw = 1.3
+        let ring: Vec2[] = [
+          [c[0] - ux * hl + uy * hw, c[1] - uy * hl - ux * hw],
+          [c[0] + ux * hl + uy * hw, c[1] + uy * hl - ux * hw],
+          [c[0] + ux * hl - uy * hw, c[1] + uy * hl + ux * hw],
+          [c[0] - ux * hl - uy * hw, c[1] - uy * hl + ux * hw],
+        ]
+        if (signedArea(ring) < 0) ring = ring.reverse()
+        const base = terrain.z(c)
+        const carPal = { ...pal, wallLit: pal.tramCar[0], wallShade: pal.tramCar[1] }
+        items.push(extrude(view, carPal, `tram:${run.id}:${cars}`, ring, [], base + 0.4, base + 4, pal.tramCar[2], 'none'))
+        cars++
+      }
+      walked += len
+    }
+  }
+  stats.streetcars = cars
   stats.heightFromTag = heightSources.height
   stats.heightFromModel = heightSources.model
   stats.heightFromLevels = heightSources.levels
@@ -484,6 +546,8 @@ export const isLatticeTower = (t: Readonly<Record<string, string>>): boolean =>
 export const isShellRoof = (t: Readonly<Record<string, string>>): boolean =>
   t['building:part'] === 'roof' && ['round', 'spherical', 'circular'].includes(t['roof:shape'] ?? '') && t.height === undefined && t['min_height'] === undefined
 export const SHELL_RISE = 1.6
+/** Metres between the streetcars drawn on a line. */
+export const TRAM_SPACING = 900
 
 /**
  * Half-width of a lattice tower at fraction `t` of its height, as a fraction of the base: the

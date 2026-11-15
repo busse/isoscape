@@ -167,7 +167,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     sealed('L', p.land), sealed('Lw', p.water),
     ...Object.entries(p.cover).map(([g, colour]) => sealed(`cv-${g}`, colour)), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
     sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('plan', p.plan), sealed('burned', p.burned), sealed('canal', p.water), sealed('path', p.path),
-    sealed('road', p.road), sealed('rail', p.rail), sealed('weir', p.foam),
+    sealed('road', p.road), sealed('rail', p.rail), sealed('tram', p.tram), sealed('weir', p.foam),
     `.ties{fill:none;stroke:${p.railTie};stroke-width:${p.groundLineWidth * 2};stroke-dasharray:1 2.2}`,
     `.crest{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:.6}`,
     `.cm{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:${p.contourMinor}}`,
@@ -236,6 +236,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     ribbonLayer('path'),
     ribbonLayer('road'),
     ribbonLayer('rail'),
+    ribbonLayer('tram'),
   ]
   const lineLayer = (kind: string, cls: string) => ({
     cls,
