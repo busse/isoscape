@@ -65,8 +65,7 @@ export interface Palette {
    * boxcar-red freight.
    */
   readonly parts: Readonly<Record<PartTone, readonly [string, string, string]>>
-  /** Rail yards: cinder ground between the tracks, platforms, and the running rails at close scale. */
-  readonly yard: string
+  /** Station platforms, and the running rails of a track at close scale. */
   readonly platform: string
   readonly railSteel: string
   readonly roofs: Readonly<Record<'residential' | 'commercial' | 'industrial' | 'civic' | 'other', readonly string[]>>
@@ -134,7 +133,6 @@ const paper: Palette = {
     engine: ['#4a4a4d', '#242427', '#333336'],
     freight: ['#a8553d', '#74382a', '#8c4632'],
   },
-  yard: '#d6cebf',
   platform: '#efe9dc',
   railSteel: '#4f4a45',
   roofs: {
@@ -209,7 +207,6 @@ const night: Palette = {
     engine: ['#2a2b30', '#17181c', '#212226'],
     freight: ['#5e3328', '#40231c', '#4f2b22'],
   },
-  yard: '#2a2c33',
   platform: '#3a3d48',
   railSteel: '#8a90a2',
   roofs: {

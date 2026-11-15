@@ -5,7 +5,7 @@
 
 import type { Tags } from './osm.ts'
 
-export type GroundKind = 'water' | 'island' | 'green' | 'wood' | 'marsh' | 'sand' | 'rock' | 'parking' | 'cemetery' | 'plan' | 'grounds' | 'burned' | 'yard' | 'platform'
+export type GroundKind = 'water' | 'island' | 'green' | 'wood' | 'marsh' | 'sand' | 'rock' | 'parking' | 'cemetery' | 'plan' | 'grounds' | 'burned' | 'platform'
 
 export const groundKind = (t: Tags): GroundKind | null => {
   if (t.building !== undefined || t['building:part'] !== undefined) return null
@@ -28,7 +28,7 @@ export const groundKind = (t: Tags): GroundKind | null => {
 }
 
 /** Paint order of the ground layers, bottom first. Water and islands are handled apart. */
-export const GROUND_ORDER: readonly GroundKind[] = ['green', 'cemetery', 'marsh', 'wood', 'sand', 'rock', 'parking', 'plan', 'grounds', 'burned', 'yard', 'platform']
+export const GROUND_ORDER: readonly GroundKind[] = ['green', 'cemetery', 'marsh', 'wood', 'sand', 'rock', 'parking', 'plan', 'grounds', 'burned', 'platform']
 
 /** Carriageway widths in meters. Missing means "do not draw". */
 const ROAD_WIDTH: Readonly<Record<string, number>> = {

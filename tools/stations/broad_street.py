@@ -242,7 +242,7 @@ for i, pts in enumerate(track_lines):
     express = i in EXPRESS
     features.append({
         'id': f'bss-track-{i + 1}', 'name': f'Broad Street Station {"express" if express else "passenger"} track', 'kind': 'rail',
-        'from': 1919, 'to': 1976, 'line': [lonlat(p) for p in pts[::2]] + ([lonlat(pts[-1])] if len(pts) % 2 == 0 else []),
+        'from': 1919, 'to': 1976, 'width': 4.4, 'line': [lonlat(p) for p in pts[::2]] + ([lonlat(pts[-1])] if len(pts) % 2 == 0 else []),
         'note': ('One of the two express tracks' if express else 'One of the seven passenger tracks') +
         ' of the station loop (7 passenger, 2 express, from the 1919 opening card). Trains ran in at one junction with the RF&P main and out at the other, so none had to back in. Placed from the OSM platforms at the station and the USGS quadrangles of 1934 and 1956 around the loop; the gathering of tracks onto the loop is drawn, not surveyed.',
         'sources': LOOP_SRC,
@@ -282,7 +282,7 @@ for k, t in enumerate(PLATFORMS):
     for side, (s0, s9) in (('south', (S_SOUTH + 4, s1 - 1)), ('north', (s2 + 1, S_NORTH - 4))):
         features.append({
             'id': f'bss-canopy-{k + 1}-{side}', 'name': 'Broad Street Station platform canopy', 'kind': 'canopy', 'from': 1919, 'to': 1976,
-            'line': [lonlat(st(s0, t)), lonlat(st(s9, t))], 'width': 9.0, 'height': 5.4,
+            'line': [lonlat(st(s0, t)), lonlat(st(s9, t))], 'width': 8.0, 'height': 5.4,
             'note': 'A cast-iron and steel butterfly canopy on a single row of cast-iron columns, roofed in red-brown; several survive at the Science Museum. Width and height approximate.',
             'sources': P_SRC,
         })
@@ -296,21 +296,6 @@ for k, t in enumerate(PLATFORMS):
             'note': 'The housing of a ramp from the concourse down to the platform. Placed from the 1969 photograph; approximate.',
             'sources': [SRC['photo-1969']],
         })
-
-# The yard: cinders under and between the tracks.
-left, right = [], []
-for k, (p, d) in enumerate(zip(center, acc)):
-    if k % 2:
-        continue
-    nx, ny = normal(k)
-    lo = min(-offset(i, d) for i in range(len(TRACKS))) - 3.5
-    hi = max(-offset(i, d) for i in range(len(TRACKS))) + 3.5
-    left.append((p[0] + nx * lo, p[1] + ny * lo))
-    right.append((p[0] + nx * hi, p[1] + ny * hi))
-features.append({
-    'id': 'bss-yard', 'name': 'Broad Street Station track loop', 'kind': 'yard', 'from': 1919, 'to': 1976,
-    'ring': ring(left + right[::-1]), 'note': 'The cinder ground of the station loop, around its tracks.', 'sources': LOOP_SRC,
-})
 
 # The express building beside the express tracks, from the 1956 quadrangle.
 features.append({
@@ -351,7 +336,8 @@ features.append({
 
 # ---- the city around it: car lines and era rules from the streetcar history ------------------------
 sc = json.loads(STREETCARS.read_text())
-features += [f for f in sc['features'] if f['kind'] == 'streetcar' and f.get('from', 0) <= 1943 < f.get('to', 9999)]
+# At this scale a car line is drawn at the width of its double track, not the bold city-map ribbon.
+features += [{**f, 'width': 5.5} for f in sc['features'] if f['kind'] == 'streetcar' and f.get('from', 0) <= 1943 < f.get('to', 9999)]
 
 rules = [
     {'where': {'id': ['w1485004507', 'w1485004508', 'w1089070999']}, 'eras': [],

@@ -2,14 +2,14 @@
   "title": "Broad Street Station, 1943",
   "data": "richmond-streetcars",
   "center": [
-    -77.465347,
-    37.562276
+    -77.465687,
+    37.561643
   ],
-  "width": 1000,
-  "depth": 1000,
+  "width": 780,
+  "depth": 680,
   "bearing": 200,
   "snap": false,
-  "scale": 3.4,
+  "scale": 4.4,
   "squash": 0.6,
   "exaggeration": 1.0,
   "slab": 24,

@@ -31,7 +31,7 @@ export interface Epoch {
 export interface HistoryFeature {
   readonly id: string
   readonly name: string
-  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'yard' | 'canopy'
+  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy'
   readonly from: number
   readonly to?: number
   /** lon/lat outline (open), for areas and landmarks. */
@@ -55,7 +55,7 @@ export interface HistoryFeature {
   readonly tone?: PartTone
   /** A rail line: a train standing on it, `at` meters from the line's start. */
   readonly train?: Train
-  /** Creek width in meters. */
+  /** Width in meters: a creek's, a curated rail line's ballast (default 3.2), a canopy's roof. */
   readonly width?: number
   /** From this year a landmark stands as a burned shell. */
   readonly ruin?: number
