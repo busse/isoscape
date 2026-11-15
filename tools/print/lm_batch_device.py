@@ -10,7 +10,7 @@ OUT = os.path.expanduser('~/mnt/ISO-TEST/chrisbusse-store/print-files/landmarks'
 SVG = os.path.expanduser('~/mnt/ISO-TEST/isoscape/out/landmarks')
 L = {x[0]: x for x in json.load(open(os.path.join(LM, 'list.json')))}
 # Tall mountain scenes: keep the whole scene, and take the panel from this share of the height.
-OPTS = {'machu-picchu': {'zoom': False, 'anchor': 0.55}, 'matterhorn': {'zoom': False, 'anchor': 0.5}}
+OPTS = {'matterhorn': {'zoom': False, 'anchor': 0.5}}
 ONLY = set(sys.argv[2:])
 built = set()
 for f in ('status.json', 'status-0.json', 'status-1.json', 'status-r.json'):

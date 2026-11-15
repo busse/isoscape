@@ -2,16 +2,16 @@
  "title": "Machu Picchu and Aguas Calientes — Peru",
  "center": [
   -72.5352,
-  -13.158
+  -13.1585
  ],
- "width": 2600,
- "depth": 3600,
- "bearing": 240,
+ "width": 3800,
+ "depth": 2400,
+ "bearing": 155,
  "snap": false,
- "scale": 2.3,
+ "scale": 1.6,
  "squash": 0.5,
  "exaggeration": 1.0,
- "slab": 16,
+ "slab": 14,
  "palette": "paper",
  "bridgeDeck": 7,
  "bridges": [],
