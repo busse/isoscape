@@ -132,7 +132,7 @@
     -77.4292,
     37.5318
    ],
-   "ground": 1100,
+   "ground": 750,
    "note": "Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened in 1901 under its clock tower, with a gable-roofed train shed 530 feet long behind. The Seaboard moved its trains to Broad Street in 1959; the C&O stayed until Amtrak took over in 1971. Amtrak trains call here again.",
    "sources": [
     "https://www.dhr.virginia.gov/?p=15225",
@@ -149,7 +149,7 @@
     -77.4302,
     37.5326
    ],
-   "ground": 1000,
+   "ground": 550,
    "note": "Just east of 14th and Dock streets the C&O's viaduct crossed over the Seaboard, which crossed over the Southern on the ground: three railroads at three levels, built in 1900 and 1901. Now and then the railroads staged photographs with a train on every level. CSX and Norfolk Southern trains still cross here.",
    "sources": [
     "https://www.richmondrailroadmuseum.com/railroad-history",
@@ -163,10 +163,10 @@
    "title": "The C&O viaduct",
    "subtitle": "Three miles along the river",
    "at": [
-    -77.442,
+    -77.4465,
     37.5338
    ],
-   "ground": 1400,
+   "ground": 1500,
    "note": "In 1901 the C&O raised its line on a viaduct along the north bank of the James, three miles of trestle past Tredegar and down Dock Street, so trains of coal for Newport News bypassed the crowded route through the city. CSX coal trains still run on it.",
    "sources": [
     "https://www.virginiaplaces.org/rail/cando.html",
@@ -183,7 +183,7 @@
     -77.43694,
     37.52639
    ],
-   "ground": 1100,
+   "ground": 800,
    "note": "Across the river, the Southern Railway's trains for Danville left from Hull Street Station, built in 1915 when the Southern gave up its passenger depot on 14th Street. Passenger service ended in 1957. The station reopened in 2011 as the Richmond Railroad Museum.",
    "sources": [
     "https://www.american-rails.com/varrms.html",

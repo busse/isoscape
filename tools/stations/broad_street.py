@@ -406,9 +406,9 @@ LABELS = [
     ((390, 350), 'start', 'Seaboard Junction', 'The Seaboard Air Line leaves the RF&P for Main Street Station'),
     ((-120, -60), 'end', 'Broad Street Station', 'RF&P, Atlantic Coast Line and N&W trains'),
     ((-2650, -3300), 'start', 'To Petersburg and Florida', 'ACL Belt Line over the James; N&W trains by way of Petersburg'),
-    ((3200, -3150), 'end', 'Main Street Station', 'Seaboard Air Line south to Raleigh and Florida; C&O'),
+    ((2750, -3180), 'end', 'Main Street Station', 'Seaboard Air Line south to Raleigh and Florida; C&O'),
     ((-3050, -1600), 'start', 'C&O James River line', 'west to Lynchburg'),
-    ((-3050, -2780), 'start', 'Southern Railway', 'from Hull Street station, southwest to Danville'),
+    ((-3100, -2380), 'start', 'Southern Railway', 'from Hull Street station, southwest to Danville'),
 ]
 labels = [{
     'id': f'lines-label-{k + 1}', 'name': name, 'kind': 'label', 'from': 1919, 'to': 1976, 'at': lonlat(at), 'anchor': anchor, 'caption': caption,
