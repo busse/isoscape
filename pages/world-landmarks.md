@@ -29,6 +29,8 @@ December 31, 2026.
 
 ## Eiffel Tower, Paris
 
+**[Open the map of the Eiffel Tower in the explorer →](https://busse.github.io/isoscape/#lm-eiffel-tower)**
+
 ![The Eiffel Tower and the Champ de Mars, with the Seine and the Trocadéro behind](world-eiffel-tower.jpg)
 
 **Data: [IGN RGE ALTI®](https://geoservices.ign.fr/rgealti)**, France's bare-earth model at
@@ -45,6 +47,8 @@ first platform and a third at the second.
 Licence: Licence Ouverte 2.0 (Etalab). Credit: *RGE ALTI® © IGN*.
 
 ## Matterhorn and Zermatt, Switzerland
+
+**[Open the map of the Matterhorn and Zermatt in the explorer →](https://busse.github.io/isoscape/#lm-matterhorn)**
 
 ![Zermatt in the valley, with the Matterhorn rising behind it](world-matterhorn.jpg)
 
@@ -63,6 +67,8 @@ Licence: swisstopo's terms for free geodata (OGD), commercial use included. Cred
 
 ## Himeji Castle, Japan
 
+**[Open the map of Himeji Castle in the explorer →](https://busse.github.io/isoscape/#lm-himeji-castle)**
+
 ![Himeji Castle on its hill, inside its moats, with the city around it](world-himeji-castle.jpg)
 
 **Data: [GSI elevation tiles](https://maps.gsi.go.jp/development/ichiran.html)** from the
@@ -77,6 +83,8 @@ Licence: GSI's content terms, compatible with CC BY 4.0. Credit: *GSI elevation 
 processed* (地理院タイル（標高タイル）を加工して作成).
 
 ## Machu Picchu, Peru
+
+**[Open the map of Machu Picchu in the explorer →](https://busse.github.io/isoscape/#lm-machu-picchu)**
 
 ![Aguas Calientes on the left, Huayna Picchu in front, and the citadel above the switchback road on the right](world-machu-picchu.jpg)
 
@@ -95,6 +103,8 @@ WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018
 COPERNICUS by the European Union and ESA; all rights reserved*.
 
 ## Sydney Opera House and Harbour Bridge, Australia
+
+**[Open the map of Sydney in the explorer →](https://busse.github.io/isoscape/#lm-sydney-opera-house)**
 
 ![Sydney's CBD towers with the Opera House on Bennelong Point and the Harbour Bridge behind](world-sydney-opera-house.jpg)
 
