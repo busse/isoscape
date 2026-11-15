@@ -774,6 +774,11 @@ body.reading main { grid-template-rows: 1fr; }
           (isNum(s.streetcarScale) && s.streetcarScale !== 1 ? ', all drawn ' + esc(s.streetcarScale) + ' times life size so they read at this scale' : '') + '.' +
           (isNum(s.unbuiltStreets) && s.unbuiltStreets > 0 ? ' Small streets are drawn only where a house of the year stood nearby: ' + int(s.unbuiltStreets) + ' laid out since are left off.' : '') + '</p>')
       }
+      if (s.parts > 0 || s.canopyPieces > 0 || s.trainPieces > 0) {
+        out.push('<p><b>Modeled close up:</b> ' + plural(s.parts || 0, 'part') + ' of one building, each from its plans and photographs, in the building’s own colors' +
+          (s.canopyPieces > 0 ? '; ' + plural(s.canopyPieces, 'piece') + ' of platform canopy' : '') +
+          (s.trainPieces > 0 ? '; and ' + plural(s.trainPieces, 'car') + ' of standing trains, their number and makeup illustrative' : '') + '. Heights are <b>approximate</b>. ' + how('one-building-close-up', 'how the station is modeled →') + '</p>')
+      }
       const cur = Array.isArray(tm.curated) ? tm.curated : []
       if (cur.length) {
         out.push('<p><b>Curated</b> for this year, from published sources; positions are drawn from today’s street grid and published dimensions, not surveyed:</p><ul>' +
