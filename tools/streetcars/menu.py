@@ -6,6 +6,7 @@ Products, each a print file at 300 dpi:
   menu        the big map framed by every box, 32 x 24 in (Printful's 24 x 32, landscape)
   map         the big map alone, with its title band and stop list, 36 x 24 in
   box <id>    one stop on its own, 24 x 18 in (Printful's 18 x 24, landscape)
+  canvas      framed-canvas files for each of those, at the sizes the store sells
 
 Two steps, because the scene needs the cached data and the drawing needs a fast SVG renderer:
 
@@ -274,6 +275,7 @@ def save(img, out_dir, name, dpi):
 
 
 SITE = 'https://busse.github.io/isoscape/'
+SHOP = 'https://chrisbusse.com/collections/richmond-streetcars-1925'
 BUILD = f'{REGION}:{YEAR}'
 
 
@@ -287,7 +289,8 @@ def write_page(pts):
            'stood in 1925: sixteen car lines over the buildings then standing, with fourteen places the cars',
            'ran to framed around it, from the suburbs they made to the trolley parks at the ends of the line.', '',
            '![The 1925 map, framed by its fourteen stops](streetcars-menu.jpg)', '',
-           f'[Open the map]({SITE}#{BUILD}) to pan and zoom, or jump to a stop below.', '', '## The stops', '']
+           f'[Open the map]({SITE}#{BUILD}) to pan and zoom, or jump to a stop below. Prints of the whole set, the map',
+           f'alone and each stop are in the [shop]({SHOP}).', '', '## The stops', '']
     for s in stops():
         x, y = pts[s['id']]
         out += [f"### {s['n']}. {s['title']}", '', f"*{s['line']}*", '', s['note'], '',
@@ -310,14 +313,43 @@ def write_page(pts):
     print('pages/streetcars.md')
 
 
+CANVAS = {'menu': ((24, 18), (32, 24)), 'map': ((18, 12), (30, 20), (36, 24)), 'box': ((16, 12), (24, 18))}
+CANVAS_DPI = 300
+WRAP = 1.5                  # inches of mirrored image around each face, for the canvas's sides
+
+
+def write_canvas(print_dir):
+    """Framed-canvas files beside each print: the face at each size the store sells, plus 1.5 in of
+    mirrored wrap per side, at 300 dpi (Printful's canvas print files)."""
+    out = os.path.join(print_dir, 'canvas')
+    os.makedirs(out, exist_ok=True)
+    for f in sorted(os.listdir(print_dir)):
+        m = re.match(r'(streetcars-1925-(menu|map|\d\d-[a-z-]+))_\d+x\d+\.jpg$', f)
+        if not m: continue
+        kind = m.group(2) if m.group(2) in ('menu', 'map') else 'box'
+        base = Image.open(os.path.join(print_dir, f)).convert('RGB')
+        wrap = int(WRAP * CANVAS_DPI)
+        for fw, fh in CANVAS[kind]:
+            face = np.asarray(base.resize((fw * CANVAS_DPI, fh * CANVAS_DPI), Image.LANCZOS))
+            arr = np.pad(face, ((wrap, wrap), (wrap, wrap), (0, 0)), mode='symmetric')
+            name = f'{m.group(1)}_canvas-{fw}x{fh}.jpg'
+            p = os.path.join(out, name)
+            img = Image.fromarray(arr)
+            for q in (92, 88, 84, 80, 76):
+                img.save(p, quality=q, dpi=(CANVAS_DPI, CANVAS_DPI), optimize=True)
+                if os.path.getsize(p) <= MAX_BYTES: break
+            print(name, img.size, f'{os.path.getsize(p) / 1e6:.1f} MB')
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('what', choices=['points', 'menu', 'map', 'boxes', 'page'])
+    ap.add_argument('what', choices=['points', 'menu', 'map', 'boxes', 'page', 'canvas'])
     ap.add_argument('ids', nargs='*')
     ap.add_argument('--dpi', type=int, default=300)
     ap.add_argument('--dir', default=os.path.join(ROOT, 'out', 'streetcars'))
     a = ap.parse_args()
     if a.what == 'points': return write_points(a.dir)
+    if a.what == 'canvas': return write_canvas(os.path.join(a.dir, 'print'))
     pts = json.load(open(os.path.join(a.dir, 'points.json')))
     if a.what == 'page': return write_page(pts)
     out = os.path.join(a.dir, 'print' if a.dpi >= 300 else f'proof-{a.dpi}')
