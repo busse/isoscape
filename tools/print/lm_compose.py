@@ -84,11 +84,11 @@ if __name__ == '__main__':
         if not os.path.exists(svg): print('no svg', slug); continue
         print(*make(slug, L[slug][1], L[slug][2], svg, out), flush=True)
 
-def make_canvas(print_path, out_dir, key, dpi=150):
+def make_canvas(print_path, out_dir, key, dpi=150, portrait=False):
     """Framed-canvas files (face + 1.5 in mirrored wrap per side) from the print file; 27x39 in at 150 dpi = 23.7 MP."""
     base = Image.open(print_path).convert('RGB'); out = []
     wrap = int(1.5 * dpi)
-    for fw, fh in ((18, 12), (30, 20), (36, 24)):
+    for fw, fh in (((12, 18), (20, 30), (24, 36)) if portrait else ((18, 12), (30, 20), (36, 24))):
         face = np.asarray(base.resize((fw * dpi, fh * dpi), Image.LANCZOS))
         arr = np.pad(face, ((wrap, wrap), (wrap, wrap), (0, 0)), mode='symmetric')
         fn = os.path.join(out_dir, f'{key}_canvas-{fw}x{fh}.jpg')
