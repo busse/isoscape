@@ -5,6 +5,7 @@ import { parseArgs, promisify } from 'node:util'
 import { archiveBuild, listBuilds } from './archive.ts'
 import { backfill } from './backfill.ts'
 import { cleanDem, fetchDem, loadDem, sampler } from './dem.ts'
+import { DEM_SOURCES } from './dem-sources.ts'
 import { fetchFootprints, loadFootprints } from './footprints.ts'
 import { coverSampler, fetchLandcover, loadLandcover } from './landcover.ts'
 import { renderExplorer } from './explorer.ts'
@@ -23,6 +24,7 @@ const run = promisify(execFile)
 const HELP = `isoscape — isometric dot-and-line views of real places
 
   isoscape regions                 list region configs in regions/
+  isoscape sources                 list the elevation sources, with credits and licences, as JSON
   isoscape query <region>          print the Overpass query for a region
   isoscape fetch <region>          download OSM data and elevation to data/<region>/
   isoscape info <region>           camera, counts and height coverage, as JSON
@@ -148,6 +150,11 @@ export const main = async (argv: string[]): Promise<void> => {
     }
     return
   }
+  if (command === 'sources') {
+    // The elevation sources, with their credits and licences, as JSON (the print and shop tools read it).
+    console.log(JSON.stringify(Object.values(DEM_SOURCES).map(({ id, name, coverage, about, credit, licence, link, native }) => ({ id, name, coverage, about, credit, licence, link, native })), null, 1))
+    return
+  }
   if (command === 'explorer') {
     const outDir = resolve(values.out ?? 'out')
     const n = await writeExplorer(outDir, values['site-url'], true)
@@ -221,9 +228,9 @@ export const main = async (argv: string[]): Promise<void> => {
  */
 const writeExplorer = async (outDir: string, siteUrl?: string, verbose = false): Promise<number> => {
   const builds = await listBuilds(outDir)
-  const pages = loadPages()
-  await mkdir(outDir, { recursive: true })
   const config = await loadSiteConfig(siteUrl)
+  const pages = loadPages(undefined, config.siteUrl)
+  await mkdir(outDir, { recursive: true })
   const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined)
   await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, pages, { ...site, ...(config.shop ? { shop: config.shop } : {}), ...(config.home ? { home: config.home } : {}), ...(config.latestPages === false ? { latestPages: false } : {}) }))
   if (verbose) {

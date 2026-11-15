@@ -24,8 +24,10 @@ Open a chat with Claude (we used Claude Opus 5.5) and say:
 
 > Use the GitHub repo busse/isoscape to make an isometric map of *your place*.
 
-It takes a few minutes. It works best for places in the US, where USGS elevation data gives
-the terrain; elsewhere the map is flat.
+It takes a few minutes. Terrain works anywhere: from USGS lidar in the US, from national
+mapping agencies in France, Switzerland and Japan, and from the European Space Agency's 30 m
+Copernicus model everywhere else. [Landmarks around the world](world-landmarks.md) shows one
+of each.
 
 ## Contact
 
@@ -57,10 +59,22 @@ credit in its description, and every page shows it.
 fire-insurance maps, so outlines and heights are approximate. They show the city's shape, not
 a building-by-building survey.
 
-**Elevation.** From the [USGS 3D Elevation Program
+**Elevation.** In the US, from the [USGS 3D Elevation Program
 (3DEP)](https://www.usgs.gov/3d-elevation-program), served by the National Map. It is in the
 public domain. The USGS asks for, but does not require, a credit. `data/*/dem.bin.gz` is a
 resampled copy.
+
+**Elevation outside the US.** Each of these allows commercial use, and each asks for a credit:
+
+| Source | Licence | Credit to carry |
+|---|---|---|
+| [IGN RGE ALTI®](https://geoservices.ign.fr/rgealti) (France) | Licence Ouverte 2.0 (Etalab) | RGE ALTI® © IGN |
+| [swisstopo swissALTI3D](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) (Switzerland) | swisstopo free geodata (OGD) terms | swissALTI3D © Federal Office of Topography swisstopo |
+| [GSI elevation tiles](https://maps.gsi.go.jp/development/ichiran.html) (Japan) | GSI content terms (compatible with CC BY 4.0) | GSI elevation tiles, processed (地理院タイル（標高タイル）を加工して作成) |
+| [Copernicus DEM GLO-30](https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM) (worldwide) | Copernicus WorldDEM-30 licence | produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved |
+| [Terrain Tiles](https://registry.opendata.aws/terrain-tiles/) (worldwide) | each source's own; see [Tilezen's attribution list](https://github.com/tilezen/joerd/blob/master/docs/attribution.md) | Terrain Tiles (Mapzen/Tilezen); SRTM courtesy of the U.S. Geological Survey; ETOPO1 courtesy of NOAA |
+
+`isoscape sources` prints the same list. Every map names its own source in its caption.
 
 **Building footprints (some regions).** [Microsoft Global ML Building
 Footprints](https://github.com/microsoft/GlobalMLBuildingFootprints), under the ODbL like OSM.
@@ -83,7 +97,8 @@ sources item by item.
 
 ## Sharing a picture
 
-Put this line with the picture. Drop the second part for a view drawn without terrain:
+Put this line with the picture. Drop the second part for a view drawn without terrain, and
+outside the US use that source's credit from the table above instead of USGS 3DEP:
 
 > Map data © OpenStreetMap contributors (ODbL) · Elevation: USGS 3DEP
 

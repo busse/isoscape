@@ -16,6 +16,10 @@ and adapt them with credit, but not for sale. Prints of them are in the holiday 
   [Open Database License](https://opendatacommons.org/licenses/odbl/). The cached `data/*/osm.json`
   files are OSM data and carry that licence. A rendered map is a produced work: credit OSM.
 - Elevation: [USGS 3D Elevation Program](https://www.usgs.gov/3d-elevation-program), public domain.
+  Outside the US: IGN RGE ALTI® (Licence Ouverte 2.0), swisstopo swissALTI3D (OGD terms), GSI
+  elevation tiles (GSI content terms), Copernicus DEM GLO-30 (Copernicus WorldDEM-30 licence) and
+  Terrain Tiles (per source). All allow commercial use with credit; the exact credits are in
+  [About](pages/about.md) and `isoscape sources`.
 - Land cover: [NLCD](https://www.mrlc.gov/), public domain. Building footprints where OSM has few:
   [Microsoft Global ML Building Footprints](https://github.com/microsoft/GlobalMLBuildingFootprints) (ODbL).
 - Historic Richmond: buildings traced from [Sanborn Fire Insurance Maps](https://www.loc.gov/collections/sanborn-maps/)

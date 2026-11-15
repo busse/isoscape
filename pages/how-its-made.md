@@ -41,7 +41,7 @@ Where to start:
 | Extra footprints (where a region asks) | Microsoft's ML building footprints | Traced by a model from imagery. Good outlines, sometimes merged or missing |
 | Building heights | OSM `height`, else Microsoft's model, else `building:levels`, else a guess | Mixed. In downtown Richmond about 40% are guesses; around Gwynn's Island, a little over half. Each build reports its own split |
 | Woods, wetlands, fields, crops (where a region asks) | USGS National Land Cover Database (NLCD 2021) | Classified from satellite imagery at 30 m. Right in the large, coarse at the edges |
-| Ground elevation | USGS 3DEP bare-earth model | Measured. 1 m lidar where it has been flown |
+| Ground elevation | USGS 3DEP bare-earth model in the US; elsewhere a national or global model (IGN, swisstopo, GSI, Copernicus, Terrain Tiles) | Measured. 1 m lidar where 3DEP has flown; from 1 m to 30 m abroad, by source |
 | River surface | The lowest lidar returns over mapped water, smoothed | Inferred |
 | Exposed rock and rapids | Height above, and fall of, that surface | Inferred |
 | Shoreline (with terrain) | Mapped water, corrected against the lidar | Inferred |
@@ -57,14 +57,30 @@ land cover, islands, coastline and car parks. Large areas are fetched in tiles o
 tried in turn. Each tile is cached as it arrives, so an interrupted fetch picks up where it
 stopped. The merged answer is saved as `data/<region>/osm.json`.
 
-**Elevation.** The ground comes from the [USGS 3D Elevation Program
-(3DEP)](https://www.usgs.gov/3d-elevation-program). Its seamless bare-earth model is served by
+**Elevation.** In the US, the ground comes from the [USGS 3D Elevation Program
+(3DEP)](https://www.usgs.gov/3d-elevation-program), the default source. Its seamless bare-earth model is served by
 the National Map's `exportImage` service, which returns the best data available for each
 place: 1 m lidar where it has been flown, coarser models elsewhere. Bare earth means
 buildings and trees have been removed. isoscape requests uncompressed 32-bit float GeoTIFFs
 in tiles of at most 1,500 pixels a side, at 1 m per pixel unless the region sets
 `demResolution`. The tiles are stitched together and stored as `data/<region>/dem.bin.gz`:
 gzipped 16-bit integers in centimetres, so heights are kept to the nearest centimetre.
+
+Outside the US, a region names another source in `terrain.source`; `isoscape sources` lists
+them with their credits and licences, and [Landmarks around the world](world-landmarks.md)
+shows one map for each. `ign` (France, 1 m) is cut to order like 3DEP, by IGN's WMS server,
+as raw 32-bit heights. The rest are published in fixed pieces that isoscape downloads and
+resamples onto its own grid. `swisstopo` (Switzerland, 2 m) comes as one-kilometre squares in
+the Swiss grid, found through swisstopo's STAC catalogue and converted with swisstopo's
+published formulas, good to about a metre. `gsi` (Japan) comes as web-map tiles with heights
+packed into their colours: 5 m lidar first, then 5 m photogrammetry, then the 10 m national
+model. `copernicus` (worldwide, 30 m) comes as one-degree squares of cloud-optimised GeoTIFF,
+read with Deflate and the floating-point predictor. `terrain-tiles` (worldwide) is a mosaic
+of open models in web-map tiles. Copernicus is a *surface* model, so forest and roofs are in
+its heights. `terrain.fillFrom` names a second source for whatever the first leaves empty,
+which is how the Matterhorn's Italian face is filled from Copernicus. The default
+`demResolution` is 1 m, or the source's own spacing where that is coarser (30 m for
+Copernicus and Terrain Tiles). The cache records which source it came from.
 
 3DEP sometimes fills a gap in its coverage with a large negative number. One patch near
 Shockoe Bottom reads −88 m. Any sample below −5 m is treated as missing, along with a
@@ -89,7 +105,7 @@ pasture, crops, scrub and so on. The map image comes back with each class in its
 colour, and each colour is matched back to its class. The result is stored in
 `data/<region>/landcover.bin.gz`.
 
-Code: `src/osm.ts`, `src/dem.ts`, `src/footprints.ts`, `src/landcover.ts`.
+Code: `src/osm.ts`, `src/dem.ts`, `src/dem-sources.ts`, `src/rasters.ts`, `src/footprints.ts`, `src/landcover.ts`.
 
 ## Region
 
@@ -233,8 +249,18 @@ Every OSM building that lies **wholly inside the frame** and covers at least
 camera, and the roof goes on top. Courtyards work. Wall shading follows which way each wall
 faces, with the light from the left. Roof colour follows the building's type: homes,
 commerce, industry or civic. Where a building is mapped as Simple 3D Buildings parts
-(`building:part`), the parts are drawn instead of the outline. Open canopies
+(`building:part`), the parts are drawn instead of the outline, except parts that are only
+roofs (`building:part=roof`), which sit on the outline as their podium. Open canopies
 (`building=roof`) are left out.
+
+Two shapes are not prisms. A **lattice tower** (`tower:construction=lattice`, such as the
+Eiffel Tower) is drawn whole as a spire on its outline, in 16 stacked tapering pieces, in a
+darker iron tone. Its width follows the Eiffel Tower's curve: e^(−3.3·t) of the base at
+height fraction t, so 0.56 at the first platform and 0.32 at the second, running out to a
+mast over the top sixth. The parts mapped inside it are dropped. A **curved roof shell with
+no height** (a roof part shaped `round`, `spherical` or `circular`, such as the Sydney Opera
+House's sails) is drawn as a sail rising to a point, 1.6 × √area metres above its podium.
+That height is an approximation, not a survey.
 
 **Footprints from Microsoft's model** fill in where OSM has none. Wherever an OSM building
 and a footprint overlap, OSM wins and the footprint is dropped. A footprint is dropped if its
@@ -257,7 +283,7 @@ first-return surface minus bare earth) is the top item on the roadmap.
 On a slope, a building stands on the **lowest** ground under it, so its downhill wall shows
 its full height. The roof sits at the building's height above the average ground under it.
 
-Code: `buildingHeights` in `src/classify.ts`, `extrude` in `src/scene.ts`.
+Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scene.ts`.
 
 ## Bridges
 
@@ -441,7 +467,8 @@ Code: `src/archive.ts`, `src/explorer.ts`, `src/pages.ts`.
 
 Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, available
 under the Open Database License. Elevation from the [USGS 3D Elevation
-Program](https://www.usgs.gov/3d-elevation-program), public domain. Years built for the
+Program](https://www.usgs.gov/3d-elevation-program), public domain, and outside the US from
+the sources credited on [Landmarks around the world](world-landmarks.md). Years built for the
 Richmond series from the City of Richmond's open data. Fire-insurance maps from the Library
 of Congress Sanborn Maps Collection. See [About](about.md) for what that means when you use
 or share a picture.
