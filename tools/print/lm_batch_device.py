@@ -10,7 +10,7 @@ OUT = os.path.expanduser('~/mnt/ISO-TEST/chrisbusse-store/print-files/landmarks'
 SVG = os.path.expanduser('~/mnt/ISO-TEST/isoscape/out/landmarks')
 L = {x[0]: x for x in json.load(open(os.path.join(LM, 'list.json')))}
 # Tall mountain scenes: keep the whole scene, and take the panel from this share of the height.
-OPTS = {'matterhorn': {'zoom': False}}
+OPTS = {'matterhorn': {'zoom': False, 'trim': False}}   # Zermatt sits in the V of the plate's front edge
 # Scenes taller than wide get a portrait (24x36) print and portrait canvases.
 PORTRAIT = {'matterhorn'}
 ONLY = set(sys.argv[2:])

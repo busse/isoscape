@@ -11,7 +11,7 @@ Image.MAX_IMAGE_PIXELS = None
 MAX = 15_000_000
 CREDIT = 'isoscape by Chris Busse  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP'
 
-def content_box(svg, zoom=True):
+def content_box(svg, zoom=True, trim=True):
     s = open(svg, encoding='utf-8').read(3000)
     vb = list(map(float, re.search(r'viewBox="([^"]+)"', s).group(1).split()))
     with tempfile.TemporaryDirectory() as t:
@@ -29,7 +29,7 @@ def content_box(svg, zoom=True):
     # trim the slab face: bottom rows that are mostly the slab's flat tan
     slab = (np.abs(rgb - np.array([203, 191, 165])).sum(-1) < 40) & mask
     r = int(ys.max()) - 4   # skip the outline at the very bottom
-    while r > ys.min() and mask[r].sum() > 0 and slab[r].sum() > 0.35 * mask[r].sum(): r -= 1
+    while trim and r > ys.min() and mask[r].sum() > 0 and slab[r].sum() > 0.35 * mask[r].sum(): r -= 1
     y1 = vb[1] + (r + 1) * k
     y1 -= (y1 - y0) * 0.01
     water = (rgb[..., 2] > rgb[..., 0] + 25) & mask
@@ -54,10 +54,10 @@ def elevation_credit(region_path):
     if t.get('fillFrom') in S: credit += '; ' + S[t['fillFrom']]['credit'].replace('Elevation: ', '')
     return credit
 
-def make(slug, title, place, svg, out_dir, landscape=True, zoom=True, anchor=None, credit=None):
+def make(slug, title, place, svg, out_dir, landscape=True, zoom=True, anchor=None, credit=None, trim=True):
     """zoom=False keeps the whole scene even when it is mostly water (a frame drawn to hold shore and
     water together); anchor='left' or 'top' keeps that edge when the panel crops the scene; a number 0-1 is the share of a vertical crop taken from the top."""
-    box = content_box(svg, zoom)
+    box = content_box(svg, zoom, trim)
     cx, cy = box[0] + box[2] / 2, box[1] + box[3] * 0.55
     PANEL = 1.73   # the 36x24 layout's map panel, width / height
     if anchor == 'left': cx = box[0] + min(box[2], box[3] * PANEL) / 2
