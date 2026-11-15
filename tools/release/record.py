@@ -82,10 +82,18 @@ def history_inputs(r):
     return {p: sha(os.path.join(ISO, p)) for p in out}
 
 
-def scene(region, year, svg, flags=(), build_id=None):
+def scene(region, year, svg, flags=(), build_id=None, made_at=None):
+    """A scene the print was cut from. Its SVG is frozen by hash (out/ is a work area), so the
+    print can always be recomposed exactly; `commit` is the code it was drawn with, when known."""
     s = {'region': region, 'year': year, 'flags': list(flags), 'svg': rel(svg) if os.path.exists(svg) else svg,
          'sha256': sha(svg) if os.path.exists(svg) else None}
+    if s['sha256']:
+        dst = os.path.join(SNAP, 'scenes', s['sha256'] + '.svg')
+        if not os.path.exists(dst):
+            os.makedirs(os.path.dirname(dst), exist_ok=True); shutil.copy2(svg, dst)
+        s['frozen'] = rel(dst)
     if build_id: s['build'] = build_id
+    if made_at: s['commit'] = made_at
     return s
 
 
@@ -146,7 +154,8 @@ def from_spec(key, d, made):
         pick = [b for b in cands if b[:15] <= when] or cands
         if not pick: scenes.append({'build': None, 'name': name}); continue
         b = pick[-1]; m = json.load(open(os.path.join(ISO, 'out', 'builds', b, 'meta.json')))
-        scenes.append(scene(m['region'], (m.get('time') or {}).get('year'), os.path.join(ISO, 'out', 'builds', b, 'image.svg'), build_id=b))
+        scenes.append(scene(m['region'], (m.get('time') or {}).get('year'), os.path.join(ISO, 'out', 'builds', b, 'image.svg'), build_id=b,
+                            made_at=(m.get('git') or {}).get('commit')))
     recipe = {'tool': 'tools/print/compose.py', 'run': [f'python3 tools/print/compose.py tools/print/spec.json out/builds <out> --only {key}'],
               'pinned': 'panels use the builds named in scenes[].build, not the newest'}
     return 'compose', recipe, scenes, {'tools/print/spec.json': sha(os.path.join(ISO, 'tools', 'print', 'spec.json'))}

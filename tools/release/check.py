@@ -9,7 +9,7 @@ commit and frozen data byte for byte.
 frozen copies, builds each scene as recorded, and compares SHA-256. A scene that matches is
 proof the design can be remade exactly; the check writes "reproduces" into the record.
 """
-import argparse, hashlib, json, os, shutil, subprocess, sys, tempfile
+import argparse, hashlib, json, os, shutil, subprocess, sys, tempfile, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ISO = os.path.normpath(os.path.join(HERE, '..', '..'))
@@ -38,16 +38,14 @@ def problems(store, r):
             if not os.path.exists(q): bad.append(('frozen data missing', dd['snapshot'], f))
             elif sha(q) != h: bad.append(('frozen data changed', dd['snapshot'], f))
     for s in r['scenes']:
-        p = os.path.join(ISO, s.get('svg') or '')
-        if s.get('sha256') and (not os.path.exists(p) or sha(p) != s['sha256']): bad.append(('scene svg differs from record (rebuild to confirm)', s.get('svg')))
+        f = os.path.join(ISO, s.get('frozen') or '')
+        if s.get('sha256') and (not s.get('frozen') or not os.path.exists(f) or sha(f) != s['sha256']): bad.append(('frozen scene missing or changed', s.get('frozen')))
     c = r['isoscape']['commit']
     if subprocess.run(['git', '-C', ISO, 'cat-file', '-e', c + '^{commit}']).returncode != 0: bad.append(('commit not in repo', c))
     return bad
 
 
-def rebuild(r, keep):
-    """(matched, total) scenes rebuilt from the record's commit and frozen data."""
-    c = r['isoscape']['commit']
+def worktree(c, r, keep):
     wt = keep.get(c)
     if wt is None:
         wt = tempfile.mkdtemp(prefix='iso-rel-')
@@ -59,10 +57,17 @@ def rebuild(r, keep):
         if os.path.islink(link): os.unlink(link)
         elif os.path.isdir(link): shutil.rmtree(link)   # data tracked in git at that commit: the frozen copy has it too
         os.symlink(os.path.join(ISO, dd['snapshot']), link)
+    return wt
+
+
+def rebuild(r, keep):
+    """(matched, total) scenes rebuilt from their commit (the scene's own, else the record's)
+    and the frozen data. A scene that does not match is still safe: its frozen SVG is the art."""
     ok = n = 0
     for s in r['scenes']:
         if not s.get('region') or not s.get('sha256'): continue
         n += 1
+        wt = worktree(s.get('commit') or r['isoscape']['commit'], r, keep)
         with tempfile.TemporaryDirectory() as t:
             cmd = ['node', 'bin/isoscape.js', 'build', s['region'], '--no-archive', '--out', t] + (['--year', str(s['year'])] if s.get('year') is not None else []) + s.get('flags', [])
             subprocess.run(cmd, cwd=wt, capture_output=True)
@@ -76,16 +81,19 @@ def rebuild(r, keep):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('store'); ap.add_argument('designs', nargs='*'); ap.add_argument('--rebuild', action='store_true')
+    ap.add_argument('--budget', type=float, default=1e9, help='seconds; stop between designs after this (rebuilds resume where they left off)')
+    ap.add_argument('--again', action='store_true', help='rebuild designs already rebuilt')
     a = ap.parse_args()
     index = json.load(open(os.path.join(REL, 'index.json')))
-    keep, fails = {}, 0
+    keep, fails, t0 = {}, 0, time.time()
     try:
         for k in a.designs or list(index):
+            if time.time() - t0 > a.budget: print('OUT OF TIME: run again to continue'); break
             p = os.path.join(REL, k, f"v{index[k]['current']}.json")
             r = json.load(open(p))
             bad = problems(a.store, r)
             line = f"{k} v{r['version']}: " + ('OK' if not bad else f'{len(bad)} problem(s): {bad[:3]}')
-            if a.rebuild:
+            if a.rebuild and (a.again or 'reproduced' not in r):
                 ok, n = rebuild(r, keep)
                 r['reproduced'] = {'scenes': n, 'matched': ok}
                 json.dump(r, open(p, 'w'), indent=1, ensure_ascii=False)
