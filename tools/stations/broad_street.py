@@ -297,6 +297,23 @@ for k, t in enumerate(PLATFORMS):
             'sources': [SRC['photo-1969']],
         })
 
+# The loop's grounds: the tracks and the hill they ran around, out to 12 m beyond the outermost
+# track and closed along the main line. None of today's streets, paths or parking run here.
+edge = []
+for k, (p, d) in enumerate(zip(center, acc)):
+    if k % 3:
+        continue
+    nx, ny = normal(k)
+    reach = max(abs(offset(i, d)) for i in range(len(TRACKS))) + 12
+    edge.append((p[0] + nx * reach, p[1] + ny * reach))
+# Back north just inside the main line (OSM ways 880021818 and 880021819), so it is kept.
+edge += [(425, 160), (366, 302), (276, 392), (196, 476), (146, 545), (30, 760)]
+features.append({
+    'id': 'bss-grounds', 'name': 'Broad Street Station loop', 'kind': 'site', 'from': 1919, 'to': 1976, 'ring': ring(edge),
+    'note': 'The station loop and the hill inside it, closed along the RF&P main: railroad land, so today\'s streets and lots there are not drawn.',
+    'sources': LOOP_SRC,
+})
+
 # The express building beside the express tracks, from the 1956 quadrangle.
 features.append({
     'id': 'bss-express', 'name': 'Express building (Railway Express Agency)', 'kind': 'landmark', 'from': 1919, 'to': 1976,
@@ -337,7 +354,7 @@ features.append({
 # ---- the city around it: car lines and era rules from the streetcar history ------------------------
 sc = json.loads(STREETCARS.read_text())
 # At this scale a car line is drawn at the width of its double track, not the bold city-map ribbon.
-features += [{**f, 'width': 5.5} for f in sc['features'] if f['kind'] == 'streetcar' and f.get('from', 0) <= 1943 < f.get('to', 9999)]
+features += [{**f, 'width': 4.0} for f in sc['features'] if f['kind'] == 'streetcar' and f.get('from', 0) <= 1943 < f.get('to', 9999)]
 
 rules = [
     {'where': {'id': ['w1485004507', 'w1485004508', 'w1089070999']}, 'eras': [],

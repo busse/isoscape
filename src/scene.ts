@@ -195,20 +195,21 @@ export const buildScene = (
   const ribbons: Ribbon[] = []
   // A town plan, while it is the whole town, keeps only the streets inside it.
   const plans = curated.filter((h) => h.kind === 'plan' && h.limitsStreets && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
-  // Curated water (a filled basin) was not yet built over: nothing of today's runs across it.
-  const basins = curated.filter((h) => h.kind === 'water' && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
+  // Curated water (a filled basin) was not yet built over, and a site (a station's grounds) was
+  // laid out otherwise: nothing of today's runs across either.
+  const basins = curated.filter((h) => (h.kind === 'water' || h.kind === 'site') && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
   const inTown = (a: Vec2, b: Vec2) => {
     const mid: Vec2 = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]
     return (plans.length === 0 || plans.some((r) => pointInRing(mid, r))) && !basins.some((r) => pointInRing(mid, r))
   }
-  const ribbonOf = (kind: Ribbon['kind'], line: LineFeature, width: number): Ribbon | null => {
+  const ribbonOf = (kind: Ribbon['kind'], line: LineFeature, width: number, today = true): Ribbon | null => {
     const pts = line.points.map(([lon, lat]) => view.toView(lon, lat))
     const quads: Vec2[][] = []
     const center: Vec2[][] = []
     for (let i = 0; i + 1 < pts.length; i++) {
       const seg = clipSegmentToRect(pts[i], pts[i + 1], wide)
       if (seg === null) continue
-      if ((kind === 'road' || kind === 'path' || kind === 'rail') && !inTown(seg[0], seg[1])) continue
+      if (today && (kind === 'road' || kind === 'path' || kind === 'rail') && !inTown(seg[0], seg[1])) continue
       const q = segmentQuad(seg[0], seg[1], width / 2, width / 2)
       if (q === null) continue
       quads.push(q)
@@ -252,7 +253,7 @@ export const buildScene = (
   for (const h of curated) {
     if (h.kind !== 'rail') continue
     for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
-      const r = ribbonOf('rail', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, h.width ?? 3.2)
+      const r = ribbonOf('rail', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, h.width ?? 3.2, false)
       if (r) ribbons.push(r)
     }
   }
