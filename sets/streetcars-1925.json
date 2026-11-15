@@ -5,11 +5,25 @@
  "subtitle": "Sixteen car lines and the places they ran to, in the city that gave the world the electric streetcar",
  "note": "Lines follow today's streets, placed from the City Planning Commission's plate of the 1925 routes and the sources cited for each; some ends are approximate. Buildings are those standing by 1925.",
  "credit": "isoscape by Chris Busse  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Buildings dated from City of Richmond assessor records and traced from Sanborn maps (Library of Congress)  ·  Routes after Harland Bartholomew & Associates for the City Planning Commission, plate 53 (1943)",
- "map": {"region": "richmond-streetcars", "year": 1925},
- "fine": ["--streetcar-scale", "1.5"],
+ "map": {
+  "region": "richmond-streetcars",
+  "year": 1925
+ },
+ "fine": [
+  "--streetcar-scale",
+  "1.5"
+ ],
  "boxes": "tools/streetcars/stops.json",
- "key": {"from": "tools/streetcars/routes.json", "list": "routes", "name": "name", "color": "tram"},
- "ground": {"menu": 1800, "box": 2100},
+ "key": {
+  "from": "tools/streetcars/routes.json",
+  "list": "routes",
+  "name": "name",
+  "color": "tram"
+ },
+ "ground": {
+  "menu": 1800,
+  "box": 2100
+ },
  "box_label": "Richmond's streetcars, 1925",
  "page": {
   "slug": "streetcars",
@@ -20,8 +34,48 @@
   "intro": "In May 1888 Frank Sprague's electric cars began running on Richmond's hills, the first big electric street railway that worked, and the city grew out along the lines. This map draws the system as it stood in 1925: sixteen car lines over the buildings then standing, with fourteen places the cars ran to framed around it, from the suburbs they made to the trolley parks at the ends of the line.",
   "image_alt": "The 1925 map, framed by its fourteen stops",
   "boxes_heading": "The stops",
-  "table": {"heading": "The lines", "intro": "Each line follows the streets its sources name, placed on today's streets. Where a source is silent, the ends are approximate.", "from": "tools/streetcars/routes.json", "list": "routes", "columns": [["Line", "name"], ["Route", "route"], ["Ran", "{from}–{to}"]]},
+  "table": {
+   "heading": "The lines",
+   "intro": "Each line follows the streets its sources name, placed on today's streets. Where a source is silent, the ends are approximate.",
+   "from": "tools/streetcars/routes.json",
+   "list": "routes",
+   "columns": [
+    [
+     "Line",
+     "name"
+    ],
+    [
+     "Route",
+     "route"
+    ],
+    [
+     "Ran",
+     "{from}–{to}"
+    ]
+   ]
+  },
   "how": "The routes come from plate 53 of Harland Bartholomew & Associates' 1943 report to the City Planning Commission, *Early Transit Routes, 1888 & 1925*, with the details from the sources listed for each line. Buildings are the ones standing today that the city assessor dates to 1925 or before, plus those traced from Sanborn fire-insurance maps downtown; small streets are drawn only where a house of the year stood nearby. Henrico County keeps no such dates online, so the suburbs across the 1925 county line look emptier than they were. On the big map, lines and cars are drawn three times life size; on the single-stop prints, one and a half.",
   "shop": "https://chrisbusse.com/collections/richmond-streetcars-1925"
+ },
+ "store": {
+  "place": "Richmond streetcars",
+  "tag": "streetcars-1925",
+  "collection": {
+   "handle": "richmond-streetcars-1925",
+   "title": "Richmond's Streetcars, 1925",
+   "description": "Richmond's sixteen streetcar lines as they ran in 1925, and fourteen of the places they served: the trolley parks at the ends of the lines, the streetcar suburbs they built, and the corners downtown. The big map framed by every stop, the map alone, and a print for each stop. <a href=\"https://busse.github.io/isoscape/#/streetcars\">The stops, their stories and sources ↗</a>",
+   "menu_label": "Richmond's streetcars, 1925"
+  },
+  "menu": {
+   "title": "Richmond's Streetcars, 1925: The Lines and Fourteen Stops",
+   "blurb": "Richmond's sixteen streetcar lines as they ran in 1925, drawn over the buildings then standing and framed by fourteen of the places the cars served, each with a short history: the trolley parks at the ends of the lines, the streetcar suburbs they built, and the corners downtown."
+  },
+  "map": {
+   "title": "Richmond's Streetcars, 1925: The System Map",
+   "blurb": "Richmond's sixteen streetcar lines as they ran in 1925, from Westhampton to Fulton and from Lakeside to Forest Hill, drawn over the buildings then standing, with fourteen stops numbered."
+  },
+  "box_title": "{title}, Richmond Streetcars 1925",
+  "box_line": "{subtitle}. Stop {n} of fourteen on Richmond's Streetcars, 1925.",
+  "credit_extra": "Routes after Harland Bartholomew &amp; Associates for the City Planning Commission, plate 53 (1943), with the sources cited for each stop on the <a href=\"https://busse.github.io/isoscape/#/streetcars\">streetcars page ↗</a>."
  }
 }
