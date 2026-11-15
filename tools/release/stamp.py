@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+"""Stamp a design's title block onto its print and canvas files, as its next version.
+
+The art is not redrawn: version N+1 is version N's sold files, unchanged, with the title block
+(tools/print/titleblock.py) set into the bottom-right corner of the sheet, or of the canvas face
+(the mirrored wrap is left as it was). Because the base files are frozen in version N's record,
+the new files can always be made again from them byte for byte (check.py --rebuild does this).
+
+    python3 tools/release/stamp.py <store-dir> <design>... --version N [--out DIR] [--dry]
+
+Without --out the new files go beside the old ones, named <stem>-vN_<size>.jpg. Prints each
+placement (x, y, w, h and the size used); a sheet with no room raises an error.
+"""
+import argparse, json, os, re, sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ISO = os.path.normpath(os.path.join(HERE, '..', '..'))
+sys.path.insert(0, os.path.join(ISO, 'tools', 'print')); sys.path.insert(0, HERE)
+from PIL import Image  # noqa: E402
+import titleblock, plates  # noqa: E402
+
+Image.MAX_IMAGE_PIXELS = None
+WRAP = 1.5            # inches of mirrored wrap around a canvas face (tools/sets/set.py, compose.py)
+
+
+def size_u(long_in, dpi):
+    """The block's size for a sheet: 1.3 on a 36 in sheet at 300 dpi, a little smaller on
+    smaller sheets (by the square root, so it stays legible), in the file's own pixels."""
+    return round(1.3 * (long_in / 36) ** 0.5 * dpi / 300, 4)
+
+
+def versioned(name, n):
+    stem, size = re.match(r'(.+?)(_(?:canvas-)?\d+x\d+\.jpg)$', name).groups()
+    return re.sub(r'-v\d+$', '', stem) + f'-v{n}' + size
+
+
+def sheet_geometry(name, im):
+    """(face box or None, long side in inches, dpi) from a file's name and pixel size."""
+    m = re.search(r'_canvas-(\d+)x(\d+)\.jpg$', name)
+    if m:
+        w_in, h_in = int(m.group(1)), int(m.group(2))
+        dpi = im.width / (w_in + 2 * WRAP)
+        wr = round(WRAP * dpi)
+        return (wr, wr, im.width - wr, im.height - wr), max(w_in, h_in), dpi
+    w_in, h_in = map(int, re.search(r'_(\d+)x(\d+)\.jpg$', name).groups())
+    if (im.width > im.height) != (w_in > h_in): w_in, h_in = h_in, w_in
+    return None, max(w_in, h_in), im.width / w_in
+
+
+def files_of(store, d, key):
+    pdir = os.path.join(store, d.get('print_dir') or ('print-files/landmarks' if key.startswith('lm-') else 'print-files'))
+    out = [os.path.join(pdir, d['print'])]
+    if d.get('canvas'):
+        rx = re.compile('^' + re.escape(d['canvas']).replace(r'\{w\}', r'\d+').replace(r'\{h\}', r'\d+') + '$')
+        for sub in (os.path.join(pdir, 'canvas'), pdir):
+            if os.path.isdir(sub):
+                out += sorted(os.path.join(sub, f) for f in os.listdir(sub) if rx.match(f))
+    return out
+
+
+def stamp_file(src, dst, info):
+    im = Image.open(src)
+    face, long_in, dpi = sheet_geometry(os.path.basename(src), im)
+    out, at = titleblock.stamp(im, info, size_u(long_in, dpi), face)
+    kw = {k: im.info[k] for k in ('dpi', 'icc_profile') if k in im.info}
+    if im.format == 'JPEG':   # the source's own quantization and chroma subsampling
+        from PIL import JpegImagePlugin
+        kw.update(qtables=im.quantization, subsampling=JpegImagePlugin.get_sampling(im))
+    out.save(dst, **kw)
+    return at
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('store'); ap.add_argument('designs', nargs='+')
+    ap.add_argument('--version', type=int, help='the new version (default: the catalog version + 1)')
+    ap.add_argument('--drawn', default='2026'); ap.add_argument('--out'); ap.add_argument('--dry', action='store_true')
+    a = ap.parse_args()
+    cat = json.load(open(os.path.join(a.store, 'pipeline', 'catalog.json')))['designs']
+    report = {}
+    for key in a.designs:
+        d = cat[key]; n = a.version or d.get('version', 1) + 1
+        info = plates.info(key, n, a.drawn)
+        report[key] = {'version': n, 'info': info, 'files': {}}
+        for src in files_of(a.store, d, key):
+            dst = os.path.join(a.out or os.path.dirname(src), versioned(os.path.basename(src), n))
+            if a.dry: report[key]['files'][os.path.basename(src)] = os.path.basename(dst); continue
+            at = stamp_file(src, dst, info)
+            report[key]['files'][os.path.basename(src)] = {'to': os.path.basename(dst), 'at': at}
+            print(key, os.path.basename(dst), at, flush=True)
+    if a.out:
+        json.dump(report, open(os.path.join(a.out, 'stamp-report.json'), 'w'), indent=1, ensure_ascii=False)
+    return report
+
+
+if __name__ == '__main__':
+    main()

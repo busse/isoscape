@@ -1,0 +1,741 @@
+{
+ "about": "The plate register: one permanent catalog number for every isoscape design. A plate never changes when a design is redrawn (that is its version) and is never reused, even if a design is withdrawn. Printed form uses a middle dot (STC·02); data and filenames use a hyphen (STC-02). See \"Plates\" in the README.",
+ "scheme": {
+  "plate": "<SET>-<NN>: the set's three-letter code, then the piece's number within the set",
+  "numbers": "two digits, given in order of first release within the set and never reused; a set of boxes uses its box numbers, 00 for the set sheet (the framed menu of boxes) and M for its map",
+  "taxonomy": "isoscape › collection › set › piece. A collection or set can be renamed without changing any plate."
+ },
+ "collections": [
+  {
+   "id": "places",
+   "name": "Places through time",
+   "about": "A place drawn as it stood in one or more years."
+  },
+  {
+   "id": "buildings",
+   "name": "Buildings in their time",
+   "about": "One building drawn close up in its own time, with the places around it."
+  },
+  {
+   "id": "landmarks",
+   "name": "Landmarks",
+   "about": "A landmark drawn in its surroundings today."
+  }
+ ],
+ "sets": [
+  {
+   "code": "RVA",
+   "name": "Richmond",
+   "collection": "places"
+  },
+  {
+   "code": "STC",
+   "name": "Richmond's Streetcars, 1925",
+   "collection": "places",
+   "slug": "streetcars-1925"
+  },
+  {
+   "code": "GWY",
+   "name": "Gwynn's Island",
+   "collection": "places"
+  },
+  {
+   "code": "BSS",
+   "name": "Broad Street Station, 1943",
+   "collection": "buildings",
+   "slug": "broad-street-1943"
+  },
+  {
+   "code": "LMA",
+   "name": "American Landmarks",
+   "collection": "landmarks"
+  },
+  {
+   "code": "LMW",
+   "name": "World Landmarks",
+   "collection": "landmarks"
+  }
+ ],
+ "registered": "2026-11-15",
+ "plates": [
+  {
+   "plate": "RVA-01",
+   "design": "richmond-1925",
+   "title": "Richmond, 1925",
+   "piece": "1925",
+   "place": "Richmond"
+  },
+  {
+   "plate": "RVA-02",
+   "design": "richmond-1865",
+   "title": "Richmond, 1865",
+   "piece": "1865",
+   "place": "Richmond"
+  },
+  {
+   "plate": "RVA-03",
+   "design": "richmond-1886",
+   "title": "Richmond, 1886",
+   "piece": "1886",
+   "place": "Richmond"
+  },
+  {
+   "plate": "RVA-04",
+   "design": "richmond-1950",
+   "title": "Richmond, 1950",
+   "piece": "1950",
+   "place": "Richmond"
+  },
+  {
+   "plate": "RVA-05",
+   "design": "richmond-2026",
+   "title": "Richmond, 2026",
+   "piece": "2026",
+   "place": "Richmond"
+  },
+  {
+   "plate": "RVA-06",
+   "design": "richmond-through-time",
+   "title": "Richmond, 1737–2026",
+   "piece": "1737–2026",
+   "place": "Richmond"
+  },
+  {
+   "plate": "RVA-07",
+   "design": "then-and-now",
+   "title": "Richmond, Then & Now",
+   "piece": "Then & Now",
+   "place": "Richmond"
+  },
+  {
+   "plate": "GWY-01",
+   "design": "gwynns-island",
+   "title": "Gwynn's Island",
+   "piece": "Gwynn's Island",
+   "place": "Gwynn's Island"
+  },
+  {
+   "plate": "RVA-08",
+   "design": "richmond-panorama-2026",
+   "title": "Richmond and the James",
+   "piece": "Richmond and the James",
+   "place": "Richmond"
+  },
+  {
+   "plate": "LMA-01",
+   "design": "lm-times-square",
+   "title": "Times Square",
+   "piece": "Times Square",
+   "place": "New York City"
+  },
+  {
+   "plate": "LMA-02",
+   "design": "lm-brooklyn-bridge",
+   "title": "Brooklyn Bridge",
+   "piece": "Brooklyn Bridge",
+   "place": "New York City"
+  },
+  {
+   "plate": "LMA-03",
+   "design": "lm-central-park",
+   "title": "Central Park",
+   "piece": "Central Park",
+   "place": "New York City"
+  },
+  {
+   "plate": "LMA-04",
+   "design": "lm-statue-of-liberty",
+   "title": "Statue of Liberty",
+   "piece": "Statue of Liberty",
+   "place": "New York Harbor"
+  },
+  {
+   "plate": "LMA-05",
+   "design": "lm-flatiron-building",
+   "title": "Flatiron Building",
+   "piece": "Flatiron Building",
+   "place": "New York City"
+  },
+  {
+   "plate": "LMA-06",
+   "design": "lm-us-capitol",
+   "title": "U.S. Capitol",
+   "piece": "U.S. Capitol",
+   "place": "Washington, D.C."
+  },
+  {
+   "plate": "LMA-07",
+   "design": "lm-white-house",
+   "title": "The White House",
+   "piece": "The White House",
+   "place": "Washington, D.C."
+  },
+  {
+   "plate": "LMA-08",
+   "design": "lm-world-trade-center",
+   "title": "One World Trade Center",
+   "piece": "One World Trade Center",
+   "place": "New York City"
+  },
+  {
+   "plate": "LMA-09",
+   "design": "lm-lincoln-memorial",
+   "title": "Lincoln Memorial",
+   "piece": "Lincoln Memorial",
+   "place": "Washington, D.C."
+  },
+  {
+   "plate": "LMA-10",
+   "design": "lm-washington-monument",
+   "title": "Washington Monument",
+   "piece": "Washington Monument",
+   "place": "Washington, D.C."
+  },
+  {
+   "plate": "LMA-11",
+   "design": "lm-jefferson-memorial",
+   "title": "Jefferson Memorial",
+   "piece": "Jefferson Memorial",
+   "place": "Washington, D.C."
+  },
+  {
+   "plate": "LMA-12",
+   "design": "lm-independence-hall",
+   "title": "Independence Hall",
+   "piece": "Independence Hall",
+   "place": "Philadelphia"
+  },
+  {
+   "plate": "LMA-13",
+   "design": "lm-philadelphia-museum-of-art",
+   "title": "Philadelphia Museum of Art",
+   "piece": "Philadelphia Museum of Art",
+   "place": "Philadelphia"
+  },
+  {
+   "plate": "LMA-14",
+   "design": "lm-faneuil-hall",
+   "title": "Faneuil Hall",
+   "piece": "Faneuil Hall",
+   "place": "Boston"
+  },
+  {
+   "plate": "LMA-15",
+   "design": "lm-plymouth-rock",
+   "title": "Plymouth Rock",
+   "piece": "Plymouth Rock",
+   "place": "Plymouth, Massachusetts"
+  },
+  {
+   "plate": "LMA-16",
+   "design": "lm-buckingham-fountain",
+   "title": "Buckingham Fountain",
+   "piece": "Buckingham Fountain",
+   "place": "Chicago"
+  },
+  {
+   "plate": "LMA-17",
+   "design": "lm-bunker-hill",
+   "title": "Bunker Hill Monument",
+   "piece": "Bunker Hill Monument",
+   "place": "Boston"
+  },
+  {
+   "plate": "LMA-18",
+   "design": "lm-devils-tower",
+   "title": "Devils Tower",
+   "piece": "Devils Tower",
+   "place": "Crook County, Wyoming"
+  },
+  {
+   "plate": "LMA-19",
+   "design": "lm-gateway-arch",
+   "title": "Gateway Arch",
+   "piece": "Gateway Arch",
+   "place": "St. Louis"
+  },
+  {
+   "plate": "LMA-20",
+   "design": "lm-coit-tower",
+   "title": "Coit Tower",
+   "piece": "Coit Tower",
+   "place": "San Francisco"
+  },
+  {
+   "plate": "LMA-21",
+   "design": "lm-castillo-de-san-marcos",
+   "title": "Castillo de San Marcos",
+   "piece": "Castillo de San Marcos",
+   "place": "St. Augustine, Florida"
+  },
+  {
+   "plate": "LMA-22",
+   "design": "lm-gettysburg",
+   "title": "Gettysburg Battlefield",
+   "piece": "Gettysburg Battlefield",
+   "place": "Gettysburg, Pennsylvania"
+  },
+  {
+   "plate": "LMA-23",
+   "design": "lm-jackson-square",
+   "title": "Jackson Square",
+   "piece": "Jackson Square",
+   "place": "New Orleans"
+  },
+  {
+   "plate": "LMA-24",
+   "design": "lm-chicago-river",
+   "title": "The Chicago River",
+   "piece": "The Chicago River",
+   "place": "Chicago"
+  },
+  {
+   "plate": "LMA-25",
+   "design": "lm-alcatraz",
+   "title": "Alcatraz Island",
+   "piece": "Alcatraz Island",
+   "place": "San Francisco Bay"
+  },
+  {
+   "plate": "LMA-26",
+   "design": "lm-lombard-street",
+   "title": "Lombard Street",
+   "piece": "Lombard Street",
+   "place": "San Francisco"
+  },
+  {
+   "plate": "LMA-27",
+   "design": "lm-hearst-castle",
+   "title": "Hearst Castle",
+   "piece": "Hearst Castle",
+   "place": "San Simeon, California"
+  },
+  {
+   "plate": "LMA-28",
+   "design": "lm-monticello",
+   "title": "Monticello",
+   "piece": "Monticello",
+   "place": "Charlottesville, Virginia"
+  },
+  {
+   "plate": "LMA-29",
+   "design": "lm-mount-vernon",
+   "title": "Mount Vernon",
+   "piece": "Mount Vernon",
+   "place": "Fairfax County, Virginia"
+  },
+  {
+   "plate": "LMA-30",
+   "design": "lm-las-vegas-strip",
+   "title": "The Las Vegas Strip",
+   "piece": "The Las Vegas Strip",
+   "place": "Las Vegas"
+  },
+  {
+   "plate": "LMA-31",
+   "design": "lm-delicate-arch",
+   "title": "Delicate Arch",
+   "piece": "Delicate Arch",
+   "place": "Arches National Park, Utah"
+  },
+  {
+   "plate": "LMA-32",
+   "design": "lm-savannah-squares",
+   "title": "Savannah's Squares",
+   "piece": "Savannah's Squares",
+   "place": "Savannah, Georgia"
+  },
+  {
+   "plate": "LMA-33",
+   "design": "lm-griffith-observatory",
+   "title": "Griffith Observatory",
+   "piece": "Griffith Observatory",
+   "place": "Los Angeles"
+  },
+  {
+   "plate": "LMA-34",
+   "design": "lm-texas-capitol",
+   "title": "Texas State Capitol",
+   "piece": "Texas State Capitol",
+   "place": "Austin"
+  },
+  {
+   "plate": "LMA-35",
+   "design": "lm-the-alamo",
+   "title": "The Alamo",
+   "piece": "The Alamo",
+   "place": "San Antonio"
+  },
+  {
+   "plate": "LMA-36",
+   "design": "lm-cape-hatteras-lighthouse",
+   "title": "Cape Hatteras Lighthouse",
+   "piece": "Cape Hatteras Lighthouse",
+   "place": "Outer Banks, North Carolina"
+  },
+  {
+   "plate": "LMA-37",
+   "design": "lm-golden-gate-bridge",
+   "title": "Golden Gate Bridge",
+   "piece": "Golden Gate Bridge",
+   "place": "San Francisco"
+  },
+  {
+   "plate": "LMA-38",
+   "design": "lm-wright-brothers",
+   "title": "Wright Brothers National Memorial",
+   "piece": "Wright Brothers National Memorial",
+   "place": "Kill Devil Hills, North Carolina"
+  },
+  {
+   "plate": "LMA-39",
+   "design": "lm-niagara-falls",
+   "title": "Niagara Falls",
+   "piece": "Niagara Falls",
+   "place": "New York and Ontario"
+  },
+  {
+   "plate": "LMA-40",
+   "design": "lm-crater-lake",
+   "title": "Crater Lake",
+   "piece": "Crater Lake",
+   "place": "Oregon"
+  },
+  {
+   "plate": "LMA-41",
+   "design": "lm-half-dome",
+   "title": "Half Dome and Yosemite Valley",
+   "piece": "Half Dome and Yosemite Valley",
+   "place": "Yosemite National Park"
+  },
+  {
+   "plate": "LMA-42",
+   "design": "lm-grand-canyon",
+   "title": "Grand Canyon",
+   "piece": "Grand Canyon",
+   "place": "Arizona"
+  },
+  {
+   "plate": "LMA-43",
+   "design": "lm-kennedy-space-center",
+   "title": "Kennedy Space Center",
+   "piece": "Kennedy Space Center",
+   "place": "Cape Canaveral, Florida"
+  },
+  {
+   "plate": "LMA-44",
+   "design": "lm-mount-st-helens",
+   "title": "Mount St. Helens",
+   "piece": "Mount St. Helens",
+   "place": "Washington"
+  },
+  {
+   "plate": "LMA-45",
+   "design": "lm-mount-rushmore",
+   "title": "Mount Rushmore",
+   "piece": "Mount Rushmore",
+   "place": "Black Hills, South Dakota"
+  },
+  {
+   "plate": "LMA-46",
+   "design": "lm-old-faithful",
+   "title": "Old Faithful",
+   "piece": "Old Faithful",
+   "place": "Yellowstone National Park"
+  },
+  {
+   "plate": "LMA-47",
+   "design": "lm-hoover-dam",
+   "title": "Hoover Dam",
+   "piece": "Hoover Dam",
+   "place": "Nevada and Arizona"
+  },
+  {
+   "plate": "LMA-48",
+   "design": "lm-diamond-head",
+   "title": "Waikiki and Diamond Head",
+   "piece": "Waikiki and Diamond Head",
+   "place": "Honolulu, Hawaii"
+  },
+  {
+   "plate": "LMA-49",
+   "design": "lm-pearl-harbor",
+   "title": "Pearl Harbor",
+   "piece": "Pearl Harbor",
+   "place": "Honolulu, Hawaii"
+  },
+  {
+   "plate": "LMA-50",
+   "design": "lm-fort-sumter",
+   "title": "Fort Sumter",
+   "piece": "Fort Sumter",
+   "place": "Charleston Harbor, South Carolina"
+  },
+  {
+   "plate": "RVA-09",
+   "design": "richmond-james-2026",
+   "title": "The James, I-195 to Rocketts Landing",
+   "piece": "The James, I-195 to Rocketts",
+   "place": "Richmond"
+  },
+  {
+   "plate": "LMW-01",
+   "design": "lm-eiffel-tower",
+   "title": "Eiffel Tower",
+   "piece": "Eiffel Tower",
+   "place": "Paris"
+  },
+  {
+   "plate": "LMW-02",
+   "design": "lm-himeji-castle",
+   "title": "Himeji Castle",
+   "piece": "Himeji Castle",
+   "place": "Hyōgo, Japan"
+  },
+  {
+   "plate": "LMW-03",
+   "design": "lm-machu-picchu",
+   "title": "Machu Picchu and Aguas Calientes",
+   "piece": "Machu Picchu and Aguas Calientes",
+   "place": "Cusco, Peru"
+  },
+  {
+   "plate": "LMW-04",
+   "design": "lm-sydney-opera-house",
+   "title": "Sydney Opera House and Harbour Bridge",
+   "piece": "Sydney Opera House and Harbour Bridge",
+   "place": "Sydney"
+  },
+  {
+   "plate": "LMW-05",
+   "design": "lm-matterhorn",
+   "title": "Matterhorn and Zermatt",
+   "piece": "Matterhorn and Zermatt",
+   "place": "Switzerland"
+  },
+  {
+   "plate": "STC-00",
+   "design": "streetcars-1925-menu",
+   "title": "Richmond's Streetcars, 1925: The Lines and Fourteen Stops",
+   "piece": "The set",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-M",
+   "design": "streetcars-1925-map",
+   "title": "Richmond's Streetcars, 1925: The System Map",
+   "piece": "The map",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-01",
+   "design": "streetcars-1925-01-westhampton",
+   "title": "Westhampton Park, Richmond Streetcars 1925",
+   "piece": "Box 1",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-02",
+   "design": "streetcars-1925-02-fair-grounds",
+   "title": "State Fair Grounds, Richmond Streetcars 1925",
+   "piece": "Box 2",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-03",
+   "design": "streetcars-1925-03-ginter-park",
+   "title": "Ginter Park, Richmond Streetcars 1925",
+   "piece": "Box 3",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-04",
+   "design": "streetcars-1925-04-barton-heights",
+   "title": "Barton Heights, Richmond Streetcars 1925",
+   "piece": "Box 4",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-05",
+   "design": "streetcars-1925-05-highland-park",
+   "title": "Highland Park, Richmond Streetcars 1925",
+   "piece": "Box 5",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-06",
+   "design": "streetcars-1925-06-nine-mile",
+   "title": "Nine Mile Road, Richmond Streetcars 1925",
+   "piece": "Box 6",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-07",
+   "design": "streetcars-1925-07-church-hill",
+   "title": "Church Hill and Jefferson Park, Richmond Streetcars 1925",
+   "piece": "Box 7",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-08",
+   "design": "streetcars-1925-08-broad-street",
+   "title": "Seventh and Broad, Richmond Streetcars 1925",
+   "piece": "Box 8",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-09",
+   "design": "streetcars-1925-09-manchester",
+   "title": "Manchester, Richmond Streetcars 1925",
+   "piece": "Box 9",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-10",
+   "design": "streetcars-1925-10-woodland-heights",
+   "title": "Woodland Heights, Richmond Streetcars 1925",
+   "piece": "Box 10",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-11",
+   "design": "streetcars-1925-11-forest-hill",
+   "title": "Forest Hill Park, Richmond Streetcars 1925",
+   "piece": "Box 11",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-12",
+   "design": "streetcars-1925-12-byrd-park",
+   "title": "Byrd Park, Richmond Streetcars 1925",
+   "piece": "Box 12",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-13",
+   "design": "streetcars-1925-13-the-fan",
+   "title": "The Fan, Richmond Streetcars 1925",
+   "piece": "Box 13",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "STC-14",
+   "design": "streetcars-1925-14-broad-laurel",
+   "title": "Broad and Laurel, Richmond Streetcars 1925",
+   "piece": "Box 14",
+   "place": "Richmond streetcars"
+  },
+  {
+   "plate": "BSS-00",
+   "design": "broad-street-1943-menu",
+   "title": "Broad Street Station, 1943: The Railroads and Fourteen Places",
+   "piece": "The set",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-M",
+   "design": "broad-street-1943-map",
+   "title": "Broad Street Station, 1943: The Railroad Map",
+   "piece": "The map",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-01",
+   "design": "broad-street-1943-01-ay-tower",
+   "title": "AY Tower, Broad Street Station 1943",
+   "piece": "Box 1",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-02",
+   "design": "broad-street-1943-02-fair-grounds",
+   "title": "The State Fair grounds, Broad Street Station 1943",
+   "piece": "Box 2",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-03",
+   "design": "broad-street-1943-03-hermitage-road",
+   "title": "Hermitage Road, Broad Street Station 1943",
+   "piece": "Box 3",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-04",
+   "design": "broad-street-1943-04-seaboard-junction",
+   "title": "Seaboard Junction, Broad Street Station 1943",
+   "piece": "Box 4",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-05",
+   "design": "broad-street-1943-05-loop",
+   "title": "The loop and the sheds, Broad Street Station 1943",
+   "piece": "Box 5",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-06",
+   "design": "broad-street-1943-06-sauer",
+   "title": "C.F. Sauer Company, Broad Street Station 1943",
+   "piece": "Box 6",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-07",
+   "design": "broad-street-1943-07-main-street-station",
+   "title": "Main Street Station, Broad Street Station 1943",
+   "piece": "Box 7",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-08",
+   "design": "broad-street-1943-08-triple-crossing",
+   "title": "The Triple Crossing, Broad Street Station 1943",
+   "piece": "Box 8",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-09",
+   "design": "broad-street-1943-09-co-viaduct",
+   "title": "The C&O viaduct, Broad Street Station 1943",
+   "piece": "Box 9",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-10",
+   "design": "broad-street-1943-10-hull-street",
+   "title": "Hull Street Station, Broad Street Station 1943",
+   "piece": "Box 10",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-11",
+   "design": "broad-street-1943-11-belt-line-bridge",
+   "title": "The Belt Line bridge, Broad Street Station 1943",
+   "piece": "Box 11",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-12",
+   "design": "broad-street-1943-12-william-byrd",
+   "title": "Hotel William Byrd, Broad Street Station 1943",
+   "piece": "Box 12",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-13",
+   "design": "broad-street-1943-13-from-the-fan",
+   "title": "Broad Street Station, Broad Street Station 1943",
+   "piece": "Box 13",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-14",
+   "design": "broad-street-1943-14-front",
+   "title": "Pope's front, Broad Street Station 1943",
+   "piece": "Box 14",
+   "place": "Broad Street Station"
+  }
+ ]
+}
