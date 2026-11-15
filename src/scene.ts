@@ -22,6 +22,7 @@ import { localMetres } from './region.ts'
 import { makeTerrain, rasterize, settleWater, stillWater, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
+import { canopyItems, dome, toned, trainItems } from './parts.ts'
 import { alive, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
@@ -164,7 +165,7 @@ export const buildScene = (
     }
   }
   for (const h of curated) {
-    if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan' || h.kind === 'grounds') && h.ring !== undefined) {
+    if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan' || h.kind === 'grounds' || h.kind === 'yard' || h.kind === 'platform') && h.ring !== undefined) {
       // Pleasure grounds that are gone (a fairground, an amusement park) take a tint of their own.
       const rings = curatedRings(h)
       if (rings.length > 0) ground.push({ kind: h.kind, rings })
@@ -246,6 +247,14 @@ export const buildScene = (
     if (h.kind !== 'creek' || h.line === undefined) continue
     const r = ribbonOf('canal', { type: 'line', id: h.id, tags: {}, points: h.line }, h.width ?? 6)
     if (r) ribbons.push(r)
+  }
+  // Curated track (a station's loop, long since taken up), drawn as rail.
+  for (const h of curated) {
+    if (h.kind !== 'rail') continue
+    for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
+      const r = ribbonOf('rail', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, h.width ?? 3.2)
+      if (r) ribbons.push(r)
+    }
   }
   // A racecourse or promenade that is gone: a closed loop drawn as a path.
   for (const h of curated) {
@@ -402,18 +411,49 @@ export const buildScene = (
     stats.undatedToday = undated
     // Curated landmarks: lost buildings, from published dimensions, in their own tone.
     let landmarks = 0
+    let parts = 0
     for (const h of curated) {
       if (h.kind !== 'landmark' || h.ring === undefined) continue
       const outer = orient(toViewRing(view, h.ring), true)
       if (!outer.every((p) => insideRect(p, frame))) continue
       const ruined = h.ruin !== undefined && time.year >= h.ruin
       const grounds = outer.map((p) => terrain.z(p))
+      if (h.tone !== undefined) {
+        // A part of a modeled building: from its seat, in its own tone.
+        const seat = (h.seat === 'max' ? Math.max(...grounds) : Math.min(...grounds)) + (h.base ?? 0)
+        const t = toned(pal, h.tone)
+        items.push(h.shape === 'dome'
+          ? dome(view, pal, `history:${h.id}`, outer, seat, seat + (h.height ?? 10), h.name)
+          : extrude(view, t.pal, `history:${h.id}`, outer, [], seat, seat + (h.height ?? 10), t.roof, 'none', h.name))
+        parts++
+        continue
+      }
       const base = Math.min(...grounds)
       const top = Math.max(...grounds) + (h.height ?? 10) * (ruined ? 0.45 : 1)
       items.push(extrude(view, pal, `history:${h.id}`, outer, [], base, top, ruined ? pal.ash : pal.lost, dotsMode, h.name))
       landmarks++
     }
     stats.landmarks = landmarks
+    if (parts > 0) stats.parts = parts
+    // Platform canopies and standing trains, set on the ground under them.
+    const inFrame = (p: Vec2) => p[0] > frame.minX + 5 && p[0] < frame.maxX - 5 && p[1] > frame.minY + 5 && p[1] < frame.maxY - 5
+    const keep = (list: Item[]) => list.filter((it) => it.hull.every(inFrame))
+    let canopies = 0
+    let cars = 0
+    for (const h of curated) {
+      if (h.kind === 'canopy' && h.line !== undefined) {
+        const got = keep(canopyItems(view, pal, `history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.width ?? 9, h.height ?? 5, (p) => terrain.z(p)))
+        items.push(...got)
+        canopies += got.length / 2
+      }
+      if (h.kind === 'rail' && h.train !== undefined && h.line !== undefined) {
+        const got = keep(trainItems(view, pal, `history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.train, (p) => terrain.z(p)))
+        items.push(...got)
+        cars += got.length
+      }
+    }
+    if (canopies > 0) stats.canopyPieces = canopies
+    if (cars > 0) stats.trainPieces = cars
     // Buildings traced from fire-insurance maps that are gone today, in the maps' colors.
     const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
     for (const b of time.history.traced) {

@@ -111,6 +111,9 @@ const densify = (ring: readonly Vec2[], step: number, closed = true): Vec2[] => 
 }
 
 /** Layers drawn on the water's surface rather than the ground's. */
+/** Pixels per meter at and above which tracks are drawn with ties and running rails. */
+export const CLOSE_RAIL = 1.5
+
 const WATERY = new Set(['W', 'canal', 'weir'])
 
 interface Entry { rings: Ring[]; minN: number; maxN: number }
@@ -136,6 +139,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   const drapeWater = (pt: Vec2) => P(pt, T.waterZ(pt))
 
   const items = paintOrder(scene.items)
+  const close = view.scale >= CLOSE_RAIL
 
   // ---- the frame on screen -------------------------------------------------------------------
   const xs: number[] = []
@@ -166,9 +170,13 @@ export const renderSvg = (scene: Scene): Rendered => {
     `.td{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth};stroke-dasharray:1.2 1.8}`,
     sealed('L', p.land), sealed('Lw', p.water),
     ...Object.entries(p.cover).map(([g, color]) => sealed(`cv-${g}`, color)), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
-    sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('plan', p.plan), sealed('grounds', p.grounds), sealed('racetrack', p.racetrack), sealed('burned', p.burned), sealed('canal', p.water), sealed('path', p.path),
+    sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('plan', p.plan), sealed('grounds', p.grounds), sealed('racetrack', p.racetrack), sealed('burned', p.burned), sealed('yard', p.yard), sealed('platform', p.platform), sealed('canal', p.water), sealed('path', p.path),
     sealed('road', p.road), sealed('rail', p.rail), sealed('tram', p.tram), sealed('weir', p.foam),
-    `.ties{fill:none;stroke:${p.railTie};stroke-width:${p.groundLineWidth * 2};stroke-dasharray:1 2.2}`,
+    // At close scale (CLOSE_RAIL px per meter or more) a track shows its ties, about 0.25 m
+    // wide every 0.67 m across 2 m of the ribbon, and its two running rails, 1.44 m apart.
+    close
+      ? `.ties{fill:none;stroke:${p.railTie};stroke-width:${f(view.scale * 2 * view.squash)};stroke-dasharray:${f(view.scale * 0.25)} ${f(view.scale * 0.42)};stroke-opacity:.75}.steel{fill:none;stroke:${p.railSteel};stroke-width:${f(Math.max(p.groundLineWidth, view.scale * 0.12))}}`
+      : `.ties{fill:none;stroke:${p.railTie};stroke-width:${p.groundLineWidth * 2};stroke-dasharray:1 2.2}`,
     `.crest{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:.6}`,
     `.cm{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:${p.contourMinor}}`,
     `.cM{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth * 1.6};stroke-opacity:${p.contourMajor}}`,
@@ -243,7 +251,18 @@ export const renderSvg = (scene: Scene): Rendered => {
     cls,
     segs: scene.ribbons.filter((rb) => rb.kind === kind).flatMap((rb) => rb.center),
   })
-  const lineLayers = [lineLayer('rail', 'ties'), lineLayer('weir', 'crest')]
+  const railCenters = lineLayer('rail', 'ties').segs
+  const gauge = (k: number): Vec2[][] => railCenters.map(([a, b]) => {
+    const len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
+    const nx = ((b[1] - a[1]) / len) * k
+    const ny = (-(b[0] - a[0]) / len) * k
+    return [[a[0] + nx, a[1] + ny], [b[0] + nx, b[1] + ny]]
+  })
+  const lineLayers = [
+    lineLayer('rail', 'ties'),
+    ...(close ? [{ cls: 'steel', segs: [...gauge(0.72), ...gauge(-0.72)] }] : []),
+    lineLayer('weir', 'crest'),
+  ]
 
   // ---- terrain extras -------------------------------------------------------------------------
   const interval = opts.contour ?? 2

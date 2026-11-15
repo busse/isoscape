@@ -3,6 +3,8 @@
  * chosen. Line weights are in screen pixels, so they hold at any `scale`.
  */
 
+import type { PartTone } from './history.ts'
+
 export interface Palette {
   readonly sky: string
   readonly land: string
@@ -56,6 +58,17 @@ export interface Palette {
   /** Streetcar lines on the ground, and the cars on them: side lit, side in shade, roof. */
   readonly tram: string
   readonly tramCar: readonly [string, string, string]
+  /**
+   * A modeled building's parts, by tone: side lit, side in shade, roof. Broad Street Station's
+   * Indiana limestone, its dome's terra-cotta tile, the iron of its platform canopies and their
+   * roofing, the plastered ramp houses, and the trains: Pullman-green coaches, black engines,
+   * boxcar-red freight.
+   */
+  readonly parts: Readonly<Record<PartTone, readonly [string, string, string]>>
+  /** Rail yards: cinder ground between the tracks, platforms, and the running rails at close scale. */
+  readonly yard: string
+  readonly platform: string
+  readonly railSteel: string
   readonly roofs: Readonly<Record<'residential' | 'commercial' | 'industrial' | 'civic' | 'other', readonly string[]>>
   readonly lineWidth: number
   readonly groundLineWidth: number
@@ -112,6 +125,18 @@ const paper: Palette = {
   traced: { brick: '#e9c2b8', frame: '#efe0a6', stone: '#c3d3e2', iron: '#cfcdc8', special: '#c5dcc0', fireproof: '#cfc6a4' },
   tram: '#b8362c',
   tramCar: ['#c9473a', '#8f2a22', '#e8d9b0'],
+  parts: {
+    stone: ['#f1e9d6', '#cdbf9f', '#e7dcc2'],
+    dome: ['#b2b8a6', '#808a7a', '#c0c5b4'],
+    iron: ['#5d4f48', '#3a302c', '#9a5a45'],
+    ramp: ['#f4efe4', '#d2cabb', '#ece5d6'],
+    coach: ['#58704f', '#364934', '#3a3b3a'],
+    engine: ['#4a4a4d', '#242427', '#333336'],
+    freight: ['#a8553d', '#74382a', '#8c4632'],
+  },
+  yard: '#d6cebf',
+  platform: '#efe9dc',
+  railSteel: '#4f4a45',
   roofs: {
     residential: ['#f6e9d8', '#f1e2cf', '#f7efe2', '#efd9c5'],
     commercial: ['#fbfaf6', '#f0eee8', '#e9e7e1', '#f6f4ee'],
@@ -175,6 +200,18 @@ const night: Palette = {
   traced: { brick: '#5a3c3a', frame: '#5a5236', stone: '#34465a', iron: '#45454a', special: '#3a4f3c', fireproof: '#4f4a36' },
   tram: '#e0614f',
   tramCar: ['#f07a5f', '#b04a3a', '#f2e2b8'],
+  parts: {
+    stone: ['#5a5648', '#3e3b33', '#4c4940'],
+    dome: ['#45503f', '#2f372c', '#525c49'],
+    iron: ['#2a2b33', '#1b1c22', '#5a3a32'],
+    ramp: ['#4a4a4e', '#36363b', '#404045'],
+    coach: ['#2f4a33', '#1f3022', '#26282b'],
+    engine: ['#2a2b30', '#17181c', '#212226'],
+    freight: ['#5e3328', '#40231c', '#4f2b22'],
+  },
+  yard: '#2a2c33',
+  platform: '#3a3d48',
+  railSteel: '#8a90a2',
   roofs: {
     residential: ['#3d3f4c', '#42434f'],
     commercial: ['#454a5a', '#3f4453'],

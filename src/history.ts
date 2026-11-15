@@ -31,7 +31,7 @@ export interface Epoch {
 export interface HistoryFeature {
   readonly id: string
   readonly name: string
-  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track'
+  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'yard' | 'canopy'
   readonly from: number
   readonly to?: number
   /** lon/lat outline (open), for areas and landmarks. */
@@ -41,8 +41,20 @@ export interface HistoryFeature {
   readonly lines?: Vec2[][]
   /** Streetcar lines: the line's name, for the explorer, and the operator. */
   readonly route?: string
-  /** Landmark height in meters. */
+  /** Landmark height in meters; for a canopy, the height of its roof. */
   readonly height?: number
+  /**
+   * A landmark drawn as one part of a modeled building: it stands `base` meters above its seat,
+   * the lowest ground under it (`seat: 'max'`: the highest, for a part carried over lower
+   * ground, such as a concourse over tracks); `shape: 'dome'` rounds it to a dome; `tone`
+   * paints it from the palette's `parts` instead of the lost-landmark tone.
+   */
+  readonly base?: number
+  readonly seat?: 'min' | 'max'
+  readonly shape?: 'prism' | 'dome'
+  readonly tone?: PartTone
+  /** A rail line: a train standing on it, `at` meters from the line's start. */
+  readonly train?: Train
   /** Creek width in meters. */
   readonly width?: number
   /** From this year a landmark stands as a burned shell. */
@@ -51,6 +63,20 @@ export interface HistoryFeature {
   readonly limitsStreets?: boolean
   readonly note: string
   readonly sources: readonly string[]
+}
+
+export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight'
+
+/**
+ * A train on a curated rail line: an engine (unless `engine` is false) and `cars` cars behind
+ * it, from `at` meters along the line, running toward its end (or its start, with `reverse`).
+ */
+export interface Train {
+  readonly cars: number
+  readonly at: number
+  readonly engine?: boolean
+  readonly kind?: 'coach' | 'freight'
+  readonly reverse?: boolean
 }
 
 /** Which years a kind of map feature existed: the first rule that matches decides. */
@@ -64,6 +90,8 @@ export interface Rule {
     readonly type?: 'line' | 'polygon'
     /** Only bridges (true) or only what is not a bridge (false). */
     readonly bridge?: boolean
+    /** OSM ids, such as "w1485004507": for a way a curated feature stands in for. */
+    readonly id?: readonly string[]
   }
   /** Spans [from, to): null for an open end. An empty list means "not dated: today only". */
   readonly eras: readonly (readonly [number | null, number | null])[]
@@ -143,6 +171,7 @@ export const parseYear = (s: string | undefined): number | null => {
 
 const matches = (r: Rule, f: Feature): boolean => {
   const w = r.where
+  if (w.id !== undefined && !w.id.includes(f.id)) return false
   if (w.type !== undefined && w.type !== f.type) return false
   if (w.bridge !== undefined && (f.tags.bridge !== undefined && f.tags.bridge !== 'no') !== w.bridge) return false
   if (w.name !== undefined) {
