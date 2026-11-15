@@ -157,8 +157,8 @@ def from_spec(key, d, made):
 def record(store, key, d, files, shop, mocks, note=None):
     pdir = os.path.join(store, d.get('print_dir') or ('print-files/landmarks' if key.startswith('lm-') else 'print-files'))
     pfile = os.path.join(pdir, d['print'])
-    canvas = sorted(glob.glob(os.path.join(pdir, 'canvas', d['canvas'].replace('{w}', '*').replace('{h}', '*')))) + \
-        sorted(glob.glob(os.path.join(pdir, d['canvas'].replace('{w}', '*').replace('{h}', '*'))))
+    cpat = (d.get('canvas') or '').replace('{w}', '*').replace('{h}', '*')
+    canvas = (sorted(glob.glob(os.path.join(pdir, 'canvas', cpat))) + sorted(glob.glob(os.path.join(pdir, cpat)))) if cpat else []
     made = os.path.getmtime(pfile) if os.path.exists(pfile) else 0
     got = from_set(key, d) or from_landmark(key, d) or from_spec(key, d, made)
     kind, recipe, scenes, inputs = got if got else ('unknown', {}, [], {})

@@ -8,3 +8,4 @@ data/sanborn/buildings.json
 out/_trash/
 data/lm-*/
 __pycache__/
+data/_releases/
