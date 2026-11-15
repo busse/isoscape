@@ -163,6 +163,29 @@ def from_spec(key, d, made):
     return 'compose', recipe, scenes, {'tools/print/spec.json': sha(os.path.join(ISO, 'tools', 'print', 'spec.json'))}
 
 
+def from_stamp(store, key, d):
+    """A version made by stamping the title block on the previous version's files (stamp.py):
+    the art, its scenes and its data are the previous version's; the recipe is the stamp."""
+    log_p = os.path.join(store, 'pipeline', 'state', 'stamps.json')
+    log = json.load(open(log_p)) if os.path.exists(log_p) else {}
+    mine = {f: v for f, v in log.items() if v['design'] == key and v['version'] == d.get('version', 1)}
+    if not mine: return None
+    base_v = d['version'] - 1
+    base_p = os.path.join(REL, key, f'v{base_v}.json')
+    base = json.load(open(base_p))
+    scenes = [dict(s, commit=s.get('commit') or base['isoscape']['commit']) for s in base['scenes']]
+    tools = next(iter(mine.values()))['tools']
+    now = {f: sha(os.path.join(ISO, f)) for f in tools}
+    recipe = {'tool': 'tools/release/stamp.py',
+              'run': [f'python3 tools/release/stamp.py <store> {key} --version {d["version"]}   # from the v{base_v} files below'],
+              'base_version': base_v, 'base_record': rel(base_p), 'base_kind': base['kind'],
+              'block': next(iter(mine.values()))['info'],
+              'files': {f: {'base': v['base'], 'base_sha256': v['base_sha256'], 'at': v['at']} for f, v in sorted(mine.items())},
+              'tools_at_stamping': tools, 'tools_match_commit': tools == now}
+    inputs = dict(tools); inputs[rel(base_p)] = sha(base_p)
+    return 'stamp', recipe, scenes, inputs, base.get('data', {})
+
+
 # ---- one record ---------------------------------------------------------------------------------
 
 def record(store, key, d, files, shop, mocks, note=None):
@@ -171,10 +194,11 @@ def record(store, key, d, files, shop, mocks, note=None):
     cpat = (d.get('canvas') or '').replace('{w}', '*').replace('{h}', '*')
     canvas = (sorted(glob.glob(os.path.join(pdir, 'canvas', cpat))) + sorted(glob.glob(os.path.join(pdir, cpat)))) if cpat else []
     made = os.path.getmtime(pfile) if os.path.exists(pfile) else 0
-    got = from_set(key, d) or from_landmark(key, d) or from_spec(key, d, made)
-    kind, recipe, scenes, inputs = got if got else ('unknown', {}, [], {})
-    data = {}
-    for s in scenes:
+    st = from_stamp(store, key, d)
+    got = None if st else (from_set(key, d) or from_landmark(key, d) or from_spec(key, d, made))
+    kind, recipe, scenes, inputs = st[:4] if st else got if got else ('unknown', {}, [], {})
+    data = dict(st[4]) if st else {}
+    for s in ([] if st else scenes):
         r = s.get('region')
         if not r or not os.path.exists(os.path.join(ISO, 'regions', f'{r}.json')): continue
         inputs.update(history_inputs(r))

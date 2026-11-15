@@ -7,7 +7,9 @@ commit and frozen data byte for byte.
 
 --rebuild checks out each recorded commit into a scratch worktree, points its data/ at the
 frozen copies, builds each scene as recorded, and compares SHA-256. A scene that matches is
-proof the design can be remade exactly; the check writes "reproduces" into the record.
+proof the design can be remade exactly; the check writes "reproduces" into the record. A
+stamped version (kind "stamp", stamp.py) is also stamped again from its base files with the
+recorded commit's tools, and every file must come out byte for byte ("restamped").
 """
 import argparse, hashlib, json, os, shutil, subprocess, sys, tempfile, time
 
@@ -44,6 +46,10 @@ def problems(store, r):
     for s in r['scenes']:
         f = os.path.join(ISO, s.get('frozen') or '')
         if s.get('sha256') and (not s.get('frozen') or not os.path.exists(f) or sha(f) != s['sha256']): bad.append(('frozen scene missing or changed', s.get('frozen')))
+    for f, v in ((r.get('recipe') or {}).get('files') or {}).items() if r.get('kind') == 'stamp' else []:
+        q = os.path.join(store, v['base'])
+        if not os.path.exists(q): bad.append(('stamp base missing', v['base']))
+        elif sha(q) != v['base_sha256']: bad.append(('stamp base changed', v['base']))
     c = r['isoscape']['commit']
     if subprocess.run(['git', '-C', ISO, 'cat-file', '-e', c + '^{commit}']).returncode != 0: bad.append(('commit not in repo', c))
     return bad
@@ -88,6 +94,22 @@ def rebuild(r, keep):
     return ok, n
 
 
+def restamp(store, r, keep):
+    """(matched, total) files of a stamped version made again from their base files with the
+    recorded commit's stamp.py and title block, compared by SHA-256."""
+    files = r['recipe']['files']; outs = {os.path.basename(o['file']): o for o in [r['outputs']['print']] + r['outputs']['canvas']}
+    wt = worktree(r['isoscape']['commit'], {'data': {}}, keep)
+    ok = 0
+    with tempfile.TemporaryDirectory() as t:
+        for f, v in files.items():
+            dst = os.path.join(t, f)
+            code = ('import sys, json; sys.path[:0] = ["tools/print", "tools/release"]; import stamp; '
+                    f'stamp.stamp_file({os.path.join(store, v["base"])!r}, {dst!r}, json.loads({json.dumps(json.dumps(r["recipe"]["block"]))}))')
+            subprocess.run([sys.executable, '-c', code], cwd=wt, capture_output=True)
+            ok += os.path.exists(dst) and sha(dst) == (outs.get(f) or {}).get('sha256')
+    return ok, len(files)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('store'); ap.add_argument('designs', nargs='*'); ap.add_argument('--rebuild', action='store_true')
@@ -103,6 +125,12 @@ def main():
             r = json.load(open(p))
             bad = problems(a.store, r)
             line = f"{k} v{r['version']}: " + ('OK' if not bad else f'{len(bad)} problem(s): {bad[:3]}')
+            if a.rebuild and r.get('kind') == 'stamp' and (a.again or 'restamped' not in r):
+                ok, n = restamp(a.store, r, keep)
+                r['restamped'] = {'files': n, 'matched': ok}
+                json.dump(r, open(p, 'w'), indent=1, ensure_ascii=False)
+                line += f'; restamped {ok}/{n} files identical'
+                if ok < n: bad.append('restamp')
             if a.rebuild and (a.again or 'reproduced' not in r):
                 ok, n = rebuild(r, keep)
                 r['reproduced'] = {'scenes': n, 'matched': ok}
