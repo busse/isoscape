@@ -69,7 +69,7 @@ export interface GroundPolygon {
 }
 
 export interface Ribbon {
-  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir' | 'tram'
+  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir' | 'tram' | 'racetrack'
   /** View-metre quads, draped over the terrain when drawn. */
   readonly quads: Vec2[][]
   /** View-metre centre segments, for rail ties and weir crests. */
@@ -165,9 +165,9 @@ export const buildScene = (
   }
   for (const h of curated) {
     if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan' || h.kind === 'grounds') && h.ring !== undefined) {
-      // Pleasure grounds that are gone (a fairground, an amusement park) take the plan's tint.
+      // Pleasure grounds that are gone (a fairground, an amusement park) take a tint of their own.
       const rings = curatedRings(h)
-      if (rings.length > 0) ground.push({ kind: h.kind === 'grounds' ? 'plan' : h.kind, rings })
+      if (rings.length > 0) ground.push({ kind: h.kind, rings })
     }
   }
   stats.ground = ground.length
@@ -250,7 +250,7 @@ export const buildScene = (
   // A racecourse or promenade that is gone: a closed loop drawn as a path.
   for (const h of curated) {
     if (h.kind !== 'track' || h.line === undefined) continue
-    const r = ribbonOf('path', { type: 'line', id: h.id, tags: {}, points: [...h.line, h.line[0]] }, h.width ?? 12)
+    const r = ribbonOf('racetrack', { type: 'line', id: h.id, tags: {}, points: [...h.line, h.line[0]] }, h.width ?? 12)
     if (r) ribbons.push(r)
   }
   // Streetcar lines: a bold ribbon down the street, wider than the track, so it reads at a

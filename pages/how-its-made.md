@@ -440,8 +440,16 @@ draws them three times life size (27 m lines, 42 m cars). The lines come from
 corner in OpenStreetMap, and follows the streets between them, preferring the streets the two
 corners name (any other street costs six times as much per metre). Two streets that meet
 without sharing a node take their closest points, up to 150 m apart. A run over a viaduct
-since torn down is drawn straight. Vanished pleasure grounds (a fairground) are tinted like a
-town plan, and a racetrack is a closed path.
+since torn down is drawn straight. Vanished pleasure grounds (a fairground) take a sandy tint of
+their own, and a racetrack is a closed dirt-coloured ribbon. `--streetcar-scale` overrides the
+series' scale for one build: the single-stop prints of the streetcar series use 1.5, so the
+lines read thinner up close.
+
+**The streetcar prints.** `tools/streetcars/menu.py` frames the 1925 map with fourteen numbered
+boxes, one per stop or attraction, each 1,800 m of ground across, cut from the same scene and
+rasterised from the vector at the pixels it fills, with a note written from the sources stored
+beside it (`tools/streetcars/stops.json`). The same tool makes the map alone and a print per
+stop (2,100 m across). `isoscape locate` tells it where each stop falls in the picture.
 
 **What the series cannot show:**
 

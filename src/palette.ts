@@ -48,6 +48,9 @@ export interface Palette {
   readonly ash: string
   readonly burned: string
   readonly plan: string
+  /** Vanished pleasure grounds (a fairground), and a racetrack's dirt oval. */
+  readonly grounds: string
+  readonly racetrack: string
   /** Roofs of buildings traced from fire-insurance maps, in the maps' own colour code. */
   readonly traced: Readonly<Record<'brick' | 'frame' | 'stone' | 'iron' | 'special' | 'fireproof', string>>
   /** Streetcar lines on the ground, and the cars on them: side lit, side in shade, roof. */
@@ -104,6 +107,8 @@ const paper: Palette = {
   ash: '#6d6259',
   burned: '#d3c3ad',
   plan: '#e4dcc4',
+  grounds: '#ddd0a8',
+  racetrack: '#b39a6c',
   traced: { brick: '#e9c2b8', frame: '#efe0a6', stone: '#c3d3e2', iron: '#cfcdc8', special: '#c5dcc0', fireproof: '#cfc6a4' },
   tram: '#b8362c',
   tramCar: ['#c9473a', '#8f2a22', '#e8d9b0'],
@@ -165,6 +170,8 @@ const night: Palette = {
   ash: '#121114',
   burned: '#3a2f2a',
   plan: '#252836',
+  grounds: '#2e2c2a',
+  racetrack: '#4a3f30',
   traced: { brick: '#5a3c3a', frame: '#5a5236', stone: '#34465a', iron: '#45454a', special: '#3a4f3c', fireproof: '#4f4a36' },
   tram: '#e0614f',
   tramCar: ['#f07a5f', '#b04a3a', '#f2e2b8'],
