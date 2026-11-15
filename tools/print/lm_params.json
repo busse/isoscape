@@ -1,0 +1,827 @@
+{
+ "alcatraz": {
+  "composer_commit": "any (explicit window; template score 0.626)",
+  "opts": {
+   "window": [
+    -2984.01,
+    -1901.93,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 0.72,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "brooklyn-bridge": {
+  "composer_commit": "any (explicit window; template score 0.518)",
+  "opts": {
+   "window": [
+    -2966.73,
+    -1889.49,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.95,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "buckingham-fountain": {
+  "composer_commit": "any (explicit window; template score 0.745)",
+  "opts": {
+   "window": [
+    -3000.99,
+    -1734.32,
+    5976.17,
+    3431.9
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.69,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "bunker-hill": {
+  "composer_commit": "any (explicit window; template score 0.42)",
+  "opts": {
+   "window": [
+    -2979.69,
+    -1661.59,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.86,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "cape-hatteras-lighthouse": {
+  "composer_commit": "any (explicit window; template score 0.787)",
+  "opts": {
+   "window": [
+    -2992.65,
+    -1581.73,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.3,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "castillo-de-san-marcos": {
+  "composer_commit": "any (explicit window; template score 0.674)",
+  "opts": {
+   "window": [
+    -2988.53,
+    -1555.41,
+    5977.16,
+    3432.47
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.35,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "central-park": {
+  "composer_commit": "any (explicit window; template score 0.432)",
+  "opts": {
+   "window": [
+    -2975.57,
+    -1665.09,
+    5977.06,
+    3432.41
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 2.01,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "chicago-river": {
+  "composer_commit": "any (explicit window; template score 0.582)",
+  "opts": {
+   "window": [
+    -2983.71,
+    -1873.15,
+    5976.17,
+    3431.9
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 2.38,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "coit-tower": {
+  "composer_commit": "any (explicit window; template score 0.887)",
+  "opts": {
+   "window": [
+    -2646.85,
+    -1977.15,
+    5298.13,
+    3042.9
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 0.7,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "crater-lake": {
+  "composer_commit": "any (explicit window; template score 0.869)",
+  "opts": {
+   "window": [
+    -2601.29,
+    -2139.4,
+    5215.53,
+    2992.57
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.58,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "delicate-arch": {
+  "composer_commit": "any (explicit window; template score 0.817)",
+  "opts": {
+   "window": [
+    -2979.4,
+    -1780.22,
+    5976.07,
+    3431.84
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.48,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "devils-tower": {
+  "composer_commit": "any (explicit window; template score 0.843)",
+  "opts": {
+   "window": [
+    -2996.97,
+    -1787.41,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 2.52,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "diamond-head": {
+  "composer_commit": "any (explicit window; template score 0.755)",
+  "opts": {
+   "window": [
+    -2984.6,
+    -1612.59,
+    5977.85,
+    3432.86
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.57,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "eiffel-tower": {
+  "composer_commit": "any (explicit window; template score 0.478)",
+  "opts": {
+   "window": [
+    -2996.97,
+    -1749.81,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.93,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "faneuil-hall": {
+  "composer_commit": "any (explicit window; template score 0.604)",
+  "opts": {
+   "window": [
+    -2988.43,
+    -1738.16,
+    5976.96,
+    3432.35
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.95,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "flatiron-building": {
+  "composer_commit": "any (explicit window; template score 0.541)",
+  "opts": {
+   "window": [
+    -2988.43,
+    -2025.42,
+    5976.96,
+    3432.35
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 2.11,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "fort-sumter": {
+  "composer_commit": "any (explicit window; template score 0.841)",
+  "opts": {
+   "window": [
+    -3022.89,
+    -1533.15,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 0.66,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "gateway-arch": {
+  "composer_commit": "any (explicit window; template score 0.685)",
+  "opts": {
+   "window": [
+    -3009.93,
+    -1751.57,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.89,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "gettysburg": {
+  "composer_commit": "any (explicit window; template score 0.771)",
+  "opts": {
+   "window": [
+    -2979.69,
+    -1708.87,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 2.09,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "golden-gate-bridge": {
+  "composer_commit": "any (explicit window; template score 0.759)",
+  "opts": {
+   "window": [
+    -2979.69,
+    -2021.85,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.94,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "grand-canyon": {
+  "composer_commit": "any (explicit window; template score 0.979)",
+  "opts": {
+   "window": [
+    -2875.41,
+    -2829.27,
+    5750.83,
+    3301.79
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 2.01,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "griffith-observatory": {
+  "composer_commit": "any (explicit window; template score 0.686)",
+  "opts": {
+   "window": [
+    -2992.35,
+    -2478.4,
+    5976.07,
+    3431.84
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 3.24,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "half-dome": {
+  "composer_commit": "any (explicit window; template score 0.847)",
+  "opts": {
+   "window": [
+    -2992.65,
+    -1990.65,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 2.73,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "hearst-castle": {
+  "composer_commit": "any (explicit window; template score 0.891)",
+  "opts": {
+   "window": [
+    -2988.03,
+    -2833.75,
+    5976.07,
+    3431.84
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 3.0,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "himeji-castle": {
+  "composer_commit": "any (explicit window; template score 0.497)",
+  "opts": {
+   "window": [
+    -2992.65,
+    -1622.33,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.89,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "hoover-dam": {
+  "composer_commit": "any (explicit window; template score 0.825)",
+  "opts": {
+   "window": [
+    -2997.37,
+    -1917.94,
+    5977.45,
+    3432.64
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 2.85,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "independence-hall": {
+  "composer_commit": "any (explicit window; template score 0.498)",
+  "opts": {
+   "window": [
+    -2984.11,
+    -1700.38,
+    5976.96,
+    3432.35
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.9,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "jackson-square": {
+  "composer_commit": "any (explicit window; template score 0.565)",
+  "opts": {
+   "window": [
+    -2988.53,
+    -1594.81,
+    5977.16,
+    3432.47
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.19,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "jefferson-memorial": {
+  "composer_commit": "any (explicit window; template score 0.807)",
+  "opts": {
+   "window": [
+    -2975.37,
+    -1842.47,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.26,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "kennedy-space-center": {
+  "composer_commit": "any (explicit window; template score 0.756)",
+  "opts": {
+   "window": [
+    -2992.65,
+    -1567.69,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.67,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "las-vegas-strip": {
+  "composer_commit": "any (explicit window; template score 0.524)",
+  "opts": {
+   "window": [
+    -2988.33,
+    -1660.11,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.6,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "lincoln-memorial": {
+  "composer_commit": "any (explicit window; template score 0.84)",
+  "opts": {
+   "window": [
+    -2988.33,
+    -1661.79,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.18,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "lombard-street": {
+  "composer_commit": "any (explicit window; template score 0.757)",
+  "opts": {
+   "window": [
+    -2914.9,
+    -2136.03,
+    5825.59,
+    3345.79
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 0.85,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "machu-picchu": {
+  "composer_commit": "any (explicit window; template score 0.981)",
+  "opts": {
+   "window": [
+    -2186.54,
+    -2462.29,
+    4368.71,
+    2508.42
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.08,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "matterhorn": {
+  "composer_commit": "any (explicit window; template score 0.962)",
+  "opts": {
+   "window": [
+    -2765.08,
+    -5502.92,
+    5525.84,
+    7953.68
+   ]
+  },
+  "landscape": false,
+  "mean_diff": 2.94,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "monticello": {
+  "composer_commit": "any (explicit window; template score 0.985)",
+  "opts": {
+   "window": [
+    -2119.07,
+    -2269.95,
+    4233.83,
+    2428.07
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 0.8,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "mount-rushmore": {
+  "composer_commit": "any (explicit window; template score 0.755)",
+  "opts": {
+   "window": [
+    -2988.73,
+    -1730.77,
+    5977.45,
+    3432.64
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 3.05,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "mount-st-helens": {
+  "composer_commit": "any (explicit window; template score 0.96)",
+  "opts": {
+   "window": [
+    -2271.57,
+    -2376.54,
+    4543.13,
+    2606.81
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.36,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "mount-vernon": {
+  "composer_commit": "any (explicit window; template score 0.833)",
+  "opts": {
+   "window": [
+    -2992.65,
+    -1673.19,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.19,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "niagara-falls": {
+  "composer_commit": "any (explicit window; template score 0.654)",
+  "opts": {
+   "window": [
+    -3014.65,
+    -1688.02,
+    5977.45,
+    3432.64
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.75,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "old-faithful": {
+  "composer_commit": "any (explicit window; template score 0.76)",
+  "opts": {
+   "window": [
+    -2988.33,
+    -1811.91,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.81,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "pearl-harbor": {
+  "composer_commit": "any (explicit window; template score 0.767)",
+  "opts": {
+   "window": [
+    -2958.48,
+    -1574.89,
+    5977.45,
+    3432.64
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.11,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "philadelphia-museum-of-art": {
+  "composer_commit": "any (explicit window; template score 0.593)",
+  "opts": {
+   "window": [
+    -3010.13,
+    -1709.58,
+    5977.16,
+    3432.47
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 2.55,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "plymouth-rock": {
+  "composer_commit": "any (explicit window; template score 0.68)",
+  "opts": {
+   "window": [
+    -2992.85,
+    -1842.04,
+    5977.16,
+    3432.47
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.31,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "savannah-squares": {
+  "composer_commit": "any (explicit window; template score 0.397)",
+  "opts": {
+   "window": [
+    -2988.03,
+    -1603.05,
+    5976.17,
+    3431.9
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.66,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "statue-of-liberty": {
+  "composer_commit": "any (explicit window; template score 0.838)",
+  "opts": {
+   "window": [
+    -2993.08,
+    -1788.91,
+    5675.06,
+    3259.7
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 0.83,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "sydney-opera-house": {
+  "composer_commit": "any (explicit window; template score 0.686)",
+  "opts": {
+   "window": [
+    -3005.61,
+    -2138.91,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 2.01,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "texas-capitol": {
+  "composer_commit": "any (explicit window; template score 0.561)",
+  "opts": {
+   "window": [
+    -2988.33,
+    -1725.59,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.88,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "the-alamo": {
+  "composer_commit": "any (explicit window; template score 0.57)",
+  "opts": {
+   "window": [
+    -3001.39,
+    -1816.95,
+    5976.96,
+    3432.35
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.87,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "times-square": {
+  "composer_commit": "any (explicit window; template score 0.545)",
+  "opts": {
+   "window": [
+    -2984.01,
+    -2125.71,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 2.16,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "us-capitol": {
+  "composer_commit": "any (explicit window; template score 0.475)",
+  "opts": {
+   "window": [
+    -2983.71,
+    -1685.54,
+    5976.17,
+    3431.9
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.7,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "washington-monument": {
+  "composer_commit": "any (explicit window; template score 0.718)",
+  "opts": {
+   "window": [
+    -2975.57,
+    -1699.85,
+    5977.06,
+    3432.41
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.44,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "white-house": {
+  "composer_commit": "any (explicit window; template score 0.645)",
+  "opts": {
+   "window": [
+    -2992.85,
+    -1703.0,
+    5977.16,
+    3432.47
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.74,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "world-trade-center": {
+  "composer_commit": "any (explicit window; template score 0.61)",
+  "opts": {
+   "window": [
+    -2984.21,
+    -1846.01,
+    5977.16,
+    3432.47
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.8,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ },
+ "wright-brothers": {
+  "composer_commit": "any (explicit window; template score 0.69)",
+  "opts": {
+   "window": [
+    -2979.69,
+    -1586.57,
+    5976.66,
+    3432.18
+   ]
+  },
+  "landscape": true,
+  "mean_diff": 1.77,
+  "match": true,
+  "checked_by_eye": "2026-11-15"
+ }
+}

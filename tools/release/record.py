@@ -133,9 +133,11 @@ def from_landmark(key, d):
     if not key.startswith('lm-'): return None
     slug = key[3:]
     svg = os.path.join(ISO, 'out', 'landmarks', f'{key}.svg')
-    recipe = {'tool': 'tools/print/lm_batch_device.py', 'run': [f'node bin/isoscape.js build {key} --no-archive --out out/landmarks',
-              f'python3 tools/print/lm_batch_device.py 600 {slug}']}
-    return 'landmark', recipe, [scene(key, None, svg)], {'tools/print/lm_compose.py': sha(os.path.join(ISO, 'tools', 'print', 'lm_compose.py'))}
+    lp = json.load(open(os.path.join(ISO, 'tools', 'print', 'lm_params.json'))).get(slug, {}) if os.path.exists(os.path.join(ISO, 'tools', 'print', 'lm_params.json')) else {}
+    recipe = {'tool': 'tools/print/lm_batch_device.py', 'run': [f'python3 tools/release/remake.py {key}   # restores the frozen scene',
+              f'python3 tools/print/lm_batch_device.py 600 {slug}   # composes with tools/print/lm_params.json'],
+              'composer_settings': lp.get('opts'), 'settings_checked': {k: lp.get(k) for k in ('mean_diff', 'match', 'checked_by_eye')}}
+    return 'landmark', recipe, [scene(key, None, svg)], {f'tools/print/{f}': sha(os.path.join(ISO, 'tools', 'print', f)) for f in ('lm_compose.py', 'compose.py', 'lm_params.json')}
 
 
 def from_spec(key, d, made):

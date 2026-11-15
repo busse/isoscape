@@ -10,7 +10,12 @@ OUT = os.path.expanduser('~/mnt/ISO-TEST/chrisbusse-store/print-files/landmarks'
 SVG = os.path.expanduser('~/mnt/ISO-TEST/isoscape/out/landmarks')
 L = {x[0]: x for x in json.load(open(os.path.join(LM, 'list.json')))}
 # Tall mountain scenes: keep the whole scene, and take the panel from this share of the height.
-OPTS = {'matterhorn': {'zoom': False, 'trim': False}}   # Zermatt sits in the V of the plate's front edge
+OPTS = {'matterhorn': {'zoom': False, 'trim': False}}
+# The settings each landmark print was made with, recovered by tools/release/landmark_params.py
+# (a crop window, or zoom/anchor): recomposing a landmark keeps its framing.
+_P = os.path.join(HERE, 'lm_params.json')
+for _s, _v in (json.load(open(_P)) if os.path.exists(_P) else {}).items():
+    if _v.get('match'): OPTS[_s] = {**OPTS.get(_s, {}), **_v['opts']}   # Zermatt sits in the V of the plate's front edge
 # Scenes taller than wide get a portrait (24x36) print and portrait canvases.
 PORTRAIT = {'matterhorn'}
 ONLY = set(sys.argv[2:])

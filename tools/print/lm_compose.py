@@ -54,11 +54,13 @@ def elevation_credit(region_path):
     if t.get('fillFrom') in S: credit += '; ' + S[t['fillFrom']]['credit'].replace('Elevation: ', '')
     return credit
 
-def make(slug, title, place, svg, out_dir, landscape=True, zoom=True, anchor=None, credit=None, trim=True):
+def make(slug, title, place, svg, out_dir, landscape=True, zoom=True, anchor=None, credit=None, trim=True, window=None):
     """zoom=False keeps the whole scene even when it is mostly water (a frame drawn to hold shore and
     water together); anchor='left' or 'top' keeps that edge when the panel crops the scene; a number 0-1 is the share of a vertical crop taken from the top."""
-    box = content_box(svg, zoom, trim)
-    cx, cy = box[0] + box[2] / 2, box[1] + box[3] * 0.55
+    # window: the exact crop (x, y, w, h in SVG units) a print was made with, from
+    # tools/print/lm_params.json; it overrides the automatic framing below.
+    box = list(window) if window else content_box(svg, zoom, trim)
+    cx, cy = box[0] + box[2] / 2, box[1] + box[3] * (0.5 if window else 0.55)
     PANEL = 1.73   # the 36x24 layout's map panel, width / height
     if anchor == 'left': cx = box[0] + min(box[2], box[3] * PANEL) / 2
     if anchor == 'top': anchor = 0.0

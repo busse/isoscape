@@ -49,7 +49,7 @@ def main():
             slug = a.design[3:]
             portrait = r['store']['catalog'].get('orientation') == 'vertical'
             credit = M.elevation_credit(os.path.join(ISO, 'regions', f'{a.design}.json'))
-            opts = {'zoom': False, 'trim': False} if slug == 'matterhorn' else {}
+            opts = r['recipe'].get('composer_settings') or ({'zoom': False, 'trim': False} if slug == 'matterhorn' else {})
             M.make(slug, L[slug][1], L[slug][2], os.path.join(ISO, r['scenes'][0]['svg']), out, credit=credit, landscape=not portrait, **opts)
         else:
             # compose.py reads the newest build of each panel: point it at a builds dir holding only the pinned ones.
