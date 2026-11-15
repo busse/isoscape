@@ -78,7 +78,7 @@ processed* (地理院タイル（標高タイル）を加工して作成).
 
 ## Machu Picchu, Peru
 
-![Aguas Calientes by the Urubamba, with the switchback road climbing to the citadel](world-machu-picchu.jpg)
+![Aguas Calientes on the left, Huayna Picchu in front, and the citadel above the switchback road on the right]((world-machu-picchu.jpg)
 
 **Data: [Copernicus DEM GLO-30](https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM)**,
 a model of the whole planet at 30 m, made by the TanDEM-X radar satellites and released free
