@@ -144,7 +144,7 @@ export interface History {
    * (default 1).
    */
   readonly streetcarScale?: number
-  /** Draw railroad tracks this many times their width, so the network reads from afar (default 1). */
+  /** Draw railroad tracks this many times their width, and in the ties' darker tone, so the network reads from afar (default 1). */
   readonly railScale?: number
 }
 

@@ -241,7 +241,9 @@ def compose_menu(dpi, S, sc, pts):
     ih = cw / BOX_ASPECT
     for s, (c, r) in zip(S.boxes, frame_order(len(S.boxes))):
         x, y = cell(c, r)
-        scene = sc.get(s)
+        # A set whose big map is drawn bolder than life (wide track, big cars) can draw its menu
+        # boxes from the fine scenes too: `"fine_menu": true`.
+        scene = sc.get(s, fine=bool(S.cfg.get('fine_menu')))
         img.paste(scene.render(scene.window(pts['box'][s['id']], s.get('ground', S.ground['menu']), BOX_ASPECT), round(cw), round(ih)), (round(x), round(y)))
         d.rectangle((x, y, x + cw, y + ih), outline=INK, width=max(1, round(I(0.01))))
         box_text(d, S, s, x, y + ih + I(0.1), cw, ch - ih - I(0.1), dpi)

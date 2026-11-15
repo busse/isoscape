@@ -367,6 +367,8 @@ features.append({
 sc = json.loads(STREETCARS.read_text())
 # At this scale a car line is drawn at the width of its double track, not the bold city-map ribbon.
 features += [{**f, 'width': 4.0} for f in sc['features'] if f['kind'] == 'streetcar' and f.get('from', 0) <= 1943 < f.get('to', 9999)]
+# The fair grounds north of the tracks (1906–1941), for views of the years before 1943.
+features += [f for f in sc['features'] if f['kind'] in ('grounds', 'track')]
 
 rules = [
     {'where': {'id': ['w1485004507', 'w1485004508', 'w1089070999']}, 'eras': [],
@@ -401,7 +403,7 @@ LINES_SRC = ['https://chicagorailfan.com/stbrric.html', 'https://www.richmondrai
 LABELS = [
     ((-850, 2250), 'start', 'To Washington', 'RF&P main line: Fredericksburg, Washington, New York'),
     ((-480, 1930), 'start', 'AY Tower', "The RF&P main meets the Atlantic Coast Line's Belt Line"),
-    ((450, 420), 'start', 'Seaboard Junction', 'The Seaboard Air Line leaves the RF&P for Main Street Station'),
+    ((390, 350), 'start', 'Seaboard Junction', 'The Seaboard Air Line leaves the RF&P for Main Street Station'),
     ((-120, -60), 'end', 'Broad Street Station', 'RF&P, Atlantic Coast Line and N&W trains'),
     ((-2650, -3300), 'start', 'To Petersburg and Florida', 'ACL Belt Line over the James; N&W trains by way of Petersburg'),
     ((3200, -3150), 'end', 'Main Street Station', 'Seaboard Air Line south to Raleigh and Florida; C&O'),

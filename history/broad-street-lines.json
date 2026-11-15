@@ -19276,6 +19276,204 @@
    "width": 4.0
   },
   {
+   "id": "fair-grounds",
+   "name": "Virginia State Fair Grounds",
+   "kind": "grounds",
+   "from": 1906,
+   "to": 1941,
+   "ring": [
+    [
+     -77.465947,
+     37.569226
+    ],
+    [
+     -77.460393,
+     37.569226
+    ],
+    [
+     -77.460393,
+     37.575445
+    ],
+    [
+     -77.465947,
+     37.575445
+    ]
+   ],
+   "note": "The State Fair grounds at the tip of the Boulevard, reached by streetcar, from the revived fair of 1906 until the fair moved out in 1941; The Diamond stands there now. The outline is approximate.",
+   "sources": [
+    "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
+    "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm"
+   ]
+  },
+  {
+   "id": "fair-track",
+   "name": "Fair Grounds racetrack",
+   "kind": "track",
+   "from": 1906,
+   "to": 1941,
+   "line": [
+    [
+     -77.462275,
+     37.573435
+    ],
+    [
+     -77.462286,
+     37.573535
+    ],
+    [
+     -77.462318,
+     37.573632
+    ],
+    [
+     -77.462372,
+     37.573723
+    ],
+    [
+     -77.462444,
+     37.573806
+    ],
+    [
+     -77.462534,
+     37.573877
+    ],
+    [
+     -77.462637,
+     37.573934
+    ],
+    [
+     -77.462752,
+     37.573977
+    ],
+    [
+     -77.462874,
+     37.574003
+    ],
+    [
+     -77.463,
+     37.574012
+    ],
+    [
+     -77.463126,
+     37.574003
+    ],
+    [
+     -77.463248,
+     37.573977
+    ],
+    [
+     -77.463363,
+     37.573934
+    ],
+    [
+     -77.463466,
+     37.573877
+    ],
+    [
+     -77.463556,
+     37.573806
+    ],
+    [
+     -77.463628,
+     37.573723
+    ],
+    [
+     -77.463682,
+     37.573632
+    ],
+    [
+     -77.463714,
+     37.573535
+    ],
+    [
+     -77.463725,
+     37.573435
+    ],
+    [
+     -77.463725,
+     37.570965
+    ],
+    [
+     -77.463714,
+     37.570865
+    ],
+    [
+     -77.463682,
+     37.570768
+    ],
+    [
+     -77.463628,
+     37.570677
+    ],
+    [
+     -77.463556,
+     37.570594
+    ],
+    [
+     -77.463466,
+     37.570523
+    ],
+    [
+     -77.463363,
+     37.570466
+    ],
+    [
+     -77.463248,
+     37.570423
+    ],
+    [
+     -77.463126,
+     37.570397
+    ],
+    [
+     -77.463,
+     37.570388
+    ],
+    [
+     -77.462874,
+     37.570397
+    ],
+    [
+     -77.462752,
+     37.570423
+    ],
+    [
+     -77.462637,
+     37.570466
+    ],
+    [
+     -77.462534,
+     37.570523
+    ],
+    [
+     -77.462444,
+     37.570594
+    ],
+    [
+     -77.462372,
+     37.570677
+    ],
+    [
+     -77.462318,
+     37.570768
+    ],
+    [
+     -77.462286,
+     37.570865
+    ],
+    [
+     -77.462275,
+     37.570965
+    ]
+   ],
+   "width": 24,
+   "note": "The fair's half-mile racetrack, drawn as an approximate oval at the center of the grounds.",
+   "sources": [
+    "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
+    "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm",
+    "https://www.purethunderracing.com/?p=6184"
+   ]
+  },
+  {
    "id": "lines-label-1",
    "name": "To Washington",
    "kind": "label",
@@ -19318,8 +19516,8 @@
    "from": 1919,
    "to": 1976,
    "at": [
-    -77.4607005,
-    37.5648984
+    -77.4613804,
+    37.5642653
    ],
    "anchor": "start",
    "caption": "The Seaboard Air Line leaves the RF&P for Main Street Station",

@@ -88,6 +88,8 @@ export interface Scene {
   readonly stats: Record<string, number>
   /** For a dated scene: the year, its title, and the curated features drawn in it. */
   readonly time?: { readonly year: number; readonly title?: string; readonly curated: readonly HistoryFeature[] }
+  /** Track drawn wider than life (a history's `railScale` over 1) is inked dark, to read from afar. */
+  readonly boldRail?: boolean
   /** Words on the map: curated labels, at view meters and the ground height there. */
   readonly labels?: readonly MapLabel[]
 }
@@ -508,6 +510,7 @@ export const buildScene = (
     region, view, palette: pal, terrain, ground, ribbons, items, stats,
     ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated } }),
     ...(labels.length === 0 ? {} : { labels }),
+    ...(railScale > 1 ? { boldRail: true } : {}),
   }
 }
 

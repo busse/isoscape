@@ -171,7 +171,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     sealed('L', p.land), sealed('Lw', p.water),
     ...Object.entries(p.cover).map(([g, color]) => sealed(`cv-${g}`, color)), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
     sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('plan', p.plan), sealed('grounds', p.grounds), sealed('racetrack', p.racetrack), sealed('burned', p.burned), sealed('platform', p.platform), sealed('canal', p.water), sealed('path', p.path),
-    sealed('road', p.road), sealed('rail', p.rail), sealed('tram', p.tram), sealed('weir', p.foam),
+    sealed('road', p.road), sealed('rail', scene.boldRail ? p.railTie : p.rail), sealed('tram', p.tram), sealed('weir', p.foam),
     // At close scale (CLOSE_RAIL px per meter or more) a track shows its ties, about 0.25 m
     // wide every 0.67 m across 2 m of the ribbon, and its two running rails, 1.44 m apart.
     close
