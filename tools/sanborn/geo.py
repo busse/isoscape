@@ -30,7 +30,7 @@ def rings_of(geom):
 
 
 def sample_lines(lines, step=1.0):
-    """Points every `step` metres along polylines given in metres."""
+    """Points every `step` meters along polylines given in meters."""
     out = []
     for pts in lines:
         pts = np.asarray(pts, float)
@@ -43,7 +43,7 @@ def sample_lines(lines, step=1.0):
 
 
 def load_lines(path):
-    """Block outlines (or any polygons/lines) from GeoJSON, as metre polylines."""
+    """Block outlines (or any polygons/lines) from GeoJSON, as meter polylines."""
     fc = json.load(open(path))
     lines = []
     for f in fc['features']:
@@ -57,7 +57,7 @@ def load_lines(path):
 
 
 def sim(params):
-    """World metres -> image pixels: u,v = s*R(th)*(x,-y) + (tu,tv)."""
+    """World meters -> image pixels: u,v = s*R(th)*(x,-y) + (tu,tv)."""
     tu, tv, th, s = params
     c, si = math.cos(th), math.sin(th)
     return np.array([[s * c, -s * si], [s * si, s * c]]), np.array([tu, tv])

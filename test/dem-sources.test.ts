@@ -80,16 +80,16 @@ test('TIFF LZW decodes a repeating run (the KwKwK case)', () => {
 })
 
 test('Web Mercator and Swiss grid conversions land where they should', () => {
-  // Zoom 0: the whole world is one 256-pixel tile, the equator and prime meridian at its centre.
+  // Zoom 0: the whole world is one 256-pixel tile, the equator and prime meridian at its center.
   assert.deepEqual(mercatorPixel(0, 0, 0).map((v) => Math.round(v)), [128, 128])
-  // The old Bern observatory, LV95's origin, is at 2 600 000 / 1 200 000 (to a metre or so).
+  // The old Bern observatory, LV95's origin, is at 2 600 000 / 1 200 000 (to a meter or so).
   const [e, n] = toLv95(7.438632, 46.951083)
   assert.ok(Math.abs(e - 2_600_000) < 2 && Math.abs(n - 1_200_000) < 2, `${e} ${n}`)
 })
 
-test('every elevation source names its licence and credit, and 3DEP is the default', () => {
+test('every elevation source names its license and credit, and 3DEP is the default', () => {
   for (const s of Object.values(DEM_SOURCES)) {
-    assert.ok(s.credit.length > 10 && s.licence.length > 5 && s.link.startsWith('https://'), s.id)
+    assert.ok(s.credit.length > 10 && s.license.length > 5 && s.link.startsWith('https://'), s.id)
   }
   assert.equal(demSource(undefined).id, '3dep')
   assert.throws(() => demSource('nowhere'))

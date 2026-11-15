@@ -28,10 +28,10 @@
  *
  *   #<idA>[..<idB>][@<cx>,<cy>,<z>][~<split>][/made]
  *
- * `cx,cy` is the centre of the visible area in the image's own SVG viewBox units (1 decimal),
+ * `cx,cy` is the center of the visible area in the image's own SVG viewBox units (1 decimal),
  * and `z` the zoom relative to "fit" (3 significant digits; 1 is fit, 2 twice as close), so the
  * same link frames the same part of the picture on any screen size. `~<split>` is the compare
- * divider's position as a fraction of the stage width (only when comparing and not centred).
+ * divider's position as a fraction of the stage width (only when comparing and not centered).
  * The view is left out while it is the fitted view. Anything malformed falls back to fit. The
  * hash follows panning and zooming (debounced, with replaceState, so Back is not flooded);
  * choosing a build, comparing or changing tab still makes a history entry. The Link button
@@ -371,7 +371,7 @@ body.reading main { grid-template-rows: 1fr; }
 </main>
 <script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: site.shop ?? null, home: site.home ?? null, latestPages: site.latestPages !== false })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
-<script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, licence: d.licence, link: d.link }])))}</script>
+<script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, license: d.license, link: d.link }])))}</script>
 <script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2) })))}</script>
 <script>
 (() => {
@@ -535,7 +535,7 @@ body.reading main { grid-template-rows: 1fr; }
   }
   // The zoom at which the whole image fits the stage; the URL's zoom is relative to it.
   const fitZoom = (vb) => Math.min(stage.clientWidth / vb[2], stage.clientHeight / vb[3]) * 0.94
-  // The current view, resolution-independent: the visible centre in viewBox units, zoom / fit.
+  // The current view, resolution-independent: the visible center in viewBox units, zoom / fit.
   const viewOf = () => {
     const a = byId.get(state.a)
     const w = stage.clientWidth, h = stage.clientHeight
@@ -629,7 +629,7 @@ body.reading main { grid-template-rows: 1fr; }
   stage.addEventListener('pointercancel', lift)
   stage.addEventListener('dblclick', (e) => { if (!e.target.closest('#toolbar')) fit() })
   // When the stage changes size (the info panel opens, closes or changes tab), keep the point at
-  // its centre where it was.
+  // its center where it was.
   let stageSize = null
   new ResizeObserver(() => {
     const w = stage.clientWidth, h = stage.clientHeight
@@ -745,7 +745,7 @@ body.reading main { grid-template-rows: 1fr; }
     if (isNum(c.width) && isNum(c.depth)) {
       lede += 'A frame ' + dist(c.width) + ' across and ' + dist(c.depth) + ' deep (' + ((c.width * c.depth) / 1e6).toFixed(2) + ' km²)'
       const ctr = Array.isArray(c.center) && isNum(c.center[0]) && isNum(c.center[1]) ? c.center : null
-      if (ctr) lede += ', centred on <a href="https://www.openstreetmap.org/?mlat=' + ctr[1] + '&amp;mlon=' + ctr[0] + '#map=16/' + ctr[1] + '/' + ctr[0] + '" target="_blank" rel="noopener" title="Open this point on openstreetmap.org">' + latlon(ctr) + '</a>'
+      if (ctr) lede += ', centered on <a href="https://www.openstreetmap.org/?mlat=' + ctr[1] + '&amp;mlon=' + ctr[0] + '#map=16/' + ctr[1] + '/' + ctr[0] + '" target="_blank" rel="noopener" title="Open this point on openstreetmap.org">' + latlon(ctr) + '</a>'
       lede += '.'
     }
     out.push('<p class="lede">' + lede + '</p>')
@@ -765,9 +765,14 @@ body.reading main { grid-template-rows: 1fr; }
         out.push('<p>' + p + '</p>')
       }
       if (s.traced > 0) {
-        out.push('<p><b>Traced:</b> ' + plural(s.traced, 'building') + ' that no longer stand, traced from Sanborn fire-insurance maps and drawn in the maps’ own colours (pink brick, yellow frame, blue stone, grey iron). Each appears from the first map that shows it, though it may be older. When it went: ' +
+        out.push('<p><b>Traced:</b> ' + plural(s.traced, 'building') + ' that no longer stand, traced from Sanborn fire-insurance maps and drawn in the maps’ own colors (pink brick, yellow frame, blue stone, gray iron). Each appears from the first map that shows it, though it may be older. When it went: ' +
           int(s.tracedEndMap || 0) + ' by a later map that no longer shows it, ' + int(s.tracedEndRebuilt || 0) + ' by the year the building now on the site went up, ' +
-          int(s.tracedEndHighway || 0) + ' by an expressway through the site, and ' + int(s.tracedEndAssumed || 0) + ' <b>assumed</b> gone by 1960. Heights are <b>guessed</b> from the material: brick and stone three storeys, frame two.</p>')
+          int(s.tracedEndHighway || 0) + ' by an expressway through the site, and ' + int(s.tracedEndAssumed || 0) + ' <b>assumed</b> gone by 1960. Heights are <b>guessed</b> from the material: brick and stone three stories, frame two.</p>')
+      }
+      if (s.streetcarLines > 0) {
+        out.push('<p><b>Streetcars:</b> ' + plural(s.streetcarLines, 'car line') + ' in red, each placed on today’s streets from the corners its sources name (listed below), with ' + plural(s.streetcars || 0, 'car') + ' along them' +
+          (isNum(s.streetcarScale) && s.streetcarScale !== 1 ? ', all drawn ' + esc(s.streetcarScale) + ' times life size so they read at this scale' : '') + '.' +
+          (isNum(s.unbuiltStreets) && s.unbuiltStreets > 0 ? ' Small streets are drawn only where a house of the year stood nearby: ' + int(s.unbuiltStreets) + ' laid out since are left off.' : '') + '</p>')
       }
       const cur = Array.isArray(tm.curated) ? tm.curated : []
       if (cur.length) {
@@ -795,7 +800,7 @@ body.reading main { grid-template-rows: 1fr; }
     const tilt = (Math.asin(squash) * 180) / Math.PI
     cam.push('Orthographic, tilted ' + Math.round(tilt) + '° down from the horizon: ground running into the picture is drawn at ' + +squash.toFixed(2) + '× its length and heights at ' + Math.cos(Math.asin(squash)).toFixed(2) + '×' +
       (isNum(c.exaggeration) && c.exaggeration !== 1 ? ', then ×' + c.exaggeration + ' for every height' : '') + '.')
-    if (isNum(c.scale)) cam.push(c.scale + ' px per metre across the frame' + (Array.isArray(x.viewBox) ? '; the whole drawing is ' + int(x.viewBox[2]) + ' × ' + int(x.viewBox[3]) + ' px at 1:1' : '') + '.')
+    if (isNum(c.scale)) cam.push(c.scale + ' px per meter across the frame' + (Array.isArray(x.viewBox) ? '; the whole drawing is ' + int(x.viewBox[2]) + ' × ' + int(x.viewBox[3]) + ' px at 1:1' : '') + '.')
     out.push('<p>' + cam.join(' ') + '</p>')
 
     // What went in.
@@ -890,7 +895,7 @@ body.reading main { grid-template-rows: 1fr; }
     if (other.length) out.push('<p>Other measures: ' + other.map((k) => esc(k) + ' ' + fmt(s[k])).join(', ') + '.</p>')
 
     out.push('</section><p class="credit">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors (ODbL)' +
-      (relief ? ' · ' + esc((demSources[t.source || '3dep'] || demSources['3dep']).credit) + ' (' + esc((demSources[t.source || '3dep'] || demSources['3dep']).licence) + ')' + (t.fillFrom && demSources[t.fillFrom] ? ' · ' + esc(demSources[t.fillFrom].credit) : '') : '') + (pageBySlug.has('about') ? ' · <a href="#/about">credits and licences</a>' : '') + '</p>')
+      (relief ? ' · ' + esc((demSources[t.source || '3dep'] || demSources['3dep']).credit) + ' (' + esc((demSources[t.source || '3dep'] || demSources['3dep']).license) + ')' + (t.fillFrom && demSources[t.fillFrom] ? ' · ' + esc(demSources[t.fillFrom].credit) : '') : '') + (pageBySlug.has('about') ? ' · <a href="#/about">credits and licenses</a>' : '') + '</p>')
     return '<div class="story">' + out.join('') + '</div>'
   }
   $('toggleInfo').addEventListener('click', () => toggleInfo())

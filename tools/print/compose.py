@@ -4,7 +4,7 @@
 Each design in a spec is one or more panels (a build's SVG, cropped to a region of the scene)
 laid out on a sheet at an exact Printful size, at 300 dpi, with a paper margin, a title band
 and the credit line every print must carry (OpenStreetMap is ODbL: produced works must credit
-it). The art is vector, so each panel is rasterised straight to the pixels it fills.
+it). The art is vector, so each panel is rasterized straight to the pixels it fills.
 
 A design with "contain": true shows its region whole, letterboxed in the panel area, instead of
 cropping it to the panel's shape (for very long views on a panorama sheet). "credit" overrides the
@@ -36,7 +36,7 @@ def latest_builds(builds_dir):
 
 
 def fit(region, aspect, focus=None):
-    """Largest crop of `region` (x, y, w, h) with width/height = aspect, centred on focus."""
+    """Largest crop of `region` (x, y, w, h) with width/height = aspect, centered on focus."""
     x, y, w, h = region
     cx, cy = focus or (x + w / 2, y + h / 2)
     if w / h > aspect:
@@ -99,7 +99,7 @@ def compose(design, size, builds, regions, dpi, scale=1.0):
         x0 = round(m + c * (cw + gap)); y0 = round(m + r * (ch + label_h + gap))
         reg = regions[p.get('region', design.get('region'))]
         if design.get('contain'):
-            # The whole region, not a crop: a very long view stays whole and sits centred in its area.
+            # The whole region, not a crop: a very long view stays whole and sits centered in its area.
             ra = reg['box'][2] / reg['box'][3]
             if ra > cw / ch:
                 nh = cw / ra; y0 = round(y0 + (ch - nh) / 2); ch = nh

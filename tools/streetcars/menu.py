@@ -16,7 +16,7 @@ Two steps, because the scene needs the cached data and the drawing needs a fast 
 2. Anywhere with rsvg-convert, with the two SVGs and points.json alongside:
      python3 tools/streetcars/menu.py menu|map|boxes [ids...] [--dpi 300] [--dir out/streetcars]
 
-Every box is rasterised straight from the vector at the pixels it fills.
+Every box is rasterized straight from the vector at the pixels it fills.
 """
 import argparse, json, os, re, shutil, subprocess, sys, tempfile
 import numpy as np
@@ -30,8 +30,8 @@ import compose as C  # noqa: E402
 
 REGION, YEAR = 'richmond-streetcars', 1925
 SVG_NAME = f'{REGION}-{YEAR}.svg'
-MENU_GROUND = 1800          # metres of ground across a box on the menu
-BOX_GROUND = 2100           # metres across a single-stop print
+MENU_GROUND = 1800          # meters of ground across a box on the menu
+BOX_GROUND = 2100           # meters across a single-stop print
 BOX_ASPECT = 1.6            # menu boxes, width / height
 MAX_BYTES = 15_000_000      # the store's upload ceiling for a print file
 TRAM = '#b8362c'            # palette.ts paper.tram: the lines' red
@@ -111,13 +111,13 @@ class Scene:
                              (xs.max() - xs.min() + 1) * k, (ys.max() - ys.min() + 1) * k)
         return self._content
 
-    def window(self, centre, ground_w, aspect):
-        """A window `ground_w` metres across, centred on an SVG point, kept on the plate."""
+    def window(self, center, ground_w, aspect):
+        """A window `ground_w` meters across, centered on an SVG point, kept on the plate."""
         cx0, cy0, cw, ch = self.content()
         w = ground_w * self.scale
         h = w / aspect
-        x = min(max(centre[0] - w / 2, cx0), cx0 + cw - w)
-        y = min(max(centre[1] - h / 2, cy0), cy0 + ch - h)
+        x = min(max(center[0] - w / 2, cx0), cx0 + cw - w)
+        y = min(max(center[1] - h / 2, cy0), cy0 + ch - h)
         return (x, y, w, h)
 
 
@@ -273,15 +273,53 @@ def save(img, out_dir, name, dpi):
     print(p, img.size, f'{os.path.getsize(p) / 1e6:.1f} MB q{q}')
 
 
+SITE = 'https://busse.github.io/isoscape/'
+BUILD = f'{REGION}:{YEAR}'
+
+
+def write_page(pts):
+    """pages/streetcars.md, from the same stops, lines and sources as the prints."""
+    out = ['---', "title: Richmond's streetcars, 1925", 'order: 45',
+           'summary: The 1925 car lines and fourteen places they ran to, drawn from a 1943 planning plate and the buildings standing then.',
+           'social: streetcars-social.jpg', '---', '', "# Richmond's streetcars, 1925", '',
+           "In May 1888 Frank Sprague's electric cars began running on Richmond's hills, the first big electric",
+           'street railway that worked, and the city grew out along the lines. This map draws the system as it',
+           'stood in 1925: sixteen car lines over the buildings then standing, with fourteen places the cars',
+           'ran to framed around it, from the suburbs they made to the trolley parks at the ends of the line.', '',
+           '![The 1925 map, framed by its fourteen stops](streetcars-menu.jpg)', '',
+           f'[Open the map]({SITE}#{BUILD}) to pan and zoom, or jump to a stop below.', '', '## The stops', '']
+    for s in stops():
+        x, y = pts[s['id']]
+        out += [f"### {s['n']}. {s['title']}", '', f"*{s['line']}*", '', s['note'], '',
+                f"[See it on the map]({SITE}#{BUILD}@{x:.0f},{y:.0f},6) · Sources: " +
+                ' '.join(f'[{k + 1}]({u})' for k, u in enumerate(s['sources'])), '']
+    out += ['## The lines', '', 'Each line follows the streets its sources name, placed on today\'s streets. Where a',
+            'source is silent, the ends are approximate.', '', '| Line | Route | Ran |', '|---|---|---|']
+    for r in routes():
+        out.append(f"| {r['name']} | {r['route']} | {r['from']}–{r['to']} |")
+    out += ['', '## How it was drawn', '',
+            "The routes come from plate 53 of Harland Bartholomew & Associates' 1943 report to the City",
+            "Planning Commission, *Early Transit Routes, 1888 & 1925*, with the details from the sources",
+            'listed for each line. Buildings are the ones standing today that the city assessor dates to',
+            '1925 or before, plus those traced from Sanborn fire-insurance maps downtown; small streets are',
+            'drawn only where a house of the year stood nearby. Henrico County keeps no such dates online,',
+            'so the suburbs across the 1925 county line look emptier than they were. On the big map, lines',
+            'and cars are drawn three times life size; on the single-stop prints, one and a half.', '',
+            'More in [How it\'s made](how-its-made.md#time).', '']
+    open(os.path.join(ROOT, 'pages', 'streetcars.md'), 'w').write('\n'.join(out))
+    print('pages/streetcars.md')
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('what', choices=['points', 'menu', 'map', 'boxes'])
+    ap.add_argument('what', choices=['points', 'menu', 'map', 'boxes', 'page'])
     ap.add_argument('ids', nargs='*')
     ap.add_argument('--dpi', type=int, default=300)
     ap.add_argument('--dir', default=os.path.join(ROOT, 'out', 'streetcars'))
     a = ap.parse_args()
     if a.what == 'points': return write_points(a.dir)
     pts = json.load(open(os.path.join(a.dir, 'points.json')))
+    if a.what == 'page': return write_page(pts)
     out = os.path.join(a.dir, 'print' if a.dpi >= 300 else f'proof-{a.dpi}')
     if a.what in ('menu', 'map'):
         big = Scene(os.path.join(a.dir, 'big', SVG_NAME))

@@ -9,10 +9,10 @@ this folder. Scans are cached outside the repo (`~/work/sanborn`); the outputs g
    holding `item_NNN.json` from `https://www.loc.gov/item/sanborn09064_NNN/?fo=json`).
 2. `python3 arcgis.py CityBlock <bbox> ../../data/sanborn/blocks.json`: the city's block
    outlines, for checking fits.
-3. Read two or three named street corners off each sheet (`mosaic.py` makes labelled contact
+3. Read two or three named street corners off each sheet (`mosaic.py` makes labeled contact
    sheets) into `cps<edition>.json` as `[u, v, lon, lat, label]`; corners come from OSM
    intersections.
-4. `python3 rigid.py cps<edition>.json <metres per pixel> georef.json`: fit each sheet; a
+4. `python3 rigid.py cps<edition>.json <meters per pixel> georef.json`: fit each sheet; a
    third corner flags misreads. `ovmosaic.py` draws the city's blocks over sheets to check.
 5. `python3 extract.py <edition> georef.json "<scan path with {sh:04d}>" ../../history/sanborn/<edition>.geojson <skip,sheets> keep<edition>.json`
 6. `node dates.ts` (from the repo root: `node tools/sanborn/dates.ts`), then

@@ -1,7 +1,7 @@
 /**
  * Plane geometry on the view plane.
  *
- * Everything after projection lives in "view metres": E' runs left to right across the frame,
+ * Everything after projection lives in "view meters": E' runs left to right across the frame,
  * N' runs from the near edge (small) to the far edge (large). The camera always looks along +N',
  * so *nearer* means *smaller N'*. That one convention is what the extruder, the paint order and
  * the renderer all agree on.
@@ -60,7 +60,7 @@ const distToLine = (p: Vec2, a: Vec2, b: Vec2): number => {
 }
 
 /**
- * Remove vertices that sit within `tolerance` of the line through their neighbours, and
+ * Remove vertices that sit within `tolerance` of the line through their neighbors, and
  * vertices closer than `tolerance` to the previous one. Mapped footprints carry a lot of
  * near-collinear noise, and every surviving vertex becomes a dot and a wall.
  */
@@ -203,7 +203,7 @@ export const pointInPolygon = (p: Vec2, rings: readonly (readonly Vec2[])[]): bo
 
 /**
  * Do two convex polygons' interiors overlap? If not, returns the separating axis as a unit
- * normal pointing from `b` towards `a`.
+ * normal pointing from `b` toward `a`.
  */
 export const separatingAxis = (a: readonly Vec2[], b: readonly Vec2[]): Vec2 | null => {
   for (const poly of [a, b]) {

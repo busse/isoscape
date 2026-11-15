@@ -19,7 +19,7 @@ their world positions come from OSM intersections (see `cps*.json`).
 
 - **Beers, Illustrated Atlas of the City of Richmond (1876–77)**, Library of Congress
   item 2005630891 (public domain; also VCU Libraries). Sections J–M cover the frame. Buildings
-  are drawn as grey hatching under owners' names, so colour tracing does not work: a
+  are drawn as gray hatching under owners' names, so color tracing does not work: a
   hatching-density test catches the lettering as well and misses lightly hatched buildings.
   Needs an orientation-aware texture classifier or hand tracing. Not traced.
 - **Baist atlas (1889)**, VCU Libraries: same era as the 1886 Sanborn; not used.

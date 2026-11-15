@@ -1,5 +1,5 @@
 {
- "about": "The stops and attractions framing the 1925 streetcar map: one box each, numbered clockwise from the top left. Each note is written from the sources listed with it; `at` is the point the box is centred on, `line` the car line that served it in 1925. Voice: an invitation to ride as of 1925 (where to board, what you would find), then what became of the place, in the past tense; every fact is from the sources listed.",
+ "about": "The stops and attractions framing the 1925 streetcar map: one box each, numbered clockwise from the top left. Each note is written from the sources listed with it; `at` is the point the box is centered on, `line` the car line that served it in 1925. Voice: an invitation to ride as of 1925 (where to board, what you would find), then what became of the place, in the past tense; every fact is from the sources listed.",
  "stops": [
   {
    "n": 1,
@@ -137,7 +137,7 @@
     -77.4395,
     37.523
    ],
-   "note": "Across the river on the Mayo Bridge. Manchester was a city of its own until it joined Richmond in 1910, on the promise of a better bridge. The arched concrete span of 1913 brings the cars from 14th Street straight onto Hull Street, Manchester's main street of shops, restaurants and theatres.",
+   "note": "Across the river on the Mayo Bridge. Manchester was a city of its own until it joined Richmond in 1910, on the promise of a better bridge. The arched concrete span of 1913 brings the cars from 14th Street straight onto Hull Street, Manchester's main street of shops, restaurants and theaters.",
    "sources": [
     "https://architecturerichmond.com/?p=3761",
     "https://richmondmagazine.com/news/richmond-history/manchester-history/",
@@ -169,7 +169,7 @@
     -77.4733,
     37.5194
    ],
-   "note": "The end of the line, and Richmond's favourite trolley park since 1890: a boat lake, a bath house and the Dip-the-Dips roller coaster. Its days are numbered. The coaster was condemned in 1931, the rides came down in 1932, and in 1934 the city bought the 105 acres for a public park.",
+   "note": "The end of the line, and Richmond's favorite trolley park since 1890: a boat lake, a bath house and the Dip-the-Dips roller coaster. Its days are numbered. The coaster was condemned in 1931, the rides came down in 1932, and in 1934 the city bought the 105 acres for a public park.",
    "sources": [
     "https://tclf.org/forest-hill-park-va",
     "https://richmondfamilymagazine.com/community/history/richmonds-original-theme-park/",

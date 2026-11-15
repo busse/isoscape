@@ -45,8 +45,8 @@ isoscape is free and open source. Open a chat with Claude (we used Claude Opus 5
 
 > Use the GitHub repo busse/isoscape to make an isometric map of *your place*.
 
-Claude clones the repo, writes a region file for your place (`regions/<name>.json`: a centre,
-a width and depth in metres, see [Region config](#region-config)), fetches OpenStreetMap and
+Claude clones the repo, writes a region file for your place (`regions/<name>.json`: a center,
+a width and depth in meters, see [Region config](#region-config)), fetches OpenStreetMap and
 elevation, and builds the SVG and the pan-and-zoom page. It takes a few minutes. Terrain works
 anywhere: USGS 3DEP in the US, IGN in France, swisstopo in Switzerland, GSI in Japan, and
 Copernicus's 30 m model for the rest of the world (see [Elevation sources](#elevation-sources)). Your map is yours to print and share; credit OpenStreetMap (see
@@ -82,7 +82,7 @@ rewrites `out/index.html`, a single local page over all of them:
   Each part links to the matching section of the site's pages. Measures an older build did
   not record are marked as unknown. When comparing, A and B are shown side by side.
 - **Pages** (top of the left column): longer reading, such as *How it's made* (the whole
-  pipeline, and what is measured, inferred or guessed) and *About, credits and licences*.
+  pipeline, and what is measured, inferred or guessed) and *About, credits and licenses*.
 
 Keys: `↑`/`↓` step through builds, `F` fits, `1` shows actual size, `C` compares, `I`
 toggles the info panel, `M` switches to "How this view was made", `/` filters, `Esc` leaves a
@@ -161,7 +161,7 @@ node bin/isoscape.js explorer                                             # just
 `backfill` exports the commit's tree to a temporary directory, gives it this checkout's
 cached data, runs its own CLI, and archives the result dated to the commit. That puts
 outputs from before the archive existed in the explorer alongside new ones. Thumbnails use
-`rsvg-convert` if installed, else ImageMagick, else a colour swatch. `out/` is git-ignored:
+`rsvg-convert` if installed, else ImageMagick, else a color swatch. `out/` is git-ignored:
 the archive is local.
 
 ## Requirements
@@ -216,7 +216,7 @@ regions/<name>.json ─► fetch ─► data/<name>/osm.json
 **The camera** (`view.ts`) is orthographic, tilted down, and always looks along +N′ ("view
 north"). Ground across the frame is drawn at full `scale`. Ground into the frame is
 foreshortened by `squash`, the sine of the tilt (0.5 is a 30° tilt). Height is drawn at the
-cosine of the tilt. The frame is a rectangle in view metres, so it lands on screen as a plain
+cosine of the tilt. The frame is a rectangle in view meters, so it lands on screen as a plain
 rectangle, which suits a panorama.
 
 **Snap.** A camera facing due north sees most street grids at an odd angle. With `snap`, the
@@ -247,25 +247,25 @@ cycle is broken by depth.
 comes from USGS 3DEP, the National Map's seamless bare-earth model, which is 1 m lidar across
 Richmond; elsewhere from the source the region names (see [Elevation sources](#elevation-sources)). `fetch` asks its
 `exportImage` service for an uncompressed float GeoTIFF over the region. A minimal reader
-parses it, and it is stored as gzipped int16 centimetres (about 4 MB for this slice). The
-build resamples it onto a 5 m grid in view metres and blurs it lightly to lose the lidar
+parses it, and it is stored as gzipped int16 centimeters (about 4 MB for this slice). The
+build resamples it onto a 5 m grid in view meters and blurs it lightly to lose the lidar
 grit. Elevation above the frame's lowest point, times `terrain.exaggeration`, becomes scene
-height. Buildings and bridge clearances add true metres on top, so the hills are
+height. Buildings and bridge clearances add true meters on top, so the hills are
 exaggerated but the towers are not.
 
 **Elevation voids.** 3DEP sometimes fills a void with a large negative value: one patch near
 Shockoe Bottom read −88 m. Samples below −5 m, plus a few pixels around them, are treated as
-missing and filled from their neighbours.
+missing and filled from their neighbors.
 
 **The river.** Lidar over mapped water is not the water: rocks, ledges and overlapped banks
 stand above it. The surface at each water node is taken as a low percentile of the wet ground
-within 30 m, then smoothed along the water. Anything a metre or more above that surface is
+within 30 m, then smoothed along the water. Anything a meter or more above that surface is
 drawn as exposed rock, which gives the boulder fields. The water drapes on the surface, so
 it lies level across the river and falls along it. **Rapids** are drawn where that surface
 falls faster than `terrain.rapids` (m/m) measured over 40 m: white strokes across the
 current, with froth where it drops hardest. OSM weirs are drawn as white crests. Rocks and
 rapids are only read at least two cells (10 m) from shore. **The shoreline follows the
-lidar, not OSM's outline:** near-shore "water" standing more than a metre above the river is
+lidar, not OSM's outline:** near-shore "water" standing more than a meter above the river is
 given back to the land at its own height. The water's edge is then traced through the
 corrected water grid (marching squares over a lightly smoothed mask) and drawn at the
 river's surface. Where an outline overlaps a steep bank, this gives a bank sloping into the
@@ -290,27 +290,27 @@ same pipeline on a flat plate.
 {
   "title": "Richmond, VA — Tredegar to the Mayo Bridge",
   "center": [-77.4400, 37.5338],  // lon, lat
-  "width": 1700,                  // metres across the frame
-  "depth": 950,                   // metres into the frame
+  "width": 1700,                  // meters across the frame
+  "depth": 950,                   // meters into the frame
   "bearing": 0,                   // direction the camera faces; 0 = north is up
   "snap": true,                   // turn ≤45° to put the street grid on the diagonals
-  "scale": 2.4,                   // px per metre across the frame
+  "scale": 2.4,                   // px per meter across the frame
   "squash": 0.5,                  // sine of the tilt
   "exaggeration": 1.0,            // vertical exaggeration
-  "slab": 16,                     // ground slab thickness, metres
+  "slab": 16,                     // ground slab thickness, meters
   "palette": "paper",             // paper | night
   "bridgeDeck": 7,                // default deck height per OSM layer
-  "bridges": [{ "match": "Manchester", "deck": 24 }],  // + "pierSpacing": metres (default 38; long for suspension bridges)
+  "bridges": [{ "match": "Manchester", "deck": 24 }],  // + "pierSpacing": meters (default 38; long for suspension bridges)
   "minBuildingArea": 12,          // m²
   "dots": "all",                  // all | roof | none
   "data": "richmond-downtown",    // optional: share another region's cached data
   "terrain": {                    // optional: relief from data/<region>/dem.bin.gz
     "exaggeration": 2.5,          // vertical exaggeration of the ground only
-    "cell": 5,                    // grid spacing, metres
-    "contour": 2,                 // contour interval, metres (0 for none)
+    "cell": 5,                    // grid spacing, meters
+    "contour": 2,                 // contour interval, meters (0 for none)
     "majorEvery": 5,              // every 5th contour heavier
     "rapids": 0.035,              // water-surface fall (m/m over 40 m) that reads as rapids
-    "demResolution": 1,           // metres per pixel to fetch (default 1, or the source's own spacing)
+    "demResolution": 1,           // meters per pixel to fetch (default 1, or the source's own spacing)
     "source": "3dep",             // where the heights come from; see Elevation sources
     "fillFrom": "copernicus"      // optional: a second source for gaps (a national model stops at the border)
   }
@@ -324,7 +324,7 @@ data.
 
 `terrain.source` picks where the heights come from. Every source ends as the same cached grid,
 so nothing after `fetch` changes. `isoscape sources` prints them all, with credits and
-licences; the maps, the explorer and the prints credit whichever one a region used.
+licenses; the maps, the explorer and the prints credit whichever one a region used.
 
 | `source` | Covers | Data | Detail |
 |---|---|---|---|
@@ -380,7 +380,7 @@ year before. The method and its limits are in the *How it's made* page, under "T
 **Traced buildings.** `tools/sanborn/` turns Sanborn fire-insurance map sheets into dated
 footprints of buildings since lost. It downloads the sheets from the Library of Congress,
 fits each sheet to the ground from two or three street corners read off it, traces the
-coloured fills, and follows each building until a later map, a newer building or a highway
+colored fills, and follows each building until a later map, a newer building or a highway
 shows it gone. The steps are in *How it's made*, under "Time". The 1886, 1895, 1905, 1924–25 and
 1950–52 editions are traced into `history/sanborn/`. The results are sketches: outlines and
 heights are approximate, and some buildings are missing, misplaced or merged.
@@ -396,8 +396,8 @@ and elevation and keeps only its year-built parcels in its own `data/` folder.
 2. **Corridors.** A region shaped by a GeoJSON polygon instead of a rectangle: the river plus
    a ~300 m buffer on its north bank, clipped to the city line. That is the full
    west-to-east Richmond strip. It may also mean "unrolling" the river so distance along the
-   centreline becomes screen x.
-3. **Tiles.** Build once, then crop viewBoxes into tiles and rasterise a zoom pyramid for a
+   centerline becomes screen x.
+3. **Tiles.** Build once, then crop viewBoxes into tiles and rasterize a zoom pyramid for a
    web map. There are no seams to hide: one projection, one paint order.
 4. **Levels of detail.** Drop dots and minor edges at low zoom.
 5. **Hand-drawn landmarks.** Override the Belle Isle footbridge under the Lee Bridge, the
@@ -407,7 +407,7 @@ and elevation and keeps only its year-built parcels in its own `data/` folder.
 ## Data
 
 Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, available
-under the Open Database License. The cached `data/*/osm.json` files carry that licence, and
+under the Open Database License. The cached `data/*/osm.json` files carry that license, and
 every rendered SVG and page carries the attribution. Elevation is from the
 [USGS 3D Elevation Program](https://www.usgs.gov/3d-elevation-program), public domain, or,
 outside the US, from the source each region names (see [Elevation sources](#elevation-sources));

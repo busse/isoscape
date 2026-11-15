@@ -36,14 +36,14 @@ export interface HistoryFeature {
   readonly to?: number
   /** lon/lat outline (open), for areas and landmarks. */
   readonly ring?: Vec2[]
-  /** lon/lat centre line, for creeks and streetcar lines (a streetcar line may hold several runs: `lines`). */
+  /** lon/lat center line, for creeks and streetcar lines (a streetcar line may hold several runs: `lines`). */
   readonly line?: Vec2[]
   readonly lines?: Vec2[][]
   /** Streetcar lines: the line's name, for the explorer, and the operator. */
   readonly route?: string
-  /** Landmark height in metres. */
+  /** Landmark height in meters. */
   readonly height?: number
-  /** Creek width in metres. */
+  /** Creek width in meters. */
   readonly width?: number
   /** From this year a landmark stands as a burned shell. */
   readonly ruin?: number
@@ -100,7 +100,7 @@ export interface History {
   readonly traced: readonly TracedBuilding[]
   /**
    * Minor streets (tertiary, residential, service, unclassified, living streets and paths) drawn only
-   * where a building of the year stands within this many metres: a street with no house on it
+   * where a building of the year stands within this many meters: a street with no house on it
    * yet is taken as not yet laid out. Larger roads follow the era rules as usual.
    */
   readonly streetsNearBuildings?: number
@@ -171,13 +171,13 @@ export const featureAlive = (f: Feature, year: number, h: History): boolean => {
 const MINOR_STREETS = new Set(['tertiary', 'tertiary_link', 'residential', 'service', 'unclassified', 'living_street', 'track', 'footway', 'path', 'cycleway', 'pedestrian', 'steps', 'bridleway'])
 
 /**
- * Drop minor streets with no building within `metres` (of the buildings still in `features`,
+ * Drop minor streets with no building within `meters` (of the buildings still in `features`,
  * plus `extra` points, such as buildings traced from old maps). A street in a 1925 scene with
  * no 1925 house anywhere along it was most likely laid out later. Returns the kept features
  * and how many streets were dropped.
  */
 export const dropUnbuiltStreets = (
-  features: readonly Feature[], metres: number, extra: readonly Vec2[] = [],
+  features: readonly Feature[], meters: number, extra: readonly Vec2[] = [],
 ): { kept: Feature[]; dropped: number } => {
   let lat0 = 0
   let n = 0
@@ -185,7 +185,7 @@ export const dropUnbuiltStreets = (
   lat0 = n ? lat0 / n : 0
   const kx = 111_320 * Math.cos((lat0 * Math.PI) / 180)
   const ky = 110_574
-  const cell = metres
+  const cell = meters
   const grid = new Set<string>()
   const add = (lon: number, lat: number) => {
     const x = Math.floor((lon * kx) / cell)
@@ -239,7 +239,7 @@ export interface Dated {
 
 /**
  * Date each building: a curated year first, then its own `start_date` when OSM has one, else
- * the year built of the parcel its centre falls in.
+ * the year built of the parcel its center falls in.
  *
  * An assessor records one year per parcel: the year of its main building. Up to `few`
  * buildings on a lot (a row split in OSM, a house and its shed) all take it; with more, only one
@@ -288,7 +288,7 @@ export const dateBuildings = (
   // Area in rough square degrees is enough to rank buildings on one parcel.
   const size = (b: PolygonFeature) => Math.abs(b.outers[0].reduce((a, p, i, r) => { const q = r[(i + 1) % r.length]; return a + p[0] * q[1] - q[0] * p[1] }, 0))
   for (const [k, list] of tenants) {
-    // A curated building's parcel year is evidently not to be trusted for its neighbours either.
+    // A curated building's parcel year is evidently not to be trusted for its neighbors either.
     if (list.length >= crowd || list.some((b) => fixed.has(b.id))) continue
     const ranked = [...list].sort((a, b) => size(b) - size(a))
     // A few buildings on one lot (a row, a house and its shed) are taken to share its year;

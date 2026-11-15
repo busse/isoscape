@@ -21,7 +21,7 @@ for d in sorted(glob.glob('out/builds/*')):
         big = os.path.join(t, 'big.png'); C.svg_to_png(p, big, 2400, None, C.PAPER)
         im = Image.open(big).convert('RGB')
     im.resize((360, round(im.height * 360 / im.width)), Image.LANCZOS).save(os.path.join(d, 'thumb.png'))
-    # social: 1200x630 centred crop of the middle of the scene
+    # social: 1200x630 centered crop of the middle of the scene
     w = im.width; h = round(w * 630 / 1200)
     if h > im.height: h = im.height; w = round(h * 1200 / 630)
     x0 = (im.width - w) // 2; y0 = max(0, (im.height - h) // 2)

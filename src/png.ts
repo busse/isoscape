@@ -1,5 +1,5 @@
 /**
- * Just enough PNG: 8-bit, non-interlaced, palette (type 3), grey (0), RGB (2) or RGBA (6).
+ * Just enough PNG: 8-bit, non-interlaced, palette (type 3), gray (0), RGB (2) or RGBA (6).
  * Enough to read a WMS map image without a dependency.
  */
 
@@ -38,7 +38,7 @@ export const decodePng = (buf: Buffer): Png => {
   }
   if (depth !== 8 || interlace !== 0) throw new Error(`unsupported PNG: depth ${depth}, interlace ${interlace}`)
   const channels = type === 3 || type === 0 ? 1 : type === 2 ? 3 : type === 6 ? 4 : 0
-  if (channels === 0) throw new Error(`unsupported PNG colour type ${type}`)
+  if (channels === 0) throw new Error(`unsupported PNG color type ${type}`)
   if (type === 3 && palette === null) throw new Error('palette PNG without a palette')
   const raw = inflateSync(Buffer.concat(data))
   const stride = width * channels

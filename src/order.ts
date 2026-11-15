@@ -36,7 +36,7 @@ const screenBox = (item: Item): Box => {
 export const compare = (a: Item, b: Item): number => {
   const axis: Vec2 | null = separatingAxis(a.hull, b.hull)
   if (axis !== null) {
-    // `axis` points from b to a. The camera sits towards −N', so a is nearer when the axis
+    // `axis` points from b to a. The camera sits toward −N', so a is nearer when the axis
     // has a negative N' component.
     const towardsCamera = -axis[1]
     if (towardsCamera > 1e-6) return 1
@@ -53,7 +53,7 @@ export const compare = (a: Item, b: Item): number => {
 export const paintOrder = (items: readonly Item[], cell = 96): Item[] => {
   const n = items.length
   const boxes = items.map(screenBox)
-  // Spatial hash on screen boxes, so only near neighbours are compared.
+  // Spatial hash on screen boxes, so only near neighbors are compared.
   const grid = new Map<string, number[]>()
   boxes.forEach((b, i) => {
     for (let gx = Math.floor(b.minX / cell); gx <= Math.floor(b.maxX / cell); gx++) {

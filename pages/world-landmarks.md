@@ -13,7 +13,7 @@ elevation stops at the US border, so a map anywhere else used to come out flat.
 
 These five landmarks show that isoscape can now draw anywhere. Each one takes its terrain
 from a different open elevation dataset: three national mapping agencies, a European space
-programme, and a worldwide open mosaic. The buildings still come from OpenStreetMap. Everything
+program, and a worldwide open mosaic. The buildings still come from OpenStreetMap. Everything
 after the download is the same code that draws Richmond and the fifty American landmarks.
 
 | Landmark | Elevation data | Who publishes it | Ground detail |
@@ -45,7 +45,7 @@ would read as a skyscraper, so isoscape draws any lattice tower as a tapering sp
 mapped footprint. Its width follows the Eiffel Tower's own curve: about half the base at the
 first platform and a third at the second.
 
-Licence: Licence Ouverte 2.0 (Etalab). Credit: *RGE ALTI® © IGN*.
+License: Licence Ouverte 2.0 (Etalab). Credit: *RGE ALTI® © IGN*.
 
 ## Matterhorn and Zermatt, Switzerland
 
@@ -54,8 +54,8 @@ Licence: Licence Ouverte 2.0 (Etalab). Credit: *RGE ALTI® © IGN*.
 ![Zermatt in the valley, with the Matterhorn rising behind it](world-matterhorn.jpg)
 
 **Data: [swisstopo swissALTI3D](https://www.swisstopo.admin.ch/en/height-model-swissalti3d)**,
-a lidar model of Switzerland published as one-kilometre squares at 2 m in the Swiss national
-grid (LV95). isoscape finds the squares it needs in swisstopo's STAC catalogue, keeps the
+a lidar model of Switzerland published as one-kilometer squares at 2 m in the Swiss national
+grid (LV95). isoscape finds the squares it needs in swisstopo's STAC catalog, keeps the
 newest survey of each, and converts every sample from Swiss coordinates using swisstopo's
 published formulas.
 
@@ -63,7 +63,7 @@ The summit sits on the Italian border, and swissALTI3D stops there. The Italian 
 filled from Copernicus GLO-30 (see Machu Picchu). Each region can name a second source for
 whatever the first leaves empty, so the mountain is whole.
 
-Licence: swisstopo's terms for free geodata (OGD), commercial use included. Credit:
+License: swisstopo's terms for free geodata (OGD), commercial use included. Credit:
 *swissALTI3D © Federal Office of Topography swisstopo*, plus the Copernicus notice.
 
 ## Himeji Castle, Japan
@@ -74,13 +74,13 @@ Licence: swisstopo's terms for free geodata (OGD), commercial use included. Cred
 
 **Data: [GSI elevation tiles](https://maps.gsi.go.jp/development/ichiran.html)** from the
 Geospatial Information Authority of Japan. They are map tiles with the height packed into
-each pixel's colour, in hundredths of a metre. isoscape reads the 5 m lidar tiles first, then
+each pixel's color, in hundredths of a meter. isoscape reads the 5 m lidar tiles first, then
 5 m photogrammetry, and fills any gaps from the 10 m national model. It then reprojects from
 the web map grid to its own.
 
 The castle hill, the moats and the low ground of the city around them are all in the data.
 
-Licence: GSI's content terms, compatible with CC BY 4.0. Credit: *GSI elevation tiles,
+License: GSI's content terms, compatible with CC BY 4.0. Credit: *GSI elevation tiles,
 processed* (地理院タイル（標高タイル）を加工して作成).
 
 ## Machu Picchu, Peru
@@ -91,7 +91,7 @@ processed* (地理院タイル（標高タイル）を加工して作成).
 
 **Data: [Copernicus DEM GLO-30](https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM)**,
 a model of the whole planet at 30 m, made by the TanDEM-X radar satellites and released free
-by the EU's Copernicus programme. It is published as one-degree squares of cloud-optimised
+by the EU's Copernicus program. It is published as one-degree squares of cloud-optimized
 GeoTIFF on AWS. isoscape reads those files directly; its TIFF reader now handles their Deflate
 compression and floating-point predictor.
 
@@ -99,7 +99,7 @@ This is a surface model, so forest canopy and roofs are part of the height. At 3
 coarse for streets, but in the Andes the terrain is the subject: the Urubamba gorge, the
 switchback road up from Aguas Calientes, the citadel on its saddle, and the peaks around it.
 
-Licence: free worldwide, commercial use included. Credit: *produced using Copernicus
+License: free worldwide, commercial use included. Credit: *produced using Copernicus
 WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under
 COPERNICUS by the European Union and ESA; all rights reserved*.
 
@@ -111,7 +111,7 @@ COPERNICUS by the European Union and ESA; all rights reserved*.
 
 **Data: [Terrain Tiles](https://registry.opendata.aws/terrain-tiles/)**, an open worldwide
 mosaic on AWS. Each place gets the best open model available there, in the
-same web-map tiles as GSI with a different colour encoding. In Sydney that model is NASA's
+same web-map tiles as GSI with a different color encoding. In Sydney that model is NASA's
 SRTM radar survey at 30 m. Geoscience Australia's 5 m lidar would be sharper, but its web
 service did not answer coverage requests when these maps were made.
 
@@ -119,7 +119,7 @@ OpenStreetMap maps the Opera House's sails as roof parts with no heights. isosca
 curved roof shell with no height as a sail rising to a point, sized from its footprint, on
 top of the podium. **The sail heights are an approximation**, not a survey.
 
-Licence: open data from each underlying source. Credit: *Terrain Tiles (Mapzen/Tilezen);
+License: open data from each underlying source. Credit: *Terrain Tiles (Mapzen/Tilezen);
 SRTM courtesy of the U.S. Geological Survey; ETOPO1 courtesy of NOAA*.
 
 ## How it works
@@ -131,17 +131,17 @@ A region's file names its elevation source in its `terrain` section:
 ```
 
 The sources are `3dep` (the default), `ign`, `swisstopo`, `gsi`, `copernicus` and
-`terrain-tiles`. `isoscape sources` lists each one with its coverage, credit and licence.
+`terrain-tiles`. `isoscape sources` lists each one with its coverage, credit and license.
 They fall into two kinds:
 
 - **Cut to order** (USGS 3DEP, IGN): the server returns an image for any box, so isoscape
   asks for tiles that line up exactly with its own grid.
 - **Fixed pieces** (GSI, Terrain Tiles, Copernicus, swisstopo): web-map tiles, one-degree
-  squares or one-kilometre squares in a national grid. isoscape downloads the pieces covering
+  squares or one-kilometer squares in a national grid. isoscape downloads the pieces covering
   the frame, then samples each point of its grid from them, converting to the piece's own
   coordinates.
 
-Either way the result is the same: a grid of metres above sea level over the frame, cached in
+Either way the result is the same: a grid of meters above sea level over the frame, cached in
 `data/<region>/dem.bin.gz` with the source's name. Nothing after the fetch knows where the
 heights came from, except the credits. The map's caption, the explorer's "How this view was
 made" tab and the prints all name the right source. [How it's made](how-its-made.md#inputs)

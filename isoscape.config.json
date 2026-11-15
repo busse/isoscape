@@ -43,7 +43,9 @@
           "richmond"
         ],
         "shop": "https://chrisbusse.com/collections/richmond-through-time",
-        "shopLabel": "Shop Richmond prints ↗"
+        "shopLabel": "Shop Richmond prints ↗",
+        "page": "#/streetcars",
+        "pageLabel": "Richmond's streetcars, 1925: the lines and fourteen stops"
       },
       {
         "title": "Virginia",
@@ -157,7 +159,7 @@
         "href": "#/how-its-made"
       },
       {
-        "label": "About, credits and licences",
+        "label": "About, credits and licenses",
         "href": "#/about"
       }
     ]

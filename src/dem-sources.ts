@@ -1,17 +1,17 @@
 /**
- * Where elevation comes from. Every source ends in the same thing: a grid of metres above sea
+ * Where elevation comes from. Every source ends in the same thing: a grid of meters above sea
  * level on the region's lon/lat box (see `fetchDem` in `dem.ts`), so nothing downstream knows
  * or cares which one was used. They differ in how they hand the heights over:
  *
  * - **request** sources cut an image to order for any box (USGS 3DEP, IGN). The grid is
  *   fetched in tiles that line up with the output exactly.
  * - **mosaic** sources publish fixed pieces: map tiles in Web Mercator (GSI, AWS Terrain
- *   Tiles), one-degree squares (Copernicus) or one-kilometre squares in the Swiss grid
+ *   Tiles), one-degree squares (Copernicus) or one-kilometer squares in the Swiss grid
  *   (swisstopo). The pieces covering the box are downloaded, then the output grid is sampled
  *   from them, reprojecting each sample to the piece's own coordinates.
  *
  * All five non-US sources allow commercial use with attribution; `credit` is the line the
- * maps and pages carry, and `licence` names the terms.
+ * maps and pages carry, and `license` names the terms.
  */
 
 import { bilinear, decodeTiff, type Raster } from './rasters.ts'
@@ -38,9 +38,9 @@ interface Common {
   readonly about: string
   /** The attribution line every map using it must carry. */
   readonly credit: string
-  readonly licence: string
+  readonly license: string
   readonly link: string
-  /** Finest useful metres per pixel; finer `demResolution` just interpolates. */
+  /** Finest useful meters per pixel; finer `demResolution` just interpolates. */
   readonly native: number
 }
 
@@ -54,9 +54,9 @@ export interface RequestSource extends Common {
 
 export interface MosaicSource extends Common {
   readonly kind: 'mosaic'
-  /** The pieces covering `b` at about `metresPerPixel`. May ask a catalogue first. */
-  readonly pieces: (b: Bounds, metresPerPixel: number, get: (url: string) => Promise<string>) => Promise<Piece[]>
-  /** Build a lon/lat → metres sampler from the downloaded pieces (`null` where a piece is missing). */
+  /** The pieces covering `b` at about `metersPerPixel`. May ask a catalog first. */
+  readonly pieces: (b: Bounds, metersPerPixel: number, get: (url: string) => Promise<string>) => Promise<Piece[]>
+  /** Build a lon/lat → meters sampler from the downloaded pieces (`null` where a piece is missing). */
   readonly sampler: (pieces: { piece: Piece; buf: Buffer | null }[]) => (lon: number, lat: number) => number
 }
 
@@ -80,7 +80,7 @@ const tilesOver = (b: Bounds, z: number) => {
   return out
 }
 
-/** Sample a set of same-zoom map tiles, each already decoded to metres, as one surface. */
+/** Sample a set of same-zoom map tiles, each already decoded to meters, as one surface. */
 const tileSampler = (z: number, tiles: Map<string, Raster>) => (lon: number, lat: number): number => {
   const [px, py] = mercatorPixel(lon, lat, z)
   const tx = Math.floor(px / 256)
@@ -97,12 +97,12 @@ const pngHeights = (buf: Buffer, unpack: (r: number, g: number, b: number) => nu
   return { width: png.width, height: png.height, data }
 }
 
-/** Zoom whose pixels are no bigger than `m` metres at latitude `lat`, capped at `max`. */
+/** Zoom whose pixels are no bigger than `m` meters at latitude `lat`, capped at `max`. */
 const zoomFor = (m: number, lat: number, max: number) =>
   Math.min(max, Math.max(0, Math.ceil(Math.log2((156_543.034 * Math.cos((lat * Math.PI) / 180)) / m))))
 
 /**
- * WGS84 → Swiss LV95 (EPSG:2056), swisstopo's published approximation (good to about a metre,
+ * WGS84 → Swiss LV95 (EPSG:2056), swisstopo's published approximation (good to about a meter,
  * well under one 2 m pixel).
  */
 export const toLv95 = (lon: number, lat: number): [number, number] => {
@@ -126,7 +126,7 @@ const usgs3dep: RequestSource = {
   coverage: 'United States (U.S. Geological Survey)',
   about: 'Bare-earth lidar, 1 m across most of the US, served by the National Map',
   credit: 'Elevation: USGS 3DEP',
-  licence: 'public domain',
+  license: 'public domain',
   link: 'https://www.usgs.gov/3d-elevation-program',
   native: 1,
   tile: 1500,
@@ -155,7 +155,7 @@ const ign: RequestSource = {
   coverage: 'France (Institut national de l’information géographique et forestière)',
   about: 'Bare-earth model at 1 m, from airborne lidar in cities, along coasts and in forests, and image correlation elsewhere',
   credit: 'Elevation: RGE ALTI® © IGN',
-  licence: 'Licence Ouverte 2.0 (Etalab)',
+  license: 'Licence Ouverte 2.0 (Etalab)',
   link: 'https://geoservices.ign.fr/rgealti',
   native: 1,
   tile: 2000,
@@ -199,7 +199,7 @@ const gsi: MosaicSource = {
   coverage: 'Japan (Geospatial Information Authority of Japan, 国土地理院)',
   about: 'Bare-earth 5 m lidar where it has been flown, filled from the 10 m national model elsewhere',
   credit: 'Elevation: GSI elevation tiles (Geospatial Information Authority of Japan), processed',
-  licence: 'GSI content terms (国土地理院コンテンツ利用規約), compatible with CC BY 4.0',
+  license: 'GSI content terms (国土地理院コンテンツ利用規約), compatible with CC BY 4.0',
   link: 'https://maps.gsi.go.jp/development/ichiran.html',
   native: 5,
   pieces: async (b) =>
@@ -211,7 +211,7 @@ const gsi: MosaicSource = {
       })),
     ),
   sampler: (got) => {
-    // x = R·2¹⁶ + G·2⁸ + B in hundredths of a metre, two's complement in 24 bits; 2²³ is "no data".
+    // x = R·2¹⁶ + G·2⁸ + B in hundredths of a meter, two's complement in 24 bits; 2²³ is "no data".
     const unpack = (r: number, g: number, b: number) => {
       const x = r * 65_536 + g * 256 + b
       return x === 8_388_608 ? NaN : (x < 8_388_608 ? x : x - 16_777_216) * 0.01
@@ -238,7 +238,7 @@ const terrainTiles: MosaicSource = {
   coverage: 'Worldwide (Mapzen/Tilezen, on AWS Open Data), the best open model per place',
   about: 'A mosaic of open models: national lidar in the US, UK, Austria and a few other countries, and NASA’s 30 m SRTM radar survey elsewhere, which is what covers Sydney',
   credit: 'Elevation: Terrain Tiles (Mapzen/Tilezen, AWS Open Data); SRTM courtesy of the U.S. Geological Survey; ETOPO1 courtesy of NOAA',
-  licence: 'open data from each source, credited as Tilezen’s attribution list asks',
+  license: 'open data from each source, credited as Tilezen’s attribution list asks',
   link: 'https://registry.opendata.aws/terrain-tiles/',
   native: 30,
   pieces: async (b, m) => {
@@ -252,7 +252,7 @@ const terrainTiles: MosaicSource = {
   sampler: (got) => {
     const z = Number(got[0]?.piece.key.z ?? 0)
     const tiles = new Map<string, Raster>()
-    // Terrarium: metres = R·256 + G + B/256 − 32768.
+    // Terrarium: meters = R·256 + G + B/256 − 32768.
     for (const { piece, buf } of got) if (buf !== null) tiles.set(`${piece.key.x}/${piece.key.y}`, pngHeights(buf, (r, g, b) => r * 256 + g + b / 256 - 32_768))
     return tileSampler(z, tiles)
   },
@@ -262,10 +262,10 @@ const copernicus: MosaicSource = {
   id: 'copernicus',
   kind: 'mosaic',
   name: 'Copernicus DEM GLO-30',
-  coverage: 'Worldwide (European Space Agency, Copernicus programme)',
+  coverage: 'Worldwide (European Space Agency, Copernicus program)',
   about: 'A 30 m surface model from the TanDEM-X radar mission: it includes forest canopy and buildings, so it suits mountains better than cities',
   credit: 'Elevation: produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved',
-  licence: 'Licence for the use of the Copernicus WorldDEM-30 (free, worldwide, commercial use allowed)',
+  license: 'Licence for the use of the Copernicus WorldDEM-30 (free, worldwide, commercial use allowed)',
   link: 'https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/collections-description/COP-DEM',
   native: 30,
   pieces: async (b) => {
@@ -297,11 +297,11 @@ const swisstopo: MosaicSource = {
   coverage: 'Switzerland and Liechtenstein (Federal Office of Topography swisstopo)',
   about: 'Bare-earth lidar model, published as 1 km squares at 2 m in the Swiss grid (LV95) and refreshed on a six-year cycle',
   credit: 'Elevation: swissALTI3D © Federal Office of Topography swisstopo',
-  licence: 'swisstopo terms of use for free geodata (OGD): free use, commercial included, with source attribution',
+  license: 'swisstopo terms of use for free geodata (OGD): free use, commercial included, with source attribution',
   link: 'https://www.swisstopo.admin.ch/en/height-model-swissalti3d',
   native: 2,
   pieces: async (b, _m, get) => {
-    // The STAC catalogue lists every published square; keep the newest year of each.
+    // The STAC catalog lists every published square; keep the newest year of each.
     const newest = new Map<string, { year: number; url: string }>()
     let next: string | undefined =
       `https://data.geo.admin.ch/api/stac/v0.9/collections/ch.swisstopo.swissalti3d/items?bbox=${[b.west, b.south, b.east, b.north].join(',')}&limit=100`

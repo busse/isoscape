@@ -1,4 +1,4 @@
-"""Reference lines for registration, from cached data: OSM street centre lines, city blocks."""
+"""Reference lines for registration, from cached data: OSM street center lines, city blocks."""
 import json, sys
 import numpy as np
 from geo import to_m, sample_lines, load_lines

@@ -1,5 +1,5 @@
-"""Trace the buildings on georeferenced sheets: coloured fills split by the printed party walls,
-traced as polygons, carried to lon/lat, one GeoJSON per edition. Material from the colour."""
+"""Trace the buildings on georeferenced sheets: colored fills split by the printed party walls,
+traced as polygons, carried to lon/lat, one GeoJSON per edition. Material from the color."""
 import json, sys
 import numpy as np
 import cv2
@@ -14,7 +14,7 @@ STOREYS = {'brick': 3, 'frame': 2, 'stone': 3, 'iron': 4, 'special': 3, 'firepro
 
 def trace(img, params, keep=None, min_m2=10, fireproof=False, tile=3000, overlap=400):
     """Big scans are read in overlapping tiles; a building is kept by the tile whose core holds
-    its centre, and only if it does not run off that tile."""
+    its center, and only if it does not run off that tile."""
     Image.MAX_IMAGE_PIXELS = None
     src = Image.open(img).convert('RGB')
     W, H = src.size
@@ -86,7 +86,7 @@ def trace_window(im, params, off, core, keep, min_m2, fireproof, edges=None):
         poly = Polygon(np.stack([xy[:, 0], xy[:, 1]], 1)).buffer(0)
         if poly.is_empty or poly.area < min_m2:
             continue
-        # thin strips (rails, fences drawn in colour) are not buildings
+        # thin strips (rails, fences drawn in color) are not buildings
         compact = poly.area / max(poly.length, 1e-6)
         if compact < 1.3 or (mat == 'stone' and compact < 2.5):
             continue

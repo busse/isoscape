@@ -7,7 +7,7 @@
  * fragment they arrived with: `s/<id>.html#<id>@cx,cy,z` opens that exact view.
  *
  * Each build gets a 1200×630 preview image, `out/builds/<id>/social.png`: the picture cropped
- * (not letterboxed) to 1.91:1 around its centre, rasterised with rsvg-convert, else headless
+ * (not letterboxed) to 1.91:1 around its center, rasterized with rsvg-convert, else headless
  * Chrome. Without either, the thumbnail stands in.
  *
  * Open Graph wants absolute URLs. The site's public address comes from `--site-url`, else
@@ -264,7 +264,7 @@ export const shareFile = (target: { build: string } | { page: string }): string 
 
 /**
  * The part of a viewBox shown at 1200×630: the full height or width, whichever fits, cut to
- * 1.91:1 around the centre. Cutting height, the sky above goes before the ground below. A
+ * 1.91:1 around the center. Cutting height, the sky above goes before the ground below. A
  * picture with a caption in its top-left corner (a dated build's year) is cut from the right
  * and the bottom instead, so the caption stays whole.
  */
@@ -301,7 +301,7 @@ export const CHROMES = [
 type Rasteriser = { kind: 'rsvg' } | { kind: 'chrome'; bin: string } | null
 let found: Promise<Rasteriser> | undefined
 
-/** What is installed to rasterise SVG: rsvg-convert, else a headless Chrome, else nothing. */
+/** What is installed to rasterize SVG: rsvg-convert, else a headless Chrome, else nothing. */
 export const findRasteriser = (): Promise<Rasteriser> =>
   (found ??= (async () => {
     try {
@@ -321,7 +321,7 @@ export const findRasteriser = (): Promise<Rasteriser> =>
     return null
   })())
 
-/** Render `svgPath` to a 1200×630 PNG at `pngPath`. False when nothing could rasterise it. */
+/** Render `svgPath` to a 1200×630 PNG at `pngPath`. False when nothing could rasterize it. */
 export const renderSocial = async (svgPath: string, pngPath: string, viewBox: readonly number[]): Promise<boolean> => {
   const r = await findRasteriser()
   if (r === null) return false

@@ -32,7 +32,7 @@ export interface BuildMeta {
   readonly stats: Readonly<Record<string, number>>
   readonly config: Region
   readonly files: { readonly svg: string; readonly thumb?: string; readonly social?: string; readonly preview?: string }
-  /** The page colour, for a swatch where there is no thumbnail. */
+  /** The page color, for a swatch where there is no thumbnail. */
   readonly sky: string
   /** A dated build: its year, its place in the series, and the curated features drawn in it. */
   readonly time?: {
@@ -57,7 +57,7 @@ const gitInfo = async (): Promise<BuildMeta['git']> => {
 }
 
 /**
- * Rasterise a thumbnail with whatever is installed: rsvg-convert, else headless Chrome (which
+ * Rasterize a thumbnail with whatever is installed: rsvg-convert, else headless Chrome (which
  * draws the SVG exactly as the explorer will). ImageMagick's own SVG renderer is not tried: it
  * ignores clip paths and stylesheets and draws these blank. False when nothing worked.
  */

@@ -15,7 +15,7 @@ share, along OSM's own street geometry:
   street fills today (a viaduct since torn down).
 
 The path between stops is the shortest walk over OSM's street graph, where streets named in
-both stops cost 1 per metre and every other street 6, so it keeps to the named street and
+both stops cost 1 per meter and every other street 6, so it keeps to the named street and
 only leaves it to bridge a gap (a street renamed, a block since closed). Each placed route
 replaces the history's `streetcar` feature of the same id; every other feature is kept.
 """

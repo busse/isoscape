@@ -24,7 +24,7 @@ const run = promisify(execFile)
 const HELP = `isoscape — isometric dot-and-line views of real places
 
   isoscape regions                 list region configs in regions/
-  isoscape sources                 list the elevation sources, with credits and licences, as JSON
+  isoscape sources                 list the elevation sources, with credits and licenses, as JSON
   isoscape query <region>          print the Overpass query for a region
   isoscape fetch <region>          download OSM data and elevation to data/<region>/
   isoscape info <region>           camera, counts and height coverage, as JSON
@@ -43,7 +43,7 @@ const HELP = `isoscape — isometric dot-and-line views of real places
                             other sources (footprints, land cover)
   --budget <seconds>        stop starting new OSM tiles after this long (fetch resumes)
   --palette <name>   override the region's palette (paper, night)
-  --png [width]      also rasterise out/<region>.png (needs rsvg-convert)
+  --png [width]      also rasterize out/<region>.png (needs rsvg-convert)
   --note "<text>"    say what this build is trying, shown in the explorer
   --year <yyyy>      build a dated region as it stood in that year
   --streetcar-scale <n>  draw streetcar lines and cars at n times life size
@@ -160,8 +160,8 @@ export const main = async (argv: string[]): Promise<void> => {
     return
   }
   if (command === 'sources') {
-    // The elevation sources, with their credits and licences, as JSON (the print and shop tools read it).
-    console.log(JSON.stringify(Object.values(DEM_SOURCES).map(({ id, name, coverage, about, credit, licence, link, native }) => ({ id, name, coverage, about, credit, licence, link, native })), null, 1))
+    // The elevation sources, with their credits and licenses, as JSON (the print and shop tools read it).
+    console.log(JSON.stringify(Object.values(DEM_SOURCES).map(({ id, name, coverage, about, credit, license, link, native }) => ({ id, name, coverage, about, credit, license, link, native })), null, 1))
     return
   }
   if (command === 'explorer') {

@@ -48,7 +48,7 @@ export const quadkeysFor = (b: Bounds): string[] => {
 export interface Footprint {
   /** Outer ring, lon/lat, open. */
   readonly ring: Vec2[]
-  /** Modelled height in metres, when the model gave one. */
+  /** Modeled height in meters, when the model gave one. */
   readonly height?: number
 }
 
@@ -76,7 +76,7 @@ export const fetchFootprints = async (r: Region, dir: string, log = console.erro
   }
   await run('rm', ['-f', tmp]).catch(() => undefined)
   await writeFile(join(dir, 'footprints.json'), JSON.stringify({ source: 'Microsoft Global ML Building Footprints (ODbL)', footprints: out }))
-  log(`${out.length} footprints in the region, ${out.filter((f) => f.height !== undefined).length} with a modelled height`)
+  log(`${out.length} footprints in the region, ${out.filter((f) => f.height !== undefined).length} with a modeled height`)
   return out.length
 }
 
@@ -98,11 +98,11 @@ const inRing = (p: Vec2, ring: readonly Vec2[]): boolean => {
   }
   return inside
 }
-const centre = (ring: readonly Vec2[]): Vec2 => ring.reduce<Vec2>((a, p) => [a[0] + p[0] / ring.length, a[1] + p[1] / ring.length], [0, 0])
+const center = (ring: readonly Vec2[]): Vec2 => ring.reduce<Vec2>((a, p) => [a[0] + p[0] / ring.length, a[1] + p[1] / ring.length], [0, 0])
 
 /**
  * Footprints as building features, leaving out any that overlap an OSM building: a footprint
- * whose centre lies in an OSM building, or that holds an OSM building's centre.
+ * whose center lies in an OSM building, or that holds an OSM building's center.
  */
 export const mergeFootprints = (osm: readonly PolygonFeature[], footprints: readonly Footprint[]): PolygonFeature[] => {
   const cell = 0.002
@@ -110,7 +110,7 @@ export const mergeFootprints = (osm: readonly PolygonFeature[], footprints: read
   const keyOf = (p: Vec2) => `${Math.floor(p[0] / cell)},${Math.floor(p[1] / cell)}`
   for (const f of osm) {
     if (f.tags.building === undefined && f.tags['building:part'] === undefined) continue
-    const k = keyOf(centre(f.outers[0]))
+    const k = keyOf(center(f.outers[0]))
     const list = grid.get(k)
     if (list) list.push(f)
     else grid.set(k, [f])
@@ -123,8 +123,8 @@ export const mergeFootprints = (osm: readonly PolygonFeature[], footprints: read
   }
   const merged: PolygonFeature[] = []
   footprints.forEach((fp, i) => {
-    const c = centre(fp.ring)
-    const clash = near(c).some((o) => inRing(c, o.outers[0]) || inRing(centre(o.outers[0]), fp.ring))
+    const c = center(fp.ring)
+    const clash = near(c).some((o) => inRing(c, o.outers[0]) || inRing(center(o.outers[0]), fp.ring))
     if (clash) return
     merged.push({
       type: 'polygon',

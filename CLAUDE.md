@@ -4,19 +4,19 @@ Read README.md for what this is. This file is the rules for changing it.
 
 ## Conventions
 
-- **View metres.** Everything after `view.toView` is in metres on the view plane: E′ across the
+- **View meters.** Everything after `view.toView` is in meters on the view plane: E′ across the
   frame (left → right), N′ into it (near → far). The camera looks along +N′, so *nearer means
   smaller N′*. Screen y grows downward. Don't introduce a second coordinate system.
 - **Ring orientation.** Building outers are counter-clockwise and holes clockwise, in view
-  metres, so the outward normal of edge a→b is (dy, −dx) for both. A wall is visible when that
+  meters, so the outward normal of edge a→b is (dy, −dx) for both. A wall is visible when that
   normal has a negative N′ component.
-- **Palettes hold every colour and line weight.** No hex values outside `palette.ts`.
+- **Palettes hold every color and line weight.** No hex values outside `palette.ts`.
 - **No runtime dependencies.** Node ≥ 22.18 runs the TypeScript directly, so keep to erasable
   syntax: no enums, no namespaces, no parameter properties. `npm run typecheck` enforces it.
 - **The cache is the source.** `build` never touches the network. Only `fetch` does.
-- **Two heights.** `terrain.elevation(p)` is metres above sea level, used for contours, slopes
+- **Two heights.** `terrain.elevation(p)` is meters above sea level, used for contours, slopes
   and rapids. `terrain.z(p)` is scene height: (elevation − datum) × exaggeration, used for
-  drawing. Building heights and bridge clearances are true metres added to scene z.
+  drawing. Building heights and bridge clearances are true meters added to scene z.
 - **Strip seams.** Strips lap toward the camera only (by up to 8 m), into ground the next strip
   repaints, so no seam shows at any zoom and no lap covers a standing item. Never lap away from
   the camera.
@@ -52,7 +52,7 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | how a building or bridge is drawn | `extrude` / `bridgePieces` in `scene.ts` |
 | what occludes what | `compare` in `order.ts` |
 | SVG structure, layers, the viewer page | `render.ts` |
-| colours, weights, dot size | `palette.ts` |
+| colors, weights, dot size | `palette.ts` |
 | elevation fetch and storage | `dem.ts` |
 | an elevation source (URL, decoding, reprojection, credit) | `dem-sources.ts`; TIFF decoding in `rasters.ts` |
 | lattice towers, roof shells | `spire`, `isLatticeTower`, `isShellRoof` in `scene.ts` |
@@ -70,7 +70,7 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 
 ## Known limits
 
-- The hillshade is quantised per 5 m cell, so very steep ground can look stepped.
+- The hillshade is quantized per 5 m cell, so very steep ground can look stepped.
 - Rapids come from the lidar's water surface, read only 10 m or more from shore; a polygon
   far off from the real channel can still produce false falls.
 - Big regions make big SVGs (the I-195 to Rocketts view is 25 MB and takes a browser 10–20 s
@@ -84,5 +84,5 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
   curated item and era rule must cite a source (or say plainly that it is approximate).
 - Outside the US, terrain is only as fine as its source: Copernicus is a 30 m *surface* model
   (trees and roofs included), and Terrain Tiles is 30 m SRTM in much of the world. Every source
-  must carry its credit and licence in `dem-sources.ts`; the maps, explorer and prints use them.
+  must carry its credit and license in `dem-sources.ts`; the maps, explorer and prints use them.
 - Concave footprints that interlock can form an ordering cycle, which is broken by depth.

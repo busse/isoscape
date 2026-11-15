@@ -4,7 +4,7 @@
  * - **GeoTIFF**: classic TIFF, little- or big-endian, strips or tiles; uncompressed, LZW or
  *   Deflate; no predictor, horizontal (2) or floating-point (3) predictor; one 32-bit float or
  *   16-bit integer sample. That covers USGS 3DEP's exports, swisstopo's swissALTI3D tiles and
- *   the Copernicus DEM's cloud-optimised GeoTIFFs. The georeference (pixel scale, tie point,
+ *   the Copernicus DEM's cloud-optimized GeoTIFFs. The georeference (pixel scale, tie point,
  *   pixel-is-area or -point) is read from the GeoTIFF tags when present.
  *
  * PNG elevation tiles (GSI, AWS Terrain Tiles) are read with `png.ts`.
@@ -94,7 +94,7 @@ const unpredictFloat = (row: Uint8Array, w: number, bps: number): Uint8Array => 
   return out
 }
 
-/** Parse a classic TIFF to metres, with its georeference when the file carries one. */
+/** Parse a classic TIFF to meters, with its georeference when the file carries one. */
 export const decodeTiff = (buf: Buffer): Raster => {
   const le = buf.toString('latin1', 0, 2) === 'II'
   const u16 = (o: number) => (le ? buf.readUInt16LE(o) : buf.readUInt16BE(o))
@@ -204,7 +204,7 @@ export const decodeTiff = (buf: Buffer): Raster => {
   return { width, height, data, geo }
 }
 
-/** Bilinear sample of a raster at fractional pixel (fx, fy), measured from pixel centres. NaN-aware. */
+/** Bilinear sample of a raster at fractional pixel (fx, fy), measured from pixel centers. NaN-aware. */
 export const bilinear = (r: { width: number; height: number; data: Float32Array }, fx: number, fy: number): number => {
   if (fx < -0.5 || fy < -0.5 || fx > r.width - 0.5 || fy > r.height - 0.5) return NaN
   const x0 = Math.floor(fx)

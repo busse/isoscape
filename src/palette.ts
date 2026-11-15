@@ -1,5 +1,5 @@
 /**
- * Colours and line weights. A palette is the whole style: there is no other place a colour is
+ * Colors and line weights. A palette is the whole style: there is no other place a color is
  * chosen. Line weights are in screen pixels, so they hold at any `scale`.
  */
 
@@ -51,7 +51,7 @@ export interface Palette {
   /** Vanished pleasure grounds (a fairground), and a racetrack's dirt oval. */
   readonly grounds: string
   readonly racetrack: string
-  /** Roofs of buildings traced from fire-insurance maps, in the maps' own colour code. */
+  /** Roofs of buildings traced from fire-insurance maps, in the maps' own color code. */
   readonly traced: Readonly<Record<'brick' | 'frame' | 'stone' | 'iron' | 'special' | 'fireproof', string>>
   /** Streetcar lines on the ground, and the cars on them: side lit, side in shade, roof. */
   readonly tram: string
@@ -194,7 +194,7 @@ export const palette = (name = 'paper'): Palette => {
 
 const hex = (c: string): [number, number, number] => [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16)) as [number, number, number]
 
-/** Linear mix of two #rrggbb colours. */
+/** Linear mix of two #rrggbb colors. */
 export const mix = (a: string, b: string, t: number): string => {
   const [ar, ag, ab] = hex(a)
   const [br, bg, bb] = hex(b)

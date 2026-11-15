@@ -4,7 +4,7 @@
 1. Drop slivers: footprints whose minimum rotated rectangle is more than 8x longer than wide
    and under 12 m wide, or over 100 m long and under 8 m wide on average (area / length,
    which catches bent strips whose bounding rectangle is wide). On the Sanborn sheets these are rail viaducts, sheds along tracks and
-   street edges the colour classifier took for buildings; extruded, they stand as walls.
+   street edges the color classifier took for buildings; extruded, they stand as walls.
 2. Drop sprawls: footprints over 2,000 m² that fill under 45% of their convex hull. These are
    river shading and hatching on the overview sheets, not buildings.
 3. Merge duplicates: where two footprints overlap by more than 85% (intersection over union),
