@@ -6,12 +6,16 @@ The art is not redrawn: version N+1 is version N's sold files, unchanged, with t
 (the mirrored wrap is left as it was). Because the base files are frozen in version N's record,
 the new files can always be made again from them byte for byte (check.py --rebuild does this).
 
-    python3 tools/release/stamp.py <store-dir> <design>... --version N [--out DIR] [--dry]
+    python3 tools/release/stamp.py <store-dir> <design>... [--version N] [--out DIR] [--budget S]
+    python3 tools/release/stamp.py <store-dir> all --budget 160      every design in the catalog
 
-Without --out the new files go beside the old ones, named <stem>-vN_<size>.jpg. Prints each
-placement (x, y, w, h and the size used); a sheet with no room raises an error.
+Without --out the new files go beside the old ones, named <stem>-vN_<size>.jpg, and each is
+logged in <store>/pipeline/state/stamps.json: its base file and that file's SHA-256, the block's
+fields and placement, and the new file's SHA-256 (record.py and check.py read it). A file already
+logged there is skipped, so a run cut short by --budget picks up where it stopped. A sheet with no
+room for the block raises an error.
 """
-import argparse, json, os, re, sys
+import argparse, hashlib, json, os, re, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ISO = os.path.normpath(os.path.join(HERE, '..', '..'))
@@ -70,23 +74,43 @@ def stamp_file(src, dst, info):
     return at
 
 
+def sha(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for b in iter(lambda: f.read(1 << 20), b''): h.update(b)
+    return h.hexdigest()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('store'); ap.add_argument('designs', nargs='+')
     ap.add_argument('--version', type=int, help='the new version (default: the catalog version + 1)')
     ap.add_argument('--drawn', default='2026'); ap.add_argument('--out'); ap.add_argument('--dry', action='store_true')
+    ap.add_argument('--budget', type=float, default=1e9)
     a = ap.parse_args()
+    t0 = time.time()
     cat = json.load(open(os.path.join(a.store, 'pipeline', 'catalog.json')))['designs']
+    log_p = os.path.join(a.store, 'pipeline', 'state', 'stamps.json')
+    log = json.load(open(log_p)) if os.path.exists(log_p) else {}
     report = {}
-    for key in a.designs:
+    for key in (list(cat) if a.designs == ['all'] else a.designs):
         d = cat[key]; n = a.version or d.get('version', 1) + 1
         info = plates.info(key, n, a.drawn)
         report[key] = {'version': n, 'info': info, 'files': {}}
         for src in files_of(a.store, d, key):
             dst = os.path.join(a.out or os.path.dirname(src), versioned(os.path.basename(src), n))
             if a.dry: report[key]['files'][os.path.basename(src)] = os.path.basename(dst); continue
+            if not a.out and os.path.basename(dst) in log and os.path.exists(dst): continue
+            if time.time() - t0 > a.budget:
+                print('OUT OF TIME: run the same command again to continue', flush=True); sys.exit(3)
             at = stamp_file(src, dst, info)
             report[key]['files'][os.path.basename(src)] = {'to': os.path.basename(dst), 'at': at}
+            if not a.out:
+                log[os.path.basename(dst)] = {'design': key, 'version': n, 'base': os.path.relpath(src, a.store), 'base_sha256': sha(src),
+                    'file': os.path.relpath(dst, a.store), 'sha256': sha(dst), 'info': info,
+                    'at': {'x': at[0], 'y': at[1], 'w': at[2], 'h': at[3], 'u': at[4], 'where': at[5]},
+                    'tools': {f: sha(os.path.join(ISO, f)) for f in ('tools/print/titleblock.py', 'tools/release/stamp.py', 'catalog/plates.json')}}
+                json.dump(log, open(log_p, 'w'), indent=1, ensure_ascii=False)
             print(key, os.path.basename(dst), at, flush=True)
     if a.out:
         json.dump(report, open(os.path.join(a.out, 'stamp-report.json'), 'w'), indent=1, ensure_ascii=False)
