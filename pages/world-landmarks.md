@@ -2,6 +2,7 @@
 title: Landmarks around the world
 order: 40
 summary: Five landmarks outside the US, each drawn from a different country's open elevation data.
+social: world-landmarks-social.jpg
 ---
 
 # Landmarks around the world

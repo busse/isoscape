@@ -101,7 +101,8 @@ page forwards to the explorer and keeps the fragment, so the **Link** button (`L
 Previews need absolute URLs: before publishing, give the public address of `out/` in
 `isoscape.config.json` (`{ "siteUrl": "https://example.org/isoscape/" }`), in
 `ISOSCAPE_SITE_URL`, or as `--site-url` on `build`, `series` or `explorer`, and rebuild the
-page. `"flagship": "<region>"` there picks the site's own preview image (default: the newest build).
+page. `"flagship": "<region>"` there picks the site's own preview image (default: the newest build), which content
+pages share unless their front matter names their own (`social:`, below).
 
 The same file can give the explorer a front page. `"home"` has a `title`, an `intro`, `heroes`
 (featured views, each a `region`, optional `year` in a dated series, `title`, `blurb`, and
@@ -133,6 +134,9 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
 ![The pipeline](pipeline.svg)
 ```
 
+- `social` (optional) names a 1200×630 PNG or JPEG beside the page for its link preview; it
+  is copied to `out/s/page-<slug>.jpg` (or `.png`). Without it, a page previews with the
+  site's flagship view. `world-landmarks-social.jpg` is one, made from the five maps.
 - `title` is the nav label (default: the first `#` heading). `order` sorts the nav, lowest
   first (default 100); the shipped pages use 10 and 90. `slug` overrides the file name.
 - Section ids follow GitHub's rule (lower case, punctuation dropped, spaces to hyphens), and

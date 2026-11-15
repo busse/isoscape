@@ -87,3 +87,21 @@ test('a link to a map on the public site stays inside the explorer', async () =>
   assert.equal(pageLink('world-landmarks', 'https://busse.github.io/isoscape/#lm-eiffel-tower', 'https://busse.github.io/isoscape/'), '#lm-eiffel-tower')
   assert.equal(pageLink('world-landmarks', 'https://example.com/#x', 'https://busse.github.io/isoscape/'), 'https://example.com/#x')
 })
+
+test('a page can name its own link-preview image, and the share page uses it', async () => {
+  const { compilePage } = await import('../src/pages.ts')
+  const { writeSocial, imageSize } = await import('../src/social.ts')
+  const { readFileSync, mkdtempSync: mk } = await import('node:fs')
+  // A 2×1 baseline JPEG header is enough for the size reader: SOI, then SOF0 with height 1, width 2.
+  const jpeg = Buffer.from([0xff, 0xd8, 0xff, 0xc0, 0x00, 0x11, 0x08, 0x00, 0x01, 0x00, 0x02, 0x03, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0xd9])
+  assert.deepEqual(imageSize(jpeg), { width: 2, height: 1 })
+  const page = compilePage('---\ntitle: World\nsummary: Five places.\nsocial: card.jpg\n---\n\n# World\n', 'world.md', (n) => (n === 'card.jpg' ? jpeg : null))
+  assert.equal(page.social?.name, 'card.jpg')
+  assert.throws(() => compilePage('---\nsocial: nope.jpg\n---\n# X\n', 'x.md', () => null))
+  const out = mk(join(tmpdir(), 'iso-social-'))
+  await writeSocial(out, [], [page], { siteUrl: 'https://example.org/iso/' })
+  const html = readFileSync(join(out, 's', 'page-world.html'), 'utf8')
+  assert.match(html, /og:image" content="https:\/\/example.org\/iso\/s\/page-world.jpg"/)
+  assert.match(html, /og:image:width" content="2"/)
+  assert.deepEqual(readFileSync(join(out, 's', 'page-world.jpg')), jpeg)
+})

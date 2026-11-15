@@ -8,9 +8,11 @@
  *     title: How it's made
  *     order: 10
  *     summary: One line for the nav's tooltip.
+ *     social: world-landmarks-social.jpg
  *     ---
  *
- * `slug` defaults to the file name, `order` to 100 (lower comes first in the nav). A page is
+ * `social` names a 1200×630 PNG or JPEG beside the page for its link preview; without one, the
+ * page's preview uses the site's flagship view. `slug` defaults to the file name, `order` to 100 (lower comes first in the nav). A page is
  * reached at `#/<slug>`, and a section of it at `#/<slug>/<heading-id>`.
  *
  * Links are written as they would be for GitHub, so the files read well there too: `#rapids`
@@ -33,6 +35,8 @@ export interface Page {
   readonly file: string
   readonly html: string
   readonly headings: Heading[]
+  /** The link-preview image named by `social:`, with its bytes, read from beside the page. */
+  readonly social?: { readonly name: string; readonly bytes: Buffer }
 }
 
 export const PAGES_DIR = fileURLToPath(new URL('../pages/', import.meta.url))
@@ -89,6 +93,14 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     },
   })
   const first = result.headings.find((h) => h.level === 1)
+  let social: Page['social']
+  if (data.social) {
+    const name = data.social.replace(/^\.\//, '')
+    if (!/^[\w.-]+\.(png|jpe?g)$/i.test(name) || name.startsWith('.')) throw new Error(`pages/${fileName}: social "${data.social}" must be a PNG or JPEG file name beside the page`)
+    const bytes = readAsset(name)
+    if (bytes === null) throw new Error(`pages/${fileName}: social image "${name}" not found beside the page`)
+    social = { name, bytes }
+  }
   return {
     slug,
     title: data.title ?? first?.text ?? slug,
@@ -97,6 +109,7 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     file: `pages/${fileName}`,
     html: result.html,
     headings: result.headings,
+    ...(social === undefined ? {} : { social }),
   }
 }
 

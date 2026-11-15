@@ -18,7 +18,7 @@
 import { execFile } from 'node:child_process'
 import { access, mkdir, open, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join, resolve } from 'node:path'
+import { extname, join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { promisify } from 'node:util'
 import type { BuildMeta } from './archive.ts'
@@ -348,6 +348,21 @@ export const renderSocial = async (svgPath: string, pngPath: string, viewBox: re
   }
 }
 
+/** Width and height of a PNG or JPEG held in memory; undefined if it is neither. */
+export const imageSize = (buf: Buffer): { width: number; height: number } | undefined => {
+  if (buf.length >= 24 && buf.readUInt32BE(0) === 0x89504e47) return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) }
+  if (buf.length < 4 || buf[0] !== 0xff || buf[1] !== 0xd8) return undefined
+  // JPEG: walk the segments to the first start-of-frame marker (C0–CF, except C4, C8 and CC).
+  for (let i = 2; i + 9 < buf.length; ) {
+    if (buf[i] !== 0xff) { i++; continue }
+    const marker = buf[i + 1]
+    if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) return { width: buf.readUInt16BE(i + 7), height: buf.readUInt16BE(i + 5) }
+    if (marker === 0xd8 || (marker >= 0xd0 && marker <= 0xd7) || marker === 0x01) { i += 2; continue }
+    i += 2 + buf.readUInt16BE(i + 2)
+  }
+  return undefined
+}
+
 /** Width and height of a PNG, from its header; undefined if it is not one. */
 export const pngSize = async (path: string): Promise<{ width: number; height: number } | undefined> => {
   try {
@@ -461,11 +476,22 @@ export const writeSocial = async (
   const imageAlt = flag === undefined ? undefined : buildCard(flag).alt
   for (const p of pages) {
     const file = shareFile({ page: p.slug })
+    // A page with its own `social:` image gets it, copied beside its share page as
+    // s/page-<slug>.<ext>; otherwise it shares the site's flagship picture.
+    let own: Preview | undefined
+    const size = p.social === undefined ? undefined : imageSize(p.social.bytes)
+    if (p.social !== undefined && size !== undefined) {
+      const name = `page-${p.slug}${extname(p.social.name).toLowerCase().replace('.jpeg', '.jpg')}`
+      await writeFile(resolve(outDir, 's', name), p.social.bytes)
+      own = { path: `s/${name}`, ...size }
+    }
+    const pic = own ?? image
+    const alt = own === undefined ? imageAlt : p.summary ?? p.title
     await writeFile(resolve(outDir, 's', file), sharePage({
       title: `${p.title} · ${SITE_NAME}`,
       description: clip(p.summary ?? firstParagraph(p.html), 300),
       type: 'article',
-      ...(image === undefined ? {} : { image: siteHref(image.path, base, 1), imageWidth: image.width, imageHeight: image.height, ...(imageAlt === undefined ? {} : { imageAlt }) }),
+      ...(pic === undefined ? {} : { image: siteHref(pic.path, base, 1), imageWidth: pic.width, imageHeight: pic.height, ...(alt === undefined ? {} : { imageAlt: alt }) }),
       ...(base === undefined ? {} : { url: siteHref(`s/${file}`, base) }),
     }, `#/${p.slug}`))
   }
