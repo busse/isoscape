@@ -1,0 +1,78 @@
+{
+ "name": "lm-himeji-castle",
+ "region": "lm-himeji-castle",
+ "title": "Himeji Castle \u2014 Hy\u014dgo, Japan",
+ "palette": "paper",
+ "note": "Landmarks around the world: gsi elevation",
+ "viewBox": [
+  -3024,
+  -2046.7735221594655,
+  6048,
+  4062.342741541119
+ ],
+ "bearing": -27.910516410623757,
+ "ms": 565,
+ "stats": {
+  "features": 12806,
+  "ground": 167,
+  "elevationDatum": 11.1,
+  "elevationTop": 56.1,
+  "ribbons": 716,
+  "footprintsAdded": 0,
+  "buildings": 1641,
+  "heightFromTag": 1,
+  "heightFromModel": 0,
+  "heightFromLevels": 98,
+  "heightGuessed": 1542,
+  "bridgePieces": 51,
+  "contourSegments": 10418,
+  "rapidCells": 0,
+  "strips": 130
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Himeji Castle \u2014 Hy\u014dgo, Japan",
+  "center": [
+   134.6936,
+   34.839
+  ],
+  "width": 1000,
+  "depth": 1300,
+  "scale": 6,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 8,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "source": "gsi",
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-himeji-castle"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-235615-lm-himeji-castle",
+ "createdAt": "2026-11-14T23:56:15.989Z",
+ "bytes": 2897565,
+ "git": {
+  "commit": "3b32fdd",
+  "dirty": false,
+  "subject": "Matterhorn: camera on the Zermatt\u2013summit line"
+ },
+ "files": {
+  "svg": "builds/20261114-235615-lm-himeji-castle/image.svg",
+  "thumb": "builds/20261114-235615-lm-himeji-castle/thumb.png",
+  "social": "builds/20261114-235615-lm-himeji-castle/social.png",
+  "preview": "builds/20261114-235615-lm-himeji-castle/preview.jpg"
+ }
+}

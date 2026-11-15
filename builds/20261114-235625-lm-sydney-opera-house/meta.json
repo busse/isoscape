@@ -1,0 +1,85 @@
+{
+ "name": "lm-sydney-opera-house",
+ "region": "lm-sydney-opera-house",
+ "title": "Sydney Opera House and Harbour Bridge \u2014 Sydney",
+ "palette": "paper",
+ "note": "Landmarks around the world: terrain-tiles elevation",
+ "viewBox": [
+  -3024,
+  -2243.6513193689643,
+  6048,
+  4256.622462539264
+ ],
+ "bearing": 20,
+ "ms": 1657,
+ "stats": {
+  "features": 10207,
+  "ground": 461,
+  "elevationDatum": -3.9,
+  "elevationTop": 112.5,
+  "ribbons": 3399,
+  "footprintsAdded": 0,
+  "buildings": 1145,
+  "heightFromTag": 72,
+  "heightFromModel": 0,
+  "heightFromLevels": 833,
+  "heightGuessed": 240,
+  "bridgePieces": 898,
+  "contourSegments": 23065,
+  "rapidCells": 0,
+  "strips": 208
+ },
+ "config": {
+  "bearing": 20,
+  "snap": false,
+  "title": "Sydney Opera House and Harbour Bridge \u2014 Sydney",
+  "center": [
+   151.2112,
+   -33.8597
+  ],
+  "width": 1600,
+  "depth": 2080,
+  "scale": 3.75,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Harbour Bridge",
+    "deck": 49,
+    "pierSpacing": 100000
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "source": "terrain-tiles",
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 5,
+   "majorEvery": 5,
+   "rapids": 0,
+   "rocks": false,
+   "demResolution": 3
+  },
+  "name": "lm-sydney-opera-house"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-235625-lm-sydney-opera-house",
+ "createdAt": "2026-11-14T23:56:25.074Z",
+ "bytes": 6188760,
+ "git": {
+  "commit": "3b32fdd",
+  "dirty": false,
+  "subject": "Matterhorn: camera on the Zermatt\u2013summit line"
+ },
+ "files": {
+  "svg": "builds/20261114-235625-lm-sydney-opera-house/image.svg",
+  "thumb": "builds/20261114-235625-lm-sydney-opera-house/thumb.png",
+  "social": "builds/20261114-235625-lm-sydney-opera-house/social.png",
+  "preview": "builds/20261114-235625-lm-sydney-opera-house/preview.jpg"
+ }
+}

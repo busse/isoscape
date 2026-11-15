@@ -1,0 +1,78 @@
+{
+ "name": "lm-machu-picchu",
+ "region": "lm-machu-picchu",
+ "title": "Machu Picchu and Aguas Calientes \u2014 Peru",
+ "palette": "paper",
+ "note": "Landmarks around the world: copernicus elevation, wide frame",
+ "viewBox": [
+  -3064,
+  -2468.6912867394267,
+  6128,
+  3472.0902557841982
+ ],
+ "bearing": 155,
+ "ms": 841,
+ "stats": {
+  "features": 1110,
+  "ground": 73,
+  "elevationDatum": 1858.6,
+  "elevationTop": 2934,
+  "ribbons": 274,
+  "footprintsAdded": 0,
+  "buildings": 567,
+  "heightFromTag": 2,
+  "heightFromModel": 0,
+  "heightFromLevels": 2,
+  "heightGuessed": 563,
+  "bridgePieces": 23,
+  "contourSegments": 51060,
+  "rapidCells": 0,
+  "strips": 120
+ },
+ "config": {
+  "bearing": 155,
+  "snap": false,
+  "title": "Machu Picchu and Aguas Calientes \u2014 Peru",
+  "center": [
+   -72.5352,
+   -13.1585
+  ],
+  "width": 3800,
+  "depth": 2400,
+  "scale": 1.6,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 14,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "roof",
+  "fetchTile": 2000,
+  "terrain": {
+   "source": "copernicus",
+   "exaggeration": 1,
+   "cell": 10,
+   "contour": 20,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 10
+  },
+  "name": "lm-machu-picchu"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261115-000346-lm-machu-picchu",
+ "createdAt": "2026-11-15T00:03:46.885Z",
+ "bytes": 4613636,
+ "git": {
+  "commit": "eac0b4d",
+  "dirty": false,
+  "subject": "Machu Picchu: wide frame across the Urubamba, town and citadel side by side"
+ },
+ "files": {
+  "svg": "builds/20261115-000346-lm-machu-picchu/image.svg",
+  "thumb": "builds/20261115-000346-lm-machu-picchu/thumb.png",
+  "social": "builds/20261115-000346-lm-machu-picchu/social.png",
+  "preview": "builds/20261115-000346-lm-machu-picchu/preview.jpg"
+ }
+}
