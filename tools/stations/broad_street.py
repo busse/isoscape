@@ -401,7 +401,7 @@ OUT.write_text(json.dumps(history, indent=1, ensure_ascii=False) + '\n')
 # town labeled at the edge of the frame. Places in meters east and north of the station.
 LINES_SRC = ['https://chicagorailfan.com/stbrric.html', 'https://www.richmondrailroadmuseum.com/railroad-history']
 LABELS = [
-    ((-1180, 2120), 'end', 'To Washington', 'RF&P main line: Fredericksburg, Washington, New York'),
+    ((-1200, 1720), 'end', 'To Washington', 'RF&P main line: Fredericksburg, Washington, New York'),
     ((-480, 1930), 'start', 'AY Tower', "The RF&P main meets the Atlantic Coast Line's Belt Line"),
     ((390, 350), 'start', 'Seaboard Junction', 'The Seaboard Air Line leaves the RF&P for Main Street Station'),
     ((-120, -60), 'end', 'Broad Street Station', 'RF&P, Atlantic Coast Line and N&W trains'),
