@@ -6,7 +6,7 @@
  "epochs": [
   {
    "year": 1943,
-   "title": "Broad Street Station at its height",
+   "title": "The lines from Broad Street Station",
    "note": "The wartime peak: 57 trains a day, a record 33,324 passengers on April 22, 1943."
   }
  ],
@@ -19795,5 +19795,5 @@
  },
  "streetsNearBuildings": 60,
  "streetcarScale": 1,
- "railScale": 3
+ "railScale": 4
 }

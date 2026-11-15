@@ -1,14 +1,14 @@
 {
   "title": "Broad Street Station, 1943",
   "center": [
-    -77.46614,
-    37.560919
+    -77.466253,
+    37.560738
   ],
-  "width": 780,
-  "depth": 640,
+  "width": 1000,
+  "depth": 800,
   "bearing": 45,
   "snap": false,
-  "scale": 4.4,
+  "scale": 3.5,
   "squash": 0.62,
   "exaggeration": 1.0,
   "slab": 24,

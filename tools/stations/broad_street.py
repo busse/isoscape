@@ -395,7 +395,7 @@ history = {
 OUT.write_text(json.dumps(history, indent=1, ensure_ascii=False) + '\n')
 
 # ---- the wider view: where the lines go --------------------------------------------------------
-# The same scene, with the railroads drawn three times their width and each line's way out of
+# The same scene, with the railroads drawn four times their width and each line's way out of
 # town labeled at the edge of the frame. Places in meters east and north of the station.
 LINES_SRC = ['https://chicagorailfan.com/stbrric.html', 'https://www.richmondrailroadmuseum.com/railroad-history']
 LABELS = [
@@ -413,7 +413,8 @@ labels = [{
     'note': 'Where the line went in 1943. Main Street Station served the Seaboard Air Line and the C&O, Hull Street station the Southern; AY Tower, about a mile northwest of Broad Street, was the wye of the RF&P main and the ACL; Seaboard Junction, just north of the station, was where the SAL left the RF&P.',
     'sources': LINES_SRC,
 } for k, (at, anchor, name, caption) in enumerate(LABELS)]
-lines = {**history, 'title': 'The lines from Broad Street Station, 1943', 'features': features + labels, 'railScale': 3,
+lines = {**history, 'title': 'The lines from Broad Street Station, 1943', 'features': features + labels, 'railScale': 4,
+         'epochs': [{'year': 1943, 'title': 'The lines from Broad Street Station', 'note': history['epochs'][0]['note']}],
          'sanborn': {**history['sanborn'], 'lost': ['history/sanborn/lost.geojson', history['sanborn']['lost']], 'editions': [1925]}}
 (ROOT / 'history' / 'broad-street-lines.json').write_text(json.dumps(lines, indent=1, ensure_ascii=False) + '\n')
 print(f'{OUT.relative_to(ROOT)}: {len(features)} features; loop {total:.0f} m, straight {L_END - L_START:.0f} m')
