@@ -104,10 +104,11 @@ def find_spot(sheet, bw, bh, face=None, pad=None, step=4, where='foot'):
     The block's right edge lines up with the right edge of the art (the rows that run more than
     half the sheet's width: the map, the rows of boxes, the rules) and it never touches anything
     already printed, keeping `pad` of clear paper around it.
-      foot: in the band below the art, as low as the sheet's top margin allows (the same margin
-            below as above). Every layout but the set sheets.
+      foot: in the band below the art, as low as the art's side margin allows (the same margin
+            below as at the side). Every layout but the set sheets.
       head: in the header above the art, its bottom just over the header rule, its top no higher
-            than the first line of the title. For set sheets, whose foot is full of notes."""
+            than the first line of the title; slid left of anything already at the right (a line
+            key). For set sheets, whose foot is full of notes."""
     x0, y0, x1, y1 = face or (0, 0, sheet.width, sheet.height)
     mask = content_mask(sheet, face, step)
     h, w = mask.shape
@@ -119,18 +120,19 @@ def find_spot(sheet, bw, bh, face=None, pad=None, step=4, where='foot'):
     first, art_top, art_bottom = int(np.nonzero(rows)[0].min()), int(np.nonzero(wide)[0].min()), int(np.nonzero(wide)[0].max())
     pad = pad if pad is not None else bh * 0.35
     p, bws, bhs = int(pad / step) + 1, -(-bw // step), -(-bh // step)
-    xs = right - bws
-    if xs - p < 0:
-        return None
-    free = ~mask[:, max(0, xs - p):min(w, right + p)].any(axis=1)
-    if where == 'foot':
-        span = range(h - first, art_bottom + bhs + p, -1)      # yb: the row just below the block
-    else:
-        span = range(art_top - p // 2, first + bhs - 1, -1)
-    for yb in span:
-        lo, hi = yb - bhs - (p if where == 'foot' else 0), min(h, yb + (p if where == 'foot' else p // 2))
-        if lo >= 0 and free[lo:hi].all():
-            return x0 + xs * step + (bws * step - bw), y0 + (yb - bhs) * step
+    side = w - right                                   # the art's side margin
+    if where == 'foot':                                # as low as the side margin allows
+        spans = [(right - bws, range(h - side, art_bottom + bhs + p, -1))]
+    else:                                              # right-aligned, else slid left past a key
+        spans = [(xs, range(art_top - p // 2, first + bhs - 1, -1)) for xs in range(right - bws, 0, -2)]
+    for xs, ys in spans:
+        if xs - p < 0:
+            continue
+        free = ~mask[:, max(0, xs - p):min(w, xs + bws + p)].any(axis=1)
+        for yb in ys:                                  # yb: the row just below the block
+            lo, hi = (yb - bhs - p, min(h, yb + p)) if where == 'foot' else (yb - bhs, min(h, yb + p // 2))
+            if lo >= 0 and free[lo:hi].all():
+                return x0 + xs * step + (bws * step - bw) * (xs == right - bws), y0 + (yb - bhs) * step
     return None
 
 
