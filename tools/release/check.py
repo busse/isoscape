@@ -57,6 +57,7 @@ def rebuild(r, keep):
     for name, dd in r['data'].items():
         link = os.path.join(wt, 'data', name)
         if os.path.islink(link): os.unlink(link)
+        elif os.path.isdir(link): shutil.rmtree(link)   # data tracked in git at that commit: the frozen copy has it too
         os.symlink(os.path.join(ISO, dd['snapshot']), link)
     ok = n = 0
     for s in r['scenes']:
