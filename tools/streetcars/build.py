@@ -58,14 +58,18 @@ def has(node, street):
 def corner(a, b, near=None):
     cands = [n for n in names_at if has(n, a) and has(n, b)]
     if not cands:
-        # Streets that meet without sharing a node: the closest pair of their nodes, within 40 m.
+        # Streets that meet without sharing a node: the closest pair of their nodes, within 150 m
+        # (noted when over 40 m).
         na = [n for n in names_at if has(n, a)]; nb = [n for n in names_at if has(n, b)]
         best = None
         for x in na:
             for y in nb:
                 d = dist(coord[x], coord[y])
-                if d < 40 and (best is None or d < best[0]): best = (d, x)
-        if best is None: raise SystemExit(f'no corner of {a!r} and {b!r} in the OSM data')
+                if best is None or d < best[0]: best = (d, x)
+        if best is None or best[0] > 150:
+            far = f' (nearest {best[0]:.0f} m apart)' if best else ''
+            raise SystemExit(f'no corner of {a!r} and {b!r} in the OSM data{far}')
+        if best[0] > 40: print(f'  note: {a!r} and {b!r} come within {best[0]:.0f} m; using that as the corner')
         cands = [best[1]]
     if near is None: return cands[0]
     return min(cands, key=lambda n: dist(coord[n], coord[near]))
