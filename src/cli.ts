@@ -28,6 +28,8 @@ const HELP = `isoscape — isometric dot-and-line views of real places
   isoscape query <region>          print the Overpass query for a region
   isoscape fetch <region>          download OSM data and elevation to data/<region>/
   isoscape info <region>           camera, counts and height coverage, as JSON
+  isoscape locate <region> <lon,lat>...
+                                   where places fall in the built picture (SVG units)
   isoscape build <region>          write out/<region>.svg and .html, archive the build,
                                    and refresh the explorer at out/index.html
   isoscape series <region>         build every epoch of a dated region (see regions/*.json
@@ -89,7 +91,7 @@ const loadInputs = async (name: string) => {
     let parcels: ReturnType<typeof parseParcels> = []
     if (region.time.yearBuilt !== undefined) {
       try {
-        parcels = parseParcels(await readFile(resolve('data', region.name, 'yearbuilt.json'), 'utf8'), region.time.yearBuilt.field)
+        parcels = parseParcels(await readFile(resolve(dataDir(region), 'yearbuilt.json'), 'utf8'), region.time.yearBuilt.field)
       } catch {
         console.error(`no year-built data for "${name}"; run: isoscape fetch ${name} --extras-only`)
       }
@@ -203,6 +205,18 @@ export const main = async (argv: string[]): Promise<void> => {
     case 'info': {
       const scene = await loadScene(name, values.palette, values.year === undefined ? undefined : Number(values.year))
       console.log(JSON.stringify({ region: scene.region.name, bearing: Number(scene.view.bearing.toFixed(2)), ...scene.stats }, null, 2))
+      return
+    }
+    case 'locate': {
+      // Where places fall in the built picture: lon,lat pairs → SVG coordinates on the ground.
+      const scene = await loadScene(name, values.palette, values.year === undefined ? undefined : Number(values.year))
+      const out = positionals.slice(2).map((arg) => {
+        const [lon, lat] = arg.split(',').map(Number)
+        const p = scene.view.toView(lon, lat)
+        const [x, y] = scene.view.toScreen(p, scene.terrain.z(p))
+        return { lon, lat, x: Number(x.toFixed(1)), y: Number(y.toFixed(1)) }
+      })
+      console.log(JSON.stringify(out, null, 1))
       return
     }
     case 'build': {

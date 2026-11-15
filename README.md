@@ -177,6 +177,7 @@ types itself. `--png` shells out to `rsvg-convert` (`brew install librsvg`).
 | `isoscape query <region>` | print the Overpass query a fetch would send |
 | `isoscape fetch <region>` | download OSM data (`osm.json`) and elevation (`dem.bin.gz`) into `data/<region>/`; `--osm-only`, `--dem-only` |
 | `isoscape info <region>` | the chosen bearing, feature counts, and where building heights came from |
+| `isoscape locate <region> <lon,lat>...` | where places fall in the built picture, in SVG units (`--year` for a dated scene); the print tools use it to place markers and crops |
 | `isoscape build <region>` | write `out/<region>.svg` and `out/<region>.html`, archive the build, refresh the explorer; `--year <yyyy>` for one scene of a dated region |
 | `isoscape series <region>` | build every year of a dated region, each as `<region>-<year>` |
 | `isoscape explorer` | rewrite `out/index.html` from the archive |
