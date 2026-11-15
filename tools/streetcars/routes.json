@@ -2,121 +2,581 @@
  "about": "Richmond's car lines in 1925, as Harland Bartholomew & Associates drew them for the City Planning Commission (plate 53, 'Early Transit Routes, 1888 & 1925', 31 January 1943), within the city limits of the day, plus the interurban to Ashland, which ran on its own. The plate is a small diagram: each line here follows the streets it names, placed on today's OpenStreetMap streets, with the details from the sources given per line. Where a source is silent, a line's ends are approximate; the notes say which.",
  "routes": [
   {
-   "id": "car-westhampton", "name": "Westhampton line", "route": "Floyd Avenue – Grove Avenue – Westhampton", "from": 1901, "to": 1947,
-   "runs": [[
-    ["Floyd Avenue", "Harrison Street"], ["Floyd Avenue", "Robinson Street"], ["Floyd Avenue", "Thompson Street"],
-    ["Grove Avenue", "Three Chopt Road"], ["Three Chopt Road", "Towana Road"], ["Towana Road", "Campus Drive"],
-    {"at": [-77.5345, 37.5805], "on": "Campus Drive"}
-   ]],
+   "id": "car-westhampton",
+   "name": "Westhampton line",
+   "route": "Floyd Avenue – Grove Avenue – Westhampton",
+   "from": 1901,
+   "to": 1947,
+   "runs": [
+    [
+     [
+      "Floyd Avenue",
+      "Harrison Street"
+     ],
+     [
+      "Floyd Avenue",
+      "Robinson Street"
+     ],
+     [
+      "Floyd Avenue",
+      "Thompson Street"
+     ],
+     [
+      "Grove Avenue",
+      "Three Chopt Road"
+     ],
+     [
+      "Three Chopt Road",
+      "Towana Road"
+     ],
+     [
+      "Towana Road",
+      "Campus Drive"
+     ],
+     {
+      "at": [
+       -77.5345,
+       37.5805
+      ],
+      "on": "Campus Drive"
+     }
+    ]
+   ],
    "note": "West on Floyd Avenue from Robinson Street to the belt line railroad, under it in a tunnel, then a little north to Grove Avenue; out Grove to Three Chopt Road; then on its own right-of-way beside Three Chopt to Towana Road, and on (the line of today's Campus Drive) to Westhampton Park, which became the University of Richmond's campus in 1914. The right-of-way beside Three Chopt is drawn along the road itself.",
-   "sources": ["https://dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6064_Three_Chopt_Road_HD_2012_NR_FINAL.pdf", "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"]
+   "sources": [
+    "https://dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6064_Three_Chopt_Road_HD_2012_NR_FINAL.pdf",
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+   ]
   },
   {
-   "id": "car-belmont", "name": "Belmont line", "route": "Broad Street – Sheppard Street – Cary Street – Belmont Avenue", "from": 1895, "to": 1949,
-   "runs": [[
-    ["Broad Street", "Sheppard Street"], ["Sheppard Street", "Cary Street"], ["Cary Street", "Belmont Avenue"], ["Belmont Avenue", "Garrett Street"]
-   ]],
+   "id": "car-belmont",
+   "name": "Belmont line",
+   "route": "Broad Street – Sheppard Street – Cary Street – Belmont Avenue",
+   "from": 1895,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "Broad Street",
+      "Sheppard Street"
+     ],
+     [
+      "Sheppard Street",
+      "Cary Street"
+     ],
+     [
+      "Cary Street",
+      "Belmont Avenue"
+     ],
+     [
+      "Belmont Avenue",
+      "Garrett Street"
+     ]
+    ]
+   ],
    "note": "The Broad Street line's extension west from Robinson Street to Sheppard, south to Cary, later carried on eleven blocks to Garrett Street. Which street carried the last stretch is read from the 1925 plate's 'Belmont' label.",
-   "sources": ["https://museumdistrict.org/history", "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"]
+   "sources": [
+    "https://museumdistrict.org/history",
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+   ]
   },
   {
-   "id": "car-broad", "name": "Broad Street line", "route": "Broad Street, Sheppard Street to Church Hill", "from": 1888, "to": 1949,
-   "runs": [[["Broad Street", "Sheppard Street"], ["Broad Street", "Robinson Street"], ["Broad Street", "1st Street"], ["Broad Street", "29th Street"]]],
+   "id": "car-broad",
+   "name": "Broad Street line",
+   "route": "Broad Street, Sheppard Street to Church Hill",
+   "from": 1888,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "Broad Street",
+      "Sheppard Street"
+     ],
+     [
+      "Broad Street",
+      "Robinson Street"
+     ],
+     [
+      "Broad Street",
+      "1st Street"
+     ],
+     [
+      "Broad Street",
+      "29th Street"
+     ]
+    ]
+   ],
    "note": "Broad Street, the spine of the system, from the Belmont line's turn at Sheppard Street east to Church Hill. The east end is approximate.",
-   "sources": ["https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10", "https://museumdistrict.org/history"]
+   "sources": [
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://museumdistrict.org/history"
+   ]
   },
   {
-   "id": "car-fairgrounds", "name": "State Fair Grounds spur", "route": "Boulevard north to the Fair Grounds", "from": 1906, "to": 1941,
-   "runs": [[["Broad Street", "Arthur Ashe Boulevard"], {"at": [-77.4625, 37.5690], "on": "Arthur Ashe Boulevard"}]],
+   "id": "car-fairgrounds",
+   "name": "State Fair Grounds spur",
+   "route": "Boulevard north to the Fair Grounds",
+   "from": 1906,
+   "to": 1941,
+   "runs": [
+    [
+     [
+      "Broad Street",
+      "Arthur Ashe Boulevard"
+     ],
+     {
+      "at": [
+       -77.4625,
+       37.569
+      ],
+      "on": "Arthur Ashe Boulevard"
+     }
+    ]
+   ],
    "note": "The 1925 plate shows a short spur north from Broad Street ending in a loop. It is drawn here up the Boulevard to the State Fair Grounds (1906–1941, on the site of The Diamond); which street the spur took is not certain.",
-   "sources": ["https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10", "https://richmondmagazine.com/news/news/a-fair-history/"]
+   "sources": [
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
+    "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm"
+   ]
   },
   {
-   "id": "car-main", "name": "Main Street line", "route": "Main Street, Robinson Street to Shockoe", "from": 1888, "to": 1949,
-   "runs": [[["Main Street", "Robinson Street"], ["Main Street", "Harrison Street"], ["Main Street", "17th Street"]]],
+   "id": "car-main",
+   "name": "Main Street line",
+   "route": "Main Street, Robinson Street to Shockoe",
+   "from": 1888,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "Main Street",
+      "Robinson Street"
+     ],
+     [
+      "Main Street",
+      "Harrison Street"
+     ],
+     [
+      "Main Street",
+      "17th Street"
+     ]
+    ]
+   ],
    "note": "West Main Street, which the line turned into a commercial street through the Fan, east to Shockoe. The west end is approximate.",
-   "sources": ["https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10", "https://dhr.virginia.gov/?p=16894"]
+   "sources": [
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://dhr.virginia.gov/?p=16894"
+   ]
   },
   {
-   "id": "car-harrison", "name": "Harrison Street line", "route": "Harrison Street, Main to Broad", "from": 1890, "to": 1949,
-   "runs": [[["Main Street", "Harrison Street"], ["Floyd Avenue", "Harrison Street"], ["Broad Street", "Harrison Street"]]],
+   "id": "car-harrison",
+   "name": "Harrison Street line",
+   "route": "Harrison Street, Main to Broad",
+   "from": 1890,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "Main Street",
+      "Harrison Street"
+     ],
+     [
+      "Floyd Avenue",
+      "Harrison Street"
+     ],
+     [
+      "Broad Street",
+      "Harrison Street"
+     ]
+    ]
+   ],
    "note": "A crosstown link on Harrison Street between the Main, Floyd and Broad lines, as the 1925 plate shows it.",
-   "sources": ["https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"]
+   "sources": [
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+   ]
   },
   {
-   "id": "car-byrd-park", "name": "Reservoir (Byrd) Park line", "route": "Robinson Street – Lakeview Avenue", "from": 1895, "to": 1949,
-   "runs": [[["Main Street", "Robinson Street"], ["Robinson Street", "Lakeview Avenue"], {"at": [-77.4775, 37.5405], "on": "Lakeview Avenue"}]],
+   "id": "car-byrd-park",
+   "name": "Reservoir (Byrd) Park line",
+   "route": "Robinson Street – Lakeview Avenue",
+   "from": 1895,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "Main Street",
+      "Robinson Street"
+     ],
+     [
+      "Robinson Street",
+      "Lakeview Avenue"
+     ],
+     {
+      "at": [
+       -77.4775,
+       37.5405
+      ],
+      "on": "Lakeview Avenue"
+     }
+    ]
+   ],
    "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favourite destinations, along Lakeview Avenue as the 1925 plate labels it. The far end is approximate.",
-   "sources": ["https://museumdistrict.org/history", "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10", "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"]
+   "sources": [
+    "https://museumdistrict.org/history",
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"
+   ]
   },
   {
-   "id": "car-clay", "name": "Clay Street line", "route": "Clay Street", "from": 1888, "to": 1949,
-   "runs": [[["Clay Street", "Harrison Street"], ["Clay Street", "1st Street"]]],
+   "id": "car-clay",
+   "name": "Clay Street line",
+   "route": "Clay Street",
+   "from": 1888,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "Clay Street",
+      "Harrison Street"
+     ],
+     [
+      "Clay Street",
+      "1st Street"
+     ]
+    ]
+   ],
    "note": "Sprague's first line of 1888 ran from Church Hill to Clay and Hancock Streets; the 1925 plate still shows Clay Street. The ends are approximate.",
-   "sources": ["https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/", "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"]
+   "sources": [
+    "https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/",
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+   ]
   },
   {
-   "id": "car-lakeside", "name": "Brookland and Lakeside line", "route": "1st Street – North Avenue – Brookland Park – Chamberlayne – Laburnum – Hermitage Road", "from": 1891, "to": 1949,
-   "runs": [[
-    ["1st Street", "Broad Street"], ["1st Street", "Monteiro Street"], ["Monteiro Street", "Dove Street"], ["North Avenue", "Dove Street"], ["North Avenue", "Brookland Park Boulevard"],
-    ["Brookland Park Boulevard", "Chamberlayne Avenue"], ["Chamberlayne Avenue", "Laburnum Avenue"], ["Laburnum Avenue", "Hermitage Road"],
-    ["Hermitage Road", "Lakeside Avenue"], {"at": [-77.4690, 37.6110], "on": "Lakeside Avenue"}
-   ]],
+   "id": "car-lakeside",
+   "name": "Brookland and Lakeside line",
+   "route": "1st Street – North Avenue – Brookland Park – Chamberlayne – Laburnum – Hermitage Road",
+   "from": 1891,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "1st Street",
+      "Broad Street"
+     ],
+     [
+      "1st Street",
+      "Monteiro Street"
+     ],
+     [
+      "Monteiro Street",
+      "Dove Street"
+     ],
+     [
+      "North Avenue",
+      "Dove Street"
+     ],
+     [
+      "North Avenue",
+      "Brookland Park Boulevard"
+     ],
+     [
+      "Brookland Park Boulevard",
+      "Chamberlayne Avenue"
+     ],
+     [
+      "Chamberlayne Avenue",
+      "Laburnum Avenue"
+     ],
+     [
+      "Laburnum Avenue",
+      "Hermitage Road"
+     ],
+     [
+      "Hermitage Road",
+      "Lakeside Avenue"
+     ],
+     {
+      "at": [
+       -77.469,
+       37.611
+      ],
+      "on": "Lakeside Avenue"
+     }
+    ]
+   ],
    "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate.",
-   "sources": ["https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text", "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10", "https://lewisginter.org/?p=11566"]
+   "sources": [
+    "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://lewisginter.org/?p=11566"
+   ]
   },
   {
-   "id": "car-highland-park", "name": "Highland Park line", "route": "5th Street – Northside Viaduct – Highland Park loop", "from": 1893, "to": 1949,
-   "runs": [[
-    ["5th Street", "Broad Street"], ["Meadowbridge Road", "Milton Street"], ["Milton Street", "2nd Avenue"], ["Highland Street", "2nd Avenue"],
-    ["Highland Street", "Patrick Avenue"], ["Meadowbridge Road", "Patrick Avenue"], ["Meadowbridge Road", "Milton Street"]
-   ]],
+   "id": "car-highland-park",
+   "name": "Highland Park line",
+   "route": "5th Street – Northside Viaduct – Highland Park loop",
+   "from": 1893,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "5th Street",
+      "Broad Street"
+     ],
+     [
+      "Meadowbridge Road",
+      "Milton Street"
+     ],
+     [
+      "Milton Street",
+      "2nd Avenue"
+     ],
+     [
+      "Highland Street",
+      "2nd Avenue"
+     ],
+     [
+      "Highland Street",
+      "Patrick Avenue"
+     ],
+     [
+      "Meadowbridge Road",
+      "Patrick Avenue"
+     ],
+     [
+      "Meadowbridge Road",
+      "Milton Street"
+     ]
+    ]
+   ],
    "note": "North on Fifth Street over the Northside Viaduct (1892) to Chestnut Hill and Highland Park, and after 1908 round a loop by Meadowbridge Road, Milton Street and Highland Street (the cross street joining them, Second Avenue here, is approximate). The Hull Street–Highland Park line was Richmond's last: the last car ran on 25 November 1949.",
-   "sources": ["https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text", "https://rvanews.com/?p=20453", "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"]
+   "sources": [
+    "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
+    "https://rvanews.com/?p=20453",
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+   ]
   },
   {
-   "id": "car-marshall", "name": "Marshall Street line (Fulton)", "route": "Marshall Street Viaduct – Church Hill – Fulton", "from": 1911, "to": 1949,
-   "runs": [[
-    ["College Street", "Marshall Street"], {"straight": ["Marshall Street", "21st Street"]}, ["Marshall Street", "31st Street"],
-    {"at": [-77.4140, 37.5245], "on": "Williamsburg Avenue"}, {"at": [-77.4080, 37.5150], "on": "Williamsburg Avenue"}
-   ]],
+   "id": "car-marshall",
+   "name": "Marshall Street line (Fulton)",
+   "route": "Marshall Street Viaduct – Church Hill – Fulton",
+   "from": 1911,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "College Street",
+      "Marshall Street"
+     ],
+     {
+      "straight": [
+       "Marshall Street",
+       "21st Street"
+      ]
+     },
+     [
+      "Marshall Street",
+      "31st Street"
+     ],
+     {
+      "at": [
+       -77.414,
+       37.5245
+      ],
+      "on": "Williamsburg Avenue"
+     },
+     {
+      "at": [
+       -77.408,
+       37.515
+      ],
+      "on": "Williamsburg Avenue"
+     }
+    ]
+   ],
    "note": "Across Shockoe Valley on the Marshall Street Viaduct (1911, since demolished: drawn straight) from College Street to 21st Street at Jefferson Park, out Marshall Street, and down to Fulton along Williamsburg Avenue. The route from Marshall Street down to Fulton is approximate.",
-   "sources": ["https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts", "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"]
+   "sources": [
+    "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts",
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+   ]
   },
   {
-   "id": "car-venable", "name": "Venable Street line", "route": "17th Street – Venable Street – 25th Street – Nine Mile Road", "from": 1888, "to": 1949,
-   "runs": [[
-    ["17th Street", "Main Street"], ["17th Street", "Broad Street"], ["Venable Street", "21st Street"], ["Venable Street", "25th Street"],
-    ["25th Street", "Nine Mile Road"], {"at": [-77.3905, 37.5442], "on": "Nine Mile Road"}
-   ]],
+   "id": "car-venable",
+   "name": "Venable Street line",
+   "route": "17th Street – Venable Street – 25th Street – Nine Mile Road",
+   "from": 1888,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "17th Street",
+      "Main Street"
+     ],
+     [
+      "17th Street",
+      "Broad Street"
+     ],
+     [
+      "Venable Street",
+      "21st Street"
+     ],
+     [
+      "Venable Street",
+      "25th Street"
+     ],
+     [
+      "25th Street",
+      "Nine Mile Road"
+     ],
+     {
+      "at": [
+       -77.3905,
+       37.5442
+      ],
+      "on": "Nine Mile Road"
+     }
+    ]
+   ],
    "note": "North on 17th Street, east along Venable Street through Union Hill, and up 25th Street to Nine Mile Road, the road the Seven Pines line took out of the city (chartered along 25th to 29th Streets and Nine Mile Road). The federal government bought the Seven Pines line in 1918 for a wartime plant; how far cars ran out Nine Mile Road in 1925 is not certain.",
-   "sources": ["https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10", "https://henrico.us/locations/nine-mile-road/", "https://modelingjimcrow.virginia.edu/node/91936"]
+   "sources": [
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://henrico.us/locations/nine-mile-road/",
+    "https://modelingjimcrow.virginia.edu/node/91936"
+   ]
   },
   {
-   "id": "car-jefferson", "name": "Jefferson Avenue line", "route": "21st Street – Jefferson Avenue", "from": 1890, "to": 1949,
-   "runs": [[["21st Street", "Broad Street"], ["Jefferson Avenue", "21st Street"], {"at": [-77.4160, 37.5350], "on": "Jefferson Avenue"}]],
+   "id": "car-jefferson",
+   "name": "Jefferson Avenue line",
+   "route": "21st Street – Jefferson Avenue",
+   "from": 1890,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "21st Street",
+      "Broad Street"
+     ],
+     [
+      "Jefferson Avenue",
+      "21st Street"
+     ],
+     {
+      "at": [
+       -77.416,
+       37.535
+      ],
+      "on": "Jefferson Avenue"
+     }
+    ]
+   ],
    "note": "Up 21st Street and out Jefferson Avenue past Jefferson Park, one of the trolley's pleasure grounds, as the 1925 plate shows it.",
-   "sources": ["https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10", "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"]
+   "sources": [
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"
+   ]
   },
   {
-   "id": "car-hull", "name": "Hull Street line", "route": "14th Street – Mayo Bridge – Hull Street", "from": 1888, "to": 1949,
-   "runs": [[["14th Street", "Main Street"], ["Hull Street", "Cowardin Avenue"], ["Hull Street", "31st Street"]]],
+   "id": "car-hull",
+   "name": "Hull Street line",
+   "route": "14th Street – Mayo Bridge – Hull Street",
+   "from": 1888,
+   "to": 1949,
+   "runs": [
+    [
+     [
+      "14th Street",
+      "Main Street"
+     ],
+     [
+      "Hull Street",
+      "Cowardin Avenue"
+     ],
+     [
+      "Hull Street",
+      "31st Street"
+     ]
+    ]
+   ],
    "note": "Over the Mayo Bridge into Manchester and out Hull Street. Its last car, No. 408 on the Hull Street–Highland Park run, ended Richmond's streetcars on 25 November 1949. The outer end is approximate.",
-   "sources": ["https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10", "https://richmondmagazine.com/news/richmond-history/richmond-trolley-system/"]
+   "sources": [
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://richmondmagazine.com/news/richmond-history/richmond-trolley-system/"
+   ]
   },
   {
-   "id": "car-forest-hill", "name": "Forest Hill line", "route": "7th Street – Free Bridge – Semmes Avenue – Forest Hill Avenue", "from": 1890, "to": 1934,
-   "runs": [[["7th Street", "Broad Street"], ["Semmes Avenue", "Cowardin Avenue"], ["Semmes Avenue", "Forest Hill Avenue"], ["Forest Hill Avenue", "41st Street"]]],
+   "id": "car-forest-hill",
+   "name": "Forest Hill line",
+   "route": "7th Street – Free Bridge – Semmes Avenue – Forest Hill Avenue",
+   "from": 1890,
+   "to": 1934,
+   "runs": [
+    [
+     [
+      "7th Street",
+      "Broad Street"
+     ],
+     [
+      "Semmes Avenue",
+      "Cowardin Avenue"
+     ],
+     [
+      "Semmes Avenue",
+      "Forest Hill Avenue"
+     ],
+     [
+      "Forest Hill Avenue",
+      "41st Street"
+     ]
+    ]
+   ],
    "note": "South over the river (the free bridge at Ninth Street), down the median of Semmes Avenue through Woodland Heights, and out Forest Hill Avenue to Forest Hill Park and its amusement park, the most popular trolley destination of all. VEPCO proposed taking up the Semmes Avenue tracks in 1933.",
-   "sources": ["https://sah-archipedia.org/node/1321", "https://rvamag.com/politics/richmond-politics/grtc-connects-route-2-northside-to-forest-hill.html", "https://rvanews.com/?p=117440", "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"]
+   "sources": [
+    "https://sah-archipedia.org/node/1321",
+    "https://rvamag.com/politics/richmond-politics/grtc-connects-route-2-northside-to-forest-hill.html",
+    "https://rvanews.com/?p=117440",
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+   ]
   },
   {
-   "id": "car-ashland", "name": "Richmond–Ashland Railway", "route": "Broad and Laurel – Brook Road – Ashland", "from": 1907, "to": 1938,
-   "runs": [[
-    ["Broad Street", "Laurel Street"], {"direct": [-77.4480, 37.5580]}, {"at": [-77.4470, 37.5610], "on": "Brook Road"}, {"at": [-77.4566, 37.6165], "on": "Brook Road"}
-   ]],
+   "id": "car-ashland",
+   "name": "Richmond–Ashland Railway",
+   "route": "Broad and Laurel – Brook Road – Ashland",
+   "from": 1907,
+   "to": 1938,
+   "runs": [
+    [
+     [
+      "Broad Street",
+      "Laurel Street"
+     ],
+     {
+      "direct": [
+       -77.448,
+       37.558
+      ]
+     },
+     {
+      "at": [
+       -77.447,
+       37.561
+      ],
+      "on": "Brook Road"
+     },
+     {
+      "at": [
+       -77.4566,
+       37.6165
+      ],
+      "on": "Brook Road"
+     }
+    ]
+   ],
    "note": "The interurban to Ashland, built as the Richmond and Chesapeake Bay Railway (1907) and run as the Richmond–Ashland Railway from 1919 to 1938: from its terminal at Broad and Laurel Streets (814 West Broad), over a half-mile concrete trestle across Bacon's Quarter Branch (drawn straight), then up Brook Road and on to Ashland.",
-   "sources": ["https://pantographblog.blogspot.com/2009/08/richmond-and-chesapeake-bay-railway.html", "https://varails.com/trolley-lines/the-richmond-ashland-railway", "https://richmondmagazine.com/news/richmond-history/by-train-to-the-center-of-the-universe/"]
+   "sources": [
+    "https://pantographblog.blogspot.com/2009/08/richmond-and-chesapeake-bay-railway.html",
+    "https://varails.com/trolley-lines/the-richmond-ashland-railway",
+    "https://richmondmagazine.com/news/richmond-history/by-train-to-the-center-of-the-universe/"
+   ]
   }
  ]
 }
