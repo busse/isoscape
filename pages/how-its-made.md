@@ -423,6 +423,26 @@ undated features are drawn only today.
 
 In every scene after the first, buildings **new since the previous scene** have gold roofs.
 
+**Streets before the houses.** A series can say that minor streets (tertiary and smaller,
+service roads and paths) are drawn only where a building of the year stands within so many
+metres of them: 75 m in the 1925 streetcar scene. Each street is walked every half that
+distance and kept if any building (standing today and built by then, or traced from a Sanborn
+sheet and still standing) has a corner within one grid cell of a step. A suburb whose streets
+were laid out but not yet built on shows its main roads only.
+
+**Streetcar lines.** A curated `streetcar` item is a line drawn as a bold red ribbon down the
+street, 9 m wide, with a car every 900 m along it: 14 m long and 3.6 m tall like a 1920s
+double-truck car, but 5.4 m wide (about twice a real car's width) so its pale roof reads
+against the line. A series can scale both up so they read across a whole city: the 1925 scene
+draws them three times life size (27 m lines, 42 m cars). The lines come from
+`tools/streetcars/build.py`, which reads each line as a list of street corners (from the
+1925 plate of the city's early transit routes and the sources cited per line), finds each
+corner in OpenStreetMap, and follows the streets between them, preferring the streets the two
+corners name (any other street costs six times as much per metre). Two streets that meet
+without sharing a node take their closest points, up to 150 m apart. A run over a viaduct
+since torn down is drawn straight. Vanished pleasure grounds (a fairground) are tinted like a
+town plan, and a racetrack is a closed path.
+
 **What the series cannot show:**
 
 - **Survivorship.** Only buildings standing today are measured. Downtown Richmond in 1900 had
