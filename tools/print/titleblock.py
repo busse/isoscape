@@ -13,6 +13,7 @@ comes out the same wherever it runs, in the print's own fonts and palette.
 info: {collection, set, piece, plate, version, drawn, location, facing}
 """
 import os
+import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -90,7 +91,6 @@ def block(info, u=1.0):
 
 def content_mask(sheet, face=None, step=4, tol=14):
     """Boolean array (one cell per `step` px) marking what is not bare paper."""
-    import numpy as np
     x0, y0, x1, y1 = face or (0, 0, sheet.width, sheet.height)
     small = sheet.crop((x0, y0, x1, y1)).convert('RGB').resize(((x1 - x0) // step, (y1 - y0) // step), Image.BOX)
     a = np.asarray(small).astype(int)
@@ -98,40 +98,51 @@ def content_mask(sheet, face=None, step=4, tol=14):
     return np.abs(a - paper).max(axis=2) > tol
 
 
-def find_spot(sheet, bw, bh, face=None, pad=None, step=4):
-    """Top-left (x, y) for a bw x bh block in the bottom-right corner, or None if it won't fit.
+def find_spot(sheet, bw, bh, face=None, pad=None, step=4, where='foot'):
+    """Top-left (x, y) for a bw x bh block, or None if it won't fit.
 
-    The block's right edge lines up with the right edge of the art (the rightmost column that is
-    mostly ink), its bottom sits no lower than the sheet's top margin allows (the same margin below
-    as above), and it never touches anything already printed (keeping `pad` of clear paper)."""
+    The block's right edge lines up with the right edge of the art (the rows that run more than
+    half the sheet's width: the map, the rows of boxes, the rules) and it never touches anything
+    already printed, keeping `pad` of clear paper around it.
+      foot: in the band below the art, as low as the sheet's top margin allows (the same margin
+            below as above). Every layout but the set sheets.
+      head: in the header above the art, its bottom just over the header rule, its top no higher
+            than the first line of the title. For set sheets, whose foot is full of notes."""
     x0, y0, x1, y1 = face or (0, 0, sheet.width, sheet.height)
     mask = content_mask(sheet, face, step)
     h, w = mask.shape
-    cols, rows = mask.sum(axis=0), mask.sum(axis=1)
-    right = int(max(i for i in range(w) if cols[i] > 0.25 * h)) + 1
-    top = int(min(j for j in range(h) if rows[j] > 0.25 * w))
-    art = int(max(j for j in range(h) if rows[j] > 0.5 * w))   # bottom of the art: search below it
+    rows = mask.sum(axis=1)
+    wide = rows > 0.5 * w
+    if not wide.any():
+        return None
+    right = int(np.nonzero(mask[wide].any(axis=0))[0].max()) + 1
+    first, art_top, art_bottom = int(np.nonzero(rows)[0].min()), int(np.nonzero(wide)[0].min()), int(np.nonzero(wide)[0].max())
     pad = pad if pad is not None else bh * 0.35
     p, bws, bhs = int(pad / step) + 1, -(-bw // step), -(-bh // step)
     xs = right - bws
     if xs - p < 0:
         return None
     free = ~mask[:, max(0, xs - p):min(w, right + p)].any(axis=1)
-    for yb in range(h - top, bhs - 1, -1):             # yb: the row just below the block
-        lo, hi = yb - bhs - p, min(h, yb + p)
-        if lo > art and free[lo:hi].all():
+    if where == 'foot':
+        span = range(h - first, art_bottom + bhs + p, -1)      # yb: the row just below the block
+    else:
+        span = range(art_top - p // 2, first + bhs - 1, -1)
+    for yb in span:
+        lo, hi = yb - bhs - (p if where == 'foot' else 0), min(h, yb + (p if where == 'foot' else p // 2))
+        if lo >= 0 and free[lo:hi].all():
             return x0 + xs * step + (bws * step - bw), y0 + (yb - bhs) * step
     return None
 
 
-def stamp(sheet, info, u, face=None, shrink=(1.0, 0.9, 0.8, 0.7, 0.6)):
+def stamp(sheet, info, u, face=None, shrink=(1.0, 0.9, 0.8, 0.7, 0.6), where=('foot', 'head')):
     """Stamp the block on a copy of `sheet`; returns (sheet, (x, y, w, h, u)). Tries smaller sizes
     if the corner is too full; raises if nothing fits."""
-    for s in shrink:
-        b = block(info, u * s)
-        at = find_spot(sheet, b.width, b.height, face)
-        if at:
-            out = sheet.convert('RGB').copy()
-            out.paste(b.convert('RGB'), at)
-            return out, (at[0], at[1], b.width, b.height, round(u * s, 4))
+    for place in where:
+        for s in shrink:
+            b = block(info, u * s)
+            at = find_spot(sheet, b.width, b.height, face, where=place)
+            if at:
+                out = sheet.convert('RGB').copy()
+                out.paste(b.convert('RGB'), at)
+                return out, (at[0], at[1], b.width, b.height, round(u * s, 4), place)
     raise ValueError('no room for the title block')
