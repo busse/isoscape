@@ -1,6 +1,9 @@
 # isoscape — working contract
 
-Read README.md for what this is. This file is the rules for changing it.
+Read README.md for what this is. This file is the rules for changing it. Notes for agents helping
+someone use isoscape (the reference site and the shop) are in AGENTS.md:
+
+@AGENTS.md
 
 ## Conventions
 

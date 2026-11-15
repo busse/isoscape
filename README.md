@@ -2,6 +2,9 @@
 
 Isometric dot-and-line views of real places, built from open map data.
 
+See the maps at [busse.github.io/isoscape](https://busse.github.io/isoscape/) · Prints at
+[chrisbusse.com](https://chrisbusse.com/), which support the work.
+
 A sibling of [dotscene](https://github.com/busse/dotscene): the same visual language (inked
 edges, a dot on every corner, flat fills), but driven by geography instead of hand-placed
 points. Where dotscene is for authoring a scene, isoscape is for *surveying* one. You give it a
