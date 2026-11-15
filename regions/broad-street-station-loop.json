@@ -1,0 +1,33 @@
+{
+  "title": "Broad Street Station, 1943: the loop",
+  "data": "broad-street-station",
+  "center": [
+    -77.46546,
+    37.561643
+  ],
+  "width": 700,
+  "depth": 540,
+  "bearing": 200,
+  "snap": false,
+  "scale": 4.9,
+  "squash": 0.6,
+  "exaggeration": 1.0,
+  "slab": 24,
+  "palette": "paper",
+  "minBuildingArea": 12,
+  "dots": "none",
+  "terrain": {
+    "exaggeration": 1.2,
+    "cell": 3,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 1
+  },
+  "time": {
+    "history": "history/broad-street-station.json",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  }
+}
