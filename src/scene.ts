@@ -165,7 +165,7 @@ export const buildScene = (
     }
   }
   for (const h of curated) {
-    if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan' || h.kind === 'grounds' || h.kind === 'platform') && h.ring !== undefined) {
+    if ((h.kind === 'water' || h.kind === 'burned' || h.kind === 'plan' || h.kind === 'grounds' || h.kind === 'platform' || h.kind === 'wood') && h.ring !== undefined) {
       // Pleasure grounds that are gone (a fairground, an amusement park) take a tint of their own.
       const rings = curatedRings(h)
       if (rings.length > 0) ground.push({ kind: h.kind, rings })

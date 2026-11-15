@@ -1,0 +1,33 @@
+{
+  "title": "Broad Street Station, 1943: the front",
+  "data": "richmond-streetcars",
+  "center": [
+    -77.465913,
+    37.561281
+  ],
+  "width": 380,
+  "depth": 330,
+  "bearing": 20,
+  "snap": false,
+  "scale": 9.0,
+  "squash": 0.6,
+  "exaggeration": 1.0,
+  "slab": 12,
+  "palette": "paper",
+  "minBuildingArea": 12,
+  "dots": "none",
+  "terrain": {
+    "exaggeration": 1.5,
+    "cell": 3,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 5
+  },
+  "time": {
+    "history": "history/broad-street-station.json",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  }
+}

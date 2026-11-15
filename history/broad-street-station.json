@@ -959,7 +959,7 @@
      37.5623179
     ]
    ],
-   "height": 16,
+   "height": 14,
    "tone": "stone",
    "note": "The concourse's far block, beyond the platforms, with its tall windows. Outline from OSM; height approximate.",
    "sources": [
@@ -9738,6 +9738,112 @@
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
     "https://www.chicagorailfan.com/stbcric.html",
     "https://scholarscompass.vcu.edu/postcard/190"
+   ]
+  },
+  {
+   "id": "bss-woods-1",
+   "name": "Woods by the station loop",
+   "kind": "wood",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4655847,
+     37.5655133
+    ],
+    [
+     -77.4648141,
+     37.5655676
+    ],
+    [
+     -77.4645308,
+     37.5652782
+    ],
+    [
+     -77.4641002,
+     37.5649436
+    ],
+    [
+     -77.4637489,
+     37.5638131
+    ],
+    [
+     -77.4638849,
+     37.563587
+    ],
+    [
+     -77.4643155,
+     37.563587
+    ],
+    [
+     -77.4643835,
+     37.5630173
+    ],
+    [
+     -77.4648141,
+     37.5627369
+    ],
+    [
+     -77.4651654,
+     37.5632434
+    ],
+    [
+     -77.4658,
+     37.5632434
+    ],
+    [
+     -77.4660833,
+     37.563587
+    ],
+    [
+     -77.465732,
+     37.5639216
+    ],
+    [
+     -77.465732,
+     37.5647175
+    ]
+   ],
+   "note": "Woodland as the 1956 USGS quadrangle tints it; outline traced from that sheet, approximate.",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+   ]
+  },
+  {
+   "id": "bss-woods-2",
+   "name": "Woods by the station loop",
+   "kind": "wood",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4629669,
+     37.5648893
+    ],
+    [
+     -77.4624003,
+     37.5647175
+    ],
+    [
+     -77.4614144,
+     37.563587
+    ],
+    [
+     -77.4615504,
+     37.5632434
+    ],
+    [
+     -77.461981,
+     37.5633067
+    ],
+    [
+     -77.4626836,
+     37.5641477
+    ]
+   ],
+   "note": "Woodland as the 1956 USGS quadrangle tints it; outline traced from that sheet, approximate.",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
    ]
   },
   {

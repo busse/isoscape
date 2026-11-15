@@ -137,7 +137,7 @@ C_SRC = [SRC['osm-station'], SRC['photo-1969'], SRC['platforms']]
 part('bss-concourse', 'Broad Street Station concourse', rect_ab(-16, 1, 35, 95), 14, 'stone',
      'The long concourse, carried from the head house out over the station tracks at the level of the waiting room; ramps led down from it to each platform. Outline from OSM; height approximate.',
      C_SRC, seat='max')
-part('bss-concourse-end', 'Broad Street Station concourse', rect_ab(-30, 8.5, 95, 152), 16, 'stone',
+part('bss-concourse-end', 'Broad Street Station concourse', rect_ab(-30, 8.5, 95, 152), 14, 'stone',
      'The concourse\'s far block, beyond the platforms, with its tall windows. Outline from OSM; height approximate.', C_SRC)
 
 # ---- tracks, platforms, canopies ---------------------------------------------------------------
@@ -313,6 +313,18 @@ features.append({
     'note': 'The station loop and the hill inside it, closed along the RF&P main: railroad land, so today\'s streets and lots there are not drawn.',
     'sources': LOOP_SRC,
 })
+
+# Woods on the hill inside the loop and along the main, from the green tint of the 1956
+# quadrangle (its woodland symbol); taken to stand in 1943 as well.
+WOODS = [
+    [(19, 488), (87, 494), (112, 462), (150, 425), (181, 300), (169, 275), (131, 275), (125, 212), (87, 181), (56, 237), (0, 237), (-25, 275), (6, 312), (6, 400)],
+    [(250, 419), (300, 400), (387, 275), (375, 237), (337, 244), (275, 337)],
+]
+for k, w in enumerate(WOODS):
+    features.append({
+        'id': f'bss-woods-{k + 1}', 'name': 'Woods by the station loop', 'kind': 'wood', 'from': 1919, 'to': 1976, 'ring': ring(w),
+        'note': 'Woodland as the 1956 USGS quadrangle tints it; outline traced from that sheet, approximate.', 'sources': [SRC['usgs-1956']],
+    })
 
 # The express building beside the express tracks, from the 1956 quadrangle.
 features.append({
