@@ -13,6 +13,14 @@ version; the version is part of each print file's name (`-v2`, `-v3`).
 
 ## November 15, 2026
 
+**Every print now carries its plate.** Each design has a permanent catalog number, its plate
+(RVA·01 is Richmond, 1925; STC·02 is stop 2 of Richmond's Streetcars; LMA·25 is Alcatraz). A
+small title block in the corner of every print and canvas gives the plate with the piece's place
+in the catalog (collection, set and piece), its version, the year it was drawn, the point it was
+drawn around and the direction it faces. On the two set sheets the block sits in the header. The
+art is unchanged. Every design is now version 2, except the menu, the system map and stop 2 of
+Richmond's Streetcars, 1925, which are version 3.
+
 **New: Broad Street Station, 1943.** Richmond's union station at its wartime height and the
 railroads that ran from it: the railroad map framed by fourteen places, the map alone, and a
 print for each place. The first of a new kind of map, one building drawn close up in its own

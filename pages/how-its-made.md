@@ -497,6 +497,19 @@ Code: `src/history.ts`; the history file is `history/<series>.json`; the tracing
 `tools/sanborn/` (Python: NumPy, SciPy, OpenCV, Shapely), and their output is
 `history/sanborn/`.
 
+## Plates and the title block
+
+Every print and canvas carries a small title block in its bottom-right corner, like the corner
+of a drafting sheet: the isoscape cube, the maker, the piece's place in the catalog (collection,
+set and piece), its plate number, version, the year it was drawn, the point the view was drawn
+around and the direction it faces. On a 36 × 24 in sheet it is 1,690 × 239 pixels at 300 dpi,
+about 5.6 × 0.8 in; smaller sheets scale it by the square root of their long side over 36 in
+(so 4.6 in across on a 24 × 18), which keeps it legible. Its right edge lines up with the art,
+and it sits as low as the art's side margin allows, with clear paper around it a third of its
+height wide. Where the foot of a sheet is full (the two set sheets) it sits in the header
+instead, and only if no place fits at full size is it shrunk, in steps of a tenth. On a canvas it
+goes on the face, never the wrap. The plates themselves are listed in `catalog/plates.json`.
+
 ## Archive and explorer
 
 Every build is kept under `out/builds/<timestamp>-<name>/` as the SVG, a thumbnail and a

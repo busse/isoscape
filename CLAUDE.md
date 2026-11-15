@@ -73,6 +73,7 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | a set: a big map framed by numbered boxes, its prints and page | `sets/<name>.json`, `tools/sets/set.py`; "Making a set" in the README |
 | one building modeled close up (parts, tracks, canopies, trains) | `tools/stations/<name>.py` → `history/<name>.json`; `src/parts.ts` |
 | release records: what each sold design was made from, and how to remake it | `tools/release/` → `releases/` |
+| plate numbers, the taxonomy, the printed title block | `catalog/plates.json`, `tools/release/plates.py`, `tools/print/titleblock.py`, `tools/release/stamp.py`; "Plates" in the README |
 | a published piece corrected or redrawn | `pages/changes.md` (and the store's `changes_page.py`): every change, dated, with the piece's version |
 | placing streetcar lines from named corners | `tools/streetcars/build.py` (routes in `tools/streetcars/routes.json`) |
 

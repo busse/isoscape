@@ -490,3 +490,24 @@ prints and scenes are frozen as sold, the landmarks' framing is recovered as an 
 (`tools/print/lm_params.json`, by `tools/release/landmark_params.py`, checked by eye), and
 `check.py --rebuild` reports which of their scenes the current code still draws identically.
 Frozen data and scenes are large and stay out of git; keep them backed up with the print files.
+
+## Plates
+
+Every design has a plate: a permanent catalog number, kept in `catalog/plates.json` with the
+taxonomy it sits in (isoscape › collection › set › piece). A plate is the set's three-letter
+code and the piece's number in the set (`RVA-01`, `STC-02`; `00` is a set's framed sheet of
+boxes and `M` its map), printed with a middle dot (RVA·01). Numbers follow the order of first
+release and are never reused; a redraw changes a design's version, never its plate.
+
+Every print carries a title block (`tools/print/titleblock.py`): the cube and maker, the
+collection › set › piece, the plate, the version, the year drawn, the point the view was drawn
+around (decimal degrees) and the direction it faces. It sits in the bottom-right corner,
+right-aligned with the art, or in the header of a set sheet whose foot is full.
+
+- `python3 tools/release/plates.py check <store-dir>`: every plate unique and well formed, and
+  every design in the store has one. `plates.py next <SET>` gives a new design its number.
+- `python3 tools/release/plates.py list [--csv]`: the catalog as a text reference list.
+- `python3 tools/release/stamp.py <store-dir> <design>...`: stamp the block onto a design's
+  print and canvas files as its next version (logged in the store's `state/stamps.json`;
+  `record.py` records it as kind `stamp`, and `check.py --rebuild` stamps it again byte for byte).
+
