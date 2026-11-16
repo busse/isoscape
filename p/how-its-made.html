@@ -15,18 +15,18 @@
 <meta property="og:title" content="How it&#39;s made · isoscape">
 <meta property="og:description" content="The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.">
 <meta property="og:url" content="https://busse.github.io/isoscape/p/how-its-made.html">
-<meta property="og:image" content="https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.png">
-<meta property="og:image:secure_url" content="https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.png">
-<meta property="og:image:type" content="image/png">
+<meta property="og:image" content="https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.jpg">
+<meta property="og:image:secure_url" content="https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.jpg">
+<meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Isometric map of Downtown Richmond, from the Capitol to Tobacco Row as it stood in 1925 (The 1924–25 Sanborn map): buildings, streets, water and the lie of the land, seen from above at an angle">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="How it&#39;s made · isoscape">
 <meta name="twitter:description" content="The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.">
-<meta name="twitter:image" content="https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.png">
+<meta name="twitter:image" content="https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.jpg">
 <meta name="twitter:image:alt" content="Isometric map of Downtown Richmond, from the Capitol to Tobacco Row as it stood in 1925 (The 1924–25 Sanborn map): buildings, streets, water and the lie of the land, seen from above at an angle">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How it's made","description":"The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.","author":{"@type":"Person","name":"Chris Busse","url":"https://busse.github.io/isoscape/p/about.html#contact"},"inLanguage":"en","image":"https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.png","url":"https://busse.github.io/isoscape/p/how-its-made.html","mainEntityOfPage":"https://busse.github.io/isoscape/p/how-its-made.html","dateModified":"2026-11-16","isPartOf":{"@type":"WebSite","name":"isoscape","url":"https://busse.github.io/isoscape/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How it's made","description":"The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.","author":{"@type":"Person","name":"Chris Busse","url":"https://busse.github.io/isoscape/p/about.html#contact"},"inLanguage":"en","image":"https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.jpg","url":"https://busse.github.io/isoscape/p/how-its-made.html","mainEntityOfPage":"https://busse.github.io/isoscape/p/how-its-made.html","dateModified":"2026-11-16","isPartOf":{"@type":"WebSite","name":"isoscape","url":"https://busse.github.io/isoscape/"}}</script>
 <style>
 :root {
   --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
@@ -705,6 +705,15 @@ Markdown files in <code>pages/</code>. To add one, see the README.</p>
 these pages as <code>p/&lt;slug&gt;.html</code>, each map as <code>m/&lt;region&gt;.html</code> (and each year of a dated series
 as <code>m/&lt;region&gt;-&lt;year&gt;.html</code>) with its picture and this same &quot;How this view was made&quot; text, and a
 <code>sitemap.xml</code> listing them all.</p>
+<p>Chat apps and social sites never see the part of an address after <code>#</code>, so every view in the
+explorer would preview as the front page. Each map, each year of a series and each page also
+has a share page in <code>s/</code>, named as its plain page is, with its own title, description and
+picture, and a script that sends a visitor on into the explorer at that view. The <strong>Link</strong>
+button copies a share page&#39;s address, and the address bar shows it while you look, so an
+address copied from either previews as what you were looking at. The pictures are 1,200 × 630
+pixels (1.91:1): a map cropped from its middle, saved as a JPEG at quality 86, about 140 to 260
+KB; a page with a sheet of its own, such as a set or a cutaway, uses its drawing alone, not the
+whole sheet.</p>
 <p>Code: <code>src/archive.ts</code>, <code>src/explorer.ts</code>, <code>src/pages.ts</code>, <code>src/story.ts</code>, <code>src/static-pages.ts</code>.</p>
 <h2 id="credits">Credits</h2>
 <p>Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, available
