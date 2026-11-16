@@ -30,6 +30,8 @@ export interface BuildMeta {
   readonly ms: number
   readonly bytes: number
   readonly stats: Readonly<Record<string, number>>
+  /** The sources this scene drew from, as its credit line names them (`sceneCredits`). */
+  readonly credits?: readonly string[]
   readonly config: Region
   readonly files: { readonly svg: string; readonly thumb?: string; readonly social?: string; readonly preview?: string }
   /** The page color, for a swatch where there is no thumbnail. */

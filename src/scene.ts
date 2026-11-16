@@ -205,6 +205,10 @@ export const buildScene = (
         terrain.cover[j * terrain.nx + i] = extra.cover(lon, lat)
       }
     }
+    // Land nodes that took a cover class: what the credit line goes by.
+    let covered = 0
+    for (let k = 0; k < terrain.cover.length; k++) if (terrain.cover[k] !== 0 && terrain.water[k] === 0) covered++
+    stats.coverNodes = covered
   }
   if (!terrain.flat) {
     stats.elevationDatum = Number(terrain.datum.toFixed(1))
@@ -391,6 +395,8 @@ export const buildScene = (
   // water. Buildings mapped in OSM on water (boathouses, piers) stay.
   const sc = { ground } as unknown as Scene
   let modelOnWater = 0
+  let footprintsDrawn = 0
+  let datedFromParcels = 0
   for (const s of shown) {
     if (!inFrame(s)) continue
     if (sites.length > 0 && sites.some((r) => pointInRing(centroid(s.outer), r))) continue
@@ -408,6 +414,7 @@ export const buildScene = (
     const h = floor === undefined ? own : { ...own, base: floor }
     if (!Number.isFinite(h.base) || !Number.isFinite(h.top)) continue
     heightSources[h.source]++
+    if (s.tags.source === 'microsoft') footprintsDrawn++
     // Seat the building on the ground under it (`seatLevel`): walls reach down to the lowest
     // corner, and heights count from a level set by the true slope, not the drawn one. The parts
     // of one building all count from the level of its outline.
@@ -439,6 +446,10 @@ export const buildScene = (
       roof = pal.fresh
       fresh++
     }
+    // A parcel's year built decided something here: whether the building stands in a past
+    // year, or that it is drawn as new since the previous one. Today's scene otherwise draws
+    // every building whatever its date.
+    if (dated?.source === 'parcel' && time !== undefined && (time.year < time.history.present || roof === pal.fresh)) datedFromParcels++
     if (lattice.includes(s)) entries.push(spire(view, pal, s.id, latticeFootprint(outer, area), base, gMean + h.top, dotsMode, s.tags.name))
     else if (isShellRoof(s.tags)) {
       // Seat the shell on the roof of the building it stands on, if any.
@@ -454,6 +465,8 @@ export const buildScene = (
     if (isBridgeTower(s.tags)) towerParts.push({ at: centroid(outer), top })
   }
   if (modelOnWater > 0) stats.footprintsOnWater = modelOnWater
+  stats.footprintsDrawn = footprintsDrawn
+  if (time !== undefined) stats.datedFromParcels = datedFromParcels
   const prisms = entries.flatMap((e) => ('prism' in e ? [e.prism] : []))
   const settled = settlePrisms(prisms)
   if (settled > 0) stats.partsSettled = settled

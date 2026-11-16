@@ -16,7 +16,7 @@ import type { Item, Scene, Shape } from './scene.ts'
 import { contours, nodeShade, riverFall, type ContourSegment } from './terrain.ts'
 import { isoBand, type BandPoint } from './isoband.ts'
 import { COVER_OF, COVER_ORDER, type CoverGroup } from './landcover.ts'
-import { demCredit } from './dem-sources.ts'
+import { sceneCredits } from './credits.ts'
 
 const f = (n: number) => (Math.round(n * 10) / 10).toString()
 
@@ -231,9 +231,9 @@ export const renderSvg = (scene: Scene): Rendered => {
   const out: string[] = []
   const sealed = (cls: string, fill: string) => `.${cls}{fill:${fill};stroke:${fill};stroke-width:.6;stroke-linejoin:round}`
   out.push(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.map(f).join(' ')}" class="isoscape" data-region="${esc(region.name)}" role="img">`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.map(f).join(' ')}" class="isoscape" data-region="${esc(region.name)}" data-credits="${esc(JSON.stringify(sceneCredits(region, scene.stats, T.flat)))}" role="img">`,
     `<title>${esc(region.title)}</title>`,
-    `<desc>Map data © OpenStreetMap contributors (ODbL).${T.flat ? '' : ` ${esc(demCredit(region))}.`} Bearing ${view.bearing.toFixed(1)}°.</desc>`,
+    `<desc>${esc(sceneCredits(region, scene.stats, T.flat).join(' · '))}. Bearing ${view.bearing.toFixed(1)}°.</desc>`,
     `<style>`,
     `.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}.d{fill:none;stroke:${p.ink};stroke-width:${f(p.dotRadius * 2)};stroke-linecap:round}`,
     `.td{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth};stroke-dasharray:1.2 1.8}`,
@@ -915,7 +915,7 @@ export const renderPage = (scene: Scene, rendered: Rendered): string => `<!docty
 <body>
 <div id="stage">${rendered.svg.replace('<svg ', '<svg preserveAspectRatio="xMidYMid meet" ')}</div>
 <header><h1>${esc(scene.region.title)}</h1><div>drag to pan · scroll to zoom · double-click to reset</div></header>
-<footer>Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors${scene.terrain.flat ? '' : ` · ${esc(demCredit(scene.region))}`}</footer>
+<footer>Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors${sceneCredits(scene.region, scene.stats, scene.terrain.flat).slice(1).map((c) => ` · ${esc(c)}`).join('')}</footer>
 <div id="tip"></div>
 <script>
 (() => {

@@ -650,8 +650,20 @@ under the Open Database License. Elevation from the [USGS 3D Elevation
 Program](https://www.usgs.gov/3d-elevation-program), public domain, and outside the US from
 the sources credited on [Landmarks around the world](world-landmarks.md). Years built for the
 Richmond series from the City of Richmond's open data. Fire-insurance maps from the Library
-of Congress Sanborn Maps Collection. See [About](about.md) for what that means when you use
-or share a picture.
+of Congress Sanborn Maps Collection. Land cover, where a map uses it (Gwynn's Island), from
+the USGS [National Land Cover Database](https://www.mrlc.gov) 2021, public domain; building
+footprints OpenStreetMap lacks, where a map uses them, from Microsoft's Global ML Building
+Footprints, under the Open Database License. See [About](about.md) for what that means when
+you use or share a picture.
+
+Each map names only the sources it drew from. A build works out its own credit line from what
+the scene used (`src/credits.ts`): OpenStreetMap always; the elevation source by name when the
+ground has relief; land cover when cover classes were read onto the ground; Microsoft's
+footprints when at least one is drawn; assessor's year-built records when a date from them
+decided whether a building stands in that year or is shown as new; Sanborn maps only when a
+building traced from them is drawn. The line is written into the SVG (`data-credits`), the
+build record and `isoscape info`, and the prints take it from the builds they are made from,
+so a modern view never credits fire-insurance maps it does not use.
 
 Inspired by [Isometric SF](https://isometricsf.com), Justin Chavez's isometric pixel-art map
 of San Francisco ([how it was made](https://www.justinchavez.com/blog/isometric-sf-how/)).
