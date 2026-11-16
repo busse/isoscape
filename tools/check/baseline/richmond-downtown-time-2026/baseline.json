@@ -5,16 +5,16 @@
   "--year",
   "2026"
  ],
- "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "commit": "9c326f9e599178978c92435620d0a1264a4e2872",
  "dirty": false,
- "approved": "2026-11-16T12:25:55-0500",
- "svg_sha256": "4ae97e75d5e24794c7b61f9ed5360208bad3fc90fc3e2f9bee1e0d90baa0f462",
- "svg_bytes": 10104722,
+ "approved": "2026-11-16T17:10:54-0500",
+ "svg_sha256": "3847222572194f11bbd2c918fd6f2cc824ac974f1ad206fd154f123598002aa8",
+ "svg_bytes": 15957293,
  "viewBox": [
   -3024.0,
-  -1675.6,
+  -1671.9,
   6048.0,
-  2730.8
+  2727.1
  ],
  "width": 12000,
  "crops": [
@@ -40,21 +40,19 @@
    "h": 1000
   }
  ],
- "warnings": [
-  "no year-built data for \"richmond-downtown-time\"; run: isoscape fetch richmond-downtown-time --extras-only"
- ],
+ "warnings": [],
  "residual": {
   "towers": {
-   "max": 16.0,
-   "mean": 2.0026
+   "max": 38.222,
+   "mean": 1.8407
   },
   "interchange": {
-   "max": 23.889,
-   "mean": 2.1664
+   "max": 18.222,
+   "mean": 2.1238
   },
   "rowhouses-terrain": {
-   "max": 14.0,
-   "mean": 2.2284
+   "max": 17.0,
+   "mean": 2.0844
   }
  },
  "data": {
