@@ -41,3 +41,15 @@ test('a building on exaggerated slopes counts its height from the true slope', (
   assert.equal(seatLevel([0, 20], 1), 10)
   assert.equal(seatLevel([0, 20], 0.5), 10)
 })
+
+test('a building tagged implausibly low, zero or unreadable gets the usual guess', async () => {
+  const { buildingHeights } = await import('../src/classify.ts')
+  for (const height of ['0.4', '0', 'huge', '37;35']) {
+    const h = buildingHeights({ building: 'house', height }, 120)
+    assert.equal(h.source, 'guess')
+    assert.equal(h.top, 8)
+  }
+  assert.equal(buildingHeights({ building: 'house', height: '6' }, 120).top, 6)
+  // A part may be low: steps, a plinth.
+  assert.equal(buildingHeights({ 'building:part': 'steps', height: '0.5' }, 120).source, 'height')
+})

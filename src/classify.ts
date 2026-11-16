@@ -104,12 +104,17 @@ const finite = (v: string | undefined): number | null => {
 /**
  * Height and base of a building, in meters. OSM's own `height` wins, then levels; failing
  * both, a guess from the building's type and footprint, which is what most of a city will be
- * until lidar heights are joined in.
+ * until lidar heights are joined in. A whole building (not a `building:part`) tagged lower
+ * than `MIN_TAGGED_HEIGHT` is taken as having no height: a building that low is a bad tag
+ * (Los Angeles County's import gives hundreds of hillside houses 0.4 m), and drawn it is a
+ * flat outline on the ground.
  */
+export const MIN_TAGGED_HEIGHT = 2
 export const buildingHeights = (t: Tags, footprintArea: number): { base: number; top: number; source: 'height' | 'model' | 'levels' | 'guess' } => {
   const minLevel = finite(t['building:min_level'])
   const base = Math.max(0, parseLength(t.min_height) ?? (minLevel !== null ? minLevel * METRES_PER_LEVEL : 0))
-  const height = parseLength(t.height)
+  const tagged = parseLength(t.height)
+  const height = tagged !== null && t.building !== undefined && tagged < MIN_TAGGED_HEIGHT ? null : tagged
   if (height !== null && height > base) return { base, top: height, source: t['height:source'] === 'model' ? 'model' : 'height' }
   const levels = finite(t['building:levels']) ?? NaN
   if (Number.isFinite(levels) && levels > 0) {

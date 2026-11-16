@@ -282,7 +282,9 @@ center lies in an OSM building, or if it holds an OSM building's center.
 
 **Heights** are taken from the first of these that the building has:
 
-1. a `height` tag, from a survey or a mapper's estimate;
+1. a `height` tag, from a survey or a mapper's estimate (a whole building tagged under 2 m,
+   or with a height that can't be read, is taken as having none: Los Angeles County's import
+   gives hundreds of hillside houses 0.4 m);
 2. **an estimate from Microsoft's model**, for its own footprints, where it made one;
 3. `building:levels`, at 3.4 m a floor, plus half a floor for each roof level;
 4. **a guess** from the building's type and size: 3.2 m for a shed or anything under 40 m²,
