@@ -65,6 +65,8 @@ export interface Item {
   readonly footprint?: Ring
   /** A bridge span's center line, view meters, its deck's mean height, and which bridge it is. */
   readonly span?: { readonly a: Vec2; readonly b: Vec2; readonly z: number; readonly bridge: string }
+  /** A bridge pier, standing under a deck. */
+  readonly pier?: boolean
 }
 
 export interface GroundPolygon {
@@ -192,6 +194,17 @@ export const buildScene = (
       const rings = curatedRings(h)
       if (rings.length > 0) ground.push({ kind: h.kind, rings })
     }
+  }
+  // A bare-earth model often keeps a short overpass as a ridge of ground across the cut or
+  // street under it (the lidar saw the deck); carve it out before anything reads the ground.
+  if (!terrain.flat && !curated.some((h) => h.kind === 'plan' && h.limitsStreets)) {
+    const lines = features.filter((f): f is LineFeature => f.type === 'line' && isBridge(f.tags) && (roadWidth(f.tags) !== null || isRail(f.tags)))
+    const abutments = chainBridges(lines).flatMap((c) => [
+      ...(c.rampStart ? [c.line.points[0]] : []),
+      ...(c.rampEnd ? [c.line.points[c.line.points.length - 1]] : []),
+    ]).map(([lon, lat]) => view.toView(lon, lat))
+    const lowered = carveUnderBridges(terrain, lines.map((f) => ({ pts: f.points.map(([lon, lat]) => view.toView(lon, lat)), width: deckWidth(f.tags) })), abutments)
+    if (lowered > 0) stats.groundUnderBridgesLowered = lowered
   }
   stats.ground = ground.length
   rasterize(terrain, ground.filter((g) => g.kind === 'water').map((g) => g.rings), 1)
@@ -579,13 +592,18 @@ export const buildScene = (
 
   // ---- bridges -----------------------------------------------------------------------------
   let spans = 0
-  const chains = chainBridges(plans.length > 0 ? [] : bridgeLines)
-  const ends = bridgeEnds(view, region, chains)
   const roofs = roofIndex(items)
+  // Skyways: footbridges that run from building to building at a floor the data does not give.
+  // Drawn at a ramp's height they lie across walls and roofs, so they are left out.
+  const skyways = bridgeLines.filter((f) => isSkyway(f.tags, f.points.map(([lon, lat]) => view.toView(lon, lat)), roofs))
+  if (skyways.length > 0) stats.skywaysLeftOut = skyways.length
+  const chains = chainBridges(plans.length > 0 ? [] : bridgeLines.filter((f) => !skyways.includes(f)))
+  const ends = bridgeEnds(view, region, chains)
   const towers = suspensionTowers(view, chains, towerParts)
+  const lines = joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix)))
   for (let c = 0; c < chains.length; c++) {
-    const pieces = bridgePieces(view, pal, region, terrain, chains[c], ends[c], roofs, towers.get(c))
-    spans += pieces.length
+    const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c))
+    spans += pieces.filter((p) => p.pier !== true).length
     items.push(...pieces)
   }
   stats.bridgePieces = spans
@@ -915,6 +933,108 @@ const FASCIA = 1.6
 const PIER_SPACING = 38
 const PIECE = 22
 
+/** A bridge deck's width, meters: the road's, plus a meter and a half of parapet. */
+const deckWidth = (t: Readonly<Record<string, string>>): number => (isRail(t) ? 4.5 : (roadWidth(t) ?? 6) + 1.5)
+
+/** Ground under a deck is lowered in full from this far from a grounded end, meters, and not at all within half of it. */
+export const ABUTMENT_KEEP = 10
+
+/** How far past a deck's edge the ground either side of it is read, meters. */
+export const UNDER_DECK_REACH = 8
+
+/**
+ * Lower the ground under bridge decks to what lies either side of them. A bare-earth model is
+ * meant to have bridges taken out, but an overpass often stays in it as a ridge across the cut
+ * it spans (or is filled level with the street from its abutments), and the road under it then
+ * climbs over a hump. A grid node within a deck's footprint that stands more than half a meter
+ * above the ground `UNDER_DECK_REACH` past the edges of all the decks there, on both sides,
+ * takes the straight line across between those two. Ground is never raised, and a deck over
+ * flat ground, a valley, a hillside or a bluff's crest changes nothing. Returns the number of
+ * nodes lowered.
+ */
+export const carveUnderBridges = (terrain: Terrain, decks: readonly { pts: readonly Vec2[]; width: number }[], abutments: readonly Vec2[] = []): number => {
+  const { nx, ny, x0, y0, cell, elev } = terrain
+  // Which nodes are under a deck, and the deck's direction there.
+  const under = new Int8Array(nx * ny)
+  const dir = new Float32Array(nx * ny * 2)
+  const best = new Float32Array(nx * ny).fill(Infinity)
+  for (const d of decks) {
+    const half = d.width / 2 + cell / 2
+    for (let k = 1; k < d.pts.length; k++) {
+      const [a, b] = [d.pts[k - 1], d.pts[k]]
+      const len = Math.hypot(b[0] - a[0], b[1] - a[1])
+      if (len < 1e-6) continue
+      const ux = (b[0] - a[0]) / len
+      const uy = (b[1] - a[1]) / len
+      const i0 = Math.max(0, Math.floor((Math.min(a[0], b[0]) - half - x0) / cell))
+      const i1 = Math.min(nx - 1, Math.ceil((Math.max(a[0], b[0]) + half - x0) / cell))
+      const j0 = Math.max(0, Math.floor((Math.min(a[1], b[1]) - half - y0) / cell))
+      const j1 = Math.min(ny - 1, Math.ceil((Math.max(a[1], b[1]) + half - y0) / cell))
+      for (let j = j0; j <= j1; j++) {
+        for (let i = i0; i <= i1; i++) {
+          const px = x0 + i * cell - a[0]
+          const py = y0 + j * cell - a[1]
+          const along = px * ux + py * uy
+          if (along < 0 || along > len) continue
+          const off = Math.abs(-px * uy + py * ux)
+          if (off > half) continue
+          const n = j * nx + i
+          under[n] = 1
+          if (off < best[n]) {
+            best[n] = off
+            dir[2 * n] = ux
+            dir[2 * n + 1] = uy
+          }
+        }
+      }
+    }
+  }
+  const at = (x: number, y: number) => {
+    const i = Math.round((x - x0) / cell)
+    const j = Math.round((y - y0) / cell)
+    return i < 0 || j < 0 || i >= nx || j >= ny ? -1 : j * nx + i
+  }
+  const out = Float32Array.from(elev)
+  let lowered = 0
+  for (let n = 0; n < nx * ny; n++) {
+    if (under[n] === 0) continue
+    const x = x0 + (n % nx) * cell
+    const y = y0 + Math.floor(n / nx) * cell
+    // Step out across the deck both ways until clear of every deck, then a little more.
+    const side = (sign: number): { z: number; d: number } | null => {
+      const qx = -dir[2 * n + 1] * sign
+      const qy = dir[2 * n] * sign
+      for (let t = cell / 2; t <= 80; t += cell / 2) {
+        const m = at(x + qx * t, y + qy * t)
+        if (m < 0) return null
+        if (under[m] === 0) {
+          const d = t + UNDER_DECK_REACH
+          const e = at(x + qx * d, y + qy * d)
+          return e < 0 ? null : { z: terrain.elevation([x + qx * d, y + qy * d]), d }
+        }
+      }
+      return null
+    }
+    const l = side(1)
+    const r = side(-1)
+    if (l === null || r === null) continue
+    // Full depth from `ABUTMENT_KEEP` past a grounded end, none at the end: the street that
+    // runs onto the bridge keeps its level.
+    let near = Infinity
+    for (const a of abutments) near = Math.min(near, Math.hypot(a[0] - x, a[1] - y))
+    const w = Math.min(1, Math.max(0, near / ABUTMENT_KEEP - 0.5))
+    const across = l.z + ((r.z - l.z) * l.d) / (l.d + r.d)
+    // Only a ridge: ground under the deck higher than on both sides of it. A deck along the
+    // crest of a bluff or a hillside keeps the ground under it.
+    if (w > 0 && elev[n] > Math.max(l.z, r.z) + 0.5) {
+      out[n] = elev[n] + (across - elev[n]) * w
+      lowered++
+    }
+  }
+  elev.set(out)
+  return lowered
+}
+
 /** A run of bridge ways joined end to end, with which ends come down to the ground. */
 export interface BridgeChain {
   readonly line: LineFeature
@@ -927,6 +1047,20 @@ export interface BridgeChain {
 }
 
 const key = (p: Vec2) => `${p[0].toFixed(7)},${p[1].toFixed(7)}`
+
+/** The sharpest turn a chain of bridge ways takes where two ways join, radians. */
+export const MAX_CHAIN_TURN = Math.PI / 3
+
+/** The turn at vertex `j` of a lon/lat line, radians (0 straight on, π doubling back). */
+const turnAt = (pts: readonly Vec2[], j: number): number => {
+  if (j <= 0 || j >= pts.length - 1) return 0
+  const k = Math.cos((pts[j][1] * Math.PI) / 180)
+  const ax = (pts[j][0] - pts[j - 1][0]) * k
+  const ay = pts[j][1] - pts[j - 1][1]
+  const bx = (pts[j + 1][0] - pts[j][0]) * k
+  const by = pts[j + 1][1] - pts[j][1]
+  return Math.abs(Math.atan2(ax * by - ay * bx, ax * bx + ay * by))
+}
 
 /**
  * OSM cuts one bridge into many ways (at every lane change, name change, or junction). Ramp
@@ -957,20 +1091,30 @@ export const chainBridges = (lines: readonly LineFeature[]): BridgeChain[] => {
       let grew = true
       while (grew) {
         grew = false
+        // At a fork, carry on along the straightest way, and never turn back through one: a
+        // chain that doubled back up the other branch would join two tracks into a V.
+        let pick: { i: number; next: Vec2[]; turn: number } | null = null
+        const head = key(pts[0])
+        const tail = key(pts[pts.length - 1])
         for (let i = 0; i < left.length; i++) {
-          const c = left[i]
-          const s = c.points
-          const head = key(pts[0])
-          const tail = key(pts[pts.length - 1])
-          if (key(s[0]) === tail) pts = pts.concat(s.slice(1))
-          else if (key(s[s.length - 1]) === tail) pts = pts.concat(s.slice(0, -1).reverse())
-          else if (key(s[s.length - 1]) === head) pts = s.slice(0, -1).concat(pts)
-          else if (key(s[0]) === head) pts = s.slice(1).reverse().concat(pts)
-          else continue
-          members.push(c)
-          left.splice(i, 1)
+          const s = left[i].points
+          let next: Vec2[] | null = null
+          if (key(s[0]) === tail) next = pts.concat(s.slice(1))
+          else if (key(s[s.length - 1]) === tail) next = pts.concat(s.slice(0, -1).reverse())
+          else if (key(s[s.length - 1]) === head) next = s.slice(0, -1).concat(pts)
+          else if (key(s[0]) === head) next = s.slice(1).reverse().concat(pts)
+          if (next === null) continue
+          const atTail = next.length > pts.length && next[0] === pts[0]
+          const j = atTail ? pts.length - 1 : next.length - pts.length
+          const turn = turnAt(next, j)
+          if (turn > MAX_CHAIN_TURN) continue
+          if (pick === null || turn < pick.turn) pick = { i, next, turn }
+        }
+        if (pick !== null) {
+          pts = pick.next
+          members.push(left[pick.i])
+          left.splice(pick.i, 1)
           grew = true
-          break
         }
       }
       const ids = new Set(members.map((m) => m.id))
@@ -1142,6 +1286,31 @@ export const buildingAt = (roofs: readonly Roof[], p: Vec2): Roof | null => {
   return best
 }
 
+/** How near a building a footbridge's end must be for it to count as a skyway, meters. */
+export const SKYWAY_REACH = 3
+
+/** The longest footbridge counted as a skyway, meters (a bridge's walkway past its towers is not). */
+export const SKYWAY_LONGEST = 80
+
+/**
+ * A footbridge (a footway, path or cycleway) no longer than `SKYWAY_LONGEST` with an end at or
+ * within `SKYWAY_REACH` of a building: a skyway or an enclosed bridge into an upper floor,
+ * whose height OSM rarely gives.
+ */
+export const isSkyway = (t: Readonly<Record<string, string>>, pts: readonly Vec2[], roofs: readonly Roof[]): boolean => {
+  // A sidewalk beside a street bridge is not a skyway, however near a building it lands.
+  if (!isPath(t) || t.footway === 'sidewalk' || t.footway === 'crossing' || pts.length < 2) return false
+  let length = 0
+  for (let i = 1; i < pts.length; i++) length += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])
+  if (length > SKYWAY_LONGEST) return false
+  const near = (p: Vec2, q: Vec2) => {
+    const len = Math.max(1e-6, Math.hypot(p[0] - q[0], p[1] - q[1]))
+    for (const d of [0, SKYWAY_REACH]) if (buildingAt(roofs, [p[0] + ((p[0] - q[0]) * d) / len, p[1] + ((p[1] - q[1]) * d) / len]) !== null) return true
+    return false
+  }
+  return near(pts[0], pts[1]) || near(pts[pts.length - 1], pts[pts.length - 2])
+}
+
 /** A part of a bridge tower: where it stands (view meters) and the scene z of its top. */
 interface TowerPart { readonly at: Vec2; readonly top: number }
 
@@ -1233,39 +1402,45 @@ export const cableZ = (s: number, total: number, towers: readonly { s: number; t
   return Math.max(deckZ(s) + 0.5, chord - sag * 4 * u * (1 - u))
 }
 
-const bridgePieces = (
-  view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain,
-  ends: BridgeEnds, roofs: readonly Roof[] = [], towers?: readonly Tower[],
-): Item[] => {
-  const spacing = pierSpacing(region, chain)
-  const line = chain.line
-  const t = line.tags
-  const rail = isRail(t)
-  const width = rail ? 4.5 : (roadWidth(t) ?? 6) + 1.5
-  const deck = deckHeight(region, chain)
-  const pts = line.points.map(([lon, lat]) => view.toView(lon, lat))
-  const cum = [0]
-  for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]))
-  const total = cum[cum.length - 1]
-  const pointAt = (s: number): Vec2 => {
-    let i = 1
-    while (i < cum.length - 1 && cum[i] < s) i++
-    const u = (s - cum[i - 1]) / Math.max(1e-9, cum[i] - cum[i - 1])
-    return [pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * u, pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * u]
-  }
-  const ground = (s: number) => terrain.z(pointAt(s))
+/** Distance to the ground along the network at `s`, from the nearest vertex's. */
+const toGroundAt = (ends: BridgeEnds, cum: readonly number[], s: number): number => {
+  let d = Infinity
+  for (let k = 0; k < cum.length; k++) d = Math.min(d, ends.toGround[k] + Math.abs(cum[k] - s))
+  return d
+}
 
+/** How far past a grounded end the ground is read for its abutment, meters. */
+export const ABUTMENT_REACH = 12
+
+/**
+ * The level of a grounded bridge end, from the ground `past(t)` meters beyond it: the rim the
+ * ground climbs to within `ABUTMENT_REACH` where it levels off there (the outer half climbs
+ * less than three quarters as much as the inner half), else the ground at the end.
+ */
+export const abutmentLevel = (past: (t: number) => number): number => {
+  const g0 = past(0)
+  let inner = g0
+  let outer = -Infinity
+  for (let t = 2; t <= ABUTMENT_REACH; t += 2) {
+    if (t <= ABUTMENT_REACH / 2) inner = Math.max(inner, past(t))
+    else outer = Math.max(outer, past(t))
+  }
+  const rise = inner - g0
+  return rise > 0.5 && outer - inner < rise * 0.75 ? Math.max(inner, outer) : g0
+}
+
+/**
+ * The deck's height along a bridge `total` meters long, as a function of `s`: `ground(s)` is
+ * the scene height under it and `clearance(s)` how high over it the deck must be;
+ * `startLevel` and `endLevel` are the scene heights of its two ends. The deck never dips below
+ * the straight line between its ends, and rises above it in straight runs only where the
+ * clearance needs.
+ */
+export const deckProfile = (
+  total: number, ground: (s: number) => number, clearance: (s: number) => number, startLevel: number, endLevel: number,
+): ((s: number) => number) => {
   // The deck profile. A bridge runs fairly straight between its abutments, and never closer to
   // what is under it than its clearance — except where it comes down to meet the ground.
-  // Distance to the ground along the network, from the nearest vertex's.
-  const toGround = (s: number) => {
-    let d = Infinity
-    for (let k = 0; k < cum.length; k++) d = Math.min(d, ends.toGround[k] + Math.abs(cum[k] - s))
-    return d
-  }
-  const clearance = (s: number) => rampClearance(deck, total, s, toGround(s), ends.start, ends.end)
-  const startLevel = ground(0) + ends.start
-  const endLevel = ground(total) + ends.end
   const step = 5
   const samples = Math.max(2, Math.ceil(total / step) + 1)
   const raw: number[] = []
@@ -1293,12 +1468,109 @@ const bridgePieces = (
     const b = hull[h + 1]
     for (let k = a; k <= b; k++) smooth[k] = raw[a] + ((raw[b] - raw[a]) * (k - a)) / Math.max(1, b - a)
   }
-  const zAt = (s: number) => {
+  return (s: number) => {
     const f = (s / Math.max(1e-9, total)) * (samples - 1)
     const k = Math.min(samples - 2, Math.max(0, Math.floor(f)))
     const u = f - k
     return smooth[k] * (1 - u) + smooth[k + 1] * u
   }
+}
+
+/**
+ * Decks that meet at a node meet at one height. A chain that runs on through the node sets the
+ * height there; where only chain ends meet, the highest of them does. An end that joins
+ * another deck then runs straight to that height, so no deck stops short in mid-air above or
+ * below the one it joins. Grounded ends stay on the ground.
+ */
+export const joinDecks = (
+  chains: readonly BridgeChain[], line: readonly ((fix?: { start?: number; end?: number }) => DeckLine)[],
+): DeckLine[] => {
+  const keys = chains.map((c) => c.line.points.map(key))
+  let lines = line.map((f) => f())
+  for (let pass = 0; pass < 3; pass++) {
+    const through = new Map<string, number>()
+    const ended = new Map<string, number>()
+    lines.forEach((l, i) => {
+      const ks = keys[i]
+      for (let k = 1; k + 1 < ks.length; k++) through.set(ks[k], Math.max(through.get(ks[k]) ?? -Infinity, l.zAt(l.cum[k])))
+      ended.set(ks[0], Math.max(ended.get(ks[0]) ?? -Infinity, l.startLevel))
+      ended.set(ks[ks.length - 1], Math.max(ended.get(ks[ks.length - 1]) ?? -Infinity, l.endLevel))
+    })
+    let changed = false
+    lines = lines.map((l, i) => {
+      const ks = keys[i]
+      const want = (k: string, own: number) => through.get(k) ?? ended.get(k) ?? own
+      const start = chains[i].rampStart ? l.startLevel : want(ks[0], l.startLevel)
+      const end = chains[i].rampEnd ? l.endLevel : want(ks[ks.length - 1], l.endLevel)
+      if (Math.abs(start - l.startLevel) < 0.2 && Math.abs(end - l.endLevel) < 0.2) return l
+      changed = true
+      return line[i]({ start, end })
+    })
+    if (!changed) break
+  }
+  return lines
+}
+
+/** A chain's deck line: its points and lengths, view meters, and the deck's height along it. */
+interface DeckLine {
+  readonly pts: Vec2[]
+  readonly cum: number[]
+  readonly total: number
+  readonly zAt: (s: number) => number
+  readonly startLevel: number
+  readonly endLevel: number
+}
+
+/**
+ * The deck line of a chain. A grounded end sits on its abutment; an end that joins another
+ * bridge is at `fix` where given (the height of the deck it joins), else at its clearance.
+ */
+const deckLine = (
+  view: View, region: Region, terrain: Terrain, chain: BridgeChain, ends: BridgeEnds,
+  fix: { start?: number; end?: number } = {},
+): DeckLine => {
+  const deck = deckHeight(region, chain)
+  const pts = chain.line.points.map(([lon, lat]) => view.toView(lon, lat))
+  const cum = [0]
+  for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]))
+  const total = cum[cum.length - 1]
+  const pointAt = (s: number): Vec2 => {
+    let i = 1
+    while (i < cum.length - 1 && cum[i] < s) i++
+    const u = (s - cum[i - 1]) / Math.max(1e-9, cum[i] - cum[i - 1])
+    return [pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * u, pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * u]
+  }
+  const ground = (s: number) => terrain.z(pointAt(s))
+  // A grounded end sits on its abutment. An overpass mapped rim to rim over a cut ends on the
+  // cut's sloping sides in a smoothed ground model while its street runs on at the rim: where
+  // the ground past the end climbs and then levels off within `ABUTMENT_REACH`, the end sits at
+  // that level. Where it goes on climbing (a ramp landing on a hillside), it sits on the ground.
+  const seat = (end: 0 | 1): number => {
+    const [p, q] = end === 0 ? [pts[0], pts[1]] : [pts[pts.length - 1], pts[pts.length - 2]]
+    return abutmentLevel((t) => {
+      const len = Math.max(1e-6, Math.hypot(p[0] - q[0], p[1] - q[1]))
+      return terrain.z([p[0] + ((p[0] - q[0]) * t) / len, p[1] + ((p[1] - q[1]) * t) / len])
+    })
+  }
+  const startLevel = chain.rampStart ? seat(0) : fix.start ?? ground(0) + ends.start
+  const endLevel = chain.rampEnd ? seat(1) : fix.end ?? ground(total) + ends.end
+  // A joined end's own clearance is what the deck it joins gives it.
+  const c0 = chain.rampStart ? ends.start : startLevel - ground(0)
+  const c1 = chain.rampEnd ? ends.end : endLevel - ground(total)
+  const zAt = deckProfile(total, ground, (s) => rampClearance(deck, total, s, toGroundAt(ends, cum, s), c0, c1), startLevel, endLevel)
+  return { pts, cum, total, zAt, startLevel, endLevel }
+}
+
+const bridgePieces = (
+  view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain,
+  dl: DeckLine, roofs: readonly Roof[] = [], towers?: readonly Tower[],
+): Item[] => {
+  const spacing = pierSpacing(region, chain)
+  const line = chain.line
+  const t = line.tags
+  const rail = isRail(t)
+  const width = deckWidth(t)
+  const { pts, cum, zAt } = dl
   const items: Item[] = []
   let traveled = 0
   let nextPier = spacing / 2
@@ -1328,7 +1600,7 @@ const bridgePieces = (
         continue
       }
       const shapes: Shape[] = []
-      // Piers first: they stand behind the fascia.
+      // Piers: they stand behind the fascia.
       while (nextPier <= s1) {
         const u = (nextPier - s0) / Math.max(1e-6, s1 - s0)
         const pz = z0 + (z1 - z0) * u
@@ -1343,7 +1615,22 @@ const bridgePieces = (
           const half = width / 2 - 0.6
           const l: Vec2 = [c[0] - dy * half, c[1] + dx * half]
           const r: Vec2 = [c[0] + dy * half, c[1] - dx * half]
-          shapes.push({ pts: [view.toScreen(l, footZ), view.toScreen(r, footZ), view.toScreen(r, pz - FASCIA), view.toScreen(l, pz - FASCIA)], fill: pal.pier, ink: true })
+          // Each pier is an item of its own, so it takes its place behind a building nearer
+          // the camera even where the deck above passes over that building's edge.
+          const foot = segmentQuad(l, r, 0.4, 0.4)
+          if (foot !== null) {
+            items.push({
+              id: `${line.id}.${i}.${k}.pier${items.length}`,
+              kind: 'bridge',
+              hull: convexHull(foot),
+              zMin: footZ,
+              zMax: Math.min(z0, z1) - FASCIA,
+              key: c[1],
+              shapes: [{ pts: [view.toScreen(l, footZ), view.toScreen(r, footZ), view.toScreen(r, pz - FASCIA), view.toScreen(l, pz - FASCIA)], fill: pal.pier, ink: true }],
+              dots: [],
+              pier: true,
+            })
+          }
         }
         nextPier += spacing
       }
@@ -1368,6 +1655,18 @@ const bridgePieces = (
         shapes.push({ pts: [lo0, lo1, hi1, hi0], fill: pal.fascia, seal: true })
         shapes.push({ pts: [lo0, lo1], fill: 'none', line: true })
       }
+      // An abutment: where a grounded end stands over lower ground, a wall down to it, seen
+      // when the end faces the camera.
+      for (const [at, zEnd, l, r, out] of [
+        [i === 0 && k === 0 && chain.rampStart, z0, ql0, qr0, [p0[0] - p1[0], p0[1] - p1[1]]],
+        [i === pts.length - 2 && k === n - 1 && chain.rampEnd, z1, qr1, ql1, [p1[0] - p0[0], p1[1] - p0[1]]],
+      ] as const) {
+        if (!at || out[1] >= 0) continue
+        const gl = terrain.z(l)
+        const gr = terrain.z(r)
+        if (zEnd - Math.min(gl, gr) <= FASCIA) continue
+        shapes.push({ pts: [view.toScreen(l, Math.min(gl, zEnd)), view.toScreen(r, Math.min(gr, zEnd)), view.toScreen(r, zEnd), view.toScreen(l, zEnd)], fill: pal.fascia, ink: true })
+      }
       const d0 = view.toScreen(ql0, z0)
       const d1 = view.toScreen(ql1, z1)
       const d2 = view.toScreen(qr1, z1)
@@ -1380,7 +1679,8 @@ const bridgePieces = (
         id: `${line.id}.${i}.${k}`,
         kind: 'bridge',
         hull: convexHull(quad),
-        zMin: Math.min(terrain.z(p0), terrain.z(p1)),
+        // The deck's underside: a span over another span or a pier is in front of it.
+        zMin: Math.min(z0, z1) - FASCIA,
         zMax: Math.max(z0, z1),
         key: (p0[1] + p1[1]) / 2,
         shapes,
