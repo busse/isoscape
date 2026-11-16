@@ -7,7 +7,7 @@ social: streetcars-social.jpg
 
 # Richmond's streetcars, 1925
 
-In May 1888 Frank Sprague's electric cars began running on Richmond's hills, the first big electric street railway that worked, and the city grew out along the lines. This map draws the system as it stood in 1925: sixteen car lines over the buildings then standing, with fourteen places the cars ran to framed around it, from the suburbs they made to the trolley parks at the ends of the line.
+By May 1888 Frank Sprague's electric cars were running on Richmond's hills, the first big electric street railway that worked, and the city grew out along the lines. This map draws the system as it stood in 1925: sixteen car lines over the buildings then standing, with fourteen places the cars ran to framed around it, from the suburbs they made to the trolley parks at the ends of the line.
 
 ![The 1925 map, framed by its fourteen stops](streetcars-menu.jpg)
 
