@@ -416,7 +416,7 @@ interface Shaped { readonly solid: Solid; readonly tones: Tones; readonly suffix
  * a tender; a shed's two roof slopes falling to a valley over its posts (a butterfly roof);
  * anything else as its box. `joint` tells the points on a joint with the next piece.
  */
-const shaped = (pal: Palette, whole: Box, b: Box, k: number, n: number, coupled = false): Shaped[] & { joint?: (p: Vec3) => boolean } => {
+export const shaped = (pal: Palette, whole: Box, b: Box, k: number, n: number, coupled = false): Shaped[] & { joint?: (p: Vec3) => boolean } => {
   const [p0, p1, , p3] = b.ring
   const len = Math.hypot(p1[0] - p0[0], p1[1] - p0[1])
   const wid = Math.hypot(p3[0] - p0[0], p3[1] - p0[1])
@@ -467,18 +467,30 @@ const shaped = (pal: Palette, whole: Box, b: Box, k: number, n: number, coupled 
     if (coupled && !frontAtEnd && k === 0) add(slab(hw * 0.7, z0 + 0.3, z0 + 0.72 * H), toneOf('coal'), ':diaphragm', -gap, 0)
     if (coupled && frontAtEnd && k + 1 === n) add(slab(hw * 0.7, z0 + 0.3, z0 + 0.72 * H), toneOf('coal'), ':diaphragm', len, len + gap)
   } else if (whole.tone === 'diesel') {
-    // A diesel passenger unit, its cab to the front: a body with a darker arched roof, the cab's
-    // nose lower than the roof, its windshield, and a band of small windows along the body.
+    // A streamlined passenger cab unit of about 1950, in plain generic form: a full-width body
+    // with a darker arched roof, and at its front a nose that slopes up to a raked windshield
+    // (the "bulldog" nose of the cab units then hauling most named trains), a band of small
+    // windows along the body.
     const t = toneOf('diesel')
     const eave = z0 + 0.8 * H
-    const nose = 2.2
+    const nose = 3.0
     add(slab(hw, z0, eave), t, '', ...at(nose, total))
     add([[-hw, eave], [hw, eave], [hw * 0.8, z0 + 0.93 * H], [0, z1], [-hw * 0.8, z0 + 0.93 * H]], toneOf('carRoof', pal.parts.diesel[1]), ':roof', ...at(nose, total))
-    add(slab(hw, z0, z0 + 0.5 * H), t, ':nose', ...at(0, nose))
-    add(slab(hw * 0.9, z0 + 0.5 * H, eave), toneOf('glass'), ':windshield', ...at(nose - 0.35, nose))
-    for (const side of [1, -1]) {
-      add([[side * hw, z0 + 0.55 * H], [side * (hw + 0.05), z0 + 0.55 * H], [side * (hw + 0.05), z0 + 0.7 * H], [side * hw, z0 + 0.7 * H]], toneOf('glass'), side > 0 ? ':windows' : ':windows-b', ...at(nose + 0.8, nose + 2.6))
-      add([[side * hw, z0 + 0.6 * H], [side * (hw + 0.05), z0 + 0.6 * H], [side * (hw + 0.05), z0 + 0.7 * H], [side * hw, z0 + 0.7 * H]], toneOf('glass'), side > 0 ? ':ports' : ':ports-b', ...at(6, total - 2))
+    // The nose, its side profile swept across the unit's width: d meters behind the front.
+    const local = (d: number) => (frontAtEnd ? total - d : d) - off
+    const inPiece = [0, nose].every((d) => local(d) >= w0 - 1e-6 && local(d) <= w1 + 1e-6)
+    if (inPiece) {
+      const side = (pts: [number, number][]): Vec2[] => pts.map(([d, z]): Vec2 => [local(d), z0 + z * H])
+      const across = (pr: Vec2[], tones: Tones, suffix: string, half = hw) => out.push({ solid: sweep(pr, origin, w, u, -half, half), tones, suffix })
+      across(side([[0, 0], [nose, 0], [nose, 0.8], [2.0, 0.78], [0.9, 0.58], [0, 0.4]]), t, ':nose')
+      // The windshield, a thin pane laid on the slope from the nose to the cab's roof.
+      const slope = (d: number) => 0.58 + ((d - 0.9) * 0.2) / 1.1
+      const o = 0.05 / H
+      across(side([[1.05, slope(1.05) + 0.002], [1.95, slope(1.95) + 0.002], [1.95, slope(1.95) + o], [1.05, slope(1.05) + o]]), toneOf('glass'), ':windshield', hw * 0.85)
+    }
+    for (const sd of [1, -1]) {
+      add([[sd * hw, z0 + 0.55 * H], [sd * (hw + 0.05), z0 + 0.55 * H], [sd * (hw + 0.05), z0 + 0.7 * H], [sd * hw, z0 + 0.7 * H]], toneOf('glass'), sd > 0 ? ':windows' : ':windows-b', ...at(nose + 0.4, nose + 1.8))
+      add([[sd * hw, z0 + 0.6 * H], [sd * (hw + 0.05), z0 + 0.6 * H], [sd * (hw + 0.05), z0 + 0.7 * H], [sd * hw, z0 + 0.7 * H]], toneOf('glass'), sd > 0 ? ':ports' : ':ports-b', ...at(6, total - 2))
     }
   } else if (whole.tone === 'freight') {
     add([[-hw, z0], [hw, z0], [hw, z0 + 0.8 * H], [hw * 0.55, z0 + 0.96 * H], [0, z1], [-hw * 0.55, z0 + 0.96 * H], [-hw, z0 + 0.8 * H]], toneOf('freight', pal.parts.roof[2]), '')

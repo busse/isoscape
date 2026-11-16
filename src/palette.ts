@@ -72,7 +72,8 @@ export interface Palette {
    * boxcar-red freight; and, for the larger trains of a cutaway, an engine's iron in a grey
    * light enough for its edges to show, the coal in its tender, and a coach's darker roof.
    * Main Street Station's buff brick and red clay tile, the painted steel of its train shed, the
-   * ballast of its elevated tracks, and a diesel engine in a plain grey.
+   * ballast of its elevated tracks, and a diesel engine in a plain mid grey, light enough for
+   * its edges to show.
    */
   readonly parts: Readonly<Record<PartTone, readonly [string, string, string]>>
   /**
@@ -168,7 +169,7 @@ const paper: Palette = {
     tile: ['#b46049', '#844232', '#a9553f'],
     steel: ['#7d7f86', '#5c5e65', '#8e9096'],
     ballast: ['#b5aa90', '#948a72', '#aca186'],
-    diesel: ['#66696d', '#45474b', '#54575b'],
+    diesel: ['#9a9da1', '#7b7e83', '#8a8d92'],
   },
   poche: '#2c2b33',
   cutOutline: '#2c2b33',

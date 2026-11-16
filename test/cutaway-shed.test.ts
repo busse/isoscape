@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { corners, frameSolids, insetRing, insetSolids, newell, sectionOf, cutPlane, trackSolids, TRACK, type Solid } from '../src/cutaway.ts'
-import { ghostItem, partSolids, FRAME_PIECE, sideElevation } from '../src/cutaway-scene.ts'
+import { ghostItem, partSolids, FRAME_PIECE, sideElevation, shaped, shortPieces } from '../src/cutaway-scene.ts'
 import { palette } from '../src/palette.ts'
 import type { HistoryFeature } from '../src/history.ts'
 import type { Vec2 } from '../src/geom.ts'
@@ -95,4 +95,19 @@ test('a dormer on a roof shell paints after its sides', async () => {
   const hull: Vec2[] = [[0, 0], [10, 0], [10, 10], [0, 10]]
   const item = (id: string, z0: number, z1: number, extra = {}) => ({ id, kind: 'building' as const, hull, zMin: z0, zMax: z1, key: 5, shapes: [], dots: [], ...extra })
   assert.equal(compare(item('dormer', 1, 3, { over: 'roof', key: 9 }), item('side', 0, 5, { shell: { id: 'roof', faces: 1 }, key: 1 })), 1)
+})
+
+test('a diesel cab unit: a sloped nose and its windshield at the front piece only, under the roof', () => {
+  const ring: Vec2[] = [[0, 0], [21.3, 0], [21.3, 3.2], [0, 3.2]]
+  const unit = { id: 'u:0', ring, z0: 0.6, z1: 4.4, tone: 'diesel' as const, front: [-1, 0] as Vec2 }
+  const pieces = shortPieces(unit)
+  const made = pieces.map((p, k) => shaped(palette('paper'), unit, p, k, pieces.length))
+  const with_ = (sfx: string) => made.filter((m) => m.some((s) => s.suffix === sfx)).length
+  assert.equal(with_(':nose'), 1)
+  assert.equal(with_(':windshield'), 1)
+  const nose = made.flat().find((s) => s.suffix === ':nose')!
+  const xs = corners(nose.solid).map((p) => p[0])
+  assert.ok(Math.min(...xs) < 0.01 && Math.max(...xs) <= 3.01, 'the nose is the front 3 m')
+  const top = Math.max(...corners(nose.solid).map((p) => p[2]))
+  assert.ok(top < 4.4 && top > 3.0, 'it rises to the cab, below the roof')
 })

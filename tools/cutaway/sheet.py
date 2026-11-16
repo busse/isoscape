@@ -178,6 +178,10 @@ def main():
     iso_body = re.sub(r'<text\b[^>]*>.*?</text>', '', iso_body, flags=re.S)
     cap = max(28, (vb[2] - 48) * 0.022) * 2.4
     iso_vb = [vb[0], vb[1] + cap, vb[2], vb[3] - cap]
+    if spec.get('isoView'):
+        # A closer frame on the plate (x, y, w, h in its own units): what runs past it, a track
+        # or a trestle, is cut at the frame's edge.
+        iso_vb = list(spec['isoView'])
     svb, sec_body = inner(sec_svg)
     if cross:
         # A second flat section (a cross section), beside the first at the same scale.
@@ -192,7 +196,7 @@ def main():
     iso_h = iso_vb[3] * s_iso
     # Wayfinding labels under the plate push the sections down when they run past two lines.
     WF = 50
-    low = max([len(wf['lines']) for wf in spec.get('wayfinding', []) if wf['place'] != 'top-right'] or [0])
+    low = max([len(wf['lines']) for wf in spec.get('wayfinding', []) if wf['place'] != 'top-right' and 'label' not in wf] or [0])
     push = max(0, (low - 2) * WF * 1.42)
     # The flat section beneath, no taller than SEC_H, from the left edge of the art; with a
     # cross section, the two side by side at one scale, bottoms level.
@@ -293,7 +297,7 @@ def main():
         lines = [ln.upper() for ln in wf['lines']]
         wmax = max(font('bold', WF).getlength(ln) + 3 * len(ln) for ln in lines)
         lh = WF * 1.42
-        x0, y0 = {
+        x0, y0 = wf['label'] if 'label' in wf else {
             'top-right': (ART_R - wmax, top - 215),
             'bottom-right': (ART_R - wmax, iso_rect[1] + iso_rect[3] + 70),
             'bottom-left': (M + 20, iso_rect[1] + iso_rect[3] + 70),
@@ -305,7 +309,12 @@ def main():
         # The leader: from the label's nearer edge to the place, ending in a dot.
         lx = x0 - 30 if ax < x0 else min(ax, x0 + wmax + 60)
         ly = y0 + lh * len(lines) - lh / 2 if ay > y0 else y0 - WF - 26
-        if wf['place'] != 'top-right':
+        if 'label' in wf:
+            # A label set where the spec says (`label`, its first baseline): the leader leaves
+            # the point of its box nearest the place it names, so it stays short.
+            lx = min(max(ax, x0 - 30), x0 + wmax + 60)
+            ly = min(max(ay, y0 - WF - 26), y0 - WF - 26 + lh * len(lines) + 34)
+        elif wf['place'] != 'top-right':
             ly = y0 - WF - 26
             lx = max(x0 - 30, min(ax, x0 + wmax + 60))
         out.append(f'<path d="M{lx:.0f} {ly:.0f}L{ax:.0f} {ay:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>')
@@ -335,6 +344,11 @@ def main():
         ky += 68
     if ky > H - 120:
         print(f'warning: the column runs to {ky:.0f}, past the credit line', file=sys.stderr)
+    elif spec.get('columnEnd') and ky > spec['columnEnd']:
+        # The room the print's title block needs below the column (stamp.py places it there).
+        print(f"warning: the column runs to {ky:.0f}, into the title block's room (columnEnd {spec['columnEnd']})", file=sys.stderr)
+    if os.environ.get('SHEET_DEBUG'):
+        print(f'column ends at {ky:.0f}', file=sys.stderr)
     out.append(text(M, H - 150, spec['credit'], 46, 'regular', DIM))
     out.append('</svg>')
     sheet = os.path.join(a.out, f'{name}-sheet.svg')
