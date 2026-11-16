@@ -1,0 +1,43 @@
+{
+ "about": "The sheet for the Broad Street Station cutaway: tools/cutaway/sheet.py. Callouts are anchored to drawn parts (history ids, in the isometric view and the flat section); a badge's style is the anchored part's confidence unless `confidence` says otherwise. Callout text is a working draft, written with Claude, for the artist to edit.",
+ "region": "broad-street-station-cutaway",
+ "year": 1943,
+ "title": "Broad Street Station, 1943",
+ "subtitle": "Cut down the middle, from the Broad Street doors to the trains",
+ "sectionCaption": "The same cut, seen flat: Broad Street on the left, the trains on the right",
+ "groups": [
+  {
+   "title": "The way to the train",
+   "callouts": [
+    {"n": 1, "title": "Broad Street", "text": "The streetcar stops at the forecourt.", "iso": {"at": [-77.46628, 37.56041]}, "section": {"s": -52, "elevation": 67.5}, "confidence": "drawn"},
+    {"n": 2, "title": "The portico", "text": "Six columns between two piers.", "iso": {"part": "history:bss-c-column-2", "dy": -0.35}, "section": {"part": "history:bss-c-entablature", "dy": -0.9}},
+    {"n": 3, "title": "Vestibule", "text": "Entrance halls on each side, with stairs and elevators up to the offices.", "iso": {"part": "history:bss-c-entrance-hall-2-stair"}, "section": {"part": "history:bss-c-vestibule-1-column-1", "dy": -0.2}},
+    {"n": 4, "title": "White Waiting Room", "text": "The main hall: a barrel vault, long benches, the dome above.", "iso": {"part": "history:bss-c-hall-bench-2"}, "section": {"part": "history:bss-c-hall-west-lunette-7", "dy": 0.9}},
+    {"n": 5, "title": "Tickets, Pullman, Information", "text": "Counters along the east side of the hall.", "iso": {"part": "history:bss-c-band-counter-2"}},
+    {"n": 6, "title": "Colored Waiting Room", "text": "Virginia law kept Black and white passengers apart. This wing had its own lunch room, smoking room and toilets.", "iso": {"part": "history:bss-c-cwr-floor-mark"}},
+    {"n": 7, "title": "Lunch room and dining room", "text": "In the west wing, with the kitchen behind.", "iso": {"part": "history:bss-c-west-wing", "dx": -0.2, "dy": -0.38}},
+    {"n": 8, "title": "Baggage and parcel check", "text": "In the east wing, off the checking lobby.", "iso": {"part": "history:bss-c-baggage-counter"}},
+    {"n": 9, "title": "The concourse", "text": "A long room out over the tracks.", "iso": {"part": "history:bss-c-concourse-deck", "dx": 0.15}, "section": {"part": "history:bss-c-concourse-roof", "dy": 3.0}},
+    {"n": 10, "title": "Stairs", "text": "Down from the concourse to each platform.", "iso": {"part": "history:bss-c-stair-2"}, "section": {"s": 53.5, "elevation": 64.5}},
+    {"n": 11, "title": "Platforms and sheds", "text": "Butterfly sheds over each platform.", "iso": {"part": "history:bss-canopy-3-south-cut:5"}, "confidence": "drawn"},
+    {"n": 12, "title": "The trains", "text": "RF&P and Atlantic Coast Line. 33,324 passengers on April 22, 1943, the busiest day.", "iso": {"part": "history:bss-track-2:9"}, "section": {"s": 37, "elevation": 63.0}, "confidence": "written"}
+   ]
+  },
+  {
+   "title": "The building",
+   "callouts": [
+    {"n": 13, "title": "The dome", "text": "Tile in 1943. The copper came in 1955.", "iso": {"part": "history:bss-c-dome", "dy": -0.25}, "section": {"part": "history:bss-c-dome", "dy": -0.6}},
+    {"n": 14, "title": "Offices", "text": "Four floors in each wing: Trainmaster, Superintendent of Telegraph, General Superintendent.", "iso": {"part": "history:bss-c-front-floor-3"}, "section": {"part": "history:bss-c-front-floor-3", "dx": -0.6}},
+    {"n": 15, "title": "Basement", "text": "Under the whole building, on piers.", "section": {"s": 4, "elevation": 64.0}, "confidence": "drawn"}
+   ]
+  }
+ ],
+ "key": [
+  ["drawn", "drawn from a plan, a section or a survey map"],
+  ["written", "from written accounts"],
+  ["approximate", "approximate: no drawing shows it"]
+ ],
+ "sources": "Sources: The American Architect, July 9, 1919 (first-floor plan, Plate 15; sections, Plates 17 and 18); Sanborn fire-insurance atlas, 1925; USGS Richmond quadrangles, 1934 and 1956; OpenStreetMap.",
+ "notes": "Dashed outline: the east half of the building, lifted away, with its ground floor left in place. Heights scaled from the 1919 sections, whose figures are illegible.",
+ "credit": "Drawn by Chris Busse with isoscape, built with Claude  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP"
+}
