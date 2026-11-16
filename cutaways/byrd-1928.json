@@ -1,0 +1,375 @@
+{
+ "about": "The sheet for the Byrd Theatre cutaway: tools/cutaway/sheet.py. Callouts are anchored to drawn parts (history ids, in the isometric view and the flat section); each callout gives its badge's confidence. Callout text is a working draft, written with Claude, for the artist to edit. The holly border and the red and green of the title and headings are sheet decoration, not part of the drawing.",
+ "design": "byrd-1928-cutaway",
+ "region": "byrd-theatre-cutaway",
+ "year": 1928,
+ "theme": "holiday",
+ "halo": true,
+ "mapData": false,
+ "title": "The Byrd Theatre, Christmas Eve 1928",
+ "subtitle": "Opening night, cut down the middle from the Cary Street doors to the screen",
+ "sectionCaption": "The same cut, seen flat: Cary Street on the left, the stage and the organ on the right",
+ "groups": [
+  {
+   "title": "From the sidewalk to a seat",
+   "traveler": true,
+   "callouts": [
+    {
+     "n": 1,
+     "title": "West Cary Street",
+     "text": "Red brick and white terra cotta, a black marble box office, and a plain bronze marquee with no lettering. The corner sign is drawn without its letters.",
+     "iso": {
+      "part": "history:byrd-c-front-frieze",
+      "dx": -0.3,
+      "badge": [
+       -170,
+       -120
+      ]
+     },
+     "section": {
+      "s": 0.3,
+      "elevation": 18.0,
+      "badge": [
+       -170,
+       -60
+      ]
+     },
+     "confidence": "written"
+    },
+    {
+     "n": 2,
+     "title": "Two sets of doors",
+     "text": "An outer lobby between two sets of a dozen brass-framed glass doors (28 doors, by a 1986 count).",
+     "iso": {
+      "part": "history:byrd-c-doors-inner-1",
+      "badge": [
+       110,
+       170
+      ]
+     },
+     "section": {
+      "part": "history:byrd-c-doors-inner-1",
+      "badge": [
+       0,
+       200
+      ]
+     },
+     "confidence": "written"
+    },
+    {
+     "n": 3,
+     "title": "The lobby",
+     "text": "A vaulted, gold-leafed ceiling twenty-five feet up, marble halfway up the walls, and a mezzanine lounge on three sides. Its plan is approximate.",
+     "iso": {
+      "part": "history:byrd-c-lobby-marble",
+      "dx": -0.2,
+      "badge": [
+       -120,
+       -150
+      ]
+     },
+     "section": {
+      "part": "history:byrd-c-lobby-ceiling",
+      "dx": -0.25,
+      "badge": [
+       0,
+       -150
+      ]
+     },
+     "confidence": "written"
+    },
+    {
+     "n": 4,
+     "title": "Pool and fountain",
+     "text": "Twenty feet by eight, with a fountain and fish; a candy stand replaced it about 1940. Its place is approximate.",
+     "iso": {
+      "part": "history:byrd-c-pool-water",
+      "badge": [
+       -140,
+       90
+      ]
+     },
+     "section": {
+      "part": "history:byrd-k-fountain",
+      "badge": [
+       0,
+       -170
+      ]
+     },
+     "confidence": "approximate"
+    },
+    {
+     "n": 5,
+     "title": "Orchestra",
+     "text": "916 seats today, 19 inches wide, in red velvet. The rows and aisles of 1928 are not recorded.",
+     "iso": {
+      "part": "history:byrd-k-orch-seats-8-3",
+      "badge": [
+       160,
+       120
+      ]
+     },
+     "section": {
+      "part": "history:byrd-c-orch-floor-16",
+      "badge": [
+       0,
+       180
+      ]
+     },
+     "confidence": "approximate"
+    },
+    {
+     "n": 6,
+     "title": "Balcony",
+     "text": "476 seats today. Its depth and rake are approximate.",
+     "iso": {
+      "part": "history:byrd-c-bal-front",
+      "dx": 0.1,
+      "badge": [
+       90,
+       -170
+      ]
+     },
+     "section": {
+      "part": "history:byrd-c-bal-tier-7",
+      "badge": [
+       150,
+       -110
+      ]
+     },
+     "confidence": "approximate"
+    },
+    {
+     "n": 7,
+     "title": "Segregated",
+     "text": "The Byrd was segregated: Black patrons were not admitted until the 1960s. Where seats were set apart is not known; none are drawn.",
+     "confidence": "written"
+    }
+   ]
+  },
+  {
+   "title": "The house",
+   "callouts": [
+    {
+     "n": 8,
+     "title": "Dome and chandelier",
+     "text": "Four thousand crystals and three hundred bulbs in four colors, some two tons, lowered for relamping.",
+     "iso": {
+      "part": "history:byrd-k-chandelier",
+      "dy": 0.15,
+      "badge": [
+       -170,
+       40
+      ]
+     },
+     "section": {
+      "part": "history:byrd-k-chandelier",
+      "dy": 0.2,
+      "badge": [
+       -170,
+       0
+      ]
+     },
+     "confidence": "written"
+    },
+    {
+     "n": 9,
+     "title": "Murals",
+     "text": "Six in niches high on the side walls and more behind the boxes, by Arthur Brounet. The paintings are not drawn.",
+     "section": {
+      "part": "history:byrd-c-niche-2",
+      "badge": [
+       0,
+       -210
+      ]
+     },
+     "confidence": "written"
+    },
+    {
+     "n": 10,
+     "title": "Projection booth",
+     "text": "Two Simplex projectors, Vitaphone sound, and the switchboard for every light, the curtain and the masking. Its place is approximate.",
+     "iso": {
+      "part": "history:byrd-k-projector-1",
+      "badge": [
+       -150,
+       -130
+      ]
+     },
+     "section": {
+      "part": "history:byrd-c-booth-floor",
+      "badge": [
+       -120,
+       -150
+      ]
+     },
+     "confidence": "approximate"
+    },
+    {
+     "n": 11,
+     "title": "Air tunnels",
+     "text": "Three concrete tunnels under the floor carried the cooled air. Their routes are not known.",
+     "section": {
+      "part": "history:byrd-c-tunnel-3-roof",
+      "dx": 0.1,
+      "badge": [
+       0,
+       170
+      ]
+     },
+     "confidence": "approximate"
+    }
+   ]
+  },
+  {
+   "title": "The Wurlitzer",
+   "callouts": [
+    {
+     "n": 12,
+     "title": "Gold grille",
+     "text": "Along the whole proscenium, hiding the openings of the organ chambers.",
+     "iso": {
+      "part": "history:byrd-c-grille-5",
+      "dy": 0.2,
+      "badge": [
+       -160,
+       -150
+      ]
+     },
+     "section": {
+      "part": "history:byrd-c-grille-rail-2",
+      "badge": [
+       -150,
+       -80
+      ]
+     },
+     "confidence": "written"
+    },
+    {
+     "n": 13,
+     "title": "Organ chambers",
+     "text": "Opus 1948, four manuals and seventeen ranks, in two rooms over the stage, with a room for the relays. Their layout is approximate.",
+     "iso": {
+      "part": "history:byrd-k-chest-5",
+      "badge": [
+       120,
+       -170
+      ]
+     },
+     "section": {
+      "part": "history:byrd-k-chest-3",
+      "badge": [
+       -60,
+       -200
+      ]
+     },
+     "confidence": "approximate"
+    },
+    {
+     "n": 14,
+     "title": "The console",
+     "text": "Mahogany, on its own lift from the open pit. On opening night Carl Rhond played, with Velma Beck and Winston Neville; the program was a film and the organ.",
+     "iso": {
+      "part": "history:byrd-k-console",
+      "badge": [
+       170,
+       60
+      ]
+     },
+     "section": {
+      "part": "history:byrd-k-console",
+      "badge": [
+       120,
+       200
+      ]
+     },
+     "confidence": "written"
+    },
+    {
+     "n": 15,
+     "title": "Piano and harp",
+     "text": "In the boxes either side of the stage, played from the console. Which held which is not known.",
+     "section": {
+      "part": "history:byrd-c-box-west-front",
+      "badge": [
+       -170,
+       0
+      ]
+     },
+     "confidence": "written"
+    }
+   ]
+  }
+ ],
+ "key": [
+  [
+   "drawn",
+   "drawn from a plan or a section: none was found"
+  ],
+  [
+   "written",
+   "from written accounts or photographs"
+  ],
+  [
+   "approximate",
+   "approximate: placed from descriptions"
+  ]
+ ],
+ "keyNote": "The same marks, small, stand before the streetcar line and the street.",
+ "travelerKey": "A patron, drawn to scale: 1.75 m (5 ft 9 in) tall. The red line is the way from the sidewalk to a seat.",
+ "sources": "Sources: National Register nomination, Byrd Theatre (Virginia DHR 127-0287, 1977–79), with its USGS map; Miles J. Rudisill Jr., Theatre Organ, Jan.–Feb. 1986, and its 1928 photographs; Byrd Theatre Foundation (About; Theatre History; The Mighty Wurlitzer Organ; balcony seats, Jan. 2025); Wikipedia, Byrd Theatre, for today's seat counts and, citing the Richmond Times-Dispatch (April 8, 2002), segregation; the front c. 1929 (RVA Rephotography Project); HMDB marker 152369; National Weather Service, Richmond Christmas Day records; Museum District Association.",
+ "notes": "No plan, section or seating chart of the building was found. Rooms are placed from written descriptions and photographs inside the 84 x 135 ft lot; only the lot and the lobby's height are given in feet. Sources differ: 1,396 seats (the nomination, used here), 1,390 (1986), 1,392 (Wikipedia), 1,200 (the foundation today); 4,000 crystals and two tons (the nomination) or 5,000 and two and a half tons (the foundation); three organ chambers (the nomination), two and a relay room (the foundation), or four rooms. The cut runs 5 ft east of the center line, so the chandelier and the console stand whole. The building east of the theatre stands on the side lifted away and is left out. Cary Street, its sidewalks and the shops to the west are approximate: no map data was at hand, so the ground is drawn flat. No snow: the Weather Service records none on the ground in Richmond on Christmas Day 1928. No decorations are drawn in the building, since no account of any was found. The holly and the red and green of the title and headings are the sheet's own decoration.",
+ "credit": "Drawn by Chris Busse with isoscape, built with Claude",
+ "layout": {
+  "isoHeight": 3750,
+  "isoAlign": "left",
+  "notes": {
+   "x": 4380,
+   "y": 5000,
+   "w": 3020
+  },
+  "bottom": 420
+ },
+ "wayfinding": [
+  {
+   "id": "belmont",
+   "at": [
+    -77.47803977,
+    37.55220828
+   ],
+   "place": "inside-left-below",
+   "confidence": "written",
+   "lines": [
+    "Sheppard Street, the next corner west:",
+    "the Belmont car line, north to Broad",
+    "and south toward Byrd Park"
+   ],
+   "sources": [
+    "Museum District Association, history of the Museum District (the Belmont line ran north and south from Broad and Sheppard streets to the Byrd Park area)",
+    "history/richmond-streetcars.json: the Belmont line, 1895–1949, after the Library of Virginia's 1925 transit plate"
+   ],
+   "text": "Sheppard Street, the next corner west: the Belmont car line, north to Broad Street and south toward Byrd Park.",
+   "offset": [
+    0,
+    330
+   ]
+  },
+  {
+   "id": "cary-east",
+   "at": [
+    -77.47771387,
+    37.55208142
+   ],
+   "place": "below",
+   "confidence": "approximate",
+   "lines": [
+    "West Cary Street, east to the Boulevard",
+    "and on toward downtown"
+   ],
+   "sources": [
+    "USGS 7.5-minute quadrangle, Richmond, 1964, as reproduced in the National Register nomination (read from the map image, approximate)"
+   ],
+   "text": "West Cary Street, east to the Boulevard and on toward downtown."
+  }
+ ]
+}

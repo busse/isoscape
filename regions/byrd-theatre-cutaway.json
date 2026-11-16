@@ -1,0 +1,112 @@
+{
+  "title": "The Byrd Theatre, Christmas Eve 1928: cut down the middle",
+  "data": "richmond-i195-rocketts",
+  "center": [
+    -77.4777777,
+    37.5523787
+  ],
+  "width": 59.5,
+  "depth": 49.0,
+  "bearing": 330.0,
+  "snap": false,
+  "scale": 20,
+  "squash": 0.55,
+  "exaggeration": 1.0,
+  "slab": 0,
+  "palette": "winter",
+  "minBuildingArea": 12,
+  "dots": "none",
+  "time": {
+    "history": "history/byrd-theatre.json"
+  },
+  "cutaway": {
+    "through": [
+      -77.47783371,
+      37.55222366
+    ],
+    "bearing": 26.0,
+    "remove": "right",
+    "floor": 0.3,
+    "keep": 1.5,
+    "parts": "byrd-c-",
+    "outline": {
+      "parts": [
+        "byrd-w-"
+      ],
+      "offset": 0.3
+    },
+    "section": {
+      "from": -6,
+      "to": 42,
+      "beyond": 16,
+      "other": 4,
+      "scale": 25,
+      "earth": 1.5,
+      "route": [
+        [
+          -3.6,
+          0.95
+        ],
+        [
+          0.4,
+          0.95
+        ],
+        [
+          0.6,
+          1.25
+        ],
+        [
+          13.6,
+          1.25
+        ],
+        [
+          24.8,
+          0.275
+        ]
+      ],
+      "travelers": [
+        {
+          "s": -2.2,
+          "floor": 0,
+          "facing": 1
+        },
+        {
+          "s": 7.0,
+          "floor": 0.3,
+          "facing": 1
+        },
+        {
+          "s": 24.8,
+          "floor": -0.675,
+          "facing": 1
+        }
+      ]
+    },
+    "travelers": [
+      {
+        "at": [
+          -77.47789257,
+          37.55223047
+        ],
+        "floor": 0,
+        "facing": 1
+      },
+      {
+        "at": [
+          -77.47777742,
+          37.55226212
+        ],
+        "floor": 0.3,
+        "facing": 1
+      },
+      {
+        "at": [
+          -77.47767488,
+          37.55241137
+        ],
+        "floor": -0.675,
+        "facing": 1
+      }
+    ]
+  }
+}
