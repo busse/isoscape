@@ -116,6 +116,46 @@ sections, with featured regions first and folded sections closed. `"shop"` (`lab
 `cta`, and `links` keyed by region prefix) adds the shop button and a "Buy a print" button on
 matching views. See this repo's own `isoscape.config.json`.
 
+### Static pages and search
+
+The explorer is one page that routes with the URL fragment, so a search engine sees a single
+address, and the share pages forward into it at once. So `isoscape explorer` (and every build)
+also writes a plain HTML page for everything worth finding, beside `index.html`:
+
+- `p/<slug>.html`: every content page, its whole text in the document, with GitHub-style
+  anchors, links between pages as files, its images copied into `p/`, and "Open this in the
+  explorer". Where the page's maps (or the section that tells its story) have a shop link,
+  "Prints of this map" goes to it.
+- `m/<region>.html`: every region's newest build, with its picture, "How this view was made"
+  (the same text as the explorer's tab, from `src/story.ts`), "Explore this map" (the lasting
+  route `#<region>` or `#<region>:<year>`) and "Buy a print" (the explorer's shop rule). A dated
+  series of more than one year gets a series page there instead, with every year, and
+  `m/<region>-<year>.html` for each year, linked to each other.
+- `sitemap.xml`: `index.html` and every one of those pages, with the date of the build or of
+  the page's last commit. Written only when the site URL is known (sitemaps need absolute URLs).
+
+Each page has its own title, description, canonical URL, link-preview tags, JSON-LD
+(`Article` for content pages, `VisualArtwork` for maps, by Chris Busse), the explorer's colors
+and type, and the site's Google Analytics when `analytics.ga` is set. Shop links carry the
+campaign tags the explorer adds when they are clicked, written in at build time:
+`utm_source=isoscape-explorer&utm_medium=referral&utm_campaign=<page slug or region>`.
+
+Map pages are named by region, not by build id, so a rebuild keeps their address; build ids
+change with every build. The share pages in `s/` keep their addresses and their forwarding
+(links already shared still open the explorer at the exact view), name the matching static
+page as canonical, and link to it. `index.html` lists every static page in a folded
+"Every map and page as a plain web page" at the foot of the front page, and without script shows
+only that. Pages of regions or content pages that are gone are removed from `m/` and `p/`.
+
+**Submitting the sitemap.** A GitHub Pages project site lives under a path
+(`https://busse.github.io/isoscape/`) and cannot serve the host's root `robots.txt`, so no
+`robots.txt` can point to the sitemap. Every page names it in its head
+(`<link rel="sitemap" href="sitemap.xml">`), but search engines do not rely on that: the site's
+owner must submit `https://busse.github.io/isoscape/sitemap.xml` once in
+[Google Search Console](https://search.google.com/search-console) (add the URL-prefix property
+`https://busse.github.io/isoscape/`, verify it with the HTML-file or meta-tag method, then
+Sitemaps → Add), and in Bing Webmaster Tools if wanted. After that, each publish updates it.
+
 ### Adding a page
 
 Pages are Markdown files in `pages/`, compiled into `out/index.html` whenever it is
@@ -152,7 +192,7 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   schemes. Files starting with `_` (drafts) and `README.md` are skipped.
 - `npm test` checks that every in-page link in `pages/` lands on a real section, and that the
   sections the "How this view was made" tab links to exist in `how-its-made.md`. If you
-  rename a heading there, update `story` in `src/explorer.ts` too.
+  rename a heading there, update `makeStory` in `src/story.ts` too.
 
 ```sh
 node bin/isoscape.js build richmond-downtown-topo --note "lighter foam"   # say what you tried

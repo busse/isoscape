@@ -73,23 +73,38 @@ export const pageLink = (slug: string, href: string, siteUrl?: string): string =
 }
 
 /**
+ * How a page is compiled for somewhere other than the explorer. The static pages
+ * (static-pages.ts) keep GitHub's heading ids, turn explorer routes into links between files,
+ * and link images as files beside the page instead of inlining them.
+ */
+export interface CompileMode {
+  /** Prefix for heading ids in the HTML (default `p-<slug>-`, the explorer's). */
+  readonly idPrefix?: string
+  /** Rewrite a link once it is an explorer route (or left as written), given this page's slug. */
+  readonly route?: (href: string, slug: string) => string
+  /** Link an image file beside the page by this href instead of inlining it (called only for files that exist). */
+  readonly imageHref?: (name: string) => string
+}
+
+/**
  * Compile one page. `readAsset` returns the bytes of a file beside the page, or null; it is
  * only ever asked for plain file names with a known image extension.
  */
-export const compilePage = (src: string, fileName: string, readAsset: (name: string) => Buffer | null = () => null, siteUrl?: string): Page => {
+export const compilePage = (src: string, fileName: string, readAsset: (name: string) => Buffer | null = () => null, siteUrl?: string, mode: CompileMode = {}): Page => {
   const { data, body } = frontMatter(src)
   const slug = data.slug ?? basename(fileName, extname(fileName))
   if (!SLUG.test(slug)) throw new Error(`pages/${fileName}: slug "${slug}" must be lower-case letters, digits and hyphens`)
   const order = data.order === undefined ? 100 : Number(data.order)
   const result = markdown(body, {
-    idPrefix: `p-${slug}-`,
-    link: (href) => pageLink(slug, href, siteUrl),
+    idPrefix: mode.idPrefix ?? `p-${slug}-`,
+    link: (href) => (mode.route === undefined ? pageLink(slug, href, siteUrl) : mode.route(pageLink(slug, href, siteUrl), slug)),
     image: (src) => {
       const name = src.replace(/^\.\//, '')
       const mime = MIME[extname(name).toLowerCase()]
       if (mime === undefined || !/^[\w.-]+$/.test(name) || name.startsWith('.')) return /^https?:/i.test(src) ? src : null
       const bytes = readAsset(name)
-      return bytes === null ? null : `data:${mime};base64,${bytes.toString('base64')}`
+      if (bytes === null) return null
+      return mode.imageHref === undefined ? `data:${mime};base64,${bytes.toString('base64')}` : mode.imageHref(name)
     },
   })
   const first = result.headings.find((h) => h.level === 1)
@@ -114,7 +129,7 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
 }
 
 /** Every `*.md` in the pages folder, in nav order. A missing folder is no pages. */
-export const loadPages = (dir: string = PAGES_DIR, siteUrl?: string): Page[] => {
+export const loadPages = (dir: string = PAGES_DIR, siteUrl?: string, mode: CompileMode = {}): Page[] => {
   let files: string[]
   try {
     files = readdirSync(dir).filter((f) => f.endsWith('.md') && !f.startsWith('_') && f.toLowerCase() !== 'readme.md')
@@ -128,7 +143,7 @@ export const loadPages = (dir: string = PAGES_DIR, siteUrl?: string): Page[] => 
       } catch {
         return null
       }
-    }, siteUrl),
+    }, siteUrl, mode),
   )
   const seen = new Set<string>()
   for (const p of pages) {
