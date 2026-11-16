@@ -12,7 +12,7 @@ import {
   pointInRing, signedArea, simplifyRing, type Ring, type Vec2,
 } from './geom.ts'
 import {
-  buildingClass, buildingHeights, groundKind, isBridge, isPath, isRail, roadWidth, waterwayWidth, type GroundKind,
+  buildingClass, buildingHeights, groundKind, isBridge, isPath, isRail, roadWidth, waterFlows, waterwayWidth, type GroundKind,
 } from './classify.ts'
 import type { Feature, LineFeature, PolygonFeature } from './osm.ts'
 import { mix, type Palette } from './palette.ts'
@@ -166,6 +166,10 @@ export const buildScene = (
 
   // ---- ground ----------------------------------------------------------------------------
   const ground: GroundPolygon[] = []
+  // Water by whether it flows: rivers get rocks and rapids, still water (and the sea) none.
+  const riverWater: Ring[][] = []
+  const stillWaters: Ring[][] = []
+  const plainWater: Ring[][] = []
   const margin = 40
   const wide = { minX: frame.minX - margin, maxX: frame.maxX + margin, minY: frame.minY - margin, maxY: frame.maxY + margin }
   for (const f of features) {
@@ -178,14 +182,31 @@ export const buildScene = (
       ...f.outers.map((r) => orient(clipRingToRect(toViewRing(view, r), wide), true)),
       ...f.inners.map((r) => orient(clipRingToRect(toViewRing(view, r), wide), false)),
     ].filter((r) => r.length >= 3 && Math.abs(signedArea(r)) > 1)
-    if (rings.length > 0) ground.push({ kind, rings })
+    if (rings.length === 0) continue
+    ground.push({ kind, rings })
+    if (kind === 'water') {
+      const flows = waterFlows(f.tags)
+      if (flows === true) riverWater.push(rings)
+      else if (flows === false) stillWaters.push(rings)
+      else plainWater.push(rings)
+    }
   }
+  // Plain water is a river where a river runs through it.
+  const riverLines = features
+    .filter((f): f is LineFeature => f.type === 'line' && (f.tags.waterway === 'river' || f.tags.waterway === 'stream'))
+    .map((f) => f.points.map(([lon, lat]) => view.toView(lon, lat)))
+  const crossedByRiver = (rings: Ring[]) => riverLines.some((pts) => pts.some((p, k) =>
+    pointInPolygon(p, rings) || (k > 0 && pointInPolygon([(p[0] + pts[k - 1][0]) / 2, (p[1] + pts[k - 1][1]) / 2], rings))))
+  for (const rings of plainWater) (crossedByRiver(rings) ? riverWater : stillWaters).push(rings)
   // The sea and tidal water come as coastline, land on its left: the frame minus the land.
   const coastWays = features.filter((f): f is LineFeature => f.type === 'line' && f.tags.natural === 'coastline').map((f) => f.points)
   if (coastWays.length > 0) {
     const chains = chainCoast(coastWays).map((c) => c.map(([lon, lat]) => view.toView(lon, lat)))
     const sea = waterFromCoast(chains, wide)
-    if (sea !== null) ground.unshift({ kind: 'water', rings: sea })
+    if (sea !== null) {
+      ground.unshift({ kind: 'water', rings: sea })
+      stillWaters.push(sea)
+    }
     stats.coastWays = coastWays.length
   }
   const curatedRings = (h: HistoryFeature) => [orient(clipRingToRect(toViewRing(view, h.ring ?? []), wide), true)].filter((r) => r.length >= 3)
@@ -226,7 +247,10 @@ export const buildScene = (
     if (lowered > 0) stats.groundUnderBridgesLowered = lowered
   }
   stats.ground = ground.length
-  rasterize(terrain, ground.filter((g) => g.kind === 'water').map((g) => g.rings), 1)
+  // Every water outline is water; still water marked after the rivers wins where they overlap.
+  rasterize(terrain, ground.filter((g) => g.kind === 'water').map((g) => g.rings), 1, false)
+  rasterize(terrain, riverWater, 1, true)
+  rasterize(terrain, stillWaters, 1, false)
   rasterize(terrain, ground.filter((g) => g.kind === 'island').map((g) => g.rings), 0)
   settleWater(terrain, 30, 1.0, opts.rocks !== false)
   if (!terrain.flat) stillWater(terrain, curated.filter((h) => h.kind === 'water').map(curatedRings))

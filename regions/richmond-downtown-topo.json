@@ -25,7 +25,6 @@
     "exaggeration": 2.5,
     "cell": 5,
     "contour": 2,
-    "majorEvery": 5,
-    "rapids": 0.035
+    "majorEvery": 5
   }
 }

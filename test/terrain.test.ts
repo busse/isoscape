@@ -1,6 +1,8 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { contours, makeTerrain, rasterize, riverFall, settleWater } from '../src/terrain.ts'
+import { contours, makeTerrain, RAPIDS, rasterize, riverFall, settleWater } from '../src/terrain.ts'
+import { waterFlows } from '../src/classify.ts'
+import { palette } from '../src/palette.ts'
 import { makeView } from '../src/view.ts'
 import { alignServed, encodeDem, decodeDem, misaligned, sampler } from '../src/dem.ts'
 import { servedBox } from '../src/dem-sources.ts'
@@ -51,7 +53,7 @@ test('water is found under the rocks, and the drop reads as rapids', () => {
   const i = Math.round((10 - t.x0) / t.cell)
   const j = Math.round((0 - t.y0) / t.cell)
   const fall = riverFall(t, i, j)!
-  assert.ok(fall.slope > 0.035, `slope ${fall.slope}`)
+  assert.ok(fall.slope > 2 * RAPIDS, `slope ${fall.slope}`)
   assert.ok(fall.down[0] > 0.9, 'falls eastward')
   const calm = riverFall(t, Math.round((-180 - t.x0) / t.cell), j)
   assert.ok(calm === null || calm.slope < 0.01)
@@ -132,4 +134,102 @@ test('no rock and no rapid is read where the source has no heights', () => {
   for (const v of t.rocks) rocks += v
   assert.equal(rocks, 0)
   for (let j = 0; j < t.ny; j++) for (let i = 0; i < t.nx; i++) assert.equal(riverFall(t, i, j), null)
+})
+
+test('a stepped, hydro-flattened river reads its fall along the reach, not only at the steps', () => {
+  // Level reaches stepping down 0.5 m every 100 m eastward (5 m per km), as 3DEP draws a river;
+  // then, east of 0, a calm reach falling 1 m per km. A long, straight channel.
+  const wide = makeView({ ...region, width: 1200, depth: 200 }, 0)
+  const t = makeTerrain(wide, 5, 1, (lon) => {
+    const e = lon * M
+    return e < 0 ? 20 - 0.5 * Math.floor((e + 600) / 100) : 17 - e / 1000
+  })
+  rasterize(t, [[[[-600, -40], [600, -40], [600, 40], [-600, 40]]]], 1)
+  settleWater(t)
+  const j = Math.round((0 - t.y0) / t.cell)
+  const at = (e: number) => riverFall(t, Math.round((e - t.x0) / t.cell), j)
+  // Midway between two steps the water is level, yet it is in a reach that falls 5 m per km.
+  for (const e of [-450, -350, -250]) {
+    const f = at(e)
+    assert.ok(f !== null && f.slope > RAPIDS && f.slope < 0.008, `${e}: ${f?.slope}`)
+    assert.ok(f.down[0] > 0.9, 'runs east')
+  }
+  for (const e of [250, 350]) {
+    const f = at(e)
+    assert.ok(f === null || f.slope < RAPIDS / 2, `${e}: ${f?.slope}`)
+  }
+})
+
+test('only a river gets rocks and rapids: not a basin, a lake or the ground drawn over it', async () => {
+  assert.equal(waterFlows({ natural: 'water', water: 'river' }), true)
+  assert.equal(waterFlows({ waterway: 'riverbank' }), true)
+  assert.equal(waterFlows({ natural: 'water', water: 'wastewater', landuse: 'basin' }), false)
+  assert.equal(waterFlows({ natural: 'water', water: 'basin' }), false)
+  assert.equal(waterFlows({ natural: 'water', water: 'lake' }), false)
+  assert.equal(waterFlows({ natural: 'water', amenity: 'fountain' }), false)
+  assert.equal(waterFlows({ natural: 'water' }), undefined)
+  const { buildScene } = await import('../src/scene.ts')
+  const { renderSvg } = await import('../src/render.ts')
+  const { parseOsm } = await import('../src/osm.ts')
+  const box = (w: number, s: number, e: number, n: number) =>
+    [[w, s], [e, s], [e, n], [w, n], [w, s]].map(([x, y]) => ({ lon: x / M, lat: y / 110_574 }))
+  // A river falling 3 m over 40 m eastward at the middle with a rock in it (north half), and a
+  // treatment basin that tilts and has a rock in it (south half).
+  const ground = (lon: number, lat: number) => {
+    const e = lon * M
+    const n = lat * 110_574
+    const rock = Math.hypot(e + 100, n - 60) < 7 || Math.hypot(e + 100, n + 80) < 7 ? 3 : 0
+    if (n > 0) return (e < 0 ? 10 : e > 40 ? 7 : 10 - (3 * e) / 40) + rock
+    return 2 + e / 50 + rock
+  }
+  const elements = (dry: boolean) => [
+    { type: 'way', id: 1, tags: { natural: 'water', water: 'river' }, geometry: box(-190, 20, 190, 110) },
+    { type: 'way', id: 2, tags: { natural: 'water', water: 'wastewater', landuse: 'basin' }, geometry: box(-190, -130, 190, -30) },
+    ...(dry ? [{ type: 'way', id: 3, tags: { natural: 'bare_rock' }, geometry: box(-190, 20, 190, 110) }] : []),
+  ]
+  const r = { ...region, snap: false, width: 400, depth: 300, terrain: { cell: 5 } }
+  const scene = buildScene(r, parseOsm(JSON.stringify({ elements: elements(false) })), palette('paper'), ground)
+  const T = scene.terrain
+  let riverRocks = 0
+  for (let j = 0; j < T.ny; j++) {
+    for (let i = 0; i < T.nx; i++) {
+      const n = T.y0 + j * T.cell
+      if (T.rocks[j * T.nx + i] === 1) {
+        assert.ok(n > 0, 'no rock in the basin')
+        riverRocks++
+      }
+      if (n < -20) assert.equal(riverFall(T, i, j), null, 'no rapid in the basin')
+    }
+  }
+  assert.ok(riverRocks > 0, 'the rock in the river is marked')
+  const wet = renderSvg(scene)
+  assert.ok((wet.stats.rapidCells ?? 0) > 0, 'the river reads as rapids')
+  assert.ok(wet.svg.includes('class="boulder"'))
+  // The same river drawn as a bed of bare rock is dry ground: no rock and no rapid on it.
+  const dry = renderSvg(buildScene(r, parseOsm(JSON.stringify({ elements: elements(true) })), palette('paper'), ground))
+  assert.equal(dry.stats.rapidCells, 0)
+  assert.ok(!dry.svg.includes('class="boulder"'))
+})
+
+test('where a hydro-flattened river steps down, the water above the step is not rock', () => {
+  // Level water stepping down 2 m at e = 0, sharply, with one boulder 3 m proud upstream.
+  const wide = makeView({ ...region, width: 800, depth: 200 }, 0)
+  const t = makeTerrain(wide, 5, 1, (lon, lat) => {
+    const e = lon * M
+    const n = lat * 110_574
+    return (e < 0 ? 12 : 10) + (Math.hypot(e + 200, n) < 6 ? 3 : 0)
+  })
+  rasterize(t, [[[[-400, -40], [400, -40], [400, 40], [-400, 40]]]], 1)
+  settleWater(t)
+  for (let j = 0; j < t.ny; j++) {
+    for (let i = 0; i < t.nx; i++) {
+      if (t.rocks[j * t.nx + i] !== 1) continue
+      const e = t.x0 + i * t.cell
+      const n = t.y0 + j * t.cell
+      assert.ok(Math.hypot(e + 200, n) < 15, `rock at ${e}, ${n} is not the boulder`)
+    }
+  }
+  let rocks = 0
+  for (const v of t.rocks) rocks += v
+  assert.ok(rocks > 0, 'the boulder is rock')
 })

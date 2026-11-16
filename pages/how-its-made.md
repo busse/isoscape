@@ -230,12 +230,23 @@ course, steeply only where it really drops.
 
 - Water points standing **more than 1 m above that surface**, at least two grid cells (10 m
   at the default 5 m grid) from shore, are drawn as **exposed rock**. These are the boulder fields of the falls.
+  Where a hydro-flattened river steps down, the water just above the step stands clear of a
+  surface read partly below it; so a rock must also stand more than 1 m above a low value (the
+  15th percentile) of the water within 30 m that is level with it or further up the channel. Otherwise every step would be drawn
+  as a line of boulders.
+- **Only a river gets rocks and rapids.** Water mapped as a river (`water=river`, `rapids` or
+  `stream`, or `waterway=riverbank`), or plain `natural=water` with a river or stream line
+  running through it, is a river. A lake, pond, reservoir, basin, treatment works, canal,
+  dock, pool or fountain, and the sea, are still water: they get neither.
+- Nothing is drawn as rock **on ground painted over the river** (a bed of bare rock, a wooded
+  island the water outline left in), or **within 20 m of a mapped weir or dam**: the lidar
+  sees the dam standing clear of the water, but it is drawn as a crest, not as boulders.
 - Near the shore, mapped "water" standing more than 1 m above the surface is treated as bank.
   It is **given back to the land** at its own height.
 
 - Where the elevation source has **no heights** (3DEP leaves much of San Francisco Bay
   empty), the gap is filled in from the shore around it. That fill is a guess, not a surface,
-  so no rock is read within 30 m of it, and no rapid on it.
+  so no rock is read within 30 m of it, and no fall is read on it or from it.
 
 Both are inferences: a gravel bar mapped as water or a misplaced outline can produce false
 rock. Flat regions skip all of this and draw OSM's outlines as they are.
@@ -244,22 +255,39 @@ Code: `settleWater` in `src/terrain.ts`.
 
 ## Rapids
 
-A rapid is where the recovered water surface **falls quickly**. At each water point at least
-two grid cells from shore, the fall is measured across 40 m in four directions, and the steepest is
-kept. Measuring over 40 m means a single noisy cell cannot fake a rapid. Where the fall
-exceeds `terrain.rapids` (0.035 by default, 3.5 m per 100 m), the cell reads as a rapid.
+A rapid is where the recovered water surface **falls quickly along the river**. 3DEP's water
+is hydro-flattened: level from bank to bank, stepping down along the river by a meter or
+less at a time, with long level reaches between the steps. Measured across a few cells, the
+fall is all at the step lines and nil between them, which is not how a river runs.
 
-Each rapid cell gets one or two short white strokes across the current, plus a wash of froth
-where it drops hardest. The strokes are placed by a hash of the cell's position, not at
-random, so the same data always draws the same marks. Weirs mapped in OSM are drawn
-separately.
+So the fall is measured **along the channel, over a reach**. First, every point of a river
+gets its distance up the channel: the shortest path through the river's own water from where
+it rises out of its lowest pool (the water within 5 cm of its lowest level; in Richmond, the tidal James below the Mayo Bridge). Then, at
+each water point at least two grid cells from shore, the surface heights of the river around
+it, within 200 m and from 50 m below it to 200 m above it along the channel, are fitted
+against that distance. The slope of the fit is the fall. This spreads each step's drop over
+the 200 m below it, where the water runs white, and reads the pool above a dam as calm to
+within 50 m of its crest. Where the fall exceeds `terrain.rapids` (0.004 by default, 4 m per
+km), the point reads as a rapid. For comparison, the James falls about 32 m (105 feet)
+through Richmond, a little over 3 m per km on average, and its level pools fall about 1 m
+per km.
 
-Rapids are **inferred, not observed**. They show where the lidar surface is steep, which is
-usually where the water is white, but river level on the day of the survey, a misplaced
-outline or a dam can all mislead it. The build's tab reports how many cells were read as
-rapids.
+Each rapid point gets short white strokes across the current, **as thick as the fall**: a
+stroke in about one point in seven just over the threshold, rising to one in most points and
+two in some at four times it (16 m per km), with a faint wash of froth that fades in over the steepest.
+The strokes are placed by a hash of the point's position, not at random, so the same data
+always draws the same marks. No rapid is drawn on ground painted over the river. Weirs
+mapped in OSM are drawn separately.
 
-Code: `riverFall` in `src/terrain.ts`, `paintStrip` in `src/render.ts`.
+Rapids are **inferred, not observed**. They show where the lidar surface falls, which is
+usually where the water is white, but river level on the day of the survey, where the
+hydro-flattening put its steps, or a dam can all mislead it. Until November 2026 the fall was
+measured across 40 m against a threshold of 3.5 m per 100 m; once the elevation was put where
+it belongs, nothing on the James fell that steeply, and the rapids drawn before had mostly
+come from water outlines lying on banks. The build's tab reports how many points were read
+as rapids.
+
+Code: `channelFall` and `riverFall` in `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 
 ## Shoreline
 
