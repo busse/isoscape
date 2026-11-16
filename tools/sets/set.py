@@ -361,8 +361,9 @@ def write_page(S, pts):
     out = ['---', f"title: {P['title']}", f"order: {P.get('order', 50)}", f"summary: {P['summary']}",
            f'social: {slug}-social.jpg', '---', '', f"# {P['title']}", '', P['intro'], '',
            f"![{P.get('image_alt', P['title'])}]({slug}-menu.jpg)", '',
-           f"[Open the map]({SITE}#{ref}) to pan and zoom, or jump to a {P.get('noun', 'place')} below." +
-           (f" Prints of the whole set, the map alone and each {P.get('noun', 'place')} are in the [shop]({P['shop']})." if P.get('shop') else ''),
+           # No word of the shop here: the explorer adds the page's shop button while the page's
+           # slug (or its maps) are in shop.onSale in isoscape.config.json, the one list of what sells.
+           f"[Open the map]({SITE}#{ref}) to pan and zoom, or jump to a {P.get('noun', 'place')} below.",
            '', f"## {P.get('boxes_heading', 'The places')}", '']
     for s in S.boxes:
         x, y = pts['box'][s['id']]

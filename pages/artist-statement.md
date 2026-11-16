@@ -20,6 +20,5 @@ I'm treating all of this as a warm-up. In 2027 I'm working on several projects a
 
 ## Elsewhere
 
-- Prints, puzzles and gifts of these maps: [chrisbusse.com](https://chrisbusse.com)
 - Writing: [fullbacklog.com](https://fullbacklog.com)
 - [How it's made](how-its-made.md) · [About, credits and licenses](about.md)

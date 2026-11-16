@@ -9,7 +9,7 @@
  *
  * With a `home` in isoscape.config.json, the page opens on a front page instead (`#home`, or no
  * hash): the featured views large, then the other regions as cards in their sections, with the
- * shop's links. The same sections group the build list, featured regions first, and a section
+ * shop's links (only for what is in the shop's `onSale`). The same sections group the build list, featured regions first, and a section
  * can start folded (the landmarks do).
  *
  * Content pages (Markdown in `pages/`, compiled by `pages.ts`) are listed above the builds and
@@ -44,7 +44,7 @@
 import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
-import { escAttr, siteTags, type SiteCard } from './social.ts'
+import { buyLinks, escAttr, pageShop, shopCta, siteTags, type SiteCard } from './social.ts'
 import { makeStory } from './story.ts'
 
 // The isoscape mark (one isometric building), for the browser tab.
@@ -127,6 +127,27 @@ const plainList = (site: SiteCard): string => {
     `<details id="plain"><summary>Every map and page as a plain web page</summary><nav aria-label="Every map and page as a plain web page">` +
     site.plain.map((g) => `<h2>${escHtml(g.title)}</h2><ul>${g.links.map((l) => `<li><a href="${escAttr(l.href)}">${escHtml(l.label)}</a></li>`).join('')}</ul>`).join('') +
     `</nav></details></div>`
+}
+
+/** The shop as the page's script sees it: no `onSale` (the script gets it resolved, as `buy`), and `cta` only while something is on sale. */
+const shopCard = (site: SiteCard) => {
+  if (site.shop === undefined) return null
+  const cta = shopCta(site)
+  return { label: site.shop.label, url: site.shop.url, ...(cta === undefined ? {} : { cta }) }
+}
+
+/** The front page as the script sees it: shop buttons come resolved in `buy`, so no shop fields here. */
+const homeCard = (site: SiteCard) => {
+  if (site.home === undefined) return null
+  const strip = <T extends object>(x: T): T => Object.fromEntries(Object.entries(x).filter(([k]) => k !== 'shop' && k !== 'shopLabel')) as T
+  return { ...site.home, heroes: site.home.heroes.map(strip), sections: site.home.sections.map(strip) }
+}
+
+/** The regions a page, as the explorer shows it, links into (`#<region>…`), in order of first mention. */
+const explorerMapRefs = (html: string): string[] => {
+  const out: string[] = []
+  for (const m of html.matchAll(/href="#([a-z0-9][a-z0-9-]*)(?=[:@"])/g)) if (m[1] !== 'home' && !out.includes(m[1])) out.push(m[1])
+  return out
 }
 
 const escHtml = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string)
@@ -301,6 +322,8 @@ body.home main { grid-template-rows: 1fr; }
 .hm .banner span { color: var(--dim); }
 .hm .btn { display: inline-block; padding: 7px 15px; border-radius: 18px; background: var(--accent); color: var(--panel); border: 1px solid var(--accent); text-decoration: none; font-weight: 600; font-size: 13px; white-space: nowrap; }
 .hm .btn.ghost { background: transparent; color: var(--accent); }
+#article .buyp { margin: 0 0 1.4em; }
+#article .buyp .btn { display: inline-block; padding: 7px 15px; border-radius: 18px; background: var(--accent); color: var(--panel); text-decoration: none; font-weight: 600; font-size: 13px; }
 .hm .btn:hover { filter: brightness(1.08); }
 .hm .banner .btn { margin-left: auto; }
 .hm h1 { font-size: 34px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 10px; font-weight: 650; }
@@ -366,7 +389,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
 <body>
 <nav id="nav">
   <header>${site.home ? '<a class="brand" href="#home" title="Front page">' : ''}<b>isoscape</b><span>explorer</span>${site.home ? '</a>' : ''}<span class="count" id="count"></span></header>${site.shop ? `
-  <a class="shop" href="${escAttr(site.shop.url)}" target="_blank" rel="noopener"><b>${escHtml(site.shop.cta ?? 'Prints of these maps')} ↗</b><span>${escHtml(site.shop.label)}</span></a>` : ''}
+  <a class="shop" href="${escAttr(site.shop.url)}" target="_blank" rel="noopener"><b>${escHtml(shopCta(site) ?? 'Shop prints')} ↗</b><span>${escHtml(site.shop.label)}</span></a>` : ''}
   <div id="pages"></div>
   <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false">
   <div id="list"></div>
@@ -401,10 +424,10 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   <section id="home" tabindex="-1"><div class="hm" id="homeBody"></div>${plainList(site)}</section>
   <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
 </main>
-<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: site.shop ?? null, home: site.home ?? null, latestPages: site.latestPages !== false })}</script>
+<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, buy: site.shop ? buyLinks(site, new Set(builds.map((b) => b.region))) : null })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, license: d.license, link: d.link }])))}</script>
-<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2) })))}</script>
+<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2), shop: (site.shop && pageShop(p.slug, explorerMapRefs(p.html), site)) ?? null })))}</script>
 <script>
 (() => {
   const builds = JSON.parse(document.getElementById('builds').textContent)
@@ -457,17 +480,9 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     const i = home.sections.findIndex((x) => prefixIndex(x, region) < 99)
     return i < 0 ? home.sections.length : i
   }
-  // Where "Buy a print" goes for a build: its featured view's own link, else the shop's links by region prefix.
-  const shopFor = (b) => {
-    if (!site.shop || !b) return null
-    const h = home && home.heroes[heroIndex(b.region)]
-    if (h && h.shop) return h.shop
-    const L = site.shop.links
-    if (!L) return null
-    const k = Object.keys(L).filter((p) => b.region.startsWith(p)).sort((x, y) => y.length - x.length)[0]
-    return k ? L[k] : null
-  }
-  const buyLabel = (b) => { const h = home && home.heroes[heroIndex(b.region)]; return (h && h.shopLabel) || 'Buy a print ↗' }
+  // Where "Buy a print" goes for a build, with its button text: resolved from the shop's onSale
+  // when the page was written (buyLinks in social.ts); nothing when its region is not on sale.
+  const buyOf = (b) => (b && site.buy && site.buy.regions[b.region]) || null
   const renderList = () => {
     const list = visible()
     $('count').textContent = builds.length + (builds.length === 1 ? ' build' : ' builds')
@@ -693,14 +708,14 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const fmt = (v) => (v === undefined ? '–' : typeof v === 'number' ? (Number.isInteger(v) ? v.toLocaleString() : v.toFixed(2)) : esc(v))
   const renderInfo = () => {
     const a = byId.get(state.a)
-    const buy = shopFor(a)
+    const buy = buyOf(a)
     if (!a) { $('infoTitle').textContent = ''; $('infoBody').innerHTML = ''; $('links').innerHTML = ''; return }
     const b = state.compare ? byId.get(state.b) : null
     $('infoTitle').textContent = b ? a.title + '  ·  A vs B' : a.title
     $('links').innerHTML = '<a href="' + esc(a.files.svg) + '" target="_blank"' + (phone() ? ' title="The full drawing: large, may not open on a phone"' : '') + '>' + (phone() ? 'Full drawing ↗' : 'Open A’s SVG ↗') + '</a>' +
       (b ? '<a href="' + esc(b.files.svg) + '" target="_blank">Open B’s SVG ↗</a>' : '') +
       (site.latestPages ? '<a href="' + esc(a.name) + '.html" target="_blank" title="The latest build of this region, with hover labels">Latest page ↗</a>' : '') +
-      (buy ? '<a class="buy" href="' + esc(buy) + '" target="_blank" rel="noopener">' + esc(buyLabel(a)) + '</a>' : '')
+      (buy ? '<a class="buy" href="' + esc(buy.url) + '" target="_blank" rel="noopener">' + esc(buy.label) + '</a>' : '')
     $('info').classList.toggle('made', state.tab === 'made')
     for (const t of $('tabs').children) t.classList.toggle('on', t.dataset.tab === state.tab)
     if (state.tab === 'made') {
@@ -959,21 +974,21 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const orderIndex = (sec, region) => { const i = (sec.order || []).indexOf(region); return i < 0 ? 1e6 : i }
   const renderHome = () => {
     const out = []
-    if (site.shop) out.push('<div class="banner"><b>' + esc(site.shop.cta || 'Prints of these maps') + '</b><span>' + esc(site.shop.label) + '</span>' +
+    if (site.shop) out.push('<div class="banner">' + (site.shop.cta ? '<b>' + esc(site.shop.cta) + '</b><span>' + esc(site.shop.label) + '</span>' : '<b>' + esc(site.shop.label) + '</b>') +
       '<a class="btn" href="' + esc(site.shop.url) + '" target="_blank" rel="noopener">Visit the shop ↗</a></div>')
     out.push('<h1>' + esc(home.title) + '</h1>' + (home.intro ? '<p class="intro">' + esc(home.intro) + '</p>' : ''))
     out.push('<div class="heroes">' + home.heroes.map((h) => {
       const b = latestOf(h.region, h.year) || latestOf(h.region)
       if (!b) return ''
       const ser = seriesOf(b)
-      const buy = shopFor(b)
+      const buy = buyOf(b)
       // The link-preview image (from tools/print/thumbs.py) when there is one, else the thumbnail.
       const big = b.files.svg.replace(/[^/]*$/, 'social.png')
       return '<article class="hero"><a class="pic" href="#' + esc(b.id) + '"><img src="' + esc(big) + '" data-fallback="' + esc(b.files.thumb || '') + '" alt="' + esc(h.title) + '"></a>' +
         '<div class="tx"><h2>' + esc(h.title) + '</h2>' + (h.blurb ? '<p>' + esc(h.blurb) + '</p>' : '') +
         (ser.length > 1 ? '<div class="years">' + ser.map((y) => '<a href="#' + esc(y.id) + '" title="' + esc(y.time.title || '') + '">' + esc(y.time.year) + '</a>').join('') + '</div>' : '') +
         '<div class="acts"><a class="btn ghost" href="#' + esc(b.id) + '">' + (ser.length > 1 ? 'Step through ' + ser.length + ' years' : 'Explore the map') + '</a>' +
-        (buy ? '<a class="btn" href="' + esc(buy) + '" target="_blank" rel="noopener">' + esc(buyLabel(b)) + '</a>' : '') + '</div></div></article>'
+        (buy ? '<a class="btn" href="' + esc(buy.url) + '" target="_blank" rel="noopener">' + esc(buy.label) + '</a>' : '') + '</div></div></article>'
     }).join('') + '</div>')
     const featured = new Set(home.heroes.map((h) => h.region))
     const regions = [...new Set(builds.map((b) => b.region))].filter((r) => !featured.has(r))
@@ -981,9 +996,10 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
       const cards = regions.filter((r) => sectionOf(r) === i).map((r) => latestOf(r))
         .sort((x, y) => orderIndex(sec, x.region) - orderIndex(sec, y.region) || titleOf(x).localeCompare(titleOf(y)))
       if (cards.length === 0) return
+      const secBuy = site.buy && site.buy.sections[i]
       out.push('<section class="sec"><header><h2>' + esc(sec.homeTitle || sec.title) + '</h2>' + (sec.blurb ? '<p>' + esc(sec.blurb) + '</p>' : '') +
         (sec.page ? '<a class="btn" href="' + esc(sec.page) + '">' + esc(sec.pageLabel || 'Read the story') + '</a> ' : '') +
-        (sec.shop ? '<a class="btn" href="' + esc(sec.shop) + '" target="_blank" rel="noopener">' + esc(sec.shopLabel || 'Buy prints ↗') + '</a>' : '') + '</header>' +
+        (secBuy ? '<a class="btn" href="' + esc(secBuy.url) + '" target="_blank" rel="noopener">' + esc(secBuy.label) + '</a>' : '') + '</header>' +
         '<div class="cards">' + cards.map((b) => '<a class="card" href="#' + esc(b.id) + '"><img loading="lazy" src="' + esc(b.files.thumb || '') + '" alt=""><b>' + esc(titleOf(b)) + '</b></a>').join('') + '</div></section>')
     })
     if (home.links && home.links.length) out.push('<div class="more">' + home.links.map((l) => '<a href="' + esc(l.href) + '"' + (l.href.startsWith('#') ? '' : ' target="_blank" rel="noopener"') + '>' + esc(l.label) + '</a>').join('') + '</div>')
@@ -1016,7 +1032,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     document.body.classList.add('reading')
     if ($('article').dataset.slug !== p.slug) {
       $('article').dataset.slug = p.slug
-      $('article').innerHTML = p.html + '<p class="source">This page is <code>' + esc(p.file) + '</code>. Edit it there; the next build, or <code>isoscape explorer</code>, puts the change here.</p>'
+      $('article').innerHTML = (p.shop ? '<p class="buyp"><a class="btn" href="' + esc(p.shop.url) + '" target="_blank" rel="noopener">' + esc(p.shop.label) + '</a></p>' : '') + p.html + '<p class="source">This page is <code>' + esc(p.file) + '</code>. Edit it there; the next build, or <code>isoscape explorer</code>, puts the change here.</p>'
       $('toc').innerHTML = p.headings.length < 2 ? '' : '<h3>On this page</h3>' + p.headings.map((h) =>
         '<a href="#/' + esc(p.slug) + '/' + esc(h.id) + '" data-id="' + esc(h.id) + '">' + esc(h.text) + '</a>').join('')
     }

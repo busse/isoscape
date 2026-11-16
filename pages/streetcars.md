@@ -11,7 +11,7 @@ By May 1888 Frank Sprague's electric cars were running on Richmond's hills, the 
 
 ![The 1925 map, framed by its fourteen stops](streetcars-menu.jpg)
 
-[Open the map](https://busse.github.io/isoscape/#richmond-streetcars:1925) to pan and zoom, or jump to a stop below. Prints of the whole set, the map alone and each stop are in the [shop](https://chrisbusse.com/collections/richmond-streetcars-1925).
+[Open the map](https://busse.github.io/isoscape/#richmond-streetcars:1925) to pan and zoom, or jump to a stop below.
 
 ## The stops
 
