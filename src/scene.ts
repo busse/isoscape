@@ -590,7 +590,9 @@ export const buildScene = (
     // out of the other.
     const cut = region.cutaway
     const shown = (h: HistoryFeature) => (cut === undefined ? h.only !== 'cutaway' : h.only !== 'whole')
-    const zOf = (e: number) => (e - terrain.datum) * terrain.exaggeration
+    const zOf = modelZ(terrain, curated
+      .filter((h) => h.kind === 'landmark' && h.ring !== undefined && h.tone !== undefined && shown(h) && (h.elevation !== undefined || h.upTo !== undefined))
+      .map((h) => Math.min(...toViewRing(view, h.ring!).map((p) => terrain.elevation(p)))))
     const partGround = curated.filter((h) => h.kind === 'landmark' && h.ring !== undefined && h.tone !== undefined && shown(h))
       .map((h) => ({ id: h.id, seat: h.seat, on: h.on, base: h.base, height: h.height, grounds: orient(toViewRing(view, h.ring!), true).map((p) => terrain.z(p)), ...(h.elevation === undefined ? {} : { at: zOf(h.elevation) }) }))
     const levels = partLevels(partGround)
@@ -735,6 +737,25 @@ export const buildScene = (
  * The features that stood in a year. Buildings by their dates (undated ones only in the
  * present; a curated `until` ends one before today); everything else by the history's era rules.
  */
+/**
+ * Scene height of an absolute elevation given in a modeled building's parts (`elevation`,
+ * `upTo`, a cutaway's floor). A building is not exaggerated with the ground (see "Two heights"):
+ * its parts keep their true meters above one another, from the ground under the model, taken as
+ * the median of the lowest ground under each part that gives an absolute height (`grounds`, in
+ * meters above sea level). That ground is drawn where the terrain is, so the building stands on
+ * it; only the levels within the building are true. With no exaggeration this is the plain
+ * (elevation − datum), unchanged.
+ */
+export const modelZ = (terrain: { readonly datum: number; readonly exaggeration: number }, grounds: readonly number[]): ((e: number) => number) => {
+  const plain = (e: number) => (e - terrain.datum) * terrain.exaggeration
+  if (terrain.exaggeration === 1 || grounds.length === 0) return plain
+  const sorted = [...grounds].sort((a, b) => a - b)
+  const m = sorted.length >> 1
+  const ref = sorted.length % 2 ? sorted[m] : (sorted[m - 1] + sorted[m]) / 2
+  const at = plain(ref)
+  return (e: number) => at + (e - ref)
+}
+
 export const asOf = (features: readonly Feature[], time: TimeContext): Feature[] =>
   features.filter((f) => {
     const isBuilding = f.type === 'polygon' && (f.tags.building !== undefined || f.tags['building:part'] !== undefined)

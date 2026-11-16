@@ -32,3 +32,15 @@ test('without a support a part sits on its own ground, plus its base', () => {
   // A cycle is cut where it closes: one of the pair keeps its own ground.
   assert.ok(Number.isFinite(levels.get('a')) && Number.isFinite(levels.get('b')))
 })
+
+test('absolute part elevations keep true meters between parts on exaggerated terrain', async () => {
+  const { modelZ } = await import('../src/scene.ts')
+  // Ground exaggerated 3x from a 60 m datum; the model's ground is at 66 m. Columns from 67.4 m,
+  // 11.8 m tall, carry an entablature given at 79.2 m: it must start where they end.
+  const z = modelZ({ datum: 60, exaggeration: 3 }, [66, 65, 70])
+  assert.equal(z(66), 18)
+  assert.ok(Math.abs(z(67.4) + 11.8 - z(79.2)) < 1e-9)
+  // Without exaggeration nothing changes.
+  const plain = modelZ({ datum: 60, exaggeration: 1 }, [66])
+  assert.equal(plain(79.2), 79.2 - 60)
+})

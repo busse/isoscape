@@ -199,7 +199,11 @@ that 1 m lidar records and a 5 m grid would turn into speckle.
 The scene's height at any point is its elevation above the lowest point in the frame (the
 **datum**), times `terrain.exaggeration`. The sample regions draw hills 2.5–4× taller than
 life, so the landform reads from a distance. **Buildings and bridges keep their true heights** on top
-of the exaggerated ground, so a 2.5× hill does not stretch the towers standing on it.
+of the exaggerated ground, so a 2.5× hill does not stretch the towers standing on it. A modeled
+building whose parts give their levels above sea level (a porch at 67.4 m, columns on it, an
+entablature at 79.2 m) keeps them true too: they are measured from the ground under the model
+(the median of the lowest ground under each such part), which is drawn where the terrain is, so
+an entablature still rests on its columns in a view drawn three times taller than life.
 
 Contours are computed from the true elevation; the hillshade from the drawn, exaggerated
 surface, so it matches the shape you see:
