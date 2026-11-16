@@ -514,8 +514,9 @@ A spec may also set `theme` (`"holiday"`: accents from `SHEET_THEMES` in `src/pa
 border with holly at the corners; margins only), `halo` (leaders drawn over a paper halo, for a
 dark plate), `mapData: false` (no OpenStreetMap credit in the drawing's metadata, for a plate
 drawn without its data), `keyNote` (the line under the key), and `layout` (`isoHeight`,
-`isoAlign: "left"`, `bottom`, and `notes: {x, y, w}` to set the sources and notes beside the
-section). A wayfinding label can stand `inside-left-above` or `inside-left-below` the place it
+`isoAlign: "left"`, `bottom`, `sectionW`, `key: {x, y, w}` to set the key in a block of its
+own, and `notes: {x, y, w}` to set the sources and notes beside the section, or under the key
+when `y` is left out). A callout may name a list of anchors in one drawing. A wayfinding label can stand `inside-left-above` or `inside-left-below` the place it
 points to on the plate's left edge, or `below` the plate, and be nudged by `offset`.
 
 `--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):

@@ -26,12 +26,12 @@
      37.5522224
     ],
     [
-     -77.47762058,
-     37.55256251
+     -77.47762067,
+     37.55256234
     ],
     [
-     -77.47788567,
-     37.55265649
+     -77.47788576,
+     37.55265632
     ]
    ],
    "height": 19.6,
@@ -2221,12 +2221,12 @@
      37.55260346
     ],
     [
-     -77.47787946,
-     37.55265429
+     -77.47787955,
+     37.55265412
     ],
     [
-     -77.47788567,
-     37.55265649
+     -77.47788576,
+     37.55265632
     ]
    ],
    "height": 20.5,
@@ -2386,12 +2386,12 @@
      37.55251168
     ],
     [
-     -77.47762058,
-     37.55256251
+     -77.47762067,
+     37.55256234
     ],
     [
-     -77.47762679,
-     37.55256471
+     -77.47762688,
+     37.55256454
     ]
    ],
    "height": 16.9,
@@ -2402,6 +2402,309 @@
    "note": "An outer side wall of plain brick. Its thickness and height are approximate.",
    "sources": [
     "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "byrd-c-spring-curb-1",
+   "name": "Byrd Theatre: the spring",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47781812,
+     37.5525885
+    ],
+    [
+     -77.47773942,
+     37.5525606
+    ],
+    [
+     -77.47773804,
+     37.55256308
+    ],
+    [
+     -77.47781674,
+     37.55259098
+    ]
+   ],
+   "height": 1.5,
+   "tone": "stone",
+   "elevation": 62.75,
+   "upTo": 64.25,
+   "confidence": "approximate",
+   "note": "A natural spring, found when the theatre was built in 1928 and built over rather than pumped out (Richmond Magazine, \"225 Secrets of the City\", 2006); a Byrd engineer writes on Cinema Treasures that water can be pumped from it for the air conditioning, and Wikipedia speaks of a spring and pool in the basement that used to supply it. No source places it in the basement or says how its water was used: drawn as a pool sunk in the basement floor under the stage, approximately.",
+   "sources": [
+    "https://richmondmagazine.com/best-of-richmond/225-secrets-of-the-city/",
+    "https://cinematreasures.org/theaters/334"
+   ]
+  },
+  {
+   "id": "byrd-c-spring-curb-2",
+   "name": "Byrd Theatre: the spring",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47780386,
+     37.55261413
+    ],
+    [
+     -77.47772516,
+     37.55258622
+    ],
+    [
+     -77.47772378,
+     37.5525887
+    ],
+    [
+     -77.47780248,
+     37.5526166
+    ]
+   ],
+   "height": 1.5,
+   "tone": "stone",
+   "elevation": 62.75,
+   "upTo": 64.25,
+   "confidence": "approximate",
+   "note": "A natural spring, found when the theatre was built in 1928 and built over rather than pumped out (Richmond Magazine, \"225 Secrets of the City\", 2006); a Byrd engineer writes on Cinema Treasures that water can be pumped from it for the air conditioning, and Wikipedia speaks of a spring and pool in the basement that used to supply it. No source places it in the basement or says how its water was used: drawn as a pool sunk in the basement floor under the stage, approximately.",
+   "sources": [
+    "https://richmondmagazine.com/best-of-richmond/225-secrets-of-the-city/",
+    "https://cinematreasures.org/theaters/334"
+   ]
+  },
+  {
+   "id": "byrd-c-spring-curb-3",
+   "name": "Byrd Theatre: the spring",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47781674,
+     37.55259098
+    ],
+    [
+     -77.47781363,
+     37.55258988
+    ],
+    [
+     -77.47780075,
+     37.55261302
+    ],
+    [
+     -77.47780386,
+     37.55261413
+    ]
+   ],
+   "height": 1.5,
+   "tone": "stone",
+   "elevation": 62.75,
+   "upTo": 64.25,
+   "confidence": "approximate",
+   "note": "A natural spring, found when the theatre was built in 1928 and built over rather than pumped out (Richmond Magazine, \"225 Secrets of the City\", 2006); a Byrd engineer writes on Cinema Treasures that water can be pumped from it for the air conditioning, and Wikipedia speaks of a spring and pool in the basement that used to supply it. No source places it in the basement or says how its water was used: drawn as a pool sunk in the basement floor under the stage, approximately.",
+   "sources": [
+    "https://richmondmagazine.com/best-of-richmond/225-secrets-of-the-city/",
+    "https://cinematreasures.org/theaters/334"
+   ]
+  },
+  {
+   "id": "byrd-c-spring-curb-4",
+   "name": "Byrd Theatre: the spring",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47774115,
+     37.55256418
+    ],
+    [
+     -77.47773804,
+     37.55256308
+    ],
+    [
+     -77.47772516,
+     37.55258622
+    ],
+    [
+     -77.47772827,
+     37.55258733
+    ]
+   ],
+   "height": 1.5,
+   "tone": "stone",
+   "elevation": 62.75,
+   "upTo": 64.25,
+   "confidence": "approximate",
+   "note": "A natural spring, found when the theatre was built in 1928 and built over rather than pumped out (Richmond Magazine, \"225 Secrets of the City\", 2006); a Byrd engineer writes on Cinema Treasures that water can be pumped from it for the air conditioning, and Wikipedia speaks of a spring and pool in the basement that used to supply it. No source places it in the basement or says how its water was used: drawn as a pool sunk in the basement floor under the stage, approximately.",
+   "sources": [
+    "https://richmondmagazine.com/best-of-richmond/225-secrets-of-the-city/",
+    "https://cinematreasures.org/theaters/334"
+   ]
+  },
+  {
+   "id": "byrd-c-spring-bed",
+   "name": "Byrd Theatre: the spring",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47781363,
+     37.55258988
+    ],
+    [
+     -77.47774115,
+     37.55256418
+    ],
+    [
+     -77.47772827,
+     37.55258733
+    ],
+    [
+     -77.47780075,
+     37.55261302
+    ]
+   ],
+   "height": 0.2,
+   "tone": "stone",
+   "elevation": 62.75,
+   "upTo": 62.95,
+   "confidence": "approximate",
+   "note": "A natural spring, found when the theatre was built in 1928 and built over rather than pumped out (Richmond Magazine, \"225 Secrets of the City\", 2006); a Byrd engineer writes on Cinema Treasures that water can be pumped from it for the air conditioning, and Wikipedia speaks of a spring and pool in the basement that used to supply it. No source places it in the basement or says how its water was used: drawn as a pool sunk in the basement floor under the stage, approximately.",
+   "sources": [
+    "https://richmondmagazine.com/best-of-richmond/225-secrets-of-the-city/"
+   ]
+  },
+  {
+   "id": "byrd-k-spring-water-1",
+   "name": "Byrd Theatre: the spring",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47781363,
+     37.55258988
+    ],
+    [
+     -77.47775564,
+     37.55256932
+    ],
+    [
+     -77.47774277,
+     37.55259247
+    ],
+    [
+     -77.47780075,
+     37.55261302
+    ]
+   ],
+   "height": 0.9,
+   "tone": "water",
+   "elevation": 62.95,
+   "upTo": 63.85,
+   "confidence": "approximate",
+   "note": "A natural spring, found when the theatre was built in 1928 and built over rather than pumped out (Richmond Magazine, \"225 Secrets of the City\", 2006); a Byrd engineer writes on Cinema Treasures that water can be pumped from it for the air conditioning, and Wikipedia speaks of a spring and pool in the basement that used to supply it. No source places it in the basement or says how its water was used: drawn as a pool sunk in the basement floor under the stage, approximately.",
+   "sources": [
+    "https://richmondmagazine.com/best-of-richmond/225-secrets-of-the-city/",
+    "https://cinematreasures.org/theaters/334"
+   ]
+  },
+  {
+   "id": "byrd-k-spring-water-2",
+   "name": "Byrd Theatre: the spring",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47775564,
+     37.55256932
+    ],
+    [
+     -77.47774115,
+     37.55256418
+    ],
+    [
+     -77.47772827,
+     37.55258733
+    ],
+    [
+     -77.47774277,
+     37.55259247
+    ]
+   ],
+   "height": 0.9,
+   "tone": "water",
+   "elevation": 62.95,
+   "upTo": 63.85,
+   "confidence": "approximate",
+   "note": "A natural spring, found when the theatre was built in 1928 and built over rather than pumped out (Richmond Magazine, \"225 Secrets of the City\", 2006); a Byrd engineer writes on Cinema Treasures that water can be pumped from it for the air conditioning, and Wikipedia speaks of a spring and pool in the basement that used to supply it. No source places it in the basement or says how its water was used: drawn as a pool sunk in the basement floor under the stage, approximately.",
+   "sources": [
+    "https://richmondmagazine.com/best-of-richmond/225-secrets-of-the-city/",
+    "https://cinematreasures.org/theaters/334"
+   ]
+  },
+  {
+   "id": "byrd-k-spring-pump",
+   "name": "Byrd Theatre: the spring's pump",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47779177,
+     37.55257125
+    ],
+    [
+     -77.47778141,
+     37.55256757
+    ],
+    [
+     -77.47777819,
+     37.55257336
+    ],
+    [
+     -77.47778855,
+     37.55257703
+    ]
+   ],
+   "height": 1.2,
+   "tone": "iron",
+   "elevation": 63.95,
+   "upTo": 65.15,
+   "confidence": "approximate",
+   "note": "A pump by the spring: a Byrd engineer writes that water can be pumped from it for the air conditioning (Cinema Treasures). Its place, size and date are not known.",
+   "sources": [
+    "https://cinematreasures.org/theaters/334"
+   ]
+  },
+  {
+   "id": "byrd-k-spring-pipe",
+   "name": "Byrd Theatre: the spring's pump",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47778723,
+     37.55257161
+    ],
+    [
+     -77.47778412,
+     37.55257051
+    ],
+    [
+     -77.47778274,
+     37.55257299
+    ],
+    [
+     -77.47778585,
+     37.55257409
+    ]
+   ],
+   "height": 1.5,
+   "tone": "iron",
+   "elevation": 65.15,
+   "upTo": 66.65,
+   "confidence": "approximate",
+   "note": "A pipe up from the pump; where the water went is not known. Approximate.",
+   "sources": [
+    "https://cinematreasures.org/theaters/334"
    ]
   },
   {
@@ -2419,12 +2722,12 @@
      37.5523147
     ],
     [
-     -77.47758951,
-     37.55255149
+     -77.4775896,
+     37.55255133
     ],
     [
-     -77.47762058,
-     37.55256251
+     -77.47762067,
+     37.55256234
     ]
    ],
    "height": 1.8,
@@ -2511,20 +2814,20 @@
    "from": 1928,
    "ring": [
     [
-     -77.47788222,
-     37.55264933
+     -77.47788231,
+     37.55264916
     ],
     [
-     -77.47767304,
-     37.55257517
+     -77.47767313,
+     37.552575
     ],
     [
-     -77.47767028,
-     37.55258013
+     -77.47767037,
+     37.55257996
     ],
     [
-     -77.47787946,
-     37.55265429
+     -77.47787955,
+     37.55265412
     ]
    ],
    "height": 20.5,
@@ -2544,20 +2847,20 @@
    "from": 1928,
    "ring": [
     [
-     -77.47767304,
-     37.55257517
+     -77.47767313,
+     37.552575
     ],
     [
-     -77.47762955,
-     37.55255975
+     -77.47762964,
+     37.55255958
     ],
     [
-     -77.47762679,
-     37.55256471
+     -77.47762688,
+     37.55256454
     ],
     [
-     -77.47767028,
-     37.55258013
+     -77.47767037,
+     37.55257996
     ]
    ],
    "height": 16.9,
@@ -2585,6 +2888,39 @@
      37.55222736
     ],
     [
+     -77.47776708,
+     37.55229926
+    ],
+    [
+     -77.47803217,
+     37.55239325
+    ]
+   ],
+   "height": 0.4,
+   "tone": "roof",
+   "elevation": 86.45,
+   "upTo": 86.85,
+   "confidence": "approximate",
+   "note": "The roof over the lobby, flat behind the front's parapet. Height approximate.",
+   "sources": [
+    "https://rvarephotoproject3.blogspot.com/2017/03/byrd-theater-c.html"
+   ]
+  },
+  {
+   "id": "byrd-c-roof-house",
+   "name": "Byrd Theatre: roof",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47803217,
+     37.55239325
+    ],
+    [
+     -77.47776708,
+     37.55229926
+    ],
+    [
      -77.47764518,
      37.55251829
     ],
@@ -2598,7 +2934,7 @@
    "elevation": 86.45,
    "upTo": 86.85,
    "confidence": "approximate",
-   "note": "The roof over the lobby and auditorium, flat behind the front's parapet. Height approximate.",
+   "note": "The roof over the auditorium, flat. Height approximate.",
    "sources": [
     "https://rvarephotoproject3.blogspot.com/2017/03/byrd-theater-c.html"
    ]
@@ -2618,12 +2954,12 @@
      37.55251829
     ],
     [
-     -77.47762058,
-     37.55256251
+     -77.47762067,
+     37.55256234
     ],
     [
-     -77.47788567,
-     37.55265649
+     -77.47788576,
+     37.55265632
     ]
    ],
    "height": 0.4,
@@ -7601,12 +7937,12 @@
      37.55251388
     ],
     [
-     -77.47762955,
-     37.55255975
+     -77.47762964,
+     37.55255958
     ],
     [
-     -77.47788222,
-     37.55264933
+     -77.47788231,
+     37.55264916
     ]
    ],
    "height": 0.3,
@@ -7630,16 +7966,115 @@
      37.55260346
     ],
     [
+     -77.47782594,
+     37.55257445
+    ],
+    [
+     -77.4778005,
+     37.55262016
+    ],
+    [
+     -77.47788231,
+     37.55264916
+    ]
+   ],
+   "height": 0.3,
+   "tone": "floor",
+   "elevation": 63.65,
+   "upTo": 63.95,
+   "confidence": "approximate",
+   "note": "The basement under the stage, from which the console rises (nomination). Its extent is approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "byrd-c-basement-floor-2",
+   "name": "Byrd Theatre: stage",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47774724,
+     37.55254655
+    ],
+    [
      -77.47769857,
      37.5525293
     ],
     [
-     -77.47767304,
-     37.55257517
+     -77.47767313,
+     37.552575
     ],
     [
-     -77.47788222,
-     37.55264933
+     -77.4777218,
+     37.55259226
+    ]
+   ],
+   "height": 0.3,
+   "tone": "floor",
+   "elevation": 63.65,
+   "upTo": 63.95,
+   "confidence": "approximate",
+   "note": "The basement under the stage, from which the console rises (nomination). Its extent is approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "byrd-c-basement-floor-3",
+   "name": "Byrd Theatre: stage",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47782594,
+     37.55257445
+    ],
+    [
+     -77.47774724,
+     37.55254655
+    ],
+    [
+     -77.47773942,
+     37.5525606
+    ],
+    [
+     -77.47781812,
+     37.5525885
+    ]
+   ],
+   "height": 0.3,
+   "tone": "floor",
+   "elevation": 63.65,
+   "upTo": 63.95,
+   "confidence": "approximate",
+   "note": "The basement under the stage, from which the console rises (nomination). Its extent is approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "byrd-c-basement-floor-4",
+   "name": "Byrd Theatre: stage",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47780248,
+     37.5526166
+    ],
+    [
+     -77.47772378,
+     37.5525887
+    ],
+    [
+     -77.4777218,
+     37.55259226
+    ],
+    [
+     -77.4778005,
+     37.55262016
     ]
    ],
    "height": 0.3,
@@ -7815,8 +8250,8 @@
    "tone": "gold",
    "elevation": 67.05,
    "upTo": 77.1,
-   "confidence": "approximate",
-   "note": "The proscenium wall. The opening's size is approximate; the 1928 photograph shows a deep arch with the original inner proscenium, covered in the 1950s (Rudisill 1986).",
+   "confidence": "written",
+   "note": "The gilded frame of the original inner proscenium, shown in the 1928 photograph and covered in the 1950s by a CinemaScope screen (Rudisill 1986). Its size is approximate.",
    "sources": [
     "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
    ]
@@ -7848,8 +8283,8 @@
    "tone": "gold",
    "elevation": 67.05,
    "upTo": 77.1,
-   "confidence": "approximate",
-   "note": "The proscenium wall. The opening's size is approximate; the 1928 photograph shows a deep arch with the original inner proscenium, covered in the 1950s (Rudisill 1986).",
+   "confidence": "written",
+   "note": "The gilded frame of the original inner proscenium, shown in the 1928 photograph and covered in the 1950s by a CinemaScope screen (Rudisill 1986). Its size is approximate.",
    "sources": [
     "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
    ]
@@ -7881,8 +8316,75 @@
    "tone": "gold",
    "elevation": 76.65,
    "upTo": 77.1,
+   "confidence": "written",
+   "note": "The gilded frame of the original inner proscenium, shown in the 1928 photograph and covered in the 1950s by a CinemaScope screen (Rudisill 1986). Its size is approximate.",
+   "sources": [
+    "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
+   ]
+  },
+  {
+   "id": "byrd-c-pros-arch",
+   "name": "Byrd Theatre: stage",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47786201,
+     37.55258427
+    ],
+    [
+     -77.47770357,
+     37.5525281
+    ],
+    [
+     -77.47770339,
+     37.55252843
+    ],
+    [
+     -77.47786183,
+     37.5525846
+    ]
+   ],
+   "height": 0.55,
+   "tone": "gold",
+   "elevation": 77.1,
+   "upTo": 77.65,
+   "confidence": "written",
+   "note": "The proscenium arch over the inner proscenium, as the 1928 photograph shows it (Rudisill 1986: \"the original inner proscenium which was covered in the 1950s with a Cinemascope screen\"). Its rise and width are approximate.",
+   "sources": [
+    "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
+   ],
+   "shape": "arch"
+  },
+  {
+   "id": "byrd-c-pros-arch-inner",
+   "name": "Byrd Theatre: stage",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47785598,
+     37.55258174
+    ],
+    [
+     -77.47770997,
+     37.55252997
+    ],
+    [
+     -77.47770979,
+     37.55253031
+    ],
+    [
+     -77.4778558,
+     37.55258207
+    ]
+   ],
+   "height": 0.25,
+   "tone": "plaster",
+   "elevation": 77.1,
+   "upTo": 77.35,
    "confidence": "approximate",
-   "note": "The proscenium wall. The opening's size is approximate; the 1928 photograph shows a deep arch with the original inner proscenium, covered in the 1950s (Rudisill 1986).",
+   "note": "The proscenium arch over the inner proscenium, as the 1928 photograph shows it (Rudisill 1986: \"the original inner proscenium which was covered in the 1950s with a Cinemascope screen\"). Its rise and width are approximate.",
    "sources": [
     "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
    ]
@@ -8514,7 +9016,7 @@
    ]
   },
   {
-   "id": "byrd-c-curtain-1",
+   "id": "byrd-c-curtain-1-1",
    "name": "Byrd Theatre: stage",
    "kind": "landmark",
    "from": 1928,
@@ -8524,12 +9026,12 @@
      37.55259212
     ],
     [
-     -77.47783549,
-     37.55258625
+     -77.47784481,
+     37.55258955
     ],
     [
-     -77.47783411,
-     37.55258873
+     -77.47784343,
+     37.55259203
     ],
     [
      -77.47785068,
@@ -8541,33 +9043,33 @@
    "elevation": 67.05,
    "upTo": 76.65,
    "confidence": "approximate",
-   "note": "The stage curtain in red velvet, drawn open (the 1986 restoration matched the carpet to \"the seats and stage curtains\"; nomination: red velvet). Approximate.",
+   "note": "The stage curtain, drawn open. Its 1928 color is not recorded: it is drawn in the seats' red, as in 1986, when the new carpet was chosen \"to match the seats and stage curtains\" (Rudisill 1986); the nomination's scheme is amber and gold with red velvet accents. Its size is approximate.",
    "sources": [
     "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf",
     "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
    ]
   },
   {
-   "id": "byrd-c-curtain-2",
+   "id": "byrd-c-curtain-1-2",
    "name": "Byrd Theatre: stage",
    "kind": "landmark",
    "from": 1928,
    "ring": [
     [
-     -77.47771951,
-     37.55254513
+     -77.47784426,
+     37.55259055
     ],
     [
-     -77.47770294,
-     37.55253926
+     -77.47783701,
+     37.55258798
     ],
     [
-     -77.47770156,
-     37.55254174
+     -77.47783563,
+     37.55259046
     ],
     [
-     -77.47771813,
-     37.55254761
+     -77.47784288,
+     37.55259303
     ]
    ],
    "height": 9.6,
@@ -8575,7 +9077,211 @@
    "elevation": 67.05,
    "upTo": 76.65,
    "confidence": "approximate",
-   "note": "The stage curtain in red velvet, drawn open (the 1986 restoration matched the carpet to \"the seats and stage curtains\"; nomination: red velvet). Approximate.",
+   "note": "The stage curtain, drawn open. Its 1928 color is not recorded: it is drawn in the seats' red, as in 1986, when the new carpet was chosen \"to match the seats and stage curtains\" (Rudisill 1986); the nomination's scheme is amber and gold with red velvet accents. Its size is approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf",
+    "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
+   ]
+  },
+  {
+   "id": "byrd-c-curtain-1-3",
+   "name": "Byrd Theatre: stage",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47783756,
+     37.55258699
+    ],
+    [
+     -77.47783031,
+     37.55258442
+    ],
+    [
+     -77.47782893,
+     37.55258689
+    ],
+    [
+     -77.47783618,
+     37.55258946
+    ]
+   ],
+   "height": 9.6,
+   "tone": "seat",
+   "elevation": 67.05,
+   "upTo": 76.65,
+   "confidence": "approximate",
+   "note": "The stage curtain, drawn open. Its 1928 color is not recorded: it is drawn in the seats' red, as in 1986, when the new carpet was chosen \"to match the seats and stage curtains\" (Rudisill 1986); the nomination's scheme is amber and gold with red velvet accents. Its size is approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf",
+    "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
+   ]
+  },
+  {
+   "id": "byrd-c-curtain-1-4",
+   "name": "Byrd Theatre: stage",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47782976,
+     37.55258541
+    ],
+    [
+     -77.47782251,
+     37.55258284
+    ],
+    [
+     -77.47782113,
+     37.55258532
+    ],
+    [
+     -77.47782838,
+     37.55258789
+    ]
+   ],
+   "height": 9.6,
+   "tone": "seat",
+   "elevation": 67.05,
+   "upTo": 76.65,
+   "confidence": "approximate",
+   "note": "The stage curtain, drawn open. Its 1928 color is not recorded: it is drawn in the seats' red, as in 1986, when the new carpet was chosen \"to match the seats and stage curtains\" (Rudisill 1986); the nomination's scheme is amber and gold with red velvet accents. Its size is approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf",
+    "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
+   ]
+  },
+  {
+   "id": "byrd-c-curtain-2-1",
+   "name": "Byrd Theatre: stage",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47773194,
+     37.55254954
+    ],
+    [
+     -77.47772469,
+     37.55254697
+    ],
+    [
+     -77.47772331,
+     37.55254945
+    ],
+    [
+     -77.47773056,
+     37.55255202
+    ]
+   ],
+   "height": 9.6,
+   "tone": "seat",
+   "elevation": 67.05,
+   "upTo": 76.65,
+   "confidence": "approximate",
+   "note": "The stage curtain, drawn open. Its 1928 color is not recorded: it is drawn in the seats' red, as in 1986, when the new carpet was chosen \"to match the seats and stage curtains\" (Rudisill 1986); the nomination's scheme is amber and gold with red velvet accents. Its size is approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf",
+    "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
+   ]
+  },
+  {
+   "id": "byrd-c-curtain-2-2",
+   "name": "Byrd Theatre: stage",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47772414,
+     37.55254796
+    ],
+    [
+     -77.47771689,
+     37.55254539
+    ],
+    [
+     -77.47771551,
+     37.55254787
+    ],
+    [
+     -77.47772276,
+     37.55255044
+    ]
+   ],
+   "height": 9.6,
+   "tone": "seat",
+   "elevation": 67.05,
+   "upTo": 76.65,
+   "confidence": "approximate",
+   "note": "The stage curtain, drawn open. Its 1928 color is not recorded: it is drawn in the seats' red, as in 1986, when the new carpet was chosen \"to match the seats and stage curtains\" (Rudisill 1986); the nomination's scheme is amber and gold with red velvet accents. Its size is approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf",
+    "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
+   ]
+  },
+  {
+   "id": "byrd-c-curtain-2-3",
+   "name": "Byrd Theatre: stage",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47771744,
+     37.5525444
+    ],
+    [
+     -77.47771019,
+     37.55254183
+    ],
+    [
+     -77.47770881,
+     37.55254431
+    ],
+    [
+     -77.47771606,
+     37.55254688
+    ]
+   ],
+   "height": 9.6,
+   "tone": "seat",
+   "elevation": 67.05,
+   "upTo": 76.65,
+   "confidence": "approximate",
+   "note": "The stage curtain, drawn open. Its 1928 color is not recorded: it is drawn in the seats' red, as in 1986, when the new carpet was chosen \"to match the seats and stage curtains\" (Rudisill 1986); the nomination's scheme is amber and gold with red velvet accents. Its size is approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf",
+    "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
+   ]
+  },
+  {
+   "id": "byrd-c-curtain-2-4",
+   "name": "Byrd Theatre: stage",
+   "kind": "landmark",
+   "from": 1928,
+   "ring": [
+    [
+     -77.47770964,
+     37.55254282
+    ],
+    [
+     -77.47770239,
+     37.55254025
+    ],
+    [
+     -77.47770101,
+     37.55254273
+    ],
+    [
+     -77.47770826,
+     37.5525453
+    ]
+   ],
+   "height": 9.6,
+   "tone": "seat",
+   "elevation": 67.05,
+   "upTo": 76.65,
+   "confidence": "approximate",
+   "note": "The stage curtain, drawn open. Its 1928 color is not recorded: it is drawn in the seats' red, as in 1986, when the new carpet was chosen \"to match the seats and stage curtains\" (Rudisill 1986); the nomination's scheme is amber and gold with red velvet accents. Its size is approximate.",
    "sources": [
     "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf",
     "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
@@ -8604,12 +9310,12 @@
      37.5525946
     ]
    ],
-   "height": 1.2,
+   "height": 1.9,
    "tone": "seat",
-   "elevation": 75.45,
+   "elevation": 74.75,
    "upTo": 76.65,
    "confidence": "approximate",
-   "note": "The stage curtain in red velvet, drawn open (the 1986 restoration matched the carpet to \"the seats and stage curtains\"; nomination: red velvet). Approximate.",
+   "note": "The stage curtain, drawn open. Its 1928 color is not recorded: it is drawn in the seats' red, as in 1986, when the new carpet was chosen \"to match the seats and stage curtains\" (Rudisill 1986); the nomination's scheme is amber and gold with red velvet accents. Its size is approximate.",
    "sources": [
     "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf",
     "https://journals.shareok.org/theatreorgan/article/download/3999/3978/3932"
@@ -8796,12 +9502,12 @@
      37.55252049
     ],
     [
-     -77.47762955,
-     37.55255975
+     -77.47762964,
+     37.55255958
     ],
     [
-     -77.47788222,
-     37.55264933
+     -77.47788231,
+     37.55264916
     ]
    ],
    "height": 0.3,
