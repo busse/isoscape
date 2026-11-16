@@ -57,7 +57,55 @@ export const compare = (a: Item, b: Item, stacked = false): number => {
   if (b.zMin >= a.zMax - 0.05) return -1
   // Overlapping footprints at overlapping heights: a bridge over a low building, or bad data.
   if (a.kind !== b.kind) return a.kind === 'bridge' ? 1 : -1
+  if (a.span !== undefined && b.span !== undefined) {
+    const s = spanOrder(a.span, b.span)
+    if (s !== 0) return s
+  }
   return a.key < b.key ? 1 : a.key > b.key ? -1 : 0
+}
+
+type Span = NonNullable<Item['span']>
+
+/**
+ * How far `p` lies beyond the line of span `s`, along N' (into the frame). Null unless `p` is
+ * beside the span (within half a span of it along its line), or when the span runs into the
+ * frame; 0 when it lies within half a meter of the span's line.
+ */
+const beyond = (s: Span, p: Vec2): number | null => {
+  const dx = s.b[0] - s.a[0]
+  const dy = s.b[1] - s.a[1]
+  const len = Math.hypot(dx, dy)
+  if (Math.abs(dx) < 0.3 * len) return null
+  const along = ((p[0] - s.a[0]) * dx + (p[1] - s.a[1]) * dy) / (len * len)
+  if (along < -0.5 || along > 1.5) return null
+  const off = p[1] - (s.a[1] + dy * ((p[0] - s.a[0]) / dx))
+  return Math.abs(off) < 0.5 ? 0 : off
+}
+
+/**
+ * Two bridge spans that overlap side by side (the two carriageways of a viaduct, a pair of
+ * tracks). Their depth keys alternate along the road, so ordering them by key interleaves two
+ * decks span by span into a ladder. Instead the deck whose line is nearer the camera is in
+ * front, whatever its height (its fascia and piers hide the farther deck's); where one runs
+ * right over the other, the upper one is.
+ */
+export const spanOrder = (a: Span, b: Span): number => {
+  // Spans of one deck follow each other: depth decides.
+  if (a.bridge === b.bridge) return 0
+  // Only decks that run side by side; where one crosses another, depth decides as before (a
+  // higher crossing deck painted later would lay its piers over the nearer, lower deck).
+  const ax = a.b[0] - a.a[0], ay = a.b[1] - a.a[1], bx = b.b[0] - b.a[0], by = b.b[1] - b.a[1]
+  if (Math.abs(ax * bx + ay * by) < 0.97 * Math.hypot(ax, ay) * Math.hypot(bx, by)) return 0
+  const mid = (s: Span): Vec2 => [(s.a[0] + s.b[0]) / 2, (s.a[1] + s.b[1]) / 2]
+  const ba = beyond(a, mid(b))
+  const ab = beyond(b, mid(a))
+  // b beyond a's line, or a short of b's: a is nearer.
+  const votes = (ba === null ? 0 : Math.sign(ba)) - (ab === null ? 0 : Math.sign(ab))
+  if (votes !== 0) return votes > 0 ? 1 : -1
+  // Not beside each other at all: depth decides.
+  if (ba === null && ab === null) return 0
+  // One right over the other: the upper deck.
+  return a.z > b.z + 1 ? 1 : b.z > a.z + 1 ? -1 : 0
 }
 
 /** How far (meters) two footprints may overlap and still count as apart, with `stacked`. */

@@ -429,7 +429,9 @@ shows it gone. The steps are in *How it's made*, under "Time". The 1886, 1895, 1
 heights are approximate, and some buildings are missing, misplaced or merged.
 
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
-and elevation and keeps only its year-built parcels in its own `data/` folder.
+and elevation and keeps only its year-built parcels in its own `data/` folder. A build looks for
+`yearbuilt.json` in the region's own folder first, then in the shared one, and stops with an
+error if neither has it: without it nearly every building would be undated.
 
 ## Cutaways
 

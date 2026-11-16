@@ -66,6 +66,16 @@ in tiles of at most 1,500 pixels a side, at 1 m per pixel unless the region sets
 `demResolution`. The tiles are stitched together and stored as `data/<region>/dem.bin.gz`:
 gzipped 16-bit integers in centimeters, so heights are kept to the nearest centimeter.
 
+The service keeps its pixels square in degrees. A tile sized in meters is not square in
+degrees away from the equator, so the service widens it north and south about its center
+and fills the same number of pixels: the image covers more ground than was asked for. Each
+tile is read on the box it really covers and resampled onto the box asked for. Until
+November 2026 this was missed, and the ground in every 3DEP map sat squeezed north–south by
+the cosine of the latitude (0.79 in Richmond, 0.73 at Crater Lake): up to a few hundred
+meters off at a tile's edge, with a step where two tiles met. Water outlines then lay on
+banks and cliffs, which read as rock and as false falls. Files fetched before the fix are
+put right as they load.
+
 Outside the US, a region names another source in `terrain.source`; `isoscape sources` lists
 them with their credits and licenses, and [Landmarks around the world](world-landmarks.md)
 shows one map for each. `ign` (France, 1 m) is cut to order like 3DEP, by IGN's WMS server,
@@ -144,7 +154,10 @@ Code: `src/view.ts`, `chooseBearing` in `src/scene.ts`.
 ## Ground
 
 Each OSM area is classified by its tags as water, island, park or grass, wood, marsh, sand,
-bare rock, parking or cemetery, and drawn as a flat fill in that order. Rivers are drawn from
+bare rock, parking or cemetery, and drawn as a flat fill in that order. Cover that lies
+mostly over water (the trees on a river island) is drawn over the water; the rest is drawn
+under it, so a park mapped around a lake, as Central Park is around the Lake, does not paint
+the lake over as lawn. Rivers are drawn from
 their mapped area, never from their center line. Canals, streams and ditches are drawn as
 ribbons of a typical width.
 
@@ -214,6 +227,10 @@ course, steeply only where it really drops.
 - Near the shore, mapped "water" standing more than 1 m above the surface is treated as bank.
   It is **given back to the land** at its own height.
 
+- Where the elevation source has **no heights** (3DEP leaves much of San Francisco Bay
+  empty), the gap is filled in from the shore around it. That fill is a guess, not a surface,
+  so no rock is read within 30 m of it, and no rapid on it.
+
 Both are inferences: a gravel bar mapped as water or a misplaced outline can produce false
 rock. Flat regions skip all of this and draw OSM's outlines as they are.
 
@@ -241,9 +258,12 @@ Code: `riverFall` in `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 ## Shoreline
 
 With terrain, the water's edge is traced from the lidar-corrected water grid (marching squares
-over a lightly smoothed mask), not from OSM's outline, and drawn at the river's surface. Where
-the outline overlaps a steep bank, the bank slopes into the water instead of the water
-climbing the bank.
+over a lightly smoothed mask), not from OSM's outline. Open water is drawn at the river's
+surface; a grid cell that is part water and part bank is draped on the ground, so the water
+meets the bank at the bank's own height. Where the outline overlaps a steep bank, the bank
+slopes into the water instead of the water climbing the bank. Each strip draws the ground it
+laps toward the camera from that ground's own grid cells, so its shore there is the same as
+the next strip's and the shoreline has no teeth at the strip lines.
 
 Code: `paintStrip` in `src/render.ts`.
 
@@ -254,9 +274,18 @@ Every OSM building that lies **wholly inside the frame** and covers at least
 camera, and the roof goes on top. Courtyards work. Wall shading follows which way each wall
 faces, with the light from the left. Roof color follows the building's type: homes,
 commerce, industry or civic. Where a building is mapped as Simple 3D Buildings parts
-(`building:part`), the parts are drawn instead of the outline, except parts that are only
-roofs (`building:part=roof`), which sit on the outline as their podium. Open canopies
-(`building=roof`) are left out.
+(`building:part`), the parts are drawn instead of the outline if the parts that reach the
+ground cover at least half of it. Many outlines carry parts only for a crown, a tower or
+rooftop works; such an outline is drawn whole, and its parts only above its roof. Parts that
+are only roofs (`building:part=roof`) never replace the outline: it stays as their podium. A
+building is drawn whole or not at all, so parts whose outline the frame cuts are left out
+too. Nothing stands on air: a part raised off the ground (`min_height`) that nothing beside
+it holds up, and that is not mapped as a bridge, reaches down to the roof under it or to the
+ground (a crown whose shaft is missing from the data, or too small to draw). A bridge tower's
+parts (`tower:type=bridge`) are often mapped from the top of the pier up, with the pier left
+out, so the lowest of them (no tower part within 40 m starts lower) reach down to the ground
+or water; struts between the legs keep their height. Open canopies (`building=roof`) are left
+out.
 
 Two shapes are not prisms. A **lattice tower** (`tower:construction=lattice`, such as the
 Eiffel Tower) is drawn whole as a spire on its outline, in 16 stacked tapering pieces, in a
@@ -272,11 +301,16 @@ That height is an approximation, not a survey.
 
 **Footprints from Microsoft's model** fill in where OSM has none. Wherever an OSM building
 and a footprint overlap, OSM wins and the footprint is dropped. A footprint is dropped if its
-center lies in an OSM building, or if it holds an OSM building's center.
+center lies in an OSM building, or if it holds an OSM building's center. A footprint whose
+center is on water is dropped too: there the model has found a boat, a pier head or a
+boathouse it cannot tell from a house. Buildings mapped in OSM on water, such as boathouses,
+stay.
 
 **Heights** are taken from the first of these that the building has:
 
-1. a `height` tag, from a survey or a mapper's estimate;
+1. a `height` tag, from a survey or a mapper's estimate (a whole building tagged under 2 m,
+   or with a height that can't be read, is taken as having none: Los Angeles County's import
+   gives hundreds of hillside houses 0.4 m);
 2. **an estimate from Microsoft's model**, for its own footprints, where it made one;
 3. `building:levels`, at 3.4 m a floor, plus half a floor for each roof level;
 4. **a guess** from the building's type and size: 3.2 m for a shed or anything under 40 m²,
@@ -288,8 +322,15 @@ Each build counts how many heights came from each source. A view with many guess
 right footprints and plausible but invented skylines. Joining real heights from lidar (the
 first-return surface minus bare earth) is the top item on the roadmap.
 
-On a slope, a building stands on the **lowest** ground under it, so its downhill wall shows
-its full height. The roof sits at the building's height above the average ground under it.
+On a slope, a building stands on the **lowest** ground under it, so its walls never float.
+The ground is drawn steeper than life but buildings keep their true heights, so the roof is
+set by the **true** slope, not the drawn one: it sits at the building's height above the
+lowest ground plus half the true fall across the footprint (the drawn fall divided by the
+exaggeration). On the downhill side the building shows what it would on the real hill, and
+the rest of the drawn relief goes into the hill on its uphill side, so a two-story house on a
+steep street stays a two-story house. On flat ground nothing changes. The parts of one
+building all count their heights from the level of its outline, and buildings traced from
+fire-insurance maps and lost landmarks are seated the same way.
 
 Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scene.ts`.
 
@@ -298,17 +339,37 @@ Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scen
 OSM splits one bridge into many ways, at every change of lanes, name or junction. Ramping
 each piece down to the ground would turn a viaduct into a roller coaster. So bridge ways that
 share an end, a layer and a kind (road or rail) are joined into chains first. A chain only
-ramps down at an end that touches no other bridge.
+ramps down at an end that touches no other bridge. Bridges that touch form a network,
+anchored to the ground at those ends, and no deck stands higher than a 70 m ramp from the
+nearest anchor allows, measured along the network: a viaduct that forks into short ways that
+each come down a few meters on ramps down to the fork, not standing at full height over a fan
+of steep stubs. An end that joins another bridge (a ramp onto a viaduct of another layer, a
+link at a fork) meets the higher of the decks there and eases to its own height over 70 m, so
+the two arrive at one height. Where a deck comes down to
+the ground, its side stops at the ground instead of hanging below it.
 
 **Deck height is a rule of thumb.** OSM rarely records it. A region can name a height for a
 bridge, for example `{ "match": "Manchester", "deck": 24 }`. Otherwise the deck sits
 `bridgeDeck` meters (7 by default) above the ground for each OSM `layer`. The deck is a taut
 line over whatever it crosses: never closer to the ground than its clearance, rising in
-straight runs, and easing down over at most 70 m at a free end. Piers drop to the real ground
-or water every 38 m where the deck is more than 3 m up.
+straight runs, and easing down over 70 m at a free end. The ramp keeps that length on a short
+bridge, so a bridge shorter than two ramps never reaches full height: a 30 m footbridge over a
+canal rises well under a meter above its banks, where a 7 m tent would read as a stub floating
+in the air. Piers drop to the real ground or water every 38 m where the deck is more than 3 m
+up, or to the roof of a building under the deck, never down through it. A span that lies
+inside a building and below its roof (a garage ramp, a walkway's landing) is left out: the
+building hides it.
 
 Each bridge is cut into spans of at most 22 m, so a long bridge can pass in front of one
 building and behind another. Bridges are cut at the edges of the frame.
+
+**A suspension bridge** (`bridge:structure=suspension`) whose towers are mapped as parts
+(`tower:type=bridge`) gets its two main cables, drawn as plain lines. The parts standing
+within 25 m of the bridge's line make its towers, and the parts either side of the widest gap
+across the line are a tower's two legs. Each cable runs from an anchorage on the deck at one
+end of the bridge, over the tops of the legs, to the other end: a parabola between towers
+that sags to 2 m over the deck at mid-span, and a slighter one down to each anchorage.
+Suspenders, tower detail and arches are not drawn.
 
 Code: `chainBridges` and `bridgePieces` in `src/scene.ts`.
 
@@ -322,6 +383,10 @@ on screen:
 - If their footprints can be separated by a line, the one on the camera's side of that line
   is in front.
 - If the footprints overlap (stacked building parts), the one entirely above is in front.
+- Two bridge spans that run side by side (within about 14 degrees of parallel, the two
+  carriageways of a viaduct or a pair of tracks): the one whose line is nearer the camera is
+  in front, or the upper one where one runs right over the other. By centers alone, two
+  overlapping decks alternate span by span and read as a ladder.
 - Otherwise the nearer center wins.
 
 A topological sort turns these pairwise results into one order. The rare cycle, from concave
@@ -350,7 +415,11 @@ with water where the cut crosses the river.
 
 **The SVG is compact.** Coordinates are rounded to a tenth of a pixel and written relative to
 the previous point. Draped edges are simplified to a quarter pixel, and the soft edges of
-hillshade bands to half a pixel. Each dot is a zero-length
+hillshade bands to half a pixel: a point is dropped only while the line that replaces it
+passes within that distance of every point it stands for. (Until November 2026 each point
+was tested against its two neighbors alone, so a long, gently curving edge could drift
+several pixels off; across open water, where nothing covers the strips, the gaps showed as
+white stripes.) Each dot is a zero-length
 line with round caps. Even so, a big region can produce a file of 25–45 MB. The `--png` option
 renders a raster with `rsvg-convert`. Colors and line weights come from a palette (`paper`
 or `night`).
@@ -368,7 +437,9 @@ which is which.
 every scene from its year on. The year comes from:
 
 1. a curated year, for a few landmarks whose records are known to be wrong or missing (the
-   Capitol, St. John's Church, the Old Stone House and so on), each with a source;
+   Capitol, St. John's Church, the Old Stone House and so on), each with a source. A curated
+   year can also end: the Capitol's central block (OSM's middle building part) is drawn alone
+   from 1788, and its full outline, with the wings of 1904–06, from 1906;
 2. else OpenStreetMap's `start_date` tag;
 3. else the city assessor's *year built* for the parcel under the building's center.
 
@@ -432,19 +503,28 @@ through sixteen street corners, each snapped to the city's block outlines); and
 
 **Era rules** date everything else that OSM maps: the first rule matching a feature's name,
 `ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
-Downtown Expressway from 1976, the river viaducts from 1901. The James River and Kanawha Canal
-appears from 1800 until the railroad took it over, and again from the Canal Walk of 1999.
-Features no rule matches are drawn in every year, which suits the street grid. Paths and other
-undated features are drawn only today.
+Downtown Expressway from 1976, the river viaducts from 1901, today's Mayo Bridge from 1913 (its
+earlier wooden spans are not drawn). The James River and Kanawha Canal appears from 1800 until
+the railroad took it over, and again from the Canal Walk of 1999. Interchange ramps follow the
+interstate and parking aisles and driveways follow surface parking (1950); both dates are
+approximate. A feature no rule matches is drawn in every year, so the Richmond series ends its
+rules with catch-alls: the street grid, streams and the river are drawn in every year, and
+anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basins, paths) is
+drawn only today, since nothing says when it was made. Each catch-all names what still needs a
+source.
 
 In every scene after the first, buildings **new since the previous scene** have gold roofs.
 
 **Streets before the houses.** A series can say that minor streets (tertiary and smaller,
 service roads and paths) are drawn only where a building of the year stands within so many
-meters of them: 75 m in the 1925 streetcar scene. Each street is walked every half that
-distance and kept if any building (standing today and built by then, or traced from a Sanborn
-sheet and still standing) has a corner within one grid cell of a step. A suburb whose streets
-were laid out but not yet built on shows its main roads only.
+meters of them: 75 m in the 1925 streetcar scene, 60 m in the downtown series. Each street is
+walked every half that distance and kept if any building (standing today and built by then,
+traced from a Sanborn sheet and still standing, or a curated landmark) has a corner within one
+grid cell of a step. A suburb whose streets were laid out but not yet built on shows its main
+roads only. The downtown series holds its main roads to the same test, because before the
+first Sanborn map (1886) the only record of how far the town reached is what still stands. A
+street of a town plan (Mayo's grid of 1737) is kept in every year from the plan on, houses or
+not, though not the plan's service roads. Today's scene keeps all of today's streets.
 
 **Streetcar lines.** A curated `streetcar` item is a line drawn as a bold red ribbon down the
 street, 9 m wide, with a car every 900 m along it: 14 m long and 3.6 m tall like a 1920s

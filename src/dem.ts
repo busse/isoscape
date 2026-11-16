@@ -5,7 +5,8 @@
  * `terrain.source`: USGS 3DEP in the US (the default), or a national or global model
  * elsewhere. Whatever the source, the result is the same: a grid of meters above sea level on
  * the region's lon/lat box, stored compactly as gzipped int16 steps above the grid's minimum,
- * with a one-line JSON header. Nothing after the fetch knows which source it was.
+ * with a one-line JSON header. Nothing after the fetch needs to know which source it was, except
+ * that grids fetched from 3DEP before `servedBox` was known are put right as they load.
  *
  * In 3DEP, water is hydro-flattened: a river surface is flat across its width and steps down
  * along its course, so the fall of the James through the city is in the data.
@@ -18,7 +19,7 @@ import { promisify } from 'node:util'
 import { gunzipSync, gzipSync } from 'node:zlib'
 import { fetchBounds, type Region } from './region.ts'
 import type { Bounds } from './osm.ts'
-import { demSource, type MosaicSource, type RequestSource } from './dem-sources.ts'
+import { demSource, regrid, servedBox, type MosaicSource, type RequestSource } from './dem-sources.ts'
 import { decodeTiff } from './rasters.ts'
 
 const run = promisify(execFile)
@@ -32,6 +33,10 @@ export interface Dem {
   readonly height: number
   /** Row-major, row 0 at the north edge; meters; NaN where there is no data. */
   readonly data: Float32Array
+  /** The source's id, as stored in the file (absent in the oldest files, which are all 3DEP). */
+  readonly source?: string
+  /** True when every sample sits where the box says (see `alignServed`). */
+  readonly aligned?: boolean
 }
 
 const SIZE = (b: Bounds, metersPerPixel: number) => {
@@ -43,10 +48,59 @@ const SIZE = (b: Bounds, metersPerPixel: number) => {
 /** Kept for callers that only want the 3DEP URL. */
 export const demUrl = (b: Bounds, width: number, height: number): string => (demSource('3dep') as RequestSource).url(b, width, height)
 
-/** 3DEP's TIFF, georeferenced by the request's box rather than the file's tags. */
+/** 3DEP's TIFF for a request of `bounds`, resampled from the box it really covers (`servedBox`). */
 export const readTiff = (buf: Buffer, bounds: { west: number; south: number; east: number; north: number }): Dem => {
   const r = decodeTiff(buf)
-  return { ...bounds, width: r.width, height: r.height, data: r.data }
+  return { ...bounds, width: r.width, height: r.height, data: regrid(r.data, r.width, r.height, servedBox(bounds, r.width, r.height), bounds), aligned: true }
+}
+
+/**
+ * Put a 3DEP grid fetched before `servedBox` was known back where it belongs.
+ *
+ * 3DEP keeps its pixels square in degrees, so every image it served for a box sized in meters
+ * covered more latitude than asked, about the box's center: the ground in it sits squeezed
+ * north–south by the cosine of the latitude (0.73 at Crater Lake), up to a few hundred meters
+ * off at an image's edge, with a step where two tiles meet. Each image is resampled from the
+ * box it covered onto the box it was stored as. The oldest files were one image; later ones
+ * are rows of `tile`-pixel tiles, told apart by the step at the first tile row.
+ */
+export const alignServed = (d: Dem, tile = (demSource('3dep') as RequestSource).tile): Dem => {
+  const { width, height } = d
+  const tiled = height > tile && rowStep(d, tile) > 4
+  const rows = tiled ? tile : height
+  const cols = tiled ? tile : width
+  const dLon = (d.east - d.west) / width
+  const dLat = (d.north - d.south) / height
+  const data = new Float32Array(width * height)
+  for (let y0 = 0; y0 < height; y0 += rows) {
+    for (let x0 = 0; x0 < width; x0 += cols) {
+      const w = Math.min(cols, width - x0)
+      const h = Math.min(rows, height - y0)
+      const box = { west: d.west + x0 * dLon, east: d.west + (x0 + w) * dLon, north: d.north - y0 * dLat, south: d.north - (y0 + h) * dLat }
+      const piece = new Float32Array(w * h)
+      for (let y = 0; y < h; y++) piece.set(d.data.subarray((y0 + y) * width + x0, (y0 + y) * width + x0 + w), y * w)
+      const fixed = regrid(piece, w, h, servedBox(box, w, h), box)
+      for (let y = 0; y < h; y++) data.set(fixed.subarray(y * w, (y + 1) * w), (y0 + y) * width + x0)
+    }
+  }
+  return { ...d, data, aligned: true }
+}
+
+/** How much bigger the mean change across row `y` is than across the rows near it. */
+const rowStep = (d: Dem, y: number): number => {
+  const across = (r: number) => {
+    let s = 0
+    let n = 0
+    for (let x = 0; x < d.width; x++) {
+      const a = d.data[r * d.width + x]
+      const b = d.data[(r - 1) * d.width + x]
+      if (!Number.isNaN(a) && !Number.isNaN(b)) { s += Math.abs(a - b); n++ }
+    }
+    return n > 0 ? s / n : 0
+  }
+  const near = [y - 10, y - 5, y + 5, y + 10].filter((r) => r >= 1 && r < d.height).map(across)
+  const base = near.reduce((a, b) => a + b, 0) / Math.max(1, near.length)
+  return base > 0 ? across(y) / base : 0
 }
 
 type Log = (m: string) => void
@@ -196,7 +250,7 @@ export const fetchDem = async (
     for (let i = 0; i < got.data.length; i++) if (Number.isNaN(got.data[i]) && !Number.isNaN(more.data[i])) { got.data[i] = more.data[i]; filled++ }
     log(`  ${((filled / got.data.length) * 100).toFixed(1)}% of the grid filled from ${fill.name}`)
   }
-  const dem: Dem = { ...b, width, height, data: got.data }
+  const dem: Dem = { ...b, width, height, data: got.data, aligned: true }
   await writeFile(join(dir, 'dem.bin.gz'), encodeDem(dem, filled > 0 ? `${src.id}+${fillId}` : src.id))
   await rm(tileDir, { recursive: true, force: true })
   await rm(join(dir, 'dem-fill'), { recursive: true, force: true })
@@ -225,7 +279,7 @@ export const encodeDem = (d: Dem, source?: string): Buffer => {
     const v = d.data[i]
     q[i] = Number.isNaN(v) ? -32768 : Math.max(-32767, Math.min(32767, Math.round((v - lo) / scale)))
   }
-  const header = JSON.stringify({ west: d.west, south: d.south, east: d.east, north: d.north, width: d.width, height: d.height, offset: lo, scale, ...(source === undefined ? {} : { source }) })
+  const header = JSON.stringify({ west: d.west, south: d.south, east: d.east, north: d.north, width: d.width, height: d.height, offset: lo, scale, ...(source === undefined ? {} : { source }), ...(d.aligned === true ? { aligned: true } : {}) })
   return gzipSync(Buffer.concat([Buffer.from(header + '\n'), Buffer.from(q.buffer)]), { level: 9 })
 }
 
@@ -237,12 +291,19 @@ export const decodeDem = (gz: Buffer): Dem => {
   const q = new Int16Array(body.buffer.slice(body.byteOffset, body.byteOffset + body.byteLength))
   const data = new Float32Array(q.length)
   for (let i = 0; i < q.length; i++) data[i] = q[i] === -32768 ? NaN : h.offset + q[i] * h.scale
-  return { west: h.west, south: h.south, east: h.east, north: h.north, width: h.width, height: h.height, data }
+  return {
+    west: h.west, south: h.south, east: h.east, north: h.north, width: h.width, height: h.height, data,
+    ...(h.source === undefined ? {} : { source: h.source }), ...(h.aligned === true ? { aligned: true } : {}),
+  }
 }
+
+/** Was this grid fetched from 3DEP before its served box was accounted for? */
+export const misaligned = (d: Dem): boolean => d.aligned !== true && (d.source === undefined || d.source.split('+')[0] === '3dep')
 
 export const loadDem = async (path: string): Promise<Dem | null> => {
   try {
-    return decodeDem(await readFile(path))
+    const d = decodeDem(await readFile(path))
+    return misaligned(d) ? alignServed(d) : d
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null
     throw error

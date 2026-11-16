@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { isoBand, type BandPoint } from '../src/isoband.ts'
 import { makeTerrain, nodeShade } from '../src/terrain.ts'
 import { makeView } from '../src/view.ts'
-import { shadeAlphas } from '../src/render.ts'
+import { shadeAlphas, simplify } from '../src/render.ts'
 import type { Region } from '../src/region.ts'
 
 const area = (ring: readonly BandPoint[]) => {
@@ -93,4 +93,24 @@ test('the shade field is zero on flat ground and positive on a slope facing the 
   const s = nodeShade(t, light)
   const mid = Math.floor(t.ny / 2) * t.nx + Math.floor(t.nx / 2)
   assert.ok(s[mid] > 0.05)
+})
+
+test('a simplified draped edge stays within its tolerance of every point, even on a long gentle curve', () => {
+  // A row edge 6000 units long that sags 10 units: every three neighbors are nearly in line,
+  // so a test of each point against its neighbors alone kept almost nothing.
+  const pts: [number, number][] = []
+  for (let k = 0; k <= 1000; k++) {
+    const x = -3000 + 6 * k
+    pts.push([x, 10 * (1 - (x / 3000) ** 2)])
+  }
+  const out = simplify(pts, 0.25)
+  assert.ok(out.length < pts.length / 4, `kept ${out.length}`)
+  let worst = 0
+  for (const [x, y] of pts) {
+    const s = out.findIndex((q, i) => i + 1 < out.length && q[0] <= x && out[i + 1][0] >= x)
+    const [a, b] = [out[s], out[s + 1]]
+    const yy = a[1] + ((x - a[0]) / (b[0] - a[0] || 1)) * (b[1] - a[1])
+    worst = Math.max(worst, Math.abs(yy - y))
+  }
+  assert.ok(worst <= 0.26, `off by ${worst}`)
 })

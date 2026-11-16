@@ -21,6 +21,8 @@ export interface Terrain {
   readonly elev: Float32Array
   /** 1 where a node is on open water. */
   readonly water: Uint8Array
+  /** 1 where the source had no height for a node and it was filled from its neighbors. */
+  readonly filled: Uint8Array
   /** 1 where a water node is rock standing clear of the river's surface. */
   readonly rocks: Uint8Array
   /** 1 where a water node is at least two cells from any shore: where rocks and rapids are read. */
@@ -53,6 +55,7 @@ export const makeTerrain = (
   const nx = Math.ceil((f.maxX - f.minX) / cell) + 3
   const ny = Math.ceil((f.maxY - f.minY) / cell) + 3
   const elev = new Float32Array(nx * ny)
+  const filled = new Uint8Array(nx * ny)
   if (sample !== null) {
     for (let j = 0; j < ny; j++) {
       for (let i = 0; i < nx; i++) {
@@ -60,6 +63,7 @@ export const makeTerrain = (
         elev[j * nx + i] = sample(lon, lat)
       }
     }
+    for (let k = 0; k < elev.length; k++) if (Number.isNaN(elev[k])) filled[k] = 1
     fillGaps(elev, nx, ny)
     // Lidar at 1 m carries curbs, rubble and noise that a 5 m grid aliases into speckle.
     // A light blur keeps the landforms and loses the grit.
@@ -100,7 +104,7 @@ export const makeTerrain = (
     return w > 0 ? (s / w - datum) * exaggeration : z([e, n])
   }
   return {
-    cell, nx, ny, x0, y0, elev,
+    cell, nx, ny, x0, y0, elev, filled,
     water: new Uint8Array(nx * ny),
     rocks: new Uint8Array(nx * ny),
     interior: new Uint8Array(nx * ny),
@@ -322,6 +326,9 @@ export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0, markRocks
   const { nx, ny, elev, water } = t
   const reach = Math.max(1, Math.round(radius / t.cell))
   const surface = new Float32Array(elev.length)
+  // Water with a gap in the source near it (a bay the lidar did not cover) has a surface
+  // filled in from the shore around it: no rock can be read there.
+  const guessed = new Uint8Array(elev.length)
   const values: number[] = []
   for (let j = 0; j < ny; j++) {
     for (let i = 0; i < nx; i++) {
@@ -335,6 +342,7 @@ export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0, markRocks
           const jj = j + dj
           if (ii < 0 || jj < 0 || ii >= nx || jj >= ny) continue
           const kk = jj * nx + ii
+          if (t.filled[kk] === 1) guessed[k] = 1
           if (water[kk] === 1) values.push(elev[kk])
         }
       }
@@ -372,7 +380,7 @@ export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0, markRocks
   markInterior()
   for (let k = 0; k < elev.length; k++) {
     if (water[k] !== 1) continue
-    if (markRocks && t.interior[k] === 1 && elev[k] - surface[k] > rockHeight) t.rocks[k] = 1
+    if (markRocks && t.interior[k] === 1 && guessed[k] !== 1 && elev[k] - surface[k] > rockHeight) t.rocks[k] = 1
     elev[k] = surface[k]
     t.level[k] = surface[k]
   }
@@ -406,14 +414,14 @@ export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0, markRocks
 export const riverFall = (t: Terrain, i: number, j: number, span = 20): { slope: number; down: Vec2 } | null => {
   const k = Math.max(1, Math.round(span / t.cell))
   if (i < k || j < k || i >= t.nx - k || j >= t.ny - k) return null
-  if (t.interior[j * t.nx + i] !== 1) return null
+  if (t.interior[j * t.nx + i] !== 1 || t.filled[j * t.nx + i] === 1) return null
   let gx = 0
   let gy = 0
   let best = 0
   for (const [di, dj] of [[1, 0], [0, 1], [1, 1], [1, -1]] as const) {
     const a = (j + dj * k) * t.nx + (i + di * k)
     const b = (j - dj * k) * t.nx + (i - di * k)
-    if (t.interior[a] !== 1 || t.interior[b] !== 1) continue
+    if (t.interior[a] !== 1 || t.interior[b] !== 1 || t.filled[a] === 1 || t.filled[b] === 1) continue
     const run = 2 * k * t.cell * Math.hypot(di, dj)
     const g = (t.elev[a] - t.elev[b]) / run
     if (Math.abs(g) > best) best = Math.abs(g)
