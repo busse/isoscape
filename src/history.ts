@@ -31,12 +31,16 @@ export interface Epoch {
 export interface HistoryFeature {
   readonly id: string
   readonly name: string
-  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label'
+  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label' | 'street' | 'walk'
   readonly from: number
   readonly to?: number
   /** lon/lat outline (open), for areas and landmarks. */
   readonly ring?: Vec2[]
-  /** lon/lat center line, for creeks and streetcar lines (a streetcar line may hold several runs: `lines`). */
+  /**
+   * lon/lat center line, for creeks and streetcar lines (a streetcar line may hold several runs:
+   * `lines`), and for a curated street (`street`, drawn as a road) or sidewalk (`walk`, as a
+   * path), `width` meters wide, where no OSM data covers the place.
+   */
   readonly line?: Vec2[]
   readonly lines?: Vec2[][]
   /** Streetcar lines: the line's name, for the explorer, and the operator. */
@@ -108,6 +112,7 @@ export type Confidence = 'drawn' | 'written' | 'approximate'
 export const confidenceOf = (h: { readonly confidence?: Confidence }): Confidence => h.confidence ?? 'approximate'
 
 export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof'
+  | 'brick' | 'terracotta' | 'gold' | 'bronze' | 'seat' | 'pipe' | 'screen' | 'lamp' | 'marble' | 'water' | 'earth'
 
 /**
  * A train on a curated rail line: an engine (unless `engine` is false) and `cars` cars behind

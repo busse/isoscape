@@ -373,7 +373,7 @@ same pipeline on a flat plate.
   "squash": 0.5,                  // sine of the tilt
   "exaggeration": 1.0,            // vertical exaggeration
   "slab": 16,                     // ground slab thickness, meters
-  "palette": "paper",             // paper | night
+  "palette": "paper",             // paper | night | winter
   "bridgeDeck": 7,                // default deck height per OSM layer
   "bridges": [{ "match": "Manchester", "deck": 24 }],  // + "pierSpacing": meters (default 38; long for suspension bridges)
   "minBuildingArea": 12,          // m²
@@ -508,6 +508,14 @@ A callout's anchor in either drawing may say `"badge": [dx, dy]` (sheet units, 9
 the badge then stands that far off the part, with a leader to a dot on it, so it does not hide
 what it names. `travelerKey` adds a line with the traveler's glyph to the key, and a group with
 `"traveler": true` carries the glyph beside its heading.
+
+A spec may also set `theme` (`"holiday"`: accents from `SHEET_THEMES` in `src/palette.ts`, a
+border with holly at the corners; margins only), `halo` (leaders drawn over a paper halo, for a
+dark plate), `mapData: false` (no OpenStreetMap credit in the drawing's metadata, for a plate
+drawn without its data), `keyNote` (the line under the key), and `layout` (`isoHeight`,
+`isoAlign: "left"`, `bottom`, and `notes: {x, y, w}` to set the sources and notes beside the
+section). A wayfinding label can stand `inside-left-above` or `inside-left-below` the place it
+points to on the plate's left edge, or `below` the plate, and be nudged by `offset`.
 
 `--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):
 the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, each with its title

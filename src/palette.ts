@@ -162,6 +162,17 @@ const paper: Palette = {
     loco: ['#6b6c70', '#4a4b4f', '#5a5b5f'],
     coal: ['#403e3b', '#2f2e2c', '#4a4744'],
     carRoof: ['#43553d', '#2f3d2b', '#4a5d43'],
+    brick: ['#c98c76', '#a46a57', '#b77d69'],
+    terracotta: ['#f1ece2', '#d4cdbf', '#ebe5d8'],
+    gold: ['#d9b25e', '#b08a3e', '#e3c37a'],
+    bronze: ['#a88a55', '#7c6439', '#b89a64'],
+    seat: ['#a6403a', '#7a2c28', '#b8534a'],
+    pipe: ['#d9d3c2', '#b3ab97', '#e5e0d2'],
+    screen: ['#fbfaf5', '#ecebe4', '#ffffff'],
+    lamp: ['#f6e7b8', '#e0c98a', '#fbf0cf'],
+    marble: ['#3a3638', '#262325', '#4a4446'],
+    water: ['#a8cad8', '#7fa9bc', '#b9d6e2'],
+    earth: ['#cdbfa3', '#b3a58a', '#d6c9ae'],
   },
   poche: '#2c2b33',
   cutOutline: '#2c2b33',
@@ -254,6 +265,17 @@ const night: Palette = {
     loco: ['#3a3b40', '#26272c', '#303136'],
     coal: ['#1f1f22', '#161618', '#29292c'],
     carRoof: ['#24382a', '#18261c', '#2a3e2f'],
+    brick: ['#5b3a37', '#3d2727', '#4a3230'],
+    terracotta: ['#8d8f98', '#62656f', '#9a9ca5'],
+    gold: ['#8a7240', '#5e4d2c', '#9a8150'],
+    bronze: ['#6a5838', '#4a3d27', '#776443'],
+    seat: ['#6a2a28', '#4a1d1c', '#7a3330'],
+    pipe: ['#6e6a62', '#4e4b45', '#7a766d'],
+    screen: ['#d8d6cf', '#b8b6af', '#e2e0da'],
+    lamp: ['#e8d49a', '#c9b273', '#f0dfae'],
+    marble: ['#2a2628', '#1a1718', '#3a3437'],
+    water: ['#1b2e3b', '#152430', '#22384a'],
+    earth: ['#2b2f3b', '#20232c', '#323644'],
   },
   poche: '#c9d1e6',
   cutOutline: '#c9d1e6',
@@ -269,7 +291,60 @@ const night: Palette = {
   },
 }
 
-export const PALETTES: Readonly<Record<string, Palette>> = { paper, night }
+/**
+ * A winter night with the lights on inside: the street, the ground and the outsides of
+ * buildings in moonlit blues and dark brick, and a modeled building's rooms in warm lamplight
+ * (plaster, gilding, crimson velvet), so a cutaway's open rooms glow against the dark. The cut
+ * itself is inked dark, and the dashed outline of what was lifted away is drawn light, so it
+ * reads on the dark ground.
+ */
+const winter: Palette = {
+  ...night,
+  sky: '#151b2a',
+  land: '#1f2636',
+  slab: '#3a3230',
+  road: '#2a3141',
+  path: '#363e51',
+  ink: '#1c1517',
+  wallLit: '#3a4152',
+  wallShade: '#2a2f3d',
+  parts: {
+    ...night.parts,
+    stone: ['#ead8b4', '#c9ae84', '#f0e0c2'],
+    plaster: ['#f2dcaa', '#d6b67c', '#f6e6bf'],
+    floor: ['#b98a5c', '#94673f', '#c9a070'],
+    wood: ['#8e5d38', '#673f25', '#a06d45'],
+    glass: ['#f2cf7a', '#d9ae55', '#f6dc98'],
+    roof: ['#3e4454', '#2c313d', '#465062'],
+    iron: ['#3c383a', '#282527', '#4c4648'],
+    coal: ['#1f1d1e', '#141313', '#2a2829'],
+    brick: ['#6a423c', '#47302c', '#55403e'],
+    terracotta: ['#9a9ca6', '#6d7080', '#a8aab4'],
+    gold: ['#e3b65a', '#b3882f', '#efca78'],
+    bronze: ['#a5834a', '#7a5f33', '#b5935a'],
+    seat: ['#a8322d', '#76201f', '#bd453b'],
+    pipe: ['#ddd1b4', '#ada083', '#e9dfc7'],
+    screen: ['#fcf5e1', '#efe4c6', '#fff9ea'],
+    lamp: ['#fff1c6', '#f3d585', '#fff7dd'],
+    marble: ['#2c2729', '#1b1819', '#3c3538'],
+    water: ['#5b9fae', '#41798a', '#78b7c4'],
+    earth: ['#3a3230', '#3a3230', '#3a3230'],
+  },
+  poche: '#22181b',
+  cutOutline: '#e6d3a8',
+  route: '#d8392b',
+}
+
+export const PALETTES: Readonly<Record<string, Palette>> = { paper, night, winter }
+
+/**
+ * Accents for a cutaway sheet's margins (tools/cutaway/sheet.py, a spec's `theme`), never for
+ * the drawing itself: a holiday sheet's deep red and evergreen green, for the title, the
+ * section headings and a plain border rule.
+ */
+export const SHEET_THEMES: Readonly<Record<string, { readonly red: string; readonly green: string; readonly gold: string }>> = {
+  holiday: { red: '#8f1d24', green: '#1f4a33', gold: '#a8812f' },
+}
 
 export const palette = (name = 'paper'): Palette => {
   const p = PALETTES[name]

@@ -424,8 +424,10 @@ was tested against its two neighbors alone, so a long, gently curving edge could
 several pixels off; across open water, where nothing covers the strips, the gaps showed as
 white stripes.) Each dot is a zero-length
 line with round caps. Even so, a big region can produce a file of 25–45 MB. The `--png` option
-renders a raster with `rsvg-convert`. Colors and line weights come from a palette (`paper`
-or `night`).
+renders a raster with `rsvg-convert`. Colors and line weights come from a palette (`paper`,
+`night`, or `winter`: a night with the lights on inside, the street and the outsides of
+buildings in moonlit blues and dark brick and a modeled building's rooms in warm lamplight,
+for the Byrd Theatre cutaway).
 
 Code: `src/render.ts`, `src/palette.ts`.
 
@@ -674,7 +676,16 @@ leader to a small dot on the part, drawn like the wayfinding labels' leaders. Ca
 on the sheet, the two-digit numbers in the badges on the drawings, is 40 pixels (9.6 pt; 7.2 pt
 at 24 × 18). There are no canvas files: a canvas's 1.5 in of mirrored wrap would carry the
 title and the column round its sides. Its title block sits in the bottom-right corner, below
-the column.
+the column. A sheet may carry a theme (`"theme": "holiday"`): the title in deep red, the
+headings and their rules in evergreen, and a plain double rule round the sheet with a sprig of
+holly at each corner, all in the margins and never on the drawing; on a dark plate its leaders
+are drawn over a paper-colored halo. Where the column would run long, the sources and notes can
+stand in a box of their own beside the flat section.
+
+Where no map data covers a place, the history file can draw its streets and sidewalks
+itself (`"kind": "street"` or `"walk"`, a center line and a width), on flat ground. The Byrd
+Theatre cutaway stands on Cary Street drawn that way: the cache has no OpenStreetMap or
+elevation data for Carytown.
 
 ## Sets: a map framed by its places
 

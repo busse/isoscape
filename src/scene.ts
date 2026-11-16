@@ -280,6 +280,12 @@ export const buildScene = (
     const r = ribbonOf('canal', { type: 'line', id: h.id, tags: {}, points: h.line }, h.width ?? 6)
     if (r) ribbons.push(r)
   }
+  // A curated street or sidewalk, for a place no OSM data covers: drawn as a road or a path.
+  for (const h of curated) {
+    if ((h.kind !== 'street' && h.kind !== 'walk') || h.line === undefined) continue
+    const r = ribbonOf(h.kind === 'street' ? 'road' : 'path', { type: 'line', id: h.id, tags: {}, points: h.line }, h.width ?? (h.kind === 'street' ? 12 : 3), false)
+    if (r) ribbons.push(r)
+  }
   // Curated track (a station's loop, long since taken up), drawn as rail.
   for (const h of curated) {
     if (h.kind !== 'rail') continue

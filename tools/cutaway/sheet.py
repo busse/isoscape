@@ -98,12 +98,18 @@ def badge(x, y, n, conf, r=44):
     return circle + num
 
 
+HALO = [False]   # set from the spec: leaders get a paper halo, to read on a dark plate
+
+
 def leader(x0, y0, x1, y1, r=0):
     """A thin leader from (x0, y0), less r at that end, to a small dot at (x1, y1): the
-    wayfinding labels' leaders, drawn the same."""
+    wayfinding labels' leaders, drawn the same. On a dark plate (`halo` in the spec) each
+    leader and dot is drawn over a paper-colored halo."""
     d = ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5 or 1
     sx, sy = x0 + (x1 - x0) * r / d, y0 + (y1 - y0) * r / d
-    return (f'<path d="M{sx:.0f} {sy:.0f}L{x1:.0f} {y1:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>'
+    halo = (f'<path d="M{sx:.0f} {sy:.0f}L{x1:.0f} {y1:.0f}" fill="none" stroke="{PAPER}" stroke-width="15" stroke-linecap="round"/>'
+            f'<circle cx="{x1:.0f}" cy="{y1:.0f}" r="20" fill="{PAPER}"/>') if HALO[0] else ''
+    return (halo + f'<path d="M{sx:.0f} {sy:.0f}L{x1:.0f} {y1:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>'
             f'<circle cx="{x1:.0f}" cy="{y1:.0f}" r="13" fill="{INK}" stroke="{PAPER}" stroke-width="3"/>')
 
 
@@ -121,6 +127,35 @@ def figure(x, y, h, shapes, fill, facing=1):
     """The traveler glyph (the build's own shapes, in meters, feet at 0), feet at (x, y), h tall."""
     k = h / 1.75
     return '<g>' + ''.join('<path fill="{}" d="M{}Z"/>'.format(fill, 'L'.join(f'{x + px * k * facing:.1f} {y - py * k:.1f}' for px, py in poly)) for poly in shapes) + '</g>'
+
+
+def theme_colors(name):
+    """A sheet theme's accents, from src/palette.ts (SHEET_THEMES): the one place colors live."""
+    r = subprocess.run(['node', '--input-type=module', '-e', "import('./src/palette.ts').then((m) => console.log(JSON.stringify(m.SHEET_THEMES)))"],
+                       cwd=ROOT, check=True, capture_output=True, text=True)
+    return json.loads(r.stdout)[name]
+
+
+def holly(x, y, k, green, red, flip=1):
+    """A sprig of holly for a holiday sheet's corner: two leaves and three berries, `k` units to
+    a leaf's length, pointing away from the corner (flip -1 mirrors it). Decoration only."""
+    def leaf(cx, cy, ang):
+        # A holly leaf: a pointed oval with three notches a side, turned to `ang` degrees.
+        import math
+        pts = []
+        for i in range(17):
+            t = i / 16
+            u = (t - 0.5) * k
+            w = 0.26 * k * math.sin(math.pi * t) * (0.82 if i % 4 == 2 else 1.0)
+            pts.append((u, w))
+        pts += [(u, -w) for u, w in reversed(pts[1:-1])]
+        a = math.radians(ang)
+        return 'M' + 'L'.join(f'{cx + u * math.cos(a) - v * math.sin(a):.0f} {cy + u * math.sin(a) + v * math.cos(a):.0f}' for u, v in pts) + 'Z'
+    d = leaf(x + flip * 0.42 * k, y - 0.12 * k, -18 * flip) + leaf(x + flip * 0.12 * k, y + 0.40 * k, 72 * flip)
+    out = f'<path d="{d}" fill="{green}"/>'
+    for bx, by in ((0.0, 0.0), (0.13, -0.09), (0.05, 0.13)):
+        out += f'<circle cx="{x + flip * bx * k:.0f}" cy="{y + by * k:.0f}" r="{0.075 * k:.0f}" fill="{red}"/>'
+    return out
 
 
 def inner(svg_text):
@@ -169,37 +204,57 @@ def main():
     for g in spec['groups']:
         for c in g['callouts']:
             c['_conf'] = confidence(c, conf_of)
+    HALO[0] = bool(spec.get('halo'))
+    # A theme colors the title, the headings and their rules, and draws a plain border: sheet
+    # decoration, never a claim about the drawing.
+    theme = theme_colors(spec['theme']) if spec.get('theme') else None
+    accent = theme['red'] if theme else INK
+    head_ink = theme['green'] if theme else DIM
+    rule_ink = theme['green'] if theme else INK
 
     # The isometric drawing, without its year caption (the sheet has a title of its own).
     vb, iso_body = inner(iso_svg)
     iso_body = re.sub(r'<text\b[^>]*>.*?</text>', '', iso_body, flags=re.S)
+    if spec.get('mapData') is False:
+        # The build's metadata credits OpenStreetMap; a plate drawn with none of its data says nothing.
+        iso_body = re.sub(r'<desc>.*?</desc>', '', iso_body, flags=re.S)
     cap = max(28, (vb[2] - 48) * 0.022) * 2.4
     iso_vb = [vb[0], vb[1] + cap, vb[2], vb[3] - cap]
     svb, sec_body = inner(sec_svg)
 
     top = 700
-    iso_box = (M - 60, top, ART_R - M + 60, 3900)
+    iso_box = (M - 60, top, ART_R - M + 60, spec.get('layout', {}).get('isoHeight', 3900))
     s_iso = min(iso_box[2] / iso_vb[2], iso_box[3] / iso_vb[3])
     iso_h = iso_vb[3] * s_iso
     # The flat section beneath, no taller than SEC_H, from the left edge of the art.
     sec_w = ART_R - M
-    s_sec = min(sec_w / svb[2], (H - 330 - (top + iso_h + 330)) / svb[3])
+    s_sec = min(sec_w / svb[2], (H - spec.get('layout', {}).get('bottom', 330) - (top + iso_h + 330)) / svb[3])
     sec_h = svb[3] * s_sec
     sec_top = top + iso_h + 420
     sec_box = (M, sec_top, svb[2] * s_sec, sec_h)
 
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
            f'<rect width="{W}" height="{H}" fill="{PAPER}"/>']
+    if theme:
+        # The border: an evergreen rule round the sheet, a finer one inside it, holly at the corners.
+        bi = 120
+        out.append(f'<rect x="{bi}" y="{bi}" width="{W - 2 * bi}" height="{H - 2 * bi}" fill="none" stroke="{theme["green"]}" stroke-width="14"/>')
+        out.append(f'<rect x="{bi + 34}" y="{bi + 34}" width="{W - 2 * bi - 68}" height="{H - 2 * bi - 68}" fill="none" stroke="{theme["green"]}" stroke-width="4"/>')
+        for cx, cy, fl in ((bi, bi, 1), (W - bi, bi, -1), (bi, H - bi, 1), (W - bi, H - bi, -1)):
+            out.append(f'<circle cx="{cx}" cy="{cy}" r="96" fill="{PAPER}"/>')
+            out.append(holly(cx, cy, 170, theme['green'], theme['red'], fl))
     # Title.
-    out.append(text(M, 400, spec['title'], 250, 'bold'))
+    out.append(text(M, 400, spec['title'], 250, 'bold', accent))
     out.append(text(M, 570, spec['subtitle'], 112, 'italic', DIM))
     # The drawings.
-    ox_iso, oy_iso = iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2 - iso_vb[0] * s_iso, iso_box[1] - iso_vb[1] * s_iso
-    out.append(f'<svg x="{iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2:.1f}" y="{iso_box[1]}" width="{iso_vb[2] * s_iso:.1f}" height="{iso_h:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in iso_vb)}" overflow="hidden">{iso_body}</svg>')
+    # The plate is centered over the art, or set against its left edge (`layout.isoAlign`).
+    iso_x = M if spec.get('layout', {}).get('isoAlign') == 'left' else iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2
+    ox_iso, oy_iso = iso_x - iso_vb[0] * s_iso, iso_box[1] - iso_vb[1] * s_iso
+    out.append(f'<svg x="{iso_x:.1f}" y="{iso_box[1]}" width="{iso_vb[2] * s_iso:.1f}" height="{iso_h:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in iso_vb)}" overflow="hidden">{iso_body}</svg>')
     out.append(text(M, sec_top - 70, spec['sectionCaption'], 76, 'italic', DIM))
     out.append(f'<svg x="{sec_box[0]}" y="{sec_box[1]:.1f}" width="{sec_box[2]:.1f}" height="{sec_box[3]:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in svb)}">{sec_body}</svg>')
     ox_sec, oy_sec = sec_box[0] - svb[0] * s_sec, sec_box[1] - svb[1] * s_sec
-    iso_rect = (iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2, iso_box[1], iso_vb[2] * s_iso, iso_h)
+    iso_rect = (iso_x, iso_box[1], iso_vb[2] * s_iso, iso_h)
 
     def locate(lonlat):
         r = subprocess.run(['node', 'bin/isoscape.js', 'locate', region, '--year', str(year), '--', f'{lonlat[0]},{lonlat[1]}'], cwd=ROOT, check=True, capture_output=True, text=True)
@@ -226,11 +281,11 @@ def main():
     y = 570
     x = COL_X
     for g in spec['groups']:
-        out.append(text(x, y, g['title'].upper(), 58, 'bold', DIM, family=SANS, spacing=4))
+        out.append(text(x, y, g['title'].upper(), 58, 'bold', head_ink, family=SANS, spacing=4))
         if g.get('traveler') and traveler:
             tw = font('bold', 58).getlength(g['title'].upper()) + 4 * len(g['title'])
             out.append(figure(x + tw + 40, y + 4, 82, traveler['shapes'], route))
-        out.append(f'<line x1="{x}" y1="{y + 32}" x2="{W - M}" y2="{y + 32}" stroke="{INK}" stroke-width="4"/>')
+        out.append(f'<line x1="{x}" y1="{y + 32}" x2="{W - M}" y2="{y + 32}" stroke="{rule_ink}" stroke-width="4"/>')
         y += 170
         for c in g['callouts']:
             conf = c['_conf']
@@ -266,9 +321,19 @@ def main():
         lh = WF * 1.42
         x0, y0 = {
             'top-right': (ART_R - wmax, top - 215),
+            # Inside the plate's top-left corner, over its sky, for a place off to the upper left.
+            'inside-top-left': (iso_rect[0] + 90, iso_rect[1] + 150),
             'bottom-right': (ART_R - wmax, iso_rect[1] + iso_rect[3] + 70),
             'bottom-left': (M + 20, iso_rect[1] + iso_rect[3] + 70),
+            # Inside the plate, at its left edge, just above the place pointed to.
+            'inside-left-above': (iso_rect[0] + 90, ay - lh * len(lines) - 60),
+            # Inside the plate, at its left edge, just below the place pointed to.
+            'inside-left-below': (iso_rect[0] + 90, ay + 160),
+            # Below the plate, starting under the place pointed to on its bottom edge.
+            'below': (ax - 40, iso_rect[1] + iso_rect[3] + 70),
         }[wf['place']]
+        # A label may be nudged off what it would cover (sheet units).
+        x0, y0 = x0 + wf.get('offset', [0, 0])[0], y0 + wf.get('offset', [0, 0])[1]
         out.append(f'<rect x="{x0 - 30:.0f}" y="{y0 - WF - 26:.0f}" width="{wmax + 90:.0f}" height="{lh * len(lines) + 34:.0f}" fill="{PAPER}" fill-opacity="0.9"/>')
         out.append(badge(x0 + 6, y0 - WF * 0.36, None, wf['confidence'], 15))
         for i, ln in enumerate(lines):
@@ -276,21 +341,24 @@ def main():
         # The leader: from the label's nearer edge to the place, ending in a dot.
         lx = x0 - 30 if ax < x0 else min(ax, x0 + wmax + 60)
         ly = y0 + lh * len(lines) - lh / 2 if ay > y0 else y0 - WF - 26
-        if wf['place'] != 'top-right':
+        if wf['place'] not in ('top-right', 'inside-top-left', 'inside-left-above'):
             ly = y0 - WF - 26
             lx = max(x0 - 30, min(ax, x0 + wmax + 60))
+        if HALO[0]:
+            out.append(f'<path d="M{lx:.0f} {ly:.0f}L{ax:.0f} {ay:.0f}" fill="none" stroke="{PAPER}" stroke-width="15" stroke-linecap="round"/>')
+            out.append(f'<circle cx="{ax:.0f}" cy="{ay:.0f}" r="20" fill="{PAPER}"/>')
         out.append(f'<path d="M{lx:.0f} {ly:.0f}L{ax:.0f} {ay:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>')
         out.append(f'<circle cx="{ax:.0f}" cy="{ay:.0f}" r="13" fill="{INK}"/>')
     # Key, sources and notes, at the foot of the callout column.
     ky = y + 40
-    out.append(text(x, ky, 'HOW SURE EACH PART IS', 58, 'bold', DIM, family=SANS, spacing=4))
-    out.append(f'<line x1="{x}" y1="{ky + 32}" x2="{W - M}" y2="{ky + 32}" stroke="{INK}" stroke-width="4"/>')
+    out.append(text(x, ky, 'HOW SURE EACH PART IS', 58, 'bold', head_ink, family=SANS, spacing=4))
+    out.append(f'<line x1="{x}" y1="{ky + 32}" x2="{W - M}" y2="{ky + 32}" stroke="{rule_ink}" stroke-width="4"/>')
     ky += 150
     for conf, msg in spec['key']:
         out.append(badge(x + 56, ky - 22, None, conf, 42))
         out.append(text(x + 140, ky, msg, 56, 'regular', DIM))
         ky += 92
-    for line in wrap('The same marks, small, stand before each place the trains and streetcars went.', 'regular', 56, W - M - x - 140):
+    for line in wrap(spec.get('keyNote', 'The same marks, small, stand before each place the trains and streetcars went.'), 'regular', 56, W - M - x - 140):
         out.append(text(x + 140, ky, line, 56, 'regular', DIM))
         ky += 76
     if spec.get('travelerKey') and traveler:
@@ -300,13 +368,20 @@ def main():
             out.append(text(x + 140, ky, line, 56, 'regular', DIM))
             ky += 76
     ky += 40
-    for line in wrap(spec['sources'], 'italic', 50, W - M - x) + [''] + wrap(spec['notes'], 'italic', 50, W - M - x):
+    nb = spec.get('layout', {}).get('notes')
+    nx, ny, nw = (nb['x'], nb['y'], nb['w']) if nb else (x, ky, W - M - x)
+    for line in wrap(spec['sources'], 'italic', 50, nw) + [''] + wrap(spec['notes'], 'italic', 50, nw):
         if line:
-            out.append(text(x, ky, line, 50, 'italic', DIM))
-        ky += 68
+            out.append(text(nx, ny, line, 50, 'italic', DIM))
+        ny += 68
+    if nb is None:
+        ky = ny
+    elif ny > H - 260:
+        print(f'warning: the notes run to {ny:.0f}, past the credit line', file=sys.stderr)
     if ky > H - 120:
         print(f'warning: the column runs to {ky:.0f}, past the credit line', file=sys.stderr)
-    out.append(text(M, H - 150, spec['credit'], 46, 'regular', DIM))
+    # Within a theme's border, the credit line stands higher.
+    out.append(text(M, H - (230 if theme else 150), spec['credit'], 46, 'regular', DIM))
     out.append('</svg>')
     sheet = os.path.join(a.out, f'{name}-sheet.svg')
     open(sheet, 'w').write('\n'.join(out))
