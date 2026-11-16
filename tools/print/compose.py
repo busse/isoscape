@@ -84,6 +84,9 @@ def fit(region, aspect, focus=None):
     return nx, ny, w2, h2
 
 
+SOCIAL = (1200, 630)    # a link preview: Open Graph's and X's large card, 1.91:1
+
+
 import shutil
 def svg_to_png(src, png, width, height=None, background=None):
     """rsvg-convert when installed, else cairosvg (pip install cairosvg)."""

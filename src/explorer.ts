@@ -35,10 +35,14 @@
  * The view is left out while it is the fitted view. Anything malformed falls back to fit. The
  * hash follows panning and zooming (debounced, with replaceState, so Back is not flooded);
  * choosing a build, comparing or changing tab still makes a history entry. The Link button
- * (or L) copies the URL of the build's (or page's) share page, `s/<id>.html` or
- * `s/page-<slug>.html`, with the current fragment: link previews then show that build, and
- * the share page passes the fragment on, so the link still opens this exact view (see
- * social.ts). Under the site URL when one is set, else beside this file.
+ * (or L; "Copy link" on a page) copies the URL of what is shown's share page (see social.ts):
+ * `s/<name>.html` for a map or a year (with its lasting name in the fragment in place of the
+ * build id), `s/page-<slug>.html` for a page, `s/<id>.html` for an older build, with the rest
+ * of the fragment: link previews then show that map or page, and the share page passes the
+ * fragment on, so the link still opens this exact view. Under the site URL when one is set,
+ * else beside this file. Served over http(s), the address bar shows the share page's path with
+ * the route's fragment (`<base href="./">` keeps relative URLs resolving here), so a copied
+ * address previews too; analytics still report this file's own path.
  */
 
 import type { BuildMeta } from './archive.ts'
@@ -158,6 +162,7 @@ export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Pag
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="./">
 <title>isoscape explorer</title>
 ${site.analytics ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${escAttr(site.analytics.ga)}"></script>
 <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)} gtag('js', new Date()); gtag('config', '${escAttr(site.analytics.ga)}', { send_page_view: false })</script>
@@ -369,6 +374,8 @@ body.reading main { grid-template-rows: 1fr; }
 @media (max-width: 1180px) { .doc { grid-template-columns: minmax(0, 70ch); } #toc { display: none; } }
 .doc .back { display: inline-block; margin-bottom: 18px; font-size: 12.5px; color: var(--accent); text-decoration: none; border: 1px solid var(--line); border-radius: 14px; padding: 3px 11px; background: var(--bg); cursor: pointer; }
 .doc .back:hover { border-color: var(--accent); }
+.doc #pageLink { margin-left: 6px; }
+.doc #pageLink.on { border-color: var(--accent); background: var(--accent-soft); }
 ${PROSE_CSS}#toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
 #toc h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 6px 0 8px; }
 #toc a { display: block; padding: 3px 0 3px 10px; border-left: 2px solid var(--line); color: var(--dim); text-decoration: none; }
@@ -422,9 +429,9 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     <div class="body" id="infoBody"></div>
   </section>
   <section id="home" tabindex="-1"><div class="hm" id="homeBody"></div>${plainList(site)}</section>
-  <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
+  <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><button class="back" id="pageLink" title="Copy a link to this page, with its link preview (L)">Copy link</button><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
 </main>
-<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, buy: site.shop ? buyLinks(site, new Set(builds.map((b) => b.region))) : null })}</script>
+<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, shares: site.shares ?? null, buy: site.shop ? buyLinks(site, new Set(builds.map((b) => b.region))) : null })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, license: d.license, link: d.link }])))}</script>
 <script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2), shop: (site.shop && pageShop(p.slug, explorerMapRefs(p.html), site)) ?? null })))}</script>
@@ -810,15 +817,64 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   $('actual').addEventListener('click', actual)
 
   // ---- links ----------------------------------------------------------------------------------
-  // Copy the full URL of what is on screen, view included.
-  const copied = (text) => {
-    const btn = $('link')
+  // Link-preview crawlers (chat apps, social sites) never see the '#…' part of an address and run
+  // no script, so every '#<route>' address previews as the whole site. Each map, year and page has
+  // a share page in s/ with its own preview, which opens this page at the fragment it carries, or
+  // at its own route. The Link buttons copy that page's address (on a phone, they offer the share
+  // sheet), and on a server the address bar shows it too, so an address copied from there previews
+  // as what it shows. <base href="./"> keeps every relative URL resolving beside this file.
+  const shares = site.shares || { maps: {}, pages: [] }
+  const appDir = document.baseURI.replace(/[#?].*$/, '').replace(/[^/]*$/, '')
+  // Analytics report the explorer's own path, whatever the address bar shows (see trackView).
+  const appPath = location.pathname
+  const canDoor = /^https?:$/.test(location.protocol) && (Object.keys(shares.maps).length > 0 || shares.pages.length > 0)
+  // A build's lasting name, when that name opens it: '<region>:<year>' or '<region>'.
+  const lastingRef = (b) => {
+    if (b.time) return latestOf(b.region, b.time.year) === b && shares.maps[b.region + ':' + b.time.year] ? b.region + ':' + b.time.year : null
+    return latestOf(b.region) === b && shares.maps[b.region] ? b.region : null
+  }
+  // The share page for a route: its path, the fragment it still needs ('' when its own route is
+  // enough; a lasting name stands for the build id), and the static page it names as canonical.
+  const doorFor = (hash) => {
+    let h = hash.replace(/^#/, '')
+    try { h = decodeURIComponent(h) } catch (err) { /* keep it raw */ }
+    if (h === '' || h === 'home') return null
+    if (h.startsWith('/')) {
+      const [slug, ...rest] = h.slice(1).split('/')
+      if (!pageBySlug.has(slug) || !shares.pages.includes(slug)) return null
+      const section = rest.join('/')
+      return { path: 's/page-' + slug + '.html', hash: section ? '#/' + slug + '/' + section : '', page: 'p/' + slug + '.html' }
+    }
+    const m = /^([^.@~/]+)(.*)$/.exec(h)
+    const b = m ? byId.get(resolveRef(m[1])) : null
+    if (!b) return null
+    const ref = lastingRef(b)
+    const own = shares.maps[b.time ? b.region + ':' + b.time.year : b.region] || shares.maps[b.region]
+    if (ref) return { path: 's/' + shares.maps[ref] + '.html', hash: m[2] ? '#' + ref + m[2] : '', page: 'm/' + shares.maps[ref] + '.html' }
+    return { path: 's/' + encodeURIComponent(b.id) + '.html', hash: '#' + b.id + m[2], page: own ? 'm/' + own + '.html' : null }
+  }
+  // The canonical link follows what is shown (its static page), so a browser's own Share (Chrome's
+  // uses the canonical address) sends a page with its own preview. Search engines read this page
+  // without a fragment, at the front page, where it stays the site's address.
+  const canonical = document.querySelector('link[rel="canonical"]')
+  const siteCanonical = canonical ? canonical.getAttribute('href') : null
+  // Set the address for a route: the share page's path (on a server), with the route's fragment.
+  const setAddress = (hash, push) => {
+    const d = doorFor(hash)
+    if (canonical && site.siteUrl) canonical.setAttribute('href', d && d.page ? site.siteUrl + d.page : siteCanonical)
+    const same = location.hash === hash
+    const url = canDoor ? new URL((d ? d.path : '') + hash, appDir).href : null
+    if (same && (url === null || url === location.href)) return
+    const how = push && !same ? 'pushState' : 'replaceState'
+    try { history[how](null, '', url || hash) } catch (err) { if (!same) history[how](null, '', hash) }
+  }
+  const copied = (text, btn) => {
     btn.textContent = text
     btn.classList.add('on')
-    clearTimeout(copied.t)
-    copied.t = setTimeout(() => { btn.textContent = 'Link'; btn.classList.remove('on') }, 1400)
+    clearTimeout(btn.copiedTimer)
+    btn.copiedTimer = setTimeout(() => { btn.textContent = btn.dataset.label; btn.classList.remove('on') }, 1400)
   }
-  const copyFallback = (url) => {
+  const copyFallback = (url, btn) => {
     const ta = document.createElement('textarea')
     ta.value = url
     ta.setAttribute('readonly', '')
@@ -829,24 +885,32 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     let ok = false
     try { ok = document.execCommand('copy') } catch (err) { ok = false }
     ta.remove()
-    if (ok) copied('Copied')
+    if (ok) copied('Copied', btn)
     else window.prompt('Copy this link:', url)
   }
-  // The share page (s/<id>.html, s/page-<slug>.html) carries the link preview and passes the
-  // fragment on to this page, so the link both previews well and opens this exact view.
+  // The address to share for what is on screen: its share page, under the site URL when one is set.
   const shareUrl = () => {
-    const file = state.page !== null ? 'page-' + state.page : state.a
-    if (!file) return location.href
-    const root = site.siteUrl || location.href.replace(/[#?].*$/, '').replace(/[^/]*$/, '')
-    return root + 's/' + encodeURIComponent(file) + '.html' + location.hash
+    const root = site.siteUrl || appDir
+    if (state.home || (state.page === null && !byId.has(state.a))) return root
+    const hash = state.page !== null ? location.hash : viewerHash()
+    const d = doorFor(hash)
+    return d ? root + d.path + d.hash : root + hash
   }
   const copyLink = () => {
     writeHash()
+    const btn = state.page !== null ? $('pageLink') : $('link')
+    if (!btn.dataset.label) btn.dataset.label = btn.textContent
     const url = shareUrl()
+    // A phone's share sheet, where there is one; else the clipboard.
+    if (navigator.share && window.matchMedia && matchMedia('(pointer: coarse)').matches) {
+      navigator.share({ title: document.title.replace(/ · isoscape explorer$/, ''), url }).catch(() => undefined)
+      return
+    }
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(() => copied('Copied'), () => copyFallback(url))
-    } else copyFallback(url)
+      navigator.clipboard.writeText(url).then(() => copied('Copied', btn), () => copyFallback(url, btn))
+    } else copyFallback(url, btn)
   }
+  $('pageLink').addEventListener('click', copyLink)
   $('link').addEventListener('click', copyLink)
 
   // ---- selection, history, keys ------------------------------------------------------------------
@@ -879,8 +943,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const writeHash = () => {
     clearTimeout(hashTimer)
     if (state.page !== null || state.home || !byId.has(state.a)) return
-    const hash = viewerHash()
-    if (location.hash !== hash) history.replaceState(null, '', hash)
+    setAddress(viewerHash(), false)
     routed = location.hash
   }
   const scheduleHash = () => {
@@ -941,8 +1004,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
       if (!state.refit && state.pendingView) { const v = state.pendingView; state.pendingView = null; applyView(v) }
     } else layout()
     clearTimeout(hashTimer)
-    const hash = viewerHash()
-    if (location.hash !== hash) history[push ? 'pushState' : 'replaceState'](null, '', hash)
+    setAddress(viewerHash(), push)
     routed = location.hash
   }
   const setTab = (tab) => {
@@ -1061,7 +1123,14 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     if (!x || byId.has(x)) return x
     const m = /^(.+):([0-9]{1,4})$/.exec(x)
     const b = m ? latestOf(m[1], Number(m[2])) : latestOf(x)
-    return b ? b.id : x
+    if (b) return b.id
+    // A build no longer here (an old link): the newest build of the same name, else its region's.
+    const gone = /^[0-9]{8}-[0-9]{6}-(.+)$/.exec(x)
+    if (!gone) return x
+    let best = null
+    for (const y of builds) if (y.name === gone[1] && (!best || y.createdAt > best.createdAt)) best = y
+    best = best || latestOf(gone[1])
+    return best ? best.id : x
   }
   const parseHash = () => {
     let h = location.hash.slice(1)
@@ -1094,15 +1163,15 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     const where = location.hash.split('@')[0] || '#home'
     if (where === viewed) return
     viewed = where
-    gtag('event', 'page_view', { page_location: location.origin + location.pathname + where, page_title: document.title })
+    gtag('event', 'page_view', { page_location: location.origin + appPath + where, page_title: document.title })
   }
   const route = () => {
     closeDrawer()
     routed = location.hash
     setTimeout(trackView, 0)
     const r = parseHash()
-    if (r.page !== undefined && pageBySlug.size > 0) { openPage(r.page, r.section); return }
-    if (home && (r.a === 'home' || !r.a)) { openHome(); return }
+    if (r.page !== undefined && pageBySlug.size > 0) { openPage(r.page, r.section); setAddress(location.hash, false); return }
+    if (home && (r.a === 'home' || !r.a)) { openHome(); setAddress(location.hash, false); return }
     if (state.page !== null) closePage()
     if (state.home) closeHome()
     if (builds.length === 0) return
@@ -1140,8 +1209,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     const link = e.target.closest('a[href^="#"]')
     if (!link || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
     e.preventDefault()
-    const href = link.getAttribute('href')
-    if (href !== location.hash) history.pushState(null, '', href)
+    setAddress(link.getAttribute('href'), true)
     route()
   })
   const onNavigate = () => { if (location.hash !== routed) route() }
@@ -1156,8 +1224,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     }
     if (state.page !== null) {
       // Reading: the arrows scroll the page. Esc goes back to the viewer.
-      if (e.key === 'Escape' && byId.has(state.a)) { history.pushState(null, '', viewerHash()); route() }
-      else if (e.key === 'Escape' && home) { history.pushState(null, '', '#home'); route() }
+      if (e.key === 'Escape' && byId.has(state.a)) { setAddress(viewerHash(), true); route() }
+      else if (e.key === 'Escape' && home) { setAddress('#home', true); route() }
       else if (e.key === '/') { $('filter').focus(); e.preventDefault() }
       else if (e.key === 'l' || e.key === 'L') copyLink()
       return
