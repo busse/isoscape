@@ -9,7 +9,7 @@
  * (and any hill there) paints over it, and ground behind it does not.
  */
 
-import { centroid, clipRingToRect, clipSegmentToRect, hash, type Rect, type Ring, type Vec2 } from './geom.ts'
+import { clipRingToRect, pointInPolygon, clipSegmentToRect, hash, type Rect, type Ring, type Vec2 } from './geom.ts'
 import { GROUND_ORDER } from './classify.ts'
 import { paintOrder } from './order.ts'
 import type { Item, Scene, Shape } from './scene.ts'
@@ -293,8 +293,29 @@ export const renderSvg = (scene: Scene): Rendered => {
   }
   const cover = scene.ground.filter((g) => GROUND_ORDER.includes(g.kind))
   // Cover that sits in the river (vegetation on its islands and rocks) paints over the water;
-  // everything else paints under it, so a park drawn across the river is covered by it.
-  const inRiver = (g: (typeof cover)[number]) => wetAt(centroid(g.rings[0]))
+  // everything else paints under it, so a park drawn across the river is covered by it. In
+  // the river means mostly over water, judged on up to about 400 points spread over it: a
+  // park round a pond can have its middle in the pond.
+  const inRiver = (g: (typeof cover)[number]): boolean => {
+    let minX = Infinity
+    let maxX = -Infinity
+    let minY = Infinity
+    let maxY = -Infinity
+    for (const r of g.rings) for (const [x, y] of r) { minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y) }
+    const step = Math.max(c, Math.sqrt(((maxX - minX) * (maxY - minY)) / 400))
+    let inside = 0
+    let wet = 0
+    for (let y = minY + step / 2; y < maxY; y += step) {
+      for (let x = minX + step / 2; x < maxX; x += step) {
+        if (!pointInPolygon([x, y], g.rings)) continue
+        inside++
+        if (wetAt([x, y])) wet++
+      }
+    }
+    // Smaller than a cell: its middle decides.
+    if (inside === 0) return wetAt([(minX + maxX) / 2, (minY + maxY) / 2])
+    return wet * 2 > inside
+  }
   const coverLayers = (after: boolean): Layer[] =>
     GROUND_ORDER.map((kind) => ({
       cls: kind,
@@ -304,8 +325,10 @@ export const renderSvg = (scene: Scene): Rendered => {
     cls: kind,
     entries: scene.ribbons.filter((rb) => rb.kind === kind).flatMap((rb) => rb.quads.map((q) => entryOf([q]))),
   })
+  // Cover on land paints under the water: with terrain, the water comes from the grid and is
+  // painted first in each strip, so this cover goes in ahead of it (see paintStrip).
+  const underWater: Layer[] = coverLayers(false)
   const layers: Layer[] = [
-    ...coverLayers(false),
     // OSM's water outline draws a flat scene's shore; with terrain the water grid does.
     { cls: 'W', entries: T.flat ? water.map((g) => entryOf(g.rings)) : [] },
     { cls: 'I', entries: T.flat ? islands.map((g) => entryOf(g.rings)) : [] },
@@ -557,14 +580,37 @@ export const renderSvg = (scene: Scene): Rendered => {
     const groundFar = 0
     const band: Rect = { minX: fr.minX, maxX: fr.maxX, minY: s.n0 - lapNear, maxY: s.n1 + lapFar }
     const parts: string[] = []
+    // The rows the strip's ground covers: its own, and those its lap toward the camera falls
+    // in, each cut to the part the strip paints. Each keeps its own cells: a lap drawn by
+    // stretching the strip's first row over the next strip's ground put that row's shore
+    // there, out of step with the next strip's, and the shore showed a saw's teeth.
+    const lapTo = s.n0 - lapNear
+    const rows: { j: number; lo: number; hi: number; yLo: number; top: boolean }[] = []
+    for (let j = Math.max(0, Math.floor((lapTo - T.y0) / c + 1e-9)); j < s.j1; j++) {
+      const lo = T.y0 + j * c
+      const hi = T.y0 + (j + 1) * c
+      if (hi <= lapTo) continue
+      const top = j === s.j1 - 1
+      rows.push({ j, lo, hi, yLo: Math.max(lapTo, lo - rowLap), top })
+    }
+    /** Cell (i, j)'s part of `field` at one half, traced in the cell and cut to [yLo, yHi]. */
+    const tracedIn = (field: Float32Array, i: number, r: (typeof rows)[number], yLo: number, yHi: number): Vec2[] | null => {
+      const poly = traceCell(field, i, r.j, r.lo, r.hi)
+      if (poly === null || (yLo <= r.lo && yHi >= r.hi)) return poly
+      const cut = clipRingToRect(poly, { minX: -Infinity, maxX: Infinity, minY: yLo, maxY: yHi })
+      return cut.length >= 3 ? cut : null
+    }
     // The strip's base: its own surface, cell row by cell row, colored water where the grid
     // is water and land elsewhere. It hides what lies behind a rise, and because it already
     // matches what is drawn on it, no seam can leak a wrong color through.
     let landBase = ''
     let waterBase = ''
-    for (let j = s.j0; j < s.j1; j++) {
-      const yLo = j === s.j0 ? s.n0 - lapNear : T.y0 + j * c - rowLap
-      const yHi = j === s.j1 - 1 ? s.n1 - baseInset : T.y0 + (j + 1) * c
+    for (const r of rows) {
+      const j = r.j
+      const yLo = r.yLo
+      const yHi = r.top ? s.n1 - baseInset : r.hi
+      // Water reaches the far edge, over the cover painted under it (see underWater).
+      const yWet = r.top ? s.n1 : yHi
       let start = iMin
       let wet = baseWet(start, j)
       for (let i = iMin + 1; i <= iMax; i++) {
@@ -574,7 +620,7 @@ export const renderSvg = (scene: Scene): Rendered => {
         const bottom: Vec2[] = []
         const lay = wet ? drapeWater : drape
         for (let k = start; k <= i; k++) {
-          top.push(lay([nodeX(k), yHi]))
+          top.push(lay([nodeX(k), wet ? yWet : yHi]))
           bottom.push(lay([nodeX(k), yLo]))
         }
         // Wound like the traced cells (along the near edge first), so overlaps add, not cancel.
@@ -589,9 +635,10 @@ export const renderSvg = (scene: Scene): Rendered => {
     // Land cover over the bare ground: whole cells merged into runs, edges traced through.
     for (const [g, field] of coverFields) {
       let d = ''
-      for (let j = s.j0; j < s.j1; j++) {
-        const yLo = j === s.j0 ? s.n0 - lapNear : T.y0 + j * c - rowLap
-        const yHi = j === s.j1 - 1 ? s.n1 + groundFar : T.y0 + (j + 1) * c
+      for (const r of rows) {
+        const j = r.j
+        const yLo = r.yLo
+        const yHi = r.top ? s.n1 + groundFar : r.hi
         let runStart = -1
         const full = (i: number) => field[j * T.nx + i] >= 0.5 && field[j * T.nx + i + 1] >= 0.5 && field[(j + 1) * T.nx + i] >= 0.5 && field[(j + 1) * T.nx + i + 1] >= 0.5
         const flushRun = (iEnd: number) => {
@@ -611,41 +658,51 @@ export const renderSvg = (scene: Scene): Rendered => {
             continue
           }
           flushRun(i)
-          const poly = traceCell(field, i, j, yLo, yHi)
+          const poly = tracedIn(field, i, r, Math.max(lapTo, r.lo), yHi)
           if (poly !== null) d += groundPath(poly.map(drape))
         }
         flushRun(iMax)
       }
       if (d) parts.push(`<path class="cv-${g}" d="${d}"/>`)
     }
+    const paintLayers = (list: readonly Layer[], band: Rect) => {
+      for (const layer of list) {
+        let d = ''
+        for (const e of layer.entries) {
+          if (e.maxN < s.n0 || e.minN > s.n1) continue
+          for (const ring of e.rings) {
+            const clipped = clipRingToRect(ring, band)
+            if (clipped.length < 3) continue
+            d += groundPath(densify(clipped, c).map(WATERY.has(layer.cls) ? drapeWater : drape))
+          }
+        }
+        if (d) parts.push(`<path class="${layer.cls}" d="${d}"/>`)
+      }
+    }
+    // Parks, woods and the like that are not in the water go under it: a park drawn across a
+    // lake (Central Park around the Lake) must not paint the lake over as lawn.
+    // It stops a little short of the strip's far edge, where this strip's water reaches: the
+    // strip before has lapped its own cover over that much, so on land nothing shows.
+    paintLayers(underWater, { ...band, maxY: s.n1 - Math.min(0.3, baseInset / 2) })
     if (waterBase) parts.push(`<path class="Lw" d="${waterBase}"/>`)
     // With terrain, the water's edge comes from the lidar-corrected water grid, not from OSM's
-    // outline: the two disagree by meters, and on a steep bank meters become cliffs.
+    // outline: the two disagree by meters, and on a steep bank meters become cliffs. A cell
+    // part water and part land is draped on the ground, so the water meets the bank at the
+    // bank's own height: draped at the river's level it stood below the bank beside it, and
+    // the bank of the next strip, painted later, overhung it in a tooth at every strip line.
     if (!T.flat) {
       let shore = ''
-      for (let j = s.j0; j < s.j1; j++) {
-        const yLo = j === s.j0 ? s.n0 - lapNear : T.y0 + j * c
-        const yHi = j === s.j1 - 1 ? s.n1 + groundFar : T.y0 + (j + 1) * c
+      for (const r of rows) {
+        const yHi = r.top ? s.n1 + groundFar : r.hi
         for (let i = iMin; i < iMax; i++) {
-          if (wetCorners(i, j) === 4) continue
-          const poly = traceCell(wetness, i, j, yLo, yHi)
-          if (poly !== null) shore += groundPath(poly.map(drapeWater))
+          if (wetCorners(i, r.j) === 4) continue
+          const poly = tracedIn(wetness, i, r, Math.max(lapTo, r.lo), yHi)
+          if (poly !== null) shore += groundPath(poly.map(drape))
         }
       }
       if (shore) parts.push(`<path class="W" d="${shore}"/>`)
     }
-    for (const layer of layers) {
-      let d = ''
-      for (const e of layer.entries) {
-        if (e.maxN < s.n0 || e.minN > s.n1) continue
-        for (const ring of e.rings) {
-          const clipped = clipRingToRect(ring, band)
-          if (clipped.length < 3) continue
-          d += groundPath(densify(clipped, c).map(WATERY.has(layer.cls) ? drapeWater : drape))
-        }
-      }
-      if (d) parts.push(`<path class="${layer.cls}" d="${d}"/>`)
-    }
+    paintLayers(layers, band)
     for (const ll of lineLayers) {
       let d = ''
       for (const [a, b] of ll.segs) {

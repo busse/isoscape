@@ -154,7 +154,10 @@ Code: `src/view.ts`, `chooseBearing` in `src/scene.ts`.
 ## Ground
 
 Each OSM area is classified by its tags as water, island, park or grass, wood, marsh, sand,
-bare rock, parking or cemetery, and drawn as a flat fill in that order. Rivers are drawn from
+bare rock, parking or cemetery, and drawn as a flat fill in that order. Cover that lies
+mostly over water (the trees on a river island) is drawn over the water; the rest is drawn
+under it, so a park mapped around a lake, as Central Park is around the Lake, does not paint
+the lake over as lawn. Rivers are drawn from
 their mapped area, never from their center line. Canals, streams and ditches are drawn as
 ribbons of a typical width.
 
@@ -255,9 +258,12 @@ Code: `riverFall` in `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 ## Shoreline
 
 With terrain, the water's edge is traced from the lidar-corrected water grid (marching squares
-over a lightly smoothed mask), not from OSM's outline, and drawn at the river's surface. Where
-the outline overlaps a steep bank, the bank slopes into the water instead of the water
-climbing the bank.
+over a lightly smoothed mask), not from OSM's outline. Open water is drawn at the river's
+surface; a grid cell that is part water and part bank is draped on the ground, so the water
+meets the bank at the bank's own height. Where the outline overlaps a steep bank, the bank
+slopes into the water instead of the water climbing the bank. Each strip draws the ground it
+laps toward the camera from that ground's own grid cells, so its shore there is the same as
+the next strip's and the shoreline has no teeth at the strip lines.
 
 Code: `paintStrip` in `src/render.ts`.
 
