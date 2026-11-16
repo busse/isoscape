@@ -278,7 +278,10 @@ That height is an approximation, not a survey.
 
 **Footprints from Microsoft's model** fill in where OSM has none. Wherever an OSM building
 and a footprint overlap, OSM wins and the footprint is dropped. A footprint is dropped if its
-center lies in an OSM building, or if it holds an OSM building's center.
+center lies in an OSM building, or if it holds an OSM building's center. A footprint whose
+center is on water is dropped too: there the model has found a boat, a pier head or a
+boathouse it cannot tell from a house. Buildings mapped in OSM on water, such as boathouses,
+stay.
 
 **Heights** are taken from the first of these that the building has:
 

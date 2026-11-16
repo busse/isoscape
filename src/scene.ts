@@ -375,9 +375,18 @@ export const buildScene = (
   const sites = curated.filter((h) => h.kind === 'site' && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
   // Prisms wait in `entries` until every one is placed, so that none is left standing on air.
   const entries: (Item | { prism: Prism; make: (p: Prism) => Item })[] = []
+  // A footprint from a model (Microsoft's) whose center is on water is a boat, a pier head
+  // or a boathouse the model cannot tell from a house; drawn, it is a house standing in the
+  // water. Buildings mapped in OSM on water (boathouses, piers) stay.
+  const sc = { ground } as unknown as Scene
+  let modelOnWater = 0
   for (const s of shown) {
     if (!inFrame(s)) continue
     if (sites.length > 0 && sites.some((r) => pointInRing(centroid(s.outer), r))) continue
+    if (s.tags.source === 'microsoft' && onWater(sc, centroid(s.outer))) {
+      modelOnWater++
+      continue
+    }
     const area = Math.abs(signedArea(s.outer)) - s.inners.reduce((a, h) => a + Math.abs(signedArea(h)), 0)
     if (area < minArea) continue
     const outer = orient(simplifyRing(s.outer, 0.45), true)
@@ -423,6 +432,7 @@ export const buildScene = (
       entries.push({ prism, make: (p) => extrude(view, pal, s.id, outer, inners, p.base, p.top, roof, dotsMode, s.tags.name) })
     }
   }
+  if (modelOnWater > 0) stats.footprintsOnWater = modelOnWater
   const prisms = entries.flatMap((e) => ('prism' in e ? [e.prism] : []))
   const settled = settlePrisms(prisms)
   if (settled > 0) stats.partsSettled = settled
