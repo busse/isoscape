@@ -467,7 +467,15 @@ works, and what is approximate, is in *How it's made*, under "Cutaways".
 ```sh
 node bin/isoscape.js build broad-street-station-cutaway --year 1943 --png
 python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json   # out/cutaways/
+python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json --print   # out/cutaways/print/
 ```
+
+`--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):
+the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, each with its title
+block in the bottom-right corner below the callout column (`titleblock.stamp`, place
+`corner`), named `<design>_<w>x<h>.jpg` and logged with their SHA-256 in `print/prints.json`.
+A cutaway sheet has no canvas files: its title, credit line and column all lie within the
+1.5 in a canvas mirrors round its sides.
 
 ## Making a set
 

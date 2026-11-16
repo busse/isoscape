@@ -2,7 +2,7 @@
 """A cutaway sheet: the isometric cutaway large, the flat section of the same cut beneath it,
 numbered callouts in a column beside them, a key to how sure each part is, sources and credits.
 
-    python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json [--out <dir>] [--png 3200]
+    python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json [--out <dir>] [--png 3200] [--print]
 
 It builds the region (isoscape build <region> --year <year> --no-archive), which writes the
 cutaway, its flat section and where each part is drawn in both (*.anchors.json), then lays the
@@ -11,14 +11,28 @@ drawings inline. A callout names a drawn part (or a place) in either drawing; it
 part's confidence, from the history file, unless the callout says otherwise: a solid disc for a
 part drawn from a plan, section or survey map, a ring for one placed from written accounts, a
 dashed ring for one that is approximate.
+
+--print also makes the print files, into <out>/print/: the sheet rasterized from the vector at
+300 dpi at each size in PRINTS (both 4:3, the set sheet's sizes), with the plate's title block
+(tools/print/titleblock.py, the fields from tools/release/plates.py for the spec's `design`)
+set in the bottom-right corner below the callout column, at the size stamp.py gives a sheet of
+that length. Each is named <design>_<w>x<h>.jpg (version 1 has no -vN suffix) and logged, with
+the block's fields, placement and every file's SHA-256, in print/prints.json. No canvas files:
+a canvas's 1.5 in of mirrored wrap would carry the title, the credit line and the column's text,
+all within 1.5 in of the sheet's edges, mirrored round its sides.
 """
-import argparse, json, os, re, subprocess, sys
-from PIL import ImageFont
+import argparse, hashlib, json, os, re, subprocess, sys, tempfile
+from PIL import Image, ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, os.path.join(ROOT, 'tools', 'print'))
+sys.path.insert(0, os.path.join(ROOT, 'tools', 'release'))
 import compose as C  # noqa: E402
+
+Image.MAX_IMAGE_PIXELS = None
+PRINTS = ((32, 24), (24, 18))   # inches; 300 dpi
+MAX_BYTES = 15_000_000           # the store's upload ceiling for a print file (tools/sets/set.py)
 
 W, H = 9600, 7200            # 32 x 24 in at 300 dpi
 BODY = 54                    # callout text: 13 pt at 32 x 24 in, 9.7 pt at 24 x 18 in
@@ -100,6 +114,7 @@ def main():
     ap.add_argument('--out', default=os.path.join(ROOT, 'out', 'cutaways'))
     ap.add_argument('--png', type=int, default=3200)
     ap.add_argument('--no-build', action='store_true')
+    ap.add_argument('--print', action='store_true', help='also make the 300 dpi print files, stamped, into <out>/print/')
     a = ap.parse_args()
     spec = json.load(open(a.spec))
     name = os.path.splitext(os.path.basename(a.spec))[0]
@@ -166,8 +181,10 @@ def main():
             return (frame['x0'] + where['s']) * frame['scale'], -(where['elevation'] - frame['datum']) * frame['exaggeration'] * frame['scale']
         return None
 
-    # Callout badges on the drawings, and the column beside them.
-    y = 840
+    # Callout badges on the drawings, and the column beside them. The column's first heading
+    # stands on the subtitle's baseline, which leaves the foot of the column clear for the
+    # print's title block (tools/print/titleblock.py) at both print sizes.
+    y = 570
     x = COL_X
     for g in spec['groups']:
         out.append(text(x, y, g['title'].upper(), 58, 'bold', DIM, family=SANS, spacing=4))
@@ -191,8 +208,8 @@ def main():
             for line in wrap(c['text'], 'regular', BODY, W - M - x - 140):
                 out.append(text(x + 140, yy, line, BODY, 'regular', DIM))
                 yy += 72
-            y = yy + 66
-        y += 60
+            y = yy + 58
+        y += 36
     # Wayfinding: where the trains and streetcars went, in the plate's margins, each with a
     # leader to the track end or the street it belongs to.
     WF = 50
@@ -255,6 +272,41 @@ def main():
         C.svg_to_png(sheet, os.path.join(a.out, f'{name}-sheet.png'), a.png)
         C.svg_to_png(section, os.path.join(a.out, f'{name}-section.png'), a.png)
     print(f'wrote {sheet}')
+    if a.print:
+        prints(spec, sheet, os.path.join(a.out, 'print'))
+
+
+def sha(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for b in iter(lambda: f.read(1 << 20), b''): h.update(b)
+    return h.hexdigest()
+
+
+def prints(spec, sheet, out_dir, version=1):
+    """The print files: each size rasterized at 300 dpi and stamped with the title block."""
+    import plates, stamp, titleblock
+    design = spec['design']
+    info = plates.info(design, version)
+    os.makedirs(out_dir, exist_ok=True)
+    log = {'design': design, 'version': version, 'sheet': os.path.relpath(sheet, ROOT), 'sheet_sha256': sha(sheet), 'info': info,
+           'tools': {f: sha(os.path.join(ROOT, f)) for f in ('tools/cutaway/sheet.py', 'tools/print/titleblock.py', 'tools/release/stamp.py', 'catalog/plates.json')},
+           'files': {}}
+    for w_in, h_in in PRINTS:
+        with tempfile.TemporaryDirectory() as tmp:
+            png = os.path.join(tmp, 'sheet.png')
+            C.svg_to_png(sheet, png, w_in * 300, h_in * 300, background=PAPER)
+            im = Image.open(png).convert('RGB')
+        assert im.size == (w_in * 300, h_in * 300), im.size
+        im, at = titleblock.stamp(im, info, stamp.size_u(w_in, 300), where=('foot', 'corner', 'head'))
+        p = os.path.join(out_dir, f'{design}_{w_in}x{h_in}.jpg')
+        for q in (94, 90, 86, 82, 78):
+            im.save(p, quality=q, dpi=(300, 300), optimize=True)
+            if os.path.getsize(p) <= MAX_BYTES: break
+        log['files'][os.path.basename(p)] = {'size': list(im.size), 'quality': q, 'bytes': os.path.getsize(p), 'sha256': sha(p),
+                                             'at': {'x': at[0], 'y': at[1], 'w': at[2], 'h': at[3], 'u': at[4], 'where': at[5]}}
+        print(p, im.size, f'{os.path.getsize(p) / 1e6:.1f} MB q{q}', 'block', at)
+    json.dump(log, open(os.path.join(out_dir, 'prints.json'), 'w'), indent=1, ensure_ascii=False)
 
 
 if __name__ == '__main__':

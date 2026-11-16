@@ -128,10 +128,29 @@ def find_spot(sheet, bw, bh, face=None, pad=None, step=4, where='foot'):
             below as at the side). Every layout but the set sheets.
       head: in the header above the art, its bottom just over the header rule, its top no higher
             than the first line of the title; slid left of anything already at the right (a line
-            key). For set sheets, whose foot is full of notes."""
+            key). For set sheets, whose foot is full of notes.
+      corner: in the bottom-right corner beside the art, not below it: right-aligned with the
+            rightmost thing printed, as low as that side margin allows, clear of everything.
+            For a sheet with a column of notes beside its art (the cutaway sheet), where no row
+            runs across the sheet. Only when asked for: stamp() does not try it by default."""
     x0, y0, x1, y1 = face or (0, 0, sheet.width, sheet.height)
     mask = content_mask(sheet, face, step)
     h, w = mask.shape
+    if where == 'corner':
+        cols = np.nonzero(mask.any(axis=0))[0]
+        if not len(cols):
+            return None
+        right = int(cols.max()) + 1
+        pad = pad if pad is not None else bh * 0.35
+        p, bws, bhs = int(pad / step) + 1, -(-bw // step), -(-bh // step)
+        xs = right - bws
+        if xs - p < 0:
+            return None
+        free = ~mask[:, xs - p:min(w, right + p)].any(axis=1)
+        for yb in range(h - (w - right), bhs + p, -1):
+            if free[yb - bhs - p:min(h, yb + p)].all():
+                return x0 + xs * step + (bws * step - bw), y0 + (yb - bhs) * step
+        return None
     rows = mask.sum(axis=1)
     wide = rows > 0.8 * w                              # the art and rules, not a long line of text
     if not wide.any():
