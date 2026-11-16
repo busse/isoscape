@@ -294,7 +294,7 @@ for k, (b0, b1) in enumerate(pieces(B_GATE, B_END, BAY)):
 # outer posts. Their number and size are approximate (the photograph, not a drawing).
 POSTS = [-72.0, -54.0, -36.0, -18.0, 0.0, 18.0, 36.0, 54.0, 72.0]
 # The ground under the deck's two sides, roughly (3DEP): the bracing stands on it.
-GROUND_UNDER = {'w': 8.7, 'e': 7.0}
+GROUND_UNDER = {'w': 9.0, 'e': 8.4}
 for k in range(NB + 1):
     b = SHED_B0 + k * BAY
     for j, x in enumerate(POSTS):

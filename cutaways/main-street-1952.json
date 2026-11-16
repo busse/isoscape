@@ -89,7 +89,7 @@
     {
      "n": 5,
      "title": "The concourse",
-     "text": "An ell behind the head house, closed at its sides and open to the shed. Five arches lead to it from the waiting room.",
+     "text": "An ell behind the head house, open to the shed. Five arches lead to it from the waiting room.",
      "iso": {
       "part": "history:mss-h-ell-floor",
       "dx": 0.15,
@@ -228,7 +228,7 @@
     {
      "n": 12,
      "title": "Mail and baggage",
-     "text": "Baggage rooms and a public hall on the ground floor; the mail room under the concourse, with loading docks on the west side.",
+     "text": "Baggage rooms and a public hall on the ground floor; the mail room under the concourse, docks on the west.",
      "iso": {
       "part": "history:mss-h-mail-floor",
       "dx": 0.1
@@ -296,8 +296,8 @@
   ]
  ],
  "marksNote": "The same marks, small, stand before each place the trains went.",
- "sources": "Sources: HAER VA-4, Union Station Trainshed (measured drawings, 1970; photographs, 1971) and HABS VA-848, Main Street Station (data pages, 1969; photographs), Library of Congress; National Register (1970) and Landmark (1976) nominations; Detroit Publishing photographs, about 1905; Library of Congress blog, 2026; SAH Archipedia; Official Guide, December 1952; OpenStreetMap; USGS 3DEP.",
- "notes": "The head house's east half is lifted away to 1.5 m above its ground floor, and part of the shed's east roof; their outlines are dashed. No plan of the head house is known: its rooms follow the written survey, its heights are scaled from photographs. In 1952 Virginia law segregated the station's waiting rooms; this sheet does not show where, because no source found says where.",
+ "sources": "Sources: HAER VA-4, the train shed (measured drawings, 1970; photographs, 1971), and HABS VA-848, the station (data pages, 1969; photographs), Library of Congress; National Register (1970) and Landmark (1976) nominations; Detroit Publishing photographs, about 1905; Library of Congress blog, 2026; SAH Archipedia; Official Guide, December 1952; OpenStreetMap; USGS 3DEP.",
+ "notes": "The head house's east half is lifted away down to its ground floor, and part of the shed's east roof; their outlines are dashed. No plan of the head house is known: its rooms follow the written survey, its heights are scaled from photographs. In 1952 Virginia law segregated the station's waiting rooms; this sheet does not show where, because no source found says where.",
  "credit": "Drawn with isoscape, built with Claude  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Shed after HAER VA-4 (Library of Congress)",
  "travelerKey": "A traveler, drawn to scale: 1.75 m (5 ft 9 in) tall. The red line is the way from the street to the train.",
  "wayfinding": [
@@ -319,7 +319,9 @@
     "Wikipedia, George Washington (train): a section divided from the main train at Gordonsville and operated through Richmond to Phoebus",
     "Library of Congress, Picture This, March 20, 2026 (which side each railroad used)"
    ],
-   "text": "Chesapeake and Ohio, on the east side: the George Washington's Richmond section, east to Phoebus, and west to Gordonsville, where it joined the main train between Washington and Cincinnati and Louisville."
+   "text": "Chesapeake and Ohio, on the east side: the George Washington's Richmond section, east to Phoebus, and west to Gordonsville, where it joined the main train between Washington and Cincinnati and Louisville.",
+   "part": "history:mss-d-track-e-7",
+   "dx": 0.3
   },
   {
    "id": "sal",
@@ -338,7 +340,9 @@
     "Official Guide, December 1952: the Orange Blossom Special, as transcribed by streamlinerschedules.com",
     "Library of Congress, Picture This, March 20, 2026; SEABOARD lettered on the west trestle in Detroit Publishing photograph 4a18653"
    ],
-   "text": "Seaboard Air Line, on the west side: south by Raleigh, Columbia and Savannah to Jacksonville and Miami; north by the RF&P to Washington and New York."
+   "text": "Seaboard Air Line, on the west side: south by Raleigh, Columbia and Savannah to Jacksonville and Miami; north by the RF&P to Washington and New York.",
+   "part": "history:mss-d-track-w-s1",
+   "dx": -0.3
   }
  ],
  "crossSection": {

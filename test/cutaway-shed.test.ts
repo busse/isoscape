@@ -79,3 +79,13 @@ test('a car beside the plane is drawn from the side, flat, at true length', () =
   assert.ok(it.shapes.some((s) => s.fill === pal.parts.glass[0]), 'it has windows')
   assert.ok(Math.max(...xs) - Math.min(...xs) > 10, 'it runs along the plane')
 })
+
+test('inside a roof shell: a slope facing the camera covers what stands under it, one facing away does not', async () => {
+  const { compare } = await import('../src/order.ts')
+  const hull: Vec2[] = [[0, 0], [10, 0], [10, 10], [0, 10]]
+  const item = (id: string, z0: number, z1: number, extra = {}) => ({ id, kind: 'building' as const, hull, zMin: z0, zMax: z1, key: 5, shapes: [], dots: [], ...extra })
+  const floor = item('floor', 2, 2.3, { within: 'roof' })
+  assert.equal(compare(item('near', 0, 5, { shell: { id: 'roof', faces: 1 } }), floor), 1)
+  assert.equal(compare(item('far', 0, 5, { shell: { id: 'roof', faces: -1 } }), floor), -1)
+  assert.equal(compare(floor, item('near', 0, 5, { shell: { id: 'roof', faces: 1 } })), -1)
+})

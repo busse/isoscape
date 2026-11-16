@@ -280,6 +280,10 @@ def main():
         if 'plate' in wf:
             # A place off the plate: pointed to at the plate's edge, as a fraction of its box.
             ax, ay = iso_rect[0] + wf['plate'][0] * iso_rect[2], iso_rect[1] + wf['plate'][1] * iso_rect[3]
+        elif 'part' in wf:
+            # A drawn part (a track on its trestle, above the ground `at` would point to).
+            p = anchor(wf, iso_a)
+            ax, ay = ox_iso + p[0] * s_iso, oy_iso + p[1] * s_iso
         else:
             p = locate(wf['at'])
             ax, ay = ox_iso + p[0] * s_iso, oy_iso + p[1] * s_iso
