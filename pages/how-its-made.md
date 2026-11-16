@@ -344,15 +344,44 @@ Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scen
 
 OSM splits one bridge into many ways, at every change of lanes, name or junction. Ramping
 each piece down to the ground would turn a viaduct into a roller coaster. So bridge ways that
-share an end, a layer and a kind (road or rail) are joined into chains first. A chain only
+share an end, a layer and a kind (road or rail) are joined into chains first. At a fork a
+chain carries on along the straightest way, and never through a turn sharper than 60 degrees,
+so two tracks that meet are not joined into a V. A chain only
 ramps down at an end that touches no other bridge. Bridges that touch form a network,
 anchored to the ground at those ends, and no deck stands higher than a 70 m ramp from the
 nearest anchor allows, measured along the network: a viaduct that forks into short ways that
 each come down a few meters on ramps down to the fork, not standing at full height over a fan
 of steep stubs. An end that joins another bridge (a ramp onto a viaduct of another layer, a
-link at a fork) meets the higher of the decks there and eases to its own height over 70 m, so
-the two arrive at one height. Where a deck comes down to
-the ground, its side stops at the ground instead of hanging below it.
+link at a fork) meets the higher of the decks there and eases to its own height over 70 m.
+Then the decks are matched at every node they share: a deck that runs on through the node
+sets the height there, and where only ends meet, the highest end does. The others run
+straight to that height, so no deck stops short in mid-air above or below the one it joins.
+Where a deck comes down to the ground, its side stops at the ground instead of hanging below it.
+
+**A deck runs straight between its ends.** It never dips below the straight line between the
+heights of its two ends, and rises above that line only where it needs its clearance: an
+overpass whose ends are both at street level spans a cut level, whatever depth the cut has,
+and ends at different heights give a straight grade. A grounded end sits on its abutment. In
+a smoothed ground model an overpass mapped rim to rim ends on the sloping sides of the cut, so
+the ground is read for 12 m past the end: where it climbs within the first 6 m and then levels
+off (the outer 6 m climbs less than three quarters as much), the end sits at that level, with
+an abutment wall down to the ground when the end faces the camera. Where the ground goes on
+climbing (a ramp landing on a hillside), the end sits on the ground.
+
+**Ground the model kept under a deck is carved out.** A bare-earth model is meant to have
+bridges taken out, but a short overpass often stays in it as a ridge of ground across the cut
+it spans, and the road under it then climbs over a hump. Under every deck, a grid node that
+stands more than half a meter above the ground 8 m past the edges of the decks on both sides
+takes the straight line across between those two. The carving fades in over the 10 m nearest
+a grounded end, so the street running onto a bridge keeps its level, and it never raises
+ground: a deck along a hillside or a bluff's crest changes nothing.
+
+**Skyways are left out.** A footway, path or cycleway bridge no longer than 80 m with an end
+in or within 3 m of a building is a skyway or a bridge into an upper floor, and OSM rarely
+says which floor. Drawn at a ramp's height, it lies across the walls and roofs of the
+buildings it joins, so it is not drawn (sidewalks beside a street bridge are kept). It is
+decided from the buildings' outlines before the ground is carved, so the ground under a skyway
+is left as it is.
 
 **Deck height is a rule of thumb.** OSM rarely records it. A region can name a height for a
 bridge, for example `{ "match": "Manchester", "deck": 24 }`. Otherwise the deck sits
@@ -362,7 +391,8 @@ straight runs, and easing down over 70 m at a free end. The ramp keeps that leng
 bridge, so a bridge shorter than two ramps never reaches full height: a 30 m footbridge over a
 canal rises well under a meter above its banks, where a 7 m tent would read as a stub floating
 in the air. Piers drop to the real ground or water every 38 m where the deck is more than 3 m
-up, or to the roof of a building under the deck, never down through it. A span that lies
+up, or to the roof of a building under the deck, never down through it. Each pier is
+ordered on its own, behind its deck and behind a building nearer the camera. A span that lies
 inside a building and below its roof (a garage ramp, a walkway's landing) is left out: the
 building hides it.
 
@@ -377,7 +407,8 @@ end of the bridge, over the tops of the legs, to the other end: a parabola betwe
 that sags to 2 m over the deck at mid-span, and a slighter one down to each anchorage.
 Suspenders, tower detail and arches are not drawn.
 
-Code: `chainBridges` and `bridgePieces` in `src/scene.ts`.
+Code: `carveUnderBridges`, `isSkyway`, `chainBridges`, `joinDecks`, `deckProfile`,
+`abutmentLevel` and `bridgePieces` in `src/scene.ts`.
 
 ## Paint order
 
@@ -389,6 +420,8 @@ on screen:
 - If their footprints can be separated by a line, the one on the camera's side of that line
   is in front.
 - If the footprints overlap (stacked building parts), the one entirely above is in front.
+- A pier and a deck whose footprints overlap: the deck is in front (a deck's height range
+  starts at its underside, so a deck over another deck is in front of it too).
 - Two bridge spans that run side by side (within about 14 degrees of parallel, the two
   carriageways of a viaduct or a pair of tracks): the one whose line is nearer the camera is
   in front, or the upper one where one runs right over the other. By centers alone, two
