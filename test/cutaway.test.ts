@@ -159,3 +159,16 @@ test('the section path stops short of what it must not cross, and leaves no scra
   const head = arrowOn([[0, 0], [100, 0]], 8)!
   assert.ok(head[0][0] > head[1][0])
 })
+
+test('the land tone stands for the ground: filled in its color, with no ink', async () => {
+  const { partTones } = await import('../src/cutaway-scene.ts')
+  const { palette } = await import('../src/palette.ts')
+  const pal = palette('winter')
+  const tones = partTones(pal, { tone: 'land' } as never)
+  assert.equal(tones.ink, false)
+  assert.equal(tones.lit, pal.land)
+  const view = { squash: 0.6, toScreen: ([e, n]: Vec2, z = 0) => [e * 10, -n * 6 - z * 8] } as unknown as View
+  const item = solidItem(view, tones, 'g', [prism(box, -2, 0)])
+  assert.ok(item !== null && item.shapes.every((s) => s.ink !== true && s.fill === pal.land))
+  assert.notEqual(partTones(pal, { tone: 'brick' } as never).ink, false)
+})

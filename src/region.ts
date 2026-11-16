@@ -94,7 +94,10 @@ export interface Cutaway {
   readonly keep?: number
   /** Id prefix of the parts that are cut (default: every modeled part). */
   readonly parts?: string
-  /** Items lifted away whole even though they are not cut (a shed over the nearest platform): regular expressions on item ids. */
+  /**
+   * Items lifted away whole even though they are not cut (a shed over the nearest platform, or a
+   * neighbor in front of the cut): regular expressions on item ids, or on OSM building ids (w123).
+   */
   readonly lift?: readonly string[]
   /**
    * Outline, dashed on the ground, the removed side of the union of these parts' footprints

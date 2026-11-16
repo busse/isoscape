@@ -112,7 +112,7 @@ export type Confidence = 'drawn' | 'written' | 'approximate'
 export const confidenceOf = (h: { readonly confidence?: Confidence }): Confidence => h.confidence ?? 'approximate'
 
 export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof'
-  | 'brick' | 'terracotta' | 'gold' | 'bronze' | 'seat' | 'pipe' | 'screen' | 'lamp' | 'marble' | 'water' | 'earth'
+  | 'brick' | 'terracotta' | 'gold' | 'bronze' | 'seat' | 'pipe' | 'screen' | 'lamp' | 'marble' | 'water' | 'earth' | 'land'
 
 /**
  * A train on a curated rail line: an engine (unless `engine` is false) and `cars` cars behind

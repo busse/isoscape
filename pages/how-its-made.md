@@ -684,8 +684,14 @@ stand in a box of their own beside the flat section.
 
 Where no map data covers a place, the history file can draw its streets and sidewalks
 itself (`"kind": "street"` or `"walk"`, a center line and a width), on flat ground. The Byrd
-Theatre cutaway stands on Cary Street drawn that way: the cache has no OpenStreetMap or
-elevation data for Carytown.
+Theatre cutaway stands on OpenStreetMap's Cary Street and sidewalks and the 3DEP lidar's ground
+(67.2–67.3 m along the front), its model set on the theatre's OSM outline, which measures
+25.76 × 41.18 m against the nomination's 84 × 135 ft. A neighbor stands in 1928 only where the
+assessor's year built puts it up by then. A cutaway's `lift` can name OSM buildings too: the
+Byrd's lifts the houses and the corner building east of it, on the side lifted away, which
+would stand in front of the cut. Below the sidewalk on that side, a part in the `land` tone (the
+ground's own color, uninked) hides the raked floor's fill, so the plan shows nothing under the
+ground beyond the cut.
 
 ## Sets: a map framed by its places
 

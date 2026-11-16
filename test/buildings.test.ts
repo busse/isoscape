@@ -68,3 +68,17 @@ test("a model's footprint on water is left out; a mapped boathouse stays", async
   assert.deepEqual(ids, ['m1', 'w2'])
   assert.equal(scene.stats.footprintsOnWater, 1)
 })
+
+test("a cutaway's lift takes a neighbor's OSM building away whole; others stay", async () => {
+  const { buildScene } = await import('../src/scene.ts')
+  const { palette } = await import('../src/palette.ts')
+  const { lonLatFromLocal } = await import('../src/region.ts')
+  const base = { name: 't', title: 't', center: [0, 0], width: 400, depth: 400, bearing: 0, scale: 1 } as const
+  const ll = lonLatFromLocal(base as never)
+  const sq = (x: number, y: number, s: number): Vec2[] => square(x, y, s).map(([e, n]) => ll(e, n) as Vec2)
+  const house = (id: string, x: number) => ({ type: 'polygon' as const, id, tags: { building: 'house' }, outers: [sq(x, 50, 10)], inners: [] })
+  const region = { ...base, cutaway: { through: ll(0, 0), bearing: 0, remove: 'right', parts: 'none-', lift: ['^w2$'] } }
+  const scene = buildScene(region as never, [house('w1', -60), house('w2', 60)], palette('paper'), null)
+  assert.deepEqual(scene.items.map((i) => i.id).filter((id) => id.startsWith('w')), ['w1'])
+  assert.equal(scene.stats.liftedBuildings, 1)
+})

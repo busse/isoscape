@@ -313,6 +313,8 @@ export interface Tones {
   readonly lit: string; readonly shade: string; readonly roof: string; readonly cut: string
   /** The inside of a shell (a dome's ceiling): lit and shaded. */
   readonly inner?: readonly [string, string]
+  /** False: faces are filled without ink (the `land` tone, which stands for the ground). */
+  readonly ink?: boolean
 }
 
 /**
@@ -354,7 +356,7 @@ export const solidItem = (
         const wall = mix(lit, shade, (u[0] / h + 1) / 2)
         fill = u[2] > 0.05 ? mix(wall, tones.roof, u[2]) : wall
       }
-      if (joint === undefined) faces.push({ depth: fc[1] * cos - fc[2] * sin, cut: f.role === 'cut', shape: { pts: screen, fill, ink: true } })
+      if (joint === undefined) faces.push({ depth: fc[1] * cos - fc[2] * sin, cut: f.role === 'cut', shape: { pts: screen, fill, ink: tones.ink ?? true } })
       else {
         // Sealed, and inked only along edges that are not on a joint with the next piece.
         const shapes: Shape[] = [{ pts: screen, fill, seal: true }]

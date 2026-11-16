@@ -58,6 +58,9 @@ export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean } 
 export const partTones = (pal: Palette, h: HistoryFeature): Tones => {
   const [lit, shade, roof] = pal.parts[h.tone ?? 'stone']
   const [il, is] = pal.parts.plaster
+  // The ground's own color, uninked: earth outside a building's walls below the sidewalk, so a
+  // cutaway's plan shows nothing under the ground beyond the cut.
+  if (h.tone === 'land') return { lit: pal.land, shade: pal.land, roof: pal.land, cut: pal.land, ink: false }
   return { lit, shade, roof, cut: pal.poche, inner: [il, is] }
 }
 
