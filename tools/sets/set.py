@@ -219,12 +219,24 @@ def frame_order(n):
     return ring[:n]
 
 
-def compose_menu(dpi, S, sc, pts):
+def menu_layout(dpi):
+    """The menu's grid at `dpi`: sheet size, margin, gutter, title band, foot, cell size, and the
+    big map's box (the middle three by two cells)."""
     I = lambda v: v * dpi
     W, H = round(I(32)), round(I(24))
     m, g, head, foot = I(0.75), I(0.26), I(1.35), I(0.5)
     cw = (W - 2 * m - 4 * g) / 5
     ch = (H - 2 * m - head - foot - 3 * g) / 4
+    top = m + head
+    mx, my = m + (cw + g), top + (ch + g)
+    return {'W': W, 'H': H, 'm': m, 'g': g, 'head': head, 'foot': foot, 'cw': cw, 'ch': ch, 'top': top,
+            'map': (mx, my, 3 * cw + 2 * g, 2 * ch + g)}
+
+
+def compose_menu(dpi, S, sc, pts):
+    I = lambda v: v * dpi
+    L = menu_layout(dpi)
+    W, H, m, g, head, foot, cw, ch = (L[k] for k in ('W', 'H', 'm', 'g', 'head', 'foot', 'cw', 'ch'))
     img = Image.new('RGB', (W, H), PAPER)
     d = ImageDraw.Draw(img)
     d.text((m, m - I(0.05)), S.cfg['title'], font=font('bold', I(0.5)), fill=INK)
@@ -249,8 +261,7 @@ def compose_menu(dpi, S, sc, pts):
         img.paste(scene.render(scene.window(pts['box'][s['id']], s.get('ground', S.ground['menu']), BOX_ASPECT), round(cw), round(ih)), (round(x), round(y)))
         d.rectangle((x, y, x + cw, y + ih), outline=INK, width=max(1, round(I(0.01))))
         box_text(d, S, s, x, y + ih + I(0.1), cw, ch - ih - I(0.1), dpi)
-    mx, my = cell(1, 1)
-    mw, mh = 3 * cw + 2 * g, 2 * ch + g
+    mx, my, mw, mh = L['map']
     big = sc.get()
     paste_map(img, d, S, big, pts, map_box(big, mw / mh), mx, my, mw, mh, I(0.12))
     d.rectangle((mx, my, mx + mw, my + mh), outline=INK, width=max(1, round(I(0.01))))
@@ -351,9 +362,28 @@ def write_canvas(S, print_dir):
             print(os.path.basename(p), img.size, f'{os.path.getsize(p) / 1e6:.1f} MB')
 
 
+def social(menu, dest):
+    """A set's link preview, 1200 x 630, from its menu print: the big map whole, in its frame line,
+    on paper widened to 1.91:1 (the map is a little narrower). Trimming it instead would cut
+    through the markers and labels at its edges, and the whole menu is too small to read."""
+    L = menu_layout(menu.size[0] / 32)
+    sw, sh = C.SOCIAL
+    x, y, w, h = L['map']
+    pad = L['g'] / 2
+    art = menu.crop((round(x - pad), round(y - pad), round(x + w + pad), round(y + h + pad)))
+    cw, ch = art.size
+    if cw / ch < sw / sh:
+        sheet = Image.new('RGB', (round(ch * sw / sh), ch), PAPER)
+        sheet.paste(art, ((sheet.size[0] - cw) // 2, 0))
+    else:
+        fx, fy, fw, fh = C.fit((0, 0, cw, ch), sw / sh)
+        sheet = art.crop((round(fx), round(fy), round(fx + fw), round(fy + fh)))
+    sheet.resize((sw, sh), Image.LANCZOS).save(dest, quality=86, optimize=True)
+
+
 def write_page(S, pts):
     """pages/<slug>.md, from the same boxes and sources as the prints. Its images, <slug>-menu.jpg
-    and <slug>-social.jpg, are made from the menu print beside it."""
+    and <slug>-social.jpg (see `social`), are made from the menu print beside it."""
     P = S.cfg['page']
     slug = P['slug']
     region, year = S.scene_of()
@@ -385,8 +415,7 @@ def write_page(S, pts):
     if os.path.exists(menu):
         im = Image.open(menu)
         im.resize((1800, 1350), Image.LANCZOS).save(os.path.join(ROOT, 'pages', f'{slug}-menu.jpg'), quality=84, optimize=True)
-        w = im.size[0]
-        im.crop((0, 0, w, round(w / 1.905))).resize((1200, 630), Image.LANCZOS).save(os.path.join(ROOT, 'pages', f'{slug}-social.jpg'), quality=86, optimize=True)
+        social(im, os.path.join(ROOT, 'pages', f'{slug}-social.jpg'))
     print(f'pages/{slug}.md')
 
 
