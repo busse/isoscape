@@ -4,7 +4,7 @@ import { clipRingToRect, convexHull, separatingAxis, signedArea, simplifyRing, t
 import { dominantGridAngle, makeView, snapBearing } from '../src/view.ts'
 import {
   abutmentLevel, bridgeEnds, buildingAt, cableZ, CABLE_CLEARANCE, carveUnderBridges, chainBridges, deckProfile, extrude, isSkyway, joinDecks,
-  rampClearance, RAMP, roofIndex, type Item,
+  groupDecks, rampClearance, RAMP, roofIndex, type Item,
 } from '../src/scene.ts'
 import { makeTerrain } from '../src/terrain.ts'
 import { compare, paintOrder, spanOrder } from '../src/order.ts'
@@ -420,4 +420,57 @@ test('a skyway is left out and carves nothing; a street bridge in its place carv
   const street = scene({ highway: 'primary' })
   assert.equal(street.stats.skywaysLeftOut, undefined)
   assert.ok((street.stats.groundUnderBridgesLowered ?? 0) > 0)
+})
+
+test('a sidewalk beside its street is one deck with it; a short stub is level with the deck it touches', () => {
+  const chain = (id: string, tags: Record<string, string>, pts: Vec2[]) => ({ line: { type: 'line' as const, id, tags: { bridge: 'yes', ...tags }, points: pts }, names: (tags.name ?? '').toLowerCase(), rampStart: true, rampEnd: true })
+  const line = (pts: Vec2[], z: (s: number) => number) => {
+    const cum = [0]
+    for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]))
+    const total = cum[cum.length - 1]
+    return { pts, cum, total, zAt: z, startLevel: z(0), endLevel: z(total) }
+  }
+  // A 60 m street along x at y = 0, its deck climbing from 10 to 16; a 50 m sidewalk 9 m to
+  // its side on a profile of its own, lower; a 50 m ramp 4 m to the other side; a 6 m stub that
+  // ends on the street's node at x = 30; a footbridge that crosses the street.
+  const chains = [
+    chain('street', { highway: 'primary', name: 'Broad' }, [[0, 0], [30, 0], [60, 0]]),
+    chain('walk', { highway: 'footway', footway: 'sidewalk' }, [[5, 9], [55, 9]]),
+    chain('ramp', { highway: 'primary_link' }, [[0, -4], [58, -4]]),
+    chain('stub', { highway: 'footway' }, [[30, 0], [30, 6]]),
+    chain('across', { highway: 'footway' }, [[20, -12], [20, 12]]),
+  ]
+  const lines = [
+    line([[0, 0], [30, 0], [60, 0]], (s) => 10 + s / 10),
+    line([[5, 9], [55, 9]], () => 5),
+    line([[0, -4], [58, -4]], () => 20),
+    line([[30, 0], [30, 6]], (s) => 2 + s),
+    line([[20, -12], [20, 12]], () => 3),
+  ]
+  // Chains carry lon/lat points; these share the street's node at (30, 0) by key.
+  const out = groupDecks(chains, lines)
+  // The sidewalk takes the street's heights where it lies beside it, not the ramp's.
+  for (const s of [0, 25, 50]) assert.ok(Math.abs(out[1].zAt(s) - (10 + (5 + s) / 10)) < 0.05, `walk at ${s}: ${out[1].zAt(s)}`)
+  assert.ok(Math.abs(out[1].startLevel - 10.5) < 0.05)
+  // The street and the crossing footbridge keep their own.
+  assert.equal(out[0], lines[0])
+  assert.equal(out[4], lines[4])
+  // The stub is level, at the street's height at the shared node.
+  assert.equal(out[3].zAt(0), 13)
+  assert.equal(out[3].zAt(6), 13)
+})
+
+test('the other half of a divided street follows the longer half', () => {
+  const chain = (id: string, name: string, pts: Vec2[]) => ({ line: { type: 'line' as const, id, tags: { bridge: 'yes', highway: 'primary', name }, points: pts }, names: name.toLowerCase(), rampStart: true, rampEnd: true })
+  const line = (pts: Vec2[], z: (s: number) => number) => {
+    const total = Math.hypot(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1])
+    return { pts, cum: [0, total], total, zAt: z, startLevel: z(0), endLevel: z(total) }
+  }
+  const chains = [chain('east', 'Broad', [[0, 0], [24, 0]]), chain('west', 'Broad', [[22, 10], [2, 10]]), chain('other', 'Main', [[22, -10], [2, -10]])]
+  const out = groupDecks(chains, [line([[0, 0], [24, 0]], (s) => 10 + s / 4), line([[22, 10], [2, 10]], () => 0), line([[22, -10], [2, -10]], () => 0)])
+  // Running the other way: its start lies beside the street's 22 m mark.
+  assert.ok(Math.abs(out[1].startLevel - 15.5) < 0.05)
+  assert.ok(Math.abs(out[1].endLevel - 10.5) < 0.05)
+  // A street of another name keeps its own.
+  assert.equal(out[2].startLevel, 0)
 })

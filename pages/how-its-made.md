@@ -428,6 +428,15 @@ takes the straight line across between those two. The carving fades in over the 
 a grounded end, so the street running onto a bridge keeps its level, and it never raises
 ground: a deck along a hillside or a bluff's crest changes nothing.
 
+**Parallel ways of one street are one deck.** OSM maps a street's carriageways and its
+sidewalks or cycle tracks as ways of their own, side by side, and each would get a profile of
+its own: a sidewalk sitting lower beside its street, a divided street as a cluster of tilted
+slabs. A footway, path or cycleway bridge that lies within 15 m of a street's bridge its whole
+length, running the same way along it, takes the street's heights wherever it lies beside it (a
+street before a ramp beside it); so does a carriageway beside a longer one of the same name,
+kind and layer. A bridge way shorter than 10 m that shares a node with a longer deck is drawn
+level, at that deck's height at the node.
+
 **Skyways are left out.** A footway, path or cycleway bridge no longer than 80 m with an end
 in or within 3 m of a building is a skyway or a bridge into an upper floor, and OSM rarely
 says which floor. Drawn at a ramp's height, it lies across the walls and roofs of the
@@ -459,7 +468,7 @@ end of the bridge, over the tops of the legs, to the other end: a parabola betwe
 that sags to 2 m over the deck at mid-span, and a slighter one down to each anchorage.
 Suspenders, tower detail and arches are not drawn.
 
-Code: `carveUnderBridges`, `isSkyway`, `chainBridges`, `joinDecks`, `deckProfile`,
+Code: `carveUnderBridges`, `isSkyway`, `chainBridges`, `joinDecks`, `groupDecks`, `deckProfile`,
 `abutmentLevel` and `bridgePieces` in `src/scene.ts`.
 
 ## Paint order

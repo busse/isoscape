@@ -704,7 +704,7 @@ export const buildScene = (
   const chains = chainBridges(plans.length > 0 || extra.section === true ? [] : bridgeLines.filter((f) => !skyways.has(f)))
   const ends = bridgeEnds(view, region, chains)
   const towers = suspensionTowers(view, chains, towerParts)
-  const lines = joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix)))
+  const lines = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix))))
   for (let c = 0; c < chains.length; c++) {
     const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c))
     spans += pieces.filter((p) => p.pier !== true).length
@@ -1623,6 +1623,137 @@ export const joinDecks = (
     if (!changed) break
   }
   return lines
+}
+
+/** How far apart parallel bridge ways of one street may lie and still be one deck, meters. */
+export const DECK_GROUP_REACH = 15
+
+/** A bridge way shorter than this, meters, that touches a longer deck is drawn level with it. */
+export const SHORT_DECK = 10
+
+/** Where a point falls along a polyline: meters along it, and meters off it. */
+const alongLine = (pts: readonly Vec2[], cum: readonly number[], p: Vec2): { s: number; off: number } => {
+  let best = { s: 0, off: Infinity }
+  for (let i = 1; i < pts.length; i++) {
+    const a = pts[i - 1]
+    const b = pts[i]
+    const dx = b[0] - a[0]
+    const dy = b[1] - a[1]
+    const l2 = dx * dx + dy * dy
+    const u = l2 < 1e-12 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2))
+    const off = Math.hypot(p[0] - a[0] - dx * u, p[1] - a[1] - dy * u)
+    if (off < best.off) best = { s: cum[i - 1] + (cum[i] - cum[i - 1]) * u, off }
+  }
+  return best
+}
+
+/** A point `s` meters along a deck line. */
+const deckPointAt = (l: DeckLine, s: number): Vec2 => {
+  let i = 1
+  while (i < l.cum.length - 1 && l.cum[i] < s) i++
+  const u = (s - l.cum[i - 1]) / Math.max(1e-9, l.cum[i] - l.cum[i - 1])
+  return [l.pts[i - 1][0] + (l.pts[i][0] - l.pts[i - 1][0]) * u, l.pts[i - 1][1] + (l.pts[i][1] - l.pts[i - 1][1]) * u]
+}
+
+/**
+ * Where `follower` runs beside `leader` its whole length, within `DECK_GROUP_REACH` and the
+ * same way along (a sidewalk beside its street, the other half of a divided street), the meters
+ * along the leader of each of the follower's samples, every 2 m; else null.
+ */
+const besideDeck = (follower: DeckLine, leader: DeckLine): number[] | null => {
+  const n = Math.max(2, Math.ceil(follower.total / 2) + 1)
+  const at: number[] = []
+  for (let k = 0; k < n; k++) {
+    const p = alongLine(leader.pts, leader.cum, deckPointAt(follower, (follower.total * k) / (n - 1)))
+    if (p.off > DECK_GROUP_REACH) return null
+    at.push(p.s)
+  }
+  // Running the same way along it: the follower's length shows up as about as much of the
+  // leader's (a way that crosses it, or turns off it, does not).
+  const run = Math.abs(at[at.length - 1] - at[0])
+  if (run < follower.total * 0.8) return null
+  const dir = Math.sign(at[at.length - 1] - at[0])
+  for (let k = 1; k < at.length; k++) if ((at[k] - at[k - 1]) * dir < -0.5) return null
+  return at
+}
+
+/**
+ * Parallel bridge ways of one street are one deck. OSM maps a street's carriageways and its
+ * sidewalks or cycle tracks as ways of their own, side by side, and each would get a profile of
+ * its own: a sidewalk sitting lower beside its street, or a divided street as a cluster of
+ * tilted slabs. A footway, path or cycleway bridge that runs beside a street's bridge its whole
+ * length (within `DECK_GROUP_REACH`, the same way along), and a carriageway beside a longer one
+ * of the same street (same name, kind and layer), take that bridge's heights wherever they lie
+ * beside it. Then a bridge way shorter than `SHORT_DECK` that shares a node with a longer deck is
+ * drawn level, at that deck's height at the node.
+ */
+export const groupDecks = (chains: readonly BridgeChain[], lines: readonly DeckLine[]): DeckLine[] => {
+  const out = lines.slice()
+  const follows = new Map<number, number>()
+  const road = (c: BridgeChain) => !isRail(c.line.tags) && !isPath(c.line.tags) && roadWidth(c.line.tags) !== null
+  const layer = (c: BridgeChain) => c.line.tags.layer ?? '1'
+  const byLength = chains.map((_, i) => i).sort((a, b) => lines[b].total - lines[a].total)
+  const follow = (i: number, leader: number, at: readonly number[]) => {
+    const l = out[leader]
+    const own = lines[i]
+    const n = at.length
+    const zs = at.map((s) => l.zAt(Math.max(0, Math.min(l.total, s))))
+    const zAt = (s: number) => {
+      const f = Math.max(0, Math.min(n - 1, (s / Math.max(1e-9, own.total)) * (n - 1)))
+      const k = Math.min(n - 2, Math.floor(f))
+      return zs[k] + (zs[k + 1] - zs[k]) * (f - k)
+    }
+    out[i] = { ...own, zAt, startLevel: zs[0], endLevel: zs[n - 1] }
+    follows.set(i, leader)
+  }
+  // The nearest longer deck it runs beside; a street before a ramp (`*_link`) beside it. A deck
+  // that itself follows another can lead a shorter one: it is longer, so no loop can form.
+  const nearest = (i: number, ok: (j: number) => boolean) => {
+    let best: { j: number; at: number[]; off: number } | null = null
+    const link = (j: number) => ((chains[j].line.tags.highway ?? '').endsWith('_link') ? 1 : 0)
+    for (const j of byLength) {
+      if (j === i || lines[j].total <= lines[i].total || !ok(j)) continue
+      const at = besideDeck(lines[i], lines[j])
+      if (at === null) continue
+      const off = alongLine(lines[j].pts, lines[j].cum, deckPointAt(lines[i], lines[i].total / 2)).off + link(j) * DECK_GROUP_REACH
+      if (best === null || off < best.off) best = { j, at, off }
+    }
+    return best
+  }
+  // The other half of a divided street follows the longer half.
+  for (const i of byLength) {
+    const c = chains[i]
+    if (!road(c) || (c.line.tags.name ?? '') === '') continue
+    const b = nearest(i, (j) => road(chains[j]) && layer(chains[j]) === layer(c) && chains[j].line.tags.highway === c.line.tags.highway && chains[j].names.includes(c.line.tags.name!.toLowerCase()))
+    if (b !== null) follow(i, b.j, b.at)
+  }
+  // Sidewalks and cycle tracks follow the street they run beside.
+  for (const i of byLength) {
+    const c = chains[i]
+    if (!isPath(c.line.tags) || isRail(c.line.tags)) continue
+    const b = nearest(i, (j) => road(chains[j]) && layer(chains[j]) === layer(c))
+    if (b !== null) follow(i, b.j, b.at)
+  }
+  // A short way that touches a longer deck is level with it there.
+  const keys = chains.map((c) => c.line.points.map(key))
+  const nodeOf = new Map<string, number[]>()
+  keys.forEach((ks, i) => ks.forEach((k) => nodeOf.set(k, [...(nodeOf.get(k) ?? []), i])))
+  for (let i = 0; i < chains.length; i++) {
+    if (follows.has(i) || lines[i].total >= SHORT_DECK) continue
+    let best: { j: number; z: number } | null = null
+    for (const k of [keys[i][0], keys[i][keys[i].length - 1]]) {
+      for (const j of nodeOf.get(k) ?? []) {
+        if (j === i || lines[j].total <= lines[i].total) continue
+        if (best !== null && lines[j].total <= lines[best.j].total) continue
+        const v = keys[j].indexOf(k)
+        best = { j, z: out[j].zAt(out[j].cum[v]) }
+      }
+    }
+    if (best === null) continue
+    const z = best.z
+    out[i] = { ...lines[i], zAt: () => z, startLevel: z, endLevel: z }
+  }
+  return out
 }
 
 /** A chain's deck line: its points and lengths, view meters, and the deck's height along it. */
