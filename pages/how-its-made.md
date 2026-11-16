@@ -255,7 +255,10 @@ roofs (`building:part=roof`), which sit on the outline as their podium. Open can
 
 Two shapes are not prisms. A **lattice tower** (`tower:construction=lattice`, such as the
 Eiffel Tower) is drawn whole as a spire on its outline, in 16 stacked tapering pieces, in a
-darker iron tone. Its width follows the Eiffel Tower's curve: e^(−3.3·t) of the base at
+darker iron tone. The outline is first cleared of corners within 3% of √area of their
+neighbors' line (about 3 m on the Eiffel Tower), so the small jogs where a leg meets an arch
+don't run up the tower as slivers, and dots go only at the corners of its foot that face the
+camera. Its width follows the Eiffel Tower's curve: e^(−3.3·t) of the base at
 height fraction t, so 0.56 at the first platform and 0.32 at the second, running out to a
 mast over the top sixth. The parts mapped inside it are dropped. A **curved roof shell with
 no height** (a roof part shaped `round`, `spherical` or `circular`, such as the Sydney Opera

@@ -367,7 +367,7 @@ export const buildScene = (
       roof = pal.fresh
       fresh++
     }
-    if (lattice.includes(s)) items.push(spire(view, pal, s.id, outer, base, gMean + h.top, dotsMode, s.tags.name))
+    if (lattice.includes(s)) items.push(spire(view, pal, s.id, latticeFootprint(outer, area), base, gMean + h.top, dotsMode, s.tags.name))
     else if (isShellRoof(s.tags)) {
       // Seat the shell on the roof of the building it stands on, if any.
       const c = centroid(outer)
@@ -615,6 +615,19 @@ export const isLatticeTower = (t: Readonly<Record<string, string>>): boolean =>
   t.building !== undefined && (t['tower:construction'] === 'lattice' || (t['roof:shape'] === 'pyramidal' && t['roof:height'] !== undefined && t['roof:height'] === t.height))
 
 /**
+ * The outline a lattice tower tapers from. Every edge of the footprint becomes a wall that
+ * narrows toward the axis all the way up, so the short jogs a mapped outline has where a leg
+ * meets an arch (1 to 3 m on the Eiffel Tower) would run up the tower as slivers of near-doubled
+ * lines. Corners closer than `LATTICE_SIMPLIFY` × √area to their neighbors' line are dropped;
+ * the legs and the curve of the arches between them stay.
+ */
+export const LATTICE_SIMPLIFY = 0.03
+export const latticeFootprint = (outer: Ring, area: number): Ring => {
+  const ring = simplifyRing(outer, LATTICE_SIMPLIFY * Math.sqrt(area))
+  return ring.length >= 3 ? orient(ring, true) : outer
+}
+
+/**
  * A curved roof shell mapped with no height (the Sydney Opera House's sails): a roof part whose
  * shape is round, spherical or circular. It is drawn as a sail rising to a point, its height
  * `SHELL_RISE` × √area, an approximation that grows with the shell like the real ones do.
@@ -662,7 +675,14 @@ export const spire = (
       const tone = mix(mix(pal.wallLit, pal.wallShade, (dy / len + 1) / 2), pal.ink, iron ? 0.35 : 0)
       walls.push({
         key: (a[1] + b[1]) / 2,
-        shape: { pts: [view.toScreen(at(a, k0), z0), view.toScreen(at(b, k0), z0), view.toScreen(at(b, k1), z1), view.toScreen(at(a, k1), z1)], fill: tone, ink: true },
+        shape: {
+          pts: [view.toScreen(at(a, k0), z0), view.toScreen(at(b, k0), z0), view.toScreen(at(b, k1), z1), view.toScreen(at(a, k1), z1)],
+          fill: tone,
+          ink: true,
+          // As in `extrude`, the lowest walls carry the dots at their own feet, so whatever is
+          // painted in front of a corner (a nearer leg, the tower above it) hides its dot.
+          ...(dots === 'all' && i === 0 ? { dots: [view.toScreen(a, base), view.toScreen(b, base)] } : {}),
+        },
       })
     }
     walls.sort((x, y) => y.key - x.key)
@@ -677,7 +697,7 @@ export const spire = (
     zMax: top,
     key: c[1],
     shapes,
-    dots: dots === 'all' ? dedupe(outer.map((p) => view.toScreen(p, base))) : [],
+    dots: [],
     ...(name === undefined ? {} : { name }),
   }
 }
