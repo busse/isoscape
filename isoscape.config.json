@@ -8,25 +8,23 @@
   "shop": {
     "label": "Holiday shop, open through December 31, 2026",
     "url": "https://chrisbusse.com/",
-    "links": {},
-    "cta": "Buy prints of these maps"
+    "cta": "Buy prints of these maps",
+    "onSale": {}
   },
   "home": {
     "title": "Richmond, drawn from open data",
-    "intro": "Small isometric maps of Richmond, Virginia: the James River through the city in one long view, and downtown block by block from 1737 to today. Pan and zoom any map, or compare two side by side. The tool that draws them is free and open source, and prints are in the holiday shop.",
+    "intro": "Small isometric maps of Richmond, Virginia: the James River through the city in one long view, and downtown block by block from 1737 to today. Pan and zoom any map, or compare two side by side. The tool that draws them is free and open source.",
     "heroes": [
       {
         "region": "richmond-i195-rocketts",
         "title": "The James, from I-195 to Rocketts Landing",
-        "blurb": "The river through the heart of Richmond in one long view: Belle Isle and the falls, the bridges, Hollywood Cemetery, and downtown on the hill.",
-        "shop": "https://chrisbusse.com/products/the-james-i-195-to-rocketts-landing-panorama-print"
+        "blurb": "The river through the heart of Richmond in one long view: Belle Isle and the falls, the bridges, Hollywood Cemetery, and downtown on the hill."
       },
       {
         "region": "richmond-downtown-time",
         "year": 1925,
         "title": "Downtown Richmond through time, 1737–2026",
-        "blurb": "The same blocks, from the Capitol to Tobacco Row, year by year. Buildings come from fire-insurance maps and other dated sources. Pick a year below, or press [ and ] in the viewer to step through them.",
-        "shop": "https://chrisbusse.com/collections/richmond-through-time"
+        "blurb": "The same blocks, from the Capitol to Tobacco Row, year by year. Buildings come from fire-insurance maps and other dated sources. Pick a year below, or press [ and ] in the viewer to step through them."
       }
     ],
     "sections": [
@@ -36,7 +34,6 @@
         "prefixes": [
           "richmond"
         ],
-        "shop": "https://chrisbusse.com/collections/richmond-through-time",
         "shopLabel": "Shop Richmond prints ↗",
         "page": "#/streetcars",
         "pageLabel": "Richmond's streetcars, 1925: the lines and fourteen stops"
@@ -49,7 +46,6 @@
         "blurb": "One building drawn close up in its own time, from its plans, photographs and fire-insurance maps, with the places around it. The first is Broad Street Station in 1943, at its wartime height.",
         "page": "#/broad-street",
         "pageLabel": "Broad Street Station, 1943: the railroads and fourteen places",
-        "shop": "https://chrisbusse.com/collections/buildings-in-their-time",
         "shopLabel": "Shop Buildings in their time ↗",
         "order": [
           "broad-street-lines",
@@ -64,7 +60,6 @@
         "prefixes": [
           "gwynns-island"
         ],
-        "shop": "https://chrisbusse.com/collections/gwynns-island",
         "shopLabel": "Shop Gwynn's Island prints ↗"
       },
       {
@@ -78,7 +73,6 @@
         ],
         "blurb": "Five landmarks outside the US, each drawn from a different country's open elevation data. The landing page tells the story of each dataset.",
         "page": "#/world-landmarks",
-        "shop": "https://chrisbusse.com/collections/world-landmarks",
         "shopLabel": "Shop world landmark prints ↗",
         "order": [
           "lm-eiffel-tower",
@@ -96,7 +90,6 @@
         ],
         "collapsed": true,
         "blurb": "Fifty well-known American places, each drawn in its surroundings.",
-        "shop": "https://chrisbusse.com/collections/american-landmarks",
         "shopLabel": "Shop landmark prints ↗",
         "order": [
           "lm-brooklyn-bridge",

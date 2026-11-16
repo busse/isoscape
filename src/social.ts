@@ -37,8 +37,12 @@ export interface SiteConfig {
   readonly siteUrl?: string
   /** Region name or build id whose newest build is the site's preview image. */
   readonly flagship?: string
-  /** Optional shop for prints: a header link, plus a "Buy a print" link on views whose region starts with a key of `links`. */
-  readonly shop?: { readonly label: string; readonly url: string; readonly cta?: string; readonly links?: Readonly<Record<string, string>> }
+  /**
+   * Optional shop for prints: a link to its front page in the header (always), plus a link to buy
+   * on each map, section, set or page that is in `onSale` (see `onSaleUrl`), and nowhere else.
+   * `cta` is the header's wording while anything is on sale.
+   */
+  readonly shop?: { readonly label: string; readonly url: string; readonly cta?: string; readonly onSale?: OnSale }
   /** Optional front page for the explorer: featured views, then the rest in sections. */
   readonly home?: HomeConfig
   /** False on a published site that does not carry out/<region>.html, to hide the "Latest page" link. */
@@ -53,9 +57,7 @@ export interface HomeHero {
   readonly year?: number
   readonly title: string
   readonly blurb?: string
-  /** Where "Buy a print" goes for this view; else the shop's `links` by region prefix. */
-  readonly shop?: string
-  /** The shop button's text for this view (default "Buy a print ↗"), e.g. when the link is a collection rather than this map. */
+  /** The shop button's text for this view (default "Buy a print ↗"), shown while its region is in the shop's `onSale`. */
   readonly shopLabel?: string
 }
 
@@ -70,7 +72,7 @@ export interface HomeSection {
   readonly order?: readonly string[]
   /** Start folded in the build list. */
   readonly collapsed?: boolean
-  readonly shop?: string
+  /** The shop button's text (default "Buy prints ↗"), shown while the section is on sale (see `sectionShop`). */
   readonly shopLabel?: string
   /** A page that tells the section's story ('#/<slug>'), linked beside the shop button. */
   readonly page?: string
@@ -102,8 +104,29 @@ export const normaliseSiteUrl = (raw: string | undefined): string | undefined =>
   return u.href.endsWith('/') ? u.href : `${u.href}/`
 }
 
+/** What is for sale: region prefix, set slug or page slug → the product or collection URL. */
+export type OnSale = Readonly<Record<string, string>>
+
 const isShop = (v: unknown): v is NonNullable<SiteConfig['shop']> =>
   typeof v === 'object' && v !== null && typeof (v as { label?: unknown }).label === 'string' && typeof (v as { url?: unknown }).url === 'string'
+
+/**
+ * The shop as the site uses it: label, url, cta and `onSale` (only string URLs kept). Anything
+ * else (an old `links` map) is dropped, so no URL but these reaches a page.
+ */
+const shopOf = (v: NonNullable<SiteConfig['shop']>): NonNullable<SiteConfig['shop']> => {
+  const raw = (v as { onSale?: unknown }).onSale
+  const onSale = typeof raw === 'object' && raw !== null && !Array.isArray(raw)
+    ? Object.fromEntries(Object.entries(raw).filter((e): e is [string, string] => e[0] !== '' && typeof e[1] === 'string' && e[1] !== ''))
+    : {}
+  return { label: v.label, url: v.url, ...(typeof v.cta === 'string' && v.cta !== '' ? { cta: v.cta } : {}), onSale }
+}
+
+/** A front page without per-view or per-section shop URLs: where to buy comes from `shop.onSale` only. */
+const homeOf = (h: HomeConfig): HomeConfig => {
+  const strip = <T extends object>(x: T): T => Object.fromEntries(Object.entries(x).filter(([k]) => k !== 'shop')) as T
+  return { ...h, heroes: h.heroes.map(strip), sections: h.sections.map(strip) }
+}
 
 const isHome = (v: unknown): v is HomeConfig => {
   if (typeof v !== 'object' || v === null) return false
@@ -126,8 +149,8 @@ export const loadSiteConfig = async (flag?: string, root = process.cwd(), env = 
   return {
     ...(siteUrl === undefined ? {} : { siteUrl }),
     ...(typeof file.flagship === 'string' && file.flagship !== '' ? { flagship: file.flagship } : {}),
-    ...(isShop(file.shop) ? { shop: file.shop } : {}),
-    ...(isHome(file.home) ? { home: file.home } : {}),
+    ...(isShop(file.shop) ? { shop: shopOf(file.shop) } : {}),
+    ...(isHome(file.home) ? { home: homeOf(file.home) } : {}),
     ...(file.latestPages === false ? { latestPages: false } : {}),
     ...(isAnalytics(file.analytics) ? { analytics: { ga: file.analytics.ga } } : {}),
   }
@@ -413,17 +436,73 @@ export const flagshipOf = (builds: readonly BuildMeta[], flagship?: string): Bui
   (flagship === undefined ? undefined : builds.find((b) => b.id === flagship || b.region === flagship || b.name === flagship)) ?? builds[0]
 
 /**
- * Where "Buy a print" goes for a region: its featured view's own link, else the shop's `links` by
- * the longest matching region prefix. The explorer's `shopFor` (in its script) follows the same rule.
+ * The URL `onSale` gives a subject (a region, a set slug or a page slug): the entry under the
+ * longest key the subject starts with. No entry, no URL: nothing links to the shop for it.
+ */
+export const onSaleUrl = (onSale: OnSale | undefined, subject: string): string | undefined => {
+  if (onSale === undefined) return undefined
+  const key = Object.keys(onSale).filter((k) => k !== '' && subject.startsWith(k)).sort((a, b) => b.length - a.length)[0]
+  return key === undefined ? undefined : onSale[key]
+}
+
+/** True while anything at all is on sale. */
+export const anyOnSale = (config: Pick<SiteConfig, 'shop'>): boolean => Object.keys(config.shop?.onSale ?? {}).length > 0
+
+/** The shop's call to action (`cta`), only while something is on sale. */
+export const shopCta = (config: Pick<SiteConfig, 'shop'>): string | undefined =>
+  anyOnSale(config) ? config.shop?.cta : undefined
+
+/**
+ * Where "Buy a print" goes for a region: `onSale` by the region's longest matching prefix, with
+ * its featured view's button text. The explorer gets these resolved (`buyLinks`).
  */
 export const shopFor = (config: Pick<SiteConfig, 'shop' | 'home'>, region: string): { url: string; label: string } | undefined => {
-  if (config.shop === undefined) return undefined
+  const url = onSaleUrl(config.shop?.onSale, region)
+  if (url === undefined) return undefined
   const hero = config.home?.heroes.find((h) => h.region === region)
-  const label = hero?.shopLabel ?? 'Buy a print ↗'
-  if (hero?.shop) return { url: hero.shop, label }
-  const links = config.shop.links ?? {}
-  const key = Object.keys(links).filter((p) => region.startsWith(p)).sort((a, b) => b.length - a.length)[0]
-  return key === undefined ? undefined : { url: links[key], label }
+  return { url, label: hero?.shopLabel ?? 'Buy a print ↗' }
+}
+
+/**
+ * Where a front-page section's shop button goes: the one URL every one of its prefixes is on sale
+ * under, else its story page's slug in `onSale`. Nothing when neither holds.
+ */
+export const sectionShop = (config: Pick<SiteConfig, 'shop'>, sec: Pick<HomeSection, 'page' | 'prefixes' | 'shopLabel'>): { url: string; label: string } | undefined => {
+  const onSale = config.shop?.onSale
+  const label = sec.shopLabel ?? 'Buy prints ↗'
+  const urls = new Set(sec.prefixes.map((p) => onSaleUrl(onSale, p)))
+  const shared = urls.size === 1 ? [...urls][0] : undefined
+  if (shared !== undefined) return { url: shared, label }
+  const slug = sec.page?.startsWith('#/') ? sec.page.slice(2).split('/')[0] : undefined
+  const bySlug = slug === undefined || slug === '' ? undefined : onSaleUrl(onSale, slug)
+  return bySlug === undefined ? undefined : { url: bySlug, label }
+}
+
+/**
+ * Where a content page's shop button goes: its own slug in `onSale` (a set's or a cutaway's
+ * page), else the one URL every map it links to is on sale under, else its section's (the
+ * section whose story it tells). `maps` are the regions the page links into, in order.
+ */
+export const pageShop = (slug: string, maps: readonly string[], config: Pick<SiteConfig, 'shop' | 'home'>): { url: string; label: string } | undefined => {
+  const label = maps.length > 1 ? 'Prints of these maps ↗' : maps.length === 1 ? 'Prints of this map ↗' : 'Buy a print ↗'
+  const own = onSaleUrl(config.shop?.onSale, slug)
+  if (own !== undefined) return { url: own, label }
+  const urls = new Set(maps.map((r) => onSaleUrl(config.shop?.onSale, r)))
+  const shared = urls.size === 1 ? [...urls][0] : undefined
+  if (shared !== undefined) return { url: shared, label }
+  const sec = config.home?.sections.find((s) => s.page === `#/${slug}`)
+  const viaSection = sec === undefined ? undefined : sectionShop(config, sec)
+  return viaSection === undefined ? undefined : { url: viaSection.url, label }
+}
+
+/** Every shop link the explorer's script shows, resolved here: per region, and per front-page section (null when not on sale). */
+export const buyLinks = (config: Pick<SiteConfig, 'shop' | 'home'>, regions: Iterable<string>): { regions: Record<string, { url: string; label: string }>; sections: ({ url: string; label: string } | null)[] } => {
+  const out: Record<string, { url: string; label: string }> = {}
+  for (const r of regions) {
+    const s = shopFor(config, r)
+    if (s !== undefined) out[r] = s
+  }
+  return { regions: out, sections: (config.home?.sections ?? []).map((s) => sectionShop(config, s) ?? null) }
 }
 
 /**

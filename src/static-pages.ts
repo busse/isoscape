@@ -31,7 +31,7 @@ import { MARK, PROSE_CSS, STORY_CSS, THEME_CSS } from './explorer.ts'
 import { escapeHtml } from './markdown.ts'
 import { loadPages, PAGES_DIR, type Page } from './pages.ts'
 import {
-  buildCard, clip, escAttr, firstParagraph, flagshipOf, imageSize, metaTags, previewOf, shopFor, siteHref, withCampaign,
+  buildCard, clip, escAttr, firstParagraph, flagshipOf, imageSize, metaTags, pageShop, previewOf, shopFor, siteHref, withCampaign,
   SITE_NAME, statsLine, type HomeConfig, type Preview, type SiteConfig,
 } from './social.ts'
 import { makeStory } from './story.ts'
@@ -159,15 +159,8 @@ export const mapTitle = (e: MapEntry | SeriesEntry, home?: HomeConfig): string =
 /** The regions a static content page links into (`../index.html#<region>…`), in order of first mention. */
 export const mapRefs = (html: string): string[] => {
   const out: string[] = []
-  for (const m of html.matchAll(/href="\.\.\/index\.html#([a-z0-9][a-z0-9-]*)(?=[:@"])/g)) if (!out.includes(m[1])) out.push(m[1])
+  for (const m of html.matchAll(/href="\.\.\/index\.html#([a-z0-9][a-z0-9-]*)(?=[:@"])/g)) if (m[1] !== 'home' && !out.includes(m[1])) out.push(m[1])
   return out
-}
-
-/** Where a content page's "Prints" link goes: the shop link its maps share, else that of the section that tells its story. */
-export const pageShop = (page: Pick<Page, 'slug' | 'html'>, config: Pick<SiteConfig, 'shop' | 'home'>): string | undefined => {
-  const urls = new Set(mapRefs(page.html).map((r) => shopFor(config, r)?.url).filter((u): u is string => u !== undefined))
-  if (urls.size === 1) return [...urls][0]
-  return config.home?.sections.find((s) => s.page === `#/${page.slug}` && s.shop)?.shop
 }
 
 // ---- links --------------------------------------------------------------------------------------
@@ -351,9 +344,8 @@ export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}
   const description = clip(page.summary ?? firstParagraph(page.html), 300)
   const image = imgs.own ?? imgs.flagship
   const imageAlt = imgs.own === undefined ? imgs.flagshipAlt : page.summary ?? page.title
-  const shop = pageShop(page, ctx.config)
-  const linked = mapRefs(page.html).length
-  const acts = `<p class="acts"><a class="btn ghost" href="../index.html#/${escAttr(page.slug)}">Open this in the explorer</a>${shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop, page.slug, ctx.config.shop?.url))}">${linked > 1 ? 'Prints of these maps' : 'Prints of this map'} ↗</a>`}</p>\n`
+  const shop = pageShop(page.slug, mapRefs(page.html), ctx.config)
+  const acts = `<p class="acts"><a class="btn ghost" href="../index.html#/${escAttr(page.slug)}">Open this in the explorer</a>${shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, page.slug, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`}</p>\n`
   const url = abs(path, ctx)
   const ld = {
     '@context': 'https://schema.org',

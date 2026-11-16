@@ -6,7 +6,7 @@ import { dirname, join, normalize } from 'node:path'
 import type { BuildMeta } from '../src/archive.ts'
 import { renderExplorer } from '../src/explorer.ts'
 import { loadPages } from '../src/pages.ts'
-import { shopFor, withCampaign, writeSocial, type SiteConfig } from '../src/social.ts'
+import { anyOnSale, buyLinks, loadSiteConfig, onSaleUrl, pageShop, sectionShop, shopCta, shopFor, withCampaign, writeSocial, type SiteConfig } from '../src/social.ts'
 import {
   loadStaticPages, mapRefs, plainLinks, planStatic, sitemapXml, staticRoute, writeStatic,
 } from '../src/static-pages.ts'
@@ -33,9 +33,9 @@ const BUILDS = [
 const CONFIG: SiteConfig = {
   siteUrl: 'https://example.org/iso/',
   analytics: { ga: 'G-ABC1234' },
-  shop: { label: 'Shop', url: 'https://shop.example/', links: { 'lm-': 'https://shop.example/c/landmarks', cars: 'https://shop.example/c/cars' } },
+  shop: { label: 'Shop', url: 'https://shop.example/', onSale: { 'lm-': 'https://shop.example/c/landmarks', cars: 'https://shop.example/c/cars', 'town-time': 'https://shop.example/c/town' } },
   home: {
-    title: 'Home', heroes: [{ region: 'town-time', year: 1925, title: 'The town through time', blurb: 'Year by year.', shop: 'https://shop.example/c/town' }],
+    title: 'Home', heroes: [{ region: 'town-time', year: 1925, title: 'The town through time', blurb: 'Year by year.' }],
     sections: [{ title: 'Landmarks', prefixes: ['lm-'], page: '#/story', pageLabel: 'Read the story' }, { title: 'Cars', prefixes: ['cars'] }],
   },
 }
@@ -210,4 +210,85 @@ test('the explorer lists the static pages in plain links, and the story runs out
   assert.match(text, /^<div class="story">/)
   assert.match(text, /120 buildings/)
   assert.match(text, /<a href="how-its-made.html#camera">how the camera works →<\/a>/)
+})
+
+test('what is on sale: the longest key a region, set or page slug starts with', () => {
+  const onSale = { richmond: 'https://s/c/rva', 'richmond-streetcars': 'https://s/c/cars', 'broad-street-cutaway': 'https://s/p/cut' }
+  assert.equal(onSaleUrl(onSale, 'richmond-downtown-time'), 'https://s/c/rva')
+  assert.equal(onSaleUrl(onSale, 'richmond-streetcars'), 'https://s/c/cars')
+  assert.equal(onSaleUrl(onSale, 'richmond-streetcars-west'), 'https://s/c/cars')
+  assert.equal(onSaleUrl(onSale, 'broad-street-cutaway'), 'https://s/p/cut')
+  // A key longer than the subject, or one it does not start with, is no match.
+  assert.equal(onSaleUrl(onSale, 'broad-street'), undefined)
+  assert.equal(onSaleUrl(onSale, 'broad-street-lines'), undefined)
+  assert.equal(onSaleUrl(onSale, 'rich'), undefined)
+  assert.equal(onSaleUrl({}, 'richmond'), undefined)
+  assert.equal(onSaleUrl(undefined, 'richmond'), undefined)
+
+  const config: SiteConfig = { shop: { label: 'L', url: 'https://s/', cta: 'Buy prints', onSale }, home: {
+    title: 'H', heroes: [{ region: 'richmond-i195', title: 'I-195', shopLabel: 'Prints ↗' }],
+    sections: [
+      { title: 'Richmond', prefixes: ['richmond'], page: '#/streetcars' },
+      { title: 'Buildings', prefixes: ['broad-street'], page: '#/broad-street' },
+      { title: 'Mixed', prefixes: ['richmond', 'gwynns'] },
+    ],
+  } }
+  assert.deepEqual(shopFor(config, 'richmond-i195'), { url: 'https://s/c/rva', label: 'Prints ↗' })
+  assert.equal(shopFor(config, 'gwynns-island'), undefined)
+  // A section: one URL for all its prefixes, else its story page's slug.
+  assert.deepEqual(sectionShop(config, config.home!.sections[0]), { url: 'https://s/c/rva', label: 'Buy prints ↗' })
+  assert.equal(sectionShop(config, config.home!.sections[1]), undefined)
+  assert.equal(sectionShop(config, config.home!.sections[2]), undefined)
+  assert.deepEqual(sectionShop({ shop: { label: 'L', url: 'https://s/', onSale: { streetcars: 'https://s/c/set' } } }, { ...config.home!.sections[0], shopLabel: 'Shop ↗' }), { url: 'https://s/c/set', label: 'Shop ↗' })
+  // A page: its own slug first (the cutaway turns on by its slug alone), then its maps', then its section's.
+  assert.deepEqual(pageShop('broad-street-cutaway', [], config), { url: 'https://s/p/cut', label: 'Buy a print ↗' })
+  assert.equal(pageShop('broad-street', ['broad-street-lines'], config), undefined)
+  assert.deepEqual(pageShop('streetcars', ['richmond-streetcars', 'richmond-streetcars-west'], config), { url: 'https://s/c/cars', label: 'Prints of these maps ↗' })
+  assert.equal(pageShop('landmarks', ['richmond-streetcars', 'gwynns-island'], config), undefined)
+  assert.deepEqual(pageShop('streetcars', [], config), { url: 'https://s/c/rva', label: 'Buy a print ↗' })
+  assert.equal(shopCta(config), 'Buy prints')
+  assert.deepEqual(buyLinks(config, ['richmond-i195', 'gwynns-island']), {
+    regions: { 'richmond-i195': { url: 'https://s/c/rva', label: 'Prints ↗' } },
+    sections: [{ url: 'https://s/c/rva', label: 'Buy prints ↗' }, null, null],
+  })
+})
+
+test('with nothing on sale, no page links to anything in the shop but its front page', async () => {
+  // The config as written: an empty onSale, and old per-view and per-section shop URLs and a
+  // `links` map, which are ignored.
+  const dir = mkdtempSync(join(tmpdir(), 'iso-cfg-'))
+  writeFileSync(join(dir, 'isoscape.config.json'), JSON.stringify({
+    siteUrl: 'https://example.org/iso/',
+    shop: { label: 'Holiday shop', url: 'https://shop.example/', cta: 'Buy prints of these maps', links: { 'lm-': 'https://shop.example/c/landmarks' }, onSale: {} },
+    home: { ...CONFIG.home, heroes: [{ ...CONFIG.home!.heroes[0], shop: 'https://shop.example/c/town' }], sections: CONFIG.home!.sections.map((s) => ({ ...s, shop: 'https://shop.example/c/sec', shopLabel: 'Shop ↗' })) },
+  }))
+  const config = await loadSiteConfig(undefined, dir, {})
+  assert.equal(anyOnSale(config), false)
+  assert.equal(shopCta(config), undefined)
+  assert.deepEqual(config.shop?.onSale, {})
+  assert.equal((config.shop as { links?: unknown }).links, undefined)
+  assert.equal((config.home?.heroes[0] as { shop?: unknown }).shop, undefined)
+
+  const { out, pagesDir } = site()
+  // The story page as it should now be written: no sentence about prints.
+  writeFileSync(join(pagesDir, 'story.md'), '---\ntitle: The story\n---\n\n# The story\n\nSee [the cars](https://example.org/iso/#cars:1925@1,2,3) and [the tower](https://example.org/iso/#lm-tower).\n')
+  const pages = loadPages(pagesDir, config.siteUrl)
+  const plan = planStatic(BUILDS, pages.map((p) => p.slug), config.home)
+  await writeSocial(out, BUILDS, pages, config, undefined, (t) => ('build' in t ? plan.forBuild(t.build) : plan.forPage(t.page)))
+  const result = await writeStatic(out, BUILDS, plan, config, { pagesDir })
+  writeFileSync(join(out, 'index.html'), renderExplorer(BUILDS, pages, { shop: config.shop, home: config.home, plain: plainLinks(plan, pages, config.home) }))
+  const files = ['index.html', ...result.files.filter((f) => f.endsWith('.html')), ...readdirSync(join(out, 's')).map((f) => `s/${f}`)]
+  assert.ok(files.length > 10)
+  for (const f of files) {
+    const text = readFileSync(join(out, f), 'utf8')
+    for (const [m] of text.matchAll(/https:\/\/shop\.example[^"'\s<)\\]*/g)) {
+      assert.ok(/^https:\/\/shop\.example\/(\?utm_source=isoscape-explorer&(amp;)?utm_medium=referral&(amp;)?utm_campaign=[a-z0-9-]+)?$/i.test(m), `${f}: ${m}`)
+    }
+    const hit = text.match(/.{80}(Buy a print|Prints of th|Buy prints of these maps|Shop ↗).{40}/)
+    assert.equal(hit, null, `${f}: ${hit?.[0]}`)
+  }
+  const index = readFileSync(join(out, 'index.html'), 'utf8')
+  assert.match(index, /<a class="shop" href="https:\/\/shop.example\/"[^>]*><b>Shop prints ↗<\/b><span>Holiday shop<\/span><\/a>/)
+  assert.match(index, /"buy":\{"regions":\{\},"sections":\[null,null\]\}/)
+  assert.match(readFileSync(join(out, 'p', 'story.html'), 'utf8'), /<p class="acts"><a class="btn ghost" href="\.\.\/index\.html#\/story">Open this in the explorer<\/a><\/p>/)
 })

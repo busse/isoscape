@@ -2,8 +2,8 @@
 
 Isometric dot-and-line views of real places, built from open map data.
 
-See the maps at [busse.github.io/isoscape](https://busse.github.io/isoscape/) · Prints at
-[chrisbusse.com](https://chrisbusse.com/), which support the work.
+See the maps at [busse.github.io/isoscape](https://busse.github.io/isoscape/) · The shop,
+which supports the work: [chrisbusse.com](https://chrisbusse.com/).
 
 A sibling of [dotscene](https://github.com/busse/dotscene): the same visual language (inked
 edges, a dot on every corner, flat fills), but driven by geography instead of hand-placed
@@ -60,9 +60,9 @@ Claude, Anthropic's AI, using Claude Opus 5.5, directed and reviewed by Chris Bu
 the code, traced the historic buildings, laid out the prints, and set up the shop. The maps are
 drawn by software from open data, not by hand; the historic years are machine-traced sketches.
 
-Prints of the maps on the isoscape site (Richmond through time, Gwynn's Island, fifty American
-landmarks, and [five landmarks around the world](pages/world-landmarks.md)) are in a holiday shop at [chrisbusse.com](https://chrisbusse.com) through
-December 31, 2026. The tool stays here for good.
+Prints of some of the designs on the isoscape site are sold in a holiday shop at
+[chrisbusse.com](https://chrisbusse.com), open through December 31, 2026; the site links to a
+design's print only while it is on sale (`shop.onSale`, below). The tool stays here for good.
 
 ## The explorer
 
@@ -109,12 +109,45 @@ pages share unless their front matter names their own (`social:`, below).
 
 The same file can give the explorer a front page. `"home"` has a `title`, an `intro`, `heroes`
 (featured views, each a `region`, optional `year` in a dated series, `title`, `blurb`, and
-`shop` link with optional `shopLabel`), `sections` (each a `title`, the region-name `prefixes` it holds, and optionally
-`homeTitle`, `blurb`, `order` (region names to show first), `collapsed`, `shop` and `shopLabel`), and `links` shown at the bottom.
+optional `shopLabel`), `sections` (each a `title`, the region-name `prefixes` it holds, and optionally
+`homeTitle`, `blurb`, `order` (region names to show first), `collapsed` and `shopLabel`), and `links` shown at the bottom.
 The page then opens on the front page (`#home`). The build list is grouped by the same
-sections, with featured regions first and folded sections closed. `"shop"` (`label`, `url`,
-`cta`, and `links` keyed by region prefix) adds the shop button and a "Buy a print" button on
-matching views. See this repo's own `isoscape.config.json`.
+sections, with featured regions first and folded sections closed. See this repo's own
+`isoscape.config.json`.
+
+#### The shop, and what is on sale
+
+`"shop"` has a `label`, a `url` (the shop's front page), a `cta`, and `onSale`, the one list of
+what is for sale:
+
+```json
+"shop": {
+  "label": "Holiday shop, open through December 31, 2026",
+  "url": "https://chrisbusse.com/",
+  "cta": "Buy prints of these maps",
+  "onSale": { "broad-street-cutaway": "https://chrisbusse.com/products/…" }
+}
+```
+
+Each key of `onSale` is a region prefix, a set's page slug or a content page's slug, and its
+value the product or collection URL. A subject (a region, or a page's slug) is on sale under the
+longest key it starts with: `"richmond"` covers every `richmond-…` region, and a longer
+`"richmond-streetcars"` overrides it for those. The site always links to the shop's front page
+(the explorer's header, the front page's banner and "Shop prints ↗" atop every static page),
+and links to buy only what `onSale` names:
+
+- a map ("Buy a print ↗", or its featured view's `shopLabel`): the explorer's info bar, its
+  front page, and `m/<region>.html`;
+- a front-page section (its `shopLabel`, else "Buy prints ↗"): when every one of its `prefixes`
+  is on sale under one URL, else when the slug of its story `page` is;
+- a content page (a button at its head, in the explorer and in `p/<slug>.html`): when its own
+  slug is on sale, else when every map it links to is on sale under one URL, else when the
+  section whose story it tells is.
+
+`cta` replaces "Shop prints" in the header only while something is on sale. With `onSale`
+empty, nothing anywhere links to a product or collection, and no text says so. Per-view or
+per-section `shop` URLs, and the old `shop.links`, are ignored. To put a design on sale, add its
+key and URL and rerun `isoscape explorer`; to take it off, remove the key.
 
 ### Static pages and search
 
@@ -124,11 +157,10 @@ also writes a plain HTML page for everything worth finding, beside `index.html`:
 
 - `p/<slug>.html`: every content page, its whole text in the document, with GitHub-style
   anchors, links between pages as files, its images copied into `p/`, and "Open this in the
-  explorer". Where the page's maps (or the section that tells its story) have a shop link,
-  "Prints of this map" goes to it.
+  explorer". Where the page is on sale (see `onSale` above), a shop button goes to it.
 - `m/<region>.html`: every region's newest build, with its picture, "How this view was made"
   (the same text as the explorer's tab, from `src/story.ts`), "Explore this map" (the lasting
-  route `#<region>` or `#<region>:<year>`) and "Buy a print" (the explorer's shop rule). A dated
+  route `#<region>` or `#<region>:<year>`) and, while it is on sale, "Buy a print". A dated
   series of more than one year gets a series page there instead, with every year, and
   `m/<region>-<year>.html` for each year, linked to each other.
 - `sitemap.xml`: `index.html` and every one of those pages, with the date of the build or of
@@ -484,9 +516,11 @@ block in the bottom-right corner below the callout column (`titleblock.stamp`, p
 A cutaway sheet has no canvas files: its title, credit line and column all lie within the
 1.5 in a canvas mirrors round its sides. `--page` (after `--print`) writes its explorer page,
 `pages/<page.slug>.md`, from the spec's `page` (`slug`, `title`, `order`, `summary`, `intro`,
-`how`, `drafted`, and `shop` once prints sell): the sheet, the plate and its kind, every callout
+`how` and `drafted`): the sheet, the plate and its kind, every callout
 as text with how sure it is, the key, where the trains and streetcars went with their sources,
-the sources and notes, and the note on how the page was drafted.
+the sources and notes, and the note on how the page was drafted. The page names no shop; once
+the sheet's prints sell, add `"<page.slug>": "<product URL>"` to `shop.onSale` and the explorer
+puts a "Buy a print ↗" button on the page.
 
 ## Making a set
 
@@ -517,15 +551,15 @@ fourteen places they ran to.
    `note` (what is approximate), `credit`, `map` (`region`, `year`), `boxes`, an optional
    `key` (up to sixteen names in the title band, from a list in a JSON file), optional `fine`
    (extra `build` flags for the single prints, e.g. `["--streetcar-scale", "1.5"]`), and `page`
-   (`slug`, `title`, `summary`, `intro`, `how`, `noun`, an optional `table`, and `shop` once
-   the prints are for sale).
+   (`slug`, `title`, `summary`, `intro`, `how`, `noun`, and an optional `table`).
 4. **Scenes**, where the region's data is cached: `python3 tools/sets/set.py <name> prepare`
    builds each year's SVG into `out/sets/<name>/scenes/` and writes `points.json`.
 5. **Prints**, anywhere with `rsvg-convert`: `set.py <name> menu`, `map`, `boxes`, `canvas`
    (300 dpi into `out/sets/<name>/print/`; `--dpi 40` for a quick proof). Look at every one.
 6. **The page**: `set.py <name> page` writes `pages/<page.slug>.md` and its two images from the
-   menu print. Link it from a section of `isoscape.config.json` (`page`, `pageLabel`) and, once
-   the prints sell, point `shop.links` at the collection for the region.
+   menu print. Link it from a section of `isoscape.config.json` (`page`, `pageLabel`). The page
+   names no shop: once the prints sell, add the page's slug (and, if you like, the region) to
+   `shop.onSale` with the collection's URL, and the explorer adds the shop buttons.
 
 ## Roadmap
 
