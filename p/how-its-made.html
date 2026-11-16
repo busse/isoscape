@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How it&#39;s made · isoscape</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HNNYF0H75C"></script>
+<script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)} gtag('js', new Date()); gtag('config', 'G-HNNYF0H75C')</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20120%20120%22%3E%3Cg%20stroke%3D%22%232c2b33%22%20stroke-width%3D%223%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M60%2018%20L100%2041%20L60%2064%20L20%2041%20Z%22%20fill%3D%22%23f2c879%22%2F%3E%3Cpath%20d%3D%22M20%2041%20L60%2064%20L60%20104%20L20%2081%20Z%22%20fill%3D%22%23ece7dc%22%2F%3E%3Cpath%20d%3D%22M100%2041%20L60%2064%20L60%20104%20L100%2081%20Z%22%20fill%3D%22%23c3bbac%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%232c2b33%22%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2218%22%20r%3D%224%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%2241%22%20r%3D%224%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2241%22%20r%3D%224%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%2264%22%20r%3D%224%22%2F%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2281%22%20r%3D%224%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%2281%22%20r%3D%224%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%22104%22%20r%3D%224%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="../sitemap.xml">
+<meta name="description" content="The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.">
+<link rel="canonical" href="https://busse.github.io/isoscape/p/how-its-made.html">
+<meta property="og:site_name" content="isoscape">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How it&#39;s made · isoscape">
+<meta property="og:description" content="The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.">
+<meta property="og:url" content="https://busse.github.io/isoscape/p/how-its-made.html">
+<meta property="og:image" content="https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.png">
+<meta property="og:image:secure_url" content="https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Isometric map of Downtown Richmond, from the Capitol to Tobacco Row as it stood in 1925 (The 1924–25 Sanborn map): buildings, streets, water and the lie of the land, seen from above at an angle">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How it&#39;s made · isoscape">
+<meta name="twitter:description" content="The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.">
+<meta name="twitter:image" content="https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.png">
+<meta name="twitter:image:alt" content="Isometric map of Downtown Richmond, from the Capitol to Tobacco Row as it stood in 1925 (The 1924–25 Sanborn map): buildings, streets, water and the lie of the land, seen from above at an angle">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How it's made","description":"The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.","author":{"@type":"Person","name":"Chris Busse","url":"https://busse.github.io/isoscape/p/about.html#contact"},"inLanguage":"en","image":"https://busse.github.io/isoscape/builds/20261114-042410-richmond-downtown-time-1925/social.png","url":"https://busse.github.io/isoscape/p/how-its-made.html","mainEntityOfPage":"https://busse.github.io/isoscape/p/how-its-made.html","dateModified":"2026-11-16","isPartOf":{"@type":"WebSite","name":"isoscape","url":"https://busse.github.io/isoscape/"}}</script>
+<style>
+:root {
+  --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
+  --accent: #2f6f8f; --accent-soft: #dcebf2; --stage: #e7e4dc; --chip: #efece5; --good: #3c7a4a; --bad: #a3473a; --warn: #b8860b;
+  font: 13px/1.45 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #15161b; --panel: #1b1d23; --line: #2b2e37; --ink: #e5e6ec; --dim: #9497a3; --faint: #646875;
+    --accent: #7fb6d4; --accent-soft: #22323d; --stage: #101115; --chip: #252831; --good: #7fc28f; --bad: #e08c7e; --warn: #f2c94c; }
+}
+* { box-sizing: border-box; }
+.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; }
+.prose h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 18px; font-weight: 650; }
+.prose h2 { font-size: 20px; letter-spacing: -.01em; margin: 2.2em 0 .5em; padding-top: .6em; border-top: 1px solid var(--line); font-weight: 650; }
+.prose h3 { font-size: 16px; margin: 1.6em 0 .4em; }
+.prose h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin: 1.5em 0 .3em; }
+.prose h2, .prose h3 { scroll-margin-top: 16px; }
+.prose p, .prose ul, .prose ol, .prose blockquote, .prose .table, .prose pre { margin: 0 0 1em; }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose li { margin: .25em 0; }
+.prose li::marker { color: var(--faint); }
+.prose a { color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); text-underline-offset: 2px; }
+.prose a:hover { text-decoration-color: var(--accent); }
+.prose code { font: .86em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: .05em .25em; border-radius: 4px; }
+.prose pre { max-height: none; font-size: 12.5px; }
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+.prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 0 6px 6px 0; }
+.prose blockquote p:last-child { margin-bottom: 0; }
+.prose img { display: block; max-width: 100%; height: auto; margin: 1.4em auto; }
+.prose hr { border: none; border-top: 1px solid var(--line); margin: 2em 0; }
+.prose .table { overflow-x: auto; }
+.prose table { font-size: 13.5px; font-variant-numeric: normal; }
+.prose th, .prose td { text-align: left; white-space: normal; vertical-align: top; padding: 6px 10px 6px 0; color: var(--ink); }
+.prose th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); border-bottom: 1.5px solid var(--line); }
+.prose td:first-child { color: var(--ink); font-weight: 500; }
+.prose .source { margin-top: 3em; padding-top: 1em; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--faint); }
+.story { font-size: 13.5px; line-height: 1.6; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 0 36px; align-content: start; }
+.story > h3, .story > .lede, .story > .credit { grid-column: 1 / -1; }
+.story section { max-width: 72ch; }
+.story h3 { margin: 0 0 8px; }
+.story h4 { font-size: 13px; margin: 12px 0 3px; font-weight: 600; }
+.story h4 a { font-weight: 400; font-size: 11.5px; margin-left: 6px; }
+.story p { margin: 0 0 6px; }
+.story ul { margin: 0 0 6px; padding-left: 1.2em; }
+.story li { margin: 2px 0; }
+.story a { color: var(--accent); text-decoration: none; }
+.story a:hover { text-decoration: underline; }
+.story .lede { font-size: 14.5px; max-width: 110ch; margin-bottom: 2px; }
+.story .unknown { color: var(--faint); }
+.story code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: 0 4px; border-radius: 3px; }
+.story .credit { margin-top: 14px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12px; color: var(--dim); }
+.mixbar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 6px 0 4px; max-width: 360px; background: var(--chip); }
+.mixbar span { display: block; height: 100%; }
+.m-tag { background: var(--good); } .m-model { background: #8a7bb8; } .m-lev { background: var(--accent); } .m-guess { background: var(--faint); }
+.story ul.keyed { list-style: none; padding-left: 0; }
+.key { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+html, body { margin: 0; background: var(--panel); color: var(--ink); }
+.top { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 18px; padding: 12px 20px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.top a.brand { display: flex; align-items: baseline; gap: 8px; color: inherit; text-decoration: none; }
+.top a.brand b { font-size: 15px; letter-spacing: -.01em; }
+.top a.brand span { color: var(--dim); }
+.top nav { margin-left: auto; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; }
+.top nav a { color: var(--accent); text-decoration: none; }
+.top nav a:hover { text-decoration: underline; }
+.wrap { max-width: 70ch; margin: 0 auto; padding: 26px 20px 40px; }
+.wrap.wide { max-width: 1040px; }
+.acts { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 22px; }
+.btn { display: inline-block; padding: 7px 15px; border-radius: 18px; background: var(--accent); color: var(--panel); border: 1px solid var(--accent); text-decoration: none; font-weight: 600; font-size: 13px; }
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+h1.title { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 12px; font-weight: 650; }
+.lede { font-size: 16px; line-height: 1.6; margin: 0 0 18px; max-width: 74ch; }
+.plain { font-size: 15px; line-height: 1.6; max-width: 74ch; }
+.plain a { color: var(--accent); text-underline-offset: 2px; }
+figure.pic { margin: 0 0 18px; }
+figure.pic img { display: block; width: 100%; height: auto; border-radius: 10px; background: var(--stage); border: 1px solid var(--line); }
+figure.pic figcaption { font-size: 12.5px; color: var(--dim); margin-top: 6px; }
+.years { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 20px; padding: 0; list-style: none; }
+.years a, .years span { display: inline-block; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.years a:hover { border-color: var(--accent); color: var(--accent); }
+.years span { background: var(--accent); border-color: var(--accent); color: var(--panel); }
+h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-top: 14px; border-top: 1px solid var(--line); font-weight: 650; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; padding: 0; list-style: none; }
+.cards a { display: flex; flex-direction: column; gap: 5px; text-decoration: none; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 9px; padding: 8px; height: 100%; box-sizing: border-box; }
+.cards a:hover { border-color: var(--accent); }
+.cards img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 5px; background: var(--stage); display: block; }
+.cards b { font-size: 13px; line-height: 1.3; }
+.cards small { color: var(--dim); font-size: 12px; }
+.more { font-size: 14px; }
+.more ul { columns: 2 220px; padding-left: 1.1em; margin: 0; }
+.more li { margin: 2px 0; }
+.more a { color: var(--accent); }
+.foot { max-width: 1040px; margin: 0 auto; padding: 14px 20px 48px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--dim); }
+.foot p { margin: 0 0 6px; }
+.foot a { color: var(--accent); }
+@media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; } .top nav { margin-left: 0; } }
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="../index.html" title="Open the isoscape explorer"><b>isoscape</b><span>isometric maps of real places</span></a><nav aria-label="Site"><a href="../p/how-its-made.html">How it&#39;s made</a><a href="../p/about.html">About, credits and licenses</a><a href="https://chrisbusse.com/?utm_source=isoscape-explorer&amp;utm_medium=referral&amp;utm_campaign=how-its-made">Shop prints ↗</a></nav></header>
+<main class="wrap">
+<p class="acts"><a class="btn ghost" href="../index.html#/how-its-made">Open this in the explorer</a></p>
+<article class="prose">
+<h1 id="how-its-made">How it&#39;s made</h1>
+<p>isoscape draws a real place as an isometric dot-and-line picture: inked edges, a dot on every
+visible corner, flat fills. Nothing in it is drawn by hand. Every line comes from two open
+datasets, OpenStreetMap and the USGS 3D Elevation Program, and the code decides where it
+goes.</p>
+<p>This page follows the pipeline from the download to the finished SVG. It also says, for every
+part of the picture, whether it was <strong>measured</strong>, <strong>inferred</strong> from a measurement, or
+<strong>guessed</strong>. They look the same on the page, and they are not.</p>
+<p>Each build in the explorer also has its own <strong>How this view was made</strong> tab under the picture.
+It gives that view&#39;s frame, sources and counts, and links back to the sections here.</p>
+<p><img src="pipeline.svg" alt="The pipeline: fetch from OpenStreetMap and 3DEP into a local cache, then parse, camera, terrain, scene, order, draw, archive and explorer" loading="lazy"></p>
+<p>Where to start:</p>
+<ul><li><strong>Lidar and GIS:</strong> <a href="#terrain">Terrain</a>, <a href="#rivers">Rivers</a>, <a href="#rapids">Rapids</a> and
+<a href="#shoreline">Shoreline</a>.</li><li><strong>Urban planning:</strong> <a href="#buildings">Buildings</a>, <a href="#bridges">Bridges</a> and
+<a href="#measured-inferred-guessed">Measured, inferred, guessed</a>.</li><li><strong>Art and illustration:</strong> <a href="#camera">Camera</a>, <a href="#drawing">Drawing</a> and
+<a href="#paint-order">Paint order</a>.</li><li><strong>History:</strong> <a href="#time">Time</a> covers the dated series: what is measured, what is curated, and
+what a series cannot show.</li><li><strong>Development:</strong> every section names the file that does the work. The
+<a href="#archive-and-explorer">archive and explorer</a> section covers the build loop.</li></ul>
+<h2 id="measured-inferred-guessed">Measured, inferred, guessed</h2>
+<div class="table"><table><thead><tr><th>Part of the picture</th><th>Comes from</th><th>How sure</th></tr></thead><tbody><tr><td>Building footprints, roads, rail, parks, water outlines</td><td>OpenStreetMap</td><td>Mapped by volunteers, mostly traced from aerial imagery. Usually good, sometimes stale</td></tr><tr><td>Extra footprints (where a region asks)</td><td>Microsoft&#39;s ML building footprints</td><td>Traced by a model from imagery. Good outlines, sometimes merged or missing</td></tr><tr><td>Building heights</td><td>OSM <code>height</code>, else Microsoft&#39;s model, else <code>building:levels</code>, else a guess</td><td>Mixed. In downtown Richmond about 40% are guesses; around Gwynn&#39;s Island, a little over half. Each build reports its own split</td></tr><tr><td>Woods, wetlands, fields, crops (where a region asks)</td><td>USGS National Land Cover Database (NLCD 2021)</td><td>Classified from satellite imagery at 30 m. Right in the large, coarse at the edges</td></tr><tr><td>Ground elevation</td><td>USGS 3DEP bare-earth model in the US; elsewhere a national or global model (IGN, swisstopo, GSI, Copernicus, Terrain Tiles)</td><td>Measured. 1 m lidar where 3DEP has flown; from 1 m to 30 m abroad, by source</td></tr><tr><td>River surface</td><td>The lowest lidar returns over mapped water, smoothed</td><td>Inferred</td></tr><tr><td>Exposed rock and rapids</td><td>Height above, and fall of, that surface</td><td>Inferred</td></tr><tr><td>Shoreline (with terrain)</td><td>Mapped water, corrected against the lidar</td><td>Inferred</td></tr><tr><td>Bridge deck heights</td><td>A per-region rule by name, else a default per OSM layer</td><td>Rule of thumb</td></tr><tr><td>Camera bearing</td><td>Snapped to the street grid, or set in the region</td><td>Chosen</td></tr></tbody></table></div>
+<h2 id="inputs">Inputs</h2>
+<p><strong>OpenStreetMap.</strong> <code>fetch</code> asks the Overpass API for everything the renderer can draw:
+buildings and building parts, water and waterways, roads, railways, parks, woods and other
+land cover, islands, coastline and car parks. Large areas are fetched in tiles of at most
+1.6 km a side, because Overpass refuses or times out on big requests. Four public mirrors are
+tried in turn. Each tile is cached as it arrives, so an interrupted fetch picks up where it
+stopped. The merged answer is saved as <code>data/&lt;region&gt;/osm.json</code>.</p>
+<p><strong>Elevation.</strong> In the US, the ground comes from the <a href="https://www.usgs.gov/3d-elevation-program" target="_blank" rel="noopener">USGS 3D Elevation Program
+(3DEP)</a>, the default source. Its seamless bare-earth model is served by
+the National Map&#39;s <code>exportImage</code> service, which returns the best data available for each
+place: 1 m lidar where it has been flown, coarser models elsewhere. Bare earth means
+buildings and trees have been removed. isoscape requests uncompressed 32-bit float GeoTIFFs
+in tiles of at most 1,500 pixels a side, at 1 m per pixel unless the region sets
+<code>demResolution</code>. The tiles are stitched together and stored as <code>data/&lt;region&gt;/dem.bin.gz</code>:
+gzipped 16-bit integers in centimeters, so heights are kept to the nearest centimeter.</p>
+<p>The service keeps its pixels square in degrees. A tile sized in meters is not square in
+degrees away from the equator, so the service widens it north and south about its center
+and fills the same number of pixels: the image covers more ground than was asked for. Each
+tile is read on the box it really covers and resampled onto the box asked for. Until
+November 2026 this was missed, and the ground in every 3DEP map sat squeezed north–south by
+the cosine of the latitude (0.79 in Richmond, 0.73 at Crater Lake): up to a few hundred
+meters off at a tile&#39;s edge, with a step where two tiles met. Water outlines then lay on
+banks and cliffs, which read as rock and as false falls. Files fetched before the fix are
+put right as they load.</p>
+<p>Outside the US, a region names another source in <code>terrain.source</code>; <code>isoscape sources</code> lists
+them with their credits and licenses, and <a href="world-landmarks.html">Landmarks around the world</a>
+shows one map for each. <code>ign</code> (France, 1 m) is cut to order like 3DEP, by IGN&#39;s WMS server,
+as raw 32-bit heights. The rest are published in fixed pieces that isoscape downloads and
+resamples onto its own grid. <code>swisstopo</code> (Switzerland, 2 m) comes as one-kilometer squares in
+the Swiss grid, found through swisstopo&#39;s STAC catalog and converted with swisstopo&#39;s
+published formulas, good to about a meter. <code>gsi</code> (Japan) comes as web-map tiles with heights
+packed into their colors: 5 m lidar first, then 5 m photogrammetry, then the 10 m national
+model. <code>copernicus</code> (worldwide, 30 m) comes as one-degree squares of cloud-optimized GeoTIFF,
+read with Deflate and the floating-point predictor. <code>terrain-tiles</code> (worldwide) is a mosaic
+of open models in web-map tiles. Copernicus is a <em>surface</em> model, so forest and roofs are in
+its heights. <code>terrain.fillFrom</code> names a second source for whatever the first leaves empty,
+which is how the Matterhorn&#39;s Italian face is filled from Copernicus. The default
+<code>demResolution</code> is 1 m, or the source&#39;s own spacing where that is coarser (30 m for
+Copernicus and Terrain Tiles). The cache records which source it came from.</p>
+<p>3DEP sometimes fills a gap in its coverage with a large negative number. One patch near
+Shockoe Bottom reads −88 m. Any sample below −5 m is treated as missing, along with a
+three-pixel rim around it, and filled from its neighbors.</p>
+<p>The download covers the frame&#39;s circumscribed circle plus a 60 m margin. The camera can turn
+after the data arrives (see <a href="#camera">Camera</a>), and the data still covers the frame. <strong>Builds
+never touch the network</strong>, so a build can be repeated exactly.</p>
+<p><strong>Building footprints, beyond OSM.</strong> OSM is thorough in cities and thin in the country.
+Around Gwynn&#39;s Island it maps 417 buildings, while Microsoft&#39;s
+<a href="https://github.com/microsoft/GlobalMLBuildingFootprints" target="_blank" rel="noopener">Global ML Building Footprints</a>
+find over 6,000. A region can list <code>&quot;microsoft&quot;</code> in <code>sources.buildings</code>. <code>fetch</code> then
+downloads the dataset&#39;s parts for the region&#39;s zoom-9 quadkeys, keeps the footprints whose
+centers fall in the region, and stores them in <code>data/&lt;region&gt;/footprints.json</code>. The model
+estimates a height for many of them, and that height is kept.</p>
+<p><strong>Land cover.</strong> Rural OSM rarely maps woods and fields. A region with <code>sources.landcover: &quot;nlcd&quot;</code> gets the <a href="https://www.mrlc.gov/" target="_blank" rel="noopener">National Land Cover Database</a> (NLCD 2021) through
+the MRLC&#39;s map service. That&#39;s a 30 m classification of the whole country: forest, wetland,
+pasture, crops, scrub and so on. The map image comes back with each class in its legend
+color, and each color is matched back to its class. The result is stored in
+<code>data/&lt;region&gt;/landcover.bin.gz</code>.</p>
+<p>Code: <code>src/osm.ts</code>, <code>src/dem.ts</code>, <code>src/dem-sources.ts</code>, <code>src/rasters.ts</code>, <code>src/footprints.ts</code>, <code>src/landcover.ts</code>.</p>
+<h2 id="region">Region</h2>
+<p>A place is one JSON file in <code>regions/</code>. It sets the center (longitude, latitude), the frame&#39;s
+width and depth in meters, the camera&#39;s bearing and whether it may snap, the scale in pixels
+per meter, the tilt, the terrain settings, rules for bridge decks, and the palette. The
+README&#39;s &quot;Region config&quot; section lists every key.</p>
+<p>Positions are converted to local meters east and north of the center. This simple
+equirectangular approximation is accurate to a fraction of a meter across a city-sized frame.</p>
+<p>Code: <code>src/region.ts</code>.</p>
+<h2 id="camera">Camera</h2>
+<p>The camera is <strong>orthographic</strong>: no perspective, so a building is the same size near and far,
+and lengths across the picture can be measured with a ruler. It looks down at a fixed tilt.
+The region sets <code>squash</code>, the sine of that tilt:</p>
+<ul><li>Ground across the picture is drawn at full scale (<code>scale</code> pixels per meter).</li><li>Ground running into the picture is drawn at <code>squash</code> of its length. At 0.5 the tilt is 30°,
+the classic 2:1 view of isometric games.</li><li>Heights are drawn at the cosine of the tilt (0.87 at 30°), times any <code>exaggeration</code>.</li></ul>
+<p>The frame is a rectangle on the ground, square to the camera, so it lands on the screen as a
+plain rectangle. That suits a panorama.</p>
+<p><strong>Snap.</strong> Seen from due north, most street grids sit at an awkward angle. With <code>snap</code> on,
+isoscape measures the dominant direction of every building edge in the frame (weighted by
+length, folded so that edges at 0°, 90°, 180° and 270° all count for the same grid). The camera
+then turns by up to 45° to put that grid on the picture&#39;s diagonals. Downtown Richmond snaps to
+a bearing of −8.7°. Set <code>&quot;snap&quot;: false</code> to keep the bearing you gave.</p>
+<p>Code: <code>src/view.ts</code>, <code>chooseBearing</code> in <code>src/scene.ts</code>.</p>
+<h2 id="ground">Ground</h2>
+<p>Each OSM area is classified by its tags as water, island, park or grass, wood, marsh, sand,
+bare rock, parking or cemetery, and drawn as a flat fill in that order. Cover that lies
+mostly over water (the trees on a river island) is drawn over the water; the rest is drawn
+under it, so a park mapped around a lake, as Central Park is around the Lake, does not paint
+the lake over as lawn. Rivers are drawn from
+their mapped area, never from their center line. Canals, streams and ditches are drawn as
+ribbons of a typical width.</p>
+<p><strong>Roads and rail</strong> become ribbons. A road&#39;s width comes from its <code>width</code> tag if it has one,
+otherwise from its class: 14 m for a motorway, 7 m for a residential street, 1.8 m for a
+footway. Tunnels are left out. Railways are 3.2 m ribbons with dashed ties. Weirs and dams
+are drawn as white crests.</p>
+<p><strong>Land cover from NLCD</strong>, where a region uses it, goes down first, between the bare ground
+and OSM&#39;s own areas. Each 30 m class is resampled onto the terrain grid and grouped as woods,
+evergreen woods, swamp, marsh, field, crop, scrub or barren. Each group&#39;s edge is traced
+smoothly through the grid, the same way as the shoreline, so the blocks don&#39;t show as
+squares. OSM&#39;s parks, woods and marshes are drawn on top of it, so mapped detail wins.</p>
+<p>Code: <code>src/classify.ts</code>, <code>buildScene</code> in <code>src/scene.ts</code>, cover in <code>paintStrip</code> in <code>src/render.ts</code>.</p>
+<h2 id="coastline">Coastline</h2>
+<p>OSM does not map the sea, or tidal water like the Chesapeake Bay, as water polygons. It maps
+the coastline as lines with the land always on their left. isoscape joins those lines into
+chains and cuts them where they cross the frame. It closes each piece of land by walking the
+frame&#39;s edge, and the water is the frame minus the land. The result can be wrong if the
+coastline near the frame is broken or mis-tagged.</p>
+<p>Code: <code>src/coast.ts</code>.</p>
+<h2 id="terrain">Terrain</h2>
+<p>With terrain turned on, the elevation is resampled onto a regular grid in the camera&#39;s
+coordinates, every 5 m by default (<code>cell</code>). A light blur removes the curbs, rubble and noise
+that 1 m lidar records and a 5 m grid would turn into speckle.</p>
+<p>The scene&#39;s height at any point is its elevation above the lowest point in the frame (the
+<strong>datum</strong>), times <code>terrain.exaggeration</code>. The sample regions draw hills 2.5–4× taller than
+life, so the landform reads from a distance. <strong>Buildings and bridges keep their true heights</strong> on top
+of the exaggerated ground, so a 2.5× hill does not stretch the towers standing on it.</p>
+<p>Contours are computed from the true elevation; the hillshade from the drawn, exaggerated
+surface, so it matches the shape you see:</p>
+<ul><li><strong>Hillshade.</strong> The ground is lit from the left and a little toward the camera. The light is
+worked out at every grid node, from the surface smoothed once over its neighbors (a 3×3
+blur), so it changes smoothly from node to node. The shading is then drawn as nested bands,
+two to each of 12 steps lighter or darker (24 each way), whose edges are traced with
+marching squares between the nodes. Each band adds a thin wash on top of the one it sits
+in, so the ground shows smooth, soft shading rather than 5 m squares, and no two shades
+meet edge to edge. The shading stops at the traced shoreline and is not drawn on the river.</li><li><strong>Contours.</strong> Marching squares every 2 m by default (<code>contour</code>), with every fifth line
+heavier (<code>majorEvery</code>). There are no contours over water.</li></ul>
+<p>Code: <code>src/terrain.ts</code>, <code>paintStrip</code> in <code>src/render.ts</code>.</p>
+<h2 id="rivers">Rivers</h2>
+<p>Lidar over a river is not the river. 3DEP&#39;s bare-earth surfaces are mostly hydro-flattened,
+level across the water and stepping down along it. But OSM&#39;s water outline never matches
+them to the meter, and rocks, ledges and overlapped banks stand above the water. Draped
+naively, the river would climb its own banks.</p>
+<p>So the river&#39;s surface is <strong>recovered</strong>. At each water point on the grid, it is taken as a
+low value (the 15th percentile) of the elevations of all water points within 30 m. It is then
+smoothed along the water. The river ends up level across its width and falling along its
+course, steeply only where it really drops.</p>
+<ul><li><p>Water points standing <strong>more than 1 m above that surface</strong>, at least two grid cells (10 m
+at the default 5 m grid) from shore, are drawn as <strong>exposed rock</strong>. These are the boulder fields of the falls.</p></li><li><p>Near the shore, mapped &quot;water&quot; standing more than 1 m above the surface is treated as bank.
+It is <strong>given back to the land</strong> at its own height.</p></li><li><p>Where the elevation source has <strong>no heights</strong> (3DEP leaves much of San Francisco Bay
+empty), the gap is filled in from the shore around it. That fill is a guess, not a surface,
+so no rock is read within 30 m of it, and no rapid on it.</p></li></ul>
+<p>Both are inferences: a gravel bar mapped as water or a misplaced outline can produce false
+rock. Flat regions skip all of this and draw OSM&#39;s outlines as they are.</p>
+<p>Code: <code>settleWater</code> in <code>src/terrain.ts</code>.</p>
+<h2 id="rapids">Rapids</h2>
+<p>A rapid is where the recovered water surface <strong>falls quickly</strong>. At each water point at least
+two grid cells from shore, the fall is measured across 40 m in four directions, and the steepest is
+kept. Measuring over 40 m means a single noisy cell cannot fake a rapid. Where the fall
+exceeds <code>terrain.rapids</code> (0.035 by default, 3.5 m per 100 m), the cell reads as a rapid.</p>
+<p>Each rapid cell gets one or two short white strokes across the current, plus a wash of froth
+where it drops hardest. The strokes are placed by a hash of the cell&#39;s position, not at
+random, so the same data always draws the same marks. Weirs mapped in OSM are drawn
+separately.</p>
+<p>Rapids are <strong>inferred, not observed</strong>. They show where the lidar surface is steep, which is
+usually where the water is white, but river level on the day of the survey, a misplaced
+outline or a dam can all mislead it. The build&#39;s tab reports how many cells were read as
+rapids.</p>
+<p>Code: <code>riverFall</code> in <code>src/terrain.ts</code>, <code>paintStrip</code> in <code>src/render.ts</code>.</p>
+<h2 id="shoreline">Shoreline</h2>
+<p>With terrain, the water&#39;s edge is traced from the lidar-corrected water grid (marching squares
+over a lightly smoothed mask), not from OSM&#39;s outline. Open water is drawn at the river&#39;s
+surface; a grid cell that is part water and part bank is draped on the ground, so the water
+meets the bank at the bank&#39;s own height. Where the outline overlaps a steep bank, the bank
+slopes into the water instead of the water climbing the bank. Each strip draws the ground it
+laps toward the camera from that ground&#39;s own grid cells, so its shore there is the same as
+the next strip&#39;s and the shoreline has no teeth at the strip lines.</p>
+<p>Code: <code>paintStrip</code> in <code>src/render.ts</code>.</p>
+<h2 id="buildings">Buildings</h2>
+<p>Every OSM building that lies <strong>wholly inside the frame</strong> and covers at least
+<code>minBuildingArea</code> (12 m² by default) becomes a prism. Walls are drawn on the sides facing the
+camera, and the roof goes on top. Courtyards work. Wall shading follows which way each wall
+faces, with the light from the left. Roof color follows the building&#39;s type: homes,
+commerce, industry or civic. Where a building is mapped as Simple 3D Buildings parts
+(<code>building:part</code>), the parts are drawn instead of the outline if the parts that reach the
+ground cover at least half of it. Many outlines carry parts only for a crown, a tower or
+rooftop works; such an outline is drawn whole, and its parts only above its roof. Parts that
+are only roofs (<code>building:part=roof</code>) never replace the outline: it stays as their podium. A
+building is drawn whole or not at all, so parts whose outline the frame cuts are left out
+too. Nothing stands on air: a part raised off the ground (<code>min_height</code>) that nothing beside
+it holds up, and that is not mapped as a bridge, reaches down to the roof under it or to the
+ground (a crown whose shaft is missing from the data, or too small to draw). A bridge tower&#39;s
+parts (<code>tower:type=bridge</code>) are often mapped from the top of the pier up, with the pier left
+out, so the lowest of them (no tower part within 40 m starts lower) reach down to the ground
+or water; struts between the legs keep their height. Open canopies (<code>building=roof</code>) are left
+out.</p>
+<p>Two shapes are not prisms. A <strong>lattice tower</strong> (<code>tower:construction=lattice</code>, such as the
+Eiffel Tower) is drawn whole as a spire on its outline, in 16 stacked tapering pieces, in a
+darker iron tone. The outline is first cleared of corners within 3% of √area of their
+neighbors&#39; line (about 3 m on the Eiffel Tower), so the small jogs where a leg meets an arch
+don&#39;t run up the tower as slivers, and dots go only at the corners of its foot that face the
+camera. Its width follows the Eiffel Tower&#39;s curve: e^(−3.3·t) of the base at
+height fraction t, so 0.56 at the first platform and 0.32 at the second, running out to a
+mast over the top sixth. The parts mapped inside it are dropped. A <strong>curved roof shell with
+no height</strong> (a roof part shaped <code>round</code>, <code>spherical</code> or <code>circular</code>, such as the Sydney Opera
+House&#39;s sails) is drawn as a sail rising to a point, 1.6 × √area meters above its podium.
+That height is an approximation, not a survey.</p>
+<p><strong>Footprints from Microsoft&#39;s model</strong> fill in where OSM has none. Wherever an OSM building
+and a footprint overlap, OSM wins and the footprint is dropped. A footprint is dropped if its
+center lies in an OSM building, or if it holds an OSM building&#39;s center. A footprint whose
+center is on water is dropped too: there the model has found a boat, a pier head or a
+boathouse it cannot tell from a house. Buildings mapped in OSM on water, such as boathouses,
+stay.</p>
+<p><strong>Heights</strong> are taken from the first of these that the building has:</p>
+<ol><li>a <code>height</code> tag, from a survey or a mapper&#39;s estimate (a whole building tagged under 2 m,
+or with a height that can&#39;t be read, is taken as having none: Los Angeles County&#39;s import
+gives hundreds of hillside houses 0.4 m);</li><li><strong>an estimate from Microsoft&#39;s model</strong>, for its own footprints, where it made one;</li><li><code>building:levels</code>, at 3.4 m a floor, plus half a floor for each roof level;</li><li><strong>a guess</strong> from the building&#39;s type and size: 3.2 m for a shed or anything under 40 m²,
+8 m for a house, 10 m for a terrace, 16 m for apartments or a hotel, 13 m for an office
+(24 m over 1,500 m²), 11 m for industry, 16 m for a church, and 8–14 m by footprint for
+anything else.</li></ol>
+<p>Each build counts how many heights came from each source. A view with many guesses has the
+right footprints and plausible but invented skylines. Joining real heights from lidar (the
+first-return surface minus bare earth) is the top item on the roadmap.</p>
+<p>On a slope, a building stands on the <strong>lowest</strong> ground under it, so its walls never float.
+The ground is drawn steeper than life but buildings keep their true heights, so the roof is
+set by the <strong>true</strong> slope, not the drawn one: it sits at the building&#39;s height above the
+lowest ground plus half the true fall across the footprint (the drawn fall divided by the
+exaggeration). On the downhill side the building shows what it would on the real hill, and
+the rest of the drawn relief goes into the hill on its uphill side, so a two-story house on a
+steep street stays a two-story house. On flat ground nothing changes. The parts of one
+building all count their heights from the level of its outline, and buildings traced from
+fire-insurance maps and lost landmarks are seated the same way.</p>
+<p>Code: <code>buildingHeights</code> in <code>src/classify.ts</code>, <code>extrude</code> and <code>spire</code> in <code>src/scene.ts</code>.</p>
+<h2 id="bridges">Bridges</h2>
+<p>OSM splits one bridge into many ways, at every change of lanes, name or junction. Ramping
+each piece down to the ground would turn a viaduct into a roller coaster. So bridge ways that
+share an end, a layer and a kind (road or rail) are joined into chains first. A chain only
+ramps down at an end that touches no other bridge. Bridges that touch form a network,
+anchored to the ground at those ends, and no deck stands higher than a 70 m ramp from the
+nearest anchor allows, measured along the network: a viaduct that forks into short ways that
+each come down a few meters on ramps down to the fork, not standing at full height over a fan
+of steep stubs. An end that joins another bridge (a ramp onto a viaduct of another layer, a
+link at a fork) meets the higher of the decks there and eases to its own height over 70 m, so
+the two arrive at one height. Where a deck comes down to
+the ground, its side stops at the ground instead of hanging below it.</p>
+<p><strong>Deck height is a rule of thumb.</strong> OSM rarely records it. A region can name a height for a
+bridge, for example <code>{ &quot;match&quot;: &quot;Manchester&quot;, &quot;deck&quot;: 24 }</code>. Otherwise the deck sits
+<code>bridgeDeck</code> meters (7 by default) above the ground for each OSM <code>layer</code>. The deck is a taut
+line over whatever it crosses: never closer to the ground than its clearance, rising in
+straight runs, and easing down over 70 m at a free end. The ramp keeps that length on a short
+bridge, so a bridge shorter than two ramps never reaches full height: a 30 m footbridge over a
+canal rises well under a meter above its banks, where a 7 m tent would read as a stub floating
+in the air. Piers drop to the real ground or water every 38 m where the deck is more than 3 m
+up, or to the roof of a building under the deck, never down through it. A span that lies
+inside a building and below its roof (a garage ramp, a walkway&#39;s landing) is left out: the
+building hides it.</p>
+<p>Each bridge is cut into spans of at most 22 m, so a long bridge can pass in front of one
+building and behind another. Bridges are cut at the edges of the frame.</p>
+<p><strong>A suspension bridge</strong> (<code>bridge:structure=suspension</code>) whose towers are mapped as parts
+(<code>tower:type=bridge</code>) gets its two main cables, drawn as plain lines. The parts standing
+within 25 m of the bridge&#39;s line make its towers, and the parts either side of the widest gap
+across the line are a tower&#39;s two legs. Each cable runs from an anchorage on the deck at one
+end of the bridge, over the tops of the legs, to the other end: a parabola between towers
+that sags to 2 m over the deck at mid-span, and a slighter one down to each anchorage.
+Suspenders, tower detail and arches are not drawn.</p>
+<p>Code: <code>chainBridges</code> and <code>bridgePieces</code> in <code>src/scene.ts</code>.</p>
+<h2 id="paint-order">Paint order</h2>
+<p>The drawing has no depth buffer. Things are painted back to front, and the order is the hard
+part. Sorting by a single depth per object fails as soon as a long warehouse sits beside a
+small house. So the order is decided <strong>pairwise</strong>, only between objects whose boxes overlap
+on screen:</p>
+<ul><li>If their footprints can be separated by a line, the one on the camera&#39;s side of that line
+is in front.</li><li>If the footprints overlap (stacked building parts), the one entirely above is in front.</li><li>Two bridge spans that run side by side (within about 14 degrees of parallel, the two
+carriageways of a viaduct or a pair of tracks): the one whose line is nearer the camera is
+in front, or the upper one where one runs right over the other. By centers alone, two
+overlapping decks alternate span by span and read as a ladder.</li><li>Otherwise the nearer center wins.</li></ul>
+<p>A topological sort turns these pairwise results into one order. The rare cycle, from concave
+footprints that interlock, is broken by depth.</p>
+<p>Code: <code>src/order.ts</code>.</p>
+<h2 id="drawing">Drawing</h2>
+<p><strong>The ground is painted in strips</strong>, two grid rows deep (10 m at the default cell size), from
+the back of the frame to the front. A landscape hides parts of itself: a bank that falls away
+from the camera hides the water behind it. Each strip drapes everything that lies on it over
+the terrain: bare ground, parks, water, roads, rail, hillshade, contours, rocks and rapids.
+Each building or bridge is painted straight after the strip that holds its front edge, so a
+hill in front of it covers it and the ground behind it does not.</p>
+<p>The next strip&#39;s parks, roads and cover lap 0.6 m back over a strip&#39;s near edge, so a strip&#39;s
+hillshade and contours are shifted the same way: each runs from just past its near edge
+(0.6 m plus the width of the edge strokes, about 1.1 m at the sample scale) to the same
+distance past its far edge. The ground in that lap is then shaded once, by the strip that
+painted it last, and no light streak shows along the strip lines. Where two strips&#39; shading
+meets, both trace the same points, so there is no hairline between them.</p>
+<p>The front of the plate is a <strong>slab</strong>, a true cross-section of the ground along the near edge,
+with water where the cut crosses the river. A region with no slab (<code>&quot;slab&quot;: 0</code>, the cutaway) is
+cut square instead: the ground ends on straight lines, at the lowest point of its far edge on
+screen and the highest of its near edge, so its edge does not wander with the ground, and
+standing things are cut along the same near line.</p>
+<p><strong>The SVG is compact.</strong> Coordinates are rounded to a tenth of a pixel and written relative to
+the previous point. Draped edges are simplified to a quarter pixel, and the soft edges of
+hillshade bands to half a pixel: a point is dropped only while the line that replaces it
+passes within that distance of every point it stands for. (Until November 2026 each point
+was tested against its two neighbors alone, so a long, gently curving edge could drift
+several pixels off; across open water, where nothing covers the strips, the gaps showed as
+white stripes.) Each dot is a zero-length
+line with round caps. Even so, a big region can produce a file of 25–45 MB. The <code>--png</code> option
+renders a raster with <code>rsvg-convert</code>. Colors and line weights come from a palette (<code>paper</code>
+or <code>night</code>).</p>
+<p>Code: <code>src/render.ts</code>, <code>src/palette.ts</code>.</p>
+<h2 id="time">Time</h2>
+<p>A region with a <code>time</code> section is drawn as a <strong>series</strong>: one scene for each year (epoch) in its
+history file, built with <code>isoscape series &lt;region&gt;</code>. The downtown Richmond series runs from
+the 1737 town plan to today. Each scene combines two kinds of evidence, and the explorer says
+which is which.</p>
+<p><strong>Measured: buildings standing today, by the year each was built.</strong> A building appears in
+every scene from its year on. The year comes from:</p>
+<ol><li>a curated year, for a few landmarks whose records are known to be wrong or missing (the
+Capitol, St. John&#39;s Church, the Old Stone House and so on), each with a source. A curated
+year can also end: the Capitol&#39;s central block (OSM&#39;s middle building part) is drawn alone
+from 1788, and its full outline, with the wings of 1904–06, from 1906;</li><li>else OpenStreetMap&#39;s <code>start_date</code> tag;</li><li>else the city assessor&#39;s <em>year built</em> for the parcel under the building&#39;s center.</li></ol>
+<p>The assessor records one year per parcel, the year of its main building. Up to four buildings
+on a lot (a row split in OSM, a house and its shed) all take that year. With more buildings,
+only one clearly larger than the rest takes it. A parcel with eight or more (a campus, Capitol
+Square) gives its year to none of them. Buildings with no year appear only in today&#39;s scene.</p>
+<p><strong>Curated: what is gone or was different.</strong> A short list per series, each item with its
+years and sources: a filled canal basin, a burned district, a buried creek, demolished
+landmarks drawn from published dimensions in a red-brown tone (a burned shell in ash gray), and
+the town plan, which limits the earliest scene&#39;s streets to the original grid. Positions come
+from today&#39;s street grid. They are not surveyed.</p>
+<p><strong>Traced: buildings from fire-insurance maps.</strong> The Sanborn Map Company drew every building
+in a city&#39;s business district for insurers, block by block. Each building appears as a
+footprint colored by material: pink brick, yellow frame, blue stone, gray iron. The Library of
+Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:</p>
+<ol><li><strong>Georeference.</strong> Each sheet is placed on the ground by a rotation and shift: at one scale
+per edition, two or three named street corners read off the sheet are enough. A third
+corner checks the first two. The block outlines from the city&#39;s GIS are drawn over each
+sheet to confirm the fit (<code>tools/sanborn/rigid.py</code>, <code>ovmosaic.py</code>).</li><li><strong>Trace.</strong> The colored fills are separated from the paper and the printed lines, read for
+material, closed over the lettering, and traced as polygons. Near-rectangles are squared
+up, and outlines and thin strips (river banks, rails) are dropped (<code>extract.py</code>).</li><li><strong>Follow through time.</strong> A traced footprint mostly covered by a building standing today is
+taken to be that building, or its replacement on the same footprint, and today&#39;s data
+already draws it. The rest are <strong>lost buildings</strong>. Each is drawn from the first edition
+that shows it, though it may be older. It is drawn until it is known to be gone, in this
+order of preference: a later edition that maps the spot without it; the year the building
+on its site today went up; the opening of an expressway through it. Failing all of those,
+it is <em>assumed</em> gone by 1960, when clearing for parking and highways began
+(<code>lifespans.py</code>).</li><li><strong>Clean.</strong> A last pass drops slivers, any footprint more than 8 times longer than it is
+wide and under 12 m wide, or over 100 m long and under 8 m wide on average: on the sheets these are rail viaducts, track-side sheds and street
+edges, and extruded they would stand as walls. It then smooths each outline to within 1.5 m,
+so pixel stair-steps do not draw as striped walls. It also drops sprawls (over 2,000 m² and
+filling under 45% of their convex hull: river shading, not buildings) and merges footprints
+traced in two editions that overlap by more than 85%, keeping the earlier start and the later
+end (<code>clean.py</code>: 68 dropped, 170 merged).</li></ol>
+<p>The historic buildings are sketches, not a survey. A machine traced them from scans of
+fire-insurance maps, so outlines are approximate, heights are guessed from material, and some
+buildings are missing, misplaced or merged. The 1924 overview (&quot;congested district&quot;) sheet is
+the least precise source. The historic scenes show the city&#39;s shape and density, not each
+building exactly.</p>
+<p>Traced buildings keep the maps&#39; colors, so they read apart from today&#39;s. Their heights are
+guessed from their material (brick and stone three stories, frame two): the story counts
+printed on the sheets are not read yet; later editions add olive-brown for fire-proof
+construction, drawn six stories. The explorer counts, for each scene, how many traced
+buildings stand and how each one&#39;s end date was found.</p>
+<p>Five editions are traced: <strong>1886</strong>; <strong>1895</strong> and <strong>1905</strong> (sheets read by eye); <strong>1924–25</strong>, whose first volume opens with a single
+&quot;congested district&quot; map of the whole business district (fitted with a rubber sheet
+through sixteen street corners, each snapped to the city&#39;s block outlines); and
+<strong>1950–52</strong>, a corrected reprint whose sheets were matched feature by feature to their
+1924–25 versions where those were fitted, and read by eye otherwise. Each later edition turns
+&quot;assumed&quot; end dates into ones read from a map.</p>
+<p><strong>Era rules</strong> date everything else that OSM maps: the first rule matching a feature&#39;s name,
+<code>ref</code> or tags decides the spans in which it existed. Interstates appear from 1958, the
+Downtown Expressway from 1976, the river viaducts from 1901, today&#39;s Mayo Bridge from 1913 (its
+earlier wooden spans are not drawn). The James River and Kanawha Canal appears from 1800 until
+the railroad took it over, and again from the Canal Walk of 1999. Interchange ramps follow the
+interstate and parking aisles and driveways follow surface parking (1950); both dates are
+approximate. A feature no rule matches is drawn in every year, so the Richmond series ends its
+rules with catch-alls: the street grid, streams and the river are drawn in every year, and
+anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basins, paths) is
+drawn only today, since nothing says when it was made. Each catch-all names what still needs a
+source.</p>
+<p>In every scene after the first, buildings <strong>new since the previous scene</strong> have gold roofs.</p>
+<p><strong>Streets before the houses.</strong> A series can say that minor streets (tertiary and smaller,
+service roads and paths) are drawn only where a building of the year stands within so many
+meters of them: 75 m in the 1925 streetcar scene, 60 m in the downtown series. Each street is
+walked every half that distance and kept if any building (standing today and built by then,
+traced from a Sanborn sheet and still standing, or a curated landmark) has a corner within one
+grid cell of a step. A suburb whose streets were laid out but not yet built on shows its main
+roads only. The downtown series holds its main roads to the same test, because before the
+first Sanborn map (1886) the only record of how far the town reached is what still stands. A
+street of a town plan (Mayo&#39;s grid of 1737) is kept in every year from the plan on, houses or
+not, though not the plan&#39;s service roads. Today&#39;s scene keeps all of today&#39;s streets.</p>
+<p><strong>Streetcar lines.</strong> A curated <code>streetcar</code> item is a line drawn as a bold red ribbon down the
+street, 9 m wide, with a car every 900 m along it: 14 m long and 3.6 m tall like a 1920s
+double-truck car, but 5.4 m wide (about twice a real car&#39;s width) so its pale roof reads
+against the line. A series can scale both up so they read across a whole city: the 1925 scene
+draws them three times life size (27 m lines, 42 m cars). The lines come from
+<code>tools/streetcars/build.py</code>, which reads each line as a list of street corners (from the
+1925 plate of the city&#39;s early transit routes and the sources cited per line), finds each
+corner in OpenStreetMap, and follows the streets between them, preferring the streets the two
+corners name (any other street costs six times as much per meter). Two streets that meet
+without sharing a node take their closest points, up to 150 m apart. A run over a viaduct
+since torn down is drawn straight. Vanished pleasure grounds (a fairground) take a sandy tint of
+their own, and a racetrack is a closed dirt-colored ribbon. <code>--streetcar-scale</code> overrides the
+series&#39; scale for one build: the single-stop prints of the streetcar series use 1.5, so the
+lines read thinner up close.</p>
+<p>The fair grounds are traced from sheet 468 of the 1924–25 Sanborn atlas (100 feet to the inch,
+0.403 m per pixel of the scan, north up, fixed at Hermitage Road and Sherwood Avenue): the
+outline follows the Boulevard and Hermitage Road to the tip where they meet, the one-mile
+track&#39;s south turn (a radius of 83 m) is taken off the sheet with its straights parallel to
+the Boulevard, and the north turn is drawn to make up the mile. Thirty-six of the fair&#39;s buildings
+come from the same sheet. A curated <em>site</em> (the fair grounds while the fair stood, a station&#39;s
+loop of tracks) clears today&#39;s streets, lots and buildings from within it.</p>
+<h2 id="one-building-close-up">One building, close up</h2>
+<p>Broad Street Station in 1943 is modeled from parts
+(<code>tools/stations/broad_street.py</code>): wings, center pavilion, porch, six columns and two piers,
+entablature, drum and a dome (a quarter circle in ten steps), each with a height above its
+seat, and the concourse, a deck at the waiting room&#39;s level on piers over the tracks: a part
+can stand at a given elevation and reach up to another, instead of rising from its seat. A part
+can rest on another: the columns and piers stand on the porch and the entablature on the
+columns, so on the sloping forecourt all six columns share one base and one top. The
+station&#39;s own colors live in the palette&#39;s <code>parts</code>: limestone, the dome&#39;s tile, the iron and
+roofing of the platform canopies, ramp houses, and the trains. Nine tracks follow the
+surviving platforms through the station and the USGS quadrangles of 1934 and 1956 around the
+loop, gathering into four and then two within 110 m of each end. Canopies are cut into 12 m
+pieces, each on a column, 8 m wide and 5.4 m up; trains are a steam engine (18 m, with a
+cab), its tender (11 m) and 26 m heavyweight cars, 1 m apart. At 1.5 pixels per meter or
+closer, track is drawn with its ties and its two rails, 1.44 m apart. Each tie is a rectangle
+on the ground, 2 m across the track and 0.25 m along it, square to the track where it stands
+and spaced every 0.67 m along the whole line (the spacing carries on through bends), so it
+foreshortens with the view like everything else; the strips paint the ties with the ground.
+The rails are the center line offset 0.72 m each way on the ground, mitered at bends so they
+have no gap or jog. Farther out, ties are a dashed line along the track.
+A series can draw track wider than life (<code>railScale</code>, or <code>--rail-scale</code> for one build) and in
+the ties&#39; darker tone, so a network reads across a city: the wide railroad map uses four
+times. Curated labels name places on the map; the single-place prints of a set leave them
+out.</p>
+<h2 id="cutaways">Cutaways</h2>
+<p>A cutaway opens one modeled building along a vertical plane (<code>src/cutaway.ts</code>,
+<code>src/cutaway-scene.ts</code>). The region names the plane, a point and a compass bearing, and the side
+of it that is lifted away; the camera stands on that side. Broad Street Station is cut down its
+axis, the plane through the middle of the portico, the waiting room and the concourse, running
+at a bearing of 40.8°, with the east half lifted away and the camera looking from that side at
+a bearing of 342° (<code>regions/broad-street-station-cutaway.json</code>). Only modeled parts whose ids
+begin with the region&#39;s prefix (<code>bss-</code>) are cut, and one canopy on the removed side that is not
+cut is lifted away whole.</p>
+<p>Every part of the building is first made into convex solids: a prism for a wall, a floor or a
+bench; for a dome, a solid of revolution in slices, one per side of its outline, with an outer
+and an inner surface; a stair as one block per tread. Each solid is clipped to the half of space
+behind the plane, and where the clip opens it a new face closes it on the plane: that face is
+the section, drawn solid in ink (poché). On the removed side the building is not simply gone:
+everything up to 1.5 m above its first floor stays, clipped there, so the ground floor reads as
+a plan, its walls cut low with inked tops, its benches and counters whole. A dashed line marks
+the footprint of what was lifted away, 1.5 m outside the floors, but only where nothing still
+stands: within 2.5 m of a low wall it would only repeat the wall, and is left out.</p>
+<p>The pieces become ordinary items for the paint order (above). A part&#39;s pieces behind the plane
+are one item and its pieces in front another, and each is split again at the first floor, so
+it takes its place on both sides of the floor&#39;s slab. Within an item, faces turned away from
+the camera are dropped, the rest are painted far to near, and the sections last. A cutaway
+stacks many parts over others (slabs over piers, the concourse over trains), so its paint order
+adds one rule: two items apart on the ground, the farther wholly above the nearer, cannot cover
+each other and are left unordered; footprints that overlap by up to 3 cm, the rounding of
+their corners, count as apart. Cars and canopy runs are cut into pieces at most 7 m long, drawn
+without seams, so each piece takes its own place among the stairs and the deck it passes.</p>
+<p>In a cutaway, coaches are solid Pullman-green bodies under a darker arched roof, with a
+continuous band of windows down each side and, in the 1 m gap ahead of each car that has one
+coupled ahead of it, the dark diaphragm of its vestibule. A steam engine faces the way its
+train came in (the engine leads, toward the start of its line): a round boiler with a darker
+smokebox at the front, a stack and two domes on top, a frame and running board under it, and a
+boxy cab 4 m long at the back, beside the tender, whose tank is lower than the cab and carries
+its coal heaped at the front. They are drawn in a grey light enough for their edges to show.
+Sheds have butterfly roofs falling to a valley over their posts; a post stands only under a
+roof that is drawn. The ground is flat-toned (the region&#39;s <code>terrain.shade</code> is 0, which turns
+the hillshade off), and the dashed outline of what was lifted away lies level at the first
+floor.</p>
+<p>The <strong>flat section</strong> is made from the same parts and the same plane: the camera looks level and
+square at the plane from the removed side, nothing in front of it is kept, and behind it the
+building is drawn 35 m deep. Trains and sheds are not cut on the skew: where a track with a
+train standing across the plane, or within 16 m behind it, meets the plane, one car is drawn
+end on, square and true size on its trucks (a coach&#39;s arched end with its door, an engine&#39;s
+round smokebox, or a tender&#39;s tank and coal); and where a shed&#39;s line meets it, its butterfly
+profile, a center post and two wings rising outward. A stair down from the floor on the removed
+side (to the platforms) is drawn as its stepped profile, dashed. Under it the ground is cut along the plane and dug out where the
+building goes below it; platforms are drawn 0.35 m over the rails (approximate), rails at true
+gauge where tracks cross the plane, and a red dashed line follows the traveler from the street
+to the train. The line runs at waist height, 0.95 m over each floor, with a small arrowhead
+pointing the way on each stretch, and it is broken where it meets a traveler and where it
+would cross a car end seen square on, so it passes behind the car rather than over its face.</p>
+<p><strong>Travelers.</strong> A plain standing figure, 1.75 m (5 ft 9 in) tall, in the route&#39;s red, gives
+the drawings their scale: head, body, legs in a short stride and a small suitcase
+(<code>src/traveler.ts</code>). Its height is a convention, not a claim from a source. In the flat section
+four stand on the route, feet on their floors: on Broad Street, in the White Waiting Room, on
+the concourse and at the foot of the stair beside the car end. In the cutaway three stand
+upright, facing across the picture, on the portico, among the benches of the waiting room and
+on a platform by the train; each is an item in the paint order like any other, with a 0.5 m
+footprint, so what stands in front of it covers it. For Broad Street the section runs from 45 m on the street side of the plane&#39;s
+point to 104 m on the track side, at 10 pixels to the meter, and its earth is cut 5 m below the
+lowest ground along it. Code: <code>src/section.ts</code>.</p>
+<p><strong>What is approximate.</strong> Every part says how it is known: <em>drawn</em> (traced from a plate or a
+survey map), <em>written</em> (placed from a written account) or <em>approximate</em> (inferred), and a
+part that says nothing is approximate. For Broad Street Station the rooms of the first floor,
+the hall&#39;s octagon, its benches and counters, the portico and the concourse&#39;s width are traced
+from the first-floor plan of 1919 (Plate 15), fitted by the 240-ft frontage; the levels, the
+dome and the basement are scaled from the sections (Plates 17 and 18), whose figures are
+illegible; the first floor&#39;s elevation, wall thicknesses, door heights, the basement&#39;s piers
+and use, the stairs to the platforms and the concourse&#39;s height are approximate. The sheet&#39;s
+numbered badges show which: solid for drawn, a ring for written, a dashed ring for approximate.
+Code: <code>tools/stations/broad_street_plan.py</code>, <code>tools/cutaway/sheet.py</code>.</p>
+<p><strong>Sources.</strong> For Broad Street Station: <em>The American Architect</em> of July 9, 1919 (its text, the
+first-floor plan on Plate 15 and the sections on Plates 17 and 18); the 1925 Sanborn
+fire-insurance atlas; the USGS Richmond quadrangles of 1934 and 1956, for the loop of tracks;
+the Official Guide timetables of 1933 and 1941 and the Richmond Railroad Museum, for the trains
+and where they went; the City Planning Commission&#39;s transit map of January 1943, for the
+streetcars and buses on West Broad; the ICC&#39;s 1955 ruling in <em>NAACP v. St. Louis-San Francisco
+Ry.</em>, for the end of the segregated waiting rooms; and OpenStreetMap for the ground. Each is
+named on the sheet, and the wayfinding notes carry their own.</p>
+<p><strong>The sheet</strong> (<code>cutaways/&lt;name&gt;.json</code>, <code>tools/cutaway/sheet.py</code>) is 32 × 24 in at 300 dpi
+(9,600 × 7,200 pixels): the cutaway large, the flat section beneath it, and a column of numbered
+callouts, each anchored to a drawn part in either drawing, with the key, the sources and the
+notes. A badge that would hide the part it names is set off it into clear space, with a thin
+leader to a small dot on the part, drawn like the wayfinding labels&#39; leaders. Callout text is 54 pixels (13 pt; 9.7 pt on the 24 × 18 in print), and the smallest text
+on the sheet, the two-digit numbers in the badges on the drawings, is 40 pixels (9.6 pt; 7.2 pt
+at 24 × 18). There are no canvas files: a canvas&#39;s 1.5 in of mirrored wrap would carry the
+title and the column round its sides. Its title block sits in the bottom-right corner, below
+the column.</p>
+<h2 id="sets-a-map-framed-by-its-places">Sets: a map framed by its places</h2>
+<p><code>tools/sets/set.py</code> frames a big map with up to fourteen
+numbered boxes (the 1925 streetcars use one per stop), each 1,800 m of ground across, cut from
+the scene of its own year and rasterized from the vector at the pixels it fills, with a note
+written from the sources stored beside it. The same tool makes the map alone, a print per box
+(2,100 m across), canvas files with 1.5 in of mirrored wrap, and the box&#39;s page in the explorer.
+<code>isoscape locate</code> tells it where each box falls in the picture. A set is one file,
+<code>sets/&lt;name&gt;.json</code>; &quot;Making a set&quot; in the README walks through one.</p>
+<p><strong>What the series cannot show:</strong></p>
+<ul><li><strong>Survivorship.</strong> Only buildings standing today are measured. Downtown Richmond in 1900 had
+far more buildings than the 1900 scene, because most of them were torn down later. The
+scenes show what survives, plus the few curated losses.</li><li><strong>Heaped years.</strong> Assessors often round: in this data, many buildings are dated to exactly
+1900 or 1910. Read the decades loosely.</li><li><strong>Today&#39;s ground.</strong> The elevation is today&#39;s lidar, so the I-95 cut through Shockoe Valley
+is there in 1737. Curated water is laid flat at the lowest ground beneath it.</li><li><strong>The jump to today.</strong> Undated buildings appear only in today&#39;s scene, so the last step of a
+series adds many more buildings than really went up in that interval.</li></ul>
+<p>Code: <code>src/history.ts</code>; the history file is <code>history/&lt;series&gt;.json</code>; the tracing tools are in
+<code>tools/sanborn/</code> (Python: NumPy, SciPy, OpenCV, Shapely), and their output is
+<code>history/sanborn/</code>.</p>
+<h2 id="plates-and-the-title-block">Plates and the title block</h2>
+<p>Every print and canvas carries a small title block in its bottom-right corner, like the corner
+of a drafting sheet: the isoscape cube, the maker, the piece&#39;s place in the catalog (collection,
+set and piece), its plate number, version, the year it was drawn, the point the view was drawn
+around and the direction it faces. On a 36 × 24 in sheet it is 1,690 × 239 pixels at 300 dpi,
+about 5.6 × 0.8 in; smaller sheets scale it by the square root of their long side over 36 in
+(so 4.6 in across on a 24 × 18), which keeps it legible. Its right edge lines up with the art,
+and it sits as low as the art&#39;s side margin allows, with clear paper around it a third of its
+height wide. Where the foot of a sheet is full (the two set sheets) it sits in the header
+instead, and only if no place fits at full size is it shrunk, in steps of a tenth. On a canvas it
+goes on the face, never the wrap. A piece that is not a map can say what it is in one more
+line under the maker, at 28 units, about 7 pt on a 24 × 18 in sheet: the Broad Street cutaway&#39;s
+says &quot;Building cutaway&quot;. The plates themselves are listed in <code>catalog/plates.json</code>.</p>
+<h2 id="archive-and-explorer">Archive and explorer</h2>
+<p>Every build is kept under <code>out/builds/&lt;timestamp&gt;-&lt;name&gt;/</code> as the SVG, a thumbnail and a
+<code>meta.json</code>. The meta file records:</p>
+<ul><li>the region&#39;s settings;</li><li>the camera bearing used;</li><li>every count the build measured (features, ground areas, buildings by height source, bridge
+spans, rapid cells, contour segments, strips);</li><li>the build&#39;s time and file size;</li><li>the git commit, its subject, and whether <code>src/</code> or <code>regions/</code> had uncommitted changes;</li><li>an optional <code>--note</code> saying what the build was trying;</li><li>for a dated scene, its year, the year before it in the series, and the curated features
+drawn in it, with their sources.</li></ul>
+<p><code>backfill</code> builds an older commit&#39;s code against today&#39;s cached data, so the archive can
+include outputs from before it existed.</p>
+<p>After every build, <code>out/index.html</code> is rewritten: this explorer. It is a single file with the
+build list and these pages embedded in it, so it opens from disk with no server. The pages are
+Markdown files in <code>pages/</code>. To add one, see the README.</p>
+<p>Beside it go plain pages that need no script, for search engines and link previews: each of
+these pages as <code>p/&lt;slug&gt;.html</code>, each map as <code>m/&lt;region&gt;.html</code> (and each year of a dated series
+as <code>m/&lt;region&gt;-&lt;year&gt;.html</code>) with its picture and this same &quot;How this view was made&quot; text, and a
+<code>sitemap.xml</code> listing them all.</p>
+<p>Code: <code>src/archive.ts</code>, <code>src/explorer.ts</code>, <code>src/pages.ts</code>, <code>src/story.ts</code>, <code>src/static-pages.ts</code>.</p>
+<h2 id="credits">Credits</h2>
+<p>Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, available
+under the Open Database License. Elevation from the <a href="https://www.usgs.gov/3d-elevation-program" target="_blank" rel="noopener">USGS 3D Elevation
+Program</a>, public domain, and outside the US from
+the sources credited on <a href="world-landmarks.html">Landmarks around the world</a>. Years built for the
+Richmond series from the City of Richmond&#39;s open data. Fire-insurance maps from the Library
+of Congress Sanborn Maps Collection. See <a href="about.html">About</a> for what that means when you use
+or share a picture.</p>
+<p>Inspired by <a href="https://isometricsf.com" target="_blank" rel="noopener">Isometric SF</a>, Justin Chavez&#39;s isometric pixel-art map
+of San Francisco (<a href="https://www.justinchavez.com/blog/isometric-sf-how/" target="_blank" rel="noopener">how it was made</a>).</p></article>
+<p class="acts"><a class="btn ghost" href="../index.html#/how-its-made">Open this in the explorer</a></p>
+</main>
+<footer class="foot">
+<p>Maps by Chris Busse, drawn with isoscape, a free, open-source tool he built with Claude (see the <a href="../p/artist-statement.html">artist statement</a>), from OpenStreetMap and public elevation data. Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors (ODbL).</p>
+<p><a href="../index.html">Open the explorer</a> · <a href="../p/artist-statement.html">Artist statement</a> · <a href="../p/how-its-made.html">How it&#39;s made</a> · <a href="../p/world-landmarks.html">Landmarks around the world</a> · <a href="../p/streetcars.html">Richmond&#39;s streetcars, 1925</a> · <a href="../p/broad-street.html">Broad Street Station, 1943</a> · <a href="../p/broad-street-cutaway.html">Broad Street Station, 1943: the cutaway</a> · <a href="../p/about.html">About, credits and licenses</a> · <a href="../p/changes.html">Changes</a> · <a href="https://github.com/busse/isoscape">isoscape on GitHub</a></p>
+</footer>
+</body>
+</html>
