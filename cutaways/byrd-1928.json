@@ -208,7 +208,7 @@
     {
      "n": 11,
      "title": "The spring and the air tunnels",
-     "text": "Builders found a natural spring here in 1928 and built over it (Richmond Magazine, 2006); a Byrd engineer writes that its water can be pumped for the air conditioning. The cooled air was drawn through three concrete tunnels under the floor. Where the spring lies, and how its water was used, is not known.",
+     "text": "Builders found a natural spring here in 1928 and built over it (Richmond Magazine, 2006); a Byrd engineer writes that its water can be pumped for the air conditioning. The cooled air was drawn through three concrete tunnels under the floor. Where the spring lies, and how the air conditioning used its water, is not known.",
      "section": [
       {
        "part": "history:byrd-c-tunnel-3-roof",
@@ -268,8 +268,8 @@
      "section": {
       "part": "history:byrd-k-chest-3",
       "badge": [
-       330,
-       -260
+       150,
+       -230
       ]
      },
      "confidence": "approximate"

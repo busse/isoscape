@@ -46,7 +46,7 @@
       "^w327377549$",
       "^history:byrd-c-roof-house$",
       "^history:byrd-c-ceiling-(1|3)$",
-      "^history:byrd-c-ceiling-corner-(1[1-7])$"
+      "^history:byrd-c-ceiling-corner-(1[1-9])$"
     ],
     "outline": {
       "parts": [

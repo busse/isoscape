@@ -187,14 +187,14 @@ box(K('blade-sign'), 'Byrd Theatre: vertical sign', -11.3, -10.8, -2.3, -0.2, 6.
 
 # ---- outer walls -------------------------------------------------------------------------------
 SIDE = 'An outer side wall of plain brick. Its thickness and height are approximate.'
-# The east wall stands on the side the cut lifts away, where only its plan is drawn: it is drawn
-# from the sidewalk's level, since nothing below the ground is shown outside the cut.
+# The east wall stands on the side the cut lifts away, where only its plan is drawn: below the
+# sidewalk it is hidden by the ground beside it (`ground-east`, below).
 for side, a0, a1 in (('west', -W2, -WI), ('east', WI, W2)):
     west = side == 'west'
     box(C(f'wall-{side}'), 'Byrd Theatre: side wall', a0, a1, T, B_HOUSE, 0, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
-    box(C(f'wall-{side}-house'), 'Byrd Theatre: side wall', a0, a1, B_HOUSE, B_PIT, Z_FILL if west else 0, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
-    box(C(f'wall-{side}-front'), 'Byrd Theatre: side wall', a0, a1, B_PIT, B_PROS, -1.6 if west else 0, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
-    box(C(f'wall-{side}-stage'), 'Byrd Theatre: side wall', a0, a1, B_PROS, LOT_D, Z_BSMT if west else 0, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
+    box(C(f'wall-{side}-house'), 'Byrd Theatre: side wall', a0, a1, B_HOUSE, B_PIT, Z_FILL, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
+    box(C(f'wall-{side}-front'), 'Byrd Theatre: side wall', a0, a1, B_PIT, B_PROS, -1.6, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
+    box(C(f'wall-{side}-stage'), 'Byrd Theatre: side wall', a0, a1, B_PROS, LOT_D, Z_BSMT if west else -1.6, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
     if west:
         box(C(f'wall-{side}-pit'), 'Byrd Theatre: basement wall', a0, a1, B_PIT, B_PROS, Z_BSMT, 0, 'brick', 'approximate', SIDE, [NOM])
 # ---- the spring under the building ---------------------------------------------------------
@@ -206,11 +206,12 @@ SPRING = ('A natural spring, found when the theatre was built in 1928 and built 
           '"225 Secrets of the City", 2006); a Byrd engineer writes on Cinema Treasures that water can be pumped from it for the '
           'air conditioning, and Wikipedia speaks of a spring and pool in the basement that used to supply it. No source places it '
           'in the basement or says how its water was used: drawn as a pool sunk in the basement floor under the stage, approximately.')
-for k, (a0, a1, b0, b1) in enumerate(((SP_A0, SP_A1, SP_B0, SP_B0 + 0.3), (SP_A0, SP_A1, SP_B1 - 0.3, SP_B1), (SP_A0, SP_A0 + 0.3, SP_B0 + 0.3, SP_B1 - 0.3), (SP_A1 - 0.3, SP_A1, SP_B0 + 0.3, SP_B1 - 0.3))):
+# The curbs round the pool: the far (west) one is left out, so the water shows whole in the flat section.
+for k, (a0, a1, b0, b1) in enumerate(((SP_A0, SP_A1, SP_B0, SP_B0 + 0.3), (SP_A0, SP_A1, SP_B1 - 0.3, SP_B1), (SP_A1 - 0.3, SP_A1, SP_B0 + 0.3, SP_B1 - 0.3))):
     box(C(f'spring-curb-{k + 1}'), 'Byrd Theatre: the spring', a0, a1, b0, b1, Z_BSMT - 0.9, Z_BSMT + 0.6, 'stone', 'approximate', SPRING, [SPRING_SRC['rm2006'], SPRING_SRC['ct']])
-box(C('spring-bed'), 'Byrd Theatre: the spring', SP_A0 + 0.3, SP_A1 - 0.3, SP_B0 + 0.3, SP_B1 - 0.3, Z_BSMT - 0.9, Z_BSMT - 0.7, 'stone', 'approximate', SPRING, [SPRING_SRC['rm2006']])
+box(C('spring-bed'), 'Byrd Theatre: the spring', SP_A0, SP_A1 - 0.3, SP_B0 + 0.3, SP_B1 - 0.3, Z_BSMT - 0.9, Z_BSMT - 0.7, 'stone', 'approximate', SPRING, [SPRING_SRC['rm2006']])
 # The water, in two pieces either side of the cut, never cut: in the flat section it shows as water.
-for k, (a0, a1) in enumerate(((SP_A0 + 0.3, CUT_A), (CUT_A, SP_A1 - 0.3))):
+for k, (a0, a1) in enumerate(((SP_A0, CUT_A - 0.05), (CUT_A + 0.05, SP_A1 - 0.3))):
     box(K(f'spring-water-{k + 1}'), 'Byrd Theatre: the spring', a0, a1, SP_B0 + 0.3, SP_B1 - 0.3, Z_BSMT - 0.7, Z_BSMT + 0.2, 'water', 'approximate', SPRING, [SPRING_SRC['rm2006'], SPRING_SRC['ct']])
 box(K('spring-pump'), 'Byrd Theatre: the spring\'s pump', -1.4, -0.4, 35.9, 36.6, Z_BSMT + 0.3, Z_BSMT + 1.5, 'iron', 'approximate',
     'A pump by the spring: a Byrd engineer writes that water can be pumped from it for the air conditioning (Cinema Treasures). Its place, size and date are not known.', [SPRING_SRC['ct']])
@@ -227,7 +228,7 @@ LINING = 'The plastered inside face of the outer wall. Approximate.'
 box(C('lining-lobby'), LOBBY, -WI, -WI + 0.05, T, B_HOUSE - 0.6, Z_LOBBY, Z_LCEIL, 'plaster', 'approximate', LINING, [NOM])
 box(C('lining-house'), HOUSE, -WI, -WI + 0.05, B_HOUSE, B_PROS, Z_FRONT_ROW - 0.3, Z_CEIL, 'plaster', 'approximate', LINING, [NOM])
 box(C('wall-back'), 'Byrd Theatre: back wall', -WI, 8.0, LOT_D - T, LOT_D, Z_BSMT, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
-box(C('wall-back-east'), 'Byrd Theatre: back wall', 8.0, WI, LOT_D - T, LOT_D, 0, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
+box(C('wall-back-east'), 'Byrd Theatre: back wall', 8.0, WI, LOT_D - T, LOT_D, -1.6, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
 # The roof over the auditorium, and the ceiling between the dome and the near side wall, are
 # lifted away in the cutaway (the region's `lift`), so the side wall's niches show; the flat
 # section draws them.
@@ -287,7 +288,7 @@ PIT = 'The orchestra pit, open in 1928 (the stage was later extended over it: no
 box(C('pit-floor'), STAGE, -8.0, 8.0, B_PIT, B_STAGE, Z_PIT - 0.3, Z_PIT, 'floor', 'approximate', PIT, [NOM, T86])
 box(C('pit-rail'), STAGE, -8.0, 8.0, B_PIT, B_PIT + 0.25, Z_PIT, Z_FRONT_ROW + 0.95, 'plaster', 'written', 'The rail round the orchestra pit, a balustrade as the 1928 photograph of the console shows; its height is approximate.', [T86])
 for side, a0, a1 in (('west', -WI, -8.0), ('east', 8.0, WI)):
-    box(C(f'pit-side-floor-{side}'), STAGE, a0, a1, B_PIT, B_STAGE, Z_FRONT_ROW - 0.3, Z_FRONT_ROW, 'floor', 'approximate', 'The floor beside the pit, at the front row\'s level. Approximate.', [NOM])
+    box(C(f'pit-side-floor-{side}'), STAGE, a0, a1, B_PIT, B_PROS, Z_FRONT_ROW - 0.3, Z_FRONT_ROW, 'floor', 'approximate', 'The floor beside the pit, at the front row\'s level. Approximate.', [NOM])
     box(C(f'pit-side-wall-{side}'), STAGE, (a1 - 0.2) if side == 'west' else a0, a1 if side == 'west' else a0 + 0.2, B_PIT, B_STAGE, Z_PIT, Z_FRONT_ROW + 0.95, 'plaster', 'approximate', PIT, [NOM])
 box(C('stage-apron-wall'), STAGE, -8.0, 8.0, B_STAGE, B_PROS, Z_BSMT, Z_STAGE, 'plaster', 'approximate', 'The stage\'s front, down to the pit floor. Approximate.', [NOM])
 
@@ -301,7 +302,7 @@ for k, (a0, a1, b0, b1) in enumerate(((-WI, SP_A0, B_PROS, LOT_D - T), (SP_A1, 8
 PROS = 'The proscenium wall. The opening\'s size is approximate; the 1928 photograph shows a deep arch with the original inner proscenium, covered in the 1950s (Rudisill 1986).'
 OP, Z_OP = 7.2, 9.4
 for k, (a0, a1) in enumerate(((-WI, -OP), (OP, WI))):
-    box(C(f'pros-pier-{k + 1}'), STAGE, a0, a1, B_PROS, B_PROS + 0.8, Z_STAGE, Z_ROOF, 'plaster', 'approximate', PROS, [NOM, T86])
+    box(C(f'pros-pier-{k + 1}'), STAGE, a0, a1, B_PROS, B_PROS + 0.8, Z_FRONT_ROW - 0.3, Z_ROOF, 'plaster', 'approximate', PROS, [NOM, T86])
 box(C('pros-header'), STAGE, -OP, OP, B_PROS, B_PROS + 0.8, Z_OP, Z_CHAMBER, 'plaster', 'approximate', PROS, [NOM, T86])
 box(C('pros-over-grille'), STAGE, -OP, OP, B_PROS, B_PROS + 0.8, Z_CHAMBER + 3.3, Z_ROOF, 'plaster', 'approximate', PROS, [NOM, T86])
 INNER = 'The gilded frame of the original inner proscenium, shown in the 1928 photograph and covered in the 1950s by a CinemaScope screen (Rudisill 1986). Its size is approximate.'
