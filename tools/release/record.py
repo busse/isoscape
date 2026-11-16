@@ -12,8 +12,11 @@ A record pins:
     the copy never changes),
   * every scene SVG the print was cut from, by SHA-256 (builds are deterministic: same code and
     same data give the same bytes),
-  * every output by SHA-256: the print file and its canvas files, with their Printful file IDs,
-  * where it is sold and shown: Shopify product handles and IDs, mockup images, explorer view.
+  * every output by SHA-256: the print file (every size's, when the catalog has a "prints" map)
+    and its canvas files, with their Printful file IDs,
+  * where it is sold and shown: Shopify product handles and IDs (the merged product, one per
+    design, from state/merged.json, and any per-format products from state/shopify.json),
+    mockup images, explorer view.
 
 Run where the data and the store live (the Mac):
     python3 tools/release/record.py <store-dir> [design...] [--version N] [--note "..."]
@@ -196,6 +199,7 @@ def from_stamp(store, key, d):
     log = json.load(open(log_p)) if os.path.exists(log_p) else {}
     mine = {f: v for f, v in log.items() if v['design'] == key and v['version'] == d.get('version', 1)}
     if not mine: return None
+    if any(v.get('redraw') for v in mine.values()): return from_redraw(store, key, d, mine)
     base_v = d['version'] - 1
     base_p = os.path.join(REL, key, f'v{base_v}.json')
     base = json.load(open(base_p))
@@ -212,19 +216,65 @@ def from_stamp(store, key, d):
     return 'stamp', recipe, scenes, inputs, base.get('data', {})
 
 
-# ---- one record ---------------------------------------------------------------------------------
+def from_redraw(store, key, d, mine):
+    """A redraw (stamp.py --base): new art composed from new builds (compose.py, canvas.py), then
+    stamped as the next version. Its scenes and data are the new builds', not the previous
+    version's; check.py rebuilds the scenes and stamps the base files again."""
+    first = sorted(mine.values(), key=lambda v: v['base'])
+    base_print = next((v for v in first if '_canvas-' not in v['base']), first[0])
+    got = from_spec(key, d, os.path.getmtime(os.path.join(store, base_print['base'])))
+    if got is None: raise SystemExit(f'{key}: a redraw is recorded only for a design in tools/print/spec.json')
+    _, compose, scenes, inputs = got
+    tools = base_print['tools']
+    now = {f: sha(os.path.join(ISO, f)) for f in tools}
+    base_dir = os.path.dirname(base_print['base'])
+    canvas = sorted(v for v in mine.values() if '_canvas-' in v['base'])
+    sizes = ' '.join(re.search(r'_canvas-(\d+x\d+)\.jpg$', v['base']).group(1) for v in canvas)
+    run = [f'python3 tools/print/compose.py tools/print/spec.json out/builds <store>/{base_dir} --only {key}']
+    if canvas: run.append(f'python3 tools/print/canvas.py <store>/{base_print["base"]} <store>/{base_dir}/canvas {sizes}')
+    run.append(f'python3 tools/release/stamp.py <store> {key} --version {d["version"]} --base {base_dir}')
+    recipe = {'tool': 'tools/release/stamp.py', 'run': run, 'redraw': True, 'base_kind': 'compose',
+              'previous_record': rel(os.path.join(REL, key, f"v{d['version'] - 1}.json")), 'pinned': compose['pinned'],
+              'block': base_print['info'],
+              'files': {f: {'base': v['base'], 'base_sha256': v['base_sha256'], 'at': v['at']} for f, v in sorted(mine.items())},
+              'tools_at_stamping': tools, 'tools_match_commit': tools == now}
+    inputs = dict(inputs); inputs.update(tools)
+    if canvas: inputs['tools/print/canvas.py'] = sha(os.path.join(ISO, 'tools', 'print', 'canvas.py'))
+    return 'redraw', recipe, scenes, inputs
 
-def record(store, key, d, files, shop, mocks, note=None):
+
+def outputs_of(store, d, key):
+    """(print file, other print files, canvas files): the catalog's "print", every other file of
+    its "prints" map (one per size, when the text is sized for each), and its canvas files."""
     pdir = os.path.join(store, d.get('print_dir') or ('print-files/landmarks' if key.startswith('lm-') else 'print-files'))
     pfile = os.path.join(pdir, d['print'])
+    others = sorted({os.path.join(pdir, f) for f in (d.get('prints') or {}).values()} - {pfile})
     cpat = (d.get('canvas') or '').replace('{w}', '*').replace('{h}', '*')
     canvas = (sorted(glob.glob(os.path.join(pdir, 'canvas', cpat))) + sorted(glob.glob(os.path.join(pdir, cpat)))) if cpat else []
+    return pfile, others, canvas
+
+
+def products_of(key, shop, merged):
+    """The design's Shopify products: its merged product (one per design, every format and size)
+    first, then any per-format products."""
+    out = []
+    m = (merged or {}).get(key)
+    if m: out.append({'handle': m['handle'], 'id': m['id'], 'format': 'all (merged)', 'status': m.get('status'), 'variants': len(m.get('variants') or {})})
+    out += [{'handle': h, 'id': v['id'], 'format': v['format'], 'status': v.get('status')} for h, v in shop.items() if v['design'] == key]
+    return out
+
+
+# ---- one record ---------------------------------------------------------------------------------
+
+def record(store, key, d, files, shop, mocks, note=None, merged=None):
+    pfile, others, canvas = outputs_of(store, d, key)
     made = os.path.getmtime(pfile) if os.path.exists(pfile) else 0
     st = from_stamp(store, key, d)
+    redraw = bool(st) and st[0] == 'redraw'   # new art: its scenes and data are its own
     got = None if st else (from_cutaway(key, d) or from_set(key, d) or from_landmark(key, d) or from_spec(key, d, made))
     kind, recipe, scenes, inputs = st[:4] if st else got if got else ('unknown', {}, [], {})
-    data = dict(st[4]) if st else {}
-    for s in ([] if st else scenes):
+    data = dict(st[4]) if st and not redraw else {}
+    for s in ([] if st and not redraw else scenes):
         r = s.get('region')
         if not r or not os.path.exists(os.path.join(ISO, 'regions', f'{r}.json')): continue
         inputs.update(history_inputs(r))
@@ -234,7 +284,7 @@ def record(store, key, d, files, shop, mocks, note=None):
         data[os.path.basename(dd)] = {'snapshot': snap, 'files': fl}
     out = lambda p: {'file': rel(p) if p.startswith(ISO) else os.path.relpath(p, store), 'sha256': sha(p), 'bytes': os.path.getsize(p),
                      'printful_file_id': files.get(os.path.basename(p))} if os.path.exists(p) else {'file': os.path.basename(p), 'missing': True}
-    prods = [{'handle': h, 'id': v['id'], 'format': v['format'], 'status': v.get('status')} for h, v in shop.items() if v['design'] == key]
+    prods = products_of(key, shop, merged)
     mk = {f: [m['url'] for m in (mocks.get(f'{key}|{f}') or {}).get('mockups', [])] for f in d.get('formats', [])}
     return {
         'design': key, 'title': d['title'], 'version': d.get('version', 1),
@@ -242,7 +292,7 @@ def record(store, key, d, files, shop, mocks, note=None):
         'provenance': 'recorded at release' if note == 'release' else 'reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce',
         'isoscape': commit(), 'kind': kind, 'recipe': recipe, 'scenes': scenes,
         'inputs': inputs, 'data': data,
-        'outputs': {'print': out(pfile), 'canvas': [out(c) for c in canvas]},
+        'outputs': dict({'print': out(pfile)}, **({'prints': [out(p) for p in others]} if others else {}), canvas=[out(c) for c in canvas]),
         'store': {'catalog': {k: v for k, v in d.items() if k not in ('blurb', 'blurb_html')}, 'products': prods, 'mockups': mk},
         'explorer': {'view': d.get('explore')},
     }
@@ -259,6 +309,8 @@ def main():
     files = json.load(open(os.path.join(P, 'files.json')))
     shop = json.load(open(os.path.join(P, 'state', 'shopify.json')))
     mocks = json.load(open(os.path.join(P, 'state', 'mockups.json')))
+    mp = os.path.join(P, 'state', 'merged.json')
+    merged = json.load(open(mp)) if os.path.exists(mp) else {}
     keys = a.designs or list(cat)
     index_p = os.path.join(REL, 'index.json')
     index = json.load(open(index_p)) if os.path.exists(index_p) else {}
@@ -266,7 +318,7 @@ def main():
         d = cat[k]; v = d.get('version', 1)
         p = os.path.join(REL, k, f'v{v}.json')
         if os.path.exists(p) and not a.force: continue
-        r = record(a.store, k, d, files, shop, mocks, 'release' if a.release else None)
+        r = record(a.store, k, d, files, shop, mocks, 'release' if a.release else None, merged)
         os.makedirs(os.path.dirname(p), exist_ok=True)
         json.dump(r, open(p, 'w'), indent=1, ensure_ascii=False)
         index[k] = {'title': d['title'], 'current': v, 'kind': r['kind'], 'records': sorted(os.listdir(os.path.dirname(p)))}

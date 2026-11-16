@@ -653,6 +653,23 @@ lists them.
 - `python3 tools/release/remake.py <design> [--compose <store-dir>]`: put a design's frozen
   scenes back where its recipe reads them, and remake the print.
 
+A redraw (new art for a published design) is composed into a folder in the store, then
+stamped as the next version, and recorded as kind `redraw`:
+
+```sh
+python3 tools/print/compose.py tools/print/spec.json out/builds <store>/print-files/drawn/<design>-v3 --only <design>
+python3 tools/print/canvas.py <store>/print-files/drawn/<design>-v3/<design>_36x24.jpg <store>/print-files/drawn/<design>-v3/canvas 18x12 30x20 36x24
+python3 tools/release/stamp.py <store> <design> --base print-files/drawn/<design>-v3   # before the catalog's version is raised
+```
+
+`stamp.py --base` writes `<design>-v3_<size>.jpg` (and its canvas files) beside the current
+version's, from the unstamped files in that folder; the record pins the new builds as its
+scenes, freezes their data, and keeps the unstamped files as the stamp's base, so
+`check.py --rebuild` both rebuilds the scenes and stamps the files again. Canvas files are the
+print resized to each face with 1.5 in of mirrored wrap (`canvas.py`, as `set.py canvas`). A
+record lists every print file of a catalog `prints` map (one file per size) and the design's
+products: its merged product (`state/merged.json`) first, then any per-format ones.
+
 A cutaway sheet is recorded as kind `cutaway` (`tools/cutaway/sheet.py --print`): its scenes
 are the region's cutaway and flat section (`"output": "-section"`, which `check.py --rebuild`
 compares against the build's `-section.svg`) and the composed sheet SVG, frozen but not rebuilt;
