@@ -262,3 +262,48 @@ test('render: with terrain, a park drawn around a lake is painted under the lake
   }
   assert.ok(both > 3)
 })
+
+test('render: with no slab the plate is cut square, on straight lines, over rolling ground', async () => {
+  const { renderSvg } = await import('../src/render.ts')
+  const { buildScene } = await import('../src/scene.ts')
+  const { parseOsm } = await import('../src/osm.ts')
+  const json = JSON.stringify({ elements: [] })
+  // Ground that rolls across the frame, so a draped edge would wander up and down on screen.
+  const scene = buildScene({ ...region, snap: false, width: 300, depth: 200, slab: 0, terrain: { cell: 5 } }, parseOsm(json), pal, (lon) => 10 + 6 * Math.sin(lon * 20000))
+  const { svg } = renderSvg(scene)
+  const ground = svg.match(/<clipPath id="ground"><path d="([^"]*)"/)
+  assert.ok(ground, 'the ground has a clip of its own')
+  // The clip is a rectangle: a move, then runs (the last closes it), each straight across or
+  // straight down.
+  const nums = ground[1].replace(/^M[^l]*l/, '').replace(/z$/, '').match(/-?[\d.]+/g)!.map(Number)
+  assert.equal(nums.length, 6, ground[1])
+  for (let k = 0; k < 6; k += 2) assert.ok(nums[k] === 0 || nums[k + 1] === 0, ground[1])
+  const strips = [...svg.matchAll(/<g data-strip="[^"]*" clip-path="url\(#(\w+)\)"/g)]
+  assert.ok(strips.length > 3)
+  for (const m of strips) assert.equal(m[1], 'ground')
+  assert.ok(!svg.includes('class="edge"'), 'no wandering ink line along the front')
+})
+
+test('close-scale ties lie square to their track on the ground, evenly spaced across a bend', async () => {
+  const { tiesAlong, offsetJoined, TIE } = await import('../src/render.ts')
+  // A track that runs diagonally, then bends.
+  const segs: Vec2[][] = [[[0, 0], [30, 40]], [[30, 40], [30, 90]]]
+  const ties = tiesAlong(segs)
+  assert.ok(ties.length > 100)
+  const unit = (a: Vec2, b: Vec2): Vec2 => { const l = Math.hypot(b[0] - a[0], b[1] - a[1]); return [(b[0] - a[0]) / l, (b[1] - a[1]) / l] }
+  const u0 = unit([0, 0], [30, 40])
+  const first = ties[0]
+  // Its long side (corner 0 to 1) is square to the track, its short side (1 to 2) along it.
+  const long = unit(first[0], first[1])
+  assert.ok(Math.abs(long[0] * u0[0] + long[1] * u0[1]) < 1e-9)
+  assert.ok(Math.abs(Math.hypot(first[1][0] - first[0][0], first[1][1] - first[0][1]) - TIE.length) < 1e-9)
+  assert.ok(Math.abs(Math.hypot(first[2][0] - first[1][0], first[2][1] - first[1][1]) - TIE.width) < 1e-9)
+  // Centers keep the same spacing along the line, across the bend too (measured along the track).
+  const center = (q: Vec2[]): Vec2 => [(q[0][0] + q[2][0]) / 2, (q[0][1] + q[2][1]) / 2]
+  const along = (p: Vec2) => (p[1] <= 40 + 1e-9 && Math.abs(p[0] - 0.75 * p[1]) < 1e-6 ? Math.hypot(p[0], p[1]) : 50 + (p[1] - 40))
+  const ds = ties.map((q) => along(center(q)))
+  for (let i = 1; i < ds.length; i++) assert.ok(Math.abs(ds[i] - ds[i - 1] - TIE.every) < 1e-6, `tie ${i}: ${ds[i] - ds[i - 1]}`)
+  // A running rail offset from the bending line meets itself at the bend.
+  const rail = offsetJoined(segs, 0.72)
+  assert.ok(Math.hypot(rail[0][1][0] - rail[1][0][0], rail[0][1][1] - rail[1][0][1]) < 1e-9)
+})

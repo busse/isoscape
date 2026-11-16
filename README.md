@@ -433,6 +433,61 @@ and elevation and keeps only its year-built parcels in its own `data/` folder. A
 `yearbuilt.json` in the region's own folder first, then in the shared one, and stops with an
 error if neither has it: without it nearly every building would be undated.
 
+## Cutaways
+
+A region with a `cutaway` section opens a modeled building along a vertical plane: the half on
+one side is lifted away, its ground floor left as a plan, and every cut is drawn solid in ink.
+
+```jsonc
+"cutaway": {
+  "through": [-77.4658172, 37.5611118],  // a point on the plane
+  "bearing": 40.8,                        // the compass direction it runs
+  "remove": "right",                      // the side lifted away; stand the camera there
+  "floor": 67.4, "keep": 1.5,             // on that side keep what stands up to 1.5 m over this floor (m above sea level)
+  "parts": "bss-",                        // only modeled parts with this id prefix are cut
+  "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away whole though not cut
+  "outline": { "parts": ["bss-c-floor-"], "offset": 1.5 },  // dash the removed footprint
+  "travelers": [{ "at": [-77.466035, 37.56091], "floor": 67.4, "facing": 1 }],  // figures to scale (1.75 m); no floor: on the ground
+  "section": { "from": -62, "to": 104, "beyond": 35, "other": 3, "scale": 10, "earth": 5,
+               "route": [[-60, 64.7], [50.5, 68.3]],   // the flat section and the traveler's path (waist height)
+               "travelers": [{ "s": -40, "floor": 65.66, "facing": 1 }] }   // figures on the path
+}
+```
+
+The parts come from a history file (see "Time"): a part drawn only in whole views carries
+`"only": "whole"` (a building's massing), one drawn only in cutaways `"only": "cutaway"` (its
+walls, floors and rooms). A part may stand at an `elevation` and reach `upTo` another, revolve
+(`"shape": "revolve"` with `levels`, for a dome or a shell), rise as a `stair`, and says how it
+is known: `"confidence": "drawn"`, `"written"` or `"approximate"` (the default). Cut parts must
+have convex footprints; a part that does not is cut on its convex hull.
+
+`build` writes the cutaway, its flat section (`<name>-section.svg`) and, for each, where every
+part is drawn (`*.anchors.json`). `tools/cutaway/sheet.py cutaways/<name>.json` lays them out
+on a 32 x 24 in sheet with numbered callouts, the confidence key, sources and credits. How it
+works, and what is approximate, is in *How it's made*, under "Cutaways".
+
+```sh
+node bin/isoscape.js build broad-street-station-cutaway --year 1943 --png
+python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json   # out/cutaways/
+python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json --print   # out/cutaways/print/
+```
+
+A callout's anchor in either drawing may say `"badge": [dx, dy]` (sheet units, 9,600 across):
+the badge then stands that far off the part, with a leader to a dot on it, so it does not hide
+what it names. `travelerKey` adds a line with the traveler's glyph to the key, and a group with
+`"traveler": true` carries the glyph beside its heading.
+
+`--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):
+the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, each with its title
+block in the bottom-right corner below the callout column (`titleblock.stamp`, place
+`corner`), named `<design>_<w>x<h>.jpg` and logged with their SHA-256 in `print/prints.json`.
+A cutaway sheet has no canvas files: its title, credit line and column all lie within the
+1.5 in a canvas mirrors round its sides. `--page` (after `--print`) writes its explorer page,
+`pages/<page.slug>.md`, from the spec's `page` (`slug`, `title`, `order`, `summary`, `intro`,
+`how`, `drafted`, and `shop` once prints sell): the sheet, the plate and its kind, every callout
+as text with how sure it is, the key, where the trains and streetcars went with their sources,
+the sources and notes, and the note on how the page was drafted.
+
 ## Making a set
 
 A **set** is one big map framed by numbered boxes, each a close view of a place (or of the same
@@ -561,6 +616,11 @@ lists them.
 - `python3 tools/release/remake.py <design> [--compose <store-dir>]`: put a design's frozen
   scenes back where its recipe reads them, and remake the print.
 
+A cutaway sheet is recorded as kind `cutaway` (`tools/cutaway/sheet.py --print`): its scenes
+are the region's cutaway and flat section (`"output": "-section"`, which `check.py --rebuild`
+compares against the build's `-section.svg`) and the composed sheet SVG, frozen but not rebuilt;
+the block and every print file's SHA-256 come from `out/cutaways/print/prints.json`.
+
 Designs published before records existed (November 15, 2026) were recorded afterwards: their
 prints and scenes are frozen as sold, the landmarks' framing is recovered as an explicit window
 (`tools/print/lm_params.json`, by `tools/release/landmark_params.py`, checked by eye), and
@@ -580,8 +640,18 @@ collection › set › piece, the plate, the version, the year drawn, the point 
 around (decimal degrees) and the direction it faces. It sits in the bottom-right corner,
 right-aligned with the art, or in the header of a set sheet whose foot is full.
 
+A plate may also say what kind of piece it is, with an optional `"kind"` (`"Map"`,
+`"Landmark"`, `"Building cutaway"`; up to 24 characters). The block then prints it as one line
+under the maker, at 28 units (7.1 pt on a 24 in sheet), on the baseline of the lower row's values,
+and the maker's two lines move up to make room. A plate with no kind prints nothing there, and
+its block is the same, byte for byte, as before kinds existed. The Broad Street cutaway
+(`BSS-15`) is the first with one. A cutaway's location and facing come from its own region
+(the sheet spec in `cutaways/` names its `design`), not the set's map.
+
 - `python3 tools/release/plates.py check <store-dir>`: every plate unique and well formed, and
-  every design in the store has one. `plates.py next <SET>` gives a new design its number.
+  every design in the store has one, and every kind is a short line of text.
+  `plates.py next <SET>` gives a new design its number. Tests: `cd tools/release && python3 -m
+  unittest test_plates`.
 - `python3 tools/release/plates.py list [--csv]`: the catalog as a text reference list.
 - `python3 tools/release/stamp.py <store-dir> <design>...`: stamp the block onto a design's
   print and canvas files as its next version (logged in the store's `state/stamps.json`;

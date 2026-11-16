@@ -22,7 +22,9 @@ import { localMetres } from './region.ts'
 import { makeTerrain, rasterize, settleWater, stillWater, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
-import { canopyItems, dome, partLevels, toned, trainItems } from './parts.ts'
+import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
+import { cutawayItems, partSolids, partTones, travelerItem, type PlacedPart } from './cutaway-scene.ts'
+import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
 import { alive, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
@@ -47,6 +49,8 @@ export interface Shape {
   readonly seal?: boolean
   /** Dots painted with this shape, so whatever paints later can cover them. */
   readonly dots?: readonly Vec2[]
+  /** An open line's own stroke: color, width and dash, in pixels (a cutaway's dashed outline). */
+  readonly stroke?: { readonly color: string; readonly width: number; readonly dash: readonly [number, number] }
 }
 
 export interface Item {
@@ -96,6 +100,10 @@ export interface Scene {
   readonly boldRail?: boolean
   /** Words on the map: curated labels, at view meters and the ground height there. */
   readonly labels?: readonly MapLabel[]
+  /** A cutaway's plane, in view meters. */
+  readonly cut?: CutPlane
+  /** A flat section's cut faces, in plane coordinates: meters along the plane, scene z. */
+  readonly sections?: readonly Vec2[][]
 }
 
 export interface MapLabel {
@@ -128,7 +136,7 @@ export const buildScene = (
   features: readonly Feature[],
   pal: Palette,
   elevation: ((lon: number, lat: number) => number) | null = null,
-  extra: { footprints?: readonly Footprint[]; cover?: (lon: number, lat: number) => number; time?: TimeContext } = {},
+  extra: { footprints?: readonly Footprint[]; cover?: (lon: number, lat: number) => number; time?: TimeContext; section?: boolean } = {},
 ): Scene => {
   const time = extra.time
   const curated = time === undefined ? [] : time.history.features.filter((h) => alive(h.from, h.to, time.year))
@@ -303,6 +311,8 @@ export const buildScene = (
 
   // ---- buildings ---------------------------------------------------------------------------
   const items: Item[] = []
+  let cutPlaneOut: CutPlane | undefined
+  let sectionsOut: Vec2[][] | undefined
   const minArea = region.minBuildingArea ?? 12
   const dotsMode = region.dots ?? 'all'
 
@@ -464,6 +474,7 @@ export const buildScene = (
   // pale roof reads against the line, all times the history's `streetcarScale`; set on the
   // ground and turned with the street. Their spacing is for the picture, not a timetable.
   let cars = 0
+  const tramBoxes: Box[] = []
   for (const run of tramRuns) {
     let along = TRAM_SPACING / 2
     let walked = 0
@@ -489,6 +500,7 @@ export const buildScene = (
         if (signedArea(ring) < 0) ring = ring.reverse()
         const base = terrain.z(c)
         const carPal = { ...pal, wallLit: pal.tramCar[0], wallShade: pal.tramCar[1] }
+        tramBoxes.push({ id: `tram:${run.id}:${cars}`, ring, z0: base + 0.4, z1: base + 0.4 + 3.6 * tramScale, tone: 'tram' })
         items.push(extrude(view, carPal, `tram:${run.id}:${cars}`, ring, [], base + 0.4, base + 0.4 + 3.6 * tramScale, pal.tramCar[2], 'none'))
         cars++
       }
@@ -511,12 +523,18 @@ export const buildScene = (
     // Curated landmarks: lost buildings, from published dimensions, in their own tone.
     let landmarks = 0
     let parts = 0
-    // Modeled parts first find their levels together, so a part can rest on another.
-    const partGround = curated.filter((h) => h.kind === 'landmark' && h.ring !== undefined && h.tone !== undefined)
-      .map((h) => ({ id: h.id, seat: h.seat, on: h.on, base: h.base, height: h.height, grounds: orient(toViewRing(view, h.ring!), true).map((p) => terrain.z(p)) }))
+    // Modeled parts first find their levels together, so a part can rest on another. A part
+    // drawn only in whole views (a building's massing) or only in cutaways (its rooms) is left
+    // out of the other.
+    const cut = region.cutaway
+    const shown = (h: HistoryFeature) => (cut === undefined ? h.only !== 'cutaway' : h.only !== 'whole')
+    const zOf = (e: number) => (e - terrain.datum) * terrain.exaggeration
+    const partGround = curated.filter((h) => h.kind === 'landmark' && h.ring !== undefined && h.tone !== undefined && shown(h))
+      .map((h) => ({ id: h.id, seat: h.seat, on: h.on, base: h.base, height: h.height, grounds: orient(toViewRing(view, h.ring!), true).map((p) => terrain.z(p)), ...(h.elevation === undefined ? {} : { at: zOf(h.elevation) }) }))
     const levels = partLevels(partGround)
+    const placed: PlacedPart[] = []
     for (const h of curated) {
-      if (h.kind !== 'landmark' || h.ring === undefined) continue
+      if (h.kind !== 'landmark' || h.ring === undefined || !shown(h)) continue
       const outer = orient(toViewRing(view, h.ring), true)
       if (!outer.every((p) => insideRect(p, frame))) continue
       const ruined = h.ruin !== undefined && time.year >= h.ruin
@@ -524,11 +542,18 @@ export const buildScene = (
       if (h.tone !== undefined) {
         // A part of a modeled building: from its seat, in its own tone.
         const seat = levels.get(h.id) ?? Math.min(...grounds) + (h.base ?? 0)
-        const t = toned(pal, h.tone)
-        items.push(h.shape === 'dome'
-          ? dome(view, pal, `history:${h.id}`, outer, seat, seat + (h.height ?? 10), h.name)
-          : extrude(view, t.pal, `history:${h.id}`, outer, [], seat, seat + (h.height ?? 10), t.roof, 'none', h.name))
+        const top = h.upTo !== undefined ? zOf(h.upTo) : seat + (h.height ?? 10)
         parts++
+        // A stair or an arch keeps its corners in order: its first edge is its foot, or its span.
+        if (cut !== undefined) placed.push({ h, outer: h.shape === 'stair' || h.shape === 'arch' ? toViewRing(view, h.ring) : outer, seat, top })
+        else {
+          const t = toned(pal, h.tone)
+          const solid = h.shape === 'revolve' ? solidItem(view, partTones(pal, h), `history:${h.id}`, partSolids({ h, outer, seat, top }).solids, h.name) : null
+          if (solid !== null) items.push(solid)
+          else items.push(h.shape === 'dome'
+            ? dome(view, pal, `history:${h.id}`, outer, seat, top, h.name)
+            : extrude(view, t.pal, `history:${h.id}`, outer, [], seat, top, t.roof, 'none', h.name))
+        }
         continue
       }
       const base = Math.min(...grounds)
@@ -540,23 +565,52 @@ export const buildScene = (
     if (parts > 0) stats.parts = parts
     // Platform canopies and standing trains, set on the ground under them.
     const inFrame = (p: Vec2) => p[0] > frame.minX + 5 && p[0] < frame.maxX - 5 && p[1] > frame.minY + 5 && p[1] < frame.maxY - 5
-    const keep = (list: Item[]) => list.filter((it) => it.hull.every(inFrame))
+    const keepBoxes = (list: Box[]) => list.filter((b) => b.ring.every(inFrame))
     let canopies = 0
     let cars = 0
+    const boxes: Box[] = []
     for (const h of curated) {
-      if (h.kind === 'canopy' && h.line !== undefined) {
-        const got = keep(canopyItems(view, pal, `history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.width ?? 9, h.height ?? 5, (p) => terrain.z(p)))
-        items.push(...got)
+      if (h.kind === 'canopy' && h.line !== undefined && shown(h)) {
+        const kept = keepBoxes(canopyBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.width ?? 9, h.height ?? 5, (p) => terrain.z(p)))
+        // A post stands only under a roof that is drawn.
+        const roofs = new Set(kept.map((b) => b.id))
+        const got = kept.filter((b) => !b.id.includes(':post:') || roofs.has(b.id.replace(':post:', ':')))
+        boxes.push(...got)
         canopies += got.length / 2
       }
-      if (h.kind === 'rail' && h.train !== undefined && h.line !== undefined) {
-        const got = keep(trainItems(view, pal, `history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.train, (p) => terrain.z(p)))
-        items.push(...got)
+      const train = cut !== undefined && h.cutTrain !== undefined ? h.cutTrain : h.train
+      if (h.kind === 'rail' && train !== undefined && h.line !== undefined) {
+        const got = keepBoxes(trainBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), train, (p) => terrain.z(p)))
+        boxes.push(...got)
         cars += got.length
       }
     }
     if (canopies > 0) stats.canopyPieces = canopies
     if (cars > 0) stats.trainPieces = cars
+    if (cut === undefined) items.push(...boxes.map((b) => boxItem(view, pal, b)))
+    else {
+      const outlineRings = cut.outline === undefined ? [] : curated
+        .filter((h) => h.ring !== undefined && (cut.outline?.parts ?? []).some((p) => h.id.startsWith(p)))
+        .map((h) => offsetConvex(orient(toViewRing(view, h.ring!), true), cut.outline?.offset ?? 0))
+      const keepZ = cut.floor !== undefined && cut.keep !== undefined ? zOf(cut.floor) + cut.keep : undefined
+      const done = cutawayItems(view, pal, cut, placed, extra.section === true ? [...boxes, ...tramBoxes] : boxes, {
+        ...(keepZ === undefined ? {} : { keepZ }), ...(cut.floor === undefined ? {} : { floorZ: zOf(cut.floor) }), section: extra.section === true, outlineRings,
+        // The outline lies on the ground, or on whatever kept part it crosses (a porch).
+        // The outline lies level at the cut's floor (or on the ground, with no floor given).
+        ground: (p) => (cut.floor === undefined ? terrain.z(p) : zOf(cut.floor)),
+      })
+      if (extra.section === true) items.length = 0
+      for (const it of done.items) items.push(it)
+      if (extra.section !== true) {
+        (cut.travelers ?? []).forEach((t, k) => {
+          const at = view.toView(t.at[0], t.at[1])
+          items.push(travelerItem(view, pal, `traveler:${k + 1}`, at, t.floor === undefined ? terrain.z(at) : zOf(t.floor), t.facing))
+        })
+      }
+      for (const [k, v] of Object.entries(done.stats)) stats[k] = v
+      cutPlaneOut = done.plane
+      if (done.sections.length > 0) sectionsOut = done.sections
+    }
     // Buildings traced from fire-insurance maps that are gone today, in the maps' colors.
     const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
     for (const b of time.history.traced) {
@@ -577,9 +631,14 @@ export const buildScene = (
     stats.curated = curated.length
   }
 
+  if (extra.section === true) {
+    // The flat section keeps only what the cut made.
+    for (let k = items.length - 1; k >= 0; k--) if (!(items[k].id.startsWith('history:') || items[k].id.startsWith('tram:'))) items.splice(k, 1)
+  }
+
   // ---- bridges -----------------------------------------------------------------------------
   let spans = 0
-  const chains = chainBridges(plans.length > 0 ? [] : bridgeLines)
+  const chains = chainBridges(plans.length > 0 || extra.section === true ? [] : bridgeLines)
   const ends = bridgeEnds(view, region, chains)
   const roofs = roofIndex(items)
   const towers = suspensionTowers(view, chains, towerParts)
@@ -604,6 +663,8 @@ export const buildScene = (
     ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated } }),
     ...(labels.length === 0 ? {} : { labels }),
     ...(railScale > 1 ? { boldRail: true } : {}),
+    ...(cutPlaneOut === undefined ? {} : { cut: cutPlaneOut }),
+    ...(sectionsOut === undefined ? {} : { sections: sectionsOut }),
   }
 }
 

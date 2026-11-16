@@ -83,6 +83,7 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | tracing fire-insurance maps (georeference, trace, lifespans) | `tools/sanborn/*.py` → `history/sanborn/` |
 | a set: a big map framed by numbered boxes, its prints and page | `sets/<name>.json`, `tools/sets/set.py`; "Making a set" in the README |
 | one building modeled close up (parts, tracks, canopies, trains) | `tools/stations/<name>.py` → `history/<name>.json`; `src/parts.ts` |
+| a cutaway: the cut plane, sections, plan, flat section, its sheet | `cutaway` in `regions/<name>.json`; `src/cutaway.ts`, `src/cutaway-scene.ts`, `src/section.ts`; `cutaways/<name>.json`, `tools/cutaway/sheet.py`; "Cutaways" in the README |
 | release records: what each sold design was made from, and how to remake it | `tools/release/` → `releases/` |
 | plate numbers, the taxonomy, the printed title block | `catalog/plates.json`, `tools/release/plates.py`, `tools/print/titleblock.py`, `tools/release/stamp.py`; "Plates" in the README |
 | a published piece corrected or redrawn | `pages/changes.md` (and the store's `changes_page.py`): every change, dated, with the piece's version |

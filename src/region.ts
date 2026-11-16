@@ -73,6 +73,58 @@ export interface Region {
   }
   /** Draw the ground with relief from data/<region>/dem.bin.gz. Omit for a flat plate. */
   readonly terrain?: TerrainOptions
+  /** Open a modeled building along a vertical plane: see `Cutaway`. */
+  readonly cutaway?: Cutaway
+}
+
+/**
+ * A cutaway: the curated parts of a dated scene cut by a vertical plane, the half on one side
+ * lifted away. Only parts drawn with `only: 'cutaway'` or with no `only` take part, and only
+ * those whose id starts with `parts`. See "Cutaways" in the README.
+ */
+export interface Cutaway {
+  /** A point on the plane, [lon, lat]. */
+  readonly through: readonly [number, number]
+  /** Compass bearing the plane runs along, in degrees. */
+  readonly bearing: number
+  /** The side of that bearing lifted away. The camera should stand on it. */
+  readonly remove: 'left' | 'right'
+  /** On the removed side, keep what stands up to `keep` meters above the elevation `floor` (a plan of that floor). */
+  readonly floor?: number
+  readonly keep?: number
+  /** Id prefix of the parts that are cut (default: every modeled part). */
+  readonly parts?: string
+  /** Items lifted away whole even though they are not cut (a shed over the nearest platform): regular expressions on item ids. */
+  readonly lift?: readonly string[]
+  /**
+   * Outline, dashed on the ground, the removed side of the union of these parts' footprints
+   * (id prefixes; convex footprints), pushed `offset` meters out.
+   */
+  readonly outline?: { readonly parts: readonly string[]; readonly offset?: number }
+  /**
+   * Travelers drawn to scale in the cutaway (src/traveler.ts): where each stands, the floor it
+   * stands on (m above sea level; on the ground where none is given), and which way it faces
+   * across the picture (1 right, -1 left).
+   */
+  readonly travelers?: readonly { readonly at: readonly [number, number]; readonly floor?: number; readonly facing: 1 | -1 }[]
+  /**
+   * The flat section: the same plane, seen square on, everything on the removed side gone.
+   * `from` and `to` are its ends, in meters along the plane from `through`; `beyond` is how far
+   * behind the plane the cut parts are drawn, `other` how far everything else is.
+   */
+  readonly section?: {
+    readonly from: number
+    readonly to: number
+    readonly beyond?: number
+    readonly other?: number
+    readonly scale?: number
+    /** Floor of the earth drawn under the section, in meters below the lowest ground. */
+    readonly earth?: number
+    /** The traveler's path: points [meters along the plane, elevation in meters above sea level]. */
+    readonly route?: readonly (readonly [number, number])[]
+    /** Travelers on the path: meters along the plane, the floor's elevation, and facing (1 toward `to`). */
+    readonly travelers?: readonly { readonly s: number; readonly floor: number; readonly facing: 1 | -1 }[]
+  }
 }
 
 export interface TerrainOptions {
@@ -88,6 +140,12 @@ export interface TerrainOptions {
   readonly majorEvery?: number
   /** Water-surface gradient (m/m) above which a stretch of river reads as rapids. */
   readonly rapids?: number
+  /**
+   * Strength of the hillshade, 1 by default; 0 draws the ground flat-toned (its relief still
+   * shapes it). A close view of one building, such as a cutaway, uses 0, so a bank does not
+   * read as a stain.
+   */
+  readonly shade?: number
   /** Mark rock standing clear of the water. Default true; off for tidal flats and shoals. */
   readonly rocks?: boolean
   /** Meters per pixel to fetch the elevation at. Default 1 (or the source's native spacing, if coarser); coarser keeps big regions small. */

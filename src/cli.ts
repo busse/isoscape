@@ -9,12 +9,14 @@ import { DEM_SOURCES } from './dem-sources.ts'
 import { fetchFootprints, loadFootprints } from './footprints.ts'
 import { coverSampler, fetchLandcover, loadLandcover } from './landcover.ts'
 import { renderExplorer } from './explorer.ts'
+import { TRAVELER_HEIGHT, travelerShapes } from './traveler.ts'
 import { fetchOsm, overpassQuery, parseOsm } from './osm.ts'
 import { loadPages } from './pages.ts'
 import { palette } from './palette.ts'
 import { fetchBounds, loadRegion, type Region } from './region.ts'
 import { renderPage, renderSvg } from './render.ts'
 import { buildScene, type TimeContext } from './scene.ts'
+import { anchorOf, renderSection, sectionRegion } from './section.ts'
 import { loadSiteConfig, writeSocial } from './social.ts'
 import { pageDates, planStatic, plainLinks, writeStatic } from './static-pages.ts'
 import { dateBuildings, fetchYearBuilt, loadHistory, loadYearBuilt, yearBuiltDirs, type History, type Parcel } from './history.ts'
@@ -108,8 +110,8 @@ let streetcarScale: number | undefined
 /** `--rail-scale`: likewise for railroad track. */
 let railScale: number | undefined
 
-const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number) => {
-  const extra = { ...inp.extra }
+const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number, section = false) => {
+  const extra: Parameters<typeof buildScene>[4] = { ...inp.extra, ...(section ? { section: true } : {}) }
   if (inp.history !== null) {
     const y = year ?? inp.history.present
     const epoch = inp.history.epochs.find((e) => e.year === y)
@@ -285,6 +287,19 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
   const base = resolve(outDir, `${name}${suffix}`)
   await writeFile(`${base}.svg`, rendered.svg)
   await writeFile(`${base}.html`, renderPage(scene, rendered))
+  if (scene.region.cutaway !== undefined) {
+    // Where each modeled part is drawn, for the callouts of a sheet; and the flat section.
+    const anchors: Record<string, [number, number, number, number]> = {}
+    for (const it of scene.items) if (it.id.startsWith('history:') || it.id.startsWith('traveler:')) anchorOf(anchors, it)
+    await writeFile(`${base}.anchors.json`, JSON.stringify({ viewBox: rendered.viewBox, anchors }) + '\n')
+    if (scene.region.cutaway.section !== undefined) {
+      const sec = sceneOf({ ...inp, region: sectionRegion(scene.region) }, values.palette, year, previous, true)
+      const drawn = renderSection(sec, scene.region.cutaway)
+      await writeFile(`${base}-section.svg`, drawn.svg)
+      await writeFile(`${base}-section.anchors.json`, JSON.stringify({ viewBox: drawn.viewBox, frame: drawn.frame, anchors: drawn.anchors, traveler: { height: TRAVELER_HEIGHT, shapes: travelerShapes() } }) + '\n')
+      console.error(`wrote ${base}-section.svg (${sec.items.length} items, ${(sec.sections ?? []).length} cut faces)`)
+    }
+  }
   const mb = (rendered.svg.length / 1e6).toFixed(2)
   const relief = scene.terrain.flat ? 'flat' : `terrain ${scene.stats.elevationDatum}–${scene.stats.elevationTop} m ×${scene.terrain.exaggeration}, ${rendered.stats.rapidCells} rapid cells`
   console.error(`${name}${dated}: bearing ${scene.view.bearing.toFixed(1)}°, ${scene.stats.buildings} buildings, ${scene.stats.bridgePieces} bridge spans, ${relief}, ${mb} MB svg, ${Math.round(performance.now() - t0)} ms`)

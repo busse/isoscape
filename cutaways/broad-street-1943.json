@@ -1,0 +1,345 @@
+{
+ "about": "The sheet for the Broad Street Station cutaway: tools/cutaway/sheet.py. Callouts are anchored to drawn parts (history ids, in the isometric view and the flat section); a badge's style is the anchored part's confidence unless `confidence` says otherwise. Callout text is a working draft, written with Claude, for the artist to edit.",
+ "design": "broad-street-1943-cutaway",
+ "region": "broad-street-station-cutaway",
+ "year": 1943,
+ "title": "Broad Street Station, 1943",
+ "subtitle": "Cut down the middle, from the Broad Street doors to the trains",
+ "sectionCaption": "The same cut, seen flat: Broad Street on the left, the trains on the right",
+ "groups": [
+  {
+   "title": "The way to the train",
+   "callouts": [
+    {
+     "n": 1,
+     "title": "Broad Street",
+     "text": "The front of the station, facing West Broad Street.",
+     "iso": {
+      "part": "history:bss-porch",
+      "dx": 0.0,
+      "dy": 0.45
+     },
+     "section": {
+      "s": -41,
+      "elevation": 67.0,
+      "badge": [
+       -40,
+       -150
+      ]
+     },
+     "confidence": "drawn"
+    },
+    {
+     "n": 2,
+     "title": "The portico",
+     "text": "Six columns between two piers.",
+     "iso": {
+      "part": "history:bss-c-column-2",
+      "dy": -0.3,
+      "badge": [
+       120,
+       -170
+      ]
+     },
+     "section": {
+      "part": "history:bss-entablature",
+      "dy": -0.9
+     }
+    },
+    {
+     "n": 3,
+     "title": "Vestibule",
+     "text": "Entrance halls on each side, with stairs and elevators up to the offices.",
+     "iso": {
+      "part": "history:bss-c-entrance-hall-2-stair",
+      "badge": [
+       -200,
+       80
+      ]
+     },
+     "section": {
+      "part": "history:bss-c-vestibule-1-column-1",
+      "dy": -0.2,
+      "badge": [
+       0,
+       -170
+      ]
+     }
+    },
+    {
+     "n": 4,
+     "title": "White Waiting Room",
+     "text": "The main hall: a low dome over a shallow vault, with four long benches.",
+     "iso": {
+      "part": "history:bss-c-hall-bench-2",
+      "badge": [
+       -170,
+       -110
+      ]
+     },
+     "section": {
+      "part": "history:bss-c-hall-west-lunette",
+      "dy": 1.6
+     }
+    },
+    {
+     "n": 5,
+     "title": "Tickets, Pullman, Information",
+     "text": "Counters along the east side of the hall.",
+     "iso": {
+      "part": "history:bss-c-band-counter-2",
+      "badge": [
+       -120,
+       -140
+      ]
+     }
+    },
+    {
+     "n": 6,
+     "title": "Colored Waiting Room",
+     "text": "Virginia law kept Black and white passengers apart. This wing had its own lunch room, smoking room and toilets. The waiting rooms were segregated from the station’s opening in 1919 until January 1956, when a federal order took effect.",
+     "iso": {
+      "part": "history:bss-c-cwr-floor-mark"
+     }
+    },
+    {
+     "n": 7,
+     "title": "Lunch room and dining room",
+     "text": "In the west wing, with the kitchen behind.",
+     "iso": {
+      "part": "history:bss-c-west-wing",
+      "dx": -0.2,
+      "dy": -0.38
+     }
+    },
+    {
+     "n": 8,
+     "title": "Baggage and parcel check",
+     "text": "In the east wing, off the checking lobby.",
+     "iso": {
+      "part": "history:bss-c-baggage-counter",
+      "badge": [
+       -150,
+       -150
+      ]
+     }
+    },
+    {
+     "n": 9,
+     "title": "The concourse",
+     "text": "A long room out over the tracks.",
+     "iso": {
+      "part": "history:bss-c-concourse-deck",
+      "dx": 0.15
+     },
+     "section": {
+      "part": "history:bss-c-concourse-roof",
+      "dy": 3.0
+     }
+    },
+    {
+     "n": 10,
+     "title": "Stairs",
+     "text": "Down from the concourse to each platform.",
+     "iso": {
+      "part": "history:bss-c-stair-2",
+      "badge": [
+       170,
+       -30
+      ]
+     },
+     "section": {
+      "part": "history:bss-c-stair-2",
+      "dx": 0.3,
+      "dy": -0.25,
+      "badge": [
+       -160,
+       300
+      ]
+     }
+    },
+    {
+     "n": 11,
+     "title": "Platforms and sheds",
+     "text": "Butterfly sheds over each platform.",
+     "iso": {
+      "part": "history:bss-canopy-3-south-cut:5"
+     },
+     "confidence": "drawn"
+    },
+    {
+     "n": 12,
+     "title": "The trains",
+     "text": "RF&P and Atlantic Coast Line. 33,324 passengers on April 22, 1943, the busiest day.",
+     "iso": {
+      "part": "history:bss-track-2:1",
+      "badge": [
+       150,
+       -80
+      ]
+     },
+     "section": {
+      "part": "history:bss-track-2:end",
+      "badge": [
+       110,
+       260
+      ]
+     },
+     "confidence": "written"
+    }
+   ],
+   "traveler": true
+  },
+  {
+   "title": "The building",
+   "callouts": [
+    {
+     "n": 13,
+     "title": "The dome",
+     "text": "Tile in 1943. The copper came in 1955.",
+     "iso": {
+      "part": "history:bss-dome",
+      "dy": -0.25,
+      "badge": [
+       0,
+       -250
+      ]
+     },
+     "section": {
+      "part": "history:bss-dome",
+      "dy": -0.6
+     }
+    },
+    {
+     "n": 14,
+     "title": "Offices",
+     "text": "Four floors in each wing: Trainmaster, Superintendent of Telegraph, General Superintendent.",
+     "iso": {
+      "part": "history:bss-c-front-floor-3",
+      "badge": [
+       0,
+       -200
+      ]
+     },
+     "section": {
+      "part": "history:bss-c-front-floor-3",
+      "dx": -0.6,
+      "badge": [
+       -170,
+       -60
+      ]
+     }
+    },
+    {
+     "n": 15,
+     "title": "Basement",
+     "text": "Under the whole building, on piers. It held baggage, mail and the heating plant.",
+     "section": {
+      "s": 4,
+      "elevation": 64.0
+     },
+     "confidence": "written"
+    }
+   ]
+  }
+ ],
+ "key": [
+  [
+   "drawn",
+   "drawn from a plan, a section or a survey map"
+  ],
+  [
+   "written",
+   "from written accounts or timetables"
+  ],
+  [
+   "approximate",
+   "approximate: no drawing shows it"
+  ]
+ ],
+ "sources": "Sources: The American Architect, July 9, 1919 (text; first-floor plan, Plate 15; sections, Plates 17 and 18); Sanborn fire-insurance atlas, 1925; USGS Richmond quadrangles, 1934 and 1956; Official Guide timetables, 1933 and 1941; Richmond Railroad Museum; City Planning Commission transit map, January 1943; ICC, NAACP v. St. Louis-San Francisco Ry., 297 I.C.C. 335 (1955); OpenStreetMap.",
+ "notes": "The east half of the building is lifted away down to its first floor; its walls are left standing low, as a plan. In the flat section, the departure stairs, which stand on the side lifted away, are dashed. Heights are scaled from the 1919 sections, whose figures are illegible; the first floor’s level is approximate.",
+ "credit": "Drawn with isoscape, built with Claude  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP",
+ "wayfinding": [
+  {
+   "id": "north",
+   "at": [
+    -77.4657083,
+    37.561733
+   ],
+   "place": "top-right",
+   "confidence": "written",
+   "lines": [
+    "North to Washington on the RF&P,",
+    "and on to New York by the Pennsylvania Railroad",
+    "South by the Atlantic Coast Line to Petersburg, Charleston,",
+    "Savannah, Jacksonville and Florida",
+    "Both railroads’ trains came in and left by the north"
+   ],
+   "sources": [
+    "Official Guide schedules of 1933 and June 1941 (Havana Special, Tamiami Champion), as transcribed by streamlinerschedules.com",
+    "chicagorailfan.com (ACL route)",
+    "Richmond Railroad Museum, railroad history"
+   ],
+   "text": "North to Washington on the RF&P, and on to New York by the Pennsylvania Railroad; south by the Atlantic Coast Line to Petersburg, Charleston, Savannah, Jacksonville and Florida. Both railroads’ trains came in and left by the north."
+  },
+  {
+   "id": "loop",
+   "at": [
+    -77.4648998,
+    37.5608469
+   ],
+   "place": "bottom-right",
+   "confidence": "written",
+   "lines": [
+    "To the loop, where every train turned",
+    "to leave the way it came"
+   ],
+   "sources": [
+    "Richmond Railroad Museum, railroad history",
+    "The American Architect, July 9, 1919 (track lay-out)",
+    "USGS Richmond quadrangles, 1934 and 1956"
+   ],
+   "plate": [
+    0.86,
+    0.96
+   ],
+   "text": "To the loop, where every train turned to leave the way it came."
+  },
+  {
+   "id": "broad",
+   "at": [
+    -77.4664633,
+    37.5603622
+   ],
+   "place": "bottom-left",
+   "confidence": "approximate",
+   "lines": [
+    "West Broad Street",
+    "Streetcars and buses east to downtown"
+   ],
+   "sources": [
+    "Transit Routes Direct to Downtown District, City Planning Commission, January 31, 1943 (Library of Virginia); routes on West Broad read from the map image, approximate"
+   ],
+   "plate": [
+    0.03,
+    0.86
+   ],
+   "text": "West Broad Street: streetcars and buses east to downtown."
+  }
+ ],
+ "page": {
+  "slug": "broad-street-cutaway",
+  "title": "Broad Street Station, 1943: the cutaway",
+  "order": 47,
+  "summary": "John Russell Pope's station cut down the middle, from the Broad Street doors to the trains, as it stood in 1943, with how sure each part is.",
+  "intro": "Broad Street Station opened in January 1919 for the RF&P and the Atlantic Coast Line. This drawing cuts it down the middle, from the Broad Street doors through the portico, the White Waiting Room under the dome and the concourse out over the tracks, as it stood in 1943. The east half is lifted away down to its first floor, so its rooms read as a plan, and beneath it the same cut is drawn flat, with the traveler's way from the street to the train dashed in red. It belongs to the [Broad Street Station, 1943](broad-street.md) set.",
+  "image_alt": "The cutaway sheet: the station cut down the middle above, the same cut seen flat below, and the numbered callouts beside them",
+  "key_intro": "Every part of the drawing says how it is known, and each numbered badge shows it:",
+  "wayfinding_heading": "Where the trains and streetcars went",
+  "how": "The station is a model made of parts: the rooms of the first floor, the hall's octagon, its benches and counters, the portico and the concourse are traced from the first-floor plan published in The American Architect in 1919 (Plate 15), fitted by the 240-foot frontage; the levels, the dome and the basement are scaled from the sections (Plates 17 and 18), whose figures are illegible. The model is cut along one vertical plane down the station's axis. Every face the cut opens is drawn solid in ink; on the side lifted away, everything up to 1.5 m above the first floor stays, so the ground floor reads as a plan. The flat section below is the same plane seen square and level, with the building drawn 35 m deep behind it. Chris Busse drew it with isoscape, the open-source tool he built with Claude.",
+  "drafted": "This page was drafted with Claude, Anthropic's AI (Claude Opus 5.5), and reviewed by Chris Busse. More on how we work in the [artist statement](artist-statement.md).",
+  "traveler_note": "The small red figures are travelers drawn to scale, 1.75 m (5 ft 9 in) tall; their height is a convention, not a claim from a source. The red line is the way from the street to the train."
+ },
+ "travelerKey": "A traveler, drawn to scale: 1.75 m (5 ft 9 in) tall. The red line is the way from the street to the train."
+}

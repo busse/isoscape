@@ -32,9 +32,23 @@ def dms(v, pos, neg):
     return f'{abs(v):.3f}° {pos if v >= 0 else neg}'
 
 
+def cutaway_of(design):
+    """The cutaway sheet spec (cutaways/*.json) whose `design` this is, or None."""
+    for sp in sorted(glob.glob(os.path.join(ISO, 'cutaways', '*.json'))):
+        C = json.load(open(sp))
+        if C.get('design') == design:
+            return sp, C
+    return None
+
+
 def where(design):
-    """(lon, lat, bearing) the design was drawn at: a set box's own point and scene, else the
-    region of its first scene."""
+    """(lon, lat, bearing) the design was drawn at: a cutaway's region, a set box's own point and
+    scene, else the region of its first scene."""
+    cut = cutaway_of(design)
+    if cut:
+        cfg = json.load(open(os.path.join(ISO, 'regions', f'{cut[1]["region"]}.json')))
+        lon, lat = cfg['center']
+        return lon, lat, cfg.get('bearing', 0)
     recs = sorted(glob.glob(os.path.join(ISO, 'releases', design, 'v*.json')), key=lambda p: int(re.findall(r'v(\d+)', p)[-1]))
     rec = json.load(open(recs[-1])) if recs else {}
     region = None
@@ -64,9 +78,12 @@ def info(design, version=None, drawn=None, reg=None):
     s = next(s for s in reg['sets'] if s['code'] == code)
     col = next(c for c in reg['collections'] if c['id'] == s['collection'])
     lon, lat, bearing = where(design)
-    return {'collection': col['name'], 'set': s['name'], 'piece': p['piece'], 'plate': p['plate'],
-            'version': str(version or p.get('version', 1)), 'drawn': str(drawn or 2026),
-            'location': f'{dms(lat, "N", "S")} {dms(lon, "E", "W")}', 'facing': f'{round(bearing) % 360}°'}
+    out = {'collection': col['name'], 'set': s['name'], 'piece': p['piece'], 'plate': p['plate'],
+           'version': str(version or p.get('version', 1)), 'drawn': str(drawn or 2026),
+           'location': f'{dms(lat, "N", "S")} {dms(lon, "E", "W")}', 'facing': f'{round(bearing) % 360}°'}
+    if p.get('kind'):           # only when the plate names one: older blocks stay as they were
+        out['kind'] = p['kind']
+    return out
 
 
 def check(store=None):
@@ -80,6 +97,7 @@ def check(store=None):
     bad += [f'malformed plate {x}' for x in plates if not PLATE.match(x)]
     bad += [f'unknown set in {x}' for x in plates if x.split('-')[0] not in codes]
     bad += [f'set {s["code"]} in unknown collection' for s in reg['sets'] if s['collection'] not in cols]
+    bad += [f'empty or malformed kind in {p["plate"]}' for p in reg['plates'] if 'kind' in p and (not isinstance(p['kind'], str) or not p['kind'].strip() or len(p['kind']) > 24)]
     if store:
         cat = json.load(open(os.path.join(store, 'pipeline', 'catalog.json')))['designs']
         bad += [f'no plate for {k}' for k in cat if k not in designs]

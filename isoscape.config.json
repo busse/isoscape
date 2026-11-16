@@ -2,22 +2,13 @@
   "siteUrl": "https://busse.github.io/isoscape/",
   "flagship": "richmond-downtown-time-1925",
   "latestPages": false,
-  "analytics": { "ga": "G-HNNYF0H75C" },
+  "analytics": {
+    "ga": "G-HNNYF0H75C"
+  },
   "shop": {
     "label": "Holiday shop, open through December 31, 2026",
     "url": "https://chrisbusse.com/",
-    "links": {
-      "broad-street": "https://chrisbusse.com/collections/broad-street-station-1943",
-      "richmond-streetcars": "https://chrisbusse.com/collections/richmond-streetcars-1925",
-      "lm-eiffel-tower": "https://chrisbusse.com/collections/world-landmarks",
-      "lm-matterhorn": "https://chrisbusse.com/collections/world-landmarks",
-      "lm-sydney-opera-house": "https://chrisbusse.com/collections/world-landmarks",
-      "lm-himeji-castle": "https://chrisbusse.com/collections/world-landmarks",
-      "lm-machu-picchu": "https://chrisbusse.com/collections/world-landmarks",
-      "richmond": "https://chrisbusse.com/collections/richmond-through-time",
-      "gwynns-island": "https://chrisbusse.com/collections/gwynns-island",
-      "lm-": "https://chrisbusse.com/collections/american-landmarks"
-    },
+    "links": {},
     "cta": "Buy prints of these maps"
   },
   "home": {

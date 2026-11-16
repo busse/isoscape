@@ -411,7 +411,10 @@ painted it last, and no light streak shows along the strip lines. Where two stri
 meets, both trace the same points, so there is no hairline between them.
 
 The front of the plate is a **slab**, a true cross-section of the ground along the near edge,
-with water where the cut crosses the river.
+with water where the cut crosses the river. A region with no slab (`"slab": 0`, the cutaway) is
+cut square instead: the ground ends on straight lines, at the lowest point of its far edge on
+screen and the highest of its near edge, so its edge does not wander with the ground, and
+standing things are cut along the same near line.
 
 **The SVG is compact.** Coordinates are rounded to a tenth of a pixel and written relative to
 the previous point. Draped edges are simplified to a quarter pixel, and the soft edges of
@@ -554,7 +557,8 @@ loop of tracks) clears today's streets, lots and buildings from within it.
 Broad Street Station in 1943 is modeled from parts
 (`tools/stations/broad_street.py`): wings, center pavilion, porch, six columns and two piers,
 entablature, drum and a dome (a quarter circle in ten steps), each with a height above its
-seat, and the concourse seated on the high side of the ground so it bridges the tracks. A part
+seat, and the concourse, a deck at the waiting room's level on piers over the tracks: a part
+can stand at a given elevation and reach up to another, instead of rising from its seat. A part
 can rest on another: the columns and piers stand on the porch and the entablature on the
 columns, so on the sloping forecourt all six columns share one base and one top. The
 station's own colors live in the palette's `parts`: limestone, the dome's tile, the iron and
@@ -563,11 +567,114 @@ surviving platforms through the station and the USGS quadrangles of 1934 and 195
 loop, gathering into four and then two within 110 m of each end. Canopies are cut into 12 m
 pieces, each on a column, 8 m wide and 5.4 m up; trains are a steam engine (18 m, with a
 cab), its tender (11 m) and 26 m heavyweight cars, 1 m apart. At 1.5 pixels per meter or
-closer, track is drawn with its ties (0.25 m every 0.67 m) and its two rails, 1.44 m apart.
+closer, track is drawn with its ties and its two rails, 1.44 m apart. Each tie is a rectangle
+on the ground, 2 m across the track and 0.25 m along it, square to the track where it stands
+and spaced every 0.67 m along the whole line (the spacing carries on through bends), so it
+foreshortens with the view like everything else; the strips paint the ties with the ground.
+The rails are the center line offset 0.72 m each way on the ground, mitered at bends so they
+have no gap or jog. Farther out, ties are a dashed line along the track.
 A series can draw track wider than life (`railScale`, or `--rail-scale` for one build) and in
 the ties' darker tone, so a network reads across a city: the wide railroad map uses four
 times. Curated labels name places on the map; the single-place prints of a set leave them
 out.
+
+## Cutaways
+
+A cutaway opens one modeled building along a vertical plane (`src/cutaway.ts`,
+`src/cutaway-scene.ts`). The region names the plane, a point and a compass bearing, and the side
+of it that is lifted away; the camera stands on that side. Broad Street Station is cut down its
+axis, the plane through the middle of the portico, the waiting room and the concourse, running
+at a bearing of 40.8°, with the east half lifted away and the camera looking from that side at
+a bearing of 342° (`regions/broad-street-station-cutaway.json`). Only modeled parts whose ids
+begin with the region's prefix (`bss-`) are cut, and one canopy on the removed side that is not
+cut is lifted away whole.
+
+Every part of the building is first made into convex solids: a prism for a wall, a floor or a
+bench; for a dome, a solid of revolution in slices, one per side of its outline, with an outer
+and an inner surface; a stair as one block per tread. Each solid is clipped to the half of space
+behind the plane, and where the clip opens it a new face closes it on the plane: that face is
+the section, drawn solid in ink (poché). On the removed side the building is not simply gone:
+everything up to 1.5 m above its first floor stays, clipped there, so the ground floor reads as
+a plan, its walls cut low with inked tops, its benches and counters whole. A dashed line marks
+the footprint of what was lifted away, 1.5 m outside the floors, but only where nothing still
+stands: within 2.5 m of a low wall it would only repeat the wall, and is left out.
+
+The pieces become ordinary items for the paint order (above). A part's pieces behind the plane
+are one item and its pieces in front another, and each is split again at the first floor, so
+it takes its place on both sides of the floor's slab. Within an item, faces turned away from
+the camera are dropped, the rest are painted far to near, and the sections last. A cutaway
+stacks many parts over others (slabs over piers, the concourse over trains), so its paint order
+adds one rule: two items apart on the ground, the farther wholly above the nearer, cannot cover
+each other and are left unordered; footprints that overlap by up to 3 cm, the rounding of
+their corners, count as apart. Cars and canopy runs are cut into pieces at most 7 m long, drawn
+without seams, so each piece takes its own place among the stairs and the deck it passes.
+
+In a cutaway, coaches are solid Pullman-green bodies under a darker arched roof, with a
+continuous band of windows down each side and, in the 1 m gap ahead of each car that has one
+coupled ahead of it, the dark diaphragm of its vestibule. A steam engine faces the way its
+train came in (the engine leads, toward the start of its line): a round boiler with a darker
+smokebox at the front, a stack and two domes on top, a frame and running board under it, and a
+boxy cab 4 m long at the back, beside the tender, whose tank is lower than the cab and carries
+its coal heaped at the front. They are drawn in a grey light enough for their edges to show.
+Sheds have butterfly roofs falling to a valley over their posts; a post stands only under a
+roof that is drawn. The ground is flat-toned (the region's `terrain.shade` is 0, which turns
+the hillshade off), and the dashed outline of what was lifted away lies level at the first
+floor.
+
+The **flat section** is made from the same parts and the same plane: the camera looks level and
+square at the plane from the removed side, nothing in front of it is kept, and behind it the
+building is drawn 35 m deep. Trains and sheds are not cut on the skew: where a track with a
+train standing across the plane, or within 16 m behind it, meets the plane, one car is drawn
+end on, square and true size on its trucks (a coach's arched end with its door, an engine's
+round smokebox, or a tender's tank and coal); and where a shed's line meets it, its butterfly
+profile, a center post and two wings rising outward. A stair down from the floor on the removed
+side (to the platforms) is drawn as its stepped profile, dashed. Under it the ground is cut along the plane and dug out where the
+building goes below it; platforms are drawn 0.35 m over the rails (approximate), rails at true
+gauge where tracks cross the plane, and a red dashed line follows the traveler from the street
+to the train. The line runs at waist height, 0.95 m over each floor, with a small arrowhead
+pointing the way on each stretch, and it is broken where it meets a traveler and where it
+would cross a car end seen square on, so it passes behind the car rather than over its face.
+
+**Travelers.** A plain standing figure, 1.75 m (5 ft 9 in) tall, in the route's red, gives
+the drawings their scale: head, body, legs in a short stride and a small suitcase
+(`src/traveler.ts`). Its height is a convention, not a claim from a source. In the flat section
+four stand on the route, feet on their floors: on Broad Street, in the White Waiting Room, on
+the concourse and at the foot of the stair beside the car end. In the cutaway three stand
+upright, facing across the picture, on the portico, among the benches of the waiting room and
+on a platform by the train; each is an item in the paint order like any other, with a 0.5 m
+footprint, so what stands in front of it covers it. For Broad Street the section runs from 45 m on the street side of the plane's
+point to 104 m on the track side, at 10 pixels to the meter, and its earth is cut 5 m below the
+lowest ground along it. Code: `src/section.ts`.
+
+**What is approximate.** Every part says how it is known: *drawn* (traced from a plate or a
+survey map), *written* (placed from a written account) or *approximate* (inferred), and a
+part that says nothing is approximate. For Broad Street Station the rooms of the first floor,
+the hall's octagon, its benches and counters, the portico and the concourse's width are traced
+from the first-floor plan of 1919 (Plate 15), fitted by the 240-ft frontage; the levels, the
+dome and the basement are scaled from the sections (Plates 17 and 18), whose figures are
+illegible; the first floor's elevation, wall thicknesses, door heights, the basement's piers
+and use, the stairs to the platforms and the concourse's height are approximate. The sheet's
+numbered badges show which: solid for drawn, a ring for written, a dashed ring for approximate.
+Code: `tools/stations/broad_street_plan.py`, `tools/cutaway/sheet.py`.
+
+**Sources.** For Broad Street Station: *The American Architect* of July 9, 1919 (its text, the
+first-floor plan on Plate 15 and the sections on Plates 17 and 18); the 1925 Sanborn
+fire-insurance atlas; the USGS Richmond quadrangles of 1934 and 1956, for the loop of tracks;
+the Official Guide timetables of 1933 and 1941 and the Richmond Railroad Museum, for the trains
+and where they went; the City Planning Commission's transit map of January 1943, for the
+streetcars and buses on West Broad; the ICC's 1955 ruling in *NAACP v. St. Louis-San Francisco
+Ry.*, for the end of the segregated waiting rooms; and OpenStreetMap for the ground. Each is
+named on the sheet, and the wayfinding notes carry their own.
+
+**The sheet** (`cutaways/<name>.json`, `tools/cutaway/sheet.py`) is 32 × 24 in at 300 dpi
+(9,600 × 7,200 pixels): the cutaway large, the flat section beneath it, and a column of numbered
+callouts, each anchored to a drawn part in either drawing, with the key, the sources and the
+notes. A badge that would hide the part it names is set off it into clear space, with a thin
+leader to a small dot on the part, drawn like the wayfinding labels' leaders. Callout text is 54 pixels (13 pt; 9.7 pt on the 24 × 18 in print), and the smallest text
+on the sheet, the two-digit numbers in the badges on the drawings, is 40 pixels (9.6 pt; 7.2 pt
+at 24 × 18). There are no canvas files: a canvas's 1.5 in of mirrored wrap would carry the
+title and the column round its sides. Its title block sits in the bottom-right corner, below
+the column.
 
 ## Sets: a map framed by its places
 
@@ -606,7 +713,9 @@ about 5.6 × 0.8 in; smaller sheets scale it by the square root of their long si
 and it sits as low as the art's side margin allows, with clear paper around it a third of its
 height wide. Where the foot of a sheet is full (the two set sheets) it sits in the header
 instead, and only if no place fits at full size is it shrunk, in steps of a tenth. On a canvas it
-goes on the face, never the wrap. The plates themselves are listed in `catalog/plates.json`.
+goes on the face, never the wrap. A piece that is not a map can say what it is in one more
+line under the maker, at 28 units, about 7 pt on a 24 × 18 in sheet: the Broad Street cutaway's
+says "Building cutaway". The plates themselves are listed in `catalog/plates.json`.
 
 ## Archive and explorer
 

@@ -30,6 +30,8 @@ export interface PartSeat {
   readonly on?: string
   readonly base?: number
   readonly height?: number
+  /** A fixed seat (scene z), which wins over `on` and the ground. */
+  readonly at?: number
 }
 
 /**
@@ -48,7 +50,7 @@ export const partLevels = (parts: readonly PartSeat[]): Map<string, number> => {
     if (known !== undefined) return known
     resolving.add(p.id)
     const support = p.on === undefined ? undefined : byId.get(p.on)
-    const seat = support !== undefined && !resolving.has(support.id)
+    const seat = p.at !== undefined ? p.at : support !== undefined && !resolving.has(support.id)
       ? level(support) + (support.height ?? 10)
       : p.seat === 'max' ? Math.max(...p.grounds) : Math.min(...p.grounds)
     resolving.delete(p.id)
@@ -114,17 +116,27 @@ export const STOCK = {
   gap: 1,
 } as const
 
-/** The cars of a standing train, each its own item, set on the ground under it. */
-export const trainItems = (
-  view: View, pal: Palette, id: string, line: readonly Vec2[], train: Train, ground: (p: Vec2) => number,
-): Item[] => {
+/** A box a part is drawn as: a footprint, its bottom and top, and its tone. */
+export interface Box {
+  readonly id: string; readonly ring: Ring; readonly z0: number; readonly z1: number; readonly tone: PartTone
+  /** Rolling stock: the unit direction the train faces (its engine leads), in view meters. */
+  readonly front?: Vec2
+}
+
+export const boxItem = (view: View, pal: Palette, b: Box): Item => {
+  const t = toned(pal, b.tone)
+  return extrude(view, t.pal, b.id, b.ring, [], b.z0, b.z1, t.roof, 'none')
+}
+
+/** The cars of a standing train, each its own box, set on the ground under it. */
+export const trainBoxes = (id: string, line: readonly Vec2[], train: Train, ground: (p: Vec2) => number): Box[] => {
   const pts = train.reverse === true ? [...line].reverse() : line
   const total = lengthOf(pts)
   const consist: { kind: 'engine' | 'tender' | 'coach' | 'freight'; tone: PartTone }[] = []
   if (train.engine !== false) consist.push({ kind: 'engine', tone: 'engine' }, { kind: 'tender', tone: 'engine' })
   const car = train.kind ?? 'coach'
   for (let k = 0; k < train.cars; k++) consist.push({ kind: car, tone: car })
-  const items: Item[] = []
+  const boxes: Box[] = []
   let d = train.at
   consist.forEach((c, k) => {
     const dims = STOCK[c.kind]
@@ -132,18 +144,23 @@ export const trainItems = (
     d += dims.length + STOCK.gap
     if (mid > total) return
     const { p, dir } = along(pts, mid)
-    const ring = box(p, dir, dims.length / 2, dims.width / 2)
     const z = ground(p) + 0.6
-    const t = toned(pal, c.tone)
-    items.push(extrude(view, t.pal, `${id}:${k}`, ring, [], z, z + dims.height - 0.6, t.roof, 'none'))
+    // The engine leads, toward the line's start.
+    const front: Vec2 = [-dir[0], -dir[1]]
+    boxes.push({ id: `${id}:${k}`, ring: box(p, dir, dims.length / 2, dims.width / 2), z0: z, z1: z + dims.height - 0.6, tone: c.tone, front })
     if (c.kind === 'engine') {
       // The cab, a step up at the engine's back end.
       const cab = along(pts, mid - dims.length / 2 + 2)
-      items.push(extrude(view, t.pal, `${id}:${k}:cab`, box(cab.p, cab.dir, 2, dims.width / 2), [], z, z + dims.height + 0.2, t.roof, 'none'))
+      boxes.push({ id: `${id}:${k}:cab`, ring: box(cab.p, cab.dir, 2, dims.width / 2), z0: z, z1: z + dims.height + 0.2, tone: c.tone })
     }
   })
-  return items
+  return boxes
 }
+
+/** The cars of a standing train, each its own item, set on the ground under it. */
+export const trainItems = (
+  view: View, pal: Palette, id: string, line: readonly Vec2[], train: Train, ground: (p: Vec2) => number,
+): Item[] => trainBoxes(id, line, train, ground).map((b) => boxItem(view, pal, b))
 
 /**
  * An umbrella canopy over a platform: a roof `width` wide, 0.6 m deep, at `height` over the
@@ -151,18 +168,18 @@ export const trainItems = (
  * trains beside it, with a column under each piece.
  */
 export const CANOPY_PIECE = 12
-export const canopyItems = (
-  view: View, pal: Palette, id: string, line: readonly Vec2[], width: number, height: number, ground: (p: Vec2) => number,
-): Item[] => {
+export const canopyBoxes = (id: string, line: readonly Vec2[], width: number, height: number, ground: (p: Vec2) => number): Box[] => {
   const total = lengthOf(line)
-  const iron = toned(pal, 'iron')
-  const items: Item[] = []
+  const boxes: Box[] = []
   for (let s = 0, k = 0; s < total - 1; s += CANOPY_PIECE, k++) {
     const len = Math.min(CANOPY_PIECE, total - s)
     const { p, dir } = along(line, s + len / 2)
     const z = ground(p)
-    items.push(extrude(view, iron.pal, `${id}:post:${k}`, box(p, dir, 0.3, 0.3), [], z, z + height - 0.6, iron.roof, 'none'))
-    items.push(extrude(view, iron.pal, `${id}:${k}`, box(p, dir, len / 2, width / 2), [], z + height - 0.6, z + height, iron.roof, 'none'))
+    boxes.push({ id: `${id}:post:${k}`, ring: box(p, dir, 0.3, 0.3), z0: z, z1: z + height - 0.6, tone: 'iron' })
+    boxes.push({ id: `${id}:${k}`, ring: box(p, dir, len / 2, width / 2), z0: z + height - 0.6, z1: z + height, tone: 'iron' })
   }
-  return items
+  return boxes
 }
+export const canopyItems = (
+  view: View, pal: Palette, id: string, line: readonly Vec2[], width: number, height: number, ground: (p: Vec2) => number,
+): Item[] => canopyBoxes(id, line, width, height, ground).map((b) => boxItem(view, pal, b))
