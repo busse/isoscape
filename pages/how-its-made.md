@@ -298,9 +298,13 @@ Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scen
 OSM splits one bridge into many ways, at every change of lanes, name or junction. Ramping
 each piece down to the ground would turn a viaduct into a roller coaster. So bridge ways that
 share an end, a layer and a kind (road or rail) are joined into chains first. A chain only
-ramps down at an end that touches no other bridge. An end that joins another bridge (a ramp
-onto a viaduct of another layer, a link at a fork) meets the higher of the decks there and
-eases to its own height over 70 m, so the two arrive at one height. Where a deck comes down to
+ramps down at an end that touches no other bridge. Bridges that touch form a network,
+anchored to the ground at those ends, and no deck stands higher than a 70 m ramp from the
+nearest anchor allows, measured along the network: a viaduct that forks into short ways that
+each come down a few meters on ramps down to the fork, not standing at full height over a fan
+of steep stubs. An end that joins another bridge (a ramp onto a viaduct of another layer, a
+link at a fork) meets the higher of the decks there and eases to its own height over 70 m, so
+the two arrive at one height. Where a deck comes down to
 the ground, its side stops at the ground instead of hanging below it.
 
 **Deck height is a rule of thumb.** OSM rarely records it. A region can name a height for a
