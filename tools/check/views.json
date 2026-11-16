@@ -1,0 +1,289 @@
+{
+ "about": "Views the visual check watches (tools/check/visual.py). width: render width in px for the whole scene, about 300 dpi on the largest print, capped at 12000. Crops: x, y, w, h in render px.",
+ "views": [
+  {
+   "name": "richmond-i195-rocketts",
+   "args": [
+    "richmond-i195-rocketts"
+   ],
+   "width": 7200,
+   "why": "RVA-09, The James, I-195 to Rocketts Landing: 10 x 24 in, the whole width; 24 in at 300 dpi = 7,200 px.",
+   "crops": [
+    {
+     "name": "fall-line-hills",
+     "x": 15,
+     "y": 40,
+     "w": 1500,
+     "h": 1000,
+     "why": "Steep wooded bluffs at the west end and the I-195 bridge: hillshade, contours, bridge piers."
+    },
+    {
+     "name": "open-park",
+     "x": 2040,
+     "y": 0,
+     "w": 1500,
+     "h": 1000,
+     "why": "Open ground on the north bank: park fill, paths, gentle slopes and contours."
+    },
+    {
+     "name": "downtown-bridges",
+     "x": 4020,
+     "y": 0,
+     "w": 1500,
+     "h": 1000,
+     "why": "Downtown towers over the river and the Manchester and Mayo bridges: buildings, occlusion, decks."
+    },
+    {
+     "name": "rocketts-end",
+     "x": 5550,
+     "y": 216,
+     "w": 1500,
+     "h": 1000,
+     "why": "The Rocketts end: the rail viaduct, the river channel, tanks and treatment basins, and the plate's near edge (slab)."
+    }
+   ]
+  },
+  {
+   "name": "richmond-downtown",
+   "args": [
+    "richmond-downtown"
+   ],
+   "width": 6000,
+   "why": "Not a sold piece; flat (no terrain). Watched for buildings and bridges on flat ground at 6,000 px.",
+   "crops": [
+    {
+     "name": "bridges",
+     "x": 1200,
+     "y": 738,
+     "w": 1500,
+     "h": 1000,
+     "why": "Bridges over the river: decks, piers, rails and ramps."
+    },
+    {
+     "name": "towers",
+     "x": 3675,
+     "y": 62,
+     "w": 1500,
+     "h": 1000,
+     "why": "Tall downtown towers: walls, roofs and what they hide."
+    },
+    {
+     "name": "east-riverfront",
+     "x": 4500,
+     "y": 812,
+     "w": 1500,
+     "h": 1000,
+     "why": "Dense low buildings, rail and the riverfront at the east edge."
+    }
+   ]
+  },
+  {
+   "name": "richmond-downtown-time-1925",
+   "args": [
+    "richmond-downtown-time",
+    "--year",
+    "1925"
+   ],
+   "width": 12000,
+   "why": "RVA-01, Richmond, 1925: 24 x 36 in, the print's box is 4,524 of the scene's 6,048 units; 36 in at 300 dpi would be 14,400 px for the scene, capped at 12,000.",
+   "crops": [
+    {
+     "name": "title",
+     "x": 0,
+     "y": 0,
+     "w": 2600,
+     "h": 600,
+     "why": "The year and title lettering at the top left (the dated scene's title)."
+    },
+    {
+     "name": "church-hill-bluff",
+     "x": 5250,
+     "y": 700,
+     "w": 1500,
+     "h": 1000,
+     "why": "Steep bluff below Church Hill: hillshade steps and traced Sanborn buildings on the slope."
+    },
+    {
+     "name": "river-bridges",
+     "x": 1200,
+     "y": 2875,
+     "w": 1500,
+     "h": 1000,
+     "why": "The 1925 viaducts, traced riverfront buildings, the river's islands and its rocks (dots)."
+    },
+    {
+     "name": "dense-traced",
+     "x": 8250,
+     "y": 3250,
+     "w": 1500,
+     "h": 1000,
+     "why": "Dense traced Sanborn buildings: many small footprints, heights and order."
+    }
+   ]
+  },
+  {
+   "name": "richmond-downtown-time-2026",
+   "args": [
+    "richmond-downtown-time",
+    "--year",
+    "2026"
+   ],
+   "width": 12000,
+   "why": "RVA-05, Richmond, 2026: same print and width as 1925.",
+   "crops": [
+    {
+     "name": "towers",
+     "x": 1725,
+     "y": 1375,
+     "w": 1500,
+     "h": 1000,
+     "why": "Downtown towers today: tall walls, roofs and occlusion."
+    },
+    {
+     "name": "interchange",
+     "x": 4050,
+     "y": 2650,
+     "w": 1500,
+     "h": 1000,
+     "why": "The I-95 and rail interchange by the river: stacked bridge decks and piers."
+    },
+    {
+     "name": "rowhouses-terrain",
+     "x": 8625,
+     "y": 4000,
+     "w": 1500,
+     "h": 1000,
+     "why": "Dense rowhouses on sloping ground: many small buildings with hillshade."
+    }
+   ]
+  },
+  {
+   "name": "gwynns-island",
+   "args": [
+    "gwynns-island"
+   ],
+   "width": 12000,
+   "why": "GWY-01, Gwynn's Island: 24 x 36 in, the print's box is 8,500 of 19,574 units, so 300 dpi would need 24,900 px; capped at 12,000 (about 145 dpi on the print).",
+   "crops": [
+    {
+     "name": "island-village",
+     "x": 9600,
+     "y": 2350,
+     "w": 1500,
+     "h": 1000,
+     "why": "Houses and roads on Gwynn's Island: Microsoft footprints, small buildings, shoreline."
+    },
+    {
+     "name": "bridge",
+     "x": 7688,
+     "y": 2950,
+     "w": 1500,
+     "h": 1000,
+     "why": "The bridge to the island and the narrow water around it."
+    },
+    {
+     "name": "steep-shore",
+     "x": 0,
+     "y": 100,
+     "w": 1500,
+     "h": 1000,
+     "why": "The steepest ground in the view, on the Piankatank's north shore: hillshade and contours."
+    },
+    {
+     "name": "open-woods",
+     "x": 3750,
+     "y": 3625,
+     "w": 1500,
+     "h": 1000,
+     "why": "Open ground: land cover fills (woods, fields) and their texture."
+    }
+   ]
+  },
+  {
+   "name": "broad-street-station-front-1943",
+   "args": [
+    "broad-street-station-front",
+    "--year",
+    "1943"
+   ],
+   "width": 8800,
+   "why": "BSS box 15, Broad Street Station (the 1943 front, modeled station and platforms): a box print is 24 x 18 in over 250 m, about 2,825 of 3,438 units; 24 in at 300 dpi gives 8,800 px.",
+   "crops": [
+    {
+     "name": "title",
+     "x": 0,
+     "y": 0,
+     "w": 2400,
+     "h": 500,
+     "why": "The year and title lettering."
+    },
+    {
+     "name": "portico",
+     "x": 3595,
+     "y": 2078,
+     "w": 1500,
+     "h": 1400,
+     "why": "The modeled station's portico, columns and dome: parts, shading, edges (a broken portico was once published)."
+    },
+    {
+     "name": "platforms",
+     "x": 6125,
+     "y": 1975,
+     "w": 1500,
+     "h": 1000,
+     "why": "Platform canopies, tracks and trains east of the station."
+    },
+    {
+     "name": "lawn-hillshade",
+     "x": 5740,
+     "y": 3020,
+     "w": 1500,
+     "h": 1000,
+     "why": "Open lawns, roads and the 2 m hillshade south of the tracks: blocky shading shows here first."
+    }
+   ]
+  },
+  {
+   "name": "lm-eiffel-tower",
+   "args": [
+    "lm-eiffel-tower"
+   ],
+   "width": 10900,
+   "why": "LMW-01, Eiffel Tower: 36 x 24 in landscape over a 5,977-unit window of 6,048; 36 in at 300 dpi gives 10,900 px.",
+   "crops": [
+    {
+     "name": "tower",
+     "x": 4700,
+     "y": 1900,
+     "w": 1500,
+     "h": 2400,
+     "why": "The tower from base to top: the lattice spire's edges and any stray dots on it."
+    },
+    {
+     "name": "bridges-river",
+     "x": 3065,
+     "y": 3042,
+     "w": 1500,
+     "h": 1000,
+     "why": "The Pont d'Iena and the Seine: bridge decks, piers and water."
+    },
+    {
+     "name": "trocadero-slope",
+     "x": 1839,
+     "y": 1884,
+     "w": 1500,
+     "h": 1000,
+     "why": "The Trocadero slope: hillshade on steep ground, park fill and paths."
+    },
+    {
+     "name": "dense-blocks",
+     "x": 1975,
+     "y": 5972,
+     "w": 1500,
+     "h": 1000,
+     "why": "Dense Paris blocks: courtyards, roofs, many small walls."
+    }
+   ]
+  }
+ ]
+}

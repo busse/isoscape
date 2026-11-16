@@ -13,7 +13,8 @@
     "build": "node bin/isoscape.js build",
     "info": "node bin/isoscape.js info",
     "test": "node --test test/*.test.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check:visual": "python3 tools/check/visual.py check"
   },
   "engines": {
     "node": ">=22.18"
