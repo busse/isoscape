@@ -19,7 +19,7 @@ import { mix, type Palette } from './palette.ts'
 import type { Region } from './region.ts'
 import { dominantGridAngle, makeView, snapBearing, type View } from './view.ts'
 import { localMetres } from './region.ts'
-import { makeTerrain, rasterize, settleWater, stillWater, type Terrain } from './terrain.ts'
+import { makeTerrain, rasterize, settleWater, stillWater, traceShore, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
 import { canopyItems, dome, partLevels, toned, trainItems } from './parts.ts'
@@ -198,6 +198,7 @@ export const buildScene = (
   rasterize(terrain, ground.filter((g) => g.kind === 'island').map((g) => g.rings), 0)
   settleWater(terrain, 30, 1.0, opts.rocks !== false)
   if (!terrain.flat) stillWater(terrain, curated.filter((h) => h.kind === 'water').map(curatedRings))
+  traceShore(terrain, ground.filter((g) => g.kind === 'water').map((g) => g.rings), ground.filter((g) => g.kind === 'island').map((g) => g.rings))
   if (extra.cover !== undefined) {
     for (let j = 0; j < terrain.ny; j++) {
       for (let i = 0; i < terrain.nx; i++) {

@@ -117,3 +117,6 @@ published print in place: redraw it as the next version (`-vN` files, catalog `v
   (trees and roofs included), and Terrain Tiles is 30 m SRTM in much of the world. Every source
   must carry its credit and license in `dem-sources.ts`; the maps, explorer and prints use them.
 - Concave footprints that interlock can form an ordering cycle, which is broken by depth.
+- With terrain, water mapped as an area narrower than a grid cell, with no grid node inside it,
+  is not drawn; where the lidar finds mapped water more than 1.5 m above the river, or a bar
+  in midstream, the shore there follows the 5 m grid (smoothed) rather than the outline.

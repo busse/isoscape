@@ -168,9 +168,15 @@ are drawn as white crests.
 
 **Land cover from NLCD**, where a region uses it, goes down first, between the bare ground
 and OSM's own areas. Each 30 m class is resampled onto the terrain grid and grouped as woods,
-evergreen woods, swamp, marsh, field, crop, scrub or barren. Each group's edge is traced
-smoothly through the grid, the same way as the shoreline, so the blocks don't show as
-squares. OSM's parks, woods and marshes are drawn on top of it, so mapped detail wins.
+evergreen woods, swamp, marsh, field, crop, scrub or barren. The groups are then blurred, a
+Gaussian of 12 m (0.4 of a 30 m cell), and a group covers the ground wherever it outweighs
+every other group and bare ground; the edge is traced with marching squares between the grid
+nodes. A diagonal edge of 30 m steps comes out within about a meter and a half of a straight
+line, so the source's blocks don't show at print size, and a single 30 m cell still keeps a
+small rounded patch of its own. Two patches that meet share one edge, with no gap or overlap
+between them. Open water and unknown cells carry no weight, so the cover runs to the shore,
+where the shoreline cuts it. OSM's parks, woods and marshes are drawn on top of it, so mapped
+detail wins.
 
 Code: `src/classify.ts`, `buildScene` in `src/scene.ts`, cover in `paintStrip` in `src/render.ts`.
 
@@ -204,9 +210,11 @@ surface, so it matches the shape you see:
   two to each of 12 steps lighter or darker (24 each way), whose edges are traced with
   marching squares between the nodes. Each band adds a thin wash on top of the one it sits
   in, so the ground shows smooth, soft shading rather than 5 m squares, and no two shades
-  meet edge to edge. The shading stops at the traced shoreline and is not drawn on the river.
+  meet edge to edge. The shading stops exactly at the traced shoreline: the water is cut out of
+  it, and its bands bend where they cross the shoreline, as the ground does. It is not drawn on
+  the river.
 - **Contours.** Marching squares every 2 m by default (`contour`), with every fifth line
-  heavier (`majorEvery`). There are no contours over water.
+  heavier (`majorEvery`). There are no contours over water: they are cut at the shoreline too.
 
 Code: `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 
@@ -257,15 +265,32 @@ Code: `riverFall` in `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 
 ## Shoreline
 
-With terrain, the water's edge is traced from the lidar-corrected water grid (marching squares
-over a lightly smoothed mask), not from OSM's outline. Open water is drawn at the river's
-surface; a grid cell that is part water and part bank is draped on the ground, so the water
-meets the bank at the bank's own height. Where the outline overlaps a steep bank, the bank
-slopes into the water instead of the water climbing the bank. Each strip draws the ground it
-laps toward the camera from that ground's own grid cells, so its shore there is the same as
-the next strip's and the shoreline has no teeth at the strip lines.
+With terrain, the water's edge follows OSM's outline, traced between the grid's nodes: each
+node holds its distance to the nearest edge of the mapped water and islands (positive over
+water, out to two cells either way), and the shoreline is drawn where that crosses zero,
+which is the outline itself, a straight edge exactly. A grid that only knows wet and dry nodes
+can put the shore only halfway between them, and a shore running slantwise across the grid
+came out as a staircase, a run of nodes long and a cell high; on a steep, exaggerated bank
+each step stood up as a tooth.
 
-Code: `paintStrip` in `src/render.ts`.
+The lidar still corrects the outline where it has to. Mapped water that the lidar finds more
+than 1.5 m above the river (a bluff the outline overlaps, a creek in its ravine), or lower
+than that but more than two cells from the outline (a bar or a rock in midstream), stays land,
+and there the shore is traced as before, through the wet and dry nodes smoothed over 3 × 3.
+Mapped water lower than that and near the outline is drawn as water.
+
+The ground meets the water on the shoreline. On the water's side of it the ground lies on the
+river's surface; on the land's side it rises from the surface to its own height one cell
+inland, in proportion to the distance. A shore cell is drawn as two pieces that meet on the
+line, land and water, and anything else draped across the line (cover, parks, roads, the
+hillshade's bands) gets a point where it crosses, so it bends there with the ground and does
+not stand clear of it, over the water behind.
+
+Narrow water follows its outline too: a canal a cell or two wide keeps its mapped banks
+instead of ending in shards cut along the grid. Water so narrow that no grid node falls in it
+(a stream mapped as an area under a cell wide) is still not drawn.
+
+Code: `shoreField` and `Terrain.z` in `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 
 ## Buildings
 
@@ -410,8 +435,18 @@ distance past its far edge. The ground in that lap is then shaded once, by the s
 painted it last, and no light streak shows along the strip lines. Where two strips' shading
 meets, both trace the same points, so there is no hairline between them.
 
+Within a strip, the water is one path: the wholly wet cells and the wet parts of shore cells
+together, so they meet without a seam. Cover and parks that lie under water (a park drawn
+around a lake) are cut out where the water is, so nothing of theirs shows through where one
+strip's water meets the next's; on a lake those seams had shown as faint lines.
+
+The ground reaches a cell past the plate's sides, and the sides are then covered in paper,
+so each side is one clean edge. (Cut by a clip, a renderer that clips each shape in turn laid
+the edge once for every shape that reached it, and a side over water showed a dotted line.)
+
 The front of the plate is a **slab**, a true cross-section of the ground along the near edge,
-with water where the cut crosses the river.
+with water where the cut crosses water at least two cells wide, from shoreline to shoreline.
+A stream narrower than that cuts no stripe down the slab.
 
 **The SVG is compact.** Coordinates are rounded to a tenth of a pixel and written relative to
 the previous point. Draped edges are simplified to a quarter pixel, and the soft edges of
