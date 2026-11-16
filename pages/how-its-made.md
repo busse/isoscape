@@ -411,7 +411,10 @@ painted it last, and no light streak shows along the strip lines. Where two stri
 meets, both trace the same points, so there is no hairline between them.
 
 The front of the plate is a **slab**, a true cross-section of the ground along the near edge,
-with water where the cut crosses the river.
+with water where the cut crosses the river. A region with no slab (`"slab": 0`, the cutaway) is
+cut square instead: the ground ends on straight lines, at the lowest point of its far edge on
+screen and the highest of its near edge, so its edge does not wander with the ground, and
+standing things are cut along the same near line.
 
 **The SVG is compact.** Coordinates are rounded to a tenth of a pixel and written relative to
 the previous point. Draped edges are simplified to a quarter pixel, and the soft edges of

@@ -221,7 +221,15 @@ export const renderSvg = (scene: Scene): Rendered => {
   // One bad coordinate must not take the whole frame with it: skip anything not finite.
   for (const it of items) for (const s of it.shapes) for (const pt of s.pts) if (pt[1] < top) top = pt[1]
   for (let n = fr.minY; n <= fr.maxY + 1e-6; n += c) for (const e of xs) { const y = drape([e, n])[1]; if (y < top) top = y }
-  const bottom = P([0, fr.minY], -slab)[1]
+  // With no slab the plate is cut square: the ground ends on straight lines, below the lowest
+  // point of its far edge and above the highest of its near edge (the frame's sides are already
+  // straight on screen), and standing things are cut along that near line. A draped edge would
+  // wander up and down with the ground.
+  const square = slab <= 0
+  const groundTop = Math.max(...xs.map((e) => drape([e, fr.maxY])[1]))
+  const groundBottom = Math.min(...front.map((pt) => pt[1]))
+  if (square && groundTop < top) top = groundTop
+  const bottom = square ? groundBottom : P([0, fr.minY], -slab)[1]
   const pad = 24
   // A dated scene carries its year as a caption above the plate, in room of its own.
   const capSize = scene.time === undefined ? 0 : Math.max(28, (x1 - x0) * 0.022)
@@ -788,12 +796,17 @@ export const renderSvg = (scene: Scene): Rendered => {
       if (foam) parts.push(`<path class="foam" d="${foam}"/>`)
     }
     // Ground that faces away from the camera can project below the front edge; cut it there.
-    out.push(`<g data-strip="${f(s.n0)}" clip-path="url(#above)">${parts.join('')}</g>`)
+    out.push(`<g data-strip="${f(s.n0)}" clip-path="url(#${square ? 'ground' : 'above'})">${parts.join('')}</g>`)
   }
 
   // ---- items, slotted between strips ---------------------------------------------------------------
   // Standing things are cut at the plate's sides and along the front ground line.
-  out.push(`<defs><clipPath id="above"><path d="${pathOf([[x0, vb[1]], [x1, vb[1]], ...front.slice().reverse()])}"/></clipPath></defs>`)
+  out.push(
+    square
+      ? `<defs><clipPath id="above"><path d="${pathOf([[x0, vb[1]], [x1, vb[1]], [x1, groundBottom], [x0, groundBottom]])}"/></clipPath>` +
+          `<clipPath id="ground"><path d="${pathOf([[x0, groundTop], [x1, groundTop], [x1, groundBottom], [x0, groundBottom]])}"/></clipPath></defs>`
+      : `<defs><clipPath id="above"><path d="${pathOf([[x0, vb[1]], [x1, vb[1]], ...front.slice().reverse()])}"/></clipPath></defs>`,
+  )
   let next = 0
   const flushTo = (nearN: number) => {
     while (next < strips.length && strips[next].n1 > nearN + 1e-6) paintStrip(strips[next++])
@@ -804,8 +817,8 @@ export const renderSvg = (scene: Scene): Rendered => {
     out.push(`<g clip-path="url(#above)">${paintItem(it)}</g>`)
   }
   flushTo(-Infinity)
-  // A crisp ink line along the front ground.
-  out.push(`<path class="edge" d="${pathOf(front, false)}"/>`)
+  // A crisp ink line along the front ground (a square plate ends in its ground's color alone).
+  if (!square) out.push(`<path class="edge" d="${pathOf(front, false)}"/>`)
   // Labels over everything, haloed in the land color so they read across lines and roofs.
   if (scene.labels !== undefined) {
     const size = Math.max(14, capSize * 0.42)

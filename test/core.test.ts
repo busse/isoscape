@@ -262,3 +262,24 @@ test('render: with terrain, a park drawn around a lake is painted under the lake
   }
   assert.ok(both > 3)
 })
+
+test('render: with no slab the plate is cut square, on straight lines, over rolling ground', async () => {
+  const { renderSvg } = await import('../src/render.ts')
+  const { buildScene } = await import('../src/scene.ts')
+  const { parseOsm } = await import('../src/osm.ts')
+  const json = JSON.stringify({ elements: [] })
+  // Ground that rolls across the frame, so a draped edge would wander up and down on screen.
+  const scene = buildScene({ ...region, snap: false, width: 300, depth: 200, slab: 0, terrain: { cell: 5 } }, parseOsm(json), pal, (lon) => 10 + 6 * Math.sin(lon * 20000))
+  const { svg } = renderSvg(scene)
+  const ground = svg.match(/<clipPath id="ground"><path d="([^"]*)"/)
+  assert.ok(ground, 'the ground has a clip of its own')
+  // The clip is a rectangle: a move, then runs (the last closes it), each straight across or
+  // straight down.
+  const nums = ground[1].replace(/^M[^l]*l/, '').replace(/z$/, '').match(/-?[\d.]+/g)!.map(Number)
+  assert.equal(nums.length, 6, ground[1])
+  for (let k = 0; k < 6; k += 2) assert.ok(nums[k] === 0 || nums[k + 1] === 0, ground[1])
+  const strips = [...svg.matchAll(/<g data-strip="[^"]*" clip-path="url\(#(\w+)\)"/g)]
+  assert.ok(strips.length > 3)
+  for (const m of strips) assert.equal(m[1], 'ground')
+  assert.ok(!svg.includes('class="edge"'), 'no wandering ink line along the front')
+})
