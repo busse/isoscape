@@ -481,7 +481,9 @@ export const buildScene = (
     const gMin = Math.min(...grounds)
     const gMean = grounds.reduce((a, b) => a + b, 0) / grounds.length
     const holder = holders.get(s)?.[0]
-    const level = seatLevel(holder === undefined ? grounds : holder.outer.map((p) => terrain.z(p)), terrain.exaggeration)
+    const level = holder === undefined
+      ? seatLevel(region.seatOnBanks === true && spansWater(s.tags, outer, (p) => onWater(sc, p)) ? bankGrounds(outer, grounds, (p) => onWater(sc, p)) : grounds, terrain.exaggeration)
+      : seatLevel(holder.outer.map((p) => terrain.z(p)), terrain.exaggeration)
     // A bridge tower's lowest mapped parts stand on the ground or water: OSM often maps a
     // tower's legs from the pier top up and leaves the pier out. A part is lowest when no part
     // of a bridge tower within `TOWER_REACH` of it starts lower (struts between the legs do).
@@ -833,6 +835,23 @@ export const seatLevel = (grounds: readonly number[], exaggeration: number): num
   const lo = Math.min(...grounds)
   const hi = Math.max(...grounds)
   return lo + (hi - lo) / (2 * Math.max(1, exaggeration))
+}
+
+/**
+ * Does a building span water? OSM says so with a `layer` of 1 or more (it stands over
+ * something), and the water under its center says what: a mill or a house built over a canal
+ * or a race. Such a building stands on the banks, and the ground under its middle is the
+ * water's bed, so it counts its height from the banks (`bankGrounds`).
+ */
+export const spansWater = (tags: Readonly<Record<string, string>>, outer: Ring, wet: (p: Vec2) => boolean): boolean => {
+  const layer = parseInt(tags.layer ?? '', 10)
+  return Number.isFinite(layer) && layer >= 1 && wet(centroid(outer))
+}
+
+/** The ground under a building's corners on land, or all of them if none is on land. */
+export const bankGrounds = (outer: Ring, grounds: readonly number[], wet: (p: Vec2) => boolean): number[] => {
+  const dry = grounds.filter((_, i) => !wet(outer[i]))
+  return dry.length > 0 ? dry : [...grounds]
 }
 
 /**

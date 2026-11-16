@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { groundCover, seatLevel, settlePrisms, type Prism } from '../src/scene.ts'
+import { bankGrounds, groundCover, seatLevel, settlePrisms, spansWater, type Prism } from '../src/scene.ts'
 import type { Vec2 } from '../src/geom.ts'
 
 const square = (x: number, y: number, s = 10): Vec2[] => [[x, y], [x + s, y], [x + s, y + s], [x, y + s]]
@@ -67,4 +67,19 @@ test("a model's footprint on water is left out; a mapped boathouse stays", async
   const ids = scene.items.map((i) => i.id).sort()
   assert.deepEqual(ids, ['m1', 'w2'])
   assert.equal(scene.stats.footprintsOnWater, 1)
+})
+
+test('a building over water counts its height from the banks', () => {
+  const outer = square(0, 0, 20)
+  const canal = (p: Vec2) => p[0] > 5 && p[0] < 15
+  const wetAll = () => true
+  assert.equal(spansWater({ layer: '1' }, outer, canal), true)
+  assert.equal(spansWater({}, outer, canal), false)
+  assert.equal(spansWater({ layer: '-1' }, outer, canal), false)
+  assert.equal(spansWater({ layer: 'federal' }, outer, canal), false)
+  assert.equal(spansWater({ layer: '1' }, outer, () => false), false)
+  const pts: Vec2[] = [[0, 0], [10, 0], [20, 0], [20, 20], [10, 20], [0, 20]]
+  assert.deepEqual(bankGrounds(pts, [9, 1, 8, 8, 1, 9], canal), [9, 8, 8, 9])
+  // A boathouse wholly on the water keeps every corner.
+  assert.deepEqual(bankGrounds(pts, [1, 1, 1, 1, 1, 1], wetAll), [1, 1, 1, 1, 1, 1])
 })

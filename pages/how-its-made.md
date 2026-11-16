@@ -397,6 +397,13 @@ steep street stays a two-story house. On flat ground nothing changes. The parts 
 building all count their heights from the level of its outline, and buildings traced from
 fire-insurance maps and lost landmarks are seated the same way.
 
+A building that spans water, one OpenStreetMap gives a `layer` of 1 or more and that has
+mapped water under its center (a mill or a house over a canal), stands on the banks: in maps
+that turn this on (`seatOnBanks`; downtown Richmond), its height counts from the ground at its
+corners on land, not from the bed of the water under it. Its walls still reach down to the
+water. In downtown Richmond this moves one building, over the Haxall Canal, from a roof below
+the bank in front of it to a roof 4 m above it.
+
 Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scene.ts`.
 
 ## Bridges

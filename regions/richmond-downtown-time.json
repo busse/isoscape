@@ -29,6 +29,7 @@
     }
   ],
   "minBuildingArea": 12,
+  "seatOnBanks": true,
   "dots": "all",
   "data": "richmond-i195-rocketts",
   "terrain": {
