@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { clipRingToRect, convexHull, separatingAxis, signedArea, simplifyRing, type Vec2 } from '../src/geom.ts'
 import { dominantGridAngle, makeView, snapBearing } from '../src/view.ts'
-import { chainBridges, extrude, rampClearance, RAMP, type Item } from '../src/scene.ts'
+import { chainBridges, extrude, junctionClearances, rampClearance, RAMP, type Item } from '../src/scene.ts'
 import { compare, paintOrder } from '../src/order.ts'
 import { assembleRings, parseOsm } from '../src/osm.ts'
 import { buildingHeights, parseLength } from '../src/classify.ts'
@@ -85,13 +85,31 @@ test('bridge ways sharing ends chain, and only grounded ends ramp', () => {
 })
 
 test('a short bridge stays low; a long one reaches its deck', () => {
-  const peak = (total: number) => Math.max(...Array.from({ length: 101 }, (_, k) => rampClearance(7, total, (total * k) / 100, true, true)))
+  const peak = (total: number) => Math.max(...Array.from({ length: 101 }, (_, k) => rampClearance(7, total, (total * k) / 100, 0, 0)))
   assert.ok(peak(30) < 1, `30 m footbridge peaks at ${peak(30)}`)
   assert.ok(peak(80) < 7 && peak(80) > 1)
   assert.equal(peak(2 * RAMP + 10), 7)
   // An end that meets another bridge stays at deck height.
-  assert.equal(rampClearance(7, 200, 0, false, true), 7)
-  assert.equal(rampClearance(7, 200, 200, false, true), 0)
+  assert.equal(rampClearance(7, 200, 0, 7, 0), 7)
+  assert.equal(rampClearance(7, 200, 200, 7, 0), 0)
+  // An end that joins a higher deck starts at its height and eases down to its own.
+  assert.equal(rampClearance(7, 200, 0, 21, 0), 21)
+  assert.equal(rampClearance(7, 200, 100, 21, 0), 7)
+})
+
+test('a ramp that joins a higher viaduct meets it at its height', () => {
+  const line = (id: string, layer: string, pts: Vec2[]) =>
+    ({ type: 'line' as const, id, tags: { highway: 'motorway_link', bridge: 'yes', layer }, points: pts })
+  // A layer-1 link from the ground onto the end of a layer-3 viaduct.
+  const link = line('l', '1', [[0, 0], [0.002, 0]])
+  const viaduct = line('v', '3', [[0.002, 0], [0.006, 0]])
+  const chains = chainBridges([link, viaduct])
+  const ends = junctionClearances(view, region, chains)
+  const li = chains.findIndex((c) => c.line.id === 'l')
+  const vi = chains.findIndex((c) => c.line.id === 'v')
+  assert.equal(ends[li].start, 0)
+  assert.equal(ends[li].end, 21)
+  assert.equal(ends[vi].start, 21)
 })
 
 test('multipolygon fragments assemble into rings', () => {

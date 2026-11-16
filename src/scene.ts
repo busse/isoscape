@@ -498,8 +498,10 @@ export const buildScene = (
 
   // ---- bridges -----------------------------------------------------------------------------
   let spans = 0
-  for (const chain of chainBridges(plans.length > 0 ? [] : bridgeLines)) {
-    const pieces = bridgePieces(view, pal, region, terrain, chain)
+  const chains = chainBridges(plans.length > 0 ? [] : bridgeLines)
+  const ends = junctionClearances(view, region, chains)
+  for (let c = 0; c < chains.length; c++) {
+    const pieces = bridgePieces(view, pal, region, terrain, chains[c], ends[c])
     spans += pieces.length
     items.push(...pieces)
   }
@@ -804,20 +806,65 @@ const pierSpacing = (region: Region, chain: BridgeChain): number => {
 /** How far a ramp runs from the ground up to full deck height, meters. */
 export const RAMP = 70
 
-/**
- * Clearance over the ground at distance `s` along a bridge `total` long, for a deck `deck` high:
- * full height, except within `RAMP` of an end that comes down to the ground, where it eases in.
- * The ramp keeps its length on a short bridge, so one shorter than two ramps never reaches full
- * height: a 30 m footbridge over a canal rises a meter or so, not into a 7 m tent.
- */
-export const rampClearance = (deck: number, total: number, s: number, rampStart: boolean, rampEnd: boolean): number => {
-  const e = Math.min(rampStart ? s : Infinity, rampEnd ? total - s : Infinity)
-  if (e >= RAMP) return deck
-  const u = Math.max(0, e / RAMP)
-  return deck * (u * u * (3 - 2 * u))
+const ease = (u: number) => {
+  const v = Math.min(1, Math.max(0, u))
+  return v * v * (3 - 2 * v)
 }
 
-const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain): Item[] => {
+/**
+ * Clearance over the ground at distance `s` along a bridge `total` long, for a deck `deck` high,
+ * given the clearance it must meet at each end: 0 where it comes down to the ground, another
+ * bridge's height where it joins one. Within `RAMP` of an end the deck eases from that end's
+ * clearance to its own. The ramp keeps its length on a short bridge, so one shorter than two
+ * ramps never reaches full height: a 30 m footbridge over a canal rises a meter or so, not into
+ * a 7 m tent.
+ */
+export const rampClearance = (deck: number, total: number, s: number, startC: number, endC: number): number => {
+  const d0 = (startC - deck) * (1 - ease(s / RAMP))
+  const d1 = (endC - deck) * (1 - ease((total - s) / RAMP))
+  return Math.max(0, deck + Math.min(0, d0, d1) + Math.max(0, d0, d1))
+}
+
+/** Length along a chain to each of its vertices, view meters. */
+const chainLengths = (view: View, chain: BridgeChain): number[] => {
+  const pts = chain.line.points.map(([lon, lat]) => view.toView(lon, lat))
+  const cum = [0]
+  for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]))
+  return cum
+}
+
+/**
+ * The clearance each chain must meet at its two ends. A grounded end meets the ground. An end
+ * that joins another bridge (a ramp onto a viaduct of another layer, a link at a fork) meets
+ * the highest of the decks there, so the two arrive at one height instead of one stopping in
+ * mid-air above or below the other.
+ */
+export const junctionClearances = (view: View, region: Region, chains: readonly BridgeChain[]): { start: number; end: number }[] => {
+  const nominal = chains.map((c) => {
+    const cum = chainLengths(view, c)
+    return { deck: deckHeight(region, c), cum, total: cum[cum.length - 1] }
+  })
+  const at = new Map<string, number>()
+  chains.forEach((c, i) => {
+    const n = nominal[i]
+    c.line.points.forEach((p, k) => {
+      const h = rampClearance(n.deck, n.total, n.cum[k], c.rampStart ? 0 : n.deck, c.rampEnd ? 0 : n.deck)
+      at.set(key(p), Math.max(at.get(key(p)) ?? 0, h))
+    })
+  })
+  return chains.map((c, i) => {
+    const pts = c.line.points
+    return {
+      start: c.rampStart ? 0 : at.get(key(pts[0])) ?? nominal[i].deck,
+      end: c.rampEnd ? 0 : at.get(key(pts[pts.length - 1])) ?? nominal[i].deck,
+    }
+  })
+}
+
+const bridgePieces = (
+  view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain,
+  ends: { start: number; end: number } = { start: chain.rampStart ? 0 : deckHeight(region, chain), end: chain.rampEnd ? 0 : deckHeight(region, chain) },
+): Item[] => {
   const spacing = pierSpacing(region, chain)
   const line = chain.line
   const t = line.tags
@@ -838,9 +885,9 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
 
   // The deck profile. A bridge runs fairly straight between its abutments, and never closer to
   // what is under it than its clearance — except where it comes down to meet the ground.
-  const clearance = (s: number) => rampClearance(deck, total, s, chain.rampStart, chain.rampEnd)
-  const startLevel = ground(0) + (chain.rampStart ? 0 : deck)
-  const endLevel = ground(total) + (chain.rampEnd ? 0 : deck)
+  const clearance = (s: number) => rampClearance(deck, total, s, ends.start, ends.end)
+  const startLevel = ground(0) + ends.start
+  const endLevel = ground(total) + ends.end
   const step = 5
   const samples = Math.max(2, Math.ceil(total / step) + 1)
   const raw: number[] = []
@@ -923,8 +970,10 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
         if (nN >= 0) continue
         const zu0 = u0 === ql0 || u0 === qr0 ? z0 : z1
         const zu1 = u1 === ql0 || u1 === qr0 ? z0 : z1
-        const lo0 = view.toScreen(u0, zu0 - FASCIA)
-        const lo1 = view.toScreen(u1, zu1 - FASCIA)
+        // Where the deck meets the ground the fascia stops at it, so a ramp lands as a ramp and
+        // not as a slab cut off square.
+        const lo0 = view.toScreen(u0, Math.min(zu0, Math.max(zu0 - FASCIA, terrain.z(u0))))
+        const lo1 = view.toScreen(u1, Math.min(zu1, Math.max(zu1 - FASCIA, terrain.z(u1))))
         const hi0 = view.toScreen(u0, zu0)
         const hi1 = view.toScreen(u1, zu1)
         // Filled and sealed, but inked only along its length: a span is one bridge, not a
