@@ -36,6 +36,13 @@ export interface Palette {
   /** Hillshade: what slopes turned to the light are washed with, and what turned away. */
   readonly shadeLight: string
   readonly shadeDark: string
+  /**
+   * Hillshade strength: the wash's opacity per step of shade toward or away from the light,
+   * and the most it may reach. A step is 1/22 of the full range of light · normal.
+   */
+  readonly shadeLightStep: number
+  readonly shadeDarkStep: number
+  readonly shadeMax: number
   /** Contour ink opacity, minor and major. */
   readonly contourMinor: number
   readonly contourMajor: number
@@ -110,6 +117,9 @@ const paper: Palette = {
   boulder: '#cbbfa8',
   shadeLight: '#fffaf0',
   shadeDark: '#4a3b26',
+  shadeLightStep: 0.045,
+  shadeDarkStep: 0.04,
+  shadeMax: 0.55,
   contourMinor: 0.16,
   contourMajor: 0.34,
   wallLit: '#ece7dc',
@@ -184,6 +194,9 @@ const night: Palette = {
   boulder: '#4a4d58',
   shadeLight: '#46526e',
   shadeDark: '#000000',
+  shadeLightStep: 0.045,
+  shadeDarkStep: 0.04,
+  shadeMax: 0.55,
   contourMinor: 0.14,
   contourMajor: 0.3,
   wallLit: '#363b4a',

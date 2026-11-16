@@ -172,17 +172,41 @@ export const rasterize = (t: Terrain, polygons: readonly (readonly Ring[])[], va
   }
 }
 
-/** Unit surface normal of the drawn (exaggerated) surface over cell (i, j). */
-export const cellNormal = (t: Terrain, i: number, j: number): [number, number, number] => {
-  const at = (ii: number, jj: number) => (t.elev[jj * t.nx + ii] - t.datum) * t.exaggeration
-  const a = at(i, j)
-  const b = at(i + 1, j)
-  const c = at(i, j + 1)
-  const d = at(i + 1, j + 1)
-  const dzdx = (b + d - a - c) / (2 * t.cell)
-  const dzdy = (c + d - a - b) / (2 * t.cell)
-  const len = Math.hypot(dzdx, dzdy, 1)
-  return [-dzdx / len, -dzdy / len, 1 / len]
+/**
+ * How much more or less light each grid node takes than flat ground: light · n − light_z, for
+ * the unit normal n of the drawn (exaggerated) surface. The surface is first smoothed once
+ * with a 3×3 binomial kernel, and the slope at a node is the central difference across its two
+ * neighbors, so the field varies smoothly from node to node and can be traced as bands.
+ */
+export const nodeShade = (t: Terrain, light: readonly [number, number, number]): Float32Array => {
+  const { nx, ny } = t
+  const z = new Float32Array(nx * ny)
+  const clampI = (i: number) => Math.max(0, Math.min(nx - 1, i))
+  const clampJ = (j: number) => Math.max(0, Math.min(ny - 1, j))
+  const raw = (i: number, j: number) => t.elev[clampJ(j) * nx + clampI(i)]
+  for (let j = 0; j < ny; j++) {
+    for (let i = 0; i < nx; i++) {
+      let sum = 0
+      for (let dj = -1; dj <= 1; dj++) {
+        for (let di = -1; di <= 1; di++) sum += raw(i + di, j + dj) * (di === 0 ? 2 : 1) * (dj === 0 ? 2 : 1)
+      }
+      z[j * nx + i] = ((sum / 16) - t.datum) * t.exaggeration
+    }
+  }
+  const out = new Float32Array(nx * ny)
+  for (let j = 0; j < ny; j++) {
+    for (let i = 0; i < nx; i++) {
+      const il = clampI(i - 1)
+      const ir = clampI(i + 1)
+      const jl = clampJ(j - 1)
+      const jr = clampJ(j + 1)
+      const dzdx = (z[j * nx + ir] - z[j * nx + il]) / ((ir - il) * t.cell)
+      const dzdy = (z[jr * nx + i] - z[jl * nx + i]) / ((jr - jl) * t.cell)
+      const len = Math.hypot(dzdx, dzdy, 1)
+      out[j * nx + i] = (-dzdx * light[0] - dzdy * light[1] + light[2]) / len - light[2]
+    }
+  }
+  return out
 }
 
 /** Is the whole cell (i, j) water? */

@@ -94,11 +94,13 @@ published print in place: redraw it as the next version (`-vN` files, catalog `v
 
 ## Known limits
 
-- The hillshade is quantized per 5 m cell, so very steep ground can look stepped.
+- The hillshade is drawn as 24 nested bands each way, traced between 5 m grid nodes, so at
+  extreme zoom a band's edge shows as a faint step in shade, and its bends as short straight
+  runs.
 - Rapids come from the lidar's water surface, read only 10 m or more from shore; a polygon
   far off from the real channel can still produce false falls.
-- Big regions make big SVGs (the I-195 to Rocketts view is 25 MB and takes a browser 10–20 s
-  to open). Use the `--png` render for quick looks.
+- Big regions make big SVGs (the I-195 to Rocketts view is about 36 MB; at 25 MB it took a
+  browser 10–20 s to open). Use the `--png` render for quick looks.
 - One bad OSM tag must never break a build: parse every numeric tag defensively (one
   building's `building:min_level` is "federal").
 - Bridge ways that fork at a junction ramp at the fork if no other bridge way touches it.

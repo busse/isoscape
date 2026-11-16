@@ -182,11 +182,16 @@ The scene's height at any point is its elevation above the lowest point in the f
 life, so the landform reads from a distance. **Buildings and bridges keep their true heights** on top
 of the exaggerated ground, so a 2.5× hill does not stretch the towers standing on it.
 
-Shading and contours are computed from the true elevation, not the exaggerated one:
+Contours are computed from the true elevation; the hillshade from the drawn, exaggerated
+surface, so it matches the shape you see:
 
-- **Hillshade.** Each cell is lit from the left and a little toward the camera. The result is
-  rounded to one of 12 steps lighter or darker, which keeps the SVG small. Very steep ground
-  can look stepped.
+- **Hillshade.** The ground is lit from the left and a little toward the camera. The light is
+  worked out at every grid node, from the surface smoothed once over its neighbors (a 3×3
+  blur), so it changes smoothly from node to node. The shading is then drawn as nested bands,
+  two to each of 12 steps lighter or darker (24 each way), whose edges are traced with
+  marching squares between the nodes. Each band adds a thin wash on top of the one it sits
+  in, so the ground shows smooth, soft shading rather than 5 m squares, and no two shades
+  meet edge to edge. The shading stops at the traced shoreline and is not drawn on the river.
 - **Contours.** Marching squares every 2 m by default (`contour`), with every fifth line
   heavier (`majorEvery`). There are no contours over water.
 
@@ -330,12 +335,20 @@ the terrain: bare ground, parks, water, roads, rail, hillshade, contours, rocks 
 Each building or bridge is painted straight after the strip that holds its front edge, so a
 hill in front of it covers it and the ground behind it does not.
 
+The next strip's parks, roads and cover lap 0.6 m back over a strip's near edge, so a strip's
+hillshade and contours are shifted the same way: each runs from just past its near edge
+(0.6 m plus the width of the edge strokes, about 1.1 m at the sample scale) to the same
+distance past its far edge. The ground in that lap is then shaded once, by the strip that
+painted it last, and no light streak shows along the strip lines. Where two strips' shading
+meets, both trace the same points, so there is no hairline between them.
+
 The front of the plate is a **slab**, a true cross-section of the ground along the near edge,
 with water where the cut crosses the river.
 
 **The SVG is compact.** Coordinates are rounded to a tenth of a pixel and written relative to
-the previous point. Draped edges are simplified to a quarter pixel. Each dot is a zero-length
-line with round caps. Even so, a big region can produce a 25 MB file. The `--png` option
+the previous point. Draped edges are simplified to a quarter pixel, and the soft edges of
+hillshade bands to half a pixel. Each dot is a zero-length
+line with round caps. Even so, a big region can produce a file of 25–45 MB. The `--png` option
 renders a raster with `rsvg-convert`. Colors and line weights come from a palette (`paper`
 or `night`).
 

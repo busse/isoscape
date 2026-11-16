@@ -21,7 +21,7 @@ under bluffs that rise 50 m to downtown, Oregon Hill and Church Hill.
 
 The widest view, `richmond-i195-rocketts`, follows the James for 7.85 km, from I-195 to
 Rocketts Landing. Every mapped building is drawn (about 6,750), as are all bridges, rapids
-and the bluffs on both banks. It is a 25 MB SVG, and `--png` renders it at 18,840 px wide.
+and the bluffs on both banks. It is a 36 MB SVG, and `--png` renders it at 18,840 px wide.
 
 ![The James through Richmond from I-195 to Rocketts Landing](docs/richmond-i195-rocketts.png)
 
