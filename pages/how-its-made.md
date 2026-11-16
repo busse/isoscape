@@ -662,7 +662,9 @@ draws them three times life size (27 m lines, 42 m cars). The lines come from
 corner in OpenStreetMap, and follows the streets between them, preferring the streets the two
 corners name (any other street costs six times as much per meter). Two streets that meet
 without sharing a node take their closest points, up to 150 m apart. A run over a viaduct
-since torn down is drawn straight. Vanished pleasure grounds (a fairground) take a sandy tint of
+since torn down is drawn straight. Where a line runs along a road bridge (within 6 m of its deck's
+edge and within about 25° of its heading, beside the deck and not past its ends), it is drawn
+on the deck, as wide as the deck allows, and no car is set on the ground under it. Vanished pleasure grounds (a fairground) take a sandy tint of
 their own, and a racetrack is a closed dirt-colored ribbon. `--streetcar-scale` overrides the
 series' scale for one build: the single-stop prints of the streetcar series use 1.5, so the
 lines read thinner up close.

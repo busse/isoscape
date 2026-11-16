@@ -285,8 +285,8 @@ export const buildScene = (
     const mid: Vec2 = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]
     return (plans.length === 0 || plans.some((r) => pointInRing(mid, r))) && !basins.some((r) => pointInRing(mid, r))
   }
-  const ribbonOf = (kind: Ribbon['kind'], line: LineFeature, width: number, today = true): Ribbon | null => {
-    const pts = line.points.map(([lon, lat]) => view.toView(lon, lat))
+  const ribbonOf = (kind: Ribbon['kind'], line: LineFeature, width: number, today = true, viewPts?: readonly Vec2[]): Ribbon | null => {
+    const pts = viewPts ?? line.points.map(([lon, lat]) => view.toView(lon, lat))
     const quads: Vec2[][] = []
     const center: Vec2[][] = []
     for (let i = 0; i + 1 < pts.length; i++) {
@@ -348,17 +348,28 @@ export const buildScene = (
     if (r) ribbons.push(r)
   }
   // Streetcar lines: a bold ribbon down the street, wider than the track, so it reads at a
-  // city-wide scale.
+  // city-wide scale. Where a line follows a road bridge, it is drawn on the deck (in
+  // `bridgePieces`), not on the ground under it.
   const tramRuns: { id: string; pts: Vec2[] }[] = []
   const tramScale = time?.history.streetcarScale ?? 1
+  const roadDecks: DeckSpan[] = []
+  for (const f of bridgeLines) {
+    if (isRail(f.tags) || skyways.has(f)) continue
+    const pts = f.points.map(([lon, lat]) => view.toView(lon, lat))
+    for (let i = 0; i + 1 < pts.length; i++) roadDecks.push({ a: pts[i], b: pts[i + 1], half: deckWidth(f.tags) / 2 })
+  }
   for (const h of curated) {
     if (h.kind !== 'streetcar') continue
     for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
-      const r = ribbonOf('tram', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, (h.width ?? 9) * tramScale)
-      if (r) ribbons.push(r)
-      tramRuns.push({ id: `${h.id}:${k}`, pts: run.map(([lon, lat]) => view.toView(lon, lat)) })
+      const pts = run.map(([lon, lat]) => view.toView(lon, lat))
+      for (const [j, part] of offDecks(pts, roadDecks).entries()) {
+        const r = ribbonOf('tram', { type: 'line', id: `${h.id}:${k}:${j}`, tags: {}, points: [] }, (h.width ?? 9) * tramScale, true, part)
+        if (r) ribbons.push(r)
+      }
+      tramRuns.push({ id: `${h.id}:${k}`, pts })
     }
   }
+  const tramWidth = 9 * tramScale
   stats.streetcarLines = curated.filter((h) => h.kind === 'streetcar').length
   stats.ribbons = ribbons.length
 
@@ -551,6 +562,8 @@ export const buildScene = (
         if (c[0] < frame.minX + 20 || c[0] > frame.maxX - 20 || c[1] < frame.minY + 20 || c[1] > frame.maxY - 20) continue
         const ux = (b[0] - a[0]) / len
         const uy = (b[1] - a[1]) / len
+        // No car is set on the ground under a bridge the line crosses on.
+        if (onDeck(c, [ux, uy], roadDecks)) continue
         const hl = 7 * tramScale
         const hw = 2.7 * tramScale
         let ring: Vec2[] = [
@@ -708,7 +721,7 @@ export const buildScene = (
   const towers = suspensionTowers(view, chains, towerParts)
   const lines = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix))))
   for (let c = 0; c < chains.length; c++) {
-    const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c))
+    const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth } : undefined)
     spans += pieces.filter((p) => p.pier !== true).length
     items.push(...pieces)
   }
@@ -737,6 +750,84 @@ export const buildScene = (
  * The features that stood in a year. Buildings by their dates (undated ones only in the
  * present; a curated `until` ends one before today); everything else by the history's era rules.
  */
+/** A segment of a road bridge's center line, view meters, with half its deck's width. */
+export interface DeckSpan { readonly a: Vec2; readonly b: Vec2; readonly half: number }
+
+/** How far, past a deck's edge, a streetcar line may run and still be taken to cross on it, meters. */
+export const TRAM_DECK_SLACK = 6
+
+/** Distance from `p` to the segment a–b. */
+const segDist = (p: Vec2, a: Vec2, b: Vec2): number => {
+  const dx = b[0] - a[0]
+  const dy = b[1] - a[1]
+  const l2 = dx * dx + dy * dy
+  const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2))
+  return Math.hypot(p[0] - a[0] - dx * t, p[1] - a[1] - dy * t)
+}
+
+/**
+ * Whether a streetcar line at `p`, heading `dir`, crosses on one of `decks`: within the deck's
+ * half width plus `TRAM_DECK_SLACK` of its center line (the line is placed on today's street,
+ * the bridge on its own way) and running along it, within about 25°. A line passing under a
+ * bridge crosses it, and is not on it.
+ */
+export const onDeck = (p: Vec2, dir: Vec2, decks: readonly DeckSpan[]): boolean => {
+  const dl = Math.hypot(dir[0], dir[1])
+  if (dl < 1e-9) return false
+  for (const d of decks) {
+    const ex = d.b[0] - d.a[0]
+    const ey = d.b[1] - d.a[1]
+    const el = Math.hypot(ex, ey)
+    if (el < 1e-9) continue
+    if (Math.abs((ex * dir[0] + ey * dir[1]) / (el * dl)) < 0.9) continue
+    // Beside the deck, not past its ends.
+    const t = ((p[0] - d.a[0]) * ex + (p[1] - d.a[1]) * ey) / (el * el)
+    if (t < 0 || t > 1) continue
+    if (segDist(p, d.a, d.b) <= d.half + TRAM_DECK_SLACK) return true
+  }
+  return false
+}
+
+/** A streetcar line's runs off the road bridges it crosses on (view meters), cut every 4 m. */
+export const offDecks = (pts: readonly Vec2[], decks: readonly DeckSpan[]): Vec2[][] => {
+  if (decks.length === 0) return [pts.slice()]
+  const runs: Vec2[][] = []
+  let cur: Vec2[] = []
+  const flush = () => {
+    if (cur.length >= 2) runs.push(cur)
+    cur = []
+  }
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const a = pts[i]
+    const b = pts[i + 1]
+    const len = Math.hypot(b[0] - a[0], b[1] - a[1])
+    const dir: Vec2 = [b[0] - a[0], b[1] - a[1]]
+    // Only a segment that comes near a deck is cut, so a line that crosses no bridge is drawn
+    // as before.
+    const near = decks.some((d) => {
+      const r = d.half + TRAM_DECK_SLACK
+      return Math.max(d.a[0], d.b[0]) + r >= Math.min(a[0], b[0]) && Math.min(d.a[0], d.b[0]) - r <= Math.max(a[0], b[0]) &&
+        Math.max(d.a[1], d.b[1]) + r >= Math.min(a[1], b[1]) && Math.min(d.a[1], d.b[1]) - r <= Math.max(a[1], b[1])
+    })
+    const n = near ? Math.max(1, Math.ceil(len / 4)) : 1
+
+    for (let k = 0; k < n; k++) {
+      const p: Vec2 = [a[0] + (dir[0] * k) / n, a[1] + (dir[1] * k) / n]
+      const q: Vec2 = [a[0] + (dir[0] * (k + 1)) / n, a[1] + (dir[1] * (k + 1)) / n]
+      const m: Vec2 = [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2]
+      if (onDeck(m, dir, decks)) {
+        if (cur.length > 0) cur.push(m)
+        flush()
+        continue
+      }
+      if (cur.length === 0) cur.push(p)
+      cur.push(q)
+    }
+  }
+  flush()
+  return runs
+}
+
 /**
  * Scene height of an absolute elevation given in a modeled building's parts (`elevation`,
  * `upTo`, a cutaway's floor). A building is not exaggerated with the ground (see "Two heights"):
@@ -1830,6 +1921,7 @@ const deckLine = (
 const bridgePieces = (
   view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain,
   dl: DeckLine, roofs: readonly Roof[] = [], towers?: readonly Tower[],
+  trams?: { readonly runs: readonly (readonly Vec2[])[]; readonly width: number },
 ): Item[] => {
   const spacing = pierSpacing(region, chain)
   const line = chain.line
@@ -1938,6 +2030,21 @@ const bridgePieces = (
       const d2 = view.toScreen(qr1, z1)
       const d3 = view.toScreen(qr0, z0)
       shapes.push({ pts: [d0, d1, d2, d3], fill: rail ? pal.rail : pal.deck, seal: true })
+      // A streetcar line that crosses on this deck is drawn on it, as wide as on the ground but
+      // no wider than the deck.
+      if (!rail && trams !== undefined) {
+        // The same test as the ground's (`onDeck`), from the deck's side: a run of the line
+        // passes within reach of this piece's middle and runs along it.
+        const mid: Vec2 = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2]
+        const along: DeckSpan[] = []
+        for (const run of trams.runs) for (let j = 0; j + 1 < run.length; j++) along.push({ a: run[j], b: run[j + 1], half: width / 2 })
+        const carried = onDeck(mid, [p1[0] - p0[0], p1[1] - p0[1]], along)
+        if (carried) {
+          const tw = Math.min(trams.width, width - 1) / 2
+          const tq = segmentQuad(p0, p1, tw, tw, 0.3)
+          if (tq !== null) shapes.push({ pts: [view.toScreen(tq[0], z0), view.toScreen(tq[1], z1), view.toScreen(tq[2], z1), view.toScreen(tq[3], z0)], fill: pal.tram, seal: true })
+        }
+      }
       shapes.push({ pts: [d0, d1], fill: 'none', line: true })
       shapes.push({ pts: [d3, d2], fill: 'none', line: true })
       if (rail) shapes.push({ pts: [view.toScreen(p0, z0), view.toScreen(p1, z1)], fill: 'none', line: true, dash: true })

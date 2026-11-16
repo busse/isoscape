@@ -44,3 +44,18 @@ test('absolute part elevations keep true meters between parts on exaggerated ter
   const plain = modelZ({ datum: 60, exaggeration: 1 }, [66])
   assert.equal(plain(79.2), 79.2 - 60)
 })
+
+test('a streetcar line that runs along a road bridge leaves the ground there; one passing under does not', async () => {
+  const { offDecks, onDeck } = await import('../src/scene.ts')
+  const deck = [{ a: [100, 0] as [number, number], b: [200, 0] as [number, number], half: 5 }]
+  // Along the bridge, 4 m off its center line: cut out between the abutments.
+  const runs = offDecks([[0, 4], [300, 4]], deck)
+  assert.equal(runs.length, 2)
+  assert.ok(runs[0][runs[0].length - 1][0] <= 102 && runs[0][runs[0].length - 1][0] >= 96)
+  assert.ok(runs[1][0][0] >= 196 && runs[1][0][0] <= 204)
+  // Crossing under it: drawn whole.
+  assert.equal(offDecks([[150, -50], [150, 50]], deck).length, 1)
+  assert.equal(onDeck([150, 0], [0, 1], deck), false)
+  // A parallel street 20 m away is not on it.
+  assert.equal(offDecks([[0, 20], [300, 20]], deck).length, 1)
+})
