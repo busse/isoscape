@@ -237,6 +237,8 @@ course, steeply only where it really drops.
 
 - Water points standing **more than 1 m above that surface**, at least two grid cells (10 m
   at the default 5 m grid) from shore, are drawn as **exposed rock**. These are the boulder fields of the falls.
+  Each boulder sits up to a third of a cell off its grid point, chosen by a hash of the point, so
+  a field of them does not read as a honeycomb in rows.
   Where a hydro-flattened river steps down, the water just above the step stands clear of a
   surface read partly below it; so a rock must also stand more than 1 m above a low value (the
   15th percentile) of the water within 30 m that is level with it or further up the channel. Otherwise every step would be drawn

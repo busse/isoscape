@@ -1063,9 +1063,11 @@ export const renderSvg = (scene: Scene): Rendered => {
       for (let j = s.j0; j < s.j1; j++) {
         for (let i = iMin; i < iMax; i++) {
           if (T.rocks[j * T.nx + i] !== 1 || onDryBed(j * T.nx + i) || nearWeir[j * T.nx + i] === 1) continue
-          const cx = T.x0 + i * c
-          const cy = T.y0 + j * c
           const h = hash(`r${i},${j}`)
+          // Off its grid node by up to a third of a cell either way, so a boulder field does not
+          // read as a honeycomb in rows.
+          const cx = T.x0 + i * c + (((h >>> 9) % 100) / 100 - 0.5) * c * 0.66
+          const cy = T.y0 + j * c + (((h >>> 16) % 100) / 100 - 0.5) * c * 0.66
           const rad = c * (0.45 + 0.3 * ((h % 100) / 100))
           const ring: Vec2[] = []
           for (let k = 0; k < 6; k++) {
