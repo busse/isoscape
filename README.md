@@ -475,7 +475,11 @@ the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, ea
 block in the bottom-right corner below the callout column (`titleblock.stamp`, place
 `corner`), named `<design>_<w>x<h>.jpg` and logged with their SHA-256 in `print/prints.json`.
 A cutaway sheet has no canvas files: its title, credit line and column all lie within the
-1.5 in a canvas mirrors round its sides.
+1.5 in a canvas mirrors round its sides. `--page` (after `--print`) writes its explorer page,
+`pages/<page.slug>.md`, from the spec's `page` (`slug`, `title`, `order`, `summary`, `intro`,
+`how`, `drafted`, and `shop` once prints sell): the sheet, the plate and its kind, every callout
+as text with how sure it is, the key, where the trains and streetcars went with their sources,
+the sources and notes, and the note on how the page was drafted.
 
 ## Making a set
 

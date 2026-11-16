@@ -2,7 +2,7 @@
 """A cutaway sheet: the isometric cutaway large, the flat section of the same cut beneath it,
 numbered callouts in a column beside them, a key to how sure each part is, sources and credits.
 
-    python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json [--out <dir>] [--png 3200] [--print]
+    python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json [--out <dir>] [--png 3200] [--print] [--page]
 
 It builds the region (isoscape build <region> --year <year> --no-archive), which writes the
 cutaway, its flat section and where each part is drawn in both (*.anchors.json), then lays the
@@ -20,6 +20,11 @@ that length. Each is named <design>_<w>x<h>.jpg (version 1 has no -vN suffix) an
 the block's fields, placement and every file's SHA-256, in print/prints.json. No canvas files:
 a canvas's 1.5 in of mirrored wrap would carry the title, the credit line and the column's text,
 all within 1.5 in of the sheet's edges, mirrored round its sides.
+
+--page writes the sheet's page in the explorer, pages/<page.slug>.md, from the same callouts,
+key, sources and notes as the sheet, with its two images (<slug>-sheet.jpg, <slug>-social.jpg)
+made from the 32 x 24 print. Like a set's page, it has no shop link until the spec's page names
+one (`shop`).
 """
 import argparse, hashlib, json, os, re, subprocess, sys, tempfile
 from PIL import Image, ImageFont
@@ -115,6 +120,7 @@ def main():
     ap.add_argument('--png', type=int, default=3200)
     ap.add_argument('--no-build', action='store_true')
     ap.add_argument('--print', action='store_true', help='also make the 300 dpi print files, stamped, into <out>/print/')
+    ap.add_argument('--page', action='store_true', help='also write pages/<page.slug>.md and its images')
     a = ap.parse_args()
     spec = json.load(open(a.spec))
     name = os.path.splitext(os.path.basename(a.spec))[0]
@@ -130,6 +136,9 @@ def main():
     sec_a = json.load(open(base + '-section.anchors.json'))
     history = json.load(open(os.path.join(ROOT, json.load(open(os.path.join(ROOT, 'regions', region + '.json')))['time']['history'])))
     conf_of = {f['id']: f.get('confidence', 'approximate') for f in history['features']}
+    for g in spec['groups']:
+        for c in g['callouts']:
+            c['_conf'] = confidence(c, conf_of)
 
     # The isometric drawing, without its year caption (the sheet has a title of its own).
     vb, iso_body = inner(iso_svg)
@@ -191,9 +200,7 @@ def main():
         out.append(f'<line x1="{x}" y1="{y + 32}" x2="{W - M}" y2="{y + 32}" stroke="{INK}" stroke-width="4"/>')
         y += 170
         for c in g['callouts']:
-            part = (c.get('iso') or {}).get('part') or (c.get('section') or {}).get('part') or ''
-            conf = c.get('confidence') or conf_of.get(part.replace('history:', '').split(':')[0], 'approximate')
-            c['_conf'] = conf
+            conf = c['_conf']
             if 'iso' in c:
                 p = anchor(c['iso'], iso_a)
                 if p is not None:
@@ -274,6 +281,56 @@ def main():
     print(f'wrote {sheet}')
     if a.print:
         prints(spec, sheet, os.path.join(a.out, 'print'))
+    if a.page:
+        page(spec, os.path.join(a.out, 'print'))
+
+
+def confidence(c, conf_of):
+    """A callout's badge: its own `confidence`, else its part's, else approximate."""
+    part = (c.get('iso') or {}).get('part') or (c.get('section') or {}).get('part') or ''
+    return c.get('confidence') or conf_of.get(part.replace('history:', '').split(':')[0], 'approximate')
+
+
+def page(spec, print_dir):
+    """pages/<slug>.md: the sheet, its callouts as text, the key, the sources and notes."""
+    import plates
+    P = spec['page']
+    slug = P['slug']
+    plate = plates.by_design()[spec['design']]
+    key = dict((k, msg.replace(': ', '; ')) for k, msg in spec['key'])      # read in a sentence
+    marks = {'drawn': 'solid', 'written': 'ring', 'approximate': 'dashed ring'}
+    out = ['---', f"title: {P['title']}", f"order: {P.get('order', 50)}", f"summary: {P['summary']}",
+           f'social: {slug}-social.jpg', '---', '', f"# {P['title']}", '',
+           f"*{plate['kind']} · Plate {plate['plate'].replace('-', '·')}*" if plate.get('kind') else f"*Plate {plate['plate'].replace('-', '·')}*", '',
+           P['intro'], '', f"![{P.get('image_alt', P['title'])}]({slug}-sheet.jpg)", '']
+    if P.get('shop'):
+        out += [f"Prints are in the [shop]({P['shop']}).", '']
+    for g in spec['groups']:
+        out += [f"## {g['title']}", '']
+        for c in g['callouts']:
+            out += [f"### {c['n']}. {c['title']}", '', c['text'], '', f"*How sure: {key[c['_conf']]}.*", '']
+    out += ["## How sure each part is", '', P.get('key_intro', ''), '']
+    out += [f"- **{marks[k].capitalize()}:** {key[k]}." for k, _ in spec['key']]
+    out += ['', P.get('marks_note', 'The same marks, small, stand before each place the trains and streetcars went.'), '']
+    if spec.get('wayfinding'):
+        out += [f"## {P.get('wayfinding_heading', 'Where the trains and streetcars went')}", '']
+        for wf in spec['wayfinding']:
+            out += [f"- {wf.get('text') or ' '.join(wf['lines'])} *({key[wf['confidence']][:1].upper() + key[wf['confidence']][1:]}. Sources: {'; '.join(wf.get('sources', [])).rstrip('.')}.)*"]
+        out += ['']
+    out += ['## Sources', '', re.sub(r'^Sources:\s*', '', spec['sources']), '', spec['notes'], '', '## How it was drawn', '', P['how'], '',
+            "More in [How it's made](how-its-made.md#cutaways).", '']
+    if P.get('drafted'):
+        out += ['---', '', f"*{P['drafted']}*", '']
+    open(os.path.join(ROOT, 'pages', f'{slug}.md'), 'w').write('\n'.join(out))
+    sheet = os.path.join(print_dir, f"{spec['design']}_32x24.jpg")
+    if os.path.exists(sheet):
+        im = Image.open(sheet)
+        im.resize((1800, 1350), Image.LANCZOS).save(os.path.join(ROOT, 'pages', f'{slug}-sheet.jpg'), quality=84, optimize=True)
+        w = im.size[0]
+        im.crop((0, 0, w, round(w / 1.905))).resize((1200, 630), Image.LANCZOS).save(os.path.join(ROOT, 'pages', f'{slug}-social.jpg'), quality=86, optimize=True)
+    else:
+        print(f'warning: no print at {sheet}; run --print first for the page images', file=sys.stderr)
+    print(f'pages/{slug}.md')
 
 
 def sha(path):
