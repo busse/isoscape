@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { groundCover, settlePrisms, type Prism } from '../src/scene.ts'
+import { groundCover, seatLevel, settlePrisms, type Prism } from '../src/scene.ts'
 import type { Vec2 } from '../src/geom.ts'
 
 const square = (x: number, y: number, s = 10): Vec2[] => [[x, y], [x + s, y], [x + s, y + s], [x, y + s]]
@@ -30,4 +30,14 @@ test('a cantilever held by a taller neighbor, and a mapped bridge, keep their ba
   assert.equal(settlePrisms([tower, pod, span]), 0)
   assert.equal(pod.base, 46)
   assert.equal(span.base, 10)
+})
+
+test('a building on exaggerated slopes counts its height from the true slope', () => {
+  // Flat ground: the ground itself.
+  assert.equal(seatLevel([4, 4, 4, 4], 2), 4)
+  // 20 m of drawn fall at 2x is 10 m of true fall: half of it shows below the roof.
+  assert.equal(seatLevel([0, 20, 20, 0], 2), 5)
+  // Unexaggerated ground: the middle of the fall.
+  assert.equal(seatLevel([0, 20], 1), 10)
+  assert.equal(seatLevel([0, 20], 0.5), 10)
 })

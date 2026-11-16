@@ -388,14 +388,16 @@ export const buildScene = (
     const h = floor === undefined ? own : { ...own, base: floor }
     if (!Number.isFinite(h.base) || !Number.isFinite(h.top)) continue
     heightSources[h.source]++
-    // Seat the building on the ground under it: walls reach down to the lowest corner, so a
-    // building on a slope shows its full height on the downhill side.
+    // Seat the building on the ground under it (`seatLevel`): walls reach down to the lowest
+    // corner, and heights count from a level set by the true slope, not the drawn one. The parts
+    // of one building all count from the level of its outline.
     const grounds = outer.map((p) => terrain.z(p))
     const gMin = Math.min(...grounds)
-    const gMax = Math.max(...grounds)
     const gMean = grounds.reduce((a, b) => a + b, 0) / grounds.length
-    const base = gMin + h.base
-    const top = Math.max(gMean + h.top, gMax + 2.5, base + 2.5)
+    const holder = holders.get(s)?.[0]
+    const level = seatLevel(holder === undefined ? grounds : holder.outer.map((p) => terrain.z(p)), terrain.exaggeration)
+    const base = h.base > 0 ? level + h.base : gMin
+    const top = Math.max(level + h.top, base + 2.5)
     const cls = buildingClass(s.tags)
     const roofs = pal.roofs[cls]
     let roof = roofs[hash(s.id) % roofs.length]
@@ -499,7 +501,7 @@ export const buildScene = (
         continue
       }
       const base = Math.min(...grounds)
-      const top = Math.max(...grounds) + (h.height ?? 10) * (ruined ? 0.45 : 1)
+      const top = Math.max(seatLevel(grounds, terrain.exaggeration) + (h.height ?? 10) * (ruined ? 0.45 : 1), base + 2.5)
       items.push(extrude(view, pal, `history:${h.id}`, outer, [], base, top, ruined ? pal.ash : pal.lost, dotsMode, h.name))
       landmarks++
     }
@@ -532,7 +534,7 @@ export const buildScene = (
       if (outer.length < 3 || !outer.every((p) => insideRect(p, frame))) continue
       const grounds = outer.map((p) => terrain.z(p))
       const base = Math.min(...grounds)
-      const top = Math.max(...grounds) + b.storeys * 3.6
+      const top = Math.max(seatLevel(grounds, terrain.exaggeration) + b.storeys * 3.6, base + 2.5)
       items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, pal.traced[b.material], dotsMode))
       ends[b.end]++
     }
@@ -656,6 +658,20 @@ export const extrude = (
     dots: dedupe(roofDots),
     ...(name === undefined ? {} : { name }),
   }
+}
+
+/**
+ * The level a building's heights count from, on ground drawn `exaggeration` times steeper
+ * than life. Its walls reach down to the lowest ground under it, and its roof stands its
+ * height above the lowest ground plus half the *true* fall across the footprint: so on the
+ * downhill side it shows what it would on the real slope (its height, plus half the fall),
+ * and the rest of the drawn relief goes into the hill on the uphill side. A two-story house
+ * on a steep street stays a two-story house. On flat ground, the level is the ground.
+ */
+export const seatLevel = (grounds: readonly number[], exaggeration: number): number => {
+  const lo = Math.min(...grounds)
+  const hi = Math.max(...grounds)
+  return lo + (hi - lo) / (2 * Math.max(1, exaggeration))
 }
 
 /**

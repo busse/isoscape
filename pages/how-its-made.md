@@ -294,8 +294,15 @@ Each build counts how many heights came from each source. A view with many guess
 right footprints and plausible but invented skylines. Joining real heights from lidar (the
 first-return surface minus bare earth) is the top item on the roadmap.
 
-On a slope, a building stands on the **lowest** ground under it, so its downhill wall shows
-its full height. The roof sits at the building's height above the average ground under it.
+On a slope, a building stands on the **lowest** ground under it, so its walls never float.
+The ground is drawn steeper than life but buildings keep their true heights, so the roof is
+set by the **true** slope, not the drawn one: it sits at the building's height above the
+lowest ground plus half the true fall across the footprint (the drawn fall divided by the
+exaggeration). On the downhill side the building shows what it would on the real hill, and
+the rest of the drawn relief goes into the hill on its uphill side, so a two-story house on a
+steep street stays a two-story house. On flat ground nothing changes. The parts of one
+building all count their heights from the level of its outline, and buildings traced from
+fire-insurance maps and lost landmarks are seated the same way.
 
 Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scene.ts`.
 
