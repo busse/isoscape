@@ -254,8 +254,14 @@ Every OSM building that lies **wholly inside the frame** and covers at least
 camera, and the roof goes on top. Courtyards work. Wall shading follows which way each wall
 faces, with the light from the left. Roof color follows the building's type: homes,
 commerce, industry or civic. Where a building is mapped as Simple 3D Buildings parts
-(`building:part`), the parts are drawn instead of the outline, except parts that are only
-roofs (`building:part=roof`), which sit on the outline as their podium. Open canopies
+(`building:part`), the parts are drawn instead of the outline if the parts that reach the
+ground cover at least half of it. Many outlines carry parts only for a crown, a tower or
+rooftop works; such an outline is drawn whole, and its parts only above its roof. Parts that
+are only roofs (`building:part=roof`) never replace the outline: it stays as their podium. A
+building is drawn whole or not at all, so parts whose outline the frame cuts are left out
+too. Nothing stands on air: a part raised off the ground (`min_height`) that nothing beside
+it holds up, and that is not mapped as a bridge, reaches down to the roof under it or to the
+ground (a crown whose shaft is missing from the data, or too small to draw). Open canopies
 (`building=roof`) are left out.
 
 Two shapes are not prisms. A **lattice tower** (`tower:construction=lattice`, such as the

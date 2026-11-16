@@ -324,10 +324,47 @@ export const buildScene = (
   const latticeHulls = lattice.map((t) => convexHull(t.outer))
   const keptParts = parts.filter((p) => !latticeHulls.some((h) => pointInRing(centroid(p.outer), h)))
   // Simple 3D Buildings: where parts describe a building, draw the parts, not the outline.
-  // Parts that are only roofs (building:part=roof) do not replace the building under them: it
-  // stays, as their podium.
-  const partCentres = keptParts.filter((p) => p.tags['building:part'] !== 'roof').map((p) => centroid(p.outer))
-  const shown = solids.filter((s) => lattice.includes(s) || !partCentres.some((c) => pointInRing(c, s.outer))).concat(keptParts)
+  // Each part belongs to the smallest outline holding its centroid. The parts replace the
+  // outline only where the parts that reach the ground cover at least half of it; many
+  // outlines carry parts for only their crown or their rooftop works, and dropping such an
+  // outline would leave its parts in the air. A kept outline is drawn whole, and its parts only
+  // above its roof. Parts that are only roofs (building:part=roof) never replace the building
+  // under them: it stays, as their podium.
+  const areaOf = (s: Solid) => Math.abs(signedArea(s.outer))
+  // Every outline holding a part's centroid, smallest first.
+  const holders = new Map<Solid, Solid[]>()
+  for (const p of keptParts) {
+    const c = centroid(p.outer)
+    const hs = solids.filter((s) => !lattice.includes(s) && pointInRing(c, s.outer)).sort((x, y) => areaOf(x) - areaOf(y))
+    if (hs.length > 0) holders.set(p, hs)
+  }
+  const replaced = new Set<Solid>()
+  let underParts = 0
+  for (const s of solids) {
+    const mine = keptParts.filter((p) => p.tags['building:part'] !== 'roof' && (holders.get(p) ?? []).includes(s))
+    if (mine.length === 0) continue
+    const grounded = mine.filter((p) => buildingHeights(p.tags, areaOf(p)).base < 0.5).map((p) => p.outer)
+    if (groundCover(s.outer, s.inners, grounded) >= PARTS_REPLACE) replaced.add(s)
+    else underParts++
+  }
+  if (underParts > 0) stats.outlinesUnderParts = underParts
+  // The height a part's own data is raised to: the roof of the outline it stands on, if drawn.
+  const floorOf = new Map<Solid, number>()
+  const inFrame = (s: Solid) => s.outer.every((p) => insideRect(p, frame))
+  const partsShown = keptParts.filter((p) => {
+    const hs = holders.get(p)
+    if (hs === undefined) return true
+    // A building is drawn whole or not at all: its parts go with an outline the frame cuts.
+    if (!inFrame(hs[0])) return false
+    const kept = hs.filter((s) => !replaced.has(s))
+    if (kept.length === 0 || isShellRoof(p.tags)) return true
+    const roofTop = Math.max(...kept.map((s) => buildingHeights(s.tags, areaOf(s)).top))
+    const own = buildingHeights(p.tags, areaOf(p))
+    if (own.top <= roofTop + 0.5) return false
+    if (own.base < roofTop) floorOf.set(p, roofTop)
+    return true
+  })
+  const shown = solids.filter((s) => !replaced.has(s)).concat(partsShown)
 
   let heightSources = { height: 0, model: 0, levels: 0, guess: 0 }
   let fresh = 0
@@ -336,15 +373,19 @@ export const buildScene = (
   // A curated site (a station's grounds, a fairground) was laid out otherwise while it stood:
   // today's buildings on it are not drawn.
   const sites = curated.filter((h) => h.kind === 'site' && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
+  // Prisms wait in `entries` until every one is placed, so that none is left standing on air.
+  const entries: (Item | { prism: Prism; make: (p: Prism) => Item })[] = []
   for (const s of shown) {
-    if (!s.outer.every((p) => insideRect(p, frame))) continue
+    if (!inFrame(s)) continue
     if (sites.length > 0 && sites.some((r) => pointInRing(centroid(s.outer), r))) continue
     const area = Math.abs(signedArea(s.outer)) - s.inners.reduce((a, h) => a + Math.abs(signedArea(h)), 0)
     if (area < minArea) continue
     const outer = orient(simplifyRing(s.outer, 0.45), true)
     if (outer.length < 3) continue
     const inners = s.inners.map((h) => orient(simplifyRing(h, 0.45), false)).filter((h) => h.length >= 3)
-    const h = buildingHeights(s.tags, area)
+    const own = buildingHeights(s.tags, area)
+    const floor = floorOf.get(s)
+    const h = floor === undefined ? own : { ...own, base: floor }
     if (!Number.isFinite(h.base) || !Number.isFinite(h.top)) continue
     heightSources[h.source]++
     // Seat the building on the ground under it: walls reach down to the lowest corner, so a
@@ -367,16 +408,23 @@ export const buildScene = (
       roof = pal.fresh
       fresh++
     }
-    if (lattice.includes(s)) items.push(spire(view, pal, s.id, latticeFootprint(outer, area), base, gMean + h.top, dotsMode, s.tags.name))
+    if (lattice.includes(s)) entries.push(spire(view, pal, s.id, latticeFootprint(outer, area), base, gMean + h.top, dotsMode, s.tags.name))
     else if (isShellRoof(s.tags)) {
       // Seat the shell on the roof of the building it stands on, if any.
       const c = centroid(outer)
       const under = solids.find((o) => o !== s && pointInRing(c, o.outer) && shown.includes(o))
       const podium = under === undefined ? 0 : buildingHeights(under.tags, Math.abs(signedArea(under.outer))).top
-      items.push(spire(view, pal, s.id, outer, gMin + podium, gMean + podium + SHELL_RISE * Math.sqrt(area), dotsMode, s.tags.name, (t) => 1 - t * 0.97, false, 4))
+      entries.push(spire(view, pal, s.id, outer, gMin + podium, gMean + podium + SHELL_RISE * Math.sqrt(area), dotsMode, s.tags.name, (t) => 1 - t * 0.97, false, 4))
+    } else {
+      const span = s.tags.building === 'bridge' || s.tags['building:part'] === 'bridge' || s.tags.man_made === 'bridge' || isBridge(s.tags)
+      const prism: Prism = { outer, base, top, foot: gMin, raised: h.base > 0, span }
+      entries.push({ prism, make: (p) => extrude(view, pal, s.id, outer, inners, p.base, p.top, roof, dotsMode, s.tags.name) })
     }
-    else items.push(extrude(view, pal, s.id, outer, inners, base, top, roof, dotsMode, s.tags.name))
   }
+  const prisms = entries.flatMap((e) => ('prism' in e ? [e.prism] : []))
+  const settled = settlePrisms(prisms)
+  if (settled > 0) stats.partsSettled = settled
+  for (const e of entries) items.push('prism' in e ? e.make(e.prism) : e)
   stats.buildings = items.length
   // Streetcars on their lines: a car every `TRAM_SPACING` meters along each run, 14 m long and
   // 3.6 m tall (a 1920s double-truck car) but 5.4 m wide, about twice a real car's width so its
@@ -610,6 +658,97 @@ export const extrude = (
   }
 }
 
+/**
+ * How much of an outline's ground the parts that reach the ground cover, from 0 to 1,
+ * sampled on a grid of about 400 points (the centroid alone for a footprint too small to
+ * sample). Holes in the outline are not ground.
+ */
+export const groundCover = (outer: Ring, inners: readonly Ring[], grounded: readonly Ring[]): number => {
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+  for (const [x, y] of outer) {
+    minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y)
+  }
+  const step = Math.max(0.25, Math.sqrt(((maxX - minX) * (maxY - minY)) / 400))
+  let inside = 0
+  let covered = 0
+  for (let y = minY + step / 2; y < maxY; y += step) {
+    for (let x = minX + step / 2; x < maxX; x += step) {
+      const p: Vec2 = [x, y]
+      if (!pointInRing(p, outer) || inners.some((h) => pointInRing(p, h))) continue
+      inside++
+      if (grounded.some((r) => pointInRing(p, r))) covered++
+    }
+  }
+  if (inside === 0) return grounded.some((r) => pointInRing(centroid(outer), r)) ? 1 : 0
+  return covered / inside
+}
+
+/** Do two footprints overlap or touch (within `tol` meters)? */
+export const footprintsMeet = (a: readonly Vec2[], b: readonly Vec2[], tol: number): boolean => {
+  const near = (p: Vec2, ring: readonly Vec2[]) => {
+    if (pointInRing(p, ring)) return true
+    for (let i = 0; i < ring.length; i++) {
+      const s = ring[i]
+      const e = ring[(i + 1) % ring.length]
+      const dx = e[0] - s[0]
+      const dy = e[1] - s[1]
+      const l2 = dx * dx + dy * dy
+      const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - s[0]) * dx + (p[1] - s[1]) * dy) / l2))
+      if (Math.hypot(p[0] - s[0] - t * dx, p[1] - s[1] - t * dy) <= tol) return true
+    }
+    return false
+  }
+  return a.some((p) => near(p, b)) || b.some((p) => near(p, a))
+}
+
+/** Do two footprints' interiors overlap? Tested at each one's centroid and at its corners pulled a tenth of the way in. */
+export const footprintsOverlap = (a: readonly Vec2[], b: readonly Vec2[]): boolean => {
+  const probes = (r: readonly Vec2[]): Vec2[] => {
+    const c = centroid(r)
+    return [c, ...r.map((p): Vec2 => [p[0] + (c[0] - p[0]) * 0.1, p[1] + (c[1] - p[1]) * 0.1])]
+  }
+  return probes(a).some((p) => pointInRing(p, b)) || probes(b).some((p) => pointInRing(p, a))
+}
+
+/** A prism about to be drawn: its footprint, its scene heights, and the ground under its foot. */
+export interface Prism { outer: Ring; base: number; top: number; foot: number; raised: boolean; span: boolean }
+
+/**
+ * Nothing stands on air. A prism the data raises off the ground (`min_height`,
+ * `building:min_level`) keeps its base if a prism beside or under it holds it there (a
+ * cantilever off a tower's side, a skyway between two), or if the data says it is a bridge
+ * (`span`). Otherwise it reaches down to the top of what is under it, or to the ground: a
+ * crown whose shaft was left out of the data, or whose shaft was too small to draw, stands on
+ * what is there. Prisms are settled from the lowest base up. Returns how many were lowered.
+ */
+export const settlePrisms = (prisms: Prism[]): number => {
+  const tol = 0.5
+  let lowered = 0
+  const order = prisms.map((p, i) => i).filter((i) => prisms[i].raised && !prisms[i].span).sort((a, b) => prisms[a].base - prisms[b].base)
+  const boxes = prisms.map((p) => {
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+    for (const [x, y] of p.outer) {
+      minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y)
+    }
+    return { minX, maxX, minY, maxY }
+  })
+  for (const i of order) {
+    const p = prisms[i]
+    if (p.base <= p.foot + tol) continue
+    const bi = boxes[i]
+    const others = prisms.filter((q, j) => j !== i && boxes[j].minX <= bi.maxX + tol && boxes[j].maxX >= bi.minX - tol && boxes[j].minY <= bi.maxY + tol && boxes[j].maxY >= bi.minY - tol)
+    const held = others.some((q) => q.base <= p.base + tol && q.top >= p.base + tol && footprintsMeet(p.outer, q.outer, tol))
+    if (held) continue
+    let support = p.foot
+    for (const q of others) if (q.top <= p.base + tol && q.top > support && footprintsOverlap(p.outer, q.outer)) support = q.top
+    if (p.base - support > tol) {
+      p.base = support
+      lowered++
+    }
+  }
+  return lowered
+}
+
 /** OSM's lattice towers: tagged as such, or a building whose pyramidal roof is its whole height. */
 export const isLatticeTower = (t: Readonly<Record<string, string>>): boolean =>
   t.building !== undefined && (t['tower:construction'] === 'lattice' || (t['roof:shape'] === 'pyramidal' && t['roof:height'] !== undefined && t['roof:height'] === t.height))
@@ -636,6 +775,8 @@ export const isShellRoof = (t: Readonly<Record<string, string>>): boolean =>
   t['building:part'] === 'roof' && ['round', 'spherical', 'circular'].includes(t['roof:shape'] ?? '') && t.height === undefined && t['min_height'] === undefined
 export const SHELL_RISE = 1.6
 /** Meters between the streetcars drawn on a line. */
+/** Parts replace their outline when the parts that reach the ground cover at least this share of it. */
+export const PARTS_REPLACE = 0.5
 export const TRAM_SPACING = 900
 
 /**
