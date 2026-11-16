@@ -141,7 +141,22 @@ python3 tools/check/previews.py https://busse.github.io/isoscape/
 
 It lists each page with a missing tag, a relative URL, an image that is not served (or not in
 the directory), not 1.91:1, not the size its tags say, or over 1 MB, and exits 1 if any has
-one. Platforms cache a preview for days or weeks after first fetching a URL; to see a fixed one
+one.
+
+To check the addresses and Link buttons in a real browser before publishing, offline:
+
+```sh
+PLAYWRIGHT_CORE=<folder of playwright-core> node tools/check/browser.mjs out/
+```
+
+It serves the directory at `/isoscape/` (a path, as GitHub Pages does) and blocks every other
+host. In headless Chrome, on a desktop window and a phone-sized one, it follows links to a
+page, a map, a year and a set, then goes Back and Forward. It reloads each kind of share address and
+opens old `#…` links and an old build's share page. It follows the static pages' links in,
+presses Link and fetches what it copied as a crawler would, and checks the shop link's tags. It
+prints PASS or FAIL for each, with screenshots in `out/check/browser/`, and says "skipped"
+without playwright-core (`npm install playwright-core` anywhere; it is not a dependency) or
+Chrome (`$CHROME`). Platforms cache a preview for days or weeks after first fetching a URL; to see a fixed one
 at once, ask for it again in Facebook's Sharing Debugger or LinkedIn's Post Inspector, or share
 the URL with a `?v=2` on the end.
 
