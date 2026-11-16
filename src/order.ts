@@ -32,15 +32,25 @@ const screenBox = (item: Item): Box => {
   return { minX, minY, maxX, maxY }
 }
 
-/** +1 when `a` paints after (in front of) `b`, −1 when before, 0 when it does not matter. */
-export const compare = (a: Item, b: Item): number => {
-  const axis: Vec2 | null = separatingAxis(a.hull, b.hull)
+/**
+ * +1 when `a` paints after (in front of) `b`, −1 when before, 0 when it does not matter.
+ *
+ * With `stacked`, two items apart on the ground, the farther one wholly above the nearer (a
+ * floor's slab beyond a pier under it, a deck beyond a train), cannot cover each other at all:
+ * every line of sight falls as it goes, so it passes over the nearer before it reaches the
+ * farther, or under the farther after it leaves the nearer. They are left unordered, so the
+ * pair cannot close a cycle with the orders that matter. Cutaways, which stack many such
+ * parts, use it; other views keep the plain rule.
+ */
+export const compare = (a: Item, b: Item, stacked = false): number => {
+  // Modeled parts that abut may overlap by the centimeter their corners were rounded to.
+  const axis: Vec2 | null = separatingAxis(a.hull, b.hull, stacked ? STACK_TOLERANCE : 1e-6)
   if (axis !== null) {
     // `axis` points from b to a. The camera sits toward −N', so a is nearer when the axis
     // has a negative N' component.
     const towardsCamera = -axis[1]
-    if (towardsCamera > 1e-6) return 1
-    if (towardsCamera < -1e-6) return -1
+    if (towardsCamera > 1e-6) return stacked && b.zMin >= a.zMax - 0.05 ? 0 : 1
+    if (towardsCamera < -1e-6) return stacked && a.zMin >= b.zMax - 0.05 ? 0 : -1
     return 0
   }
   if (a.zMin >= b.zMax - 0.05) return 1
@@ -50,7 +60,10 @@ export const compare = (a: Item, b: Item): number => {
   return a.key < b.key ? 1 : a.key > b.key ? -1 : 0
 }
 
-export const paintOrder = (items: readonly Item[], cell = 96): Item[] => {
+/** How far (meters) two footprints may overlap and still count as apart, with `stacked`. */
+export const STACK_TOLERANCE = 0.03
+
+export const paintOrder = (items: readonly Item[], cell = 96, stacked = false): Item[] => {
   const n = items.length
   const boxes = items.map(screenBox)
   // Spatial hash on screen boxes, so only near neighbors are compared.
@@ -79,7 +92,7 @@ export const paintOrder = (items: readonly Item[], cell = 96): Item[] => {
         const bi = boxes[i]
         const bj = boxes[j]
         if (bi.maxX <= bj.minX || bj.maxX <= bi.minX || bi.maxY <= bj.minY || bj.maxY <= bi.minY) continue
-        const c = compare(items[i], items[j])
+        const c = compare(items[i], items[j], stacked)
         if (c > 0) { after[j].push(i); indegree[i]++ }
         else if (c < 0) { after[i].push(j); indegree[j]++ }
       }

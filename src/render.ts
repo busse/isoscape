@@ -166,7 +166,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   /** Water lies on the river's surface, wherever its outline reaches. */
   const drapeWater = (pt: Vec2) => P(pt, T.waterZ(pt))
 
-  const items = paintOrder(scene.items)
+  const items = paintOrder(scene.items, 96, scene.cut !== undefined)
   const close = view.scale >= CLOSE_RAIL
 
   // ---- the frame on screen -------------------------------------------------------------------

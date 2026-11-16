@@ -55,6 +55,8 @@ export interface SectionRendered {
   readonly viewBox: readonly [number, number, number, number]
   /** Screen boxes of the drawn parts, by item id, for callouts: [minX, minY, maxX, maxY]. */
   readonly anchors: Record<string, readonly [number, number, number, number]>
+  /** How to place a point by meters along the plane and elevation: x = (x0 + s) × scale, y = −(elevation − datum) × exaggeration × scale. */
+  readonly frame: { readonly x0: number; readonly scale: number; readonly datum: number; readonly exaggeration: number }
 }
 
 /** Draw a section scene (`buildScene` with `section`) as SVG. */
@@ -68,7 +70,7 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
   const along = (s: number): Vec2 => [pl.p[0] + pl.u[0] * s, pl.p[1] + pl.u[1] * s]
   const P = (s: number, z: number): Vec2 => view.toScreen(along(s), z)
   const zOf = (e: number) => (e - T.datum) * T.exaggeration
-  const items = paintOrder(scene.items)
+  const items = paintOrder(scene.items, 96, true)
   // The ground along the plane, dug out under whatever the building cut puts below it.
   const step = 0.5
   const ground: [number, number][] = []
@@ -151,7 +153,7 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
     ...out,
     `</svg>`,
   ].join('\n')
-  return { svg, viewBox: vb, anchors }
+  return { svg, viewBox: vb, anchors, frame: { x0: pl.p[0], scale: view.scale, datum: T.datum, exaggeration: T.exaggeration } }
 }
 
 /** Platforms stand this high over the rails in the section (approximate: no drawing gives it). */
@@ -175,7 +177,7 @@ const paintItem = (it: Item): string => {
 /** Grow the anchor box of an item's part (its id, less any `:near` or piece suffix). */
 export const anchorOf = (anchors: Record<string, [number, number, number, number]>, it: Item): void => {
   if (it.shapes.length === 0) return
-  const key = it.id.replace(/:near$/, '')
+  const key = it.id.replace(/\/\d+$/, '').replace(/(:near)?(:base)?$/, '')
   let box = anchors[key]
   for (const s of it.shapes) for (const [x, y] of s.pts) {
     if (box === undefined) box = anchors[key] = [x, y, x, y]

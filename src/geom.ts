@@ -205,7 +205,7 @@ export const pointInPolygon = (p: Vec2, rings: readonly (readonly Vec2[])[]): bo
  * Do two convex polygons' interiors overlap? If not, returns the separating axis as a unit
  * normal pointing from `b` toward `a`.
  */
-export const separatingAxis = (a: readonly Vec2[], b: readonly Vec2[]): Vec2 | null => {
+export const separatingAxis = (a: readonly Vec2[], b: readonly Vec2[], eps = 1e-6): Vec2 | null => {
   for (const poly of [a, b]) {
     for (let i = 0; i < poly.length; i++) {
       const p = poly[i]
@@ -215,8 +215,8 @@ export const separatingAxis = (a: readonly Vec2[], b: readonly Vec2[]): Vec2 | n
       const n: Vec2 = [(q[1] - p[1]) / len, -(q[0] - p[0]) / len]
       const [aMin, aMax] = projectOnto(a, n)
       const [bMin, bMax] = projectOnto(b, n)
-      if (aMin >= bMax - 1e-6) return n
-      if (bMin >= aMax - 1e-6) return [-n[0], -n[1]]
+      if (aMin >= bMax - eps) return n
+      if (bMin >= aMax - eps) return [-n[0], -n[1]]
     }
   }
   return null

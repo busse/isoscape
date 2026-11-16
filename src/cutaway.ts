@@ -252,6 +252,8 @@ export const behind = (pl: CutPlane): HalfSpace => ({ n: [pl.n[0], pl.n[1], 0], 
 export const inFront = (pl: CutPlane): HalfSpace => ({ n: [-pl.n[0], -pl.n[1], 0], d: -(pl.n[0] * pl.p[0] + pl.n[1] * pl.p[1]) })
 /** Everything at or below scene height z. */
 export const below = (z: number): HalfSpace => ({ n: [0, 0, 1], d: z })
+/** Everything at or above scene height z. */
+export const above = (z: number): HalfSpace => ({ n: [0, 0, -1], d: -z })
 /** Everything no more than `depth` meters behind the plane. */
 export const within = (pl: CutPlane, depth: number): HalfSpace => ({ n: [-pl.n[0], -pl.n[1], 0], d: depth - (pl.n[0] * pl.p[0] + pl.n[1] * pl.p[1]) })
 

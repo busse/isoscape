@@ -98,11 +98,13 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
 
     # ---- floors ---------------------------------------------------------------------------
     for k, (ring, what) in enumerate([
-        (rect(725, 880, 2572, 1600), 'the main block'),
-        (LL([P(1850, 880), P(2572, 880), P(2572, 838), P(2330, 712), P(1850, 712)]), 'the east wing\'s back, with its cut corner'),
-        (LL([P(725, 880), P(1450, 880), P(1450, 755), P(1000, 755)]), 'the west wing\'s back, with its cut corner'),
-        (rect(1450, 700, 1850, 880), 'the concourse vestibule'),
-        (rect(1850, 575, 2330, 712), 'Enclosed Concourse Passage No. 2'),
+        (rect(1305, 880, 2549, 1441), 'the hall and the east wing'),
+        (rect(1494, 1441, 2549, 1577), 'the vestibule and the east wing\'s front'),
+        (LL([P(1860, 880), P(2549, 880), P(2549, 848), P(2326, 735), P(1860, 735)]), 'the east wing\'s back, with its cut corner'),
+        (rect(1305, 755, 1463, 880), 'the rooms beside the concourse vestibule'),
+        (rect(1463, 700, 1837, 880), 'the concourse vestibule'),
+        (rect(1837, 735, 1860, 880), 'the concourse vestibule\'s east side'),
+        (rect(1860, 598, 2307, 712), 'Enclosed Concourse Passage No. 2'),
     ]):
         cp(f'floor-{k + 1}', 'Broad Street Station: first floor', ring, -0.5, 0, 'floor', 'drawn',
            f'The first floor of {what}. {PLAN} Thickness approximate.', plan_src)
@@ -121,12 +123,11 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
     # ---- outer walls ------------------------------------------------------------------------
     T = 23  # 0.9 m
     outer = [
-        ('front-west', (725, 1600 - T / 2), (1305, 1600 - T / 2), WING_TOP),
         ('front-east', (1995, 1600 - T / 2), (2572, 1600 - T / 2), WING_TOP),
         ('east', (2572 - T / 2, 1600), (2572 - T / 2, 838), WING_TOP),
         ('east-corner', (2572 - T / 2, 838), (2330, 712 + T / 2), WING_TOP),
         ('east-back', (2330, 712 + T / 2), (1860, 712 + T / 2), WING_TOP),
-        ('passage-2-back', (1850, 575 + T / 2), (2330, 575 + T / 2), 6.5),
+        ('passage-2-back', (1860, 575 + T / 2), (2330, 575 + T / 2), 6.5),
         ('passage-2-end', (2330 - T / 2, 575), (2330 - T / 2, 712), 6.5),
     ]
     for id_, p, q, top in outer:
@@ -136,9 +137,9 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
     # the cut, as solid blocks: nothing of their insides shows.
     cp('west-wing', 'Broad Street Station: west wing', LL([P(725, 1600), P(1305, 1600), P(1305, 755), P(1000, 755), P(725, 880)]), BSMT, WING_TOP, 'stone', 'drawn',
        'The west wing (the lunch room, dining room and kitchen, and the white men\'s rooms), drawn as a solid block: the cut does not open it. ' + PLAN + ' ' + SECT, sect_src)
-    cp('passage-1', 'Broad Street Station: Enclosed Concourse Passage No. 1', rect(1160, 575, 1450, 755), -0.5, 6.5, 'stone', 'drawn',
+    cp('passage-1', 'Broad Street Station: Enclosed Concourse Passage No. 1', rect(1160, 575, 1440, 755), -0.5, 6.5, 'stone', 'drawn',
        'Enclosed Concourse Passage No. 1, as a solid block. ' + PLAN_HT, plan_src)
-    cp('entrance-hall-1', 'Broad Street Station: Entrance Hall No. 1', rect(1305, 1441, 1500, 1600), BSMT, FRONT_TOP, 'stone', 'drawn',
+    cp('entrance-hall-1', 'Broad Street Station: Entrance Hall No. 1', rect(1305, 1471, 1494, 1577), BSMT, FRONT_TOP, 'stone', 'drawn',
        'Entrance Hall No. 1, with its stair and elevator to the offices, as a solid block. ' + PLAN + ' ' + SECT, sect_src)
 
     # ---- the front block over the vestibule ----------------------------------------------------
@@ -149,15 +150,15 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
         cp(f'front-door-{k + 1}', 'Broad Street Station: front doors', rect(x0, 1577, x1, 1600), 4.5, FRONT_TOP, 'stone', 'drawn',
            'The wall over one of the doors from the portico into Vestibule No. 1. Doors from the plan; their height is approximate.', sect_src)
     for x in (1500, 1800):
-        cp(f'vestibule-1-wall-{x}', 'Broad Street Station: Vestibule No. 1', rect(x - 6, 1471, x + 6, 1577), 0, FRONT_TOP, 'plaster', 'drawn',
+        cp(f'vestibule-1-wall-{x}', 'Broad Street Station: Vestibule No. 1', rect(x - 6, 1471, x + 6, 1577), 0, FRONT_TOP - 0.6, 'plaster', 'drawn',
            'A side wall of Vestibule No. 1, between it and an entrance hall. ' + PLAN + ' ' + SECT, sect_src)
     for k, x in enumerate((1600, 1700)):
         cp(f'vestibule-1-column-{k + 1}', 'Broad Street Station: Vestibule No. 1', disc(x, 1515, 22), 0, L2, 'stone', 'drawn',
            'One of the two columns of Vestibule No. 1. ' + PLAN_HT, plan_src)
     for k, z in enumerate((L2, L3, L4)):
-        cp(f'front-floor-{k + 2}', 'Broad Street Station: offices over the vestibule', rect(1500, 1441, 1800, 1577), z - 0.4, z, 'floor', 'drawn',
+        cp(f'front-floor-{k + 2}', 'Broad Street Station: offices over the vestibule', rect(1506, 1471, 1794, 1577), z - 0.4, z, 'floor', 'drawn',
            ('The bridge passage over the vestibule (second-floor plan, Plate 16).' if k == 0 else 'An office floor over the vestibule.') + ' ' + SECT, [P16, P17, P18])
-    cp('front-roof', 'Broad Street Station: roof over the vestibule', rect(1500, 1441, 1800, 1577), FRONT_TOP - 0.6, FRONT_TOP, 'stone', 'approximate',
+    cp('front-roof', 'Broad Street Station: roof over the vestibule', rect(1494, 1471, 1806, 1577), FRONT_TOP - 0.6, FRONT_TOP, 'stone', 'approximate',
        'The roof over the front block. Height scaled from section C-C; its build-up is approximate.', sect_src)
     cp('entrance-hall-2-wall', 'Broad Street Station: Entrance Hall No. 2', wall((1960, 1441), (1960, 1577), 12), 0, L2, 'plaster', 'drawn',
        'The wall between Entrance Hall No. 2 and the White Women\'s room. ' + PLAN_HT, plan_src)
@@ -240,21 +241,25 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
     # Partitions: center lines in plate px, 8 px (0.3 m) thick, up to the second floor.
     parts = [
         ('band-back', (2085, 955), (2085, 1345)), ('band-1', (1985, 1100), (2085, 1100)), ('band-2', (1985, 1210), (2085, 1210)),
-        ('cwr-top-1', (2085, 955), (2190, 955)), ('cwr-top-2', (2250, 955), (2565, 955)), ('cwr-bottom', (1960, 1347), (2565, 1347)),
+        ('cwr-top-1', (2085, 955), (2190, 955)), ('cwr-top-2', (2250, 955), (2549, 955)), ('cwr-bottom', (1985, 1347), (2549, 1347)),
         ('cwr-east-1', (2435, 955), (2435, 1110)), ('cwr-east-2', (2435, 1180), (2435, 1347)),
-        ('strip-1', (2435, 1090), (2565, 1090)), ('strip-2', (2435, 1190), (2565, 1190)),
-        ('front-1', (2195, 1347), (2195, 1580)), ('front-2', (2295, 1347), (2295, 1580)), ('front-3', (2440, 1347), (2440, 1580)),
-        ('front-4', (2440, 1500), (2560, 1500)), ('matron', (2195, 1420), (2295, 1420)),
-        ('back-1', (1960, 724), (1960, 955)), ('back-2', (2060, 724), (2060, 955)), ('back-3', (2200, 724), (2200, 955)),
-        ('back-4', (2320, 724), (2320, 955)), ('parcel', (2060, 900), (2200, 900)), ('dining', (2320, 820), (2440, 820)),
-        ('pantry-1', (2440, 790), (2440, 955)), ('pantry-2', (2440, 870), (2560, 870)),
-        ('vestibule-7', (1870, 870), (1960, 955)), ('vestibule-6b', (1837, 712), (1837, 870)),
+        ('strip-1', (2435, 1090), (2549, 1090)), ('strip-2', (2435, 1190), (2549, 1190)),
+        ('front-1', (2195, 1347), (2195, 1577)), ('front-2', (2295, 1347), (2295, 1577)), ('front-3', (2440, 1347), (2440, 1577)),
+        ('front-4', (2440, 1500), (2549, 1500)), ('matron', (2195, 1420), (2295, 1420)),
+        ('back-1', (1960, 735), (1960, 955)), ('back-2', (2060, 735), (2060, 955)), ('back-3', (2200, 735), (2200, 955)),
+        ('back-4', (2320, 735), (2320, 955)), ('parcel', (2060, 900), (2200, 900)), ('dining', (2320, 820), (2440, 820)),
+        ('pantry-1', (2440, 800), (2440, 955)), ('pantry-2', (2440, 870), (2549, 870)),
+        ('vestibule-7', (1870, 870), (1960, 955)),
     ]
     for id_, p, q in parts:
+        # Each stops half its thickness short at both ends, so it meets its neighbor's face.
+        l = math.hypot(q[0] - p[0], q[1] - p[1])
+        u = ((q[0] - p[0]) / l * 4, (q[1] - p[1]) / l * 4)
+        p, q = (p[0] + u[0], p[1] + u[1]), (q[0] - u[0], q[1] - u[1])
         cp(f'partition-{id_}', WING, wall(p, q, 8), 0, L2, 'plaster', 'drawn',
            'A partition of the first floor: around the Colored Waiting Room, the counters and lobbies, baggage and parcel check, Lunch Room No. 2, toilets and stores. ' + PLAN_HT, plan_src)
     for k, y in enumerate((1060, 1205)):
-        cp(f'cwr-bench-{k + 1}', 'Broad Street Station: Colored Waiting Room', rect(2170, y - 13, 2390, y + 13), 0, 0.9, 'wood', 'drawn',
+        cp(f'cwr-bench-{k + 1}', 'Broad Street Station: Colored Waiting Room', rect(2170, y - 13, 2390, y + 13), 0.02, 0.9, 'wood', 'drawn',
            'A long bench of the Colored Waiting Room, as the plan draws it. Height approximate.', plan_src)
     cp('cwr-floor-mark', 'Broad Street Station: Colored Waiting Room', rect(2095, 965, 2425, 1337), 0, 0.02, 'floor', 'drawn',
        'The Colored Waiting Room, in the east wing, opposite the lunch room across the White Waiting Room: Virginia law kept Black and white passengers apart. ' + PLAN, plan_src + [ARCHIPEDIA])
@@ -267,7 +272,7 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
     # ---- the concourse vestibule ---------------------------------------------------------------
     VEST = 'Broad Street Station: concourse vestibule'
     for x0, x1 in ((1440, 1463), (1837, 1860)):
-        cp(f'vestibule-6-wall-{x0}', VEST, rect(x0, 700, x1, 870), 0, WING_TOP, 'plaster', 'drawn', 'A side wall of the vestibule to the concourse (Vestibule No. 6). ' + PLAN + ' ' + SECT, sect_src)
+        cp(f'vestibule-6-wall-{x0}', VEST, rect(x0, 700, x1, 870), 0, WING_TOP - 0.6, 'plaster', 'drawn', 'A side wall of the vestibule to the concourse (Vestibule No. 6). ' + PLAN + ' ' + SECT, sect_src)
     for k, x in enumerate((1600, 1700)):
         cp(f'vestibule-6-column-{k + 1}', VEST, disc(x, 785, 22), 0, 9.0, 'stone', 'drawn', 'One of the two columns of the vestibule to the concourse. ' + PLAN_HT, plan_src)
     cp('vestibule-6-roof', VEST, rect(1440, 700, 1860, 846), WING_TOP - 0.6, WING_TOP, 'stone', 'approximate',
@@ -295,7 +300,7 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
             part(f'bss-c-concourse-west-{k + 1}-{nm}', CON, LL([ab(a0, q0), ab(a0 + WT, q0), ab(a0 + WT, q1), ab(a0, q1)]), z1 - z0, 'plaster',
                  'The concourse\'s west wall, with one of its eleven tall windows (per the 1919 article and the National Register nomination); window sizes approximate.',
                  [AMAR, NR], only='cutaway', elevation=FF + z0, confidence='written')
-    part('bss-c-concourse-end', CON, LL([ab(a0, b1 - WT), ab(a1, b1 - WT), ab(a1, b1), ab(a0, b1)]), 8.4, 'plaster', 'The far end wall of the concourse. Approximate.', [AMAR],
+    part('bss-c-concourse-end', CON, LL([ab(a0 + WT, b1 - WT), ab(a1 - WT, b1 - WT), ab(a1 - WT, b1), ab(a0 + WT, b1)]), 8.4, 'plaster', 'The far end wall of the concourse. Approximate.', [AMAR],
          only='cutaway', elevation=FF, confidence='approximate')
     part('bss-c-concourse-roof', CON, LL([ab(a0, b0), ab(a1, b0), ab(a1, b1), ab(a0, b1)]), 0.6, 'stone',
          'The concourse roof, over an elliptical barrel vault (1919 article; National Register nomination). Height approximate.',

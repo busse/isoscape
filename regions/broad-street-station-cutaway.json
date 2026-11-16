@@ -2,17 +2,17 @@
   "title": "Broad Street Station, 1943: cut down the middle",
   "data": "broad-street-station",
   "center": [
-    -77.4654862,
-    37.5611825
+    -77.4657119,
+    37.5610154
   ],
-  "width": 175.0,
-  "depth": 135.0,
+  "width": 208.0,
+  "depth": 115.0,
   "bearing": 318.0,
   "snap": false,
   "scale": 10,
   "squash": 0.6,
   "exaggeration": 1.0,
-  "slab": 12,
+  "slab": 6,
   "palette": "paper",
   "minBuildingArea": 12,
   "dots": "none",

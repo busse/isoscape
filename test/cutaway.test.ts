@@ -108,3 +108,33 @@ test('a part says how it is known, approximate unless it says otherwise', () => 
   assert.equal(confidenceOf({ confidence: 'drawn' }), 'drawn')
   assert.equal(confidenceOf({ confidence: 'written' }), 'written')
 })
+
+test('a footprint pushed out keeps its corners square', async () => {
+  const { offsetConvex } = await import('../src/cutaway.ts')
+  const out = offsetConvex(box, 1)
+  assert.deepEqual(out.map((p) => p.map((v) => Math.round(v * 1e9) / 1e9)), [[-1, -1], [5, -1], [5, 3], [-1, 3]])
+})
+
+test('long boxes are cut into short pieces along their length', async () => {
+  const { shortPieces, BOX_PIECE } = await import('../src/cutaway-scene.ts')
+  const pieces = shortPieces({ id: 'car', ring: [[0, 0], [26, 0], [26, 3], [0, 3]], z0: 0, z1: 4, tone: 'coach' })
+  assert.equal(pieces.length, Math.ceil(26 / BOX_PIECE))
+  assert.deepEqual(pieces[0].ring[1], [26 / pieces.length, 0])
+  assert.equal(pieces[pieces.length - 1].id, `car/${pieces.length - 1}`)
+  assert.equal(shortPieces({ id: 'cab', ring: [[0, 0], [4, 0], [4, 3], [0, 3]], z0: 0, z1: 4, tone: 'engine' }).length, 1)
+})
+
+test('stacked: a part wholly above a nearer one is left unordered', async () => {
+  const { compare } = await import('../src/order.ts')
+  const item = (n0: number, n1: number, z0: number, z1: number) => ({
+    id: 'x', kind: 'building' as const, hull: [[0, n0], [1, n0], [1, n1], [0, n1]] as Vec2[], zMin: z0, zMax: z1, key: (n0 + n1) / 2, shapes: [], dots: [],
+  })
+  const near = item(0, 1, 0, 4)
+  const farHigh = item(2, 3, 6, 8)
+  const farLow = item(2, 3, 0, 8)
+  assert.equal(compare(near, farHigh), 1)
+  assert.equal(compare(near, farHigh, true), 0)
+  assert.equal(compare(near, farLow, true), 1)
+  // Footprints that overlap by a rounding centimeter still count as apart.
+  assert.equal(compare(item(0, 2.01, 0, 4), farLow, true), 1)
+})

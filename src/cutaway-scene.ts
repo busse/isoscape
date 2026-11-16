@@ -10,10 +10,10 @@ import type { HistoryFeature } from './history.ts'
 import type { Palette } from './palette.ts'
 import { boxItem, domeProfile, toned, type Box } from './parts.ts'
 import type { Cutaway } from './region.ts'
-import type { Item } from './scene.ts'
+import type { Item, Shape } from './scene.ts'
 import type { View } from './view.ts'
 import {
-  behind, clipAll, cutPlane, isConvex, prism, revolve, sectionOf, sideOf, solidItem, splitSolids, stair, unionOutline, within,
+  above, behind, below, clipAll, clipSolid, cutPlane, isConvex, prism, revolve, sectionOf, sideOf, solidItem, splitSolids, stair, unionOutline, within,
   type CutPlane, type Solid, type Tones,
 } from './cutaway.ts'
 
@@ -62,7 +62,7 @@ export interface CutawayResult {
  */
 export const cutawayItems = (
   view: View, pal: Palette, cut: Cutaway, parts: readonly PlacedPart[], boxes: readonly Box[],
-  opts: { keepZ?: number; section?: boolean; outlineRings?: readonly Ring[]; ground: (p: Vec2) => number },
+  opts: { keepZ?: number; floorZ?: number; section?: boolean; outlineRings?: readonly Ring[]; ground: (p: Vec2) => number },
 ): CutawayResult => {
   const through = view.toView(cut.through[0], cut.through[1])
   const plane = cutPlane(through, cut.bearing, view.bearing, cut.remove)
@@ -97,10 +97,18 @@ export const cutawayItems = (
     }
     stats.cutParts++
     const { back, front } = splitSolids(solids, plane, opts.keepZ)
-    const b = solidItem(view, tones, id, back, p.h.name)
-    if (b !== null) items.push(b)
-    const f = solidItem(view, tones, `${id}:near`, front, p.h.name)
-    if (f !== null) items.push(f)
+    // A part that runs through the floor is drawn as two items, above and below it, so it
+    // takes its place in the paint order on each side of the floor's slab.
+    for (const [list, suffix] of [[back, ''], [front, ':near']] as const) {
+      const parts = opts.floorZ === undefined ? [{ s: list, tag: '' }] : [
+        { s: list.map((x) => clipSolid(x, below(opts.floorZ!))).filter((x): x is Solid => x !== null), tag: ':base' },
+        { s: list.map((x) => clipSolid(x, above(opts.floorZ!))).filter((x): x is Solid => x !== null), tag: '' },
+      ]
+      for (const { s, tag } of parts) {
+        const it = solidItem(view, tones, `${id}${suffix}${tag}`, s, p.h.name)
+        if (it !== null) items.push(it)
+      }
+    }
   }
   for (const b of boxes) {
     if (opts.section) {
@@ -114,7 +122,10 @@ export const cutawayItems = (
       stats.lifted++
       continue
     }
-    items.push(boxItem(view, pal, b))
+    // Long boxes (a car, a run of canopy) are cut into short pieces, so each piece takes its
+    // own place among the stairs and the concourse it passes.
+    const pieces = shortPieces(b)
+    pieces.forEach((piece, k) => items.push(pieces.length === 1 ? boxItem(view, pal, piece) : seamless(view, boxItem(view, pal, piece), piece, k > 0, k + 1 < pieces.length)))
   }
   if (!opts.section && opts.outlineRings !== undefined && opts.outlineRings.length > 0) {
     let k = 0
@@ -166,4 +177,47 @@ const outlineItem = (view: View, pal: Palette, id: string, a: Vec2, b: Vec2, gro
     shapes: [{ pts: [view.toScreen(a, za), view.toScreen(b, zb)], fill: 'none', line: true, stroke: { color: pal.cutOutline, width: pal.lineWidth * 2, dash: pal.cutOutlineDash } }],
     dots: [],
   }
+}
+
+/** Boxes are cut into pieces no longer than this, in cutaways. */
+export const BOX_PIECE = 7
+
+/** A box's pieces along its first edge, each at most `BOX_PIECE` long (the box itself if short). */
+export const shortPieces = (b: Box): Box[] => {
+  const [p0, p1, p2, p3] = b.ring
+  if (b.ring.length !== 4) return [b]
+  const len = Math.hypot(p1[0] - p0[0], p1[1] - p0[1])
+  const n = Math.ceil(len / BOX_PIECE - 1e-9)
+  if (n <= 1) return [b]
+  const at = (a: Vec2, c: Vec2, t: number): Vec2 => [a[0] + (c[0] - a[0]) * t, a[1] + (c[1] - a[1]) * t]
+  return Array.from({ length: n }, (_, k) => ({
+    ...b,
+    id: `${b.id}/${k}`,
+    ring: [at(p0, p1, k / n), at(p0, p1, (k + 1) / n), at(p3, p2, (k + 1) / n), at(p3, p2, k / n)],
+  }))
+}
+
+/**
+ * A piece of a cut box drawn without ink where it meets its neighbors: every face is sealed in
+ * its own color, and only the edges that are not on a joint are inked, so the box reads whole.
+ */
+const seamless = (view: View, it: Item, b: Box, joinStart: boolean, joinEnd: boolean): Item => {
+  const [p0, p1, p2, p3] = b.ring
+  const joints: Vec2[] = []
+  for (const z of [b.z0, b.z1]) {
+    if (joinStart) joints.push(view.toScreen(p0, z), view.toScreen(p3, z))
+    if (joinEnd) joints.push(view.toScreen(p1, z), view.toScreen(p2, z))
+  }
+  const onJoint = (q: Vec2) => joints.some((j) => Math.hypot(j[0] - q[0], j[1] - q[1]) < 1e-6)
+  const shapes: Shape[] = []
+  for (const sh of it.shapes) {
+    shapes.push({ pts: sh.pts, fill: sh.fill, seal: true })
+    for (let i = 0; i < sh.pts.length; i++) {
+      const a = sh.pts[i]
+      const c = sh.pts[(i + 1) % sh.pts.length]
+      if (onJoint(a) && onJoint(c)) continue
+      shapes.push({ pts: [a, c], fill: 'none', line: true })
+    }
+  }
+  return { ...it, shapes }
 }

@@ -507,7 +507,7 @@ export const buildScene = (
         .map((h) => offsetConvex(orient(toViewRing(view, h.ring!), true), cut.outline?.offset ?? 0))
       const keepZ = cut.floor !== undefined && cut.keep !== undefined ? zOf(cut.floor) + cut.keep : undefined
       const done = cutawayItems(view, pal, cut, placed, extra.section === true ? [...boxes, ...tramBoxes] : boxes, {
-        ...(keepZ === undefined ? {} : { keepZ }), section: extra.section === true, outlineRings,
+        ...(keepZ === undefined ? {} : { keepZ }), ...(cut.floor === undefined ? {} : { floorZ: zOf(cut.floor) }), section: extra.section === true, outlineRings,
         // The outline lies on the ground, or on whatever kept part it crosses (a porch).
         ground: (p) => Math.max(terrain.z(p), ...placed.filter((q) => (keepZ === undefined || q.top <= keepZ) && pointInRing(p, q.outer)).map((q) => q.top)),
       })

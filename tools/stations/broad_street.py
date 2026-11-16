@@ -295,7 +295,11 @@ for k, t in enumerate(PLATFORMS):
     s1, s2 = sorted((crossing(t, CA0), crossing(t, CA1)))
     # In a cutaway the south (east-side) sheds stop short of the departure stairs, which are
     # drawn open; in whole views they run to the concourse over the stair houses.
-    for side, (s0, s9), only in (('south', (S_SOUTH + 4, s1 - 1), 'whole'), ('north', (s2 + 1, S_NORTH - 4), None), ('south', (S_SOUTH + 4, s1 - 14), 'cutaway')):
+    # (and stop 4.5 m short of the head house's back, b = 20.8, which platform 1 runs past).
+    s_back = s1 - 14
+    while to_ab(st(s_back, t))[1] - 4.5 * abs(UT[0] * UB[0] + UT[1] * UB[1]) < 20.8 + 4.5 and s_back > S_SOUTH:
+        s_back -= 1.0
+    for side, (s0, s9), only in (('south', (S_SOUTH + 4, s1 - 1), 'whole'), ('north', (s2 + 1, S_NORTH - 4), None), ('south', (S_SOUTH + 4, s_back), 'cutaway')):
         features.append({
             'id': f'bss-canopy-{k + 1}-{side}' + ('-cut' if only == 'cutaway' else ''), 'name': 'Broad Street Station platform canopy', 'kind': 'canopy', 'from': 1919, 'to': 1976,
             'line': [lonlat(st(s0, t)), lonlat(st(s9, t))], 'width': 8.0, 'height': 5.4,
