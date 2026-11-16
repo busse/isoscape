@@ -3,16 +3,16 @@
  "args": [
   "richmond-i195-rocketts"
  ],
- "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "commit": "9c326f9e599178978c92435620d0a1264a4e2872",
  "dirty": false,
- "approved": "2026-11-16T12:25:27-0500",
- "svg_sha256": "ddcfbea48b31e239a8d446b8be92ef1bf7c84f56da275e7d43b6e7a742c683a4",
- "svg_bytes": 25947489,
+ "approved": "2026-11-16T17:10:31-0500",
+ "svg_sha256": "f657f6dcb5d3e57344fc1904b3d1e5cb1cf335edc97ed31528e4261bf0094d2a",
+ "svg_bytes": 46167834,
  "viewBox": [
   -9444.0,
-  -1771.6,
+  -1732.5,
   18888.0,
-  3191.3
+  3152.2
  ],
  "width": 7200,
  "crops": [
@@ -40,7 +40,7 @@
   {
    "name": "rocketts-end",
    "x": 5550,
-   "y": 216,
+   "y": 200,
    "w": 1500,
    "h": 1000
   }
@@ -48,20 +48,20 @@
  "warnings": [],
  "residual": {
   "fall-line-hills": {
-   "max": 22.333,
-   "mean": 1.9355
+   "max": 22.111,
+   "mean": 1.8712
   },
   "open-park": {
-   "max": 21.0,
-   "mean": 2.0496
+   "max": 23.889,
+   "mean": 1.8749
   },
   "downtown-bridges": {
-   "max": 19.0,
-   "mean": 1.8787
+   "max": 24.111,
+   "mean": 1.9137
   },
   "rocketts-end": {
-   "max": 19.889,
-   "mean": 2.0948
+   "max": 22.0,
+   "mean": 1.8803
   }
  },
  "data": {

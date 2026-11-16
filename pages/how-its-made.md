@@ -168,9 +168,15 @@ are drawn as white crests.
 
 **Land cover from NLCD**, where a region uses it, goes down first, between the bare ground
 and OSM's own areas. Each 30 m class is resampled onto the terrain grid and grouped as woods,
-evergreen woods, swamp, marsh, field, crop, scrub or barren. Each group's edge is traced
-smoothly through the grid, the same way as the shoreline, so the blocks don't show as
-squares. OSM's parks, woods and marshes are drawn on top of it, so mapped detail wins.
+evergreen woods, swamp, marsh, field, crop, scrub or barren. The groups are then blurred, a
+Gaussian of 12 m (0.4 of a 30 m cell), and a group covers the ground wherever it outweighs
+every other group and bare ground; the edge is traced with marching squares between the grid
+nodes. A diagonal edge of 30 m steps comes out within about a meter and a half of a straight
+line, so the source's blocks don't show at print size, and a single 30 m cell still keeps a
+small rounded patch of its own. Two patches that meet share one edge, with no gap or overlap
+between them. Open water and unknown cells carry no weight, so the cover runs to the shore,
+where the shoreline cuts it. OSM's parks, woods and marshes are drawn on top of it, so mapped
+detail wins.
 
 Code: `src/classify.ts`, `buildScene` in `src/scene.ts`, cover in `paintStrip` in `src/render.ts`.
 
@@ -204,9 +210,16 @@ surface, so it matches the shape you see:
   two to each of 12 steps lighter or darker (24 each way), whose edges are traced with
   marching squares between the nodes. Each band adds a thin wash on top of the one it sits
   in, so the ground shows smooth, soft shading rather than 5 m squares, and no two shades
-  meet edge to edge. The shading stops at the traced shoreline and is not drawn on the river.
+  meet edge to edge. The shading stops exactly at the traced shoreline: the water is cut out of
+  it, and its bands bend where they cross the shoreline, as the ground does. It is not drawn on
+  the river. Steep ground is held back: past 5 steps either way the shade grows only logarithmically
+  (5 + 2 · ln(1 + (s − 5)/2) steps for a slope worth s), so a bluff, cut or embankment turned
+  from the light darkens smoothly instead of piling up as a dark smear. A face that would be
+  17 steps dark shows about 9, one at 40 about 11. Gentle ground stays under the knee and is
+  drawn exactly as it was; lit slopes never pass about 6 steps, however steep, so they change
+  by less than a sixth of a step.
 - **Contours.** Marching squares every 2 m by default (`contour`), with every fifth line
-  heavier (`majorEvery`). There are no contours over water.
+  heavier (`majorEvery`). There are no contours over water: they are cut at the shoreline too.
 
 Code: `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 
@@ -224,12 +237,25 @@ course, steeply only where it really drops.
 
 - Water points standing **more than 1 m above that surface**, at least two grid cells (10 m
   at the default 5 m grid) from shore, are drawn as **exposed rock**. These are the boulder fields of the falls.
+  Each boulder sits up to a third of a cell off its grid point, chosen by a hash of the point, so
+  a field of them does not read as a honeycomb in rows.
+  Where a hydro-flattened river steps down, the water just above the step stands clear of a
+  surface read partly below it; so a rock must also stand more than 1 m above a low value (the
+  15th percentile) of the water within 30 m that is level with it or further up the channel. Otherwise every step would be drawn
+  as a line of boulders.
+- **Only a river gets rocks and rapids.** Water mapped as a river (`water=river`, `rapids` or
+  `stream`, or `waterway=riverbank`), or plain `natural=water` with a river or stream line
+  running through it, is a river. A lake, pond, reservoir, basin, treatment works, canal,
+  dock, pool or fountain, and the sea, are still water: they get neither.
+- Nothing is drawn as rock **on ground painted over the river** (a bed of bare rock, a wooded
+  island the water outline left in), or **within 20 m of a mapped weir or dam**: the lidar
+  sees the dam standing clear of the water, but it is drawn as a crest, not as boulders.
 - Near the shore, mapped "water" standing more than 1 m above the surface is treated as bank.
   It is **given back to the land** at its own height.
 
 - Where the elevation source has **no heights** (3DEP leaves much of San Francisco Bay
   empty), the gap is filled in from the shore around it. That fill is a guess, not a surface,
-  so no rock is read within 30 m of it, and no rapid on it.
+  so no rock is read within 30 m of it, and no fall is read on it or from it.
 
 Both are inferences: a gravel bar mapped as water or a misplaced outline can produce false
 rock. Flat regions skip all of this and draw OSM's outlines as they are.
@@ -238,34 +264,73 @@ Code: `settleWater` in `src/terrain.ts`.
 
 ## Rapids
 
-A rapid is where the recovered water surface **falls quickly**. At each water point at least
-two grid cells from shore, the fall is measured across 40 m in four directions, and the steepest is
-kept. Measuring over 40 m means a single noisy cell cannot fake a rapid. Where the fall
-exceeds `terrain.rapids` (0.035 by default, 3.5 m per 100 m), the cell reads as a rapid.
+A rapid is where the recovered water surface **falls quickly along the river**. 3DEP's water
+is hydro-flattened: level from bank to bank, stepping down along the river by a meter or
+less at a time, with long level reaches between the steps. Measured across a few cells, the
+fall is all at the step lines and nil between them, which is not how a river runs.
 
-Each rapid cell gets one or two short white strokes across the current, plus a wash of froth
-where it drops hardest. The strokes are placed by a hash of the cell's position, not at
-random, so the same data always draws the same marks. Weirs mapped in OSM are drawn
-separately.
+So the fall is measured **along the channel, over a reach**. First, every point of a river
+gets its distance up the channel: the shortest path through the river's own water from where
+it rises out of its lowest pool (the water within 5 cm of its lowest level; in Richmond, the tidal James below the Mayo Bridge). Then, at
+each water point at least two grid cells from shore, the surface heights of the river around
+it, within 200 m and from 50 m below it to 200 m above it along the channel, are fitted
+against that distance. The slope of the fit is the fall. This spreads each step's drop over
+the 200 m below it, where the water runs white, and reads the pool above a dam as calm to
+within 50 m of its crest. Where the fall exceeds `terrain.rapids` (0.004 by default, 4 m per
+km), the point reads as a rapid. For comparison, the James falls about 32 m (105 feet)
+through Richmond, a little over 3 m per km on average, and its level pools fall about 1 m
+per km.
 
-Rapids are **inferred, not observed**. They show where the lidar surface is steep, which is
-usually where the water is white, but river level on the day of the survey, a misplaced
-outline or a dam can all mislead it. The build's tab reports how many cells were read as
-rapids.
+Each rapid point gets short white strokes across the current, **as thick as the fall**: a
+stroke in about one point in seven just over the threshold, rising to one in most points and
+two in some at four times it (16 m per km), with a faint wash of froth that fades in over the steepest.
+So a reach reads as broken water and not as even hatching along the steps of the lidar's
+surface, each stroke sits anywhere in its 5 m cell, turns up to 20° off square to the current
+and runs 2 to 7 m long; a smooth field of clumps about 20 m across scales how many points get
+one (0.4 to 1.6 times, 1 on average), and each point's froth is a soft, uneven blob off its
+center rather than a square. Only points over the threshold ever get a mark.
+The strokes are placed by a hash of the point's position, not at random, so the same data
+always draws the same marks. No rapid is drawn on ground painted over the river. Weirs
+mapped in OSM are drawn separately.
 
-Code: `riverFall` in `src/terrain.ts`, `paintStrip` in `src/render.ts`.
+Rapids are **inferred, not observed**. They show where the lidar surface falls, which is
+usually where the water is white, but river level on the day of the survey, where the
+hydro-flattening put its steps, or a dam can all mislead it. Until November 2026 the fall was
+measured across 40 m against a threshold of 3.5 m per 100 m; once the elevation was put where
+it belongs, nothing on the James fell that steeply, and the rapids drawn before had mostly
+come from water outlines lying on banks. The build's tab reports how many points were read
+as rapids.
+
+Code: `channelFall` and `riverFall` in `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 
 ## Shoreline
 
-With terrain, the water's edge is traced from the lidar-corrected water grid (marching squares
-over a lightly smoothed mask), not from OSM's outline. Open water is drawn at the river's
-surface; a grid cell that is part water and part bank is draped on the ground, so the water
-meets the bank at the bank's own height. Where the outline overlaps a steep bank, the bank
-slopes into the water instead of the water climbing the bank. Each strip draws the ground it
-laps toward the camera from that ground's own grid cells, so its shore there is the same as
-the next strip's and the shoreline has no teeth at the strip lines.
+With terrain, the water's edge follows OSM's outline, traced between the grid's nodes: each
+node holds its distance to the nearest edge of the mapped water and islands (positive over
+water, out to two cells either way), and the shoreline is drawn where that crosses zero,
+which is the outline itself, a straight edge exactly. A grid that only knows wet and dry nodes
+can put the shore only halfway between them, and a shore running slantwise across the grid
+came out as a staircase, a run of nodes long and a cell high; on a steep, exaggerated bank
+each step stood up as a tooth.
 
-Code: `paintStrip` in `src/render.ts`.
+The lidar still corrects the outline where it has to. Mapped water that the lidar finds more
+than 1.5 m above the river (a bluff the outline overlaps, a creek in its ravine), or lower
+than that but more than two cells from the outline (a bar or a rock in midstream), stays land,
+and there the shore is traced as before, through the wet and dry nodes smoothed over 3 × 3.
+Mapped water lower than that and near the outline is drawn as water.
+
+The ground meets the water on the shoreline. On the water's side of it the ground lies on the
+river's surface; on the land's side it rises from the surface to its own height one cell
+inland, in proportion to the distance. A shore cell is drawn as two pieces that meet on the
+line, land and water, and anything else draped across the line (cover, parks, roads, the
+hillshade's bands) gets a point where it crosses, so it bends there with the ground and does
+not stand clear of it, over the water behind.
+
+Narrow water follows its outline too: a canal a cell or two wide keeps its mapped banks
+instead of ending in shards cut along the grid. Water so narrow that no grid node falls in it
+(a stream mapped as an area under a cell wide) is still not drawn.
+
+Code: `shoreField` and `Terrain.z` in `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 
 ## Buildings
 
@@ -338,15 +403,53 @@ Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scen
 
 OSM splits one bridge into many ways, at every change of lanes, name or junction. Ramping
 each piece down to the ground would turn a viaduct into a roller coaster. So bridge ways that
-share an end, a layer and a kind (road or rail) are joined into chains first. A chain only
+share an end, a layer and a kind (road or rail) are joined into chains first. At a fork a
+chain carries on along the straightest way, and never through a turn sharper than 60 degrees,
+so two tracks that meet are not joined into a V. A chain only
 ramps down at an end that touches no other bridge. Bridges that touch form a network,
 anchored to the ground at those ends, and no deck stands higher than a 70 m ramp from the
 nearest anchor allows, measured along the network: a viaduct that forks into short ways that
 each come down a few meters on ramps down to the fork, not standing at full height over a fan
 of steep stubs. An end that joins another bridge (a ramp onto a viaduct of another layer, a
-link at a fork) meets the higher of the decks there and eases to its own height over 70 m, so
-the two arrive at one height. Where a deck comes down to
-the ground, its side stops at the ground instead of hanging below it.
+link at a fork) meets the higher of the decks there and eases to its own height over 70 m.
+Then the decks are matched at every node they share: a deck that runs on through the node
+sets the height there, and where only ends meet, the highest end does. The others run
+straight to that height, so no deck stops short in mid-air above or below the one it joins.
+Where a deck comes down to the ground, its side stops at the ground instead of hanging below it.
+
+**A deck runs straight between its ends.** It never dips below the straight line between the
+heights of its two ends, and rises above that line only where it needs its clearance: an
+overpass whose ends are both at street level spans a cut level, whatever depth the cut has,
+and ends at different heights give a straight grade. A grounded end sits on its abutment. In
+a smoothed ground model an overpass mapped rim to rim ends on the sloping sides of the cut, so
+the ground is read for 12 m past the end: where it climbs within the first 6 m and then levels
+off (the outer 6 m climbs less than three quarters as much), the end sits at that level, with
+an abutment wall down to the ground when the end faces the camera. Where the ground goes on
+climbing (a ramp landing on a hillside), the end sits on the ground.
+
+**Ground the model kept under a deck is carved out.** A bare-earth model is meant to have
+bridges taken out, but a short overpass often stays in it as a ridge of ground across the cut
+it spans, and the road under it then climbs over a hump. Under every deck, a grid node that
+stands more than half a meter above the ground 8 m past the edges of the decks on both sides
+takes the straight line across between those two. The carving fades in over the 10 m nearest
+a grounded end, so the street running onto a bridge keeps its level, and it never raises
+ground: a deck along a hillside or a bluff's crest changes nothing.
+
+**Parallel ways of one street are one deck.** OSM maps a street's carriageways and its
+sidewalks or cycle tracks as ways of their own, side by side, and each would get a profile of
+its own: a sidewalk sitting lower beside its street, a divided street as a cluster of tilted
+slabs. A footway, path or cycleway bridge that lies within 15 m of a street's bridge its whole
+length, running the same way along it, takes the street's heights wherever it lies beside it (a
+street before a ramp beside it); so does a carriageway beside a longer one of the same name,
+kind and layer. A bridge way shorter than 10 m that shares a node with a longer deck is drawn
+level, at that deck's height at the node.
+
+**Skyways are left out.** A footway, path or cycleway bridge no longer than 80 m with an end
+in or within 3 m of a building is a skyway or a bridge into an upper floor, and OSM rarely
+says which floor. Drawn at a ramp's height, it lies across the walls and roofs of the
+buildings it joins, so it is not drawn (sidewalks beside a street bridge are kept). It is
+decided from the buildings' outlines before the ground is carved, so the ground under a skyway
+is left as it is.
 
 **Deck height is a rule of thumb.** OSM rarely records it. A region can name a height for a
 bridge, for example `{ "match": "Manchester", "deck": 24 }`. Otherwise the deck sits
@@ -356,7 +459,8 @@ straight runs, and easing down over 70 m at a free end. The ramp keeps that leng
 bridge, so a bridge shorter than two ramps never reaches full height: a 30 m footbridge over a
 canal rises well under a meter above its banks, where a 7 m tent would read as a stub floating
 in the air. Piers drop to the real ground or water every 38 m where the deck is more than 3 m
-up, or to the roof of a building under the deck, never down through it. A span that lies
+up, or to the roof of a building under the deck, never down through it. Each pier is
+ordered on its own, behind its deck and behind a building nearer the camera. A span that lies
 inside a building and below its roof (a garage ramp, a walkway's landing) is left out: the
 building hides it.
 
@@ -371,7 +475,8 @@ end of the bridge, over the tops of the legs, to the other end: a parabola betwe
 that sags to 2 m over the deck at mid-span, and a slighter one down to each anchorage.
 Suspenders, tower detail and arches are not drawn.
 
-Code: `chainBridges` and `bridgePieces` in `src/scene.ts`.
+Code: `carveUnderBridges`, `isSkyway`, `chainBridges`, `joinDecks`, `groupDecks`, `deckProfile`,
+`abutmentLevel` and `bridgePieces` in `src/scene.ts`.
 
 ## Paint order
 
@@ -383,6 +488,8 @@ on screen:
 - If their footprints can be separated by a line, the one on the camera's side of that line
   is in front.
 - If the footprints overlap (stacked building parts), the one entirely above is in front.
+- A pier and a deck whose footprints overlap: the deck is in front (a deck's height range
+  starts at its underside, so a deck over another deck is in front of it too).
 - Two bridge spans that run side by side (within about 14 degrees of parallel, the two
   carriageways of a viaduct or a pair of tracks): the one whose line is nearer the camera is
   in front, or the upper one where one runs right over the other. By centers alone, two
@@ -410,8 +517,18 @@ distance past its far edge. The ground in that lap is then shaded once, by the s
 painted it last, and no light streak shows along the strip lines. Where two strips' shading
 meets, both trace the same points, so there is no hairline between them.
 
+Within a strip, the water is one path: the wholly wet cells and the wet parts of shore cells
+together, so they meet without a seam. Cover and parks that lie under water (a park drawn
+around a lake) are cut out where the water is, so nothing of theirs shows through where one
+strip's water meets the next's; on a lake those seams had shown as faint lines.
+
+The ground reaches a cell past the plate's sides, and the sides are then covered in paper,
+so each side is one clean edge. (Cut by a clip, a renderer that clips each shape in turn laid
+the edge once for every shape that reached it, and a side over water showed a dotted line.)
+
 The front of the plate is a **slab**, a true cross-section of the ground along the near edge,
-with water where the cut crosses the river. A region with no slab (`"slab": 0`, the cutaway) is
+with water where the cut crosses water at least two cells wide, from shoreline to shoreline.
+A stream narrower than that cuts no stripe down the slab. A region with no slab (`"slab": 0`, the cutaway) is
 cut square instead: the ground ends on straight lines, at the lowest point of its far edge on
 screen and the highest of its near edge, so its edge does not wander with the ground, and
 standing things are cut along the same near line.
@@ -753,8 +870,20 @@ under the Open Database License. Elevation from the [USGS 3D Elevation
 Program](https://www.usgs.gov/3d-elevation-program), public domain, and outside the US from
 the sources credited on [Landmarks around the world](world-landmarks.md). Years built for the
 Richmond series from the City of Richmond's open data. Fire-insurance maps from the Library
-of Congress Sanborn Maps Collection. See [About](about.md) for what that means when you use
-or share a picture.
+of Congress Sanborn Maps Collection. Land cover, where a map uses it (Gwynn's Island), from
+the USGS [National Land Cover Database](https://www.mrlc.gov) 2021, public domain; building
+footprints OpenStreetMap lacks, where a map uses them, from Microsoft's Global ML Building
+Footprints, under the Open Database License. See [About](about.md) for what that means when
+you use or share a picture.
+
+Each map names only the sources it drew from. A build works out its own credit line from what
+the scene used (`src/credits.ts`): OpenStreetMap always; the elevation source by name when the
+ground has relief; land cover when cover classes were read onto the ground; Microsoft's
+footprints when at least one is drawn; assessor's year-built records when a date from them
+decided whether a building stands in that year or is shown as new; Sanborn maps only when a
+building traced from them is drawn. The line is written into the SVG (`data-credits`), the
+build record and `isoscape info`, and the prints take it from the builds they are made from,
+so a modern view never credits fire-insurance maps it does not use.
 
 Inspired by [Isometric SF](https://isometricsf.com), Justin Chavez's isometric pixel-art map
 of San Francisco ([how it was made](https://www.justinchavez.com/blog/isometric-sf-how/)).

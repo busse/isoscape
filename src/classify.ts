@@ -27,6 +27,21 @@ export const groundKind = (t: Tags): GroundKind | null => {
   return null
 }
 
+/**
+ * Is mapped water a flowing river? `true` for a river or its bank (`water=river`, `rapids` or
+ * `stream`, `waterway=riverbank`); `false` for still or kept water: a lake, pond, reservoir,
+ * basin, treatment works, canal, dock, pool or fountain; `undefined` for bare `natural=water`,
+ * which is a river only where a river runs through it. Only a river gets rocks and rapids.
+ */
+export const waterFlows = (t: Tags): boolean | undefined => {
+  if (t.waterway === 'riverbank') return true
+  if (t.water === 'river' || t.water === 'rapids' || t.water === 'stream') return true
+  if (t.water !== undefined) return false
+  if (t.waterway !== undefined || t.landuse === 'basin' || t.landuse === 'reservoir' || t.amenity === 'fountain') return false
+  if (t.leisure !== undefined || t.man_made !== undefined || t.basin !== undefined) return false
+  return undefined
+}
+
 /** Paint order of the ground layers, bottom first. Water and islands are handled apart. */
 export const GROUND_ORDER: readonly GroundKind[] = ['green', 'cemetery', 'marsh', 'wood', 'sand', 'rock', 'parking', 'plan', 'grounds', 'burned', 'platform']
 

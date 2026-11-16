@@ -7,13 +7,19 @@ and the credit line every print must carry (OpenStreetMap is ODbL: produced work
 it). The art is vector, so each panel is rasterized straight to the pixels it fills.
 
 A design with "contain": true shows its region whole, letterboxed in the panel area, instead of
-cropping it to the panel's shape (for very long views on a panorama sheet). "credit" overrides the
-credit line (a modern view has no Sanborn maps).
+cropping it to the panel's shape (for very long views on a panorama sheet).
+
+The credit line names exactly the sources the design's builds drew from: each build's SVG
+carries them in its data-credits attribute (`sceneCredits` in src/credits.ts: OpenStreetMap,
+the elevation source, land cover, building footprints, year-built records, Sanborn maps, each
+only when the scene used it), and the line is "isoscape by Chris Busse" and their union, in
+order. Only a build made before builds carried credits falls back to the design's "credit" or
+the old default line, so a sold print can still be remade exactly as it was.
 
 Usage: compose.py <spec.json> <builds-dir> <out-dir> [--only <design>] [--dpi 300] [--proof]
 --proof writes 1/6-scale JPEGs instead, for checking layouts quickly.
 """
-import json, os, re, subprocess, sys, tempfile, argparse
+import html, json, os, re, subprocess, sys, tempfile, argparse
 from PIL import Image, ImageDraw, ImageFont
 
 Image.MAX_IMAGE_PIXELS = None
@@ -21,8 +27,38 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 FONT = {k: os.path.join(HERE, 'fonts', f'libre-baskerville-latin-{v}.woff') for k, v in
         {'bold': '700-normal', 'regular': '400-normal', 'italic': '400-italic'}.items()}
 PAPER, INK, DIM = '#f4f1ea', '#2c2b33', '#6a6570'
-CREDIT = ('isoscape by Chris Busse  ·  Map data © OpenStreetMap contributors (ODbL)  ·  '
-          'Elevation: USGS 3DEP  ·  Historic buildings traced from Sanborn Fire Insurance Maps, Library of Congress')
+BYLINE = 'isoscape by Chris Busse'
+# The line every print carried before builds named their own sources: only for remaking a print
+# from a build made before then (see `design_credit`). lm_compose.py sets CREDIT for its own prints.
+LEGACY_CREDIT = ('isoscape by Chris Busse  ·  Map data © OpenStreetMap contributors (ODbL)  ·  '
+                 'Elevation: USGS 3DEP  ·  Historic buildings traced from Sanborn Fire Insurance Maps, Library of Congress')
+CREDIT = LEGACY_CREDIT
+# Set while composing a design whose credit was derived from its builds: only such a line may
+# wrap to two lines instead of shrinking below CREDIT_MIN_PT (a sold print remakes unchanged).
+CREDIT_DERIVED = False
+CREDIT_MIN_PT = 7
+
+
+def build_credits(svg_path):
+    """The sources a build drew from, from its SVG's data-credits attribute; None for an older build."""
+    with open(svg_path, encoding='utf-8') as f:
+        head = f.read(8192)
+    m = re.search(r'<svg\b[^>]*?\sdata-credits="([^"]*)"', head)
+    return json.loads(html.unescape(m.group(1))) if m else None
+
+
+def design_credit(design, builds):
+    """The credit line for a design: the byline and every source its panels' builds used, once each."""
+    parts, legacy = [], []
+    for p in design['panels']:
+        got = build_credits(builds[p['build']])
+        if got is None: legacy.append(p['build']); continue
+        parts += [c for c in got if c not in parts]
+    if legacy:
+        print(f"warning: {', '.join(sorted(set(legacy)))} carry no credits (built before builds named their sources); "
+              'using the design\'s "credit" or the old default line. Rebuild to derive it.', file=sys.stderr)
+        return design.get('credit', LEGACY_CREDIT)
+    return '  ·  '.join([BYLINE] + parts)
 
 
 def latest_builds(builds_dir):
@@ -123,6 +159,13 @@ def compose(design, size, builds, regions, dpi, scale=1.0):
     sf = text_fit(d, design.get('subtitle', ''), FONT['italic'], round(band * 0.2), area_w * 0.62)
     d.text((m, by + band * 0.18 + tf.size * 1.25), design.get('subtitle', ''), font=sf, fill=DIM)
     cf = text_fit(d, CREDIT, FONT['regular'], round(band * 0.085), area_w * 0.36)
+    if CREDIT_DERIVED and cf.size < dpi * scale * CREDIT_MIN_PT / 72:
+        # A long derived line (many sources) wraps onto two lines rather than shrink past legibility.
+        size = round(band * 0.085)
+        while size > cf.size:
+            f = ImageFont.truetype(FONT['regular'], size)
+            if len(wrap(d, CREDIT, f, area_w * 0.36)) <= 2: cf = f; break
+            size = int(size * 0.94)
     lines = wrap(d, CREDIT, cf, area_w * 0.36)
     ly = by + band * 0.22
     for ln in lines:
@@ -153,10 +196,11 @@ def main():
         for size in design['sizes']:
             w, h = size if design.get('orientation', 'landscape') == 'portrait' else (max(size), min(size))
             if design.get('orientation') == 'portrait': w, h = min(size), max(size)
-            global CREDIT
-            saved = CREDIT; CREDIT = design.get('credit', CREDIT)
+            global CREDIT, CREDIT_DERIVED
+            saved = CREDIT; CREDIT = design_credit(design, builds)
+            CREDIT_DERIVED = CREDIT.startswith(BYLINE + '  ·  ') and all(build_credits(builds[p['build']]) is not None for p in design['panels'])
             img = compose(design, (w, h), builds, spec['regions'], o.dpi, 1 / 6 if o.proof else 1.0)
-            CREDIT = saved
+            CREDIT = saved; CREDIT_DERIVED = False
             fn = os.path.join(o.out, f"{name}_{w:g}x{h:g}{'_proof' if o.proof else ''}.jpg")
             img.save(fn, quality=80 if o.proof else 93, dpi=(o.dpi, o.dpi), subsampling=0 if not o.proof else 2)
             print(fn, img.size)

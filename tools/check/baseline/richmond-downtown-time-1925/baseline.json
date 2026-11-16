@@ -5,16 +5,16 @@
   "--year",
   "1925"
  ],
- "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "commit": "9c326f9e599178978c92435620d0a1264a4e2872",
  "dirty": false,
- "approved": "2026-11-16T12:25:39-0500",
- "svg_sha256": "78ad1477ebfe39df6039de7a764c7e9728893351784f5231ef80e96e72aabdfe",
- "svg_bytes": 7586503,
+ "approved": "2026-11-16T17:10:43-0500",
+ "svg_sha256": "491360767e39718e0e8ae4ebdfb913f8b601a55bdbdc8ecb253c670567c3d082",
+ "svg_bytes": 13686247,
  "viewBox": [
   -3024.0,
-  -1589.2,
+  -1671.9,
   6048.0,
-  2644.4
+  2727.1
  ],
  "width": 12000,
  "crops": [
@@ -47,25 +47,23 @@
    "h": 1000
   }
  ],
- "warnings": [
-  "no year-built data for \"richmond-downtown-time\"; run: isoscape fetch richmond-downtown-time --extras-only"
- ],
+ "warnings": [],
  "residual": {
   "title": {
    "max": 1.778,
-   "mean": 0.9551
+   "mean": 0.955
   },
   "church-hill-bluff": {
-   "max": 15.222,
-   "mean": 2.0928
+   "max": 21.333,
+   "mean": 1.9891
   },
   "river-bridges": {
-   "max": 20.0,
-   "mean": 1.0584
+   "max": 19.667,
+   "mean": 1.0848
   },
   "dense-traced": {
-   "max": 12.0,
-   "mean": 1.9947
+   "max": 10.889,
+   "mean": 1.9552
   }
  },
  "data": {

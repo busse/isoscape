@@ -55,6 +55,8 @@ export const compare = (a: Item, b: Item, stacked = false): number => {
   }
   if (a.zMin >= b.zMax - 0.05) return 1
   if (b.zMin >= a.zMax - 0.05) return -1
+  // A pier under a deck, its own or another's, stands behind it.
+  if (a.kind === 'bridge' && b.kind === 'bridge' && a.pier !== b.pier) return a.pier === true ? -1 : 1
   // Overlapping footprints at overlapping heights: a bridge over a low building, or bad data.
   if (a.kind !== b.kind) return a.kind === 'bridge' ? 1 : -1
   if (a.span !== undefined && b.span !== undefined) {

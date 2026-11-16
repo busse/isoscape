@@ -5,16 +5,16 @@
   "--year",
   "1943"
  ],
- "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "commit": "9c326f9e599178978c92435620d0a1264a4e2872",
  "dirty": false,
- "approved": "2026-11-16T12:26:37-0500",
- "svg_sha256": "4c2ec18ca80275020d1c5ec0725a471b5b09516ea68432f553f83c8ca4671300",
- "svg_bytes": 434516,
+ "approved": "2026-11-16T17:11:30-0500",
+ "svg_sha256": "cdd3134c87ad34db6bda31323962bdbab8f86b680d2c6c342aae9dc99242ed1e",
+ "svg_bytes": 1001650,
  "viewBox": [
   -1719.0,
-  -1083.3,
+  -1087.0,
   3438.0,
-  2063.3
+  2066.9
  ],
  "width": 8800,
  "crops": [
@@ -51,19 +51,19 @@
  "residual": {
   "title": {
    "max": 1.778,
-   "mean": 0.967
+   "mean": 0.9671
   },
   "portico": {
-   "max": 7.667,
-   "mean": 1.1875
+   "max": 10.0,
+   "mean": 1.7239
   },
   "platforms": {
-   "max": 7.0,
-   "mean": 1.5497
+   "max": 6.778,
+   "mean": 1.823
   },
   "lawn-hillshade": {
-   "max": 11.333,
-   "mean": 1.8945
+   "max": 19.444,
+   "mean": 1.9826
   }
  },
  "data": {

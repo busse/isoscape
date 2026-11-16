@@ -242,3 +242,12 @@ export const hash = (s: string): number => {
   }
   return h >>> 0
 }
+
+/** Distance from p to the segment a–b. */
+export const distToSegment = (p: Vec2, a: Vec2, b: Vec2): number => {
+  const dx = b[0] - a[0]
+  const dy = b[1] - a[1]
+  const len2 = dx * dx + dy * dy
+  const u = len2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / len2))
+  return Math.hypot(p[0] - a[0] - u * dx, p[1] - a[1] - u * dy)
+}

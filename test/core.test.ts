@@ -2,7 +2,11 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { clipRingToRect, convexHull, separatingAxis, signedArea, simplifyRing, type Vec2 } from '../src/geom.ts'
 import { dominantGridAngle, makeView, snapBearing } from '../src/view.ts'
-import { bridgeEnds, buildingAt, cableZ, CABLE_CLEARANCE, chainBridges, extrude, rampClearance, RAMP, roofIndex, type Item } from '../src/scene.ts'
+import {
+  abutmentLevel, bridgeEnds, buildingAt, cableZ, CABLE_CLEARANCE, carveUnderBridges, chainBridges, deckProfile, extrude, isSkyway, joinDecks,
+  groupDecks, rampClearance, RAMP, roofIndex, type Item,
+} from '../src/scene.ts'
+import { makeTerrain } from '../src/terrain.ts'
 import { compare, paintOrder, spanOrder } from '../src/order.ts'
 import { assembleRings, parseOsm } from '../src/osm.ts'
 import { buildingHeights, parseLength } from '../src/classify.ts'
@@ -253,9 +257,10 @@ test('render: with terrain, a park drawn around a lake is painted under the lake
   const scene = buildScene({ ...region, snap: false, width: 300, depth: 300, terrain: { cell: 5 } }, parseOsm(json), pal, () => 10)
   const { svg } = renderSvg(scene)
   let both = 0
-  for (const g of svg.matchAll(/<g data-strip="[^"]*"[^>]*>(.*?)<\/g>/gs)) {
-    const lawn = g[1].indexOf('class="green"')
-    const lake = g[1].indexOf('class="Lw"')
+  // Each strip's own markup runs to the next strip's (strips hold groups of their own).
+  for (const g of svg.split('<g data-strip=').slice(1)) {
+    const lawn = g.indexOf('class="green"')
+    const lake = g.indexOf('class="Lw"')
     if (lawn < 0 || lake < 0) continue
     both++
     assert.ok(lawn < lake, 'the lawn comes first in its strip, and the lake over it')
@@ -306,4 +311,166 @@ test('close-scale ties lie square to their track on the ground, evenly spaced ac
   // A running rail offset from the bending line meets itself at the bend.
   const rail = offsetJoined(segs, 0.72)
   assert.ok(Math.hypot(rail[0][1][0] - rail[1][0][0], rail[0][1][1] - rail[1][0][1]) < 1e-9)
+})
+
+test('a deck over a cut runs straight between its ends, whatever is under it', () => {
+  // A 40 m overpass, both ends at street level (10), over a cut 8 m deep.
+  const cut = (s: number) => (s > 8 && s < 32 ? 2 : 10)
+  const own = (s: number) => rampClearance(7, 40, s, Math.min(s, 40 - s), 0, 0)
+  const z = deckProfile(40, cut, own, 10, 10)
+  // (Within a meter of street level: it eases off the rim the way a ramp would.)
+  for (let s = 0; s <= 40; s += 2) assert.ok(Math.abs(z(s) - 10) < 0.2, `deck at ${s} is ${z(s)}`)
+  // Ends at different heights: a straight grade between them.
+  const slope = deckProfile(40, () => 0, own, 4, 12)
+  for (let s = 0; s <= 40; s += 5) assert.ok(Math.abs(slope(s) - (4 + (8 * s) / 40)) < 1e-6)
+  // A long bridge from low banks still rises to its clearance in the middle.
+  const river = deckProfile(300, () => 0, (s) => rampClearance(7, 300, s, Math.min(s, 300 - s), 0, 0), 0, 0)
+  assert.ok(Math.abs(river(150) - 7) < 1e-6)
+})
+
+test('a grounded end sits on the rim the ground levels off at, not on a hillside', () => {
+  // Past the end the ground climbs 3 m in 4 m and then levels: the end sits on the rim.
+  assert.equal(abutmentLevel((t) => Math.min(3, (3 * t) / 4)), 3)
+  // A steady climb (a ramp landing on a hillside): the end stays on the ground.
+  assert.ok(Math.abs(abutmentLevel((t) => t / 2)) < 1e-9)
+  // Level or falling ground: on the ground.
+  assert.equal(abutmentLevel(() => 5), 5)
+  assert.ok(Math.abs(abutmentLevel((t) => -t)) < 1e-9)
+})
+
+test('bridge ways chain straight on through a fork, never back up the other branch', () => {
+  const line = (id: string, pts: Vec2[]) => ({ type: 'line' as const, id, tags: { railway: 'rail', bridge: 'yes' }, points: pts })
+  // Two tracks that meet at a point, and one that runs on from it.
+  const a = line('a', [[0, 0], [0.001, 0]])
+  const b = line('b', [[0, 0.0002], [0.001, 0]])
+  const on = line('on', [[0.001, 0], [0.002, 0]])
+  const chains = chainBridges([a, b, on])
+  assert.equal(chains.length, 2)
+  // No chain turns back through the fork into a V.
+  for (const c of chains) assert.ok(c.line.points.every((p, i, ps) => i === 0 || p[0] >= ps[i - 1][0]))
+})
+
+test('a deck that ends at another meets it at that deck\'s height', () => {
+  const chain = (rampStart: boolean, rampEnd: boolean, pts: Vec2[]) => ({ line: { type: 'line' as const, id: 'x', tags: {}, points: pts }, names: '', rampStart, rampEnd })
+  // A runs through the node (0.001, 0) at 30; B ends there from the ground, first drawn at 20.
+  const chains = [chain(true, true, [[0, 0], [0.001, 0], [0.002, 0]]), chain(true, false, [[0.001, 0.001], [0.001, 0]])]
+  const flat = (start: number, end: number) => ({ pts: [], cum: [0, 100], total: 100, zAt: (s: number) => start + ((end - start) * s) / 100, startLevel: start, endLevel: end })
+  const a = { pts: [], cum: [0, 100, 200], total: 200, zAt: () => 30, startLevel: 30, endLevel: 30 }
+  const lines = joinDecks(chains, [() => a, (fix) => flat(0, fix?.end ?? 20)])
+  assert.equal(lines[1].endLevel, 30)
+  assert.equal(lines[1].startLevel, 0)
+  assert.equal(lines[0], a)
+})
+
+test('ground left standing under a deck is carved down to the ground either side', () => {
+  const r: Region = { ...region, width: 200, depth: 200 }
+  const v = makeView(r, 0)
+  // A cut 60 m wide running along N' (floor 0, rims 10), crossed along E' by a 100 m deck that
+  // the ground model kept as a ridge at street level across the cut.
+  const t = makeTerrain(v, 5, 1, (lon, lat) => {
+    const [x, y] = v.toView(lon, lat)
+    return Math.abs(x) > 30 || Math.abs(y) < 8 ? 10 : 0
+  })
+  const before = t.elevation([0, 0])
+  assert.ok(before > 5, `ridge stands ${before}`)
+  carveUnderBridges(t, [{ pts: [[-60, 0], [60, 0]], width: 12 }], [[-60, 0], [60, 0]])
+  const under = t.elevation([0, 0])
+  assert.ok(under < before - 4, `ground under the deck is ${under}`)
+  // The rims and the ground off the deck are untouched; nothing is raised.
+  assert.ok(Math.abs(t.elevation([60, 0]) - 10) < 1e-6)
+  assert.ok(Math.abs(t.elevation([0, 40])) < 1e-6)
+})
+
+test('a footbridge into a building is a skyway; a sidewalk beside a bridge is not', () => {
+  const hall = extrude(view, pal, 'hall', square(0, 0, 20), [], 0, 30, 'none', 'none')
+  const roofs = roofIndex([hall])
+  const pts: Vec2[] = [[10, 10], [10, 40]]
+  assert.equal(isSkyway({ highway: 'footway', bridge: 'yes' }, pts, roofs), true)
+  assert.equal(isSkyway({ highway: 'footway', footway: 'sidewalk', bridge: 'yes' }, pts, roofs), false)
+  assert.equal(isSkyway({ highway: 'primary', bridge: 'yes' }, pts, roofs), false)
+  assert.equal(isSkyway({ highway: 'footway', bridge: 'yes' }, [[50, 50], [50, 80]], roofs), false)
+  // A long walkway that passes a building (a suspension bridge's sidewalk at its towers) is not.
+  assert.equal(isSkyway({ highway: 'cycleway', bridge: 'yes' }, [[10, 10], [10, 500]], roofs), false)
+})
+
+test('a pier stands behind its deck and behind a building nearer the camera', () => {
+  const deck: Item = { id: 'd', kind: 'bridge', hull: square(0, 20, 10), zMin: 18, zMax: 20, key: 25, shapes: [], dots: [], span: { a: [0, 25], b: [10, 25], z: 20, bridge: 'd' } }
+  const pier: Item = { id: 'p', kind: 'bridge', hull: square(4, 24, 2), zMin: 0, zMax: 18, key: 25, shapes: [], dots: [], pier: true }
+  assert.equal(compare(pier, deck), -1)
+  assert.equal(compare(deck, pier), 1)
+  const house = extrude(view, pal, 'h', square(0, 0, 10), [], 0, 8, 'none', 'none')
+  assert.equal(compare(pier, house), -1)
+})
+
+test('a skyway is left out and carves nothing; a street bridge in its place carves the ridge', async () => {
+  const { buildScene } = await import('../src/scene.ts')
+  const m = 1 / 111320
+  const box = (x: number, y: number, s: number) => [[x, y], [x + s, y], [x + s, y + s], [x, y + s], [x, y]].map(([a, b]) => ({ lon: a * m, lat: b * m }))
+  // Two halls 40 m apart, a way between them at y = 10; the ground model kept a ridge under it
+  // across a cut 40 m wide.
+  const scene = (tags: Record<string, string>) => buildScene({ ...region, snap: false, width: 200, depth: 200, terrain: { cell: 5 } }, parseOsm(JSON.stringify({ elements: [
+    { type: 'way', id: 1, tags: { building: 'yes', height: '20' }, geometry: box(-40, 0, 20) },
+    { type: 'way', id: 2, tags: { building: 'yes', height: '20' }, geometry: box(20, 0, 20) },
+    { type: 'way', id: 3, tags: { ...tags, bridge: 'yes', layer: '1' }, geometry: [{ lon: -20 * m, lat: 10 * m }, { lon: 20 * m, lat: 10 * m }] },
+  ] })), pal, (lon, lat) => (Math.abs(lon / m) > 20 || Math.abs(lat / m - 10) < 6 ? 10 : 0))
+  const sky = scene({ highway: 'footway' })
+  assert.equal(sky.stats.skywaysLeftOut, 1)
+  assert.equal(sky.stats.groundUnderBridgesLowered, undefined)
+  assert.ok(!sky.items.some((i) => i.kind === 'bridge'))
+  const street = scene({ highway: 'primary' })
+  assert.equal(street.stats.skywaysLeftOut, undefined)
+  assert.ok((street.stats.groundUnderBridgesLowered ?? 0) > 0)
+})
+
+test('a sidewalk beside its street is one deck with it; a short stub is level with the deck it touches', () => {
+  const chain = (id: string, tags: Record<string, string>, pts: Vec2[]) => ({ line: { type: 'line' as const, id, tags: { bridge: 'yes', ...tags }, points: pts }, names: (tags.name ?? '').toLowerCase(), rampStart: true, rampEnd: true })
+  const line = (pts: Vec2[], z: (s: number) => number) => {
+    const cum = [0]
+    for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]))
+    const total = cum[cum.length - 1]
+    return { pts, cum, total, zAt: z, startLevel: z(0), endLevel: z(total) }
+  }
+  // A 60 m street along x at y = 0, its deck climbing from 10 to 16; a 50 m sidewalk 9 m to
+  // its side on a profile of its own, lower; a 50 m ramp 4 m to the other side; a 6 m stub that
+  // ends on the street's node at x = 30; a footbridge that crosses the street.
+  const chains = [
+    chain('street', { highway: 'primary', name: 'Broad' }, [[0, 0], [30, 0], [60, 0]]),
+    chain('walk', { highway: 'footway', footway: 'sidewalk' }, [[5, 9], [55, 9]]),
+    chain('ramp', { highway: 'primary_link' }, [[0, -4], [58, -4]]),
+    chain('stub', { highway: 'footway' }, [[30, 0], [30, 6]]),
+    chain('across', { highway: 'footway' }, [[20, -12], [20, 12]]),
+  ]
+  const lines = [
+    line([[0, 0], [30, 0], [60, 0]], (s) => 10 + s / 10),
+    line([[5, 9], [55, 9]], () => 5),
+    line([[0, -4], [58, -4]], () => 20),
+    line([[30, 0], [30, 6]], (s) => 2 + s),
+    line([[20, -12], [20, 12]], () => 3),
+  ]
+  // Chains carry lon/lat points; these share the street's node at (30, 0) by key.
+  const out = groupDecks(chains, lines)
+  // The sidewalk takes the street's heights where it lies beside it, not the ramp's.
+  for (const s of [0, 25, 50]) assert.ok(Math.abs(out[1].zAt(s) - (10 + (5 + s) / 10)) < 0.05, `walk at ${s}: ${out[1].zAt(s)}`)
+  assert.ok(Math.abs(out[1].startLevel - 10.5) < 0.05)
+  // The street and the crossing footbridge keep their own.
+  assert.equal(out[0], lines[0])
+  assert.equal(out[4], lines[4])
+  // The stub is level, at the street's height at the shared node.
+  assert.equal(out[3].zAt(0), 13)
+  assert.equal(out[3].zAt(6), 13)
+})
+
+test('the other half of a divided street follows the longer half', () => {
+  const chain = (id: string, name: string, pts: Vec2[]) => ({ line: { type: 'line' as const, id, tags: { bridge: 'yes', highway: 'primary', name }, points: pts }, names: name.toLowerCase(), rampStart: true, rampEnd: true })
+  const line = (pts: Vec2[], z: (s: number) => number) => {
+    const total = Math.hypot(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1])
+    return { pts, cum: [0, total], total, zAt: z, startLevel: z(0), endLevel: z(total) }
+  }
+  const chains = [chain('east', 'Broad', [[0, 0], [24, 0]]), chain('west', 'Broad', [[22, 10], [2, 10]]), chain('other', 'Main', [[22, -10], [2, -10]])]
+  const out = groupDecks(chains, [line([[0, 0], [24, 0]], (s) => 10 + s / 4), line([[22, 10], [2, 10]], () => 0), line([[22, -10], [2, -10]], () => 0)])
+  // Running the other way: its start lies beside the street's 22 m mark.
+  assert.ok(Math.abs(out[1].startLevel - 15.5) < 0.05)
+  assert.ok(Math.abs(out[1].endLevel - 10.5) < 0.05)
+  // A street of another name keeps its own.
+  assert.equal(out[2].startLevel, 0)
 })
