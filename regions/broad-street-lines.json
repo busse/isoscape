@@ -22,7 +22,6 @@
     "cell": 12,
     "contour": 0,
     "majorEvery": 5,
-    "rapids": 0.035,
     "demResolution": 5
   },
   "time": {

@@ -305,9 +305,11 @@ stand above it. The surface at each water node is taken as a low percentile of t
 within 30 m, then smoothed along the water. Anything a meter or more above that surface is
 drawn as exposed rock, which gives the boulder fields. The water drapes on the surface, so
 it lies level across the river and falls along it. **Rapids** are drawn where that surface
-falls faster than `terrain.rapids` (m/m) measured over 40 m: white strokes across the
-current, with froth where it drops hardest. OSM weirs are drawn as white crests. Rocks and
-rapids are only read at least two cells (10 m) from shore. **The shoreline follows the
+falls faster than `terrain.rapids` (m/m, 4 m per km by default) along the river's channel,
+measured over a 200 m reach: white strokes across the current, as thick as the fall. OSM
+weirs are drawn as white crests. Rocks and rapids are only read on rivers (not lakes, basins
+or the sea), at least two cells (10 m) from shore, and never on ground painted over the
+water. **The shoreline follows the
 lidar, not OSM's outline:** near-shore "water" standing more than a meter above the river is
 given back to the land at its own height. The water's edge is then traced through the
 corrected water grid (marching squares over a lightly smoothed mask) and drawn at the
@@ -352,7 +354,7 @@ same pipeline on a flat plate.
     "cell": 5,                    // grid spacing, meters
     "contour": 2,                 // contour interval, meters (0 for none)
     "majorEvery": 5,              // every 5th contour heavier
-    "rapids": 0.035,              // water-surface fall (m/m over 40 m) that reads as rapids
+    "rapids": 0.004,              // river fall along its channel (m/m over 200 m) that reads as rapids
     "demResolution": 1,           // meters per pixel to fetch (default 1, or the source's own spacing)
     "source": "3dep",             // where the heights come from; see Elevation sources
     "fillFrom": "copernicus"      // optional: a second source for gaps (a national model stops at the border)
@@ -397,8 +399,9 @@ in the countryside:
   Database](https://www.mrlc.gov/) (NLCD 2021, 30 m, public domain), under OSM's own land use.
 
 `fetch` gets them along with everything else; `fetch <region> --extras-only` gets just these.
-For tidal water, set `terrain.rocks: false` and `terrain.rapids: 0`: river logic has nothing to
-find there.
+The sea (drawn from the coastline) and still water get no rocks or rapids. For a tidal river
+mapped as a river, set `terrain.rocks: false` and `terrain.rapids: 0`: river logic has nothing
+to find there.
 
 ## Time
 

@@ -102,7 +102,9 @@ published print in place: redraw it as the next version (`-vN` files, catalog `v
 - The hillshade is drawn as 24 nested bands each way, traced between 5 m grid nodes, so at
   extreme zoom a band's edge shows as a faint step in shade, and its bends as short straight
   runs.
-- Rapids come from the lidar's water surface, read only 10 m or more from shore; a polygon
+- Rapids come from the lidar's water surface, read along the channel over 200 m and only
+  10 m or more from shore, so they sit where the hydro-flattening put its steps (on the James
+  the north channel beside Belle Isle reads level, its drop all at the dam below). A polygon
   far off from the real channel can still produce false falls.
 - Big regions make big SVGs (the I-195 to Rocketts view is about 36 MB; at 25 MB it took a
   browser 10–20 s to open). Use the `--png` render for quick looks.

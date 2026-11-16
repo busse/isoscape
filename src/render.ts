@@ -9,11 +9,11 @@
  * (and any hill there) paints over it, and ground behind it does not.
  */
 
-import { clipRingToRect, pointInPolygon, clipSegmentToRect, hash, type Rect, type Ring, type Vec2 } from './geom.ts'
+import { clipRingToRect, distToSegment, pointInPolygon, clipSegmentToRect, hash, type Rect, type Ring, type Vec2 } from './geom.ts'
 import { GROUND_ORDER } from './classify.ts'
 import { paintOrder } from './order.ts'
 import type { Item, Scene, Shape } from './scene.ts'
-import { contours, nodeShade, riverFall, type ContourSegment } from './terrain.ts'
+import { contours, FALL_REACH, nodeShade, polygonMask, RAPIDS, riverFall, type ContourSegment } from './terrain.ts'
 import { isoBand, type BandPoint } from './isoband.ts'
 import { COVER_OF, COVER_ORDER, type CoverGroup } from './landcover.ts'
 import { demCredit } from './dem-sources.ts'
@@ -328,11 +328,12 @@ export const renderSvg = (scene: Scene): Rendered => {
   // Cover on land paints under the water: with terrain, the water comes from the grid and is
   // painted first in each strip, so this cover goes in ahead of it (see paintStrip).
   const underWater: Layer[] = coverLayers(false)
+  const overWater: Layer[] = coverLayers(true)
   const layers: Layer[] = [
     // OSM's water outline draws a flat scene's shore; with terrain the water grid does.
     { cls: 'W', entries: T.flat ? water.map((g) => entryOf(g.rings)) : [] },
     { cls: 'I', entries: T.flat ? islands.map((g) => entryOf(g.rings)) : [] },
-    ...coverLayers(true),
+    ...overWater,
     ribbonLayer('canal'),
     ribbonLayer('weir'),
     ribbonLayer('path'),
@@ -368,8 +369,33 @@ export const renderSvg = (scene: Scene): Rendered => {
     else contoursByRow.set(s.row, [s])
   }
   stats.contourSegments = allContours.length
-  const rapidsThreshold = opts.rapids ?? 0.035
+  const rapidsThreshold = opts.rapids ?? RAPIDS
   let rapidCells = 0
+  // Ground painted over the river (a bed of bare rock, a wooded island the outline left in the
+  // water) is drawn dry: no rock or rapid is drawn on it.
+  const dryBed = T.flat ? new Uint8Array(0) : polygonMask(T, overWater.flatMap((l) => l.entries.map((e) => e.rings)))
+  // A weir or dam mapped across the river is drawn as one: the lidar sees it standing clear of
+  // the water, but it is a wall, not boulders. A mapped line rarely matches the lidar to the
+  // meter, so no rock is drawn within 20 m of it.
+  const nearWeir = new Uint8Array(T.flat ? 0 : T.nx * T.ny)
+  if (!T.flat) {
+    for (const rb of scene.ribbons) {
+      if (rb.kind !== 'weir') continue
+      for (const [a, b] of rb.center) {
+        const reach = Math.max(c * 1.5, 20)
+        const i0 = Math.max(0, Math.floor((Math.min(a[0], b[0]) - reach - T.x0) / c))
+        const i1 = Math.min(T.nx - 1, Math.ceil((Math.max(a[0], b[0]) + reach - T.x0) / c))
+        const j0 = Math.max(0, Math.floor((Math.min(a[1], b[1]) - reach - T.y0) / c))
+        const j1 = Math.min(T.ny - 1, Math.ceil((Math.max(a[1], b[1]) + reach - T.y0) / c))
+        for (let jj = j0; jj <= j1; jj++) {
+          for (let ii = i0; ii <= i1; ii++) {
+            if (distToSegment([T.x0 + ii * c, T.y0 + jj * c], a, b) <= reach) nearWeir[jj * T.nx + ii] = 1
+          }
+        }
+      }
+    }
+  }
+  const onDryBed = (k: number) => dryBed[k] === 1
 
   // ---- strips -----------------------------------------------------------------------------------
   // Two grid rows per strip, aligned to the grid, from the far edge to the near.
@@ -740,18 +766,22 @@ export const renderSvg = (scene: Scene): Rendered => {
           if (rapidsThreshold <= 0) continue
           const fall = riverFall(T, i, j)
           if (fall === null || fall.slope < rapidsThreshold) continue
+          const k = j * T.nx + i
+          if (onDryBed(k) || onDryBed(k + 1) || onDryBed(k + T.nx) || onDryBed(k + T.nx + 1)) continue
           const slope = fall.slope
           rapidCells++
           const h = hash(`${i},${j}`)
+          // In proportion to the fall: full at four times the threshold.
           const strength = Math.min(1, (slope - rapidsThreshold) / (rapidsThreshold * 3))
           const cx = T.x0 + (i + 0.5) * c
           const cy = T.y0 + (j + 0.5) * c
           // Across the current: perpendicular to the downhill direction.
           const ux = -fall.down[1]
           const uy = fall.down[0]
-          // Sparse and deliberate: one stroke for a riffle, two where it really drops.
-          if (hash(`k${i},${j}`) % 3 === 0 && strength < 0.5) continue
-          const marks = strength < 0.5 ? 1 : 2
+          // Sparse and deliberate, as thick as the fall: a stroke in every few cells of a riffle,
+          // one or two in every cell where it really drops.
+          if ((hash(`k${i},${j}`) % 1000) / 1000 > 0.15 + 0.65 * strength) continue
+          const marks = strength < 0.9 ? 1 : 2
           for (let m = 0; m < marks; m++) {
             const hm = hash(`${h}:${m}`)
             const jx = ((hm % 1000) / 1000 - 0.5) * c * 0.8
@@ -762,14 +792,15 @@ export const renderSvg = (scene: Scene): Rendered => {
             foam += pathOf([drape(a), drape(b)], false)
           }
           const q: Vec2[] = [[cx - c / 2, cy - c / 2], [cx + c / 2, cy - c / 2], [cx + c / 2, cy + c / 2], [cx - c / 2, cy + c / 2]]
-          if (strength > 0.3) froth += `<path class="froth" fill-opacity="${(0.1 + 0.25 * strength).toFixed(2)}" d="${pathOf(q.map(drape))}"/>`
+          // The froth fades in from nothing, so a stretch of it has no edge.
+          if (strength > 0.6) froth += `<path class="froth" fill-opacity="${(0.2 * (strength - 0.6) / 0.4).toFixed(2)}" d="${pathOf(q.map(drape))}"/>`
         }
       }
       // Rock standing clear of the river: the boulder fields that make the falls.
       let rock = ''
       for (let j = s.j0; j < s.j1; j++) {
         for (let i = iMin; i < iMax; i++) {
-          if (T.rocks[j * T.nx + i] !== 1) continue
+          if (T.rocks[j * T.nx + i] !== 1 || onDryBed(j * T.nx + i) || nearWeir[j * T.nx + i] === 1) continue
           const cx = T.x0 + i * c
           const cy = T.y0 + j * c
           const h = hash(`r${i},${j}`)
@@ -829,6 +860,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   }
   out.push(`</svg>`)
   stats.rapidCells = rapidCells
+  if (!T.flat) stats.rapidsReach = FALL_REACH
   stats.strips = strips.length
   return { svg: out.join('\n'), viewBox: vb, stats }
 }
