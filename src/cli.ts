@@ -5,6 +5,7 @@ import { parseArgs, promisify } from 'node:util'
 import { archiveBuild, listBuilds } from './archive.ts'
 import { backfill } from './backfill.ts'
 import { cleanDem, fetchDem, loadDem, sampler } from './dem.ts'
+import { sceneCredits } from './credits.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
 import { fetchFootprints, loadFootprints } from './footprints.ts'
 import { coverSampler, fetchLandcover, loadLandcover } from './landcover.ts'
@@ -215,7 +216,7 @@ export const main = async (argv: string[]): Promise<void> => {
     }
     case 'info': {
       const scene = await loadScene(name, values.palette, values.year === undefined ? undefined : Number(values.year))
-      console.log(JSON.stringify({ region: scene.region.name, bearing: Number(scene.view.bearing.toFixed(2)), ...scene.stats }, null, 2))
+      console.log(JSON.stringify({ region: scene.region.name, bearing: Number(scene.view.bearing.toFixed(2)), ...scene.stats, credits: sceneCredits(scene.region, scene.stats, scene.terrain.flat) }, null, 2))
       return
     }
     case 'locate': {
@@ -322,6 +323,7 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
     bearing: scene.view.bearing,
     ms: Math.round(performance.now() - t0),
     stats: { ...scene.stats, ...rendered.stats },
+    credits: sceneCredits(scene.region, scene.stats, scene.terrain.flat),
     config: scene.region,
     sky: scene.palette.sky,
     ...(scene.time === undefined ? {} : {

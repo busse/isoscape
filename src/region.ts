@@ -69,7 +69,8 @@ export interface Region {
    */
   readonly time?: {
     readonly history: string
-    readonly yearBuilt?: { readonly url: string; readonly field: string }
+    /** `credit`: how prints and pages credit the year-built records, when any date comes from them. */
+    readonly yearBuilt?: { readonly url: string; readonly field: string; readonly credit?: string }
   }
   /** Draw the ground with relief from data/<region>/dem.bin.gz. Omit for a flat plate. */
   readonly terrain?: TerrainOptions
