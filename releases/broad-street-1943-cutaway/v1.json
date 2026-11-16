@@ -3,11 +3,11 @@
  "title": "Broad Street Station, 1943: Cutaway",
  "version": 1,
  "version_note": null,
- "recorded": "2026-11-16T21:43:51+00:00",
+ "recorded": "2026-11-16T22:43:59+00:00",
  "provenance": "recorded at release",
  "isoscape": {
-  "commit": "d105be7834967ba9162e329946656b9f34bfe22f",
-  "subject": "Merge shop-links: every shop link in the explorer comes from shop.onSale",
+  "commit": "66c9560b44027a1addcd27c434d5e9b2113f25b4",
+  "subject": "Release records: The James and Gwynn's Island v3 rebuild and restamp byte for byte",
   "dirty": false
  },
  "kind": "cutaway",
@@ -105,7 +105,7 @@
   "cutaways/broad-street-1943.json": "23c16bfdcfed0f2da5f043752256e14794c18e536e860d0dfe5ecdd42cf6a781",
   "tools/cutaway/sheet.py": "39e442e3e32e3efe0b52ed800ebc2b7af6a6be69b78d4da9b95e7f71f2ee69e9",
   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
-  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
   "regions/broad-street-station-cutaway.json": "2e0cb0495cf16520e62b15af2cbb788249515be48b734e071ace5f7184b6b82e",
   "history/broad-street-station.json": "d3a598f059fca4d9c544a6ce042a6cbaf27b67b043624b311816fc059850400e",
@@ -129,6 +129,14 @@
    "bytes": 5282738,
    "printful_file_id": 1113731857
   },
+  "prints": [
+   {
+    "file": "print-files/broad-street-1943/broad-street-1943-cutaway_24x18.jpg",
+    "sha256": "0ea9bc3e75af709801701a81758d3c649bad4e581d42889496114e38aae25ea6",
+    "bytes": 3574455,
+    "printful_file_id": 1113731560
+   }
+  ],
   "canvas": []
  },
  "store": {
@@ -171,7 +179,15 @@
     0.95417
    ]
   },
-  "products": [],
+  "products": [
+   {
+    "handle": "broad-street-station-1943-cutaway",
+    "id": "gid://shopify/Product/9138049187958",
+    "format": "all (merged)",
+    "status": "ACTIVE",
+    "variants": 4
+   }
+  ],
   "mockups": {
    "Print": [
     "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-cutaway_32x24-print_a6bb3d9e-37ef-4127-a1d3-23d9c73685dd.jpg?v=1794864969",
