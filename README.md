@@ -95,17 +95,55 @@ the next build) keeps your place, and Back and Forward move between pages and th
 
 ### Link previews
 
-Chat apps and social sites ignore the `#…` part of a link and run no script, so each build
-also gets a share page, `out/s/<id>.html` (and each page `out/s/page-<slug>.html`), with its
-own title, description and a 1200×630 preview image, `out/builds/<id>/social.png` (the picture
-cropped to fit; `rsvg-convert` or Chrome renders it, else the thumbnail stands in). A share
-page forwards to the explorer and keeps the fragment, so the **Link** button (`L`) copies
-`s/<id>.html#<the exact view>`. `isoscape explorer` makes any missing images and pages.
+Chat apps and social sites (Facebook, Threads, LinkedIn, iMessage, Slack, X, Bluesky, Discord)
+run no script and never send the `#…` part of a link, so every `index.html#…` address previews
+as `index.html` itself: the site's card, never the map or page it names. So the explorer also
+writes share pages in `out/s/`, each with its own title, description, canonical link and
+1200×630 picture, and a script that sends a visitor on into the explorer, keeping any fragment
+the link carries:
+
+- `s/<name>.html` for each map and each year of a dated series, named as its static page
+  `m/<name>.html` is and opening its lasting route (`#<region>` or `#<region>:<year>`), so the
+  address outlives rebuilds;
+- `s/page-<slug>.html` for each content page;
+- `s/<id>.html` for each build. One left from a build that is gone is rewritten to its region's
+  card, and the explorer opens a gone build id as the newest build of the same name, so links
+  already shared keep working and keep a picture that exists.
+
+The **Link** button (`L`, and "Copy link" on a page; on a phone, the share sheet) copies the
+share page's address, with the view in the fragment: `s/lm-grand-canyon.html#lm-grand-canyon@…`.
+Served over http(s), the explorer also shows that address in the address bar (with
+`history.replaceState`; `<base href="./">` keeps every relative URL beside `index.html`), so an
+address copied from there previews too, and reloading it comes back to the same view. Its
+canonical link follows the `p/` or `m/` page of what is shown, which is what a browser's own
+Share sends in Chrome. Analytics still report the explorer's own path with the route
+(`/isoscape/#lm-grand-canyon`), as before. An address written by hand as `index.html#…` still
+opens the view, and still previews as the site.
+
+The picture for a build is `out/builds/<id>/social.png` (the picture cropped to 1.91:1;
+`rsvg-convert` or Chrome renders it, else the thumbnail stands in), and previews use
+`social.jpg` beside it (ImageMagick or Python's Pillow makes it, about a fifth the bytes; some
+apps drop pictures near 1 MB). A page's own picture is its front matter's `social:` (below).
+`isoscape explorer` makes any missing images and pages.
+
 Previews need absolute URLs: before publishing, give the public address of `out/` in
 `isoscape.config.json` (`{ "siteUrl": "https://example.org/isoscape/" }`), in
 `ISOSCAPE_SITE_URL`, or as `--site-url` on `build`, `series` or `explorer`, and rebuild the
 page. `"flagship": "<region>"` there picks the site's own preview image (default: the newest build), which content
 pages share unless their front matter names their own (`social:`, below).
+
+To check every page's preview tags, in an output directory or on the live site:
+
+```sh
+python3 tools/check/previews.py out/
+python3 tools/check/previews.py https://busse.github.io/isoscape/
+```
+
+It lists each page with a missing tag, a relative URL, an image that is not served (or not in
+the directory), not 1.91:1, not the size its tags say, or over 1 MB, and exits 1 if any has
+one. Platforms cache a preview for days or weeks after first fetching a URL; to see a fixed one
+at once, ask for it again in Facebook's Sharing Debugger or LinkedIn's Post Inspector, or share
+the URL with a `?v=2` on the end.
 
 The same file can give the explorer a front page. `"home"` has a `title`, an `intro`, `heroes`
 (featured views, each a `region`, optional `year` in a dated series, `title`, `blurb`, and
@@ -211,7 +249,10 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
 
 - `social` (optional) names a 1200×630 PNG or JPEG beside the page for its link preview; it
   is copied to `out/s/page-<slug>.jpg` (or `.png`). Without it, a page previews with the
-  site's flagship view. `world-landmarks-social.jpg` is one, made from the five maps.
+  site's flagship view. `world-landmarks-social.jpg` is one, made from the five maps. Make it
+  the drawing, not the whole sheet: at the size a preview shows, a sheet's text cannot be
+  read. A set's (`tools/sets/set.py`) is its big map whole, and a cutaway's
+  (`tools/cutaway/sheet.py --page`) is the isometric cut alone.
 - `title` is the nav label (default: the first `#` heading). `order` sorts the nav, lowest
   first (default 100); the shipped pages use 10 and 90. `slug` overrides the file name.
 - Section ids follow GitHub's rule (lower case, punctuation dropped, spaces to hyphens), and

@@ -744,6 +744,16 @@ these pages as `p/<slug>.html`, each map as `m/<region>.html` (and each year of 
 as `m/<region>-<year>.html`) with its picture and this same "How this view was made" text, and a
 `sitemap.xml` listing them all.
 
+Chat apps and social sites never see the part of an address after `#`, so every view in the
+explorer would preview as the front page. Each map, each year of a series and each page also
+has a share page in `s/`, named as its plain page is, with its own title, description and
+picture, and a script that sends a visitor on into the explorer at that view. The **Link**
+button copies a share page's address, and the address bar shows it while you look, so an
+address copied from either previews as what you were looking at. The pictures are 1,200 × 630
+pixels (1.91:1): a map cropped from its middle, saved as a JPEG at quality 86, about 140 to 260
+KB; a page with a sheet of its own, such as a set or a cutaway, uses its drawing alone, not the
+whole sheet.
+
 Code: `src/archive.ts`, `src/explorer.ts`, `src/pages.ts`, `src/story.ts`, `src/static-pages.ts`.
 
 ## Credits
