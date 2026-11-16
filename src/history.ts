@@ -132,7 +132,7 @@ export interface History {
   /** The year that counts as today: undated buildings appear in this scene only. */
   readonly present: number
   /** Curated years built for particular OSM buildings, which win over every other date. */
-  readonly dates: readonly { readonly id: string; readonly name?: string; readonly year: number; readonly source: string; readonly note?: string }[]
+  readonly dates: readonly { readonly id: string; readonly name?: string; readonly year: number; readonly until?: number; readonly source: string; readonly note?: string }[]
   /** Fire-insurance maps traced into footprints: the editions used, and the buildings since lost. */
   readonly sanborn?: { readonly lost: string | readonly string[]; readonly editions: readonly number[]; readonly source: string }
   readonly traced: readonly TracedBuilding[]
@@ -294,6 +294,12 @@ export interface Parcel {
 
 export interface Dated {
   readonly year: number
+  /**
+   * Curated only: drawn before this year and not from it, until today's scene, which draws
+   * everything mapped today. For a part that stands in for a building before it was enlarged
+   * (the Capitol's central block before its wings), whose full outline is dated from then.
+   */
+  readonly until?: number
   readonly source: 'curated' | 'osm' | 'parcel'
 }
 
@@ -330,13 +336,15 @@ export const dateBuildings = (
     return -1
   }
   const fixed = new Map(curated.map((d) => [d.id, d.year]))
+  const untils = new Map(curated.filter((d) => d.until !== undefined).map((d) => [d.id, d.until as number]))
   const out = new Map<string, Dated>()
   const tenants = new Map<number, PolygonFeature[]>()
   for (const b of buildings) {
     if (b.tags.building === undefined && b.tags['building:part'] === undefined) continue
     const mine = fixed.get(b.id)
     const own = parseYear(b.tags.start_date ?? b.tags['building:start_date'] ?? b.tags.construction_date)
-    if (mine !== undefined) out.set(b.id, { year: mine, source: 'curated' })
+    const until = untils.get(b.id)
+    if (mine !== undefined) out.set(b.id, { year: mine, ...(until === undefined ? {} : { until }), source: 'curated' })
     else if (own !== null) out.set(b.id, { year: own, source: 'osm' })
     // Every building counts as a tenant of its parcel, dated or not.
     const k = parcelOf(b)

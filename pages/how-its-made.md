@@ -368,7 +368,9 @@ which is which.
 every scene from its year on. The year comes from:
 
 1. a curated year, for a few landmarks whose records are known to be wrong or missing (the
-   Capitol, St. John's Church, the Old Stone House and so on), each with a source;
+   Capitol, St. John's Church, the Old Stone House and so on), each with a source. A curated
+   year can also end: the Capitol's central block (OSM's middle building part) is drawn alone
+   from 1788, and its full outline, with the wings of 1904–06, from 1906;
 2. else OpenStreetMap's `start_date` tag;
 3. else the city assessor's *year built* for the parcel under the building's center.
 

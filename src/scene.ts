@@ -530,14 +530,15 @@ export const buildScene = (
 
 /**
  * The features that stood in a year. Buildings by their dates (undated ones only in the
- * present); everything else by the history's era rules.
+ * present; a curated `until` ends one before today); everything else by the history's era rules.
  */
 export const asOf = (features: readonly Feature[], time: TimeContext): Feature[] =>
   features.filter((f) => {
     const isBuilding = f.type === 'polygon' && (f.tags.building !== undefined || f.tags['building:part'] !== undefined)
     if (!isBuilding) return featureAlive(f, time.year, time.history)
     const d = time.dates.get(f.id)
-    return d === undefined ? time.year >= time.history.present : d.year <= time.year
+    if (d === undefined) return time.year >= time.history.present
+    return d.year <= time.year && (d.until === undefined || time.year < d.until || time.year >= time.history.present)
   })
 
 /** The rectangle either side of a segment, as a ring: left offset `l`, right offset `r`. */

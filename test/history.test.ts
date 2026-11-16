@@ -81,6 +81,20 @@ test('as of a year: dated buildings from their year, undated ones only today', (
   assert.deepEqual(ids(2026), ['old', 'new'])
 })
 
+test('a curated part can stand in for a building until it was enlarged, and stays in today\'s scene', () => {
+  const curated = [
+    { id: 'core', year: 1788, until: 1906, source: 's' },
+    { id: 'whole', year: 1906, source: 's' },
+  ]
+  const fs = [building('core', 0, 0, 0.0001, { 'building:part': 'yes' }), building('whole', 0, 0, 0.0003)]
+  const dates = dateBuildings(fs, [], curated)
+  assert.equal(dates.get('core')?.until, 1906)
+  const ids = (y: number) => asOf(fs, { year: y, history: history(), dates }).map((f) => f.id)
+  assert.deepEqual(ids(1800), ['core'])
+  assert.deepEqual(ids(1910), ['whole'])
+  assert.deepEqual(ids(2026), ['core', 'whole'])
+})
+
 test('year built is read from the region\'s own data folder first, then the shared one; missing is an error', async () => {
   assert.deepEqual(yearBuiltDirs({ name: 'time', data: 'shared' }, 'd'), [join('d', 'time'), join('d', 'shared')])
   assert.deepEqual(yearBuiltDirs({ name: 'solo' }, 'd'), [join('d', 'solo')])

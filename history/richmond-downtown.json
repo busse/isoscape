@@ -777,11 +777,19 @@
  ],
  "dates": [
   {
+   "id": "w366226948",
+   "name": "Virginia State Capitol, central block",
+   "year": 1788,
+   "until": 1906,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "Jefferson's Capitol, completed 1788, drawn alone until the wings of 1904–06 were added. Its footprint is OSM's central building part (w366226948), taken to be the original building because it stands between the two wings; that identification and its height (OSM's, 8.1 m) are not from the source."
+  },
+  {
    "id": "w45088494",
    "name": "Virginia State Capitol",
-   "year": 1788,
+   "year": 1906,
    "source": "https://vga.virginia.gov/?p=73",
-   "note": "Completed 1788; the wings of 1904–06 are not drawn apart."
+   "note": "The Capitol as OSM outlines it today, with the wings of 1904–06, is drawn from 1906; before that only its central block (below) stands."
   },
   {
    "id": "w400327565",
