@@ -228,7 +228,7 @@ def from_redraw(store, key, d, mine):
     tools = base_print['tools']
     now = {f: sha(os.path.join(ISO, f)) for f in tools}
     base_dir = os.path.dirname(base_print['base'])
-    canvas = sorted(v for v in mine.values() if '_canvas-' in v['base'])
+    canvas = sorted((v for v in mine.values() if '_canvas-' in v['base']), key=lambda v: v['base'])
     sizes = ' '.join(re.search(r'_canvas-(\d+x\d+)\.jpg$', v['base']).group(1) for v in canvas)
     run = [f'python3 tools/print/compose.py tools/print/spec.json out/builds <store>/{base_dir} --only {key}']
     if canvas: run.append(f'python3 tools/print/canvas.py <store>/{base_print["base"]} <store>/{base_dir}/canvas {sizes}')

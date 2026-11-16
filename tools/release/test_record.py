@@ -77,6 +77,26 @@ class Redraw(unittest.TestCase):
             with self.assertRaises(SystemExit):
                 stamp.redraw_files(store, d, 'g', os.path.join(store, 'nowhere'))
 
+    def test_a_redraw_with_canvas_files_is_recorded(self):
+        # record.from_redraw over a stamp log with a print and two canvas files (the composed
+        # print is pinned to its builds by from_spec, stubbed here).
+        log = {f'g-v3{s}': {'design': 'g', 'version': 3, 'base': f'print-files/drawn/g-v3/{b}', 'base_sha256': 'x', 'redraw': True,
+                            'info': {'version': '3'}, 'at': {}, 'tools': {'tools/release/stamp.py': 'y'}}
+               for s, b in (('_36x24.jpg', 'g_36x24.jpg'), ('_canvas-30x20.jpg', 'canvas/g_canvas-30x20.jpg'), ('_canvas-18x12.jpg', 'canvas/g_canvas-18x12.jpg'))}
+        with tempfile.TemporaryDirectory() as store:
+            for v in log.values(): touch(os.path.join(store, v['base']))
+            spec, record.from_spec = record.from_spec, lambda key, d, made: ('compose', {'run': ['c'], 'pinned': 'p'}, [{'build': 'b'}], {'tools/print/spec.json': 'z'})
+            try:
+                kind, recipe, scenes, inputs = record.from_redraw(store, 'g', {'version': 3}, log)
+            finally:
+                record.from_spec = spec
+        self.assertEqual(kind, 'redraw')
+        self.assertEqual(scenes, [{'build': 'b'}])
+        self.assertIn('canvas.py', recipe['run'][1])
+        self.assertTrue(recipe['run'][1].endswith('18x12 30x20'))
+        self.assertIn('--base print-files/drawn/g-v3', recipe['run'][2])
+        self.assertEqual(len(recipe['files']), 3)
+
     def test_check_restamps_a_redraw(self):
         self.assertIn('redraw', check.STAMPED)
         self.assertIn('stamp', check.STAMPED)
