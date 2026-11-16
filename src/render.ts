@@ -1026,20 +1026,35 @@ export const renderSvg = (scene: Scene): Rendered => {
           const ux = -fall.down[1]
           const uy = fall.down[0]
           // Sparse and deliberate, as thick as the fall: a stroke in every few cells of a riffle,
-          // one or two in every cell where it really drops.
-          if ((hash(`k${i},${j}`) % 1000) / 1000 > 0.15 + 0.65 * strength) continue
+          // one or two in every cell where it really drops. A smooth field of clumps thins them
+          // unevenly, so a reach reads as broken water and not as bands of even hatching along
+          // the steps of the surface; it only ever takes marks away.
+          if ((hash(`k${i},${j}`) % 1000) / 1000 > (0.15 + 0.65 * strength) * rapidsClumps(i, j)) continue
           const marks = strength < 0.9 ? 1 : 2
           for (let m = 0; m < marks; m++) {
             const hm = hash(`${h}:${m}`)
-            const jx = ((hm % 1000) / 1000 - 0.5) * c * 0.8
-            const jy = (((hm >>> 10) % 1000) / 1000 - 0.5) * c * 0.8
-            const len = c * (0.35 + 0.3 * (((hm >>> 20) % 100) / 100))
-            const a: Vec2 = [cx + jx - ux * len, cy + jy - uy * len]
-            const b: Vec2 = [cx + jx + ux * len, cy + jy + uy * len]
+            const jx = ((hm % 1000) / 1000 - 0.5) * c
+            const jy = (((hm >>> 10) % 1000) / 1000 - 0.5) * c
+            const len = c * (0.2 + 0.5 * (((hm >>> 20) % 100) / 100))
+            // Each stroke turns up to 20 degrees off square to the current.
+            const turn = ((hash(`t${h}:${m}`) % 1000) / 1000 - 0.5) * 0.7
+            const vx = ux * Math.cos(turn) - uy * Math.sin(turn)
+            const vy = ux * Math.sin(turn) + uy * Math.cos(turn)
+            const a: Vec2 = [cx + jx - vx * len, cy + jy - vy * len]
+            const b: Vec2 = [cx + jx + vx * len, cy + jy + vy * len]
             foam += pathOf([drape(a), drape(b)], false)
           }
-          const q: Vec2[] = [[cx - c / 2, cy - c / 2], [cx + c / 2, cy - c / 2], [cx + c / 2, cy + c / 2], [cx - c / 2, cy + c / 2]]
-          // The froth fades in from nothing, so a stretch of it has no edge.
+          // The froth fades in from nothing, so a stretch of it has no edge; each cell's is a soft,
+          // uneven blob, off the cell's center, so the grid does not show.
+          const fr = c * (0.55 + 0.25 * ((h >>> 8) % 100) / 100)
+          const fx = cx + (((h >>> 4) % 100) / 100 - 0.5) * c * 0.5
+          const fy = cy + (((h >>> 12) % 100) / 100 - 0.5) * c * 0.5
+          const q: Vec2[] = []
+          for (let v = 0; v < 7; v++) {
+            const a = (v / 7) * Math.PI * 2 + (h % 5)
+            const wob = 0.7 + 0.3 * (((h >>> (v * 3)) % 8) / 8)
+            q.push([fx + Math.cos(a) * fr * wob, fy + Math.sin(a) * fr * wob])
+          }
           if (strength > 0.6) froth += `<path class="froth" fill-opacity="${(0.2 * (strength - 0.6) / 0.4).toFixed(2)}" d="${pathOf(q.map(drape))}"/>`
         }
       }
@@ -1153,6 +1168,21 @@ export const steepShade = (level: number): number => {
   const a = Math.abs(level)
   if (a <= SHADE_KNEE) return level
   return Math.sign(level) * (SHADE_KNEE + SHADE_SOFT * Math.log1p((a - SHADE_KNEE) / SHADE_SOFT))
+}
+/**
+ * A smooth field of clumps for the rapids marks, 0.4 to 1.6 (1 on average), varying over about
+ * four grid cells: value noise from a hash at every fourth node, eased between.
+ */
+export const rapidsClumps = (i: number, j: number): number => {
+  const g = 4
+  const i0 = Math.floor(i / g)
+  const j0 = Math.floor(j / g)
+  const u = (i / g - i0) ** 2 * (3 - 2 * (i / g - i0))
+  const v = (j / g - j0) ** 2 * (3 - 2 * (j / g - j0))
+  const n = (a: number, b: number) => (hash(`clump${a},${b}`) % 1000) / 1000
+  const top = n(i0, j0) * (1 - u) + n(i0 + 1, j0) * u
+  const bottom = n(i0, j0 + 1) * (1 - u) + n(i0 + 1, j0 + 1) * u
+  return 0.4 + 1.2 * (top * (1 - v) + bottom * v)
 }
 /** Over open water the shade field is held this many steps below every band. */
 const SHORE_CAP = 100

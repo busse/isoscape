@@ -282,6 +282,11 @@ per km.
 Each rapid point gets short white strokes across the current, **as thick as the fall**: a
 stroke in about one point in seven just over the threshold, rising to one in most points and
 two in some at four times it (16 m per km), with a faint wash of froth that fades in over the steepest.
+So a reach reads as broken water and not as even hatching along the steps of the lidar's
+surface, each stroke sits anywhere in its 5 m cell, turns up to 20° off square to the current
+and runs 2 to 7 m long; a smooth field of clumps about 20 m across scales how many points get
+one (0.4 to 1.6 times, 1 on average), and each point's froth is a soft, uneven blob off its
+center rather than a square. Only points over the threshold ever get a mark.
 The strokes are placed by a hash of the point's position, not at random, so the same data
 always draws the same marks. No rapid is drawn on ground painted over the river. Weirs
 mapped in OSM are drawn separately.

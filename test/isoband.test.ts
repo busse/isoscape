@@ -129,3 +129,22 @@ test('a simplified draped edge stays within its tolerance of every point, even o
   }
   assert.ok(worst <= 0.26, `off by ${worst}`)
 })
+
+test('rapids clumps: a smooth field from 0.4 to 1.6 that averages about 1', async () => {
+  const { rapidsClumps } = await import('../src/render.ts')
+  let sum = 0
+  let n = 0
+  let jump = 0
+  for (let j = 0; j < 80; j++) {
+    for (let i = 0; i < 80; i++) {
+      const v = rapidsClumps(i, j)
+      assert.ok(v >= 0.4 - 1e-9 && v <= 1.6 + 1e-9)
+      sum += v
+      n++
+      if (i > 0) jump = Math.max(jump, Math.abs(v - rapidsClumps(i - 1, j)))
+    }
+  }
+  assert.ok(Math.abs(sum / n - 1) < 0.1, `mean ${sum / n}`)
+  // Smooth: neighbors never differ by more than about half the range.
+  assert.ok(jump < 0.6, `jump ${jump}`)
+})
