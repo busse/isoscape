@@ -22,7 +22,7 @@ import { localMetres } from './region.ts'
 import { makeTerrain, rasterize, settleWater, stillWater, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
-import { canopyItems, dome, toned, trainItems } from './parts.ts'
+import { canopyItems, dome, partLevels, toned, trainItems } from './parts.ts'
 import { alive, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
@@ -430,6 +430,10 @@ export const buildScene = (
     // Curated landmarks: lost buildings, from published dimensions, in their own tone.
     let landmarks = 0
     let parts = 0
+    // Modeled parts first find their levels together, so a part can rest on another.
+    const partGround = curated.filter((h) => h.kind === 'landmark' && h.ring !== undefined && h.tone !== undefined)
+      .map((h) => ({ id: h.id, seat: h.seat, on: h.on, base: h.base, height: h.height, grounds: orient(toViewRing(view, h.ring!), true).map((p) => terrain.z(p)) }))
+    const levels = partLevels(partGround)
     for (const h of curated) {
       if (h.kind !== 'landmark' || h.ring === undefined) continue
       const outer = orient(toViewRing(view, h.ring), true)
@@ -438,7 +442,7 @@ export const buildScene = (
       const grounds = outer.map((p) => terrain.z(p))
       if (h.tone !== undefined) {
         // A part of a modeled building: from its seat, in its own tone.
-        const seat = (h.seat === 'max' ? Math.max(...grounds) : Math.min(...grounds)) + (h.base ?? 0)
+        const seat = levels.get(h.id) ?? Math.min(...grounds) + (h.base ?? 0)
         const t = toned(pal, h.tone)
         items.push(h.shape === 'dome'
           ? dome(view, pal, `history:${h.id}`, outer, seat, seat + (h.height ?? 10), h.name)

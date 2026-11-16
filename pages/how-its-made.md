@@ -458,7 +458,9 @@ loop of tracks) clears today's streets, lots and buildings from within it.
 Broad Street Station in 1943 is modeled from parts
 (`tools/stations/broad_street.py`): wings, center pavilion, porch, six columns and two piers,
 entablature, drum and a dome (a quarter circle in ten steps), each with a height above its
-seat, and the concourse seated on the high side of the ground so it bridges the tracks. The
+seat, and the concourse seated on the high side of the ground so it bridges the tracks. A part
+can rest on another: the columns and piers stand on the porch and the entablature on the
+columns, so on the sloping forecourt all six columns share one base and one top. The
 station's own colors live in the palette's `parts`: limestone, the dome's tile, the iron and
 roofing of the platform canopies, ramp houses, and the trains. Nine tracks follow the
 surviving platforms through the station and the USGS quadrangles of 1934 and 1956 around the
