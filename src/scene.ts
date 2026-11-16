@@ -23,7 +23,7 @@ import { makeTerrain, rasterize, settleWater, stillWater, type Terrain } from '.
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
-import { cutawayItems, partSolids, partTones, type PlacedPart } from './cutaway-scene.ts'
+import { cutawayItems, partSolids, partTones, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
 import { alive, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
 
@@ -601,6 +601,12 @@ export const buildScene = (
       })
       if (extra.section === true) items.length = 0
       for (const it of done.items) items.push(it)
+      if (extra.section !== true) {
+        (cut.travelers ?? []).forEach((t, k) => {
+          const at = view.toView(t.at[0], t.at[1])
+          items.push(travelerItem(view, pal, `traveler:${k + 1}`, at, t.floor === undefined ? terrain.z(at) : zOf(t.floor), t.facing))
+        })
+      }
       for (const [k, v] of Object.entries(done.stats)) stats[k] = v
       cutPlaneOut = done.plane
       if (done.sections.length > 0) sectionsOut = done.sections

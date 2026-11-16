@@ -97,6 +97,31 @@ def badge(x, y, n, conf, r=44):
     return circle + num
 
 
+def leader(x0, y0, x1, y1, r=0):
+    """A thin leader from (x0, y0), less r at that end, to a small dot at (x1, y1): the
+    wayfinding labels' leaders, drawn the same."""
+    d = ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5 or 1
+    sx, sy = x0 + (x1 - x0) * r / d, y0 + (y1 - y0) * r / d
+    return (f'<path d="M{sx:.0f} {sy:.0f}L{x1:.0f} {y1:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>'
+            f'<circle cx="{x1:.0f}" cy="{y1:.0f}" r="13" fill="{INK}" stroke="{PAPER}" stroke-width="3"/>')
+
+
+def badge_at(px, py, off, n, conf, r):
+    """A callout's badge on a drawing at the part's point (px, py), or, where the callout gives
+    `badge: [dx, dy]` (sheet units), moved off the part by that much into clear space, with a
+    leader back to a dot on the part, so the badge never hides what it names."""
+    if not off:
+        return badge(px, py, n, conf, r)
+    bx, by = px + off[0], py + off[1]
+    return leader(bx, by, px, py, r) + badge(bx, by, n, conf, r)
+
+
+def figure(x, y, h, shapes, fill, facing=1):
+    """The traveler glyph (the build's own shapes, in meters, feet at 0), feet at (x, y), h tall."""
+    k = h / 1.75
+    return '<g>' + ''.join('<path fill="{}" d="M{}Z"/>'.format(fill, 'L'.join(f'{x + px * k * facing:.1f} {y - py * k:.1f}' for px, py in poly)) for poly in shapes) + '</g>'
+
+
 def inner(svg_text):
     """An SVG's contents and its viewBox."""
     vb = [float(v) for v in re.search(r'viewBox="([^"]+)"', svg_text).group(1).split()]
@@ -136,6 +161,10 @@ def main():
     sec_a = json.load(open(base + '-section.anchors.json'))
     history = json.load(open(os.path.join(ROOT, json.load(open(os.path.join(ROOT, 'regions', region + '.json')))['time']['history'])))
     conf_of = {f['id']: f.get('confidence', 'approximate') for f in history['features']}
+    # The traveler, as the build drew it, and the route's color, as the section drew it.
+    traveler = sec_a.get('traveler')
+    m = re.search(r'<g class="traveler"><path fill="([^"]+)"', sec_svg)
+    route = m.group(1) if m else INK
     for g in spec['groups']:
         for c in g['callouts']:
             c['_conf'] = confidence(c, conf_of)
@@ -197,18 +226,19 @@ def main():
     x = COL_X
     for g in spec['groups']:
         out.append(text(x, y, g['title'].upper(), 58, 'bold', DIM, family=SANS, spacing=4))
+        if g.get('traveler') and traveler:
+            tw = font('bold', 58).getlength(g['title'].upper()) + 4 * len(g['title'])
+            out.append(figure(x + tw + 40, y + 4, 82, traveler['shapes'], route))
         out.append(f'<line x1="{x}" y1="{y + 32}" x2="{W - M}" y2="{y + 32}" stroke="{INK}" stroke-width="4"/>')
         y += 170
         for c in g['callouts']:
             conf = c['_conf']
-            if 'iso' in c:
-                p = anchor(c['iso'], iso_a)
+            for where, anchors, frame, (ox, oy, sc) in (('iso', iso_a, None, (ox_iso, oy_iso, s_iso)), ('section', sec_a, sec_a.get('frame'), (ox_sec, oy_sec, s_sec))):
+                if where not in c:
+                    continue
+                p = anchor(c[where], anchors, frame)
                 if p is not None:
-                    out.append(badge(ox_iso + p[0] * s_iso, oy_iso + p[1] * s_iso, c['n'], conf, 46))
-            if 'section' in c:
-                p = anchor(c['section'], sec_a, sec_a.get('frame'))
-                if p is not None:
-                    out.append(badge(ox_sec + p[0] * s_sec, oy_sec + p[1] * s_sec, c['n'], conf, 46))
+                    out.append(badge_at(ox + p[0] * sc, oy + p[1] * sc, c[where].get('badge'), c['n'], conf, 46))
             out.append(badge(x + 56, y - 26, c['n'], conf, 50))
             out.append(text(x + 140, y, c['title'], 70, 'bold'))
             yy = y + 86
@@ -258,11 +288,17 @@ def main():
     for conf, msg in spec['key']:
         out.append(badge(x + 56, ky - 22, None, conf, 42))
         out.append(text(x + 140, ky, msg, 56, 'regular', DIM))
-        ky += 100
+        ky += 92
     for line in wrap('The same marks, small, stand before each place the trains and streetcars went.', 'regular', 56, W - M - x - 140):
         out.append(text(x + 140, ky, line, 56, 'regular', DIM))
         ky += 76
-    ky += 60
+    if spec.get('travelerKey') and traveler:
+        ky += 26
+        out.append(figure(x + 56, ky + 14, 90, traveler['shapes'], route))
+        for line in wrap(spec['travelerKey'], 'regular', 56, W - M - x - 140):
+            out.append(text(x + 140, ky, line, 56, 'regular', DIM))
+            ky += 76
+    ky += 40
     for line in wrap(spec['sources'], 'italic', 50, W - M - x) + [''] + wrap(spec['notes'], 'italic', 50, W - M - x):
         if line:
             out.append(text(x, ky, line, 50, 'italic', DIM))
@@ -312,6 +348,8 @@ def page(spec, print_dir):
     out += ["## How sure each part is", '', P.get('key_intro', ''), '']
     out += [f"- **{marks[k].capitalize()}:** {key[k]}." for k, _ in spec['key']]
     out += ['', P.get('marks_note', 'The same marks, small, stand before each place the trains and streetcars went.'), '']
+    if spec.get('travelerKey'):
+        out += [f"The small red figures are travelers: {spec['travelerKey'][:1].lower() + spec['travelerKey'][1:]} Their height is a convention, not a source's claim.", '']
     if spec.get('wayfinding'):
         out += [f"## {P.get('wayfinding_heading', 'Where the trains and streetcars went')}", '']
         for wf in spec['wayfinding']:

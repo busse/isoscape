@@ -21,7 +21,11 @@
      },
      "section": {
       "s": -41,
-      "elevation": 67.0
+      "elevation": 67.0,
+      "badge": [
+       -40,
+       -150
+      ]
      },
      "confidence": "drawn"
     },
@@ -31,7 +35,11 @@
      "text": "Six columns between two piers.",
      "iso": {
       "part": "history:bss-c-column-2",
-      "dy": -0.3
+      "dy": -0.3,
+      "badge": [
+       120,
+       -170
+      ]
      },
      "section": {
       "part": "history:bss-entablature",
@@ -43,11 +51,19 @@
      "title": "Vestibule",
      "text": "Entrance halls on each side, with stairs and elevators up to the offices.",
      "iso": {
-      "part": "history:bss-c-entrance-hall-2-stair"
+      "part": "history:bss-c-entrance-hall-2-stair",
+      "badge": [
+       -200,
+       80
+      ]
      },
      "section": {
       "part": "history:bss-c-vestibule-1-column-1",
-      "dy": -0.2
+      "dy": -0.2,
+      "badge": [
+       0,
+       -170
+      ]
      }
     },
     {
@@ -55,7 +71,11 @@
      "title": "White Waiting Room",
      "text": "The main hall: a low dome over a shallow vault, with four long benches.",
      "iso": {
-      "part": "history:bss-c-hall-bench-2"
+      "part": "history:bss-c-hall-bench-2",
+      "badge": [
+       -170,
+       -110
+      ]
      },
      "section": {
       "part": "history:bss-c-hall-west-lunette",
@@ -67,7 +87,11 @@
      "title": "Tickets, Pullman, Information",
      "text": "Counters along the east side of the hall.",
      "iso": {
-      "part": "history:bss-c-band-counter-2"
+      "part": "history:bss-c-band-counter-2",
+      "badge": [
+       -120,
+       -140
+      ]
      }
     },
     {
@@ -93,7 +117,11 @@
      "title": "Baggage and parcel check",
      "text": "In the east wing, off the checking lobby.",
      "iso": {
-      "part": "history:bss-c-baggage-counter"
+      "part": "history:bss-c-baggage-counter",
+      "badge": [
+       -150,
+       -150
+      ]
      }
     },
     {
@@ -114,12 +142,20 @@
      "title": "Stairs",
      "text": "Down from the concourse to each platform.",
      "iso": {
-      "part": "history:bss-c-stair-2"
+      "part": "history:bss-c-stair-2",
+      "badge": [
+       170,
+       -30
+      ]
      },
      "section": {
       "part": "history:bss-c-stair-2",
       "dx": 0.3,
-      "dy": -0.25
+      "dy": -0.25,
+      "badge": [
+       -160,
+       300
+      ]
      }
     },
     {
@@ -136,14 +172,23 @@
      "title": "The trains",
      "text": "RF&P and Atlantic Coast Line. 33,324 passengers on April 22, 1943, the busiest day.",
      "iso": {
-      "part": "history:bss-track-2:1"
+      "part": "history:bss-track-2:1",
+      "badge": [
+       150,
+       -80
+      ]
      },
      "section": {
-      "part": "history:bss-track-2:end"
+      "part": "history:bss-track-2:end",
+      "badge": [
+       110,
+       260
+      ]
      },
      "confidence": "written"
     }
-   ]
+   ],
+   "traveler": true
   },
   {
    "title": "The building",
@@ -154,7 +199,11 @@
      "text": "Tile in 1943. The copper came in 1955.",
      "iso": {
       "part": "history:bss-dome",
-      "dy": -0.25
+      "dy": -0.25,
+      "badge": [
+       0,
+       -250
+      ]
      },
      "section": {
       "part": "history:bss-dome",
@@ -166,11 +215,19 @@
      "title": "Offices",
      "text": "Four floors in each wing: Trainmaster, Superintendent of Telegraph, General Superintendent.",
      "iso": {
-      "part": "history:bss-c-front-floor-3"
+      "part": "history:bss-c-front-floor-3",
+      "badge": [
+       0,
+       -200
+      ]
      },
      "section": {
       "part": "history:bss-c-front-floor-3",
-      "dx": -0.6
+      "dx": -0.6,
+      "badge": [
+       -170,
+       -60
+      ]
      }
     },
     {
@@ -282,5 +339,6 @@
   "wayfinding_heading": "Where the trains and streetcars went",
   "how": "The station is a model made of parts: the rooms of the first floor, the hall's octagon, its benches and counters, the portico and the concourse are traced from the first-floor plan published in The American Architect in 1919 (Plate 15), fitted by the 240-foot frontage; the levels, the dome and the basement are scaled from the sections (Plates 17 and 18), whose figures are illegible. The model is cut along one vertical plane down the station's axis. Every face the cut opens is drawn solid in ink; on the side lifted away, everything up to 1.5 m above the first floor stays, so the ground floor reads as a plan. The flat section below is the same plane seen square and level, with the building drawn 35 m deep behind it. Chris Busse drew it with isoscape, the open-source tool he built with Claude.",
   "drafted": "This page was drafted with Claude, Anthropic's AI (Claude Opus 5.5), and reviewed by Chris Busse. More on how we work in the [artist statement](artist-statement.md)."
- }
+ },
+ "travelerKey": "A traveler, drawn to scale: 1.75 m (5 ft 9 in) tall. The red line is the way from the street to the train."
 }

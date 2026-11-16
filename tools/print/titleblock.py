@@ -147,7 +147,7 @@ def find_spot(sheet, bw, bh, face=None, pad=None, step=4, where='foot'):
         if xs - p < 0:
             return None
         free = ~mask[:, xs - p:min(w, right + p)].any(axis=1)
-        for yb in range(h - (w - right), bhs + p, -1):
+        for yb in range(h - (w - right), max(bhs + p, h // 2), -1):     # the lower half only
             if free[yb - bhs - p:min(h, yb + p)].all():
                 return x0 + xs * step + (bws * step - bw), y0 + (yb - bhs) * step
         return None

@@ -117,6 +117,8 @@ Every part of the drawing says how it is known, and each numbered badge shows it
 
 The same marks, small, stand before each place the trains and streetcars went.
 
+The small red figures are travelers: a traveler, drawn to scale: 1.75 m (5 ft 9 in) tall. The red line is the way from the street to the train. Their height is a convention, not a source's claim.
+
 ## Where the trains and streetcars went
 
 - North to Washington on the RF&P, and on to New York by the Pennsylvania Railroad; south by the Atlantic Coast Line to Petersburg, Charleston, Savannah, Jacksonville and Florida. Both railroads’ trains came in and left by the north. *(From written accounts or timetables. Sources: Official Guide schedules of 1933 and June 1941 (Havana Special, Tamiami Champion), as transcribed by streamlinerschedules.com; chicagorailfan.com (ACL route); Richmond Railroad Museum, railroad history.)*

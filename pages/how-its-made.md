@@ -631,7 +631,18 @@ profile, a center post and two wings rising outward. A stair down from the floor
 side (to the platforms) is drawn as its stepped profile, dashed. Under it the ground is cut along the plane and dug out where the
 building goes below it; platforms are drawn 0.35 m over the rails (approximate), rails at true
 gauge where tracks cross the plane, and a red dashed line follows the traveler from the street
-to the train. For Broad Street the section runs from 45 m on the street side of the plane's
+to the train. The line runs at waist height, 0.95 m over each floor, with a small arrowhead
+pointing the way on each stretch, and it is broken where it meets a traveler and where it
+would cross a car end seen square on, so it passes behind the car rather than over its face.
+
+**Travelers.** A plain standing figure, 1.75 m (5 ft 9 in) tall, in the route's red, gives
+the drawings their scale: head, body, legs in a short stride and a small suitcase
+(`src/traveler.ts`). Its height is a convention, not a claim from a source. In the flat section
+four stand on the route, feet on their floors: on Broad Street, in the White Waiting Room, on
+the concourse and at the foot of the stair beside the car end. In the cutaway three stand
+upright, facing across the picture, on the portico, among the benches of the waiting room and
+on a platform by the train; each is an item in the paint order like any other, with a 0.5 m
+footprint, so what stands in front of it covers it. For Broad Street the section runs from 45 m on the street side of the plane's
 point to 104 m on the track side, at 10 pixels to the meter, and its earth is cut 5 m below the
 lowest ground along it. Code: `src/section.ts`.
 
@@ -658,7 +669,8 @@ named on the sheet, and the wayfinding notes carry their own.
 **The sheet** (`cutaways/<name>.json`, `tools/cutaway/sheet.py`) is 32 × 24 in at 300 dpi
 (9,600 × 7,200 pixels): the cutaway large, the flat section beneath it, and a column of numbered
 callouts, each anchored to a drawn part in either drawing, with the key, the sources and the
-notes. Callout text is 54 pixels (13 pt; 9.7 pt on the 24 × 18 in print), and the smallest text
+notes. A badge that would hide the part it names is set off it into clear space, with a thin
+leader to a small dot on the part, drawn like the wayfinding labels' leaders. Callout text is 54 pixels (13 pt; 9.7 pt on the 24 × 18 in print), and the smallest text
 on the sheet, the two-digit numbers in the badges on the drawings, is 40 pixels (9.6 pt; 7.2 pt
 at 24 × 18). There are no canvas files: a canvas's 1.5 in of mirrored wrap would carry the
 title and the column round its sides. Its title block sits in the bottom-right corner, below

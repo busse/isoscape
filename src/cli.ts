@@ -9,6 +9,7 @@ import { DEM_SOURCES } from './dem-sources.ts'
 import { fetchFootprints, loadFootprints } from './footprints.ts'
 import { coverSampler, fetchLandcover, loadLandcover } from './landcover.ts'
 import { renderExplorer } from './explorer.ts'
+import { TRAVELER_HEIGHT, travelerShapes } from './traveler.ts'
 import { fetchOsm, overpassQuery, parseOsm } from './osm.ts'
 import { loadPages } from './pages.ts'
 import { palette } from './palette.ts'
@@ -289,13 +290,13 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
   if (scene.region.cutaway !== undefined) {
     // Where each modeled part is drawn, for the callouts of a sheet; and the flat section.
     const anchors: Record<string, [number, number, number, number]> = {}
-    for (const it of scene.items) if (it.id.startsWith('history:')) anchorOf(anchors, it)
+    for (const it of scene.items) if (it.id.startsWith('history:') || it.id.startsWith('traveler:')) anchorOf(anchors, it)
     await writeFile(`${base}.anchors.json`, JSON.stringify({ viewBox: rendered.viewBox, anchors }) + '\n')
     if (scene.region.cutaway.section !== undefined) {
       const sec = sceneOf({ ...inp, region: sectionRegion(scene.region) }, values.palette, year, previous, true)
       const drawn = renderSection(sec, scene.region.cutaway)
       await writeFile(`${base}-section.svg`, drawn.svg)
-      await writeFile(`${base}-section.anchors.json`, JSON.stringify({ viewBox: drawn.viewBox, frame: drawn.frame, anchors: drawn.anchors }) + '\n')
+      await writeFile(`${base}-section.anchors.json`, JSON.stringify({ viewBox: drawn.viewBox, frame: drawn.frame, anchors: drawn.anchors, traveler: { height: TRAVELER_HEIGHT, shapes: travelerShapes() } }) + '\n')
       console.error(`wrote ${base}-section.svg (${sec.items.length} items, ${(sec.sections ?? []).length} cut faces)`)
     }
   }

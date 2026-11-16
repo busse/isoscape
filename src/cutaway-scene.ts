@@ -12,6 +12,7 @@ import { boxItem, domeProfile, STOCK, toned, type Box } from './parts.ts'
 import type { Cutaway } from './region.ts'
 import type { Item, Shape } from './scene.ts'
 import type { View } from './view.ts'
+import { travelerShapes } from './traveler.ts'
 import {
   above, behind, below, clipAll, corners, clipSolid, cutPlane, sweep, type FaceRole, type Vec3, isConvex, prism, revolve, sectionOf, sideOf, solidItem, splitSolids, stair, unionOutline, within,
   type CutPlane, type Solid, type Tones,
@@ -539,4 +540,21 @@ export const stairProfile = (view: View, pal: Palette, pl: CutPlane, id: string,
     zMin: p.seat, zMax: p.top, key: (a[1] + b[1]) / 2,
     shapes: [{ pts, fill: 'none', line: true, stroke: { color: pal.cutOutline, width: pal.lineWidth * 2, dash: pal.cutOutlineDash } }],
   }
+}
+
+/**
+ * A traveler standing at `at` (view meters) on a floor at scene height z, upright and facing
+ * across the picture (1 right, -1 left), in the route's color. Its footprint is a small square
+ * where it stands, so it sorts among what stands near it like any other item.
+ */
+export const travelerItem = (view: View, pal: Palette, id: string, at: Vec2, z: number, facing: 1 | -1): Item => {
+  const [bx, by] = view.toScreen(at, z)
+  const up = by - view.toScreen(at, z + 1)[1]       // screen pixels per meter of height
+  const shapes: Shape[] = travelerShapes().map((poly) => ({
+    pts: poly.map(([x, y]): Vec2 => [bx + x * facing * view.scale, by - y * up]),
+    fill: pal.route,
+  }))
+  const r = 0.25
+  const hull: Ring = [[at[0] - r, at[1] - r], [at[0] + r, at[1] - r], [at[0] + r, at[1] + r], [at[0] - r, at[1] + r]]
+  return { id, kind: 'building', hull, zMin: z, zMax: z + 1.75, key: at[1], name: 'A traveler, drawn to scale (1.75 m)', dots: [], shapes }
 }

@@ -138,3 +138,24 @@ test('stacked: a part wholly above a nearer one is left unordered', async () => 
   // Footprints that overlap by a rounding centimeter still count as apart.
   assert.equal(compare(item(0, 2.01, 0, 4), farLow, true), 1)
 })
+
+test('the traveler stands 1.75 m tall, feet on the floor', async () => {
+  const { travelerShapes, TRAVELER_HEIGHT } = await import('../src/traveler.ts')
+  const pts = travelerShapes().flat()
+  assert.equal(TRAVELER_HEIGHT, 1.75)
+  assert.ok(Math.abs(Math.max(...pts.map((p) => p[1])) - 1.75) < 0.01)
+  assert.ok(Math.abs(Math.min(...pts.map((p) => p[1]))) < 1e-9)
+})
+
+test('the section path stops short of what it must not cross, and leaves no scraps', async () => {
+  const { routeRuns, arrowOn } = await import('../src/section.ts')
+  // A path across a box (a car end): the part inside the box is gone, either side is kept.
+  const runs = routeRuns([[0, 0], [100, 0]], [[40, -5, 60, 5]])
+  assert.equal(runs.length, 2)
+  assert.ok(runs[0][runs[0].length - 1][0] <= 40 && runs[1][0][0] >= 60)
+  // A scrap shorter than the minimum, between two boxes, is dropped.
+  assert.equal(routeRuns([[0, 0], [100, 0]], [[10, -5, 50, 5], [55, -5, 90, 5]], 10).length, 2)
+  // The arrowhead points the way the path runs.
+  const head = arrowOn([[0, 0], [100, 0]], 8)!
+  assert.ok(head[0][0] > head[1][0])
+})

@@ -102,6 +102,12 @@ export interface Cutaway {
    */
   readonly outline?: { readonly parts: readonly string[]; readonly offset?: number }
   /**
+   * Travelers drawn to scale in the cutaway (src/traveler.ts): where each stands, the floor it
+   * stands on (m above sea level; on the ground where none is given), and which way it faces
+   * across the picture (1 right, -1 left).
+   */
+  readonly travelers?: readonly { readonly at: readonly [number, number]; readonly floor?: number; readonly facing: 1 | -1 }[]
+  /**
    * The flat section: the same plane, seen square on, everything on the removed side gone.
    * `from` and `to` are its ends, in meters along the plane from `through`; `beyond` is how far
    * behind the plane the cut parts are drawn, `other` how far everything else is.
@@ -116,6 +122,8 @@ export interface Cutaway {
     readonly earth?: number
     /** The traveler's path: points [meters along the plane, elevation in meters above sea level]. */
     readonly route?: readonly (readonly [number, number])[]
+    /** Travelers on the path: meters along the plane, the floor's elevation, and facing (1 toward `to`). */
+    readonly travelers?: readonly { readonly s: number; readonly floor: number; readonly facing: 1 | -1 }[]
   }
 }
 

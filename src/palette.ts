@@ -167,8 +167,8 @@ const paper: Palette = {
   cutOutline: '#2c2b33',
   cutOutlineDash: [6, 4],
   route: '#b5392f',
-  routeWidth: 5,
-  routeDash: [14, 9],
+  routeWidth: 2.6,
+  routeDash: [9, 6],
   platform: '#efe9dc',
   railSteel: '#4f4a45',
   roofs: {

@@ -447,8 +447,10 @@ one side is lifted away, its ground floor left as a plan, and every cut is drawn
   "parts": "bss-",                        // only modeled parts with this id prefix are cut
   "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away whole though not cut
   "outline": { "parts": ["bss-c-floor-"], "offset": 1.5 },  // dash the removed footprint
+  "travelers": [{ "at": [-77.466035, 37.56091], "floor": 67.4, "facing": 1 }],  // figures to scale (1.75 m); no floor: on the ground
   "section": { "from": -62, "to": 104, "beyond": 35, "other": 3, "scale": 10, "earth": 5,
-               "route": [[-60, 64.7], [50.5, 68.3]] }    // the flat section and the traveler's path
+               "route": [[-60, 64.7], [50.5, 68.3]],   // the flat section and the traveler's path (waist height)
+               "travelers": [{ "s": -40, "floor": 65.66, "facing": 1 }] }   // figures on the path
 }
 ```
 
@@ -469,6 +471,11 @@ node bin/isoscape.js build broad-street-station-cutaway --year 1943 --png
 python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json   # out/cutaways/
 python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json --print   # out/cutaways/print/
 ```
+
+A callout's anchor in either drawing may say `"badge": [dx, dy]` (sheet units, 9,600 across):
+the badge then stands that far off the part, with a leader to a dot on it, so it does not hide
+what it names. `travelerKey` adds a line with the traveler's glyph to the key, and a group with
+`"traveler": true` carries the glyph beside its heading.
 
 `--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):
 the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, each with its title

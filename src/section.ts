@@ -10,6 +10,7 @@
  */
 
 import { pointInRing, type Vec2 } from './geom.ts'
+import { travelerShapes } from './traveler.ts'
 import { paintOrder } from './order.ts'
 import type { Cutaway, Region } from './region.ts'
 import { lonLatFromLocal } from './region.ts'
@@ -139,11 +140,29 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
     out.push(paintItem(it))
     anchorOf(anchors, it)
   }
-  // The traveler's path.
+  // The traveler's path, and the travelers on it. The path stops short of each traveler (it
+  // runs between them) and of a car end seen square on (it passes behind the car, never across
+  // its face), and carries a small arrowhead, pointing the way, on each stretch long enough.
+  const travelers = (cut.section.travelers ?? []).map((t) => {
+    const polys = travelerShapes().map((poly) => poly.map(([x, y]) => P(t.s + x * t.facing, zOf(t.floor) + y)))
+    const all = polys.flat()
+    const box: Box = [Math.min(...all.map((q) => q[0])), Math.min(...all.map((q) => q[1])), Math.max(...all.map((q) => q[0])), Math.max(...all.map((q) => q[1]))]
+    return { polys, box }
+  })
   if (cut.section.route !== undefined && cut.section.route.length > 1) {
-    const pts = cut.section.route.map(([s, e]) => P(s, zOf(e)))
-    out.push(`<path fill="none" stroke="${p.route}" stroke-width="${f(p.routeWidth)}" stroke-dasharray="${p.routeDash.map(f).join(' ')}" stroke-linecap="round" stroke-linejoin="round" d="${path(pts, false)}"/>`)
+    const clear = ROUTE_CLEAR * view.scale
+    const keepOff: Box[] = [
+      ...travelers.map(({ box }): Box => [box[0] - clear, box[1] - clear, box[2] + clear, box[3] + clear]),
+      ...Object.entries(anchors).filter(([id]) => /:end$/.test(id) && /track/.test(id)).map(([, b]): Box => [b[0] - clear / 2, b[1], b[2] + clear / 2, b[3]]),
+    ]
+    const runs = routeRuns(cut.section.route.map(([s, e]) => P(s, zOf(e))), keepOff, MIN_RUN * view.scale)
+    for (const run of runs) {
+      out.push(`<path fill="none" stroke="${p.route}" stroke-width="${f(p.routeWidth)}" stroke-dasharray="${p.routeDash.map(f).join(' ')}" stroke-linecap="round" stroke-linejoin="round" d="${path(run, false)}"/>`)
+      const head = arrowOn(run, ARROW * view.scale)
+      if (head !== null) out.push(`<path fill="${p.route}" d="${path(head)}"/>`)
+    }
   }
+  for (const t of travelers) out.push(`<g class="traveler">${t.polys.map((poly) => `<path fill="${p.route}" d="${path(poly)}"/>`).join('')}</g>`)
   const pad = 20
   const vb: [number, number, number, number] = [minX - pad, minY - pad, maxX - minX + 2 * pad, maxY - minY + 2 * pad]
   const svg = [
@@ -155,6 +174,66 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
     `</svg>`,
   ].join('\n')
   return { svg, viewBox: vb, anchors, frame: { x0: pl.p[0], scale: view.scale, datum: T.datum, exaggeration: T.exaggeration } }
+}
+
+type Box = [number, number, number, number]
+
+/** The path stops this far (m) short of a traveler, and half this short of a car end. */
+export const ROUTE_CLEAR = 0.35
+/** An arrowhead on the path is this long (m); a stretch shorter than three of them has none. */
+export const ARROW = 0.7
+
+const inside = (q: Vec2, b: Box) => q[0] > b[0] && q[0] < b[2] && q[1] > b[1] && q[1] < b[3]
+
+/**
+ * A polyline (screen points) less every part inside any of the boxes, as the runs left over,
+ * found in steps of a tenth of a pixel or less.
+ */
+export const routeRuns = (pts: readonly Vec2[], boxes: readonly Box[], minLen = 0): Vec2[][] => {
+  const runs: Vec2[][] = []
+  let cur: Vec2[] = []
+  const flush = () => { if (cur.length > 1) runs.push(cur); cur = [] }
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const [a, b] = [pts[i], pts[i + 1]]
+    const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) * 10))
+    for (let k = 0; k <= n; k++) {
+      if (k === 0 && i > 0) continue
+      const q: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
+      if (boxes.some((bx) => inside(q, bx))) { flush(); continue }
+      // Keep the corners and the ends of each run; drop the steps between.
+      if (cur.length >= 2 && k > 0 && k < n) {
+        const p0 = cur[cur.length - 2]
+        const p1 = cur[cur.length - 1]
+        const cross = (p1[0] - p0[0]) * (q[1] - p0[1]) - (p1[1] - p0[1]) * (q[0] - p0[0])
+        if (Math.abs(cross) < 1e-6) { cur[cur.length - 1] = q; continue }
+      }
+      cur.push(q)
+    }
+  }
+  flush()
+  // A scrap left between two cut-outs reads as a blot, not a path: drop runs shorter than minLen.
+  return runs.filter((r) => r.slice(1).reduce((t, q, i) => t + Math.hypot(q[0] - r[i][0], q[1] - r[i][1]), 0) >= minLen)
+}
+
+/** A run of the path shorter than this (m) is left out. */
+export const MIN_RUN = 1.5
+
+/** A small filled arrowhead at the middle of a run, pointing along it, or null if the run is short. */
+export const arrowOn = (run: readonly Vec2[], len: number): Vec2[] | null => {
+  const seg = run.slice(1).map((q, i) => Math.hypot(q[0] - run[i][0], q[1] - run[i][1]))
+  const total = seg.reduce((a, b) => a + b, 0)
+  if (total < 3 * len) return null
+  let t = total / 2
+  for (let i = 0; i < seg.length; i++) {
+    if (t > seg[i]) { t -= seg[i]; continue }
+    const [a, b] = [run[i], run[i + 1]]
+    const u: Vec2 = [(b[0] - a[0]) / seg[i], (b[1] - a[1]) / seg[i]]
+    const tip: Vec2 = [a[0] + u[0] * (t + len / 2), a[1] + u[1] * (t + len / 2)]
+    const back: Vec2 = [tip[0] - u[0] * len, tip[1] - u[1] * len]
+    const w = len * 0.45
+    return [tip, [back[0] - u[1] * w, back[1] + u[0] * w], [back[0] + u[1] * w, back[1] - u[0] * w]]
+  }
+  return null
 }
 
 /** Platforms stand this high over the rails in the section (approximate: no drawing gives it). */
