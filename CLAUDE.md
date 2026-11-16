@@ -23,12 +23,13 @@ someone use isoscape (the reference site and the shop) are in AGENTS.md:
 - **Strip seams.** Strips lap toward the camera only (by up to 8 m), into ground the next strip
   repaints, so no seam shows at any zoom and no lap covers a standing item. Never lap away from
   the camera.
-- **Say who did the work.** Everything public (pages, set notes, store copy, News posts, emails,
-  social copy) attributes work truthfully. Chris directs, chooses and reviews; Claude writes the
-  code, researches, traces and models; software draws the maps from open data. Never write that
-  Chris drew, traced, modeled, built or set anything by hand, even as a figure of speech, and
-  never call machine work "by hand" or "hand-drawn". First person ("I") is for Chris's own
-  intent, choices and review only. Anything Claude drafts says so (see the About page wording).
+- **Say how the work was done.** Chris is the artist and draws the maps. isoscape is the tool
+  he draws with, built with Claude; Claude works in it under his direction (see
+  `pages/artist-statement.md` and his talk). So "I drew", "I traced" and "drawn by Chris
+  Busse" in his voice are right. What is never right is claiming manual work: nothing is drawn,
+  traced, modeled or set "by hand", and machine work is never "hand-drawn". Where it helps,
+  say the work was done with Claude or in code. Anything Claude drafts for publication says so,
+  and may point to the artist statement.
 - **Pages say what the code does.** `pages/how-its-made.md` describes the pipeline with real
   numbers (thresholds, defaults, distances). When you change one of those in the code, change
   the page in the same commit.
