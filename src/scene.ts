@@ -571,7 +571,10 @@ export const buildScene = (
     const boxes: Box[] = []
     for (const h of curated) {
       if (h.kind === 'canopy' && h.line !== undefined && shown(h)) {
-        const got = keepBoxes(canopyBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.width ?? 9, h.height ?? 5, (p) => terrain.z(p)))
+        const kept = keepBoxes(canopyBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.width ?? 9, h.height ?? 5, (p) => terrain.z(p)))
+        // A post stands only under a roof that is drawn.
+        const roofs = new Set(kept.map((b) => b.id))
+        const got = kept.filter((b) => !b.id.includes(':post:') || roofs.has(b.id.replace(':post:', ':')))
         boxes.push(...got)
         canopies += got.length / 2
       }

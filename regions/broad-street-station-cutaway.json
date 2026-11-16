@@ -42,7 +42,7 @@
     "keep": 1.5,
     "parts": "bss-",
     "lift": [
-      "^history:bss-canopy-2-south-cut:\\d+$"
+      "^history:bss-canopy-2-south-cut:(post:)?\\d+$"
     ],
     "outline": {
       "parts": [
@@ -51,7 +51,7 @@
       "offset": 1.5
     },
     "section": {
-      "from": -62,
+      "from": -45,
       "to": 104,
       "beyond": 35,
       "other": 16,
@@ -59,8 +59,8 @@
       "earth": 5,
       "route": [
         [
-          -60,
-          64.7
+          -44.5,
+          65.7
         ],
         [
           -35,

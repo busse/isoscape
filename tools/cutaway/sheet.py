@@ -21,12 +21,13 @@ sys.path.insert(0, os.path.join(ROOT, 'tools', 'print'))
 import compose as C  # noqa: E402
 
 W, H = 9600, 7200            # 32 x 24 in at 300 dpi
+BODY = 54                    # callout text: 13 pt at 32 x 24 in, 9.7 pt at 24 x 18 in
 M = 330                      # margin
 INK, PAPER, DIM = C.INK, C.PAPER, C.DIM
 SERIF = "'Libre Baskerville', Baskerville, Georgia, serif"
 SANS = 'Helvetica, Arial, sans-serif'
-COL_X = 7480                 # the callout column
-ART_R = COL_X - 240          # the drawings' right edge
+COL_X = 7600                 # the callout column
+ART_R = COL_X - 200          # the drawings' right edge
 
 
 def font(kind, px):
@@ -121,28 +122,29 @@ def main():
     iso_vb = [vb[0], vb[1] + cap, vb[2], vb[3] - cap]
     svb, sec_body = inner(sec_svg)
 
-    top = 760
-    iso_box = (M, top, ART_R - M, 4200)
-    s_iso, ox_iso, oy_iso = place(iso_vb, iso_box)
+    top = 700
+    iso_box = (M - 60, top, ART_R - M + 60, 3900)
+    s_iso = min(iso_box[2] / iso_vb[2], iso_box[3] / iso_vb[3])
     iso_h = iso_vb[3] * s_iso
-    # The section, centered in the room between the cutaway and the key.
-    s_sec = (ART_R - M) / svb[2]
+    # The flat section beneath, no taller than SEC_H, from the left edge of the art.
+    sec_w = ART_R - M
+    s_sec = min(sec_w / svb[2], (H - 330 - (top + iso_h + 330)) / svb[3])
     sec_h = svb[3] * s_sec
-    room_top, room_bottom = top + iso_h + 160, 6330
-    sec_top = room_top + max(140, (room_bottom - room_top - sec_h) / 2)
-    sec_box = (M, sec_top, ART_R - M, sec_h)
+    sec_top = top + iso_h + 420
+    sec_box = (M, sec_top, svb[2] * s_sec, sec_h)
 
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
            f'<rect width="{W}" height="{H}" fill="{PAPER}"/>']
     # Title.
-    out.append(text(M, 420, spec['title'], 250, 'bold'))
-    out.append(text(M, 600, spec['subtitle'], 112, 'italic', DIM))
+    out.append(text(M, 400, spec['title'], 250, 'bold'))
+    out.append(text(M, 570, spec['subtitle'], 112, 'italic', DIM))
     # The drawings.
-    out.append(f'<svg x="{iso_box[0]}" y="{iso_box[1]}" width="{iso_box[2]}" height="{iso_box[3]}" viewBox="{" ".join(f"{v:.1f}" for v in iso_vb)}" preserveAspectRatio="xMidYMin meet" overflow="hidden">{iso_body}</svg>')
-    s_iso, ox_iso, oy_iso = s_iso, iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2 - iso_vb[0] * s_iso, iso_box[1] - iso_vb[1] * s_iso
+    ox_iso, oy_iso = iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2 - iso_vb[0] * s_iso, iso_box[1] - iso_vb[1] * s_iso
+    out.append(f'<svg x="{iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2:.1f}" y="{iso_box[1]}" width="{iso_vb[2] * s_iso:.1f}" height="{iso_h:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in iso_vb)}" overflow="hidden">{iso_body}</svg>')
     out.append(text(M, sec_top - 70, spec['sectionCaption'], 76, 'italic', DIM))
-    out.append(f'<svg x="{sec_box[0]}" y="{sec_box[1]}" width="{sec_box[2]}" height="{sec_box[3]}" viewBox="{" ".join(f"{v:.1f}" for v in svb)}" preserveAspectRatio="xMidYMin meet">{sec_body}</svg>')
-    ox_sec, oy_sec = sec_box[0] + (sec_box[2] - svb[2] * s_sec) / 2 - svb[0] * s_sec, sec_box[1] - svb[1] * s_sec
+    out.append(f'<svg x="{sec_box[0]}" y="{sec_box[1]:.1f}" width="{sec_box[2]:.1f}" height="{sec_box[3]:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in svb)}">{sec_body}</svg>')
+    ox_sec, oy_sec = sec_box[0] - svb[0] * s_sec, sec_box[1] - svb[1] * s_sec
+    iso_rect = (iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2, iso_box[1], iso_vb[2] * s_iso, iso_h)
 
     def locate(lonlat):
         r = subprocess.run(['node', 'bin/isoscape.js', 'locate', region, '--year', str(year), '--', f'{lonlat[0]},{lonlat[1]}'], cwd=ROOT, check=True, capture_output=True, text=True)
@@ -183,24 +185,59 @@ def main():
                 if p is not None:
                     out.append(badge(ox_sec + p[0] * s_sec, oy_sec + p[1] * s_sec, c['n'], conf, 40))
             out.append(badge(x + 56, y - 26, c['n'], conf, 50))
-            out.append(text(x + 140, y, c['title'], 74, 'bold'))
-            yy = y + 92
-            for line in wrap(c['text'], 'regular', 56, W - M - x - 140):
-                out.append(text(x + 140, yy, line, 56, 'regular', DIM))
-                yy += 76
-            y = yy + 74
+            out.append(text(x + 140, y, c['title'], 70, 'bold'))
+            yy = y + 86
+            for line in wrap(c['text'], 'regular', BODY, W - M - x - 140):
+                out.append(text(x + 140, yy, line, BODY, 'regular', DIM))
+                yy += 72
+            y = yy + 66
         y += 60
-    # Key, sources, notes, credit.
-    ky = 6720 - 120
-    out.append(text(M, ky - 120, 'How sure each part is', 80, 'bold'))
-    kx = M
+    # Wayfinding: where the trains and streetcars went, in the plate's margins, each with a
+    # leader to the track end or the street it belongs to.
+    WF = 50
+    for wf in spec.get('wayfinding', []):
+        p = locate(wf['at'])
+        ax, ay = ox_iso + p[0] * s_iso, oy_iso + p[1] * s_iso
+        lines = [ln.upper() for ln in wf['lines']]
+        wmax = max(font('bold', WF).getlength(ln) + 3 * len(ln) for ln in lines)
+        lh = WF * 1.42
+        x0, y0 = {
+            'top-right': (ART_R - wmax, top + 60),
+            'bottom-right': (ART_R - wmax, iso_rect[1] + iso_rect[3] + 70),
+            'bottom-left': (M + 20, iso_rect[1] + iso_rect[3] + 70),
+        }[wf['place']]
+        out.append(f'<rect x="{x0 - 30:.0f}" y="{y0 - WF - 26:.0f}" width="{wmax + 90:.0f}" height="{lh * len(lines) + 34:.0f}" fill="{PAPER}" fill-opacity="0.9"/>')
+        out.append(badge(x0 + 6, y0 - WF * 0.36, None, wf['confidence'], 15))
+        for i, ln in enumerate(lines):
+            out.append(text(x0 + 44, y0 + i * lh, ln, WF, 'bold', INK, family=SANS, spacing=3))
+        # The leader: from the label's nearer edge to the place, ending in a dot.
+        lx = x0 - 30 if ax < x0 else min(ax, x0 + wmax + 60)
+        ly = y0 + lh * len(lines) - lh / 2 if ay > y0 else y0 - WF - 26
+        if wf['place'] != 'top-right':
+            ly = y0 - WF - 26
+            lx = max(x0 - 30, min(ax, x0 + wmax + 60))
+        out.append(f'<path d="M{lx:.0f} {ly:.0f}L{ax:.0f} {ay:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>')
+        out.append(f'<circle cx="{ax:.0f}" cy="{ay:.0f}" r="13" fill="{INK}"/>')
+    # Key, sources and notes, at the foot of the callout column.
+    ky = y + 40
+    out.append(text(x, ky, 'HOW SURE EACH PART IS', 58, 'bold', DIM, family=SANS, spacing=4))
+    out.append(f'<line x1="{x}" y1="{ky + 32}" x2="{W - M}" y2="{ky + 32}" stroke="{INK}" stroke-width="4"/>')
+    ky += 150
     for conf, msg in spec['key']:
-        out.append(badge(kx + 46, ky - 26, None, conf, 46))
-        out.append(text(kx + 120, ky, msg, 60, 'regular', DIM))
-        kx += 120 + font('regular', 60).getlength(msg) + 220
-    out.append(text(M, ky + 150, spec['sources'], 50, 'italic', DIM))
-    out.append(text(M, ky + 230, spec['notes'], 50, 'italic', DIM))
-    out.append(text(W - M, H - 150, spec['credit'], 46, 'regular', DIM, 'end'))
+        out.append(badge(x + 56, ky - 22, None, conf, 42))
+        out.append(text(x + 140, ky, msg, 56, 'regular', DIM))
+        ky += 100
+    for line in wrap('The same marks, small, stand before each place the trains and streetcars went.', 'regular', 56, W - M - x - 140):
+        out.append(text(x + 140, ky, line, 56, 'regular', DIM))
+        ky += 76
+    ky += 60
+    for line in wrap(spec['sources'], 'italic', 50, W - M - x) + [''] + wrap(spec['notes'], 'italic', 50, W - M - x):
+        if line:
+            out.append(text(x, ky, line, 50, 'italic', DIM))
+        ky += 68
+    if ky > H - 120:
+        print(f'warning: the column runs to {ky:.0f}, past the credit line', file=sys.stderr)
+    out.append(text(M, H - 150, spec['credit'], 46, 'regular', DIM))
     out.append('</svg>')
     sheet = os.path.join(a.out, f'{name}-sheet.svg')
     open(sheet, 'w').write('\n'.join(out))

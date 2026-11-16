@@ -445,7 +445,7 @@ one side is lifted away, its ground floor left as a plan, and every cut is drawn
   "remove": "right",                      // the side lifted away; stand the camera there
   "floor": 67.4, "keep": 1.5,             // on that side keep what stands up to 1.5 m over this floor (m above sea level)
   "parts": "bss-",                        // only modeled parts with this id prefix are cut
-  "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away on the removed side though not cut
+  "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away whole though not cut
   "outline": { "parts": ["bss-c-floor-"], "offset": 1.5 },  // dash the removed footprint
   "section": { "from": -62, "to": 104, "beyond": 35, "other": 3, "scale": 10, "earth": 5,
                "route": [[-60, 64.7], [50.5, 68.3]] }    // the flat section and the traveler's path

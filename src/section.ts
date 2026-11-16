@@ -177,7 +177,7 @@ const paintItem = (it: Item): string => {
 /** Grow the anchor box of an item's part (its id, less any `:near` or piece suffix). */
 export const anchorOf = (anchors: Record<string, [number, number, number, number]>, it: Item): void => {
   if (it.shapes.length === 0) return
-  const key = it.id.replace(/\/\d+$/, '').replace(/(:near)?(:base)?$/, '')
+  const key = it.id.replace(/\/\d+(:[\w-]+)?$/, '').replace(/(:near)?(:base)?$/, '')
   let box = anchors[key]
   for (const s of it.shapes) for (const [x, y] of s.pts) {
     if (box === undefined) box = anchors[key] = [x, y, x, y]

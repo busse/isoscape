@@ -129,7 +129,7 @@ export const cutawayItems = (
     }
   }
   for (const b of boxes) {
-    if (!opts.section && lift.some((r) => r.test(b.id)) && sideOf(plane, centroid(b.ring)) > 0) {
+    if (!opts.section && lift.some((r) => r.test(b.id))) {
       stats.lifted++
       continue
     }
