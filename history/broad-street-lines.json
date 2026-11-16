@@ -8864,8 +8864,208 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
+   "only": "whole",
    "elevation": 67.4,
    "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-1",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660922,
+     37.5609895
+    ],
+    [
+     -77.4660973,
+     37.5609881
+    ],
+    [
+     -77.4661025,
+     37.5609889
+    ],
+    [
+     -77.4661065,
+     37.5609917
+    ],
+    [
+     -77.4661083,
+     37.5609957
+    ],
+    [
+     -77.4661073,
+     37.5609999
+    ],
+    [
+     -77.4661038,
+     37.5610031
+    ],
+    [
+     -77.4660988,
+     37.5610045
+    ],
+    [
+     -77.4660935,
+     37.5610037
+    ],
+    [
+     -77.4660895,
+     37.561001
+    ],
+    [
+     -77.4660877,
+     37.5609969
+    ],
+    [
+     -77.4660887,
+     37.5609927
+    ]
+   ],
+   "height": 10.6,
+   "tone": "stone",
+   "note": "One of the portico's six columns: its shaft. Its place and size are from the plan; its height is scaled from the earlier postcard model (approximate).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://sah-archipedia.org/node/20518"
+   ],
+   "only": "cutaway",
+   "elevation": 67.95,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-1-base",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660904,
+     37.5609874
+    ],
+    [
+     -77.466097,
+     37.5609856
+    ],
+    [
+     -77.4661039,
+     37.5609866
+    ],
+    [
+     -77.4661091,
+     37.5609903
+    ],
+    [
+     -77.4661114,
+     37.5609955
+    ],
+    [
+     -77.4661101,
+     37.561001
+    ],
+    [
+     -77.4661056,
+     37.5610052
+    ],
+    [
+     -77.466099,
+     37.561007
+    ],
+    [
+     -77.4660922,
+     37.561006
+    ],
+    [
+     -77.4660869,
+     37.5610024
+    ],
+    [
+     -77.4660846,
+     37.5609971
+    ],
+    [
+     -77.4660859,
+     37.5609916
+    ]
+   ],
+   "height": 0.55,
+   "tone": "stone",
+   "note": "The base of a portico column, drawn as a plain band; the plan gives its plinth's place, not its profile.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-column-1-capital",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660907,
+     37.5609877
+    ],
+    [
+     -77.4660971,
+     37.560986
+    ],
+    [
+     -77.4661037,
+     37.560987
+    ],
+    [
+     -77.4661088,
+     37.5609905
+    ],
+    [
+     -77.466111,
+     37.5609956
+    ],
+    [
+     -77.4661097,
+     37.5610008
+    ],
+    [
+     -77.4661053,
+     37.5610049
+    ],
+    [
+     -77.466099,
+     37.5610067
+    ],
+    [
+     -77.4660923,
+     37.5610057
+    ],
+    [
+     -77.4660872,
+     37.5610022
+    ],
+    [
+     -77.466085,
+     37.5609971
+    ],
+    [
+     -77.4660863,
+     37.5609918
+    ]
+   ],
+   "height": 0.65,
+   "tone": "stone",
+   "note": "The capital of a portico column, drawn as a plain band (approximate: no drawing gives its profile).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 78.55,
+   "confidence": "approximate"
   },
   {
    "id": "bss-column-2",
@@ -8930,8 +9130,208 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
+   "only": "whole",
    "elevation": 67.4,
    "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-2",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660589,
+     37.5609666
+    ],
+    [
+     -77.466064,
+     37.5609652
+    ],
+    [
+     -77.4660692,
+     37.560966
+    ],
+    [
+     -77.4660733,
+     37.5609688
+    ],
+    [
+     -77.466075,
+     37.5609728
+    ],
+    [
+     -77.466074,
+     37.560977
+    ],
+    [
+     -77.4660705,
+     37.5609802
+    ],
+    [
+     -77.4660655,
+     37.5609816
+    ],
+    [
+     -77.4660602,
+     37.5609808
+    ],
+    [
+     -77.4660562,
+     37.560978
+    ],
+    [
+     -77.4660544,
+     37.560974
+    ],
+    [
+     -77.4660554,
+     37.5609698
+    ]
+   ],
+   "height": 10.6,
+   "tone": "stone",
+   "note": "One of the portico's six columns: its shaft. Its place and size are from the plan; its height is scaled from the earlier postcard model (approximate).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://sah-archipedia.org/node/20518"
+   ],
+   "only": "cutaway",
+   "elevation": 67.95,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-2-base",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660571,
+     37.5609645
+    ],
+    [
+     -77.4660637,
+     37.5609627
+    ],
+    [
+     -77.4660706,
+     37.5609637
+    ],
+    [
+     -77.4660759,
+     37.5609673
+    ],
+    [
+     -77.4660781,
+     37.5609726
+    ],
+    [
+     -77.4660768,
+     37.5609781
+    ],
+    [
+     -77.4660723,
+     37.5609823
+    ],
+    [
+     -77.4660657,
+     37.5609841
+    ],
+    [
+     -77.4660589,
+     37.5609831
+    ],
+    [
+     -77.4660536,
+     37.5609794
+    ],
+    [
+     -77.4660513,
+     37.5609742
+    ],
+    [
+     -77.4660526,
+     37.5609687
+    ]
+   ],
+   "height": 0.55,
+   "tone": "stone",
+   "note": "The base of a portico column, drawn as a plain band; the plan gives its plinth's place, not its profile.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-column-2-capital",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660574,
+     37.5609648
+    ],
+    [
+     -77.4660638,
+     37.560963
+    ],
+    [
+     -77.4660704,
+     37.560964
+    ],
+    [
+     -77.4660755,
+     37.5609675
+    ],
+    [
+     -77.4660777,
+     37.5609726
+    ],
+    [
+     -77.4660764,
+     37.5609779
+    ],
+    [
+     -77.466072,
+     37.560982
+    ],
+    [
+     -77.4660657,
+     37.5609837
+    ],
+    [
+     -77.4660591,
+     37.5609827
+    ],
+    [
+     -77.466054,
+     37.5609792
+    ],
+    [
+     -77.4660517,
+     37.5609741
+    ],
+    [
+     -77.466053,
+     37.5609689
+    ]
+   ],
+   "height": 0.65,
+   "tone": "stone",
+   "note": "The capital of a portico column, drawn as a plain band (approximate: no drawing gives its profile).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 78.55,
+   "confidence": "approximate"
   },
   {
    "id": "bss-column-3",
@@ -8996,8 +9396,208 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
+   "only": "whole",
    "elevation": 67.4,
    "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-3",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660246,
+     37.5609429
+    ],
+    [
+     -77.4660296,
+     37.5609415
+    ],
+    [
+     -77.4660349,
+     37.5609423
+    ],
+    [
+     -77.4660389,
+     37.5609451
+    ],
+    [
+     -77.4660407,
+     37.5609491
+    ],
+    [
+     -77.4660397,
+     37.5609533
+    ],
+    [
+     -77.4660362,
+     37.5609566
+    ],
+    [
+     -77.4660312,
+     37.560958
+    ],
+    [
+     -77.4660259,
+     37.5609572
+    ],
+    [
+     -77.4660219,
+     37.5609544
+    ],
+    [
+     -77.4660201,
+     37.5609504
+    ],
+    [
+     -77.4660211,
+     37.5609462
+    ]
+   ],
+   "height": 10.6,
+   "tone": "stone",
+   "note": "One of the portico's six columns: its shaft. Its place and size are from the plan; its height is scaled from the earlier postcard model (approximate).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://sah-archipedia.org/node/20518"
+   ],
+   "only": "cutaway",
+   "elevation": 67.95,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-3-base",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660228,
+     37.5609409
+    ],
+    [
+     -77.4660294,
+     37.560939
+    ],
+    [
+     -77.4660363,
+     37.5609401
+    ],
+    [
+     -77.4660415,
+     37.5609437
+    ],
+    [
+     -77.4660438,
+     37.560949
+    ],
+    [
+     -77.4660425,
+     37.5609544
+    ],
+    [
+     -77.466038,
+     37.5609586
+    ],
+    [
+     -77.4660314,
+     37.5609605
+    ],
+    [
+     -77.4660245,
+     37.5609594
+    ],
+    [
+     -77.4660193,
+     37.5609558
+    ],
+    [
+     -77.466017,
+     37.5609505
+    ],
+    [
+     -77.4660183,
+     37.5609451
+    ]
+   ],
+   "height": 0.55,
+   "tone": "stone",
+   "note": "The base of a portico column, drawn as a plain band; the plan gives its plinth's place, not its profile.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-column-3-capital",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660231,
+     37.5609412
+    ],
+    [
+     -77.4660294,
+     37.5609394
+    ],
+    [
+     -77.4660361,
+     37.5609404
+    ],
+    [
+     -77.4660412,
+     37.5609439
+    ],
+    [
+     -77.4660434,
+     37.560949
+    ],
+    [
+     -77.4660421,
+     37.5609543
+    ],
+    [
+     -77.4660377,
+     37.5609583
+    ],
+    [
+     -77.4660314,
+     37.5609601
+    ],
+    [
+     -77.4660247,
+     37.5609591
+    ],
+    [
+     -77.4660196,
+     37.5609556
+    ],
+    [
+     -77.4660174,
+     37.5609505
+    ],
+    [
+     -77.4660187,
+     37.5609452
+    ]
+   ],
+   "height": 0.65,
+   "tone": "stone",
+   "note": "The capital of a portico column, drawn as a plain band (approximate: no drawing gives its profile).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 78.55,
+   "confidence": "approximate"
   },
   {
    "id": "bss-column-4",
@@ -9062,8 +9662,208 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
+   "only": "whole",
    "elevation": 67.4,
    "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-4",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659865,
+     37.5609167
+    ],
+    [
+     -77.4659916,
+     37.5609153
+    ],
+    [
+     -77.4659968,
+     37.5609161
+    ],
+    [
+     -77.4660009,
+     37.5609189
+    ],
+    [
+     -77.4660026,
+     37.5609229
+    ],
+    [
+     -77.4660016,
+     37.5609271
+    ],
+    [
+     -77.4659981,
+     37.5609303
+    ],
+    [
+     -77.4659931,
+     37.5609318
+    ],
+    [
+     -77.4659879,
+     37.560931
+    ],
+    [
+     -77.4659838,
+     37.5609282
+    ],
+    [
+     -77.4659821,
+     37.5609241
+    ],
+    [
+     -77.4659831,
+     37.5609199
+    ]
+   ],
+   "height": 10.6,
+   "tone": "stone",
+   "note": "One of the portico's six columns: its shaft. Its place and size are from the plan; its height is scaled from the earlier postcard model (approximate).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://sah-archipedia.org/node/20518"
+   ],
+   "only": "cutaway",
+   "elevation": 67.95,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-4-base",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659848,
+     37.5609146
+    ],
+    [
+     -77.4659914,
+     37.5609128
+    ],
+    [
+     -77.4659982,
+     37.5609139
+    ],
+    [
+     -77.4660035,
+     37.5609175
+    ],
+    [
+     -77.4660058,
+     37.5609227
+    ],
+    [
+     -77.4660045,
+     37.5609282
+    ],
+    [
+     -77.4659999,
+     37.5609324
+    ],
+    [
+     -77.4659933,
+     37.5609343
+    ],
+    [
+     -77.4659865,
+     37.5609332
+    ],
+    [
+     -77.4659812,
+     37.5609296
+    ],
+    [
+     -77.4659789,
+     37.5609243
+    ],
+    [
+     -77.4659802,
+     37.5609189
+    ]
+   ],
+   "height": 0.55,
+   "tone": "stone",
+   "note": "The base of a portico column, drawn as a plain band; the plan gives its plinth's place, not its profile.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-column-4-capital",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.465985,
+     37.5609149
+    ],
+    [
+     -77.4659914,
+     37.5609132
+    ],
+    [
+     -77.465998,
+     37.5609142
+    ],
+    [
+     -77.4660031,
+     37.5609177
+    ],
+    [
+     -77.4660053,
+     37.5609228
+    ],
+    [
+     -77.4660041,
+     37.5609281
+    ],
+    [
+     -77.4659997,
+     37.5609321
+    ],
+    [
+     -77.4659933,
+     37.5609339
+    ],
+    [
+     -77.4659867,
+     37.5609329
+    ],
+    [
+     -77.4659816,
+     37.5609294
+    ],
+    [
+     -77.4659794,
+     37.5609243
+    ],
+    [
+     -77.4659806,
+     37.560919
+    ]
+   ],
+   "height": 0.65,
+   "tone": "stone",
+   "note": "The capital of a portico column, drawn as a plain band (approximate: no drawing gives its profile).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 78.55,
+   "confidence": "approximate"
   },
   {
    "id": "bss-column-5",
@@ -9128,8 +9928,208 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
+   "only": "whole",
    "elevation": 67.4,
    "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-5",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659519,
+     37.5608928
+    ],
+    [
+     -77.4659569,
+     37.5608914
+    ],
+    [
+     -77.4659622,
+     37.5608922
+    ],
+    [
+     -77.4659662,
+     37.560895
+    ],
+    [
+     -77.465968,
+     37.5608991
+    ],
+    [
+     -77.465967,
+     37.5609032
+    ],
+    [
+     -77.4659635,
+     37.5609065
+    ],
+    [
+     -77.4659584,
+     37.5609079
+    ],
+    [
+     -77.4659532,
+     37.5609071
+    ],
+    [
+     -77.4659492,
+     37.5609043
+    ],
+    [
+     -77.4659474,
+     37.5609003
+    ],
+    [
+     -77.4659484,
+     37.5608961
+    ]
+   ],
+   "height": 10.6,
+   "tone": "stone",
+   "note": "One of the portico's six columns: its shaft. Its place and size are from the plan; its height is scaled from the earlier postcard model (approximate).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://sah-archipedia.org/node/20518"
+   ],
+   "only": "cutaway",
+   "elevation": 67.95,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-5-base",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659501,
+     37.5608908
+    ],
+    [
+     -77.4659567,
+     37.5608889
+    ],
+    [
+     -77.4659636,
+     37.56089
+    ],
+    [
+     -77.4659688,
+     37.5608936
+    ],
+    [
+     -77.4659711,
+     37.5608989
+    ],
+    [
+     -77.4659698,
+     37.5609043
+    ],
+    [
+     -77.4659653,
+     37.5609085
+    ],
+    [
+     -77.4659587,
+     37.5609104
+    ],
+    [
+     -77.4659518,
+     37.5609093
+    ],
+    [
+     -77.4659466,
+     37.5609057
+    ],
+    [
+     -77.4659443,
+     37.5609004
+    ],
+    [
+     -77.4659456,
+     37.560895
+    ]
+   ],
+   "height": 0.55,
+   "tone": "stone",
+   "note": "The base of a portico column, drawn as a plain band; the plan gives its plinth's place, not its profile.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-column-5-capital",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659504,
+     37.5608911
+    ],
+    [
+     -77.4659567,
+     37.5608893
+    ],
+    [
+     -77.4659634,
+     37.5608903
+    ],
+    [
+     -77.4659685,
+     37.5608938
+    ],
+    [
+     -77.4659707,
+     37.5608989
+    ],
+    [
+     -77.4659694,
+     37.5609042
+    ],
+    [
+     -77.465965,
+     37.5609083
+    ],
+    [
+     -77.4659586,
+     37.56091
+    ],
+    [
+     -77.465952,
+     37.560909
+    ],
+    [
+     -77.4659469,
+     37.5609055
+    ],
+    [
+     -77.4659447,
+     37.5609004
+    ],
+    [
+     -77.465946,
+     37.5608951
+    ]
+   ],
+   "height": 0.65,
+   "tone": "stone",
+   "note": "The capital of a portico column, drawn as a plain band (approximate: no drawing gives its profile).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 78.55,
+   "confidence": "approximate"
   },
   {
    "id": "bss-column-6",
@@ -9194,8 +10194,208 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
+   "only": "whole",
    "elevation": 67.4,
    "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-6",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659186,
+     37.5608699
+    ],
+    [
+     -77.4659236,
+     37.5608685
+    ],
+    [
+     -77.4659289,
+     37.5608693
+    ],
+    [
+     -77.4659329,
+     37.5608721
+    ],
+    [
+     -77.4659347,
+     37.5608761
+    ],
+    [
+     -77.4659337,
+     37.5608803
+    ],
+    [
+     -77.4659302,
+     37.5608835
+    ],
+    [
+     -77.4659252,
+     37.5608849
+    ],
+    [
+     -77.4659199,
+     37.5608841
+    ],
+    [
+     -77.4659159,
+     37.5608814
+    ],
+    [
+     -77.4659141,
+     37.5608773
+    ],
+    [
+     -77.4659151,
+     37.5608731
+    ]
+   ],
+   "height": 10.6,
+   "tone": "stone",
+   "note": "One of the portico's six columns: its shaft. Its place and size are from the plan; its height is scaled from the earlier postcard model (approximate).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://sah-archipedia.org/node/20518"
+   ],
+   "only": "cutaway",
+   "elevation": 67.95,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-column-6-base",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659168,
+     37.5608678
+    ],
+    [
+     -77.4659234,
+     37.560866
+    ],
+    [
+     -77.4659303,
+     37.5608671
+    ],
+    [
+     -77.4659355,
+     37.5608707
+    ],
+    [
+     -77.4659378,
+     37.5608759
+    ],
+    [
+     -77.4659365,
+     37.5608814
+    ],
+    [
+     -77.465932,
+     37.5608856
+    ],
+    [
+     -77.4659254,
+     37.5608874
+    ],
+    [
+     -77.4659185,
+     37.5608864
+    ],
+    [
+     -77.4659133,
+     37.5608828
+    ],
+    [
+     -77.465911,
+     37.5608775
+    ],
+    [
+     -77.4659123,
+     37.560872
+    ]
+   ],
+   "height": 0.55,
+   "tone": "stone",
+   "note": "The base of a portico column, drawn as a plain band; the plan gives its plinth's place, not its profile.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-column-6-capital",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659171,
+     37.5608681
+    ],
+    [
+     -77.4659234,
+     37.5608664
+    ],
+    [
+     -77.4659301,
+     37.5608674
+    ],
+    [
+     -77.4659352,
+     37.5608709
+    ],
+    [
+     -77.4659374,
+     37.560876
+    ],
+    [
+     -77.4659361,
+     37.5608812
+    ],
+    [
+     -77.4659317,
+     37.5608853
+    ],
+    [
+     -77.4659253,
+     37.5608871
+    ],
+    [
+     -77.4659187,
+     37.5608861
+    ],
+    [
+     -77.4659136,
+     37.5608826
+    ],
+    [
+     -77.4659114,
+     37.5608775
+    ],
+    [
+     -77.4659127,
+     37.5608722
+    ]
+   ],
+   "height": 0.65,
+   "tone": "stone",
+   "note": "The capital of a portico column, drawn as a plain band (approximate: no drawing gives its profile).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 78.55,
+   "confidence": "approximate"
   },
   {
    "id": "bss-portico-pier-1",
@@ -9360,6 +10560,108 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
    ],
    "elevation": 79.2,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-entablature-architrave",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661504,
+     37.5610197
+    ],
+    [
+     -77.4658885,
+     37.5608392
+    ],
+    [
+     -77.4658897,
+     37.5608381
+    ],
+    [
+     -77.4661516,
+     37.5610186
+    ]
+   ],
+   "height": 0.15,
+   "tone": "stone",
+   "note": "The architrave's top edge, a band along the entablature's face. Approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 80.1,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-entablature-frieze",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661504,
+     37.5610197
+    ],
+    [
+     -77.4658885,
+     37.5608392
+    ],
+    [
+     -77.4658897,
+     37.5608381
+    ],
+    [
+     -77.4661516,
+     37.5610186
+    ]
+   ],
+   "height": 0.15,
+   "tone": "stone",
+   "note": "The frieze's top edge, a band along the entablature's face. Approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 81.0,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-entablature-cornice",
+   "name": "Broad Street Station portico",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660995,
+     37.5610712
+    ],
+    [
+     -77.4658321,
+     37.560887
+    ],
+    [
+     -77.4658887,
+     37.5608346
+    ],
+    [
+     -77.4661561,
+     37.5610188
+    ]
+   ],
+   "height": 0.35,
+   "tone": "stone",
+   "note": "The cornice over the entablature, projecting a little. Approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 81.8,
    "confidence": "approximate"
   },
   {
@@ -12962,6 +14264,1127 @@
    "confidence": "drawn"
   },
   {
+   "id": "bss-c-west-front-window-1-1",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662666,
+     37.5611825
+    ],
+    [
+     -77.466253,
+     37.5611731
+    ],
+    [
+     -77.4662536,
+     37.5611726
+    ],
+    [
+     -77.4662672,
+     37.561182
+    ]
+   ],
+   "height": 1.8,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 68.3,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-arch-1-1",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662666,
+     37.5611825
+    ],
+    [
+     -77.466253,
+     37.5611731
+    ],
+    [
+     -77.4662536,
+     37.5611726
+    ],
+    [
+     -77.4662672,
+     37.561182
+    ]
+   ],
+   "height": 0.8,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "shape": "arch",
+   "only": "cutaway",
+   "elevation": 70.1,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-2-1",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662653,
+     37.5611816
+    ],
+    [
+     -77.4662544,
+     37.5611741
+    ],
+    [
+     -77.466255,
+     37.5611735
+    ],
+    [
+     -77.4662658,
+     37.561181
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 72.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-3-1",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662653,
+     37.5611816
+    ],
+    [
+     -77.4662544,
+     37.5611741
+    ],
+    [
+     -77.466255,
+     37.5611735
+    ],
+    [
+     -77.4662658,
+     37.561181
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 75.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-4-1",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662653,
+     37.5611816
+    ],
+    [
+     -77.4662544,
+     37.5611741
+    ],
+    [
+     -77.466255,
+     37.5611735
+    ],
+    [
+     -77.4662658,
+     37.561181
+    ]
+   ],
+   "height": 1.3,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 78.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-1-2",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662272,
+     37.5611553
+    ],
+    [
+     -77.4662136,
+     37.561146
+    ],
+    [
+     -77.4662142,
+     37.5611454
+    ],
+    [
+     -77.4662278,
+     37.5611548
+    ]
+   ],
+   "height": 1.8,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 68.3,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-arch-1-2",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662272,
+     37.5611553
+    ],
+    [
+     -77.4662136,
+     37.561146
+    ],
+    [
+     -77.4662142,
+     37.5611454
+    ],
+    [
+     -77.4662278,
+     37.5611548
+    ]
+   ],
+   "height": 0.8,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "shape": "arch",
+   "only": "cutaway",
+   "elevation": 70.1,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-2-2",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662258,
+     37.5611544
+    ],
+    [
+     -77.466215,
+     37.5611469
+    ],
+    [
+     -77.4662156,
+     37.5611464
+    ],
+    [
+     -77.4662264,
+     37.5611539
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 72.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-3-2",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662258,
+     37.5611544
+    ],
+    [
+     -77.466215,
+     37.5611469
+    ],
+    [
+     -77.4662156,
+     37.5611464
+    ],
+    [
+     -77.4662264,
+     37.5611539
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 75.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-4-2",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662258,
+     37.5611544
+    ],
+    [
+     -77.466215,
+     37.5611469
+    ],
+    [
+     -77.4662156,
+     37.5611464
+    ],
+    [
+     -77.4662264,
+     37.5611539
+    ]
+   ],
+   "height": 1.3,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 78.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-1-3",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661878,
+     37.5611282
+    ],
+    [
+     -77.4661742,
+     37.5611188
+    ],
+    [
+     -77.4661748,
+     37.5611183
+    ],
+    [
+     -77.4661884,
+     37.5611277
+    ]
+   ],
+   "height": 1.8,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 68.3,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-arch-1-3",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661878,
+     37.5611282
+    ],
+    [
+     -77.4661742,
+     37.5611188
+    ],
+    [
+     -77.4661748,
+     37.5611183
+    ],
+    [
+     -77.4661884,
+     37.5611277
+    ]
+   ],
+   "height": 0.8,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "shape": "arch",
+   "only": "cutaway",
+   "elevation": 70.1,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-2-3",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661864,
+     37.5611273
+    ],
+    [
+     -77.4661756,
+     37.5611198
+    ],
+    [
+     -77.4661761,
+     37.5611192
+    ],
+    [
+     -77.466187,
+     37.5611267
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 72.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-3-3",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661864,
+     37.5611273
+    ],
+    [
+     -77.4661756,
+     37.5611198
+    ],
+    [
+     -77.4661761,
+     37.5611192
+    ],
+    [
+     -77.466187,
+     37.5611267
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 75.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-4-3",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661864,
+     37.5611273
+    ],
+    [
+     -77.4661756,
+     37.5611198
+    ],
+    [
+     -77.4661761,
+     37.5611192
+    ],
+    [
+     -77.466187,
+     37.5611267
+    ]
+   ],
+   "height": 1.3,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 78.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-1-4",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661484,
+     37.561101
+    ],
+    [
+     -77.4661348,
+     37.5610917
+    ],
+    [
+     -77.4661354,
+     37.5610911
+    ],
+    [
+     -77.466149,
+     37.5611005
+    ]
+   ],
+   "height": 1.8,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 68.3,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-arch-1-4",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661484,
+     37.561101
+    ],
+    [
+     -77.4661348,
+     37.5610917
+    ],
+    [
+     -77.4661354,
+     37.5610911
+    ],
+    [
+     -77.466149,
+     37.5611005
+    ]
+   ],
+   "height": 0.8,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "shape": "arch",
+   "only": "cutaway",
+   "elevation": 70.1,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-2-4",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.466147,
+     37.5611001
+    ],
+    [
+     -77.4661361,
+     37.5610926
+    ],
+    [
+     -77.4661367,
+     37.5610921
+    ],
+    [
+     -77.4661476,
+     37.5610996
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 72.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-3-4",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.466147,
+     37.5611001
+    ],
+    [
+     -77.4661361,
+     37.5610926
+    ],
+    [
+     -77.4661367,
+     37.5610921
+    ],
+    [
+     -77.4661476,
+     37.5610996
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 75.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-4-4",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.466147,
+     37.5611001
+    ],
+    [
+     -77.4661361,
+     37.5610926
+    ],
+    [
+     -77.4661367,
+     37.5610921
+    ],
+    [
+     -77.4661476,
+     37.5610996
+    ]
+   ],
+   "height": 1.3,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 78.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-1-5",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.466109,
+     37.5610739
+    ],
+    [
+     -77.4660954,
+     37.5610645
+    ],
+    [
+     -77.466096,
+     37.561064
+    ],
+    [
+     -77.4661096,
+     37.5610734
+    ]
+   ],
+   "height": 1.8,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 68.3,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-arch-1-5",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.466109,
+     37.5610739
+    ],
+    [
+     -77.4660954,
+     37.5610645
+    ],
+    [
+     -77.466096,
+     37.561064
+    ],
+    [
+     -77.4661096,
+     37.5610734
+    ]
+   ],
+   "height": 0.8,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "shape": "arch",
+   "only": "cutaway",
+   "elevation": 70.1,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-2-5",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661076,
+     37.561073
+    ],
+    [
+     -77.4660967,
+     37.5610655
+    ],
+    [
+     -77.4660973,
+     37.5610649
+    ],
+    [
+     -77.4661082,
+     37.5610724
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 72.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-3-5",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661076,
+     37.561073
+    ],
+    [
+     -77.4660967,
+     37.5610655
+    ],
+    [
+     -77.4660973,
+     37.5610649
+    ],
+    [
+     -77.4661082,
+     37.5610724
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 75.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-window-4-5",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4661076,
+     37.561073
+    ],
+    [
+     -77.4660967,
+     37.5610655
+    ],
+    [
+     -77.4660973,
+     37.5610649
+    ],
+    [
+     -77.4661082,
+     37.5610724
+    ]
+   ],
+   "height": 1.3,
+   "tone": "glass",
+   "note": "A window of the west wing's front. Sections A-A and B-B (Plates 17, 18) draw the wings' four storeys with rows of windows, arched on the first floor; their bays here are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 78.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-belt",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662795,
+     37.5611914
+    ],
+    [
+     -77.4660825,
+     37.5610556
+    ],
+    [
+     -77.4660836,
+     37.5610546
+    ],
+    [
+     -77.4662807,
+     37.5611903
+    ]
+   ],
+   "height": 0.25,
+   "tone": "stone",
+   "note": "A belt course across the west wing's front at the second floor. Approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 71.35,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-west-front-cornice",
+   "name": "Broad Street Station: west wing",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662822,
+     37.5611933
+    ],
+    [
+     -77.4660825,
+     37.5610556
+    ],
+    [
+     -77.4660848,
+     37.5610535
+    ],
+    [
+     -77.4662846,
+     37.5611911
+    ]
+   ],
+   "height": 0.4,
+   "tone": "stone",
+   "note": "The cornice of the west wing, under its parapet, at the height sections A-A and B-B draw it. Its projection is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 80.0,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-front-window-2",
+   "name": "Broad Street Station: front block",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660502,
+     37.5610334
+    ],
+    [
+     -77.4660366,
+     37.561024
+    ],
+    [
+     -77.4660372,
+     37.5610235
+    ],
+    [
+     -77.4660508,
+     37.5610329
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the offices over the vestibule. Section C-C draws the front block's office floors; the window's place is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 72.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-front-window-3",
+   "name": "Broad Street Station: front block",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660502,
+     37.5610334
+    ],
+    [
+     -77.4660366,
+     37.561024
+    ],
+    [
+     -77.4660372,
+     37.5610235
+    ],
+    [
+     -77.4660508,
+     37.5610329
+    ]
+   ],
+   "height": 1.5,
+   "tone": "glass",
+   "note": "A window of the offices over the vestibule. Section C-C draws the front block's office floors; the window's place is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 75.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-front-window-4",
+   "name": "Broad Street Station: front block",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660502,
+     37.5610334
+    ],
+    [
+     -77.4660366,
+     37.561024
+    ],
+    [
+     -77.4660372,
+     37.5610235
+    ],
+    [
+     -77.4660508,
+     37.5610329
+    ]
+   ],
+   "height": 1.3,
+   "tone": "glass",
+   "note": "A window of the offices over the vestibule. Section C-C draws the front block's office floors; the window's place is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 78.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-front-cornice",
+   "name": "Broad Street Station: front block",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660852,
+     37.5610575
+    ],
+    [
+     -77.4659653,
+     37.5609749
+    ],
+    [
+     -77.4659676,
+     37.5609727
+    ],
+    [
+     -77.4660875,
+     37.5610553
+    ]
+   ],
+   "height": 0.4,
+   "tone": "stone",
+   "note": "The cornice of the front block. Height from section C-C; projection approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 83.9,
+   "confidence": "approximate"
+  },
+  {
    "id": "bss-c-passage-1",
    "name": "Broad Street Station: Enclosed Concourse Passage No. 1",
    "kind": "landmark",
@@ -13761,7 +16184,7 @@
    ],
    "height": 21.3,
    "tone": "plaster",
-   "note": "A cut corner of the White Waiting Room: the octagon of the plan. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "note": "A cut corner of the White Waiting Room: the octagon of the plan, rising to the cornice under the dome as sections A-A and C-C draw the hall's walls. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
@@ -13769,6 +16192,76 @@
    ],
    "only": "cutaway",
    "elevation": 67.4,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-corner-1-door",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4658699,
+     37.5612164
+    ],
+    [
+     -77.4658449,
+     37.5612179
+    ],
+    [
+     -77.4658448,
+     37.5612172
+    ],
+    [
+     -77.4658699,
+     37.5612157
+    ]
+   ],
+   "height": 4.2,
+   "tone": "wood",
+   "note": "The door in a cut corner of the hall, to the vestibule behind it, as the plan draws it. Its height is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-corner-1-band",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4658922,
+     37.5612151
+    ],
+    [
+     -77.4658226,
+     37.5612192
+    ],
+    [
+     -77.4658224,
+     37.5612174
+    ],
+    [
+     -77.465892,
+     37.5612133
+    ]
+   ],
+   "height": 0.6,
+   "tone": "stone",
+   "note": "The band under the lunettes that carries the inscription round the hall (section C-C). Its depth is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 79.2,
    "confidence": "drawn"
   },
   {
@@ -13797,7 +16290,7 @@
    ],
    "height": 21.3,
    "tone": "plaster",
-   "note": "A cut corner of the White Waiting Room: the octagon of the plan. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "note": "A cut corner of the White Waiting Room: the octagon of the plan, rising to the cornice under the dome as sections A-A and C-C draw the hall's walls. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
@@ -13805,6 +16298,76 @@
    ],
    "only": "cutaway",
    "elevation": 67.4,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-corner-2-door",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.465685,
+     37.5611078
+    ],
+    [
+     -77.4656832,
+     37.5610878
+    ],
+    [
+     -77.4656841,
+     37.5610877
+    ],
+    [
+     -77.4656859,
+     37.5611077
+    ]
+   ],
+   "height": 4.2,
+   "tone": "wood",
+   "note": "The door in a cut corner of the hall, to the vestibule behind it, as the plan draws it. Its height is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-corner-2-band",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4656867,
+     37.5611256
+    ],
+    [
+     -77.4656816,
+     37.56107
+    ],
+    [
+     -77.4656838,
+     37.5610699
+    ],
+    [
+     -77.4656889,
+     37.5611254
+    ]
+   ],
+   "height": 0.6,
+   "tone": "stone",
+   "note": "The band under the lunettes that carries the inscription round the hall (section C-C). Its depth is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 79.2,
    "confidence": "drawn"
   },
   {
@@ -13833,7 +16396,7 @@
    ],
    "height": 21.3,
    "tone": "plaster",
-   "note": "A cut corner of the White Waiting Room: the octagon of the plan. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "note": "A cut corner of the White Waiting Room: the octagon of the plan, rising to the cornice under the dome as sections A-A and C-C draw the hall's walls. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
@@ -13841,6 +16404,76 @@
    ],
    "only": "cutaway",
    "elevation": 67.4,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-corner-3-door",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.465805,
+     37.5609751
+    ],
+    [
+     -77.4658301,
+     37.5609737
+    ],
+    [
+     -77.4658302,
+     37.5609744
+    ],
+    [
+     -77.4658051,
+     37.5609759
+    ]
+   ],
+   "height": 4.2,
+   "tone": "wood",
+   "note": "The door in a cut corner of the hall, to the vestibule behind it, as the plan draws it. Its height is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-corner-3-band",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4657827,
+     37.5609765
+    ],
+    [
+     -77.4658524,
+     37.5609724
+    ],
+    [
+     -77.4658525,
+     37.5609742
+    ],
+    [
+     -77.4657829,
+     37.5609782
+    ]
+   ],
+   "height": 0.6,
+   "tone": "stone",
+   "note": "The band under the lunettes that carries the inscription round the hall (section C-C). Its depth is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 79.2,
    "confidence": "drawn"
   },
   {
@@ -13869,7 +16502,7 @@
    ],
    "height": 21.3,
    "tone": "plaster",
-   "note": "A cut corner of the White Waiting Room: the octagon of the plan. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "note": "A cut corner of the White Waiting Room: the octagon of the plan, rising to the cornice under the dome as sections A-A and C-C draw the hall's walls. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
@@ -13877,6 +16510,76 @@
    ],
    "only": "cutaway",
    "elevation": 67.4,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-corner-4-door",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659899,
+     37.5610838
+    ],
+    [
+     -77.4659917,
+     37.5611038
+    ],
+    [
+     -77.4659909,
+     37.5611038
+    ],
+    [
+     -77.465989,
+     37.5610838
+    ]
+   ],
+   "height": 4.2,
+   "tone": "wood",
+   "note": "The door in a cut corner of the hall, to the vestibule behind it, as the plan draws it. Its height is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-corner-4-band",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659883,
+     37.561066
+    ],
+    [
+     -77.4659934,
+     37.5611216
+    ],
+    [
+     -77.4659911,
+     37.5611217
+    ],
+    [
+     -77.465986,
+     37.5610661
+    ]
+   ],
+   "height": 0.6,
+   "tone": "stone",
+   "note": "The band under the lunettes that carries the inscription round the hall (section C-C). Its depth is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 79.2,
    "confidence": "drawn"
   },
   {
@@ -13988,6 +16691,42 @@
    "confidence": "drawn"
   },
   {
+   "id": "bss-c-hall-back-band-1",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4658226,
+     37.5612192
+    ],
+    [
+     -77.4657733,
+     37.5611852
+    ],
+    [
+     -77.4657748,
+     37.5611839
+    ],
+    [
+     -77.465824,
+     37.5612178
+    ]
+   ],
+   "height": 0.6,
+   "tone": "stone",
+   "note": "The band under the lunettes that carries the inscription round the hall (section C-C). Its depth is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 79.2,
+   "confidence": "drawn"
+  },
+  {
    "id": "bss-c-hall-back-wall-2",
    "name": "Broad Street Station: White Waiting Room",
    "kind": "landmark",
@@ -14021,6 +16760,42 @@
    ],
    "only": "cutaway",
    "elevation": 67.4,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-back-band-2",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4657325,
+     37.5611572
+    ],
+    [
+     -77.4656867,
+     37.5611256
+    ],
+    [
+     -77.4656881,
+     37.5611242
+    ],
+    [
+     -77.465734,
+     37.5611558
+    ]
+   ],
+   "height": 0.6,
+   "tone": "stone",
+   "note": "The band under the lunettes that carries the inscription round the hall (section C-C). Its depth is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 79.2,
    "confidence": "drawn"
   },
   {
@@ -14168,6 +16943,42 @@
    "confidence": "drawn"
   },
   {
+   "id": "bss-c-hall-front-band-1",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659883,
+     37.561066
+    ],
+    [
+     -77.465939,
+     37.5610321
+    ],
+    [
+     -77.4659375,
+     37.5610334
+    ],
+    [
+     -77.4659868,
+     37.5610673
+    ]
+   ],
+   "height": 0.6,
+   "tone": "stone",
+   "note": "The band under the lunettes that carries the inscription round the hall (section C-C). Its depth is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 79.2,
+   "confidence": "drawn"
+  },
+  {
    "id": "bss-c-hall-front-wall-2",
    "name": "Broad Street Station: White Waiting Room",
    "kind": "landmark",
@@ -14201,6 +17012,42 @@
    ],
    "only": "cutaway",
    "elevation": 67.4,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-front-band-2",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4658982,
+     37.561004
+    ],
+    [
+     -77.4658524,
+     37.5609724
+    ],
+    [
+     -77.4658509,
+     37.5609737
+    ],
+    [
+     -77.4658968,
+     37.5610053
+    ]
+   ],
+   "height": 0.6,
+   "tone": "stone",
+   "note": "The band under the lunettes that carries the inscription round the hall (section C-C). Its depth is approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 79.2,
    "confidence": "drawn"
   },
   {
@@ -18260,6 +21107,146 @@
    "note": "The concourse's east wall, with a door to each departure stair. Approximate.",
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=5"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-concourse-door-1",
+   "name": "Broad Street Station concourse",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4655561,
+     37.561263
+    ],
+    [
+     -77.4655406,
+     37.5612524
+    ],
+    [
+     -77.4655169,
+     37.5612743
+    ],
+    [
+     -77.4655324,
+     37.5612849
+    ]
+   ],
+   "height": 0.05,
+   "tone": "engine",
+   "note": "The threshold of a door from the concourse to a departure stair (the 1919 article: departures by stairs on the east side). Its place and size are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=5",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0226_Broad_Street_Station_1972_Final_Nomination.pdf"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-concourse-door-2",
+   "name": "Broad Street Station concourse",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4654465,
+     37.5613643
+    ],
+    [
+     -77.465431,
+     37.5613537
+    ],
+    [
+     -77.4654073,
+     37.5613756
+    ],
+    [
+     -77.4654228,
+     37.5613862
+    ]
+   ],
+   "height": 0.05,
+   "tone": "engine",
+   "note": "The threshold of a door from the concourse to a departure stair (the 1919 article: departures by stairs on the east side). Its place and size are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=5",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0226_Broad_Street_Station_1972_Final_Nomination.pdf"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-concourse-door-3",
+   "name": "Broad Street Station concourse",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4653369,
+     37.5614657
+    ],
+    [
+     -77.4653214,
+     37.561455
+    ],
+    [
+     -77.4652977,
+     37.5614769
+    ],
+    [
+     -77.4653132,
+     37.5614876
+    ]
+   ],
+   "height": 0.05,
+   "tone": "engine",
+   "note": "The threshold of a door from the concourse to a departure stair (the 1919 article: departures by stairs on the east side). Its place and size are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=5",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0226_Broad_Street_Station_1972_Final_Nomination.pdf"
+   ],
+   "only": "cutaway",
+   "elevation": 67.4,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-c-concourse-door-4",
+   "name": "Broad Street Station concourse",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4652273,
+     37.561567
+    ],
+    [
+     -77.4652118,
+     37.5615564
+    ],
+    [
+     -77.4651881,
+     37.5615783
+    ],
+    [
+     -77.4652036,
+     37.5615889
+    ]
+   ],
+   "height": 0.05,
+   "tone": "engine",
+   "note": "The threshold of a door from the concourse to a departure stair (the 1919 article: departures by stairs on the east side). Its place and size are approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=5",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0226_Broad_Street_Station_1972_Final_Nomination.pdf"
    ],
    "only": "cutaway",
    "elevation": 67.4,

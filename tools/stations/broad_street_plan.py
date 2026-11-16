@@ -89,7 +89,14 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
          upTo=FF, confidence='drawn')
     for k, x in enumerate((1387, 1485, 1586, 1698, 1800, 1898)):
         cp(f'column-{k + 1}', POR, disc(x, 1748, 23), 0, 11.8, 'stone', 'drawn',
-           'One of the portico\'s six columns. Its place and size are from the plan; its height is scaled from the earlier postcard model (approximate).', plan_src + [ARCHIPEDIA], only=None)
+           'One of the portico\'s six columns. Its place and size are from the plan; its height is scaled from the earlier postcard model (approximate).', plan_src + [ARCHIPEDIA], only='whole')
+        # In cutaways, the column as base, shaft and capital, each a simple band.
+        cp(f'column-{k + 1}', POR, disc(x, 1748, 23), 0.55, 11.15, 'stone', 'drawn',
+           'One of the portico\'s six columns: its shaft. Its place and size are from the plan; its height is scaled from the earlier postcard model (approximate).', plan_src + [ARCHIPEDIA])
+        cp(f'column-{k + 1}-base', POR, disc(x, 1748, 30), 0, 0.55, 'stone', 'approximate',
+           'The base of a portico column, drawn as a plain band; the plan gives its plinth\'s place, not its profile.', plan_src)
+        cp(f'column-{k + 1}-capital', POR, disc(x, 1748, 29), 11.15, 11.8, 'stone', 'approximate',
+           'The capital of a portico column, drawn as a plain band (approximate: no drawing gives its profile).', plan_src)
     for k, x in enumerate((1276, 2007)):
         cp(f'portico-pier-{k + 1}', POR, rect(x - 20, 1728, x + 20, 1768), 0, 11.8, 'stone', 'drawn',
            'A square end pier of the colonnade. Place from the plan; height approximate.', plan_src, only=None)
@@ -98,6 +105,13 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
            'A pedestal at the corner of the portico terrace. Place from the plan; height approximate.', plan_src, only=None)
     cp('entablature', POR, rect(1256, 1600, 2027, 1775), 11.8, 14.4, 'stone', 'approximate',
        'The entablature over the colonnade, from pier to pier. Extent from the plan; height approximate.', plan_src, only=None)
+    # In cutaways, its parts as bands: the architrave's top and the frieze's, and the cornice
+    # over them, a little wider (approximate: no drawing gives their profiles).
+    for id_, (y1, z0, z1) in {'architrave': (1779, 12.7, 12.85), 'frieze': (1779, 13.6, 13.75)}.items():
+        cp(f'entablature-{id_}', POR, rect(1256, 1775, 2027, y1), z0, z1, 'stone', 'approximate',
+           f'The {id_}\'s top edge, a band along the entablature\'s face. Approximate.', plan_src)
+    cp('entablature-cornice', POR, rect(1248, 1592, 2035, 1785), 14.4, 14.75, 'stone', 'approximate',
+       'The cornice over the entablature, projecting a little. Approximate.', plan_src)
 
     # ---- the massing, for whole views ---------------------------------------------------------
     MASS = 'Broad Street Station (head house)'
@@ -158,6 +172,30 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
     # the cut, as solid blocks: nothing of their insides shows.
     cp('west-wing', 'Broad Street Station: west wing', LL([P(725, 1600), P(1305, 1600), P(1305, 755), P(1000, 755), P(725, 880)]), BSMT, WING_TOP, 'stone', 'drawn',
        'The west wing (the lunch room, dining room and kitchen, and the white men\'s rooms), drawn as a solid block: the cut does not open it. ' + PLAN + ' ' + SECT, sect_src)
+    # Its front, on Broad Street: windows in five bays on each floor, arched on the first, a
+    # belt course at the second floor and a cornice under the parapet. Sections A-A and B-B draw
+    # the wings' storeys and window rows; the bays here are approximate.
+    WIN = 'Broad Street Station: west wing'
+    win_note = 'A window of the west wing\'s front. Sections A-A and B-B (Plates 17, 18) draw the wings\' four storeys with rows of windows, arched on the first floor; their bays here are approximate.'
+    for j in range(5):
+        xa = 725 + 58 + j * 116 - 20
+        xb = xa + 40
+        cp(f'west-front-window-1-{j + 1}', WIN, LL([P(xa, 1600), P(xb, 1600), P(xb, 1602), P(xa, 1602)]), 0.9, 2.7, 'glass', 'approximate', win_note, sect_src)
+        cp(f'west-front-arch-1-{j + 1}', WIN, LL([P(xa, 1600), P(xb, 1600), P(xb, 1602), P(xa, 1602)]), 2.7, 3.5, 'glass', 'approximate', win_note, sect_src, shape='arch')
+        for f_, (z0, z1) in enumerate(((L2 + 0.9, L2 + 2.4), (L3 + 0.9, L3 + 2.4), (L4 + 0.8, L4 + 2.1))):
+            cp(f'west-front-window-{f_ + 2}-{j + 1}', WIN, LL([P(xa + 4, 1600), P(xb - 4, 1600), P(xb - 4, 1602), P(xa + 4, 1602)]), z0, z1, 'glass', 'approximate', win_note, sect_src)
+    cp('west-front-belt', WIN, rect(725, 1600, 1305, 1604), L2 - 0.15, L2 + 0.1, 'stone', 'approximate',
+       'A belt course across the west wing\'s front at the second floor. Approximate.', sect_src)
+    cp('west-front-cornice', WIN, rect(717, 1600, 1305, 1608), 12.6, 13.0, 'stone', 'drawn',
+       'The cornice of the west wing, under its parapet, at the height sections A-A and B-B draw it. Its projection is approximate.', sect_src)
+    # The front block over the vestibule: a window on each office floor beside the doors, and
+    # its cornice.
+    for f_, (z0, z1) in enumerate(((L2 + 0.9, L2 + 2.4), (L3 + 0.9, L3 + 2.4), (L4 + 0.8, L4 + 2.1))):
+        cp(f'front-window-{f_ + 2}', 'Broad Street Station: front block', LL([P(1400, 1600), P(1440, 1600), P(1440, 1602), P(1400, 1602)]), z0, z1, 'glass', 'approximate',
+           'A window of the offices over the vestibule. Section C-C draws the front block\'s office floors; the window\'s place is approximate.', sect_src)
+    cp('front-cornice', 'Broad Street Station: front block', rect(1297, 1600, 1650, 1608), FRONT_TOP - 0.7, FRONT_TOP - 0.3, 'stone', 'approximate',
+       'The cornice of the front block. Height from section C-C; projection approximate.', sect_src)
+
     cp('passage-1', 'Broad Street Station: Enclosed Concourse Passage No. 1', rect(1160, 575, 1440, 755), -0.5, 6.5, 'stone', 'drawn',
        'Enclosed Concourse Passage No. 1, as a solid block. ' + PLAN_HT, plan_src)
     cp('entrance-hall-1', 'Broad Street Station: Entrance Hall No. 1', rect(1305, 1471, 1494, 1577), BSMT, FRONT_TOP, 'stone', 'drawn',
@@ -201,7 +239,17 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
         if nx * ((p[0] + q[0]) / 2 - cx) + ny * ((p[1] + q[1]) / 2 - cy) < 0:
             nx, ny = -nx, -ny
         ring = LL([P(*p), P(*q), P(q[0] + nx * W, q[1] + ny * W), P(p[0] + nx * W, p[1] + ny * W)])
-        cp(f'hall-corner-{k + 1}', HALL, ring, 0, ATTIC, 'plaster', 'drawn', 'A cut corner of the White Waiting Room: the octagon of the plan. ' + PLAN + ' ' + SECT, sect_src)
+        cp(f'hall-corner-{k + 1}', HALL, ring, 0, ATTIC, 'plaster', 'drawn', 'A cut corner of the White Waiting Room: the octagon of the plan, rising to the cornice under the dome as sections A-A and C-C draw the hall\'s walls. ' + PLAN + ' ' + SECT, sect_src)
+        # On its face: the door the plan draws into the vestibule behind each corner, and the
+        # band under the lunettes ("Inscription on four sides", section C-C), carried round.
+        def inset(t0, t1, d):
+            a = (p[0] + dx * t0, p[1] + dy * t0)
+            b = (p[0] + dx * t1, p[1] + dy * t1)
+            return LL([P(*a), P(*b), P(b[0] - nx * d, b[1] - ny * d), P(a[0] - nx * d, a[1] - ny * d)])
+        cp(f'hall-corner-{k + 1}-door', HALL, inset(0.32, 0.68, 2), 0, 4.2, 'wood', 'drawn',
+           'The door in a cut corner of the hall, to the vestibule behind it, as the plan draws it. Its height is approximate.', plan_src)
+        cp(f'hall-corner-{k + 1}-band', HALL, inset(0, 1, 5), CORNICE - 1.1, CORNICE - 0.5, 'stone', 'drawn',
+           'The band under the lunettes that carries the inscription round the hall (section C-C). Its depth is approximate.', sect_src)
     # The two long sides open under their great arches to the vestibules and counters beside the
     # hall: their walls start at the cornice.
     for side, x0, x1 in (('west', X0 - W, X0), ('east', X1, X1 + W)):
@@ -211,6 +259,9 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
     for end, y0, y1 in (('back', Y0 - W, Y0), ('front', Y1, Y1 + W)):
         for k, (x0, x1) in enumerate([(X0 + C, 1590), (1710, X1 - C)]):
             cp(f'hall-{end}-wall-{k + 1}', HALL, rect(x0, y0, x1, y1), 0, ATTIC, 'plaster', 'drawn', hall_note + ' Doors approximate.', sect_src)
+            yi = y1 if end == 'back' else y0
+            cp(f'hall-{end}-band-{k + 1}', HALL, rect(x0, yi, x1, yi + (5 if end == 'back' else -5)), CORNICE - 1.1, CORNICE - 0.5, 'stone', 'drawn',
+               'The band under the lunettes that carries the inscription round the hall (section C-C). Its depth is approximate.', sect_src)
         cp(f'hall-{end}-door-head', HALL, rect(1590, y0, 1710, y1), 6.0, CORNICE, 'plaster', 'approximate',
            'The wall over the hall\'s door on the axis, up to the lunette. The door\'s width and height are approximate.', sect_src)
         cp(f'hall-{end}-lunette-head', HALL, rect(1590, y0, 1710, y1), LUNETTE, ATTIC, 'plaster', 'drawn',
@@ -343,6 +394,14 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
         q0, q1 = edges[k], edges[k + 1]
         part(f'bss-c-concourse-east-{k // 2 + 1}', CON, LL([ab(a1 - WT, q0), ab(a1, q0), ab(a1, q1), ab(a1 - WT, q1)]), 8.4, 'plaster',
              'The concourse\'s east wall, with a door to each departure stair. Approximate.', [AMAR], only='cutaway', elevation=FF, confidence='approximate')
+
+    # Each door's threshold, a dark sill across the opening and into the floor, so the way out
+    # to each stair reads on the concourse floor.
+    for k in range(1, len(edges) - 1, 2):
+        q0, q1 = edges[k], edges[k + 1]
+        part(f'bss-c-concourse-door-{(k + 1) // 2}', CON, LL([ab(a1 - WT - 1.2, q0), ab(a1, q0), ab(a1, q1), ab(a1 - WT - 1.2, q1)]), 0.05, 'engine',
+             'The threshold of a door from the concourse to a departure stair (the 1919 article: departures by stairs on the east side). Its place and size are approximate.',
+             [AMAR, NR], only='cutaway', elevation=FF, confidence='approximate')
 
     # Departure stairs on the east side, arrival ramps on the west (1919 article; SAH Archipedia):
     # a flight from the concourse door down each platform. Their run and width are approximate.
