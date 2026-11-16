@@ -477,12 +477,13 @@ one side is lifted away, its ground floor left as a plan, and every cut is drawn
   "remove": "right",                      // the side lifted away; stand the camera there
   "floor": 67.4, "keep": 1.5,             // on that side keep what stands up to 1.5 m over this floor (m above sea level)
   "parts": "bss-",                        // only modeled parts with this id prefix are cut
-  "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away whole though not cut; or OSM buildings ("^w236026091$")
+  "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away whole though not cut; OSM buildings ("^w236026091$"); modeled parts, still drawn in the flat section
   "outline": { "parts": ["bss-c-floor-"], "offset": 1.5 },  // dash the removed footprint
   "travelers": [{ "at": [-77.466035, 37.56091], "floor": 67.4, "facing": 1 }],  // figures to scale (1.75 m); no floor: on the ground
   "section": { "from": -62, "to": 104, "beyond": 35, "other": 3, "scale": 10, "earth": 5,
                "route": [[-60, 64.7], [50.5, 68.3]],   // the flat section and the traveler's path (waist height)
                "travelers": [{ "s": -40, "floor": 65.66, "facing": 1 }] }   // figures on the path
+               // "squareEarth": true digs the earth square at the ends of what lies below the ground
 }
 ```
 

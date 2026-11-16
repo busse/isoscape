@@ -83,6 +83,8 @@ export interface Palette {
   readonly route: string
   readonly routeWidth: number
   readonly routeDash: readonly [number, number]
+  /** A light halo under the traveler's path and figures, where they cross red or dark ground. */
+  readonly routeHalo?: string
   /** Station platforms, and the running rails of a track at close scale. */
   readonly platform: string
   readonly railSteel: string
@@ -336,6 +338,7 @@ const winter: Palette = {
   poche: '#22181b',
   cutOutline: '#e6d3a8',
   route: '#d8392b',
+  routeHalo: '#f6ead0',
 }
 
 export const PALETTES: Readonly<Record<string, Palette>> = { paper, night, winter }

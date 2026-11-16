@@ -120,6 +120,12 @@ export const cutawayItems = (
       if (it !== null) items.push(it)
       continue
     }
+    // A part `lift` names (a roof over the room the camera looks into) is lifted away whole in
+    // the cutaway, and still drawn in the flat section.
+    if (lift.some((r) => r.test(id))) {
+      stats.lifted++
+      continue
+    }
     if (!subject) {
       const it = solidItem(view, tones, id, solids, p.h.name)
       if (it !== null) items.push(it)
@@ -551,10 +557,13 @@ export const stairProfile = (view: View, pal: Palette, pl: CutPlane, id: string,
 export const travelerItem = (view: View, pal: Palette, id: string, at: Vec2, z: number, facing: 1 | -1): Item => {
   const [bx, by] = view.toScreen(at, z)
   const up = by - view.toScreen(at, z + 1)[1]       // screen pixels per meter of height
-  const shapes: Shape[] = travelerShapes().map((poly) => ({
-    pts: poly.map(([x, y]): Vec2 => [bx + x * facing * view.scale, by - y * up]),
-    fill: pal.route,
-  }))
+  const polys = travelerShapes().map((poly) => poly.map(([x, y]): Vec2 => [bx + x * facing * view.scale, by - y * up]))
+  // Over a light halo, where the palette has one, so the figure reads on red seats.
+  const halo = pal.routeHalo
+  const shapes: Shape[] = [
+    ...(halo === undefined ? [] : polys.map((pts): Shape => ({ pts: [...pts, pts[0]], fill: 'none', line: true, stroke: { color: halo, width: pal.routeWidth * 0.9, dash: [1e3, 0] } }))),
+    ...polys.map((pts): Shape => ({ pts, fill: pal.route })),
+  ]
   const r = 0.25
   const hull: Ring = [[at[0] - r, at[1] - r], [at[0] + r, at[1] - r], [at[0] + r, at[1] + r], [at[0] - r, at[1] + r]]
   return { id, kind: 'building', hull, zMin: z, zMax: z + 1.75, key: at[1], name: 'A traveler, drawn to scale (1.75 m)', dots: [], shapes }

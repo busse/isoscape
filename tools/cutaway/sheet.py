@@ -99,6 +99,7 @@ def badge(x, y, n, conf, r=44):
 
 
 HALO = [False]   # set from the spec: leaders get a paper halo, to read on a dark plate
+LAST = [None]    # where the column, the key and the notes ended, for a caller checking the layout
 
 
 def leader(x0, y0, x1, y1, r=0):
@@ -228,7 +229,7 @@ def main():
     s_iso = min(iso_box[2] / iso_vb[2], iso_box[3] / iso_vb[3])
     iso_h = iso_vb[3] * s_iso
     # The flat section beneath, no taller than SEC_H, from the left edge of the art.
-    sec_w = ART_R - M
+    sec_w = spec.get('layout', {}).get('sectionW', ART_R - M)
     s_sec = min(sec_w / svb[2], (H - spec.get('layout', {}).get('bottom', 330) - (top + iso_h + 330)) / svb[3])
     sec_h = svb[3] * s_sec
     sec_top = top + iso_h + 420
@@ -293,9 +294,11 @@ def main():
             for where, anchors, frame, (ox, oy, sc) in (('iso', iso_a, None, (ox_iso, oy_iso, s_iso)), ('section', sec_a, sec_a.get('frame'), (ox_sec, oy_sec, s_sec))):
                 if where not in c:
                     continue
-                p = anchor(c[where], anchors, frame)
-                if p is not None:
-                    out.append(badge_at(ox + p[0] * sc, oy + p[1] * sc, c[where].get('badge'), c['n'], conf, 46))
+                # One anchor, or a list of them: a callout may name two parts in one drawing.
+                for w in (c[where] if isinstance(c[where], list) else [c[where]]):
+                    p = anchor(w, anchors, frame)
+                    if p is not None:
+                        out.append(badge_at(ox + p[0] * sc, oy + p[1] * sc, w.get('badge'), c['n'], conf, 46))
             out.append(badge(x + 56, y - 26, c['n'], conf, 50))
             out.append(text(x + 140, y, c['title'], 70, 'bold'))
             yy = y + 86
@@ -350,37 +353,42 @@ def main():
             out.append(f'<circle cx="{ax:.0f}" cy="{ay:.0f}" r="20" fill="{PAPER}"/>')
         out.append(f'<path d="M{lx:.0f} {ly:.0f}L{ax:.0f} {ay:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>')
         out.append(f'<circle cx="{ax:.0f}" cy="{ay:.0f}" r="13" fill="{INK}"/>')
-    # Key, sources and notes, at the foot of the callout column.
-    ky = y + 40
-    out.append(text(x, ky, 'HOW SURE EACH PART IS', 58, 'bold', head_ink, family=SANS, spacing=4))
-    out.append(f'<line x1="{x}" y1="{ky + 32}" x2="{W - M}" y2="{ky + 32}" stroke="{rule_ink}" stroke-width="4"/>')
+    # Key, sources and notes, at the foot of the callout column, or the key in a block of its own
+    # (`layout.key`: x, y, w) with the sources and notes under it (`layout.notes` without y).
+    kb = spec.get('layout', {}).get('key')
+    kx, ky, kw = (kb['x'], kb['y'], kb['w']) if kb else (x, y + 40, W - M - x)
+    out.append(text(kx, ky, 'HOW SURE EACH PART IS', 58, 'bold', head_ink, family=SANS, spacing=4))
+    out.append(f'<line x1="{kx}" y1="{ky + 32}" x2="{kx + kw}" y2="{ky + 32}" stroke="{rule_ink}" stroke-width="4"/>')
     ky += 150
     for conf, msg in spec['key']:
-        out.append(badge(x + 56, ky - 22, None, conf, 42))
-        out.append(text(x + 140, ky, msg, 56, 'regular', DIM))
-        ky += 92
-    for line in wrap(spec.get('keyNote', 'The same marks, small, stand before each place the trains and streetcars went.'), 'regular', 56, W - M - x - 140):
-        out.append(text(x + 140, ky, line, 56, 'regular', DIM))
+        out.append(badge(kx + 56, ky - 22, None, conf, 42))
+        for i, line in enumerate(wrap(msg, 'regular', 56, kw - 140)):
+            out.append(text(kx + 140, ky, line, 56, 'regular', DIM))
+            ky += 76
+        ky += 16
+    for line in wrap(spec.get('keyNote', 'The same marks, small, stand before each place the trains and streetcars went.'), 'regular', 56, kw - 140):
+        out.append(text(kx + 140, ky, line, 56, 'regular', DIM))
         ky += 76
     if spec.get('travelerKey') and traveler:
         ky += 26
-        out.append(figure(x + 56, ky + 14, 90, traveler['shapes'], route))
-        for line in wrap(spec['travelerKey'], 'regular', 56, W - M - x - 140):
-            out.append(text(x + 140, ky, line, 56, 'regular', DIM))
+        out.append(figure(kx + 56, ky + 14, 90, traveler['shapes'], route))
+        for line in wrap(spec['travelerKey'], 'regular', 56, kw - 140):
+            out.append(text(kx + 140, ky, line, 56, 'regular', DIM))
             ky += 76
     ky += 40
     nb = spec.get('layout', {}).get('notes')
-    nx, ny, nw = (nb['x'], nb['y'], nb['w']) if nb else (x, ky, W - M - x)
+    nx, ny, nw = (nb['x'], nb.get('y', ky + 30), nb['w']) if nb else (kx, ky, kw)
     for line in wrap(spec['sources'], 'italic', 50, nw) + [''] + wrap(spec['notes'], 'italic', 50, nw):
         if line:
             out.append(text(nx, ny, line, 50, 'italic', DIM))
         ny += 68
-    if nb is None:
+    if nb is None and kb is None:
         ky = ny
     elif ny > H - 260:
         print(f'warning: the notes run to {ny:.0f}, past the credit line', file=sys.stderr)
-    if ky > H - 120:
-        print(f'warning: the column runs to {ky:.0f}, past the credit line', file=sys.stderr)
+    if y > H - 120 or (kb is None and ky > H - 120):
+        print(f'warning: the column runs to {max(y, ky):.0f}, past the credit line', file=sys.stderr)
+    LAST[0] = {'column': y, 'key': ky, 'notes': ny}
     # Within a theme's border, the credit line stands higher.
     out.append(text(M, H - (230 if theme else 150), spec['credit'], 46, 'regular', DIM))
     out.append('</svg>')
@@ -400,7 +408,8 @@ def main():
 
 def confidence(c, conf_of):
     """A callout's badge: its own `confidence`, else its part's, else approximate."""
-    part = (c.get('iso') or {}).get('part') or (c.get('section') or {}).get('part') or ''
+    first = lambda w: (w[0] if isinstance(w, list) and w else w) or {}
+    part = first(c.get('iso')).get('part') or first(c.get('section')).get('part') or ''
     return c.get('confidence') or conf_of.get(part.replace('history:', '').split(':')[0], 'approximate')
 
 

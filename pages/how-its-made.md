@@ -691,7 +691,13 @@ assessor's year built puts it up by then. A cutaway's `lift` can name OSM buildi
 Byrd's lifts the houses and the corner building east of it, on the side lifted away, which
 would stand in front of the cut. Below the sidewalk on that side, a part in the `land` tone (the
 ground's own color, uninked) hides the raked floor's fill, so the plan shows nothing under the
-ground beyond the cut.
+ground beyond the cut. A `lift` can name modeled parts too: they are lifted from the cutaway
+and kept in the flat section, which is how the Byrd's roof over the auditorium and the ceiling
+between its dome and the near wall come off, so the niches on the far wall show. Its flat
+section digs the earth square at the ends of what lies below the ground (`squareEarth`; the
+earth is otherwise sampled every 0.5 m along the plane, which leaves a slope at a dug edge). On
+the winter palette the traveler's path and figures stand on a light halo, so the red reads over
+the red seats.
 
 ## Sets: a map framed by its places
 

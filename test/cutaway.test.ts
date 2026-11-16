@@ -172,3 +172,14 @@ test('the land tone stands for the ground: filled in its color, with no ink', as
   assert.ok(item !== null && item.shapes.every((s) => s.ink !== true && s.fill === pal.land))
   assert.notEqual(partTones(pal, { tone: 'brick' } as never).ink, false)
 })
+
+test('a traveler on a palette with a route halo stands over a light outline; without one, not', async () => {
+  const { travelerItem } = await import('../src/cutaway-scene.ts')
+  const { palette } = await import('../src/palette.ts')
+  const view = { scale: 10, squash: 0.6, toScreen: ([e, n]: Vec2, z = 0) => [e * 10, -n * 6 - z * 8] } as unknown as View
+  const winter = travelerItem(view, palette('winter'), 't', [0, 0], 0, 1)
+  const halos = winter.shapes.filter((s) => s.line === true)
+  assert.ok(halos.length > 0 && halos.every((s) => s.stroke?.color === palette('winter').routeHalo))
+  assert.equal(winter.shapes.indexOf(halos[0]), 0)
+  assert.equal(travelerItem(view, palette('paper'), 't', [0, 0], 0, 1).shapes.filter((s) => s.line === true).length, 0)
+})
