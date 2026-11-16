@@ -442,7 +442,7 @@ fourteen places they ran to.
 3. **Tiles.** Build once, then crop viewBoxes into tiles and rasterize a zoom pyramid for a
    web map. There are no seams to hide: one projection, one paint order.
 4. **Levels of detail.** Drop dots and minor edges at low zoom.
-5. **Hand-drawn landmarks.** Override the Belle Isle footbridge under the Lee Bridge, the
+5. **Authored landmark figures.** Override the Belle Isle footbridge under the Lee Bridge, the
    Potterfield bridge and the Triple Crossing with authored figures.
 6. **Trees.** Scatter crowns over wooded areas and cemeteries.
 
