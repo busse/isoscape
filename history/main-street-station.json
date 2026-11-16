@@ -2637,7 +2637,8 @@
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "within": "mss-h-roof"
   },
   {
    "id": "mss-h-floor-fourth",
@@ -2672,7 +2673,8 @@
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "within": "mss-h-roof"
   },
   {
    "id": "mss-h-roof",
@@ -3931,6 +3933,280 @@
    ]
   },
   {
+   "id": "mss-h-tower-hands-s",
+   "name": "Main Street Station: clock",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4296036,
+     37.5343087
+    ],
+    [
+     -77.4295828,
+     37.5342962
+    ],
+    [
+     -77.4295825,
+     37.5342965
+    ],
+    [
+     -77.4296033,
+     37.534309
+    ]
+   ],
+   "height": 2.3,
+   "tone": "coal",
+   "elevation": 33.15,
+   "upTo": 35.45,
+   "note": "The clock's hands; the time they show is arbitrary (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
+   ],
+   "confidence": "approximate",
+   "shape": "frame",
+   "members": [
+    [
+     1.15,
+     1.15,
+     1.15,
+     2.0,
+     0.09
+    ],
+    [
+     1.15,
+     1.15,
+     1.7,
+     0.8999999999999999,
+     0.12
+    ]
+   ]
+  },
+  {
+   "id": "mss-h-tower-hands-e",
+   "name": "Main Street Station: clock",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4295534,
+     37.5343014
+    ],
+    [
+     -77.4295378,
+     37.534318
+    ],
+    [
+     -77.4295381,
+     37.5343182
+    ],
+    [
+     -77.4295538,
+     37.5343016
+    ]
+   ],
+   "height": 2.3,
+   "tone": "coal",
+   "elevation": 33.15,
+   "upTo": 35.45,
+   "note": "The clock's hands; the time they show is arbitrary (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
+   ],
+   "confidence": "approximate",
+   "shape": "frame",
+   "members": [
+    [
+     1.15,
+     1.15,
+     1.15,
+     2.0,
+     0.09
+    ],
+    [
+     1.15,
+     1.15,
+     1.7,
+     0.8999999999999999,
+     0.12
+    ]
+   ]
+  },
+  {
+   "id": "mss-h-tower-column-0",
+   "name": "Main Street Station: clock tower",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4296243,
+     37.5343176
+    ],
+    [
+     -77.4296166,
+     37.534313
+    ],
+    [
+     -77.4296109,
+     37.5343191
+    ],
+    [
+     -77.4296185,
+     37.5343237
+    ]
+   ],
+   "height": 3.5,
+   "tone": "stone",
+   "elevation": 32.7,
+   "upTo": 36.2,
+   "note": "Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
+   ],
+   "confidence": "written"
+  },
+  {
+   "id": "mss-h-tower-column-1",
+   "name": "Main Street Station: clock tower",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.429574,
+     37.5342875
+    ],
+    [
+     -77.4295664,
+     37.5342829
+    ],
+    [
+     -77.4295607,
+     37.534289
+    ],
+    [
+     -77.4295683,
+     37.5342935
+    ]
+   ],
+   "height": 3.5,
+   "tone": "stone",
+   "elevation": 32.7,
+   "upTo": 36.2,
+   "note": "Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
+   ],
+   "confidence": "written"
+  },
+  {
+   "id": "mss-h-tower-column-2",
+   "name": "Main Street Station: clock tower",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4295325,
+     37.5343316
+    ],
+    [
+     -77.4295249,
+     37.534327
+    ],
+    [
+     -77.4295192,
+     37.5343331
+    ],
+    [
+     -77.4295268,
+     37.5343376
+    ]
+   ],
+   "height": 3.5,
+   "tone": "stone",
+   "elevation": 32.7,
+   "upTo": 36.2,
+   "note": "Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
+   ],
+   "confidence": "written"
+  },
+  {
+   "id": "mss-h-tower-column-3",
+   "name": "Main Street Station: clock tower",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4295828,
+     37.5343617
+    ],
+    [
+     -77.4295752,
+     37.5343571
+    ],
+    [
+     -77.4295694,
+     37.5343632
+    ],
+    [
+     -77.429577,
+     37.5343678
+    ]
+   ],
+   "height": 3.5,
+   "tone": "stone",
+   "elevation": 32.7,
+   "upTo": 36.2,
+   "note": "Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
+   ],
+   "confidence": "written"
+  },
+  {
    "id": "mss-h-tower-window-s-0-0",
    "name": "Main Street Station: clock tower",
    "kind": "landmark",
@@ -4111,42 +4387,6 @@
    "confidence": "approximate"
   },
   {
-   "id": "mss-h-tower-window-e-3-0",
-   "name": "Main Street Station: clock tower",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4295425,
-     37.5343101
-    ],
-    [
-     -77.429542,
-     37.5343098
-    ],
-    [
-     -77.4295349,
-     37.5343174
-    ],
-    [
-     -77.4295353,
-     37.5343177
-    ]
-   ],
-   "height": 1.6,
-   "tone": "glass",
-   "elevation": 27.8,
-   "upTo": 29.4,
-   "note": "A window of the clock tower, as the photographs show them. Places and sizes approximate.",
-   "sources": [
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
-   ],
-   "confidence": "approximate"
-  },
-  {
    "id": "mss-h-tower-window-s-3-1",
    "name": "Main Street Station: clock tower",
    "kind": "landmark",
@@ -4168,42 +4408,6 @@
     [
      -77.4295927,
      37.5343
-    ]
-   ],
-   "height": 1.6,
-   "tone": "glass",
-   "elevation": 27.8,
-   "upTo": 29.4,
-   "note": "A window of the clock tower, as the photographs show them. Places and sizes approximate.",
-   "sources": [
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
-   ],
-   "confidence": "approximate"
-  },
-  {
-   "id": "mss-h-tower-window-e-3-1",
-   "name": "Main Street Station: clock tower",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4295524,
-     37.5342996
-    ],
-    [
-     -77.4295519,
-     37.5342993
-    ],
-    [
-     -77.4295448,
-     37.5343069
-    ],
-    [
-     -77.4295452,
-     37.5343072
     ]
    ],
    "height": 1.6,
@@ -4255,42 +4459,6 @@
    "confidence": "approximate"
   },
   {
-   "id": "mss-h-tower-window-e-4-0",
-   "name": "Main Street Station: clock tower",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4295425,
-     37.5343101
-    ],
-    [
-     -77.429542,
-     37.5343098
-    ],
-    [
-     -77.4295349,
-     37.5343174
-    ],
-    [
-     -77.4295353,
-     37.5343177
-    ]
-   ],
-   "height": 1.6,
-   "tone": "glass",
-   "elevation": 30.0,
-   "upTo": 31.6,
-   "note": "A window of the clock tower, as the photographs show them. Places and sizes approximate.",
-   "sources": [
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
-   ],
-   "confidence": "approximate"
-  },
-  {
    "id": "mss-h-tower-window-s-4-1",
    "name": "Main Street Station: clock tower",
    "kind": "landmark",
@@ -4312,42 +4480,6 @@
     [
      -77.4295927,
      37.5343
-    ]
-   ],
-   "height": 1.6,
-   "tone": "glass",
-   "elevation": 30.0,
-   "upTo": 31.6,
-   "note": "A window of the clock tower, as the photographs show them. Places and sizes approximate.",
-   "sources": [
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
-   ],
-   "confidence": "approximate"
-  },
-  {
-   "id": "mss-h-tower-window-e-4-1",
-   "name": "Main Street Station: clock tower",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4295524,
-     37.5342996
-    ],
-    [
-     -77.4295519,
-     37.5342993
-    ],
-    [
-     -77.4295448,
-     37.5343069
-    ],
-    [
-     -77.4295452,
-     37.5343072
     ]
    ],
    "height": 1.6,
@@ -6125,7 +6257,8 @@
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "within": "mss-h-roof"
   },
   {
    "id": "mss-h-corridor-third-n",
@@ -6160,7 +6293,8 @@
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "within": "mss-h-roof"
   },
   {
    "id": "mss-h-corridor-fourth-s",
@@ -6195,7 +6329,8 @@
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "within": "mss-h-roof"
   },
   {
    "id": "mss-h-corridor-fourth-n",
@@ -6230,7 +6365,8 @@
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "within": "mss-h-roof"
   },
   {
    "id": "mss-h-office-wall-0-s",

@@ -85,6 +85,8 @@ export interface HistoryFeature {
    * arched window on the ring's first edge (its span), rising to a half ellipse at the top.
    */
   readonly steps?: number
+  /** A part standing inside a roof shell (that part's id): see `Item.within`. */
+  readonly within?: string
   /** How the part is known: see `confidenceOf`. */
   readonly confidence?: Confidence
   /**

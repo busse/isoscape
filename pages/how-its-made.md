@@ -676,8 +676,10 @@ its upper face where it was, so the trusses show on their columns. The shed is b
 of HAER VA-4 (sheet 3); a frame longer than 12 m is drawn in pieces of members 6 m apart across
 it, so a train or a column under it sorts against the piece above it rather than the whole span.
 The hipped roof of the head house is an `inset` shell, each side stepped in by the same distance
-so its four slopes rise alike to the ridge, and drawn side by side so the offices inside it sort
-between its near and far slopes. The tracks stand on a deck at the level of the waiting room,
+so its four slopes rise alike to the ridge, and drawn side by side in lengths of about 6 m, so a
+dormer sorts against the length of roof under it. Parts that stand inside the shell (`within`:
+the offices in the roof) paint before the slopes that face the camera and after those that face
+away. The tracks stand on a deck at the level of the waiting room,
 on trestles: a rail line with an elevation draws no ground ribbon, its train stands on the deck,
 and its track is a modeled part with ties 2.6 m long, 0.67 m apart, and two rails at standard
 gauge. Its flat section runs from 26 m on the Main Street side of the plane's point to 70 m on the

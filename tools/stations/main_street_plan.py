@@ -124,7 +124,8 @@ def build(part, rect, ring, plane, SRC, L):
     for nm, z, extra in (('third', L3, 0.9), ('fourth', L4, 0.9)):
         a0, a1, b0, b1 = inset_at(z, extra)
         p(f'floor-{nm}', f'Main Street Station: {nm} floor', rect(a0, a1, b0, b1), z - 0.35, z, 'floor', 'written',
-          f'The {nm} floor, in the roof, lit by its dormers: offices (HABS VA-848: "three and two one-half stories"; the 1970 nomination: offices on the upper floors).' + FL, HABS)
+          f'The {nm} floor, in the roof, lit by its dormers: offices (HABS VA-848: "three and two one-half stories"; the 1970 nomination: offices on the upper floors).' + FL, HABS,
+          within='mss-h-roof')
     p('roof', 'Main Street Station: roof', rect(*R0), CORNICE, RIDGE, 'tile', 'written',
       'The very steep hipped roof of red clay tile (HABS VA-848). Its pitch and ridge height are scaled from photographs; its thickness is approximate.',
       HABS + PH, shape='inset', levels=[[0, 0, 0.55], [round(rise, 3), round(run, 3), round(run, 3)]])
@@ -167,15 +168,20 @@ def build(part, rect, ring, plane, SRC, L):
     CLK = 'A clock face, one on each side of the tower (HABS VA-848). Size approximate.'
     p('tower-clock-s', 'Main Street Station: clock', plane(cx - r, b0 + 0.26, cx + r, b0 + 0.26, 0.04), zc - r, zc + r, 'plaster', 'written', CLK, TSRC, shape='frame', members=strips)
     p('tower-clock-e', 'Main Street Station: clock', plane(a1 - 0.26, cb - r, a1 - 0.26, cb + r, 0.04), zc - r, zc + r, 'plaster', 'written', CLK, TSRC, shape='frame', members=strips)
-    # Its windows: on the front, and on the east side above the main roof's balustrade.
+    HANDS = 'The clock\'s hands; the time they show is arbitrary (approximate).'
+    hands = [[r, r, r, r + 0.85, 0.09], [r, r, r + 0.55, r - 0.25, 0.12]]
+    p('tower-hands-s', 'Main Street Station: clock', plane(cx - r, b0 + 0.19, cx + r, b0 + 0.19, 0.04), zc - r, zc + r, 'coal', 'approximate', HANDS, TSRC, shape='frame', members=hands)
+    p('tower-hands-e', 'Main Street Station: clock', plane(a1 - 0.19, cb - r, a1 - 0.19, cb + r, 0.04), zc - r, zc + r, 'coal', 'approximate', HANDS, TSRC, shape='frame', members=hands)
+    # The coupled columns that frame each clock face, drawn as a pier at each corner of its stage.
+    for k, (x, y) in enumerate([(a0 + 0.3, b0 + 0.3), (a1 - 0.3, b0 + 0.3), (a1 - 0.3, b1 - 0.3), (a0 + 0.3, b1 - 0.3)]):
+        p(f'tower-column-{k}', 'Main Street Station: clock tower', rect(x - 0.42, x + 0.42, y - 0.42, y + 0.42), SHAFT + 0.3, FF + 21.3, 'stone', 'written',
+          'Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.', TSRC)
+    # Its windows, on the front (on the east side the roof rises past the shaft).
     TWIN = 'A window of the clock tower, as the photographs show them. Places and sizes approximate.'
     for k, (z0, z1, pair) in enumerate([(G + 1.2, G + 3.6, False), (FF + 1.0, FF + 4.0, False), (L2 + 0.6, L2 + 2.6, True), (FF + 12.9, FF + 14.5, True), (FF + 15.1, FF + 16.7, True)]):
         xs = [(cx - 1.25, cx - 0.2), (cx + 0.2, cx + 1.25)] if pair else [(cx - 0.75, cx + 0.75)]
         for j, (x0, x1) in enumerate(xs):
             p(f'tower-window-s-{k}-{j}', 'Main Street Station: clock tower', ring([(x0, b0 - 0.05), (x1, b0 - 0.05), (x1, b0), (x0, b0)]), z0, z1, 'glass', 'approximate', TWIN, PH)
-            if z0 > BAL:
-                y0, y1 = cb - (x1 - cx), cb - (x0 - cx)
-                p(f'tower-window-e-{k}-{j}', 'Main Street Station: clock tower', ring([(a1, y0), (a1 + 0.05, y0), (a1 + 0.05, y1), (a1, y1)]), z0, z1, 'glass', 'approximate', TWIN, PH)
 
     # ---- the steps, the loggia and the stair to the first floor -----------------------------------
     p('front-steps', 'Main Street Station: steps from Main Street', ring([(BAYS[0], -4.0), (BAYS[5], -4.0), (BAYS[5], 0.0), (BAYS[0], 0.0)]), FORE, G, 'stone', 'approximate',
@@ -229,7 +235,8 @@ def build(part, rect, ring, plane, SRC, L):
         else:
             a0, a1, _, _ = inset_at(z1, extra)
         for side, b in (('s', 8.95), ('n', 10.7)):
-            p(f'corridor-{nm}-{side}', OFF, rect(a0, a1, b - 0.12, b + 0.12), z0, z1, 'plaster', 'written', CORR, HABS)
+            p(f'corridor-{nm}-{side}', OFF, rect(a0, a1, b - 0.12, b + 0.12), z0, z1, 'plaster', 'written', CORR, HABS,
+              within=None if nm == 'second' else 'mss-h-roof')
     OFFW = 'A partition between offices (HABS VA-848: offices of merely functional design). Its place is approximate.'
     for k, a in enumerate((BAYS[1] + 0.15, BAYS[3])):
         for side, (b0, b1) in (('s', (T, 8.83)), ('n', (10.82, HH_N - T))):

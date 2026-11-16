@@ -55,7 +55,33 @@ export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean; s
     // A shell (a hipped roof over rooms) is drawn side by side, so what stands inside it sorts
     // between its near and far sides; a solid one (a square dome) as one.
     const shell = h.levels.some(([, o, i]) => i > o + 1e-6 && i < 8)
-    return { solids, hulled: false, ...(shell ? { sides: solids.map((_, k) => k % outer.length) } : {}) }
+    if (!shell) return { solids, hulled: false }
+    // Each side is drawn in lengths of SHELL_PIECE along its edge, so a dormer on a long slope
+    // sorts against the length of roof under it, not the whole slope.
+    const pieces: Solid[] = []
+    const sides: number[] = []
+    solids.forEach((sol, k) => {
+      const e = k % outer.length
+      const a = outer[e]
+      const b = outer[(e + 1) % outer.length]
+      const len = Math.hypot(b[0] - a[0], b[1] - a[1])
+      const n = Math.max(1, Math.round(len / SHELL_PIECE))
+      const d: Vec3 = [(b[0] - a[0]) / len, (b[1] - a[1]) / len, 0]
+      const at0 = d[0] * a[0] + d[1] * a[1]
+      for (let i = 0; i < n; i++) {
+        const lo = i === 0 ? -Infinity : at0 + (len * i) / n
+        const hi = i + 1 === n ? Infinity : at0 + (len * (i + 1)) / n
+        const cut = clipAll(sol, [
+          ...(Number.isFinite(lo) ? [{ n: [-d[0], -d[1], 0] as Vec3, d: -lo }] : []),
+          ...(Number.isFinite(hi) ? [{ n: d, d: hi }] : []),
+        ])
+        if (cut === null) continue
+        // The faces where one length meets the next are joints, not sections.
+        pieces.push({ faces: cut.faces.map((f) => (f.role === 'cut' ? { pts: f.pts, role: 'internal' as const } : f)) })
+        sides.push(e * 100 + i)
+      }
+    })
+    return { solids: pieces, hulled: false, sides }
   }
   if (h.shape === 'frame' && h.members !== undefined) {
     const members = h.members.filter((m) => m.length >= 5).map((m) => (m.length >= 6 && m.length % 2 === 0
@@ -78,6 +104,9 @@ export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean; s
   if (isConvex(outer)) return { solids: [prism(outer, seat, top)], hulled: false }
   return { solids: [prism(convexHull(outer), seat, top)], hulled: true }
 }
+
+/** A shell's sides are drawn in lengths of about this many meters along their edges. */
+export const SHELL_PIECE = 6
 
 /** A frame longer than twice this (m) is drawn in pieces of members this far apart along it. */
 export const FRAME_PIECE = 6
@@ -131,6 +160,26 @@ export const cutawayItems = (
     if (made.hulled) stats.cutHulled++
     // A shell's sides are each their own item (see `partSolids`); anything else is one.
     const groups = made.sides === undefined ? [-1] : [...new Set(made.sides)]
+    // A shell's side faces the camera when its slope's outward normal points toward it: its
+    // edge's outward normal (dy, −dx) tilted up by the slope's pitch, against the camera, which
+    // looks along +N' from `squash` (the sine of its elevation) above the horizon.
+    const facing = (g: number): 1 | -1 => {
+      const e = Math.floor(g / 100) % p.outer.length
+      const a = p.outer[e]
+      const b = p.outer[(e + 1) % p.outer.length]
+      const l = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
+      const nN = -(b[0] - a[0]) / l
+      const lv = p.h.levels ?? [[0, 0, 0], [1, 1, 1]]
+      const pitch = Math.atan2(lv[lv.length - 1][0] - lv[0][0], (lv[lv.length - 1][1] - lv[0][1]) || 1e-9)
+      const sin = view.squash
+      const cos = Math.sqrt(Math.max(0, 1 - sin * sin))
+      return -nN * Math.sin(pitch) * cos + Math.cos(pitch) * sin > 0 ? 1 : -1
+    }
+    const mark = (it: Item | null, g: number): Item | null => {
+      if (it === null) return null
+      const withShell = p.h.shape === 'inset' && g >= 0 ? { ...it, shell: { id: `history:${p.h.id}`, faces: facing(g) } } : it
+      return p.h.within === undefined ? withShell : { ...withShell, within: `history:${p.h.within}` }
+    }
     for (const g of groups) {
       const solids = g < 0 ? made.solids : made.solids.filter((_, k) => made.sides![k] === g)
       const at = g < 0 ? '' : `/${g}`
@@ -159,12 +208,12 @@ export const cutawayItems = (
         }
         const sliced = slice.some((r) => r.test(id))
         const kept = solids.map((s) => clipAll(s, [behind(plane), within(plane, sliced ? sliceDepth : subject ? beyond : other)])).filter((s): s is Solid => s !== null)
-        const it = solidItem(view, tones, `${id}${at}`, kept, p.h.name)
+        const it = mark(solidItem(view, tones, `${id}${at}`, kept, p.h.name), g)
         if (it !== null) items.push(it)
         continue
       }
       if (!subject) {
-        const it = solidItem(view, tones, `${id}${at}`, solids, p.h.name)
+        const it = mark(solidItem(view, tones, `${id}${at}`, solids, p.h.name), g)
         if (it !== null) items.push(it)
         stats.keptParts++
         continue
@@ -184,7 +233,7 @@ export const cutawayItems = (
           { s: list.map((x) => clipSolid(x, above(opts.floorZ!))).filter((x): x is Solid => x !== null), tag: '' },
         ]
         for (const { s, tag } of parts) {
-          const it = solidItem(view, tones, `${id}${suffix}${tag}${at}`, s, p.h.name)
+          const it = mark(solidItem(view, tones, `${id}${suffix}${tag}${at}`, s, p.h.name), g)
           if (it !== null) items.push(it)
         }
       }

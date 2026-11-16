@@ -69,6 +69,13 @@ export interface Item {
   readonly footprint?: Ring
   /** A bridge span's center line, view meters, its deck's mean height, and which bridge it is. */
   readonly span?: { readonly a: Vec2; readonly b: Vec2; readonly z: number; readonly bridge: string }
+  /**
+   * A side of a roof shell (a cutaway's hipped roof): what stands inside the shell paints
+   * before the side when the side faces the camera (`faces` 1), after it when it faces away.
+   */
+  readonly shell?: { readonly id: string; readonly faces: 1 | -1 }
+  /** The shell (its part's id) this item stands inside, under its roof. */
+  readonly within?: string
 }
 
 export interface GroundPolygon {

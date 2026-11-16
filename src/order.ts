@@ -55,6 +55,10 @@ export const compare = (a: Item, b: Item, stacked = false): number => {
   }
   if (a.zMin >= b.zMax - 0.05) return 1
   if (b.zMin >= a.zMax - 0.05) return -1
+  // Inside a roof shell: its sides facing the camera cover what stands under them, the others
+  // are covered by it.
+  if (a.shell !== undefined && b.within === a.shell.id) return a.shell.faces
+  if (b.shell !== undefined && a.within === b.shell.id) return -b.shell.faces
   // Overlapping footprints at overlapping heights: a bridge over a low building, or bad data.
   if (a.kind !== b.kind) return a.kind === 'bridge' ? 1 : -1
   if (a.span !== undefined && b.span !== undefined) {
