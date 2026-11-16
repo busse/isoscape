@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { clipRingToRect, convexHull, separatingAxis, signedArea, simplifyRing, type Vec2 } from '../src/geom.ts'
 import { dominantGridAngle, makeView, snapBearing } from '../src/view.ts'
-import { chainBridges, extrude, bridgeEnds, rampClearance, RAMP, type Item } from '../src/scene.ts'
+import { bridgeEnds, buildingAt, chainBridges, extrude, rampClearance, RAMP, roofIndex, type Item } from '../src/scene.ts'
 import { compare, paintOrder } from '../src/order.ts'
 import { assembleRings, parseOsm } from '../src/osm.ts'
 import { buildingHeights, parseLength } from '../src/classify.ts'
@@ -129,6 +129,15 @@ test('a viaduct that fans into short lanes comes down to them', () => {
   const other = chains.findIndex((_, i) => i !== mi)
   const atJunction = chains[other].line.points[0][0] === 0.004 ? ends[other].start : ends[other].end
   assert.ok(atJunction < 1, `junction stands ${atJunction} m up`)
+})
+
+test('a bridge finds the building under it', () => {
+  const low = extrude(view, pal, 'low', square(0, 0, 20), [], 0, 6, 'none', 'none')
+  const high = extrude(view, pal, 'high', square(5, 5, 5), [], 0, 30, 'none', 'none')
+  const roofs = roofIndex([low, high])
+  assert.equal(buildingAt(roofs, [2, 2])?.top, 6)
+  assert.equal(buildingAt(roofs, [7, 7])?.top, 30)
+  assert.equal(buildingAt(roofs, [30, 30]), null)
 })
 
 test('multipolygon fragments assemble into rings', () => {

@@ -61,6 +61,8 @@ export interface Item {
   readonly shapes: Shape[]
   readonly dots: Vec2[]
   readonly name?: string
+  /** A building's outline, view meters, where it is a plain prism. */
+  readonly footprint?: Ring
 }
 
 export interface GroundPolygon {
@@ -500,8 +502,9 @@ export const buildScene = (
   let spans = 0
   const chains = chainBridges(plans.length > 0 ? [] : bridgeLines)
   const ends = bridgeEnds(view, region, chains)
+  const roofs = roofIndex(items)
   for (let c = 0; c < chains.length; c++) {
-    const pieces = bridgePieces(view, pal, region, terrain, chains[c], ends[c])
+    const pieces = bridgePieces(view, pal, region, terrain, chains[c], ends[c], roofs)
     spans += pieces.length
     items.push(...pieces)
   }
@@ -609,6 +612,7 @@ export const extrude = (
     shapes,
     dots: dedupe(roofDots),
     ...(name === undefined ? {} : { name }),
+    footprint: outer,
   }
 }
 
@@ -919,9 +923,32 @@ export const bridgeEnds = (view: View, region: Region, chains: readonly BridgeCh
   })
 }
 
+/** A building a bridge can meet: its outline and the heights of its base and roof. */
+interface Roof { readonly ring: Ring; readonly base: number; readonly top: number; readonly box: [number, number, number, number] }
+
+/** The buildings in a scene, for `buildingAt`. */
+export const roofIndex = (items: readonly Item[]): Roof[] =>
+  items.filter((i) => i.kind === 'building' && i.footprint !== undefined).map((i) => {
+    const r = i.footprint!
+    const xs = r.map((p) => p[0])
+    const ys = r.map((p) => p[1])
+    return { ring: r, base: i.zMin, top: i.zMax, box: [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)] }
+  })
+
+/** The tallest building standing at a view-meter point, if any. */
+export const buildingAt = (roofs: readonly Roof[], p: Vec2): Roof | null => {
+  let best: Roof | null = null
+  for (const r of roofs) {
+    if (p[0] < r.box[0] || p[0] > r.box[2] || p[1] < r.box[1] || p[1] > r.box[3]) continue
+    if (!pointInRing(p, r.ring)) continue
+    if (best === null || r.top > best.top) best = r
+  }
+  return best
+}
+
 const bridgePieces = (
   view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain,
-  ends: BridgeEnds,
+  ends: BridgeEnds, roofs: readonly Roof[] = [],
 ): Item[] => {
   const spacing = pierSpacing(region, chain)
   const line = chain.line
@@ -1006,13 +1033,22 @@ const bridgePieces = (
       if (quad === null) continue
       const z0 = zAt(s0)
       const z1 = zAt(s1)
+      // A span inside a building, below its roof (a garage ramp, a skyway's landing), is hidden
+      // by it; drawn, it would cut through the walls and roof.
+      const host = buildingAt(roofs, [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2])
+      if (host !== null && host.base <= Math.max(z0, z1) && host.top >= Math.max(z0, z1)) {
+        while (nextPier <= s1) nextPier += spacing
+        continue
+      }
       const shapes: Shape[] = []
       // Piers first: they stand behind the fascia.
       while (nextPier <= s1) {
         const u = (nextPier - s0) / Math.max(1e-6, s1 - s0)
         const pz = z0 + (z1 - z0) * u
         const c0: Vec2 = [p0[0] + (p1[0] - p0[0]) * u, p0[1] + (p1[1] - p0[1]) * u]
-        const footZ = terrain.z(c0)
+        // A pier over a building stands on its roof, not down through it.
+        const below = buildingAt(roofs, c0)
+        const footZ = Math.max(terrain.z(c0), below !== null && below.base < pz ? below.top : -Infinity)
         if (pz - footZ > 3) {
           const c: Vec2 = [p0[0] + (p1[0] - p0[0]) * u, p0[1] + (p1[1] - p0[1]) * u]
           const dx = (p1[0] - p0[0]) / Math.max(1e-6, s1 - s0)

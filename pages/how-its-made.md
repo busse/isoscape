@@ -315,7 +315,9 @@ straight runs, and easing down over 70 m at a free end. The ramp keeps that leng
 bridge, so a bridge shorter than two ramps never reaches full height: a 30 m footbridge over a
 canal rises well under a meter above its banks, where a 7 m tent would read as a stub floating
 in the air. Piers drop to the real ground or water every 38 m where the deck is more than 3 m
-up.
+up, or to the roof of a building under the deck, never down through it. A span that lies
+inside a building and below its roof (a garage ramp, a walkway's landing) is left out: the
+building hides it.
 
 Each bridge is cut into spans of at most 22 m, so a long bridge can pass in front of one
 building and behind another. Bridges are cut at the edges of the frame.
