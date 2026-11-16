@@ -78,14 +78,15 @@ def rebuild(r, keep):
         if not s.get('region') or not s.get('sha256'): continue
         n += 1
         c = s.get('commit') or r['isoscape']['commit']
-        memo_key = json.dumps([c, s['region'], s.get('year'), s.get('flags', []), sorted((k, v['snapshot']) for k, v in r['data'].items())])
+        # A build can write more than one scene (a cutaway's flat section: output "-section").
+        memo_key = json.dumps([c, s['region'], s.get('year'), s.get('flags', []), sorted((k, v['snapshot']) for k, v in r['data'].items())] + ([s['output']] if s.get('output') else []))
         if memo_key in MEMO:
             s['reproduces'] = MEMO[memo_key] == s['sha256']; ok += s['reproduces']; continue
         wt = worktree(c, r, keep)
         with tempfile.TemporaryDirectory() as t:
             cmd = ['node', 'bin/isoscape.js', 'build', s['region'], '--no-archive', '--out', t] + (['--year', str(s['year'])] if s.get('year') is not None else []) + s.get('flags', [])
             subprocess.run(cmd, cwd=wt, capture_output=True)
-            out = os.path.join(t, (f"{s['region']}-{s['year']}" if s.get('year') is not None else s['region']) + '.svg')
+            out = os.path.join(t, (f"{s['region']}-{s['year']}" if s.get('year') is not None else s['region']) + s.get('output', '') + '.svg')
             got = sha(out) if os.path.exists(out) else None
         MEMO[memo_key] = got
         json.dump(MEMO, open(MEMO_P, 'w'))

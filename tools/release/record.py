@@ -106,6 +106,32 @@ def sets_by_slug():
     return out
 
 
+def from_cutaway(key, d):
+    """A cutaway sheet (tools/cutaway/sheet.py --print): its spec in cutaways/ names the design.
+    Its scenes are the region's cutaway and flat section, both written by one build, and the
+    sheet SVG composed from them (frozen, not rebuilt: sheet.py makes it again from the two)."""
+    for sp in sorted(glob.glob(os.path.join(ISO, 'cutaways', '*.json'))):
+        C = json.load(open(sp))
+        if C.get('design') != key: continue
+        name = os.path.splitext(os.path.basename(sp))[0]
+        region, year = C['region'], C['year']
+        build = os.path.join(ISO, 'out', 'cutaways', 'build', f'{region}-{year}')
+        scenes = [scene(region, year, build + '.svg'), dict(scene(region, year, build + '-section.svg'), output='-section'),
+                  scene(None, None, os.path.join(ISO, 'out', 'cutaways', f'{name}-sheet.svg'))]
+        log_p = os.path.join(ISO, 'out', 'cutaways', 'print', 'prints.json')
+        log = json.load(open(log_p)) if os.path.exists(log_p) else {}
+        recipe = {'tool': 'tools/cutaway/sheet.py',
+                  'run': [f'python3 tools/cutaway/sheet.py cutaways/{name}.json --print   # where data/ is cached; out/cutaways/print/',
+                          f'python3 tools/release/remake.py {key} && python3 tools/cutaway/sheet.py cutaways/{name}.json --no-build --print   # from the frozen scenes'],
+                  'block': log.get('info'), 'files': log.get('files'), 'tools_at_printing': log.get('tools'),
+                  'copied': 'out/cutaways/print/<file> is copied unchanged to the store\'s print_dir'}
+        inputs = {rel(sp): sha(sp)}
+        for f in ('tools/cutaway/sheet.py', 'tools/print/titleblock.py', 'tools/release/stamp.py', 'catalog/plates.json'):
+            inputs[f] = sha(os.path.join(ISO, f))
+        return 'cutaway', recipe, scenes, inputs
+    return None
+
+
 def from_set(key, d):
     for slug, (name, S) in sets_by_slug().items():
         if not key.startswith(slug + '-'): continue
@@ -195,7 +221,7 @@ def record(store, key, d, files, shop, mocks, note=None):
     canvas = (sorted(glob.glob(os.path.join(pdir, 'canvas', cpat))) + sorted(glob.glob(os.path.join(pdir, cpat)))) if cpat else []
     made = os.path.getmtime(pfile) if os.path.exists(pfile) else 0
     st = from_stamp(store, key, d)
-    got = None if st else (from_set(key, d) or from_landmark(key, d) or from_spec(key, d, made))
+    got = None if st else (from_cutaway(key, d) or from_set(key, d) or from_landmark(key, d) or from_spec(key, d, made))
     kind, recipe, scenes, inputs = st[:4] if st else got if got else ('unknown', {}, [], {})
     data = dict(st[4]) if st else {}
     for s in ([] if st else scenes):

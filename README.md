@@ -605,6 +605,11 @@ lists them.
 - `python3 tools/release/remake.py <design> [--compose <store-dir>]`: put a design's frozen
   scenes back where its recipe reads them, and remake the print.
 
+A cutaway sheet is recorded as kind `cutaway` (`tools/cutaway/sheet.py --print`): its scenes
+are the region's cutaway and flat section (`"output": "-section"`, which `check.py --rebuild`
+compares against the build's `-section.svg`) and the composed sheet SVG, frozen but not rebuilt;
+the block and every print file's SHA-256 come from `out/cutaways/print/prints.json`.
+
 Designs published before records existed (November 15, 2026) were recorded afterwards: their
 prints and scenes are frozen as sold, the landmarks' framing is recovered as an explicit window
 (`tools/print/lm_params.json`, by `tools/release/landmark_params.py`, checked by eye), and
