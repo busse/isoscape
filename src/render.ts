@@ -302,11 +302,15 @@ export const renderSvg = (scene: Scene): Rendered => {
   const vb: [number, number, number, number] = [x0 - pad, top - pad - capRoom, x1 - x0 + 2 * pad, bottom - top + 2 * pad + capRoom]
 
   const out: string[] = []
+  // A square plate (no slab: a cutaway) keeps the credit line it was sold with: sentences, and
+  // no data-credits attribute (its sheet writes its own credit line, not compose.py), so a sold
+  // cutaway's scenes rebuild byte for byte. Every other plate lists its sources with " · ".
+  const credits = sceneCredits(region, scene.stats, T.flat)
   const sealed = (cls: string, fill: string) => `.${cls}{fill:${fill};stroke:${fill};stroke-width:.6;stroke-linejoin:round}`
   out.push(
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.map(f).join(' ')}" class="isoscape" data-region="${esc(region.name)}" data-credits="${esc(JSON.stringify(sceneCredits(region, scene.stats, T.flat)))}" role="img">`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.map(f).join(' ')}" class="isoscape" data-region="${esc(region.name)}"${square ? '' : ` data-credits="${esc(JSON.stringify(credits))}"`} role="img">`,
     `<title>${esc(region.title)}</title>`,
-    `<desc>${esc(sceneCredits(region, scene.stats, T.flat).join(' · '))}. Bearing ${view.bearing.toFixed(1)}°.</desc>`,
+    `<desc>${esc(credits.join(square ? '. ' : ' · '))}. Bearing ${view.bearing.toFixed(1)}°.</desc>`,
     `<style>`,
     `.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}.d{fill:none;stroke:${p.ink};stroke-width:${f(p.dotRadius * 2)};stroke-linecap:round}`,
     `.td{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth};stroke-dasharray:1.2 1.8}`,
@@ -490,11 +494,13 @@ export const renderSvg = (scene: Scene): Rendered => {
     const j0 = Math.max(jNear, j1 - 2)
     strips.push({ j0, j1, n0: Math.max(fr.minY, T.y0 + j0 * c), n1: Math.min(fr.maxY, T.y0 + j1 * c) })
   }
-  // The ground reaches a cell past the plate's sides, which are then covered in paper (see
-  // the items below): cut at the sides by its own edges, it showed a dotted pale line there.
-  const nodeX = (i: number) => T.x0 + i * c
-  const iMin = Math.max(0, Math.round((fr.minX - T.x0) / c) - 1)
-  const iMax = Math.min(T.nx - 1, Math.ceil((fr.maxX - T.x0) / c) + 1)
+  // On a slab, the ground reaches a cell past the plate's sides, which are then covered in
+  // paper (see the items below): cut at the sides by its own edges, it showed a dotted pale line
+  // there. A square plate's ground is clipped to its rectangle, so it ends at the sides as it
+  // always has (a sold cutaway's scenes must rebuild byte for byte).
+  const nodeX = square ? (i: number) => Math.min(fr.maxX, Math.max(fr.minX, T.x0 + i * c)) : (i: number) => T.x0 + i * c
+  const iMin = square ? Math.round((fr.minX - T.x0) / c) : Math.max(0, Math.round((fr.minX - T.x0) / c) - 1)
+  const iMax = square ? Math.ceil((fr.maxX - T.x0) / c) : Math.min(T.nx - 1, Math.ceil((fr.maxX - T.x0) / c) + 1)
   // Light from the left and a little toward the camera, so the slopes we look at are lit and
   // the backs of hills fall into shade.
   const light = normalize([-0.85, -0.35, 1.0])
@@ -817,7 +823,8 @@ export const renderSvg = (scene: Scene): Rendered => {
     // a different color, which is what shows as a hairline.
     const baseInset = s.n1 < fr.maxY ? Math.min(lapNear * 0.4, c * 0.25) : 0
     const groundFar = 0
-    const band: Rect = { minX: fr.minX - c, maxX: fr.maxX + c, minY: s.n0 - lapNear, maxY: s.n1 + lapFar }
+    const side = square ? 0 : c   // past the plate's sides only on a slab (see nodeX)
+    const band: Rect = { minX: fr.minX - side, maxX: fr.maxX + side, minY: s.n0 - lapNear, maxY: s.n1 + lapFar }
     const parts: string[] = []
     // The rows the strip's ground covers: its own, and those its lap toward the camera falls
     // in, each cut to the part the strip paints. Each keeps its own cells: a lap drawn by

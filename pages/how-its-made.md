@@ -525,6 +525,8 @@ strip's water meets the next's; on a lake those seams had shown as faint lines.
 The ground reaches a cell past the plate's sides, and the sides are then covered in paper,
 so each side is one clean edge. (Cut by a clip, a renderer that clips each shape in turn laid
 the edge once for every shape that reached it, and a side over water showed a dotted line.)
+A plate with no slab (a cutaway) is cut square by its own rectangle instead, and its ground
+ends at its sides.
 
 The front of the plate is a **slab**, a true cross-section of the ground along the near edge,
 with water where the cut crosses water at least two cells wide, from shoreline to shoreline.
@@ -883,7 +885,8 @@ footprints when at least one is drawn; assessor's year-built records when a date
 decided whether a building stands in that year or is shown as new; Sanborn maps only when a
 building traced from them is drawn. The line is written into the SVG (`data-credits`), the
 build record and `isoscape info`, and the prints take it from the builds they are made from,
-so a modern view never credits fire-insurance maps it does not use.
+so a modern view never credits fire-insurance maps it does not use. A cutaway's sheet writes
+its own credit line, so its scenes carry the sources only in their description, as sentences.
 
 Inspired by [Isometric SF](https://isometricsf.com), Justin Chavez's isometric pixel-art map
 of San Francisco ([how it was made](https://www.justinchavez.com/blog/isometric-sf-how/)).

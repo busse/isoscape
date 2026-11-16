@@ -474,3 +474,40 @@ test('the other half of a divided street follows the longer half', () => {
   // A street of another name keeps its own.
   assert.equal(out[2].startLevel, 0)
 })
+
+test('render: a square plate (a cutaway) ends its ground at the sides and keeps its sentence credit line', async () => {
+  // Pinned so a sold cutaway's scenes rebuild byte for byte (releases/broad-street-1943-cutaway):
+  // only a plate on a slab carries its ground a cell past the sides (covered there in paper),
+  // a data-credits attribute and the " · " credit line.
+  const { renderSvg } = await import('../src/render.ts')
+  const { buildScene } = await import('../src/scene.ts')
+  const { parseOsm } = await import('../src/osm.ts')
+  const M = 111_320
+  // A road and a lawn that run out past both sides of the plate.
+  const line = (pts: Vec2[]) => pts.map(([e, n]) => ({ lon: e / M, lat: n / 110_574 }))
+  const json = JSON.stringify({
+    elements: [
+      { type: 'way', id: 1, tags: { highway: 'residential' }, geometry: line([[-260, 10], [260, -20]]) },
+      { type: 'way', id: 2, tags: { leisure: 'park' }, geometry: line([[-260, -60], [260, -60], [260, -30], [-260, -30], [-260, -60]]) },
+    ],
+  })
+  const build = (slab: number) => renderSvg(buildScene({ ...region, snap: false, width: 300, depth: 200, slab, terrain: { cell: 5 } }, parseOsm(json), pal, (lon) => 10 + 6 * Math.sin(lon * 20000))).svg
+  const sq = build(0)
+  assert.ok(!/<svg\b[^>]*data-credits=/.test(sq), 'no data-credits on a square plate')
+  assert.match(sq, /<desc>Map data © OpenStreetMap contributors \(ODbL\)\. Elevation: USGS 3DEP\. Bearing /)
+  const clip = sq.match(/<clipPath id="ground"><path d="M(-?\d+(?:\.\d+)?)[^l]*l(-?\d+(?:\.\d+)?)/)!
+  const x0 = Math.min(Number(clip[1]), Number(clip[1]) + Number(clip[2]))
+  const x1 = Math.max(Number(clip[1]), Number(clip[1]) + Number(clip[2]))
+  let moves = 0
+  for (const g of sq.matchAll(/<g data-strip="[^"]*"[^>]*>(.*?)<\/g>/gs)) {
+    for (const m of g[1].matchAll(/ d="M(-?\d+(?:\.\d+)?)/g)) {
+      moves++
+      const x = Number(m[1])
+      assert.ok(x >= x0 - 0.05 && x <= x1 + 0.05, `ground starts at ${x}, outside the plate's sides ${x0}..${x1}`)
+    }
+  }
+  assert.ok(moves > 10)
+  const slabbed = build(14)
+  assert.match(slabbed, /<svg\b[^>]*data-credits="\[&quot;Map data/)
+  assert.match(slabbed, /<desc>Map data © OpenStreetMap contributors \(ODbL\) · Elevation: USGS 3DEP\. Bearing /)
+})
