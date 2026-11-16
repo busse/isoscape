@@ -61,6 +61,10 @@ export interface Item {
   readonly shapes: Shape[]
   readonly dots: Vec2[]
   readonly name?: string
+  /** A building's outline, view meters, where it is a plain prism. */
+  readonly footprint?: Ring
+  /** A bridge span's center line, view meters, its deck's mean height, and which bridge it is. */
+  readonly span?: { readonly a: Vec2; readonly b: Vec2; readonly z: number; readonly bridge: string }
 }
 
 export interface GroundPolygon {
@@ -366,6 +370,7 @@ export const buildScene = (
   })
   const shown = solids.filter((s) => !replaced.has(s)).concat(partsShown)
 
+  const towerParts: TowerPart[] = []
   let heightSources = { height: 0, model: 0, levels: 0, guess: 0 }
   let fresh = 0
   let undated = 0
@@ -405,7 +410,16 @@ export const buildScene = (
     const gMean = grounds.reduce((a, b) => a + b, 0) / grounds.length
     const holder = holders.get(s)?.[0]
     const level = seatLevel(holder === undefined ? grounds : holder.outer.map((p) => terrain.z(p)), terrain.exaggeration)
-    const base = h.base > 0 ? level + h.base : gMin
+    // A bridge tower's lowest mapped parts stand on the ground or water: OSM often maps a
+    // tower's legs from the pier top up and leaves the pier out. A part is lowest when no part
+    // of a bridge tower within `TOWER_REACH` of it starts lower (struts between the legs do).
+    const footed = h.base > 0 && isBridgeTower(s.tags) && !shown.some((o) => {
+      if (o === s || !isBridgeTower(o.tags)) return false
+      const c = centroid(s.outer)
+      if (!o.outer.some((p) => Math.hypot(p[0] - c[0], p[1] - c[1]) < TOWER_REACH)) return false
+      return buildingHeights(o.tags, Math.abs(signedArea(o.outer))).base < h.base
+    })
+    const base = h.base > 0 && !footed ? level + h.base : gMin
     const top = Math.max(level + h.top, base + 2.5)
     const cls = buildingClass(s.tags)
     const roofs = pal.roofs[cls]
@@ -428,9 +442,10 @@ export const buildScene = (
       entries.push(spire(view, pal, s.id, outer, gMin + podium, gMean + podium + SHELL_RISE * Math.sqrt(area), dotsMode, s.tags.name, (t) => 1 - t * 0.97, false, 4))
     } else {
       const span = s.tags.building === 'bridge' || s.tags['building:part'] === 'bridge' || s.tags.man_made === 'bridge' || isBridge(s.tags)
-      const prism: Prism = { outer, base, top, foot: gMin, raised: h.base > 0, span }
+      const prism: Prism = { outer, base, top, foot: gMin, raised: h.base > 0 && !footed, span }
       entries.push({ prism, make: (p) => extrude(view, pal, s.id, outer, inners, p.base, p.top, roof, dotsMode, s.tags.name) })
     }
+    if (isBridgeTower(s.tags)) towerParts.push({ at: centroid(outer), top })
   }
   if (modelOnWater > 0) stats.footprintsOnWater = modelOnWater
   const prisms = entries.flatMap((e) => ('prism' in e ? [e.prism] : []))
@@ -558,8 +573,12 @@ export const buildScene = (
 
   // ---- bridges -----------------------------------------------------------------------------
   let spans = 0
-  for (const chain of chainBridges(plans.length > 0 ? [] : bridgeLines)) {
-    const pieces = bridgePieces(view, pal, region, terrain, chain)
+  const chains = chainBridges(plans.length > 0 ? [] : bridgeLines)
+  const ends = bridgeEnds(view, region, chains)
+  const roofs = roofIndex(items)
+  const towers = suspensionTowers(view, chains, towerParts)
+  for (let c = 0; c < chains.length; c++) {
+    const pieces = bridgePieces(view, pal, region, terrain, chains[c], ends[c], roofs, towers.get(c))
     spans += pieces.length
     items.push(...pieces)
   }
@@ -667,6 +686,7 @@ export const extrude = (
     shapes,
     dots: dedupe(roofDots),
     ...(name === undefined ? {} : { name }),
+    footprint: outer,
   }
 }
 
@@ -774,6 +794,11 @@ export const settlePrisms = (prisms: Prism[]): number => {
   }
   return lowered
 }
+
+/** A part of a bridge's tower (a suspension or cable-stayed bridge's pylon). */
+export const isBridgeTower = (t: Readonly<Record<string, string>>): boolean => t['tower:type'] === 'bridge'
+/** Meters around a bridge tower's part to look for a part that starts lower. */
+export const TOWER_REACH = 40
 
 /** OSM's lattice towers: tagged as such, or a building whose pyramidal roof is its whole height. */
 export const isLatticeTower = (t: Readonly<Record<string, string>>): boolean =>
@@ -890,6 +915,8 @@ export interface BridgeChain {
   readonly names: string
   readonly rampStart: boolean
   readonly rampEnd: boolean
+  /** Some way in the chain is tagged `bridge:structure=suspension`. */
+  readonly suspension?: boolean
 }
 
 const key = (p: Vec2) => `${p[0].toFixed(7)},${p[1].toFixed(7)}`
@@ -946,6 +973,7 @@ export const chainBridges = (lines: readonly LineFeature[]): BridgeChain[] => {
         names: members.map((m) => `${m.tags.name ?? ''} ${m.tags['bridge:name'] ?? ''}`).join(' ').toLowerCase(),
         rampStart: groundedAt(pts[0]),
         rampEnd: groundedAt(pts[pts.length - 1]),
+        ...(members.some((m) => m.tags['bridge:structure'] === 'suspension') ? { suspension: true } : {}),
       })
     }
   }
@@ -968,7 +996,240 @@ const pierSpacing = (region: Region, chain: BridgeChain): number => {
   return PIER_SPACING
 }
 
-const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain): Item[] => {
+/** How far a ramp runs from the ground up to full deck height, meters. */
+export const RAMP = 70
+
+const ease = (u: number) => {
+  const v = Math.min(1, Math.max(0, u))
+  return v * v * (3 - 2 * v)
+}
+
+/**
+ * Clearance over the ground at a point `s` along a bridge whose deck is `deck` high, `dist`
+ * meters from the nearest place where the bridge network meets the ground, and which must meet
+ * clearance `startC` and `endC` at its two ends (another bridge's height where it joins one).
+ * Within `RAMP` of the ground the deck eases down to it; the ramp keeps its length on a short
+ * bridge, so one shorter than two ramps never reaches full height (a 30 m footbridge over a
+ * canal rises a meter or so, not into a 7 m tent). Within `RAMP` of an end that joins a higher
+ * deck, it eases up to that deck.
+ */
+export const rampClearance = (deck: number, total: number, s: number, dist: number, startC: number, endC: number): number => {
+  const own = deck * ease(dist / RAMP)
+  const a = ease(s / RAMP)
+  const b = ease((total - s) / RAMP)
+  return Math.max(own, startC * (1 - a) + own * a, endC * (1 - b) + own * b)
+}
+
+/** Length along a chain to each of its vertices, view meters. */
+const chainLengths = (view: View, chain: BridgeChain): number[] => {
+  const pts = chain.line.points.map(([lon, lat]) => view.toView(lon, lat))
+  const cum = [0]
+  for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]))
+  return cum
+}
+
+/** How a chain meets the rest: clearance at each end, and each vertex's distance to the ground. */
+export interface BridgeEnds {
+  readonly start: number
+  readonly end: number
+  /** Per vertex: meters along the bridge network to the nearest end that meets the ground. */
+  readonly toGround: readonly number[]
+}
+
+/**
+ * Bridges that touch form a network, anchored to the ground at every end that touches no other
+ * bridge. A deck can only be as high as a ramp from the nearest anchor allows, measured along
+ * the network: so where a viaduct fans out into a dozen short plaza lanes that each come down
+ * within a few meters, the viaduct ramps down to the plaza instead of standing at full height
+ * over a fan of steep ribbons. An end that joins another bridge (a ramp onto a viaduct of
+ * another layer, a link at a fork) meets the highest of the decks there, so the two arrive at
+ * one height instead of one stopping in mid-air above or below the other.
+ */
+export const bridgeEnds = (view: View, region: Region, chains: readonly BridgeChain[]): BridgeEnds[] => {
+  const info = chains.map((c) => ({ deck: deckHeight(region, c), cum: chainLengths(view, c), keys: c.line.points.map(key) }))
+  // Shortest distance along the network from every vertex to a grounded end (Dijkstra).
+  const edges = new Map<string, [string, number][]>()
+  const link = (a: string, b: string, w: number) => {
+    edges.set(a, [...(edges.get(a) ?? []), [b, w]])
+    edges.set(b, [...(edges.get(b) ?? []), [a, w]])
+  }
+  const dist = new Map<string, number>()
+  const heap: [number, string][] = []
+  const push = (d: number, k: string) => {
+    heap.push([d, k])
+    let i = heap.length - 1
+    while (i > 0) {
+      const p = (i - 1) >> 1
+      if (heap[p][0] <= heap[i][0]) break
+      ;[heap[p], heap[i]] = [heap[i], heap[p]]
+      i = p
+    }
+  }
+  const pop = (): [number, string] => {
+    const top = heap[0]
+    const last = heap.pop()!
+    if (heap.length > 0) {
+      heap[0] = last
+      let i = 0
+      for (;;) {
+        const l = 2 * i + 1
+        const r = l + 1
+        let m = i
+        if (l < heap.length && heap[l][0] < heap[m][0]) m = l
+        if (r < heap.length && heap[r][0] < heap[m][0]) m = r
+        if (m === i) break
+        ;[heap[m], heap[i]] = [heap[i], heap[m]]
+        i = m
+      }
+    }
+    return top
+  }
+  chains.forEach((c, i) => {
+    const { cum, keys } = info[i]
+    for (let k = 1; k < keys.length; k++) link(keys[k - 1], keys[k], cum[k] - cum[k - 1])
+    if (c.rampStart) push(0, keys[0])
+    if (c.rampEnd) push(0, keys[keys.length - 1])
+  })
+  while (heap.length > 0) {
+    const [d, k] = pop()
+    if (dist.has(k)) continue
+    dist.set(k, d)
+    for (const [n, w] of edges.get(k) ?? []) if (!dist.has(n)) push(d + w, n)
+  }
+  const toGround = info.map(({ keys }) => keys.map((k) => dist.get(k) ?? Infinity))
+  // Each node's height: the highest any chain through it may stand there.
+  const at = new Map<string, number>()
+  info.forEach(({ deck, keys }, i) => {
+    keys.forEach((k, v) => at.set(k, Math.max(at.get(k) ?? 0, deck * ease(toGround[i][v] / RAMP))))
+  })
+  return chains.map((c, i) => {
+    const keys = info[i].keys
+    return {
+      start: c.rampStart ? 0 : at.get(keys[0]) ?? info[i].deck,
+      end: c.rampEnd ? 0 : at.get(keys[keys.length - 1]) ?? info[i].deck,
+      toGround: toGround[i],
+    }
+  })
+}
+
+/** A building a bridge can meet: its outline and the heights of its base and roof. */
+interface Roof { readonly ring: Ring; readonly base: number; readonly top: number; readonly box: [number, number, number, number] }
+
+/** The buildings in a scene, for `buildingAt`. */
+export const roofIndex = (items: readonly Item[]): Roof[] =>
+  items.filter((i) => i.kind === 'building' && i.footprint !== undefined).map((i) => {
+    const r = i.footprint!
+    const xs = r.map((p) => p[0])
+    const ys = r.map((p) => p[1])
+    return { ring: r, base: i.zMin, top: i.zMax, box: [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)] }
+  })
+
+/** The tallest building standing at a view-meter point, if any. */
+export const buildingAt = (roofs: readonly Roof[], p: Vec2): Roof | null => {
+  let best: Roof | null = null
+  for (const r of roofs) {
+    if (p[0] < r.box[0] || p[0] > r.box[2] || p[1] < r.box[1] || p[1] > r.box[3]) continue
+    if (!pointInRing(p, r.ring)) continue
+    if (best === null || r.top > best.top) best = r
+  }
+  return best
+}
+
+/** A part of a bridge tower: where it stands (view meters) and the scene z of its top. */
+interface TowerPart { readonly at: Vec2; readonly top: number }
+
+/** A suspension bridge's tower, along its chain: `s` meters in, and its legs' offsets and tops. */
+export interface Tower { readonly s: number; readonly legs: readonly { readonly d: number; readonly top: number }[] }
+
+/** Meters off a suspension bridge's line that its towers' parts may stand. */
+const TOWER_OFFSET = 25
+
+/**
+ * The towers of each suspension bridge (`bridge:structure=suspension`), found from the bridge
+ * tower parts standing on its line: a cluster of parts along the line is one tower, and the
+ * parts either side of the widest gap across the line are its two legs. Only the longest chain through a set of towers
+ * carries the cables, so a bridge mapped as two carriageways and two sidewalks gets one pair.
+ */
+export const suspensionTowers = (view: View, chains: readonly BridgeChain[], parts: readonly TowerPart[]): Map<number, Tower[]> => {
+  const out = new Map<number, Tower[]>()
+  const used = new Set<TowerPart>()
+  const order = chains.map((c, i) => ({ c, i, cum: chainLengths(view, c) }))
+    .filter((x) => x.c.suspension === true)
+    .sort((a, b) => b.cum[b.cum.length - 1] - a.cum[a.cum.length - 1])
+  for (const { c, i, cum } of order) {
+    const pts = c.line.points.map(([lon, lat]) => view.toView(lon, lat))
+    const near: { s: number; d: number; top: number; part: TowerPart }[] = []
+    for (const part of parts) {
+      if (used.has(part)) continue
+      let best: { s: number; d: number } | null = null
+      for (let k = 1; k < pts.length; k++) {
+        const [a, b] = [pts[k - 1], pts[k]]
+        const len = cum[k] - cum[k - 1]
+        if (len < 1e-6) continue
+        const ux = (b[0] - a[0]) / len
+        const uy = (b[1] - a[1]) / len
+        const along = (part.at[0] - a[0]) * ux + (part.at[1] - a[1]) * uy
+        if (along < 0 || along > len) continue
+        // Left of the direction of travel is positive.
+        const d = -(part.at[0] - a[0]) * uy + (part.at[1] - a[1]) * ux
+        if (Math.abs(d) <= TOWER_OFFSET && (best === null || Math.abs(d) < Math.abs(best.d))) best = { s: cum[k - 1] + along, d }
+      }
+      if (best !== null) near.push({ ...best, top: part.top, part })
+    }
+    near.sort((a, b) => a.s - b.s)
+    const clusters: (typeof near)[] = []
+    for (const n of near) {
+      const last = clusters[clusters.length - 1]
+      if (last !== undefined && n.s - last[last.length - 1].s < 40) last.push(n)
+      else clusters.push([n])
+    }
+    const towers: Tower[] = []
+    for (const cl of clusters) {
+      // The legs: the parts either side of the widest gap across the line.
+      const byD = cl.slice().sort((a, b) => a.d - b.d)
+      let cut = 0
+      for (let k = 1; k < byD.length; k++) if (byD[k].d - byD[k - 1].d > (cut === 0 ? 0 : byD[cut].d - byD[cut - 1].d)) cut = k
+      if (cut === 0 || byD[cut].d - byD[cut - 1].d < 4) continue
+      const legs = [byD.slice(0, cut), byD.slice(cut)].map((side) => ({
+        d: side.reduce((a, n) => a + n.d, 0) / side.length,
+        top: Math.max(...side.map((n) => n.top)),
+      }))
+      towers.push({ s: cl.reduce((a, n) => a + n.s, 0) / cl.length, legs })
+    }
+    if (towers.length < 2) continue
+    for (const n of near) used.add(n.part)
+    out.set(i, towers)
+  }
+  return out
+}
+
+/** Meters a main cable hangs over the deck at the middle of a span between towers. */
+export const CABLE_CLEARANCE = 2
+
+/**
+ * A main cable's height at `s` along a suspension bridge: parabolas through the anchorages at
+ * each end (on the deck) and the tower tops, sagging between towers to `CABLE_CLEARANCE` over
+ * the deck at mid-span, and hanging a little between the end towers and the anchorages.
+ */
+export const cableZ = (s: number, total: number, towers: readonly { s: number; top: number }[], deckZ: (s: number) => number): number => {
+  const knots = [{ s: 0, z: deckZ(0) + CABLE_CLEARANCE, tower: false }, ...towers.map((t) => ({ s: t.s, z: t.top, tower: true })), { s: total, z: deckZ(total) + CABLE_CLEARANCE, tower: false }]
+  let k = 1
+  while (k < knots.length - 1 && knots[k].s < s) k++
+  const a = knots[k - 1]
+  const b = knots[k]
+  const span = Math.max(1e-6, b.s - a.s)
+  const u = Math.min(1, Math.max(0, (s - a.s) / span))
+  const chord = a.z + (b.z - a.z) * u
+  const sag = a.tower && b.tower
+    ? Math.max(0, (a.z + b.z) / 2 - (deckZ((a.s + b.s) / 2) + CABLE_CLEARANCE))
+    : 0.15 * Math.abs(b.z - a.z)
+  return Math.max(deckZ(s) + 0.5, chord - sag * 4 * u * (1 - u))
+}
+
+const bridgePieces = (
+  view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain,
+  ends: BridgeEnds, roofs: readonly Roof[] = [], towers?: readonly Tower[],
+): Item[] => {
   const spacing = pierSpacing(region, chain)
   const line = chain.line
   const t = line.tags
@@ -989,15 +1250,15 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
 
   // The deck profile. A bridge runs fairly straight between its abutments, and never closer to
   // what is under it than its clearance — except where it comes down to meet the ground.
-  const ramp = Math.min(70, total / 3)
-  const clearance = (s: number) => {
-    const e = Math.min(chain.rampStart ? s : Infinity, chain.rampEnd ? total - s : Infinity)
-    if (ramp <= 0 || e >= ramp) return deck
-    const u = Math.max(0, e / ramp)
-    return deck * (u * u * (3 - 2 * u))
+  // Distance to the ground along the network, from the nearest vertex's.
+  const toGround = (s: number) => {
+    let d = Infinity
+    for (let k = 0; k < cum.length; k++) d = Math.min(d, ends.toGround[k] + Math.abs(cum[k] - s))
+    return d
   }
-  const startLevel = ground(0) + (chain.rampStart ? 0 : deck)
-  const endLevel = ground(total) + (chain.rampEnd ? 0 : deck)
+  const clearance = (s: number) => rampClearance(deck, total, s, toGround(s), ends.start, ends.end)
+  const startLevel = ground(0) + ends.start
+  const endLevel = ground(total) + ends.end
   const step = 5
   const samples = Math.max(2, Math.ceil(total / step) + 1)
   const raw: number[] = []
@@ -1052,13 +1313,22 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
       if (quad === null) continue
       const z0 = zAt(s0)
       const z1 = zAt(s1)
+      // A span inside a building, below its roof (a garage ramp, a skyway's landing), is hidden
+      // by it; drawn, it would cut through the walls and roof.
+      const host = buildingAt(roofs, [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2])
+      if (host !== null && host.base <= Math.max(z0, z1) && host.top >= Math.max(z0, z1)) {
+        while (nextPier <= s1) nextPier += spacing
+        continue
+      }
       const shapes: Shape[] = []
       // Piers first: they stand behind the fascia.
       while (nextPier <= s1) {
         const u = (nextPier - s0) / Math.max(1e-6, s1 - s0)
         const pz = z0 + (z1 - z0) * u
         const c0: Vec2 = [p0[0] + (p1[0] - p0[0]) * u, p0[1] + (p1[1] - p0[1]) * u]
-        const footZ = terrain.z(c0)
+        // A pier over a building stands on its roof, not down through it.
+        const below = buildingAt(roofs, c0)
+        const footZ = Math.max(terrain.z(c0), below !== null && below.base < pz ? below.top : -Infinity)
         if (pz - footZ > 3) {
           const c: Vec2 = [p0[0] + (p1[0] - p0[0]) * u, p0[1] + (p1[1] - p0[1]) * u]
           const dx = (p1[0] - p0[0]) / Math.max(1e-6, s1 - s0)
@@ -1080,8 +1350,10 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
         if (nN >= 0) continue
         const zu0 = u0 === ql0 || u0 === qr0 ? z0 : z1
         const zu1 = u1 === ql0 || u1 === qr0 ? z0 : z1
-        const lo0 = view.toScreen(u0, zu0 - FASCIA)
-        const lo1 = view.toScreen(u1, zu1 - FASCIA)
+        // Where the deck meets the ground the fascia stops at it, so a ramp lands as a ramp and
+        // not as a slab cut off square.
+        const lo0 = view.toScreen(u0, Math.min(zu0, Math.max(zu0 - FASCIA, terrain.z(u0))))
+        const lo1 = view.toScreen(u1, Math.min(zu1, Math.max(zu1 - FASCIA, terrain.z(u1))))
         const hi0 = view.toScreen(u0, zu0)
         const hi1 = view.toScreen(u1, zu1)
         // Filled and sealed, but inked only along its length: a span is one bridge, not a
@@ -1107,9 +1379,57 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
         shapes,
         dots: [],
         ...(t.name === undefined ? {} : { name: t.name }),
+        span: { a: p0, b: p1, z: (z0 + z1) / 2, bridge: line.id },
       })
     }
     traveled += len
+  }
+  if (towers !== undefined) items.push(...cablePieces(view, line.id, pts, cum, zAt, towers))
+  return items
+}
+
+/** A suspension bridge's two main cables, cut into pieces like its deck. */
+const cablePieces = (
+  view: View, id: string, pts: readonly Vec2[], cum: readonly number[], zAt: (s: number) => number, towers: readonly Tower[],
+): Item[] => {
+  const total = cum[cum.length - 1]
+  const at = (s: number): { p: Vec2; n: Vec2 } => {
+    let i = 1
+    while (i < cum.length - 1 && cum[i] < s) i++
+    const len = Math.max(1e-9, cum[i] - cum[i - 1])
+    const u = (s - cum[i - 1]) / len
+    const dx = (pts[i][0] - pts[i - 1][0]) / len
+    const dy = (pts[i][1] - pts[i - 1][1]) / len
+    return { p: [pts[i - 1][0] + dx * len * u, pts[i - 1][1] + dy * len * u], n: [-dy, dx] }
+  }
+  const items: Item[] = []
+  for (const side of [0, 1]) {
+    const legs = towers.map((t) => ({ s: t.s, ...(side === 0 ? (t.legs[0].d > t.legs[1].d ? t.legs[0] : t.legs[1]) : (t.legs[0].d > t.legs[1].d ? t.legs[1] : t.legs[0])) }))
+    const d = legs.reduce((a, l) => a + l.d, 0) / legs.length
+    const n = Math.max(2, Math.ceil(total / PIECE))
+    for (let k = 0; k < n; k++) {
+      const s0 = (total * k) / n
+      const s1 = (total * (k + 1)) / n
+      const a = at(s0)
+      const b = at(s1)
+      const q0: Vec2 = [a.p[0] + a.n[0] * d, a.p[1] + a.n[1] * d]
+      const q1: Vec2 = [b.p[0] + b.n[0] * d, b.p[1] + b.n[1] * d]
+      if (!insideRect(q0, view.frame) || !insideRect(q1, view.frame)) continue
+      const c0 = cableZ(s0, total, legs, zAt)
+      const c1 = cableZ(s1, total, legs, zAt)
+      const quad = segmentQuad(q0, q1, 0.5, 0.5)
+      if (quad === null) continue
+      items.push({
+        id: `${id}.cable${side}.${k}`,
+        kind: 'bridge',
+        hull: convexHull(quad),
+        zMin: Math.min(zAt(s0), zAt(s1)),
+        zMax: Math.max(c0, c1),
+        key: (q0[1] + q1[1]) / 2,
+        shapes: [{ pts: [view.toScreen(q0, c0), view.toScreen(q1, c1)], fill: 'none', line: true }],
+        dots: [],
+      })
+    }
   }
   return items
 }

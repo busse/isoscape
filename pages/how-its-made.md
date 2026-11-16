@@ -261,8 +261,11 @@ are only roofs (`building:part=roof`) never replace the outline: it stays as the
 building is drawn whole or not at all, so parts whose outline the frame cuts are left out
 too. Nothing stands on air: a part raised off the ground (`min_height`) that nothing beside
 it holds up, and that is not mapped as a bridge, reaches down to the roof under it or to the
-ground (a crown whose shaft is missing from the data, or too small to draw). Open canopies
-(`building=roof`) are left out.
+ground (a crown whose shaft is missing from the data, or too small to draw). A bridge tower's
+parts (`tower:type=bridge`) are often mapped from the top of the pier up, with the pier left
+out, so the lowest of them (no tower part within 40 m starts lower) reach down to the ground
+or water; struts between the legs keep their height. Open canopies (`building=roof`) are left
+out.
 
 Two shapes are not prisms. A **lattice tower** (`tower:construction=lattice`, such as the
 Eiffel Tower) is drawn whole as a spire on its outline, in 16 stacked tapering pieces, in a
@@ -316,17 +319,37 @@ Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scen
 OSM splits one bridge into many ways, at every change of lanes, name or junction. Ramping
 each piece down to the ground would turn a viaduct into a roller coaster. So bridge ways that
 share an end, a layer and a kind (road or rail) are joined into chains first. A chain only
-ramps down at an end that touches no other bridge.
+ramps down at an end that touches no other bridge. Bridges that touch form a network,
+anchored to the ground at those ends, and no deck stands higher than a 70 m ramp from the
+nearest anchor allows, measured along the network: a viaduct that forks into short ways that
+each come down a few meters on ramps down to the fork, not standing at full height over a fan
+of steep stubs. An end that joins another bridge (a ramp onto a viaduct of another layer, a
+link at a fork) meets the higher of the decks there and eases to its own height over 70 m, so
+the two arrive at one height. Where a deck comes down to
+the ground, its side stops at the ground instead of hanging below it.
 
 **Deck height is a rule of thumb.** OSM rarely records it. A region can name a height for a
 bridge, for example `{ "match": "Manchester", "deck": 24 }`. Otherwise the deck sits
 `bridgeDeck` meters (7 by default) above the ground for each OSM `layer`. The deck is a taut
 line over whatever it crosses: never closer to the ground than its clearance, rising in
-straight runs, and easing down over at most 70 m at a free end. Piers drop to the real ground
-or water every 38 m where the deck is more than 3 m up.
+straight runs, and easing down over 70 m at a free end. The ramp keeps that length on a short
+bridge, so a bridge shorter than two ramps never reaches full height: a 30 m footbridge over a
+canal rises well under a meter above its banks, where a 7 m tent would read as a stub floating
+in the air. Piers drop to the real ground or water every 38 m where the deck is more than 3 m
+up, or to the roof of a building under the deck, never down through it. A span that lies
+inside a building and below its roof (a garage ramp, a walkway's landing) is left out: the
+building hides it.
 
 Each bridge is cut into spans of at most 22 m, so a long bridge can pass in front of one
 building and behind another. Bridges are cut at the edges of the frame.
+
+**A suspension bridge** (`bridge:structure=suspension`) whose towers are mapped as parts
+(`tower:type=bridge`) gets its two main cables, drawn as plain lines. The parts standing
+within 25 m of the bridge's line make its towers, and the parts either side of the widest gap
+across the line are a tower's two legs. Each cable runs from an anchorage on the deck at one
+end of the bridge, over the tops of the legs, to the other end: a parabola between towers
+that sags to 2 m over the deck at mid-span, and a slighter one down to each anchorage.
+Suspenders, tower detail and arches are not drawn.
 
 Code: `chainBridges` and `bridgePieces` in `src/scene.ts`.
 
@@ -340,6 +363,10 @@ on screen:
 - If their footprints can be separated by a line, the one on the camera's side of that line
   is in front.
 - If the footprints overlap (stacked building parts), the one entirely above is in front.
+- Two bridge spans that run side by side (within about 14 degrees of parallel, the two
+  carriageways of a viaduct or a pair of tracks): the one whose line is nearer the camera is
+  in front, or the upper one where one runs right over the other. By centers alone, two
+  overlapping decks alternate span by span and read as a ladder.
 - Otherwise the nearer center wins.
 
 A topological sort turns these pairwise results into one order. The rare cycle, from concave
