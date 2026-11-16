@@ -597,9 +597,15 @@ each other and are left unordered; footprints that overlap by up to 3 cm, the ro
 their corners, count as apart. Cars and canopy runs are cut into pieces at most 7 m long, drawn
 without seams, so each piece takes its own place among the stairs and the deck it passes.
 
+In a cutaway, cars are drawn with arched roofs and a band of windows down each side, engines
+with a frame, a boiler, a dome and a stack, tenders with coal, and sheds with butterfly roofs
+falling to a valley over their posts; a post stands only under a roof that is drawn. The
+ground is flat-toned (the region's `terrain.shade` is 0, which turns the hillshade off), and the
+dashed outline of what was lifted away lies level at the first floor.
+
 The **flat section** is made from the same parts and the same plane: the camera looks level and
 square at the plane from the removed side, nothing in front of it is kept, and behind it the
-building is drawn 35 m deep, trains and canopies 3 m. Under it the ground is cut along the
+building is drawn 35 m deep, trains and canopies 16 m, each drawn in its own colors where the plane cuts it. Under it the ground is cut along the
 plane and dug out where the building goes below it; platforms are drawn 0.35 m over the rails
 (approximate), rails where tracks cross the plane, and a red dashed line follows the traveler
 from the street to the train. Code: `src/section.ts`.
