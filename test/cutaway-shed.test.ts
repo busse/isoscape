@@ -89,3 +89,10 @@ test('inside a roof shell: a slope facing the camera covers what stands under it
   assert.equal(compare(item('far', 0, 5, { shell: { id: 'roof', faces: -1 } }), floor), -1)
   assert.equal(compare(floor, item('near', 0, 5, { shell: { id: 'roof', faces: 1 } })), -1)
 })
+
+test('a dormer on a roof shell paints after its sides', async () => {
+  const { compare } = await import('../src/order.ts')
+  const hull: Vec2[] = [[0, 0], [10, 0], [10, 10], [0, 10]]
+  const item = (id: string, z0: number, z1: number, extra = {}) => ({ id, kind: 'building' as const, hull, zMin: z0, zMax: z1, key: 5, shapes: [], dots: [], ...extra })
+  assert.equal(compare(item('dormer', 1, 3, { over: 'roof', key: 9 }), item('side', 0, 5, { shell: { id: 'roof', faces: 1 }, key: 1 })), 1)
+})

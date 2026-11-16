@@ -59,6 +59,8 @@ export const compare = (a: Item, b: Item, stacked = false): number => {
   // are covered by it.
   if (a.shell !== undefined && b.within === a.shell.id) return a.shell.faces
   if (b.shell !== undefined && a.within === b.shell.id) return -b.shell.faces
+  if (b.shell !== undefined && a.over === b.shell.id) return 1
+  if (a.shell !== undefined && b.over === a.shell.id) return -1
   // Overlapping footprints at overlapping heights: a bridge over a low building, or bad data.
   if (a.kind !== b.kind) return a.kind === 'bridge' ? 1 : -1
   if (a.span !== undefined && b.span !== undefined) {

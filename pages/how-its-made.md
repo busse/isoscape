@@ -683,7 +683,7 @@ away. The tracks stand on a deck at the level of the waiting room,
 on trestles: a rail line with an elevation draws no ground ribbon, its train stands on the deck,
 and its track is a modeled part with ties 2.6 m long, 0.67 m apart, and two rails at standard
 gauge. Its flat section runs from 26 m on the Main Street side of the plane's point to 70 m on the
-track side, the building 35 m deep behind it and everything else 24 m. The main stair, behind
+track side, the building 35 m deep behind it and everything else 26 m. The main stair, behind
 its tiled wall, is drawn there as its dashed outline (`section.hidden`); the shed's roofing is
 drawn only 1 m behind the plane (`section.slice`), so its cut and its edge show and the trusses
 under it are not hidden; and a train standing beside the plane is drawn from the side, flat,

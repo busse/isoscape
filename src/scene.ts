@@ -76,6 +76,8 @@ export interface Item {
   readonly shell?: { readonly id: string; readonly faces: 1 | -1 }
   /** The shell (its part's id) this item stands inside, under its roof. */
   readonly within?: string
+  /** The shell (its part's id) this item stands on, outside it (a dormer): it paints after its sides. */
+  readonly over?: string
 }
 
 export interface GroundPolygon {

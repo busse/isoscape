@@ -2763,7 +2763,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-0-0-roof",
@@ -2814,7 +2815,8 @@
      0.95,
      0.95
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-0-0-glass",
@@ -2852,7 +2854,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-0-1",
@@ -2890,7 +2893,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-0-1-roof",
@@ -2941,7 +2945,8 @@
      0.95,
      0.95
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-0-1-glass",
@@ -2979,7 +2984,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-0-2",
@@ -3017,7 +3023,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-0-2-roof",
@@ -3068,7 +3075,8 @@
      0.95,
      0.95
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-0-2-glass",
@@ -3106,7 +3114,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-0-3",
@@ -3144,7 +3153,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-0-3-roof",
@@ -3195,7 +3205,8 @@
      0.95,
      0.95
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-0-3-glass",
@@ -3233,7 +3244,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-1-0",
@@ -3271,7 +3283,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-1-0-roof",
@@ -3322,7 +3335,8 @@
      0.75,
      0.75
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-1-0-glass",
@@ -3360,7 +3374,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-1-1",
@@ -3398,7 +3413,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-1-1-roof",
@@ -3449,7 +3465,8 @@
      0.75,
      0.75
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-dormer-1-1-glass",
@@ -3487,7 +3504,8 @@
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p"
    ],
-   "confidence": "approximate"
+   "confidence": "approximate",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower",

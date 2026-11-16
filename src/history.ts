@@ -87,6 +87,8 @@ export interface HistoryFeature {
   readonly steps?: number
   /** A part standing inside a roof shell (that part's id): see `Item.within`. */
   readonly within?: string
+  /** A part standing on a roof shell's outside (that part's id), a dormer: see `Item.over`. */
+  readonly over?: string
   /** How the part is known: see `confidenceOf`. */
   readonly confidence?: Confidence
   /**

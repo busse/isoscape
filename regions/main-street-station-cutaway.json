@@ -2,11 +2,11 @@
   "title": "Main Street Station, about 1952: the head house cut down the middle, the shed opened",
   "data": "richmond-i195-rocketts",
   "center": [
-    -77.429313,
-    37.5344025
+    -77.4293195,
+    37.5344099
   ],
   "width": 112.0,
-  "depth": 79.0,
+  "depth": 77.0,
   "bearing": 325.0,
   "snap": false,
   "scale": 10,
@@ -44,7 +44,7 @@
       "from": -26,
       "to": 70,
       "beyond": 35,
-      "other": 24,
+      "other": 26,
       "scale": 10,
       "earth": 4,
       "hidden": [

@@ -178,7 +178,8 @@ export const cutawayItems = (
     const mark = (it: Item | null, g: number): Item | null => {
       if (it === null) return null
       const withShell = p.h.shape === 'inset' && g >= 0 ? { ...it, shell: { id: `history:${p.h.id}`, faces: facing(g) } } : it
-      return p.h.within === undefined ? withShell : { ...withShell, within: `history:${p.h.within}` }
+      const inside = p.h.within === undefined ? withShell : { ...withShell, within: `history:${p.h.within}` }
+      return p.h.over === undefined ? inside : { ...inside, over: `history:${p.h.over}` }
     }
     for (const g of groups) {
       const solids = g < 0 ? made.solids : made.solids.filter((_, k) => made.sides![k] === g)

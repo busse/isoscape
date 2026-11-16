@@ -130,13 +130,6 @@
        120
       ]
      },
-     "section": {
-      "part": "history:mss-d-platform-2-4",
-      "badge": [
-       0,
-       170
-      ]
-     },
      "cross": {
       "part": "history:mss-d-platform-3-4",
       "badge": [
@@ -198,10 +191,11 @@
      },
      "cross": {
       "part": "history:mss-s-truss-3",
-      "dy": -0.15,
+      "dx": 0.12,
+      "dy": -0.1,
       "badge": [
-       0,
-       -150
+       220,
+       -90
       ]
      }
     },
@@ -219,8 +213,8 @@
      "section": {
       "part": "history:mss-d-post-2-3",
       "badge": [
-       140,
-       60
+       170,
+       40
       ]
      },
      "confidence": "written"
@@ -297,7 +291,7 @@
  ],
  "marksNote": "The same marks, small, stand before each place the trains went.",
  "sources": "Sources: HAER VA-4, the train shed (measured drawings, 1970; photographs, 1971), and HABS VA-848, the station (data pages, 1969; photographs), Library of Congress; National Register (1970) and Landmark (1976) nominations; Detroit Publishing photographs, about 1905; Library of Congress blog, 2026; SAH Archipedia; Official Guide, December 1952; OpenStreetMap; USGS 3DEP.",
- "notes": "The head house's east half is lifted away down to its ground floor, and part of the shed's east roof; their outlines are dashed. No plan of the head house is known: its rooms follow the written survey, its heights are scaled from photographs. In 1952 Virginia law segregated the station's waiting rooms; this sheet does not show where, because no source found says where.",
+ "notes": "The head house's east half is lifted away down to its ground floor, and part of the shed's roof; their outlines are dashed. No plan of the head house is known: its rooms follow the written survey, its heights are scaled from photographs. In 1952 Virginia law segregated the waiting rooms; this sheet does not show where, as no source found says where.",
  "credit": "Drawn with isoscape, built with Claude  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Shed after HAER VA-4 (Library of Congress)",
  "travelerKey": "A traveler, drawn to scale: 1.75 m (5 ft 9 in) tall. The red line is the way from the street to the train.",
  "wayfinding": [

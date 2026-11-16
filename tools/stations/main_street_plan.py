@@ -136,10 +136,10 @@ def build(part, rect, ring, plane, SRC, L):
             b_front = R0[2] + (z0 - CORNICE) * k_in - 0.4
             b_back = R0[2] + (z1 - CORNICE) * k_in + 0.6
             w = 0.95 if row == 0 else 0.75
-            p(f'dormer-{row}-{j}', 'Main Street Station: dormer', rect(c - w, c + w, b_front, b_back), z0, z1, 'brick', 'approximate', DORM, HABS + PH)
+            p(f'dormer-{row}-{j}', 'Main Street Station: dormer', rect(c - w, c + w, b_front, b_back), z0, z1, 'brick', 'approximate', DORM, HABS + PH, over='mss-h-roof')
             p(f'dormer-{row}-{j}-roof', 'Main Street Station: dormer', rect(c - w - 0.15, c + w + 0.15, b_front - 0.15, b_back), z1, z1 + 1.0, 'tile', 'approximate', DORM, HABS + PH,
-              shape='inset', levels=[[0, 0, 0], [1.0, w, w]])
-            p(f'dormer-{row}-{j}-glass', 'Main Street Station: dormer', ring([(c - w + 0.35, b_front - 0.04), (c + w - 0.35, b_front - 0.04), (c + w - 0.35, b_front), (c - w + 0.35, b_front)]), z0 + 0.4, z1 - 0.3, 'glass', 'approximate', DORM, HABS + PH)
+              shape='inset', levels=[[0, 0, 0], [1.0, w, w]], over='mss-h-roof')
+            p(f'dormer-{row}-{j}-glass', 'Main Street Station: dormer', ring([(c - w + 0.35, b_front - 0.04), (c + w - 0.35, b_front - 0.04), (c + w - 0.35, b_front), (c - w + 0.35, b_front)]), z0 + 0.4, z1 - 0.3, 'glass', 'approximate', DORM, HABS + PH, over='mss-h-roof')
 
     # ---- the clock tower ------------------------------------------------------------------------
     TW = 'The six-story clock tower at the southwest corner (HABS VA-848), its finial 110 ft above the ground (SAH Archipedia). Its outline is OSM\'s; its stages are scaled from photographs (approximate).'
