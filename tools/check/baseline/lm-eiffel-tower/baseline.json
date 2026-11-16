@@ -1,0 +1,71 @@
+{
+ "view": "lm-eiffel-tower",
+ "args": [
+  "lm-eiffel-tower"
+ ],
+ "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "dirty": false,
+ "approved": "2026-11-16T12:26:48-0500",
+ "svg_sha256": "4f7d7d892f2a4f036f1279d713b9912150644772eff6c53ece393c22d953e27d",
+ "svg_bytes": 5791988,
+ "viewBox": [
+  -3024.0,
+  -2329.8,
+  6048.0,
+  4345.4
+ ],
+ "width": 10900,
+ "crops": [
+  {
+   "name": "tower",
+   "x": 4700,
+   "y": 1900,
+   "w": 1500,
+   "h": 2400
+  },
+  {
+   "name": "bridges-river",
+   "x": 3065,
+   "y": 3042,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "trocadero-slope",
+   "x": 1839,
+   "y": 1884,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "dense-blocks",
+   "x": 1975,
+   "y": 5972,
+   "w": 1500,
+   "h": 1000
+  }
+ ],
+ "warnings": [],
+ "residual": {
+  "tower": {
+   "max": 15.0,
+   "mean": 1.7149
+  },
+  "bridges-river": {
+   "max": 10.556,
+   "mean": 1.2856
+  },
+  "trocadero-slope": {
+   "max": 35.0,
+   "mean": 1.9521
+  },
+  "dense-blocks": {
+   "max": 13.333,
+   "mean": 2.0143
+  }
+ },
+ "data": {
+  "data/lm-eiffel-tower/dem.bin.gz": "71bd5d7370841219c572bcbc0b896463bd43e2e658fedb391a47cc599ff84b1d",
+  "data/lm-eiffel-tower/osm.json": "53d6ef06cbf378ae87cddc2d8ad4b3527b238b55b543d53f3c780544a118c7a2"
+ }
+}

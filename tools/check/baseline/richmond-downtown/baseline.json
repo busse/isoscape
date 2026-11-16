@@ -1,0 +1,60 @@
+{
+ "view": "richmond-downtown",
+ "args": [
+  "richmond-downtown"
+ ],
+ "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "dirty": false,
+ "approved": "2026-11-16T12:25:29-0500",
+ "svg_sha256": "b9a5834483cbeb4fe96effa1ccd7bdbd5aff7679fa12c4deab502a01069223b8",
+ "svg_bytes": 1074227,
+ "viewBox": [
+  -2064.0,
+  -730.0,
+  4128.0,
+  1357.3
+ ],
+ "width": 6000,
+ "crops": [
+  {
+   "name": "bridges",
+   "x": 1200,
+   "y": 738,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "towers",
+   "x": 3675,
+   "y": 62,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "east-riverfront",
+   "x": 4500,
+   "y": 812,
+   "w": 1500,
+   "h": 1000
+  }
+ ],
+ "warnings": [],
+ "residual": {
+  "bridges": {
+   "max": 12.0,
+   "mean": 1.3378
+  },
+  "towers": {
+   "max": 17.0,
+   "mean": 1.6375
+  },
+  "east-riverfront": {
+   "max": 11.333,
+   "mean": 2.0351
+  }
+ },
+ "data": {
+  "data/richmond-downtown/dem.bin.gz": "5a6654a9ccea741b297900cbbdc6a36c35ef2e8ac96ebe452e7ffd397a2de963",
+  "data/richmond-downtown/osm.json": "3903fe4c960a9524ee35115481d6d70ec2b77c9163fd3b6c6fd5d7e635a85340"
+ }
+}

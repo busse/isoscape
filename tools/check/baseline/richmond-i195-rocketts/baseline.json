@@ -1,0 +1,71 @@
+{
+ "view": "richmond-i195-rocketts",
+ "args": [
+  "richmond-i195-rocketts"
+ ],
+ "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "dirty": false,
+ "approved": "2026-11-16T12:25:27-0500",
+ "svg_sha256": "ddcfbea48b31e239a8d446b8be92ef1bf7c84f56da275e7d43b6e7a742c683a4",
+ "svg_bytes": 25947489,
+ "viewBox": [
+  -9444.0,
+  -1771.6,
+  18888.0,
+  3191.3
+ ],
+ "width": 7200,
+ "crops": [
+  {
+   "name": "fall-line-hills",
+   "x": 15,
+   "y": 40,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "open-park",
+   "x": 2040,
+   "y": 0,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "downtown-bridges",
+   "x": 4020,
+   "y": 0,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "rocketts-end",
+   "x": 5550,
+   "y": 216,
+   "w": 1500,
+   "h": 1000
+  }
+ ],
+ "warnings": [],
+ "residual": {
+  "fall-line-hills": {
+   "max": 22.333,
+   "mean": 1.9355
+  },
+  "open-park": {
+   "max": 21.0,
+   "mean": 2.0496
+  },
+  "downtown-bridges": {
+   "max": 19.0,
+   "mean": 1.8787
+  },
+  "rocketts-end": {
+   "max": 19.889,
+   "mean": 2.0948
+  }
+ },
+ "data": {
+  "data/richmond-i195-rocketts/dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+  "data/richmond-i195-rocketts/osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+ }
+}

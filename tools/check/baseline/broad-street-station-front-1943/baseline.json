@@ -1,0 +1,74 @@
+{
+ "view": "broad-street-station-front-1943",
+ "args": [
+  "broad-street-station-front",
+  "--year",
+  "1943"
+ ],
+ "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "dirty": false,
+ "approved": "2026-11-16T12:26:37-0500",
+ "svg_sha256": "4c2ec18ca80275020d1c5ec0725a471b5b09516ea68432f553f83c8ca4671300",
+ "svg_bytes": 434516,
+ "viewBox": [
+  -1719.0,
+  -1083.3,
+  3438.0,
+  2063.3
+ ],
+ "width": 8800,
+ "crops": [
+  {
+   "name": "title",
+   "x": 0,
+   "y": 0,
+   "w": 2400,
+   "h": 500
+  },
+  {
+   "name": "portico",
+   "x": 3595,
+   "y": 2078,
+   "w": 1500,
+   "h": 1400
+  },
+  {
+   "name": "platforms",
+   "x": 6125,
+   "y": 1975,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "lawn-hillshade",
+   "x": 5740,
+   "y": 3020,
+   "w": 1500,
+   "h": 1000
+  }
+ ],
+ "warnings": [],
+ "residual": {
+  "title": {
+   "max": 1.778,
+   "mean": 0.967
+  },
+  "portico": {
+   "max": 7.667,
+   "mean": 1.1875
+  },
+  "platforms": {
+   "max": 7.0,
+   "mean": 1.5497
+  },
+  "lawn-hillshade": {
+   "max": 11.333,
+   "mean": 1.8945
+  }
+ },
+ "data": {
+  "data/broad-street-station/dem.bin.gz": "106ea02c5229b62aba8bc21e8b0bd12ab257722d6eec25f4527dbbdca5184b8b",
+  "data/broad-street-station/osm.json": "3aab8a8a78c342097c9e6ffd1f6d8d20f9f7c0be297426475e529d434b72ef7f",
+  "data/broad-street-station/yearbuilt.json": "5f9cb8d05b4edfd7209390b3482fd26ee3ab4283f984fc233792f3d8b228def7"
+ }
+}

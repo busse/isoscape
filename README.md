@@ -467,6 +467,40 @@ isoscape is by Chris Busse: [fullbacklog.com](https://fullbacklog.com) (Substack
 [LinkedIn](https://linkedin.com/in/chrisbusse), and @busse on
 [Threads](https://www.threads.net/@busse) and [Instagram](https://www.instagram.com/busse).
 
+## Visual check
+
+A change to shared drawing code can change every map. The visual check shows what it changed
+before anything is published. `tools/check/views.json` lists the views it watches (the
+regions behind the sold prints, with the year where a view is dated), the width to render each
+at (about 300 dpi on its largest print, capped at 12,000 px) and two to four crops of each,
+placed on steep terrain, open ground, dense buildings, bridges, the modeled landmarks and the
+title lettering. Each crop says in its `why` what it watches.
+
+- `python3 tools/check/visual.py approve [view...]`: build each view, render its crops and
+  store them as the baseline in `tools/check/baseline/<view>/`, with `baseline.json` (the
+  commit, the SVG's SHA-256, the build's warnings, the cached data files it read, the width
+  and the boxes). The crops are 256-color PNGs, about 5 MB in all, and are committed.
+- `npm run check:visual` (or `visual.py check [view...]`): build and render the same way and
+  compare each crop with its baseline. It writes `out/check/index.html`, with baseline, new
+  and a difference image for every crop, worst first, prints one line per view, and exits 1
+  if any crop is out of tolerance. A view whose SVG is byte for byte the baseline's is
+  "identical" and is not rendered; `--render` renders and compares it anyway (after updating
+  `rsvg-convert` or Pillow). A view whose cached data is missing is skipped, not failed.
+
+A pixel counts as changed when, after a 3×3 blur of both crops, a channel differs by more
+than 8 levels, so lone antialiased pixels do not count. A crop passes with at most 0.02% of
+its pixels changed and a mean blurred difference of at most 0.5 levels. In the difference
+image, red is changed and amber differs by less than the threshold. A full check of the seven
+views takes about 30 s when nothing changed and under 2 minutes when every view must be
+rendered.
+
+Run it before publishing any change to shared drawing code. Approve again only after a person
+has looked at the report and accepted every change in it, and commit the new baseline with the
+change. If the check reports that cached data or build warnings differ from the baseline's,
+the pictures differ for that reason, not the code. Builds are deterministic, so the same
+commit and data give the same SVG. The check needs Python 3 with Pillow and numpy, and
+`rsvg-convert`. Its comparison has unit tests: `cd tools/check && python3 -m unittest`.
+
 ## Release records
 
 Every design for sale has a record in `releases/<design>/v<N>.json`, so it can always be
