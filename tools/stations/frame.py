@@ -8,7 +8,7 @@ tone, how the part is known, a note and its sources.
 
     from frame import Frame, Parts
     F = Frame(lon0, lat0, a_bearing=116.0)          # a runs along bearing 116°, b along 26°
-    P = Parts(F, year_from=1928, year_to=None)
+    P = Parts(F, year_from=1928, year_to=None, datum=67.25)   # z given above the datum
     P.box('x-wall', 'A wall', -12.8, -12.2, 0, 41, 0.0, 15.0, 'brick', 'written', 'note', [src])
 """
 
@@ -48,16 +48,19 @@ class Frame:
 class Parts:
     """Parts of one modeled building, each from `z0` to `z1` (elevations, meters)."""
 
-    def __init__(self, frame, year_from, year_to=None):
+    def __init__(self, frame, year_from, year_to=None, datum=0.0):
         self.F = frame
         self.year_from, self.year_to = year_from, year_to
+        # Heights are given above `datum` (meters above sea level, such as the sidewalk's), and
+        # written as elevations, which is what history.ts reads.
+        self.datum = datum
         self.features = []
 
     def add(self, id_, name, ring, z0, z1, tone, conf, note, sources, **more):
         f = {'id': id_, 'name': name, 'kind': 'landmark', 'from': self.year_from}
         if self.year_to is not None:
             f['to'] = self.year_to
-        f.update({'ring': ring, 'height': round(z1 - z0, 3), 'tone': tone, 'elevation': round(z0, 3), 'upTo': round(z1, 3),
+        f.update({'ring': ring, 'height': round(z1 - z0, 3), 'tone': tone, 'elevation': round(self.datum + z0, 3), 'upTo': round(self.datum + z1, 3),
                   'confidence': conf, 'note': note, 'sources': list(sources)})
         f.update({k: v for k, v in more.items() if v is not None})
         self.features.append(f)

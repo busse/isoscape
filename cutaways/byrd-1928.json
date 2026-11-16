@@ -5,7 +5,6 @@
  "year": 1928,
  "theme": "holiday",
  "halo": true,
- "mapData": false,
  "title": "The Byrd Theatre, Christmas Eve 1928",
  "subtitle": "Opening night, cut down the middle from the Cary Street doors to the screen",
  "sectionCaption": "The same cut, seen flat: Cary Street on the left, the stage and the organ on the right",
@@ -318,8 +317,8 @@
  ],
  "keyNote": "The same marks, small, stand before the streetcar line and the street.",
  "travelerKey": "A patron, drawn to scale: 1.75 m (5 ft 9 in) tall. The red line is the way from the sidewalk to a seat.",
- "sources": "Sources: National Register nomination, Byrd Theatre (Virginia DHR 127-0287, 1977–79), with its USGS map; Miles J. Rudisill Jr., Theatre Organ, Jan.–Feb. 1986, and its 1928 photographs; Byrd Theatre Foundation (About; Theatre History; The Mighty Wurlitzer Organ; balcony seats, Jan. 2025); Wikipedia, Byrd Theatre, for today's seat counts and, citing the Richmond Times-Dispatch (April 8, 2002), segregation; the front c. 1929 (RVA Rephotography Project); HMDB marker 152369; National Weather Service, Richmond Christmas Day records; Museum District Association.",
- "notes": "No plan, section or seating chart of the building was found. Rooms are placed from written descriptions and photographs inside the 84 x 135 ft lot; only the lot and the lobby's height are given in feet. Sources differ: 1,396 seats (the nomination, used here), 1,390 (1986), 1,392 (Wikipedia), 1,200 (the foundation today); 4,000 crystals and two tons (the nomination) or 5,000 and two and a half tons (the foundation); three organ chambers (the nomination), two and a relay room (the foundation), or four rooms. The cut runs 5 ft east of the center line, so the chandelier and the console stand whole. The building east of the theatre stands on the side lifted away and is left out. Cary Street, its sidewalks and the shops to the west are approximate: no map data was at hand, so the ground is drawn flat. No snow: the Weather Service records none on the ground in Richmond on Christmas Day 1928. No decorations are drawn in the building, since no account of any was found. The holly and the red and green of the title and headings are the sheet's own decoration.",
+ "sources": "Sources: National Register nomination, Byrd Theatre (Virginia DHR 127-0287, 1977–79), with its USGS map; Miles J. Rudisill Jr., Theatre Organ, Jan.–Feb. 1986, and its 1928 photographs; Byrd Theatre Foundation (About; Theatre History; The Mighty Wurlitzer Organ; balcony seats, Jan. 2025); Wikipedia, Byrd Theatre, for today's seat counts and, citing the Richmond Times-Dispatch (April 8, 2002), segregation; the front c. 1929 (RVA Rephotography Project); OpenStreetMap contributors (the street, the outlines); USGS 3DEP lidar (the ground); City of Richmond, year of construction (the neighbors); National Weather Service, Richmond Christmas Day records; Museum District Association.",
+ "notes": "No plan, section or seating chart of the building was found. Rooms are placed from written descriptions and photographs inside the 84 x 135 ft lot of the nomination; only the lot and the lobby's height are given in feet. Sources differ: 1,396 seats (the nomination, used here), 1,390 (1986), 1,392 (Wikipedia), 1,200 (the foundation today); 4,000 crystals and two tons (the nomination) or 5,000 and two and a half tons (the foundation); three organ chambers (the nomination), two and a relay room (the foundation), or four rooms. The cut runs 5 ft east of the center line, so the chandelier and the console stand whole. West Cary Street, its sidewalks and the ground are today's (OpenStreetMap; USGS 3DEP lidar), and the model is set on the theatre's OpenStreetMap outline, which measures within 0.2 m of the lot. A neighbor is drawn only where the city assessor's year built puts it up by 1928: the one-storey shops to the west (1923), which the c. 1929 photograph also shows. The building next door to the east is dated 1929 and is not drawn; the houses and the corner building beyond it stand on the side lifted away and are left out. No snow: the Weather Service records none on the ground in Richmond on Christmas Day 1928. No decorations are drawn in the building, since no account of any was found. The holly and the red and green of the title and headings are the sheet's own decoration.",
  "credit": "Drawn by Chris Busse with isoscape, built with Claude",
  "layout": {
   "isoHeight": 3750,
@@ -335,8 +334,8 @@
   {
    "id": "belmont",
    "at": [
-    -77.47803977,
-    37.55220828
+    -77.47813108,
+    37.55224227
    ],
    "place": "inside-left-below",
    "confidence": "written",
@@ -358,8 +357,8 @@
   {
    "id": "cary-east",
    "at": [
-    -77.47771387,
-    37.55208142
+    -77.4777997,
+    37.55212479
    ],
    "place": "below",
    "confidence": "approximate",

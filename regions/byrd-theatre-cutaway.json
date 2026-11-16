@@ -1,13 +1,13 @@
 {
   "title": "The Byrd Theatre, Christmas Eve 1928: cut down the middle",
-  "data": "richmond-i195-rocketts",
+  "data": "byrd-theatre",
   "center": [
-    -77.4777777,
-    37.5523787
+    -77.47787681,
+    37.55242006
   ],
   "width": 59.5,
   "depth": 49.0,
-  "bearing": 330.0,
+  "bearing": 327.95,
   "snap": false,
   "scale": 20,
   "squash": 0.55,
@@ -16,19 +16,35 @@
   "palette": "winter",
   "minBuildingArea": 12,
   "dots": "none",
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 2,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 1,
+    "shade": 0
+  },
   "time": {
-    "history": "history/byrd-theatre.json"
+    "history": "history/byrd-theatre.json",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
   },
   "cutaway": {
     "through": [
-      -77.47783371,
-      37.55222366
+      -77.47792584,
+      37.55226352
     ],
-    "bearing": 26.0,
+    "bearing": 23.95,
     "remove": "right",
-    "floor": 0.3,
+    "floor": 67.55,
     "keep": 1.5,
     "parts": "byrd-c-",
+    "lift": [
+      "^w2360260(90|91|92|93)$",
+      "^w327377549$"
+    ],
     "outline": {
       "parts": [
         "byrd-w-"
@@ -45,39 +61,39 @@
       "route": [
         [
           -3.6,
-          0.95
+          68.2
         ],
         [
           0.4,
-          0.95
+          68.2
         ],
         [
           0.6,
-          1.25
+          68.5
         ],
         [
           13.6,
-          1.25
+          68.5
         ],
         [
           24.8,
-          0.275
+          67.525
         ]
       ],
       "travelers": [
         {
           "s": -2.2,
-          "floor": 0,
+          "floor": 67.25,
           "facing": 1
         },
         {
           "s": 7.0,
-          "floor": 0.3,
+          "floor": 67.55,
           "facing": 1
         },
         {
           "s": 24.8,
-          "floor": -0.675,
+          "floor": 66.575,
           "facing": 1
         }
       ]
@@ -85,26 +101,26 @@
     "travelers": [
       {
         "at": [
-          -77.47789257,
-          37.55223047
+          -77.47798496,
+          37.55226864
         ],
-        "floor": 0,
+        "floor": 67.25,
         "facing": 1
       },
       {
         "at": [
-          -77.47777742,
-          37.55226212
+          -77.47787131,
+          37.55230356
         ],
-        "floor": 0.3,
+        "floor": 67.55,
         "facing": 1
       },
       {
         "at": [
-          -77.47767488,
-          37.55241137
+          -77.47777552,
+          37.55245564
         ],
-        "floor": -0.675,
+        "floor": 66.575,
         "facing": 1
       }
     ]

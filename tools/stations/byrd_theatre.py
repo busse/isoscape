@@ -7,11 +7,13 @@ notes). The model is placed from written descriptions and photographs inside the
 Street, on the street's northeast side), so nearly every part is approximate and says so.
 
 The local frame (tools/stations/frame.py): `a` across the front, to the right facing it from
-Cary Street (bearing 116°, the street's direction as measured on the USGS 1964 Richmond
-quadrangle reproduced in the nomination), and `b` back into the lot (bearing 26°). The origin
-is the middle of the front, at the National Register marker's GPS position (HMDB). No
-elevation data covers Carytown in the cache, so the plate is flat: every elevation here is
-meters above the Cary Street sidewalk.
+Cary Street, and `b` back into the lot. Both are set on the theatre's OpenStreetMap outline
+(way 327377540): its front runs at bearing 113.95° (its back at the same, its sides at 24.2°, a
+skew of 0.3° that is ignored), and it measures 25.76 x 41.18 m, the nomination's 84 x 135 ft
+(25.6 x 41.15 m) within 0.2 m. The model keeps the nomination's lot, centered on that outline.
+The origin is the middle of the outline's front. Heights are given in meters above the Cary
+Street sidewalk in front of the theatre, 67.25 m above sea level on the USGS 3DEP lidar
+(data/byrd-theatre/dem.bin.gz, 67.2–67.3 m along the front), and written as elevations.
 
 What rests on what:
   lot, front on Cary, NE side                 nomination, item 10 (written)
@@ -38,9 +40,12 @@ from frame import Frame, Parts
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'history' / 'byrd-theatre.json'
 
-LON0, LAT0 = -77.47785, 37.55223     # HMDB marker 152369: 37° 33.134′ N, 77° 28.671′ W
-F = Frame(LON0, LAT0, a_bearing=116.0)
-P = Parts(F, 1928)
+# The middle of the front of the theatre's OSM outline (way 327377540); the HMDB marker (152369,
+# 37° 33.134′ N, 77° 28.671′ W) stands on the sidewalk about 9 m east of it.
+LON0, LAT0 = -77.4779424, 37.55226939
+DATUM = 67.25                        # the sidewalk in front, m above sea level (3DEP lidar)
+F = Frame(LON0, LAT0, a_bearing=113.95)
+P = Parts(F, 1928, datum=DATUM)
 
 SRC = {
     'nom': 'https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf',
@@ -54,6 +59,7 @@ SRC = {
     'wiki': 'https://en.wikipedia.org/wiki/Byrd_Theatre',
     'photo1929': 'https://rvarephotoproject3.blogspot.com/2017/03/byrd-theater-c.html',
     'hmdb': 'https://www.hmdb.org/m.asp?m=152369',
+    'osm': 'https://www.openstreetmap.org/way/327377540',
 }
 NOM, PHOTO, T86 = SRC['nom'], SRC['photo1929'], SRC['to1986']
 APPROX = 'No plan or section of the theatre was found; '
@@ -128,18 +134,10 @@ box('byrd-w-mass', 'Byrd Theatre', -W2, W2, 0, LOT_D, 0, Z_ROOF, 'brick', 'appro
     [NOM], only='whole')
 
 # ---- the street, the sidewalks, the neighbors ------------------------------------------------------
-CARY = [(-70, -9.5), (70, -9.5)]
-P.line('byrd-cary', 'West Cary Street', 'street', CARY, 12.0,
-       'West Cary Street, the theatre\'s front. Its direction is measured on the 1964 USGS quadrangle reproduced in the 1979 nomination; its width and the sidewalks\' are approximate (no map data for Carytown was at hand).',
-       [SRC['nom-map'], SRC['hmdb']])
-for k, b in enumerate((-1.75, -17.25)):
-    P.line(f'byrd-walk-{k + 1}', 'West Cary Street sidewalk', 'walk', [(-70, b), (70, b)], 3.5,
-           'A sidewalk of West Cary Street; width approximate.', [SRC['nom-map']])
-NEIGH = 'The neighbors are drawn from the c. 1929 photograph of the front: a one-storey row of shops on one side, a two-storey building on the other. Their lots, depths and heights are approximate.'
-box('byrd-n-west', 'Shops beside the Byrd (one storey)', -22.0, -W2 - 0.4, 0, 18.0, 0, 5.0, 'brick', 'approximate', NEIGH, [PHOTO])
-box('byrd-n-west-cornice', 'Shops beside the Byrd (one storey)', -22.0, -W2 - 0.4, -0.25, 0.0, 4.4, 4.9, 'terracotta', 'approximate', NEIGH, [PHOTO])
-# The two-storey building east of the theatre (c. 1929 photograph) stands on the side the cut lifts
-# away, in front of the cut: it is left out of the cutaway (the sheet's notes say so).
+# West Cary Street, its sidewalks and the buildings round the theatre are OpenStreetMap's
+# (data/byrd-theatre/osm.json), with the ground from the USGS 3DEP lidar. A neighbor stands in
+# 1928 only where the assessor's year built (or an OSM start date) puts it up by then: the
+# dated-series rule, history.ts. Neighbors are not modeled here.
 
 # ---- the front -----------------------------------------------------------------------------------
 FRONT_NOTE = 'The front on Cary Street: red brick with white terra-cotta ornament (nomination), its arched windows, frieze and cornice as the c. 1929 photograph shows them; sizes and places approximate.'
@@ -187,18 +185,27 @@ box(K('blade-sign'), 'Byrd Theatre: vertical sign', -11.3, -10.8, -2.3, -0.2, 6.
 
 # ---- outer walls -------------------------------------------------------------------------------
 SIDE = 'An outer side wall of plain brick. Its thickness and height are approximate.'
+# The east wall stands on the side the cut lifts away, where only its plan is drawn: it is drawn
+# from the sidewalk's level, since nothing below the ground is shown outside the cut.
 for side, a0, a1 in (('west', -W2, -WI), ('east', WI, W2)):
+    west = side == 'west'
     box(C(f'wall-{side}'), 'Byrd Theatre: side wall', a0, a1, T, B_HOUSE, 0, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
-    box(C(f'wall-{side}-house'), 'Byrd Theatre: side wall', a0, a1, B_HOUSE, B_PIT, Z_FILL, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
-    box(C(f'wall-{side}-front'), 'Byrd Theatre: side wall', a0, a1, B_PIT, B_PROS, -1.6, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
-    box(C(f'wall-{side}-stage'), 'Byrd Theatre: side wall', a0, a1, B_PROS, LOT_D, Z_BSMT if side == 'west' else -1.6, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
-    box(C(f'wall-{side}-pit'), 'Byrd Theatre: basement wall', a0, a1, B_PIT, B_PROS, Z_BSMT if side == 'west' else -1.6, 0, 'brick', 'approximate', SIDE, [NOM])
+    box(C(f'wall-{side}-house'), 'Byrd Theatre: side wall', a0, a1, B_HOUSE, B_PIT, Z_FILL if west else 0, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
+    box(C(f'wall-{side}-front'), 'Byrd Theatre: side wall', a0, a1, B_PIT, B_PROS, -1.6 if west else 0, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
+    box(C(f'wall-{side}-stage'), 'Byrd Theatre: side wall', a0, a1, B_PROS, LOT_D, Z_BSMT if west else 0, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
+    if west:
+        box(C(f'wall-{side}-pit'), 'Byrd Theatre: basement wall', a0, a1, B_PIT, B_PROS, Z_BSMT, 0, 'brick', 'approximate', SIDE, [NOM])
+# Beyond the east wall, below the sidewalk: the ground, drawn in the ground's own color and
+# uninked, so the plan on the side the cut lifts away shows nothing below the ground (the raked
+# floor and its fill go down 1.55 m).
+box(K('ground-east'), 'The ground east of the theatre', W2, W2 + 3.0, B_HOUSE - 0.5, LOT_D, -1.8, 0, 'land', 'approximate',
+    'The ground beside the theatre, below the sidewalk\'s level: it hides the floor\'s fill on the side the cut lifts away.', [SRC['osm']], only='cutaway')
 LINING = 'The plastered inside face of the outer wall. Approximate.'
 # Over the lobby's ceiling nothing is known of the rooms: the wall is left bare.
 box(C('lining-lobby'), LOBBY, -WI, -WI + 0.05, T, B_HOUSE - 0.6, Z_LOBBY, Z_LCEIL, 'plaster', 'approximate', LINING, [NOM])
 box(C('lining-house'), HOUSE, -WI, -WI + 0.05, B_HOUSE, B_PROS, Z_FRONT_ROW - 0.3, Z_CEIL, 'plaster', 'approximate', LINING, [NOM])
 box(C('wall-back'), 'Byrd Theatre: back wall', -WI, 8.0, LOT_D - T, LOT_D, Z_BSMT, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
-box(C('wall-back-east'), 'Byrd Theatre: back wall', 8.0, WI, LOT_D - T, LOT_D, -1.6, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
+box(C('wall-back-east'), 'Byrd Theatre: back wall', 8.0, WI, LOT_D - T, LOT_D, 0, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
 box(C('roof'), 'Byrd Theatre: roof', -W2, W2, T, B_PROS + 0.8, Z_ROOF - 0.4, Z_ROOF, 'roof', 'approximate', 'The roof over the lobby and auditorium, flat behind the front\'s parapet. Height approximate.', [PHOTO])
 box(C('stage-roof'), 'Byrd Theatre: roof', -W2, W2, B_PROS + 0.8, LOT_D, Z_STAGE_ROOF - 0.4, Z_STAGE_ROOF, 'roof', 'approximate', 'The roof over the stage and the organ chambers. Height approximate.', [NOM])
 
@@ -420,21 +427,24 @@ for k, (a0, a1) in enumerate(((-9.0, -7.4), (-4.6, -3.0), (-0.4, 1.2))):
     for j, (w0, w1) in enumerate(((a0 - 0.25, a0),) + (((a1, a1 + 0.25),) if k < 2 else ())):
         box(C(f'tunnel-{k + 1}-wall-{j + 1}'), 'Byrd Theatre: air tunnel', w0, w1, B_ROW0, B_PIT, Z_T0, Z_T1, 'stone', 'approximate', TUN, [SRC['about']])
 
-# Under the lobby's back, where the raked floor's fill begins: the ground, just behind the cut,
-# so the flat section's earth meets the fill without a gap.
-box(K('earth-under-lobby'), LOBBY, -WI, CUT_A - 0.01, B_HOUSE - 2.0, B_HOUSE, Z_FILL, 0, 'earth', 'approximate', 'The ground under the lobby. Approximate.', [NOM])
+RULES = []
+YEAR_BUILT = 'https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0'
 
 # ---- the history file -----------------------------------------------------------------------
 features = P.features
 history = {
     'title': 'The Byrd Theatre on its opening night, Christmas Eve 1928',
-    'method': 'The theatre is modeled from curated parts inside the city lot of the 1979 National Register nomination (about 84 x 135 ft). No plan, section or seating chart was found, so rooms are placed from written descriptions (the nomination; Theatre Organ, 1986; the Byrd Theatre Foundation) and photographs (the 1928 interior views in Theatre Organ; the front c. 1929). Every part names its sources and how it is known. No map data for Carytown was at hand: West Cary Street and the neighbors are drawn approximately, on flat ground, with elevations above the sidewalk.',
+    'method': 'The theatre is modeled from curated parts inside the city lot of the 1979 National Register nomination (about 84 x 135 ft). No plan, section or seating chart was found, so rooms are placed from written descriptions (the nomination; Theatre Organ, 1986; the Byrd Theatre Foundation) and photographs (the 1928 interior views in Theatre Organ; the front c. 1929). Every part names its sources and how it is known. West Cary Street, the neighbors and the ground are today\'s, from OpenStreetMap and the USGS 3DEP lidar; a neighbor stands in 1928 only where the assessor\'s year built puts it up by then.',
     'present': 2026,
     'about': 'The Byrd Theatre opened on Christmas Eve 1928, "a great civic event" (nomination), with a feature film and the Wurlitzer organ.',
     'epochs': [{'year': 1928, 'title': 'Opening night, Christmas Eve 1928', 'note': 'December 24, 1928: the theatre\'s grand opening.'}],
     'features': features,
-    'rules': [],
-    'dates': [],
+    'rules': RULES,
+    'dates': [{'id': 'w327377540', 'name': 'Byrd Theatre', 'year': 2026, 'source': SRC['osm'],
+               'note': 'Today\'s outline of the theatre is drawn only in today\'s scene; in 1928 the theatre is drawn from its curated parts.'}]
+             + [{'id': w, 'name': f'{n} West Cary Street', 'year': 1923, 'source': YEAR_BUILT,
+                 'note': 'One of the one-storey shops west of the theatre: the assessor dates their parcel 1923, and the c. 1929 photograph of the front shows a one-storey row of shops on that side. The parcel holds too many buildings for the year to be given to each by the general rule, so it is given here.'}
+                for w, n in (('w327377551', 2916), ('w327377552', 2920))],
 }
 OUT.write_text(json.dumps(history, indent=1, ensure_ascii=False) + '\n')
 
@@ -443,5 +453,5 @@ conf = [f['confidence'] for f in features if f['kind'] == 'landmark' and f.get('
 share = sum(c == 'approximate' for c in conf) / len(conf)
 print(f'{OUT.relative_to(ROOT)}: {len(features)} features; {len(conf)} cutaway parts, {share:.0%} approximate')
 # Where things are, for the region and the sheet.
-print('origin', F.lonlat(0, 0), 'cut through', F.lonlat(CUT_A, 0), 'b bearing', F.b_bearing)
+print('origin', F.lonlat(0, 0), 'cut through', F.lonlat(CUT_A, 0), 'b bearing', F.b_bearing, 'datum', DATUM)
 print('B_PIT', round(B_PIT, 2), 'Z_FRONT_ROW', round(Z_FRONT_ROW, 3), 'B_BOOTH', round(B_BOOTH, 2), 'Z_BOOTH', Z_BOOTH)
