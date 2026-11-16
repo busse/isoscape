@@ -1,0 +1,99 @@
+{
+  "title": "Broad Street Station, 1943: cut down the middle",
+  "data": "broad-street-station",
+  "center": [
+    -77.4654862,
+    37.5611825
+  ],
+  "width": 175.0,
+  "depth": 135.0,
+  "bearing": 318.0,
+  "snap": false,
+  "scale": 10,
+  "squash": 0.6,
+  "exaggeration": 1.0,
+  "slab": 12,
+  "palette": "paper",
+  "minBuildingArea": 12,
+  "dots": "none",
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 2,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 1
+  },
+  "time": {
+    "history": "history/broad-street-station.json",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  },
+  "cutaway": {
+    "through": [
+      -77.4658172,
+      37.5611118
+    ],
+    "bearing": 40.8,
+    "remove": "right",
+    "floor": 67.4,
+    "keep": 1.5,
+    "parts": "bss-",
+    "lift": [
+      "^history:bss-canopy-2-south-cut:\\d+$"
+    ],
+    "outline": {
+      "parts": [
+        "bss-c-floor-"
+      ],
+      "offset": 1.5
+    },
+    "section": {
+      "from": -62,
+      "to": 104,
+      "beyond": 35,
+      "other": 3,
+      "scale": 10,
+      "earth": 5,
+      "route": [
+        [
+          -60,
+          64.7
+        ],
+        [
+          -35,
+          66.4
+        ],
+        [
+          -31.5,
+          68.3
+        ],
+        [
+          -19,
+          68.3
+        ],
+        [
+          8.6,
+          68.3
+        ],
+        [
+          15.7,
+          68.3
+        ],
+        [
+          50.5,
+          68.3
+        ],
+        [
+          50.5,
+          61.8
+        ],
+        [
+          42.8,
+          61.8
+        ]
+      ]
+    }
+  }
+}

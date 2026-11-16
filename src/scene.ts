@@ -24,7 +24,7 @@ import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
 import { cutawayItems, type PlacedPart } from './cutaway-scene.ts'
-import type { CutPlane } from './cutaway.ts'
+import { offsetConvex, type CutPlane } from './cutaway.ts'
 import { alive, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
@@ -98,6 +98,8 @@ export interface Scene {
   readonly labels?: readonly MapLabel[]
   /** A cutaway's plane, in view meters. */
   readonly cut?: CutPlane
+  /** A flat section's cut faces, in plane coordinates: meters along the plane, scene z. */
+  readonly sections?: readonly Vec2[][]
 }
 
 export interface MapLabel {
@@ -300,6 +302,7 @@ export const buildScene = (
   // ---- buildings ---------------------------------------------------------------------------
   const items: Item[] = []
   let cutPlaneOut: CutPlane | undefined
+  let sectionsOut: Vec2[][] | undefined
   const minArea = region.minBuildingArea ?? 12
   const dotsMode = region.dots ?? 'all'
 
@@ -484,7 +487,7 @@ export const buildScene = (
     let cars = 0
     const boxes: Box[] = []
     for (const h of curated) {
-      if (h.kind === 'canopy' && h.line !== undefined) {
+      if (h.kind === 'canopy' && h.line !== undefined && shown(h)) {
         const got = keepBoxes(canopyBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.width ?? 9, h.height ?? 5, (p) => terrain.z(p)))
         boxes.push(...got)
         canopies += got.length / 2
@@ -500,16 +503,19 @@ export const buildScene = (
     if (cut === undefined) items.push(...boxes.map((b) => boxItem(view, pal, b)))
     else {
       const outlineRings = cut.outline === undefined ? [] : curated
-        .filter((h) => h.only === 'whole' && h.ring !== undefined && h.id.startsWith(cut.outline ?? ''))
-        .map((h) => orient(toViewRing(view, h.ring!), true))
+        .filter((h) => h.ring !== undefined && (cut.outline?.parts ?? []).some((p) => h.id.startsWith(p)))
+        .map((h) => offsetConvex(orient(toViewRing(view, h.ring!), true), cut.outline?.offset ?? 0))
       const keepZ = cut.floor !== undefined && cut.keep !== undefined ? zOf(cut.floor) + cut.keep : undefined
       const done = cutawayItems(view, pal, cut, placed, extra.section === true ? [...boxes, ...tramBoxes] : boxes, {
-        ...(keepZ === undefined ? {} : { keepZ }), section: extra.section === true, outlineRings, ground: (p) => terrain.z(p),
+        ...(keepZ === undefined ? {} : { keepZ }), section: extra.section === true, outlineRings,
+        // The outline lies on the ground, or on whatever kept part it crosses (a porch).
+        ground: (p) => Math.max(terrain.z(p), ...placed.filter((q) => (keepZ === undefined || q.top <= keepZ) && pointInRing(p, q.outer)).map((q) => q.top)),
       })
       if (extra.section === true) items.length = 0
-      items.push(...done.items)
+      for (const it of done.items) items.push(it)
       for (const [k, v] of Object.entries(done.stats)) stats[k] = v
       cutPlaneOut = done.plane
+      if (done.sections.length > 0) sectionsOut = done.sections
     }
     // Buildings traced from fire-insurance maps that are gone today, in the maps' colors.
     const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
@@ -560,6 +566,7 @@ export const buildScene = (
     ...(labels.length === 0 ? {} : { labels }),
     ...(railScale > 1 ? { boldRail: true } : {}),
     ...(cutPlaneOut === undefined ? {} : { cut: cutPlaneOut }),
+    ...(sectionsOut === undefined ? {} : { sections: sectionsOut }),
   }
 }
 

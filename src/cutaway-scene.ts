@@ -13,7 +13,7 @@ import type { Cutaway } from './region.ts'
 import type { Item } from './scene.ts'
 import type { View } from './view.ts'
 import {
-  behind, clipAll, cutPlane, isConvex, prism, revolve, sideOf, solidItem, splitSolids, stair, unionOutline, within,
+  behind, clipAll, cutPlane, isConvex, prism, revolve, sectionOf, sideOf, solidItem, splitSolids, stair, unionOutline, within,
   type CutPlane, type Solid, type Tones,
 } from './cutaway.ts'
 
@@ -38,7 +38,8 @@ export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean } 
 
 const tonesOf = (pal: Palette, h: HistoryFeature): Tones => {
   const [lit, shade, roof] = pal.parts[h.tone ?? 'stone']
-  return { lit, shade, roof, cut: pal.poche }
+  const [il, is] = pal.parts.plaster
+  return { lit, shade, roof, cut: pal.poche, inner: [il, is] }
 }
 
 const boxTones = (pal: Palette, b: Box): Tones => {
@@ -50,6 +51,8 @@ export interface CutawayResult {
   readonly items: Item[]
   readonly plane: CutPlane
   readonly stats: Record<string, number>
+  /** In a section: every cut face of the cut parts, in plane coordinates (s, z). */
+  readonly sections: Vec2[][]
 }
 
 /**
@@ -66,6 +69,7 @@ export const cutawayItems = (
   const prefix = cut.parts ?? ''
   const lift = (cut.lift ?? []).map((r) => new RegExp(r))
   const items: Item[] = []
+  const sections: Vec2[][] = []
   const stats: Record<string, number> = { cutParts: 0, keptParts: 0, cutHulled: 0, lifted: 0 }
   const beyond = cut.section?.beyond ?? 35
   const other = cut.section?.other ?? 2
@@ -76,6 +80,10 @@ export const cutawayItems = (
     const id = `history:${p.h.id}`
     const subject = p.h.id.startsWith(prefix)
     if (opts.section) {
+      if (subject) for (const s of solids) {
+        const sec = sectionOf(s, plane)
+        if (sec !== null) sections.push(sec)
+      }
       const kept = solids.map((s) => clipAll(s, [behind(plane), within(plane, subject ? beyond : other)])).filter((s): s is Solid => s !== null)
       const it = solidItem(view, tones, id, kept, p.h.name)
       if (it !== null) items.push(it)
@@ -123,7 +131,7 @@ export const cutawayItems = (
     }
     stats.outlinePieces = k
   }
-  return { items, plane, stats }
+  return { items, plane, stats, sections }
 }
 
 /** Dashed outline pieces are this long at most, so each sorts among what stands near it. */

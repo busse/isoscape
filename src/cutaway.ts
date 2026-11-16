@@ -21,11 +21,11 @@ import type { View } from './view.ts'
 export type Vec3 = readonly [number, number, number]
 
 /**
- * What a face is: a wall (`side`), a top or bottom, a face shared with a neighboring piece of the
+ * What a face is: a wall (`side`), the inside of a shell (`inner`), a top or bottom, a face shared with a neighboring piece of the
  * same part (`internal`, never drawn, but kept so clipping can close the piece), or a section
  * (`cut`).
  */
-export type FaceRole = 'side' | 'top' | 'bottom' | 'internal' | 'cut'
+export type FaceRole = 'side' | 'inner' | 'top' | 'bottom' | 'internal' | 'cut'
 export interface Face { readonly pts: readonly Vec3[]; readonly role: FaceRole }
 /** A convex polyhedron. Faces may be wound either way: `outward` orients them when drawn. */
 export interface Solid { readonly faces: readonly Face[] }
@@ -124,7 +124,7 @@ export const revolve = (ring: readonly Vec2[], levels: readonly Level[]): Solid[
       const ia0 = at(a, lo.inner, lo.z), ib0 = at(b, lo.inner, lo.z), ia1 = at(a, hi.inner, hi.z), ib1 = at(b, hi.inner, hi.z)
       out.push(solidOf([
         faceOf([oa0, ob0, ob1, oa1], 'side'),
-        faceOf([ia0, ia1, ib1, ib0], 'side'),
+        faceOf([ia0, ia1, ib1, ib0], 'inner'),
         faceOf([oa0, oa1, ia1, ia0], 'internal'),
         faceOf([ob0, ib0, ib1, ob1], 'internal'),
         faceOf([oa0, ia0, ib0, ob0], l === 0 ? 'bottom' : 'internal'),
@@ -285,7 +285,11 @@ export const sectionOf = (s: Solid, pl: CutPlane): Vec2[] | null => {
 }
 
 /** The colors a part is drawn in: walls lit and shaded, its top, and the section's ink. */
-export interface Tones { readonly lit: string; readonly shade: string; readonly roof: string; readonly cut: string }
+export interface Tones {
+  readonly lit: string; readonly shade: string; readonly roof: string; readonly cut: string
+  /** The inside of a shell (a dome's ceiling): lit and shaded. */
+  readonly inner?: readonly [string, string]
+}
 
 /**
  * One item from a part's solids. Faces turned away from the camera are dropped (on screen their
@@ -320,7 +324,8 @@ export const solidItem = (view: View, tones: Tones, id: string, solids: readonly
       else if (f.role === 'top' || u[2] > 0.97) fill = tones.roof
       else {
         const h = Math.hypot(u[0], u[1]) || 1
-        const wall = mix(tones.lit, tones.shade, (u[0] / h + 1) / 2)
+        const [lit, shade] = f.role === 'inner' && tones.inner !== undefined ? tones.inner : [tones.lit, tones.shade]
+        const wall = mix(lit, shade, (u[0] / h + 1) / 2)
         fill = u[2] > 0.05 ? mix(wall, tones.roof, u[2]) : wall
       }
       faces.push({ depth: fc[1] * cos - fc[2] * sin, cut: f.role === 'cut', shape: { pts: screen, fill, ink: true } })
@@ -431,3 +436,25 @@ export const isConvex = (ring: readonly Vec2[]): boolean => {
 }
 
 export const tonesOf = (pal: Palette, lit: string, shade: string, roof: string): Tones => ({ lit, shade, roof, cut: pal.poche })
+
+/**
+ * A convex counter-clockwise ring pushed `d` meters out: each edge moved out along its normal,
+ * the corners where the moved edges meet.
+ */
+export const offsetConvex = (ring: readonly Vec2[], d: number): Vec2[] => {
+  if (d === 0) return ring.slice()
+  const n = ring.length
+  const lines = ring.map((a, i) => {
+    const b = ring[(i + 1) % n]
+    const l = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
+    const o: Vec2 = [((b[1] - a[1]) / l) * d, (-(b[0] - a[0]) / l) * d]
+    return { p: [a[0] + o[0], a[1] + o[1]] as Vec2, v: [b[0] - a[0], b[1] - a[1]] as Vec2 }
+  })
+  return lines.map((L, i) => {
+    const M = lines[(i + n - 1) % n]
+    const den = M.v[0] * L.v[1] - M.v[1] * L.v[0]
+    if (Math.abs(den) < 1e-9 * Math.hypot(...M.v) * Math.hypot(...L.v)) return L.p
+    const t = ((L.p[0] - M.p[0]) * L.v[1] - (L.p[1] - M.p[1]) * L.v[0]) / den
+    return [M.p[0] + M.v[0] * t, M.p[1] + M.v[1] * t]
+  })
+}

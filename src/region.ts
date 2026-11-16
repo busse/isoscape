@@ -96,8 +96,11 @@ export interface Cutaway {
   readonly parts?: string
   /** Items lifted away on the removed side even though they are not cut: regular expressions on item ids. */
   readonly lift?: readonly string[]
-  /** Outline the removed side of the footprints of these parts' `whole` massing, dashed: an id prefix. */
-  readonly outline?: string
+  /**
+   * Outline, dashed on the ground, the removed side of the union of these parts' footprints
+   * (id prefixes; convex footprints), pushed `offset` meters out.
+   */
+  readonly outline?: { readonly parts: readonly string[]; readonly offset?: number }
   /**
    * The flat section: the same plane, seen square on, everything on the removed side gone.
    * `from` and `to` are its ends, in meters along the plane from `through`; `beyond` is how far
@@ -111,6 +114,8 @@ export interface Cutaway {
     readonly scale?: number
     /** Floor of the earth drawn under the section, in meters below the lowest ground. */
     readonly earth?: number
+    /** The traveler's path: points [meters along the plane, elevation in meters above sea level]. */
+    readonly route?: readonly (readonly [number, number])[]
   }
 }
 
