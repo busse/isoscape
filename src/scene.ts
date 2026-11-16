@@ -134,9 +134,15 @@ export const buildScene = (
   const curated = time === undefined ? [] : time.history.features.filter((h) => alive(h.from, h.to, time.year))
   if (time !== undefined) features = asOf(features, time)
   let unbuiltStreets = 0
-  if (time !== undefined && time.history.streetsNearBuildings !== undefined) {
+  // Today's scene draws today's streets, built on or not.
+  if (time !== undefined && time.history.streetsNearBuildings !== undefined && time.year < time.history.present) {
+    // Traced and curated buildings of the year count as houses too; a town plan vouches for
+    // its own streets.
     const traced = time.history.traced.filter((b) => alive(b.from, b.to, time.year)).map((b) => b.ring[0])
-    const r = dropUnbuiltStreets(features, time.history.streetsNearBuildings, traced)
+    const landmarks = curated.filter((h) => h.kind === 'landmark' && h.ring !== undefined).flatMap((h) => h.ring ?? [])
+    // A plan's streets stay laid out after the plan stops limiting the town.
+    const plans = time.history.features.filter((h) => h.kind === 'plan' && h.ring !== undefined && h.from <= time.year).map((h) => h.ring ?? [])
+    const r = dropUnbuiltStreets(features, time.history.streetsNearBuildings, [...traced, ...landmarks], plans, time.history.majorStreetsNearBuildings === true)
     features = r.kept
     unbuiltStreets = r.dropped
   }
@@ -603,14 +609,15 @@ export const buildScene = (
 
 /**
  * The features that stood in a year. Buildings by their dates (undated ones only in the
- * present); everything else by the history's era rules.
+ * present; a curated `until` ends one before today); everything else by the history's era rules.
  */
 export const asOf = (features: readonly Feature[], time: TimeContext): Feature[] =>
   features.filter((f) => {
     const isBuilding = f.type === 'polygon' && (f.tags.building !== undefined || f.tags['building:part'] !== undefined)
     if (!isBuilding) return featureAlive(f, time.year, time.history)
     const d = time.dates.get(f.id)
-    return d === undefined ? time.year >= time.history.present : d.year <= time.year
+    if (d === undefined) return time.year >= time.history.present
+    return d.year <= time.year && (d.until === undefined || time.year < d.until || time.year >= time.history.present)
   })
 
 /** The rectangle either side of a segment, as a ring: left offset `l`, right offset `r`. */
