@@ -162,6 +162,8 @@ export interface Card {
   readonly imageAlt?: string
   /** og:url and the canonical link; only when absolute. */
   readonly url?: string
+  /** The canonical link, when it is not `url`: a share page names the static page it stands for. */
+  readonly canonical?: string
   readonly type?: 'website' | 'article'
 }
 
@@ -171,7 +173,7 @@ export const metaTags = (c: Card): string => {
     value === undefined || value === '' ? '' : `<meta ${attr}="${key}" content="${escAttr(String(value))}">\n`
   return (
     m('name', 'description', c.description) +
-    (c.url === undefined ? '' : `<link rel="canonical" href="${escAttr(c.url)}">\n`) +
+    ((c.canonical ?? c.url) === undefined ? '' : `<link rel="canonical" href="${escAttr(c.canonical ?? c.url ?? '')}">\n`) +
     m('property', 'og:site_name', SITE_NAME) +
     m('property', 'og:type', c.type ?? 'website') +
     m('property', 'og:title', c.title) +
@@ -244,7 +246,7 @@ export const firstParagraph = (html: string): string => {
  * without script. No meta refresh: some crawlers (Facebook's) follow one, and would take the
  * index page's card instead of this one.
  */
-export const sharePage = (card: Card, route: string): string => {
+export const sharePage = (card: Card, route: string, more?: { readonly href: string; readonly label: string }): string => {
   const target = `../index.html${route}`
   return `<!doctype html>
 <html lang="en">
@@ -258,7 +260,7 @@ ${metaTags(card)}<script>location.replace('../index.html' + (location.hash.lengt
 <body>
 <p><a href="${escAttr(target)}">${escAttr(card.title)}</a></p>
 ${card.image === undefined ? '' : `<p><a href="${escAttr(target)}"><img src="${escAttr(card.image)}" alt="${escAttr(card.imageAlt ?? '')}"></a></p>\n`}<p>${escAttr(card.description)}</p>
-</body>
+${more === undefined ? '' : `<p><a href="${escAttr(more.href)}">${escAttr(more.label)}</a></p>\n`}</body>
 </html>
 `
 }
@@ -410,6 +412,45 @@ export const previewOf = async (outDir: string, b: BuildMeta): Promise<Preview |
 export const flagshipOf = (builds: readonly BuildMeta[], flagship?: string): BuildMeta | undefined =>
   (flagship === undefined ? undefined : builds.find((b) => b.id === flagship || b.region === flagship || b.name === flagship)) ?? builds[0]
 
+/**
+ * Where "Buy a print" goes for a region: its featured view's own link, else the shop's `links` by
+ * the longest matching region prefix. The explorer's `shopFor` (in its script) follows the same rule.
+ */
+export const shopFor = (config: Pick<SiteConfig, 'shop' | 'home'>, region: string): { url: string; label: string } | undefined => {
+  if (config.shop === undefined) return undefined
+  const hero = config.home?.heroes.find((h) => h.region === region)
+  const label = hero?.shopLabel ?? 'Buy a print ↗'
+  if (hero?.shop) return { url: hero.shop, label }
+  const links = config.shop.links ?? {}
+  const key = Object.keys(links).filter((p) => region.startsWith(p)).sort((a, b) => b.length - a.length)[0]
+  return key === undefined ? undefined : { url: links[key], label }
+}
+
+/**
+ * A shop link tagged with where it was followed from, as the explorer tags them when clicked:
+ * utm_source=isoscape-explorer, utm_medium=referral, utm_campaign=<page slug or region>. Only links
+ * to the shop's own host are tagged, and a link that already carries utm_source is left alone.
+ */
+export const withCampaign = (href: string, campaign: string, shopUrl?: string): string => {
+  let u: URL
+  try {
+    u = new URL(href)
+  } catch {
+    return href
+  }
+  let host: string | undefined
+  try {
+    host = shopUrl === undefined ? undefined : new URL(shopUrl).hostname
+  } catch {
+    host = undefined
+  }
+  if ((host !== undefined && u.hostname !== host) || u.searchParams.has('utm_source')) return href
+  u.searchParams.set('utm_source', 'isoscape-explorer')
+  u.searchParams.set('utm_medium', 'referral')
+  u.searchParams.set('utm_campaign', campaign.replace(/[^a-z0-9-]+/gi, '-').slice(0, 60) || 'home')
+  return u.toString()
+}
+
 /** What index.html needs to carry the site-wide card. */
 export interface SiteCard {
   readonly siteUrl?: string
@@ -419,6 +460,10 @@ export interface SiteCard {
   readonly analytics?: SiteConfig['analytics']
   readonly image?: Preview
   readonly imageAlt?: string
+  /** Plain links to the static pages (static-pages.ts), grouped, for crawlers and readers without script. */
+  readonly plain?: readonly { readonly title: string; readonly links: readonly { readonly href: string; readonly label: string }[] }[]
+  /** True when sitemap.xml is written beside index.html. */
+  readonly sitemap?: boolean
 }
 
 /** The site-wide tags for index.html (which sits at out/, depth 0). */
@@ -446,8 +491,15 @@ export const writeSocial = async (
   pages: readonly Page[],
   config: SiteConfig,
   log: (line: string) => void = () => undefined,
+  /** The static page (path under out/) a build or content page is best read at: the share page names it as canonical and links to it. */
+  staticOf: (target: { build: BuildMeta } | { page: string }) => string | undefined = () => undefined,
 ): Promise<SiteCard & { rendered: number; missing: number }> => {
   const base = config.siteUrl
+  // A share page is a door into the explorer; the static page is what a search engine should index.
+  const pointTo = (path: string | undefined, label: string) => path === undefined ? { card: {}, more: undefined } : {
+    card: base === undefined ? {} : { canonical: siteHref(path, base) },
+    more: { href: siteHref(path, undefined, 1), label },
+  }
   let rendered = 0
   let missing = 0
   let canRender = true
@@ -473,11 +525,13 @@ export const writeSocial = async (
     previews.set(b.id, preview)
     const { title, description, alt } = buildCard(b)
     const file = shareFile({ build: b.id })
+    const to = pointTo(staticOf({ build: b }), 'About this map')
     await writeFile(resolve(outDir, 's', file), sharePage({
       title, description, type: 'article',
       ...(preview === undefined ? {} : { image: siteHref(preview.path, base, 1), imageWidth: preview.width, imageHeight: preview.height, imageAlt: alt }),
       ...(base === undefined ? {} : { url: siteHref(`s/${file}`, base) }),
-    }, `#${b.id}`))
+      ...to.card,
+    }, `#${b.id}`, to.more))
   }
   const flag = flagshipOf(builds, config.flagship)
   const image = flag === undefined ? undefined : previews.get(flag.id)
@@ -495,13 +549,15 @@ export const writeSocial = async (
     }
     const pic = own ?? image
     const alt = own === undefined ? imageAlt : p.summary ?? p.title
+    const to = pointTo(staticOf({ page: p.slug }), 'Read it as a plain page')
     await writeFile(resolve(outDir, 's', file), sharePage({
       title: `${p.title} · ${SITE_NAME}`,
       description: clip(p.summary ?? firstParagraph(p.html), 300),
       type: 'article',
       ...(pic === undefined ? {} : { image: siteHref(pic.path, base, 1), imageWidth: pic.width, imageHeight: pic.height, ...(alt === undefined ? {} : { imageAlt: alt }) }),
       ...(base === undefined ? {} : { url: siteHref(`s/${file}`, base) }),
-    }, `#/${p.slug}`))
+      ...to.card,
+    }, `#/${p.slug}`, to.more))
   }
   return {
     ...(base === undefined ? {} : { siteUrl: base }),

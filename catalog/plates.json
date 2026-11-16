@@ -3,7 +3,8 @@
  "scheme": {
   "plate": "<SET>-<NN>: the set's three-letter code, then the piece's number within the set",
   "numbers": "two digits, given in order of first release within the set and never reused; a set of boxes uses its box numbers, 00 for the set sheet (the framed menu of boxes) and M for its map",
-  "taxonomy": "isoscape › collection › set › piece. A collection or set can be renamed without changing any plate."
+  "taxonomy": "isoscape › collection › set › piece. A collection or set can be renamed without changing any plate.",
+  "kind": "optional, per plate: what sort of piece it is (\"Map\", \"Landmark\", \"Building cutaway\"), printed as one line of the title block; absent prints nothing"
  },
  "collections": [
   {
@@ -736,6 +737,14 @@
    "title": "Pope's front, Broad Street Station 1943",
    "piece": "Box 14",
    "place": "Broad Street Station"
+  },
+  {
+   "plate": "BSS-15",
+   "design": "broad-street-1943-cutaway",
+   "title": "Broad Street Station, 1943: The Cutaway",
+   "piece": "Cutaway",
+   "place": "Broad Street Station",
+   "kind": "Building cutaway"
   }
  ]
 }

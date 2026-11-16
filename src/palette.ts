@@ -36,6 +36,13 @@ export interface Palette {
   /** Hillshade: what slopes turned to the light are washed with, and what turned away. */
   readonly shadeLight: string
   readonly shadeDark: string
+  /**
+   * Hillshade strength: the wash's opacity per step of shade toward or away from the light,
+   * and the most it may reach. A step is 1/22 of the full range of light · normal.
+   */
+  readonly shadeLightStep: number
+  readonly shadeDarkStep: number
+  readonly shadeMax: number
   /** Contour ink opacity, minor and major. */
   readonly contourMinor: number
   readonly contourMajor: number
@@ -62,9 +69,20 @@ export interface Palette {
    * A modeled building's parts, by tone: side lit, side in shade, roof. Broad Street Station's
    * Indiana limestone, its dome's terra-cotta tile, the iron of its platform canopies and their
    * roofing, the plastered ramp houses, and the trains: Pullman-green coaches, black engines,
-   * boxcar-red freight.
+   * boxcar-red freight; and, for the larger trains of a cutaway, an engine's iron in a grey
+   * light enough for its edges to show, the coal in its tender, and a coach's darker roof.
    */
   readonly parts: Readonly<Record<PartTone, readonly [string, string, string]>>
+  /**
+   * Cutaways: the ink fill of every cut surface (poché), the dashed outline of what was lifted
+   * away, and the traveler's path on a flat section, with its stroke width and dash in pixels.
+   */
+  readonly poche: string
+  readonly cutOutline: string
+  readonly cutOutlineDash: readonly [number, number]
+  readonly route: string
+  readonly routeWidth: number
+  readonly routeDash: readonly [number, number]
   /** Station platforms, and the running rails of a track at close scale. */
   readonly platform: string
   readonly railSteel: string
@@ -110,6 +128,9 @@ const paper: Palette = {
   boulder: '#cbbfa8',
   shadeLight: '#fffaf0',
   shadeDark: '#4a3b26',
+  shadeLightStep: 0.045,
+  shadeDarkStep: 0.04,
+  shadeMax: 0.55,
   contourMinor: 0.16,
   contourMajor: 0.34,
   wallLit: '#ece7dc',
@@ -132,7 +153,22 @@ const paper: Palette = {
     coach: ['#58704f', '#364934', '#3a3b3a'],
     engine: ['#4a4a4d', '#242427', '#333336'],
     freight: ['#a8553d', '#74382a', '#8c4632'],
+    plaster: ['#f7f2e6', '#ddd4c2', '#f3ede0'],
+    floor: ['#e9e1cf', '#cfc4ad', '#f6f1e4'],
+    wood: ['#9a7350', '#6f5038', '#b08a62'],
+    glass: ['#c9d3cf', '#a9b6b2', '#d9e0dc'],
+    tram: ['#c9473a', '#8f2a22', '#e8d9b0'],
+    roof: ['#8b8c84', '#6a6b64', '#8e8f87'],
+    loco: ['#6b6c70', '#4a4b4f', '#5a5b5f'],
+    coal: ['#403e3b', '#2f2e2c', '#4a4744'],
+    carRoof: ['#43553d', '#2f3d2b', '#4a5d43'],
   },
+  poche: '#2c2b33',
+  cutOutline: '#2c2b33',
+  cutOutlineDash: [6, 4],
+  route: '#b5392f',
+  routeWidth: 2.6,
+  routeDash: [9, 6],
   platform: '#efe9dc',
   railSteel: '#4f4a45',
   roofs: {
@@ -184,6 +220,9 @@ const night: Palette = {
   boulder: '#4a4d58',
   shadeLight: '#46526e',
   shadeDark: '#000000',
+  shadeLightStep: 0.045,
+  shadeDarkStep: 0.04,
+  shadeMax: 0.55,
   contourMinor: 0.14,
   contourMajor: 0.3,
   wallLit: '#363b4a',
@@ -206,7 +245,19 @@ const night: Palette = {
     coach: ['#2f4a33', '#1f3022', '#26282b'],
     engine: ['#2a2b30', '#17181c', '#212226'],
     freight: ['#5e3328', '#40231c', '#4f2b22'],
+    plaster: ['#4a4a50', '#36363b', '#45454a'],
+    floor: ['#3a3a40', '#2c2c31', '#424248'],
+    wood: ['#5a4434', '#3e2f24', '#6a5140'],
+    glass: ['#3c4a52', '#2c3840', '#46545c'],
+    tram: ['#f07a5f', '#b04a3a', '#f2e2b8'],
+    roof: ['#4a4b48', '#383936', '#525350'],
+    loco: ['#3a3b40', '#26272c', '#303136'],
+    coal: ['#1f1f22', '#161618', '#29292c'],
+    carRoof: ['#24382a', '#18261c', '#2a3e2f'],
   },
+  poche: '#c9d1e6',
+  cutOutline: '#c9d1e6',
+  route: '#e0614f',
   platform: '#3a3d48',
   railSteel: '#8a90a2',
   roofs: {

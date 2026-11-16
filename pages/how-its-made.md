@@ -66,6 +66,16 @@ in tiles of at most 1,500 pixels a side, at 1 m per pixel unless the region sets
 `demResolution`. The tiles are stitched together and stored as `data/<region>/dem.bin.gz`:
 gzipped 16-bit integers in centimeters, so heights are kept to the nearest centimeter.
 
+The service keeps its pixels square in degrees. A tile sized in meters is not square in
+degrees away from the equator, so the service widens it north and south about its center
+and fills the same number of pixels: the image covers more ground than was asked for. Each
+tile is read on the box it really covers and resampled onto the box asked for. Until
+November 2026 this was missed, and the ground in every 3DEP map sat squeezed north–south by
+the cosine of the latitude (0.79 in Richmond, 0.73 at Crater Lake): up to a few hundred
+meters off at a tile's edge, with a step where two tiles met. Water outlines then lay on
+banks and cliffs, which read as rock and as false falls. Files fetched before the fix are
+put right as they load.
+
 Outside the US, a region names another source in `terrain.source`; `isoscape sources` lists
 them with their credits and licenses, and [Landmarks around the world](world-landmarks.md)
 shows one map for each. `ign` (France, 1 m) is cut to order like 3DEP, by IGN's WMS server,
@@ -144,7 +154,10 @@ Code: `src/view.ts`, `chooseBearing` in `src/scene.ts`.
 ## Ground
 
 Each OSM area is classified by its tags as water, island, park or grass, wood, marsh, sand,
-bare rock, parking or cemetery, and drawn as a flat fill in that order. Rivers are drawn from
+bare rock, parking or cemetery, and drawn as a flat fill in that order. Cover that lies
+mostly over water (the trees on a river island) is drawn over the water; the rest is drawn
+under it, so a park mapped around a lake, as Central Park is around the Lake, does not paint
+the lake over as lawn. Rivers are drawn from
 their mapped area, never from their center line. Canals, streams and ditches are drawn as
 ribbons of a typical width.
 
@@ -182,11 +195,16 @@ The scene's height at any point is its elevation above the lowest point in the f
 life, so the landform reads from a distance. **Buildings and bridges keep their true heights** on top
 of the exaggerated ground, so a 2.5× hill does not stretch the towers standing on it.
 
-Shading and contours are computed from the true elevation, not the exaggerated one:
+Contours are computed from the true elevation; the hillshade from the drawn, exaggerated
+surface, so it matches the shape you see:
 
-- **Hillshade.** Each cell is lit from the left and a little toward the camera. The result is
-  rounded to one of 12 steps lighter or darker, which keeps the SVG small. Very steep ground
-  can look stepped.
+- **Hillshade.** The ground is lit from the left and a little toward the camera. The light is
+  worked out at every grid node, from the surface smoothed once over its neighbors (a 3×3
+  blur), so it changes smoothly from node to node. The shading is then drawn as nested bands,
+  two to each of 12 steps lighter or darker (24 each way), whose edges are traced with
+  marching squares between the nodes. Each band adds a thin wash on top of the one it sits
+  in, so the ground shows smooth, soft shading rather than 5 m squares, and no two shades
+  meet edge to edge. The shading stops at the traced shoreline and is not drawn on the river.
 - **Contours.** Marching squares every 2 m by default (`contour`), with every fifth line
   heavier (`majorEvery`). There are no contours over water.
 
@@ -208,6 +226,10 @@ course, steeply only where it really drops.
   at the default 5 m grid) from shore, are drawn as **exposed rock**. These are the boulder fields of the falls.
 - Near the shore, mapped "water" standing more than 1 m above the surface is treated as bank.
   It is **given back to the land** at its own height.
+
+- Where the elevation source has **no heights** (3DEP leaves much of San Francisco Bay
+  empty), the gap is filled in from the shore around it. That fill is a guess, not a surface,
+  so no rock is read within 30 m of it, and no rapid on it.
 
 Both are inferences: a gravel bar mapped as water or a misplaced outline can produce false
 rock. Flat regions skip all of this and draw OSM's outlines as they are.
@@ -236,9 +258,12 @@ Code: `riverFall` in `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 ## Shoreline
 
 With terrain, the water's edge is traced from the lidar-corrected water grid (marching squares
-over a lightly smoothed mask), not from OSM's outline, and drawn at the river's surface. Where
-the outline overlaps a steep bank, the bank slopes into the water instead of the water
-climbing the bank.
+over a lightly smoothed mask), not from OSM's outline. Open water is drawn at the river's
+surface; a grid cell that is part water and part bank is draped on the ground, so the water
+meets the bank at the bank's own height. Where the outline overlaps a steep bank, the bank
+slopes into the water instead of the water climbing the bank. Each strip draws the ground it
+laps toward the camera from that ground's own grid cells, so its shore there is the same as
+the next strip's and the shoreline has no teeth at the strip lines.
 
 Code: `paintStrip` in `src/render.ts`.
 
@@ -249,13 +274,25 @@ Every OSM building that lies **wholly inside the frame** and covers at least
 camera, and the roof goes on top. Courtyards work. Wall shading follows which way each wall
 faces, with the light from the left. Roof color follows the building's type: homes,
 commerce, industry or civic. Where a building is mapped as Simple 3D Buildings parts
-(`building:part`), the parts are drawn instead of the outline, except parts that are only
-roofs (`building:part=roof`), which sit on the outline as their podium. Open canopies
-(`building=roof`) are left out.
+(`building:part`), the parts are drawn instead of the outline if the parts that reach the
+ground cover at least half of it. Many outlines carry parts only for a crown, a tower or
+rooftop works; such an outline is drawn whole, and its parts only above its roof. Parts that
+are only roofs (`building:part=roof`) never replace the outline: it stays as their podium. A
+building is drawn whole or not at all, so parts whose outline the frame cuts are left out
+too. Nothing stands on air: a part raised off the ground (`min_height`) that nothing beside
+it holds up, and that is not mapped as a bridge, reaches down to the roof under it or to the
+ground (a crown whose shaft is missing from the data, or too small to draw). A bridge tower's
+parts (`tower:type=bridge`) are often mapped from the top of the pier up, with the pier left
+out, so the lowest of them (no tower part within 40 m starts lower) reach down to the ground
+or water; struts between the legs keep their height. Open canopies (`building=roof`) are left
+out.
 
 Two shapes are not prisms. A **lattice tower** (`tower:construction=lattice`, such as the
 Eiffel Tower) is drawn whole as a spire on its outline, in 16 stacked tapering pieces, in a
-darker iron tone. Its width follows the Eiffel Tower's curve: e^(−3.3·t) of the base at
+darker iron tone. The outline is first cleared of corners within 3% of √area of their
+neighbors' line (about 3 m on the Eiffel Tower), so the small jogs where a leg meets an arch
+don't run up the tower as slivers, and dots go only at the corners of its foot that face the
+camera. Its width follows the Eiffel Tower's curve: e^(−3.3·t) of the base at
 height fraction t, so 0.56 at the first platform and 0.32 at the second, running out to a
 mast over the top sixth. The parts mapped inside it are dropped. A **curved roof shell with
 no height** (a roof part shaped `round`, `spherical` or `circular`, such as the Sydney Opera
@@ -264,11 +301,16 @@ That height is an approximation, not a survey.
 
 **Footprints from Microsoft's model** fill in where OSM has none. Wherever an OSM building
 and a footprint overlap, OSM wins and the footprint is dropped. A footprint is dropped if its
-center lies in an OSM building, or if it holds an OSM building's center.
+center lies in an OSM building, or if it holds an OSM building's center. A footprint whose
+center is on water is dropped too: there the model has found a boat, a pier head or a
+boathouse it cannot tell from a house. Buildings mapped in OSM on water, such as boathouses,
+stay.
 
 **Heights** are taken from the first of these that the building has:
 
-1. a `height` tag, from a survey or a mapper's estimate;
+1. a `height` tag, from a survey or a mapper's estimate (a whole building tagged under 2 m,
+   or with a height that can't be read, is taken as having none: Los Angeles County's import
+   gives hundreds of hillside houses 0.4 m);
 2. **an estimate from Microsoft's model**, for its own footprints, where it made one;
 3. `building:levels`, at 3.4 m a floor, plus half a floor for each roof level;
 4. **a guess** from the building's type and size: 3.2 m for a shed or anything under 40 m²,
@@ -280,8 +322,15 @@ Each build counts how many heights came from each source. A view with many guess
 right footprints and plausible but invented skylines. Joining real heights from lidar (the
 first-return surface minus bare earth) is the top item on the roadmap.
 
-On a slope, a building stands on the **lowest** ground under it, so its downhill wall shows
-its full height. The roof sits at the building's height above the average ground under it.
+On a slope, a building stands on the **lowest** ground under it, so its walls never float.
+The ground is drawn steeper than life but buildings keep their true heights, so the roof is
+set by the **true** slope, not the drawn one: it sits at the building's height above the
+lowest ground plus half the true fall across the footprint (the drawn fall divided by the
+exaggeration). On the downhill side the building shows what it would on the real hill, and
+the rest of the drawn relief goes into the hill on its uphill side, so a two-story house on a
+steep street stays a two-story house. On flat ground nothing changes. The parts of one
+building all count their heights from the level of its outline, and buildings traced from
+fire-insurance maps and lost landmarks are seated the same way.
 
 Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scene.ts`.
 
@@ -290,17 +339,37 @@ Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scen
 OSM splits one bridge into many ways, at every change of lanes, name or junction. Ramping
 each piece down to the ground would turn a viaduct into a roller coaster. So bridge ways that
 share an end, a layer and a kind (road or rail) are joined into chains first. A chain only
-ramps down at an end that touches no other bridge.
+ramps down at an end that touches no other bridge. Bridges that touch form a network,
+anchored to the ground at those ends, and no deck stands higher than a 70 m ramp from the
+nearest anchor allows, measured along the network: a viaduct that forks into short ways that
+each come down a few meters on ramps down to the fork, not standing at full height over a fan
+of steep stubs. An end that joins another bridge (a ramp onto a viaduct of another layer, a
+link at a fork) meets the higher of the decks there and eases to its own height over 70 m, so
+the two arrive at one height. Where a deck comes down to
+the ground, its side stops at the ground instead of hanging below it.
 
 **Deck height is a rule of thumb.** OSM rarely records it. A region can name a height for a
 bridge, for example `{ "match": "Manchester", "deck": 24 }`. Otherwise the deck sits
 `bridgeDeck` meters (7 by default) above the ground for each OSM `layer`. The deck is a taut
 line over whatever it crosses: never closer to the ground than its clearance, rising in
-straight runs, and easing down over at most 70 m at a free end. Piers drop to the real ground
-or water every 38 m where the deck is more than 3 m up.
+straight runs, and easing down over 70 m at a free end. The ramp keeps that length on a short
+bridge, so a bridge shorter than two ramps never reaches full height: a 30 m footbridge over a
+canal rises well under a meter above its banks, where a 7 m tent would read as a stub floating
+in the air. Piers drop to the real ground or water every 38 m where the deck is more than 3 m
+up, or to the roof of a building under the deck, never down through it. A span that lies
+inside a building and below its roof (a garage ramp, a walkway's landing) is left out: the
+building hides it.
 
 Each bridge is cut into spans of at most 22 m, so a long bridge can pass in front of one
 building and behind another. Bridges are cut at the edges of the frame.
+
+**A suspension bridge** (`bridge:structure=suspension`) whose towers are mapped as parts
+(`tower:type=bridge`) gets its two main cables, drawn as plain lines. The parts standing
+within 25 m of the bridge's line make its towers, and the parts either side of the widest gap
+across the line are a tower's two legs. Each cable runs from an anchorage on the deck at one
+end of the bridge, over the tops of the legs, to the other end: a parabola between towers
+that sags to 2 m over the deck at mid-span, and a slighter one down to each anchorage.
+Suspenders, tower detail and arches are not drawn.
 
 Code: `chainBridges` and `bridgePieces` in `src/scene.ts`.
 
@@ -314,6 +383,10 @@ on screen:
 - If their footprints can be separated by a line, the one on the camera's side of that line
   is in front.
 - If the footprints overlap (stacked building parts), the one entirely above is in front.
+- Two bridge spans that run side by side (within about 14 degrees of parallel, the two
+  carriageways of a viaduct or a pair of tracks): the one whose line is nearer the camera is
+  in front, or the upper one where one runs right over the other. By centers alone, two
+  overlapping decks alternate span by span and read as a ladder.
 - Otherwise the nearer center wins.
 
 A topological sort turns these pairwise results into one order. The rare cycle, from concave
@@ -330,12 +403,27 @@ the terrain: bare ground, parks, water, roads, rail, hillshade, contours, rocks 
 Each building or bridge is painted straight after the strip that holds its front edge, so a
 hill in front of it covers it and the ground behind it does not.
 
+The next strip's parks, roads and cover lap 0.6 m back over a strip's near edge, so a strip's
+hillshade and contours are shifted the same way: each runs from just past its near edge
+(0.6 m plus the width of the edge strokes, about 1.1 m at the sample scale) to the same
+distance past its far edge. The ground in that lap is then shaded once, by the strip that
+painted it last, and no light streak shows along the strip lines. Where two strips' shading
+meets, both trace the same points, so there is no hairline between them.
+
 The front of the plate is a **slab**, a true cross-section of the ground along the near edge,
-with water where the cut crosses the river.
+with water where the cut crosses the river. A region with no slab (`"slab": 0`, the cutaway) is
+cut square instead: the ground ends on straight lines, at the lowest point of its far edge on
+screen and the highest of its near edge, so its edge does not wander with the ground, and
+standing things are cut along the same near line.
 
 **The SVG is compact.** Coordinates are rounded to a tenth of a pixel and written relative to
-the previous point. Draped edges are simplified to a quarter pixel. Each dot is a zero-length
-line with round caps. Even so, a big region can produce a 25 MB file. The `--png` option
+the previous point. Draped edges are simplified to a quarter pixel, and the soft edges of
+hillshade bands to half a pixel: a point is dropped only while the line that replaces it
+passes within that distance of every point it stands for. (Until November 2026 each point
+was tested against its two neighbors alone, so a long, gently curving edge could drift
+several pixels off; across open water, where nothing covers the strips, the gaps showed as
+white stripes.) Each dot is a zero-length
+line with round caps. Even so, a big region can produce a file of 25–45 MB. The `--png` option
 renders a raster with `rsvg-convert`. Colors and line weights come from a palette (`paper`
 or `night`).
 
@@ -352,7 +440,9 @@ which is which.
 every scene from its year on. The year comes from:
 
 1. a curated year, for a few landmarks whose records are known to be wrong or missing (the
-   Capitol, St. John's Church, the Old Stone House and so on), each with a source;
+   Capitol, St. John's Church, the Old Stone House and so on), each with a source. A curated
+   year can also end: the Capitol's central block (OSM's middle building part) is drawn alone
+   from 1788, and its full outline, with the wings of 1904–06, from 1906;
 2. else OpenStreetMap's `start_date` tag;
 3. else the city assessor's *year built* for the parcel under the building's center.
 
@@ -416,19 +506,28 @@ through sixteen street corners, each snapped to the city's block outlines); and
 
 **Era rules** date everything else that OSM maps: the first rule matching a feature's name,
 `ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
-Downtown Expressway from 1976, the river viaducts from 1901. The James River and Kanawha Canal
-appears from 1800 until the railroad took it over, and again from the Canal Walk of 1999.
-Features no rule matches are drawn in every year, which suits the street grid. Paths and other
-undated features are drawn only today.
+Downtown Expressway from 1976, the river viaducts from 1901, today's Mayo Bridge from 1913 (its
+earlier wooden spans are not drawn). The James River and Kanawha Canal appears from 1800 until
+the railroad took it over, and again from the Canal Walk of 1999. Interchange ramps follow the
+interstate and parking aisles and driveways follow surface parking (1950); both dates are
+approximate. A feature no rule matches is drawn in every year, so the Richmond series ends its
+rules with catch-alls: the street grid, streams and the river are drawn in every year, and
+anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basins, paths) is
+drawn only today, since nothing says when it was made. Each catch-all names what still needs a
+source.
 
 In every scene after the first, buildings **new since the previous scene** have gold roofs.
 
 **Streets before the houses.** A series can say that minor streets (tertiary and smaller,
 service roads and paths) are drawn only where a building of the year stands within so many
-meters of them: 75 m in the 1925 streetcar scene. Each street is walked every half that
-distance and kept if any building (standing today and built by then, or traced from a Sanborn
-sheet and still standing) has a corner within one grid cell of a step. A suburb whose streets
-were laid out but not yet built on shows its main roads only.
+meters of them: 75 m in the 1925 streetcar scene, 60 m in the downtown series. Each street is
+walked every half that distance and kept if any building (standing today and built by then,
+traced from a Sanborn sheet and still standing, or a curated landmark) has a corner within one
+grid cell of a step. A suburb whose streets were laid out but not yet built on shows its main
+roads only. The downtown series holds its main roads to the same test, because before the
+first Sanborn map (1886) the only record of how far the town reached is what still stands. A
+street of a town plan (Mayo's grid of 1737) is kept in every year from the plan on, houses or
+not, though not the plan's service roads. Today's scene keeps all of today's streets.
 
 **Streetcar lines.** A curated `streetcar` item is a line drawn as a bold red ribbon down the
 street, 9 m wide, with a car every 900 m along it: 14 m long and 3.6 m tall like a 1920s
@@ -458,18 +557,124 @@ loop of tracks) clears today's streets, lots and buildings from within it.
 Broad Street Station in 1943 is modeled from parts
 (`tools/stations/broad_street.py`): wings, center pavilion, porch, six columns and two piers,
 entablature, drum and a dome (a quarter circle in ten steps), each with a height above its
-seat, and the concourse seated on the high side of the ground so it bridges the tracks. The
+seat, and the concourse, a deck at the waiting room's level on piers over the tracks: a part
+can stand at a given elevation and reach up to another, instead of rising from its seat. A part
+can rest on another: the columns and piers stand on the porch and the entablature on the
+columns, so on the sloping forecourt all six columns share one base and one top. The
 station's own colors live in the palette's `parts`: limestone, the dome's tile, the iron and
 roofing of the platform canopies, ramp houses, and the trains. Nine tracks follow the
 surviving platforms through the station and the USGS quadrangles of 1934 and 1956 around the
 loop, gathering into four and then two within 110 m of each end. Canopies are cut into 12 m
 pieces, each on a column, 8 m wide and 5.4 m up; trains are a steam engine (18 m, with a
 cab), its tender (11 m) and 26 m heavyweight cars, 1 m apart. At 1.5 pixels per meter or
-closer, track is drawn with its ties (0.25 m every 0.67 m) and its two rails, 1.44 m apart.
+closer, track is drawn with its ties and its two rails, 1.44 m apart. Each tie is a rectangle
+on the ground, 2 m across the track and 0.25 m along it, square to the track where it stands
+and spaced every 0.67 m along the whole line (the spacing carries on through bends), so it
+foreshortens with the view like everything else; the strips paint the ties with the ground.
+The rails are the center line offset 0.72 m each way on the ground, mitered at bends so they
+have no gap or jog. Farther out, ties are a dashed line along the track.
 A series can draw track wider than life (`railScale`, or `--rail-scale` for one build) and in
 the ties' darker tone, so a network reads across a city: the wide railroad map uses four
 times. Curated labels name places on the map; the single-place prints of a set leave them
 out.
+
+## Cutaways
+
+A cutaway opens one modeled building along a vertical plane (`src/cutaway.ts`,
+`src/cutaway-scene.ts`). The region names the plane, a point and a compass bearing, and the side
+of it that is lifted away; the camera stands on that side. Broad Street Station is cut down its
+axis, the plane through the middle of the portico, the waiting room and the concourse, running
+at a bearing of 40.8°, with the east half lifted away and the camera looking from that side at
+a bearing of 342° (`regions/broad-street-station-cutaway.json`). Only modeled parts whose ids
+begin with the region's prefix (`bss-`) are cut, and one canopy on the removed side that is not
+cut is lifted away whole.
+
+Every part of the building is first made into convex solids: a prism for a wall, a floor or a
+bench; for a dome, a solid of revolution in slices, one per side of its outline, with an outer
+and an inner surface; a stair as one block per tread. Each solid is clipped to the half of space
+behind the plane, and where the clip opens it a new face closes it on the plane: that face is
+the section, drawn solid in ink (poché). On the removed side the building is not simply gone:
+everything up to 1.5 m above its first floor stays, clipped there, so the ground floor reads as
+a plan, its walls cut low with inked tops, its benches and counters whole. A dashed line marks
+the footprint of what was lifted away, 1.5 m outside the floors, but only where nothing still
+stands: within 2.5 m of a low wall it would only repeat the wall, and is left out.
+
+The pieces become ordinary items for the paint order (above). A part's pieces behind the plane
+are one item and its pieces in front another, and each is split again at the first floor, so
+it takes its place on both sides of the floor's slab. Within an item, faces turned away from
+the camera are dropped, the rest are painted far to near, and the sections last. A cutaway
+stacks many parts over others (slabs over piers, the concourse over trains), so its paint order
+adds one rule: two items apart on the ground, the farther wholly above the nearer, cannot cover
+each other and are left unordered; footprints that overlap by up to 3 cm, the rounding of
+their corners, count as apart. Cars and canopy runs are cut into pieces at most 7 m long, drawn
+without seams, so each piece takes its own place among the stairs and the deck it passes.
+
+In a cutaway, coaches are solid Pullman-green bodies under a darker arched roof, with a
+continuous band of windows down each side and, in the 1 m gap ahead of each car that has one
+coupled ahead of it, the dark diaphragm of its vestibule. A steam engine faces the way its
+train came in (the engine leads, toward the start of its line): a round boiler with a darker
+smokebox at the front, a stack and two domes on top, a frame and running board under it, and a
+boxy cab 4 m long at the back, beside the tender, whose tank is lower than the cab and carries
+its coal heaped at the front. They are drawn in a grey light enough for their edges to show.
+Sheds have butterfly roofs falling to a valley over their posts; a post stands only under a
+roof that is drawn. The ground is flat-toned (the region's `terrain.shade` is 0, which turns
+the hillshade off), and the dashed outline of what was lifted away lies level at the first
+floor.
+
+The **flat section** is made from the same parts and the same plane: the camera looks level and
+square at the plane from the removed side, nothing in front of it is kept, and behind it the
+building is drawn 35 m deep. Trains and sheds are not cut on the skew: where a track with a
+train standing across the plane, or within 16 m behind it, meets the plane, one car is drawn
+end on, square and true size on its trucks (a coach's arched end with its door, an engine's
+round smokebox, or a tender's tank and coal); and where a shed's line meets it, its butterfly
+profile, a center post and two wings rising outward. A stair down from the floor on the removed
+side (to the platforms) is drawn as its stepped profile, dashed. Under it the ground is cut along the plane and dug out where the
+building goes below it; platforms are drawn 0.35 m over the rails (approximate), rails at true
+gauge where tracks cross the plane, and a red dashed line follows the traveler from the street
+to the train. The line runs at waist height, 0.95 m over each floor, with a small arrowhead
+pointing the way on each stretch, and it is broken where it meets a traveler and where it
+would cross a car end seen square on, so it passes behind the car rather than over its face.
+
+**Travelers.** A plain standing figure, 1.75 m (5 ft 9 in) tall, in the route's red, gives
+the drawings their scale: head, body, legs in a short stride and a small suitcase
+(`src/traveler.ts`). Its height is a convention, not a claim from a source. In the flat section
+four stand on the route, feet on their floors: on Broad Street, in the White Waiting Room, on
+the concourse and at the foot of the stair beside the car end. In the cutaway three stand
+upright, facing across the picture, on the portico, among the benches of the waiting room and
+on a platform by the train; each is an item in the paint order like any other, with a 0.5 m
+footprint, so what stands in front of it covers it. For Broad Street the section runs from 45 m on the street side of the plane's
+point to 104 m on the track side, at 10 pixels to the meter, and its earth is cut 5 m below the
+lowest ground along it. Code: `src/section.ts`.
+
+**What is approximate.** Every part says how it is known: *drawn* (traced from a plate or a
+survey map), *written* (placed from a written account) or *approximate* (inferred), and a
+part that says nothing is approximate. For Broad Street Station the rooms of the first floor,
+the hall's octagon, its benches and counters, the portico and the concourse's width are traced
+from the first-floor plan of 1919 (Plate 15), fitted by the 240-ft frontage; the levels, the
+dome and the basement are scaled from the sections (Plates 17 and 18), whose figures are
+illegible; the first floor's elevation, wall thicknesses, door heights, the basement's piers
+and use, the stairs to the platforms and the concourse's height are approximate. The sheet's
+numbered badges show which: solid for drawn, a ring for written, a dashed ring for approximate.
+Code: `tools/stations/broad_street_plan.py`, `tools/cutaway/sheet.py`.
+
+**Sources.** For Broad Street Station: *The American Architect* of July 9, 1919 (its text, the
+first-floor plan on Plate 15 and the sections on Plates 17 and 18); the 1925 Sanborn
+fire-insurance atlas; the USGS Richmond quadrangles of 1934 and 1956, for the loop of tracks;
+the Official Guide timetables of 1933 and 1941 and the Richmond Railroad Museum, for the trains
+and where they went; the City Planning Commission's transit map of January 1943, for the
+streetcars and buses on West Broad; the ICC's 1955 ruling in *NAACP v. St. Louis-San Francisco
+Ry.*, for the end of the segregated waiting rooms; and OpenStreetMap for the ground. Each is
+named on the sheet, and the wayfinding notes carry their own.
+
+**The sheet** (`cutaways/<name>.json`, `tools/cutaway/sheet.py`) is 32 × 24 in at 300 dpi
+(9,600 × 7,200 pixels): the cutaway large, the flat section beneath it, and a column of numbered
+callouts, each anchored to a drawn part in either drawing, with the key, the sources and the
+notes. A badge that would hide the part it names is set off it into clear space, with a thin
+leader to a small dot on the part, drawn like the wayfinding labels' leaders. Callout text is 54 pixels (13 pt; 9.7 pt on the 24 × 18 in print), and the smallest text
+on the sheet, the two-digit numbers in the badges on the drawings, is 40 pixels (9.6 pt; 7.2 pt
+at 24 × 18). There are no canvas files: a canvas's 1.5 in of mirrored wrap would carry the
+title and the column round its sides. Its title block sits in the bottom-right corner, below
+the column.
 
 ## Sets: a map framed by its places
 
@@ -508,7 +713,9 @@ about 5.6 × 0.8 in; smaller sheets scale it by the square root of their long si
 and it sits as low as the art's side margin allows, with clear paper around it a third of its
 height wide. Where the foot of a sheet is full (the two set sheets) it sits in the header
 instead, and only if no place fits at full size is it shrunk, in steps of a tenth. On a canvas it
-goes on the face, never the wrap. The plates themselves are listed in `catalog/plates.json`.
+goes on the face, never the wrap. A piece that is not a map can say what it is in one more
+line under the maker, at 28 units, about 7 pt on a 24 × 18 in sheet: the Broad Street cutaway's
+says "Building cutaway". The plates themselves are listed in `catalog/plates.json`.
 
 ## Archive and explorer
 
@@ -532,7 +739,12 @@ After every build, `out/index.html` is rewritten: this explorer. It is a single 
 build list and these pages embedded in it, so it opens from disk with no server. The pages are
 Markdown files in `pages/`. To add one, see the README.
 
-Code: `src/archive.ts`, `src/explorer.ts`, `src/pages.ts`.
+Beside it go plain pages that need no script, for search engines and link previews: each of
+these pages as `p/<slug>.html`, each map as `m/<region>.html` (and each year of a dated series
+as `m/<region>-<year>.html`) with its picture and this same "How this view was made" text, and a
+`sitemap.xml` listing them all.
+
+Code: `src/archive.ts`, `src/explorer.ts`, `src/pages.ts`, `src/story.ts`, `src/static-pages.ts`.
 
 ## Credits
 

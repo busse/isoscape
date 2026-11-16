@@ -2,8 +2,8 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { clipRingToRect, convexHull, separatingAxis, signedArea, simplifyRing, type Vec2 } from '../src/geom.ts'
 import { dominantGridAngle, makeView, snapBearing } from '../src/view.ts'
-import { chainBridges, extrude, type Item } from '../src/scene.ts'
-import { compare, paintOrder } from '../src/order.ts'
+import { bridgeEnds, buildingAt, cableZ, CABLE_CLEARANCE, chainBridges, extrude, rampClearance, RAMP, roofIndex, type Item } from '../src/scene.ts'
+import { compare, paintOrder, spanOrder } from '../src/order.ts'
 import { assembleRings, parseOsm } from '../src/osm.ts'
 import { buildingHeights, parseLength } from '../src/classify.ts'
 import { palette } from '../src/palette.ts'
@@ -84,6 +84,91 @@ test('bridge ways sharing ends chain, and only grounded ends ramp', () => {
   assert.ok(chains[0].rampStart && chains[0].rampEnd)
 })
 
+test('a short bridge stays low; a long one reaches its deck', () => {
+  // A lone bridge, grounded at both ends: its distance to the ground is to the nearer end.
+  const peak = (total: number) => Math.max(...Array.from({ length: 101 }, (_, k) => {
+    const s = (total * k) / 100
+    return rampClearance(7, total, s, Math.min(s, total - s), 0, 0)
+  }))
+  assert.ok(peak(30) < 1, `30 m footbridge peaks at ${peak(30)}`)
+  assert.ok(peak(80) < 7 && peak(80) > 1)
+  assert.equal(peak(2 * RAMP + 10), 7)
+  // An end that joins a higher deck starts at its height and eases down to its own.
+  assert.equal(rampClearance(7, 200, 0, Infinity, 21, 7), 21)
+  assert.equal(rampClearance(7, 200, 100, Infinity, 21, 7), 7)
+})
+
+test('a ramp that joins a higher viaduct meets it at its height', () => {
+  const line = (id: string, layer: string, pts: Vec2[]) =>
+    ({ type: 'line' as const, id, tags: { highway: 'motorway_link', bridge: 'yes', layer }, points: pts })
+  // A layer-1 link from the ground onto a layer-3 viaduct, which runs on to the ground 440 m on.
+  const link = line('l', '1', [[0, 0], [0.002, 0]])
+  const viaduct = line('v', '3', [[0.002, 0], [0.006, 0]])
+  const chains = chainBridges([link, viaduct])
+  const ends = bridgeEnds(view, region, chains)
+  const li = chains.findIndex((c) => c.line.id === 'l')
+  const vi = chains.findIndex((c) => c.line.id === 'v')
+  assert.equal(ends[li].start, 0)
+  assert.equal(ends[li].end, 21)
+  assert.equal(ends[vi].start, 21)
+})
+
+test('a viaduct that fans into short lanes comes down to them', () => {
+  const line = (id: string, pts: Vec2[]) =>
+    ({ type: 'line' as const, id, tags: { highway: 'trunk', bridge: 'yes', layer: '1' }, points: pts })
+  // A 440 m viaduct ending at a junction where two 10 m lanes each meet the ground.
+  const main = line('m', [[0, 0], [0.004, 0]])
+  const a = line('a', [[0.004, 0], [0.00409, 0.00001]])
+  const b = line('b', [[0.004, 0], [0.00409, -0.00001]])
+  const chains = chainBridges([main, a, b])
+  const ends = bridgeEnds(view, region, chains)
+  // The viaduct joins one lane into a chain; the other lane meets it at the junction.
+  const mi = chains.findIndex((c) => c.line.points.some((p) => p[0] === 0))
+  const j = chains[mi].line.points.findIndex((p) => p[0] === 0.004 && p[1] === 0)
+  assert.ok(ends[mi].toGround[j] < 12, `junction is ${ends[mi].toGround[j]} m from the ground`)
+  const other = chains.findIndex((_, i) => i !== mi)
+  const atJunction = chains[other].line.points[0][0] === 0.004 ? ends[other].start : ends[other].end
+  assert.ok(atJunction < 1, `junction stands ${atJunction} m up`)
+})
+
+test('a bridge finds the building under it', () => {
+  const low = extrude(view, pal, 'low', square(0, 0, 20), [], 0, 6, 'none', 'none')
+  const high = extrude(view, pal, 'high', square(5, 5, 5), [], 0, 30, 'none', 'none')
+  const roofs = roofIndex([low, high])
+  assert.equal(buildingAt(roofs, [2, 2])?.top, 6)
+  assert.equal(buildingAt(roofs, [7, 7])?.top, 30)
+  assert.equal(buildingAt(roofs, [30, 30]), null)
+})
+
+test('side-by-side decks keep one order along their length', () => {
+  // Two parallel decks 10 m apart; their spans are staggered, so their centers alternate.
+  const near = (x: number) => ({ a: [x, 0] as Vec2, b: [x + 22, 0] as Vec2, z: 14, bridge: 'n' })
+  const far = (x: number) => ({ a: [x, 10] as Vec2, b: [x + 22, 10] as Vec2, z: 14, bridge: 'f' })
+  for (const dx of [-11, 0, 11]) {
+    assert.equal(spanOrder(near(0), far(dx)), 1)
+    assert.equal(spanOrder(far(dx), near(0)), -1)
+  }
+  // Crossing decks, and spans of one deck, are left to depth.
+  assert.equal(spanOrder(near(0), { a: [11, -11], b: [11, 11], z: 21, bridge: 'x' }), 0)
+  assert.equal(spanOrder(near(0), { ...near(22), bridge: 'n' }), 0)
+  // One right over the other: the upper.
+  assert.equal(spanOrder({ ...near(0), z: 21, bridge: 'u' }, near(0)), 1)
+})
+
+test('a main cable hangs between its towers and meets them at the top', () => {
+  const deck = () => 67
+  const towers = [{ s: 340, top: 227 }, { s: 1620, top: 227 }]
+  const z = (s: number) => cableZ(s, 1960, towers, deck)
+  assert.equal(z(340), 227)
+  assert.equal(z(1620), 227)
+  assert.ok(Math.abs(z(980) - (67 + CABLE_CLEARANCE)) < 1e-9)
+  // A parabola: a quarter of the way along the main span, three quarters of the sag remains.
+  assert.ok(Math.abs(z(660) - (227 - (227 - 69) * 0.75)) < 1e-9)
+  // The side spans come down to the anchorages on the deck.
+  assert.equal(z(0), 67 + CABLE_CLEARANCE)
+  assert.ok(z(170) < (227 + 69) / 2)
+})
+
 test('multipolygon fragments assemble into rings', () => {
   const rings = assembleRings([
     [[0, 0], [1, 0]],
@@ -133,8 +218,92 @@ test('render: a flat region renders, paths are well formed', async () => {
   }
 })
 
+test('the lowest parts of a bridge tower reach the ground; its struts do not', async () => {
+  const { buildScene } = await import('../src/scene.ts')
+  const { parseOsm } = await import('../src/osm.ts')
+  const box = (x: number, y: number, w: number) => [{ lat: y, lon: x }, { lat: y, lon: x + w }, { lat: y + w, lon: x + w }, { lat: y + w, lon: x }, { lat: y, lon: x }]
+  const tower = { 'building:part': 'yes', man_made: 'tower', 'tower:type': 'bridge' }
+  const json = JSON.stringify({ elements: [
+    { type: 'way', id: 1, tags: { ...tower, min_height: '21', height: '74' }, geometry: box(0, 0, 0.0001) },
+    { type: 'way', id: 2, tags: { ...tower, min_height: '21', height: '74' }, geometry: box(0.0003, 0, 0.0001) },
+    { type: 'way', id: 3, tags: { ...tower, min_height: '50', height: '52' }, geometry: box(0.0001, 0, 0.0002) },
+  ] })
+  const scene = buildScene({ ...region, snap: false, width: 300, depth: 200 }, parseOsm(json), pal)
+  const base = (id: string) => scene.items.find((i) => i.id === id)!.zMin
+  assert.equal(base('w1'), 0)
+  assert.equal(base('w2'), 0)
+  assert.equal(base('w3'), 50)
+})
+
 test('nonsense numeric tags fall back instead of poisoning heights', () => {
   const h = buildingHeights({ building: 'yes', 'building:min_level': 'federal', 'building:levels': 'two', 'roof:levels': '?' }, 100)
   assert.ok(Number.isFinite(h.base) && Number.isFinite(h.top))
   assert.equal(h.base, 0)
+})
+
+test('render: with terrain, a park drawn around a lake is painted under the lake, not over it', async () => {
+  const { renderSvg } = await import('../src/render.ts')
+  const { buildScene } = await import('../src/scene.ts')
+  const { parseOsm } = await import('../src/osm.ts')
+  const box = (x: number, y: number, s: number) => [{ lat: y, lon: x }, { lat: y, lon: x + s }, { lat: y + s, lon: x + s }, { lat: y + s, lon: x }, { lat: y, lon: x }]
+  const json = JSON.stringify({ elements: [
+    { type: 'way', id: 1, tags: { leisure: 'park' }, geometry: box(-0.002, -0.002, 0.004) },
+    { type: 'way', id: 2, tags: { natural: 'water', water: 'lake' }, geometry: box(-0.0006, -0.0006, 0.0012) },
+  ] })
+  const scene = buildScene({ ...region, snap: false, width: 300, depth: 300, terrain: { cell: 5 } }, parseOsm(json), pal, () => 10)
+  const { svg } = renderSvg(scene)
+  let both = 0
+  for (const g of svg.matchAll(/<g data-strip="[^"]*"[^>]*>(.*?)<\/g>/gs)) {
+    const lawn = g[1].indexOf('class="green"')
+    const lake = g[1].indexOf('class="Lw"')
+    if (lawn < 0 || lake < 0) continue
+    both++
+    assert.ok(lawn < lake, 'the lawn comes first in its strip, and the lake over it')
+  }
+  assert.ok(both > 3)
+})
+
+test('render: with no slab the plate is cut square, on straight lines, over rolling ground', async () => {
+  const { renderSvg } = await import('../src/render.ts')
+  const { buildScene } = await import('../src/scene.ts')
+  const { parseOsm } = await import('../src/osm.ts')
+  const json = JSON.stringify({ elements: [] })
+  // Ground that rolls across the frame, so a draped edge would wander up and down on screen.
+  const scene = buildScene({ ...region, snap: false, width: 300, depth: 200, slab: 0, terrain: { cell: 5 } }, parseOsm(json), pal, (lon) => 10 + 6 * Math.sin(lon * 20000))
+  const { svg } = renderSvg(scene)
+  const ground = svg.match(/<clipPath id="ground"><path d="([^"]*)"/)
+  assert.ok(ground, 'the ground has a clip of its own')
+  // The clip is a rectangle: a move, then runs (the last closes it), each straight across or
+  // straight down.
+  const nums = ground[1].replace(/^M[^l]*l/, '').replace(/z$/, '').match(/-?[\d.]+/g)!.map(Number)
+  assert.equal(nums.length, 6, ground[1])
+  for (let k = 0; k < 6; k += 2) assert.ok(nums[k] === 0 || nums[k + 1] === 0, ground[1])
+  const strips = [...svg.matchAll(/<g data-strip="[^"]*" clip-path="url\(#(\w+)\)"/g)]
+  assert.ok(strips.length > 3)
+  for (const m of strips) assert.equal(m[1], 'ground')
+  assert.ok(!svg.includes('class="edge"'), 'no wandering ink line along the front')
+})
+
+test('close-scale ties lie square to their track on the ground, evenly spaced across a bend', async () => {
+  const { tiesAlong, offsetJoined, TIE } = await import('../src/render.ts')
+  // A track that runs diagonally, then bends.
+  const segs: Vec2[][] = [[[0, 0], [30, 40]], [[30, 40], [30, 90]]]
+  const ties = tiesAlong(segs)
+  assert.ok(ties.length > 100)
+  const unit = (a: Vec2, b: Vec2): Vec2 => { const l = Math.hypot(b[0] - a[0], b[1] - a[1]); return [(b[0] - a[0]) / l, (b[1] - a[1]) / l] }
+  const u0 = unit([0, 0], [30, 40])
+  const first = ties[0]
+  // Its long side (corner 0 to 1) is square to the track, its short side (1 to 2) along it.
+  const long = unit(first[0], first[1])
+  assert.ok(Math.abs(long[0] * u0[0] + long[1] * u0[1]) < 1e-9)
+  assert.ok(Math.abs(Math.hypot(first[1][0] - first[0][0], first[1][1] - first[0][1]) - TIE.length) < 1e-9)
+  assert.ok(Math.abs(Math.hypot(first[2][0] - first[1][0], first[2][1] - first[1][1]) - TIE.width) < 1e-9)
+  // Centers keep the same spacing along the line, across the bend too (measured along the track).
+  const center = (q: Vec2[]): Vec2 => [(q[0][0] + q[2][0]) / 2, (q[0][1] + q[2][1]) / 2]
+  const along = (p: Vec2) => (p[1] <= 40 + 1e-9 && Math.abs(p[0] - 0.75 * p[1]) < 1e-6 ? Math.hypot(p[0], p[1]) : 50 + (p[1] - 40))
+  const ds = ties.map((q) => along(center(q)))
+  for (let i = 1; i < ds.length; i++) assert.ok(Math.abs(ds[i] - ds[i - 1] - TIE.every) < 1e-6, `tie ${i}: ${ds[i] - ds[i - 1]}`)
+  // A running rail offset from the bending line meets itself at the bend.
+  const rail = offsetJoined(segs, 0.72)
+  assert.ok(Math.hypot(rail[0][1][0] - rail[1][0][0], rail[0][1][1] - rail[1][0][1]) < 1e-9)
 })

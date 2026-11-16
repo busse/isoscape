@@ -9,13 +9,15 @@
  * (and any hill there) paints over it, and ground behind it does not.
  */
 
-import { centroid, clipRingToRect, clipSegmentToRect, hash, type Rect, type Ring, type Vec2 } from './geom.ts'
+import { clipRingToRect, pointInPolygon, clipSegmentToRect, hash, type Rect, type Ring, type Vec2 } from './geom.ts'
 import { GROUND_ORDER } from './classify.ts'
 import { paintOrder } from './order.ts'
 import type { Item, Scene, Shape } from './scene.ts'
-import { cellNormal, contours, dampCell, riverFall, type ContourSegment } from './terrain.ts'
+import { contours, nodeShade, riverFall, type ContourSegment } from './terrain.ts'
+import { isoBand, type BandPoint } from './isoband.ts'
 import { COVER_OF, COVER_ORDER, type CoverGroup } from './landcover.ts'
 import { demCredit } from './dem-sources.ts'
+import { mix } from './palette.ts'
 
 const f = (n: number) => (Math.round(n * 10) / 10).toString()
 
@@ -33,24 +35,92 @@ const num = (tenths: number): string => {
 const pair = (a: string, b: string) => (b.startsWith('-') || (b.startsWith('.') && a.includes('.')) ? a + b : `${a} ${b}`)
 
 /**
- * Drop points that lie within `tol` pixels of the line through their neighbors. Draped edges
- * carry a point per grid node; on screen most of them are straight.
+ * The directions from a kept point `a` along which a straight line passes within `tol` of
+ * every point dropped since: a cone, narrowed by each point in turn. Testing a dropped point
+ * against its neighbors alone lets a long, gentle curve drift off by many pixels, and then
+ * the two edges of a draped row no longer meet the rows beside them.
  */
-const simplify = (pts: readonly Vec2[], tol: number): Vec2[] => {
+class Sleeve {
+  a: Vec2 = [0, 0]
+  ref = 0
+  lo = -Infinity
+  hi = Infinity
+  tol: number
+  constructor(tol: number) { this.tol = tol }
+  reset(a: Vec2): void {
+    this.a = a
+    this.lo = -Infinity
+    this.hi = Infinity
+  }
+  private angle(p: Vec2): number {
+    const t = Math.atan2(p[1] - this.a[1], p[0] - this.a[0])
+    if (this.lo === -Infinity && this.hi === Infinity) this.ref = t
+    let d = t - this.ref
+    while (d > Math.PI) d -= 2 * Math.PI
+    while (d <= -Math.PI) d += 2 * Math.PI
+    return d
+  }
+  /** Narrow the cone so the line passes within `tol` of `p`. */
+  add(p: Vec2): void {
+    const r = Math.hypot(p[0] - this.a[0], p[1] - this.a[1])
+    if (r <= this.tol) return
+    const t = this.angle(p)
+    const w = Math.asin(this.tol / r)
+    this.lo = Math.max(this.lo, t - w)
+    this.hi = Math.min(this.hi, t + w)
+  }
+  /** Does the line from `a` to `b` pass within `tol` of every point added? */
+  holds(b: Vec2): boolean {
+    if (this.lo === -Infinity) return true
+    if (this.lo > this.hi) return false
+    const r = Math.hypot(b[0] - this.a[0], b[1] - this.a[1])
+    if (r <= 1e-9) return false
+    const t = this.angle(b)
+    return t >= this.lo && t <= this.hi
+  }
+}
+
+/**
+ * Drop points while the line between the points kept passes within `tol` pixels of every point
+ * dropped. Draped edges carry a point per grid node; on screen most of them are straight.
+ */
+export const simplify = (pts: readonly Vec2[], tol: number): Vec2[] => {
   if (pts.length <= 3) return pts.slice()
   const out: Vec2[] = [pts[0]]
+  const sleeve = new Sleeve(tol)
+  sleeve.reset(pts[0])
   for (let i = 1; i < pts.length - 1; i++) {
-    const a = out[out.length - 1]
-    const p = pts[i]
-    const b = pts[i + 1]
-    const dx = b[0] - a[0]
-    const dy = b[1] - a[1]
-    const len = Math.hypot(dx, dy)
-    const d = len < 1e-9 ? Math.hypot(p[0] - a[0], p[1] - a[1]) : Math.abs(dx * (a[1] - p[1]) - dy * (a[0] - p[0])) / len
-    if (d > tol) out.push(p)
+    sleeve.add(pts[i])
+    if (!sleeve.holds(pts[i + 1])) {
+      out.push(pts[i])
+      sleeve.reset(pts[i])
+    }
   }
   out.push(pts[pts.length - 1])
   return out
+}
+
+/**
+ * Which points to keep when simplifying to within `tol`: like `simplify`, but points marked in
+ * `fixed` are always kept, and points `may` refuses are never kept unless fixed.
+ */
+const keptPoints = (pts: readonly Vec2[], fixed: Uint8Array, tol: number, may: (k: number) => boolean = () => true): Uint8Array => {
+  const keep = new Uint8Array(pts.length)
+  if (pts.length === 0) return keep
+  keep[0] = 1
+  keep[pts.length - 1] = 1
+  const sleeve = new Sleeve(tol)
+  sleeve.reset(pts[0])
+  for (let k = 1; k < pts.length - 1; k++) {
+    if (fixed[k] === 1) { keep[k] = 1; sleeve.reset(pts[k]); continue }
+    if (!may(k)) continue
+    sleeve.add(pts[k])
+    // The next point that may be kept stands in for the line's far end.
+    let n = k + 1
+    while (n < pts.length - 1 && fixed[n] !== 1 && !may(n)) n++
+    if (!sleeve.holds(pts[n])) { keep[k] = 1; sleeve.reset(pts[k]) }
+  }
+  return keep
 }
 
 /** Path data, relative after the first point, in tenths of a unit. */
@@ -113,11 +183,75 @@ const densify = (ring: readonly Vec2[], step: number, closed = true): Vec2[] => 
 /** Layers drawn on the water's surface rather than the ground's. */
 /** Pixels per meter at and above which tracks are drawn with ties and running rails. */
 export const CLOSE_RAIL = 1.5
+/** A tie at close scale, in meters on the ground: across the track, along it, and center to center. */
+export const TIE = { length: 2, width: 0.25, every: 0.67 } as const
+
+/**
+ * Segments offset sideways by k meters (to the right of travel for k > 0), each meeting the
+ * next at a mitered joint where the two connect, so an offset line (a running rail) has no
+ * gap or jog where its center line bends.
+ */
+export const offsetJoined = (segs: readonly (readonly Vec2[])[], k: number): Vec2[][] => {
+  const normal = (a: readonly number[], b: readonly number[]): Vec2 => {
+    const len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
+    return [(b[1] - a[1]) / len, -(b[0] - a[0]) / len]
+  }
+  const joins = (p: readonly number[], q: readonly number[]) => Math.hypot(p[0] - q[0], p[1] - q[1]) < 1e-6
+  const miter = (n: Vec2, m: Vec2): Vec2 => {
+    const x = n[0] + m[0]
+    const y = n[1] + m[1]
+    const d = (x * n[0] + y * n[1]) || 1
+    // A sharp turn would throw the miter far out: past about 120 degrees, keep the plain offset.
+    return d < 0.5 ? n : [x / d, y / d]
+  }
+  return segs.map(([a, b], i) => {
+    const n = normal(a, b)
+    const prev = i > 0 && joins(segs[i - 1][1], a) ? normal(segs[i - 1][0], segs[i - 1][1]) : undefined
+    const next = i + 1 < segs.length && joins(b, segs[i + 1][0]) ? normal(segs[i + 1][0], segs[i + 1][1]) : undefined
+    const na = prev === undefined ? n : miter(n, prev)
+    const nb = next === undefined ? n : miter(n, next)
+    return [[a[0] + na[0] * k, a[1] + na[1] * k], [b[0] + nb[0] * k, b[1] + nb[1] * k]]
+  })
+}
+
+/**
+ * The ties of a track, as ground polygons in view meters: each a TIE.length × TIE.width
+ * rectangle square to the track where it stands, spaced evenly along the whole line (the
+ * spacing carries on across a joint, and starts again only after a break in the line).
+ */
+export const tiesAlong = (segs: readonly (readonly Vec2[])[]): Vec2[][] => {
+  const out: Vec2[][] = []
+  let next = TIE.every / 2
+  let prev: Vec2 | undefined
+  for (const [a, b] of segs) {
+    if (prev === undefined || Math.hypot(a[0] - prev[0], a[1] - prev[1]) > 1e-6) next = TIE.every / 2
+    const len = Math.hypot(b[0] - a[0], b[1] - a[1])
+    prev = b
+    if (len < 1e-9) continue
+    const u: Vec2 = [(b[0] - a[0]) / len, (b[1] - a[1]) / len]
+    const n: Vec2 = [u[1], -u[0]]
+    const hl = TIE.length / 2
+    const hw = TIE.width / 2
+    for (; next <= len; next += TIE.every) {
+      const c: Vec2 = [a[0] + u[0] * next, a[1] + u[1] * next]
+      out.push([
+        [c[0] - n[0] * hl - u[0] * hw, c[1] - n[1] * hl - u[1] * hw],
+        [c[0] + n[0] * hl - u[0] * hw, c[1] + n[1] * hl - u[1] * hw],
+        [c[0] + n[0] * hl + u[0] * hw, c[1] + n[1] * hl + u[1] * hw],
+        [c[0] - n[0] * hl + u[0] * hw, c[1] - n[1] * hl + u[1] * hw],
+      ])
+    }
+    next -= len
+  }
+  return out
+}
 
 const WATERY = new Set(['W', 'canal', 'weir'])
 
 interface Entry { rings: Ring[]; minN: number; maxN: number }
-interface Layer { cls: string; entries: Entry[] }
+/** A ground layer. `small`: its pieces are small enough to lie wholly in a strip's lap, so each
+ * strip paints every piece its lapped band reaches, not only those in the strip itself (ties). */
+interface Layer { cls: string; entries: Entry[]; small?: boolean }
 
 const entryOf = (rings: Ring[]): Entry => {
   let minN = Infinity
@@ -138,7 +272,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   /** Water lies on the river's surface, wherever its outline reaches. */
   const drapeWater = (pt: Vec2) => P(pt, T.waterZ(pt))
 
-  const items = paintOrder(scene.items)
+  const items = paintOrder(scene.items, 96, scene.cut !== undefined)
   const close = view.scale >= CLOSE_RAIL
 
   // ---- the frame on screen -------------------------------------------------------------------
@@ -152,7 +286,15 @@ export const renderSvg = (scene: Scene): Rendered => {
   // One bad coordinate must not take the whole frame with it: skip anything not finite.
   for (const it of items) for (const s of it.shapes) for (const pt of s.pts) if (pt[1] < top) top = pt[1]
   for (let n = fr.minY; n <= fr.maxY + 1e-6; n += c) for (const e of xs) { const y = drape([e, n])[1]; if (y < top) top = y }
-  const bottom = P([0, fr.minY], -slab)[1]
+  // With no slab the plate is cut square: the ground ends on straight lines, below the lowest
+  // point of its far edge and above the highest of its near edge (the frame's sides are already
+  // straight on screen), and standing things are cut along that near line. A draped edge would
+  // wander up and down with the ground.
+  const square = slab <= 0
+  const groundTop = Math.max(...xs.map((e) => drape([e, fr.maxY])[1]))
+  const groundBottom = Math.min(...front.map((pt) => pt[1]))
+  if (square && groundTop < top) top = groundTop
+  const bottom = square ? groundBottom : P([0, fr.minY], -slab)[1]
   const pad = 24
   // A dated scene carries its year as a caption above the plate, in room of its own.
   const capSize = scene.time === undefined ? 0 : Math.max(28, (x1 - x0) * 0.022)
@@ -172,10 +314,11 @@ export const renderSvg = (scene: Scene): Rendered => {
     ...Object.entries(p.cover).map(([g, color]) => sealed(`cv-${g}`, color)), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
     sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('plan', p.plan), sealed('grounds', p.grounds), sealed('racetrack', p.racetrack), sealed('burned', p.burned), sealed('platform', p.platform), sealed('canal', p.water), sealed('path', p.path),
     sealed('road', p.road), sealed('rail', scene.boldRail ? p.railTie : p.rail), sealed('tram', p.tram), sealed('weir', p.foam),
-    // At close scale (CLOSE_RAIL px per meter or more) a track shows its ties, about 0.25 m
-    // wide every 0.67 m across 2 m of the ribbon, and its two running rails, 1.44 m apart.
+    // At close scale (CLOSE_RAIL px per meter or more) a track shows its ties, each a
+    // rectangle on the ground square to the track (TIE: 2 m by 0.25 m, every 0.67 m, painted in
+    // the strips like the rest of the ground), and its two running rails, 1.44 m apart.
     close
-      ? `.ties{fill:none;stroke:${p.railTie};stroke-width:${f(view.scale * 2 * view.squash)};stroke-dasharray:${f(view.scale * 0.25)} ${f(view.scale * 0.42)};stroke-opacity:.75}.steel{fill:none;stroke:${p.railSteel};stroke-width:${f(Math.max(p.groundLineWidth, view.scale * 0.12))}}`
+      ? `.tie{fill:${mix(p.rail, p.railTie, 0.75)}}.steel{fill:none;stroke:${p.railSteel};stroke-width:${f(Math.max(p.groundLineWidth, view.scale * 0.12))};stroke-linecap:round}`
       : `.ties{fill:none;stroke:${p.railTie};stroke-width:${p.groundLineWidth * 2};stroke-dasharray:1 2.2}`,
     `.crest{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:.6}`,
     `.cm{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:${p.contourMinor}}`,
@@ -184,8 +327,10 @@ export const renderSvg = (scene: Scene): Rendered => {
     `.froth{fill:${p.foam}}`,
     `.boulder{fill:${p.boulder};stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:.7;stroke-linejoin:round}`,
     `.edge{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth}}`,
-    // Hillshade levels: hp1… lit, hm1… shaded.
-    ...Array.from({ length: 12 }, (_, k) => `.hp${k + 1}{fill:${p.shadeLight};fill-opacity:${Math.min(0.55, (k + 1) * 0.045).toFixed(3)}}.hm${k + 1}{fill:${p.shadeDark};fill-opacity:${Math.min(0.55, (k + 1) * 0.04).toFixed(3)}}`),
+    // Hillshade bands: hp1… lit, hm1… shaded. The bands nest (each lies inside the one before),
+    // so each class carries only what its band adds to the one below it.
+    ...(T.flat ? [] : shadeAlphas(p.shadeLightStep, p.shadeMax).map((a, k) => `.hp${k + 1}{fill:${p.shadeLight};fill-opacity:${a.toFixed(4)}}`)),
+    ...(T.flat ? [] : shadeAlphas(p.shadeDarkStep, p.shadeMax).map((a, k) => `.hm${k + 1}{fill:${p.shadeDark};fill-opacity:${a.toFixed(4)}}`)),
     `</style>`,
     `<rect x="${f(vb[0])}" y="${f(vb[1])}" width="${f(vb[2])}" height="${f(vb[3])}" fill="${p.sky}"/>`,
   )
@@ -222,8 +367,29 @@ export const renderSvg = (scene: Scene): Rendered => {
   }
   const cover = scene.ground.filter((g) => GROUND_ORDER.includes(g.kind))
   // Cover that sits in the river (vegetation on its islands and rocks) paints over the water;
-  // everything else paints under it, so a park drawn across the river is covered by it.
-  const inRiver = (g: (typeof cover)[number]) => wetAt(centroid(g.rings[0]))
+  // everything else paints under it, so a park drawn across the river is covered by it. In
+  // the river means mostly over water, judged on up to about 400 points spread over it: a
+  // park round a pond can have its middle in the pond.
+  const inRiver = (g: (typeof cover)[number]): boolean => {
+    let minX = Infinity
+    let maxX = -Infinity
+    let minY = Infinity
+    let maxY = -Infinity
+    for (const r of g.rings) for (const [x, y] of r) { minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y) }
+    const step = Math.max(c, Math.sqrt(((maxX - minX) * (maxY - minY)) / 400))
+    let inside = 0
+    let wet = 0
+    for (let y = minY + step / 2; y < maxY; y += step) {
+      for (let x = minX + step / 2; x < maxX; x += step) {
+        if (!pointInPolygon([x, y], g.rings)) continue
+        inside++
+        if (wetAt([x, y])) wet++
+      }
+    }
+    // Smaller than a cell: its middle decides.
+    if (inside === 0) return wetAt([(minX + maxX) / 2, (minY + maxY) / 2])
+    return wet * 2 > inside
+  }
   const coverLayers = (after: boolean): Layer[] =>
     GROUND_ORDER.map((kind) => ({
       cls: kind,
@@ -233,8 +399,10 @@ export const renderSvg = (scene: Scene): Rendered => {
     cls: kind,
     entries: scene.ribbons.filter((rb) => rb.kind === kind).flatMap((rb) => rb.quads.map((q) => entryOf([q]))),
   })
+  // Cover on land paints under the water: with terrain, the water comes from the grid and is
+  // painted first in each strip, so this cover goes in ahead of it (see paintStrip).
+  const underWater: Layer[] = coverLayers(false)
   const layers: Layer[] = [
-    ...coverLayers(false),
     // OSM's water outline draws a flat scene's shore; with terrain the water grid does.
     { cls: 'W', entries: T.flat ? water.map((g) => entryOf(g.rings)) : [] },
     { cls: 'I', entries: T.flat ? islands.map((g) => entryOf(g.rings)) : [] },
@@ -245,6 +413,9 @@ export const renderSvg = (scene: Scene): Rendered => {
     ribbonLayer('racetrack'),
     ribbonLayer('road'),
     ribbonLayer('rail'),
+    // Close up, the ties lie on the ballast as ground polygons (opaque: two strips paint the
+    // ground where they lap, and a see-through tie would come out darker there).
+    { cls: 'tie', small: true, entries: close ? tiesAlong(scene.ribbons.filter((rb) => rb.kind === 'rail').flatMap((rb) => rb.center)).map((q) => entryOf([q])) : [] },
     ribbonLayer('tram'),
   ]
   const lineLayer = (kind: string, cls: string) => ({
@@ -252,14 +423,9 @@ export const renderSvg = (scene: Scene): Rendered => {
     segs: scene.ribbons.filter((rb) => rb.kind === kind).flatMap((rb) => rb.center),
   })
   const railCenters = lineLayer('rail', 'ties').segs
-  const gauge = (k: number): Vec2[][] => railCenters.map(([a, b]) => {
-    const len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
-    const nx = ((b[1] - a[1]) / len) * k
-    const ny = (-(b[0] - a[0]) / len) * k
-    return [[a[0] + nx, a[1] + ny], [b[0] + nx, b[1] + ny]]
-  })
+  const gauge = (k: number): Vec2[][] => offsetJoined(railCenters, k)
   const lineLayers = [
-    lineLayer('rail', 'ties'),
+    ...(close ? [] : [lineLayer('rail', 'ties')]),
     ...(close ? [{ cls: 'steel', segs: [...gauge(0.72), ...gauge(-0.72)] }] : []),
     lineLayer('weir', 'crest'),
   ]
@@ -293,6 +459,11 @@ export const renderSvg = (scene: Scene): Rendered => {
   // Light from the left and a little toward the camera, so the slopes we look at are lit and
   // the backs of hills fall into shade.
   const light = normalize([-0.85, -0.35, 1.0])
+  // The shade field, in steps (one step is 1/22 of light · normal), at every node. Toward the
+  // water it is held down so that every band ends at the traced shoreline, where the water's
+  // smoothed mask reaches one half: the river's surface is not shaded.
+  const litField = new Float32Array(T.elev.length)
+  const darkField = new Float32Array(T.elev.length)
   const wetCorners = (i: number, j: number) =>
     T.water[j * T.nx + i] + T.water[j * T.nx + i + 1] + T.water[(j + 1) * T.nx + i] + T.water[(j + 1) * T.nx + i + 1]
   /**
@@ -374,6 +545,91 @@ export const renderSvg = (scene: Scene): Rendered => {
     return out.length >= 3 ? out : null
   }
 
+  if (!T.flat) {
+    const shade = nodeShade(T, light)
+    for (let k = 0; k < shade.length; k++) {
+      const level = shade[k] * SHADE_GAIN * (opts.shade ?? 1)
+      const shore = SHORE_CAP * (1 - 2 * wetness[k])
+      litField[k] = Math.min(level, shore)
+      darkField[k] = Math.min(-level, shore)
+    }
+  }
+  // Each strip's shading reaches this far past its far edge, and stops this far short of its
+  // near edge: as far as the next strip's ground layers lap back over it (0.6 m), plus their
+  // sealing strokes. Those laps then fall under the shading of the strip that drew them, and
+  // ground the laps do not cover is shaded once, by that same strip.
+  const shadeLap = 0.6 + 0.6 / (view.scale * view.squash)
+  const nodes = iMax - iMin + 1
+  /** The shade fields along view-meter line n, interpolated between grid rows. */
+  const fieldRow = (field: Float32Array, n: number, into: Float32Array, at: number) => {
+    const g = (n - T.y0) / c
+    const j = Math.min(T.ny - 2, Math.floor(g + 1e-9))
+    const u = Math.max(0, g - j)
+    for (let i = 0; i < nodes; i++) {
+      const lo = field[j * T.nx + iMin + i]
+      into[at + i] = u < 1e-9 ? lo : lo + (field[(j + 1) * T.nx + iMin + i] - lo) * u
+    }
+  }
+  // Along each row line, which nodes survive simplification of the draped line as a whole. A
+  // band edge running along a strip's boundary keeps exactly these nodes (and its own
+  // crossings), so the strips on either side draw the same line and meet without a hairline.
+  const rowKeep = new Map<number, Uint8Array>()
+  const keepOnRow = (n: number): Uint8Array => {
+    let keep = rowKeep.get(n)
+    if (keep === undefined) {
+      const pts: Vec2[] = []
+      for (let i = iMin; i <= iMax; i++) pts.push(drape([nodeX(i), n]))
+      keep = keptPoints(pts, new Uint8Array(pts.length), 0.25)
+      rowKeep.set(n, keep)
+    }
+    return keep
+  }
+  /** A ring from `isoBand` over a strip's rows (`ys`, view meters), as draped path data. */
+  const bandPath = (input: readonly BandPoint[], ys: readonly number[]): string => {
+    const yOf = (lj: number) => {
+      const r = Math.min(ys.length - 2, Math.floor(lj))
+      return ys[r] + (ys[r + 1] - ys[r]) * (lj - r)
+    }
+    // A node on a boundary line that the line's own simplification dropped may not be kept.
+    // Start the ring at a point that may, and close it on that point again, so simplification
+    // never has to keep one.
+    const rowNode = (q: BandPoint) => q.onRow && q.i === Math.floor(q.i)
+    const may = (q: BandPoint) => !rowNode(q) || keepOnRow(ys[q.j])[q.i] === 1
+    const s0 = Math.max(0, input.findIndex(may))
+    const ring = [...input.slice(s0), ...input.slice(0, s0), input[s0]]
+    const pts: Vec2[] = []
+    const fixed = new Uint8Array(ring.length)
+    ring.forEach((q, k) => {
+      const i = Math.floor(q.i)
+      const x = q.i === i ? nodeX(iMin + i) : nodeX(iMin + i) + (nodeX(iMin + i + 1) - nodeX(iMin + i)) * (q.i - i)
+      pts.push(drape([x, yOf(q.j)]))
+      if (q.onRow && may(q)) fixed[k] = 1
+    })
+    const keep = keptPoints(pts, fixed, 0.5, (k) => may(ring[k]))
+    return pathOf(pts.filter((_, k) => keep[k] === 1 && k < pts.length - 1))
+  }
+  /** A strip's hillshade: nested bands, lit and shaded, one path per band. */
+  const shadeStrip = (s: Strip): string => {
+    const lo = s.n0 > fr.minY ? s.n0 + shadeLap : s.n0
+    const hi = s.n1 < fr.maxY ? s.n1 + shadeLap : s.n1
+    const ys = [lo]
+    for (let j = Math.floor((lo - T.y0) / c) + 1; T.y0 + j * c < hi - 1e-6; j++) if (T.y0 + j * c > lo + 1e-6) ys.push(T.y0 + j * c)
+    ys.push(hi)
+    let out = ''
+    for (const [field, cls] of [[litField, 'hp'], [darkField, 'hm']] as const) {
+      const local = new Float32Array(ys.length * nodes)
+      ys.forEach((n, r) => fieldRow(field, n, local, r * nodes))
+      let top = -Infinity
+      for (const v of local) top = Math.max(top, v)
+      for (let m = 1; m <= SHADE_BANDS && bandThreshold(m) <= top; m++) {
+        let d = ''
+        for (const ring of isoBand(local, nodes, 0, nodes - 1, 0, ys.length - 1, bandThreshold(m))) d += bandPath(ring, ys)
+        if (d) out += `<path class="${cls}${m}" d="${d}"/>`
+      }
+    }
+    return out
+  }
+
   const paintStrip = (s: Strip) => {
     // Strips overlap their neighbors so no background shows between them, and no two edges
     // may coincide: where two anti-aliased edges land on the same pixel row, a browser
@@ -396,14 +652,37 @@ export const renderSvg = (scene: Scene): Rendered => {
     const groundFar = 0
     const band: Rect = { minX: fr.minX, maxX: fr.maxX, minY: s.n0 - lapNear, maxY: s.n1 + lapFar }
     const parts: string[] = []
+    // The rows the strip's ground covers: its own, and those its lap toward the camera falls
+    // in, each cut to the part the strip paints. Each keeps its own cells: a lap drawn by
+    // stretching the strip's first row over the next strip's ground put that row's shore
+    // there, out of step with the next strip's, and the shore showed a saw's teeth.
+    const lapTo = s.n0 - lapNear
+    const rows: { j: number; lo: number; hi: number; yLo: number; top: boolean }[] = []
+    for (let j = Math.max(0, Math.floor((lapTo - T.y0) / c + 1e-9)); j < s.j1; j++) {
+      const lo = T.y0 + j * c
+      const hi = T.y0 + (j + 1) * c
+      if (hi <= lapTo) continue
+      const top = j === s.j1 - 1
+      rows.push({ j, lo, hi, yLo: Math.max(lapTo, lo - rowLap), top })
+    }
+    /** Cell (i, j)'s part of `field` at one half, traced in the cell and cut to [yLo, yHi]. */
+    const tracedIn = (field: Float32Array, i: number, r: (typeof rows)[number], yLo: number, yHi: number): Vec2[] | null => {
+      const poly = traceCell(field, i, r.j, r.lo, r.hi)
+      if (poly === null || (yLo <= r.lo && yHi >= r.hi)) return poly
+      const cut = clipRingToRect(poly, { minX: -Infinity, maxX: Infinity, minY: yLo, maxY: yHi })
+      return cut.length >= 3 ? cut : null
+    }
     // The strip's base: its own surface, cell row by cell row, colored water where the grid
     // is water and land elsewhere. It hides what lies behind a rise, and because it already
     // matches what is drawn on it, no seam can leak a wrong color through.
     let landBase = ''
     let waterBase = ''
-    for (let j = s.j0; j < s.j1; j++) {
-      const yLo = j === s.j0 ? s.n0 - lapNear : T.y0 + j * c - rowLap
-      const yHi = j === s.j1 - 1 ? s.n1 - baseInset : T.y0 + (j + 1) * c
+    for (const r of rows) {
+      const j = r.j
+      const yLo = r.yLo
+      const yHi = r.top ? s.n1 - baseInset : r.hi
+      // Water reaches the far edge, over the cover painted under it (see underWater).
+      const yWet = r.top ? s.n1 : yHi
       let start = iMin
       let wet = baseWet(start, j)
       for (let i = iMin + 1; i <= iMax; i++) {
@@ -413,7 +692,7 @@ export const renderSvg = (scene: Scene): Rendered => {
         const bottom: Vec2[] = []
         const lay = wet ? drapeWater : drape
         for (let k = start; k <= i; k++) {
-          top.push(lay([nodeX(k), yHi]))
+          top.push(lay([nodeX(k), wet ? yWet : yHi]))
           bottom.push(lay([nodeX(k), yLo]))
         }
         // Wound like the traced cells (along the near edge first), so overlaps add, not cancel.
@@ -428,9 +707,10 @@ export const renderSvg = (scene: Scene): Rendered => {
     // Land cover over the bare ground: whole cells merged into runs, edges traced through.
     for (const [g, field] of coverFields) {
       let d = ''
-      for (let j = s.j0; j < s.j1; j++) {
-        const yLo = j === s.j0 ? s.n0 - lapNear : T.y0 + j * c - rowLap
-        const yHi = j === s.j1 - 1 ? s.n1 + groundFar : T.y0 + (j + 1) * c
+      for (const r of rows) {
+        const j = r.j
+        const yLo = r.yLo
+        const yHi = r.top ? s.n1 + groundFar : r.hi
         let runStart = -1
         const full = (i: number) => field[j * T.nx + i] >= 0.5 && field[j * T.nx + i + 1] >= 0.5 && field[(j + 1) * T.nx + i] >= 0.5 && field[(j + 1) * T.nx + i + 1] >= 0.5
         const flushRun = (iEnd: number) => {
@@ -450,41 +730,57 @@ export const renderSvg = (scene: Scene): Rendered => {
             continue
           }
           flushRun(i)
-          const poly = traceCell(field, i, j, yLo, yHi)
+          const poly = tracedIn(field, i, r, Math.max(lapTo, r.lo), yHi)
           if (poly !== null) d += groundPath(poly.map(drape))
         }
         flushRun(iMax)
       }
       if (d) parts.push(`<path class="cv-${g}" d="${d}"/>`)
     }
+    const paintLayers = (list: readonly Layer[], band: Rect) => {
+      // Small pieces (ties) reach 0.25 m past the far lap: the ground lapped over them there has
+      // its edge draped between its own points, and a tie cut on that same line showed a sliver
+      // of the one beneath; reaching past it, the strip paints the tie over its own lap's edge.
+      const smallBand: Rect = { ...band, maxY: band.maxY + (s.n1 < fr.maxY ? 0.25 : 0) }
+      for (const layer of list) {
+        let d = ''
+        for (const e of layer.entries) {
+          if (layer.small === true ? e.maxN < smallBand.minY || e.minN > smallBand.maxY : e.maxN < s.n0 || e.minN > s.n1) continue
+          for (const ring of e.rings) {
+            const clipped = clipRingToRect(ring, layer.small === true ? smallBand : band)
+            if (clipped.length < 3) continue
+            // Small pieces keep every corner: simplified, a sliver of a tie cut at the strip's
+            // edge could lose one and show as a thin wedge.
+            d += layer.small === true ? pathOf(clipped.map(drape)) : groundPath(densify(clipped, c).map(WATERY.has(layer.cls) ? drapeWater : drape))
+          }
+        }
+        if (d) parts.push(`<path class="${layer.cls}" d="${d}"/>`)
+      }
+    }
+    // Parks, woods and the like that are not in the water go under it: a park drawn across a
+    // lake (Central Park around the Lake) must not paint the lake over as lawn.
+    // It stops a little short of the strip's far edge, where this strip's water reaches: the
+    // strip before has lapped its own cover over that much, so on land nothing shows.
+    paintLayers(underWater, { ...band, maxY: s.n1 - Math.min(0.3, baseInset / 2) })
     if (waterBase) parts.push(`<path class="Lw" d="${waterBase}"/>`)
     // With terrain, the water's edge comes from the lidar-corrected water grid, not from OSM's
-    // outline: the two disagree by meters, and on a steep bank meters become cliffs.
+    // outline: the two disagree by meters, and on a steep bank meters become cliffs. A cell
+    // part water and part land is draped on the ground, so the water meets the bank at the
+    // bank's own height: draped at the river's level it stood below the bank beside it, and
+    // the bank of the next strip, painted later, overhung it in a tooth at every strip line.
     if (!T.flat) {
       let shore = ''
-      for (let j = s.j0; j < s.j1; j++) {
-        const yLo = j === s.j0 ? s.n0 - lapNear : T.y0 + j * c
-        const yHi = j === s.j1 - 1 ? s.n1 + groundFar : T.y0 + (j + 1) * c
+      for (const r of rows) {
+        const yHi = r.top ? s.n1 + groundFar : r.hi
         for (let i = iMin; i < iMax; i++) {
-          if (wetCorners(i, j) === 4) continue
-          const poly = traceCell(wetness, i, j, yLo, yHi)
-          if (poly !== null) shore += groundPath(poly.map(drapeWater))
+          if (wetCorners(i, r.j) === 4) continue
+          const poly = tracedIn(wetness, i, r, Math.max(lapTo, r.lo), yHi)
+          if (poly !== null) shore += groundPath(poly.map(drape))
         }
       }
       if (shore) parts.push(`<path class="W" d="${shore}"/>`)
     }
-    for (const layer of layers) {
-      let d = ''
-      for (const e of layer.entries) {
-        if (e.maxN < s.n0 || e.minN > s.n1) continue
-        for (const ring of e.rings) {
-          const clipped = clipRingToRect(ring, band)
-          if (clipped.length < 3) continue
-          d += groundPath(densify(clipped, c).map(WATERY.has(layer.cls) ? drapeWater : drape))
-        }
-      }
-      if (d) parts.push(`<path class="${layer.cls}" d="${d}"/>`)
-    }
+    paintLayers(layers, band)
     for (const ll of lineLayers) {
       let d = ''
       for (const [a, b] of ll.segs) {
@@ -495,45 +791,17 @@ export const renderSvg = (scene: Scene): Rendered => {
       if (d) parts.push(`<path class="${ll.cls}" d="${d}"/>`)
     }
     if (!T.flat) {
-      // Hillshade: runs of cells along each row that share a shade level, washed light or dark.
-      const flatShade = light[2]
-      // One path per shade level per strip: runs of a level share a class.
-      const shades = new Map<number, string>()
-      for (let j = s.j0; j < s.j1; j++) {
-        let runStart = -1
-        let runLevel = 0
-        const emit = (iEnd: number) => {
-          if (runStart < 0 || runLevel === 0) return
-          const topEdge: Vec2[] = []
-          const bottomEdge: Vec2[] = []
-          for (let i = runStart; i <= iEnd; i++) {
-            topEdge.push(drape([nodeX(i), T.y0 + (j + 1) * c]))
-            bottomEdge.push(drape([nodeX(i), T.y0 + j * c]))
-          }
-          shades.set(runLevel, (shades.get(runLevel) ?? '') + groundPath([...topEdge, ...bottomEdge.reverse()]))
-        }
-        for (let i = iMin; i < iMax; i++) {
-          let level = 0
-          if (!dampCell(T, i, j)) {
-            const n = cellNormal(T, i, j)
-            const shade = n[0] * light[0] + n[1] * light[1] + n[2] * light[2]
-            level = Math.max(-12, Math.min(12, Math.round((shade - flatShade) * 22)))
-          }
-          if (level !== runLevel) {
-            emit(i)
-            runStart = i
-            runLevel = level
-          }
-        }
-        emit(iMax)
-      }
-      for (const [level, d] of [...shades].sort((a, b) => a[0] - b[0])) parts.push(`<path class="h${level < 0 ? 'm' : 'p'}${Math.abs(level)}" d="${d}"/>`)
-      // Contours.
+      // Hillshade: nested iso-bands of the shade field, traced across the strip.
+      const shading = shadeStrip(s)
+      if (shading) parts.push(shading)
+      // Contours, over the same stretch as the shading: the next strip's ground laps back over
+      // this one's near edge, so that strip draws the lines there, and they are not cut.
       let minor = ''
       let major = ''
-      for (let j = s.j0; j < s.j1; j++) {
+      const lineBand: Rect = { ...band, minY: s.n0 > fr.minY ? s.n0 + shadeLap : s.n0, maxY: s.n1 < fr.maxY ? s.n1 + shadeLap : s.n1 }
+      for (let j = s.j0; j <= s.j1; j++) {
         for (const seg of contoursByRow.get(j) ?? []) {
-          const clipped = clipSegmentToRect(seg.a, seg.b, band)
+          const clipped = clipSegmentToRect(seg.a, seg.b, lineBand)
           if (clipped === null) continue
           const d = pathOf(clipped.map(drape), false)
           if (seg.major) major += d
@@ -598,12 +866,17 @@ export const renderSvg = (scene: Scene): Rendered => {
       if (foam) parts.push(`<path class="foam" d="${foam}"/>`)
     }
     // Ground that faces away from the camera can project below the front edge; cut it there.
-    out.push(`<g data-strip="${f(s.n0)}" clip-path="url(#above)">${parts.join('')}</g>`)
+    out.push(`<g data-strip="${f(s.n0)}" clip-path="url(#${square ? 'ground' : 'above'})">${parts.join('')}</g>`)
   }
 
   // ---- items, slotted between strips ---------------------------------------------------------------
   // Standing things are cut at the plate's sides and along the front ground line.
-  out.push(`<defs><clipPath id="above"><path d="${pathOf([[x0, vb[1]], [x1, vb[1]], ...front.slice().reverse()])}"/></clipPath></defs>`)
+  out.push(
+    square
+      ? `<defs><clipPath id="above"><path d="${pathOf([[x0, vb[1]], [x1, vb[1]], [x1, groundBottom], [x0, groundBottom]])}"/></clipPath>` +
+          `<clipPath id="ground"><path d="${pathOf([[x0, groundTop], [x1, groundTop], [x1, groundBottom], [x0, groundBottom]])}"/></clipPath></defs>`
+      : `<defs><clipPath id="above"><path d="${pathOf([[x0, vb[1]], [x1, vb[1]], ...front.slice().reverse()])}"/></clipPath></defs>`,
+  )
   let next = 0
   const flushTo = (nearN: number) => {
     while (next < strips.length && strips[next].n1 > nearN + 1e-6) paintStrip(strips[next++])
@@ -614,8 +887,8 @@ export const renderSvg = (scene: Scene): Rendered => {
     out.push(`<g clip-path="url(#above)">${paintItem(it)}</g>`)
   }
   flushTo(-Infinity)
-  // A crisp ink line along the front ground.
-  out.push(`<path class="edge" d="${pathOf(front, false)}"/>`)
+  // A crisp ink line along the front ground (a square plate ends in its ground's color alone).
+  if (!square) out.push(`<path class="edge" d="${pathOf(front, false)}"/>`)
   // Labels over everything, haloed in the land color so they read across lines and roofs.
   if (scene.labels !== undefined) {
     const size = Math.max(14, capSize * 0.42)
@@ -643,6 +916,30 @@ export const renderSvg = (scene: Scene): Rendered => {
   return { svg: out.join('\n'), viewBox: vb, stats }
 }
 
+/** Hillshade: steps per unit of light · normal, and nested bands per step on each side. */
+const SHADE_GAIN = 22
+const SHADE_SUBSTEPS = 2
+const SHADE_STEPS = 12
+const SHADE_BANDS = SHADE_STEPS * SHADE_SUBSTEPS
+/** How far above any band the shoreline cap starts, in steps. */
+const SHORE_CAP = 100
+/** Band m covers the ground at least this many steps lit (or shaded). */
+const bandThreshold = (m: number) => (m - 0.5) / SHADE_SUBSTEPS
+/**
+ * Each nested band's own opacity, so that ground inside band m shows the wash at
+ * min(max, step · m / substeps), as a single flat wash at that opacity would.
+ */
+export const shadeAlphas = (step: number, max: number): number[] => {
+  const out: number[] = []
+  let below = 0
+  for (let m = 1; m <= SHADE_BANDS; m++) {
+    const total = Math.min(max, (step * m) / SHADE_SUBSTEPS)
+    out.push(1 - (1 - total) / (1 - below))
+    below = total
+  }
+  return out
+}
+
 const normalize = (v: [number, number, number]): [number, number, number] => {
   const l = Math.hypot(...v)
   return [v[0] / l, v[1] / l, v[2] / l]
@@ -659,6 +956,7 @@ const paintItem = (it: Item): string => {
 }
 
 const paint = (s: Shape): string => {
+  if (s.line && s.stroke !== undefined) return `<path fill="none" stroke="${s.stroke.color}" stroke-width="${f(s.stroke.width)}" stroke-dasharray="${s.stroke.dash.map(f).join(' ')}" d="${pathOf(s.pts, false)}"/>`
   if (s.line) return `<path class="${s.dash ? 'td' : 'i'}" d="${pathOf(s.pts, false)}"/>`
   if (s.seal) return `<path fill="${s.fill}" stroke="${s.fill}" stroke-width="0.5" stroke-linejoin="round" d="${pathOf(s.pts)}"/>`
   return `<path${s.ink ? ' class="i"' : ''} fill="${s.fill}" d="${pathOf(s.pts)}"/>`

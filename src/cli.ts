@@ -9,14 +9,17 @@ import { DEM_SOURCES } from './dem-sources.ts'
 import { fetchFootprints, loadFootprints } from './footprints.ts'
 import { coverSampler, fetchLandcover, loadLandcover } from './landcover.ts'
 import { renderExplorer } from './explorer.ts'
+import { TRAVELER_HEIGHT, travelerShapes } from './traveler.ts'
 import { fetchOsm, overpassQuery, parseOsm } from './osm.ts'
 import { loadPages } from './pages.ts'
 import { palette } from './palette.ts'
 import { fetchBounds, loadRegion, type Region } from './region.ts'
 import { renderPage, renderSvg } from './render.ts'
 import { buildScene, type TimeContext } from './scene.ts'
+import { anchorOf, renderSection, sectionRegion } from './section.ts'
 import { loadSiteConfig, writeSocial } from './social.ts'
-import { dateBuildings, fetchYearBuilt, loadHistory, parseParcels, type History } from './history.ts'
+import { pageDates, planStatic, plainLinks, writeStatic } from './static-pages.ts'
+import { dateBuildings, fetchYearBuilt, loadHistory, loadYearBuilt, yearBuiltDirs, type History, type Parcel } from './history.ts'
 import type { PolygonFeature } from './osm.ts'
 
 const run = promisify(execFile)
@@ -91,13 +94,9 @@ const loadInputs = async (name: string) => {
   let dates: TimeContext['dates'] = new Map()
   if (region.time !== undefined) {
     history = await loadHistory(resolve(region.time.history))
-    let parcels: ReturnType<typeof parseParcels> = []
+    let parcels: Parcel[] = []
     if (region.time.yearBuilt !== undefined) {
-      try {
-        parcels = parseParcels(await readFile(resolve(dataDir(region), 'yearbuilt.json'), 'utf8'), region.time.yearBuilt.field)
-      } catch {
-        console.error(`no year-built data for "${name}"; run: isoscape fetch ${name} --extras-only`)
-      }
+      parcels = (await loadYearBuilt(yearBuiltDirs(region, resolve('data')), region.time.yearBuilt.field, name)).parcels
     }
     dates = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates)
   }
@@ -111,8 +110,8 @@ let streetcarScale: number | undefined
 /** `--rail-scale`: likewise for railroad track. */
 let railScale: number | undefined
 
-const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number) => {
-  const extra = { ...inp.extra }
+const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number, section = false) => {
+  const extra: Parameters<typeof buildScene>[4] = { ...inp.extra, ...(section ? { section: true } : {}) }
   if (inp.history !== null) {
     const y = year ?? inp.history.present
     const epoch = inp.history.epochs.find((e) => e.year === y)
@@ -257,9 +256,16 @@ const writeExplorer = async (outDir: string, siteUrl?: string, verbose = false):
   const config = await loadSiteConfig(siteUrl)
   const pages = loadPages(undefined, config.siteUrl)
   await mkdir(outDir, { recursive: true })
-  const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined)
-  await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, pages, { ...site, ...(config.shop ? { shop: config.shop } : {}), ...(config.home ? { home: config.home } : {}), ...(config.latestPages === false ? { latestPages: false } : {}), ...(config.analytics ? { analytics: config.analytics } : {}) }))
+  // Static pages for search engines (static-pages.ts); the share pages name them as canonical.
+  const plan = planStatic(builds, pages.map((p) => p.slug), config.home)
+  const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined, (t) => ('build' in t ? plan.forBuild(t.build) : plan.forPage(t.page)))
+  const statics = await writeStatic(outDir, builds, plan, config, { dates: await pageDates(pages) })
+  await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, pages, {
+    ...site, ...(config.shop ? { shop: config.shop } : {}), ...(config.home ? { home: config.home } : {}), ...(config.latestPages === false ? { latestPages: false } : {}), ...(config.analytics ? { analytics: config.analytics } : {}),
+    plain: plainLinks(plan, pages, config.home), sitemap: config.siteUrl !== undefined,
+  }))
   if (verbose) {
+    console.error(`wrote ${statics.files.filter((f) => f.endsWith('.html')).length} static pages in ${resolve(outDir, 'p')}/ and ${resolve(outDir, 'm')}/ (${(statics.bytes / 1e6).toFixed(2)} MB)${config.siteUrl === undefined ? '' : ', and sitemap.xml'}`)
     if (site.rendered > 0) console.error(`rendered ${site.rendered} social preview image${site.rendered === 1 ? '' : 's'}`)
     if (site.missing > 0) console.error(`${site.missing} build${site.missing === 1 ? ' has' : 's have'} no social image (no rsvg-convert or Chrome found); their previews use the thumbnail`)
     console.error(`wrote ${builds.length + pages.length} share pages in ${resolve(outDir, 's')}/`)
@@ -281,6 +287,19 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
   const base = resolve(outDir, `${name}${suffix}`)
   await writeFile(`${base}.svg`, rendered.svg)
   await writeFile(`${base}.html`, renderPage(scene, rendered))
+  if (scene.region.cutaway !== undefined) {
+    // Where each modeled part is drawn, for the callouts of a sheet; and the flat section.
+    const anchors: Record<string, [number, number, number, number]> = {}
+    for (const it of scene.items) if (it.id.startsWith('history:') || it.id.startsWith('traveler:')) anchorOf(anchors, it)
+    await writeFile(`${base}.anchors.json`, JSON.stringify({ viewBox: rendered.viewBox, anchors }) + '\n')
+    if (scene.region.cutaway.section !== undefined) {
+      const sec = sceneOf({ ...inp, region: sectionRegion(scene.region) }, values.palette, year, previous, true)
+      const drawn = renderSection(sec, scene.region.cutaway)
+      await writeFile(`${base}-section.svg`, drawn.svg)
+      await writeFile(`${base}-section.anchors.json`, JSON.stringify({ viewBox: drawn.viewBox, frame: drawn.frame, anchors: drawn.anchors, traveler: { height: TRAVELER_HEIGHT, shapes: travelerShapes() } }) + '\n')
+      console.error(`wrote ${base}-section.svg (${sec.items.length} items, ${(sec.sections ?? []).length} cut faces)`)
+    }
+  }
   const mb = (rendered.svg.length / 1e6).toFixed(2)
   const relief = scene.terrain.flat ? 'flat' : `terrain ${scene.stats.elevationDatum}–${scene.stats.elevationTop} m ×${scene.terrain.exaggeration}, ${rendered.stats.rapidCells} rapid cells`
   console.error(`${name}${dated}: bearing ${scene.view.bearing.toFixed(1)}°, ${scene.stats.buildings} buildings, ${scene.stats.bridgePieces} bridge spans, ${relief}, ${mb} MB svg, ${Math.round(performance.now() - t0)} ms`)

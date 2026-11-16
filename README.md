@@ -21,7 +21,7 @@ under bluffs that rise 50 m to downtown, Oregon Hill and Church Hill.
 
 The widest view, `richmond-i195-rocketts`, follows the James for 7.85 km, from I-195 to
 Rocketts Landing. Every mapped building is drawn (about 6,750), as are all bridges, rapids
-and the bluffs on both banks. It is a 25 MB SVG, and `--png` renders it at 18,840 px wide.
+and the bluffs on both banks. It is a 36 MB SVG, and `--png` renders it at 18,840 px wide.
 
 ![The James through Richmond from I-195 to Rocketts Landing](docs/richmond-i195-rocketts.png)
 
@@ -116,6 +116,46 @@ sections, with featured regions first and folded sections closed. `"shop"` (`lab
 `cta`, and `links` keyed by region prefix) adds the shop button and a "Buy a print" button on
 matching views. See this repo's own `isoscape.config.json`.
 
+### Static pages and search
+
+The explorer is one page that routes with the URL fragment, so a search engine sees a single
+address, and the share pages forward into it at once. So `isoscape explorer` (and every build)
+also writes a plain HTML page for everything worth finding, beside `index.html`:
+
+- `p/<slug>.html`: every content page, its whole text in the document, with GitHub-style
+  anchors, links between pages as files, its images copied into `p/`, and "Open this in the
+  explorer". Where the page's maps (or the section that tells its story) have a shop link,
+  "Prints of this map" goes to it.
+- `m/<region>.html`: every region's newest build, with its picture, "How this view was made"
+  (the same text as the explorer's tab, from `src/story.ts`), "Explore this map" (the lasting
+  route `#<region>` or `#<region>:<year>`) and "Buy a print" (the explorer's shop rule). A dated
+  series of more than one year gets a series page there instead, with every year, and
+  `m/<region>-<year>.html` for each year, linked to each other.
+- `sitemap.xml`: `index.html` and every one of those pages, with the date of the build or of
+  the page's last commit. Written only when the site URL is known (sitemaps need absolute URLs).
+
+Each page has its own title, description, canonical URL, link-preview tags, JSON-LD
+(`Article` for content pages, `VisualArtwork` for maps, by Chris Busse), the explorer's colors
+and type, and the site's Google Analytics when `analytics.ga` is set. Shop links carry the
+campaign tags the explorer adds when they are clicked, written in at build time:
+`utm_source=isoscape-explorer&utm_medium=referral&utm_campaign=<page slug or region>`.
+
+Map pages are named by region, not by build id, so a rebuild keeps their address; build ids
+change with every build. The share pages in `s/` keep their addresses and their forwarding
+(links already shared still open the explorer at the exact view), name the matching static
+page as canonical, and link to it. `index.html` lists every static page in a folded
+"Every map and page as a plain web page" at the foot of the front page, and without script shows
+only that. Pages of regions or content pages that are gone are removed from `m/` and `p/`.
+
+**Submitting the sitemap.** A GitHub Pages project site lives under a path
+(`https://busse.github.io/isoscape/`) and cannot serve the host's root `robots.txt`, so no
+`robots.txt` can point to the sitemap. Every page names it in its head
+(`<link rel="sitemap" href="sitemap.xml">`), but search engines do not rely on that: the site's
+owner must submit `https://busse.github.io/isoscape/sitemap.xml` once in
+[Google Search Console](https://search.google.com/search-console) (add the URL-prefix property
+`https://busse.github.io/isoscape/`, verify it with the HTML-file or meta-tag method, then
+Sitemaps → Add), and in Bing Webmaster Tools if wanted. After that, each publish updates it.
+
 ### Adding a page
 
 Pages are Markdown files in `pages/`, compiled into `out/index.html` whenever it is
@@ -152,7 +192,7 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   schemes. Files starting with `_` (drafts) and `README.md` are skipped.
 - `npm test` checks that every in-page link in `pages/` lands on a real section, and that the
   sections the "How this view was made" tab links to exist in `how-its-made.md`. If you
-  rename a heading there, update `story` in `src/explorer.ts` too.
+  rename a heading there, update `makeStory` in `src/story.ts` too.
 
 ```sh
 node bin/isoscape.js build richmond-downtown-topo --note "lighter foam"   # say what you tried
@@ -389,7 +429,64 @@ shows it gone. The steps are in *How it's made*, under "Time". The 1886, 1895, 1
 heights are approximate, and some buildings are missing, misplaced or merged.
 
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
-and elevation and keeps only its year-built parcels in its own `data/` folder.
+and elevation and keeps only its year-built parcels in its own `data/` folder. A build looks for
+`yearbuilt.json` in the region's own folder first, then in the shared one, and stops with an
+error if neither has it: without it nearly every building would be undated.
+
+## Cutaways
+
+A region with a `cutaway` section opens a modeled building along a vertical plane: the half on
+one side is lifted away, its ground floor left as a plan, and every cut is drawn solid in ink.
+
+```jsonc
+"cutaway": {
+  "through": [-77.4658172, 37.5611118],  // a point on the plane
+  "bearing": 40.8,                        // the compass direction it runs
+  "remove": "right",                      // the side lifted away; stand the camera there
+  "floor": 67.4, "keep": 1.5,             // on that side keep what stands up to 1.5 m over this floor (m above sea level)
+  "parts": "bss-",                        // only modeled parts with this id prefix are cut
+  "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away whole though not cut
+  "outline": { "parts": ["bss-c-floor-"], "offset": 1.5 },  // dash the removed footprint
+  "travelers": [{ "at": [-77.466035, 37.56091], "floor": 67.4, "facing": 1 }],  // figures to scale (1.75 m); no floor: on the ground
+  "section": { "from": -62, "to": 104, "beyond": 35, "other": 3, "scale": 10, "earth": 5,
+               "route": [[-60, 64.7], [50.5, 68.3]],   // the flat section and the traveler's path (waist height)
+               "travelers": [{ "s": -40, "floor": 65.66, "facing": 1 }] }   // figures on the path
+}
+```
+
+The parts come from a history file (see "Time"): a part drawn only in whole views carries
+`"only": "whole"` (a building's massing), one drawn only in cutaways `"only": "cutaway"` (its
+walls, floors and rooms). A part may stand at an `elevation` and reach `upTo` another, revolve
+(`"shape": "revolve"` with `levels`, for a dome or a shell), rise as a `stair`, and says how it
+is known: `"confidence": "drawn"`, `"written"` or `"approximate"` (the default). Cut parts must
+have convex footprints; a part that does not is cut on its convex hull.
+
+`build` writes the cutaway, its flat section (`<name>-section.svg`) and, for each, where every
+part is drawn (`*.anchors.json`). `tools/cutaway/sheet.py cutaways/<name>.json` lays them out
+on a 32 x 24 in sheet with numbered callouts, the confidence key, sources and credits. How it
+works, and what is approximate, is in *How it's made*, under "Cutaways".
+
+```sh
+node bin/isoscape.js build broad-street-station-cutaway --year 1943 --png
+python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json   # out/cutaways/
+python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json --print   # out/cutaways/print/
+```
+
+A callout's anchor in either drawing may say `"badge": [dx, dy]` (sheet units, 9,600 across):
+the badge then stands that far off the part, with a leader to a dot on it, so it does not hide
+what it names. `travelerKey` adds a line with the traveler's glyph to the key, and a group with
+`"traveler": true` carries the glyph beside its heading.
+
+`--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):
+the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, each with its title
+block in the bottom-right corner below the callout column (`titleblock.stamp`, place
+`corner`), named `<design>_<w>x<h>.jpg` and logged with their SHA-256 in `print/prints.json`.
+A cutaway sheet has no canvas files: its title, credit line and column all lie within the
+1.5 in a canvas mirrors round its sides. `--page` (after `--print`) writes its explorer page,
+`pages/<page.slug>.md`, from the spec's `page` (`slug`, `title`, `order`, `summary`, `intro`,
+`how`, `drafted`, and `shop` once prints sell): the sheet, the plate and its kind, every callout
+as text with how sure it is, the key, where the trains and streetcars went with their sources,
+the sources and notes, and the note on how the page was drafted.
 
 ## Making a set
 
@@ -467,6 +564,40 @@ isoscape is by Chris Busse: [fullbacklog.com](https://fullbacklog.com) (Substack
 [LinkedIn](https://linkedin.com/in/chrisbusse), and @busse on
 [Threads](https://www.threads.net/@busse) and [Instagram](https://www.instagram.com/busse).
 
+## Visual check
+
+A change to shared drawing code can change every map. The visual check shows what it changed
+before anything is published. `tools/check/views.json` lists the views it watches (the
+regions behind the sold prints, with the year where a view is dated), the width to render each
+at (about 300 dpi on its largest print, capped at 12,000 px) and two to four crops of each,
+placed on steep terrain, open ground, dense buildings, bridges, the modeled landmarks and the
+title lettering. Each crop says in its `why` what it watches.
+
+- `python3 tools/check/visual.py approve [view...]`: build each view, render its crops and
+  store them as the baseline in `tools/check/baseline/<view>/`, with `baseline.json` (the
+  commit, the SVG's SHA-256, the build's warnings, the cached data files it read, the width
+  and the boxes). The crops are 256-color PNGs, about 5 MB in all, and are committed.
+- `npm run check:visual` (or `visual.py check [view...]`): build and render the same way and
+  compare each crop with its baseline. It writes `out/check/index.html`, with baseline, new
+  and a difference image for every crop, worst first, prints one line per view, and exits 1
+  if any crop is out of tolerance. A view whose SVG is byte for byte the baseline's is
+  "identical" and is not rendered; `--render` renders and compares it anyway (after updating
+  `rsvg-convert` or Pillow). A view whose cached data is missing is skipped, not failed.
+
+A pixel counts as changed when, after a 3×3 blur of both crops, a channel differs by more
+than 8 levels, so lone antialiased pixels do not count. A crop passes with at most 0.02% of
+its pixels changed and a mean blurred difference of at most 0.5 levels. In the difference
+image, red is changed and amber differs by less than the threshold. A full check of the seven
+views takes about 30 s when nothing changed and under 2 minutes when every view must be
+rendered.
+
+Run it before publishing any change to shared drawing code. Approve again only after a person
+has looked at the report and accepted every change in it, and commit the new baseline with the
+change. If the check reports that cached data or build warnings differ from the baseline's,
+the pictures differ for that reason, not the code. Builds are deterministic, so the same
+commit and data give the same SVG. The check needs Python 3 with Pillow and numpy, and
+`rsvg-convert`. Its comparison has unit tests: `cd tools/check && python3 -m unittest`.
+
 ## Release records
 
 Every design for sale has a record in `releases/<design>/v<N>.json`, so it can always be
@@ -484,6 +615,11 @@ lists them.
   rebuild every scene from its commit and frozen data, byte for byte.
 - `python3 tools/release/remake.py <design> [--compose <store-dir>]`: put a design's frozen
   scenes back where its recipe reads them, and remake the print.
+
+A cutaway sheet is recorded as kind `cutaway` (`tools/cutaway/sheet.py --print`): its scenes
+are the region's cutaway and flat section (`"output": "-section"`, which `check.py --rebuild`
+compares against the build's `-section.svg`) and the composed sheet SVG, frozen but not rebuilt;
+the block and every print file's SHA-256 come from `out/cutaways/print/prints.json`.
 
 Designs published before records existed (November 15, 2026) were recorded afterwards: their
 prints and scenes are frozen as sold, the landmarks' framing is recovered as an explicit window
@@ -504,8 +640,18 @@ collection › set › piece, the plate, the version, the year drawn, the point 
 around (decimal degrees) and the direction it faces. It sits in the bottom-right corner,
 right-aligned with the art, or in the header of a set sheet whose foot is full.
 
+A plate may also say what kind of piece it is, with an optional `"kind"` (`"Map"`,
+`"Landmark"`, `"Building cutaway"`; up to 24 characters). The block then prints it as one line
+under the maker, at 28 units (7.1 pt on a 24 in sheet), on the baseline of the lower row's values,
+and the maker's two lines move up to make room. A plate with no kind prints nothing there, and
+its block is the same, byte for byte, as before kinds existed. The Broad Street cutaway
+(`BSS-15`) is the first with one. A cutaway's location and facing come from its own region
+(the sheet spec in `cutaways/` names its `design`), not the set's map.
+
 - `python3 tools/release/plates.py check <store-dir>`: every plate unique and well formed, and
-  every design in the store has one. `plates.py next <SET>` gives a new design its number.
+  every design in the store has one, and every kind is a short line of text.
+  `plates.py next <SET>` gives a new design its number. Tests: `cd tools/release && python3 -m
+  unittest test_plates`.
 - `python3 tools/release/plates.py list [--csv]`: the catalog as a text reference list.
 - `python3 tools/release/stamp.py <store-dir> <design>...`: stamp the block onto a design's
   print and canvas files as its next version (logged in the store's `state/stamps.json`;

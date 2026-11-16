@@ -1,0 +1,64 @@
+{
+ "view": "richmond-downtown-time-2026",
+ "args": [
+  "richmond-downtown-time",
+  "--year",
+  "2026"
+ ],
+ "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "dirty": false,
+ "approved": "2026-11-16T12:25:55-0500",
+ "svg_sha256": "4ae97e75d5e24794c7b61f9ed5360208bad3fc90fc3e2f9bee1e0d90baa0f462",
+ "svg_bytes": 10104722,
+ "viewBox": [
+  -3024.0,
+  -1675.6,
+  6048.0,
+  2730.8
+ ],
+ "width": 12000,
+ "crops": [
+  {
+   "name": "towers",
+   "x": 1725,
+   "y": 1375,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "interchange",
+   "x": 4050,
+   "y": 2650,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "rowhouses-terrain",
+   "x": 8625,
+   "y": 4000,
+   "w": 1500,
+   "h": 1000
+  }
+ ],
+ "warnings": [
+  "no year-built data for \"richmond-downtown-time\"; run: isoscape fetch richmond-downtown-time --extras-only"
+ ],
+ "residual": {
+  "towers": {
+   "max": 16.0,
+   "mean": 2.0026
+  },
+  "interchange": {
+   "max": 23.889,
+   "mean": 2.1664
+  },
+  "rowhouses-terrain": {
+   "max": 14.0,
+   "mean": 2.2284
+  }
+ },
+ "data": {
+  "data/richmond-i195-rocketts/dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+  "data/richmond-i195-rocketts/osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+ }
+}

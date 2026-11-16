@@ -32,25 +32,86 @@ const screenBox = (item: Item): Box => {
   return { minX, minY, maxX, maxY }
 }
 
-/** +1 when `a` paints after (in front of) `b`, −1 when before, 0 when it does not matter. */
-export const compare = (a: Item, b: Item): number => {
-  const axis: Vec2 | null = separatingAxis(a.hull, b.hull)
+/**
+ * +1 when `a` paints after (in front of) `b`, −1 when before, 0 when it does not matter.
+ *
+ * With `stacked`, two items apart on the ground, the farther one wholly above the nearer (a
+ * floor's slab beyond a pier under it, a deck beyond a train), cannot cover each other at all:
+ * every line of sight falls as it goes, so it passes over the nearer before it reaches the
+ * farther, or under the farther after it leaves the nearer. They are left unordered, so the
+ * pair cannot close a cycle with the orders that matter. Cutaways, which stack many such
+ * parts, use it; other views keep the plain rule.
+ */
+export const compare = (a: Item, b: Item, stacked = false): number => {
+  // Modeled parts that abut may overlap by the centimeter their corners were rounded to.
+  const axis: Vec2 | null = separatingAxis(a.hull, b.hull, stacked ? STACK_TOLERANCE : 1e-6)
   if (axis !== null) {
     // `axis` points from b to a. The camera sits toward −N', so a is nearer when the axis
     // has a negative N' component.
     const towardsCamera = -axis[1]
-    if (towardsCamera > 1e-6) return 1
-    if (towardsCamera < -1e-6) return -1
+    if (towardsCamera > 1e-6) return stacked && b.zMin >= a.zMax - 0.05 ? 0 : 1
+    if (towardsCamera < -1e-6) return stacked && a.zMin >= b.zMax - 0.05 ? 0 : -1
     return 0
   }
   if (a.zMin >= b.zMax - 0.05) return 1
   if (b.zMin >= a.zMax - 0.05) return -1
   // Overlapping footprints at overlapping heights: a bridge over a low building, or bad data.
   if (a.kind !== b.kind) return a.kind === 'bridge' ? 1 : -1
+  if (a.span !== undefined && b.span !== undefined) {
+    const s = spanOrder(a.span, b.span)
+    if (s !== 0) return s
+  }
   return a.key < b.key ? 1 : a.key > b.key ? -1 : 0
 }
 
-export const paintOrder = (items: readonly Item[], cell = 96): Item[] => {
+type Span = NonNullable<Item['span']>
+
+/**
+ * How far `p` lies beyond the line of span `s`, along N' (into the frame). Null unless `p` is
+ * beside the span (within half a span of it along its line), or when the span runs into the
+ * frame; 0 when it lies within half a meter of the span's line.
+ */
+const beyond = (s: Span, p: Vec2): number | null => {
+  const dx = s.b[0] - s.a[0]
+  const dy = s.b[1] - s.a[1]
+  const len = Math.hypot(dx, dy)
+  if (Math.abs(dx) < 0.3 * len) return null
+  const along = ((p[0] - s.a[0]) * dx + (p[1] - s.a[1]) * dy) / (len * len)
+  if (along < -0.5 || along > 1.5) return null
+  const off = p[1] - (s.a[1] + dy * ((p[0] - s.a[0]) / dx))
+  return Math.abs(off) < 0.5 ? 0 : off
+}
+
+/**
+ * Two bridge spans that overlap side by side (the two carriageways of a viaduct, a pair of
+ * tracks). Their depth keys alternate along the road, so ordering them by key interleaves two
+ * decks span by span into a ladder. Instead the deck whose line is nearer the camera is in
+ * front, whatever its height (its fascia and piers hide the farther deck's); where one runs
+ * right over the other, the upper one is.
+ */
+export const spanOrder = (a: Span, b: Span): number => {
+  // Spans of one deck follow each other: depth decides.
+  if (a.bridge === b.bridge) return 0
+  // Only decks that run side by side; where one crosses another, depth decides as before (a
+  // higher crossing deck painted later would lay its piers over the nearer, lower deck).
+  const ax = a.b[0] - a.a[0], ay = a.b[1] - a.a[1], bx = b.b[0] - b.a[0], by = b.b[1] - b.a[1]
+  if (Math.abs(ax * bx + ay * by) < 0.97 * Math.hypot(ax, ay) * Math.hypot(bx, by)) return 0
+  const mid = (s: Span): Vec2 => [(s.a[0] + s.b[0]) / 2, (s.a[1] + s.b[1]) / 2]
+  const ba = beyond(a, mid(b))
+  const ab = beyond(b, mid(a))
+  // b beyond a's line, or a short of b's: a is nearer.
+  const votes = (ba === null ? 0 : Math.sign(ba)) - (ab === null ? 0 : Math.sign(ab))
+  if (votes !== 0) return votes > 0 ? 1 : -1
+  // Not beside each other at all: depth decides.
+  if (ba === null && ab === null) return 0
+  // One right over the other: the upper deck.
+  return a.z > b.z + 1 ? 1 : b.z > a.z + 1 ? -1 : 0
+}
+
+/** How far (meters) two footprints may overlap and still count as apart, with `stacked`. */
+export const STACK_TOLERANCE = 0.03
+
+export const paintOrder = (items: readonly Item[], cell = 96, stacked = false): Item[] => {
   const n = items.length
   const boxes = items.map(screenBox)
   // Spatial hash on screen boxes, so only near neighbors are compared.
@@ -79,7 +140,7 @@ export const paintOrder = (items: readonly Item[], cell = 96): Item[] => {
         const bi = boxes[i]
         const bj = boxes[j]
         if (bi.maxX <= bj.minX || bj.maxX <= bi.minX || bi.maxY <= bj.minY || bj.maxY <= bi.minY) continue
-        const c = compare(items[i], items[j])
+        const c = compare(items[i], items[j], stacked)
         if (c > 0) { after[j].push(i); indegree[i]++ }
         else if (c < 0) { after[i].push(j); indegree[j]++ }
       }

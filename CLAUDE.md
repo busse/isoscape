@@ -48,6 +48,9 @@ node bin/isoscape.js info <region>     # counts and height sources
 npm test && npm run typecheck
 ```
 
+Before publishing any change to shared drawing code, run `npm run check:visual` and look at
+`out/check/index.html` (see "Visual check" in the README).
+
 Every build lands in the explorer (`out/index.html`). When iterating, pass
 `--note "<what changed>"` so the explorer says what each build was for, and compare against
 the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
@@ -73,15 +76,18 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | the explorer page | `explorer.ts` |
 | a content page (How it's made, About, a new one) | `pages/<slug>.md`; see "Adding a page" in the README |
 | how pages are loaded and linked; the Markdown subset | `pages.ts`, `markdown.ts` |
-| the per-build "How this view was made" text | `story` in `explorer.ts` (it links to `pages/how-its-made.md` section ids) |
+| the per-build "How this view was made" text | `makeStory` in `story.ts`, shared by the explorer and the static map pages (it links to `pages/how-its-made.md` section ids) |
+| the static pages for search engines (`p/`, `m/`, `sitemap.xml`), their URLs, head tags and JSON-LD | `static-pages.ts`; shared CSS from `explorer.ts`; "Static pages and search" in the README |
 | building an old commit into the archive | `backfill.ts` |
 | dated series: year built, era rules, curated history | `history.ts`, `asOf` in `scene.ts`, `history/<series>.json` |
 | tracing fire-insurance maps (georeference, trace, lifespans) | `tools/sanborn/*.py` → `history/sanborn/` |
 | a set: a big map framed by numbered boxes, its prints and page | `sets/<name>.json`, `tools/sets/set.py`; "Making a set" in the README |
 | one building modeled close up (parts, tracks, canopies, trains) | `tools/stations/<name>.py` → `history/<name>.json`; `src/parts.ts` |
+| a cutaway: the cut plane, sections, plan, flat section, its sheet | `cutaway` in `regions/<name>.json`; `src/cutaway.ts`, `src/cutaway-scene.ts`, `src/section.ts`; `cutaways/<name>.json`, `tools/cutaway/sheet.py`; "Cutaways" in the README |
 | release records: what each sold design was made from, and how to remake it | `tools/release/` → `releases/` |
 | plate numbers, the taxonomy, the printed title block | `catalog/plates.json`, `tools/release/plates.py`, `tools/print/titleblock.py`, `tools/release/stamp.py`; "Plates" in the README |
 | a published piece corrected or redrawn | `pages/changes.md` (and the store's `changes_page.py`): every change, dated, with the piece's version |
+| the visual check: watched views, crops, tolerance, its report | `tools/check/views.json`, `tools/check/visual.py`; baseline in `tools/check/baseline/` |
 | placing streetcar lines from named corners | `tools/streetcars/build.py` (routes in `tools/streetcars/routes.json`) |
 
 ## Release records
@@ -94,11 +100,13 @@ published print in place: redraw it as the next version (`-vN` files, catalog `v
 
 ## Known limits
 
-- The hillshade is quantized per 5 m cell, so very steep ground can look stepped.
+- The hillshade is drawn as 24 nested bands each way, traced between 5 m grid nodes, so at
+  extreme zoom a band's edge shows as a faint step in shade, and its bends as short straight
+  runs.
 - Rapids come from the lidar's water surface, read only 10 m or more from shore; a polygon
   far off from the real channel can still produce false falls.
-- Big regions make big SVGs (the I-195 to Rocketts view is 25 MB and takes a browser 10–20 s
-  to open). Use the `--png` render for quick looks.
+- Big regions make big SVGs (the I-195 to Rocketts view is about 36 MB; at 25 MB it took a
+  browser 10–20 s to open). Use the `--png` render for quick looks.
 - One bad OSM tag must never break a build: parse every numeric tag defensively (one
   building's `building:min_level` is "federal").
 - Bridge ways that fork at a junction ramp at the fork if no other bridge way touches it.
