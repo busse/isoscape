@@ -11,6 +11,14 @@ tools and the research get better, a published map is sometimes corrected and re
 page lists those changes, newest first. A print ordered after a change is made from the new
 version; the version is part of each print file's name (`-v2`, `-v3`).
 
+## November 16, 2026
+
+**New: Broad Street Station, 1943: Cutaway (plate BSS·15, version 1).** The station cut down
+the middle, from the Broad Street doors to the trains, with the same cut seen flat below it and a
+traveler's way from the street to the train. It is the first building cutaway. Every part is
+marked by how sure it is: drawn from a plan or section, from written accounts, or approximate.
+[The cutaway, its callouts and its sources](broad-street-cutaway.md)
+
 ## November 15, 2026
 
 **Every print now carries its plate.** Each design has a permanent catalog number, its plate

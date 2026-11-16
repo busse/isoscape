@@ -9,11 +9,13 @@
     "label": "Holiday shop, open through December 31, 2026",
     "url": "https://chrisbusse.com/",
     "cta": "Buy prints of these maps",
-    "onSale": {}
+    "onSale": {
+      "broad-street-cutaway": "https://chrisbusse.com/products/broad-street-station-1943-cutaway"
+    }
   },
   "home": {
     "title": "Richmond, drawn from open data",
-    "intro": "Small isometric maps of Richmond, Virginia: the James River through the city in one long view, and downtown block by block from 1737 to today. Pan and zoom any map, or compare two side by side. The tool that draws them is free and open source.",
+    "intro": "Small isometric maps of Richmond, Virginia: the James River through the city in one long view, and downtown block by block from 1737 to today. Pan and zoom any map, or compare two side by side. The tool that draws them is free and open source, and prints are in the holiday shop.",
     "heroes": [
       {
         "region": "richmond-i195-rocketts",
