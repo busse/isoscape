@@ -60,7 +60,9 @@ export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Pag
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>isoscape explorer</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(MARK)}">
+${site.analytics ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${escAttr(site.analytics.ga)}"></script>
+<script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)} gtag('js', new Date()); gtag('config', '${escAttr(site.analytics.ga)}', { send_page_view: false })</script>
+` : ''}<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(MARK)}">
 ${siteTags(site, builds.length)}<style>
 :root {
   --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
@@ -1229,9 +1231,19 @@ body.reading main { grid-template-rows: 1fr; }
     const [a, b] = sel.split('..')
     return { a: resolveRef(a), b: resolveRef(b), tab, view, split }
   }
+  // Visitor analytics, when the site configures it: one page view per page or map opened (not per pan or zoom).
+  let viewed = null
+  const trackView = () => {
+    if (typeof gtag !== 'function') return
+    const where = location.hash.split('@')[0] || '#home'
+    if (where === viewed) return
+    viewed = where
+    gtag('event', 'page_view', { page_location: location.origin + location.pathname + where, page_title: document.title })
+  }
   const route = () => {
     closeDrawer()
     routed = location.hash
+    setTimeout(trackView, 0)
     const r = parseHash()
     if (r.page !== undefined && pageBySlug.size > 0) { openPage(r.page, r.section); return }
     if (home && (r.a === 'home' || !r.a)) { openHome(); return }

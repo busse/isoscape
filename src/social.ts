@@ -43,6 +43,8 @@ export interface SiteConfig {
   readonly home?: HomeConfig
   /** False on a published site that does not carry out/<region>.html, to hide the "Latest page" link. */
   readonly latestPages?: boolean
+  /** Optional visitor analytics for the published explorer: a Google Analytics measurement ID ("G-…"). Off when absent. */
+  readonly analytics?: { readonly ga: string }
 }
 
 /** A featured view on the explorer's front page: the newest build of `region` (or its `year`, in a dated series). */
@@ -113,7 +115,7 @@ const isHome = (v: unknown): v is HomeConfig => {
 
 /** `--site-url`, else ISOSCAPE_SITE_URL, else isoscape.config.json in `root`. */
 export const loadSiteConfig = async (flag?: string, root = process.cwd(), env = process.env): Promise<SiteConfig> => {
-  let file: { siteUrl?: unknown; flagship?: unknown; shop?: unknown; home?: unknown; latestPages?: unknown } = {}
+  let file: { siteUrl?: unknown; flagship?: unknown; shop?: unknown; home?: unknown; latestPages?: unknown; analytics?: unknown } = {}
   try {
     file = JSON.parse(await readFile(resolve(root, 'isoscape.config.json'), 'utf8')) as typeof file
   } catch (err) {
@@ -127,8 +129,13 @@ export const loadSiteConfig = async (flag?: string, root = process.cwd(), env = 
     ...(isShop(file.shop) ? { shop: file.shop } : {}),
     ...(isHome(file.home) ? { home: file.home } : {}),
     ...(file.latestPages === false ? { latestPages: false } : {}),
+    ...(isAnalytics(file.analytics) ? { analytics: { ga: file.analytics.ga } } : {}),
   }
 }
+
+/** Only a well-formed measurement ID is ever written into the page. */
+const isAnalytics = (v: unknown): v is { ga: string } =>
+  typeof v === 'object' && v !== null && typeof (v as { ga?: unknown }).ga === 'string' && /^G-[A-Z0-9]{6,16}$/.test((v as { ga: string }).ga)
 
 // ---- URLs and tags ------------------------------------------------------------------------------
 
@@ -409,6 +416,7 @@ export interface SiteCard {
   readonly shop?: SiteConfig['shop']
   readonly home?: HomeConfig
   readonly latestPages?: boolean
+  readonly analytics?: SiteConfig['analytics']
   readonly image?: Preview
   readonly imageAlt?: string
 }

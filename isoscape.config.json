@@ -2,6 +2,7 @@
   "siteUrl": "https://busse.github.io/isoscape/",
   "flagship": "richmond-downtown-time-1925",
   "latestPages": false,
+  "analytics": { "ga": "G-HNNYF0H75C" },
   "shop": {
     "label": "Holiday shop, open through December 31, 2026",
     "url": "https://chrisbusse.com/",

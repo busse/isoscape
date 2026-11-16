@@ -38,6 +38,13 @@ isoscape is by Chris Busse.
 - Threads: [@busse](https://www.threads.net/@busse)
 - Instagram: [@busse](https://www.instagram.com/busse)
 
+## Visitor statistics
+
+This site uses Google Analytics to count visits: which pages and maps are opened, and which
+site sent the visitor. It sets cookies to do that. Links to the shop carry a tag naming the page
+they were clicked on. A copy of the explorer you build yourself has no analytics unless you add
+an `analytics` entry to `isoscape.config.json`.
+
 ## Inspiration
 
 isoscape began as an attempt to draw Richmond the way [Isometric SF](https://isometricsf.com)
