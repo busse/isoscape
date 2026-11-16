@@ -194,8 +194,8 @@ for side, a0, a1 in (('west', -W2, -WI), ('east', WI, W2)):
     box(C(f'wall-{side}-stage'), 'Byrd Theatre: side wall', a0, a1, B_PROS, LOT_D, Z_BSMT if side == 'west' else -1.6, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
     box(C(f'wall-{side}-pit'), 'Byrd Theatre: basement wall', a0, a1, B_PIT, B_PROS, Z_BSMT if side == 'west' else -1.6, 0, 'brick', 'approximate', SIDE, [NOM])
 LINING = 'The plastered inside face of the outer wall. Approximate.'
-box(C('lining-lobby'), LOBBY, -WI, -WI + 0.05, T, B_HOUSE - 0.6, Z_LOBBY, Z_CEIL, 'plaster', 'approximate', LINING, [NOM])
-box(C('lining-over-lobby'), HOUSE, -WI, -WI + 0.05, B_HOUSE - 0.6, B_HOUSE, BAL_Z0 + 3.5, Z_CEIL, 'plaster', 'approximate', LINING, [NOM])
+# Over the lobby's ceiling nothing is known of the rooms: the wall is left bare.
+box(C('lining-lobby'), LOBBY, -WI, -WI + 0.05, T, B_HOUSE - 0.6, Z_LOBBY, Z_LCEIL, 'plaster', 'approximate', LINING, [NOM])
 box(C('lining-house'), HOUSE, -WI, -WI + 0.05, B_HOUSE, B_PROS, Z_FRONT_ROW - 0.3, Z_CEIL, 'plaster', 'approximate', LINING, [NOM])
 box(C('wall-back'), 'Byrd Theatre: back wall', -WI, 8.0, LOT_D - T, LOT_D, Z_BSMT, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
 box(C('wall-back-east'), 'Byrd Theatre: back wall', 8.0, WI, LOT_D - T, LOT_D, -1.6, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])

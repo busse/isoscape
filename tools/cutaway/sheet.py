@@ -136,25 +136,26 @@ def theme_colors(name):
     return json.loads(r.stdout)[name]
 
 
-def holly(x, y, k, green, red, flip=1):
-    """A sprig of holly for a holiday sheet's corner: two leaves and three berries, `k` units to
-    a leaf's length, pointing away from the corner (flip -1 mirrors it). Decoration only."""
+def holly(x, y, k, green, red, flip=1, vflip=1):
+    """A sprig of holly for a holiday sheet's corner: two spiked leaves and three berries, `k`
+    units to a leaf's length, pointing away from the corner (flip -1 mirrors it across, vflip
+    -1 turns it upside down, for the foot of the sheet). Decoration only."""
+    import math
+
     def leaf(cx, cy, ang):
-        # A holly leaf: a pointed oval with three notches a side, turned to `ang` degrees.
-        import math
+        # A holly leaf: a long oval whose edge runs out to a spine at each of seven lobes.
         pts = []
-        for i in range(17):
-            t = i / 16
-            u = (t - 0.5) * k
-            w = 0.26 * k * math.sin(math.pi * t) * (0.82 if i % 4 == 2 else 1.0)
-            pts.append((u, w))
+        for i in range(15):
+            t = i / 14
+            w = 0.27 * k * math.sin(math.pi * t) ** 0.7 * (1.0 if i % 2 else 0.6)
+            pts.append(((t - 0.5) * k, w))
         pts += [(u, -w) for u, w in reversed(pts[1:-1])]
         a = math.radians(ang)
-        return 'M' + 'L'.join(f'{cx + u * math.cos(a) - v * math.sin(a):.0f} {cy + u * math.sin(a) + v * math.cos(a):.0f}' for u, v in pts) + 'Z'
-    d = leaf(x + flip * 0.42 * k, y - 0.12 * k, -18 * flip) + leaf(x + flip * 0.12 * k, y + 0.40 * k, 72 * flip)
+        return 'M' + 'L'.join(f'{cx + u * math.cos(a) - v * math.sin(a):.0f} {cy + vflip * (u * math.sin(a) + v * math.cos(a)):.0f}' for u, v in pts) + 'Z'
+    d = leaf(x + flip * 0.42 * k, y - vflip * 0.12 * k, -18 * flip) + leaf(x + flip * 0.12 * k, y + vflip * 0.40 * k, 72 * flip)
     out = f'<path d="{d}" fill="{green}"/>'
     for bx, by in ((0.0, 0.0), (0.13, -0.09), (0.05, 0.13)):
-        out += f'<circle cx="{x + flip * bx * k:.0f}" cy="{y + by * k:.0f}" r="{0.075 * k:.0f}" fill="{red}"/>'
+        out += f'<circle cx="{x + flip * bx * k:.0f}" cy="{y + vflip * by * k:.0f}" r="{0.075 * k:.0f}" fill="{red}"/>'
     return out
 
 
@@ -240,9 +241,9 @@ def main():
         bi = 120
         out.append(f'<rect x="{bi}" y="{bi}" width="{W - 2 * bi}" height="{H - 2 * bi}" fill="none" stroke="{theme["green"]}" stroke-width="14"/>')
         out.append(f'<rect x="{bi + 34}" y="{bi + 34}" width="{W - 2 * bi - 68}" height="{H - 2 * bi - 68}" fill="none" stroke="{theme["green"]}" stroke-width="4"/>')
-        for cx, cy, fl in ((bi, bi, 1), (W - bi, bi, -1), (bi, H - bi, 1), (W - bi, H - bi, -1)):
+        for cx, cy, fl, vf in ((bi, bi, 1, 1), (W - bi, bi, -1, 1), (bi, H - bi, 1, -1), (W - bi, H - bi, -1, -1)):
             out.append(f'<circle cx="{cx}" cy="{cy}" r="96" fill="{PAPER}"/>')
-            out.append(holly(cx, cy, 170, theme['green'], theme['red'], fl))
+            out.append(holly(cx, cy, 170, theme['green'], theme['red'], fl, vf))
     # Title.
     out.append(text(M, 400, spec['title'], 250, 'bold', accent))
     out.append(text(M, 570, spec['subtitle'], 112, 'italic', DIM))

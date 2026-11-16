@@ -36,8 +36,8 @@
       "offset": 0.3
     },
     "section": {
-      "from": -6,
-      "to": 42,
+      "from": -5.85,
+      "to": 41.15,
       "beyond": 16,
       "other": 4,
       "scale": 25,

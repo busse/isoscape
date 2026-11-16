@@ -22,8 +22,8 @@
       "part": "history:byrd-c-front-frieze",
       "dx": -0.3,
       "badge": [
-       -170,
-       -120
+       -300,
+       -60
       ]
      },
      "section": {
@@ -61,11 +61,12 @@
      "title": "The lobby",
      "text": "A vaulted, gold-leafed ceiling twenty-five feet up, marble halfway up the walls, and a mezzanine lounge on three sides. Its plan is approximate.",
      "iso": {
-      "part": "history:byrd-c-lobby-marble",
-      "dx": -0.2,
+      "part": "history:byrd-c-lobby-ceiling",
+      "dx": 0.15,
+      "dy": 0.1,
       "badge": [
-       -120,
-       -150
+       -300,
+       120
       ]
      },
      "section": {
@@ -112,8 +113,8 @@
      "section": {
       "part": "history:byrd-c-orch-floor-16",
       "badge": [
-       0,
-       180
+       -60,
+       -300
       ]
      },
      "confidence": "approximate"
@@ -133,8 +134,8 @@
      "section": {
       "part": "history:byrd-c-bal-tier-7",
       "badge": [
-       150,
-       -110
+       60,
+       260
       ]
      },
      "confidence": "approximate"
@@ -252,15 +253,15 @@
      "iso": {
       "part": "history:byrd-k-chest-5",
       "badge": [
-       120,
-       -170
+       560,
+       -60
       ]
      },
      "section": {
       "part": "history:byrd-k-chest-3",
       "badge": [
-       -60,
-       -200
+       330,
+       -260
       ]
      },
      "confidence": "approximate"
@@ -369,7 +370,11 @@
    "sources": [
     "USGS 7.5-minute quadrangle, Richmond, 1964, as reproduced in the National Register nomination (read from the map image, approximate)"
    ],
-   "text": "West Cary Street, east to the Boulevard and on toward downtown."
+   "text": "West Cary Street, east to the Boulevard and on toward downtown.",
+   "offset": [
+    0,
+    40
+   ]
   }
  ]
 }

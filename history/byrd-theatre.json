@@ -2590,43 +2590,10 @@
      37.55237916
     ]
    ],
-   "height": 14.7,
+   "height": 7.62,
    "tone": "plaster",
    "elevation": 0.3,
-   "upTo": 15.0,
-   "confidence": "approximate",
-   "note": "The plastered inside face of the outer wall. Approximate.",
-   "sources": [
-    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0287_Byrd_Theater_1979_Final_Nomination.pdf"
-   ]
-  },
-  {
-   "id": "byrd-c-lining-over-lobby",
-   "name": "Byrd Theatre: auditorium",
-   "kind": "landmark",
-   "from": 1928,
-   "ring": [
-    [
-     -77.47791265,
-     37.55237916
-    ],
-    [
-     -77.47791214,
-     37.55237896
-    ],
-    [
-     -77.47790916,
-     37.55238384
-    ],
-    [
-     -77.47790967,
-     37.55238404
-    ]
-   ],
-   "height": 5.1,
-   "tone": "plaster",
-   "elevation": 9.9,
-   "upTo": 15.0,
+   "upTo": 7.92,
    "confidence": "approximate",
    "note": "The plastered inside face of the outer wall. Approximate.",
    "sources": [

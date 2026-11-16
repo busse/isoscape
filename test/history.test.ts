@@ -156,3 +156,27 @@ test('a dated series: what no rule dates is drawn today only, except the street 
   assert.ok(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1913, h))
   assert.ok(featureAlive(area({ leisure: 'park' }), 2026, h))
 })
+
+test('a curated street and sidewalk are drawn as a road and a path where no map data covers the place', async () => {
+  const { buildScene } = await import('../src/scene.ts')
+  const { palette } = await import('../src/palette.ts')
+  const { lonLatFromLocal } = await import('../src/region.ts')
+  const region = { name: 't', title: 't', center: [0, 0], width: 200, depth: 200, bearing: 0, scale: 1 } as const
+  const ll = lonLatFromLocal(region as never)
+  const line = (n: number) => [ll(-90, n), ll(90, n)] as [number, number][]
+  const history = {
+    title: 't', present: 2026, epochs: [{ year: 1928, title: 't' }], rules: [], dates: [], traced: [],
+    features: [
+      { id: 'st', name: 'A street', kind: 'street', from: 1900, line: line(0), width: 12, note: 'n', sources: [] },
+      { id: 'wk', name: 'A sidewalk', kind: 'walk', from: 1900, line: line(10), width: 3.5, note: 'n', sources: [] },
+      { id: 'gone', name: 'Built later', kind: 'street', from: 1950, line: line(-40), width: 12, note: 'n', sources: [] },
+    ],
+  }
+  const scene = buildScene(region as never, [], palette('paper'), null, { time: { year: 1928, history: history as never, dates: new Map() } })
+  const kinds = scene.ribbons.map((r) => r.kind).sort()
+  assert.deepEqual(kinds, ['path', 'road'])
+  // The road is the street's width across: 12 m, at 1 px a meter.
+  const q = scene.ribbons.find((r) => r.kind === 'road')!.quads[0]
+  const ys = q.map((p) => p[1])
+  assert.ok(Math.abs(Math.max(...ys) - Math.min(...ys) - 12) < 0.01)
+})
