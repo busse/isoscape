@@ -23,8 +23,9 @@ all within 1.5 in of the sheet's edges, mirrored round its sides.
 
 --page writes the sheet's page in the explorer, pages/<page.slug>.md, from the same callouts,
 key, sources and notes as the sheet, with its two images (<slug>-sheet.jpg, <slug>-social.jpg)
-made from the 32 x 24 print. Like a set's page, it has no shop link until the spec's page names
-one (`shop`).
+made from the 32 x 24 print. Like a set's page, it says nothing of the shop: the explorer adds
+its shop button while shop.onSale in isoscape.config.json, the one list of what sells, has an
+entry for the page's slug (e.g. "broad-street-cutaway": "<product URL>").
 """
 import argparse, hashlib, json, os, re, subprocess, sys, tempfile
 from PIL import Image, ImageFont
@@ -339,8 +340,6 @@ def page(spec, print_dir):
            f'social: {slug}-social.jpg', '---', '', f"# {P['title']}", '',
            f"*{plate['kind']} · Plate {plate['plate'].replace('-', '·')}*" if plate.get('kind') else f"*Plate {plate['plate'].replace('-', '·')}*", '',
            P['intro'], '', f"![{P.get('image_alt', P['title'])}]({slug}-sheet.jpg)", '']
-    if P.get('shop'):
-        out += [f"Prints are in the [shop]({P['shop']}).", '']
     for g in spec['groups']:
         out += [f"## {g['title']}", '']
         for c in g['callouts']:
