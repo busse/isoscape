@@ -13,6 +13,30 @@ version; the version is part of each print file's name (`-v2`, `-v3`).
 
 ## November 16, 2026
 
+**The James, I-195 to Rocketts Landing (plate RVA·09) and Gwynn's Island (plate GWY·01),
+version 3: redrawn.** Both maps were inspected tile by tile, corrected in code, and drawn again
+from the same data.
+
+- The elevation data had been read out of place, so the ground did not sit exactly
+  under the mapped streets and shores. It is now read in place.
+- The hill shading is smooth: steep banks no longer show dark smears or stepped edges.
+- On the James, rapids and rocks are drawn only where the river falls, among the islands
+  above the Mayo Bridge and at the dam by Belle Isle, and no longer on the dry bed south of
+  Belle Isle or in a wastewater basin by Rocketts.
+- Shorelines follow the mapped banks, without the saw-tooth edges they had along the tidal
+  reach at Rocketts and on the bluffs and spit of Gwynn's Island.
+- Bridges and ramps end properly, on the ground they reach, with no short steep stubs.
+- On Gwynn's Island, the edges of woods and fields are smooth, no longer stepped by the
+  30 m land-cover grid.
+- Each print's credit line names exactly the sources its map was drawn from. Gwynn's Island
+  had credited Sanborn fire-insurance maps it does not use; it now credits OpenStreetMap,
+  USGS 3DEP elevation, the USGS National Land Cover Database and Microsoft's building
+  footprints.
+
+The plates are unchanged; the title block on each print now gives version 3.
+
+*Drafted with Claude; see the [artist statement](artist-statement.md).*
+
 **New: Broad Street Station, 1943: Cutaway (plate BSS·15, version 1).** The station cut down
 the middle, from the Broad Street doors to the trains, with the same cut seen flat below it and a
 traveler's way from the street to the train. It is the first building cutaway. Every part is
