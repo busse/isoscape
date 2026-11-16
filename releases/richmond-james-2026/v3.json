@@ -61,7 +61,8 @@
    "sha256": "f657f6dcb5d3e57344fc1904b3d1e5cb1cf335edc97ed31528e4261bf0094d2a",
    "frozen": "data/_releases/scenes/f657f6dcb5d3e57344fc1904b3d1e5cb1cf335edc97ed31528e4261bf0094d2a.svg",
    "build": "20261116-172559-richmond-i195-rocketts",
-   "commit": "2eb233a"
+   "commit": "2eb233a",
+   "reproduces": true
   }
  ],
  "inputs": {
@@ -135,5 +136,13 @@
  },
  "explorer": {
   "view": "richmond-i195-rocketts"
+ },
+ "restamped": {
+  "files": 1,
+  "matched": 1
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 1
  }
 }

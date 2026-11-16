@@ -98,7 +98,8 @@
    "sha256": "0b223e878bd0d8b917d6ddfb2dc172b7fbd9dc0df315d44cb88a8804aa0873fd",
    "frozen": "data/_releases/scenes/0b223e878bd0d8b917d6ddfb2dc172b7fbd9dc0df315d44cb88a8804aa0873fd.svg",
    "build": "20261116-172522-gwynns-island",
-   "commit": "2eb233a"
+   "commit": "2eb233a",
+   "reproduces": true
   }
  ],
  "inputs": {
@@ -219,5 +220,13 @@
  },
  "explorer": {
   "view": "gwynns-island"
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 1
  }
 }
