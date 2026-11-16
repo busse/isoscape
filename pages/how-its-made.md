@@ -667,26 +667,33 @@ Ry.*, for the end of the segregated waiting rooms; and OpenStreetMap for the gro
 named on the sheet, and the wayfinding notes carry their own.
 
 **Main Street Station** (`regions/main-street-station-cutaway.json`) is cut down the axis of
-its head house, the plane running at a bearing of 36.9° through the pier between the loggia's
-third and fourth bays, the east half lifted away down to 1.5 m above the ground floor; the
-camera looks from the southeast at a bearing of 325°. Its train shed is not cut: the roofing of
-four bays on the shed's east slope is lifted away whole instead, leaving the dashed outline of
+its head house, the plane running at a bearing of 36.9° 4.2 m west of the front's middle, just
+east of the main stair and its screen of columns, the east half lifted away down to 1.5 m above
+the ground floor; the camera looks from the southeast at a bearing of 325°. So that the stair
+shows as a flight, its east wall and the floor over its first flight are lifted away whole, as
+are the concourse's roof and the roof over the taper to the shed (`lift`), each leaving its
+dashed outline. Its train shed is not cut: the roofing of
+four bays on the shed's east slope, with the monitor's slatted side over them, is lifted away
+whole instead, leaving the dashed outline of
 its upper face where it was, so the trusses show on their columns. The shed is built from
 `frame` parts, straight members in a vertical plane traced node by node from the cross section
 of HAER VA-4 (sheet 3); a frame longer than 12 m is drawn in pieces of members 6 m apart across
 it, so a train or a column under it sorts against the piece above it rather than the whole span.
 The hipped roof of the head house is an `inset` shell, each side stepped in by the same distance
-so its four slopes rise alike to the ridge, and drawn side by side in lengths of about 6 m, so a
-dormer sorts against the length of roof under it. Parts that stand inside the shell (`within`:
+so its four slopes rise alike to the ridge, in courses about 1.4 m apart up the slope, and drawn
+side by side in lengths of about 6 m, so a dormer sorts against the length of roof under it. The
+loggia's piers are stacked in courses about 0.55 m high, every other one set 3 cm proud, and its
+segmental arches are plates in eight slices along the arc. Parts that stand inside the shell (`within`:
 the offices in the roof) paint before the slopes that face the camera and after those that face
 away. The tracks stand on a deck at the level of the waiting room,
 on trestles: a rail line with an elevation draws no ground ribbon, its train stands on the deck,
 and its track is a modeled part with ties 2.6 m long, 0.67 m apart, and two rails at standard
 gauge. Its flat section runs from 26 m on the Main Street side of the plane's point to 70 m on the
 track side, the building 35 m deep behind it and everything else 26 m. The main stair, behind
-its tiled wall, is drawn there as its dashed outline (`section.hidden`); the shed's roofing is
-drawn only 1 m behind the plane (`section.slice`), so its cut and its edge show and the trusses
-under it are not hidden; and a train standing beside the plane is drawn from the side, flat,
+its tiled wall, is drawn there as its dashed outline (`section.hidden`); the shed is drawn in
+full behind the plane, as HAER's longitudinal section draws it: the columns 18 ft apart, the
+bracing between them, the underside of the roof falling to the eave, the monitor's slatted side
+along the ridge, and the roof over the taper falling to the concourse; and a train standing beside the plane is drawn from the side, flat,
 car by car, with its windows, doors, trucks and the gaps between the cars. Beside it the sheet
 puts a second flat section, the shed cut across 1.2 m south of a truss and looking north
 (`regions/main-street-station-shed-section.json`), at the same scale: the truss whole, the
@@ -697,7 +704,10 @@ platforms and deck in ink, the cars standing across the plane end on.
 callouts, each anchored to a drawn part in either drawing, with the key, the sources and the
 notes; a sheet may set a cross section (`crossSection`) beside the flat section, both at one
 scale, and wayfinding labels under the plate that run past two lines push the sections down to
-make room. A badge that would hide the part it names is set off it into clear space, with a thin
+make room; a label may instead be set where the spec says (`label`), its leader leaving the
+nearest point of its box. A sheet may frame the plate closer (`isoView`, a box in the plate's
+own units), cutting what runs past it at the edge, and may say where its column must end
+(`columnEnd`), to keep room for the title block; Main Street's ends by 6,560 of the 7,200. A badge that would hide the part it names is set off it into clear space, with a thin
 leader to a small dot on the part, drawn like the wayfinding labels' leaders. Callout text is 54 pixels (13 pt; 9.7 pt on the 24 × 18 in print), and the smallest text
 on the sheet, the two-digit numbers in the badges on the drawings, is 40 pixels (9.6 pt; 7.2 pt
 at 24 × 18). There are no canvas files: a canvas's 1.5 in of mirrored wrap would carry the

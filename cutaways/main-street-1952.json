@@ -6,6 +6,12 @@
  "title": "Main Street Station, 1952",
  "subtitle": "Cut down the middle, from Main Street up to the trains",
  "sectionCaption": "The same cut, seen flat: Main Street on the left, the trains on the right",
+ "isoView": [
+  -420,
+  -338,
+  970,
+  530
+ ],
  "groups": [
   {
    "title": "The way to the train",
@@ -14,15 +20,15 @@
     {
      "n": 1,
      "title": "Main Street",
-     "text": "The station stands on the north side of East Main Street, in Shockoe Valley.",
+     "text": "East Main Street, in Shockoe Valley.",
      "iso": {
       "at": [
-       -77.4295931,
-       37.5340741
+       -77.429596,
+       37.5341041
       ],
       "badge": [
-       -130,
-       -110
+       -150,
+       -40
       ]
      },
      "section": {
@@ -38,7 +44,7 @@
     {
      "n": 2,
      "title": "The loggia",
-     "text": "Five arches of rough-hewn stone. Its first bay from the west opens on the main stair.",
+     "text": "Five segmental arches of rough-hewn stone; the first from the west opens on the main stair.",
      "iso": {
       "part": "history:mss-h-loggia-pier-1",
       "badge": [
@@ -57,7 +63,7 @@
     {
      "n": 3,
      "title": "The main stair",
-     "text": "Straight up from the Main Street doors to the waiting room, with a landing halfway, between tiled walls.",
+     "text": "Straight up to the waiting room without turning, with a landing halfway, between tiled walls.",
      "section": {
       "part": "history:mss-h-stair-2",
       "dx": 0.1,
@@ -70,7 +76,7 @@
     {
      "n": 4,
      "title": "The waiting room",
-     "text": "Most of the first floor, under a coffered ceiling, with a screen of columns and glazed arches toward the stair. Its east half is lifted away.",
+     "text": "A coffered ceiling and a screen of columns and glazed arches toward the stair. Its east half, where the ticket booths stood, is lifted away.",
      "iso": {
       "part": "history:mss-h-screen-glass-2",
       "badge": [
@@ -89,7 +95,7 @@
     {
      "n": 5,
      "title": "The concourse",
-     "text": "An ell behind the head house, open to the shed. Five arches lead to it from the waiting room.",
+     "text": "An ell behind the head house, open to the shed. Its roof is lifted away.",
      "iso": {
       "part": "history:mss-h-ell-floor",
       "dx": 0.15,
@@ -103,7 +109,7 @@
     {
      "n": 6,
      "title": "The gates",
-     "text": "A wrought-iron screen between the concourse and the shed, with numbered gates to the platforms.",
+     "text": "A wrought-iron screen with numbered gates.",
      "iso": {
       "part": "history:mss-h-gates",
       "badge": [
@@ -122,7 +128,7 @@
     {
      "n": 7,
      "title": "Platforms and tracks",
-     "text": "Six tracks end under the shed, with a through track under each eave and five platforms, all level with the waiting room.",
+     "text": "Six stub tracks and five platforms, level with the waiting room, and a through track under each eave.",
      "iso": {
       "part": "history:mss-d-platform-3-2",
       "badge": [
@@ -150,7 +156,7 @@
       ]
      },
      "section": {
-      "part": "history:mss-track-3:0:side",
+      "part": "history:mss-track-2:0:side",
       "dx": 0.25,
       "badge": [
        0,
@@ -162,7 +168,7 @@
     {
      "n": 9,
      "title": "A diesel",
-     "text": "Drawn plain and generic: no source shows the engine of a train standing here.",
+     "text": "A streamlined cab unit of about 1950, in plain form: no source shows which engine stood here.",
      "iso": {
       "part": "history:mss-track-5:0",
       "badge": [
@@ -180,7 +186,7 @@
     {
      "n": 10,
      "title": "The train shed",
-     "text": "Riveted steel by Wilson Brothers of Philadelphia, 1900, 123 by 517 ft: trusses of 123-ft span, 18 ft apart, with a monitor on the ridge.",
+     "text": "Riveted steel by Wilson Brothers, 1900, 123 by 517 ft: trusses 18 ft apart, a monitor on the ridge.",
      "iso": {
       "part": "history:mss-s-truss-2",
       "dy": -0.2,
@@ -236,7 +242,7 @@
     {
      "n": 13,
      "title": "Offices",
-     "text": "Railroad offices on three floors, on a corridor running east and west; two floors are in the roof, lit by dormers.",
+     "text": "Three floors of offices on an east-west corridor, two of them in the roof, lit by dormers.",
      "iso": {
       "part": "history:mss-h-floor-third",
       "badge": [
@@ -256,12 +262,12 @@
     {
      "n": 14,
      "title": "The clock tower",
-     "text": "Six stories at the southwest corner, with a clock on each face. Its finial stands 110 ft above the ground.",
+     "text": "Six stories at the southwest corner; its finial stands 110 ft above the ground.",
      "iso": {
       "part": "history:mss-h-tower-clock-s",
       "badge": [
        -170,
-       -60
+       -120
       ]
      },
      "section": {
@@ -289,11 +295,11 @@
    "approximate: no drawing shows it"
   ]
  ],
- "marksNote": "The same marks, small, stand before each place the trains went.",
- "sources": "Sources: HAER VA-4, the train shed (measured drawings, 1970; photographs, 1971), and HABS VA-848, the station (data pages, 1969; photographs), Library of Congress; National Register (1970) and Landmark (1976) nominations; Detroit Publishing photographs, about 1905; Library of Congress blog, 2026; SAH Archipedia; Official Guide, December 1952; OpenStreetMap; USGS 3DEP.",
- "notes": "The head house's east half is lifted away down to its ground floor, and part of the shed's roof; their outlines are dashed. No plan of the head house is known: its rooms follow the written survey, its heights are scaled from photographs. In 1952 Virginia law segregated the waiting rooms; this sheet does not show where, as no source found says where.",
+ "marksNote": "The same marks stand by each place the trains went.",
+ "sources": "Sources: HAER VA-4, the train shed (drawings, 1970; photographs, 1971) and HABS VA-848, the station (data pages, 1969; photographs), Library of Congress; National Register (1970) and Landmark (1976) nominations; Detroit Publishing photographs, about 1905; Official Guide, December 1952; SAH Archipedia; OpenStreetMap; USGS 3DEP.",
+ "notes": "No plan of the head house is known: its rooms follow the HABS description, its heights and stonework are scaled from photographs. Virginia law segregated the waiting rooms in 1952; no source found says where.",
  "credit": "Drawn with isoscape, built with Claude  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Shed after HAER VA-4 (Library of Congress)",
- "travelerKey": "A traveler, drawn to scale: 1.75 m (5 ft 9 in) tall. The red line is the way from the street to the train.",
+ "travelerKey": "A traveler to scale, 1.75 m (5 ft 9 in) tall. The red line is the way to the train.",
  "wayfinding": [
   {
    "id": "co",
@@ -326,21 +332,30 @@
    "place": "bottom-left",
    "confidence": "written",
    "lines": [
-    "Seaboard Air Line, on the west side: south by Raleigh,",
-    "Columbia and Savannah to Jacksonville and Miami;",
-    "north by the RF&P to Washington and New York"
+    "Seaboard Air Line,",
+    "on the west side:",
+    "south by Raleigh,",
+    "Columbia and Savannah",
+    "to Jacksonville",
+    "and Miami; north by",
+    "the RF&P to Washington",
+    "and New York"
    ],
    "sources": [
     "Official Guide, December 1952: the Orange Blossom Special, as transcribed by streamlinerschedules.com",
     "Library of Congress, Picture This, March 20, 2026; SEABOARD lettered on the west trestle in Detroit Publishing photograph 4a18653"
    ],
    "text": "Seaboard Air Line, on the west side: south by Raleigh, Columbia and Savannah to Jacksonville and Miami; north by the RF&P to Washington and New York.",
-   "part": "history:mss-d-track-w-s1",
-   "dx": -0.3
+   "part": "history:mss-d-track-w-s3",
+   "label": [
+    340,
+    1410
+   ]
   }
  ],
  "crossSection": {
   "region": "main-street-station-shed-section",
   "caption": "The shed cut across, looking north"
- }
+ },
+ "columnEnd": 6560
 }

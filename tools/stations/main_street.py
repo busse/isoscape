@@ -242,15 +242,29 @@ for k in range(NB):
         mm = [
             [to_u(side * EAVE), top(EAVE) + 0.8, to_u(side * 59.6), top(59.6) + 0.8, 0.18 / FT],
             [to_u(side * 59.6), top(59.6) + 0.8, to_u(side * 18.7), top(18.7) + 0.8, 0.18 / FT],
-            [to_u(side * 18.7), top(18.7) + 1.4, to_u(side * 18.7), mtop(18.7) - 0.3, 0.06 / FT],
             [to_u(side * 30.0), mtop(28.3) + 0.2, to_u(0.0), mtop(0) + 0.8, 0.18 / FT],
             [to_u(side * 5.0), 57.4, to_u(0.0), 58.9, 0.15 / FT],
         ]
         part(f'mss-s-roof-{tag}-{k}', 'Main Street Station train shed: roof', plane(SHED_C - HALF, b0 + TH, SHED_C + HALF, b0 + TH, BAY - 2 * TH),
              FF, FF + 18.5, 'roof', 'drawn',
-             ROOF_NOTE + ' The monitor\'s sides, open for light and air between the main roof and the monitor\'s roof (HAER VA-4, sheets 1 and 3), are drawn as a plain panel.',
+             ROOF_NOTE,
              SHED_SRC + [SRC['haer-1']], shape='frame',
              members=[[round(m[0], 3), round(m[1] * FT, 3), round(m[2], 3), round(m[3] * FT, 3), round(m[4] * FT, 3)] for m in mm])
+    # The monitor's sides, open for light and air between the main roof and the monitor's roof:
+    # the side elevation (HAER VA-4, sheet 2) draws them as a band of close vertical slats.
+    for side, tag in ((-1, 'w'), (1, 'e')):
+        a = xa(side * 18.7)
+        z0, z1 = (top(18.7) + 1.4) * FT, (mtop(18.7) - 0.3) * FT
+        slats = []
+        u = 0.15
+        while u < BAY - 2 * TH - 0.1:
+            slats.append([round(u, 3), 0, round(u, 3), round(z1 - z0, 3), 0.07])
+            u += 0.35
+        slats += [[0, 0.05, round(BAY - 2 * TH, 3), 0.05, 0.1], [0, round(z1 - z0 - 0.05, 3), round(BAY - 2 * TH, 3), round(z1 - z0 - 0.05, 3), 0.1]]
+        part(f'mss-s-louver-{tag}-{k}', 'Main Street Station train shed: monitor side', plane(a + 0.04, b0 + TH, a + 0.04, b1 - TH, 0.08),
+             FF + z0, FF + z1, 'steel', 'drawn',
+             'The open side of the monitor along the ridge, between the main roof and the monitor\'s roof (HAER VA-4, sheets 1 and 3), drawn in slats as the side elevation (sheet 2) draws it. The slats\' spacing is approximate.',
+             SHED_SRC + [SRC['haer-1']], shape='frame', members=slats)
     # Longitudinal X-bracing between the columns, from 11 ft to 23 ft 6 in above the platform
     # (the side elevation, sheet 2), and the eave strut along the column heads.
     for side, tag in ((-1, 'w'), (1, 'e')):
@@ -259,6 +273,17 @@ for k in range(NB):
              FF, FF + 9, 'steel', 'drawn',
              'Diagonal bracing between two columns, as the side elevation draws it in every bay (HAER VA-4, sheet 2): from 11 ft to 23 ft 6 in above the platform.',
              SHED_SRC, shape='frame', members=[[0, 11 * FT, BAY - 2 * TH, 23.5 * FT, 0.12], [0, 23.5 * FT, BAY - 2 * TH, 11 * FT, 0.12], [0, 23.5 * FT, BAY - 2 * TH, 23.5 * FT, 0.25]])
+
+# The roof over the taper between the concourse and the shed's first truss: the longitudinal
+# section (HAER VA-4, sheet 2) draws it falling from the shed, about 33 ft over the platform,
+# to the concourse's roof. Its plan is a taper (sheet 2); it is drawn here as wide as the
+# concourse (approximate). In the cutaway it is lifted away, to show the gates.
+TAPER_Z0 = FF + 6.8 + 0.5   # the concourse's roof (main_street_plan.py: CTOP)
+part('mss-s-taper-roof', 'Main Street Station: roof between the concourse and the shed', plane(MP.ELL[1], MP.B_GATE, MP.ELL[1], SHED_B0 - 0.2, MP.ELL[1] - MP.ELL[0]),
+     FF, FF + 33 * FT, 'roof', 'drawn',
+     'The roof over the 31-ft taper between the concourse and the train shed, falling from the shed to the concourse as the longitudinal section (HAER VA-4, sheet 2) draws it. Its width and thickness are approximate.',
+     [SRC['haer-2']], shape='frame',
+     members=[[0, round(TAPER_Z0 - FF, 3), round(SHED_B0 - 0.2 - MP.B_GATE, 3), round(33 * FT, 3), 0.25]])
 
 # ---- the deck, platforms and tracks ---------------------------------------------------------
 # From the cross section (sheet 3): six stub tracks under the shed, and a through track under
@@ -386,7 +411,7 @@ TRAIN_NOTE = ('A train standing at a platform: heavyweight coaches in Pullman gr
               'named trains through the station about 1952 (the Seaboard\'s Orange Blossom Special, December 1952; the C&O\'s George Washington).')
 rail_line('5', B_STUB + 1.0, B_END + 60, {'cars': 3, 'at': 0, 'power': 'diesel'},
           TRAIN_NOTE + ' The diesel unit at its head is a plain generic one: the C&O\'s George Washington ran behind diesels from 1950 (TrainWeb, after Millard), but no source gives this train\'s engine.')
-rail_line('3', B_STUB + 1.0, B_END + 60, {'cars': 3, 'at': 3.0, 'engine': False}, TRAIN_NOTE)
+rail_line('2', B_STUB + 1.0, B_END + 60, {'cars': 3, 'at': 3.0, 'engine': False}, TRAIN_NOTE)
 rail_line('6', B_STUB + 1.0, B_END + 60, {'cars': 3, 'at': 0.5, 'engine': False}, TRAIN_NOTE)
 
 # ---- the city: era rules and dates from the downtown series ---------------------------------

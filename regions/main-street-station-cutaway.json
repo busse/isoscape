@@ -29,8 +29,8 @@
   },
   "cutaway": {
     "through": [
-      -77.429491,
-      37.5342391
+      -77.4295222,
+      37.5342578
     ],
     "bearing": 36.9,
     "remove": "right",
@@ -38,7 +38,12 @@
     "keep": 1.5,
     "parts": "mss-h-",
     "lift": [
-      "^history:mss-s-roof-e-[0-3]$"
+      "^history:mss-s-roof-e-[0-3]$",
+      "^history:mss-h-stair-wall-e$",
+      "^history:mss-h-floor-first-1$",
+      "^history:mss-h-ell-roof$",
+      "^history:mss-s-taper-roof$",
+      "^history:mss-s-louver-e-[0-3]$"
     ],
     "section": {
       "from": -26,
@@ -105,26 +110,20 @@
           "floor": 14.9,
           "facing": 1
         }
-      ],
-      "slice": {
-        "parts": [
-          "^history:mss-s-roof-"
-        ],
-        "depth": 1.0
-      }
+      ]
     },
     "travelers": [
       {
         "at": [
-          -77.4295137,
-          37.5341735
+          -77.4295964,
+          37.5341157
         ],
         "facing": 1
       },
       {
         "at": [
-          -77.4293459,
-          37.5344348
+          -77.4293685,
+          37.5344484
         ],
         "floor": 14.9,
         "facing": 1
