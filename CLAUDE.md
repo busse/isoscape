@@ -113,8 +113,9 @@ published print in place: redraw it as the next version (`-vN` files, catalog `v
   building's `building:min_level` is "federal").
 - Bridge ways that fork at a junction ramp at the fork if no other bridge way touches it.
 - Skyways (footbridges up to 80 m with an end at a building) are not drawn: OSM rarely gives
-  their floor. Side-by-side decks of one crossing whose ends land at different heights (a
-  sidewalk way shorter than its street's) can still sit a little apart in height.
+  their floor. Side-by-side ways of one street are grouped into one deck (`groupDecks`), but only
+  where they run within 15 m of each other their whole length; a sidewalk that turns off its
+  street partway keeps its own profile and can sit a little apart in height.
 - Buildings must sit wholly inside the frame to be drawn. Bridges are cut at the plate's
   edges.
 - A dated series shows only surviving buildings plus what is curated in `history/`; every
