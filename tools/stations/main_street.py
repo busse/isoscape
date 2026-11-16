@@ -371,7 +371,7 @@ for side, t in (('w', 'w'), ('e', 'e')):
     walk = (MP.HH_E + 0.4, a - 1.7) if side == 'e' else (a + 1.7, MP.HH_W - 0.4)
     outer = (a + 2.4) if side == 'e' else (a - 2.4)
     lo, hi = (min(walk[0], outer), max(walk[1], outer))
-    for k, (b0, b1) in enumerate(pieces(-30.0, B_GATE, 7.0)):
+    for k, (b0, b1) in enumerate(pieces(-27.0, B_GATE, 7.0)):
         part(f'mss-d-side-deck-{side}-{k}', 'Main Street Station: trestle deck', rect(lo, hi, b0, b1), DECK_BOTTOM, DECK, 'ballast', 'written',
              'The deck of the elevated through track beside the head house, carried on a trestle and across Main Street on a bridge (HABS VA-848; Detroit Publishing photographs). Its width and girders are approximate.',
              [SRC['habs-data'], SRC['detroit-east'], SRC['detroit-west']])

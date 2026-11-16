@@ -177,8 +177,9 @@ def build(part, rect, ring, plane, SRC, L):
       HABS + PH, shape='inset', levels=roof_levels)
     # Bronze finials at each end of the ridge (HABS VA-848); the west one stands on the half kept.
     for end, ra in (('w', R0[0] + run), ('e', R0[1] - run)):
-        p(f'ridge-finial-{end}', 'Main Street Station: roof', rect(ra - 0.14, ra + 0.14, HH_N / 2 - 0.14, HH_N / 2 + 0.14), RIDGE, RIDGE + 2.6, 'iron', 'written',
-          'A bronze finial at an end of the ridge (HABS VA-848: "decorative bronze finials appear at each end of the ridge"). Its height is approximate, from the photographs.', HABS + PH)
+        p(f'ridge-finial-{end}', 'Main Street Station: roof', rect(ra - 0.14, ra + 0.14, HH_N / 2 - 0.14, HH_N / 2 + 0.14), RIDGE, RIDGE + 2.2, 'iron', 'written',
+          'A bronze finial at an end of the ridge (HABS VA-848: "decorative bronze finials appear at each end of the ridge"), drawn as a plain spire. Its height and form are approximate, from the photographs.', HABS + PH,
+          shape='inset', levels=[[0, 0, 9], [0.5, 0.06, 9], [2.2, 0.139, 9]])
     # Dormers on the front slope: a lower row of five, an upper row of three (HABS VA-848: two levels).
     DORM = 'A dormer on the roof\'s front: HABS VA-848 describes two levels of dormers, plain hipped ones alternating with pedimented ones; the photographs show five or more in the lower row across the front. Places and sizes approximate, from photographs (Detroit Publishing 4a10737).'
     for row, (z0, z1, centers) in enumerate([(CORNICE + 0.5, CORNICE + 2.7, [(BAYS[k] + BAYS[k + 1]) / 2 for k in range(0, 5)]), (CORNICE + 4.4, CORNICE + 6.0, [(BAYS[k] + BAYS[k + 1]) / 2 for k in (0, 2)])]):
@@ -224,8 +225,9 @@ def build(part, rect, ring, plane, SRC, L):
       levels=[[0, 0, 9], [0.4, 0.03, 9], [0.8, 0.12, 9], [1.2, 0.27, 9], [1.6, 0.48, 9], [2.0, 0.75, 9], [2.4, 1.1, 9], [2.8, 1.55, 9], [3.2, 2.1, 9], [3.6, 2.9, 9]])
     p('tower-lantern', 'Main Street Station: clock tower', rect(cx - 0.3, cx + 0.3, cb - 0.3, cb + 0.3), FF + 25.3, FF + 25.9, 'stone', 'written',
       'The base of the bronze finial on the dome (HABS VA-848). Size approximate.', TSRC)
-    p('tower-finial', 'Main Street Station: clock tower', rect(cx - 0.18, cx + 0.18, cb - 0.18, cb + 0.18), FF + 25.4, G + 33.5, 'stone', 'written',
-      'The bronze finial, its top 110 ft above the ground (SAH Archipedia; HABS VA-848).', TSRC)
+    p('tower-finial', 'Main Street Station: clock tower', rect(cx - 0.22, cx + 0.22, cb - 0.22, cb + 0.22), FF + 25.9, G + 33.5, 'iron', 'written',
+      'The bronze finial, its top 110 ft above the ground (SAH Archipedia; HABS VA-848), drawn as a plain spire; its form is approximate.', TSRC,
+      shape='inset', levels=[[0, 0, 9], [0.8, 0.05, 9], [round(G + 33.5 - FF - 25.9, 3), 0.219, 9]])
     # The clock faces, on the front and the east side: discs, as stacked strips.
     zc = FF + 19.4
     r = 1.15
