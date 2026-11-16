@@ -63,6 +63,8 @@ export interface Item {
   readonly name?: string
   /** A building's outline, view meters, where it is a plain prism. */
   readonly footprint?: Ring
+  /** A bridge span's center line, view meters, its deck's mean height, and which bridge it is. */
+  readonly span?: { readonly a: Vec2; readonly b: Vec2; readonly z: number; readonly bridge: string }
 }
 
 export interface GroundPolygon {
@@ -1099,6 +1101,7 @@ const bridgePieces = (
         shapes,
         dots: [],
         ...(t.name === undefined ? {} : { name: t.name }),
+        span: { a: p0, b: p1, z: (z0 + z1) / 2, bridge: line.id },
       })
     }
     traveled += len

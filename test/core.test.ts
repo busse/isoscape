@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { clipRingToRect, convexHull, separatingAxis, signedArea, simplifyRing, type Vec2 } from '../src/geom.ts'
 import { dominantGridAngle, makeView, snapBearing } from '../src/view.ts'
 import { bridgeEnds, buildingAt, chainBridges, extrude, rampClearance, RAMP, roofIndex, type Item } from '../src/scene.ts'
-import { compare, paintOrder } from '../src/order.ts'
+import { compare, paintOrder, spanOrder } from '../src/order.ts'
 import { assembleRings, parseOsm } from '../src/osm.ts'
 import { buildingHeights, parseLength } from '../src/classify.ts'
 import { palette } from '../src/palette.ts'
@@ -138,6 +138,21 @@ test('a bridge finds the building under it', () => {
   assert.equal(buildingAt(roofs, [2, 2])?.top, 6)
   assert.equal(buildingAt(roofs, [7, 7])?.top, 30)
   assert.equal(buildingAt(roofs, [30, 30]), null)
+})
+
+test('side-by-side decks keep one order along their length', () => {
+  // Two parallel decks 10 m apart; their spans are staggered, so their centers alternate.
+  const near = (x: number) => ({ a: [x, 0] as Vec2, b: [x + 22, 0] as Vec2, z: 14, bridge: 'n' })
+  const far = (x: number) => ({ a: [x, 10] as Vec2, b: [x + 22, 10] as Vec2, z: 14, bridge: 'f' })
+  for (const dx of [-11, 0, 11]) {
+    assert.equal(spanOrder(near(0), far(dx)), 1)
+    assert.equal(spanOrder(far(dx), near(0)), -1)
+  }
+  // Crossing decks, and spans of one deck, are left to depth.
+  assert.equal(spanOrder(near(0), { a: [11, -11], b: [11, 11], z: 21, bridge: 'x' }), 0)
+  assert.equal(spanOrder(near(0), { ...near(22), bridge: 'n' }), 0)
+  // One right over the other: the upper.
+  assert.equal(spanOrder({ ...near(0), z: 21, bridge: 'u' }, near(0)), 1)
 })
 
 test('multipolygon fragments assemble into rings', () => {

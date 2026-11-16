@@ -334,6 +334,10 @@ on screen:
 - If their footprints can be separated by a line, the one on the camera's side of that line
   is in front.
 - If the footprints overlap (stacked building parts), the one entirely above is in front.
+- Two bridge spans that run side by side (within about 14 degrees of parallel, the two
+  carriageways of a viaduct or a pair of tracks): the one whose line is nearer the camera is
+  in front, or the upper one where one runs right over the other. By centers alone, two
+  overlapping decks alternate span by span and read as a ladder.
 - Otherwise the nearer center wins.
 
 A topological sort turns these pairwise results into one order. The rare cycle, from concave
