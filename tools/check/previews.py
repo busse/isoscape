@@ -13,7 +13,8 @@ under 1 MB, its og:image:width and og:image:height true to the file and about 1.
 og:image:alt, twitter:card summary_large_image, twitter:image and a canonical link.
 
 Pages checked: index.html, every s/*.html, p/*.html and m/*.html. Against a URL, the list comes
-from sitemap.xml (index, p/, m/) and from index.html's own data (the share pages it hands out).
+from sitemap.xml (index, p/, m/) and from index.html's own data (the share pages it hands out),
+so share pages left from builds that are gone are checked only in a directory.
 Against a directory, absolute image URLs under the site URL (from the page's og:url, or
 --site-url) are looked up as files in it; other images are fetched.
 
@@ -135,19 +136,17 @@ class Site:
 
 
 def share_pages(index_html):
-    """The share pages the explorer hands out, from index.html's embedded data."""
-    out = []
-    m = re.search(r'<script type="application/json" id="shares">(.*?)</script>', index_html, re.S)
-    if m:
-        return [f's/{f}' for f in json.loads(m.group(1))]
-    b = re.search(r'<script type="application/json" id="builds">(.*?)</script>', index_html, re.S)
-    for x in json.loads(b.group(1)) if b else []:
-        out.append(f's/{x["id"]}.html')
-    p = re.search(r'<script type="application/json" id="pagesData">(.*?)</script>', index_html, re.S)
-    for x in json.loads(p.group(1)) if p else []:
-        if isinstance(x, dict) and 'slug' in x:
-            out.append(f's/page-{x["slug"]}.html')
-    return out
+    """The share pages the explorer hands out, from index.html's embedded data: every build's,
+    every map's and year's (the site data's `shares.maps`) and every content page's."""
+    def data(name):
+        m = re.search(rf'<script type="application/json" id="{name}">(.*?)</script>', index_html, re.S)
+        return json.loads(m.group(1)) if m else None
+    out = [f's/{x["id"]}.html' for x in data('builds') or []]
+    shares = (data('site') or {}).get('shares') or {}
+    out += [f's/{n}.html' for n in sorted(set((shares.get('maps') or {}).values()))]
+    slugs = shares.get('pages') or [x['slug'] for x in data('pagesData') or [] if isinstance(x, dict) and 'slug' in x]
+    out += [f's/page-{s}.html' for s in slugs]
+    return list(dict.fromkeys(out))
 
 
 def check(site, rel):
