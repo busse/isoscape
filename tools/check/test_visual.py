@@ -86,5 +86,44 @@ class Quantize(unittest.TestCase):
         self.assertTrue((np.asarray(q.convert('RGB')) == np.asarray(again.convert('RGB'))).all())
 
 
+class CropsOutside(unittest.TestCase):
+    view = {'name': 'v', 'args': ['v'], 'width': 400, 'crops': [
+        {'name': 'top', 'x': 0, 'y': 0, 'w': 200, 'h': 100},
+        {'name': 'foot', 'x': 0, 'y': 250, 'w': 200, 'h': 100}]}
+
+    def test_outside_crops(self):
+        # A 400 px render of a 4:3 viewBox is 300 px tall: the foot crop (250 + 100) is past it.
+        bad, w, h = visual.outside_crops(self.view, [0, 0, 800, 600])
+        self.assertEqual(bad, ['foot'])
+        self.assertEqual((w, h), (400, 300))
+        self.assertEqual(visual.outside_crops(self.view, [0, 0, 800, 800])[0], [])
+
+    def test_check_reports_a_crop_outside_the_render_instead_of_crashing(self):
+        import json, tempfile
+        from unittest import mock
+        with tempfile.TemporaryDirectory() as tmp:
+            base, out = os.path.join(tmp, 'base'), os.path.join(tmp, 'out')
+            os.makedirs(os.path.join(base, 'v'))
+            img = scene(100, 200)
+            for c in self.view['crops']:
+                visual.save_png(visual.quantize(img), os.path.join(base, 'v', c['name'] + '.png'))
+            json.dump({'width': 400, 'args': ['v'], 'warnings': [], 'svg_sha256': 'old', 'data': {},
+                       'crops': self.view['crops']}, open(os.path.join(base, 'v', 'baseline.json'), 'w'))
+            svg = os.path.join(tmp, 'v.svg')
+            open(svg, 'w').write('<svg/>')
+
+            def fake_render(svg_, width, box, dest):
+                visual.save_png(img, dest)
+            with mock.patch.multiple(visual, BASE=base, OUT=out, data_files=lambda v: [],
+                                     build=lambda v: (svg, [0, 0, 800, 600], [], 0.0),
+                                     render_crop=fake_render, sha_file=lambda p: 'new'):
+                code = visual.check([self.view], 1)
+            self.assertEqual(code, 1)
+            report = open(os.path.join(out, 'index.html')).read()
+            self.assertIn('outside the render', report)
+            self.assertTrue(os.path.exists(os.path.join(out, 'crops', 'v', 'top-new.png')))
+            self.assertFalse(os.path.exists(os.path.join(out, 'crops', 'v', 'foot-new.png')))
+
+
 if __name__ == '__main__':
     unittest.main()

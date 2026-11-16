@@ -154,19 +154,26 @@ def render_crop(svg, width, box, dest):
                     f'--left={-x}', f'--top={-y}', '-b', 'white', '-o', dest, svg], check=True)
 
 
-def check_boxes(view, vb):
-    """Every crop must fall inside the render."""
+def outside_crops(view, vb):
+    """The crops that do not fall wholly inside the render (the scene's height can change, so a
+    crop near the foot can end up past it), and the render's size: (names, W, H)."""
     W = view['width']
     H = W * vb[3] / vb[2]
     bad = [c['name'] for c in view['crops'] if c['x'] < 0 or c['y'] < 0 or c['x'] + c['w'] > W or c['y'] + c['h'] > H]
+    return bad, W, H
+
+
+def check_boxes(view, vb):
+    """Every crop must fall inside the render (approve)."""
+    bad, W, H = outside_crops(view, vb)
     if bad: raise RuntimeError(f"{view['name']}: crops {bad} fall outside the {W} x {H:.0f} px render")
 
 
-def render_all(view, svg, dest_dir, jobs):
+def render_all(view, svg, dest_dir, jobs, crops=None):
     os.makedirs(dest_dir, exist_ok=True)
     with cf.ThreadPoolExecutor(jobs) as ex:
         futs = [ex.submit(render_crop, svg, view['width'], (c['x'], c['y'], c['w'], c['h']),
-                          os.path.join(dest_dir, c['name'] + '.png')) for c in view['crops']]
+                          os.path.join(dest_dir, c['name'] + '.png')) for c in (view['crops'] if crops is None else crops)]
         for f in futs: f.result()
 
 
@@ -292,11 +299,18 @@ def check(views, jobs, force=False):
             line = f'{name}: identical ({time.time() - t0:.0f} s)'
             print(line + (f"  [{' | '.join(notes)}]" if notes else ''))
             results.append((name, 'identical', notes)); continue
-        check_boxes(v, vb)
+        # A crop outside the new render is a failed crop, not a reason to stop the check.
+        outside, W, H = outside_crops(v, vb)
         cdir = os.path.join(OUT, 'crops', name)
-        render_all(v, svg, cdir, jobs)
+        render_all(v, svg, cdir, jobs, [c for c in v['crops'] if c['name'] not in outside])
         worst, nbad = None, 0
         for c in v['crops']:
+            if c['name'] in outside:
+                failed = True; nbad += 1
+                rows.append({'view': name, 'crop': c['name'], 'why': c.get('why', ''), 'missing': True, 'ok': False,
+                             'raw': 100, 'changed': 100, 'mean': 255,
+                             'note': f"falls outside the {W} x {H:.0f} px render: move the crop and re-approve"})
+                continue
             bp = os.path.join(bdir, c['name'] + '.png')
             np_ = os.path.join(cdir, c['name'] + '.png')
             if not os.path.exists(bp):
@@ -364,7 +378,7 @@ Approve again only after a person has looked at every change here and accepted i
     for r in rows:
         bad = not r['ok']
         head = f"{e(r['view'])} / {e(r['crop'])} — <span class=\"{'fail' if bad else 'ok'}\">" + \
-               (f"{r['changed']:.3f}% changed, mean {r['mean']:.2f}, {r['raw']:.2f}% of pixels differ at all" if not r.get('missing') else 'no baseline crop') + '</span>'
+               (f"{r['changed']:.3f}% changed, mean {r['mean']:.2f}, {r['raw']:.2f}% of pixels differ at all" if not r.get('missing') else ('outside the render' if r.get('note') else 'no baseline crop')) + '</span>'
         parts.append(f'<div class="crop{" bad" if bad else ""}"><h2>{head}</h2><div class="why">{e(r["why"])}'
                      + (f' <b>{e(r["note"])}</b>' if r.get('note') else '') + '</div>')
         if not r.get('missing'):
