@@ -512,8 +512,8 @@ export const flatElevations = (view: View, pal: Palette, pl: CutPlane, boxes: re
 }
 
 /**
- * A stair on the removed side, for the flat section: its sawtooth profile projected square on
- * to the plane, dashed like the outline of what was lifted away.
+ * A stair on the removed side, for the flat section: its outline (slope, back and foot)
+ * projected square on to the plane, dashed like the outline of what was lifted away.
  */
 export const stairProfile = (view: View, pal: Palette, pl: CutPlane, id: string, p: PlacedPart): Item => {
   const [p0, p1, p2, p3] = p.outer
@@ -524,13 +524,9 @@ export const stairProfile = (view: View, pal: Palette, pl: CutPlane, id: string,
   const at = (s: number): Vec2 => [pl.p[0] + pl.u[0] * s, pl.p[1] + pl.u[1] * s]
   const s0 = sOf(foot)
   const s1 = sOf(head)
-  const n = p.h.steps ?? 12
-  const pts: Vec2[] = [view.toScreen(at(s0), p.seat)]
-  for (let k = 0; k < n; k++) {
-    const za = p.seat + ((p.top - p.seat) * (k + 1)) / n
-    pts.push(view.toScreen(at(s0 + ((s1 - s0) * k) / n), za), view.toScreen(at(s0 + ((s1 - s0) * (k + 1)) / n), za))
-  }
-  pts.push(view.toScreen(at(s1), p.seat), view.toScreen(at(s0), p.seat))
+  // Only the flight's outline (slope, back and foot) is drawn, dashed. At the section's scale a
+  // tread is a few pixels, and a sawtooth of them, dashed or solid, reads as a jagged line.
+  const outline: Vec2[] = [view.toScreen(at(s0), p.seat), view.toScreen(at(s1), p.top), view.toScreen(at(s1), p.seat), view.toScreen(at(s0), p.seat)]
   const a = at(Math.min(s0, s1))
   const b = at(Math.max(s0, s1))
   const f: Vec2 = [pl.n[0] * 0.02, pl.n[1] * 0.02]
@@ -538,7 +534,9 @@ export const stairProfile = (view: View, pal: Palette, pl: CutPlane, id: string,
     id, kind: 'building', name: p.h.name, dots: [],
     hull: [a, b, [b[0] + f[0], b[1] + f[1]], [a[0] + f[0], a[1] + f[1]]],
     zMin: p.seat, zMax: p.top, key: (a[1] + b[1]) / 2,
-    shapes: [{ pts, fill: 'none', line: true, stroke: { color: pal.cutOutline, width: pal.lineWidth * 2, dash: pal.cutOutlineDash } }],
+    shapes: [
+      { pts: outline, fill: 'none', line: true, stroke: { color: pal.cutOutline, width: pal.lineWidth * 2, dash: pal.cutOutlineDash } },
+    ],
   }
 }
 
