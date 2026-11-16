@@ -364,7 +364,7 @@ for idx, cars, north_end in TRAINS:
     if idx == 1:
         # In the cutaway the train beside platform 2 stands with its engine at the south end,
         # just past the departure stairs, so the engine is in the picture.
-        f['cutTrain'] = {'cars': cars, 'at': round(at_straight(pts, from_end=True) + 50, 1), 'reverse': True}
+        f['cutTrain'] = {'cars': cars, 'at': round(at_straight(pts, from_end=True) + 72, 1), 'reverse': True}
     f['note'] += ' A train stands here: a steam engine and heavyweight cars in Pullman green (the consist is illustrative).'
     f['sources'] = f['sources'] + ['https://www.hmdb.org/m.asp?m=9209']
 

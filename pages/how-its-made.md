@@ -616,8 +616,8 @@ building is drawn 35 m deep. Trains and sheds are not cut on the skew: where a t
 train standing across the plane, or within 16 m behind it, meets the plane, one car is drawn
 end on, square and true size on its trucks (a coach's arched end with its door, an engine's
 round smokebox, or a tender's tank and coal); and where a shed's line meets it, its butterfly
-profile, a center post and two wings rising outward. A stair on the removed side is drawn as
-its stepped profile, dashed. Under it the ground is cut along the plane and dug out where the
+profile, a center post and two wings rising outward. A stair down from the floor on the removed
+side (to the platforms) is drawn as its stepped profile, dashed. Under it the ground is cut along the plane and dug out where the
 building goes below it; platforms are drawn 0.35 m over the rails (approximate), rails at true
 gauge where tracks cross the plane, and a red dashed line follows the traveler from the street
 to the train. Code: `src/section.ts`.

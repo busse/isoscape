@@ -183,7 +183,7 @@ def main():
             if 'section' in c:
                 p = anchor(c['section'], sec_a, sec_a.get('frame'))
                 if p is not None:
-                    out.append(badge(ox_sec + p[0] * s_sec, oy_sec + p[1] * s_sec, c['n'], conf, 40))
+                    out.append(badge(ox_sec + p[0] * s_sec, oy_sec + p[1] * s_sec, c['n'], conf, 46))
             out.append(badge(x + 56, y - 26, c['n'], conf, 50))
             out.append(text(x + 140, y, c['title'], 70, 'bold'))
             yy = y + 86
@@ -196,8 +196,15 @@ def main():
     # leader to the track end or the street it belongs to.
     WF = 50
     for wf in spec.get('wayfinding', []):
-        p = locate(wf['at'])
-        ax, ay = ox_iso + p[0] * s_iso, oy_iso + p[1] * s_iso
+        if 'plate' in wf:
+            # A place off the plate: pointed to at the plate's edge, as a fraction of its box.
+            ax, ay = iso_rect[0] + wf['plate'][0] * iso_rect[2], iso_rect[1] + wf['plate'][1] * iso_rect[3]
+        else:
+            p = locate(wf['at'])
+            ax, ay = ox_iso + p[0] * s_iso, oy_iso + p[1] * s_iso
+        # A place beyond the plate's edge is pointed to at the edge, toward it.
+        ax = min(max(ax, iso_rect[0] + 16), iso_rect[0] + iso_rect[2] - 16)
+        ay = min(max(ay, iso_rect[1] + 16), iso_rect[1] + iso_rect[3] - 16)
         lines = [ln.upper() for ln in wf['lines']]
         wmax = max(font('bold', WF).getlength(ln) + 3 * len(ln) for ln in lines)
         lh = WF * 1.42

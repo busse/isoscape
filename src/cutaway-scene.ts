@@ -101,8 +101,9 @@ export const cutawayItems = (
     const id = `history:${p.h.id}`
     const subject = p.h.id.startsWith(prefix)
     if (opts.section) {
-      // A flight on the side lifted away is drawn as its profile, dashed, on the plane.
-      if (subject && p.h.shape === 'stair' && p.outer.every((q) => sideOf(plane, q) > 0) && Math.min(...p.outer.map((q) => sideOf(plane, q))) < beyond) {
+      // A flight down from the floor on the side lifted away (a stair to the platforms) is
+      // drawn as its profile, dashed, on the plane.
+      if (subject && p.h.shape === 'stair' && p.top <= (opts.floorZ ?? Infinity) + 0.05 && p.outer.every((q) => sideOf(plane, q) > 0) && Math.min(...p.outer.map((q) => sideOf(plane, q))) < beyond) {
         items.push(stairProfile(view, pal, plane, id, p))
         continue
       }

@@ -12,12 +12,11 @@
     {
      "n": 1,
      "title": "Broad Street",
-     "text": "The streetcar stops at the forecourt.",
+     "text": "The front of the station, facing West Broad Street.",
      "iso": {
-      "at": [
-       -77.46628,
-       37.56041
-      ]
+      "part": "history:bss-porch",
+      "dx": 0.0,
+      "dy": 0.45
      },
      "section": {
       "s": -41,
@@ -30,7 +29,7 @@
      "title": "The portico",
      "text": "Six columns between two piers.",
      "iso": {
-      "part": "history:bss-column-2",
+      "part": "history:bss-c-column-2",
       "dy": -0.3
      },
      "section": {
@@ -117,8 +116,9 @@
       "part": "history:bss-c-stair-2"
      },
      "section": {
-      "s": 53.5,
-      "elevation": 64.5
+      "part": "history:bss-c-stair-2",
+      "dx": 0.3,
+      "dy": -0.25
      }
     },
     {
@@ -138,8 +138,7 @@
       "part": "history:bss-track-2:1"
      },
      "section": {
-      "s": 37,
-      "elevation": 63.0
+      "part": "history:bss-track-2:end"
      },
      "confidence": "written"
     }
@@ -201,7 +200,7 @@
   ]
  ],
  "sources": "Sources: The American Architect, July 9, 1919 (text; first-floor plan, Plate 15; sections, Plates 17 and 18); Sanborn fire-insurance atlas, 1925; USGS Richmond quadrangles, 1934 and 1956; Official Guide timetables, 1933 and 1941; Richmond Railroad Museum; City Planning Commission transit map, January 1943; ICC, NAACP v. St. Louis-San Francisco Ry., 297 I.C.C. 335 (1955); OpenStreetMap.",
- "notes": "Dashed outline: the east half of the building, lifted away, with its ground floor left in place. Heights are scaled from the 1919 sections, whose figures are illegible; the first floor’s level is approximate.",
+ "notes": "The east half of the building is lifted away down to its first floor; its walls are left standing low, as a plan. In the flat section, the departure stairs, which stand on the side lifted away, are dashed. Heights are scaled from the 1919 sections, whose figures are illegible; the first floor’s level is approximate.",
  "credit": "Drawn by Chris Busse with isoscape, built with Claude  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP",
  "wayfinding": [
   {
@@ -241,6 +240,10 @@
     "Richmond Railroad Museum, railroad history",
     "The American Architect, July 9, 1919 (track lay-out)",
     "USGS Richmond quadrangles, 1934 and 1956"
+   ],
+   "plate": [
+    0.86,
+    0.96
    ]
   },
   {
@@ -257,6 +260,10 @@
    ],
    "sources": [
     "Transit Routes Direct to Downtown District, City Planning Commission, January 31, 1943 (Library of Virginia); routes on West Broad read from the map image, approximate"
+   ],
+   "plate": [
+    0.008,
+    0.86
    ]
   }
  ]
