@@ -449,7 +449,7 @@ The fair grounds are traced from sheet 468 of the 1924–25 Sanborn atlas (100 f
 0.403 m per pixel of the scan, north up, fixed at Hermitage Road and Sherwood Avenue): the
 outline follows the Boulevard and Hermitage Road to the tip where they meet, the one-mile
 track's south turn (a radius of 83 m) is taken off the sheet with its straights parallel to
-the Boulevard, and the north turn is drawn to make up the mile. Forty of the fair's buildings
+the Boulevard, and the north turn is drawn to make up the mile. Thirty-six of the fair's buildings
 come from the same sheet. A curated *site* (the fair grounds while the fair stood, a station's
 loop of tracks) clears today's streets, lots and buildings from within it.
 
