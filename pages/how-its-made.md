@@ -66,6 +66,16 @@ in tiles of at most 1,500 pixels a side, at 1 m per pixel unless the region sets
 `demResolution`. The tiles are stitched together and stored as `data/<region>/dem.bin.gz`:
 gzipped 16-bit integers in centimeters, so heights are kept to the nearest centimeter.
 
+The service keeps its pixels square in degrees. A tile sized in meters is not square in
+degrees away from the equator, so the service widens it north and south about its center
+and fills the same number of pixels: the image covers more ground than was asked for. Each
+tile is read on the box it really covers and resampled onto the box asked for. Until
+November 2026 this was missed, and the ground in every 3DEP map sat squeezed north–south by
+the cosine of the latitude (0.79 in Richmond, 0.73 at Crater Lake): up to a few hundred
+meters off at a tile's edge, with a step where two tiles met. Water outlines then lay on
+banks and cliffs, which read as rock and as false falls. Files fetched before the fix are
+put right as they load.
+
 Outside the US, a region names another source in `terrain.source`; `isoscape sources` lists
 them with their credits and licenses, and [Landmarks around the world](world-landmarks.md)
 shows one map for each. `ign` (France, 1 m) is cut to order like 3DEP, by IGN's WMS server,
