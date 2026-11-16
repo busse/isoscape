@@ -1,0 +1,54 @@
+{
+  "title": "Main Street Station, about 1952: the train shed cut across, looking north",
+  "data": "richmond-i195-rocketts",
+  "center": [
+    -77.4293413,
+    37.5344032
+  ],
+  "width": 116.0,
+  "depth": 76.0,
+  "bearing": 325.0,
+  "snap": false,
+  "scale": 10,
+  "squash": 0.55,
+  "exaggeration": 1.0,
+  "slab": 0,
+  "palette": "paper",
+  "minBuildingArea": 12,
+  "dots": "none",
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 2,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 1,
+    "shade": 0
+  },
+  "time": {
+    "history": "history/main-street-station.json"
+  },
+  "cutaway": {
+    "through": [
+      -77.4291104,
+      37.5346325
+    ],
+    "bearing": 126.9,
+    "remove": "right",
+    "parts": "mss-",
+    "section": {
+      "from": -26,
+      "to": 26,
+      "beyond": 3,
+      "other": 20,
+      "scale": 10,
+      "earth": 4,
+      "travelers": [
+        {
+          "s": 0.3,
+          "floor": 14.9,
+          "facing": -1
+        }
+      ]
+    }
+  }
+}
