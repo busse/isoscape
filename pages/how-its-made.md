@@ -364,7 +364,11 @@ with water where the cut crosses the river.
 
 **The SVG is compact.** Coordinates are rounded to a tenth of a pixel and written relative to
 the previous point. Draped edges are simplified to a quarter pixel, and the soft edges of
-hillshade bands to half a pixel. Each dot is a zero-length
+hillshade bands to half a pixel: a point is dropped only while the line that replaces it
+passes within that distance of every point it stands for. (Until November 2026 each point
+was tested against its two neighbors alone, so a long, gently curving edge could drift
+several pixels off; across open water, where nothing covers the strips, the gaps showed as
+white stripes.) Each dot is a zero-length
 line with round caps. Even so, a big region can produce a file of 25–45 MB. The `--png` option
 renders a raster with `rsvg-convert`. Colors and line weights come from a palette (`paper`
 or `night`).

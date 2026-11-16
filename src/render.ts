@@ -34,21 +34,66 @@ const num = (tenths: number): string => {
 const pair = (a: string, b: string) => (b.startsWith('-') || (b.startsWith('.') && a.includes('.')) ? a + b : `${a} ${b}`)
 
 /**
- * Drop points that lie within `tol` pixels of the line through their neighbors. Draped edges
- * carry a point per grid node; on screen most of them are straight.
+ * The directions from a kept point `a` along which a straight line passes within `tol` of
+ * every point dropped since: a cone, narrowed by each point in turn. Testing a dropped point
+ * against its neighbors alone lets a long, gentle curve drift off by many pixels, and then
+ * the two edges of a draped row no longer meet the rows beside them.
  */
-const simplify = (pts: readonly Vec2[], tol: number): Vec2[] => {
+class Sleeve {
+  a: Vec2 = [0, 0]
+  ref = 0
+  lo = -Infinity
+  hi = Infinity
+  tol: number
+  constructor(tol: number) { this.tol = tol }
+  reset(a: Vec2): void {
+    this.a = a
+    this.lo = -Infinity
+    this.hi = Infinity
+  }
+  private angle(p: Vec2): number {
+    const t = Math.atan2(p[1] - this.a[1], p[0] - this.a[0])
+    if (this.lo === -Infinity && this.hi === Infinity) this.ref = t
+    let d = t - this.ref
+    while (d > Math.PI) d -= 2 * Math.PI
+    while (d <= -Math.PI) d += 2 * Math.PI
+    return d
+  }
+  /** Narrow the cone so the line passes within `tol` of `p`. */
+  add(p: Vec2): void {
+    const r = Math.hypot(p[0] - this.a[0], p[1] - this.a[1])
+    if (r <= this.tol) return
+    const t = this.angle(p)
+    const w = Math.asin(this.tol / r)
+    this.lo = Math.max(this.lo, t - w)
+    this.hi = Math.min(this.hi, t + w)
+  }
+  /** Does the line from `a` to `b` pass within `tol` of every point added? */
+  holds(b: Vec2): boolean {
+    if (this.lo === -Infinity) return true
+    if (this.lo > this.hi) return false
+    const r = Math.hypot(b[0] - this.a[0], b[1] - this.a[1])
+    if (r <= 1e-9) return false
+    const t = this.angle(b)
+    return t >= this.lo && t <= this.hi
+  }
+}
+
+/**
+ * Drop points while the line between the points kept passes within `tol` pixels of every point
+ * dropped. Draped edges carry a point per grid node; on screen most of them are straight.
+ */
+export const simplify = (pts: readonly Vec2[], tol: number): Vec2[] => {
   if (pts.length <= 3) return pts.slice()
   const out: Vec2[] = [pts[0]]
+  const sleeve = new Sleeve(tol)
+  sleeve.reset(pts[0])
   for (let i = 1; i < pts.length - 1; i++) {
-    const a = out[out.length - 1]
-    const p = pts[i]
-    const b = pts[i + 1]
-    const dx = b[0] - a[0]
-    const dy = b[1] - a[1]
-    const len = Math.hypot(dx, dy)
-    const d = len < 1e-9 ? Math.hypot(p[0] - a[0], p[1] - a[1]) : Math.abs(dx * (a[1] - p[1]) - dy * (a[0] - p[0])) / len
-    if (d > tol) out.push(p)
+    sleeve.add(pts[i])
+    if (!sleeve.holds(pts[i + 1])) {
+      out.push(pts[i])
+      sleeve.reset(pts[i])
+    }
   }
   out.push(pts[pts.length - 1])
   return out
@@ -63,20 +108,16 @@ const keptPoints = (pts: readonly Vec2[], fixed: Uint8Array, tol: number, may: (
   if (pts.length === 0) return keep
   keep[0] = 1
   keep[pts.length - 1] = 1
-  let a = pts[0]
+  const sleeve = new Sleeve(tol)
+  sleeve.reset(pts[0])
   for (let k = 1; k < pts.length - 1; k++) {
-    if (fixed[k] === 1) { keep[k] = 1; a = pts[k]; continue }
+    if (fixed[k] === 1) { keep[k] = 1; sleeve.reset(pts[k]); continue }
     if (!may(k)) continue
+    sleeve.add(pts[k])
     // The next point that may be kept stands in for the line's far end.
     let n = k + 1
     while (n < pts.length - 1 && fixed[n] !== 1 && !may(n)) n++
-    const p = pts[k]
-    const b = pts[n]
-    const dx = b[0] - a[0]
-    const dy = b[1] - a[1]
-    const len = Math.hypot(dx, dy)
-    const d = len < 1e-9 ? Math.hypot(p[0] - a[0], p[1] - a[1]) : Math.abs(dx * (a[1] - p[1]) - dy * (a[0] - p[0])) / len
-    if (d > tol) { keep[k] = 1; a = p }
+    if (!sleeve.holds(pts[n])) { keep[k] = 1; sleeve.reset(pts[k]) }
   }
   return keep
 }
