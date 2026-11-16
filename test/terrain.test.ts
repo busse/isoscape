@@ -116,3 +116,20 @@ test('an old 3DEP grid, one image or rows of tiles, is put back where the ground
   assert.equal(misaligned({ ...one, source: 'ign' }), false)
   assert.equal(misaligned(decodeDem(encodeDem(fixedOne, '3dep'))), false)
 })
+
+test('no rock and no rapid is read where the source has no heights', () => {
+  // A bay the lidar did not cover: heights only on the shore, and a steep bank on one side.
+  // Filled in from the shore, the bay's "surface" slopes and humps; none of it is rock or falls.
+  const t = makeTerrain(view, 5, 1, (lon, lat) => {
+    const e = lon * M
+    const n = lat * 110_574
+    if (Math.abs(n) < 120 && Math.abs(e) < 160) return NaN
+    return n > 0 ? 40 + n / 5 : 0.5
+  })
+  rasterize(t, [[[[-160, -120], [160, -120], [160, 120], [-160, 120]]]], 1)
+  settleWater(t)
+  let rocks = 0
+  for (const v of t.rocks) rocks += v
+  assert.equal(rocks, 0)
+  for (let j = 0; j < t.ny; j++) for (let i = 0; i < t.nx; i++) assert.equal(riverFall(t, i, j), null)
+})

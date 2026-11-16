@@ -224,6 +224,10 @@ course, steeply only where it really drops.
 - Near the shore, mapped "water" standing more than 1 m above the surface is treated as bank.
   It is **given back to the land** at its own height.
 
+- Where the elevation source has **no heights** (3DEP leaves much of San Francisco Bay
+  empty), the gap is filled in from the shore around it. That fill is a guess, not a surface,
+  so no rock is read within 30 m of it, and no rapid on it.
+
 Both are inferences: a gravel bar mapped as water or a misplaced outline can produce false
 rock. Flat regions skip all of this and draw OSM's outlines as they are.
 
