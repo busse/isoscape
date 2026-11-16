@@ -775,6 +775,7 @@ const paintItem = (it: Item): string => {
 }
 
 const paint = (s: Shape): string => {
+  if (s.line && s.stroke !== undefined) return `<path fill="none" stroke="${s.stroke.color}" stroke-width="${f(s.stroke.width)}" stroke-dasharray="${s.stroke.dash.map(f).join(' ')}" d="${pathOf(s.pts, false)}"/>`
   if (s.line) return `<path class="${s.dash ? 'td' : 'i'}" d="${pathOf(s.pts, false)}"/>`
   if (s.seal) return `<path fill="${s.fill}" stroke="${s.fill}" stroke-width="0.5" stroke-linejoin="round" d="${pathOf(s.pts)}"/>`
   return `<path${s.ink ? ' class="i"' : ''} fill="${s.fill}" d="${pathOf(s.pts)}"/>`

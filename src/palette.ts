@@ -72,6 +72,16 @@ export interface Palette {
    * boxcar-red freight.
    */
   readonly parts: Readonly<Record<PartTone, readonly [string, string, string]>>
+  /**
+   * Cutaways: the ink fill of every cut surface (poché), the dashed outline of what was lifted
+   * away, and the traveler's path on a flat section, with its stroke width and dash in pixels.
+   */
+  readonly poche: string
+  readonly cutOutline: string
+  readonly cutOutlineDash: readonly [number, number]
+  readonly route: string
+  readonly routeWidth: number
+  readonly routeDash: readonly [number, number]
   /** Station platforms, and the running rails of a track at close scale. */
   readonly platform: string
   readonly railSteel: string
@@ -142,7 +152,18 @@ const paper: Palette = {
     coach: ['#58704f', '#364934', '#3a3b3a'],
     engine: ['#4a4a4d', '#242427', '#333336'],
     freight: ['#a8553d', '#74382a', '#8c4632'],
+    plaster: ['#f7f2e6', '#ddd4c2', '#f3ede0'],
+    floor: ['#e9e1cf', '#cfc4ad', '#f6f1e4'],
+    wood: ['#9a7350', '#6f5038', '#b08a62'],
+    glass: ['#c9d3cf', '#a9b6b2', '#d9e0dc'],
+    tram: ['#c9473a', '#8f2a22', '#e8d9b0'],
   },
+  poche: '#2c2b33',
+  cutOutline: '#2c2b33',
+  cutOutlineDash: [6, 4],
+  route: '#b5392f',
+  routeWidth: 5,
+  routeDash: [14, 9],
   platform: '#efe9dc',
   railSteel: '#4f4a45',
   roofs: {
@@ -219,7 +240,15 @@ const night: Palette = {
     coach: ['#2f4a33', '#1f3022', '#26282b'],
     engine: ['#2a2b30', '#17181c', '#212226'],
     freight: ['#5e3328', '#40231c', '#4f2b22'],
+    plaster: ['#4a4a50', '#36363b', '#45454a'],
+    floor: ['#3a3a40', '#2c2c31', '#424248'],
+    wood: ['#5a4434', '#3e2f24', '#6a5140'],
+    glass: ['#3c4a52', '#2c3840', '#46545c'],
+    tram: ['#f07a5f', '#b04a3a', '#f2e2b8'],
   },
+  poche: '#c9d1e6',
+  cutOutline: '#c9d1e6',
+  route: '#e0614f',
   platform: '#3a3d48',
   railSteel: '#8a90a2',
   roofs: {

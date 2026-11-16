@@ -54,8 +54,26 @@ export interface HistoryFeature {
   readonly base?: number
   readonly seat?: 'min' | 'max'
   readonly on?: string
-  readonly shape?: 'prism' | 'dome'
+  readonly shape?: 'prism' | 'dome' | 'revolve' | 'stair'
   readonly tone?: PartTone
+  /**
+   * Which views draw the part: `whole` only those without a cutaway (a building's massing),
+   * `cutaway` only those with one (its walls, floors and rooms). Absent: both.
+   */
+  readonly only?: 'whole' | 'cutaway'
+  /** The part's bottom at this elevation (meters above sea level), instead of on its seat. */
+  readonly elevation?: number
+  /** The part's top at this elevation, instead of `height` above its bottom. */
+  readonly upTo?: number
+  /**
+   * `revolve`: levels of a solid of revolution about the ring's centroid, each [height above the
+   * part's bottom, outer radius, inner radius], radii as fractions of the ring's (0 inside: solid).
+   */
+  readonly levels?: readonly (readonly [number, number, number])[]
+  /** `stair`: the number of treads; it rises from the ring's first edge to its third. */
+  readonly steps?: number
+  /** How the part is known: see `confidenceOf`. */
+  readonly confidence?: Confidence
   /**
    * A label written on the map: `name` at the point `at` (lon/lat), with an optional second
    * line, `caption`, set from its start, middle or end.
@@ -75,7 +93,16 @@ export interface HistoryFeature {
   readonly sources: readonly string[]
 }
 
-export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight'
+/**
+ * How a part is known: `drawn` from a plan, a section or a survey map; `written` from a written
+ * account; `approximate` where nothing shows it (its place or size inferred).
+ */
+export type Confidence = 'drawn' | 'written' | 'approximate'
+
+/** A part's confidence: what it says, or `approximate` when it says nothing. */
+export const confidenceOf = (h: { readonly confidence?: Confidence }): Confidence => h.confidence ?? 'approximate'
+
+export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram'
 
 /**
  * A train on a curated rail line: an engine (unless `engine` is false) and `cars` cars behind

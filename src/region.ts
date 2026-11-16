@@ -73,6 +73,45 @@ export interface Region {
   }
   /** Draw the ground with relief from data/<region>/dem.bin.gz. Omit for a flat plate. */
   readonly terrain?: TerrainOptions
+  /** Open a modeled building along a vertical plane: see `Cutaway`. */
+  readonly cutaway?: Cutaway
+}
+
+/**
+ * A cutaway: the curated parts of a dated scene cut by a vertical plane, the half on one side
+ * lifted away. Only parts drawn with `only: 'cutaway'` or with no `only` take part, and only
+ * those whose id starts with `parts`. See "Cutaways" in the README.
+ */
+export interface Cutaway {
+  /** A point on the plane, [lon, lat]. */
+  readonly through: readonly [number, number]
+  /** Compass bearing the plane runs along, in degrees. */
+  readonly bearing: number
+  /** The side of that bearing lifted away. The camera should stand on it. */
+  readonly remove: 'left' | 'right'
+  /** On the removed side, keep what stands up to `keep` meters above the elevation `floor` (a plan of that floor). */
+  readonly floor?: number
+  readonly keep?: number
+  /** Id prefix of the parts that are cut (default: every modeled part). */
+  readonly parts?: string
+  /** Items lifted away on the removed side even though they are not cut: regular expressions on item ids. */
+  readonly lift?: readonly string[]
+  /** Outline the removed side of the footprints of these parts' `whole` massing, dashed: an id prefix. */
+  readonly outline?: string
+  /**
+   * The flat section: the same plane, seen square on, everything on the removed side gone.
+   * `from` and `to` are its ends, in meters along the plane from `through`; `beyond` is how far
+   * behind the plane the cut parts are drawn, `other` how far everything else is.
+   */
+  readonly section?: {
+    readonly from: number
+    readonly to: number
+    readonly beyond?: number
+    readonly other?: number
+    readonly scale?: number
+    /** Floor of the earth drawn under the section, in meters below the lowest ground. */
+    readonly earth?: number
+  }
 }
 
 export interface TerrainOptions {
