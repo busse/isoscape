@@ -375,7 +375,10 @@ stay.
 
 1. a `height` tag, from a survey or a mapper's estimate (a whole building tagged under 2 m,
    or with a height that can't be read, is taken as having none: Los Angeles County's import
-   gives hundreds of hillside houses 0.4 m);
+   gives hundreds of hillside houses 0.4 m). In maps that turn on `checkLevels` (downtown
+   Richmond), an apartment building, dormitory, hotel, house, terrace or office tagged more than
+   5.5 m a floor is taken as mistagged and drawn by its floors instead: there a six-story
+   apartment building is tagged 80 m and a twelve-story one 96 m;
 2. **an estimate from Microsoft's model**, for its own footprints, where it made one;
 3. `building:levels`, at 3.4 m a floor, plus half a floor for each roof level;
 4. **a guess** from the building's type and size: 3.2 m for a shed or anything under 40 m²,

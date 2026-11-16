@@ -125,11 +125,23 @@ const finite = (v: string | undefined): number | null => {
  * flat outline on the ground.
  */
 export const MIN_TAGGED_HEIGHT = 2
-export const buildingHeights = (t: Tags, footprintArea: number): { base: number; top: number; source: 'height' | 'model' | 'levels' | 'guess' } => {
+
+/**
+ * With `checkLevels`, a building of ordinary floors (`ORDINARY_FLOORS`) tagged more than
+ * `MAX_LEVEL_HEIGHT` meters a level is taken as mistagged and drawn by its levels: in downtown
+ * Richmond a six-story apartment building is tagged 80 m, and a twelve-story one 96 m (the
+ * height of City Hall). Churches, halls, sheds and plants keep a tall tagged height.
+ */
+export const MAX_LEVEL_HEIGHT = 5.5
+const ORDINARY_FLOORS = ['apartments', 'residential', 'dormitory', 'hotel', 'house', 'terrace', 'office']
+export const buildingHeights = (t: Tags, footprintArea: number, checkLevels = false): { base: number; top: number; source: 'height' | 'model' | 'levels' | 'guess' } => {
   const minLevel = finite(t['building:min_level'])
   const base = Math.max(0, parseLength(t.min_height) ?? (minLevel !== null ? minLevel * METRES_PER_LEVEL : 0))
   const tagged = parseLength(t.height)
-  const height = tagged !== null && t.building !== undefined && tagged < MIN_TAGGED_HEIGHT ? null : tagged
+  const tagLevels = finite(t['building:levels'])
+  const overTall = checkLevels && tagged !== null && tagLevels !== null && tagLevels > 0 && ORDINARY_FLOORS.includes(t.building ?? '') &&
+    tagged - base > tagLevels * MAX_LEVEL_HEIGHT
+  const height = (tagged !== null && t.building !== undefined && tagged < MIN_TAGGED_HEIGHT) || overTall ? null : tagged
   if (height !== null && height > base) return { base, top: height, source: t['height:source'] === 'model' ? 'model' : 'height' }
   const levels = finite(t['building:levels']) ?? NaN
   if (Number.isFinite(levels) && levels > 0) {

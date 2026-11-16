@@ -416,7 +416,7 @@ export const buildScene = (
   for (const s of solids) {
     const mine = keptParts.filter((p) => p.tags['building:part'] !== 'roof' && (holders.get(p) ?? []).includes(s))
     if (mine.length === 0) continue
-    const grounded = mine.filter((p) => buildingHeights(p.tags, areaOf(p)).base < 0.5).map((p) => p.outer)
+    const grounded = mine.filter((p) => buildingHeights(p.tags, areaOf(p), region.checkLevels === true).base < 0.5).map((p) => p.outer)
     if (groundCover(s.outer, s.inners, grounded) >= PARTS_REPLACE) replaced.add(s)
     else underParts++
   }
@@ -431,8 +431,8 @@ export const buildScene = (
     if (!inFrame(hs[0])) return false
     const kept = hs.filter((s) => !replaced.has(s))
     if (kept.length === 0 || isShellRoof(p.tags)) return true
-    const roofTop = Math.max(...kept.map((s) => buildingHeights(s.tags, areaOf(s)).top))
-    const own = buildingHeights(p.tags, areaOf(p))
+    const roofTop = Math.max(...kept.map((s) => buildingHeights(s.tags, areaOf(s), region.checkLevels === true).top))
+    const own = buildingHeights(p.tags, areaOf(p), region.checkLevels === true)
     if (own.top <= roofTop + 0.5) return false
     if (own.base < roofTop) floorOf.set(p, roofTop)
     return true
@@ -468,7 +468,7 @@ export const buildScene = (
     const outer = orient(simplifyRing(s.outer, 0.45), true)
     if (outer.length < 3) continue
     const inners = s.inners.map((h) => orient(simplifyRing(h, 0.45), false)).filter((h) => h.length >= 3)
-    const own = buildingHeights(s.tags, area)
+    const own = buildingHeights(s.tags, area, region.checkLevels === true)
     const floor = floorOf.get(s)
     const h = floor === undefined ? own : { ...own, base: floor }
     if (!Number.isFinite(h.base) || !Number.isFinite(h.top)) continue
@@ -491,7 +491,7 @@ export const buildScene = (
       if (o === s || !isBridgeTower(o.tags)) return false
       const c = centroid(s.outer)
       if (!o.outer.some((p) => Math.hypot(p[0] - c[0], p[1] - c[1]) < TOWER_REACH)) return false
-      return buildingHeights(o.tags, Math.abs(signedArea(o.outer))).base < h.base
+      return buildingHeights(o.tags, Math.abs(signedArea(o.outer)), region.checkLevels === true).base < h.base
     })
     const base = h.base > 0 && !footed ? level + h.base : gMin
     const top = Math.max(level + h.top, base + 2.5)
@@ -516,7 +516,7 @@ export const buildScene = (
       // Seat the shell on the roof of the building it stands on, if any.
       const c = centroid(outer)
       const under = solids.find((o) => o !== s && pointInRing(c, o.outer) && shown.includes(o))
-      const podium = under === undefined ? 0 : buildingHeights(under.tags, Math.abs(signedArea(under.outer))).top
+      const podium = under === undefined ? 0 : buildingHeights(under.tags, Math.abs(signedArea(under.outer)), region.checkLevels === true).top
       entries.push(spire(view, pal, s.id, outer, gMin + podium, gMean + podium + SHELL_RISE * Math.sqrt(area), dotsMode, s.tags.name, (t) => 1 - t * 0.97, false, 4))
     } else {
       const span = s.tags.building === 'bridge' || s.tags['building:part'] === 'bridge' || s.tags.man_made === 'bridge' || isBridge(s.tags)

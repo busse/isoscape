@@ -67,6 +67,11 @@ export interface Region {
    * in scene.ts). Off unless set, so plates already sold redraw exactly as they were.
    */
   readonly seatOnBanks?: boolean
+  /**
+   * Draw a building of ordinary floors by its levels when its tagged height is more than
+   * `MAX_LEVEL_HEIGHT` a level (classify.ts). Off unless set, like `seatOnBanks`.
+   */
+  readonly checkLevels?: boolean
   /** Use another region's cached data (data/<name>/) instead of this region's own. */
   readonly data?: string
   /**

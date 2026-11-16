@@ -2,6 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { bankGrounds, groundCover, seatLevel, settlePrisms, spansWater, type Prism } from '../src/scene.ts'
 import type { Vec2 } from '../src/geom.ts'
+import { buildingHeights } from '../src/classify.ts'
 
 const square = (x: number, y: number, s = 10): Vec2[] => [[x, y], [x + s, y], [x + s, y + s], [x, y + s]]
 const prism = (outer: Vec2[], base: number, top: number, extra: Partial<Prism> = {}): Prism =>
@@ -82,4 +83,15 @@ test('a building over water counts its height from the banks', () => {
   assert.deepEqual(bankGrounds(pts, [9, 1, 8, 8, 1, 9], canal), [9, 8, 8, 9])
   // A boathouse wholly on the water keeps every corner.
   assert.deepEqual(bankGrounds(pts, [1, 1, 1, 1, 1, 1], wetAll), [1, 1, 1, 1, 1, 1])
+})
+
+test('a tagged height far over its floors is a mistag, when the map checks levels', () => {
+  const hues = { building: 'apartments', 'building:levels': '6', height: '80' }
+  assert.equal(buildingHeights(hues, 2000).top, 80)
+  assert.equal(buildingHeights(hues, 2000, true).source, 'levels')
+  assert.ok(Math.abs(buildingHeights(hues, 2000, true).top - 21.2) < 0.01)
+  // Five and a half meters a floor still stands, and a church keeps its tall tagged height.
+  assert.equal(buildingHeights({ building: 'office', 'building:levels': '4', height: '22' }, 900, true).top, 22)
+  assert.equal(buildingHeights({ building: 'church', 'building:levels': '1', height: '40' }, 900, true).top, 40)
+  assert.equal(buildingHeights({ building: 'apartments', 'building:levels': 'many', height: '80' }, 900, true).top, 80)
 })
