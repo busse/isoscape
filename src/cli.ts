@@ -299,7 +299,7 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
       const sec = sceneOf({ ...inp, region: sectionRegion(scene.region) }, values.palette, year, previous, true)
       const drawn = renderSection(sec, scene.region.cutaway)
       await writeFile(`${base}-section.svg`, drawn.svg)
-      await writeFile(`${base}-section.anchors.json`, JSON.stringify({ viewBox: drawn.viewBox, anchors: drawn.anchors }) + '\n')
+      await writeFile(`${base}-section.anchors.json`, JSON.stringify({ viewBox: drawn.viewBox, frame: drawn.frame, anchors: drawn.anchors }) + '\n')
       console.error(`wrote ${base}-section.svg (${sec.items.length} items, ${(sec.sections ?? []).length} cut faces)`)
     }
   }
