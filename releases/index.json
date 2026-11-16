@@ -125,6 +125,14 @@
    "v2.json"
   ]
  },
+ "broad-street-1943-cutaway": {
+  "title": "Broad Street Station, 1943: Cutaway",
+  "current": 1,
+  "kind": "cutaway",
+  "records": [
+   "v1.json"
+  ]
+ },
  "broad-street-1943-map": {
   "title": "Broad Street Station, 1943: The Railroad Map",
   "current": 2,

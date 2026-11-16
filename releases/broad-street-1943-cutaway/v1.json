@@ -1,0 +1,196 @@
+{
+ "design": "broad-street-1943-cutaway",
+ "title": "Broad Street Station, 1943: Cutaway",
+ "version": 1,
+ "version_note": null,
+ "recorded": "2026-11-16T21:43:51+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "d105be7834967ba9162e329946656b9f34bfe22f",
+  "subject": "Merge shop-links: every shop link in the explorer comes from shop.onSale",
+  "dirty": false
+ },
+ "kind": "cutaway",
+ "recipe": {
+  "tool": "tools/cutaway/sheet.py",
+  "run": [
+   "python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json --print   # where data/ is cached; out/cutaways/print/",
+   "python3 tools/release/remake.py broad-street-1943-cutaway && python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json --no-build --print   # from the frozen scenes"
+  ],
+  "block": {
+   "collection": "Buildings in their time",
+   "set": "Broad Street Station, 1943",
+   "piece": "Cutaway",
+   "plate": "BSS-15",
+   "version": "1",
+   "drawn": "2026",
+   "location": "37.561° N 77.466° W",
+   "facing": "342°",
+   "kind": "Building cutaway"
+  },
+  "files": {
+   "broad-street-1943-cutaway_32x24.jpg": {
+    "size": [
+     9600,
+     7200
+    ],
+    "quality": 94,
+    "bytes": 5282738,
+    "sha256": "e84311245186a53c5d7275916135ca83f9af4a9325f655771a9ef10bac15fe1b",
+    "at": {
+     "x": 7679,
+     "y": 6644,
+     "w": 1593,
+     "h": 226,
+     "u": 1.2257,
+     "where": "corner"
+    }
+   },
+   "broad-street-1943-cutaway_24x18.jpg": {
+    "size": [
+     7200,
+     5400
+    ],
+    "quality": 94,
+    "bytes": 3574455,
+    "sha256": "0ea9bc3e75af709801701a81758d3c649bad4e581d42889496114e38aae25ea6",
+    "at": {
+     "x": 5576,
+     "y": 4960,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "corner"
+    }
+   }
+  },
+  "tools_at_printing": {
+   "tools/cutaway/sheet.py": "4e013eee43bb35b690511d3c68077260bdcdf681bbb6b2c4f13ca731a5a8b31c",
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "copied": "out/cutaways/print/<file> is copied unchanged to the store's print_dir"
+ },
+ "scenes": [
+  {
+   "region": "broad-street-station-cutaway",
+   "year": 1943,
+   "flags": [],
+   "svg": "out/cutaways/build/broad-street-station-cutaway-1943.svg",
+   "sha256": "9742be61e2987ff27492714c5d6202a32d81126f78a52c454a6adff263cc300d",
+   "frozen": "data/_releases/scenes/9742be61e2987ff27492714c5d6202a32d81126f78a52c454a6adff263cc300d.svg",
+   "reproduces": true
+  },
+  {
+   "region": "broad-street-station-cutaway",
+   "year": 1943,
+   "flags": [],
+   "svg": "out/cutaways/build/broad-street-station-cutaway-1943-section.svg",
+   "sha256": "6a0f5561b8c17ad7215535ff8366710211141839cbfa15a8015ffc51f0db3e36",
+   "frozen": "data/_releases/scenes/6a0f5561b8c17ad7215535ff8366710211141839cbfa15a8015ffc51f0db3e36.svg",
+   "output": "-section",
+   "reproduces": true
+  },
+  {
+   "region": null,
+   "year": null,
+   "flags": [],
+   "svg": "out/cutaways/broad-street-1943-sheet.svg",
+   "sha256": "210e3d5060ae7a8bb544d48e290278e95e0968b7d29df79ae947732e56ff5d49",
+   "frozen": "data/_releases/scenes/210e3d5060ae7a8bb544d48e290278e95e0968b7d29df79ae947732e56ff5d49.svg"
+  }
+ ],
+ "inputs": {
+  "cutaways/broad-street-1943.json": "23c16bfdcfed0f2da5f043752256e14794c18e536e860d0dfe5ecdd42cf6a781",
+  "tools/cutaway/sheet.py": "39e442e3e32e3efe0b52ed800ebc2b7af6a6be69b78d4da9b95e7f71f2ee69e9",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "eeecd1e97e934d8976e332125a739daf651c0b63190b93c311001fe0bc725c4c",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "regions/broad-street-station-cutaway.json": "2e0cb0495cf16520e62b15af2cbb788249515be48b734e071ace5f7184b6b82e",
+  "history/broad-street-station.json": "d3a598f059fca4d9c544a6ce042a6cbaf27b67b043624b311816fc059850400e",
+  "history/sanborn/broad-street-lost.geojson": "451ed9f5aadffd32dfdeb929eed168311f933532afec3a5f7e97f51cc75b7b6c",
+  "history/sanborn/fair-grounds.geojson": "ccab37978983fdf8008d49ee3a453e0259a10b51a3587d945b6fe9a8c3a8abd6"
+ },
+ "data": {
+  "broad-street-station": {
+   "snapshot": "data/_releases/broad-street-station@1fd3a2bb6c6b",
+   "files": {
+    "dem.bin.gz": "106ea02c5229b62aba8bc21e8b0bd12ab257722d6eec25f4527dbbdca5184b8b",
+    "osm.json": "3aab8a8a78c342097c9e6ffd1f6d8d20f9f7c0be297426475e529d434b72ef7f",
+    "yearbuilt.json": "5f9cb8d05b4edfd7209390b3482fd26ee3ab4283f984fc233792f3d8b228def7"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/broad-street-1943/broad-street-1943-cutaway_32x24.jpg",
+   "sha256": "e84311245186a53c5d7275916135ca83f9af4a9325f655771a9ef10bac15fe1b",
+   "bytes": 5282738,
+   "printful_file_id": 1113731857
+  },
+  "canvas": []
+ },
+ "store": {
+  "catalog": {
+   "place": "Broad Street Station",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print"
+   ],
+   "print_dir": "print-files/broad-street-1943",
+   "tags": [
+    "broad-street-1943"
+   ],
+   "credit_extra": "Drawn from the 1919 plans and sections published in The American Architect, with the other sources listed on the sheet.",
+   "modern": true,
+   "title": "Broad Street Station, 1943: Cutaway",
+   "ratio": "3x4",
+   "sizes": [
+    "18x24",
+    "24x32"
+   ],
+   "print": "broad-street-1943-cutaway_32x24.jpg",
+   "prints": {
+    "18x24": "broad-street-1943-cutaway_24x18.jpg",
+    "24x32": "broad-street-1943-cutaway_32x24.jpg"
+   },
+   "detail": [
+    0.17,
+    0.16,
+    0.47,
+    0.56
+   ],
+   "version": 1,
+   "plate": "BSS-15",
+   "plate_box": [
+    0.7999,
+    0.92278,
+    0.96583,
+    0.95417
+   ]
+  },
+  "products": [],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-cutaway_32x24-print_a6bb3d9e-37ef-4127-a1d3-23d9c73685dd.jpg?v=1794864969",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-cutaway_32x24-detail_5e00aaab-1017-4b43-80b3-7c8146e999ba.jpg?v=1794864975",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-cutaway_32x24-plate_7e444c87-87e3-41ed-92dd-289146af1c65.jpg?v=1794864980"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-cutaway_32x24-framed-print-black_1dfc066c-a2e2-49e7-991c-e04050a2aeaa.jpg?v=1794864989",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-cutaway_32x24-framed-print-white_f9b82b24-e0b1-4d1d-9fe5-82e286a3c7cc.jpg?v=1794864995",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-cutaway_32x24-detail_5e00aaab-1017-4b43-80b3-7c8146e999ba.jpg?v=1794864975",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-cutaway_32x24-plate_7e444c87-87e3-41ed-92dd-289146af1c65.jpg?v=1794864980"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 2
+ }
+}
