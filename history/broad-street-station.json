@@ -196,47 +196,47 @@
    "to": 1976,
    "ring": [
     [
-     -77.4661024,
-     37.5610156
+     -77.4661067,
+     37.5610185
     ],
     [
-     -77.4660999,
-     37.5610202
+     -77.4661042,
+     37.5610232
     ],
     [
-     -77.4661014,
-     37.5610251
+     -77.4661057,
+     37.5610281
     ],
     [
-     -77.4661061,
-     37.5610284
+     -77.4661104,
+     37.5610314
     ],
     [
-     -77.4661124,
-     37.5610288
+     -77.4661167,
+     37.5610318
     ],
     [
-     -77.4661178,
-     37.5610262
+     -77.4661221,
+     37.5610292
     ],
     [
-     -77.4661203,
-     37.5610216
+     -77.4661245,
+     37.5610245
     ],
     [
-     -77.4661188,
-     37.5610167
+     -77.4661231,
+     37.5610197
     ],
     [
-     -77.466114,
-     37.5610134
+     -77.4661183,
+     37.5610164
     ],
     [
-     -77.4661078,
-     37.561013
+     -77.4661121,
+     37.5610159
     ]
    ],
-   "height": 12.5,
+   "height": 11.5,
    "tone": "stone",
    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
    "sources": [
@@ -246,7 +246,8 @@
     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
     "https://www.openstreetmap.org/way/252997396",
     "https://sah-archipedia.org/node/20518"
-   ]
+   ],
+   "on": "bss-steps"
   },
   {
    "id": "bss-column-2",
@@ -256,47 +257,47 @@
    "to": 1976,
    "ring": [
     [
-     -77.466056,
-     37.5609837
+     -77.4660603,
+     37.5609866
     ],
     [
-     -77.4660536,
-     37.5609883
+     -77.4660579,
+     37.5609913
     ],
     [
-     -77.466055,
-     37.5609932
+     -77.4660593,
+     37.5609962
     ],
     [
-     -77.4660598,
-     37.5609965
+     -77.4660641,
+     37.5609995
     ],
     [
-     -77.4660661,
-     37.5609969
+     -77.4660704,
+     37.5609999
     ],
     [
-     -77.4660715,
-     37.5609943
+     -77.4660758,
+     37.5609973
     ],
     [
-     -77.4660739,
-     37.5609897
+     -77.4660782,
+     37.5609926
     ],
     [
-     -77.4660725,
-     37.5609848
+     -77.4660768,
+     37.5609877
     ],
     [
-     -77.4660677,
-     37.5609815
+     -77.466072,
+     37.5609845
     ],
     [
-     -77.4660614,
-     37.5609811
+     -77.4660657,
+     37.560984
     ]
    ],
-   "height": 12.5,
+   "height": 11.5,
    "tone": "stone",
    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
    "sources": [
@@ -306,7 +307,8 @@
     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
     "https://www.openstreetmap.org/way/252997396",
     "https://sah-archipedia.org/node/20518"
-   ]
+   ],
+   "on": "bss-steps"
   },
   {
    "id": "bss-column-3",
@@ -316,47 +318,47 @@
    "to": 1976,
    "ring": [
     [
-     -77.4660097,
-     37.5609518
+     -77.466014,
+     37.5609547
     ],
     [
-     -77.4660073,
-     37.5609564
+     -77.4660116,
+     37.5609594
     ],
     [
-     -77.4660087,
-     37.5609613
+     -77.466013,
+     37.5609643
     ],
     [
-     -77.4660135,
-     37.5609646
+     -77.4660178,
+     37.5609675
     ],
     [
-     -77.4660198,
-     37.560965
+     -77.4660241,
+     37.560968
     ],
     [
-     -77.4660252,
-     37.5609624
+     -77.4660295,
+     37.5609654
     ],
     [
-     -77.4660276,
-     37.5609578
+     -77.4660319,
+     37.5609607
     ],
     [
-     -77.4660262,
-     37.5609529
+     -77.4660305,
+     37.5609558
     ],
     [
-     -77.4660214,
-     37.5609496
+     -77.4660257,
+     37.5609525
     ],
     [
-     -77.4660151,
-     37.5609492
+     -77.4660194,
+     37.5609521
     ]
    ],
-   "height": 12.5,
+   "height": 11.5,
    "tone": "stone",
    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
    "sources": [
@@ -366,7 +368,8 @@
     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
     "https://www.openstreetmap.org/way/252997396",
     "https://sah-archipedia.org/node/20518"
-   ]
+   ],
+   "on": "bss-steps"
   },
   {
    "id": "bss-column-4",
@@ -376,47 +379,47 @@
    "to": 1976,
    "ring": [
     [
-     -77.4659634,
-     37.5609199
+     -77.4659677,
+     37.5609228
     ],
     [
-     -77.465961,
-     37.5609245
+     -77.4659652,
+     37.5609275
     ],
     [
-     -77.4659624,
-     37.5609294
+     -77.4659667,
+     37.5609324
     ],
     [
-     -77.4659672,
-     37.5609327
+     -77.4659715,
+     37.5609356
     ],
     [
-     -77.4659735,
-     37.5609331
+     -77.4659777,
+     37.5609361
     ],
     [
-     -77.4659788,
-     37.5609305
+     -77.4659831,
+     37.5609335
     ],
     [
-     -77.4659813,
-     37.5609259
+     -77.4659856,
+     37.5609288
     ],
     [
-     -77.4659798,
-     37.560921
+     -77.4659841,
+     37.5609239
     ],
     [
-     -77.4659751,
-     37.5609177
+     -77.4659794,
+     37.5609206
     ],
     [
-     -77.4659688,
-     37.5609173
+     -77.4659731,
+     37.5609202
     ]
    ],
-   "height": 12.5,
+   "height": 11.5,
    "tone": "stone",
    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
    "sources": [
@@ -426,7 +429,8 @@
     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
     "https://www.openstreetmap.org/way/252997396",
     "https://sah-archipedia.org/node/20518"
-   ]
+   ],
+   "on": "bss-steps"
   },
   {
    "id": "bss-column-5",
@@ -436,47 +440,47 @@
    "to": 1976,
    "ring": [
     [
-     -77.4659171,
-     37.560888
+     -77.4659214,
+     37.5608909
     ],
     [
-     -77.4659146,
-     37.5608926
+     -77.4659189,
+     37.5608955
     ],
     [
-     -77.4659161,
-     37.5608975
+     -77.4659204,
+     37.5609004
     ],
     [
-     -77.4659208,
-     37.5609008
+     -77.4659251,
+     37.5609037
     ],
     [
-     -77.4659271,
-     37.5609012
+     -77.4659314,
+     37.5609041
     ],
     [
-     -77.4659325,
-     37.5608986
+     -77.4659368,
+     37.5609015
     ],
     [
-     -77.465935,
-     37.560894
+     -77.4659393,
+     37.5608969
     ],
     [
-     -77.4659335,
-     37.5608891
+     -77.4659378,
+     37.560892
     ],
     [
-     -77.4659288,
-     37.5608858
+     -77.465933,
+     37.5608887
     ],
     [
-     -77.4659225,
-     37.5608853
+     -77.4659268,
+     37.5608883
     ]
    ],
-   "height": 12.5,
+   "height": 11.5,
    "tone": "stone",
    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
    "sources": [
@@ -486,7 +490,8 @@
     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
     "https://www.openstreetmap.org/way/252997396",
     "https://sah-archipedia.org/node/20518"
-   ]
+   ],
+   "on": "bss-steps"
   },
   {
    "id": "bss-column-6",
@@ -496,47 +501,47 @@
    "to": 1976,
    "ring": [
     [
-     -77.4658708,
-     37.560856
+     -77.465875,
+     37.560859
     ],
     [
-     -77.4658683,
-     37.5608607
+     -77.4658726,
+     37.5608636
     ],
     [
-     -77.4658698,
-     37.5608656
+     -77.465874,
+     37.5608685
     ],
     [
-     -77.4658745,
-     37.5608689
+     -77.4658788,
+     37.5608718
     ],
     [
-     -77.4658808,
-     37.5608693
+     -77.4658851,
+     37.5608722
     ],
     [
-     -77.4658862,
-     37.5608667
+     -77.4658905,
+     37.5608696
     ],
     [
-     -77.4658886,
-     37.560862
+     -77.4658929,
+     37.560865
     ],
     [
-     -77.4658872,
-     37.5608571
+     -77.4658915,
+     37.5608601
     ],
     [
-     -77.4658824,
-     37.5608539
+     -77.4658867,
+     37.5608568
     ],
     [
-     -77.4658761,
-     37.5608534
+     -77.4658804,
+     37.5608564
     ]
    ],
-   "height": 12.5,
+   "height": 11.5,
    "tone": "stone",
    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
    "sources": [
@@ -546,7 +551,8 @@
     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
     "https://www.openstreetmap.org/way/252997396",
     "https://sah-archipedia.org/node/20518"
-   ]
+   ],
+   "on": "bss-steps"
   },
   {
    "id": "bss-pier-1",
@@ -572,7 +578,7 @@
      37.561061
     ]
    ],
-   "height": 12.5,
+   "height": 11.5,
    "tone": "stone",
    "note": "A square end pier of the colonnade. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
    "sources": [
@@ -581,7 +587,8 @@
     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
     "https://www.openstreetmap.org/way/252997396"
-   ]
+   ],
+   "on": "bss-steps"
   },
   {
    "id": "bss-pier-2",
@@ -607,7 +614,7 @@
      37.5608578
     ]
    ],
-   "height": 12.5,
+   "height": 11.5,
    "tone": "stone",
    "note": "A square end pier of the colonnade. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
    "sources": [
@@ -616,7 +623,8 @@
     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
     "https://www.openstreetmap.org/way/252997396"
-   ]
+   ],
+   "on": "bss-steps"
   },
   {
    "id": "bss-entablature",
@@ -652,7 +660,7 @@
     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
     "https://www.openstreetmap.org/way/252997396"
    ],
-   "base": 12.5
+   "on": "bss-column-1"
   },
   {
    "id": "bss-marquee-1",

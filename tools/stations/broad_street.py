@@ -94,7 +94,7 @@ SRC = {
 features = []
 
 
-def part(id_, name, ring_, height, tone, note, sources, base=0.0, seat='min', shape='prism'):
+def part(id_, name, ring_, height, tone, note, sources, base=0.0, seat='min', shape='prism', on=None):
     f = {'id': id_, 'name': name, 'kind': 'landmark', 'from': 1919, 'to': 1976, 'ring': ring_, 'height': height,
          'tone': tone, 'note': note, 'sources': sources}
     if base:
@@ -103,6 +103,8 @@ def part(id_, name, ring_, height, tone, note, sources, base=0.0, seat='min', sh
         f['seat'] = seat
     if shape != 'prism':
         f['shape'] = shape
+    if on is not None:
+        f['on'] = on
     features.append(f)
 
 
@@ -119,13 +121,15 @@ part('bss-center', HEAD, rect_ab(-20.5, 16.5, -20, 21), 19.5, 'stone', 'The cent
 part('bss-passages', HEAD, rect_ab(-36, 24, 21, 35), 9, 'stone', 'The enclosed concourse passages across the back of the head house. ' + H_NOTE, H_SRC)
 part('bss-steps', HEAD, rect_ab(-21, 17, -29, -20), 1.0, 'stone', 'The porch, raised above the forecourt. ' + H_NOTE, H_SRC)
 # The colonnade: six Tuscan columns between square end piers, after the Doric of St. Peter's
-# Square; the entablature runs across them at the wings' cornice.
+# Square; the entablature runs across them at the wings' cornice. Columns and piers stand on
+# the porch and the entablature on the columns (`on`), so on the sloping forecourt they share
+# one base and one top, 12.5 m over the porch's lowest ground.
 for k in range(6):
-    a = -15 + k * 5.4
-    part(f'bss-column-{k + 1}', HEAD, poly_ab(a, -24.5, 0.9, 10), 12.5, 'stone', 'One of the colonnade\'s six columns, modeled on the Doric of St. Peter\'s Square. ' + H_NOTE, H_SRC + [SRC['archipedia']])
+    a = -15.5 + k * 5.4  # centered on the front (a = −2), between the piers
+    part(f'bss-column-{k + 1}', HEAD, poly_ab(a, -24.5, 0.9, 10), 11.5, 'stone', 'One of the colonnade\'s six columns, modeled on the Doric of St. Peter\'s Square. ' + H_NOTE, H_SRC + [SRC['archipedia']], on='bss-steps')
 for k, a in enumerate((-19.2, 15.2)):
-    part(f'bss-pier-{k + 1}', HEAD, rect_ab(a - 1.2, a + 1.2, -25.7, -23.3), 12.5, 'stone', 'A square end pier of the colonnade. ' + H_NOTE, H_SRC)
-part('bss-entablature', HEAD, rect_ab(-20.5, 16.5, -26.5, -20), 2.5, 'stone', 'The entablature over the colonnade. ' + H_NOTE, H_SRC, base=12.5)
+    part(f'bss-pier-{k + 1}', HEAD, rect_ab(a - 1.2, a + 1.2, -25.7, -23.3), 11.5, 'stone', 'A square end pier of the colonnade. ' + H_NOTE, H_SRC, on='bss-steps')
+part('bss-entablature', HEAD, rect_ab(-20.5, 16.5, -26.5, -20), 2.5, 'stone', 'The entablature over the colonnade. ' + H_NOTE, H_SRC, on='bss-column-1')
 for k, (a0, a1) in enumerate(((-41, -20.5), (16.5, 37))):
     part(f'bss-marquee-{k + 1}', HEAD, rect_ab(a0, a1, -23.5, -20), 0.5, 'iron', 'Cast-iron and glass marquee over the wing\'s doors (approximate).', [SRC['postcard-a'], SRC['postcard-b']], base=4.2)
 # The dome: a polygonal drum pierced by lunettes, then the Roman dome, its top about 108 ft up.

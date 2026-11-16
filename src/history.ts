@@ -47,10 +47,13 @@ export interface HistoryFeature {
    * A landmark drawn as one part of a modeled building: it stands `base` meters above its seat,
    * the lowest ground under it (`seat: 'max'`: the highest, for a part carried over lower
    * ground, such as a concourse over tracks); `shape: 'dome'` rounds it to a dome; `tone`
-   * paints it from the palette's `parts` instead of the lost-landmark tone.
+   * paints it from the palette's `parts` instead of the lost-landmark tone. `on` names another
+   * part it rests on: its seat is then that part's top, so parts that share a support (the
+   * columns on a porch, an entablature on its columns) share one level on sloping ground.
    */
   readonly base?: number
   readonly seat?: 'min' | 'max'
+  readonly on?: string
   readonly shape?: 'prism' | 'dome'
   readonly tone?: PartTone
   /**

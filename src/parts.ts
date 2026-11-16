@@ -22,6 +22,44 @@ export const toned = (pal: Palette, tone: PartTone): { pal: Palette; roof: strin
  */
 export const domeProfile = (t: number): number => Math.sqrt(Math.max(0, 1 - (t * 0.995) ** 2))
 
+/** What `partLevels` needs of a part: its seat rule, support, base, height and the ground under it. */
+export interface PartSeat {
+  readonly id: string
+  readonly grounds: readonly number[]
+  readonly seat?: 'min' | 'max'
+  readonly on?: string
+  readonly base?: number
+  readonly height?: number
+}
+
+/**
+ * The scene z of each part's bottom. A part stands `base` above its seat: the top of the part
+ * named by `on` when there is one, otherwise the lowest ground under it (the highest with
+ * `seat: 'max'`). Seating on a support keeps a group level on sloping ground, so columns on one
+ * porch all stand on its top and meet the entablature at one height. A missing or circular
+ * support falls back to the part's own ground.
+ */
+export const partLevels = (parts: readonly PartSeat[]): Map<string, number> => {
+  const byId = new Map(parts.map((p) => [p.id, p]))
+  const levels = new Map<string, number>()
+  const resolving = new Set<string>()
+  const level = (p: PartSeat): number => {
+    const known = levels.get(p.id)
+    if (known !== undefined) return known
+    resolving.add(p.id)
+    const support = p.on === undefined ? undefined : byId.get(p.on)
+    const seat = support !== undefined && !resolving.has(support.id)
+      ? level(support) + (support.height ?? 10)
+      : p.seat === 'max' ? Math.max(...p.grounds) : Math.min(...p.grounds)
+    resolving.delete(p.id)
+    const z = seat + (p.base ?? 0)
+    levels.set(p.id, z)
+    return z
+  }
+  for (const p of parts) level(p)
+  return levels
+}
+
 /** A dome on `outer` (its springing line), from `base` to `top`. */
 export const dome = (view: View, pal: Palette, id: string, outer: Ring, base: number, top: number, name?: string): Item =>
   spire(view, toned(pal, 'dome').pal, id, outer, base, top, 'none', name, domeProfile, false, 10)
