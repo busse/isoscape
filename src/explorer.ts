@@ -45,11 +45,89 @@ import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
 import { escAttr, siteTags, type SiteCard } from './social.ts'
+import { makeStory } from './story.ts'
 
 // The isoscape mark (one isometric building), for the browser tab.
-const MARK = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><g stroke="#2c2b33" stroke-width="3" stroke-linejoin="round">' +
+export const MARK = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><g stroke="#2c2b33" stroke-width="3" stroke-linejoin="round">' +
   '<path d="M60 18 L100 41 L60 64 L20 41 Z" fill="#f2c879"/><path d="M20 41 L60 64 L60 104 L20 81 Z" fill="#ece7dc"/><path d="M100 41 L60 64 L60 104 L100 81 Z" fill="#c3bbac"/></g>' +
   '<g fill="#2c2b33"><circle cx="60" cy="18" r="4"/><circle cx="100" cy="41" r="4"/><circle cx="20" cy="41" r="4"/><circle cx="60" cy="64" r="4"/><circle cx="20" cy="81" r="4"/><circle cx="100" cy="81" r="4"/><circle cx="60" cy="104" r="4"/></g></svg>'
+
+/** The explorer's colors and type, light and dark; the static pages (static-pages.ts) use the same. */
+export const THEME_CSS = `:root {
+  --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
+  --accent: #2f6f8f; --accent-soft: #dcebf2; --stage: #e7e4dc; --chip: #efece5; --good: #3c7a4a; --bad: #a3473a; --warn: #b8860b;
+  font: 13px/1.45 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #15161b; --panel: #1b1d23; --line: #2b2e37; --ink: #e5e6ec; --dim: #9497a3; --faint: #646875;
+    --accent: #7fb6d4; --accent-soft: #22323d; --stage: #101115; --chip: #252831; --good: #7fc28f; --bad: #e08c7e; --warn: #f2c94c; }
+}
+`
+
+/** The reading view's typography, shared with the static content pages. */
+export const PROSE_CSS = `.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; }
+.prose h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 18px; font-weight: 650; }
+.prose h2 { font-size: 20px; letter-spacing: -.01em; margin: 2.2em 0 .5em; padding-top: .6em; border-top: 1px solid var(--line); font-weight: 650; }
+.prose h3 { font-size: 16px; margin: 1.6em 0 .4em; }
+.prose h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin: 1.5em 0 .3em; }
+.prose h2, .prose h3 { scroll-margin-top: 16px; }
+.prose p, .prose ul, .prose ol, .prose blockquote, .prose .table, .prose pre { margin: 0 0 1em; }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose li { margin: .25em 0; }
+.prose li::marker { color: var(--faint); }
+.prose a { color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); text-underline-offset: 2px; }
+.prose a:hover { text-decoration-color: var(--accent); }
+.prose code { font: .86em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: .05em .25em; border-radius: 4px; }
+.prose pre { max-height: none; font-size: 12.5px; }
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+.prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 0 6px 6px 0; }
+.prose blockquote p:last-child { margin-bottom: 0; }
+.prose img { display: block; max-width: 100%; height: auto; margin: 1.4em auto; }
+.prose hr { border: none; border-top: 1px solid var(--line); margin: 2em 0; }
+.prose .table { overflow-x: auto; }
+.prose table { font-size: 13.5px; font-variant-numeric: normal; }
+.prose th, .prose td { text-align: left; white-space: normal; vertical-align: top; padding: 6px 10px 6px 0; color: var(--ink); }
+.prose th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); border-bottom: 1.5px solid var(--line); }
+.prose td:first-child { color: var(--ink); font-weight: 500; }
+.prose .source { margin-top: 3em; padding-top: 1em; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--faint); }
+`
+
+/** "How this view was made", shared with the static map pages. */
+export const STORY_CSS = `.story { font-size: 13.5px; line-height: 1.6; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 0 36px; align-content: start; }
+.story > h3, .story > .lede, .story > .credit { grid-column: 1 / -1; }
+.story section { max-width: 72ch; }
+.story h3 { margin: 0 0 8px; }
+.story h4 { font-size: 13px; margin: 12px 0 3px; font-weight: 600; }
+.story h4 a { font-weight: 400; font-size: 11.5px; margin-left: 6px; }
+.story p { margin: 0 0 6px; }
+.story ul { margin: 0 0 6px; padding-left: 1.2em; }
+.story li { margin: 2px 0; }
+.story a { color: var(--accent); text-decoration: none; }
+.story a:hover { text-decoration: underline; }
+.story .lede { font-size: 14.5px; max-width: 110ch; margin-bottom: 2px; }
+.story .unknown { color: var(--faint); }
+.story code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: 0 4px; border-radius: 3px; }
+.story .credit { margin-top: 14px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12px; color: var(--dim); }
+.mixbar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 6px 0 4px; max-width: 360px; background: var(--chip); }
+.mixbar span { display: block; height: 100%; }
+.m-tag { background: var(--good); } .m-model { background: #8a7bb8; } .m-lev { background: var(--accent); } .m-guess { background: var(--faint); }
+.story ul.keyed { list-style: none; padding-left: 0; }
+.key { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+`
+
+/**
+ * Every map and page as a plain web page (see static-pages.ts): a folded list at the foot of the
+ * front page, in the document itself, so a crawler that runs no script still finds them all. Without
+ * script the front page shows only this, with a note.
+ */
+const plainList = (site: SiteCard): string => {
+  if (!site.plain?.length) return ''
+  return `<div class="plainlinks"><noscript><p><b>The explorer needs JavaScript.</b> Every map and page is also here as a plain web page:</p></noscript>` +
+    `<details id="plain"><summary>Every map and page as a plain web page</summary><nav aria-label="Every map and page as a plain web page">` +
+    site.plain.map((g) => `<h2>${escHtml(g.title)}</h2><ul>${g.links.map((l) => `<li><a href="${escAttr(l.href)}">${escHtml(l.label)}</a></li>`).join('')}</ul>`).join('') +
+    `</nav></details></div>`
+}
 
 const escHtml = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string)
 const json = (v: unknown) => JSON.stringify(v).replace(/</g, '\\u003c')
@@ -63,18 +141,9 @@ export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Pag
 ${site.analytics ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${escAttr(site.analytics.ga)}"></script>
 <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)} gtag('js', new Date()); gtag('config', '${escAttr(site.analytics.ga)}', { send_page_view: false })</script>
 ` : ''}<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(MARK)}">
-${siteTags(site, builds.length)}<style>
-:root {
-  --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
-  --accent: #2f6f8f; --accent-soft: #dcebf2; --stage: #e7e4dc; --chip: #efece5; --good: #3c7a4a; --bad: #a3473a; --warn: #b8860b;
-  font: 13px/1.45 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  color-scheme: light dark;
-}
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #15161b; --panel: #1b1d23; --line: #2b2e37; --ink: #e5e6ec; --dim: #9497a3; --faint: #646875;
-    --accent: #7fb6d4; --accent-soft: #22323d; --stage: #101115; --chip: #252831; --good: #7fc28f; --bad: #e08c7e; --warn: #f2c94c; }
-}
-* { box-sizing: border-box; }
+${siteTags(site, builds.length)}${site.sitemap ? '<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">\n' : ''}${site.plain?.length ? `<noscript><style>#stage, #info, #page, #filter, #list, #mbar, #mwarn { display: none !important; } #home { display: block !important; } main { grid-template-rows: 1fr !important; } #plain > summary { color: var(--ink); }</style></noscript>
+` : ''}<style>
+${THEME_CSS}* { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); }
 body { display: grid; grid-template-columns: 300px 1fr; grid-template-rows: 100%; overflow: hidden; }
 button { font: inherit; color: inherit; }
@@ -261,6 +330,12 @@ body.home main { grid-template-rows: 1fr; }
 .hm .more { margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; gap: 8px 22px; flex-wrap: wrap; font-size: 14px; }
 .hm .more a { color: var(--accent); }
 @media (max-width: 760px) { .hm { padding: 16px 16px 60px; } .hm h1 { font-size: 27px; } }
+.plainlinks { max-width: 1240px; margin: -56px auto 0; padding: 0 36px 40px; font-size: 12.5px; color: var(--dim); }
+.plainlinks summary { cursor: pointer; color: var(--faint); }
+.plainlinks h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; margin: 14px 0 4px; }
+.plainlinks ul { columns: 3 220px; margin: 0; padding-left: 1.1em; }
+.plainlinks a { color: var(--accent); }
+@media (max-width: 760px) { .plainlinks { margin-top: -40px; padding: 0 16px 32px; } }
 
 /* ---- pages: reading view --------------------------------------------------------- */
 #page { display: none; overflow-y: auto; background: var(--panel); min-height: 0; }
@@ -271,32 +346,7 @@ body.reading main { grid-template-rows: 1fr; }
 @media (max-width: 1180px) { .doc { grid-template-columns: minmax(0, 70ch); } #toc { display: none; } }
 .doc .back { display: inline-block; margin-bottom: 18px; font-size: 12.5px; color: var(--accent); text-decoration: none; border: 1px solid var(--line); border-radius: 14px; padding: 3px 11px; background: var(--bg); cursor: pointer; }
 .doc .back:hover { border-color: var(--accent); }
-.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; }
-.prose h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 18px; font-weight: 650; }
-.prose h2 { font-size: 20px; letter-spacing: -.01em; margin: 2.2em 0 .5em; padding-top: .6em; border-top: 1px solid var(--line); font-weight: 650; }
-.prose h3 { font-size: 16px; margin: 1.6em 0 .4em; }
-.prose h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin: 1.5em 0 .3em; }
-.prose h2, .prose h3 { scroll-margin-top: 16px; }
-.prose p, .prose ul, .prose ol, .prose blockquote, .prose .table, .prose pre { margin: 0 0 1em; }
-.prose ul, .prose ol { padding-left: 1.3em; }
-.prose li { margin: .25em 0; }
-.prose li::marker { color: var(--faint); }
-.prose a { color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); text-underline-offset: 2px; }
-.prose a:hover { text-decoration-color: var(--accent); }
-.prose code { font: .86em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: .05em .25em; border-radius: 4px; }
-.prose pre { max-height: none; font-size: 12.5px; }
-.prose pre code { background: none; padding: 0; font-size: inherit; }
-.prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 0 6px 6px 0; }
-.prose blockquote p:last-child { margin-bottom: 0; }
-.prose img { display: block; max-width: 100%; height: auto; margin: 1.4em auto; }
-.prose hr { border: none; border-top: 1px solid var(--line); margin: 2em 0; }
-.prose .table { overflow-x: auto; }
-.prose table { font-size: 13.5px; font-variant-numeric: normal; }
-.prose th, .prose td { text-align: left; white-space: normal; vertical-align: top; padding: 6px 10px 6px 0; color: var(--ink); }
-.prose th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); border-bottom: 1.5px solid var(--line); }
-.prose td:first-child { color: var(--ink); font-weight: 500; }
-.prose .source { margin-top: 3em; padding-top: 1em; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--faint); }
-#toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
+${PROSE_CSS}#toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
 #toc h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 6px 0 8px; }
 #toc a { display: block; padding: 3px 0 3px 10px; border-left: 2px solid var(--line); color: var(--dim); text-decoration: none; }
 #toc a:hover { color: var(--ink); }
@@ -309,28 +359,8 @@ body.reading main { grid-template-rows: 1fr; }
 #info .bar .tabs button.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
 #info.made { max-height: 52vh; }
 #info .body.stories { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 14px 24px 22px; }
-.story { font-size: 13.5px; line-height: 1.6; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr)); gap: 0 36px; align-content: start; }
-.story > h3, .story > .lede, .story > .credit { grid-column: 1 / -1; }
-.story section { max-width: 72ch; }
-.story h3 { margin: 0 0 8px; }
-.story h4 { font-size: 13px; margin: 12px 0 3px; font-weight: 600; }
-.story h4 a { font-weight: 400; font-size: 11.5px; margin-left: 6px; }
-.story p { margin: 0 0 6px; }
-.story ul { margin: 0 0 6px; padding-left: 1.2em; }
-.story li { margin: 2px 0; }
-.story a { color: var(--accent); text-decoration: none; }
-.story a:hover { text-decoration: underline; }
-.story .lede { font-size: 14.5px; max-width: 110ch; margin-bottom: 2px; }
-.story .unknown { color: var(--faint); }
-.story code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: 0 4px; border-radius: 3px; }
-.story .credit { margin-top: 14px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12px; color: var(--dim); }
-.mixbar { display: flex; height: 8px; border-radius: 4px; overflow: hidden; margin: 6px 0 4px; max-width: 360px; background: var(--chip); }
-.mixbar span { display: block; height: 100%; }
-.m-tag { background: var(--good); } .m-model { background: #8a7bb8; } .m-lev { background: var(--accent); } .m-guess { background: var(--faint); }
-.doc .back[hidden] { display: none; }
+${STORY_CSS}.doc .back[hidden] { display: none; }
 #page:focus { outline: none; }
-.story ul.keyed { list-style: none; padding-left: 0; }
-.key { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
 </style>
 </head>
 <body>
@@ -368,7 +398,7 @@ body.reading main { grid-template-rows: 1fr; }
       <div class="links" id="links"></div></div>
     <div class="body" id="infoBody"></div>
   </section>
-  <section id="home" tabindex="-1"><div class="hm" id="homeBody"></div></section>
+  <section id="home" tabindex="-1"><div class="hm" id="homeBody"></div>${plainList(site)}</section>
   <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
 </main>
 <script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: site.shop ?? null, home: site.home ?? null, latestPages: site.latestPages !== false })}</script>
@@ -713,198 +743,8 @@ body.reading main { grid-template-rows: 1fr; }
       '<div class="settings"><h3>' + (b ? 'Settings that differ' : 'Settings') + '</h3>' + (b ? configDiff(a, b) : '<pre>' + esc(JSON.stringify(a.config, null, 2)) + '</pre>') + '</div>'
   }
   // ---- how this view was made ------------------------------------------------------------------
-  // A build's own story, written from its meta.json. Anything an older build did not record is
-  // said to be unknown rather than guessed.
-  const how = (id, text) => pageBySlug.has('how-its-made') ? '<a href="#/how-its-made/' + id + '">' + text + '</a>' : text
-  const KNOWN = new Set(['features', 'ground', 'ribbons', 'buildings', 'heightFromTag', 'heightFromModel', 'heightFromLevels', 'heightGuessed', 'footprintsAdded', 'bridgePieces', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'coastWays', 'year', 'newSincePrevious', 'landmarks', 'curated', 'datedCurated', 'datedOsm', 'datedParcel', 'undatedToday', 'traced', 'tracedEndMap', 'tracedEndRebuilt', 'tracedEndHighway', 'tracedEndAssumed'])
-  const POINTS = ['north', 'north-northeast', 'northeast', 'east-northeast', 'east', 'east-southeast', 'southeast', 'south-southeast', 'south', 'south-southwest', 'southwest', 'west-southwest', 'west', 'west-northwest', 'northwest', 'north-northwest']
-  const isNum = (v) => typeof v === 'number' && Number.isFinite(v)
-  const int = (v) => Math.round(v).toLocaleString()
-  const dist = (m) => (m >= 1000 ? +(m / 1000).toFixed(2) + ' km' : Math.round(m) + ' m')
-  const deg360 = (d) => Math.round(((d % 360) + 360) % 360) % 360
-  const compass = (d) => POINTS[Math.round((((d % 360) + 360) % 360) / 22.5) % 16]
-  const plural = (n, one, many) => int(n) + ' ' + (Math.round(n) === 1 ? one : many || one + 's')
-  const ordinal = (n) => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : n % 10 === 1 ? 'st' : n % 10 === 2 ? 'nd' : n % 10 === 3 ? 'rd' : 'th')
-  const pct = (part, whole) => (whole > 0 ? Math.round((100 * part) / whole) + '%' : '–')
-  const areaText = (m2) => (m2 >= 10000 ? (m2 / 10000).toFixed(1) + ' ha' : int(m2) + ' m²')
-  const latlon = (c) => Math.abs(c[1]).toFixed(4) + '°' + (c[1] >= 0 ? 'N' : 'S') + ', ' + Math.abs(c[0]).toFixed(4) + '°' + (c[0] >= 0 ? 'E' : 'W')
-  const unknown = (text) => '<span class="unknown">' + text + '</span>'
-  const story = (x, tag) => {
-    const c = x.config || {}, s = x.stats || {}, t = c.terrain || null
-    const has = (k) => isNum(s[k])
-    const relief = !!t && t.enabled !== false && has('elevationTop') && has('elevationDatum')
-    const out = []
-    // Each heading opens a section; the sections flow into as many columns as fit.
-    let inSection = false
-    const head = (title, link) => {
-      out.push((inSection ? '</section>' : '') + '<section><h4>' + title + (link ? ' ' + link : '') + '</h4>')
-      inSection = true
-    }
-    out.push(tag ? '<h3>' + tag + ' · ' + esc(label(x)) + '</h3>' : '')
-
-    // The place and the frame.
-    let lede = '<b>' + esc(x.title || c.title || x.region) + '.</b> '
-    if (isNum(c.width) && isNum(c.depth)) {
-      lede += 'A frame ' + dist(c.width) + ' across and ' + dist(c.depth) + ' deep (' + ((c.width * c.depth) / 1e6).toFixed(2) + ' km²)'
-      const ctr = Array.isArray(c.center) && isNum(c.center[0]) && isNum(c.center[1]) ? c.center : null
-      if (ctr) lede += ', centered on <a href="https://www.openstreetmap.org/?mlat=' + ctr[1] + '&amp;mlon=' + ctr[0] + '#map=16/' + ctr[1] + '/' + ctr[0] + '" target="_blank" rel="noopener" title="Open this point on openstreetmap.org">' + latlon(ctr) + '</a>'
-      lede += '.'
-    }
-    out.push('<p class="lede">' + lede + '</p>')
-
-    // Time: what is measured and what is curated in a dated scene.
-    if (x.time) {
-      const tm = x.time
-      head('The year ' + esc(tm.year) + (tm.title ? ': ' + esc(tm.title) : ''), how('time', 'how time is drawn →'))
-      if (tm.note) out.push('<p>' + esc(tm.note) + '</p>')
-      if (has('buildings')) {
-        const dated = (s.datedCurated || 0) + (s.datedOsm || 0) + (s.datedParcel || 0)
-        let p = '<b>Measured:</b> ' + plural(s.buildings, 'building') + ' standing today that had been built by ' + esc(tm.year) + '. '
-        if (dated > 0) p += 'Their years: ' + int(s.datedParcel || 0) + ' from the city assessor’s year built, ' + int(s.datedOsm || 0) + ' from OpenStreetMap’s <code>start_date</code>' + (s.datedCurated ? ', ' + int(s.datedCurated) + ' curated' : '') + '. '
-        if (s.undatedToday > 0) p += int(s.undatedToday) + ' more have no recorded year and appear only in today’s scene. '
-        if (isNum(s.newSincePrevious) && isNum(tm.previous)) p += '<b>' + int(s.newSincePrevious) + '</b> are new since ' + esc(tm.previous) + ', roofed in gold. '
-        p += 'Anything demolished since is missing unless traced or curated below.'
-        out.push('<p>' + p + '</p>')
-      }
-      if (s.traced > 0) {
-        out.push('<p><b>Traced:</b> ' + plural(s.traced, 'building') + ' that no longer stand, traced from Sanborn fire-insurance maps and drawn in the maps’ own colors (pink brick, yellow frame, blue stone, gray iron). Each appears from the first map that shows it, though it may be older. When it went: ' +
-          int(s.tracedEndMap || 0) + ' by a later map that no longer shows it, ' + int(s.tracedEndRebuilt || 0) + ' by the year the building now on the site went up, ' +
-          int(s.tracedEndHighway || 0) + ' by an expressway through the site, and ' + int(s.tracedEndAssumed || 0) + ' <b>assumed</b> gone by 1960. Heights are <b>guessed</b> from the material: brick and stone three stories, frame two.</p>')
-      }
-      if (s.streetcarLines > 0) {
-        out.push('<p><b>Streetcars:</b> ' + plural(s.streetcarLines, 'car line') + ' in red, each placed on today’s streets from the corners its sources name (listed below), with ' + plural(s.streetcars || 0, 'car') + ' along them' +
-          (isNum(s.streetcarScale) && s.streetcarScale !== 1 ? ', all drawn ' + esc(s.streetcarScale) + ' times life size so they read at this scale' : '') + '.' +
-          (isNum(s.unbuiltStreets) && s.unbuiltStreets > 0 ? ' Small streets are drawn only where a house of the year stood nearby: ' + int(s.unbuiltStreets) + ' laid out since are left off.' : '') + '</p>')
-      }
-      if (s.parts > 0 || s.canopyPieces > 0 || s.trainPieces > 0) {
-        out.push('<p><b>Modeled close up:</b> ' + plural(s.parts || 0, 'part') + ' of one building, each from its plans and photographs, in the building’s own colors' +
-          (s.canopyPieces > 0 ? '; ' + plural(s.canopyPieces, 'piece') + ' of platform canopy' : '') +
-          (s.trainPieces > 0 ? '; and ' + plural(s.trainPieces, 'car') + ' of standing trains, their number and makeup illustrative' : '') + '. Heights are <b>approximate</b>. ' + how('one-building-close-up', 'how the station is modeled →') + '</p>')
-      }
-      const cur = Array.isArray(tm.curated) ? tm.curated : []
-      if (cur.length) {
-        out.push('<p><b>Curated</b> for this year, from published sources; positions are drawn from today’s street grid and published dimensions, not surveyed:</p><ul>' +
-          cur.map((h) => '<li><b>' + esc(h.name) + '</b> (' + esc(h.from) + (h.to ? '–' + esc(h.to) : '') + '). ' + esc(h.note) +
-            (h.sources && h.sources.length ? ' <span class="sources">' + h.sources.map((u, k) => '<a href="' + esc(u) + '" target="_blank" rel="noopener">[' + (k + 1) + ']</a>').join(' ') + '</span>' : '') + '</li>').join('') + '</ul>')
-      } else out.push('<p>No curated features stand in this year; roads, rail and water follow the series’ era rules.</p>')
-      out.push('<p>The ground is today’s: cuts and fills since (the interstate, the floodwall) are in the elevation.</p>')
-    }
-
-    // The camera.
-    head('Camera', how('camera', 'how the camera works →'))
-    const cam = []
-    if (isNum(x.bearing)) {
-      let p = 'Looking ' + compass(x.bearing) + ' (bearing ' + deg360(x.bearing) + '°)'
-      if (c.snap !== false && isNum(c.bearing)) {
-        const turn = x.bearing - c.bearing
-        p += Math.abs(turn) < 0.05
-          ? ', where snapping to the street grid left it'
-          : ', turned ' + Math.abs(turn).toFixed(1) + '° ' + (turn < 0 ? 'counter-clockwise' : 'clockwise') + ' from the configured ' + deg360(c.bearing) + '° so the street grid runs along the diagonals'
-      } else if (c.snap === false) p += ', a fixed bearing with no snapping'
-      cam.push(p + '.')
-    }
-    const squash = isNum(c.squash) ? Math.min(1, Math.max(0.01, c.squash)) : 0.5
-    const tilt = (Math.asin(squash) * 180) / Math.PI
-    cam.push('Orthographic, tilted ' + Math.round(tilt) + '° down from the horizon: ground running into the picture is drawn at ' + +squash.toFixed(2) + '× its length and heights at ' + Math.cos(Math.asin(squash)).toFixed(2) + '×' +
-      (isNum(c.exaggeration) && c.exaggeration !== 1 ? ', then ×' + c.exaggeration + ' for every height' : '') + '.')
-    if (isNum(c.scale)) cam.push(c.scale + ' px per meter across the frame' + (Array.isArray(x.viewBox) ? '; the whole drawing is ' + int(x.viewBox[2]) + ' × ' + int(x.viewBox[3]) + ' px at 1:1' : '') + '.')
-    out.push('<p>' + cam.join(' ') + '</p>')
-
-    // What went in.
-    head('Sources', how('inputs', 'where the data comes from →'))
-    const src = []
-    src.push('<li><b>OpenStreetMap</b>: ' + (has('features') ? int(s.features) + ' features read from the cached download' : unknown('feature count not recorded')) +
-      (c.data && c.data !== x.region ? ', shared with region <code>' + esc(c.data) + '</code>' : '') +
-      (has('coastWays') ? '; the sea and tidal water come from ' + plural(s.coastWays, 'coastline way') : '') + '.</li>')
-    if (relief) {
-      const dem = demSources[t.source || '3dep'] || demSources['3dep']
-      const fill = t.fillFrom ? demSources[t.fillFrom] : null
-      src.push('<li><b>' + esc(dem.name) + ' elevation</b> (' + esc(dem.coverage) + '; ' + esc(dem.about.charAt(0).toLowerCase() + dem.about.slice(1)) + ')' +
-        (fill ? ', with gaps beyond its coverage filled from <b>' + esc(fill.name) + '</b>' : '') + ', fetched at ' + (t.demResolution ?? 1) + ' m per pixel and resampled to a ' + (t.cell ?? 5) + ' m grid. The ground runs from ' +
-        s.elevationDatum.toFixed(1) + ' m to ' + s.elevationTop.toFixed(1) + ' m above sea level (' + (s.elevationTop - s.elevationDatum).toFixed(1) + ' m of relief), drawn ' +
-        (t.exaggeration ?? 2) + '× taller than life. Buildings and bridges keep their true heights.</li>')
-    } else if (t && t.enabled !== false) {
-      src.push('<li><b>Elevation</b>: ' + unknown('the region asks for terrain, but this build recorded no elevation range. Either the elevation was not fetched yet (the build then falls back to a flat plate), or the build predates that measure.') + '</li>')
-    } else {
-      src.push('<li><b>No elevation</b>: drawn on a flat plate' + (t && t.enabled === false ? ' (terrain is switched off for this region)' : '') + '.</li>')
-    }
-    out.push('<ul>' + src.join('') + '</ul>')
-
-    // Ground.
-    head('Ground', how('ground', 'what the ground is made of →'))
-    const g = []
-    if (has('ground')) g.push(plural(s.ground, 'mapped area') + ' of water, islands, parks, woods and other cover')
-    if (has('ribbons')) g.push(plural(s.ribbons, 'ribbon') + ' of road, path, rail, canal and weir')
-    let gp = g.length ? 'From the map, ' + g.join(', and ') + '.' : unknown('Ground counts were not recorded.')
-    if (has('strips')) gp += ' Painted in ' + int(s.strips) + ' strips from back to front, ' + 2 * ((t && t.cell) ?? 5) + ' m deep each, so hills hide what is behind them (' + how('drawing', 'why') + ').'
-    if (relief && has('contourSegments')) {
-      const iv = t.contour ?? 2
-      gp += iv > 0 ? ' Contours every ' + iv + ' m with every ' + ordinal(t.majorEvery ?? 5) + ' line heavier: ' + int(s.contourSegments) + ' segments.' : ' No contours.'
-    }
-    out.push('<p>' + gp + '</p>')
-
-    // Rivers and rapids.
-    head('Rivers and rapids', how('rapids', 'how rapids are read →'))
-    if (relief) {
-      const thr = t.rapids ?? 0.035
-      if (has('rapidCells')) {
-        const cell = t.cell ?? 5
-        out.push('<p>' + (s.rapidCells > 0 ? int(s.rapidCells) + ' grid cells (about ' + areaText(s.rapidCells * cell * cell) + ') read as rapids' : 'No stretch of water read as rapids') +
-          ': places where the river’s surface, recovered from the lidar, falls faster than ' + +(thr * 100).toFixed(2) + ' m per 100 m, measured over 40 m. Rock standing more than 1 m clear of that surface is drawn as boulders. Both are ' +
-          how('rivers', 'inferred') + ' from the lidar, not observed.</p>')
-      } else out.push('<p>' + unknown('Rapids were not counted for this build.') + '</p>')
-    } else {
-      out.push('<p>Without elevation, water is drawn from OpenStreetMap’s outlines as they are. No river surface, rocks or rapids are inferred.</p>')
-    }
-
-    // Buildings.
-    head('Buildings', how('buildings', 'where heights come from →'))
-    if (has('buildings')) {
-      const added = s.footprintsAdded > 0 ? s.footprintsAdded : 0
-      out.push('<p>' + plural(s.buildings, 'building') + ', extruded from footprints of at least ' + (c.minBuildingArea ?? 12) + ' m² that lie wholly inside the frame' +
-        (added > 0 ? ': OpenStreetMap’s, plus ' + int(added) + ' traced by <a href="https://github.com/microsoft/GlobalMLBuildingFootprints">Microsoft’s building model</a> where OpenStreetMap has none.' : ', from OpenStreetMap.') + '</p>')
-      if (has('heightFromTag') && has('heightFromLevels') && has('heightGuessed')) {
-        const model = s.heightFromModel > 0 ? s.heightFromModel : 0
-        const tot = s.heightFromTag + model + s.heightFromLevels + s.heightGuessed
-        const seg = (cls, n) => (n > 0 ? '<span class="' + cls + '" style="width:' + ((100 * n) / tot).toFixed(2) + '%"></span>' : '')
-        out.push('<div class="mixbar" title="Where the heights came from">' + seg('m-tag', s.heightFromTag) + seg('m-model', model) + seg('m-lev', s.heightFromLevels) + seg('m-guess', s.heightGuessed) + '</div>')
-        out.push('<ul class="keyed">' +
-          '<li><span class="key m-tag"></span>' + int(s.heightFromTag) + ' (' + pct(s.heightFromTag, tot) + ') from a <code>height</code> tag</li>' +
-          (model > 0 ? '<li><span class="key m-model"></span>' + int(model) + ' (' + pct(model, tot) + ') from Microsoft’s model, <b>estimated</b> from imagery</li>' : '') +
-          '<li><span class="key m-lev"></span>' + int(s.heightFromLevels) + ' (' + pct(s.heightFromLevels, tot) + ') from the number of floors, at 3.4 m a floor</li>' +
-          '<li><span class="key m-guess"></span>' + int(s.heightGuessed) + ' (' + pct(s.heightGuessed, tot) + ') <b>guessed</b> from the building’s type and size</li></ul>')
-      } else out.push('<p>' + unknown('Where the heights came from was not recorded for this build.') + '</p>')
-    } else out.push('<p>' + unknown('Buildings were not counted for this build.') + '</p>')
-
-    // Bridges.
-    head('Bridges', how('bridges', 'how decks are placed →'))
-    const rules = Array.isArray(c.bridges) ? c.bridges : []
-    let bp = has('bridgePieces') ? (s.bridgePieces > 0 ? plural(s.bridgePieces, 'bridge span') + ' of up to 22 m, so long bridges sort among the buildings.' : 'No bridges in the frame.') : unknown('Bridge spans were not counted for this build.')
-    if (!has('bridgePieces') || s.bridgePieces > 0) {
-      bp += ' Deck heights are rules of thumb' + (rules.length ? ': ' + rules.map((r) => esc(r.match) + ' ' + esc(r.deck) + ' m').join(', ') + ', and any other bridge ' : ': every bridge ') + (c.bridgeDeck ?? 7) + ' m per OSM layer.'
-    }
-    out.push('<p>' + bp + '</p>')
-
-    // Drawing.
-    head('Drawing', how('paint-order', 'paint order →'))
-    const dots = { all: 'a dot on every visible corner', roof: 'dots on roof corners only', none: 'no dots' }[c.dots || 'all'] || 'dots: ' + esc(c.dots)
-    out.push('<p>The <code>' + esc(x.palette || c.palette || 'paper') + '</code> palette, ' + dots + ', on a ground slab ' + (c.slab ?? 14) + ' m thick.</p>')
-
-    // This build.
-    head('This build', how('archive-and-explorer', 'the archive →'))
-    const bl = []
-    bl.push('Built ' + (x.createdAt ? when(x.createdAt) : unknown('at an unrecorded time')) + (isNum(x.ms) ? ' in ' + (x.ms / 1000).toFixed(1) + ' s' : '') + (isNum(x.bytes) ? ', ' + mb(x.bytes) + ' of SVG' : '') + '.')
-    if (x.git) bl.push('From commit <code>' + esc(x.git.commit) + '</code>, “' + esc(x.git.subject) + '”' + (x.git.dirty ? ', <span class="dirty">with uncommitted changes in src/ or regions/</span>' : '') + '.')
-    else bl.push(unknown('No commit was recorded; it was not built inside a git checkout.'))
-    if (x.note) bl.push('Note: <b>' + esc(x.note) + '</b>.')
-    out.push('<p>' + bl.join(' ') + '</p>')
-    const other = Object.keys(s).filter((k) => !KNOWN.has(k)).sort()
-    if (other.length) out.push('<p>Other measures: ' + other.map((k) => esc(k) + ' ' + fmt(s[k])).join(', ') + '.</p>')
-
-    out.push('</section><p class="credit">Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors (ODbL)' +
-      (relief ? ' · ' + esc((demSources[t.source || '3dep'] || demSources['3dep']).credit) + ' (' + esc((demSources[t.source || '3dep'] || demSources['3dep']).license) + ')' + (t.fillFrom && demSources[t.fillFrom] ? ' · ' + esc(demSources[t.fillFrom].credit) : '') : '') + (pageBySlug.has('about') ? ' · <a href="#/about">credits and licenses</a>' : '') + '</p>')
-    return '<div class="story">' + out.join('') + '</div>'
-  }
+  // A build's own story, from story.ts (its source is embedded here; static map pages run the same code).
+  const story = (${makeStory.toString()})({ esc, label, when, mb, fmt, demSources, pageHref: (slug, section) => (pageBySlug.has(slug) ? '#/' + slug + (section ? '/' + section : '') : null) })
   $('toggleInfo').addEventListener('click', () => toggleInfo())
   // Phones: the build list is a drawer behind the menu button; the info panel starts folded.
   const closeDrawer = () => document.body.classList.remove('navopen')

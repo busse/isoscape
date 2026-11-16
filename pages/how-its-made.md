@@ -532,7 +532,12 @@ After every build, `out/index.html` is rewritten: this explorer. It is a single 
 build list and these pages embedded in it, so it opens from disk with no server. The pages are
 Markdown files in `pages/`. To add one, see the README.
 
-Code: `src/archive.ts`, `src/explorer.ts`, `src/pages.ts`.
+Beside it go plain pages that need no script, for search engines and link previews: each of
+these pages as `p/<slug>.html`, each map as `m/<region>.html` (and each year of a dated series
+as `m/<region>-<year>.html`) with its picture and this same "How this view was made" text, and a
+`sitemap.xml` listing them all.
+
+Code: `src/archive.ts`, `src/explorer.ts`, `src/pages.ts`, `src/story.ts`, `src/static-pages.ts`.
 
 ## Credits
 

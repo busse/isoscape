@@ -73,7 +73,8 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | the explorer page | `explorer.ts` |
 | a content page (How it's made, About, a new one) | `pages/<slug>.md`; see "Adding a page" in the README |
 | how pages are loaded and linked; the Markdown subset | `pages.ts`, `markdown.ts` |
-| the per-build "How this view was made" text | `story` in `explorer.ts` (it links to `pages/how-its-made.md` section ids) |
+| the per-build "How this view was made" text | `makeStory` in `story.ts`, shared by the explorer and the static map pages (it links to `pages/how-its-made.md` section ids) |
+| the static pages for search engines (`p/`, `m/`, `sitemap.xml`), their URLs, head tags and JSON-LD | `static-pages.ts`; shared CSS from `explorer.ts`; "Static pages and search" in the README |
 | building an old commit into the archive | `backfill.ts` |
 | dated series: year built, era rules, curated history | `history.ts`, `asOf` in `scene.ts`, `history/<series>.json` |
 | tracing fire-insurance maps (georeference, trace, lifespans) | `tools/sanborn/*.py` → `history/sanborn/` |

@@ -16,6 +16,7 @@ import { fetchBounds, loadRegion, type Region } from './region.ts'
 import { renderPage, renderSvg } from './render.ts'
 import { buildScene, type TimeContext } from './scene.ts'
 import { loadSiteConfig, writeSocial } from './social.ts'
+import { pageDates, planStatic, plainLinks, writeStatic } from './static-pages.ts'
 import { dateBuildings, fetchYearBuilt, loadHistory, parseParcels, type History } from './history.ts'
 import type { PolygonFeature } from './osm.ts'
 
@@ -257,9 +258,16 @@ const writeExplorer = async (outDir: string, siteUrl?: string, verbose = false):
   const config = await loadSiteConfig(siteUrl)
   const pages = loadPages(undefined, config.siteUrl)
   await mkdir(outDir, { recursive: true })
-  const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined)
-  await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, pages, { ...site, ...(config.shop ? { shop: config.shop } : {}), ...(config.home ? { home: config.home } : {}), ...(config.latestPages === false ? { latestPages: false } : {}), ...(config.analytics ? { analytics: config.analytics } : {}) }))
+  // Static pages for search engines (static-pages.ts); the share pages name them as canonical.
+  const plan = planStatic(builds, pages.map((p) => p.slug), config.home)
+  const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined, (t) => ('build' in t ? plan.forBuild(t.build) : plan.forPage(t.page)))
+  const statics = await writeStatic(outDir, builds, plan, config, { dates: await pageDates(pages) })
+  await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, pages, {
+    ...site, ...(config.shop ? { shop: config.shop } : {}), ...(config.home ? { home: config.home } : {}), ...(config.latestPages === false ? { latestPages: false } : {}), ...(config.analytics ? { analytics: config.analytics } : {}),
+    plain: plainLinks(plan, pages, config.home), sitemap: config.siteUrl !== undefined,
+  }))
   if (verbose) {
+    console.error(`wrote ${statics.files.filter((f) => f.endsWith('.html')).length} static pages in ${resolve(outDir, 'p')}/ and ${resolve(outDir, 'm')}/ (${(statics.bytes / 1e6).toFixed(2)} MB)${config.siteUrl === undefined ? '' : ', and sitemap.xml'}`)
     if (site.rendered > 0) console.error(`rendered ${site.rendered} social preview image${site.rendered === 1 ? '' : 's'}`)
     if (site.missing > 0) console.error(`${site.missing} build${site.missing === 1 ? ' has' : 's have'} no social image (no rsvg-convert or Chrome found); their previews use the thumbnail`)
     console.error(`wrote ${builds.length + pages.length} share pages in ${resolve(outDir, 's')}/`)
