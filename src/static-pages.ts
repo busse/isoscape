@@ -31,7 +31,7 @@ import { MARK, PROSE_CSS, STORY_CSS, THEME_CSS } from './explorer.ts'
 import { escapeHtml } from './markdown.ts'
 import { loadPages, PAGES_DIR, type Page } from './pages.ts'
 import {
-  buildCard, clip, escAttr, firstParagraph, flagshipOf, imageSize, metaTags, pageShop, previewOf, shopFor, siteHref, withCampaign,
+  buildCard, clip, escAttr, firstParagraph, flagshipOf, pageDescription, imageSize, metaTags, pageShop, previewOf, shopFor, siteHref, withCampaign, type ShareDoor,
   SITE_NAME, statsLine, type HomeConfig, type Preview, type SiteConfig,
 } from './social.ts'
 import { makeStory } from './story.ts'
@@ -139,6 +139,19 @@ export const planStatic = (builds: readonly BuildMeta[], pageSlugs: readonly str
     forRegion: (region) => byRegion.get(region),
   }
 }
+
+/**
+ * Every map's lasting share page (social.ts writes them as `s/<name>.html`), named as its static
+ * page is: `m/<name>.html` → `s/<name>.html`, with its route and its page's heading.
+ */
+export const shareDoors = (plan: StaticPlan, home?: HomeConfig): ShareDoor[] =>
+  plan.entries.filter((e): e is MapEntry | SeriesEntry => e.kind !== 'page').map((e) => ({
+    name: e.path.replace(/^m\//, '').replace(/\.html$/, ''),
+    route: e.route,
+    build: e.build,
+    title: mapTitle(e, home),
+    ...(e.kind === 'series' ? { key: e.region } : {}),
+  }))
 
 /** The front-page section a region belongs to (the first whose prefixes match), as the explorer groups them. */
 export const sectionOf = (home: HomeConfig | undefined, region: string) =>
@@ -341,7 +354,7 @@ export interface ContentImages {
 /** A content page as a plain HTML document: `p/<slug>.html`. */
 export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}, modified?: string): string => {
   const path = ctx.plan.forPage(page.slug) ?? `p/${page.slug}.html`
-  const description = clip(page.summary ?? firstParagraph(page.html), 300)
+  const description = pageDescription(page)
   const image = imgs.own ?? imgs.flagship
   const imageAlt = imgs.own === undefined ? imgs.flagshipAlt : page.summary ?? page.title
   const shop = pageShop(page.slug, mapRefs(page.html), ctx.config)
