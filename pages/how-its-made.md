@@ -578,8 +578,11 @@ out.
 A cutaway opens one modeled building along a vertical plane (`src/cutaway.ts`,
 `src/cutaway-scene.ts`). The region names the plane, a point and a compass bearing, and the side
 of it that is lifted away; the camera stands on that side. Broad Street Station is cut down its
-axis, the plane through the middle of the portico, the waiting room and the concourse
-(`regions/broad-street-station-cutaway.json`).
+axis, the plane through the middle of the portico, the waiting room and the concourse, running
+at a bearing of 40.8°, with the east half lifted away and the camera looking from that side at
+a bearing of 342° (`regions/broad-street-station-cutaway.json`). Only modeled parts whose ids
+begin with the region's prefix (`bss-`) are cut, and one canopy on the removed side that is not
+cut is lifted away whole.
 
 Every part of the building is first made into convex solids: a prism for a wall, a floor or a
 bench; for a dome, a solid of revolution in slices, one per side of its outline, with an outer
@@ -623,7 +626,9 @@ profile, a center post and two wings rising outward. A stair down from the floor
 side (to the platforms) is drawn as its stepped profile, dashed. Under it the ground is cut along the plane and dug out where the
 building goes below it; platforms are drawn 0.35 m over the rails (approximate), rails at true
 gauge where tracks cross the plane, and a red dashed line follows the traveler from the street
-to the train. Code: `src/section.ts`.
+to the train. The section runs from 45 m before the plane's point (the Broad Street sidewalk)
+to 104 m beyond it (past the last platform), at 10 pixels to the meter, and its earth is cut
+5 m below the lowest ground along it. Code: `src/section.ts`.
 
 **What is approximate.** Every part says how it is known: *drawn* (traced from a plate or a
 survey map), *written* (placed from a written account) or *approximate* (inferred), and a
@@ -635,6 +640,24 @@ illegible; the first floor's elevation, wall thicknesses, door heights, the base
 and use, the stairs to the platforms and the concourse's height are approximate. The sheet's
 numbered badges show which: solid for drawn, a ring for written, a dashed ring for approximate.
 Code: `tools/stations/broad_street_plan.py`, `tools/cutaway/sheet.py`.
+
+**Sources.** For Broad Street Station: *The American Architect* of July 9, 1919 (its text, the
+first-floor plan on Plate 15 and the sections on Plates 17 and 18); the 1925 Sanborn
+fire-insurance atlas; the USGS Richmond quadrangles of 1934 and 1956, for the loop of tracks;
+the Official Guide timetables of 1933 and 1941 and the Richmond Railroad Museum, for the trains
+and where they went; the City Planning Commission's transit map of January 1943, for the
+streetcars and buses on West Broad; the ICC's 1955 ruling in *NAACP v. St. Louis-San Francisco
+Ry.*, for the end of the segregated waiting rooms; and OpenStreetMap for the ground. Each is
+named on the sheet, and the wayfinding notes carry their own.
+
+**The sheet** (`cutaways/<name>.json`, `tools/cutaway/sheet.py`) is 32 × 24 in at 300 dpi
+(9,600 × 7,200 pixels): the cutaway large, the flat section beneath it, and a column of numbered
+callouts, each anchored to a drawn part in either drawing, with the key, the sources and the
+notes. Callout text is 54 pixels (13 pt; 9.7 pt on the 24 × 18 in print), and the smallest text
+on the sheet, the two-digit numbers in the badges on the drawings, is 40 pixels (9.6 pt; 7.2 pt
+at 24 × 18). There are no canvas files: a canvas's 1.5 in of mirrored wrap would carry the
+title and the column round its sides. Its title block sits in the bottom-right corner, below
+the column.
 
 ## Sets: a map framed by its places
 
