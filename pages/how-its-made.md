@@ -66,6 +66,16 @@ in tiles of at most 1,500 pixels a side, at 1 m per pixel unless the region sets
 `demResolution`. The tiles are stitched together and stored as `data/<region>/dem.bin.gz`:
 gzipped 16-bit integers in centimeters, so heights are kept to the nearest centimeter.
 
+The service keeps its pixels square in degrees. A tile sized in meters is not square in
+degrees away from the equator, so the service widens it north and south about its center
+and fills the same number of pixels: the image covers more ground than was asked for. Each
+tile is read on the box it really covers and resampled onto the box asked for. Until
+November 2026 this was missed, and the ground in every 3DEP map sat squeezed north–south by
+the cosine of the latitude (0.79 in Richmond, 0.73 at Crater Lake): up to a few hundred
+meters off at a tile's edge, with a step where two tiles met. Water outlines then lay on
+banks and cliffs, which read as rock and as false falls. Files fetched before the fix are
+put right as they load.
+
 Outside the US, a region names another source in `terrain.source`; `isoscape sources` lists
 them with their credits and licenses, and [Landmarks around the world](world-landmarks.md)
 shows one map for each. `ign` (France, 1 m) is cut to order like 3DEP, by IGN's WMS server,
@@ -144,7 +154,10 @@ Code: `src/view.ts`, `chooseBearing` in `src/scene.ts`.
 ## Ground
 
 Each OSM area is classified by its tags as water, island, park or grass, wood, marsh, sand,
-bare rock, parking or cemetery, and drawn as a flat fill in that order. Rivers are drawn from
+bare rock, parking or cemetery, and drawn as a flat fill in that order. Cover that lies
+mostly over water (the trees on a river island) is drawn over the water; the rest is drawn
+under it, so a park mapped around a lake, as Central Park is around the Lake, does not paint
+the lake over as lawn. Rivers are drawn from
 their mapped area, never from their center line. Canals, streams and ditches are drawn as
 ribbons of a typical width.
 
@@ -214,6 +227,10 @@ course, steeply only where it really drops.
 - Near the shore, mapped "water" standing more than 1 m above the surface is treated as bank.
   It is **given back to the land** at its own height.
 
+- Where the elevation source has **no heights** (3DEP leaves much of San Francisco Bay
+  empty), the gap is filled in from the shore around it. That fill is a guess, not a surface,
+  so no rock is read within 30 m of it, and no rapid on it.
+
 Both are inferences: a gravel bar mapped as water or a misplaced outline can produce false
 rock. Flat regions skip all of this and draw OSM's outlines as they are.
 
@@ -241,9 +258,12 @@ Code: `riverFall` in `src/terrain.ts`, `paintStrip` in `src/render.ts`.
 ## Shoreline
 
 With terrain, the water's edge is traced from the lidar-corrected water grid (marching squares
-over a lightly smoothed mask), not from OSM's outline, and drawn at the river's surface. Where
-the outline overlaps a steep bank, the bank slopes into the water instead of the water
-climbing the bank.
+over a lightly smoothed mask), not from OSM's outline. Open water is drawn at the river's
+surface; a grid cell that is part water and part bank is draped on the ground, so the water
+meets the bank at the bank's own height. Where the outline overlaps a steep bank, the bank
+slopes into the water instead of the water climbing the bank. Each strip draws the ground it
+laps toward the camera from that ground's own grid cells, so its shore there is the same as
+the next strip's and the shoreline has no teeth at the strip lines.
 
 Code: `paintStrip` in `src/render.ts`.
 
@@ -395,7 +415,11 @@ with water where the cut crosses the river.
 
 **The SVG is compact.** Coordinates are rounded to a tenth of a pixel and written relative to
 the previous point. Draped edges are simplified to a quarter pixel, and the soft edges of
-hillshade bands to half a pixel. Each dot is a zero-length
+hillshade bands to half a pixel: a point is dropped only while the line that replaces it
+passes within that distance of every point it stands for. (Until November 2026 each point
+was tested against its two neighbors alone, so a long, gently curving edge could drift
+several pixels off; across open water, where nothing covers the strips, the gaps showed as
+white stripes.) Each dot is a zero-length
 line with round caps. Even so, a big region can produce a file of 25–45 MB. The `--png` option
 renders a raster with `rsvg-convert`. Colors and line weights come from a palette (`paper`
 or `night`).

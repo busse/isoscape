@@ -117,6 +117,37 @@ export const toLv95 = (lon: number, lat: number): [number, number] => {
 const sampleGeo = (r: Raster, x: number, y: number) =>
   r.geo === undefined ? NaN : bilinear(r, (x - r.geo.x0) / r.geo.dx - 0.5, (r.geo.y0 - y) / r.geo.dy - 0.5)
 
+/**
+ * The box a service that keeps pixels square in degrees fills, asked for `b` at `width` ×
+ * `height`: `b` widened about its center along the side whose pixels are smaller.
+ */
+export const servedBox = (b: Bounds, width: number, height: number): Bounds => {
+  const s = Math.max((b.east - b.west) / width, (b.north - b.south) / height)
+  const cx = (b.west + b.east) / 2
+  const cy = (b.south + b.north) / 2
+  return { west: cx - (s * width) / 2, east: cx + (s * width) / 2, south: cy - (s * height) / 2, north: cy + (s * height) / 2 }
+}
+
+/**
+ * Resample a `width` × `height` grid (row 0 at the north) that covers `from` onto a grid of
+ * the same size covering `to`, bilinearly, skipping missing samples.
+ */
+export const regrid = (data: Float32Array, width: number, height: number, from: Bounds, to: Bounds): Float32Array => {
+  const r: Raster = { width, height, data }
+  const out = new Float32Array(width * height)
+  const dx = (to.east - to.west) / width
+  const dy = (to.north - to.south) / height
+  for (let y = 0; y < height; y++) {
+    const lat = to.north - (y + 0.5) * dy
+    const fy = ((from.north - lat) / (from.north - from.south)) * height - 0.5
+    for (let x = 0; x < width; x++) {
+      const lon = to.west + (x + 0.5) * dx
+      out[y * width + x] = bilinear(r, ((lon - from.west) / (from.east - from.west)) * width - 0.5, fy)
+    }
+  }
+  return out
+}
+
 // ---------------------------------------------------------------------------------- sources
 
 const usgs3dep: RequestSource = {
@@ -145,7 +176,10 @@ const usgs3dep: RequestSource = {
       compression: 'None',
       f: 'image',
     }),
-  decode: (buf) => decodeTiff(buf).data,
+  // exportImage keeps its pixels square in degrees: asked for a box whose pixels are not (any
+  // box sized in meters, away from the equator), it widens the box about its center and fills
+  // the image size asked for. Read the image on the box it covers, then resample it onto ours.
+  decode: (buf, b, width, height) => regrid(decodeTiff(buf).data, width, height, servedBox(b, width, height), b),
 }
 
 const ign: RequestSource = {

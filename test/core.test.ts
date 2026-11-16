@@ -240,3 +240,25 @@ test('nonsense numeric tags fall back instead of poisoning heights', () => {
   assert.ok(Number.isFinite(h.base) && Number.isFinite(h.top))
   assert.equal(h.base, 0)
 })
+
+test('render: with terrain, a park drawn around a lake is painted under the lake, not over it', async () => {
+  const { renderSvg } = await import('../src/render.ts')
+  const { buildScene } = await import('../src/scene.ts')
+  const { parseOsm } = await import('../src/osm.ts')
+  const box = (x: number, y: number, s: number) => [{ lat: y, lon: x }, { lat: y, lon: x + s }, { lat: y + s, lon: x + s }, { lat: y + s, lon: x }, { lat: y, lon: x }]
+  const json = JSON.stringify({ elements: [
+    { type: 'way', id: 1, tags: { leisure: 'park' }, geometry: box(-0.002, -0.002, 0.004) },
+    { type: 'way', id: 2, tags: { natural: 'water', water: 'lake' }, geometry: box(-0.0006, -0.0006, 0.0012) },
+  ] })
+  const scene = buildScene({ ...region, snap: false, width: 300, depth: 300, terrain: { cell: 5 } }, parseOsm(json), pal, () => 10)
+  const { svg } = renderSvg(scene)
+  let both = 0
+  for (const g of svg.matchAll(/<g data-strip="[^"]*"[^>]*>(.*?)<\/g>/gs)) {
+    const lawn = g[1].indexOf('class="green"')
+    const lake = g[1].indexOf('class="Lw"')
+    if (lawn < 0 || lake < 0) continue
+    both++
+    assert.ok(lawn < lake, 'the lawn comes first in its strip, and the lake over it')
+  }
+  assert.ok(both > 3)
+})
