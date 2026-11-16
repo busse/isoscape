@@ -349,7 +349,7 @@ def page(spec, print_dir):
     out += [f"- **{marks[k].capitalize()}:** {key[k]}." for k, _ in spec['key']]
     out += ['', P.get('marks_note', 'The same marks, small, stand before each place the trains and streetcars went.'), '']
     if spec.get('travelerKey'):
-        out += [f"The small red figures are travelers: {spec['travelerKey'][:1].lower() + spec['travelerKey'][1:]} Their height is a convention, not a source's claim.", '']
+        out += [P.get('traveler_note', spec['travelerKey']), '']
     if spec.get('wayfinding'):
         out += [f"## {P.get('wayfinding_heading', 'Where the trains and streetcars went')}", '']
         for wf in spec['wayfinding']:

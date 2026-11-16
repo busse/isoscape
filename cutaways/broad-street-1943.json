@@ -338,7 +338,8 @@
   "key_intro": "Every part of the drawing says how it is known, and each numbered badge shows it:",
   "wayfinding_heading": "Where the trains and streetcars went",
   "how": "The station is a model made of parts: the rooms of the first floor, the hall's octagon, its benches and counters, the portico and the concourse are traced from the first-floor plan published in The American Architect in 1919 (Plate 15), fitted by the 240-foot frontage; the levels, the dome and the basement are scaled from the sections (Plates 17 and 18), whose figures are illegible. The model is cut along one vertical plane down the station's axis. Every face the cut opens is drawn solid in ink; on the side lifted away, everything up to 1.5 m above the first floor stays, so the ground floor reads as a plan. The flat section below is the same plane seen square and level, with the building drawn 35 m deep behind it. Chris Busse drew it with isoscape, the open-source tool he built with Claude.",
-  "drafted": "This page was drafted with Claude, Anthropic's AI (Claude Opus 5.5), and reviewed by Chris Busse. More on how we work in the [artist statement](artist-statement.md)."
+  "drafted": "This page was drafted with Claude, Anthropic's AI (Claude Opus 5.5), and reviewed by Chris Busse. More on how we work in the [artist statement](artist-statement.md).",
+  "traveler_note": "The small red figures are travelers drawn to scale, 1.75 m (5 ft 9 in) tall; their height is a convention, not a claim from a source. The red line is the way from the street to the train."
  },
  "travelerKey": "A traveler, drawn to scale: 1.75 m (5 ft 9 in) tall. The red line is the way from the street to the train."
 }

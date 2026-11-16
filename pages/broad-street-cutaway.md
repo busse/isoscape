@@ -117,7 +117,7 @@ Every part of the drawing says how it is known, and each numbered badge shows it
 
 The same marks, small, stand before each place the trains and streetcars went.
 
-The small red figures are travelers: a traveler, drawn to scale: 1.75 m (5 ft 9 in) tall. The red line is the way from the street to the train. Their height is a convention, not a source's claim.
+The small red figures are travelers drawn to scale, 1.75 m (5 ft 9 in) tall; their height is a convention, not a claim from a source. The red line is the way from the street to the train.
 
 ## Where the trains and streetcars went
 
