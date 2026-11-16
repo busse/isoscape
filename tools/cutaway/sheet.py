@@ -118,6 +118,7 @@ def main():
 
     # The isometric drawing, without its year caption (the sheet has a title of its own).
     vb, iso_body = inner(iso_svg)
+    iso_body = re.sub(r'<text\b[^>]*>.*?</text>', '', iso_body, flags=re.S)
     cap = max(28, (vb[2] - 48) * 0.022) * 2.4
     iso_vb = [vb[0], vb[1] + cap, vb[2], vb[3] - cap]
     svb, sec_body = inner(sec_svg)
