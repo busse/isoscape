@@ -472,6 +472,16 @@ python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json   # out/cutaways/
 python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json --print   # out/cutaways/print/
 ```
 
+Other part shapes: `"shape": "frame"` with `members` (straight members, or convex plates, in
+the vertical plane over the ring's first edge: a truss, a roof slope), `"inset"` with `levels`
+(a hipped roof or a square dome, stepped in by distance), and `"track"` (ties and rails on a
+deck). A rail line with an `elevation` stands its train on a deck and draws no ground track.
+`lift` also lifts modeled parts whole, leaving their outline dashed. In the section,
+`"hidden"` draws stairs behind a wall as their dashed outline and `"slice": {"parts": [...],
+"depth": 1}` draws a roof only that far behind the plane. A sheet's `crossSection` (`region`,
+`caption`) sets a second flat section beside the first, with callouts anchored to it by
+`"cross"`; `marksNote` words the key's line about the wayfinding marks.
+
 A callout's anchor in either drawing may say `"badge": [dx, dy]` (sheet units, 9,600 across):
 the badge then stands that far off the part, with a leader to a dot on it, so it does not hide
 what it names. `travelerKey` adds a line with the traveler's glyph to the key, and a group with

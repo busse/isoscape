@@ -46,6 +46,7 @@ INK, PAPER, DIM = C.INK, C.PAPER, C.DIM
 SERIF = "'Libre Baskerville', Baskerville, Georgia, serif"
 SANS = 'Helvetica, Arial, sans-serif'
 COL_X = 7600                 # the callout column
+MARKS_NOTE = 'The same marks, small, stand before each place the trains and streetcars went.'   # the spec's `marksNote` may say otherwise
 ART_R = COL_X - 200          # the drawings' right edge
 
 
@@ -152,8 +153,11 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     region, year = spec['region'], spec['year']
     build_dir = os.path.join(a.out, 'build')
+    cross = spec.get('crossSection')
     if not a.no_build:
         subprocess.run(['node', 'bin/isoscape.js', 'build', region, '--year', str(year), '--no-archive', '--out', build_dir], cwd=ROOT, check=True)
+        if cross:
+            subprocess.run(['node', 'bin/isoscape.js', 'build', cross['region'], '--year', str(year), '--no-archive', '--out', build_dir], cwd=ROOT, check=True)
     base = os.path.join(build_dir, f'{region}-{year}')
     iso_svg = open(base + '.svg').read()
     sec_svg = open(base + '-section.svg').read()
@@ -175,17 +179,34 @@ def main():
     cap = max(28, (vb[2] - 48) * 0.022) * 2.4
     iso_vb = [vb[0], vb[1] + cap, vb[2], vb[3] - cap]
     svb, sec_body = inner(sec_svg)
+    if cross:
+        # A second flat section (a cross section), beside the first at the same scale.
+        cbase = os.path.join(build_dir, f"{cross['region']}-{year}")
+        cross_svg = open(cbase + '-section.svg').read()
+        cross_a = json.load(open(cbase + '-section.anchors.json'))
+        cvb, cross_body = inner(cross_svg)
 
     top = 700
     iso_box = (M - 60, top, ART_R - M + 60, 3900)
     s_iso = min(iso_box[2] / iso_vb[2], iso_box[3] / iso_vb[3])
     iso_h = iso_vb[3] * s_iso
-    # The flat section beneath, no taller than SEC_H, from the left edge of the art.
+    # Wayfinding labels under the plate push the sections down when they run past two lines.
+    WF = 50
+    low = max([len(wf['lines']) for wf in spec.get('wayfinding', []) if wf['place'] != 'top-right'] or [0])
+    push = max(0, (low - 2) * WF * 1.42)
+    # The flat section beneath, no taller than SEC_H, from the left edge of the art; with a
+    # cross section, the two side by side at one scale, bottoms level.
     sec_w = ART_R - M
-    s_sec = min(sec_w / svb[2], (H - 330 - (top + iso_h + 330)) / svb[3])
+    sec_top = top + iso_h + 420 + push
+    GAP = 260
+    widths = svb[2] + (cvb[2] if cross else 0)
+    heights = max(svb[3], cvb[3]) if cross else svb[3]
+    s_sec = min((sec_w - (GAP if cross else 0)) / widths, (H - 330 - (sec_top - 90)) / heights)
     sec_h = svb[3] * s_sec
-    sec_top = top + iso_h + 420
-    sec_box = (M, sec_top, svb[2] * s_sec, sec_h)
+    sec_bottom = sec_top + heights * s_sec
+    sec_box = (M, sec_bottom - sec_h, svb[2] * s_sec, sec_h)
+    if cross:
+        cross_box = (M + svb[2] * s_sec + GAP, sec_bottom - cvb[3] * s_sec, cvb[2] * s_sec, cvb[3] * s_sec)
 
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
            f'<rect width="{W}" height="{H}" fill="{PAPER}"/>']
@@ -198,6 +219,11 @@ def main():
     out.append(text(M, sec_top - 70, spec['sectionCaption'], 76, 'italic', DIM))
     out.append(f'<svg x="{sec_box[0]}" y="{sec_box[1]:.1f}" width="{sec_box[2]:.1f}" height="{sec_box[3]:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in svb)}">{sec_body}</svg>')
     ox_sec, oy_sec = sec_box[0] - svb[0] * s_sec, sec_box[1] - svb[1] * s_sec
+    drawings = [('iso', iso_a, None, None), ('section', sec_a, sec_a.get('frame'), (ox_sec, oy_sec, s_sec))]
+    if cross:
+        out.append(text(cross_box[0], sec_top - 70, cross['caption'], 76, 'italic', DIM))
+        out.append(f'<svg x="{cross_box[0]:.1f}" y="{cross_box[1]:.1f}" width="{cross_box[2]:.1f}" height="{cross_box[3]:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in cvb)}">{cross_body}</svg>')
+        drawings.append(('cross', cross_a, cross_a.get('frame'), (cross_box[0] - cvb[0] * s_sec, cross_box[1] - cvb[1] * s_sec, s_sec)))
     iso_rect = (iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2, iso_box[1], iso_vb[2] * s_iso, iso_h)
 
     def locate(lonlat):
@@ -233,7 +259,8 @@ def main():
         y += 170
         for c in g['callouts']:
             conf = c['_conf']
-            for where, anchors, frame, (ox, oy, sc) in (('iso', iso_a, None, (ox_iso, oy_iso, s_iso)), ('section', sec_a, sec_a.get('frame'), (ox_sec, oy_sec, s_sec))):
+            for where, anchors, frame, place_ in drawings:
+                ox, oy, sc = place_ if place_ is not None else (ox_iso, oy_iso, s_iso)
                 if where not in c:
                     continue
                 p = anchor(c[where], anchors, frame)
@@ -249,7 +276,6 @@ def main():
         y += 36
     # Wayfinding: where the trains and streetcars went, in the plate's margins, each with a
     # leader to the track end or the street it belongs to.
-    WF = 50
     for wf in spec.get('wayfinding', []):
         if 'plate' in wf:
             # A place off the plate: pointed to at the plate's edge, as a fraction of its box.
@@ -289,7 +315,7 @@ def main():
         out.append(badge(x + 56, ky - 22, None, conf, 42))
         out.append(text(x + 140, ky, msg, 56, 'regular', DIM))
         ky += 92
-    for line in wrap('The same marks, small, stand before each place the trains and streetcars went.', 'regular', 56, W - M - x - 140):
+    for line in wrap(spec.get('marksNote', MARKS_NOTE), 'regular', 56, W - M - x - 140):
         out.append(text(x + 140, ky, line, 56, 'regular', DIM))
         ky += 76
     if spec.get('travelerKey') and traveler:
@@ -347,7 +373,7 @@ def page(spec, print_dir):
             out += [f"### {c['n']}. {c['title']}", '', c['text'], '', f"*How sure: {key[c['_conf']]}.*", '']
     out += ["## How sure each part is", '', P.get('key_intro', ''), '']
     out += [f"- **{marks[k].capitalize()}:** {key[k]}." for k, _ in spec['key']]
-    out += ['', P.get('marks_note', 'The same marks, small, stand before each place the trains and streetcars went.'), '']
+    out += ['', P.get('marks_note', spec.get('marksNote', MARKS_NOTE)), '']
     if spec.get('travelerKey'):
         out += [P.get('traveler_note', spec['travelerKey']), '']
     if spec.get('wayfinding'):

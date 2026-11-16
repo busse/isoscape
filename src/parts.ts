@@ -104,12 +104,15 @@ export const box = (c: Vec2, dir: Vec2, hl: number, hw: number): Ring => {
 }
 
 /**
- * Rolling stock of the 1940s, in meters: a steam engine and its tender, and the cars behind.
+ * Rolling stock of the 1940s and 1950s, in meters: a steam engine and its tender, or a diesel
+ * unit, and the cars behind.
  * A heavyweight coach or Pullman is about 26 m (85 ft) long, 3.1 m wide and 4.1 m tall over the
  * roof; a 40-ft boxcar about 12.5 m long and 4.0 m tall. They stand 1 m apart.
  */
 export const STOCK = {
   engine: { length: 18, width: 3.1, height: 4.6 },
+  /** A diesel passenger unit with a cab at its front end, about 70 ft long. */
+  diesel: { length: 21.3, width: 3.2, height: 4.4 },
   tender: { length: 11, width: 3.1, height: 4.0 },
   coach: { length: 26, width: 3.1, height: 4.1 },
   freight: { length: 12.5, width: 3.0, height: 4.0 },
@@ -132,8 +135,9 @@ export const boxItem = (view: View, pal: Palette, b: Box): Item => {
 export const trainBoxes = (id: string, line: readonly Vec2[], train: Train, ground: (p: Vec2) => number): Box[] => {
   const pts = train.reverse === true ? [...line].reverse() : line
   const total = lengthOf(pts)
-  const consist: { kind: 'engine' | 'tender' | 'coach' | 'freight'; tone: PartTone }[] = []
-  if (train.engine !== false) consist.push({ kind: 'engine', tone: 'engine' }, { kind: 'tender', tone: 'engine' })
+  const consist: { kind: 'engine' | 'tender' | 'diesel' | 'coach' | 'freight'; tone: PartTone }[] = []
+  if (train.engine !== false && train.power === 'diesel') consist.push({ kind: 'diesel', tone: 'diesel' })
+  else if (train.engine !== false) consist.push({ kind: 'engine', tone: 'engine' }, { kind: 'tender', tone: 'engine' })
   const car = train.kind ?? 'coach'
   for (let k = 0; k < train.cars; k++) consist.push({ kind: car, tone: car })
   const boxes: Box[] = []

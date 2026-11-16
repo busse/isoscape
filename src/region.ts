@@ -122,6 +122,17 @@ export interface Cutaway {
     readonly earth?: number
     /** The traveler's path: points [meters along the plane, elevation in meters above sea level]. */
     readonly route?: readonly (readonly [number, number])[]
+    /**
+     * Stairs hidden from the plane behind a wall (regular expressions on item ids): drawn as
+     * their dashed outline, as a stair on the side lifted away is.
+     */
+    readonly hidden?: readonly string[]
+    /**
+     * Parts drawn only in a thin slice behind the plane (regular expressions on item ids, and
+     * the slice's depth in meters, default 1): a roof seen from beneath would otherwise hide
+     * the trusses under it; this way only its cut and the edge next to it show.
+     */
+    readonly slice?: { readonly parts: readonly string[]; readonly depth?: number }
     /** Travelers on the path: meters along the plane, the floor's elevation, and facing (1 toward `to`). */
     readonly travelers?: readonly { readonly s: number; readonly floor: number; readonly facing: 1 | -1 }[]
   }

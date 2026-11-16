@@ -71,6 +71,8 @@ export interface Palette {
    * roofing, the plastered ramp houses, and the trains: Pullman-green coaches, black engines,
    * boxcar-red freight; and, for the larger trains of a cutaway, an engine's iron in a grey
    * light enough for its edges to show, the coal in its tender, and a coach's darker roof.
+   * Main Street Station's buff brick and red clay tile, the painted steel of its train shed, the
+   * ballast of its elevated tracks, and a diesel engine in a plain grey.
    */
   readonly parts: Readonly<Record<PartTone, readonly [string, string, string]>>
   /**
@@ -162,6 +164,11 @@ const paper: Palette = {
     loco: ['#6b6c70', '#4a4b4f', '#5a5b5f'],
     coal: ['#403e3b', '#2f2e2c', '#4a4744'],
     carRoof: ['#43553d', '#2f3d2b', '#4a5d43'],
+    brick: ['#e2c99c', '#b89d72', '#d6bd92'],
+    tile: ['#b46049', '#844232', '#a9553f'],
+    steel: ['#7d7f86', '#5c5e65', '#8e9096'],
+    ballast: ['#b5aa90', '#948a72', '#aca186'],
+    diesel: ['#66696d', '#45474b', '#54575b'],
   },
   poche: '#2c2b33',
   cutOutline: '#2c2b33',
@@ -254,6 +261,11 @@ const night: Palette = {
     loco: ['#3a3b40', '#26272c', '#303136'],
     coal: ['#1f1f22', '#161618', '#29292c'],
     carRoof: ['#24382a', '#18261c', '#2a3e2f'],
+    brick: ['#5c5040', '#40382d', '#544a3c'],
+    tile: ['#6a3a2e', '#4a2820', '#5e3428'],
+    steel: ['#2c2d33', '#1d1e23', '#34353b'],
+    ballast: ['#4a4840', '#38362f', '#43413a'],
+    diesel: ['#34363b', '#232428', '#2d2f33'],
   },
   poche: '#c9d1e6',
   cutOutline: '#c9d1e6',

@@ -124,6 +124,8 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
         // Across the plane at an angle, the gauge and ballast are drawn as long as they cut.
         const l = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
         const sin = Math.abs(((b[0] - a[0]) * pl.n[0] + (b[1] - a[1]) * pl.n[1]) / l) || 1
+        // An elevated track's rails stand on its deck (its ballast is a modeled part there).
+        if (h.elevation !== undefined) continue
         const g = T.z(along(s))
         const half = 1.6 / sin
         out.push(`<path fill="${p.rail}" class="i" d="${path([P(s - half - 0.4, g), P(s + half + 0.4, g), P(s + half, g + 0.35), P(s - half, g + 0.35)])}"/>`)

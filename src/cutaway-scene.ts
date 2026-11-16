@@ -14,7 +14,7 @@ import type { Item, Shape } from './scene.ts'
 import type { View } from './view.ts'
 import { travelerShapes } from './traveler.ts'
 import {
-  above, behind, below, clipAll, corners, clipSolid, cutPlane, sweep, type FaceRole, type Vec3, isConvex, prism, revolve, sectionOf, sideOf, solidItem, splitSolids, stair, unionOutline, within,
+  above, behind, below, clipAll, corners, clipSolid, cutPlane, frameSolids, newell, insetSolids, sweep, trackSolids, type FaceRole, type Vec3, isConvex, prism, revolve, sectionOf, sideOf, solidItem, splitSolids, stair, unionOutline, within,
   type CutPlane, type Solid, type Tones,
 } from './cutaway.ts'
 
@@ -22,7 +22,7 @@ import {
 export interface PlacedPart { readonly h: HistoryFeature; readonly outer: Ring; readonly seat: number; readonly top: number }
 
 /** The solids a placed part is made of. Non-convex prisms are drawn on their convex hull. */
-export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean } => {
+export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean; sides?: number[] } => {
   const { h, outer, seat, top } = p
   if (h.shape === 'revolve' && h.levels !== undefined) {
     return { solids: revolve(outer, h.levels.map(([z, o, i]) => ({ z: seat + z, outer: o, inner: i }))), hulled: false }
@@ -50,9 +50,37 @@ export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean } 
     return { solids: [sweep(profile, p0, u, w, 0, thick)], hulled: false }
   }
   if (h.shape === 'stair') return { solids: stair(outer, seat, top, h.steps ?? 12), hulled: false }
+  if (h.shape === 'inset' && h.levels !== undefined) {
+    const solids = insetSolids(outer, h.levels.map(([z, o, i]) => ({ z: seat + z, outer: o, inner: i })))
+    // A shell (a hipped roof over rooms) is drawn side by side, so what stands inside it sorts
+    // between its near and far sides; a solid one (a square dome) as one.
+    const shell = h.levels.some(([, o, i]) => i > o + 1e-6 && i < 8)
+    return { solids, hulled: false, ...(shell ? { sides: solids.map((_, k) => k % outer.length) } : {}) }
+  }
+  if (h.shape === 'frame' && h.members !== undefined) {
+    const members = h.members.filter((m) => m.length >= 5).map((m) => (m.length >= 6 && m.length % 2 === 0
+      ? m.map((v, i) => (i % 2 === 1 ? seat + v : v))
+      : [m[0], seat + m[1], m[2], seat + m[3], m[4]]))
+    const solids = frameSolids(outer, members)
+    // A long frame (a truss across a shed) is drawn in pieces of members FRAME_PIECE apart, so
+    // what stands under it sorts against the piece above it, not the whole span.
+    const span = Math.hypot(outer[1][0] - outer[0][0], outer[1][1] - outer[0][1])
+    if (span <= 2 * FRAME_PIECE) return { solids, hulled: false }
+    // (frameSolids leaves out members of no length; so does this.)
+    const drawn = members.filter((m) => (m.length >= 6 && m.length % 2 === 0) || Math.hypot(m[2] - m[0], m[3] - m[1]) >= 1e-6)
+    const sides = drawn.map((m) => {
+      const us = m.length >= 6 ? m.filter((_, i) => i % 2 === 0) : [m[0], m[2]]
+      return Math.floor(us.reduce((t, v) => t + v, 0) / us.length / FRAME_PIECE)
+    })
+    return { solids, hulled: false, sides }
+  }
+  if (h.shape === 'track') return { solids: trackSolids(outer, seat), hulled: false }
   if (isConvex(outer)) return { solids: [prism(outer, seat, top)], hulled: false }
   return { solids: [prism(convexHull(outer), seat, top)], hulled: true }
 }
+
+/** A frame longer than twice this (m) is drawn in pieces of members this far apart along it. */
+export const FRAME_PIECE = 6
 
 /** The tones a modeled part is drawn in, its inside (a dome's ceiling) in plaster. */
 export const partTones = (pal: Palette, h: HistoryFeature): Tones => {
@@ -87,6 +115,9 @@ export const cutawayItems = (
   const plane = cutPlane(through, cut.bearing, view.bearing, cut.remove)
   const prefix = cut.parts ?? ''
   const lift = (cut.lift ?? []).map((r) => new RegExp(r))
+  const hidden = (cut.section?.hidden ?? []).map((r) => new RegExp(r))
+  const slice = (cut.section?.slice?.parts ?? []).map((r) => new RegExp(r))
+  const sliceDepth = cut.section?.slice?.depth ?? 1
   const items: Item[] = []
   const sections: Vec2[][] = []
   const stats: Record<string, number> = { cutParts: 0, keptParts: 0, cutHulled: 0, lifted: 0 }
@@ -96,50 +127,66 @@ export const cutawayItems = (
   const beyond = cut.section?.beyond ?? 35
   const other = cut.section?.other ?? 2
   for (const p of parts) {
-    const { solids, hulled } = partSolids(p)
-    if (hulled) stats.cutHulled++
-    const tones = partTones(pal, p.h)
-    const id = `history:${p.h.id}`
-    const subject = p.h.id.startsWith(prefix)
-    if (opts.section) {
-      // A flight down from the floor on the side lifted away (a stair to the platforms) is
-      // drawn as its profile, dashed, on the plane.
-      if (subject && p.h.shape === 'stair' && p.top <= (opts.floorZ ?? Infinity) + 0.05 && p.outer.every((q) => sideOf(plane, q) > 0) && Math.min(...p.outer.map((q) => sideOf(plane, q))) < beyond) {
-        items.push(stairProfile(view, pal, plane, id, p))
+    const made = partSolids(p)
+    if (made.hulled) stats.cutHulled++
+    // A shell's sides are each their own item (see `partSolids`); anything else is one.
+    const groups = made.sides === undefined ? [-1] : [...new Set(made.sides)]
+    for (const g of groups) {
+      const solids = g < 0 ? made.solids : made.solids.filter((_, k) => made.sides![k] === g)
+      const at = g < 0 ? '' : `/${g}`
+      const tones = partTones(pal, p.h)
+      const id = `history:${p.h.id}`
+      const subject = p.h.id.startsWith(prefix)
+      // A part lifted away whole (a shed's roofing, to show the trusses under it) leaves the
+      // outline of its upper face, dashed, where it was.
+      if (!opts.section && lift.some((r) => r.test(id))) {
+        stats.lifted++
+        const ghost = ghostItem(view, pal, `${id}:lifted${at}`, solids)
+        if (ghost !== null) items.push(ghost)
         continue
       }
-      if (subject) for (const s of solids) {
-        const sec = sectionOf(s, plane)
-        if (sec !== null) sections.push(sec)
-      }
-      const kept = solids.map((s) => clipAll(s, [behind(plane), within(plane, subject ? beyond : other)])).filter((s): s is Solid => s !== null)
-      const it = solidItem(view, tones, id, kept, p.h.name)
-      if (it !== null) items.push(it)
-      continue
-    }
-    if (!subject) {
-      const it = solidItem(view, tones, id, solids, p.h.name)
-      if (it !== null) items.push(it)
-      stats.keptParts++
-      continue
-    }
-    stats.cutParts++
-    const { back, front } = splitSolids(solids, plane, opts.keepZ)
-    for (const x of front) {
-      const c = corners(x)
-      const zs = c.map((q) => q[2])
-      if (Math.max(...zs) - Math.min(...zs) > 0.3) standing.push(convexHull(c.map((q): Vec2 => [q[0], q[1]])))
-    }
-    // A part that runs through the floor is drawn as two items, above and below it, so it
-    // takes its place in the paint order on each side of the floor's slab.
-    for (const [list, suffix] of [[back, ''], [front, ':near']] as const) {
-      const parts = opts.floorZ === undefined ? [{ s: list, tag: '' }] : [
-        { s: list.map((x) => clipSolid(x, below(opts.floorZ!))).filter((x): x is Solid => x !== null), tag: ':base' },
-        { s: list.map((x) => clipSolid(x, above(opts.floorZ!))).filter((x): x is Solid => x !== null), tag: '' },
-      ]
-      for (const { s, tag } of parts) {
-        const it = solidItem(view, tones, `${id}${suffix}${tag}`, s, p.h.name)
+      if (opts.section) {
+        // A flight down from the floor on the side lifted away (a stair to the platforms), or one
+        // hidden behind a wall (`section.hidden`), is drawn as its profile, dashed, on the plane.
+        const removed = p.top <= (opts.floorZ ?? Infinity) + 0.05 && p.outer.every((q) => sideOf(plane, q) > 0) && Math.min(...p.outer.map((q) => sideOf(plane, q))) < beyond
+        if (subject && p.h.shape === 'stair' && (removed || hidden.some((r) => r.test(id)))) {
+          items.push(stairProfile(view, pal, plane, id, p))
+          continue
+        }
+        if (subject) for (const s of solids) {
+          const sec = sectionOf(s, plane)
+          if (sec !== null) sections.push(sec)
+        }
+        const sliced = slice.some((r) => r.test(id))
+        const kept = solids.map((s) => clipAll(s, [behind(plane), within(plane, sliced ? sliceDepth : subject ? beyond : other)])).filter((s): s is Solid => s !== null)
+        const it = solidItem(view, tones, `${id}${at}`, kept, p.h.name)
         if (it !== null) items.push(it)
+        continue
+      }
+      if (!subject) {
+        const it = solidItem(view, tones, `${id}${at}`, solids, p.h.name)
+        if (it !== null) items.push(it)
+        stats.keptParts++
+        continue
+      }
+      stats.cutParts++
+      const { back, front } = splitSolids(solids, plane, opts.keepZ)
+      for (const x of front) {
+        const c = corners(x)
+        const zs = c.map((q) => q[2])
+        if (Math.max(...zs) - Math.min(...zs) > 0.3) standing.push(convexHull(c.map((q): Vec2 => [q[0], q[1]])))
+      }
+      // A part that runs through the floor is drawn as two items, above and below it, so it
+      // takes its place in the paint order on each side of the floor's slab.
+      for (const [list, suffix] of [[back, ''], [front, ':near']] as const) {
+        const parts = opts.floorZ === undefined ? [{ s: list, tag: '' }] : [
+          { s: list.map((x) => clipSolid(x, below(opts.floorZ!))).filter((x): x is Solid => x !== null), tag: ':base' },
+          { s: list.map((x) => clipSolid(x, above(opts.floorZ!))).filter((x): x is Solid => x !== null), tag: '' },
+        ]
+        for (const { s, tag } of parts) {
+          const it = solidItem(view, tones, `${id}${suffix}${tag}${at}`, s, p.h.name)
+          if (it !== null) items.push(it)
+        }
       }
     }
   }
@@ -190,6 +237,45 @@ export const cutawayItems = (
     stats.outlinePieces = k
   }
   return { items, plane, stats, sections }
+}
+
+/**
+ * The dashed outline of a lifted part: the edges of each solid's most upward-facing face, an
+ * edge shared by two faces drawn once.
+ */
+export const ghostItem = (view: View, pal: Palette, id: string, solids: readonly Solid[]): Item | null => {
+  const edges = new Map<string, [Vec3, Vec3]>()
+  const key = (p: Vec3) => p.map((v) => v.toFixed(2)).join(',')
+  for (const s of solids) {
+    const cs = corners(s)
+    const c: Vec3 = [cs.reduce((t, q) => t + q[0], 0) / cs.length, cs.reduce((t, q) => t + q[1], 0) / cs.length, cs.reduce((t, q) => t + q[2], 0) / cs.length]
+    let best: { pts: readonly Vec3[]; up: number } | null = null
+    for (const f of s.faces) {
+      if (f.role === 'internal' || f.role === 'bottom') continue
+      let n = newell(f.pts)
+      const fc = f.pts.reduce((t, q) => [t[0] + q[0] / f.pts.length, t[1] + q[1] / f.pts.length, t[2] + q[2] / f.pts.length] as Vec3, [0, 0, 0] as Vec3)
+      if (n[0] * (fc[0] - c[0]) + n[1] * (fc[1] - c[1]) + n[2] * (fc[2] - c[2]) < 0) n = [-n[0], -n[1], -n[2]]
+      const up = n[2] / (Math.hypot(n[0], n[1], n[2]) || 1)
+      if (up > 0.2 && (best === null || up > best.up)) best = { pts: f.pts, up }
+    }
+    if (best === null) continue
+    best.pts.forEach((a, i) => {
+      const b = best!.pts[(i + 1) % best!.pts.length]
+      const k = [key(a), key(b)].sort().join('|')
+      if (edges.has(k)) edges.delete(k)
+      else edges.set(k, [a, b])
+    })
+  }
+  if (edges.size === 0) return null
+  const pts = [...edges.values()].flat()
+  const flat = pts.map((q): Vec2 => [q[0], q[1]])
+  const hull = convexHull(flat)
+  if (hull.length < 3) return null
+  const zs = pts.map((q) => q[2])
+  return {
+    id, kind: 'building', hull, zMin: Math.min(...zs), zMax: Math.max(...zs), key: centroid(hull)[1], dots: [],
+    shapes: [...edges.values()].map(([a, b]) => ({ pts: [view.toScreen([a[0], a[1]], a[2]), view.toScreen([b[0], b[1]], b[2])], fill: 'none', line: true, stroke: { color: pal.cutOutline, width: pal.lineWidth * 2, dash: pal.cutOutlineDash } })),
+  }
 }
 
 /** Dashed outline pieces are this long at most, so each sorts among what stands near it. */
@@ -330,6 +416,20 @@ const shaped = (pal: Palette, whole: Box, b: Box, k: number, n: number, coupled 
     const gap = STOCK.gap
     if (coupled && !frontAtEnd && k === 0) add(slab(hw * 0.7, z0 + 0.3, z0 + 0.72 * H), toneOf('coal'), ':diaphragm', -gap, 0)
     if (coupled && frontAtEnd && k + 1 === n) add(slab(hw * 0.7, z0 + 0.3, z0 + 0.72 * H), toneOf('coal'), ':diaphragm', len, len + gap)
+  } else if (whole.tone === 'diesel') {
+    // A diesel passenger unit, its cab to the front: a body with a darker arched roof, the cab's
+    // nose lower than the roof, its windshield, and a band of small windows along the body.
+    const t = toneOf('diesel')
+    const eave = z0 + 0.8 * H
+    const nose = 2.2
+    add(slab(hw, z0, eave), t, '', ...at(nose, total))
+    add([[-hw, eave], [hw, eave], [hw * 0.8, z0 + 0.93 * H], [0, z1], [-hw * 0.8, z0 + 0.93 * H]], toneOf('carRoof', pal.parts.diesel[1]), ':roof', ...at(nose, total))
+    add(slab(hw, z0, z0 + 0.5 * H), t, ':nose', ...at(0, nose))
+    add(slab(hw * 0.9, z0 + 0.5 * H, eave), toneOf('glass'), ':windshield', ...at(nose - 0.35, nose))
+    for (const side of [1, -1]) {
+      add([[side * hw, z0 + 0.55 * H], [side * (hw + 0.05), z0 + 0.55 * H], [side * (hw + 0.05), z0 + 0.7 * H], [side * hw, z0 + 0.7 * H]], toneOf('glass'), side > 0 ? ':windows' : ':windows-b', ...at(nose + 0.8, nose + 2.6))
+      add([[side * hw, z0 + 0.6 * H], [side * (hw + 0.05), z0 + 0.6 * H], [side * (hw + 0.05), z0 + 0.7 * H], [side * hw, z0 + 0.7 * H]], toneOf('glass'), side > 0 ? ':ports' : ':ports-b', ...at(6, total - 2))
+    }
   } else if (whole.tone === 'freight') {
     add([[-hw, z0], [hw, z0], [hw, z0 + 0.8 * H], [hw * 0.55, z0 + 0.96 * H], [0, z1], [-hw * 0.55, z0 + 0.96 * H], [-hw, z0 + 0.8 * H]], toneOf('freight', pal.parts.roof[2]), '')
   } else if (whole.tone === 'engine' && total > 14) {
@@ -461,6 +561,17 @@ export const flatElevations = (view: View, pal: Palette, pl: CutPlane, boxes: re
           { pts: rect(-0.3, z0 + 0.42 * H, 0.3, z0 + 0.62 * H), fill: glass },
         )
       }
+    } else if (b.tone === 'diesel') {
+      // A diesel unit's front: its body and roof, the windshield's two panes, a headlight.
+      const eave = z0 + 0.8 * H
+      const [dl, ds] = toned3('diesel')
+      polys.push(
+        { pts: [[-hw, eave], [hw, eave], [hw * 0.8, z0 + 0.93 * H], [0, b.z1], [-hw * 0.8, z0 + 0.93 * H]], fill: ds },
+        { pts: rect(-hw, z0 + 0.15, hw, eave), fill: dl },
+        { pts: rect(-hw * 0.85, z0 + 0.58 * H, -0.1, eave - 0.1), fill: glass },
+        { pts: rect(0.1, z0 + 0.58 * H, hw * 0.85, eave - 0.1), fill: glass },
+        { pts: Array.from({ length: 12 }, (_, i): Vec2 => [0.2 * Math.cos((i * Math.PI) / 6), z0 + 0.42 * H + 0.2 * Math.sin((i * Math.PI) / 6)]), fill: glass },
+      )
     } else if (hl > 7) {
       // An engine's front: the cab beyond, the boiler's round smokebox, its stack.
       const cz = z0 + 2.35
@@ -482,6 +593,16 @@ export const flatElevations = (view: View, pal: Palette, pl: CutPlane, boxes: re
       )
     }
     items.push(flat(`${key}:end`, m.q, polys, 'A train: a car seen end on'))
+  }
+  // Trains standing alongside the plane, behind it within `depth`: each car, engine and tender
+  // in side elevation, true size, on its rails, with the gaps between them.
+  for (const b of boxes) {
+    if (b.front === undefined || b.id.endsWith(':cab')) continue
+    const { w } = frameOf(b)
+    if (Math.abs(w[0] * pl.n[0] + w[1] * pl.n[1]) >= 0.05) continue
+    const d = b.ring.map((q) => sideOf(pl, q))
+    if (Math.max(...d) > 1e-6 || Math.min(...d) < -depth) continue
+    items.push(sideElevation(view, pal, pl, b, Math.max(...d)))
   }
   // Sheds: by shed, its butterfly profile where its line meets the plane.
   const sheds = new Map<string, Box>()
@@ -509,6 +630,84 @@ export const flatElevations = (view: View, pal: Palette, pl: CutPlane, boxes: re
     ], 'A platform shed, end on'))
   }
   return items
+}
+
+/**
+ * A car, engine or tender seen from the side, square on, for the flat section: flat shapes on
+ * its near side (`near` meters from the plane, behind it), drawn in the train's own tones.
+ */
+export const sideElevation = (view: View, pal: Palette, pl: CutPlane, b: Box, near: number): Item => {
+  const sOf = (q: Vec2) => (q[0] - pl.p[0]) * pl.u[0] + (q[1] - pl.p[1]) * pl.u[1]
+  const ss = b.ring.map(sOf)
+  const s0 = Math.min(...ss)
+  const s1 = Math.max(...ss)
+  const len = s1 - s0
+  // Which end leads: +1 when the front is toward larger s.
+  const ahead = (b.front![0] * pl.u[0] + b.front![1] * pl.u[1]) > 0 ? 1 : -1
+  // x: meters from the car's front, back along it.
+  const S = (x: number) => (ahead > 0 ? s1 - x : s0 + x)
+  const P = (x: number, z: number): Vec2 => view.toScreen([pl.p[0] + pl.u[0] * S(x) + pl.n[0] * near, pl.p[1] + pl.u[1] * S(x) + pl.n[1] * near], z)
+  const z0 = b.z0
+  const z1 = b.z1
+  const H = z1 - z0
+  const t = (tone: PartTone, k: 0 | 1 | 2 = 0) => pal.parts[tone][k]
+  const glass = pal.parts.glass[0]
+  const polys: { pts: Vec2[]; fill: string }[] = []
+  const rect = (x0: number, za: number, x1: number, zb: number) => polys.push({ pts: [[x0, za], [x1, za], [x1, zb], [x0, zb]], fill: '' })
+  const add = (pts: Vec2[], fill: string) => polys.push({ pts, fill })
+  const box = (x0: number, za: number, x1: number, zb: number, fill: string) => { rect(x0, za, x1, zb); polys[polys.length - 1].fill = fill }
+  const disc = (cx: number, cz: number, r: number, fill: string) => add(Array.from({ length: 16 }, (_, i): Vec2 => [cx + r * Math.cos((i * Math.PI) / 8), cz + r * Math.sin((i * Math.PI) / 8)]), fill)
+  const truck = (x: number) => box(x - 1.3, z0 - 0.42, x + 1.3, z0 + 0.12, t('coal'))
+  if (b.tone === 'coach' || b.tone === 'freight') {
+    const eave = z0 + 0.78 * H
+    const roof = b.tone === 'coach' ? t('carRoof', 1) : t('freight', 1)
+    add([[0, eave], [0.25, z0 + 0.9 * H], [0.9, z1], [len - 0.9, z1], [len - 0.25, z0 + 0.9 * H], [len, eave]], roof)
+    box(0, z0 + 0.12, len, eave, b.tone === 'coach' ? t('coach') : t('freight'))
+    truck(3.2)
+    truck(len - 3.2)
+    if (b.tone === 'coach') {
+      // The vestibule doors at each end, and the windows between.
+      box(0.35, z0 + 0.12, 1.15, z0 + 0.74 * H, t('coach', 1))
+      box(len - 1.15, z0 + 0.12, len - 0.35, z0 + 0.74 * H, t('coach', 1))
+      for (let x = 2.0; x + 0.9 <= len - 1.9; x += 1.55) box(x, z0 + 0.42 * H, x + 0.9, z0 + 0.64 * H, glass)
+    }
+  } else if (b.tone === 'diesel') {
+    const eave = z0 + 0.8 * H
+    const nose = 2.2
+    add([[nose, eave], [nose + 0.4, z1], [len - 0.6, z1], [len, eave]], t('diesel', 1))
+    add([[0, z0 + 0.12], [len, z0 + 0.12], [len, eave], [nose, eave], [0.25, z0 + 0.5 * H], [0, z0 + 0.45 * H]], t('diesel'))
+    add([[nose - 1.4, z0 + 0.58 * H], [nose - 0.05, z0 + 0.58 * H], [nose - 0.05, eave - 0.1], [nose - 0.35, eave - 0.1]], glass)
+    box(nose + 0.8, z0 + 0.55 * H, nose + 2.4, z0 + 0.7 * H, glass)
+    for (let x = 6; x + 0.7 <= len - 2; x += 1.6) box(x, z0 + 0.6 * H, x + 0.7, z0 + 0.7 * H, glass)
+    truck(3.4)
+    truck(len - 3.4)
+  } else if (b.tone === 'engine' && len > 14) {
+    // A steam engine: pilot, frame and running board, boiler with stack and domes, the cab at
+    // the back, three driving wheels.
+    const cz = z0 + 2.35
+    box(0.3, z0, len, z0 + 1.25, t('loco', 1))
+    box(0.4, cz - 1.0, len - 4, cz + 1.0, t('loco'))
+    box(0.4, cz - 1.02, 2.6, cz + 1.02, t('coal'))
+    box(1.1, cz, 1.8, z0 + 4.0, t('coal'))
+    box(6.4, cz, 7.5, z0 + 3.7, t('loco'))
+    box(9.2, cz, 10.1, z0 + 3.6, t('loco'))
+    box(len - 4, z0 + 1.25, len, z0 + 3.65, t('loco'))
+    box(len - 4.1, z0 + 3.65, len + 0.1, z0 + 3.95, t('coal'))
+    box(len - 3.4, z0 + 2.45, len - 1.4, z0 + 3.25, glass)
+    for (const x of [5.2, 7.2, 9.2]) disc(x, z0 + 0.75, 0.85, t('coal'))
+    add([[0, z0 - 0.4], [0.9, z0 - 0.4], [0.9, z0 + 0.5]], t('coal'))
+  } else if (b.tone === 'engine') {
+    box(0, z0, len, z0 + 2.5, t('loco'))
+    add([[0.4, z0 + 2.5], [len * 0.62, z0 + 2.5], [len * 0.55, z0 + 3.05], [0.9, z0 + 3.05]], t('coal'))
+    truck(2.6)
+    truck(len - 2.6)
+  } else {
+    box(0, z0, len, z1, t(b.tone))
+  }
+  return {
+    id: `${b.id}:side`, kind: 'building', hull: b.ring, zMin: z0 - 0.42, zMax: z1, key: centroid(b.ring)[1], name: 'A train, seen from the side', dots: [],
+    shapes: polys.map((q) => ({ pts: q.pts.map(([x, z]) => P(x, z)), fill: q.fill, ink: true })),
+  }
 }
 
 /**

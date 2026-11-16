@@ -282,7 +282,8 @@ export const buildScene = (
   }
   // Curated track (a station's loop, long since taken up), drawn as rail.
   for (const h of curated) {
-    if (h.kind !== 'rail') continue
+    // An elevated track is drawn on its deck, as modeled parts, not on the ground.
+    if (h.kind !== 'rail' || h.elevation !== undefined) continue
     for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
       const r = ribbonOf('rail', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, (h.width ?? 3.2) * railScale, false)
       if (r) ribbons.push(r)
@@ -545,10 +546,13 @@ export const buildScene = (
         const top = h.upTo !== undefined ? zOf(h.upTo) : seat + (h.height ?? 10)
         parts++
         // A stair or an arch keeps its corners in order: its first edge is its foot, or its span.
-        if (cut !== undefined) placed.push({ h, outer: h.shape === 'stair' || h.shape === 'arch' ? toViewRing(view, h.ring) : outer, seat, top })
+        // (A frame's first edge is its plane, a track's its width: they keep theirs too.)
+        const ordered = h.shape === 'stair' || h.shape === 'arch' || h.shape === 'frame' || h.shape === 'track'
+        if (cut !== undefined) placed.push({ h, outer: ordered ? toViewRing(view, h.ring) : outer, seat, top })
         else {
           const t = toned(pal, h.tone)
-          const solid = h.shape === 'revolve' ? solidItem(view, partTones(pal, h), `history:${h.id}`, partSolids({ h, outer, seat, top }).solids, h.name) : null
+          const solid = h.shape === 'revolve' || h.shape === 'inset' || h.shape === 'frame' || h.shape === 'track'
+            ? solidItem(view, partTones(pal, h), `history:${h.id}`, partSolids({ h, outer: ordered ? toViewRing(view, h.ring) : outer, seat, top }).solids, h.name) : null
           if (solid !== null) items.push(solid)
           else items.push(h.shape === 'dome'
             ? dome(view, pal, `history:${h.id}`, outer, seat, top, h.name)
@@ -580,7 +584,8 @@ export const buildScene = (
       }
       const train = cut !== undefined && h.cutTrain !== undefined ? h.cutTrain : h.train
       if (h.kind === 'rail' && train !== undefined && h.line !== undefined) {
-        const got = keepBoxes(trainBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), train, (p) => terrain.z(p)))
+        const deck = h.elevation
+        const got = keepBoxes(trainBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), train, (p) => (deck === undefined ? terrain.z(p) : zOf(deck))))
         boxes.push(...got)
         cars += got.length
       }

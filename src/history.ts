@@ -54,7 +54,7 @@ export interface HistoryFeature {
   readonly base?: number
   readonly seat?: 'min' | 'max'
   readonly on?: string
-  readonly shape?: 'prism' | 'dome' | 'revolve' | 'stair' | 'arch'
+  readonly shape?: 'prism' | 'dome' | 'revolve' | 'stair' | 'arch' | 'inset' | 'frame' | 'track'
   readonly tone?: PartTone
   /**
    * Which views draw the part: `whole` only those without a cutaway (a building's massing),
@@ -71,6 +71,16 @@ export interface HistoryFeature {
    */
   readonly levels?: readonly (readonly [number, number, number])[]
   /**
+   * `frame`: straight members in the vertical plane over the ring's first edge (a truss, a
+   * bracket, a roof slope), each [u0, z0, u1, z1, depth]: from u0 to u1 meters along that edge
+   * from its start, at z0 and z1 meters above the part's bottom, `depth` deep in that plane,
+   * and as thick as the ring's second edge is long. `inset` uses `levels` as [height, outer
+   * inset, inner inset] in meters in from the ring (a hipped roof, a square dome; an inner inset
+   * past the middle is solid). `track`: ties and two rails on the ring, from its first edge
+   * (across the track) along its second.
+   */
+  readonly members?: readonly (readonly number[])[]
+  /**
    * `stair`: the number of treads; it rises from the ring's first edge to its third. `arch`: an
    * arched window on the ring's first edge (its span), rising to a half ellipse at the top.
    */
@@ -84,7 +94,11 @@ export interface HistoryFeature {
   readonly at?: Vec2
   readonly caption?: string
   readonly anchor?: 'start' | 'middle' | 'end'
-  /** A rail line: a train standing on it, `at` meters from the line's start. */
+  /**
+   * A rail line: a train standing on it, `at` meters from the line's start. A line with an
+   * `elevation` is carried on a deck (an elevated track): its train stands there, and it is not
+   * drawn on the ground (its deck and rails are modeled parts).
+   */
   readonly train?: Train
   /** The train a cutaway draws here instead: a close view places its train to be seen. */
   readonly cutTrain?: Train
@@ -107,7 +121,7 @@ export type Confidence = 'drawn' | 'written' | 'approximate'
 /** A part's confidence: what it says, or `approximate` when it says nothing. */
 export const confidenceOf = (h: { readonly confidence?: Confidence }): Confidence => h.confidence ?? 'approximate'
 
-export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof'
+export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof' | 'brick' | 'tile' | 'steel' | 'ballast' | 'diesel'
 
 /**
  * A train on a curated rail line: an engine (unless `engine` is false) and `cars` cars behind
@@ -117,6 +131,8 @@ export interface Train {
   readonly cars: number
   readonly at: number
   readonly engine?: boolean
+  /** The engine: a steam engine and its tender (the default), or a diesel unit. */
+  readonly power?: 'steam' | 'diesel'
   readonly kind?: 'coach' | 'freight'
   readonly reverse?: boolean
 }
