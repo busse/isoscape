@@ -801,6 +801,22 @@ const pierSpacing = (region: Region, chain: BridgeChain): number => {
   return PIER_SPACING
 }
 
+/** How far a ramp runs from the ground up to full deck height, meters. */
+export const RAMP = 70
+
+/**
+ * Clearance over the ground at distance `s` along a bridge `total` long, for a deck `deck` high:
+ * full height, except within `RAMP` of an end that comes down to the ground, where it eases in.
+ * The ramp keeps its length on a short bridge, so one shorter than two ramps never reaches full
+ * height: a 30 m footbridge over a canal rises a meter or so, not into a 7 m tent.
+ */
+export const rampClearance = (deck: number, total: number, s: number, rampStart: boolean, rampEnd: boolean): number => {
+  const e = Math.min(rampStart ? s : Infinity, rampEnd ? total - s : Infinity)
+  if (e >= RAMP) return deck
+  const u = Math.max(0, e / RAMP)
+  return deck * (u * u * (3 - 2 * u))
+}
+
 const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain): Item[] => {
   const spacing = pierSpacing(region, chain)
   const line = chain.line
@@ -822,13 +838,7 @@ const bridgePieces = (view: View, pal: Palette, region: Region, terrain: Terrain
 
   // The deck profile. A bridge runs fairly straight between its abutments, and never closer to
   // what is under it than its clearance — except where it comes down to meet the ground.
-  const ramp = Math.min(70, total / 3)
-  const clearance = (s: number) => {
-    const e = Math.min(chain.rampStart ? s : Infinity, chain.rampEnd ? total - s : Infinity)
-    if (ramp <= 0 || e >= ramp) return deck
-    const u = Math.max(0, e / ramp)
-    return deck * (u * u * (3 - 2 * u))
-  }
+  const clearance = (s: number) => rampClearance(deck, total, s, chain.rampStart, chain.rampEnd)
   const startLevel = ground(0) + (chain.rampStart ? 0 : deck)
   const endLevel = ground(total) + (chain.rampEnd ? 0 : deck)
   const step = 5

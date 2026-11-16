@@ -304,8 +304,11 @@ ramps down at an end that touches no other bridge.
 bridge, for example `{ "match": "Manchester", "deck": 24 }`. Otherwise the deck sits
 `bridgeDeck` meters (7 by default) above the ground for each OSM `layer`. The deck is a taut
 line over whatever it crosses: never closer to the ground than its clearance, rising in
-straight runs, and easing down over at most 70 m at a free end. Piers drop to the real ground
-or water every 38 m where the deck is more than 3 m up.
+straight runs, and easing down over 70 m at a free end. The ramp keeps that length on a short
+bridge, so a bridge shorter than two ramps never reaches full height: a 30 m footbridge over a
+canal rises well under a meter above its banks, where a 7 m tent would read as a stub floating
+in the air. Piers drop to the real ground or water every 38 m where the deck is more than 3 m
+up.
 
 Each bridge is cut into spans of at most 22 m, so a long bridge can pass in front of one
 building and behind another. Bridges are cut at the edges of the frame.

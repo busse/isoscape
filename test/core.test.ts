@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { clipRingToRect, convexHull, separatingAxis, signedArea, simplifyRing, type Vec2 } from '../src/geom.ts'
 import { dominantGridAngle, makeView, snapBearing } from '../src/view.ts'
-import { chainBridges, extrude, type Item } from '../src/scene.ts'
+import { chainBridges, extrude, rampClearance, RAMP, type Item } from '../src/scene.ts'
 import { compare, paintOrder } from '../src/order.ts'
 import { assembleRings, parseOsm } from '../src/osm.ts'
 import { buildingHeights, parseLength } from '../src/classify.ts'
@@ -82,6 +82,16 @@ test('bridge ways sharing ends chain, and only grounded ends ramp', () => {
   assert.equal(chains.length, 1)
   assert.equal(chains[0].line.points.length, 3)
   assert.ok(chains[0].rampStart && chains[0].rampEnd)
+})
+
+test('a short bridge stays low; a long one reaches its deck', () => {
+  const peak = (total: number) => Math.max(...Array.from({ length: 101 }, (_, k) => rampClearance(7, total, (total * k) / 100, true, true)))
+  assert.ok(peak(30) < 1, `30 m footbridge peaks at ${peak(30)}`)
+  assert.ok(peak(80) < 7 && peak(80) > 1)
+  assert.equal(peak(2 * RAMP + 10), 7)
+  // An end that meets another bridge stays at deck height.
+  assert.equal(rampClearance(7, 200, 0, false, true), 7)
+  assert.equal(rampClearance(7, 200, 200, false, true), 0)
 })
 
 test('multipolygon fragments assemble into rings', () => {
