@@ -1,5 +1,6 @@
 {
  "about": "The sheet for the Broad Street Station cutaway: tools/cutaway/sheet.py. Callouts are anchored to drawn parts (history ids, in the isometric view and the flat section); a badge's style is the anchored part's confidence unless `confidence` says otherwise. Callout text is a working draft, written with Claude, for the artist to edit.",
+ "design": "broad-street-1943-cutaway",
  "region": "broad-street-station-cutaway",
  "year": 1943,
  "title": "Broad Street Station, 1943",

@@ -616,8 +616,18 @@ collection › set › piece, the plate, the version, the year drawn, the point 
 around (decimal degrees) and the direction it faces. It sits in the bottom-right corner,
 right-aligned with the art, or in the header of a set sheet whose foot is full.
 
+A plate may also say what kind of piece it is, with an optional `"kind"` (`"Map"`,
+`"Landmark"`, `"Building cutaway"`; up to 24 characters). The block then prints it as one line
+under the maker, at 28 units (7.1 pt on a 24 in sheet), on the baseline of the lower row's values,
+and the maker's two lines move up to make room. A plate with no kind prints nothing there, and
+its block is the same, byte for byte, as before kinds existed. The Broad Street cutaway
+(`BSS-15`) is the first with one. A cutaway's location and facing come from its own region
+(the sheet spec in `cutaways/` names its `design`), not the set's map.
+
 - `python3 tools/release/plates.py check <store-dir>`: every plate unique and well formed, and
-  every design in the store has one. `plates.py next <SET>` gives a new design its number.
+  every design in the store has one, and every kind is a short line of text.
+  `plates.py next <SET>` gives a new design its number. Tests: `cd tools/release && python3 -m
+  unittest test_plates`.
 - `python3 tools/release/plates.py list [--csv]`: the catalog as a text reference list.
 - `python3 tools/release/stamp.py <store-dir> <design>...`: stamp the block onto a design's
   print and canvas files as its next version (logged in the store's `state/stamps.json`;

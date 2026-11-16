@@ -10,7 +10,10 @@ comes out the same wherever it runs, in the print's own fonts and palette.
   find_spot(sheet, w, h, …) where a w x h block fits in the sheet's bottom-right corner
   stamp(sheet, info, …)     both: returns the stamped sheet and where the block went
 
-info: {collection, set, piece, plate, version, drawn, location, facing}
+info: {collection, set, piece, plate, version, drawn, location, facing} and, optionally, kind
+(what sort of piece it is: "Map", "Landmark", "Building cutaway"). A block without a kind is
+drawn exactly as before; with one, the maker's two lines move up and the kind is set beneath
+them, one line at KIND_SIZE on the baseline of the lower row's values.
 """
 import os
 import numpy as np
@@ -28,6 +31,9 @@ CUBE_W, NAME_W = 110, 300
 TOP = [('Collection › Set › Piece', 'taxonomy', 660), ('Plate', 'plate', 230)]
 LOW = [('Version', 'version', 150), ('Drawn', 'drawn', 150), ('Location', 'location', 360), ('Facing', 'facing', 230)]
 WIDTH = CUBE_W + NAME_W + sum(w for *_, w in TOP)
+# The kind's line: 28 units is 7.1 pt on the smallest sheet stamped (24 in long at 300 dpi,
+# u = 1.06), and "Building cutaway" at that size fits the name cell with room to spare.
+KIND_SIZE = 28
 
 
 def _font(kind, size):
@@ -82,9 +88,12 @@ def block(info, u=1.0):
     for path in ([P(60, 18), P(100, 41), P(60, 64), P(20, 41), P(60, 18)],
                  [P(20, 41), P(20, 81), P(60, 104), P(100, 81), P(100, 41)], [P(60, 64), P(60, 104)]):
         d.line(path, fill=INK, width=sw, joint='curve')
-    # maker
-    _spaced(d, c0 + 22 * u, 88 * u, 'isoscape', _font('bold', 36 * u), INK, 1 * u)
-    d.text((c0 + 22 * u, 128 * u), 'drawn by Chris Busse', font=_font('italic', 22 * u), fill=INK, anchor='ls')
+    # maker, and the kind of piece beneath it when there is one
+    kind = info.get('kind')
+    _spaced(d, c0 + 22 * u, (70 if kind else 88) * u, 'isoscape', _font('bold', 36 * u), INK, 1 * u)
+    d.text((c0 + 22 * u, (108 if kind else 128) * u), 'drawn by Chris Busse', font=_font('italic', 22 * u), fill=INK, anchor='ls')
+    if kind:                    # on the baseline of the lower row's values
+        d.text((c0 + 22 * u, (H / 2 + 74) * u), kind, font=_fit(d, kind, 'regular', KIND_SIZE * u, (NAME_W - 36) * u), fill=INK, anchor='ls')
     # two rows of labeled cells
     vals = dict(info, taxonomy=taxonomy(info), plate=info['plate'].replace('-', '·'))
     lab = _font('regular', 17 * u)

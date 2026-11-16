@@ -673,7 +673,9 @@ about 5.6 × 0.8 in; smaller sheets scale it by the square root of their long si
 and it sits as low as the art's side margin allows, with clear paper around it a third of its
 height wide. Where the foot of a sheet is full (the two set sheets) it sits in the header
 instead, and only if no place fits at full size is it shrunk, in steps of a tenth. On a canvas it
-goes on the face, never the wrap. The plates themselves are listed in `catalog/plates.json`.
+goes on the face, never the wrap. A piece that is not a map can say what it is in one more
+line under the maker, at 28 units, about 7 pt on a 24 × 18 in sheet: the Broad Street cutaway's
+says "Building cutaway". The plates themselves are listed in `catalog/plates.json`.
 
 ## Archive and explorer
 
