@@ -626,9 +626,9 @@ profile, a center post and two wings rising outward. A stair down from the floor
 side (to the platforms) is drawn as its stepped profile, dashed. Under it the ground is cut along the plane and dug out where the
 building goes below it; platforms are drawn 0.35 m over the rails (approximate), rails at true
 gauge where tracks cross the plane, and a red dashed line follows the traveler from the street
-to the train. The section runs from 45 m before the plane's point (the Broad Street sidewalk)
-to 104 m beyond it (past the last platform), at 10 pixels to the meter, and its earth is cut
-5 m below the lowest ground along it. Code: `src/section.ts`.
+to the train. For Broad Street the section runs from 45 m on the street side of the plane's
+point to 104 m on the track side, at 10 pixels to the meter, and its earth is cut 5 m below the
+lowest ground along it. Code: `src/section.ts`.
 
 **What is approximate.** Every part says how it is known: *drawn* (traced from a plate or a
 survey map), *written* (placed from a written account) or *approximate* (inferred), and a
