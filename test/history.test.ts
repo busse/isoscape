@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { alive, dateBuildings, featureAlive, parseYear, type History, type Parcel } from '../src/history.ts'
+import { mkdtemp, mkdir, writeFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { alive, dateBuildings, featureAlive, loadYearBuilt, parseYear, yearBuiltDirs, type History, type Parcel } from '../src/history.ts'
 import type { LineFeature, PolygonFeature } from '../src/osm.ts'
 import { asOf } from '../src/scene.ts'
 
@@ -76,4 +79,22 @@ test('as of a year: dated buildings from their year, undated ones only today', (
   assert.deepEqual(ids(1840), [])
   assert.deepEqual(ids(1860), ['old'])
   assert.deepEqual(ids(2026), ['old', 'new'])
+})
+
+test('year built is read from the region\'s own data folder first, then the shared one; missing is an error', async () => {
+  assert.deepEqual(yearBuiltDirs({ name: 'time', data: 'shared' }, 'd'), [join('d', 'time'), join('d', 'shared')])
+  assert.deepEqual(yearBuiltDirs({ name: 'solo' }, 'd'), [join('d', 'solo')])
+  const root = await mkdtemp(join(tmpdir(), 'isoscape-yb-'))
+  const fc = (y: number) => JSON.stringify({ features: [{ geometry: { type: 'Polygon', coordinates: [[[0, 0], [1, 0], [1, 1], [0, 1], [0, 0]]] }, properties: { Y: y } }] })
+  await mkdir(join(root, 'shared'))
+  await writeFile(join(root, 'shared', 'yearbuilt.json'), fc(1900))
+  // Only the shared folder has it (a view that borrows another's parcels).
+  let got = await loadYearBuilt(yearBuiltDirs({ name: 'time', data: 'shared' }, root), 'Y', 'time')
+  assert.equal(got.parcels[0].year, 1900)
+  // The region's own folder wins (a series that borrows OSM but keeps its own parcels).
+  await mkdir(join(root, 'time'))
+  await writeFile(join(root, 'time', 'yearbuilt.json'), fc(1850))
+  got = await loadYearBuilt(yearBuiltDirs({ name: 'time', data: 'shared' }, root), 'Y', 'time')
+  assert.equal(got.parcels[0].year, 1850)
+  await assert.rejects(loadYearBuilt(yearBuiltDirs({ name: 'none', data: 'nowhere' }, root), 'Y', 'none'), /no year-built data/)
 })

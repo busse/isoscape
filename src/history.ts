@@ -366,6 +366,33 @@ export interface YearBuiltSource {
   readonly field: string
 }
 
+/**
+ * Where a dated region's year-built parcels may be: its own data folder first (where `fetch`
+ * writes them), then the shared folder it borrows OSM and elevation from (`"data"`).
+ */
+export const yearBuiltDirs = (r: Pick<Region, 'name' | 'data'>, root = 'data'): string[] =>
+  [...new Set([join(root, r.name), join(root, r.data ?? r.name)])]
+
+/**
+ * Read the year-built parcels from the first of `dirs` that holds them. A dated series without
+ * them would date nothing but its few curated buildings and draw every other building, of any
+ * age, in today's scene only (or, worse, mis-date them), so a missing file is an error.
+ */
+export const loadYearBuilt = async (dirs: readonly string[], field: string, name: string): Promise<{ parcels: Parcel[]; path: string }> => {
+  for (const dir of dirs) {
+    const path = join(dir, 'yearbuilt.json')
+    let json: string
+    try {
+      json = await readFile(path, 'utf8')
+    } catch (e) {
+      if ((e as NodeJS.ErrnoException).code === 'ENOENT') continue
+      throw e
+    }
+    return { parcels: parseParcels(json, field), path }
+  }
+  throw new Error(`no year-built data for "${name}" (looked in ${dirs.join(', ')}); run: isoscape fetch ${name} --extras-only`)
+}
+
 /** Page through an ArcGIS layer for the region's box; store it as data/<region>/yearbuilt.json. */
 export const fetchYearBuilt = async (r: Region, src: YearBuiltSource, dir: string, log = console.error): Promise<number> => {
   const b = fetchBounds(r)

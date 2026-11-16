@@ -17,7 +17,7 @@ import { renderPage, renderSvg } from './render.ts'
 import { buildScene, type TimeContext } from './scene.ts'
 import { loadSiteConfig, writeSocial } from './social.ts'
 import { pageDates, planStatic, plainLinks, writeStatic } from './static-pages.ts'
-import { dateBuildings, fetchYearBuilt, loadHistory, parseParcels, type History } from './history.ts'
+import { dateBuildings, fetchYearBuilt, loadHistory, loadYearBuilt, yearBuiltDirs, type History, type Parcel } from './history.ts'
 import type { PolygonFeature } from './osm.ts'
 
 const run = promisify(execFile)
@@ -92,13 +92,9 @@ const loadInputs = async (name: string) => {
   let dates: TimeContext['dates'] = new Map()
   if (region.time !== undefined) {
     history = await loadHistory(resolve(region.time.history))
-    let parcels: ReturnType<typeof parseParcels> = []
+    let parcels: Parcel[] = []
     if (region.time.yearBuilt !== undefined) {
-      try {
-        parcels = parseParcels(await readFile(resolve(dataDir(region), 'yearbuilt.json'), 'utf8'), region.time.yearBuilt.field)
-      } catch {
-        console.error(`no year-built data for "${name}"; run: isoscape fetch ${name} --extras-only`)
-      }
+      parcels = (await loadYearBuilt(yearBuiltDirs(region, resolve('data')), region.time.yearBuilt.field, name)).parcels
     }
     dates = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates)
   }
