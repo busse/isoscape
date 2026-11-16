@@ -1,0 +1,75 @@
+{
+ "view": "richmond-downtown-time-1925",
+ "args": [
+  "richmond-downtown-time",
+  "--year",
+  "1925"
+ ],
+ "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "dirty": false,
+ "approved": "2026-11-16T12:25:39-0500",
+ "svg_sha256": "78ad1477ebfe39df6039de7a764c7e9728893351784f5231ef80e96e72aabdfe",
+ "svg_bytes": 7586503,
+ "viewBox": [
+  -3024.0,
+  -1589.2,
+  6048.0,
+  2644.4
+ ],
+ "width": 12000,
+ "crops": [
+  {
+   "name": "title",
+   "x": 0,
+   "y": 0,
+   "w": 2600,
+   "h": 600
+  },
+  {
+   "name": "church-hill-bluff",
+   "x": 5250,
+   "y": 700,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "river-bridges",
+   "x": 1200,
+   "y": 2875,
+   "w": 1500,
+   "h": 1000
+  },
+  {
+   "name": "dense-traced",
+   "x": 8250,
+   "y": 3250,
+   "w": 1500,
+   "h": 1000
+  }
+ ],
+ "warnings": [
+  "no year-built data for \"richmond-downtown-time\"; run: isoscape fetch richmond-downtown-time --extras-only"
+ ],
+ "residual": {
+  "title": {
+   "max": 1.778,
+   "mean": 0.9551
+  },
+  "church-hill-bluff": {
+   "max": 15.222,
+   "mean": 2.0928
+  },
+  "river-bridges": {
+   "max": 20.0,
+   "mean": 1.0584
+  },
+  "dense-traced": {
+   "max": 12.0,
+   "mean": 1.9947
+  }
+ },
+ "data": {
+  "data/richmond-i195-rocketts/dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+  "data/richmond-i195-rocketts/osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+ }
+}
