@@ -12,922 +12,6 @@
  ],
  "features": [
   {
-   "id": "bss-wing-w",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4662998,
-     37.5612054
-    ],
-    [
-     -77.466124,
-     37.5610842
-    ],
-    [
-     -77.4658204,
-     37.5613649
-    ],
-    [
-     -77.4659962,
-     37.5614861
-    ]
-   ],
-   "height": 14.5,
-   "tone": "stone",
-   "note": "West wing: the lunch room and the white waiting rooms. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396"
-   ],
-   "only": "whole"
-  },
-  {
-   "id": "bss-wing-e",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4658065,
-     37.5608656
-    ],
-    [
-     -77.4656307,
-     37.5607444
-    ],
-    [
-     -77.4653271,
-     37.5610251
-    ],
-    [
-     -77.465503,
-     37.5611463
-    ]
-   ],
-   "height": 14.5,
-   "tone": "stone",
-   "note": "East wing: the \"colored\" waiting room of the segregated station, and stores. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396",
-    "https://sah-archipedia.org/node/20518"
-   ],
-   "only": "whole"
-  },
-  {
-   "id": "bss-center",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.466124,
-     37.5610842
-    ],
-    [
-     -77.4658065,
-     37.5608656
-    ],
-    [
-     -77.465503,
-     37.5611463
-    ],
-    [
-     -77.4658204,
-     37.5613649
-    ]
-   ],
-   "height": 19.5,
-   "tone": "stone",
-   "note": "The central pavilion, up to the attic with its clock, flanked by the figures Progress and Industry. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396",
-    "https://sah-archipedia.org/node/20518"
-   ],
-   "only": "whole"
-  },
-  {
-   "id": "bss-passages",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659533,
-     37.5614565
-    ],
-    [
-     -77.4654386,
-     37.5611019
-    ],
-    [
-     -77.465335,
-     37.5611978
-    ],
-    [
-     -77.4658497,
-     37.5615523
-    ]
-   ],
-   "height": 9,
-   "tone": "stone",
-   "note": "The enclosed concourse passages across the back of the head house. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396"
-   ],
-   "only": "whole"
-  },
-  {
-   "id": "bss-steps",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4661949,
-     37.5610256
-    ],
-    [
-     -77.4658689,
-     37.560801
-    ],
-    [
-     -77.4658023,
-     37.5608626
-    ],
-    [
-     -77.4661282,
-     37.5610872
-    ]
-   ],
-   "height": 1.0,
-   "tone": "stone",
-   "note": "The porch, raised above the forecourt. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396"
-   ],
-   "only": "whole"
-  },
-  {
-   "id": "bss-column-1",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4661067,
-     37.5610185
-    ],
-    [
-     -77.4661042,
-     37.5610232
-    ],
-    [
-     -77.4661057,
-     37.5610281
-    ],
-    [
-     -77.4661104,
-     37.5610314
-    ],
-    [
-     -77.4661167,
-     37.5610318
-    ],
-    [
-     -77.4661221,
-     37.5610292
-    ],
-    [
-     -77.4661245,
-     37.5610245
-    ],
-    [
-     -77.4661231,
-     37.5610197
-    ],
-    [
-     -77.4661183,
-     37.5610164
-    ],
-    [
-     -77.4661121,
-     37.5610159
-    ]
-   ],
-   "height": 11.5,
-   "tone": "stone",
-   "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396",
-    "https://sah-archipedia.org/node/20518"
-   ],
-   "on": "bss-steps",
-   "only": "whole"
-  },
-  {
-   "id": "bss-column-2",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4660603,
-     37.5609866
-    ],
-    [
-     -77.4660579,
-     37.5609913
-    ],
-    [
-     -77.4660593,
-     37.5609962
-    ],
-    [
-     -77.4660641,
-     37.5609995
-    ],
-    [
-     -77.4660704,
-     37.5609999
-    ],
-    [
-     -77.4660758,
-     37.5609973
-    ],
-    [
-     -77.4660782,
-     37.5609926
-    ],
-    [
-     -77.4660768,
-     37.5609877
-    ],
-    [
-     -77.466072,
-     37.5609845
-    ],
-    [
-     -77.4660657,
-     37.560984
-    ]
-   ],
-   "height": 11.5,
-   "tone": "stone",
-   "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396",
-    "https://sah-archipedia.org/node/20518"
-   ],
-   "on": "bss-steps",
-   "only": "whole"
-  },
-  {
-   "id": "bss-column-3",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.466014,
-     37.5609547
-    ],
-    [
-     -77.4660116,
-     37.5609594
-    ],
-    [
-     -77.466013,
-     37.5609643
-    ],
-    [
-     -77.4660178,
-     37.5609675
-    ],
-    [
-     -77.4660241,
-     37.560968
-    ],
-    [
-     -77.4660295,
-     37.5609654
-    ],
-    [
-     -77.4660319,
-     37.5609607
-    ],
-    [
-     -77.4660305,
-     37.5609558
-    ],
-    [
-     -77.4660257,
-     37.5609525
-    ],
-    [
-     -77.4660194,
-     37.5609521
-    ]
-   ],
-   "height": 11.5,
-   "tone": "stone",
-   "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396",
-    "https://sah-archipedia.org/node/20518"
-   ],
-   "on": "bss-steps",
-   "only": "whole"
-  },
-  {
-   "id": "bss-column-4",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659677,
-     37.5609228
-    ],
-    [
-     -77.4659652,
-     37.5609275
-    ],
-    [
-     -77.4659667,
-     37.5609324
-    ],
-    [
-     -77.4659715,
-     37.5609356
-    ],
-    [
-     -77.4659777,
-     37.5609361
-    ],
-    [
-     -77.4659831,
-     37.5609335
-    ],
-    [
-     -77.4659856,
-     37.5609288
-    ],
-    [
-     -77.4659841,
-     37.5609239
-    ],
-    [
-     -77.4659794,
-     37.5609206
-    ],
-    [
-     -77.4659731,
-     37.5609202
-    ]
-   ],
-   "height": 11.5,
-   "tone": "stone",
-   "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396",
-    "https://sah-archipedia.org/node/20518"
-   ],
-   "on": "bss-steps",
-   "only": "whole"
-  },
-  {
-   "id": "bss-column-5",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659214,
-     37.5608909
-    ],
-    [
-     -77.4659189,
-     37.5608955
-    ],
-    [
-     -77.4659204,
-     37.5609004
-    ],
-    [
-     -77.4659251,
-     37.5609037
-    ],
-    [
-     -77.4659314,
-     37.5609041
-    ],
-    [
-     -77.4659368,
-     37.5609015
-    ],
-    [
-     -77.4659393,
-     37.5608969
-    ],
-    [
-     -77.4659378,
-     37.560892
-    ],
-    [
-     -77.465933,
-     37.5608887
-    ],
-    [
-     -77.4659268,
-     37.5608883
-    ]
-   ],
-   "height": 11.5,
-   "tone": "stone",
-   "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396",
-    "https://sah-archipedia.org/node/20518"
-   ],
-   "on": "bss-steps",
-   "only": "whole"
-  },
-  {
-   "id": "bss-column-6",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.465875,
-     37.560859
-    ],
-    [
-     -77.4658726,
-     37.5608636
-    ],
-    [
-     -77.465874,
-     37.5608685
-    ],
-    [
-     -77.4658788,
-     37.5608718
-    ],
-    [
-     -77.4658851,
-     37.5608722
-    ],
-    [
-     -77.4658905,
-     37.5608696
-    ],
-    [
-     -77.4658929,
-     37.560865
-    ],
-    [
-     -77.4658915,
-     37.5608601
-    ],
-    [
-     -77.4658867,
-     37.5608568
-    ],
-    [
-     -77.4658804,
-     37.5608564
-    ]
-   ],
-   "height": 11.5,
-   "tone": "stone",
-   "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396",
-    "https://sah-archipedia.org/node/20518"
-   ],
-   "on": "bss-steps",
-   "only": "whole"
-  },
-  {
-   "id": "bss-pier-1",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4661653,
-     37.5610446
-    ],
-    [
-     -77.4661447,
-     37.5610304
-    ],
-    [
-     -77.4661269,
-     37.5610469
-    ],
-    [
-     -77.4661475,
-     37.561061
-    ]
-   ],
-   "height": 11.5,
-   "tone": "stone",
-   "note": "A square end pier of the colonnade. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396"
-   ],
-   "on": "bss-steps",
-   "only": "whole"
-  },
-  {
-   "id": "bss-pier-2",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4658702,
-     37.5608413
-    ],
-    [
-     -77.4658496,
-     37.5608271
-    ],
-    [
-     -77.4658318,
-     37.5608436
-    ],
-    [
-     -77.4658524,
-     37.5608578
-    ]
-   ],
-   "height": 11.5,
-   "tone": "stone",
-   "note": "A square end pier of the colonnade. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396"
-   ],
-   "on": "bss-steps",
-   "only": "whole"
-  },
-  {
-   "id": "bss-entablature",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4661721,
-     37.5610397
-    ],
-    [
-     -77.4658547,
-     37.5608211
-    ],
-    [
-     -77.4658065,
-     37.5608656
-    ],
-    [
-     -77.466124,
-     37.5610842
-    ]
-   ],
-   "height": 2.5,
-   "tone": "stone",
-   "note": "The entablature over the colonnade. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
-   "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
-    "https://www.openstreetmap.org/way/252997396"
-   ],
-   "on": "bss-column-1",
-   "only": "whole"
-  },
-  {
-   "id": "bss-marquee-1",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4663257,
-     37.5611814
-    ],
-    [
-     -77.4661499,
-     37.5610603
-    ],
-    [
-     -77.466124,
-     37.5610842
-    ],
-    [
-     -77.4662998,
-     37.5612054
-    ]
-   ],
-   "height": 0.5,
-   "tone": "iron",
-   "note": "Cast-iron and glass marquee over the wing's doors (approximate).",
-   "sources": [
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg"
-   ],
-   "base": 4.2,
-   "only": "whole"
-  },
-  {
-   "id": "bss-marquee-2",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4658325,
-     37.5608416
-    ],
-    [
-     -77.4656566,
-     37.5607205
-    ],
-    [
-     -77.4656307,
-     37.5607444
-    ],
-    [
-     -77.4658065,
-     37.5608656
-    ]
-   ],
-   "height": 0.5,
-   "tone": "iron",
-   "note": "Cast-iron and glass marquee over the wing's doors (approximate).",
-   "sources": [
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg"
-   ],
-   "base": 4.2,
-   "only": "whole"
-  },
-  {
-   "id": "bss-drum",
-   "name": "Broad Street Station (head house)",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4656655,
-     37.5610582
-    ],
-    [
-     -77.4656496,
-     37.5611248
-    ],
-    [
-     -77.4656776,
-     37.5611889
-    ],
-    [
-     -77.4657419,
-     37.5612333
-    ],
-    [
-     -77.4658255,
-     37.561246
-    ],
-    [
-     -77.4659058,
-     37.5612237
-    ],
-    [
-     -77.4659614,
-     37.5611723
-    ],
-    [
-     -77.4659773,
-     37.5611056
-    ],
-    [
-     -77.4659494,
-     37.5610415
-    ],
-    [
-     -77.465885,
-     37.5609972
-    ],
-    [
-     -77.4658014,
-     37.5609845
-    ],
-    [
-     -77.4657211,
-     37.5610068
-    ]
-   ],
-   "height": 5.5,
-   "tone": "stone",
-   "note": "The polygonal drum, pierced by lunettes after those of Columbia's Low Library. Rotunda 100 ft high inside; heights approximate.",
-   "sources": [
-    "https://sah-archipedia.org/node/20518",
-    "https://www.dhr.virginia.gov/historic-registers/127-0226/",
-    "https://www.styleweekly.com/?p=14331"
-   ],
-   "base": 19.5,
-   "only": "whole"
-  },
-  {
-   "id": "bss-dome",
-   "name": "Broad Street Station dome",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4656976,
-     37.5610355
-    ],
-    [
-     -77.4656757,
-     37.5610621
-    ],
-    [
-     -77.4656632,
-     37.5610924
-    ],
-    [
-     -77.4656609,
-     37.5611242
-    ],
-    [
-     -77.465669,
-     37.5611554
-    ],
-    [
-     -77.4656869,
-     37.5611839
-    ],
-    [
-     -77.4657135,
-     37.5612077
-    ],
-    [
-     -77.4657469,
-     37.5612252
-    ],
-    [
-     -77.4657848,
-     37.5612352
-    ],
-    [
-     -77.4658247,
-     37.561237
-    ],
-    [
-     -77.4658638,
-     37.5612305
-    ],
-    [
-     -77.4658994,
-     37.5612162
-    ],
-    [
-     -77.4659293,
-     37.561195
-    ],
-    [
-     -77.4659512,
-     37.5611684
-    ],
-    [
-     -77.4659637,
-     37.5611381
-    ],
-    [
-     -77.465966,
-     37.5611063
-    ],
-    [
-     -77.4659579,
-     37.5610751
-    ],
-    [
-     -77.46594,
-     37.5610466
-    ],
-    [
-     -77.4659134,
-     37.5610228
-    ],
-    [
-     -77.46588,
-     37.5610053
-    ],
-    [
-     -77.4658421,
-     37.5609953
-    ],
-    [
-     -77.4658023,
-     37.5609935
-    ],
-    [
-     -77.4657631,
-     37.5609999
-    ],
-    [
-     -77.4657275,
-     37.5610143
-    ]
-   ],
-   "height": 8.0,
-   "tone": "dome",
-   "note": "The Roman dome, still in its original terra-cotta tile in 1943; it was recovered in copper in 1954–55 (the green of later photographs). The tile's gray-green is read from tinted postcards: approximate.",
-   "sources": [
-    "https://sah-archipedia.org/node/20518",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
-    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg"
-   ],
-   "base": 25.0,
-   "shape": "dome",
-   "only": "whole"
-  },
-  {
    "id": "bss-concourse",
    "name": "Broad Street Station concourse",
    "kind": "landmark",
@@ -935,12 +19,12 @@
    "to": 1976,
    "ring": [
     [
-     -77.4656293,
-     37.5614006
+     -77.4657727,
+     37.5612681
     ],
     [
-     -77.4654866,
-     37.5613023
+     -77.46563,
+     37.5611698
     ],
     [
      -77.4650201,
@@ -2652,6 +1736,11 @@
    "train": {
     "cars": 11,
     "at": 583.9
+   },
+   "cutTrain": {
+    "cars": 11,
+    "at": 625.0,
+    "reverse": true
    }
   },
   {
@@ -8661,8 +7750,8 @@
      37.5604587
     ],
     [
-     -77.464971,
-     37.5604241
+     -77.4653541,
+     37.560999
     ]
    ],
    "width": 8.0,
@@ -9680,7 +8769,7 @@
    "confidence": "approximate"
   },
   {
-   "id": "bss-c-porch",
+   "id": "bss-porch",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -9709,12 +8798,11 @@
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
    ],
-   "only": "cutaway",
    "upTo": 67.4,
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-column-1",
+   "id": "bss-column-1",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -9776,12 +8864,11 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
-   "only": "cutaway",
    "elevation": 67.4,
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-column-2",
+   "id": "bss-column-2",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -9843,12 +8930,11 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
-   "only": "cutaway",
    "elevation": 67.4,
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-column-3",
+   "id": "bss-column-3",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -9910,12 +8996,11 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
-   "only": "cutaway",
    "elevation": 67.4,
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-column-4",
+   "id": "bss-column-4",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -9977,12 +9062,11 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
-   "only": "cutaway",
    "elevation": 67.4,
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-column-5",
+   "id": "bss-column-5",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -10044,12 +9128,11 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
-   "only": "cutaway",
    "elevation": 67.4,
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-column-6",
+   "id": "bss-column-6",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -10111,12 +9194,11 @@
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://sah-archipedia.org/node/20518"
    ],
-   "only": "cutaway",
    "elevation": 67.4,
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-portico-pier-1",
+   "id": "bss-portico-pier-1",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -10145,12 +9227,11 @@
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
    ],
-   "only": "cutaway",
    "elevation": 67.4,
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-portico-pier-2",
+   "id": "bss-portico-pier-2",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -10179,12 +9260,11 @@
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
    ],
-   "only": "cutaway",
    "elevation": 67.4,
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-pedestal-1",
+   "id": "bss-pedestal-1",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -10213,12 +9293,11 @@
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
    ],
-   "only": "cutaway",
    "elevation": 67.4,
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-pedestal-2",
+   "id": "bss-pedestal-2",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -10247,12 +9326,11 @@
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
    ],
-   "only": "cutaway",
    "elevation": 67.4,
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-entablature",
+   "id": "bss-entablature",
    "name": "Broad Street Station portico",
    "kind": "landmark",
    "from": 1919,
@@ -10281,8 +9359,371 @@
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27"
    ],
-   "only": "cutaway",
    "elevation": 79.2,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-wing-w",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662795,
+     37.5611914
+    ],
+    [
+     -77.4660825,
+     37.5610556
+    ],
+    [
+     -77.4658347,
+     37.5612848
+    ],
+    [
+     -77.4659383,
+     37.5613561
+    ],
+    [
+     -77.4660684,
+     37.5613866
+    ]
+   ],
+   "height": 13.6,
+   "tone": "stone",
+   "note": "The west wing: the lunch room, dining room and kitchen, and the white men's rooms. Drawn whole in views without a cutaway. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "whole",
+   "upTo": 81.0,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-wing-e",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.465848,
+     37.5608942
+    ],
+    [
+     -77.465652,
+     37.5607591
+    ],
+    [
+     -77.4654285,
+     37.5609657
+    ],
+    [
+     -77.4654738,
+     37.5610565
+    ],
+    [
+     -77.4655876,
+     37.5611349
+    ]
+   ],
+   "height": 13.6,
+   "tone": "stone",
+   "note": "The east wing: the Colored Waiting Room and its rooms, baggage and parcel check, stores. Drawn whole in views without a cutaway. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "whole",
+   "upTo": 81.0,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-center",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4660446,
+     37.5610906
+    ],
+    [
+     -77.4658102,
+     37.5609291
+    ],
+    [
+     -77.465848,
+     37.5608942
+    ],
+    [
+     -77.4660825,
+     37.5610556
+    ]
+   ],
+   "height": 17.2,
+   "tone": "stone",
+   "note": "The front block over Vestibule No. 1 and the entrance halls, with offices above. Drawn whole in views without a cutaway. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "whole",
+   "upTo": 84.60000000000001,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-attic",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4658613,
+     37.5612601
+    ],
+    [
+     -77.4656269,
+     37.5610986
+    ],
+    [
+     -77.4658102,
+     37.5609291
+    ],
+    [
+     -77.4660446,
+     37.5610906
+    ]
+   ],
+   "height": 21.3,
+   "tone": "stone",
+   "note": "The block of the White Waiting Room, up to the cornice the dome stands on. Drawn whole in views without a cutaway. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "whole",
+   "upTo": 88.7,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-vestibule",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4657727,
+     37.5612681
+    ],
+    [
+     -77.46563,
+     37.5611698
+    ],
+    [
+     -77.4656728,
+     37.5611302
+    ],
+    [
+     -77.4658155,
+     37.5612285
+    ]
+   ],
+   "height": 13.6,
+   "tone": "stone",
+   "note": "The vestibule to the concourse. Drawn whole in views without a cutaway. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "whole",
+   "upTo": 81.0,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-vestibule-west",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4658347,
+     37.5612848
+    ],
+    [
+     -77.4657888,
+     37.5612532
+    ],
+    [
+     -77.4658155,
+     37.5612285
+    ],
+    [
+     -77.4658613,
+     37.5612601
+    ]
+   ],
+   "height": 13.6,
+   "tone": "stone",
+   "note": "The rooms beside the vestibule to the concourse. Drawn whole in views without a cutaway. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "whole",
+   "upTo": 81.0,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-passage-1-mass",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4658311,
+     37.5613675
+    ],
+    [
+     -77.465736,
+     37.561302
+    ],
+    [
+     -77.4657888,
+     37.5612532
+    ],
+    [
+     -77.4658839,
+     37.5613187
+    ]
+   ],
+   "height": 6.5,
+   "tone": "stone",
+   "note": "Enclosed Concourse Passage No. 1. Drawn whole in views without a cutaway. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "whole",
+   "upTo": 73.9,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-passage-2-mass",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4655933,
+     37.5612037
+    ],
+    [
+     -77.4654336,
+     37.5610937
+    ],
+    [
+     -77.4654738,
+     37.5610565
+    ],
+    [
+     -77.4656335,
+     37.5611665
+    ]
+   ],
+   "height": 6.5,
+   "tone": "stone",
+   "note": "Enclosed Concourse Passage No. 2. Drawn whole in views without a cutaway. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "whole",
+   "upTo": 73.9,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-marquee-1",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662795,
+     37.5611914
+    ],
+    [
+     -77.4660825,
+     37.5610556
+    ],
+    [
+     -77.4661089,
+     37.5610312
+    ],
+    [
+     -77.4663059,
+     37.561167
+    ]
+   ],
+   "height": 0.5,
+   "tone": "iron",
+   "note": "A cast-iron and glass marquee over the wing's doors, from period postcards; the plan's wings, its size approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg"
+   ],
+   "elevation": 71.6,
+   "confidence": "approximate"
+  },
+  {
+   "id": "bss-marquee-2",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.465848,
+     37.5608942
+    ],
+    [
+     -77.465652,
+     37.5607591
+    ],
+    [
+     -77.4656784,
+     37.5607347
+    ],
+    [
+     -77.4658744,
+     37.5608697
+    ]
+   ],
+   "height": 0.5,
+   "tone": "iron",
+   "note": "A cast-iron and glass marquee over the wing's doors, from period postcards; the plan's wings, its size approximate.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg"
+   ],
+   "elevation": 71.6,
    "confidence": "approximate"
   },
   {
@@ -14871,12 +14312,16 @@
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-hall-west-lunette-1",
+   "id": "bss-c-hall-west-lunette",
    "name": "Broad Street Station: White Waiting Room",
    "kind": "landmark",
    "from": 1919,
    "to": 1976,
    "ring": [
+    [
+     -77.4659859,
+     37.561128
+    ],
     [
      -77.4658991,
      37.5612082
@@ -14886,485 +14331,50 @@
      37.5612078
     ],
     [
-     -77.4659046,
-     37.561202
-    ],
-    [
-     -77.4659053,
-     37.5612025
-    ]
-   ],
-   "height": 2.821,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-2",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659053,
-     37.5612025
-    ],
-    [
-     -77.4659046,
-     37.561202
-    ],
-    [
-     -77.4659108,
-     37.5611963
-    ],
-    [
-     -77.4659115,
-     37.5611968
-    ]
-   ],
-   "height": 4.701,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-3",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659115,
-     37.5611968
-    ],
-    [
-     -77.4659108,
-     37.5611963
-    ],
-    [
-     -77.465917,
-     37.5611906
-    ],
-    [
-     -77.4659177,
-     37.561191
-    ]
-   ],
-   "height": 5.821,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-4",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659177,
-     37.561191
-    ],
-    [
-     -77.465917,
-     37.5611906
-    ],
-    [
-     -77.4659232,
-     37.5611848
-    ],
-    [
-     -77.4659239,
-     37.5611853
-    ]
-   ],
-   "height": 6.582,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-5",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659239,
-     37.5611853
-    ],
-    [
-     -77.4659232,
-     37.5611848
-    ],
-    [
-     -77.4659294,
-     37.5611791
-    ],
-    [
-     -77.4659301,
-     37.5611796
-    ]
-   ],
-   "height": 7.099,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-6",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659301,
-     37.5611796
-    ],
-    [
-     -77.4659294,
-     37.5611791
-    ],
-    [
-     -77.4659356,
-     37.5611734
-    ],
-    [
-     -77.4659363,
-     37.5611738
-    ]
-   ],
-   "height": 7.423,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-7",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659363,
-     37.5611738
-    ],
-    [
-     -77.4659356,
-     37.5611734
-    ],
-    [
-     -77.4659418,
-     37.5611676
-    ],
-    [
-     -77.4659425,
-     37.5611681
-    ]
-   ],
-   "height": 7.581,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-8",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659425,
-     37.5611681
-    ],
-    [
-     -77.4659418,
-     37.5611676
-    ],
-    [
-     -77.465948,
-     37.5611619
-    ],
-    [
-     -77.4659487,
-     37.5611624
-    ]
-   ],
-   "height": 7.581,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-9",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659487,
-     37.5611624
-    ],
-    [
-     -77.465948,
-     37.5611619
-    ],
-    [
-     -77.4659542,
-     37.5611562
-    ],
-    [
-     -77.4659549,
-     37.5611566
-    ]
-   ],
-   "height": 7.423,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-10",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659549,
-     37.5611566
-    ],
-    [
-     -77.4659542,
-     37.5611562
-    ],
-    [
-     -77.4659604,
-     37.5611504
-    ],
-    [
-     -77.4659611,
-     37.5611509
-    ]
-   ],
-   "height": 7.099,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-11",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659611,
-     37.5611509
-    ],
-    [
-     -77.4659604,
-     37.5611504
-    ],
-    [
-     -77.4659666,
-     37.5611447
-    ],
-    [
-     -77.4659673,
-     37.5611452
-    ]
-   ],
-   "height": 6.582,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-12",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659673,
-     37.5611452
-    ],
-    [
-     -77.4659666,
-     37.5611447
-    ],
-    [
-     -77.4659728,
-     37.561139
-    ],
-    [
-     -77.4659735,
-     37.5611394
-    ]
-   ],
-   "height": 5.821,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-13",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659735,
-     37.5611394
-    ],
-    [
-     -77.4659728,
-     37.561139
-    ],
-    [
-     -77.465979,
-     37.5611332
-    ],
-    [
-     -77.4659797,
-     37.5611337
-    ]
-   ],
-   "height": 4.701,
-   "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
-   "sources": [
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
-    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
-   ],
-   "only": "cutaway",
-   "elevation": 80.3,
-   "confidence": "drawn"
-  },
-  {
-   "id": "bss-c-hall-west-lunette-14",
-   "name": "Broad Street Station: White Waiting Room",
-   "kind": "landmark",
-   "from": 1919,
-   "to": 1976,
-   "ring": [
-    [
-     -77.4659797,
-     37.5611337
-    ],
-    [
-     -77.465979,
-     37.5611332
-    ],
-    [
      -77.4659852,
      37.5611275
-    ],
-    [
-     -77.4659859,
-     37.561128
     ]
    ],
-   "height": 2.821,
+   "height": 7.6,
    "tone": "glass",
-   "note": "The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "note": "The west lunette window over the great arch, 11.75 m across, as section C-C draws it. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "shape": "arch",
+   "only": "cutaway",
+   "elevation": 80.3,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-west-mullion-1",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659117,
+     37.5611955
+    ],
+    [
+     -77.4659096,
+     37.5611941
+    ],
+    [
+     -77.465912,
+     37.5611919
+    ],
+    [
+     -77.465914,
+     37.5611933
+    ]
+   ],
+   "height": 5.665,
+   "tone": "plaster",
+   "note": "A mullion of the west lunette. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
@@ -15375,7 +14385,187 @@
    "confidence": "drawn"
   },
   {
-   "id": "bss-c-dome",
+   "id": "bss-c-hall-west-mullion-2",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659261,
+     37.5611821
+    ],
+    [
+     -77.4659241,
+     37.5611807
+    ],
+    [
+     -77.4659264,
+     37.5611785
+    ],
+    [
+     -77.4659285,
+     37.5611799
+    ]
+   ],
+   "height": 7.165,
+   "tone": "plaster",
+   "note": "A mullion of the west lunette. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 80.3,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-west-mullion-3",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659406,
+     37.5611687
+    ],
+    [
+     -77.4659386,
+     37.5611673
+    ],
+    [
+     -77.4659409,
+     37.5611651
+    ],
+    [
+     -77.4659429,
+     37.5611665
+    ]
+   ],
+   "height": 7.6,
+   "tone": "plaster",
+   "note": "A mullion of the west lunette. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 80.3,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-west-mullion-4",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659551,
+     37.5611553
+    ],
+    [
+     -77.465953,
+     37.5611539
+    ],
+    [
+     -77.4659554,
+     37.5611518
+    ],
+    [
+     -77.4659574,
+     37.5611532
+    ]
+   ],
+   "height": 7.165,
+   "tone": "plaster",
+   "note": "A mullion of the west lunette. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 80.3,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-west-mullion-5",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4659695,
+     37.561142
+    ],
+    [
+     -77.4659675,
+     37.5611406
+    ],
+    [
+     -77.4659698,
+     37.5611384
+    ],
+    [
+     -77.4659719,
+     37.5611398
+    ]
+   ],
+   "height": 5.665,
+   "tone": "plaster",
+   "note": "A mullion of the west lunette. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 80.3,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-c-hall-west-sill",
+   "name": "Broad Street Station: White Waiting Room",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4658973,
+     37.5612099
+    ],
+    [
+     -77.4658936,
+     37.5612073
+    ],
+    [
+     -77.4659839,
+     37.5611238
+    ],
+    [
+     -77.4659876,
+     37.5611263
+    ]
+   ],
+   "height": 0.5,
+   "tone": "plaster",
+   "note": "The sill of the west lunette, on the cornice. Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible.",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "cutaway",
+   "elevation": 79.8,
+   "confidence": "drawn"
+  },
+  {
+   "id": "bss-dome",
    "name": "Broad Street Station dome",
    "kind": "landmark",
    "from": 1919,
@@ -15488,7 +14678,6 @@
     "https://sah-archipedia.org/node/20518"
    ],
    "shape": "revolve",
-   "only": "cutaway",
    "elevation": 88.7,
    "confidence": "drawn",
    "levels": [

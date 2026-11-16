@@ -6,14 +6,14 @@
  */
 
 import { centroid, convexHull, type Ring, type Vec2 } from './geom.ts'
-import type { HistoryFeature } from './history.ts'
+import type { HistoryFeature, PartTone } from './history.ts'
 import type { Palette } from './palette.ts'
 import { boxItem, domeProfile, toned, type Box } from './parts.ts'
 import type { Cutaway } from './region.ts'
 import type { Item, Shape } from './scene.ts'
 import type { View } from './view.ts'
 import {
-  above, behind, below, clipAll, clipSolid, cutPlane, isConvex, prism, revolve, sectionOf, sideOf, solidItem, splitSolids, stair, unionOutline, within,
+  above, behind, below, clipAll, clipSolid, cutPlane, sweep, type FaceRole, type Vec3, isConvex, prism, revolve, sectionOf, sideOf, solidItem, splitSolids, stair, unionOutline, within,
   type CutPlane, type Solid, type Tones,
 } from './cutaway.ts'
 
@@ -31,12 +31,30 @@ export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean } 
     const levels = Array.from({ length: steps + 1 }, (_, k) => ({ z: seat + ((top - seat) * k) / steps, outer: domeProfile(k / steps), inner: 0 }))
     return { solids: revolve(outer, levels), hulled: false }
   }
+  if (h.shape === 'arch') {
+    // A window or opening on the ring's first edge (its span), as thick as the second, rising
+    // to a half ellipse `top − seat` high.
+    const [p0, p1, p2] = outer
+    const span = Math.hypot(p1[0] - p0[0], p1[1] - p0[1])
+    const thick = Math.hypot(p2[0] - p1[0], p2[1] - p1[1])
+    const u: Vec2 = [(p1[0] - p0[0]) / span, (p1[1] - p0[1]) / span]
+    const w: Vec2 = [(p2[0] - p1[0]) / thick, (p2[1] - p1[1]) / thick]
+    const n = 16
+    const profile: Vec2[] = [[0, seat], [span, seat]]
+    for (let i = 1; i < n; i++) {
+      const x = span * (1 - i / n)
+      const v = (x - span / 2) / (span / 2)
+      profile.push([x, seat + (top - seat) * Math.sqrt(Math.max(0, 1 - v * v))])
+    }
+    return { solids: [sweep(profile, p0, u, w, 0, thick)], hulled: false }
+  }
   if (h.shape === 'stair') return { solids: stair(outer, seat, top, h.steps ?? 12), hulled: false }
   if (isConvex(outer)) return { solids: [prism(outer, seat, top)], hulled: false }
   return { solids: [prism(convexHull(outer), seat, top)], hulled: true }
 }
 
-const tonesOf = (pal: Palette, h: HistoryFeature): Tones => {
+/** The tones a modeled part is drawn in, its inside (a dome's ceiling) in plaster. */
+export const partTones = (pal: Palette, h: HistoryFeature): Tones => {
   const [lit, shade, roof] = pal.parts[h.tone ?? 'stone']
   const [il, is] = pal.parts.plaster
   return { lit, shade, roof, cut: pal.poche, inner: [il, is] }
@@ -76,7 +94,7 @@ export const cutawayItems = (
   for (const p of parts) {
     const { solids, hulled } = partSolids(p)
     if (hulled) stats.cutHulled++
-    const tones = tonesOf(pal, p.h)
+    const tones = partTones(pal, p.h)
     const id = `history:${p.h.id}`
     const subject = p.h.id.startsWith(prefix)
     if (opts.section) {
@@ -111,21 +129,29 @@ export const cutawayItems = (
     }
   }
   for (const b of boxes) {
-    if (opts.section) {
-      const s = clipAll(prism(b.ring, b.z0, b.z1), [behind(plane), within(plane, other)])
-      if (s === null) continue
-      const it = solidItem(view, boxTones(pal, b), b.id, [s])
-      if (it !== null) items.push(it)
-      continue
-    }
-    if (lift.some((r) => r.test(b.id)) && sideOf(plane, centroid(b.ring)) > 0) {
+    if (!opts.section && lift.some((r) => r.test(b.id)) && sideOf(plane, centroid(b.ring)) > 0) {
       stats.lifted++
       continue
     }
     // Long boxes (a car, a run of canopy) are cut into short pieces, so each piece takes its
-    // own place among the stairs and the concourse it passes.
+    // own place among the stairs and the concourse it passes; each is drawn in its own shape
+    // (a car's body and roof, an engine's boiler, a shed's butterfly roof) without seams.
     const pieces = shortPieces(b)
-    pieces.forEach((piece, k) => items.push(pieces.length === 1 ? boxItem(view, pal, piece) : seamless(view, boxItem(view, pal, piece), piece, k > 0, k + 1 < pieces.length)))
+    pieces.forEach((piece, k) => {
+      const parts = shaped(pal, b, piece, k, pieces.length)
+      const solids: Solid[] = []
+      const id = pieces.length === 1 ? b.id : piece.id
+      for (const part of parts) {
+        const kept = opts.section ? clipAll(part.solid, [behind(plane), within(plane, other)]) : part.solid
+        if (kept === null) continue
+        // In the flat section a train or a shed is drawn in its own colors where the plane
+        // cuts it, so it reads as a car end or a shed's profile, not as a solid wall.
+        const tones = opts.section ? { ...part.tones, cut: part.tones.lit } : part.tones
+        const it = solidItem(view, tones, `${id}${part.suffix}`, [kept], undefined, parts.joint)
+        if (it !== null) items.push(it)
+        solids.push(kept)
+      }
+    })
   }
   if (!opts.section && opts.outlineRings !== undefined && opts.outlineRings.length > 0) {
     let k = 0
@@ -197,27 +223,75 @@ export const shortPieces = (b: Box): Box[] => {
   }))
 }
 
+/** A part of a shaped box: a solid, its tones, and a suffix for its item's id. */
+interface Shaped { readonly solid: Solid; readonly tones: Tones; readonly suffix: string }
+
 /**
- * A piece of a cut box drawn without ink where it meets its neighbors: every face is sealed in
- * its own color, and only the edges that are not on a joint are inked, so the box reads whole.
+ * The solids a box is drawn as in a cutaway, for piece `k` of `n`: a coach's body with its
+ * arched roof and a band of windows down each side; an engine's frame, boiler, dome and stack;
+ * a tender; a shed's two roof slopes falling to a valley over its posts (a butterfly roof);
+ * anything else as its box. `joint` tells the points on a joint with the next piece.
  */
-const seamless = (view: View, it: Item, b: Box, joinStart: boolean, joinEnd: boolean): Item => {
-  const [p0, p1, p2, p3] = b.ring
-  const joints: Vec2[] = []
-  for (const z of [b.z0, b.z1]) {
-    if (joinStart) joints.push(view.toScreen(p0, z), view.toScreen(p3, z))
-    if (joinEnd) joints.push(view.toScreen(p1, z), view.toScreen(p2, z))
+const shaped = (pal: Palette, whole: Box, b: Box, k: number, n: number): Shaped[] & { joint?: (p: Vec3) => boolean } => {
+  const [p0, p1, , p3] = b.ring
+  const len = Math.hypot(p1[0] - p0[0], p1[1] - p0[1])
+  const wid = Math.hypot(p3[0] - p0[0], p3[1] - p0[1])
+  const w: Vec2 = [(p1[0] - p0[0]) / len, (p1[1] - p0[1]) / len]
+  const u: Vec2 = [(p3[0] - p0[0]) / wid, (p3[1] - p0[1]) / wid]
+  const origin: Vec2 = [(p0[0] + p3[0]) / 2, (p0[1] + p3[1]) / 2]
+  const hw = wid / 2
+  const [w0, w1] = [0, len]
+  const total = len * n
+  const off = len * k
+  const ends: [FaceRole, FaceRole] = [k > 0 ? 'internal' : 'side', k + 1 < n ? 'internal' : 'side']
+  const toneOf = (t: PartTone, roof?: string): Tones => {
+    const [lit, shade, r] = pal.parts[t]
+    return { lit, shade, roof: roof ?? r, cut: pal.poche }
   }
-  const onJoint = (q: Vec2) => joints.some((j) => Math.hypot(j[0] - q[0], j[1] - q[1]) < 1e-6)
-  const shapes: Shape[] = []
-  for (const sh of it.shapes) {
-    shapes.push({ pts: sh.pts, fill: sh.fill, seal: true })
-    for (let i = 0; i < sh.pts.length; i++) {
-      const a = sh.pts[i]
-      const c = sh.pts[(i + 1) % sh.pts.length]
-      if (onJoint(a) && onJoint(c)) continue
-      shapes.push({ pts: [a, c], fill: 'none', line: true })
+  const { z0, z1 } = b
+  const H = z1 - z0
+  const out: Shaped[] = []
+  const add = (profile: Vec2[], t: Tones, suffix: string, a = w0, c = w1) => {
+    if (c - a > 1e-6) out.push({ solid: sweep(profile, origin, u, w, a, c, [a > w0 ? 'side' : ends[0], c < w1 ? 'side' : ends[1]]), tones: t, suffix })
+  }
+  const within = (a: number, c: number): [number, number] => [Math.max(w0, a - off), Math.min(w1, c - off)]
+  const isCab = whole.id.endsWith(':cab')
+  if ((whole.tone === 'coach' || whole.tone === 'freight') && !isCab) {
+    const roof = pal.parts.roof[2]
+    add([[-hw, z0], [hw, z0], [hw, z0 + 0.8 * H], [hw * 0.55, z0 + 0.96 * H], [0, z1], [-hw * 0.55, z0 + 0.96 * H], [-hw, z0 + 0.8 * H]], toneOf(whole.tone, roof), '')
+    if (whole.tone === 'coach') {
+      const [a, c] = within(1.6, total - 1.6)
+      for (const side of [1, -1]) {
+        const x0 = side * hw
+        const x1 = side * (hw + 0.04)
+        add([[x0, z0 + 0.36 * H], [x1, z0 + 0.36 * H], [x1, z0 + 0.62 * H], [x0, z0 + 0.62 * H]], toneOf('glass'), side > 0 ? ':windows' : ':windows-b', a, c)
+      }
+    }
+  } else if (whole.tone === 'engine' && !isCab && total > 14) {
+    const t = toneOf('engine')
+    add([[-hw, z0], [hw, z0], [hw, z0 + 1.1], [-hw, z0 + 1.1]], t, '')
+    const r = 0.95
+    const cz = z0 + 1.1 + r
+    const oct: Vec2[] = Array.from({ length: 8 }, (_, i) => [r * Math.cos(Math.PI / 8 + (i * Math.PI) / 4), cz + r * Math.sin(Math.PI / 8 + (i * Math.PI) / 4)])
+    add(oct, t, ':boiler', ...within(3.2, total - 0.4))
+    add([[-0.3, cz], [0.3, cz], [0.3, cz + r + 0.8], [-0.3, cz + r + 0.8]], t, ':stack', ...within(total - 2.6, total - 2.0))
+    add([[-0.4, cz], [0.4, cz], [0.4, cz + r + 0.4], [-0.4, cz + r + 0.4]], t, ':dome', ...within(total * 0.55, total * 0.55 + 1.0))
+  } else if (whole.tone === 'engine' && !isCab) {
+    // A tender: its tank, and the coal heaped in a bunker on top.
+    add([[-hw, z0], [hw, z0], [hw, z0 + 0.75 * H], [hw * 0.6, z1], [-hw * 0.6, z1], [-hw, z0 + 0.75 * H]], toneOf('engine', pal.parts.roof[1]), '')
+  } else if (whole.tone === 'iron' && !whole.id.includes(':post:') && H < 1.5) {
+    const t = toneOf('iron')
+    add([[-hw, z1], [-hw, z1 - 0.25], [0, z1 - 0.85], [0, z1 - 0.6]], t, '')
+    add([[0, z1 - 0.6], [0, z1 - 0.85], [hw, z1 - 0.25], [hw, z1]], t, ':b')
+  } else {
+    add([[-hw, z0], [hw, z0], [hw, z1], [-hw, z1]], toneOf(whole.tone), '')
+  }
+  const res = out as Shaped[] & { joint?: (p: Vec3) => boolean }
+  if (n > 1) {
+    res.joint = (q: Vec3) => {
+      const t = (q[0] - origin[0]) * w[0] + (q[1] - origin[1]) * w[1]
+      return (k > 0 && Math.abs(t - w0) < 1e-6) || (k + 1 < n && Math.abs(t - w1) < 1e-6)
     }
   }
-  return { ...it, shapes }
+  return res
 }

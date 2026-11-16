@@ -476,7 +476,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   if (!T.flat) {
     const shade = nodeShade(T, light)
     for (let k = 0; k < shade.length; k++) {
-      const level = shade[k] * SHADE_GAIN
+      const level = shade[k] * SHADE_GAIN * (opts.shade ?? 1)
       const shore = SHORE_CAP * (1 - 2 * wetness[k])
       litField[k] = Math.min(level, shore)
       darkField[k] = Math.min(-level, shore)

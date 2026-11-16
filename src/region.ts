@@ -132,6 +132,12 @@ export interface TerrainOptions {
   readonly majorEvery?: number
   /** Water-surface gradient (m/m) above which a stretch of river reads as rapids. */
   readonly rapids?: number
+  /**
+   * Strength of the hillshade, 1 by default; 0 draws the ground flat-toned (its relief still
+   * shapes it). A close view of one building, such as a cutaway, uses 0, so a bank does not
+   * read as a stain.
+   */
+  readonly shade?: number
   /** Mark rock standing clear of the water. Default true; off for tidal flats and shoals. */
   readonly rocks?: boolean
   /** Meters per pixel to fetch the elevation at. Default 1 (or the source's native spacing, if coarser); coarser keeps big regions small. */

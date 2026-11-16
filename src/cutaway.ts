@@ -154,6 +154,28 @@ export const stair = (ring: readonly Vec2[], z0: number, z1: number, steps: numb
 }
 
 /**
+ * A convex profile, given as (u, z) points, swept straight along a line: the cross-section of a
+ * car body or a shed roof run along its track. `origin` is the line's start, `u` the unit
+ * direction across it, `w` the unit direction along it; the solid runs from w0 to w1. End faces
+ * can be marked internal, where the solid meets the next piece of the same run.
+ */
+export const sweep = (
+  profile: readonly Vec2[], origin: Vec2, u: Vec2, w: Vec2, w0: number, w1: number, ends: [FaceRole, FaceRole] = ['side', 'side'],
+): Solid => {
+  const at = ([a, z]: Vec2, t: number): Vec3 => [origin[0] + u[0] * a + w[0] * t, origin[1] + u[1] * a + w[1] * t, z]
+  const faces: (Face | null)[] = [
+    faceOf(profile.map((q) => at(q, w0)), ends[0]),
+    faceOf(profile.map((q) => at(q, w1)), ends[1]),
+  ]
+  for (let i = 0; i < profile.length; i++) {
+    const a = profile[i]
+    const b = profile[(i + 1) % profile.length]
+    faces.push(faceOf([at(a, w0), at(b, w0), at(b, w1), at(a, w1)], 'side'))
+  }
+  return solidOf(faces)
+}
+
+/**
  * Clip a solid to a half-space. Returns the solid unchanged when it lies wholly inside, null
  * when wholly outside, and otherwise the part inside, closed by a `cut` face on the plane.
  */
@@ -300,7 +322,9 @@ export interface Tones {
  * part keeps behind it. A face's tone follows its normal like a wall's in `extrude`, leaning
  * toward the roof tone as it turns up.
  */
-export const solidItem = (view: View, tones: Tones, id: string, solids: readonly Solid[], name?: string): Item | null => {
+export const solidItem = (
+  view: View, tones: Tones, id: string, solids: readonly Solid[], name?: string, joint?: (p: Vec3) => boolean,
+): Item | null => {
   const pts = solids.flatMap(corners)
   if (pts.length === 0) return null
   const sin = view.squash
@@ -330,7 +354,18 @@ export const solidItem = (view: View, tones: Tones, id: string, solids: readonly
         const wall = mix(lit, shade, (u[0] / h + 1) / 2)
         fill = u[2] > 0.05 ? mix(wall, tones.roof, u[2]) : wall
       }
-      faces.push({ depth: fc[1] * cos - fc[2] * sin, cut: f.role === 'cut', shape: { pts: screen, fill, ink: true } })
+      if (joint === undefined) faces.push({ depth: fc[1] * cos - fc[2] * sin, cut: f.role === 'cut', shape: { pts: screen, fill, ink: true } })
+      else {
+        // Sealed, and inked only along edges that are not on a joint with the next piece.
+        const shapes: Shape[] = [{ pts: screen, fill, seal: true }]
+        for (let i = 0; i < ring.length; i++) {
+          const j = (i + 1) % ring.length
+          if (joint(ring[i]) && joint(ring[j])) continue
+          shapes.push({ pts: [screen[i], screen[j]], fill: 'none', line: true })
+        }
+        const depth = fc[1] * cos - fc[2] * sin
+        for (const sh of shapes) faces.push({ depth, cut: f.role === 'cut', shape: sh })
+      }
     }
   }
   faces.sort((a, b) => Number(a.cut) - Number(b.cut) || b.depth - a.depth)

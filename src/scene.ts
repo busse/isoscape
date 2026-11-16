@@ -23,8 +23,8 @@ import { makeTerrain, rasterize, settleWater, stillWater, type Terrain } from '.
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
-import { cutawayItems, type PlacedPart } from './cutaway-scene.ts'
-import { offsetConvex, type CutPlane } from './cutaway.ts'
+import { cutawayItems, partSolids, partTones, type PlacedPart } from './cutaway-scene.ts'
+import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
 import { alive, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
@@ -544,11 +544,13 @@ export const buildScene = (
         const seat = levels.get(h.id) ?? Math.min(...grounds) + (h.base ?? 0)
         const top = h.upTo !== undefined ? zOf(h.upTo) : seat + (h.height ?? 10)
         parts++
-        // A stair keeps its corners in order: its first edge is its foot.
-        if (cut !== undefined) placed.push({ h, outer: h.shape === 'stair' ? toViewRing(view, h.ring) : outer, seat, top })
+        // A stair or an arch keeps its corners in order: its first edge is its foot, or its span.
+        if (cut !== undefined) placed.push({ h, outer: h.shape === 'stair' || h.shape === 'arch' ? toViewRing(view, h.ring) : outer, seat, top })
         else {
           const t = toned(pal, h.tone)
-          items.push(h.shape === 'dome'
+          const solid = h.shape === 'revolve' ? solidItem(view, partTones(pal, h), `history:${h.id}`, partSolids({ h, outer, seat, top }).solids, h.name) : null
+          if (solid !== null) items.push(solid)
+          else items.push(h.shape === 'dome'
             ? dome(view, pal, `history:${h.id}`, outer, seat, top, h.name)
             : extrude(view, t.pal, `history:${h.id}`, outer, [], seat, top, t.roof, 'none', h.name))
         }
@@ -573,8 +575,9 @@ export const buildScene = (
         boxes.push(...got)
         canopies += got.length / 2
       }
-      if (h.kind === 'rail' && h.train !== undefined && h.line !== undefined) {
-        const got = keepBoxes(trainBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.train, (p) => terrain.z(p)))
+      const train = cut !== undefined && h.cutTrain !== undefined ? h.cutTrain : h.train
+      if (h.kind === 'rail' && train !== undefined && h.line !== undefined) {
+        const got = keepBoxes(trainBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), train, (p) => terrain.z(p)))
         boxes.push(...got)
         cars += got.length
       }
@@ -590,7 +593,8 @@ export const buildScene = (
       const done = cutawayItems(view, pal, cut, placed, extra.section === true ? [...boxes, ...tramBoxes] : boxes, {
         ...(keepZ === undefined ? {} : { keepZ }), ...(cut.floor === undefined ? {} : { floorZ: zOf(cut.floor) }), section: extra.section === true, outlineRings,
         // The outline lies on the ground, or on whatever kept part it crosses (a porch).
-        ground: (p) => Math.max(terrain.z(p), ...placed.filter((q) => (keepZ === undefined || q.top <= keepZ) && pointInRing(p, q.outer)).map((q) => q.top)),
+        // The outline lies level at the cut's floor (or on the ground, with no floor given).
+        ground: (p) => (cut.floor === undefined ? terrain.z(p) : zOf(cut.floor)),
       })
       if (extra.section === true) items.length = 0
       for (const it of done.items) items.push(it)

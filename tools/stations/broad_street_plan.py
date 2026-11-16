@@ -41,6 +41,7 @@ PDF = 'https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf'
 P15, P16, P17, P18 = (f'{PDF}#page={p}' for p in (27, 29, 31, 33))
 AMAR = f'{PDF}#page=5'
 ARCHIPEDIA = 'https://sah-archipedia.org/node/20518'
+POSTCARD = 'https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg'
 NR = 'https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0226_Broad_Street_Station_1972_Final_Nomination.pdf'
 
 PLAN = 'Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919).'
@@ -69,9 +70,11 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
     def disc(x, y, r, n=12):
         return LL([P(x + r * math.cos(2 * math.pi * k / n + math.pi / n), y + r * math.sin(2 * math.pi * k / n + math.pi / n)) for k in range(n)])
 
-    def cp(id_, name, ring, z0, z1, tone, conf, note, sources, **kw):
-        """A cutaway part from z0 to z1 meters above the first floor."""
-        part(f'bss-c-{id_}', name, ring, round(z1 - z0, 3), tone, note, sources, only='cutaway', elevation=round(FF + z0, 3), confidence=conf, **kw)
+    def cp(id_, name, ring, z0, z1, tone, conf, note, sources, only='cutaway', **kw):
+        """A part from z0 to z1 meters above the first floor: by default drawn in cutaways only
+        (`bss-c-…`); with only=None, in every view (`bss-…`); with 'whole', in whole views."""
+        pid = f'bss-c-{id_}' if only == 'cutaway' else f'bss-{id_}'
+        part(pid, name, ring, round(z1 - z0, 3), tone, note, sources, only=only, elevation=round(FF + z0, 3), confidence=conf, **kw)
 
     HALL = 'Broad Street Station: White Waiting Room'
     WING = 'Broad Street Station: east wing'
@@ -81,20 +84,38 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
 
     # ---- the portico ---------------------------------------------------------------------------
     POR = 'Broad Street Station portico'
-    part('bss-c-porch', POR, rect(1100, 1600, 2190, 1880), 1.0, 'stone',
+    part('bss-porch', POR, rect(1100, 1600, 2190, 1880), 1.0, 'stone',
          'The portico\'s floor, raised over the forecourt to the first floor. Its extent is from the plan; its height is the first floor\'s (approximate).', plan_src,
-         only='cutaway', upTo=FF, confidence='drawn')
+         upTo=FF, confidence='drawn')
     for k, x in enumerate((1387, 1485, 1586, 1698, 1800, 1898)):
         cp(f'column-{k + 1}', POR, disc(x, 1748, 23), 0, 11.8, 'stone', 'drawn',
-           'One of the portico\'s six columns. Its place and size are from the plan; its height is scaled from the earlier postcard model (approximate).', plan_src + [ARCHIPEDIA])
+           'One of the portico\'s six columns. Its place and size are from the plan; its height is scaled from the earlier postcard model (approximate).', plan_src + [ARCHIPEDIA], only=None)
     for k, x in enumerate((1276, 2007)):
         cp(f'portico-pier-{k + 1}', POR, rect(x - 20, 1728, x + 20, 1768), 0, 11.8, 'stone', 'drawn',
-           'A square end pier of the colonnade. Place from the plan; height approximate.', plan_src)
+           'A square end pier of the colonnade. Place from the plan; height approximate.', plan_src, only=None)
     for k, x in enumerate((1133, 2146)):
         cp(f'pedestal-{k + 1}', POR, rect(x - 25, 1723, x + 25, 1773), 0, 3.0, 'stone', 'drawn',
-           'A pedestal at the corner of the portico terrace. Place from the plan; height approximate.', plan_src)
+           'A pedestal at the corner of the portico terrace. Place from the plan; height approximate.', plan_src, only=None)
     cp('entablature', POR, rect(1256, 1600, 2027, 1775), 11.8, 14.4, 'stone', 'approximate',
-       'The entablature over the colonnade, from pier to pier. Extent from the plan; height approximate.', plan_src)
+       'The entablature over the colonnade, from pier to pier. Extent from the plan; height approximate.', plan_src, only=None)
+
+    # ---- the massing, for whole views ---------------------------------------------------------
+    MASS = 'Broad Street Station (head house)'
+    mass_note = ' Drawn whole in views without a cutaway. ' + PLAN + ' ' + SECT
+    for id_, name, ring, top, note in [
+        ('wing-w', MASS, LL([P(725, 1600), P(1305, 1600), P(1305, 755), P(1000, 755), P(725, 880)]), WING_TOP, 'The west wing: the lunch room, dining room and kitchen, and the white men\'s rooms.'),
+        ('wing-e', MASS, LL([P(1995, 1600), P(2572, 1600), P(2572, 838), P(2330, 712), P(1995, 712)]), WING_TOP, 'The east wing: the Colored Waiting Room and its rooms, baggage and parcel check, stores.'),
+        ('center', MASS, rect(1305, 1471, 1995, 1600), FRONT_TOP, 'The front block over Vestibule No. 1 and the entrance halls, with offices above.'),
+        ('attic', MASS, rect(1305, 846, 1995, 1471), ATTIC, 'The block of the White Waiting Room, up to the cornice the dome stands on.'),
+        ('vestibule', MASS, rect(1440, 700, 1860, 846), WING_TOP, 'The vestibule to the concourse.'),
+        ('vestibule-west', MASS, rect(1305, 755, 1440, 846), WING_TOP, 'The rooms beside the vestibule to the concourse.'),
+        ('passage-1-mass', MASS, rect(1160, 575, 1440, 755), 6.5, 'Enclosed Concourse Passage No. 1.'),
+        ('passage-2-mass', MASS, rect(1860, 575, 2330, 712), 6.5, 'Enclosed Concourse Passage No. 2.'),
+    ]:
+        part(f'bss-{id_}', name, ring, top, 'stone', note + mass_note, sect_src, only='whole', upTo=FF + top, confidence='drawn')
+    for k, (x0, x1) in enumerate(((725, 1305), (1995, 2572))):
+        cp(f'marquee-{k + 1}', MASS, rect(x0, 1600, x1, 1690), 4.2, 4.7, 'iron', 'approximate',
+           'A cast-iron and glass marquee over the wing\'s doors, from period postcards; the plan\'s wings, its size approximate.', [P15, POSTCARD], only=None)
 
     # ---- floors ---------------------------------------------------------------------------
     for k, (ring, what) in enumerate([
@@ -196,15 +217,22 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
            'The wall over the crown of the lunette. ' + SECT, sect_src)
         cp(f'hall-{end}-lunette', HALL, rect(1590, (y0 + y1) / 2 - 2, 1710, (y0 + y1) / 2 + 2), CORNICE, LUNETTE, 'glass', 'drawn',
            'A lunette window, one on each side of the hall ("Inscription on four sides" runs under them). ' + SECT, sect_src)
-    # The lunette seen across the hall: the west window's glass, stepped to its half circle.
-    yc, half, n = (Y0 + Y1) / 2, 148, 14
-    for k in range(n):
-        y0 = yc - half + k * (2 * half / n)
-        y1 = y0 + 2 * half / n
-        u = ((y0 + y1) / 2 - yc) / half
+    # The lunette seen across the hall: the west window, an arch of glass 11.75 m across from the
+    # cornice to its crown, with its mullions (section C-C draws it in elevation).
+    yc, half = (Y0 + Y1) / 2, 148
+    cp('hall-west-lunette', HALL, LL([P(X0 + 1, yc + half), P(X0 + 1, yc - half), P(X0 + 3, yc - half), P(X0 + 3, yc + half)]), CORNICE, LUNETTE, 'glass', 'drawn',
+       'The west lunette window over the great arch, 11.75 m across, as section C-C draws it. ' + SECT, sect_src, shape='arch')
+    for k in range(1, 6):
+        u = -1 + k / 3
+        if abs(u) >= 1:
+            continue
+        y = yc + u * half
         top = CORNICE + (LUNETTE - CORNICE) * math.sqrt(max(0.0, 1 - u * u))
-        cp(f'hall-west-lunette-{k + 1}', HALL, rect(X0 + 1, y0, X0 + 3, y1), CORNICE, top, 'glass', 'drawn',
-           'The west lunette: its glass, 11.75 m across, with the opening of the great arch under it. ' + SECT, sect_src)
+        cp(f'hall-west-mullion-{k}', HALL, rect(X0 + 3, y - 4, X0 + 9, y + 4), CORNICE, top, 'plaster', 'drawn',
+           'A mullion of the west lunette. ' + SECT, sect_src)
+    cp('hall-west-sill', HALL, rect(X0 + 1, yc - half - 6, X0 + 12, yc + half + 6), CORNICE - 0.5, CORNICE, 'plaster', 'drawn',
+       'The sill of the west lunette, on the cornice. ' + SECT, sect_src)
+
     # The ceiling and dome: a stepped low dome over the hall, its ceiling a shallower vault inside.
     R = 13.6
     ring = LL([P(1645 + R / K * math.cos(2 * math.pi * k / 24), 1158.5 + R / K * math.sin(2 * math.pi * k / 24)) for k in range(24)])
@@ -223,7 +251,7 @@ def build(part, ab, st, to_ab, crossing, platforms, lonlat):
         levels.append([round(z - ATTIC, 3), round(o / R, 4), round(min(i, o - 0.6) / R if i > 0 else 0.0, 4)])
     cp('dome', 'Broad Street Station dome', ring, ATTIC, DOME_TOP, 'dome', 'drawn',
        'The dome: a cornice ring, the stepped haunches and the low outer dome, in its original tile in 1943; inside, the hall\'s ceiling, a shallower vault. Profiles from sections A-A, B-B and C-C; the crown is 100 ft above the floor, as published.',
-       sect_src + [ARCHIPEDIA], shape='revolve', levels=levels)
+       sect_src + [ARCHIPEDIA], shape='revolve', levels=levels, only=None)
     # Benches: four long benches down the hall.
     for k, x in enumerate((1493, 1593, 1696, 1805)):
         cp(f'hall-bench-{k + 1}', HALL, rect(x - 13, 992, x + 13, 1307), 0, 0.9, 'wood', 'drawn',

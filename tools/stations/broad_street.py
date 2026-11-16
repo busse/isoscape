@@ -111,46 +111,19 @@ def part(id_, name, ring_, height, tone, note, sources, base=0.0, seat='min', sh
 
 
 # ---- the head house ----------------------------------------------------------------------------
-# Frontage a = −41…37 (78 m with the porch; the published frontage is 240 ft, 73 m), depth
-# b = −20…21 to the back wall, then the enclosed concourse passages to b = 35, all from OSM.
-# The center of the front is a = −2.
-HEAD = 'Broad Street Station (head house)'
-H_NOTE = 'Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).'
-H_SRC = [SRC['dhr'], SRC['plan'], SRC['postcard-a'], SRC['postcard-b'], SRC['osm-station']]
-# These massing parts draw the head house in whole views; a cutaway draws its walls, floors and
-# rooms instead (broad_street_plan.py), traced from the 1919 plates.
-W = 'whole'
-part('bss-wing-w', HEAD, rect_ab(-41, -20.5, -20, 21), 14.5, 'stone', 'West wing: the lunch room and the white waiting rooms. ' + H_NOTE, H_SRC, only=W)
-part('bss-wing-e', HEAD, rect_ab(16.5, 37, -20, 21), 14.5, 'stone', 'East wing: the "colored" waiting room of the segregated station, and stores. ' + H_NOTE, H_SRC + [SRC['archipedia']], only=W)
-part('bss-center', HEAD, rect_ab(-20.5, 16.5, -20, 21), 19.5, 'stone', 'The central pavilion, up to the attic with its clock, flanked by the figures Progress and Industry. ' + H_NOTE, H_SRC + [SRC['archipedia']], only=W)
-part('bss-passages', HEAD, rect_ab(-36, 24, 21, 35), 9, 'stone', 'The enclosed concourse passages across the back of the head house. ' + H_NOTE, H_SRC, only=W)
-part('bss-steps', HEAD, rect_ab(-21, 17, -29, -20), 1.0, 'stone', 'The porch, raised above the forecourt. ' + H_NOTE, H_SRC, only=W)
-# The colonnade: six Tuscan columns between square end piers, after the Doric of St. Peter's
-# Square; the entablature runs across them at the wings' cornice. Columns and piers stand on
-# the porch and the entablature on the columns (`on`), so on the sloping forecourt they share
-# one base and one top, 12.5 m over the porch's lowest ground.
-for k in range(6):
-    a = -15.5 + k * 5.4  # centered on the front (a = −2), between the piers
-    part(f'bss-column-{k + 1}', HEAD, poly_ab(a, -24.5, 0.9, 10), 11.5, 'stone', 'One of the colonnade\'s six columns, modeled on the Doric of St. Peter\'s Square. ' + H_NOTE, H_SRC + [SRC['archipedia']], on='bss-steps', only=W)
-for k, a in enumerate((-19.2, 15.2)):
-    part(f'bss-pier-{k + 1}', HEAD, rect_ab(a - 1.2, a + 1.2, -25.7, -23.3), 11.5, 'stone', 'A square end pier of the colonnade. ' + H_NOTE, H_SRC, on='bss-steps', only=W)
-part('bss-entablature', HEAD, rect_ab(-20.5, 16.5, -26.5, -20), 2.5, 'stone', 'The entablature over the colonnade. ' + H_NOTE, H_SRC, on='bss-column-1', only=W)
-for k, (a0, a1) in enumerate(((-41, -20.5), (16.5, 37))):
-    part(f'bss-marquee-{k + 1}', HEAD, rect_ab(a0, a1, -23.5, -20), 0.5, 'iron', 'Cast-iron and glass marquee over the wing\'s doors (approximate).', [SRC['postcard-a'], SRC['postcard-b']], base=4.2, only=W)
-# The dome: a polygonal drum pierced by lunettes, then the Roman dome, its top about 108 ft up.
-part('bss-drum', HEAD, poly_ab(-2, 0.5, 14.5, 12, math.pi / 12), 5.5, 'stone', 'The polygonal drum, pierced by lunettes after those of Columbia\'s Low Library. Rotunda 100 ft high inside; heights approximate.', [SRC['archipedia'], SRC['dhr'], SRC['styleweekly']], base=19.5, only=W)
-part('bss-dome', 'Broad Street Station dome', poly_ab(-2, 0.5, 13.5, 24), 8.0, 'dome',
-     'The Roman dome, still in its original terra-cotta tile in 1943; it was recovered in copper in 1954–55 (the green of later photographs). The tile\'s gray-green is read from tinted postcards: approximate.',
-     [SRC['archipedia'], SRC['postcard-a'], SRC['postcard-b']], base=25.0, shape='dome', only=W)
+# Traced from the 1919 first-floor plan and sections in broad_street_plan.py (called below, once
+# the platforms are placed): whole views draw its massing, cutaways its walls, floors and rooms;
+# the portico and the dome are shared by both.
 
 # ---- the concourse, bridged over the tracks ----------------------------------------------------
 # On the station's axis, 54 ft wide, as the first-floor plan (Plate 15) and the 1919 article
 # give it; its floor at the waiting room's, carried over the tracks on piers.
 import broad_street_plan as BP  # noqa: E402
 
+W = 'whole'
 C_SRC = [SRC['osm-station'], SRC['photo-1969'], SRC['platforms']]
 CA0, CA1 = -2 + (1440 - BP.XC) * BP.K, -2 + (1860 - BP.XC) * BP.K
-part('bss-concourse', 'Broad Street Station concourse', rect_ab(CA0, CA1, 35, 98), 10.0, 'stone',
+part('bss-concourse', 'Broad Street Station concourse', rect_ab(CA0, CA1, -20 + (BP.YF - 700) * BP.K, 98), 10.0, 'stone',
      'The long concourse, carried from the head house out over the station tracks at the level of the waiting room, on piers; stairs led down from it to each platform. On the station\'s axis and 54 ft wide, as the 1919 first-floor plan and article give it; it ends past the last platform on the 1925 Sanborn sheet. Floor at the waiting room\'s level (approximate); height approximate.',
      C_SRC + [SANBORN_475, BP.P15, BP.AMAR], only=W, elevation=BP.FF - 1.0, upTo=BP.FF + 9.0, confidence='drawn')
 
@@ -295,10 +268,17 @@ for k, t in enumerate(PLATFORMS):
     s1, s2 = sorted((crossing(t, CA0), crossing(t, CA1)))
     # In a cutaway the south (east-side) sheds stop short of the departure stairs, which are
     # drawn open; in whole views they run to the concourse over the stair houses.
-    # (and stop 4.5 m short of the head house's back, b = 20.8, which platform 1 runs past).
+    # (and stop short of the head house, which platform 1 runs past).
+    def clear(s_end):
+        for u in range(0, 41):
+            for side in (-4.0, 4.0):
+                a, b = to_ab(st(s_end - u * 0.5, t + side))
+                if a < 35.5 and b < 21.5 and a > -40:
+                    return False
+        return True
     s_back = s1 - 14
-    while to_ab(st(s_back, t))[1] - 4.5 * abs(UT[0] * UB[0] + UT[1] * UB[1]) < 20.8 + 4.5 and s_back > S_SOUTH:
-        s_back -= 1.0
+    while not clear(s_back) and s_back > S_SOUTH:
+        s_back -= 0.5
     for side, (s0, s9), only in (('south', (S_SOUTH + 4, s1 - 1), 'whole'), ('north', (s2 + 1, S_NORTH - 4), None), ('south', (S_SOUTH + 4, s_back), 'cutaway')):
         features.append({
             'id': f'bss-canopy-{k + 1}-{side}' + ('-cut' if only == 'cutaway' else ''), 'name': 'Broad Street Station platform canopy', 'kind': 'canopy', 'from': 1919, 'to': 1976,
@@ -381,6 +361,10 @@ for idx, cars, north_end in TRAINS:
         train = {'cars': cars, 'at': round(at, 1), 'reverse': True}
     f = next(x for x in features if x['id'] == f'bss-track-{idx + 1}')
     f['train'] = train
+    if idx == 1:
+        # In the cutaway the train beside platform 2 stands with its engine at the south end,
+        # just past the departure stairs, so the engine is in the picture.
+        f['cutTrain'] = {'cars': cars, 'at': round(at_straight(pts, from_end=True) + 50, 1), 'reverse': True}
     f['note'] += ' A train stands here: a steam engine and heavyweight cars in Pullman green (the consist is illustrative).'
     f['sources'] = f['sources'] + ['https://www.hmdb.org/m.asp?m=9209']
 
