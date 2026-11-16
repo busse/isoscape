@@ -486,6 +486,10 @@ A callout's anchor in either drawing may say `"badge": [dx, dy]` (sheet units, 9
 the badge then stands that far off the part, with a leader to a dot on it, so it does not hide
 what it names. `travelerKey` adds a line with the traveler's glyph to the key, and a group with
 `"traveler": true` carries the glyph beside its heading.
+`isoView` (`[x, y, w, h]` in the plate's own units) frames the plate closer, cutting what runs
+past it at its edge; a wayfinding label with `label: [x, y]` (sheet units, its first baseline)
+stands there, its leader leaving the nearest point of its box; `columnEnd` warns when the
+column runs past that height, into the room the print's title block needs.
 
 `--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):
 the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, each with its title
