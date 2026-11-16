@@ -431,6 +431,42 @@ heights are approximate, and some buildings are missing, misplaced or merged.
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
 and elevation and keeps only its year-built parcels in its own `data/` folder.
 
+## Cutaways
+
+A region with a `cutaway` section opens a modeled building along a vertical plane: the half on
+one side is lifted away, its ground floor left as a plan, and every cut is drawn solid in ink.
+
+```jsonc
+"cutaway": {
+  "through": [-77.4658172, 37.5611118],  // a point on the plane
+  "bearing": 40.8,                        // the compass direction it runs
+  "remove": "right",                      // the side lifted away; stand the camera there
+  "floor": 67.4, "keep": 1.5,             // on that side keep what stands up to 1.5 m over this floor (m above sea level)
+  "parts": "bss-",                        // only modeled parts with this id prefix are cut
+  "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away on the removed side though not cut
+  "outline": { "parts": ["bss-c-floor-"], "offset": 1.5 },  // dash the removed footprint
+  "section": { "from": -62, "to": 104, "beyond": 35, "other": 3, "scale": 10, "earth": 5,
+               "route": [[-60, 64.7], [50.5, 68.3]] }    // the flat section and the traveler's path
+}
+```
+
+The parts come from a history file (see "Time"): a part drawn only in whole views carries
+`"only": "whole"` (a building's massing), one drawn only in cutaways `"only": "cutaway"` (its
+walls, floors and rooms). A part may stand at an `elevation` and reach `upTo` another, revolve
+(`"shape": "revolve"` with `levels`, for a dome or a shell), rise as a `stair`, and says how it
+is known: `"confidence": "drawn"`, `"written"` or `"approximate"` (the default). Cut parts must
+have convex footprints; a part that does not is cut on its convex hull.
+
+`build` writes the cutaway, its flat section (`<name>-section.svg`) and, for each, where every
+part is drawn (`*.anchors.json`). `tools/cutaway/sheet.py cutaways/<name>.json` lays them out
+on a 32 x 24 in sheet with numbered callouts, the confidence key, sources and credits. How it
+works, and what is approximate, is in *How it's made*, under "Cutaways".
+
+```sh
+node bin/isoscape.js build broad-street-station-cutaway --year 1943 --png
+python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json   # out/cutaways/
+```
+
 ## Making a set
 
 A **set** is one big map framed by numbered boxes, each a close view of a place (or of the same

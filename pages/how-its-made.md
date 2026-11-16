@@ -474,7 +474,8 @@ loop of tracks) clears today's streets, lots and buildings from within it.
 Broad Street Station in 1943 is modeled from parts
 (`tools/stations/broad_street.py`): wings, center pavilion, porch, six columns and two piers,
 entablature, drum and a dome (a quarter circle in ten steps), each with a height above its
-seat, and the concourse seated on the high side of the ground so it bridges the tracks. A part
+seat, and the concourse, a deck at the waiting room's level on piers over the tracks: a part
+can stand at a given elevation and reach up to another, instead of rising from its seat. A part
 can rest on another: the columns and piers stand on the porch and the entablature on the
 columns, so on the sloping forecourt all six columns share one base and one top. The
 station's own colors live in the palette's `parts`: limestone, the dome's tile, the iron and
@@ -488,6 +489,51 @@ A series can draw track wider than life (`railScale`, or `--rail-scale` for one 
 the ties' darker tone, so a network reads across a city: the wide railroad map uses four
 times. Curated labels name places on the map; the single-place prints of a set leave them
 out.
+
+## Cutaways
+
+A cutaway opens one modeled building along a vertical plane (`src/cutaway.ts`,
+`src/cutaway-scene.ts`). The region names the plane, a point and a compass bearing, and the side
+of it that is lifted away; the camera stands on that side. Broad Street Station is cut down its
+axis, the plane through the middle of the portico, the waiting room and the concourse
+(`regions/broad-street-station-cutaway.json`).
+
+Every part of the building is first made into convex solids: a prism for a wall, a floor or a
+bench; for a dome, a solid of revolution in slices, one per side of its outline, with an outer
+and an inner surface; a stair as one block per tread. Each solid is clipped to the half of space
+behind the plane, and where the clip opens it a new face closes it on the plane: that face is
+the section, drawn solid in ink (poché). On the removed side the building is not simply gone:
+everything up to 1.5 m above its first floor stays, clipped there, so the ground floor reads as
+a plan, its walls cut low with inked tops, its benches and counters whole. A dashed line marks
+the footprint of what was lifted away, 1.5 m outside the floors.
+
+The pieces become ordinary items for the paint order (above). A part's pieces behind the plane
+are one item and its pieces in front another, and each is split again at the first floor, so
+it takes its place on both sides of the floor's slab. Within an item, faces turned away from
+the camera are dropped, the rest are painted far to near, and the sections last. A cutaway
+stacks many parts over others (slabs over piers, the concourse over trains), so its paint order
+adds one rule: two items apart on the ground, the farther wholly above the nearer, cannot cover
+each other and are left unordered; footprints that overlap by up to 3 cm, the rounding of
+their corners, count as apart. Cars and canopy runs are cut into pieces at most 7 m long, drawn
+without seams, so each piece takes its own place among the stairs and the deck it passes.
+
+The **flat section** is made from the same parts and the same plane: the camera looks level and
+square at the plane from the removed side, nothing in front of it is kept, and behind it the
+building is drawn 35 m deep, trains and canopies 3 m. Under it the ground is cut along the
+plane and dug out where the building goes below it; platforms are drawn 0.35 m over the rails
+(approximate), rails where tracks cross the plane, and a red dashed line follows the traveler
+from the street to the train. Code: `src/section.ts`.
+
+**What is approximate.** Every part says how it is known: *drawn* (traced from a plate or a
+survey map), *written* (placed from a written account) or *approximate* (inferred), and a
+part that says nothing is approximate. For Broad Street Station the rooms of the first floor,
+the hall's octagon, its benches and counters, the portico and the concourse's width are traced
+from the first-floor plan of 1919 (Plate 15), fitted by the 240-ft frontage; the levels, the
+dome and the basement are scaled from the sections (Plates 17 and 18), whose figures are
+illegible; the first floor's elevation, wall thicknesses, door heights, the basement's piers
+and use, the stairs to the platforms and the concourse's height are approximate. The sheet's
+numbered badges show which: solid for drawn, a ring for written, a dashed ring for approximate.
+Code: `tools/stations/broad_street_plan.py`, `tools/cutaway/sheet.py`.
 
 ## Sets: a map framed by its places
 
