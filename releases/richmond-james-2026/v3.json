@@ -1,0 +1,139 @@
+{
+ "design": "richmond-james-2026",
+ "title": "The James, I-195 to Rocketts Landing",
+ "version": 3,
+ "version_note": "redrawn: elevation that had been read out of place is corrected, the hill shading is smooth, rapids and rocks are drawn only where the river falls, the shorelines follow the mapped banks, and bridges and ramps end properly.",
+ "recorded": "2026-11-16T22:42:00+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "a51a72b80e3a99c9e02b4502cabe77c2eedb1491",
+  "subject": "record.py: sort a redraw's canvas files by name (dicts do not order); test",
+  "dirty": false
+ },
+ "kind": "redraw",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <store>/print-files/drawn/richmond-james-2026-v3 --only richmond-james-2026",
+   "python3 tools/release/stamp.py <store> richmond-james-2026 --version 3 --base print-files/drawn/richmond-james-2026-v3"
+  ],
+  "redraw": true,
+  "base_kind": "compose",
+  "previous_record": "releases/richmond-james-2026/v2.json",
+  "pinned": "panels use the builds named in scenes[].build, not the newest",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond",
+   "piece": "The James, I-195 to Rocketts",
+   "plate": "RVA-09",
+   "version": "3",
+   "drawn": "2026",
+   "location": "37.529° N 77.455° W",
+   "facing": "10°"
+  },
+  "files": {
+   "richmond-james-2026-v3_24x10.jpg": {
+    "base": "print-files/drawn/richmond-james-2026-v3/richmond-james-2026_24x10.jpg",
+    "base_sha256": "bc8c931ca30769b77408eeb36a77d778608c06c6885a3ee45ca54db0f6c5d7cd",
+    "at": {
+     "x": 5644,
+     "y": 2628,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-i195-rocketts",
+   "year": null,
+   "flags": [],
+   "svg": "out/builds/20261116-172559-richmond-i195-rocketts/image.svg",
+   "sha256": "f657f6dcb5d3e57344fc1904b3d1e5cb1cf335edc97ed31528e4261bf0094d2a",
+   "frozen": "data/_releases/scenes/f657f6dcb5d3e57344fc1904b3d1e5cb1cf335edc97ed31528e4261bf0094d2a.svg",
+   "build": "20261116-172559-richmond-i195-rocketts",
+   "commit": "2eb233a"
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "7454855d277d47779f8b7b9a457322e74d488766f2ae7747e5f320e59e1baceb",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "regions/richmond-i195-rocketts.json": "b0c1f70c1044da7879e85e83eaa17487a0f9e83f64f72fad22b058a92b35237a"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/richmond-james-2026-v3_24x10.jpg",
+   "sha256": "00ef4e235014740e40d20f2f988b159fb202825ddc6d3dd070c63cfc32b56433",
+   "bytes": 3184176,
+   "printful_file_id": 1113771177
+  },
+  "canvas": []
+ },
+ "store": {
+  "catalog": {
+   "title": "The James, I-195 to Rocketts Landing",
+   "place": "Richmond",
+   "orientation": "horizontal",
+   "modern": true,
+   "formats": [
+    "Panorama Print"
+   ],
+   "print": "richmond-james-2026-v3_24x10.jpg",
+   "explore": "richmond-i195-rocketts",
+   "version": 3,
+   "version_date": "November 16, 2026",
+   "version_note": "redrawn: elevation that had been read out of place is corrected, the hill shading is smooth, rapids and rocks are drawn only where the river falls, the shorelines follow the mapped banks, and bridges and ramps end properly.",
+   "plate": "RVA-09",
+   "plate_box": [
+    0.78389,
+    0.876,
+    0.97556,
+    0.941
+   ]
+  },
+  "products": [
+   {
+    "handle": "the-james-i-195-to-rocketts-landing",
+    "id": "gid://shopify/Product/9137908056182",
+    "format": "all (merged)",
+    "status": "DRAFT",
+    "variants": 1
+   },
+   {
+    "handle": "the-james-i-195-to-rocketts-landing-panorama-print",
+    "id": "gid://shopify/Product/9134767767670",
+    "format": "Panorama Print",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Panorama Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-james-2026-v3_24x10-panorama-print.jpg?v=1794868527",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-james-2026-v3_24x10-plate.jpg?v=1794868531"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-i195-rocketts"
+ }
+}

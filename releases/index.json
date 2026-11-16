@@ -153,11 +153,12 @@
  },
  "gwynns-island": {
   "title": "Gwynn's Island",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "lm-alcatraz": {
@@ -702,11 +703,12 @@
  },
  "richmond-james-2026": {
   "title": "The James, I-195 to Rocketts Landing",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "richmond-panorama-2026": {
