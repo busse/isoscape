@@ -476,7 +476,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   if (!T.flat) {
     const shade = nodeShade(T, light)
     for (let k = 0; k < shade.length; k++) {
-      const level = shade[k] * SHADE_GAIN
+      const level = steepShade(shade[k] * SHADE_GAIN)
       const shore = SHORE_CAP * (1 - 2 * wetness[k])
       litField[k] = Math.min(level, shore)
       darkField[k] = Math.min(-level, shore)
@@ -838,6 +838,21 @@ const SHADE_GAIN = 22
 const SHADE_SUBSTEPS = 2
 const SHADE_STEPS = 12
 const SHADE_BANDS = SHADE_STEPS * SHADE_SUBSTEPS
+/**
+ * Steep ground: past SHADE_KNEE steps either way the shade grows only logarithmically, so a
+ * bluff, cut or embankment turned from the light darkens smoothly instead of piling up at the
+ * darkest band. Lit slopes top out near 5.8 steps however steep they are (the light is high),
+ * but slopes turned away kept darkening to the 12-step clamp, three times as far: past the
+ * knee a face 17 steps dark now shows about 9, and one 40 steps dark about 11. Gentle ground
+ * stays under the knee and is drawn exactly as before; a lit slope changes by under 0.15 step.
+ */
+const SHADE_KNEE = 5
+const SHADE_SOFT = 2
+export const steepShade = (level: number): number => {
+  const a = Math.abs(level)
+  if (a <= SHADE_KNEE) return level
+  return Math.sign(level) * (SHADE_KNEE + SHADE_SOFT * Math.log1p((a - SHADE_KNEE) / SHADE_SOFT))
+}
 /** How far above any band the shoreline cap starts, in steps. */
 const SHORE_CAP = 100
 /** Band m covers the ground at least this many steps lit (or shaded). */

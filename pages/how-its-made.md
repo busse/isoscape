@@ -205,6 +205,12 @@ surface, so it matches the shape you see:
   marching squares between the nodes. Each band adds a thin wash on top of the one it sits
   in, so the ground shows smooth, soft shading rather than 5 m squares, and no two shades
   meet edge to edge. The shading stops at the traced shoreline and is not drawn on the river.
+  Steep ground is held back: past 5 steps either way the shade grows only logarithmically
+  (5 + 2 · ln(1 + (s − 5)/2) steps for a slope worth s), so a bluff, cut or embankment turned
+  from the light darkens smoothly instead of piling up as a dark smear. A face that would be
+  17 steps dark shows about 9, one at 40 about 11. Gentle ground stays under the knee and is
+  drawn exactly as it was; lit slopes never pass about 6 steps, however steep, so they change
+  by less than a sixth of a step.
 - **Contours.** Marching squares every 2 m by default (`contour`), with every fifth line
   heavier (`majorEvery`). There are no contours over water.
 
