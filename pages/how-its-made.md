@@ -325,6 +325,14 @@ building hides it.
 Each bridge is cut into spans of at most 22 m, so a long bridge can pass in front of one
 building and behind another. Bridges are cut at the edges of the frame.
 
+**A suspension bridge** (`bridge:structure=suspension`) whose towers are mapped as parts
+(`tower:type=bridge`) gets its two main cables, drawn as plain lines. The parts standing
+within 25 m of the bridge's line make its towers, and the parts either side of the widest gap
+across the line are a tower's two legs. Each cable runs from an anchorage on the deck at one
+end of the bridge, over the tops of the legs, to the other end: a parabola between towers
+that sags to 2 m over the deck at mid-span, and a slighter one down to each anchorage.
+Suspenders, tower detail and arches are not drawn.
+
 Code: `chainBridges` and `bridgePieces` in `src/scene.ts`.
 
 ## Paint order

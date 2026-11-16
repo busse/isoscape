@@ -2,7 +2,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { clipRingToRect, convexHull, separatingAxis, signedArea, simplifyRing, type Vec2 } from '../src/geom.ts'
 import { dominantGridAngle, makeView, snapBearing } from '../src/view.ts'
-import { bridgeEnds, buildingAt, chainBridges, extrude, rampClearance, RAMP, roofIndex, type Item } from '../src/scene.ts'
+import { bridgeEnds, buildingAt, cableZ, CABLE_CLEARANCE, chainBridges, extrude, rampClearance, RAMP, roofIndex, type Item } from '../src/scene.ts'
 import { compare, paintOrder, spanOrder } from '../src/order.ts'
 import { assembleRings, parseOsm } from '../src/osm.ts'
 import { buildingHeights, parseLength } from '../src/classify.ts'
@@ -153,6 +153,20 @@ test('side-by-side decks keep one order along their length', () => {
   assert.equal(spanOrder(near(0), { ...near(22), bridge: 'n' }), 0)
   // One right over the other: the upper.
   assert.equal(spanOrder({ ...near(0), z: 21, bridge: 'u' }, near(0)), 1)
+})
+
+test('a main cable hangs between its towers and meets them at the top', () => {
+  const deck = () => 67
+  const towers = [{ s: 340, top: 227 }, { s: 1620, top: 227 }]
+  const z = (s: number) => cableZ(s, 1960, towers, deck)
+  assert.equal(z(340), 227)
+  assert.equal(z(1620), 227)
+  assert.ok(Math.abs(z(980) - (67 + CABLE_CLEARANCE)) < 1e-9)
+  // A parabola: a quarter of the way along the main span, three quarters of the sag remains.
+  assert.ok(Math.abs(z(660) - (227 - (227 - 69) * 0.75)) < 1e-9)
+  // The side spans come down to the anchorages on the deck.
+  assert.equal(z(0), 67 + CABLE_CLEARANCE)
+  assert.ok(z(170) < (227 + 69) / 2)
 })
 
 test('multipolygon fragments assemble into rings', () => {
