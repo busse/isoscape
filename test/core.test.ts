@@ -204,6 +204,23 @@ test('render: a flat region renders, paths are well formed', async () => {
   }
 })
 
+test('the lowest parts of a bridge tower reach the ground; its struts do not', async () => {
+  const { buildScene } = await import('../src/scene.ts')
+  const { parseOsm } = await import('../src/osm.ts')
+  const box = (x: number, y: number, w: number) => [{ lat: y, lon: x }, { lat: y, lon: x + w }, { lat: y + w, lon: x + w }, { lat: y + w, lon: x }, { lat: y, lon: x }]
+  const tower = { 'building:part': 'yes', man_made: 'tower', 'tower:type': 'bridge' }
+  const json = JSON.stringify({ elements: [
+    { type: 'way', id: 1, tags: { ...tower, min_height: '21', height: '74' }, geometry: box(0, 0, 0.0001) },
+    { type: 'way', id: 2, tags: { ...tower, min_height: '21', height: '74' }, geometry: box(0.0003, 0, 0.0001) },
+    { type: 'way', id: 3, tags: { ...tower, min_height: '50', height: '52' }, geometry: box(0.0001, 0, 0.0002) },
+  ] })
+  const scene = buildScene({ ...region, snap: false, width: 300, depth: 200 }, parseOsm(json), pal)
+  const base = (id: string) => scene.items.find((i) => i.id === id)!.zMin
+  assert.equal(base('w1'), 0)
+  assert.equal(base('w2'), 0)
+  assert.equal(base('w3'), 50)
+})
+
 test('nonsense numeric tags fall back instead of poisoning heights', () => {
   const h = buildingHeights({ building: 'yes', 'building:min_level': 'federal', 'building:levels': 'two', 'roof:levels': '?' }, 100)
   assert.ok(Number.isFinite(h.base) && Number.isFinite(h.top))

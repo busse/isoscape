@@ -256,7 +256,10 @@ faces, with the light from the left. Roof color follows the building's type: hom
 commerce, industry or civic. Where a building is mapped as Simple 3D Buildings parts
 (`building:part`), the parts are drawn instead of the outline, except parts that are only
 roofs (`building:part=roof`), which sit on the outline as their podium. Open canopies
-(`building=roof`) are left out.
+(`building=roof`) are left out. A bridge tower's parts (`tower:type=bridge`) are often
+mapped from the top of the pier up, with the pier left out, so the lowest of them (no tower
+part within 40 m starts lower) reach down to the ground or water; struts between the legs
+keep their height.
 
 Two shapes are not prisms. A **lattice tower** (`tower:construction=lattice`, such as the
 Eiffel Tower) is drawn whole as a spire on its outline, in 16 stacked tapering pieces, in a

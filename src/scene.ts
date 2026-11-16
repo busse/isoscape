@@ -357,7 +357,16 @@ export const buildScene = (
     const gMin = Math.min(...grounds)
     const gMax = Math.max(...grounds)
     const gMean = grounds.reduce((a, b) => a + b, 0) / grounds.length
-    const base = gMin + h.base
+    // A bridge tower's lowest mapped parts stand on the ground or water: OSM often maps a
+    // tower's legs from the pier top up and leaves the pier out. A part is lowest when no part
+    // of a bridge tower within `TOWER_REACH` of it starts lower (struts between the legs do).
+    const footed = h.base > 0 && isBridgeTower(s.tags) && !shown.some((o) => {
+      if (o === s || !isBridgeTower(o.tags)) return false
+      const c = centroid(s.outer)
+      if (!o.outer.some((p) => Math.hypot(p[0] - c[0], p[1] - c[1]) < TOWER_REACH)) return false
+      return buildingHeights(o.tags, Math.abs(signedArea(o.outer))).base < h.base
+    })
+    const base = footed ? gMin : gMin + h.base
     const top = Math.max(gMean + h.top, gMax + 2.5, base + 2.5)
     const cls = buildingClass(s.tags)
     const roofs = pal.roofs[cls]
@@ -617,6 +626,11 @@ export const extrude = (
     footprint: outer,
   }
 }
+
+/** A part of a bridge's tower (a suspension or cable-stayed bridge's pylon). */
+export const isBridgeTower = (t: Readonly<Record<string, string>>): boolean => t['tower:type'] === 'bridge'
+/** Meters around a bridge tower's part to look for a part that starts lower. */
+export const TOWER_REACH = 40
 
 /** OSM's lattice towers: tagged as such, or a building whose pyramidal roof is its whole height. */
 export const isLatticeTower = (t: Readonly<Record<string, string>>): boolean =>
