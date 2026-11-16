@@ -126,8 +126,9 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
         const g = T.z(along(s))
         const half = 1.6 / sin
         out.push(`<path fill="${p.rail}" class="i" d="${path([P(s - half - 0.4, g), P(s + half + 0.4, g), P(s + half, g + 0.35), P(s - half, g + 0.35)])}"/>`)
+        // The rails themselves at true gauge, under the car ends drawn square on over them.
         for (const k of [-0.72, 0.72]) {
-          const c = s + k / sin
+          const c = s + k
           out.push(`<path fill="${p.railSteel}" d="${path([P(c - 0.08, g + 0.35), P(c + 0.08, g + 0.35), P(c + 0.08, g + 0.5), P(c - 0.08, g + 0.5)])}"/>`)
         }
       }
@@ -171,7 +172,9 @@ const crossing = (pl: NonNullable<Scene['cut']>, a: Vec2, b: Vec2): number | nul
 
 const paintItem = (it: Item): string => {
   const title = it.name === undefined ? '' : `<title>${esc(it.name)}</title>`
-  return `<g data-id="${esc(it.id)}">${title}${it.shapes.map((s) => `<path class="i" fill="${s.fill}" d="${path(s.pts)}"/>`).join('')}</g>`
+  return `<g data-id="${esc(it.id)}">${title}${it.shapes.map((s) => s.stroke !== undefined
+    ? `<path fill="none" stroke="${s.stroke.color}" stroke-width="${f(s.stroke.width)}" stroke-dasharray="${s.stroke.dash.map(f).join(' ')}" d="${path(s.pts, s.line !== true)}"/>`
+    : `<path class="i" fill="${s.fill}" d="${path(s.pts)}"/>`).join('')}</g>`
 }
 
 /** Grow the anchor box of an item's part (its id, less any `:near` or piece suffix). */

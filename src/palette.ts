@@ -69,7 +69,8 @@ export interface Palette {
    * A modeled building's parts, by tone: side lit, side in shade, roof. Broad Street Station's
    * Indiana limestone, its dome's terra-cotta tile, the iron of its platform canopies and their
    * roofing, the plastered ramp houses, and the trains: Pullman-green coaches, black engines,
-   * boxcar-red freight.
+   * boxcar-red freight; and, for the larger trains of a cutaway, an engine's iron in a grey
+   * light enough for its edges to show, the coal in its tender, and a coach's darker roof.
    */
   readonly parts: Readonly<Record<PartTone, readonly [string, string, string]>>
   /**
@@ -158,6 +159,9 @@ const paper: Palette = {
     glass: ['#c9d3cf', '#a9b6b2', '#d9e0dc'],
     tram: ['#c9473a', '#8f2a22', '#e8d9b0'],
     roof: ['#8b8c84', '#6a6b64', '#8e8f87'],
+    loco: ['#6b6c70', '#4a4b4f', '#5a5b5f'],
+    coal: ['#403e3b', '#2f2e2c', '#4a4744'],
+    carRoof: ['#43553d', '#2f3d2b', '#4a5d43'],
   },
   poche: '#2c2b33',
   cutOutline: '#2c2b33',
@@ -247,6 +251,9 @@ const night: Palette = {
     glass: ['#3c4a52', '#2c3840', '#46545c'],
     tram: ['#f07a5f', '#b04a3a', '#f2e2b8'],
     roof: ['#4a4b48', '#383936', '#525350'],
+    loco: ['#3a3b40', '#26272c', '#303136'],
+    coal: ['#1f1f22', '#161618', '#29292c'],
+    carRoof: ['#24382a', '#18261c', '#2a3e2f'],
   },
   poche: '#c9d1e6',
   cutOutline: '#c9d1e6',

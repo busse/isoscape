@@ -585,7 +585,8 @@ behind the plane, and where the clip opens it a new face closes it on the plane:
 the section, drawn solid in ink (poché). On the removed side the building is not simply gone:
 everything up to 1.5 m above its first floor stays, clipped there, so the ground floor reads as
 a plan, its walls cut low with inked tops, its benches and counters whole. A dashed line marks
-the footprint of what was lifted away, 1.5 m outside the floors.
+the footprint of what was lifted away, 1.5 m outside the floors, but only where nothing still
+stands: within 2.5 m of a low wall it would only repeat the wall, and is left out.
 
 The pieces become ordinary items for the paint order (above). A part's pieces behind the plane
 are one item and its pieces in front another, and each is split again at the first floor, so
@@ -597,18 +598,29 @@ each other and are left unordered; footprints that overlap by up to 3 cm, the ro
 their corners, count as apart. Cars and canopy runs are cut into pieces at most 7 m long, drawn
 without seams, so each piece takes its own place among the stairs and the deck it passes.
 
-In a cutaway, cars are drawn with arched roofs and a band of windows down each side, engines
-with a frame, a boiler, a dome and a stack, tenders with coal, and sheds with butterfly roofs
-falling to a valley over their posts; a post stands only under a roof that is drawn. The
-ground is flat-toned (the region's `terrain.shade` is 0, which turns the hillshade off), and the
-dashed outline of what was lifted away lies level at the first floor.
+In a cutaway, coaches are solid Pullman-green bodies under a darker arched roof, with a
+continuous band of windows down each side and, in the 1 m gap ahead of each car that has one
+coupled ahead of it, the dark diaphragm of its vestibule. A steam engine faces the way its
+train came in (the engine leads, toward the start of its line): a round boiler with a darker
+smokebox at the front, a stack and two domes on top, a frame and running board under it, and a
+boxy cab 4 m long at the back, beside the tender, whose tank is lower than the cab and carries
+its coal heaped at the front. They are drawn in a grey light enough for their edges to show.
+Sheds have butterfly roofs falling to a valley over their posts; a post stands only under a
+roof that is drawn. The ground is flat-toned (the region's `terrain.shade` is 0, which turns
+the hillshade off), and the dashed outline of what was lifted away lies level at the first
+floor.
 
 The **flat section** is made from the same parts and the same plane: the camera looks level and
 square at the plane from the removed side, nothing in front of it is kept, and behind it the
-building is drawn 35 m deep, trains and canopies 16 m, each drawn in its own colors where the plane cuts it. Under it the ground is cut along the
-plane and dug out where the building goes below it; platforms are drawn 0.35 m over the rails
-(approximate), rails where tracks cross the plane, and a red dashed line follows the traveler
-from the street to the train. Code: `src/section.ts`.
+building is drawn 35 m deep. Trains and sheds are not cut on the skew: where a track with a
+train standing across the plane, or within 16 m behind it, meets the plane, one car is drawn
+end on, square and true size on its trucks (a coach's arched end with its door, an engine's
+round smokebox, or a tender's tank and coal); and where a shed's line meets it, its butterfly
+profile, a center post and two wings rising outward. A stair on the removed side is drawn as
+its stepped profile, dashed. Under it the ground is cut along the plane and dug out where the
+building goes below it; platforms are drawn 0.35 m over the rails (approximate), rails at true
+gauge where tracks cross the plane, and a red dashed line follows the traveler from the street
+to the train. Code: `src/section.ts`.
 
 **What is approximate.** Every part says how it is known: *drawn* (traced from a plate or a
 survey map), *written* (placed from a written account) or *approximate* (inferred), and a

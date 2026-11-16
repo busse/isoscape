@@ -117,7 +117,11 @@ export const STOCK = {
 } as const
 
 /** A box a part is drawn as: a footprint, its bottom and top, and its tone. */
-export interface Box { readonly id: string; readonly ring: Ring; readonly z0: number; readonly z1: number; readonly tone: PartTone }
+export interface Box {
+  readonly id: string; readonly ring: Ring; readonly z0: number; readonly z1: number; readonly tone: PartTone
+  /** Rolling stock: the unit direction the train faces (its engine leads), in view meters. */
+  readonly front?: Vec2
+}
 
 export const boxItem = (view: View, pal: Palette, b: Box): Item => {
   const t = toned(pal, b.tone)
@@ -141,7 +145,9 @@ export const trainBoxes = (id: string, line: readonly Vec2[], train: Train, grou
     if (mid > total) return
     const { p, dir } = along(pts, mid)
     const z = ground(p) + 0.6
-    boxes.push({ id: `${id}:${k}`, ring: box(p, dir, dims.length / 2, dims.width / 2), z0: z, z1: z + dims.height - 0.6, tone: c.tone })
+    // The engine leads, toward the line's start.
+    const front: Vec2 = [-dir[0], -dir[1]]
+    boxes.push({ id: `${id}:${k}`, ring: box(p, dir, dims.length / 2, dims.width / 2), z0: z, z1: z + dims.height - 0.6, tone: c.tone, front })
     if (c.kind === 'engine') {
       // The cab, a step up at the engine's back end.
       const cab = along(pts, mid - dims.length / 2 + 2)
