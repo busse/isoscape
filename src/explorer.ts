@@ -1250,6 +1250,23 @@ body.reading main { grid-template-rows: 1fr; }
     }
     update()
   }
+  // Links to the shop carry where they were clicked, so the shop's reports can tell the explorer's
+  // visitors apart: utm_source=isoscape-explorer, utm_campaign=<the page or map being viewed>.
+  const shopHost = (() => { try { return site.shop ? new URL(site.shop.url).hostname : null } catch (err) { return null } })()
+  const tagShopLink = (e) => {
+    const a = shopHost && e.target && e.target.closest ? e.target.closest('a[href]') : null
+    if (!a) return
+    let u
+    try { u = new URL(a.href) } catch (err) { return }
+    if (u.hostname !== shopHost || u.searchParams.has('utm_source')) return
+    const where = location.hash.replace(/^#[/]?/, '').split(/[:@]/)[0].replace(/[^a-z0-9-]+/gi, '-').slice(0, 60) || 'home'
+    u.searchParams.set('utm_source', 'isoscape-explorer')
+    u.searchParams.set('utm_medium', 'referral')
+    u.searchParams.set('utm_campaign', where)
+    a.href = u.toString()
+  }
+  document.addEventListener('pointerdown', tagShopLink, true)
+  document.addEventListener('focusin', tagShopLink, true)
   // In-page links (pages, sections, "back to the viewer") make history entries, so Back works.
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a[href^="#"]')
