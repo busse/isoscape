@@ -17,6 +17,7 @@ import { contours, nodeShade, riverFall, type ContourSegment } from './terrain.t
 import { isoBand, type BandPoint } from './isoband.ts'
 import { COVER_OF, COVER_ORDER, type CoverGroup } from './landcover.ts'
 import { demCredit } from './dem-sources.ts'
+import { mix } from './palette.ts'
 
 const f = (n: number) => (Math.round(n * 10) / 10).toString()
 
@@ -182,11 +183,75 @@ const densify = (ring: readonly Vec2[], step: number, closed = true): Vec2[] => 
 /** Layers drawn on the water's surface rather than the ground's. */
 /** Pixels per meter at and above which tracks are drawn with ties and running rails. */
 export const CLOSE_RAIL = 1.5
+/** A tie at close scale, in meters on the ground: across the track, along it, and center to center. */
+export const TIE = { length: 2, width: 0.25, every: 0.67 } as const
+
+/**
+ * Segments offset sideways by k meters (to the right of travel for k > 0), each meeting the
+ * next at a mitered joint where the two connect, so an offset line (a running rail) has no
+ * gap or jog where its center line bends.
+ */
+export const offsetJoined = (segs: readonly (readonly Vec2[])[], k: number): Vec2[][] => {
+  const normal = (a: readonly number[], b: readonly number[]): Vec2 => {
+    const len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
+    return [(b[1] - a[1]) / len, -(b[0] - a[0]) / len]
+  }
+  const joins = (p: readonly number[], q: readonly number[]) => Math.hypot(p[0] - q[0], p[1] - q[1]) < 1e-6
+  const miter = (n: Vec2, m: Vec2): Vec2 => {
+    const x = n[0] + m[0]
+    const y = n[1] + m[1]
+    const d = (x * n[0] + y * n[1]) || 1
+    // A sharp turn would throw the miter far out: past about 120 degrees, keep the plain offset.
+    return d < 0.5 ? n : [x / d, y / d]
+  }
+  return segs.map(([a, b], i) => {
+    const n = normal(a, b)
+    const prev = i > 0 && joins(segs[i - 1][1], a) ? normal(segs[i - 1][0], segs[i - 1][1]) : undefined
+    const next = i + 1 < segs.length && joins(b, segs[i + 1][0]) ? normal(segs[i + 1][0], segs[i + 1][1]) : undefined
+    const na = prev === undefined ? n : miter(n, prev)
+    const nb = next === undefined ? n : miter(n, next)
+    return [[a[0] + na[0] * k, a[1] + na[1] * k], [b[0] + nb[0] * k, b[1] + nb[1] * k]]
+  })
+}
+
+/**
+ * The ties of a track, as ground polygons in view meters: each a TIE.length × TIE.width
+ * rectangle square to the track where it stands, spaced evenly along the whole line (the
+ * spacing carries on across a joint, and starts again only after a break in the line).
+ */
+export const tiesAlong = (segs: readonly (readonly Vec2[])[]): Vec2[][] => {
+  const out: Vec2[][] = []
+  let next = TIE.every / 2
+  let prev: Vec2 | undefined
+  for (const [a, b] of segs) {
+    if (prev === undefined || Math.hypot(a[0] - prev[0], a[1] - prev[1]) > 1e-6) next = TIE.every / 2
+    const len = Math.hypot(b[0] - a[0], b[1] - a[1])
+    prev = b
+    if (len < 1e-9) continue
+    const u: Vec2 = [(b[0] - a[0]) / len, (b[1] - a[1]) / len]
+    const n: Vec2 = [u[1], -u[0]]
+    const hl = TIE.length / 2
+    const hw = TIE.width / 2
+    for (; next <= len; next += TIE.every) {
+      const c: Vec2 = [a[0] + u[0] * next, a[1] + u[1] * next]
+      out.push([
+        [c[0] - n[0] * hl - u[0] * hw, c[1] - n[1] * hl - u[1] * hw],
+        [c[0] + n[0] * hl - u[0] * hw, c[1] + n[1] * hl - u[1] * hw],
+        [c[0] + n[0] * hl + u[0] * hw, c[1] + n[1] * hl + u[1] * hw],
+        [c[0] - n[0] * hl + u[0] * hw, c[1] - n[1] * hl + u[1] * hw],
+      ])
+    }
+    next -= len
+  }
+  return out
+}
 
 const WATERY = new Set(['W', 'canal', 'weir'])
 
 interface Entry { rings: Ring[]; minN: number; maxN: number }
-interface Layer { cls: string; entries: Entry[] }
+/** A ground layer. `small`: its pieces are small enough to lie wholly in a strip's lap, so each
+ * strip paints every piece its lapped band reaches, not only those in the strip itself (ties). */
+interface Layer { cls: string; entries: Entry[]; small?: boolean }
 
 const entryOf = (rings: Ring[]): Entry => {
   let minN = Infinity
@@ -249,10 +314,11 @@ export const renderSvg = (scene: Scene): Rendered => {
     ...Object.entries(p.cover).map(([g, color]) => sealed(`cv-${g}`, color)), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
     sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('plan', p.plan), sealed('grounds', p.grounds), sealed('racetrack', p.racetrack), sealed('burned', p.burned), sealed('platform', p.platform), sealed('canal', p.water), sealed('path', p.path),
     sealed('road', p.road), sealed('rail', scene.boldRail ? p.railTie : p.rail), sealed('tram', p.tram), sealed('weir', p.foam),
-    // At close scale (CLOSE_RAIL px per meter or more) a track shows its ties, about 0.25 m
-    // wide every 0.67 m across 2 m of the ribbon, and its two running rails, 1.44 m apart.
+    // At close scale (CLOSE_RAIL px per meter or more) a track shows its ties, each a
+    // rectangle on the ground square to the track (TIE: 2 m by 0.25 m, every 0.67 m, painted in
+    // the strips like the rest of the ground), and its two running rails, 1.44 m apart.
     close
-      ? `.ties{fill:none;stroke:${p.railTie};stroke-width:${f(view.scale * 2 * view.squash)};stroke-dasharray:${f(view.scale * 0.25)} ${f(view.scale * 0.42)};stroke-opacity:.75}.steel{fill:none;stroke:${p.railSteel};stroke-width:${f(Math.max(p.groundLineWidth, view.scale * 0.12))}}`
+      ? `.tie{fill:${mix(p.rail, p.railTie, 0.75)}}.steel{fill:none;stroke:${p.railSteel};stroke-width:${f(Math.max(p.groundLineWidth, view.scale * 0.12))};stroke-linecap:round}`
       : `.ties{fill:none;stroke:${p.railTie};stroke-width:${p.groundLineWidth * 2};stroke-dasharray:1 2.2}`,
     `.crest{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:.6}`,
     `.cm{fill:none;stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:${p.contourMinor}}`,
@@ -347,6 +413,9 @@ export const renderSvg = (scene: Scene): Rendered => {
     ribbonLayer('racetrack'),
     ribbonLayer('road'),
     ribbonLayer('rail'),
+    // Close up, the ties lie on the ballast as ground polygons (opaque: two strips paint the
+    // ground where they lap, and a see-through tie would come out darker there).
+    { cls: 'tie', small: true, entries: close ? tiesAlong(scene.ribbons.filter((rb) => rb.kind === 'rail').flatMap((rb) => rb.center)).map((q) => entryOf([q])) : [] },
     ribbonLayer('tram'),
   ]
   const lineLayer = (kind: string, cls: string) => ({
@@ -354,14 +423,9 @@ export const renderSvg = (scene: Scene): Rendered => {
     segs: scene.ribbons.filter((rb) => rb.kind === kind).flatMap((rb) => rb.center),
   })
   const railCenters = lineLayer('rail', 'ties').segs
-  const gauge = (k: number): Vec2[][] => railCenters.map(([a, b]) => {
-    const len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
-    const nx = ((b[1] - a[1]) / len) * k
-    const ny = (-(b[0] - a[0]) / len) * k
-    return [[a[0] + nx, a[1] + ny], [b[0] + nx, b[1] + ny]]
-  })
+  const gauge = (k: number): Vec2[][] => offsetJoined(railCenters, k)
   const lineLayers = [
-    lineLayer('rail', 'ties'),
+    ...(close ? [] : [lineLayer('rail', 'ties')]),
     ...(close ? [{ cls: 'steel', segs: [...gauge(0.72), ...gauge(-0.72)] }] : []),
     lineLayer('weir', 'crest'),
   ]
@@ -674,14 +738,20 @@ export const renderSvg = (scene: Scene): Rendered => {
       if (d) parts.push(`<path class="cv-${g}" d="${d}"/>`)
     }
     const paintLayers = (list: readonly Layer[], band: Rect) => {
+      // Small pieces (ties) reach 0.25 m past the far lap: the ground lapped over them there has
+      // its edge draped between its own points, and a tie cut on that same line showed a sliver
+      // of the one beneath; reaching past it, the strip paints the tie over its own lap's edge.
+      const smallBand: Rect = { ...band, maxY: band.maxY + (s.n1 < fr.maxY ? 0.25 : 0) }
       for (const layer of list) {
         let d = ''
         for (const e of layer.entries) {
-          if (e.maxN < s.n0 || e.minN > s.n1) continue
+          if (layer.small === true ? e.maxN < smallBand.minY || e.minN > smallBand.maxY : e.maxN < s.n0 || e.minN > s.n1) continue
           for (const ring of e.rings) {
-            const clipped = clipRingToRect(ring, band)
+            const clipped = clipRingToRect(ring, layer.small === true ? smallBand : band)
             if (clipped.length < 3) continue
-            d += groundPath(densify(clipped, c).map(WATERY.has(layer.cls) ? drapeWater : drape))
+            // Small pieces keep every corner: simplified, a sliver of a tie cut at the strip's
+            // edge could lose one and show as a thin wedge.
+            d += layer.small === true ? pathOf(clipped.map(drape)) : groundPath(densify(clipped, c).map(WATERY.has(layer.cls) ? drapeWater : drape))
           }
         }
         if (d) parts.push(`<path class="${layer.cls}" d="${d}"/>`)

@@ -567,7 +567,12 @@ surviving platforms through the station and the USGS quadrangles of 1934 and 195
 loop, gathering into four and then two within 110 m of each end. Canopies are cut into 12 m
 pieces, each on a column, 8 m wide and 5.4 m up; trains are a steam engine (18 m, with a
 cab), its tender (11 m) and 26 m heavyweight cars, 1 m apart. At 1.5 pixels per meter or
-closer, track is drawn with its ties (0.25 m every 0.67 m) and its two rails, 1.44 m apart.
+closer, track is drawn with its ties and its two rails, 1.44 m apart. Each tie is a rectangle
+on the ground, 2 m across the track and 0.25 m along it, square to the track where it stands
+and spaced every 0.67 m along the whole line (the spacing carries on through bends), so it
+foreshortens with the view like everything else; the strips paint the ties with the ground.
+The rails are the center line offset 0.72 m each way on the ground, mitered at bends so they
+have no gap or jog. Farther out, ties are a dashed line along the track.
 A series can draw track wider than life (`railScale`, or `--rail-scale` for one build) and in
 the ties' darker tone, so a network reads across a city: the wide railroad map uses four
 times. Curated labels name places on the map; the single-place prints of a set leave them
