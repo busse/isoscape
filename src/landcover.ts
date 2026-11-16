@@ -125,3 +125,81 @@ export const coverSampler = (l: Landcover) => (lon: number, lat: number): number
   if (x < 0 || y < 0 || x >= l.width || y >= l.height) return 0
   return l.codes[y * l.width + x]
 }
+
+/**
+ * How far the cover's 30 m cells are blurred before their edges are traced: a Gaussian of this
+ * many meters (0.4 of a cell). A diagonal edge of the source, a staircase of 30 m steps,
+ * comes out within about a meter and a half of a straight line, and a lone 30 m cell still
+ * keeps a patch of its own (it holds about 60% of the weight at its middle).
+ */
+export const COVER_BLUR = 12
+
+/**
+ * Each cover group's field over the grid nodes, traced at one half: above it the group
+ * outweighs every other group, and bare ground, once the classes are blurred over COVER_BLUR
+ * meters. Each boundary between two groups is then where the two weigh the same, the same
+ * line seen from both sides, so neighboring patches meet without a gap or an overlap.
+ * Nodes for which `skip` holds (open water, unknown) carry no weight either way: cover reaches
+ * the shore and the shoreline cuts it there.
+ */
+export const coverFields = (
+  cover: ArrayLike<number>, nx: number, ny: number, cell: number, skip: (k: number) => boolean, sigma = COVER_BLUR,
+): Map<CoverGroup, Float32Array> => {
+  const n = nx * ny
+  const groups = COVER_ORDER.filter((g) => {
+    for (let k = 0; k < n; k++) if (!skip(k) && COVER_OF[cover[k]] === g) return true
+    return false
+  })
+  const out = new Map<CoverGroup, Float32Array>()
+  if (groups.length === 0) return out
+  // Weights of a Gaussian across nodes, out to three sigma.
+  const reach = Math.max(1, Math.ceil((3 * sigma) / cell))
+  const kernel: number[] = []
+  for (let d = -reach; d <= reach; d++) kernel.push(Math.exp(-((d * cell) ** 2) / (2 * sigma * sigma)))
+  const tmp = new Float32Array(n)
+  const blur = (a: Float32Array): Float32Array => {
+    for (let j = 0; j < ny; j++) {
+      for (let i = 0; i < nx; i++) {
+        let s = 0
+        for (let d = -reach; d <= reach; d++) {
+          const ii = i + d
+          if (ii >= 0 && ii < nx) s += a[j * nx + ii] * kernel[d + reach]
+        }
+        tmp[j * nx + i] = s
+      }
+    }
+    const b = new Float32Array(n)
+    for (let j = 0; j < ny; j++) {
+      for (let i = 0; i < nx; i++) {
+        let s = 0
+        for (let d = -reach; d <= reach; d++) {
+          const jj = j + d
+          if (jj >= 0 && jj < ny) s += tmp[jj * nx + i] * kernel[d + reach]
+        }
+        b[j * nx + i] = s
+      }
+    }
+    return b
+  }
+  const valid = new Float32Array(n)
+  for (let k = 0; k < n; k++) valid[k] = skip(k) ? 0 : 1
+  const weight = blur(valid)
+  // Each group's share, then bare ground's (every other land class) as one more.
+  const shares = [...groups, null].map((g) => {
+    const ind = new Float32Array(n)
+    for (let k = 0; k < n; k++) if (valid[k] === 1 && (COVER_OF[cover[k]] ?? null) === g) ind[k] = 1
+    const b = blur(ind)
+    for (let k = 0; k < n; k++) b[k] = weight[k] > 1e-6 ? b[k] / weight[k] : 0
+    return b
+  })
+  groups.forEach((g, gi) => {
+    const f = new Float32Array(n)
+    for (let k = 0; k < n; k++) {
+      let other = 0
+      for (let h = 0; h < shares.length; h++) if (h !== gi && shares[h][k] > other) other = shares[h][k]
+      f[k] = weight[k] > 1e-6 ? 0.5 + shares[gi][k] - other : 0
+    }
+    out.set(g, f)
+  })
+  return out
+}

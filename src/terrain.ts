@@ -42,6 +42,11 @@ export interface Terrain {
   readonly cover: Uint8Array
   /** Scene z of the water surface at a point; the ground's own z where there is no water near. */
   readonly waterZ: (p: Vec2) => number
+  /**
+   * The shoreline field at each node: one half on the mapped shoreline, more over water, less
+   * on land (see `traceShore`); 0 everywhere until the shore is traced.
+   */
+  readonly shore: Float32Array
   readonly datum: number
   readonly exaggeration: number
   readonly flat: boolean
@@ -96,7 +101,34 @@ export const makeTerrain = (
     return a * (1 - tx) * (1 - ty) + b * tx * (1 - ty) + c * (1 - tx) * ty + d * tx * ty
   }
   const level = new Float32Array(nx * ny).fill(NaN)
-  const z = (p: Vec2) => (elevation(p) - datum) * exaggeration
+  const shore = new Float32Array(nx * ny)
+  const ground = (p: Vec2) => (elevation(p) - datum) * exaggeration
+  /**
+   * The drawn ground meets the water at the traced shoreline: over the water side of it, the
+   * ground lies on the water's surface, and on the land side it rises from that surface to its
+   * own height a cell inland (see shoreRise). Without this a shoreline between two grid nodes
+   * was draped partway up the bank, at a height that changed with where it crossed each cell.
+   */
+  const edge = SHORE_EDGE
+  const z = (p: Vec2): number => {
+    const fx = Math.min(nx - 1.001, Math.max(0, (p[0] - x0) / cell))
+    const fy = Math.min(ny - 1.001, Math.max(0, (p[1] - y0) / cell))
+    const i = Math.floor(fx)
+    const j = Math.floor(fy)
+    const k = j * nx + i
+    const a = shore[k]
+    const b = shore[k + 1]
+    const c = shore[k + nx]
+    const d = shore[k + nx + 1]
+    // Far from any shore (the field is low at all four corners), the ground is the ground.
+    if (a < edge && b < edge && c < edge && d < edge) return ground(p)
+    const tx = fx - i
+    const ty = fy - j
+    const wet = a * (1 - tx) * (1 - ty) + b * tx * (1 - ty) + c * (1 - tx) * ty + d * tx * ty
+    const surface = waterZ(p)
+    if (wet >= 0.5) return surface
+    return surface + (ground(p) - surface) * shoreRise(wet)
+  }
   const waterZ = ([e, n]: Vec2): number => {
     const fx = Math.min(nx - 1.001, Math.max(0, (e - x0) / cell))
     const fy = Math.min(ny - 1.001, Math.max(0, (n - y0) / cell))
@@ -110,7 +142,7 @@ export const makeTerrain = (
       const v = level[(j + dj) * nx + i + di]
       if (!Number.isNaN(v) && wt > 0) { s += v * wt; w += wt }
     }
-    return w > 0 ? (s / w - datum) * exaggeration : z([e, n])
+    return w > 0 ? (s / w - datum) * exaggeration : ground([e, n])
   }
   return {
     cell, nx, ny, x0, y0, elev, filled,
@@ -123,6 +155,7 @@ export const makeTerrain = (
     cover: new Uint8Array(nx * ny),
     level,
     waterZ,
+    shore,
     datum,
     exaggeration,
     flat: sample === null,
@@ -212,7 +245,7 @@ export const nodeShade = (t: Terrain, light: readonly [number, number, number]):
   const z = new Float32Array(nx * ny)
   const clampI = (i: number) => Math.max(0, Math.min(nx - 1, i))
   const clampJ = (j: number) => Math.max(0, Math.min(ny - 1, j))
-  const raw = (i: number, j: number) => t.elev[clampJ(j) * nx + clampI(i)]
+  const raw = (i: number, j: number) => drawnElevation(t, clampJ(j) * nx + clampI(i))
   for (let j = 0; j < ny; j++) {
     for (let i = 0; i < nx; i++) {
       let sum = 0
@@ -712,4 +745,123 @@ export const stillWater = (t: Terrain, rings: Vec2[][][]): void => {
     t.elev[k] = low
     t.level[k] = low
   }
+}
+
+/**
+ * Mapped water the lidar gave back to the land (see settleWater) is still drawn as water, up
+ * to the outline, if it stands no more than this many meters above the river and lies within
+ * SHORE_CELLS cells of the outline: the two often disagree by a few meters, and the outline is
+ * the smoother line. Higher (a bluff the outline overlaps, a creek in its ravine) or further
+ * out (a bar or a rock in midstream), it stays land.
+ */
+const SHORE_BANK = 1.5
+/** The shoreline field reaches this many cells either side of the line (see `shoreField`). */
+const SHORE_CELLS = 2
+/** In the field, 1 is this many cells: field = 0.5 ± distance / (SHORE_REACH · cell). */
+const SHORE_REACH = 2 * SHORE_CELLS
+/**
+ * The drawn ground rises from the water's surface at the shoreline to its own height one cell
+ * inland, in proportion to the distance: as a fraction of that rise, at a field value `wet`.
+ */
+export const shoreRise = (wet: number): number => Math.max(0, Math.min(1, (0.5 - wet) * SHORE_REACH))
+/** At or below this field value (a cell or more inland) the drawn ground is the ground. */
+const SHORE_EDGE = 0.5 - 1 / SHORE_REACH
+
+/** Elevation of the drawn ground at node k: eased to the water's surface near the shore. */
+export const drawnElevation = (t: Terrain, k: number): number => {
+  const f = t.shore[k]
+  const e = t.elev[k]
+  if (f <= SHORE_EDGE || Number.isNaN(t.level[k])) return e
+  return t.level[k] + (e - t.level[k]) * shoreRise(f)
+}
+
+/** Trace the shoreline into `t.shore`, so the drawn ground meets the water on it. */
+export const traceShore = (t: Terrain, water: readonly (readonly Ring[])[], islands: readonly (readonly Ring[])[]): void => {
+  if (t.flat) return
+  t.shore.set(shoreField(t, water, islands))
+}
+
+/**
+ * Where the shoreline runs, as a field over the grid nodes that is one half on it.
+ *
+ * The water grid knows only which nodes are wet, so a shoreline traced from it alone can pass
+ * only halfway between a wet node and a dry one: a shore running slantwise across the grid
+ * came out as a staircase, a run of nodes long and a cell high, and on a print the bank read as
+ * a saw. The mapped outline knows better. Each node's field is its signed distance to the
+ * nearest edge of the mapped water and islands (wet nodes positive), over SHORE_CELLS cells
+ * either way, so the one-half line traced between nodes is the outline itself, straight edges
+ * exactly. Where the lidar moved the shore (see SHORE_BANK), the grid decides, and near those
+ * nodes the line is traced as before, through the wet and dry nodes smoothed over 3 × 3.
+ */
+export const shoreField = (
+  t: Terrain,
+  water: readonly (readonly Ring[])[],
+  islands: readonly (readonly Ring[])[],
+): Float32Array => {
+  const { nx, ny, cell } = t
+  const reach = SHORE_CELLS * cell
+  const dist = new Float32Array(nx * ny).fill(reach)
+  for (const rings of [...water, ...islands]) {
+    for (const r of rings) {
+      for (let k = 0, m = r.length - 1; k < r.length; m = k++) {
+        const [ax, ay] = r[m]
+        const [bx, by] = r[k]
+        const i0 = Math.max(0, Math.floor((Math.min(ax, bx) - reach - t.x0) / cell))
+        const i1 = Math.min(nx - 1, Math.ceil((Math.max(ax, bx) + reach - t.x0) / cell))
+        const j0 = Math.max(0, Math.floor((Math.min(ay, by) - reach - t.y0) / cell))
+        const j1 = Math.min(ny - 1, Math.ceil((Math.max(ay, by) + reach - t.y0) / cell))
+        const dx = bx - ax
+        const dy = by - ay
+        const len2 = dx * dx + dy * dy
+        for (let j = j0; j <= j1; j++) {
+          const y = t.y0 + j * cell
+          for (let i = i0; i <= i1; i++) {
+            const x = t.x0 + i * cell
+            const u = len2 > 0 ? Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / len2)) : 0
+            const d = Math.hypot(x - ax - dx * u, y - ay - dy * u)
+            const q = j * nx + i
+            if (d < dist[q]) dist[q] = d
+          }
+        }
+      }
+    }
+  }
+  // Which nodes the outline itself holds, before the lidar corrected it.
+  const mapped = { ...t, water: new Uint8Array(nx * ny) }
+  rasterize(mapped, water, 1)
+  rasterize(mapped, islands, 0)
+  // The outline decides which side a node is on, unless the lidar put the node on the bank
+  // and it stands well clear of the water (a creek in its ravine, a bluff the outline
+  // overlaps). There the grid decides, and the line is traced as it was before the outline
+  // was read: where the grid's water, smoothed over 3 × 3 nodes (weights 4, 2, 1), is one half.
+  const wet = new Uint8Array(nx * ny)
+  const byGrid = new Uint8Array(nx * ny)
+  for (let q = 0; q < wet.length; q++) {
+    const outline = mapped.water[q] === t.water[q] || (dist[q] < reach && t.elev[q] - t.level[q] <= SHORE_BANK)
+    wet[q] = outline ? mapped.water[q] : t.water[q]
+    byGrid[q] = outline ? 0 : 1
+  }
+  const out = new Float32Array(nx * ny)
+  for (let j = 0; j < ny; j++) {
+    for (let i = 0; i < nx; i++) {
+      const q = j * nx + i
+      let near = false
+      let sum = 0
+      let wsum = 0
+      for (let dj = -1; dj <= 1; dj++) {
+        for (let di = -1; di <= 1; di++) {
+          const ii = i + di
+          const jj = j + dj
+          if (ii < 0 || jj < 0 || ii >= nx || jj >= ny) continue
+          const k = jj * nx + ii
+          if (byGrid[k] === 1) near = true
+          const w = di === 0 && dj === 0 ? 4 : di === 0 || dj === 0 ? 2 : 1
+          sum += wet[k] * w
+          wsum += w
+        }
+      }
+      out[q] = near ? sum / wsum : 0.5 + (wet[q] === 1 ? 1 : -1) * (dist[q] / (SHORE_REACH * cell))
+    }
+  }
+  return out
 }

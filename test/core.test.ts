@@ -257,9 +257,10 @@ test('render: with terrain, a park drawn around a lake is painted under the lake
   const scene = buildScene({ ...region, snap: false, width: 300, depth: 300, terrain: { cell: 5 } }, parseOsm(json), pal, () => 10)
   const { svg } = renderSvg(scene)
   let both = 0
-  for (const g of svg.matchAll(/<g data-strip="[^"]*"[^>]*>(.*?)<\/g>/gs)) {
-    const lawn = g[1].indexOf('class="green"')
-    const lake = g[1].indexOf('class="Lw"')
+  // Each strip's own markup runs to the next strip's (strips hold groups of their own).
+  for (const g of svg.split('<g data-strip=').slice(1)) {
+    const lawn = g.indexOf('class="green"')
+    const lake = g.indexOf('class="Lw"')
     if (lawn < 0 || lake < 0) continue
     both++
     assert.ok(lawn < lake, 'the lawn comes first in its strip, and the lake over it')
