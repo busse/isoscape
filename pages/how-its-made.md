@@ -432,19 +432,28 @@ through sixteen street corners, each snapped to the city's block outlines); and
 
 **Era rules** date everything else that OSM maps: the first rule matching a feature's name,
 `ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
-Downtown Expressway from 1976, the river viaducts from 1901. The James River and Kanawha Canal
-appears from 1800 until the railroad took it over, and again from the Canal Walk of 1999.
-Features no rule matches are drawn in every year, which suits the street grid. Paths and other
-undated features are drawn only today.
+Downtown Expressway from 1976, the river viaducts from 1901, today's Mayo Bridge from 1913 (its
+earlier wooden spans are not drawn). The James River and Kanawha Canal appears from 1800 until
+the railroad took it over, and again from the Canal Walk of 1999. Interchange ramps follow the
+interstate and parking aisles and driveways follow surface parking (1950); both dates are
+approximate. A feature no rule matches is drawn in every year, so the Richmond series ends its
+rules with catch-alls: the street grid, streams and the river are drawn in every year, and
+anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basins, paths) is
+drawn only today, since nothing says when it was made. Each catch-all names what still needs a
+source.
 
 In every scene after the first, buildings **new since the previous scene** have gold roofs.
 
 **Streets before the houses.** A series can say that minor streets (tertiary and smaller,
 service roads and paths) are drawn only where a building of the year stands within so many
-meters of them: 75 m in the 1925 streetcar scene. Each street is walked every half that
-distance and kept if any building (standing today and built by then, or traced from a Sanborn
-sheet and still standing) has a corner within one grid cell of a step. A suburb whose streets
-were laid out but not yet built on shows its main roads only.
+meters of them: 75 m in the 1925 streetcar scene, 60 m in the downtown series. Each street is
+walked every half that distance and kept if any building (standing today and built by then,
+traced from a Sanborn sheet and still standing, or a curated landmark) has a corner within one
+grid cell of a step. A suburb whose streets were laid out but not yet built on shows its main
+roads only. The downtown series holds its main roads to the same test, because before the
+first Sanborn map (1886) the only record of how far the town reached is what still stands. A
+street of a town plan (Mayo's grid of 1737) is kept in every year from the plan on, houses or
+not, though not the plan's service roads. Today's scene keeps all of today's streets.
 
 **Streetcar lines.** A curated `streetcar` item is a line drawn as a bold red ribbon down the
 street, 9 m wide, with a car every 900 m along it: 14 m long and 3.6 m tall like a 1920s

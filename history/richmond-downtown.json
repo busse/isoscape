@@ -2,6 +2,8 @@
  "title": "Downtown Richmond through time",
  "method": "Curated outlines are placed from today's OpenStreetMap street intersections (e.g. the corner of 20th and Cary) and the dimensions the sources give; they are not surveyed. Era rules match OSM names, refs and tags; the first match wins.",
  "present": 2026,
+ "streetsNearBuildings": 60,
+ "majorStreetsNearBuildings": true,
  "about": "Each scene draws the buildings standing today that had been built by its year (dated by OSM start_date, else the City of Richmond assessor's year built), plus the curated features below. Buildings since demolished appear only where curated. The ground is today's.",
  "epochs": [
   {
@@ -474,11 +476,11 @@
    },
    "eras": [
     [
-     1788,
+     1913,
      null
     ]
    ],
-   "note": "A bridge has stood here since John Mayo Jr.'s of 1788; today's dates from 1913.",
+   "note": "The bridge drawn is today's, of 1913. A bridge has stood near here since John Mayo Jr.'s toll bridge of 1788, but its earlier wooden spans are not drawn, so scenes before 1913 show no bridge here.",
    "sources": [
     "https://historicrichmond.com/property/mayo-bridge/"
    ]
@@ -557,7 +559,7 @@
      null
     ]
    ],
-   "note": "The elevated viaducts and the Triple Crossing were built with Main Street Station, opened 1901.",
+   "note": "The elevated viaducts and the Triple Crossing were built with Main Street Station, opened 1901. Rail bridges over the James (the Bellwood Subdivision and Richmond District crossings) are each one OSM way with their viaducts, so they are dated with them; no source here dates the river crossings themselves (undated: needs a source).",
    "sources": [
     "https://www.richmondrailroadmuseum.com/railroad-history",
     "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
@@ -577,6 +579,43 @@
    "sources": [
     "https://en.wikipedia.org/wiki/Richmond,_Fredericksburg_and_Potomac_Railroad"
    ]
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "trunk_link",
+     "primary_link",
+     "secondary_link",
+     "tertiary_link"
+    ]
+   },
+   "eras": [
+    [
+     1958,
+     null
+    ]
+   ],
+   "note": "Ramps and turning roads of the interchanges, dated with the turnpike: approximate, not sourced."
+  },
+  {
+   "where": {
+    "tag": "service",
+    "is": [
+     "parking_aisle",
+     "driveway",
+     "drive-through",
+     "parking",
+     "emergency_access"
+    ]
+   },
+   "eras": [
+    [
+     1950,
+     null
+    ]
+   ],
+   "note": "Parking aisles, driveways and drive-throughs, dated with surface parking: approximate, not sourced."
   },
   {
    "where": {
@@ -628,6 +667,112 @@
     ]
    ],
    "note": "Road bridges not named above (over the rail lines and the interstate) are dated with the viaducts: approximate."
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "trunk",
+     "primary",
+     "secondary",
+     "tertiary",
+     "residential",
+     "unclassified",
+     "living_street",
+     "service"
+    ]
+   },
+   "eras": [
+    [
+     null,
+     null
+    ]
+   ],
+   "note": "The street grid is drawn in every year, within the town plan while it stands and, for minor streets, only beside a building of the year (streetsNearBuildings)."
+  },
+  {
+   "where": {
+    "tag": "highway"
+   },
+   "eras": [],
+   "note": "Any other way (construction, elevators, platforms): not dated, drawn today only."
+  },
+  {
+   "where": {
+    "tag": "waterway",
+    "is": [
+     "river",
+     "stream",
+     "riverbank"
+    ]
+   },
+   "eras": [
+    [
+     null,
+     null
+    ]
+   ],
+   "note": "Natural water courses are drawn in every year."
+  },
+  {
+   "where": {
+    "tag": "waterway"
+   },
+   "eras": [],
+   "note": "Dams, weirs, canals, drains and ditches not dated above (the Manchester Canal, the Hollywood and VEPCO dams among them): no source here dates them, so they are drawn today only. Undated: each needs a source."
+  },
+  {
+   "where": {
+    "tag": "water",
+    "is": [
+     "basin",
+     "wastewater",
+     "pond",
+     "lake",
+     "reservoir",
+     "reflecting_pool",
+     "fountain",
+     "canal"
+    ]
+   },
+   "eras": [],
+   "note": "Basins, ponds, pools and canal beds not dated above: drawn today only."
+  },
+  {
+   "where": {
+    "tag": "man_made"
+   },
+   "eras": [],
+   "note": "Piers, bridge outlines and other works: not dated, drawn today only."
+  },
+  {
+   "where": {
+    "tag": "leisure"
+   },
+   "eras": [],
+   "note": "Parks, playgrounds, sports fields and gardens: no source here dates them (Capitol Square, Libby Hill and Chimborazo parks among them), so they are drawn today only. Undated: each needs a source."
+  },
+  {
+   "where": {
+    "tag": "landuse",
+    "is": [
+     "cemetery",
+     "grass",
+     "flowerbed",
+     "recreation_ground",
+     "village_green",
+     "basin"
+    ]
+   },
+   "eras": [],
+   "note": "Cemeteries and laid-out grounds: no source here dates them (St. John's churchyard among them), so they are drawn today only. Undated: each needs a source."
+  },
+  {
+   "where": {
+    "tag": "amenity"
+   },
+   "eras": [],
+   "note": "Other amenities (fountains, plazas): not dated, drawn today only."
   }
  ],
  "dates": [

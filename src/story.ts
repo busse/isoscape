@@ -90,6 +90,9 @@ export const makeStory = (ctx: StoryContext): ((build: unknown, tag?: string) =>
           (isNum(s.streetcarScale) && s.streetcarScale !== 1 ? ', all drawn ' + esc(s.streetcarScale) + ' times life size so they read at this scale' : '') + '.' +
           (isNum(s.unbuiltStreets) && s.unbuiltStreets > 0 ? ' Small streets are drawn only where a house of the year stood nearby: ' + int(s.unbuiltStreets) + ' laid out since are left off.' : '') + '</p>')
       }
+      if (!(s.streetcarLines > 0) && isNum(s.unbuiltStreets) && s.unbuiltStreets > 0) {
+        out.push('<p><b>Streets:</b> a street is drawn only where a building of the year stood within reach of it or the town plan laid it out: ' + int(s.unbuiltStreets) + ' of today’s are left off. Whatever the era rules do not date (parks, cemeteries, dams, piers, parking aisles) is drawn in today’s scene only.</p>')
+      }
       if (s.parts > 0 || s.canopyPieces > 0 || s.trainPieces > 0) {
         out.push('<p><b>Modeled close up:</b> ' + plural(s.parts || 0, 'part') + ' of one building, each from its plans and photographs, in the building’s own colors' +
           (s.canopyPieces > 0 ? '; ' + plural(s.canopyPieces, 'piece') + ' of platform canopy' : '') +

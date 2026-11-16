@@ -3,7 +3,7 @@ import { test } from 'node:test'
 import { mkdtemp, mkdir, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { alive, dateBuildings, featureAlive, loadYearBuilt, parseYear, yearBuiltDirs, type History, type Parcel } from '../src/history.ts'
+import { alive, dateBuildings, dropUnbuiltStreets, featureAlive, loadYearBuilt, parseYear, yearBuiltDirs, type History, type Parcel } from '../src/history.ts'
 import type { LineFeature, PolygonFeature } from '../src/osm.ts'
 import { asOf } from '../src/scene.ts'
 
@@ -97,4 +97,48 @@ test('year built is read from the region\'s own data folder first, then the shar
   got = await loadYearBuilt(yearBuiltDirs({ name: 'time', data: 'shared' }, root), 'Y', 'time')
   assert.equal(got.parcels[0].year, 1850)
   await assert.rejects(loadYearBuilt(yearBuiltDirs({ name: 'none', data: 'nowhere' }, root), 'Y', 'none'), /no year-built data/)
+})
+
+test('streets before the houses: a plan vouches for its grid; main roads only when asked', () => {
+  const street = (id: string, highway: string, x: number, extra: Record<string, string> = {}): LineFeature =>
+    ({ type: 'line', id, tags: { highway, ...extra }, points: [[x, 0], [x, 0.001]] })
+  const house = building('h', 0.01, 0.0005, 0.00005)
+  const feats = [
+    house,
+    street('near', 'residential', 0.01),          // beside the house
+    street('far', 'residential', 0.02),           // no house within 60 m
+    street('planned', 'residential', 0.03),       // inside the plan
+    street('planned-aisle', 'service', 0.0301, { service: 'parking_aisle' }), // a plan lays out no aisles
+    street('main', 'primary', 0.04),              // a main road with no house
+  ]
+  const plan: [number, number][] = [[0.029, -0.001], [0.032, -0.001], [0.032, 0.002], [0.029, 0.002]]
+  const ids = (r: { kept: readonly { id: string }[] }) => r.kept.map((f) => f.id).sort()
+  assert.deepEqual(ids(dropUnbuiltStreets(feats, 60)), ['h', 'main', 'near'])
+  assert.deepEqual(ids(dropUnbuiltStreets(feats, 60, [], [plan])), ['h', 'main', 'near', 'planned'])
+  assert.deepEqual(ids(dropUnbuiltStreets(feats, 60, [], [plan], true)), ['h', 'near', 'planned'])
+  // A curated or traced building counts as a house.
+  assert.deepEqual(ids(dropUnbuiltStreets(feats, 60, [[0.02, 0.0005]])), ['far', 'h', 'main', 'near'])
+})
+
+test('a dated series: what no rule dates is drawn today only, except the street grid and natural water', async () => {
+  const { loadHistory } = await import('../src/history.ts')
+  const h = await loadHistory('history/richmond-downtown.json')
+  const line = (tags: Record<string, string>): LineFeature => ({ type: 'line', id: 'x', tags, points: [[0, 0], [1, 1]] })
+  const area = (tags: Record<string, string>): PolygonFeature => ({ type: 'polygon', id: 'y', tags, outers: [square(0, 0, 1)], inners: [] })
+  for (const [f, early, why] of [
+    [line({ highway: 'residential' }), true, 'a street'],
+    [line({ highway: 'service', service: 'parking_aisle' }), false, 'a parking aisle'],
+    [line({ highway: 'primary_link' }), false, 'an interchange ramp'],
+    [line({ highway: 'construction' }), false, 'a road being built'],
+    [line({ waterway: 'stream' }), true, 'a stream'],
+    [line({ waterway: 'dam' }), false, 'an undated dam'],
+    [line({ man_made: 'pier' }), false, 'a pier'],
+    [area({ leisure: 'park' }), false, 'an undated park'],
+    [area({ landuse: 'cemetery' }), false, 'an undated cemetery'],
+    [area({ natural: 'water', water: 'river' }), true, 'the river'],
+    [area({ natural: 'wood' }), true, 'woods'],
+    [line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), false, 'the 1913 Mayo Bridge in 1900'],
+  ] as const) assert.equal(featureAlive(f, 1900, h), early, why)
+  assert.ok(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1913, h))
+  assert.ok(featureAlive(area({ leisure: 'park' }), 2026, h))
 })

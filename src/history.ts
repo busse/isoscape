@@ -143,6 +143,11 @@ export interface History {
    */
   readonly streetsNearBuildings?: number
   /**
+   * Hold main roads (trunk, primary, secondary) to the same test: for a series whose early
+   * scenes have no map of the town's extent but its surviving buildings and its plan.
+   */
+  readonly majorStreetsNearBuildings?: boolean
+  /**
    * Draw streetcar lines and cars this many times life size, so they read in a city-wide view
    * (default 1).
    */
@@ -164,6 +169,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(),
     dates: raw.dates ?? [], ...(raw.sanborn === undefined ? {} : { sanborn: raw.sanborn }), traced,
     ...(raw.streetsNearBuildings === undefined ? {} : { streetsNearBuildings: raw.streetsNearBuildings }),
+    ...(raw.majorStreetsNearBuildings === undefined ? {} : { majorStreetsNearBuildings: raw.majorStreetsNearBuildings }),
     ...(raw.streetcarScale === undefined ? {} : { streetcarScale: raw.streetcarScale }),
     ...(raw.railScale === undefined ? {} : { railScale: raw.railScale }),
   }
@@ -214,14 +220,23 @@ export const featureAlive = (f: Feature, year: number, h: History): boolean => {
 
 const MINOR_STREETS = new Set(['tertiary', 'tertiary_link', 'residential', 'service', 'unclassified', 'living_street', 'track', 'footway', 'path', 'cycleway', 'pedestrian', 'steps', 'bridleway'])
 
+/** Main roads, held to the same test only where a series asks (`majorStreetsNearBuildings`). */
+const MAJOR_STREETS = new Set(['trunk', 'primary', 'secondary'])
+
+/** Streets a town plan lays out: a plan's own grid, never its service roads or paths. */
+const PLANNED_STREETS = new Set(['tertiary', 'residential', 'unclassified', 'living_street'])
+
 /**
  * Drop minor streets with no building within `meters` (of the buildings still in `features`,
  * plus `extra` points, such as buildings traced from old maps). A street in a 1925 scene with
- * no 1925 house anywhere along it was most likely laid out later. Returns the kept features
- * and how many streets were dropped.
+ * no 1925 house anywhere along it was most likely laid out later. A street of the plan's kind
+ * (a main road, tertiary, residential, unclassified, living) inside a town plan already laid
+ * out (`plans`, lon/lat rings) is kept without houses: the plan is the record that it was laid
+ * out. With `major`, main roads (trunk, primary, secondary) must pass the test too. Returns the
+ * kept features and how many streets were dropped.
  */
 export const dropUnbuiltStreets = (
-  features: readonly Feature[], meters: number, extra: readonly Vec2[] = [],
+  features: readonly Feature[], meters: number, extra: readonly Vec2[] = [], plans: readonly (readonly Vec2[])[] = [], major = false,
 ): { kept: Feature[]; dropped: number } => {
   let lat0 = 0
   let n = 0
@@ -249,7 +264,8 @@ export const dropUnbuiltStreets = (
   }
   let dropped = 0
   const kept = features.filter((f) => {
-    if (f.type !== 'line' || !MINOR_STREETS.has(f.tags.highway ?? '')) return true
+    if (f.type !== 'line' || !(MINOR_STREETS.has(f.tags.highway ?? '') || (major && MAJOR_STREETS.has(f.tags.highway ?? '')))) return true
+    if ((PLANNED_STREETS.has(f.tags.highway ?? '') || MAJOR_STREETS.has(f.tags.highway ?? '')) && f.points.some((p) => plans.some((r) => pointInRing(p, r as Vec2[])))) return true
     // Walk the street every half-cell, so a long block with one house still counts.
     for (let i = 0; i < f.points.length; i++) {
       const a = f.points[i]
