@@ -209,7 +209,7 @@ def main():
         wmax = max(font('bold', WF).getlength(ln) + 3 * len(ln) for ln in lines)
         lh = WF * 1.42
         x0, y0 = {
-            'top-right': (ART_R - wmax, top + 60),
+            'top-right': (ART_R - wmax, top - 215),
             'bottom-right': (ART_R - wmax, iso_rect[1] + iso_rect[3] + 70),
             'bottom-left': (M + 20, iso_rect[1] + iso_rect[3] + 70),
         }[wf['place']]
