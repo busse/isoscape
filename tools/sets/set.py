@@ -491,6 +491,20 @@ def compose_map(dpi, S, sc, pts):
     return img
 
 
+def inked(scene, ink, px_per_unit, dpi):
+    """The scene's source with its ink lines (the `.i` class) no heavier than `ink`
+    pixels at 300 dpi (a set's `box_ink`): a box cut close from a big map enlarges its strokes
+    with its ground, so a 1,100 m box drew them three times as heavy as one from a close region.
+    None (no `box_ink`, or strokes already that thin): the source as it is."""
+    if not ink: return None
+    src = scene.src
+    def scaled(m):
+        w = float(m.group(2))
+        cap = ink * dpi / 300 / px_per_unit
+        return m.group(1) + (f'{cap:.3f}' if w > cap else m.group(2))
+    return re.sub(r'(\.i\{[^}]*?stroke-width:)([0-9.]+)', scaled, src, count=1)
+
+
 def compose_box(dpi, S, sc, s, pt):
     I = lambda v: v * dpi
     W, H = round(I(24)), round(I(18))
@@ -501,7 +515,8 @@ def compose_box(dpi, S, sc, s, pt):
     d = ImageDraw.Draw(img)
     iw, ih = W - 2 * m, I(12.6)
     scene = sc.get(s, fine=True)
-    img.paste(scene.render(scene.window(pt, s.get('ground', S.ground['box']), iw / ih), round(iw), round(ih)), (round(m), round(m)))
+    win = scene.window(pt, s.get('ground', S.ground['box']), iw / ih)
+    img.paste(scene.render(win, round(iw), round(ih), inked(scene, S.cfg.get('box_ink'), iw / win[2], dpi)), (round(m), round(m)))
     d.rectangle((m, m, m + iw, m + ih), outline=INK, width=max(1, round(I(0.01))))
     ty = m + ih + I(0.35)
     r = I(0.3)

@@ -322,5 +322,6 @@
   "box_line": "{subtitle}. Place {n} of fourteen on Broad Street Station, 1943.",
   "credit_extra": "Station loop after the USGS Richmond quadrangles of 1934 and 1956, with the sources cited for each place on the <a href=\"https://busse.github.io/isoscape/#/broad-street\">Broad Street page ↗</a>.",
   "print_dir": "print-files/broad-street-1943"
- }
+ },
+ "box_ink": 3
 }
