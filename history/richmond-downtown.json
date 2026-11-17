@@ -1587,6 +1587,181 @@
    "year": null,
    "source": "https://smandf.com/portfolio/700-centre-tower-annex",
    "note": "The seven-story annex of the 1913 tower at 700 E. Franklin St.; no source found gives its year (the assessor's is the tower's lot, 1913). Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w113029210",
+   "name": "Federal Reserve Bank Building",
+   "year": 1978,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "701 East Byrd Street, 1978 (Wikipedia's list of Richmond's tallest buildings)."
+  },
+  {
+   "id": "w225274657",
+   "name": "Riverfront Plaza, West Tower",
+   "year": 1990,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "901 East Byrd Street, 1990 (the assessor's parcel gives 1989)."
+  },
+  {
+   "id": "w266759715",
+   "name": "Riverfront Plaza, East Tower",
+   "year": 1990,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "951 East Byrd Street, 1990."
+  },
+  {
+   "id": "w225274664",
+   "name": "One James Center",
+   "year": 1985,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "901 East Cary Street, 1985 (the assessor's parcel gives 1984)."
+  },
+  {
+   "id": "w365156598",
+   "name": "Two James Center",
+   "year": 1987,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "1021 East Cary Street, 1987."
+  },
+  {
+   "id": "w365156601",
+   "name": "Omni Richmond Hotel",
+   "year": 1987,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "100 South 12th Street, 1987."
+  },
+  {
+   "id": "w365156600",
+   "name": "Three James Center",
+   "year": 1987,
+   "source": "https://en.wikipedia.org/wiki/James_Center",
+   "note": "The James Center's four buildings were all finished by 1987 (Wikipedia, James Center); the year of this one alone is not given, so 1987 is the latest it can be: approximate."
+  },
+  {
+   "id": "w236488160",
+   "name": "Wytestone Plaza",
+   "year": 1965,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "801 East Main Street, 1965."
+  },
+  {
+   "id": "w263127156",
+   "name": "700 East Main Street",
+   "year": 1964,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "700 East Main Street (the Holiday Inn), 1964."
+  },
+  {
+   "id": "w263135040",
+   "name": "Seventh & Franklin Building",
+   "year": 1967,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "701 East Franklin Street, 1967."
+  },
+  {
+   "id": "w264523632",
+   "name": "Delta Hotel (formerly Crowne Plaza)",
+   "year": 1986,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "555 East Canal Street, 1986."
+  },
+  {
+   "id": "w365155755",
+   "name": "Truist Place",
+   "year": 1983,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "919 East Main Street, 1983 (the assessor's parcel gives 1982)."
+  },
+  {
+   "id": "w236488177",
+   "name": "Truist Place (SunTrust Plaza), outline",
+   "year": 1983,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "919 East Main Street, 1983."
+  },
+  {
+   "id": "w365155758",
+   "name": "One Capitol Square",
+   "year": 1964,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "830 East Main Street, 1964 (the assessor's parcel gives 1965)."
+  },
+  {
+   "id": "w252837449",
+   "name": "One Capitol Square, outline",
+   "year": 1964,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "830 East Main Street, 1964."
+  },
+  {
+   "id": "w365615561",
+   "name": "Eighth & Main Building",
+   "year": 1975,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "707 East Main Street, 1975 (the assessor's parcel gives 1976)."
+  },
+  {
+   "id": "w236488161",
+   "name": "Eighth & Main Building, outline",
+   "year": 1975,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "707 East Main Street, 1975."
+  },
+  {
+   "id": "w236488158",
+   "name": "Main Street Centre",
+   "year": 1986,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "600 East Main Street, 1986 (the assessor's parcel gives 1985)."
+  },
+  {
+   "id": "w264502225",
+   "name": "Central National Bank Building",
+   "year": 1930,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "219 East Broad Street, 1930 (OSM gives 1929)."
+  },
+  {
+   "id": "w365155733",
+   "name": "Richmond City Hall",
+   "year": 1971,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "900 East Broad Street, 1971."
+  },
+  {
+   "id": "w365155721",
+   "name": "Richmond Marriott",
+   "year": 1984,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "500 East Broad Street, 1984 (the assessor's parcel gives 1990)."
+  },
+  {
+   "id": "w264518644",
+   "name": "The Towers on Franklin (Trolley Square)",
+   "year": 1963,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "104 West Franklin Street, 1963."
+  },
+  {
+   "id": "w113038421",
+   "name": "VDOT Annex Building",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/113038421",
+   "note": "Eight levels or more, dated only by its parcel (the assessor's year), and no source found for its year: drawn in today's scene only, as the rule for tall buildings asks."
+  },
+  {
+   "id": "w252837448",
+   "name": "7 North 8th Street parking deck",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/252837448",
+   "note": "Eight levels or more, dated only by its parcel (the assessor's year), and no source found for its year: drawn in today's scene only, as the rule for tall buildings asks."
+  },
+  {
+   "id": "w264525429",
+   "name": "6th & Main Parking Deck",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/264525429",
+   "note": "Eight levels or more, dated only by its parcel (the assessor's year), and no source found for its year: drawn in today's scene only, as the rule for tall buildings asks."
   }
  ],
  "sanborn": {

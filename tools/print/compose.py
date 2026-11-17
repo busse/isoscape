@@ -198,10 +198,11 @@ def compose(design, size, builds, regions, dpi, scale=1.0, min_scale=1.0, faces=
                 d.text((tx, y0 + round(ch) + label_h * 0.3), p['sub'], font=fi, fill=DIM)
     # title band
     by = H - m - band
-    tf = text_fit(d, design['title'], FONT['bold'], round(band * 0.42), area_w * 0.62)
-    d.text((m, by + band * 0.18), design['title'], font=tf, fill=INK)
-    sf = text_fit(d, design.get('subtitle', ''), FONT['italic'], round(band * 0.2), area_w * 0.62)
-    d.text((m, by + band * 0.18 + tf.size * 1.25), design.get('subtitle', ''), font=sf, fill=DIM)
+    tband = title_band(design, W, H)
+    tf = text_fit(d, design['title'], FONT['bold'], round(tband * 0.42), area_w * 0.62)
+    d.text((m, by + tband * 0.18), design['title'], font=tf, fill=INK)
+    sf = text_fit(d, design.get('subtitle', ''), FONT['italic'], round(tband * 0.2), area_w * 0.62)
+    d.text((m, by + tband * 0.18 + tf.size * 1.25), design.get('subtitle', ''), font=sf, fill=DIM)
     cf = text_fit(d, CREDIT, FONT['regular'], round(band * 0.085), area_w * 0.36)
     least = dpi * scale * CREDIT_MIN_PT / 72 / min_scale      # CREDIT_MIN_PT at the smallest size sold
     if CREDIT_DERIVED and min_scale < 1 and cf.size < least and not two_lines_reach(d, band, area_w, least):
@@ -233,6 +234,13 @@ def compose(design, size, builds, regions, dpi, scale=1.0, min_scale=1.0, faces=
     return sheet
 
 
+def title_band(design, W, H):
+    """The band height the title and subtitle are sized for: the design's "titleBand", else its
+    band. A design that sets its credit below the subtitle (`credit_below`) needs a taller band
+    for it without a taller title."""
+    return round(min(W, H) * design.get('titleBand', design.get('band', 0.11)))
+
+
 def two_lines_reach(d, band, area_w, least):
     """Whether the credit fits on two lines of the band's column at `least` px or more."""
     size = round(band * 0.085)
@@ -245,11 +253,15 @@ def credit_column(d, design, W, H, m, by, band, dpi, scale, least, sf, faces):
     the column from the end of the title and subtitle to the title block's reserved corner."""
     size = int(-(-least // 1))
     cf, nf = ImageFont.truetype(FONT['regular'], size), ImageFont.truetype(FONT['italic'], size)
-    tf = text_fit(d, design['title'], FONT['bold'], round(band * 0.42), (W - 2 * m) * 0.62)
+    tf = text_fit(d, design['title'], FONT['bold'], round(title_band(design, W, H) * 0.42), (W - 2 * m) * 0.62)
     left = m + max(d.textlength(design['title'], font=tf), d.textlength(design.get('subtitle', ''), font=sf)) + band * 0.5
     right = W - m - block_reserve(max(W, H) / (dpi * scale), dpi, scale, faces)
     lines, note = credit_lines(d, design, cf, nf, right - left)
     ly, lead = by + band * 0.15, size * 1.35
+    if design.get('credit') == 'below':
+        # A design that asks for it (a portrait sheet whose title fills the band's width) sets the
+        # credit and note under the subtitle, left-aligned, as wide as the title block's corner allows.
+        return credit_below(d, design, W, H, m, by, band, size, cf, nf, tf, sf, right)
     if ly + lead * (len(lines) + len(note) - 1) + size * 1.1 + (size * 0.35 if note else 0) > H - m:
         # A long subtitle leaves too narrow a column: set the credit on wide lines instead.
         return credit_wide(d, design, W, H, m, by, band, dpi, scale, size, cf, nf, tf, sf, faces)
@@ -281,6 +293,21 @@ def block_top(H, m, long_in, dpi, scale, faces):
         clear = 4 * (-(-bh // 4) + int(bh * 0.35 / 4) + 1 + 1)
         best = min(best, H - m - clear * k)
     return best
+
+
+def credit_below(d, design, W, H, m, by, band, size, cf, nf, tf, sf, right):
+    """The credit (and note) at `size` px under the subtitle, left-aligned at the margin, on lines
+    as wide as from the margin to the title block's reserved corner (`right`): for a design with
+    "credit": "below" (Then & Now, a portrait sheet whose title spans the band). The band must be
+    tall enough to hold them (the design's "band")."""
+    lines, note = credit_lines(d, design, cf, nf, right - m)
+    lead = size * 1.35
+    ly = by + title_band(design, W, H) * 0.18 + tf.size * 1.25 + sf.size * 1.25 + size * 0.4
+    if ly + lead * (len(lines) + len(note) - 1) + size * 1.1 + (size * 0.35 if note else 0) > H - m:
+        raise ValueError(f"{design['title']}: the credit at {size} px needs a taller band")
+    for i, (ln, f) in enumerate(lines + note):
+        if note and i == len(lines): ly += size * 0.35
+        d.text((m, ly), ln, font=f, fill=DIM); ly += lead
 
 
 def credit_wide(d, design, W, H, m, by, band, dpi, scale, size, cf, nf, tf, sf, faces):
