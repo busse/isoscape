@@ -11229,6 +11229,24 @@
  "rules": [
   {
    "where": {
+    "id": [
+     "w38231003",
+     "w132598295"
+    ]
+   },
+   "eras": [
+    [
+     1973,
+     null
+    ]
+   ],
+   "note": "The unnamed ramps of the Manchester Bridge, dated with it.",
+   "sources": [
+    "https://rvamag.com/news/community/rva-5x5-the-history-of-the-mayo-bridge.html"
+   ]
+  },
+  {
+   "where": {
     "name": "North Arthur Ashe Boulevard",
     "bridge": true
    },
