@@ -25,7 +25,7 @@ import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
 import { cutawayItems, partSolids, partTones, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
-import { alive, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
+import { alive, dropUnbuiltStreets, featureAlive, laterWorks, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
 export interface TimeContext {
@@ -142,7 +142,13 @@ export const buildScene = (
 ): Scene => {
   const time = extra.time
   const curated = time === undefined ? [] : time.history.features.filter((h) => alive(h.from, h.to, time.year))
-  if (time !== undefined) features = asOf(features, time)
+  let later = { atGrade: 0, verges: 0 }
+  if (time !== undefined) {
+    const all = features
+    const r = laterWorks(all, asOf(all, time), time.year, time.history)
+    features = r.kept
+    later = { atGrade: r.atGrade, verges: r.verges }
+  }
   let unbuiltStreets = 0
   // Today's scene draws today's streets, built on or not.
   if (time !== undefined && time.history.streetsNearBuildings !== undefined && time.year < time.history.present) {
@@ -159,7 +165,7 @@ export const buildScene = (
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)
   const frame = view.frame
-  const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}) }
+  const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}), ...(later.atGrade ? { bridgesAtGrade: later.atGrade } : {}), ...(later.verges ? { vergesLater: later.verges } : {}) }
   const opts = region.terrain ?? {}
   const useTerrain = elevation !== null && region.terrain !== undefined && opts.enabled !== false
   const terrain = makeTerrain(view, opts.cell ?? 5, useTerrain ? (opts.exaggeration ?? 2) : 1, useTerrain ? elevation : null)
@@ -404,6 +410,12 @@ export const buildScene = (
   // above its roof. Parts that are only roofs (building:part=roof) never replace the building
   // under them: it stays, as their podium.
   const areaOf = (s: Solid) => Math.abs(signedArea(s.outer))
+  // Heights: a curated one for a building in a dated series (`History['dates']`), else the tags'.
+  const heightOf = new Map((time?.history.dates ?? []).flatMap((d) => (d.height === undefined ? [] : [[d.id, d.height] as const])))
+  const heightsOf = (s: { id: string; tags: Solid['tags'] }, area: number): ReturnType<typeof buildingHeights> => {
+    const h = heightOf.get(s.id)
+    return h === undefined ? buildingHeights(s.tags, area, region.checkLevels === true) : { base: 0, top: h, source: 'height' }
+  }
   // Every outline holding a part's centroid, smallest first.
   const holders = new Map<Solid, Solid[]>()
   for (const p of keptParts) {
@@ -416,7 +428,7 @@ export const buildScene = (
   for (const s of solids) {
     const mine = keptParts.filter((p) => p.tags['building:part'] !== 'roof' && (holders.get(p) ?? []).includes(s))
     if (mine.length === 0) continue
-    const grounded = mine.filter((p) => buildingHeights(p.tags, areaOf(p)).base < 0.5).map((p) => p.outer)
+    const grounded = mine.filter((p) => heightsOf(p, areaOf(p)).base < 0.5).map((p) => p.outer)
     if (groundCover(s.outer, s.inners, grounded) >= PARTS_REPLACE) replaced.add(s)
     else underParts++
   }
@@ -431,8 +443,8 @@ export const buildScene = (
     if (!inFrame(hs[0])) return false
     const kept = hs.filter((s) => !replaced.has(s))
     if (kept.length === 0 || isShellRoof(p.tags)) return true
-    const roofTop = Math.max(...kept.map((s) => buildingHeights(s.tags, areaOf(s)).top))
-    const own = buildingHeights(p.tags, areaOf(p))
+    const roofTop = Math.max(...kept.map((s) => heightsOf(s, areaOf(s)).top))
+    const own = heightsOf(p, areaOf(p))
     if (own.top <= roofTop + 0.5) return false
     if (own.base < roofTop) floorOf.set(p, roofTop)
     return true
@@ -468,7 +480,7 @@ export const buildScene = (
     const outer = orient(simplifyRing(s.outer, 0.45), true)
     if (outer.length < 3) continue
     const inners = s.inners.map((h) => orient(simplifyRing(h, 0.45), false)).filter((h) => h.length >= 3)
-    const own = buildingHeights(s.tags, area)
+    const own = heightsOf(s, area)
     const floor = floorOf.get(s)
     const h = floor === undefined ? own : { ...own, base: floor }
     if (!Number.isFinite(h.base) || !Number.isFinite(h.top)) continue
@@ -481,7 +493,9 @@ export const buildScene = (
     const gMin = Math.min(...grounds)
     const gMean = grounds.reduce((a, b) => a + b, 0) / grounds.length
     const holder = holders.get(s)?.[0]
-    const level = seatLevel(holder === undefined ? grounds : holder.outer.map((p) => terrain.z(p)), terrain.exaggeration)
+    const level = holder === undefined
+      ? seatLevel(region.seatOnBanks === true && spansWater(s.tags, outer, (p) => onWater(sc, p)) ? bankGrounds(outer, grounds, (p) => onWater(sc, p)) : grounds, terrain.exaggeration)
+      : seatLevel(holder.outer.map((p) => terrain.z(p)), terrain.exaggeration)
     // A bridge tower's lowest mapped parts stand on the ground or water: OSM often maps a
     // tower's legs from the pier top up and leaves the pier out. A part is lowest when no part
     // of a bridge tower within `TOWER_REACH` of it starts lower (struts between the legs do).
@@ -489,7 +503,7 @@ export const buildScene = (
       if (o === s || !isBridgeTower(o.tags)) return false
       const c = centroid(s.outer)
       if (!o.outer.some((p) => Math.hypot(p[0] - c[0], p[1] - c[1]) < TOWER_REACH)) return false
-      return buildingHeights(o.tags, Math.abs(signedArea(o.outer))).base < h.base
+      return heightsOf(o, Math.abs(signedArea(o.outer))).base < h.base
     })
     const base = h.base > 0 && !footed ? level + h.base : gMin
     const top = Math.max(level + h.top, base + 2.5)
@@ -514,7 +528,7 @@ export const buildScene = (
       // Seat the shell on the roof of the building it stands on, if any.
       const c = centroid(outer)
       const under = solids.find((o) => o !== s && pointInRing(c, o.outer) && shown.includes(o))
-      const podium = under === undefined ? 0 : buildingHeights(under.tags, Math.abs(signedArea(under.outer))).top
+      const podium = under === undefined ? 0 : heightsOf(under, Math.abs(signedArea(under.outer))).top
       entries.push(spire(view, pal, s.id, outer, gMin + podium, gMean + podium + SHELL_RISE * Math.sqrt(area), dotsMode, s.tags.name, (t) => 1 - t * 0.97, false, 4))
     } else {
       const span = s.tags.building === 'bridge' || s.tags['building:part'] === 'bridge' || s.tags.man_made === 'bridge' || isBridge(s.tags)
@@ -674,11 +688,31 @@ export const buildScene = (
       if (done.sections.length > 0) sectionsOut = done.sections
     }
     // Buildings traced from fire-insurance maps that are gone today, in the maps' colors.
+    // A sheet gives a building but not the shore it stood on: one with half its footprint or
+    // more on water drawn in its year (today's river and canals, or a curated basin) would stand
+    // in the water, so it is left out and counted (`tracedOnWater`).
     const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
+    let tracedOnWater = 0
+    // A rail viaduct standing in the year runs where a traced building stood: the building was
+    // cleared for it (most were mapped before the viaducts of 1901) or the sheet misplaces it.
+    // Drawn, its piers pass through the roof, so it is left out and counted (`tracedUnderViaduct`).
+    const viaducts = features.filter((f): f is LineFeature => f.type === 'line' && f.tags.railway !== undefined && isBridge(f.tags))
+      .map((f) => f.points.map(([lon, lat]) => view.toView(lon, lat)))
+    const underViaduct = (ring: Ring): boolean => viaducts.some((pts) => pts.some((p) => pointInRing(p, ring)) ||
+      pts.slice(1).some((q, i) => ring.some((a, k) => segmentsCross(pts[i], q, a, ring[(k + 1) % ring.length]))))
+    let tracedUnderViaduct = 0
     for (const b of time.history.traced) {
       if (!alive(b.from, b.to, time.year)) continue
       const outer = orient(simplifyRing(toViewRing(view, b.ring), 0.3), true)
       if (outer.length < 3 || !outer.every((p) => insideRect(p, frame))) continue
+      if (wetShare(outer, (p) => onWater(sc, p)) >= 0.5) {
+        tracedOnWater++
+        continue
+      }
+      if (underViaduct(outer)) {
+        tracedUnderViaduct++
+        continue
+      }
       const grounds = outer.map((p) => terrain.z(p))
       const base = Math.min(...grounds)
       const top = Math.max(seatLevel(grounds, terrain.exaggeration) + b.storeys * 3.6, base + 2.5)
@@ -686,6 +720,8 @@ export const buildScene = (
       ends[b.end]++
     }
     stats.traced = ends.map + ends.rebuilt + ends.highway + ends.assumed
+    if (tracedOnWater > 0) stats.tracedOnWater = tracedOnWater
+    if (tracedUnderViaduct > 0) stats.tracedUnderViaduct = tracedUnderViaduct
     stats.tracedEndMap = ends.map
     stats.tracedEndRebuilt = ends.rebuilt
     stats.tracedEndHighway = ends.highway
@@ -833,6 +869,50 @@ export const seatLevel = (grounds: readonly number[], exaggeration: number): num
   const lo = Math.min(...grounds)
   const hi = Math.max(...grounds)
   return lo + (hi - lo) / (2 * Math.max(1, exaggeration))
+}
+
+/**
+ * Does a building span water? OSM says so with a `layer` of 1 or more (it stands over
+ * something), and the water under its center says what: a mill or a house built over a canal
+ * or a race. Such a building stands on the banks, and the ground under its middle is the
+ * water's bed, so it counts its height from the banks (`bankGrounds`).
+ */
+export const spansWater = (tags: Readonly<Record<string, string>>, outer: Ring, wet: (p: Vec2) => boolean): boolean => {
+  const layer = parseInt(tags.layer ?? '', 10)
+  return Number.isFinite(layer) && layer >= 1 && wet(centroid(outer))
+}
+
+/** Do segments ab and cd cross (not merely touch at an end)? */
+export const segmentsCross = (a: Vec2, b: Vec2, c: Vec2, d: Vec2): boolean => {
+  const o = (p: Vec2, q: Vec2, r: Vec2) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
+  return o(a, b, c) * o(a, b, d) < 0 && o(c, d, a) * o(c, d, b) < 0
+}
+
+/** The share of a footprint on water, from 0 to 1, sampled on a grid of about 100 points (its centroid alone if too small to sample). */
+export const wetShare = (outer: Ring, wet: (p: Vec2) => boolean): number => {
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+  for (const [x, y] of outer) {
+    minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y)
+  }
+  const step = Math.max(0.25, Math.sqrt(((maxX - minX) * (maxY - minY)) / 100))
+  let inside = 0
+  let wetCount = 0
+  for (let y = minY + step / 2; y < maxY; y += step) {
+    for (let x = minX + step / 2; x < maxX; x += step) {
+      const p: Vec2 = [x, y]
+      if (!pointInRing(p, outer)) continue
+      inside++
+      if (wet(p)) wetCount++
+    }
+  }
+  if (inside === 0) return wet(centroid(outer)) ? 1 : 0
+  return wetCount / inside
+}
+
+/** The ground under a building's corners on land, or all of them if none is on land. */
+export const bankGrounds = (outer: Ring, grounds: readonly number[], wet: (p: Vec2) => boolean): number[] => {
+  const dry = grounds.filter((_, i) => !wet(outer[i]))
+  return dry.length > 0 ? dry : [...grounds]
 }
 
 /**

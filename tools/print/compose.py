@@ -6,6 +6,9 @@ laid out on a sheet at an exact Printful size, at 300 dpi, with a paper margin, 
 and the credit line every print must carry (OpenStreetMap is ODbL: produced works must credit
 it). The art is vector, so each panel is rasterized straight to the pixels it fills.
 
+A design with a "note" prints it in italics under the credit line: what the print does not show
+as it was (in a dated view of Richmond, that the ground is today's).
+
 A design with "contain": true shows its region whole, letterboxed in the panel area, instead of
 cropping it to the panel's shape (for very long views on a panorama sheet).
 
@@ -173,8 +176,23 @@ def compose(design, size, builds, regions, dpi, scale=1.0):
     ly = by + band * 0.22
     for ln in lines:
         d.text((W - m - d.textlength(ln, font=cf), ly), ln, font=cf, fill=DIM); ly += cf.size * 1.45
+    if design.get('note'):
+        # What the print does not show as it was (a dated view's ground is today's), under the credit.
+        nf = ImageFont.truetype(FONT['italic'], cf.size)
+        ly += cf.size * 0.35
+        for ln in wrap_words(d, design['note'], nf, area_w * 0.36):
+            d.text((W - m - d.textlength(ln, font=nf), ly), ln, font=nf, fill=DIM); ly += cf.size * 1.45
     d.line((m, by + band * 0.08, W - m, by + band * 0.08), fill=INK, width=max(1, round(short * 0.0012)))
     return sheet
+
+
+def wrap_words(d, text, font, max_w):
+    lines, cur = [], ''
+    for w in text.split():
+        t = w if not cur else cur + ' ' + w
+        if d.textlength(t, font=font) <= max_w: cur = t
+        else: lines.append(cur); cur = w
+    return lines + [cur]
 
 
 def wrap(d, text, font, max_w):

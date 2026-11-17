@@ -375,7 +375,10 @@ stay.
 
 1. a `height` tag, from a survey or a mapper's estimate (a whole building tagged under 2 m,
    or with a height that can't be read, is taken as having none: Los Angeles County's import
-   gives hundreds of hillside houses 0.4 m);
+   gives hundreds of hillside houses 0.4 m). In maps that turn on `checkLevels` (downtown
+   Richmond), an apartment building, dormitory, hotel, house, terrace or office tagged more than
+   5.5 m a floor is taken as mistagged and drawn by its floors instead: there a six-story
+   apartment building is tagged 80 m and a twelve-story one 96 m;
 2. **an estimate from Microsoft's model**, for its own footprints, where it made one;
 3. `building:levels`, at 3.4 m a floor, plus half a floor for each roof level;
 4. **a guess** from the building's type and size: 3.2 m for a shed or anything under 40 m²,
@@ -396,6 +399,13 @@ the rest of the drawn relief goes into the hill on its uphill side, so a two-sto
 steep street stays a two-story house. On flat ground nothing changes. The parts of one
 building all count their heights from the level of its outline, and buildings traced from
 fire-insurance maps and lost landmarks are seated the same way.
+
+A building that spans water, one OpenStreetMap gives a `layer` of 1 or more and that has
+mapped water under its center (a mill or a house over a canal), stands on the banks: in maps
+that turn this on (`seatOnBanks`; downtown Richmond), its height counts from the ground at its
+corners on land, not from the bed of the water under it. Its walls still reach down to the
+water. In downtown Richmond this moves one building, over the Haxall Canal, from a roof below
+the bank in front of it to a roof 4 m above it.
 
 Code: `buildingHeights` in `src/classify.ts`, `extrude` and `spire` in `src/scene.ts`.
 
@@ -604,6 +614,20 @@ Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
    traced in two editions that overlap by more than 85%, keeping the earlier start and the later
    end (`clean.py`: 68 dropped, 170 merged).
 
+A sheet whose fit is known to be wrong is left out until it is placed again, and the history
+file says why: the 1905 sheets 5 and 7, read by eye, put 31 buildings on the Capitol Square
+lawn, so neither is drawn.
+
+A sheet gives the buildings but not the shore they stood on, and the water is today's (or, for
+the canal's Great Basin, an approximate outline). A traced building with half its footprint
+or more on the water drawn in its year would stand in the river, so it is left out, and the
+explorer counts how many: in downtown Richmond 10 in 1886, 3 in 1905, 20 in 1925 and 18 in
+1950, most of them mills on the islands and races above the Mayo Bridge, and warehouses on the
+Great Basin's edge. Likewise a traced building that a rail viaduct standing in its year passes
+over is left out: most were mapped in 1886 or 1895 and cleared for the viaducts of 1901, and
+the rest are misplaced by their sheet; drawn, the viaduct's piers would pass through their roofs
+(in downtown Richmond 21 in 1925 and 11 in 1950).
+
 The historic buildings are sketches, not a survey. A machine traced them from scans of
 fire-insurance maps, so outlines are approximate, heights are guessed from material, and some
 buildings are missing, misplaced or merged. The 1924 overview ("congested district") sheet is
@@ -628,8 +652,16 @@ through sixteen street corners, each snapped to the city's block outlines); and
 Downtown Expressway from 1976, the river viaducts from 1901, today's Mayo Bridge from 1913 (its
 earlier wooden spans are not drawn). The James River and Kanawha Canal appears from 1800 until
 the railroad took it over, and again from the Canal Walk of 1999. Interchange ramps follow the
-interstate and parking aisles and driveways follow surface parking (1950); both dates are
-approximate. A feature no rule matches is drawn in every year, so the Richmond series ends its
+interstate and parking aisles and driveways follow surface parking (1960, the year by which
+traced buildings are assumed cleared); both dates are approximate.
+
+Two more rules look at what lies beside a feature. A road bridge stands only over something
+there in its year: if every road, railway and waterway mapped under a bridge (its spans of one
+street joined end to end) is not yet built, the street is drawn at grade instead, so in 1950
+Broad Street crosses Shockoe Valley on the ground and the streets over the Downtown Expressway
+have no bridges. And woods and scrub with 40% or more of their outline within 20 m of a road
+not yet built are that road's verges (the planted ground of an interchange) and are dated with
+it. A feature no rule matches is drawn in every year, so the Richmond series ends its
 rules with catch-alls: the street grid, streams and the river are drawn in every year, and
 anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basins, paths) is
 drawn only today, since nothing says when it was made. Each catch-all names what still needs a
