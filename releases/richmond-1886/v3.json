@@ -1,0 +1,233 @@
+{
+ "design": "richmond-1886",
+ "title": "Richmond, 1886",
+ "version": 3,
+ "version_note": "redrawn: the James River and Kanawha Canal and what was left of the Great Basin are drawn as water at their own level, with clean banks, as the 1886 Sanborn map shows them (before, a sawtooth bank and broken blue shards); Mayo's Bridge, the Free Bridge of 1873, and the Richmond and Petersburg and Richmond and Danville railroad bridges cross the river; the Seaboard's line (1900) and later platforms are left out; Shockoe Creek runs open; the print says the ground is today's and that traced buildings' heights are assumed from their material.",
+ "recorded": "2026-11-17T14:57:43+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "01a2cb85e39a235725e0bcf216f121dab3bd907b",
+  "subject": "Merge wave4-richmond-early: Richmond 1886, Then & Now and through time corrected (the canal and basin as water of their own, the river's bridges by year with the Free Bridge, the Seaboard and platforms dated, tall buildings sourced, print text); the published 1925 and 1950 scenes unchanged",
+  "dirty": false
+ },
+ "kind": "redraw",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <store>/print-files/drawn/richmond-1886-v3 --only richmond-1886",
+   "python3 tools/print/canvas.py <store>/print-files/drawn/richmond-1886-v3/richmond-1886_36x24.jpg <store>/print-files/drawn/richmond-1886-v3/canvas 18x12 30x20 36x24",
+   "python3 tools/release/stamp.py <store> richmond-1886 --version 3 --base print-files/drawn/richmond-1886-v3"
+  ],
+  "redraw": true,
+  "base_kind": "compose",
+  "previous_record": "releases/richmond-1886/v2.json",
+  "pinned": "panels use the builds named in scenes[].build, not the newest",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond",
+   "piece": "1886",
+   "plate": "RVA-03",
+   "version": "3",
+   "drawn": "2026",
+   "location": "37.534° N 77.427° W",
+   "facing": "351°"
+  },
+  "files": {
+   "richmond-1886-v3_36x24.jpg": {
+    "base": "print-files/drawn/richmond-1886-v3/richmond-1886_36x24.jpg",
+    "base_sha256": "542488bd7d1147bd0581d37c4e3eb2c3f8af5e243b67f92733ca4e751cee4d9a",
+    "at": {
+     "x": 8754,
+     "y": 6604,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   },
+   "richmond-1886-v3_canvas-18x12.jpg": {
+    "base": "print-files/drawn/richmond-1886-v3/canvas/richmond-1886_canvas-18x12.jpg",
+    "base_sha256": "c5ce187b042de87a56a8a047fea29b4f16897d121343b0e51d0e6c02a90394de",
+    "at": {
+     "x": 4475,
+     "y": 3698,
+     "w": 1195,
+     "h": 169,
+     "u": 0.9192,
+     "where": "foot"
+    }
+   },
+   "richmond-1886-v3_canvas-30x20.jpg": {
+    "base": "print-files/drawn/richmond-1886-v3/canvas/richmond-1886_canvas-30x20.jpg",
+    "base_sha256": "bcc302048a8e6f3dc98897c55b349dcc43e51e40c136b4ec9820d9960858d975",
+    "at": {
+     "x": 7611,
+     "y": 5934,
+     "w": 1543,
+     "h": 218,
+     "u": 1.1867,
+     "where": "foot"
+    }
+   },
+   "richmond-1886-v3_canvas-36x24.jpg": {
+    "base": "print-files/drawn/richmond-1886-v3/canvas/richmond-1886_canvas-36x24.jpg",
+    "base_sha256": "04cbc62431b4fe9a0026748c088f06c81d382f0304c3b3e5385e2a71342d5b0b",
+    "at": {
+     "x": 9204,
+     "y": 7054,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-downtown-time",
+   "year": 1886,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093418-richmond-downtown-time-1886/image.svg",
+   "sha256": "17aa0cb0dc84be991713236b6f7b9eb4c0cda827bf1732eacd7840ec5528a4df",
+   "frozen": "data/_releases/scenes/17aa0cb0dc84be991713236b6f7b9eb4c0cda827bf1732eacd7840ec5528a4df.svg",
+   "build": "20261117-093418-richmond-downtown-time-1886",
+   "commit": "01a2cb8",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "caf6b357925e6dc6bfb64097a344425f65a1a789b5e888abd8c99577ebcc35e6",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "tools/print/canvas.py": "7d6950595979a5f62d60b4509ff0b9bf36766594acbc294615eca26883ce283f",
+  "regions/richmond-downtown-time.json": "498df0bb97a286cde8d08816566be631db130090de8a1928fd7f6ba3ee831681",
+  "history/richmond-downtown.json": "168cfd359a00521786d598642759bcf76bb047e103fca95d46d23d2cc9d7f43d",
+  "history/sanborn/lost.geojson": "56e62877646394d1e887b3e5fabf887ce2fca992343d2fb5e25aefe995318a0a"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/richmond-1886-v3_36x24.jpg",
+   "sha256": "e506a532adb6dc767532bda4724aeaedac3dbde01f7821c554a1a42e0d6e0db9",
+   "bytes": 8977513,
+   "printful_file_id": 1114441033
+  },
+  "canvas": [
+   {
+    "file": "print-files/canvas/richmond-1886-v3_canvas-18x12.jpg",
+    "sha256": "da3c26fa2265a23364ba566133c63d92cf35ce4c5fd5e6b3962679c632778132",
+    "bytes": 3259478,
+    "printful_file_id": 1114441251
+   },
+   {
+    "file": "print-files/canvas/richmond-1886-v3_canvas-30x20.jpg",
+    "sha256": "1dc4e7a318e91c08c21ff7e4e83947e0ba264b195fb609f8c2a7c00a87fb2e72",
+    "bytes": 5925245,
+    "printful_file_id": 1114441492
+   },
+   {
+    "file": "print-files/canvas/richmond-1886-v3_canvas-36x24.jpg",
+    "sha256": "8924f3a1dff5ba2852d27c6cd788ec0f2ef3e7b594fbec8c1a9562cfeb9614ca",
+    "bytes": 7478010,
+    "printful_file_id": 1114441849
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Richmond, 1886",
+   "place": "Richmond",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "richmond-1886-v3_36x24.jpg",
+   "canvas": "richmond-1886-v3_canvas-{w}x{h}.jpg",
+   "version": 3,
+   "version_date": "November 17, 2026",
+   "version_note": "redrawn: the James River and Kanawha Canal and what was left of the Great Basin are drawn as water at their own level, with clean banks, as the 1886 Sanborn map shows them (before, a sawtooth bank and broken blue shards); Mayo's Bridge, the Free Bridge of 1873, and the Richmond and Petersburg and Richmond and Danville railroad bridges cross the river; the Seaboard's line (1900) and later platforms are left out; Shockoe Creek runs open; the print says the ground is today's and that traced buildings' heights are assumed from their material.",
+   "plate": "RVA-03",
+   "plate_box": [
+    0.81056,
+    0.91722,
+    0.96704,
+    0.95042
+   ]
+  },
+  "products": [
+   {
+    "handle": "richmond-1886",
+    "id": "gid://shopify/Product/9137908351094",
+    "format": "all (merged)",
+    "status": "DRAFT",
+    "variants": 16
+   },
+   {
+    "handle": "richmond-1886-print",
+    "id": "gid://shopify/Product/9132733726838",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-1886-framed-print",
+    "id": "gid://shopify/Product/9132733857910",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-1886-framed-canvas",
+    "id": "gid://shopify/Product/9132733988982",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1886-v3_36x24-print.jpg?v=1794926871",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1886-v3_36x24-plate.jpg?v=1794926875"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1886-v3_36x24-framed-print-black.jpg?v=1794926882",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1886-v3_36x24-framed-print-white.jpg?v=1794926889",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1886-v3_36x24-plate.jpg?v=1794926875"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1886-v3_36x24-framed-canvas-black.jpg?v=1794926894",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1886-v3_36x24-framed-canvas-white.jpg?v=1794926899",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1886-v3_36x24-plate.jpg?v=1794926875"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 1
+ }
+}

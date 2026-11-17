@@ -18,7 +18,7 @@ part of the picture, whether it was **measured**, **inferred** from a measuremen
 Each build in the explorer also has its own **How this view was made** tab under the picture.
 It gives that view's frame, sources and counts, and links back to the sections here.
 
-![The pipeline: fetch from OpenStreetMap and 3DEP into a local cache, then parse, camera, terrain, scene, order, draw, archive and explorer](pipeline.svg)
+![From data to drawing: fetch from OpenStreetMap and elevation into a local cache, then eight build steps, read, classify, the year, camera, terrain, scene, order and draw, each with its module, into the archived SVG and the explorer; the camera step, view.ts, is marked as the projection](pipeline.svg)
 
 Where to start:
 
@@ -599,9 +599,12 @@ dated 1960 (`parkingFrom`), with surface parking: the parcel's year is its lot's
 building's. Buildings with no year appear only in today's scene.
 
 **Tall buildings are checked one by one.** In downtown Richmond every building 25 m or taller,
-or of eight levels or more, drawn in the 1925 or 1950 scene is dated from a source that names
+or of eight levels or more, drawn in a printed past scene (1865, 1886, and the 1905 to 1990
+panels of *Richmond, 1737–2026*, as well as 1925 and 1950) is dated from a source that names
 it (the National Register nominations for the Main Street Banking district, SkyscraperPage,
-Wikipedia, the SAH Archipedia), or is drawn in today's scene only. The Ross Building at 801
+Wikipedia and its list of Richmond's tallest buildings, the SAH Archipedia), or is drawn in
+today's scene only (three parking decks and an annex of eight levels or more, whose only date
+is their parcel's). The Ross Building at 801
 E. Main (eighteen floors, 1965), which its parcel had put in 1925, now first appears in 1970;
 what stood on its lot before is not known, so the lot is empty in the earlier scenes.
 
@@ -610,6 +613,33 @@ years and sources: a filled canal basin, a burned district, a buried creek, demo
 landmarks drawn from published dimensions in a red-brown tone (a burned shell in ash gray), and
 the town plan, which limits the earliest scene's streets to the original grid. Positions come
 from today's street grid. They are not surveyed.
+
+**Water that is gone.** A filled basin or a canal since drained, drawn on today's ground as it
+lies, came out as a cliff where the ground stands high and as broken shards where it dips. So
+curated water, and mapped water whose era ends before today (the canal's downtown end, 1800 to
+1890), is drawn as still water at its own level: the median of today's ground within 20 m of
+it, less 1 m. Every grid node inside it is that water; out to 20 m from its edge the ground
+eases (a smoothstep in distance) from 1 m above the water back to today's, so a low side
+becomes an embankment and a high one grades down to a clean bank. The Great Basin is drawn
+whole until 1880; in 1886 what was left of it (water between 9th and 10th Streets and a
+narrow basin between 11th and 12th, traced from sheet 11 of the 1886 Sanborn map) and the
+canal's last stretch into it (sheet 10, and the 1886 key map) are drawn as the map shows them.
+A canal mapped only as a line is a blue ribbon on the ground.
+
+**Bridges that are gone.** A curated bridge is drawn as a bridge of today's map would be, from
+its own line: a road or railroad deck at a stated height over the ground or water under it
+(the Free Bridge of 1873 to 1972, 8 m, an assumption), on piers, ramping down to the ground at
+each end, where it lands on a street of its year. Bridges replaced on their old line (Mayo's
+Bridge before 1913, the Richmond and Petersburg bridge before 1902, the Richmond and Danville's
+before the Southern's) are drawn on today's line and height in their years, an
+approximation; none is drawn in 1865, the scene after the fire that burned them. A curated
+item can be held back from builds made before it existed (`"switch"`): it is drawn only in a
+build asked for it by name (`isoscape build --with next`), and the build records that,
+so a print already sold is still made exactly as it was. The Free Bridge is drawn only so: the
+1925 and 1950 prints, version 4, were drawn without it. Its line is approximate, so in builds
+made `--with next,next2` (the 1925 and 1950 prints' version 5) a traced building with any part
+within 12 m of it is left out, as one under a rail viaduct is: otherwise its deck ran over the
+roof of a frame building on the canal bank.
 
 **Traced: buildings from fire-insurance maps.** The Sanborn Map Company drew every building
 in a city's business district for insurers, block by block. Each building appears as a
@@ -696,9 +726,11 @@ through sixteen street corners, each snapped to the city's block outlines); and
 
 **Era rules** date everything else that OSM maps: the first rule matching a feature's name,
 `ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
-Downtown Expressway from 1976, the river viaducts from 1901, today's Mayo Bridge from 1913 (its
-earlier wooden spans are not drawn). The James River and Kanawha Canal appears from 1800 until
-the railroad took it over, and again from the Canal Walk of 1999. Interchange ramps follow the
+Downtown Expressway from 1976, the river viaducts from 1901, Mayo's Bridge from 1788 (today's
+of 1913 drawn for every form, and not in 1865), the Seaboard's line from 1900 and station
+platforms with Main Street Station (1901). The James River and Kanawha Canal's Richmond Dock
+appears from 1800 until the railroad took the canal over, the line of its Tidewater Connection
+from 1854, and the Canal Walk's rebuilt channel from 1999. Interchange ramps follow the
 interstate and parking aisles and driveways follow surface parking (1960, the year by which
 traced buildings are assumed cleared); both dates are approximate.
 
@@ -710,13 +742,15 @@ short span over the canal at Rocketts, which in 1925 and 1950 crossed no canal),
 Broad Street crosses Shockoe Valley on the ground and the streets over the Downtown Expressway
 have no bridges. And woods and scrub with 40% or more of their outline within 20 m of a road
 not yet built are that road's verges (the planted ground of an interchange) and are dated with
-it. A feature no rule matches is drawn in every year, so the Richmond series ends its
+it. (In builds made `--with next`, the corrections made since the 1925 and 1950 prints' version
+4, half the outline within 60 m: the planted banks of the interstate and the expressway that the
+tighter test missed.) A feature no rule matches is drawn in every year, so the Richmond series ends its
 rules with catch-alls: the street grid, streams and the river are drawn in every year, and
 anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basins, paths) is
 drawn only today, since nothing says when it was made. Each catch-all names what still needs a
 source. Railways out of use or taken up today (`abandoned`, `disused`, `razed`) are drawn
 today only, unless a rule dates one from a source (the Richmond and Petersburg bridge over the
-James, 1902–1970, with its approach to Byrd Street Station curated as approximate track, since
+James, 1838–1970 but for its year burned, with its approach to Byrd Street Station curated as approximate track, since
 nothing of it is mapped today): their fragments end in open ground. Roundabouts appear from 1990, when the
 modern roundabout came to the United States, and unnamed service roads of no particular kind
 (the drives and rings of parking lots) with surface parking, from 1960; both are approximate.
@@ -799,7 +833,9 @@ In every scene after the first, buildings **new since the previous scene** have 
 service roads and paths) are drawn only where a building of the year stands within so many
 meters of them: 75 m in the 1925 streetcar scene, 60 m in the downtown series. A bridge is never
 dropped by this test: it crosses water or a valley where no house stands, and its era rule
-alone says when it stood (the Mayo Bridge from 1913). Each street is
+alone says when it stood (Mayo's Bridge from 1788); nor is a street that meets a road bridge
+(the road across Mayo's Island between two spans, a bridge's approach; in builds made `--with
+next`, the whole of that street by name, as Hull Street across Manchester). Each street is
 walked every half that distance and kept if any building (standing today and built by then,
 traced from a Sanborn sheet and still standing, or a curated landmark) has a corner within one
 grid cell of a step. A suburb whose streets were laid out but not yet built on shows its main

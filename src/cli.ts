@@ -20,7 +20,7 @@ import { buildScene, type TimeContext } from './scene.ts'
 import { anchorOf, renderSection, sectionRegion } from './section.ts'
 import { loadSiteConfig, writeSocial } from './social.ts'
 import { pageDates, planStatic, plainLinks, shareDoors, writeStatic } from './static-pages.ts'
-import { dateBuildings, dateGrounds, fetchYearBuilt, loadHistory, loadYearBuilt, yearBuiltDirs, type History, type Parcel } from './history.ts'
+import { dateBuildings, dateGrounds, fetchYearBuilt, loadHistory, loadYearBuilt, switchedOn, yearBuiltDirs, type History, type Parcel } from './history.ts'
 import type { PolygonFeature } from './osm.ts'
 
 const run = promisify(execFile)
@@ -52,6 +52,7 @@ const HELP = `isoscape — isometric dot-and-line views of real places
   --year <yyyy>      build a dated region as it stood in that year
   --streetcar-scale <n>  draw streetcar lines and cars at n times life size
                      (else the history's own streetcarScale)
+  --with <names>     draw the curated features switched on by these names (comma-separated)
   --rail-scale <n>   draw railroad track at n times its width (else the history's railScale)
   --no-archive       do not keep this build in out/builds/
   --out <dir>        output directory (default: out)
@@ -112,6 +113,8 @@ type Inputs = Awaited<ReturnType<typeof loadInputs>>
 let streetcarScale: number | undefined
 /** `--rail-scale`: likewise for railroad track. */
 let railScale: number | undefined
+/** `--with`: curated features switched on by name (see `HistoryFeature.switch`). */
+let switches: string[] = []
 
 const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number, section = false) => {
   const extra: Parameters<typeof buildScene>[4] = { ...inp.extra, ...(section ? { section: true } : {}) }
@@ -119,7 +122,7 @@ const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: nu
     const y = year ?? inp.history.present
     const epoch = inp.history.epochs.find((e) => e.year === y)
     extra.time = {
-      year: y, history: { ...inp.history, ...(streetcarScale === undefined ? {} : { streetcarScale }), ...(railScale === undefined ? {} : { railScale }) }, dates: inp.dates,
+      year: y, history: { ...switchedOn(inp.history, switches), ...(streetcarScale === undefined ? {} : { streetcarScale }), ...(railScale === undefined ? {} : { railScale }) }, dates: inp.dates,
       ...(previous === undefined ? {} : { previous }),
       ...(epoch === undefined ? {} : { title: epoch.title }),
     }
@@ -148,11 +151,13 @@ export const main = async (argv: string[]): Promise<void> => {
       year: { type: 'string' },
       'streetcar-scale': { type: 'string' },
       'rail-scale': { type: 'string' },
+      with: { type: 'string' },
       'site-url': { type: 'string' },
     },
   })
   if (values['streetcar-scale'] !== undefined) streetcarScale = Number(values['streetcar-scale'])
   if (values['rail-scale'] !== undefined) railScale = Number(values['rail-scale'])
+  if (values.with !== undefined) switches = values.with.split(',').map((w) => w.trim()).filter((w) => w.length > 0).sort()
   const [command, name] = positionals
   if (command === undefined || values.help) {
     console.log(HELP)
@@ -321,6 +326,7 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
     title: scene.time === undefined ? scene.region.title : `${scene.region.title}, ${scene.time.year}`,
     palette: paletteName,
     ...(values.note === undefined ? {} : { note: values.note }),
+    ...(switches.length === 0 ? {} : { flags: ['--with', switches.join(',')] }),
     viewBox: rendered.viewBox,
     bearing: scene.view.bearing,
     ms: Math.round(performance.now() - t0),

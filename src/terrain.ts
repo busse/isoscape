@@ -747,6 +747,99 @@ export const stillWater = (t: Terrain, rings: Vec2[][][]): void => {
   }
 }
 
+/** How far above its water a historic water body's bank stands, in meters (`historicWater`). */
+export const HISTORIC_BANK = 1
+/** How far out from a historic water body its bank eases back into today's ground, in meters. */
+export const HISTORIC_BAND = 20
+
+/**
+ * Water that is gone today (a filled canal basin, a canal since drained or rebuilt), drawn in a
+ * past year on today's ground. Today's ground has no bank for it: the basin was filled, the
+ * canal bed cut through or built over, so read as it is, the water's edge comes out as a cliff
+ * where the ground stands high and as broken shards where it dips. Each body is drawn instead
+ * as still water at its own level, with a smooth bank:
+ *
+ * - its level is the median of today's ground in the band around it, less `bank` meters (the
+ *   ground about a filled basin stands near its old banks);
+ * - every node inside it is that water;
+ * - out to `band` meters from its edge, the ground eases from `bank` meters above the water at
+ *   the edge back to today's ground (a smoothstep in distance), raising a low side into an
+ *   embankment and grading a high one down to the water. Today's own water is left alone.
+ *
+ * `bodies` are polygons in view meters (rings), one entry per body. Used only for a dated
+ * scene's past years: nothing of today's has such water.
+ */
+export const historicWater = (t: Terrain, bodies: readonly (readonly Ring[])[], bank = HISTORIC_BANK, band = HISTORIC_BAND): void => {
+  if (t.flat) return
+  const { nx, ny, cell } = t
+  for (const rings of bodies) {
+    const mask = polygonMask(t, [rings])
+    // Distance from each node near the body to its outline.
+    const dist = new Float32Array(nx * ny).fill(Infinity)
+    let i0 = nx, i1 = -1, j0 = ny, j1 = -1
+    for (const r of rings) {
+      for (let k = 0, m = r.length - 1; k < r.length; m = k++) {
+        const [ax, ay] = r[m]
+        const [bx, by] = r[k]
+        const a0 = Math.max(0, Math.floor((Math.min(ax, bx) - band - t.x0) / cell))
+        const a1 = Math.min(nx - 1, Math.ceil((Math.max(ax, bx) + band - t.x0) / cell))
+        const b0 = Math.max(0, Math.floor((Math.min(ay, by) - band - t.y0) / cell))
+        const b1 = Math.min(ny - 1, Math.ceil((Math.max(ay, by) + band - t.y0) / cell))
+        i0 = Math.min(i0, a0); i1 = Math.max(i1, a1); j0 = Math.min(j0, b0); j1 = Math.max(j1, b1)
+        const dx = bx - ax
+        const dy = by - ay
+        const len2 = dx * dx + dy * dy
+        for (let j = b0; j <= b1; j++) {
+          const y = t.y0 + j * cell
+          for (let i = a0; i <= a1; i++) {
+            const x = t.x0 + i * cell
+            const u = len2 > 0 ? Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / len2)) : 0
+            const d = Math.hypot(x - ax - dx * u, y - ay - dy * u)
+            const q = j * nx + i
+            if (d < dist[q]) dist[q] = d
+          }
+        }
+      }
+    }
+    if (i1 < 0) continue
+    const around: number[] = []
+    let inside = 0
+    for (let j = j0; j <= j1; j++) {
+      for (let i = i0; i <= i1; i++) {
+        const q = j * nx + i
+        if (mask[q] === 1) inside++
+        else if (dist[q] <= band && t.water[q] === 0) around.push(t.elev[q])
+      }
+    }
+    if (inside === 0 || around.length === 0) continue
+    around.sort((a, b) => a - b)
+    const level = around[Math.floor(around.length / 2)] - bank
+    const top = level + bank
+    for (let j = j0; j <= j1; j++) {
+      for (let i = i0; i <= i1; i++) {
+        const q = j * nx + i
+        if (mask[q] === 1) {
+          t.water[q] = 1
+          t.rocks[q] = 0
+          t.interior[q] = 0
+          t.flowing[q] = 0
+          t.fall[q] = 0
+          t.elev[q] = level
+          t.level[q] = level
+          continue
+        }
+        if (t.water[q] === 1 || dist[q] > band) continue
+        const s = dist[q] / band
+        const ease = s * s * (3 - 2 * s)
+        t.elev[q] = top + (t.elev[q] - top) * ease
+        // The water's level carried onto the bank, as settleWater carries a river's: the shore is
+        // then traced along the outline, not the grid.
+        if (dist[q] <= SHORE_CELLS * cell) t.level[q] = level
+      }
+    }
+  }
+}
+
 /**
  * Mapped water the lidar gave back to the land (see settleWater) is still drawn as water, up
  * to the outline, if it stands no more than this many meters above the river and lies within

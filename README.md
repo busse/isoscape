@@ -57,8 +57,9 @@ Copernicus's 30 m model for the rest of the world (see [Elevation sources](#elev
 
 **How isoscape was made.** isoscape was built, and the holiday shop is run, in chats with
 Claude, Anthropic's AI, using Claude Opus 5.5, directed and reviewed by Chris Busse. Claude wrote
-the code, traced the historic buildings, laid out the prints, and set up the shop. The maps are
-drawn by software from open data, not by hand; the historic years are machine-traced sketches.
+the code, traced the historic buildings, laid out the prints, and set up the shop. Chris Busse
+draws the maps with isoscape, in code, from open data; nothing is drawn by hand. The historic
+years are machine-traced sketches.
 
 Prints of some of the designs on the isoscape site are sold in a holiday shop at
 [chrisbusse.com](https://chrisbusse.com), open through December 31, 2026; the site links to a
@@ -273,12 +274,22 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   (`tools/cutaway/sheet.py --page`) is the isometric cut alone.
 - `title` is the nav label (default: the first `#` heading). `order` sorts the nav, lowest
   first (default 100); the shipped pages use 10 and 90. `slug` overrides the file name.
+- `unlisted: true` keeps a page out of the nav, the static pages' footers, the front page's
+  plain list and the sitemap, and asks search engines not to index `p/<slug>.html` (`noindex`).
+  It still opens at its address (`#/<slug>`, `p/<slug>.html`, `s/page-<slug>.html`). Use it
+  for a page someone has to read before it goes out, and delete the line to publish it.
+- `schema: FAQPage` gives the static page `FAQPage` JSON-LD in place of `Article`. Each heading
+  that ends in a question mark is a question, and the text under it, up to the next heading, is
+  its answer (`faqEntries` in `src/static-pages.ts`).
 - Section ids follow GitHub's rule (lower case, punctuation dropped, spaces to hyphens), and
   links are written as they would be for GitHub, so the files read the same on GitHub as in
   the explorer.
 - Images must be `.svg`, `.png`, `.jpg` or `.webp` files in `pages/` itself, and are
   embedded as data URIs so the explorer stays one file. An SVG can follow light and dark
   mode with a `prefers-color-scheme` media query, as `pipeline.svg` does.
+  `pipeline.svg` and the FAQ's diagrams (`faq-*.svg`) are written by
+  `node tools/diagrams/faq.ts`, with every color from `src/palette.ts`. Edit the script and run
+  it again. `npm test` fails when a file in `pages/` differs from what the script writes.
 - The converter (`src/markdown.ts`) escapes all text and drops raw HTML and unsafe link
   schemes. Files starting with `_` (drafts) and `README.md` are skipped.
 - `npm test` checks that every in-page link in `pages/` lands on a real section, and that the

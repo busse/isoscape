@@ -376,3 +376,44 @@ test('every page carries a whole preview: absolute URLs, an image in the output,
   // With an encoder installed, previews are JPEGs beside the PNGs.
   if (existsSync(join(out, 'builds', 'l2', 'social.jpg'))) assert.match(door, /og:image" content="https:\/\/example.org\/iso\/builds\/l2\/social.jpg"/)
 })
+
+test('an unlisted page is reachable but named nowhere, and a FAQ page carries FAQPage data', async () => {
+  const { out, pagesDir } = site()
+  writeFileSync(join(pagesDir, 'faq.md'), '---\ntitle: Questions\nunlisted: true\nschema: FAQPage\nsummary: Short answers.\n---\n\n# Questions\n\n*A note.*\n\n## About the maps\n\n### Is it <b>drawn</b> by a model?\n\nNo. The code draws it from `data` & [rules](#about-the-maps):\n\n- one;\n- two.\n\n![A plan](plan.svg)\n\n### Not a question\n\nSkipped.\n\n### Where does it come from?\n\nOpenStreetMap.\n')
+  const pages = loadPages(pagesDir, CONFIG.siteUrl)
+  const faq = pages.find((p) => p.slug === 'faq')
+  assert.equal(faq?.unlisted, true)
+  assert.equal(faq?.schema, 'FAQPage')
+  assert.equal(pages.find((p) => p.slug === 'story')?.unlisted, undefined)
+  const plan = planStatic(BUILDS, pages.map((p) => p.slug), CONFIG.home)
+  await writeStatic(out, BUILDS, plan, CONFIG, { pagesDir })
+
+  // Reachable at its address, kept out of search, and its questions and answers as data.
+  const html = readFileSync(join(out, 'p', 'faq.html'), 'utf8')
+  assert.match(html, /<meta name="robots" content="noindex">/)
+  assert.match(html, /<h3 id="is-it-bdrawnb-by-a-model">/)
+  const ld = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)?.[1] ?? 'null')
+  assert.equal(ld['@type'], 'FAQPage')
+  assert.equal(ld.name, 'Questions')
+  assert.equal(ld.author.name, 'Chris Busse')
+  assert.deepEqual(ld.mainEntity.map((q: { name: string }) => q.name), ['Is it <b>drawn</b> by a model?', 'Where does it come from?'])
+  assert.equal(ld.mainEntity[0].acceptedAnswer.text, 'No. The code draws it from data & rules: one; two.')
+  assert.equal(ld.mainEntity[1]['@type'], 'Question')
+  assert.equal(ld.mainEntity[1].acceptedAnswer['@type'], 'Answer')
+
+  // Named nowhere: not in another page's footer, the sitemap, or the explorer's nav and plain list.
+  const story = readFileSync(join(out, 'p', 'story.html'), 'utf8')
+  assert.doesNotMatch(story, /faq\.html/)
+  assert.doesNotMatch(story, /noindex/)
+  assert.doesNotMatch(readFileSync(join(out, 'sitemap.xml'), 'utf8'), /faq/)
+  assert.ok(!plainLinks(plan, pages, CONFIG.home).some((g) => g.links.some((l) => l.href.includes('faq'))))
+  const explorer = renderExplorer(BUILDS, pages, { plain: plainLinks(plan, pages, CONFIG.home) })
+  assert.match(explorer, /"slug":"faq","title":"Questions","summary":"Short answers\.","file":"pages\/faq\.md","unlisted":true/)
+  assert.match(explorer, /const listed = pages\.filter\(\(p\) => !p\.unlisted\)/)
+  assert.doesNotMatch(explorer.replace(/<script\b[\s\S]*?<\/script>/g, ''), /faq/)
+
+  // A page without the schema stays an Article.
+  const art = JSON.parse(story.match(/<script type="application\/ld\+json">(.*?)<\/script>/)?.[1] ?? 'null')
+  assert.equal(art['@type'], 'Article')
+  assert.throws(() => loadPages(((d) => (writeFileSync(join(d, 'x.md'), '---\nschema: Recipe\n---\n# X\n'), d))(mkdtempSync(join(tmpdir(), 'iso-pages-')))), /schema "Recipe"/)
+})

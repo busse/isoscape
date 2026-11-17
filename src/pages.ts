@@ -12,7 +12,11 @@
  *     ---
  *
  * `social` names a 1200×630 PNG or JPEG beside the page for its link preview; without one, the
- * page's preview uses the site's flagship view. `slug` defaults to the file name, `order` to 100 (lower comes first in the nav). A page is
+ * page's preview uses the site's flagship view. `unlisted: true` keeps a page out of the nav, the
+ * footers, the front page's plain list and the sitemap (and asks search engines not to index its
+ * static page), while it stays reachable at its address: for a page waiting to be reviewed.
+ * `schema: FAQPage` gives the static page FAQPage structured data, read from its headings that
+ * end in a question mark and the text under each. `slug` defaults to the file name, `order` to 100 (lower comes first in the nav). A page is
  * reached at `#/<slug>`, and a section of it at `#/<slug>/<heading-id>`.
  *
  * Links are written as they would be for GitHub, so the files read well there too: `#rapids`
@@ -37,6 +41,10 @@ export interface Page {
   readonly headings: Heading[]
   /** The link-preview image named by `social:`, with its bytes, read from beside the page. */
   readonly social?: { readonly name: string; readonly bytes: Buffer }
+  /** Reachable at its address but listed nowhere (`unlisted: true`). */
+  readonly unlisted?: boolean
+  /** Structured data for the static page beyond `Article` (`schema: FAQPage`). */
+  readonly schema?: 'FAQPage'
 }
 
 export const PAGES_DIR = fileURLToPath(new URL('../pages/', import.meta.url))
@@ -116,6 +124,7 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     if (bytes === null) throw new Error(`pages/${fileName}: social image "${name}" not found beside the page`)
     social = { name, bytes }
   }
+  if (data.schema !== undefined && data.schema !== 'FAQPage') throw new Error(`pages/${fileName}: schema "${data.schema}" is not one isoscape writes (FAQPage)`)
   return {
     slug,
     title: data.title ?? first?.text ?? slug,
@@ -125,6 +134,8 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     html: result.html,
     headings: result.headings,
     ...(social === undefined ? {} : { social }),
+    ...(data.unlisted === 'true' ? { unlisted: true } : {}),
+    ...(data.schema === 'FAQPage' ? { schema: 'FAQPage' as const } : {}),
   }
 }
 

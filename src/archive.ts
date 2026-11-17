@@ -24,6 +24,8 @@ export interface BuildMeta {
   readonly palette: string
   readonly createdAt: string
   readonly note?: string
+  /** Build flags that change the scene (`--with`), as given: a record replays them. */
+  readonly flags?: readonly string[]
   readonly git?: { readonly commit: string; readonly dirty: boolean; readonly subject: string }
   readonly viewBox: readonly [number, number, number, number]
   readonly bearing: number

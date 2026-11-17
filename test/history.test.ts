@@ -151,8 +151,10 @@ test('a dated series: what no rule dates is drawn today only, except the street 
     [area({ landuse: 'cemetery' }), false, 'an undated cemetery'],
     [area({ natural: 'water', water: 'river' }), true, 'the river'],
     [area({ natural: 'wood' }), true, 'woods'],
-    [line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), false, 'the 1913 Mayo Bridge in 1900'],
   ] as const) assert.equal(featureAlive(f, 1900, h), early, why)
+  // Mayo's Bridge stood from 1788, but not in the scene after the fire of April 1865, which burned it.
+  assert.ok(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1886, h))
+  assert.equal(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1865, h), false)
   assert.ok(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1913, h))
   assert.ok(featureAlive(area({ leisure: 'park' }), 2026, h))
 })
@@ -165,7 +167,7 @@ test('service roads can be held to a closer test than streets (serviceNearBuildi
   // With streets kept within 60 m (cells of 60 m, so up to about 120 m), both survive.
   assert.deepEqual(ids(dropUnbuiltStreets(feats, 60)), ['drive', 'h', 'street', 'yard'])
   // Service roads within 25 m: the yard road goes, the drive by the house stays.
-  assert.deepEqual(ids(dropUnbuiltStreets(feats, 60, [], [], false, 25)), ['drive', 'h', 'street'])
+  assert.deepEqual(ids(dropUnbuiltStreets(feats, 60, [], [], false, false, 25)), ['drive', 'h', 'street'])
 })
 
 test('every curated year cites a source, and a curated height says where it comes from', async () => {

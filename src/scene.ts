@@ -19,13 +19,13 @@ import { mix, type Palette } from './palette.ts'
 import type { Region } from './region.ts'
 import { dominantGridAngle, makeView, snapBearing, type View } from './view.ts'
 import { localMetres } from './region.ts'
-import { drawnWet, makeTerrain, rasterize, settleWater, stillWater, traceShore, type Terrain } from './terrain.ts'
+import { drawnWet, makeTerrain, rasterize, historicWater, settleWater, traceShore, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
 import { cutawayItems, partSolids, partTones, shedItems, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
-import { alive, bridgesAtGrade, dropApproaches, dropOrphanBridges, dropUnbuiltStreets, featureAlive, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
+import { alive, bridgeFeature, bridgesAtGrade, dropApproaches, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
 export interface TimeContext {
@@ -152,8 +152,10 @@ export const buildScene = (
   const extraAll: readonly Feature[] | undefined = time === undefined ? undefined : features
   if (time !== undefined) {
     const all = features
-    const r = laterWorks(all, asOf(all, time), time.year, time.history)
-    features = r.kept
+    const r = laterWorks(all, asOf(all, time), time.year, time.history, time.history.vergeReach ?? 20, time.history.vergeShare ?? 0.4)
+    // Curated bridges join the year's ways after the era rules (they carry their own years).
+    const bridges = curated.map(bridgeFeature).filter((f): f is Feature => f !== null)
+    features = bridges.length === 0 ? r.kept : [...r.kept, ...bridges]
     later = { atGrade: r.atGrade, verges: r.verges }
     // A series' own rules for what the era rules cannot see (each off unless its history asks).
     if (time.history.atGrade !== undefined) {
@@ -185,7 +187,7 @@ export const buildScene = (
     const landmarks = curated.filter((h) => h.kind === 'landmark' && h.ring !== undefined).flatMap((h) => h.ring ?? [])
     // A plan's streets stay laid out after the plan stops limiting the town.
     const plans = time.history.features.filter((h) => h.kind === 'plan' && h.ring !== undefined && h.from <= time.year).map((h) => h.ring ?? [])
-    const r = dropUnbuiltStreets(features, time.history.streetsNearBuildings, [...traced, ...landmarks], plans, time.history.majorStreetsNearBuildings === true, time.history.serviceNearBuildings)
+    const r = dropUnbuiltStreets(features, time.history.streetsNearBuildings, [...traced, ...landmarks], plans, time.history.majorStreetsNearBuildings === true, time.history.bridgeStreets === true, time.history.serviceNearBuildings)
     // A street a car line of the year ran along was laid out, houses or not (streetsUnderCars):
     // one with half its points or more within STREET_UNDER_CAR meters of a line is kept.
     if (time.history.streetsUnderCars === true) {
@@ -233,6 +235,8 @@ export const buildScene = (
   const riverWater: Ring[][] = []
   const stillWaters: Ring[][] = []
   const plainWater: Ring[][] = []
+  // Water of a past year that is gone today (see `historicWater`).
+  const historicBodies: Ring[][] = []
   const margin = 40
   const wide = { minX: frame.minX - margin, maxX: frame.maxX + margin, minY: frame.minY - margin, maxY: frame.maxY + margin }
   for (const f of features) {
@@ -247,6 +251,10 @@ export const buildScene = (
     ].filter((r) => r.length >= 3 && Math.abs(signedArea(r)) > 1)
     if (rings.length === 0) continue
     ground.push({ kind, rings })
+    if (kind === 'water' && time !== undefined && featureHistoric(f, time.year, time.history)) {
+      historicBodies.push(rings)
+      continue
+    }
     if (kind === 'water') {
       const flows = waterFlows(f.tags)
       if (flows === true) riverWater.push(rings)
@@ -316,7 +324,7 @@ export const buildScene = (
   rasterize(terrain, stillWaters, 1, false)
   rasterize(terrain, ground.filter((g) => g.kind === 'island').map((g) => g.rings), 0)
   settleWater(terrain, 30, 1.0, opts.rocks !== false)
-  if (!terrain.flat) stillWater(terrain, curated.filter((h) => h.kind === 'water').map(curatedRings))
+  if (!terrain.flat) historicWater(terrain, [...curated.filter((h) => h.kind === 'water').map(curatedRings), ...historicBodies])
   traceShore(terrain, ground.filter((g) => g.kind === 'water').map((g) => g.rings), ground.filter((g) => g.kind === 'island').map((g) => g.rings))
   if (extra.cover !== undefined) {
     for (let j = 0; j < terrain.ny; j++) {
@@ -842,7 +850,8 @@ export const buildScene = (
     // - on track: any part of it within the half width of a rail line of its year, on a viaduct
     //   (its deck, `tracedUnderViaduct`) or on the ground (its ballast, `tracedOnTrack`): the
     //   building was cleared for the line (most were mapped before the viaducts of 1901) or
-    //   the sheet misplaces it;
+    //   the sheet misplaces it; where the series asks (`bridgesClearTraced`), a curated road
+    //   bridge's deck counts as a viaduct's;
     // - buried: today's ground anywhere under it more than TRACED_BURIED meters above
     //   its floor (the level it is seated at), where a later cut or fill (the interstate's)
     //   would bury its walls (`tracedBuried`).
@@ -857,6 +866,10 @@ export const buildScene = (
         .map((f) => ({ pts: f.points.map(([lon, lat]) => view.toView(lon, lat)), half: isBridge(f.tags) ? deckWidth(f.tags) / 2 : 1.6 * railScale, deck: isBridge(f.tags) })),
       ...curated.filter((h) => h.kind === 'rail').flatMap((h) => [...(h.line ? [h.line] : []), ...(h.lines ?? [])])
         .map((run) => ({ pts: run.map(([lon, lat]) => view.toView(lon, lat)), half: 1.6 * railScale, deck: false })),
+      // A curated road bridge's deck, where the series asks (`bridgesClearTraced`).
+      ...(time.history.bridgesClearTraced === true ? curated.map(bridgeFeature) : [])
+        .filter((f): f is LineFeature => f !== null && f.type === 'line' && !isRail(f.tags))
+        .map((f) => ({ pts: f.points.map(([lon, lat]) => view.toView(lon, lat)), half: deckWidth(f.tags) / 2, deck: true })),
     ]
     const works = laterWorkLines(extraAll ?? features, time.year, time.history).map((pts) => pts.map(([lon, lat]) => view.toView(lon, lat)))
     // Canals drawn as ribbons (a canal mapped as a line, not as an area) are water too.
@@ -1778,6 +1791,9 @@ export const chainBridges = (lines: readonly LineFeature[]): BridgeChain[] => {
 
 /** Deck height for a bridge: a named rule, else the default per OSM layer. */
 const deckHeight = (region: Region, chain: BridgeChain): number => {
+  // A curated bridge's own deck (see `bridgeFeature`).
+  const own = Number(chain.line.tags['isoscape:deck'])
+  if (chain.line.tags['isoscape:deck'] !== undefined && Number.isFinite(own)) return own
   for (const rule of region.bridges ?? []) if (chain.names.includes(rule.match.toLowerCase())) return rule.deck
   const layer = Math.max(1, parseInt(chain.line.tags.layer ?? '1', 10) || 1)
   return (region.bridgeDeck ?? 7) * layer
@@ -2350,7 +2366,8 @@ const deckLine = (
   // With `railOnGround` (a past year's scene), a rail deck's grounded end sits on the ground
   // there, where its track runs on: track does not climb a bank to an abutment the way a street
   // runs on at a cut's rim, and seated on the bank its deck ended above the track it joins.
-  const onGround = railOnGround && isRail(chain.line.tags)
+  // A curated bridge (`bridgeFeature`) lands where its line ends, on the street it was drawn to.
+  const onGround = (railOnGround && isRail(chain.line.tags)) || chain.line.tags['isoscape:seat'] === 'ground'
   const startLevel = chain.rampStart ? (onGround ? ground(0) : seat(0)) : fix.start ?? ground(0) + ends.start
   const endLevel = chain.rampEnd ? (onGround ? ground(total) : seat(1)) : fix.end ?? ground(total) + ends.end
   // A joined end's own clearance is what the deck it joins gives it.

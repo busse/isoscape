@@ -668,33 +668,36 @@
  },
  "richmond-1886": {
   "title": "Richmond, 1886",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "richmond-1925": {
   "title": "Richmond, 1925",
-  "current": 4,
+  "current": 5,
   "kind": "redraw",
   "records": [
    "v1.json",
    "v2.json",
    "v3.json",
-   "v4.json"
+   "v4.json",
+   "v5.json"
   ]
  },
  "richmond-1950": {
   "title": "Richmond, 1950",
-  "current": 4,
+  "current": 5,
   "kind": "redraw",
   "records": [
    "v1.json",
    "v2.json",
    "v3.json",
-   "v4.json"
+   "v4.json",
+   "v5.json"
   ]
  },
  "richmond-2026": {
@@ -732,11 +735,12 @@
  },
  "richmond-through-time": {
   "title": "Richmond, 1737–2026",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-01-westhampton": {
@@ -885,11 +889,12 @@
  },
  "then-and-now": {
   "title": "Richmond, Then & Now",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  }
 }
