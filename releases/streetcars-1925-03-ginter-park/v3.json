@@ -1,0 +1,249 @@
+{
+ "design": "streetcars-1925-03-ginter-park",
+ "title": "Ginter Park, Richmond Streetcars 1925",
+ "version": 3,
+ "version_note": "redrawn: car lines run down the middle of divided streets and no longer jog between street pieces; bridges that carry a line are drawn at the line's width; clearings that later roads cut through the woods are filled.",
+ "recorded": "2026-11-17T20:59:56+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "df497c2c6a2b6a332960f1fc689d971c601bd6c6",
+  "subject": "Changes: ten of the streetcar set's stop prints redrawn (STC-02 version 4; STC-03 to -06, -10 to -14 version 3)",
+  "dirty": false
+ },
+ "kind": "redraw",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/sets/set.py streetcars-1925 prepare   # where data/ is cached",
+   "python3 tools/sets/set.py streetcars-1925 boxes ginter-park   # into out/sets/<set>/print (or --dir)",
+   "python3 tools/sets/set.py streetcars-1925 canvas   # into out/sets/<set>/print (or --dir)",
+   "cp <set print>/streetcars-1925-03-ginter-park_24x18.jpg <store>/print-files/streetcars/drawn/streetcars-1925-03-ginter-park-v3/ && cp <set print>/canvas/<the 16x12 24x18 files> <store>/print-files/streetcars/drawn/streetcars-1925-03-ginter-park-v3/canvas/",
+   "python3 tools/release/stamp.py <store> streetcars-1925-03-ginter-park --version 3 --base print-files/streetcars/drawn/streetcars-1925-03-ginter-park-v3"
+  ],
+  "redraw": true,
+  "base_kind": "set",
+  "previous_record": "releases/streetcars-1925-03-ginter-park/v2.json",
+  "pinned": "scenes are the set's scene SVGs below, by SHA-256",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond's Streetcars, 1925",
+   "piece": "Box 3",
+   "plate": "STC-03",
+   "version": "3",
+   "drawn": "2026",
+   "location": "37.584° N 77.451° W",
+   "facing": "0°"
+  },
+  "files": {
+   "streetcars-1925-03-ginter-park-v3_24x18.jpg": {
+    "base": "print-files/streetcars/drawn/streetcars-1925-03-ginter-park-v3/streetcars-1925-03-ginter-park_24x18.jpg",
+    "base_sha256": "efb69135c5112b79add22398a22d0e73bd508723f1e6a8fb29484ee53129f359",
+    "at": {
+     "x": 5596,
+     "y": 4980,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-03-ginter-park-v3_canvas-16x12.jpg": {
+    "base": "print-files/streetcars/drawn/streetcars-1925-03-ginter-park-v3/canvas/streetcars-1925-03-ginter-park_canvas-16x12.jpg",
+    "base_sha256": "562eced1fa8caf3a20cea1ab8398dec65d9be5dfdd9b98788680d34e246e1dbc",
+    "at": {
+     "x": 3975,
+     "y": 3742,
+     "w": 1127,
+     "h": 159,
+     "u": 0.8667,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-03-ginter-park-v3_canvas-24x18.jpg": {
+    "base": "print-files/streetcars/drawn/streetcars-1925-03-ginter-park-v3/canvas/streetcars-1925-03-ginter-park_canvas-24x18.jpg",
+    "base_sha256": "4561b70f869a9f316446eac954878d20e509ed500a108d03c90169a58c4013c3",
+    "at": {
+     "x": 6046,
+     "y": 5430,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925.svg",
+   "sha256": "82a52e94bfc68101d695193e43f9f45d4ee3f6aa2fbd4df1b8ef5fd39781c6c4",
+   "frozen": "data/_releases/scenes/82a52e94bfc68101d695193e43f9f45d4ee3f6aa2fbd4df1b8ef5fd39781c6c4.svg",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [
+    "--streetcar-scale",
+    "1.5"
+   ],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925-fine.svg",
+   "sha256": "55100cc35aa120d42606bfe53e602c0261e2dfacf4b9d854f199a8584d154e65",
+   "frozen": "data/_releases/scenes/55100cc35aa120d42606bfe53e602c0261e2dfacf4b9d854f199a8584d154e65.svg",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "sets/streetcars-1925.json": "b4b3cd09813c238b1c12abca70afb2c61dfe4690103125d447401fb2145226b4",
+  "tools/streetcars/stops.json": "5de22bc934099b6690a640ad4b853964f5a7b9832136779e413e1240ab7efa76",
+  "out/sets/streetcars-1925/points.json": "1f76c732128d3540c5ec142fce6528194a693538d94f3f326fd9eae7a476f4ee",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "tools/sets/set.py": "13f815fff20b4a443ae7eb13de44be08dfae1a27ae6927b74fb05521b2d93e39",
+  "regions/richmond-streetcars.json": "7626b5a4bad6d5b7bdb7ad507f6316ffeb924c9911099605f97814ee2486b7cd",
+  "history/richmond-streetcars.json": "ce16d94da56477b5f46321585896455cb6161073847045fa890631510a689b9f",
+  "history/sanborn/lost.geojson": "56e62877646394d1e887b3e5fabf887ce2fca992343d2fb5e25aefe995318a0a",
+  "history/sanborn/fair-grounds.geojson": "ccab37978983fdf8008d49ee3a453e0259a10b51a3587d945b6fe9a8c3a8abd6"
+ },
+ "data": {
+  "richmond-streetcars": {
+   "snapshot": "data/_releases/richmond-streetcars@6e9297a3959e",
+   "files": {
+    "dem.bin.gz": "84786d9e1fa5ccdb10f4a551a77100fdc1704b71d3f782290e89356111a4a9d0",
+    "osm.json": "7dbe53ef18944a9c025a688b68194b30502add174241cfc70fa4eaf80e967eee",
+    "yearbuilt.json": "add6087d440260fbde74ce64208d372e2520dabf6e52130c350c8fa2c79b4e63"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/streetcars/streetcars-1925-03-ginter-park-v3_24x18.jpg",
+   "sha256": "8d6f8bee68eaf6d5bf703c59e67c517bff7c1e7912cd7a427a37d5bc45cea9c8",
+   "bytes": 3061818,
+   "printful_file_id": 1114842233
+  },
+  "canvas": [
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-03-ginter-park-v3_canvas-16x12.jpg",
+    "sha256": "8aa73d0e0ca33b280b6741f0ec64c18befa62a671ba3a04b9128058a20ce31c1",
+    "bytes": 2130787,
+    "printful_file_id": 1114837086
+   },
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-03-ginter-park-v3_canvas-24x18.jpg",
+    "sha256": "31b73adc67aff2727cf38fb0b98499348da7bab3045cba957f6b8a4b5a37828a",
+    "bytes": 3354788,
+    "printful_file_id": 1114837539
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "place": "Richmond streetcars",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print_dir": "print-files/streetcars",
+   "tags": [
+    "streetcars-1925"
+   ],
+   "credit_extra": "Routes after Harland Bartholomew &amp; Associates for the City Planning Commission, plate 53 (1943), with the sources cited for each stop on the <a href=\"https://busse.github.io/isoscape/#/streetcars\">streetcars page ↗</a>.",
+   "one_mockup": true,
+   "title": "Ginter Park, Richmond Streetcars 1925",
+   "ratio": "3x4",
+   "sizes": [
+    "12x16",
+    "18x24"
+   ],
+   "print": "streetcars-1925-03-ginter-park-v3_24x18.jpg",
+   "canvas": "streetcars-1925-03-ginter-park-v3_canvas-{w}x{h}.jpg",
+   "explore": "richmond-streetcars:1925@777,-789,6",
+   "detail": [
+    0.35,
+    0.2,
+    0.65,
+    0.6
+   ],
+   "version": 3,
+   "version_date": "November 17, 2026",
+   "version_note": "redrawn: car lines run down the middle of divided streets and no longer jog between street pieces; bridges that carry a line are drawn at the line's width; clearings that later roads cut through the woods are filled.",
+   "plate": "STC-03",
+   "plate_box": [
+    0.77722,
+    0.92222,
+    0.96889,
+    0.95833
+   ]
+  },
+  "products": [
+   {
+    "handle": "ginter-park-richmond-streetcars-1925",
+    "id": "gid://shopify/Product/9137910775926",
+    "format": "all (merged)",
+    "status": "ACTIVE",
+    "variants": 10
+   },
+   {
+    "handle": "ginter-park-richmond-streetcars-1925-print",
+    "id": "gid://shopify/Product/9135595552886",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "ginter-park-richmond-streetcars-1925-framed-print",
+    "id": "gid://shopify/Product/9135595618422",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "ginter-park-richmond-streetcars-1925-framed-canvas",
+    "id": "gid://shopify/Product/9135595716726",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-03-ginter-park-v3_24x18-print.jpg?v=1794947304",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-03-ginter-park-v3_24x18-detail.jpg?v=1794947308",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-03-ginter-park-v3_24x18-plate.jpg?v=1794947313"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-03-ginter-park-v3_24x18-framed-print-black.jpg?v=1794947320",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-03-ginter-park-v3_24x18-framed-print-white.jpg?v=1794947325",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-03-ginter-park-v3_24x18-detail.jpg?v=1794947308",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-03-ginter-park-v3_24x18-plate.jpg?v=1794947313"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-03-ginter-park-v3_24x18-framed-canvas-black.jpg?v=1794947329",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-03-ginter-park-v3_24x18-framed-canvas-white.jpg?v=1794947334",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-03-ginter-park-v3_24x18-detail.jpg?v=1794947308",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-03-ginter-park-v3_24x18-plate.jpg?v=1794947313"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-streetcars:1925@777,-789,6"
+ },
+ "restamped": {
+  "files": 3,
+  "matched": 3
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 2
+ }
+}

@@ -754,47 +754,52 @@
  },
  "streetcars-1925-02-fair-grounds": {
   "title": "State Fair Grounds, Richmond Streetcars 1925",
-  "current": 3,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v2.json",
-   "v3.json"
+   "v3.json",
+   "v4.json"
   ]
  },
  "streetcars-1925-03-ginter-park": {
   "title": "Ginter Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-04-barton-heights": {
   "title": "Barton Heights, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-05-highland-park": {
   "title": "Highland Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-06-nine-mile": {
   "title": "Nine Mile Road, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-07-church-hill": {
@@ -826,47 +831,52 @@
  },
  "streetcars-1925-10-woodland-heights": {
   "title": "Woodland Heights, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-11-forest-hill": {
   "title": "Forest Hill Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-12-byrd-park": {
   "title": "Byrd Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-13-the-fan": {
   "title": "The Fan, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-14-broad-laurel": {
   "title": "Broad and Laurel, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-map": {
