@@ -41,25 +41,30 @@ test('a rule can ask that a tag be absent', () => {
   assert.ok(featureAlive(line('b', { highway: 'service', service: 'alley' }, [[0, 0], [1, 1]]), 1925, h))
 })
 
-test('a past year: canal bridges wait, decks with no road go, plantings come with their buildings, spurs need a building', () => {
+test('a past year: canal bridges wait, decks that do not meet a road at both ends go, plantings come with their buildings, spurs need a building', () => {
   const canal = line('canal', { waterway: 'canal' }, [[0, 0], [0.002, 0]])
   const over = line('over', { highway: 'residential', bridge: 'yes' }, [[0.001, -0.0002], [0.001, 0.0002]])
   const approach = line('appr', { highway: 'residential' }, [[0.001, 0.0002], [0.001, 0.001]])
+  const south = line('south', { highway: 'residential' }, [[0.001, -0.001], [0.001, -0.0002]])
   const lone = line('lone', { highway: 'unclassified', bridge: 'yes' }, [[0.005, 0], [0.005, 0.0001]])
   const landed = line('landed', { highway: 'primary', bridge: 'yes' }, [[0.007, 0], [0.007, 0.0005]])
   const street = line('street', { highway: 'primary' }, [[0.007, 0.0005], [0.007, 0.001]])
+  const across = line('across', { highway: 'primary' }, [[0.007, -0.0005], [0.007, 0]])
+  const into = line('into', { highway: 'unclassified', bridge: 'yes' }, [[0.009, 0], [0.009, 0.0002]])
+  const tunnel = line('tunnel', { highway: 'unclassified', tunnel: 'yes' }, [[0.009, 0.0002], [0.009, 0.0005]])
+  const lead = line('lead', { highway: 'unclassified' }, [[0.009, -0.0003], [0.009, 0]])
   const tower = building('tower', 0.003, 0.003, 0.0002)
   const bed: PolygonFeature = { type: 'polygon', id: 'bed', tags: { natural: 'scrub' }, outers: [square(0.0032, 0.0028, 0.0001)], inners: [] }
   const spur = line('spur', { railway: 'rail', service: 'spur' }, [[0.02, 0], [0.02, 0.001]])
   const main = line('main', { railway: 'rail' }, [[0.019, 0], [0.02, 0], [0.021, 0]])
-  const all = [canal, over, approach, lone, landed, street, tower, bed, spur, main]
+  const all = [canal, over, approach, south, lone, landed, street, across, into, tunnel, lead, tower, bed, spur, main]
   const h = history({ canalBridgesFrom: 1999 })
   const dates = new Map([['tower', { year: 1990 }]])
   const r = pastGround(all, all, 1925, h, dates)
   const ids = r.kept.map((f) => f.id)
-  assert.ok(!ids.includes('over') && !ids.includes('lone') && !ids.includes('bed') && !ids.includes('spur'))
+  assert.ok(!ids.includes('over') && !ids.includes('lone') && !ids.includes('into') && !ids.includes('bed') && !ids.includes('spur'))
   assert.ok(ids.includes('landed') && ids.includes('main'))
-  assert.deepEqual([r.canalBridges, r.orphanBridges, r.plantings, r.spurs], [1, 1, 1, 1])
+  assert.deepEqual([r.canalBridges, r.orphanBridges, r.plantings, r.spurs], [1, 2, 1, 1])
   // In 2000 the canal bridge stands and the bed with its tower; a building at its end serves the spur.
   const later = pastGround(all, all, 2000, h, dates, 2000, 40, [[0.02, 0.001]]).kept.map((f) => f.id)
   assert.ok(later.includes('over') && later.includes('bed') && later.includes('spur'))

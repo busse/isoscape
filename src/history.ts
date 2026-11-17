@@ -648,8 +648,9 @@ const PLANTING = new Set(['scrub', 'wood', 'grassland', 'heath', 'water'])
  *
  * - A minor road bridge with no `start_date` crossing a canal (a canal way or a canal's water)
  *   is not drawn before the history's `canalBridgesFrom`, unless a rule names it (`id`).
- * - A road bridge whose spans, joined end to end, touch no road of the year at either end is
- *   left out: a piece of deck with nothing to carry (its approaches came later).
+ * - A road bridge whose spans, joined end to end, do not meet a road of the year at each of
+ *   their ends (a tunnel does not count: it is not drawn) is left out: a piece of deck whose
+ *   approaches came later, or that leads into nothing drawn.
  * - Planting beds and ponds: a polygon of scrub, wood, grassland, heath or still water (no name,
  *   no waterway) under `small` m² is landscaping, dated with the nearest dated building within
  *   `reach` meters (the development around it): drawn only from that building's year, and
@@ -695,19 +696,26 @@ export const pastGround = (
   // road of the year that is not one of its own spans.
   const key = (p: Vec2) => `${p[0]},${p[1]}`
   const roadNodes = new Set<string>()
-  for (const f of out) if (f.type === 'line' && f.tags.highway !== undefined && (f.tags.bridge === undefined || f.tags.bridge === 'no')) for (const p of f.points) roadNodes.add(key(p))
+  for (const f of out) if (f.type === 'line' && f.tags.highway !== undefined && (f.tags.bridge === undefined || f.tags.bridge === 'no') && (f.tags.tunnel === undefined || f.tags.tunnel === 'no')) for (const p of f.points) roadNodes.add(key(p))
   const spans = out.filter(isRoadBridge)
   const parent = new Map(spans.map((f) => [f.id, f.id]))
   const find = (id: string): string => { let r = id; while (parent.get(r) !== r) r = parent.get(r)!; return r }
   const byEnd = new Map<string, string[]>()
   for (const f of spans) for (const p of [f.points[0], f.points[f.points.length - 1]]) byEnd.set(key(p), [...(byEnd.get(key(p)) ?? []), f.id])
   for (const ids of byEnd.values()) for (const id of ids.slice(1)) parent.set(find(id), find(ids[0]))
-  const landed = new Set<string>()
+  // A group's free ends: span ends no other span of the group shares. Each must meet a road of
+  // the year (not a tunnel, which is not drawn): a deck that ends in nothing, or runs into a
+  // tunnel, is a stub.
+  const ends = new Map<string, Vec2[]>()
   for (const f of spans) {
-    // A span meets a road where one of its points is a node of a road of the year: at its ends,
-    // or midway, where a ramp joins it.
-    if (f.points.some((p) => roadNodes.has(key(p)))) landed.add(find(f.id))
+    for (const p of [f.points[0], f.points[f.points.length - 1]]) {
+      if ((byEnd.get(key(p)) ?? []).length > 1) continue
+      const g = find(f.id)
+      ends.set(g, [...(ends.get(g) ?? []), p])
+    }
   }
+  const landed = new Set<string>()
+  for (const [g, ps] of ends) if (ps.every((p) => roadNodes.has(key(p)))) landed.add(g)
   let orphanBridges = 0
   out = out.filter((f) => {
     if (!isRoadBridge(f) || landed.has(find(f.id))) return true

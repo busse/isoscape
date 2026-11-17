@@ -715,8 +715,8 @@ Past years look at their neighbors once more:
 
 - a minor road bridge (residential, service, unclassified) over a canal, with no `start_date`,
   appears only from 1999, the Canal Walk (`canalBridgesFrom`), unless a rule names it;
-- a road bridge whose spans touch no road of the year at either end is left out: a piece of
-  deck whose approaches came later;
+- a road bridge whose spans do not meet a road of the year at each of their ends (a tunnel
+  does not count: it is not drawn) is left out: a piece of deck whose approaches came later;
 - a bed of scrub, wood, grass or heath, or a pond, under 2,000 m² and unnamed is landscaping,
   dated with the nearest dated building within 40 m (the development around it), and not
   drawn when none stands that near;
