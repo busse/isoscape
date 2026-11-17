@@ -12,6 +12,27 @@
  ],
  "features": [
   {
+   "id": "marshall-street-viaduct",
+   "name": "Marshall Street Viaduct",
+   "kind": "bridge",
+   "from": 1911,
+   "to": 1970,
+   "line": [
+    [
+     -77.4289623,
+     37.5392147
+    ],
+    [
+     -77.4215882,
+     37.5347066
+    ]
+   ],
+   "note": "Opened 12 February 1911 by the Richmond and Henrico Railway from College Street, at the east edge of the medical college, across Shockoe Valley to 21st Street at Jefferson Park, with tracks for the streetcars; closed by the city in 1970 and taken down. Drawn straight on the car line between those ends: its exact line, length and height are approximate.",
+   "sources": [
+    "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts"
+   ]
+  },
+  {
    "id": "free-bridge",
    "name": "Free Bridge (Ninth Street)",
    "kind": "bridge",

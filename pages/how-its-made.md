@@ -674,7 +674,8 @@ edge and within about 25° of its heading, beside the deck and not past its ends
 on the deck, as wide as the deck allows, and no car is set on the ground under it. A road bridge
 since taken down can be curated as a `bridge` line and is drawn as today's bridges are: the
 low Free Bridge at Ninth Street (1878 to 1972), on which the Forest Hill cars crossed the
-James, stands where the Manchester Bridge of 1973 does today. Vanished pleasure grounds (a fairground) take a sandy tint of
+James, stands where the Manchester Bridge of 1973 does today, and the Marshall Street Viaduct (1911
+to 1970) carries the Church Hill cars across Shockoe Valley. Vanished pleasure grounds (a fairground) take a sandy tint of
 their own, and a racetrack is a closed dirt-colored ribbon. `--streetcar-scale` overrides the
 series' scale for one build: the single-stop prints of the streetcar series use 1.5, so the
 lines read thinner up close.
