@@ -185,7 +185,7 @@ def from_spec(key, d, made):
         pick = [b for b in cands if b[:15] <= when] or cands
         if not pick: scenes.append({'build': None, 'name': name}); continue
         b = pick[-1]; m = json.load(open(os.path.join(ISO, 'out', 'builds', b, 'meta.json')))
-        scenes.append(scene(m['region'], (m.get('time') or {}).get('year'), os.path.join(ISO, 'out', 'builds', b, 'image.svg'), build_id=b,
+        scenes.append(scene(m['region'], (m.get('time') or {}).get('year'), os.path.join(ISO, 'out', 'builds', b, 'image.svg'), flags=m.get('flags', []), build_id=b,
                             made_at=(m.get('git') or {}).get('commit')))
     recipe = {'tool': 'tools/print/compose.py', 'run': [f'python3 tools/print/compose.py tools/print/spec.json out/builds <out> --only {key}'],
               'pinned': 'panels use the builds named in scenes[].build, not the newest'}

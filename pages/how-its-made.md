@@ -627,7 +627,7 @@ Bridge before 1913, the Richmond and Petersburg bridge before 1902, the Richmond
 before the Southern's) are drawn on today's line and height in their years, an
 approximation; none is drawn in 1865, the scene after the fire that burned them. A curated
 item can be held back from builds made before it existed (`"switch"`): it is drawn only in a
-build asked for it by name (`isoscape build --with free-bridge`), and the build records that,
+build asked for it by name (`isoscape build --with next`), and the build records that,
 so a print already sold is still made exactly as it was. The Free Bridge is drawn only so: the
 1925 and 1950 prints, version 4, were drawn without it.
 
@@ -732,7 +732,9 @@ short span over the canal at Rocketts, which in 1925 and 1950 crossed no canal),
 Broad Street crosses Shockoe Valley on the ground and the streets over the Downtown Expressway
 have no bridges. And woods and scrub with 40% or more of their outline within 20 m of a road
 not yet built are that road's verges (the planted ground of an interchange) and are dated with
-it. A feature no rule matches is drawn in every year, so the Richmond series ends its
+it. (In builds made `--with next`, the corrections made since the 1925 and 1950 prints' version
+4, half the outline within 60 m: the planted banks of the interstate and the expressway that the
+tighter test missed.) A feature no rule matches is drawn in every year, so the Richmond series ends its
 rules with catch-alls: the street grid, streams and the river are drawn in every year, and
 anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basins, paths) is
 drawn only today, since nothing says when it was made. Each catch-all names what still needs a
@@ -769,7 +771,8 @@ service roads and paths) are drawn only where a building of the year stands with
 meters of them: 75 m in the 1925 streetcar scene, 60 m in the downtown series. A bridge is never
 dropped by this test: it crosses water or a valley where no house stands, and its era rule
 alone says when it stood (Mayo's Bridge from 1788); nor is a street that meets a road bridge
-(the road across Mayo's Island between two spans, a bridge's approach). Each street is
+(the road across Mayo's Island between two spans, a bridge's approach; in builds made `--with
+next`, the whole of that street by name, as Hull Street across Manchester). Each street is
 walked every half that distance and kept if any building (standing today and built by then,
 traced from a Sanborn sheet and still standing, or a curated landmark) has a corner within one
 grid cell of a step. A suburb whose streets were laid out but not yet built on shows its main

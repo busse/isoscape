@@ -151,7 +151,7 @@ export const buildScene = (
   const extraAll: readonly Feature[] | undefined = time === undefined ? undefined : features
   if (time !== undefined) {
     const all = features
-    const r = laterWorks(all, asOf(all, time), time.year, time.history)
+    const r = laterWorks(all, asOf(all, time), time.year, time.history, time.history.vergeReach ?? 20, time.history.vergeShare ?? 0.4)
     // Curated bridges join the year's ways after the era rules (they carry their own years).
     const bridges = curated.map(bridgeFeature).filter((f): f is Feature => f !== null)
     features = bridges.length === 0 ? r.kept : [...r.kept, ...bridges]
@@ -166,7 +166,7 @@ export const buildScene = (
     const landmarks = curated.filter((h) => h.kind === 'landmark' && h.ring !== undefined).flatMap((h) => h.ring ?? [])
     // A plan's streets stay laid out after the plan stops limiting the town.
     const plans = time.history.features.filter((h) => h.kind === 'plan' && h.ring !== undefined && h.from <= time.year).map((h) => h.ring ?? [])
-    const r = dropUnbuiltStreets(features, time.history.streetsNearBuildings, [...traced, ...landmarks], plans, time.history.majorStreetsNearBuildings === true)
+    const r = dropUnbuiltStreets(features, time.history.streetsNearBuildings, [...traced, ...landmarks], plans, time.history.majorStreetsNearBuildings === true, time.history.bridgeStreets === true)
     features = r.kept
     unbuiltStreets = r.dropped
   }

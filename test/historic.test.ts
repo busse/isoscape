@@ -66,3 +66,12 @@ test('a street that meets a road bridge stands with it: the road across an islan
   const kept = dropUnbuiltStreets([north, island, south, far], 60, [], [], true).kept.map((f) => f.id)
   assert.deepEqual(kept, ['n', 'i', 's'])
 })
+
+test('with follow, the street a bridge leads onto is kept by name as far as it runs', () => {
+  const span = line('b', { highway: 'primary', bridge: 'yes' }, [[0, 0], [0, 0.002]])
+  const a = line('a', { highway: 'primary', name: 'Hull Street' }, [[0, 0.002], [0, 0.004]])
+  const b = line('b2', { highway: 'primary', name: 'Hull Street' }, [[0, 0.004], [0, 0.03]])
+  const other = line('o', { highway: 'primary', name: 'Cowardin Avenue' }, [[0, 0.004], [0.03, 0.004]])
+  assert.deepEqual(dropUnbuiltStreets([span, a, b, other], 60, [], [], true).kept.map((f) => f.id), ['b', 'a'])
+  assert.deepEqual(dropUnbuiltStreets([span, a, b, other], 60, [], [], true, true).kept.map((f) => f.id), ['b', 'a', 'b2'])
+})

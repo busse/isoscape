@@ -6,6 +6,14 @@
  "majorStreetsNearBuildings": true,
  "parkingFrom": 1960,
  "canalBridgesFrom": 1999,
+ "switches": {
+  "next": {
+   "note": "Corrections made after the 1925 and 1950 prints' version 4 (November 17, 2026), drawn in builds made with --with next: those prints stay as sold until their next version.",
+   "vergeReach": 60,
+   "vergeShare": 0.5,
+   "bridgeStreets": true
+  }
+ },
  "about": "Each scene draws the buildings standing today that had been built by its year (dated by OSM start_date, else the City of Richmond assessor's year built), plus the curated features below. Buildings since demolished appear only where curated. The ground is today's.",
  "epochs": [
   {
@@ -319,7 +327,7 @@
    "from": 1873,
    "to": 1972,
    "deck": 8,
-   "switch": "free-bridge",
+   "switch": "next",
    "line": [
     [
      -77.4401071,
@@ -338,7 +346,7 @@
      37.5278975
     ]
    ],
-   "note": "The free road bridge from the foot of 9th Street to Manchester, opened in June 1873 (RVA Mag; Dogtown Dish dates the span it describes to 1878, after the flood of 1877) and closed after the floods of 1969 and 1972, when the Manchester Bridge replaced it. Built \"rather low over the river\": its deck is drawn 8 m over the water, an assumption. Its line is today's Manchester Bridge's, which the USGS 1:24,000 Richmond quadrangle of 1934 shows it on (\"9th St Bridge\", just downstream of the Richmond and Petersburg bridge), from the corner of 9th Street to the foot of Commerce Road in Manchester: approximate. Drawn only in builds made with --with free-bridge: the 1925 and 1950 prints (version 4) were drawn before it.",
+   "note": "The free road bridge from the foot of 9th Street to Manchester, opened in June 1873 (RVA Mag; Dogtown Dish dates the span it describes to 1878, after the flood of 1877) and closed after the floods of 1969 and 1972, when the Manchester Bridge replaced it. Built \"rather low over the river\": its deck is drawn 8 m over the water, an assumption. Its line is today's Manchester Bridge's, which the USGS 1:24,000 Richmond quadrangle of 1934 shows it on (\"9th St Bridge\", just downstream of the Richmond and Petersburg bridge), from the corner of 9th Street to the foot of Commerce Road in Manchester: approximate. Drawn only in builds made with --with next: the 1925 and 1950 prints (version 4) were drawn before it.",
    "sources": [
     "https://dogtowndish.com/2018/03/03/richmonds-lost-singing-9th-street-bridge/",
     "https://rvamag.com/community/rva-5x5-the-history-of-the-mayo-bridge.html",
@@ -789,6 +797,23 @@
     "https://rvamag.com/community/rva-5x5-the-history-of-the-mayo-bridge.html",
     "https://www.loc.gov/item/sanborn09064_001/",
     "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0000/full/pct:50/0/default.jpg"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w167830264"
+    ]
+   },
+   "eras": [
+    [
+     1788,
+     null
+    ]
+   ],
+   "note": "Hull Street's short span at the foot of Mayo's Bridge in Manchester, dated with the bridge it leads to: Hull Street has run from Mayo's Bridge since the bridge's first years (the 1886 Sanborn key map). Where nothing it crosses stands in a year, it is drawn at grade. Approximate.",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_001/"
    ]
   },
   {
