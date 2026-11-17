@@ -456,12 +456,13 @@ export const shaped = (pal: Palette, whole: Box, b: Box, k: number, n: number, c
     // of windows down each side, and the vestibule's diaphragm in the gap ahead of it. In the
     // C&O's colors, blue, with a yellow band along the top of the side and gray below the windows.
     const eave = z0 + 0.78 * H
-    add(slab(hw, z0, eave), toneOf(whole.tone), '')
     if (whole.tone === 'coachBlue') {
-      const [a, c] = at(0.3, total - 0.3)
-      add(slab(hw + 0.02, z0 + 0.66 * H, z0 + 0.76 * H), toneOf('coachBand'), ':band', a, c)
-      add(slab(hw + 0.02, z0 + 0.06 * H, z0 + 0.36 * H), toneOf('coachSkirt'), ':skirt', a, c)
-    }
+      // Stacked bands of one width, so each sorts cleanly above the one below it.
+      add(slab(hw, z0, z0 + 0.36 * H), toneOf('coachSkirt'), ':skirt')
+      add(slab(hw, z0 + 0.36 * H, z0 + 0.66 * H), toneOf('coachBlue'), '')
+      add(slab(hw, z0 + 0.66 * H, z0 + 0.76 * H), toneOf('coachBand'), ':band')
+      add(slab(hw, z0 + 0.76 * H, eave), toneOf('coachBlue'), ':top')
+    } else add(slab(hw, z0, eave), toneOf(whole.tone), '')
     add([[-hw, eave], [hw, eave], [hw * 0.82, z0 + 0.9 * H], [hw * 0.45, z0 + 0.98 * H], [0, z1], [-hw * 0.45, z0 + 0.98 * H], [-hw * 0.82, z0 + 0.9 * H]], toneOf(whole.tone === 'coachBlue' ? 'coachRoof' : 'carRoof'), ':roof')
     const [a, c] = at(1.4, total - 1.4)
     for (const side of [1, -1]) {
