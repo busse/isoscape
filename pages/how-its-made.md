@@ -929,6 +929,10 @@ building traced from them is drawn. The line is written into the SVG (`data-cred
 build record and `isoscape info`, and the prints take it from the builds they are made from,
 so a modern view never credits fire-insurance maps it does not use. A cutaway's sheet writes
 its own credit line, so its scenes carry the sources only in their description, as sentences.
+On a print, every line of the credit is at least 7 pt at the smallest size that print is sold
+at: a 24 × 36 in file is also printed at 8 × 12 in, a third of its size, so there the credit is
+set at 21 pt (88 px at 300 dpi) and wraps onto as many lines as it needs, between the title and
+the title block.
 
 Inspired by [Isometric SF](https://isometricsf.com), Justin Chavez's isometric pixel-art map
 of San Francisco ([how it was made](https://www.justinchavez.com/blog/isometric-sf-how/)).

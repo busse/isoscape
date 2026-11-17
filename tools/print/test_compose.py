@@ -30,5 +30,19 @@ class Credit(unittest.TestCase):
                 self.assertEqual(C.design_credit({'panels': [{'build': 'old'}]}, builds), C.LEGACY_CREDIT)
 
 
+class SmallestSize(unittest.TestCase):
+    def test_a_24x36_is_also_an_8x12_and_a_panorama_only_itself(self):
+        spec = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'spec.json')))
+        self.assertAlmostEqual(C.smallest_scale(spec, (36, 24)), 1 / 3)
+        self.assertEqual(C.smallest_scale(spec, (24, 10)), 1.0)
+        self.assertEqual(C.smallest_scale({}, (36, 24)), 1.0)
+
+    def test_the_reserved_corner_is_the_stamped_block(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'release'))
+        import stamp, titleblock
+        u = stamp.size_u(36, 300)
+        self.assertAlmostEqual(C.block_reserve(36, 300), titleblock.WIDTH * u + titleblock.H * u * 0.5)
+
+
 if __name__ == '__main__':
     unittest.main()
