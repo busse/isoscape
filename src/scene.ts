@@ -25,7 +25,7 @@ import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
 import { cutawayItems, partSolids, partTones, shedItems, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
-import { WORKS, alive, bridgeFeature, bridgesAtGrade, dropApproaches, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
+import { WORKS, alive, bridgeFeature, bridgesAtGrade, dropApproaches, mendStreets, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
 export interface TimeContext {
@@ -206,6 +206,14 @@ export const buildScene = (
         r.dropped -= back.length
         extraStats.streetsUnderCars = back.length
       }
+    }
+    if (time.history.streetEnds !== undefined) {
+      const keptNow = new Set(r.kept)
+      const unbuilt = new Set(features.filter((f) => !keptNow.has(f)).map((f) => f.id))
+      const m = mendStreets(extraAll ?? features, r.kept, unbuilt, time.history.streetEnds)
+      r.kept = m.kept
+      if (m.mended) extraStats.streetsMended = m.mended
+      if (m.ends) extraStats.streetEndsLater = m.ends
     }
     features = r.kept
     unbuiltStreets = r.dropped

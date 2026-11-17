@@ -38008,6 +38008,26 @@
   {
    "where": {
     "id": [
+     "w44745817",
+     "w44745820",
+     "w751418083"
+    ]
+   },
+   "eras": [
+    [
+     1966,
+     null
+    ]
+   ],
+   "note": "The curved one-way approaches of Saunders Avenue to the 1966 Westwood Avenue bridges, dated with them (approximate: no source dates them apart from the bridges).",
+   "sources": [
+    "https://bridgelookup.com/bridge/582714",
+    "https://bridgecondition.com/bridge/virginia/va-000000000021568"
+   ]
+  },
+  {
+   "where": {
+    "id": [
      "w1485004507",
      "w1485004508",
      "w1089070999"
@@ -39026,5 +39046,13 @@
  "carLineBed": 1.5,
  "carLineSeal": true,
  "revolveInkFoot": true,
- "trainsClearOfDecks": true
+ "trainsClearOfDecks": true,
+ "carDecks": true,
+ "carLineEnds": 30,
+ "bridgesClearTraced": true,
+ "vergeReach": 60,
+ "vergeShare": 0.5,
+ "bridgeStreets": true,
+ "vergeFill": 15,
+ "streetEnds": 200
 }
