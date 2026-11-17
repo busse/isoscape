@@ -1,0 +1,109 @@
+{
+ "name": "gwynns-island",
+ "region": "gwynns-island",
+ "title": "Gwynn's Island, Mathews County, VA \u2014 the Piankatank to Milford Haven",
+ "palette": "paper",
+ "note": "Version 4 redraw: ground shapes cut to a strip as one polygon, no green ladder lines across clearings (fix-ladder, 791ce72)",
+ "viewBox": [
+  -9786.9,
+  -4883.871948627086,
+  19573.8,
+  9698.871175410664
+ ],
+ "bearing": 0,
+ "ms": 20044,
+ "stats": {
+  "features": 2972,
+  "coastWays": 29,
+  "skywaysLeftOut": 1,
+  "groundUnderBridgesLowered": 4,
+  "ground": 196,
+  "coverNodes": 1208742,
+  "elevationDatum": -0.1,
+  "elevationTop": 20.7,
+  "streetcarLines": 0,
+  "ribbons": 2129,
+  "footprintsAdded": 5937,
+  "footprintsOnWater": 49,
+  "footprintsDrawn": 5778,
+  "buildings": 6195,
+  "streetcars": 0,
+  "heightFromTag": 0,
+  "heightFromModel": 2683,
+  "heightFromLevels": 4,
+  "heightGuessed": 3508,
+  "bridgePieces": 50,
+  "contourSegments": 215518,
+  "rapidCells": 0,
+  "rapidsReach": 200,
+  "strips": 683
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP",
+  "Land cover: USGS National Land Cover Database 2021 (MRLC, public domain)",
+  "Building footprints: Microsoft Global ML Building Footprints (ODbL)"
+ ],
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Gwynn's Island, Mathews County, VA \u2014 the Piankatank to Milford Haven",
+  "center": [
+   -76.34203,
+   37.49788
+  ],
+  "width": 13947,
+  "depth": 13647,
+  "scale": 1.4,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 6,
+  "bridges": [
+   {
+    "match": "Twiggs Ferry",
+    "deck": 16
+   },
+   {
+    "match": "Cricket Hill",
+    "deck": 5
+   }
+  ],
+  "minBuildingArea": 10,
+  "dots": "all",
+  "fetchTile": 4000,
+  "terrain": {
+   "exaggeration": 4,
+   "cell": 10,
+   "contour": 1,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 5,
+   "rocks": false
+  },
+  "sources": {
+   "buildings": [
+    "osm",
+    "microsoft"
+   ],
+   "landcover": "nlcd"
+  },
+  "name": "gwynns-island"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261116-212313-gwynns-island",
+ "createdAt": "2026-11-17T02:23:13.119Z",
+ "bytes": 60532406,
+ "git": {
+  "commit": "4e4b7bb",
+  "dirty": false,
+  "subject": "Visual check: new baseline for downtown Richmond and Richmond 1925 (ladder lines removed)"
+ },
+ "files": {
+  "svg": "builds/20261116-212313-gwynns-island/image.svg",
+  "thumb": "builds/20261116-212313-gwynns-island/thumb.png",
+  "social": "builds/20261116-212313-gwynns-island/social.png",
+  "preview": "builds/20261116-212313-gwynns-island/preview.jpg"
+ }
+}
