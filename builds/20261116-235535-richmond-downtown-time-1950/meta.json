@@ -1,0 +1,157 @@
+{
+ "name": "richmond-downtown-time-1950",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1950",
+ "palette": "paper",
+ "note": "Richmond 1950 version 4: wave 3 corrections (Mayo Bridge, Ross Building, traced buildings, R&P and tunnel approaches)",
+ "viewBox": [
+  -3024,
+  -1671.8840019012491,
+  6048,
+  2727.060916437489
+ ],
+ "bearing": -8.7,
+ "ms": 9747,
+ "stats": {
+  "features": 4203,
+  "unbuiltStreets": 1818,
+  "bridgesAtGrade": 43,
+  "vergesLater": 39,
+  "canalBridgesLater": 2,
+  "bridgesWithoutRoads": 26,
+  "plantingsLater": 28,
+  "spursLater": 42,
+  "groundUnderBridgesLowered": 13,
+  "ground": 41,
+  "elevationDatum": -0.1,
+  "elevationTop": 56.8,
+  "streetcarLines": 0,
+  "ribbons": 828,
+  "footprintsAdded": 0,
+  "outlinesUnderParts": 3,
+  "footprintsDrawn": 0,
+  "datedFromParcels": 1228,
+  "buildings": 1867,
+  "streetcars": 0,
+  "heightFromTag": 34,
+  "heightFromModel": 0,
+  "heightFromLevels": 300,
+  "heightGuessed": 1533,
+  "year": 1950,
+  "newSincePrevious": 0,
+  "datedCurated": 31,
+  "datedOsm": 608,
+  "datedParcel": 1228,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 730,
+  "tracedOnWater": 24,
+  "tracedUnderViaduct": 23,
+  "tracedOnTrack": 11,
+  "tracedBuried": 55,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 43,
+  "tracedEndHighway": 49,
+  "tracedEndAssumed": 638,
+  "curated": 1,
+  "bridgePieces": 449,
+  "contourSegments": 48842,
+  "rapidCells": 9125,
+  "rapidsReach": 200,
+  "strips": 200
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP",
+  "Buildings dated from assessor records",
+  "Historic buildings traced from Sanborn Fire Insurance Maps, Library of Congress"
+ ],
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "checkLevels": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1950,
+  "series": "richmond-downtown-time",
+  "title": "Mid-century",
+  "note": "The last scene before the turnpike.",
+  "curated": [
+   {
+    "id": "rp-byrd-street-approach",
+    "name": "Richmond and Petersburg (Atlantic Coast Line) approach to Byrd Street Station",
+    "kind": "rail",
+    "from": 1902,
+    "to": 1971,
+    "note": "The track from the north end of the Richmond and Petersburg bridge (OSM w710689016) across the Haxall Canal into Byrd Street Station at Seventh and Byrd Streets, the R&P's original Richmond station and later the Atlantic Coast Line's headquarters, closed in 1958. Today nothing of it is mapped north of the bridge. Approximate: one track along the middle of the station's throat, read by eye from the USGS 1:24,000 Richmond quadrangles of 1934 and 1956 (which show the line crossing the canal and fanning into the station yard between Seventh and Eighth Streets south of Byrd) and joined to the bridge's mapped end, about 20 m east of where the maps put it. Drawn with the bridge, 1902 to 1970; the years are the bridge's, not the track's.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge",
+     "https://en.wikipedia.org/wiki/Byrd_Street_Station",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+    ]
+   }
+  ]
+ },
+ "id": "20261116-235535-richmond-downtown-time-1950",
+ "createdAt": "2026-11-17T04:55:35.729Z",
+ "bytes": 12819460,
+ "git": {
+  "commit": "cfdf074",
+  "dirty": false,
+  "subject": "Merge wave3-richmond: Richmond 1925 and 1950 corrected for version 4 (Mayo Bridge, Ross Building, traced buildings in water and under viaducts, the R&P and Church Hill Tunnel approaches, later works dated)"
+ },
+ "files": {
+  "svg": "builds/20261116-235535-richmond-downtown-time-1950/image.svg",
+  "thumb": "builds/20261116-235535-richmond-downtown-time-1950/thumb.png",
+  "social": "builds/20261116-235535-richmond-downtown-time-1950/social.png",
+  "preview": "builds/20261116-235535-richmond-downtown-time-1950/preview.jpg"
+ }
+}
