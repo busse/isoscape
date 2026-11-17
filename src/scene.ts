@@ -732,11 +732,16 @@ export const buildScene = (
         .map((run) => ({ pts: run.map(([lon, lat]) => view.toView(lon, lat)), half: 1.6 * railScale, deck: false })),
     ]
     const works = laterWorkLines(extraAll ?? features, time.year, time.history).map((pts) => pts.map(([lon, lat]) => view.toView(lon, lat)))
-    const wetAt = (p: Vec2): boolean => onWater(sc, p) || drawnWet(terrain, p) === true
+    // Canals drawn as ribbons (a canal mapped as a line, not as an area) are water too.
+    const canalQuads = ribbons.filter((r) => r.kind === 'canal').flatMap((r) => r.quads)
+      .map((q) => ({ q, box: [Math.min(...q.map((v) => v[0])), Math.min(...q.map((v) => v[1])), Math.max(...q.map((v) => v[0])), Math.max(...q.map((v) => v[1]))] as const }))
     for (const b of time.history.traced) {
       if (!alive(b.from, b.to, time.year)) continue
       const outer = orient(simplifyRing(toViewRing(view, b.ring), 0.3), true)
       if (outer.length < 3 || !outer.every((p) => insideRect(p, frame))) continue
+      const xs = outer.map((p) => p[0]), ys = outer.map((p) => p[1])
+      const near = canalQuads.filter(({ box }) => box[0] <= Math.max(...xs) && box[2] >= Math.min(...xs) && box[1] <= Math.max(...ys) && box[3] >= Math.min(...ys)).map(({ q }) => q)
+      const wetAt = (p: Vec2): boolean => onWater(sc, p) || drawnWet(terrain, p) === true || near.some((q) => pointInRing(p, q))
       if (ringSamples(outer, TRACED_STEP).some(wetAt)) {
         tracedOnWater++
         leftOut.push({ id: b.id, why: 'water' })

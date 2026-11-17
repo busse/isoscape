@@ -654,14 +654,15 @@ meters only. So a traced building that could not have stood where it falls is **
 whole**, never trimmed, and the explorer counts how many and why:
 
 - **On water.** Any part of it on the water drawn in its year: past the traced shoreline,
-  inside today's river or canals, or a curated basin, read every meter over its footprint and
-  along its edges. Most are mills on the islands and races above the Mayo Bridge and warehouses
-  on the Great Basin's edge. In downtown Richmond 25 in 1925 and 23 in 1950.
+  inside today's river or canals (a canal mapped only as a line counts at its drawn width), or
+  a curated basin, read every meter over its footprint and along its edges. Most are mills on
+  the islands and races above the Mayo Bridge and warehouses on the Great Basin's edge. In
+  downtown Richmond 27 in 1925 and 24 in 1950.
 - **On a viaduct or a track.** Any part of it within 12 m of the center line of a rail viaduct
   standing in its year (most were mapped in 1886 or 1895 and cleared for the viaducts of 1901,
   the rest are misplaced by their sheet, and drawn, the deck would pass over their roofs or
-  between their walls), or within a meter of the ballast of a track on the ground: 60 in 1925
-  and 33 in 1950.
+  between their walls), or within a meter of the ballast of a track on the ground: 61 in 1925
+  and 34 in 1950.
 - **Buried.** Today's ground more than 3 m above its floor anywhere under it (read every 2 m
   over its footprint and along its walls, not only at its corners: a slope can stand above a
   long wall between two low corners), within 60 m of a road built after its year (an
