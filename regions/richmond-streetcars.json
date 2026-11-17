@@ -26,6 +26,12 @@
     {
       "match": "Free Bridge (Ninth Street)",
       "deck": 4
+    },
+    {
+      "match": "Marshall Street Viaduct",
+      "deck": 7,
+      "pierSpacing": 75,
+      "abutment": 30
     }
   ],
   "minBuildingArea": 20,

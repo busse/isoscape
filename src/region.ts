@@ -13,6 +13,12 @@ export interface BridgeRule {
   readonly deck: number
   /** Meters between piers (default 38). Suspension bridges want a long spacing: two towers, not a wall of piers. */
   readonly pierSpacing?: number
+  /**
+   * Meters of each end of the deck that stand on an abutment, the deck's side walled down to the
+   * ground: with a long pier spacing, a deck that climbs off a bluff then does not hang out from
+   * its first pier.
+   */
+  readonly abutment?: number
 }
 
 export interface Region {

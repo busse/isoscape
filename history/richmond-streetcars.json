@@ -1049,100 +1049,124 @@
       37.5728545
      ],
      [
-      -77.52386,
-      37.5727558
+      -77.5228466,
+      37.5728066
      ],
      [
-      -77.5239608,
-      37.572755
+      -77.5235983,
+      37.5727896
      ],
      [
-      -77.5240259,
-      37.5727663
+      -77.5237063,
+      37.5727973
      ],
      [
-      -77.5240513,
-      37.5727792
+      -77.5237876,
+      37.5728158
      ],
      [
-      -77.524072,
-      37.5727977
+      -77.5238532,
+      37.5728448
      ],
      [
-      -77.5240963,
-      37.5728349
+      -77.523912,
+      37.5728885
      ],
      [
-      -77.5241157,
-      37.57288
+      -77.5239468,
+      37.5729264
      ],
      [
-      -77.5244402,
-      37.5739162
+      -77.523978,
+      37.572971
      ],
      [
-      -77.5244986,
-      37.5740659
+      -77.5240386,
+      37.573092
      ],
      [
-      -77.5245679,
-      37.5741955
+      -77.5241272,
+      37.5733287
      ],
      [
-      -77.5246707,
-      37.5743345
+      -77.5243017,
+      37.5738505
      ],
      [
-      -77.5249127,
-      37.5746099
+      -77.5243622,
+      37.5740174
      ],
      [
-      -77.52551,
-      37.5752545
+      -77.5244332,
+      37.574178
      ],
      [
-      -77.5257563,
-      37.5755282
+      -77.5245219,
+      37.574331
      ],
      [
-      -77.5258838,
-      37.5756887
+      -77.5246191,
+      37.5744635
      ],
      [
-      -77.5259766,
-      37.5758389
+      -77.5247421,
+      37.574607
      ],
      [
-      -77.5260503,
-      37.5759929
+      -77.5252606,
+      37.5751577
      ],
      [
-      -77.5261137,
-      37.5761735
+      -77.525623,
+      37.575528
      ],
      [
-      -77.5261708,
-      37.5763943
+      -77.5257196,
+      37.5756399
      ],
      [
-      -77.5262722,
-      37.5768688
+      -77.5257986,
+      37.5757467
      ],
      [
-      -77.5262926,
-      37.5769305
+      -77.5258859,
+      37.5758888
      ],
      [
-      -77.526324,
-      37.5769859
+      -77.5259584,
+      37.5760392
      ],
      [
-      -77.5263954,
-      37.5770612
+      -77.5260287,
+      37.5762295
      ],
      [
-      -77.5267218,
-      37.5773415
+      -77.5261319,
+      37.5765847
+     ],
+     [
+      -77.5261774,
+      37.5767191
+     ],
+     [
+      -77.5262375,
+      37.5768502
+     ],
+     [
+      -77.5263126,
+      37.5769659
+     ],
+     [
+      -77.5263635,
+      37.5770256
+     ],
+     [
+      -77.5264344,
+      37.5770954
+     ],
+     [
+      -77.5268493,
+      37.5774606
      ],
      [
       -77.5270789,
@@ -1326,10 +1350,23 @@
      ]
     ]
    ],
-   "note": "West on Floyd Avenue from Robinson Street to the belt line railroad, under it in a tunnel, then a little north to Grove Avenue; out Grove to Three Chopt Road; then on its own right-of-way beside Three Chopt to Towana Road, and on (the line of today's Campus Drive) to Westhampton Park, which became the University of Richmond's campus in 1914. The right-of-way beside Three Chopt is drawn along the road itself.",
+   "note": "West on Floyd Avenue from Robinson Street to the belt line railroad, under it in a tunnel, then a little north to Grove Avenue; out Grove to Three Chopt Road; then on its own right-of-way beside Three Chopt to Towana Road, and on (the line of today's Campus Drive) to Westhampton Park, which became the University of Richmond's campus in 1914. The right-of-way beside Three Chopt is drawn down the strip between today's road and the frontage street beside it, halfway between them: approximate.",
    "sources": [
     "https://dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6064_Three_Chopt_Road_HD_2012_NR_FINAL.pdf",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+   ],
+   "round": [
+    {
+     "from": [
+      -77.5218135,
+      37.5728545
+     ],
+     "to": [
+      -77.5270789,
+      37.5776713
+     ],
+     "tolerance": 0.5
+    }
    ]
   },
   {
@@ -3647,156 +3684,180 @@
       37.5267575
      ],
      [
-      -77.4152459,
-      37.5267121
+      -77.4152491,
+      37.5267111
      ],
      [
-      -77.4152066,
-      37.5266756
+      -77.4152108,
+      37.5266599
      ],
      [
-      -77.4151789,
-      37.5266363
+      -77.4152022,
+      37.5266332
      ],
      [
-      -77.4151665,
-      37.5265948
+      -77.4151995,
+      37.5265923
      ],
      [
-      -77.4151676,
-      37.5265665
+      -77.4152152,
+      37.5265226
      ],
      [
-      -77.4151758,
-      37.5265381
+      -77.4152428,
+      37.5264657
      ],
      [
-      -77.4152196,
-      37.5264677
+      -77.4152921,
+      37.5263936
      ],
      [
-      -77.4156637,
-      37.5259684
+      -77.4155945,
+      37.5260421
      ],
      [
-      -77.415709,
-      37.525911
+      -77.4156503,
+      37.5259688
      ],
      [
-      -77.4157345,
-      37.5258677
+      -77.4156864,
+      37.5259097
      ],
      [
-      -77.4157451,
-      37.5258383
+      -77.4157118,
+      37.5258498
      ],
      [
-      -77.4157503,
-      37.5257931
+      -77.4157258,
+      37.5257886
      ],
      [
-      -77.4157198,
-      37.5256307
+      -77.415733,
+      37.525598
      ],
      [
-      -77.4157185,
-      37.5255475
+      -77.4157407,
+      37.5255344
      ],
      [
-      -77.4157416,
-      37.525451
+      -77.4157577,
+      37.5254726
      ],
      [
-      -77.4157813,
-      37.5253769
+      -77.4157854,
+      37.5254136
      ],
      [
-      -77.415828,
-      37.5253238
+      -77.4158358,
+      37.5253448
      ],
      [
-      -77.4159028,
-      37.5252651
+      -77.4159017,
+      37.5252816
      ],
      [
-      -77.4162931,
-      37.5250217
+      -77.4159958,
+      37.5252111
      ],
      [
-      -77.4163709,
-      37.5249686
+      -77.4162781,
+      37.5250227
      ],
      [
-      -77.4164082,
-      37.5249362
+      -77.4163394,
+      37.5249681
      ],
      [
-      -77.416425,
-      37.5249146
+      -77.4163632,
+      37.5249354
      ],
      [
-      -77.4164331,
-      37.5248933
+      -77.4163721,
+      37.5249135
      ],
      [
-      -77.416431,
-      37.5248724
+      -77.4163741,
+      37.5248808
      ],
      [
-      -77.4164095,
-      37.524842
+      -77.4163619,
+      37.5248485
      ],
      [
-      -77.4163556,
-      37.5248024
+      -77.4163369,
+      37.5248167
      ],
      [
-      -77.4162336,
-      37.5247336
+      -77.4163174,
+      37.5247919
      ],
      [
-      -77.4161039,
-      37.5246684
+      -77.4162397,
+      37.5246576
      ],
      [
-      -77.4158557,
-      37.5245582
+      -77.4161978,
+      37.5246159
      ],
      [
-      -77.4151769,
-      37.5242808
+      -77.4161482,
+      37.5245833
      ],
      [
-      -77.4150609,
-      37.5242279
+      -77.4160504,
+      37.5245338
      ],
      [
-      -77.4149537,
-      37.5241694
+      -77.4158967,
+      37.5244644
      ],
      [
-      -77.41484,
-      37.5240925
+      -77.415202,
+      37.5241757
      ],
      [
-      -77.4147163,
-      37.5239939
+      -77.4150807,
+      37.5241152
      ],
      [
-      -77.4140734,
-      37.5234286
+      -77.4149707,
+      37.5240478
      ],
      [
-      -77.4139645,
-      37.5233477
+      -77.414881,
+      37.5239826
      ],
      [
-      -77.4138458,
-      37.523275
+      -77.4147777,
+      37.5238984
      ],
      [
-      -77.4137152,
-      37.5232091
+      -77.414175,
+      37.5233726
+     ],
+     [
+      -77.4140831,
+      37.5233018
+     ],
+     [
+      -77.4139874,
+      37.5232381
+     ],
+     [
+      -77.4139037,
+      37.5231922
+     ],
+     [
+      -77.4138231,
+      37.5231636
+     ],
+     [
+      -77.4137575,
+      37.5231545
+     ],
+     [
+      -77.4136025,
+      37.5231503
      ],
      [
       -77.4135603,
@@ -3972,10 +4033,35 @@
      ]
     ]
    ],
-   "note": "Across Shockoe Valley on the Marshall Street Viaduct (1911, since demolished: drawn straight) from College Street to 21st Street at Jefferson Park, out Marshall Street, and down to Fulton along Williamsburg Avenue. The route from Marshall Street down to Fulton is approximate.",
+   "note": "Across Shockoe Valley on the Marshall Street Viaduct (1911, since demolished: drawn straight) from College Street to 21st Street at Jefferson Park, out Marshall Street, and down to Fulton along Williamsburg Avenue. The route from Marshall Street down to Fulton is approximate. Along Williamsburg Avenue in front of the Armitage Manufacturing Company's building (1900) the line is drawn on the avenue's far side, clear of the wall: approximate.",
    "sources": [
     "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts",
-    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://www.dhr.virginia.gov/historic-registers/127-6693/"
+   ],
+   "round": [
+    {
+     "from": [
+      -77.4153086,
+      37.5267575
+     ],
+     "to": [
+      -77.4158557,
+      37.5245582
+     ],
+     "tolerance": 0.5
+    },
+    {
+     "from": [
+      -77.4163556,
+      37.5248024
+     ],
+     "to": [
+      -77.4135603,
+      37.5231405
+     ],
+     "tolerance": 0.5
+    }
    ]
   },
   {
@@ -6490,6 +6576,21 @@
  "carLineBed": 1.5,
  "carLineSeal": true,
  "carDecks": true,
+ "carDeckOnLine": [
+  "w37957180",
+  "w37957186",
+  "w167830264",
+  "w335959492",
+  "w307770892",
+  "w44703328",
+  "w149509962",
+  "w1303394969",
+  "w38006094",
+  "w38154795",
+  "w308302656",
+  "history:marshall-street-viaduct",
+  "history:free-bridge"
+ ],
  "carLineEnds": 30,
  "bridgesClearTraced": true,
  "vergeReach": 60,

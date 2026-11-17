@@ -103,6 +103,11 @@ export interface HistoryFeature {
   readonly cutTrain?: Train
   /** Width in meters: a creek's, a curated rail line's ballast (default 3.2), a canopy's roof. */
   readonly width?: number
+  /**
+   * A streetcar line: stretches (lon/lat ends) already drawn as curves where the line was placed,
+   * kept to `tolerance` meters when the line is straightened, so their bends stay round.
+   */
+  readonly round?: readonly { readonly from: Vec2; readonly to: Vec2; readonly tolerance: number }[]
   /** From this year a landmark stands as a burned shell. */
   readonly ruin?: number
   /** A `plan`: draw only the streets inside it while it stands. */
@@ -302,6 +307,11 @@ export interface History {
   /** A road deck that carries a car line is laid on the line as drawn, so deck and ground bands meet without a step. */
   readonly carDeckSnap?: boolean
   /**
+   * A road deck that carries a car line takes the line's center line, so the deck and the band
+   * on the ground run as one (`true`), or only the decks listed, by id.
+   */
+  readonly carDeckOnLine?: boolean | readonly string[]
+  /**
    * Meters: a car line that ends this close to another line, short of it, is carried on
    * straight to meet it (a junction where the two were placed on different corners).
    */
@@ -398,6 +408,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.streetsUnderCars === undefined ? {} : { streetsUnderCars: raw.streetsUnderCars }),
     ...(raw.carDecks === undefined ? {} : { carDecks: raw.carDecks }),
     ...(raw.carDeckSnap === undefined ? {} : { carDeckSnap: raw.carDeckSnap }),
+    ...(raw.carDeckOnLine === undefined ? {} : { carDeckOnLine: raw.carDeckOnLine }),
     ...(raw.carLineEnds === undefined ? {} : { carLineEnds: raw.carLineEnds }),
     ...(raw.vergeFill === undefined ? {} : { vergeFill: raw.vergeFill }),
     ...(raw.viaductClearance === undefined ? {} : { viaductClearance: raw.viaductClearance }),

@@ -527,12 +527,6 @@ export const buildScene = (
   // `bridgePieces`), not on the ground under it.
   const tramRuns: { id: string; pts: Vec2[] }[] = []
   const tramScale = time?.history.streetcarScale ?? 1
-  const roadDecks: DeckSpan[] = []
-  for (const f of bridgeLines) {
-    if (isRail(f.tags) || skyways.has(f)) continue
-    const pts = f.points.map(([lon, lat]) => view.toView(lon, lat))
-    for (let i = 0; i + 1 < pts.length; i++) roadDecks.push({ a: pts[i], b: pts[i + 1], half: deckWidth(f.tags) / 2 })
-  }
   // Each line's runs, straightened (below), before any is drawn: a run's end may reach another's.
   const placedRuns: { h: HistoryFeature; k: number; w: number; pts: Vec2[] }[] = []
   for (const h of curated) {
@@ -541,8 +535,10 @@ export const buildScene = (
     for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
       // A line placed on today's streets carries their every jog (a traffic circle, a
       // carriageway's sideways step): it is straightened to within TRAM_TOLERANCE of its width
-      // (at least 7 m), and its bends are filled round, so the band runs smooth.
-      placedRuns.push({ h, k, w, pts: simplifyLine(run.map(([lon, lat]) => view.toView(lon, lat)), Math.max(7, w * TRAM_TOLERANCE)) })
+      // (at least 7 m), and its bends are filled round, so the band runs smooth. A stretch the
+      // line's `round` names (already smoothed where it was placed) keeps its curve instead.
+      const raw = run.map(([lon, lat]) => view.toView(lon, lat))
+      placedRuns.push({ h, k, w, pts: roundStretches(raw, simplifyLine(raw, Math.max(7, w * TRAM_TOLERANCE)), (h.round ?? []).map((s) => ({ from: view.toView(s.from[0], s.from[1]), to: view.toView(s.to[0], s.to[1]), tolerance: s.tolerance }))) })
     }
   }
   // With carDeckSnap, a road deck that carries a car line is laid on the line as drawn (each
@@ -574,14 +570,43 @@ export const buildScene = (
         if (!f.points.some((q) => moved.has(`${q[0]},${q[1]}`))) continue
         bridgeLines[i] = { ...f, points: f.points.map((q) => moved.get(`${q[0]},${q[1]}`) ?? q) }
       }
-      roadDecks.length = 0
-      for (const f of bridgeLines) {
-        if (isRail(f.tags) || skyways.has(f)) continue
-        const pts = f.points.map(([lon, lat]) => view.toView(lon, lat))
-        for (let i = 0; i + 1 < pts.length; i++) roadDecks.push({ a: pts[i], b: pts[i + 1], half: deckWidth(f.tags) / 2 })
-      }
       extraStats.carDecksSnapped = moved.size
     }
+  }
+  // With carDeckOnLine, a road deck that carries a car line takes the line's center line (as
+  // the line is drawn, straightened): the deck and the band on the ground run as one, with no
+  // step where they meet. A node it shares with another deck moves with it, so the decks still
+  // join. `true` for every such deck, or a list of the decks' ids.
+  const onLine = time?.history.carDeckOnLine
+  const deckOnLine = new Set<string>()
+  if (onLine !== undefined && onLine !== false) {
+    const runs = placedRuns.map((r) => r.pts)
+    const moved = new Map<string, Vec2>()
+    const snapped = new Set<number>()
+    bridgeLines.forEach((f, i) => {
+      if (isRail(f.tags) || skyways.has(f) || (onLine !== true && !onLine.includes(f.id))) return
+      const pts = f.points.map(([lon, lat]) => view.toView(lon, lat))
+      const run = runCarrying(pts, runs, 9 * tramScale)
+      if (run === null) return
+      for (const [j, p] of pts.entries()) moved.set(`${f.points[j][0].toFixed(7)},${f.points[j][1].toFixed(7)}`, view.fromView(nearestOn(p, run)))
+      snapped.add(i)
+      deckOnLine.add(f.id)
+    })
+    if (snapped.size > 0) {
+      extraStats.carDecksOnLine = snapped.size
+      bridgeLines.forEach((f, i) => {
+        if (!f.points.some((q) => moved.has(`${q[0].toFixed(7)},${q[1].toFixed(7)}`))) return
+        const pts = f.points.map((q): Vec2 => moved.get(`${q[0].toFixed(7)},${q[1].toFixed(7)}`) ?? q)
+        // A snapped deck between its ends follows the line's own bends.
+        bridgeLines[i] = { ...f, points: snapped.has(i) ? followRun(pts.map(([lon, lat]) => view.toView(lon, lat)), runs).map((p) => view.fromView(p)) : pts }
+      })
+    }
+  }
+  const roadDecks: DeckSpan[] = []
+  for (const f of bridgeLines) {
+    if (isRail(f.tags) || skyways.has(f)) continue
+    const pts = f.points.map(([lon, lat]) => view.toView(lon, lat))
+    for (let i = 0; i + 1 < pts.length; i++) roadDecks.push({ a: pts[i], b: pts[i + 1], half: deckWidth(f.tags) / 2 })
   }
   // With carLineEnds, a run that stops short of another line (within that many meters, ahead of
   // its end) is carried on straight to meet it.
@@ -1227,7 +1252,8 @@ export const buildScene = (
   }
   let mergedPieces = 0
   for (let c = 0; c < chains.length; c++) {
-    const all = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }) } : undefined)
+    const onLineDeck = deckOnLine.size > 0 && deckOnLine.has(chains[c].line.id)
+    const all = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }), ...(onLineDeck ? { onLine: true } : {}) } : undefined)
     const pieces = all.filter((p) => !merged(c, p))
     mergedPieces += all.length - pieces.length
     spans += pieces.filter((p) => p.pier !== true).length
@@ -1311,6 +1337,76 @@ export const carriesTram = (pts: readonly Vec2[], runs: readonly (readonly Vec2[
     }
   }
   return false
+}
+
+/** The run (view meters) a deck's center line carries, if any: the first that `carriesTram` finds. */
+export const runCarrying = (pts: readonly Vec2[], runs: readonly (readonly Vec2[])[], width: number): readonly Vec2[] | null => {
+  for (const run of runs) if (run.length >= 2 && carriesTram(pts, [run], width)) return run
+  return null
+}
+
+/** Where `p` falls on a polyline: the segment, how far along it (0 to 1), and the point. */
+const projectOn = (p: Vec2, run: readonly Vec2[]): { i: number; t: number; q: Vec2; d: number } => {
+  let best = { i: 0, t: 0, q: run[0], d: Infinity }
+  for (let i = 0; i + 1 < run.length; i++) {
+    const a = run[i], b = run[i + 1]
+    const dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy
+    const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2))
+    const q: Vec2 = [a[0] + dx * t, a[1] + dy * t]
+    const d = Math.hypot(p[0] - q[0], p[1] - q[1])
+    if (d < best.d) best = { i, t, q, d }
+  }
+  return best
+}
+
+/** The nearest point of a polyline to `p`. */
+export const nearestOn = (p: Vec2, run: readonly Vec2[]): Vec2 => projectOn(p, run).q
+
+/**
+ * A deck whose nodes lie on a car line (view meters), following the line between them: each of
+ * its nodes kept, and the line's own vertices between each pair added, so a deck over a bend
+ * bends with the line.
+ */
+export const followRun = (pts: readonly Vec2[], runs: readonly (readonly Vec2[])[]): Vec2[] => {
+  let run: readonly Vec2[] | null = null
+  let far = Infinity
+  for (const r of runs) {
+    if (r.length < 2) continue
+    const d = Math.max(...pts.map((p) => projectOn(p, r).d))
+    if (d < far) { far = d; run = r }
+  }
+  if (run === null || far > 0.01) return pts.slice()
+  const on = run
+  const at = pts.map((p) => projectOn(p, on))
+  const out: Vec2[] = [pts[0]]
+  for (let j = 0; j + 1 < pts.length; j++) {
+    const a = at[j], b = at[j + 1]
+    if (a.i < b.i) for (let i = a.i + 1; i <= b.i; i++) out.push(on[i])
+    else if (a.i > b.i) for (let i = a.i; i > b.i; i--) out.push(on[i])
+    out.push(pts[j + 1])
+  }
+  return out.filter((p, i) => i === 0 || Math.hypot(p[0] - out[i - 1][0], p[1] - out[i - 1][1]) > 0.05)
+}
+
+/**
+ * A run straightened as a whole (`simple`, a subset of `raw`), with the stretches named redrawn
+ * finer: between the straightened run's vertices either side of each stretch, the raw points
+ * are kept to within the stretch's own tolerance. Elsewhere the run is as straightened.
+ */
+export const roundStretches = (raw: readonly Vec2[], simple: Vec2[], stretches: readonly { readonly from: Vec2; readonly to: Vec2; readonly tolerance: number }[]): Vec2[] => {
+  if (stretches.length === 0 || raw.length < 3) return simple
+  const kept = new Set(simple)
+  const near = (p: Vec2) => raw.reduce((bi, q, i) => (Math.hypot(q[0] - p[0], q[1] - p[1]) < Math.hypot(raw[bi][0] - p[0], raw[bi][1] - p[1]) ? i : bi), 0)
+  const keep = raw.map((p) => kept.has(p))
+  for (const s of stretches) {
+    let a = near(s.from), b = near(s.to)
+    if (a > b) [a, b] = [b, a]
+    while (a > 0 && !keep[a]) a--
+    while (b < raw.length - 1 && !keep[b]) b++
+    const fine = new Set(simplifyLine(raw.slice(a, b + 1), s.tolerance))
+    for (let i = a + 1; i < b; i++) keep[i] = fine.has(raw[i])
+  }
+  return raw.filter((_, i) => keep[i])
 }
 
 /** A streetcar line's runs off the road bridges it crosses on (view meters), cut every 4 m. */
@@ -2061,6 +2157,11 @@ const deckHeight = (region: Region, chain: BridgeChain): number => {
  * A bridge, cut into short spans so each can take its own place in the paint order. The deck
  * ramps up from the ground at both ends; piers drop from it at a fixed spacing.
  */
+const abutmentOf = (region: Region, chain: BridgeChain): number | undefined => {
+  for (const rule of region.bridges ?? []) if (chain.names.includes(rule.match.toLowerCase())) return rule.abutment
+  return undefined
+}
+
 const pierSpacing = (region: Region, chain: BridgeChain): number => {
   for (const rule of region.bridges ?? []) if (chain.names.includes(rule.match.toLowerCase())) return rule.pierSpacing ?? PIER_SPACING
   return PIER_SPACING
@@ -2708,7 +2809,7 @@ const deckLine = (
 const bridgePieces = (
   view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain,
   dl: DeckLine, roofs: readonly Roof[] = [], towers?: readonly Tower[],
-  trams?: { readonly runs: readonly (readonly Vec2[])[]; readonly width: number; readonly deck?: number },
+  trams?: { readonly runs: readonly (readonly Vec2[])[]; readonly width: number; readonly deck?: number; readonly onLine?: boolean },
 ): Item[] => {
   const spacing = pierSpacing(region, chain)
   const line = chain.line
@@ -2836,8 +2937,10 @@ const bridgePieces = (
           // On a deck the line is its track, TRAM_ON_DECK of its width on the ground (and no
           // wider than the deck), so the deck still reads as a bridge carrying it.
           const tw = fullTram ? Math.min(trams.width, width) / 2 : Math.min(trams.width * TRAM_ON_DECK, width - 1) / 2
-          // Full width, each piece laps a meter onto the next, past the deck's sealing stroke.
-          const tq = segmentQuad(p0, p1, tw, tw, fullTram ? 1 : 0.3)
+          // Full width, each piece laps a meter onto the next, past the deck's sealing stroke;
+          // on a deck laid on the line's own center line (carDeckOnLine) the pieces meet end to
+          // end, so no piece's band covers the last one's edge strokes.
+          const tq = segmentQuad(p0, p1, tw, tw, fullTram ? (trams.onLine === true ? 0 : 1) : 0.3)
           if (tq !== null) shapes.push({ pts: [view.toScreen(tq[0], z0), view.toScreen(tq[1], z1), view.toScreen(tq[2], z1), view.toScreen(tq[3], z0)], fill: pal.tram, seal: true })
           // A car on the deck: one at the piece nearest each TRAM_SPACING along the line's run
           // over the bridge (the ground's cars stop at the deck).
@@ -2879,6 +2982,36 @@ const bridgePieces = (
       })
     }
     traveled += len
+  }
+  // With the bridge's `abutment` (meters), each end's first stretch stands on an abutment: the
+  // deck's side facing the camera walled down to the ground, so a deck that springs from a bluff
+  // reads as built out from it rather than hung in the air. The wall is painted with the end's
+  // deck piece, under its deck, so it adds no item and changes no other item's order.
+  const ends = abutmentOf(region, chain)
+  if (ends !== undefined && dl.total > 2 * ends) {
+    const at = (s: number): { p: Vec2; d: Vec2 } => {
+      let i = 0
+      while (i + 2 < pts.length && cum[i + 1] < s) i++
+      const a = pts[i], b = pts[i + 1]
+      const L = Math.max(1e-6, cum[i + 1] - cum[i])
+      const u = Math.max(0, Math.min(1, (s - cum[i]) / L))
+      return { p: [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u], d: [(b[0] - a[0]) / L, (b[1] - a[1]) / L] }
+    }
+    const decks = items.filter((it) => it.span !== undefined && it.pier !== true)
+    for (const [host, s0, s1] of [[decks[0], 0, ends], [decks[decks.length - 1], dl.total - ends, dl.total]] as const) {
+      if (host === undefined) continue
+      const ss: number[] = []
+      for (let x = s0; x < s1; x += 1) ss.push(x)
+      ss.push(s1)
+      const mid = at((s0 + s1) / 2)
+      // The side whose outward normal faces the camera (negative N').
+      const sign = mid.d[0] > 0 ? -1 : 1
+      const side = ss.map((x) => { const { p, d } = at(x); return [p[0] - sign * d[1] * (width / 2), p[1] + sign * d[0] * (width / 2)] as Vec2 })
+      if (!side.every((q) => insideRect(q, view.frame))) continue
+      const top = side.map((q, j) => view.toScreen(q, zAt(ss[j])))
+      const foot = side.map((q, j) => view.toScreen(q, Math.min(zAt(ss[j]), terrain.z(q))))
+      ;(host.shapes as Shape[]).unshift({ pts: [...top, ...foot.reverse()], fill: pal.fascia, ink: true })
+    }
   }
   if (towers !== undefined) items.push(...cablePieces(view, line.id, pts, cum, zAt, towers))
   return [...items, ...carOnDeck]
