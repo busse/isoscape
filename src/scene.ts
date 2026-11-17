@@ -693,12 +693,24 @@ export const buildScene = (
     // in the water, so it is left out and counted (`tracedOnWater`).
     const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
     let tracedOnWater = 0
+    // A rail viaduct standing in the year runs where a traced building stood: the building was
+    // cleared for it (most were mapped before the viaducts of 1901) or the sheet misplaces it.
+    // Drawn, its piers pass through the roof, so it is left out and counted (`tracedUnderViaduct`).
+    const viaducts = features.filter((f): f is LineFeature => f.type === 'line' && f.tags.railway !== undefined && isBridge(f.tags))
+      .map((f) => f.points.map(([lon, lat]) => view.toView(lon, lat)))
+    const underViaduct = (ring: Ring): boolean => viaducts.some((pts) => pts.some((p) => pointInRing(p, ring)) ||
+      pts.slice(1).some((q, i) => ring.some((a, k) => segmentsCross(pts[i], q, a, ring[(k + 1) % ring.length]))))
+    let tracedUnderViaduct = 0
     for (const b of time.history.traced) {
       if (!alive(b.from, b.to, time.year)) continue
       const outer = orient(simplifyRing(toViewRing(view, b.ring), 0.3), true)
       if (outer.length < 3 || !outer.every((p) => insideRect(p, frame))) continue
       if (wetShare(outer, (p) => onWater(sc, p)) >= 0.5) {
         tracedOnWater++
+        continue
+      }
+      if (underViaduct(outer)) {
+        tracedUnderViaduct++
         continue
       }
       const grounds = outer.map((p) => terrain.z(p))
@@ -709,6 +721,7 @@ export const buildScene = (
     }
     stats.traced = ends.map + ends.rebuilt + ends.highway + ends.assumed
     if (tracedOnWater > 0) stats.tracedOnWater = tracedOnWater
+    if (tracedUnderViaduct > 0) stats.tracedUnderViaduct = tracedUnderViaduct
     stats.tracedEndMap = ends.map
     stats.tracedEndRebuilt = ends.rebuilt
     stats.tracedEndHighway = ends.highway
@@ -867,6 +880,12 @@ export const seatLevel = (grounds: readonly number[], exaggeration: number): num
 export const spansWater = (tags: Readonly<Record<string, string>>, outer: Ring, wet: (p: Vec2) => boolean): boolean => {
   const layer = parseInt(tags.layer ?? '', 10)
   return Number.isFinite(layer) && layer >= 1 && wet(centroid(outer))
+}
+
+/** Do segments ab and cd cross (not merely touch at an end)? */
+export const segmentsCross = (a: Vec2, b: Vec2, c: Vec2, d: Vec2): boolean => {
+  const o = (p: Vec2, q: Vec2, r: Vec2) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
+  return o(a, b, c) * o(a, b, d) < 0 && o(c, d, a) * o(c, d, b) < 0
 }
 
 /** The share of a footprint on water, from 0 to 1, sampled on a grid of about 100 points (its centroid alone if too small to sample). */

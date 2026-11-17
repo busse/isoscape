@@ -623,7 +623,10 @@ the canal's Great Basin, an approximate outline). A traced building with half it
 or more on the water drawn in its year would stand in the river, so it is left out, and the
 explorer counts how many: in downtown Richmond 10 in 1886, 3 in 1905, 20 in 1925 and 18 in
 1950, most of them mills on the islands and races above the Mayo Bridge, and warehouses on the
-Great Basin's edge.
+Great Basin's edge. Likewise a traced building that a rail viaduct standing in its year passes
+over is left out: most were mapped in 1886 or 1895 and cleared for the viaducts of 1901, and
+the rest are misplaced by their sheet; drawn, the viaduct's piers would pass through their roofs
+(in downtown Richmond 21 in 1925 and 11 in 1950).
 
 The historic buildings are sketches, not a survey. A machine traced them from scans of
 fire-insurance maps, so outlines are approximate, heights are guessed from material, and some

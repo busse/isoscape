@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { bankGrounds, groundCover, wetShare, seatLevel, settlePrisms, spansWater, type Prism } from '../src/scene.ts'
+import { bankGrounds, groundCover, segmentsCross, wetShare, seatLevel, settlePrisms, spansWater, type Prism } from '../src/scene.ts'
 import type { Vec2 } from '../src/geom.ts'
 import { buildingHeights } from '../src/classify.ts'
 
@@ -101,4 +101,10 @@ test('the share of a footprint on water', () => {
   assert.ok(Math.abs(wetShare(square(0, 0, 20), half) - 0.5) < 0.05)
   assert.equal(wetShare(square(0, 0, 20), () => false), 0)
   assert.equal(wetShare(square(0, 0, 20), () => true), 1)
+})
+
+test('segments cross only through each other, not at a shared end', () => {
+  assert.equal(segmentsCross([0, 0], [2, 2], [0, 2], [2, 0]), true)
+  assert.equal(segmentsCross([0, 0], [1, 1], [1, 1], [2, 0]), false)
+  assert.equal(segmentsCross([0, 0], [1, 0], [0, 1], [1, 1]), false)
 })
