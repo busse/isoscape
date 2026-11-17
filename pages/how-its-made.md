@@ -1044,7 +1044,20 @@ at 24 × 18, the 36 × 24 in map at 18 × 12, so 10.5, 9.3 and 14 pt on the file
 wrapped as evenly as they go so no word stands alone, and the corner the title block takes on
 any face cut from a file is kept clear. Markers that would overlap are moved apart with a short
 leader to their place; two-digit numbers are set smaller to fit their rings. A set's prints
-carry the dated series' ground note: the ground is today's, from lidar.
+carry the dated series' ground note: the ground is today's, from lidar. Where several boxes share
+a place (four of Broad Street Station's), each marker can be set off it by a few marker widths,
+with its leader back, so the markers do not hide the place they name.
+
+The Broad Street set's map adds a few rules of its own. Rail decks that cross pass at least 6 m
+apart by their OSM layers, the lower one dipped toward the ground (keeping 3 m over it) and the
+upper one lifted for what that cannot give, each change fading out at a 3% grade along its deck,
+so the Triple Crossing reads at three levels. Streets are mended after the year's drops: a run of
+up to 200 m left out between drawn streets for want of houses is put back, and a road that led
+only to a later bridge, ramp or main road is left out with it, up to 250 m back from it, except
+where a curated bridge of the year lands. Map labels carry a halo half their size wide over the
+dense blocks, and rapids are drawn one stroke a cell. Main Street Station is drawn in massing
+from the same measurements as its cutaway, its parts set from the ground under the station alone;
+its roofs are hips and gables, its shed's on columns over the deck and trestle.
 
 **What the series cannot show:**
 
