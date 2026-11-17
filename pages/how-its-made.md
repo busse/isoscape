@@ -670,7 +670,10 @@ corners name (any other street costs six times as much per meter). Two streets t
 without sharing a node take their closest points, up to 150 m apart. A run over a viaduct
 since torn down is drawn straight. Where a line runs along a road bridge (within 6 m of its deck's
 edge and within about 25° of its heading, beside the deck and not past its ends), it is drawn
-on the deck, as wide as the deck allows, and no car is set on the ground under it. Vanished pleasure grounds (a fairground) take a sandy tint of
+on the deck, as wide as the deck allows, and no car is set on the ground under it. A road bridge
+since taken down can be curated as a `bridge` line and is drawn as today's bridges are: the
+low Free Bridge at Ninth Street (1878 to 1972), on which the Forest Hill cars crossed the
+James, stands where the Manchester Bridge of 1973 does today. Vanished pleasure grounds (a fairground) take a sandy tint of
 their own, and a racetrack is a closed dirt-colored ribbon. `--streetcar-scale` overrides the
 series' scale for one build: the single-stop prints of the streetcar series use 1.5, so the
 lines read thinner up close.

@@ -31,12 +31,16 @@ export interface Epoch {
 export interface HistoryFeature {
   readonly id: string
   readonly name: string
-  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label'
+  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label' | 'bridge'
   readonly from: number
   readonly to?: number
   /** lon/lat outline (open), for areas and landmarks. */
   readonly ring?: Vec2[]
-  /** lon/lat center line, for creeks and streetcar lines (a streetcar line may hold several runs: `lines`). */
+  /**
+   * lon/lat center line, for creeks, streetcar lines (a streetcar line may hold several runs:
+   * `lines`) and lost road bridges (`bridge`: drawn as a road bridge of today would be, one
+   * level up, its deck carrying any streetcar line that runs along it).
+   */
   readonly line?: Vec2[]
   readonly lines?: Vec2[][]
   /** Streetcar lines: the line's name, for the explorer, and the operator. */

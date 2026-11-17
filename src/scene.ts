@@ -156,6 +156,13 @@ export const buildScene = (
     features = r.kept
     unbuiltStreets = r.dropped
   }
+  // A road bridge since taken down is drawn as today's bridges are, from its center line.
+  const lostBridges = curated.filter((h) => h.kind === 'bridge' && h.line !== undefined)
+  if (lostBridges.length > 0) {
+    features = [...features, ...lostBridges.map((h): LineFeature => ({
+      type: 'line', id: `history:${h.id}`, tags: { highway: 'secondary', bridge: 'yes', layer: '1', name: h.name }, points: h.line ?? [],
+    }))]
+  }
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)
   const frame = view.frame
