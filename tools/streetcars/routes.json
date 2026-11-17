@@ -51,6 +51,30 @@
    "sources": [
     "https://dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6064_Three_Chopt_Road_HD_2012_NR_FINAL.pdf",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+   ],
+   "patches": [
+    {
+     "from": [
+      -77.52386,
+      37.5727558
+     ],
+     "to": [
+      -77.5270789,
+      37.5776713
+     ],
+     "toward": {
+      "ways": [
+       308298210,
+       1516913087,
+       204596277
+      ],
+      "share": 0.5,
+      "reach": 60
+     },
+     "taper": 30,
+     "smooth": 25,
+     "round": 0.5
+    }
    ]
   },
   {
@@ -439,6 +463,35 @@
    "sources": [
     "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+   ],
+   "patches": [
+    {
+     "from": [
+      -77.4153086,
+      37.5267575
+     ],
+     "to": [
+      -77.4158557,
+      37.5245582
+     ],
+     "taper": 20,
+     "smooth": 15,
+     "round": 0.5
+    },
+    {
+     "from": [
+      -77.4163556,
+      37.5248024
+     ],
+     "to": [
+      -77.4135603,
+      37.5231405
+     ],
+     "offset": 8,
+     "taper": 25,
+     "smooth": 10,
+     "round": 0.5
+    }
    ]
   },
   {
