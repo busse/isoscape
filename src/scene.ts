@@ -2819,6 +2819,42 @@ const bridgePieces = (
     }
     traveled += len
   }
+  // With the bridge's `endPier`, each end's first `endPier` meters stand on an abutment: the
+  // deck's side facing the camera walled down to the ground, so a deck that springs from a bluff
+  // reads as built out from it rather than hung in the air.
+  if (ends !== undefined && dl.total > 2 * ends) {
+    const at = (s: number): { p: Vec2; d: Vec2 } => {
+      let i = 0
+      while (i + 2 < pts.length && cum[i + 1] < s) i++
+      const a = pts[i], b = pts[i + 1]
+      const L = Math.max(1e-6, cum[i + 1] - cum[i])
+      const u = Math.max(0, Math.min(1, (s - cum[i]) / L))
+      return { p: [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u], d: [(b[0] - a[0]) / L, (b[1] - a[1]) / L] }
+    }
+    for (const [k, s0, s1] of [[0, 0, ends], [1, dl.total - ends, dl.total]] as const) {
+      const ss: number[] = []
+      for (let x = s0; x < s1; x += 1) ss.push(x)
+      ss.push(s1)
+      const mid = at((s0 + s1) / 2)
+      // The side whose outward normal faces the camera (negative N').
+      const sign = mid.d[0] > 0 ? -1 : 1
+      const side = ss.map((x) => { const { p, d } = at(x); return [p[0] - sign * d[1] * (width / 2), p[1] + sign * d[0] * (width / 2)] as Vec2 })
+      if (!side.every((q) => insideRect(q, view.frame))) continue
+      const top = side.map((q, j) => view.toScreen(q, zAt(ss[j])))
+      const foot = side.map((q, j) => view.toScreen(q, Math.min(zAt(ss[j]), terrain.z(q))))
+      items.push({
+        id: `${line.id}.abutment${k}`,
+        kind: 'bridge',
+        hull: convexHull([...side, ...ss.map((x) => at(x).p)]),
+        zMin: Math.min(...side.map((q) => terrain.z(q))),
+        zMax: Math.max(...ss.map((x) => zAt(x))),
+        key: mid.p[1],
+        shapes: [{ pts: [...top, ...foot.reverse()], fill: pal.fascia, ink: true }],
+        dots: [],
+        pier: true,
+      })
+    }
+  }
   if (towers !== undefined) items.push(...cablePieces(view, line.id, pts, cum, zAt, towers))
   return [...items, ...carOnDeck]
 }
