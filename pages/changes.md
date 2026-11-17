@@ -11,6 +11,32 @@ tools and the research get better, a published map is sometimes corrected and re
 page lists those changes, newest first. A print ordered after a change is made from the new
 version; the version is part of each print file's name (`-v2`, `-v3`).
 
+## November 17, 2026 (Richmond's Streetcars, the last six)
+
+**Richmond's Streetcars, 1925: the set's map, the framed set and stops 1, 7, 8 and 9 redrawn.** The
+framed set, The Lines and Fourteen Stops (plate STC·00), and the map alone, The System Map (STC·M),
+are now version 4; Westhampton Park (STC·01), Church Hill and Jefferson Park (STC·07), Seventh and
+Broad (STC·08) and Manchester (STC·09) are version 3. They were redrawn with Claude, in code, and
+inspected tile by tile at full print size. They carry the corrections listed below for the other ten
+stops (car lines down the middle of divided streets, bridges at the line's width, Chamberlayne Avenue
+at grade before 1992, the Fair Grounds spur's low deck, woods filled, streams mapped off their beds
+left out), and these besides:
+
+- Bridges and viaducts that carry a car line follow the line, so the line no longer steps sideways
+  onto and off a deck.
+- The Westhampton line runs on its own strip beside Three Chopt Road rather than down the middle of
+  the road (approximate).
+- The Fulton line on Williamsburg Avenue is moved to clear the Armitage building, which it ran
+  through (approximate).
+- The Marshall Street Viaduct's piers are respaced, and its ends stand on abutments rather than
+  hanging out from the bluff (approximate).
+- Manchester's note, on its print and on the framed set's card 9, says the Mayo Bridge is drawn as a
+  plain deck.
+
+With these, every print of the set is redrawn and the whole set, the map, the framed set and all
+fourteen stops, is for sale. The title block on each print gives its version. This entry was drafted
+with Claude.
+
 ## November 17, 2026 (late)
 
 **Broad Street Station, 1943: nine of the set's prints redrawn as version 3.** AY Tower (plate
