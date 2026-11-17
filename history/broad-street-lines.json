@@ -32902,6 +32902,7 @@
   "source": "https://www.loc.gov/item/sanborn09064_009/"
  },
  "streetsNearBuildings": 60,
+ "serviceNearBuildings": 25,
  "streetcarScale": 1,
  "railScale": 4
 }

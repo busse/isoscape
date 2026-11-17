@@ -653,7 +653,10 @@ grid cell of a step. A suburb whose streets were laid out but not yet built on s
 roads only. The downtown series holds its main roads to the same test, because before the
 first Sanborn map (1886) the only record of how far the town reached is what still stands. A
 street of a town plan (Mayo's grid of 1737) is kept in every year from the plan on, houses or
-not, though not the plan's service roads. Today's scene keeps all of today's streets.
+not, though not the plan's service roads. A series can hold service roads (driveways, yard
+and works roads) to a closer test: the 1925 streetcar and 1943 Broad Street scenes keep one only
+with a building of the year within 25 m, so a works' yard roads are not kept by a house across
+the street. Today's scene keeps all of today's streets.
 
 **Streetcar lines.** A curated `streetcar` item is a line drawn as a bold red ribbon down the
 street, 9 m wide, with a car every 900 m along it: 14 m long and 3.6 m tall like a 1920s

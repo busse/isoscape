@@ -11807,5 +11807,6 @@
   "source": "https://www.loc.gov/collections/sanborn-maps/?q=richmond+virginia"
  },
  "streetsNearBuildings": 75,
+ "serviceNearBuildings": 25,
  "streetcarScale": 3
 }

@@ -180,6 +180,11 @@ export interface History {
    */
   readonly majorStreetsNearBuildings?: boolean
   /**
+   * Hold service roads (driveways, yards, lanes to a building) to a closer test: a building of the
+   * year within this many meters, so a works' yard roads are not kept by a house across the road.
+   */
+  readonly serviceNearBuildings?: number
+  /**
    * Draw streetcar lines and cars this many times life size, so they read in a city-wide view
    * (default 1).
    */
@@ -202,6 +207,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     dates: raw.dates ?? [], ...(raw.sanborn === undefined ? {} : { sanborn: raw.sanborn }), traced,
     ...(raw.streetsNearBuildings === undefined ? {} : { streetsNearBuildings: raw.streetsNearBuildings }),
     ...(raw.majorStreetsNearBuildings === undefined ? {} : { majorStreetsNearBuildings: raw.majorStreetsNearBuildings }),
+    ...(raw.serviceNearBuildings === undefined ? {} : { serviceNearBuildings: raw.serviceNearBuildings }),
     ...(raw.streetcarScale === undefined ? {} : { streetcarScale: raw.streetcarScale }),
     ...(raw.railScale === undefined ? {} : { railScale: raw.railScale }),
   }
@@ -269,6 +275,7 @@ const PLANNED_STREETS = new Set(['tertiary', 'residential', 'unclassified', 'liv
  */
 export const dropUnbuiltStreets = (
   features: readonly Feature[], meters: number, extra: readonly Vec2[] = [], plans: readonly (readonly Vec2[])[] = [], major = false,
+  service?: number,
 ): { kept: Feature[]; dropped: number } => {
   let lat0 = 0
   let n = 0
@@ -276,28 +283,32 @@ export const dropUnbuiltStreets = (
   lat0 = n ? lat0 / n : 0
   const kx = 111_320 * Math.cos((lat0 * Math.PI) / 180)
   const ky = 110_574
-  const cell = meters
-  const grid = new Set<string>()
-  const add = (lon: number, lat: number) => {
-    const x = Math.floor((lon * kx) / cell)
-    const y = Math.floor((lat * ky) / cell)
-    grid.add(`${x},${y}`)
-  }
+  const corners: Vec2[] = []
   for (const f of features) {
     if (f.type !== 'polygon' || (f.tags.building === undefined && f.tags['building:part'] === undefined)) continue
-    for (const p of f.outers[0]) add(p[0], p[1])
+    for (const p of f.outers[0]) corners.push(p)
   }
-  for (const p of extra) add(p[0], p[1])
-  const near = (lon: number, lat: number) => {
-    const x = Math.floor((lon * kx) / cell)
-    const y = Math.floor((lat * ky) / cell)
-    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) if (grid.has(`${x + dx},${y + dy}`)) return true
-    return false
+  corners.push(...extra)
+  // A grid of `size` m cells holding every building corner; near = a corner in this cell or one beside it.
+  const nearTest = (size: number) => {
+    const grid = new Set<string>()
+    for (const p of corners) grid.add(`${Math.floor((p[0] * kx) / size)},${Math.floor((p[1] * ky) / size)}`)
+    return (lon: number, lat: number) => {
+      const x = Math.floor((lon * kx) / size)
+      const y = Math.floor((lat * ky) / size)
+      for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) if (grid.has(`${x + dx},${y + dy}`)) return true
+      return false
+    }
   }
+  const nearStreet = nearTest(meters)
+  const nearService = service === undefined ? nearStreet : nearTest(service)
   let dropped = 0
   const kept = features.filter((f) => {
     if (f.type !== 'line' || !(MINOR_STREETS.has(f.tags.highway ?? '') || (major && MAJOR_STREETS.has(f.tags.highway ?? '')))) return true
     if ((PLANNED_STREETS.has(f.tags.highway ?? '') || MAJOR_STREETS.has(f.tags.highway ?? '')) && f.points.some((p) => plans.some((r) => pointInRing(p, r as Vec2[])))) return true
+    const isService = f.tags.highway === 'service' && service !== undefined
+    const near = isService ? nearService : nearStreet
+    const cell = isService ? service : meters
     // Walk the street every half-cell, so a long block with one house still counts.
     for (let i = 0; i < f.points.length; i++) {
       const a = f.points[i]

@@ -156,3 +156,14 @@ test('a dated series: what no rule dates is drawn today only, except the street 
   assert.ok(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1913, h))
   assert.ok(featureAlive(area({ leisure: 'park' }), 2026, h))
 })
+
+test('service roads can be held to a closer test than streets (serviceNearBuildings)', () => {
+  const ids = (r: { kept: { id: string }[] }) => r.kept.map((f) => f.id).sort()
+  // A house at the origin; a street and a yard road each about 100 m off (0.0009° of latitude).
+  const line = (id: string, highway: string, y: number): LineFeature => ({ type: 'line', id, tags: { highway }, points: [[0, y], [0.0002, y]] })
+  const feats = [building('h', 0, 0), line('street', 'residential', 0.0009), line('yard', 'service', 0.0009), line('drive', 'service', 0.0002)]
+  // With streets kept within 60 m (cells of 60 m, so up to about 120 m), both survive.
+  assert.deepEqual(ids(dropUnbuiltStreets(feats, 60)), ['drive', 'h', 'street', 'yard'])
+  // Service roads within 25 m: the yard road goes, the drive by the house stays.
+  assert.deepEqual(ids(dropUnbuiltStreets(feats, 60, [], [], false, 25)), ['drive', 'h', 'street'])
+})
