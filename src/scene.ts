@@ -25,7 +25,7 @@ import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
 import { cutawayItems, partSolids, partTones, shedItems, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
-import { alive, bridgeFeature, bridgesAtGrade, dropApproaches, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
+import { WORKS, alive, bridgeFeature, bridgesAtGrade, dropApproaches, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
 export interface TimeContext {
@@ -153,9 +153,7 @@ export const buildScene = (
   if (time !== undefined) {
     const all = features
     const r = laterWorks(all, asOf(all, time), time.year, time.history, time.history.vergeReach ?? 20, time.history.vergeShare ?? 0.4)
-    // Curated bridges join the year's ways after the era rules (they carry their own years).
-    const bridges = curated.map(bridgeFeature).filter((f): f is Feature => f !== null)
-    features = bridges.length === 0 ? r.kept : [...r.kept, ...bridges]
+    features = r.kept
     later = { atGrade: r.atGrade, verges: r.verges }
     // A series' own rules for what the era rules cannot see (each off unless its history asks).
     if (time.history.atGrade !== undefined) {
@@ -177,6 +175,11 @@ export const buildScene = (
       if (approaches) extraStats.approachesLater = approaches
       if (orphans) extraStats.bridgesLeadingNowhere = orphans
     }
+    // Curated bridges join the year's ways after the era rules (they carry their own years). A
+    // series that ties bridges to their approaches (the sets) adds them after its past-ground
+    // rules instead (below): those rules are for today's bridges, not for curated ones.
+    const bridges = curated.map(bridgeFeature).filter((f): f is Feature => f !== null)
+    if (bridges.length > 0 && time.history.approachesWithBridges !== true) features = [...features, ...bridges]
   }
   let unbuiltStreets = 0
   // Today's scene draws today's streets, built on or not.
@@ -214,15 +217,38 @@ export const buildScene = (
     features = r.kept
     past = { canalBridges: r.canalBridges, orphanBridges: r.orphanBridges, plantings: r.plantings, spurs: r.spurs }
   }
-  // A road bridge since taken down is drawn as today's bridges are, from its center line.
-  const lostBridges = curated.filter((h) => h.kind === 'bridge' && h.line !== undefined)
-  if (lostBridges.length > 0) {
-    features = [...features, ...lostBridges.map((h): LineFeature => ({
-      type: 'line', id: `history:${h.id}`, tags: { highway: 'secondary', bridge: 'yes', layer: '1', name: h.name }, points: h.line ?? [],
-    }))]
+  if (time !== undefined && time.history.approachesWithBridges === true) {
+    const bridges = curated.map(bridgeFeature).filter((f): f is Feature => f !== null)
+    if (bridges.length > 0) features = [...features, ...bridges]
   }
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)
+  // With carDecks, a road bridge that carries a car line keeps its deck even where what it
+  // crosses came later (a street over the turnpike's cut): the street crossed level ground then,
+  // and drawn at grade the line would dip into today's cut.
+  if (time !== undefined && time.history.carDecks === true) {
+    const runs = curated.filter((h) => h.kind === 'streetcar').flatMap((h) => [...(h.line ? [h.line] : []), ...(h.lines ?? [])])
+      .map((run) => run.map(([lon, lat]) => view.toView(lon, lat)))
+    const today = new Map((extraAll ?? []).map((f) => [f.id, f]))
+    // Not one a source puts at grade (atGrade), and only a way the line itself runs on: every
+    // point of the deck within 3 m of the line (a line drawn down the middle of a divided street
+    // runs on neither carriageway's bridge, and those stay at grade).
+    const listed = new Set((time.history.atGrade ?? []).flatMap((r) => r.id))
+    const onLine = (pts: readonly Vec2[]) => pts.every((p, i) => {
+      const q = i + 1 < pts.length ? pts[i + 1] : p
+      const mid: Vec2 = [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2]
+      return [p, mid].every((x) => runs.some((run) => run.some((a, j) => j + 1 < run.length && segDist(x, a, run[j + 1]) <= 3)))
+    })
+    let kept = 0
+    features = features.map((f) => {
+      const was = today.get(f.id)
+      if (f.type !== 'line' || was === undefined || was.type !== 'line' || isBridge(f.tags) || !isBridge(was.tags) || was.tags.highway === undefined || listed.has(f.id)) return f
+      if (!onLine(was.points.map(([lon, lat]) => view.toView(lon, lat)))) return f
+      kept++
+      return was
+    })
+    if (kept) extraStats.carDecksOverLaterCuts = kept
+  }
   const frame = view.frame
   const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}), ...(later.atGrade ? { bridgesAtGrade: later.atGrade } : {}), ...(later.verges ? { vergesLater: later.verges } : {}), ...(past.canalBridges ? { canalBridgesLater: past.canalBridges } : {}), ...(past.orphanBridges ? { bridgesWithoutRoads: past.orphanBridges } : {}), ...(past.plantings ? { plantingsLater: past.plantings } : {}), ...(past.spurs ? { spursLater: past.spurs } : {}), ...extraStats }
   const opts = region.terrain ?? {}
@@ -294,6 +320,44 @@ export const buildScene = (
       const rings = curatedRings(h)
       if (rings.length > 0) ground.push({ kind: h.kind, rings })
     }
+  }
+  // With vergeFill (meters), a later road's corridor through woods is wooded over: where a road
+  // not yet built runs with woods of the year on both sides of it, within that many meters of its
+  // edge, the strip it cut is drawn as wood, so its outline does not show as a cut-out.
+  const fill = time?.history.vergeFill
+  if (fill !== undefined && time !== undefined) {
+    const woods = ground.filter((g) => g.kind === 'wood').map((g) => {
+      const xs = g.rings.flat().map((v) => v[0]), ys = g.rings.flat().map((v) => v[1])
+      return { g, box: [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)] as const }
+    })
+    const inWood = (p: Vec2) => woods.some(({ g, box }) => p[0] >= box[0] && p[0] <= box[2] && p[1] >= box[1] && p[1] <= box[3] &&
+      g.rings.some((r) => signedArea(r) > 0 && pointInRing(p, r)) && !g.rings.some((r) => signedArea(r) < 0 && pointInRing(p, r)))
+    let filled = 0
+    for (const f of extraAll ?? features) {
+      if (f.type !== 'line' || !WORKS.has(f.tags.highway ?? '') || featureAlive(f, time.year, time.history)) continue
+      const half = (roadWidth(f.tags) ?? 8) / 2
+      const pts = f.points.map(([lon, lat]) => view.toView(lon, lat))
+      for (let i = 0; i + 1 < pts.length; i++) {
+        const a = pts[i], b = pts[i + 1]
+        const len = Math.hypot(b[0] - a[0], b[1] - a[1])
+        if (len < 1e-6) continue
+        const n = Math.ceil(len / 8)
+        for (let k = 0; k < n; k++) {
+          const p0: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
+          const p1: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 1)) / n, a[1] + ((b[1] - a[1]) * (k + 1)) / n]
+          if (!insideRect(p0, wide)) continue
+          const m: Vec2 = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2]
+          const nx = -(b[1] - a[1]) / len, ny = (b[0] - a[0]) / len
+          const reach = half + fill
+          if (!inWood([m[0] + nx * reach, m[1] + ny * reach]) || !inWood([m[0] - nx * reach, m[1] - ny * reach])) continue
+          const q = segmentQuad(p0, p1, reach, reach, 2)
+          if (q === null) continue
+          ground.push({ kind: 'wood', rings: [orient(q, true)] })
+          filled++
+        }
+      }
+    }
+    if (filled > 0) extraStats.vergeFilled = filled
   }
   // Skyways: footbridges that run from building to building at a floor the data does not give.
   // Drawn at a ramp's height they lie across walls and roofs, so they are left out. They are
@@ -438,6 +502,8 @@ export const buildScene = (
     const pts = f.points.map(([lon, lat]) => view.toView(lon, lat))
     for (let i = 0; i + 1 < pts.length; i++) roadDecks.push({ a: pts[i], b: pts[i + 1], half: deckWidth(f.tags) / 2 })
   }
+  // Each line's runs, straightened (below), before any is drawn: a run's end may reach another's.
+  const placedRuns: { h: HistoryFeature; k: number; w: number; pts: Vec2[] }[] = []
   for (const h of curated) {
     if (h.kind !== 'streetcar') continue
     const w = (h.width ?? 9) * tramScale
@@ -445,7 +511,49 @@ export const buildScene = (
       // A line placed on today's streets carries their every jog (a traffic circle, a
       // carriageway's sideways step): it is straightened to within TRAM_TOLERANCE of its width
       // (at least 7 m), and its bends are filled round, so the band runs smooth.
-      const pts = simplifyLine(run.map(([lon, lat]) => view.toView(lon, lat)), Math.max(7, w * TRAM_TOLERANCE))
+      placedRuns.push({ h, k, w, pts: simplifyLine(run.map(([lon, lat]) => view.toView(lon, lat)), Math.max(7, w * TRAM_TOLERANCE)) })
+    }
+  }
+  // With carLineEnds, a run that stops short of another line (within that many meters, ahead of
+  // its end) is carried on straight to meet it.
+  const reachEnds = time?.history.carLineEnds
+  if (reachEnds !== undefined) {
+    for (const r of placedRuns) {
+      for (const atStart of [true, false]) {
+        const n = r.pts.length
+        if (n < 2) continue
+        const e = atStart ? r.pts[0] : r.pts[n - 1]
+        const before = atStart ? r.pts[1] : r.pts[n - 2]
+        const len = Math.hypot(e[0] - before[0], e[1] - before[1])
+        if (len < 1e-6) continue
+        const u: Vec2 = [(e[0] - before[0]) / len, (e[1] - before[1]) / len]
+        let best = Infinity
+        for (const o of placedRuns) {
+          if (o === r) continue
+          for (let i = 0; i + 1 < o.pts.length; i++) {
+            // Already touching: nothing to carry on.
+            if (segDist(e, o.pts[i], o.pts[i + 1]) < 0.5) { best = -1; break }
+            const a = o.pts[i], b = o.pts[i + 1]
+            const dx = b[0] - a[0], dy = b[1] - a[1]
+            const den = u[0] * dy - u[1] * dx
+            if (Math.abs(den) < 1e-9) continue
+            const t = ((a[0] - e[0]) * dy - (a[1] - e[1]) * dx) / den
+            const v = ((a[0] - e[0]) * u[1] - (a[1] - e[1]) * u[0]) / den
+            if (t > 0 && t <= reachEnds && v >= 0 && v <= 1) best = Math.min(best, t)
+          }
+          if (best < 0) break
+        }
+        if (best > 0 && best < Infinity) {
+          const q: Vec2 = [e[0] + u[0] * best, e[1] + u[1] * best]
+          if (atStart) r.pts.unshift(q)
+          else r.pts.push(q)
+          extraStats.carLinesCarriedOn = (extraStats.carLinesCarriedOn ?? 0) + 1
+        }
+      }
+    }
+  }
+  for (const { h, k, w, pts } of placedRuns) {
+    {
       // A series can lay each line on a bed of street (carLineBed, meters showing either side, times
       // the streetcar scale):
       // where the line covers its carriageway, or runs where no street of the year is drawn,
@@ -469,6 +577,8 @@ export const buildScene = (
     }
   }
   const tramWidth = 9 * tramScale
+  // With carDecks, a road deck carrying a car line is at least this wide: the line's own width.
+  const carDeckWidth = time?.history.carDecks === true ? tramWidth : undefined
   stats.streetcarLines = curated.filter((h) => h.kind === 'streetcar').length
   stats.ribbons = ribbons.length
 
@@ -498,6 +608,13 @@ export const buildScene = (
   // building's (approximate: the line's own placement is approximate in places).
   const onCarLine = time?.history.clearCarLines !== true ? null : lineIndex(tramRuns.map((r) => r.pts), 0.5)
   let onCarLines = 0
+  // With carDecks, a building (not curated) under a road deck that carries a car line is left
+  // out: the deck is drawn as wide as the line, and a bridge stood there.
+  const carDeckLines = carDeckWidth === undefined ? [] : bridgeLines.filter((f) => !isRail(f.tags) && !skyways.has(f))
+    .map((f) => f.points.map(([lon, lat]) => view.toView(lon, lat)))
+    .filter((pts) => carriesTram(pts, tramRuns.map((r) => r.pts), carDeckWidth))
+  const underCarDeck = carDeckLines.length === 0 ? null : lineIndex(carDeckLines, (carDeckWidth ?? 0) / 2)
+  let underCarDecks = 0
   for (const f of [...osmBuildings, ...extraBuildings]) {
     const isPart = f.tags['building:part'] !== undefined && f.tags.building === undefined
     if (f.tags.building === undefined && !isPart) continue
@@ -507,6 +624,10 @@ export const buildScene = (
     }
     if (onCarLine !== null && time?.dates.get(f.id)?.source === 'parcel' && f.outers.some((o) => onCarLine(toViewRing(view, o)))) {
       onCarLines++
+      continue
+    }
+    if (underCarDeck !== null && time?.dates.get(f.id)?.source !== 'curated' && f.outers.some((o) => underCarDeck(toViewRing(view, o)))) {
+      underCarDecks++
       continue
     }
     // Canopies (`building=roof`) are open underneath; a solid prism would misdraw them.
@@ -520,6 +641,7 @@ export const buildScene = (
   }
   if (underCuratedBridge > 0) stats.underCuratedBridge = underCuratedBridge
   if (onCarLines > 0) stats.parcelDatedOnCarLines = onCarLines
+  if (underCarDecks > 0) stats.underCarDecks = underCarDecks
   // A lattice tower (the Eiffel Tower, Tokyo Tower) is drawn whole as a tapering spire from
   // its outline, so the platforms mapped inside it as parts are dropped.
   const lattice = solids.filter((s) => isLatticeTower(s.tags))
@@ -870,6 +992,8 @@ export const buildScene = (
       ...(time.history.bridgesClearTraced === true ? curated.map(bridgeFeature) : [])
         .filter((f): f is LineFeature => f !== null && f.type === 'line' && !isRail(f.tags))
         .map((f) => ({ pts: f.points.map(([lon, lat]) => view.toView(lon, lat)), half: deckWidth(f.tags) / 2, deck: true })),
+      // A deck carrying a car line, at the line's width (carDecks).
+      ...carDeckLines.map((pts) => ({ pts, half: (carDeckWidth ?? 0) / 2, deck: true })),
     ]
     const works = laterWorkLines(extraAll ?? features, time.year, time.history).map((pts) => pts.map(([lon, lat]) => view.toView(lon, lat)))
     // Canals drawn as ribbons (a canal mapped as a line, not as an area) are water too.
@@ -882,6 +1006,9 @@ export const buildScene = (
       .map((f) => f.points.map(([lon, lat]) => view.toView(lon, lat)))
     const clearOfViaducts = clear === undefined ? null : lineIndex([...features.filter((f): f is LineFeature => f.type === 'line' && f.tags.railway !== undefined && isBridge(f.tags))
       .map((f) => f.points.map(([lon, lat]) => view.toView(lon, lat))), ...curatedDecks], clear)
+    // With carDecks, the clearance is kept from the edge of a deck carrying a car line, drawn at
+    // the line's width, and not from its center line.
+    const clearOfCarDecks = clear === undefined || carDeckLines.length === 0 ? null : lineIndex(carDeckLines, (carDeckWidth ?? 0) / 2 + clear)
     const streetClear = time.history.tracedClearOfStreets
     const CARRIAGEWAYS = new Set(['trunk', 'primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'living_street'])
     // Each street keeps clear its carriageway: half its drawn width less a meter, at least
@@ -893,7 +1020,7 @@ export const buildScene = (
         if (f.type !== 'line' || !CARRIAGEWAYS.has(f.tags.highway ?? '') || isBridge(f.tags)) continue
         addLine(Math.max(streetClear, (roadWidth(f.tags) ?? 0) / 2 - 1), f.points.map(([lon, lat]) => view.toView(lon, lat)))
       }
-      for (const r of tramRuns) addLine(streetClear, r.pts)
+      for (const r of tramRuns) addLine(time.history.tracedClearOfCarLines ?? streetClear, r.pts)
     }
     const streetTests = [...byReach.entries()].map(([reach, lines]) => lineIndex(lines, reach))
     const clearOfStreets = streetClear === undefined ? null : (ring: Ring) => streetTests.some((t) => t(ring))
@@ -921,7 +1048,7 @@ export const buildScene = (
         leftOut.push({ id: b.id, why: 'water' })
         continue
       }
-      if (clearOfViaducts !== null && clearOfViaducts(outer)) {
+      if ((clearOfViaducts !== null && clearOfViaducts(outer)) || (clearOfCarDecks !== null && clearOfCarDecks(outer))) {
         tracedUnderViaduct++
         leftOut.push({ id: b.id, why: 'viaduct' })
         continue
@@ -987,7 +1114,7 @@ export const buildScene = (
   const towers = suspensionTowers(view, chains, towerParts)
   const lines = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix, time !== undefined && time.year < time.history.present))), region.groupRailDecks === true)
   for (let c = 0; c < chains.length; c++) {
-    const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth } : undefined)
+    const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }) } : undefined)
     spans += pieces.filter((p) => p.pier !== true).length
     items.push(...pieces)
   }
@@ -1051,6 +1178,21 @@ export const onDeck = (p: Vec2, dir: Vec2, decks: readonly DeckSpan[]): boolean 
     const t = ((p[0] - d.a[0]) * ex + (p[1] - d.a[1]) * ey) / (el * el)
     if (t < 0 || t > 1) continue
     if (segDist(p, d.a, d.b) <= d.half + TRAM_DECK_SLACK) return true
+  }
+  return false
+}
+
+/** Whether any piece of a deck's center line (view meters) carries one of the car line runs. */
+export const carriesTram = (pts: readonly Vec2[], runs: readonly (readonly Vec2[])[], width: number): boolean => {
+  const along: DeckSpan[] = []
+  for (const run of runs) for (let j = 0; j + 1 < run.length; j++) along.push({ a: run[j], b: run[j + 1], half: width / 2 })
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const a = pts[i], b = pts[i + 1]
+    const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 8))
+    for (let k = 0; k < n; k++) {
+      const m: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 0.5)) / n, a[1] + ((b[1] - a[1]) * (k + 0.5)) / n]
+      if (onDeck(m, [b[0] - a[0], b[1] - a[1]], along)) return true
+    }
   }
   return false
 }
@@ -2380,14 +2522,16 @@ const deckLine = (
 const bridgePieces = (
   view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain,
   dl: DeckLine, roofs: readonly Roof[] = [], towers?: readonly Tower[],
-  trams?: { readonly runs: readonly (readonly Vec2[])[]; readonly width: number },
+  trams?: { readonly runs: readonly (readonly Vec2[])[]; readonly width: number; readonly deck?: number },
 ): Item[] => {
   const spacing = pierSpacing(region, chain)
   const line = chain.line
   const t = line.tags
   const rail = isRail(t)
-  const width = deckWidth(t)
   const { pts, cum, zAt } = dl
+  // A deck that carries a car line is drawn as wide as the line and its bed (carDecks).
+  const width = !rail && trams?.deck !== undefined && carriesTram(pts, trams.runs, deckWidth(t)) ? Math.max(deckWidth(t), trams.deck) : deckWidth(t)
+  const fullTram = trams?.deck !== undefined
   const items: Item[] = []
   const carOnDeck: Item[] = []
   let traveled = 0
@@ -2505,13 +2649,16 @@ const bridgePieces = (
         if (carried) {
           // On a deck the line is its track, TRAM_ON_DECK of its width on the ground (and no
           // wider than the deck), so the deck still reads as a bridge carrying it.
-          const tw = Math.min(trams.width * TRAM_ON_DECK, width - 1) / 2
-          const tq = segmentQuad(p0, p1, tw, tw, 0.3)
+          const tw = fullTram ? Math.min(trams.width, width) / 2 : Math.min(trams.width * TRAM_ON_DECK, width - 1) / 2
+          // Full width, each piece laps a meter onto the next, past the deck's sealing stroke.
+          const tq = segmentQuad(p0, p1, tw, tw, fullTram ? 1 : 0.3)
           if (tq !== null) shapes.push({ pts: [view.toScreen(tq[0], z0), view.toScreen(tq[1], z1), view.toScreen(tq[2], z1), view.toScreen(tq[3], z0)], fill: pal.tram, seal: true })
           // A car on the deck: one at the piece nearest each TRAM_SPACING along the line's run
           // over the bridge (the ground's cars stop at the deck).
           const scale = trams.width / 9
-          if (traveled + (len * (k + 0.5)) / n >= nextCar && Math.hypot(p1[0] - p0[0], p1[1] - p0[1]) > 0) {
+          // With carDecks, no car stands on a deck shorter than three cars: its pieces, drawn
+          // one by one, would cut through it.
+          if (traveled + (len * (k + 0.5)) / n >= nextCar && Math.hypot(p1[0] - p0[0], p1[1] - p0[1]) > 0 && (!fullTram || dl.total >= 42 * scale)) {
             nextCar += TRAM_SPACING
             const c: Vec2 = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2]
             const len1 = Math.hypot(p1[0] - p0[0], p1[1] - p0[1])

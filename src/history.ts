@@ -258,6 +258,8 @@ export interface History {
    * the sheet was fitted a little off and set it in the street.
    */
   readonly tracedClearOfStreets?: number
+  /** Meters: the car lines' own clearance for traced buildings, if wider than the streets' (`tracedClearOfStreets`). */
+  readonly tracedClearOfCarLines?: number
   /** Meters: simplify traced outlines to this and take out their spikes; drop ragged gray footprints. */
   readonly tracedSmooth?: number
   /** Track on a curated site is taken whole or not at all, never cut at the site's edge. */
@@ -280,6 +282,19 @@ export interface History {
   readonly carLineSeal?: boolean
   /** Keep a street a car line of the year ran along, even with no house of the year on it. */
   readonly streetsUnderCars?: boolean
+  /**
+   * A road bridge that carries a car line is drawn at least as wide as the line, the line on it
+   * as wide as on the ground, so the line runs onto the deck without a step and no
+   * square deck end shows beside it; a building (not curated) under such a deck is left out.
+   */
+  readonly carDecks?: boolean
+  /**
+   * Meters: a car line that ends this close to another line, short of it, is carried on
+   * straight to meet it (a junction where the two were placed on different corners).
+   */
+  readonly carLineEnds?: number
+  /** Meters: a later road's corridor with woods on both sides within this of its edge is drawn as wood. */
+  readonly vergeFill?: number
   /** Bridges drawn at grade before a year, with why (the street crossed there before its bridge). */
   readonly atGrade?: readonly { readonly id: readonly string[]; readonly before: number; readonly note: string; readonly sources?: readonly string[] }[]
   /**
@@ -359,8 +374,12 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.trainsClearOfDecks === undefined ? {} : { trainsClearOfDecks: raw.trainsClearOfDecks }),
     ...(raw.carLineSeal === undefined ? {} : { carLineSeal: raw.carLineSeal }),
     ...(raw.streetsUnderCars === undefined ? {} : { streetsUnderCars: raw.streetsUnderCars }),
+    ...(raw.carDecks === undefined ? {} : { carDecks: raw.carDecks }),
+    ...(raw.carLineEnds === undefined ? {} : { carLineEnds: raw.carLineEnds }),
+    ...(raw.vergeFill === undefined ? {} : { vergeFill: raw.vergeFill }),
     ...(raw.viaductClearance === undefined ? {} : { viaductClearance: raw.viaductClearance }),
     ...(raw.tracedClearOfStreets === undefined ? {} : { tracedClearOfStreets: raw.tracedClearOfStreets }),
+    ...(raw.tracedClearOfCarLines === undefined ? {} : { tracedClearOfCarLines: raw.tracedClearOfCarLines }),
     ...(raw.parkingFrom === undefined ? {} : { parkingFrom: raw.parkingFrom }),
     ...(raw.canalBridgesFrom === undefined ? {} : { canalBridgesFrom: raw.canalBridgesFrom }),
     ...(raw.vergeReach === undefined ? {} : { vergeReach: raw.vergeReach }),
@@ -742,7 +761,7 @@ export const fetchYearBuilt = async (r: Region, src: YearBuiltSource, dir: strin
 }
 
 /** Roads whose coming changed what was there: a bridge over one, or a verge along one, is no older. */
-const WORKS = new Set(['motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'secondary', 'secondary_link', 'tertiary_link'])
+export const WORKS = new Set(['motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'secondary', 'secondary_link', 'tertiary_link'])
 
 /** Roads of `all` built after `year` whose coming changed the ground (`WORKS`): an interstate, its ramps, a main road. */
 export const laterWorkLines = (all: readonly Feature[], year: number, h: History): Vec2[][] =>

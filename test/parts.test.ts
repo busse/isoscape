@@ -59,3 +59,11 @@ test('a streetcar line that runs along a road bridge leaves the ground there; on
   // A parallel street 20 m away is not on it.
   assert.equal(offDecks([[0, 20], [300, 20]], deck).length, 1)
 })
+
+test('a deck carries a car line that runs along it, not one that crosses under it (carDecks)', async () => {
+  const { carriesTram } = await import('../src/scene.ts')
+  const deck: [number, number][] = [[100, 0], [200, 0]]
+  assert.equal(carriesTram(deck, [[[0, 3], [300, 3]]], 8), true)
+  assert.equal(carriesTram(deck, [[[150, -50], [150, 50]]], 8), false)
+  assert.equal(carriesTram(deck, [[[0, 30], [300, 30]]], 8), false)
+})

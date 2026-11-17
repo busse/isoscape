@@ -803,7 +803,16 @@ a street bed:** each car line lies on a band of street 1.5 m wider each side (ti
 streetcar scale), so a line that covers its carriageway, or runs where no street of the year is
 drawn, still reads as cars in a street; and the red band is painted exactly, cut at the grid
 lines, and lapping half a unit on screen further back than the other ground layers, so no seam
-or notch shows across it where the paint strips meet. **Station views:** a whole view leaves out
+or notch shows across it where the paint strips meet. **Decks that carry the cars:** in the
+streetcar set, a road bridge that carries a car line is drawn at least as wide as the line (13.5 m
+on the single-stop prints, 27 m on the big map) with the line on it at full width, so the line runs
+onto the deck without a step and no square deck end shows beside it; a dated building under such
+a deck is left out, a traced one within 4 m of its edge too, and no car is set on a deck shorter
+than three cars. **Lines that meet:** a line that stops within 30 m of another, short of it, is
+carried on straight to meet it. **Later roads through woods:** a road not yet built with woods of
+the year on both sides of it, within 15 m of its edge, is drawn as wood, so the interchange it cut
+does not show as a cut-out. A traced building within 5 m of a car line's center (not 2 m) is
+left out. **Station views:** a whole view leaves out
 the train cars standing under the raised concourse, and turned parts (the dome) are drawn
 shaded and inked only along their foot, so the dome reads as tile at a map's scale, not as a
 black disc of facet lines. In the station's set views the platform sheds are drawn with the
@@ -821,7 +830,12 @@ only), and add: ramps and turning roads (`*_link`) from
 Richmond and Petersburg bridge, 1902 to 1970, with its approaches to Byrd Street Station and,
 approximately, in Manchester); bridges drawn at grade before a year where a source puts the
 street on the ground (Fifth and Seventh over Leigh Street before 1971, Campus Drive before
-1950, approximate); the park lakes of the year (Westhampton Lake from 1902, Fountain Lake from
+1950, approximate), or where no source says what crossed before today's bridge (Chamberlayne
+Avenue over the railroad north of Leigh Street, whose bridges are of 1992, approximate); one
+plain low deck where the Boulevard and the fair grounds spur crossed the RF&P's cut before the
+bridge of 1943 (what stood there is not known; approximate); two streams left out (Little
+Westham Creek, mapped underground below Westhampton Lake, and one east of Nine Mile Road
+mapped off its ravine); the park lakes of the year (Westhampton Lake from 1902, Fountain Lake from
 1888, Swan and Shields lakes from 1917); basins, settling tanks and treatment works today
 only; The Diamond from 1985; and dated buildings with their sources (a parking deck of about
 2020, the Cookie Factory's tower of 1927, the art museum's outline only once its wings were
@@ -857,11 +871,16 @@ draws them three times life size (27 m lines, 42 m cars). The lines come from
 corner in OpenStreetMap, and follows the streets between them, preferring the streets the two
 corners name (any other street costs six times as much per meter). Two streets that meet
 without sharing a node take their closest points, up to 150 m apart. A run over a viaduct
-since torn down is drawn straight. A line is straightened to within 40% of its drawn width (at least 7 m), so a
+since torn down is drawn straight. The streetcar set's routes then run down the middle of a
+street mapped today as two one-way carriageways (moved halfway to the other carriageway where one
+of the same name runs the other way within 40 m), and are smoothed along their length (a Gaussian
+10 m wide, the ends held), so a line does not step from one carriageway or one mapped way to the
+next, and cuts each corner by about 6 m. A line is straightened to within 40% of its drawn width (at least 7 m), so a
 traffic circle or a carriageway's sideways step on today's streets does not kink it, and its bends
 are filled round. Where a line runs along a road bridge (within 6 m of its deck's
 edge and within about 25° of its heading, beside the deck and not past its ends), it is drawn
-on the deck as its track, 45% of its width on the ground (no wider than the deck), with a car on
+on the deck as its track, 45% of its width on the ground (no wider than the deck; in the
+streetcar set, at its full width on a deck widened to carry it), with a car on
 the deck (one every 900 m, or one 45% of the way across a shorter bridge), and no car is set on
 the ground under it. A road bridge
 since taken down can be curated as a `bridge` line and is drawn as today's bridges are: the

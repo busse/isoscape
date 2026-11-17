@@ -1,5 +1,10 @@
 {
  "about": "Richmond's car lines in 1925, as Harland Bartholomew & Associates drew them for the City Planning Commission (plate 53, 'Early Transit Routes, 1888 & 1925', 31 January 1943), within the city limits of the day, plus the interurban to Ashland, which ran on its own. The plate is a small diagram: each line here follows the streets it names, placed on today's OpenStreetMap streets, with the details from the sources given per line. Where a source is silent, a line's ends are approximate; the notes say which.",
+ "placing": {
+  "middle": 40,
+  "smooth": 10,
+  "note": "Each line is drawn down the middle of a street that today is mapped as two one-way carriageways (within 40 m), and smoothed along its length (a 10 m Gaussian), so it does not step from one carriageway or one mapped way to the next; at corners it cuts in by about 6 m. The tracks' exact place in each street is approximate."
+ },
  "routes": [
   {
    "id": "car-westhampton",
