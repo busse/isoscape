@@ -575,3 +575,16 @@ test('ties: with a clearance, two tracks laid over each other do not clump', asy
   assert.equal(plain.length, 2 * tiesAlong([a]).length)
   assert.equal(cleared.length, tiesAlong([a]).length)
 })
+
+test('far-out tie marks: where two tracks run together only the first keeps its marks', async () => {
+  const { clearRuns } = await import('../src/render.ts')
+  const a: [number, number][][] = [[[0, 0], [20, 0]]]
+  // A second track lying on the first for 10 m, then turning off 10 m away.
+  const b: [number, number][][] = [[[0, 0.5], [10, 0.5]], [[10, 0.5], [10, 10.5]]]
+  const runs = clearRuns([a, b], 2.5)
+  const len = (s: readonly (readonly number[])[]) => Math.hypot(s[1][0] - s[0][0], s[1][1] - s[0][1])
+  const total = runs.reduce((t, s) => t + len(s), 0)
+  // All of the first (20 m), none of the second's shared run, most of its turning leg.
+  assert.ok(total > 20 + 7 && total < 20 + 10, `kept ${total}`)
+  assert.ok(runs.every((s) => !(s[0][1] === 0.5 && s[1][1] === 0.5)))
+})

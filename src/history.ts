@@ -247,6 +247,8 @@ export interface History {
   readonly clearCarLines?: boolean
   /** Meters: close up, a tie within this of one already laid is left out (turnouts, wyes). */
   readonly tieClear?: number
+  /** In a whole view, leave out train cars standing under a raised concourse (its name ends "concourse"). */
+  readonly trainsClearOfDecks?: boolean
   /** Draw turned parts (`shape: 'revolve'`, a dome) shaded, inked only along their foot. */
   readonly revolveInkFoot?: boolean
   /** Meters of street bed drawn either side of each car line, under it (default none). */
@@ -316,6 +318,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.tieClear === undefined ? {} : { tieClear: raw.tieClear }),
     ...(raw.carLineBed === undefined ? {} : { carLineBed: raw.carLineBed }),
     ...(raw.revolveInkFoot === undefined ? {} : { revolveInkFoot: raw.revolveInkFoot }),
+    ...(raw.trainsClearOfDecks === undefined ? {} : { trainsClearOfDecks: raw.trainsClearOfDecks }),
     ...(raw.carLineSeal === undefined ? {} : { carLineSeal: raw.carLineSeal }),
     ...(raw.streetsUnderCars === undefined ? {} : { streetsUnderCars: raw.streetsUnderCars }),
     ...(raw.viaductClearance === undefined ? {} : { viaductClearance: raw.viaductClearance }),

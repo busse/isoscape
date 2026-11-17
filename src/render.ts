@@ -219,6 +219,49 @@ export const offsetJoined = (segs: readonly (readonly Vec2[])[], k: number): Vec
  * rectangle square to the track where it stands, spaced evenly along the whole line (the
  * spacing carries on across a joint, and starts again only after a break in the line).
  */
+/** Meters: far out, a track's tie marks within this of another track's already drawn are left out (`clearRuns`). */
+export const TIE_RUN_CLEAR = 3.5
+
+/**
+ * Center lines (each track a list of segments), with the parts of each that run within `clear`
+ * meters of a track before it left out, in pieces of up to 2 m: where two tracks lie together
+ * only the first keeps its marks.
+ */
+export const clearRuns = (tracks: readonly (readonly (readonly Vec2[])[])[], clear: number): Vec2[][] => {
+  const out: Vec2[][] = []
+  const kept = new Map<string, Vec2[][]>()
+  const cell = clear
+  const key = (p: Vec2) => `${Math.floor(p[0] / cell)},${Math.floor(p[1] / cell)}`
+  const near = (p: Vec2): boolean => {
+    const gx = Math.floor(p[0] / cell), gy = Math.floor(p[1] / cell)
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+      for (const [a, b] of kept.get(`${gx + dx},${gy + dy}`) ?? []) {
+        const ex = b[0] - a[0], ey = b[1] - a[1], l2 = ex * ex + ey * ey
+        const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * ex + (p[1] - a[1]) * ey) / l2))
+        if (Math.hypot(p[0] - a[0] - t * ex, p[1] - a[1] - t * ey) < clear) return true
+      }
+    }
+    return false
+  }
+  for (const track of tracks) {
+    const mine: Vec2[][] = []
+    for (const [a, b] of track) {
+      const len = Math.hypot(b[0] - a[0], b[1] - a[1])
+      const n = Math.max(1, Math.ceil(len / 2))
+      let run: Vec2[] | null = null
+      for (let k = 0; k < n; k++) {
+        const p: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
+        const q: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 1)) / n, a[1] + ((b[1] - a[1]) * (k + 1)) / n]
+        if (near([(p[0] + q[0]) / 2, (p[1] + q[1]) / 2])) { run = null; continue }
+        if (run === null) { run = [p, q]; out.push(run) } else run[1] = q
+        mine.push([p, q])
+      }
+    }
+    for (const sg of mine) for (const c of new Set([key(sg[0]), key(sg[1])])) { const list = kept.get(c); if (list) list.push(sg); else kept.set(c, [sg]) }
+  }
+  return out
+}
+
 export const tiesAlong = (segs: readonly (readonly Vec2[])[], clear = 0): Vec2[][] => {
   const out: Vec2[][] = []
   // With `clear`, a tie whose center is within that many meters of one already laid is left
@@ -456,8 +499,14 @@ export const renderSvg = (scene: Scene): Rendered => {
   })
   const railCenters = lineLayer('rail', 'ties').segs
   const gauge = (k: number): Vec2[][] => offsetJoined(railCenters, k)
+  // Far out, a series that clears its ties (tieClear) draws one track's tie marks where two
+  // run together (a turnout, a wye's legs), not both: two dash patterns laid over each other
+  // read as clumps across the shared ballast.
+  const farTies = scene.time?.tieClear === undefined || scene.time.tieClear <= 0
+    ? lineLayer('rail', 'ties')
+    : { cls: 'ties', segs: clearRuns(scene.ribbons.filter((rb) => rb.kind === 'rail').map((rb) => rb.center), TIE_RUN_CLEAR) }
   const lineLayers = [
-    ...(close ? [] : [lineLayer('rail', 'ties')]),
+    ...(close ? [] : [farTies]),
     ...(close ? [{ cls: 'steel', segs: [...gauge(0.72), ...gauge(-0.72)] }] : []),
     lineLayer('weir', 'crest'),
   ]

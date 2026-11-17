@@ -35,7 +35,16 @@
     {
       "match": "Free Bridge (Ninth Street)",
       "deck": 4
+    },
+    {
+      "match": "Rivanna Subdivision",
+      "deck": 12
+    },
+    {
+      "match": "Bellwood Subdivision",
+      "deck": 6
     }
   ],
-  "railPiersOverWater": true
+  "railPiersOverWater": true,
+  "groupRailDecks": true
 }

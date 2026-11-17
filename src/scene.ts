@@ -778,6 +778,8 @@ export const buildScene = (
     let canopies = 0
     let cars = 0
     const boxes: Box[] = []
+    const decks = curated.filter((h) => h.kind === 'landmark' && h.elevation !== undefined && h.ring !== undefined && h.only !== 'cutaway' && /concourse$/i.test(h.name ?? ''))
+      .map((h) => toViewRing(view, h.ring!))
     for (const h of curated) {
       if (h.kind === 'canopy' && h.line !== undefined && shown(h)) {
         const kept = keepBoxes(canopyBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), h.width ?? 9, h.height ?? 5, (p) => terrain.z(p)))
@@ -789,7 +791,16 @@ export const buildScene = (
       }
       const train = cut !== undefined && h.cutTrain !== undefined ? h.cutTrain : h.train
       if (h.kind === 'rail' && train !== undefined && h.line !== undefined) {
-        const got = keepBoxes(trainBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), train, (p) => terrain.z(p)))
+        let got = keepBoxes(trainBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), train, (p) => terrain.z(p)))
+        // A whole view of a series that asks (trainsClearOfDecks) leaves out the cars standing
+        // under a raised part (a concourse over the tracks): hidden by it, and painted in the
+        // wrong order where the deck's long footprint meets the sheds beside it.
+        if (cut === undefined && time?.history.trainsClearOfDecks === true) {
+          got = got.filter((b) => {
+            const c = centroid(b.ring)
+            return !decks.some((r) => pointInRing(c, r))
+          })
+        }
         boxes.push(...got)
         cars += got.length
       }
@@ -961,7 +972,7 @@ export const buildScene = (
   const chains = chainBridges(plans.length > 0 || extra.section === true ? [] : bridgeLines.filter((f) => !skyways.has(f)))
   const ends = bridgeEnds(view, region, chains)
   const towers = suspensionTowers(view, chains, towerParts)
-  const lines = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix, time !== undefined && time.year < time.history.present))))
+  const lines = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix, time !== undefined && time.year < time.history.present))), region.groupRailDecks === true)
   for (let c = 0; c < chains.length; c++) {
     const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth } : undefined)
     spans += pieces.filter((p) => p.pier !== true).length
@@ -2215,7 +2226,7 @@ const besideDeck = (follower: DeckLine, leader: DeckLine): number[] | null => {
  * beside it. Then a bridge way shorter than `SHORT_DECK` that shares a node with a longer deck is
  * drawn level, at that deck's height at the node.
  */
-export const groupDecks = (chains: readonly BridgeChain[], lines: readonly DeckLine[]): DeckLine[] => {
+export const groupDecks = (chains: readonly BridgeChain[], lines: readonly DeckLine[], rails = false): DeckLine[] => {
   const out = lines.slice()
   const follows = new Map<number, number>()
   const road = (c: BridgeChain) => !isRail(c.line.tags) && !isPath(c.line.tags) && roadWidth(c.line.tags) !== null
@@ -2261,6 +2272,17 @@ export const groupDecks = (chains: readonly BridgeChain[], lines: readonly DeckL
     if (!isPath(c.line.tags) || isRail(c.line.tags)) continue
     const b = nearest(i, (j) => road(chains[j]) && layer(chains[j]) === layer(c))
     if (b !== null) follow(i, b.j, b.at)
+  }
+  // With `rails` (a set's region, groupRailDecks), a track's deck follows the longer track's it
+  // runs beside on the same layer: the two ways of a double-track viaduct are one deck at one
+  // level, not two decks painted piece by piece through each other.
+  if (rails) {
+    for (const i of byLength) {
+      const c = chains[i]
+      if (!isRail(c.line.tags) || follows.has(i)) continue
+      const b = nearest(i, (j) => isRail(chains[j].line.tags) && layer(chains[j]) === layer(c) && !follows.has(j))
+      if (b !== null) follow(i, b.j, b.at)
+    }
   }
   // A short way that touches a longer deck is level with it there.
   const keys = chains.map((c) => c.line.points.map(key))

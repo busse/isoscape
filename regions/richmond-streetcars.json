@@ -45,5 +45,6 @@
       "field": "Year_Built"
     }
   },
-  "railPiersOverWater": true
+  "railPiersOverWater": true,
+  "groupRailDecks": true
 }

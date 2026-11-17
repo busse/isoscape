@@ -52,6 +52,8 @@ export interface Region {
    * pier is drawn only where the deck stands more than 3 m above its foot.
    */
   readonly railPiersOverWater?: boolean
+  /** The two ways of a double-track viaduct are drawn as one deck at one level (a set's maps). */
+  readonly groupRailDecks?: boolean
   /**
    * Extra data, beyond OSM and elevation. `buildings` lists where footprints come from:
    * OpenStreetMap and/or Microsoft's ML footprints (OSM wins where both have a building).

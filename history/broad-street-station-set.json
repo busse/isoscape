@@ -384,5 +384,6 @@
  "tieClear": 0.5,
  "carLineBed": 1.5,
  "carLineSeal": true,
- "revolveInkFoot": true
+ "revolveInkFoot": true,
+ "trainsClearOfDecks": true
 }
