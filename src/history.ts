@@ -237,6 +237,8 @@ export interface History {
   readonly streetcarScale?: number
   /** Draw railroad tracks this many times their width, and in the ties' darker tone, so the network reads from afar (default 1). */
   readonly railScale?: number
+  /** Yard, siding and spur track (any `service` tag) drawn at no more than this scale (a set's map). */
+  readonly railScaleService?: number
   /**
    * Date laid-out ground (lawns, beds, pitches, playgrounds) and service roads by the
    * assessor's year built of the parcel they lie in, as buildings are: the planted strips of a
@@ -378,6 +380,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.serviceNearBuildings === undefined ? {} : { serviceNearBuildings: raw.serviceNearBuildings }),
     ...(raw.streetcarScale === undefined ? {} : { streetcarScale: raw.streetcarScale }),
     ...(raw.railScale === undefined ? {} : { railScale: raw.railScale }),
+    ...(raw.railScaleService === undefined ? {} : { railScaleService: raw.railScaleService }),
     ...(raw.groundsByParcel === undefined ? {} : { groundsByParcel: raw.groundsByParcel }),
     ...(raw.vergeTags === undefined ? {} : { vergeTags: raw.vergeTags }),
     ...(raw.approachesWithBridges === undefined ? {} : { approachesWithBridges: raw.approachesWithBridges }),

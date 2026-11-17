@@ -474,7 +474,10 @@ export const buildScene = (
       const r = ribbonOf(isPath(t) ? 'path' : 'road', f, w)
       if (r) ribbons.push(r)
     } else if (isRail(t)) {
-      const r = ribbonOf('rail', f, 3.2 * railScale)
+      // A series can draw yard and siding track at its own scale (railScaleService): a yard of a
+      // dozen sidings drawn four times their width merges into one dark wedge.
+      const scale = t.service !== undefined && time?.history.railScaleService !== undefined ? Math.min(railScale, time.history.railScaleService) : railScale
+      const r = ribbonOf('rail', f, 3.2 * scale)
       if (r) ribbons.push(r)
     } else if (t.waterway === 'weir' || t.waterway === 'dam') {
       const r = ribbonOf('weir', f, t.waterway === 'dam' ? 6 : 3)
