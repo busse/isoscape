@@ -789,7 +789,7 @@ export const buildScene = (
   const chains = chainBridges(plans.length > 0 || extra.section === true ? [] : bridgeLines.filter((f) => !skyways.has(f)))
   const ends = bridgeEnds(view, region, chains)
   const towers = suspensionTowers(view, chains, towerParts)
-  const lines = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix))))
+  const lines = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix, time !== undefined && time.year < time.history.present))))
   for (let c = 0; c < chains.length; c++) {
     const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c))
     spans += pieces.filter((p) => p.pier !== true).length
@@ -1971,7 +1971,7 @@ interface DeckLine {
  */
 const deckLine = (
   view: View, region: Region, terrain: Terrain, chain: BridgeChain, ends: BridgeEnds,
-  fix: { start?: number; end?: number } = {},
+  fix: { start?: number; end?: number } = {}, railOnGround = false,
 ): DeckLine => {
   const deck = deckHeight(region, chain)
   const pts = chain.line.points.map(([lon, lat]) => view.toView(lon, lat))
@@ -1996,8 +1996,12 @@ const deckLine = (
       return terrain.z([p[0] + ((p[0] - q[0]) * t) / len, p[1] + ((p[1] - q[1]) * t) / len])
     })
   }
-  const startLevel = chain.rampStart ? seat(0) : fix.start ?? ground(0) + ends.start
-  const endLevel = chain.rampEnd ? seat(1) : fix.end ?? ground(total) + ends.end
+  // With `railOnGround` (a past year's scene), a rail deck's grounded end sits on the ground
+  // there, where its track runs on: track does not climb a bank to an abutment the way a street
+  // runs on at a cut's rim, and seated on the bank its deck ended above the track it joins.
+  const onGround = railOnGround && isRail(chain.line.tags)
+  const startLevel = chain.rampStart ? (onGround ? ground(0) : seat(0)) : fix.start ?? ground(0) + ends.start
+  const endLevel = chain.rampEnd ? (onGround ? ground(total) : seat(1)) : fix.end ?? ground(total) + ends.end
   // A joined end's own clearance is what the deck it joins gives it.
   const c0 = chain.rampStart ? ends.start : startLevel - ground(0)
   const c1 = chain.rampEnd ? ends.end : endLevel - ground(total)

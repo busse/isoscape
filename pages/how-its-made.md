@@ -722,6 +722,9 @@ Past years look at their neighbors once more:
   drawn when none stands that near;
 - a rail spur, siding or yard track that ends with no building of the year within 40 m of its
   end is left out (and the spurs that only led to it): today's spurs serve today's buildings;
+- a rail deck's grounded end sits on the ground there, where its track runs on, not on the
+  level of the bank beyond it (the abutment rule for streets over a cut, below): seated on the
+  bank, the river viaducts' decks ended a few meters above the track they join;
 - a building's walls that face the camera with both corners above its lowest corner stop, level,
   at the lower of the two, where the ground in front of them starts. Run down to the lowest
   corner, as in today's scene, the ground painted in front of such a wall (in a hollow, or
