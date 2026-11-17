@@ -55,6 +55,12 @@ export interface Region {
   /** The two ways of a double-track viaduct are drawn as one deck at one level (a set's maps). */
   readonly groupRailDecks?: boolean
   /**
+   * Meters: where two rail decks cross, the one with the higher OSM `layer` passes at least this
+   * far over the other (the lower dipped toward the ground there, then the upper raised, each at
+   * a 3% grade), so a crossing of railroads at three levels reads (a set's maps).
+   */
+  readonly railCrossings?: number
+  /**
    * Extra data, beyond OSM and elevation. `buildings` lists where footprints come from:
    * OpenStreetMap and/or Microsoft's ML footprints (OSM wins where both have a building).
    * `landcover: 'nlcd'` draws woods, wetlands, fields and crops from the National Land Cover

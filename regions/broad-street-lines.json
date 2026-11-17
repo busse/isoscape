@@ -46,5 +46,6 @@
     }
   ],
   "railPiersOverWater": true,
-  "groupRailDecks": true
+  "groupRailDecks": true,
+  "railCrossings": 6
 }

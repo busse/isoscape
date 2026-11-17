@@ -1131,7 +1131,8 @@ export const buildScene = (
   const chains = chainBridges(plans.length > 0 || extra.section === true ? [] : bridgeLines.filter((f) => !skyways.has(f)))
   const ends = bridgeEnds(view, region, chains)
   const towers = suspensionTowers(view, chains, towerParts)
-  const lines = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix, time !== undefined && time.year < time.history.present))), region.groupRailDecks === true)
+  const grouped = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix, time !== undefined && time.year < time.history.present))), region.groupRailDecks === true)
+  const lines = region.railCrossings === undefined ? grouped : separateCrossings(chains, grouped, region.railCrossings, terrain)
   for (let c = 0; c < chains.length; c++) {
     const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }) } : undefined)
     spans += pieces.filter((p) => p.pier !== true).length
@@ -2497,6 +2498,76 @@ interface DeckLine {
  * The deck line of a chain. A grounded end sits on its abutment; an end that joins another
  * bridge is at `fix` where given (the height of the deck it joins), else at its clearance.
  */
+/** The grade at which `separateCrossings` dips or lifts a deck to clear another. */
+const CROSSING_GRADE = 0.03
+
+/**
+ * Rail decks that cross (`railCrossings`): the deck of the higher OSM layer is made to pass at
+ * least `clear` meters over the lower one where their lines cross. The lower deck dips toward
+ * the ground (keeping 3 m over it), and what that cannot give is taken by lifting the upper,
+ * each change fading out at `CROSSING_GRADE` along its deck.
+ */
+const separateCrossings = (chains: readonly BridgeChain[], lines: readonly DeckLine[], clear: number, terrain: Terrain): DeckLine[] => {
+  const out = [...lines]
+  const at = (dl: DeckLine, s: number): Vec2 => {
+    let i = 1
+    while (i < dl.cum.length - 1 && dl.cum[i] < s) i++
+    const u = (s - dl.cum[i - 1]) / Math.max(1e-9, dl.cum[i] - dl.cum[i - 1])
+    return [dl.pts[i - 1][0] + (dl.pts[i][0] - dl.pts[i - 1][0]) * u, dl.pts[i - 1][1] + (dl.pts[i][1] - dl.pts[i - 1][1]) * u]
+  }
+  const layer = (c: BridgeChain) => Number.parseFloat(c.line.tags.layer ?? '0') || 0
+  // A change made at a crossing point P, fading with the distance along the deck from P: given
+  // to every deck of that layer passing within `PAIR` meters of P (both tracks of a pair).
+  const PAIR = 12
+  const near = (dl: DeckLine, P: Vec2): number | null => {
+    let best = Infinity, sb = 0
+    for (let k = 0; k + 1 < dl.pts.length; k++) {
+      const a = dl.pts[k], b = dl.pts[k + 1]
+      const dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy
+      const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((P[0] - a[0]) * dx + (P[1] - a[1]) * dy) / l2))
+      const d = Math.hypot(a[0] + dx * t - P[0], a[1] + dy * t - P[1])
+      if (d < best) { best = d; sb = dl.cum[k] + t * (dl.cum[k + 1] - dl.cum[k]) }
+    }
+    return best <= PAIR ? sb : null
+  }
+  const shift = (lay: number, P: Vec2, dz: number) => {
+    for (let k = 0; k < chains.length; k++) {
+      if (!isRail(chains[k].line.tags) || layer(chains[k]) !== lay) continue
+      const s0 = near(out[k], P)
+      if (s0 === null) continue
+      const z = out[k].zAt
+      out[k] = { ...out[k], zAt: (s: number) => z(s) + Math.sign(dz) * Math.max(0, Math.abs(dz) - CROSSING_GRADE * Math.abs(s - s0)) }
+    }
+  }
+  for (let i = 0; i < chains.length; i++) {
+    for (let j = i + 1; j < chains.length; j++) {
+      if (!isRail(chains[i].line.tags) || !isRail(chains[j].line.tags) || layer(chains[i]) === layer(chains[j])) continue
+      const [u, l] = layer(chains[i]) > layer(chains[j]) ? [i, j] : [j, i]
+      const U = out[u], L = out[l]
+      for (let a = 0; a + 1 < U.pts.length; a++) {
+        for (let b = 0; b + 1 < L.pts.length; b++) {
+          const p = U.pts[a], q = U.pts[a + 1], r = L.pts[b], t = L.pts[b + 1]
+          const d = (q[0] - p[0]) * (t[1] - r[1]) - (q[1] - p[1]) * (t[0] - r[0])
+          if (Math.abs(d) < 1e-9) continue
+          const ua = ((r[0] - p[0]) * (t[1] - r[1]) - (r[1] - p[1]) * (t[0] - r[0])) / d
+          const ub = ((r[0] - p[0]) * (q[1] - p[1]) - (r[1] - p[1]) * (q[0] - p[0])) / d
+          if (ua < 0 || ua > 1 || ub < 0 || ub > 1) continue
+          const su = U.cum[a] + ua * (U.cum[a + 1] - U.cum[a])
+          const sl = L.cum[b] + ub * (L.cum[b + 1] - L.cum[b])
+          const need = clear - (out[u].zAt(su) - out[l].zAt(sl))
+          if (need <= 0) continue
+          const room = Math.max(0, out[l].zAt(sl) - (terrain.z(at(out[l], sl)) + 3))
+          const down = Math.min(need, room)
+          const P = at(out[u], su)
+          if (down > 0) shift(layer(chains[l]), P, -down)
+          if (need - down > 0) shift(layer(chains[u]), P, need - down)
+        }
+      }
+    }
+  }
+  return out
+}
+
 const deckLine = (
   view: View, region: Region, terrain: Terrain, chain: BridgeChain, ends: BridgeEnds,
   fix: { start?: number; end?: number } = {}, railOnGround = false,
