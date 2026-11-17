@@ -1,20 +1,22 @@
 {
  "broad-street-1943-01-ay-tower": {
   "title": "AY Tower, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-02-fair-grounds": {
   "title": "The State Fair grounds, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-03-hermitage-road": {
@@ -37,11 +39,12 @@
  },
  "broad-street-1943-05-loop": {
   "title": "The loop and the sheds, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-06-sauer": {
@@ -73,56 +76,62 @@
  },
  "broad-street-1943-09-co-viaduct": {
   "title": "The C&O viaduct, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-10-hull-street": {
   "title": "Hull Street Station, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-11-belt-line-bridge": {
   "title": "The Belt Line bridge, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-12-william-byrd": {
   "title": "Hotel William Byrd, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-13-from-the-fan": {
   "title": "Broad Street Station, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-14-front": {
   "title": "Pope's front, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-cutaway": {

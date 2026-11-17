@@ -11,6 +11,31 @@ tools and the research get better, a published map is sometimes corrected and re
 page lists those changes, newest first. A print ordered after a change is made from the new
 version; the version is part of each print file's name (`-v2`, `-v3`).
 
+## November 17, 2026 (late)
+
+**Broad Street Station, 1943: nine of the set's prints redrawn as version 3.** AY Tower (plate
+BSS·01), The State Fair grounds (BSS·02), The loop and the sheds (BSS·05), The C&O viaduct
+(BSS·09), Hull Street Station (BSS·10), The Belt Line bridge (BSS·11), Hotel William Byrd (BSS·12),
+Broad Street Station from the Fan (BSS·13) and Pope's front (BSS·14) were redrawn with Claude, in
+code, and inspected tile by tile at full print size. These faults are corrected:
+
+- A building part the assessor dates 2016 stood in 1943 beside the station (on The loop and the
+  sheds). It is drawn only in today's views.
+- In the close view of the station's front (Pope's front), the cars and ramp houses under the shed
+  roofs cut through the roofs; they are left out there. The head house's wings now stand on the
+  ground along Broad Street, the front drive runs whole, and roads and paths no longer open small
+  notches at their bends.
+- On the prints cut from the big map, outlines were drawn about three times as heavy as elsewhere.
+  They are drawn at their proper weight.
+- The Free Bridge at Ninth Street, on The C&O viaduct, now meets Ninth Street at its north end (its
+  line and height are approximate).
+- The car line onto the Mayo Bridge joins the bridge's deck without a sideways step.
+- Stubs of road that led only to later bridges and ramps are left out.
+
+The set's map, the framed set and the prints of places 3, 4, 6, 7 and 8 follow when their
+corrections are done; until then they are not for sale. The title block on each print gives
+version 3. This entry was drafted with Claude.
+
 ## November 17, 2026 (night)
 
 **Richmond's Streetcars, 1925: ten of the stop prints redrawn.** State Fair Grounds (plate
