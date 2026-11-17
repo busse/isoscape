@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 633" width="400" height="633" role="img" aria-labelledby="src-t src-d">
 <title id="src-t">Where the geometry comes from</title>
-<desc id="src-d">Seven sources and what each gives, each marked measured (a solid disc), inferred (a ring) or guessed (a dashed ring). OpenStreetMap: streets, rail, water, parks and building outlines, measured; building heights where mappers tagged them, measured; other heights, guessed from building type and size. USGS 3DEP lidar, or a national elevation model: the ground, measured; the river surface, rocks, rapids and shoreline, inferred. Microsoft building footprints, used on Gwynn's Island: buildings OpenStreetMap lacks, traced by a model, inferred. NLCD land cover, on Gwynn's Island: woods, fields and wetlands from satellites, inferred. City of Richmond year-built records: the year each standing building went up, measured. Sanborn fire-insurance maps from the Library of Congress: lost buildings traced from the scans, inferred; their heights from their material, guessed. Rules in the code: bridge deck heights by name or layer, guessed.</desc>
+<desc id="src-d">Seven sources and what each one gives. A solid disc means measured, a ring inferred, a dashed ring guessed. OpenStreetMap: streets, rail, water, parks and building outlines, measured; building heights where mappers tagged them, measured; other heights, guessed from building type and size. USGS 3DEP lidar, or a national elevation model: the ground, measured; the river surface, rocks, rapids and shoreline, inferred. Microsoft building footprints, used on Gwynn's Island: buildings OpenStreetMap lacks, traced by a model, inferred. NLCD land cover, on Gwynn's Island: woods, fields and wetlands from satellites, inferred. City of Richmond year-built records: the year each standing building went up, measured. Sanborn fire-insurance maps from the Library of Congress: lost buildings traced from the scans, inferred; their heights from their material, guessed. Rules in the code: bridge deck heights by name or layer, guessed.</desc>
 <style>
 text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif}
 .h{font:600 12px ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif;letter-spacing:.08em}
@@ -62,5 +62,5 @@ text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif
 <text x="149" y="597" class="b ink">inferred</text>
 <circle cx="248" cy="592.4" r="5.2" class="mark dash"/>
 <text x="261" y="597" class="b ink">guessed</text>
-<text x="16" y="619" class="si dim">The marks of the cutaway sheets: drawn, written, approximate.</text>
+<text x="16" y="619" class="si dim">The same marks as on the cutaway sheets.</text>
 </svg>

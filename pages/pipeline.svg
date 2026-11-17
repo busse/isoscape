@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 878" width="400" height="878" role="img" aria-labelledby="pipe-t pipe-d">
 <title id="pipe-t">From data to drawing: the isoscape pipeline</title>
-<desc id="pipe-d">fetch, the only step that uses the network: a region file (regions/&lt;name&gt;.json) drives downloads from OpenStreetMap (osm.ts) and an elevation model (dem.ts) into a local cache (data/&lt;name&gt;/). build, offline and the same every time, runs eight steps: read the map data (osm.ts), what each tag means (classify.ts), the year for a dated map (history.ts), the camera (view.ts), ground, water and rapids (terrain.ts), buildings and bridges (scene.ts), what hides what (order.ts), and ink, color and dots (render.ts). The camera step, marked with a red dashed outline, is the projection: view.ts is about 90 lines of some 14,000 in src/. The SVG is archived and listed in the explorer (out/&lt;name&gt;.svg, out/index.html).</desc>
+<desc id="pipe-d">fetch uses the network. It reads the region file (regions/&lt;name&gt;.json) and downloads OpenStreetMap (osm.ts) and elevation (dem.ts) into a local cache (data/&lt;name&gt;/). build runs offline, from the cache, in eight steps: read the map data (osm.ts), what each tag means (classify.ts), the year for a dated map (history.ts), the camera (view.ts), ground, water and rapids (terrain.ts), buildings and bridges (scene.ts), what hides what (order.ts), and ink, color and dots (render.ts). The camera step has a red dashed outline. It is the projection, and view.ts is about 90 lines out of some 14,000 in src/. The SVG lands in out/&lt;name&gt;.svg and the explorer in out/index.html.</desc>
 <style>
 text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif}
 .h{font:600 12px ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif;letter-spacing:.08em}
@@ -15,7 +15,7 @@ text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif
 </style>
 <rect width="400" height="878" class="bg"/>
 <text x="16" y="26" class="h dim">FROM DATA TO DRAWING</text>
-<text x="16" y="48" class="si dim">fetch: the only step that uses the network</text>
+<text x="16" y="48" class="si dim">fetch uses the network</text>
 <rect x="16" y="60" width="368" height="38" class="edge card"/><circle cx="16" cy="60" r="2.9" class="ink"/><circle cx="384" cy="60" r="2.9" class="ink"/><circle cx="16" cy="98" r="2.9" class="ink"/><circle cx="384" cy="98" r="2.9" class="ink"/>
 <text x="28" y="84" class="bb ink">Region file</text>
 <text x="372" y="84" class="m ink" text-anchor="end">regions/&lt;name&gt;.json</text>
@@ -31,7 +31,7 @@ text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif
 <rect x="16" y="202" width="368" height="38" class="edge cache"/><circle cx="16" cy="202" r="2.9" class="ink"/><circle cx="384" cy="202" r="2.9" class="ink"/><circle cx="16" cy="240" r="2.9" class="ink"/><circle cx="384" cy="240" r="2.9" class="ink"/>
 <text x="28" y="226" class="bb ink">Local cache</text>
 <text x="372" y="226" class="m ink" text-anchor="end">data/&lt;name&gt;/</text>
-<text x="16" y="270" class="si dim">build: offline, from the cache, the same every time</text>
+<text x="16" y="270" class="si dim">build runs offline, from the cache</text>
 <rect x="16" y="282" width="368" height="36" class="edge card"/><circle cx="16" cy="282" r="2.9" class="ink"/><circle cx="384" cy="282" r="2.9" class="ink"/><circle cx="16" cy="318" r="2.9" class="ink"/><circle cx="384" cy="318" r="2.9" class="ink"/>
 <text x="28" y="305" class="bb ink">Read the map data</text>
 <text x="372" y="305" class="m ink" text-anchor="end">osm.ts</text>
@@ -48,8 +48,8 @@ text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif
 <text x="28" y="485" class="bb ink">Camera</text>
 <text x="372" y="485" class="m ink" text-anchor="end">view.ts</text>
 <rect x="10" y="456" width="380" height="48" class="hl"/>
-<text x="16" y="520" class="si acc">The projection is this step alone: view.ts is</text>
-<text x="16" y="537" class="si acc">about 90 lines of some 14,000 in src/.</text>
+<text x="16" y="520" class="si acc">This step is the projection. view.ts is</text>
+<text x="16" y="537" class="si acc">about 90 lines out of some 14,000 in src/.</text>
 <path d="M200 547L200 553" class="edge"/><path d="M200 561L195.8 553L204.2 553Z" class="ink"/><circle cx="200" cy="547" r="2.3" class="ink"/>
 <rect x="16" y="566" width="368" height="36" class="edge card"/><circle cx="16" cy="566" r="2.9" class="ink"/><circle cx="384" cy="566" r="2.9" class="ink"/><circle cx="16" cy="602" r="2.9" class="ink"/><circle cx="384" cy="602" r="2.9" class="ink"/>
 <text x="28" y="589" class="bb ink">Ground, water, rapids</text>
@@ -68,6 +68,6 @@ text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif
 <text x="372" y="769" class="m ink" text-anchor="end">render.ts</text>
 <path d="M200 787L200 793" class="edge"/><path d="M200 801L195.8 793L204.2 793Z" class="ink"/><circle cx="200" cy="787" r="2.3" class="ink"/>
 <rect x="16" y="806" width="368" height="56" class="edge cache"/><circle cx="16" cy="806" r="2.9" class="ink"/><circle cx="384" cy="806" r="2.9" class="ink"/><circle cx="16" cy="862" r="2.9" class="ink"/><circle cx="384" cy="862" r="2.9" class="ink"/>
-<text x="28" y="828" class="bb ink">The SVG, archived; the explorer</text>
+<text x="28" y="828" class="bb ink">The SVG and the explorer</text>
 <text x="28" y="848" class="m ink">out/&lt;name&gt;.svg  out/index.html</text>
 </svg>

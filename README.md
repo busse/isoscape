@@ -276,11 +276,11 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   first (default 100); the shipped pages use 10 and 90. `slug` overrides the file name.
 - `unlisted: true` keeps a page out of the nav, the static pages' footers, the front page's
   plain list and the sitemap, and asks search engines not to index `p/<slug>.html` (`noindex`).
-  It still opens at its address (`#/<slug>`, `p/<slug>.html`, `s/page-<slug>.html`): use it for a
-  page someone must read before it is published, and delete the line to publish it.
-- `schema: FAQPage` makes the static page's JSON-LD a `FAQPage` instead of an `Article`: every
-  heading that ends in a question mark is a question, and the text under it, up to the next
-  heading, its answer (`faqEntries` in `src/static-pages.ts`).
+  It still opens at its address (`#/<slug>`, `p/<slug>.html`, `s/page-<slug>.html`). Use it
+  for a page someone has to read before it goes out, and delete the line to publish it.
+- `schema: FAQPage` gives the static page `FAQPage` JSON-LD in place of `Article`. Each heading
+  that ends in a question mark is a question, and the text under it, up to the next heading, is
+  its answer (`faqEntries` in `src/static-pages.ts`).
 - Section ids follow GitHub's rule (lower case, punctuation dropped, spaces to hyphens), and
   links are written as they would be for GitHub, so the files read the same on GitHub as in
   the explorer.
@@ -288,8 +288,8 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   embedded as data URIs so the explorer stays one file. An SVG can follow light and dark
   mode with a `prefers-color-scheme` media query, as `pipeline.svg` does.
   `pipeline.svg` and the FAQ's diagrams (`faq-*.svg`) are written by
-  `node tools/diagrams/faq.ts`, with every color from `src/palette.ts`; change them there, not
-  in the SVG (`npm test` fails when a file in `pages/` differs from the script's output).
+  `node tools/diagrams/faq.ts`, with every color from `src/palette.ts`. Edit the script and run
+  it again. `npm test` fails when a file in `pages/` differs from what the script writes.
 - The converter (`src/markdown.ts`) escapes all text and drops raw HTML and unsafe link
   schemes. Files starting with `_` (drafts) and `README.md` are skipped.
 - `npm test` checks that every in-page link in `pages/` lands on a real section, and that the

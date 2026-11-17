@@ -145,36 +145,33 @@ export const whoDoesWhat = (): string => {
   const parts: string[] = [t(X0, y + 12, 'WHO DOES WHAT', 'h dim')]
   y += 26
   const a = lane(y, 'artist', 'Chris Busse', 'the artist', [
-    'Decides what to draw, and how it should look',
-    'Sets the rules and limits the work follows',
-    'Looks at every result, sends back what is',
-    'wrong, and decides what to keep',
+    'Decides what to draw and how it looks',
+    'Writes the rules down in CLAUDE.md',
+    'Keeps each result or sends it back',
   ])
   parts.push(a.svg)
   y += a.h
-  parts.push(between(y + 6, y + 50, 'asks, in words', 'shows the result'))
+  parts.push(between(y + 6, y + 50, 'a request', 'pictures'))
   y += 56
   const c = lane(y, 'agent', 'Claude', "under Chris's direction", [
     'Writes and changes the code',
-    'Runs the builds, the tests and the checks',
-    'Reports what changed, with pictures',
+    'Runs the builds and the checks',
+    'Shows Chris what changed',
   ])
   parts.push(c.svg)
   y += c.h
-  parts.push(between(y + 6, y + 50, 'runs a build', 'SVG, counts, warnings'))
+  parts.push(between(y + 6, y + 50, 'a build', 'the SVG, counts'))
   y += 56
   const s = lane(y, 'code', 'isoscape', 'the code', [
-    'Computes the drawing from open data',
-    'Same data and code in, same SVG out',
-    'No image model; no network while it draws',
+    'Turns the data into the SVG',
+    'the same way every time',
+    'Uses no image model and no network',
   ])
   parts.push(s.svg)
   y += s.h + 24
-  parts.push(t(X0, y, 'The loop: direct, build, look, correct.', 'si ink'))
-  parts.push(t(X0, y + 18, 'Nothing is kept until Chris approves it.', 'si ink'))
-  y += 34
+  y -= 8
   return svg('who', y, 'Who does what',
-    'Three lanes. Chris Busse, the artist, decides what to draw and how it should look, sets the rules and limits, looks at every result and decides what to keep. Claude, under his direction, writes and changes the code, runs the builds, tests and checks, and reports what changed with pictures. isoscape, the code, computes the drawing from open data, deterministically: the same data and code give the same SVG, with no image model and no network while it draws. Arrows run down (asks; runs a build) and back up (shows the result; SVG, counts, warnings): the loop of direct, build, look, correct.',
+    'Three stacked boxes. Chris Busse, the artist, decides what to draw and how it looks, writes the rules down in CLAUDE.md, and keeps each result or sends it back. Claude, under his direction, writes and changes the code, runs the builds and the checks, and shows Chris what changed. isoscape, the code, turns the data into the SVG the same way every time and uses no image model and no network. Arrows go down (a request, a build) and back up (pictures, the SVG and its counts).',
     parts.join('\n'))
 }
 
@@ -213,10 +210,10 @@ export const whereFrom = (): string => {
     parts.push(mark(x, y - 4.6, sure))
     parts.push(t(x + 13, y, label, 'b ink'))
   })
-  parts.push(t(X0, y + 22, 'The marks of the cutaway sheets: drawn, written, approximate.', 'si dim'))
+  parts.push(t(X0, y + 22, 'The same marks as on the cutaway sheets.', 'si dim'))
   y += 36
   return svg('src', y, 'Where the geometry comes from',
-    'Seven sources and what each gives, each marked measured (a solid disc), inferred (a ring) or guessed (a dashed ring). OpenStreetMap: streets, rail, water, parks and building outlines, measured; building heights where mappers tagged them, measured; other heights, guessed from building type and size. USGS 3DEP lidar, or a national elevation model: the ground, measured; the river surface, rocks, rapids and shoreline, inferred. Microsoft building footprints, used on Gwynn\'s Island: buildings OpenStreetMap lacks, traced by a model, inferred. NLCD land cover, on Gwynn\'s Island: woods, fields and wetlands from satellites, inferred. City of Richmond year-built records: the year each standing building went up, measured. Sanborn fire-insurance maps from the Library of Congress: lost buildings traced from the scans, inferred; their heights from their material, guessed. Rules in the code: bridge deck heights by name or layer, guessed.',
+    'Seven sources and what each one gives. A solid disc means measured, a ring inferred, a dashed ring guessed. OpenStreetMap: streets, rail, water, parks and building outlines, measured; building heights where mappers tagged them, measured; other heights, guessed from building type and size. USGS 3DEP lidar, or a national elevation model: the ground, measured; the river surface, rocks, rapids and shoreline, inferred. Microsoft building footprints, used on Gwynn\'s Island: buildings OpenStreetMap lacks, traced by a model, inferred. NLCD land cover, on Gwynn\'s Island: woods, fields and wetlands from satellites, inferred. City of Richmond year-built records: the year each standing building went up, measured. Sanborn fire-insurance maps from the Library of Congress: lost buildings traced from the scans, inferred; their heights from their material, guessed. Rules in the code: bridge deck heights by name or layer, guessed.',
     parts.join('\n'))
 }
 
@@ -237,7 +234,7 @@ export const pipeline = (): string => {
   let y = 14
   const parts: string[] = [t(X0, y + 12, 'FROM DATA TO DRAWING', 'h dim')]
   y += 34
-  parts.push(t(X0, y, 'fetch: the only step that uses the network', 'si dim'))
+  parts.push(t(X0, y, 'fetch uses the network', 'si dim'))
   y += 12
   parts.push(box(X0, y, BW, 38, 'card'), t(X0 + 12, y + 24, 'Region file', 'bb ink'), t(X0 + BW - 12, y + 24, 'regions/<name>.json', 'm ink', 'end'))
   y += 38
@@ -251,7 +248,7 @@ export const pipeline = (): string => {
   y += 26
   parts.push(box(X0, y, BW, 38, 'cache'), t(X0 + 12, y + 24, 'Local cache', 'bb ink'), t(X0 + BW - 12, y + 24, 'data/<name>/', 'm ink', 'end'))
   y += 38 + 30
-  parts.push(t(X0, y, 'build: offline, from the cache, the same every time', 'si dim'))
+  parts.push(t(X0, y, 'build runs offline, from the cache', 'si dim'))
   y += 12
   STAGES.forEach((s, i) => {
     if (i > 0) parts.push(arrow(W / 2, y + 5, W / 2, y + 19))
@@ -259,18 +256,18 @@ export const pipeline = (): string => {
     parts.push(box(X0, y, BW, 36, 'card'), t(X0 + 12, y + 23, s.name, 'bb ink'), t(X0 + BW - 12, y + 23, s.mod, 'm ink', 'end'))
     if (s.projection) {
       parts.push(`<rect x="${n(X0 - 6)}" y="${n(y - 6)}" width="${n(BW + 12)}" height="48" class="hl"/>`)
-      parts.push(t(X0, y + 58, 'The projection is this step alone: view.ts is', 'si acc'))
-      parts.push(t(X0, y + 75, 'about 90 lines of some 14,000 in src/.', 'si acc'))
+      parts.push(t(X0, y + 58, 'This step is the projection. view.ts is', 'si acc'))
+      parts.push(t(X0, y + 75, 'about 90 lines out of some 14,000 in src/.', 'si acc'))
       y += 44
     }
     y += 36
   })
   parts.push(arrow(W / 2, y + 5, W / 2, y + 19))
   y += 24
-  parts.push(box(X0, y, BW, 56, 'cache'), t(X0 + 12, y + 22, 'The SVG, archived; the explorer', 'bb ink'), t(X0 + 12, y + 42, 'out/<name>.svg  out/index.html', 'm ink'))
+  parts.push(box(X0, y, BW, 56, 'cache'), t(X0 + 12, y + 22, 'The SVG and the explorer', 'bb ink'), t(X0 + 12, y + 42, 'out/<name>.svg  out/index.html', 'm ink'))
   y += 56 + 16
   return svg('pipe', y, 'From data to drawing: the isoscape pipeline',
-    'fetch, the only step that uses the network: a region file (regions/<name>.json) drives downloads from OpenStreetMap (osm.ts) and an elevation model (dem.ts) into a local cache (data/<name>/). build, offline and the same every time, runs eight steps: read the map data (osm.ts), what each tag means (classify.ts), the year for a dated map (history.ts), the camera (view.ts), ground, water and rapids (terrain.ts), buildings and bridges (scene.ts), what hides what (order.ts), and ink, color and dots (render.ts). The camera step, marked with a red dashed outline, is the projection: view.ts is about 90 lines of some 14,000 in src/. The SVG is archived and listed in the explorer (out/<name>.svg, out/index.html).',
+    'fetch uses the network. It reads the region file (regions/<name>.json) and downloads OpenStreetMap (osm.ts) and elevation (dem.ts) into a local cache (data/<name>/). build runs offline, from the cache, in eight steps: read the map data (osm.ts), what each tag means (classify.ts), the year for a dated map (history.ts), the camera (view.ts), ground, water and rapids (terrain.ts), buildings and bridges (scene.ts), what hides what (order.ts), and ink, color and dots (render.ts). The camera step has a red dashed outline. It is the projection, and view.ts is about 90 lines out of some 14,000 in src/. The SVG lands in out/<name>.svg and the explorer in out/index.html.',
     parts.join('\n'))
 }
 
@@ -282,13 +279,13 @@ export const toPrint = (): string => {
   y += 30
   const RW = BW - 34
   const steps: [string, string][] = [
-    ['Build the scenes', 'isoscape build: deterministic SVG'],
-    ['Look', 'at print size; the visual check'],
+    ['Build the scenes', 'isoscape build'],
+    ['Look', 'at print size, with the visual check'],
     ['Compose the print', 'tools/print/compose.py'],
     ['Title block', 'plate RVA·01, version, year, place'],
     ['Release record', 'commit, inputs by SHA-256'],
-    ['Rebuild check', 'check.py --rebuild: same bytes'],
-    ['Printed to order', 'from that file, through the shop'],
+    ['Rebuild check', 'check.py --rebuild'],
+    ['Printed', 'when someone buys one'],
   ]
   const tops: number[] = []
   steps.forEach(([name, sub], i) => {
@@ -303,13 +300,13 @@ export const toPrint = (): string => {
   parts.push(route([[X0 + RW, tops[6] + 26], [rx, tops[6] + 26], [rx, tops[0] + 26], [X0 + RW + 2, tops[0] + 26]]))
   y += 22
   parts.push(box(X0, y, BW, 96, 'card'), `<rect x="${n(X0 - 5)}" y="${n(y - 5)}" width="${n(BW + 10)}" height="106" class="hl"/>`)
-  parts.push(t(X0 + 12, y + 22, 'A fault found after release goes round again', 'bb ink'))
-  parts.push(t(X0 + 12, y + 42, 'Redrawn as the next version (-v4), never', 'b ink'))
-  parts.push(t(X0 + 12, y + 61, 'changed in place. The plate stays; the', 'b ink'))
-  parts.push(t(X0 + 12, y + 80, 'Changes page says what changed, and when.', 'b ink'))
+  parts.push(t(X0 + 12, y + 22, 'If a fault turns up after release', 'bb ink'))
+  parts.push(t(X0 + 12, y + 42, "It's redrawn as the next version (-v4).", 'b ink'))
+  parts.push(t(X0 + 12, y + 61, 'The plate stays the same, and the', 'b ink'))
+  parts.push(t(X0 + 12, y + 80, 'Changes page says what changed.', 'b ink'))
   y += 96 + 20
   return svg('print', y, 'From drawing to print',
-    'Seven steps: build the scenes (isoscape build, deterministic SVG); look at them at print size, with the visual check; compose the print (tools/print/compose.py); set the title block (plate, such as RVA·01, version, year, place); write the release record (the commit, and every input by SHA-256); run the rebuild check (check.py --rebuild, the same bytes again); and print to order from that file, through the shop. An arrow runs from the last step back to the first: a fault found after release is redrawn as the next version (such as -v4), never changed in place; the plate stays, and the Changes page says what changed and when.',
+    'Seven steps. Build the scenes (isoscape build). Look at them at print size, with the visual check. Compose the print (tools/print/compose.py). Add the title block (plate RVA·01, version, year, place). Write the release record (the commit, and every input by SHA-256). Run the rebuild check (check.py --rebuild). Print it when someone buys one. An arrow runs from the last step back to the first. If a fault turns up after release, the design is redrawn as the next version (-v4), the plate stays the same, and the Changes page says what changed.',
     parts.join('\n'))
 }
 
@@ -319,22 +316,22 @@ export const withAgent = (): string => {
   let y = 14
   const parts: string[] = [t(X0, y + 12, 'USING IT WITH AN AGENT', 'h dim')]
   y += 26
-  const a = lane(y, 'artist', 'You', 'a person', ['Say what place to draw, and how', 'Look at the picture; say what to change'])
+  const a = lane(y, 'artist', 'You', 'a person', ['Name the place and what you want', "Look at the picture and say what's wrong"])
   parts.push(a.svg)
   y += a.h
-  parts.push(between(y + 6, y + 50, 'a request', 'pictures, a summary'))
+  parts.push(between(y + 6, y + 50, 'a request', 'pictures'))
   y += 56
-  const c = lane(y, 'agent', 'Claude', 'in the app or a terminal', ['Reads CLAUDE.md, the working contract,', 'and AGENTS.md; follows the loop'])
+  const c = lane(y, 'agent', 'Claude', 'in the app or a terminal', ['Reads CLAUDE.md and AGENTS.md', 'Builds the map and looks at it'])
   parts.push(c.svg)
   y += c.h
-  parts.push(between(y + 6, y + 50, 'commands', 'files, numbers'))
+  parts.push(between(y + 6, y + 50, 'commands', 'files, warnings'))
   y += 56
   const rows: [string, string][] = [
     ['regions/<name>.json', 'the place: center, size'],
     ['fetch', 'downloads into data/'],
     ['build <name> --png', 'out/<name>.png'],
-    ['out/index.html', 'the explorer; C compares'],
-    ['npm test', 'and npm run typecheck'],
+    ['out/index.html', 'the explorer (C to compare)'],
+    ['npm test', 'npm run typecheck'],
     ['npm run check:visual', 'out/check/index.html'],
   ]
   const h = 34 + rows.length * 22 + 6
@@ -345,11 +342,11 @@ export const withAgent = (): string => {
     parts.push(t(X0 + 24, ry, cmd, 'm ink'), t(X0 + BW - 12, ry, what, 's ink', 'end'))
   })
   y += h + 24
-  parts.push(t(X0, y, 'The loop: change, build, look at the picture,', 'si ink'))
-  parts.push(t(X0, y + 18, 'compare with the last build, keep or undo.', 'si ink'))
+  parts.push(t(X0, y, 'Never judge a change from the numbers alone.', 'si ink'))
+  parts.push(t(X0, y + 18, 'Look at the picture.', 'si ink'))
   y += 34
   return svg('agent', y, 'Using isoscape with a coding agent',
-    'Three lanes. You, a person: say what place to draw and how, look at the picture and say what to change. Claude, in the app or a terminal: reads CLAUDE.md, the working contract, and AGENTS.md, and follows the loop. Arrows run down (a request; commands) and back up (pictures and a summary; files and numbers). The repo, isoscape: regions/<name>.json (the place: center, size); fetch (downloads into data/); build <name> --png (out/<name>.png); out/index.html (the explorer, where C compares two builds); npm test and npm run typecheck; npm run check:visual (out/check/index.html). The loop: change, build, look at the picture, compare with the last build, keep or undo.',
+    'Three stacked boxes. You name the place and what you want, then look at the picture and say what is wrong. Claude, in the app or a terminal, reads CLAUDE.md and AGENTS.md and works in the loop. Arrows go down (a request, commands) and back up (pictures, files and warnings). The repo holds regions/<name>.json (the center and size of the place), fetch (downloads into data/), build <name> --png (writes out/<name>.png), out/index.html (the explorer, where C compares two builds), npm test, npm run typecheck, and npm run check:visual (writes out/check/index.html). Never judge a change from the numbers alone. Look at the picture.',
     parts.join('\n'))
 }
 
@@ -363,9 +360,9 @@ export const social = (): string => {
   parts.push(`<text x="60" y="92" style="font:700 44px ${SERIF}" class="ink">Who does what</text>`)
   parts.push(`<text x="${SW - 60}" y="90" text-anchor="end" style="font:600 26px ${SANS};letter-spacing:.06em" class="dim">ISOSCAPE · QUESTIONS</text>`)
   const cols: [string, string, string, string][] = [
-    ['artist', 'Chris Busse', 'decides, sets', 'rules, approves'],
-    ['agent', 'Claude', 'writes the code,', 'runs it, reports'],
-    ['code', 'isoscape', 'computes the', 'map from data'],
+    ['artist', 'Chris Busse', 'decides what', 'to draw and keep'],
+    ['agent', 'Claude', 'writes the code', 'and runs it'],
+    ['code', 'isoscape', 'turns the data', 'into the map'],
   ]
   const cw = 310
   const gap = (SW - 120 - 3 * cw) / 2
@@ -389,8 +386,8 @@ export const social = (): string => {
       }
     }
   })
-  parts.push(`<text x="60" y="560" style="font-size:30px;font-style:italic" class="ink">The loop: direct, build, look, correct. Nothing is kept until Chris approves it.</text>`)
-  return svg('social', SH, 'Who does what', 'Chris Busse decides, sets the rules and approves; Claude writes the code, runs it and reports; isoscape computes the drawing from data.', parts.join('\n'), SW)
+  parts.push(`<text x="60" y="560" style="font-size:28px;font-style:italic" class="ink">Chris draws the maps with isoscape. Claude wrote its code under his direction.</text>`)
+  return svg('social', SH, 'Who does what', 'Chris Busse decides what to draw and what to keep. Claude writes the code and runs it. isoscape turns the data into the map. Chris draws the maps with isoscape; Claude wrote its code under his direction.', parts.join('\n'), SW)
 
 }
 
