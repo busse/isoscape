@@ -342,10 +342,7 @@ commerce, industry or civic. Where a building is mapped as Simple 3D Buildings p
 (`building:part`), the parts are drawn instead of the outline if the parts that reach the
 ground cover at least half of it. Many outlines carry parts only for a crown, a tower or
 rooftop works; such an outline is drawn whole, and its parts only above its roof. Parts that
-are only roofs (`building:part=roof`) never replace the outline: it stays as their podium. In a
-dated series, an outline given a height from a source (see Time) is drawn whole too: the
-Virginia State Capitol's wings, with only its central block mapped as a part, stand at 18 m
-under the block's 26 m. A
+are only roofs (`building:part=roof`) never replace the outline: it stays as their podium. A
 building is drawn whole or not at all, so parts whose outline the frame cuts are left out
 too. Nothing stands on air: a part raised off the ground (`min_height`) that nothing beside
 it holds up, and that is not mapped as a bridge, reaches down to the roof under it or to the

@@ -422,12 +422,6 @@ export const buildScene = (
   for (const s of solids) {
     const mine = keptParts.filter((p) => p.tags['building:part'] !== 'roof' && (holders.get(p) ?? []).includes(s))
     if (mine.length === 0) continue
-    // An outline with a curated height is drawn whole, its parts on it (the Capitol's wings
-    // with only its central block mapped as a part).
-    if (heightOf.has(s.id)) {
-      underParts++
-      continue
-    }
     const grounded = mine.filter((p) => heightsOf(p, areaOf(p)).base < 0.5).map((p) => p.outer)
     if (groundCover(s.outer, s.inners, grounded) >= PARTS_REPLACE) replaced.add(s)
     else underParts++

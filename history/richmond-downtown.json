@@ -781,16 +781,31 @@
    "name": "Virginia State Capitol, central block",
    "year": 1788,
    "source": "https://vga.virginia.gov/?p=73",
-   "note": "Jefferson's Capitol, completed 1788 (https://vga.virginia.gov/?p=73). Its footprint is OSM's central building part (w366226948), taken to be the original building because it stands between the two wings of 1904–06; that identification is not from the source. It stands alone until the wings are added, and above them after. OSM tags it 8.1 m; its height here, 26 m, is the roof height (85 ft, three floors) SkyscraperPage measured: https://skyscraperpage.com/b190890.",
+   "note": "Jefferson's Capitol, completed 1788 (https://vga.virginia.gov/?p=73). Its footprint is OSM's central building part (w366226948), taken to be the original building because it stands between the two wings of 1904–06; that identification is not from the source. OSM tags it 8.1 m; its height here, 26 m, is the roof height (85 ft, three floors) SkyscraperPage measured: https://skyscraperpage.com/b190890.",
    "height": 26
+  },
+  {
+   "id": "w366226949",
+   "name": "Virginia State Capitol, west wing",
+   "year": 1906,
+   "height": 18,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "One of the two wings added 1904–06, an OSM building part with two levels and no height (drawn about 7 m, below the houses around the square). 18 m, under the central block's 26 m roof, is approximate."
+  },
+  {
+   "id": "w366226950",
+   "name": "Virginia State Capitol, east wing",
+   "year": 1906,
+   "height": 18,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "One of the two wings added 1904–06, an OSM building part with two levels and no height (drawn about 7 m, below the houses around the square). 18 m, under the central block's 26 m roof, is approximate."
   },
   {
    "id": "w45088494",
    "name": "Virginia State Capitol",
    "year": 1906,
    "source": "https://vga.virginia.gov/?p=73",
-   "note": "The Capitol as OSM outlines it today, with the wings of 1904–06, drawn from 1906; before that only its central block stands. OSM gives it two levels, drawn about 8 m; 18 m for the wings is approximate (below the central block's 26 m roof), and the central block rises above them.",
-   "height": 18
+   "note": "The Capitol as OSM outlines it today, with the wings of 1904–06, from 1906. OSM maps it as three parts: the central block (below) and the two wings."
   },
   {
    "id": "w400327565",
