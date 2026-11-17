@@ -15,8 +15,9 @@ the world, and the data decides the rest. [How it's made](how-its-made.md) expla
 
 isoscape was built, and the holiday shop is run, in chats with Claude, Anthropic's AI, using
 Claude Opus 5.5, directed and reviewed by Chris Busse. Claude wrote the code, traced the
-historic buildings, laid out the prints, and set up the shop. The maps are drawn by software
-from open data, not by hand. The historic years are machine-traced sketches.
+historic buildings, laid out the prints, and set up the shop. Chris Busse draws the maps with
+isoscape, in code, from open data; nothing is drawn by hand. The historic years are
+machine-traced sketches.
 
 ## Try it yourself
 

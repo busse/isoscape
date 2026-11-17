@@ -18,7 +18,7 @@ part of the picture, whether it was **measured**, **inferred** from a measuremen
 Each build in the explorer also has its own **How this view was made** tab under the picture.
 It gives that view's frame, sources and counts, and links back to the sections here.
 
-![The pipeline: fetch from OpenStreetMap and 3DEP into a local cache, then parse, camera, terrain, scene, order, draw, archive and explorer](pipeline.svg)
+![From data to drawing: fetch from OpenStreetMap and elevation into a local cache, then eight build steps, read, classify, the year, camera, terrain, scene, order and draw, each with its module, into the archived SVG and the explorer; the camera step, view.ts, is marked as the projection](pipeline.svg)
 
 Where to start:
 
