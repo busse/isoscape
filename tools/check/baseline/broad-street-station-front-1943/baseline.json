@@ -5,11 +5,11 @@
   "--year",
   "1943"
  ],
- "commit": "7b6373a9bedec7b987e3ff46a7b7d6530aa9639d",
- "dirty": false,
- "approved": "2026-11-16T19:50:10-0500",
- "svg_sha256": "3aa3a1d8f1f8a86bb9b00f2908f95b80acb090d3cf7298687650566c07be1806",
- "svg_bytes": 1001702,
+ "commit": "b3baa52fcceb9a3e73b5d2afb1747ebf1f83e90e",
+ "dirty": true,
+ "approved": "2026-11-16T23:44:21-0500",
+ "svg_sha256": "15296cbc93186951896a9a821de5632beb49897a924d748ebc6993ea86a888b3",
+ "svg_bytes": 1155632,
  "viewBox": [
   -1719.0,
   -1087.0,
@@ -54,16 +54,16 @@
    "mean": 0.9671
   },
   "portico": {
-   "max": 10.0,
-   "mean": 1.3645
+   "max": 9.0,
+   "mean": 1.3673
   },
   "platforms": {
-   "max": 6.778,
-   "mean": 1.823
+   "max": 6.889,
+   "mean": 1.9065
   },
   "lawn-hillshade": {
-   "max": 19.444,
-   "mean": 1.9826
+   "max": 22.889,
+   "mean": 1.7535
   }
  },
  "data": {

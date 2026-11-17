@@ -5,6 +5,24 @@
  "rules": [
   {
    "where": {
+    "id": [
+     "w6032500",
+     "w1180780206"
+    ]
+   },
+   "eras": [
+    [
+     1919,
+     null
+    ]
+   ],
+   "note": "The drive before the station's front, taken to be the station's own approach of 1919 rather than a later driveway (approximate: no plan of the drive is cited).",
+   "sources": [
+    "https://sah-archipedia.org/node/20518"
+   ]
+  },
+  {
+   "where": {
     "name": "The Diamond"
    },
    "eras": [
