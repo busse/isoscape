@@ -532,6 +532,13 @@ together, so they meet without a seam. Cover and parks that lie under water (a p
 around a lake) are cut out where the water is, so nothing of theirs shows through where one
 strip's water meets the next's; on a lake those seams had shown as faint lines.
 
+Each park, wood or other ground shape is cut to the strip as one polygon, holes and all, and
+comes out as its separate pieces. Cut one outline at a time, a wood with a clearing or a notch
+of bare ground in it kept an edge along the strip's line across the clearing, enclosing
+nothing; since ground shapes are outlined in their own color (0.6 units wide) to close the
+seams between them, each such edge showed as a green line, and the clearing was ruled with them
+one strip apart.
+
 The ground reaches a cell past the plate's sides, and the sides are then covered in paper,
 so each side is one clean edge. (Cut by a clip, a renderer that clips each shape in turn laid
 the edge once for every shape that reached it, and a side over water showed a dotted line.)

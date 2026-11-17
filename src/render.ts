@@ -9,7 +9,7 @@
  * (and any hill there) paints over it, and ground behind it does not.
  */
 
-import { clipRingToRect, distToSegment, pointInPolygon, clipSegmentToRect, hash, type Rect, type Ring, type Vec2 } from './geom.ts'
+import { clipPolygonToRect, clipRingToRect, distToSegment, pointInPolygon, clipSegmentToRect, hash, type Rect, type Ring, type Vec2 } from './geom.ts'
 import { GROUND_ORDER } from './classify.ts'
 import { paintOrder } from './order.ts'
 import type { Item, Scene, Shape } from './scene.ts'
@@ -931,9 +931,8 @@ export const renderSvg = (scene: Scene): Rendered => {
         let d = ''
         for (const e of layer.entries) {
           if (layer.small === true ? e.maxN < smallBand.minY || e.minN > smallBand.maxY : e.maxN < s.n0 || e.minN > s.n1) continue
-          for (const ring of e.rings) {
-            const clipped = clipRingToRect(ring, layer.small === true ? smallBand : band)
-            if (clipped.length < 3) continue
+          // Clipped as one polygon, holes and all: see clipPolygonToRect.
+          for (const clipped of clipPolygonToRect(e.rings, layer.small === true ? smallBand : band)) {
             // Small pieces keep every corner: simplified, a sliver of a tie cut at the strip's
             // edge could lose one and show as a thin wedge.
             d += layer.small === true
