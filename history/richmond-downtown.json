@@ -959,6 +959,18 @@
    1924,
    1950
   ],
-  "source": "https://www.loc.gov/collections/sanborn-maps/?q=richmond+virginia"
+  "source": "https://www.loc.gov/collections/sanborn-maps/?q=richmond+virginia",
+  "leaveOut": [
+   {
+    "edition": 1905,
+    "sheet": "5",
+    "why": "28 of its 57 traced buildings fall on the Capitol Square lawn, a public square since the Capitol was built (https://vga.virginia.gov/?p=73), so the sheet's fit (read by eye) is wrong; its other buildings are taken to be out of place too. Left out until the sheet is placed again."
+   },
+   {
+    "edition": 1905,
+    "sheet": "7",
+    "why": "3 of its 5 traced buildings fall on the Capitol Square lawn: the same misfit as sheet 5."
+   }
+  ]
  }
 }

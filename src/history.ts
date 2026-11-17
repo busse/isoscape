@@ -170,7 +170,11 @@ export interface History {
     readonly height?: number
   }[]
   /** Fire-insurance maps traced into footprints: the editions used, and the buildings since lost. */
-  readonly sanborn?: { readonly lost: string | readonly string[]; readonly editions: readonly number[]; readonly source: string }
+  readonly sanborn?: {
+    readonly lost: string | readonly string[]; readonly editions: readonly number[]; readonly source: string
+    /** Sheets whose fit is known to be wrong, left out until they are placed again: each says why. */
+    readonly leaveOut?: readonly { readonly edition: number; readonly sheet: string; readonly why: string }[]
+  }
   readonly traced: readonly TracedBuilding[]
   /**
    * Minor streets (tertiary, residential, service, unclassified, living streets and paths) drawn only
@@ -200,6 +204,8 @@ export const loadHistory = async (path: string): Promise<History> => {
       const fc = JSON.parse(await readFile(file, 'utf8')) as { features: { properties: Omit<TracedBuilding, 'ring'>; geometry: { coordinates: number[][][] } }[] }
       traced = traced.concat(fc.features.map((f) => ({ ...f.properties, ring: f.geometry.coordinates[0].slice(0, -1).map(([x, y]) => [x, y] as Vec2) })))
     }
+    const out = raw.sanborn.leaveOut ?? []
+    traced = traced.filter((b) => !out.some((o) => o.edition === b.edition && o.sheet === String(b.sheet)))
   }
   return {
     epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(),

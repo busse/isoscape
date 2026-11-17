@@ -617,6 +617,10 @@ Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
    traced in two editions that overlap by more than 85%, keeping the earlier start and the later
    end (`clean.py`: 68 dropped, 170 merged).
 
+A sheet whose fit is known to be wrong is left out until it is placed again, and the history
+file says why: the 1905 sheets 5 and 7, read by eye, put 31 buildings on the Capitol Square
+lawn, so neither is drawn.
+
 A sheet gives the buildings but not the shore they stood on, and the water is today's (or, for
 the canal's Great Basin, an approximate outline). A traced building with half its footprint
 or more on the water drawn in its year would stand in the river, so it is left out, and the

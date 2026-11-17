@@ -168,3 +168,14 @@ test('every curated year cites a source, and a curated height says where it come
     if (d.height !== undefined) assert.ok(d.height > 0 && (d.note ?? '').length > 0, `${d.id}: a height needs a note`)
   }
 })
+
+test('a sheet whose fit is known to be wrong is left out', async () => {
+  const { loadHistory } = await import('../src/history.ts')
+  const dir = await mkdtemp(join(tmpdir(), 'iso-leave-'))
+  const ring = [[0, 0], [1, 0], [1, 1], [0, 0]]
+  const f = (id: string, sheet: string, edition: number) => ({ type: 'Feature', properties: { id, from: edition, to: 1960, end: 'assumed', material: 'brick', storeys: 3, edition, sheet }, geometry: { type: 'Polygon', coordinates: [ring] } })
+  await writeFile(join(dir, 'lost.geojson'), JSON.stringify({ type: 'FeatureCollection', features: [f('a', '5', 1905), f('b', '6', 1905), f('c', '5', 1886)] }))
+  await writeFile(join(dir, 'h.json'), JSON.stringify({ sanborn: { lost: join(dir, 'lost.geojson'), editions: [1886, 1905], source: 'x', leaveOut: [{ edition: 1905, sheet: '5', why: 'misfit' }] } }))
+  const h = await loadHistory(join(dir, 'h.json'))
+  assert.deepEqual(h.traced.map((b) => b.id), ['b', 'c'])
+})
