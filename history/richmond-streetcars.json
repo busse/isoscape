@@ -11229,6 +11229,75 @@
  "rules": [
   {
    "where": {
+    "name": "North Arthur Ashe Boulevard",
+    "bridge": true
+   },
+   "eras": [
+    [
+     1943,
+     null
+    ]
+   ],
+   "note": "The Boulevard's bridge over the RF&P by the fair grounds was built in 1943 (rebuilt 1986).",
+   "sources": [
+    "https://bridgelookup.com/bridge/582695"
+   ]
+  },
+  {
+   "where": {
+    "name": "Westwood Avenue",
+    "bridge": true
+   },
+   "eras": [
+    [
+     1966,
+     null
+    ]
+   ],
+   "note": "The Westwood Avenue bridges over the RF&P at AY (the avenue and its ramp, Saunders Avenue the other half of the pair) were built in 1966.",
+   "sources": [
+    "https://bridgelookup.com/bridge/582714",
+    "https://bridgecondition.com/bridge/virginia/va-000000000021568"
+   ]
+  },
+  {
+   "where": {
+    "name": "Saunders Avenue",
+    "bridge": true
+   },
+   "eras": [
+    [
+     1966,
+     null
+    ]
+   ],
+   "note": "The other half of the 1966 Westwood Avenue bridges at AY (approximate: the bridge records name only Westwood Avenue and its ramp).",
+   "sources": [
+    "https://bridgelookup.com/bridge/582714"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w44745829",
+     "w44745825",
+     "w108533112",
+     "w753743484"
+    ]
+   },
+   "eras": [
+    [
+     1966,
+     null
+    ]
+   ],
+   "note": "The loop ramp of the 1966 Westwood Avenue bridges.",
+   "sources": [
+    "https://bridgecondition.com/bridge/virginia/va-000000000021568"
+   ]
+  },
+  {
+   "where": {
     "name": "Robert E. Lee Memorial Bridge"
    },
    "eras": [
