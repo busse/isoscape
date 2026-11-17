@@ -545,6 +545,44 @@ export const buildScene = (
       placedRuns.push({ h, k, w, pts: simplifyLine(run.map(([lon, lat]) => view.toView(lon, lat)), Math.max(7, w * TRAM_TOLERANCE)) })
     }
   }
+  // With carDeckSnap, a road deck that carries a car line is laid on the line as drawn (each
+  // of its nodes moved to the nearest point of the line, and any deck sharing that node with
+  // it), so the band on the deck and the band on the ground meet without a sideways step.
+  if (time?.history.carDeckSnap === true && placedRuns.length > 0) {
+    const runs = placedRuns.map((r) => r.pts)
+    const nearest = (p: Vec2): Vec2 => {
+      let best: Vec2 = p, bd = Infinity
+      for (const run of runs) for (let i = 0; i + 1 < run.length; i++) {
+        const a = run[i], b = run[i + 1], dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy
+        const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2))
+        const q: Vec2 = [a[0] + dx * t, a[1] + dy * t]
+        const d = Math.hypot(q[0] - p[0], q[1] - p[1])
+        if (d < bd) { bd = d; best = q }
+      }
+      return best
+    }
+    const moved = new Map<string, Vec2>()
+    for (const f of bridgeLines) {
+      if (isRail(f.tags) || skyways.has(f)) continue
+      const pts = f.points.map(([lon, lat]) => view.toView(lon, lat))
+      if (!carriesTram(pts, runs, 9 * tramScale)) continue
+      f.points.forEach((q, j) => moved.set(`${q[0]},${q[1]}`, view.fromView(nearest(pts[j]))))
+    }
+    if (moved.size > 0) {
+      for (let i = 0; i < bridgeLines.length; i++) {
+        const f = bridgeLines[i]
+        if (!f.points.some((q) => moved.has(`${q[0]},${q[1]}`))) continue
+        bridgeLines[i] = { ...f, points: f.points.map((q) => moved.get(`${q[0]},${q[1]}`) ?? q) }
+      }
+      roadDecks.length = 0
+      for (const f of bridgeLines) {
+        if (isRail(f.tags) || skyways.has(f)) continue
+        const pts = f.points.map(([lon, lat]) => view.toView(lon, lat))
+        for (let i = 0; i + 1 < pts.length; i++) roadDecks.push({ a: pts[i], b: pts[i + 1], half: deckWidth(f.tags) / 2 })
+      }
+      extraStats.carDecksSnapped = moved.size
+    }
+  }
   // With carLineEnds, a run that stops short of another line (within that many meters, ahead of
   // its end) is carried on straight to meet it.
   const reachEnds = time?.history.carLineEnds

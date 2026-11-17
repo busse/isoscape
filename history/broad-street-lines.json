@@ -39044,5 +39044,6 @@
  "vergeFill": 15,
  "streetEnds": 200,
  "bridgeAnchors": true,
- "railScaleService": 1
+ "railScaleService": 1,
+ "carDeckSnap": true
 }

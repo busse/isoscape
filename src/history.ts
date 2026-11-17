@@ -299,6 +299,8 @@ export interface History {
    * square deck end shows beside it; a building (not curated) under such a deck is left out.
    */
   readonly carDecks?: boolean
+  /** A road deck that carries a car line is laid on the line as drawn, so deck and ground bands meet without a step. */
+  readonly carDeckSnap?: boolean
   /**
    * Meters: a car line that ends this close to another line, short of it, is carried on
    * straight to meet it (a junction where the two were placed on different corners).
@@ -395,6 +397,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.carLineSeal === undefined ? {} : { carLineSeal: raw.carLineSeal }),
     ...(raw.streetsUnderCars === undefined ? {} : { streetsUnderCars: raw.streetsUnderCars }),
     ...(raw.carDecks === undefined ? {} : { carDecks: raw.carDecks }),
+    ...(raw.carDeckSnap === undefined ? {} : { carDeckSnap: raw.carDeckSnap }),
     ...(raw.carLineEnds === undefined ? {} : { carLineEnds: raw.carLineEnds }),
     ...(raw.vergeFill === undefined ? {} : { vergeFill: raw.vergeFill }),
     ...(raw.viaductClearance === undefined ? {} : { viaductClearance: raw.viaductClearance }),
