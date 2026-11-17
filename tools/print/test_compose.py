@@ -42,6 +42,10 @@ class SmallestSize(unittest.TestCase):
         import stamp, titleblock
         u = stamp.size_u(36, 300)
         self.assertAlmostEqual(C.block_reserve(36, 300), titleblock.WIDTH * u + titleblock.H * u * 0.5)
+        spec = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'spec.json')))
+        self.assertEqual(C.stamped_faces(spec, (36, 24)), [36, 18, 30, 36])
+        u18 = stamp.size_u(18, 300)                    # an 18x12 face, in the 36x24 sheet's pixels
+        self.assertAlmostEqual(C.block_reserve(36, 300, faces=[36, 18]), (titleblock.WIDTH + titleblock.H * 0.5) * u18 * 2)
 
 
 if __name__ == '__main__':
