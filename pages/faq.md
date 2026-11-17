@@ -3,7 +3,6 @@ title: Questions and answers
 order: 95
 summary: What Claude did and what the code does, where the data comes from, what's guessed, and how the prints are made.
 social: faq-social.jpg
-unlisted: true
 schema: FAQPage
 ---
 
