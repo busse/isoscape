@@ -1,0 +1,150 @@
+{
+ "design": "richmond-panorama-2026",
+ "title": "Richmond and the James",
+ "version": 3,
+ "version_note": "redrawn: elevation that had been read out of place is corrected, the hill shading is smooth, rapids and rocks are drawn only where the river falls, the shorelines follow the mapped banks, bridges and ramps end properly, the Capitol stands at its height, St. John's Church is drawn at its height, and two apartment towers mistagged in OpenStreetMap (The Hues and The Locks) are drawn by their floors.",
+ "recorded": "2026-11-17T01:34:27+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "149117914bc2bcf54c5cea3dacd594bb3c83c861",
+  "subject": "Changes: Richmond 1925, 1950, 2026 and Richmond and the James redrawn as version 3 (November 16, 2026)",
+  "dirty": false
+ },
+ "kind": "redraw",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <store>/print-files/drawn/richmond-panorama-2026-v3 --only richmond-panorama-2026",
+   "python3 tools/release/stamp.py <store> richmond-panorama-2026 --version 3 --base print-files/drawn/richmond-panorama-2026-v3"
+  ],
+  "redraw": true,
+  "base_kind": "compose",
+  "previous_record": "releases/richmond-panorama-2026/v2.json",
+  "pinned": "panels use the builds named in scenes[].build, not the newest",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond",
+   "piece": "Richmond and the James",
+   "plate": "RVA-08",
+   "version": "3",
+   "drawn": "2026",
+   "location": "37.534° N 77.427° W",
+   "facing": "351°"
+  },
+  "files": {
+   "richmond-panorama-2026-v3_24x10.jpg": {
+    "base": "print-files/drawn/richmond-panorama-2026-v3/richmond-panorama-2026_24x10.jpg",
+    "base_sha256": "b3f5d179b3d534fef88baab1844f60607144e222fa36534e0c66c9946dce73de",
+    "at": {
+     "x": 5644,
+     "y": 2628,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-downtown-time",
+   "year": 2026,
+   "flags": [],
+   "svg": "out/builds/20261116-200038-richmond-downtown-time-2026/image.svg",
+   "sha256": "5a10dd5b438ae39d38cdd9b95bc042cf2ae9ee2b65307829166f838749eb0487",
+   "frozen": "data/_releases/scenes/5a10dd5b438ae39d38cdd9b95bc042cf2ae9ee2b65307829166f838749eb0487.svg",
+   "build": "20261116-200038-richmond-downtown-time-2026",
+   "commit": "942ca88",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "08c58e8c31a6ba1a4c3ff40ad6df7dc3c0044c7de3c193aa04894f51f16214ab",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "regions/richmond-downtown-time.json": "498df0bb97a286cde8d08816566be631db130090de8a1928fd7f6ba3ee831681",
+  "history/richmond-downtown.json": "34175db8800b15b64ab67fc58fab177ce513c745a23e5b295ad79c064c8972bf",
+  "history/sanborn/lost.geojson": "298b5ac0f674499f65ff8474d06beb17fb78b417a1e8362b46ed7adb1ecdced9"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/richmond-panorama-2026-v3_24x10.jpg",
+   "sha256": "d542f05d1d58056f0ebe8680fb54d658201e8bff4325a2ab29a279cc0fbd0344",
+   "bytes": 5953673,
+   "printful_file_id": 1113888442
+  },
+  "canvas": []
+ },
+ "store": {
+  "catalog": {
+   "title": "Richmond and the James",
+   "place": "Richmond",
+   "orientation": "horizontal",
+   "modern": true,
+   "formats": [
+    "Panorama Print"
+   ],
+   "print": "richmond-panorama-2026-v3_24x10.jpg",
+   "explore": "richmond-downtown-time:2026",
+   "version": 3,
+   "version_date": "November 16, 2026",
+   "version_note": "redrawn: elevation that had been read out of place is corrected, the hill shading is smooth, rapids and rocks are drawn only where the river falls, the shorelines follow the mapped banks, bridges and ramps end properly, the Capitol stands at its height, St. John's Church is drawn at its height, and two apartment towers mistagged in OpenStreetMap (The Hues and The Locks) are drawn by their floors.",
+   "plate": "RVA-08",
+   "plate_box": [
+    0.78389,
+    0.876,
+    0.97556,
+    0.941
+   ]
+  },
+  "products": [
+   {
+    "handle": "richmond-and-the-james",
+    "id": "gid://shopify/Product/9137908514934",
+    "format": "all (merged)",
+    "status": "DRAFT",
+    "variants": 1
+   },
+   {
+    "handle": "richmond-and-the-james-panorama-print",
+    "id": "gid://shopify/Product/9132813320310",
+    "format": "Panorama Print",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Panorama Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-panorama-2026-v3_24x10-panorama-print.jpg?v=1794878809",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-panorama-2026-v3_24x10-plate.jpg?v=1794878814"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-downtown-time:2026"
+ },
+ "restamped": {
+  "files": 1,
+  "matched": 1
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 1
+ }
+}
