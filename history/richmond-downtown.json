@@ -12,6 +12,10 @@
    "vergeReach": 60,
    "vergeShare": 0.5,
    "bridgeStreets": true
+  },
+  "next2": {
+   "note": "Corrections made after Richmond 1886 (version 3) and the composites drawn from this series (version 3, November 17, 2026), drawn in builds made with --with next,next2: traced buildings under the Free Bridge's approximate line are left out, as under a rail viaduct. Those prints stay as sold until their next version.",
+   "bridgesClearTraced": true
   }
  },
  "about": "Each scene draws the buildings standing today that had been built by its year (dated by OSM start_date, else the City of Richmond assessor's year built), plus the curated features below. Buildings since demolished appear only where curated. The ground is today's.",

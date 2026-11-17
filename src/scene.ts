@@ -723,7 +723,8 @@ export const buildScene = (
     // - on track: any part of it within the half width of a rail line of its year, on a viaduct
     //   (its deck, `tracedUnderViaduct`) or on the ground (its ballast, `tracedOnTrack`): the
     //   building was cleared for the line (most were mapped before the viaducts of 1901) or
-    //   the sheet misplaces it;
+    //   the sheet misplaces it; where the series asks (`bridgesClearTraced`), a curated road
+    //   bridge's deck counts as a viaduct's;
     // - buried: today's ground anywhere under it more than TRACED_BURIED meters above
     //   its floor (the level it is seated at), where a later cut or fill (the interstate's)
     //   would bury its walls (`tracedBuried`).
@@ -738,6 +739,10 @@ export const buildScene = (
         .map((f) => ({ pts: f.points.map(([lon, lat]) => view.toView(lon, lat)), half: isBridge(f.tags) ? deckWidth(f.tags) / 2 : 1.6 * railScale, deck: isBridge(f.tags) })),
       ...curated.filter((h) => h.kind === 'rail').flatMap((h) => [...(h.line ? [h.line] : []), ...(h.lines ?? [])])
         .map((run) => ({ pts: run.map(([lon, lat]) => view.toView(lon, lat)), half: 1.6 * railScale, deck: false })),
+      // A curated road bridge's deck, where the series asks (`bridgesClearTraced`).
+      ...(time.history.bridgesClearTraced === true ? curated.map(bridgeFeature) : [])
+        .filter((f): f is LineFeature => f !== null && f.type === 'line' && !isRail(f.tags))
+        .map((f) => ({ pts: f.points.map(([lon, lat]) => view.toView(lon, lat)), half: deckWidth(f.tags) / 2, deck: true })),
     ]
     const works = laterWorkLines(extraAll ?? features, time.year, time.history).map((pts) => pts.map(([lon, lat]) => view.toView(lon, lat)))
     // Canals drawn as ribbons (a canal mapped as a line, not as an area) are water too.

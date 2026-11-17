@@ -240,10 +240,16 @@ export interface History {
   /** Keep the whole of a street, by name, that leads onto a road bridge (`dropUnbuiltStreets`'s `follow`). */
   readonly bridgeStreets?: boolean
   /**
+   * A curated road bridge clears traced buildings as a rail viaduct does: one with any part
+   * within `TRACED_VIADUCT_CLEAR` of its line is left out (its line is approximate, and a deck
+   * drawn over a roof reads as running through it).
+   */
+  readonly bridgesClearTraced?: boolean
+  /**
    * Settings a build's `--with` names switch on, by name: for corrections made after some years
    * of a series were published, so their scenes stay as sold until each is redrawn.
    */
-  readonly switches?: Readonly<Record<string, { readonly vergeReach?: number; readonly vergeShare?: number; readonly bridgeStreets?: boolean; readonly note?: string }>>
+  readonly switches?: Readonly<Record<string, { readonly vergeReach?: number; readonly vergeShare?: number; readonly bridgeStreets?: boolean; readonly bridgesClearTraced?: boolean; readonly note?: string }>>
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
@@ -269,6 +275,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.vergeReach === undefined ? {} : { vergeReach: raw.vergeReach }),
     ...(raw.vergeShare === undefined ? {} : { vergeShare: raw.vergeShare }),
     ...(raw.bridgeStreets === undefined ? {} : { bridgeStreets: raw.bridgeStreets }),
+    ...(raw.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: raw.bridgesClearTraced }),
     ...(raw.switches === undefined ? {} : { switches: raw.switches }),
   }
 }
@@ -343,7 +350,7 @@ export const switchedOn = (h: History, on: readonly string[]): History => {
   for (const name of on) {
     const set = h.switches?.[name]
     if (set === undefined) continue
-    out = { ...out, ...(set.vergeReach === undefined ? {} : { vergeReach: set.vergeReach }), ...(set.vergeShare === undefined ? {} : { vergeShare: set.vergeShare }), ...(set.bridgeStreets === undefined ? {} : { bridgeStreets: set.bridgeStreets }) }
+    out = { ...out, ...(set.vergeReach === undefined ? {} : { vergeReach: set.vergeReach }), ...(set.vergeShare === undefined ? {} : { vergeShare: set.vergeShare }), ...(set.bridgeStreets === undefined ? {} : { bridgeStreets: set.bridgeStreets }), ...(set.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: set.bridgesClearTraced }) }
   }
   return out
 }
