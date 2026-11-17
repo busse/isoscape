@@ -963,6 +963,22 @@ export const buildScene = (
     }
     if (canopies > 0) stats.canopyPieces = canopies
     if (cars > 0) stats.trainPieces = cars
+    // A close view of a station's front can leave out what stands under its shed roofs
+    // (`hideUnderSheds`): cars a roof covers any of, and ramp houses whose middle lies under a
+    // roof. Painted with the roofs piece by piece they interleave, and the roofs hide them.
+    if (cut === undefined && region.hideUnderSheds === true) {
+      const roofRings = boxes.filter((b) => b.tone === 'iron' && !b.id.includes(':post:')).map((b) => b.ring)
+      const under = (r: Ring) => { const c = centroid(r); return roofRings.some((q) => pointInRing(c, q)) }
+      // A car any corner of which a roof covers (they stand between the platforms, under the
+      // roofs' overhangs) is left out too.
+      const touched = (r: Ring) => r.some((p) => roofRings.some((q) => pointInRing(p, q)))
+      const kept = boxes.filter((b) => !(b.tone !== 'iron' && (under(b.ring) || touched(b.ring))))
+      const ramps = new Set(curated.filter((h) => h.kind === 'landmark' && h.tone === 'ramp' && h.ring !== undefined && under(toViewRing(view, h.ring))).map((h) => `history:${h.id}`))
+      for (let i = items.length - 1; i >= 0; i--) if (ramps.has(items[i].id)) items.splice(i, 1)
+      stats.hiddenUnderSheds = boxes.length - kept.length + ramps.size
+      boxes.length = 0
+      boxes.push(...kept)
+    }
     // A whole view draws its sheds' butterfly roofs as the cutaway does (shedItems).
     if (cut === undefined) items.push(...boxes.flatMap((b) => shedItems(view, pal, b)))
     else {

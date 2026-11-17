@@ -62,6 +62,8 @@ export interface Region {
   readonly railCrossings?: number
   /** The halo round map labels, as a share of their size (default 0.22): wider over dense blocks. */
   readonly labelHalo?: number
+  /** Leave out the cars and ramp houses under a modeled station's shed roofs (a close view of its front). */
+  readonly hideUnderSheds?: boolean
   /**
    * Extra data, beyond OSM and elevation. `buildings` lists where footprints come from:
    * OpenStreetMap and/or Microsoft's ML footprints (OSM wins where both have a building).

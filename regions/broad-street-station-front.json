@@ -29,5 +29,6 @@
       "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
       "field": "Year_Built"
     }
-  }
+  },
+  "hideUnderSheds": true
 }
