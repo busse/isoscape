@@ -19,13 +19,13 @@ import { mix, type Palette } from './palette.ts'
 import type { Region } from './region.ts'
 import { dominantGridAngle, makeView, snapBearing, type View } from './view.ts'
 import { localMetres } from './region.ts'
-import { makeTerrain, rasterize, settleWater, stillWater, traceShore, type Terrain } from './terrain.ts'
+import { drawnWet, makeTerrain, rasterize, settleWater, stillWater, traceShore, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
 import { cutawayItems, partSolids, partTones, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
-import { alive, dropUnbuiltStreets, featureAlive, laterWorks, type Dated, type History, type HistoryFeature } from './history.ts'
+import { alive, dropUnbuiltStreets, featureAlive, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
 export interface TimeContext {
@@ -106,6 +106,8 @@ export interface Scene {
   readonly cut?: CutPlane
   /** A flat section's cut faces, in plane coordinates: meters along the plane, scene z. */
   readonly sections?: readonly Vec2[][]
+  /** Traced buildings of the year left out, and why: on water, on a viaduct or track, or buried. */
+  readonly tracedLeftOut?: readonly { readonly id: string; readonly why: 'water' | 'viaduct' | 'track' | 'buried' }[]
 }
 
 export interface MapLabel {
@@ -143,6 +145,10 @@ export const buildScene = (
   const time = extra.time
   const curated = time === undefined ? [] : time.history.features.filter((h) => alive(h.from, h.to, time.year))
   let later = { atGrade: 0, verges: 0 }
+  // Traced buildings left out, and why (for `info` and checks; not drawn).
+  let leftOut: { id: string; why: 'water' | 'viaduct' | 'track' | 'buried' }[] | undefined
+  // Every feature mapped today, before a dated scene keeps those of its year.
+  const extraAll: readonly Feature[] | undefined = time === undefined ? undefined : features
   if (time !== undefined) {
     const all = features
     const r = laterWorks(all, asOf(all, time), time.year, time.history)
@@ -162,10 +168,17 @@ export const buildScene = (
     features = r.kept
     unbuiltStreets = r.dropped
   }
+  let past = { canalBridges: 0, orphanBridges: 0, plantings: 0, spurs: 0 }
+  if (time !== undefined && time.year < time.history.present) {
+    const tracedPoints = time.history.traced.filter((b) => alive(b.from, b.to, time.year)).flatMap((b) => b.ring)
+    const r = pastGround(extraAll ?? features, features, time.year, time.history, time.dates, 2000, 40, tracedPoints)
+    features = r.kept
+    past = { canalBridges: r.canalBridges, orphanBridges: r.orphanBridges, plantings: r.plantings, spurs: r.spurs }
+  }
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)
   const frame = view.frame
-  const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}), ...(later.atGrade ? { bridgesAtGrade: later.atGrade } : {}), ...(later.verges ? { vergesLater: later.verges } : {}) }
+  const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}), ...(later.atGrade ? { bridgesAtGrade: later.atGrade } : {}), ...(later.verges ? { vergesLater: later.verges } : {}), ...(past.canalBridges ? { canalBridgesLater: past.canalBridges } : {}), ...(past.orphanBridges ? { bridgesWithoutRoads: past.orphanBridges } : {}), ...(past.plantings ? { plantingsLater: past.plantings } : {}), ...(past.spurs ? { spursLater: past.spurs } : {}) }
   const opts = region.terrain ?? {}
   const useTerrain = elevation !== null && region.terrain !== undefined && opts.enabled !== false
   const terrain = makeTerrain(view, opts.cell ?? 5, useTerrain ? (opts.exaggeration ?? 2) : 1, useTerrain ? elevation : null)
@@ -459,6 +472,11 @@ export const buildScene = (
   // A curated site (a station's grounds, a fairground) was laid out otherwise while it stood:
   // today's buildings on it are not drawn.
   const sites = curated.filter((h) => h.kind === 'site' && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
+  // In a past year's scene a building's walls stand on the ground at its corners (`extrude`'s
+  // feet): run down to its lowest corner, a wall facing the camera across a hollow or a later
+  // cut was painted over by the nearer ground along a strip's straight edge. Today's scene keeps
+  // its walls to the lowest corner.
+  const pastScene = time !== undefined && time.year < time.history.present
   // Prisms wait in `entries` until every one is placed, so that none is left standing on air.
   const entries: (Item | { prism: Prism; make: (p: Prism) => Item })[] = []
   // A footprint from a model (Microsoft's) whose center is on water is a boat, a pier head
@@ -533,7 +551,7 @@ export const buildScene = (
     } else {
       const span = s.tags.building === 'bridge' || s.tags['building:part'] === 'bridge' || s.tags.man_made === 'bridge' || isBridge(s.tags)
       const prism: Prism = { outer, base, top, foot: gMin, raised: h.base > 0 && !footed, span }
-      entries.push({ prism, make: (p) => extrude(view, pal, s.id, outer, inners, p.base, p.top, roof, dotsMode, s.tags.name) })
+      entries.push({ prism, make: (p) => extrude(view, pal, s.id, outer, inners, p.base, p.top, roof, dotsMode, s.tags.name, pastScene && !p.raised && p.base <= gMin ? grounds : undefined) })
     }
     if (isBridgeTower(s.tags)) towerParts.push({ at: centroid(outer), top })
   }
@@ -687,41 +705,82 @@ export const buildScene = (
       cutPlaneOut = done.plane
       if (done.sections.length > 0) sectionsOut = done.sections
     }
-    // Buildings traced from fire-insurance maps that are gone today, in the maps' colors.
-    // A sheet gives a building but not the shore it stood on: one with half its footprint or
-    // more on water drawn in its year (today's river and canals, or a curated basin) would stand
-    // in the water, so it is left out and counted (`tracedOnWater`).
+    // Buildings traced from fire-insurance maps that are gone today, in the maps' colors. A sheet
+    // gives a building but not the ground it stood on, and a sheet's fit can be meters out, so
+    // one that cannot have stood where it falls is left out whole and counted, never trimmed:
+    //
+    // - on water: any part of it on water drawn in its year (past the traced shoreline, or in
+    //   today's river and canals, or a curated basin), read every TRACED_STEP meters over the
+    //   footprint and along its edges (`tracedOnWater`);
+    // - on track: any part of it within the half width of a rail line of its year, on a viaduct
+    //   (its deck, `tracedUnderViaduct`) or on the ground (its ballast, `tracedOnTrack`): the
+    //   building was cleared for the line (most were mapped before the viaducts of 1901) or
+    //   the sheet misplaces it;
+    // - buried: today's ground anywhere under it more than TRACED_BURIED meters above
+    //   its floor (the level it is seated at), where a later cut or fill (the interstate's)
+    //   would bury its walls (`tracedBuried`).
     const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
+    leftOut = []
     let tracedOnWater = 0
-    // A rail viaduct standing in the year runs where a traced building stood: the building was
-    // cleared for it (most were mapped before the viaducts of 1901) or the sheet misplaces it.
-    // Drawn, its piers pass through the roof, so it is left out and counted (`tracedUnderViaduct`).
-    const viaducts = features.filter((f): f is LineFeature => f.type === 'line' && f.tags.railway !== undefined && isBridge(f.tags))
-      .map((f) => f.points.map(([lon, lat]) => view.toView(lon, lat)))
-    const underViaduct = (ring: Ring): boolean => viaducts.some((pts) => pts.some((p) => pointInRing(p, ring)) ||
-      pts.slice(1).some((q, i) => ring.some((a, k) => segmentsCross(pts[i], q, a, ring[(k + 1) % ring.length]))))
     let tracedUnderViaduct = 0
+    let tracedOnTrack = 0
+    let tracedBuried = 0
+    const rails = [
+      ...features.filter((f): f is LineFeature => f.type === 'line' && isRail(f.tags))
+        .map((f) => ({ pts: f.points.map(([lon, lat]) => view.toView(lon, lat)), half: isBridge(f.tags) ? deckWidth(f.tags) / 2 : 1.6 * railScale, deck: isBridge(f.tags) })),
+      ...curated.filter((h) => h.kind === 'rail').flatMap((h) => [...(h.line ? [h.line] : []), ...(h.lines ?? [])])
+        .map((run) => ({ pts: run.map(([lon, lat]) => view.toView(lon, lat)), half: 1.6 * railScale, deck: false })),
+    ]
+    const works = laterWorkLines(extraAll ?? features, time.year, time.history).map((pts) => pts.map(([lon, lat]) => view.toView(lon, lat)))
+    // Canals drawn as ribbons (a canal mapped as a line, not as an area) are water too.
+    const canalQuads = ribbons.filter((r) => r.kind === 'canal').flatMap((r) => r.quads)
+      .map((q) => ({ q, box: [Math.min(...q.map((v) => v[0])), Math.min(...q.map((v) => v[1])), Math.max(...q.map((v) => v[0])), Math.max(...q.map((v) => v[1]))] as const }))
     for (const b of time.history.traced) {
       if (!alive(b.from, b.to, time.year)) continue
       const outer = orient(simplifyRing(toViewRing(view, b.ring), 0.3), true)
       if (outer.length < 3 || !outer.every((p) => insideRect(p, frame))) continue
-      if (wetShare(outer, (p) => onWater(sc, p)) >= 0.5) {
+      const xs = outer.map((p) => p[0]), ys = outer.map((p) => p[1])
+      const near = canalQuads.filter(({ box }) => box[0] <= Math.max(...xs) && box[2] >= Math.min(...xs) && box[1] <= Math.max(...ys) && box[3] >= Math.min(...ys)).map(({ q }) => q)
+      const wetAt = (p: Vec2): boolean => onWater(sc, p) || drawnWet(terrain, p) === true || near.some((q) => pointInRing(p, q))
+      if (ringSamples(outer, TRACED_STEP).some(wetAt)) {
         tracedOnWater++
+        leftOut.push({ id: b.id, why: 'water' })
         continue
       }
-      if (underViaduct(outer)) {
-        tracedUnderViaduct++
+      const track = rails.find((r) => lineNearRing(r.pts, outer, r.deck ? Math.max(r.half, TRACED_VIADUCT_CLEAR) : r.half + TRACED_TRACK_CLEAR))
+      if (track !== undefined) {
+        if (track.deck) tracedUnderViaduct++
+        else tracedOnTrack++
+        leftOut.push({ id: b.id, why: track.deck ? 'viaduct' : 'track' })
+        continue
+      }
+      const heights = outer.map((p) => terrain.elevation(p))
+      const lo = Math.min(...heights)
+      const hi = Math.max(...heights)
+      // Its floor, in meters above sea level: the level `seatLevel` seats it at (from its
+      // corners, as its walls are drawn).
+      const floor = lo + (hi - lo) / (2 * Math.max(1, terrain.exaggeration))
+      // Today's ground is read all over the footprint, not at its corners only: a slope can
+      // stand above a long wall between two low corners, or rise inside a ragged outline.
+      let above = hi
+      for (const p of ringSamples(outer, TRACED_BURIED_STEP)) above = Math.max(above, terrain.elevation(p))
+      const rise = above - floor
+      if (!terrain.flat && (rise > TRACED_DEEP || (rise > TRACED_BURIED && works.some((w) => lineNearRing(w, outer, TRACED_WORKS_REACH))))) {
+        tracedBuried++
+        leftOut.push({ id: b.id, why: 'buried' })
         continue
       }
       const grounds = outer.map((p) => terrain.z(p))
       const base = Math.min(...grounds)
       const top = Math.max(seatLevel(grounds, terrain.exaggeration) + b.storeys * 3.6, base + 2.5)
-      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, pal.traced[b.material], dotsMode))
+      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, pal.traced[b.material], dotsMode, undefined, grounds))
       ends[b.end]++
     }
     stats.traced = ends.map + ends.rebuilt + ends.highway + ends.assumed
     if (tracedOnWater > 0) stats.tracedOnWater = tracedOnWater
     if (tracedUnderViaduct > 0) stats.tracedUnderViaduct = tracedUnderViaduct
+    if (tracedOnTrack > 0) stats.tracedOnTrack = tracedOnTrack
+    if (tracedBuried > 0) stats.tracedBuried = tracedBuried
     stats.tracedEndMap = ends.map
     stats.tracedEndRebuilt = ends.rebuilt
     stats.tracedEndHighway = ends.highway
@@ -740,7 +799,7 @@ export const buildScene = (
   const chains = chainBridges(plans.length > 0 || extra.section === true ? [] : bridgeLines.filter((f) => !skyways.has(f)))
   const ends = bridgeEnds(view, region, chains)
   const towers = suspensionTowers(view, chains, towerParts)
-  const lines = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix))))
+  const lines = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix, time !== undefined && time.year < time.history.present))))
   for (let c = 0; c < chains.length; c++) {
     const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c))
     spans += pieces.filter((p) => p.pier !== true).length
@@ -764,6 +823,7 @@ export const buildScene = (
     ...(railScale > 1 ? { boldRail: true } : {}),
     ...(cutPlaneOut === undefined ? {} : { cut: cutPlaneOut }),
     ...(sectionsOut === undefined ? {} : { sections: sectionsOut }),
+    ...(leftOut === undefined ? {} : { tracedLeftOut: leftOut }),
   }
 }
 
@@ -808,10 +868,14 @@ const segmentQuad = (a: Vec2, b: Vec2, l: number, r: number, extend = 0): Vec2[]
  */
 export const extrude = (
   view: View, pal: Palette, id: string, outer: Ring, inners: Ring[], base: number, top: number,
-  roof: string, dots: 'all' | 'roof' | 'none', name?: string,
+  roof: string, dots: 'all' | 'roof' | 'none', name?: string, feet?: readonly number[],
 ): Item => {
   const walls: { key: number; shape: Shape }[] = []
-  for (const ring of [outer, ...inners]) {
+  for (const [r, ring] of [outer, ...inners].entries()) {
+    // `feet`: the ground at each corner of the outline. A wall whose both corners stand above
+    // the building's lowest corner stops, level, at the lower of the two, where the ground in
+    // front of it starts; the other walls reach down to the lowest corner as usual.
+    const wallFoot = (k: number, m: number) => (r === 0 && feet !== undefined ? Math.max(base, Math.min(top, feet[k], feet[m])) : base)
     for (let i = 0; i < ring.length; i++) {
       const a = ring[i]
       const b = ring[(i + 1) % ring.length]
@@ -828,11 +892,11 @@ export const extrude = (
       walls.push({
         key: (a[1] + b[1]) / 2,
         shape: {
-          pts: [view.toScreen(a, base), view.toScreen(b, base), view.toScreen(b, top), view.toScreen(a, top)],
+          pts: [view.toScreen(a, wallFoot(i, (i + 1) % ring.length)), view.toScreen(b, wallFoot(i, (i + 1) % ring.length)), view.toScreen(b, top), view.toScreen(a, top)],
           fill: tone,
           ink: true,
           // A wall carries the dots at its own foot, so a nearer wall hides them with it.
-          ...(dots === 'all' ? { dots: [view.toScreen(a, base), view.toScreen(b, base)] } : {}),
+          ...(dots === 'all' ? { dots: [view.toScreen(a, wallFoot(i, (i + 1) % ring.length)), view.toScreen(b, wallFoot(i, (i + 1) % ring.length))] } : {}),
         },
       })
     }
@@ -886,6 +950,73 @@ export const spansWater = (tags: Readonly<Record<string, string>>, outer: Ring, 
 export const segmentsCross = (a: Vec2, b: Vec2, c: Vec2, d: Vec2): boolean => {
   const o = (p: Vec2, q: Vec2, r: Vec2) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
   return o(a, b, c) * o(a, b, d) < 0 && o(c, d, a) * o(c, d, b) < 0
+}
+
+/** How far apart a traced building's footprint is read for water, meters. */
+export const TRACED_STEP = 1
+/**
+ * A traced building with any part this near a rail viaduct's center line, meters, is left out:
+ * the viaducts were cut through built blocks, a sheet's fit is good to a few meters, and the deck
+ * drawn passing over a building's roof or between its walls reads as running through it.
+ */
+export const TRACED_VIADUCT_CLEAR = 12
+/** And this far past the edge of a track's ballast on the ground, meters. */
+export const TRACED_TRACK_CLEAR = 1
+/**
+ * A traced building with today's ground more than TRACED_BURIED meters above its floor anywhere
+ * under it (read every TRACED_BURIED_STEP meters over its footprint and along its walls), within TRACED_WORKS_REACH meters of a road built after its year (an
+ * interstate's cut or fill), or more than TRACED_DEEP meters anywhere (two storeys and more: no
+ * building stood cut that deep into a hill, so the ground was moved since or the sheet misplaces
+ * it), is buried: left out.
+ */
+export const TRACED_BURIED = 3
+/** How far apart today's ground is read over a traced building's footprint for `TRACED_BURIED`, meters. */
+export const TRACED_BURIED_STEP = 2
+export const TRACED_WORKS_REACH = 60
+export const TRACED_DEEP = 8
+
+/**
+ * Points over a footprint: its corners, every `step` meters along its edges, and a grid `step`
+ * apart inside it, so that any part of it larger than about a step is read.
+ */
+export const ringSamples = (outer: Ring, step: number): Vec2[] => {
+  const out: Vec2[] = []
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+  for (let i = 0; i < outer.length; i++) {
+    const a = outer[i]
+    const b = outer[(i + 1) % outer.length]
+    minX = Math.min(minX, a[0]); maxX = Math.max(maxX, a[0]); minY = Math.min(minY, a[1]); maxY = Math.max(maxY, a[1])
+    const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / step))
+    for (let k = 0; k < n; k++) out.push([a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n])
+  }
+  for (let y = minY + step / 2; y < maxY; y += step) {
+    for (let x = minX + step / 2; x < maxX; x += step) if (pointInRing([x, y], outer)) out.push([x, y])
+  }
+  return out
+}
+
+/** Does a polyline come within `reach` meters of a ring (or run inside it)? */
+export const lineNearRing = (pts: readonly Vec2[], ring: Ring, reach: number): boolean => {
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+  for (const [x, y] of ring) { minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y) }
+  const segDist = (p: Vec2, a: Vec2, b: Vec2) => {
+    const dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy
+    const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2))
+    return Math.hypot(p[0] - a[0] - t * dx, p[1] - a[1] - t * dy)
+  }
+  for (let i = 0; i < pts.length; i++) {
+    const a = pts[i]
+    if (a[0] >= minX && a[0] <= maxX && a[1] >= minY && a[1] <= maxY && pointInRing(a, ring)) return true
+    const b = pts[i + 1]
+    if (b === undefined) continue
+    if (Math.max(a[0], b[0]) < minX - reach || Math.min(a[0], b[0]) > maxX + reach || Math.max(a[1], b[1]) < minY - reach || Math.min(a[1], b[1]) > maxY + reach) continue
+    for (let k = 0; k < ring.length; k++) {
+      const c = ring[k]
+      const d = ring[(k + 1) % ring.length]
+      if (segmentsCross(a, b, c, d) || segDist(c, a, b) <= reach || segDist(a, c, d) <= reach || segDist(b, c, d) <= reach) return true
+    }
+  }
+  return false
 }
 
 /** The share of a footprint on water, from 0 to 1, sampled on a grid of about 100 points (its centroid alone if too small to sample). */
@@ -1852,7 +1983,7 @@ interface DeckLine {
  */
 const deckLine = (
   view: View, region: Region, terrain: Terrain, chain: BridgeChain, ends: BridgeEnds,
-  fix: { start?: number; end?: number } = {},
+  fix: { start?: number; end?: number } = {}, railOnGround = false,
 ): DeckLine => {
   const deck = deckHeight(region, chain)
   const pts = chain.line.points.map(([lon, lat]) => view.toView(lon, lat))
@@ -1877,8 +2008,12 @@ const deckLine = (
       return terrain.z([p[0] + ((p[0] - q[0]) * t) / len, p[1] + ((p[1] - q[1]) * t) / len])
     })
   }
-  const startLevel = chain.rampStart ? seat(0) : fix.start ?? ground(0) + ends.start
-  const endLevel = chain.rampEnd ? seat(1) : fix.end ?? ground(total) + ends.end
+  // With `railOnGround` (a past year's scene), a rail deck's grounded end sits on the ground
+  // there, where its track runs on: track does not climb a bank to an abutment the way a street
+  // runs on at a cut's rim, and seated on the bank its deck ended above the track it joins.
+  const onGround = railOnGround && isRail(chain.line.tags)
+  const startLevel = chain.rampStart ? (onGround ? ground(0) : seat(0)) : fix.start ?? ground(0) + ends.start
+  const endLevel = chain.rampEnd ? (onGround ? ground(total) : seat(1)) : fix.end ?? ground(total) + ends.end
   // A joined end's own clearance is what the deck it joins gives it.
   const c0 = chain.rampStart ? ends.start : startLevel - ground(0)
   const c1 = chain.rampEnd ? ends.end : endLevel - ground(total)

@@ -575,17 +575,31 @@ which is which.
 **Measured: buildings standing today, by the year each was built.** A building appears in
 every scene from its year on. The year comes from:
 
-1. a curated year, for a few landmarks whose records are known to be wrong or missing (the
-   Capitol, St. John's Church, the Old Stone House and so on), each with a source. A curated
-   year can also end: the Capitol's central block (OSM's middle building part) is drawn alone
-   from 1788, and its full outline, with the wings of 1904–06, from 1906;
+1. a curated year, for buildings whose records are known to be wrong or missing (the
+   Capitol, St. John's Church, the Old Stone House, and every tall downtown building: see
+   below), each with a source. A curated year can also end: the Capitol's central block (OSM's
+   middle building part) is drawn alone from 1788, and its full outline, with the wings of
+   1904–06, from 1906. A curated year can also be *unknown*: a building whose only date is a
+   parcel's that is known to be wrong, and for which no source gives another, is drawn in
+   today's scene only. A building part (`building:part`) takes the curated year of the
+   building it belongs to, so a tower's crown is not dated by its parcel apart from the tower;
 2. else OpenStreetMap's `start_date` tag;
 3. else the city assessor's *year built* for the parcel under the building's center.
 
 The assessor records one year per parcel, the year of its main building. Up to four buildings
 on a lot (a row split in OSM, a house and its shed) all take that year. With more buildings,
 only one clearly larger than the rest takes it. A parcel with eight or more (a campus, Capitol
-Square) gives its year to none of them. Buildings with no year appear only in today's scene.
+Square) gives its year to none of them, and nor does a parcel holding a curated building. A
+parking structure (a deck or garage) that only its parcel dates, to a year before 1960, is
+dated 1960 (`parkingFrom`), with surface parking: the parcel's year is its lot's earlier
+building's. Buildings with no year appear only in today's scene.
+
+**Tall buildings are checked one by one.** In downtown Richmond every building 25 m or taller,
+or of eight levels or more, drawn in the 1925 or 1950 scene is dated from a source that names
+it (the National Register nominations for the Main Street Banking district, SkyscraperPage,
+Wikipedia, the SAH Archipedia), or is drawn in today's scene only. The Ross Building at 801
+E. Main (eighteen floors, 1965), which its parcel had put in 1925, now first appears in 1970;
+what stood on its lot before is not known, so the lot is empty in the earlier scenes.
 
 **Curated: what is gone or was different.** A short list per series, each item with its
 years and sources: a filled canal basin, a burned district, a buried creek, demolished
@@ -620,20 +634,40 @@ Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
    filling under 45% of their convex hull: river shading, not buildings) and merges footprints
    traced in two editions that overlap by more than 85%, keeping the earlier start and the later
    end (`clean.py`: 68 dropped, 170 merged).
+5. **Shapes.** A second pass (`clean.py --shapes`) drops the strips the first missed: a bent
+   ribbon (filling under 30% of its smallest enclosing rectangle and over 60 m long), and
+   anything under 4 m across at its widest and at least four times as long; and sawtooth
+   outlines, over 1.35 times the length of their convex hull's while filling under 70% of it,
+   on a strip 80 m long or more (a hatched edge read tooth by tooth) or on a footprint under
+   1,000 m² (a star of spikes around a shed). It trims spikes with an opening of 1.5 m (shrink,
+   then grow back with square corners), which takes off anything under 3 m wide; a footprint
+   left with under 60% of its area is dropped. Of the 2,604 footprints, 41 strips, 50 sawtooth
+   outlines and 21 spiky footprints were dropped and 247 trimmed; of those standing in 1925, 45
+   were dropped and 85 trimmed, and in 1950, 49 and 103.
 
 A sheet whose fit is known to be wrong is left out until it is placed again, and the history
 file says why: the 1905 sheets 5 and 7, read by eye, put 31 buildings on the Capitol Square
 lawn, so neither is drawn.
 
-A sheet gives the buildings but not the shore they stood on, and the water is today's (or, for
-the canal's Great Basin, an approximate outline). A traced building with half its footprint
-or more on the water drawn in its year would stand in the river, so it is left out, and the
-explorer counts how many: in downtown Richmond 10 in 1886, 3 in 1905, 20 in 1925 and 18 in
-1950, most of them mills on the islands and races above the Mayo Bridge, and warehouses on the
-Great Basin's edge. Likewise a traced building that a rail viaduct standing in its year passes
-over is left out: most were mapped in 1886 or 1895 and cleared for the viaducts of 1901, and
-the rest are misplaced by their sheet; drawn, the viaduct's piers would pass through their roofs
-(in downtown Richmond 21 in 1925 and 11 in 1950).
+A sheet gives the buildings but not the ground they stood on, and its fit is good to a few
+meters only. So a traced building that could not have stood where it falls is **left out
+whole**, never trimmed, and the explorer counts how many and why:
+
+- **On water.** Any part of it on the water drawn in its year: past the traced shoreline,
+  inside today's river or canals (a canal mapped only as a line counts at its drawn width), or
+  a curated basin, read every meter over its footprint and along its edges. Most are mills on
+  the islands and races above the Mayo Bridge and warehouses on the Great Basin's edge. In
+  downtown Richmond 27 in 1925 and 24 in 1950.
+- **On a viaduct or a track.** Any part of it within 12 m of the center line of a rail viaduct
+  standing in its year (most were mapped in 1886 or 1895 and cleared for the viaducts of 1901,
+  the rest are misplaced by their sheet, and drawn, the deck would pass over their roofs or
+  between their walls), or within a meter of the ballast of a track on the ground: 61 in 1925
+  and 34 in 1950.
+- **Buried.** Today's ground more than 3 m above its floor anywhere under it (read every 2 m
+  over its footprint and along its walls, not only at its corners: a slope can stand above a
+  long wall between two low corners), within 60 m of a road built after its year (an
+  interstate's cut or fill), or more than 8 m above it anywhere (two stories and more: no
+  building stood cut that deep into a hill): 62 in 1925 and 55 in 1950.
 
 The historic buildings are sketches, not a survey. A machine traced them from scans of
 fire-insurance maps, so outlines are approximate, heights are guessed from material, and some
@@ -641,11 +675,13 @@ buildings are missing, misplaced or merged. The 1924 overview ("congested distri
 the least precise source. The historic scenes show the city's shape and density, not each
 building exactly.
 
-Traced buildings keep the maps' colors, so they read apart from today's. Their heights are
-guessed from their material (brick and stone three stories, frame two): the story counts
-printed on the sheets are not read yet; later editions add olive-brown for fire-proof
-construction, drawn six stories. The explorer counts, for each scene, how many traced
-buildings stand and how each one's end date was found.
+Traced buildings keep the maps' colors, so they read apart from today's. The story counts
+printed on the sheets are not read yet, so **every traced building's height is assumed from its
+material**, at 3.6 m a story: brick three stories, frame two, stone three, iron (gray: sheds
+and warehouses clad in metal) four, "special" (the maps' other hazards) three, and fire-proof
+construction (olive-brown, in later editions) six. The dated prints say so under their credit
+line. The explorer counts, for each scene, how many traced buildings stand and how each one's
+end date was found.
 
 Five editions are traced: **1886**; **1895** and **1905** (sheets read by eye); **1924–25**, whose first volume opens with a single
 "congested district" map of the whole business district (fitted with a rubber sheet
@@ -664,7 +700,9 @@ traced buildings are assumed cleared); both dates are approximate.
 
 Two more rules look at what lies beside a feature. A road bridge stands only over something
 there in its year: if every road, railway and waterway mapped under a bridge (its spans of one
-street joined end to end) is not yet built, the street is drawn at grade instead, so in 1950
+street joined end to end) is not yet built, the street is drawn at grade instead (and so is a
+rail bridge standing alone, with track on the ground at both ends: the Richmond District's
+short span over the canal at Rocketts, which in 1925 and 1950 crossed no canal), so in 1950
 Broad Street crosses Shockoe Valley on the ground and the streets over the Downtown Expressway
 have no bridges. And woods and scrub with 40% or more of their outline within 20 m of a road
 not yet built are that road's verges (the planted ground of an interchange) and are dated with
@@ -672,13 +710,39 @@ it. A feature no rule matches is drawn in every year, so the Richmond series end
 rules with catch-alls: the street grid, streams and the river are drawn in every year, and
 anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basins, paths) is
 drawn only today, since nothing says when it was made. Each catch-all names what still needs a
-source.
+source. Railways out of use or taken up today (`abandoned`, `disused`, `razed`) are drawn
+today only, unless a rule dates one from a source (the Richmond and Petersburg bridge over the
+James, 1902–1970, with its approach to Byrd Street Station curated as approximate track, since
+nothing of it is mapped today): their fragments end in open ground. Roundabouts appear from 1990, when the
+modern roundabout came to the United States, and unnamed service roads of no particular kind
+(the drives and rings of parking lots) with surface parking, from 1960; both are approximate.
+
+Past years look at their neighbors once more:
+
+- a minor road bridge (residential, service, unclassified) over a canal, with no `start_date`,
+  appears only from 1999, the Canal Walk (`canalBridgesFrom`), unless a rule names it;
+- a road bridge whose spans do not meet a road of the year at each of their ends (a tunnel
+  does not count: it is not drawn) is left out: a piece of deck whose approaches came later;
+- a bed of scrub, wood, grass or heath, or a pond, under 2,000 m² and unnamed is landscaping,
+  dated with the nearest dated building within 40 m (the development around it); with none that
+  near it is natural ground (a thicket on a river island) and is drawn in every year;
+- a rail spur, siding or yard track that ends with no building of the year within 40 m of its
+  end is left out (and the spurs that only led to it): today's spurs serve today's buildings;
+- a rail deck's grounded end sits on the ground there, where its track runs on, not on the
+  level of the bank beyond it (the abutment rule for streets over a cut, below): seated on the
+  bank, the river viaducts' decks ended a few meters above the track they join;
+- a building's walls that face the camera with both corners above its lowest corner stop, level,
+  at the lower of the two, where the ground in front of them starts. Run down to the lowest
+  corner, as in today's scene, the ground painted in front of such a wall (in a hollow, or
+  beside a later cut) covered it along a strip's straight edge.
 
 In every scene after the first, buildings **new since the previous scene** have gold roofs.
 
 **Streets before the houses.** A series can say that minor streets (tertiary and smaller,
 service roads and paths) are drawn only where a building of the year stands within so many
-meters of them: 75 m in the 1925 streetcar scene, 60 m in the downtown series. Each street is
+meters of them: 75 m in the 1925 streetcar scene, 60 m in the downtown series. A bridge is never
+dropped by this test: it crosses water or a valley where no house stands, and its era rule
+alone says when it stood (the Mayo Bridge from 1913). Each street is
 walked every half that distance and kept if any building (standing today and built by then,
 traced from a Sanborn sheet and still standing, or a curated landmark) has a corner within one
 grid cell of a step. A suburb whose streets were laid out but not yet built on shows its main

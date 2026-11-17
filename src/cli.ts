@@ -99,7 +99,7 @@ const loadInputs = async (name: string) => {
     if (region.time.yearBuilt !== undefined) {
       parcels = (await loadYearBuilt(yearBuiltDirs(region, resolve('data')), region.time.yearBuilt.field, name)).parcels
     }
-    dates = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates)
+    dates = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates, 4, 8, history.parkingFrom)
   }
   return { region, features, elevation, extra, history, dates }
 }
@@ -216,7 +216,7 @@ export const main = async (argv: string[]): Promise<void> => {
     }
     case 'info': {
       const scene = await loadScene(name, values.palette, values.year === undefined ? undefined : Number(values.year))
-      console.log(JSON.stringify({ region: scene.region.name, bearing: Number(scene.view.bearing.toFixed(2)), ...scene.stats, credits: sceneCredits(scene.region, scene.stats, scene.terrain.flat) }, null, 2))
+      console.log(JSON.stringify({ region: scene.region.name, bearing: Number(scene.view.bearing.toFixed(2)), ...scene.stats, credits: sceneCredits(scene.region, scene.stats, scene.terrain.flat), ...(scene.tracedLeftOut === undefined ? {} : { tracedLeftOut: scene.tracedLeftOut }) }, null, 2))
       return
     }
     case 'locate': {
