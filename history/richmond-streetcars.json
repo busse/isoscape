@@ -76,6 +76,571 @@
    ]
   },
   {
+   "id": "ashland-viaduct",
+   "name": "Richmond–Ashland viaduct",
+   "kind": "bridge",
+   "from": 1907,
+   "to": 1938,
+   "line": [
+    [
+     -77.449093,
+     37.5498493
+    ],
+    [
+     -77.448,
+     37.558
+    ]
+   ],
+   "note": "The interurban's half-mile concrete viaduct, from the second floor of its terminal at 814 West Broad Street north over the Seaboard's tracks to just south of Brook Road. Drawn straight between the terminal and the point where the line meets Brook Road's side: its line and height are approximate.",
+   "sources": [
+    "https://varails.com/trolley-lines/the-richmond-ashland-railway"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "fair-grounds",
+   "name": "Virginia State Fair Grounds",
+   "kind": "grounds",
+   "from": 1906,
+   "to": 1941,
+   "ring": [
+    [
+     -77.4673108,
+     37.56796
+    ],
+    [
+     -77.4666069,
+     37.5690009
+    ],
+    [
+     -77.4662424,
+     37.5696714
+    ],
+    [
+     -77.4658627,
+     37.5703336
+    ],
+    [
+     -77.4654742,
+     37.571
+    ],
+    [
+     -77.4650032,
+     37.571829
+    ],
+    [
+     -77.4648069,
+     37.5721932
+    ],
+    [
+     -77.4647078,
+     37.5726972
+    ],
+    [
+     -77.4642981,
+     37.5731517
+    ],
+    [
+     -77.4640489,
+     37.5736641
+    ],
+    [
+     -77.4637134,
+     37.5742311
+    ],
+    [
+     -77.4633775,
+     37.5748365
+    ],
+    [
+     -77.4629359,
+     37.5756267
+    ],
+    [
+     -77.462669,
+     37.576083
+    ],
+    [
+     -77.4623054,
+     37.5767326
+    ],
+    [
+     -77.4621946,
+     37.5769788
+    ],
+    [
+     -77.4619414,
+     37.5777253
+    ],
+    [
+     -77.461602,
+     37.5781571
+    ],
+    [
+     -77.4613213,
+     37.5778606
+    ],
+    [
+     -77.4613868,
+     37.5776581
+    ],
+    [
+     -77.4613928,
+     37.5773346
+    ],
+    [
+     -77.4613187,
+     37.5763007
+    ],
+    [
+     -77.4612887,
+     37.5757948
+    ],
+    [
+     -77.4612661,
+     37.5755013
+    ],
+    [
+     -77.4612239,
+     37.5749651
+    ],
+    [
+     -77.4611708,
+     37.5742893
+    ],
+    [
+     -77.4611397,
+     37.5739621
+    ],
+    [
+     -77.4610909,
+     37.5734483
+    ],
+    [
+     -77.460754,
+     37.571087
+    ],
+    [
+     -77.4608228,
+     37.5703145
+    ],
+    [
+     -77.4607744,
+     37.5691078
+    ],
+    [
+     -77.4607195,
+     37.56796
+    ]
+   ],
+   "note": "The State Fair grounds at the tip of the triangle between the Boulevard and Hermitage Road, from the revived fair of 1906 until the fair moved out in 1941; The Diamond stands there now. Outline follows the two roads, after the 1925 Sanborn sheet 468; the south edge is approximate.",
+   "sources": [
+    "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
+    "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm",
+    "https://www.loc.gov/item/sanborn09064_009/"
+   ]
+  },
+  {
+   "id": "fair-grounds-site",
+   "name": "Virginia State Fair Grounds",
+   "kind": "site",
+   "from": 1906,
+   "to": 1941,
+   "ring": [
+    [
+     -77.4671399,
+     37.5680414
+    ],
+    [
+     -77.4665171,
+     37.5689622
+    ],
+    [
+     -77.4665133,
+     37.5689685
+    ],
+    [
+     -77.4661492,
+     37.5696383
+    ],
+    [
+     -77.4657701,
+     37.5702995
+    ],
+    [
+     -77.4653817,
+     37.5709657
+    ],
+    [
+     -77.4653813,
+     37.5709664
+    ],
+    [
+     -77.4649103,
+     37.5717954
+    ],
+    [
+     -77.4649095,
+     37.5717968
+    ],
+    [
+     -77.4647132,
+     37.572161
+    ],
+    [
+     -77.4647102,
+     37.5721674
+    ],
+    [
+     -77.4647078,
+     37.5721739
+    ],
+    [
+     -77.4647061,
+     37.5721806
+    ],
+    [
+     -77.4646108,
+     37.5726654
+    ],
+    [
+     -77.4642153,
+     37.5731042
+    ],
+    [
+     -77.4642106,
+     37.5731099
+    ],
+    [
+     -77.4642065,
+     37.573116
+    ],
+    [
+     -77.464203,
+     37.5731222
+    ],
+    [
+     -77.4639551,
+     37.573632
+    ],
+    [
+     -77.4636212,
+     37.5741963
+    ],
+    [
+     -77.4636201,
+     37.5741981
+    ],
+    [
+     -77.4632843,
+     37.5748034
+    ],
+    [
+     -77.4628431,
+     37.5755929
+    ],
+    [
+     -77.4625766,
+     37.5760486
+    ],
+    [
+     -77.4625759,
+     37.5760498
+    ],
+    [
+     -77.4622123,
+     37.5766994
+    ],
+    [
+     -77.4622094,
+     37.5767051
+    ],
+    [
+     -77.4620986,
+     37.5769513
+    ],
+    [
+     -77.4620962,
+     37.5769575
+    ],
+    [
+     -77.4618469,
+     37.5776923
+    ],
+    [
+     -77.4615942,
+     37.5780138
+    ],
+    [
+     -77.4614324,
+     37.5778429
+    ],
+    [
+     -77.4614856,
+     37.5776784
+    ],
+    [
+     -77.4614879,
+     37.577669
+    ],
+    [
+     -77.4614888,
+     37.5776593
+    ],
+    [
+     -77.4614948,
+     37.5773358
+    ],
+    [
+     -77.4614946,
+     37.57733
+    ],
+    [
+     -77.4614206,
+     37.5762965
+    ],
+    [
+     -77.4613906,
+     37.575791
+    ],
+    [
+     -77.4613905,
+     37.5757898
+    ],
+    [
+     -77.4613679,
+     37.5754963
+    ],
+    [
+     -77.4613679,
+     37.5754962
+    ],
+    [
+     -77.4613257,
+     37.57496
+    ],
+    [
+     -77.4612726,
+     37.5742842
+    ],
+    [
+     -77.4612725,
+     37.5742831
+    ],
+    [
+     -77.4612414,
+     37.5739559
+    ],
+    [
+     -77.4611926,
+     37.5734421
+    ],
+    [
+     -77.4611922,
+     37.5734391
+    ],
+    [
+     -77.4608564,
+     37.5710853
+    ],
+    [
+     -77.4609245,
+     37.5703203
+    ],
+    [
+     -77.4609247,
+     37.5703119
+    ],
+    [
+     -77.4608763,
+     37.5691052
+    ],
+    [
+     -77.4608763,
+     37.5691047
+    ],
+    [
+     -77.4608255,
+     37.5680414
+    ]
+   ],
+   "note": "The fair grounds, 9 m inside the roads around them: while the fair stood here, today's streets, lots and buildings on the site are not drawn.",
+   "sources": [
+    "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
+    "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm",
+    "https://www.loc.gov/item/sanborn09064_009/"
+   ]
+  },
+  {
+   "id": "fair-track",
+   "name": "Fair Grounds mile track",
+   "kind": "track",
+   "from": 1906,
+   "to": 1941,
+   "line": [
+    [
+     -77.4613504,
+     37.5741761
+    ],
+    [
+     -77.4613105,
+     37.5743037
+    ],
+    [
+     -77.461299,
+     37.5744349
+    ],
+    [
+     -77.4613162,
+     37.5745657
+    ],
+    [
+     -77.4613617,
+     37.5746921
+    ],
+    [
+     -77.4614339,
+     37.5748103
+    ],
+    [
+     -77.4615308,
+     37.5749167
+    ],
+    [
+     -77.4616493,
+     37.575008
+    ],
+    [
+     -77.4617859,
+     37.5750815
+    ],
+    [
+     -77.4619364,
+     37.575135
+    ],
+    [
+     -77.4620963,
+     37.5751668
+    ],
+    [
+     -77.4622607,
+     37.575176
+    ],
+    [
+     -77.4624246,
+     37.5751623
+    ],
+    [
+     -77.462583,
+     37.575126
+    ],
+    [
+     -77.4627311,
+     37.5750684
+    ],
+    [
+     -77.4628644,
+     37.5749911
+    ],
+    [
+     -77.4629789,
+     37.5748965
+    ],
+    [
+     -77.463071,
+     37.5747875
+    ],
+    [
+     -77.4631381,
+     37.5746673
+    ],
+    [
+     -77.4651399,
+     37.5700278
+    ],
+    [
+     -77.4651797,
+     37.5699002
+    ],
+    [
+     -77.4651912,
+     37.569769
+    ],
+    [
+     -77.465174,
+     37.5696382
+    ],
+    [
+     -77.4651286,
+     37.5695118
+    ],
+    [
+     -77.4650563,
+     37.5693936
+    ],
+    [
+     -77.4649595,
+     37.5692872
+    ],
+    [
+     -77.4648409,
+     37.5691958
+    ],
+    [
+     -77.4647043,
+     37.5691223
+    ],
+    [
+     -77.4645538,
+     37.5690688
+    ],
+    [
+     -77.4643939,
+     37.569037
+    ],
+    [
+     -77.4642295,
+     37.5690278
+    ],
+    [
+     -77.4640656,
+     37.5690416
+    ],
+    [
+     -77.4639072,
+     37.5690778
+    ],
+    [
+     -77.4637591,
+     37.5691355
+    ],
+    [
+     -77.4636258,
+     37.5692128
+    ],
+    [
+     -77.4635113,
+     37.5693074
+    ],
+    [
+     -77.4634192,
+     37.5694164
+    ],
+    [
+     -77.4633522,
+     37.5695365
+    ]
+   ],
+   "width": 20,
+   "note": "The fair's one-mile racetrack, its south turn traced from the 1925 Sanborn sheet 468 (marked 'One Mile Track'), its straights run parallel to the Boulevard; the north turn, off the sheet, is drawn to make up the mile and is approximate.",
+   "sources": [
+    "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
+    "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm",
+    "https://www.purethunderracing.com/?p=6184",
+    "https://www.loc.gov/item/sanborn09064_009/"
+   ]
+  },
+  {
    "id": "car-westhampton",
    "name": "Westhampton line",
    "kind": "streetcar",
@@ -4121,10 +4686,14 @@
      [
       -77.4768286,
       37.5452336
+     ],
+     [
+      -77.4775,
+      37.5405
      ]
     ]
    ],
-   "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. The far end is approximate.",
+   "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. Lakeview Avenue is mapped today only to Shields Lake; the last 450 m, to the end of the line, are drawn straight and are approximate.",
    "sources": [
     "https://museumdistrict.org/history",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
@@ -5016,30 +5585,6 @@
      [
       -77.4302801,
       37.561072
-     ],
-     [
-      -77.4312836,
-      37.5611287
-     ],
-     [
-      -77.4312698,
-      37.561588
-     ],
-     [
-      -77.4312298,
-      37.5625902
-     ],
-     [
-      -77.4307284,
-      37.562561
-     ],
-     [
-      -77.4306976,
-      37.5632221
-     ],
-     [
-      -77.4304072,
-      37.5632014
      ],
      [
       -77.4300881,
@@ -6103,7 +6648,7 @@
      ]
     ]
    ],
-   "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate.",
+   "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate. OSM maps Monteiro Street with a gap north of Lakewood Street; the line is drawn straight across it.",
    "sources": [
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
@@ -10739,558 +11284,120 @@
      ]
     ]
    ],
-   "note": "The interurban to Ashland, built as the Richmond and Chesapeake Bay Railway (1907) and run as the Richmond–Ashland Railway from 1919 to 1938: from its terminal at Broad and Laurel Streets (814 West Broad), over a half-mile concrete trestle across Bacon's Quarter Branch (drawn straight), then up Brook Road and on to Ashland.",
+   "note": "The interurban to Ashland, built as the Richmond and Chesapeake Bay Railway (1907) and run as the Richmond–Ashland Railway from 1919 to 1938: from its terminal at Broad and Laurel Streets (814 West Broad), where the cars left from the second floor, north on a half-mile concrete viaduct over the Seaboard's tracks to just south of Brook Road (drawn straight, its line approximate), then beside Brook Road and on to Ashland on its own right-of-way.",
    "sources": [
     "https://pantographblog.blogspot.com/2009/08/richmond-and-chesapeake-bay-railway.html",
     "https://varails.com/trolley-lines/the-richmond-ashland-railway",
     "https://richmondmagazine.com/news/richmond-history/by-train-to-the-center-of-the-universe/"
    ]
-  },
-  {
-   "id": "fair-grounds",
-   "name": "Virginia State Fair Grounds",
-   "kind": "grounds",
-   "from": 1906,
-   "to": 1941,
-   "ring": [
-    [
-     -77.4673108,
-     37.56796
-    ],
-    [
-     -77.4666069,
-     37.5690009
-    ],
-    [
-     -77.4662424,
-     37.5696714
-    ],
-    [
-     -77.4658627,
-     37.5703336
-    ],
-    [
-     -77.4654742,
-     37.571
-    ],
-    [
-     -77.4650032,
-     37.571829
-    ],
-    [
-     -77.4648069,
-     37.5721932
-    ],
-    [
-     -77.4647078,
-     37.5726972
-    ],
-    [
-     -77.4642981,
-     37.5731517
-    ],
-    [
-     -77.4640489,
-     37.5736641
-    ],
-    [
-     -77.4637134,
-     37.5742311
-    ],
-    [
-     -77.4633775,
-     37.5748365
-    ],
-    [
-     -77.4629359,
-     37.5756267
-    ],
-    [
-     -77.462669,
-     37.576083
-    ],
-    [
-     -77.4623054,
-     37.5767326
-    ],
-    [
-     -77.4621946,
-     37.5769788
-    ],
-    [
-     -77.4619414,
-     37.5777253
-    ],
-    [
-     -77.461602,
-     37.5781571
-    ],
-    [
-     -77.4613213,
-     37.5778606
-    ],
-    [
-     -77.4613868,
-     37.5776581
-    ],
-    [
-     -77.4613928,
-     37.5773346
-    ],
-    [
-     -77.4613187,
-     37.5763007
-    ],
-    [
-     -77.4612887,
-     37.5757948
-    ],
-    [
-     -77.4612661,
-     37.5755013
-    ],
-    [
-     -77.4612239,
-     37.5749651
-    ],
-    [
-     -77.4611708,
-     37.5742893
-    ],
-    [
-     -77.4611397,
-     37.5739621
-    ],
-    [
-     -77.4610909,
-     37.5734483
-    ],
-    [
-     -77.460754,
-     37.571087
-    ],
-    [
-     -77.4608228,
-     37.5703145
-    ],
-    [
-     -77.4607744,
-     37.5691078
-    ],
-    [
-     -77.4607195,
-     37.56796
-    ]
-   ],
-   "note": "The State Fair grounds at the tip of the triangle between the Boulevard and Hermitage Road, from the revived fair of 1906 until the fair moved out in 1941; The Diamond stands there now. Outline follows the two roads, after the 1925 Sanborn sheet 468; the south edge is approximate.",
-   "sources": [
-    "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
-    "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm",
-    "https://www.loc.gov/item/sanborn09064_009/"
-   ]
-  },
-  {
-   "id": "fair-grounds-site",
-   "name": "Virginia State Fair Grounds",
-   "kind": "site",
-   "from": 1906,
-   "to": 1941,
-   "ring": [
-    [
-     -77.4671399,
-     37.5680414
-    ],
-    [
-     -77.4665171,
-     37.5689622
-    ],
-    [
-     -77.4665133,
-     37.5689685
-    ],
-    [
-     -77.4661492,
-     37.5696383
-    ],
-    [
-     -77.4657701,
-     37.5702995
-    ],
-    [
-     -77.4653817,
-     37.5709657
-    ],
-    [
-     -77.4653813,
-     37.5709664
-    ],
-    [
-     -77.4649103,
-     37.5717954
-    ],
-    [
-     -77.4649095,
-     37.5717968
-    ],
-    [
-     -77.4647132,
-     37.572161
-    ],
-    [
-     -77.4647102,
-     37.5721674
-    ],
-    [
-     -77.4647078,
-     37.5721739
-    ],
-    [
-     -77.4647061,
-     37.5721806
-    ],
-    [
-     -77.4646108,
-     37.5726654
-    ],
-    [
-     -77.4642153,
-     37.5731042
-    ],
-    [
-     -77.4642106,
-     37.5731099
-    ],
-    [
-     -77.4642065,
-     37.573116
-    ],
-    [
-     -77.464203,
-     37.5731222
-    ],
-    [
-     -77.4639551,
-     37.573632
-    ],
-    [
-     -77.4636212,
-     37.5741963
-    ],
-    [
-     -77.4636201,
-     37.5741981
-    ],
-    [
-     -77.4632843,
-     37.5748034
-    ],
-    [
-     -77.4628431,
-     37.5755929
-    ],
-    [
-     -77.4625766,
-     37.5760486
-    ],
-    [
-     -77.4625759,
-     37.5760498
-    ],
-    [
-     -77.4622123,
-     37.5766994
-    ],
-    [
-     -77.4622094,
-     37.5767051
-    ],
-    [
-     -77.4620986,
-     37.5769513
-    ],
-    [
-     -77.4620962,
-     37.5769575
-    ],
-    [
-     -77.4618469,
-     37.5776923
-    ],
-    [
-     -77.4615942,
-     37.5780138
-    ],
-    [
-     -77.4614324,
-     37.5778429
-    ],
-    [
-     -77.4614856,
-     37.5776784
-    ],
-    [
-     -77.4614879,
-     37.577669
-    ],
-    [
-     -77.4614888,
-     37.5776593
-    ],
-    [
-     -77.4614948,
-     37.5773358
-    ],
-    [
-     -77.4614946,
-     37.57733
-    ],
-    [
-     -77.4614206,
-     37.5762965
-    ],
-    [
-     -77.4613906,
-     37.575791
-    ],
-    [
-     -77.4613905,
-     37.5757898
-    ],
-    [
-     -77.4613679,
-     37.5754963
-    ],
-    [
-     -77.4613679,
-     37.5754962
-    ],
-    [
-     -77.4613257,
-     37.57496
-    ],
-    [
-     -77.4612726,
-     37.5742842
-    ],
-    [
-     -77.4612725,
-     37.5742831
-    ],
-    [
-     -77.4612414,
-     37.5739559
-    ],
-    [
-     -77.4611926,
-     37.5734421
-    ],
-    [
-     -77.4611922,
-     37.5734391
-    ],
-    [
-     -77.4608564,
-     37.5710853
-    ],
-    [
-     -77.4609245,
-     37.5703203
-    ],
-    [
-     -77.4609247,
-     37.5703119
-    ],
-    [
-     -77.4608763,
-     37.5691052
-    ],
-    [
-     -77.4608763,
-     37.5691047
-    ],
-    [
-     -77.4608255,
-     37.5680414
-    ]
-   ],
-   "note": "The fair grounds, 9 m inside the roads around them: while the fair stood here, today's streets, lots and buildings on the site are not drawn.",
-   "sources": [
-    "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
-    "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm",
-    "https://www.loc.gov/item/sanborn09064_009/"
-   ]
-  },
-  {
-   "id": "fair-track",
-   "name": "Fair Grounds mile track",
-   "kind": "track",
-   "from": 1906,
-   "to": 1941,
-   "line": [
-    [
-     -77.4613504,
-     37.5741761
-    ],
-    [
-     -77.4613105,
-     37.5743037
-    ],
-    [
-     -77.461299,
-     37.5744349
-    ],
-    [
-     -77.4613162,
-     37.5745657
-    ],
-    [
-     -77.4613617,
-     37.5746921
-    ],
-    [
-     -77.4614339,
-     37.5748103
-    ],
-    [
-     -77.4615308,
-     37.5749167
-    ],
-    [
-     -77.4616493,
-     37.575008
-    ],
-    [
-     -77.4617859,
-     37.5750815
-    ],
-    [
-     -77.4619364,
-     37.575135
-    ],
-    [
-     -77.4620963,
-     37.5751668
-    ],
-    [
-     -77.4622607,
-     37.575176
-    ],
-    [
-     -77.4624246,
-     37.5751623
-    ],
-    [
-     -77.462583,
-     37.575126
-    ],
-    [
-     -77.4627311,
-     37.5750684
-    ],
-    [
-     -77.4628644,
-     37.5749911
-    ],
-    [
-     -77.4629789,
-     37.5748965
-    ],
-    [
-     -77.463071,
-     37.5747875
-    ],
-    [
-     -77.4631381,
-     37.5746673
-    ],
-    [
-     -77.4651399,
-     37.5700278
-    ],
-    [
-     -77.4651797,
-     37.5699002
-    ],
-    [
-     -77.4651912,
-     37.569769
-    ],
-    [
-     -77.465174,
-     37.5696382
-    ],
-    [
-     -77.4651286,
-     37.5695118
-    ],
-    [
-     -77.4650563,
-     37.5693936
-    ],
-    [
-     -77.4649595,
-     37.5692872
-    ],
-    [
-     -77.4648409,
-     37.5691958
-    ],
-    [
-     -77.4647043,
-     37.5691223
-    ],
-    [
-     -77.4645538,
-     37.5690688
-    ],
-    [
-     -77.4643939,
-     37.569037
-    ],
-    [
-     -77.4642295,
-     37.5690278
-    ],
-    [
-     -77.4640656,
-     37.5690416
-    ],
-    [
-     -77.4639072,
-     37.5690778
-    ],
-    [
-     -77.4637591,
-     37.5691355
-    ],
-    [
-     -77.4636258,
-     37.5692128
-    ],
-    [
-     -77.4635113,
-     37.5693074
-    ],
-    [
-     -77.4634192,
-     37.5694164
-    ],
-    [
-     -77.4633522,
-     37.5695365
-    ]
-   ],
-   "width": 20,
-   "note": "The fair's one-mile racetrack, its south turn traced from the 1925 Sanborn sheet 468 (marked 'One Mile Track'), its straights run parallel to the Boulevard; the north turn, off the sheet, is drawn to make up the mile and is approximate.",
-   "sources": [
-    "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
-    "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm",
-    "https://www.purethunderracing.com/?p=6184",
-    "https://www.loc.gov/item/sanborn09064_009/"
-   ]
   }
  ],
  "rules": [
+  {
+   "where": {
+    "name": "The Diamond"
+   },
+   "eras": [
+    [
+     1985,
+     null
+    ]
+   ],
+   "note": "The Diamond opened in April 1985 on the site of Parker Field (built in 1934 as part of the fair grounds, a ballpark from 1954).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/The_Diamond_(Richmond,_Virginia)"
+   ]
+  },
+  {
+   "where": {
+    "name": "Richmond and Petersburg Railroad Bridge"
+   },
+   "eras": [
+    [
+     1838,
+     1970
+    ]
+   ],
+   "note": "The R&P bridge, rebuilt on concrete piers in 1902 and removed in 1970; its piers stand today. Its approaches are not mapped, so its ends are drawn where OSM's way ends (approximate).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge"
+   ]
+  },
+  {
+   "where": {
+    "tag": "railway",
+    "is": [
+     "disused",
+     "abandoned",
+     "razed",
+     "dismantled"
+    ]
+   },
+   "eras": [],
+   "note": "Disused and abandoned track mapped today: no source here says when each piece last carried trains, so none is drawn in the past (it would float as pieces of live track). Undated: each needs a source."
+  },
+  {
+   "where": {
+    "id": [
+     "w296796859"
+    ]
+   },
+   "eras": [],
+   "note": "The roundabout at the Seventh Street ramps of the I-64/I-95 interchange, part of the interstate's works: drawn today only (approximate, not sourced)."
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "trunk_link",
+     "primary_link",
+     "secondary_link",
+     "tertiary_link"
+    ]
+   },
+   "eras": [
+    [
+     1958,
+     null
+    ]
+   ],
+   "note": "Ramps and turning roads of the interchanges, dated with the turnpike: approximate, not sourced."
+  },
+  {
+   "where": {
+    "tag": "water",
+    "is": [
+     "wastewater",
+     "basin",
+     "reflecting_pool"
+    ]
+   },
+   "eras": [],
+   "note": "Settling basins, stormwater basins and pools: none is dated by a source here (the treatment plant's basins and the basins of the interstate's drainage among them), so they are drawn today only."
+  },
+  {
+   "where": {
+    "tag": "landuse",
+    "is": [
+     "basin"
+    ]
+   },
+   "eras": [],
+   "note": "Basins: drawn today only, as above."
+  },
+  {
+   "where": {
+    "tag": "man_made",
+    "is": [
+     "wastewater_plant",
+     "water_works",
+     "reservoir_covered",
+     "storage_tank"
+    ]
+   },
+   "eras": [],
+   "note": "Treatment works and tanks: not dated here, drawn today only."
+  },
   {
    "where": {
     "id": [
@@ -11903,6 +12010,27 @@
    "year": 2026,
    "source": "https://richmondbizsense.com/2026/04/08/slideshow-flying-squirrels-play-ball-in-new-home-at-carmax-park/",
    "note": "The Flying Squirrels' new ballpark, first played in in April 2026; the parcel's recorded year (1925) is an older building's."
+  },
+  {
+   "id": "w975554474",
+   "name": "Sauer Center parking deck",
+   "year": 2020,
+   "source": "https://richmondbizsense.com/2019/06/07/sauer-eyes-new-office-building-800-space-parking-deck-near-whole-foods/",
+   "note": "A five-level deck planned in May 2019 on the surface lot behind 2220 W. Broad Street; dated 2020 (approximate: built after the plan). The parcel's recorded year (1910) is an older building's."
+  },
+  {
+   "id": "w466009777",
+   "name": "Cookie Factory tower",
+   "year": 1927,
+   "source": "https://cookiefactorylofts.com/history",
+   "note": "The factory's first building, a six-storey tower completed in 1927; the company added to it through the 1940s and 1950s."
+  },
+  {
+   "id": "w146689449",
+   "name": "Virginia Museum of Fine Arts",
+   "year": 2010,
+   "source": "https://sah-archipedia.org/buildings/VA-01-RI307",
+   "note": "Today's outline takes in the wings of 1954, 1970, 1976, 1984 and 2010 around the 1936 building facing the Boulevard. The 1936 building alone is not mapped, so the museum is not drawn before the outline was complete (approximate: it stood from 1936)."
   }
  ],
  "sanborn": {
@@ -11921,5 +12049,16 @@
  },
  "streetsNearBuildings": 75,
  "serviceNearBuildings": 25,
- "streetcarScale": 3
+ "streetcarScale": 3,
+ "groundsByParcel": true,
+ "vergeTags": [
+  "landuse=grass",
+  "landuse=meadow",
+  "natural=grassland",
+  "landuse=flowerbed"
+ ],
+ "approachesWithBridges": true,
+ "viaductClearance": 4,
+ "tracedClearOfStreets": 2,
+ "streetsUnderCars": true
 }

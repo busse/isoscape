@@ -556,3 +556,22 @@ export const travelerItem = (view: View, pal: Palette, id: string, at: Vec2, z: 
   const hull: Ring = [[at[0] - r, at[1] - r], [at[0] + r, at[1] - r], [at[0] + r, at[1] + r], [at[0] - r, at[1] + r]]
   return { id, kind: 'building', hull, zMin: z, zMax: z + 1.75, key: at[1], name: 'A traveler, drawn to scale (1.75 m)', dots: [], shapes }
 }
+
+/**
+ * A platform shed in a whole view, drawn as the cutaway draws it: in short pieces, each with its
+ * two roof slopes falling to a valley over its posts (a butterfly roof). Posts stay boxes.
+ */
+export const shedItems = (view: View, pal: Palette, b: Box): Item[] => {
+  if (!isShed(b) || b.id.includes(':post:')) return [boxItem(view, pal, b)]
+  const pieces = shortPieces(b)
+  const items: Item[] = []
+  pieces.forEach((piece, k) => {
+    const parts = shaped(pal, b, piece, k, pieces.length)
+    const id = pieces.length === 1 ? b.id : piece.id
+    for (const part of parts) {
+      const it = solidItem(view, part.tones, `${id}${part.suffix}`, [part.solid], undefined, parts.joint)
+      if (it !== null) items.push(it)
+    }
+  })
+  return items
+}

@@ -148,6 +148,9 @@ const paper: Palette = {
   parts: {
     stone: ['#f1e9d6', '#cdbf9f', '#e7dcc2'],
     dome: ['#b2b8a6', '#808a7a', '#c0c5b4'],
+    // The dome as it was before its copper of 1955: red-brown terra-cotta tile (set views; the
+    // cutaway, already sold, keeps `dome`).
+    tile: ['#c08466', '#8e5a43', '#cc9276'],
     iron: ['#5d4f48', '#3a302c', '#9a5a45'],
     ramp: ['#f4efe4', '#d2cabb', '#ece5d6'],
     coach: ['#58704f', '#364934', '#3a3b3a'],
@@ -240,6 +243,7 @@ const night: Palette = {
   parts: {
     stone: ['#5a5648', '#3e3b33', '#4c4940'],
     dome: ['#45503f', '#2f372c', '#525c49'],
+    tile: ['#7a4f3d', '#553628', '#865844'],
     iron: ['#2a2b33', '#1b1c22', '#5a3a32'],
     ramp: ['#4a4a4e', '#36363b', '#404045'],
     coach: ['#2f4a33', '#1f3022', '#26282b'],

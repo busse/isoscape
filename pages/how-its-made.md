@@ -674,6 +674,30 @@ anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basi
 drawn only today, since nothing says when it was made. Each catch-all names what still needs a
 source.
 
+The two sets (the 1925 streetcars and Broad Street in 1943) switch on more of these rules in
+their histories, each off unless a history asks for it. **Laid-out ground by its parcel:**
+lawns, beds, pitches, playgrounds and service roads take the assessor's year built of the
+parcel they lie in (a polygon's center, a road's midpoint), so the planted strips of a lot paved
+in 2017 and the drives of a yard built in 1989 are no older than the lot. **More verges:**
+grass and meadow, as well as woods and scrub, along a road not yet built are its infields.
+**Approaches with their bridges:** where a road bridge is not drawn in a year, the ways that lead
+only to it (joined end to end, no other street touching them) go with it, so the street ends at
+its last junction rather than in a stub; and a bridge left with an end no road reaches is left
+out, then the ways that led to it, up to three rounds. **Viaducts clear:** a traced building
+within 4 m of a rail viaduct or a curated bridge of the year, and any dated building a curated
+bridge passes over, is left out. **Streets clear:** a traced building with a street's center
+line or a car line passing through it, or within 2 m of it, is left out (the sheet was fitted a
+little off). **Streets under the cars:** a street with half its points within 12 m of a car line
+of the year is kept, houses or not. A history can also extend another (`extends`: its rules and
+dates first, its features replacing the base's of the same id), which is how the set's close
+views of Broad Street Station take these rules while the cutaway, drawn from the station's own
+history, stays as it was sold. The sets' era rules add: ramps and turning roads (`*_link`) from
+1958, approximate; disused and abandoned track never in the past unless a rule dates it (the
+Richmond and Petersburg bridge, 1838 to 1970); basins, settling tanks and treatment works today
+only; The Diamond from 1985; and dated buildings with their sources (a parking deck of about
+2020, the Cookie Factory's tower of 1927, the art museum's outline only once its wings were
+built).
+
 In every scene after the first, buildings **new since the previous scene** have gold roofs.
 
 **Streets before the houses.** A series can say that minor streets (tertiary and smaller,
@@ -700,13 +724,19 @@ draws them three times life size (27 m lines, 42 m cars). The lines come from
 corner in OpenStreetMap, and follows the streets between them, preferring the streets the two
 corners name (any other street costs six times as much per meter). Two streets that meet
 without sharing a node take their closest points, up to 150 m apart. A run over a viaduct
-since torn down is drawn straight. Where a line runs along a road bridge (within 6 m of its deck's
+since torn down is drawn straight. A line is straightened to within 40% of its drawn width (at least 7 m), so a
+traffic circle or a carriageway's sideways step on today's streets does not kink it, and its bends
+are filled round. Where a line runs along a road bridge (within 6 m of its deck's
 edge and within about 25° of its heading, beside the deck and not past its ends), it is drawn
-on the deck, as wide as the deck allows, and no car is set on the ground under it. A road bridge
+on the deck as its track, 45% of its width on the ground (no wider than the deck), with a car on
+the deck (one every 900 m, or one 45% of the way across a shorter bridge), and no car is set on
+the ground under it. A road bridge
 since taken down can be curated as a `bridge` line and is drawn as today's bridges are: the
 low Free Bridge at Ninth Street (1878 to 1972), on which the Forest Hill cars crossed the
 James, stands where the Manchester Bridge of 1973 does today, and the Marshall Street Viaduct (1911
-to 1970) carries the Church Hill cars across Shockoe Valley. Vanished pleasure grounds (a fairground) take a sandy tint of
+to 1970) carries the Church Hill cars across Shockoe Valley, and the Ashland interurban's
+half-mile concrete viaduct (1907 to 1938) carries its cars north from their terminal on Broad
+Street. Vanished pleasure grounds (a fairground) take a sandy tint of
 their own, and a racetrack is a closed dirt-colored ribbon. `--streetcar-scale` overrides the
 series' scale for one build: the single-stop prints of the streetcar series use 1.5, so the
 lines read thinner up close.

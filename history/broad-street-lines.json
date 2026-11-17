@@ -17580,7 +17580,7 @@
     ]
    ],
    "height": 9.5,
-   "tone": "dome",
+   "tone": "tile",
    "note": "The dome: a cornice ring, the stepped haunches and the low outer dome, in its original tile in 1943; inside, the hall's ceiling, a shallower vault. Profiles from sections A-A, B-B and C-C; the crown is 100 ft above the floor, as published.",
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
@@ -23917,8 +23917,7 @@
    "sources": [
     "https://dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6064_Three_Chopt_Road_HD_2012_NR_FINAL.pdf",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-belmont",
@@ -24415,8 +24414,7 @@
    "sources": [
     "https://museumdistrict.org/history",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-broad",
@@ -25517,8 +25515,7 @@
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://museumdistrict.org/history"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-main",
@@ -26351,8 +26348,7 @@
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://dhr.virginia.gov/?p=16894"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-harrison",
@@ -26512,8 +26508,7 @@
    "note": "A crosstown link on Harrison Street between the Main, Floyd and Broad lines, as the 1925 plate shows it.",
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-byrd-park",
@@ -26683,16 +26678,19 @@
      [
       -77.4768286,
       37.5452336
+     ],
+     [
+      -77.4775,
+      37.5405
      ]
     ]
    ],
-   "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. The far end is approximate.",
+   "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. Lakeview Avenue is mapped today only to Shields Lake; the last 450 m, to the end of the line, are drawn straight and are approximate.",
    "sources": [
     "https://museumdistrict.org/history",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-clay",
@@ -26925,8 +26923,7 @@
    "sources": [
     "https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-lakeside",
@@ -27580,30 +27577,6 @@
      [
       -77.4302801,
       37.561072
-     ],
-     [
-      -77.4312836,
-      37.5611287
-     ],
-     [
-      -77.4312698,
-      37.561588
-     ],
-     [
-      -77.4312298,
-      37.5625902
-     ],
-     [
-      -77.4307284,
-      37.562561
-     ],
-     [
-      -77.4306976,
-      37.5632221
-     ],
-     [
-      -77.4304072,
-      37.5632014
      ],
      [
       -77.4300881,
@@ -28667,13 +28640,12 @@
      ]
     ]
    ],
-   "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate.",
+   "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate. OSM maps Monteiro Street with a gap north of Lakewood Street; the line is drawn straight across it.",
    "sources": [
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://lewisginter.org/?p=11566"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-highland-park",
@@ -29615,8 +29587,7 @@
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
     "https://rvanews.com/?p=20453",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-marshall",
@@ -30217,8 +30188,7 @@
    "sources": [
     "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-venable",
@@ -30852,8 +30822,7 @@
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://henrico.us/locations/nine-mile-road/",
     "https://modelingjimcrow.virginia.edu/node/91936"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-jefferson",
@@ -31066,8 +31035,7 @@
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-hull",
@@ -31752,8 +31720,7 @@
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://richmondmagazine.com/news/richmond-history/richmond-trolley-system/"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "fair-grounds",
@@ -32446,6 +32413,111 @@
  "rules": [
   {
    "where": {
+    "name": "The Diamond"
+   },
+   "eras": [
+    [
+     1985,
+     null
+    ]
+   ],
+   "note": "The Diamond opened in April 1985 on the site of Parker Field (built in 1934 as part of the fair grounds, a ballpark from 1954).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/The_Diamond_(Richmond,_Virginia)"
+   ]
+  },
+  {
+   "where": {
+    "name": "Richmond and Petersburg Railroad Bridge"
+   },
+   "eras": [
+    [
+     1838,
+     1970
+    ]
+   ],
+   "note": "The R&P bridge, rebuilt on concrete piers in 1902 and removed in 1970; its piers stand today. Its approaches are not mapped, so its ends are drawn where OSM's way ends (approximate).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge"
+   ]
+  },
+  {
+   "where": {
+    "tag": "railway",
+    "is": [
+     "disused",
+     "abandoned",
+     "razed",
+     "dismantled"
+    ]
+   },
+   "eras": [],
+   "note": "Disused and abandoned track mapped today: no source here says when each piece last carried trains, so none is drawn in the past (it would float as pieces of live track). Undated: each needs a source."
+  },
+  {
+   "where": {
+    "id": [
+     "w296796859"
+    ]
+   },
+   "eras": [],
+   "note": "The roundabout at the Seventh Street ramps of the I-64/I-95 interchange, part of the interstate's works: drawn today only (approximate, not sourced)."
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "trunk_link",
+     "primary_link",
+     "secondary_link",
+     "tertiary_link"
+    ]
+   },
+   "eras": [
+    [
+     1958,
+     null
+    ]
+   ],
+   "note": "Ramps and turning roads of the interchanges, dated with the turnpike: approximate, not sourced."
+  },
+  {
+   "where": {
+    "tag": "water",
+    "is": [
+     "wastewater",
+     "basin",
+     "reflecting_pool"
+    ]
+   },
+   "eras": [],
+   "note": "Settling basins, stormwater basins and pools: none is dated by a source here (the treatment plant's basins and the basins of the interstate's drainage among them), so they are drawn today only."
+  },
+  {
+   "where": {
+    "tag": "landuse",
+    "is": [
+     "basin"
+    ]
+   },
+   "eras": [],
+   "note": "Basins: drawn today only, as above."
+  },
+  {
+   "where": {
+    "tag": "man_made",
+    "is": [
+     "wastewater_plant",
+     "water_works",
+     "reservoir_covered",
+     "storage_tank"
+    ]
+   },
+   "eras": [],
+   "note": "Treatment works and tanks: not dated here, drawn today only."
+  },
+  {
+   "where": {
     "id": [
      "w38231003",
      "w132598295"
@@ -33008,6 +33080,27 @@
    "year": 1901,
    "source": "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station",
    "note": "Opened 1901, as in the streetcar series; its parcel carries no year, so it went undrawn in 1943."
+  },
+  {
+   "id": "w975554474",
+   "name": "Sauer Center parking deck",
+   "year": 2020,
+   "source": "https://richmondbizsense.com/2019/06/07/sauer-eyes-new-office-building-800-space-parking-deck-near-whole-foods/",
+   "note": "A five-level deck planned in May 2019 on the surface lot behind 2220 W. Broad Street; dated 2020 (approximate: built after the plan). The parcel's recorded year (1910) is an older building's."
+  },
+  {
+   "id": "w466009777",
+   "name": "Cookie Factory tower",
+   "year": 1927,
+   "source": "https://cookiefactorylofts.com/history",
+   "note": "The factory's first building, a six-storey tower completed in 1927; the company added to it through the 1940s and 1950s."
+  },
+  {
+   "id": "w146689449",
+   "name": "Virginia Museum of Fine Arts",
+   "year": 2010,
+   "source": "https://sah-archipedia.org/buildings/VA-01-RI307",
+   "note": "Today's outline takes in the wings of 1954, 1970, 1976, 1984 and 2010 around the 1936 building facing the Boulevard. The 1936 building alone is not mapped, so the museum is not drawn before the outline was complete (approximate: it stood from 1936)."
   }
  ],
  "sanborn": {
@@ -33024,5 +33117,16 @@
  "streetsNearBuildings": 60,
  "serviceNearBuildings": 25,
  "streetcarScale": 1,
- "railScale": 4
+ "railScale": 4,
+ "groundsByParcel": true,
+ "vergeTags": [
+  "landuse=grass",
+  "landuse=meadow",
+  "natural=grassland",
+  "landuse=flowerbed"
+ ],
+ "approachesWithBridges": true,
+ "viaductClearance": 4,
+ "tracedClearOfStreets": 2,
+ "streetsUnderCars": true
 }

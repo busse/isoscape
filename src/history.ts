@@ -111,7 +111,7 @@ export type Confidence = 'drawn' | 'written' | 'approximate'
 /** A part's confidence: what it says, or `approximate` when it says nothing. */
 export const confidenceOf = (h: { readonly confidence?: Confidence }): Confidence => h.confidence ?? 'approximate'
 
-export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof'
+export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof' | 'tile'
 
 /**
  * A train on a curated rail line: an engine (unless `engine` is false) and `cars` cars behind
@@ -203,10 +203,56 @@ export interface History {
   readonly streetcarScale?: number
   /** Draw railroad tracks this many times their width, and in the ties' darker tone, so the network reads from afar (default 1). */
   readonly railScale?: number
+  /**
+   * Date laid-out ground (lawns, beds, pitches, playgrounds) and service roads by the
+   * assessor's year built of the parcel they lie in, as buildings are: the planted strips of a
+   * lot paved in 2017 and the drives of a yard built in 1989 are no older than the lot.
+   */
+  readonly groundsByParcel?: boolean
+  /**
+   * More kinds of verge than woods and scrub (laterWorks), as "key=value": grass and meadow
+   * along a road not yet built are its interchange's infields.
+   */
+  readonly vergeTags?: readonly string[]
+  /**
+   * Leave out a bridge's approaches with it: where a road bridge is not drawn in a year, the
+   * ways that lead only to it (a chain of ways joined end to end, none touching another
+   * street) end the street at its last junction instead of in a stub.
+   */
+  readonly approachesWithBridges?: boolean
+  /**
+   * Meters of clearance a viaduct of the year keeps: a traced building within this distance of
+   * a rail viaduct or a curated bridge (not only crossed by its center line), and any dated
+   * building a curated bridge passes over, is left out (it was cleared for the viaduct, or its
+   * place or year is wrong).
+   */
+  readonly viaductClearance?: number
+  /**
+   * Meters: a traced building with a street's center line (a carriageway, not a service road or
+   * path) or a streetcar line passing through it, or within this distance of it, is left out:
+   * the sheet was fitted a little off and set it in the street.
+   */
+  readonly tracedClearOfStreets?: number
+  /** Keep a street a car line of the year ran along, even with no house of the year on it. */
+  readonly streetsUnderCars?: boolean
+  /** Bridges drawn at grade before a year, with why (the street crossed there before its bridge). */
+  readonly atGrade?: readonly { readonly id: readonly string[]; readonly before: number; readonly note: string; readonly sources?: readonly string[] }[]
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
-  const raw = JSON.parse(await readFile(path, 'utf8')) as Partial<History>
+  let raw = JSON.parse(await readFile(path, 'utf8')) as Partial<History> & { extends?: string }
+  // A file can extend another: its rules and dates come first (so they win), its features are
+  // added (replacing the base's of the same id), and any other field it sets replaces the base's. A set's views of a place can then
+  // take rules the place's other drawings, already sold, must not.
+  if (raw.extends !== undefined) {
+    const base = JSON.parse(await readFile(raw.extends, 'utf8')) as Partial<History>
+    raw = {
+      ...base, ...raw,
+      rules: [...(raw.rules ?? []), ...(base.rules ?? [])],
+      dates: [...(raw.dates ?? []), ...(base.dates ?? [])],
+      features: [...(base.features ?? []).filter((f) => !(raw.features ?? []).some((g) => g.id === f.id)), ...(raw.features ?? [])],
+    }
+  }
   let traced: TracedBuilding[] = []
   if (raw.sanborn !== undefined) {
     for (const file of typeof raw.sanborn.lost === 'string' ? [raw.sanborn.lost] : raw.sanborn.lost) {
@@ -224,6 +270,13 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.serviceNearBuildings === undefined ? {} : { serviceNearBuildings: raw.serviceNearBuildings }),
     ...(raw.streetcarScale === undefined ? {} : { streetcarScale: raw.streetcarScale }),
     ...(raw.railScale === undefined ? {} : { railScale: raw.railScale }),
+    ...(raw.groundsByParcel === undefined ? {} : { groundsByParcel: raw.groundsByParcel }),
+    ...(raw.vergeTags === undefined ? {} : { vergeTags: raw.vergeTags }),
+    ...(raw.approachesWithBridges === undefined ? {} : { approachesWithBridges: raw.approachesWithBridges }),
+    ...(raw.atGrade === undefined ? {} : { atGrade: raw.atGrade }),
+    ...(raw.streetsUnderCars === undefined ? {} : { streetsUnderCars: raw.streetsUnderCars }),
+    ...(raw.viaductClearance === undefined ? {} : { viaductClearance: raw.viaductClearance }),
+    ...(raw.tracedClearOfStreets === undefined ? {} : { tracedClearOfStreets: raw.tracedClearOfStreets }),
   }
 }
 
@@ -526,7 +579,7 @@ const crosses = (a: Vec2, b: Vec2, c: Vec2, d: Vec2): boolean => {
  *   the turnpike (1958) is not drawn in 1950; the street is.
  * - Woods and scrub lying along roads not yet built (at least `share` of the outline within
  *   `reach` meters of them) are those roads' verges, the planted ground of an interchange,
- *   and are dated with them.
+ *   and are dated with them; so are the kinds a series adds (`vergeTags`, such as grass).
  */
 export const laterWorks = (
   all: readonly Feature[], kept: readonly Feature[], year: number, h: History, reach = 20, share = 0.4,
@@ -582,7 +635,7 @@ export const laterWorks = (
         continue
       }
     }
-    if (f.type === 'polygon' && (f.tags.natural === 'wood' || f.tags.natural === 'scrub') && later.length > 0) {
+    if (f.type === 'polygon' && (f.tags.natural === 'wood' || f.tags.natural === 'scrub' || (h.vergeTags ?? []).some((t) => f.tags[t.split('=')[0]] === t.split('=')[1])) && later.length > 0) {
       const ring = f.outers[0].map(m)
       const nearLater = (p: Vec2) => later.some((s) => {
         if (p[0] < s.box[0] - reach || p[0] > s.box[2] + reach || p[1] < s.box[1] - reach || p[1] > s.box[3] + reach) return false
@@ -595,4 +648,148 @@ export const laterWorks = (
     out.push(f)
   }
   return { kept: out, atGrade, verges }
+}
+
+/** Laid-out ground and service roads a parcel's year can date (groundsByParcel). */
+const PARCEL_GROUNDS: Record<string, readonly string[]> = {
+  landuse: ['grass', 'flowerbed', 'village_green'],
+  leisure: ['pitch', 'playground', 'dog_park', 'fitness_station', 'garden'],
+}
+
+/**
+ * Years for laid-out ground and service roads from the parcel they lie in (a polygon's center,
+ * a line's midpoint along its length), for a series with `groundsByParcel`. Parcels with no
+ * plausible year (before 1700) date nothing.
+ */
+export const dateGrounds = (features: readonly Feature[], parcels: readonly Parcel[]): Map<string, Dated> => {
+  const cell = 0.001
+  const grid = new Map<string, number[]>()
+  parcels.forEach((p, k) => {
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
+    for (const [x, y] of p.ring) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y) }
+    for (let i = Math.floor(x0 / cell); i <= Math.floor(x1 / cell); i++) {
+      for (let j = Math.floor(y0 / cell); j <= Math.floor(y1 / cell); j++) {
+        const key = `${i},${j}`
+        const list = grid.get(key)
+        if (list) list.push(k)
+        else grid.set(key, [k])
+      }
+    }
+  })
+  const yearAt = (c: Vec2): number | null => {
+    for (const k of grid.get(`${Math.floor(c[0] / cell)},${Math.floor(c[1] / cell)}`) ?? []) {
+      if (pointInRing(c, parcels[k].ring)) return parcels[k].year >= 1700 ? parcels[k].year : null
+    }
+    return null
+  }
+  const midpoint = (pts: readonly Vec2[]): Vec2 => {
+    const lens = pts.slice(1).map((q, i) => Math.hypot(q[0] - pts[i][0], q[1] - pts[i][1]))
+    let half = lens.reduce((a, b) => a + b, 0) / 2
+    for (let i = 0; i < lens.length; i++) {
+      if (half <= lens[i] && lens[i] > 0) { const t = half / lens[i]; return [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * t, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * t] }
+      half -= lens[i]
+    }
+    return pts[0]
+  }
+  const out = new Map<string, Dated>()
+  for (const f of features) {
+    let at: Vec2 | null = null
+    if (f.type === 'polygon' && f.tags.building === undefined && Object.entries(PARCEL_GROUNDS).some(([k, vs]) => vs.includes(f.tags[k] ?? ''))) at = centroid(f.outers[0])
+    else if (f.type === 'line' && f.tags.highway === 'service' && f.points.length > 1) at = midpoint(f.points)
+    if (at === null) continue
+    const y = yearAt(at)
+    if (y !== null) out.set(f.id, { year: y, source: 'parcel' })
+  }
+  return out
+}
+
+/**
+ * The ways that lead only to a road bridge not drawn this year (`kept` are the features drawn,
+ * `all` every feature mapped): from each end of such a bridge, ways joined end to end through
+ * nodes no other drawn street touches, up to the first junction. With them gone the street ends
+ * at that junction, not in a stub pointing at a bridge that is not there.
+ */
+export const dropApproaches = (all: readonly Feature[], kept: readonly Feature[]): { kept: Feature[]; dropped: number } => {
+  const isRoad = (f: Feature): f is Extract<Feature, { type: 'line' }> => f.type === 'line' && f.tags.highway !== undefined
+  const keptIds = new Set(kept.map((f) => f.id))
+  const key = (p: Vec2) => `${p[0]},${p[1]}`
+  const roads = kept.filter(isRoad)
+  const at = new Map<string, Extract<Feature, { type: 'line' }>[]>()
+  for (const f of roads) for (const p of f.points) {
+    const k = key(p)
+    const list = at.get(k)
+    if (list) list.push(f)
+    else at.set(k, [f])
+  }
+  const gone = new Set<Feature>()
+  const lostBridges = all.filter((f) => isRoad(f) && !keptIds.has(f.id) && f.tags.bridge !== undefined && f.tags.bridge !== 'no') as Extract<Feature, { type: 'line' }>[]
+  for (const b of lostBridges) {
+    for (const end of [b.points[0], b.points[b.points.length - 1]]) {
+      let node = key(end)
+      for (let guard = 0; guard < 50; guard++) {
+        const here = (at.get(node) ?? []).filter((f) => !gone.has(f))
+        if (here.length !== 1) break
+        const w = here[0]
+        // Only a way that ends here leads on; one passing through is a street of its own.
+        const ends = [key(w.points[0]), key(w.points[w.points.length - 1])]
+        if (!ends.includes(node)) break
+        // Nor one with a street joining it along the way.
+        if (w.points.slice(1, -1).some((p) => (at.get(key(p)) ?? []).some((o) => o !== w && !gone.has(o)))) break
+        gone.add(w)
+        node = ends[0] === node ? ends[1] : ends[0]
+      }
+    }
+  }
+  return { kept: kept.filter((f) => !gone.has(f)), dropped: gone.size }
+}
+
+/** Bridges a series draws at grade before a year (`atGrade`): their bridge and layer tags dropped. */
+export const bridgesAtGrade = (kept: readonly Feature[], year: number, h: History): { kept: Feature[]; n: number } => {
+  const ids = new Set((h.atGrade ?? []).filter((r) => year < r.before).flatMap((r) => r.id))
+  let n = 0
+  const out = kept.map((f) => {
+    if (f.type !== 'line' || !ids.has(f.id)) return f
+    n++
+    const { bridge: _b, layer: _l, ...tags } = f.tags
+    return { ...f, tags }
+  })
+  return { kept: out, n }
+}
+
+/**
+ * Road bridges that lead nowhere this year: a chain of bridge ways joined end to end with an end
+ * no drawn road reaches (its ramps not yet built, its street gone) would stand in the air, so
+ * the chain is left out.
+ */
+export const dropOrphanBridges = (kept: readonly Feature[]): { kept: Feature[]; dropped: number } => {
+  type Line = Extract<Feature, { type: 'line' }>
+  const isRoad = (f: Feature): f is Line => f.type === 'line' && f.tags.highway !== undefined
+  const isSpan = (f: Line) => f.tags.bridge !== undefined && f.tags.bridge !== 'no'
+  const key = (p: Vec2) => `${p[0]},${p[1]}`
+  const roads = kept.filter(isRoad)
+  const at = new Map<string, Line[]>()
+  for (const f of roads) for (const p of f.points) {
+    const k = key(p)
+    const list = at.get(k)
+    if (list) list.push(f)
+    else at.set(k, [f])
+  }
+  const spans = roads.filter(isSpan)
+  const parent = new Map(spans.map((f) => [f, f]))
+  const find = (f: Line): Line => { let r = f; while (parent.get(r) !== r) r = parent.get(r)!; return r }
+  for (const f of spans) for (const p of [f.points[0], f.points[f.points.length - 1]]) {
+    for (const o of at.get(key(p)) ?? []) if (o !== f && isSpan(o)) parent.set(find(o), find(f))
+  }
+  const chains = new Map<Line, Line[]>()
+  for (const f of spans) { const r = find(f); const list = chains.get(r); if (list) list.push(f); else chains.set(r, [f]) }
+  const gone = new Set<Feature>()
+  for (const members of chains.values()) {
+    const mine = new Set(members)
+    // The chain's ends: span ends not shared with another span of the chain.
+    const ends = members.flatMap((f) => [f.points[0], f.points[f.points.length - 1]])
+      .filter((p) => (at.get(key(p)) ?? []).filter((o) => mine.has(o)).length === 1)
+    const reached = (p: Vec2) => (at.get(key(p)) ?? []).some((o) => !mine.has(o))
+    if (ends.length > 0 && !ends.every(reached)) for (const f of members) gone.add(f)
+  }
+  return { kept: kept.filter((f) => !gone.has(f)), dropped: gone.size }
 }

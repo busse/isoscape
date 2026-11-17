@@ -217,10 +217,16 @@
        37.5405
       ],
       "on": "Lakeview Avenue"
+     },
+     {
+      "direct": [
+       -77.4775,
+       37.5405
+      ]
      }
     ]
    ],
-   "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. The far end is approximate.",
+   "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. Lakeview Avenue is mapped today only to Shields Lake; the last 450 m, to the end of the line, are drawn straight and are approximate.",
    "sources": [
     "https://museumdistrict.org/history",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
@@ -267,10 +273,19 @@
       "1st Street",
       "Monteiro Street"
      ],
-     [
-      "Monteiro Street",
-      "Dove Street"
-     ],
+     {
+      "at": [
+       -77.4302801,
+       37.561072
+      ],
+      "on": "Monteiro Street"
+     },
+     {
+      "straight": [
+       "Monteiro Street",
+       "Dove Street"
+      ]
+     },
      [
       "North Avenue",
       "Dove Street"
@@ -304,7 +319,7 @@
      }
     ]
    ],
-   "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate.",
+   "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate. OSM maps Monteiro Street with a gap north of Lakewood Street; the line is drawn straight across it.",
    "sources": [
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
@@ -571,7 +586,7 @@
      }
     ]
    ],
-   "note": "The interurban to Ashland, built as the Richmond and Chesapeake Bay Railway (1907) and run as the Richmond–Ashland Railway from 1919 to 1938: from its terminal at Broad and Laurel Streets (814 West Broad), over a half-mile concrete trestle across Bacon's Quarter Branch (drawn straight), then up Brook Road and on to Ashland.",
+   "note": "The interurban to Ashland, built as the Richmond and Chesapeake Bay Railway (1907) and run as the Richmond–Ashland Railway from 1919 to 1938: from its terminal at Broad and Laurel Streets (814 West Broad), where the cars left from the second floor, north on a half-mile concrete viaduct over the Seaboard's tracks to just south of Brook Road (drawn straight, its line approximate), then beside Brook Road and on to Ashland on its own right-of-way.",
    "sources": [
     "https://pantographblog.blogspot.com/2009/08/richmond-and-chesapeake-bay-railway.html",
     "https://varails.com/trolley-lines/the-richmond-ashland-railway",
