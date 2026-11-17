@@ -762,14 +762,33 @@ for the sheet's shading and left out; every traced building keeps its class's as
 (brick and stone 3, frame 2, iron 4, fire-resistive 3, fireproof 6), since no sheet's storey
 count was recorded. **Track on a site:** a siding mostly on a curated site goes whole, one mostly
 off it stays whole, so none is cut square at the site's edge. **Ties:** close up, a tie within
-0.5 m of one already laid is left out, so the ties of a turnout's two tracks do not clump. In
-the station's set views the platform sheds are drawn with the cutaway's butterfly roofs and the
-dome in terra-cotta tile, as it was until 1955. A history can also extend another (`extends`: its rules and
+0.5 m of one already laid is left out, so the ties of a turnout's two tracks do not clump; farther
+out, where tie marks are drawn along the center line, a track's marks within 3.5 m of a track
+drawn before it are left out, so where two run together only one pattern shows. **Car lines on
+a street bed:** each car line lies on a band of street 1.5 m wider each side (times the
+streetcar scale), so a line that covers its carriageway, or runs where no street of the year is
+drawn, still reads as cars in a street; and the red band is painted exactly, cut at the grid
+lines, and lapping half a unit on screen further back than the other ground layers, so no seam
+or notch shows across it where the paint strips meet. **Station views:** a whole view leaves out
+the train cars standing under the raised concourse, and turned parts (the dome) are drawn
+shaded and inked only along their foot, so the dome reads as tile at a map's scale, not as a
+black disc of facet lines. In the station's set views the platform sheds are drawn with the
+cutaway's butterfly roofs and the dome in terra-cotta tile, as it was until 1955. The sets'
+regions add: rail bridges over water stand on piers however low their deck (elsewhere a pier
+is drawn only under a deck more than 3 m above its foot); the two ways of a double-track viaduct
+are one deck at one level; and named deck heights for the C&O's viaduct (12 m, so it clears the
+Seaboard's, 6 m, at the Triple Crossing) and the Free Bridge (4 m, approximate). A history can also extend another (`extends`: its rules and
 dates first, its features replacing the base's of the same id), which is how the set's close
 views of Broad Street Station take these rules while the cutaway, drawn from the station's own
-history, stays as it was sold. The sets' era rules add: ramps and turning roads (`*_link`) from
+history, stays as it was sold. The sets take the downtown series' era rules and curated dates
+(parking structures from 1960, canal bridges from 1999, buildings no source dates drawn today
+only), and add: ramps and turning roads (`*_link`) from
 1958, approximate; disused and abandoned track never in the past unless a rule dates it (the
-Richmond and Petersburg bridge, 1838 to 1970); basins, settling tanks and treatment works today
+Richmond and Petersburg bridge, 1902 to 1970, with its approaches to Byrd Street Station and,
+approximately, in Manchester); bridges drawn at grade before a year where a source puts the
+street on the ground (Fifth and Seventh over Leigh Street before 1971, Campus Drive before
+1950, approximate); the park lakes of the year (Westhampton Lake from 1902, Fountain Lake from
+1888, Swan and Shields lakes from 1917); basins, settling tanks and treatment works today
 only; The Diamond from 1985; and dated buildings with their sources (a parking deck of about
 2020, the Cookie Factory's tower of 1927, the art museum's outline only once its wings were
 built).

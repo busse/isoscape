@@ -34124,6 +34124,25 @@
    "year": null,
    "source": "https://smandf.com/portfolio/700-centre-tower-annex",
    "note": "The seven-story annex of the 1913 tower at 700 E. Franklin St.; no source found gives its year (the assessor's is the tower's lot, 1913). Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w236488153",
+   "name": "Grace Place Apartments",
+   "year": null,
+   "source": "https://richmondbizsense.com/2026/01/05/two-years-later-rrha-led-apartments-rehab-on-grace-st-remains-preliminary/",
+   "note": "The eleven-story apartment building at Grace and Fourth streets: no source found gives the year it was built (the assessor's 1922 is the lot's; its use as affordable housing dates from 2001). Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w264518638",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/264518638",
+   "note": "A building part 45.7 m tall (OSM) whose only date is its parcel's (1890), far older than any building of that height downtown; no source found dates it. Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w822799760",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/822799760",
+   "note": "A building part 25 m tall (OSM) whose only date is its parcel's (1910); no source found dates it. Drawn in today's scene only until a source dates it."
   }
  ],
  "sanborn": {
