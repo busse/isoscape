@@ -5,11 +5,11 @@
   "--year",
   "1943"
  ],
- "commit": "b3baa52fcceb9a3e73b5d2afb1747ebf1f83e90e",
- "dirty": true,
- "approved": "2026-11-16T23:44:21-0500",
- "svg_sha256": "15296cbc93186951896a9a821de5632beb49897a924d748ebc6993ea86a888b3",
- "svg_bytes": 1155632,
+ "commit": "140eb9080ed410ab1fa6014231997eb092e5823b",
+ "dirty": false,
+ "approved": "2026-11-17T09:40:13-0500",
+ "svg_sha256": "4882020b71ed4d147cc8ec72a1ad3cd7e2728e4421be5ad91693fdd2407ff1f2",
+ "svg_bytes": 1178468,
  "viewBox": [
   -1719.0,
   -1087.0,
@@ -54,8 +54,8 @@
    "mean": 0.9671
   },
   "portico": {
-   "max": 9.0,
-   "mean": 1.3673
+   "max": 11.0,
+   "mean": 1.3897
   },
   "platforms": {
    "max": 6.889,
