@@ -151,8 +151,10 @@ test('a dated series: what no rule dates is drawn today only, except the street 
     [area({ landuse: 'cemetery' }), false, 'an undated cemetery'],
     [area({ natural: 'water', water: 'river' }), true, 'the river'],
     [area({ natural: 'wood' }), true, 'woods'],
-    [line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), false, 'the 1913 Mayo Bridge in 1900'],
   ] as const) assert.equal(featureAlive(f, 1900, h), early, why)
+  // Mayo's Bridge stood from 1788, but not in the scene after the fire of April 1865, which burned it.
+  assert.ok(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1886, h))
+  assert.equal(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1865, h), false)
   assert.ok(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1913, h))
   assert.ok(featureAlive(area({ leisure: 'park' }), 2026, h))
 })
