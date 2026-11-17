@@ -60,6 +60,8 @@ export interface Region {
    * a 3% grade), so a crossing of railroads at three levels reads (a set's maps).
    */
   readonly railCrossings?: number
+  /** The halo round map labels, as a share of their size (default 0.22): wider over dense blocks. */
+  readonly labelHalo?: number
   /**
    * Extra data, beyond OSM and elevation. `buildings` lists where footprints come from:
    * OpenStreetMap and/or Microsoft's ML footprints (OSM wins where both have a building).
@@ -165,6 +167,8 @@ export interface TerrainOptions {
   readonly majorEvery?: number
   /** Water-surface gradient (m/m) above which a stretch of river reads as rapids. */
   readonly rapids?: number
+  /** The most rapids strokes drawn in one cell (default 2): 1 where a coarse grid seen close would pile them up. */
+  readonly rapidsMarks?: number
   /**
    * Strength of the hillshade, 1 by default; 0 draws the ground flat-toned (its relief still
    * shapes it). A close view of one building, such as a cutaway, uses 0, so a bank does not

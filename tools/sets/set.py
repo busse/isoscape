@@ -287,7 +287,9 @@ def paste_map(img, d, S, scene, pts, box, x, y, w, h, r, least_px=0):
         if not (box[0] <= px <= box[0] + box[2] and box[1] <= py <= box[1] + box[3]):
             raise SystemExit(f"stop {s['n']} ({s['id']}) falls outside the big map")
         places.append((s, x + (px - box[0]) * k, y + (py - box[1]) * k))
-    moved = spread([(px, py) for _, px, py in places], r)
+    # A box may set its marker off its place (`badge`: [dx, dy] in marker radii, screen
+    # directions), with a leader back to it, so the markers do not hide what they name.
+    moved = spread([(px + s.get('badge', [0, 0])[0] * r, py + s.get('badge', [0, 0])[1] * r) for s, px, py in places], r)
     # Kept inside the frame.
     moved = [(min(max(mx, x + r * 1.2), x + w - r * 1.2), min(max(my, y + r * 1.2), y + h - r * 1.2)) for mx, my in moved]
     for (s, px, py), (mx, my) in zip(places, moved):

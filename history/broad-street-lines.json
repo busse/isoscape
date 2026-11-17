@@ -32354,10 +32354,10 @@
    "from": 1919,
    "to": 1976,
    "at": [
-    -77.4692,
-    37.5606
+    -77.4646,
+    37.5609
    ],
-   "anchor": "end",
+   "anchor": "start",
    "caption": "RF&P, Atlantic Coast Line and N&W trains",
    "note": "Where the line went in 1943. Main Street Station served the Seaboard Air Line and the C&O, Hull Street station the Southern; AY Tower, about a mile northwest of Broad Street, was the wye of the RF&P main and the ACL; Seaboard Junction, just north of the station, was where the SAL left the RF&P.",
    "sources": [
@@ -32390,8 +32390,8 @@
    "from": 1919,
    "to": 1976,
    "at": [
-    -77.4305,
-    37.5372
+    -77.4302,
+    37.5349
    ],
    "anchor": "end",
    "caption": "Seaboard Air Line south to Raleigh and Florida; C&O",
