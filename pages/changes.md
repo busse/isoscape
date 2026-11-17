@@ -11,6 +11,29 @@ tools and the research get better, a published map is sometimes corrected and re
 page lists those changes, newest first. A print ordered after a change is made from the new
 version; the version is part of each print file's name (`-v2`, `-v3`).
 
+## November 17, 2026
+
+**Richmond, 1925 (plate RVA·01) and Richmond, 1950 (RVA·04), version 4: redrawn.** Both prints
+were inspected again tile by tile after version 3 went on sale, and these faults in version 3 are
+corrected:
+
+- In 1925 the Mayo Bridge's south span, from Mayo's Island to Manchester, was missing. It is
+  drawn whole.
+- A tower finished in 1965, the Ross Building at 8th and Main Streets, stood in both years (the
+  assessor dates it 1925). It is gone, and its lot is left empty.
+- Traced Sanborn buildings stood in the river, on the canal, under the rail viaducts and in
+  later embankments (the interstate's). They are left out.
+- The Richmond and Petersburg railroad bridge ended in the air at the canal bank. It now lands on
+  its approach to Byrd Street Station, and in 1925 the C&O runs to the Church Hill Tunnel (it
+  collapsed that October); both approaches are placed approximately, from the USGS maps of 1934
+  and 1956 and the 1924–25 Sanborn map.
+- Modern roundabouts, the Canal Walk's canal bridges, parking-lot drives and planting beds were
+  shown. They are left out.
+
+The years that date later works (roundabouts from 1990, drives and parking from 1960, canal
+bridges from 1999) are approximate, and every traced building's height is assumed from its
+material, as the print says. The title block gives version 4.
+
 ## November 16, 2026
 
 **The James, I-195 to Rocketts Landing (plate RVA·09), Richmond, 2026 (RVA·05), Richmond and
