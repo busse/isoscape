@@ -649,8 +649,16 @@ through sixteen street corners, each snapped to the city's block outlines); and
 Downtown Expressway from 1976, the river viaducts from 1901, today's Mayo Bridge from 1913 (its
 earlier wooden spans are not drawn). The James River and Kanawha Canal appears from 1800 until
 the railroad took it over, and again from the Canal Walk of 1999. Interchange ramps follow the
-interstate and parking aisles and driveways follow surface parking (1950); both dates are
-approximate. A feature no rule matches is drawn in every year, so the Richmond series ends its
+interstate and parking aisles and driveways follow surface parking (1960, the year by which
+traced buildings are assumed cleared); both dates are approximate.
+
+Two more rules look at what lies beside a feature. A road bridge stands only over something
+there in its year: if every road, railway and waterway mapped under a bridge (its spans of one
+street joined end to end) is not yet built, the street is drawn at grade instead, so in 1950
+Broad Street crosses Shockoe Valley on the ground and the streets over the Downtown Expressway
+have no bridges. And woods and scrub with 40% or more of their outline within 20 m of a road
+not yet built are that road's verges (the planted ground of an interchange) and are dated with
+it. A feature no rule matches is drawn in every year, so the Richmond series ends its
 rules with catch-alls: the street grid, streams and the river are drawn in every year, and
 anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basins, paths) is
 drawn only today, since nothing says when it was made. Each catch-all names what still needs a

@@ -179,3 +179,25 @@ test('a sheet whose fit is known to be wrong is left out', async () => {
   const h = await loadHistory(join(dir, 'h.json'))
   assert.deepEqual(h.traced.map((b) => b.id), ['b', 'c'])
 })
+
+test('a bridge over a road not yet built is drawn at grade, and that road\'s verges are not drawn', async () => {
+  const { laterWorks } = await import('../src/history.ts')
+  const h = history({ rules: [{ where: { name: 'Turnpike' }, eras: [[1958, null]] }] as History['rules'] })
+  const line = (id: string, tags: Record<string, string>, points: [number, number][]): LineFeature => ({ type: 'line', id, tags, points })
+  const pike = line('pike', { highway: 'motorway', name: 'Turnpike' }, [[0, -0.001], [0, 0.001]])
+  const span = line('span', { highway: 'primary', name: 'Broad', bridge: 'yes', layer: '1' }, [[-0.0002, 0], [0.0002, 0]])
+  const side = line('side', { highway: 'primary', name: 'Broad', bridge: 'yes', layer: '1' }, [[0.0002, 0], [0.0004, 0]])
+  const rail = line('rail', { railway: 'rail' }, [[0.001, -0.001], [0.001, 0.001]])
+  const overRail = line('over', { highway: 'primary', name: 'Main', bridge: 'yes' }, [[0.0009, 0.0005], [0.0011, 0.0005]])
+  const verge: PolygonFeature = { type: 'polygon', id: 'verge', tags: { natural: 'wood' }, outers: [[[0.00005, -0.0005], [0.0001, -0.0005], [0.0001, 0.0005], [0.00005, 0.0005]]], inners: [] }
+  const woods: PolygonFeature = { type: 'polygon', id: 'woods', tags: { natural: 'wood' }, outers: [[[0.003, 0], [0.004, 0], [0.004, 0.001], [0.003, 0.001]]], inners: [] }
+  const all = [pike, span, side, rail, overRail, verge, woods]
+  const early = laterWorks(all, [span, side, rail, overRail, verge, woods], 1950, h)
+  assert.equal(early.atGrade, 2)
+  assert.deepEqual(early.kept.filter((f) => f.tags.bridge).map((f) => f.id), ['over'])
+  assert.ok(early.kept.some((f) => f.id === 'span' && f.tags.layer === undefined))
+  assert.deepEqual(early.kept.filter((f) => f.type === 'polygon').map((f) => f.id), ['woods'])
+  const late = laterWorks(all, all, 1960, h)
+  assert.equal(late.atGrade, 0)
+  assert.equal(late.verges, 0)
+})
