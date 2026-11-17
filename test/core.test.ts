@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { clipRingToRect, convexHull, separatingAxis, signedArea, simplifyRing, type Vec2 } from '../src/geom.ts'
+import { clipPolygonToRect, clipRingToRect, convexHull, separatingAxis, signedArea, simplifyRing, type Vec2 } from '../src/geom.ts'
 import { dominantGridAngle, makeView, snapBearing } from '../src/view.ts'
 import {
   abutmentLevel, bridgeEnds, buildingAt, cableZ, CABLE_CLEARANCE, carveUnderBridges, chainBridges, deckProfile, extrude, isSkyway, joinDecks,
@@ -26,6 +26,47 @@ test('signed area is positive counter-clockwise', () => {
 test('clipping a ring to a rectangle', () => {
   const clipped = clipRingToRect(square(-5, -5), { minX: 0, minY: 0, maxX: 100, maxY: 100 })
   assert.equal(Math.abs(signedArea(clipped)), 25)
+})
+
+/** Edges of `rings` lying on the line y = `y` that cross the open interval (x0, x1). */
+const edgesOnLine = (rings: readonly (readonly Vec2[])[], y: number, x0: number, x1: number) =>
+  rings.flatMap((r) => r.map((a, i) => [a, r[(i + 1) % r.length]] as const))
+    .filter(([a, b]) => a[1] === y && b[1] === y && Math.max(a[0], b[0]) > x0 && Math.min(a[0], b[0]) < x1)
+const netArea = (rings: readonly (readonly Vec2[])[]) => rings.reduce((s, r) => s + signedArea(r), 0)
+
+test('clipping a notched polygon leaves no edge across the notch', () => {
+  // An arch: a bar from y 20 to 30 on two legs, x 0–10 and 20–30, with the notch x 10–20 below
+  // y 20 open to the bottom. Cut at y 25, the bar's lower half spans the notch's top only, but
+  // at y 15 the clip line crosses the notch, where Sutherland–Hodgman ran an edge out and back.
+  const arch: Vec2[] = [[0, 0], [10, 0], [10, 20], [20, 20], [20, 0], [30, 0], [30, 30], [0, 30]]
+  const rect = { minX: -Infinity, maxX: Infinity, minY: -5, maxY: 15 }
+  const naive = clipRingToRect(arch, rect)
+  assert.ok(edgesOnLine([naive], 15, 10, 20).length > 0, 'the old clip leaves an edge across the notch')
+  const pieces = clipPolygonToRect([arch], rect)
+  assert.deepEqual(edgesOnLine(pieces, 15, 10, 20), [])
+  assert.equal(pieces.length, 2)
+  assert.equal(netArea(pieces), signedArea(naive))
+  assert.equal(netArea(pieces), 300)
+})
+
+test('clipping a polygon whose hole crosses the clip line leaves no edge over the hole', () => {
+  const outer: Vec2[] = [[0, 0], [30, 0], [30, 30], [0, 30]]
+  const hole: Vec2[] = [[10, 10], [10, 20], [20, 20], [20, 10]]   // clockwise
+  const rect = { minX: -Infinity, maxX: Infinity, minY: -5, maxY: 15 }
+  const pieces = clipPolygonToRect([outer, hole], rect)
+  assert.deepEqual(edgesOnLine(pieces, 15, 10, 20), [])
+  // The edge along the clip line remains where the polygon is.
+  assert.equal(edgesOnLine(pieces, 15, 0, 10).length, 1)
+  assert.equal(edgesOnLine(pieces, 15, 20, 30).length, 1)
+  assert.equal(netArea(pieces), 30 * 15 - 10 * 5)
+  // A hole wholly inside stays a hole, and the rings come back exactly as clipped.
+  const inside = clipPolygonToRect([outer, hole], { minX: -Infinity, maxX: Infinity, minY: -5, maxY: 25 })
+  assert.deepEqual(inside, [clipRingToRect(outer, { minX: -Infinity, maxX: Infinity, minY: -5, maxY: 25 }), hole])
+})
+
+test('clipping a convex polygon is unchanged', () => {
+  const r = { minX: 2, maxX: 8, minY: 3, maxY: 7 }
+  assert.deepEqual(clipPolygonToRect([square(0, 0)], r), [clipRingToRect(square(0, 0), r)])
 })
 
 test('simplify drops collinear vertices', () => {

@@ -696,32 +696,35 @@
  },
  "richmond-2026": {
   "title": "Richmond, 2026",
-  "current": 3,
+  "current": 4,
   "kind": "redraw",
   "records": [
    "v1.json",
    "v2.json",
-   "v3.json"
+   "v3.json",
+   "v4.json"
   ]
  },
  "richmond-james-2026": {
   "title": "The James, I-195 to Rocketts Landing",
-  "current": 3,
+  "current": 4,
   "kind": "redraw",
   "records": [
    "v1.json",
    "v2.json",
-   "v3.json"
+   "v3.json",
+   "v4.json"
   ]
  },
  "richmond-panorama-2026": {
   "title": "Richmond and the James",
-  "current": 3,
+  "current": 4,
   "kind": "redraw",
   "records": [
    "v1.json",
    "v2.json",
-   "v3.json"
+   "v3.json",
+   "v4.json"
   ]
  },
  "richmond-through-time": {

@@ -13,6 +13,17 @@ version; the version is part of each print file's name (`-v2`, `-v3`).
 
 ## November 16, 2026
 
+**The James, I-195 to Rocketts Landing (plate RVA·09), Richmond, 2026 (RVA·05) and Richmond and
+the James (RVA·08), version 4: redrawn.** The ground of each map is painted in strips, from far
+to near. Where a wood, park or parking lot had a notch or a clearing that crossed a strip's
+edge, the shape left a thin line of its own color across the open ground inside it, one strip
+apart (about 170 faint lines in The James; in the two downtown views, on Belle Isle and along
+the riverfront, among other places). Each shape is now cut to its strip as one outline, so the
+lines are gone. Nothing else in the drawing changed; the title block on each print now gives
+version 4.
+
+*Drafted with Claude; see the artist statement.*
+
 **Richmond, 1925 (plate RVA·01), Richmond, 1950 (RVA·04), Richmond, 2026 (RVA·05) and Richmond
 and the James (RVA·08), version 3: redrawn.** The four views of downtown Richmond were
 inspected tile by tile, corrected in code, and drawn again from the same data.
