@@ -167,3 +167,16 @@ test('service roads can be held to a closer test than streets (serviceNearBuildi
   // Service roads within 25 m: the yard road goes, the drive by the house stays.
   assert.deepEqual(ids(dropUnbuiltStreets(feats, 60, [], [], false, 25)), ['drive', 'h', 'street'])
 })
+
+test('a road bridge over a motorway not yet built is left out; one over a railway stays', async () => {
+  const { dropBridgesOverLater } = await import('../src/history.ts')
+  const ln = (id: string, tags: Record<string, string>, pts: [number, number][]): LineFeature => ({ type: 'line', id, tags, points: pts })
+  const motorway = ln('m', { highway: 'motorway' }, [[0, -1], [0, 1]])
+  const overMotorway = ln('b1', { highway: 'primary', bridge: 'yes' }, [[-0.1, 0], [0.1, 0]])
+  const overRail = ln('b2', { highway: 'primary', bridge: 'yes' }, [[-0.1, 5], [0.1, 5]])
+  const r = dropBridgesOverLater([overMotorway, overRail], [motorway])
+  assert.deepEqual(r.kept.map((f) => f.id), ['b2'])
+  assert.equal(r.dropped, 1)
+  // With the motorway built, nothing goes.
+  assert.equal(dropBridgesOverLater([overMotorway, overRail], []).dropped, 0)
+})

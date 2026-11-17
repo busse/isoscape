@@ -25,7 +25,7 @@ import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
 import { cutawayItems, partSolids, partTones, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
-import { alive, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
+import { alive, dropBridgesOverLater, dropUnbuiltStreets, featureAlive, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
 export interface TimeContext {
@@ -142,7 +142,17 @@ export const buildScene = (
 ): Scene => {
   const time = extra.time
   const curated = time === undefined ? [] : time.history.features.filter((h) => alive(h.from, h.to, time.year))
-  if (time !== undefined) features = asOf(features, time)
+  let laterBridges = 0
+  if (time !== undefined) {
+    const all = features
+    features = asOf(features, time)
+    if (time.year < time.history.present) {
+      const kept = new Set(features)
+      const r = dropBridgesOverLater(features, all.filter((f) => !kept.has(f)))
+      features = r.kept
+      laterBridges = r.dropped
+    }
+  }
   let unbuiltStreets = 0
   // Today's scene draws today's streets, built on or not.
   if (time !== undefined && time.history.streetsNearBuildings !== undefined && time.year < time.history.present) {
@@ -166,7 +176,7 @@ export const buildScene = (
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)
   const frame = view.frame
-  const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}) }
+  const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}), ...(laterBridges ? { laterBridges } : {}) }
   const opts = region.terrain ?? {}
   const useTerrain = elevation !== null && region.terrain !== undefined && opts.enabled !== false
   const terrain = makeTerrain(view, opts.cell ?? 5, useTerrain ? (opts.exaggeration ?? 2) : 1, useTerrain ? elevation : null)

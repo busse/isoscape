@@ -636,7 +636,8 @@ Downtown Expressway from 1976, the river viaducts from 1901, today's Mayo Bridge
 earlier wooden spans are not drawn). The James River and Kanawha Canal appears from 1800 until
 the railroad took it over, and again from the Canal Walk of 1999. Interchange ramps follow the
 interstate and parking aisles and driveways follow surface parking (1950); both dates are
-approximate. A feature no rule matches is drawn in every year, so the Richmond series ends its
+approximate. A road bridge that crosses a motorway or trunk road not yet built is left out of
+that year whatever rule dates it: it went up with the road beneath it. A feature no rule matches is drawn in every year, so the Richmond series ends its
 rules with catch-alls: the street grid, streams and the river are drawn in every year, and
 anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basins, paths) is
 drawn only today, since nothing says when it was made. Each catch-all names what still needs a

@@ -331,6 +331,53 @@ export const dropUnbuiltStreets = (
   return { kept, dropped }
 }
 
+/** Roads a bridge built to cross was built with: a bridge over one of these dates from it. */
+const LATER_ROADS = new Set(['motorway', 'motorway_link', 'trunk', 'trunk_link'])
+
+const segmentsCross = (a: Vec2, b: Vec2, c: Vec2, d: Vec2): boolean => {
+  const o = (p: Vec2, q: Vec2, r: Vec2) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
+  const d1 = o(c, d, a)
+  const d2 = o(c, d, b)
+  const d3 = o(a, b, c)
+  const d4 = o(a, b, d)
+  return ((d1 > 0) !== (d2 > 0)) && ((d3 > 0) !== (d4 > 0)) && d1 !== 0 && d2 !== 0 && d3 !== 0 && d4 !== 0
+}
+
+/**
+ * Drop road bridges that cross a motorway or trunk road not yet built (`gone`, lines dated out
+ * of the year): such a bridge went up with the road under it, whatever the catch-all rule for
+ * bridges says. A street that crossed there before met nothing to bridge. Returns the kept
+ * features and how many bridges went.
+ */
+export const dropBridgesOverLater = (kept: readonly Feature[], gone: readonly Feature[]): { kept: Feature[]; dropped: number } => {
+  const under = gone.filter((f) => f.type === 'line' && LATER_ROADS.has(f.tags.highway ?? '') && f.tags.bridge === undefined && f.tags.tunnel === undefined)
+  if (under.length === 0) return { kept: [...kept], dropped: 0 }
+  const box = (pts: readonly Vec2[]) => {
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
+    for (const [x, y] of pts) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y) }
+    return [x0, y0, x1, y1]
+  }
+  const roads = under.map((f) => ({ pts: (f as { points: Vec2[] }).points, b: box((f as { points: Vec2[] }).points) }))
+  let dropped = 0
+  const out = kept.filter((f) => {
+    if (f.type !== 'line' || f.tags.bridge === undefined || f.tags.bridge === 'no' || f.tags.highway === undefined) return true
+    const b = box(f.points)
+    for (const r of roads) {
+      if (r.b[0] > b[2] || r.b[2] < b[0] || r.b[1] > b[3] || r.b[3] < b[1]) continue
+      for (let i = 0; i + 1 < f.points.length; i++) {
+        for (let j = 0; j + 1 < r.pts.length; j++) {
+          if (segmentsCross(f.points[i], f.points[i + 1], r.pts[j], r.pts[j + 1])) {
+            dropped++
+            return false
+          }
+        }
+      }
+    }
+    return true
+  })
+  return { kept: out, dropped }
+}
+
 // ---- year built ------------------------------------------------------------------------------
 
 /** A parcel from the assessor: outline (lon/lat, open) and year built. */
