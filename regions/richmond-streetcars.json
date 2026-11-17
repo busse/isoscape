@@ -31,7 +31,7 @@
       "match": "Marshall Street Viaduct",
       "deck": 7,
       "pierSpacing": 75,
-      "endPier": 18
+      "abutment": 30
     }
   ],
   "minBuildingArea": 20,

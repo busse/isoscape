@@ -2050,8 +2050,8 @@ const deckHeight = (region: Region, chain: BridgeChain): number => {
  * A bridge, cut into short spans so each can take its own place in the paint order. The deck
  * ramps up from the ground at both ends; piers drop from it at a fixed spacing.
  */
-const endPier = (region: Region, chain: BridgeChain): number | undefined => {
-  for (const rule of region.bridges ?? []) if (chain.names.includes(rule.match.toLowerCase())) return rule.endPier
+const abutmentOf = (region: Region, chain: BridgeChain): number | undefined => {
+  for (const rule of region.bridges ?? []) if (chain.names.includes(rule.match.toLowerCase())) return rule.abutment
   return undefined
 }
 
@@ -2645,20 +2645,7 @@ const bridgePieces = (
   const items: Item[] = []
   const carOnDeck: Item[] = []
   let traveled = 0
-  // Where the piers stand along the deck: every `spacing` from half a spacing in, and with the
-  // bridge's `endPier`, one that far from each end (the regular ones within a quarter spacing of
-  // it left out).
-  const stations: number[] = []
-  for (let at = spacing / 2; at <= dl.total + spacing; at += spacing) stations.push(at)
-  const ends = endPier(region, chain)
-  if (ends !== undefined && dl.total > 2 * ends) {
-    const kept = stations.filter((at) => Math.abs(at - ends) >= spacing / 4 && Math.abs(at - (dl.total - ends)) >= spacing / 4)
-    stations.length = 0
-    stations.push(...[ends, ...kept, dl.total - ends].sort((a, b) => a - b))
-  }
-  let pierAt = 0
-  let nextPier = stations[0] ?? Infinity
-  const advance = () => { pierAt++; nextPier = pierAt < stations.length ? stations[pierAt] : nextPier + spacing }
+  let nextPier = spacing / 2
   let nextCar = Math.min(TRAM_SPACING / 2, dl.total * 0.45)
   for (let i = 0; i + 1 < pts.length; i++) {
     const a = pts[i]
@@ -2671,7 +2658,7 @@ const bridgePieces = (
       const p0: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
       const p1: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 1)) / n, a[1] + ((b[1] - a[1]) * (k + 1)) / n]
       if (!insideRect(p0, view.frame) || !insideRect(p1, view.frame)) {
-        while (nextPier <= s1) advance()
+        while (nextPier <= s1) nextPier += spacing
         continue
       }
       const quad = segmentQuad(p0, p1, width / 2, width / 2)
@@ -2682,7 +2669,7 @@ const bridgePieces = (
       // by it; drawn, it would cut through the walls and roof.
       const host = buildingAt(roofs, [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2])
       if (host !== null && host.base <= Math.max(z0, z1) && host.top >= Math.max(z0, z1)) {
-        while (nextPier <= s1) advance()
+        while (nextPier <= s1) nextPier += spacing
         continue
       }
       const shapes: Shape[] = []
@@ -2720,7 +2707,7 @@ const bridgePieces = (
             })
           }
         }
-        advance()
+        nextPier += spacing
       }
       // Fascia on whichever long side faces the camera.
       const [ql0, ql1, qr1, qr0] = quad
@@ -2819,9 +2806,11 @@ const bridgePieces = (
     }
     traveled += len
   }
-  // With the bridge's `endPier`, each end's first `endPier` meters stand on an abutment: the
+  // With the bridge's `abutment` (meters), each end's first stretch stands on an abutment: the
   // deck's side facing the camera walled down to the ground, so a deck that springs from a bluff
-  // reads as built out from it rather than hung in the air.
+  // reads as built out from it rather than hung in the air. The wall is painted with the end's
+  // deck piece, under its deck, so it adds no item and changes no other item's order.
+  const ends = abutmentOf(region, chain)
   if (ends !== undefined && dl.total > 2 * ends) {
     const at = (s: number): { p: Vec2; d: Vec2 } => {
       let i = 0
@@ -2831,7 +2820,9 @@ const bridgePieces = (
       const u = Math.max(0, Math.min(1, (s - cum[i]) / L))
       return { p: [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u], d: [(b[0] - a[0]) / L, (b[1] - a[1]) / L] }
     }
-    for (const [k, s0, s1] of [[0, 0, ends], [1, dl.total - ends, dl.total]] as const) {
+    const decks = items.filter((it) => it.span !== undefined && it.pier !== true)
+    for (const [host, s0, s1] of [[decks[0], 0, ends], [decks[decks.length - 1], dl.total - ends, dl.total]] as const) {
+      if (host === undefined) continue
       const ss: number[] = []
       for (let x = s0; x < s1; x += 1) ss.push(x)
       ss.push(s1)
@@ -2842,17 +2833,7 @@ const bridgePieces = (
       if (!side.every((q) => insideRect(q, view.frame))) continue
       const top = side.map((q, j) => view.toScreen(q, zAt(ss[j])))
       const foot = side.map((q, j) => view.toScreen(q, Math.min(zAt(ss[j]), terrain.z(q))))
-      items.push({
-        id: `${line.id}.abutment${k}`,
-        kind: 'bridge',
-        hull: convexHull([...side, ...ss.map((x) => at(x).p)]),
-        zMin: Math.min(...side.map((q) => terrain.z(q))),
-        zMax: Math.max(...ss.map((x) => zAt(x))),
-        key: mid.p[1],
-        shapes: [{ pts: [...top, ...foot.reverse()], fill: pal.fascia, ink: true }],
-        dots: [],
-        pier: true,
-      })
+      ;(host.shapes as Shape[]).unshift({ pts: [...top, ...foot.reverse()], fill: pal.fascia, ink: true })
     }
   }
   if (towers !== undefined) items.push(...cablePieces(view, line.id, pts, cum, zAt, towers))
