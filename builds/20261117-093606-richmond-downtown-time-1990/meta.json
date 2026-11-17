@@ -1,0 +1,141 @@
+{
+ "name": "richmond-downtown-time-1990",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1990",
+ "palette": "paper",
+ "note": "wave4: the canal and basin as water of their own, the river's bridges by year (Free Bridge), Seaboard and platforms dated, towers sourced; drawn --with next",
+ "flags": [
+  "--with",
+  "next"
+ ],
+ "viewBox": [
+  -3024,
+  -1671.8840019012491,
+  6048,
+  2727.060916437489
+ ],
+ "bearing": -8.7,
+ "ms": 7982,
+ "stats": {
+  "features": 6649,
+  "unbuiltStreets": 3297,
+  "bridgesAtGrade": 17,
+  "canalBridgesLater": 2,
+  "bridgesWithoutRoads": 6,
+  "plantingsLater": 17,
+  "spursLater": 43,
+  "groundUnderBridgesLowered": 251,
+  "ground": 161,
+  "elevationDatum": -0.1,
+  "elevationTop": 56.8,
+  "streetcarLines": 0,
+  "ribbons": 1558,
+  "footprintsAdded": 0,
+  "outlinesUnderParts": 4,
+  "footprintsDrawn": 0,
+  "datedFromParcels": 1437,
+  "buildings": 2114,
+  "streetcars": 0,
+  "heightFromTag": 60,
+  "heightFromModel": 0,
+  "heightFromLevels": 326,
+  "heightGuessed": 1728,
+  "year": 1990,
+  "newSincePrevious": 0,
+  "datedCurated": 52,
+  "datedOsm": 625,
+  "datedParcel": 1437,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 23,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 23,
+  "tracedEndHighway": 0,
+  "tracedEndAssumed": 0,
+  "curated": 0,
+  "bridgePieces": 885,
+  "contourSegments": 48861,
+  "rapidCells": 9125,
+  "rapidsReach": 200,
+  "strips": 200
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP",
+  "Buildings dated from assessor records",
+  "Historic buildings traced from Sanborn Fire Insurance Maps, Library of Congress"
+ ],
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "checkLevels": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1990,
+  "series": "richmond-downtown-time",
+  "title": "Expressway and office core",
+  "note": "The Downtown Expressway (1976) runs along the old canal bed; the James Center stands on the Great Basin's site.",
+  "curated": []
+ },
+ "id": "20261117-093606-richmond-downtown-time-1990",
+ "createdAt": "2026-11-17T14:36:06.693Z",
+ "bytes": 13048735,
+ "git": {
+  "commit": "01a2cb8",
+  "dirty": false,
+  "subject": "Merge wave4-richmond-early: Richmond 1886, Then & Now and through time corrected (the canal and basin as water of their own, the river's bridges by year with the Free Bridge, the Seaboard and platforms dated, tall buildings sourced, print text); the published 1925 and 1950 scenes unchanged"
+ },
+ "files": {
+  "svg": "builds/20261117-093606-richmond-downtown-time-1990/image.svg",
+  "thumb": "builds/20261117-093606-richmond-downtown-time-1990/thumb.png",
+  "social": "builds/20261117-093606-richmond-downtown-time-1990/social.png",
+  "preview": "builds/20261117-093606-richmond-downtown-time-1990/preview.jpg"
+ }
+}

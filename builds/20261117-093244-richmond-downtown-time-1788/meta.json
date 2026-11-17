@@ -1,0 +1,149 @@
+{
+ "name": "richmond-downtown-time-1788",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1788",
+ "palette": "paper",
+ "note": "wave4: the canal and basin as water of their own, the river's bridges by year (Free Bridge), Seaboard and platforms dated, towers sourced; drawn --with next",
+ "flags": [
+  "--with",
+  "next"
+ ],
+ "viewBox": [
+  -3024,
+  -1587.0391647884912,
+  6048,
+  2642.2160793247313
+ ],
+ "bearing": -8.7,
+ "ms": 7592,
+ "stats": {
+  "features": 389,
+  "unbuiltStreets": 2828,
+  "bridgesAtGrade": 1,
+  "vergesLater": 63,
+  "plantingsLater": 17,
+  "ground": 30,
+  "elevationDatum": -0.1,
+  "elevationTop": 56.8,
+  "streetcarLines": 0,
+  "ribbons": 100,
+  "footprintsAdded": 0,
+  "footprintsDrawn": 0,
+  "datedFromParcels": 2,
+  "buildings": 6,
+  "streetcars": 0,
+  "heightFromTag": 2,
+  "heightFromModel": 0,
+  "heightFromLevels": 0,
+  "heightGuessed": 4,
+  "year": 1788,
+  "newSincePrevious": 0,
+  "datedCurated": 4,
+  "datedOsm": 0,
+  "datedParcel": 2,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 0,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 0,
+  "tracedEndHighway": 0,
+  "tracedEndAssumed": 0,
+  "curated": 1,
+  "bridgePieces": 21,
+  "contourSegments": 49275,
+  "rapidCells": 9125,
+  "rapidsReach": 200,
+  "strips": 200
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP",
+  "Buildings dated from assessor records"
+ ],
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "checkLevels": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1788,
+  "series": "richmond-downtown-time",
+  "title": "A new capital",
+  "note": "The capital has moved from Williamsburg; Jefferson's Capitol is finished on Shockoe Hill, and John Mayo's toll bridge first crosses the James.",
+  "curated": [
+   {
+    "id": "shockoe-creek",
+    "name": "Shockoe Creek (open stream)",
+    "kind": "creek",
+    "from": 1737,
+    "to": 1890,
+    "note": "The creek ran open between present-day 15th and 16th Streets, dividing the town. A culvert begun in 1877 enclosed part of it, but the 1886 Sanborn map (volume 1, key map and sheets 18 and 19) still draws it open from Broad Street to the Dock, so it is drawn to 1890 (the end approximate). Course approximated as midway between the two streets.",
+    "sources": [
+     "https://sah-archipedia.org/node/285",
+     "https://www.loc.gov/item/sanborn09064_001/"
+    ]
+   }
+  ]
+ },
+ "id": "20261117-093244-richmond-downtown-time-1788",
+ "createdAt": "2026-11-17T14:32:44.793Z",
+ "bytes": 9495210,
+ "git": {
+  "commit": "01a2cb8",
+  "dirty": false,
+  "subject": "Merge wave4-richmond-early: Richmond 1886, Then & Now and through time corrected (the canal and basin as water of their own, the river's bridges by year with the Free Bridge, the Seaboard and platforms dated, tall buildings sourced, print text); the published 1925 and 1950 scenes unchanged"
+ },
+ "files": {
+  "svg": "builds/20261117-093244-richmond-downtown-time-1788/image.svg",
+  "thumb": "builds/20261117-093244-richmond-downtown-time-1788/thumb.png",
+  "social": "builds/20261117-093244-richmond-downtown-time-1788/social.png",
+  "preview": "builds/20261117-093244-richmond-downtown-time-1788/preview.jpg"
+ }
+}

@@ -1,0 +1,218 @@
+{
+ "name": "richmond-downtown-time-1850",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1850",
+ "palette": "paper",
+ "note": "wave4: the canal and basin as water of their own, the river's bridges by year (Free Bridge), Seaboard and platforms dated, towers sourced; drawn --with next",
+ "flags": [
+  "--with",
+  "next"
+ ],
+ "viewBox": [
+  -3024,
+  -1587.0391647884912,
+  6048,
+  2642.2160793247313
+ ],
+ "bearing": -8.7,
+ "ms": 8677,
+ "stats": {
+  "features": 925,
+  "unbuiltStreets": 2496,
+  "bridgesAtGrade": 1,
+  "vergesLater": 63,
+  "plantingsLater": 17,
+  "spursLater": 63,
+  "ground": 33,
+  "elevationDatum": -0.1,
+  "elevationTop": 56.8,
+  "streetcarLines": 0,
+  "ribbons": 387,
+  "footprintsAdded": 0,
+  "footprintsDrawn": 0,
+  "datedFromParcels": 53,
+  "buildings": 110,
+  "streetcars": 0,
+  "heightFromTag": 3,
+  "heightFromModel": 0,
+  "heightFromLevels": 16,
+  "heightGuessed": 91,
+  "year": 1850,
+  "newSincePrevious": 0,
+  "datedCurated": 10,
+  "datedOsm": 47,
+  "datedParcel": 53,
+  "undatedToday": 0,
+  "landmarks": 2,
+  "traced": 0,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 0,
+  "tracedEndHighway": 0,
+  "tracedEndAssumed": 0,
+  "curated": 6,
+  "bridgePieces": 35,
+  "contourSegments": 48689,
+  "rapidCells": 9125,
+  "rapidsReach": 200,
+  "strips": 200
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP",
+  "Buildings dated from assessor records"
+ ],
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "checkLevels": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1850,
+  "series": "richmond-downtown-time",
+  "title": "Mills and rail",
+  "note": "The railroads have reached the city; the canal and mills line the river below Main Street.",
+  "curated": [
+   {
+    "id": "great-basin",
+    "name": "Great Turning Basin, James River & Kanawha Canal",
+    "kind": "water",
+    "from": 1800,
+    "to": 1880,
+    "note": "The canal's Great Basin covered three blocks between Cary and Canal Streets, from 8th to 12th Street. Completed about 1800; railroad yards covered about half of it in the 1880s and all of it by the 1920s (the Kanawha Plaza marker). Drawn whole until 1880 (that year approximate); for what was left of it in 1886 see the next entries. Drawn as still water at its own level, with a smooth bank, on today's ground (see How it's made). The James Center stands on the site.",
+    "sources": [
+     "https://www.hmdb.org/m.asp?m=286691",
+     "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf",
+     "https://en.wikipedia.org/wiki/James_Center",
+     "https://www.loc.gov/item/sanborn09064_001/",
+     "https://www.hmdb.org/m.asp?m=286692"
+    ]
+   },
+   {
+    "id": "kanawha-canal-west",
+    "name": "James River and Kanawha Canal, from Tredegar to the Great Basin",
+    "kind": "creek",
+    "from": 1800,
+    "to": 1895,
+    "note": "The canal's last mile into the Great Basin. Its middle stretch, between 6th and 7th Streets, is read from the 1886 Sanborn map (volume 1, sheet 10, \"Old James River & Kanawha Canal (Mill Canal)\"), placed by the corners of 6th and Byrd, 7th and Byrd and 7th and Canal. West of it the line runs straight to the east end of the canal's dry bed by Tredegar mapped in OpenStreetMap (w307593380), and east of it straight to the basin's west corner, as the 1886 key map shows it: those two runs are approximate. Drawn about 10 m wide (sheet 10 draws it about 8 m) from 1800, the basin's year, to 1895, the end of the basin entries; the railroad laid on its towpath from 1880 is not drawn.",
+    "sources": [
+     "https://www.loc.gov/item/sanborn09064_001/",
+     "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0010/full/pct:25/0/default.jpg",
+     "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0000/full/pct:50/0/default.jpg",
+     "https://www.openstreetmap.org/way/307593380",
+     "https://www.hmdb.org/m.asp?m=286692"
+    ]
+   },
+   {
+    "id": "libby-prison",
+    "name": "Libby Prison (warehouses, 1845\u201352; prison 1862\u201365)",
+    "kind": "landmark",
+    "from": 1845,
+    "to": 1889,
+    "note": "Three brick warehouses, each 110 \u00d7 44 ft and four stories, on the east side of 20th Street between Cary and Dock. Used as a Confederate prison 1862\u201365; dismantled in 1889 and re-erected in Chicago. Footprint from the published dimensions, placed at the corner; not surveyed.",
+    "sources": [
+     "https://www.hmdb.org/m.asp?m=35933"
+    ]
+   },
+   {
+    "id": "lumpkins-jail",
+    "name": "Lumpkin's Jail (slave-trading complex)",
+    "kind": "landmark",
+    "from": 1835,
+    "to": 1876,
+    "note": "The largest of Richmond's slave jails, in the slave-trading district of Shockoe Bottom: a two-and-a-half-story brick building about 41 ft long, operated from the 1830s until 1865 and demolished by 1876. Its foundations were excavated in 2008 beside Main Street Station. Footprint approximate; position from the historical marker.",
+    "sources": [
+     "https://encyclopediavirginia.org/entries/lumpkins-jail/",
+     "https://www.hmdb.org/m.asp?m=40679"
+    ]
+   },
+   {
+    "id": "shockoe-creek",
+    "name": "Shockoe Creek (open stream)",
+    "kind": "creek",
+    "from": 1737,
+    "to": 1890,
+    "note": "The creek ran open between present-day 15th and 16th Streets, dividing the town. A culvert begun in 1877 enclosed part of it, but the 1886 Sanborn map (volume 1, key map and sheets 18 and 19) still draws it open from Broad Street to the Dock, so it is drawn to 1890 (the end approximate). Course approximated as midway between the two streets.",
+    "sources": [
+     "https://sah-archipedia.org/node/285",
+     "https://www.loc.gov/item/sanborn09064_001/"
+    ]
+   },
+   {
+    "id": "rp-byrd-street-approach",
+    "name": "Richmond and Petersburg (Atlantic Coast Line) approach to Byrd Street Station",
+    "kind": "rail",
+    "from": 1838,
+    "to": 1971,
+    "note": "The track from the north end of the Richmond and Petersburg bridge (OSM w710689016) across the Haxall Canal into Byrd Street Station at Seventh and Byrd Streets, the R&P's original Richmond station and later the Atlantic Coast Line's headquarters, closed in 1958. Today nothing of it is mapped north of the bridge. Approximate: one track along the middle of the station's throat, read by eye from the USGS 1:24,000 Richmond quadrangles of 1934 and 1956 (which show the line crossing the canal and fanning into the station yard between Seventh and Eighth Streets south of Byrd) and joined to the bridge's mapped end, about 20 m east of where the maps put it. Drawn with the bridge, from 1838 to 1970 (the R&P's depot stood at 8th and Byrd before Byrd Street Station, and the 1886 Sanborn map, volume 1, sheet 10, shows its tracks fanning in between 7th and 9th south of Canal); the years are the bridge's, not the track's.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge",
+     "https://en.wikipedia.org/wiki/Byrd_Street_Station",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0010/full/pct:25/0/default.jpg"
+    ]
+   }
+  ]
+ },
+ "id": "20261117-093328-richmond-downtown-time-1850",
+ "createdAt": "2026-11-17T14:33:28.332Z",
+ "bytes": 10599851,
+ "git": {
+  "commit": "01a2cb8",
+  "dirty": false,
+  "subject": "Merge wave4-richmond-early: Richmond 1886, Then & Now and through time corrected (the canal and basin as water of their own, the river's bridges by year with the Free Bridge, the Seaboard and platforms dated, tall buildings sourced, print text); the published 1925 and 1950 scenes unchanged"
+ },
+ "files": {
+  "svg": "builds/20261117-093328-richmond-downtown-time-1850/image.svg",
+  "thumb": "builds/20261117-093328-richmond-downtown-time-1850/thumb.png",
+  "social": "builds/20261117-093328-richmond-downtown-time-1850/social.png",
+  "preview": "builds/20261117-093328-richmond-downtown-time-1850/preview.jpg"
+ }
+}
