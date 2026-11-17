@@ -13,7 +13,11 @@ Every line of a derived credit (and its note) prints at CREDIT_MIN_PT or more at
 size the sheet is sold at (spec "serves": a 24x36 file is also printed as an 8x12, a third of its
 size). Where the band's own credit size cannot reach that, the credit and note are set at that
 size, right-aligned in a column between the title and the corner kept for the title block (as wide
-as the block comes to on any face stamped from the sheet), on as many lines as they need. Sheets that already meet it are composed exactly as before.
+as the block comes to on any face stamped from the sheet), on as many lines as they need. Where a
+long subtitle leaves that column too short for them, they go on wide lines instead, from the end
+of the title to the art's right edge, above the title block's corner (as tall as the block comes
+to on any face) and the subtitle; the art is not moved or cropped. Sheets that already meet it
+are composed exactly as before.
 
 A design with "contain": true shows its region whole, letterboxed in the panel area, instead of
 cropping it to the panel's shape (for very long views on a panorama sheet).
@@ -244,14 +248,59 @@ def credit_column(d, design, W, H, m, by, band, dpi, scale, least, sf, faces):
     tf = text_fit(d, design['title'], FONT['bold'], round(band * 0.42), (W - 2 * m) * 0.62)
     left = m + max(d.textlength(design['title'], font=tf), d.textlength(design.get('subtitle', ''), font=sf)) + band * 0.5
     right = W - m - block_reserve(max(W, H) / (dpi * scale), dpi, scale, faces)
-    col = right - left
+    lines, note = credit_lines(d, design, cf, nf, right - left)
+    ly, lead = by + band * 0.15, size * 1.35
+    if ly + lead * (len(lines) + len(note) - 1) + size * 1.1 + (size * 0.35 if note else 0) > H - m:
+        # A long subtitle leaves too narrow a column: set the credit on wide lines instead.
+        return credit_wide(d, design, W, H, m, by, band, dpi, scale, size, cf, nf, tf, sf, faces)
+    for i, (ln, f) in enumerate(lines + note):
+        if note and i == len(lines): ly += size * 0.35
+        d.text((right - d.textlength(ln, font=f), ly), ln, font=f, fill=DIM); ly += lead
+
+
+def credit_lines(d, design, cf, nf, col):
+    """The credit wrapped between its sources (a source wider than the column wrapped between
+    words, balanced) and the note balanced, each as (line, font), for a column `col` px wide."""
     lines = []
     for ln in [x for x in wrap(d, CREDIT, cf, col) if x]:
         lines += [(w, cf) for w in (balanced(d, ln, cf, col) if d.textlength(ln, font=cf) > col else [ln])]
     note = [(w, nf) for w in balanced(d, design['note'], nf, col)] if design.get('note') else []
-    ly, lead = by + band * 0.15, size * 1.35
-    if ly + lead * (len(lines) + len(note) - 1) + size * 1.1 + (size * 0.35 if note else 0) > H - m:
+    return lines, note
+
+
+def block_top(H, m, long_in, dpi, scale, faces):
+    """The lowest any printed thing may reach above the bottom-right corner, in the sheet's
+    pixels: above the tallest title block stamped on any face from this sheet, as stamp.py puts
+    it (titleblock.find_spot: its foot as low as the side margin allows, with 0.35 of its height
+    of clear paper kept round it, searched in 4-pixel cells), less one more cell."""
+    import titleblock
+    best = H
+    for f in list(faces) or [long_in]:
+        k = scale * long_in / f                               # one face pixel, in sheet pixels
+        bh = round(titleblock.H * round(1.3 * (f / 36) ** 0.5 * dpi / 300, 4))
+        clear = 4 * (-(-bh // 4) + int(bh * 0.35 / 4) + 1 + 1)
+        best = min(best, H - m - clear * k)
+    return best
+
+
+def credit_wide(d, design, W, H, m, by, band, dpi, scale, size, cf, nf, tf, sf, faces):
+    """The credit (and note) at `size` px on wide lines, right-aligned to the art's right edge,
+    from the end of the title to the margin, above the title block's corner and the subtitle:
+    for a subtitle so long that the column beside it is too narrow (Gwynn's Island). The art and
+    the title are where they always are; the lines start where the column's would, or higher if
+    they must to clear the block, but their tops never nearer the rule than a quarter of their size."""
+    title_end = m + d.textlength(design['title'], font=tf) + band * 0.5
+    lines, note = credit_lines(d, design, cf, nf, W - m - title_end)
+    lead = size * 1.35
+    asc, desc = cf.getmetrics()
+    depth = lead * (len(lines) + len(note) - 1) + asc + desc + (size * 0.35 if note else 0)
+    sub_top = by + band * 0.18 + tf.size * 1.25 + sf.getbbox('M')[1]
+    floor = min(block_top(H, m, max(W, H) / (dpi * scale), dpi, scale, faces), sub_top - size * 0.5)
+    ly = min(by + band * 0.15, floor - depth)
+    rule_foot = by + band * 0.08 + max(1, round(min(W, H) * 0.0012)) / 2
+    if ly + cf.getbbox(lines[0][0])[1] < rule_foot + size * 0.25:
         raise ValueError(f"{design['title']}: the credit at {size} px needs more room than the band has")
+    right = W - m
     for i, (ln, f) in enumerate(lines + note):
         if note and i == len(lines): ly += size * 0.35
         d.text((right - d.textlength(ln, font=f), ly), ln, font=f, fill=DIM); ly += lead

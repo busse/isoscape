@@ -5,11 +5,11 @@
   "--year",
   "1925"
  ],
- "commit": "8d7f062c4482a525278ddf995a511df826b270ee",
+ "commit": "b5e6a590cd79789defd92e571ef640933642294a",
  "dirty": false,
- "approved": "2026-11-16T21:15:42-0500",
- "svg_sha256": "64fad1e4fa6787aa1283f8e33def6d0bd3d16f46d6349cba057492e308969a27",
- "svg_bytes": 13594705,
+ "approved": "2026-11-16T23:54:02-0500",
+ "svg_sha256": "202fa2fced008d7ccfa4d164887b5b918d41a9171c49bd04559d644192339de9",
+ "svg_bytes": 12886056,
  "viewBox": [
   -3024.0,
   -1592.4,
@@ -54,16 +54,16 @@
    "mean": 0.955
   },
   "church-hill-bluff": {
-   "max": 30.333,
-   "mean": 2.2779
+   "max": 11.111,
+   "mean": 2.1622
   },
   "river-bridges": {
-   "max": 24.333,
-   "mean": 1.035
+   "max": 26.0,
+   "mean": 0.9925
   },
   "dense-traced": {
-   "max": 12.111,
-   "mean": 1.9306
+   "max": 11.333,
+   "mean": 1.9123
   }
  },
  "data": {

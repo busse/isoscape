@@ -153,12 +153,13 @@
  },
  "gwynns-island": {
   "title": "Gwynn's Island",
-  "current": 3,
+  "current": 4,
   "kind": "redraw",
   "records": [
    "v1.json",
    "v2.json",
-   "v3.json"
+   "v3.json",
+   "v4.json"
   ]
  },
  "lm-alcatraz": {

@@ -211,7 +211,7 @@
      "build": "richmond-downtown-time-1925"
     }
    ],
-   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it."
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it. Traced buildings’ heights are assumed from their material."
   },
   "richmond-1950": {
    "title": "Richmond, 1950",
@@ -228,7 +228,7 @@
      "build": "richmond-downtown-time-1950"
     }
    ],
-   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it."
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it. Traced buildings’ heights are assumed from their material."
   },
   "richmond-2026": {
    "title": "Richmond, 2026",

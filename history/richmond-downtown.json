@@ -4,6 +4,8 @@
  "present": 2026,
  "streetsNearBuildings": 60,
  "majorStreetsNearBuildings": true,
+ "parkingFrom": 1960,
+ "canalBridgesFrom": 1999,
  "about": "Each scene draws the buildings standing today that had been built by its year (dated by OSM start_date, else the City of Richmond assessor's year built), plus the curated features below. Buildings since demolished appear only where curated. The ground is today's.",
  "epochs": [
   {
@@ -364,6 +366,109 @@
    "sources": [
     "https://sah-archipedia.org/node/285"
    ]
+  },
+  {
+   "id": "rp-byrd-street-approach",
+   "name": "Richmond and Petersburg (Atlantic Coast Line) approach to Byrd Street Station",
+   "kind": "rail",
+   "from": 1902,
+   "to": 1971,
+   "line": [
+    [
+     -77.4414897,
+     37.5342633
+    ],
+    [
+     -77.4413478,
+     37.5347189
+    ],
+    [
+     -77.4411868,
+     37.535131
+    ],
+    [
+     -77.4410028,
+     37.535543
+    ],
+    [
+     -77.4408304,
+     37.5360008
+    ],
+    [
+     -77.4407039,
+     37.5363671
+    ]
+   ],
+   "note": "The track from the north end of the Richmond and Petersburg bridge (OSM w710689016) across the Haxall Canal into Byrd Street Station at Seventh and Byrd Streets, the R&P's original Richmond station and later the Atlantic Coast Line's headquarters, closed in 1958. Today nothing of it is mapped north of the bridge. Approximate: one track along the middle of the station's throat, read by eye from the USGS 1:24,000 Richmond quadrangles of 1934 and 1956 (which show the line crossing the canal and fanning into the station yard between Seventh and Eighth Streets south of Byrd) and joined to the bridge's mapped end, about 20 m east of where the maps put it. Drawn with the bridge, 1902 to 1970; the years are the bridge's, not the track's.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge",
+    "https://en.wikipedia.org/wiki/Byrd_Street_Station",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "church-hill-tunnel-approach",
+   "name": "Chesapeake and Ohio approach to the Church Hill Tunnel",
+   "kind": "rail",
+   "from": 1873,
+   "to": 1926,
+   "line": [
+    [
+     -77.425031,
+     37.539268
+    ],
+    [
+     -77.424996,
+     37.538765
+    ],
+    [
+     -77.424928,
+     37.538405
+    ],
+    [
+     -77.424856,
+     37.538145
+    ],
+    [
+     -77.4245071,
+     37.5377032
+    ],
+    [
+     -77.4244046,
+     37.5374857
+    ],
+    [
+     -77.4243802,
+     37.5372811
+    ],
+    [
+     -77.424191,
+     37.5371024
+    ],
+    [
+     -77.4240741,
+     37.5369748
+    ],
+    [
+     -77.4238814,
+     37.5368451
+    ],
+    [
+     -77.423253,
+     37.536144
+    ]
+   ],
+   "note": "The C&O's line to the Church Hill Tunnel's west portal, by 18th Street just north of Marshall: it left the old Virginia Central line west of 17th Street and curved southeast. The tunnel opened in 1873, collapsed on October 2, 1925, and its western end was sealed the following spring, so it is drawn through 1925 and not after. Its course: OSM's abandoned branch (w169784705) from the junction with today's Peninsula Subdivision south to 17th Street; then the C&O spur shown on the 1924–25 Sanborn map, volume 1, sheet 24, crossing the block between 17th and 18th Streets, Marshall and Clay, between the Richmond Cold Storage and International Harvester warehouses (the sheet fitted to the four corners of the block, to about a meter, and the line set midway between the warehouses standing today); then straight across 18th Street to the portal mapped in OSM (the tunnel, w6036486). Approximate.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Church_Hill_Tunnel",
+    "https://www.loc.gov/item/sanborn09064_006/",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g09064192401:09064_01_1924-0024/full/pct:25/0/default.jpg",
+    "https://www.openstreetmap.org/way/169784705",
+    "https://www.openstreetmap.org/way/6036486"
+   ],
+   "confidence": "approximate"
   }
  ],
  "rules": [
@@ -472,6 +577,22 @@
   },
   {
    "where": {
+    "name": "South 8th Street Connector"
+   },
+   "eras": [
+    [
+     1957,
+     null
+    ]
+   ],
+   "note": "The curved link from 8th Street to Canal Street crosses ground that the USGS Richmond quadrangles of 1934 and 1956 show as rail yard, so it is later; when it was built is not known here, and it is drawn from 1957: approximate.",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+   ]
+  },
+  {
+   "where": {
     "name": "Mayo Bridge"
    },
    "eras": [
@@ -546,6 +667,43 @@
    "note": "David Ross built the mill canal in 1790.",
    "sources": [
     "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w710689016"
+    ]
+   },
+   "eras": [
+    [
+     1902,
+     1970
+    ],
+    [
+     2026,
+     null
+    ]
+   ],
+   "note": "The Richmond and Petersburg (later Atlantic Coast Line) bridge over the James: rebuilt on concrete piers in 1902, removed in 1970. OSM keeps it as an abandoned railway, and today's scene (2026) draws it as OSM maps it, as before.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge"
+   ]
+  },
+  {
+   "where": {
+    "tag": "railway",
+    "is": [
+     "abandoned",
+     "disused",
+     "razed",
+     "dismantled"
+    ]
+   },
+   "eras": [],
+   "note": "Lines out of use or taken up today: OSM does not say when they ran, and what is left of them are fragments that end in open ground or against later buildings (the spurs on the Manchester bank; the approach to the Church Hill Tunnel, which collapsed on 2 October 1925). Drawn in today's view only, unless a rule above dates one from a source.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Church_Hill_Tunnel"
    ]
   },
   {
@@ -667,6 +825,44 @@
     ]
    ],
    "note": "Road bridges not named above (over the rail lines and the interstate) are dated with the viaducts: approximate."
+  },
+  {
+   "where": {
+    "tag": "junction",
+    "is": [
+     "roundabout",
+     "circular"
+    ]
+   },
+   "eras": [
+    [
+     1990,
+     null
+    ]
+   ],
+   "note": "Roundabouts and traffic circles: the modern roundabout came to the United States in 1990, and those mapped here belong to the riverfront's redevelopment. Drawn from 1990: approximate.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Roundabout"
+   ]
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "service"
+    ],
+    "without": [
+     "service",
+     "name"
+    ]
+   },
+   "eras": [
+    [
+     1960,
+     null
+    ]
+   ],
+   "note": "Unnamed service roads of no particular kind (the drives and rings of parking lots, private drives): dated with surface parking, from 1960. Approximate, not sourced. Alleys (service=alley) and named service streets stay with the street grid."
   },
   {
    "where": {
@@ -963,6 +1159,125 @@
    "year": 1921,
    "source": "https://en.wikipedia.org/wiki/Virginia_Mutual_Building",
    "note": "Built 1920–21 at 821 E. Main St. Curating its neighbor, the First National Bank Building, sets aside their shared parcel's year, so it is dated here."
+  },
+  {
+   "id": "w263127152",
+   "name": "Ross Building",
+   "year": 1965,
+   "source": "https://skyscraperpage.com/b18849",
+   "note": "The Ross Building, 801 E. Main St. (OSM: 8th and Main Apartments, old name Ross Building, 18 levels), finished in 1965: SkyscraperPage gives 1965 and 18 floors, and the Main Street Banking Historic District nomination of 2025 gives 1965 (16 stories): https://www.dhr.virginia.gov/wp-content/uploads/2023/03/127-6031_Main_St_Banking_HD_2025_UpdateBD_NRHP_Nomination_FINAL.pdf. The assessor's year (1925) put the tower in the 1925 and 1950 scenes. What stood on the lot before is not known here, so earlier scenes leave the lot empty."
+  },
+  {
+   "id": "w263153832",
+   "name": "Chesapeake and Potomac Telephone Company Building",
+   "year": 1929,
+   "source": "https://sah-archipedia.org/node/1098",
+   "note": "The C&P Telephone building at 703 E. Grace St. (OSM: Verizon Building), built in 1929 by Voorhees, Gmelin and Walker, with later additions. The assessor's year (1900) put it in the 1925 scene. Its building part (w365156597) takes this year."
+  },
+  {
+   "id": "w113029203",
+   "name": "Federal Reserve Bank building (Supreme Court of Virginia)",
+   "year": 1921,
+   "source": "https://en.wikipedia.org/wiki/Federal_Reserve_Bank_of_Richmond",
+   "note": "Built 1919–21 for the Federal Reserve Bank at 100 N. Ninth St.; the Supreme Court of Virginia since. The assessor's year is 1919."
+  },
+  {
+   "id": "w224757094",
+   "name": "Hotel Richmond (Barbara Johns Building)",
+   "year": 1911,
+   "source": "https://en.wikipedia.org/wiki/Hotel_Richmond",
+   "note": "The Hotel Richmond, later the Ninth Street Office Building: its first phase opened in 1904 and it was built out in phases until 1911; drawn whole from 1911. The assessor's year is 1903."
+  },
+  {
+   "id": "w236488175",
+   "name": "Mutual Building",
+   "year": 1912,
+   "source": "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-6031_Main_Street_Banking_HD_2005_NR_FINAL.pdf",
+   "note": "909 E. Main St.: built 1904, its upper floors added in 1912 (Main Street Banking Historic District nomination, 2005); drawn at today's height from 1912. The assessor's year is 1904."
+  },
+  {
+   "id": "w263127149",
+   "name": "Hotel Rueger (The Commonwealth)",
+   "year": 1913,
+   "source": "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-6031_Main_Street_Banking_HD_2005_NR_FINAL.pdf",
+   "note": "The Hotel Rueger at Ninth and Bank streets (later the Commonwealth Park Hotel), built 1912–13 (Main Street Banking Historic District nomination, 2005; its entry is 9 N. Ninth St., OSM's 901 Bank St. is the same corner). The assessor's year is 1917."
+  },
+  {
+   "id": "w263127151",
+   "name": "State and City Bank and Trust Company Building",
+   "year": 1923,
+   "source": "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-6031_Main_Street_Banking_HD_2005_NR_FINAL.pdf",
+   "note": "900 E. Main St., fourteen stories, 1923 (Main Street Banking Historic District nomination, 2005); the west tower of today's Pocahontas Building complex (https://historicrichmond.com/pocahontas-building/)."
+  },
+  {
+   "id": "w263127150",
+   "name": "Pocahontas Building, east tower",
+   "year": 1962,
+   "source": "https://historicrichmond.com/pocahontas-building/",
+   "note": "The east tower of the Pocahontas Building complex at 900 E. Main St., added in 1962 (the 2005 district nomination lists it as a non-historic addition of 1962: https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-6031_Main_Street_Banking_HD_2005_NR_FINAL.pdf). The assessor's year (1923) is the west tower's."
+  },
+  {
+   "id": "w264518636",
+   "name": "American National Bank Building",
+   "year": 1904,
+   "source": "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-6031_Main_Street_Banking_HD_2005_NR_FINAL.pdf",
+   "note": "1001 E. Main St. (OSM: American Heritage Apartments), built 1904 (Main Street Banking Historic District nomination, 2005). The assessor's year is 1910."
+  },
+  {
+   "id": "w264523638",
+   "name": "629 East Main Street",
+   "year": 1922,
+   "source": "https://skyscraperpage.com/b18864",
+   "note": "Fourteen floors, completed 1922 (SkyscraperPage), as the assessor also gives."
+  },
+  {
+   "id": "w264523645",
+   "name": "Virginia Electric and Power Company building (The Edison)",
+   "year": 1913,
+   "source": "https://smandf.com/portfolio/700-centre-tower-annex",
+   "note": "700 E. Franklin St., formerly the headquarters of Virginia Electric & Power Company, a high-rise built in 1913."
+  },
+  {
+   "id": "w264525427",
+   "name": "Richmond Chamber of Commerce (Eskimo Pie) Building",
+   "year": 1912,
+   "source": "https://sah-archipedia.org/node/1066",
+   "note": "530 E. Main St., built in 1912 for the Richmond Chamber of Commerce by Carneal and Johnston. The assessor's year is 1911."
+  },
+  {
+   "id": "w263153830",
+   "name": "Richmond Garage",
+   "year": 1927,
+   "source": "https://historicrichmond.com/richmond-garage-at-6th-and-franklin-streets/",
+   "note": "The Richmond Garage at Sixth and Franklin streets, built in 1927: a parking garage that does date from before the decks of the 1960s (see parkingFrom)."
+  },
+  {
+   "id": "w207771792",
+   "name": "Upper Lofts at Canal Walk",
+   "year": null,
+   "source": "https://www.apartments.com/lofts-and-upper-lofts-at-canal-walk-iii-richmond-va/v56777d/",
+   "note": "No source found for when this seven-level building was built: the listing's 1900 is the assessor's year, the only date there is, and is not taken. Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w389993686",
+   "name": "The Lofts at Shiplock Watch",
+   "year": null,
+   "source": "https://richmondbizsense.com/2020/02/24/land-buys-clear-way-for-shiplock-views-apartment-project/",
+   "note": "Richmond BizSense describes a three- and four-story building, so OSM's nine levels are wrong, and no source found gives its year (the assessor's is 1840). Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w264525430",
+   "name": "501 East Franklin",
+   "year": null,
+   "source": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+   "note": "An eight-level building whose only date is the assessor's (1916); no other source found. Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w366062353",
+   "name": "Virginia Electric and Power Company building, annex",
+   "year": null,
+   "source": "https://smandf.com/portfolio/700-centre-tower-annex",
+   "note": "The seven-story annex of the 1913 tower at 700 E. Franklin St.; no source found gives its year (the assessor's is the tower's lot, 1913). Drawn in today's scene only until a source dates it."
   }
  ],
  "sanborn": {

@@ -138,6 +138,8 @@ export interface Rule {
     readonly bridge?: boolean
     /** OSM ids, such as "w1485004507": for a way a curated feature stands in for. */
     readonly id?: readonly string[]
+    /** Tag keys the feature must not carry (a service road with no `service` kind and no name). */
+    readonly without?: readonly string[]
   }
   /** Spans [from, to): null for an open end. An empty list means "not dated: today only". */
   readonly eras: readonly (readonly [number | null, number | null])[]
@@ -169,7 +171,11 @@ export interface History {
   readonly present: number
   /** Curated years built for particular OSM buildings, which win over every other date. */
   readonly dates: readonly {
-    readonly id: string; readonly name?: string; readonly year: number; readonly until?: number; readonly source: string; readonly note?: string
+    /**
+     * The year it was built, or null where no source gives one: such a building (one whose only
+     * date was a parcel's and is known to be wrong) is drawn in today's scene only.
+     */
+    readonly id: string; readonly name?: string; readonly year: number | null; readonly until?: number; readonly source: string; readonly note?: string
     /** Its height in meters, where OSM's is missing or wrong for the series: the note says where it comes from. */
     readonly height?: number
   }[]
@@ -245,6 +251,18 @@ export interface History {
   readonly streetsUnderCars?: boolean
   /** Bridges drawn at grade before a year, with why (the street crossed there before its bridge). */
   readonly atGrade?: readonly { readonly id: readonly string[]; readonly before: number; readonly note: string; readonly sources?: readonly string[] }[]
+  /**
+   * A parking structure (`building=parking`, `parking=multi-storey`) that only its parcel dates,
+   * to a year before this one, is dated this year instead: the assessor's year is the lot's
+   * earlier building's, not the deck's. A curated date still wins.
+   */
+  readonly parkingFrom?: number
+  /**
+   * A minor road bridge (residential, service, unclassified, living street) over a canal, with
+   * no `start_date`, is drawn from this year only: the canal's bridges of today belong to its
+   * redevelopment, and what crossed it before is not known here. A rule naming the bridge wins.
+   */
+  readonly canalBridgesFrom?: number
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
@@ -289,6 +307,8 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.streetsUnderCars === undefined ? {} : { streetsUnderCars: raw.streetsUnderCars }),
     ...(raw.viaductClearance === undefined ? {} : { viaductClearance: raw.viaductClearance }),
     ...(raw.tracedClearOfStreets === undefined ? {} : { tracedClearOfStreets: raw.tracedClearOfStreets }),
+    ...(raw.parkingFrom === undefined ? {} : { parkingFrom: raw.parkingFrom }),
+    ...(raw.canalBridgesFrom === undefined ? {} : { canalBridgesFrom: raw.canalBridgesFrom }),
   }
 }
 
@@ -311,6 +331,7 @@ const matches = (r: Rule, f: Feature): boolean => {
   const w = r.where
   if (w.id !== undefined && !w.id.includes(f.id)) return false
   if (w.type !== undefined && w.type !== f.type) return false
+  if (w.without !== undefined && w.without.some((k) => f.tags[k] !== undefined)) return false
   if (w.bridge !== undefined && (f.tags.bridge !== undefined && f.tags.bridge !== 'no') !== w.bridge) return false
   if (w.name !== undefined) {
     const needle = w.name.toLowerCase()
@@ -349,8 +370,9 @@ const PLANNED_STREETS = new Set(['tertiary', 'residential', 'unclassified', 'liv
  * no 1925 house anywhere along it was most likely laid out later. A street of the plan's kind
  * (a main road, tertiary, residential, unclassified, living) inside a town plan already laid
  * out (`plans`, lon/lat rings) is kept without houses: the plan is the record that it was laid
- * out. With `major`, main roads (trunk, primary, secondary) must pass the test too. Returns the
- * kept features and how many streets were dropped.
+ * out. With `major`, main roads (trunk, primary, secondary) must pass the test too. A bridge is
+ * never dropped: it carries its street over water or a valley where no house can stand, and its
+ * era rule alone says when it stood. Returns the kept features and how many streets were dropped.
  */
 export const dropUnbuiltStreets = (
   features: readonly Feature[], meters: number, extra: readonly Vec2[] = [], plans: readonly (readonly Vec2[])[] = [], major = false,
@@ -384,6 +406,7 @@ export const dropUnbuiltStreets = (
   let dropped = 0
   const kept = features.filter((f) => {
     if (f.type !== 'line' || !(MINOR_STREETS.has(f.tags.highway ?? '') || (major && MAJOR_STREETS.has(f.tags.highway ?? '')))) return true
+    if (f.tags.bridge !== undefined && f.tags.bridge !== 'no') return true
     if ((PLANNED_STREETS.has(f.tags.highway ?? '') || MAJOR_STREETS.has(f.tags.highway ?? '')) && f.points.some((p) => plans.some((r) => pointInRing(p, r as Vec2[])))) return true
     const isService = f.tags.highway === 'service' && service !== undefined
     const near = isService ? nearService : nearStreet
@@ -425,9 +448,17 @@ export interface Dated {
   readonly source: 'curated' | 'osm' | 'parcel'
 }
 
+/** A parking structure: what `parkingFrom` holds to a later year when only its parcel dates it. */
+export const isParkingStructure = (t: Tags): boolean =>
+  t.building === 'parking' || t['building:part'] === 'parking' || t.parking === 'multi-storey'
+
 /**
  * Date each building: a curated year first, then its own `start_date` when OSM has one, else
- * the year built of the parcel its center falls in.
+ * the year built of the parcel its center falls in. A building part (`building:part`) of a
+ * curated building takes its building's curated year: the part a parcel would date is a piece
+ * of the same tower. A curated year of null leaves a building undated (today's scene only).
+ * With `parkingFrom`, a parking structure dated by its parcel alone to an earlier year is dated
+ * `parkingFrom`.
  *
  * An assessor records one year per parcel: the year of its main building. Up to `few`
  * buildings on a lot (a row split in OSM, a house and its shed) all take it; with more, only one
@@ -435,7 +466,7 @@ export interface Dated {
  * Capitol Square) the year is no one's in particular, and those buildings stay undated.
  */
 export const dateBuildings = (
-  buildings: readonly PolygonFeature[], parcels: readonly Parcel[], curated: History['dates'] = [], few = 4, crowd = 8,
+  buildings: readonly PolygonFeature[], parcels: readonly Parcel[], curated: History['dates'] = [], few = 4, crowd = 8, parkingFrom?: number,
 ): Map<string, Dated> => {
   // Parcels into a grid of ~110 m cells, by their bounding boxes.
   const cell = 0.001
@@ -466,8 +497,9 @@ export const dateBuildings = (
     const mine = fixed.get(b.id)
     const own = parseYear(b.tags.start_date ?? b.tags['building:start_date'] ?? b.tags.construction_date)
     const until = untils.get(b.id)
-    if (mine !== undefined) out.set(b.id, { year: mine, ...(until === undefined ? {} : { until }), source: 'curated' })
-    else if (own !== null) out.set(b.id, { year: own, source: 'osm' })
+    if (mine !== undefined) {
+      if (mine !== null) out.set(b.id, { year: mine, ...(until === undefined ? {} : { until }), source: 'curated' })
+    } else if (own !== null) out.set(b.id, { year: own, source: 'osm' })
     // Every building counts as a tenant of its parcel, dated or not.
     const k = parcelOf(b)
     if (k < 0) continue
@@ -484,7 +516,26 @@ export const dateBuildings = (
     // A few buildings on one lot (a row, a house and its shed) are taken to share its year;
     // among more, only one clearly larger than the rest.
     const takers = ranked.length <= few ? ranked : size(ranked[0]) >= 2 * size(ranked[1]) ? [ranked[0]] : []
-    for (const b of takers) if (!out.has(b.id)) out.set(b.id, { year: parcels[k].year, source: 'parcel' })
+    for (const b of takers) {
+      if (out.has(b.id) || fixed.has(b.id)) continue
+      const year = parkingFrom !== undefined && isParkingStructure(b.tags) ? Math.max(parcels[k].year, parkingFrom) : parcels[k].year
+      out.set(b.id, { year, source: 'parcel' })
+    }
+  }
+  // A part takes the curated year of the building it is a part of (the smallest curated outline
+  // holding its center), unless the part is curated itself.
+  const curatedOutlines = buildings.filter((b) => b.tags.building !== undefined && fixed.has(b.id))
+  if (curatedOutlines.length > 0) {
+    for (const p of buildings) {
+      if (p.tags['building:part'] === undefined || p.tags.building !== undefined || fixed.has(p.id)) continue
+      const c = centroid(p.outers[0])
+      const holder = curatedOutlines.filter((b) => pointInRing(c, b.outers[0])).sort((a, b) => size(a) - size(b))[0]
+      if (holder === undefined) continue
+      const year = fixed.get(holder.id)
+      const until = untils.get(holder.id)
+      if (year === null || year === undefined) out.delete(p.id)
+      else out.set(p.id, { year, ...(until === undefined ? {} : { until }), source: 'curated' })
+    }
   }
   return out
 }
@@ -574,6 +625,10 @@ export const fetchYearBuilt = async (r: Region, src: YearBuiltSource, dir: strin
 /** Roads whose coming changed what was there: a bridge over one, or a verge along one, is no older. */
 const WORKS = new Set(['motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'secondary', 'secondary_link', 'tertiary_link'])
 
+/** Roads of `all` built after `year` whose coming changed the ground (`WORKS`): an interstate, its ramps, a main road. */
+export const laterWorkLines = (all: readonly Feature[], year: number, h: History): Vec2[][] =>
+  all.filter((f): f is Extract<Feature, { type: 'line' }> => f.type === 'line' && WORKS.has(f.tags.highway ?? '') && !featureAlive(f, year, h)).map((f) => f.points)
+
 /** Do segments ab and cd cross (not merely touch at an end)? */
 const crosses = (a: Vec2, b: Vec2, c: Vec2, d: Vec2): boolean => {
   const o = (p: Vec2, q: Vec2, r: Vec2) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
@@ -585,10 +640,10 @@ const crosses = (a: Vec2, b: Vec2, c: Vec2, d: Vec2): boolean => {
  * What the era rules alone cannot see, because it depends on what lies next to a feature.
  * `kept` are the features standing in `year`, `all` every feature mapped today.
  *
- * - A road bridge stands only over something there in its year: one whose every crossing (a
- *   road, a railway or a waterway mapped under it) is not yet built or already gone carries
- *   its street at grade instead (its bridge and layer tags dropped). A street bridge over
- *   the turnpike (1958) is not drawn in 1950; the street is.
+ * - A road or rail bridge stands only over something there in its year: one whose every
+ *   crossing (a road, a railway or a waterway mapped under it) is not yet built or already gone
+ *   carries its street or track at grade instead (its bridge and layer tags dropped). A street
+ *   bridge over the turnpike (1958) is not drawn in 1950; the street is.
  * - Woods and scrub lying along roads not yet built (at least `share` of the outline within
  *   `reach` meters of them) are those roads' verges, the planted ground of an interchange,
  *   and are dated with them; so are the kinds a series adds (`vergeTags`, such as grass).
@@ -612,7 +667,13 @@ export const laterWorks = (
   let verges = 0
   // A bridge is its spans: bridge ways of one street joined end to end. The spans over the
   // crossing and those beside it go to grade together.
-  const isBridge = (f: Feature) => f.type === 'line' && f.tags.highway !== undefined && f.tags.bridge !== undefined && f.tags.bridge !== 'no'
+  // A rail bridge counts only standing alone, with track on the ground at both ends: one that
+  // meets another deck (a crossover between two viaducts) stays at its height with them.
+  const decked = (f: Feature) => f.type === 'line' && f.tags.bridge !== undefined && f.tags.bridge !== 'no'
+  const onDecks = new Map<string, number>()
+  for (const f of kept) if (decked(f) && f.type === 'line' && f.tags.railway !== undefined) for (const p of f.points) onDecks.set(`${p[0]},${p[1]}`, (onDecks.get(`${p[0]},${p[1]}`) ?? 0) + 1)
+  const alone = (f: Extract<Feature, { type: 'line' }>) => [f.points[0], f.points[f.points.length - 1]].every((p) => (onDecks.get(`${p[0]},${p[1]}`) ?? 0) <= 1)
+  const isBridge = (f: Feature) => decked(f) && f.type === 'line' && (f.tags.highway !== undefined || (f.tags.railway !== undefined && alone(f)))
   const spans = kept.filter(isBridge) as Extract<Feature, { type: 'line' }>[]
   const parent = new Map(spans.map((f) => [f.id, f.id]))
   const find = (id: string): string => { let r = id; while (parent.get(r) !== r) r = parent.get(r)!; return r }
@@ -811,4 +872,150 @@ export const dropOrphanBridges = (kept: readonly Feature[]): { kept: Feature[]; 
     if (ends.length > 0 && !ends.every(reached)) for (const f of members) gone.add(f)
   }
   return { kept: kept.filter((f) => !gone.has(f)), dropped: gone.size }
+}
+
+/** Minor roads whose bridges over a canal `canalBridgesFrom` holds to its year. */
+const CANAL_BRIDGE_ROADS = new Set(['residential', 'service', 'unclassified', 'living_street'])
+
+/** Planted ground: what `pastGround` dates with the buildings around it when it is small. */
+const PLANTING = new Set(['scrub', 'wood', 'grassland', 'heath', 'water'])
+
+/**
+ * What a past year leaves out that only its neighbors can show (never called for today's scene):
+ *
+ * - A minor road bridge with no `start_date` crossing a canal (a canal way or a canal's water)
+ *   is not drawn before the history's `canalBridgesFrom`, unless a rule names it (`id`).
+ * - A road bridge whose spans, joined end to end, do not meet a road of the year at each of
+ *   their ends (a tunnel does not count: it is not drawn) is left out: a piece of deck whose
+ *   approaches came later, or that leads into nothing drawn.
+ * - Planting beds and ponds: a polygon of scrub, wood, grassland, heath or still water (no name,
+ *   no waterway) under `small` m² is landscaping, dated with the nearest dated building within
+ *   `reach` meters (the development around it): drawn only from that building's year. With no
+ *   dated building that near it is not part of a development (a thicket on a river island) and
+ *   is kept.
+ *
+ * - A rail spur, siding or yard track that ends with no building of the year within `reach`
+ *   meters of its end is left out, and so on back along the spurs that led only to it: today's
+ *   spurs serve today's buildings, and drawn in a past year one stops dead in open ground.
+ *
+ * `kept` are the features standing in `year` (after the era rules), `all` every feature mapped
+ * today, `dates` the buildings' years, `traced` points of the year's traced buildings. Returns
+ * the kept features and the counts left out.
+ */
+export const pastGround = (
+  all: readonly Feature[], kept: readonly Feature[], year: number, h: History, dates: ReadonlyMap<string, { readonly year: number }>,
+  small = 2000, reach = 40, traced: readonly Vec2[] = [],
+): { kept: Feature[]; canalBridges: number; orphanBridges: number; plantings: number; spurs: number } => {
+  const lat0 = all.length > 0 ? (all[0].type === 'line' ? all[0].points[0][1] : all[0].outers[0][0][1]) : 0
+  const kx = 111320 * Math.cos((lat0 * Math.PI) / 180), ky = 110540
+  const m = (p: Vec2): Vec2 => [p[0] * kx, p[1] * ky]
+  const named = new Set(h.rules.flatMap((r) => r.where.id ?? []))
+  const isRoadBridge = (f: Feature): f is Extract<Feature, { type: 'line' }> => f.type === 'line' && f.tags.highway !== undefined && f.tags.bridge !== undefined && f.tags.bridge !== 'no'
+  // Canals: their ways and their water, in meters.
+  const canalLines = all.filter((f): f is Extract<Feature, { type: 'line' }> => f.type === 'line' && f.tags.waterway === 'canal').map((f) => f.points.map(m))
+  const canalRings = all.filter((f): f is PolygonFeature => f.type === 'polygon' && (f.tags.water === 'canal' || f.tags.waterway === 'canal')).flatMap((f) => f.outers.map((r) => r.map(m)))
+  const overCanal = (pts: readonly Vec2[]): boolean => {
+    const q = pts.map(m)
+    for (let i = 1; i < q.length; i++) {
+      for (const c of [...canalLines, ...canalRings.map((r) => [...r, r[0]])]) {
+        for (let k = 1; k < c.length; k++) if (crosses(q[i - 1], q[i], c[k - 1], c[k])) return true
+      }
+    }
+    return q.some((p) => canalRings.some((r) => pointInRing(p, r)))
+  }
+  let canalBridges = 0
+  let out = kept.filter((f) => {
+    if (h.canalBridgesFrom === undefined || year >= h.canalBridgesFrom || !isRoadBridge(f) || !CANAL_BRIDGE_ROADS.has(f.tags.highway ?? '')) return true
+    if (named.has(f.id) || parseYear(f.tags.start_date) !== null || !overCanal(f.points)) return true
+    canalBridges++
+    return false
+  })
+  // Bridges joined end to end (by shared end points), and whether any end of the group meets a
+  // road of the year that is not one of its own spans.
+  const key = (p: Vec2) => `${p[0]},${p[1]}`
+  const roadNodes = new Set<string>()
+  for (const f of out) if (f.type === 'line' && f.tags.highway !== undefined && (f.tags.bridge === undefined || f.tags.bridge === 'no') && (f.tags.tunnel === undefined || f.tags.tunnel === 'no')) for (const p of f.points) roadNodes.add(key(p))
+  const spans = out.filter(isRoadBridge)
+  const parent = new Map(spans.map((f) => [f.id, f.id]))
+  const find = (id: string): string => { let r = id; while (parent.get(r) !== r) r = parent.get(r)!; return r }
+  const byEnd = new Map<string, string[]>()
+  for (const f of spans) for (const p of [f.points[0], f.points[f.points.length - 1]]) byEnd.set(key(p), [...(byEnd.get(key(p)) ?? []), f.id])
+  for (const ids of byEnd.values()) for (const id of ids.slice(1)) parent.set(find(id), find(ids[0]))
+  // A group's free ends: span ends no other span of the group shares. Each must meet a road of
+  // the year (not a tunnel, which is not drawn): a deck that ends in nothing, or runs into a
+  // tunnel, is a stub.
+  const ends = new Map<string, Vec2[]>()
+  for (const f of spans) {
+    for (const p of [f.points[0], f.points[f.points.length - 1]]) {
+      if ((byEnd.get(key(p)) ?? []).length > 1) continue
+      const g = find(f.id)
+      ends.set(g, [...(ends.get(g) ?? []), p])
+    }
+  }
+  const landed = new Set<string>()
+  for (const [g, ps] of ends) if (ps.every((p) => roadNodes.has(key(p)))) landed.add(g)
+  let orphanBridges = 0
+  out = out.filter((f) => {
+    if (!isRoadBridge(f) || landed.has(find(f.id))) return true
+    orphanBridges++
+    return false
+  })
+  // Plantings, dated with the nearest dated building within `reach`.
+  const buildings = all.filter((f): f is PolygonFeature => f.type === 'polygon' && (f.tags.building !== undefined || f.tags['building:part'] !== undefined) && dates.has(f.id))
+    .map((f) => ({ ring: f.outers[0].map(m), year: dates.get(f.id)!.year }))
+  const area = (r: readonly Vec2[]) => Math.abs(r.reduce((a, p, i) => { const q = r[(i + 1) % r.length]; return a + p[0] * q[1] - q[0] * p[1] }, 0)) / 2
+  const gap = (a: readonly Vec2[], b: readonly Vec2[]): number => {
+    let best = Infinity
+    for (const p of a) for (let i = 0; i < b.length; i++) {
+      const s = b[i], e = b[(i + 1) % b.length]
+      const dx = e[0] - s[0], dy = e[1] - s[1], l2 = dx * dx + dy * dy
+      const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - s[0]) * dx + (p[1] - s[1]) * dy) / l2))
+      best = Math.min(best, Math.hypot(p[0] - s[0] - t * dx, p[1] - s[1] - t * dy))
+    }
+    return best
+  }
+  let plantings = 0
+  out = out.filter((f) => {
+    if (f.type !== 'polygon' || !PLANTING.has(f.tags.natural ?? '') || f.tags.name !== undefined || f.tags.waterway !== undefined) return true
+    if (f.tags.natural === 'water' && f.tags.water !== undefined && f.tags.water !== 'pond') return true
+    const ring = f.outers[0].map(m)
+    if (area(ring) >= small) return true
+    const [x0, y0] = ring.reduce((a, p) => [Math.min(a[0], p[0]), Math.min(a[1], p[1])], [Infinity, Infinity])
+    const [x1, y1] = ring.reduce((a, p) => [Math.max(a[0], p[0]), Math.max(a[1], p[1])], [-Infinity, -Infinity])
+    let nearest: { d: number; year: number } | null = null
+    for (const b of buildings) {
+      if (!b.ring.some((p) => p[0] > x0 - reach && p[0] < x1 + reach && p[1] > y0 - reach && p[1] < y1 + reach)) continue
+      const d = Math.min(gap(ring, b.ring), gap(b.ring, ring))
+      if (d <= reach && (nearest === null || d < nearest.d)) nearest = { d, year: b.year }
+    }
+    // With no building that near, it is not part of a development: natural ground, kept.
+    if (nearest === null || nearest.year <= year) return true
+    plantings++
+    return false
+  })
+  // Spurs that serve nothing of the year.
+  const standing: Vec2[] = [
+    ...out.flatMap((f) => (f.type === 'polygon' && (f.tags.building !== undefined || f.tags['building:part'] !== undefined) ? f.outers[0].map(m) : [])),
+    ...traced.map(m),
+  ]
+  const cell = reach
+  const grid = new Set(standing.map((p) => `${Math.floor(p[0] / cell)},${Math.floor(p[1] / cell)}`))
+  const served = (p: Vec2): boolean => {
+    const [x, y] = m(p)
+    const i = Math.floor(x / cell), j = Math.floor(y / cell)
+    for (let di = -1; di <= 1; di++) for (let dj = -1; dj <= 1; dj++) if (grid.has(`${i + di},${j + dj}`)) return true
+    return false
+  }
+  const isSpur = (f: Feature): f is Extract<Feature, { type: 'line' }> => f.type === 'line' && f.tags.railway !== undefined && ['spur', 'siding', 'yard'].includes(f.tags.service ?? '')
+  let spurs = 0
+  for (;;) {
+    const rails = out.filter((f): f is Extract<Feature, { type: 'line' }> => f.type === 'line' && f.tags.railway !== undefined)
+    const uses = new Map<string, number>()
+    for (const f of rails) for (const p of f.points) uses.set(key(p), (uses.get(key(p)) ?? 0) + 1)
+    const dead = new Set(rails.filter(isSpur).filter((f) => [f.points[0], f.points[f.points.length - 1]].some((e) => uses.get(key(e)) === 1 && !served(e))).map((f) => f.id))
+    if (dead.size === 0) break
+    spurs += dead.size
+    out = out.filter((f) => !dead.has(f.id))
+  }
+  return { kept: out, canalBridges, orphanBridges, plantings, spurs }
 }

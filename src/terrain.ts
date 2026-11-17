@@ -775,6 +775,25 @@ export const drawnElevation = (t: Terrain, k: number): number => {
   return t.level[k] + (e - t.level[k]) * shoreRise(f)
 }
 
+/**
+ * Is a view-meter point on water as drawn: past the traced shoreline (the shore field, read
+ * between its nodes, over one half)? Null before the shore is traced or on flat ground, where
+ * only the mapped outlines say.
+ */
+export const drawnWet = (t: Terrain, p: Vec2): boolean | null => {
+  if (t.flat) return null
+  const fx = (p[0] - t.x0) / t.cell
+  const fy = (p[1] - t.y0) / t.cell
+  const i = Math.floor(fx)
+  const j = Math.floor(fy)
+  if (i < 0 || j < 0 || i + 1 >= t.nx || j + 1 >= t.ny) return null
+  const u = fx - i
+  const v = fy - j
+  const at = (ii: number, jj: number) => t.shore[jj * t.nx + ii]
+  const f = (at(i, j) * (1 - u) + at(i + 1, j) * u) * (1 - v) + (at(i, j + 1) * (1 - u) + at(i + 1, j + 1) * u) * v
+  return f > 0.5
+}
+
 /** Trace the shoreline into `t.shore`, so the drawn ground meets the water on it. */
 export const traceShore = (t: Terrain, water: readonly (readonly Ring[])[], islands: readonly (readonly Ring[])[]): void => {
   if (t.flat) return
