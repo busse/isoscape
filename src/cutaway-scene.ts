@@ -50,8 +50,41 @@ export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean } 
     return { solids: [sweep(profile, p0, u, w, 0, thick)], hulled: false }
   }
   if (h.shape === 'stair') return { solids: stair(outer, seat, top, h.steps ?? 12), hulled: false }
+  if ((h.shape === 'hip' || h.shape === 'gable') && isConvex(outer)) return { solids: [roofSolid(outer, seat, top, h.shape)], hulled: false }
   if (isConvex(outer)) return { solids: [prism(outer, seat, top)], hulled: false }
   return { solids: [prism(convexHull(outer), seat, top)], hulled: true }
+}
+
+/**
+ * A roof on a convex ring (view meters, counter-clockwise), from `seat` at its eaves to a ridge
+ * at `top`: a prism cut by a plane rising inward from each eave. A `hip` rises from every edge
+ * at the pitch that brings its narrowest width to the ridge; a `gable` from its first and third
+ * edges only, at the pitch that meets midway between them.
+ */
+export const roofSolid = (ring: readonly Vec2[], seat: number, top: number, kind: 'hip' | 'gable'): Solid => {
+  const n = ring.length
+  const inward = (i: number) => {
+    const a = ring[i], b = ring[(i + 1) % n]
+    const l = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
+    return { a, nx: -(b[1] - a[1]) / l, ny: (b[0] - a[0]) / l }
+  }
+  // The width across from an edge: the farthest corner inward of it.
+  const across = (i: number) => {
+    const { a, nx, ny } = inward(i)
+    return Math.max(...ring.map((p) => (p[0] - a[0]) * nx + (p[1] - a[1]) * ny))
+  }
+  const eaves = kind === 'hip' ? ring.map((_, i) => i) : [0, 2].filter((i) => i < n)
+  const half = Math.min(...eaves.map(across)) / 2
+  const slope = (top - seat) / Math.max(half, 1e-6)
+  let s: Solid | null = prism(ring, seat, top)
+  for (const i of eaves) {
+    if (s === null) break
+    const { a, nx, ny } = inward(i)
+    // z − slope · (inward distance from the eave) ≤ seat.
+    s = clipSolid(s, { n: [-slope * nx, -slope * ny, 1], d: seat - slope * (a[0] * nx + a[1] * ny) })
+  }
+  if (s === null) return prism(ring, seat, top)
+  return { faces: s.faces.map((f) => (f.role === 'cut' ? { pts: f.pts, role: 'side' as const } : f)) }
 }
 
 /** The tones a modeled part is drawn in, its inside (a dome's ceiling) in plaster. */

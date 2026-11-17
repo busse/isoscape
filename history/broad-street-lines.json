@@ -32583,45 +32583,89 @@
    "name": "Main Street Station (head house)",
    "kind": "landmark",
    "from": 1901,
+   "to": 2026,
    "ring": [
     [
-     -77.4296128,
-     37.5343189
+     -77.4295666,
+     37.5342844
     ],
     [
-     -77.4293474,
-     37.5341598
+     -77.4293461,
+     37.5341522
     ],
     [
-     -77.429222,
-     37.5342931
+     -77.4292125,
+     37.5342942
     ],
     [
-     -77.4294874,
-     37.5344522
+     -77.4294331,
+     37.5344265
     ]
    ],
-   "height": 18.2,
    "tone": "stone",
    "only": "whole",
-   "confidence": "approximate",
-   "note": "The head house, 102 ft by 62 ft 4 in, of golden Roman brick trimmed with terra cotta, drawn as a plain block to its eaves; outline from OpenStreetMap, which matches the 1900 plan. Its height is scaled from photographs (approximate).",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 6.1,
+   "upTo": 26.7,
+   "note": "The head house, 102 ft by 62 ft 4 in (The Railroad Gazette, July 13, 1900), of golden Roman brick over a base of rough stone (HABS VA-848), drawn as a plain block to its cornice; its outline is OpenStreetMap's, which matches the plan. Its heights are scaled from photographs against the 110-ft tower (approximate).",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
-    "https://www.dhr.virginia.gov/?p=15225"
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.openstreetmap.org/way/366226941",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+   ]
+  },
+  {
+   "id": "mss-head-house-west",
+   "name": "Main Street Station (head house)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4295768,
+     37.5343663
+    ],
+    [
+     -77.4295211,
+     37.5343329
+    ],
+    [
+     -77.4294331,
+     37.5344265
+    ],
+    [
+     -77.4294888,
+     37.5344598
+    ]
    ],
-   "to": null
+   "tone": "stone",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 6.1,
+   "upTo": 26.7,
+   "note": "The head house, 102 ft by 62 ft 4 in (The Railroad Gazette, July 13, 1900), of golden Roman brick over a base of rough stone (HABS VA-848), drawn as a plain block to its cornice; its outline is OpenStreetMap's, which matches the plan. Its heights are scaled from photographs against the 110-ft tower (approximate).",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.openstreetmap.org/way/366226941",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+   ]
   },
   {
    "id": "mss-head-house-roof",
    "name": "Main Street Station (roof)",
    "kind": "landmark",
    "from": 1901,
+   "to": 2026,
    "ring": [
     [
-     -77.4296128,
-     37.5343189
+     -77.4295598,
+     37.5342871
     ],
     [
      -77.4293474,
@@ -32632,40 +32676,31 @@
      37.5342931
     ],
     [
-     -77.4294874,
-     37.5344522
+     -77.4294344,
+     37.5344205
     ]
    ],
-   "height": 11.7,
    "tone": "tile",
    "only": "whole",
-   "confidence": "approximate",
-   "note": "The steep hipped roof of red tile, drawn as a plain hip; its ridge height is scaled from photographs (approximate).",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 26.7,
+   "upTo": 37.9,
+   "shape": "hip",
+   "note": "The very steep hipped roof of red tile (The Railroad Gazette, 1900; HABS VA-848), about 11 m from cornice to ridge, drawn plain, without its two rows of dormers and its chimney, and from the tower east (behind the tower it is left flat). Its pitch and ridge are scaled from photographs (approximate).",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf"
-   ],
-   "shape": "revolve",
-   "levels": [
-    [
-     0.0,
-     1.0,
-     0.0
-    ],
-    [
-     11.7,
-     0.3,
-     0.0
-    ]
-   ],
-   "to": null,
-   "on": "mss-head-house"
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+   ]
   },
   {
    "id": "mss-clock-tower",
    "name": "Main Street Station (clock tower)",
    "kind": "landmark",
    "from": 1901,
+   "to": 2026,
    "ring": [
     [
      -77.4296223,
@@ -32684,76 +32719,194 @@
      37.5343663
     ]
    ],
-   "height": 28.7,
    "tone": "stone",
    "only": "whole",
-   "confidence": "approximate",
-   "note": "The clock tower at the southwest corner, 110 ft to the top of its finial (The Railroad Gazette, 1900); drawn as a plain shaft, its stages scaled from photographs (approximate).",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 6.1,
+   "upTo": 32.7,
+   "note": "The clock tower at the southwest corner, 110 ft high to its finial with a clock face on each side (The Railroad Gazette, 1900; HABS VA-848; SAH Archipedia), drawn in plain stages: shaft, clock stage, dome and finial. Its outline is OpenStreetMap's; its stages are scaled from photographs (approximate).",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
-    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38"
-   ],
-   "to": null
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+   ]
   },
   {
-   "id": "mss-clock-tower-cap",
+   "id": "mss-clock-stage",
    "name": "Main Street Station (clock tower)",
    "kind": "landmark",
    "from": 1901,
+   "to": 2026,
    "ring": [
     [
-     -77.4296223,
-     37.5343178
+     -77.4296176,
+     37.5343183
     ],
     [
-     -77.4295666,
-     37.5342844
+     -77.4295673,
+     37.5342882
     ],
     [
-     -77.4295211,
-     37.5343329
+     -77.4295258,
+     37.5343323
     ],
     [
-     -77.4295768,
-     37.5343663
+     -77.4295761,
+     37.5343625
     ]
    ],
-   "height": 5.2,
-   "tone": "tile",
+   "tone": "stone",
    "only": "whole",
-   "confidence": "approximate",
-   "note": "The tower's cap and finial, drawn as a plain point; 110 ft from the ground to the finial (The Railroad Gazette, 1900). Approximate.",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 32.7,
+   "upTo": 36.7,
+   "note": "The clock tower at the southwest corner, 110 ft high to its finial with a clock face on each side (The Railroad Gazette, 1900; HABS VA-848; SAH Archipedia), drawn in plain stages: shaft, clock stage, dome and finial. Its outline is OpenStreetMap's; its stages are scaled from photographs (approximate).",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
-    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38"
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+   ]
+  },
+  {
+   "id": "mss-clock-dome",
+   "name": "Main Street Station (clock tower)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4296192,
+     37.5343182
+    ],
+    [
+     -77.4295671,
+     37.5342869
+    ],
+    [
+     -77.4295242,
+     37.5343325
+    ],
+    [
+     -77.4295763,
+     37.5343637
+    ]
    ],
+   "tone": "tile",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 36.7,
+   "upTo": 40.3,
    "shape": "revolve",
    "levels": [
     [
-     0.0,
-     1.0,
-     0.0
+     0,
+     1,
+     0
+    ],
+    [
+     0.8,
+     0.96,
+     0
+    ],
+    [
+     1.6,
+     0.86,
+     0
+    ],
+    [
+     2.4,
+     0.66,
+     0
+    ],
+    [
+     3.0,
+     0.42,
+     0
     ],
     [
      3.6,
-     0.6,
-     0.0
-    ],
-    [
-     5.2,
-     0.05,
-     0.0
+     0.08,
+     0
     ]
    ],
-   "to": null,
-   "on": "mss-clock-tower"
+   "note": "The tower's square ribbed dome of tile (HABS VA-848), scaled from photographs: approximate.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+   ]
+  },
+  {
+   "id": "mss-clock-finial",
+   "name": "Main Street Station (clock tower)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4295757,
+     37.5343249
+    ],
+    [
+     -77.4295711,
+     37.5343222
+    ],
+    [
+     -77.4295677,
+     37.5343258
+    ],
+    [
+     -77.4295723,
+     37.5343285
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 40.3,
+   "upTo": 41.9,
+   "shape": "revolve",
+   "levels": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     1.6,
+     0.15,
+     0
+    ]
+   ],
+   "note": "The bronze finial, its top 110 ft above the ground (The Railroad Gazette, 1900; SAH Archipedia), drawn as a plain spire; its form is approximate.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+   ]
   },
   {
    "id": "mss-concourse",
    "name": "Main Street Station (concourse)",
    "kind": "landmark",
    "from": 1901,
+   "to": 2026,
    "ring": [
     [
      -77.4294648,
@@ -32772,192 +32925,4871 @@
      37.5345218
     ]
    ],
-   "height": 14.2,
    "tone": "stone",
    "only": "whole",
-   "confidence": "approximate",
-   "note": "The concourse behind the head house, 82 ft wide under a flat roof (The Railroad Gazette, 1900), drawn as a plain block. Approximate.",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 8.0,
+   "upTo": 22.2,
+   "note": "The concourse (the \"lobby\" of the 1900 plan), 82 ft wide behind the head house, one story at the level of the platforms under a flat roof (The Railroad Gazette, 1900; HABS VA-848), 35 ft deep (HAER VA-4, sheet 2), over the baggage room. Its height is approximate.",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf"
-   ],
-   "to": null
-  },
-  {
-   "id": "mss-shed",
-   "name": "Main Street Station train shed",
-   "kind": "landmark",
-   "from": 1901,
-   "ring": [
-    [
-     -77.4294183,
-     37.5346417
-    ],
-    [
-     -77.4284038,
-     37.5357122
-    ],
-    [
-     -77.4280042,
-     37.5354708
-    ],
-    [
-     -77.4290187,
-     37.5344003
-    ]
-   ],
-   "height": 5.1,
-   "tone": "iron",
-   "only": "whole",
-   "confidence": "approximate",
-   "note": "The gable-roofed train shed of 1901, 123 ft wide between its columns with 13 ft 6 in overhangs, and over 500 ft long, standing on the tracks' trestle (HAER VA-4; the National Register gives 530 ft). Its outline is OpenStreetMap's; drawn as a plain mass to the eaves on the track floor, its heights from the HAER cross section (approximate).",
-   "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/?p=15225"
-   ],
-   "to": null,
-   "base": 6.9,
-   "seat": "max"
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif",
+    "https://www.openstreetmap.org/way/113030476"
+   ]
   },
   {
    "id": "mss-shed-roof-0",
    "name": "Main Street Station train shed (roof)",
    "kind": "landmark",
    "from": 1901,
+   "to": 2026,
    "ring": [
     [
-     -77.4293823,
-     37.53462
+     -77.4290146,
+     37.5344025
     ],
     [
-     -77.4283678,
-     37.5356905
+     -77.4288615,
+     37.5345653
     ],
     [
-     -77.4280402,
-     37.5354925
+     -77.4292652,
+     37.5348073
     ],
     [
-     -77.4290547,
-     37.534422
+     -77.4294183,
+     37.5346445
     ]
    ],
-   "height": 3.4,
    "tone": "roof",
    "only": "whole",
-   "confidence": "approximate",
-   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 21.331,
+   "upTo": 28.555,
+   "shape": "gable",
+   "note": "The train shed of 1901, 123 ft wide and 517 ft long (HAER VA-4), its gable roof from the eaves, 21 ft 1 in above the platforms, to the ridge of its trusses, 44 ft 9 in, as the cross section (HAER VA-4, sheet 3) draws it; drawn plain, without the monitor along its ridge, in lengths of about 70 ft. Its level, the track floor's, is approximate.",
    "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
-   ],
-   "to": null,
-   "on": "mss-shed",
-   "seat": "max"
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif",
+    "https://www.dhr.virginia.gov/?p=15225"
+   ]
   },
   {
    "id": "mss-shed-roof-1",
    "name": "Main Street Station train shed (roof)",
    "kind": "landmark",
    "from": 1901,
+   "to": 2026,
    "ring": [
     [
-     -77.4293384,
-     37.5345934
+     -77.4288615,
+     37.5345653
     ],
     [
-     -77.4283239,
-     37.5356639
+     -77.4287084,
+     37.5347281
     ],
     [
-     -77.4280841,
-     37.5355191
+     -77.429112,
+     37.5349701
     ],
     [
-     -77.4290986,
-     37.5344486
+     -77.4292652,
+     37.5348073
     ]
    ],
-   "height": 3.4,
    "tone": "roof",
    "only": "whole",
-   "confidence": "approximate",
-   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 21.331,
+   "upTo": 28.555,
+   "shape": "gable",
+   "note": "The train shed of 1901, 123 ft wide and 517 ft long (HAER VA-4), its gable roof from the eaves, 21 ft 1 in above the platforms, to the ridge of its trusses, 44 ft 9 in, as the cross section (HAER VA-4, sheet 3) draws it; drawn plain, without the monitor along its ridge, in lengths of about 70 ft. Its level, the track floor's, is approximate.",
    "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
-   ],
-   "to": null,
-   "on": "mss-shed-roof-0",
-   "seat": "max"
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif",
+    "https://www.dhr.virginia.gov/?p=15225"
+   ]
   },
   {
    "id": "mss-shed-roof-2",
    "name": "Main Street Station train shed (roof)",
    "kind": "landmark",
    "from": 1901,
+   "to": 2026,
    "ring": [
     [
-     -77.4292944,
-     37.5345669
+     -77.4287084,
+     37.5347281
     ],
     [
-     -77.4282799,
-     37.5356374
+     -77.4285552,
+     37.5348909
     ],
     [
-     -77.4281281,
-     37.5355456
+     -77.4289589,
+     37.5351329
     ],
     [
-     -77.4291426,
-     37.5344751
+     -77.429112,
+     37.5349701
     ]
    ],
-   "height": 3.3,
    "tone": "roof",
    "only": "whole",
-   "confidence": "approximate",
-   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 21.331,
+   "upTo": 28.555,
+   "shape": "gable",
+   "note": "The train shed of 1901, 123 ft wide and 517 ft long (HAER VA-4), its gable roof from the eaves, 21 ft 1 in above the platforms, to the ridge of its trusses, 44 ft 9 in, as the cross section (HAER VA-4, sheet 3) draws it; drawn plain, without the monitor along its ridge, in lengths of about 70 ft. Its level, the track floor's, is approximate.",
    "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
-   ],
-   "to": null,
-   "on": "mss-shed-roof-1",
-   "seat": "max"
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif",
+    "https://www.dhr.virginia.gov/?p=15225"
+   ]
   },
   {
    "id": "mss-shed-roof-3",
    "name": "Main Street Station train shed (roof)",
    "kind": "landmark",
    "from": 1901,
+   "to": 2026,
    "ring": [
     [
-     -77.4292505,
-     37.5345403
+     -77.4285552,
+     37.5348909
     ],
     [
-     -77.428236,
-     37.5356108
+     -77.4284021,
+     37.5350537
     ],
     [
-     -77.428172,
-     37.5355722
+     -77.4288058,
+     37.5352957
     ],
     [
-     -77.4291865,
-     37.5345017
+     -77.4289589,
+     37.5351329
     ]
    ],
-   "height": 3.3,
    "tone": "roof",
    "only": "whole",
-   "confidence": "approximate",
-   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 21.331,
+   "upTo": 28.555,
+   "shape": "gable",
+   "note": "The train shed of 1901, 123 ft wide and 517 ft long (HAER VA-4), its gable roof from the eaves, 21 ft 1 in above the platforms, to the ridge of its trusses, 44 ft 9 in, as the cross section (HAER VA-4, sheet 3) draws it; drawn plain, without the monitor along its ridge, in lengths of about 70 ft. Its level, the track floor's, is approximate.",
    "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif",
+    "https://www.dhr.virginia.gov/?p=15225"
+   ]
+  },
+  {
+   "id": "mss-shed-roof-4",
+   "name": "Main Street Station train shed (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284021,
+     37.5350537
+    ],
+    [
+     -77.428249,
+     37.5352165
+    ],
+    [
+     -77.4286527,
+     37.5354585
+    ],
+    [
+     -77.4288058,
+     37.5352957
+    ]
    ],
-   "to": null,
-   "on": "mss-shed-roof-2",
-   "seat": "max"
+   "tone": "roof",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 21.331,
+   "upTo": 28.555,
+   "shape": "gable",
+   "note": "The train shed of 1901, 123 ft wide and 517 ft long (HAER VA-4), its gable roof from the eaves, 21 ft 1 in above the platforms, to the ridge of its trusses, 44 ft 9 in, as the cross section (HAER VA-4, sheet 3) draws it; drawn plain, without the monitor along its ridge, in lengths of about 70 ft. Its level, the track floor's, is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif",
+    "https://www.dhr.virginia.gov/?p=15225"
+   ]
+  },
+  {
+   "id": "mss-shed-roof-5",
+   "name": "Main Street Station train shed (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.428249,
+     37.5352165
+    ],
+    [
+     -77.4280959,
+     37.5353793
+    ],
+    [
+     -77.4284996,
+     37.5356213
+    ],
+    [
+     -77.4286527,
+     37.5354585
+    ]
+   ],
+   "tone": "roof",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 21.331,
+   "upTo": 28.555,
+   "shape": "gable",
+   "note": "The train shed of 1901, 123 ft wide and 517 ft long (HAER VA-4), its gable roof from the eaves, 21 ft 1 in above the platforms, to the ridge of its trusses, 44 ft 9 in, as the cross section (HAER VA-4, sheet 3) draws it; drawn plain, without the monitor along its ridge, in lengths of about 70 ft. Its level, the track floor's, is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif",
+    "https://www.dhr.virginia.gov/?p=15225"
+   ]
+  },
+  {
+   "id": "mss-shed-roof-6",
+   "name": "Main Street Station train shed (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4280959,
+     37.5353793
+    ],
+    [
+     -77.4279428,
+     37.5355421
+    ],
+    [
+     -77.4283465,
+     37.5357841
+    ],
+    [
+     -77.4284996,
+     37.5356213
+    ]
+   ],
+   "tone": "roof",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 21.331,
+   "upTo": 28.555,
+   "shape": "gable",
+   "note": "The train shed of 1901, 123 ft wide and 517 ft long (HAER VA-4), its gable roof from the eaves, 21 ft 1 in above the platforms, to the ridge of its trusses, 44 ft 9 in, as the cross section (HAER VA-4, sheet 3) draws it; drawn plain, without the monitor along its ridge, in lengths of about 70 ft. Its level, the track floor's, is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif",
+    "https://www.dhr.virginia.gov/?p=15225"
+   ]
+  },
+  {
+   "id": "mss-shed-column-0-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4293841,
+     37.5346206
+    ],
+    [
+     -77.4293787,
+     37.5346173
+    ],
+    [
+     -77.4293746,
+     37.5346217
+    ],
+    [
+     -77.42938,
+     37.5346249
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-0-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4290583,
+     37.5344253
+    ],
+    [
+     -77.4290529,
+     37.534422
+    ],
+    [
+     -77.4290488,
+     37.5344264
+    ],
+    [
+     -77.4290542,
+     37.5344296
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-1-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4293468,
+     37.5346603
+    ],
+    [
+     -77.4293414,
+     37.534657
+    ],
+    [
+     -77.4293373,
+     37.5346613
+    ],
+    [
+     -77.4293427,
+     37.5346646
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-1-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.429021,
+     37.534465
+    ],
+    [
+     -77.4290155,
+     37.5344617
+    ],
+    [
+     -77.4290115,
+     37.534466
+    ],
+    [
+     -77.4290169,
+     37.5344693
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-2-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4293095,
+     37.5346999
+    ],
+    [
+     -77.429304,
+     37.5346967
+    ],
+    [
+     -77.4293,
+     37.534701
+    ],
+    [
+     -77.4293054,
+     37.5347043
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-2-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4289837,
+     37.5345046
+    ],
+    [
+     -77.4289782,
+     37.5345014
+    ],
+    [
+     -77.4289741,
+     37.5345057
+    ],
+    [
+     -77.4289796,
+     37.534509
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-3-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4292722,
+     37.5347396
+    ],
+    [
+     -77.4292667,
+     37.5347364
+    ],
+    [
+     -77.4292626,
+     37.5347407
+    ],
+    [
+     -77.4292681,
+     37.534744
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-3-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4289463,
+     37.5345443
+    ],
+    [
+     -77.4289409,
+     37.5345411
+    ],
+    [
+     -77.4289368,
+     37.5345454
+    ],
+    [
+     -77.4289423,
+     37.5345487
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-4-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4292348,
+     37.5347793
+    ],
+    [
+     -77.4292294,
+     37.534776
+    ],
+    [
+     -77.4292253,
+     37.5347804
+    ],
+    [
+     -77.4292308,
+     37.5347836
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-4-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.428909,
+     37.534584
+    ],
+    [
+     -77.4289036,
+     37.5345807
+    ],
+    [
+     -77.4288995,
+     37.5345851
+    ],
+    [
+     -77.4289049,
+     37.5345883
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-5-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4291975,
+     37.534819
+    ],
+    [
+     -77.4291921,
+     37.5348157
+    ],
+    [
+     -77.429188,
+     37.5348201
+    ],
+    [
+     -77.4291934,
+     37.5348233
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-5-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4288717,
+     37.5346237
+    ],
+    [
+     -77.4288663,
+     37.5346204
+    ],
+    [
+     -77.4288622,
+     37.5346248
+    ],
+    [
+     -77.4288676,
+     37.534628
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-6-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4291602,
+     37.5348587
+    ],
+    [
+     -77.4291548,
+     37.5348554
+    ],
+    [
+     -77.4291507,
+     37.5348597
+    ],
+    [
+     -77.4291561,
+     37.534863
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-6-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4288344,
+     37.5346634
+    ],
+    [
+     -77.428829,
+     37.5346601
+    ],
+    [
+     -77.4288249,
+     37.5346644
+    ],
+    [
+     -77.4288303,
+     37.5346677
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-7-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4291229,
+     37.5348983
+    ],
+    [
+     -77.4291175,
+     37.5348951
+    ],
+    [
+     -77.4291134,
+     37.5348994
+    ],
+    [
+     -77.4291188,
+     37.5349027
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-7-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4287971,
+     37.534703
+    ],
+    [
+     -77.4287916,
+     37.5346998
+    ],
+    [
+     -77.4287876,
+     37.5347041
+    ],
+    [
+     -77.428793,
+     37.5347074
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-8-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4290856,
+     37.534938
+    ],
+    [
+     -77.4290801,
+     37.5349347
+    ],
+    [
+     -77.4290761,
+     37.5349391
+    ],
+    [
+     -77.4290815,
+     37.5349423
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-8-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4287598,
+     37.5347427
+    ],
+    [
+     -77.4287543,
+     37.5347395
+    ],
+    [
+     -77.4287502,
+     37.5347438
+    ],
+    [
+     -77.4287557,
+     37.534747
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-9-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4290483,
+     37.5349777
+    ],
+    [
+     -77.4290428,
+     37.5349744
+    ],
+    [
+     -77.4290387,
+     37.5349788
+    ],
+    [
+     -77.4290442,
+     37.534982
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-9-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4287224,
+     37.5347824
+    ],
+    [
+     -77.428717,
+     37.5347791
+    ],
+    [
+     -77.4287129,
+     37.5347835
+    ],
+    [
+     -77.4287184,
+     37.5347867
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-10-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4290109,
+     37.5350174
+    ],
+    [
+     -77.4290055,
+     37.5350141
+    ],
+    [
+     -77.4290014,
+     37.5350184
+    ],
+    [
+     -77.4290069,
+     37.5350217
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-10-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4286851,
+     37.5348221
+    ],
+    [
+     -77.4286797,
+     37.5348188
+    ],
+    [
+     -77.4286756,
+     37.5348231
+    ],
+    [
+     -77.428681,
+     37.5348264
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-11-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4289736,
+     37.535057
+    ],
+    [
+     -77.4289682,
+     37.5350538
+    ],
+    [
+     -77.4289641,
+     37.5350581
+    ],
+    [
+     -77.4289695,
+     37.5350614
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-11-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4286478,
+     37.5348617
+    ],
+    [
+     -77.4286424,
+     37.5348585
+    ],
+    [
+     -77.4286383,
+     37.5348628
+    ],
+    [
+     -77.4286437,
+     37.5348661
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-12-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4289363,
+     37.5350967
+    ],
+    [
+     -77.4289309,
+     37.5350935
+    ],
+    [
+     -77.4289268,
+     37.5350978
+    ],
+    [
+     -77.4289322,
+     37.5351011
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-12-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4286105,
+     37.5349014
+    ],
+    [
+     -77.4286051,
+     37.5348982
+    ],
+    [
+     -77.428601,
+     37.5349025
+    ],
+    [
+     -77.4286064,
+     37.5349058
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-13-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.428899,
+     37.5351364
+    ],
+    [
+     -77.4288936,
+     37.5351331
+    ],
+    [
+     -77.4288895,
+     37.5351375
+    ],
+    [
+     -77.4288949,
+     37.5351407
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-13-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4285732,
+     37.5349411
+    ],
+    [
+     -77.4285677,
+     37.5349378
+    ],
+    [
+     -77.4285637,
+     37.5349422
+    ],
+    [
+     -77.4285691,
+     37.5349454
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-14-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4288617,
+     37.5351761
+    ],
+    [
+     -77.4288562,
+     37.5351728
+    ],
+    [
+     -77.4288522,
+     37.5351772
+    ],
+    [
+     -77.4288576,
+     37.5351804
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-14-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4285359,
+     37.5349808
+    ],
+    [
+     -77.4285304,
+     37.5349775
+    ],
+    [
+     -77.4285263,
+     37.5349819
+    ],
+    [
+     -77.4285318,
+     37.5349851
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-15-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4288244,
+     37.5352158
+    ],
+    [
+     -77.4288189,
+     37.5352125
+    ],
+    [
+     -77.4288148,
+     37.5352168
+    ],
+    [
+     -77.4288203,
+     37.5352201
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-15-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284985,
+     37.5350205
+    ],
+    [
+     -77.4284931,
+     37.5350172
+    ],
+    [
+     -77.428489,
+     37.5350215
+    ],
+    [
+     -77.4284945,
+     37.5350248
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-16-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.428787,
+     37.5352554
+    ],
+    [
+     -77.4287816,
+     37.5352522
+    ],
+    [
+     -77.4287775,
+     37.5352565
+    ],
+    [
+     -77.428783,
+     37.5352598
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-16-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284612,
+     37.5350601
+    ],
+    [
+     -77.4284558,
+     37.5350569
+    ],
+    [
+     -77.4284517,
+     37.5350612
+    ],
+    [
+     -77.4284571,
+     37.5350645
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-17-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4287497,
+     37.5352951
+    ],
+    [
+     -77.4287443,
+     37.5352919
+    ],
+    [
+     -77.4287402,
+     37.5352962
+    ],
+    [
+     -77.4287456,
+     37.5352995
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-17-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284239,
+     37.5350998
+    ],
+    [
+     -77.4284185,
+     37.5350966
+    ],
+    [
+     -77.4284144,
+     37.5351009
+    ],
+    [
+     -77.4284198,
+     37.5351042
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-18-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4287124,
+     37.5353348
+    ],
+    [
+     -77.428707,
+     37.5353315
+    ],
+    [
+     -77.4287029,
+     37.5353359
+    ],
+    [
+     -77.4287083,
+     37.5353391
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-18-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4283866,
+     37.5351395
+    ],
+    [
+     -77.4283812,
+     37.5351362
+    ],
+    [
+     -77.4283771,
+     37.5351406
+    ],
+    [
+     -77.4283825,
+     37.5351438
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-19-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4286751,
+     37.5353745
+    ],
+    [
+     -77.4286697,
+     37.5353712
+    ],
+    [
+     -77.4286656,
+     37.5353756
+    ],
+    [
+     -77.428671,
+     37.5353788
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-19-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4283493,
+     37.5351792
+    ],
+    [
+     -77.4283438,
+     37.5351759
+    ],
+    [
+     -77.4283398,
+     37.5351803
+    ],
+    [
+     -77.4283452,
+     37.5351835
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-20-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4286378,
+     37.5354141
+    ],
+    [
+     -77.4286323,
+     37.5354109
+    ],
+    [
+     -77.4286283,
+     37.5354152
+    ],
+    [
+     -77.4286337,
+     37.5354185
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-20-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.428312,
+     37.5352188
+    ],
+    [
+     -77.4283065,
+     37.5352156
+    ],
+    [
+     -77.4283024,
+     37.5352199
+    ],
+    [
+     -77.4283079,
+     37.5352232
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-21-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4286005,
+     37.5354538
+    ],
+    [
+     -77.428595,
+     37.5354506
+    ],
+    [
+     -77.4285909,
+     37.5354549
+    ],
+    [
+     -77.4285964,
+     37.5354582
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-21-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4282746,
+     37.5352585
+    ],
+    [
+     -77.4282692,
+     37.5352553
+    ],
+    [
+     -77.4282651,
+     37.5352596
+    ],
+    [
+     -77.4282706,
+     37.5352629
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-22-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4285631,
+     37.5354935
+    ],
+    [
+     -77.4285577,
+     37.5354902
+    ],
+    [
+     -77.4285536,
+     37.5354946
+    ],
+    [
+     -77.4285591,
+     37.5354978
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-22-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4282373,
+     37.5352982
+    ],
+    [
+     -77.4282319,
+     37.5352949
+    ],
+    [
+     -77.4282278,
+     37.5352993
+    ],
+    [
+     -77.4282332,
+     37.5353025
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-23-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4285258,
+     37.5355332
+    ],
+    [
+     -77.4285204,
+     37.5355299
+    ],
+    [
+     -77.4285163,
+     37.5355343
+    ],
+    [
+     -77.4285217,
+     37.5355375
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-23-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4282,
+     37.5353379
+    ],
+    [
+     -77.4281946,
+     37.5353346
+    ],
+    [
+     -77.4281905,
+     37.535339
+    ],
+    [
+     -77.4281959,
+     37.5353422
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-24-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284885,
+     37.5355729
+    ],
+    [
+     -77.4284831,
+     37.5355696
+    ],
+    [
+     -77.428479,
+     37.5355739
+    ],
+    [
+     -77.4284844,
+     37.5355772
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-24-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4281627,
+     37.5353776
+    ],
+    [
+     -77.4281573,
+     37.5353743
+    ],
+    [
+     -77.4281532,
+     37.5353786
+    ],
+    [
+     -77.4281586,
+     37.5353819
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-25-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284512,
+     37.5356125
+    ],
+    [
+     -77.4284458,
+     37.5356093
+    ],
+    [
+     -77.4284417,
+     37.5356136
+    ],
+    [
+     -77.4284471,
+     37.5356169
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-25-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4281254,
+     37.5354172
+    ],
+    [
+     -77.4281199,
+     37.535414
+    ],
+    [
+     -77.4281159,
+     37.5354183
+    ],
+    [
+     -77.4281213,
+     37.5354216
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-26-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284139,
+     37.5356522
+    ],
+    [
+     -77.4284084,
+     37.535649
+    ],
+    [
+     -77.4284044,
+     37.5356533
+    ],
+    [
+     -77.4284098,
+     37.5356566
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-26-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4280881,
+     37.5354569
+    ],
+    [
+     -77.4280826,
+     37.5354537
+    ],
+    [
+     -77.4280785,
+     37.535458
+    ],
+    [
+     -77.428084,
+     37.5354613
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-27-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4283766,
+     37.5356919
+    ],
+    [
+     -77.4283711,
+     37.5356886
+    ],
+    [
+     -77.428367,
+     37.535693
+    ],
+    [
+     -77.4283725,
+     37.5356962
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-27-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4280507,
+     37.5354966
+    ],
+    [
+     -77.4280453,
+     37.5354933
+    ],
+    [
+     -77.4280412,
+     37.5354977
+    ],
+    [
+     -77.4280467,
+     37.5355009
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-28-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4283392,
+     37.5357316
+    ],
+    [
+     -77.4283338,
+     37.5357283
+    ],
+    [
+     -77.4283297,
+     37.5357327
+    ],
+    [
+     -77.4283352,
+     37.5357359
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-28-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4280134,
+     37.5355363
+    ],
+    [
+     -77.428008,
+     37.535533
+    ],
+    [
+     -77.4280039,
+     37.5355374
+    ],
+    [
+     -77.4280093,
+     37.5355406
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-29-w",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4283143,
+     37.5357581
+    ],
+    [
+     -77.4283089,
+     37.5357548
+    ],
+    [
+     -77.4283048,
+     37.5357591
+    ],
+    [
+     -77.4283102,
+     37.5357624
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-shed-column-29-e",
+   "name": "Main Street Station train shed (column)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4279885,
+     37.5355628
+    ],
+    [
+     -77.4279831,
+     37.5355595
+    ],
+    [
+     -77.427979,
+     37.5355638
+    ],
+    [
+     -77.4279844,
+     37.5355671
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "drawn",
+   "elevation": 14.9,
+   "upTo": 21.331,
+   "note": "A column of the shed, one of two rows 118 ft apart and 18 ft on centers (HAER VA-4, sheets 2 and 3), drawn plain to the eaves. Its size is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00003a.tif",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/sheet/00002a.tif"
+   ]
+  },
+  {
+   "id": "mss-deck-0",
+   "name": "Main Street Station (deck)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4294522,
+     37.5345574
+    ],
+    [
+     -77.4291099,
+     37.5343522
+    ],
+    [
+     -77.4288921,
+     37.5345837
+    ],
+    [
+     -77.4292345,
+     37.5347889
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 13.5,
+   "upTo": 14.9,
+   "note": "The deck that carries the stub tracks and platforms at the level of the waiting room, between the two railroads' through tracks (HAER VA-4; photograph VA-4-1 shows it on steel bents), on its trestle 25 ft over the ground (Sanborn, 1952). Its girders' depth is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-deck-1",
+   "name": "Main Street Station (deck)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4292345,
+     37.5347889
+    ],
+    [
+     -77.4288921,
+     37.5345837
+    ],
+    [
+     -77.428739,
+     37.5347465
+    ],
+    [
+     -77.4290814,
+     37.5349517
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 13.5,
+   "upTo": 14.9,
+   "note": "The deck that carries the stub tracks and platforms at the level of the waiting room, between the two railroads' through tracks (HAER VA-4; photograph VA-4-1 shows it on steel bents), on its trestle 25 ft over the ground (Sanborn, 1952). Its girders' depth is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-deck-2",
+   "name": "Main Street Station (deck)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4290814,
+     37.5349517
+    ],
+    [
+     -77.428739,
+     37.5347465
+    ],
+    [
+     -77.4285859,
+     37.5349093
+    ],
+    [
+     -77.4289283,
+     37.5351145
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 13.5,
+   "upTo": 14.9,
+   "note": "The deck that carries the stub tracks and platforms at the level of the waiting room, between the two railroads' through tracks (HAER VA-4; photograph VA-4-1 shows it on steel bents), on its trestle 25 ft over the ground (Sanborn, 1952). Its girders' depth is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-deck-3",
+   "name": "Main Street Station (deck)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4289283,
+     37.5351145
+    ],
+    [
+     -77.4285859,
+     37.5349093
+    ],
+    [
+     -77.4284328,
+     37.5350721
+    ],
+    [
+     -77.4287752,
+     37.5352773
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 13.5,
+   "upTo": 14.9,
+   "note": "The deck that carries the stub tracks and platforms at the level of the waiting room, between the two railroads' through tracks (HAER VA-4; photograph VA-4-1 shows it on steel bents), on its trestle 25 ft over the ground (Sanborn, 1952). Its girders' depth is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-deck-4",
+   "name": "Main Street Station (deck)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4287752,
+     37.5352773
+    ],
+    [
+     -77.4284328,
+     37.5350721
+    ],
+    [
+     -77.4282797,
+     37.5352349
+    ],
+    [
+     -77.428622,
+     37.5354401
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 13.5,
+   "upTo": 14.9,
+   "note": "The deck that carries the stub tracks and platforms at the level of the waiting room, between the two railroads' through tracks (HAER VA-4; photograph VA-4-1 shows it on steel bents), on its trestle 25 ft over the ground (Sanborn, 1952). Its girders' depth is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-deck-5",
+   "name": "Main Street Station (deck)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.428622,
+     37.5354401
+    ],
+    [
+     -77.4282797,
+     37.5352349
+    ],
+    [
+     -77.4281265,
+     37.5353977
+    ],
+    [
+     -77.4284689,
+     37.5356029
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 13.5,
+   "upTo": 14.9,
+   "note": "The deck that carries the stub tracks and platforms at the level of the waiting room, between the two railroads' through tracks (HAER VA-4; photograph VA-4-1 shows it on steel bents), on its trestle 25 ft over the ground (Sanborn, 1952). Its girders' depth is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-deck-6",
+   "name": "Main Street Station (deck)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284689,
+     37.5356029
+    ],
+    [
+     -77.4281265,
+     37.5353977
+    ],
+    [
+     -77.4279734,
+     37.5355605
+    ],
+    [
+     -77.4283158,
+     37.5357657
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 13.5,
+   "upTo": 14.9,
+   "note": "The deck that carries the stub tracks and platforms at the level of the waiting room, between the two railroads' through tracks (HAER VA-4; photograph VA-4-1 shows it on steel bents), on its trestle 25 ft over the ground (Sanborn, 1952). Its girders' depth is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-0-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4293695,
+     37.5346124
+    ],
+    [
+     -77.429365,
+     37.5346097
+    ],
+    [
+     -77.4293616,
+     37.5346133
+    ],
+    [
+     -77.4293661,
+     37.534616
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-0-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4292701,
+     37.5345528
+    ],
+    [
+     -77.4292656,
+     37.5345501
+    ],
+    [
+     -77.4292622,
+     37.5345537
+    ],
+    [
+     -77.4292667,
+     37.5345564
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-0-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4291707,
+     37.5344932
+    ],
+    [
+     -77.4291662,
+     37.5344905
+    ],
+    [
+     -77.4291628,
+     37.5344941
+    ],
+    [
+     -77.4291673,
+     37.5344968
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-0-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4290713,
+     37.5344336
+    ],
+    [
+     -77.4290668,
+     37.5344309
+    ],
+    [
+     -77.4290634,
+     37.5344345
+    ],
+    [
+     -77.4290679,
+     37.5344373
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-2-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4292949,
+     37.5346918
+    ],
+    [
+     -77.4292903,
+     37.534689
+    ],
+    [
+     -77.4292869,
+     37.5346927
+    ],
+    [
+     -77.4292915,
+     37.5346954
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-2-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4291955,
+     37.5346322
+    ],
+    [
+     -77.4291909,
+     37.5346295
+    ],
+    [
+     -77.4291875,
+     37.5346331
+    ],
+    [
+     -77.4291921,
+     37.5346358
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-2-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4290961,
+     37.5345726
+    ],
+    [
+     -77.4290915,
+     37.5345699
+    ],
+    [
+     -77.4290881,
+     37.5345735
+    ],
+    [
+     -77.4290927,
+     37.5345762
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-2-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4289967,
+     37.534513
+    ],
+    [
+     -77.4289921,
+     37.5345103
+    ],
+    [
+     -77.4289887,
+     37.5345139
+    ],
+    [
+     -77.4289933,
+     37.5345166
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-4-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4292202,
+     37.5347711
+    ],
+    [
+     -77.4292157,
+     37.5347684
+    ],
+    [
+     -77.4292123,
+     37.534772
+    ],
+    [
+     -77.4292168,
+     37.5347747
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-4-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4291208,
+     37.5347115
+    ],
+    [
+     -77.4291163,
+     37.5347088
+    ],
+    [
+     -77.4291129,
+     37.5347124
+    ],
+    [
+     -77.4291174,
+     37.5347151
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-4-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4290214,
+     37.5346519
+    ],
+    [
+     -77.4290169,
+     37.5346492
+    ],
+    [
+     -77.4290135,
+     37.5346528
+    ],
+    [
+     -77.429018,
+     37.5346556
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-4-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.428922,
+     37.5345924
+    ],
+    [
+     -77.4289175,
+     37.5345896
+    ],
+    [
+     -77.4289141,
+     37.5345933
+    ],
+    [
+     -77.4289186,
+     37.534596
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-6-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4291456,
+     37.5348505
+    ],
+    [
+     -77.4291411,
+     37.5348478
+    ],
+    [
+     -77.4291377,
+     37.5348514
+    ],
+    [
+     -77.4291422,
+     37.5348541
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-6-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4290462,
+     37.5347909
+    ],
+    [
+     -77.4290417,
+     37.5347882
+    ],
+    [
+     -77.4290383,
+     37.5347918
+    ],
+    [
+     -77.4290428,
+     37.5347945
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-6-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4289468,
+     37.5347313
+    ],
+    [
+     -77.4289423,
+     37.5347286
+    ],
+    [
+     -77.4289389,
+     37.5347322
+    ],
+    [
+     -77.4289434,
+     37.5347349
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-6-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4288474,
+     37.5346717
+    ],
+    [
+     -77.4288429,
+     37.534669
+    ],
+    [
+     -77.4288395,
+     37.5346726
+    ],
+    [
+     -77.428844,
+     37.5346753
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-8-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.429071,
+     37.5349298
+    ],
+    [
+     -77.4290664,
+     37.5349271
+    ],
+    [
+     -77.429063,
+     37.5349307
+    ],
+    [
+     -77.4290676,
+     37.5349334
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-8-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4289716,
+     37.5348702
+    ],
+    [
+     -77.428967,
+     37.5348675
+    ],
+    [
+     -77.4289636,
+     37.5348711
+    ],
+    [
+     -77.4289682,
+     37.5348739
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-8-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4288722,
+     37.5348107
+    ],
+    [
+     -77.4288676,
+     37.5348079
+    ],
+    [
+     -77.4288642,
+     37.5348116
+    ],
+    [
+     -77.4288688,
+     37.5348143
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-8-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4287728,
+     37.5347511
+    ],
+    [
+     -77.4287682,
+     37.5347484
+    ],
+    [
+     -77.4287648,
+     37.534752
+    ],
+    [
+     -77.4287694,
+     37.5347547
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-10-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4289963,
+     37.5350092
+    ],
+    [
+     -77.4289918,
+     37.5350065
+    ],
+    [
+     -77.4289884,
+     37.5350101
+    ],
+    [
+     -77.4289929,
+     37.5350128
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-10-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4288969,
+     37.5349496
+    ],
+    [
+     -77.4288924,
+     37.5349469
+    ],
+    [
+     -77.428889,
+     37.5349505
+    ],
+    [
+     -77.4288935,
+     37.5349532
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-10-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4287975,
+     37.53489
+    ],
+    [
+     -77.428793,
+     37.5348873
+    ],
+    [
+     -77.4287896,
+     37.5348909
+    ],
+    [
+     -77.4287941,
+     37.5348936
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-10-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4286981,
+     37.5348304
+    ],
+    [
+     -77.4286936,
+     37.5348277
+    ],
+    [
+     -77.4286902,
+     37.5348313
+    ],
+    [
+     -77.4286947,
+     37.534834
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-12-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4289217,
+     37.5350885
+    ],
+    [
+     -77.4289172,
+     37.5350858
+    ],
+    [
+     -77.4289138,
+     37.5350894
+    ],
+    [
+     -77.4289183,
+     37.5350922
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-12-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4288223,
+     37.535029
+    ],
+    [
+     -77.4288178,
+     37.5350262
+    ],
+    [
+     -77.4288144,
+     37.5350299
+    ],
+    [
+     -77.4288189,
+     37.5350326
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-12-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4287229,
+     37.5349694
+    ],
+    [
+     -77.4287184,
+     37.5349667
+    ],
+    [
+     -77.428715,
+     37.5349703
+    ],
+    [
+     -77.4287195,
+     37.534973
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-12-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4286235,
+     37.5349098
+    ],
+    [
+     -77.428619,
+     37.5349071
+    ],
+    [
+     -77.4286156,
+     37.5349107
+    ],
+    [
+     -77.4286201,
+     37.5349134
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-14-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4288471,
+     37.5351679
+    ],
+    [
+     -77.4288425,
+     37.5351652
+    ],
+    [
+     -77.4288391,
+     37.5351688
+    ],
+    [
+     -77.4288437,
+     37.5351715
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-14-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4287477,
+     37.5351083
+    ],
+    [
+     -77.4287431,
+     37.5351056
+    ],
+    [
+     -77.4287397,
+     37.5351092
+    ],
+    [
+     -77.4287443,
+     37.5351119
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-14-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4286483,
+     37.5350487
+    ],
+    [
+     -77.4286437,
+     37.535046
+    ],
+    [
+     -77.4286403,
+     37.5350496
+    ],
+    [
+     -77.4286449,
+     37.5350523
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-14-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4285489,
+     37.5349891
+    ],
+    [
+     -77.4285443,
+     37.5349864
+    ],
+    [
+     -77.4285409,
+     37.53499
+    ],
+    [
+     -77.4285455,
+     37.5349928
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-16-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4287724,
+     37.5352472
+    ],
+    [
+     -77.4287679,
+     37.5352445
+    ],
+    [
+     -77.4287645,
+     37.5352482
+    ],
+    [
+     -77.428769,
+     37.5352509
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-16-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.428673,
+     37.5351877
+    ],
+    [
+     -77.4286685,
+     37.535185
+    ],
+    [
+     -77.4286651,
+     37.5351886
+    ],
+    [
+     -77.4286696,
+     37.5351913
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-16-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4285736,
+     37.5351281
+    ],
+    [
+     -77.4285691,
+     37.5351254
+    ],
+    [
+     -77.4285657,
+     37.535129
+    ],
+    [
+     -77.4285702,
+     37.5351317
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-16-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284742,
+     37.5350685
+    ],
+    [
+     -77.4284697,
+     37.5350658
+    ],
+    [
+     -77.4284663,
+     37.5350694
+    ],
+    [
+     -77.4284708,
+     37.5350721
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-18-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4286978,
+     37.5353266
+    ],
+    [
+     -77.4286933,
+     37.5353239
+    ],
+    [
+     -77.4286899,
+     37.5353275
+    ],
+    [
+     -77.4286944,
+     37.5353302
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-18-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4285984,
+     37.535267
+    ],
+    [
+     -77.4285939,
+     37.5352643
+    ],
+    [
+     -77.4285905,
+     37.5352679
+    ],
+    [
+     -77.428595,
+     37.5352706
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-18-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.428499,
+     37.5352074
+    ],
+    [
+     -77.4284945,
+     37.5352047
+    ],
+    [
+     -77.4284911,
+     37.5352083
+    ],
+    [
+     -77.4284956,
+     37.5352111
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-18-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4283996,
+     37.5351479
+    ],
+    [
+     -77.4283951,
+     37.5351451
+    ],
+    [
+     -77.4283917,
+     37.5351488
+    ],
+    [
+     -77.4283962,
+     37.5351515
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-20-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4286232,
+     37.535406
+    ],
+    [
+     -77.4286186,
+     37.5354032
+    ],
+    [
+     -77.4286152,
+     37.5354069
+    ],
+    [
+     -77.4286198,
+     37.5354096
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-20-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4285238,
+     37.5353464
+    ],
+    [
+     -77.4285192,
+     37.5353437
+    ],
+    [
+     -77.4285158,
+     37.5353473
+    ],
+    [
+     -77.4285204,
+     37.53535
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-20-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284244,
+     37.5352868
+    ],
+    [
+     -77.4284198,
+     37.5352841
+    ],
+    [
+     -77.4284164,
+     37.5352877
+    ],
+    [
+     -77.428421,
+     37.5352904
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-20-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.428325,
+     37.5352272
+    ],
+    [
+     -77.4283204,
+     37.5352245
+    ],
+    [
+     -77.428317,
+     37.5352281
+    ],
+    [
+     -77.4283216,
+     37.5352308
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-22-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4285485,
+     37.5354853
+    ],
+    [
+     -77.428544,
+     37.5354826
+    ],
+    [
+     -77.4285406,
+     37.5354862
+    ],
+    [
+     -77.4285451,
+     37.5354889
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-22-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284491,
+     37.5354257
+    ],
+    [
+     -77.4284446,
+     37.535423
+    ],
+    [
+     -77.4284412,
+     37.5354266
+    ],
+    [
+     -77.4284457,
+     37.5354294
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-22-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4283497,
+     37.5353662
+    ],
+    [
+     -77.4283452,
+     37.5353634
+    ],
+    [
+     -77.4283418,
+     37.5353671
+    ],
+    [
+     -77.4283463,
+     37.5353698
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-22-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4282503,
+     37.5353066
+    ],
+    [
+     -77.4282458,
+     37.5353039
+    ],
+    [
+     -77.4282424,
+     37.5353075
+    ],
+    [
+     -77.4282469,
+     37.5353102
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-24-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4284739,
+     37.5355647
+    ],
+    [
+     -77.4284694,
+     37.535562
+    ],
+    [
+     -77.428466,
+     37.5355656
+    ],
+    [
+     -77.4284705,
+     37.5355683
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-24-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4283745,
+     37.5355051
+    ],
+    [
+     -77.42837,
+     37.5355024
+    ],
+    [
+     -77.4283666,
+     37.535506
+    ],
+    [
+     -77.4283711,
+     37.5355087
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-24-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4282751,
+     37.5354455
+    ],
+    [
+     -77.4282706,
+     37.5354428
+    ],
+    [
+     -77.4282672,
+     37.5354464
+    ],
+    [
+     -77.4282717,
+     37.5354491
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-24-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4281757,
+     37.5353859
+    ],
+    [
+     -77.4281712,
+     37.5353832
+    ],
+    [
+     -77.4281678,
+     37.5353868
+    ],
+    [
+     -77.4281723,
+     37.5353895
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-26-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4283993,
+     37.535644
+    ],
+    [
+     -77.4283947,
+     37.5356413
+    ],
+    [
+     -77.4283913,
+     37.5356449
+    ],
+    [
+     -77.4283959,
+     37.5356476
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-26-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4282999,
+     37.5355844
+    ],
+    [
+     -77.4282953,
+     37.5355817
+    ],
+    [
+     -77.4282919,
+     37.5355854
+    ],
+    [
+     -77.4282965,
+     37.5355881
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-26-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4282005,
+     37.5355249
+    ],
+    [
+     -77.4281959,
+     37.5355222
+    ],
+    [
+     -77.4281925,
+     37.5355258
+    ],
+    [
+     -77.4281971,
+     37.5355285
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-26-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4281011,
+     37.5354653
+    ],
+    [
+     -77.4280965,
+     37.5354626
+    ],
+    [
+     -77.4280931,
+     37.5354662
+    ],
+    [
+     -77.4280977,
+     37.5354689
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-28-0",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4283246,
+     37.5357234
+    ],
+    [
+     -77.4283201,
+     37.5357207
+    ],
+    [
+     -77.4283167,
+     37.5357243
+    ],
+    [
+     -77.4283212,
+     37.535727
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-28-1",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4282252,
+     37.5356638
+    ],
+    [
+     -77.4282207,
+     37.5356611
+    ],
+    [
+     -77.4282173,
+     37.5356647
+    ],
+    [
+     -77.4282218,
+     37.5356674
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-28-2",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4281258,
+     37.5356042
+    ],
+    [
+     -77.4281213,
+     37.5356015
+    ],
+    [
+     -77.4281179,
+     37.5356051
+    ],
+    [
+     -77.4281224,
+     37.5356078
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
+  },
+  {
+   "id": "mss-trestle-post-28-3",
+   "name": "Main Street Station (trestle)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4280264,
+     37.5355446
+    ],
+    [
+     -77.4280219,
+     37.5355419
+    ],
+    [
+     -77.4280185,
+     37.5355455
+    ],
+    [
+     -77.428023,
+     37.5355483
+    ]
+   ],
+   "tone": "iron",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "approximate",
+   "upTo": 13.5,
+   "note": "A post of the steel trestle under the deck (HAER photograph VA-4-1 shows the deck on steel bents). Their number and spacing here are approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0800/va0897/photos/215874pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_016/"
+   ]
   }
  ],
  "rules": [
@@ -34143,6 +38975,20 @@
    "year": null,
    "source": "https://www.openstreetmap.org/way/822799760",
    "note": "A building part 25 m tall (OSM) whose only date is its parcel's (1910); no source found dates it. Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w366226941",
+   "name": "Main Street Station head house (today's outline)",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/366226941",
+   "note": "Drawn in today's scene only: in the set's years the station is drawn as curated parts (mss-*)."
+  },
+  {
+   "id": "w366226942",
+   "name": "Main Street Station clock tower (today's outline)",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/366226942",
+   "note": "Drawn in today's scene only: in the set's years the station is drawn as curated parts (mss-*)."
   }
  ],
  "sanborn": {

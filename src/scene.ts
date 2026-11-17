@@ -861,11 +861,18 @@ export const buildScene = (
     // out of the other.
     const cut = region.cutaway
     const shown = (h: HistoryFeature) => (cut === undefined ? h.only !== 'cutaway' : h.only !== 'whole')
-    const zOf = modelZ(terrain, curated
+    const absolute = curated
       .filter((h) => h.kind === 'landmark' && h.ring !== undefined && h.tone !== undefined && shown(h) && (h.elevation !== undefined || h.upTo !== undefined))
-      .map((h) => Math.min(...toViewRing(view, h.ring!).map((p) => terrain.elevation(p)))))
+    const groundOf = (h: HistoryFeature) => Math.min(...toViewRing(view, h.ring!).map((p) => terrain.elevation(p)))
+    const zOf = modelZ(terrain, absolute.filter((h) => h.model === undefined).map(groundOf))
+    // Each named model takes its levels from its own ground.
+    const models = new Map<string, (e: number) => number>()
+    for (const m of new Set(absolute.flatMap((h) => (h.model === undefined ? [] : [h.model])))) {
+      models.set(m, modelZ(terrain, absolute.filter((h) => h.model === m).map(groundOf)))
+    }
+    const zFor = (h: HistoryFeature) => (h.model === undefined ? zOf : (models.get(h.model) ?? zOf))
     const partGround = curated.filter((h) => h.kind === 'landmark' && h.ring !== undefined && h.tone !== undefined && shown(h))
-      .map((h) => ({ id: h.id, seat: h.seat, on: h.on, base: h.base, height: h.height, grounds: orient(toViewRing(view, h.ring!), true).map((p) => terrain.z(p)), ...(h.elevation === undefined ? {} : { at: zOf(h.elevation) }) }))
+      .map((h) => ({ id: h.id, seat: h.seat, on: h.on, base: h.base, height: h.height, grounds: orient(toViewRing(view, h.ring!), true).map((p) => terrain.z(p)), ...(h.elevation === undefined ? {} : { at: zFor(h)(h.elevation) }) }))
     const levels = partLevels(partGround)
     const placed: PlacedPart[] = []
     for (const h of curated) {
@@ -877,7 +884,7 @@ export const buildScene = (
       if (h.tone !== undefined) {
         // A part of a modeled building: from its seat, in its own tone.
         const seat = levels.get(h.id) ?? Math.min(...grounds) + (h.base ?? 0)
-        const top = h.upTo !== undefined ? zOf(h.upTo) : seat + (h.height ?? 10)
+        const top = h.upTo !== undefined ? zFor(h)(h.upTo) : seat + (h.height ?? 10)
         parts++
         // A stair or an arch keeps its corners in order: its first edge is its foot, or its span.
         if (cut !== undefined) placed.push({ h, outer: h.shape === 'stair' || h.shape === 'arch' ? toViewRing(view, h.ring) : outer, seat, top })
@@ -886,11 +893,12 @@ export const buildScene = (
           // A series can draw its turned parts (a dome) as shaded faces inked only at their foot
           // (revolveInkFoot): inked facet by facet, a dome a few dozen meters across reads as a
           // black disc at a map's scale.
-          const solids = h.shape === 'revolve' ? partSolids({ h, outer, seat, top }).solids : []
+          const roof = h.shape === 'hip' || h.shape === 'gable'
+          const solids = h.shape === 'revolve' || roof ? partSolids({ h, outer, seat, top }).solids : []
           const footZ = Math.min(...solids.flatMap((sl) => sl.faces.flatMap((f) => f.pts.map((q) => q[2]))))
           const solid = h.shape === 'revolve'
             ? solidItem(view, partTones(pal, h), `history:${h.id}`, solids, h.name, time?.history.revolveInkFoot === true ? (q) => q[2] > footZ + 0.01 : undefined)
-            : null
+            : roof ? solidItem(view, partTones(pal, h), `history:${h.id}`, solids, h.name) : null
           if (solid !== null) items.push(solid)
           else items.push(h.shape === 'dome'
             ? dome(view, pal, `history:${h.id}`, outer, seat, top, h.name)
