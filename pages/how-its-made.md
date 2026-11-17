@@ -199,7 +199,11 @@ that 1 m lidar records and a 5 m grid would turn into speckle.
 The scene's height at any point is its elevation above the lowest point in the frame (the
 **datum**), times `terrain.exaggeration`. The sample regions draw hills 2.5–4× taller than
 life, so the landform reads from a distance. **Buildings and bridges keep their true heights** on top
-of the exaggerated ground, so a 2.5× hill does not stretch the towers standing on it.
+of the exaggerated ground, so a 2.5× hill does not stretch the towers standing on it. A modeled
+building whose parts give their levels above sea level (a porch at 67.4 m, columns on it, an
+entablature at 79.2 m) keeps them true too: they are measured from the ground under the model
+(the median of the lowest ground under each such part), which is drawn where the terrain is, so
+an entablature still rests on its columns in a view drawn three times taller than life.
 
 Contours are computed from the true elevation; the hillshade from the drawn, exaggerated
 surface, so it matches the shape you see:
@@ -770,6 +774,73 @@ Past years look at their neighbors once more:
   corner, as in today's scene, the ground painted in front of such a wall (in a hollow, or
   beside a later cut) covered it along a strip's straight edge.
 
+The two sets (the 1925 streetcars and Broad Street in 1943) switch on more of these rules in
+their histories, each off unless a history asks for it. **Laid-out ground by its parcel:**
+lawns, beds, pitches, playgrounds and service roads take the assessor's year built of the
+parcel they lie in (a polygon's center, a road's midpoint; not a parcel holding a building with a curated year, whose recorded year is another building's), so the planted strips of a lot paved
+in 2017 and the drives of a yard built in 1989 are no older than the lot. **More verges:**
+grass and meadow, as well as woods and scrub, along a road not yet built are its infields.
+**Approaches with their bridges:** where a road bridge is not drawn in a year, the ways that lead
+only to it (joined end to end, no other street touching them) go with it, so the street ends at
+its last junction rather than in a stub; and a bridge left with an end no road reaches is left
+out, then the ways that led to it, up to three rounds. **Viaducts clear:** a traced building
+within 4 m of a rail viaduct or a curated bridge of the year, and any dated building a curated
+bridge passes over, is left out. **Streets clear:** a traced building standing in a street's carriageway (within half
+the street's drawn width less a meter of its center line, and at least 2 m) or within 2 m of a
+car line is left out (the sheet was fitted a little off). **Streets under the cars:** a street with half its points within 12 m of a car line
+of the year is kept, houses or not; and a building dated only by its parcel that a car line of
+the year runs through is left out, its parcel's year taken to be another building's.
+**Smoother tracing:** traced outlines are simplified to 2.5 m and rid of spikes (a corner under
+40° with an edge under 8 m), and a gray ("iron") footprint filling under 60% of its hull is taken
+for the sheet's shading and left out; every traced building keeps its class's assumed storeys
+(brick and stone 3, frame 2, iron 4, fire-resistive 3, fireproof 6), since no sheet's storey
+count was recorded. **Track on a site:** a siding mostly on a curated site goes whole, one mostly
+off it stays whole, so none is cut square at the site's edge. **Ties:** close up, a tie within
+0.5 m of one already laid is left out, so the ties of a turnout's two tracks do not clump; farther
+out, where tie marks are drawn along the center line, a track's marks within 3.5 m of a track
+drawn before it are left out, so where two run together only one pattern shows. **Car lines on
+a street bed:** each car line lies on a band of street 1.5 m wider each side (times the
+streetcar scale), so a line that covers its carriageway, or runs where no street of the year is
+drawn, still reads as cars in a street; and the red band is painted exactly, cut at the grid
+lines, and lapping half a unit on screen further back than the other ground layers, so no seam
+or notch shows across it where the paint strips meet. **Decks that carry the cars:** in the
+streetcar set, a road bridge that carries a car line is drawn at least as wide as the line (13.5 m
+on the single-stop prints, 27 m on the big map) with the line on it at full width, so the line runs
+onto the deck without a step and no square deck end shows beside it; a dated building under such
+a deck is left out, a traced one within 4 m of its edge too, and no car is set on a deck shorter
+than three cars. **Lines that meet:** a line that stops within 30 m of another, short of it, is
+carried on straight to meet it. **Later roads through woods:** a road not yet built with woods of
+the year on both sides of it, within 15 m of its edge, is drawn as wood, so the interchange it cut
+does not show as a cut-out. A traced building within 5 m of a car line's center (not 2 m) is
+left out. **Station views:** a whole view leaves out
+the train cars standing under the raised concourse, and turned parts (the dome) are drawn
+shaded and inked only along their foot, so the dome reads as tile at a map's scale, not as a
+black disc of facet lines. In the station's set views the platform sheds are drawn with the
+cutaway's butterfly roofs and the dome in terra-cotta tile, as it was until 1955. The sets'
+regions add: rail bridges over water stand on piers however low their deck (elsewhere a pier
+is drawn only under a deck more than 3 m above its foot); the two ways of a double-track viaduct
+are one deck at one level; and named deck heights for the C&O's viaduct (12 m, so it clears the
+Seaboard's, 6 m, at the Triple Crossing) and the Free Bridge (4 m, approximate: in 1925 its south end meets the street the cars run on; in 1943 it lands at Seventh Street and Semmes Avenue). A history can also extend another (`extends`: its rules and
+dates first, its features replacing the base's of the same id), which is how the set's close
+views of Broad Street Station take these rules while the cutaway, drawn from the station's own
+history, stays as it was sold. The sets take the downtown series' era rules and curated dates
+(parking structures from 1960, canal bridges from 1999, buildings no source dates drawn today
+only), and add: ramps and turning roads (`*_link`) from
+1958, approximate; disused and abandoned track never in the past unless a rule dates it (the
+Richmond and Petersburg bridge, 1902 to 1970, with its approaches to Byrd Street Station and,
+approximately, in Manchester); bridges drawn at grade before a year where a source puts the
+street on the ground (Fifth and Seventh over Leigh Street before 1971, Campus Drive before
+1950, approximate), or where no source says what crossed before today's bridge (Chamberlayne
+Avenue over the railroad north of Leigh Street, whose bridges are of 1992, approximate); one
+plain low deck where the Boulevard and the fair grounds spur crossed the RF&P's cut before the
+bridge of 1943 (what stood there is not known; approximate); two streams left out (Little
+Westham Creek, mapped underground below Westhampton Lake, and one east of Nine Mile Road
+mapped off its ravine); the park lakes of the year (Westhampton Lake from 1902, Fountain Lake from
+1888, Swan and Shields lakes from 1917); basins, settling tanks and treatment works today
+only; The Diamond from 1985; and dated buildings with their sources (a parking deck of about
+2020, the Cookie Factory's tower of 1927, the art museum's outline only once its wings were
+built).
+
 In every scene after the first, buildings **new since the previous scene** have gold roofs.
 
 **Streets before the houses.** A series can say that minor streets (tertiary and smaller,
@@ -785,7 +856,10 @@ grid cell of a step. A suburb whose streets were laid out but not yet built on s
 roads only. The downtown series holds its main roads to the same test, because before the
 first Sanborn map (1886) the only record of how far the town reached is what still stands. A
 street of a town plan (Mayo's grid of 1737) is kept in every year from the plan on, houses or
-not, though not the plan's service roads. Today's scene keeps all of today's streets.
+not, though not the plan's service roads. A series can hold service roads (driveways, yard
+and works roads) to a closer test: the 1925 streetcar and 1943 Broad Street scenes keep one only
+with a building of the year within 25 m, so a works' yard roads are not kept by a house across
+the street. Today's scene keeps all of today's streets.
 
 **Streetcar lines.** A curated `streetcar` item is a line drawn as a bold red ribbon down the
 street, 9 m wide, with a car every 900 m along it: 14 m long and 3.6 m tall like a 1920s
@@ -797,7 +871,24 @@ draws them three times life size (27 m lines, 42 m cars). The lines come from
 corner in OpenStreetMap, and follows the streets between them, preferring the streets the two
 corners name (any other street costs six times as much per meter). Two streets that meet
 without sharing a node take their closest points, up to 150 m apart. A run over a viaduct
-since torn down is drawn straight. Vanished pleasure grounds (a fairground) take a sandy tint of
+since torn down is drawn straight. The streetcar set's routes then run down the middle of a
+street mapped today as two one-way carriageways (moved halfway to the other carriageway where one
+of the same name runs the other way within 40 m), and are smoothed along their length (a Gaussian
+10 m wide, the ends held), so a line does not step from one carriageway or one mapped way to the
+next, and cuts each corner by about 6 m. A line is straightened to within 40% of its drawn width (at least 7 m), so a
+traffic circle or a carriageway's sideways step on today's streets does not kink it, and its bends
+are filled round. Where a line runs along a road bridge (within 6 m of its deck's
+edge and within about 25° of its heading, beside the deck and not past its ends), it is drawn
+on the deck as its track, 45% of its width on the ground (no wider than the deck; in the
+streetcar set, at its full width on a deck widened to carry it), with a car on
+the deck (one every 900 m, or one 45% of the way across a shorter bridge), and no car is set on
+the ground under it. A road bridge
+since taken down can be curated as a `bridge` line and is drawn as today's bridges are: the
+low Free Bridge at Ninth Street (1878 to 1972), on which the Forest Hill cars crossed the
+James, stands where the Manchester Bridge of 1973 does today, and the Marshall Street Viaduct (1911
+to 1970) carries the Church Hill cars across Shockoe Valley, and the Ashland interurban's
+half-mile concrete viaduct (1907 to 1938) carries its cars north from their terminal on Broad
+Street. Vanished pleasure grounds (a fairground) take a sandy tint of
 their own, and a racetrack is a closed dirt-colored ribbon. `--streetcar-scale` overrides the
 series' scale for one build: the single-stop prints of the streetcar series use 1.5, so the
 lines read thinner up close.
@@ -943,6 +1034,17 @@ written from the sources stored beside it. The same tool makes the map alone, a 
 (2,100 m across), canvas files with 1.5 in of mirrored wrap, and the box's page in the explorer.
 `isoscape locate` tells it where each box falls in the picture. A set is one file,
 `sets/<name>.json`; "Making a set" in the README walks through one.
+
+Every window shows only the drawn plate: the part drawn edge to edge, measured without the
+slab's front face, so no paper and no tan band shows inside a frame; a box asked for more
+ground than that is drawn smaller to fit, and the big map is cut from the same part, moved up
+or down so every stop's marker stays inside. Every line of text is at least 7 pt at the
+smallest size each print is sold at (a 24 × 18 in stop print at 16 × 12, the 32 × 24 in sheet
+at 24 × 18, the 36 × 24 in map at 18 × 12, so 10.5, 9.3 and 14 pt on the files), lines are
+wrapped as evenly as they go so no word stands alone, and the corner the title block takes on
+any face cut from a file is kept clear. Markers that would overlap are moved apart with a short
+leader to their place; two-digit numbers are set smaller to fit their rings. A set's prints
+carry the dated series' ground note: the ground is today's, from lidar.
 
 **What the series cannot show:**
 

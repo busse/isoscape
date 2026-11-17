@@ -21,15 +21,15 @@ By May 1888 Frank Sprague's electric cars were running on Richmond's hills, the 
 
 Ride the Westhampton car out Grove Avenue to the end of the line. The streetcar company opened an amusement park by the lake in May 1902, a little Eiffel Tower and all, but it never paid. Richmond College bought the grounds in 1910 and moved here by 1914.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@-2388,-666,6) · Sources: [1](https://magazine.richmond.edu/article/-/25779) [2](https://libguides.richmond.edu/GamblesMillProject)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@-2388,-667,6) · Sources: [1](https://magazine.richmond.edu/article/-/25779) [2](https://libguides.richmond.edu/GamblesMillProject)
 
 ### 2. State Fair Grounds
 
-*Boulevard spur*
+*State Fair Grounds spur*
 
-Take the Boulevard spur north to the Fair Grounds. The State Fair came back here in 1906, opening with an airshow, and built its exhibition hall in 1908; races run on the fair's own track. The fair moved out in 1941, and The Diamond stands on the ground today.
+Take the State Fair Grounds spur up the Boulevard to the fair. The State Fair came back here in 1906, opening with an airshow, and built its exhibition hall in 1908; races run on the fair's own track. The fair moved out in 1941, and The Diamond stands on the ground today.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@311,-412,6) · Sources: [1](https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/) [2](https://en.wikipedia.org/wiki/Richmond_Arena) [3](https://www.purethunderracing.com/?p=6184) [4](https://urbanscalerichmondvirginia.blogspot.com/2014/12/a-brief-history-of-sports-complex-in.html)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@311,-410,6) · Sources: [1](https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/) [2](https://en.wikipedia.org/wiki/Richmond_Arena) [3](https://www.purethunderracing.com/?p=6184) [4](https://urbanscalerichmondvirginia.blogspot.com/2014/12/a-brief-history-of-sports-complex-in.html)
 
 ### 3. Ginter Park
 
@@ -37,13 +37,13 @@ Take the Boulevard spur north to the Fair Grounds. The State Fair came back here
 
 Lewis Ginter, who made his fortune in cigarettes, began buying Northside land in the late 1880s, and Ginter Park became one of Richmond's first streetcar suburbs. Stay aboard the Chamberlayne cars for his Lakeside Park, just north of this view: a lake, a small zoo and a nine-hole golf course.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@777,-791,6) · Sources: [1](https://www.lewisginter.org/visit/about/history/major-lewis-ginter/) [2](https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@777,-789,6) · Sources: [1](https://www.lewisginter.org/visit/about/history/major-lewis-ginter/) [2](https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/)
 
 ### 4. Barton Heights
 
 *Lakeside line, over the First Street viaduct*
 
-Cross Bacon's Quarter Branch on the First Street viaduct. James Barton had it built so a car could leave for Broad Street every 20 minutes. Begun in 1894, it was one of the first trolley suburbs in the country: a Henrico town from 1896, and part of Richmond since 1914.
+Cross the valley of Bacon's Quarter Branch on the First Street viaduct. James Barton had it built so a car could leave for Broad Street every 20 minutes. Begun in 1894, it was one of the first trolley suburbs in the country: a Henrico town from 1896, and part of Richmond since 1914.
 
 [See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@1456,-31,6) · Sources: [1](https://richmondmagazine.com/news/richmond-history/barton%20heights%20the%20valentine%20community%20conversations/) [2](https://www.dhr.virginia.gov/historic-registers/127-0816/) [3](https://www.dhr.virginia.gov/?p=16934)
 
@@ -53,7 +53,7 @@ Cross Bacon's Quarter Branch on the First Street viaduct. James Barton had it bu
 
 Over the Fifth Street viaduct and round the loop at the top of the hill. The advertisements promise fresh air and under 15 minutes by trolley to Seventh and Broad. Run through to Hull Street, the Highland Park cars would outlast every other line in town: the last one ran on 25 November 1949.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@1961,-565,6) · Sources: [1](https://blog.richmond.edu/walkingrichmond/2017/04/26/disconnected) [2](https://richmondmagazine.com/news/richmond-history/richmond-trolley-system/) [3](https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@1961,-564,6) · Sources: [1](https://blog.richmond.edu/walkingrichmond/2017/04/26/disconnected) [2](https://richmondmagazine.com/news/richmond-history/richmond-trolley-system/) [3](https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text)
 
 ### 6. Nine Mile Road
 
@@ -69,7 +69,7 @@ Out the old New Bridge Road toward Seven Pines. The Richmond City and Seven Pine
 
 Since 1911 the Marshall Street Viaduct has carried the cars across Shockoe Valley to the hill where Richmond was first laid out. In October 1925 the railroad tunnel under Jefferson Park caved in during repairs, killing at least three men. They lie inside it still.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@2019,826,6) · Sources: [1](https://www.wikipedia.org/wiki/Church_Hill,_Richmond,_Virginia) [2](https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts) [3](https://freepages.rootsweb.com/~howardlake/history/amusement12/jeffersonrichmondva.html) [4](https://www.atlasobscura.com/places/church-hill-tunnel)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@2019,823,6) · Sources: [1](https://www.wikipedia.org/wiki/Church_Hill,_Richmond,_Virginia) [2](https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts) [3](https://freepages.rootsweb.com/~howardlake/history/amusement12/jeffersonrichmondva.html) [4](https://www.atlasobscura.com/places/church-hill-tunnel)
 
 ### 8. Seventh and Broad
 
@@ -77,15 +77,15 @@ Since 1911 the Marshall Street Viaduct has carried the cars across Shockoe Valle
 
 Every line comes downtown. In May 1888 Frank Sprague, $75,000 of his own money spent, finished the Clay Street line: the first electric street railway in the world that truly worked. By 1925, Seventh and Broad is the corner every suburb measures its ride against.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@1262,484,6) · Sources: [1](https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/) [2](https://blog.richmond.edu/walkingrichmond/2017/04/26/disconnected) [3](https://www.americanheritage.com/gems-symmetry-and-convenience)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@1262,483,6) · Sources: [1](https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/) [2](https://blog.richmond.edu/walkingrichmond/2017/04/26/disconnected) [3](https://www.americanheritage.com/gems-symmetry-and-convenience)
 
 ### 9. Manchester
 
 *Hull Street line, over the Mayo Bridge*
 
-Across the river on the Mayo Bridge. Manchester was a city of its own until it joined Richmond in 1910, on the promise of a better bridge. The arched concrete span of 1913 brings the cars from 14th Street straight onto Hull Street, Manchester's main street of shops, restaurants and theaters.
+Across the river on the Mayo Bridge. Manchester was a city of its own until it joined Richmond in 1910, on the promise of a better bridge. The arched concrete span of 1913, drawn here as a plain deck, brings the cars from 14th Street straight onto Hull Street, Manchester's main street.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@1204,1168,6) · Sources: [1](https://architecturerichmond.com/?p=3761) [2](https://richmondmagazine.com/news/richmond-history/manchester-history/) [3](https://www.dhr.virginia.gov/historic-registers/127-0859/)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@1204,1172,6) · Sources: [1](https://architecturerichmond.com/?p=3761) [2](https://richmondmagazine.com/news/richmond-history/manchester-history/) [3](https://www.dhr.virginia.gov/historic-registers/127-0859/)
 
 ### 10. Woodland Heights
 
@@ -93,15 +93,15 @@ Across the river on the Mayo Bridge. Manchester was a city of its own until it j
 
 Down the middle of Semmes Avenue. The Southside Land and Improvement Company bought the old Rhodes place in 1889, sold lots to the east and north, and opened a car line in 1890 to fill them. The trolley, and the park at the end of it, were the suburb's best selling points.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@446,1190,6) · Sources: [1](https://rvanews.com/?p=20228) [2](https://tclf.org/forest-hill-park-va) [3](https://sah-archipedia.org/node/1321)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@446,1194,6) · Sources: [1](https://rvanews.com/?p=20228) [2](https://tclf.org/forest-hill-park-va) [3](https://sah-archipedia.org/node/1321)
 
 ### 11. Forest Hill Park
 
 *Forest Hill line, end of the line*
 
-The end of the line, and Richmond's favorite trolley park since 1890: a boat lake, a bath house and the Dip-the-Dips roller coaster. Its days are numbered. The coaster was condemned in 1931, the rides came down in 1932, and in 1934 the city bought the 105 acres for a public park.
+The end of the line, and Richmond's favorite trolley park since 1890, with a boat lake, a bath house and the Dip-the-Dips roller coaster; only the lake is drawn. Its days are numbered: the coaster was condemned in 1931, the rides came down in 1932, and in 1934 the city bought the 105 acres for a park.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@-109,1264,6) · Sources: [1](https://tclf.org/forest-hill-park-va) [2](https://richmondfamilymagazine.com/community/history/richmonds-original-theme-park/) [3](https://www.hmdb.org/m.asp?m=28854) [4](https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@-109,1255,6) · Sources: [1](https://tclf.org/forest-hill-park-va) [2](https://richmondfamilymagazine.com/community/history/richmonds-original-theme-park/) [3](https://www.hmdb.org/m.asp?m=28854) [4](https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text)
 
 ### 12. Byrd Park
 
@@ -109,7 +109,7 @@ The end of the line, and Richmond's favorite trolley park since 1890: a boat lak
 
 Down Robinson Street and out Lakeview Avenue. The city laid out the park around its new reservoir from 1874 and named it for William Byrd by 1907. Next door, the Idlewood amusement park opened at the end of the line in 1906, with a horse-show pavilion and lit lagoons. It was gone by 1914.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@-446,529,6) · Sources: [1](https://www.tclf.org/landscapes/byrd-park) [2](https://www.dalebrumfield.net/single-post/2014/05/03/part-7-live-fast-die-hard-richmond-s-idlewood-amusement-park) [3](https://en.wikipedia.org/wiki/Byrd_Park)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@-446,532,6) · Sources: [1](https://www.tclf.org/landscapes/byrd-park) [2](https://www.dalebrumfield.net/single-post/2014/05/03/part-7-live-fast-die-hard-richmond-s-idlewood-amusement-park) [3](https://en.wikipedia.org/wiki/Byrd_Park)
 
 ### 13. The Fan
 
@@ -117,15 +117,15 @@ Down Robinson Street and out Lakeview Avenue. The city laid out the park around 
 
 Cars run west through the Fan on Main Street, Floyd Avenue and Broad Street, and houses have filled the blocks between them: one of Richmond's first streetcar suburbs. The city's 1906 annexation came, as one historian puts it, "in direct response to the trolley." The Floyd Avenue cars run on to Westhampton.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@311,270,6) · Sources: [1](https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/) [2](https://dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6064_Three_Chopt_Road_HD_2012_NR_FINAL.pdf)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@311,267,6) · Sources: [1](https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/) [2](https://dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6064_Three_Chopt_Road_HD_2012_NR_FINAL.pdf)
 
 ### 14. Broad and Laurel
 
 *Richmond–Ashland Railway*
 
-Board the interurban here for Lakeside and Ashland. Opened in July 1907 for big, fast electric cars, the line crosses Bacon's Quarter Branch on a half-mile concrete trestle. Reorganized as the Richmond–Ashland Railway, it ran until 1938. The terminal building still stands.
+Board the interurban here for Lakeside and Ashland. Opened in July 1907 for big, fast electric cars, the line leaves its terminal from the second floor, on a half-mile concrete viaduct over the Seaboard's tracks. Reorganized as the Richmond–Ashland Railway, it ran until 1938. The terminal building still stands.
 
-[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@815,295,6) · Sources: [1](https://pantographblog.blogspot.com/2009/08/richmond-and-chesapeake-bay-railway.html) [2](https://american-rails.com/vgainterstrethsy.html)
+[See it on the map](https://busse.github.io/isoscape/#richmond-streetcars:1925@815,292,6) · Sources: [1](https://pantographblog.blogspot.com/2009/08/richmond-and-chesapeake-bay-railway.html) [2](https://american-rails.com/vgainterstrethsy.html) [3](https://varails.com/trolley-lines/the-richmond-ashland-railway)
 
 ## The lines
 

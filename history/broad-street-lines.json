@@ -10,7 +10,99 @@
    "note": "The wartime peak: 57 trains a day, a record 33,324 passengers on April 22, 1943."
   }
  ],
+ "atGrade": [
+  {
+   "id": [
+    "w153957425",
+    "w153957423"
+   ],
+   "before": 1971,
+   "note": "Fifth and Seventh streets cross East Leigh Street on bridges built in 1971; before them the streets are drawn meeting at grade (approximate).",
+   "sources": [
+    "https://bridgelookup.com/bridge/582613",
+    "https://bridgelookup.com/bridge/582615"
+   ]
+  },
+  {
+   "id": [
+    "w6038838"
+   ],
+   "before": 1950,
+   "note": "Campus Drive past the Burying Ground: the road built through here in 1912 and widened in 1947 ran on the ground; no source found dates today's bridge, so before 1950 the drive and the Westhampton cars are drawn at grade (approximate).",
+   "sources": [
+    "https://buryinggroundmemorial.richmond.edu/timeline.html"
+   ]
+  }
+ ],
  "features": [
+  {
+   "id": "marshall-street-viaduct",
+   "name": "Marshall Street Viaduct",
+   "kind": "bridge",
+   "from": 1911,
+   "to": 1970,
+   "line": [
+    [
+     -77.4289623,
+     37.5392147
+    ],
+    [
+     -77.4215882,
+     37.5347066
+    ]
+   ],
+   "note": "Opened 12 February 1911 by the Richmond and Henrico Railway from College Street, at the east edge of the medical college, across Shockoe Valley to 21st Street at Jefferson Park, with tracks for the streetcars; closed by the city in 1970 and taken down. Drawn straight on the car line between those ends: its exact line, length and height are approximate.",
+   "sources": [
+    "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts"
+   ]
+  },
+  {
+   "id": "free-bridge",
+   "name": "Free Bridge (Ninth Street)",
+   "kind": "bridge",
+   "from": 1878,
+   "to": 1972,
+   "line": [
+    [
+     -77.4401071,
+     37.5344434
+    ],
+    [
+     -77.4403247,
+     37.5342294
+    ],
+    [
+     -77.4412143,
+     37.5333544
+    ],
+    [
+     -77.4436891,
+     37.5307454
+    ],
+    [
+     -77.4442842,
+     37.5299915
+    ],
+    [
+     -77.4444154,
+     37.5298308
+    ],
+    [
+     -77.4445848,
+     37.5296027
+    ],
+    [
+     -77.4442837,
+     37.5276392
+    ]
+   ],
+   "note": "The low iron bridge from Ninth Street to Manchester, toll-free, built 1878 and closed after the floods of 1969 and 1972, when the Manchester Bridge replaced it. Drawn on the line of today's Manchester Bridge, its deck 4 m above the river, landing at Seventh Street and Semmes Avenue in Manchester: its exact line, landing and height are approximate.",
+   "sources": [
+    "https://dogtowndish.com/2018/03/03/richmonds-lost-singing-9th-street-bridge/",
+    "https://en.wikipedia.org/wiki/Manchester_Bridge_(Virginia)",
+    "https://sah-archipedia.org/node/1321"
+   ]
+  },
   {
    "id": "bss-concourse",
    "name": "Broad Street Station concourse",
@@ -17516,7 +17608,7 @@
     ]
    ],
    "height": 9.5,
-   "tone": "dome",
+   "tone": "tile",
    "note": "The dome: a cornice ring, the stepped haunches and the low outer dome, in its original tile in 1943; inside, the hall's ceiling, a shallower vault. Profiles from sections A-A, B-B and C-C; the crown is 100 ft above the floor, as published.",
    "sources": [
     "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
@@ -23853,8 +23945,7 @@
    "sources": [
     "https://dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6064_Three_Chopt_Road_HD_2012_NR_FINAL.pdf",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-belmont",
@@ -24351,8 +24442,7 @@
    "sources": [
     "https://museumdistrict.org/history",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-broad",
@@ -25453,8 +25543,7 @@
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://museumdistrict.org/history"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-main",
@@ -26287,8 +26376,7 @@
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://dhr.virginia.gov/?p=16894"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-harrison",
@@ -26448,8 +26536,7 @@
    "note": "A crosstown link on Harrison Street between the Main, Floyd and Broad lines, as the 1925 plate shows it.",
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-byrd-park",
@@ -26619,16 +26706,19 @@
      [
       -77.4768286,
       37.5452336
+     ],
+     [
+      -77.4775,
+      37.5405
      ]
     ]
    ],
-   "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. The far end is approximate.",
+   "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. Lakeview Avenue is mapped today only to Shields Lake; the last 450 m, to the end of the line, are drawn straight and are approximate.",
    "sources": [
     "https://museumdistrict.org/history",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-clay",
@@ -26861,8 +26951,7 @@
    "sources": [
     "https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-lakeside",
@@ -27516,30 +27605,6 @@
      [
       -77.4302801,
       37.561072
-     ],
-     [
-      -77.4312836,
-      37.5611287
-     ],
-     [
-      -77.4312698,
-      37.561588
-     ],
-     [
-      -77.4312298,
-      37.5625902
-     ],
-     [
-      -77.4307284,
-      37.562561
-     ],
-     [
-      -77.4306976,
-      37.5632221
-     ],
-     [
-      -77.4304072,
-      37.5632014
      ],
      [
       -77.4300881,
@@ -28603,13 +28668,12 @@
      ]
     ]
    ],
-   "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate.",
+   "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate. OSM maps Monteiro Street with a gap north of Lakewood Street; the line is drawn straight across it.",
    "sources": [
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://lewisginter.org/?p=11566"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-highland-park",
@@ -29551,8 +29615,7 @@
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
     "https://rvanews.com/?p=20453",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-marshall",
@@ -30153,8 +30216,7 @@
    "sources": [
     "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-venable",
@@ -30788,8 +30850,7 @@
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://henrico.us/locations/nine-mile-road/",
     "https://modelingjimcrow.virginia.edu/node/91936"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-jefferson",
@@ -31002,8 +31063,7 @@
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "car-hull",
@@ -31688,8 +31748,7 @@
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://richmondmagazine.com/news/richmond-history/richmond-trolley-system/"
-   ],
-   "width": 4.0
+   ]
   },
   {
    "id": "fair-grounds",
@@ -32259,8 +32318,8 @@
    "from": 1919,
    "to": 1976,
    "at": [
-    -77.4712395,
-    37.5785544
+    -77.47,
+    37.5762
    ],
    "anchor": "start",
    "caption": "The RF&P main meets the Atlantic Coast Line's Belt Line",
@@ -32295,8 +32354,8 @@
    "from": 1919,
    "to": 1976,
    "at": [
-    -77.4671599,
-    37.5605574
+    -77.4692,
+    37.5606
    ],
    "anchor": "end",
    "caption": "RF&P, Atlantic Coast Line and N&W trains",
@@ -32331,8 +32390,8 @@
    "from": 1919,
    "to": 1976,
    "at": [
-    -77.4346363,
-    37.532341
+    -77.4305,
+    37.5372
    ],
    "anchor": "end",
    "caption": "Seaboard Air Line south to Raleigh and Florida; C&O",
@@ -32377,9 +32436,743 @@
     "https://chicagorailfan.com/stbrric.html",
     "https://www.richmondrailroadmuseum.com/railroad-history"
    ]
+  },
+  {
+   "id": "rp-byrd-street-approach",
+   "name": "Richmond and Petersburg (Atlantic Coast Line) approach to Byrd Street Station",
+   "kind": "rail",
+   "from": 1902,
+   "to": 1971,
+   "line": [
+    [
+     -77.4414897,
+     37.5342633
+    ],
+    [
+     -77.4413478,
+     37.5347189
+    ],
+    [
+     -77.4411868,
+     37.535131
+    ],
+    [
+     -77.4410028,
+     37.535543
+    ],
+    [
+     -77.4408304,
+     37.5360008
+    ],
+    [
+     -77.4407039,
+     37.5363671
+    ]
+   ],
+   "note": "The track from the north end of the Richmond and Petersburg bridge (OSM w710689016) across the Haxall Canal into Byrd Street Station at Seventh and Byrd Streets, the R&P's original Richmond station and later the Atlantic Coast Line's headquarters, closed in 1958. Today nothing of it is mapped north of the bridge. Approximate: one track along the middle of the station's throat, read by eye from the USGS 1:24,000 Richmond quadrangles of 1934 and 1956 (which show the line crossing the canal and fanning into the station yard between Seventh and Eighth Streets south of Byrd) and joined to the bridge's mapped end, about 20 m east of where the maps put it. Drawn with the bridge, 1902 to 1970; the years are the bridge's, not the track's.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge",
+    "https://en.wikipedia.org/wiki/Byrd_Street_Station",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "rp-manchester-approach",
+   "name": "Richmond and Petersburg (Atlantic Coast Line) approach in Manchester",
+   "kind": "rail",
+   "from": 1902,
+   "to": 1971,
+   "line": [
+    [
+     -77.4459585,
+     37.5295426
+    ],
+    [
+     -77.4459745,
+     37.5295251
+    ],
+    [
+     -77.4462565,
+     37.529227
+    ],
+    [
+     -77.4468448,
+     37.5286108
+    ],
+    [
+     -77.4468925,
+     37.5285472
+    ],
+    [
+     -77.4469411,
+     37.5280628
+    ]
+   ],
+   "note": "The track from the south end of the Richmond and Petersburg bridge (OSM w710689016): along the old grade OSM maps as a path today (w1065955897), then on to the Southern's line beside it, so the bridge lands on track, not on the hillside. Approximate: where the R&P met the Southern here is not drawn from a source. Drawn with the bridge, 1902 to 1970.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "church-hill-tunnel-approach",
+   "name": "Chesapeake and Ohio approach to the Church Hill Tunnel",
+   "kind": "rail",
+   "from": 1873,
+   "to": 1926,
+   "line": [
+    [
+     -77.425031,
+     37.539268
+    ],
+    [
+     -77.424996,
+     37.538765
+    ],
+    [
+     -77.424928,
+     37.538405
+    ],
+    [
+     -77.424856,
+     37.538145
+    ],
+    [
+     -77.4245071,
+     37.5377032
+    ],
+    [
+     -77.4244046,
+     37.5374857
+    ],
+    [
+     -77.4243802,
+     37.5372811
+    ],
+    [
+     -77.424191,
+     37.5371024
+    ],
+    [
+     -77.4240741,
+     37.5369748
+    ],
+    [
+     -77.4238814,
+     37.5368451
+    ],
+    [
+     -77.423253,
+     37.536144
+    ]
+   ],
+   "note": "The C&O's line to the Church Hill Tunnel's west portal, by 18th Street just north of Marshall: it left the old Virginia Central line west of 17th Street and curved southeast. The tunnel opened in 1873, collapsed on October 2, 1925, and its western end was sealed the following spring, so it is drawn through 1925 and not after. Its course: OSM's abandoned branch (w169784705) from the junction with today's Peninsula Subdivision south to 17th Street; then the C&O spur shown on the 1924–25 Sanborn map, volume 1, sheet 24, crossing the block between 17th and 18th Streets, Marshall and Clay, between the Richmond Cold Storage and International Harvester warehouses (the sheet fitted to the four corners of the block, to about a meter, and the line set midway between the warehouses standing today); then straight across 18th Street to the portal mapped in OSM (the tunnel, w6036486). Approximate.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Church_Hill_Tunnel",
+    "https://www.loc.gov/item/sanborn09064_006/",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g09064192401:09064_01_1924-0024/full/pct:25/0/default.jpg",
+    "https://www.openstreetmap.org/way/169784705",
+    "https://www.openstreetmap.org/way/6036486"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-head-house",
+   "name": "Main Street Station (head house)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4296128,
+     37.5343189
+    ],
+    [
+     -77.4293474,
+     37.5341598
+    ],
+    [
+     -77.429222,
+     37.5342931
+    ],
+    [
+     -77.4294874,
+     37.5344522
+    ]
+   ],
+   "height": 18.2,
+   "tone": "stone",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The head house, 102 ft by 62 ft 4 in, of golden Roman brick trimmed with terra cotta, drawn as a plain block to its eaves; outline from OpenStreetMap, which matches the 1900 plan. Its height is scaled from photographs (approximate).",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://www.dhr.virginia.gov/?p=15225"
+   ],
+   "to": null
+  },
+  {
+   "id": "mss-head-house-roof",
+   "name": "Main Street Station (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4296128,
+     37.5343189
+    ],
+    [
+     -77.4293474,
+     37.5341598
+    ],
+    [
+     -77.429222,
+     37.5342931
+    ],
+    [
+     -77.4294874,
+     37.5344522
+    ]
+   ],
+   "height": 11.7,
+   "tone": "tile",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The steep hipped roof of red tile, drawn as a plain hip; its ridge height is scaled from photographs (approximate).",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf"
+   ],
+   "shape": "revolve",
+   "levels": [
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     11.7,
+     0.3,
+     0.0
+    ]
+   ],
+   "to": null,
+   "on": "mss-head-house"
+  },
+  {
+   "id": "mss-clock-tower",
+   "name": "Main Street Station (clock tower)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4296223,
+     37.5343178
+    ],
+    [
+     -77.4295666,
+     37.5342844
+    ],
+    [
+     -77.4295211,
+     37.5343329
+    ],
+    [
+     -77.4295768,
+     37.5343663
+    ]
+   ],
+   "height": 28.7,
+   "tone": "stone",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The clock tower at the southwest corner, 110 ft to the top of its finial (The Railroad Gazette, 1900); drawn as a plain shaft, its stages scaled from photographs (approximate).",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38"
+   ],
+   "to": null
+  },
+  {
+   "id": "mss-clock-tower-cap",
+   "name": "Main Street Station (clock tower)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4296223,
+     37.5343178
+    ],
+    [
+     -77.4295666,
+     37.5342844
+    ],
+    [
+     -77.4295211,
+     37.5343329
+    ],
+    [
+     -77.4295768,
+     37.5343663
+    ]
+   ],
+   "height": 5.2,
+   "tone": "tile",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The tower's cap and finial, drawn as a plain point; 110 ft from the ground to the finial (The Railroad Gazette, 1900). Approximate.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38"
+   ],
+   "shape": "revolve",
+   "levels": [
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     3.6,
+     0.6,
+     0.0
+    ],
+    [
+     5.2,
+     0.05,
+     0.0
+    ]
+   ],
+   "to": null,
+   "on": "mss-clock-tower"
+  },
+  {
+   "id": "mss-concourse",
+   "name": "Main Street Station (concourse)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4294648,
+     37.5344455
+    ],
+    [
+     -77.4292428,
+     37.5343124
+    ],
+    [
+     -77.429171,
+     37.5343888
+    ],
+    [
+     -77.4293929,
+     37.5345218
+    ]
+   ],
+   "height": 14.2,
+   "tone": "stone",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The concourse behind the head house, 82 ft wide under a flat roof (The Railroad Gazette, 1900), drawn as a plain block. Approximate.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf"
+   ],
+   "to": null
+  },
+  {
+   "id": "mss-shed",
+   "name": "Main Street Station train shed",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4294183,
+     37.5346417
+    ],
+    [
+     -77.4284038,
+     37.5357122
+    ],
+    [
+     -77.4280042,
+     37.5354708
+    ],
+    [
+     -77.4290187,
+     37.5344003
+    ]
+   ],
+   "height": 5.1,
+   "tone": "iron",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The gable-roofed train shed of 1901, 123 ft wide between its columns with 13 ft 6 in overhangs, and over 500 ft long, standing on the tracks' trestle (HAER VA-4; the National Register gives 530 ft). Its outline is OpenStreetMap's; drawn as a plain mass to the eaves on the track floor, its heights from the HAER cross section (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/?p=15225"
+   ],
+   "to": null,
+   "base": 6.9,
+   "seat": "max"
+  },
+  {
+   "id": "mss-shed-roof-0",
+   "name": "Main Street Station train shed (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4293823,
+     37.53462
+    ],
+    [
+     -77.4283678,
+     37.5356905
+    ],
+    [
+     -77.4280402,
+     37.5354925
+    ],
+    [
+     -77.4290547,
+     37.534422
+    ]
+   ],
+   "height": 3.4,
+   "tone": "roof",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
+   ],
+   "to": null,
+   "on": "mss-shed",
+   "seat": "max"
+  },
+  {
+   "id": "mss-shed-roof-1",
+   "name": "Main Street Station train shed (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4293384,
+     37.5345934
+    ],
+    [
+     -77.4283239,
+     37.5356639
+    ],
+    [
+     -77.4280841,
+     37.5355191
+    ],
+    [
+     -77.4290986,
+     37.5344486
+    ]
+   ],
+   "height": 3.4,
+   "tone": "roof",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
+   ],
+   "to": null,
+   "on": "mss-shed-roof-0",
+   "seat": "max"
+  },
+  {
+   "id": "mss-shed-roof-2",
+   "name": "Main Street Station train shed (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4292944,
+     37.5345669
+    ],
+    [
+     -77.4282799,
+     37.5356374
+    ],
+    [
+     -77.4281281,
+     37.5355456
+    ],
+    [
+     -77.4291426,
+     37.5344751
+    ]
+   ],
+   "height": 3.3,
+   "tone": "roof",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
+   ],
+   "to": null,
+   "on": "mss-shed-roof-1",
+   "seat": "max"
+  },
+  {
+   "id": "mss-shed-roof-3",
+   "name": "Main Street Station train shed (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4292505,
+     37.5345403
+    ],
+    [
+     -77.428236,
+     37.5356108
+    ],
+    [
+     -77.428172,
+     37.5355722
+    ],
+    [
+     -77.4291865,
+     37.5345017
+    ]
+   ],
+   "height": 3.3,
+   "tone": "roof",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
+   ],
+   "to": null,
+   "on": "mss-shed-roof-2",
+   "seat": "max"
   }
  ],
  "rules": [
+  {
+   "where": {
+    "name": "Westhampton Lake",
+    "type": "polygon"
+   },
+   "eras": [
+    [
+     1902,
+     null
+    ]
+   ],
+   "note": "The streetcar company's Westhampton Park opened by the lake in May 1902.",
+   "sources": [
+    "https://magazine.richmond.edu/article/-/25779"
+   ]
+  },
+  {
+   "where": {
+    "name": "Boat Lake",
+    "type": "polygon"
+   },
+   "eras": [
+    [
+     1888,
+     null
+    ]
+   ],
+   "note": "Fountain (Boat) Lake is the pit dug for the berms of the New Reservoir, built 1875–1888.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Byrd_Park"
+   ]
+  },
+  {
+   "where": {
+    "name": "Swan Lake",
+    "type": "polygon"
+   },
+   "eras": [
+    [
+     1917,
+     null
+    ]
+   ],
+   "note": "Planned by 1914; by 1917 the park had its two new lakes.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Byrd_Park",
+    "https://www.tclf.org/landscapes/byrd-park"
+   ]
+  },
+  {
+   "where": {
+    "name": "Shields Lake",
+    "type": "polygon"
+   },
+   "eras": [
+    [
+     1917,
+     null
+    ]
+   ],
+   "note": "Planned by 1914; by 1917 the park had its two new lakes.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Byrd_Park",
+    "https://www.tclf.org/landscapes/byrd-park"
+   ]
+  },
+  {
+   "where": {
+    "name": "The Diamond"
+   },
+   "eras": [
+    [
+     1985,
+     null
+    ]
+   ],
+   "note": "The Diamond opened in April 1985 on the site of Parker Field (built in 1934 as part of the fair grounds, a ballpark from 1954).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/The_Diamond_(Richmond,_Virginia)"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w296796859"
+    ]
+   },
+   "eras": [],
+   "note": "The roundabout at the Seventh Street ramps of the I-64/I-95 interchange, part of the interstate's works: drawn today only (approximate, not sourced)."
+  },
+  {
+   "where": {
+    "tag": "water",
+    "is": [
+     "wastewater",
+     "basin",
+     "reflecting_pool"
+    ]
+   },
+   "eras": [],
+   "note": "Settling basins, stormwater basins and pools: none is dated by a source here (the treatment plant's basins and the basins of the interstate's drainage among them), so they are drawn today only."
+  },
+  {
+   "where": {
+    "tag": "landuse",
+    "is": [
+     "basin"
+    ]
+   },
+   "eras": [],
+   "note": "Basins: drawn today only, as above."
+  },
+  {
+   "where": {
+    "tag": "man_made",
+    "is": [
+     "wastewater_plant",
+     "water_works",
+     "reservoir_covered",
+     "storage_tank"
+    ]
+   },
+   "eras": [],
+   "note": "Treatment works and tanks: not dated here, drawn today only."
+  },
+  {
+   "where": {
+    "id": [
+     "w38231003",
+     "w132598295"
+    ]
+   },
+   "eras": [
+    [
+     1973,
+     null
+    ]
+   ],
+   "note": "The unnamed ramps of the Manchester Bridge, dated with it.",
+   "sources": [
+    "https://rvamag.com/news/community/rva-5x5-the-history-of-the-mayo-bridge.html"
+   ]
+  },
+  {
+   "where": {
+    "name": "North Arthur Ashe Boulevard",
+    "bridge": true
+   },
+   "eras": [
+    [
+     1943,
+     null
+    ]
+   ],
+   "note": "The Boulevard's bridge over the RF&P by the fair grounds was built in 1943 (rebuilt 1986).",
+   "sources": [
+    "https://bridgelookup.com/bridge/582695"
+   ]
+  },
+  {
+   "where": {
+    "name": "Westwood Avenue",
+    "bridge": true
+   },
+   "eras": [
+    [
+     1966,
+     null
+    ]
+   ],
+   "note": "The Westwood Avenue bridges over the RF&P at AY (the avenue and its ramp, Saunders Avenue the other half of the pair) were built in 1966.",
+   "sources": [
+    "https://bridgelookup.com/bridge/582714",
+    "https://bridgecondition.com/bridge/virginia/va-000000000021568"
+   ]
+  },
+  {
+   "where": {
+    "name": "Saunders Avenue",
+    "bridge": true
+   },
+   "eras": [
+    [
+     1966,
+     null
+    ]
+   ],
+   "note": "The other half of the 1966 Westwood Avenue bridges at AY (approximate: the bridge records name only Westwood Avenue and its ramp).",
+   "sources": [
+    "https://bridgelookup.com/bridge/582714"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w44745829",
+     "w44745825",
+     "w108533112",
+     "w753743484"
+    ]
+   },
+   "eras": [
+    [
+     1966,
+     null
+    ]
+   ],
+   "note": "The loop ramp of the 1966 Westwood Avenue bridges.",
+   "sources": [
+    "https://bridgecondition.com/bridge/virginia/va-000000000021568"
+   ]
+  },
   {
    "where": {
     "id": [
@@ -32573,15 +33366,31 @@
   },
   {
    "where": {
+    "name": "South 8th Street Connector"
+   },
+   "eras": [
+    [
+     1957,
+     null
+    ]
+   ],
+   "note": "The curved link from 8th Street to Canal Street crosses ground that the USGS Richmond quadrangles of 1934 and 1956 show as rail yard, so it is later; when it was built is not known here, and it is drawn from 1957: approximate.",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+   ]
+  },
+  {
+   "where": {
     "name": "Mayo Bridge"
    },
    "eras": [
     [
-     1788,
+     1913,
      null
     ]
    ],
-   "note": "A bridge has stood here since John Mayo Jr.'s of 1788; today's dates from 1913.",
+   "note": "The bridge drawn is today's, of 1913. A bridge has stood near here since John Mayo Jr.'s toll bridge of 1788, but its earlier wooden spans are not drawn, so scenes before 1913 show no bridge here.",
    "sources": [
     "https://historicrichmond.com/property/mayo-bridge/"
    ]
@@ -32651,6 +33460,43 @@
   },
   {
    "where": {
+    "id": [
+     "w710689016"
+    ]
+   },
+   "eras": [
+    [
+     1902,
+     1970
+    ],
+    [
+     2026,
+     null
+    ]
+   ],
+   "note": "The Richmond and Petersburg (later Atlantic Coast Line) bridge over the James: rebuilt on concrete piers in 1902, removed in 1970. OSM keeps it as an abandoned railway, and today's scene (2026) draws it as OSM maps it, as before.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge"
+   ]
+  },
+  {
+   "where": {
+    "tag": "railway",
+    "is": [
+     "abandoned",
+     "disused",
+     "razed",
+     "dismantled"
+    ]
+   },
+   "eras": [],
+   "note": "Lines out of use or taken up today: OSM does not say when they ran, and what is left of them are fragments that end in open ground or against later buildings (the spurs on the Manchester bank; the approach to the Church Hill Tunnel, which collapsed on 2 October 1925). Drawn in today's view only, unless a rule above dates one from a source.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Church_Hill_Tunnel"
+   ]
+  },
+  {
+   "where": {
     "tag": "railway",
     "bridge": true
    },
@@ -32660,7 +33506,7 @@
      null
     ]
    ],
-   "note": "The elevated viaducts and the Triple Crossing were built with Main Street Station, opened 1901.",
+   "note": "The elevated viaducts and the Triple Crossing were built with Main Street Station, opened 1901. Rail bridges over the James (the Bellwood Subdivision and Richmond District crossings) are each one OSM way with their viaducts, so they are dated with them; no source here dates the river crossings themselves (undated: needs a source).",
    "sources": [
     "https://www.richmondrailroadmuseum.com/railroad-history",
     "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
@@ -32680,6 +33526,43 @@
    "sources": [
     "https://en.wikipedia.org/wiki/Richmond,_Fredericksburg_and_Potomac_Railroad"
    ]
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "trunk_link",
+     "primary_link",
+     "secondary_link",
+     "tertiary_link"
+    ]
+   },
+   "eras": [
+    [
+     1958,
+     null
+    ]
+   ],
+   "note": "Ramps and turning roads of the interchanges, dated with the turnpike: approximate, not sourced."
+  },
+  {
+   "where": {
+    "tag": "service",
+    "is": [
+     "parking_aisle",
+     "driveway",
+     "drive-through",
+     "parking",
+     "emergency_access"
+    ]
+   },
+   "eras": [
+    [
+     1960,
+     null
+    ]
+   ],
+   "note": "Parking aisles, driveways and drive-throughs, dated with surface parking (1960): approximate, not sourced."
   },
   {
    "where": {
@@ -32713,11 +33596,11 @@
    },
    "eras": [
     [
-     1950,
+     1960,
      null
     ]
    ],
-   "note": "Surface parking: an approximate date, not sourced."
+   "note": "Surface parking, from 1960: the year by which the traced buildings no later map accounts for are assumed gone, when clearing for parking and highways began. Approximate, not sourced."
   },
   {
    "where": {
@@ -32731,15 +33614,535 @@
     ]
    ],
    "note": "Road bridges not named above (over the rail lines and the interstate) are dated with the viaducts: approximate."
+  },
+  {
+   "where": {
+    "tag": "junction",
+    "is": [
+     "roundabout",
+     "circular"
+    ]
+   },
+   "eras": [
+    [
+     1990,
+     null
+    ]
+   ],
+   "note": "Roundabouts and traffic circles: the modern roundabout came to the United States in 1990, and those mapped here belong to the riverfront's redevelopment. Drawn from 1990: approximate.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Roundabout"
+   ]
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "service"
+    ],
+    "without": [
+     "service",
+     "name"
+    ]
+   },
+   "eras": [
+    [
+     1960,
+     null
+    ]
+   ],
+   "note": "Unnamed service roads of no particular kind (the drives and rings of parking lots, private drives): dated with surface parking, from 1960. Approximate, not sourced. Alleys (service=alley) and named service streets stay with the street grid."
+  },
+  {
+   "where": {
+    "tag": "highway",
+    "is": [
+     "trunk",
+     "primary",
+     "secondary",
+     "tertiary",
+     "residential",
+     "unclassified",
+     "living_street",
+     "service"
+    ]
+   },
+   "eras": [
+    [
+     null,
+     null
+    ]
+   ],
+   "note": "The street grid is drawn in every year, within the town plan while it stands and, for minor streets, only beside a building of the year (streetsNearBuildings)."
+  },
+  {
+   "where": {
+    "tag": "highway"
+   },
+   "eras": [],
+   "note": "Any other way (construction, elevators, platforms): not dated, drawn today only."
+  },
+  {
+   "where": {
+    "tag": "waterway",
+    "is": [
+     "river",
+     "stream",
+     "riverbank"
+    ]
+   },
+   "eras": [
+    [
+     null,
+     null
+    ]
+   ],
+   "note": "Natural water courses are drawn in every year."
+  },
+  {
+   "where": {
+    "tag": "waterway"
+   },
+   "eras": [],
+   "note": "Dams, weirs, canals, drains and ditches not dated above (the Manchester Canal, the Hollywood and VEPCO dams among them): no source here dates them, so they are drawn today only. Undated: each needs a source."
+  },
+  {
+   "where": {
+    "tag": "water",
+    "is": [
+     "basin",
+     "wastewater",
+     "pond",
+     "lake",
+     "reservoir",
+     "reflecting_pool",
+     "fountain",
+     "canal"
+    ]
+   },
+   "eras": [],
+   "note": "Basins, ponds, pools and canal beds not dated above: drawn today only."
+  },
+  {
+   "where": {
+    "tag": "man_made"
+   },
+   "eras": [],
+   "note": "Piers, bridge outlines and other works: not dated, drawn today only."
+  },
+  {
+   "where": {
+    "tag": "leisure"
+   },
+   "eras": [],
+   "note": "Parks, playgrounds, sports fields and gardens: no source here dates them (Capitol Square, Libby Hill and Chimborazo parks among them), so they are drawn today only. Undated: each needs a source."
+  },
+  {
+   "where": {
+    "tag": "landuse",
+    "is": [
+     "cemetery",
+     "grass",
+     "flowerbed",
+     "recreation_ground",
+     "village_green",
+     "basin"
+    ]
+   },
+   "eras": [],
+   "note": "Cemeteries and laid-out grounds: no source here dates them (St. John's churchyard among them), so they are drawn today only. Undated: each needs a source."
+  },
+  {
+   "where": {
+    "tag": "amenity"
+   },
+   "eras": [],
+   "note": "Other amenities (fountains, plazas): not dated, drawn today only."
   }
  ],
  "dates": [
+  {
+   "id": "w113030476",
+   "name": "Main Street Station",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/113030476",
+   "note": "OSM's outline of the station, head house and shed in one, is drawn in today's scene only: in the set's years the station is drawn as curated parts (mss-*), from the 1900 plan and the HAER drawings."
+  },
   {
    "id": "w252997396",
    "name": "Broad Street Station (Science Museum of Virginia)",
    "year": 1976,
    "source": "https://smv.org/about/history-of-the-museum/",
    "note": "Today's outline, with the museum's 1971 dome theater, is drawn from 1976, when the Science Museum took the building; before that the station is drawn from its curated parts."
+  },
+  {
+   "id": "w943656807",
+   "name": "South Falls garage",
+   "year": 2018,
+   "source": "https://richmondbizsense.com/2018/05/21/100m-manchester-riverfront-project-begins-summer-14-story-tower/",
+   "note": "The parking deck of the South Falls project, begun in 2018 (approximate)."
+  },
+  {
+   "id": "w44888568",
+   "name": "Greater Richmond Convention Center",
+   "year": 2003,
+   "source": "https://www.visitrichmondva.com/meetings/blog/home/post/greater-richmond-convention-center-celebrates-20-years/",
+   "note": "Today's building, the expansion of 2003, covering several blocks; the parcel's recorded year (1900) is an older building's."
+  },
+  {
+   "id": "w1497207098",
+   "name": "CarMax Park",
+   "year": 2026,
+   "source": "https://richmondbizsense.com/2026/04/08/slideshow-flying-squirrels-play-ball-in-new-home-at-carmax-park/",
+   "note": "The Flying Squirrels' new ballpark, first played in in April 2026; the parcel's recorded year (1925) is an older building's."
+  },
+  {
+   "id": "w1497207099",
+   "name": "CarMax Park (grandstand)",
+   "year": 2026,
+   "source": "https://richmondbizsense.com/2026/04/08/slideshow-flying-squirrels-play-ball-in-new-home-at-carmax-park/",
+   "note": "The Flying Squirrels' new ballpark, first played in in April 2026; the parcel's recorded year (1925) is an older building's."
+  },
+  {
+   "id": "w975554474",
+   "name": "Sauer Center parking deck",
+   "year": 2020,
+   "source": "https://richmondbizsense.com/2019/06/07/sauer-eyes-new-office-building-800-space-parking-deck-near-whole-foods/",
+   "note": "A five-level deck planned in May 2019 on the surface lot behind 2220 W. Broad Street; dated 2020 (approximate: built after the plan). The parcel's recorded year (1910) is an older building's."
+  },
+  {
+   "id": "w466009777",
+   "name": "Cookie Factory tower",
+   "year": 1927,
+   "source": "https://cookiefactorylofts.com/history",
+   "note": "The factory's first building, a six-storey tower completed in 1927; the company added to it through the 1940s and 1950s."
+  },
+  {
+   "id": "w146689449",
+   "name": "Virginia Museum of Fine Arts",
+   "year": 2010,
+   "source": "https://sah-archipedia.org/buildings/VA-01-RI307",
+   "note": "Today's outline takes in the wings of 1954, 1970, 1976, 1984 and 2010 around the 1936 building facing the Boulevard. The 1936 building alone is not mapped, so the museum is not drawn before the outline was complete (approximate: it stood from 1936)."
+  },
+  {
+   "id": "w366226948",
+   "name": "Virginia State Capitol, central block",
+   "year": 1788,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "Jefferson's Capitol, completed 1788 (https://vga.virginia.gov/?p=73). Its footprint is OSM's central building part (w366226948), taken to be the original building because it stands between the two wings of 1904–06; that identification is not from the source. OSM tags it 8.1 m; its height here, 26 m, is the roof height (85 ft, three floors) SkyscraperPage measured: https://skyscraperpage.com/b190890.",
+   "height": 26
+  },
+  {
+   "id": "w366226949",
+   "name": "Virginia State Capitol, west wing",
+   "year": 1906,
+   "height": 18,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "One of the two wings added 1904–06, an OSM building part with two levels and no height (drawn about 7 m, below the houses around the square). 18 m, under the central block's 26 m roof, is approximate."
+  },
+  {
+   "id": "w366226950",
+   "name": "Virginia State Capitol, east wing",
+   "year": 1906,
+   "height": 18,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "One of the two wings added 1904–06, an OSM building part with two levels and no height (drawn about 7 m, below the houses around the square). 18 m, under the central block's 26 m roof, is approximate."
+  },
+  {
+   "id": "w45088494",
+   "name": "Virginia State Capitol",
+   "year": 1906,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "The Capitol as OSM outlines it today, with the wings of 1904–06, from 1906. OSM maps it as three parts: the central block (below) and the two wings."
+  },
+  {
+   "id": "w400327565",
+   "name": "St. John's Church",
+   "year": 1741,
+   "source": "https://sah-archipedia.org/node/20521",
+   "height": 9,
+   "note": "Completed 1741 (https://lva-virginia.libguides.com/richmond-maps/history). A one-story frame church with a double-pitched roof, enlarged in 1772 and 1829, with a tower from 1833 (rebuilt 1866 and 1904–05). OSM gives no height, so it was drawn at the 16 m guess for a church; 9 m for the ridge is approximate. The outline is today's, so it shows the later additions in every year."
+  },
+  {
+   "id": "w365615571",
+   "name": "Old Stone House",
+   "year": 1754,
+   "source": "https://en.wikipedia.org/wiki/Old_Stone_House_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w207696511",
+   "name": "Masons Hall",
+   "year": 1787,
+   "source": "https://en.wikipedia.org/wiki/History_of_Richmond,_Virginia"
+  },
+  {
+   "id": "w224601769",
+   "name": "Wickham House",
+   "year": 1812,
+   "source": "https://en.wikipedia.org/wiki/Wickham_House"
+  },
+  {
+   "id": "w658620667",
+   "name": "Executive Mansion",
+   "year": 1813,
+   "source": "https://en.wikipedia.org/wiki/Virginia_Governor%27s_Mansion"
+  },
+  {
+   "id": "w224530979",
+   "name": "Monumental Church",
+   "year": 1814,
+   "source": "https://en.wikipedia.org/wiki/Monumental_Church"
+  },
+  {
+   "id": "w224601753",
+   "name": "White House of the Confederacy",
+   "year": 1818,
+   "source": "https://en.wikipedia.org/wiki/White_House_of_the_Confederacy"
+  },
+  {
+   "id": "w224530980",
+   "name": "Egyptian Building",
+   "year": 1845,
+   "source": "https://en.wikipedia.org/wiki/Egyptian_Building"
+  },
+  {
+   "id": "r19918536",
+   "name": "St. Paul's Episcopal Church",
+   "year": 1845,
+   "source": "https://en.wikipedia.org/wiki/St._Paul%27s_Episcopal_Church_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w113023444",
+   "name": "Old City Hall",
+   "year": 1894,
+   "source": "https://en.wikipedia.org/wiki/Old_City_Hall_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w236488169",
+   "name": "First National Bank Building",
+   "year": 1913,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "Completed 1913, Richmond's first high-rise; the assessor's year (1911) put it two years early."
+  },
+  {
+   "id": "w266761453",
+   "name": "The Virginia",
+   "year": 1906,
+   "source": "https://en.wikipedia.org/wiki/The_Virginia",
+   "note": "Five-story apartment building of 1906 (National Register); the assessor's year (1847) is the parcel's, not the building's."
+  },
+  {
+   "id": "w236488141",
+   "name": "Hotel John Marshall",
+   "year": 1929,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "The hotel opened in 1929 (fifteen floors); the assessor's year (1920) put it in the 1925 scene."
+  },
+  {
+   "id": "w365155760",
+   "name": "Hotel John Marshall, tower",
+   "year": 1929,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia"
+  },
+  {
+   "id": "w822723705",
+   "name": "Hotel John Marshall, tower",
+   "year": 1929,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia"
+  },
+  {
+   "id": "w225274650",
+   "name": "Riverside on the James",
+   "year": 2005,
+   "source": "https://richmondbizsense.com/2021/04/08/riverside-on-the-james-ll-flooring-headquarters-sell-for-combined-93m/",
+   "note": "The fifteen-story office tower was built in 2005; the assessor's year (1920) is the old power plant site's."
+  },
+  {
+   "id": "w225274652",
+   "name": "Riverside on the James, parking deck",
+   "year": 2005,
+   "source": "https://www.businesswire.com/news/home/20210407005264/en/American-Real-Estate-Partners-Sells-Class-A-Richmond-Office-Tower-to-Opal-Holdings/",
+   "note": "The tower's attached parking deck. Its year is taken to be the tower's (2005); approximate."
+  },
+  {
+   "id": "w398440546",
+   "name": "The Locks Tower",
+   "year": 2019,
+   "source": "https://www.multihousingnews.com/downtown-richmond-gets-new-luxury-high-rise/",
+   "note": "Twelve-story apartment tower at 1001 E. Byrd St., completed by October 2019 (planned in 2017: https://richmondbizsense.com/2017/11/20/58m-12-story-tower-slated-along-canal/)."
+  },
+  {
+   "id": "w943656806",
+   "name": "South Falls Tower",
+   "year": 2021,
+   "source": "https://richmondbizsense.com/2022/01/05/developers-plan-next-phases-of-riverfront-residential-towers-in-manchester/",
+   "note": "Fourteen-story L-shaped tower at 111 Hull St., finished in 2021 on a former paper-mill site; the assessor's year (1929) put it in the 1950 scene."
+  },
+  {
+   "id": "w1078391655",
+   "name": "The Hydro",
+   "year": 2022,
+   "source": "https://richmondbizsense.com/2022/04/14/new-hydro-building-in-manchester-flush-with-commercial-tenants/",
+   "note": "Seven-story apartment building at 101 Manchester Road, recently completed in April 2022."
+  },
+  {
+   "id": "w1078391657",
+   "name": "Shiplock Views",
+   "year": 2021,
+   "source": "https://richmondbizsense.com/2020/10/22/project-snapshot-shiplock-views-coming-into-view/",
+   "note": "New apartment building, five stories on Main Street and nine toward the river, slated to be finished in spring 2021."
+  },
+  {
+   "id": "r21542843",
+   "name": "The Hues at City View",
+   "year": 2025,
+   "source": "https://www.donleyinc.com/?p=20172",
+   "note": "Apartment building in Manchester completed in July 2025; the assessor's year (1920) put it in the 1925 scene."
+  },
+  {
+   "id": "w236488171",
+   "name": "Virginia Mutual Building",
+   "year": 1921,
+   "source": "https://en.wikipedia.org/wiki/Virginia_Mutual_Building",
+   "note": "Built 1920–21 at 821 E. Main St. Curating its neighbor, the First National Bank Building, sets aside their shared parcel's year, so it is dated here."
+  },
+  {
+   "id": "w263127152",
+   "name": "Ross Building",
+   "year": 1965,
+   "source": "https://skyscraperpage.com/b18849",
+   "note": "The Ross Building, 801 E. Main St. (OSM: 8th and Main Apartments, old name Ross Building, 18 levels), finished in 1965: SkyscraperPage gives 1965 and 18 floors, and the Main Street Banking Historic District nomination of 2025 gives 1965 (16 stories): https://www.dhr.virginia.gov/wp-content/uploads/2023/03/127-6031_Main_St_Banking_HD_2025_UpdateBD_NRHP_Nomination_FINAL.pdf. The assessor's year (1925) put the tower in the 1925 and 1950 scenes. What stood on the lot before is not known here, so earlier scenes leave the lot empty."
+  },
+  {
+   "id": "w263153832",
+   "name": "Chesapeake and Potomac Telephone Company Building",
+   "year": 1929,
+   "source": "https://sah-archipedia.org/node/1098",
+   "note": "The C&P Telephone building at 703 E. Grace St. (OSM: Verizon Building), built in 1929 by Voorhees, Gmelin and Walker, with later additions. The assessor's year (1900) put it in the 1925 scene. Its building part (w365156597) takes this year."
+  },
+  {
+   "id": "w113029203",
+   "name": "Federal Reserve Bank building (Supreme Court of Virginia)",
+   "year": 1921,
+   "source": "https://en.wikipedia.org/wiki/Federal_Reserve_Bank_of_Richmond",
+   "note": "Built 1919–21 for the Federal Reserve Bank at 100 N. Ninth St.; the Supreme Court of Virginia since. The assessor's year is 1919."
+  },
+  {
+   "id": "w224757094",
+   "name": "Hotel Richmond (Barbara Johns Building)",
+   "year": 1911,
+   "source": "https://en.wikipedia.org/wiki/Hotel_Richmond",
+   "note": "The Hotel Richmond, later the Ninth Street Office Building: its first phase opened in 1904 and it was built out in phases until 1911; drawn whole from 1911. The assessor's year is 1903."
+  },
+  {
+   "id": "w236488175",
+   "name": "Mutual Building",
+   "year": 1912,
+   "source": "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-6031_Main_Street_Banking_HD_2005_NR_FINAL.pdf",
+   "note": "909 E. Main St.: built 1904, its upper floors added in 1912 (Main Street Banking Historic District nomination, 2005); drawn at today's height from 1912. The assessor's year is 1904."
+  },
+  {
+   "id": "w263127149",
+   "name": "Hotel Rueger (The Commonwealth)",
+   "year": 1913,
+   "source": "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-6031_Main_Street_Banking_HD_2005_NR_FINAL.pdf",
+   "note": "The Hotel Rueger at Ninth and Bank streets (later the Commonwealth Park Hotel), built 1912–13 (Main Street Banking Historic District nomination, 2005; its entry is 9 N. Ninth St., OSM's 901 Bank St. is the same corner). The assessor's year is 1917."
+  },
+  {
+   "id": "w263127151",
+   "name": "State and City Bank and Trust Company Building",
+   "year": 1923,
+   "source": "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-6031_Main_Street_Banking_HD_2005_NR_FINAL.pdf",
+   "note": "900 E. Main St., fourteen stories, 1923 (Main Street Banking Historic District nomination, 2005); the west tower of today's Pocahontas Building complex (https://historicrichmond.com/pocahontas-building/)."
+  },
+  {
+   "id": "w263127150",
+   "name": "Pocahontas Building, east tower",
+   "year": 1962,
+   "source": "https://historicrichmond.com/pocahontas-building/",
+   "note": "The east tower of the Pocahontas Building complex at 900 E. Main St., added in 1962 (the 2005 district nomination lists it as a non-historic addition of 1962: https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-6031_Main_Street_Banking_HD_2005_NR_FINAL.pdf). The assessor's year (1923) is the west tower's."
+  },
+  {
+   "id": "w264518636",
+   "name": "American National Bank Building",
+   "year": 1904,
+   "source": "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-6031_Main_Street_Banking_HD_2005_NR_FINAL.pdf",
+   "note": "1001 E. Main St. (OSM: American Heritage Apartments), built 1904 (Main Street Banking Historic District nomination, 2005). The assessor's year is 1910."
+  },
+  {
+   "id": "w264523638",
+   "name": "629 East Main Street",
+   "year": 1922,
+   "source": "https://skyscraperpage.com/b18864",
+   "note": "Fourteen floors, completed 1922 (SkyscraperPage), as the assessor also gives."
+  },
+  {
+   "id": "w264523645",
+   "name": "Virginia Electric and Power Company building (The Edison)",
+   "year": 1913,
+   "source": "https://smandf.com/portfolio/700-centre-tower-annex",
+   "note": "700 E. Franklin St., formerly the headquarters of Virginia Electric & Power Company, a high-rise built in 1913."
+  },
+  {
+   "id": "w264525427",
+   "name": "Richmond Chamber of Commerce (Eskimo Pie) Building",
+   "year": 1912,
+   "source": "https://sah-archipedia.org/node/1066",
+   "note": "530 E. Main St., built in 1912 for the Richmond Chamber of Commerce by Carneal and Johnston. The assessor's year is 1911."
+  },
+  {
+   "id": "w263153830",
+   "name": "Richmond Garage",
+   "year": 1927,
+   "source": "https://historicrichmond.com/richmond-garage-at-6th-and-franklin-streets/",
+   "note": "The Richmond Garage at Sixth and Franklin streets, built in 1927: a parking garage that does date from before the decks of the 1960s (see parkingFrom)."
+  },
+  {
+   "id": "w207771792",
+   "name": "Upper Lofts at Canal Walk",
+   "year": null,
+   "source": "https://www.apartments.com/lofts-and-upper-lofts-at-canal-walk-iii-richmond-va/v56777d/",
+   "note": "No source found for when this seven-level building was built: the listing's 1900 is the assessor's year, the only date there is, and is not taken. Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w389993686",
+   "name": "The Lofts at Shiplock Watch",
+   "year": null,
+   "source": "https://richmondbizsense.com/2020/02/24/land-buys-clear-way-for-shiplock-views-apartment-project/",
+   "note": "Richmond BizSense describes a three- and four-story building, so OSM's nine levels are wrong, and no source found gives its year (the assessor's is 1840). Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w264525430",
+   "name": "501 East Franklin",
+   "year": null,
+   "source": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+   "note": "An eight-level building whose only date is the assessor's (1916); no other source found. Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w366062353",
+   "name": "Virginia Electric and Power Company building, annex",
+   "year": null,
+   "source": "https://smandf.com/portfolio/700-centre-tower-annex",
+   "note": "The seven-story annex of the 1913 tower at 700 E. Franklin St.; no source found gives its year (the assessor's is the tower's lot, 1913). Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w236488153",
+   "name": "Grace Place Apartments",
+   "year": null,
+   "source": "https://richmondbizsense.com/2026/01/05/two-years-later-rrha-led-apartments-rehab-on-grace-st-remains-preliminary/",
+   "note": "The eleven-story apartment building at Grace and Fourth streets: no source found gives the year it was built (the assessor's 1922 is the lot's; its use as affordable housing dates from 2001). Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w264518638",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/264518638",
+   "note": "A building part 45.7 m tall (OSM) whose only date is its parcel's (1890), far older than any building of that height downtown; no source found dates it. Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w822799760",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/822799760",
+   "note": "A building part 25 m tall (OSM) whose only date is its parcel's (1910); no source found dates it. Drawn in today's scene only until a source dates it."
   }
  ],
  "sanborn": {
@@ -32754,6 +34157,28 @@
   "source": "https://www.loc.gov/item/sanborn09064_009/"
  },
  "streetsNearBuildings": 60,
+ "serviceNearBuildings": 25,
+ "parkingFrom": 1960,
+ "canalBridgesFrom": 1999,
  "streetcarScale": 1,
- "railScale": 4
+ "railScale": 4,
+ "groundsByParcel": true,
+ "vergeTags": [
+  "landuse=grass",
+  "landuse=meadow",
+  "natural=grassland",
+  "landuse=flowerbed"
+ ],
+ "approachesWithBridges": true,
+ "viaductClearance": 4,
+ "tracedClearOfStreets": 2,
+ "streetsUnderCars": true,
+ "tracedSmooth": 2.5,
+ "siteWholeLines": true,
+ "clearCarLines": true,
+ "tieClear": 0.5,
+ "carLineBed": 1.5,
+ "carLineSeal": true,
+ "revolveInkFoot": true,
+ "trainsClearOfDecks": true
 }

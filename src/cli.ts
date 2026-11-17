@@ -20,7 +20,7 @@ import { buildScene, type TimeContext } from './scene.ts'
 import { anchorOf, renderSection, sectionRegion } from './section.ts'
 import { loadSiteConfig, writeSocial } from './social.ts'
 import { pageDates, planStatic, plainLinks, shareDoors, writeStatic } from './static-pages.ts'
-import { dateBuildings, fetchYearBuilt, loadHistory, loadYearBuilt, switchedOn, yearBuiltDirs, type History, type Parcel } from './history.ts'
+import { dateBuildings, dateGrounds, fetchYearBuilt, loadHistory, loadYearBuilt, switchedOn, yearBuiltDirs, type History, type Parcel } from './history.ts'
 import type { PolygonFeature } from './osm.ts'
 
 const run = promisify(execFile)
@@ -100,7 +100,9 @@ const loadInputs = async (name: string) => {
     if (region.time.yearBuilt !== undefined) {
       parcels = (await loadYearBuilt(yearBuiltDirs(region, resolve('data')), region.time.yearBuilt.field, name)).parcels
     }
-    dates = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates, 4, 8, history.parkingFrom)
+    const dated = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates, 4, 8, history.parkingFrom)
+    if (history.groundsByParcel === true) for (const [id, d] of dateGrounds(features, parcels, history.dates)) if (!dated.has(id)) dated.set(id, d)
+    dates = dated
   }
   return { region, features, elevation, extra, history, dates }
 }

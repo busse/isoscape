@@ -219,8 +219,66 @@ export const offsetJoined = (segs: readonly (readonly Vec2[])[], k: number): Vec
  * rectangle square to the track where it stands, spaced evenly along the whole line (the
  * spacing carries on across a joint, and starts again only after a break in the line).
  */
-export const tiesAlong = (segs: readonly (readonly Vec2[])[]): Vec2[][] => {
+/** Meters: far out, a track's tie marks within this of another track's already drawn are left out (`clearRuns`). */
+export const TIE_RUN_CLEAR = 3.5
+
+/**
+ * Center lines (each track a list of segments), with the parts of each that run within `clear`
+ * meters of a track before it left out, in pieces of up to 2 m: where two tracks lie together
+ * only the first keeps its marks.
+ */
+export const clearRuns = (tracks: readonly (readonly (readonly Vec2[])[])[], clear: number): Vec2[][] => {
   const out: Vec2[][] = []
+  const kept = new Map<string, Vec2[][]>()
+  const cell = clear
+  const key = (p: Vec2) => `${Math.floor(p[0] / cell)},${Math.floor(p[1] / cell)}`
+  const near = (p: Vec2): boolean => {
+    const gx = Math.floor(p[0] / cell), gy = Math.floor(p[1] / cell)
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+      for (const [a, b] of kept.get(`${gx + dx},${gy + dy}`) ?? []) {
+        const ex = b[0] - a[0], ey = b[1] - a[1], l2 = ex * ex + ey * ey
+        const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * ex + (p[1] - a[1]) * ey) / l2))
+        if (Math.hypot(p[0] - a[0] - t * ex, p[1] - a[1] - t * ey) < clear) return true
+      }
+    }
+    return false
+  }
+  for (const track of tracks) {
+    const mine: Vec2[][] = []
+    for (const [a, b] of track) {
+      const len = Math.hypot(b[0] - a[0], b[1] - a[1])
+      const n = Math.max(1, Math.ceil(len / 2))
+      let run: Vec2[] | null = null
+      for (let k = 0; k < n; k++) {
+        const p: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
+        const q: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 1)) / n, a[1] + ((b[1] - a[1]) * (k + 1)) / n]
+        if (near([(p[0] + q[0]) / 2, (p[1] + q[1]) / 2])) { run = null; continue }
+        if (run === null) { run = [p, q]; out.push(run) } else run[1] = q
+        mine.push([p, q])
+      }
+    }
+    for (const sg of mine) for (const c of new Set([key(sg[0]), key(sg[1])])) { const list = kept.get(c); if (list) list.push(sg); else kept.set(c, [sg]) }
+  }
+  return out
+}
+
+export const tiesAlong = (segs: readonly (readonly Vec2[])[], clear = 0): Vec2[][] => {
+  const out: Vec2[][] = []
+  // With `clear`, a tie whose center is within that many meters of one already laid is left
+  // out: where two tracks lie over each other (a turnout, a wye's legs) their ties do not clump.
+  const laid = new Map<string, Vec2[]>()
+  const free = (c: Vec2): boolean => {
+    if (clear <= 0) return true
+    const gx = Math.floor(c[0] / clear), gy = Math.floor(c[1] / clear)
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+      for (const q of laid.get(`${gx + dx},${gy + dy}`) ?? []) if (Math.hypot(q[0] - c[0], q[1] - c[1]) < clear) return false
+    }
+    const k = `${gx},${gy}`
+    const list = laid.get(k)
+    if (list) list.push(c)
+    else laid.set(k, [c])
+    return true
+  }
   let next = TIE.every / 2
   let prev: Vec2 | undefined
   for (const [a, b] of segs) {
@@ -234,6 +292,7 @@ export const tiesAlong = (segs: readonly (readonly Vec2[])[]): Vec2[][] => {
     const hw = TIE.width / 2
     for (; next <= len; next += TIE.every) {
       const c: Vec2 = [a[0] + u[0] * next, a[1] + u[1] * next]
+      if (!free(c)) continue
       out.push([
         [c[0] - n[0] * hl - u[0] * hw, c[1] - n[1] * hl - u[1] * hw],
         [c[0] + n[0] * hl - u[0] * hw, c[1] + n[1] * hl - u[1] * hw],
@@ -431,17 +490,67 @@ export const renderSvg = (scene: Scene): Rendered => {
     ribbonLayer('rail'),
     // Close up, the ties lie on the ballast as ground polygons (opaque: two strips paint the
     // ground where they lap, and a see-through tie would come out darker there).
-    { cls: 'tie', small: true, entries: close ? tiesAlong(scene.ribbons.filter((rb) => rb.kind === 'rail').flatMap((rb) => rb.center)).map((q) => entryOf([q])) : [] },
+    { cls: 'tie', small: true, entries: close ? tiesAlong(scene.ribbons.filter((rb) => rb.kind === 'rail').flatMap((rb) => rb.center), scene.time?.tieClear ?? 0).map((q) => entryOf([q])) : [] },
     ribbonLayer('tram'),
   ]
   const lineLayer = (kind: string, cls: string) => ({
     cls,
     segs: scene.ribbons.filter((rb) => rb.kind === kind).flatMap((rb) => rb.center),
   })
+  // With carDecks, no tie mark is laid across a car line (a level crossing): the line is drawn
+  // over the track, as the street was.
+  const trams = scene.time?.carDecks === true ? scene.ribbons.filter((rb) => rb.kind === 'tram') : []
+  const tramHalf = trams.length === 0 ? 0 : Math.hypot(trams[0].quads[0][1][0] - trams[0].quads[0][2][0], trams[0].quads[0][1][1] - trams[0].quads[0][2][1]) / 2
+  const tramSegs = trams.flatMap((rb) => rb.center)
+  const offCars = (segs: Vec2[][]): Vec2[][] => {
+    if (tramSegs.length === 0) return segs
+    const cell = 50
+    const grid = new Map<string, Vec2[][]>()
+    for (const sg of tramSegs) {
+      const [a, b] = sg
+      for (let x = Math.floor((Math.min(a[0], b[0]) - tramHalf - 1) / cell); x <= Math.floor((Math.max(a[0], b[0]) + tramHalf + 1) / cell); x++)
+        for (let y = Math.floor((Math.min(a[1], b[1]) - tramHalf - 1) / cell); y <= Math.floor((Math.max(a[1], b[1]) + tramHalf + 1) / cell); y++) {
+          const k = `${x},${y}`
+          const l = grid.get(k)
+          if (l) l.push(sg)
+          else grid.set(k, [sg])
+        }
+    }
+    const near = (p: Vec2) => (grid.get(`${Math.floor(p[0] / cell)},${Math.floor(p[1] / cell)}`) ?? []).some(([a, b]) => {
+      const dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy
+      const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2))
+      return Math.hypot(p[0] - a[0] - t * dx, p[1] - a[1] - t * dy) <= tramHalf + 1
+    })
+    const out: Vec2[][] = []
+    for (const seg of segs) {
+      // Runs are kept whole (their dash pattern unbroken) except where they pass under a line.
+      let cur: Vec2[] = []
+      for (let i = 0; i + 1 < seg.length; i++) {
+        const a = seg[i], b = seg[i + 1]
+        const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 2))
+        for (let k = 0; k < n; k++) {
+          const p: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
+          const q: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 1)) / n, a[1] + ((b[1] - a[1]) * (k + 1)) / n]
+          if (near([(p[0] + q[0]) / 2, (p[1] + q[1]) / 2])) { if (cur.length > 0) cur.push(p); if (cur.length >= 2) out.push(cur); cur = []; continue }
+          if (cur.length === 0) cur.push(p)
+          if (k === n - 1) cur.push(q)
+        }
+      }
+      if (cur.length >= 2) out.push(cur)
+    }
+    return out
+  }
   const railCenters = lineLayer('rail', 'ties').segs
   const gauge = (k: number): Vec2[][] => offsetJoined(railCenters, k)
+  // Far out, a series that clears its ties (tieClear) draws one track's tie marks where two
+  // run together (a turnout, a wye's legs), not both: two dash patterns laid over each other
+  // read as clumps across the shared ballast.
+  const farTies0 = scene.time?.tieClear === undefined || scene.time.tieClear <= 0
+    ? lineLayer('rail', 'ties')
+    : { cls: 'ties', segs: clearRuns(scene.ribbons.filter((rb) => rb.kind === 'rail').map((rb) => rb.center), TIE_RUN_CLEAR) }
+  const farTies = tramSegs.length === 0 ? farTies0 : { cls: farTies0.cls, segs: offCars(farTies0.segs) }
   const lineLayers = [
-    ...(close ? [] : [lineLayer('rail', 'ties')]),
+    ...(close ? [] : [farTies]),
     ...(close ? [{ cls: 'steel', segs: [...gauge(0.72), ...gauge(-0.72)] }] : []),
     lineLayer('weir', 'crest'),
   ]
@@ -739,6 +848,32 @@ export const renderSvg = (scene: Scene): Rendered => {
     return out
   }
   /**
+   * A ring cut wherever its edges cross a grid line, so each edge lies in one cell. Draped, two
+   * pieces of one shape cut by different strips then share every point along their common
+   * edges, and their edges meet without a step.
+   */
+  const gridCut = (pts: readonly Vec2[]): Vec2[] => {
+    if (T.flat) return pts.slice()
+    const out: Vec2[] = []
+    const n = pts.length
+    for (let k = 0; k < n; k++) {
+      const a = pts[k]
+      const b = pts[(k + 1) % n]
+      const ts: number[] = []
+      const dx = b[0] - a[0]
+      const dy = b[1] - a[1]
+      if (Math.abs(dx) > 1e-9) {
+        for (let i = Math.ceil((Math.min(a[0], b[0]) - T.x0) / c); i <= Math.floor((Math.max(a[0], b[0]) - T.x0) / c); i++) ts.push((T.x0 + i * c - a[0]) / dx)
+      }
+      if (Math.abs(dy) > 1e-9) {
+        for (let j = Math.ceil((Math.min(a[1], b[1]) - T.y0) / c); j <= Math.floor((Math.max(a[1], b[1]) - T.y0) / c); j++) ts.push((T.y0 + j * c - a[1]) / dy)
+      }
+      out.push(a)
+      for (const t of ts.filter((u) => u > 1e-9 && u < 1 - 1e-9).sort((u, v) => u - v)) out.push([a[0] + dx * t, a[1] + dy * t])
+    }
+    return out
+  }
+  /**
    * Where the segment a–b (view meters, within one cell) crosses the cell's traced shoreline,
    * in order from a: none unless the cell is part water and part land.
    */
@@ -927,15 +1062,23 @@ export const renderSvg = (scene: Scene): Rendered => {
       // its edge draped between its own points, and a tie cut on that same line showed a sliver
       // of the one beneath; reaching past it, the strip paints the tie over its own lap's edge.
       const smallBand: Rect = { ...band, maxY: band.maxY + (s.n1 < fr.maxY ? 0.25 : 0) }
+      // Sealed car lines (carLineSeal) reach further back, past this strip's own lapped streets
+      // by more than their sealing stroke's round corners (half a unit on screen), and keep
+      // every point: simplified separately, two strips' pieces of the band met a little apart,
+      // and the street lapped under it showed through as a notch.
+      const sealBand: Rect = { ...band, maxY: band.maxY + (s.n1 < fr.maxY ? 0.5 / (view.scale * view.squash) : 0) }
       for (const layer of list) {
         let d = ''
+        const sealed = layer.cls === 'tram' && scene.time?.carLineSeal === true
         for (const e of layer.entries) {
-          if (layer.small === true ? e.maxN < smallBand.minY || e.minN > smallBand.maxY : e.maxN < s.n0 || e.minN > s.n1) continue
+          if (sealed ? e.maxN < sealBand.minY || e.minN > sealBand.maxY : layer.small === true ? e.maxN < smallBand.minY || e.minN > smallBand.maxY : e.maxN < s.n0 || e.minN > s.n1) continue
           // Clipped as one polygon, holes and all: see clipPolygonToRect.
-          for (const clipped of clipPolygonToRect(e.rings, layer.small === true ? smallBand : band)) {
+          for (const clipped of clipPolygonToRect(e.rings, sealed ? sealBand : layer.small === true ? smallBand : band)) {
             // Small pieces keep every corner: simplified, a sliver of a tie cut at the strip's
             // edge could lose one and show as a thin wedge.
-            d += layer.small === true
+            d += sealed
+              ? pathOf(gridCut(clipped).map(drape))
+              : layer.small === true
               ? pathOf(alongShore(clipped, true).map(drape))
               : groundPath(WATERY.has(layer.cls) ? densify(clipped, c).map(drapeWater) : alongShore(densify(clipped, c), true).map(drape))
           }

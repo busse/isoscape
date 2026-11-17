@@ -354,3 +354,49 @@ export const distToSegment = (p: Vec2, a: Vec2, b: Vec2): number => {
   const u = len2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / len2))
   return Math.hypot(p[0] - a[0] - u * dx, p[1] - a[1] - u * dy)
 }
+
+/** Douglas–Peucker: the fewest points of an open polyline that stay within `tol` of it. */
+export const simplifyLine = (pts: readonly Vec2[], tol: number): Vec2[] => {
+  if (pts.length <= 2) return pts.slice()
+  const keep = new Uint8Array(pts.length)
+  keep[0] = keep[pts.length - 1] = 1
+  const stack: [number, number][] = [[0, pts.length - 1]]
+  while (stack.length > 0) {
+    const [i, j] = stack.pop() as [number, number]
+    const a = pts[i], b = pts[j]
+    const dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy
+    let best = -1, far = 0
+    for (let k = i + 1; k < j; k++) {
+      const p = pts[k]
+      const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2))
+      const d = Math.hypot(p[0] - a[0] - t * dx, p[1] - a[1] - t * dy)
+      if (d > far) { far = d; best = k }
+    }
+    if (best >= 0 && far > tol) { keep[best] = 1; stack.push([i, best], [best, j]) }
+  }
+  return pts.filter((_, k) => keep[k] === 1)
+}
+
+/**
+ * A ring without its spikes: a corner sharper than `minDeg` with an edge shorter than `maxLen`
+ * on either side is dropped, again and again until none is left (a traced outline's pixel teeth).
+ */
+export const despike = (ring: Ring, minDeg = 40, maxLen = 8): Ring => {
+  let r = ring.slice()
+  for (let pass = 0; pass < 20 && r.length > 3; pass++) {
+    let changed = false
+    const out: Vec2[] = []
+    for (let i = 0; i < r.length; i++) {
+      const a = r[(i - 1 + r.length) % r.length], b = r[i], c = r[(i + 1) % r.length]
+      const ux = a[0] - b[0], uy = a[1] - b[1], vx = c[0] - b[0], vy = c[1] - b[1]
+      const lu = Math.hypot(ux, uy), lv = Math.hypot(vx, vy)
+      if (lu < 1e-9 || lv < 1e-9) { changed = true; continue }
+      const ang = (Math.acos(Math.max(-1, Math.min(1, (ux * vx + uy * vy) / (lu * lv)))) * 180) / Math.PI
+      if (ang < minDeg && Math.min(lu, lv) < maxLen && r.length - (changed ? 1 : 0) > 3) { changed = true; continue }
+      out.push(b)
+    }
+    r = out
+    if (!changed) break
+  }
+  return r
+}

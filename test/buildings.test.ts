@@ -70,6 +70,40 @@ test("a model's footprint on water is left out; a mapped boathouse stays", async
   assert.equal(scene.stats.footprintsOnWater, 1)
 })
 
+test('a building traced from an old map whose middle is on water mapped today is left out', async () => {
+  const { buildScene } = await import('../src/scene.ts')
+  const { palette } = await import('../src/palette.ts')
+  const { lonLatFromLocal } = await import('../src/region.ts')
+  const region = { name: 't', title: 't', center: [0, 0], width: 400, depth: 400, bearing: 0, scale: 1 } as const
+  const ll = lonLatFromLocal(region as never)
+  const sq = (x: number, y: number, s: number): Vec2[] => square(x, y, s).map(([e, n]) => ll(e, n) as Vec2)
+  const water = { type: 'polygon' as const, id: 'w1', tags: { natural: 'water' }, outers: [sq(-150, -150, 300)], inners: [] }
+  const traced = (id: string, x: number, y: number) => ({ id, ring: sq(x, y, 12), from: 1905, to: 1960, end: 'assumed' as const, material: 'brick' as const, storeys: 3 })
+  const history = { epochs: [], features: [], rules: [], present: 2026, dates: [], traced: [traced('wet', 0, 0), traced('dry', 170, 170)] }
+  const scene = buildScene(region as never, [water], palette('paper'), null, { time: { year: 1925, history: history as never, dates: new Map() } })
+  assert.deepEqual(scene.items.map((i) => i.id).filter((id) => id.startsWith('traced:')), ['traced:dry'])
+  assert.equal(scene.stats.tracedOnWater, 1)
+})
+
+test('a curated lost road bridge is drawn as a bridge in its years, and a streetcar line along it rides its deck', async () => {
+  const { buildScene } = await import('../src/scene.ts')
+  const { palette } = await import('../src/palette.ts')
+  const { lonLatFromLocal } = await import('../src/region.ts')
+  const region = { name: 't', title: 't', center: [0, 0], width: 400, depth: 400, bearing: 0, scale: 1 } as const
+  const ll = lonLatFromLocal(region as never)
+  const line = [ll(-150, 0) as Vec2, ll(150, 0) as Vec2]
+  const bridge = { id: 'old', name: 'Old Bridge', kind: 'bridge', from: 1878, to: 1972, line }
+  const car = { id: 'car', name: 'A line', kind: 'streetcar', from: 1890, to: 1934, line }
+  const history = { epochs: [], features: [bridge, car], rules: [], present: 2026, dates: [], traced: [] }
+  const at = (year: number) => buildScene(region as never, [], palette('paper'), null, { time: { year, history: history as never, dates: new Map() } })
+  const deck = (s: ReturnType<typeof at>) => s.items.filter((i) => i.id.startsWith('history:old.') && !i.id.includes('pier'))
+  const s1925 = at(1925)
+  assert.ok(deck(s1925).length > 0)
+  // The deck carries the line, in the line's color.
+  assert.ok(deck(s1925).some((i) => i.shapes.some((sh) => sh.fill === palette('paper').tram)))
+  assert.equal(deck(at(1980)).length, 0)
+})
+
 test('a building over water counts its height from the banks', () => {
   const outer = square(0, 0, 20)
   const canal = (p: Vec2) => p[0] > 5 && p[0] < 15

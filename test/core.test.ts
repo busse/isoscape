@@ -552,3 +552,39 @@ test('render: a square plate (a cutaway) ends its ground at the sides and keeps 
   assert.match(slabbed, /<svg\b[^>]*data-credits="\[&quot;Map data/)
   assert.match(slabbed, /<desc>Map data © OpenStreetMap contributors \(ODbL\) · Elevation: USGS 3DEP\. Bearing /)
 })
+
+test('despike drops sharp short teeth and keeps a plain outline', async () => {
+  const { despike, simplifyLine } = await import('../src/geom.ts')
+  const square: [number, number][] = [[0, 0], [10, 0], [10, 10], [0, 10]]
+  assert.deepEqual(despike(square), square)
+  // A 3 m tooth, 0.5 m wide, out of the top edge.
+  const toothed: [number, number][] = [[0, 0], [10, 0], [10, 10], [5.25, 10], [5, 13], [4.75, 10], [0, 10]]
+  assert.equal(despike(toothed).length, 6)
+  assert.ok(despike(toothed).every(([, y]) => y <= 10))
+  // simplifyLine keeps the ends and drops a 1 m wiggle at a 2 m tolerance.
+  assert.deepEqual(simplifyLine([[0, 0], [5, 1], [10, 0]], 2), [[0, 0], [10, 0]])
+  assert.deepEqual(simplifyLine([[0, 0], [5, 3], [10, 0]], 2), [[0, 0], [5, 3], [10, 0]])
+})
+
+test('ties: with a clearance, two tracks laid over each other do not clump', async () => {
+  const { tiesAlong } = await import('../src/render.ts')
+  const a: [number, number][] = [[0, 0], [20, 0]]
+  const b: [number, number][] = [[0, 0.2], [20, 0.2]]
+  const plain = tiesAlong([a, b])
+  const cleared = tiesAlong([a, b], 0.5)
+  assert.equal(plain.length, 2 * tiesAlong([a]).length)
+  assert.equal(cleared.length, tiesAlong([a]).length)
+})
+
+test('far-out tie marks: where two tracks run together only the first keeps its marks', async () => {
+  const { clearRuns } = await import('../src/render.ts')
+  const a: [number, number][][] = [[[0, 0], [20, 0]]]
+  // A second track lying on the first for 10 m, then turning off 10 m away.
+  const b: [number, number][][] = [[[0, 0.5], [10, 0.5]], [[10, 0.5], [10, 10.5]]]
+  const runs = clearRuns([a, b], 2.5)
+  const len = (s: readonly (readonly number[])[]) => Math.hypot(s[1][0] - s[0][0], s[1][1] - s[0][1])
+  const total = runs.reduce((t, s) => t + len(s), 0)
+  // All of the first (20 m), none of the second's shared run, most of its turning leg.
+  assert.ok(total > 20 + 7 && total < 20 + 10, `kept ${total}`)
+  assert.ok(runs.every((s) => !(s[0][1] === 0.5 && s[1][1] === 0.5)))
+})

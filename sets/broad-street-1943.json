@@ -3,8 +3,9 @@
  "slug": "broad-street-1943",
  "title": "Broad Street Station, 1943",
  "subtitle": "Richmond's union station at its wartime height, and the railroads that ran from it",
- "note": "Track is today's, dated by the era rules, with the station loop traced from the USGS quadrangles of 1934 and 1956; the station is modeled from its plans, postcards and the 1925 Sanborn sheets, its heights approximate. Buildings are those standing in 1943. Trains are illustrative.",
+ "note": "Track is today's, dated by the era rules, with the station loop traced from the USGS quadrangles of 1934 and 1956; the station is modeled from its plans, postcards and the 1925 Sanborn sheets, its heights approximate. Buildings are today's that stood by 1943, by the city's recorded year built, with lost ones traced from the 1925 Sanborn sheets, their outlines and heights approximate. Trains are illustrative.",
  "credit": "isoscape by Chris Busse  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Buildings dated from City of Richmond assessor records and traced from Sanborn maps (Library of Congress)  ·  Station loop after the USGS Richmond quadrangles of 1934 and 1956",
+ "ground_note": "The ground is today’s, from lidar: cuts and fills made since (the interstates, the Downtown Expressway, the floodwall) show in it.",
  "map": {
   "region": "broad-street-lines",
   "year": 1943
@@ -30,7 +31,7 @@
     37.578283
    ],
    "ground": 900,
-   "note": "About a mile northwest of the station, the RF&P main line from Washington met the Atlantic Coast Line's Belt Line at a wye worked from AY Tower. Trains for the Coast Line swung south onto the Belt Line here; Broad Street trains took the third leg down to the station.",
+   "note": "About a mile northwest of the station, the RF&P main line from Washington met the Atlantic Coast Line's Belt Line at the wye called AY, its switches worked from AY Tower (not drawn: no source here places it). Trains for the Coast Line swung south onto the Belt Line here; Broad Street trains took the third leg down to the station.",
    "sources": [
     "https://chicagorailfan.com/stbrric.html",
     "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad",
@@ -48,11 +49,12 @@
    ],
    "year": 1940,
    "ground": 1500,
-   "note": "From 1906 the State Fair filled these grounds north of the tracks every fall, and Parker Field went up on them for baseball in 1934. The fair association bought Strawberry Hill in 1941 and held its first fair there after the war, in 1946. The Diamond stands on the site.",
+   "note": "From 1906 the State Fair filled these grounds north of the tracks every fall, around its racetrack. Parker Field went up on them in 1934 (not drawn here), a ballpark only from 1954. The fair association bought Strawberry Hill in 1941 and held its first fair there after the war, in 1946. The Diamond stands on the site.",
    "sources": [
     "https://richmondmagazine.com/news/news/a-fair-history/",
     "https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm",
-    "https://urbanscalerichmondvirginia.blogspot.com/2014/12/a-brief-history-of-sports-complex-in.html"
+    "https://urbanscalerichmondvirginia.blogspot.com/2014/12/a-brief-history-of-sports-complex-in.html",
+    "https://en.wikipedia.org/wiki/The_Diamond_(Richmond,_Virginia)"
    ]
   },
   {
@@ -61,14 +63,13 @@
    "title": "Hermitage Road",
    "subtitle": "Industry along the tracks",
    "at": [
-    -77.460587,
-    37.566164
+    -77.4605,
+    37.5668
    ],
-   "ground": 1300,
-   "note": "Once the Seaboard Air Line joined the RF&P here in 1900, firms lined Hermitage Road for the sidings: the Richmond Foundry and Manufacturing Company built at 2300 Hermitage Road in 1906, and the Putney shoe works bought part of the old fair grounds. The warehouses are a historic district today.",
+   "ground": 750,
+   "note": "Once the Seaboard Air Line joined the RF&P just south of here in 1900, firms lined Hermitage Road for the sidings: the Richmond Foundry and Manufacturing Company built at 2300 Hermitage Road, by the junction, in 1906, and warehouses for Export Leaf Tobacco, Miller & Rhoads and A. H. Robins followed. They are a historic district today.",
    "sources": [
-    "https://dhr.virginia.gov/?p=28752",
-    "https://richmondmagazine.com/arts-entertainment/whole-foods-richmond/"
+    "https://dhr.virginia.gov/?p=28752"
    ]
   },
   {
@@ -77,10 +78,10 @@
    "title": "Seaboard Junction",
    "subtitle": "Where the Seaboard left the RF&P",
    "at": [
-    -77.461834,
-    37.564265
+    -77.4618,
+    37.5636
    ],
-   "ground": 1300,
+   "ground": 900,
    "note": "Just north of the station the Seaboard Air Line's main line left the RF&P and ran southeast to Main Street Station. Seaboard trains between Washington and the South passed Broad Street by; only from 1959 did they call there, backing in. The Seaboard and the Coast Line merged in 1967.",
    "sources": [
     "https://chicagorailfan.com/stbrric.html",
@@ -112,8 +113,8 @@
    "title": "C.F. Sauer Company",
    "subtitle": "Broad Street at Hermitage Road",
    "at": [
-    -77.46,
-    37.5572
+    -77.4606,
+    37.5584
    ],
    "ground": 1100,
    "note": "The extract house Conrad Sauer founded at 17th and Broad in 1887 moved to Broad and Hermitage in 1911, by the rail sidings. When Sauer died in 1927 it was the country's largest producer of extracts and spices. The headquarters is on the National Register, and the Sauer's Vanilla sign still lights Broad Street.",
@@ -129,13 +130,15 @@
    "title": "Main Street Station",
    "subtitle": "The Seaboard and the C&O",
    "at": [
-    -77.4292,
-    37.5318
+    -77.429,
+    37.5345
    ],
    "ground": 750,
-   "note": "Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened in 1901 under its clock tower, with a gable-roofed train shed 530 feet long behind. The Seaboard moved its trains to Broad Street in 1959; the C&O stayed until Amtrak took over in 1971. Amtrak trains call here again.",
+   "note": "Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened in 1901: a head house under a steep hipped roof of red tile, its clock tower 110 feet to the finial, and behind it a gable-roofed train shed more than 500 feet long on the tracks' trestle, here in plain massing. The Seaboard moved to Broad Street in 1959; the C&O stayed until Amtrak took over in 1971.",
    "sources": [
     "https://www.dhr.virginia.gov/?p=15225",
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.greatamericanstations.com/stations/RVM",
     "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
    ]
@@ -201,7 +204,7 @@
     37.53639
    ],
    "ground": 1400,
-   "note": "Coast Line trains for Petersburg and Florida crossed the James on the Belt Line's double-track concrete bridge, opened with Broad Street Station in 1919; the stone piers of the single-track bridge of 1891 stood in the river beside it. It carries CSX trains today.",
+   "note": "Coast Line trains for Petersburg and Florida crossed the James on the Belt Line's double-track bridge, opened with Broad Street Station in 1919, drawn here as a deck on piers. It carries CSX trains today.",
    "sources": [
     "https://virginiaplaces.org/rail/atlanticcoastline.html",
     "https://en.wikipedia.org/wiki/CSX_A-Line_Bridge",
@@ -214,11 +217,11 @@
    "title": "Hotel William Byrd",
    "subtitle": "Across Broad from the station",
    "at": [
-    -77.46694,
-    37.56
+    -77.4664,
+    37.5603
    ],
    "region": "broad-street-station",
-   "ground": 380,
+   "ground": 460,
    "note": "Built in 1925 for the passengers across the street, the eleven-story William Byrd, designed by Marcellus Wright, had nearly 200 rooms; with the station it made the traveler's first picture of Richmond. It closed in the 1980s and has been apartments for older residents since 1996.",
    "sources": [
     "https://www.dhr.virginia.gov/?p=15215",

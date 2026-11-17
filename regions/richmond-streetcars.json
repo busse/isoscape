@@ -22,6 +22,10 @@
     {
       "match": "Boulevard Bridge",
       "deck": 20
+    },
+    {
+      "match": "Free Bridge (Ninth Street)",
+      "deck": 4
     }
   ],
   "minBuildingArea": 20,
@@ -40,5 +44,7 @@
       "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
       "field": "Year_Built"
     }
-  }
+  },
+  "railPiersOverWater": true,
+  "groupRailDecks": true
 }

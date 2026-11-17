@@ -117,12 +117,16 @@ class Scene:
         if not labels: self.src = re.sub(r'<g class="labels".*?</g>', '', self.src, flags=re.S)
         self.vb = list(map(float, re.search(r'viewBox="([^"]+)"', self.src).group(1).split()))
         self.scale = json.load(open(os.path.join(ROOT, 'regions', f'{region}.json')))['scale']
+        # The plate's front face (the slab, and the water in its cut) is drawn between the sky's
+        # rectangle and the ground: measured without it, the drawn plate is the ground alone, so
+        # no window or map frame takes in the tan band below the ground's front edge.
+        self.ground_src = re.sub(r'(<rect [^\n]*/>\n)(?:<path (?:class="i" )?fill="[^"]+" d="[^"]*"/>\n)+(?=<defs><clipPath id="above">)', r'\1', self.src, count=1)
         self._content = None
 
-    def render(self, box, w, h):
+    def render(self, box, w, h, src=None):
         """The window `box` (x, y, w, h in SVG units) at w x h px."""
         x, y, bw, bh = box
-        svg = re.sub(r'viewBox="[^"]+"', f'viewBox="{x:.2f} {y:.2f} {bw:.2f} {bh:.2f}"', self.src, count=1)
+        svg = re.sub(r'viewBox="[^"]+"', f'viewBox="{x:.2f} {y:.2f} {bw:.2f} {bh:.2f}"', src or self.src, count=1)
         svg = svg.replace('<svg ', f'<svg width="{w}" height="{h}" preserveAspectRatio="none" ', 1)
         with tempfile.TemporaryDirectory() as t:
             p, o = os.path.join(t, 'a.svg'), os.path.join(t, 'a.png')
@@ -138,7 +142,7 @@ class Scene:
         if self._content is None:
             w = 1600
             h = round(w * self.vb[3] / self.vb[2])
-            a = np.asarray(self.render(self.vb, w, h)).astype(int)
+            a = np.asarray(self.render(self.vb, w, h, self.ground_src)).astype(int)
             bg = np.array(Image.new('RGB', (1, 1), PAPER).getpixel((0, 0)))
             ys, xs = np.where(np.abs(a - bg).sum(-1) > 12)
             k = self.vb[2] / w
@@ -146,10 +150,41 @@ class Scene:
                              (xs.max() - xs.min() + 1) * k, (ys.max() - ys.min() + 1) * k)
         return self._content
 
+    def covered(self):
+        """The part of the plate drawn edge to edge (SVG units): rows and columns where the drawing
+        reaches, so a window kept inside it shows no paper at the plate's edges. Something drawn
+        past the ground's edge (a bridge cut at the edge) does not widen it, and the slab's side is
+        not counted at all (see ground_src)."""
+        if getattr(self, '_covered', None) is None:
+            w = 3200
+            h = round(w * self.vb[3] / self.vb[2])
+            a = np.asarray(self.render(self.vb, w, h, self.ground_src)).astype(int)
+            bg = np.array(Image.new('RGB', (1, 1), PAPER).getpixel((0, 0)))
+            ink = np.abs(a - bg).sum(-1) > 3
+            # Rows nearly all drawn give the sides; within the sides, the columns give the top
+            # and bottom; then the sides again over the rows between those, until it settles.
+            rows = np.where(ink.mean(1) > 0.9)[0]
+            y0, y1 = rows.min(), rows.max()
+            x0, x1 = 0, ink.shape[1] - 1
+            for _ in range(6):
+                band = ink[y0:y1 + 1]
+                full = [r for r in band if r.mean() > 0.9]
+                nx0 = max(r.argmax() for r in full)
+                nx1 = min(len(r) - 1 - r[::-1].argmax() for r in full)
+                cols = ink[:, nx0:nx1 + 1].T
+                ny0 = max(c.argmax() for c in cols)
+                ny1 = min(len(c) - 1 - c[::-1].argmax() for c in cols)
+                if (nx0, nx1, ny0, ny1) == (x0, x1, y0, y1): break
+                x0, x1, y0, y1 = nx0, nx1, ny0, ny1
+            k = self.vb[2] / w
+            self._covered = (self.vb[0] + (x0 + 1) * k, self.vb[1] + (y0 + 1) * k, (x1 - x0 - 1) * k, (y1 - y0 - 1) * k)
+        return self._covered
+
     def window(self, centre, ground_w, aspect):
-        """A window `ground_w` meters across, centered on an SVG point, kept on the plate."""
-        cx0, cy0, cw, ch = self.content()
-        w = ground_w * self.scale
+        """A window `ground_w` meters across, centered on an SVG point, kept on the plate. A window
+        larger than the plate drawn edge to edge is made smaller to fit, never let past its edge."""
+        cx0, cy0, cw, ch = self.covered()
+        w = min(ground_w * self.scale, cw, ch * aspect)
         h = w / aspect
         x = min(max(centre[0] - w / 2, cx0), cx0 + cw - w)
         y = min(max(centre[1] - h / 2, cy0), cy0 + ch - h)
@@ -168,48 +203,126 @@ class Scenes:
         return self.cache[k]
 
 
+# Every line of text prints at MIN_PT or more at the smallest size each product is sold at: a
+# 24 x 18 stop print is also sold at 16 x 12, the 32 x 24 sheet at 24 x 18, the 36 x 24 map at
+# 18 x 12 (CANVAS). SMALLEST is that size as a share of the file's.
+MIN_PT = C.CREDIT_MIN_PT
+SMALLEST = {kind: min(max(f) for f in faces) / max(faces[-1]) for kind, faces in CANVAS.items()}
+
+
+def least(kind, dpi):
+    """The least type size (px, the font's em) a product's text may have."""
+    return dpi * MIN_PT / 72 / SMALLEST[kind]
+
+
+def corner(kind, dpi):
+    """(w, h) px kept clear at the bottom right for the title block stamped later (stamp.py), as
+    large as it comes on any face cut from the file (a canvas face's block is relatively larger)."""
+    import titleblock
+    long_in = max(CANVAS[kind][-1])
+    faces = [long_in] + [max(f) for f in CANVAS[kind]]
+    u = max(round(1.3 * (f / 36) ** 0.5 * dpi / 300, 4) * long_in / f for f in faces)
+    return C.block_reserve(long_in, dpi, 1.0, faces), titleblock.H * u * 1.45
+
+
 def wrap(d, text, f, max_w):
-    lines, cur = [], ''
-    for w in text.split():
-        t = (cur + ' ' + w).strip()
-        if d.textlength(t, font=f) <= max_w: cur = t
-        else: lines.append(cur); cur = w
-    if cur: lines.append(cur)
-    return lines
+    """Words wrapped to max_w, the lines as even as they can be: no word left alone on a line."""
+    return C.balanced(d, text, f, max_w) if text.strip() else []
 
 
-def marker(d, x, y, n, r):
-    d.ellipse((x - r, y - r, x + r, y + r), fill=PAPER, outline=ACCENT, width=max(2, round(r * 0.18)))
-    f = font('bold', r * 1.1)
+def foot_lines(d, S, f, fi, max_w):
+    """The note (what is approximate), the ground note (in italics) and the credit, wrapped to
+    max_w: the credit breaks only between its parts where it can."""
+    out = [(ln, f) for ln in wrap(d, S.cfg.get('note', ''), f, max_w)]
+    out += [(ln, fi) for ln in wrap(d, S.cfg.get('ground_note', ''), fi, max_w)]
+    for ln in C.wrap(d, S.cfg['credit'], f, max_w):
+        out += [(x, f) for x in (wrap(d, ln, f, max_w) if d.textlength(ln, font=f) > max_w else [ln])]
+    return out
+
+
+def marker(d, x, y, n, r, least_px=0):
+    """A numbered ring. Two digits are set smaller to sit inside it, the ring grown if the
+    number would otherwise print under the least size."""
     t = str(n)
-    d.text((x - d.textlength(t, font=f) / 2, y - r * 0.6), t, font=f, fill=INK)
+    share = 1.1 if len(t) == 1 else 0.82
+    r = max(r, least_px / share)
+    d.ellipse((x - r, y - r, x + r, y + r), fill=PAPER, outline=ACCENT, width=max(2, round(r * 0.18)))
+    f = font('bold', r * share)
+    l, t0, rr, b0 = d.textbbox((0, 0), t, font=f)
+    d.text((x - (l + rr) / 2, y - (t0 + b0) / 2), t, font=f, fill=INK)
+    return r
 
 
-def credit_lines(d, text, x, y, w, size):
-    f = font('regular', size)
-    for ln in wrap(d, text, f, w):
-        d.text((x, y), ln, font=f, fill=DIM); y += size * 1.4
-    return y
+def spread(points, r, gap=1.15, rounds=200):
+    """Marker centers moved apart so no two rings overlap: each pair closer than 2r·gap is pushed
+    apart along the line between them, a little each round."""
+    pts = [list(p) for p in points]
+    need = 2 * r * gap
+    for _ in range(rounds):
+        moved = False
+        for i in range(len(pts)):
+            for j in range(i + 1, len(pts)):
+                dx, dy = pts[j][0] - pts[i][0], pts[j][1] - pts[i][1]
+                dd = (dx * dx + dy * dy) ** 0.5
+                if dd >= need: continue
+                if dd < 1e-6: dx, dy, dd = 1.0, 0.0, 1.0
+                push = (need - dd) / 2 + 0.5
+                pts[i][0] -= dx / dd * push; pts[i][1] -= dy / dd * push
+                pts[j][0] += dx / dd * push; pts[j][1] += dy / dd * push
+                moved = True
+        if not moved: break
+    return pts
 
 
-def paste_map(img, d, S, scene, pts, box, x, y, w, h, r):
-    """The scene's window `box` drawn into (x, y, w, h), with a numbered marker at each box."""
+def paste_map(img, d, S, scene, pts, box, x, y, w, h, r, least_px=0):
+    """The scene's window `box` drawn into (x, y, w, h), with a numbered marker at each box.
+    Markers that would overlap are moved apart, each with a leader to its place."""
     img.paste(scene.render(box, round(w), round(h)), (round(x), round(y)))
     k = w / box[2]
+    share = 0.82 if any(s['n'] >= 10 for s in S.boxes) else 1.1
+    r = max(r, least_px / share)
+    places = []
     for s in S.boxes:
         px, py = pts['map'][s['id']]
-        if box[0] <= px <= box[0] + box[2] and box[1] <= py <= box[1] + box[3]:
-            marker(d, x + (px - box[0]) * k, y + (py - box[1]) * k, s['n'], r)
+        if not (box[0] <= px <= box[0] + box[2] and box[1] <= py <= box[1] + box[3]):
+            raise SystemExit(f"stop {s['n']} ({s['id']}) falls outside the big map")
+        places.append((s, x + (px - box[0]) * k, y + (py - box[1]) * k))
+    moved = spread([(px, py) for _, px, py in places], r)
+    # Kept inside the frame.
+    moved = [(min(max(mx, x + r * 1.2), x + w - r * 1.2), min(max(my, y + r * 1.2), y + h - r * 1.2)) for mx, my in moved]
+    for (s, px, py), (mx, my) in zip(places, moved):
+        if abs(mx - px) + abs(my - py) > r * 0.3:
+            d.line((px, py, mx, my), fill=ACCENT, width=max(2, round(r * 0.14)))
+            d.ellipse((px - r * 0.18, py - r * 0.18, px + r * 0.18, py + r * 0.18), fill=ACCENT)
+    for (s, _, _), (mx, my) in zip(places, moved):
+        marker(d, mx, my, s['n'], r)
 
 
-def map_box(scene, aspect, top_share=0.55):
-    """The whole plate cut to `aspect`, trimming top and bottom (or the sides) as needed."""
-    x, y, w, h = scene.content()
+def map_box(scene, aspect, marks=(), top_share=0.55, pad=0.03):
+    """The plate drawn edge to edge (no paper, no slab) cut to `aspect`, trimming top and bottom
+    (or the sides) as needed: by `top_share` of the cut from the top, moved if that would leave a
+    stop's marker (`marks`, SVG points) outside or within `pad` of the edge."""
+    x, y, w, h = scene.covered()
     if w / h < aspect:
         nh = w / aspect
-        return (x, y + (h - nh) * top_share, w, nh)
+        ny = y + (h - nh) * top_share
+        if marks:
+            lo, hi = min(p[1] for p in marks), max(p[1] for p in marks)
+            # As much room around the outermost markers as the cut allows, up to `pad` of it.
+            room = min(nh * pad, max(0.0, (nh - (hi - lo)) / 2))
+            lo, hi = lo - room, hi + room
+            ny = min(max(ny, hi - nh), lo)
+            ny = min(max(ny, y), y + h - nh)
+        return (x, ny, w, nh)
     nw = h * aspect
-    return (x + (w - nw) / 2, y, nw, h)
+    nx = x + (w - nw) / 2
+    if marks:
+        lo, hi = min(p[0] for p in marks), max(p[0] for p in marks)
+        room = min(nw * pad, max(0.0, (nw - (hi - lo)) / 2))
+        lo, hi = lo - room, hi + room
+        nx = min(max(nx, hi - nw), lo)
+        nx = min(max(nx, x), x + w - nw)
+    return (nx, y, nw, h)
 
 
 def frame_order(n):
@@ -219,12 +332,16 @@ def frame_order(n):
     return ring[:n]
 
 
-def menu_layout(dpi):
+# Menu type, inches at 32 x 24 (each at least least('menu')): box titles, subtitles, notes.
+MENU_TYPE = {'title': 0.17, 'sub': 0.135, 'note': 0.135, 'foot': 0.13}
+
+
+def menu_layout(dpi, foot_in=0.5):
     """The menu's grid at `dpi`: sheet size, margin, gutter, title band, foot, cell size, and the
     big map's box (the middle three by two cells)."""
     I = lambda v: v * dpi
     W, H = round(I(32)), round(I(24))
-    m, g, head, foot = I(0.75), I(0.26), I(1.35), I(0.5)
+    m, g, head, foot = I(0.75), I(0.26), I(1.35), I(foot_in)
     cw = (W - 2 * m - 4 * g) / 5
     ch = (H - 2 * m - head - foot - 3 * g) / 4
     top = m + head
@@ -233,9 +350,20 @@ def menu_layout(dpi):
             'map': (mx, my, 3 * cw + 2 * g, 2 * ch + g)}
 
 
+def menu_foot(S, dpi):
+    """The menu's foot lines and its height in inches."""
+    I = lambda v: v * dpi
+    size = max(I(MENU_TYPE['foot']), least('menu', dpi))
+    d = ImageDraw.Draw(Image.new('RGB', (10, 10)))
+    rw, _ = corner('menu', dpi)
+    lines = foot_lines(d, S, font('regular', size), font('italic', size), I(32) - 2 * I(0.75))
+    return lines, size, (len(lines) * size * 1.4 + I(0.12)) / dpi
+
+
 def compose_menu(dpi, S, sc, pts):
     I = lambda v: v * dpi
-    L = menu_layout(dpi)
+    lines, fsize, foot_in = menu_foot(S, dpi)
+    L = menu_layout(dpi, foot_in)
     W, H, m, g, head, foot, cw, ch = (L[k] for k in ('W', 'H', 'm', 'g', 'head', 'foot', 'cw', 'ch'))
     img = Image.new('RGB', (W, H), PAPER)
     d = ImageDraw.Draw(img)
@@ -243,66 +371,121 @@ def compose_menu(dpi, S, sc, pts):
     d.text((m, m + I(0.64)), S.cfg.get('subtitle', ''), font=font('italic', I(0.19)), fill=DIM)
     rule = m + head - I(0.22)
     d.line((m, rule, W - m, rule), fill=INK, width=max(1, round(I(0.012))))
-    # The key (up to sixteen names, four columns of four) at the right of the title band.
-    kx, kw = W - m - I(15.2), I(15.2)
-    nf = font('regular', I(0.135))
-    for i, name in enumerate(S.key_items()[:16]):
-        x, y = kx + (i // 4) * kw / 4, m + (i % 4) * I(0.255)
-        d.line((x, y + I(0.085), x + I(0.28), y + I(0.085)), fill=ACCENT, width=max(2, round(I(0.06))))
-        d.text((x + I(0.38), y), name, font=nf, fill=INK)
+    # The key: up to sixteen names in four columns at the right of the title band. Every line is
+    # drawn in one color, so the key is a plain list of names, without swatches that could not
+    # tell one line from another.
+    items = S.key_items()[:16]
+    if items:
+        nf = font('regular', max(I(0.135), least('menu', dpi)))
+        hf = font('italic', max(I(0.135), least('menu', dpi)))
+        cols = 4
+        colw = [max(d.textlength(n, font=nf) for n in items[c * 4:(c + 1) * 4]) for c in range((len(items) + 3) // 4)]
+        kx = W - m - sum(colw) - I(0.35) * (len(colw) - 1)
+        d.text((kx - I(0.25) - d.textlength(S.cfg.get('key_heading', 'The lines:'), font=hf), m), S.cfg.get('key_heading', 'The lines:'), font=hf, fill=ACCENT)
+        x = kx
+        for c, cwid in enumerate(colw):
+            for i, name in enumerate(items[c * 4:(c + 1) * 4]):
+                d.text((x, m + i * I(0.24)), name, font=nf, fill=INK)
+            x += cwid + I(0.35)
     top = m + head
     cell = lambda c, r: (m + c * (cw + g), top + r * (ch + g))
-    ih = cw / BOX_ASPECT
+    # Each picture is as tall as the longest note leaves room for, no taller than BOX_ASPECT.
+    ih = min(cw / BOX_ASPECT, ch - I(0.1) - max(box_text_height(d, S, s, cw, dpi) for s in S.boxes))
+    aspect = cw / ih
     for s, (c, r) in zip(S.boxes, frame_order(len(S.boxes))):
         x, y = cell(c, r)
         # A set whose big map is drawn bolder than life (wide track, big cars) can draw its menu
         # boxes from the fine scenes too: `"fine_menu": true`.
         scene = sc.get(s, fine=bool(S.cfg.get('fine_menu')))
-        img.paste(scene.render(scene.window(pts['box'][s['id']], s.get('ground', S.ground['menu']), BOX_ASPECT), round(cw), round(ih)), (round(x), round(y)))
+        img.paste(scene.render(scene.window(pts['box'][s['id']], s.get('ground', S.ground['menu']), aspect), round(cw), round(ih)), (round(x), round(y)))
         d.rectangle((x, y, x + cw, y + ih), outline=INK, width=max(1, round(I(0.01))))
         box_text(d, S, s, x, y + ih + I(0.1), cw, ch - ih - I(0.1), dpi)
     mx, my, mw, mh = L['map']
     big = sc.get()
-    paste_map(img, d, S, big, pts, map_box(big, mw / mh), mx, my, mw, mh, I(0.12))
+    paste_map(img, d, S, big, pts, map_box(big, mw / mh, list(pts['map'].values())), mx, my, mw, mh, I(0.12), least('menu', dpi))
     d.rectangle((mx, my, mx + mw, my + mh), outline=INK, width=max(1, round(I(0.01))))
-    credit_lines(d, S.cfg.get('note', '') + '  ' + S.cfg['credit'], m, H - m - foot + I(0.12), W - 2 * m, I(0.085))
+    y = H - m - foot + I(0.1)
+    for ln, f in lines:
+        d.text((m, y), ln, font=f, fill=DIM); y += fsize * 1.4
     return img
 
 
-def box_text(d, S, s, x, y, w, h, dpi):
-    """Number, title, subtitle and note under a menu box."""
+def box_text_height(d, S, s, w, dpi):
+    """Room (px) the number, title, subtitle and note of a menu box need under its picture."""
     I = lambda v: v * dpi
-    r = I(0.13)
-    marker(d, x + r, y + r, s['n'], r)
-    d.text((x + 2 * r + I(0.08), y - I(0.01)), s['title'], font=font('bold', I(0.17)), fill=INK)
-    d.text((x, y + 2 * r + I(0.04)), S.sub(s), font=font('italic', I(0.105)), fill=ACCENT)
-    nf = font('regular', I(0.104))
-    ny, lh = y + 2 * r + I(0.24), I(0.104) * 1.45
-    for ln in wrap(d, s['note'], nf, w):
-        if ny + lh > y + h + I(0.02): break
+    lp = least('menu', dpi)
+    r = max(I(0.15), lp / 0.82)
+    sz, ns = max(I(MENU_TYPE['sub']), lp), max(I(MENU_TYPE['note']), lp)
+    n = len(wrap(d, s['note'], font('regular', ns), w))
+    return 2 * r + I(0.06) + sz * 1.45 + ns * 1.42 * (n - 1) + ns * 1.15
+
+
+def box_text(d, S, s, x, y, w, h, dpi):
+    """Number, title, subtitle and note under a menu box. A note that does not fit is an error."""
+    I = lambda v: v * dpi
+    lp = least('menu', dpi)
+    r = marker(d, x + I(0.15), y + I(0.15), s['n'], I(0.15), lp)
+    d.text((x + 2 * r + I(0.08), y - I(0.01)), s['title'], font=font('bold', I(MENU_TYPE['title'])), fill=INK)
+    sz = max(I(MENU_TYPE['sub']), lp)
+    d.text((x, y + 2 * r + I(0.04)), S.sub(s), font=font('italic', sz), fill=ACCENT)
+    ns = max(I(MENU_TYPE['note']), lp)
+    nf = font('regular', ns)
+    ny, lh = y + 2 * r + I(0.06) + sz * 1.45, ns * 1.42
+    lines = wrap(d, s['note'], nf, w)
+    if ny + lh * (len(lines) - 1) + ns * 1.15 > y + h + I(0.02):
+        raise SystemExit(f"box {s['n']} ({s['id']}): its note needs {len(lines)} lines and does not fit under its picture")
+    for ln in lines:
         d.text((x, ny), ln, font=nf, fill=INK); ny += lh
+
+
+def stop_list(d, S, kf, nf, max_w):
+    """The stops as entries 'n Title', the number in bold, wrapped between entries only."""
+    gap = d.textlength('\u2003\u2003', font=kf)
+    rows, cur, cw = [], [], 0
+    for s in S.boxes:
+        num, name = str(s['n']), s['title']
+        ew = d.textlength(num + ' ', font=nf) + d.textlength(name, font=kf)
+        if cur and cw + gap + ew > max_w:
+            rows.append(cur); cur, cw = [], 0
+        cur.append((num, name)); cw += (gap if len(cur) > 1 else 0) + ew
+    if cur: rows.append(cur)
+    return rows, gap
 
 
 def compose_map(dpi, S, sc, pts):
     I = lambda v: v * dpi
     W, H = round(I(36)), round(I(24))
-    m, band = I(0.75), I(1.75)
+    m = I(0.75)
+    lp = least('map', dpi)
+    rw, rh = corner('map', dpi)
+    d0 = ImageDraw.Draw(Image.new('RGB', (10, 10)))
+    ks = max(I(0.2), lp)
+    kf, knf = font('regular', ks), font('bold', ks)
+    rows, gap = stop_list(d0, S, kf, knf, W - 2 * m - rw)
+    fs = lp
+    foot = foot_lines(d0, S, font('regular', fs), font('italic', fs), W - 2 * m - rw)
+    sub_s = max(I(0.19), lp)
+    band = I(0.3) + I(0.63) + sub_s * 1.5 + I(0.12) + len(rows) * ks * 1.45 + I(0.12) + len(foot) * fs * 1.4
     img = Image.new('RGB', (W, H), PAPER)
     d = ImageDraw.Draw(img)
     mw, mh = W - 2 * m, H - 2 * m - band
     big = sc.get()
-    paste_map(img, d, S, big, pts, map_box(big, mw / mh), m, m, mw, mh, I(0.13))
+    paste_map(img, d, S, big, pts, map_box(big, mw / mh, list(pts['map'].values())), m, m, mw, mh, I(0.13), lp)
     d.rectangle((m, m, m + mw, m + mh), outline=INK, width=max(1, round(I(0.01))))
     by = m + mh + I(0.3)
     d.text((m, by), S.cfg['title'], font=font('bold', I(0.48)), fill=INK)
-    d.text((m, by + I(0.63)), S.cfg.get('subtitle', ''), font=font('italic', I(0.19)), fill=DIM)
-    nb = ' '
-    names = '   '.join(str(s['n']) + nb + s['title'].replace(' ', nb) for s in S.boxes)
-    kf = font('regular', I(0.15))
-    ky = by + I(0.98)
-    for ln in wrap(d, names, kf, mw):
-        d.text((m, ky), ln, font=kf, fill=INK); ky += I(0.15) * 1.4
-    credit_lines(d, S.cfg.get('note', '') + '  ' + S.cfg['credit'], m, H - m + I(0.12), mw, I(0.075))
+    d.text((m, by + I(0.63)), S.cfg.get('subtitle', ''), font=font('italic', sub_s), fill=DIM)
+    ky = by + I(0.63) + sub_s * 1.5 + I(0.12)
+    for row in rows:
+        x = m
+        for num, name in row:
+            d.text((x, ky), num + ' ', font=knf, fill=ACCENT); x += d.textlength(num + ' ', font=knf)
+            d.text((x, ky), name, font=kf, fill=INK); x += d.textlength(name, font=kf) + gap
+        ky += ks * 1.45
+    ky += I(0.12)
+    for ln, f in foot:
+        d.text((m, ky), ln, font=f, fill=DIM); ky += fs * 1.4
+    if ky > H - I(0.2): raise SystemExit('the map band runs off the sheet')
     return img
 
 
@@ -310,6 +493,8 @@ def compose_box(dpi, S, sc, s, pt):
     I = lambda v: v * dpi
     W, H = round(I(24)), round(I(18))
     m = I(0.75)
+    lp = least('box', dpi)
+    rw, rh = corner('box', dpi)
     img = Image.new('RGB', (W, H), PAPER)
     d = ImageDraw.Draw(img)
     iw, ih = W - 2 * m, I(12.6)
@@ -324,9 +509,18 @@ def compose_box(dpi, S, sc, s, pt):
     d.text((tx, ty + I(0.66)), f"{S.sub(s)}  ·  {S.cfg.get('box_label', S.cfg['title'])}", font=font('italic', I(0.2)), fill=ACCENT)
     nf = font('regular', I(0.235))
     ny = ty + I(1.2)
-    for ln in wrap(d, s['note'], nf, iw * 0.8):
+    for ln in wrap(d, s['note'], nf, min(iw * 0.8, iw - rw)):
         d.text((m, ny), ln, font=nf, fill=INK); ny += I(0.235) * 1.5
-    credit_lines(d, S.cfg['credit'], m, H - I(0.55), iw, I(0.075))
+    # The credit and the ground note, set at the least size, bottom-aligned, clear of the corner.
+    f, fi = font('regular', lp), font('italic', lp)
+    d0 = ImageDraw.Draw(Image.new('RGB', (10, 10)))
+    lines = [(ln, fi) for ln in wrap(d0, S.cfg.get('ground_note', ''), fi, iw - rw)]
+    for ln in C.wrap(d0, S.cfg['credit'], f, iw - rw):
+        lines += [(x, f) for x in (wrap(d0, ln, f, iw - rw) if d0.textlength(ln, font=f) > iw - rw else [ln])]
+    cy = H - I(0.45) - len(lines) * lp * 1.4
+    if cy < ny + I(0.1): raise SystemExit(f"box {s['n']} ({s['id']}): its note runs into the credit")
+    for ln, ff in lines:
+        d.text((m, cy), ln, font=ff, fill=DIM); cy += lp * 1.4
     return img
 
 

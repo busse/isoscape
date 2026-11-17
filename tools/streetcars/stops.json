@@ -20,12 +20,12 @@
    "n": 2,
    "id": "fair-grounds",
    "title": "State Fair Grounds",
-   "line": "Boulevard spur",
+   "line": "State Fair Grounds spur",
    "at": [
     -77.4625,
     37.5715
    ],
-   "note": "Take the Boulevard spur north to the Fair Grounds. The State Fair came back here in 1906, opening with an airshow, and built its exhibition hall in 1908; races run on the fair's own track. The fair moved out in 1941, and The Diamond stands on the ground today.",
+   "note": "Take the State Fair Grounds spur up the Boulevard to the fair. The State Fair came back here in 1906, opening with an airshow, and built its exhibition hall in 1908; races run on the fair's own track. The fair moved out in 1941, and The Diamond stands on the ground today.",
    "sources": [
     "https://richmondfamilymagazine.com/community/history/how-and-where-the-state-fair-started/",
     "https://en.wikipedia.org/wiki/Richmond_Arena",
@@ -57,7 +57,7 @@
     -77.433,
     37.56
    ],
-   "note": "Cross Bacon's Quarter Branch on the First Street viaduct. James Barton had it built so a car could leave for Broad Street every 20 minutes. Begun in 1894, it was one of the first trolley suburbs in the country: a Henrico town from 1896, and part of Richmond since 1914.",
+   "note": "Cross the valley of Bacon's Quarter Branch on the First Street viaduct. James Barton had it built so a car could leave for Broad Street every 20 minutes. Begun in 1894, it was one of the first trolley suburbs in the country: a Henrico town from 1896, and part of Richmond since 1914.",
    "sources": [
     "https://richmondmagazine.com/news/richmond-history/barton%20heights%20the%20valentine%20community%20conversations/",
     "https://www.dhr.virginia.gov/historic-registers/127-0816/",
@@ -137,7 +137,7 @@
     -77.4395,
     37.523
    ],
-   "note": "Across the river on the Mayo Bridge. Manchester was a city of its own until it joined Richmond in 1910, on the promise of a better bridge. The arched concrete span of 1913 brings the cars from 14th Street straight onto Hull Street, Manchester's main street of shops, restaurants and theaters.",
+   "note": "Across the river on the Mayo Bridge. Manchester was a city of its own until it joined Richmond in 1910, on the promise of a better bridge. The arched concrete span of 1913, drawn here as a plain deck, brings the cars from 14th Street straight onto Hull Street, Manchester's main street.",
    "sources": [
     "https://architecturerichmond.com/?p=3761",
     "https://richmondmagazine.com/news/richmond-history/manchester-history/",
@@ -169,7 +169,7 @@
     -77.4733,
     37.5194
    ],
-   "note": "The end of the line, and Richmond's favorite trolley park since 1890: a boat lake, a bath house and the Dip-the-Dips roller coaster. Its days are numbered. The coaster was condemned in 1931, the rides came down in 1932, and in 1934 the city bought the 105 acres for a public park.",
+   "note": "The end of the line, and Richmond's favorite trolley park since 1890, with a boat lake, a bath house and the Dip-the-Dips roller coaster; only the lake is drawn. Its days are numbered: the coaster was condemned in 1931, the rides came down in 1932, and in 1934 the city bought the 105 acres for a park.",
    "sources": [
     "https://tclf.org/forest-hill-park-va",
     "https://richmondfamilymagazine.com/community/history/richmonds-original-theme-park/",
@@ -217,10 +217,11 @@
     -77.4495,
     37.5495
    ],
-   "note": "Board the interurban here for Lakeside and Ashland. Opened in July 1907 for big, fast electric cars, the line crosses Bacon's Quarter Branch on a half-mile concrete trestle. Reorganized as the Richmond–Ashland Railway, it ran until 1938. The terminal building still stands.",
+   "note": "Board the interurban here for Lakeside and Ashland. Opened in July 1907 for big, fast electric cars, the line leaves its terminal from the second floor, on a half-mile concrete viaduct over the Seaboard's tracks. Reorganized as the Richmond–Ashland Railway, it ran until 1938. The terminal building still stands.",
    "sources": [
     "https://pantographblog.blogspot.com/2009/08/richmond-and-chesapeake-bay-railway.html",
-    "https://american-rails.com/vgainterstrethsy.html"
+    "https://american-rails.com/vgainterstrethsy.html",
+    "https://varails.com/trolley-lines/the-richmond-ashland-railway"
    ]
   }
  ]
