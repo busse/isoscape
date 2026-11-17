@@ -1466,6 +1466,88 @@
     "https://museumdistrict.org/history"
    ],
    "width": 4.0
+  },
+  {
+   "id": "bss-wing-e",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.465848,
+     37.5608942
+    ],
+    [
+     -77.465652,
+     37.5607591
+    ],
+    [
+     -77.4654285,
+     37.5609657
+    ],
+    [
+     -77.4654738,
+     37.5610565
+    ],
+    [
+     -77.4655876,
+     37.5611349
+    ]
+   ],
+   "height": 13.6,
+   "tone": "stone",
+   "note": "The east wing: the Colored Waiting Room and its rooms, baggage and parcel check, stores. Drawn whole in views without a cutaway. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible. In the set's close views its walls start at the mound's level along Broad Street (65.6 m), where the lidar puts the ground in front of it; behind, the ground falls about 5 m to the tracks (approximate).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "whole",
+   "upTo": 81.0,
+   "confidence": "drawn",
+   "elevation": 65.6
+  },
+  {
+   "id": "bss-wing-w",
+   "name": "Broad Street Station (head house)",
+   "kind": "landmark",
+   "from": 1919,
+   "to": 1976,
+   "ring": [
+    [
+     -77.4662795,
+     37.5611914
+    ],
+    [
+     -77.4660825,
+     37.5610556
+    ],
+    [
+     -77.4658347,
+     37.5612848
+    ],
+    [
+     -77.4659383,
+     37.5613561
+    ],
+    [
+     -77.4660684,
+     37.5613866
+    ]
+   ],
+   "height": 13.6,
+   "tone": "stone",
+   "note": "The west wing: the lunch room, dining room and kitchen, and the white men's rooms. Drawn whole in views without a cutaway. Traced from the first-floor plan (Plate 15, The American Architect, July 9, 1919). Heights scaled from sections A-A, B-B and C-C (Plates 17 and 18); their figures are illegible. In the set's close views its walls start at the mound's level along Broad Street (65.6 m), where the lidar puts the ground in front of it; behind, the ground falls about 5 m to the tracks (approximate).",
+   "sources": [
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=27",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=31",
+    "https://www.usmodernist.org/AMAR/AMAR-1919-07-09.pdf#page=33"
+   ],
+   "only": "whole",
+   "upTo": 81.0,
+   "confidence": "drawn",
+   "elevation": 65.6
   }
  ],
  "tracedSmooth": 2.5,
