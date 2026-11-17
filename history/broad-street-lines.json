@@ -32577,6 +32577,387 @@
     "https://www.openstreetmap.org/way/6036486"
    ],
    "confidence": "approximate"
+  },
+  {
+   "id": "mss-head-house",
+   "name": "Main Street Station (head house)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4296128,
+     37.5343189
+    ],
+    [
+     -77.4293474,
+     37.5341598
+    ],
+    [
+     -77.429222,
+     37.5342931
+    ],
+    [
+     -77.4294874,
+     37.5344522
+    ]
+   ],
+   "height": 18.2,
+   "tone": "stone",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The head house, 102 ft by 62 ft 4 in, of golden Roman brick trimmed with terra cotta, drawn as a plain block to its eaves; outline from OpenStreetMap, which matches the 1900 plan. Its height is scaled from photographs (approximate).",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://www.dhr.virginia.gov/?p=15225"
+   ],
+   "to": null
+  },
+  {
+   "id": "mss-head-house-roof",
+   "name": "Main Street Station (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4296128,
+     37.5343189
+    ],
+    [
+     -77.4293474,
+     37.5341598
+    ],
+    [
+     -77.429222,
+     37.5342931
+    ],
+    [
+     -77.4294874,
+     37.5344522
+    ]
+   ],
+   "height": 11.7,
+   "tone": "tile",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The steep hipped roof of red tile, drawn as a plain hip; its ridge height is scaled from photographs (approximate).",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf"
+   ],
+   "shape": "revolve",
+   "levels": [
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     11.7,
+     0.3,
+     0.0
+    ]
+   ],
+   "to": null,
+   "on": "mss-head-house"
+  },
+  {
+   "id": "mss-clock-tower",
+   "name": "Main Street Station (clock tower)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4296223,
+     37.5343178
+    ],
+    [
+     -77.4295666,
+     37.5342844
+    ],
+    [
+     -77.4295211,
+     37.5343329
+    ],
+    [
+     -77.4295768,
+     37.5343663
+    ]
+   ],
+   "height": 28.7,
+   "tone": "stone",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The clock tower at the southwest corner, 110 ft to the top of its finial (The Railroad Gazette, 1900); drawn as a plain shaft, its stages scaled from photographs (approximate).",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38"
+   ],
+   "to": null
+  },
+  {
+   "id": "mss-clock-tower-cap",
+   "name": "Main Street Station (clock tower)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4296223,
+     37.5343178
+    ],
+    [
+     -77.4295666,
+     37.5342844
+    ],
+    [
+     -77.4295211,
+     37.5343329
+    ],
+    [
+     -77.4295768,
+     37.5343663
+    ]
+   ],
+   "height": 5.2,
+   "tone": "tile",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The tower's cap and finial, drawn as a plain point; 110 ft from the ground to the finial (The Railroad Gazette, 1900). Approximate.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38"
+   ],
+   "shape": "revolve",
+   "levels": [
+    [
+     0.0,
+     1.0,
+     0.0
+    ],
+    [
+     3.6,
+     0.6,
+     0.0
+    ],
+    [
+     5.2,
+     0.05,
+     0.0
+    ]
+   ],
+   "to": null,
+   "on": "mss-clock-tower"
+  },
+  {
+   "id": "mss-concourse",
+   "name": "Main Street Station (concourse)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4294648,
+     37.5344455
+    ],
+    [
+     -77.4292428,
+     37.5343124
+    ],
+    [
+     -77.429171,
+     37.5343888
+    ],
+    [
+     -77.4293929,
+     37.5345218
+    ]
+   ],
+   "height": 14.2,
+   "tone": "stone",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The concourse behind the head house, 82 ft wide under a flat roof (The Railroad Gazette, 1900), drawn as a plain block. Approximate.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0800/va0897/data/va0897data.pdf"
+   ],
+   "to": null
+  },
+  {
+   "id": "mss-shed",
+   "name": "Main Street Station train shed",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4294183,
+     37.5346417
+    ],
+    [
+     -77.4284038,
+     37.5357122
+    ],
+    [
+     -77.4280042,
+     37.5354708
+    ],
+    [
+     -77.4290187,
+     37.5344003
+    ]
+   ],
+   "height": 5.1,
+   "tone": "iron",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The gable-roofed train shed of 1901, 123 ft wide between its columns with 13 ft 6 in overhangs, and over 500 ft long, standing on the tracks' trestle (HAER VA-4; the National Register gives 530 ft). Its outline is OpenStreetMap's; drawn as a plain mass to the eaves on the track floor, its heights from the HAER cross section (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/?p=15225"
+   ],
+   "to": null,
+   "base": 6.9,
+   "seat": "max"
+  },
+  {
+   "id": "mss-shed-roof-0",
+   "name": "Main Street Station train shed (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4293823,
+     37.53462
+    ],
+    [
+     -77.4283678,
+     37.5356905
+    ],
+    [
+     -77.4280402,
+     37.5354925
+    ],
+    [
+     -77.4290547,
+     37.534422
+    ]
+   ],
+   "height": 3.4,
+   "tone": "roof",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
+   ],
+   "to": null,
+   "on": "mss-shed",
+   "seat": "max"
+  },
+  {
+   "id": "mss-shed-roof-1",
+   "name": "Main Street Station train shed (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4293384,
+     37.5345934
+    ],
+    [
+     -77.4283239,
+     37.5356639
+    ],
+    [
+     -77.4280841,
+     37.5355191
+    ],
+    [
+     -77.4290986,
+     37.5344486
+    ]
+   ],
+   "height": 3.4,
+   "tone": "roof",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
+   ],
+   "to": null,
+   "on": "mss-shed-roof-0",
+   "seat": "max"
+  },
+  {
+   "id": "mss-shed-roof-2",
+   "name": "Main Street Station train shed (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4292944,
+     37.5345669
+    ],
+    [
+     -77.4282799,
+     37.5356374
+    ],
+    [
+     -77.4281281,
+     37.5355456
+    ],
+    [
+     -77.4291426,
+     37.5344751
+    ]
+   ],
+   "height": 3.3,
+   "tone": "roof",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
+   ],
+   "to": null,
+   "on": "mss-shed-roof-1",
+   "seat": "max"
+  },
+  {
+   "id": "mss-shed-roof-3",
+   "name": "Main Street Station train shed (roof)",
+   "kind": "landmark",
+   "from": 1901,
+   "ring": [
+    [
+     -77.4292505,
+     37.5345403
+    ],
+    [
+     -77.428236,
+     37.5356108
+    ],
+    [
+     -77.428172,
+     37.5355722
+    ],
+    [
+     -77.4291865,
+     37.5345017
+    ]
+   ],
+   "height": 3.3,
+   "tone": "roof",
+   "only": "whole",
+   "confidence": "approximate",
+   "note": "The shed's gable roof, drawn as four steps up to its ridge, 33.4 m above sea level by the HAER cross section (approximate).",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf"
+   ],
+   "to": null,
+   "on": "mss-shed-roof-2",
+   "seat": "max"
   }
  ],
  "rules": [
@@ -33381,6 +33762,13 @@
  ],
  "dates": [
   {
+   "id": "w113030476",
+   "name": "Main Street Station",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/113030476",
+   "note": "OSM's outline of the station, head house and shed in one, is drawn in today's scene only: in the set's years the station is drawn as curated parts (mss-*), from the 1900 plan and the HAER drawings."
+  },
+  {
    "id": "w252997396",
    "name": "Broad Street Station (Science Museum of Virginia)",
    "year": 1976,
@@ -33528,12 +33916,6 @@
    "name": "Old City Hall",
    "year": 1894,
    "source": "https://en.wikipedia.org/wiki/Old_City_Hall_(Richmond,_Virginia)"
-  },
-  {
-   "id": "w113030476",
-   "name": "Main Street Station",
-   "year": 1901,
-   "source": "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
   },
   {
    "id": "w236488169",

@@ -63,14 +63,13 @@
    "title": "Hermitage Road",
    "subtitle": "Industry along the tracks",
    "at": [
-    -77.460587,
-    37.566164
+    -77.46,
+    37.568
    ],
-   "ground": 1300,
-   "note": "Once the Seaboard Air Line joined the RF&P here in 1900, firms lined Hermitage Road for the sidings: the Richmond Foundry and Manufacturing Company built at 2300 Hermitage Road in 1906, and the Putney shoe works bought part of the old fair grounds. The warehouses are a historic district today.",
+   "ground": 900,
+   "note": "Once the Seaboard Air Line joined the RF&P just south of here in 1900, firms lined Hermitage Road for the sidings: the Richmond Foundry and Manufacturing Company built at 2300 Hermitage Road, by the junction, in 1906, and warehouses for Export Leaf Tobacco, Miller & Rhoads and A. H. Robins followed. They are a historic district today.",
    "sources": [
-    "https://dhr.virginia.gov/?p=28752",
-    "https://richmondmagazine.com/arts-entertainment/whole-foods-richmond/"
+    "https://dhr.virginia.gov/?p=28752"
    ]
   },
   {
@@ -79,10 +78,10 @@
    "title": "Seaboard Junction",
    "subtitle": "Where the Seaboard left the RF&P",
    "at": [
-    -77.4615,
-    37.564
+    -77.4618,
+    37.5636
    ],
-   "ground": 700,
+   "ground": 550,
    "note": "Just north of the station the Seaboard Air Line's main line left the RF&P and ran southeast to Main Street Station. Seaboard trains between Washington and the South passed Broad Street by; only from 1959 did they call there, backing in. The Seaboard and the Coast Line merged in 1967.",
    "sources": [
     "https://chicagorailfan.com/stbrric.html",
@@ -135,9 +134,11 @@
     37.5345
    ],
    "ground": 750,
-   "note": "Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened in 1901 under its clock tower, with a gable-roofed train shed behind. Here it is drawn plainly, from today's outline, without its tower or shed. The Seaboard moved to Broad Street in 1959; the C&O stayed until Amtrak took over in 1971.",
+   "note": "Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened in 1901: a head house under a steep hipped roof of red tile, its clock tower 110 feet to the finial, and behind it a gable-roofed train shed more than 500 feet long on the tracks' trestle, here in plain massing. The Seaboard moved to Broad Street in 1959; the C&O stayed until Amtrak took over in 1971.",
    "sources": [
     "https://www.dhr.virginia.gov/?p=15225",
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.greatamericanstations.com/stations/RVM",
     "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
    ]
