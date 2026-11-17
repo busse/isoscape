@@ -407,6 +407,68 @@
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
    ],
    "confidence": "approximate"
+  },
+  {
+   "id": "church-hill-tunnel-approach",
+   "name": "Chesapeake and Ohio approach to the Church Hill Tunnel",
+   "kind": "rail",
+   "from": 1873,
+   "to": 1926,
+   "line": [
+    [
+     -77.425031,
+     37.539268
+    ],
+    [
+     -77.424996,
+     37.538765
+    ],
+    [
+     -77.424928,
+     37.538405
+    ],
+    [
+     -77.424856,
+     37.538145
+    ],
+    [
+     -77.4245071,
+     37.5377032
+    ],
+    [
+     -77.4244046,
+     37.5374857
+    ],
+    [
+     -77.4243802,
+     37.5372811
+    ],
+    [
+     -77.424191,
+     37.5371024
+    ],
+    [
+     -77.4240741,
+     37.5369748
+    ],
+    [
+     -77.4238814,
+     37.5368451
+    ],
+    [
+     -77.423253,
+     37.536144
+    ]
+   ],
+   "note": "The C&O's line to the Church Hill Tunnel's west portal, by 18th Street just north of Marshall: it left the old Virginia Central line west of 17th Street and curved southeast. The tunnel opened in 1873, collapsed on October 2, 1925, and its western end was sealed the following spring, so it is drawn through 1925 and not after. Its course: OSM's abandoned branch (w169784705) from the junction with today's Peninsula Subdivision south to 17th Street; then the C&O spur shown on the 1924–25 Sanborn map, volume 1, sheet 24, crossing the block between 17th and 18th Streets, Marshall and Clay, between the Richmond Cold Storage and International Harvester warehouses (the sheet fitted to the four corners of the block, to about a meter, and the line set midway between the warehouses standing today); then straight across 18th Street to the portal mapped in OSM (the tunnel, w6036486). Approximate.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Church_Hill_Tunnel",
+    "https://www.loc.gov/item/sanborn09064_006/",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g09064192401:09064_01_1924-0024/full/pct:25/0/default.jpg",
+    "https://www.openstreetmap.org/way/169784705",
+    "https://www.openstreetmap.org/way/6036486"
+   ],
+   "confidence": "approximate"
   }
  ],
  "rules": [
