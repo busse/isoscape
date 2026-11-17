@@ -808,7 +808,12 @@ streetcar set, a road bridge that carries a car line is drawn at least as wide a
 on the single-stop prints, 27 m on the big map) with the line on it at full width, so the line runs
 onto the deck without a step and no square deck end shows beside it; a dated building under such
 a deck is left out, a traced one within 4 m of its edge too, and no car is set on a deck shorter
-than three cars. **Lines that meet:** a line that stops within 30 m of another, short of it, is
+than three cars. On the decks the set names (thirteen, in the boxes for Church Hill, Broad
+Street and Manchester and on the big map, including the Mayo and Free bridges and the Marshall
+Street Viaduct), the deck is laid on the car line's own center line, as the line is drawn after
+straightening, following its bends, a node it shares with another deck moving with it; its
+pieces then meet end to end rather than lapping a meter, so the deck's edge strokes run unbroken.
+The list keeps the decks of stops already sold as they were. **Lines that meet:** a line that stops within 30 m of another, short of it, is
 carried on straight to meet it. **Later roads through woods:** a road not yet built with woods of
 the year on both sides of it, within 15 m of its edge, is drawn as wood, so the interchange it cut
 does not show as a cut-out. A traced building within 5 m of a car line's center (not 2 m) is
@@ -820,7 +825,9 @@ cutaway's butterfly roofs and the dome in terra-cotta tile, as it was until 1955
 regions add: rail bridges over water stand on piers however low their deck (elsewhere a pier
 is drawn only under a deck more than 3 m above its foot); the two ways of a double-track viaduct
 are one deck at one level; and named deck heights for the C&O's viaduct (12 m, so it clears the
-Seaboard's, 6 m, at the Triple Crossing) and the Free Bridge (4 m, approximate: in 1925 its south end meets the street the cars run on; in 1943 it lands at Seventh Street and Semmes Avenue). A history can also extend another (`extends`: its rules and
+Seaboard's, 6 m, at the Triple Crossing) and the Free Bridge (4 m, approximate: in 1925 its south end meets the street the cars run on; in 1943 it lands at Seventh Street and Semmes Avenue), and piers 75 m apart, not 38 m, under the
+Marshall Street Viaduct (approximate: none of its pier spacing is known here; at 38 m one stood in
+front of the Richmond Cold Storage building's face and read as standing in it). A history can also extend another (`extends`: its rules and
 dates first, its features replacing the base's of the same id), which is how the set's close
 views of Broad Street Station take these rules while the cutaway, drawn from the station's own
 history, stays as it was sold. The sets take the downtown series' era rules and curated dates
@@ -877,7 +884,16 @@ of the same name runs the other way within 40 m), and are smoothed along their l
 10 m wide, the ends held), so a line does not step from one carriageway or one mapped way to the
 next, and cuts each corner by about 6 m. A line is straightened to within 40% of its drawn width (at least 7 m), so a
 traffic circle or a carriageway's sideways step on today's streets does not kink it, and its bends
-are filled round. Where a line runs along a road bridge (within 6 m of its deck's
+are filled round. A route can also redraw a stretch of its line (`patches`: the stretch between
+two points, the rest kept as placed): moved part of the way toward other mapped ways, or a set
+distance to one side, both eased in over the stretch's first and last 20 to 30 m, then smoothed
+wider and kept round (to 0.5 m) when the line is straightened. The Westhampton line on Three
+Chopt Road runs halfway toward the frontage street beside it (the road and that street today
+have a strip of ground between them, and the line's own right-of-way ran beside the road), smoothed
+25 m wide; the Fulton line's descent on 31st Street is smoothed 15 m wide, and along
+Williamsburg Avenue in front of the Armitage Manufacturing Company's building of 1900 it is moved
+11 m to the south, onto the far carriageway and a little past it, so the line at three times
+life size on the big map clears the building's wall (approximate). Where a line runs along a road bridge (within 6 m of its deck's
 edge and within about 25° of its heading, beside the deck and not past its ends), it is drawn
 on the deck as its track, 45% of its width on the ground (no wider than the deck; in the
 streetcar set, at its full width on a deck widened to carry it), with a car on
