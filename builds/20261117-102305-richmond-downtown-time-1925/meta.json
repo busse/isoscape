@@ -1,0 +1,192 @@
+{
+ "name": "richmond-downtown-time-1925",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1925",
+ "palette": "paper",
+ "note": "Richmond 1925 version 5: the Ninth Street (Free) Bridge (approximate), Hull Street kept, 60 m verges; a traced building under the bridge left out; drawn --with next,next2",
+ "flags": [
+  "--with",
+  "next,next2"
+ ],
+ "viewBox": [
+  -3024,
+  -1592.3837474304996,
+  6048,
+  2647.5606619667396
+ ],
+ "bearing": -8.7,
+ "ms": 13153,
+ "stats": {
+  "features": 4097,
+  "unbuiltStreets": 1654,
+  "bridgesAtGrade": 43,
+  "vergesLater": 61,
+  "canalBridgesLater": 2,
+  "bridgesWithoutRoads": 3,
+  "plantingsLater": 17,
+  "spursLater": 42,
+  "groundUnderBridgesLowered": 13,
+  "ground": 33,
+  "elevationDatum": -0.1,
+  "elevationTop": 56.8,
+  "streetcarLines": 0,
+  "ribbons": 830,
+  "footprintsAdded": 0,
+  "outlinesUnderParts": 3,
+  "footprintsDrawn": 0,
+  "datedFromParcels": 1131,
+  "buildings": 1762,
+  "streetcars": 0,
+  "heightFromTag": 30,
+  "heightFromModel": 0,
+  "heightFromLevels": 279,
+  "heightGuessed": 1453,
+  "year": 1925,
+  "newSincePrevious": 0,
+  "datedCurated": 27,
+  "datedOsm": 604,
+  "datedParcel": 1131,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 857,
+  "tracedOnWater": 27,
+  "tracedUnderViaduct": 50,
+  "tracedOnTrack": 12,
+  "tracedBuried": 62,
+  "tracedEndMap": 263,
+  "tracedEndRebuilt": 39,
+  "tracedEndHighway": 47,
+  "tracedEndAssumed": 508,
+  "curated": 3,
+  "bridgePieces": 471,
+  "contourSegments": 48842,
+  "rapidCells": 9125,
+  "rapidsReach": 200,
+  "strips": 200
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP",
+  "Buildings dated from assessor records",
+  "Historic buildings traced from Sanborn Fire Insurance Maps, Library of Congress"
+ ],
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "checkLevels": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1925,
+  "series": "richmond-downtown-time",
+  "title": "The 1924\u201325 Sanborn map",
+  "note": "Downtown at the height of the tobacco and rail city, as the fire-insurance maps drew it.",
+  "curated": [
+   {
+    "id": "free-bridge",
+    "name": "Free Bridge (the Ninth Street Bridge)",
+    "kind": "bridge",
+    "from": 1873,
+    "to": 1972,
+    "note": "The free road bridge from the foot of 9th Street to Manchester, opened in June 1873 (RVA Mag; Dogtown Dish dates the span it describes to 1878, after the flood of 1877) and closed after the floods of 1969 and 1972, when the Manchester Bridge replaced it. Built \"rather low over the river\": its deck is drawn 8 m over the water, an assumption. Its line is today's Manchester Bridge's, which the USGS 1:24,000 Richmond quadrangle of 1934 shows it on (\"9th St Bridge\", just downstream of the Richmond and Petersburg bridge), from the corner of 9th Street to the foot of Commerce Road in Manchester: approximate. Drawn only in builds made with --with next: the 1925 and 1950 prints (version 4) were drawn before it.",
+    "sources": [
+     "https://dogtowndish.com/2018/03/03/richmonds-lost-singing-9th-street-bridge/",
+     "https://rvamag.com/community/rva-5x5-the-history-of-the-mayo-bridge.html",
+     "https://en.wikipedia.org/wiki/Manchester_Bridge_(Virginia)",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0000/full/pct:50/0/default.jpg"
+    ]
+   },
+   {
+    "id": "rp-byrd-street-approach",
+    "name": "Richmond and Petersburg (Atlantic Coast Line) approach to Byrd Street Station",
+    "kind": "rail",
+    "from": 1838,
+    "to": 1971,
+    "note": "The track from the north end of the Richmond and Petersburg bridge (OSM w710689016) across the Haxall Canal into Byrd Street Station at Seventh and Byrd Streets, the R&P's original Richmond station and later the Atlantic Coast Line's headquarters, closed in 1958. Today nothing of it is mapped north of the bridge. Approximate: one track along the middle of the station's throat, read by eye from the USGS 1:24,000 Richmond quadrangles of 1934 and 1956 (which show the line crossing the canal and fanning into the station yard between Seventh and Eighth Streets south of Byrd) and joined to the bridge's mapped end, about 20 m east of where the maps put it. Drawn with the bridge, from 1838 to 1970 (the R&P's depot stood at 8th and Byrd before Byrd Street Station, and the 1886 Sanborn map, volume 1, sheet 10, shows its tracks fanning in between 7th and 9th south of Canal); the years are the bridge's, not the track's.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge",
+     "https://en.wikipedia.org/wiki/Byrd_Street_Station",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0010/full/pct:25/0/default.jpg"
+    ]
+   },
+   {
+    "id": "church-hill-tunnel-approach",
+    "name": "Chesapeake and Ohio approach to the Church Hill Tunnel",
+    "kind": "rail",
+    "from": 1873,
+    "to": 1926,
+    "note": "The C&O's line to the Church Hill Tunnel's west portal, by 18th Street just north of Marshall: it left the old Virginia Central line west of 17th Street and curved southeast. The tunnel opened in 1873, collapsed on October 2, 1925, and its western end was sealed the following spring, so it is drawn through 1925 and not after. Its course: OSM's abandoned branch (w169784705) from the junction with today's Peninsula Subdivision south to 17th Street; then the C&O spur shown on the 1924\u201325 Sanborn map, volume 1, sheet 24, crossing the block between 17th and 18th Streets, Marshall and Clay, between the Richmond Cold Storage and International Harvester warehouses (the sheet fitted to the four corners of the block, to about a meter, and the line set midway between the warehouses standing today); then straight across 18th Street to the portal mapped in OSM (the tunnel, w6036486). Approximate.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Church_Hill_Tunnel",
+     "https://www.loc.gov/item/sanborn09064_006/",
+     "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g09064192401:09064_01_1924-0024/full/pct:25/0/default.jpg",
+     "https://www.openstreetmap.org/way/169784705",
+     "https://www.openstreetmap.org/way/6036486"
+    ]
+   }
+  ]
+ },
+ "id": "20261117-102305-richmond-downtown-time-1925",
+ "createdAt": "2026-11-17T15:23:05.326Z",
+ "bytes": 12886895,
+ "git": {
+  "commit": "10a8744",
+  "dirty": false,
+  "subject": "Merge wave5-free-bridge: the Free Bridge clears traced buildings in builds made --with next,next2 (Richmond 1925 and 1950, version 5); every recorded scene unchanged"
+ },
+ "files": {
+  "svg": "builds/20261117-102305-richmond-downtown-time-1925/image.svg",
+  "thumb": "builds/20261117-102305-richmond-downtown-time-1925/thumb.png",
+  "social": "builds/20261117-102305-richmond-downtown-time-1925/social.png",
+  "preview": "builds/20261117-102305-richmond-downtown-time-1925/preview.jpg"
+ }
+}

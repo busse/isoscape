@@ -15,8 +15,8 @@
 <meta property="og:title" content="How it&#39;s made · isoscape">
 <meta property="og:description" content="The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.">
 <meta property="og:url" content="https://busse.github.io/isoscape/p/how-its-made.html">
-<meta property="og:image" content="https://busse.github.io/isoscape/builds/20261116-235515-richmond-downtown-time-1925/social.jpg">
-<meta property="og:image:secure_url" content="https://busse.github.io/isoscape/builds/20261116-235515-richmond-downtown-time-1925/social.jpg">
+<meta property="og:image" content="https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg">
+<meta property="og:image:secure_url" content="https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -24,9 +24,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="How it&#39;s made · isoscape">
 <meta name="twitter:description" content="The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.">
-<meta name="twitter:image" content="https://busse.github.io/isoscape/builds/20261116-235515-richmond-downtown-time-1925/social.jpg">
+<meta name="twitter:image" content="https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg">
 <meta name="twitter:image:alt" content="Isometric map of Downtown Richmond, from the Capitol to Tobacco Row as it stood in 1925 (The 1924–25 Sanborn map): buildings, streets, water and the lie of the land, seen from above at an angle">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How it's made","description":"The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.","author":{"@type":"Person","name":"Chris Busse","url":"https://busse.github.io/isoscape/p/about.html#contact"},"inLanguage":"en","image":"https://busse.github.io/isoscape/builds/20261116-235515-richmond-downtown-time-1925/social.jpg","url":"https://busse.github.io/isoscape/p/how-its-made.html","mainEntityOfPage":"https://busse.github.io/isoscape/p/how-its-made.html","dateModified":"2026-11-17","isPartOf":{"@type":"WebSite","name":"isoscape","url":"https://busse.github.io/isoscape/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How it's made","description":"The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.","author":{"@type":"Person","name":"Chris Busse","url":"https://busse.github.io/isoscape/p/about.html#contact"},"inLanguage":"en","image":"https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg","url":"https://busse.github.io/isoscape/p/how-its-made.html","mainEntityOfPage":"https://busse.github.io/isoscape/p/how-its-made.html","dateModified":"2026-11-17","isPartOf":{"@type":"WebSite","name":"isoscape","url":"https://busse.github.io/isoscape/"}}</script>
 <style>
 :root {
   --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
@@ -623,7 +623,10 @@ approximation; none is drawn in 1865, the scene after the fire that burned them.
 item can be held back from builds made before it existed (<code>&quot;switch&quot;</code>): it is drawn only in a
 build asked for it by name (<code>isoscape build --with next</code>), and the build records that,
 so a print already sold is still made exactly as it was. The Free Bridge is drawn only so: the
-1925 and 1950 prints, version 4, were drawn without it.</p>
+1925 and 1950 prints, version 4, were drawn without it. Its line is approximate, so in builds
+made <code>--with next,next2</code> (the 1925 and 1950 prints&#39; version 5) a traced building with any part
+within 12 m of it is left out, as one under a rail viaduct is: otherwise its deck ran over the
+roof of a frame building on the canal bank.</p>
 <p><strong>Traced: buildings from fire-insurance maps.</strong> The Sanborn Map Company drew every building
 in a city&#39;s business district for insurers, block by block. Each building appears as a
 footprint colored by material: pink brick, yellow frame, blue stone, gray iron. The Library of

@@ -1,0 +1,177 @@
+{
+ "name": "richmond-downtown-time-1950",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1950",
+ "palette": "paper",
+ "note": "Richmond 1950 version 5: the Ninth Street (Free) Bridge (approximate), Hull Street kept, 60 m verges; a traced building under the bridge left out; drawn --with next,next2",
+ "flags": [
+  "--with",
+  "next,next2"
+ ],
+ "viewBox": [
+  -3024,
+  -1671.8840019012491,
+  6048,
+  2727.060916437489
+ ],
+ "bearing": -8.7,
+ "ms": 11062,
+ "stats": {
+  "features": 4418,
+  "unbuiltStreets": 1617,
+  "bridgesAtGrade": 43,
+  "vergesLater": 61,
+  "canalBridgesLater": 2,
+  "bridgesWithoutRoads": 3,
+  "plantingsLater": 17,
+  "spursLater": 42,
+  "groundUnderBridgesLowered": 13,
+  "ground": 33,
+  "elevationDatum": -0.1,
+  "elevationTop": 56.8,
+  "streetcarLines": 0,
+  "ribbons": 829,
+  "footprintsAdded": 0,
+  "outlinesUnderParts": 4,
+  "footprintsDrawn": 0,
+  "datedFromParcels": 1228,
+  "buildings": 1867,
+  "streetcars": 0,
+  "heightFromTag": 34,
+  "heightFromModel": 0,
+  "heightFromLevels": 300,
+  "heightGuessed": 1533,
+  "year": 1950,
+  "newSincePrevious": 0,
+  "datedCurated": 31,
+  "datedOsm": 608,
+  "datedParcel": 1228,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 729,
+  "tracedOnWater": 24,
+  "tracedUnderViaduct": 24,
+  "tracedOnTrack": 11,
+  "tracedBuried": 55,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 43,
+  "tracedEndHighway": 49,
+  "tracedEndAssumed": 637,
+  "curated": 2,
+  "bridgePieces": 471,
+  "contourSegments": 48842,
+  "rapidCells": 9125,
+  "rapidsReach": 200,
+  "strips": 200
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP",
+  "Buildings dated from assessor records",
+  "Historic buildings traced from Sanborn Fire Insurance Maps, Library of Congress"
+ ],
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "checkLevels": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1950,
+  "series": "richmond-downtown-time",
+  "title": "Mid-century",
+  "note": "The last scene before the turnpike.",
+  "curated": [
+   {
+    "id": "free-bridge",
+    "name": "Free Bridge (the Ninth Street Bridge)",
+    "kind": "bridge",
+    "from": 1873,
+    "to": 1972,
+    "note": "The free road bridge from the foot of 9th Street to Manchester, opened in June 1873 (RVA Mag; Dogtown Dish dates the span it describes to 1878, after the flood of 1877) and closed after the floods of 1969 and 1972, when the Manchester Bridge replaced it. Built \"rather low over the river\": its deck is drawn 8 m over the water, an assumption. Its line is today's Manchester Bridge's, which the USGS 1:24,000 Richmond quadrangle of 1934 shows it on (\"9th St Bridge\", just downstream of the Richmond and Petersburg bridge), from the corner of 9th Street to the foot of Commerce Road in Manchester: approximate. Drawn only in builds made with --with next: the 1925 and 1950 prints (version 4) were drawn before it.",
+    "sources": [
+     "https://dogtowndish.com/2018/03/03/richmonds-lost-singing-9th-street-bridge/",
+     "https://rvamag.com/community/rva-5x5-the-history-of-the-mayo-bridge.html",
+     "https://en.wikipedia.org/wiki/Manchester_Bridge_(Virginia)",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0000/full/pct:50/0/default.jpg"
+    ]
+   },
+   {
+    "id": "rp-byrd-street-approach",
+    "name": "Richmond and Petersburg (Atlantic Coast Line) approach to Byrd Street Station",
+    "kind": "rail",
+    "from": 1838,
+    "to": 1971,
+    "note": "The track from the north end of the Richmond and Petersburg bridge (OSM w710689016) across the Haxall Canal into Byrd Street Station at Seventh and Byrd Streets, the R&P's original Richmond station and later the Atlantic Coast Line's headquarters, closed in 1958. Today nothing of it is mapped north of the bridge. Approximate: one track along the middle of the station's throat, read by eye from the USGS 1:24,000 Richmond quadrangles of 1934 and 1956 (which show the line crossing the canal and fanning into the station yard between Seventh and Eighth Streets south of Byrd) and joined to the bridge's mapped end, about 20 m east of where the maps put it. Drawn with the bridge, from 1838 to 1970 (the R&P's depot stood at 8th and Byrd before Byrd Street Station, and the 1886 Sanborn map, volume 1, sheet 10, shows its tracks fanning in between 7th and 9th south of Canal); the years are the bridge's, not the track's.",
+    "sources": [
+     "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge",
+     "https://en.wikipedia.org/wiki/Byrd_Street_Station",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0010/full/pct:25/0/default.jpg"
+    ]
+   }
+  ]
+ },
+ "id": "20261117-102325-richmond-downtown-time-1950",
+ "createdAt": "2026-11-17T15:23:25.410Z",
+ "bytes": 12820099,
+ "git": {
+  "commit": "10a8744",
+  "dirty": false,
+  "subject": "Merge wave5-free-bridge: the Free Bridge clears traced buildings in builds made --with next,next2 (Richmond 1925 and 1950, version 5); every recorded scene unchanged"
+ },
+ "files": {
+  "svg": "builds/20261117-102325-richmond-downtown-time-1950/image.svg",
+  "thumb": "builds/20261117-102325-richmond-downtown-time-1950/thumb.png",
+  "social": "builds/20261117-102325-richmond-downtown-time-1950/social.png",
+  "preview": "builds/20261117-102325-richmond-downtown-time-1950/preview.jpg"
+ }
+}
