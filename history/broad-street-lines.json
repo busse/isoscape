@@ -24530,18 +24530,6 @@
       37.5614946
      ],
      [
-      -77.4685891,
-      37.5614623
-     ],
-     [
-      -77.4685224,
-      37.5615308
-     ],
-     [
-      -77.4684764,
-      37.561578
-     ],
-     [
       -77.4683597,
       37.5615079
      ],
@@ -25539,7 +25527,7 @@
      ]
     ]
    ],
-   "note": "Broad Street, the spine of the system, from the Belmont line's turn at Sheppard Street east to Church Hill. The east end is approximate.",
+   "note": "Broad Street, the spine of the system, from the Belmont line's turn at Sheppard Street east to Church Hill. The east end is approximate. West of the Boulevard the line keeps to the middle of Broad Street, past a jog in the street's mapped center line (approximate).",
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://museumdistrict.org/history"
