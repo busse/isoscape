@@ -1,0 +1,230 @@
+{
+ "design": "richmond-1925",
+ "title": "Richmond, 1925",
+ "version": 3,
+ "version_note": "redrawn: elevation that had been read out of place is corrected, the hill shading is smooth, rapids and rocks are drawn only where the river falls, the shorelines follow the mapped banks, bridges and ramps end properly, the Capitol stands at its height with its wings of 1906, St. John's Church is drawn at its height, buildings the assessor misdated appear only from their real years, traced buildings that fell in the river or under the rail viaducts are left out, the credit line is set at a legible size, and the print says the ground is today's.",
+ "recorded": "2026-11-17T01:34:27+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "149117914bc2bcf54c5cea3dacd594bb3c83c861",
+  "subject": "Changes: Richmond 1925, 1950, 2026 and Richmond and the James redrawn as version 3 (November 16, 2026)",
+  "dirty": false
+ },
+ "kind": "redraw",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <store>/print-files/drawn/richmond-1925-v3 --only richmond-1925",
+   "python3 tools/print/canvas.py <store>/print-files/drawn/richmond-1925-v3/richmond-1925_36x24.jpg <store>/print-files/drawn/richmond-1925-v3/canvas 18x12 30x20 36x24",
+   "python3 tools/release/stamp.py <store> richmond-1925 --version 3 --base print-files/drawn/richmond-1925-v3"
+  ],
+  "redraw": true,
+  "base_kind": "compose",
+  "previous_record": "releases/richmond-1925/v2.json",
+  "pinned": "panels use the builds named in scenes[].build, not the newest",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond",
+   "piece": "1925",
+   "plate": "RVA-01",
+   "version": "3",
+   "drawn": "2026",
+   "location": "37.534° N 77.427° W",
+   "facing": "351°"
+  },
+  "files": {
+   "richmond-1925-v3_36x24.jpg": {
+    "base": "print-files/drawn/richmond-1925-v3/richmond-1925_36x24.jpg",
+    "base_sha256": "f1c811762ce239de6c27d2454ec45a96db1ae4ed9dc5f3d7c585c3197757de6e",
+    "at": {
+     "x": 8754,
+     "y": 6604,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   },
+   "richmond-1925-v3_canvas-18x12.jpg": {
+    "base": "print-files/drawn/richmond-1925-v3/canvas/richmond-1925_canvas-18x12.jpg",
+    "base_sha256": "d6ce7889399c23fa2ab7d25e9f61e417297cb47af02aee55ae23e68e1eee11d7",
+    "at": {
+     "x": 4475,
+     "y": 3698,
+     "w": 1195,
+     "h": 169,
+     "u": 0.9192,
+     "where": "foot"
+    }
+   },
+   "richmond-1925-v3_canvas-30x20.jpg": {
+    "base": "print-files/drawn/richmond-1925-v3/canvas/richmond-1925_canvas-30x20.jpg",
+    "base_sha256": "8f53df75937149e64d87bbf798765aa50f2ad4c4220fda248d8d2d48644ac29a",
+    "at": {
+     "x": 7611,
+     "y": 5934,
+     "w": 1543,
+     "h": 218,
+     "u": 1.1867,
+     "where": "foot"
+    }
+   },
+   "richmond-1925-v3_canvas-36x24.jpg": {
+    "base": "print-files/drawn/richmond-1925-v3/canvas/richmond-1925_canvas-36x24.jpg",
+    "base_sha256": "f3f1139b0f1ae2d9a6fab0086c7ea2882841e1cbd31422330abd05eac4dbad27",
+    "at": {
+     "x": 9204,
+     "y": 7054,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-downtown-time",
+   "year": 1925,
+   "flags": [],
+   "svg": "out/builds/20261116-200007-richmond-downtown-time-1925/image.svg",
+   "sha256": "6383a04be5094f0b338ca10043c3198ba53af077bc5253b99e9597c14045a88f",
+   "frozen": "data/_releases/scenes/6383a04be5094f0b338ca10043c3198ba53af077bc5253b99e9597c14045a88f.svg",
+   "build": "20261116-200007-richmond-downtown-time-1925",
+   "commit": "942ca88",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "08c58e8c31a6ba1a4c3ff40ad6df7dc3c0044c7de3c193aa04894f51f16214ab",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "tools/print/canvas.py": "7d6950595979a5f62d60b4509ff0b9bf36766594acbc294615eca26883ce283f",
+  "regions/richmond-downtown-time.json": "498df0bb97a286cde8d08816566be631db130090de8a1928fd7f6ba3ee831681",
+  "history/richmond-downtown.json": "34175db8800b15b64ab67fc58fab177ce513c745a23e5b295ad79c064c8972bf",
+  "history/sanborn/lost.geojson": "298b5ac0f674499f65ff8474d06beb17fb78b417a1e8362b46ed7adb1ecdced9"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/richmond-1925-v3_36x24.jpg",
+   "sha256": "c68cdd91189a63156d16fc7090a3152cb90b306b6a2144068b584a395746a2c1",
+   "bytes": 11577777,
+   "printful_file_id": 1113887785
+  },
+  "canvas": [
+   {
+    "file": "print-files/canvas/richmond-1925-v3_canvas-18x12.jpg",
+    "sha256": "4cd4e564e69c7c5c5459b77e398d281981fe56575445a32b826dcf76d1cb4a92",
+    "bytes": 4216557,
+    "printful_file_id": 1113888635
+   },
+   {
+    "file": "print-files/canvas/richmond-1925-v3_canvas-30x20.jpg",
+    "sha256": "be92a9a33ce7efb1a269ff1e1b11b22697f52f5dc52934ea064f944910d5798f",
+    "bytes": 7659924,
+    "printful_file_id": 1113888891
+   },
+   {
+    "file": "print-files/canvas/richmond-1925-v3_canvas-36x24.jpg",
+    "sha256": "d23488e3376e72dd05e7481a123d4a17e754cfd1408f9f56073706f762ca97e0",
+    "bytes": 9657652,
+    "printful_file_id": 1113889166
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Richmond, 1925",
+   "place": "Richmond",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "richmond-1925-v3_36x24.jpg",
+   "canvas": "richmond-1925-v3_canvas-{w}x{h}.jpg",
+   "version": 3,
+   "version_date": "November 16, 2026",
+   "version_note": "redrawn: elevation that had been read out of place is corrected, the hill shading is smooth, rapids and rocks are drawn only where the river falls, the shorelines follow the mapped banks, bridges and ramps end properly, the Capitol stands at its height with its wings of 1906, St. John's Church is drawn at its height, buildings the assessor misdated appear only from their real years, traced buildings that fell in the river or under the rail viaducts are left out, the credit line is set at a legible size, and the print says the ground is today's.",
+   "plate": "RVA-01",
+   "plate_box": [
+    0.81056,
+    0.91722,
+    0.96704,
+    0.95042
+   ]
+  },
+  "products": [
+   {
+    "handle": "richmond-1925",
+    "id": "gid://shopify/Product/9137908252790",
+    "format": "all (merged)",
+    "status": "DRAFT",
+    "variants": 16
+   },
+   {
+    "handle": "richmond-1925-print",
+    "id": "gid://shopify/Product/9132690931830",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-1925-framed-print",
+    "id": "gid://shopify/Product/9132691030134",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-1925-framed-canvas",
+    "id": "gid://shopify/Product/9132691095670",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1925-v3_36x24-print.jpg?v=1794878710",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1925-v3_36x24-plate.jpg?v=1794878714"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1925-v3_36x24-framed-print-black.jpg?v=1794878719",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1925-v3_36x24-framed-print-white.jpg?v=1794878725",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1925-v3_36x24-plate.jpg?v=1794878714"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1925-v3_36x24-framed-canvas-black.jpg?v=1794878730",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1925-v3_36x24-framed-canvas-white.jpg?v=1794878735",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1925-v3_36x24-plate.jpg?v=1794878714"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 1
+ }
+}

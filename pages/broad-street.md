@@ -11,7 +11,7 @@ John Russell Pope's Broad Street Station opened in January 1919 for the RF&P and
 
 ![The 1943 railroad map, framed by its fourteen places](broad-street-menu.jpg)
 
-[Open the map](https://busse.github.io/isoscape/#broad-street-lines:1943) to pan and zoom, or jump to a place below. Prints of the whole set, the map alone and each place are in the [shop](https://chrisbusse.com/collections/broad-street-station-1943).
+[Open the map](https://busse.github.io/isoscape/#broad-street-lines:1943) to pan and zoom, or jump to a place below.
 
 ## The places
 

@@ -611,11 +611,11 @@
    },
    "eras": [
     [
-     1950,
+     1960,
      null
     ]
    ],
-   "note": "Parking aisles, driveways and drive-throughs, dated with surface parking: approximate, not sourced."
+   "note": "Parking aisles, driveways and drive-throughs, dated with surface parking (1960): approximate, not sourced."
   },
   {
    "where": {
@@ -649,11 +649,11 @@
    },
    "eras": [
     [
-     1950,
+     1960,
      null
     ]
    ],
-   "note": "Surface parking: an approximate date, not sourced."
+   "note": "Surface parking, from 1960: the year by which the traced buildings no later map accounts for are assumed gone, when clearing for parking and highways began. Approximate, not sourced."
   },
   {
    "where": {
@@ -780,22 +780,40 @@
    "id": "w366226948",
    "name": "Virginia State Capitol, central block",
    "year": 1788,
-   "until": 1906,
    "source": "https://vga.virginia.gov/?p=73",
-   "note": "Jefferson's Capitol, completed 1788, drawn alone until the wings of 1904–06 were added. Its footprint is OSM's central building part (w366226948), taken to be the original building because it stands between the two wings; that identification and its height (OSM's, 8.1 m) are not from the source."
+   "note": "Jefferson's Capitol, completed 1788 (https://vga.virginia.gov/?p=73). Its footprint is OSM's central building part (w366226948), taken to be the original building because it stands between the two wings of 1904–06; that identification is not from the source. OSM tags it 8.1 m; its height here, 26 m, is the roof height (85 ft, three floors) SkyscraperPage measured: https://skyscraperpage.com/b190890.",
+   "height": 26
+  },
+  {
+   "id": "w366226949",
+   "name": "Virginia State Capitol, west wing",
+   "year": 1906,
+   "height": 18,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "One of the two wings added 1904–06, an OSM building part with two levels and no height (drawn about 7 m, below the houses around the square). 18 m, under the central block's 26 m roof, is approximate."
+  },
+  {
+   "id": "w366226950",
+   "name": "Virginia State Capitol, east wing",
+   "year": 1906,
+   "height": 18,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "One of the two wings added 1904–06, an OSM building part with two levels and no height (drawn about 7 m, below the houses around the square). 18 m, under the central block's 26 m roof, is approximate."
   },
   {
    "id": "w45088494",
    "name": "Virginia State Capitol",
    "year": 1906,
    "source": "https://vga.virginia.gov/?p=73",
-   "note": "The Capitol as OSM outlines it today, with the wings of 1904–06, is drawn from 1906; before that only its central block (below) stands."
+   "note": "The Capitol as OSM outlines it today, with the wings of 1904–06, from 1906. OSM maps it as three parts: the central block (below) and the two wings."
   },
   {
    "id": "w400327565",
    "name": "St. John's Church",
    "year": 1741,
-   "source": "https://lva-virginia.libguides.com/richmond-maps/history"
+   "source": "https://sah-archipedia.org/node/20521",
+   "height": 9,
+   "note": "Completed 1741 (https://lva-virginia.libguides.com/richmond-maps/history). A one-story frame church with a double-pitched roof, enlarged in 1772 and 1829, with a tower from 1833 (rebuilt 1866 and 1904–05). OSM gives no height, so it was drawn at the 16 m guess for a church; 9 m for the ridge is approximate. The outline is today's, so it shows the later additions in every year."
   },
   {
    "id": "w365615571",
@@ -856,6 +874,95 @@
    "name": "Main Street Station",
    "year": 1901,
    "source": "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
+  },
+  {
+   "id": "w236488169",
+   "name": "First National Bank Building",
+   "year": 1913,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "Completed 1913, Richmond's first high-rise; the assessor's year (1911) put it two years early."
+  },
+  {
+   "id": "w266761453",
+   "name": "The Virginia",
+   "year": 1906,
+   "source": "https://en.wikipedia.org/wiki/The_Virginia",
+   "note": "Five-story apartment building of 1906 (National Register); the assessor's year (1847) is the parcel's, not the building's."
+  },
+  {
+   "id": "w236488141",
+   "name": "Hotel John Marshall",
+   "year": 1929,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "The hotel opened in 1929 (fifteen floors); the assessor's year (1920) put it in the 1925 scene."
+  },
+  {
+   "id": "w365155760",
+   "name": "Hotel John Marshall, tower",
+   "year": 1929,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia"
+  },
+  {
+   "id": "w822723705",
+   "name": "Hotel John Marshall, tower",
+   "year": 1929,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia"
+  },
+  {
+   "id": "w225274650",
+   "name": "Riverside on the James",
+   "year": 2005,
+   "source": "https://richmondbizsense.com/2021/04/08/riverside-on-the-james-ll-flooring-headquarters-sell-for-combined-93m/",
+   "note": "The fifteen-story office tower was built in 2005; the assessor's year (1920) is the old power plant site's."
+  },
+  {
+   "id": "w225274652",
+   "name": "Riverside on the James, parking deck",
+   "year": 2005,
+   "source": "https://www.businesswire.com/news/home/20210407005264/en/American-Real-Estate-Partners-Sells-Class-A-Richmond-Office-Tower-to-Opal-Holdings/",
+   "note": "The tower's attached parking deck. Its year is taken to be the tower's (2005); approximate."
+  },
+  {
+   "id": "w398440546",
+   "name": "The Locks Tower",
+   "year": 2019,
+   "source": "https://www.multihousingnews.com/downtown-richmond-gets-new-luxury-high-rise/",
+   "note": "Twelve-story apartment tower at 1001 E. Byrd St., completed by October 2019 (planned in 2017: https://richmondbizsense.com/2017/11/20/58m-12-story-tower-slated-along-canal/)."
+  },
+  {
+   "id": "w943656806",
+   "name": "South Falls Tower",
+   "year": 2021,
+   "source": "https://richmondbizsense.com/2022/01/05/developers-plan-next-phases-of-riverfront-residential-towers-in-manchester/",
+   "note": "Fourteen-story L-shaped tower at 111 Hull St., finished in 2021 on a former paper-mill site; the assessor's year (1929) put it in the 1950 scene."
+  },
+  {
+   "id": "w1078391655",
+   "name": "The Hydro",
+   "year": 2022,
+   "source": "https://richmondbizsense.com/2022/04/14/new-hydro-building-in-manchester-flush-with-commercial-tenants/",
+   "note": "Seven-story apartment building at 101 Manchester Road, recently completed in April 2022."
+  },
+  {
+   "id": "w1078391657",
+   "name": "Shiplock Views",
+   "year": 2021,
+   "source": "https://richmondbizsense.com/2020/10/22/project-snapshot-shiplock-views-coming-into-view/",
+   "note": "New apartment building, five stories on Main Street and nine toward the river, slated to be finished in spring 2021."
+  },
+  {
+   "id": "r21542843",
+   "name": "The Hues at City View",
+   "year": 2025,
+   "source": "https://www.donleyinc.com/?p=20172",
+   "note": "Apartment building in Manchester completed in July 2025; the assessor's year (1920) put it in the 1925 scene."
+  },
+  {
+   "id": "w236488171",
+   "name": "Virginia Mutual Building",
+   "year": 1921,
+   "source": "https://en.wikipedia.org/wiki/Virginia_Mutual_Building",
+   "note": "Built 1920–21 at 821 E. Main St. Curating its neighbor, the First National Bank Building, sets aside their shared parcel's year, so it is dated here."
   }
  ],
  "sanborn": {
@@ -867,6 +974,18 @@
    1924,
    1950
   ],
-  "source": "https://www.loc.gov/collections/sanborn-maps/?q=richmond+virginia"
+  "source": "https://www.loc.gov/collections/sanborn-maps/?q=richmond+virginia",
+  "leaveOut": [
+   {
+    "edition": 1905,
+    "sheet": "5",
+    "why": "28 of its 57 traced buildings fall on the Capitol Square lawn, a public square since the Capitol was built (https://vga.virginia.gov/?p=73), so the sheet's fit (read by eye) is wrong; its other buildings are taken to be out of place too. Left out until the sheet is placed again."
+   },
+   {
+    "edition": 1905,
+    "sheet": "7",
+    "why": "3 of its 5 traced buildings fall on the Capitol Square lawn: the same misfit as sheet 5."
+   }
+  ]
  }
 }

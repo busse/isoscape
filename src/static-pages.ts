@@ -31,7 +31,7 @@ import { MARK, PROSE_CSS, STORY_CSS, THEME_CSS } from './explorer.ts'
 import { escapeHtml } from './markdown.ts'
 import { loadPages, PAGES_DIR, type Page } from './pages.ts'
 import {
-  buildCard, clip, escAttr, firstParagraph, flagshipOf, imageSize, metaTags, previewOf, shopFor, siteHref, withCampaign,
+  buildCard, clip, escAttr, firstParagraph, flagshipOf, pageDescription, imageSize, metaTags, pageShop, previewOf, shopFor, siteHref, withCampaign, type ShareDoor,
   SITE_NAME, statsLine, type HomeConfig, type Preview, type SiteConfig,
 } from './social.ts'
 import { makeStory } from './story.ts'
@@ -140,6 +140,19 @@ export const planStatic = (builds: readonly BuildMeta[], pageSlugs: readonly str
   }
 }
 
+/**
+ * Every map's lasting share page (social.ts writes them as `s/<name>.html`), named as its static
+ * page is: `m/<name>.html` → `s/<name>.html`, with its route and its page's heading.
+ */
+export const shareDoors = (plan: StaticPlan, home?: HomeConfig): ShareDoor[] =>
+  plan.entries.filter((e): e is MapEntry | SeriesEntry => e.kind !== 'page').map((e) => ({
+    name: e.path.replace(/^m\//, '').replace(/\.html$/, ''),
+    route: e.route,
+    build: e.build,
+    title: mapTitle(e, home),
+    ...(e.kind === 'series' ? { key: e.region } : {}),
+  }))
+
 /** The front-page section a region belongs to (the first whose prefixes match), as the explorer groups them. */
 export const sectionOf = (home: HomeConfig | undefined, region: string) =>
   home?.sections.find((s) => s.prefixes.some((p) => region.startsWith(p)))
@@ -159,15 +172,8 @@ export const mapTitle = (e: MapEntry | SeriesEntry, home?: HomeConfig): string =
 /** The regions a static content page links into (`../index.html#<region>…`), in order of first mention. */
 export const mapRefs = (html: string): string[] => {
   const out: string[] = []
-  for (const m of html.matchAll(/href="\.\.\/index\.html#([a-z0-9][a-z0-9-]*)(?=[:@"])/g)) if (!out.includes(m[1])) out.push(m[1])
+  for (const m of html.matchAll(/href="\.\.\/index\.html#([a-z0-9][a-z0-9-]*)(?=[:@"])/g)) if (m[1] !== 'home' && !out.includes(m[1])) out.push(m[1])
   return out
-}
-
-/** Where a content page's "Prints" link goes: the shop link its maps share, else that of the section that tells its story. */
-export const pageShop = (page: Pick<Page, 'slug' | 'html'>, config: Pick<SiteConfig, 'shop' | 'home'>): string | undefined => {
-  const urls = new Set(mapRefs(page.html).map((r) => shopFor(config, r)?.url).filter((u): u is string => u !== undefined))
-  if (urls.size === 1) return [...urls][0]
-  return config.home?.sections.find((s) => s.page === `#/${page.slug}` && s.shop)?.shop
 }
 
 // ---- links --------------------------------------------------------------------------------------
@@ -348,12 +354,11 @@ export interface ContentImages {
 /** A content page as a plain HTML document: `p/<slug>.html`. */
 export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}, modified?: string): string => {
   const path = ctx.plan.forPage(page.slug) ?? `p/${page.slug}.html`
-  const description = clip(page.summary ?? firstParagraph(page.html), 300)
+  const description = pageDescription(page)
   const image = imgs.own ?? imgs.flagship
   const imageAlt = imgs.own === undefined ? imgs.flagshipAlt : page.summary ?? page.title
-  const shop = pageShop(page, ctx.config)
-  const linked = mapRefs(page.html).length
-  const acts = `<p class="acts"><a class="btn ghost" href="../index.html#/${escAttr(page.slug)}">Open this in the explorer</a>${shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop, page.slug, ctx.config.shop?.url))}">${linked > 1 ? 'Prints of these maps' : 'Prints of this map'} ↗</a>`}</p>\n`
+  const shop = pageShop(page.slug, mapRefs(page.html), ctx.config)
+  const acts = `<p class="acts"><a class="btn ghost" href="../index.html#/${escAttr(page.slug)}">Open this in the explorer</a>${shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, page.slug, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`}</p>\n`
   const url = abs(path, ctx)
   const ld = {
     '@context': 'https://schema.org',
@@ -460,7 +465,7 @@ export const renderMapPage = (e: MapEntry, ctx: Ctx, previews: ReadonlyMap<strin
   const description = clip(hero?.blurb ? `${hero.blurb} ${card.description}` : card.description, 300)
   const image = previews.get(b.id)
   const alt = mapAlt(b)
-  const shop = shopFor(ctx.config, e.region)
+  const shop = shopFor(ctx.config, e.region, e.year)
   const explore = `${u}index.html${e.route}`
   const series = e.series === undefined ? undefined : ctx.plan.entries.find((x): x is SeriesEntry => x.kind === 'series' && x.path === e.series)
   const story = sec?.page === undefined ? undefined : sec.page.startsWith('#/') ? ctx.plan.forPage(sec.page.slice(2).split('/')[0]) : undefined

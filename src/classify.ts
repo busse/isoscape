@@ -27,6 +27,21 @@ export const groundKind = (t: Tags): GroundKind | null => {
   return null
 }
 
+/**
+ * Is mapped water a flowing river? `true` for a river or its bank (`water=river`, `rapids` or
+ * `stream`, `waterway=riverbank`); `false` for still or kept water: a lake, pond, reservoir,
+ * basin, treatment works, canal, dock, pool or fountain; `undefined` for bare `natural=water`,
+ * which is a river only where a river runs through it. Only a river gets rocks and rapids.
+ */
+export const waterFlows = (t: Tags): boolean | undefined => {
+  if (t.waterway === 'riverbank') return true
+  if (t.water === 'river' || t.water === 'rapids' || t.water === 'stream') return true
+  if (t.water !== undefined) return false
+  if (t.waterway !== undefined || t.landuse === 'basin' || t.landuse === 'reservoir' || t.amenity === 'fountain') return false
+  if (t.leisure !== undefined || t.man_made !== undefined || t.basin !== undefined) return false
+  return undefined
+}
+
 /** Paint order of the ground layers, bottom first. Water and islands are handled apart. */
 export const GROUND_ORDER: readonly GroundKind[] = ['green', 'cemetery', 'marsh', 'wood', 'sand', 'rock', 'parking', 'plan', 'grounds', 'burned', 'platform']
 
@@ -110,11 +125,23 @@ const finite = (v: string | undefined): number | null => {
  * flat outline on the ground.
  */
 export const MIN_TAGGED_HEIGHT = 2
-export const buildingHeights = (t: Tags, footprintArea: number): { base: number; top: number; source: 'height' | 'model' | 'levels' | 'guess' } => {
+
+/**
+ * With `checkLevels`, a building of ordinary floors (`ORDINARY_FLOORS`) tagged more than
+ * `MAX_LEVEL_HEIGHT` meters a level is taken as mistagged and drawn by its levels: in downtown
+ * Richmond a six-story apartment building is tagged 80 m, and a twelve-story one 96 m (the
+ * height of City Hall). Churches, halls, sheds and plants keep a tall tagged height.
+ */
+export const MAX_LEVEL_HEIGHT = 5.5
+const ORDINARY_FLOORS = ['apartments', 'residential', 'dormitory', 'hotel', 'house', 'terrace', 'office']
+export const buildingHeights = (t: Tags, footprintArea: number, checkLevels = false): { base: number; top: number; source: 'height' | 'model' | 'levels' | 'guess' } => {
   const minLevel = finite(t['building:min_level'])
   const base = Math.max(0, parseLength(t.min_height) ?? (minLevel !== null ? minLevel * METRES_PER_LEVEL : 0))
   const tagged = parseLength(t.height)
-  const height = tagged !== null && t.building !== undefined && tagged < MIN_TAGGED_HEIGHT ? null : tagged
+  const tagLevels = finite(t['building:levels'])
+  const overTall = checkLevels && tagged !== null && tagLevels !== null && tagLevels > 0 && ORDINARY_FLOORS.includes(t.building ?? '') &&
+    tagged - base > tagLevels * MAX_LEVEL_HEIGHT
+  const height = (tagged !== null && t.building !== undefined && tagged < MIN_TAGGED_HEIGHT) || overTall ? null : tagged
   if (height !== null && height > base) return { base, top: height, source: t['height:source'] === 'model' ? 'model' : 'height' }
   const levels = finite(t['building:levels']) ?? NaN
   if (Number.isFinite(levels) && levels > 0) {

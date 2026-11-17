@@ -24,9 +24,7 @@ after the download is the same code that draws Richmond and the fifty American l
 | [Machu Picchu, Peru](https://busse.github.io/isoscape/#lm-machu-picchu) | Copernicus DEM GLO-30 | European Space Agency / EU Copernicus | 30 m, radar from orbit |
 | [Sydney Opera House and Harbour Bridge](https://busse.github.io/isoscape/#lm-sydney-opera-house) | Terrain Tiles | Mapzen/Tilezen on AWS Open Data | 30 m here (SRTM) |
 
-Click a landmark's name to open its map, then drag to pan and scroll to zoom. Prints of all
-five are in the [holiday shop](https://chrisbusse.com/collections/world-landmarks) through
-December 31, 2026.
+Click a landmark's name to open its map, then drag to pan and scroll to zoom.
 
 ## Eiffel Tower, Paris
 

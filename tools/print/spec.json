@@ -113,7 +113,8 @@
      "label": "2026",
      "sub": "today"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it."
   },
   "then-and-now": {
    "title": "Richmond, Then & Now",
@@ -140,7 +141,8 @@
      "build": "richmond-downtown-time-2026",
      "label": "2026"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it."
   },
   "richmond-panorama-2026": {
    "title": "Richmond and the James",
@@ -174,7 +176,8 @@
     {
      "build": "richmond-downtown-time-1865"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it."
   },
   "richmond-1886": {
    "title": "Richmond, 1886",
@@ -190,7 +193,8 @@
     {
      "build": "richmond-downtown-time-1886"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it."
   },
   "richmond-1925": {
    "title": "Richmond, 1925",
@@ -206,7 +210,8 @@
     {
      "build": "richmond-downtown-time-1925"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it."
   },
   "richmond-1950": {
    "title": "Richmond, 1950",
@@ -222,7 +227,8 @@
     {
      "build": "richmond-downtown-time-1950"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it."
   },
   "richmond-2026": {
    "title": "Richmond, 2026",

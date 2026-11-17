@@ -5,6 +5,7 @@ import { parseArgs, promisify } from 'node:util'
 import { archiveBuild, listBuilds } from './archive.ts'
 import { backfill } from './backfill.ts'
 import { cleanDem, fetchDem, loadDem, sampler } from './dem.ts'
+import { sceneCredits } from './credits.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
 import { fetchFootprints, loadFootprints } from './footprints.ts'
 import { coverSampler, fetchLandcover, loadLandcover } from './landcover.ts'
@@ -18,7 +19,7 @@ import { renderPage, renderSvg } from './render.ts'
 import { buildScene, type TimeContext } from './scene.ts'
 import { anchorOf, renderSection, sectionRegion } from './section.ts'
 import { loadSiteConfig, writeSocial } from './social.ts'
-import { pageDates, planStatic, plainLinks, writeStatic } from './static-pages.ts'
+import { pageDates, planStatic, plainLinks, shareDoors, writeStatic } from './static-pages.ts'
 import { dateBuildings, fetchYearBuilt, loadHistory, loadYearBuilt, yearBuiltDirs, type History, type Parcel } from './history.ts'
 import type { PolygonFeature } from './osm.ts'
 
@@ -215,7 +216,7 @@ export const main = async (argv: string[]): Promise<void> => {
     }
     case 'info': {
       const scene = await loadScene(name, values.palette, values.year === undefined ? undefined : Number(values.year))
-      console.log(JSON.stringify({ region: scene.region.name, bearing: Number(scene.view.bearing.toFixed(2)), ...scene.stats }, null, 2))
+      console.log(JSON.stringify({ region: scene.region.name, bearing: Number(scene.view.bearing.toFixed(2)), ...scene.stats, credits: sceneCredits(scene.region, scene.stats, scene.terrain.flat) }, null, 2))
       return
     }
     case 'locate': {
@@ -258,7 +259,7 @@ const writeExplorer = async (outDir: string, siteUrl?: string, verbose = false):
   await mkdir(outDir, { recursive: true })
   // Static pages for search engines (static-pages.ts); the share pages name them as canonical.
   const plan = planStatic(builds, pages.map((p) => p.slug), config.home)
-  const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined, (t) => ('build' in t ? plan.forBuild(t.build) : plan.forPage(t.page)))
+  const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined, (t) => ('build' in t ? plan.forBuild(t.build) : plan.forPage(t.page)), shareDoors(plan, config.home))
   const statics = await writeStatic(outDir, builds, plan, config, { dates: await pageDates(pages) })
   await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, pages, {
     ...site, ...(config.shop ? { shop: config.shop } : {}), ...(config.home ? { home: config.home } : {}), ...(config.latestPages === false ? { latestPages: false } : {}), ...(config.analytics ? { analytics: config.analytics } : {}),
@@ -268,7 +269,7 @@ const writeExplorer = async (outDir: string, siteUrl?: string, verbose = false):
     console.error(`wrote ${statics.files.filter((f) => f.endsWith('.html')).length} static pages in ${resolve(outDir, 'p')}/ and ${resolve(outDir, 'm')}/ (${(statics.bytes / 1e6).toFixed(2)} MB)${config.siteUrl === undefined ? '' : ', and sitemap.xml'}`)
     if (site.rendered > 0) console.error(`rendered ${site.rendered} social preview image${site.rendered === 1 ? '' : 's'}`)
     if (site.missing > 0) console.error(`${site.missing} build${site.missing === 1 ? ' has' : 's have'} no social image (no rsvg-convert or Chrome found); their previews use the thumbnail`)
-    console.error(`wrote ${builds.length + pages.length} share pages in ${resolve(outDir, 's')}/`)
+    console.error(`wrote ${builds.length + pages.length + Object.keys(site.shares?.maps ?? {}).length} share pages in ${resolve(outDir, 's')}/${site.stale > 0 ? `, and pointed ${site.stale} left from gone builds at their region's` : ''}`)
     if (config.siteUrl === undefined) console.error('link previews use relative URLs: set "siteUrl" in isoscape.config.json (or ISOSCAPE_SITE_URL, or --site-url) to the public address of out/ before publishing')
   }
   return builds.length
@@ -322,6 +323,7 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
     bearing: scene.view.bearing,
     ms: Math.round(performance.now() - t0),
     stats: { ...scene.stats, ...rendered.stats },
+    credits: sceneCredits(scene.region, scene.stats, scene.terrain.flat),
     config: scene.region,
     sky: scene.palette.sky,
     ...(scene.time === undefined ? {} : {

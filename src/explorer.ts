@@ -9,7 +9,7 @@
  *
  * With a `home` in isoscape.config.json, the page opens on a front page instead (`#home`, or no
  * hash): the featured views large, then the other regions as cards in their sections, with the
- * shop's links. The same sections group the build list, featured regions first, and a section
+ * shop's links (only for what is in the shop's `onSale`). The same sections group the build list, featured regions first, and a section
  * can start folded (the landmarks do).
  *
  * Content pages (Markdown in `pages/`, compiled by `pages.ts`) are listed above the builds and
@@ -35,16 +35,20 @@
  * The view is left out while it is the fitted view. Anything malformed falls back to fit. The
  * hash follows panning and zooming (debounced, with replaceState, so Back is not flooded);
  * choosing a build, comparing or changing tab still makes a history entry. The Link button
- * (or L) copies the URL of the build's (or page's) share page, `s/<id>.html` or
- * `s/page-<slug>.html`, with the current fragment: link previews then show that build, and
- * the share page passes the fragment on, so the link still opens this exact view (see
- * social.ts). Under the site URL when one is set, else beside this file.
+ * (or L; "Copy link" on a page) copies the URL of what is shown's share page (see social.ts):
+ * `s/<name>.html` for a map or a year (with its lasting name in the fragment in place of the
+ * build id), `s/page-<slug>.html` for a page, `s/<id>.html` for an older build, with the rest
+ * of the fragment: link previews then show that map or page, and the share page passes the
+ * fragment on, so the link still opens this exact view. Under the site URL when one is set,
+ * else beside this file. Served over http(s), the address bar shows the share page's path with
+ * the route's fragment (`<base href="./">` keeps relative URLs resolving here), so a copied
+ * address previews too; analytics still report this file's own path.
  */
 
 import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
-import { escAttr, siteTags, type SiteCard } from './social.ts'
+import { buyLinks, escAttr, pageShop, shopCta, siteTags, type SiteCard } from './social.ts'
 import { makeStory } from './story.ts'
 
 // The isoscape mark (one isometric building), for the browser tab.
@@ -129,6 +133,27 @@ const plainList = (site: SiteCard): string => {
     `</nav></details></div>`
 }
 
+/** The shop as the page's script sees it: no `onSale` (the script gets it resolved, as `buy`), and `cta` only while something is on sale. */
+const shopCard = (site: SiteCard) => {
+  if (site.shop === undefined) return null
+  const cta = shopCta(site)
+  return { label: site.shop.label, url: site.shop.url, ...(cta === undefined ? {} : { cta }) }
+}
+
+/** The front page as the script sees it: shop buttons come resolved in `buy`, so no shop fields here. */
+const homeCard = (site: SiteCard) => {
+  if (site.home === undefined) return null
+  const strip = <T extends object>(x: T): T => Object.fromEntries(Object.entries(x).filter(([k]) => k !== 'shop' && k !== 'shopLabel')) as T
+  return { ...site.home, heroes: site.home.heroes.map(strip), sections: site.home.sections.map(strip) }
+}
+
+/** The regions a page, as the explorer shows it, links into (`#<region>…`), in order of first mention. */
+const explorerMapRefs = (html: string): string[] => {
+  const out: string[] = []
+  for (const m of html.matchAll(/href="#([a-z0-9][a-z0-9-]*)(?=[:@"])/g)) if (m[1] !== 'home' && !out.includes(m[1])) out.push(m[1])
+  return out
+}
+
 const escHtml = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string)
 const json = (v: unknown) => JSON.stringify(v).replace(/</g, '\\u003c')
 
@@ -137,6 +162,7 @@ export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Pag
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="./">
 <title>isoscape explorer</title>
 ${site.analytics ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${escAttr(site.analytics.ga)}"></script>
 <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)} gtag('js', new Date()); gtag('config', '${escAttr(site.analytics.ga)}', { send_page_view: false })</script>
@@ -301,6 +327,8 @@ body.home main { grid-template-rows: 1fr; }
 .hm .banner span { color: var(--dim); }
 .hm .btn { display: inline-block; padding: 7px 15px; border-radius: 18px; background: var(--accent); color: var(--panel); border: 1px solid var(--accent); text-decoration: none; font-weight: 600; font-size: 13px; white-space: nowrap; }
 .hm .btn.ghost { background: transparent; color: var(--accent); }
+#article .buyp { margin: 0 0 1.4em; }
+#article .buyp .btn { display: inline-block; padding: 7px 15px; border-radius: 18px; background: var(--accent); color: var(--panel); text-decoration: none; font-weight: 600; font-size: 13px; }
 .hm .btn:hover { filter: brightness(1.08); }
 .hm .banner .btn { margin-left: auto; }
 .hm h1 { font-size: 34px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 10px; font-weight: 650; }
@@ -346,6 +374,8 @@ body.reading main { grid-template-rows: 1fr; }
 @media (max-width: 1180px) { .doc { grid-template-columns: minmax(0, 70ch); } #toc { display: none; } }
 .doc .back { display: inline-block; margin-bottom: 18px; font-size: 12.5px; color: var(--accent); text-decoration: none; border: 1px solid var(--line); border-radius: 14px; padding: 3px 11px; background: var(--bg); cursor: pointer; }
 .doc .back:hover { border-color: var(--accent); }
+.doc #pageLink { margin-left: 6px; }
+.doc #pageLink.on { border-color: var(--accent); background: var(--accent-soft); }
 ${PROSE_CSS}#toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
 #toc h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 6px 0 8px; }
 #toc a { display: block; padding: 3px 0 3px 10px; border-left: 2px solid var(--line); color: var(--dim); text-decoration: none; }
@@ -366,7 +396,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
 <body>
 <nav id="nav">
   <header>${site.home ? '<a class="brand" href="#home" title="Front page">' : ''}<b>isoscape</b><span>explorer</span>${site.home ? '</a>' : ''}<span class="count" id="count"></span></header>${site.shop ? `
-  <a class="shop" href="${escAttr(site.shop.url)}" target="_blank" rel="noopener"><b>${escHtml(site.shop.cta ?? 'Prints of these maps')} ↗</b><span>${escHtml(site.shop.label)}</span></a>` : ''}
+  <a class="shop" href="${escAttr(site.shop.url)}" target="_blank" rel="noopener"><b>${escHtml(shopCta(site) ?? 'Shop prints')} ↗</b><span>${escHtml(site.shop.label)}</span></a>` : ''}
   <div id="pages"></div>
   <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false">
   <div id="list"></div>
@@ -399,12 +429,12 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     <div class="body" id="infoBody"></div>
   </section>
   <section id="home" tabindex="-1"><div class="hm" id="homeBody"></div>${plainList(site)}</section>
-  <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
+  <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><button class="back" id="pageLink" title="Copy a link to this page, with its link preview (L)">Copy link</button><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
 </main>
-<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: site.shop ?? null, home: site.home ?? null, latestPages: site.latestPages !== false })}</script>
+<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, shares: site.shares ?? null, buy: site.shop ? buyLinks(site, new Set(builds.flatMap((b) => (b.time ? [b.region, `${b.region}:${b.time.year}`] : [b.region])))) : null })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, license: d.license, link: d.link }])))}</script>
-<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2) })))}</script>
+<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2), shop: (site.shop && pageShop(p.slug, explorerMapRefs(p.html), site)) ?? null })))}</script>
 <script>
 (() => {
   const builds = JSON.parse(document.getElementById('builds').textContent)
@@ -457,17 +487,10 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     const i = home.sections.findIndex((x) => prefixIndex(x, region) < 99)
     return i < 0 ? home.sections.length : i
   }
-  // Where "Buy a print" goes for a build: its featured view's own link, else the shop's links by region prefix.
-  const shopFor = (b) => {
-    if (!site.shop || !b) return null
-    const h = home && home.heroes[heroIndex(b.region)]
-    if (h && h.shop) return h.shop
-    const L = site.shop.links
-    if (!L) return null
-    const k = Object.keys(L).filter((p) => b.region.startsWith(p)).sort((x, y) => y.length - x.length)[0]
-    return k ? L[k] : null
-  }
-  const buyLabel = (b) => { const h = home && home.heroes[heroIndex(b.region)]; return (h && h.shopLabel) || 'Buy a print ↗' }
+  // Where "Buy a print" goes for a build, with its button text: resolved from the shop's onSale
+  // when the page was written (buyLinks in social.ts); nothing when its region (or, for a dated
+  // build, its region and year) is not on sale.
+  const buyOf = (b) => (b && site.buy && ((b.time && site.buy.regions[b.region + ':' + b.time.year]) || site.buy.regions[b.region])) || null
   const renderList = () => {
     const list = visible()
     $('count').textContent = builds.length + (builds.length === 1 ? ' build' : ' builds')
@@ -693,14 +716,14 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const fmt = (v) => (v === undefined ? '–' : typeof v === 'number' ? (Number.isInteger(v) ? v.toLocaleString() : v.toFixed(2)) : esc(v))
   const renderInfo = () => {
     const a = byId.get(state.a)
-    const buy = shopFor(a)
+    const buy = buyOf(a)
     if (!a) { $('infoTitle').textContent = ''; $('infoBody').innerHTML = ''; $('links').innerHTML = ''; return }
     const b = state.compare ? byId.get(state.b) : null
     $('infoTitle').textContent = b ? a.title + '  ·  A vs B' : a.title
     $('links').innerHTML = '<a href="' + esc(a.files.svg) + '" target="_blank"' + (phone() ? ' title="The full drawing: large, may not open on a phone"' : '') + '>' + (phone() ? 'Full drawing ↗' : 'Open A’s SVG ↗') + '</a>' +
       (b ? '<a href="' + esc(b.files.svg) + '" target="_blank">Open B’s SVG ↗</a>' : '') +
       (site.latestPages ? '<a href="' + esc(a.name) + '.html" target="_blank" title="The latest build of this region, with hover labels">Latest page ↗</a>' : '') +
-      (buy ? '<a class="buy" href="' + esc(buy) + '" target="_blank" rel="noopener">' + esc(buyLabel(a)) + '</a>' : '')
+      (buy ? '<a class="buy" href="' + esc(buy.url) + '" target="_blank" rel="noopener">' + esc(buy.label) + '</a>' : '')
     $('info').classList.toggle('made', state.tab === 'made')
     for (const t of $('tabs').children) t.classList.toggle('on', t.dataset.tab === state.tab)
     if (state.tab === 'made') {
@@ -795,15 +818,64 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   $('actual').addEventListener('click', actual)
 
   // ---- links ----------------------------------------------------------------------------------
-  // Copy the full URL of what is on screen, view included.
-  const copied = (text) => {
-    const btn = $('link')
+  // Link-preview crawlers (chat apps, social sites) never see the '#…' part of an address and run
+  // no script, so every '#<route>' address previews as the whole site. Each map, year and page has
+  // a share page in s/ with its own preview, which opens this page at the fragment it carries, or
+  // at its own route. The Link buttons copy that page's address (on a phone, they offer the share
+  // sheet), and on a server the address bar shows it too, so an address copied from there previews
+  // as what it shows. <base href="./"> keeps every relative URL resolving beside this file.
+  const shares = site.shares || { maps: {}, pages: [] }
+  const appDir = document.baseURI.replace(/[#?].*$/, '').replace(/[^/]*$/, '')
+  // Analytics report the explorer's own path, whatever the address bar shows (see trackView).
+  const appPath = location.pathname
+  const canDoor = /^https?:$/.test(location.protocol) && (Object.keys(shares.maps).length > 0 || shares.pages.length > 0)
+  // A build's lasting name, when that name opens it: '<region>:<year>' or '<region>'.
+  const lastingRef = (b) => {
+    if (b.time) return latestOf(b.region, b.time.year) === b && shares.maps[b.region + ':' + b.time.year] ? b.region + ':' + b.time.year : null
+    return latestOf(b.region) === b && shares.maps[b.region] ? b.region : null
+  }
+  // The share page for a route: its path, the fragment it still needs ('' when its own route is
+  // enough; a lasting name stands for the build id), and the static page it names as canonical.
+  const doorFor = (hash) => {
+    let h = hash.replace(/^#/, '')
+    try { h = decodeURIComponent(h) } catch (err) { /* keep it raw */ }
+    if (h === '' || h === 'home') return null
+    if (h.startsWith('/')) {
+      const [slug, ...rest] = h.slice(1).split('/')
+      if (!pageBySlug.has(slug) || !shares.pages.includes(slug)) return null
+      const section = rest.join('/')
+      return { path: 's/page-' + slug + '.html', hash: section ? '#/' + slug + '/' + section : '', page: 'p/' + slug + '.html' }
+    }
+    const m = /^([^.@~/]+)(.*)$/.exec(h)
+    const b = m ? byId.get(resolveRef(m[1])) : null
+    if (!b) return null
+    const ref = lastingRef(b)
+    const own = shares.maps[b.time ? b.region + ':' + b.time.year : b.region] || shares.maps[b.region]
+    if (ref) return { path: 's/' + shares.maps[ref] + '.html', hash: m[2] ? '#' + ref + m[2] : '', page: 'm/' + shares.maps[ref] + '.html' }
+    return { path: 's/' + encodeURIComponent(b.id) + '.html', hash: '#' + b.id + m[2], page: own ? 'm/' + own + '.html' : null }
+  }
+  // The canonical link follows what is shown (its static page), so a browser's own Share (Chrome's
+  // uses the canonical address) sends a page with its own preview. Search engines read this page
+  // without a fragment, at the front page, where it stays the site's address.
+  const canonical = document.querySelector('link[rel="canonical"]')
+  const siteCanonical = canonical ? canonical.getAttribute('href') : null
+  // Set the address for a route: the share page's path (on a server), with the route's fragment.
+  const setAddress = (hash, push) => {
+    const d = doorFor(hash)
+    if (canonical && site.siteUrl) canonical.setAttribute('href', d && d.page ? site.siteUrl + d.page : siteCanonical)
+    const same = location.hash === hash
+    const url = canDoor ? new URL((d ? d.path : '') + hash, appDir).href : null
+    if (same && (url === null || url === location.href)) return
+    const how = push && !same ? 'pushState' : 'replaceState'
+    try { history[how](null, '', url || hash) } catch (err) { if (!same) history[how](null, '', hash) }
+  }
+  const copied = (text, btn) => {
     btn.textContent = text
     btn.classList.add('on')
-    clearTimeout(copied.t)
-    copied.t = setTimeout(() => { btn.textContent = 'Link'; btn.classList.remove('on') }, 1400)
+    clearTimeout(btn.copiedTimer)
+    btn.copiedTimer = setTimeout(() => { btn.textContent = btn.dataset.label; btn.classList.remove('on') }, 1400)
   }
-  const copyFallback = (url) => {
+  const copyFallback = (url, btn) => {
     const ta = document.createElement('textarea')
     ta.value = url
     ta.setAttribute('readonly', '')
@@ -814,24 +886,32 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     let ok = false
     try { ok = document.execCommand('copy') } catch (err) { ok = false }
     ta.remove()
-    if (ok) copied('Copied')
+    if (ok) copied('Copied', btn)
     else window.prompt('Copy this link:', url)
   }
-  // The share page (s/<id>.html, s/page-<slug>.html) carries the link preview and passes the
-  // fragment on to this page, so the link both previews well and opens this exact view.
+  // The address to share for what is on screen: its share page, under the site URL when one is set.
   const shareUrl = () => {
-    const file = state.page !== null ? 'page-' + state.page : state.a
-    if (!file) return location.href
-    const root = site.siteUrl || location.href.replace(/[#?].*$/, '').replace(/[^/]*$/, '')
-    return root + 's/' + encodeURIComponent(file) + '.html' + location.hash
+    const root = site.siteUrl || appDir
+    if (state.home || (state.page === null && !byId.has(state.a))) return root
+    const hash = state.page !== null ? location.hash : viewerHash()
+    const d = doorFor(hash)
+    return d ? root + d.path + d.hash : root + hash
   }
   const copyLink = () => {
     writeHash()
+    const btn = state.page !== null ? $('pageLink') : $('link')
+    if (!btn.dataset.label) btn.dataset.label = btn.textContent
     const url = shareUrl()
+    // A phone's share sheet, where there is one; else the clipboard.
+    if (navigator.share && window.matchMedia && matchMedia('(pointer: coarse)').matches) {
+      navigator.share({ title: document.title.replace(/ · isoscape explorer$/, ''), url }).catch(() => undefined)
+      return
+    }
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(() => copied('Copied'), () => copyFallback(url))
-    } else copyFallback(url)
+      navigator.clipboard.writeText(url).then(() => copied('Copied', btn), () => copyFallback(url, btn))
+    } else copyFallback(url, btn)
   }
+  $('pageLink').addEventListener('click', copyLink)
   $('link').addEventListener('click', copyLink)
 
   // ---- selection, history, keys ------------------------------------------------------------------
@@ -864,8 +944,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const writeHash = () => {
     clearTimeout(hashTimer)
     if (state.page !== null || state.home || !byId.has(state.a)) return
-    const hash = viewerHash()
-    if (location.hash !== hash) history.replaceState(null, '', hash)
+    setAddress(viewerHash(), false)
     routed = location.hash
   }
   const scheduleHash = () => {
@@ -926,8 +1005,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
       if (!state.refit && state.pendingView) { const v = state.pendingView; state.pendingView = null; applyView(v) }
     } else layout()
     clearTimeout(hashTimer)
-    const hash = viewerHash()
-    if (location.hash !== hash) history[push ? 'pushState' : 'replaceState'](null, '', hash)
+    setAddress(viewerHash(), push)
     routed = location.hash
   }
   const setTab = (tab) => {
@@ -959,21 +1037,21 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const orderIndex = (sec, region) => { const i = (sec.order || []).indexOf(region); return i < 0 ? 1e6 : i }
   const renderHome = () => {
     const out = []
-    if (site.shop) out.push('<div class="banner"><b>' + esc(site.shop.cta || 'Prints of these maps') + '</b><span>' + esc(site.shop.label) + '</span>' +
+    if (site.shop) out.push('<div class="banner">' + (site.shop.cta ? '<b>' + esc(site.shop.cta) + '</b><span>' + esc(site.shop.label) + '</span>' : '<b>' + esc(site.shop.label) + '</b>') +
       '<a class="btn" href="' + esc(site.shop.url) + '" target="_blank" rel="noopener">Visit the shop ↗</a></div>')
     out.push('<h1>' + esc(home.title) + '</h1>' + (home.intro ? '<p class="intro">' + esc(home.intro) + '</p>' : ''))
     out.push('<div class="heroes">' + home.heroes.map((h) => {
       const b = latestOf(h.region, h.year) || latestOf(h.region)
       if (!b) return ''
       const ser = seriesOf(b)
-      const buy = shopFor(b)
+      const buy = buyOf(b)
       // The link-preview image (from tools/print/thumbs.py) when there is one, else the thumbnail.
       const big = b.files.svg.replace(/[^/]*$/, 'social.png')
       return '<article class="hero"><a class="pic" href="#' + esc(b.id) + '"><img src="' + esc(big) + '" data-fallback="' + esc(b.files.thumb || '') + '" alt="' + esc(h.title) + '"></a>' +
         '<div class="tx"><h2>' + esc(h.title) + '</h2>' + (h.blurb ? '<p>' + esc(h.blurb) + '</p>' : '') +
         (ser.length > 1 ? '<div class="years">' + ser.map((y) => '<a href="#' + esc(y.id) + '" title="' + esc(y.time.title || '') + '">' + esc(y.time.year) + '</a>').join('') + '</div>' : '') +
         '<div class="acts"><a class="btn ghost" href="#' + esc(b.id) + '">' + (ser.length > 1 ? 'Step through ' + ser.length + ' years' : 'Explore the map') + '</a>' +
-        (buy ? '<a class="btn" href="' + esc(buy) + '" target="_blank" rel="noopener">' + esc(buyLabel(b)) + '</a>' : '') + '</div></div></article>'
+        (buy ? '<a class="btn" href="' + esc(buy.url) + '" target="_blank" rel="noopener">' + esc(buy.label) + '</a>' : '') + '</div></div></article>'
     }).join('') + '</div>')
     const featured = new Set(home.heroes.map((h) => h.region))
     const regions = [...new Set(builds.map((b) => b.region))].filter((r) => !featured.has(r))
@@ -981,9 +1059,10 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
       const cards = regions.filter((r) => sectionOf(r) === i).map((r) => latestOf(r))
         .sort((x, y) => orderIndex(sec, x.region) - orderIndex(sec, y.region) || titleOf(x).localeCompare(titleOf(y)))
       if (cards.length === 0) return
+      const secBuy = site.buy && site.buy.sections[i]
       out.push('<section class="sec"><header><h2>' + esc(sec.homeTitle || sec.title) + '</h2>' + (sec.blurb ? '<p>' + esc(sec.blurb) + '</p>' : '') +
         (sec.page ? '<a class="btn" href="' + esc(sec.page) + '">' + esc(sec.pageLabel || 'Read the story') + '</a> ' : '') +
-        (sec.shop ? '<a class="btn" href="' + esc(sec.shop) + '" target="_blank" rel="noopener">' + esc(sec.shopLabel || 'Buy prints ↗') + '</a>' : '') + '</header>' +
+        (secBuy ? '<a class="btn" href="' + esc(secBuy.url) + '" target="_blank" rel="noopener">' + esc(secBuy.label) + '</a>' : '') + '</header>' +
         '<div class="cards">' + cards.map((b) => '<a class="card" href="#' + esc(b.id) + '"><img loading="lazy" src="' + esc(b.files.thumb || '') + '" alt=""><b>' + esc(titleOf(b)) + '</b></a>').join('') + '</div></section>')
     })
     if (home.links && home.links.length) out.push('<div class="more">' + home.links.map((l) => '<a href="' + esc(l.href) + '"' + (l.href.startsWith('#') ? '' : ' target="_blank" rel="noopener"') + '>' + esc(l.label) + '</a>').join('') + '</div>')
@@ -1016,7 +1095,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     document.body.classList.add('reading')
     if ($('article').dataset.slug !== p.slug) {
       $('article').dataset.slug = p.slug
-      $('article').innerHTML = p.html + '<p class="source">This page is <code>' + esc(p.file) + '</code>. Edit it there; the next build, or <code>isoscape explorer</code>, puts the change here.</p>'
+      $('article').innerHTML = (p.shop ? '<p class="buyp"><a class="btn" href="' + esc(p.shop.url) + '" target="_blank" rel="noopener">' + esc(p.shop.label) + '</a></p>' : '') + p.html + '<p class="source">This page is <code>' + esc(p.file) + '</code>. Edit it there; the next build, or <code>isoscape explorer</code>, puts the change here.</p>'
       $('toc').innerHTML = p.headings.length < 2 ? '' : '<h3>On this page</h3>' + p.headings.map((h) =>
         '<a href="#/' + esc(p.slug) + '/' + esc(h.id) + '" data-id="' + esc(h.id) + '">' + esc(h.text) + '</a>').join('')
     }
@@ -1045,7 +1124,14 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     if (!x || byId.has(x)) return x
     const m = /^(.+):([0-9]{1,4})$/.exec(x)
     const b = m ? latestOf(m[1], Number(m[2])) : latestOf(x)
-    return b ? b.id : x
+    if (b) return b.id
+    // A build no longer here (an old link): the newest build of the same name, else its region's.
+    const gone = /^[0-9]{8}-[0-9]{6}-(.+)$/.exec(x)
+    if (!gone) return x
+    let best = null
+    for (const y of builds) if (y.name === gone[1] && (!best || y.createdAt > best.createdAt)) best = y
+    best = best || latestOf(gone[1])
+    return best ? best.id : x
   }
   const parseHash = () => {
     let h = location.hash.slice(1)
@@ -1078,15 +1164,15 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     const where = location.hash.split('@')[0] || '#home'
     if (where === viewed) return
     viewed = where
-    gtag('event', 'page_view', { page_location: location.origin + location.pathname + where, page_title: document.title })
+    gtag('event', 'page_view', { page_location: location.origin + appPath + where, page_title: document.title })
   }
   const route = () => {
     closeDrawer()
     routed = location.hash
     setTimeout(trackView, 0)
     const r = parseHash()
-    if (r.page !== undefined && pageBySlug.size > 0) { openPage(r.page, r.section); return }
-    if (home && (r.a === 'home' || !r.a)) { openHome(); return }
+    if (r.page !== undefined && pageBySlug.size > 0) { openPage(r.page, r.section); setAddress(location.hash, false); return }
+    if (home && (r.a === 'home' || !r.a)) { openHome(); setAddress(location.hash, false); return }
     if (state.page !== null) closePage()
     if (state.home) closeHome()
     if (builds.length === 0) return
@@ -1124,8 +1210,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     const link = e.target.closest('a[href^="#"]')
     if (!link || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
     e.preventDefault()
-    const href = link.getAttribute('href')
-    if (href !== location.hash) history.pushState(null, '', href)
+    setAddress(link.getAttribute('href'), true)
     route()
   })
   const onNavigate = () => { if (location.hash !== routed) route() }
@@ -1140,8 +1225,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     }
     if (state.page !== null) {
       // Reading: the arrows scroll the page. Esc goes back to the viewer.
-      if (e.key === 'Escape' && byId.has(state.a)) { history.pushState(null, '', viewerHash()); route() }
-      else if (e.key === 'Escape' && home) { history.pushState(null, '', '#home'); route() }
+      if (e.key === 'Escape' && byId.has(state.a)) { setAddress(viewerHash(), true); route() }
+      else if (e.key === 'Escape' && home) { setAddress('#home', true); route() }
       else if (e.key === '/') { $('filter').focus(); e.preventDefault() }
       else if (e.key === 'l' || e.key === 'L') copyLink()
       return

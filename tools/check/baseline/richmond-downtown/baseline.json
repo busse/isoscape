@@ -3,11 +3,11 @@
  "args": [
   "richmond-downtown"
  ],
- "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "commit": "8d7f062c4482a525278ddf995a511df826b270ee",
  "dirty": false,
- "approved": "2026-11-16T12:25:29-0500",
- "svg_sha256": "b9a5834483cbeb4fe96effa1ccd7bdbd5aff7679fa12c4deab502a01069223b8",
- "svg_bytes": 1074227,
+ "approved": "2026-11-16T21:15:26-0500",
+ "svg_sha256": "3b829638ada0496d023b684519752d2ea85113325785db6cd9bb05c959b3f634",
+ "svg_bytes": 1203943,
  "viewBox": [
   -2064.0,
   -730.0,
@@ -41,16 +41,16 @@
  "warnings": [],
  "residual": {
   "bridges": {
-   "max": 12.0,
-   "mean": 1.3378
+   "max": 10.0,
+   "mean": 0.6039
   },
   "towers": {
-   "max": 17.0,
-   "mean": 1.6375
+   "max": 14.0,
+   "mean": 1.6548
   },
   "east-riverfront": {
-   "max": 11.333,
-   "mean": 2.0351
+   "max": 11.667,
+   "mean": 1.9312
   }
  },
  "data": {

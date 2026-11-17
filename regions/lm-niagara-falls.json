@@ -23,7 +23,6 @@
   "cell": 5,
   "contour": 5,
   "majorEvery": 5,
-  "rapids": 0.035,
   "demResolution": 2
  },
  "sources": {

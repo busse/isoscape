@@ -30,7 +30,7 @@ export const makeStory = (ctx: StoryContext): ((build: unknown, tag?: string) =>
     const href = pageHref('how-its-made', id)
     return href ? '<a href="' + esc(href) + '">' + text + '</a>' : text
   }
-  const KNOWN = new Set(['features', 'ground', 'ribbons', 'buildings', 'heightFromTag', 'heightFromModel', 'heightFromLevels', 'heightGuessed', 'footprintsAdded', 'bridgePieces', 'elevationDatum', 'elevationTop', 'rapidCells', 'contourSegments', 'strips', 'coastWays', 'year', 'newSincePrevious', 'landmarks', 'curated', 'datedCurated', 'datedOsm', 'datedParcel', 'undatedToday', 'traced', 'tracedEndMap', 'tracedEndRebuilt', 'tracedEndHighway', 'tracedEndAssumed'])
+  const KNOWN = new Set(['features', 'ground', 'ribbons', 'buildings', 'heightFromTag', 'heightFromModel', 'heightFromLevels', 'heightGuessed', 'footprintsAdded', 'bridgePieces', 'elevationDatum', 'elevationTop', 'rapidCells', 'rapidsReach', 'contourSegments', 'strips', 'coastWays', 'year', 'newSincePrevious', 'landmarks', 'curated', 'datedCurated', 'datedOsm', 'datedParcel', 'undatedToday', 'traced', 'tracedEndMap', 'tracedEndRebuilt', 'tracedEndHighway', 'tracedEndAssumed'])
   const POINTS = ['north', 'north-northeast', 'northeast', 'east-northeast', 'east', 'east-southeast', 'southeast', 'south-southeast', 'south', 'south-southwest', 'southwest', 'west-southwest', 'west', 'west-northwest', 'northwest', 'north-northwest']
   const isNum = (v) => typeof v === 'number' && Number.isFinite(v)
   const int = (v) => Math.round(v).toLocaleString()
@@ -163,12 +163,17 @@ export const makeStory = (ctx: StoryContext): ((build: unknown, tag?: string) =>
     // Rivers and rapids.
     head('Rivers and rapids', how('rapids', 'how rapids are read →'))
     if (relief) {
-      const thr = t.rapids ?? 0.035
       if (has('rapidCells')) {
         const cell = t.cell ?? 5
+        // Builds since November 2026 measure the fall along the channel over a reach (and say
+        // how long); older ones measured it across 40 m, against a threshold of 0.035 by default.
+        const reach = has('rapidsReach') ? s.rapidsReach : null
+        const thr = t.rapids ?? (reach !== null ? 0.004 : 0.035)
+        const rule = reach !== null
+          ? 'places on a river where its surface, recovered from the lidar, falls faster than ' + +(thr * 1000).toFixed(1) + ' m per km along its channel, measured over ' + int(reach) + ' m. Rock standing more than 1 m clear of the water around it is drawn as boulders; lakes, basins and the sea get neither. Both are '
+          : 'places where the river’s surface, recovered from the lidar, falls faster than ' + +(thr * 100).toFixed(2) + ' m per 100 m, measured over 40 m. Rock standing more than 1 m clear of that surface is drawn as boulders. Both are '
         out.push('<p>' + (s.rapidCells > 0 ? int(s.rapidCells) + ' grid cells (about ' + areaText(s.rapidCells * cell * cell) + ') read as rapids' : 'No stretch of water read as rapids') +
-          ': places where the river’s surface, recovered from the lidar, falls faster than ' + +(thr * 100).toFixed(2) + ' m per 100 m, measured over 40 m. Rock standing more than 1 m clear of that surface is drawn as boulders. Both are ' +
-          how('rivers', 'inferred') + ' from the lidar, not observed.</p>')
+          ': ' + rule + how('rivers', 'inferred') + ' from the lidar, not observed.</p>')
       } else out.push('<p>' + unknown('Rapids were not counted for this build.') + '</p>')
     } else {
       out.push('<p>Without elevation, water is drawn from OpenStreetMap’s outlines as they are. No river surface, rocks or rapids are inferred.</p>')

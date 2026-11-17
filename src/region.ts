@@ -61,6 +61,17 @@ export interface Region {
   readonly minBuildingArea?: number
   /** Which vertices get dots: every visible corner, roof corners only, or none. */
   readonly dots?: 'all' | 'roof' | 'none'
+  /**
+   * Seat a building that spans water (`layer` 1 or more, water under its center) on its banks:
+   * its height counts from the ground at its corners on land, not the water's bed (`spansWater`
+   * in scene.ts). Off unless set, so plates already sold redraw exactly as they were.
+   */
+  readonly seatOnBanks?: boolean
+  /**
+   * Draw a building of ordinary floors by its levels when its tagged height is more than
+   * `MAX_LEVEL_HEIGHT` a level (classify.ts). Off unless set, like `seatOnBanks`.
+   */
+  readonly checkLevels?: boolean
   /** Use another region's cached data (data/<name>/) instead of this region's own. */
   readonly data?: string
   /**
@@ -69,7 +80,8 @@ export interface Region {
    */
   readonly time?: {
     readonly history: string
-    readonly yearBuilt?: { readonly url: string; readonly field: string }
+    /** `credit`: how prints and pages credit the year-built records, when any date comes from them. */
+    readonly yearBuilt?: { readonly url: string; readonly field: string; readonly credit?: string }
   }
   /** Draw the ground with relief from data/<region>/dem.bin.gz. Omit for a flat plate. */
   readonly terrain?: TerrainOptions

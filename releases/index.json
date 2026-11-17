@@ -125,6 +125,14 @@
    "v2.json"
   ]
  },
+ "broad-street-1943-cutaway": {
+  "title": "Broad Street Station, 1943: Cutaway",
+  "current": 1,
+  "kind": "cutaway",
+  "records": [
+   "v1.json"
+  ]
+ },
  "broad-street-1943-map": {
   "title": "Broad Street Station, 1943: The Railroad Map",
   "current": 2,
@@ -145,11 +153,12 @@
  },
  "gwynns-island": {
   "title": "Gwynn's Island",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "lm-alcatraz": {
@@ -667,47 +676,55 @@
  },
  "richmond-1925": {
   "title": "Richmond, 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "richmond-1950": {
   "title": "Richmond, 1950",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "richmond-2026": {
   "title": "Richmond, 2026",
-  "current": 2,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json",
+   "v4.json"
   ]
  },
  "richmond-james-2026": {
   "title": "The James, I-195 to Rocketts Landing",
-  "current": 2,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json",
+   "v4.json"
   ]
  },
  "richmond-panorama-2026": {
   "title": "Richmond and the James",
-  "current": 2,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json",
+   "v4.json"
   ]
  },
  "richmond-through-time": {

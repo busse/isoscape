@@ -8,6 +8,14 @@ the new files can always be made again from them byte for byte (check.py --rebui
 
     python3 tools/release/stamp.py <store-dir> <design>... [--version N] [--out DIR] [--budget S]
     python3 tools/release/stamp.py <store-dir> all --budget 160      every design in the catalog
+    python3 tools/release/stamp.py <store-dir> <design> --base <dir>   a redraw: stamp new art
+
+A redraw (new art, not just a block) is composed first (compose.py, and tools/print/canvas.py
+for its canvas files) into a folder in the store, its files named as those tools name them
+(<design>_<size>.jpg, <design>_canvas-<w>x<h>.jpg, in <dir> or <dir>/canvas). --base <dir>
+stamps those files instead of the catalog's current ones, as the next version, into the
+folders where the current files are; the log marks them "redraw" (record.py then records the
+new art's scenes and data, not the previous version's).
 
 Without --out the new files go beside the old ones, named <stem>-vN_<size>.jpg, and each is
 logged in <store>/pipeline/state/stamps.json: its base file and that file's SHA-256, the block's
@@ -62,6 +70,24 @@ def files_of(store, d, key):
     return out
 
 
+def unversioned(name):
+    """A store file's name as compose.py or canvas.py writes it: without its -vN."""
+    stem, size = re.match(r'(.+?)(_(?:canvas-)?\d+x\d+\.jpg)$', name).groups()
+    return re.sub(r'-v\d+$', '', stem) + size
+
+
+def redraw_files(store, d, key, base):
+    """(source, destination folder) for a redraw: each of the catalog's current files, found
+    under its unversioned name in `base` (or `base`/canvas), stamped into the current file's folder."""
+    out = []
+    for cur in files_of(store, d, key):
+        name = unversioned(os.path.basename(cur))
+        src = next((p for p in (os.path.join(base, name), os.path.join(base, 'canvas', name)) if os.path.exists(p)), None)
+        if src is None: raise SystemExit(f'{key}: no {name} in {base} (compose it, and its canvas files, first)')
+        out.append((src, os.path.dirname(cur)))
+    return out
+
+
 def stamp_file(src, dst, info):
     im = Image.open(src)
     face, long_in, dpi = sheet_geometry(os.path.basename(src), im)
@@ -90,7 +116,9 @@ def main():
     ap.add_argument('--version', type=int, help='the new version (default: the catalog version + 1)')
     ap.add_argument('--drawn', default='2026'); ap.add_argument('--out'); ap.add_argument('--dry', action='store_true')
     ap.add_argument('--budget', type=float, default=1e9)
+    ap.add_argument('--base', help='a redraw: stamp the newly composed files in this folder (see above)')
     a = ap.parse_args()
+    base = os.path.join(a.store, a.base) if a.base and not os.path.isabs(a.base) else a.base
     t0 = time.time()
     cat = json.load(open(os.path.join(a.store, 'pipeline', 'catalog.json')))['designs']
     log_p = os.path.join(a.store, 'pipeline', 'state', 'stamps.json')
@@ -100,8 +128,10 @@ def main():
         d = cat[key]; n = a.version or d.get('version', 1) + 1
         info = plates.info(key, n, a.drawn)
         report[key] = {'version': n, 'info': info, 'files': {}}
-        for src in files_of(a.store, d, key):
-            dst = os.path.join(a.out or os.path.dirname(src), versioned(os.path.basename(src), n))
+        pairs = redraw_files(a.store, d, key, base) if base else [(src, os.path.dirname(src)) for src in files_of(a.store, d, key)]
+        for src, folder in pairs:
+            dst = os.path.join(a.out or folder, versioned(os.path.basename(src), n))
+            if os.path.abspath(dst) == os.path.abspath(src): raise SystemExit(f'{dst} would overwrite its own base')
             if a.dry: report[key]['files'][os.path.basename(src)] = os.path.basename(dst); continue
             if not a.out and os.path.basename(dst) in log and os.path.exists(dst): continue
             if time.time() - t0 > a.budget:
@@ -113,6 +143,7 @@ def main():
                     'file': os.path.relpath(dst, a.store), 'sha256': sha(dst), 'info': info,
                     'at': {'x': at[0], 'y': at[1], 'w': at[2], 'h': at[3], 'u': at[4], 'where': at[5]},
                     'tools': {f: sha(os.path.join(ISO, f)) for f in ('tools/print/titleblock.py', 'tools/release/stamp.py', 'catalog/plates.json')}}
+                if base: log[os.path.basename(dst)]['redraw'] = True
                 json.dump(log, open(log_p, 'w'), indent=1, ensure_ascii=False)
             print(key, os.path.basename(dst), at, flush=True)
     if a.out:

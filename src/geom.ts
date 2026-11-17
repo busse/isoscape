@@ -143,6 +143,109 @@ export const clipRingToRect = (ring: Ring, r: Rect): Ring => {
   return out
 }
 
+/**
+ * One polygon (outers counter-clockwise, holes clockwise, filled nonzero) clipped to an
+ * axis-aligned rectangle, with no edge running along the rectangle's sides where the polygon
+ * is not.
+ *
+ * Each ring is clipped by Sutherland–Hodgman, which fills correctly but, where a concave ring
+ * leaves the rectangle and comes back across a notch, or a hole crosses a side, leaves edges
+ * along that side over ground the polygon does not cover: an edge out and an edge back, or an
+ * outer's edge over a hole's. They enclose nothing, but a ground shape is stroked in its own
+ * color to seal it, and each showed as a line across the bare ground. So along each side the
+ * edges' directions are summed, and where they cancel they are dropped; the rest are joined
+ * again into rings. The fill is the same; the polygon falls apart into its separate pieces, and
+ * a hole that crossed the side becomes a bay in the outer's edge. Where nothing cancels, the
+ * rings are returned exactly as clipped.
+ */
+export const clipPolygonToRect = (rings: readonly Ring[], r: Rect): Ring[] => {
+  const clipped = rings.map((ring) => clipRingToRect(ring, r)).filter((ring) => ring.length >= 3)
+  const sides = [r.minX, r.maxX, r.minY, r.maxY]
+  // Which side an edge runs along (0 to 3), or -1; x sides first, then y.
+  const sideOf = (a: Vec2, b: Vec2): number => {
+    for (let k = 0; k < 4; k++) {
+      const v = sides[k]
+      if (!Number.isFinite(v)) continue
+      const axis = k < 2 ? 0 : 1
+      if (a[axis] === v && b[axis] === v && a[1 - axis] !== b[1 - axis]) return k
+    }
+    return -1
+  }
+  const along: { a: number; b: number }[][] = [[], [], [], []]
+  const inner: [Vec2, Vec2][] = []
+  for (const ring of clipped) {
+    for (let i = 0; i < ring.length; i++) {
+      const a = ring[i]
+      const b = ring[(i + 1) % ring.length]
+      if (a[0] === b[0] && a[1] === b[1]) continue
+      const k = sideOf(a, b)
+      if (k < 0) inner.push([a, b])
+      else along[k].push(k < 2 ? { a: a[1], b: b[1] } : { a: a[0], b: b[0] })
+    }
+  }
+  // Along each side: the net direction (+1 up the axis, −1 down) and how many edges cover each
+  // stretch between consecutive endpoints.
+  let cancels = false
+  const kept: [Vec2, Vec2][] = []
+  along.forEach((edges, k) => {
+    if (edges.length < 2) {
+      for (const e of edges) kept.push(k < 2 ? [[sides[k], e.a], [sides[k], e.b]] : [[e.a, sides[k]], [e.b, sides[k]]])
+      return
+    }
+    const ts = [...new Set(edges.flatMap((e) => [e.a, e.b]))].sort((x, y) => x - y)
+    const at = new Map(ts.map((t, i) => [t, i]))
+    const net = new Array<number>(ts.length).fill(0)
+    const count = new Array<number>(ts.length).fill(0)
+    for (const e of edges) {
+      const lo = at.get(Math.min(e.a, e.b))!
+      const hi = at.get(Math.max(e.a, e.b))!
+      const s = e.b > e.a ? 1 : -1
+      net[lo] += s
+      net[hi] -= s
+      count[lo] += 1
+      count[hi] -= 1
+    }
+    let n = 0
+    let c = 0
+    for (let i = 0; i + 1 < ts.length; i++) {
+      n += net[i]
+      c += count[i]
+      if (c > Math.abs(n)) cancels = true
+      for (let m = 0; m < Math.abs(n); m++) {
+        const [t0, t1] = n > 0 ? [ts[i], ts[i + 1]] : [ts[i + 1], ts[i]]
+        kept.push(k < 2 ? [[sides[k], t0], [sides[k], t1]] : [[t0, sides[k]], [t1, sides[k]]])
+      }
+    }
+  })
+  if (!cancels) return clipped
+  // Join the edges again into rings. Every point has as many edges in as out, before and after
+  // the cancelling, so a walk from any edge comes back to where it started.
+  const key = (p: Vec2) => `${p[0]},${p[1]}`
+  const from = new Map<string, [Vec2, Vec2][]>()
+  for (const e of [...inner, ...kept]) {
+    const list = from.get(key(e[0]))
+    if (list === undefined) from.set(key(e[0]), [e])
+    else list.push(e)
+  }
+  const out: Ring[] = []
+  for (const list of from.values()) {
+    while (list.length > 0) {
+      const first = list.pop()!
+      const ring: Vec2[] = [first[0]]
+      const home = key(first[0])
+      let e = first
+      while (key(e[1]) !== home) {
+        ring.push(e[1])
+        const next = from.get(key(e[1]))
+        if (next === undefined || next.length === 0) break
+        e = next.pop()!
+      }
+      if (ring.length >= 3 && Math.abs(signedArea(ring)) > 1e-9) out.push(ring)
+    }
+  }
+  return out
+}
+
 const lerpAtX = (a: Vec2, b: Vec2, x: number): Vec2 => {
   const t = (x - a[0]) / (b[0] - a[0])
   return [x, a[1] + t * (b[1] - a[1])]
@@ -241,4 +344,13 @@ export const hash = (s: string): number => {
     h = Math.imul(h, 16777619)
   }
   return h >>> 0
+}
+
+/** Distance from p to the segment a–b. */
+export const distToSegment = (p: Vec2, a: Vec2, b: Vec2): number => {
+  const dx = b[0] - a[0]
+  const dy = b[1] - a[1]
+  const len2 = dx * dx + dy * dy
+  const u = len2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / len2))
+  return Math.hypot(p[0] - a[0] - u * dx, p[1] - a[1] - u * dy)
 }

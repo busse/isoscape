@@ -17,5 +17,12 @@ test('the explorer offers a link to the current view, and its script parses', ()
   assert.ok(script)
   assert.doesNotThrow(() => new Function(script[1]))
   // The view rides in the hash, written with replaceState so panning makes no history entries.
-  assert.match(script[1], /history\.replaceState\(null, '', hash\)/)
+  assert.match(script[1], /setAddress\(viewerHash\(\), false\)/)
+  assert.match(script[1], /const how = push && !same \? 'pushState' : 'replaceState'/)
+  // Relative URLs keep resolving beside index.html when the address bar shows a share page in s/.
+  assert.match(html, /<head>\n<meta charset="utf-8">\n<meta name="viewport"[^>]*>\n<base href="\.\/">/)
+  // Pages have a link button too.
+  assert.match(html, /<button class="back" id="pageLink"[^>]*>Copy link<\/button>/)
+  // Analytics keep the explorer's own path, whatever the address bar shows.
+  assert.match(script[1], /page_location: location\.origin \+ appPath \+ where/)
 })

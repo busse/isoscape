@@ -3,16 +3,16 @@
  "args": [
   "gwynns-island"
  ],
- "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "commit": "9c326f9e599178978c92435620d0a1264a4e2872",
  "dirty": false,
- "approved": "2026-11-16T12:26:34-0500",
- "svg_sha256": "e6e2c5f900f1dd0fb44e0d0aa7654f5443941c1459491b73d7256ab3fc6ea182",
- "svg_bytes": 36539942,
+ "approved": "2026-11-16T17:11:28-0500",
+ "svg_sha256": "0b223e878bd0d8b917d6ddfb2dc172b7fbd9dc0df315d44cb88a8804aa0873fd",
+ "svg_bytes": 60533215,
  "viewBox": [
   -9786.9,
-  -4915.7,
+  -4883.9,
   19573.8,
-  9730.7
+  9698.9
  ],
  "width": 12000,
  "crops": [
@@ -48,20 +48,20 @@
  "warnings": [],
  "residual": {
   "island-village": {
-   "max": 12.444,
-   "mean": 2.3372
+   "max": 11.0,
+   "mean": 1.9321
   },
   "bridge": {
-   "max": 12.0,
-   "mean": 1.6713
+   "max": 13.667,
+   "mean": 1.084
   },
   "steep-shore": {
-   "max": 39.444,
-   "mean": 1.9097
+   "max": 26.444,
+   "mean": 2.0276
   },
   "open-woods": {
-   "max": 19.222,
-   "mean": 0.4108
+   "max": 16.111,
+   "mean": 0.4075
   }
  },
  "data": {

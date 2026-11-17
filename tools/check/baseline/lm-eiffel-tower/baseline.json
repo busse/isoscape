@@ -3,16 +3,16 @@
  "args": [
   "lm-eiffel-tower"
  ],
- "commit": "dfd0cc72f76ed067fc4d31cd5fb6af19a20b3527",
+ "commit": "9c326f9e599178978c92435620d0a1264a4e2872",
  "dirty": false,
- "approved": "2026-11-16T12:26:48-0500",
- "svg_sha256": "4f7d7d892f2a4f036f1279d713b9912150644772eff6c53ece393c22d953e27d",
- "svg_bytes": 5791988,
+ "approved": "2026-11-16T17:11:37-0500",
+ "svg_sha256": "37cb93c4e783f89d98ddb14eff752a14b3e54f498ff7951b05be0fc6ecf1ec52",
+ "svg_bytes": 7665458,
  "viewBox": [
   -3024.0,
-  -2329.8,
+  -2328.8,
   6048.0,
-  4345.4
+  4344.4
  ],
  "width": 10900,
  "crops": [
@@ -48,20 +48,20 @@
  "warnings": [],
  "residual": {
   "tower": {
-   "max": 15.0,
-   "mean": 1.7149
+   "max": 14.0,
+   "mean": 1.6395
   },
   "bridges-river": {
-   "max": 10.556,
-   "mean": 1.2856
+   "max": 11.778,
+   "mean": 1.1038
   },
   "trocadero-slope": {
-   "max": 35.0,
-   "mean": 1.9521
+   "max": 11.111,
+   "mean": 1.9697
   },
   "dense-blocks": {
-   "max": 13.333,
-   "mean": 2.0143
+   "max": 7.0,
+   "mean": 1.8193
   }
  },
  "data": {

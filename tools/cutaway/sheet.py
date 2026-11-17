@@ -22,9 +22,10 @@ a canvas's 1.5 in of mirrored wrap would carry the title, the credit line and th
 all within 1.5 in of the sheet's edges, mirrored round its sides.
 
 --page writes the sheet's page in the explorer, pages/<page.slug>.md, from the same callouts,
-key, sources and notes as the sheet, with its two images (<slug>-sheet.jpg, <slug>-social.jpg)
-made from the 32 x 24 print. Like a set's page, it has no shop link until the spec's page names
-one (`shop`).
+key, sources and notes as the sheet, with its two images: <slug>-sheet.jpg, made from the 32 x 24
+print, and <slug>-social.jpg, its link preview, the isometric cutaway alone at 1200 x 630. Like a set's page, it says nothing of the shop: the explorer adds
+its shop button while shop.onSale in isoscape.config.json, the one list of what sells, has an
+entry for the page's slug (e.g. "broad-street-cutaway": "<product URL>").
 """
 import argparse, hashlib, json, os, re, subprocess, sys, tempfile
 from PIL import Image, ImageFont
@@ -212,6 +213,7 @@ def main():
     if cross:
         cross_box = (M + svb[2] * s_sec + GAP, sec_bottom - cvb[3] * s_sec, cvb[2] * s_sec, cvb[3] * s_sec)
 
+    labels = []    # the wayfinding labels' boxes, which the link preview keeps clear of
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
            f'<rect width="{W}" height="{H}" fill="{PAPER}"/>']
     # Title.
@@ -303,6 +305,7 @@ def main():
             'bottom-left': (M + 20, iso_rect[1] + iso_rect[3] + 70),
         }[wf['place']]
         out.append(f'<rect x="{x0 - 30:.0f}" y="{y0 - WF - 26:.0f}" width="{wmax + 90:.0f}" height="{lh * len(lines) + 34:.0f}" fill="{PAPER}" fill-opacity="0.9"/>')
+        labels.append((x0 - 30, y0 - WF - 26, wmax + 90, lh * len(lines) + 34))
         out.append(badge(x0 + 6, y0 - WF * 0.36, None, wf['confidence'], 15))
         for i, ln in enumerate(lines):
             out.append(text(x0 + 44, y0 + i * lh, ln, WF, 'bold', INK, family=SANS, spacing=3))
@@ -362,7 +365,7 @@ def main():
     if a.print:
         prints(spec, sheet, os.path.join(a.out, 'print'))
     if a.page:
-        page(spec, os.path.join(a.out, 'print'))
+        page(spec, os.path.join(a.out, 'print'), sheet, iso_rect, labels)
 
 
 def confidence(c, conf_of):
@@ -371,7 +374,24 @@ def confidence(c, conf_of):
     return c.get('confidence') or conf_of.get(part.replace('history:', '').split(':')[0], 'approximate')
 
 
-def page(spec, print_dir):
+def social(sheet, iso_rect, labels, dest):
+    """The page's link preview, 1200 x 630: the isometric cutaway itself, not the whole sheet
+    (title, column and flat section are too small to read at that size): its full height, its
+    ends trimmed to 1.91:1, so no text above or below it is cut through, and its top lowered
+    below any wayfinding label that reaches down into the drawing's top fifth. Rendered from
+    the sheet's vector at twice the size and scaled down."""
+    sw, sh = C.SOCIAL
+    x, y, w, h = iso_rect
+    top = y
+    for lx, ly, lw, lh in labels:
+        if lx < x + w and lx + lw > x and y < ly + lh < y + h / 5:
+            top = max(top, ly + lh + 10)
+    x, y, w, h = C.fit((x, top, w, y + h - top), sw / sh)
+    im = C.raster(sheet, (x, y, w, h), sw * 2, sh * 2)
+    im.resize((sw, sh), Image.LANCZOS).save(dest, quality=86, optimize=True)
+
+
+def page(spec, print_dir, sheet_svg, iso_rect, labels=()):
     """pages/<slug>.md: the sheet, its callouts as text, the key, the sources and notes."""
     import plates
     P = spec['page']
@@ -383,8 +403,6 @@ def page(spec, print_dir):
            f'social: {slug}-social.jpg', '---', '', f"# {P['title']}", '',
            f"*{plate['kind']} · Plate {plate['plate'].replace('-', '·')}*" if plate.get('kind') else f"*Plate {plate['plate'].replace('-', '·')}*", '',
            P['intro'], '', f"![{P.get('image_alt', P['title'])}]({slug}-sheet.jpg)", '']
-    if P.get('shop'):
-        out += [f"Prints are in the [shop]({P['shop']}).", '']
     for g in spec['groups']:
         out += [f"## {g['title']}", '']
         for c in g['callouts']:
@@ -408,10 +426,9 @@ def page(spec, print_dir):
     if os.path.exists(sheet):
         im = Image.open(sheet)
         im.resize((1800, 1350), Image.LANCZOS).save(os.path.join(ROOT, 'pages', f'{slug}-sheet.jpg'), quality=84, optimize=True)
-        w = im.size[0]
-        im.crop((0, 0, w, round(w / 1.905))).resize((1200, 630), Image.LANCZOS).save(os.path.join(ROOT, 'pages', f'{slug}-social.jpg'), quality=86, optimize=True)
     else:
-        print(f'warning: no print at {sheet}; run --print first for the page images', file=sys.stderr)
+        print(f'warning: no print at {sheet}; run --print first for the page\'s sheet image', file=sys.stderr)
+    social(sheet_svg, iso_rect, labels, os.path.join(ROOT, 'pages', f'{slug}-social.jpg'))
     print(f'pages/{slug}.md')
 
 

@@ -2,8 +2,8 @@
 
 Isometric dot-and-line views of real places, built from open map data.
 
-See the maps at [busse.github.io/isoscape](https://busse.github.io/isoscape/) · Prints at
-[chrisbusse.com](https://chrisbusse.com/), which support the work.
+See the maps at [busse.github.io/isoscape](https://busse.github.io/isoscape/) · The shop,
+which supports the work: [chrisbusse.com](https://chrisbusse.com/).
 
 A sibling of [dotscene](https://github.com/busse/dotscene): the same visual language (inked
 edges, a dot on every corner, flat fills), but driven by geography instead of hand-placed
@@ -60,9 +60,9 @@ Claude, Anthropic's AI, using Claude Opus 5.5, directed and reviewed by Chris Bu
 the code, traced the historic buildings, laid out the prints, and set up the shop. The maps are
 drawn by software from open data, not by hand; the historic years are machine-traced sketches.
 
-Prints of the maps on the isoscape site (Richmond through time, Gwynn's Island, fifty American
-landmarks, and [five landmarks around the world](pages/world-landmarks.md)) are in a holiday shop at [chrisbusse.com](https://chrisbusse.com) through
-December 31, 2026. The tool stays here for good.
+Prints of some of the designs on the isoscape site are sold in a holiday shop at
+[chrisbusse.com](https://chrisbusse.com), open through December 31, 2026; the site links to a
+design's print only while it is on sale (`shop.onSale`, below). The tool stays here for good.
 
 ## The explorer
 
@@ -95,26 +95,115 @@ the next build) keeps your place, and Back and Forward move between pages and th
 
 ### Link previews
 
-Chat apps and social sites ignore the `#…` part of a link and run no script, so each build
-also gets a share page, `out/s/<id>.html` (and each page `out/s/page-<slug>.html`), with its
-own title, description and a 1200×630 preview image, `out/builds/<id>/social.png` (the picture
-cropped to fit; `rsvg-convert` or Chrome renders it, else the thumbnail stands in). A share
-page forwards to the explorer and keeps the fragment, so the **Link** button (`L`) copies
-`s/<id>.html#<the exact view>`. `isoscape explorer` makes any missing images and pages.
+Chat apps and social sites (Facebook, Threads, LinkedIn, iMessage, Slack, X, Bluesky, Discord)
+run no script and never send the `#…` part of a link, so every `index.html#…` address previews
+as `index.html` itself: the site's card, never the map or page it names. So the explorer also
+writes share pages in `out/s/`, each with its own title, description, canonical link and
+1200×630 picture, and a script that sends a visitor on into the explorer, keeping any fragment
+the link carries:
+
+- `s/<name>.html` for each map and each year of a dated series, named as its static page
+  `m/<name>.html` is and opening its lasting route (`#<region>` or `#<region>:<year>`), so the
+  address outlives rebuilds;
+- `s/page-<slug>.html` for each content page;
+- `s/<id>.html` for each build. One left from a build that is gone is rewritten to its region's
+  card, and the explorer opens a gone build id as the newest build of the same name, so links
+  already shared keep working and keep a picture that exists.
+
+The **Link** button (`L`, and "Copy link" on a page; on a phone, the share sheet) copies the
+share page's address, with the view in the fragment: `s/lm-grand-canyon.html#lm-grand-canyon@…`.
+Served over http(s), the explorer also shows that address in the address bar (with
+`history.replaceState`; `<base href="./">` keeps every relative URL beside `index.html`), so an
+address copied from there previews too, and reloading it comes back to the same view. Its
+canonical link follows the `p/` or `m/` page of what is shown, which is what a browser's own
+Share sends in Chrome. Analytics still report the explorer's own path with the route
+(`/isoscape/#lm-grand-canyon`), as before. An address written by hand as `index.html#…` still
+opens the view, and still previews as the site.
+
+The picture for a build is `out/builds/<id>/social.png` (the picture cropped to 1.91:1;
+`rsvg-convert` or Chrome renders it, else the thumbnail stands in), and previews use
+`social.jpg` beside it (ImageMagick or Python's Pillow makes it, about a fifth the bytes; some
+apps drop pictures near 1 MB). A page's own picture is its front matter's `social:` (below).
+`isoscape explorer` makes any missing images and pages.
+
 Previews need absolute URLs: before publishing, give the public address of `out/` in
 `isoscape.config.json` (`{ "siteUrl": "https://example.org/isoscape/" }`), in
 `ISOSCAPE_SITE_URL`, or as `--site-url` on `build`, `series` or `explorer`, and rebuild the
 page. `"flagship": "<region>"` there picks the site's own preview image (default: the newest build), which content
 pages share unless their front matter names their own (`social:`, below).
 
+To check every page's preview tags, in an output directory or on the live site:
+
+```sh
+python3 tools/check/previews.py out/
+python3 tools/check/previews.py https://busse.github.io/isoscape/
+```
+
+It lists each page with a missing tag, a relative URL, an image that is not served (or not in
+the directory), not 1.91:1, not the size its tags say, or over 1 MB, and exits 1 if any has
+one.
+
+To check the addresses and Link buttons in a real browser before publishing, offline:
+
+```sh
+PLAYWRIGHT_CORE=<folder of playwright-core> node tools/check/browser.mjs out/
+```
+
+It serves the directory at `/isoscape/` (a path, as GitHub Pages does) and blocks every other
+host. In headless Chrome, on a desktop window and a phone-sized one, it follows links to a
+page, a map, a year and a set, then goes Back and Forward. It reloads each kind of share address and
+opens old `#…` links and an old build's share page. It follows the static pages' links in,
+presses Link and fetches what it copied as a crawler would, and checks the shop link's tags. It
+prints PASS or FAIL for each, with screenshots in `out/check/browser/`, and says "skipped"
+without playwright-core (`npm install playwright-core` anywhere; it is not a dependency) or
+Chrome (`$CHROME`). Platforms cache a preview for days or weeks after first fetching a URL; to see a fixed one
+at once, ask for it again in Facebook's Sharing Debugger or LinkedIn's Post Inspector, or share
+the URL with a `?v=2` on the end.
+
 The same file can give the explorer a front page. `"home"` has a `title`, an `intro`, `heroes`
 (featured views, each a `region`, optional `year` in a dated series, `title`, `blurb`, and
-`shop` link with optional `shopLabel`), `sections` (each a `title`, the region-name `prefixes` it holds, and optionally
-`homeTitle`, `blurb`, `order` (region names to show first), `collapsed`, `shop` and `shopLabel`), and `links` shown at the bottom.
+optional `shopLabel`), `sections` (each a `title`, the region-name `prefixes` it holds, and optionally
+`homeTitle`, `blurb`, `order` (region names to show first), `collapsed` and `shopLabel`), and `links` shown at the bottom.
 The page then opens on the front page (`#home`). The build list is grouped by the same
-sections, with featured regions first and folded sections closed. `"shop"` (`label`, `url`,
-`cta`, and `links` keyed by region prefix) adds the shop button and a "Buy a print" button on
-matching views. See this repo's own `isoscape.config.json`.
+sections, with featured regions first and folded sections closed. See this repo's own
+`isoscape.config.json`.
+
+#### The shop, and what is on sale
+
+`"shop"` has a `label`, a `url` (the shop's front page), a `cta`, and `onSale`, the one list of
+what is for sale:
+
+```json
+"shop": {
+  "label": "Holiday shop, open through December 31, 2026",
+  "url": "https://chrisbusse.com/",
+  "cta": "Buy prints of these maps",
+  "onSale": { "broad-street-cutaway": "https://chrisbusse.com/products/…" }
+}
+```
+
+Each key of `onSale` is a region prefix, a set's page slug or a content page's slug, and its
+value the product or collection URL. A subject (a region, or a page's slug) is on sale under the
+longest key it starts with: `"richmond"` covers every `richmond-…` region, and a longer
+`"richmond-streetcars"` overrides it for those. A key with a year, `"<region>:<year>"` (the
+explorer's route for that year, e.g. `"richmond-downtown-time:1925"`), names that one year's
+view of a dated region and nothing else: not its other years, nor the series' page
+(`m/<region>.html`); it must match the year exactly. The site always links to the shop's front page
+(the explorer's header, the front page's banner and "Shop prints ↗" atop every static page),
+and links to buy only what `onSale` names:
+
+- a map ("Buy a print ↗", or its featured view's `shopLabel`): the explorer's info bar, its
+  front page, and `m/<region>.html` (a year's: `m/<region>-<year>.html`);
+- a front-page section (its `shopLabel`, else "Buy prints ↗"): when every one of its `prefixes`
+  is on sale under one URL, else when the slug of its story `page` is;
+- a content page (a button at its head, in the explorer and in `p/<slug>.html`): when its own
+  slug is on sale, else when every map it links to is on sale under one URL, else when the
+  section whose story it tells is.
+
+`cta` replaces "Shop prints" in the header only while something is on sale. With `onSale`
+empty, nothing anywhere links to a product or collection, and no text says so. Per-view or
+per-section `shop` URLs, and the old `shop.links`, are ignored. To put a design on sale, add its
+key and URL and rerun `isoscape explorer`; to take it off, remove the key.
 
 ### Static pages and search
 
@@ -124,11 +213,10 @@ also writes a plain HTML page for everything worth finding, beside `index.html`:
 
 - `p/<slug>.html`: every content page, its whole text in the document, with GitHub-style
   anchors, links between pages as files, its images copied into `p/`, and "Open this in the
-  explorer". Where the page's maps (or the section that tells its story) have a shop link,
-  "Prints of this map" goes to it.
+  explorer". Where the page is on sale (see `onSale` above), a shop button goes to it.
 - `m/<region>.html`: every region's newest build, with its picture, "How this view was made"
   (the same text as the explorer's tab, from `src/story.ts`), "Explore this map" (the lasting
-  route `#<region>` or `#<region>:<year>`) and "Buy a print" (the explorer's shop rule). A dated
+  route `#<region>` or `#<region>:<year>`) and, while it is on sale, "Buy a print". A dated
   series of more than one year gets a series page there instead, with every year, and
   `m/<region>-<year>.html` for each year, linked to each other.
 - `sitemap.xml`: `index.html` and every one of those pages, with the date of the build or of
@@ -179,7 +267,10 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
 
 - `social` (optional) names a 1200×630 PNG or JPEG beside the page for its link preview; it
   is copied to `out/s/page-<slug>.jpg` (or `.png`). Without it, a page previews with the
-  site's flagship view. `world-landmarks-social.jpg` is one, made from the five maps.
+  site's flagship view. `world-landmarks-social.jpg` is one, made from the five maps. Make it
+  the drawing, not the whole sheet: at the size a preview shows, a sheet's text cannot be
+  read. A set's (`tools/sets/set.py`) is its big map whole, and a cutaway's
+  (`tools/cutaway/sheet.py --page`) is the isometric cut alone.
 - `title` is the nav label (default: the first `#` heading). `order` sorts the nav, lowest
   first (default 100); the shipped pages use 10 and 90. `slug` overrides the file name.
 - Section ids follow GitHub's rule (lower case, punctuation dropped, spaces to hyphens), and
@@ -305,9 +396,11 @@ stand above it. The surface at each water node is taken as a low percentile of t
 within 30 m, then smoothed along the water. Anything a meter or more above that surface is
 drawn as exposed rock, which gives the boulder fields. The water drapes on the surface, so
 it lies level across the river and falls along it. **Rapids** are drawn where that surface
-falls faster than `terrain.rapids` (m/m) measured over 40 m: white strokes across the
-current, with froth where it drops hardest. OSM weirs are drawn as white crests. Rocks and
-rapids are only read at least two cells (10 m) from shore. **The shoreline follows the
+falls faster than `terrain.rapids` (m/m, 4 m per km by default) along the river's channel,
+measured over a 200 m reach: white strokes across the current, as thick as the fall. OSM
+weirs are drawn as white crests. Rocks and rapids are only read on rivers (not lakes, basins
+or the sea), at least two cells (10 m) from shore, and never on ground painted over the
+water. **The shoreline follows the
 lidar, not OSM's outline:** near-shore "water" standing more than a meter above the river is
 given back to the land at its own height. The water's edge is then traced through the
 corrected water grid (marching squares over a lightly smoothed mask) and drawn at the
@@ -352,7 +445,7 @@ same pipeline on a flat plate.
     "cell": 5,                    // grid spacing, meters
     "contour": 2,                 // contour interval, meters (0 for none)
     "majorEvery": 5,              // every 5th contour heavier
-    "rapids": 0.035,              // water-surface fall (m/m over 40 m) that reads as rapids
+    "rapids": 0.004,              // river fall along its channel (m/m over 200 m) that reads as rapids
     "demResolution": 1,           // meters per pixel to fetch (default 1, or the source's own spacing)
     "source": "3dep",             // where the heights come from; see Elevation sources
     "fillFrom": "copernicus"      // optional: a second source for gaps (a national model stops at the border)
@@ -397,8 +490,9 @@ in the countryside:
   Database](https://www.mrlc.gov/) (NLCD 2021, 30 m, public domain), under OSM's own land use.
 
 `fetch` gets them along with everything else; `fetch <region> --extras-only` gets just these.
-For tidal water, set `terrain.rocks: false` and `terrain.rapids: 0`: river logic has nothing to
-find there.
+The sea (drawn from the coastline) and still water get no rocks or rapids. For a tidal river
+mapped as a river, set `terrain.rocks: false` and `terrain.rapids: 0`: river logic has nothing
+to find there.
 
 ## Time
 
@@ -498,9 +592,11 @@ block in the bottom-right corner below the callout column (`titleblock.stamp`, p
 A cutaway sheet has no canvas files: its title, credit line and column all lie within the
 1.5 in a canvas mirrors round its sides. `--page` (after `--print`) writes its explorer page,
 `pages/<page.slug>.md`, from the spec's `page` (`slug`, `title`, `order`, `summary`, `intro`,
-`how`, `drafted`, and `shop` once prints sell): the sheet, the plate and its kind, every callout
+`how` and `drafted`): the sheet, the plate and its kind, every callout
 as text with how sure it is, the key, where the trains and streetcars went with their sources,
-the sources and notes, and the note on how the page was drafted.
+the sources and notes, and the note on how the page was drafted. The page names no shop; once
+the sheet's prints sell, add `"<page.slug>": "<product URL>"` to `shop.onSale` and the explorer
+puts a "Buy a print ↗" button on the page.
 
 ## Making a set
 
@@ -531,15 +627,15 @@ fourteen places they ran to.
    `note` (what is approximate), `credit`, `map` (`region`, `year`), `boxes`, an optional
    `key` (up to sixteen names in the title band, from a list in a JSON file), optional `fine`
    (extra `build` flags for the single prints, e.g. `["--streetcar-scale", "1.5"]`), and `page`
-   (`slug`, `title`, `summary`, `intro`, `how`, `noun`, an optional `table`, and `shop` once
-   the prints are for sale).
+   (`slug`, `title`, `summary`, `intro`, `how`, `noun`, and an optional `table`).
 4. **Scenes**, where the region's data is cached: `python3 tools/sets/set.py <name> prepare`
    builds each year's SVG into `out/sets/<name>/scenes/` and writes `points.json`.
 5. **Prints**, anywhere with `rsvg-convert`: `set.py <name> menu`, `map`, `boxes`, `canvas`
    (300 dpi into `out/sets/<name>/print/`; `--dpi 40` for a quick proof). Look at every one.
 6. **The page**: `set.py <name> page` writes `pages/<page.slug>.md` and its two images from the
-   menu print. Link it from a section of `isoscape.config.json` (`page`, `pageLabel`) and, once
-   the prints sell, point `shop.links` at the collection for the region.
+   menu print. Link it from a section of `isoscape.config.json` (`page`, `pageLabel`). The page
+   names no shop: once the prints sell, add the page's slug (and, if you like, the region) to
+   `shop.onSale` with the collection's URL, and the explorer adds the shop buttons.
 
 ## Roadmap
 
@@ -629,6 +725,23 @@ lists them.
   rebuild every scene from its commit and frozen data, byte for byte.
 - `python3 tools/release/remake.py <design> [--compose <store-dir>]`: put a design's frozen
   scenes back where its recipe reads them, and remake the print.
+
+A redraw (new art for a published design) is composed into a folder in the store, then
+stamped as the next version, and recorded as kind `redraw`:
+
+```sh
+python3 tools/print/compose.py tools/print/spec.json out/builds <store>/print-files/drawn/<design>-v3 --only <design>
+python3 tools/print/canvas.py <store>/print-files/drawn/<design>-v3/<design>_36x24.jpg <store>/print-files/drawn/<design>-v3/canvas 18x12 30x20 36x24
+python3 tools/release/stamp.py <store> <design> --base print-files/drawn/<design>-v3   # before the catalog's version is raised
+```
+
+`stamp.py --base` writes `<design>-v3_<size>.jpg` (and its canvas files) beside the current
+version's, from the unstamped files in that folder; the record pins the new builds as its
+scenes, freezes their data, and keeps the unstamped files as the stamp's base, so
+`check.py --rebuild` both rebuilds the scenes and stamps the files again. Canvas files are the
+print resized to each face with 1.5 in of mirrored wrap (`canvas.py`, as `set.py canvas`). A
+record lists every print file of a catalog `prints` map (one file per size) and the design's
+products: its merged product (`state/merged.json`) first, then any per-format ones.
 
 A cutaway sheet is recorded as kind `cutaway` (`tools/cutaway/sheet.py --print`): its scenes
 are the region's cutaway and flat section (`"output": "-section"`, which `check.py --rebuild`

@@ -103,13 +103,19 @@ published print in place: redraw it as the next version (`-vN` files, catalog `v
 - The hillshade is drawn as 24 nested bands each way, traced between 5 m grid nodes, so at
   extreme zoom a band's edge shows as a faint step in shade, and its bends as short straight
   runs.
-- Rapids come from the lidar's water surface, read only 10 m or more from shore; a polygon
+- Rapids come from the lidar's water surface, read along the channel over 200 m and only
+  10 m or more from shore, so they sit where the hydro-flattening put its steps (on the James
+  the north channel beside Belle Isle reads level, its drop all at the dam below). A polygon
   far off from the real channel can still produce false falls.
 - Big regions make big SVGs (the I-195 to Rocketts view is about 36 MB; at 25 MB it took a
   browser 10–20 s to open). Use the `--png` render for quick looks.
 - One bad OSM tag must never break a build: parse every numeric tag defensively (one
   building's `building:min_level` is "federal").
 - Bridge ways that fork at a junction ramp at the fork if no other bridge way touches it.
+- Skyways (footbridges up to 80 m with an end at a building) are not drawn: OSM rarely gives
+  their floor. Side-by-side ways of one street are grouped into one deck (`groupDecks`), but only
+  where they run within 15 m of each other their whole length; a sidewalk that turns off its
+  street partway keeps its own profile and can sit a little apart in height.
 - Buildings must sit wholly inside the frame to be drawn. Bridges are cut at the plate's
   edges.
 - A dated series shows only surviving buildings plus what is curated in `history/`; every
@@ -118,3 +124,6 @@ published print in place: redraw it as the next version (`-vN` files, catalog `v
   (trees and roofs included), and Terrain Tiles is 30 m SRTM in much of the world. Every source
   must carry its credit and license in `dem-sources.ts`; the maps, explorer and prints use them.
 - Concave footprints that interlock can form an ordering cycle, which is broken by depth.
+- With terrain, water mapped as an area narrower than a grid cell, with no grid node inside it,
+  is not drawn; where the lidar finds mapped water more than 1.5 m above the river, or a bar
+  in midstream, the shore there follows the 5 m grid (smoothed) rather than the outline.
