@@ -404,6 +404,12 @@ export const buildScene = (
   // above its roof. Parts that are only roofs (building:part=roof) never replace the building
   // under them: it stays, as their podium.
   const areaOf = (s: Solid) => Math.abs(signedArea(s.outer))
+  // Heights: a curated one for a building in a dated series (`History['dates']`), else the tags'.
+  const heightOf = new Map((time?.history.dates ?? []).flatMap((d) => (d.height === undefined ? [] : [[d.id, d.height] as const])))
+  const heightsOf = (s: { id: string; tags: Solid['tags'] }, area: number): ReturnType<typeof buildingHeights> => {
+    const h = heightOf.get(s.id)
+    return h === undefined ? buildingHeights(s.tags, area, region.checkLevels === true) : { base: 0, top: h, source: 'height' }
+  }
   // Every outline holding a part's centroid, smallest first.
   const holders = new Map<Solid, Solid[]>()
   for (const p of keptParts) {
@@ -416,7 +422,13 @@ export const buildScene = (
   for (const s of solids) {
     const mine = keptParts.filter((p) => p.tags['building:part'] !== 'roof' && (holders.get(p) ?? []).includes(s))
     if (mine.length === 0) continue
-    const grounded = mine.filter((p) => buildingHeights(p.tags, areaOf(p), region.checkLevels === true).base < 0.5).map((p) => p.outer)
+    // An outline with a curated height is drawn whole, its parts on it (the Capitol's wings
+    // with only its central block mapped as a part).
+    if (heightOf.has(s.id)) {
+      underParts++
+      continue
+    }
+    const grounded = mine.filter((p) => heightsOf(p, areaOf(p)).base < 0.5).map((p) => p.outer)
     if (groundCover(s.outer, s.inners, grounded) >= PARTS_REPLACE) replaced.add(s)
     else underParts++
   }
@@ -431,16 +443,14 @@ export const buildScene = (
     if (!inFrame(hs[0])) return false
     const kept = hs.filter((s) => !replaced.has(s))
     if (kept.length === 0 || isShellRoof(p.tags)) return true
-    const roofTop = Math.max(...kept.map((s) => buildingHeights(s.tags, areaOf(s), region.checkLevels === true).top))
-    const own = buildingHeights(p.tags, areaOf(p), region.checkLevels === true)
+    const roofTop = Math.max(...kept.map((s) => heightsOf(s, areaOf(s)).top))
+    const own = heightsOf(p, areaOf(p))
     if (own.top <= roofTop + 0.5) return false
     if (own.base < roofTop) floorOf.set(p, roofTop)
     return true
   })
   const shown = solids.filter((s) => !replaced.has(s)).concat(partsShown)
 
-  // A curated height for a building in a dated series (`History['dates']`).
-  const heightOf = new Map((time?.history.dates ?? []).flatMap((d) => (d.height === undefined ? [] : [[d.id, d.height] as const])))
   const towerParts: TowerPart[] = []
   let heightSources = { height: 0, model: 0, levels: 0, guess: 0 }
   let fresh = 0
@@ -470,10 +480,7 @@ export const buildScene = (
     const outer = orient(simplifyRing(s.outer, 0.45), true)
     if (outer.length < 3) continue
     const inners = s.inners.map((h) => orient(simplifyRing(h, 0.45), false)).filter((h) => h.length >= 3)
-    const curatedHeight = heightOf.get(s.id)
-    const own = curatedHeight === undefined
-      ? buildingHeights(s.tags, area, region.checkLevels === true)
-      : { base: 0, top: curatedHeight, source: 'height' as const }
+    const own = heightsOf(s, area)
     const floor = floorOf.get(s)
     const h = floor === undefined ? own : { ...own, base: floor }
     if (!Number.isFinite(h.base) || !Number.isFinite(h.top)) continue
@@ -496,7 +503,7 @@ export const buildScene = (
       if (o === s || !isBridgeTower(o.tags)) return false
       const c = centroid(s.outer)
       if (!o.outer.some((p) => Math.hypot(p[0] - c[0], p[1] - c[1]) < TOWER_REACH)) return false
-      return buildingHeights(o.tags, Math.abs(signedArea(o.outer)), region.checkLevels === true).base < h.base
+      return heightsOf(o, Math.abs(signedArea(o.outer))).base < h.base
     })
     const base = h.base > 0 && !footed ? level + h.base : gMin
     const top = Math.max(level + h.top, base + 2.5)
@@ -521,7 +528,7 @@ export const buildScene = (
       // Seat the shell on the roof of the building it stands on, if any.
       const c = centroid(outer)
       const under = solids.find((o) => o !== s && pointInRing(c, o.outer) && shown.includes(o))
-      const podium = under === undefined ? 0 : buildingHeights(under.tags, Math.abs(signedArea(under.outer)), region.checkLevels === true).top
+      const podium = under === undefined ? 0 : heightsOf(under, Math.abs(signedArea(under.outer))).top
       entries.push(spire(view, pal, s.id, outer, gMin + podium, gMean + podium + SHELL_RISE * Math.sqrt(area), dotsMode, s.tags.name, (t) => 1 - t * 0.97, false, 4))
     } else {
       const span = s.tags.building === 'bridge' || s.tags['building:part'] === 'bridge' || s.tags.man_made === 'bridge' || isBridge(s.tags)
