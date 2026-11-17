@@ -58,6 +58,16 @@ test('a curated bridge is a bridge way of its own, switched on by name when it s
   assert.equal(switchedOn(history(), []).features.length, 0)
 })
 
+test('a switch\'s settings apply only in builds that name it, and names add up', () => {
+  const h = history({ switches: { next: { vergeReach: 60 }, next2: { bridgesClearTraced: true } } })
+  assert.equal(switchedOn(h, []).bridgesClearTraced, undefined)
+  assert.equal(switchedOn(h, ['next']).bridgesClearTraced, undefined)
+  assert.equal(switchedOn(h, ['next']).vergeReach, 60)
+  const both = switchedOn(h, ['next', 'next2'])
+  assert.equal(both.bridgesClearTraced, true)
+  assert.equal(both.vergeReach, 60)
+})
+
 test('a street that meets a road bridge stands with it: the road across an island between two spans', () => {
   const north = line('n', { highway: 'primary', bridge: 'yes' }, [[0, 0], [0, 0.002]])
   const island = line('i', { highway: 'primary' }, [[0, 0.002], [0, 0.004]])

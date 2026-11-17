@@ -632,7 +632,10 @@ approximation; none is drawn in 1865, the scene after the fire that burned them.
 item can be held back from builds made before it existed (`"switch"`): it is drawn only in a
 build asked for it by name (`isoscape build --with next`), and the build records that,
 so a print already sold is still made exactly as it was. The Free Bridge is drawn only so: the
-1925 and 1950 prints, version 4, were drawn without it.
+1925 and 1950 prints, version 4, were drawn without it. Its line is approximate, so in builds
+made `--with next,next2` (the 1925 and 1950 prints' version 5) a traced building with any part
+within 12 m of it is left out, as one under a rail viaduct is: otherwise its deck ran over the
+roof of a frame building on the canal bank.
 
 **Traced: buildings from fire-insurance maps.** The Sanborn Map Company drew every building
 in a city's business district for insurers, block by block. Each building appears as a
