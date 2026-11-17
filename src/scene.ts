@@ -97,7 +97,7 @@ export interface Scene {
   readonly items: Item[]
   readonly stats: Record<string, number>
   /** For a dated scene: the year, its title, and the curated features drawn in it. */
-  readonly time?: { readonly year: number; readonly title?: string; readonly curated: readonly HistoryFeature[]; readonly tieClear?: number; readonly carLineSeal?: boolean }
+  readonly time?: { readonly year: number; readonly title?: string; readonly curated: readonly HistoryFeature[]; readonly tieClear?: number; readonly carLineSeal?: boolean; readonly carDecks?: boolean }
   /** Track drawn wider than life (a history's `railScale` over 1) is inked dark, to read from afar. */
   readonly boldRail?: boolean
   /** Words on the map: curated labels, at view meters and the ground height there. */
@@ -1134,7 +1134,7 @@ export const buildScene = (
 
   return {
     region, view, palette: pal, terrain, ground, ribbons, items, stats,
-    ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated, ...(time.history.tieClear === undefined ? {} : { tieClear: time.history.tieClear }), ...(time.history.carLineSeal === true ? { carLineSeal: true } : {}) } }),
+    ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated, ...(time.history.tieClear === undefined ? {} : { tieClear: time.history.tieClear }), ...(time.history.carLineSeal === true ? { carLineSeal: true } : {}), ...(time.history.carDecks === true ? { carDecks: true } : {}) } }),
     ...(labels.length === 0 ? {} : { labels }),
     ...(railScale > 1 ? { boldRail: true } : {}),
     ...(cutPlaneOut === undefined ? {} : { cut: cutPlaneOut }),

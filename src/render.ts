@@ -497,14 +497,57 @@ export const renderSvg = (scene: Scene): Rendered => {
     cls,
     segs: scene.ribbons.filter((rb) => rb.kind === kind).flatMap((rb) => rb.center),
   })
+  // With carDecks, no tie mark is laid across a car line (a level crossing): the line is drawn
+  // over the track, as the street was.
+  const trams = scene.time?.carDecks === true ? scene.ribbons.filter((rb) => rb.kind === 'tram') : []
+  const tramHalf = trams.length === 0 ? 0 : Math.hypot(trams[0].quads[0][1][0] - trams[0].quads[0][2][0], trams[0].quads[0][1][1] - trams[0].quads[0][2][1]) / 2
+  const tramSegs = trams.flatMap((rb) => rb.center)
+  const offCars = (segs: Vec2[][]): Vec2[][] => {
+    if (tramSegs.length === 0) return segs
+    const cell = 50
+    const grid = new Map<string, Vec2[][]>()
+    for (const sg of tramSegs) {
+      const [a, b] = sg
+      for (let x = Math.floor((Math.min(a[0], b[0]) - tramHalf - 1) / cell); x <= Math.floor((Math.max(a[0], b[0]) + tramHalf + 1) / cell); x++)
+        for (let y = Math.floor((Math.min(a[1], b[1]) - tramHalf - 1) / cell); y <= Math.floor((Math.max(a[1], b[1]) + tramHalf + 1) / cell); y++) {
+          const k = `${x},${y}`
+          const l = grid.get(k)
+          if (l) l.push(sg)
+          else grid.set(k, [sg])
+        }
+    }
+    const near = (p: Vec2) => (grid.get(`${Math.floor(p[0] / cell)},${Math.floor(p[1] / cell)}`) ?? []).some(([a, b]) => {
+      const dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy
+      const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2))
+      return Math.hypot(p[0] - a[0] - t * dx, p[1] - a[1] - t * dy) <= tramHalf + 1
+    })
+    const out: Vec2[][] = []
+    for (const seg of segs) {
+      for (let i = 0; i + 1 < seg.length; i++) {
+        const a = seg[i], b = seg[i + 1]
+        const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 2))
+        let cur: Vec2[] = []
+        for (let k = 0; k < n; k++) {
+          const p: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
+          const q: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 1)) / n, a[1] + ((b[1] - a[1]) * (k + 1)) / n]
+          if (near([(p[0] + q[0]) / 2, (p[1] + q[1]) / 2])) { if (cur.length >= 2) out.push(cur); cur = []; continue }
+          if (cur.length === 0) cur.push(p)
+          cur.push(q)
+        }
+        if (cur.length >= 2) out.push(cur)
+      }
+    }
+    return out
+  }
   const railCenters = lineLayer('rail', 'ties').segs
   const gauge = (k: number): Vec2[][] => offsetJoined(railCenters, k)
   // Far out, a series that clears its ties (tieClear) draws one track's tie marks where two
   // run together (a turnout, a wye's legs), not both: two dash patterns laid over each other
   // read as clumps across the shared ballast.
-  const farTies = scene.time?.tieClear === undefined || scene.time.tieClear <= 0
+  const farTies0 = scene.time?.tieClear === undefined || scene.time.tieClear <= 0
     ? lineLayer('rail', 'ties')
     : { cls: 'ties', segs: clearRuns(scene.ribbons.filter((rb) => rb.kind === 'rail').map((rb) => rb.center), TIE_RUN_CLEAR) }
+  const farTies = tramSegs.length === 0 ? farTies0 : { cls: farTies0.cls, segs: offCars(farTies0.segs) }
   const lineLayers = [
     ...(close ? [] : [farTies]),
     ...(close ? [{ cls: 'steel', segs: [...gauge(0.72), ...gauge(-0.72)] }] : []),
