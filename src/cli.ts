@@ -99,7 +99,7 @@ const loadInputs = async (name: string) => {
     if (region.time.yearBuilt !== undefined) {
       parcels = (await loadYearBuilt(yearBuiltDirs(region, resolve('data')), region.time.yearBuilt.field, name)).parcels
     }
-    dates = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates)
+    dates = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates, 4, 8, history.parkingFrom)
   }
   return { region, features, elevation, extra, history, dates }
 }

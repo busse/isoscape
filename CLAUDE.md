@@ -120,6 +120,9 @@ published print in place: redraw it as the next version (`-vN` files, catalog `v
   edges.
 - A dated series shows only surviving buildings plus what is curated in `history/`; every
   curated item and era rule must cite a source (or say plainly that it is approximate).
+  Traced Sanborn buildings that fall on water, within 12 m of a viaduct's center line, on a
+  track, or under ground more than 3 m above their floor near a later road (8 m anywhere) are
+  left out whole, not trimmed; their heights are assumed from their material.
 - Outside the US, terrain is only as fine as its source: Copernicus is a 30 m *surface* model
   (trees and roofs included), and Terrain Tiles is 30 m SRTM in much of the world. Every source
   must carry its credit and license in `dem-sources.ts`; the maps, explorer and prints use them.
