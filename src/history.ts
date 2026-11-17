@@ -125,7 +125,7 @@ export type Confidence = 'drawn' | 'written' | 'approximate'
 /** A part's confidence: what it says, or `approximate` when it says nothing. */
 export const confidenceOf = (h: { readonly confidence?: Confidence }): Confidence => h.confidence ?? 'approximate'
 
-export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof' | 'brick' | 'tile' | 'steel' | 'ballast' | 'diesel'
+export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof' | 'brick' | 'tile' | 'steel' | 'ballast' | 'diesel' | 'coachBlue' | 'coachBand' | 'coachSkirt' | 'coachRoof'
 
 /**
  * A train on a curated rail line: an engine (unless `engine` is false) and `cars` cars behind
@@ -138,6 +138,8 @@ export interface Train {
   /** The engine: a steam engine and its tender (the default), or a diesel unit. */
   readonly power?: 'steam' | 'diesel'
   readonly kind?: 'coach' | 'freight'
+  /** The coaches' paint: Pullman green (the default), or the C&O's blue with a yellow band. */
+  readonly livery?: 'pullman' | 'co'
   readonly reverse?: boolean
 }
 

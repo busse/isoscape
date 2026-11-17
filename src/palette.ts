@@ -73,7 +73,8 @@ export interface Palette {
    * light enough for its edges to show, the coal in its tender, and a coach's darker roof.
    * Main Street Station's buff brick and red clay tile, the painted steel of its train shed, the
    * ballast of its elevated tracks, and a diesel engine in a plain mid grey, light enough for
-   * its edges to show.
+   * its edges to show. The Chesapeake and Ohio's passenger cars of the early 1950s: blue, a
+   * yellow band along the top of the side, gray below the windows, a dark roof.
    */
   readonly parts: Readonly<Record<PartTone, readonly [string, string, string]>>
   /**
@@ -170,6 +171,10 @@ const paper: Palette = {
     steel: ['#7d7f86', '#5c5e65', '#8e9096'],
     ballast: ['#b5aa90', '#948a72', '#aca186'],
     diesel: ['#9a9da1', '#7b7e83', '#8a8d92'],
+    coachBlue: ['#2f4f7a', '#213a5c', '#3a3b3a'],
+    coachBand: ['#e2b93b', '#b8932a', '#c9a433'],
+    coachSkirt: ['#a9adb1', '#868a8f', '#9a9ea3'],
+    coachRoof: ['#4a4b4f', '#36373a', '#4f5054'],
   },
   poche: '#2c2b33',
   cutOutline: '#2c2b33',
@@ -267,6 +272,10 @@ const night: Palette = {
     steel: ['#2c2d33', '#1d1e23', '#34353b'],
     ballast: ['#4a4840', '#38362f', '#43413a'],
     diesel: ['#34363b', '#232428', '#2d2f33'],
+    coachBlue: ['#22385a', '#172843', '#26282b'],
+    coachBand: ['#8f7628', '#6c591e', '#7d6723'],
+    coachSkirt: ['#4a4d52', '#36393d', '#414448'],
+    coachRoof: ['#2a2b2e', '#1d1e20', '#2e2f32'],
   },
   poche: '#c9d1e6',
   cutOutline: '#c9d1e6',

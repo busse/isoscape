@@ -451,12 +451,18 @@ export const shaped = (pal: Palette, whole: Box, b: Box, k: number, n: number, c
   const slab = (x: number, za: number, zb: number): Vec2[] => [[-x, za], [x, za], [x, zb], [-x, zb]]
   if (isCab) {
     // A cutaway draws the cab as part of its engine, at the engine's back end.
-  } else if (whole.tone === 'coach') {
+  } else if (whole.tone === 'coach' || whole.tone === 'coachBlue') {
     // A heavyweight coach: a solid Pullman-green body, a darker arched roof, a continuous band
-    // of windows down each side, and the vestibule's diaphragm in the gap ahead of it.
+    // of windows down each side, and the vestibule's diaphragm in the gap ahead of it. In the
+    // C&O's colors, blue, with a yellow band along the top of the side and gray below the windows.
     const eave = z0 + 0.78 * H
-    add(slab(hw, z0, eave), toneOf('coach'), '')
-    add([[-hw, eave], [hw, eave], [hw * 0.82, z0 + 0.9 * H], [hw * 0.45, z0 + 0.98 * H], [0, z1], [-hw * 0.45, z0 + 0.98 * H], [-hw * 0.82, z0 + 0.9 * H]], toneOf('carRoof'), ':roof')
+    add(slab(hw, z0, eave), toneOf(whole.tone), '')
+    if (whole.tone === 'coachBlue') {
+      const [a, c] = at(0.3, total - 0.3)
+      add(slab(hw + 0.02, z0 + 0.66 * H, z0 + 0.76 * H), toneOf('coachBand'), ':band', a, c)
+      add(slab(hw + 0.02, z0 + 0.06 * H, z0 + 0.36 * H), toneOf('coachSkirt'), ':skirt', a, c)
+    }
+    add([[-hw, eave], [hw, eave], [hw * 0.82, z0 + 0.9 * H], [hw * 0.45, z0 + 0.98 * H], [0, z1], [-hw * 0.45, z0 + 0.98 * H], [-hw * 0.82, z0 + 0.9 * H]], toneOf(whole.tone === 'coachBlue' ? 'coachRoof' : 'carRoof'), ':roof')
     const [a, c] = at(1.4, total - 1.4)
     for (const side of [1, -1]) {
       const x0 = side * hw
@@ -600,8 +606,8 @@ export const flatElevations = (view: View, pal: Palette, pl: CutPlane, boxes: re
     const z0 = b.z0
     const H = b.z1 - b.z0
     const rail = z0 - 0.1
-    const [lit, shade] = toned3('coach')
-    const [rl, rs, rr] = toned3('carRoof')
+    const [lit, shade] = toned3(b.tone === 'coachBlue' ? 'coachBlue' : 'coach')
+    const [rl, rs, rr] = toned3(b.tone === 'coachBlue' ? 'coachRoof' : 'carRoof')
     const [ll, ls] = toned3('loco')
     const [cl] = toned3('coal')
     const glass = pal.parts.glass[0]
@@ -609,13 +615,20 @@ export const flatElevations = (view: View, pal: Palette, pl: CutPlane, boxes: re
       // Two trucks on the rails.
       { pts: rect(-1.25, rail, 1.25, z0 + 0.15), fill: cl },
     ]
-    if (b.tone === 'coach' || b.tone === 'freight') {
+    const coach = b.tone === 'coach' || b.tone === 'coachBlue'
+    if (coach || b.tone === 'freight') {
       const eave = z0 + 0.78 * H
       polys.push(
-        { pts: [[-hw, z0 + 0.15], [hw, z0 + 0.15], [hw, eave], [hw * 0.82, z0 + 0.9 * H], [hw * 0.45, z0 + 0.98 * H], [0, b.z1], [-hw * 0.45, z0 + 0.98 * H], [-hw * 0.82, z0 + 0.9 * H], [-hw, eave]], fill: b.tone === 'coach' ? rs : pal.parts.freight[1] },
-        { pts: rect(-hw, z0 + 0.15, hw, eave), fill: b.tone === 'coach' ? lit : pal.parts.freight[0] },
+        { pts: [[-hw, z0 + 0.15], [hw, z0 + 0.15], [hw, eave], [hw * 0.82, z0 + 0.9 * H], [hw * 0.45, z0 + 0.98 * H], [0, b.z1], [-hw * 0.45, z0 + 0.98 * H], [-hw * 0.82, z0 + 0.9 * H], [-hw, eave]], fill: coach ? rs : pal.parts.freight[1] },
+        { pts: rect(-hw, z0 + 0.15, hw, eave), fill: coach ? lit : pal.parts.freight[0] },
       )
-      if (b.tone === 'coach') {
+      if (b.tone === 'coachBlue') {
+        polys.push(
+          { pts: rect(-hw, z0 + 0.66 * H, hw, z0 + 0.76 * H), fill: pal.parts.coachBand[0] },
+          { pts: rect(-hw, z0 + 0.15, hw, z0 + 0.36 * H), fill: pal.parts.coachSkirt[0] },
+        )
+      }
+      if (coach) {
         polys.push(
           // The end door, with its window, and the diaphragm's frame around it.
           { pts: rect(-0.95, z0 + 0.15, 0.95, z0 + 0.74 * H), fill: shade },
@@ -720,17 +733,22 @@ export const sideElevation = (view: View, pal: Palette, pl: CutPlane, b: Box, ne
   const box = (x0: number, za: number, x1: number, zb: number, fill: string) => { rect(x0, za, x1, zb); polys[polys.length - 1].fill = fill }
   const disc = (cx: number, cz: number, r: number, fill: string) => add(Array.from({ length: 16 }, (_, i): Vec2 => [cx + r * Math.cos((i * Math.PI) / 8), cz + r * Math.sin((i * Math.PI) / 8)]), fill)
   const truck = (x: number) => box(x - 1.3, z0 - 0.42, x + 1.3, z0 + 0.12, t('coal'))
-  if (b.tone === 'coach' || b.tone === 'freight') {
+  const coach = b.tone === 'coach' || b.tone === 'coachBlue'
+  if (coach || b.tone === 'freight') {
     const eave = z0 + 0.78 * H
-    const roof = b.tone === 'coach' ? t('carRoof', 1) : t('freight', 1)
+    const roof = coach ? t(b.tone === 'coachBlue' ? 'coachRoof' : 'carRoof', 1) : t('freight', 1)
     add([[0, eave], [0.25, z0 + 0.9 * H], [0.9, z1], [len - 0.9, z1], [len - 0.25, z0 + 0.9 * H], [len, eave]], roof)
-    box(0, z0 + 0.12, len, eave, b.tone === 'coach' ? t('coach') : t('freight'))
+    box(0, z0 + 0.12, len, eave, coach ? t(b.tone) : t('freight'))
     truck(3.2)
     truck(len - 3.2)
-    if (b.tone === 'coach') {
+    if (b.tone === 'coachBlue') {
+      box(0, z0 + 0.66 * H, len, z0 + 0.76 * H, t('coachBand'))
+      box(0, z0 + 0.12, len, z0 + 0.36 * H, t('coachSkirt'))
+    }
+    if (coach) {
       // The vestibule doors at each end, and the windows between.
-      box(0.35, z0 + 0.12, 1.15, z0 + 0.74 * H, t('coach', 1))
-      box(len - 1.15, z0 + 0.12, len - 0.35, z0 + 0.74 * H, t('coach', 1))
+      box(0.35, z0 + 0.12, 1.15, z0 + 0.74 * H, t(b.tone, 1))
+      box(len - 1.15, z0 + 0.12, len - 0.35, z0 + 0.74 * H, t(b.tone, 1))
       for (let x = 2.0; x + 0.9 <= len - 1.9; x += 1.55) box(x, z0 + 0.42 * H, x + 0.9, z0 + 0.64 * H, glass)
     }
   } else if (b.tone === 'diesel') {

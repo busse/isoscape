@@ -139,7 +139,8 @@ export const trainBoxes = (id: string, line: readonly Vec2[], train: Train, grou
   if (train.engine !== false && train.power === 'diesel') consist.push({ kind: 'diesel', tone: 'diesel' })
   else if (train.engine !== false) consist.push({ kind: 'engine', tone: 'engine' }, { kind: 'tender', tone: 'engine' })
   const car = train.kind ?? 'coach'
-  for (let k = 0; k < train.cars; k++) consist.push({ kind: car, tone: car })
+  const carTone: PartTone = car === 'coach' && train.livery === 'co' ? 'coachBlue' : car
+  for (let k = 0; k < train.cars; k++) consist.push({ kind: car, tone: carTone })
   const boxes: Box[] = []
   let d = train.at
   consist.forEach((c, k) => {
