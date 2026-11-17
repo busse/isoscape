@@ -217,8 +217,11 @@ export const buildScene = (
     features = r.kept
     past = { canalBridges: r.canalBridges, orphanBridges: r.orphanBridges, plantings: r.plantings, spurs: r.spurs }
   }
-  if (time !== undefined && time.history.approachesWithBridges === true) {
-    const bridges = curated.map(bridgeFeature).filter((f): f is Feature => f !== null)
+  if (time !== undefined) {
+    // A curated bridge stands in its years whatever the past-ground rules made of today's
+    // bridges: one they left out (no road of the year at its ends) is put back.
+    const have = new Set(features.map((f) => f.id))
+    const bridges = curated.map(bridgeFeature).filter((f): f is Feature => f !== null && !have.has(f.id))
     if (bridges.length > 0) features = [...features, ...bridges]
   }
   const bearing = chooseBearing(region, features)
