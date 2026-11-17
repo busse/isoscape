@@ -754,11 +754,12 @@
  },
  "streetcars-1925-01-westhampton": {
   "title": "Westhampton Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-02-fair-grounds": {
@@ -813,29 +814,32 @@
  },
  "streetcars-1925-07-church-hill": {
   "title": "Church Hill and Jefferson Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-08-broad-street": {
   "title": "Seventh and Broad, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-09-manchester": {
   "title": "Manchester, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-10-woodland-heights": {
@@ -890,20 +894,22 @@
  },
  "streetcars-1925-map": {
   "title": "Richmond's Streetcars, 1925: The System Map",
-  "current": 3,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v2.json",
-   "v3.json"
+   "v3.json",
+   "v4.json"
   ]
  },
  "streetcars-1925-menu": {
   "title": "Richmond's Streetcars, 1925: The Lines and Fourteen Stops",
-  "current": 3,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v2.json",
-   "v3.json"
+   "v3.json",
+   "v4.json"
   ]
  },
  "then-and-now": {

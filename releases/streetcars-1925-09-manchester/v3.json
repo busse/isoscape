@@ -1,0 +1,249 @@
+{
+ "design": "streetcars-1925-09-manchester",
+ "title": "Manchester, Richmond Streetcars 1925",
+ "version": 3,
+ "version_note": "redrawn: car lines run down the middle of divided streets and no longer jog between street pieces; bridges that carry a line are drawn at the line's width and follow the line; clearings that later roads cut through the woods are filled; the note says the Mayo Bridge is drawn as a plain deck.",
+ "recorded": "2026-11-17T23:55:24+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "27610f89cbcae3821b622bf4eef92ee263c3cc96",
+  "subject": "Changes: the streetcar set's map, framed set and stops 1, 7, 8 and 9 redrawn; the whole set is for sale",
+  "dirty": true
+ },
+ "kind": "redraw",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/sets/set.py streetcars-1925 prepare   # where data/ is cached",
+   "python3 tools/sets/set.py streetcars-1925 boxes manchester   # into out/sets/<set>/print (or --dir)",
+   "python3 tools/sets/set.py streetcars-1925 canvas   # into out/sets/<set>/print (or --dir)",
+   "cp <set print>/streetcars-1925-09-manchester_24x18.jpg <store>/print-files/streetcars/drawn/streetcars-1925-09-manchester-v3/ && cp <set print>/canvas/<the 16x12 24x18 files> <store>/print-files/streetcars/drawn/streetcars-1925-09-manchester-v3/canvas/",
+   "python3 tools/release/stamp.py <store> streetcars-1925-09-manchester --version 3 --base print-files/streetcars/drawn/streetcars-1925-09-manchester-v3"
+  ],
+  "redraw": true,
+  "base_kind": "set",
+  "previous_record": "releases/streetcars-1925-09-manchester/v2.json",
+  "pinned": "scenes are the set's scene SVGs below, by SHA-256",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond's Streetcars, 1925",
+   "piece": "Box 9",
+   "plate": "STC-09",
+   "version": "3",
+   "drawn": "2026",
+   "location": "37.523° N 77.439° W",
+   "facing": "0°"
+  },
+  "files": {
+   "streetcars-1925-09-manchester-v3_24x18.jpg": {
+    "base": "print-files/streetcars/drawn/streetcars-1925-09-manchester-v3/streetcars-1925-09-manchester_24x18.jpg",
+    "base_sha256": "3ad68bcfd1cb731e89d109c6a15f1e13437bf49d656906a8bff848ecd52a074b",
+    "at": {
+     "x": 5596,
+     "y": 4980,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-09-manchester-v3_canvas-16x12.jpg": {
+    "base": "print-files/streetcars/drawn/streetcars-1925-09-manchester-v3/canvas/streetcars-1925-09-manchester_canvas-16x12.jpg",
+    "base_sha256": "26eb1acc4830407a233b2e8a0ebc1ce1f5efb173ab3416a4f3bbce4028cb249b",
+    "at": {
+     "x": 3975,
+     "y": 3742,
+     "w": 1127,
+     "h": 159,
+     "u": 0.8667,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-09-manchester-v3_canvas-24x18.jpg": {
+    "base": "print-files/streetcars/drawn/streetcars-1925-09-manchester-v3/canvas/streetcars-1925-09-manchester_canvas-24x18.jpg",
+    "base_sha256": "559f520928458ddf5ca18340c4956c118ae2ee98d094a959cc93803fd7067ca3",
+    "at": {
+     "x": 6046,
+     "y": 5430,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925.svg",
+   "sha256": "dee87ccb41bfd046fc43909279ba39adbaa553066c0fad30152c19cb05d2bb9f",
+   "frozen": "data/_releases/scenes/dee87ccb41bfd046fc43909279ba39adbaa553066c0fad30152c19cb05d2bb9f.svg",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [
+    "--streetcar-scale",
+    "1.5"
+   ],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925-fine.svg",
+   "sha256": "eab8d7dd661793a662d91d11953a36a147edcae6c78c30a50f0fa3c3e517013a",
+   "frozen": "data/_releases/scenes/eab8d7dd661793a662d91d11953a36a147edcae6c78c30a50f0fa3c3e517013a.svg",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "sets/streetcars-1925.json": "b4b3cd09813c238b1c12abca70afb2c61dfe4690103125d447401fb2145226b4",
+  "tools/streetcars/stops.json": "5de22bc934099b6690a640ad4b853964f5a7b9832136779e413e1240ab7efa76",
+  "out/sets/streetcars-1925/points.json": "1f76c732128d3540c5ec142fce6528194a693538d94f3f326fd9eae7a476f4ee",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "tools/sets/set.py": "090bac67d92805c22088520b9cd8b3425b0ffa4f5c4a790f4bd73f24232a95a1",
+  "regions/richmond-streetcars.json": "194be82bc8e421cf50010f172b3aeb5c5359a7df043ebabf94cb643fe9350754",
+  "history/richmond-streetcars.json": "5f980cb5f5b5a6de4ed6878dd3ef4427deecad80670f58e26bad20a50852b703",
+  "history/sanborn/lost.geojson": "56e62877646394d1e887b3e5fabf887ce2fca992343d2fb5e25aefe995318a0a",
+  "history/sanborn/fair-grounds.geojson": "ccab37978983fdf8008d49ee3a453e0259a10b51a3587d945b6fe9a8c3a8abd6"
+ },
+ "data": {
+  "richmond-streetcars": {
+   "snapshot": "data/_releases/richmond-streetcars@6e9297a3959e",
+   "files": {
+    "dem.bin.gz": "84786d9e1fa5ccdb10f4a551a77100fdc1704b71d3f782290e89356111a4a9d0",
+    "osm.json": "7dbe53ef18944a9c025a688b68194b30502add174241cfc70fa4eaf80e967eee",
+    "yearbuilt.json": "add6087d440260fbde74ce64208d372e2520dabf6e52130c350c8fa2c79b4e63"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/streetcars/streetcars-1925-09-manchester-v3_24x18.jpg",
+   "sha256": "419975faf82e6c384910f7a4d3d83fbb97d8724ff9b525e154df6df477a2b150",
+   "bytes": 3427321,
+   "printful_file_id": 1115028536
+  },
+  "canvas": [
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-09-manchester-v3_canvas-16x12.jpg",
+    "sha256": "c466d4d4bc382df38aba85ee358816c70d2ddd59dd4c22b7ef0e6550a050207a",
+    "bytes": 2297535,
+    "printful_file_id": 1115026878
+   },
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-09-manchester-v3_canvas-24x18.jpg",
+    "sha256": "5d6d16911ec9a6029e748e4e44b21f247bfb6fff8b93718cbbc78e41647d4265",
+    "bytes": 3696086,
+    "printful_file_id": 1115027023
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "place": "Richmond streetcars",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print_dir": "print-files/streetcars",
+   "tags": [
+    "streetcars-1925"
+   ],
+   "credit_extra": "Routes after Harland Bartholomew &amp; Associates for the City Planning Commission, plate 53 (1943), with the sources cited for each stop on the <a href=\"https://busse.github.io/isoscape/#/streetcars\">streetcars page ↗</a>.",
+   "one_mockup": true,
+   "title": "Manchester, Richmond Streetcars 1925",
+   "ratio": "3x4",
+   "sizes": [
+    "12x16",
+    "18x24"
+   ],
+   "print": "streetcars-1925-09-manchester-v3_24x18.jpg",
+   "canvas": "streetcars-1925-09-manchester-v3_canvas-{w}x{h}.jpg",
+   "explore": "richmond-streetcars:1925@1204,1172,6",
+   "detail": [
+    0.35,
+    0.2,
+    0.65,
+    0.6
+   ],
+   "version": 3,
+   "version_date": "November 17, 2026",
+   "version_note": "redrawn: car lines run down the middle of divided streets and no longer jog between street pieces; bridges that carry a line are drawn at the line's width and follow the line; clearings that later roads cut through the woods are filled; the note says the Mayo Bridge is drawn as a plain deck.",
+   "plate": "STC-09",
+   "plate_box": [
+    0.77722,
+    0.92222,
+    0.96889,
+    0.95833
+   ]
+  },
+  "products": [
+   {
+    "handle": "manchester-richmond-streetcars-1925",
+    "id": "gid://shopify/Product/9137911005302",
+    "format": "all (merged)",
+    "status": "ACTIVE",
+    "variants": 10
+   },
+   {
+    "handle": "manchester-richmond-streetcars-1925-print",
+    "id": "gid://shopify/Product/9135597191286",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "manchester-richmond-streetcars-1925-framed-print",
+    "id": "gid://shopify/Product/9135597289590",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "manchester-richmond-streetcars-1925-framed-canvas",
+    "id": "gid://shopify/Product/9135597355126",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-09-manchester-v3_24x18-print.jpg?v=1794958616",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-09-manchester-v3_24x18-detail.jpg?v=1794958621",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-09-manchester-v3_24x18-plate.jpg?v=1794958625"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-09-manchester-v3_24x18-framed-print-black.jpg?v=1794958631",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-09-manchester-v3_24x18-framed-print-white.jpg?v=1794958636",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-09-manchester-v3_24x18-detail.jpg?v=1794958621",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-09-manchester-v3_24x18-plate.jpg?v=1794958625"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-09-manchester-v3_24x18-framed-canvas-black.jpg?v=1794958640",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-09-manchester-v3_24x18-framed-canvas-white.jpg?v=1794958645",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-09-manchester-v3_24x18-detail.jpg?v=1794958621",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-09-manchester-v3_24x18-plate.jpg?v=1794958625"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-streetcars:1925@1204,1172,6"
+ },
+ "restamped": {
+  "files": 3,
+  "matched": 3
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 2
+ }
+}
