@@ -560,10 +560,10 @@ const crosses = (a: Vec2, b: Vec2, c: Vec2, d: Vec2): boolean => {
  * What the era rules alone cannot see, because it depends on what lies next to a feature.
  * `kept` are the features standing in `year`, `all` every feature mapped today.
  *
- * - A road bridge stands only over something there in its year: one whose every crossing (a
- *   road, a railway or a waterway mapped under it) is not yet built or already gone carries
- *   its street at grade instead (its bridge and layer tags dropped). A street bridge over
- *   the turnpike (1958) is not drawn in 1950; the street is.
+ * - A road or rail bridge stands only over something there in its year: one whose every
+ *   crossing (a road, a railway or a waterway mapped under it) is not yet built or already gone
+ *   carries its street or track at grade instead (its bridge and layer tags dropped). A street
+ *   bridge over the turnpike (1958) is not drawn in 1950; the street is.
  * - Woods and scrub lying along roads not yet built (at least `share` of the outline within
  *   `reach` meters of them) are those roads' verges, the planted ground of an interchange,
  *   and are dated with them.
@@ -587,7 +587,13 @@ export const laterWorks = (
   let verges = 0
   // A bridge is its spans: bridge ways of one street joined end to end. The spans over the
   // crossing and those beside it go to grade together.
-  const isBridge = (f: Feature) => f.type === 'line' && f.tags.highway !== undefined && f.tags.bridge !== undefined && f.tags.bridge !== 'no'
+  // A rail bridge counts only standing alone, with track on the ground at both ends: one that
+  // meets another deck (a crossover between two viaducts) stays at its height with them.
+  const decked = (f: Feature) => f.type === 'line' && f.tags.bridge !== undefined && f.tags.bridge !== 'no'
+  const onDecks = new Map<string, number>()
+  for (const f of kept) if (decked(f) && f.type === 'line' && f.tags.railway !== undefined) for (const p of f.points) onDecks.set(`${p[0]},${p[1]}`, (onDecks.get(`${p[0]},${p[1]}`) ?? 0) + 1)
+  const alone = (f: Extract<Feature, { type: 'line' }>) => [f.points[0], f.points[f.points.length - 1]].every((p) => (onDecks.get(`${p[0]},${p[1]}`) ?? 0) <= 1)
+  const isBridge = (f: Feature) => decked(f) && f.type === 'line' && (f.tags.highway !== undefined || (f.tags.railway !== undefined && alone(f)))
   const spans = kept.filter(isBridge) as Extract<Feature, { type: 'line' }>[]
   const parent = new Map(spans.map((f) => [f.id, f.id]))
   const find = (id: string): string => { let r = id; while (parent.get(r) !== r) r = parent.get(r)!; return r }

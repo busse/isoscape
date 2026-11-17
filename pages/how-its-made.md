@@ -699,7 +699,9 @@ traced buildings are assumed cleared); both dates are approximate.
 
 Two more rules look at what lies beside a feature. A road bridge stands only over something
 there in its year: if every road, railway and waterway mapped under a bridge (its spans of one
-street joined end to end) is not yet built, the street is drawn at grade instead, so in 1950
+street joined end to end) is not yet built, the street is drawn at grade instead (and so is a
+rail bridge standing alone, with track on the ground at both ends: the Richmond District's
+short span over the canal at Rocketts, which in 1925 and 1950 crossed no canal), so in 1950
 Broad Street crosses Shockoe Valley on the ground and the streets over the Downtown Expressway
 have no bridges. And woods and scrub with 40% or more of their outline within 20 m of a road
 not yet built are that road's verges (the planted ground of an interchange) and are dated with
