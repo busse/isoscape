@@ -118,7 +118,11 @@ def place(route):
             else:
                 pts.extend(path(last, node, shared)[1:])
         last, last_names = node, names
-    return [[round(x, 7), round(y, 7)] for x, y in pts]
+    out = []
+    for x, y in pts:   # a stop that repeats the last point adds nothing
+        q = [round(x, 7), round(y, 7)]
+        if not out or out[-1] != q: out.append(q)
+    return out
 
 routes = json.load(open(routes_path))
 hist = json.load(open(history_path))

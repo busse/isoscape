@@ -247,6 +247,14 @@ export interface History {
   readonly clearCarLines?: boolean
   /** Meters: close up, a tie within this of one already laid is left out (turnouts, wyes). */
   readonly tieClear?: number
+  /** Meters of street bed drawn either side of each car line, under it (default none). */
+  readonly carLineBed?: number
+  /**
+   * Paint the car lines' band exactly, unsimplified and cut at the grid lines, and lapping
+   * half a unit on screen further back than the other ground layers, so no seam or notch shows
+   * in it where the paint strips meet.
+   */
+  readonly carLineSeal?: boolean
   /** Keep a street a car line of the year ran along, even with no house of the year on it. */
   readonly streetsUnderCars?: boolean
   /** Bridges drawn at grade before a year, with why (the street crossed there before its bridge). */
@@ -304,6 +312,8 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.siteWholeLines === undefined ? {} : { siteWholeLines: raw.siteWholeLines }),
     ...(raw.clearCarLines === undefined ? {} : { clearCarLines: raw.clearCarLines }),
     ...(raw.tieClear === undefined ? {} : { tieClear: raw.tieClear }),
+    ...(raw.carLineBed === undefined ? {} : { carLineBed: raw.carLineBed }),
+    ...(raw.carLineSeal === undefined ? {} : { carLineSeal: raw.carLineSeal }),
     ...(raw.streetsUnderCars === undefined ? {} : { streetsUnderCars: raw.streetsUnderCars }),
     ...(raw.viaductClearance === undefined ? {} : { viaductClearance: raw.viaductClearance }),
     ...(raw.tracedClearOfStreets === undefined ? {} : { tracedClearOfStreets: raw.tracedClearOfStreets }),

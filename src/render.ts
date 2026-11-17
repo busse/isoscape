@@ -755,6 +755,32 @@ export const renderSvg = (scene: Scene): Rendered => {
     return out
   }
   /**
+   * A ring cut wherever its edges cross a grid line, so each edge lies in one cell. Draped, two
+   * pieces of one shape cut by different strips then share every point along their common
+   * edges, and their edges meet without a step.
+   */
+  const gridCut = (pts: readonly Vec2[]): Vec2[] => {
+    if (T.flat) return pts.slice()
+    const out: Vec2[] = []
+    const n = pts.length
+    for (let k = 0; k < n; k++) {
+      const a = pts[k]
+      const b = pts[(k + 1) % n]
+      const ts: number[] = []
+      const dx = b[0] - a[0]
+      const dy = b[1] - a[1]
+      if (Math.abs(dx) > 1e-9) {
+        for (let i = Math.ceil((Math.min(a[0], b[0]) - T.x0) / c); i <= Math.floor((Math.max(a[0], b[0]) - T.x0) / c); i++) ts.push((T.x0 + i * c - a[0]) / dx)
+      }
+      if (Math.abs(dy) > 1e-9) {
+        for (let j = Math.ceil((Math.min(a[1], b[1]) - T.y0) / c); j <= Math.floor((Math.max(a[1], b[1]) - T.y0) / c); j++) ts.push((T.y0 + j * c - a[1]) / dy)
+      }
+      out.push(a)
+      for (const t of ts.filter((u) => u > 1e-9 && u < 1 - 1e-9).sort((u, v) => u - v)) out.push([a[0] + dx * t, a[1] + dy * t])
+    }
+    return out
+  }
+  /**
    * Where the segment a–b (view meters, within one cell) crosses the cell's traced shoreline,
    * in order from a: none unless the cell is part water and part land.
    */
@@ -943,15 +969,23 @@ export const renderSvg = (scene: Scene): Rendered => {
       // its edge draped between its own points, and a tie cut on that same line showed a sliver
       // of the one beneath; reaching past it, the strip paints the tie over its own lap's edge.
       const smallBand: Rect = { ...band, maxY: band.maxY + (s.n1 < fr.maxY ? 0.25 : 0) }
+      // Sealed car lines (carLineSeal) reach further back, past this strip's own lapped streets
+      // by more than their sealing stroke's round corners (half a unit on screen), and keep
+      // every point: simplified separately, two strips' pieces of the band met a little apart,
+      // and the street lapped under it showed through as a notch.
+      const sealBand: Rect = { ...band, maxY: band.maxY + (s.n1 < fr.maxY ? 0.5 / (view.scale * view.squash) : 0) }
       for (const layer of list) {
         let d = ''
+        const sealed = layer.cls === 'tram' && scene.time?.carLineSeal === true
         for (const e of layer.entries) {
-          if (layer.small === true ? e.maxN < smallBand.minY || e.minN > smallBand.maxY : e.maxN < s.n0 || e.minN > s.n1) continue
+          if (sealed ? e.maxN < sealBand.minY || e.minN > sealBand.maxY : layer.small === true ? e.maxN < smallBand.minY || e.minN > smallBand.maxY : e.maxN < s.n0 || e.minN > s.n1) continue
           // Clipped as one polygon, holes and all: see clipPolygonToRect.
-          for (const clipped of clipPolygonToRect(e.rings, layer.small === true ? smallBand : band)) {
+          for (const clipped of clipPolygonToRect(e.rings, sealed ? sealBand : layer.small === true ? smallBand : band)) {
             // Small pieces keep every corner: simplified, a sliver of a tie cut at the strip's
             // edge could lose one and show as a thin wedge.
-            d += layer.small === true
+            d += sealed
+              ? pathOf(gridCut(clipped).map(drape))
+              : layer.small === true
               ? pathOf(alongShore(clipped, true).map(drape))
               : groundPath(WATERY.has(layer.cls) ? densify(clipped, c).map(drapeWater) : alongShore(densify(clipped, c), true).map(drape))
           }

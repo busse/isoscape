@@ -97,7 +97,7 @@ export interface Scene {
   readonly items: Item[]
   readonly stats: Record<string, number>
   /** For a dated scene: the year, its title, and the curated features drawn in it. */
-  readonly time?: { readonly year: number; readonly title?: string; readonly curated: readonly HistoryFeature[]; readonly tieClear?: number }
+  readonly time?: { readonly year: number; readonly title?: string; readonly curated: readonly HistoryFeature[]; readonly tieClear?: number; readonly carLineSeal?: boolean }
   /** Track drawn wider than life (a history's `railScale` over 1) is inked dark, to read from afar. */
   readonly boldRail?: boolean
   /** Words on the map: curated labels, at view meters and the ground height there. */
@@ -438,14 +438,20 @@ export const buildScene = (
       // carriageway's sideways step): it is straightened to within TRAM_TOLERANCE of its width
       // (at least 7 m), and its bends are filled round, so the band runs smooth.
       const pts = simplifyLine(run.map(([lon, lat]) => view.toView(lon, lat)), Math.max(7, w * TRAM_TOLERANCE))
+      // A series can lay each line on a bed of street (carLineBed, meters showing either side, times
+      // the streetcar scale):
+      // where the line covers its carriageway, or runs where no street of the year is drawn,
+      // it still reads as a car in the street, not a band across open ground.
+      const bed = time?.history.carLineBed
       for (const [j, part] of offDecks(pts, roadDecks).entries()) {
-        const r = ribbonOf('tram', { type: 'line', id: `${h.id}:${k}:${j}`, tags: {}, points: [] }, w, true, part)
-        if (r) {
+        for (const [kind, width] of [...(bed === undefined ? [] : [['road', w + 2 * bed * tramScale] as const]), ['tram', w] as const]) {
+          const r = ribbonOf(kind, { type: 'line', id: `${h.id}:${k}:${j}`, tags: {}, points: [] }, width, false, part)
+          if (!r) continue
           for (let i = 1; i + 1 < part.length; i++) {
             const [cx, cy] = part[i]
             if (!insideRect(part[i], wide)) continue
             // Wound as the ribbon's quads are, so the layer's nonzero fill joins them, not cancels.
-            const disc = Array.from({ length: 12 }, (_, q): Vec2 => [cx + (w / 2) * Math.cos((q * Math.PI) / 6), cy + (w / 2) * Math.sin((q * Math.PI) / 6)])
+            const disc = Array.from({ length: 12 }, (_, q): Vec2 => [cx + (width / 2) * Math.cos((q * Math.PI) / 6), cy + (width / 2) * Math.sin((q * Math.PI) / 6)])
             r.quads.push(Math.sign(signedArea(disc)) === Math.sign(signedArea(r.quads[0])) ? disc : disc.reverse())
           }
           ribbons.push(r)
@@ -967,7 +973,7 @@ export const buildScene = (
 
   return {
     region, view, palette: pal, terrain, ground, ribbons, items, stats,
-    ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated, ...(time.history.tieClear === undefined ? {} : { tieClear: time.history.tieClear }) } }),
+    ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated, ...(time.history.tieClear === undefined ? {} : { tieClear: time.history.tieClear }), ...(time.history.carLineSeal === true ? { carLineSeal: true } : {}) } }),
     ...(labels.length === 0 ? {} : { labels }),
     ...(railScale > 1 ? { boldRail: true } : {}),
     ...(cutPlaneOut === undefined ? {} : { cut: cutPlaneOut }),

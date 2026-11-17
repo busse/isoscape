@@ -338,6 +338,26 @@
       "5th Street",
       "Broad Street"
      ],
+     {
+      "at": [
+       -77.4327923,
+       37.5478695
+      ],
+      "on": "5th Street"
+     },
+     {
+      "direct": [
+       -77.4324402,
+       37.54872
+      ]
+     },
+     {
+      "at": [
+       -77.4324402,
+       37.54872
+      ],
+      "on": "5th Street"
+     },
      [
       "Meadowbridge Road",
       "Milton Street"
@@ -364,11 +384,12 @@
      ]
     ]
    ],
-   "note": "North on Fifth Street over the Northside Viaduct (1892) to Chestnut Hill and Highland Park, and after 1908 round a loop by Meadowbridge Road, Milton Street and Highland Street (the cross street joining them, Second Avenue here, is approximate). The Hull Street–Highland Park line was Richmond's last: the last car ran on 25 November 1949.",
+   "note": "North on Fifth Street over the Northside Viaduct (opened in 1891, an iron bridge 1,200 feet long) to Chestnut Hill and Highland Park, and after 1908 round a loop by Meadowbridge Road, Milton Street and Highland Street (the cross street joining them, Second Avenue here, is approximate). The Hull Street–Highland Park line was Richmond's last: the last car ran on 25 November 1949. Fifth Street is drawn straight across today's interstate, as it ran then.",
    "sources": [
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
     "https://rvanews.com/?p=20453",
-    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://en.wikipedia.org/wiki/Fifth_Street_Viaduct"
    ]
   },
   {
