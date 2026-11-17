@@ -1068,6 +1068,10 @@ head house's wings at the mound's level along Broad Street (65.6 m), where the g
 falls about 5 m to the tracks.
 Where two rail decks run into one another at nearly one level (within 2 m), the shorter deck's
 pieces lying on the longer one are left out, so converging viaducts read as one deck.
+A crossing's lift is carried on, still fading at 3%, into a deck that continues the lifted one end to
+end, so no step shows where a line's OSM layer changes. Main Street Station's heights are measured
+on a 1971 HABS photograph against its 110-ft finial (eaves 56 ft, ridge about 80 ft, dome 93 to
+102 ft), with a clock face 7.5 ft across on each side of the tower.
 
 **What the series cannot show:**
 
