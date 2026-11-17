@@ -2050,6 +2050,11 @@ const deckHeight = (region: Region, chain: BridgeChain): number => {
  * A bridge, cut into short spans so each can take its own place in the paint order. The deck
  * ramps up from the ground at both ends; piers drop from it at a fixed spacing.
  */
+const endPier = (region: Region, chain: BridgeChain): number | undefined => {
+  for (const rule of region.bridges ?? []) if (chain.names.includes(rule.match.toLowerCase())) return rule.endPier
+  return undefined
+}
+
 const pierSpacing = (region: Region, chain: BridgeChain): number => {
   for (const rule of region.bridges ?? []) if (chain.names.includes(rule.match.toLowerCase())) return rule.pierSpacing ?? PIER_SPACING
   return PIER_SPACING
@@ -2640,7 +2645,20 @@ const bridgePieces = (
   const items: Item[] = []
   const carOnDeck: Item[] = []
   let traveled = 0
-  let nextPier = spacing / 2
+  // Where the piers stand along the deck: every `spacing` from half a spacing in, and with the
+  // bridge's `endPier`, one that far from each end (the regular ones within a quarter spacing of
+  // it left out).
+  const stations: number[] = []
+  for (let at = spacing / 2; at <= dl.total + spacing; at += spacing) stations.push(at)
+  const ends = endPier(region, chain)
+  if (ends !== undefined && dl.total > 2 * ends) {
+    const kept = stations.filter((at) => Math.abs(at - ends) >= spacing / 4 && Math.abs(at - (dl.total - ends)) >= spacing / 4)
+    stations.length = 0
+    stations.push(...[ends, ...kept, dl.total - ends].sort((a, b) => a - b))
+  }
+  let pierAt = 0
+  let nextPier = stations[0] ?? Infinity
+  const advance = () => { pierAt++; nextPier = pierAt < stations.length ? stations[pierAt] : nextPier + spacing }
   let nextCar = Math.min(TRAM_SPACING / 2, dl.total * 0.45)
   for (let i = 0; i + 1 < pts.length; i++) {
     const a = pts[i]
@@ -2653,7 +2671,7 @@ const bridgePieces = (
       const p0: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
       const p1: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 1)) / n, a[1] + ((b[1] - a[1]) * (k + 1)) / n]
       if (!insideRect(p0, view.frame) || !insideRect(p1, view.frame)) {
-        while (nextPier <= s1) nextPier += spacing
+        while (nextPier <= s1) advance()
         continue
       }
       const quad = segmentQuad(p0, p1, width / 2, width / 2)
@@ -2664,7 +2682,7 @@ const bridgePieces = (
       // by it; drawn, it would cut through the walls and roof.
       const host = buildingAt(roofs, [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2])
       if (host !== null && host.base <= Math.max(z0, z1) && host.top >= Math.max(z0, z1)) {
-        while (nextPier <= s1) nextPier += spacing
+        while (nextPier <= s1) advance()
         continue
       }
       const shapes: Shape[] = []
@@ -2702,7 +2720,7 @@ const bridgePieces = (
             })
           }
         }
-        nextPier += spacing
+        advance()
       }
       // Fascia on whichever long side faces the camera.
       const [ql0, ql1, qr1, qr0] = quad
