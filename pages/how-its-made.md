@@ -595,9 +595,12 @@ dated 1960 (`parkingFrom`), with surface parking: the parcel's year is its lot's
 building's. Buildings with no year appear only in today's scene.
 
 **Tall buildings are checked one by one.** In downtown Richmond every building 25 m or taller,
-or of eight levels or more, drawn in the 1925 or 1950 scene is dated from a source that names
+or of eight levels or more, drawn in a printed past scene (1865, 1886, and the 1905 to 1990
+panels of *Richmond, 1737–2026*, as well as 1925 and 1950) is dated from a source that names
 it (the National Register nominations for the Main Street Banking district, SkyscraperPage,
-Wikipedia, the SAH Archipedia), or is drawn in today's scene only. The Ross Building at 801
+Wikipedia and its list of Richmond's tallest buildings, the SAH Archipedia), or is drawn in
+today's scene only (three parking decks and an annex of eight levels or more, whose only date
+is their parcel's). The Ross Building at 801
 E. Main (eighteen floors, 1965), which its parcel had put in 1925, now first appears in 1970;
 what stood on its lot before is not known, so the lot is empty in the earlier scenes.
 
