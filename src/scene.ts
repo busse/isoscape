@@ -68,7 +68,7 @@ export interface Item {
   /** A building's outline, view meters, where it is a plain prism. */
   readonly footprint?: Ring
   /** A bridge span's center line, view meters, its deck's mean height, and which bridge it is. */
-  readonly span?: { readonly a: Vec2; readonly b: Vec2; readonly z: number; readonly bridge: string }
+  readonly span?: { readonly a: Vec2; readonly b: Vec2; readonly z: number; readonly bridge: string; readonly stack?: boolean }
   /** A bridge pier, standing under a deck. */
   readonly pier?: boolean
 }
@@ -1207,11 +1207,33 @@ export const buildScene = (
   const towers = suspensionTowers(view, chains, towerParts)
   const grouped = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix, time !== undefined && time.year < time.history.present))), region.groupRailDecks === true)
   const lines = region.railCrossings === undefined ? grouped : separateCrossings(chains, grouped, region.railCrossings, terrain)
+  // With railCrossings, where two rail decks run into one another (converging viaducts at
+  // nearly one level), the shorter deck's pieces lying on the longer deck are left out: drawn
+  // both, their fascias and ties interleave piece by piece.
+  const merged = (c: number, p: Item): boolean => {
+    if (region.railCrossings === undefined || p.span === undefined || !isRail(chains[c].line.tags)) return false
+    const m: Vec2 = [(p.span.a[0] + p.span.b[0]) / 2, (p.span.a[1] + p.span.b[1]) / 2]
+    for (let o = 0; o < chains.length; o++) {
+      if (o === c || !isRail(chains[o].line.tags) || lines[o].total <= lines[c].total) continue
+      const L = lines[o]
+      for (let k = 0; k + 1 < L.pts.length; k++) {
+        const a = L.pts[k], b = L.pts[k + 1], dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy
+        const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((m[0] - a[0]) * dx + (m[1] - a[1]) * dy) / l2))
+        if (Math.hypot(a[0] + dx * t - m[0], a[1] + dy * t - m[1]) > deckWidth(chains[o].line.tags) / 2) continue
+        if (Math.abs(L.zAt(L.cum[k] + t * (L.cum[k + 1] - L.cum[k])) - p.span.z) < 2) return true
+      }
+    }
+    return false
+  }
+  let mergedPieces = 0
   for (let c = 0; c < chains.length; c++) {
-    const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }) } : undefined)
+    const all = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }) } : undefined)
+    const pieces = all.filter((p) => !merged(c, p))
+    mergedPieces += all.length - pieces.length
     spans += pieces.filter((p) => p.pier !== true).length
     items.push(...pieces)
   }
+  if (mergedPieces > 0) stats.railDeckPiecesMerged = mergedPieces
   stats.bridgePieces = spans
 
   const labels: MapLabel[] = []
@@ -2853,7 +2875,7 @@ const bridgePieces = (
         shapes,
         dots: [],
         ...(t.name === undefined ? {} : { name: t.name }),
-        span: { a: p0, b: p1, z: (z0 + z1) / 2, bridge: line.id },
+        span: { a: p0, b: p1, z: (z0 + z1) / 2, bridge: line.id, ...(rail && region.railCrossings !== undefined ? { stack: true } : {}) },
       })
     }
     traveled += len
