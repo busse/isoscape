@@ -637,12 +637,13 @@ Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
 5. **Shapes.** A second pass (`clean.py --shapes`) drops the strips the first missed: a bent
    ribbon (filling under 30% of its smallest enclosing rectangle and over 60 m long), and
    anything under 4 m across at its widest and at least four times as long; and sawtooth
-   strips, 80 m long or more, whose outline runs over 1.35 times the length of their convex
-   hull's while filling under 70% of it (a hatched edge read tooth by tooth). It trims spikes
-   with an opening of 1.5 m (shrink, then grow back with square corners), which takes off
-   anything under 3 m wide; a footprint left with under 60% of its area is dropped. Of the 2,604
-   footprints, 41 strips, 18 sawtooth strips and 20 spiky footprints were dropped and 247
-   trimmed; of those standing in 1925, 34 were dropped and 85 trimmed, and in 1950, 34 and 103.
+   outlines, over 1.35 times the length of their convex hull's while filling under 70% of it,
+   on a strip 80 m long or more (a hatched edge read tooth by tooth) or on a footprint under
+   1,000 m² (a star of spikes around a shed). It trims spikes with an opening of 1.5 m (shrink,
+   then grow back with square corners), which takes off anything under 3 m wide; a footprint
+   left with under 60% of its area is dropped. Of the 2,604 footprints, 41 strips, 50 sawtooth
+   outlines and 21 spiky footprints were dropped and 247 trimmed; of those standing in 1925, 45
+   were dropped and 85 trimmed, and in 1950, 49 and 103.
 
 A sheet whose fit is known to be wrong is left out until it is placed again, and the history
 file says why: the 1905 sheets 5 and 7, read by eye, put 31 buildings on the Capitol Square
@@ -663,8 +664,8 @@ whole**, never trimmed, and the explorer counts how many and why:
   and 33 in 1950.
 - **Buried.** Today's ground more than 3 m above its floor under one of its corners, within
   60 m of a road built after its year (an interstate's cut or fill), or more than 8 m above it
-  anywhere (two stories and more: no building stood cut that deep into a hill): 65 in 1925 and
-  59 in 1950.
+  anywhere (two stories and more: no building stood cut that deep into a hill): 61 in 1925 and
+  55 in 1950.
 
 The historic buildings are sketches, not a survey. A machine traced them from scans of
 fire-insurance maps, so outlines are approximate, heights are guessed from material, and some

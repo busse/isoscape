@@ -14,8 +14,9 @@
 
 Usage: clean.py history/sanborn/lost.geojson   (rewrites in place; dropped ids -> clean-dropped.json)
 
-`--shapes` runs only the shape pass, over every footprint (it ran once over the cleaned file of
-November 2026; it can run again without changing more):
+`--shapes` runs only the shape pass, over every footprint (it ran over the cleaned file in
+November 2026, the second time with the small-star rule added; a run after that trims a few
+outlines again, by a little, and drops nothing more):
 
 5. Drop strips: footprints filling under 30% of their minimum rotated rectangle and over 60 m
    long (a bent ribbon), or under 4 m wide at their widest (the diameter of the largest circle
@@ -23,12 +24,14 @@ November 2026; it can run again without changing more):
    building.
 6. Drop sawtooth strips: footprints at least 80 m long whose outline is over 1.35 times the
    length of their convex hull's and that fill under 70% of it: a hatched edge the classifier
-   read tooth by tooth.
+   read tooth by tooth. The same outline on a footprint under 1,000 m² is a star of spikes
+   around a small shed: dropped too.
 7. Trim spikes: an opening of 1.5 m (shrink, then grow back, square corners) removes spikes and
    slivers under 3 m wide; the largest piece left, simplified at 1.5 m, replaces the outline,
    or, when under 60% of the area is left, the footprint is dropped.
 
-Usage: clean.py --shapes history/sanborn/lost.geojson   (dropped and trimmed ids -> clean-shapes.json)
+Usage: clean.py --shapes history/sanborn/lost.geojson   (dropped and trimmed ids are added to
+clean-shapes.json, with those of earlier runs)
 """
 import json, math, sys
 if sys.argv[1] == '--shapes':
@@ -48,7 +51,7 @@ if sys.argv[1] == '--shapes':
         fid = f['properties'].get('id')
         if (s.area / (a * b) < 0.3 and L > 60) or (D < 4 and L >= 4 * D):
             report['strip'].append(fid); continue
-        if L >= 80 and s.length / hull.length > 1.35 and s.area / hull.area < 0.7:
+        if (L >= 80 or s.area < 1000) and s.length / hull.length > 1.35 and s.area / hull.area < 0.7:
             report['sawtooth'].append(fid); continue
         o = s.buffer(-1.5, join_style=2).buffer(1.5, join_style=2)
         pieces = [] if o.is_empty else list(getattr(o, 'geoms', [o]))
@@ -63,7 +66,13 @@ if sys.argv[1] == '--shapes':
         keep.append(f)
     g['features'] = keep
     json.dump(g, open(path, 'w'))
-    json.dump(report, open(path.replace('lost.geojson', 'clean-shapes.json'), 'w'), indent=1)
+    out = path.replace('lost.geojson', 'clean-shapes.json')
+    try:
+        earlier = json.load(open(out))
+    except FileNotFoundError:
+        earlier = {}
+    report = {k: earlier.get(k, []) + [i for i in v if i not in earlier.get(k, [])] for k, v in report.items()}
+    json.dump(report, open(out, 'w'), indent=1)
     print({k: len(v) for k, v in report.items()}, 'kept', len(keep))
     sys.exit(0)
 from shapely.geometry import shape, mapping
