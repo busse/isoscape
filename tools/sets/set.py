@@ -146,9 +146,38 @@ class Scene:
                              (xs.max() - xs.min() + 1) * k, (ys.max() - ys.min() + 1) * k)
         return self._content
 
+    def covered(self):
+        """The part of the plate drawn edge to edge (SVG units): rows and columns where the drawing
+        reaches, so a window kept inside it shows no paper at the plate's edges. Something drawn
+        past the ground's edge (a bridge cut at the edge, the slab's side) does not widen it."""
+        if getattr(self, '_covered', None) is None:
+            w = 3200
+            h = round(w * self.vb[3] / self.vb[2])
+            a = np.asarray(self.render(self.vb, w, h)).astype(int)
+            bg = np.array(Image.new('RGB', (1, 1), PAPER).getpixel((0, 0)))
+            ink = np.abs(a - bg).sum(-1) > 3
+            # Rows nearly all drawn give the sides; within the sides, the columns give the top
+            # and bottom; then the sides again over the rows between those, until it settles.
+            rows = np.where(ink.mean(1) > 0.9)[0]
+            y0, y1 = rows.min(), rows.max()
+            x0, x1 = 0, ink.shape[1] - 1
+            for _ in range(6):
+                band = ink[y0:y1 + 1]
+                full = [r for r in band if r.mean() > 0.9]
+                nx0 = max(r.argmax() for r in full)
+                nx1 = min(len(r) - 1 - r[::-1].argmax() for r in full)
+                cols = ink[:, nx0:nx1 + 1].T
+                ny0 = max(c.argmax() for c in cols)
+                ny1 = min(len(c) - 1 - c[::-1].argmax() for c in cols)
+                if (nx0, nx1, ny0, ny1) == (x0, x1, y0, y1): break
+                x0, x1, y0, y1 = nx0, nx1, ny0, ny1
+            k = self.vb[2] / w
+            self._covered = (self.vb[0] + (x0 + 1) * k, self.vb[1] + (y0 + 1) * k, (x1 - x0 - 1) * k, (y1 - y0 - 1) * k)
+        return self._covered
+
     def window(self, centre, ground_w, aspect):
         """A window `ground_w` meters across, centered on an SVG point, kept on the plate."""
-        cx0, cy0, cw, ch = self.content()
+        cx0, cy0, cw, ch = self.covered()
         w = ground_w * self.scale
         h = w / aspect
         x = min(max(centre[0] - w / 2, cx0), cx0 + cw - w)
