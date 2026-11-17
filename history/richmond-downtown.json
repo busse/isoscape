@@ -577,6 +577,22 @@
   },
   {
    "where": {
+    "name": "South 8th Street Connector"
+   },
+   "eras": [
+    [
+     1957,
+     null
+    ]
+   ],
+   "note": "The curved link from 8th Street to Canal Street crosses ground that the USGS Richmond quadrangles of 1934 and 1956 show as rail yard, so it is later; when it was built is not known here, and it is drawn from 1957: approximate.",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+   ]
+  },
+  {
+   "where": {
     "name": "Mayo Bridge"
    },
    "eras": [
