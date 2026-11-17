@@ -12,5 +12,5 @@
     "types": ["node"],
     "skipLibCheck": true
   },
-  "include": ["src", "test", "bin"]
+  "include": ["src", "test", "bin", "tools/diagrams"]
 }

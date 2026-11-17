@@ -1,47 +1,73 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 228" role="img" aria-labelledby="t d" font-family="ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif" xmlns:c2pa="http://c2pa.org/manifest">
-<title id="t">The isoscape pipeline</title>
-<desc id="d">fetch: a region config drives downloads from OpenStreetMap and USGS 3DEP into a local cache. build: the cache is parsed, projected, given terrain, turned into a scene, sorted, drawn as SVG, archived, and listed in the explorer.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 878" width="400" height="878" role="img" aria-labelledby="pipe-t pipe-d">
+<title id="pipe-t">From data to drawing: the isoscape pipeline</title>
+<desc id="pipe-d">fetch, the only step that uses the network: a region file (regions/&lt;name&gt;.json) drives downloads from OpenStreetMap (osm.ts) and an elevation model (dem.ts) into a local cache (data/&lt;name&gt;/). build, offline and the same every time, runs eight steps: read the map data (osm.ts), what each tag means (classify.ts), the year for a dated map (history.ts), the camera (view.ts), ground, water and rapids (terrain.ts), buildings and bridges (scene.ts), what hides what (order.ts), and ink, color and dots (render.ts). The camera step, marked with a red dashed outline, is the projection: view.ts is about 90 lines of some 14,000 in src/. The SVG is archived and listed in the explorer (out/&lt;name&gt;.svg, out/index.html).</desc>
 <style>
-.b{fill:#fbfaf7;stroke:#26252b;stroke-width:1.2}
-.k{fill:#dcebf2;stroke:#2f6f8f;stroke-width:1.2}
-.t{fill:#26252b;font-size:13px;font-weight:600}
-.s{fill:#77737a;font-size:11px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
-.l{fill:#77737a;font-size:12px;font-style:italic}
-.a{fill:none;stroke:#77737a;stroke-width:1.2;marker-end:url(#h)}
-.h{fill:#77737a}
-.dot{fill:#26252b}
-@media (prefers-color-scheme: dark){
-.b{fill:#1b1d23;stroke:#e5e6ec}.k{fill:#22323d;stroke:#7fb6d4}.t{fill:#e5e6ec}.s,.l{fill:#9497a3}.a{stroke:#9497a3}.h{fill:#9497a3}.dot{fill:#e5e6ec}
-}
+text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif}
+.h{font:600 12px ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif;letter-spacing:.08em}
+.n{font:700 16px 'Libre Baskerville', Baskerville, Georgia, serif}
+.b{font-size:13.5px}
+.bb{font-size:13.5px;font-weight:600}
+.m{font:12.5px ui-monospace, SFMono-Regular, Menlo, monospace}
+.s{font-size:12.5px}
+.si{font-size:12.5px;font-style:italic}
+.bg{fill:#f4f1ea}.ink{fill:#2c2b33}.dim{fill:#6e6656}.card{fill:#faf7ef}.artist{fill:#f2c879}.agent{fill:#c3d3e2}.code{fill:#d3dfb9}.cache{fill:#a8cad8}.acc{fill:#b5392f}.edge{fill:none;stroke:#2c2b33;stroke-width:1.2}.thin{fill:none;stroke:#2c2b33;stroke-width:0.72}.edge.card{fill:#faf7ef}.edge.cache{fill:#a8cad8}.edge.artist{fill:#f2c879}.edge.agent{fill:#c3d3e2}.edge.code{fill:#d3dfb9}.mark{fill:#f4f1ea;stroke:#2c2b33;stroke-width:1.2}.mark.solid{fill:#2c2b33}.mark.dash{stroke-dasharray:2.6 1.7}.hl{fill:none;stroke:#b5392f;stroke-width:1.68;stroke-dasharray:6 4}
+@media (prefers-color-scheme: dark){.bg{fill:#14161d}.ink{fill:#c9d1e6}.dim{fill:#8a90a2}.card{fill:#1d2029}.artist{fill:#8a6f3c}.agent{fill:#34465a}.code{fill:#22302a}.cache{fill:#1b2e3b}.acc{fill:#e0614f}.edge{fill:none;stroke:#c9d1e6;stroke-width:1.2}.thin{fill:none;stroke:#c9d1e6;stroke-width:0.72}.edge.card{fill:#1d2029}.edge.cache{fill:#1b2e3b}.edge.artist{fill:#8a6f3c}.edge.agent{fill:#34465a}.edge.code{fill:#22302a}.mark{fill:#14161d;stroke:#c9d1e6;stroke-width:1.2}.mark.solid{fill:#c9d1e6}.mark.dash{stroke-dasharray:2.6 1.7}.hl{fill:none;stroke:#e0614f;stroke-width:1.68;stroke-dasharray:6 4}}
 </style>
-<defs><marker id="h" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path class="h" d="M0 0L8 4L0 8z"/></marker></defs>
-
-<text class="l" x="10" y="14">fetch — the only step that touches the network</text>
-<rect class="b" x="10" y="38" width="160" height="46" rx="5"/>
-<text class="t" x="20" y="57">Region config</text><text class="s" x="20" y="74">regions/&lt;name&gt;.json</text>
-<rect class="b" x="240" y="24" width="170" height="40" rx="5"/>
-<text class="t" x="250" y="41">OpenStreetMap</text><text class="s" x="250" y="56">Overpass, in tiles</text>
-<rect class="b" x="240" y="72" width="170" height="40" rx="5"/>
-<text class="t" x="250" y="89">USGS 3DEP elevation</text><text class="s" x="250" y="104">exportImage, in tiles</text>
-<rect class="k" x="480" y="44" width="180" height="46" rx="5"/>
-<text class="t" x="490" y="63">Local cache</text><text class="s" x="490" y="80">data/&lt;name&gt;/</text>
-<path class="a" d="M170 55L238 45"/><path class="a" d="M170 68L238 90"/>
-<path class="a" d="M410 45L478 60"/><path class="a" d="M410 92L478 76"/>
-
-<text class="l" x="64" y="141">build — offline, from the cache; every build is archived</text>
-<path class="a" d="M570 90V122H52V148"/>
-<g transform="translate(10 150)">
-<rect class="b" x="0" width="84" height="46" rx="5"/><text class="t" x="8" y="19">Parse</text><text class="s" x="8" y="36">osm.ts</text>
-<rect class="b" x="94" width="84" height="46" rx="5"/><text class="t" x="102" y="19">Camera</text><text class="s" x="102" y="36">view.ts</text>
-<rect class="b" x="188" width="84" height="46" rx="5"/><text class="t" x="196" y="19">Terrain</text><text class="s" x="196" y="36">terrain.ts</text>
-<rect class="b" x="282" width="84" height="46" rx="5"/><text class="t" x="290" y="19">Scene</text><text class="s" x="290" y="36">scene.ts</text>
-<rect class="b" x="376" width="84" height="46" rx="5"/><text class="t" x="384" y="19">Order</text><text class="s" x="384" y="36">order.ts</text>
-<rect class="b" x="470" width="84" height="46" rx="5"/><text class="t" x="478" y="19">Draw</text><text class="s" x="478" y="36">render.ts</text>
-<rect class="k" x="564" width="84" height="46" rx="5"/><text class="t" x="572" y="19">Archive</text><text class="s" x="572" y="36">archive.ts</text>
-<rect class="k" x="658" width="84" height="46" rx="5"/><text class="t" x="666" y="19">Explorer</text><text class="s" x="666" y="36">explorer.ts</text>
-<path class="a" d="M84 23H92"/><path class="a" d="M178 23H186"/><path class="a" d="M272 23H280"/><path class="a" d="M366 23H374"/>
-<path class="a" d="M460 23H468"/><path class="a" d="M554 23H562"/><path class="a" d="M648 23H656"/>
-</g>
-<circle class="dot" cx="10" cy="38" r="2"/><circle class="dot" cx="170" cy="38" r="2"/><circle class="dot" cx="10" cy="84" r="2"/><circle class="dot" cx="170" cy="84" r="2"/>
-<text class="l" x="10" y="222">The SVG lands in out/&lt;name&gt;.svg and out/builds/&lt;id&gt;/, with a thumbnail and meta.json; out/index.html is rewritten.</text>
-<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpkYTk4M2U5My05OTYzLTQwMmUtOTdmZC0xYTVkNDRlNTVmYjcAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaPmdf9SONScstMPLictUd9oAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo2ZDRlOGU4Yy1kNTNlLTQ0MmMtYmVlYi03ZjQ0YjQ3ZWIyZWJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoFMkUL57XFj6/urknb6RcKgAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggoT/6+GMx8S6jOOeKESMNrxO+5iYC6m+6fhDoGuo8gWakZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaHaolED42S8hV1oZ3Wokzy4AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIBa046FmTP4ctqEcngzamXz5BwXcj22+YojasJaZd2cqZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GRAbZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmRhOTgzZTkzLTk5NjMtNDAyZS05N2ZkLTFhNWQ0NGU1NWZiNy9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmMwMDU0MjE4LTg0OTYtNGE4Ni1iYjg1LTUzZjQzZTNkYzQ1YnJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCChP/r4YzHxLqM454oRIw2vE77mJgLqb7p+EOga6jyBZqJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggusqmOtn5cbYTu8sr3pCwfWrp7jWF4dqDqCjyVI+s7AKiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggNVto6h/SnpBVvFkozEku8PvCTJqDTg/SST4FN6MBWfB0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQBcPyrZhHKzkxd8YifdNC0cek5bqmddSNEesk/39Sf2odG1VmG3XGeCXyMD96sHC8/eNA+lC2H9kjUFId5N92sA=</c2pa:manifest></metadata></svg>
+<rect width="400" height="878" class="bg"/>
+<text x="16" y="26" class="h dim">FROM DATA TO DRAWING</text>
+<text x="16" y="48" class="si dim">fetch: the only step that uses the network</text>
+<rect x="16" y="60" width="368" height="38" class="edge card"/><circle cx="16" cy="60" r="2.9" class="ink"/><circle cx="384" cy="60" r="2.9" class="ink"/><circle cx="16" cy="98" r="2.9" class="ink"/><circle cx="384" cy="98" r="2.9" class="ink"/>
+<text x="28" y="84" class="bb ink">Region file</text>
+<text x="372" y="84" class="m ink" text-anchor="end">regions/&lt;name&gt;.json</text>
+<path d="M200 103L200 111" class="edge"/><path d="M200 119L195.8 111L204.2 111Z" class="ink"/><circle cx="200" cy="103" r="2.3" class="ink"/>
+<rect x="16" y="124" width="178" height="52" class="edge card"/><circle cx="16" cy="124" r="2.9" class="ink"/><circle cx="194" cy="124" r="2.9" class="ink"/><circle cx="16" cy="176" r="2.9" class="ink"/><circle cx="194" cy="176" r="2.9" class="ink"/>
+<text x="28" y="146" class="bb ink">OpenStreetMap</text>
+<text x="28" y="165" class="m ink">osm.ts</text>
+<rect x="206" y="124" width="178" height="52" class="edge card"/><circle cx="206" cy="124" r="2.9" class="ink"/><circle cx="384" cy="124" r="2.9" class="ink"/><circle cx="206" cy="176" r="2.9" class="ink"/><circle cx="384" cy="176" r="2.9" class="ink"/>
+<text x="218" y="146" class="bb ink">Elevation</text>
+<text x="218" y="165" class="m ink">dem.ts</text>
+<path d="M105 181L105 189" class="edge"/><path d="M105 197L100.8 189L109.2 189Z" class="ink"/><circle cx="105" cy="181" r="2.3" class="ink"/>
+<path d="M295 181L295 189" class="edge"/><path d="M295 197L290.8 189L299.2 189Z" class="ink"/><circle cx="295" cy="181" r="2.3" class="ink"/>
+<rect x="16" y="202" width="368" height="38" class="edge cache"/><circle cx="16" cy="202" r="2.9" class="ink"/><circle cx="384" cy="202" r="2.9" class="ink"/><circle cx="16" cy="240" r="2.9" class="ink"/><circle cx="384" cy="240" r="2.9" class="ink"/>
+<text x="28" y="226" class="bb ink">Local cache</text>
+<text x="372" y="226" class="m ink" text-anchor="end">data/&lt;name&gt;/</text>
+<text x="16" y="270" class="si dim">build: offline, from the cache, the same every time</text>
+<rect x="16" y="282" width="368" height="36" class="edge card"/><circle cx="16" cy="282" r="2.9" class="ink"/><circle cx="384" cy="282" r="2.9" class="ink"/><circle cx="16" cy="318" r="2.9" class="ink"/><circle cx="384" cy="318" r="2.9" class="ink"/>
+<text x="28" y="305" class="bb ink">Read the map data</text>
+<text x="372" y="305" class="m ink" text-anchor="end">osm.ts</text>
+<path d="M200 323L200 329" class="edge"/><path d="M200 337L195.8 329L204.2 329Z" class="ink"/><circle cx="200" cy="323" r="2.3" class="ink"/>
+<rect x="16" y="342" width="368" height="36" class="edge card"/><circle cx="16" cy="342" r="2.9" class="ink"/><circle cx="384" cy="342" r="2.9" class="ink"/><circle cx="16" cy="378" r="2.9" class="ink"/><circle cx="384" cy="378" r="2.9" class="ink"/>
+<text x="28" y="365" class="bb ink">What each tag means</text>
+<text x="372" y="365" class="m ink" text-anchor="end">classify.ts</text>
+<path d="M200 383L200 389" class="edge"/><path d="M200 397L195.8 389L204.2 389Z" class="ink"/><circle cx="200" cy="383" r="2.3" class="ink"/>
+<rect x="16" y="402" width="368" height="36" class="edge card"/><circle cx="16" cy="402" r="2.9" class="ink"/><circle cx="384" cy="402" r="2.9" class="ink"/><circle cx="16" cy="438" r="2.9" class="ink"/><circle cx="384" cy="438" r="2.9" class="ink"/>
+<text x="28" y="425" class="bb ink">The year, for a dated map</text>
+<text x="372" y="425" class="m ink" text-anchor="end">history.ts</text>
+<path d="M200 443L200 449" class="edge"/><path d="M200 457L195.8 449L204.2 449Z" class="ink"/><circle cx="200" cy="443" r="2.3" class="ink"/>
+<rect x="16" y="462" width="368" height="36" class="edge card"/><circle cx="16" cy="462" r="2.9" class="ink"/><circle cx="384" cy="462" r="2.9" class="ink"/><circle cx="16" cy="498" r="2.9" class="ink"/><circle cx="384" cy="498" r="2.9" class="ink"/>
+<text x="28" y="485" class="bb ink">Camera</text>
+<text x="372" y="485" class="m ink" text-anchor="end">view.ts</text>
+<rect x="10" y="456" width="380" height="48" class="hl"/>
+<text x="16" y="520" class="si acc">The projection is this step alone: view.ts is</text>
+<text x="16" y="537" class="si acc">about 90 lines of some 14,000 in src/.</text>
+<path d="M200 547L200 553" class="edge"/><path d="M200 561L195.8 553L204.2 553Z" class="ink"/><circle cx="200" cy="547" r="2.3" class="ink"/>
+<rect x="16" y="566" width="368" height="36" class="edge card"/><circle cx="16" cy="566" r="2.9" class="ink"/><circle cx="384" cy="566" r="2.9" class="ink"/><circle cx="16" cy="602" r="2.9" class="ink"/><circle cx="384" cy="602" r="2.9" class="ink"/>
+<text x="28" y="589" class="bb ink">Ground, water, rapids</text>
+<text x="372" y="589" class="m ink" text-anchor="end">terrain.ts</text>
+<path d="M200 607L200 613" class="edge"/><path d="M200 621L195.8 613L204.2 613Z" class="ink"/><circle cx="200" cy="607" r="2.3" class="ink"/>
+<rect x="16" y="626" width="368" height="36" class="edge card"/><circle cx="16" cy="626" r="2.9" class="ink"/><circle cx="384" cy="626" r="2.9" class="ink"/><circle cx="16" cy="662" r="2.9" class="ink"/><circle cx="384" cy="662" r="2.9" class="ink"/>
+<text x="28" y="649" class="bb ink">Buildings and bridges</text>
+<text x="372" y="649" class="m ink" text-anchor="end">scene.ts</text>
+<path d="M200 667L200 673" class="edge"/><path d="M200 681L195.8 673L204.2 673Z" class="ink"/><circle cx="200" cy="667" r="2.3" class="ink"/>
+<rect x="16" y="686" width="368" height="36" class="edge card"/><circle cx="16" cy="686" r="2.9" class="ink"/><circle cx="384" cy="686" r="2.9" class="ink"/><circle cx="16" cy="722" r="2.9" class="ink"/><circle cx="384" cy="722" r="2.9" class="ink"/>
+<text x="28" y="709" class="bb ink">What hides what</text>
+<text x="372" y="709" class="m ink" text-anchor="end">order.ts</text>
+<path d="M200 727L200 733" class="edge"/><path d="M200 741L195.8 733L204.2 733Z" class="ink"/><circle cx="200" cy="727" r="2.3" class="ink"/>
+<rect x="16" y="746" width="368" height="36" class="edge card"/><circle cx="16" cy="746" r="2.9" class="ink"/><circle cx="384" cy="746" r="2.9" class="ink"/><circle cx="16" cy="782" r="2.9" class="ink"/><circle cx="384" cy="782" r="2.9" class="ink"/>
+<text x="28" y="769" class="bb ink">Ink, color, dots</text>
+<text x="372" y="769" class="m ink" text-anchor="end">render.ts</text>
+<path d="M200 787L200 793" class="edge"/><path d="M200 801L195.8 793L204.2 793Z" class="ink"/><circle cx="200" cy="787" r="2.3" class="ink"/>
+<rect x="16" y="806" width="368" height="56" class="edge cache"/><circle cx="16" cy="806" r="2.9" class="ink"/><circle cx="384" cy="806" r="2.9" class="ink"/><circle cx="16" cy="862" r="2.9" class="ink"/><circle cx="384" cy="862" r="2.9" class="ink"/>
+<text x="28" y="828" class="bb ink">The SVG, archived; the explorer</text>
+<text x="28" y="848" class="m ink">out/&lt;name&gt;.svg  out/index.html</text>
+</svg>

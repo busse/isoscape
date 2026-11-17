@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 633" width="400" height="633" role="img" aria-labelledby="src-t src-d">
+<title id="src-t">Where the geometry comes from</title>
+<desc id="src-d">Seven sources and what each gives, each marked measured (a solid disc), inferred (a ring) or guessed (a dashed ring). OpenStreetMap: streets, rail, water, parks and building outlines, measured; building heights where mappers tagged them, measured; other heights, guessed from building type and size. USGS 3DEP lidar, or a national elevation model: the ground, measured; the river surface, rocks, rapids and shoreline, inferred. Microsoft building footprints, used on Gwynn's Island: buildings OpenStreetMap lacks, traced by a model, inferred. NLCD land cover, on Gwynn's Island: woods, fields and wetlands from satellites, inferred. City of Richmond year-built records: the year each standing building went up, measured. Sanborn fire-insurance maps from the Library of Congress: lost buildings traced from the scans, inferred; their heights from their material, guessed. Rules in the code: bridge deck heights by name or layer, guessed.</desc>
+<style>
+text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif}
+.h{font:600 12px ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif;letter-spacing:.08em}
+.n{font:700 16px 'Libre Baskerville', Baskerville, Georgia, serif}
+.b{font-size:13.5px}
+.bb{font-size:13.5px;font-weight:600}
+.m{font:12.5px ui-monospace, SFMono-Regular, Menlo, monospace}
+.s{font-size:12.5px}
+.si{font-size:12.5px;font-style:italic}
+.bg{fill:#f4f1ea}.ink{fill:#2c2b33}.dim{fill:#6e6656}.card{fill:#faf7ef}.artist{fill:#f2c879}.agent{fill:#c3d3e2}.code{fill:#d3dfb9}.cache{fill:#a8cad8}.acc{fill:#b5392f}.edge{fill:none;stroke:#2c2b33;stroke-width:1.2}.thin{fill:none;stroke:#2c2b33;stroke-width:0.72}.edge.card{fill:#faf7ef}.edge.cache{fill:#a8cad8}.edge.artist{fill:#f2c879}.edge.agent{fill:#c3d3e2}.edge.code{fill:#d3dfb9}.mark{fill:#f4f1ea;stroke:#2c2b33;stroke-width:1.2}.mark.solid{fill:#2c2b33}.mark.dash{stroke-dasharray:2.6 1.7}.hl{fill:none;stroke:#b5392f;stroke-width:1.68;stroke-dasharray:6 4}
+@media (prefers-color-scheme: dark){.bg{fill:#14161d}.ink{fill:#c9d1e6}.dim{fill:#8a90a2}.card{fill:#1d2029}.artist{fill:#8a6f3c}.agent{fill:#34465a}.code{fill:#22302a}.cache{fill:#1b2e3b}.acc{fill:#e0614f}.edge{fill:none;stroke:#c9d1e6;stroke-width:1.2}.thin{fill:none;stroke:#c9d1e6;stroke-width:0.72}.edge.card{fill:#1d2029}.edge.cache{fill:#1b2e3b}.edge.artist{fill:#8a6f3c}.edge.agent{fill:#34465a}.edge.code{fill:#22302a}.mark{fill:#14161d;stroke:#c9d1e6;stroke-width:1.2}.mark.solid{fill:#c9d1e6}.mark.dash{stroke-dasharray:2.6 1.7}.hl{fill:none;stroke:#e0614f;stroke-width:1.68;stroke-dasharray:6 4}}
+</style>
+<rect width="400" height="633" class="bg"/>
+<text x="16" y="26" class="h dim">WHERE THE GEOMETRY COMES FROM</text>
+<rect x="16" y="44" width="368" height="93" class="edge card"/><circle cx="16" cy="44" r="2.9" class="ink"/><circle cx="384" cy="44" r="2.9" class="ink"/><circle cx="16" cy="137" r="2.9" class="ink"/><circle cx="384" cy="137" r="2.9" class="ink"/>
+<text x="28" y="65" class="bb ink">OpenStreetMap</text>
+<circle cx="36" cy="82.4" r="5.2" class="mark solid"/>
+<text x="50" y="87" class="b ink">Streets, rail, water, parks, building outlines</text>
+<circle cx="36" cy="103.4" r="5.2" class="mark solid"/>
+<text x="50" y="108" class="b ink">Building heights, where mappers tagged them</text>
+<circle cx="36" cy="124.4" r="5.2" class="mark dash"/>
+<text x="50" y="129" class="b ink">Other heights, from building type and size</text>
+<rect x="16" y="151" width="368" height="72" class="edge card"/><circle cx="16" cy="151" r="2.9" class="ink"/><circle cx="384" cy="151" r="2.9" class="ink"/><circle cx="16" cy="223" r="2.9" class="ink"/><circle cx="384" cy="223" r="2.9" class="ink"/>
+<text x="28" y="172" class="bb ink">USGS 3DEP lidar</text>
+<text x="372" y="172" class="s ink" text-anchor="end">or a national model</text>
+<circle cx="36" cy="189.4" r="5.2" class="mark solid"/>
+<text x="50" y="194" class="b ink">The ground: hills, banks, the riverbed</text>
+<circle cx="36" cy="210.4" r="5.2" class="mark"/>
+<text x="50" y="215" class="b ink">River surface, rocks, rapids, shoreline</text>
+<rect x="16" y="237" width="368" height="51" class="edge card"/><circle cx="16" cy="237" r="2.9" class="ink"/><circle cx="384" cy="237" r="2.9" class="ink"/><circle cx="16" cy="288" r="2.9" class="ink"/><circle cx="384" cy="288" r="2.9" class="ink"/>
+<text x="28" y="258" class="bb ink">Microsoft footprints</text>
+<text x="372" y="258" class="s ink" text-anchor="end">Gwynn's Island</text>
+<circle cx="36" cy="275.4" r="5.2" class="mark"/>
+<text x="50" y="280" class="b ink">Buildings OSM lacks, traced by a model</text>
+<rect x="16" y="302" width="368" height="51" class="edge card"/><circle cx="16" cy="302" r="2.9" class="ink"/><circle cx="384" cy="302" r="2.9" class="ink"/><circle cx="16" cy="353" r="2.9" class="ink"/><circle cx="384" cy="353" r="2.9" class="ink"/>
+<text x="28" y="323" class="bb ink">NLCD land cover</text>
+<text x="372" y="323" class="s ink" text-anchor="end">Gwynn's Island</text>
+<circle cx="36" cy="340.4" r="5.2" class="mark"/>
+<text x="50" y="345" class="b ink">Woods, fields and wetlands, from satellites</text>
+<rect x="16" y="367" width="368" height="51" class="edge card"/><circle cx="16" cy="367" r="2.9" class="ink"/><circle cx="384" cy="367" r="2.9" class="ink"/><circle cx="16" cy="418" r="2.9" class="ink"/><circle cx="384" cy="418" r="2.9" class="ink"/>
+<text x="28" y="388" class="bb ink">City year-built records</text>
+<text x="372" y="388" class="s ink" text-anchor="end">Richmond</text>
+<circle cx="36" cy="405.4" r="5.2" class="mark solid"/>
+<text x="50" y="410" class="b ink">The year each standing building went up</text>
+<rect x="16" y="432" width="368" height="72" class="edge card"/><circle cx="16" cy="432" r="2.9" class="ink"/><circle cx="384" cy="432" r="2.9" class="ink"/><circle cx="16" cy="504" r="2.9" class="ink"/><circle cx="384" cy="504" r="2.9" class="ink"/>
+<text x="28" y="453" class="bb ink">Sanborn maps</text>
+<text x="372" y="453" class="s ink" text-anchor="end">Library of Congress</text>
+<circle cx="36" cy="470.4" r="5.2" class="mark"/>
+<text x="50" y="475" class="b ink">Lost buildings, traced from the scans</text>
+<circle cx="36" cy="491.4" r="5.2" class="mark dash"/>
+<text x="50" y="496" class="b ink">Their heights, from their material</text>
+<rect x="16" y="518" width="368" height="51" class="edge card"/><circle cx="16" cy="518" r="2.9" class="ink"/><circle cx="384" cy="518" r="2.9" class="ink"/><circle cx="16" cy="569" r="2.9" class="ink"/><circle cx="384" cy="569" r="2.9" class="ink"/>
+<text x="28" y="539" class="bb ink">Rules in the code</text>
+<circle cx="36" cy="556.4" r="5.2" class="mark dash"/>
+<text x="50" y="561" class="b ink">Bridge deck heights, by name or layer</text>
+<circle cx="24" cy="592.4" r="5.2" class="mark solid"/>
+<text x="37" y="597" class="b ink">measured</text>
+<circle cx="136" cy="592.4" r="5.2" class="mark"/>
+<text x="149" y="597" class="b ink">inferred</text>
+<circle cx="248" cy="592.4" r="5.2" class="mark dash"/>
+<text x="261" y="597" class="b ink">guessed</text>
+<text x="16" y="619" class="si dim">The marks of the cutaway sheets: drawn, written, approximate.</text>
+</svg>

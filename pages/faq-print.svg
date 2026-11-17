@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 690" width="400" height="690" role="img" aria-labelledby="print-t print-d">
+<title id="print-t">From drawing to print</title>
+<desc id="print-d">Seven steps: build the scenes (isoscape build, deterministic SVG); look at them at print size, with the visual check; compose the print (tools/print/compose.py); set the title block (plate, such as RVA·01, version, year, place); write the release record (the commit, and every input by SHA-256); run the rebuild check (check.py --rebuild, the same bytes again); and print to order from that file, through the shop. An arrow runs from the last step back to the first: a fault found after release is redrawn as the next version (such as -v4), never changed in place; the plate stays, and the Changes page says what changed and when.</desc>
+<style>
+text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif}
+.h{font:600 12px ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif;letter-spacing:.08em}
+.n{font:700 16px 'Libre Baskerville', Baskerville, Georgia, serif}
+.b{font-size:13.5px}
+.bb{font-size:13.5px;font-weight:600}
+.m{font:12.5px ui-monospace, SFMono-Regular, Menlo, monospace}
+.s{font-size:12.5px}
+.si{font-size:12.5px;font-style:italic}
+.bg{fill:#f4f1ea}.ink{fill:#2c2b33}.dim{fill:#6e6656}.card{fill:#faf7ef}.artist{fill:#f2c879}.agent{fill:#c3d3e2}.code{fill:#d3dfb9}.cache{fill:#a8cad8}.acc{fill:#b5392f}.edge{fill:none;stroke:#2c2b33;stroke-width:1.2}.thin{fill:none;stroke:#2c2b33;stroke-width:0.72}.edge.card{fill:#faf7ef}.edge.cache{fill:#a8cad8}.edge.artist{fill:#f2c879}.edge.agent{fill:#c3d3e2}.edge.code{fill:#d3dfb9}.mark{fill:#f4f1ea;stroke:#2c2b33;stroke-width:1.2}.mark.solid{fill:#2c2b33}.mark.dash{stroke-dasharray:2.6 1.7}.hl{fill:none;stroke:#b5392f;stroke-width:1.68;stroke-dasharray:6 4}
+@media (prefers-color-scheme: dark){.bg{fill:#14161d}.ink{fill:#c9d1e6}.dim{fill:#8a90a2}.card{fill:#1d2029}.artist{fill:#8a6f3c}.agent{fill:#34465a}.code{fill:#22302a}.cache{fill:#1b2e3b}.acc{fill:#e0614f}.edge{fill:none;stroke:#c9d1e6;stroke-width:1.2}.thin{fill:none;stroke:#c9d1e6;stroke-width:0.72}.edge.card{fill:#1d2029}.edge.cache{fill:#1b2e3b}.edge.artist{fill:#8a6f3c}.edge.agent{fill:#34465a}.edge.code{fill:#22302a}.mark{fill:#14161d;stroke:#c9d1e6;stroke-width:1.2}.mark.solid{fill:#c9d1e6}.mark.dash{stroke-dasharray:2.6 1.7}.hl{fill:none;stroke:#e0614f;stroke-width:1.68;stroke-dasharray:6 4}}
+</style>
+<rect width="400" height="690" class="bg"/>
+<text x="16" y="26" class="h dim">FROM DRAWING TO PRINT</text>
+<rect x="16" y="44" width="334" height="52" class="edge card"/><circle cx="16" cy="44" r="2.9" class="ink"/><circle cx="350" cy="44" r="2.9" class="ink"/><circle cx="16" cy="96" r="2.9" class="ink"/><circle cx="350" cy="96" r="2.9" class="ink"/>
+<text x="28" y="66" class="bb ink">Build the scenes</text>
+<text x="28" y="85" class="m ink">isoscape build: deterministic SVG</text>
+<path d="M183 101L183 107" class="edge"/><path d="M183 115L178.8 107L187.2 107Z" class="ink"/><circle cx="183" cy="101" r="2.3" class="ink"/>
+<rect x="16" y="120" width="334" height="52" class="edge artist"/><circle cx="16" cy="120" r="2.9" class="ink"/><circle cx="350" cy="120" r="2.9" class="ink"/><circle cx="16" cy="172" r="2.9" class="ink"/><circle cx="350" cy="172" r="2.9" class="ink"/>
+<text x="28" y="142" class="bb ink">Look</text>
+<text x="28" y="161" class="s ink">at print size; the visual check</text>
+<path d="M183 177L183 183" class="edge"/><path d="M183 191L178.8 183L187.2 183Z" class="ink"/><circle cx="183" cy="177" r="2.3" class="ink"/>
+<rect x="16" y="196" width="334" height="52" class="edge card"/><circle cx="16" cy="196" r="2.9" class="ink"/><circle cx="350" cy="196" r="2.9" class="ink"/><circle cx="16" cy="248" r="2.9" class="ink"/><circle cx="350" cy="248" r="2.9" class="ink"/>
+<text x="28" y="218" class="bb ink">Compose the print</text>
+<text x="28" y="237" class="m ink">tools/print/compose.py</text>
+<path d="M183 253L183 259" class="edge"/><path d="M183 267L178.8 259L187.2 259Z" class="ink"/><circle cx="183" cy="253" r="2.3" class="ink"/>
+<rect x="16" y="272" width="334" height="52" class="edge card"/><circle cx="16" cy="272" r="2.9" class="ink"/><circle cx="350" cy="272" r="2.9" class="ink"/><circle cx="16" cy="324" r="2.9" class="ink"/><circle cx="350" cy="324" r="2.9" class="ink"/>
+<text x="28" y="294" class="bb ink">Title block</text>
+<text x="28" y="313" class="m ink">plate RVA·01, version, year, place</text>
+<path d="M183 329L183 335" class="edge"/><path d="M183 343L178.8 335L187.2 335Z" class="ink"/><circle cx="183" cy="329" r="2.3" class="ink"/>
+<rect x="16" y="348" width="334" height="52" class="edge card"/><circle cx="16" cy="348" r="2.9" class="ink"/><circle cx="350" cy="348" r="2.9" class="ink"/><circle cx="16" cy="400" r="2.9" class="ink"/><circle cx="350" cy="400" r="2.9" class="ink"/>
+<text x="28" y="370" class="bb ink">Release record</text>
+<text x="28" y="389" class="m ink">commit, inputs by SHA-256</text>
+<path d="M183 405L183 411" class="edge"/><path d="M183 419L178.8 411L187.2 411Z" class="ink"/><circle cx="183" cy="405" r="2.3" class="ink"/>
+<rect x="16" y="424" width="334" height="52" class="edge card"/><circle cx="16" cy="424" r="2.9" class="ink"/><circle cx="350" cy="424" r="2.9" class="ink"/><circle cx="16" cy="476" r="2.9" class="ink"/><circle cx="350" cy="476" r="2.9" class="ink"/>
+<text x="28" y="446" class="bb ink">Rebuild check</text>
+<text x="28" y="465" class="m ink">check.py --rebuild: same bytes</text>
+<path d="M183 481L183 487" class="edge"/><path d="M183 495L178.8 487L187.2 487Z" class="ink"/><circle cx="183" cy="481" r="2.3" class="ink"/>
+<rect x="16" y="500" width="334" height="52" class="edge card"/><circle cx="16" cy="500" r="2.9" class="ink"/><circle cx="350" cy="500" r="2.9" class="ink"/><circle cx="16" cy="552" r="2.9" class="ink"/><circle cx="350" cy="552" r="2.9" class="ink"/>
+<text x="28" y="522" class="bb ink">Printed to order</text>
+<text x="28" y="541" class="m ink">from that file, through the shop</text>
+<path d="M350 526L376 526L376 70L360 70" class="edge"/><path d="M352 70L360 65.8L360 74.2Z" class="ink"/><circle cx="350" cy="526" r="2.3" class="ink"/>
+<rect x="16" y="574" width="368" height="96" class="edge card"/><circle cx="16" cy="574" r="2.9" class="ink"/><circle cx="384" cy="574" r="2.9" class="ink"/><circle cx="16" cy="670" r="2.9" class="ink"/><circle cx="384" cy="670" r="2.9" class="ink"/>
+<rect x="11" y="569" width="378" height="106" class="hl"/>
+<text x="28" y="596" class="bb ink">A fault found after release goes round again</text>
+<text x="28" y="616" class="b ink">Redrawn as the next version (-v4), never</text>
+<text x="28" y="635" class="b ink">changed in place. The plate stays; the</text>
+<text x="28" y="654" class="b ink">Changes page says what changed, and when.</text>
+</svg>

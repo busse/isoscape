@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 538" width="400" height="538" role="img" aria-labelledby="agent-t agent-d">
+<title id="agent-t">Using isoscape with a coding agent</title>
+<desc id="agent-d">Three lanes. You, a person: say what place to draw and how, look at the picture and say what to change. Claude, in the app or a terminal: reads CLAUDE.md, the working contract, and AGENTS.md, and follows the loop. Arrows run down (a request; commands) and back up (pictures and a summary; files and numbers). The repo, isoscape: regions/&lt;name&gt;.json (the place: center, size); fetch (downloads into data/); build &lt;name&gt; --png (out/&lt;name&gt;.png); out/index.html (the explorer, where C compares two builds); npm test and npm run typecheck; npm run check:visual (out/check/index.html). The loop: change, build, look at the picture, compare with the last build, keep or undo.</desc>
+<style>
+text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif}
+.h{font:600 12px ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif;letter-spacing:.08em}
+.n{font:700 16px 'Libre Baskerville', Baskerville, Georgia, serif}
+.b{font-size:13.5px}
+.bb{font-size:13.5px;font-weight:600}
+.m{font:12.5px ui-monospace, SFMono-Regular, Menlo, monospace}
+.s{font-size:12.5px}
+.si{font-size:12.5px;font-style:italic}
+.bg{fill:#f4f1ea}.ink{fill:#2c2b33}.dim{fill:#6e6656}.card{fill:#faf7ef}.artist{fill:#f2c879}.agent{fill:#c3d3e2}.code{fill:#d3dfb9}.cache{fill:#a8cad8}.acc{fill:#b5392f}.edge{fill:none;stroke:#2c2b33;stroke-width:1.2}.thin{fill:none;stroke:#2c2b33;stroke-width:0.72}.edge.card{fill:#faf7ef}.edge.cache{fill:#a8cad8}.edge.artist{fill:#f2c879}.edge.agent{fill:#c3d3e2}.edge.code{fill:#d3dfb9}.mark{fill:#f4f1ea;stroke:#2c2b33;stroke-width:1.2}.mark.solid{fill:#2c2b33}.mark.dash{stroke-dasharray:2.6 1.7}.hl{fill:none;stroke:#b5392f;stroke-width:1.68;stroke-dasharray:6 4}
+@media (prefers-color-scheme: dark){.bg{fill:#14161d}.ink{fill:#c9d1e6}.dim{fill:#8a90a2}.card{fill:#1d2029}.artist{fill:#8a6f3c}.agent{fill:#34465a}.code{fill:#22302a}.cache{fill:#1b2e3b}.acc{fill:#e0614f}.edge{fill:none;stroke:#c9d1e6;stroke-width:1.2}.thin{fill:none;stroke:#c9d1e6;stroke-width:0.72}.edge.card{fill:#1d2029}.edge.cache{fill:#1b2e3b}.edge.artist{fill:#8a6f3c}.edge.agent{fill:#34465a}.edge.code{fill:#22302a}.mark{fill:#14161d;stroke:#c9d1e6;stroke-width:1.2}.mark.solid{fill:#c9d1e6}.mark.dash{stroke-dasharray:2.6 1.7}.hl{fill:none;stroke:#e0614f;stroke-width:1.68;stroke-dasharray:6 4}}
+</style>
+<rect width="400" height="538" class="bg"/>
+<text x="16" y="26" class="h dim">USING IT WITH AN AGENT</text>
+<rect x="16" y="40" width="368" height="78" class="edge card"/><circle cx="16" cy="40" r="2.9" class="ink"/><circle cx="384" cy="40" r="2.9" class="ink"/><circle cx="16" cy="118" r="2.9" class="ink"/><circle cx="384" cy="118" r="2.9" class="ink"/><rect x="16" y="40" width="10" height="78" class="edge artist"/><circle cx="26" cy="40" r="2.9" class="ink"/><circle cx="26" cy="118" r="2.9" class="ink"/><text x="40" y="64" class="n ink">You</text><text x="372" y="63" class="s ink" text-anchor="end">a person</text><text x="40" y="88" class="b ink">Say what place to draw, and how</text><text x="40" y="107" class="b ink">Look at the picture; say what to change</text>
+<path d="M64 124L64 160" class="edge"/><path d="M64 168L59.8 160L68.2 160Z" class="ink"/><circle cx="64" cy="124" r="2.3" class="ink"/><text x="78" y="150.5" class="s dim">a request</text><path d="M238 168L238 132" class="edge"/><path d="M238 124L242.2 132L233.8 132Z" class="ink"/><circle cx="238" cy="168" r="2.3" class="ink"/><text x="252" y="150.5" class="s dim">pictures, a summary</text>
+<rect x="16" y="174" width="368" height="78" class="edge card"/><circle cx="16" cy="174" r="2.9" class="ink"/><circle cx="384" cy="174" r="2.9" class="ink"/><circle cx="16" cy="252" r="2.9" class="ink"/><circle cx="384" cy="252" r="2.9" class="ink"/><rect x="16" y="174" width="10" height="78" class="edge agent"/><circle cx="26" cy="174" r="2.9" class="ink"/><circle cx="26" cy="252" r="2.9" class="ink"/><text x="40" y="198" class="n ink">Claude</text><text x="372" y="197" class="s ink" text-anchor="end">in the app or a terminal</text><text x="40" y="222" class="b ink">Reads CLAUDE.md, the working contract,</text><text x="40" y="241" class="b ink">and AGENTS.md; follows the loop</text>
+<path d="M64 258L64 294" class="edge"/><path d="M64 302L59.8 294L68.2 294Z" class="ink"/><circle cx="64" cy="258" r="2.3" class="ink"/><text x="78" y="284.5" class="s dim">commands</text><path d="M238 302L238 266" class="edge"/><path d="M238 258L242.2 266L233.8 266Z" class="ink"/><circle cx="238" cy="302" r="2.3" class="ink"/><text x="252" y="284.5" class="s dim">files, numbers</text>
+<rect x="16" y="308" width="368" height="172" class="edge card"/><circle cx="16" cy="308" r="2.9" class="ink"/><circle cx="384" cy="308" r="2.9" class="ink"/><circle cx="16" cy="480" r="2.9" class="ink"/><circle cx="384" cy="480" r="2.9" class="ink"/>
+<rect x="16" y="308" width="10" height="172" class="edge code"/>
+<circle cx="26" cy="308" r="2.9" class="ink"/><circle cx="26" cy="480" r="2.9" class="ink"/>
+<text x="40" y="332" class="n ink">The repo</text>
+<text x="372" y="331" class="s ink" text-anchor="end">isoscape</text>
+<text x="40" y="358" class="m ink">regions/&lt;name&gt;.json</text>
+<text x="372" y="358" class="s ink" text-anchor="end">the place: center, size</text>
+<text x="40" y="380" class="m ink">fetch</text>
+<text x="372" y="380" class="s ink" text-anchor="end">downloads into data/</text>
+<text x="40" y="402" class="m ink">build &lt;name&gt; --png</text>
+<text x="372" y="402" class="s ink" text-anchor="end">out/&lt;name&gt;.png</text>
+<text x="40" y="424" class="m ink">out/index.html</text>
+<text x="372" y="424" class="s ink" text-anchor="end">the explorer; C compares</text>
+<text x="40" y="446" class="m ink">npm test</text>
+<text x="372" y="446" class="s ink" text-anchor="end">and npm run typecheck</text>
+<text x="40" y="468" class="m ink">npm run check:visual</text>
+<text x="372" y="468" class="s ink" text-anchor="end">out/check/index.html</text>
+<text x="16" y="504" class="si ink">The loop: change, build, look at the picture,</text>
+<text x="16" y="522" class="si ink">compare with the last build, keep or undo.</text>
+</svg>
