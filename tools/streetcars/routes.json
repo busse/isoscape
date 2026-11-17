@@ -487,7 +487,7 @@
       -77.4135603,
       37.5231405
      ],
-     "offset": 8,
+     "offset": 11,
      "taper": 25,
      "smooth": 10,
      "round": 0.5
@@ -595,6 +595,21 @@
    "sources": [
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
     "https://richmondmagazine.com/news/richmond-history/richmond-trolley-system/"
+   ],
+   "patches": [
+    {
+     "from": [
+      -77.4348224,
+      37.5273223
+     ],
+     "to": [
+      -77.4373864,
+      37.5252096
+     ],
+     "taper": 15,
+     "smooth": 20,
+     "round": 0.5
+    }
    ]
   },
   {
