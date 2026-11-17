@@ -662,10 +662,11 @@ whole**, never trimmed, and the explorer counts how many and why:
   the rest are misplaced by their sheet, and drawn, the deck would pass over their roofs or
   between their walls), or within a meter of the ballast of a track on the ground: 60 in 1925
   and 33 in 1950.
-- **Buried.** Today's ground more than 3 m above its floor under one of its corners, within
-  60 m of a road built after its year (an interstate's cut or fill), or more than 8 m above it
-  anywhere (two stories and more: no building stood cut that deep into a hill): 61 in 1925 and
-  55 in 1950.
+- **Buried.** Today's ground more than 3 m above its floor anywhere under it (read every 2 m
+  over its footprint and along its walls, not only at its corners: a slope can stand above a
+  long wall between two low corners), within 60 m of a road built after its year (an
+  interstate's cut or fill), or more than 8 m above it anywhere (two stories and more: no
+  building stood cut that deep into a hill): 62 in 1925 and 55 in 1950.
 
 The historic buildings are sketches, not a survey. A machine traced them from scans of
 fire-insurance maps, so outlines are approximate, heights are guessed from material, and some

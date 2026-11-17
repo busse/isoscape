@@ -716,7 +716,7 @@ export const buildScene = (
     //   (its deck, `tracedUnderViaduct`) or on the ground (its ballast, `tracedOnTrack`): the
     //   building was cleared for the line (most were mapped before the viaducts of 1901) or
     //   the sheet misplaces it;
-    // - buried: today's ground under one of its corners more than TRACED_BURIED meters above
+    // - buried: today's ground anywhere under it more than TRACED_BURIED meters above
     //   its floor (the level it is seated at), where a later cut or fill (the interstate's)
     //   would bury its walls (`tracedBuried`).
     const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
@@ -752,9 +752,14 @@ export const buildScene = (
       const heights = outer.map((p) => terrain.elevation(p))
       const lo = Math.min(...heights)
       const hi = Math.max(...heights)
-      // Its floor, in meters above sea level: the level `seatLevel` seats it at.
+      // Its floor, in meters above sea level: the level `seatLevel` seats it at (from its
+      // corners, as its walls are drawn).
       const floor = lo + (hi - lo) / (2 * Math.max(1, terrain.exaggeration))
-      const rise = hi - floor
+      // Today's ground is read all over the footprint, not at its corners only: a slope can
+      // stand above a long wall between two low corners, or rise inside a ragged outline.
+      let above = hi
+      for (const p of ringSamples(outer, TRACED_BURIED_STEP)) above = Math.max(above, terrain.elevation(p))
+      const rise = above - floor
       if (!terrain.flat && (rise > TRACED_DEEP || (rise > TRACED_BURIED && works.some((w) => lineNearRing(w, outer, TRACED_WORKS_REACH))))) {
         tracedBuried++
         leftOut.push({ id: b.id, why: 'buried' })
@@ -953,13 +958,15 @@ export const TRACED_VIADUCT_CLEAR = 12
 /** And this far past the edge of a track's ballast on the ground, meters. */
 export const TRACED_TRACK_CLEAR = 1
 /**
- * A traced building with today's ground more than TRACED_BURIED meters above its floor under one
- * of its corners, within TRACED_WORKS_REACH meters of a road built after its year (an
+ * A traced building with today's ground more than TRACED_BURIED meters above its floor anywhere
+ * under it (read every TRACED_BURIED_STEP meters over its footprint and along its walls), within TRACED_WORKS_REACH meters of a road built after its year (an
  * interstate's cut or fill), or more than TRACED_DEEP meters anywhere (two storeys and more: no
  * building stood cut that deep into a hill, so the ground was moved since or the sheet misplaces
  * it), is buried: left out.
  */
 export const TRACED_BURIED = 3
+/** How far apart today's ground is read over a traced building's footprint for `TRACED_BURIED`, meters. */
+export const TRACED_BURIED_STEP = 2
 export const TRACED_WORKS_REACH = 60
 export const TRACED_DEEP = 8
 
