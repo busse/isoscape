@@ -607,6 +607,9 @@ Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
    filling under 45% of their convex hull: river shading, not buildings) and merges footprints
    traced in two editions that overlap by more than 85%, keeping the earlier start and the later
    end (`clean.py`: 68 dropped, 170 merged).
+5. **Draw.** A lost building whose middle falls on water mapped today (the river, a canal of the
+   year) is left out: there the sheet's fit is off at the shore, and drawn it would stand in the
+   river.
 
 The historic buildings are sketches, not a survey. A machine traced them from scans of
 fire-insurance maps, so outlines are approximate, heights are guessed from material, and some

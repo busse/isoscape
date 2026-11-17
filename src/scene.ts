@@ -690,10 +690,17 @@ export const buildScene = (
     }
     // Buildings traced from fire-insurance maps that are gone today, in the maps' colors.
     const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
+    let tracedOnWater = 0
     for (const b of time.history.traced) {
       if (!alive(b.from, b.to, time.year)) continue
       const outer = orient(simplifyRing(toViewRing(view, b.ring), 0.3), true)
       if (outer.length < 3 || !outer.every((p) => insideRect(p, frame))) continue
+      // A traced building whose middle falls on water mapped today (a sheet fitted a little off
+      // at the shore) would stand in the river: it is left out, like a model's house on water.
+      if (onWater(sc, centroid(outer))) {
+        tracedOnWater++
+        continue
+      }
       const grounds = outer.map((p) => terrain.z(p))
       const base = Math.min(...grounds)
       const top = Math.max(seatLevel(grounds, terrain.exaggeration) + b.storeys * 3.6, base + 2.5)
@@ -705,6 +712,7 @@ export const buildScene = (
     stats.tracedEndRebuilt = ends.rebuilt
     stats.tracedEndHighway = ends.highway
     stats.tracedEndAssumed = ends.assumed
+    if (tracedOnWater > 0) stats.tracedOnWater = tracedOnWater
     stats.curated = curated.length
   }
 
