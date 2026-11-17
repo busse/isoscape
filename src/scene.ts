@@ -518,6 +518,7 @@ export const buildScene = (
   // step where they meet. A node it shares with another deck moves with it, so the decks still
   // join. `true` for every such deck, or a list of the decks' ids.
   const onLine = time?.history.carDeckOnLine
+  const deckOnLine = new Set<string>()
   if (onLine !== undefined && onLine !== false) {
     const runs = placedRuns.map((r) => r.pts)
     const moved = new Map<string, Vec2>()
@@ -529,6 +530,7 @@ export const buildScene = (
       if (run === null) return
       for (const [j, p] of pts.entries()) moved.set(`${f.points[j][0].toFixed(7)},${f.points[j][1].toFixed(7)}`, view.fromView(nearestOn(p, run)))
       snapped.add(i)
+      deckOnLine.add(f.id)
     })
     if (snapped.size > 0) {
       extraStats.carDecksOnLine = snapped.size
@@ -1146,7 +1148,8 @@ export const buildScene = (
   const towers = suspensionTowers(view, chains, towerParts)
   const lines = groupDecks(chains, joinDecks(chains, chains.map((c, i) => (fix?: { start?: number; end?: number }) => deckLine(view, region, terrain, c, ends[i], fix, time !== undefined && time.year < time.history.present))), region.groupRailDecks === true)
   for (let c = 0; c < chains.length; c++) {
-    const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }) } : undefined)
+    const onLineDeck = deckOnLine.size > 0 && deckOnLine.has(chains[c].line.id)
+    const pieces = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }), ...(onLineDeck ? { onLine: true } : {}) } : undefined)
     spans += pieces.filter((p) => p.pier !== true).length
     items.push(...pieces)
   }
@@ -2624,7 +2627,7 @@ const deckLine = (
 const bridgePieces = (
   view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain,
   dl: DeckLine, roofs: readonly Roof[] = [], towers?: readonly Tower[],
-  trams?: { readonly runs: readonly (readonly Vec2[])[]; readonly width: number; readonly deck?: number },
+  trams?: { readonly runs: readonly (readonly Vec2[])[]; readonly width: number; readonly deck?: number; readonly onLine?: boolean },
 ): Item[] => {
   const spacing = pierSpacing(region, chain)
   const line = chain.line
@@ -2752,8 +2755,10 @@ const bridgePieces = (
           // On a deck the line is its track, TRAM_ON_DECK of its width on the ground (and no
           // wider than the deck), so the deck still reads as a bridge carrying it.
           const tw = fullTram ? Math.min(trams.width, width) / 2 : Math.min(trams.width * TRAM_ON_DECK, width - 1) / 2
-          // Full width, each piece laps a meter onto the next, past the deck's sealing stroke.
-          const tq = segmentQuad(p0, p1, tw, tw, fullTram ? 1 : 0.3)
+          // Full width, each piece laps a meter onto the next, past the deck's sealing stroke;
+          // on a deck laid on the line's own center line (carDeckOnLine) the pieces meet end to
+          // end, so no piece's band covers the last one's edge strokes.
+          const tq = segmentQuad(p0, p1, tw, tw, fullTram ? (trams.onLine === true ? 0 : 1) : 0.3)
           if (tq !== null) shapes.push({ pts: [view.toScreen(tq[0], z0), view.toScreen(tq[1], z1), view.toScreen(tq[2], z1), view.toScreen(tq[3], z0)], fill: pal.tram, seal: true })
           // A car on the deck: one at the piece nearest each TRAM_SPACING along the line's run
           // over the bridge (the ground's cars stop at the deck).
