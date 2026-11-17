@@ -719,8 +719,8 @@ Past years look at their neighbors once more:
 - a road bridge whose spans do not meet a road of the year at each of their ends (a tunnel
   does not count: it is not drawn) is left out: a piece of deck whose approaches came later;
 - a bed of scrub, wood, grass or heath, or a pond, under 2,000 m² and unnamed is landscaping,
-  dated with the nearest dated building within 40 m (the development around it), and not
-  drawn when none stands that near;
+  dated with the nearest dated building within 40 m (the development around it); with none that
+  near it is natural ground (a thicket on a river island) and is drawn in every year;
 - a rail spur, siding or yard track that ends with no building of the year within 40 m of its
   end is left out (and the spurs that only led to it): today's spurs serve today's buildings;
 - a rail deck's grounded end sits on the ground there, where its track runs on, not on the

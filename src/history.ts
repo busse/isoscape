@@ -653,8 +653,9 @@ const PLANTING = new Set(['scrub', 'wood', 'grassland', 'heath', 'water'])
  *   approaches came later, or that leads into nothing drawn.
  * - Planting beds and ponds: a polygon of scrub, wood, grassland, heath or still water (no name,
  *   no waterway) under `small` m² is landscaping, dated with the nearest dated building within
- *   `reach` meters (the development around it): drawn only from that building's year, and
- *   never in a past year when no dated building stands that near.
+ *   `reach` meters (the development around it): drawn only from that building's year. With no
+ *   dated building that near it is not part of a development (a thicket on a river island) and
+ *   is kept.
  *
  * - A rail spur, siding or yard track that ends with no building of the year within `reach`
  *   meters of its end is left out, and so on back along the spurs that led only to it: today's
@@ -750,7 +751,8 @@ export const pastGround = (
       const d = Math.min(gap(ring, b.ring), gap(b.ring, ring))
       if (d <= reach && (nearest === null || d < nearest.d)) nearest = { d, year: b.year }
     }
-    if (nearest !== null && nearest.year <= year) return true
+    // With no building that near, it is not part of a development: natural ground, kept.
+    if (nearest === null || nearest.year <= year) return true
     plantings++
     return false
   })
