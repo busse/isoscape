@@ -5,6 +5,7 @@
  "subtitle": "Richmond's union station at its wartime height, and the railroads that ran from it",
  "note": "Track is today's, dated by the era rules, with the station loop traced from the USGS quadrangles of 1934 and 1956; the station is modeled from its plans, postcards and the 1925 Sanborn sheets, its heights approximate. Buildings are today's that stood by 1943, by the city's recorded year built, with lost ones traced from the 1925 Sanborn sheets, their outlines and heights approximate. Trains are illustrative.",
  "credit": "isoscape by Chris Busse  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Buildings dated from City of Richmond assessor records and traced from Sanborn maps (Library of Congress)  ·  Station loop after the USGS Richmond quadrangles of 1934 and 1956",
+ "ground_note": "The ground is today’s, from lidar: cuts and fills made since (the interstates, the Downtown Expressway, the floodwall) show in it.",
  "map": {
   "region": "broad-street-lines",
   "year": 1943

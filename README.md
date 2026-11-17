@@ -610,8 +610,9 @@ fourteen places they ran to.
    ("Over the Fifth Street viaduct and round the loop…") and then says what became of the place.
    American spelling. A box with no source does not go in.
 3. **The set file**, `sets/<name>.json`: `slug` (the print files' prefix), `title`, `subtitle`,
-   `note` (what is approximate), `credit`, `map` (`region`, `year`), `boxes`, an optional
-   `key` (up to sixteen names in the title band, from a list in a JSON file), optional `fine`
+   `note` (what is approximate), `credit`, `ground_note` (for a dated set, that the ground is
+   today's), `map` (`region`, `year`), `boxes`, an optional
+   `key` (up to sixteen names in the title band, from a list in a JSON file, set as a plain list), optional `fine`
    (extra `build` flags for the single prints, e.g. `["--streetcar-scale", "1.5"]`), and `page`
    (`slug`, `title`, `summary`, `intro`, `how`, `noun`, and an optional `table`).
 4. **Scenes**, where the region's data is cached: `python3 tools/sets/set.py <name> prepare`

@@ -853,6 +853,17 @@ written from the sources stored beside it. The same tool makes the map alone, a 
 `isoscape locate` tells it where each box falls in the picture. A set is one file,
 `sets/<name>.json`; "Making a set" in the README walks through one.
 
+Every window shows only the drawn plate: the part drawn edge to edge, measured without the
+slab's front face, so no paper and no tan band shows inside a frame; a box asked for more
+ground than that is drawn smaller to fit, and the big map is cut from the same part, moved up
+or down so every stop's marker stays inside. Every line of text is at least 7 pt at the
+smallest size each print is sold at (a 24 × 18 in stop print at 16 × 12, the 32 × 24 in sheet
+at 24 × 18, the 36 × 24 in map at 18 × 12, so 10.5, 9.3 and 14 pt on the files), lines are
+wrapped as evenly as they go so no word stands alone, and the corner the title block takes on
+any face cut from a file is kept clear. Markers that would overlap are moved apart with a short
+leader to their place; two-digit numbers are set smaller to fit their rings. A set's prints
+carry the dated series' ground note: the ground is today's, from lidar.
+
 **What the series cannot show:**
 
 - **Survivorship.** Only buildings standing today are measured. Downtown Richmond in 1900 had
