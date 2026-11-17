@@ -708,7 +708,8 @@ anything else with no dated rule (parks, cemeteries, dams and weirs, piers, basi
 drawn only today, since nothing says when it was made. Each catch-all names what still needs a
 source. Railways out of use or taken up today (`abandoned`, `disused`, `razed`) are drawn
 today only, unless a rule dates one from a source (the Richmond and Petersburg bridge over the
-James, 1902–1970): their fragments end in open ground. Roundabouts appear from 1990, when the
+James, 1902–1970, with its approach to Byrd Street Station curated as approximate track, since
+nothing of it is mapped today): their fragments end in open ground. Roundabouts appear from 1990, when the
 modern roundabout came to the United States, and unnamed service roads of no particular kind
 (the drives and rings of parking lots) with surface parking, from 1960; both are approximate.
 

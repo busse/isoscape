@@ -366,6 +366,47 @@
    "sources": [
     "https://sah-archipedia.org/node/285"
    ]
+  },
+  {
+   "id": "rp-byrd-street-approach",
+   "name": "Richmond and Petersburg (Atlantic Coast Line) approach to Byrd Street Station",
+   "kind": "rail",
+   "from": 1902,
+   "to": 1971,
+   "line": [
+    [
+     -77.4414897,
+     37.5342633
+    ],
+    [
+     -77.4413478,
+     37.5347189
+    ],
+    [
+     -77.4411868,
+     37.535131
+    ],
+    [
+     -77.4410028,
+     37.535543
+    ],
+    [
+     -77.4408304,
+     37.5360008
+    ],
+    [
+     -77.4407039,
+     37.5363671
+    ]
+   ],
+   "note": "The track from the north end of the Richmond and Petersburg bridge (OSM w710689016) across the Haxall Canal into Byrd Street Station at Seventh and Byrd Streets, the R&P's original Richmond station and later the Atlantic Coast Line's headquarters, closed in 1958. Today nothing of it is mapped north of the bridge. Approximate: one track along the middle of the station's throat, read by eye from the USGS 1:24,000 Richmond quadrangles of 1934 and 1956 (which show the line crossing the canal and fanning into the station yard between Seventh and Eighth Streets south of Byrd) and joined to the bridge's mapped end, about 20 m east of where the maps put it. Drawn with the bridge, 1902 to 1970; the years are the bridge's, not the track's.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge",
+    "https://en.wikipedia.org/wiki/Byrd_Street_Station",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+   ],
+   "confidence": "approximate"
   }
  ],
  "rules": [
