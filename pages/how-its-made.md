@@ -1066,6 +1066,8 @@ and the big map draws yard and siding track at its own width, not four times it.
 of the station's front leaves out the cars and ramp houses under its shed roofs, and starts the
 head house's wings at the mound's level along Broad Street (65.6 m), where the ground behind
 falls about 5 m to the tracks.
+Where two rail decks run into one another at nearly one level (within 2 m), the shorter deck's
+pieces lying on the longer one are left out, so converging viaducts read as one deck.
 
 **What the series cannot show:**
 
