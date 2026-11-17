@@ -523,19 +523,20 @@ export const renderSvg = (scene: Scene): Rendered => {
     })
     const out: Vec2[][] = []
     for (const seg of segs) {
+      // Runs are kept whole (their dash pattern unbroken) except where they pass under a line.
+      let cur: Vec2[] = []
       for (let i = 0; i + 1 < seg.length; i++) {
         const a = seg[i], b = seg[i + 1]
         const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 2))
-        let cur: Vec2[] = []
         for (let k = 0; k < n; k++) {
           const p: Vec2 = [a[0] + ((b[0] - a[0]) * k) / n, a[1] + ((b[1] - a[1]) * k) / n]
           const q: Vec2 = [a[0] + ((b[0] - a[0]) * (k + 1)) / n, a[1] + ((b[1] - a[1]) * (k + 1)) / n]
-          if (near([(p[0] + q[0]) / 2, (p[1] + q[1]) / 2])) { if (cur.length >= 2) out.push(cur); cur = []; continue }
+          if (near([(p[0] + q[0]) / 2, (p[1] + q[1]) / 2])) { if (cur.length > 0) cur.push(p); if (cur.length >= 2) out.push(cur); cur = []; continue }
           if (cur.length === 0) cur.push(p)
-          cur.push(q)
+          if (k === n - 1) cur.push(q)
         }
-        if (cur.length >= 2) out.push(cur)
       }
+      if (cur.length >= 2) out.push(cur)
     }
     return out
   }
