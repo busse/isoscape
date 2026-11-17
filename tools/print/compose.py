@@ -247,14 +247,25 @@ def credit_column(d, design, W, H, m, by, band, dpi, scale, least, sf, faces):
     col = right - left
     lines = []
     for ln in [x for x in wrap(d, CREDIT, cf, col) if x]:
-        lines += [(w, cf) for w in (wrap_words(d, ln, cf, col) if d.textlength(ln, font=cf) > col else [ln])]
-    note = [(w, nf) for w in wrap_words(d, design['note'], nf, col)] if design.get('note') else []
+        lines += [(w, cf) for w in (balanced(d, ln, cf, col) if d.textlength(ln, font=cf) > col else [ln])]
+    note = [(w, nf) for w in balanced(d, design['note'], nf, col)] if design.get('note') else []
     ly, lead = by + band * 0.15, size * 1.35
     if ly + lead * (len(lines) + len(note) - 1) + size * 1.1 + (size * 0.35 if note else 0) > H - m:
         raise ValueError(f"{design['title']}: the credit at {size} px needs more room than the band has")
     for i, (ln, f) in enumerate(lines + note):
         if note and i == len(lines): ly += size * 0.35
         d.text((right - d.textlength(ln, font=f), ly), ln, font=f, fill=DIM); ly += lead
+
+
+def balanced(d, text, font, max_w):
+    """Words wrapped into as few lines as fit max_w, as even in length as they can be (no word
+    left alone on a last line)."""
+    n, lo, hi = len(wrap_words(d, text, font, max_w)), 0.0, max_w
+    while hi - lo > 4:
+        mid = (lo + hi) / 2
+        if len(wrap_words(d, text, font, mid)) <= n: hi = mid
+        else: lo = mid
+    return wrap_words(d, text, font, hi)
 
 
 def wrap_words(d, text, font, max_w):

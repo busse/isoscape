@@ -48,5 +48,19 @@ class SmallestSize(unittest.TestCase):
         self.assertAlmostEqual(C.block_reserve(36, 300, faces=[36, 18]), (titleblock.WIDTH + titleblock.H * 0.5) * u18 * 2)
 
 
+class Balanced(unittest.TestCase):
+    def test_no_word_is_left_alone(self):
+        from PIL import Image, ImageDraw, ImageFont
+        d = ImageDraw.Draw(Image.new('RGB', (4, 4)))
+        f = ImageFont.truetype(C.FONT['italic'], 40)
+        text = 'The ground is today’s, from lidar: cuts and fills made since show in it.'
+        w = d.textlength(text, font=f) - d.textlength(' it.', font=f) + 2   # greedy leaves "it." alone
+        self.assertEqual(C.wrap_words(d, text, f, w)[-1], 'it.')
+        got = C.balanced(d, text, f, w)
+        self.assertEqual(len(got), 2)
+        self.assertGreater(min(len(x) for x in got), 20)
+        self.assertEqual(' '.join(got), text)
+
+
 if __name__ == '__main__':
     unittest.main()
