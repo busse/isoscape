@@ -330,6 +330,8 @@ export interface History {
    * later works. Off unless set.
    */
   readonly streetEnds?: number
+  /** The street at either end of a curated bridge of the year is kept to it (`dropApproaches`, `mendStreets`). */
+  readonly bridgeAnchors?: boolean
   /** Keep the whole of a street, by name, that leads onto a road bridge (`dropUnbuiltStreets`'s `follow`). */
   readonly bridgeStreets?: boolean
   /**
@@ -402,6 +404,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.bridgeStreets === undefined ? {} : { bridgeStreets: raw.bridgeStreets }),
     ...(raw.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: raw.bridgesClearTraced }),
     ...(raw.streetEnds === undefined ? {} : { streetEnds: raw.streetEnds }),
+    ...(raw.bridgeAnchors === undefined ? {} : { bridgeAnchors: raw.bridgeAnchors }),
     ...(raw.switches === undefined ? {} : { switches: raw.switches }),
   }
 }
@@ -943,7 +946,7 @@ export const dateGrounds = (features: readonly Feature[], parcels: readonly Parc
  * nodes no other drawn street touches, up to the first junction. With them gone the street ends
  * at that junction, not in a stub pointing at a bridge that is not there.
  */
-export const dropApproaches = (all: readonly Feature[], kept: readonly Feature[]): { kept: Feature[]; dropped: number } => {
+export const dropApproaches = (all: readonly Feature[], kept: readonly Feature[], anchors: ReadonlySet<string> = new Set()): { kept: Feature[]; dropped: number } => {
   const isRoad = (f: Feature): f is Extract<Feature, { type: 'line' }> => f.type === 'line' && f.tags.highway !== undefined
   const keptIds = new Set(kept.map((f) => f.id))
   const key = (p: Vec2) => `${p[0]},${p[1]}`
@@ -961,6 +964,8 @@ export const dropApproaches = (all: readonly Feature[], kept: readonly Feature[]
     for (const end of [b.points[0], b.points[b.points.length - 1]]) {
       let node = key(end)
       for (let guard = 0; guard < 50; guard++) {
+        // A curated bridge of the year lands here: the street goes on to it.
+        if (anchors.has(node)) break
         const here = (at.get(node) ?? []).filter((f) => !gone.has(f))
         if (here.length !== 1) break
         const w = here[0]
@@ -989,7 +994,7 @@ export const dropApproaches = (all: readonly Feature[], kept: readonly Feature[]
 export const ENDS_REACH = 250
 
 export const mendStreets = (
-  all: readonly Feature[], kept: readonly Feature[], unbuilt: ReadonlySet<string>, gap: number,
+  all: readonly Feature[], kept: readonly Feature[], unbuilt: ReadonlySet<string>, gap: number, anchors: ReadonlySet<string> = new Set(),
 ): { kept: Feature[]; mended: number; ends: number } => {
   type Line = Extract<Feature, { type: 'line' }>
   const isRoad = (f: Feature): f is Line => f.type === 'line' && f.tags.highway !== undefined
@@ -1043,7 +1048,7 @@ export const mendStreets = (
       if (!keep.has(f.id) || (f.tags.bridge !== undefined && f.tags.bridge !== 'no')) continue
       for (const end of [f.points[0], f.points[f.points.length - 1]]) {
         const others = (byNode.get(key(end)) ?? []).filter((o) => o !== f)
-        if (others.length === 0 || others.some((o) => keep.has(o.id))) continue
+        if (others.length === 0 || others.some((o) => keep.has(o.id)) || anchors.has(key(end))) continue
         const from = others.filter((o) => later.has(o.id)).map((o) => back.get(o.id) ?? 0)
         if (from.length === 0) continue
         const d = Math.min(...from) + len(f)

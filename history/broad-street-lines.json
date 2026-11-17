@@ -39054,5 +39054,6 @@
  "vergeShare": 0.5,
  "bridgeStreets": true,
  "vergeFill": 15,
- "streetEnds": 200
+ "streetEnds": 200,
+ "bridgeAnchors": true
 }

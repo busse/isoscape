@@ -144,6 +144,10 @@ export const buildScene = (
 ): Scene => {
   const time = extra.time
   const curated = time === undefined ? [] : time.history.features.filter((h) => alive(h.from, h.to, time.year))
+  // The ends of the year's curated bridges (bridgeAnchors): the streets they land on stay.
+  const anchors = new Set<string>(time?.history.bridgeAnchors === true
+    ? curated.filter((h) => h.kind === 'bridge' && h.line !== undefined && h.line.length >= 2).flatMap((h) => [h.line![0], h.line![h.line!.length - 1]].map((p) => `${p[0]},${p[1]}`))
+    : [])
   let later = { atGrade: 0, verges: 0 }
   const extraStats: Record<string, number> = {}
   // Traced buildings left out, and why (for `info` and checks; not drawn).
@@ -165,7 +169,7 @@ export const buildScene = (
       // A bridge left with an end in the air goes too, and then the ways leading only to it.
       let approaches = 0, orphans = 0
       for (let round = 0; round < 3; round++) {
-        const a = dropApproaches(all, features)
+        const a = dropApproaches(all, features, anchors)
         const o = dropOrphanBridges(a.kept)
         features = o.kept
         approaches += a.dropped
@@ -210,7 +214,7 @@ export const buildScene = (
     if (time.history.streetEnds !== undefined) {
       const keptNow = new Set(r.kept)
       const unbuilt = new Set(features.filter((f) => !keptNow.has(f)).map((f) => f.id))
-      const m = mendStreets(extraAll ?? features, r.kept, unbuilt, time.history.streetEnds)
+      const m = mendStreets(extraAll ?? features, r.kept, unbuilt, time.history.streetEnds, anchors)
       r.kept = m.kept
       if (m.mended) extraStats.streetsMended = m.mended
       if (m.ends) extraStats.streetEndsLater = m.ends
