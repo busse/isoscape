@@ -1,5 +1,5 @@
 {
-  "title": "Main Street Station, about 1952: the head house cut down the middle, the shed opened",
+  "title": "Main Street Station, about 1952: the head house cut through the waiting rooms, the shed opened",
   "data": "richmond-i195-rocketts",
   "center": [
     -77.4293195,
@@ -29,8 +29,8 @@
   },
   "cutaway": {
     "through": [
-      -77.4295222,
-      37.5342578
+      -77.4294417,
+      37.5342095
     ],
     "bearing": 36.9,
     "remove": "right",
@@ -39,8 +39,6 @@
     "parts": "mss-h-",
     "lift": [
       "^history:mss-s-roof-e-[0-3]$",
-      "^history:mss-h-stair-wall-e$",
-      "^history:mss-h-floor-first-1$",
       "^history:mss-h-ell-roof$",
       "^history:mss-s-taper-roof$",
       "^history:mss-s-louver-e-[0-3]$"
@@ -69,19 +67,19 @@
           9.35
         ],
         [
-          4.2,
+          6.0,
           9.35
         ],
         [
-          10.2,
+          11.34,
           12.6
         ],
         [
-          12.0,
+          12.95,
           12.6
         ],
         [
-          18.0,
+          19.0,
           15.85
         ],
         [
@@ -98,6 +96,11 @@
         {
           "s": 2.0,
           "floor": 8.4,
+          "facing": 1
+        },
+        {
+          "s": 16,
+          "floor": 14.9,
           "facing": 1
         },
         {
@@ -122,8 +125,24 @@
       },
       {
         "at": [
-          -77.4293685,
-          37.5344484
+          -77.4294699,
+          37.5342547
+        ],
+        "floor": 8.4,
+        "facing": 1
+      },
+      {
+        "at": [
+          -77.4294325,
+          37.5342945
+        ],
+        "floor": 14.9,
+        "facing": 1
+      },
+      {
+        "at": [
+          -77.429344,
+          37.5344337
         ],
         "floor": 14.9,
         "facing": 1

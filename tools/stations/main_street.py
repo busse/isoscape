@@ -15,10 +15,11 @@ HAER VA-4's plan (sheet 2) puts the first truss: 63 ft of head house, a 35-ft co
 a 31-ft taper. The train shed is drawn from HAER VA-4's measured drawings (1970): its trusses,
 columns, brackets and monitors traced from the cross section (sheet 3, at 1/8 in = 1 ft), its
 tracks and platforms from the same section, its bays (18 ft) and longitudinal bracing from the
-plan and side elevation (sheet 2). The head house's floors and rooms come from the written
-description of HABS VA-848 (1969) and the 1970 National Register nomination; no plan or section
-of it is known, so its room layout and heights are approximate: heights are scaled from HABS
-and Detroit Publishing photographs against the published 110-ft tower and the 102-ft front.
+plan and side elevation (sheet 2). The head house's rooms on its two public floors are traced
+from the architects' plans in The Railroad Gazette of July 13, 1900, which The Times of November
+24, 1901 describes as built; its floors' levels follow that article's section; its upper floors,
+of which no plan was found, follow HABS VA-848 (1969); its stonework, dormers and tower are
+scaled from photographs (HABS, Detroit Publishing) against the 110-ft tower and the 102-ft front.
 
     python3 tools/stations/main_street.py   # writes history/main-street-station.json
 
@@ -103,6 +104,17 @@ SRC = {
     'obs-1952': 'https://streamlinerschedules.com/concourse/track2/orangeblossom195212.html',
     'gw': 'https://en.wikipedia.org/wiki/George_Washington_(train)',
     'gw-diesel': 'https://trainweb.us/fredatsf/C&OGW50.htm',
+    'rg-1900': 'https://archive.org/details/sim_railway-age_1900-07-13_32_28',
+    'times-1901': 'https://www.loc.gov/resource/sn85034438/1901-11-24/ed-1/?sp=1&st=text',
+    'sanborn-1905': 'https://www.loc.gov/item/sanborn09064_003/',
+    'sanborn-1952': 'https://www.loc.gov/item/sanborn09064_016/',
+    'haer-photo-10': f'{LOC}/service/pnp/habshaer/va/va0800/va0897/photos/215883pv.jpg',
+    'habs-photo-11': f'{LOC}/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg',
+    'habs-photo-a1': f'{LOC}/service/pnp/habshaer/va/va1800/va1805/photos/305475pv.jpg',
+    'detroit-nw': 'https://www.loc.gov/item/2016818689/',
+    'odc-1950': 'https://richmondrailroadmuseum.com/main-street-station',
+    'co-306-1953': 'https://piedmontsub.com/Richmond.shtml',
+    'sal-e8-1955': 'https://www.railpictures.net/photo/243833',
 }
 
 # ---- levels (meters above sea level) --------------------------------------------------------
@@ -396,23 +408,61 @@ for side, t in (('w', 'w'), ('e', 'e')):
         part(f'mss-d-bridge-{side}-{g}', 'Main Street Station: bridge over Main Street', rect(x - 0.3, x + 0.3, -27.0, -2.0), DECK_BOTTOM - 1.2, DECK_BOTTOM, 'steel', 'written',
              'A plate girder of the bridge that carries the track over Main Street (HABS VA-848). Its depth is approximate.', [SRC['habs-data'], SRC['habs-photo-1971']])
 
+# ---- on the platforms: carts, lamps, railings -------------------------------------------------
+CART = ('A four-wheel baggage cart on the platform, as photographs of about 1950 and 1969 show them here (Old Dominion Chapter NRHS, J. I. Kelly, '
+        'about 1950; HABS VA-848-A-1). Size approximate.')
+for k, (x0, b0) in enumerate(((56.0, SHED_B0 + 3.0), (56.0, SHED_B0 + 7.0), (27.0, SHED_B0 + 14.0))):
+    a0 = xa(x0)
+    part(f'mss-d-cart-{k}', 'Main Street Station: baggage cart', rect(a0, a0 + 1.1, b0, b0 + 3.0), FF + 0.45, FF + 0.75, 'wood', 'written', CART,
+         [SRC['odc-1950'], SRC['habs-photo-a1']])
+    for j, (u0, u1) in enumerate(((0.3, 0.6), (2.4, 2.7))):
+        part(f'mss-d-cart-{k}-wheels-{j}', 'Main Street Station: baggage cart', rect(a0 + 0.05, a0 + 1.05, b0 + u0, b0 + u1), FF, FF + 0.45, 'coal', 'written', CART,
+             [SRC['odc-1950'], SRC['habs-photo-a1']])
+    part(f'mss-d-cart-{k}-rack', 'Main Street Station: baggage cart', rect(a0, a0 + 1.1, b0, b0 + 0.08), FF + 0.75, FF + 1.6, 'wood', 'written', CART,
+         [SRC['odc-1950'], SRC['habs-photo-a1']])
+# Along the east trestle beside the head house: its lattice railing and gooseneck lamps.
+RAIL = ('The iron railing along the outer edge of the trestle\'s deck beside the head house, of crossed bars (HABS photographs VA-848-11 and '
+        'VA-848-A-1; Detroit Publishing 4a10737). Its pattern\'s size is approximate.')
+a_e = xa(TRACKS['e']) + 2.4
+ln = B_GATE + 27.0
+lat = [[0, 0.05, round(ln, 3), 0.05, 0.08], [0, 1.05, round(ln, 3), 1.05, 0.1]]
+u = 0.0
+while u < ln - 0.5:
+    lat += [[round(u, 3), 0.1, round(u + 0.5, 3), 1.0, 0.035], [round(u, 3), 1.0, round(u + 0.5, 3), 0.1, 0.035]]
+    if round(u / 0.5) % 6 == 0:
+        lat.append([round(u, 3), 0, round(u, 3), 1.1, 0.08])
+    u += 0.5
+part('mss-d-rail-e', 'Main Street Station: railing', plane(a_e - 0.06, -27.0, a_e - 0.06, B_GATE, 0.06), FF, FF + 1.1, 'iron', 'written', RAIL,
+     [SRC['habs-photo-11'], SRC['habs-photo-a1'], SRC['detroit-east']], shape='frame', members=lat)
+LAMP = ('A gooseneck lamp on the platform beside the head house (HABS photograph VA-848-11, 1971; VA-848-A-1, 1969). Present in 1952 is likely, '
+        'not recorded. Places approximate.')
+for k, b in enumerate((-20.0, 4.0, 18.0)):
+    a = a_e - 0.35
+    part(f'mss-d-lamp-{k}', 'Main Street Station: lamp', plane(a, b, a, b + 1.0, 0.12), FF, FF + 4.4, 'iron', 'approximate', LAMP,
+         [SRC['habs-photo-11'], SRC['habs-photo-a1']], shape='frame', members=[[0.06, 0, 0.06, 4.3, 0.12], [0.06, 4.3, 0.7, 4.3, 0.08], [0.55, 3.95, 0.9, 3.95, 0.3]])
+
 # ---- trains, about 1952 -----------------------------------------------------------------------
 # The train lines: kind 'rail' with an elevation, so the trains stand on the deck and no track
-# is drawn on the ground. Which railroad used which stub track is not known.
-def rail_line(t, b0, b1, train, note):
+# is drawn on the ground. The Seaboard used the west side, the C&O the east (the site plan in The
+# Railroad Gazette, 1900; Sanborn 1905 and 1952); which stub track each train used is not known.
+def rail_line(t, b0, b1, train, note, sources):
     a = xa(TRACKS[t])
     line = [lonlat(ab(a, b)) for b in (b0, (b0 + b1) / 2, b1)]
     features.append({'id': f'mss-track-{t}', 'name': 'Main Street Station: train', 'kind': 'rail', 'from': 1901, 'to': 1985, 'line': line,
-                     'elevation': DECK + 0.2, 'train': train, 'note': note,
-                     'sources': [SRC['obs-1952'], SRC['gw'], SRC['gw-diesel'], SRC['haer-3']]})
+                     'elevation': DECK + 0.2, 'train': train, 'note': note, 'sources': sources})
 
 
-TRAIN_NOTE = ('A train standing at a platform: heavyweight coaches in Pullman green. The consist is illustrative; both railroads ran '
-              'named trains through the station about 1952 (the Seaboard\'s Orange Blossom Special, December 1952; the C&O\'s George Washington).')
-rail_line('5', B_STUB + 1.0, B_END + 60, {'cars': 3, 'at': 0, 'power': 'diesel'},
-          TRAIN_NOTE + ' The diesel unit at its head is a plain generic one: the C&O\'s George Washington ran behind diesels from 1950 (TrainWeb, after Millard), but no source gives this train\'s engine.')
-rail_line('2', B_STUB + 1.0, B_END + 60, {'cars': 3, 'at': 3.0, 'engine': False}, TRAIN_NOTE)
-rail_line('6', B_STUB + 1.0, B_END + 60, {'cars': 3, 'at': 0.5, 'engine': False}, TRAIN_NOTE)
+SIDES = [SRC['rg-1900'], SRC['sanborn-1952'], SRC['haer-3']]
+CO = ('A Chesapeake and Ohio passenger train: a 4-6-4 steam engine of the C&O\'s L-2 class and cars in the C&O\'s blue, with a yellow band '
+      'along the top and gray below, as a dated color photograph shows one just north of the station on February 25, 1953 (piedmontsub.com, '
+      'L. Z. Daily). The engine and cars are drawn plain; the number of cars is illustrative.')
+rail_line('5', B_STUB + 1.0, B_END + 60, {'cars': 3, 'at': 0, 'livery': 'co'}, CO, [SRC['co-306-1953']] + SIDES)
+rail_line('6', B_STUB + 1.0, B_END + 60, {'cars': 3, 'at': 0.5, 'engine': False, 'livery': 'co'},
+          'C&O passenger cars at a platform, in the blue, yellow and gray of the 1953 photograph (piedmontsub.com). Illustrative.', [SRC['co-306-1953']] + SIDES)
+SAL = ('A Seaboard Air Line passenger train: a streamlined diesel unit, drawn plain in gray, and heavyweight cars in Pullman green. A 1955 '
+       'photograph records the Seaboard\'s E8 diesels at its Richmond station (RailPictures.net, N. Plagens); none opened shows the engine '
+       'of a Seaboard train here in 1952, so engine and colors are approximate. The Orange Blossom Special called in December 1952 (Official Guide).')
+rail_line('2', B_STUB + 1.0, B_END + 60, {'cars': 3, 'at': 0, 'power': 'diesel'}, SAL, [SRC['sal-e8-1955'], SRC['obs-1952']] + SIDES)
 
 # ---- the city: era rules and dates from the downtown series ---------------------------------
 dt = json.loads(DOWNTOWN.read_text())
@@ -432,11 +482,11 @@ dates = [
 history = {
     'title': 'Main Street Station, about 1952',
     'method': ('The station is modeled from curated parts: the train shed from HAER VA-4\'s measured drawings (1970), traced from '
-               'the cross section and the plan; the head house\'s massing fitted to OpenStreetMap, its floors from the written '
-               'description of HABS VA-848 (1969) and the National Register nomination (1970), its heights scaled from photographs. '
-               'No plan of the head house is known: its rooms are placed approximately. No other building stands in the frame; '
-               'the streets and today\'s OSM features follow the downtown series\' era rules (no I-95 before 1958). '
-               'Trains are illustrative. Every part names its sources.'),
+               'the cross section and the plan; the head house\'s rooms on its two public floors traced from the plans in The Railroad '
+               'Gazette (July 13, 1900), which The Times (November 24, 1901) describes as built, fitted to OpenStreetMap\'s outline; its '
+               'upper floors from HABS VA-848 (1969); its heights and stonework scaled from photographs. Uses of the rooms in 1952 are '
+               'not all recorded. No other building stands in the frame; the streets and today\'s OSM features follow the downtown '
+               'series\' era rules (no I-95 before 1958). Trains follow dated photographs where one was found. Every part names its sources.'),
     'present': 2026,
     'about': ('Main Street Station, the Union Station of the Seaboard Air Line and the Chesapeake and Ohio, opened on 27 November 1901 '
               '(HABS VA-848). The Seaboard left for Broad Street Station in 1959.'),

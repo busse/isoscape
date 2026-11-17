@@ -767,8 +767,9 @@ each other and are left unordered; footprints that overlap by up to 3 cm, the ro
 their corners, count as apart. Cars and canopy runs are cut into pieces at most 7 m long, drawn
 without seams, so each piece takes its own place among the stairs and the deck it passes.
 
-In a cutaway, coaches are solid Pullman-green bodies under a darker arched roof, with a
-continuous band of windows down each side and, in the 1 m gap ahead of each car that has one
+In a cutaway, coaches are solid Pullman-green bodies under a darker arched roof (or, for a
+train in the C&O's colors of the early 1950s, `livery: "co"`, blue with a yellow band along the
+top of the side, gray below the windows and a dark roof), with a continuous band of windows down each side and, in the 1 m gap ahead of each car that has one
 coupled ahead of it, the dark diaphragm of its vestibule. A steam engine faces the way its
 train came in (the engine leads, toward the start of its line): a round boiler with a darker
 smokebox at the front, a stack and two domes on top, a frame and running board under it, and a
@@ -824,13 +825,14 @@ streetcars and buses on West Broad; the ICC's 1955 ruling in *NAACP v. St. Louis
 Ry.*, for the end of the segregated waiting rooms; and OpenStreetMap for the ground. Each is
 named on the sheet, and the wayfinding notes carry their own.
 
-**Main Street Station** (`regions/main-street-station-cutaway.json`) is cut down the axis of
-its head house, the plane running at a bearing of 36.9° 4.2 m west of the front's middle, just
-east of the main stair and its screen of columns, the east half lifted away down to 1.5 m above
-the ground floor; the camera looks from the southeast at a bearing of 325°. So that the stair
-shows as a flight, its east wall and the floor over its first flight are lifted away whole, as
-are the concourse's roof and the roof over the taper to the shed (`lift`), each leaving its
-dashed outline. Its train shed is not cut: the roofing of
+**Main Street Station** (`regions/main-street-station-cutaway.json`) is cut through its two
+waiting rooms, the plane running at a bearing of 36.9° 4.7 m east of the front's middle (66.7 ft
+from the west face on the plans of 1900), between the benches and the east row of columns, the
+east side lifted away down to 1.5 m above the ground floor; the camera looks from the southeast
+at a bearing of 325°. The rooms of the two public floors are traced from the plans printed in
+*The Railroad Gazette* of July 13, 1900, their feet mapped onto OpenStreetMap's outline of the
+head house. The concourse's roof and the roof over the taper to the shed are lifted away whole
+(`lift`), each leaving its dashed outline. Its train shed is not cut: the roofing of
 four bays on the shed's east slope, with the monitor's slatted side over them, is lifted away
 whole instead, leaving the dashed outline of
 its upper face where it was, so the trusses show on their columns. The shed is built from
@@ -843,12 +845,13 @@ side by side in lengths of about 6 m, so a dormer sorts against the length of ro
 loggia's piers are stacked in courses about 0.55 m high, every other one set 3 cm proud, and its
 segmental arches are plates in eight slices along the arc. Parts that stand inside the shell (`within`:
 the offices in the roof) paint before the slopes that face the camera and after those that face
-away. The tracks stand on a deck at the level of the waiting room,
+away; the floors and corridor walls in the roof are drawn in lengths of about 3 m along it, so
+each sorts against the length of roof over it. The tracks stand on a deck at the level of the waiting room,
 on trestles: a rail line with an elevation draws no ground ribbon, its train stands on the deck,
 and its track is a modeled part with ties 2.6 m long, 0.67 m apart, and two rails at standard
 gauge. Its flat section runs from 26 m on the Main Street side of the plane's point to 70 m on the
 track side, the building 35 m deep behind it and everything else 26 m. The main stair, behind
-its tiled wall, is drawn there as its dashed outline (`section.hidden`); the shed is drawn in
+the ticket office, is drawn there as its dashed outline (`section.hidden`); the shed is drawn in
 full behind the plane, as HAER's longitudinal section draws it: the columns 18 ft apart, the
 bracing between them, the underside of the roof falling to the eave, the monitor's slatted side
 along the ridge, and the roof over the taper falling to the concourse; and a train standing beside the plane is drawn from the side, flat,
