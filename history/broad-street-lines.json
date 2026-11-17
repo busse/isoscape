@@ -32555,8 +32555,8 @@
    "model": "mss",
    "confidence": "drawn",
    "elevation": 6.1,
-   "upTo": 26.7,
-   "note": "The head house, 102 ft by 62 ft 4 in (The Railroad Gazette, July 13, 1900), of golden Roman brick over a base of rough stone (HABS VA-848), drawn as a plain block to its cornice; its outline is OpenStreetMap's, which matches the plan. Its heights are scaled from photographs against the 110-ft tower (approximate).",
+   "upTo": 23.169,
+   "note": "The head house, 102 ft by 62 ft 4 in (The Railroad Gazette, July 13, 1900), of golden Roman brick over a base of rough stone (HABS VA-848), drawn as a plain block to its cornice; its outline is OpenStreetMap's, which matches the plan. Its cornice, about 56 ft above Main Street, is measured on HABS photograph VA-848-12 (1971) against the 110-ft tower (approximate).",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
@@ -32594,8 +32594,8 @@
    "model": "mss",
    "confidence": "drawn",
    "elevation": 6.1,
-   "upTo": 26.7,
-   "note": "The head house, 102 ft by 62 ft 4 in (The Railroad Gazette, July 13, 1900), of golden Roman brick over a base of rough stone (HABS VA-848), drawn as a plain block to its cornice; its outline is OpenStreetMap's, which matches the plan. Its heights are scaled from photographs against the 110-ft tower (approximate).",
+   "upTo": 23.169,
+   "note": "The head house, 102 ft by 62 ft 4 in (The Railroad Gazette, July 13, 1900), of golden Roman brick over a base of rough stone (HABS VA-848), drawn as a plain block to its cornice; its outline is OpenStreetMap's, which matches the plan. Its cornice, about 56 ft above Main Street, is measured on HABS photograph VA-848-12 (1971) against the 110-ft tower (approximate).",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
@@ -32632,15 +32632,16 @@
    "only": "whole",
    "model": "mss",
    "confidence": "written",
-   "elevation": 26.7,
-   "upTo": 37.9,
+   "elevation": 23.169,
+   "upTo": 30.484,
    "shape": "hip",
-   "note": "The very steep hipped roof of red tile (The Railroad Gazette, 1900; HABS VA-848), about 11 m from cornice to ridge, drawn plain, without its two rows of dormers and its chimney, and from the tower east (behind the tower it is left flat). Its pitch and ridge are scaled from photographs (approximate).",
+   "note": "The steep hipped roof of red tile (The Railroad Gazette, 1900; HABS VA-848), from the cornice at about 56 ft to the ridge at about 80 ft above Main Street, drawn plain, without its two rows of dormers and its chimney, and from the tower east (behind the tower it is left flat). Heights measured on HABS photograph VA-848-12 (1971), an oblique view of the front, against the finial's 110 ft above the street: approximate, to within about 5 ft.",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ]
   },
   {
@@ -32672,13 +32673,16 @@
    "model": "mss",
    "confidence": "written",
    "elevation": 6.1,
-   "upTo": 32.7,
-   "note": "The clock tower at the southwest corner, 110 ft high to its finial with a clock face on each side (The Railroad Gazette, 1900; HABS VA-848; SAH Archipedia), drawn in plain stages: shaft, clock stage, dome and finial. Its outline is OpenStreetMap's; its stages are scaled from photographs (approximate).",
+   "upTo": 30.027,
+   "note": "The clock tower at the southwest corner, 110 ft high to its finial with a clock face on each side (The Railroad Gazette, 1900; HABS VA-848; SAH Archipedia), drawn in plain stages: shaft, clock stage, dome and finial. Its outline is OpenStreetMap's; its stages are scaled from photographs (approximate). Heights measured on HABS photograph VA-848-12 (1971), an oblique view of the front, against the finial's 110 ft above the street: approximate, to within about 5 ft. The Sanborn sheets of 1905 and 1952 mark it \"Clock Tower 90'\", about the top of its masonry.",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
     "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_003/",
+    "https://www.loc.gov/item/sanborn09064_016/",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737"
    ]
@@ -32711,14 +32715,17 @@
    "only": "whole",
    "model": "mss",
    "confidence": "written",
-   "elevation": 32.7,
-   "upTo": 36.7,
-   "note": "The clock tower at the southwest corner, 110 ft high to its finial with a clock face on each side (The Railroad Gazette, 1900; HABS VA-848; SAH Archipedia), drawn in plain stages: shaft, clock stage, dome and finial. Its outline is OpenStreetMap's; its stages are scaled from photographs (approximate).",
+   "elevation": 30.027,
+   "upTo": 34.446,
+   "note": "The clock tower at the southwest corner, 110 ft high to its finial with a clock face on each side (The Railroad Gazette, 1900; HABS VA-848; SAH Archipedia), drawn in plain stages: shaft, clock stage, dome and finial. Its outline is OpenStreetMap's; its stages are scaled from photographs (approximate). Heights measured on HABS photograph VA-848-12 (1971), an oblique view of the front, against the finial's 110 ft above the street: approximate, to within about 5 ft. The Sanborn sheets of 1905 and 1952 mark it \"Clock Tower 90'\", about the top of its masonry.",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
     "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_003/",
+    "https://www.loc.gov/item/sanborn09064_016/",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737"
    ]
@@ -32751,8 +32758,8 @@
    "only": "whole",
    "model": "mss",
    "confidence": "written",
-   "elevation": 36.7,
-   "upTo": 40.3,
+   "elevation": 34.446,
+   "upTo": 37.19,
    "shape": "revolve",
    "levels": [
     [
@@ -32761,37 +32768,45 @@
      0
     ],
     [
-     0.8,
-     0.96,
+     0.2,
+     1.06,
      0
     ],
     [
-     1.6,
-     0.86,
+     0.4,
+     1.0,
      0
     ],
     [
-     2.4,
-     0.66,
+     1.2,
+     0.93,
      0
     ],
     [
-     3.0,
-     0.42,
+     2.0,
+     0.78,
      0
     ],
     [
-     3.6,
-     0.08,
+     2.6,
+     0.5,
+     0
+    ],
+    [
+     2.743,
+     0.12,
      0
     ]
    ],
-   "note": "The tower's square ribbed dome of tile (HABS VA-848), scaled from photographs: approximate.",
+   "note": "The tower's square ribbed dome of tile (HABS VA-848), from about 93 ft to about 102 ft above Main Street. Heights measured on HABS photograph VA-848-12 (1971), an oblique view of the front, against the finial's 110 ft above the street: approximate, to within about 5 ft.",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
     "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_003/",
+    "https://www.loc.gov/item/sanborn09064_016/",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737"
    ]
@@ -32824,8 +32839,8 @@
    "only": "whole",
    "model": "mss",
    "confidence": "written",
-   "elevation": 40.3,
-   "upTo": 41.9,
+   "elevation": 37.19,
+   "upTo": 39.628,
    "shape": "revolve",
    "levels": [
     [
@@ -32834,17 +32849,196 @@
      0
     ],
     [
-     1.6,
+     2.438,
      0.15,
      0
     ]
    ],
-   "note": "The bronze finial, its top 110 ft above the ground (The Railroad Gazette, 1900; SAH Archipedia), drawn as a plain spire; its form is approximate.",
+   "note": "The bronze finial, its top 110 ft above the street (The Railroad Gazette, 1900; SAH Archipedia), drawn as a plain spire; its form is approximate.",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
     "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_003/",
+    "https://www.loc.gov/item/sanborn09064_016/",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+   ]
+  },
+  {
+   "id": "mss-clock-face-s",
+   "name": "Main Street Station (clock)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.429603,
+     37.5343093
+    ],
+    [
+     -77.4295823,
+     37.5342969
+    ],
+    [
+     -77.4295827,
+     37.5342964
+    ],
+    [
+     -77.4296034,
+     37.5343088
+    ]
+   ],
+   "tone": "plaster",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 30.865,
+   "upTo": 33.151,
+   "shape": "disc",
+   "note": "A clock face, one on each of the tower's four sides (The Railroad Gazette, 1900), about 7.5 ft across, its center about 85 ft above Main Street. Heights measured on HABS photograph VA-848-12 (1971), an oblique view of the front, against the finial's 110 ft above the street: approximate, to within about 5 ft.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_003/",
+    "https://www.loc.gov/item/sanborn09064_016/",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+   ]
+  },
+  {
+   "id": "mss-clock-face-e",
+   "name": "Main Street Station (clock)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4295541,
+     37.5343018
+    ],
+    [
+     -77.4295385,
+     37.5343184
+    ],
+    [
+     -77.429538,
+     37.534318
+    ],
+    [
+     -77.4295535,
+     37.5343015
+    ]
+   ],
+   "tone": "plaster",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 30.865,
+   "upTo": 33.151,
+   "shape": "disc",
+   "note": "A clock face, one on each of the tower's four sides (The Railroad Gazette, 1900), about 7.5 ft across, its center about 85 ft above Main Street. Heights measured on HABS photograph VA-848-12 (1971), an oblique view of the front, against the finial's 110 ft above the street: approximate, to within about 5 ft.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_003/",
+    "https://www.loc.gov/item/sanborn09064_016/",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+   ]
+  },
+  {
+   "id": "mss-clock-face-n",
+   "name": "Main Street Station (clock)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4295404,
+     37.5343414
+    ],
+    [
+     -77.4295611,
+     37.5343538
+    ],
+    [
+     -77.4295607,
+     37.5343543
+    ],
+    [
+     -77.42954,
+     37.5343418
+    ]
+   ],
+   "tone": "plaster",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 30.865,
+   "upTo": 33.151,
+   "shape": "disc",
+   "note": "A clock face, one on each of the tower's four sides (The Railroad Gazette, 1900), about 7.5 ft across, its center about 85 ft above Main Street. Heights measured on HABS photograph VA-848-12 (1971), an oblique view of the front, against the finial's 110 ft above the street: approximate, to within about 5 ft.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_003/",
+    "https://www.loc.gov/item/sanborn09064_016/",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737"
+   ]
+  },
+  {
+   "id": "mss-clock-face-w",
+   "name": "Main Street Station (clock)",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 2026,
+   "ring": [
+    [
+     -77.4295893,
+     37.5343488
+    ],
+    [
+     -77.4296049,
+     37.5343323
+    ],
+    [
+     -77.4296054,
+     37.5343326
+    ],
+    [
+     -77.4295899,
+     37.5343492
+    ]
+   ],
+   "tone": "plaster",
+   "only": "whole",
+   "model": "mss",
+   "confidence": "written",
+   "elevation": 30.865,
+   "upTo": 33.151,
+   "shape": "disc",
+   "note": "A clock face, one on each of the tower's four sides (The Railroad Gazette, 1900), about 7.5 ft across, its center about 85 ft above Main Street. Heights measured on HABS photograph VA-848-12 (1971), an oblique view of the front, against the finial's 110 ft above the street: approximate, to within about 5 ft.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
+    "https://www.openstreetmap.org/way/366226942",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
+    "https://www.loc.gov/item/sanborn09064_003/",
+    "https://www.loc.gov/item/sanborn09064_016/",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737"
    ]

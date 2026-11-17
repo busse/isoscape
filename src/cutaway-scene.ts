@@ -49,6 +49,18 @@ export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean } 
     }
     return { solids: [sweep(profile, p0, u, w, 0, thick)], hulled: false }
   }
+  if (h.shape === 'disc') {
+    // A disc standing on the ring's first edge (its diameter), as thick as the second: a clock
+    // face. Its height is `top − seat`; the ring's corners are kept in order (see placed parts).
+    const [p0, p1, p2] = outer
+    const span = Math.hypot(p1[0] - p0[0], p1[1] - p0[1])
+    const thick = Math.hypot(p2[0] - p1[0], p2[1] - p1[1])
+    const u: Vec2 = [(p1[0] - p0[0]) / span, (p1[1] - p0[1]) / span]
+    const w: Vec2 = [(p2[0] - p1[0]) / thick, (p2[1] - p1[1]) / thick]
+    const n = 20
+    const profile: Vec2[] = Array.from({ length: n }, (_, k): Vec2 => [span / 2 + (span / 2) * Math.cos((2 * Math.PI * k) / n), (seat + top) / 2 + ((top - seat) / 2) * Math.sin((2 * Math.PI * k) / n)])
+    return { solids: [sweep(profile, p0, u, w, 0, thick)], hulled: false }
+  }
   if (h.shape === 'stair') return { solids: stair(outer, seat, top, h.steps ?? 12), hulled: false }
   if ((h.shape === 'hip' || h.shape === 'gable') && isConvex(outer)) return { solids: [roofSolid(outer, seat, top, h.shape)], hulled: false }
   if (isConvex(outer)) return { solids: [prism(outer, seat, top)], hulled: false }
