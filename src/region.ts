@@ -55,6 +55,20 @@ export interface Region {
   /** The two ways of a double-track viaduct are drawn as one deck at one level (a set's maps). */
   readonly groupRailDecks?: boolean
   /**
+   * Meters: where two rail decks cross, the one with the higher OSM `layer` passes at least this
+   * far over the other (the lower dipped toward the ground there, then the upper raised, each at
+   * a 3% grade), so a crossing of railroads at three levels reads (a set's maps).
+   */
+  readonly railCrossings?: number
+  /** The halo round map labels, as a share of their size (default 0.22): wider over dense blocks. */
+  readonly labelHalo?: number
+  /** Leave out the cars and ramp houses under a modeled station's shed roofs (a close view of its front). */
+  readonly hideUnderSheds?: boolean
+  /** Ground ribbons (roads, paths, track) filled round at their bends, so no wedge opens on a bend's outside (a set's views). */
+  readonly ribbonJoins?: boolean
+  /** Meters: tie marks are drawn on only one of tracks this close (default TIE_RUN_CLEAR, 3.5). */
+  readonly tieRunClear?: number
+  /**
    * Extra data, beyond OSM and elevation. `buildings` lists where footprints come from:
    * OpenStreetMap and/or Microsoft's ML footprints (OSM wins where both have a building).
    * `landcover: 'nlcd'` draws woods, wetlands, fields and crops from the National Land Cover
@@ -159,6 +173,8 @@ export interface TerrainOptions {
   readonly majorEvery?: number
   /** Water-surface gradient (m/m) above which a stretch of river reads as rapids. */
   readonly rapids?: number
+  /** The most rapids strokes drawn in one cell (default 2): 1 where a coarse grid seen close would pile them up. */
+  readonly rapidsMarks?: number
   /**
    * Strength of the hillshade, 1 by default; 0 draws the ground flat-toned (its relief still
    * shapes it). A close view of one building, such as a cutaway, uses 0, so a bank does not

@@ -287,7 +287,9 @@ def paste_map(img, d, S, scene, pts, box, x, y, w, h, r, least_px=0):
         if not (box[0] <= px <= box[0] + box[2] and box[1] <= py <= box[1] + box[3]):
             raise SystemExit(f"stop {s['n']} ({s['id']}) falls outside the big map")
         places.append((s, x + (px - box[0]) * k, y + (py - box[1]) * k))
-    moved = spread([(px, py) for _, px, py in places], r)
+    # A box may set its marker off its place (`badge`: [dx, dy] in marker radii, screen
+    # directions), with a leader back to it, so the markers do not hide what they name.
+    moved = spread([(px + s.get('badge', [0, 0])[0] * r, py + s.get('badge', [0, 0])[1] * r) for s, px, py in places], r)
     # Kept inside the frame.
     moved = [(min(max(mx, x + r * 1.2), x + w - r * 1.2), min(max(my, y + r * 1.2), y + h - r * 1.2)) for mx, my in moved]
     for (s, px, py), (mx, my) in zip(places, moved):
@@ -489,6 +491,20 @@ def compose_map(dpi, S, sc, pts):
     return img
 
 
+def inked(scene, ink, px_per_unit, dpi):
+    """The scene's source with its ink lines (the `.i` class) no heavier than `ink`
+    pixels at 300 dpi (a set's `box_ink`): a box cut close from a big map enlarges its strokes
+    with its ground, so a 1,100 m box drew them three times as heavy as one from a close region.
+    None (no `box_ink`, or strokes already that thin): the source as it is."""
+    if not ink: return None
+    src = scene.src
+    def scaled(m):
+        w = float(m.group(2))
+        cap = ink * dpi / 300 / px_per_unit
+        return m.group(1) + (f'{cap:.3f}' if w > cap else m.group(2))
+    return re.sub(r'(\.i\{[^}]*?stroke-width:)([0-9.]+)', scaled, src, count=1)
+
+
 def compose_box(dpi, S, sc, s, pt):
     I = lambda v: v * dpi
     W, H = round(I(24)), round(I(18))
@@ -499,7 +515,8 @@ def compose_box(dpi, S, sc, s, pt):
     d = ImageDraw.Draw(img)
     iw, ih = W - 2 * m, I(12.6)
     scene = sc.get(s, fine=True)
-    img.paste(scene.render(scene.window(pt, s.get('ground', S.ground['box']), iw / ih), round(iw), round(ih)), (round(m), round(m)))
+    win = scene.window(pt, s.get('ground', S.ground['box']), iw / ih)
+    img.paste(scene.render(win, round(iw), round(ih), inked(scene, S.cfg.get('box_ink'), iw / win[2], dpi)), (round(m), round(m)))
     d.rectangle((m, m, m + iw, m + ih), outline=INK, width=max(1, round(I(0.01))))
     ty = m + ih + I(0.35)
     r = I(0.3)

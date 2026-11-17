@@ -63,13 +63,14 @@
    "title": "Hermitage Road",
    "subtitle": "Industry along the tracks",
    "at": [
-    -77.4605,
-    37.5668
+    -77.4569,
+    37.566
    ],
-   "ground": 750,
-   "note": "Once the Seaboard Air Line joined the RF&P just south of here in 1900, firms lined Hermitage Road for the sidings: the Richmond Foundry and Manufacturing Company built at 2300 Hermitage Road, by the junction, in 1906, and warehouses for Export Leaf Tobacco, Miller & Rhoads and A. H. Robins followed. They are a historic district today.",
+   "ground": 650,
+   "note": "Once the Seaboard Air Line met the RF&P just south of here in 1900, the land between the two railroads filled with warehouses and plants along Hermitage and Overbrook roads, from 1913 on: Export Leaf Tobacco, the purchasing arm of British American Tobacco, J. P. Taylor of Universal Leaf, Miller & Rhoads and A. H. Robins among them. Drawn are those standing today that the city dates to 1943 or before. They are a historic district today.",
    "sources": [
-    "https://dhr.virginia.gov/?p=28752"
+    "https://www.dhr.virginia.gov/historic-registers/127-6730/",
+    "https://www.dhr.virginia.gov/pdf_files/127-7825_Hermitage_Road_Warehouse_HD_Update_BI_2023_NRHP_DraftFinal051023.pdf"
    ]
   },
   {
@@ -86,6 +87,10 @@
    "sources": [
     "https://chicagorailfan.com/stbrric.html",
     "https://www.richmondrailroadmuseum.com/railroad-history"
+   ],
+   "badge": [
+    -1.9,
+    0.2
    ]
   },
   {
@@ -105,6 +110,10 @@
     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
     "https://www.chicagorailfan.com/stbcric.html",
     "https://www.hmdb.org/m.asp?m=9209"
+   ],
+   "badge": [
+    0.4,
+    -2.8
    ]
   },
   {
@@ -141,6 +150,10 @@
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.greatamericanstations.com/stations/RVM",
     "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
+   ],
+   "badge": [
+    3.2,
+    -1.8
    ]
   },
   {
@@ -226,6 +239,10 @@
    "sources": [
     "https://www.dhr.virginia.gov/?p=15215",
     "https://richmondbizsense.com/2017/03/23/5m-renovation-wraps-up-at-william-byrd/"
+   ],
+   "badge": [
+    0.1,
+    2.7
    ]
   },
   {
@@ -244,6 +261,10 @@
     "https://sah-archipedia.org/node/20518",
     "https://www.hmdb.org/m.asp?m=9209",
     "https://www.dhr.virginia.gov/historic-registers/127-0226/"
+   ],
+   "badge": [
+    -2.5,
+    1.5
    ]
   },
   {
@@ -262,6 +283,10 @@
     "https://sah-archipedia.org/node/20518",
     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
     "https://rvanews.com/?p=17011"
+   ],
+   "badge": [
+    -2.7,
+    -1.3
    ]
   }
  ],
@@ -297,5 +322,6 @@
   "box_line": "{subtitle}. Place {n} of fourteen on Broad Street Station, 1943.",
   "credit_extra": "Station loop after the USGS Richmond quadrangles of 1934 and 1956, with the sources cited for each place on the <a href=\"https://busse.github.io/isoscape/#/broad-street\">Broad Street page ↗</a>.",
   "print_dir": "print-files/broad-street-1943"
- }
+ },
+ "box_ink": 3
 }

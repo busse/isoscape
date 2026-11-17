@@ -547,7 +547,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   // read as clumps across the shared ballast.
   const farTies0 = scene.time?.tieClear === undefined || scene.time.tieClear <= 0
     ? lineLayer('rail', 'ties')
-    : { cls: 'ties', segs: clearRuns(scene.ribbons.filter((rb) => rb.kind === 'rail').map((rb) => rb.center), TIE_RUN_CLEAR) }
+    : { cls: 'ties', segs: clearRuns(scene.ribbons.filter((rb) => rb.kind === 'rail').map((rb) => rb.center), scene.region.tieRunClear ?? TIE_RUN_CLEAR) }
   const farTies = tramSegs.length === 0 ? farTies0 : { cls: farTies0.cls, segs: offCars(farTies0.segs) }
   const lineLayers = [
     ...(close ? [] : [farTies]),
@@ -1179,7 +1179,7 @@ export const renderSvg = (scene: Scene): Rendered => {
           // unevenly, so a reach reads as broken water and not as bands of even hatching along
           // the steps of the surface; it only ever takes marks away.
           if ((hash(`k${i},${j}`) % 1000) / 1000 > (0.15 + 0.65 * strength) * rapidsClumps(i, j)) continue
-          const marks = strength < 0.9 ? 1 : 2
+          const marks = Math.min(strength < 0.9 ? 1 : 2, opts.rapidsMarks ?? 2)
           for (let m = 0; m < marks; m++) {
             const hm = hash(`${h}:${m}`)
             const jx = ((hm % 1000) / 1000 - 0.5) * c
@@ -1275,7 +1275,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   // Labels over everything, haloed in the land color so they read across lines and roofs.
   if (scene.labels !== undefined) {
     const size = Math.max(14, capSize * 0.42)
-    out.push(`<g class="labels" font-family="Georgia, 'Times New Roman', serif" fill="${p.ink}" stroke="${p.land}" stroke-width="${f(size * 0.22)}" stroke-linejoin="round" paint-order="stroke">`)
+    out.push(`<g class="labels" font-family="Georgia, 'Times New Roman', serif" fill="${p.ink}" stroke="${p.land}" stroke-width="${f(size * (scene.region.labelHalo ?? 0.22))}" stroke-linejoin="round" paint-order="stroke">`)
     for (const l of scene.labels) {
       const [sx, sy] = P(l.at, l.z)
       out.push(`<text x="${f(sx)}" y="${f(sy)}" font-size="${f(size)}" text-anchor="${l.anchor}" font-weight="bold">${esc(l.text)}</text>`)

@@ -58,8 +58,14 @@ export interface HistoryFeature {
   readonly base?: number
   readonly seat?: 'min' | 'max'
   readonly on?: string
-  readonly shape?: 'prism' | 'dome' | 'revolve' | 'stair' | 'arch'
+  readonly shape?: 'prism' | 'dome' | 'revolve' | 'stair' | 'arch' | 'hip' | 'gable'
   readonly tone?: PartTone
+  /**
+   * The modeled building a part belongs to, where a history holds more than one: the parts of
+   * each `model` take their levels from the ground under that model alone (see `modelZ`), so
+   * one building's ground does not lift another's. Parts with none share one model.
+   */
+  readonly model?: string
   /**
    * Which views draw the part: `whole` only those without a cutaway (a building's massing),
    * `cutaway` only those with one (its walls, floors and rooms). Absent: both.
@@ -77,6 +83,9 @@ export interface HistoryFeature {
   /**
    * `stair`: the number of treads; it rises from the ring's first edge to its third. `arch`: an
    * arched window on the ring's first edge (its span), rising to a half ellipse at the top.
+   * `hip`: a roof rising from every edge of its (convex) ring at one pitch to a ridge at its
+   * top; `gable`: a roof rising from the ring's first and third edges (its eaves) to a ridge
+   * midway between them at its top, the second and fourth edges its gable ends.
    */
   readonly steps?: number
   /** How the part is known: see `confidenceOf`. */
@@ -228,6 +237,8 @@ export interface History {
   readonly streetcarScale?: number
   /** Draw railroad tracks this many times their width, and in the ties' darker tone, so the network reads from afar (default 1). */
   readonly railScale?: number
+  /** Yard, siding and spur track (any `service` tag) drawn at no more than this scale (a set's map). */
+  readonly railScaleService?: number
   /**
    * Date laid-out ground (lawns, beds, pitches, playgrounds) and service roads by the
    * assessor's year built of the parcel they lie in, as buildings are: the planted strips of a
@@ -288,6 +299,8 @@ export interface History {
    * square deck end shows beside it; a building (not curated) under such a deck is left out.
    */
   readonly carDecks?: boolean
+  /** A road deck that carries a car line is laid on the line as drawn, so deck and ground bands meet without a step. */
+  readonly carDeckSnap?: boolean
   /**
    * Meters: a car line that ends this close to another line, short of it, is carried on
    * straight to meet it (a junction where the two were placed on different corners).
@@ -315,6 +328,14 @@ export interface History {
    */
   readonly vergeReach?: number
   readonly vergeShare?: number
+  /**
+   * Meters: mend the year's streets (`mendStreets`): put back runs of streets up to this long
+   * left out between drawn ones for want of houses, and leave out road ways that led only to
+   * later works. Off unless set.
+   */
+  readonly streetEnds?: number
+  /** The street at either end of a curated bridge of the year is kept to it (`dropApproaches`, `mendStreets`). */
+  readonly bridgeAnchors?: boolean
   /** Keep the whole of a street, by name, that leads onto a road bridge (`dropUnbuiltStreets`'s `follow`). */
   readonly bridgeStreets?: boolean
   /**
@@ -361,6 +382,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.serviceNearBuildings === undefined ? {} : { serviceNearBuildings: raw.serviceNearBuildings }),
     ...(raw.streetcarScale === undefined ? {} : { streetcarScale: raw.streetcarScale }),
     ...(raw.railScale === undefined ? {} : { railScale: raw.railScale }),
+    ...(raw.railScaleService === undefined ? {} : { railScaleService: raw.railScaleService }),
     ...(raw.groundsByParcel === undefined ? {} : { groundsByParcel: raw.groundsByParcel }),
     ...(raw.vergeTags === undefined ? {} : { vergeTags: raw.vergeTags }),
     ...(raw.approachesWithBridges === undefined ? {} : { approachesWithBridges: raw.approachesWithBridges }),
@@ -375,6 +397,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.carLineSeal === undefined ? {} : { carLineSeal: raw.carLineSeal }),
     ...(raw.streetsUnderCars === undefined ? {} : { streetsUnderCars: raw.streetsUnderCars }),
     ...(raw.carDecks === undefined ? {} : { carDecks: raw.carDecks }),
+    ...(raw.carDeckSnap === undefined ? {} : { carDeckSnap: raw.carDeckSnap }),
     ...(raw.carLineEnds === undefined ? {} : { carLineEnds: raw.carLineEnds }),
     ...(raw.vergeFill === undefined ? {} : { vergeFill: raw.vergeFill }),
     ...(raw.viaductClearance === undefined ? {} : { viaductClearance: raw.viaductClearance }),
@@ -386,6 +409,8 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.vergeShare === undefined ? {} : { vergeShare: raw.vergeShare }),
     ...(raw.bridgeStreets === undefined ? {} : { bridgeStreets: raw.bridgeStreets }),
     ...(raw.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: raw.bridgesClearTraced }),
+    ...(raw.streetEnds === undefined ? {} : { streetEnds: raw.streetEnds }),
+    ...(raw.bridgeAnchors === undefined ? {} : { bridgeAnchors: raw.bridgeAnchors }),
     ...(raw.switches === undefined ? {} : { switches: raw.switches }),
   }
 }
@@ -927,7 +952,7 @@ export const dateGrounds = (features: readonly Feature[], parcels: readonly Parc
  * nodes no other drawn street touches, up to the first junction. With them gone the street ends
  * at that junction, not in a stub pointing at a bridge that is not there.
  */
-export const dropApproaches = (all: readonly Feature[], kept: readonly Feature[]): { kept: Feature[]; dropped: number } => {
+export const dropApproaches = (all: readonly Feature[], kept: readonly Feature[], anchors: ReadonlySet<string> = new Set()): { kept: Feature[]; dropped: number } => {
   const isRoad = (f: Feature): f is Extract<Feature, { type: 'line' }> => f.type === 'line' && f.tags.highway !== undefined
   const keptIds = new Set(kept.map((f) => f.id))
   const key = (p: Vec2) => `${p[0]},${p[1]}`
@@ -945,6 +970,8 @@ export const dropApproaches = (all: readonly Feature[], kept: readonly Feature[]
     for (const end of [b.points[0], b.points[b.points.length - 1]]) {
       let node = key(end)
       for (let guard = 0; guard < 50; guard++) {
+        // A curated bridge of the year lands here: the street goes on to it.
+        if (anchors.has(node)) break
         const here = (at.get(node) ?? []).filter((f) => !gone.has(f))
         if (here.length !== 1) break
         const w = here[0]
@@ -959,6 +986,91 @@ export const dropApproaches = (all: readonly Feature[], kept: readonly Feature[]
     }
   }
   return { kept: kept.filter((f) => !gone.has(f)), dropped: gone.size }
+}
+
+/**
+ * Streets mended after the year's drops (`streetEnds`): a run of minor-street ways left out only
+ * for want of a house beside it (`unbuilt`), no longer than `gap` meters and joining drawn
+ * roads at two or more places, is put back, so a street does not break where one block is
+ * empty; then a road way with an end that met only roads not drawn this year (a later bridge,
+ * ramp or interchange, not a street left out for want of houses) and meets no drawn road is
+ * left out too, and so on back to the nearest junction, so no approach ends square in a field.
+ */
+/** Meters: how far back from a later work `mendStreets` leaves out the ways that led to it. */
+export const ENDS_REACH = 250
+
+export const mendStreets = (
+  all: readonly Feature[], kept: readonly Feature[], unbuilt: ReadonlySet<string>, gap: number, anchors: ReadonlySet<string> = new Set(),
+): { kept: Feature[]; mended: number; ends: number } => {
+  type Line = Extract<Feature, { type: 'line' }>
+  const isRoad = (f: Feature): f is Line => f.type === 'line' && f.tags.highway !== undefined
+  const key = (p: Vec2) => `${p[0]},${p[1]}`
+  let lat0 = 0, n = 0
+  for (const f of all) if (f.type === 'line' && f.points.length) { lat0 += f.points[0][1]; n++ }
+  lat0 = n ? lat0 / n : 0
+  const kx = 111_320 * Math.cos((lat0 * Math.PI) / 180), ky = 110_574
+  const len = (f: Line) => f.points.reduce((a, p, i) => (i === 0 ? 0 : a + Math.hypot((p[0] - f.points[i - 1][0]) * kx, (p[1] - f.points[i - 1][1]) * ky)), 0)
+  const allRoads = all.filter(isRoad)
+  const byNode = new Map<string, Line[]>()
+  for (const f of allRoads) for (const p of f.points) {
+    const k = key(p)
+    const l = byNode.get(k)
+    if (l) l.push(f)
+    else byNode.set(k, [f])
+  }
+  const keep = new Set(kept.filter(isRoad).map((f) => f.id))
+  // 1. Gaps: components of unbuilt ways, joined at shared nodes.
+  let mended = 0
+  const seen = new Set<string>()
+  for (const f of allRoads) {
+    if (!unbuilt.has(f.id) || seen.has(f.id)) continue
+    const comp: Line[] = []
+    const stack = [f]
+    seen.add(f.id)
+    while (stack.length) {
+      const w = stack.pop()!
+      comp.push(w)
+      for (const p of w.points) for (const o of byNode.get(key(p)) ?? []) if (unbuilt.has(o.id) && !seen.has(o.id)) { seen.add(o.id); stack.push(o) }
+    }
+    const meets = new Set<string>()
+    for (const w of comp) for (const p of w.points) if ((byNode.get(key(p)) ?? []).some((o) => keep.has(o.id))) meets.add(key(p))
+    if (meets.size >= 2 && comp.reduce((a, w) => a + len(w), 0) <= gap) {
+      for (const w of comp) keep.add(w.id)
+      mended += comp.length
+    }
+  }
+  // 2. Ends that led only to later works.
+  // Only roads count as later works (a bridge, a ramp, a main road), not paths and drives.
+  const works = (f: Line) => (f.tags.bridge !== undefined && f.tags.bridge !== 'no') ||
+    /^(motorway|trunk|primary|secondary|tertiary)(_link)?$/.test(f.tags.highway ?? '')
+  const later = new Set(allRoads.filter((f) => !keep.has(f.id) && !unbuilt.has(f.id) && works(f)).map((f) => f.id))
+  // How far back from the later work each way left out lies: a chain is followed back only
+  // `ENDS_REACH` meters, so a long road that also led elsewhere is not lost whole.
+  const back = new Map<string, number>()
+  let ends = 0
+  for (let round = 0; round < 40; round++) {
+    let changed = false
+    for (const f of allRoads) {
+      if (!keep.has(f.id) || (f.tags.bridge !== undefined && f.tags.bridge !== 'no')) continue
+      for (const end of [f.points[0], f.points[f.points.length - 1]]) {
+        const others = (byNode.get(key(end)) ?? []).filter((o) => o !== f)
+        if (others.length === 0 || others.some((o) => keep.has(o.id)) || anchors.has(key(end))) continue
+        const from = others.filter((o) => later.has(o.id)).map((o) => back.get(o.id) ?? 0)
+        if (from.length === 0) continue
+        const d = Math.min(...from) + len(f)
+        if (d > ENDS_REACH) continue
+        keep.delete(f.id)
+        later.add(f.id)
+        back.set(f.id, d)
+        ends++
+        changed = true
+        break
+      }
+    }
+    if (!changed) break
+  }
+  const out = all.filter((f) => isRoad(f) && keep.has(f.id) && !kept.includes(f))
+  return { kept: [...kept.filter((f) => !isRoad(f) || keep.has(f.id)), ...out], mended, ends }
 }
 
 /** Bridges a series draws at grade before a year (`atGrade`): their bridge and layer tags dropped. */

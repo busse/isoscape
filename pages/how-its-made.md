@@ -1044,7 +1044,30 @@ at 24 × 18, the 36 × 24 in map at 18 × 12, so 10.5, 9.3 and 14 pt on the file
 wrapped as evenly as they go so no word stands alone, and the corner the title block takes on
 any face cut from a file is kept clear. Markers that would overlap are moved apart with a short
 leader to their place; two-digit numbers are set smaller to fit their rings. A set's prints
-carry the dated series' ground note: the ground is today's, from lidar.
+carry the dated series' ground note: the ground is today's, from lidar. Where several boxes share
+a place (four of Broad Street Station's), each marker can be set off it by a few marker widths,
+with its leader back, so the markers do not hide the place they name.
+
+The Broad Street set's map adds a few rules of its own. Rail decks that cross pass at least 6 m
+apart by their OSM layers, the lower one dipped toward the ground (keeping 3 m over it) and the
+upper one lifted for what that cannot give, each change fading out at a 3% grade along its deck,
+so the Triple Crossing reads at three levels. Streets are mended after the year's drops: a run of
+up to 200 m left out between drawn streets for want of houses is put back, and a road that led
+only to a later bridge, ramp or main road is left out with it, up to 250 m back from it, except
+where a curated bridge of the year lands. Map labels carry a halo half their size wide over the
+dense blocks, and rapids are drawn one stroke a cell. Main Street Station is drawn in massing
+from the same measurements as its cutaway, its parts set from the ground under the station alone;
+its roofs are hips and gables, its shed's on columns over the deck and trestle.
+On the set's prints of single places, ink lines are held to 3 px at 300 dpi (a box cut close
+from the big map otherwise drew them as heavy as it enlarged it); roads, paths and ballast are
+filled round at every bend; tie marks go on one track only where tracks run within 5 m; a road
+deck that carries a car line is laid on the line as drawn, so the line leaves it without a step;
+and the big map draws yard and siding track at its own width, not four times it. The close view
+of the station's front leaves out the cars and ramp houses under its shed roofs, and starts the
+head house's wings at the mound's level along Broad Street (65.6 m), where the ground behind
+falls about 5 m to the tracks.
+Where two rail decks run into one another at nearly one level (within 2 m), the shorter deck's
+pieces lying on the longer one are left out, so converging viaducts read as one deck.
 
 **What the series cannot show:**
 

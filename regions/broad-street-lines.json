@@ -22,7 +22,8 @@
     "cell": 12,
     "contour": 0,
     "majorEvery": 5,
-    "demResolution": 5
+    "demResolution": 5,
+    "rapidsMarks": 1
   },
   "time": {
     "history": "history/broad-street-lines.json",
@@ -46,5 +47,9 @@
     }
   ],
   "railPiersOverWater": true,
-  "groupRailDecks": true
+  "groupRailDecks": true,
+  "railCrossings": 6,
+  "labelHalo": 0.5,
+  "ribbonJoins": true,
+  "tieRunClear": 5
 }
