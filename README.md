@@ -287,6 +287,9 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
 - Images must be `.svg`, `.png`, `.jpg` or `.webp` files in `pages/` itself, and are
   embedded as data URIs so the explorer stays one file. An SVG can follow light and dark
   mode with a `prefers-color-scheme` media query, as `pipeline.svg` does.
+  `pipeline.svg` and the FAQ's diagrams (`faq-*.svg`) are written by
+  `node tools/diagrams/faq.ts`, with every color from `src/palette.ts`; change them there, not
+  in the SVG (`npm test` fails when a file in `pages/` differs from the script's output).
 - The converter (`src/markdown.ts`) escapes all text and drops raw HTML and unsafe link
   schemes. Files starting with `_` (drafts) and `README.md` are skipped.
 - `npm test` checks that every in-page link in `pages/` lands on a real section, and that the
