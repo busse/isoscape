@@ -168,15 +168,47 @@ test('service roads can be held to a closer test than streets (serviceNearBuildi
   assert.deepEqual(ids(dropUnbuiltStreets(feats, 60, [], [], false, 25)), ['drive', 'h', 'street'])
 })
 
-test('a road bridge over a motorway not yet built is left out; one over a railway stays', async () => {
-  const { dropBridgesOverLater } = await import('../src/history.ts')
-  const ln = (id: string, tags: Record<string, string>, pts: [number, number][]): LineFeature => ({ type: 'line', id, tags, points: pts })
-  const motorway = ln('m', { highway: 'motorway' }, [[0, -1], [0, 1]])
-  const overMotorway = ln('b1', { highway: 'primary', bridge: 'yes' }, [[-0.1, 0], [0.1, 0]])
-  const overRail = ln('b2', { highway: 'primary', bridge: 'yes' }, [[-0.1, 5], [0.1, 5]])
-  const r = dropBridgesOverLater([overMotorway, overRail], [motorway])
-  assert.deepEqual(r.kept.map((f) => f.id), ['b2'])
-  assert.equal(r.dropped, 1)
-  // With the motorway built, nothing goes.
-  assert.equal(dropBridgesOverLater([overMotorway, overRail], []).dropped, 0)
+test('every curated year cites a source, and a curated height says where it comes from', async () => {
+  const { loadHistory } = await import('../src/history.ts')
+  const h = await loadHistory('history/richmond-downtown.json')
+  const ids = new Set<string>()
+  for (const d of h.dates) {
+    assert.match(d.source, /^https:\/\//, d.id)
+    assert.ok(!ids.has(d.id), `${d.id} is dated twice`)
+    ids.add(d.id)
+    if (d.height !== undefined) assert.ok(d.height > 0 && (d.note ?? '').length > 0, `${d.id}: a height needs a note`)
+  }
+})
+
+test('a sheet whose fit is known to be wrong is left out', async () => {
+  const { loadHistory } = await import('../src/history.ts')
+  const dir = await mkdtemp(join(tmpdir(), 'iso-leave-'))
+  const ring = [[0, 0], [1, 0], [1, 1], [0, 0]]
+  const f = (id: string, sheet: string, edition: number) => ({ type: 'Feature', properties: { id, from: edition, to: 1960, end: 'assumed', material: 'brick', storeys: 3, edition, sheet }, geometry: { type: 'Polygon', coordinates: [ring] } })
+  await writeFile(join(dir, 'lost.geojson'), JSON.stringify({ type: 'FeatureCollection', features: [f('a', '5', 1905), f('b', '6', 1905), f('c', '5', 1886)] }))
+  await writeFile(join(dir, 'h.json'), JSON.stringify({ sanborn: { lost: join(dir, 'lost.geojson'), editions: [1886, 1905], source: 'x', leaveOut: [{ edition: 1905, sheet: '5', why: 'misfit' }] } }))
+  const h = await loadHistory(join(dir, 'h.json'))
+  assert.deepEqual(h.traced.map((b) => b.id), ['b', 'c'])
+})
+
+test('a bridge over a road not yet built is drawn at grade, and that road\'s verges are not drawn', async () => {
+  const { laterWorks } = await import('../src/history.ts')
+  const h = history({ rules: [{ where: { name: 'Turnpike' }, eras: [[1958, null]] }] as History['rules'] })
+  const line = (id: string, tags: Record<string, string>, points: [number, number][]): LineFeature => ({ type: 'line', id, tags, points })
+  const pike = line('pike', { highway: 'motorway', name: 'Turnpike' }, [[0, -0.001], [0, 0.001]])
+  const span = line('span', { highway: 'primary', name: 'Broad', bridge: 'yes', layer: '1' }, [[-0.0002, 0], [0.0002, 0]])
+  const side = line('side', { highway: 'primary', name: 'Broad', bridge: 'yes', layer: '1' }, [[0.0002, 0], [0.0004, 0]])
+  const rail = line('rail', { railway: 'rail' }, [[0.001, -0.001], [0.001, 0.001]])
+  const overRail = line('over', { highway: 'primary', name: 'Main', bridge: 'yes' }, [[0.0009, 0.0005], [0.0011, 0.0005]])
+  const verge: PolygonFeature = { type: 'polygon', id: 'verge', tags: { natural: 'wood' }, outers: [[[0.00005, -0.0005], [0.0001, -0.0005], [0.0001, 0.0005], [0.00005, 0.0005]]], inners: [] }
+  const woods: PolygonFeature = { type: 'polygon', id: 'woods', tags: { natural: 'wood' }, outers: [[[0.003, 0], [0.004, 0], [0.004, 0.001], [0.003, 0.001]]], inners: [] }
+  const all = [pike, span, side, rail, overRail, verge, woods]
+  const early = laterWorks(all, [span, side, rail, overRail, verge, woods], 1950, h)
+  assert.equal(early.atGrade, 2)
+  assert.deepEqual(early.kept.filter((f) => f.tags.bridge).map((f) => f.id), ['over'])
+  assert.ok(early.kept.some((f) => f.id === 'span' && f.tags.layer === undefined))
+  assert.deepEqual(early.kept.filter((f) => f.type === 'polygon').map((f) => f.id), ['woods'])
+  const late = laterWorks(all, all, 1960, h)
+  assert.equal(late.atGrade, 0)
+  assert.equal(late.verges, 0)
 })

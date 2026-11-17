@@ -98,6 +98,15 @@ test('links in a static page go to files, sections to anchors, maps to the explo
   assert.deepEqual(shopFor(CONFIG, 'town-time'), { url: 'https://shop.example/c/town', label: 'Buy a print ↗' })
   assert.equal(shopFor(CONFIG, 'lm-tower')?.url, 'https://shop.example/c/landmarks')
   assert.equal(shopFor(CONFIG, 'elsewhere'), undefined)
+  // A region's key covers every year; a <region>:<year> key only that year's view.
+  assert.equal(shopFor(CONFIG, 'town-time', 1925)?.url, 'https://shop.example/c/town')
+  const years = { shop: { label: 'L', url: 'https://s/', onSale: { 'rva-time:1925': 'https://s/p/1925', 'rva-time:2026': 'https://s/p/2026' } } }
+  assert.equal(shopFor(years, 'rva-time', 1925)?.url, 'https://s/p/1925')
+  assert.equal(shopFor(years, 'rva-time', 2026)?.url, 'https://s/p/2026')
+  assert.equal(shopFor(years, 'rva-time', 1886), undefined)
+  assert.equal(shopFor(years, 'rva-time'), undefined)
+  assert.equal(shopFor(years, 'rva-time', 19250), undefined)
+  assert.deepEqual(buyLinks(years, ['rva-time', 'rva-time:1925', 'rva-time:1886']).regions, { 'rva-time:1925': { url: 'https://s/p/1925', label: 'Buy a print ↗' } })
   assert.deepEqual(mapRefs('<a href="../index.html#cars:1925@1">a</a><a href="../index.html#lm-tower">b</a><a href="#below">c</a><a href="../index.html#/how-its-made">d</a>'), ['cars', 'lm-tower'])
 })
 

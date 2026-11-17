@@ -30,5 +30,37 @@ class Credit(unittest.TestCase):
                 self.assertEqual(C.design_credit({'panels': [{'build': 'old'}]}, builds), C.LEGACY_CREDIT)
 
 
+class SmallestSize(unittest.TestCase):
+    def test_a_24x36_is_also_an_8x12_and_a_panorama_only_itself(self):
+        spec = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'spec.json')))
+        self.assertAlmostEqual(C.smallest_scale(spec, (36, 24)), 1 / 3)
+        self.assertEqual(C.smallest_scale(spec, (24, 10)), 1.0)
+        self.assertEqual(C.smallest_scale({}, (36, 24)), 1.0)
+
+    def test_the_reserved_corner_is_the_stamped_block(self):
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'release'))
+        import stamp, titleblock
+        u = stamp.size_u(36, 300)
+        self.assertAlmostEqual(C.block_reserve(36, 300), titleblock.WIDTH * u + titleblock.H * u * 0.5)
+        spec = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'spec.json')))
+        self.assertEqual(C.stamped_faces(spec, (36, 24)), [36, 18, 30, 36])
+        u18 = stamp.size_u(18, 300)                    # an 18x12 face, in the 36x24 sheet's pixels
+        self.assertAlmostEqual(C.block_reserve(36, 300, faces=[36, 18]), (titleblock.WIDTH + titleblock.H * 0.5) * u18 * 2)
+
+
+class Balanced(unittest.TestCase):
+    def test_no_word_is_left_alone(self):
+        from PIL import Image, ImageDraw, ImageFont
+        d = ImageDraw.Draw(Image.new('RGB', (4, 4)))
+        f = ImageFont.truetype(C.FONT['italic'], 40)
+        text = 'The ground is today’s, from lidar: cuts and fills made since show in it.'
+        w = d.textlength(text, font=f) - d.textlength(' it.', font=f) + 2   # greedy leaves "it." alone
+        self.assertEqual(C.wrap_words(d, text, f, w)[-1], 'it.')
+        got = C.balanced(d, text, f, w)
+        self.assertEqual(len(got), 2)
+        self.assertGreater(min(len(x) for x in got), 20)
+        self.assertEqual(' '.join(got), text)
+
+
 if __name__ == '__main__':
     unittest.main()

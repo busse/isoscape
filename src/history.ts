@@ -168,9 +168,17 @@ export interface History {
   /** The year that counts as today: undated buildings appear in this scene only. */
   readonly present: number
   /** Curated years built for particular OSM buildings, which win over every other date. */
-  readonly dates: readonly { readonly id: string; readonly name?: string; readonly year: number; readonly until?: number; readonly source: string; readonly note?: string }[]
+  readonly dates: readonly {
+    readonly id: string; readonly name?: string; readonly year: number; readonly until?: number; readonly source: string; readonly note?: string
+    /** Its height in meters, where OSM's is missing or wrong for the series: the note says where it comes from. */
+    readonly height?: number
+  }[]
   /** Fire-insurance maps traced into footprints: the editions used, and the buildings since lost. */
-  readonly sanborn?: { readonly lost: string | readonly string[]; readonly editions: readonly number[]; readonly source: string }
+  readonly sanborn?: {
+    readonly lost: string | readonly string[]; readonly editions: readonly number[]; readonly source: string
+    /** Sheets whose fit is known to be wrong, left out until they are placed again: each says why. */
+    readonly leaveOut?: readonly { readonly edition: number; readonly sheet: string; readonly why: string }[]
+  }
   readonly traced: readonly TracedBuilding[]
   /**
    * Minor streets (tertiary, residential, service, unclassified, living streets and paths) drawn only
@@ -205,6 +213,8 @@ export const loadHistory = async (path: string): Promise<History> => {
       const fc = JSON.parse(await readFile(file, 'utf8')) as { features: { properties: Omit<TracedBuilding, 'ring'>; geometry: { coordinates: number[][][] } }[] }
       traced = traced.concat(fc.features.map((f) => ({ ...f.properties, ring: f.geometry.coordinates[0].slice(0, -1).map(([x, y]) => [x, y] as Vec2) })))
     }
+    const out = raw.sanborn.leaveOut ?? []
+    traced = traced.filter((b) => !out.some((o) => o.edition === b.edition && o.sheet === String(b.sheet)))
   }
   return {
     epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(),
@@ -329,53 +339,6 @@ export const dropUnbuiltStreets = (
     return false
   })
   return { kept, dropped }
-}
-
-/** Roads a bridge built to cross was built with: a bridge over one of these dates from it. */
-const LATER_ROADS = new Set(['motorway', 'motorway_link', 'trunk', 'trunk_link'])
-
-const segmentsCross = (a: Vec2, b: Vec2, c: Vec2, d: Vec2): boolean => {
-  const o = (p: Vec2, q: Vec2, r: Vec2) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
-  const d1 = o(c, d, a)
-  const d2 = o(c, d, b)
-  const d3 = o(a, b, c)
-  const d4 = o(a, b, d)
-  return ((d1 > 0) !== (d2 > 0)) && ((d3 > 0) !== (d4 > 0)) && d1 !== 0 && d2 !== 0 && d3 !== 0 && d4 !== 0
-}
-
-/**
- * Drop road bridges that cross a motorway or trunk road not yet built (`gone`, lines dated out
- * of the year): such a bridge went up with the road under it, whatever the catch-all rule for
- * bridges says. A street that crossed there before met nothing to bridge. Returns the kept
- * features and how many bridges went.
- */
-export const dropBridgesOverLater = (kept: readonly Feature[], gone: readonly Feature[]): { kept: Feature[]; dropped: number } => {
-  const under = gone.filter((f) => f.type === 'line' && LATER_ROADS.has(f.tags.highway ?? '') && f.tags.bridge === undefined && f.tags.tunnel === undefined)
-  if (under.length === 0) return { kept: [...kept], dropped: 0 }
-  const box = (pts: readonly Vec2[]) => {
-    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
-    for (const [x, y] of pts) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y) }
-    return [x0, y0, x1, y1]
-  }
-  const roads = under.map((f) => ({ pts: (f as { points: Vec2[] }).points, b: box((f as { points: Vec2[] }).points) }))
-  let dropped = 0
-  const out = kept.filter((f) => {
-    if (f.type !== 'line' || f.tags.bridge === undefined || f.tags.bridge === 'no' || f.tags.highway === undefined) return true
-    const b = box(f.points)
-    for (const r of roads) {
-      if (r.b[0] > b[2] || r.b[2] < b[0] || r.b[1] > b[3] || r.b[3] < b[1]) continue
-      for (let i = 0; i + 1 < f.points.length; i++) {
-        for (let j = 0; j + 1 < r.pts.length; j++) {
-          if (segmentsCross(f.points[i], f.points[i + 1], r.pts[j], r.pts[j + 1])) {
-            dropped++
-            return false
-          }
-        }
-      }
-    }
-    return true
-  })
-  return { kept: out, dropped }
 }
 
 // ---- year built ------------------------------------------------------------------------------
@@ -541,4 +504,95 @@ export const fetchYearBuilt = async (r: Region, src: YearBuiltSource, dir: strin
   await mkdir(dir, { recursive: true })
   await writeFile(join(dir, 'yearbuilt.json'), JSON.stringify({ type: 'FeatureCollection', source: src.url, features }))
   return features.length
+}
+
+/** Roads whose coming changed what was there: a bridge over one, or a verge along one, is no older. */
+const WORKS = new Set(['motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'secondary', 'secondary_link', 'tertiary_link'])
+
+/** Do segments ab and cd cross (not merely touch at an end)? */
+const crosses = (a: Vec2, b: Vec2, c: Vec2, d: Vec2): boolean => {
+  const o = (p: Vec2, q: Vec2, r: Vec2) => (q[0] - p[0]) * (r[1] - p[1]) - (q[1] - p[1]) * (r[0] - p[0])
+  const d1 = o(a, b, c), d2 = o(a, b, d), d3 = o(c, d, a), d4 = o(c, d, b)
+  return d1 * d2 < 0 && d3 * d4 < 0
+}
+
+/**
+ * What the era rules alone cannot see, because it depends on what lies next to a feature.
+ * `kept` are the features standing in `year`, `all` every feature mapped today.
+ *
+ * - A road bridge stands only over something there in its year: one whose every crossing (a
+ *   road, a railway or a waterway mapped under it) is not yet built or already gone carries
+ *   its street at grade instead (its bridge and layer tags dropped). A street bridge over
+ *   the turnpike (1958) is not drawn in 1950; the street is.
+ * - Woods and scrub lying along roads not yet built (at least `share` of the outline within
+ *   `reach` meters of them) are those roads' verges, the planted ground of an interchange,
+ *   and are dated with them.
+ */
+export const laterWorks = (
+  all: readonly Feature[], kept: readonly Feature[], year: number, h: History, reach = 20, share = 0.4,
+): { kept: Feature[]; atGrade: number; verges: number } => {
+  const lat0 = all.length > 0 ? (all[0].type === 'line' ? all[0].points[0][1] : all[0].outers[0][0][1]) : 0
+  const kx = 111320 * Math.cos((lat0 * Math.PI) / 180), ky = 110540
+  const m = (p: Vec2): Vec2 => [p[0] * kx, p[1] * ky]
+  type Seg = { a: Vec2; b: Vec2; box: [number, number, number, number] }
+  const segsOf = (pts: readonly Vec2[]): Seg[] => pts.slice(1).map((q, i) => {
+    const a = m(pts[i]), b = m(q)
+    return { a, b, box: [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[0], b[0]), Math.max(a[1], b[1])] }
+  })
+  const lines = all.filter((f): f is Extract<Feature, { type: 'line' }> => f.type === 'line')
+  const under = lines.filter((f) => (f.tags.highway !== undefined || f.tags.railway !== undefined || f.tags.waterway !== undefined) && !(f.tags.bridge !== undefined && f.tags.bridge !== 'no'))
+    .map((f) => ({ f, segs: segsOf(f.points), alive: featureAlive(f, year, h) }))
+  const later = lines.filter((f) => WORKS.has(f.tags.highway ?? '') && !featureAlive(f, year, h)).flatMap((f) => segsOf(f.points))
+  let atGrade = 0
+  let verges = 0
+  // A bridge is its spans: bridge ways of one street joined end to end. The spans over the
+  // crossing and those beside it go to grade together.
+  const isBridge = (f: Feature) => f.type === 'line' && f.tags.highway !== undefined && f.tags.bridge !== undefined && f.tags.bridge !== 'no'
+  const spans = kept.filter(isBridge) as Extract<Feature, { type: 'line' }>[]
+  const parent = new Map(spans.map((f) => [f.id, f.id]))
+  const find = (id: string): string => { let r = id; while (parent.get(r) !== r) r = parent.get(r)!; return r }
+  const ends = new Map<string, string[]>()
+  for (const f of spans) for (const p of [f.points[0], f.points[f.points.length - 1]]) {
+    const k = `${p[0]},${p[1]}|${f.tags.name ?? f.id}`
+    const list = ends.get(k)
+    if (list) list.push(f.id)
+    else ends.set(k, [f.id])
+  }
+  for (const ids of ends.values()) for (const id of ids.slice(1)) parent.set(find(id), find(ids[0]))
+  const crossed = new Map<string, number>()
+  const standing = new Map<string, number>()
+  for (const f of spans) {
+    const mine = segsOf(f.points)
+    const g = find(f.id)
+    for (const u of under) {
+      if (u.f.id === f.id) continue
+      if (!mine.some((s) => u.segs.some((t) => t.box[0] <= s.box[2] && s.box[0] <= t.box[2] && t.box[1] <= s.box[3] && s.box[1] <= t.box[3] && crosses(s.a, s.b, t.a, t.b)))) continue
+      crossed.set(g, (crossed.get(g) ?? 0) + 1)
+      if (u.alive) standing.set(g, (standing.get(g) ?? 0) + 1)
+    }
+  }
+  const out: Feature[] = []
+  for (const f of kept) {
+    if (isBridge(f)) {
+      const g = find(f.id)
+      if ((crossed.get(g) ?? 0) > 0 && (standing.get(g) ?? 0) === 0) {
+        const { bridge: _b, layer: _l, ...tags } = f.tags
+        out.push({ ...f, tags })
+        atGrade++
+        continue
+      }
+    }
+    if (f.type === 'polygon' && (f.tags.natural === 'wood' || f.tags.natural === 'scrub') && later.length > 0) {
+      const ring = f.outers[0].map(m)
+      const nearLater = (p: Vec2) => later.some((s) => {
+        if (p[0] < s.box[0] - reach || p[0] > s.box[2] + reach || p[1] < s.box[1] - reach || p[1] > s.box[3] + reach) return false
+        const dx = s.b[0] - s.a[0], dy = s.b[1] - s.a[1], l2 = dx * dx + dy * dy
+        const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p[0] - s.a[0]) * dx + (p[1] - s.a[1]) * dy) / l2))
+        return Math.hypot(p[0] - s.a[0] - t * dx, p[1] - s.a[1] - t * dy) <= reach
+      })
+      if (ring.filter(nearLater).length >= share * ring.length) { verges++; continue }
+    }
+    out.push(f)
+  }
+  return { kept: out, atGrade, verges }
 }

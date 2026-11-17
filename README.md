@@ -185,12 +185,15 @@ what is for sale:
 Each key of `onSale` is a region prefix, a set's page slug or a content page's slug, and its
 value the product or collection URL. A subject (a region, or a page's slug) is on sale under the
 longest key it starts with: `"richmond"` covers every `richmond-…` region, and a longer
-`"richmond-streetcars"` overrides it for those. The site always links to the shop's front page
+`"richmond-streetcars"` overrides it for those. A key with a year, `"<region>:<year>"` (the
+explorer's route for that year, e.g. `"richmond-downtown-time:1925"`), names that one year's
+view of a dated region and nothing else: not its other years, nor the series' page
+(`m/<region>.html`); it must match the year exactly. The site always links to the shop's front page
 (the explorer's header, the front page's banner and "Shop prints ↗" atop every static page),
 and links to buy only what `onSale` names:
 
 - a map ("Buy a print ↗", or its featured view's `shopLabel`): the explorer's info bar, its
-  front page, and `m/<region>.html`;
+  front page, and `m/<region>.html` (a year's: `m/<region>-<year>.html`);
 - a front-page section (its `shopLabel`, else "Buy prints ↗"): when every one of its `prefixes`
   is on sale under one URL, else when the slug of its story `page` is;
 - a content page (a button at its head, in the explorer and in `p/<slug>.html`): when its own

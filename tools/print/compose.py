@@ -6,6 +6,15 @@ laid out on a sheet at an exact Printful size, at 300 dpi, with a paper margin, 
 and the credit line every print must carry (OpenStreetMap is ODbL: produced works must credit
 it). The art is vector, so each panel is rasterized straight to the pixels it fills.
 
+A design with a "note" prints it in italics under the credit line: what the print does not show
+as it was (in a dated view of Richmond, that the ground is today's).
+
+Every line of a derived credit (and its note) prints at CREDIT_MIN_PT or more at the smallest
+size the sheet is sold at (spec "serves": a 24x36 file is also printed as an 8x12, a third of its
+size). Where the band's own credit size cannot reach that, the credit and note are set at that
+size, right-aligned in a column between the title and the corner kept for the title block (as wide
+as the block comes to on any face stamped from the sheet), on as many lines as they need. Sheets that already meet it are composed exactly as before.
+
 A design with "contain": true shows its region whole, letterboxed in the panel area, instead of
 cropping it to the panel's shape (for very long views on a panorama sheet).
 
@@ -37,6 +46,34 @@ CREDIT = LEGACY_CREDIT
 # wrap to two lines instead of shrinking below CREDIT_MIN_PT (a sold print remakes unchanged).
 CREDIT_DERIVED = False
 CREDIT_MIN_PT = 7
+
+
+def smallest_scale(spec, size):
+    """The smallest size a sheet of `size` (inches) is sold at, as a fraction of it: a 24x36 is
+    also sold as an 8x12 print (spec "serves"), so 1/3. A sheet not listed is sold only as itself."""
+    key = 'x'.join(f'{v:g}' for v in sorted(size))
+    sold = [s for sizes in (spec.get('serves') or {}).get(key, {}).values() for s in sizes]
+    return min([1.0] + [max(int(a) for a in s.split('x')) / max(size) for s in sold])
+
+
+def stamped_faces(spec, size):
+    """Long sides (inches) of every face cut from a sheet that gets its own title block: the
+    sheet, and each framed-canvas face made from it (canvas.py; spec "serves")."""
+    key = 'x'.join(f'{v:g}' for v in sorted(size))
+    canv = (spec.get('serves') or {}).get(key, {}).get('Framed Canvas', [])
+    return [max(size)] + [max(int(a) for a in s.split('x')) for s in canv]
+
+
+def block_reserve(long_in, dpi, scale=1.0, faces=()):
+    """Width kept clear at the bottom right, in the sheet's pixels, for the title block stamped
+    later (stamp.py size_u, titleblock.WIDTH) with its clear margin: the largest it comes to on
+    any face stamped from this sheet (a block on an 18x12 canvas face is relatively larger)."""
+    import titleblock
+    best = 0
+    for f in list(faces) or [long_in]:
+        u = round(1.3 * (f / 36) ** 0.5 * dpi / 300, 4) * scale * long_in / f
+        best = max(best, titleblock.WIDTH * u + titleblock.H * u * 0.5)
+    return best
 
 
 def build_credits(svg_path):
@@ -118,7 +155,7 @@ def text_fit(draw, text, font_path, size, max_w):
     return ImageFont.truetype(font_path, size)
 
 
-def compose(design, size, builds, regions, dpi, scale=1.0):
+def compose(design, size, builds, regions, dpi, scale=1.0, min_scale=1.0, faces=()):
     W_in, H_in = size
     W, H = round(W_in * dpi * scale), round(H_in * dpi * scale)
     short = min(W, H)
@@ -162,6 +199,15 @@ def compose(design, size, builds, regions, dpi, scale=1.0):
     sf = text_fit(d, design.get('subtitle', ''), FONT['italic'], round(band * 0.2), area_w * 0.62)
     d.text((m, by + band * 0.18 + tf.size * 1.25), design.get('subtitle', ''), font=sf, fill=DIM)
     cf = text_fit(d, CREDIT, FONT['regular'], round(band * 0.085), area_w * 0.36)
+    least = dpi * scale * CREDIT_MIN_PT / 72 / min_scale      # CREDIT_MIN_PT at the smallest size sold
+    if CREDIT_DERIVED and min_scale < 1 and cf.size < least and not two_lines_reach(d, band, area_w, least):
+        # Even two lines at the band's credit size would print below CREDIT_MIN_PT at the smallest
+        # size this sheet is sold at (a 24x36 is also an 8x12): set the credit and note at that
+        # minimum, in a column between the title and the title block's corner, on as many lines
+        # as they need.
+        credit_column(d, design, W, H, m, by, band, dpi, scale, least, sf, faces)
+        d.line((m, by + band * 0.08, W - m, by + band * 0.08), fill=INK, width=max(1, round(short * 0.0012)))
+        return sheet
     if CREDIT_DERIVED and cf.size < dpi * scale * CREDIT_MIN_PT / 72:
         # A long derived line (many sources) wraps onto two lines rather than shrink past legibility.
         size = round(band * 0.085)
@@ -173,8 +219,62 @@ def compose(design, size, builds, regions, dpi, scale=1.0):
     ly = by + band * 0.22
     for ln in lines:
         d.text((W - m - d.textlength(ln, font=cf), ly), ln, font=cf, fill=DIM); ly += cf.size * 1.45
+    if design.get('note'):
+        # What the print does not show as it was (a dated view's ground is today's), under the credit.
+        nf = ImageFont.truetype(FONT['italic'], cf.size)
+        ly += cf.size * 0.35
+        for ln in wrap_words(d, design['note'], nf, area_w * 0.36):
+            d.text((W - m - d.textlength(ln, font=nf), ly), ln, font=nf, fill=DIM); ly += cf.size * 1.45
     d.line((m, by + band * 0.08, W - m, by + band * 0.08), fill=INK, width=max(1, round(short * 0.0012)))
     return sheet
+
+
+def two_lines_reach(d, band, area_w, least):
+    """Whether the credit fits on two lines of the band's column at `least` px or more."""
+    size = round(band * 0.085)
+    if size < least: return False
+    return len(wrap(d, CREDIT, ImageFont.truetype(FONT['regular'], size), area_w * 0.36)) <= 2
+
+
+def credit_column(d, design, W, H, m, by, band, dpi, scale, least, sf, faces):
+    """The credit (and the design's note, in italics) at `least` px, rounded up, right-aligned in
+    the column from the end of the title and subtitle to the title block's reserved corner."""
+    size = int(-(-least // 1))
+    cf, nf = ImageFont.truetype(FONT['regular'], size), ImageFont.truetype(FONT['italic'], size)
+    tf = text_fit(d, design['title'], FONT['bold'], round(band * 0.42), (W - 2 * m) * 0.62)
+    left = m + max(d.textlength(design['title'], font=tf), d.textlength(design.get('subtitle', ''), font=sf)) + band * 0.5
+    right = W - m - block_reserve(max(W, H) / (dpi * scale), dpi, scale, faces)
+    col = right - left
+    lines = []
+    for ln in [x for x in wrap(d, CREDIT, cf, col) if x]:
+        lines += [(w, cf) for w in (balanced(d, ln, cf, col) if d.textlength(ln, font=cf) > col else [ln])]
+    note = [(w, nf) for w in balanced(d, design['note'], nf, col)] if design.get('note') else []
+    ly, lead = by + band * 0.15, size * 1.35
+    if ly + lead * (len(lines) + len(note) - 1) + size * 1.1 + (size * 0.35 if note else 0) > H - m:
+        raise ValueError(f"{design['title']}: the credit at {size} px needs more room than the band has")
+    for i, (ln, f) in enumerate(lines + note):
+        if note and i == len(lines): ly += size * 0.35
+        d.text((right - d.textlength(ln, font=f), ly), ln, font=f, fill=DIM); ly += lead
+
+
+def balanced(d, text, font, max_w):
+    """Words wrapped into as few lines as fit max_w, as even in length as they can be (no word
+    left alone on a last line)."""
+    n, lo, hi = len(wrap_words(d, text, font, max_w)), 0.0, max_w
+    while hi - lo > 4:
+        mid = (lo + hi) / 2
+        if len(wrap_words(d, text, font, mid)) <= n: hi = mid
+        else: lo = mid
+    return wrap_words(d, text, font, hi)
+
+
+def wrap_words(d, text, font, max_w):
+    lines, cur = [], ''
+    for w in text.split():
+        t = w if not cur else cur + ' ' + w
+        if d.textlength(t, font=font) <= max_w: cur = t
+        else: lines.append(cur); cur = w
+    return lines + [cur]
 
 
 def wrap(d, text, font, max_w):
@@ -202,7 +302,8 @@ def main():
             global CREDIT, CREDIT_DERIVED
             saved = CREDIT; CREDIT = design_credit(design, builds)
             CREDIT_DERIVED = CREDIT.startswith(BYLINE + '  ·  ') and all(build_credits(builds[p['build']]) is not None for p in design['panels'])
-            img = compose(design, (w, h), builds, spec['regions'], o.dpi, 1 / 6 if o.proof else 1.0)
+            img = compose(design, (w, h), builds, spec['regions'], o.dpi, 1 / 6 if o.proof else 1.0,
+                          smallest_scale(spec, (w, h)), stamped_faces(spec, (w, h)))
             CREDIT = saved; CREDIT_DERIVED = False
             fn = os.path.join(o.out, f"{name}_{w:g}x{h:g}{'_proof' if o.proof else ''}.jpg")
             img.save(fn, quality=80 if o.proof else 93, dpi=(o.dpi, o.dpi), subsampling=0 if not o.proof else 2)

@@ -1,7 +1,8 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { groundCover, seatLevel, settlePrisms, type Prism } from '../src/scene.ts'
+import { bankGrounds, groundCover, segmentsCross, wetShare, seatLevel, settlePrisms, spansWater, type Prism } from '../src/scene.ts'
 import type { Vec2 } from '../src/geom.ts'
+import { buildingHeights } from '../src/classify.ts'
 
 const square = (x: number, y: number, s = 10): Vec2[] => [[x, y], [x + s, y], [x + s, y + s], [x, y + s]]
 const prism = (outer: Vec2[], base: number, top: number, extra: Partial<Prism> = {}): Prism =>
@@ -101,4 +102,43 @@ test('a curated lost road bridge is drawn as a bridge in its years, and a street
   // The deck carries the line, in the line's color.
   assert.ok(deck(s1925).some((i) => i.shapes.some((sh) => sh.fill === palette('paper').tram)))
   assert.equal(deck(at(1980)).length, 0)
+})
+
+test('a building over water counts its height from the banks', () => {
+  const outer = square(0, 0, 20)
+  const canal = (p: Vec2) => p[0] > 5 && p[0] < 15
+  const wetAll = () => true
+  assert.equal(spansWater({ layer: '1' }, outer, canal), true)
+  assert.equal(spansWater({}, outer, canal), false)
+  assert.equal(spansWater({ layer: '-1' }, outer, canal), false)
+  assert.equal(spansWater({ layer: 'federal' }, outer, canal), false)
+  assert.equal(spansWater({ layer: '1' }, outer, () => false), false)
+  const pts: Vec2[] = [[0, 0], [10, 0], [20, 0], [20, 20], [10, 20], [0, 20]]
+  assert.deepEqual(bankGrounds(pts, [9, 1, 8, 8, 1, 9], canal), [9, 8, 8, 9])
+  // A boathouse wholly on the water keeps every corner.
+  assert.deepEqual(bankGrounds(pts, [1, 1, 1, 1, 1, 1], wetAll), [1, 1, 1, 1, 1, 1])
+})
+
+test('a tagged height far over its floors is a mistag, when the map checks levels', () => {
+  const hues = { building: 'apartments', 'building:levels': '6', height: '80' }
+  assert.equal(buildingHeights(hues, 2000).top, 80)
+  assert.equal(buildingHeights(hues, 2000, true).source, 'levels')
+  assert.ok(Math.abs(buildingHeights(hues, 2000, true).top - 21.2) < 0.01)
+  // Five and a half meters a floor still stands, and a church keeps its tall tagged height.
+  assert.equal(buildingHeights({ building: 'office', 'building:levels': '4', height: '22' }, 900, true).top, 22)
+  assert.equal(buildingHeights({ building: 'church', 'building:levels': '1', height: '40' }, 900, true).top, 40)
+  assert.equal(buildingHeights({ building: 'apartments', 'building:levels': 'many', height: '80' }, 900, true).top, 80)
+})
+
+test('the share of a footprint on water', () => {
+  const half = (p: Vec2) => p[0] < 10
+  assert.ok(Math.abs(wetShare(square(0, 0, 20), half) - 0.5) < 0.05)
+  assert.equal(wetShare(square(0, 0, 20), () => false), 0)
+  assert.equal(wetShare(square(0, 0, 20), () => true), 1)
+})
+
+test('segments cross only through each other, not at a shared end', () => {
+  assert.equal(segmentsCross([0, 0], [2, 2], [0, 2], [2, 0]), true)
+  assert.equal(segmentsCross([0, 0], [1, 1], [1, 1], [2, 0]), false)
+  assert.equal(segmentsCross([0, 0], [1, 0], [0, 1], [1, 1]), false)
 })
