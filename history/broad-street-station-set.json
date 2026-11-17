@@ -359,5 +359,9 @@
     ]
    ]
   }
- ]
+ ],
+ "tracedSmooth": 2.5,
+ "siteWholeLines": true,
+ "clearCarLines": true,
+ "tieClear": 0.5
 }

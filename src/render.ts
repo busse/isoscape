@@ -219,8 +219,23 @@ export const offsetJoined = (segs: readonly (readonly Vec2[])[], k: number): Vec
  * rectangle square to the track where it stands, spaced evenly along the whole line (the
  * spacing carries on across a joint, and starts again only after a break in the line).
  */
-export const tiesAlong = (segs: readonly (readonly Vec2[])[]): Vec2[][] => {
+export const tiesAlong = (segs: readonly (readonly Vec2[])[], clear = 0): Vec2[][] => {
   const out: Vec2[][] = []
+  // With `clear`, a tie whose center is within that many meters of one already laid is left
+  // out: where two tracks lie over each other (a turnout, a wye's legs) their ties do not clump.
+  const laid = new Map<string, Vec2[]>()
+  const free = (c: Vec2): boolean => {
+    if (clear <= 0) return true
+    const gx = Math.floor(c[0] / clear), gy = Math.floor(c[1] / clear)
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+      for (const q of laid.get(`${gx + dx},${gy + dy}`) ?? []) if (Math.hypot(q[0] - c[0], q[1] - c[1]) < clear) return false
+    }
+    const k = `${gx},${gy}`
+    const list = laid.get(k)
+    if (list) list.push(c)
+    else laid.set(k, [c])
+    return true
+  }
   let next = TIE.every / 2
   let prev: Vec2 | undefined
   for (const [a, b] of segs) {
@@ -234,6 +249,7 @@ export const tiesAlong = (segs: readonly (readonly Vec2[])[]): Vec2[][] => {
     const hw = TIE.width / 2
     for (; next <= len; next += TIE.every) {
       const c: Vec2 = [a[0] + u[0] * next, a[1] + u[1] * next]
+      if (!free(c)) continue
       out.push([
         [c[0] - n[0] * hl - u[0] * hw, c[1] - n[1] * hl - u[1] * hw],
         [c[0] + n[0] * hl - u[0] * hw, c[1] + n[1] * hl - u[1] * hw],
@@ -431,7 +447,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     ribbonLayer('rail'),
     // Close up, the ties lie on the ballast as ground polygons (opaque: two strips paint the
     // ground where they lap, and a see-through tie would come out darker there).
-    { cls: 'tie', small: true, entries: close ? tiesAlong(scene.ribbons.filter((rb) => rb.kind === 'rail').flatMap((rb) => rb.center)).map((q) => entryOf([q])) : [] },
+    { cls: 'tie', small: true, entries: close ? tiesAlong(scene.ribbons.filter((rb) => rb.kind === 'rail').flatMap((rb) => rb.center), scene.time?.tieClear ?? 0).map((q) => entryOf([q])) : [] },
     ribbonLayer('tram'),
   ]
   const lineLayer = (kind: string, cls: string) => ({

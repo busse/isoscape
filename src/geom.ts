@@ -273,3 +273,27 @@ export const simplifyLine = (pts: readonly Vec2[], tol: number): Vec2[] => {
   }
   return pts.filter((_, k) => keep[k] === 1)
 }
+
+/**
+ * A ring without its spikes: a corner sharper than `minDeg` with an edge shorter than `maxLen`
+ * on either side is dropped, again and again until none is left (a traced outline's pixel teeth).
+ */
+export const despike = (ring: Ring, minDeg = 40, maxLen = 8): Ring => {
+  let r = ring.slice()
+  for (let pass = 0; pass < 20 && r.length > 3; pass++) {
+    let changed = false
+    const out: Vec2[] = []
+    for (let i = 0; i < r.length; i++) {
+      const a = r[(i - 1 + r.length) % r.length], b = r[i], c = r[(i + 1) % r.length]
+      const ux = a[0] - b[0], uy = a[1] - b[1], vx = c[0] - b[0], vy = c[1] - b[1]
+      const lu = Math.hypot(ux, uy), lv = Math.hypot(vx, vy)
+      if (lu < 1e-9 || lv < 1e-9) { changed = true; continue }
+      const ang = (Math.acos(Math.max(-1, Math.min(1, (ux * vx + uy * vy) / (lu * lv)))) * 180) / Math.PI
+      if (ang < minDeg && Math.min(lu, lv) < maxLen && r.length - (changed ? 1 : 0) > 3) { changed = true; continue }
+      out.push(b)
+    }
+    r = out
+    if (!changed) break
+  }
+  return r
+}

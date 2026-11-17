@@ -688,7 +688,17 @@ within 4 m of a rail viaduct or a curated bridge of the year, and any dated buil
 bridge passes over, is left out. **Streets clear:** a traced building with a street's center
 line or a car line passing through it, or within 2 m of it, is left out (the sheet was fitted a
 little off). **Streets under the cars:** a street with half its points within 12 m of a car line
-of the year is kept, houses or not. A history can also extend another (`extends`: its rules and
+of the year is kept, houses or not; and a building dated only by its parcel that a car line of
+the year runs through is left out, its parcel's year taken to be another building's.
+**Smoother tracing:** traced outlines are simplified to 2.5 m and rid of spikes (a corner under
+40° with an edge under 8 m), and a gray ("iron") footprint filling under 60% of its hull is taken
+for the sheet's shading and left out; every traced building keeps its class's assumed storeys
+(brick and stone 3, frame 2, iron 4, fire-resistive 3, fireproof 6), since no sheet's storey
+count was recorded. **Track on a site:** a siding mostly on a curated site goes whole, one mostly
+off it stays whole, so none is cut square at the site's edge. **Ties:** close up, a tie within
+0.5 m of one already laid is left out, so the ties of a turnout's two tracks do not clump. In
+the station's set views the platform sheds are drawn with the cutaway's butterfly roofs and the
+dome in terra-cotta tile, as it was until 1955. A history can also extend another (`extends`: its rules and
 dates first, its features replacing the base's of the same id), which is how the set's close
 views of Broad Street Station take these rules while the cutaway, drawn from the station's own
 history, stays as it was sold. The sets' era rules add: ramps and turning roads (`*_link`) from

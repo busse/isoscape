@@ -33101,6 +33101,141 @@
    "year": 2010,
    "source": "https://sah-archipedia.org/buildings/VA-01-RI307",
    "note": "Today's outline takes in the wings of 1954, 1970, 1976, 1984 and 2010 around the 1936 building facing the Boulevard. The 1936 building alone is not mapped, so the museum is not drawn before the outline was complete (approximate: it stood from 1936)."
+  },
+  {
+   "id": "w366226948",
+   "name": "Virginia State Capitol, central block",
+   "year": 1788,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "Jefferson's Capitol, completed 1788 (https://vga.virginia.gov/?p=73). Its footprint is OSM's central building part (w366226948), taken to be the original building because it stands between the two wings of 1904–06; that identification is not from the source. OSM tags it 8.1 m; its height here, 26 m, is the roof height (85 ft, three floors) SkyscraperPage measured: https://skyscraperpage.com/b190890.",
+   "height": 26
+  },
+  {
+   "id": "w366226949",
+   "name": "Virginia State Capitol, west wing",
+   "year": 1906,
+   "height": 18,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "One of the two wings added 1904–06, an OSM building part with two levels and no height (drawn about 7 m, below the houses around the square). 18 m, under the central block's 26 m roof, is approximate."
+  },
+  {
+   "id": "w366226950",
+   "name": "Virginia State Capitol, east wing",
+   "year": 1906,
+   "height": 18,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "One of the two wings added 1904–06, an OSM building part with two levels and no height (drawn about 7 m, below the houses around the square). 18 m, under the central block's 26 m roof, is approximate."
+  },
+  {
+   "id": "w45088494",
+   "name": "Virginia State Capitol",
+   "year": 1906,
+   "source": "https://vga.virginia.gov/?p=73",
+   "note": "The Capitol as OSM outlines it today, with the wings of 1904–06, from 1906. OSM maps it as three parts: the central block (below) and the two wings."
+  },
+  {
+   "id": "w400327565",
+   "name": "St. John's Church",
+   "year": 1741,
+   "source": "https://sah-archipedia.org/node/20521",
+   "height": 9,
+   "note": "Completed 1741 (https://lva-virginia.libguides.com/richmond-maps/history). A one-story frame church with a double-pitched roof, enlarged in 1772 and 1829, with a tower from 1833 (rebuilt 1866 and 1904–05). OSM gives no height, so it was drawn at the 16 m guess for a church; 9 m for the ridge is approximate. The outline is today's, so it shows the later additions in every year."
+  },
+  {
+   "id": "w365615571",
+   "name": "Old Stone House",
+   "year": 1754,
+   "source": "https://en.wikipedia.org/wiki/Old_Stone_House_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w207696511",
+   "name": "Masons Hall",
+   "year": 1787,
+   "source": "https://en.wikipedia.org/wiki/History_of_Richmond,_Virginia"
+  },
+  {
+   "id": "w224601769",
+   "name": "Wickham House",
+   "year": 1812,
+   "source": "https://en.wikipedia.org/wiki/Wickham_House"
+  },
+  {
+   "id": "w658620667",
+   "name": "Executive Mansion",
+   "year": 1813,
+   "source": "https://en.wikipedia.org/wiki/Virginia_Governor%27s_Mansion"
+  },
+  {
+   "id": "w224530979",
+   "name": "Monumental Church",
+   "year": 1814,
+   "source": "https://en.wikipedia.org/wiki/Monumental_Church"
+  },
+  {
+   "id": "w224601753",
+   "name": "White House of the Confederacy",
+   "year": 1818,
+   "source": "https://en.wikipedia.org/wiki/White_House_of_the_Confederacy"
+  },
+  {
+   "id": "w224530980",
+   "name": "Egyptian Building",
+   "year": 1845,
+   "source": "https://en.wikipedia.org/wiki/Egyptian_Building"
+  },
+  {
+   "id": "r19918536",
+   "name": "St. Paul's Episcopal Church",
+   "year": 1845,
+   "source": "https://en.wikipedia.org/wiki/St._Paul%27s_Episcopal_Church_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w113023444",
+   "name": "Old City Hall",
+   "year": 1894,
+   "source": "https://en.wikipedia.org/wiki/Old_City_Hall_(Richmond,_Virginia)"
+  },
+  {
+   "id": "w236488169",
+   "name": "First National Bank Building",
+   "year": 1913,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "Completed 1913, Richmond's first high-rise; the assessor's year (1911) put it two years early."
+  },
+  {
+   "id": "w266761453",
+   "name": "The Virginia",
+   "year": 1906,
+   "source": "https://en.wikipedia.org/wiki/The_Virginia",
+   "note": "Five-story apartment building of 1906 (National Register); the assessor's year (1847) is the parcel's, not the building's."
+  },
+  {
+   "id": "w225274652",
+   "name": "Riverside on the James, parking deck",
+   "year": 2005,
+   "source": "https://www.businesswire.com/news/home/20210407005264/en/American-Real-Estate-Partners-Sells-Class-A-Richmond-Office-Tower-to-Opal-Holdings/",
+   "note": "The tower's attached parking deck. Its year is taken to be the tower's (2005); approximate."
+  },
+  {
+   "id": "w398440546",
+   "name": "The Locks Tower",
+   "year": 2019,
+   "source": "https://www.multihousingnews.com/downtown-richmond-gets-new-luxury-high-rise/",
+   "note": "Twelve-story apartment tower at 1001 E. Byrd St., completed by October 2019 (planned in 2017: https://richmondbizsense.com/2017/11/20/58m-12-story-tower-slated-along-canal/)."
+  },
+  {
+   "id": "w236488171",
+   "name": "Virginia Mutual Building",
+   "year": 1921,
+   "source": "https://en.wikipedia.org/wiki/Virginia_Mutual_Building",
+   "note": "Built 1920–21 at 821 E. Main St. Curating its neighbor, the First National Bank Building, sets aside their shared parcel's year, so it is dated here."
+  },
+  {
+   "id": "w264523638",
+   "name": "629 East Main Street",
+   "year": 1922,
+   "source": "https://skyscraperpage.com/b18864",
+   "note": "The 14-storey office tower, finished in 1922 (now the Residences at Richmond Trust); the parcel's year agrees."
   }
  ],
  "sanborn": {
@@ -33128,5 +33263,9 @@
  "approachesWithBridges": true,
  "viaductClearance": 4,
  "tracedClearOfStreets": 2,
- "streetsUnderCars": true
+ "streetsUnderCars": true,
+ "tracedSmooth": 2.5,
+ "siteWholeLines": true,
+ "clearCarLines": true,
+ "tieClear": 0.5
 }

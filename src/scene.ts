@@ -9,7 +9,7 @@
 
 import {
   centroid, clipRingToRect, clipSegmentToRect, convexHull, hash, insideRect, orient, pointInPolygon,
-  pointInRing, signedArea, simplifyLine, simplifyRing, type Ring, type Vec2,
+  despike, pointInRing, signedArea, simplifyLine, simplifyRing, type Ring, type Vec2,
 } from './geom.ts'
 import {
   buildingClass, buildingHeights, groundKind, isBridge, isPath, isRail, roadWidth, waterFlows, waterwayWidth, type GroundKind,
@@ -97,7 +97,7 @@ export interface Scene {
   readonly items: Item[]
   readonly stats: Record<string, number>
   /** For a dated scene: the year, its title, and the curated features drawn in it. */
-  readonly time?: { readonly year: number; readonly title?: string; readonly curated: readonly HistoryFeature[] }
+  readonly time?: { readonly year: number; readonly title?: string; readonly curated: readonly HistoryFeature[]; readonly tieClear?: number }
   /** Track drawn wider than life (a history's `railScale` over 1) is inked dark, to read from afar. */
   readonly boldRail?: boolean
   /** Words on the map: curated labels, at view meters and the ground height there. */
@@ -339,10 +339,19 @@ export const buildScene = (
     const pts = viewPts ?? line.points.map(([lon, lat]) => view.toView(lon, lat))
     const quads: Vec2[][] = []
     const center: Vec2[][] = []
+    // A series can take track whole or not at all on a site (siteWholeLines): a siding mostly
+    // on the grounds goes, one mostly off them stays whole, and none is cut square at the edge.
+    let whole = false
+    if (today && kind === 'rail' && time?.history.siteWholeLines === true && basins.length > 0) {
+      const mids = pts.slice(1).map((q, i): Vec2 => [(pts[i][0] + q[0]) / 2, (pts[i][1] + q[1]) / 2])
+      const inside = mids.filter((m) => basins.some((r) => pointInRing(m, r))).length
+      if (inside * 2 >= mids.length) return null
+      whole = true
+    }
     for (let i = 0; i + 1 < pts.length; i++) {
       const seg = clipSegmentToRect(pts[i], pts[i + 1], wide)
       if (seg === null) continue
-      if (today && (kind === 'road' || kind === 'path' || kind === 'rail') && !inTown(seg[0], seg[1])) continue
+      if (today && (kind === 'road' || kind === 'path' || kind === 'rail') && !whole && !inTown(seg[0], seg[1])) continue
       const q = segmentQuad(seg[0], seg[1], width / 2, width / 2)
       if (q === null) continue
       quads.push(q)
@@ -422,7 +431,9 @@ export const buildScene = (
           for (let i = 1; i + 1 < part.length; i++) {
             const [cx, cy] = part[i]
             if (!insideRect(part[i], wide)) continue
-            r.quads.push(Array.from({ length: 12 }, (_, q): Vec2 => [cx + (w / 2) * Math.cos((q * Math.PI) / 6), cy + (w / 2) * Math.sin((q * Math.PI) / 6)]))
+            // Wound as the ribbon's quads are, so the layer's nonzero fill joins them, not cancels.
+            const disc = Array.from({ length: 12 }, (_, q): Vec2 => [cx + (w / 2) * Math.cos((q * Math.PI) / 6), cy + (w / 2) * Math.sin((q * Math.PI) / 6)])
+            r.quads.push(Math.sign(signedArea(disc)) === Math.sign(signedArea(r.quads[0])) ? disc : disc.reverse())
           }
           ribbons.push(r)
         }
@@ -455,11 +466,20 @@ export const buildScene = (
   const underCurated = time?.history.viaductClearance === undefined ? null
     : lineIndex(features.filter((f): f is LineFeature => f.type === 'line' && f.id.startsWith('history:') && isBridge(f.tags)).map((f) => f.points.map(([lon, lat]) => view.toView(lon, lat))), time.history.viaductClearance)
   let underCuratedBridge = 0
+  // With clearCarLines, a building dated only by its parcel that a car line of the year runs
+  // through is left out: the line ran down a street there, so the parcel's year is another
+  // building's (approximate: the line's own placement is approximate in places).
+  const onCarLine = time?.history.clearCarLines !== true ? null : lineIndex(tramRuns.map((r) => r.pts), 0.5)
+  let onCarLines = 0
   for (const f of [...osmBuildings, ...extraBuildings]) {
     const isPart = f.tags['building:part'] !== undefined && f.tags.building === undefined
     if (f.tags.building === undefined && !isPart) continue
     if (underCurated !== null && time?.dates.get(f.id)?.source !== 'curated' && f.outers.some((o) => underCurated(toViewRing(view, o)))) {
       underCuratedBridge++
+      continue
+    }
+    if (onCarLine !== null && time?.dates.get(f.id)?.source === 'parcel' && f.outers.some((o) => onCarLine(toViewRing(view, o)))) {
+      onCarLines++
       continue
     }
     // Canopies (`building=roof`) are open underneath; a solid prism would misdraw them.
@@ -472,6 +492,7 @@ export const buildScene = (
     })
   }
   if (underCuratedBridge > 0) stats.underCuratedBridge = underCuratedBridge
+  if (onCarLines > 0) stats.parcelDatedOnCarLines = onCarLines
   // A lattice tower (the Eiffel Tower, Tokyo Tower) is drawn whole as a tapering spire from
   // its outline, so the platforms mapped inside it as parts are dropped.
   const lattice = solids.filter((s) => isLatticeTower(s.tags))
@@ -796,10 +817,21 @@ export const buildScene = (
       ...tramRuns.map((r) => r.pts),
     ], streetClear)
     let tracedInStreet = 0
+    let tracedRagged = 0
     for (const b of time.history.traced) {
       if (!alive(b.from, b.to, time.year)) continue
-      const outer = orient(simplifyRing(toViewRing(view, b.ring), 0.3), true)
+      // A series can smooth its traced outlines further (tracedSmooth, meters): simplified to that
+      // tolerance and rid of spikes, so a sheet's pixel teeth do not draw as a sawtooth; and a
+      // gray "iron" footprint filling under TRACED_IRON_FILL of its hull is taken for the
+      // sheet's shading, not a building, and left out.
+      const smooth = time.history.tracedSmooth
+      const outer = smooth === undefined ? orient(simplifyRing(toViewRing(view, b.ring), 0.3), true)
+        : orient(despike(simplifyRing(toViewRing(view, b.ring), smooth)), true)
       if (outer.length < 3 || !outer.every((p) => insideRect(p, frame))) continue
+      if (smooth !== undefined && b.material === 'iron' && Math.abs(signedArea(outer)) < TRACED_IRON_FILL * Math.abs(signedArea(convexHull(outer)))) {
+        tracedRagged++
+        continue
+      }
       if (wetShare(outer, (p) => onWater(sc, p)) >= 0.5) {
         tracedOnWater++
         continue
@@ -822,6 +854,7 @@ export const buildScene = (
     if (tracedOnWater > 0) stats.tracedOnWater = tracedOnWater
     if (tracedUnderViaduct > 0) stats.tracedUnderViaduct = tracedUnderViaduct
     if (tracedInStreet > 0) stats.tracedInStreet = tracedInStreet
+    if (tracedRagged > 0) stats.tracedRagged = tracedRagged
     stats.tracedEndMap = ends.map
     stats.tracedEndRebuilt = ends.rebuilt
     stats.tracedEndHighway = ends.highway
@@ -860,7 +893,7 @@ export const buildScene = (
 
   return {
     region, view, palette: pal, terrain, ground, ribbons, items, stats,
-    ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated } }),
+    ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated, ...(time.history.tieClear === undefined ? {} : { tieClear: time.history.tieClear }) } }),
     ...(labels.length === 0 ? {} : { labels }),
     ...(railScale > 1 ? { boldRail: true } : {}),
     ...(cutPlaneOut === undefined ? {} : { cut: cutPlaneOut }),
@@ -1294,6 +1327,8 @@ export const TRAM_ON_DECK = 0.45
 export const TRAM_TOLERANCE = 0.4
 /** Meters from a car line within which a street is taken to be the one it ran on (streetsUnderCars). */
 export const STREET_UNDER_CAR = 12
+/** A traced gray ("iron") footprint must fill this share of its hull to be taken for a building (tracedSmooth). */
+export const TRACED_IRON_FILL = 0.6
 
 /**
  * Half-width of a lattice tower at fraction `t` of its height, as a fraction of the base: the

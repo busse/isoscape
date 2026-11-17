@@ -233,6 +233,14 @@ export interface History {
    * the sheet was fitted a little off and set it in the street.
    */
   readonly tracedClearOfStreets?: number
+  /** Meters: simplify traced outlines to this and take out their spikes; drop ragged gray footprints. */
+  readonly tracedSmooth?: number
+  /** Track on a curated site is taken whole or not at all, never cut at the site's edge. */
+  readonly siteWholeLines?: boolean
+  /** Leave out a building dated only by its parcel that a car line of the year runs through. */
+  readonly clearCarLines?: boolean
+  /** Meters: close up, a tie within this of one already laid is left out (turnouts, wyes). */
+  readonly tieClear?: number
   /** Keep a street a car line of the year ran along, even with no house of the year on it. */
   readonly streetsUnderCars?: boolean
   /** Bridges drawn at grade before a year, with why (the street crossed there before its bridge). */
@@ -274,6 +282,10 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.vergeTags === undefined ? {} : { vergeTags: raw.vergeTags }),
     ...(raw.approachesWithBridges === undefined ? {} : { approachesWithBridges: raw.approachesWithBridges }),
     ...(raw.atGrade === undefined ? {} : { atGrade: raw.atGrade }),
+    ...(raw.tracedSmooth === undefined ? {} : { tracedSmooth: raw.tracedSmooth }),
+    ...(raw.siteWholeLines === undefined ? {} : { siteWholeLines: raw.siteWholeLines }),
+    ...(raw.clearCarLines === undefined ? {} : { clearCarLines: raw.clearCarLines }),
+    ...(raw.tieClear === undefined ? {} : { tieClear: raw.tieClear }),
     ...(raw.streetsUnderCars === undefined ? {} : { streetsUnderCars: raw.streetsUnderCars }),
     ...(raw.viaductClearance === undefined ? {} : { viaductClearance: raw.viaductClearance }),
     ...(raw.tracedClearOfStreets === undefined ? {} : { tracedClearOfStreets: raw.tracedClearOfStreets }),
