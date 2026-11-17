@@ -57,8 +57,9 @@ Copernicus's 30 m model for the rest of the world (see [Elevation sources](#elev
 
 **How isoscape was made.** isoscape was built, and the holiday shop is run, in chats with
 Claude, Anthropic's AI, using Claude Opus 5.5, directed and reviewed by Chris Busse. Claude wrote
-the code, traced the historic buildings, laid out the prints, and set up the shop. The maps are
-drawn by software from open data, not by hand; the historic years are machine-traced sketches.
+the code, traced the historic buildings, laid out the prints, and set up the shop. Chris Busse
+draws the maps with isoscape, in code, from open data; nothing is drawn by hand. The historic
+years are machine-traced sketches.
 
 Prints of some of the designs on the isoscape site are sold in a holiday shop at
 [chrisbusse.com](https://chrisbusse.com), open through December 31, 2026; the site links to a
