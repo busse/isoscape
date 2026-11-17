@@ -750,7 +750,14 @@ export const buildScene = (
         if (cut !== undefined) placed.push({ h, outer: h.shape === 'stair' || h.shape === 'arch' ? toViewRing(view, h.ring) : outer, seat, top })
         else {
           const t = toned(pal, h.tone)
-          const solid = h.shape === 'revolve' ? solidItem(view, partTones(pal, h), `history:${h.id}`, partSolids({ h, outer, seat, top }).solids, h.name) : null
+          // A series can draw its turned parts (a dome) as shaded faces inked only at their foot
+          // (revolveInkFoot): inked facet by facet, a dome a few dozen meters across reads as a
+          // black disc at a map's scale.
+          const solids = h.shape === 'revolve' ? partSolids({ h, outer, seat, top }).solids : []
+          const footZ = Math.min(...solids.flatMap((sl) => sl.faces.flatMap((f) => f.pts.map((q) => q[2]))))
+          const solid = h.shape === 'revolve'
+            ? solidItem(view, partTones(pal, h), `history:${h.id}`, solids, h.name, time?.history.revolveInkFoot === true ? (q) => q[2] > footZ + 0.01 : undefined)
+            : null
           if (solid !== null) items.push(solid)
           else items.push(h.shape === 'dome'
             ? dome(view, pal, `history:${h.id}`, outer, seat, top, h.name)
@@ -2381,7 +2388,9 @@ const bridgePieces = (
         // A pier over a building stands on its roof, not down through it.
         const below = buildingAt(roofs, c0)
         const footZ = Math.max(terrain.z(c0), below !== null && below.base < pz ? below.top : -Infinity)
-        if (pz - footZ > 3) {
+        // A set's rail bridge stands on its piers over water however low it runs (railPiersOverWater).
+        const wetFoot = rail && region.railPiersOverWater === true && below === null && drawnWet(terrain, c0) === true
+        if (pz - footZ > (wetFoot ? 0.5 : 3)) {
           const c: Vec2 = [p0[0] + (p1[0] - p0[0]) * u, p0[1] + (p1[1] - p0[1]) * u]
           const dx = (p1[0] - p0[0]) / Math.max(1e-6, s1 - s0)
           const dy = (p1[1] - p0[1]) / Math.max(1e-6, s1 - s0)

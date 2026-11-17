@@ -48,6 +48,11 @@ export interface Region {
   readonly bridgeDeck?: number
   readonly bridges?: readonly BridgeRule[]
   /**
+   * Rail bridges stand on piers over water however low their deck (a set's maps): without it a
+   * pier is drawn only where the deck stands more than 3 m above its foot.
+   */
+  readonly railPiersOverWater?: boolean
+  /**
    * Extra data, beyond OSM and elevation. `buildings` lists where footprints come from:
    * OpenStreetMap and/or Microsoft's ML footprints (OSM wins where both have a building).
    * `landcover: 'nlcd'` draws woods, wetlands, fields and crops from the National Land Cover

@@ -383,5 +383,6 @@
  "clearCarLines": true,
  "tieClear": 0.5,
  "carLineBed": 1.5,
- "carLineSeal": true
+ "carLineSeal": true,
+ "revolveInkFoot": true
 }

@@ -22,6 +22,16 @@
     "https://bridgelookup.com/bridge/582613",
     "https://bridgelookup.com/bridge/582615"
    ]
+  },
+  {
+   "id": [
+    "w6038838"
+   ],
+   "before": 1950,
+   "note": "Campus Drive past the Burying Ground: the road built through here in 1912 and widened in 1947 ran on the ground; no source found dates today's bridge, so before 1950 the drive and the Westhampton cars are drawn at grade (approximate).",
+   "sources": [
+    "https://buryinggroundmemorial.richmond.edu/timeline.html"
+   ]
   }
  ],
  "features": [
@@ -80,9 +90,13 @@
     [
      -77.4445848,
      37.5296027
+    ],
+    [
+     -77.4442837,
+     37.5276392
     ]
    ],
-   "note": "The low iron bridge from Ninth Street to Manchester, toll-free, built 1878 and closed after the floods of 1969 and 1972, when the Manchester Bridge replaced it. The Forest Hill cars crossed on it. Drawn on the line of today's Manchester Bridge, where the car line is placed: its exact line and height are approximate.",
+   "note": "The low iron bridge from Ninth Street to Manchester, toll-free, built 1878 and closed after the floods of 1969 and 1972, when the Manchester Bridge replaced it. The Forest Hill cars crossed on it. Drawn on the line of today's Manchester Bridge, where the car line is placed, landing at Seventh Street and Semmes Avenue, its deck 4 m above the river: its exact line, landing and height are approximate.",
    "sources": [
     "https://dogtowndish.com/2018/03/03/richmonds-lost-singing-9th-street-bridge/",
     "https://en.wikipedia.org/wiki/Manchester_Bridge_(Virginia)",
@@ -692,6 +706,44 @@
     "https://en.wikipedia.org/wiki/Byrd_Street_Station",
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "rp-manchester-approach",
+   "name": "Richmond and Petersburg (Atlantic Coast Line) approach in Manchester",
+   "kind": "rail",
+   "from": 1902,
+   "to": 1971,
+   "line": [
+    [
+     -77.4459585,
+     37.5295426
+    ],
+    [
+     -77.4459745,
+     37.5295251
+    ],
+    [
+     -77.4462565,
+     37.529227
+    ],
+    [
+     -77.4468448,
+     37.5286108
+    ],
+    [
+     -77.4468925,
+     37.5285472
+    ],
+    [
+     -77.4469411,
+     37.5280628
+    ]
+   ],
+   "note": "The track from the south end of the Richmond and Petersburg bridge (OSM w710689016): along the old grade OSM maps as a path today (w1065955897), then on to the Southern's line beside it, so the bridge lands on track, not on the hillside. Approximate: where the R&P met the Southern here is not drawn from a source. Drawn with the bridge, 1902 to 1970.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge"
    ],
    "confidence": "approximate"
   },
@@ -11371,6 +11423,72 @@
   }
  ],
  "rules": [
+  {
+   "where": {
+    "name": "Westhampton Lake",
+    "type": "polygon"
+   },
+   "eras": [
+    [
+     1902,
+     null
+    ]
+   ],
+   "note": "The streetcar company's Westhampton Park opened by the lake in May 1902.",
+   "sources": [
+    "https://magazine.richmond.edu/article/-/25779"
+   ]
+  },
+  {
+   "where": {
+    "name": "Boat Lake",
+    "type": "polygon"
+   },
+   "eras": [
+    [
+     1888,
+     null
+    ]
+   ],
+   "note": "Fountain (Boat) Lake is the pit dug for the berms of the New Reservoir, built 1875–1888.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Byrd_Park"
+   ]
+  },
+  {
+   "where": {
+    "name": "Swan Lake",
+    "type": "polygon"
+   },
+   "eras": [
+    [
+     1917,
+     null
+    ]
+   ],
+   "note": "Planned by 1914; by 1917 the park had its two new lakes.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Byrd_Park",
+    "https://www.tclf.org/landscapes/byrd-park"
+   ]
+  },
+  {
+   "where": {
+    "name": "Shields Lake",
+    "type": "polygon"
+   },
+   "eras": [
+    [
+     1917,
+     null
+    ]
+   ],
+   "note": "Planned by 1914; by 1917 the park had its two new lakes.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Byrd_Park",
+    "https://www.tclf.org/landscapes/byrd-park"
+   ]
+  },
   {
    "where": {
     "name": "The Diamond"
