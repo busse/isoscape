@@ -684,7 +684,7 @@ source.
 The two sets (the 1925 streetcars and Broad Street in 1943) switch on more of these rules in
 their histories, each off unless a history asks for it. **Laid-out ground by its parcel:**
 lawns, beds, pitches, playgrounds and service roads take the assessor's year built of the
-parcel they lie in (a polygon's center, a road's midpoint), so the planted strips of a lot paved
+parcel they lie in (a polygon's center, a road's midpoint; not a parcel holding a building with a curated year, whose recorded year is another building's), so the planted strips of a lot paved
 in 2017 and the drives of a yard built in 1989 are no older than the lot. **More verges:**
 grass and meadow, as well as woods and scrub, along a road not yet built are its infields.
 **Approaches with their bridges:** where a road bridge is not drawn in a year, the ways that lead

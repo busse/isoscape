@@ -673,7 +673,7 @@ const PARCEL_GROUNDS: Record<string, readonly string[]> = {
  * a line's midpoint along its length), for a series with `groundsByParcel`. Parcels with no
  * plausible year (before 1700) date nothing.
  */
-export const dateGrounds = (features: readonly Feature[], parcels: readonly Parcel[]): Map<string, Dated> => {
+export const dateGrounds = (features: readonly Feature[], parcels: readonly Parcel[], curated: History['dates'] = []): Map<string, Dated> => {
   const cell = 0.001
   const grid = new Map<string, number[]>()
   parcels.forEach((p, k) => {
@@ -688,11 +688,18 @@ export const dateGrounds = (features: readonly Feature[], parcels: readonly Parc
       }
     }
   })
+  const parcelAt = (c: Vec2): number => {
+    for (const k of grid.get(`${Math.floor(c[0] / cell)},${Math.floor(c[1] / cell)}`) ?? []) if (pointInRing(c, parcels[k].ring)) return k
+    return -1
+  }
+  // As in dateBuildings, a parcel holding a building with a curated year dates nothing else:
+  // its recorded year is evidently another building's (a station's grounds, a campus).
+  const ids = new Set(curated.map((d) => d.id))
+  const distrusted = new Set(features.filter((f) => f.type === 'polygon' && ids.has(f.id)).map((f) => parcelAt(centroid((f as PolygonFeature).outers[0]))))
   const yearAt = (c: Vec2): number | null => {
-    for (const k of grid.get(`${Math.floor(c[0] / cell)},${Math.floor(c[1] / cell)}`) ?? []) {
-      if (pointInRing(c, parcels[k].ring)) return parcels[k].year >= 1700 ? parcels[k].year : null
-    }
-    return null
+    const k = parcelAt(c)
+    if (k < 0 || distrusted.has(k)) return null
+    return parcels[k].year >= 1700 ? parcels[k].year : null
   }
   const midpoint = (pts: readonly Vec2[]): Vec2 => {
     const lens = pts.slice(1).map((q, i) => Math.hypot(q[0] - pts[i][0], q[1] - pts[i][1]))

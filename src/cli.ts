@@ -100,7 +100,7 @@ const loadInputs = async (name: string) => {
       parcels = (await loadYearBuilt(yearBuiltDirs(region, resolve('data')), region.time.yearBuilt.field, name)).parcels
     }
     const dated = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates)
-    if (history.groundsByParcel === true) for (const [id, d] of dateGrounds(features, parcels)) if (!dated.has(id)) dated.set(id, d)
+    if (history.groundsByParcel === true) for (const [id, d] of dateGrounds(features, parcels, history.dates)) if (!dated.has(id)) dated.set(id, d)
     dates = dated
   }
   return { region, features, elevation, extra, history, dates }

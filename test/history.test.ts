@@ -230,6 +230,9 @@ test('laid-out ground and service roads take the year of the parcel they lie in 
   assert.deepEqual(kept.map((f) => f.id), ['drive'])
   // Without the flag the parcel's year is not read.
   assert.equal(asOf([lawn], { year: 1943, history: history(), dates: d }).length, 1)
+  // A parcel holding a building with a curated year dates nothing else.
+  const station: PolygonFeature = { type: 'polygon', id: 'station', tags: { building: 'train_station' }, outers: [sq(0.0006, 0.0006, 0.0002)], inners: [] }
+  assert.equal(dateGrounds([lawn, station], parcels, [{ id: 'station', year: 1919, source: 'https://x' }]).get('lawn'), undefined)
 })
 
 test('a bridge not drawn takes the ways that lead only to it; a listed bridge is drawn at grade', async () => {
