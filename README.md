@@ -733,6 +733,11 @@ python3 tools/print/canvas.py <store>/print-files/drawn/<design>-v3/<design>_36x
 python3 tools/release/stamp.py <store> <design> --base print-files/drawn/<design>-v3   # before the catalog's version is raised
 ```
 
+A set's print is redrawn the same way: `set.py <set> boxes <id>` and `set.py <set> canvas` (with
+`--dir` to keep them apart from older prints), the unstamped box and its canvas files copied into
+`<store>/print-files/<dir>/drawn/<design>-vN` and its `canvas/`, then `stamp.py --base`; the
+record's scenes are then the set's scene SVGs.
+
 `stamp.py --base` writes `<design>-v3_<size>.jpg` (and its canvas files) beside the current
 version's, from the unstamped files in that folder; the record pins the new builds as its
 scenes, freezes their data, and keeps the unstamped files as the stamp's base, so

@@ -223,23 +223,32 @@ def from_redraw(store, key, d, mine):
     first = sorted(mine.values(), key=lambda v: v['base'])
     base_print = next((v for v in first if '_canvas-' not in v['base']), first[0])
     got = from_spec(key, d, os.path.getmtime(os.path.join(store, base_print['base'])))
-    if got is None: raise SystemExit(f'{key}: a redraw is recorded only for a design in tools/print/spec.json')
-    _, compose, scenes, inputs = got
+    set_got = None if got else from_set(key, d)
+    if got is None and set_got is None: raise SystemExit(f'{key}: a redraw is recorded only for a design in tools/print/spec.json or a set')
+    _, made, scenes, inputs = got or set_got
     tools = base_print['tools']
     now = {f: sha(os.path.join(ISO, f)) for f in tools}
     base_dir = os.path.dirname(base_print['base'])
     canvas = sorted((v for v in mine.values() if '_canvas-' in v['base']), key=lambda v: v['base'])
     sizes = ' '.join(re.search(r'_canvas-(\d+x\d+)\.jpg$', v['base']).group(1) for v in canvas)
-    run = [f'python3 tools/print/compose.py tools/print/spec.json out/builds <store>/{base_dir} --only {key}']
-    if canvas: run.append(f'python3 tools/print/canvas.py <store>/{base_print["base"]} <store>/{base_dir}/canvas {sizes}')
+    if got:
+        run = [f'python3 tools/print/compose.py tools/print/spec.json out/builds <store>/{base_dir} --only {key}']
+        if canvas: run.append(f'python3 tools/print/canvas.py <store>/{base_print["base"]} <store>/{base_dir}/canvas {sizes}')
+    else:
+        # A set's print (set.py menu|map|boxes, then canvas), copied unchanged into base_dir and
+        # base_dir/canvas; the scenes are the set's, from out/sets/<set>/scenes.
+        run = [f'{c}   # into out/sets/<set>/print (or --dir)' if ' prepare' not in c else c for c in made['run']]
+        run.append(f'cp <set print>/{os.path.basename(base_print["base"])} <store>/{base_dir}/' + (f' && cp <set print>/canvas/<the {sizes} files> <store>/{base_dir}/canvas/' if canvas else ''))
     run.append(f'python3 tools/release/stamp.py <store> {key} --version {d["version"]} --base {base_dir}')
-    recipe = {'tool': 'tools/release/stamp.py', 'run': run, 'redraw': True, 'base_kind': 'compose',
-              'previous_record': rel(os.path.join(REL, key, f"v{d['version'] - 1}.json")), 'pinned': compose['pinned'],
+    recipe = {'tool': 'tools/release/stamp.py', 'run': run, 'redraw': True, 'base_kind': 'compose' if got else 'set',
+              'previous_record': rel(os.path.join(REL, key, f"v{d['version'] - 1}.json")),
+              'pinned': made.get('pinned') or 'scenes are the set\'s scene SVGs below, by SHA-256',
               'block': base_print['info'],
               'files': {f: {'base': v['base'], 'base_sha256': v['base_sha256'], 'at': v['at']} for f, v in sorted(mine.items())},
               'tools_at_stamping': tools, 'tools_match_commit': tools == now}
     inputs = dict(inputs); inputs.update(tools)
-    if canvas: inputs['tools/print/canvas.py'] = sha(os.path.join(ISO, 'tools', 'print', 'canvas.py'))
+    if set_got: inputs['tools/sets/set.py'] = sha(os.path.join(ISO, 'tools', 'sets', 'set.py'))
+    if canvas and got: inputs['tools/print/canvas.py'] = sha(os.path.join(ISO, 'tools', 'print', 'canvas.py'))
     return 'redraw', recipe, scenes, inputs
 
 
