@@ -1,0 +1,232 @@
+{
+ "design": "gwynns-island",
+ "title": "Gwynn's Island",
+ "version": 4,
+ "version_note": "redrawn: thin lines that crossed open ground inside some woods, green spaces and a parking lot, one paint strip apart, are gone, and the credit line is now legible at the smallest size; nothing else in the drawing changed.",
+ "recorded": "2026-11-17T03:20:23+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "078548fd3b7dc4c2cfb6985abab7e616dbdfe076",
+  "subject": "compose.py: a credit too tall for the column beside a long subtitle goes on wide lines above the title block; test",
+  "dirty": true
+ },
+ "kind": "redraw",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <store>/print-files/drawn/gwynns-island-v4 --only gwynns-island",
+   "python3 tools/print/canvas.py <store>/print-files/drawn/gwynns-island-v4/gwynns-island_36x24.jpg <store>/print-files/drawn/gwynns-island-v4/canvas 18x12 30x20 36x24",
+   "python3 tools/release/stamp.py <store> gwynns-island --version 4 --base print-files/drawn/gwynns-island-v4"
+  ],
+  "redraw": true,
+  "base_kind": "compose",
+  "previous_record": "releases/gwynns-island/v3.json",
+  "pinned": "panels use the builds named in scenes[].build, not the newest",
+  "block": {
+   "collection": "Places through time",
+   "set": "Gwynn's Island",
+   "piece": "Gwynn's Island",
+   "plate": "GWY-01",
+   "version": "4",
+   "drawn": "2026",
+   "location": "37.498° N 76.342° W",
+   "facing": "0°"
+  },
+  "files": {
+   "gwynns-island-v4_36x24.jpg": {
+    "base": "print-files/drawn/gwynns-island-v4/gwynns-island_36x24.jpg",
+    "base_sha256": "194f95ede6d418070808f3a0108ef48da0e29be5e3f35a9f785fddb6ea72438b",
+    "at": {
+     "x": 8754,
+     "y": 6604,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   },
+   "gwynns-island-v4_canvas-18x12.jpg": {
+    "base": "print-files/drawn/gwynns-island-v4/canvas/gwynns-island_canvas-18x12.jpg",
+    "base_sha256": "a7662f555c7893c05538598d162909db6ffbe22ddfcd1f605e66a5587e23b4c0",
+    "at": {
+     "x": 4475,
+     "y": 3698,
+     "w": 1195,
+     "h": 169,
+     "u": 0.9192,
+     "where": "foot"
+    }
+   },
+   "gwynns-island-v4_canvas-30x20.jpg": {
+    "base": "print-files/drawn/gwynns-island-v4/canvas/gwynns-island_canvas-30x20.jpg",
+    "base_sha256": "bf958d89873741a3d04596d2c09f1684339082551dbbad7203dacb28123470f9",
+    "at": {
+     "x": 7611,
+     "y": 5934,
+     "w": 1543,
+     "h": 218,
+     "u": 1.1867,
+     "where": "foot"
+    }
+   },
+   "gwynns-island-v4_canvas-36x24.jpg": {
+    "base": "print-files/drawn/gwynns-island-v4/canvas/gwynns-island_canvas-36x24.jpg",
+    "base_sha256": "e3c5bbf4601ac80cfbc1c8d827488930ce3ba0ea208a90f842eb4fecf5726acd",
+    "at": {
+     "x": 9204,
+     "y": 7054,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "gwynns-island",
+   "year": null,
+   "flags": [],
+   "svg": "out/builds/20261116-212313-gwynns-island/image.svg",
+   "sha256": "f5ed76fed9fa4e2ea9d75742c2aafe83a16f1ee5589671ff6d8757317d1d7022",
+   "frozen": "data/_releases/scenes/f5ed76fed9fa4e2ea9d75742c2aafe83a16f1ee5589671ff6d8757317d1d7022.svg",
+   "build": "20261116-212313-gwynns-island",
+   "commit": "4e4b7bb",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "08c58e8c31a6ba1a4c3ff40ad6df7dc3c0044c7de3c193aa04894f51f16214ab",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "tools/print/canvas.py": "7d6950595979a5f62d60b4509ff0b9bf36766594acbc294615eca26883ce283f",
+  "regions/gwynns-island.json": "f352b0134124ffa82ee172753c8134d50d8a054e7412e67b428e3c02d74170f3"
+ },
+ "data": {
+  "gwynns-island": {
+   "snapshot": "data/_releases/gwynns-island@539ba2b17aee",
+   "files": {
+    "dem.bin.gz": "dcf538a8e096441d534170c7edf97eb2712213d31782548ad383f025fc2d7d07",
+    "footprints.json": "7f41d1acd1993f20f370ac6316d4a39138171992164912649828baf625023e6b",
+    "landcover.bin.gz": "a8a74eed686f2f2c46f9ac3302cc983b53e15deaaa194b57ab9c1103fb9610d6",
+    "osm.json": "7918ef9f6beec34688d267cd9864c8609cb5b7df3b1eb6b284abc60a0e623e08"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/gwynns-island-v4_36x24.jpg",
+   "sha256": "9d82df8a5e359c040e816b0a6816669b24a4ef32d788cd1ed64db8d40facbe33",
+   "bytes": 6016720,
+   "printful_file_id": 1113956180
+  },
+  "canvas": [
+   {
+    "file": "print-files/canvas/gwynns-island-v4_canvas-18x12.jpg",
+    "sha256": "02dd0cdf9594a7eed1d44ef1f5d447bad3afa0f90a745b156dabee7bd8b312e4",
+    "bytes": 1982360,
+    "printful_file_id": 1113956285
+   },
+   {
+    "file": "print-files/canvas/gwynns-island-v4_canvas-30x20.jpg",
+    "sha256": "12006d3b1bbd44ae003c25940e1984686d2e21c0649f4d8caa7628878d739c7a",
+    "bytes": 3794769,
+    "printful_file_id": 1113956376
+   },
+   {
+    "file": "print-files/canvas/gwynns-island-v4_canvas-36x24.jpg",
+    "sha256": "848e7579c7da61b33fc1dd917573e2642c5ec5f2396a8da4802e5ded89a5a785",
+    "bytes": 4863162,
+    "printful_file_id": 1113956519
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Gwynn's Island",
+   "place": "Gwynn's Island",
+   "orientation": "horizontal",
+   "modern": true,
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "gwynns-island-v4_36x24.jpg",
+   "canvas": "gwynns-island-v4_canvas-{w}x{h}.jpg",
+   "explore": "gwynns-island",
+   "version": 4,
+   "version_date": "November 16, 2026",
+   "version_note": "redrawn: thin lines that crossed open ground inside some woods, green spaces and a parking lot, one paint strip apart, are gone, and the credit line is now legible at the smallest size; nothing else in the drawing changed.",
+   "plate": "GWY-01",
+   "plate_box": [
+    0.81056,
+    0.91722,
+    0.96704,
+    0.95042
+   ]
+  },
+  "products": [
+   {
+    "handle": "gwynns-island",
+    "id": "gid://shopify/Product/9137908482166",
+    "format": "all (merged)",
+    "status": "ACTIVE",
+    "variants": 16
+   },
+   {
+    "handle": "gwynns-island-print",
+    "id": "gid://shopify/Product/9132813189238",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "gwynns-island-framed-print",
+    "id": "gid://shopify/Product/9132813222006",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "gwynns-island-framed-canvas",
+    "id": "gid://shopify/Product/9132813254774",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/gwynns-island-v4_36x24-print.jpg?v=1794885149",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/gwynns-island-v4_36x24-plate.jpg?v=1794885153"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/gwynns-island-v4_36x24-framed-print-black.jpg?v=1794885159",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/gwynns-island-v4_36x24-framed-print-white.jpg?v=1794885164",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/gwynns-island-v4_36x24-plate.jpg?v=1794885153"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/gwynns-island-v4_36x24-framed-canvas-black.jpg?v=1794885169",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/gwynns-island-v4_36x24-framed-canvas-white.jpg?v=1794885174",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/gwynns-island-v4_36x24-plate.jpg?v=1794885153"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "gwynns-island"
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 1
+ }
+}

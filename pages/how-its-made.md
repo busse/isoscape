@@ -998,7 +998,9 @@ its own credit line, so its scenes carry the sources only in their description, 
 On a print, every line of the credit is at least 7 pt at the smallest size that print is sold
 at: a 24 × 36 in file is also printed at 8 × 12 in, a third of its size, so there the credit is
 set at 21 pt (88 px at 300 dpi) and wraps onto as many lines as it needs, between the title and
-the title block.
+the title block. Where a long subtitle leaves too little room there (Gwynn's Island), the credit
+runs instead on wide lines from the end of the title to the right edge of the map, above the
+corner where the title block goes; the map itself is not moved or cropped.
 
 Inspired by [Isometric SF](https://isometricsf.com), Justin Chavez's isometric pixel-art map
 of San Francisco ([how it was made](https://www.justinchavez.com/blog/isometric-sf-how/)).

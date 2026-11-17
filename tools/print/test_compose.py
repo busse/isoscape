@@ -48,6 +48,46 @@ class SmallestSize(unittest.TestCase):
         self.assertAlmostEqual(C.block_reserve(36, 300, faces=[36, 18]), (titleblock.WIDTH + titleblock.H * 0.5) * u18 * 2)
 
 
+class WideCredit(unittest.TestCase):
+    """A subtitle so long that the column beside it is too short (Gwynn's Island): the credit goes
+    on wide lines above the title block's corner, at the minimum size, and the art is untouched."""
+    SOURCES = ['Map data © OpenStreetMap contributors (ODbL)', 'Elevation: USGS 3DEP',
+               'Land cover: USGS National Land Cover Database 2021 (MRLC, public domain)',
+               'Building footprints: Microsoft Global ML Building Footprints (ODbL)']
+
+    def sheet(self, subtitle, sources):
+        import numpy as np
+        spec = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'spec.json')))
+        with tempfile.TemporaryDirectory() as d:
+            builds = {'b': svg(d, 'b', sources)}
+            design = {'title': "Gwynn's Island", 'subtitle': subtitle, 'region': 'r', 'panels': [{'build': 'b'}]}
+            saved = C.CREDIT, C.CREDIT_DERIVED
+            C.CREDIT, C.CREDIT_DERIVED = C.design_credit(design, builds), True
+            try:
+                img = C.compose(design, (36, 24), builds, {'r': {'box': [0, 0, 1, 1]}}, 300, 1 / 6,
+                                C.smallest_scale(spec, (36, 24)), C.stamped_faces(spec, (36, 24)))
+            finally:
+                C.CREDIT, C.CREDIT_DERIVED = saved
+        return np.asarray(img.convert('L')) < 200, spec
+
+    def test_long_subtitle_puts_the_credit_on_wide_lines_clear_of_the_block(self):
+        import numpy as np
+        ink, spec = self.sheet('Mathews County, Virginia · between the Piankatank and Milford Haven', self.SOURCES)
+        H, W = ink.shape
+        m, band = round(H * 0.05), round(H * 0.11)
+        right = ink[H - m - band:, round(W * 0.6):]                 # right of the subtitle's end
+        rows = np.nonzero(right.any(axis=1))[0] + H - m - band
+        top = C.block_top(H, m, 36, 300, 1 / 6, C.stamped_faces(spec, (36, 24)))
+        text = rows[rows > H - m - band + band * 0.08 + 2]          # below the rule
+        self.assertTrue(len(text))
+        self.assertLess(text.max(), top)                            # clear of every face's title block
+        self.assertFalse(ink[round(top):H - m, W - m - 1].any())    # the corner itself is empty paper
+
+    def test_a_credit_too_long_for_even_wide_lines_is_refused(self):
+        with self.assertRaises(ValueError):
+            self.sheet('Mathews County, Virginia · between the Piankatank and Milford Haven', self.SOURCES * 3)
+
+
 class Balanced(unittest.TestCase):
     def test_no_word_is_left_alone(self):
         from PIL import Image, ImageDraw, ImageFont
