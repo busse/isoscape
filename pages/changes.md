@@ -11,6 +11,41 @@ tools and the research get better, a published map is sometimes corrected and re
 page lists those changes, newest first. A print ordered after a change is made from the new
 version; the version is part of each print file's name (`-v2`, `-v3`).
 
+## November 17, 2026 (later)
+
+**Richmond, 1886 (plate RVA·03), Richmond, 1737–2026 (RVA·06) and Richmond, Then & Now (RVA·07),
+version 3: redrawn.** The three prints were taken off sale on November 16 while they were inspected
+again, tile by tile, at full print size. These faults in version 2 are corrected:
+
+- The James River and Kanawha Canal and its Great Basin, gone today, were drawn on today's ground:
+  the basin's near bank came out as a sawtooth cliff and the canal as broken blue shards. They are
+  now still water at their own level, with clean banks. In 1886 the basin is what the Sanborn map
+  of that year shows left of it (between 9th and 10th Streets, and a narrow slip between 11th and
+  12th), with the canal running in from Tredegar.
+- No bridge crossed the river to Manchester in 1886. Mayo's Bridge, the Free Bridge at 9th Street
+  (1873 to 1972), the Richmond and Petersburg railroad bridge and the Richmond and Danville's (today
+  the Southern's) are drawn in the years each stood; in the 1865 panel none is, since all were
+  burned in April 1865. The older bridges are drawn on their successors' lines and heights, an
+  approximation.
+- The Seaboard's line through Shockoe Valley (it reached Richmond in 1900) and today's station
+  platforms were drawn in earlier years. They are left out before 1900 and 1901.
+- Shockoe Creek, still open on the 1886 Sanborn map, is drawn open in 1886.
+- In the 1970 and 1990 panels of *Richmond, 1737–2026* twenty-two towers are dated from published
+  sources (Wikipedia's list of Richmond's tallest buildings, its James Center article) instead of
+  the assessor's records, and three tall buildings with no source are left to 2026. The captions
+  say what the early panels can show: before 1886, only the buildings that survive, the curated
+  landmarks and the streets.
+- Each print says that the ground is today's and that traced buildings' heights are assumed from
+  their material, legibly on the smallest print sold.
+
+What is approximate: the Free Bridge's line and its 8 m deck, the canal's course west of 6th
+Street, the years the basin was cut back (about 1880) and gone (by 1895), and the dates of the
+bridges where the history file says so. *Richmond, 1865* (RVA·02) stays off sale: with no
+fire-insurance map before 1886 it shows only the buildings that survive and a few landmarks, which
+reads as an empty city. The 1925 and 1950 prints (version 4) do not yet show the Free Bridge; they
+will in their next version. The title block on each redrawn print gives version 3. This entry was
+drafted with Claude.
+
 ## November 17, 2026
 
 **Richmond, 1925 (plate RVA·01) and Richmond, 1950 (RVA·04), version 4: redrawn.** Both prints

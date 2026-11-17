@@ -1,0 +1,385 @@
+{
+ "design": "richmond-through-time",
+ "title": "Richmond, 1737–2026",
+ "version": 3,
+ "version_note": "redrawn: each panel's canal, basin and river bridges are drawn for its year (the canal and basin as water at their own level with clean banks; Mayo's Bridge and the railroad bridges by year, none in 1865; the Free Bridge from 1873); twenty-two towers in the 1970 and 1990 panels are dated from their sources, and three with no source are left to 2026; the Seaboard's line from 1900; the captions say what each early panel shows (only what survives), and the print notes that the ground is today's and traced buildings' heights are assumed.",
+ "recorded": "2026-11-17T14:57:43+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "01a2cb85e39a235725e0bcf216f121dab3bd907b",
+  "subject": "Merge wave4-richmond-early: Richmond 1886, Then & Now and through time corrected (the canal and basin as water of their own, the river's bridges by year with the Free Bridge, the Seaboard and platforms dated, tall buildings sourced, print text); the published 1925 and 1950 scenes unchanged",
+  "dirty": false
+ },
+ "kind": "redraw",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <store>/print-files/drawn/richmond-through-time-v3 --only richmond-through-time",
+   "python3 tools/print/canvas.py <store>/print-files/drawn/richmond-through-time-v3/richmond-through-time_36x24.jpg <store>/print-files/drawn/richmond-through-time-v3/canvas 18x12 30x20 36x24",
+   "python3 tools/release/stamp.py <store> richmond-through-time --version 3 --base print-files/drawn/richmond-through-time-v3"
+  ],
+  "redraw": true,
+  "base_kind": "compose",
+  "previous_record": "releases/richmond-through-time/v2.json",
+  "pinned": "panels use the builds named in scenes[].build, not the newest",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond",
+   "piece": "1737–2026",
+   "plate": "RVA-06",
+   "version": "3",
+   "drawn": "2026",
+   "location": "37.534° N 77.427° W",
+   "facing": "351°"
+  },
+  "files": {
+   "richmond-through-time-v3_36x24.jpg": {
+    "base": "print-files/drawn/richmond-through-time-v3/richmond-through-time_36x24.jpg",
+    "base_sha256": "b24e1603119fa8b36f2c007930cd92486244023b69e3a7583af0a335eac46edc",
+    "at": {
+     "x": 8754,
+     "y": 6604,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   },
+   "richmond-through-time-v3_canvas-18x12.jpg": {
+    "base": "print-files/drawn/richmond-through-time-v3/canvas/richmond-through-time_canvas-18x12.jpg",
+    "base_sha256": "d5b2a804c5e4f49ea47fe4a8216d57f2ab21979957bf38c726112a46d365f4b1",
+    "at": {
+     "x": 4479,
+     "y": 3702,
+     "w": 1195,
+     "h": 169,
+     "u": 0.9192,
+     "where": "foot"
+    }
+   },
+   "richmond-through-time-v3_canvas-30x20.jpg": {
+    "base": "print-files/drawn/richmond-through-time-v3/canvas/richmond-through-time_canvas-30x20.jpg",
+    "base_sha256": "70cf0b5ad9e1e480541452703ff729d765b12ed1280d44bd50228a78c5ab4432",
+    "at": {
+     "x": 7611,
+     "y": 5934,
+     "w": 1543,
+     "h": 218,
+     "u": 1.1867,
+     "where": "foot"
+    }
+   },
+   "richmond-through-time-v3_canvas-36x24.jpg": {
+    "base": "print-files/drawn/richmond-through-time-v3/canvas/richmond-through-time_canvas-36x24.jpg",
+    "base_sha256": "996170856b572a90d8f06beba4127c9bae530ebffffe7c1fa04253a3600fb0da",
+    "at": {
+     "x": 9204,
+     "y": 7054,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-downtown-time",
+   "year": 1737,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093219-richmond-downtown-time-1737/image.svg",
+   "sha256": "4d40f778e80bb4df0f237719be654089b06d99155a3e3b3d94fcb271e46cdafa",
+   "frozen": "data/_releases/scenes/4d40f778e80bb4df0f237719be654089b06d99155a3e3b3d94fcb271e46cdafa.svg",
+   "build": "20261117-093219-richmond-downtown-time-1737",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 1788,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093244-richmond-downtown-time-1788/image.svg",
+   "sha256": "a12be6fbc593f7cff353d104fc8e43e9360c8a7eac6372137eaba93b8150b9ab",
+   "frozen": "data/_releases/scenes/a12be6fbc593f7cff353d104fc8e43e9360c8a7eac6372137eaba93b8150b9ab.svg",
+   "build": "20261117-093244-richmond-downtown-time-1788",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 1820,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093306-richmond-downtown-time-1820/image.svg",
+   "sha256": "9ea062085385565d4b8e56aa8c4bef83e9406f4fb93d6b7d93de3416377a61cc",
+   "frozen": "data/_releases/scenes/9ea062085385565d4b8e56aa8c4bef83e9406f4fb93d6b7d93de3416377a61cc.svg",
+   "build": "20261117-093306-richmond-downtown-time-1820",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 1850,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093328-richmond-downtown-time-1850/image.svg",
+   "sha256": "682b409411aa98f850d5d46e0ab8d349400cb45c534f65acec63a284f6edf8a1",
+   "frozen": "data/_releases/scenes/682b409411aa98f850d5d46e0ab8d349400cb45c534f65acec63a284f6edf8a1.svg",
+   "build": "20261117-093328-richmond-downtown-time-1850",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 1865,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093349-richmond-downtown-time-1865/image.svg",
+   "sha256": "0ed0255282c3464a4998683bfeab60088c8ecaa2efc64e31e86ddec09999692b",
+   "frozen": "data/_releases/scenes/0ed0255282c3464a4998683bfeab60088c8ecaa2efc64e31e86ddec09999692b.svg",
+   "build": "20261117-093349-richmond-downtown-time-1865",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 1886,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093418-richmond-downtown-time-1886/image.svg",
+   "sha256": "17aa0cb0dc84be991713236b6f7b9eb4c0cda827bf1732eacd7840ec5528a4df",
+   "frozen": "data/_releases/scenes/17aa0cb0dc84be991713236b6f7b9eb4c0cda827bf1732eacd7840ec5528a4df.svg",
+   "build": "20261117-093418-richmond-downtown-time-1886",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 1905,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093443-richmond-downtown-time-1905/image.svg",
+   "sha256": "8e964c4ae42f4e1fcf6082a5e74eb6aab183228fd021266c880faa210397d5b4",
+   "frozen": "data/_releases/scenes/8e964c4ae42f4e1fcf6082a5e74eb6aab183228fd021266c880faa210397d5b4.svg",
+   "build": "20261117-093443-richmond-downtown-time-1905",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 1925,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093507-richmond-downtown-time-1925/image.svg",
+   "sha256": "f5686654f2049f471442fd251f5b273e5bbd4cffb58ba4aaaaf5a408f19369dc",
+   "frozen": "data/_releases/scenes/f5686654f2049f471442fd251f5b273e5bbd4cffb58ba4aaaaf5a408f19369dc.svg",
+   "build": "20261117-093507-richmond-downtown-time-1925",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 1950,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093530-richmond-downtown-time-1950/image.svg",
+   "sha256": "a5c5c348f8c556b24a6079bbfa859b759a61f3fc64e4a25310fd00adefe87475",
+   "frozen": "data/_releases/scenes/a5c5c348f8c556b24a6079bbfa859b759a61f3fc64e4a25310fd00adefe87475.svg",
+   "build": "20261117-093530-richmond-downtown-time-1950",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 1970,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093548-richmond-downtown-time-1970/image.svg",
+   "sha256": "7ee69cd022abf3ee1b48d769606288a768194e63d2a2d8c265b10fd7adce3a25",
+   "frozen": "data/_releases/scenes/7ee69cd022abf3ee1b48d769606288a768194e63d2a2d8c265b10fd7adce3a25.svg",
+   "build": "20261117-093548-richmond-downtown-time-1970",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 1990,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093606-richmond-downtown-time-1990/image.svg",
+   "sha256": "38bdb67637e8b80b681aa7f4416be996f4c800004ced6607152fe82ce9696e8b",
+   "frozen": "data/_releases/scenes/38bdb67637e8b80b681aa7f4416be996f4c800004ced6607152fe82ce9696e8b.svg",
+   "build": "20261117-093606-richmond-downtown-time-1990",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 2026,
+   "flags": [],
+   "svg": "out/builds/20261117-093626-richmond-downtown-time-2026/image.svg",
+   "sha256": "1084d01685559cde06bfe76164a754d34b2ce76210ba4a805943be0b67537a39",
+   "frozen": "data/_releases/scenes/1084d01685559cde06bfe76164a754d34b2ce76210ba4a805943be0b67537a39.svg",
+   "build": "20261117-093626-richmond-downtown-time-2026",
+   "commit": "01a2cb8",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "caf6b357925e6dc6bfb64097a344425f65a1a789b5e888abd8c99577ebcc35e6",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "tools/print/canvas.py": "7d6950595979a5f62d60b4509ff0b9bf36766594acbc294615eca26883ce283f",
+  "regions/richmond-downtown-time.json": "498df0bb97a286cde8d08816566be631db130090de8a1928fd7f6ba3ee831681",
+  "history/richmond-downtown.json": "168cfd359a00521786d598642759bcf76bb047e103fca95d46d23d2cc9d7f43d",
+  "history/sanborn/lost.geojson": "56e62877646394d1e887b3e5fabf887ce2fca992343d2fb5e25aefe995318a0a"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/richmond-through-time-v3_36x24.jpg",
+   "sha256": "4a8a6bdea291334f3a7688022aa7c10370a119232d125c9ba4a20febb4c23117",
+   "bytes": 14014640,
+   "printful_file_id": 1114442153
+  },
+  "canvas": [
+   {
+    "file": "print-files/canvas/richmond-through-time-v3_canvas-18x12.jpg",
+    "sha256": "e7fe6055d9e3295f903e2a9f098593945c8382f3046ef5085ee5d6893081f7fb",
+    "bytes": 4194412,
+    "printful_file_id": 1114442431
+   },
+   {
+    "file": "print-files/canvas/richmond-through-time-v3_canvas-30x20.jpg",
+    "sha256": "de0fdfad3d0d573ec6e53cefadb89b07164cfb24d049553c319b81cee3a17aff",
+    "bytes": 8725563,
+    "printful_file_id": 1114442976
+   },
+   {
+    "file": "print-files/canvas/richmond-through-time-v3_canvas-36x24.jpg",
+    "sha256": "a764b630c56a079774917aee04e0aabc2c40714347a79675b0c8396991348c04",
+    "bytes": 11539827,
+    "printful_file_id": 1114443571
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Richmond, 1737–2026",
+   "place": "Richmond",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "richmond-through-time-v3_36x24.jpg",
+   "canvas": "richmond-through-time-v3_canvas-{w}x{h}.jpg",
+   "explore": "richmond-downtown-time:1737",
+   "version": 3,
+   "version_date": "November 17, 2026",
+   "version_note": "redrawn: each panel's canal, basin and river bridges are drawn for its year (the canal and basin as water at their own level with clean banks; Mayo's Bridge and the railroad bridges by year, none in 1865; the Free Bridge from 1873); twenty-two towers in the 1970 and 1990 panels are dated from their sources, and three with no source are left to 2026; the Seaboard's line from 1900; the captions say what each early panel shows (only what survives), and the print notes that the ground is today's and traced buildings' heights are assumed.",
+   "plate": "RVA-06",
+   "plate_box": [
+    0.81056,
+    0.91722,
+    0.96704,
+    0.95042
+   ]
+  },
+  "products": [
+   {
+    "handle": "richmond-1737-2026",
+    "id": "gid://shopify/Product/9137908416630",
+    "format": "all (merged)",
+    "status": "DRAFT",
+    "variants": 16
+   },
+   {
+    "handle": "richmond-1737-2026-print",
+    "id": "gid://shopify/Product/9132812992630",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-1737-2026-framed-print",
+    "id": "gid://shopify/Product/9132813025398",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-1737-2026-framed-canvas",
+    "id": "gid://shopify/Product/9132813058166",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-through-time-v3_36x24-print.jpg?v=1794926906",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-through-time-v3_36x24-plate.jpg?v=1794926910"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-through-time-v3_36x24-framed-print-black.jpg?v=1794926916",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-through-time-v3_36x24-framed-print-white.jpg?v=1794926921",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-through-time-v3_36x24-plate.jpg?v=1794926910"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-through-time-v3_36x24-framed-canvas-black.jpg?v=1794926927",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-through-time-v3_36x24-framed-canvas-white.jpg?v=1794926932",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-through-time-v3_36x24-plate.jpg?v=1794926910"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-downtown-time:1737"
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 12,
+  "matched": 12
+ }
+}
