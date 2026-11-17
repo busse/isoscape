@@ -11557,6 +11557,25 @@
   },
   {
    "where": {
+    "tag": "service",
+    "is": [
+     "parking_aisle",
+     "driveway",
+     "drive-through",
+     "parking",
+     "emergency_access"
+    ]
+   },
+   "eras": [
+    [
+     1950,
+     null
+    ]
+   ],
+   "note": "Parking aisles, driveways and drive-throughs, dated with surface parking, as in the downtown series: approximate, not sourced."
+  },
+  {
+   "where": {
     "tag": "highway",
     "bridge": true
    },
@@ -11642,6 +11661,48 @@
    "name": "Main Street Station",
    "year": 1901,
    "source": "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
+  },
+  {
+   "id": "r21542843",
+   "name": "The Hues at City View",
+   "year": 2026,
+   "source": "https://richmondbizsense.com/2026/07/13/slideshow-scenes-from-hard-hat-happy-hour-at-the-hues-at-city-view/",
+   "note": "Under construction in July 2026; the parcel's recorded year (1920) is an older building's."
+  },
+  {
+   "id": "w943656806",
+   "name": "South Falls I",
+   "year": 2018,
+   "source": "https://richmondbizsense.com/2018/05/21/100m-manchester-riverfront-project-begins-summer-14-story-tower/",
+   "note": "The South Falls tower was begun in 2018 (year approximate: begun, not finished); the parcel's recorded year (1929) is an older building's."
+  },
+  {
+   "id": "w943656807",
+   "name": "South Falls garage",
+   "year": 2018,
+   "source": "https://richmondbizsense.com/2018/05/21/100m-manchester-riverfront-project-begins-summer-14-story-tower/",
+   "note": "The parking deck of the South Falls project, begun in 2018 (approximate)."
+  },
+  {
+   "id": "w1078391655",
+   "name": "Hydro",
+   "year": 2024,
+   "source": "https://s-www.virginiahousing.com/-/media/project/vhcomtenant/virginiahousingsite/partners/case-studies/richmond-hydro-apartments.pdf",
+   "note": "Seven stories of new construction, open by the case study of October 2024; the year is approximate (no later than)."
+  },
+  {
+   "id": "w1078391657",
+   "name": "Shiplock Views",
+   "year": 2019,
+   "source": "https://richmondbizsense.com/2019/10/21/site-work-starts-on-shiplock-views-apartment-project-near-libby-hill/",
+   "note": "Site work began in October 2019 (year approximate: begun, not finished)."
+  },
+  {
+   "id": "w225274650",
+   "name": "Riverside on the James",
+   "year": 2003,
+   "source": "https://globest.com/2003/05/14/82m-riverside-on-the-james-to-rise-in-richmond",
+   "note": "The tower was announced to rise in 2003 (year approximate); the parcel's recorded year is the old power plant's."
   }
  ],
  "sanborn": {
