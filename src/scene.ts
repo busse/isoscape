@@ -454,6 +454,19 @@ export const buildScene = (
       if (today && (kind === 'road' || kind === 'path' || kind === 'rail') && !whole && !inTown(seg[0], seg[1])) continue
       const q = segmentQuad(seg[0], seg[1], width / 2, width / 2)
       if (q === null) continue
+      // With ribbonJoins, a bend is filled round (an octagon at each vertex): segment quads
+      // alone leave a wedge open on the outside of every bend.
+      // Its ends are filled round too, so two ways meeting at an angle (a street's next way) join.
+      if (region.ribbonJoins === true) {
+        const r = width / 2
+        const disc = (c: Vec2) => {
+          const oct = Array.from({ length: 8 }, (_, k): Vec2 => [c[0] + r * Math.cos((k * Math.PI) / 4), c[1] + r * Math.sin((k * Math.PI) / 4)])
+          // Wound as the quads are, so the fill adds and does not cancel.
+          quads.push(Math.sign(signedArea(oct)) === Math.sign(signedArea(q)) ? oct : oct.reverse())
+        }
+        disc(seg[0])
+        if (i + 2 === pts.length) disc(seg[1])
+      }
       quads.push(q)
       center.push([seg[0], seg[1]])
     }

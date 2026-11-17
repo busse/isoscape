@@ -64,6 +64,8 @@ export interface Region {
   readonly labelHalo?: number
   /** Leave out the cars and ramp houses under a modeled station's shed roofs (a close view of its front). */
   readonly hideUnderSheds?: boolean
+  /** Ground ribbons (roads, paths, track) filled round at their bends, so no wedge opens on a bend's outside (a set's views). */
+  readonly ribbonJoins?: boolean
   /**
    * Extra data, beyond OSM and elevation. `buildings` lists where footprints come from:
    * OpenStreetMap and/or Microsoft's ML footprints (OSM wins where both have a building).

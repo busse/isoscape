@@ -30,5 +30,6 @@
       "field": "Year_Built"
     }
   },
-  "hideUnderSheds": true
+  "hideUnderSheds": true,
+  "ribbonJoins": true
 }

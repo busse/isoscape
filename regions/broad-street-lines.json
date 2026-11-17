@@ -49,5 +49,6 @@
   "railPiersOverWater": true,
   "groupRailDecks": true,
   "railCrossings": 6,
-  "labelHalo": 0.5
+  "labelHalo": 0.5,
+  "ribbonJoins": true
 }
