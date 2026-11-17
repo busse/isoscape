@@ -439,6 +439,8 @@ export const buildScene = (
   })
   const shown = solids.filter((s) => !replaced.has(s)).concat(partsShown)
 
+  // A curated height for a building in a dated series (`History['dates']`).
+  const heightOf = new Map((time?.history.dates ?? []).flatMap((d) => (d.height === undefined ? [] : [[d.id, d.height] as const])))
   const towerParts: TowerPart[] = []
   let heightSources = { height: 0, model: 0, levels: 0, guess: 0 }
   let fresh = 0
@@ -468,7 +470,10 @@ export const buildScene = (
     const outer = orient(simplifyRing(s.outer, 0.45), true)
     if (outer.length < 3) continue
     const inners = s.inners.map((h) => orient(simplifyRing(h, 0.45), false)).filter((h) => h.length >= 3)
-    const own = buildingHeights(s.tags, area, region.checkLevels === true)
+    const curatedHeight = heightOf.get(s.id)
+    const own = curatedHeight === undefined
+      ? buildingHeights(s.tags, area, region.checkLevels === true)
+      : { base: 0, top: curatedHeight, source: 'height' as const }
     const floor = floorOf.get(s)
     const h = floor === undefined ? own : { ...own, base: floor }
     if (!Number.isFinite(h.base) || !Number.isFinite(h.top)) continue

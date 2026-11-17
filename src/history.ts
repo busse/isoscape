@@ -164,7 +164,11 @@ export interface History {
   /** The year that counts as today: undated buildings appear in this scene only. */
   readonly present: number
   /** Curated years built for particular OSM buildings, which win over every other date. */
-  readonly dates: readonly { readonly id: string; readonly name?: string; readonly year: number; readonly until?: number; readonly source: string; readonly note?: string }[]
+  readonly dates: readonly {
+    readonly id: string; readonly name?: string; readonly year: number; readonly until?: number; readonly source: string; readonly note?: string
+    /** Its height in meters, where OSM's is missing or wrong for the series: the note says where it comes from. */
+    readonly height?: number
+  }[]
   /** Fire-insurance maps traced into footprints: the editions used, and the buildings since lost. */
   readonly sanborn?: { readonly lost: string | readonly string[]; readonly editions: readonly number[]; readonly source: string }
   readonly traced: readonly TracedBuilding[]

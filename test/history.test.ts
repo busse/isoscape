@@ -156,3 +156,15 @@ test('a dated series: what no rule dates is drawn today only, except the street 
   assert.ok(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1913, h))
   assert.ok(featureAlive(area({ leisure: 'park' }), 2026, h))
 })
+
+test('every curated year cites a source, and a curated height says where it comes from', async () => {
+  const { loadHistory } = await import('../src/history.ts')
+  const h = await loadHistory('history/richmond-downtown.json')
+  const ids = new Set<string>()
+  for (const d of h.dates) {
+    assert.match(d.source, /^https:\/\//, d.id)
+    assert.ok(!ids.has(d.id), `${d.id} is dated twice`)
+    ids.add(d.id)
+    if (d.height !== undefined) assert.ok(d.height > 0 && (d.note ?? '').length > 0, `${d.id}: a height needs a note`)
+  }
+})
