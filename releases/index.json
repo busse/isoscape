@@ -678,24 +678,26 @@
  },
  "richmond-1925": {
   "title": "Richmond, 1925",
-  "current": 4,
+  "current": 5,
   "kind": "redraw",
   "records": [
    "v1.json",
    "v2.json",
    "v3.json",
-   "v4.json"
+   "v4.json",
+   "v5.json"
   ]
  },
  "richmond-1950": {
   "title": "Richmond, 1950",
-  "current": 4,
+  "current": 5,
   "kind": "redraw",
   "records": [
    "v1.json",
    "v2.json",
    "v3.json",
-   "v4.json"
+   "v4.json",
+   "v5.json"
   ]
  },
  "richmond-2026": {

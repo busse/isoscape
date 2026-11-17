@@ -1,0 +1,233 @@
+{
+ "design": "richmond-1950",
+ "title": "Richmond, 1950",
+ "version": 5,
+ "version_note": "redrawn: the Ninth Street (Free) Bridge, which stood from 1873 to 1972 and was missing, is drawn crossing from the foot of 9th Street, on today's Manchester Bridge line and at a height that are both approximate; a building traced from the Sanborn map that stood on its line is left out; woods along what became the interstate and the Downtown Expressway, planted with those roads, are left out.",
+ "recorded": "2026-11-17T15:43:40+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "10a874417632bfda6070b3bf24a6d467a54b53bc",
+  "subject": "Merge wave5-free-bridge: the Free Bridge clears traced buildings in builds made --with next,next2 (Richmond 1925 and 1950, version 5); every recorded scene unchanged",
+  "dirty": false
+ },
+ "kind": "redraw",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <store>/print-files/drawn/richmond-1950-v5 --only richmond-1950",
+   "python3 tools/print/canvas.py <store>/print-files/drawn/richmond-1950-v5/richmond-1950_36x24.jpg <store>/print-files/drawn/richmond-1950-v5/canvas 18x12 30x20 36x24",
+   "python3 tools/release/stamp.py <store> richmond-1950 --version 5 --base print-files/drawn/richmond-1950-v5"
+  ],
+  "redraw": true,
+  "base_kind": "compose",
+  "previous_record": "releases/richmond-1950/v4.json",
+  "pinned": "panels use the builds named in scenes[].build, not the newest",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond",
+   "piece": "1950",
+   "plate": "RVA-04",
+   "version": "5",
+   "drawn": "2026",
+   "location": "37.534° N 77.427° W",
+   "facing": "351°"
+  },
+  "files": {
+   "richmond-1950-v5_36x24.jpg": {
+    "base": "print-files/drawn/richmond-1950-v5/richmond-1950_36x24.jpg",
+    "base_sha256": "2fea87951777972561f30a33588bd37e12c48d87be2f4b576867f73ad0b277bf",
+    "at": {
+     "x": 8754,
+     "y": 6604,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   },
+   "richmond-1950-v5_canvas-18x12.jpg": {
+    "base": "print-files/drawn/richmond-1950-v5/canvas/richmond-1950_canvas-18x12.jpg",
+    "base_sha256": "f47632fcad9dde81d74b818591fbcebfd9558411dcdb5403fc829b66f4becb7f",
+    "at": {
+     "x": 4475,
+     "y": 3698,
+     "w": 1195,
+     "h": 169,
+     "u": 0.9192,
+     "where": "foot"
+    }
+   },
+   "richmond-1950-v5_canvas-30x20.jpg": {
+    "base": "print-files/drawn/richmond-1950-v5/canvas/richmond-1950_canvas-30x20.jpg",
+    "base_sha256": "3aeccdd2eea09ee91c52ebc89cd86906d3d2567b5288f50e2615719383b83ff0",
+    "at": {
+     "x": 7611,
+     "y": 5934,
+     "w": 1543,
+     "h": 218,
+     "u": 1.1867,
+     "where": "foot"
+    }
+   },
+   "richmond-1950-v5_canvas-36x24.jpg": {
+    "base": "print-files/drawn/richmond-1950-v5/canvas/richmond-1950_canvas-36x24.jpg",
+    "base_sha256": "de44c0f80129b4db62bf96f4e30758ef461396335c3be79d842fd751b6e7dc0e",
+    "at": {
+     "x": 9204,
+     "y": 7054,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-downtown-time",
+   "year": 1950,
+   "flags": [
+    "--with",
+    "next,next2"
+   ],
+   "svg": "out/builds/20261117-102325-richmond-downtown-time-1950/image.svg",
+   "sha256": "05da3ef3d723552a9adfe306cdb4c410389dab68d0f30e4836dc088bd38050ce",
+   "frozen": "data/_releases/scenes/05da3ef3d723552a9adfe306cdb4c410389dab68d0f30e4836dc088bd38050ce.svg",
+   "build": "20261117-102325-richmond-downtown-time-1950",
+   "commit": "10a8744",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "caf6b357925e6dc6bfb64097a344425f65a1a789b5e888abd8c99577ebcc35e6",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "tools/print/canvas.py": "7d6950595979a5f62d60b4509ff0b9bf36766594acbc294615eca26883ce283f",
+  "regions/richmond-downtown-time.json": "498df0bb97a286cde8d08816566be631db130090de8a1928fd7f6ba3ee831681",
+  "history/richmond-downtown.json": "72e541f7f2e9cc27366cf5aee9adf370570dc39122b54eade9c8b5a20ae0d187",
+  "history/sanborn/lost.geojson": "56e62877646394d1e887b3e5fabf887ce2fca992343d2fb5e25aefe995318a0a"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/richmond-1950-v5_36x24.jpg",
+   "sha256": "c0e9e60e0b7333c19185db2edb52e70628ad72b39e6c6b908a5d85611be5be63",
+   "bytes": 10643869,
+   "printful_file_id": 1114481060
+  },
+  "canvas": [
+   {
+    "file": "print-files/canvas/richmond-1950-v5_canvas-18x12.jpg",
+    "sha256": "bb75790b1ce0d31afb7d203e2c847f1876fac63eeb529dbf64150f3fdc768b13",
+    "bytes": 3885001,
+    "printful_file_id": 1114481265
+   },
+   {
+    "file": "print-files/canvas/richmond-1950-v5_canvas-30x20.jpg",
+    "sha256": "1ab49998979aef242b4cb5f3f5a1f9c749e047048e20a07c8144f1fb9389e0fd",
+    "bytes": 7083650,
+    "printful_file_id": 1114481463
+   },
+   {
+    "file": "print-files/canvas/richmond-1950-v5_canvas-36x24.jpg",
+    "sha256": "f787fb6dbce251ff40a63985050e512f6f01698304993caa778f67a8045cffd7",
+    "bytes": 8912981,
+    "printful_file_id": 1114481681
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Richmond, 1950",
+   "place": "Richmond",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "richmond-1950-v5_36x24.jpg",
+   "canvas": "richmond-1950-v5_canvas-{w}x{h}.jpg",
+   "version": 5,
+   "version_date": "November 17, 2026",
+   "version_note": "redrawn: the Ninth Street (Free) Bridge, which stood from 1873 to 1972 and was missing, is drawn crossing from the foot of 9th Street, on today's Manchester Bridge line and at a height that are both approximate; a building traced from the Sanborn map that stood on its line is left out; woods along what became the interstate and the Downtown Expressway, planted with those roads, are left out.",
+   "plate": "RVA-04",
+   "plate_box": [
+    0.81056,
+    0.91722,
+    0.96704,
+    0.95042
+   ]
+  },
+  "products": [
+   {
+    "handle": "richmond-1950",
+    "id": "gid://shopify/Product/9137908383862",
+    "format": "all (merged)",
+    "status": "ACTIVE",
+    "variants": 16
+   },
+   {
+    "handle": "richmond-1950-print",
+    "id": "gid://shopify/Product/9132812697718",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-1950-framed-print",
+    "id": "gid://shopify/Product/9132812763254",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-1950-framed-canvas",
+    "id": "gid://shopify/Product/9132812828790",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1950-v5_36x24-print.jpg?v=1794929621",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1950-v5_36x24-plate.jpg?v=1794929625"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1950-v5_36x24-framed-print-black.jpg?v=1794929630",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1950-v5_36x24-framed-print-white.jpg?v=1794929635",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1950-v5_36x24-plate.jpg?v=1794929625"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1950-v5_36x24-framed-canvas-black.jpg?v=1794929640",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1950-v5_36x24-framed-canvas-white.jpg?v=1794929645",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/richmond-1950-v5_36x24-plate.jpg?v=1794929625"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 1,
+  "matched": 1
+ }
+}

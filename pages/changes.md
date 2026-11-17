@@ -11,6 +11,24 @@ tools and the research get better, a published map is sometimes corrected and re
 page lists those changes, newest first. A print ordered after a change is made from the new
 version; the version is part of each print file's name (`-v2`, `-v3`).
 
+## November 17, 2026 (evening)
+
+**Richmond, 1925 (plate RVA·01) and Richmond, 1950 (RVA·04), version 5: redrawn.** Both prints
+were redrawn with Claude, in code, with the corrections made for Richmond, 1886 (`isoscape build
+--with next,next2`), and inspected again, tile by tile, at full print size.
+
+- Version 5 adds the Ninth Street Bridge, the Free Bridge, which stood from 1873 to 1972 and was
+  missing. It crosses the river from the foot of 9th Street, at the left edge of the print. Its
+  line and its height are approximate: it is drawn on the line of today's Manchester Bridge, which
+  replaced it, about 8 meters over the water.
+- A frame building traced from the 1924–25 Sanborn map stood on the bridge's line by the canal
+  bank, and the bridge's deck ran over its roof. It is left out, as buildings under the rail
+  viaducts already were.
+- Patches of woods along what became the interstate and the Downtown Expressway were drawn. They
+  were planted with those roads, so they are left out.
+
+The title block on each print gives version 5.
+
 ## November 17, 2026 (later)
 
 **Richmond, 1886 (plate RVA·03), Richmond, 1737–2026 (RVA·06) and Richmond, Then & Now (RVA·07),
