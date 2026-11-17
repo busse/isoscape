@@ -11,6 +11,31 @@ tools and the research get better, a published map is sometimes corrected and re
 page lists those changes, newest first. A print ordered after a change is made from the new
 version; the version is part of each print file's name (`-v2`, `-v3`).
 
+## November 17, 2026 (night)
+
+**Richmond's Streetcars, 1925: ten of the stop prints redrawn.** State Fair Grounds (plate
+STC·02) is now version 4; Ginter Park (STC·03), Barton Heights (STC·04), Highland Park (STC·05),
+Nine Mile Road (STC·06), Woodland Heights (STC·10), Forest Hill Park (STC·11), Byrd Park (STC·12),
+The Fan (STC·13) and Broad and Laurel (STC·14) are version 3. They were redrawn with Claude, in
+code, and inspected tile by tile at full print size. These faults are corrected:
+
+- On divided streets a car line followed one side of the street, or jogged from one piece of the
+  street to the next. It now runs down the middle of the street.
+- Bridges and viaducts that carry a car line were narrower than the line. They are drawn at the
+  line's width, with the line on them whole.
+- Chamberlayne Avenue's bridges over the railroad north of Leigh Street were built in 1992. What
+  crossed there in 1925 is not known here, so before 1992 the avenue is drawn crossing at grade
+  (approximate).
+- The Fair Grounds spur crosses the RF&P on a plain low deck, beside the Boulevard (approximate).
+- Roads built later left their clearings in the woods of 1925. The woods are filled.
+- Two streams mapped off their beds (one of them mapped where it runs underground) are left out.
+- The notes on box 2 and box 4 are reworded: box 2 names the State Fair Grounds spur, and box 4
+  no longer speaks of the creek, only of its valley.
+
+The set's map, the framed set and the prints of stops 1, 7, 8 and 9 follow when their
+corrections are done; until then they are not for sale. The title block on each print gives its
+version. This entry was drafted with Claude.
+
 ## November 17, 2026 (evening)
 
 **Richmond, 1925 (plate RVA·01) and Richmond, 1950 (RVA·04), version 5: redrawn.** Both prints
