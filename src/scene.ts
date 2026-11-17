@@ -812,10 +812,19 @@ export const buildScene = (
     const clearOfViaducts = clear === undefined ? null : lineIndex([...viaducts, ...curatedDecks], clear)
     const streetClear = time.history.tracedClearOfStreets
     const CARRIAGEWAYS = new Set(['trunk', 'primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'living_street'])
-    const clearOfStreets = streetClear === undefined ? null : lineIndex([
-      ...features.filter((f): f is LineFeature => f.type === 'line' && CARRIAGEWAYS.has(f.tags.highway ?? '') && !isBridge(f.tags)).map((f) => f.points.map(([lon, lat]) => view.toView(lon, lat))),
-      ...tramRuns.map((r) => r.pts),
-    ], streetClear)
+    // Each street keeps clear its carriageway: half its drawn width less a meter, at least
+    // `tracedClearOfStreets`; the car lines that much either side of their center.
+    const byReach = new Map<number, Vec2[][]>()
+    const addLine = (reach: number, pts: Vec2[]) => { const k = Math.round(reach); const list = byReach.get(k); if (list) list.push(pts); else byReach.set(k, [pts]) }
+    if (streetClear !== undefined) {
+      for (const f of features) {
+        if (f.type !== 'line' || !CARRIAGEWAYS.has(f.tags.highway ?? '') || isBridge(f.tags)) continue
+        addLine(Math.max(streetClear, (roadWidth(f.tags) ?? 0) / 2 - 1), f.points.map(([lon, lat]) => view.toView(lon, lat)))
+      }
+      for (const r of tramRuns) addLine(streetClear, r.pts)
+    }
+    const streetTests = [...byReach.entries()].map(([reach, lines]) => lineIndex(lines, reach))
+    const clearOfStreets = streetClear === undefined ? null : (ring: Ring) => streetTests.some((t) => t(ring))
     let tracedInStreet = 0
     let tracedRagged = 0
     for (const b of time.history.traced) {

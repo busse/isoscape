@@ -63,8 +63,8 @@
    "title": "Hermitage Road",
    "subtitle": "Industry along the tracks",
    "at": [
-    -77.46,
-    37.569
+    -77.460587,
+    37.566164
    ],
    "ground": 1300,
    "note": "Once the Seaboard Air Line joined the RF&P here in 1900, firms lined Hermitage Road for the sidings: the Richmond Foundry and Manufacturing Company built at 2300 Hermitage Road in 1906, and the Putney shoe works bought part of the old fair grounds. The warehouses are a historic district today.",
@@ -79,10 +79,10 @@
    "title": "Seaboard Junction",
    "subtitle": "Where the Seaboard left the RF&P",
    "at": [
-    -77.461834,
-    37.564265
+    -77.4615,
+    37.564
    ],
-   "ground": 1000,
+   "ground": 700,
    "note": "Just north of the station the Seaboard Air Line's main line left the RF&P and ran southeast to Main Street Station. Seaboard trains between Washington and the South passed Broad Street by; only from 1959 did they call there, backing in. The Seaboard and the Coast Line merged in 1967.",
    "sources": [
     "https://chicagorailfan.com/stbrric.html",

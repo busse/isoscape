@@ -307,14 +307,19 @@ def map_box(scene, aspect, marks=(), top_share=0.55, pad=0.03):
         nh = w / aspect
         ny = y + (h - nh) * top_share
         if marks:
-            lo, hi = min(p[1] for p in marks) - nh * pad, max(p[1] for p in marks) + nh * pad
+            lo, hi = min(p[1] for p in marks), max(p[1] for p in marks)
+            # As much room around the outermost markers as the cut allows, up to `pad` of it.
+            room = min(nh * pad, max(0.0, (nh - (hi - lo)) / 2))
+            lo, hi = lo - room, hi + room
             ny = min(max(ny, hi - nh), lo)
             ny = min(max(ny, y), y + h - nh)
         return (x, ny, w, nh)
     nw = h * aspect
     nx = x + (w - nw) / 2
     if marks:
-        lo, hi = min(p[0] for p in marks) - nw * pad, max(p[0] for p in marks) + nw * pad
+        lo, hi = min(p[0] for p in marks), max(p[0] for p in marks)
+        room = min(nw * pad, max(0.0, (nw - (hi - lo)) / 2))
+        lo, hi = lo - room, hi + room
         nx = min(max(nx, hi - nw), lo)
         nx = min(max(nx, x), x + w - nw)
     return (nx, y, nw, h)

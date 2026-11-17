@@ -692,9 +692,9 @@ only to it (joined end to end, no other street touching them) go with it, so the
 its last junction rather than in a stub; and a bridge left with an end no road reaches is left
 out, then the ways that led to it, up to three rounds. **Viaducts clear:** a traced building
 within 4 m of a rail viaduct or a curated bridge of the year, and any dated building a curated
-bridge passes over, is left out. **Streets clear:** a traced building with a street's center
-line or a car line passing through it, or within 2 m of it, is left out (the sheet was fitted a
-little off). **Streets under the cars:** a street with half its points within 12 m of a car line
+bridge passes over, is left out. **Streets clear:** a traced building standing in a street's carriageway (within half
+the street's drawn width less a meter of its center line, and at least 2 m) or within 2 m of a
+car line is left out (the sheet was fitted a little off). **Streets under the cars:** a street with half its points within 12 m of a car line
 of the year is kept, houses or not; and a building dated only by its parcel that a car line of
 the year runs through is left out, its parcel's year taken to be another building's.
 **Smoother tracing:** traced outlines are simplified to 2.5 m and rid of spikes (a corner under
