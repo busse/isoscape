@@ -217,16 +217,72 @@ def place(route):
         if not out or out[-1] != q: out.append(q)
     return out
 
+def seg_near(p, segs):
+    """The nearest point to `p` (meters) on segments [(a, b)] (meters), and its distance."""
+    best = None
+    for a, b in segs:
+        dx, dy = b[0] - a[0], b[1] - a[1]; l2 = dx * dx + dy * dy or 1e-12
+        t = max(0.0, min(1.0, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2))
+        q = (a[0] + dx * t, a[1] + dy * t); d = math.hypot(q[0] - p[0], q[1] - p[1])
+        if best is None or d < best[1]: best = (q, d)
+    return best
+
+WAYS = {}
+for e in els:
+    if e['type'] == 'way' and 'geometry' in e: WAYS[e['id']] = [(g['lon'], g['lat']) for g in e['geometry'] if g is not None]
+
+def patch(run, p):
+    """A stretch of a placed run redrawn, the rest kept as placed (see `patches` in the module doc)."""
+    m = [to_m(q) for q in run]
+    def near(pt):
+        t = to_m(pt); return min(range(len(m)), key=lambda i: math.hypot(m[i][0] - t[0], m[i][1] - t[1]))
+    i0, i1 = sorted((near(p['from']), near(p['to'])))
+    seg = m[i0:i1 + 1]
+    # Resampled every 2 m, with how far along each point is.
+    pts = [seg[0]]
+    for a, b in zip(seg, seg[1:]):
+        L = math.hypot(b[0] - a[0], b[1] - a[1]); k = max(1, math.ceil(L / 2.0))
+        pts += [(a[0] + (b[0] - a[0]) * i / k, a[1] + (b[1] - a[1]) * i / k) for i in range(1, k + 1)]
+    s = [0.0]
+    for a, b in zip(pts, pts[1:]): s.append(s[-1] + math.hypot(b[0] - a[0], b[1] - a[1]))
+    total = s[-1]; taper = p.get('taper', 30)
+    def weight(x):   # 0 at each end of the stretch, 1 past the tapers, eased
+        u = max(0.0, min(1.0, x / taper, (total - x) / taper)); return u * u * (3 - 2 * u)
+    out = []
+    toward = p.get('toward')
+    segs = []
+    if toward:
+        for wid in toward['ways']:
+            g = [to_m(q) for q in WAYS[wid]]; segs += list(zip(g, g[1:]))
+    for k, q in enumerate(pts):
+        w = weight(s[k]); x, y = q
+        if toward:
+            n = seg_near(q, segs)
+            if n and n[1] <= toward.get('reach', 60): x += w * toward['share'] * (n[0][0] - q[0]); y += w * toward['share'] * (n[0][1] - q[1])
+        if p.get('offset'):
+            a = pts[max(0, k - 1)]; b = pts[min(len(pts) - 1, k + 1)]
+            dx, dy = b[0] - a[0], b[1] - a[1]; L = math.hypot(dx, dy) or 1e-9
+            x += w * p['offset'] * dy / L; y -= w * p['offset'] * dx / L   # positive: to the right of travel
+        out.append((x, y))
+    new = smooth([from_m(q) for q in out], p['smooth']) if p.get('smooth') else [from_m(q) for q in out]
+    new = [[round(x, 7), round(y, 7)] for x, y in new]
+    new[0], new[-1] = run[i0], run[i1]
+    return run[:i0] + new + run[i1 + 1:]
+
 routes = json.load(open(routes_path))
 PLACING.update(routes.get('placing', {}))
 hist = json.load(open(history_path))
 placed = {}
 for r in routes['routes']:
     runs = [place({'stops': s}) for s in r['runs']]
+    for p in r.get('patches', []):
+        runs[p.get('run', 0)] = patch(runs[p.get('run', 0)], p)
     length = sum(dist(a, b) for run in runs for a, b in zip(run, run[1:]))
     print(f"{r['id']}: {len(runs)} run(s), {length / 1609.34:.1f} miles")
     placed[r['id']] = {'id': r['id'], 'name': r['name'], 'kind': 'streetcar', 'from': r.get('from', 1888), 'to': r.get('to', 1950),
                        'route': r.get('route', ''), 'lines': runs, 'note': r['note'], 'sources': r['sources']}
+    rounds = [{'from': p['from'], 'to': p['to'], 'tolerance': p['round']} for p in r.get('patches', []) if p.get('round')]
+    if rounds: placed[r['id']]['round'] = rounds
 # A curated bridge drawn on a line's old placement (each of its points within 0.5 m of it) moves
 # with the line: each point to the nearest point of the new placement.
 def nearest(p, run):
