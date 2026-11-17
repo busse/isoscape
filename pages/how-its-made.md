@@ -777,7 +777,7 @@ cutaway's butterfly roofs and the dome in terra-cotta tile, as it was until 1955
 regions add: rail bridges over water stand on piers however low their deck (elsewhere a pier
 is drawn only under a deck more than 3 m above its foot); the two ways of a double-track viaduct
 are one deck at one level; and named deck heights for the C&O's viaduct (12 m, so it clears the
-Seaboard's, 6 m, at the Triple Crossing) and the Free Bridge (4 m, approximate, its south end on the street the cars run on). A history can also extend another (`extends`: its rules and
+Seaboard's, 6 m, at the Triple Crossing) and the Free Bridge (4 m, approximate: in 1925 its south end meets the street the cars run on; in 1943 it lands at Seventh Street and Semmes Avenue). A history can also extend another (`extends`: its rules and
 dates first, its features replacing the base's of the same id), which is how the set's close
 views of Broad Street Station take these rules while the cutaway, drawn from the station's own
 history, stays as it was sold. The sets take the downtown series' era rules and curated dates
