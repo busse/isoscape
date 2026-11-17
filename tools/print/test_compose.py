@@ -88,6 +88,34 @@ class WideCredit(unittest.TestCase):
             self.sheet('Mathews County, Virginia · between the Piankatank and Milford Haven', self.SOURCES * 3)
 
 
+class CreditBelow(unittest.TestCase):
+    """A design with "credit": "below" (Then & Now) sets its credit under the subtitle at the left
+    margin, in a taller band, with the title sized for its "titleBand", clear of the block."""
+    def test_credit_under_the_subtitle_clear_of_the_block(self):
+        import numpy as np
+        spec = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'spec.json')))
+        sources = ['Map data © OpenStreetMap contributors (ODbL)', 'Elevation: USGS 3DEP', 'Buildings dated from assessor records',
+                   'Historic buildings traced from Sanborn Fire Insurance Maps, Library of Congress']
+        with tempfile.TemporaryDirectory() as d:
+            builds = {'b': svg(d, 'b', sources)}
+            design = {'title': 'Richmond, Then & Now', 'subtitle': '1886 and 2026, the same blocks from the same spot', 'region': 'r',
+                      'orientation': 'portrait', 'credit': 'below', 'band': 0.19, 'titleBand': 0.11,
+                      'note': 'The ground is today’s, from lidar. Traced buildings’ heights are assumed from their material.', 'panels': [{'build': 'b'}]}
+            saved = C.CREDIT, C.CREDIT_DERIVED
+            C.CREDIT, C.CREDIT_DERIVED = C.design_credit(design, builds), True
+            try:
+                img = C.compose(design, (24, 36), builds, {'r': {'box': [0, 0, 1, 1]}}, 300, 1 / 2,
+                                C.smallest_scale(spec, (24, 36)), C.stamped_faces(spec, (24, 36)))
+            finally:
+                C.CREDIT, C.CREDIT_DERIVED = saved
+        ink = np.asarray(img.convert('L')) < 200
+        H, W = ink.shape
+        m = round(W * 0.05)
+        reserve = C.block_reserve(36, 300, 1 / 2, C.stamped_faces(spec, (24, 36)))
+        self.assertFalse(ink[H - m - round(H * 0.03):H - m, round(W - m - reserve):W - m].any())   # the block's corner is paper
+        self.assertTrue(ink[H - m - round(W * 0.19 * 0.4):H - m, m:m + round(W * 0.3)].any())       # the credit, low at the left
+
+
 class Balanced(unittest.TestCase):
     def test_no_word_is_left_alone(self):
         from PIL import Image, ImageDraw, ImageFont

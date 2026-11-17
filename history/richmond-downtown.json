@@ -6,6 +6,14 @@
  "majorStreetsNearBuildings": true,
  "parkingFrom": 1960,
  "canalBridgesFrom": 1999,
+ "switches": {
+  "next": {
+   "note": "Corrections made after the 1925 and 1950 prints' version 4 (November 17, 2026), drawn in builds made with --with next: those prints stay as sold until their next version.",
+   "vergeReach": 60,
+   "vergeShare": 0.5,
+   "bridgeStreets": true
+  }
+ },
  "about": "Each scene draws the buildings standing today that had been built by its year (dated by OSM start_date, else the City of Richmond assessor's year built), plus the curated features below. Buildings since demolished appear only where curated. The ground is today's.",
  "epochs": [
   {
@@ -51,7 +59,7 @@
   {
    "year": 1870,
    "title": "Rebuilding",
-   "note": "The burned district is rebuilding; Shockoe Creek still runs open, until 1877."
+   "note": "The burned district is rebuilding; Shockoe Creek still runs open through the valley."
   },
   {
    "year": 1886,
@@ -145,7 +153,7 @@
    "name": "Great Turning Basin, James River & Kanawha Canal",
    "kind": "water",
    "from": 1800,
-   "to": 1895,
+   "to": 1880,
    "ring": [
     [
      -77.438082,
@@ -164,13 +172,190 @@
      37.5369982
     ]
    ],
-   "note": "The canal's Great Basin covered three blocks between Cary and Canal Streets, from 8th to 12th Street. Completed about 1800, and still drawn on the 1886 Sanborn map; later filled and used as a rail yard after the railroad took over the canal (the end date here is approximate). The James Center stands on the site.",
+   "note": "The canal's Great Basin covered three blocks between Cary and Canal Streets, from 8th to 12th Street. Completed about 1800; railroad yards covered about half of it in the 1880s and all of it by the 1920s (the Kanawha Plaza marker). Drawn whole until 1880 (that year approximate); for what was left of it in 1886 see the next entries. Drawn as still water at its own level, with a smooth bank, on today's ground (see How it's made). The James Center stands on the site.",
    "sources": [
     "https://www.hmdb.org/m.asp?m=286691",
     "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf",
     "https://en.wikipedia.org/wiki/James_Center",
-    "https://www.loc.gov/item/sanborn09064_001/"
+    "https://www.loc.gov/item/sanborn09064_001/",
+    "https://www.hmdb.org/m.asp?m=286692"
    ]
+  },
+  {
+   "id": "great-basin-1886",
+   "name": "What was left of the Great Basin in 1886, between 9th and 10th Streets",
+   "kind": "water",
+   "from": 1880,
+   "to": 1895,
+   "ring": [
+    [
+     -77.4384864,
+     37.5356687
+    ],
+    [
+     -77.4384419,
+     37.5358805
+    ],
+    [
+     -77.4383988,
+     37.5358557
+    ],
+    [
+     -77.4383553,
+     37.5360625
+    ],
+    [
+     -77.438071,
+     37.5358986
+    ],
+    [
+     -77.4381484,
+     37.5355304
+    ],
+    [
+     -77.4382001,
+     37.5355602
+    ],
+    [
+     -77.4382107,
+     37.5355097
+    ]
+   ],
+   "note": "The water marked \"Basin\" in the block between 9th and 10th Streets, Byrd and Canal, on the 1886 Sanborn map (volume 1, sheet 11), its outline read from the sheet and placed by the corners of 10th and Byrd, 11th and Byrd and 11th and Canal, as the sheet's traced buildings are. By then rail yards and warehouses covered the rest of the basin. Drawn 1880 to 1895: the start is the marker's \"1880s\", the end the next map's year, both approximate. Still water at its own level, with a smooth bank, on today's ground.",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_001/",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0011/full/pct:25/0/default.jpg",
+    "https://www.hmdb.org/m.asp?m=286692"
+   ],
+   "confidence": "drawn"
+  },
+  {
+   "id": "basin-slip-1886",
+   "name": "Basin between 11th and 12th Streets, 1886",
+   "kind": "water",
+   "from": 1880,
+   "to": 1895,
+   "ring": [
+    [
+     -77.4367729,
+     37.5346752
+    ],
+    [
+     -77.436757,
+     37.5347509
+    ],
+    [
+     -77.4362745,
+     37.5344727
+    ],
+    [
+     -77.4362904,
+     37.534397
+    ]
+   ],
+   "note": "The narrow water marked \"Basin\" beside the track and trestle on the east side of Byrd Street between 11th and 12th, on the 1886 Sanborn map (volume 1, sheet 11), placed as the entry above. Years approximate, as above.",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_001/",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0011/full/pct:25/0/default.jpg"
+   ],
+   "confidence": "drawn"
+  },
+  {
+   "id": "kanawha-canal-west",
+   "name": "James River and Kanawha Canal, from Tredegar to the Great Basin",
+   "kind": "creek",
+   "from": 1800,
+   "to": 1895,
+   "width": 10,
+   "line": [
+    [
+     -77.4462515,
+     37.5365128
+    ],
+    [
+     -77.4422384,
+     37.5378017
+    ],
+    [
+     -77.4405669,
+     37.5370732
+    ],
+    [
+     -77.4388481,
+     37.5369982
+    ]
+   ],
+   "note": "The canal's last mile into the Great Basin. Its middle stretch, between 6th and 7th Streets, is read from the 1886 Sanborn map (volume 1, sheet 10, \"Old James River & Kanawha Canal (Mill Canal)\"), placed by the corners of 6th and Byrd, 7th and Byrd and 7th and Canal. West of it the line runs straight to the east end of the canal's dry bed by Tredegar mapped in OpenStreetMap (w307593380), and east of it straight to the basin's west corner, as the 1886 key map shows it: those two runs are approximate. Drawn about 10 m wide (sheet 10 draws it about 8 m) from 1800, the basin's year, to 1895, the end of the basin entries; the railroad laid on its towpath from 1880 is not drawn.",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_001/",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0010/full/pct:25/0/default.jpg",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0000/full/pct:50/0/default.jpg",
+    "https://www.openstreetmap.org/way/307593380",
+    "https://www.hmdb.org/m.asp?m=286692"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "kanawha-canal-1886",
+   "name": "The canal's last stretch into what was left of the basin, 1886",
+   "kind": "creek",
+   "from": 1880,
+   "to": 1895,
+   "width": 8,
+   "line": [
+    [
+     -77.4388481,
+     37.5369982
+    ],
+    [
+     -77.4384864,
+     37.5357687
+    ]
+   ],
+   "note": "From the basin's old west corner to the water left between 9th and 10th Streets, as the 1886 Sanborn key map shows the canal running into it: a straight line, approximate.",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_001/",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0000/full/pct:50/0/default.jpg"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "free-bridge",
+   "name": "Free Bridge (the Ninth Street Bridge)",
+   "kind": "bridge",
+   "mode": "road",
+   "from": 1873,
+   "to": 1972,
+   "deck": 8,
+   "switch": "next",
+   "line": [
+    [
+     -77.4401071,
+     37.5344434
+    ],
+    [
+     -77.44517,
+     37.5292
+    ],
+    [
+     -77.44555,
+     37.5286
+    ],
+    [
+     -77.4456033,
+     37.5278975
+    ]
+   ],
+   "note": "The free road bridge from the foot of 9th Street to Manchester, opened in June 1873 (RVA Mag; Dogtown Dish dates the span it describes to 1878, after the flood of 1877) and closed after the floods of 1969 and 1972, when the Manchester Bridge replaced it. Built \"rather low over the river\": its deck is drawn 8 m over the water, an assumption. Its line is today's Manchester Bridge's, which the USGS 1:24,000 Richmond quadrangle of 1934 shows it on (\"9th St Bridge\", just downstream of the Richmond and Petersburg bridge), from the corner of 9th Street to the foot of Commerce Road in Manchester: approximate. Drawn only in builds made with --with next: the 1925 and 1950 prints (version 4) were drawn before it.",
+   "sources": [
+    "https://dogtowndish.com/2018/03/03/richmonds-lost-singing-9th-street-bridge/",
+    "https://rvamag.com/community/rva-5x5-the-history-of-the-mayo-bridge.html",
+    "https://en.wikipedia.org/wiki/Manchester_Bridge_(Virginia)",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0000/full/pct:50/0/default.jpg"
+   ],
+   "confidence": "approximate",
+   "highway": "tertiary"
   },
   {
    "id": "burned-1865",
@@ -334,7 +519,7 @@
    "name": "Shockoe Creek (open stream)",
    "kind": "creek",
    "from": 1737,
-   "to": 1877,
+   "to": 1890,
    "width": 8,
    "line": [
     [
@@ -362,16 +547,17 @@
      37.5315242
     ]
    ],
-   "note": "The creek ran open between present-day 15th and 16th Streets, dividing the town, until it was enclosed in a culvert in 1877. Course approximated as midway between the two streets.",
+   "note": "The creek ran open between present-day 15th and 16th Streets, dividing the town. A culvert begun in 1877 enclosed part of it, but the 1886 Sanborn map (volume 1, key map and sheets 18 and 19) still draws it open from Broad Street to the Dock, so it is drawn to 1890 (the end approximate). Course approximated as midway between the two streets.",
    "sources": [
-    "https://sah-archipedia.org/node/285"
+    "https://sah-archipedia.org/node/285",
+    "https://www.loc.gov/item/sanborn09064_001/"
    ]
   },
   {
    "id": "rp-byrd-street-approach",
    "name": "Richmond and Petersburg (Atlantic Coast Line) approach to Byrd Street Station",
    "kind": "rail",
-   "from": 1902,
+   "from": 1838,
    "to": 1971,
    "line": [
     [
@@ -399,12 +585,13 @@
      37.5363671
     ]
    ],
-   "note": "The track from the north end of the Richmond and Petersburg bridge (OSM w710689016) across the Haxall Canal into Byrd Street Station at Seventh and Byrd Streets, the R&P's original Richmond station and later the Atlantic Coast Line's headquarters, closed in 1958. Today nothing of it is mapped north of the bridge. Approximate: one track along the middle of the station's throat, read by eye from the USGS 1:24,000 Richmond quadrangles of 1934 and 1956 (which show the line crossing the canal and fanning into the station yard between Seventh and Eighth Streets south of Byrd) and joined to the bridge's mapped end, about 20 m east of where the maps put it. Drawn with the bridge, 1902 to 1970; the years are the bridge's, not the track's.",
+   "note": "The track from the north end of the Richmond and Petersburg bridge (OSM w710689016) across the Haxall Canal into Byrd Street Station at Seventh and Byrd Streets, the R&P's original Richmond station and later the Atlantic Coast Line's headquarters, closed in 1958. Today nothing of it is mapped north of the bridge. Approximate: one track along the middle of the station's throat, read by eye from the USGS 1:24,000 Richmond quadrangles of 1934 and 1956 (which show the line crossing the canal and fanning into the station yard between Seventh and Eighth Streets south of Byrd) and joined to the bridge's mapped end, about 20 m east of where the maps put it. Drawn with the bridge, from 1838 to 1970 (the R&P's depot stood at 8th and Byrd before Byrd Street Station, and the 1886 Sanborn map, volume 1, sheet 10, shows its tracks fanning in between 7th and 9th south of Canal); the years are the bridge's, not the track's.",
    "sources": [
     "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge",
     "https://en.wikipedia.org/wiki/Byrd_Street_Station",
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
-    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0010/full/pct:25/0/default.jpg"
    ],
    "confidence": "approximate"
   },
@@ -597,13 +784,36 @@
    },
    "eras": [
     [
-     1913,
+     1788,
+     1865
+    ],
+    [
+     1866,
      null
     ]
    ],
-   "note": "The bridge drawn is today's, of 1913. A bridge has stood near here since John Mayo Jr.'s toll bridge of 1788, but its earlier wooden spans are not drawn, so scenes before 1913 show no bridge here.",
+   "note": "A bridge has stood here since John Mayo's toll bridge of 1787-88, rebuilt after floods (1802, 1814, 1816, 1823, 1870, 1877) and after the Confederates burned it on 3 April 1865; the city bought it in 1905 and built today's concrete bridge in 1913. Every form before 1913 is drawn on today's bridge's line and height, an approximation; the 1886 Sanborn key map shows Mayo's Bridge on this line. Not drawn in 1865, the scene after the fire: its rebuilding year is taken as 1866, approximate.",
    "sources": [
-    "https://historicrichmond.com/property/mayo-bridge/"
+    "https://rvamag.com/community/rva-5x5-the-history-of-the-mayo-bridge.html",
+    "https://www.loc.gov/item/sanborn09064_001/",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0000/full/pct:50/0/default.jpg"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w167830264"
+    ]
+   },
+   "eras": [
+    [
+     1788,
+     null
+    ]
+   ],
+   "note": "Hull Street's short span at the foot of Mayo's Bridge in Manchester, dated with the bridge it leads to: Hull Street has run from Mayo's Bridge since the bridge's first years (the 1886 Sanborn key map). Where nothing it crosses stands in a year, it is drawn at grade. Approximate.",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_001/"
    ]
   },
   {
@@ -633,6 +843,50 @@
    "note": "The floodwall was dedicated on 21 October 1994.",
    "sources": [
     "https://www.hmdb.org/m.asp?m=23953"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w120865532",
+     "w1467679096"
+    ]
+   },
+   "eras": [
+    [
+     1999,
+     null
+    ]
+   ],
+   "note": "The Canal Walk's channel of the canal between 9th and 12th Streets, as rebuilt and re-watered in 1999: drawn today only. Its line (the ways below) is drawn in past years as the canal's Tidewater Connection.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/James_River_and_Kanawha_Canal"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w302945743",
+     "w1467678743",
+     "w1467678744",
+     "w307765822"
+    ]
+   },
+   "eras": [
+    [
+     1854,
+     1890
+    ],
+    [
+     1999,
+     null
+    ]
+   ],
+   "note": "The Tidewater Connection, opened in 1854 from the Great Basin down to the Richmond Dock (the Kanawha Plaza marker), drawn along OSM's line of today's re-watered channel, which follows it: approximate. The 1886 Sanborn map (volume 1, sheet 11) shows a narrow channel along Byrd Street here. Its end, 1890, is the canal's.",
+   "sources": [
+    "https://www.hmdb.org/m.asp?m=286692",
+    "https://www.loc.gov/item/sanborn09064_001/",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0011/full/pct:25/0/default.jpg"
    ]
   },
   {
@@ -677,7 +931,11 @@
    },
    "eras": [
     [
-     1902,
+     1838,
+     1865
+    ],
+    [
+     1866,
      1970
     ],
     [
@@ -685,7 +943,7 @@
      null
     ]
    ],
-   "note": "The Richmond and Petersburg (later Atlantic Coast Line) bridge over the James: rebuilt on concrete piers in 1902, removed in 1970. OSM keeps it as an abandoned railway, and today's scene (2026) draws it as OSM maps it, as before.",
+   "note": "The Richmond and Petersburg (later Atlantic Coast Line) bridge over the James: completed in 1838, destroyed on 2 April 1865, rebuilt as a trestle opened 26 May 1866, burned in 1882 and rebuilt in 1883, rebuilt on concrete piers in 1902, removed in 1970 (Wikipedia). Every form is drawn on OSM's line of the last. OSM keeps it as an abandoned bridge, so today's scene still draws its piers.",
    "sources": [
     "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge"
    ]
@@ -708,6 +966,24 @@
   },
   {
    "where": {
+    "id": [
+     "w114143919"
+    ]
+   },
+   "eras": [
+    [
+     1866,
+     null
+    ]
+   ],
+   "note": "The Southern (Norfolk Southern) bridge to Manchester, on the line of the Richmond and Danville Railroad's bridge, which the 1886 Sanborn key map shows crossing just upstream of Mayo's Bridge. Drawn from 1866, after the bridges burned in 1865 (the year approximate); before 1865 it is not drawn. Every form is drawn on today's line and height, an approximation.",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_001/",
+    "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0000/full/pct:50/0/default.jpg"
+   ]
+  },
+  {
+   "where": {
     "tag": "railway",
     "bridge": true
    },
@@ -721,6 +997,39 @@
    "sources": [
     "https://www.richmondrailroadmuseum.com/railroad-history",
     "https://en.wikipedia.org/wiki/Richmond_Main_Street_Station"
+   ]
+  },
+  {
+   "where": {
+    "tag": "railway",
+    "is": [
+     "platform"
+    ]
+   },
+   "eras": [
+    [
+     1901,
+     null
+    ]
+   ],
+   "note": "Platforms mapped today belong to Main Street Station (1901) and later: dated with it.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Main_Street_Station_(Richmond,_Virginia)"
+   ]
+  },
+  {
+   "where": {
+    "name": "Bellwood Subdivision"
+   },
+   "eras": [
+    [
+     1900,
+     null
+    ]
+   ],
+   "note": "The Seaboard Air Line's line through Shockoe Valley and Manchester: the Seaboard reached Richmond in 1900 (its line from Petersburg, the Richmond, Petersburg and Carolina, opened that year), so it is not drawn before. Approximate where the line shares older track.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Seaboard_Air_Line_Railroad"
    ]
   },
   {
@@ -1278,6 +1587,181 @@
    "year": null,
    "source": "https://smandf.com/portfolio/700-centre-tower-annex",
    "note": "The seven-story annex of the 1913 tower at 700 E. Franklin St.; no source found gives its year (the assessor's is the tower's lot, 1913). Drawn in today's scene only until a source dates it."
+  },
+  {
+   "id": "w113029210",
+   "name": "Federal Reserve Bank Building",
+   "year": 1978,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "701 East Byrd Street, 1978 (Wikipedia's list of Richmond's tallest buildings)."
+  },
+  {
+   "id": "w225274657",
+   "name": "Riverfront Plaza, West Tower",
+   "year": 1990,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "901 East Byrd Street, 1990 (the assessor's parcel gives 1989)."
+  },
+  {
+   "id": "w266759715",
+   "name": "Riverfront Plaza, East Tower",
+   "year": 1990,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "951 East Byrd Street, 1990."
+  },
+  {
+   "id": "w225274664",
+   "name": "One James Center",
+   "year": 1985,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "901 East Cary Street, 1985 (the assessor's parcel gives 1984)."
+  },
+  {
+   "id": "w365156598",
+   "name": "Two James Center",
+   "year": 1987,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "1021 East Cary Street, 1987."
+  },
+  {
+   "id": "w365156601",
+   "name": "Omni Richmond Hotel",
+   "year": 1987,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "100 South 12th Street, 1987."
+  },
+  {
+   "id": "w365156600",
+   "name": "Three James Center",
+   "year": 1987,
+   "source": "https://en.wikipedia.org/wiki/James_Center",
+   "note": "The James Center's four buildings were all finished by 1987 (Wikipedia, James Center); the year of this one alone is not given, so 1987 is the latest it can be: approximate."
+  },
+  {
+   "id": "w236488160",
+   "name": "Wytestone Plaza",
+   "year": 1965,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "801 East Main Street, 1965."
+  },
+  {
+   "id": "w263127156",
+   "name": "700 East Main Street",
+   "year": 1964,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "700 East Main Street (the Holiday Inn), 1964."
+  },
+  {
+   "id": "w263135040",
+   "name": "Seventh & Franklin Building",
+   "year": 1967,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "701 East Franklin Street, 1967."
+  },
+  {
+   "id": "w264523632",
+   "name": "Delta Hotel (formerly Crowne Plaza)",
+   "year": 1986,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "555 East Canal Street, 1986."
+  },
+  {
+   "id": "w365155755",
+   "name": "Truist Place",
+   "year": 1983,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "919 East Main Street, 1983 (the assessor's parcel gives 1982)."
+  },
+  {
+   "id": "w236488177",
+   "name": "Truist Place (SunTrust Plaza), outline",
+   "year": 1983,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "919 East Main Street, 1983."
+  },
+  {
+   "id": "w365155758",
+   "name": "One Capitol Square",
+   "year": 1964,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "830 East Main Street, 1964 (the assessor's parcel gives 1965)."
+  },
+  {
+   "id": "w252837449",
+   "name": "One Capitol Square, outline",
+   "year": 1964,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "830 East Main Street, 1964."
+  },
+  {
+   "id": "w365615561",
+   "name": "Eighth & Main Building",
+   "year": 1975,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "707 East Main Street, 1975 (the assessor's parcel gives 1976)."
+  },
+  {
+   "id": "w236488161",
+   "name": "Eighth & Main Building, outline",
+   "year": 1975,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "707 East Main Street, 1975."
+  },
+  {
+   "id": "w236488158",
+   "name": "Main Street Centre",
+   "year": 1986,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "600 East Main Street, 1986 (the assessor's parcel gives 1985)."
+  },
+  {
+   "id": "w264502225",
+   "name": "Central National Bank Building",
+   "year": 1930,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "219 East Broad Street, 1930 (OSM gives 1929)."
+  },
+  {
+   "id": "w365155733",
+   "name": "Richmond City Hall",
+   "year": 1971,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "900 East Broad Street, 1971."
+  },
+  {
+   "id": "w365155721",
+   "name": "Richmond Marriott",
+   "year": 1984,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "500 East Broad Street, 1984 (the assessor's parcel gives 1990)."
+  },
+  {
+   "id": "w264518644",
+   "name": "The Towers on Franklin (Trolley Square)",
+   "year": 1963,
+   "source": "https://en.wikipedia.org/wiki/List_of_tallest_buildings_in_Richmond,_Virginia",
+   "note": "104 West Franklin Street, 1963."
+  },
+  {
+   "id": "w113038421",
+   "name": "VDOT Annex Building",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/113038421",
+   "note": "Eight levels or more, dated only by its parcel (the assessor's year), and no source found for its year: drawn in today's scene only, as the rule for tall buildings asks."
+  },
+  {
+   "id": "w252837448",
+   "name": "7 North 8th Street parking deck",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/252837448",
+   "note": "Eight levels or more, dated only by its parcel (the assessor's year), and no source found for its year: drawn in today's scene only, as the rule for tall buildings asks."
+  },
+  {
+   "id": "w264525429",
+   "name": "6th & Main Parking Deck",
+   "year": null,
+   "source": "https://www.openstreetmap.org/way/264525429",
+   "note": "Eight levels or more, dated only by its parcel (the assessor's year), and no source found for its year: drawn in today's scene only, as the rule for tall buildings asks."
   }
  ],
  "sanborn": {

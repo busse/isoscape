@@ -31,7 +31,7 @@ export interface Epoch {
 export interface HistoryFeature {
   readonly id: string
   readonly name: string
-  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label'
+  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label' | 'bridge'
   readonly from: number
   readonly to?: number
   /** lon/lat outline (open), for areas and landmarks. */
@@ -94,6 +94,23 @@ export interface HistoryFeature {
   readonly ruin?: number
   /** A `plan`: draw only the streets inside it while it stands. */
   readonly limitsStreets?: boolean
+  /**
+   * A `bridge`: a road (`mode: 'road'`, default) or railroad (`'rail'`) bridge that is gone,
+   * along `line` (lon/lat), drawn as a bridge of today's map would be: its deck `deck` meters
+   * over the ground or water under it (default the region's), ramping down to the ground at
+   * each end. Each end should be a node of a street (or track) standing in the years it is
+   * drawn, so the bridge lands on it; a past year's check leaves out a road bridge that does
+   * not (see `pastGround`). `highway` is the road's OSM class (default secondary).
+   */
+  readonly mode?: 'road' | 'rail'
+  readonly deck?: number
+  readonly highway?: string
+  /**
+   * Drawn only in builds asked for it by name (`isoscape build --with <name>`): for a feature
+   * added after some years of a series were published, so their scenes stay as sold until each
+   * is redrawn. A build records the names it was given.
+   */
+  readonly switch?: string
   readonly note: string
   readonly sources: readonly string[]
 }
@@ -137,6 +154,8 @@ export interface Rule {
     /** Tag keys the feature must not carry (a service road with no `service` kind and no name). */
     readonly without?: readonly string[]
   }
+  /** Applied only in builds that switch it on by name (see `HistoryFeature.switch`). */
+  readonly switch?: string
   /** Spans [from, to): null for an open end. An empty list means "not dated: today only". */
   readonly eras: readonly (readonly [number | null, number | null])[]
   readonly note?: string
@@ -212,6 +231,19 @@ export interface History {
    * redevelopment, and what crossed it before is not known here. A rule naming the bridge wins.
    */
   readonly canalBridgesFrom?: number
+  /**
+   * Woods and scrub with `vergeShare` of their outline or more within `vergeReach` meters of a
+   * road not yet built are its verges, dated with it (`laterWorks`; defaults 20 m and 0.4).
+   */
+  readonly vergeReach?: number
+  readonly vergeShare?: number
+  /** Keep the whole of a street, by name, that leads onto a road bridge (`dropUnbuiltStreets`'s `follow`). */
+  readonly bridgeStreets?: boolean
+  /**
+   * Settings a build's `--with` names switch on, by name: for corrections made after some years
+   * of a series were published, so their scenes stay as sold until each is redrawn.
+   */
+  readonly switches?: Readonly<Record<string, { readonly vergeReach?: number; readonly vergeShare?: number; readonly bridgeStreets?: boolean; readonly note?: string }>>
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
@@ -234,6 +266,10 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.railScale === undefined ? {} : { railScale: raw.railScale }),
     ...(raw.parkingFrom === undefined ? {} : { parkingFrom: raw.parkingFrom }),
     ...(raw.canalBridgesFrom === undefined ? {} : { canalBridgesFrom: raw.canalBridgesFrom }),
+    ...(raw.vergeReach === undefined ? {} : { vergeReach: raw.vergeReach }),
+    ...(raw.vergeShare === undefined ? {} : { vergeShare: raw.vergeShare }),
+    ...(raw.bridgeStreets === undefined ? {} : { bridgeStreets: raw.bridgeStreets }),
+    ...(raw.switches === undefined ? {} : { switches: raw.switches }),
   }
 }
 
@@ -281,6 +317,48 @@ export const featureAlive = (f: Feature, year: number, h: History): boolean => {
   return true
 }
 
+/**
+ * Whether a feature standing in `year` stands then only for a span that ends before today: the
+ * era its first matching rule draws it in has an end (the canal's downtown end, 1800 to 1890,
+ * re-watered in 1999 along another bed). Such water is drawn as historic water (see
+ * `historicWater` in terrain.ts), not on today's ground as it lies.
+ */
+export const featureHistoric = (f: Feature, year: number, h: History): boolean => {
+  for (const r of h.rules) {
+    if (!matches(r, f)) continue
+    return r.eras.some(([a, b]) => b !== null && alive(a, b, year))
+  }
+  return false
+}
+
+/**
+ * A history as a build's `--with` names (`on`) have it: every unswitched feature and rule and
+ * those named, and the settings the names switch on.
+ */
+export const switchedOn = (h: History, on: readonly string[]): History => {
+  const keep = (x: { readonly switch?: string }) => x.switch === undefined || on.includes(x.switch)
+  let out = h
+  if (!h.features.every(keep)) out = { ...out, features: h.features.filter(keep) }
+  if (!h.rules.every(keep)) out = { ...out, rules: h.rules.filter(keep) }
+  for (const name of on) {
+    const set = h.switches?.[name]
+    if (set === undefined) continue
+    out = { ...out, ...(set.vergeReach === undefined ? {} : { vergeReach: set.vergeReach }), ...(set.vergeShare === undefined ? {} : { vergeShare: set.vergeShare }), ...(set.bridgeStreets === undefined ? {} : { bridgeStreets: set.bridgeStreets }) }
+  }
+  return out
+}
+
+/** A curated bridge as the map feature it stands in for: a road or railroad bridge way. */
+export const bridgeFeature = (h: HistoryFeature): Feature | null => {
+  if (h.kind !== 'bridge' || h.line === undefined || h.line.length < 2) return null
+  const tags: Record<string, string> = h.mode === 'rail'
+    ? { railway: 'rail', bridge: 'yes', layer: '1', name: h.name }
+    : { highway: h.highway ?? 'secondary', bridge: 'yes', layer: '1', name: h.name }
+  tags['isoscape:seat'] = 'ground'
+  if (h.deck !== undefined) tags['isoscape:deck'] = String(h.deck)
+  return { type: 'line', id: `history:${h.id}`, tags, points: h.line }
+}
+
 const MINOR_STREETS = new Set(['tertiary', 'tertiary_link', 'residential', 'service', 'unclassified', 'living_street', 'track', 'footway', 'path', 'cycleway', 'pedestrian', 'steps', 'bridleway'])
 
 /** Main roads, held to the same test only where a series asks (`majorStreetsNearBuildings`). */
@@ -295,12 +373,13 @@ const PLANNED_STREETS = new Set(['tertiary', 'residential', 'unclassified', 'liv
  * no 1925 house anywhere along it was most likely laid out later. A street of the plan's kind
  * (a main road, tertiary, residential, unclassified, living) inside a town plan already laid
  * out (`plans`, lon/lat rings) is kept without houses: the plan is the record that it was laid
- * out. With `major`, main roads (trunk, primary, secondary) must pass the test too. A bridge is
+ * out. With `major`, main roads (trunk, primary, secondary) must pass the test too. A street that
+ * meets a road bridge is kept with it (with `follow`, the rest of that street by name too). A bridge is
  * never dropped: it carries its street over water or a valley where no house can stand, and its
  * era rule alone says when it stood. Returns the kept features and how many streets were dropped.
  */
 export const dropUnbuiltStreets = (
-  features: readonly Feature[], meters: number, extra: readonly Vec2[] = [], plans: readonly (readonly Vec2[])[] = [], major = false,
+  features: readonly Feature[], meters: number, extra: readonly Vec2[] = [], plans: readonly (readonly Vec2[])[] = [], major = false, follow = false,
 ): { kept: Feature[]; dropped: number } => {
   let lat0 = 0
   let n = 0
@@ -326,10 +405,27 @@ export const dropUnbuiltStreets = (
     for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) if (grid.has(`${x + dx},${y + dy}`)) return true
     return false
   }
+  // Nodes of road bridges: a street that meets one carries the bridge's traffic on (the road
+  // across an island between two spans, a bridge's approach), so it stands with the bridge.
+  const bridgeNodes = new Set<string>()
+  for (const f of features) if (f.type === 'line' && f.tags.highway !== undefined && f.tags.bridge !== undefined && f.tags.bridge !== 'no') for (const p of f.points) bridgeNodes.add(`${p[0]},${p[1]}`)
+  // ...and, with `follow`, so does the rest of that street, by name, as far as it runs on
+  // unbroken (Hull Street from Mayo's Bridge across Manchester).
+  const carried = new Set<string>()
+  const streets = features.filter((f): f is Extract<Feature, { type: 'line' }> => f.type === 'line' && f.tags.highway !== undefined && !(f.tags.bridge !== undefined && f.tags.bridge !== 'no'))
+  let front = streets.filter((f) => f.points.some((p) => bridgeNodes.has(`${p[0]},${p[1]}`)))
+  for (const f of front) carried.add(f.id)
+  while (follow && front.length > 0) {
+    const ends = new Map<string, string>()
+    for (const f of front) if (f.tags.name !== undefined) for (const p of f.points) ends.set(`${p[0]},${p[1]}`, f.tags.name)
+    front = streets.filter((g) => !carried.has(g.id) && g.tags.name !== undefined && g.points.some((p) => ends.get(`${p[0]},${p[1]}`) === g.tags.name))
+    for (const g of front) carried.add(g.id)
+  }
   let dropped = 0
   const kept = features.filter((f) => {
     if (f.type !== 'line' || !(MINOR_STREETS.has(f.tags.highway ?? '') || (major && MAJOR_STREETS.has(f.tags.highway ?? '')))) return true
     if (f.tags.bridge !== undefined && f.tags.bridge !== 'no') return true
+    if (carried.has(f.id)) return true
     if ((PLANNED_STREETS.has(f.tags.highway ?? '') || MAJOR_STREETS.has(f.tags.highway ?? '')) && f.points.some((p) => plans.some((r) => pointInRing(p, r as Vec2[])))) return true
     // Walk the street every half-cell, so a long block with one house still counts.
     for (let i = 0; i < f.points.length; i++) {
