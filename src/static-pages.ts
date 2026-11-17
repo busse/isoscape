@@ -265,6 +265,8 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 `
 
 interface Head {
+  /** Ask search engines not to index the page (an unlisted page, waiting to be reviewed). */
+  readonly noindex?: boolean
   readonly title: string
   readonly description: string
   readonly path: string
@@ -289,7 +291,7 @@ const head = (h: Head, ctx: Ctx): string => `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(h.title)}</title>
-${analytics(ctx.config.analytics?.ga)}<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(MARK)}">
+${h.noindex ? '<meta name="robots" content="noindex">\n' : ''}${analytics(ctx.config.analytics?.ga)}<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(MARK)}">
 ${ctx.config.siteUrl === undefined ? '' : `<link rel="sitemap" type="application/xml" title="Sitemap" href="${up(ctx.depth)}sitemap.xml">\n`}${metaTags({
   title: h.title,
   description: h.description,
@@ -322,7 +324,7 @@ const topBar = (ctx: Ctx, campaign: string): string => {
 /** The footer: who draws the maps and how, the credits, every content page. */
 const footer = (ctx: Ctx): string => {
   const u = up(ctx.depth)
-  const links = ctx.pages.map((p) => {
+  const links = ctx.pages.filter((p) => !p.unlisted).map((p) => {
     const path = ctx.plan.forPage(p.slug)
     return path === undefined ? '' : `<a href="${escAttr(u + path)}">${escapeHtml(p.title)}</a>`
   }).filter((x) => x !== '')
@@ -351,6 +353,30 @@ export interface ContentImages {
   readonly flagshipAlt?: string
 }
 
+const ENTITIES: Readonly<Record<string, string>> = { amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", nbsp: ' ' }
+
+/** Compiled HTML as plain text: tags dropped, entities read, white space collapsed. */
+export const plainText = (html: string): string =>
+  html.replace(/<[^>]*>/g, ' ').replace(/&(amp|lt|gt|quot|#39|nbsp);/g, (_, e: string) => ENTITIES[e] ?? '').replace(/\s+/g, ' ').replace(/ ([.,;:!?)])/g, '$1').replace(/\( /g, '(').trim()
+
+/**
+ * The questions of a compiled page and their answers: every heading whose text ends in a question
+ * mark, with the text under it up to the next heading of any level. For FAQPage structured data.
+ */
+export const faqEntries = (html: string): { question: string; answer: string }[] => {
+  const heads = [...html.matchAll(/<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/g)]
+  const out: { question: string; answer: string }[] = []
+  heads.forEach((m, i) => {
+    const question = plainText(m[2])
+    if (!question.endsWith('?')) return
+    const start = (m.index ?? 0) + m[0].length
+    const end = i + 1 < heads.length ? heads[i + 1].index ?? html.length : html.length
+    const answer = plainText(html.slice(start, end))
+    if (answer !== '') out.push({ question, answer })
+  })
+  return out
+}
+
 /** A content page as a plain HTML document: `p/<slug>.html`. */
 export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}, modified?: string): string => {
   const path = ctx.plan.forPage(page.slug) ?? `p/${page.slug}.html`
@@ -360,10 +386,12 @@ export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}
   const shop = pageShop(page.slug, mapRefs(page.html), ctx.config)
   const acts = `<p class="acts"><a class="btn ghost" href="../index.html#/${escAttr(page.slug)}">Open this in the explorer</a>${shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, page.slug, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`}</p>\n`
   const url = abs(path, ctx)
+  const faq = page.schema === 'FAQPage' ? faqEntries(page.html) : []
   const ld = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: page.title,
+    ...(faq.length > 0
+      ? { '@type': 'FAQPage', name: page.title, mainEntity: faq.map((q) => ({ '@type': 'Question', name: q.question, acceptedAnswer: { '@type': 'Answer', text: q.answer } })) }
+      : { '@type': 'Article', headline: page.title }),
     description,
     author: person(ctx),
     inLanguage: 'en',
@@ -372,7 +400,7 @@ export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}
     ...(modified === undefined ? {} : { dateModified: modified }),
     isPartOf: { '@type': 'WebSite', name: SITE_NAME, ...(ctx.config.siteUrl === undefined ? {} : { url: ctx.config.siteUrl }) },
   }
-  return head({ title: `${page.title} · ${SITE_NAME}`, description, path, type: 'article', ld, ...(image === undefined ? {} : { image }), ...(imageAlt === undefined ? {} : { imageAlt }) }, ctx) +
+  return head({ title: `${page.title} · ${SITE_NAME}`, description, path, type: 'article', ld, ...(page.unlisted ? { noindex: true } : {}), ...(image === undefined ? {} : { image }), ...(imageAlt === undefined ? {} : { imageAlt }) }, ctx) +
     topBar(ctx, page.slug) +
     `<main class="wrap">\n${acts}<article class="prose">\n${page.html}</article>\n${acts}</main>\n` +
     footer(ctx) + '</body>\n</html>\n'
@@ -545,7 +573,7 @@ export interface PlainLinks {
 
 export const plainLinks = (plan: StaticPlan, pages: readonly Page[], home?: HomeConfig): PlainLinks[] => {
   const groups: PlainLinks[] = []
-  const pageLinks = pages.map((p) => ({ href: plan.forPage(p.slug) ?? '', label: p.title })).filter((l) => l.href !== '')
+  const pageLinks = pages.filter((p) => !p.unlisted).map((p) => ({ href: plan.forPage(p.slug) ?? '', label: p.title })).filter((l) => l.href !== '')
   if (pageLinks.length) groups.push({ title: 'Pages', links: pageLinks })
   const maps = plan.entries.filter((e): e is MapEntry | SeriesEntry => e.kind !== 'page')
   const label = (e: MapEntry | SeriesEntry) => mapTitle(e, home)
@@ -652,7 +680,8 @@ export const writeStatic = async (
     const base = config.siteUrl
     const day = (iso: string) => iso.slice(0, 10)
     const newestDay = builds.length ? day(newest(builds).createdAt) : undefined
-    const urls = [{ loc: base, ...(newestDay === undefined ? {} : { lastmod: newestDay }) }, ...plan.entries.map((e) => {
+    const hidden = new Set(pages.filter((p) => p.unlisted).map((p) => p.slug))
+    const urls = [{ loc: base, ...(newestDay === undefined ? {} : { lastmod: newestDay }) }, ...plan.entries.filter((e) => e.kind !== 'page' || !hidden.has(e.slug)).map((e) => {
       const lastmod = e.kind === 'page' ? opts.dates?.get(e.slug) : day(e.kind === 'series' ? newest(e.years.map((y) => y.build)).createdAt : e.build.createdAt)
       return { loc: siteHref(e.path, base), ...(lastmod === undefined ? {} : { lastmod }) }
     })]

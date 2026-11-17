@@ -273,6 +273,13 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   (`tools/cutaway/sheet.py --page`) is the isometric cut alone.
 - `title` is the nav label (default: the first `#` heading). `order` sorts the nav, lowest
   first (default 100); the shipped pages use 10 and 90. `slug` overrides the file name.
+- `unlisted: true` keeps a page out of the nav, the static pages' footers, the front page's
+  plain list and the sitemap, and asks search engines not to index `p/<slug>.html` (`noindex`).
+  It still opens at its address (`#/<slug>`, `p/<slug>.html`, `s/page-<slug>.html`): use it for a
+  page someone must read before it is published, and delete the line to publish it.
+- `schema: FAQPage` makes the static page's JSON-LD a `FAQPage` instead of an `Article`: every
+  heading that ends in a question mark is a question, and the text under it, up to the next
+  heading, its answer (`faqEntries` in `src/static-pages.ts`).
 - Section ids follow GitHub's rule (lower case, punctuation dropped, spaces to hyphens), and
   links are written as they would be for GitHub, so the files read the same on GitHub as in
   the explorer.

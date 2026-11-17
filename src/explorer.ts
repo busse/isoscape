@@ -434,7 +434,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
 <script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, shares: site.shares ?? null, buy: site.shop ? buyLinks(site, new Set(builds.flatMap((b) => (b.time ? [b.region, `${b.region}:${b.time.year}`] : [b.region])))) : null })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, license: d.license, link: d.link }])))}</script>
-<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2), shop: (site.shop && pageShop(p.slug, explorerMapRefs(p.html), site)) ?? null })))}</script>
+<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, ...(p.unlisted ? { unlisted: true } : {}), html: p.html, headings: p.headings.filter((h) => h.level === 2), shop: (site.shop && pageShop(p.slug, explorerMapRefs(p.html), site)) ?? null })))}</script>
 <script>
 (() => {
   const builds = JSON.parse(document.getElementById('builds').textContent)
@@ -444,6 +444,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const state = { a: null, b: null, compare: false, zoom: 1, panX: 0, panY: 0, split: 0.5, filter: '', tab: 'details', page: null, refit: false, pendingView: null }
   const pages = JSON.parse(document.getElementById('pagesData').textContent)
   const pageBySlug = new Map(pages.map((p) => [p.slug, p]))
+  // An unlisted page (front matter \`unlisted: true\`) opens at its address but is named nowhere.
+  const listed = pages.filter((p) => !p.unlisted)
   const site = JSON.parse(document.getElementById('site').textContent)
   const demSources = JSON.parse(document.getElementById('demSources').textContent)
   const home = site.home
@@ -1019,8 +1021,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   // #/<slug> and #/<slug>/<section> open a page; anything else is a build selection.
   let routed = null
   const renderPages = () => {
-    $('pages').hidden = pages.length === 0 && !home
-    $('pages').innerHTML = (home ? '<a class="home' + (state.home ? ' on' : '') + '" href="#home">Front page</a>' : '') + pages.map((p) => '<a href="#/' + esc(p.slug) + '"' + (state.page === p.slug ? ' class="on"' : '') +
+    $('pages').hidden = listed.length === 0 && !home
+    $('pages').innerHTML = (home ? '<a class="home' + (state.home ? ' on' : '') + '" href="#home">Front page</a>' : '') + listed.map((p) => '<a href="#/' + esc(p.slug) + '"' + (state.page === p.slug ? ' class="on"' : '') +
       (p.summary ? ' title="' + esc(p.summary) + '"' : '') + '>' + esc(p.title) + '</a>').join('')
   }
   const markToc = () => {
@@ -1088,7 +1090,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   }
 
   const openPage = (slug, section) => {
-    const p = pageBySlug.get(slug) || pages[0]
+    const p = pageBySlug.get(slug) || listed[0]
     if (!p) return
     if (state.home) closeHome()
     state.page = p.slug
@@ -1138,7 +1140,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     try { h = decodeURIComponent(h) } catch (err) { /* keep it raw */ }
     if (h.startsWith('/')) {
       const parts = h.slice(1).split('/')
-      return { page: parts[0] || (pages[0] ? pages[0].slug : ''), section: parts.slice(1).join('/') }
+      return { page: parts[0] || (listed[0] ? listed[0].slug : ''), section: parts.slice(1).join('/') }
     }
     const [whole, tab] = h.split('/')
     let sel = whole || '', view = null, split = null
@@ -1250,7 +1252,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const start = parseHash()
   if (builds.length === 0) {
     $('empty').innerHTML = '<div><b>No builds yet.</b><br>Run <code>node bin/isoscape.js build &lt;region&gt;</code> and reload.' +
-      (pages.length ? '<br><br>Meanwhile: <a href="#/' + esc(pages[0].slug) + '">' + esc(pages[0].title) + '</a>' : '') + '</div>'
+      (listed.length ? '<br><br>Meanwhile: <a href="#/' + esc(listed[0].slug) + '">' + esc(listed[0].title) + '</a>' : '') + '</div>'
     renderList()
   } else if (home && start.page === undefined && !(start.a && byId.has(start.a))) {
     routed = location.hash
