@@ -827,7 +827,11 @@ is drawn only under a deck more than 3 m above its foot); the two ways of a doub
 are one deck at one level; and named deck heights for the C&O's viaduct (12 m, so it clears the
 Seaboard's, 6 m, at the Triple Crossing) and the Free Bridge (4 m, approximate: in 1925 its south end meets the street the cars run on; in 1943 it lands at Seventh Street and Semmes Avenue), and piers 75 m apart, not 38 m, under the
 Marshall Street Viaduct (approximate: none of its pier spacing is known here; at 38 m one stood in
-front of the Richmond Cold Storage building's face and read as standing in it). A history can also extend another (`extends`: its rules and
+front of the Richmond Cold Storage building's face and read as standing in it), its first and last
+30 m standing on an abutment, the side of the deck facing the camera walled down to the ground, so
+the deck is built out from the bluff at College Street rather than hung in the air from its first
+pier (the abutment is painted with the end piece of deck, so nothing else is reordered; its form is
+approximate). A history can also extend another (`extends`: its rules and
 dates first, its features replacing the base's of the same id), which is how the set's close
 views of Broad Street Station take these rules while the cutaway, drawn from the station's own
 history, stays as it was sold. The sets take the downtown series' era rules and curated dates
