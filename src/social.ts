@@ -48,6 +48,7 @@ export interface SiteConfig {
   /**
    * Optional shop for prints: a link to its front page in the header (always), plus a link to buy
    * on each map, section, set or page that is in `onSale` (see `onSaleUrl`), and nowhere else.
+   * A key `<region>:<year>` (the explorer's route for a year) puts it on that year's view only.
    * `cta` is the header's wording while anything is on sale.
    */
   readonly shop?: { readonly label: string; readonly url: string; readonly cta?: string; readonly onSale?: OnSale }
@@ -512,12 +513,13 @@ export const flagshipOf = (builds: readonly BuildMeta[], flagship?: string): Bui
   (flagship === undefined ? undefined : builds.find((b) => b.id === flagship || b.region === flagship || b.name === flagship)) ?? builds[0]
 
 /**
- * The URL `onSale` gives a subject (a region, a set slug or a page slug): the entry under the
- * longest key the subject starts with. No entry, no URL: nothing links to the shop for it.
+ * The URL `onSale` gives a subject (a region, a set slug, a page slug, or `<region>:<year>`): the
+ * entry under the longest key the subject starts with; a key with a year (`<region>:<year>`)
+ * only when it is the whole subject. No entry, no URL: nothing links to the shop for it.
  */
 export const onSaleUrl = (onSale: OnSale | undefined, subject: string): string | undefined => {
   if (onSale === undefined) return undefined
-  const key = Object.keys(onSale).filter((k) => k !== '' && subject.startsWith(k)).sort((a, b) => b.length - a.length)[0]
+  const key = Object.keys(onSale).filter((k) => k !== '' && (k.includes(':') ? k === subject : subject.startsWith(k))).sort((a, b) => b.length - a.length)[0]
   return key === undefined ? undefined : onSale[key]
 }
 
@@ -529,11 +531,14 @@ export const shopCta = (config: Pick<SiteConfig, 'shop'>): string | undefined =>
   anyOnSale(config) ? config.shop?.cta : undefined
 
 /**
- * Where "Buy a print" goes for a region: `onSale` by the region's longest matching prefix, with
- * its featured view's button text. The explorer gets these resolved (`buyLinks`).
+ * Where "Buy a print" goes for a region, or for one year of it: `onSale` by the longest key that
+ * `<region>` (or `<region>:<year>`, the explorer's route for that year) starts with, with its
+ * featured view's button text. So a region's key covers every year, and a key such as
+ * `richmond-downtown-time:1925` that year's view alone (not the series' page, nor another year).
+ * The explorer gets these resolved (`buyLinks`).
  */
-export const shopFor = (config: Pick<SiteConfig, 'shop' | 'home'>, region: string): { url: string; label: string } | undefined => {
-  const url = onSaleUrl(config.shop?.onSale, region)
+export const shopFor = (config: Pick<SiteConfig, 'shop' | 'home'>, region: string, year?: number): { url: string; label: string } | undefined => {
+  const url = onSaleUrl(config.shop?.onSale, year === undefined ? region : `${region}:${year}`)
   if (url === undefined) return undefined
   const hero = config.home?.heroes.find((h) => h.region === region)
   return { url, label: hero?.shopLabel ?? 'Buy a print ↗' }
@@ -571,11 +576,15 @@ export const pageShop = (slug: string, maps: readonly string[], config: Pick<Sit
   return viaSection === undefined ? undefined : { url: viaSection.url, label }
 }
 
-/** Every shop link the explorer's script shows, resolved here: per region, and per front-page section (null when not on sale). */
+/**
+ * Every shop link the explorer's script shows, resolved here: per region and per `<region>:<year>`
+ * (each given as such a string), and per front-page section (null when not on sale).
+ */
 export const buyLinks = (config: Pick<SiteConfig, 'shop' | 'home'>, regions: Iterable<string>): { regions: Record<string, { url: string; label: string }>; sections: ({ url: string; label: string } | null)[] } => {
   const out: Record<string, { url: string; label: string }> = {}
   for (const r of regions) {
-    const s = shopFor(config, r)
+    const m = /^(.*):(\d+)$/.exec(r)
+    const s = m === null ? shopFor(config, r) : shopFor(config, m[1], Number(m[2]))
     if (s !== undefined) out[r] = s
   }
   return { regions: out, sections: (config.home?.sections ?? []).map((s) => sectionShop(config, s) ?? null) }

@@ -465,7 +465,7 @@ export const renderMapPage = (e: MapEntry, ctx: Ctx, previews: ReadonlyMap<strin
   const description = clip(hero?.blurb ? `${hero.blurb} ${card.description}` : card.description, 300)
   const image = previews.get(b.id)
   const alt = mapAlt(b)
-  const shop = shopFor(ctx.config, e.region)
+  const shop = shopFor(ctx.config, e.region, e.year)
   const explore = `${u}index.html${e.route}`
   const series = e.series === undefined ? undefined : ctx.plan.entries.find((x): x is SeriesEntry => x.kind === 'series' && x.path === e.series)
   const story = sec?.page === undefined ? undefined : sec.page.startsWith('#/') ? ctx.plan.forPage(sec.page.slice(2).split('/')[0]) : undefined

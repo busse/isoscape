@@ -431,7 +431,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   <section id="home" tabindex="-1"><div class="hm" id="homeBody"></div>${plainList(site)}</section>
   <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><button class="back" id="pageLink" title="Copy a link to this page, with its link preview (L)">Copy link</button><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
 </main>
-<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, shares: site.shares ?? null, buy: site.shop ? buyLinks(site, new Set(builds.map((b) => b.region))) : null })}</script>
+<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, shares: site.shares ?? null, buy: site.shop ? buyLinks(site, new Set(builds.flatMap((b) => (b.time ? [b.region, `${b.region}:${b.time.year}`] : [b.region])))) : null })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, license: d.license, link: d.link }])))}</script>
 <script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2), shop: (site.shop && pageShop(p.slug, explorerMapRefs(p.html), site)) ?? null })))}</script>
@@ -488,8 +488,9 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     return i < 0 ? home.sections.length : i
   }
   // Where "Buy a print" goes for a build, with its button text: resolved from the shop's onSale
-  // when the page was written (buyLinks in social.ts); nothing when its region is not on sale.
-  const buyOf = (b) => (b && site.buy && site.buy.regions[b.region]) || null
+  // when the page was written (buyLinks in social.ts); nothing when its region (or, for a dated
+  // build, its region and year) is not on sale.
+  const buyOf = (b) => (b && site.buy && ((b.time && site.buy.regions[b.region + ':' + b.time.year]) || site.buy.regions[b.region])) || null
   const renderList = () => {
     const list = visible()
     $('count').textContent = builds.length + (builds.length === 1 ? ' build' : ' builds')
