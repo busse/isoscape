@@ -66,6 +66,8 @@ export interface Region {
   readonly hideUnderSheds?: boolean
   /** Ground ribbons (roads, paths, track) filled round at their bends, so no wedge opens on a bend's outside (a set's views). */
   readonly ribbonJoins?: boolean
+  /** Meters: tie marks are drawn on only one of tracks this close (default TIE_RUN_CLEAR, 3.5). */
+  readonly tieRunClear?: number
   /**
    * Extra data, beyond OSM and elevation. `buildings` lists where footprints come from:
    * OpenStreetMap and/or Microsoft's ML footprints (OSM wins where both have a building).

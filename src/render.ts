@@ -547,7 +547,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   // read as clumps across the shared ballast.
   const farTies0 = scene.time?.tieClear === undefined || scene.time.tieClear <= 0
     ? lineLayer('rail', 'ties')
-    : { cls: 'ties', segs: clearRuns(scene.ribbons.filter((rb) => rb.kind === 'rail').map((rb) => rb.center), TIE_RUN_CLEAR) }
+    : { cls: 'ties', segs: clearRuns(scene.ribbons.filter((rb) => rb.kind === 'rail').map((rb) => rb.center), scene.region.tieRunClear ?? TIE_RUN_CLEAR) }
   const farTies = tramSegs.length === 0 ? farTies0 : { cls: farTies0.cls, segs: offCars(farTies0.segs) }
   const lineLayers = [
     ...(close ? [] : [farTies]),
