@@ -614,6 +614,13 @@ Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
    traced in two editions that overlap by more than 85%, keeping the earlier start and the later
    end (`clean.py`: 68 dropped, 170 merged).
 
+A sheet gives the buildings but not the shore they stood on, and the water is today's (or, for
+the canal's Great Basin, an approximate outline). A traced building with half its footprint
+or more on the water drawn in its year would stand in the river, so it is left out, and the
+explorer counts how many: in downtown Richmond 10 in 1886, 3 in 1905, 20 in 1925 and 18 in
+1950, most of them mills on the islands and races above the Mayo Bridge, and warehouses on the
+Great Basin's edge.
+
 The historic buildings are sketches, not a survey. A machine traced them from scans of
 fire-insurance maps, so outlines are approximate, heights are guessed from material, and some
 buildings are missing, misplaced or merged. The 1924 overview ("congested district") sheet is

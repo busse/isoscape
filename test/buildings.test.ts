@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { bankGrounds, groundCover, seatLevel, settlePrisms, spansWater, type Prism } from '../src/scene.ts'
+import { bankGrounds, groundCover, wetShare, seatLevel, settlePrisms, spansWater, type Prism } from '../src/scene.ts'
 import type { Vec2 } from '../src/geom.ts'
 import { buildingHeights } from '../src/classify.ts'
 
@@ -94,4 +94,11 @@ test('a tagged height far over its floors is a mistag, when the map checks level
   assert.equal(buildingHeights({ building: 'office', 'building:levels': '4', height: '22' }, 900, true).top, 22)
   assert.equal(buildingHeights({ building: 'church', 'building:levels': '1', height: '40' }, 900, true).top, 40)
   assert.equal(buildingHeights({ building: 'apartments', 'building:levels': 'many', height: '80' }, 900, true).top, 80)
+})
+
+test('the share of a footprint on water', () => {
+  const half = (p: Vec2) => p[0] < 10
+  assert.ok(Math.abs(wetShare(square(0, 0, 20), half) - 0.5) < 0.05)
+  assert.equal(wetShare(square(0, 0, 20), () => false), 0)
+  assert.equal(wetShare(square(0, 0, 20), () => true), 1)
 })

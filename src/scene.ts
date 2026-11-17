@@ -681,11 +681,19 @@ export const buildScene = (
       if (done.sections.length > 0) sectionsOut = done.sections
     }
     // Buildings traced from fire-insurance maps that are gone today, in the maps' colors.
+    // A sheet gives a building but not the shore it stood on: one with half its footprint or
+    // more on water drawn in its year (today's river and canals, or a curated basin) would stand
+    // in the water, so it is left out and counted (`tracedOnWater`).
     const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
+    let tracedOnWater = 0
     for (const b of time.history.traced) {
       if (!alive(b.from, b.to, time.year)) continue
       const outer = orient(simplifyRing(toViewRing(view, b.ring), 0.3), true)
       if (outer.length < 3 || !outer.every((p) => insideRect(p, frame))) continue
+      if (wetShare(outer, (p) => onWater(sc, p)) >= 0.5) {
+        tracedOnWater++
+        continue
+      }
       const grounds = outer.map((p) => terrain.z(p))
       const base = Math.min(...grounds)
       const top = Math.max(seatLevel(grounds, terrain.exaggeration) + b.storeys * 3.6, base + 2.5)
@@ -693,6 +701,7 @@ export const buildScene = (
       ends[b.end]++
     }
     stats.traced = ends.map + ends.rebuilt + ends.highway + ends.assumed
+    if (tracedOnWater > 0) stats.tracedOnWater = tracedOnWater
     stats.tracedEndMap = ends.map
     stats.tracedEndRebuilt = ends.rebuilt
     stats.tracedEndHighway = ends.highway
@@ -851,6 +860,27 @@ export const seatLevel = (grounds: readonly number[], exaggeration: number): num
 export const spansWater = (tags: Readonly<Record<string, string>>, outer: Ring, wet: (p: Vec2) => boolean): boolean => {
   const layer = parseInt(tags.layer ?? '', 10)
   return Number.isFinite(layer) && layer >= 1 && wet(centroid(outer))
+}
+
+/** The share of a footprint on water, from 0 to 1, sampled on a grid of about 100 points (its centroid alone if too small to sample). */
+export const wetShare = (outer: Ring, wet: (p: Vec2) => boolean): number => {
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+  for (const [x, y] of outer) {
+    minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y)
+  }
+  const step = Math.max(0.25, Math.sqrt(((maxX - minX) * (maxY - minY)) / 100))
+  let inside = 0
+  let wetCount = 0
+  for (let y = minY + step / 2; y < maxY; y += step) {
+    for (let x = minX + step / 2; x < maxX; x += step) {
+      const p: Vec2 = [x, y]
+      if (!pointInRing(p, outer)) continue
+      inside++
+      if (wet(p)) wetCount++
+    }
+  }
+  if (inside === 0) return wet(centroid(outer)) ? 1 : 0
+  return wetCount / inside
 }
 
 /** The ground under a building's corners on land, or all of them if none is on land. */
