@@ -63,7 +63,7 @@
     {
      "n": 3,
      "title": "The main stair",
-     "text": "Twelve feet wide and marble, with a landing halfway.",
+     "text": "Twelve feet wide, with a marble landing halfway.",
      "section": {
       "part": "history:mss-h-stair-2",
       "dx": 0.1,
@@ -106,7 +106,7 @@
      "section": {
       "part": "history:mss-h-bench-1",
       "badge": [
-       130,
+       -150,
        -150
       ]
      }
@@ -118,7 +118,7 @@
      "section": {
       "part": "history:mss-h-lunch-counter-top",
       "badge": [
-       -170,
+       150,
        -190
       ]
      },
@@ -168,10 +168,10 @@
      "title": "Platforms and tracks",
      "text": "Six stub tracks, five platforms; a through track under each eave.",
      "iso": {
-      "part": "history:mss-d-platform-3-2",
+      "part": "history:mss-d-platform-4-2",
       "badge": [
-       150,
-       120
+       -170,
+       130
       ]
      },
      "cross": {
