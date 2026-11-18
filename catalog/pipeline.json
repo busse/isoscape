@@ -2762,7 +2762,7 @@
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 5,
+   "rounds": 1,
    "waiting_on": "agent",
    "decision": "owner approved the look of d5 on 2026-11-18 (dormers materially better); rc1: one inspection against the checklist, at most one fix round; track floor left as drawn",
    "accepted_faults": [
@@ -2784,7 +2784,7 @@
    "kind": "cutaway",
    "stage": "final draft",
    "budget_note": "d1 to d4 were made before the scheme was adopted (November 18, 2026); d5 needs the owner's say-so",
-   "notes": "open: sheet balance after the taller tower; the track floor drawn 0.7 m high",
+   "notes": "five working-draft rounds (d1 to d5) before rc1; the track floor drawn 0.7 m high is an accepted fault",
    "log": [
     "2026-11-18: working draft -> final draft"
    ]
