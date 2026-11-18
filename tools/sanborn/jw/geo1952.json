@@ -70,5 +70,103 @@
   "m_per_px": 0.154,
   "block_inliers": 0.23,
   "block_points": 3834
+ },
+ "310": {
+  "params": [
+   -4759.841678656485,
+   9739.477814149697,
+   0.9327765611445283,
+   6.561679790026246
+  ],
+  "refined": true,
+  "corners": [
+   "4th & Jackson",
+   "5th & Jackson",
+   "7th & Jackson"
+  ],
+  "resid_m": [
+   0.5,
+   1.1,
+   1.6
+  ],
+  "resid_corners_only": [
+   0.5,
+   1.1,
+   1.6
+  ],
+  "m_per_px": 0.1524,
+  "block_inliers": 0.16,
+  "block_points": 2912,
+  "scale_bar_m_per_px_full": 0.0762
+ },
+ "326": {
+  "params": [
+   -4767.33327490253,
+   13879.81076255344,
+   0.9269514867181267,
+   6.551719551578364
+  ],
+  "refined": false,
+  "corners": [
+   "Jackson & St James",
+   "Jackson & Price",
+   "Jackson & Cameo",
+   "St James & Duval",
+   "St John & Baker",
+   "St Paul & Baker",
+   "St James & Baker",
+   "1st & Duval"
+  ],
+  "resid_m": [
+   3.8,
+   3.5,
+   3.1,
+   6.7,
+   2.9,
+   5.9,
+   0.6,
+   2.0
+  ],
+  "resid_corners_only": [
+   3.8,
+   3.5,
+   3.1,
+   6.7,
+   2.9,
+   5.9,
+   0.6,
+   2.0
+  ],
+  "m_per_px": 0.1526,
+  "block_inliers": 0.18,
+  "block_points": 4897
+ },
+ "311": {
+  "params": [
+   -6338.463978708653,
+   9906.156511496083,
+   0.9109705454376977,
+   6.561683070866141
+  ],
+  "refined": true,
+  "corners": [
+   "4th & Baker (from sheet 310's fit)",
+   "7th & Baker (from sheet 310's fit)",
+   "4th & Preston"
+  ],
+  "resid_m": [
+   0.9,
+   2.2,
+   2.6
+  ],
+  "resid_corners_only": [
+   0.9,
+   2.2,
+   2.6
+  ],
+  "m_per_px": 0.1524,
+  "block_inliers": 0.07,
+  "block_points": 1846,
+  "scale_bar_m_per_px_full": 0.0762
  }
 }

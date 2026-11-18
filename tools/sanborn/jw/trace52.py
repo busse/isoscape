@@ -9,15 +9,17 @@ is a building part when:
   - it is uncolored and holds a glyph-sized printed mark inside it (the story number, the use
     letter "D", the roof circle), and is not a yard or a lot strip: area 6-350 m2 (a larger outline
     on these sheets is a yard; none of the plain outlines checked by eye was a building that big), it
-    fills at least half its rotated bounding box, and it is not more than 7 times longer than
+    fills at least half its rotated bounding box, and it is not more than 5 times longer than
     wide. Yards that hold a printed dimension or a block number pass this test too: looking at
     every sheet's overlay finds them, and they are dropped by hand (fixes.json).
 Dashed lines are bridged first (a closing along 7 px lines at every 15 degrees), so an open
 porch or a wall drawn dashed still closes its building off from the yard.
 An uncolored region of the first pass (lines as printed) that holds regions of the second
-(dashes bridged) filling under 70% of it had leaked into its yard: those replace it.
+(dashes bridged) filling under 70% of it had leaked into its yard, and one that holds two or more
+marked regions of the second is a row of houses split by dashed party walls: in both cases the
+second-pass regions replace it.
 Parts that share a printed line are joined into one building when the smaller is under 40% of the
-larger's area (a porch, a rear wing or an addition); parts of like size (row houses, a block of
+larger's area and under 45 m2 (a porch, a rear wing or an addition); parts of like size (row houses, a block of
 stores) stay separate buildings. An uncolored part whose edge is more than half shared with
 colored parts (a label box or a light well inside a colored building) joins that building. Region outlines are grown by 1.5 px to the middle of their lines.
 
@@ -25,8 +27,10 @@ colored parts (a label box or a light well inside a colored building) joins that
 
 fixes.json (per sheet) lists what looking at the overlay found: "drop": region ids that are not
 buildings (a yard holding a dimension, a block number), "add": [u, v] points (50% px) inside
-outlined buildings the rules missed, "split": ids not to join to a neighbor, "addpoly": outlines read by
-eye ({"uv": [[u, v], ...] in 50% px, "material", "color"}) where an outline leaks on both passes.
+outlined buildings the rules missed, "droppt": [u, v] points (50% px): the building holding each
+is dropped before parts are joined (a yard), "split": ids not to join to a neighbor, "addpoly": outlines read by
+eye ({"uv": [[u, v], ...] in 50% px, "material", "color"}) where an outline leaks on both passes,
+"exclude": areas left out ({"uv": ..., "why"}), such as an inset drawn at another orientation.
 Out: one record per building: ring (lon/lat), material, color ('colored' or 'uncolored'),
 area m2, parts, ids of its regions, and the points where its marks sit (for reading labels)."""
 import json, sys, os
@@ -55,13 +59,44 @@ def regions(im, close_angles=()):
     closed = ink.copy()
     for ang in close_angles:
         # bridge the gaps of dashed lines along the sheet's own grid directions
-        k = np.zeros((5, 5), np.uint8)
-        dx, dy = np.cos(np.radians(ang)) * 2, np.sin(np.radians(ang)) * 2
-        cv2.line(k, (int(round(2 - dx)), int(round(2 - dy))), (int(round(2 + dx)), int(round(2 + dy))), 1, 1)
+        k = np.zeros((9, 9), np.uint8)
+        dx, dy = np.cos(np.radians(ang)) * 4, np.sin(np.radians(ang)) * 4
+        cv2.line(k, (int(round(4 - dx)), int(round(4 - dy))), (int(round(4 + dx)), int(round(4 + dy))), 1, 1)
         closed |= cv2.morphologyEx(ink, cv2.MORPH_CLOSE, k)
     inkc = cv2.dilate(closed, np.ones((2, 2), np.uint8))
     n, lab, st, _ = cv2.connectedComponentsWithStats(1 - inkc, connectivity=4)
     return n, lab, st, ink
+
+def glyph_boxes(ink):
+    """Printed marks the size of a letter or the roof circle that close around a counter: ink
+    pieces standing alone, 5-19 px across (the 50% scan), 25-300 px of ink, with a hole. Dashes are
+    thinner than 5 px; block numbers ('65N') are taller than 19."""
+    n, lab, st, _ = cv2.connectedComponentsWithStats(ink, connectivity=8)
+    k = (st[:, 4] >= 25) & (st[:, 4] <= 300) & (np.minimum(st[:, 2], st[:, 3]) >= 5) & (st[:, 2] <= 19) & (st[:, 3] <= 19)
+    k[0] = False
+    out = []
+    for i in np.flatnonzero(k):
+        x, y, w, h = st[i, :4]
+        # only marks that close around a counter: the use letters D and A, the roof circle, a B
+        # (a printed dimension, 15' or 25', mostly does not)
+        sub = (lab[y:y + h, x:x + w] == i).astype(np.uint8)
+        cs, hier = cv2.findContours(np.pad(sub, 1), cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
+        if hier is not None and any(hh[3] >= 0 and cv2.contourArea(c) >= 2 for c, hh in zip(cs, hier[0])):
+            out.append((x, y, w, h))
+    return np.array(out).reshape(-1, 4)
+
+def count_glyphs(lab, boxes):
+    """Each mark is given to the region that holds three quarters of the paper around it."""
+    out = {}
+    H, W = lab.shape
+    for x, y, w, h in boxes:
+        x0, y0, x1, y1 = max(0, x - 2), max(0, y - 2), min(W, x + w + 2), min(H, y + h + 2)
+        v = lab[y0:y1, x0:x1].ravel(); v = v[v > 0]
+        if v.size:
+            bc = np.bincount(v); r = int(bc.argmax())
+            if bc[r] >= 0.75 * v.size:  # a mark on a line between two regions (an address, a width) is no one's
+                out[r] = out.get(r, 0) + 1
+    return out
 
 def grid_angles(im):
     """The directions of the sheet's printed lines: 0 and 90 degrees, and the two commonest others."""
@@ -84,8 +119,11 @@ def main(sheet, img, geofile, out, fixfile=None):
     geo = json.load(open(geofile))[sheet]; p = geo['params']
     fixes = (json.load(open(fixfile)).get(sheet, {}) if fixfile and os.path.exists(fixfile) else {})
     drop, adds, nosplit = set(fixes.get('drop', [])), fixes.get('add', []), set(fixes.get('split', []))
-    im = np.asarray(Image.open(img).convert('RGB'))
+    im = np.asarray(Image.open(img).convert('RGB')).copy()
     H, W = im.shape[:2]
+    for q in fixes.get('exclude', []):
+        # an inset drawn at its own orientation (fitted separately, or left out): blanked
+        cv2.fillPoly(im, [np.array(q['uv'], np.int32)], (255, 255, 255))
     cls = classify52(im)
     s = px_per_m(p); m2 = 1 / (s * s)
     angs = grid_angles(im)
@@ -93,7 +131,8 @@ def main(sheet, img, geofile, out, fixfile=None):
     # pass 1, colored parts, on the lines as printed; pass 2, uncolored, with dashes bridged
     for pass_ in (1, 2):
         n, lab, st, ink = regions(im, () if pass_ == 1 else angs)
-        found = collect(pass_, n, lab, st, cls, m2, W, H, drop, adds if pass_ == 2 else [])
+        if pass_ == 1: boxes = glyph_boxes(ink)
+        found = collect(pass_, n, lab, st, cls, m2, W, H, drop, adds if pass_ == 2 else [], count_glyphs(lab, boxes))
         # (pass 1 also takes the uncolored buildings whose outlines close as printed; pass 2 adds
         # those that close only once their dashes are bridged)
         if pass_ == 1:
@@ -111,7 +150,8 @@ def main(sheet, img, geofile, out, fixfile=None):
                 if k and ('c', k) in parts and parts[('c', k)]['kind'] == 'uncolored' and (hit == k).mean() >= 0.8:
                     inside.setdefault(k, []).append(i)
             for k, qs in inside.items():
-                if sum(found[i]['area'] for i in qs) < 0.7 * parts[('c', k)]['area']:
+                marked = [i for i in qs if found[i].get('glyphs', 0) >= 1]
+                if sum(found[i]['area'] for i in qs) < 0.7 * parts[('c', k)]['area'] or len(marked) >= 2:
                     x, y, w, h = parts[('c', k)]['box']; taken[y:y + h, x:x + w][labs1[y:y + h, x:x + w] == k] = 0
                     del parts[('c', k)]
                     for i in qs: parts[('u', i)] = found[i]
@@ -120,9 +160,9 @@ def main(sheet, img, geofile, out, fixfile=None):
                 x, y, w, h = q['box']
                 if taken[y:y + h, x:x + w][lab[y:y + h, x:x + w] == i].mean() > 0.2: continue
                 parts[('u', i)] = q
-    return finish(sheet, p, parts, labs1, lab, W, H, out, nosplit, fixes.get('addpoly', []), m2)
+    return finish(sheet, p, parts, labs1, lab, W, H, out, nosplit, fixes.get('addpoly', []), m2, fixes.get('droppt', []))
 
-def collect(pass_, n, lab, st, cls, m2, W, H, drop, adds):
+def collect(pass_, n, lab, st, cls, m2, W, H, drop, adds, gcount):
     added = {int(lab[int(v), int(u)]) for u, v in adds}
     parts = {}
     for i in range(1, n):
@@ -140,8 +180,7 @@ def collect(pass_, n, lab, st, cls, m2, W, H, drop, adds):
         nh, hl, hs, hc = cv2.connectedComponentsWithStats(holes, connectivity=8)
         marks = [(float(hc[j][0] + x), float(hc[j][1] + y)) for j in range(1, nh) if 4 <= hs[j, 4] <= 300]
         # glyph-sized marks (a letter, a digit, the roof circle), not dashes or specks
-        # (the block numbers, '65N', print taller than 19 px: they are not counted)
-        glyphs = sum(1 for j in range(1, nh) if 40 <= hs[j, 4] <= 300 and min(hs[j, 2], hs[j, 3]) >= 6 and hs[j, 3] <= 19)
+        glyphs = gcount.get(i, 0)
         (cx, cy), (rw, rh), ang = cv2.minAreaRect(cnt)
         fill = a / max(rw * rh, 1)
         elong = max(rw, rh) / max(min(rw, rh), 1)
@@ -153,14 +192,14 @@ def collect(pass_, n, lab, st, cls, m2, W, H, drop, adds):
             if mat == 'stone' and am > 1500:
                 continue  # water
             kind = 'colored'
-        elif (pass_ == 2 and i in added) or ( (glyphs >= 1 and 6 <= am <= 350 and fill >= 0.5 and elong <= 7 and colored < 0.2)):
+        elif (pass_ == 2 and i in added) or ( (glyphs >= 1 and 6 <= am <= 350 and fill >= 0.5 and elong <= 5 and colored < 0.2)):
             mat, kind = 'frame', 'uncolored'
         else:
             continue
-        parts[i] = dict(mat=mat, kind=kind, area=am, marks=marks, box=(x, y, w, h))
+        parts[i] = dict(mat=mat, kind=kind, area=am, marks=marks, box=(x, y, w, h), glyphs=glyphs)
     return parts
 
-def finish(sheet, p, parts, lab1, lab2, W, H, out, nosplit, addpolys=(), m2_=1.0):
+def finish(sheet, p, parts, lab1, lab2, W, H, out, nosplit, addpolys=(), m2_=1.0, droppts=()):
     # region ids: colored parts 'c<id>' (pass 1), uncolored 'u<id>' (pass 2)
     owner = np.zeros((H, W), np.int32); keys = sorted(parts, key=str); idx = {k: j + 1 for j, k in enumerate(keys)}
     for k in keys:
@@ -169,6 +208,11 @@ def finish(sheet, p, parts, lab1, lab2, W, H, out, nosplit, addpolys=(), m2_=1.0
         owner[y:y + h, x:x + w][m] = idx[k]
     lab = owner
     parts = {idx[k]: dict(parts[k], name=f'{k[0]}{k[1]}') for k in keys}
+    for u, v in droppts:
+        # the part holding each point is dropped (a yard), before parts are joined
+        j = int(lab[int(v), int(u)])
+        if j in parts:
+            del parts[j]; lab[lab == j] = 0
     # join parts that share a printed line
     ids = sorted(parts)
     grown = {}
@@ -186,7 +230,7 @@ def finish(sheet, p, parts, lab1, lab2, W, H, out, nosplit, addpolys=(), m2_=1.0
         for j in nb:
             if j <= i or parts[i]['name'] in nosplit or parts[j]['name'] in nosplit: continue
             small, big = sorted((parts[i]['area'], parts[j]['area']))
-            if small < 0.4 * big:
+            if small < 0.4 * big and small < 45:
                 parent[find(i)] = find(j)
     # an uncolored part most of whose edge is shared with colored parts is a label box or a light
     # well inside a colored building: it joins that building
