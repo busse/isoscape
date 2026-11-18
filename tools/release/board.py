@@ -167,7 +167,7 @@ def collapse(rows_in):
     """Runs of on-hold rows of one plate series with nothing to say are one row (the landmarks)."""
     out, runs = [], {}
     for k, e in rows_in:
-        series = (e.get('plate') or '')[:3]
+        series = (e.get('plate') or '').split('-')[0]
         quiet = e['status'] != 'active' and not e.get('planned_edition') and not e.get('accepted_faults')
         if quiet and series: runs.setdefault((series, e['status'], e['kind'], e.get('decision')), []).append((k, e))
         else: out.append(row(k, e))
@@ -302,7 +302,7 @@ def page(b):
             v = e.get('asset_version') or '—'
             L.append(f"| {(e.get('plate') or '—').replace('-', '·')} | {e['title']} | {e['kind']} | {v} | {'yes, version ' + str(e['live_version']) if e['on_sale'] else 'no'} |")
         if landmarks:
-            sets = sorted({e['plate'][:3] for _, e in landmarks})
+            sets = sorted({e['plate'].split('-')[0] for _, e in landmarks})
             L.append(f"| {', '.join(s + '·…' for s in sets)} | {len(landmarks)} landmark prints | print | various | no |")
         L.append('')
     planned = [(k, e) for k, e in sorted(items.items(), key=lambda x: (x[1].get('plate') or 'zzz', x[0])) if e.get('planned_edition')]

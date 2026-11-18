@@ -738,6 +738,16 @@ what it names. `travelerKey` adds a line with the traveler's glyph to the key, a
 sheet over the cutaway's) draws the traveler's way in the cutaway too, red and dashed as the
 section draws it; `cutaway.order: "components"` breaks a cycle in the paint order at an item
 that lies in one, rather than at the farthest item left.
+A cutaway may trace a second way beside its route, `cutaway.pumped` (and `section.pumped` in
+its section), in the palette's `pumped` blue: the water a works lifts, beside the water that
+drives it. With `section.ribbon` both are drawn as water rather than dashes: a pale band (60%
+opaque) under a thin line with arrowheads every 3 m, the route in the palette's `drive` teal
+(never the route's red, which reads as warm water), each end tagged from `routeEnds` and
+`pumpedEnds`. An inset with `water` draws its mains in the same blue. A sheet's `sections` (each `region`, `caption` and `as`, the key its callouts anchor
+to) sets the flat sections along its foot in place of the region's own and `crossSection`; its
+`inset` sets a small flat context map with a heading, a caption and `why`, a few short
+paragraphs on the building's purpose (`tools/cutaway/context.py`, from a cached OpenStreetMap
+extract).
 `isoView` (`[x, y, w, h]` in the plate's own units) frames the plate closer, cutting what runs
 past it at its edge; a wayfinding label with `label: [x, y]` (sheet units, its first baseline)
 stands there, its leader leaving the nearest point of its box; `columnEnd` warns when the
@@ -1142,9 +1152,11 @@ Frozen data and scenes are large and stay out of git; keep them backed up with t
 ## Plates
 
 Every design has a plate: a permanent catalog number, kept in `catalog/plates.json` with the
-taxonomy it sits in (isoscape › collection › set › piece). A plate is the set's three-letter
-code and the piece's number in the set (`RVA-01`, `STC-02`; `00` is a set's framed sheet of
-boxes and `M` its map), printed with a middle dot (RVA·01). Numbers follow the order of first
+taxonomy it sits in (isoscape › collection › set › piece). A plate is the set's code, three or
+four capital letters, and the piece's number in the set (`RVA-01`, `STC-02`, `BPPH-01`; `00` is
+a set's framed sheet of boxes and `M` its map), printed with a middle dot (RVA·01). Codes were
+three letters until November 18, 2026, when Chris asked for a four-letter one (BPPH); the
+existing codes stay as they are. Numbers follow the order of first
 release and are never reused; a redraw changes a design's version, never its plate.
 
 Every print carries a title block (`tools/print/titleblock.py`): the cube and maker, the

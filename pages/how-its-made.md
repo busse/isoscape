@@ -1075,7 +1075,12 @@ end on, square and true size on its trucks (a coach's arched end with its door, 
 round smokebox, or a tender's tank and coal); and where a shed's line meets it, its butterfly
 profile, a center post and two wings rising outward. A stair down from the floor on the removed
 side (to the platforms) is drawn as its stepped profile, dashed. Under it the ground is cut along the plane and dug out where the
-building goes below it; platforms are drawn 0.35 m over the rails (approximate), rails at true
+building goes below it. Water held in a work (a forebay, a tailrace) and ground modeled as a
+part (a canal's bed) are cut in their own colors, water's blue and the earth's, where every
+other cut part is solid ink. A works that lifts water (the Pump House) may trace that water too, in a darker blue
+beside the route of the water that drives it; drawn as water, the two are a pale band under a
+thin line with arrowheads every 3 m, teal for the water that drives and blue for the water
+pumped, never red, with a tag at each end saying where the water comes in and goes out. Platforms are drawn 0.35 m over the rails (approximate), rails at true
 gauge where tracks cross the plane, and a red dashed line follows the traveler from the street
 to the train. The line runs at waist height, 0.95 m over each floor, with a small arrowhead
 pointing the way on each stretch, and it is broken where it meets a traveler and where it
@@ -1088,7 +1093,9 @@ over the cutaway's (0.52 for Main Street Station), so the two read alike there.
 
 **Travelers.** A plain standing figure, 1.75 m (5 ft 9 in) tall, in the route's red, gives
 the drawings their scale: head, body, legs in a short stride and a small suitcase
-(`src/traveler.ts`). Its height is a convention, not a claim from a source. In the flat section
+(`src/traveler.ts`). Its height is a convention, not a claim from a source. A place people
+visited rather than passed through (the Pump House's pavilion) draws visitors instead, at the
+same height: the figure with empty hands, or one in a long skirt to the ground (`figure`). In the flat section
 four stand on the route, feet on their floors: on Broad Street, in the White Waiting Room, on
 the concourse and at the foot of the stair beside the car end. In the cutaway three stand
 upright, facing across the picture, on the portico, among the benches of the waiting room and

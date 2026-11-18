@@ -91,6 +91,21 @@ export interface Palette {
   readonly cutOutline: string
   readonly cutOutlineDash: readonly [number, number]
   readonly route: string
+  /** A cutaway's second way (`pumped`): what a works lifts, beside the route that drives it. */
+  readonly pumped: string
+  /**
+   * A section's ways drawn as water (`section.ribbon`): the water that drives a works, and the
+   * pale bands under both ways, the water that drives and the water pumped. Never the route's
+   * red, which would read as warm water.
+   */
+  readonly drive: string
+  readonly driveBand: string
+  readonly pumpedBand: string
+  /**
+   * The water ways' marks in a section (`section.ribbon`), in section pixels: the paper edge
+   * round each arrowhead, and an end tag's leader, its dot's radius and the dot's paper ring.
+   */
+  readonly wayMarks: { readonly arrowEdge: number; readonly leader: number; readonly dot: number; readonly ring: number }
   readonly routeWidth: number
   readonly routeDash: readonly [number, number]
   /** Station platforms, and the running rails of a track at close scale. */
@@ -188,11 +203,20 @@ const paper: Palette = {
     coachBand: ['#e2b93b', '#b8932a', '#c9a433'],
     coachSkirt: ['#a9adb1', '#868a8f', '#9a9ea3'],
     coachRoof: ['#4a4b4f', '#36373a', '#4f5054'],
+    // Water held in a modeled work (a forebay, a wheel pit), drawn as a solid at its level.
+    water: ['#a8cad8', '#8fb3c4', '#b4d3df'],
+    // Ground modeled as a part (a canal's bed under its water), cut in the section's earth color.
+    earth: ['#cdbfa3', '#cdbfa3', '#d6c9ae'],
   },
   poche: '#2c2b33',
   cutOutline: '#2c2b33',
   cutOutlineDash: [6, 4],
   route: '#b5392f',
+  pumped: '#2f6690',
+  drive: '#1f7a73',
+  driveBand: '#9cc9c3',
+  pumpedBand: '#a9c4dd',
+  wayMarks: { arrowEdge: 1.2, leader: 2, dot: 5.5, ring: 2.5 },
   routeWidth: 2.6,
   routeDash: [9, 6],
   platform: '#efe9dc',
@@ -292,10 +316,16 @@ const night: Palette = {
     coachBand: ['#8f7628', '#6c591e', '#7d6723'],
     coachSkirt: ['#4a4d52', '#36393d', '#414448'],
     coachRoof: ['#2a2b2e', '#1d1e20', '#2e2f32'],
+    water: ['#1b2e3b', '#16252f', '#223847'],
+    earth: ['#2b2f3b', '#2b2f3b', '#323746'],
   },
   poche: '#c9d1e6',
   cutOutline: '#c9d1e6',
   route: '#e0614f',
+  pumped: '#7fb6e0',
+  drive: '#5fbfb4',
+  driveBand: '#2a5652',
+  pumpedBand: '#2b4a66',
   platform: '#3a3d48',
   railSteel: '#8a90a2',
   roofs: {

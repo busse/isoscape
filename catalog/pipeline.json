@@ -2859,30 +2859,139 @@
    "notes": "needed to redraw Richmond, 1865 (RVA-02), which is off sale and blocked until it exists"
   },
   "pump-house-cutaway": {
-   "plate": null,
+   "plate": "BPPH-01",
    "status": "active",
-   "asset_version": null,
+   "asset_version": "1.0.0-rc2",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 0,
-   "waiting_on": "agent",
-   "decision": "owner: pursue (2026-11-18); handed to a separate Opus 5.5 session (ISO-TEST/handoff/pump-house/HANDOFF.md); it moves this to working draft when d1 exists",
-   "accepted_faults": [],
+   "rounds": 2,
+   "waiting_on": "owner",
+   "decision": "rc1 inspected once; its one fix round made rc2. Waiting on the owner: (1) a second fix round for the title block (it sits top right over the column, and its taxonomy line is about 4.8 pt at 24x18), (2) the typeface as rendered for print, (3) release approval",
+   "accepted_faults": [
+    {
+     "what": "main view: callout 8's dot falls just west of the visible suction, on the west wheel",
+     "box": [
+      3300,
+      2150,
+      3500,
+      2420
+     ]
+    },
+    {
+     "what": "main view: callout 3's dot sits on a girder member just in front of the penstock",
+     "box": [
+      3820,
+      2230,
+      3960,
+      2370
+     ]
+    },
+    {
+     "what": "main view: callout 11's dot lies on the floor edge under the main, which shows only as a thin strip",
+     "box": [
+      4700,
+      2480,
+      4980,
+      2780
+     ]
+    },
+    {
+     "what": "main view: the west tailrace mouth shows its tunnel dry, with a stray inner line, where the others show water",
+     "box": [
+      3540,
+      3610,
+      3790,
+      3780
+     ]
+    },
+    {
+     "what": "map panel: the label The New Pump-House crosses the canal line",
+     "box": [
+      560,
+      1440,
+      1200,
+      1560
+     ]
+    },
+    {
+     "what": "map panel: the label canal below the locks crosses the canal line and the cemetery's edge",
+     "box": [
+      1190,
+      1580,
+      1720,
+      1700
+     ]
+    },
+    {
+     "what": "pump section: badge 11 stands on the main's band, its dot on an arrowhead",
+     "box": [
+      5820,
+      5450,
+      6150,
+      5600
+     ]
+    },
+    {
+     "what": "pump section: badge 8 covers where the blue line leaves the forebay",
+     "box": [
+      5800,
+      5150,
+      5920,
+      5280
+     ]
+    },
+    {
+     "what": "main view: the west wing's end-wall lancets show as slivers (handoff known fault)",
+     "box": [
+      2380,
+      1700,
+      2640,
+      2650
+     ]
+    },
+    {
+     "what": "main view: the penstocks are square in section (handoff known fault)",
+     "box": [
+      3824,
+      2313,
+      3982,
+      2598
+     ]
+    },
+    {
+     "what": "pump section: the pumped line crosses the forebay wall schematically; callout 8 gives the real intake (handoff known fault)",
+     "box": [
+      5680,
+      5200,
+      5900,
+      5420
+     ]
+    }
+   ],
    "planned_edition": null,
-   "last_inspected": null,
-   "branch": "cutaway-pump-house",
+   "last_inspected": "f67df4e",
+   "branch": null,
    "worktree": null,
    "links": [
-    "/mnt/user-data/outputs/cutaway/pump-house.md"
+    "cutaways/pump-house-1885-pumped.json",
+    "cutaways/pump-house-1885.json",
+    "ISO-TEST/handoff/pump-house/HANDOFF-back.md",
+    "ISO-TEST/handoff/pump-house/d3/d3.md"
    ],
    "title": "The Byrd Park Pump House: Cutaway",
    "kind": "cutaway",
-   "stage": "rough draft",
-   "notes": "research done: feasibility 3.5 of 5 (pump-house.md)",
+   "stage": "final draft",
+   "notes": "research done: feasibility 3.5 of 5; rough draft, then d1-d3 on 2026-11-18 on The American Engineer pp. 260-261 (HathiTrust full scans). Approved: d3, the pumped-water variant; d2 kept as cutaways/pump-house-1885.json. Known faults for rc1 (owner: list, not pre-accepted): gang positions along the room inferred; tailraces' size and line inferred; penstocks square in section; south walkway a large blank plane in the cut; sections print small (about 8-9 in each at 32 x 24); context map uses today's OSM river and canal lines, with one gap closed; west wing's end-wall lancets show as slivers; the pumped line crosses the forebay wall schematically (the suction's intake was at the west end). Plate BPPH-01, set BPPH (2026-11-18). rc1 inspected once; fix round -> rc2 (f67df4e).",
    "log": [
-    "2026-11-18: research -> rough draft"
+    "2026-11-18: research -> rough draft",
+    "2026-11-18: rough draft -> working draft (1.0.0-d1)",
+    "2026-11-18: d2: context panel (where the water went, and why) after owner review of d1",
+    "2026-11-18: d3: variant tracing the water pumped (owner asked for it as a variant, keeping d2)",
+    "2026-11-18: d3: ways drawn as water (teal and blue ribbons with IN / OUT tags), owner chose option C",
+    "2026-11-18: working draft -> final draft (1.0.0-rc1): owner approved the look of d3; handed back to the planning session",
+    "2026-11-18: rc1 inspected (plate BPPH-01); one fix round -> 1.0.0-rc2; waits on the owner"
    ]
   },
   "story-jackson-ward": {
@@ -2895,7 +3004,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "fact check done (492b033 and after): 143 claims checked, 44 changes, fit to hand to reviewers with caveats (Silver 1984 and Campbell 2012 unseen, worded as secondary). Waiting on the owner's read of factcheck/story-page.pdf and two small decisions; then he shares it with his community reviewers (outside review). Unlisted page, not published.",
+   "decision": "fact check done (143 claims, 44 changes); page rounds 1 and 2 from the owner's review done (headline and deck, numbered figures, link fix, lightbox and grid, route section as prose, four compare sliders; branch at 930c1d4). Waiting on the owner's local review (ISO-TEST/_preview/jackson-ward/), the headline choice and two small decisions; then he shares it with his community reviewers. Not merged, not published.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,

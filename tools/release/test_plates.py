@@ -29,6 +29,16 @@ class Register(unittest.TestCase):
         self.assertEqual(cut['plate'], 'BSS-15')
         self.assertEqual(cut['facing'], '342°')     # the cutaway region's own camera, not the set map's
 
+    def test_set_codes_of_three_or_four_letters(self):
+        for ok in ('RVA-01', 'BSS-M', 'BPPH-01', 'BPPH-100'):
+            self.assertTrue(plates.PLATE.match(ok), ok)
+        for bad in ('RV-01', 'BPPHX-01', 'bpph-01', 'BPPH-1', 'BPPH01'):
+            self.assertFalse(plates.PLATE.match(bad), bad)
+        cut = plates.info('pump-house-cutaway')
+        self.assertEqual((cut['plate'], cut['set'], cut['kind']), ('BPPH-01', 'Byrd Park Pump House, 1885', 'Building cutaway'))
+        self.assertTrue(plates.cutaway_of('pump-house-cutaway')[0].endswith('pump-house-1885-pumped.json'))   # d3, by its key
+        self.assertIn('BPPH-01', [r['plate'].replace('·', '-') for r in plates.rows()])
+
 
 class Block(unittest.TestCase):
     def test_a_block_without_a_kind_is_unchanged(self):

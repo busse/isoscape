@@ -5,6 +5,7 @@
 
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import type { Figure } from './traveler.ts'
 
 export interface BridgeRule {
   /** Case-insensitive substring of the way's `name` (or `bridge:name`). */
@@ -143,9 +144,10 @@ export interface Cutaway {
   /**
    * Travelers drawn to scale in the cutaway (src/traveler.ts): where each stands, the floor it
    * stands on (m above sea level; on the ground where none is given), and which way it faces
-   * across the picture (1 right, -1 left).
+   * across the picture (1 right, -1 left); `figure`, a visitor in place of the traveler
+   * (src/traveler.ts).
    */
-  readonly travelers?: readonly { readonly at: readonly [number, number]; readonly floor?: number; readonly facing: 1 | -1 }[]
+  readonly travelers?: readonly { readonly at: readonly [number, number]; readonly floor?: number; readonly facing: 1 | -1; readonly figure?: Figure }[]
   /**
    * The traveler's way in the cutaway, as the flat section's `route` draws it: points [lon, lat,
    * elevation in meters above sea level] (waist height), drawn in the route's color and dashed,
@@ -154,6 +156,11 @@ export interface Cutaway {
    * the two read alike (the section's scale on the sheet over the cutaway's).
    */
   readonly route?: { readonly points: readonly (readonly [number, number, number])[]; readonly weight?: number }
+  /**
+   * A second way, drawn as `route` is but in the palette's `pumped` color: the water a works
+   * lifts, beside the water that drives it (the Pump House). Its section has `section.pumped`.
+   */
+  readonly pumped?: { readonly points: readonly (readonly [number, number, number])[]; readonly weight?: number }
   /** How a cycle in the paint order is broken: `components` at its start (see `paintOrder`); by default, at the farthest item left. */
   readonly order?: 'components'
   /**
@@ -171,6 +178,16 @@ export interface Cutaway {
     readonly earth?: number
     /** The traveler's path: points [meters along the plane, elevation in meters above sea level]. */
     readonly route?: readonly (readonly [number, number])[]
+    /** The second way (`cutaway.pumped`), in the palette's `pumped` color: points as `route`'s. */
+    readonly pumped?: readonly (readonly [number, number])[]
+    /**
+     * Draw the ways as water rather than as dashes: a pale band under a thin line with
+     * arrowheads, the route in the palette's `drive` teal and `pumped` in its blue, each end
+     * tagged with `routeEnds` / `pumpedEnds` ([in, out] labels, e.g. "IN: FOREBAY").
+     */
+    readonly ribbon?: boolean
+    readonly routeEnds?: readonly [string, string]
+    readonly pumpedEnds?: readonly [string, string]
     /**
      * Stairs hidden from the plane behind a wall (regular expressions on item ids): drawn as
      * their dashed outline, as a stair on the side lifted away is.
@@ -183,7 +200,7 @@ export interface Cutaway {
      */
     readonly slice?: { readonly parts: readonly string[]; readonly depth?: number }
     /** Travelers on the path: meters along the plane, the floor's elevation, and facing (1 toward `to`). */
-    readonly travelers?: readonly { readonly s: number; readonly floor: number; readonly facing: 1 | -1 }[]
+    readonly travelers?: readonly { readonly s: number; readonly floor: number; readonly facing: 1 | -1; readonly figure?: Figure }[]
   }
 }
 
