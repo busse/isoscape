@@ -36,8 +36,13 @@ for outside review".
 
 | Date | Run | Lines | Wall clock | Tokens | Tool calls | Restarts | Delivered | Left undone |
 |---|---|---|---|---|---|---|---|---|
+| 2026-11-18 | jw-text (Opus 5.5): story page, timeline, cap study area, ten method charts, How we know | 4, 5, 6, 9 | 31 min (12:45–13:16 ET) | 440,516 | 178 | 0 | page (unlisted), 12 charts by script, 45 claims checked against opened sources, 11 fact-check items | slots for 1925, the island, Second Street; 4 groups of facts still resting on secondary sources; three small number mismatches (count 235 vs 238; bank 10.1 vs 9 m; 1st Street cut 6.2 vs 6.4 m) |
 
 ## Before the estimate (not counted against it)
 
 Research and brief, the ground restoration (jw-ground), the 1952 trace (jw-trace), the rough
 draft and the outline were done November 17–18, 2026, before this estimate was made.
+
+## Notes for the case study
+
+- The text-and-charts run was estimated at 4½–6 agent-days (lines 4, 5, 6, 9) and took one 31-minute run of 440,000 tokens. Either the estimate was far too high or the unit is wrong; the fact check will show how much of that work stands.
