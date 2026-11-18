@@ -1100,6 +1100,9 @@ export const buildScene = (
           items.push(...route)
           stats.routeDashes = route.length
         }
+        if (cut.pumped !== undefined && cut.pumped.points.length > 1) {
+          items.push(...routeItems(view, pal, cut.pumped.points.map(([lon, lat, e]) => [view.toView(lon, lat), zOf(e)] as const), cut.pumped.weight ?? 1, true))
+        }
       }
       for (const [k, v] of Object.entries(done.stats)) stats[k] = v
       cutPlaneOut = done.plane

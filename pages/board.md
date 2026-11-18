@@ -22,14 +22,14 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 ## Waiting on a decision
 
 - **The Byrd Theatre: Cutaway**: owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead
-- **The Byrd Park Pump House: Cutaway**: d2: approve the look (subject, framing, notes) to go to final draft, or send changes
+- **The Byrd Park Pump House: Cutaway**: d3 is a variant (cutaways/pump-house-1885-pumped.json: the water pumped traced beside the water that drives, a section through a pump in place of the long section); d2 stands as cutaways/pump-house-1885.json (tag pump-house-cutaway-1.0.0-d2). Choose, or approve one for final draft
 
 ## Working draft
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | The Byrd Theatre: Cutaway | cutaway | 1.0.0-d2 | no |
-| — | The Byrd Park Pump House: Cutaway | cutaway | 1.0.0-d2 | no |
+| — | The Byrd Park Pump House: Cutaway | cutaway | 1.0.0-d3 | no |
 
 ## Final production
 

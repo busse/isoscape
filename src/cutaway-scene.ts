@@ -934,7 +934,7 @@ export const shedItems = (view: View, pal: Palette, b: Box): Item[] => {
  * sorts among what stands near it: a dash behind a wall or under a floor is hidden like
  * anything else there.
  */
-export const routeItems = (view: View, pal: Palette, pts: readonly (readonly [Vec2, number])[], weight: number): Item[] => {
+export const routeItems = (view: View, pal: Palette, pts: readonly (readonly [Vec2, number])[], weight: number, pumped = false): Item[] => {
   const [on, off] = pal.routeDash.map((d) => d * weight)
   const width = pal.routeWidth * weight
   const at = (i: number, t: number): [Vec2, number] => {
@@ -967,14 +967,14 @@ export const routeItems = (view: View, pal: Palette, pts: readonly (readonly [Ve
     const r = 0.06
     const hull = convexHull(xs.flatMap(([x, y]): Vec2[] => [[x - r, y - r], [x + r, y - r], [x + r, y + r], [x - r, y + r]]))
     items.push({
-      id: `route:${k}`,
+      id: pumped ? `pumped:${k}` : `route:${k}`,
       kind: 'building',
       hull,
       zMin: Math.min(...run.map(([, z]) => z)),
       zMax: Math.max(...run.map(([, z]) => z)),
       key: xs.reduce((s, p) => s + p[1], 0) / xs.length,
-      name: 'The way to the train',
-      shapes: [{ pts: run.map(([p, z]) => view.toScreen(p, z)), fill: 'none', line: true, stroke: { color: pal.route, width, round: true } }],
+      name: pumped ? 'The way of the water pumped' : 'The way to the train',
+      shapes: [{ pts: run.map(([p, z]) => view.toScreen(p, z)), fill: 'none', line: true, stroke: { color: pumped ? pal.pumped : pal.route, width, round: true } }],
       dots: [],
     })
   }

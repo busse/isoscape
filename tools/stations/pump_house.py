@@ -678,3 +678,33 @@ c['section'] = {'from': -27, 'to': 41, 'beyond': 25, 'slice': {'parts': ['^histo
 (ROOT / 'regions' / 'pump-house-cutaway-across.json').write_text(json.dumps(across, indent=2) + '\n')
 
 print(f'{OUT.relative_to(ROOT)}: {len(features)} parts; shaft z {HUB_Z:.2f}, b {HUB_B:.2f}; forebay {FOREBAY:.2f}, tail {TAIL:.2f}; wheels at a {[round(w, 2) for w in WHEELS]}')
+
+# ---- variant: the water pumped, beside the water that drives (cutaways/pump-house-1885-pumped.json) ----
+# The main view again, under its own name, and a third cut, across through one pump, as The
+# American Engineer's p. 261 draws it, with the water the pumps lift traced in blue (the
+# palette's `pumped`) beside the red of the water that turns the wheels.
+PA = WHEELS[1] + PUMPS_AT[1]        # the middle gang's middle pump
+G1 = GANGS[1]
+pumped_main = json.loads(json.dumps(main))
+pumped_main['title'] = 'The New Pump-House, about 1885: cut along the machine room, both ways traced (working draft, variant)'
+pc = pumped_main['cutaway']
+# The two ways are traced in the flat sections only: in the cutaway they run under the floors
+# and the water, and their few visible dashes read as stray marks.
+pc.pop('route', None)
+pc.pop('section', None)
+(ROOT / 'regions' / 'pump-house-cutaway-pumped.json').write_text(json.dumps(pumped_main, indent=2) + '\n')
+
+pump = json.loads(json.dumps(across))
+pump['title'] = 'The New Pump-House, about 1885: cut across through a pump (working draft, variant)'
+c = pump['cutaway']
+c['through'] = lonlat(PA, 0)
+c['travelers'] = []
+# Behind this cut only the pumps' own work is drawn: the wheels, penstocks and their frames
+# behind it are left out, as the engraving leaves them out.
+c['section'] = {'from': -4, 'to': 40, 'beyond': 25, 'slice': {'parts': ['^history:ph-w-', '^history:ph-c-(wheel|penstock|diffuser|aframe|tailpit|crank-1-[02]|rod-1-[02])'], 'depth': 0.1},
+                'other': 3, 'scale': 10, 'earth': 3,
+                'pumped': [[r3([b])[0], r3([z])[0]] for b, z in ((36, FOREBAY - 0.6), (B1 + 0.2, FOREBAY - 0.6), (B_IN_N + 0.3, 27.6), (HUB_B + 1.75, 27.6),
+                                                               (HUB_B + 0.37, 27.2), (HUB_B + 0.37, 25.2), (12.4, 25.2), (40, 25.2))],
+                'travelers': [{'s': 5.0, 'floor': PAV, 'facing': 1, 'figure': 'visitor'}, {'s': 12.5, 'floor': PAV, 'facing': -1, 'figure': 'visitor-skirt'}]}
+(ROOT / 'regions' / 'pump-house-cutaway-pump.json').write_text(json.dumps(pump, indent=2) + '\n')
+print('variant regions written: pump-house-cutaway-pumped, pump-house-cutaway-pump')

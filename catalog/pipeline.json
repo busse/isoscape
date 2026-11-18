@@ -2861,14 +2861,14 @@
   "pump-house-cutaway": {
    "plate": null,
    "status": "active",
-   "asset_version": "1.0.0-d2",
+   "asset_version": "1.0.0-d3",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 2,
+   "rounds": 3,
    "waiting_on": "owner",
-   "decision": "d2: approve the look (subject, framing, notes) to go to final draft, or send changes",
+   "decision": "d3 is a variant (cutaways/pump-house-1885-pumped.json: the water pumped traced beside the water that drives, a section through a pump in place of the long section); d2 stands as cutaways/pump-house-1885.json (tag pump-house-cutaway-1.0.0-d2). Choose, or approve one for final draft",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -2885,7 +2885,8 @@
    "log": [
     "2026-11-18: research -> rough draft",
     "2026-11-18: rough draft -> working draft (1.0.0-d1)",
-    "2026-11-18: d2: context panel (where the water went, and why) after owner review of d1"
+    "2026-11-18: d2: context panel (where the water went, and why) after owner review of d1",
+    "2026-11-18: d3: variant tracing the water pumped (owner asked for it as a variant, keeping d2)"
    ]
   },
   "story-jackson-ward": {

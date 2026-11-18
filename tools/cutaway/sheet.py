@@ -159,15 +159,22 @@ def main():
     region, year = spec['region'], spec['year']
     build_dir = os.path.join(a.out, 'build')
     cross = spec.get('crossSection')
+    # The flat sections along the foot of the sheet, left to right, each with the key its
+    # callouts anchor to: the main region's own (`section`) and a `crossSection` (`cross`), or a
+    # spec's `sections` list in their place (each `region`, `caption` and `as`).
+    secs = spec.get('sections') or ([{'region': region, 'caption': spec['sectionCaption'], 'as': 'section'}] + ([{**cross, 'as': 'cross'}] if cross else []))
     if not a.no_build:
-        subprocess.run(['node', 'bin/isoscape.js', 'build', region, '--year', str(year), '--no-archive', '--out', build_dir], cwd=ROOT, check=True)
-        if cross:
-            subprocess.run(['node', 'bin/isoscape.js', 'build', cross['region'], '--year', str(year), '--no-archive', '--out', build_dir], cwd=ROOT, check=True)
+        for r in [region] + [x['region'] for x in secs if x['region'] != region]:
+            subprocess.run(['node', 'bin/isoscape.js', 'build', r, '--year', str(year), '--no-archive', '--out', build_dir], cwd=ROOT, check=True)
     base = os.path.join(build_dir, f'{region}-{year}')
     iso_svg = open(base + '.svg').read()
-    sec_svg = open(base + '-section.svg').read()
     iso_a = json.load(open(base + '.anchors.json'))
-    sec_a = json.load(open(base + '-section.anchors.json'))
+    for x in secs:
+        sb = os.path.join(build_dir, f"{x['region']}-{year}")
+        x['_svg'] = open(sb + '-section.svg').read()
+        x['_a'] = json.load(open(sb + '-section.anchors.json'))
+        x['_vb'], x['_body'] = inner(x['_svg'])
+    sec_svg, sec_a = secs[0]['_svg'], secs[0]['_a']
     history = json.load(open(os.path.join(ROOT, json.load(open(os.path.join(ROOT, 'regions', region + '.json')))['time']['history'])))
     conf_of = {f['id']: f.get('confidence', 'approximate') for f in history['features']}
     # The traveler, as the build drew it, and the route's color, as the section drew it.
@@ -187,13 +194,6 @@ def main():
         # A closer frame on the plate (x, y, w, h in its own units): what runs past it, a track
         # or a trestle, is cut at the frame's edge.
         iso_vb = list(spec['isoView'])
-    svb, sec_body = inner(sec_svg)
-    if cross:
-        # A second flat section (a cross section), beside the first at the same scale.
-        cbase = os.path.join(build_dir, f"{cross['region']}-{year}")
-        cross_svg = open(cbase + '-section.svg').read()
-        cross_a = json.load(open(cbase + '-section.anchors.json'))
-        cvb, cross_body = inner(cross_svg)
 
     top = 700
     iso_box = (M - 60, top, ART_R - M + 60, 3900)
@@ -208,14 +208,15 @@ def main():
     sec_w = ART_R - M
     sec_top = top + iso_h + 420 + push
     GAP = 260
-    widths = svb[2] + (cvb[2] if cross else 0)
-    heights = max(svb[3], cvb[3]) if cross else svb[3]
-    s_sec = min((sec_w - (GAP if cross else 0)) / widths, (H - 330 - (sec_top - 90)) / heights)
-    sec_h = svb[3] * s_sec
+    widths = sum(x['_vb'][2] for x in secs)
+    heights = max(x['_vb'][3] for x in secs)
+    s_sec = min((sec_w - GAP * (len(secs) - 1)) / widths, (H - 330 - (sec_top - 90)) / heights)
     sec_bottom = sec_top + heights * s_sec
-    sec_box = (M, sec_bottom - sec_h, svb[2] * s_sec, sec_h)
-    if cross:
-        cross_box = (M + svb[2] * s_sec + GAP, sec_bottom - cvb[3] * s_sec, cvb[2] * s_sec, cvb[3] * s_sec)
+    xx = M
+    for x in secs:
+        vb_ = x['_vb']
+        x['_box'] = (xx, sec_bottom - vb_[3] * s_sec, vb_[2] * s_sec, vb_[3] * s_sec)
+        xx += vb_[2] * s_sec + GAP
 
     labels = []    # the wayfinding labels' boxes, which the link preview keeps clear of
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
@@ -226,14 +227,13 @@ def main():
     # The drawings.
     ox_iso, oy_iso = iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2 - iso_vb[0] * s_iso, iso_box[1] - iso_vb[1] * s_iso
     out.append(f'<svg x="{iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2:.1f}" y="{iso_box[1]}" width="{iso_vb[2] * s_iso:.1f}" height="{iso_h:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in iso_vb)}" overflow="hidden">{iso_body}</svg>')
-    out.append(text(M, sec_top - 70, spec['sectionCaption'], 76, 'italic', DIM))
-    out.append(f'<svg x="{sec_box[0]}" y="{sec_box[1]:.1f}" width="{sec_box[2]:.1f}" height="{sec_box[3]:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in svb)}">{sec_body}</svg>')
-    ox_sec, oy_sec = sec_box[0] - svb[0] * s_sec, sec_box[1] - svb[1] * s_sec
-    drawings = [('iso', iso_a, None, None), ('section', sec_a, sec_a.get('frame'), (ox_sec, oy_sec, s_sec))]
-    if cross:
-        out.append(text(cross_box[0], sec_top - 70, cross['caption'], 76, 'italic', DIM))
-        out.append(f'<svg x="{cross_box[0]:.1f}" y="{cross_box[1]:.1f}" width="{cross_box[2]:.1f}" height="{cross_box[3]:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in cvb)}">{cross_body}</svg>')
-        drawings.append(('cross', cross_a, cross_a.get('frame'), (cross_box[0] - cvb[0] * s_sec, cross_box[1] - cvb[1] * s_sec, s_sec)))
+    drawings = [('iso', iso_a, None, None)]
+    for x in secs:
+        bx_, by_, bw_, bh_ = x['_box']
+        vb_ = x['_vb']
+        out.append(text(bx_, sec_top - 70, x['caption'], 76, 'italic', DIM))
+        out.append(f'<svg x="{bx_:.1f}" y="{by_:.1f}" width="{bw_:.1f}" height="{bh_:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in vb_)}">{x["_body"]}</svg>')
+        drawings.append((x['as'], x['_a'], x['_a'].get('frame'), (bx_ - vb_[0] * s_sec, by_ - vb_[1] * s_sec, s_sec)))
     iso_rect = (iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2, iso_box[1], iso_vb[2] * s_iso, iso_h)
     if spec.get('inset'):
         # A small flat map of where the building stands and what its work joined

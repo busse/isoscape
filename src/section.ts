@@ -151,17 +151,19 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
     const box: Box = [Math.min(...all.map((q) => q[0])), Math.min(...all.map((q) => q[1])), Math.max(...all.map((q) => q[0])), Math.max(...all.map((q) => q[1]))]
     return { polys, box }
   })
-  if (cut.section.route !== undefined && cut.section.route.length > 1) {
+  // The route, and a second way (`pumped`) in its own color, drawn alike.
+  for (const [line, color] of [[cut.section.route, p.route], [cut.section.pumped, p.pumped]] as const) {
+    if (line === undefined || line.length < 2) continue
     const clear = ROUTE_CLEAR * view.scale
     const keepOff: Box[] = [
       ...travelers.map(({ box }): Box => [box[0] - clear, box[1] - clear, box[2] + clear, box[3] + clear]),
       ...Object.entries(anchors).filter(([id]) => /:end$/.test(id) && /track/.test(id)).map(([, b]): Box => [b[0] - clear / 2, b[1], b[2] + clear / 2, b[3]]),
     ]
-    const runs = routeRuns(cut.section.route.map(([s, e]) => P(s, zOf(e))), keepOff, MIN_RUN * view.scale)
+    const runs = routeRuns(line.map(([s, e]) => P(s, zOf(e))), keepOff, MIN_RUN * view.scale)
     for (const run of runs) {
-      out.push(`<path fill="none" stroke="${p.route}" stroke-width="${f(p.routeWidth)}" stroke-dasharray="${p.routeDash.map(f).join(' ')}" stroke-linecap="round" stroke-linejoin="round" d="${path(run, false)}"/>`)
+      out.push(`<path fill="none" stroke="${color}" stroke-width="${f(p.routeWidth)}" stroke-dasharray="${p.routeDash.map(f).join(' ')}" stroke-linecap="round" stroke-linejoin="round" d="${path(run, false)}"/>`)
       const head = arrowOn(run, ARROW * view.scale)
-      if (head !== null) out.push(`<path fill="${p.route}" d="${path(head)}"/>`)
+      if (head !== null) out.push(`<path fill="${color}" d="${path(head)}"/>`)
     }
   }
   for (const t of travelers) out.push(`<g class="traveler">${t.polys.map((poly) => `<path fill="${p.route}" d="${path(poly)}"/>`).join('')}</g>`)

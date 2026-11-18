@@ -85,6 +85,8 @@ export interface Palette {
   readonly cutOutline: string
   readonly cutOutlineDash: readonly [number, number]
   readonly route: string
+  /** A cutaway's second way (`pumped`): what a works lifts, beside the route that drives it. */
+  readonly pumped: string
   readonly routeWidth: number
   readonly routeDash: readonly [number, number]
   /** Station platforms, and the running rails of a track at close scale. */
@@ -190,6 +192,7 @@ const paper: Palette = {
   cutOutline: '#2c2b33',
   cutOutlineDash: [6, 4],
   route: '#b5392f',
+  pumped: '#2f6690',
   routeWidth: 2.6,
   routeDash: [9, 6],
   platform: '#efe9dc',
@@ -294,6 +297,7 @@ const night: Palette = {
   poche: '#c9d1e6',
   cutOutline: '#c9d1e6',
   route: '#e0614f',
+  pumped: '#7fb6e0',
   platform: '#3a3d48',
   railSteel: '#8a90a2',
   roofs: {

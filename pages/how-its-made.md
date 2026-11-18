@@ -1005,7 +1005,8 @@ profile, a center post and two wings rising outward. A stair down from the floor
 side (to the platforms) is drawn as its stepped profile, dashed. Under it the ground is cut along the plane and dug out where the
 building goes below it. Water held in a work (a forebay, a tailrace) and ground modeled as a
 part (a canal's bed) are cut in their own colors, water's blue and the earth's, where every
-other cut part is solid ink. Platforms are drawn 0.35 m over the rails (approximate), rails at true
+other cut part is solid ink. A works that lifts water (the Pump House) may trace that water too, in a darker blue
+beside the red route of the water that drives it. Platforms are drawn 0.35 m over the rails (approximate), rails at true
 gauge where tracks cross the plane, and a red dashed line follows the traveler from the street
 to the train. The line runs at waist height, 0.95 m over each floor, with a small arrowhead
 pointing the way on each stretch, and it is broken where it meets a traveler and where it

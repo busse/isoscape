@@ -609,6 +609,13 @@ what it names. `travelerKey` adds a line with the traveler's glyph to the key, a
 sheet over the cutaway's) draws the traveler's way in the cutaway too, red and dashed as the
 section draws it; `cutaway.order: "components"` breaks a cycle in the paint order at an item
 that lies in one, rather than at the farthest item left.
+A cutaway may trace a second way beside its route, `cutaway.pumped` (and `section.pumped` in
+its section), in the palette's `pumped` blue: the water a works lifts, beside the water that
+drives it. A sheet's `sections` (each `region`, `caption` and `as`, the key its callouts anchor
+to) sets the flat sections along its foot in place of the region's own and `crossSection`; its
+`inset` sets a small flat context map with a heading, a caption and `why`, a few short
+paragraphs on the building's purpose (`tools/cutaway/context.py`, from a cached OpenStreetMap
+extract).
 `isoView` (`[x, y, w, h]` in the plate's own units) frames the plate closer, cutting what runs
 past it at its edge; a wayfinding label with `label: [x, y]` (sheet units, its first baseline)
 stands there, its leader leaving the nearest point of its box; `columnEnd` warns when the

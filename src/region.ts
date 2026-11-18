@@ -156,6 +156,11 @@ export interface Cutaway {
    * the two read alike (the section's scale on the sheet over the cutaway's).
    */
   readonly route?: { readonly points: readonly (readonly [number, number, number])[]; readonly weight?: number }
+  /**
+   * A second way, drawn as `route` is but in the palette's `pumped` color: the water a works
+   * lifts, beside the water that drives it (the Pump House). Its section has `section.pumped`.
+   */
+  readonly pumped?: { readonly points: readonly (readonly [number, number, number])[]; readonly weight?: number }
   /** How a cycle in the paint order is broken: `components` at its start (see `paintOrder`); by default, at the farthest item left. */
   readonly order?: 'components'
   /**
@@ -173,6 +178,8 @@ export interface Cutaway {
     readonly earth?: number
     /** The traveler's path: points [meters along the plane, elevation in meters above sea level]. */
     readonly route?: readonly (readonly [number, number])[]
+    /** The second way (`cutaway.pumped`), in the palette's `pumped` color: points as `route`'s. */
+    readonly pumped?: readonly (readonly [number, number])[]
     /**
      * Stairs hidden from the plane behind a wall (regular expressions on item ids): drawn as
      * their dashed outline, as a stair on the side lifted away is.
