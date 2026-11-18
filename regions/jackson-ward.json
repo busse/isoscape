@@ -1,13 +1,13 @@
 {
   "title": "Jackson Ward, from Belvidere to Seventh Street",
   "center": [
-    -77.4380,
-    37.5490
+    -77.43757,
+    37.55005
   ],
-  "width": 1600,
-  "depth": 1100,
-  "bearing": 0,
-  "snap": true,
+  "width": 1900,
+  "depth": 1200,
+  "bearing": -9.5,
+  "snap": false,
   "scale": 2.0,
   "squash": 0.5,
   "exaggeration": 1.0,

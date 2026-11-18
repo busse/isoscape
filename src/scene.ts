@@ -19,7 +19,7 @@ import { mix, type Palette } from './palette.ts'
 import type { Region } from './region.ts'
 import { dominantGridAngle, makeView, snapBearing, type View } from './view.ts'
 import { localMetres } from './region.ts'
-import { drawnWet, makeTerrain, rasterize, historicWater, settleWater, traceShore, type Terrain } from './terrain.ts'
+import { drawnWet, makeTerrain, rasterize, historicWater, restoreGround, settleWater, traceShore, type HeightGrid, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
@@ -268,7 +268,17 @@ export const buildScene = (
   const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}), ...(later.atGrade ? { bridgesAtGrade: later.atGrade } : {}), ...(later.verges ? { vergesLater: later.verges } : {}), ...(past.canalBridges ? { canalBridgesLater: past.canalBridges } : {}), ...(past.orphanBridges ? { bridgesWithoutRoads: past.orphanBridges } : {}), ...(past.plantings ? { plantingsLater: past.plantings } : {}), ...(past.spurs ? { spursLater: past.spurs } : {}), ...extraStats }
   const opts = region.terrain ?? {}
   const useTerrain = elevation !== null && region.terrain !== undefined && opts.enabled !== false
-  const terrain = makeTerrain(view, opts.cell ?? 5, useTerrain ? (opts.exaggeration ?? 2) : 1, useTerrain ? elevation : null)
+  // Ground a later work cut or filled, put back for the years before it (`GroundRestoration`).
+  const restorations = time === undefined ? [] : (time.history.ground ?? []).filter((g) => time.year < g.before)
+  let restoredNodes = 0
+  const restore = restorations.length === 0 ? undefined : (grid: HeightGrid) => {
+    for (const g of restorations) {
+      restoredNodes += restoreGround(grid, g.rings.map((r) => r.map(([lon, lat]) => view.toView(lon, lat))),
+        (g.lines ?? []).map((l) => ({ pts: l.line.map(([lon, lat]) => view.toView(lon, lat)), ...(l.elevation === undefined ? {} : { elevation: l.elevation }) })))
+    }
+  }
+  const terrain = makeTerrain(view, opts.cell ?? 5, useTerrain ? (opts.exaggeration ?? 2) : 1, useTerrain ? elevation : null, useTerrain ? restore : undefined)
+  if (restoredNodes > 0) stats.groundRestored = restoredNodes
 
   // ---- ground ----------------------------------------------------------------------------
   const ground: GroundPolygon[] = []

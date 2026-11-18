@@ -61,6 +61,7 @@ export const makeTerrain = (
   cell: number,
   exaggeration: number,
   sample: ((lon: number, lat: number) => number) | null,
+  restore?: (grid: HeightGrid) => void,
 ): Terrain => {
   const f = view.frame
   // One cell of margin past every edge, so lookups at the frame's rim interpolate.
@@ -79,6 +80,9 @@ export const makeTerrain = (
     }
     for (let k = 0; k < elev.length; k++) if (Number.isNaN(elev[k])) filled[k] = 1
     fillGaps(elev, nx, ny)
+    // A dated scene may put back ground that later works cut or filled (`restoreGround`),
+    // before the blur, so the rebuilt ground and the measured ground blend at its rim.
+    if (restore !== undefined) restore({ elev, nx, ny, x0, y0, cell })
     // Lidar at 1 m carries curbs, rubble and noise that a 5 m grid aliases into speckle.
     // A light blur keeps the landforms and loses the grit.
     blur(elev, nx, ny, 2)
@@ -162,6 +166,141 @@ export const makeTerrain = (
     elevation,
     z,
   }
+}
+
+/** A bare height grid in view meters: row-major from the near edge, as in `Terrain`. */
+export interface HeightGrid {
+  readonly elev: Float32Array
+  readonly nx: number
+  readonly ny: number
+  readonly x0: number
+  readonly y0: number
+  readonly cell: number
+}
+
+/** A line the rebuilt ground must follow, in view meters (see `restoreGround`). */
+export interface GroundLine {
+  readonly pts: readonly Vec2[]
+  /**
+   * Its elevation (meters, the DEM's datum) where a source gives one, such as a contour of an
+   * old map. Absent: a street that ran through at grade, its surface taken as a straight grade
+   * along the line between the measured ground where it leaves the area on either side.
+   */
+  readonly elevation?: number
+}
+
+/** How closely the membrane is solved: meters of change in the last sweep. */
+export const RESTORE_TOLERANCE = 0.001
+
+/**
+ * Rebuild the ground inside `rings` (view meters, even-odd) as it stood before later works cut
+ * or filled it: the measured heights there are discarded, and the surface is rebuilt from what
+ * bounds it. The measured ground just outside the rings holds the edge; each line in `lines`
+ * holds the nodes it passes over inside them (a street that ran through at grade: a straight
+ * grade between its ends at the rim; a line with an elevation: that elevation); every other
+ * node inside takes the mean of its four neighbors, a membrane (harmonic) surface, solved by
+ * successive over-relaxation. Returns the number of nodes rebuilt. What this gives is an
+ * estimate: the smoothest surface that meets its bounds, not a survey.
+ */
+export const restoreGround = (g: HeightGrid, rings: readonly (readonly Vec2[])[], lines: readonly GroundLine[] = []): number => {
+  const { elev, nx, ny, x0, y0, cell } = g
+  const inside = new Uint8Array(nx * ny)
+  for (let j = 0; j < ny; j++) {
+    const y = y0 + j * cell
+    const xs: number[] = []
+    for (const r of rings) {
+      for (let k = 0, m = r.length - 1; k < r.length; m = k++) {
+        const [ax, ay] = r[m]
+        const [bx, by] = r[k]
+        if (ay > y !== by > y) xs.push(ax + ((y - ay) / (by - ay)) * (bx - ax))
+      }
+    }
+    xs.sort((a, b) => a - b)
+    for (let k = 0; k + 1 < xs.length; k += 2) {
+      const i0 = Math.max(1, Math.ceil((xs[k] - x0) / cell))
+      const i1 = Math.min(nx - 2, Math.floor((xs[k + 1] - x0) / cell))
+      // The grid's own rim is never rebuilt: the membrane needs measured ground around it.
+      if (j < 1 || j > ny - 2) continue
+      for (let i = i0; i <= i1; i++) inside[j * nx + i] = 1
+    }
+  }
+  const measured = (x: number, y: number): number => {
+    const fx = Math.min(nx - 1.001, Math.max(0, (x - x0) / cell))
+    const fy = Math.min(ny - 1.001, Math.max(0, (y - y0) / cell))
+    const i = Math.floor(fx), j = Math.floor(fy), tx = fx - i, ty = fy - j
+    return elev[j * nx + i] * (1 - tx) * (1 - ty) + elev[j * nx + i + 1] * tx * (1 - ty) + elev[(j + 1) * nx + i] * (1 - tx) * ty + elev[(j + 1) * nx + i + 1] * tx * ty
+  }
+  const nodeOf = (x: number, y: number): number => {
+    const i = Math.round((x - x0) / cell), j = Math.round((y - y0) / cell)
+    return i < 0 || j < 0 || i >= nx || j >= ny ? -1 : j * nx + i
+  }
+  // Nodes a line holds: their value, and how many lines set it (two streets crossing average).
+  const held = new Float64Array(nx * ny)
+  const holds = new Uint16Array(nx * ny)
+  for (const line of lines) {
+    // Walk the line in half-cell steps, remembering the distance along it.
+    const steps: { p: Vec2; s: number; k: number; in: boolean }[] = []
+    let s = 0
+    for (let a = 0; a + 1 < line.pts.length; a++) {
+      const p = line.pts[a], q = line.pts[a + 1]
+      const len = Math.hypot(q[0] - p[0], q[1] - p[1])
+      const n = Math.max(1, Math.ceil(len / (cell / 2)))
+      for (let t = 0; t < n + (a + 2 === line.pts.length ? 1 : 0); t++) {
+        const pt: Vec2 = [p[0] + ((q[0] - p[0]) * t) / n, p[1] + ((q[1] - p[1]) * t) / n]
+        const k = nodeOf(pt[0], pt[1])
+        steps.push({ p: pt, s: s + (len * t) / n, k, in: k >= 0 && inside[k] === 1 })
+      }
+      s += len
+    }
+    for (let a = 0; a < steps.length; a++) {
+      if (!steps[a].in) continue
+      let b = a
+      while (b + 1 < steps.length && steps[b + 1].in) b++
+      // A run inside the area: at grade, it needs measured ground at both ends.
+      const before = a > 0 ? steps[a - 1] : null
+      const after = b + 1 < steps.length ? steps[b + 1] : null
+      if (line.elevation !== undefined || (before !== null && after !== null)) {
+        const za = before === null ? 0 : measured(before.p[0], before.p[1])
+        const zb = after === null ? 0 : measured(after.p[0], after.p[1])
+        for (let c = a; c <= b; c++) {
+          const v = line.elevation ?? za + ((zb - za) * (steps[c].s - before!.s)) / Math.max(1e-9, after!.s - before!.s)
+          const k = steps[c].k
+          held[k] = holds[k] === 0 ? v : held[k] + v
+          holds[k]++
+        }
+      }
+      a = b
+    }
+  }
+  const free: number[] = []
+  let rebuilt = 0
+  let sum = 0, count = 0
+  for (let k = 0; k < inside.length; k++) {
+    if (inside[k] !== 1) continue
+    rebuilt++
+    if (holds[k] > 0) elev[k] = held[k] / holds[k]
+    else free.push(k)
+  }
+  // Start the free nodes from the mean of the area's rim, then relax.
+  for (let k = 0; k < inside.length; k++) {
+    if (inside[k] === 1) continue
+    const i = k % nx
+    if ((i > 0 && inside[k - 1]) || (i + 1 < nx && inside[k + 1]) || (k >= nx && inside[k - nx]) || (k + nx < inside.length && inside[k + nx])) { sum += elev[k]; count++ }
+  }
+  const start = count > 0 ? sum / count : 0
+  for (const k of free) elev[k] = start
+  const omega = 1.9
+  for (let sweep = 0; sweep < 20000; sweep++) {
+    let change = 0
+    for (const k of free) {
+      const v = (elev[k - 1] + elev[k + 1] + elev[k - nx] + elev[k + nx]) / 4
+      const d = omega * (v - elev[k])
+      elev[k] += d
+      change = Math.max(change, Math.abs(d))
+    }
+    if (change < RESTORE_TOLERANCE) break
+  }
+  return rebuilt
 }
 
 /** Replace missing samples by the mean of their present neighbors, repeatedly. */
