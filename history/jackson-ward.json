@@ -1020,6 +1020,18 @@
    "sources": [
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf"
    ]
+  },
+  {
+   "id": [
+    "w153957425",
+    "w153957423"
+   ],
+   "before": 1971,
+   "note": "Fifth and Seventh streets cross East Leigh Street on bridges built in 1971; before them the streets are drawn meeting at grade (approximate).",
+   "sources": [
+    "https://bridgelookup.com/bridge/582613",
+    "https://bridgelookup.com/bridge/582615"
+   ]
   }
  ],
  "sanborn": {
@@ -1048,5 +1060,120 @@
     "why": "3 of its 5 traced buildings fall on the Capitol Square lawn: the same misfit as sheet 5."
    }
   ]
- }
+ },
+ "rules": [
+  {
+   "where": {
+    "id": [
+     "w6032230",
+     "w6039697",
+     "w38256011",
+     "w38256015",
+     "w38256027",
+     "w38256040",
+     "w38256047",
+     "w45088996",
+     "w86411968",
+     "w167834373",
+     "w296796861",
+     "w297225883",
+     "w364961821",
+     "w601098880",
+     "w772547247",
+     "w772547248",
+     "w772547249",
+     "w1042145752",
+     "w1098737577",
+     "w1556679453",
+     "w4990972",
+     "w44888560",
+     "w44888561",
+     "w44888564",
+     "w103342569",
+     "w103342588",
+     "w103342605",
+     "w103342610",
+     "w103342683",
+     "w121205839",
+     "w121205856",
+     "w364961824",
+     "w601098877",
+     "w601098878",
+     "w601098879"
+    ]
+   },
+   "eras": [
+    [
+     1968,
+     null
+    ]
+   ],
+   "note": "I-64 east of its junction with the Turnpike, and its ramps, carry start_date 1968 in OpenStreetMap; Roads to the Future gives 1968 for I-64's completion through Richmond. Before then not drawn (the 1959 scene shows the Turnpike alone).",
+   "sources": [
+    "https://roadstothefuture.com/Richmond_Interstate_Expy.html",
+    "https://www.openstreetmap.org/way/103342588"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w44888579",
+     "w1306725577",
+     "w1212923659"
+    ]
+   },
+   "eras": [
+    [
+     1891,
+     null
+    ]
+   ],
+   "note": "The Fifth Street Viaduct over Bacon's Quarter Branch and the railroad: the first opened in 1891, a reinforced-concrete one in 1933, and today's in 1997 (the National Bridge Inventory gives 1996). A viaduct stood here in 1952; it is drawn in today's form.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Fifth_Street_Viaduct",
+    "https://bridgelookup.com/bridge/584470"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w44888581"
+    ]
+   },
+   "eras": [
+    [
+     1901,
+     null
+    ]
+   ],
+   "note": "Today's North 1st Street bridge over the CSX railroad and Bacon Street was built in 2000 (National Bridge Inventory). The USGS Richmond sheets surveyed 1933-34 and revised 1956 show 1st Street running straight across the railroad and the valley here; the earlier crossing's form was not found. Drawn in today's form (approximate).",
+   "sources": [
+    "https://bridgelookup.com/bridge/585413",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/GeoTIFF/VA/VA_Richmond_186501_1956_24000_geo.tif"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w120374941",
+     "w135207689",
+     "w120375061",
+     "w154116217"
+    ]
+   },
+   "eras": [
+    [
+     1901,
+     null
+    ]
+   ],
+   "note": "Today's Chamberlayne bridge over the CSX railroad was built in 1992 (National Bridge Inventory). The USGS sheets of 1933-34 and 1956 show Chamberlayne Parkway crossing the railroad here; the earlier crossing's form was not found. Drawn in today's form (approximate).",
+   "sources": [
+    "https://bridgelookup.com/bridge/583420",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/GeoTIFF/VA/VA_Richmond_186501_1956_24000_geo.tif"
+   ]
+  }
+ ]
 }
