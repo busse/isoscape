@@ -27,3 +27,7 @@ Recorded with Claude.
     story and its write-up: the plan of where the trench was filled (its coverage), the three
     street-level cross sections (today, rebuilt, the 1934 points), and the rest of the method
     charts.
+11. **The overlay plan** (12:32 ET). The early plan view stays in the story too: the highway's
+    area laid over the 1952 houses, over today's street plan and today's buildings (the round
+    Coliseum at lower right). Source image: `trace/overlays/all-sheets-on-osm-with-highway.jpg`.
+    Redraw it in the story's flat chart style by script, with a legend, a scale and its credits.
