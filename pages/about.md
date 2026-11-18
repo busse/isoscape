@@ -96,7 +96,8 @@ the public domain.
 by the [Library of Congress](https://www.loc.gov/collections/sanborn-maps/). The editions used
 were published long enough ago to be out of US copyright. Check each item's rights statement
 on the Library's site before reusing the scans. The traced footprints in `history/sanborn/`
-are derived from them.
+are derived from them, and are free to reuse under CC0: see [Data](data.md) for those and
+the other datasets made for these maps, with their licenses.
 
 **Years built (dated series).** The Richmond series uses the City of Richmond's *Year of
 Construction* layer, published on the city's ArcGIS open data service. Check the city's terms

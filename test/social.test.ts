@@ -6,7 +6,7 @@ import { join } from 'node:path'
 import type { BuildMeta } from '../src/archive.ts'
 import { renderExplorer } from '../src/explorer.ts'
 import {
-  buildCard, clip, escAttr, flagshipOf, loadSiteConfig, metaTags, normaliseSiteUrl, reframeSvg, shareFile, sharePage, siteHref, socialCrop,
+  buildCard, buyLinks, clip, escAttr, flagshipOf, loadSiteConfig, metaTags, normaliseSiteUrl, onSaleUrl, reframeSvg, shareFile, sharePage, shopFor, siteHref, socialCrop,
 } from '../src/social.ts'
 
 const build = (id: string, extra: Partial<BuildMeta> = {}): BuildMeta => ({
@@ -133,4 +133,22 @@ test('a front page comes from the config, and a malformed one is ignored', async
   assert.match(selling, /<a class="shop" href="https:\/\/s\/"[^>]*><b>Buy ↗<\/b><span>L<\/span><\/a>/)
   await writeFile(join(dir, 'isoscape.config.json'), JSON.stringify({ home: { title: 'T', heroes: 'no', sections: [] } }))
   assert.equal((await loadSiteConfig(undefined, dir, {})).home, undefined)
+})
+
+test('an onSale list: its first print is the view’s buy link, the rest are shown beside it', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'iso-prints-'))
+  await writeFile(join(dir, 'isoscape.config.json'), JSON.stringify({ shop: { label: 'Shop', url: 'https://s/', onSale: {
+    'r:2026': ['https://s/p/a', { url: 'https://s/p/b', label: 'Buy B ↗' }, { url: 'https://s/p/c' }, 'https://s/p/d', { url: 'ftp://x', label: 'no' }],
+    'q:1925': [{ url: 'https://s/p/q', label: 'Buy Q ↗' }],
+    bad: [{ url: 'https://s/p/z' }].slice(1),
+    'r': 'https://s/p/r',
+  } } }))
+  const config = await loadSiteConfig(undefined, dir, {})
+  assert.deepEqual(config.shop?.onSale, { 'r:2026': 'https://s/p/a', 'q:1925': 'https://s/p/q', r: 'https://s/p/r' })
+  // Only the first entry may go without a label; one with no label past it, or not http(s), is dropped.
+  assert.deepEqual(shopFor(config, 'r', 2026), { url: 'https://s/p/a', label: 'Buy a print ↗', more: [{ url: 'https://s/p/b', label: 'Buy B ↗' }] })
+  assert.deepEqual(shopFor(config, 'q', 1925), { url: 'https://s/p/q', label: 'Buy Q ↗' })
+  assert.deepEqual(shopFor(config, 'r', 1925), { url: 'https://s/p/r', label: 'Buy a print ↗' })
+  assert.equal(onSaleUrl(config.shop?.onSale, 'r:2026'), 'https://s/p/a')
+  assert.deepEqual(buyLinks(config, ['r:2026']).regions['r:2026'].more, [{ url: 'https://s/p/b', label: 'Buy B ↗' }])
 })

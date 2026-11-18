@@ -508,6 +508,7 @@ export const renderMapPage = (e: MapEntry, ctx: Ctx, previews: ReadonlyMap<strin
     (image === undefined ? '' : `<figure class="pic"><a href="${escAttr(explore)}"><img src="${escAttr(u + image.path)}" width="${image.width}" height="${image.height}" alt="${escAttr(alt)}"></a><figcaption>${escapeHtml(statsLine(b))}</figcaption></figure>\n`) +
     `<p class="acts"><a class="btn${shop ? ' ghost' : ''}" href="${escAttr(explore)}">Explore this map</a>` +
     (shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, e.region, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`) +
+    (shop?.more ?? []).map((m) => ` <a class="btn" href="${escAttr(withCampaign(m.url, e.region, ctx.config.shop?.url))}">${escapeHtml(m.label)}</a>`).join('') +
     (story === undefined ? '' : ` <a class="btn ghost" href="${escAttr(u + story)}">${escapeHtml(sec?.pageLabel ?? 'Read the story')}</a>`) + `</p>\n` +
     (series === undefined ? '' : `<nav aria-label="Years"><ul class="years">${series.years.map((y) => `<li>${y.year === e.year ? `<span aria-current="page">${y.year}</span>` : `<a href="${escAttr(u + y.path)}"${y.build.time?.title ? ` title="${escAttr(y.build.time.title)}"` : ''}>${y.year}</a>`}</li>`).join('')}</ul></nav>\n`) +
     drawnBy(ctx, series !== undefined) +
