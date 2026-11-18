@@ -2895,7 +2895,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "agent",
-   "decision": "outline approved 2026-11-18 with eight decisions (drafts/jackson-ward/decisions.md on the branch): title 'What stood where the highway runs'; 1925 added; Gilpin Court beat; chronological; cap as study area and range of views; explorer story page; reviewers see the fact-checked draft; 1959 labeled approximate. Estimate and actuals tracked in drafts/jackson-ward/effort.md",
+   "decision": "working draft integrated on story-jackson-ward (ce30c56): 1925, 1952, 1959, today; the island; the overlay plan; 24 images; count 216 paved / 447 corridor. In fact check by a separate agent (20 open items). Then the owner's read, then his community reviewers. Unlisted page, not published.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -2906,12 +2906,13 @@
    ],
    "title": "Jackson Ward and the interstate",
    "kind": "story",
-   "stage": "outline",
+   "stage": "fact check",
    "notes": "editorial first: a web story, perhaps a book; prints are not the goal",
    "private": true,
    "log": [
     "2026-11-18: research -> rough draft",
-    "2026-11-18: rough draft -> outline"
+    "2026-11-18: rough draft -> outline",
+    "2026-11-18: outline -> fact check"
    ]
   },
   "story-redlining": {
