@@ -69,27 +69,27 @@ volume 1 tracing, which names none. See [The tracing](#the-tracing).
 | # | As the sheet prints it | Stories (as printed) | Sheet |
 |---|---|---|---|
 | 1 | Corby Baking Company, Plant C | 3 | 306 |
-| 2 | St. Joseph's R.C. Church (Colored) | not printed by the label | 308 |
+| 2 | St. Joseph's R.C. Church (Colored) | not printed | 308 |
 | 3 | Rectory | 2 | 308 |
-| 4 | Peoples Bible Institute (Colored) | not printed by the label | 307 |
-| 5 | Sharon Baptist Church (Colored) | not printed by the label | 306 |
+| 4 | Peoples Bible Institute (Colored) | not printed | 307 |
+| 5 | Sharon Baptist Church (Colored) | not printed | 306 |
 | 6 | Undertaker | 2 | 307 |
 | 7 | Leigh St. Holiness Church (Colored) | 1-1/2 | 306 |
 | 8 | Booker Washington School (Colored); fireproof part "built in 1923" | 3 | 306 |
 | 9 | True Reformers Hall: Colored hall & meeting rooms 2nd & 3rd, printing 1st | 3 | 308 |
-| 10 | Bank | not printed by the label | 308 |
+| 10 | Bank | not printed | 308 |
 | 11 | Hippodrome Theatre (Colored) | 1-2 | 308 |
 | 12 | Otira Apartments | 3 | 308 |
 | 13 | Undertaking parlors 1st, meeting halls 2nd & 3rd | 3 | 308 |
-| 14 | 3rd St. Bethel A.M.E. Church (Colored) | not printed by the label | 308 |
+| 14 | 3rd St. Bethel A.M.E. Church (Colored) | not printed | 308 |
 | 15 | Moving Pictures (Colored); lobby | 1-1/2 | 308 |
 | 16 | Miller Hotel (Colored): stores, hotel entrance, dining room | 3 | 308 |
 | 17 | Y.M.C.A. (Colored) | 2 | 308 |
-| 18 | Offices | not printed by the label | 308 |
-| 19 | Bank | not printed by the label | 308 |
+| 18 | Offices | not printed | 308 |
+| 19 | Bank | not printed | 308 |
 | 20 | Bank | 3-4 | 308 |
-| 21 | Miller & Rhoads Private Garage | not printed by the label | 309 |
-| 22 | Leigh St. Memorial M.E. Church | not printed by the label | 309 |
+| 21 | Miller & Rhoads Private Garage | not printed | 309 |
+| 22 | Leigh St. Memorial M.E. Church | not printed | 309 |
 
 Names are as printed; "(Colored)" is the sheet's own word. The bank at 214 East Clay (20) is
 the building of the Mechanics Savings Bank, built 1909–10, which failed in 1922; the Southern
@@ -136,37 +136,37 @@ were not read for names. See [The tracing](#the-tracing). Working draft.
 
 | # | As the sheet prints it | Stories (as printed) | Sheet |
 |---|---|---|---|
-| 1 | Furniture storage warehouse; loading shed; furniture repair | not printed by the label | 306 |
-| 2 | St. Joseph's R.C. Church (Colored) | not printed by the label | 308 |
+| 1 | Furniture storage warehouse; loading shed; furniture repair | not printed | 306 |
+| 2 | St. Joseph's R.C. Church (Colored) | not printed | 308 |
 | 3 | Sharon Baptist Church (Colored) | 1-2 | 306 |
 | 4 | Undertaker | 2 | 307 |
-| 5 | Auto repair | not printed by the label | 306 |
+| 5 | Auto repair | not printed | 306 |
 | 6 | Storage house (vacant) | 4 | 308 |
 | 7 | Colored hall & meeting rooms 2nd & 3rd; club; store | 3 | 308 |
-| 8 | Filling station; auto repair | not printed by the label | 308 |
+| 8 | Filling station; auto repair | not printed | 308 |
 | 9 | Apartments | 2 | 308 |
 | 10 | Store; hall 2nd | 2 | 308 |
 | 11 | Restaurant; hall 2nd (Colored) | 3 | 307 |
-| 12 | Stores; upholstering & repair; tire repair | not printed by the label | 306 |
+| 12 | Stores; upholstering & repair; tire repair | not printed | 306 |
 | 13 | Hippodrome Theatre (Colored), movies | 1-2 | 308 |
 | 14 | Leigh St. Y.M.C.A. (Colored) | 3 | 308 |
 | 15 | Auto & casket storage | 2 | 308 |
-| 16 | Storage | not printed by the label | 308 |
-| 17 | Third St. Bethel A.M.E. Church (Colored) | not printed by the label | 308 |
+| 16 | Storage | not printed | 308 |
+| 17 | Third St. Bethel A.M.E. Church (Colored) | not printed | 308 |
 | 18 | Moving pictures (Colored); restaurant; lobby; store | 1-2 | 308 |
 | 19 | Restaurant | 2 | 308 |
 | 20 | Rest. (restaurant); "Fl. abv. 1st" | 3 | 308 |
 | 21 | Stores; hotel entrance; dining room | 3 | 308 |
-| 22 | Restaurant; store | not printed by the label | 308 |
+| 22 | Restaurant; store | not printed | 308 |
 | 23 | Restaurant; hotel | 2 | 308 |
 | 24 | Offices | 2 | 308 |
 | 25 | Stores; office; Southern Aid Society of Va. (Colored), office building; stores; nos. 212-216 E. Clay | 4 | 308 |
 | 26 | Apartments | 2 | 308 |
 | 27 | Offices | 2 | 308 |
-| 28 | Miller & Rhoads furniture warehouse; garage 1st, upholstering 2nd, furniture repair 3rd ("fireproof construction built 1936"; "built 1941") | not printed by the label | 309 |
-| 29 | Elks Home, Williams Lodge (Colored) | not printed by the label | 309 |
+| 28 | Miller & Rhoads furniture warehouse; garage 1st, upholstering 2nd, furniture repair 3rd ("fireproof construction built 1936"; "built 1941") | not printed | 309 |
+| 29 | Elks Home, Williams Lodge (Colored) | not printed | 309 |
 | 30 | Miller & Rhoads furniture storage | 2 | 309 |
-| 31 | Leigh St. M.E. Church | not printed by the label | 309 |
+| 31 | Leigh St. M.E. Church | not printed | 309 |
 
 ![Second Street about 1925 (above) and in 1952 (below), the same blocks](jackson-ward-pair-second-street.webp)
 
