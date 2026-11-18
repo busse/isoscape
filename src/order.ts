@@ -123,11 +123,11 @@ export const spanOrder = (a: Span, b: Span): number => {
 export const STACK_TOLERANCE = 0.03
 
 /**
- * `components`: break a cycle where it starts. The plain rule forces the farthest unplaced item,
- * which may stand nowhere near the cycle (a tower behind a building whose attic floors and roof
- * form one), and paints it before parts it should follow. With `components`, the item forced is
- * the farthest of a cycle (a strongly connected group of the items left) that nothing else left
- * must precede. A region's `cutaway.order` asks for it; others keep the plain rule.
+ * `components`: break a cycle within it. The plain rule forces the farthest unplaced item, which
+ * may be in no cycle at all (a tower behind a building whose attic floors and roof form one) and
+ * then paints before parts it should follow. With `components`, the item forced is the farthest
+ * of those left that lie in a cycle (a strongly connected group of more than one item). A
+ * region's `cutaway.order` asks for it; others keep the plain rule.
  */
 export const paintOrder = (items: readonly Item[], cell = 96, stacked = false, components = false): Item[] => {
   const n = items.length
@@ -195,9 +195,8 @@ export const paintOrder = (items: readonly Item[], cell = 96, stacked = false, c
 }
 
 /**
- * The item to force when every item left waits on another: among the strongly connected groups
- * of the items left (Tarjan's algorithm), one that no other group left must precede, and in it
- * the item `first` puts first.
+ * The item to force when every item left waits on another: of the items left that lie in a
+ * strongly connected group of more than one (Tarjan's algorithm), the one `first` puts first.
  */
 const cycleStart = (after: readonly number[][], done: readonly boolean[], first: (i: number, j: number) => number): number => {
   const n = after.length
@@ -246,17 +245,14 @@ const cycleStart = (after: readonly number[][], done: readonly boolean[], first:
       }
     }
   }
-  // A group is a source when no edge from another group left comes into it.
-  const fed = new Array<boolean>(groups).fill(false)
-  for (let v = 0; v < n; v++) {
-    if (done[v]) continue
-    for (const w of after[v]) if (!done[w] && group[w] !== group[v]) fed[group[w]] = true
-  }
+  const size = new Array<number>(groups).fill(0)
+  for (let v = 0; v < n; v++) if (!done[v]) size[group[v]]++
   let best = -1
   for (let v = 0; v < n; v++) {
-    if (done[v] || fed[group[v]]) continue
+    if (done[v] || size[group[v]] < 2) continue
     if (best < 0 || first(v, best) < 0) best = v
   }
+  if (best < 0) for (let v = 0; v < n; v++) if (!done[v] && (best < 0 || first(v, best) < 0)) best = v
   return best
 }
 
