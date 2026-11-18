@@ -10,15 +10,15 @@ social: jackson-ward-social.jpg
 
 > **Unpublished working draft, for review.** Not for circulation. The facts are being checked
 > against their sources, and the community reviewers have not yet read it. The numbers,
-> pictures and wording may change. Placeholders marked **Slot** wait on work in progress.
-> Drafted with Claude for Chris Busse, November 18, 2026.
+> pictures and wording may change. Drafted with Claude for Chris Busse, November 18, 2026.
 
 Between 1955 and 1958 the Richmond–Petersburg Turnpike, now I-95 and I-64, was cut through
 Jackson Ward, then the center of Black business, church and civic life in Richmond. The last
 Sanborn fire-insurance survey before the road, republished in 1952, shows the blocks it took
-building by building. Chris Busse has drawn the blocks from those sheets with isoscape, on the
-ground as it stood before the trench, so the same blocks can be seen in 1952, a year after the road opened, and
-today. This page goes in order of time, and ends with [how we know](#how-we-know) what each
+building by building, and the same company's survey of 1925 shows them a generation earlier.
+Chris Busse has drawn the blocks from those sheets with isoscape, on the ground as it stood
+before the trench, so the same frame can be seen about 1925, in 1952, about a year after the
+road opened, and today. This page goes in order of time, and ends with [how we know](#how-we-know) what each
 picture shows, how sure it is, and where it may be wrong.
 
 The pictures are of buildings and ground. They do not show people, and they cannot say who
@@ -28,9 +28,19 @@ churches and institutions, whose work this rests on (see
 
 ## 1925
 
-> **Slot: the 1925 view** (the same frame as below, from the 1925 Sanborn volume 3; work in
-> progress). Image `jackson-ward-state-1925.webp` and its note go here, with the close view of
-> Apostle Town before Gilpin Court.
+![Jackson Ward about 1925, from Belvidere Street to 7th Street and from Broad Street to the railroad, seen from the south: frame houses in yellow and brick in pink fill the blocks north of Leigh Street, and Apostle Town stands where Gilpin Court was later built](jackson-ward-state-1925.webp)
+
+*How this was made:* buildings north of Leigh Street (and between Clay and Leigh from 1st to
+7th Streets) from the 15 sheets of the 1925 Sanborn volume 3, registered onto the same sheets of
+the 1952 printing and placed by their fits; south of that from the 1924–25 volume 1 tracing;
+and buildings standing today that the city dates to 1925 or before. The ground is the same
+estimate as in 1952. See [The tracing](#the-tracing). Working draft.
+
+The 1925 volume was drawn between January and April 1925 and reached the Library of Congress on
+May 16, 1925, with its correction table blank, so it shows the ward as first surveyed that
+year [[LoC, Sanborn 1925 vol. 3](#sources)]. On these sheets most buildings north of Leigh
+Street are frame. The tracing found 3,907 outlines, 2,317 of them colored as frame
+[[1925 notes](#the-tracing)].
 
 Jackson Ward was made a city ward in 1871. The city's 2026 community plan says its lines were
 drawn to dilute Black voting power [[Community Plan 2026](#sources), timeline]. Its institutions
@@ -49,20 +59,63 @@ undesirable, and its residents were barred from loans for houses and businesses 
 §1.4.2]. By the 1930s more than 8,000 Black Richmonders lived and worked in the ward
 [[Community Plan 2026](#sources), citing Taylor 1994].
 
+![Second Street about 1925, from Broad Street at the near edge to past Leigh Street, with 22 buildings numbered where the 1925 sheets print a name or use](jackson-ward-second-street-1925.webp)
+
+*How this was made:* a close crop of the 1925 view, numbered where the 1925 sheets print a name
+or use beside a building that is drawn here (`tools/sanborn/jw/named1925.csv`). Numbers run
+from the top of the picture down. South of Clay Street the buildings come from the older
+volume 1 tracing, which names none. See [The tracing](#the-tracing).
+
+| # | As the sheet prints it | Stories (as printed) | Sheet |
+|---|---|---|---|
+| 1 | Corby Baking Company, Plant C | 3 | 306 |
+| 2 | St. Joseph's R.C. Church (Colored) | not printed by the label | 308 |
+| 3 | Rectory | 2 | 308 |
+| 4 | Peoples Bible Institute (Colored) | not printed by the label | 307 |
+| 5 | Sharon Baptist Church (Colored) | not printed by the label | 306 |
+| 6 | Undertaker | 2 | 307 |
+| 7 | Leigh St. Holiness Church (Colored) | 1-1/2 | 306 |
+| 8 | Booker Washington School (Colored); fireproof part "built in 1923" | 3 | 306 |
+| 9 | True Reformers Hall: Colored hall & meeting rooms 2nd & 3rd, printing 1st | 3 | 308 |
+| 10 | Bank | not printed by the label | 308 |
+| 11 | Hippodrome Theatre (Colored) | 1-2 | 308 |
+| 12 | Otira Apartments | 3 | 308 |
+| 13 | Undertaking parlors 1st, meeting halls 2nd & 3rd | 3 | 308 |
+| 14 | 3rd St. Bethel A.M.E. Church (Colored) | not printed by the label | 308 |
+| 15 | Moving Pictures (Colored); lobby | 1-1/2 | 308 |
+| 16 | Miller Hotel (Colored): stores, hotel entrance, dining room | 3 | 308 |
+| 17 | Y.M.C.A. (Colored) | 2 | 308 |
+| 18 | Offices | not printed by the label | 308 |
+| 19 | Bank | not printed by the label | 308 |
+| 20 | Bank | 3-4 | 308 |
+| 21 | Miller & Rhoads Private Garage | not printed by the label | 309 |
+| 22 | Leigh St. Memorial M.E. Church | not printed by the label | 309 |
+
+Names are as printed; "(Colored)" is the sheet's own word. The bank at 214 East Clay (20) is
+the building of the Mechanics Savings Bank, built 1909–10, which failed in 1922; the Southern
+Aid Society bought it in 1930 [[NPS, 212 East Clay Street](#sources)]. The National Park
+Service shows True Reformers Hall (9) as a three-story building on Second Street
+[[NPS, Black Wall Street](#sources)]. The sheet does not name the other two banks (10, 19).
+
 ## 1952: the last survey before the road
 
 ![Jackson Ward in 1952, from Belvidere Street to 7th Street and from Broad Street to the railroad, seen from the south: row houses, churches and shops fill the blocks, and no highway crosses them](jackson-ward-state-1952.webp)
 
 *How this was made:* buildings north of Leigh Street from the 1952 Sanborn volume 3, south of
-it from the 1924–25 and 1950–52 volume 1 tracings, and buildings standing today that the city
-dates to 1952 or before, on ground rebuilt as it was before the trench (an estimate, about
-±1.5 m in its middle). See [The ground before the trench](#the-ground-before-the-trench) and
-[The tracing](#the-tracing). Rough draft.
+it from the 1924–25 and 1950–52 volume 1 tracings (Second Street from Broad to Clay traced
+again for this story), and buildings standing today that the city dates to 1952 or before, on
+ground rebuilt as it was before the trench (an estimate, about ±1.5 m in its middle). Streets
+that ran where the trench is now are read off the sheets. See
+[The ground before the trench](#the-ground-before-the-trench) and [The tracing](#the-tracing).
+Working draft.
+
+![The same frame about 1925 (above) and in 1952 (below): most blocks change little, and in 1952 Gilpin Court's long brick buildings stand where Apostle Town's frame houses were](jackson-ward-pair-1925-1952.webp)
 
 The 1952 volume is a full reprint, with "Copyright 1952" on every sheet and a new index dated
 September 1951. It draws what was built after 1925, such as Gilpin Court and the Armstrong High
 School annex of 1938 [[trace notes](#the-tracing)]. On the 15 sheets traced for this story
-there are 3,157 building outlines. The sheets name 122 of them: churches, schools, lodges,
+there are 2,875 building outlines of 12 m² or more. The tracing records 122 names and uses
+printed beside them: churches, schools, lodges,
 theaters, a Y.M.C.A., ice plants, laundries and warehouses. They print "(Colored)" beside the
 names of Black institutions, and this page keeps the sheet's own word where it quotes a name.
 
@@ -73,23 +126,61 @@ houses in the north blocks, and the brick churches and halls along Leigh and Sec
 
 ## Second Street
 
-![Second Street from Clay Street to just past Leigh Street in 1952, with 29 buildings numbered where the sheets name them: the Hippodrome, the Elks' Capitol City Lodge, the Leigh Street Y.M.C.A., Third Street Bethel A.M.E. and others](jackson-ward-second-street-1952.webp)
+![Second Street in 1952, from Broad Street at the near edge to past Leigh Street, with 31 buildings numbered where the sheets print a name or use: the Hippodrome, the Leigh Street Y.M.C.A., Third Street Bethel A.M.E., the Southern Aid Society's office building and others](jackson-ward-second-street-1952.webp)
 
-*How this was made:* a close crop of the 1952 view, numbered from the trace's list of named
-buildings. Names are as the sheets print them. Rough draft; south of Clay Street is not yet
-drawn in full. See [The tracing](#the-tracing).
+*How this was made:* a close crop of the 1952 view, numbered where the 1952 sheets print a name
+or use beside a building that is drawn here (`tools/sanborn/jw/named.csv`). Numbers run from
+the top of the picture down; a marker stands over the top of its roof. South of Clay Street
+the buildings come from volume 1 sheets 2 and 3, fitted again and traced for this story, which
+were not read for names. See [The tracing](#the-tracing). Working draft.
 
-> **Slot: Second Street from Broad to Clay** (volume 1 sheets 2–3, being re-traced). When it is
-> done, the crop above extends to Broad Street and the list below gains its buildings.
+| # | As the sheet prints it | Stories (as printed) | Sheet |
+|---|---|---|---|
+| 1 | Furniture storage warehouse; loading shed; furniture repair | not printed by the label | 306 |
+| 2 | St. Joseph's R.C. Church (Colored) | not printed by the label | 308 |
+| 3 | Sharon Baptist Church (Colored) | 1-2 | 306 |
+| 4 | Undertaker | 2 | 307 |
+| 5 | Auto repair | not printed by the label | 306 |
+| 6 | Storage house (vacant) | 4 | 308 |
+| 7 | Colored hall & meeting rooms 2nd & 3rd; club; store | 3 | 308 |
+| 8 | Filling station; auto repair | not printed by the label | 308 |
+| 9 | Apartments | 2 | 308 |
+| 10 | Store; hall 2nd | 2 | 308 |
+| 11 | Restaurant; hall 2nd (Colored) | 3 | 307 |
+| 12 | Stores; upholstering & repair; tire repair | not printed by the label | 306 |
+| 13 | Hippodrome Theatre (Colored), movies | 1-2 | 308 |
+| 14 | Leigh St. Y.M.C.A. (Colored) | 3 | 308 |
+| 15 | Auto & casket storage | 2 | 308 |
+| 16 | Storage | not printed by the label | 308 |
+| 17 | Third St. Bethel A.M.E. Church (Colored) | not printed by the label | 308 |
+| 18 | Moving pictures (Colored); restaurant; lobby; store | 1-2 | 308 |
+| 19 | Restaurant | 2 | 308 |
+| 20 | Rest. (restaurant); "Fl. abv. 1st" | 3 | 308 |
+| 21 | Stores; hotel entrance; dining room | 3 | 308 |
+| 22 | Restaurant; store | not printed by the label | 308 |
+| 23 | Restaurant; hotel | 2 | 308 |
+| 24 | Offices | 2 | 308 |
+| 25 | Stores; office; Southern Aid Society of Va. (Colored), office building; stores; nos. 212-216 E. Clay | 4 | 308 |
+| 26 | Apartments | 2 | 308 |
+| 27 | Offices | 2 | 308 |
+| 28 | Miller & Rhoads furniture warehouse; garage 1st, upholstering 2nd, furniture repair 3rd ("fireproof construction built 1936"; "built 1941") | not printed by the label | 309 |
+| 29 | Elks Home, Williams Lodge (Colored) | not printed by the label | 309 |
+| 30 | Miller & Rhoads furniture storage | 2 | 309 |
+| 31 | Leigh St. M.E. Church | not printed by the label | 309 |
+
+![Second Street about 1925 (above) and in 1952 (below), the same blocks](jackson-ward-pair-second-street.webp)
 
 Second Street, "the Deuce," was the ward's main commercial street. On sheet 308 of the 1952
 volume, between Clay and Jackson Streets, the sheet names the Hippodrome Theatre, a second
 moving-picture house, the Elks' Capitol City Lodge, the Leigh Street Y.M.C.A., Third Street
 Bethel A.M.E. and St. Joseph's churches, a hotel entrance with its dining room, restaurants,
 stores, offices, and a "colored hall & meeting rooms" [[trace notes](#the-tracing)]. The
-Hippodrome closed in 1967 [[Community Plan 2026](#sources)]. A label for the "Southern Aid
-Society of Va." is printed near Nos. 212–216, but which building it names has not been
-checked.
+Hippodrome closed in 1967 [[Community Plan 2026](#sources)]. The label "Southern Aid Society of
+Va." on sheet 308 is printed under the frontage numbers 212, 214 and 216 of one 4-story office
+building on East Clay Street (25). The National Park Service gives 212 East Clay as the
+Society's headquarters from 1930, when it bought the former Mechanics Savings Bank building and
+added two wings [[NPS, 212 East Clay Street](#sources)]. The building stands today, so it is
+drawn from today's map.
 
 ## How the route was chosen
 
@@ -123,8 +214,15 @@ federal money [[Richmond Family Magazine 2022](#sources)]. Tolls ended in 1992
 
 ![The 1952 view with every building quiet except those whose center falls in the highway's footprint: darker for today's paved roadway and ramps, lighter for the corridor of 15 m either side](jackson-ward-count-1952.webp)
 
-*How this was made:* the 1952 view, with buildings picked out by the polygons in
-[The count's polygon and rule](#the-counts-polygon-and-rule). Rough draft.
+*How this was made:* the 1952 view, with exactly the buildings the count counts picked out
+(the count's own list of them), by the polygons in
+[The count's polygon and rule](#the-counts-polygon-and-rule). Working draft.
+
+![A plan of the ward, north near the top: the highway's paved footprint and its corridor in red over the 1952 outlines in their printed colors, over today's street plan and today's buildings in gray, with the round Coliseum at lower right](jackson-ward-overlay.webp)
+
+*How this was made:* drawn in code from the same files as the maps: the 1952 outlines, today's
+OpenStreetMap buildings and streets, and the count's two polygons. Today's buildings show where
+the blocks were rebuilt after the road, among them the Coliseum on cleared blocks south of it.
 
 How much the road destroyed has been counted many ways, and the counts disagree. They cover
 different areas (the ward, the ward and Navy Hill, or the whole 34.7-mile road), and they count
@@ -147,39 +245,48 @@ does not choose among them.
 | thousands of Black residents displaced; hundreds of homes destroyed | 1955–58 | [Community Plan 2026](#sources), timeline |
 
 This story adds one more number, of a different kind: **buildings on the 1952 Sanborn sheets
-within this polygon**. There are **238** in the polygon of today's paved roadway and
-ramps, and **489** in the corridor of that pavement plus 15 m on each side. These are
-outlines on a map. Sheds and porches larger than 6 m² count, and an apartment house counts once.
-The number does not count homes, families or people, and it is approximate: the polygon is
+within this polygon**. There are **216** in the polygon of today's paved roadway and
+ramps, and **447** in the corridor of that pavement plus 15 m on each side. These are
+outlines on a map. Outlines under 12 m² (privies and the smallest sheds) are not counted, and
+an apartment house counts once. The number does not count homes, families or people, and it is approximate: the polygon is
 today's footprint, standing in for the 1958 right-of-way, which we have not seen. How it was
 made is in [The count's polygon and rule](#the-counts-polygon-and-rule).
 
 ## The lost streets
 
-![1952: the seven stretches of street the trench took, drawn in red at grade across the corridor](jackson-ward-streets-1952.webp)
+![1952: the 31 stretches of street and alley the trench took, drawn in red across the corridor, with the corridor outlined](jackson-ward-streets-1952.webp)
 
 ![Today: the same corridor, with the bridges that now carry the surviving streets over the trench in red](jackson-ward-streets-2026.webp)
 
-*How this was made:* each stretch joins a street's two surviving ends straight across the
-trench, as the 1934 USGS survey shows them running through. See
-[The ground before the trench](#the-ground-before-the-trench). Rough draft.
+*How this was made:* seven stretches join a street's two surviving ends straight across the
+trench, as the 1934 USGS survey shows them running through. The other 24 are read off the 1952
+sheets: each street's center line, placed by the sheet's fit, kept where no street runs today
+and where at least 20 m of it, and at least 40% of that, lies in the corridor. See
+[The ground before the trench](#the-ground-before-the-trench) and [The tracing](#the-tracing).
+Working draft.
 
 Seven streets that ran through at grade now end at the trench or cross it on a bridge:
 Chamberlayne Parkway, St. James, 1st, 2nd, Duval, 5th (now Maggie L. Walker Place) and 7th.
-Published counts of the streets cut run to 31 [[Campbell 2012](#sources), via Wikipedia] and
-34 [[Grant application 2022](#sources)]. Streets that ran wholly inside the corridor are not
-drawn yet.
-
-> **Slot: the 1952 street lines inside the corridor** (from the Sanborn sheets; work in
-> progress). When they are traced, the pictures above show every lost street, and this
-> paragraph gives the number drawn.
+Inside the corridor the 1952 sheets print 24 more stretches of 22 streets and alleys, 2,275 m in
+all, where no street runs today: among them Moore, Gilmer, Munford, Shooks, Calhoun and West
+Baker Streets, St. Paul and St. John Streets, North 3rd, 4th, 5th and 6th Streets, East and
+West Duval Streets, a stretch of Brook Road, and Cave, Paradise, Cottage and Gilbert Alleys
+[[LoC, Sanborn 1952 vol. 3](#sources)]. The pictures draw 31 stretches in all. Published counts
+of the streets cut run to 31 [[Campbell 2012](#sources), via Wikipedia] and 34
+[[Grant application 2022](#sources)]; they count whole streets over other areas, so they and our
+31 stretches measure different things.
 
 ## The island
 
-> **Slot: the island.** One image of only what was removed: the 1952 buildings, streets and
-> ground inside the highway's boundary, drawn alone, with the boundary as its edge
-> (`jackson-ward-island.webp`; work in progress). Its note will give the same two counts as
-> [The count](#the-count), read from the same file.
+![Only what the highway took: the 1952 blocks inside the corridor, buildings, streets and ground, drawn alone as a slab floating on blank paper, from the Belvidere ramps at upper left to about 8th Street at lower right](jackson-ward-island.webp)
+
+*How this was made:* the 1952 view cut to the corridor polygon (today's roadway and ramps plus
+15 m each side) and drawn alone, with the ground's cut edge as the slab's sides. It holds the
+447 buildings the count counts in the corridor, 216 of them in the paved
+polygon, with the streets and the ground as rebuilt before the trench. The edge is today's
+footprint, standing in for the 1958 right-of-way. At its east end the island stops where the
+traced 1952 sheets stop, at about 8th Street: the ramp loop beyond was not traced, so it is left
+off. Working draft.
 
 ## 1959, about a year after
 
@@ -223,9 +330,15 @@ filed plans for a first building of 56 units, aiming to start it in early 2027
 Informed Residents, are named in the city's community plan [[Community Plan 2026](#sources)].
 This page takes no position on the plan.
 
-> **Slot: Gilpin Court in 1925, 1952 and today**, from the 1925 tracing (work in progress).
-> Sheet 318, which draws Gilpin Court in 1952, rests on one control point; it is to be checked
-> against 1950s aerial photographs before its buildings are counted.
+![Apostle Town about 1925 (top): rows of frame houses on narrow lots; Gilpin Court in 1952 (middle): long brick buildings on a new plan; and today (bottom)](jackson-ward-apostle-town.webp)
+
+*How this was made:* the same close crop of the 1925, 1952 and today views. In 1925, where
+Apostle Town's streets differ from today's, they are drawn as sheet 318 prints them: Cabell and Tyler Streets, and Hickory Street on its old
+line, read off the sheet and drawn until 1941; Gilpin Court's own streets and paths are drawn
+from 1941 [[LoC, Sanborn 1925 vol. 3](#sources); [LVA 2025](#sources)]. The 1925 houses on
+the site that the 1952 sheets no longer show (119 of them) are taken to have gone in 1941, when
+the clearance began; whether any went earlier is not known. Sheet 318 rests on one control
+point (8.5 m off), so the whole block may sit several meters from where it stood. Working draft.
 
 ## Today, and the cap
 
@@ -291,7 +404,9 @@ ground at its edge: each point inside takes the average of its neighbors. The se
 that crossed at grade are held straight between their surviving ends; that changes the result
 by about 4 cm typically and 50 cm at most, because the ground there is nearly level. East of
 3rd Street, where the ramps stand on the edge of the Shockoe Valley, the lidar is kept and only
-banks narrower than 50 m are taken down.
+banks narrower than 50 m are taken down. As this ground is drawn, the most put back in the
+trench is 7.8 m, between Brook Road and Chamberlayne Parkway, and the most taken away is 10.1 m,
+where a ramp's bank stands inside the trench's outline at the junction.
 
 ![Four profiles: St. Peter, North 1st and North 5th Streets across the trench, and the trench's center line with the 1934 survey's check points](jackson-ward-profiles.webp)
 
@@ -351,8 +466,30 @@ shifted to fit the Gilpin Court buildings standing today (8.5 m).
 
 Colors on the sheets give each building's material: pink for brick, yellow for frame. The 1952
 printing leaves many frame houses uncolored; those are taken to be frame, an inference checked
-on one sheet against the 1925 printing. Stories are printed on every building but were read
-only for the named ones; the rest are drawn two stories high.
+on one sheet against the 1925 printing. Stories and uses were read off the sheets for the
+buildings counted in the corridor and those near Second Street, 479 in all (stories for 164 of
+them); a building is drawn 3.6 m a story where its stories were read, and two stories high
+where they were not. Of the 447 counted in the corridor, the letters read on 403 mark
+270 dwellings (houses, duplexes and apartment houses), 54 private garages, 29 flats, 28 stores,
+6 churches and a school. These are buildings, and a dwelling may hold one household or several.
+
+Second Street from Broad to Clay is on volume 1 of the 1950–52 printing. Its sheets 2 and 3 were
+fitted again to street corners read off them (residuals 0.5–2.9 m) and traced, adding 198
+outlines the earlier tracing had missed there.
+
+Busy outlines were simplified before drawing: corners closer than 1 m to a straight run were
+dropped and near-rectangles squared, with no wall moved more than 1 m. The counts are made from
+the outlines as traced.
+
+**1925.** The 15 sheets of the 1925 volume 3 were matched to their 1952 reprints feature by
+feature (1,300 to 3,500 matches a sheet; the median mismatch is about 0.1 m on the ground) and
+placed by the 1952 fits, so their positions carry the same few meters of error. In 1925 every
+building is colored, and the tracer reads the colored fills [[LoC, Sanborn 1925
+vol. 3](#sources)]. That tracer splits more porches and frame fronts into outlines of their own
+than the 1952 one did, so the two tracings read the sheets differently: the 1925 tracing finds
+270 outlines in the paved polygon and 565 in the corridor, against 216 and 447
+in 1952. The difference is not a count of buildings lost between 1925 and 1952, and this page
+does not use it as one.
 
 ### The count's polygon and rule
 
@@ -362,13 +499,18 @@ The polygon is built from today's OpenStreetMap ways of the Turnpike and its ram
 to its lanes at 3.65 m plus 3 m shoulders, with the gaps between carriageways closed. It runs
 from the Belvidere Street ramps to the line of 8th Street, and leaves out I-64 east of the
 junction, built later. The corridor adds 15 m on each side for the cut slopes and walls. A
-building counts when a point inside its outline falls in the polygon. The counts are
-238 and 489, from one file, `tools/sanborn/jw/counts.json`.
+building counts when a point inside its outline falls in the polygon. Outlines under 12 m² are
+not counted: the map draws nothing that small (12 m² is the region's smallest building), and
+counting them would give a number the pictures cannot show. They are privies and sheds under
+about 3.5 m on a side. One outline on sheet 310, the box of the sheet's correction table, is not
+a building and is left out. The counts are 216 and 447, from one file,
+`tools/sanborn/jw/counts.json`; the count picture, the plan and the island draw the same
+buildings, from the list the count writes.
 
 What the number cannot say: the 1958 right-of-way may differ from today's footprint, the
 ramps of 1958 were not today's ramps, and a building torn down between the survey and 1955 may
 still be on the sheet. The tracer splits some row houses at every party wall and merges others,
-counts sheds over 6 m², and misses some small buildings.
+and misses some small buildings.
 
 ### Measured, inferred, unknown
 
@@ -378,19 +520,23 @@ counts sheds over 6 m², and misses some small buildings.
 | **Measured** | Each 1952 outline, its position and printed color; the 122 names | Read off the sheets; placed to within a few meters (above) |
 | **Measured** | The 1934 survey's streets and contours | USGS, 10-foot contours; placed by its own projection and a shift of about 15 m |
 | **Inferred** | The ground inside the trench before 1955 | The membrane estimate: about ±1.5 m mid-trench, ±3 m at its ends |
+| **Measured** | 24 stretches of street inside the corridor; Apostle Town's 1925 streets | Read off the 1952 and 1925 sheets and placed by their fits |
+| **Measured** | Uses and stories of 479 buildings | Read off the 1952 sheets, as printed |
 | **Inferred** | The seven lost street stretches | Straight joins between surviving ends, which the 1934 sheet shows running through |
-| **Inferred** | Uncolored outlines are frame buildings; heights of unnamed buildings | Checked on one sheet; two stories assumed |
+| **Inferred** | When Apostle Town's houses went | 1941, when the clearance began, for every one the 1952 sheets no longer show |
+| **Inferred** | Uncolored outlines are frame buildings; heights where stories were not read | Checked on one sheet; two stories assumed |
 | **Inferred** | Which buildings the road took | A point inside each outline, tested against today's footprint |
 | **Unknown** | The 1958 right-of-way | Library of Virginia, Accession 40941, not yet seen |
 | **Unknown** | What changed between the survey and 1955; when each later loss happened | Not yet dated building by building |
-| **Unknown** | The use of most buildings; streets wholly inside the corridor | Not yet read; in progress |
+| **Unknown** | Uses and stories outside the corridor and Second Street; most stories inside it | Not yet read; needs the full-size scans |
 | **Unknown** | Which routes were studied, 1946–54 | Silver's book and the Authority's papers, not yet seen |
 
 ### Sources and rights
 
 | Source | Used for | Rights |
 |---|---|---|
-| Sanborn Fire Insurance Map, Richmond, 1952, vol. 3, Library of Congress | 1952 buildings | Public domain; credit Library of Congress, Geography and Map Division, Sanborn Maps Collection |
+| Sanborn Fire Insurance Map, Richmond, 1952, vol. 3, and 1950–52, vol. 1, Library of Congress | 1952 buildings and streets | Public domain; credit Library of Congress, Geography and Map Division, Sanborn Maps Collection |
+| Sanborn Fire Insurance Map, Richmond, 1925, vol. 3, Library of Congress | 1925 buildings and Apostle Town's streets | Public domain (published 1925); same credit |
 | USGS Richmond, Va., 1:24,000, surveyed 1933–34 | The check on the rebuilt ground | Public domain (federal work) |
 | USGS 3D Elevation Program lidar | Today's ground | Public domain |
 | OpenStreetMap | Today's streets, buildings and highway | ODbL; © OpenStreetMap contributors |
@@ -423,7 +569,10 @@ Opened for this draft unless marked.
 - **Fact sheet 2023**: City of Richmond, Reconnect Jackson Ward fact sheet. https://rva.gov/sites/default/files/2024-11/RJW-FactSheetv3_12_2023.pdf
 - **Feasibility Study 2022**: OIPI, VDOT and City of Richmond, Reconnect Jackson Ward Feasibility Study, September 2022. https://www.rva.gov/sites/default/files/2024-11/RJW_FS_Report_2022-09-30v5-FINAL.pdf
 - **Grant application 2022**: City of Richmond, Reconnecting Communities Pilot grant application, October 2022. https://www.rva.gov/sites/default/files/2024-11/UPC114874_RJW_GrantApplicationCombined_2022-10-27.pdf
+- **LoC, Sanborn 1925 vol. 3**: Library of Congress, Sanborn Fire Insurance Map from Richmond, Independent Cities, Virginia, 1924–1925, vol. 3, 1925. https://www.loc.gov/item/sanborn09064_008/
 - **LoC, Sanborn 1952 vol. 3**: Library of Congress, Sanborn Fire Insurance Map from Richmond, 1952, vol. 3. https://www.loc.gov/item/sanborn09064_018/
+- **NPS, 212 East Clay Street**: National Park Service, "212 East Clay Street." https://www.nps.gov/places/212-east-clay-street.htm
+- **NPS, Black Wall Street**: National Park Service, "Jackson Ward and its Black Wall Street." https://www.nps.gov/articles/000/jackson-ward-and-its-black-wall-street.htm
 - **LVA 2024**: Renee Savits, Richmond–Petersburg Turnpike Authority records, Accession 40941, *The UncommonWealth*, Library of Virginia, October 9, 2024. https://uncommonwealth.lva.virginia.gov/?p=42248
 - **LVA 2025**: Ashley Craig, "A Brief History of Public Housing in the City of Richmond," *The UncommonWealth*, November 17, 2025. https://uncommonwealth.lva.virginia.gov/blog/2025/11/17/a-brief-history-of-public-housing-in-the-city-of-richmond
 - **LVA Document Bank**: Library of Virginia, "Urban Renewal in Virginia." https://www.lva.virginia.gov/collections/educator-resources/dbva/items/show/300
