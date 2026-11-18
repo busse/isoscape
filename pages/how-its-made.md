@@ -1109,6 +1109,32 @@ Code: `src/history.ts`; the history file is `history/<series>.json`; the tracing
 `tools/sanborn/` (Python: NumPy, SciPy, OpenCV, Shapely), and their output is
 `history/sanborn/`.
 
+## Stages and inspection
+
+Since November 18, 2026, every piece goes through four stages, and it moves on only when Chris
+passes it at a gate. A **rough draft** is a proof-size render. It tests whether the subject,
+the framing and the data can carry a print. A **working draft** is the full composition at print
+size, with its notes written and sourced and its known faults listed. Working drafts are numbered
+d1, d2 and so on. A **final draft** is a release candidate, numbered rc1, rc2. It gets one
+inspection against a fixed checklist, at most one round of fixes, and a recheck of only what
+changed. **Final production** is the stamped print, uploaded, for sale, with its release record
+written.
+
+The inspection looks at the whole sheet at about 1,500 pixels across, roughly how a framed print
+looks from a meter away, and then in tiles of 1,200 pixels at full size. Every fact printed on
+the sheet is checked against the source it cites. Text must be at least 6 pt at the smallest size
+sold. What blocks release is what a person would notice at arm's length, and any fact that is
+wrong or unsourced. Faults seen only up close go on that print's list of accepted faults, so
+they are not reported again. A third round of fixes at any stage needs Chris's say-so.
+
+Each file also carries an asset version, such as 3.1.0. The first number is the edition, and it
+is the only one the title block prints. The second is a correction made in place before anyone
+ordered that edition. The third is the same art stamped again. Drafts are named for the
+edition they lead to, such as 4.0.0-rc1. Once an edition has an order, it is never changed. The
+store's order counts (counts only) decide that, and a count that is not known counts as sold.
+Where everything stands is on the [production board](board.md). This section was drafted with
+Claude.
+
 ## Plates and the title block
 
 Every print and canvas carries a small title block in its bottom-right corner, like the corner

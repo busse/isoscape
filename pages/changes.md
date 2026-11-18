@@ -11,6 +11,19 @@ tools and the research get better, a published map is sometimes corrected and re
 page lists those changes, newest first. A print ordered after a change is made from the new
 version; the version is part of each print file's name (`-v2`, `-v3`).
 
+## How versions work from here
+
+*November 18, 2026.* From today, every map and print goes through the same stages before it is
+sold. A rough draft tests whether a subject works. A working draft is composed at full size, with
+its notes written and sourced. A final draft is a release candidate, checked once against a fixed
+list. Final production is the print for sale. A print's title block now gets a version number
+only at final production, and that number names an edition someone could own. Drafts are never
+sold and never listed here. If a print for sale has a fault and nobody has ordered it yet, it may
+be corrected in place without a new version number. This page will still say what changed and
+when. Once anyone has ordered an edition, it stays as it is, and any change becomes a new edition.
+Numbers already printed stay as they are. The [production board](board.md) shows where each piece
+stands. This entry was drafted with Claude.
+
 ## November 17, 2026 (Broad Street Station, four more)
 
 **Broad Street Station, 1943: four more of the set's prints redrawn as version 3.** Seaboard Junction

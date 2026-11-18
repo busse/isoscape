@@ -23,10 +23,20 @@ Run where the data and the store live (the Mac):
 With no designs, records every design in the store's catalog that has no record of its current
 version yet. A redrawn design (catalog "version" N) gets a new v<N>.json; older ones are kept.
 check.py verifies records, and with --rebuild remakes each scene from its record.
+
+Asset versions (README "Stages and the board"): a record stores the design's asset version, the
+store catalog's "asset_version" (default N.0.0, N its "version"). A record whose asset version
+raises MINOR within the same edition (3.0.0 -> 3.1.0: corrected art replacing an unsold edition's
+files in place) is kind "revision", written as v3.1.json beside v3.json. It keeps the superseded
+record's output hashes ("supersedes"), and is refused unless the board (catalog/pipeline.json)
+says the design has 0 orders, counted within the last two days, and, when the design is on sale,
+pages/changes.md has a line naming its plate and the revision (BSS·07 ... 3.1).
 """
 import argparse, datetime, glob, hashlib, json, os, re, shutil, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import board as BOARD  # noqa: E402
 ISO = os.path.normpath(os.path.join(HERE, '..', '..'))
 REL = os.path.join(ISO, 'releases')
 SNAP = os.path.join(ISO, 'data', '_releases')
@@ -197,11 +207,13 @@ def from_stamp(store, key, d):
     the art, its scenes and its data are the previous version's; the recipe is the stamp."""
     log_p = os.path.join(store, 'pipeline', 'state', 'stamps.json')
     log = json.load(open(log_p)) if os.path.exists(log_p) else {}
-    mine = {f: v for f, v in log.items() if v['design'] == key and v['version'] == d.get('version', 1)}
+    asset = asset_of(d)
+    mine = {f: v for f, v in log.items() if v['design'] == key and v['version'] == d.get('version', 1)
+            and v.get('asset_version', f"{v['version']}.0.0") == asset}
     if not mine: return None
     if any(v.get('redraw') for v in mine.values()): return from_redraw(store, key, d, mine)
     base_v = d['version'] - 1
-    base_p = os.path.join(REL, key, f'v{base_v}.json')
+    base_p = os.path.join(REL, key, d.get('_previous') or f'v{base_v}.json')   # a re-stamp (PATCH): this edition's record
     base = json.load(open(base_p))
     scenes = [dict(s, commit=s.get('commit') or base['isoscape']['commit']) for s in base['scenes']]
     tools = next(iter(mine.values()))['tools']
@@ -241,7 +253,7 @@ def from_redraw(store, key, d, mine):
         run.append(f'cp <set print>/{os.path.basename(base_print["base"])} <store>/{base_dir}/' + (f' && cp <set print>/canvas/<the {sizes} files> <store>/{base_dir}/canvas/' if canvas else ''))
     run.append(f'python3 tools/release/stamp.py <store> {key} --version {d["version"]} --base {base_dir}')
     recipe = {'tool': 'tools/release/stamp.py', 'run': run, 'redraw': True, 'base_kind': 'compose' if got else 'set',
-              'previous_record': rel(os.path.join(REL, key, f"v{d['version'] - 1}.json")),
+              'previous_record': rel(os.path.join(REL, key, d.get('_previous') or f"v{d['version'] - 1}.json")),
               'pinned': made.get('pinned') or 'scenes are the set\'s scene SVGs below, by SHA-256',
               'block': base_print['info'],
               'files': {f: {'base': v['base'], 'base_sha256': v['base_sha256'], 'at': v['at']} for f, v in sorted(mine.items())},
@@ -296,15 +308,57 @@ def record(store, key, d, files, shop, mocks, note=None, merged=None):
     prods = products_of(key, shop, merged)
     mk = {f: [m['url'] for m in (mocks.get(f'{key}|{f}') or {}).get('mockups', [])] for f in d.get('formats', [])}
     return {
-        'design': key, 'title': d['title'], 'version': d.get('version', 1),
+        'design': key, 'title': d['title'], 'version': d.get('version', 1), 'asset_version': asset_of(d),
         'version_note': d.get('version_note'), 'recorded': datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds'),
         'provenance': 'recorded at release' if note == 'release' else 'reconstructed: recorded after release; check.py --rebuild confirms the scenes reproduce',
         'isoscape': commit(), 'kind': kind, 'recipe': recipe, 'scenes': scenes,
         'inputs': inputs, 'data': data,
         'outputs': dict({'print': out(pfile)}, **({'prints': [out(p) for p in others]} if others else {}), canvas=[out(c) for c in canvas]),
-        'store': {'catalog': {k: v for k, v in d.items() if k not in ('blurb', 'blurb_html')}, 'products': prods, 'mockups': mk},
+        'store': {'catalog': {k: v for k, v in d.items() if k not in ('blurb', 'blurb_html') and not k.startswith('_')}, 'products': prods, 'mockups': mk},
         'explorer': {'view': d.get('explore')},
     }
+
+
+# ---- asset versions and revisions ----------------------------------------------------------------
+
+def asset_of(d):
+    """A catalog entry's asset version: its "asset_version", else <version>.0.0."""
+    return d.get('asset_version') or f"{d.get('version', 1)}.0.0"
+
+
+def record_name(asset):
+    """v3.json for 3.0.0; v3.1.json for 3.1.0; v3.1.1.json for 3.1.1."""
+    return BOARD.file_suffix(asset) + '.json'
+
+
+def is_revision(asset, prev):
+    """True when `asset` raises MINOR within the edition of the previous record (asset `prev`)."""
+    if not prev: return False
+    a, b = BOARD.parse(asset), BOARD.parse(prev)
+    return a[0] == b[0] and a[1] > b[1]
+
+
+def revision_gate(key, asset, items=None, changes=None, today=None):
+    """Why a revision may not be recorded (None if it may): the edition must be unsold, as the
+    board says from the store's counts, and an on-sale revision must be on the Changes page."""
+    items = items if items is not None else BOARD.load()['items']
+    e = items.get(key)
+    if e is None: return f'{key} is not on the board (catalog/pipeline.json)'
+    M, m = BOARD.parse(asset)[:2]
+    if e.get('orders') != 0:
+        return (f'{key}: the board says orders = {e.get("orders")!r}. A revision ({asset}) replaces an edition in place and is '
+                f'only for an edition nobody has ordered. Run `python3 orders.py counts` in the store (on the Mac), then '
+                f'`python3 tools/release/board.py orders <store-dir>`; if it has any order, make edition {M + 1} instead.')
+    day = e.get('orders_counted')
+    today = today or datetime.date.today()
+    if not day or (today - datetime.date.fromisoformat(day)).days > 2:
+        return f'{key}: orders were counted {day or "never"}; count them again (orders.py counts, board.py orders) before replacing files'
+    if e.get('on_sale'):
+        plate = (e.get('plate') or '').replace('-', '·')
+        text = changes if changes is not None else open(os.path.join(ISO, 'pages', 'changes.md')).read()
+        if not any(plate in line and f'{M}.{m}' in line for line in text.splitlines()):
+            return f'{key} is on sale: add a dated line to pages/changes.md naming {plate} and revision {M}.{m} (what was corrected), then record'
+    return None
 
 
 def main():
@@ -325,12 +379,29 @@ def main():
     index = json.load(open(index_p)) if os.path.exists(index_p) else {}
     for k in keys:
         d = cat[k]; v = d.get('version', 1)
-        p = os.path.join(REL, k, f'v{v}.json')
+        asset = asset_of(d)
+        if not BOARD.parse(asset) or BOARD.parse(asset)[3]: raise SystemExit(f'{k}: asset version {asset!r}: a release is MAJOR.MINOR.PATCH, never a draft')
+        if BOARD.parse(asset)[0] != v: raise SystemExit(f'{k}: asset version {asset} is not of edition {v}')
+        p = os.path.join(REL, k, record_name(asset))
         if os.path.exists(p) and not a.force: continue
+        prev = index.get(k)
+        prev_asset = prev and (prev.get('asset_version') or f"{prev['current']}.0.0")
+        revision = prev_asset != asset and is_revision(asset, prev_asset)
+        if revision:
+            why = revision_gate(k, asset)
+            if why: raise SystemExit('refusing a revision: ' + why)
+        if prev and prev_asset != asset and BOARD.parse(prev_asset)[0] == v:   # a revision, or a re-stamp (PATCH), of this edition
+            d = dict(d, _previous=prev.get('record') or f"v{prev['current']}.json")
         r = record(a.store, k, d, files, shop, mocks, 'release' if a.release else None, merged)
+        if revision:
+            old = json.load(open(os.path.join(REL, k, d['_previous'])))
+            r['recipe']['made_as'] = r['kind']; r['kind'] = 'revision'
+            r['supersedes'] = {'record': d['_previous'], 'asset_version': old.get('asset_version') or f"{old['version']}.0.0",
+                               'outputs': [{'file': o['file'], 'sha256': o.get('sha256')} for o in [old['outputs']['print']] + old['outputs'].get('prints', []) + old['outputs']['canvas']]}
         os.makedirs(os.path.dirname(p), exist_ok=True)
         json.dump(r, open(p, 'w'), indent=1, ensure_ascii=False)
         index[k] = {'title': d['title'], 'current': v, 'kind': r['kind'], 'records': sorted(os.listdir(os.path.dirname(p)))}
+        if asset != f'{v}.0.0': index[k].update(asset_version=asset, record=os.path.basename(p))
         print('recorded', k, f'v{v}', r['kind'], len(r['scenes']), 'scenes', len(r['data']), 'data dirs', flush=True)
     json.dump(dict(sorted(index.items())), open(index_p, 'w'), indent=1, ensure_ascii=False)
 

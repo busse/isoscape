@@ -706,6 +706,220 @@ the pictures differ for that reason, not the code. Builds are deterministic, so 
 commit and data give the same SVG. The check needs Python 3 with Pillow and numpy, and
 `rsvg-convert`. Its comparison has unit tests: `cd tools/check && python3 -m unittest`.
 
+## Stages and the board
+
+Every piece of work, from a first look at a subject to a print for sale, is at one stage and
+moves on only through that stage's gate. The board, `catalog/pipeline.json`, says where each
+piece is, what is on sale, and what it waits on. This scheme was agreed with Chris on
+November 18, 2026, and applies from then on. Version numbers printed before that date stay as
+they are.
+
+### Stages of image work
+
+Image work is prints, set boxes, set maps, set menus and cutaways.
+
+| Stage | What it is | Number | Gate to the next stage |
+|---|---|---|---|
+| research (optional) | A brief on whether the subject can be drawn honestly, with the sources found and opened. No image. | none | Chris says draw it. |
+| rough draft | A proof-size render to test the subject, the framing, and whether the data can carry it. No notes are needed, and there is no stamp. | none | Chris says it is worth pursuing. |
+| working draft | The full composition at print size. Notes are written and sourced, and known faults are listed on the board. Iterate freely. | d1, d2, … | Chris approves the look: subject, framing and notes. |
+| final draft | A release candidate. Facts are checked against sources that were opened. It gets one inspection against the checklist below, at most one fix round, and a targeted recheck of what changed. | rc1, rc2, … | Chris approves release. |
+| final production | Stamped, uploaded and live, with its release record written and checked. | version 1, 2, … | None. Later changes are planned editions. |
+
+A plate version, the number in the printed title block and in the store, is given only at
+final production. Drafts never appear in the store, on the Changes pages, or in a title block.
+A release candidate is stamped for inspection with the version it will have if released
+(`stamp.py --asset 3.0.0-rc1 --out <dir>`). The block prints only `3`, and the file never goes
+into the store.
+
+### The acceptance bar at each stage
+
+- **Rough draft:** the subject reads at proof size, the data covers the frame (no holes, no
+  missing heights where they matter), and the subject sits clear of the edges.
+- **Working draft:** the composition is at print size, every fact in the notes has a source,
+  and every known fault is listed on the board. Faults are allowed if they are listed.
+- **Final draft:** nothing a person would notice at arm's length; every fact on the print
+  sourced; text legible; the plate block correct. Faults seen only up close go on the design's
+  accepted-faults list on the board, with their pixel boxes, so later inspections do not report
+  them again. If they matter, they are fixed in a planned edition.
+- **Final production:** `record.py --release` has written the record, `check.py --rebuild`
+  passes, the store's files match the record, and the product is live.
+
+### The final-draft inspection
+
+A final draft gets one inspection. Hand the inspector this list as it stands, with the design
+key, its asset version (for example `3.0.0-rc1`), the commit, the print file's path, and its
+board entry.
+
+1. Open the print file at its largest size sold. First look at the whole sheet scaled to your
+   screen, about 1,500 px across. That is arm's length: a framed print seen from about a
+   meter (3 ft). Then go over it in tiles of about 1,200 px at 100%.
+2. Open the sources. For every fact printed on the sheet (note, captions, labels, names, dates,
+   heights, counts), open the source cited for it in the set, cutaway or print spec, and
+   confirm it says that. A fact with no source, or a source that does not say it, is a
+   finding.
+3. At arm's length these count: a building, bridge or line floating, cut through, standing in
+   water, or of the wrong era where it draws the eye; a label or badge that covers a subject or
+   collides with another; text that is cut off, overlapping, misspelled or wrong; a subject
+   named in the title or the note that is missing or unrecognizable; a seam, blank patch or
+   stray mark visible on the whole-sheet view; color or line weight clearly off from the rest of
+   its set.
+4. Text: body text measures at least 6 pt at the smallest size sold. The title block's own
+   small labels are a board-wide item (`all-prints-label-size`): do not report them.
+5. The plate block: plate, version (the MAJOR of the asset version), collection › set › piece,
+   year drawn, location, facing, and kind must match `python3 tools/release/plates.py info
+   <design> --version <MAJOR>`.
+6. Do not report anything in the design's `accepted_faults` on the board, anything in
+   CLAUDE.md "Known limits", anything visible only above 100%, faults already listed in its
+   `planned_edition`, or matters of subject and framing (Chris approved the look at working
+   draft).
+7. Grade each finding:
+   - **A**: seen at arm's length. Blocks release.
+   - **C**: a fact that is wrong or unsourced. Blocks release.
+   - **B**: seen only up close. Goes on the accepted-faults list with its box, unless the one
+     fix round fixes it at no risk.
+8. Report a table with columns for grade, pixel box on the full print file (x0, y0, x1, y1),
+   one line of description, and the crop's file name. Give a verdict: **pass** (no A or C
+   findings) or **fix** (with the A and C findings listed).
+9. After the fix round (rc2), recheck only the boxes and text that changed, not the whole
+   sheet. Record the commit in the board's `last_inspected`.
+
+### Round budget
+
+A round is one pass of changes made in answer to a review or an inspection. The board's
+`rounds` is the number of the current draft or candidate (`d4` is 4, `rc1` is 1).
+
+- A third fix round at any stage needs Chris's say-so. For a working draft (or a rough draft's
+  proofs), that is round 4. Record it in the entry's `budget_note`; `board.py check` fails
+  without one.
+- A final draft has one fix round (rc2). A second fix round (rc3) also needs his say-so, and
+  usually means the piece goes back to working draft.
+
+### After release: planned editions
+
+Changes to published work are batched into planned editions. Each has a stated reason:
+**factual correction**, **wall-visible fault** (seen at arm's length), or **improvement**. The
+board's `planned_edition` holds the reason and the list of fixes queued. Its work then runs
+through the stages again as the next edition's drafts: `4.0.0-d1`, then `4.0.0-rc1`. A piece
+with a known factual error comes off sale until it is fixed (rule of November 16, 2026),
+unless Chris decides otherwise for that piece.
+
+### Asset versions
+
+Inside the pipeline and the explorer, files and builds carry an asset version, `MAJOR.MINOR.PATCH`:
+
+- **MAJOR** is the plate version, the edition. It is the only number the title block prints.
+- **MINOR** is a revision of the art within an edition. It is possible only while the edition
+  has no orders.
+- **PATCH** is a re-stamp or re-export with identical art.
+- **Drafts** are prereleases of the next edition: `-dN` for working drafts and `-rcN` for
+  release candidates.
+
+| Asset version | Meaning | Print file | Record |
+|---|---|---|---|
+| `1.0.0-d2` | second working draft of a new design | not in the store | none |
+| `1.0.0-rc1` | its first release candidate | `--out` only | none |
+| `1.0.0` | released as version 1 | `<design>-v1_<size>.jpg` | `v1.json` |
+| `1.1.0` | corrected in place before anyone ordered it; the block still says 1 | `-v1.1_` | `v1.1.json`, kind `revision` |
+| `1.1.1` | the same art re-stamped or re-exported | `-v1.1.1_` | `v1.1.1.json` |
+| `2.0.0-rc1` | candidate for edition 2 (edition 1 has orders, so it is frozen) | `--out` only | none |
+| `4.0.0-rc1` | candidate for a fourth edition of a design now at 3 | `--out` only | none |
+
+Two cases on the board today: Main Street Station (BSS·07, `3.0.0`) will be corrected as
+`3.1.0` if it has no orders, or as `4.0.0` if it has any. Scott's Addition is `1.0.0-rc1` as
+BSS·16, or would be `3.0.0-rc1` as BSS·03.
+
+`stamp.py --asset 3.1.0` writes `-v3.1` files and logs the asset version. The store catalog's
+`asset_version` (default `<version>.0.0`) tells `record.py` which files to record.
+
+### Frozen once sold: "no orders"
+
+Once any order includes an edition, that edition is frozen, and the next change is a new
+edition. While it has no orders, a live print may be replaced in place by a corrected file
+(a MINOR revision), in the store and on the plate, without a new plate version.
+
+"No orders" comes only from the store:
+
+1. On the Mac, in the store's pipeline, `python3 orders.py counts` reads every order. It needs
+   the Admin API scope `read_orders`, plus `read_all_orders` for orders older than 60 days. It
+   writes `state/orders.json` with counts only: per design key, the number of orders that
+   include any of its products. Cancelled and refunded orders count; test orders do not.
+2. `python3 tools/release/board.py orders <store-dir>` copies those counts onto the board, with
+   the date they were counted (`orders`, `orders_counted`).
+3. Until then, `orders` is `"unknown"`, and unknown counts as sold.
+
+`record.py` refuses a revision unless the board says `orders: 0`, counted within the last two
+days. A revision of a design on sale also needs a one-line, dated entry on `pages/changes.md`
+(and the store's Changes page) that names its plate and the revision, such as "BSS·07 … 3.1",
+and says what was corrected. The record keeps the superseded files' hashes (`supersedes`), and
+`check.py` confirms those files are still there, so nothing is lost.
+
+### Stories
+
+A story package is editorial first: a web story, and perhaps a book. Prints are not the goal.
+Its stages are:
+
+1. **research**: a brief, with every source opened. Gate: Chris says take it to an outline.
+2. **outline**: Gate: Chris approves the outline.
+3. **fact check**: every claim is checked against a source that was opened, and listed.
+4. **outside review**: where the subject calls for it (slavery, redlining, displacement), by
+   people with standing in it: historians, and the communities it is about.
+5. **published**: Gate: Chris approves publication.
+
+### The board
+
+`catalog/pipeline.json` has one entry per design or piece of work. It is keyed by the store's
+design key where there is one, and every plate in `catalog/plates.json` has an entry. Each entry
+holds:
+
+- `title`, `plate`, and `kind` (`print`, `set box`, `set map`, `set menu`, `cutaway`,
+  `story`, `research`, or `batch` for a change across many designs)
+- `stage`, and `status` (`active`, `on hold`, `blocked` or `backlog`)
+- `asset_version`, `published_version` (the latest release record), `live_version` (on sale
+  now, or null), `on_sale`, and `orders`
+- `rounds`, `waiting_on` (`owner`, `agent` or `nothing`), and `decision` (the decision needed,
+  in one line)
+- `accepted_faults` (one-line items, with a `box` of print pixels `[x0, y0, x1, y1]` where
+  known), and `planned_edition` (`reason`, `fixes`)
+- `last_inspected` (a commit), `branch`, `worktree`, and `links`
+- private `notes`, and a `log` of stage changes
+
+Commands:
+
+- `python3 tools/release/board.py check` validates the board. Every plate has an entry, and
+  each entry's plate matches `plates.json`. Published and live versions agree with the latest
+  release record. A draft's asset version is a prerelease of the next edition (or a revision of
+  an unsold one), its `-dN`/`-rcN` agrees with `rounds`, and the round budget holds.
+- `python3 tools/release/board.py show [--md]` prints a plain table grouped by stage, with the
+  "waiting on the owner" list first.
+- `python3 tools/release/board.py set <key> field=value …` edits one entry, and `--new` adds
+  one. Values are JSON where they parse; `field+=value` appends to a list (`accepted_faults+="what
+  @ x0,y0,x1,y1"`); `planned_edition.reason=…` sets a field inside an object.
+- `python3 tools/release/board.py page` writes `pages/board.md`, the explorer's unlisted
+  "Production board" page. It never shows orders, notes, links, branches, worktrees, logs or
+  commits.
+- `python3 tools/release/board.py orders <store-dir>` takes the store's counts (see above).
+
+Tests: `cd tools/release && python3 -m unittest test_board`.
+
+### Moving a piece between stages
+
+Each move is one `board.py set` after the gate is passed, and `check` keeps the fields
+consistent. For example, after Chris approves a working draft:
+
+```sh
+python3 tools/release/board.py set <key> stage="final draft" asset_version=1.0.0-rc1 rounds=1 waiting_on=agent decision=null
+```
+
+At release, after stamping, uploading, `record.py --release` and `check.py --rebuild`:
+
+```sh
+python3 tools/release/board.py set <key> stage="final production" asset_version=1.0.0 published_version=1 live_version=1 on_sale=true rounds=0 waiting_on=nothing orders=0
+```
+
+Then write the Changes entry, run `board.py page`, and commit `releases/`,
+`catalog/pipeline.json` and `pages/` together.
+
 ## Release records
 
 Every design for sale has a record in `releases/<design>/v<N>.json`, so it can always be
@@ -718,7 +932,8 @@ Printful file ID, and the Shopify products, mockups and explorer view. `releases
 lists them.
 
 - `python3 tools/release/record.py <store-dir> [design...] --release`: write the record when a
-  design is published or redrawn (a redrawn design is a new version: see `pages/changes.md`).
+  design is published or redrawn (a redrawn design is a new edition: see `pages/changes.md`; an
+  unsold edition corrected in place is a `revision`, `v3.1.json`: see "Stages and the board").
 - `python3 tools/release/check.py <store-dir> [--rebuild]`: verify every pinned file, and
   rebuild every scene from its commit and frozen data, byte for byte.
 - `python3 tools/release/remake.py <design> [--compose <store-dir>]`: put a design's frozen
