@@ -26,7 +26,7 @@
 <meta name="twitter:description" content="The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.">
 <meta name="twitter:image" content="https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg">
 <meta name="twitter:image:alt" content="Isometric map of Downtown Richmond, from the Capitol to Tobacco Row as it stood in 1925 (The 1924–25 Sanborn map): buildings, streets, water and the lie of the land, seen from above at an angle">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How it's made","description":"The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.","author":{"@type":"Person","name":"Chris Busse","url":"https://busse.github.io/isoscape/p/about.html#contact"},"inLanguage":"en","image":"https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg","url":"https://busse.github.io/isoscape/p/how-its-made.html","mainEntityOfPage":"https://busse.github.io/isoscape/p/how-its-made.html","dateModified":"2026-11-17","isPartOf":{"@type":"WebSite","name":"isoscape","url":"https://busse.github.io/isoscape/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How it's made","description":"The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.","author":{"@type":"Person","name":"Chris Busse","url":"https://busse.github.io/isoscape/p/about.html#contact"},"inLanguage":"en","image":"https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg","url":"https://busse.github.io/isoscape/p/how-its-made.html","mainEntityOfPage":"https://busse.github.io/isoscape/p/how-its-made.html","dateModified":"2026-11-18","isPartOf":{"@type":"WebSite","name":"isoscape","url":"https://busse.github.io/isoscape/"}}</script>
 <style>
 :root {
   --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
@@ -1048,6 +1048,28 @@ series adds many more buildings than really went up in that interval.</li></ul>
 <p>Code: <code>src/history.ts</code>; the history file is <code>history/&lt;series&gt;.json</code>; the tracing tools are in
 <code>tools/sanborn/</code> (Python: NumPy, SciPy, OpenCV, Shapely), and their output is
 <code>history/sanborn/</code>.</p>
+<h2 id="stages-and-inspection">Stages and inspection</h2>
+<p>Since November 18, 2026, every piece goes through four stages, and it moves on only when Chris
+passes it at a gate. A <strong>rough draft</strong> is a proof-size render. It tests whether the subject,
+the framing and the data can carry a print. A <strong>working draft</strong> is the full composition at print
+size, with its notes written and sourced and its known faults listed. Working drafts are numbered
+d1, d2 and so on. A <strong>final draft</strong> is a release candidate, numbered rc1, rc2. It gets one
+inspection against a fixed checklist, at most one round of fixes, and a recheck of only what
+changed. <strong>Final production</strong> is the stamped print, uploaded, for sale, with its release record
+written.</p>
+<p>The inspection looks at the whole sheet at about 1,500 pixels across, roughly how a framed print
+looks from a meter away, and then in tiles of 1,200 pixels at full size. Every fact printed on
+the sheet is checked against the source it cites. Text must be at least 6 pt at the smallest size
+sold. What blocks release is what a person would notice at arm&#39;s length, and any fact that is
+wrong or unsourced. Faults seen only up close go on that print&#39;s list of accepted faults, so
+they are not reported again. A third round of fixes at any stage needs Chris&#39;s say-so.</p>
+<p>Each file also carries an asset version, such as 3.1.0. The first number is the edition, and it
+is the only one the title block prints. The second is a correction made in place before anyone
+ordered that edition. The third is the same art stamped again. Drafts are named for the
+edition they lead to, such as 4.0.0-rc1. Once an edition has an order, it is never changed. The
+store&#39;s order counts (counts only) decide that, and a count that is not known counts as sold.
+Where everything stands is on the <a href="board.html">production board</a>. This section was drafted with
+Claude.</p>
 <h2 id="plates-and-the-title-block">Plates and the title block</h2>
 <p>Every print and canvas carries a small title block in its bottom-right corner, like the corner
 of a drafting sheet: the isoscape cube, the maker, the piece&#39;s place in the catalog (collection,
