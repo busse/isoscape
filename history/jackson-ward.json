@@ -2007,28 +2007,28 @@
    }
   },
   "island-paved": {
-   "note": "The island: only what the highway took, inside today's paved roadway and ramps, drawn alone on blank paper (the 1952 buildings the count counts in the paved polygon, the streets and the ground as rebuilt before the trench), the ground cut at the polygon's edge and drawn as a floating slab. The edge is today's footprint, a stand-in for the 1958 right-of-way (Library of Virginia, Acc. 40941, not yet seen).",
+   "note": "The island: only what the highway took, inside today's paved roadway and ramps, drawn alone on blank paper (the 1952 buildings the count counts in the paved polygon, the streets and the ground as rebuilt before the trench), the ground cut at the polygon's edge and drawn as a floating slab. The edge is today's footprint, a stand-in for the 1958 right-of-way (Library of Virginia, Acc. 40941, not yet seen). The edge is cut where the traced 1952 sheets end, at about 8th Street (tools/sanborn/jw/island.py), so the ramp loop east of it, never traced, is not shown bare.",
    "island": {
-    "file": "tools/sanborn/jw/highway-footprint.geojson",
+    "file": "tools/sanborn/jw/island.geojson",
     "ids": "tools/sanborn/jw/counted-ids.json",
-    "polygon": "paved",
+    "polygon": "paved-traced",
     "idLists": [
      "paved"
     ],
-    "caption": "Only what the highway took: inside today's paved roadway and ramps, a stand-in for the 1958 right-of-way"
+    "caption": "Only what the highway took: inside today's paved roadway and ramps, a stand-in for the 1958 right-of-way; cut where the traced 1952 sheets end, at about 8th Street"
    }
   },
   "island-corridor": {
-   "note": "The island: as island-paved, inside the corridor (today's paved roadway and ramps plus 15 m each side for cut slopes and walls): the buildings the count counts in the paved and the corridor polygons.",
+   "note": "The island: as island-paved, inside the corridor (today's paved roadway and ramps plus 15 m each side for cut slopes and walls): the buildings the count counts in the paved and the corridor polygons. The edge is cut where the traced 1952 sheets end, at about 8th Street (tools/sanborn/jw/island.py), so the ramp loop east of it, never traced, is not shown bare.",
    "island": {
-    "file": "tools/sanborn/jw/highway-footprint.geojson",
+    "file": "tools/sanborn/jw/island.geojson",
     "ids": "tools/sanborn/jw/counted-ids.json",
-    "polygon": "corridor",
+    "polygon": "corridor-traced",
     "idLists": [
      "paved",
      "corridor"
     ],
-    "caption": "Only what the highway took: inside today's roadway and ramps plus 15 m each side, a stand-in for the 1958 right-of-way"
+    "caption": "Only what the highway took: inside today's roadway and ramps plus 15 m each side, a stand-in for the 1958 right-of-way; cut where the traced 1952 sheets end, at about 8th Street"
    }
   }
  }
