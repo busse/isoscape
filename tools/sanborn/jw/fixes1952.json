@@ -301,6 +301,10 @@
    [
     500,
     2548
+   ],
+   [
+    1589,
+    1850
    ]
   ],
   "exclude": [
@@ -390,6 +394,10 @@
    [
     604,
     1167
+   ],
+   [
+    1484,
+    1590
    ]
   ]
  },
@@ -449,6 +457,16 @@
     "color": "colored",
     "note": "Booker Washington School: its fill leaks into the block's yard; outline placed by eye (the 1922-23 fireproof wing and the brick part drawn as one)"
    }
+  ],
+  "droppt": [
+   [
+    639,
+    1316
+   ],
+   [
+    1470,
+    949
+   ]
   ]
  },
  "309": {
@@ -531,7 +549,7 @@
     ],
     "material": "fireproof",
     "color": "colored",
-    "note": "Tire & Rubber Goodrich Ho (olive fireproof fill missed by the color rule); outline placed by eye"
+    "note": "Tire & Rubber Goods W. Ho. (olive fireproof fill missed by the color rule); outline placed by eye"
    }
   ]
  },

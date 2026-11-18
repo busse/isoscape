@@ -6,7 +6,8 @@
   storeys  2, assumed (the sheets print each building's stories; they were not read, except for
            the named buildings in named.csv)
   storeysFrom 'assumed' or 'sheet'
-  name, use where read by eye (named.csv: sheet, building id, name, use, stories, note)
+  name, use where read by eye (named.csv: edition, sheet, a point inside the building (lon, lat;
+           u50, v50 on the 50% scan), name, use, stories, note)
   id       jw<edition>-<sheet>-<n>; n is the number printed on that sheet's overlay
   byEye    true for outlines placed by eye (fixes.json addpoly)
 
@@ -24,11 +25,12 @@ from geo import to_m, to_ll
 
 def main(edition, out, named, *traces):
     edition = int(edition)
-    names = {}
+    names = []
     if os.path.exists(named):
+        from shapely.geometry import Point
         for r in csv.DictReader(open(named)):
             if r.get('edition') and int(r['edition']) != edition: continue
-            names.setdefault((r['sheet'], r['building']), []).append(r)
+            x, y = to_m(float(r['lon']), float(r['lat'])); r['_pt'] = Point(float(x), float(y)); names.append(r)
     feats, taken, cover = [], [], []
     for path in traces:
         t = json.load(open(path)); sh = t['sheet']; cs = []
@@ -41,7 +43,7 @@ def main(edition, out, named, *traces):
             pr = {'edition': edition, 'sheet': sh, 'id': f'jw{edition}-{sh}-{n}', 'n': n, 'material': b['material'], 'color': b['color'],
                   'storeys': 2, 'storeysFrom': 'assumed', 'area': round(poly.area, 1)}
             if b.get('byEye'): pr['byEye'] = True
-            for row in names.get((sh, str(n)), []):
+            for row in [r for r in names if r['sheet'] == sh and poly.buffer(0.5).contains(r['_pt'])]:
                 if row.get('name'): pr['name'] = row['name']
                 if row.get('use'): pr['use'] = row['use']
                 if row.get('stories'):
