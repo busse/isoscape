@@ -219,9 +219,15 @@
    "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
-   "decision": null,
+   "decision": "joins the Main Street Station revision 3.1.0 (the taller station changes its top edge); needs orders = 0 recounted",
    "accepted_faults": [],
-   "planned_edition": null,
+   "planned_edition": {
+    "reason": "factual correction",
+    "fixes": [
+     "Main Street Station, at the box's top edge, is drawn about a fifth too low (finial about 148 ft over Main Street)"
+    ],
+    "as": "3.1.0, a revision in place, with BSS-07, BSS-M and BSS-00, if it has no orders; otherwise edition 4"
+   },
    "last_inspected": null,
    "branch": null,
    "worktree": null,
