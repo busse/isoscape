@@ -309,5 +309,63 @@
     1167
    ]
   ]
+ },
+ "306": {
+  "exclude": [
+   {
+    "uv": [
+     [
+      1500,
+      2750
+     ],
+     [
+      2175,
+      2750
+     ],
+     [
+      2175,
+      2800
+     ],
+     [
+      1500,
+      2800
+     ]
+    ],
+    "why": "scale bar"
+   }
+  ],
+  "addpoly": [
+   {
+    "uv": [
+     [
+      828,
+      2045
+     ],
+     [
+      1040,
+      2045
+     ],
+     [
+      1040,
+      2352
+     ],
+     [
+      868,
+      2352
+     ],
+     [
+      868,
+      2200
+     ],
+     [
+      828,
+      2200
+     ]
+    ],
+    "material": "fireproof",
+    "color": "colored",
+    "note": "Booker Washington School: its fill leaks into the block's yard; outline placed by eye (the 1922-23 fireproof wing and the brick part drawn as one)"
+   }
+  ]
  }
 }

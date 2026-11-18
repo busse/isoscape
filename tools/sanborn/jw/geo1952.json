@@ -309,5 +309,47 @@
   "m_per_px": 0.1553,
   "block_inliers": 0.13,
   "block_points": 4492
+ },
+ "306": {
+  "params": [
+   -2819.6821284522352,
+   13468.477363882568,
+   0.9271299826553203,
+   6.350964315108557
+  ],
+  "refined": false,
+  "corners": [
+   "Clay & Adams",
+   "Leigh & Adams",
+   "Leigh & St James",
+   "Clay & St James",
+   "Leigh & 1st",
+   "Clay & 1st",
+   "Jackson & St James",
+   "Leigh & Price"
+  ],
+  "resid_m": [
+   4.5,
+   4.2,
+   1.9,
+   0.7,
+   0.5,
+   2.7,
+   1.2,
+   2.0
+  ],
+  "resid_corners_only": [
+   4.5,
+   4.2,
+   1.9,
+   0.7,
+   0.5,
+   2.7,
+   1.2,
+   2.0
+  ],
+  "m_per_px": 0.1575,
+  "block_inliers": 0.1,
+  "block_points": 4825
  }
 }
