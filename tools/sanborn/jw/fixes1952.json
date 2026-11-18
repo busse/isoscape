@@ -243,5 +243,36 @@
     "why": "the correction table at the foot of the sheet"
    }
   ]
+ },
+ "318": {
+  "droppt": [
+   [
+    1646,
+    2065
+   ]
+  ],
+  "exclude": [
+   {
+    "uv": [
+     [
+      30,
+      1640
+     ],
+     [
+      700,
+      1640
+     ],
+     [
+      700,
+      1730
+     ],
+     [
+      30,
+      1730
+     ]
+    ],
+    "why": "scale bar"
+   }
+  ]
  }
 }

@@ -259,5 +259,22 @@
   "block_inliers": 0.06,
   "block_points": 2678,
   "scale_bar_m_per_px_full": 0.0762
+ },
+ "318": {
+  "params": [
+   13251.118527921137,
+   11841.739171405015,
+   -0.35779249665883756,
+   6.561679790026246
+  ],
+  "refined": false,
+  "corners": [
+   "Hickory & W. Charity (water-pipe crossing)"
+  ],
+  "resid_m": [
+   8.5
+  ],
+  "how": "one corner and the scale bar, rotation and shift searched (0.5 deg, 3 m steps) against the outlines of the Gilpin Court buildings that stand today (OSM): they fall on their 1952 outlines (rotsearch.py)",
+  "m_per_px": 0.1524
  }
 }
