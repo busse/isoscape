@@ -48,7 +48,7 @@
 import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
-import { buyLinks, escAttr, pageShop, shopCta, siteTags, type SiteCard } from './social.ts'
+import { buyLinks, escAttr, pageMapRefs, pageShop, printLinks, shopCta, siteTags, type SiteCard } from './social.ts'
 import { makeStory } from './story.ts'
 
 // The isoscape mark (one isometric building), for the browser tab.
@@ -82,6 +82,7 @@ export const PROSE_CSS = `.prose { font-size: 15.5px; line-height: 1.65; color: 
 .prose li::marker { color: var(--faint); }
 .prose a { color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); text-underline-offset: 2px; }
 .prose a:hover { text-decoration-color: var(--accent); }
+.prose a.buy { font-weight: 600; white-space: nowrap; }
 .prose code { font: .86em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: .05em .25em; border-radius: 4px; }
 .prose pre { max-height: none; font-size: 12.5px; }
 .prose pre code { background: none; padding: 0; font-size: inherit; }
@@ -148,11 +149,6 @@ const homeCard = (site: SiteCard) => {
 }
 
 /** The regions a page, as the explorer shows it, links into (`#<region>…`), in order of first mention. */
-const explorerMapRefs = (html: string): string[] => {
-  const out: string[] = []
-  for (const m of html.matchAll(/href="#([a-z0-9][a-z0-9-]*)(?=[:@"])/g)) if (m[1] !== 'home' && !out.includes(m[1])) out.push(m[1])
-  return out
-}
 
 const escHtml = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string)
 const json = (v: unknown) => JSON.stringify(v).replace(/</g, '\\u003c')
@@ -434,7 +430,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
 <script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, shares: site.shares ?? null, buy: site.shop ? buyLinks(site, new Set(builds.flatMap((b) => (b.time ? [b.region, `${b.region}:${b.time.year}`] : [b.region])))) : null })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, license: d.license, link: d.link }])))}</script>
-<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, ...(p.unlisted ? { unlisted: true } : {}), html: p.html, headings: p.headings.filter((h) => h.level === 2), shop: (site.shop && pageShop(p.slug, explorerMapRefs(p.html), site)) ?? null })))}</script>
+<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, ...(p.unlisted ? { unlisted: true } : {}), html: printLinks(p.html, site.shop?.products), headings: p.headings.filter((h) => h.level === 2), shop: (site.shop && pageShop(p.slug, pageMapRefs(p.html), site)) ?? null })))}</script>
 <script>
 (() => {
   const builds = JSON.parse(document.getElementById('builds').textContent)
@@ -1097,7 +1093,9 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     document.body.classList.add('reading')
     if ($('article').dataset.slug !== p.slug) {
       $('article').dataset.slug = p.slug
-      $('article').innerHTML = (p.shop ? '<p class="buyp"><a class="btn" href="' + esc(p.shop.url) + '" target="_blank" rel="noopener">' + esc(p.shop.label) + '</a></p>' : '') + p.html + '<p class="source">This page is <code>' + esc(p.file) + '</code>. Edit it there; the next build, or <code>isoscape explorer</code>, puts the change here.</p>'
+      // The page's shop button above it and again at its foot, as on its static page.
+      const buyp = p.shop ? '<p class="buyp"><a class="btn" href="' + esc(p.shop.url) + '" target="_blank" rel="noopener">' + esc(p.shop.label) + '</a></p>' : ''
+      $('article').innerHTML = buyp + p.html + buyp + '<p class="source">This page is <code>' + esc(p.file) + '</code>. Edit it there; the next build, or <code>isoscape explorer</code>, puts the change here.</p>'
       $('toc').innerHTML = p.headings.length < 2 ? '' : '<h3>On this page</h3>' + p.headings.map((h) =>
         '<a href="#/' + esc(p.slug) + '/' + esc(h.id) + '" data-id="' + esc(h.id) + '">' + esc(h.text) + '</a>').join('')
     }

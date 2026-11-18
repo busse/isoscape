@@ -197,9 +197,23 @@ and links to buy only what `onSale` names:
   front page, and `m/<region>.html` (a year's: `m/<region>-<year>.html`);
 - a front-page section (its `shopLabel`, else "Buy prints ↗"): when every one of its `prefixes`
   is on sale under one URL, else when the slug of its story `page` is;
-- a content page (a button at its head, in the explorer and in `p/<slug>.html`): when its own
-  slug is on sale, else when every map it links to is on sale under one URL, else when the
-  section whose story it tells is.
+- a content page (a button at its head and its foot, in the explorer and in `p/<slug>.html`, and
+  a link in its share page `s/page-<slug>.html`): when its own slug is on sale, else when every
+  map it links to is on sale under one URL, else when the section whose story it tells is (a
+  set's page on sale as a collection says "Prints of this set ↗");
+- a piece of a set (a place's or stop's print, the map alone, the framed map): beside the
+  link to its view in a content page, from `shop.products` (below).
+
+`shop.products` maps the explorer view each set piece is cut from (the store catalog's
+`explore`, e.g. `"broad-street-lines:1943@-494,-1066,6"`, or the whole map's
+`"broad-street-lines:1943"`) to its prints: `[{ "url", "label", "design" }]`. Where a page links to
+that view, the link to buy goes beside it: after "See it on the map" in a box's line of links
+("Buy a print of this place ↗"), or at the end of the paragraph ("Open the map … Buy a print of
+the map alone ↗ · Buy a print of the map with every place ↗"). It is written, never by hand, by
+`python3 tools/release/products.py <store-dir>` from the store's catalog and product handles and
+the board's `on_sale`: only set boxes, maps and framed maps that the board has on sale and the
+store has active. Rerun it whenever a piece goes on or off sale (`--check` says whether it is
+current, and it warns of a piece no page links to).
 
 `cta` replaces "Shop prints" in the header only while something is on sale. With `onSale`
 empty, nothing anywhere links to a product or collection, and no text says so. Per-view or
@@ -633,8 +647,9 @@ fourteen places they ran to.
    (300 dpi into `out/sets/<name>/print/`; `--dpi 40` for a quick proof). Look at every one.
 6. **The page**: `set.py <name> page` writes `pages/<page.slug>.md` and its two images from the
    menu print. Link it from a section of `isoscape.config.json` (`page`, `pageLabel`). The page
-   names no shop: once the prints sell, add the page's slug (and, if you like, the region) to
-   `shop.onSale` with the collection's URL, and the explorer adds the shop buttons.
+   names no shop: once the prints sell, add the page's slug and the region to `shop.onSale`
+   with the collection's URL, and run `tools/release/products.py <store-dir>` for each print's
+   own link; the explorer adds the shop buttons and the links.
 
 ## Roadmap
 
