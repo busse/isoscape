@@ -13,7 +13,8 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Stage | Entries |
 |---|---|
-| research | 2 |
+| research | 1 |
+| rough draft | 1 |
 | working draft | 2 |
 | final production | 43 |
 | on hold | 55 |
@@ -23,15 +24,17 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 ## Waiting on a decision
 
 - **The Byrd Theatre: Cutaway**: review the working draft; target on sale about December 1, 2026
-- **Main Street Station, about 1952: Cutaway**: review marks on the working draft (review PDF sent for d3; d4 corrects the tower and roof heights and adds the red route)
-- **Title-block labels at the smallest sizes**: whether to make an edition of every print for larger title-block labels (they print at about 3 to 4 pt at the smallest sizes sold)
-- **The Byrd Park Pump House: Cutaway**: draw it or not
 
 ## Research
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Title-block labels at the smallest sizes | batch | — | no |
+
+## Rough draft
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
 | — | The Byrd Park Pump House: Cutaway | cutaway | — | no |
 
 ## Working draft

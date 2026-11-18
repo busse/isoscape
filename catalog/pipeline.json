@@ -2852,15 +2852,17 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "agent",
-   "decision": "first story; rough drafts done on branches jw-ground (ground before the cut) and jw-trace (1952 Sanborn, 15 sheets, 3,157 outlines); next: integrate, outline for the owner; shows its work; community reviewers at working draft",
+   "waiting_on": "owner",
+   "decision": "approve the outline (outline.md) and answer its open questions; rough drafts integrated on story-jackson-ward",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
-   "branch": null,
-   "worktree": null,
+   "branch": "story-jackson-ward",
+   "worktree": "/home/claude/wt-jw",
    "links": [
-    "/mnt/user-data/outputs/stories/jackson-ward/brief.md"
+    "/mnt/user-data/outputs/stories/jackson-ward/brief.md",
+    "/mnt/user-data/outputs/stories/jackson-ward/outline.md",
+    "/mnt/user-data/outputs/stories/jackson-ward/rough/rough.md"
    ],
    "title": "Jackson Ward and the interstate",
    "kind": "story",
@@ -2869,7 +2871,8 @@
    "private": true,
    "log": [
     "2026-11-18: research -> rough draft",
-    "2026-11-18: rough draft -> outline"
+    "2026-11-18: rough draft -> outline",
+    "2026-11-18: rough drafts integrated (one region, one history); outline written for the owner"
    ]
   },
   "story-redlining": {
