@@ -3,11 +3,11 @@
  "title": "Seventh and Broad, Richmond Streetcars 1925",
  "version": 3,
  "version_note": "redrawn: car lines run down the middle of divided streets and no longer jog between street pieces; bridges that carry a line are drawn at the line's width and follow the line; clearings that later roads cut through the woods are filled.",
- "recorded": "2026-11-17T23:55:24+00:00",
+ "recorded": "2026-11-17T23:58:03+00:00",
  "provenance": "recorded at release",
  "isoscape": {
-  "commit": "27610f89cbcae3821b622bf4eef92ee263c3cc96",
-  "subject": "Changes: the streetcar set's map, framed set and stops 1, 7, 8 and 9 redrawn; the whole set is for sale",
+  "commit": "7d72a12f29893761b816f8a4ef8077ffb795a949",
+  "subject": "Release records: the streetcar set's last six (draft of the records, rewritten next)",
   "dirty": true
  },
  "kind": "redraw",
