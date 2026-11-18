@@ -22,6 +22,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
+- **The Byrd Park Pump House: Cutaway** (BPPH·01): rc1 was inspected once; its one fix round (callout 2 in the main view, slanted arrowheads, the marks on 5 and 10, the 175-ft head, about 23 ft) made rc2, which waits on the owner's release approval
 - **The Byrd Theatre: Cutaway**: owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead
 
 ## Working draft
@@ -34,7 +35,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
-| BPPH·01 | The Byrd Park Pump House: Cutaway | cutaway | 1.0.0-rc1 | no |
+| BPPH·01 | The Byrd Park Pump House: Cutaway | cutaway | 1.0.0-rc2 | no |
 
 ## Final production
 
@@ -114,6 +115,7 @@ Changes to published work are made in planned editions, each for a stated reason
 
 Small faults seen only up close are listed here, so they are known and not reported again at each inspection. Any that matter are fixed in a planned edition.
 
+- **The Byrd Park Pump House: Cutaway** (BPPH·01): main view: callout 8's dot falls just west of the visible suction, on the west wheel; main view: callout 3's dot sits on a girder member just in front of the penstock; main view: callout 11's dot lies on the floor edge under the main, which shows only as a thin strip; main view: the west tailrace mouth shows its tunnel dry, with a stray inner line, where the others show water; map panel: the label The New Pump-House crosses the canal line; map panel: the label canal below the locks crosses the canal line and the cemetery's edge; pump section: badge 11 stands on the main's band, its dot on an arrowhead; pump section: badge 8 covers where the blue line leaves the forebay; main view: the west wing's end-wall lancets show as slivers (handoff known fault); main view: the penstocks are square in section (handoff known fault); pump section: the pumped line crosses the forebay wall schematically; callout 8 gives the real intake (handoff known fault).
 - **C.F. Sauer Company, Broad Street Station 1943** (BSS·06): a present-day street is drawn meeting a 1940 building beside the freight track.
 - **Main Street Station, about 1952: Cutaway** (MSS·01): track floor drawn 0.7 m high (6.5 m above the ground floor; the 1900 section and HABS VA-848-10 give 19 ft, 5.8 m): about 0.4 mm on the 32 in print, not visible at arm's length; correct in a later edition if the model is reworked; callout 10 dot on a shed diagonal in front of the C&O engine; callout 11 dot on a truss member over the Seaboard diesel; badge 7 stands over the red route at the arcade; main view: the route is hidden on the stair and doubles back in the waiting room, two red lines leaving the traveler; flat section: callout 6 dot on the lunch counter, barely seen behind the glass screen.
 - **Richmond's Streetcars, 1925: The Lines and Fourteen Stops** (STC·00): a stray rock mark in the river; card 5 says "over the Fifth Street viaduct", a viaduct outside box 5's frame.
