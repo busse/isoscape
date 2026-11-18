@@ -9,7 +9,7 @@ social: jackson-ward-social.jpg
 
 # Jackson Ward before I-95, block by block
 
-> **Working draft, for review.** This page is not listed on the site. Please do not pass it on. The facts were checked
+> **Working draft, for review.** This page is not listed on the site. The facts were checked
 > against their sources on November 18, 2026. The community reviewers have not yet read it. The numbers,
 > pictures and wording may change. Drafted with Claude for Chris Busse, {{date}}.
 
