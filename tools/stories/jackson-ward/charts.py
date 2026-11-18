@@ -320,7 +320,7 @@ def chart_cut_fill(data, out):
                 bbox=dict(boxstyle='round,pad=0.25', fc=R['paper'], ec='none', alpha=0.9))
     kk = np.nanargmin(np.where(inside, diff, np.nan))
     j2, i2 = divmod(kk, data.nx)
-    ax.annotate(f'highest bank\ntaken down: {-diff[j2, i2]:.1f} m', xy=(data.xs[i2], data.ys[j2]), xytext=(data.xs[i2] - 60, data.ys[j2] + 260),
+    ax.annotate(f'highest bank taken down:\n{-diff[j2, i2]:.1f} m, a ramp at the junction', xy=(data.xs[i2], data.ys[j2]), xytext=(data.xs[i2] - 60, data.ys[j2] + 260),
                 fontsize=9, ha='center', arrowprops=dict(arrowstyle='-', color=R['ink'], lw=0.8), zorder=9,
                 bbox=dict(boxstyle='round,pad=0.25', fc=R['paper'], ec='none', alpha=0.9))
     label(ax, 860, -330, 'Shockoe\nValley', size=9, color=R['muted'])
@@ -367,7 +367,7 @@ def chart_profiles(data, out):
     streets = [('Saint Peter Street', 'St. Peter Street'), ('North 1st Street', 'North 1st Street'), ('North 5th Street', 'North 5th Street')]
     rings_all = data.trench['rings'] + data.junction['rings']
     fig = plt.figure(figsize=(10.5, 13.2))
-    gs = fig.add_gridspec(4, 1, height_ratios=[1, 1, 1, 1.25], hspace=0.45, left=0.08, right=0.95, top=0.915, bottom=0.115)
+    gs = fig.add_gridspec(4, 1, height_ratios=[1, 1, 1, 1.25], hspace=0.45, left=0.08, right=0.95, top=0.895, bottom=0.115)
     fig.suptitle('The ground along the streets the trench cut: today, and rebuilt for 1952', x=0.08, ha='left', fontsize=13.5, fontweight=600)
     for k, (osm, title) in enumerate(streets):
         ax = fig.add_subplot(gs[k])
@@ -460,8 +460,10 @@ def chart_profiles(data, out):
          Line2D([], [], marker='o', ls='', color=R['fill'], ms=8, label='1934 sheet disagrees'),
          Line2D([], [], marker='o', ls='', mfc=R['paper'], mec=R['fill'], mew=1.2, ms=8, label='level not readable on the sheet')]
     fig.legend(handles=h, loc='lower center', ncol=3, bbox_to_anchor=(0.52, 0.004), fontsize=9, handlelength=2.2, columnspacing=1.5)
-    fig.text(0.08, 0.946, 'Elevations in meters above sea level (NAVD 88). Lidar: USGS 3DEP. 1934: USGS Richmond 1:24,000, surveyed 1933–34, contours every 10 ft\n(converted). No 1934 contour can be read where the three streets cross the trench; the check points are on the center line (bottom). ' + CREDIT,
-             fontsize=8, color=R['muted'], ha='left')
+    fig.text(0.08, 0.94, 'Elevations in meters above sea level (NAVD 88). Lidar: USGS 3DEP. 1934: USGS Richmond 1:24,000, surveyed 1933–34,\n'
+             'contours every 10 ft (converted). No 1934 contour can be read where the three streets cross the trench; the check points\n'
+             'are on the center line (bottom). ' + CREDIT,
+             fontsize=8, color=R['muted'], ha='left', va='center', linespacing=1.35)
     save(fig, out, 'profiles')
 
 
@@ -814,16 +816,22 @@ def chart_count(data, out):
         q = np.asarray(q, dtype=float) - ctr
         return np.column_stack([q[..., 0] * ca - q[..., 1] * sa, q[..., 0] * sa + q[..., 1] * ca]) if q.ndim == 2 else np.array([q[0] * ca - q[1] * sa, q[0] * sa + q[1] * ca])
 
+    # Which buildings count is read from count.py's own list (counted-ids.json), so the plan shows
+    # exactly what the count counts, by the same rule: a point inside the outline in the polygon,
+    # no outline under 12 m2 (the map draws nothing smaller), the correction-table box left out.
+    ids = json.load(open(os.path.join(ROOT, 'tools/sanborn/jw/counted-ids.json')))
+    in_paved, in_corr = set(ids['paved']), set(ids['corridor'])
     groups = {'quiet': [], 'near': [], 'pick': []}
     n_in = {'paved': 0, 'corridor': 0}
     for b_ in data.d['traced']:
-        g = SPoly(b_['ring']).buffer(0)
-        q = g.representative_point()        # count.py's rule: a point inside the outline
-        in_p = any(p.contains(q) for p in paved)
-        in_c = any(p.contains(q) for p in corridor)
+        if b_['id'] not in in_paved and b_['id'] not in in_corr and b_['m2'] < 12:
+            continue
+        in_p = b_['id'] in in_paved
+        in_c = in_p or b_['id'] in in_corr
         n_in['paved'] += in_p
         n_in['corridor'] += in_c
         groups['pick' if in_p else 'near' if in_c else 'quiet'].append(T(b_['ring']))
+    assert (n_in['paved'], n_in['corridor']) == (c['paved']['buildings'], c['corridor']['buildings']), (n_in, 'counted-ids.json and counts.json disagree: re-run count.py')
     tp = T(pts)
     bounds = (tp[:, 0].min() - 40, tp[:, 0].max() + 40, tp[:, 1].min() - 150, tp[:, 1].max() + 150)
     fig = plt.figure(figsize=(13, 7.6))
@@ -856,8 +864,8 @@ def chart_count(data, out):
     fig.text(0.015, 0.31, 'Buildings on the 1952 Sanborn sheets within this polygon', fontsize=11.5, fontweight=600, va='top')
     fig.text(0.015, 0.265, f"Paved polygon (today's roadway and ramps): {c['paved']['buildings']}", fontsize=10.5, va='top')
     fig.text(0.015, 0.23, f"Corridor (the paved polygon plus 15 m each side): {c['corridor']['buildings']}", fontsize=10.5, va='top')
-    fig.text(0.015, 0.18, 'A count of outlines on a map. Sheds and porches over 6 m² count;\nan apartment house is one. Not homes, families or people.\n'
-                          'The polygon is today\'s footprint, standing in for the 1958\nright-of-way, which has not been seen.', fontsize=9.5, va='top')
+    fig.text(0.015, 0.18, 'A count of outlines on a map. Outlines under 12 m² (privies and small\nsheds, which the map does not draw) are not counted; an apartment\nhouse is one. Not homes, families or people. '
+                          'The polygon is\ntoday\'s footprint, standing in for the 1958 right-of-way,\nwhich has not been seen.', fontsize=9.5, va='top')
     bx = fig.add_axes([0.55, 0.075, 0.40, 0.185])
     sheets = sorted(c['corridor']['sheets'], key=int)
     xs = np.arange(len(sheets))
@@ -879,9 +887,7 @@ def chart_count(data, out):
          Patch(color=R['quiet'], label='every other 1952 outline'),
          Line2D([], [], color=R['line'], lw=1.3, label='paved polygon'), Line2D([], [], color=R['ink'], lw=1.0, ls=(0, (4, 2.5)), label='corridor polygon')]
     fig.legend(handles=h, loc='upper left', ncol=5, bbox_to_anchor=(0.015, 0.355), fontsize=9, handlelength=1.6, columnspacing=1.2)
-    note = '' if (n_in['paved'], n_in['corridor']) == (c['paved']['buildings'], c['corridor']['buildings']) else \
-        f" This plan's own test, in view meters, finds {n_in['paved']} and {n_in['corridor']}: outlines that straddle a polygon's edge can fall either way."
-    footer(fig, 'Counts: tools/sanborn/jw/counts.json (count.py).' + note + ' Sanborn, Richmond 1952 vol. 3 (Library of Congress, public domain); streets: OpenStreetMap (ODbL).')
+    footer(fig, 'Counts: tools/sanborn/jw/counts.json and counted-ids.json (count.py); this plan draws the same ids. Sanborn, Richmond 1952 vol. 3 (Library of Congress, public domain); streets: OpenStreetMap (ODbL).')
     save(fig, out, 'count')
 
 
