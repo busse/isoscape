@@ -2757,15 +2757,19 @@
   "main-street-1952-cutaway": {
    "plate": null,
    "status": "active",
-   "asset_version": "1.0.0-d4",
+   "asset_version": "1.0.0-rc1",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 4,
-   "waiting_on": "owner",
-   "decision": "round 5 done (d5): dormers rebuilt as two clean kinds at the measured count, dome rounded, sheet rebalanced; waiting on the owner's review",
-   "accepted_faults": [],
+   "rounds": 5,
+   "waiting_on": "agent",
+   "decision": "owner approved the look of d5 on 2026-11-18 (dormers materially better); rc1: one inspection against the checklist, at most one fix round; track floor left as drawn",
+   "accepted_faults": [
+    {
+     "what": "track floor drawn 0.7 m high (6.5 m above the ground floor; the 1900 section and HABS VA-848-10 give 19 ft, 5.8 m): about 0.4 mm on the 32 in print, not visible at arm's length; correct in a later edition if the model is reworked"
+    }
+   ],
    "planned_edition": null,
    "last_inspected": "113ebc1",
    "branch": "cutaway-main-street",
@@ -2778,9 +2782,12 @@
    ],
    "title": "Main Street Station, about 1952: Cutaway",
    "kind": "cutaway",
-   "stage": "working draft",
+   "stage": "final draft",
    "budget_note": "d1 to d4 were made before the scheme was adopted (November 18, 2026); d5 needs the owner's say-so",
-   "notes": "open: sheet balance after the taller tower; the track floor drawn 0.7 m high"
+   "notes": "open: sheet balance after the taller tower; the track floor drawn 0.7 m high",
+   "log": [
+    "2026-11-18: working draft -> final draft"
+   ]
   },
   "pre-1886-buildings": {
    "plate": null,

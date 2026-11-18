@@ -14,7 +14,8 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Stage | Entries |
 |---|---|
 | rough draft | 1 |
-| working draft | 2 |
+| working draft | 1 |
+| final draft | 1 |
 | final production | 43 |
 | on hold | 55 |
 | blocked | 1 |
@@ -23,7 +24,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 ## Waiting on a decision
 
 - **The Byrd Theatre: Cutaway**: owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead
-- **Main Street Station, about 1952: Cutaway**: round 5 done (d5): dormers rebuilt as two clean kinds at the measured count, dome rounded, sheet rebalanced; waiting on the owner's review
 
 ## Rough draft
 
@@ -36,7 +36,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | The Byrd Theatre: Cutaway | cutaway | 1.0.0-d2 | no |
-| — | Main Street Station, about 1952: Cutaway | cutaway | 1.0.0-d4 | no |
+
+## Final draft
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Main Street Station, about 1952: Cutaway | cutaway | 1.0.0-rc1 | no |
 
 ## Final production
 
@@ -122,3 +127,4 @@ Small faults seen only up close are listed here, so they are known and not repor
 - **Church Hill and Jefferson Park, Richmond Streetcars 1925** (STC·07): a spur runs through a low building.
 - **Manchester, Richmond Streetcars 1925** (STC·09): the Forest Hill line takes a tight hairpin; the line bends sharply at the Mayo Bridge landing.
 - **Richmond's Streetcars, 1925: The System Map** (STC·M): the Fulton line touches the corner of the Armitage building; a stray rock mark in the river.
+- **Main Street Station, about 1952: Cutaway**: track floor drawn 0.7 m high (6.5 m above the ground floor; the 1900 section and HABS VA-848-10 give 19 ft, 5.8 m): about 0.4 mm on the 32 in print, not visible at arm's length; correct in a later edition if the model is reworked.
