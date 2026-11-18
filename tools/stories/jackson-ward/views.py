@@ -6,8 +6,10 @@ own history and drawn with isoscape, then cropped and, where the page numbers bu
 
 Builds each scene it needs once (`node bin/isoscape.js build jackson-ward --year Y [--with S]
 --no-archive --out <work>/<scene>`), rasterizes the SVG with rsvg-convert at the zoom each view
-asks for, crops it, and writes pages/jackson-ward-<name>.webp (1600 px wide, for the page) and,
-with --full, a full-size PNG of each (under 8,000 px) for review. Pairs and triples are stacked
+asks for, crops it, and writes pages/jackson-ward-<name>.webp (1600 px wide, for the page),
+pages/jackson-ward-<name>-large.webp (3200 px wide, opened in the page's lightbox) for views
+drawn wider than 2,400 px, and, with --full, a full-size PNG of each (under 8,000 px) for review.
+`--large-from DIR` writes only the large copies, from full-size PNGs already in DIR. Pairs and triples are stacked
 with the year in the corner.
 
 Numbered views (Second Street) mark every building the sheets name (tools/sanborn/jw/named.csv
@@ -226,9 +228,22 @@ def numbered(im, svg, box, z, names, edition):
     return im, [dict(n=r['n'], name=r['name'], stories=r['stories'], sheet=r['sheet']) for r in uniq]
 
 
+LARGE = 3200       # the lightbox's copy, px wide
+LARGE_FROM = 2400  # only views drawn at least this wide get one
+
+
+def save_large(im, name):
+    if im.width < LARGE_FROM:
+        return
+    w = min(LARGE, im.width)
+    big = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS) if im.width > w else im
+    big.convert('RGB').save(os.path.join(ROOT, 'pages', f'jackson-ward-{name}-large.webp'), quality=80, method=6)
+
+
 def save(im, name, full, keep=None):
     if full:
         im.save(os.path.join(full, f'jackson-ward-{name}.png'), optimize=True)
+    save_large(im, name)
     w = 1600
     small = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS) if im.width > w else im
     small.save(os.path.join(ROOT, 'pages', f'jackson-ward-{name}.webp'), quality=84, method=6)
@@ -242,7 +257,15 @@ def main():
     ap.add_argument('--work', default='/tmp/jw-views')
     ap.add_argument('--full', default=None)
     ap.add_argument('--only', default=None)
+    ap.add_argument('--large-from', default=None)
     a = ap.parse_args()
+    if a.large_from:
+        for name in VIEWS:
+            f = os.path.join(a.large_from, f'jackson-ward-{name}.png')
+            if os.path.exists(f) and (not a.only or name in a.only.split(',')):
+                save_large(Image.open(f), name)
+                print('wrote large', name)
+        return
     os.makedirs(a.work, exist_ok=True)
     if a.full:
         os.makedirs(a.full, exist_ok=True)

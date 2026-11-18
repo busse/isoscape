@@ -49,6 +49,7 @@ import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
 import { buyLinks, escAttr, pageMapRefs, pageShop, printLinks, shopCta, siteTags, type SiteCard } from './social.ts'
+import { FIGURE_CSS, LIGHTBOX_CSS, lightbox } from './lightbox.ts'
 import { makeStory } from './story.ts'
 
 /**
@@ -380,7 +381,12 @@ body.reading main { grid-template-rows: 1fr; }
 .doc .back:hover { border-color: var(--accent); }
 .doc #pageLink { margin-left: 6px; }
 .doc #pageLink.on { border-color: var(--accent); background: var(--accent-soft); }
-${PROSE_CSS}#toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
+${PROSE_CSS}${FIGURE_CSS}${LIGHTBOX_CSS}/* Wide figures run past the text column, over the margin and the contents list beside it. */
+#page { container-type: inline-size; }
+.doc .prose figure.fig.wide { position: relative; z-index: 2; margin-left: calc(-1 * min(var(--bleed), 200px)); width: calc(100% + 276px + min(var(--bleed), 200px)); --bleed: calc((100cqw - 100% - 276px) / 2 - 24px); }
+.doc .prose figure.fig.wide img { background: var(--panel); }
+@media (max-width: 1180px) { .doc .prose figure.fig.wide { --bleed: calc((100cqw - 100%) / 2 - 24px); margin-left: calc(-1 * var(--bleed)); width: calc(100% + 2 * var(--bleed)); } }
+#toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
 #toc h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 6px 0 8px; }
 #toc a { display: block; padding: 3px 0 3px 10px; border-left: 2px solid var(--line); color: var(--dim); text-decoration: none; }
 #toc a:hover { color: var(--ink); }
@@ -774,6 +780,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   }
   // ---- how this view was made ------------------------------------------------------------------
   // A build's own story, from story.ts (its source is embedded here; static map pages run the same code).
+  // Numbered figures on a page open in a lightbox (lightbox.ts); it takes the keys while open.
+  ;(${lightbox.toString()})(document)
   const story = (${makeStory.toString()})({ esc, label, when, mb, fmt, demSources, pageHref: (slug, section) => (pageBySlug.has(slug) ? '#/' + slug + (section ? '/' + section : '') : null) })
   $('toggleInfo').addEventListener('click', () => toggleInfo())
   // Phones: the build list is a drawer behind the menu button; the info panel starts folded.
