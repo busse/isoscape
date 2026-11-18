@@ -230,6 +230,7 @@ export const restoreGround = (g: HeightGrid, rings: readonly (readonly Vec2[])[]
     const i = Math.floor(fx), j = Math.floor(fy), tx = fx - i, ty = fy - j
     return elev[j * nx + i] * (1 - tx) * (1 - ty) + elev[j * nx + i + 1] * tx * (1 - ty) + elev[(j + 1) * nx + i] * (1 - tx) * ty + elev[(j + 1) * nx + i + 1] * tx * ty
   }
+  const measuredAt = (step: { p: Vec2 } | null): number => (step === null ? 0 : measured(step.p[0], step.p[1]))
   const nodeOf = (x: number, y: number): number => {
     const i = Math.round((x - x0) / cell), j = Math.round((y - y0) / cell)
     return i < 0 || j < 0 || i >= nx || j >= ny ? -1 : j * nx + i
@@ -260,8 +261,10 @@ export const restoreGround = (g: HeightGrid, rings: readonly (readonly Vec2[])[]
       const before = a > 0 ? steps[a - 1] : null
       const after = b + 1 < steps.length ? steps[b + 1] : null
       if (line.elevation !== undefined || (before !== null && after !== null)) {
-        const za = before === null ? 0 : measured(before.p[0], before.p[1])
-        const zb = after === null ? 0 : measured(after.p[0], after.p[1])
+        // The measured node just outside each end (a point between nodes would mix in the
+        // discarded heights inside).
+        const za = before === null || before.k < 0 ? measuredAt(before) : elev[before.k]
+        const zb = after === null || after.k < 0 ? measuredAt(after) : elev[after.k]
         for (let c = a; c <= b; c++) {
           const v = line.elevation ?? za + ((zb - za) * (steps[c].s - before!.s)) / Math.max(1e-9, after!.s - before!.s)
           const k = steps[c].k
