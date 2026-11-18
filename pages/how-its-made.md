@@ -1090,8 +1090,11 @@ Where two rail decks run into one another at nearly one level (within 2 m), the 
 pieces lying on the longer one are left out, so converging viaducts read as one deck.
 A crossing's lift is carried on, still fading at 3%, into a deck that continues the lifted one end to
 end, so no step shows where a line's OSM layer changes. Main Street Station's heights are measured
-on a 1971 HABS photograph against its 110-ft finial (eaves 56 ft, ridge about 80 ft, dome 93 to
-102 ft), with a clock face 7.5 ft across on each side of the tower.
+on three 1971 HABS photographs against the front's own width, 102 ft (approximate, to within
+about 1.5 m): the cornice about 68 ft over Main Street, the ridge about 115 ft, the dome from about
+127 to 140 ft and the finial about 148 ft, with a clock face about 9 ft across on each side of the
+tower. Its hipped roof is drawn in two pieces round the tower, each cut from the one roof
+(`roofRing`), so the ridge runs its measured 11 m.
 
 **What the series cannot show:**
 

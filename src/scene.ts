@@ -978,7 +978,7 @@ export const buildScene = (
         const top = h.upTo !== undefined ? zFor(h)(h.upTo) : seat + (h.height ?? 10)
         parts++
         // A stair or an arch keeps its corners in order: its first edge is its foot, or its span.
-        if (cut !== undefined) placed.push({ h, outer: h.shape === 'stair' || h.shape === 'arch' ? toViewRing(view, h.ring) : outer, seat, top })
+        if (cut !== undefined) placed.push({ h, outer: h.shape === 'stair' || h.shape === 'arch' ? toViewRing(view, h.ring) : outer, seat, top, ...(h.roofRing === undefined ? {} : { roof: orient(toViewRing(view, h.roofRing), true) }) })
         else {
           const t = toned(pal, h.tone)
           // A series can draw its turned parts (a dome) as shaded faces inked only at their foot
@@ -986,7 +986,7 @@ export const buildScene = (
           // black disc at a map's scale.
           const roof = h.shape === 'hip' || h.shape === 'gable' || h.shape === 'disc'
           // A disc keeps its corners in order: its first edge is its diameter.
-          const solids = h.shape === 'revolve' || roof ? partSolids({ h, outer: h.shape === 'disc' ? toViewRing(view, h.ring) : outer, seat, top }).solids : []
+          const solids = h.shape === 'revolve' || roof ? partSolids({ h, outer: h.shape === 'disc' ? toViewRing(view, h.ring) : outer, seat, top, ...(h.roofRing === undefined ? {} : { roof: orient(toViewRing(view, h.roofRing), true) }) }).solids : []
           const footZ = Math.min(...solids.flatMap((sl) => sl.faces.flatMap((f) => f.pts.map((q) => q[2]))))
           const solid = h.shape === 'revolve'
             ? solidItem(view, partTones(pal, h), `history:${h.id}`, solids, h.name, time?.history.revolveInkFoot === true ? (q) => q[2] > footZ + 0.01 : undefined)

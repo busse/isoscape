@@ -13,25 +13,22 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Stage | Entries |
 |---|---|
-| research | 2 |
+| rough draft | 1 |
 | working draft | 2 |
 | final production | 43 |
 | on hold | 55 |
 | blocked | 1 |
-| backlog | 1 |
+| backlog | 2 |
 
 ## Waiting on a decision
 
-- **The Byrd Theatre: Cutaway**: review the working draft; target on sale about December 1, 2026
-- **Main Street Station, about 1952: Cutaway**: review marks on the working draft (review PDF sent for d3; d4 corrects the tower and roof heights and adds the red route)
-- **Title-block labels at the smallest sizes**: whether to make an edition of every print for larger title-block labels (they print at about 3 to 4 pt at the smallest sizes sold)
-- **The Byrd Park Pump House: Cutaway**: draw it or not
+- **The Byrd Theatre: Cutaway**: owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead
+- **Main Street Station, about 1952: Cutaway**: round 5 done (d5): dormers rebuilt as two clean kinds at the measured count, dome rounded, sheet rebalanced; waiting on the owner's review
 
-## Research
+## Rough draft
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
-| — | Title-block labels at the smallest sizes | batch | — | no |
 | — | The Byrd Park Pump House: Cutaway | cutaway | — | no |
 
 ## Working draft
@@ -105,6 +102,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
+| — | Title-block labels at the smallest sizes | batch | — | no |
 | — | Richmond before 1886: a traced building layer | research | — | no |
 
 ## Planned editions
@@ -112,6 +110,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 Changes to published work are made in planned editions, each for a stated reason: a factual correction, a fault visible on the wall, or an improvement.
 
 - **Main Street Station, Broad Street Station 1943** (BSS·07), factual correction: Main Street Station is drawn about a fifth too low: rebuild the tower and roof to the heights measured on HABS VA-848-10, -11 and -12 (finial about 148 ft over Main Street); the note says "110 feet to the finial"; correct it to about 148 ft (approximate).
+- **The Triple Crossing, Broad Street Station 1943** (BSS·08), factual correction: Main Street Station, at the box's top edge, is drawn about a fifth too low (finial about 148 ft over Main Street).
 - **Broad Street Station, 1943: The Railroad Map** (BSS·M), factual correction: Main Street Station is drawn about a fifth too low (finial about 148 ft over Main Street, not 110).
 - **Title-block labels at the smallest sizes**, improvement: set the title block's labels at no less than 6 pt at the smallest size sold, on every print.
 

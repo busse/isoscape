@@ -59,6 +59,12 @@ export interface HistoryFeature {
   readonly seat?: 'min' | 'max'
   readonly on?: string
   readonly shape?: 'prism' | 'dome' | 'revolve' | 'stair' | 'arch' | 'hip' | 'gable' | 'disc'
+  /**
+   * A `hip` that is one piece of a larger hipped roof (split round a tower that stands in it):
+   * that roof's whole outline (lon, lat, convex). The piece's slopes rise from the whole roof's
+   * eaves, and its own ring only cuts it out, so the pieces meet as one roof.
+   */
+  readonly roofRing?: Vec2[]
   readonly tone?: PartTone
   /**
    * The modeled building a part belongs to, where a history holds more than one: the parts of
