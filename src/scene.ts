@@ -23,7 +23,7 @@ import { drawnWet, lowerGround, makeTerrain, rasterize, historicWater, restoreGr
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
-import { cutawayItems, partSolids, partTones, shedItems, travelerItem, type PlacedPart } from './cutaway-scene.ts'
+import { cutawayItems, partSolids, partTones, routeItems, shedItems, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
 import { WORKS, alive, bridgeFeature, bridgesAtGrade, streetFeature, dropApproaches, mendStreets, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
 
@@ -41,6 +41,8 @@ export interface Shape {
   readonly pts: readonly Vec2[]
   readonly fill: string
   readonly ink?: boolean
+  /** With `ink`, the finer line (`palette.fineLineWidth`). */
+  readonly fine?: boolean
   /** Dashed center line, for track on a bridge. */
   readonly dash?: boolean
   /** Draw as an open polyline instead of a filled polygon. */
@@ -49,8 +51,11 @@ export interface Shape {
   readonly seal?: boolean
   /** Dots painted with this shape, so whatever paints later can cover them. */
   readonly dots?: readonly Vec2[]
-  /** An open line's own stroke: color, width and dash, in pixels (a cutaway's dashed outline). */
-  readonly stroke?: { readonly color: string; readonly width: number; readonly dash: readonly [number, number] }
+  /**
+   * An open line's own stroke: color, width and dash, in pixels (a cutaway's dashed outline); no
+   * dash for a solid stroke, `round` for round caps (a dash of a cutaway's route).
+   */
+  readonly stroke?: { readonly color: string; readonly width: number; readonly dash?: readonly [number, number]; readonly round?: boolean }
 }
 
 export interface Item {
@@ -69,6 +74,15 @@ export interface Item {
   readonly footprint?: Ring
   /** A bridge span's center line, view meters, its deck's mean height, and which bridge it is. */
   readonly span?: { readonly a: Vec2; readonly b: Vec2; readonly z: number; readonly bridge: string; readonly stack?: boolean }
+  /**
+   * A side of a roof shell (a cutaway's hipped roof): what stands inside the shell paints
+   * before the side when the side faces the camera (`faces` 1), after it when it faces away.
+   */
+  readonly shell?: { readonly id: string; readonly faces: 1 | -1 }
+  /** The shell (its part's id) this item stands inside, under its roof. */
+  readonly within?: string
+  /** The shell (its part's id) this item stands on, outside it (a dormer): it paints after its sides. */
+  readonly over?: string
   /** A bridge pier, standing under a deck. */
   readonly pier?: boolean
 }
@@ -545,7 +559,8 @@ export const buildScene = (
   }
   // Curated track (a station's loop, long since taken up), drawn as rail.
   for (const h of curated) {
-    if (h.kind !== 'rail') continue
+    // An elevated track is drawn on its deck, as modeled parts, not on the ground.
+    if (h.kind !== 'rail' || h.elevation !== undefined) continue
     for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
       const r = ribbonOf('rail', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, (h.width ?? 3.2) * railScale, false)
       if (r) ribbons.push(r)
@@ -1023,19 +1038,22 @@ export const buildScene = (
         const top = h.upTo !== undefined ? zFor(h)(h.upTo) : seat + (h.height ?? 10)
         parts++
         // A stair or an arch keeps its corners in order: its first edge is its foot, or its span.
-        if (cut !== undefined) placed.push({ h, outer: h.shape === 'stair' || h.shape === 'arch' ? toViewRing(view, h.ring) : outer, seat, top })
+        // (A frame's first edge is its plane, a track's its width: they keep theirs too.)
+        const ordered = h.shape === 'stair' || h.shape === 'arch' || h.shape === 'frame' || h.shape === 'track'
+        if (cut !== undefined) placed.push({ h, outer: ordered ? toViewRing(view, h.ring) : outer, seat, top, ...(h.roofRing === undefined ? {} : { roof: orient(toViewRing(view, h.roofRing), true) }) })
         else {
           const t = toned(pal, h.tone)
           // A series can draw its turned parts (a dome) as shaded faces inked only at their foot
           // (revolveInkFoot): inked facet by facet, a dome a few dozen meters across reads as a
           // black disc at a map's scale.
           const roof = h.shape === 'hip' || h.shape === 'gable' || h.shape === 'disc'
+          const solidShape = h.shape === 'inset' || h.shape === 'frame' || h.shape === 'track'
           // A disc keeps its corners in order: its first edge is its diameter.
-          const solids = h.shape === 'revolve' || roof ? partSolids({ h, outer: h.shape === 'disc' ? toViewRing(view, h.ring) : outer, seat, top }).solids : []
+          const solids = h.shape === 'revolve' || roof || solidShape ? partSolids({ h, outer: h.shape === 'disc' || ordered ? toViewRing(view, h.ring) : outer, seat, top, ...(h.roofRing === undefined ? {} : { roof: orient(toViewRing(view, h.roofRing), true) }) }).solids : []
           const footZ = Math.min(...solids.flatMap((sl) => sl.faces.flatMap((f) => f.pts.map((q) => q[2]))))
           const solid = h.shape === 'revolve'
             ? solidItem(view, partTones(pal, h), `history:${h.id}`, solids, h.name, time?.history.revolveInkFoot === true ? (q) => q[2] > footZ + 0.01 : undefined)
-            : roof ? solidItem(view, partTones(pal, h), `history:${h.id}`, solids, h.name) : null
+            : roof || solidShape ? solidItem(view, partTones(pal, h), `history:${h.id}`, solids, h.name) : null
           if (solid !== null) items.push(solid)
           else items.push(h.shape === 'dome'
             ? dome(view, pal, `history:${h.id}`, outer, seat, top, h.name)
@@ -1069,7 +1087,8 @@ export const buildScene = (
       }
       const train = cut !== undefined && h.cutTrain !== undefined ? h.cutTrain : h.train
       if (h.kind === 'rail' && train !== undefined && h.line !== undefined) {
-        let got = keepBoxes(trainBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), train, (p) => terrain.z(p)))
+        const deck = h.elevation
+        let got = keepBoxes(trainBoxes(`history:${h.id}`, h.line.map(([lon, lat]) => view.toView(lon, lat)), train, (p) => (deck === undefined ? terrain.z(p) : zFor(h)(deck))))
         // A whole view of a series that asks (trainsClearOfDecks) leaves out the cars standing
         // under a raised part (a concourse over the tracks): hidden by it, and painted in the
         // wrong order where the deck's long footprint meets the sheds beside it.
@@ -1121,6 +1140,11 @@ export const buildScene = (
           const at = view.toView(t.at[0], t.at[1])
           items.push(travelerItem(view, pal, `traveler:${k + 1}`, at, t.floor === undefined ? terrain.z(at) : zOf(t.floor), t.facing))
         })
+        if (cut.route !== undefined && cut.route.points.length > 1) {
+          const route = routeItems(view, pal, cut.route.points.map(([lon, lat, e]) => [view.toView(lon, lat), zOf(e)] as const), cut.route.weight ?? 1)
+          items.push(...route)
+          stats.routeDashes = route.length
+        }
       }
       for (const [k, v] of Object.entries(done.stats)) stats[k] = v
       cutPlaneOut = done.plane

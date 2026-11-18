@@ -197,9 +197,23 @@ and links to buy only what `onSale` names:
   front page, and `m/<region>.html` (a year's: `m/<region>-<year>.html`);
 - a front-page section (its `shopLabel`, else "Buy prints ↗"): when every one of its `prefixes`
   is on sale under one URL, else when the slug of its story `page` is;
-- a content page (a button at its head, in the explorer and in `p/<slug>.html`): when its own
-  slug is on sale, else when every map it links to is on sale under one URL, else when the
-  section whose story it tells is.
+- a content page (a button at its head and its foot, in the explorer and in `p/<slug>.html`, and
+  a link in its share page `s/page-<slug>.html`): when its own slug is on sale, else when every
+  map it links to is on sale under one URL, else when the section whose story it tells is (a
+  set's page on sale as a collection says "Prints of this set ↗");
+- a piece of a set (a place's or stop's print, the map alone, the framed map): beside the
+  link to its view in a content page, from `shop.products` (below).
+
+`shop.products` maps the explorer view each set piece is cut from (the store catalog's
+`explore`, e.g. `"broad-street-lines:1943@-494,-1066,6"`, or the whole map's
+`"broad-street-lines:1943"`) to its prints: `[{ "url", "label", "design" }]`. Where a page links to
+that view, the link to buy goes beside it: after "See it on the map" in a box's line of links
+("Buy a print of this place ↗"), or at the end of the paragraph ("Open the map … Buy a print of
+the map alone ↗ · Buy a print of the map with every place ↗"). It is written, never by hand, by
+`python3 tools/release/products.py <store-dir>` from the store's catalog and product handles and
+the board's `on_sale`: only set boxes, maps and framed maps that the board has on sale and the
+store has active. Rerun it whenever a piece goes on or off sale (`--check` says whether it is
+current, and it warns of a piece no page links to).
 
 `cta` replaces "Shop prints" in the header only while something is on sale. With `onSale`
 empty, nothing anywhere links to a product or collection, and no text says so. Per-view or
@@ -244,6 +258,43 @@ owner must submit `https://busse.github.io/isoscape/sitemap.xml` once in
 [Google Search Console](https://search.google.com/search-console) (add the URL-prefix property
 `https://busse.github.io/isoscape/`, verify it with the HTML-file or meta-tag method, then
 Sitemaps → Add), and in Bing Webmaster Tools if wanted. After that, each publish updates it.
+
+### Publishing the site
+
+The live site, https://busse.github.io/isoscape/, is GitHub Pages serving the root of this
+repo's `gh-pages` branch (Settings → Pages: branch `gh-pages`, folder `/`). A push to
+`gh-pages` deploys it in a minute or two. Nothing else publishes it: there is no Actions
+workflow and no `docs/` site.
+
+`gh-pages` is a history of the built site, one commit per publish ("Explorer: …"): `index.html`,
+`p/`, `m/`, `s/`, `sitemap.xml`, `.nojekyll`, and `builds/`, the build folders the pages show
+(SVG, thumbnail, preview images, `meta.json`). Older builds of a view stay there, so share links
+to them keep working. The builds are not in `main`: `out/` is ignored, and each machine's
+`out/builds/` holds only what was built there. The site's own `builds/` is the record of what
+is live.
+
+To publish, from an up-to-date `main` (`git pull`), with an up-to-date checkout of `gh-pages`
+beside it (here `../isoscape-site`, made with `git worktree add ../isoscape-site gh-pages` or
+a clone of that branch):
+
+1. Copy any new build folders the change needs from `out/builds/` into
+   `../isoscape-site/builds/`. A change to pages or `isoscape.config.json` needs none.
+2. `node bin/isoscape.js explorer --out ../isoscape-site`. It lists the builds in the site's
+   own `builds/`, and rewrites `index.html`, `p/`, `m/`, `s/` and `sitemap.xml` from this
+   checkout's pages and config.
+3. Check it: `python3 tools/check/previews.py ../isoscape-site/` and
+   `PLAYWRIGHT_CORE=<dir> node tools/check/browser.mjs ../isoscape-site/`, and look at what
+   changed in a browser, desktop and phone-sized.
+4. In `../isoscape-site`, `git status` should show only what the change meant to touch.
+   Commit ("Explorer: <what changed>") and push `gh-pages`. Then run
+   `python3 tools/check/previews.py https://busse.github.io/isoscape/` once it is live.
+
+`tools/site.py <dest>` assembles a site from scratch: it copies the newest build of every view
+from `out/builds/` and moves every other build in `<dest>/builds/` out to
+`<dest>/../_site_trash_<id>`. Run it only on a machine whose `out/builds/` holds every build
+now live. Otherwise it drops views and old share links from the site, or rolls back a redraw.
+(On November 18, 2026 the copy of this repo in Chris's `ISO-TEST` folder lacked 28 of the 113
+live builds, among them the current Richmond 1925 and 1950.)
 
 ### Adding a page
 
@@ -603,10 +654,28 @@ python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json   # out/cutaways/
 python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json --print   # out/cutaways/print/
 ```
 
+Other part shapes: `"shape": "frame"` with `members` (straight members, or convex plates, in
+the vertical plane over the ring's first edge: a truss, a roof slope), `"inset"` with `levels`
+(a hipped roof or a square dome, stepped in by distance), and `"track"` (ties and rails on a
+deck). A rail line with an `elevation` stands its train on a deck and draws no ground track.
+`lift` also lifts modeled parts whole, leaving their outline dashed. In the section,
+`"hidden"` draws stairs behind a wall as their dashed outline and `"slice": {"parts": [...],
+"depth": 1}` draws a roof only that far behind the plane. A sheet's `crossSection` (`region`,
+`caption`) sets a second flat section beside the first, with callouts anchored to it by
+`"cross"`; `marksNote` words the key's line about the wayfinding marks.
+
 A callout's anchor in either drawing may say `"badge": [dx, dy]` (sheet units, 9,600 across):
 the badge then stands that far off the part, with a leader to a dot on it, so it does not hide
 what it names. `travelerKey` adds a line with the traveler's glyph to the key, and a group with
-`"traveler": true` carries the glyph beside its heading.
+`"traveler": true` carries the glyph beside its heading. In the region, `cutaway.route`
+(`points`: [lon, lat, elevation], at waist height, and a `weight`, the section's scale on the
+sheet over the cutaway's) draws the traveler's way in the cutaway too, red and dashed as the
+section draws it; `cutaway.order: "components"` breaks a cycle in the paint order at an item
+that lies in one, rather than at the farthest item left.
+`isoView` (`[x, y, w, h]` in the plate's own units) frames the plate closer, cutting what runs
+past it at its edge; a wayfinding label with `label: [x, y]` (sheet units, its first baseline)
+stands there, its leader leaving the nearest point of its box; `columnEnd` warns when the
+column runs past that height, into the room the print's title block needs.
 
 `--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):
 the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, each with its title
@@ -659,8 +728,9 @@ fourteen places they ran to.
    (300 dpi into `out/sets/<name>/print/`; `--dpi 40` for a quick proof). Look at every one.
 6. **The page**: `set.py <name> page` writes `pages/<page.slug>.md` and its two images from the
    menu print. Link it from a section of `isoscape.config.json` (`page`, `pageLabel`). The page
-   names no shop: once the prints sell, add the page's slug (and, if you like, the region) to
-   `shop.onSale` with the collection's URL, and the explorer adds the shop buttons.
+   names no shop: once the prints sell, add the page's slug and the region to `shop.onSale`
+   with the collection's URL, and run `tools/release/products.py <store-dir>` for each print's
+   own link; the explorer adds the shop buttons and the links.
 
 ## Roadmap
 

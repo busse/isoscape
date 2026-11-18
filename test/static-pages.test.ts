@@ -7,7 +7,7 @@ import { dirname, join, normalize } from 'node:path'
 import type { BuildMeta } from '../src/archive.ts'
 import { renderExplorer } from '../src/explorer.ts'
 import { loadPages } from '../src/pages.ts'
-import { anyOnSale, buyLinks, imageSize, loadSiteConfig, onSaleUrl, pageShop, sectionShop, shopCta, shopFor, withCampaign, writeSocial, type SiteConfig } from '../src/social.ts'
+import { anyOnSale, buyLinks, imageSize, loadSiteConfig, onSaleUrl, pageMapRefs, pageShop, printLinks, sectionShop, shopCta, shopFor, withCampaign, writeSocial, type SiteConfig } from '../src/social.ts'
 import {
   loadStaticPages, mapRefs, plainLinks, planStatic, shareDoors, sitemapXml, staticRoute, writeStatic,
 } from '../src/static-pages.ts'
@@ -253,6 +253,8 @@ test('what is on sale: the longest key a region, set or page slug starts with', 
   // A page: its own slug first (the cutaway turns on by its slug alone), then its maps', then its section's.
   assert.deepEqual(pageShop('broad-street-cutaway', [], config), { url: 'https://s/p/cut', label: 'Buy a print ↗' })
   assert.equal(pageShop('broad-street', ['broad-street-lines'], config), undefined)
+  // A set's page whose own slug sells as a collection says so.
+  assert.deepEqual(pageShop('cars-set', ['cars'], { shop: { label: 'L', url: 'https://s/', onSale: { 'cars-set': 'https://s/collections/cars' } } }), { url: 'https://s/collections/cars', label: 'Prints of this set ↗' })
   assert.deepEqual(pageShop('streetcars', ['richmond-streetcars', 'richmond-streetcars-west'], config), { url: 'https://s/c/cars', label: 'Prints of these maps ↗' })
   assert.equal(pageShop('landmarks', ['richmond-streetcars', 'gwynns-island'], config), undefined)
   assert.deepEqual(pageShop('streetcars', [], config), { url: 'https://s/c/rva', label: 'Buy a print ↗' })
@@ -301,6 +303,63 @@ test('with nothing on sale, no page links to anything in the shop but its front 
   assert.match(index, /<a class="shop" href="https:\/\/shop.example\/"[^>]*><b>Shop prints ↗<\/b><span>Holiday shop<\/span><\/a>/)
   assert.match(index, /"buy":\{"regions":\{\},"sections":\[null,null\]\}/)
   assert.match(readFileSync(join(out, 'p', 'story.html'), 'utf8'), /<p class="acts"><a class="btn ghost" href="\.\.\/index\.html#\/story">Open this in the explorer<\/a><\/p>/)
+})
+
+test("each piece's print sits beside the link to its view, once, and only for what is in products", () => {
+  const products = {
+    'cars:1925': [{ url: 'https://s/products/map', label: 'Buy a print of the map alone ↗' }, { url: 'https://s/products/menu', label: 'Buy a print of the map with every stop ↗' }],
+    'cars:1925@1,2,6': [{ url: 'https://s/products/one', label: 'Buy a print of this stop ↗', design: 'cars-01-one' }],
+  }
+  const html = '<p><a href="#cars:1925">Open the map</a> to pan and zoom, or jump to a stop below.</p>\n' +
+    '<h3>1. One</h3>\n<p><a href="#cars:1925@1,2,6">See it on the map</a> · Sources: <a href="https://src/1">1</a></p>\n' +
+    '<p><a href="#cars:1925@3,4,6">See it on the map</a> · Sources: <a href="https://src/2">1</a></p>\n' +
+    '<p>Again: <a href="#cars:1925@1,2,6">here</a></p>\n'
+  const out = printLinks(html, products)
+  // In a list of links, right after the view's link; else closing its paragraph.
+  assert.ok(out.includes('<a href="#cars:1925@1,2,6">See it on the map</a> · <a class="buy" href="https://s/products/one" target="_blank" rel="noopener">Buy a print of this stop ↗</a> · Sources:'))
+  assert.ok(out.includes('or jump to a stop below. <a class="buy" href="https://s/products/map" target="_blank" rel="noopener">Buy a print of the map alone ↗</a> · <a class="buy" href="https://s/products/menu"'))
+  // A view not on sale, and a second link to one already given, get nothing.
+  assert.ok(out.includes('<p><a href="#cars:1925@3,4,6">See it on the map</a> · Sources: <a href="https://src/2">1</a></p>'))
+  assert.ok(out.includes('<p>Again: <a href="#cars:1925@1,2,6">here</a></p>'))
+  assert.equal((out.match(/class="buy"/g) ?? []).length, 3)
+  // The static page's links, tagged; nothing at all without products.
+  const st = printLinks(html.replace(/href="#/g, 'href="../index.html#'), products, '../index.html#', (u) => withCampaign(u, 'cars', 'https://s/'))
+  assert.ok(st.includes('href="https://s/products/one?utm_source=isoscape-explorer&amp;utm_medium=referral&amp;utm_campaign=cars"'))
+  assert.equal(printLinks(html, undefined), html)
+  assert.equal(printLinks(html, {}), html)
+  assert.deepEqual(pageMapRefs(html), ['cars'])
+  assert.deepEqual(pageMapRefs('<a href="../index.html#town-time:1925">x</a> <a href="#home">h</a>'), ['town-time'])
+})
+
+test("a set's page links to its collection in the explorer, its static page and its share page, and to each piece's print", async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'iso-cfg-'))
+  writeFileSync(join(dir, 'isoscape.config.json'), JSON.stringify({
+    ...CONFIG,
+    shop: { label: 'Holiday shop', url: 'https://shop.example/', onSale: { 'cars-set': 'https://shop.example/collections/cars' },
+      products: {
+        'cars:1925@1,2,6': [{ url: 'https://shop.example/products/stop-one', label: 'Buy a print of this stop ↗', design: 'cars-01-one' }],
+        'cars:1925@9,9,6': { url: 'javascript:alert(1)', label: 'bad' },
+        'cars:1925@8,8,6': [{ url: 'https://shop.example/products/x' }],
+      } },
+  }))
+  const config = await loadSiteConfig(undefined, dir, {})
+  // Only well-formed entries are kept.
+  assert.deepEqual(Object.keys(config.shop?.products ?? {}), ['cars:1925@1,2,6'])
+  const { out, pagesDir } = site()
+  writeFileSync(join(pagesDir, 'cars-set.md'), '---\ntitle: The cars\n---\n\n# The cars\n\n[Open the map](https://example.org/iso/#cars:1925) to pan.\n\n### 1. One\n\n[See it on the map](https://example.org/iso/#cars:1925@1,2,6) · Sources: [1](https://src.example/1)\n')
+  const pages = loadPages(pagesDir, config.siteUrl)
+  const plan = planStatic(BUILDS, pages.map((p) => p.slug), config.home)
+  await writeSocial(out, BUILDS, pages, config, undefined, (t) => ('build' in t ? plan.forBuild(t.build) : plan.forPage(t.page)))
+  await writeStatic(out, BUILDS, plan, config, { pagesDir })
+  const index = renderExplorer(BUILDS, pages, { shop: config.shop, home: config.home })
+  const tagged = (path: string) => `https://shop.example/${path}?utm_source=isoscape-explorer&amp;utm_medium=referral&amp;utm_campaign=cars-set`
+  const staticPage = readFileSync(join(out, 'p', 'cars-set.html'), 'utf8')
+  assert.equal(staticPage.split(`<a class="btn" href="${tagged('collections/cars')}">Prints of this set ↗</a>`).length - 1, 2)
+  assert.ok(staticPage.includes(`See it on the map</a> · <a class="buy" href="${tagged('products/stop-one')}" target="_blank" rel="noopener">Buy a print of this stop ↗</a> · Sources:`))
+  const share = readFileSync(join(out, 's', 'page-cars-set.html'), 'utf8')
+  assert.ok(share.includes(`<p><a href="${tagged('collections/cars')}">Prints of this set ↗</a></p>`))
+  assert.ok(index.includes('"shop":{"url":"https://shop.example/collections/cars","label":"Prints of this set ↗"}'))
+  assert.ok(index.includes('See it on the map\\u003c/a> · \\u003ca class=\\"buy\\" href=\\"https://shop.example/products/stop-one\\"'))
 })
 
 /** A real (solid) PNG of this size, so encoders can read it. */

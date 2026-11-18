@@ -49,9 +49,10 @@ export interface SiteConfig {
    * Optional shop for prints: a link to its front page in the header (always), plus a link to buy
    * on each map, section, set or page that is in `onSale` (see `onSaleUrl`), and nowhere else.
    * A key `<region>:<year>` (the explorer's route for a year) puts it on that year's view only.
-   * `cta` is the header's wording while anything is on sale.
+   * `cta` is the header's wording while anything is on sale. `products` puts each piece's own
+   * print beside the links to its view in the content pages (see `printLinks`).
    */
-  readonly shop?: { readonly label: string; readonly url: string; readonly cta?: string; readonly onSale?: OnSale }
+  readonly shop?: { readonly label: string; readonly url: string; readonly cta?: string; readonly onSale?: OnSale; readonly products?: Products }
   /** Optional front page for the explorer: featured views, then the rest in sections. */
   readonly home?: HomeConfig
   /** False on a published site that does not carry out/<region>.html, to hide the "Latest page" link. */
@@ -116,6 +117,21 @@ export const normaliseSiteUrl = (raw: string | undefined): string | undefined =>
 /** What is for sale: region prefix, set slug or page slug → the product or collection URL. */
 export type OnSale = Readonly<Record<string, string>>
 
+/** One piece's print in the shop: its product page, the link's words, and the store's design key. */
+export interface Product {
+  readonly url: string
+  readonly label: string
+  readonly design?: string
+}
+
+/**
+ * The pieces on sale, by the explorer view each is cut from (`<region>:<year>@<x>,<y>,<zoom>`, or
+ * a whole map's `<region>:<year>`), as the store's catalog names it (`explore`): a set's places
+ * and stops, its map alone and its framed map. Written by tools/release/products.py from the
+ * store's catalog and the board's `on_sale`, never by hand.
+ */
+export type Products = Readonly<Record<string, readonly Product[]>>
+
 const isShop = (v: unknown): v is NonNullable<SiteConfig['shop']> =>
   typeof v === 'object' && v !== null && typeof (v as { label?: unknown }).label === 'string' && typeof (v as { url?: unknown }).url === 'string'
 
@@ -128,7 +144,17 @@ const shopOf = (v: NonNullable<SiteConfig['shop']>): NonNullable<SiteConfig['sho
   const onSale = typeof raw === 'object' && raw !== null && !Array.isArray(raw)
     ? Object.fromEntries(Object.entries(raw).filter((e): e is [string, string] => e[0] !== '' && typeof e[1] === 'string' && e[1] !== ''))
     : {}
-  return { label: v.label, url: v.url, ...(typeof v.cta === 'string' && v.cta !== '' ? { cta: v.cta } : {}), onSale }
+  const rawProducts = (v as { products?: unknown }).products
+  const products: Record<string, Product[]> = {}
+  if (typeof rawProducts === 'object' && rawProducts !== null && !Array.isArray(rawProducts)) {
+    for (const [view, list] of Object.entries(rawProducts)) {
+      const ok = (Array.isArray(list) ? list : [list]).filter((x): x is Product =>
+        typeof x === 'object' && x !== null && typeof x.url === 'string' && /^https?:\/\//.test(x.url) && typeof x.label === 'string' && x.label !== '')
+        .map((x) => ({ url: x.url, label: x.label, ...(typeof x.design === 'string' ? { design: x.design } : {}) }))
+      if (view !== '' && ok.length > 0) products[view] = ok
+    }
+  }
+  return { label: v.label, url: v.url, ...(typeof v.cta === 'string' && v.cta !== '' ? { cta: v.cta } : {}), onSale, ...(Object.keys(products).length > 0 ? { products } : {}) }
 }
 
 /** A front page without per-view or per-section shop URLs: where to buy comes from `shop.onSale` only. */
@@ -285,7 +311,7 @@ export const firstParagraph = (html: string): string => {
  * without script. No meta refresh: some crawlers (Facebook's) follow one, and would take the
  * index page's card instead of this one.
  */
-export const sharePage = (card: Card, route: string, more?: { readonly href: string; readonly label: string }): string => {
+export const sharePage = (card: Card, route: string, more?: { readonly href: string; readonly label: string }, buy?: { readonly href: string; readonly label: string }): string => {
   const target = `../index.html${route}`
   return `<!doctype html>
 <html lang="en">
@@ -299,7 +325,7 @@ ${metaTags(card)}<script>location.replace('../index.html' + (location.hash.lengt
 <body>
 <p><a href="${escAttr(target)}">${escAttr(card.title)}</a></p>
 ${card.image === undefined ? '' : `<p><a href="${escAttr(target)}"><img src="${escAttr(card.image)}" alt="${escAttr(card.imageAlt ?? '')}"></a></p>\n`}<p>${escAttr(card.description)}</p>
-${more === undefined ? '' : `<p><a href="${escAttr(more.href)}">${escAttr(more.label)}</a></p>\n`}</body>
+${more === undefined ? '' : `<p><a href="${escAttr(more.href)}">${escAttr(more.label)}</a></p>\n`}${buy === undefined ? '' : `<p><a href="${escAttr(buy.href)}">${escAttr(buy.label)}</a></p>\n`}</body>
 </html>
 `
 }
@@ -561,19 +587,60 @@ export const sectionShop = (config: Pick<SiteConfig, 'shop'>, sec: Pick<HomeSect
 
 /**
  * Where a content page's shop button goes: its own slug in `onSale` (a set's or a cutaway's
- * page), else the one URL every map it links to is on sale under, else its section's (the
- * section whose story it tells). `maps` are the regions the page links into, in order.
+ * page; "Prints of this set ↗" when that is a collection), else the one URL every map it links
+ * to is on sale under, else its section's (the section whose story it tells). `maps` are the
+ * regions the page links into, in order.
  */
 export const pageShop = (slug: string, maps: readonly string[], config: Pick<SiteConfig, 'shop' | 'home'>): { url: string; label: string } | undefined => {
   const label = maps.length > 1 ? 'Prints of these maps ↗' : maps.length === 1 ? 'Prints of this map ↗' : 'Buy a print ↗'
   const own = onSaleUrl(config.shop?.onSale, slug)
-  if (own !== undefined) return { url: own, label }
+  if (own !== undefined) return { url: own, label: /\/collections\//.test(own) ? 'Prints of this set ↗' : label }
   const urls = new Set(maps.map((r) => onSaleUrl(config.shop?.onSale, r)))
   const shared = urls.size === 1 ? [...urls][0] : undefined
   if (shared !== undefined) return { url: shared, label }
   const sec = config.home?.sections.find((s) => s.page === `#/${slug}`)
   const viaSection = sec === undefined ? undefined : sectionShop(config, sec)
   return viaSection === undefined ? undefined : { url: viaSection.url, label }
+}
+
+/**
+ * The maps a content page links into, in order of first link: the region of each link to a view,
+ * written as the explorer has it (`#<region>…`) or as a static page does (`../index.html#<region>…`).
+ */
+export const pageMapRefs = (html: string): string[] => {
+  const out: string[] = []
+  for (const m of html.matchAll(/href="(?:\.\.\/index\.html)?#([a-z0-9][a-z0-9-]*)(?=[:@"])/g)) if (m[1] !== 'home' && !out.includes(m[1])) out.push(m[1])
+  return out
+}
+
+/**
+ * A content page with each piece's print beside the link to its view: where a link to a view in
+ * `products` (written `<prefix><view>`, `#` in the explorer, `../index.html#` in a static page)
+ * leads a list of links (`See it on the map · Sources: …`), its prints follow it in that list;
+ * otherwise they close its paragraph. Each view's prints are given once, at its first link.
+ * `href` may tag a shop URL (`withCampaign`). Nothing changes for a view not on sale.
+ */
+export const printLinks = (html: string, products: Products | undefined, prefix = '#', href: (url: string) => string = (u) => u): string => {
+  if (products === undefined || Object.keys(products).length === 0) return html
+  const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string)
+  const done = new Set<string>()
+  // Paragraph by paragraph, so a print never lands outside the paragraph that links to its view.
+  return html.replace(/<p>([\s\S]*?)<\/p>/g, (whole, body: string) => {
+    let text = body
+    let tail = ''
+    for (const [view, list] of Object.entries(products)) {
+      if (done.has(view)) continue
+      const open = `<a href="${esc(prefix + view)}">`
+      const at = text.indexOf(open)
+      if (at < 0) continue
+      done.add(view)
+      const links = list.map((p) => `<a class="buy" href="${esc(href(p.url))}" target="_blank" rel="noopener">${esc(p.label)}</a>`).join(' · ')
+      const end = text.indexOf('</a>', at) + 4
+      if (text.startsWith(' · ', end)) text = text.slice(0, end) + ' · ' + links + text.slice(end)
+      else tail += (/[.!?]$/.test((text + tail).replace(/<[^>]*>/g, '').trimEnd()) ? ' ' : ' · ') + links
+    }
+    return text === body && tail === '' ? whole : `<p>${text}${tail}</p>`
+  })
 }
 
 /**
@@ -796,6 +863,8 @@ export const writeSocial = async (
     const pic = own ?? image
     const alt = own === undefined ? imageAlt : p.summary ?? p.title
     const to = pointTo(staticOf({ page: p.slug }), 'Read it as a plain page')
+    // Its shop button, as the explorer and the static page show it.
+    const shop = config.shop === undefined ? undefined : pageShop(p.slug, pageMapRefs(p.html), config)
     await writeFile(resolve(outDir, 's', file), sharePage({
       title: `${p.title} · ${SITE_NAME}`,
       description: pageDescription(p),
@@ -803,7 +872,7 @@ export const writeSocial = async (
       ...(pic === undefined ? {} : { image: siteHref(pic.path, base, 1), imageWidth: pic.width, imageHeight: pic.height, ...(alt === undefined ? {} : { imageAlt: alt }) }),
       ...(base === undefined ? {} : { url: siteHref(`s/${file}`, base) }),
       ...to.card,
-    }, `#/${p.slug}`, to.more))
+    }, `#/${p.slug}`, to.more, shop === undefined ? undefined : { href: withCampaign(shop.url, p.slug, config.shop?.url), label: shop.label }))
   }
   return {
     ...(base === undefined ? {} : { siteUrl: base }),

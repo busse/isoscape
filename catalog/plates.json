@@ -47,6 +47,11 @@
    "slug": "broad-street-1943"
   },
   {
+   "code": "MSS",
+   "name": "Main Street Station, 1952",
+   "collection": "buildings"
+  },
+  {
    "code": "LMA",
    "name": "American Landmarks",
    "collection": "landmarks"
@@ -752,6 +757,14 @@
    "title": "Scott's Addition, Broad Street Station 1943",
    "piece": "Box 3",
    "place": "Broad Street Station"
+  },
+  {
+   "plate": "MSS-01",
+   "design": "main-street-1952-cutaway",
+   "title": "Main Street Station, about 1952: Cutaway",
+   "piece": "Cutaway",
+   "place": "Main Street Station",
+   "kind": "Building cutaway"
   }
  ]
 }

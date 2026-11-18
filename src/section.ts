@@ -71,7 +71,7 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
   const along = (s: number): Vec2 => [pl.p[0] + pl.u[0] * s, pl.p[1] + pl.u[1] * s]
   const P = (s: number, z: number): Vec2 => view.toScreen(along(s), z)
   const zOf = (e: number) => (e - T.datum) * T.exaggeration
-  const items = paintOrder(scene.items, 96, true)
+  const items = paintOrder(scene.items, 96, true, cut.order === 'components')
   // The ground along the plane, dug out under whatever the building cut puts below it.
   const step = 0.5
   const ground: [number, number][] = []
@@ -124,6 +124,8 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
         // Across the plane at an angle, the gauge and ballast are drawn as long as they cut.
         const l = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
         const sin = Math.abs(((b[0] - a[0]) * pl.n[0] + (b[1] - a[1]) * pl.n[1]) / l) || 1
+        // An elevated track's rails stand on its deck (its ballast is a modeled part there).
+        if (h.elevation !== undefined) continue
         const g = T.z(along(s))
         const half = 1.6 / sin
         out.push(`<path fill="${p.rail}" class="i" d="${path([P(s - half - 0.4, g), P(s + half + 0.4, g), P(s + half, g + 0.35), P(s - half, g + 0.35)])}"/>`)
@@ -168,7 +170,7 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
   const svg = [
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.map(f).join(' ')}" class="isoscape-section" role="img">`,
     `<title>${esc(scene.region.title)}</title>`,
-    `<style>.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}</style>`,
+    `<style>.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}${items.some((it) => it.shapes.some((s) => s.fine === true)) ? `.fi{stroke-width:${p.fineLineWidth}}` : ''}</style>`,
     `<rect x="${f(vb[0])}" y="${f(vb[1])}" width="${f(vb[2])}" height="${f(vb[3])}" fill="${p.sky}"/>`,
     ...out,
     `</svg>`,
@@ -252,8 +254,8 @@ const crossing = (pl: NonNullable<Scene['cut']>, a: Vec2, b: Vec2): number | nul
 const paintItem = (it: Item): string => {
   const title = it.name === undefined ? '' : `<title>${esc(it.name)}</title>`
   return `<g data-id="${esc(it.id)}">${title}${it.shapes.map((s) => s.stroke !== undefined
-    ? `<path fill="none" stroke="${s.stroke.color}" stroke-width="${f(s.stroke.width)}" stroke-dasharray="${s.stroke.dash.map(f).join(' ')}" d="${path(s.pts, s.line !== true)}"/>`
-    : `<path class="i" fill="${s.fill}" d="${path(s.pts)}"/>`).join('')}</g>`
+    ? `<path fill="none" stroke="${s.stroke.color}" stroke-width="${f(s.stroke.width)}"${s.stroke.dash === undefined ? '' : ` stroke-dasharray="${s.stroke.dash.map(f).join(' ')}"`} d="${path(s.pts, s.line !== true)}"/>`
+    : `<path class="${s.fine === true ? 'i fi' : 'i'}" fill="${s.fill}" d="${path(s.pts)}"/>`).join('')}</g>`
 }
 
 /** Grow the anchor box of an item's part (its id, less any `:near` or piece suffix). */

@@ -67,9 +67,9 @@ The extract house Conrad Sauer founded at 17th and Broad in 1887 moved to Broad 
 
 *The Seaboard and the C&O*
 
-Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened in 1901: a head house under a steep hipped roof of red tile, its clock tower 110 feet to the finial, and behind it a gable-roofed train shed more than 500 feet long on the tracks' trestle, here in plain massing. The Seaboard moved to Broad Street in 1959; the C&O stayed until Amtrak took over in 1971.
+Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened in 1901: a head house under a steep hipped roof of red tile, its clock tower about 148 feet to the finial, and behind it a gable-roofed train shed more than 500 feet long on the tracks' trestle, here in plain massing. The Seaboard moved to Broad Street in 1959; the C&O stayed until Amtrak took over in 1971.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@1533,674,6) · Sources: [1](https://www.dhr.virginia.gov/?p=15225) [2](https://archive.org/details/sim_railway-age_1900-07-13_32_28) [3](https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf) [4](https://www.greatamericanstations.com/stations/RVM) [5](https://en.wikipedia.org/wiki/Richmond_Main_Street_Station)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@1533,674,6) · Sources: [1](https://www.dhr.virginia.gov/?p=15225) [2](https://archive.org/details/sim_railway-age_1900-07-13_32_28) [3](https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf) [4](https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/photos/305470p.jpg) [5](https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg) [6](https://www.greatamericanstations.com/stations/RVM) [7](https://en.wikipedia.org/wiki/Richmond_Main_Street_Station)
 
 ### 8. The Triple Crossing
 

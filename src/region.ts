@@ -147,6 +147,16 @@ export interface Cutaway {
    */
   readonly travelers?: readonly { readonly at: readonly [number, number]; readonly floor?: number; readonly facing: 1 | -1 }[]
   /**
+   * The traveler's way in the cutaway, as the flat section's `route` draws it: points [lon, lat,
+   * elevation in meters above sea level] (waist height), drawn in the route's color and dashed,
+   * dash by dash, so each sorts among what stands near it. `weight` scales the palette's route
+   * width and dash, so that on a sheet, where the cutaway and the section are scaled differently,
+   * the two read alike (the section's scale on the sheet over the cutaway's).
+   */
+  readonly route?: { readonly points: readonly (readonly [number, number, number])[]; readonly weight?: number }
+  /** How a cycle in the paint order is broken: `components` at its start (see `paintOrder`); by default, at the farthest item left. */
+  readonly order?: 'components'
+  /**
    * The flat section: the same plane, seen square on, everything on the removed side gone.
    * `from` and `to` are its ends, in meters along the plane from `through`; `beyond` is how far
    * behind the plane the cut parts are drawn, `other` how far everything else is.
@@ -161,6 +171,17 @@ export interface Cutaway {
     readonly earth?: number
     /** The traveler's path: points [meters along the plane, elevation in meters above sea level]. */
     readonly route?: readonly (readonly [number, number])[]
+    /**
+     * Stairs hidden from the plane behind a wall (regular expressions on item ids): drawn as
+     * their dashed outline, as a stair on the side lifted away is.
+     */
+    readonly hidden?: readonly string[]
+    /**
+     * Parts drawn only in a thin slice behind the plane (regular expressions on item ids, and
+     * the slice's depth in meters, default 1): a roof seen from beneath would otherwise hide
+     * the trusses under it; this way only its cut and the edge next to it show.
+     */
+    readonly slice?: { readonly parts: readonly string[]; readonly depth?: number }
     /** Travelers on the path: meters along the plane, the floor's elevation, and facing (1 toward `to`). */
     readonly travelers?: readonly { readonly s: number; readonly floor: number; readonly facing: 1 | -1 }[]
   }

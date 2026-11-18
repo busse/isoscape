@@ -511,7 +511,11 @@ on screen:
 - Otherwise the nearer center wins.
 
 A topological sort turns these pairwise results into one order. The rare cycle, from concave
-footprints that interlock, is broken by depth.
+footprints that interlock, is broken by depth: the farthest item left is painted next. That item
+may lie in no cycle at all (a tower behind a building whose attic floors and roof form one) and
+then paints before parts it should follow, so a cutaway can ask instead (`cutaway.order:
+"components"`, Main Street Station) for the farthest item that lies in a cycle, found as the
+strongly connected groups of the items left.
 
 Code: `src/order.ts`.
 
@@ -1050,8 +1054,9 @@ each other and are left unordered; footprints that overlap by up to 3 cm, the ro
 their corners, count as apart. Cars and canopy runs are cut into pieces at most 7 m long, drawn
 without seams, so each piece takes its own place among the stairs and the deck it passes.
 
-In a cutaway, coaches are solid Pullman-green bodies under a darker arched roof, with a
-continuous band of windows down each side and, in the 1 m gap ahead of each car that has one
+In a cutaway, coaches are solid Pullman-green bodies under a darker arched roof (or, for a
+train in the C&O's colors of the early 1950s, `livery: "co"`, blue with a yellow band along the
+top of the side, gray below the windows and a dark roof), with a continuous band of windows down each side and, in the 1 m gap ahead of each car that has one
 coupled ahead of it, the dark diaphragm of its vestibule. A steam engine faces the way its
 train came in (the engine leads, toward the start of its line): a round boiler with a darker
 smokebox at the front, a stack and two domes on top, a frame and running board under it, and a
@@ -1075,6 +1080,11 @@ gauge where tracks cross the plane, and a red dashed line follows the traveler f
 to the train. The line runs at waist height, 0.95 m over each floor, with a small arrowhead
 pointing the way on each stretch, and it is broken where it meets a traveler and where it
 would cross a car end seen square on, so it passes behind the car rather than over its face.
+A cutaway may draw the same way through its travelers (`cutaway.route`: points with their
+elevations, at waist height): it is cut into dashes as long, along the line on the screen, as
+the section's, each dash an item in the paint order, so a wall or a floor in front of it hides
+it. Its width and dashes are the section's times a `weight`, the section's scale on the sheet
+over the cutaway's (0.52 for Main Street Station), so the two read alike there.
 
 **Travelers.** A plain standing figure, 1.75 m (5 ft 9 in) tall, in the route's red, gives
 the drawings their scale: head, body, legs in a short stride and a small suitcase
@@ -1107,10 +1117,63 @@ streetcars and buses on West Broad; the ICC's 1955 ruling in *NAACP v. St. Louis
 Ry.*, for the end of the segregated waiting rooms; and OpenStreetMap for the ground. Each is
 named on the sheet, and the wayfinding notes carry their own.
 
+**Main Street Station** (`regions/main-street-station-cutaway.json`) is cut through its two
+waiting rooms, the plane running at a bearing of 36.9° 4.7 m east of the front's middle (66.7 ft
+from the west face on the plans of 1900), between the benches and the east row of columns, the
+east side lifted away down to 1.5 m above the ground floor; the camera looks from the southeast
+at a bearing of 325°. The rooms of the two public floors are traced from the plans printed in
+*The Railroad Gazette* of July 13, 1900, their feet mapped onto OpenStreetMap's outline of the
+head house. The concourse's roof and the roof over the taper to the shed are lifted away whole
+(`lift`), each leaving its dashed outline. Its train shed is not cut: the roofing of
+four bays on the shed's east slope, with the monitor's slatted side over them, is lifted away
+whole instead, leaving the dashed outline of
+its upper face where it was, so the trusses show on their columns. The shed is built from
+`frame` parts, straight members in a vertical plane traced node by node from the cross section
+of HAER VA-4 (sheet 3); a frame longer than 12 m is drawn in pieces of members 6 m apart across
+it, so a train or a column under it sorts against the piece above it rather than the whole span.
+The hipped roof of the head house is an `inset` shell, each side stepped in by the same distance
+so its four slopes rise alike to the ridge, in courses about 1.4 m apart up the slope, and drawn
+side by side in lengths of about 6 m, so a dormer sorts against the length of roof under it. Its
+ridge, 41.4 m above sea level, and the tower's stages (the balcony at 35.9 m, the clocks' centers
+at 40.3 m, the dome from 44.8 to 48.7 m, the finial's tip at 51.6 m, about 148 ft over Main
+Street) are measured on HABS photographs VA-848-10 to -12 (1971) against the 102-ft front, to
+within about 1.5 m. The roof's outline takes in the tower's, so a part marked `over` the shell
+(the dormers, and the tower from its balcony up) is in front of every piece of it, apart on the
+ground or not; a piece's box reaches up to the ridge, and beside the tower it would otherwise
+stand in front of the clock stage. Parts inside the shell (`within`) sort against its pieces
+first too, and a part over the shell is in front of a part inside it. The dormers are of two
+kinds, each identical wherever it stands: pedimented wall dormers on the cornice over the
+first, third and fifth bays, and small hipped dormers set into the slope, whose cheeks are
+wedges cut by the roof's plane so they sit on the tiles; they are outlined in a finer ink
+(`ink: "fine"`, 0.35 against 0.6). The tower's drum and dome are sixteen-sided solids of
+revolution. The
+loggia's piers are stacked in courses about 0.55 m high, every other one set 3 cm proud, and its
+segmental arches are plates in eight slices along the arc. Parts that stand inside the shell (`within`:
+the offices in the roof) paint before the slopes that face the camera and after those that face
+away; the floors and corridor walls in the roof are drawn in lengths of about 3 m along it, so
+each sorts against the length of roof over it. The tracks stand on a deck at the level of the waiting room,
+on trestles: a rail line with an elevation draws no ground ribbon, its train stands on the deck,
+and its track is a modeled part with ties 2.6 m long, 0.67 m apart, and two rails at standard
+gauge. Its flat section runs from 26 m on the Main Street side of the plane's point to 70 m on the
+track side, the building 35 m deep behind it and everything else 26 m. The main stair, behind
+the ticket office, is drawn there as its dashed outline (`section.hidden`); the shed is drawn in
+full behind the plane, as HAER's longitudinal section draws it: the columns 18 ft apart, the
+bracing between them, the underside of the roof falling to the eave, the monitor's slatted side
+along the ridge, and the roof over the taper falling to the concourse; and a train standing beside the plane is drawn from the side, flat,
+car by car, with its windows, doors, trucks and the gaps between the cars. Beside it the sheet
+puts a second flat section, the shed cut across 1.2 m south of a truss and looking north
+(`regions/main-street-station-shed-section.json`), at the same scale: the truss whole, the
+platforms and deck in ink, the cars standing across the plane end on.
+
 **The sheet** (`cutaways/<name>.json`, `tools/cutaway/sheet.py`) is 32 × 24 in at 300 dpi
 (9,600 × 7,200 pixels): the cutaway large, the flat section beneath it, and a column of numbered
 callouts, each anchored to a drawn part in either drawing, with the key, the sources and the
-notes. A badge that would hide the part it names is set off it into clear space, with a thin
+notes; a sheet may set a cross section (`crossSection`) beside the flat section, both at one
+scale, and wayfinding labels under the plate that run past two lines push the sections down to
+make room; a label may instead be set where the spec says (`label`), its leader leaving the
+nearest point of its box. A sheet may frame the plate closer (`isoView`, a box in the plate's
+own units), cutting what runs past it at the edge, and may say where its column must end
+(`columnEnd`), to keep room for the title block; Main Street's ends by 6,560 of the 7,200. A badge that would hide the part it names is set off it into clear space, with a thin
 leader to a small dot on the part, drawn like the wayfinding labels' leaders. Callout text is 54 pixels (13 pt; 9.7 pt on the 24 × 18 in print), and the smallest text
 on the sheet, the two-digit numbers in the badges on the drawings, is 40 pixels (9.6 pt; 7.2 pt
 at 24 × 18). There are no canvas files: a canvas's 1.5 in of mirrored wrap would carry the
@@ -1162,8 +1225,11 @@ Where two rail decks run into one another at nearly one level (within 2 m), the 
 pieces lying on the longer one are left out, so converging viaducts read as one deck.
 A crossing's lift is carried on, still fading at 3%, into a deck that continues the lifted one end to
 end, so no step shows where a line's OSM layer changes. Main Street Station's heights are measured
-on a 1971 HABS photograph against its 110-ft finial (eaves 56 ft, ridge about 80 ft, dome 93 to
-102 ft), with a clock face 7.5 ft across on each side of the tower.
+on three 1971 HABS photographs against the front's own width, 102 ft (approximate, to within
+about 1.5 m): the cornice about 68 ft over Main Street, the ridge about 115 ft, the dome from about
+127 to 140 ft and the finial about 148 ft, with a clock face about 9 ft across on each side of the
+tower. Its hipped roof is drawn in two pieces round the tower, each cut from the one roof
+(`roofRing`), so the ridge runs its measured 11 m.
 
 **What the series cannot show:**
 
