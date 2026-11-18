@@ -183,6 +183,8 @@ const paper: Palette = {
     coachRoof: ['#4a4b4f', '#36373a', '#4f5054'],
     // Water held in a modeled work (a forebay, a wheel pit), drawn as a solid at its level.
     water: ['#a8cad8', '#8fb3c4', '#b4d3df'],
+    // Ground modeled as a part (a canal's bed under its water), cut in the section's earth color.
+    earth: ['#cdbfa3', '#cdbfa3', '#d6c9ae'],
   },
   poche: '#2c2b33',
   cutOutline: '#2c2b33',
@@ -287,6 +289,7 @@ const night: Palette = {
     coachSkirt: ['#4a4d52', '#36393d', '#414448'],
     coachRoof: ['#2a2b2e', '#1d1e20', '#2e2f32'],
     water: ['#1b2e3b', '#16252f', '#223847'],
+    earth: ['#2b2f3b', '#2b2f3b', '#323746'],
   },
   poche: '#c9d1e6',
   cutOutline: '#c9d1e6',

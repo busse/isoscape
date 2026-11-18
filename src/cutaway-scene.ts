@@ -182,8 +182,9 @@ export const FRAME_PIECE = 6
 export const partTones = (pal: Palette, h: HistoryFeature): Tones => {
   const [lit, shade, roof] = pal.parts[h.tone ?? 'stone']
   const [il, is] = pal.parts.plaster
-  // Water held in a work is cut in its own shade, so a section reads it as water, not as ink.
-  return { lit, shade, roof, cut: h.tone === 'water' ? shade : pal.poche, inner: [il, is] }
+  // Water held in a work, and ground modeled as a part, are cut in their own shade, so a
+  // section reads them as water and earth, not as ink.
+  return { lit, shade, roof, cut: h.tone === 'water' || h.tone === 'earth' ? shade : pal.poche, inner: [il, is] }
 }
 
 const boxTones = (pal: Palette, b: Box): Tones => {

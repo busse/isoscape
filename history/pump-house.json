@@ -25469,6 +25469,36 @@
    "only": "whole"
   },
   {
+   "id": "ph-s-forebay-bed-0",
+   "name": "Pump House Canal (the forebay): bed",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48629968,
+     37.5368234
+    ],
+    [
+     -77.48628598,
+     37.53681899
+    ],
+    [
+     -77.48624705,
+     37.53687347
+    ]
+   ],
+   "elevation": 21.4,
+   "upTo": 25.426,
+   "tone": "earth",
+   "confidence": "approximate",
+   "note": "The forebay's bed, at the foot of the forebay wall as the section through a pump draws it (The American Engineer, 1884, p. 261); today's lidar finds the drained channel lower. Depth approximate.",
+   "sources": [
+    "https://babel.hathitrust.org/cgi/pt?id=mdp.39015010782855&seq=271",
+    "https://www.usgs.gov/3d-elevation-program"
+   ]
+  },
+  {
    "id": "ph-s-forebay-0",
    "name": "Pump House Canal (the forebay)",
    "kind": "landmark",
@@ -25488,13 +25518,51 @@
      37.53687347
     ]
    ],
-   "elevation": 21.4,
+   "elevation": 25.426,
    "upTo": 30.943,
    "tone": "water",
    "confidence": "written",
    "note": "The forebay: the Pump House Canal, turned off above the Three Mile Locks and dammed at the east end of the house; its waterline level with the walkway round the north front (NRHP 2002). Its level here is where the section through a pump draws it against the shaft (The American Engineer, 1884, p. 261). The channel's banks and bed are today's lidar (3DEP); its 1885 level is inferred, not measured.",
    "sources": [
     "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://babel.hathitrust.org/cgi/pt?id=mdp.39015010782855&seq=271",
+    "https://www.usgs.gov/3d-elevation-program"
+   ]
+  },
+  {
+   "id": "ph-s-forebay-bed-1",
+   "name": "Pump House Canal (the forebay): bed",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48628598,
+     37.53681899
+    ],
+    [
+     -77.48609198,
+     37.53672545
+    ],
+    [
+     -77.48597131,
+     37.53689434
+    ],
+    [
+     -77.48618033,
+     37.53693695
+    ],
+    [
+     -77.48624705,
+     37.53687347
+    ]
+   ],
+   "elevation": 21.4,
+   "upTo": 25.426,
+   "tone": "earth",
+   "confidence": "approximate",
+   "note": "The forebay's bed, at the foot of the forebay wall as the section through a pump draws it (The American Engineer, 1884, p. 261); today's lidar finds the drained channel lower. Depth approximate.",
+   "sources": [
     "https://babel.hathitrust.org/cgi/pt?id=mdp.39015010782855&seq=271",
     "https://www.usgs.gov/3d-elevation-program"
    ]
@@ -25527,13 +25595,51 @@
      37.53687347
     ]
    ],
-   "elevation": 21.4,
+   "elevation": 25.426,
    "upTo": 30.943,
    "tone": "water",
    "confidence": "written",
    "note": "The forebay: the Pump House Canal, turned off above the Three Mile Locks and dammed at the east end of the house; its waterline level with the walkway round the north front (NRHP 2002). Its level here is where the section through a pump draws it against the shaft (The American Engineer, 1884, p. 261). The channel's banks and bed are today's lidar (3DEP); its 1885 level is inferred, not measured.",
    "sources": [
     "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://babel.hathitrust.org/cgi/pt?id=mdp.39015010782855&seq=271",
+    "https://www.usgs.gov/3d-elevation-program"
+   ]
+  },
+  {
+   "id": "ph-s-forebay-bed-2",
+   "name": "Pump House Canal (the forebay): bed",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48609198,
+     37.53672545
+    ],
+    [
+     -77.48567869,
+     37.53653725
+    ],
+    [
+     -77.48557485,
+     37.53668258
+    ],
+    [
+     -77.4856789,
+     37.53675599
+    ],
+    [
+     -77.48597131,
+     37.53689434
+    ]
+   ],
+   "elevation": 21.4,
+   "upTo": 25.426,
+   "tone": "earth",
+   "confidence": "approximate",
+   "note": "The forebay's bed, at the foot of the forebay wall as the section through a pump draws it (The American Engineer, 1884, p. 261); today's lidar finds the drained channel lower. Depth approximate.",
+   "sources": [
     "https://babel.hathitrust.org/cgi/pt?id=mdp.39015010782855&seq=271",
     "https://www.usgs.gov/3d-elevation-program"
    ]
@@ -25566,7 +25672,7 @@
      37.53689434
     ]
    ],
-   "elevation": 21.4,
+   "elevation": 25.426,
    "upTo": 30.943,
    "tone": "water",
    "confidence": "written",

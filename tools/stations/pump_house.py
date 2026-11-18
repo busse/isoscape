@@ -533,11 +533,15 @@ def clipped(q):
 WATER_NOTE = (' The channel\'s banks and bed are today\'s lidar (3DEP); its 1885 level is inferred, not measured.')
 WALK_W = 17.4
 FB_S = 17.0           # the forebay's water reaches under the walkway to the wall's foot
+FB_BED = HUB_Z - 10.4 * FT   # the forebay's bed at the forebay wall's foot in the section through a pump (AE p. 261) = 25.43
 TERRACE = 26.45      # the south walkway, over the tailraces' crowns (approximate)
 FOREBAY_Q = [[(-90, 8.0), (-20, 17.5), (-20, 33.0), (-90, 22.0)], [(-20, 17.5), (0, FB_S), (0, 38.5), (-20, 33.0)],
              [(0, FB_S), (42, FB_S), (42, 35.5), (30, 38.0), (0, 38.5)]]
 for k, q in enumerate(x for x in (clipped(qq) for qq in FOREBAY_Q) if len(x) >= 3):
-    part(f'ph-s-forebay-{k}', 'Pump House Canal (the forebay)', quad(q), BED, FOREBAY, 'water', 'written',
+    part(f'ph-s-forebay-bed-{k}', 'Pump House Canal (the forebay): bed', quad(q), BED, FB_BED, 'earth', 'approximate',
+         'The forebay\'s bed, at the foot of the forebay wall as the section through a pump draws it (The American Engineer, 1884, p. 261); '
+         'today\'s lidar finds the drained channel lower. Depth approximate.', [AE2, SRC['lidar']])
+    part(f'ph-s-forebay-{k}', 'Pump House Canal (the forebay)', quad(q), FB_BED, FOREBAY, 'water', 'written',
          'The forebay: the Pump House Canal, turned off above the Three Mile Locks and dammed at the east end of the house; its waterline level with the walkway round the north front (NRHP 2002). '
          'Its level here is where the section through a pump draws it against the shaft (The American Engineer, 1884, p. 261).' + WATER_NOTE, [NRHP, AE2, SRC['lidar']])
 part('ph-s-forebay-dam', 'Pump House Canal: the dam', rect(42.0, 44.0, WALK_W, 35.0), BED, FOREBAY + 0.6, 'stone', 'approximate',

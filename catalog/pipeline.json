@@ -2861,29 +2861,30 @@
   "pump-house-cutaway": {
    "plate": null,
    "status": "active",
-   "asset_version": null,
+   "asset_version": "1.0.0-d1",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 0,
-   "waiting_on": "agent",
-   "decision": "owner: pursue (2026-11-18); handed to a separate Opus 5.5 session (ISO-TEST/handoff/pump-house/HANDOFF.md); it moves this to working draft when d1 exists",
+   "rounds": 1,
+   "waiting_on": "owner",
+   "decision": "d1: approve the look (subject, framing, notes) to go to final draft, or send changes",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
    "branch": "cutaway-pump-house",
    "worktree": null,
    "links": [
-    "/mnt/user-data/outputs/cutaway/pump-house.md",
-    "/mnt/user-data/outputs/cutaway/pump-house/rough/rough.md"
+    "cutaways/pump-house-1885.json",
+    "ISO-TEST/handoff/pump-house/d1/d1.md"
    ],
    "title": "The Byrd Park Pump House: Cutaway",
    "kind": "cutaway",
-   "stage": "rough draft",
-   "notes": "research done: feasibility 3.5 of 5 (pump-house.md); rough draft 2026-11-18: long cut from the southwest plus a flat section across a wheel; no measured drawings found online (HAER VA-34 has photos only)",
+   "stage": "working draft",
+   "notes": "research done: feasibility 3.5 of 5; rough draft 2026-11-18; d1 2026-11-18 on The American Engineer pp. 260-261 (HathiTrust full scans). Known faults at d1: gang positions along the room approximate; tailraces' size and line inferred; penstocks drawn square in section; the south walkway reads as a large blank plane in the iso; inset river and canal lines are today's OSM; long and cross sections are small at one shared scale; roof lifted (Chris chose this over a cut shell).",
    "log": [
-    "2026-11-18: research -> rough draft"
+    "2026-11-18: research -> rough draft",
+    "2026-11-18: rough draft -> working draft (1.0.0-d1)"
    ]
   },
   "story-jackson-ward": {

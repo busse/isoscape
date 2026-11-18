@@ -4,6 +4,10 @@ numbered callouts in a column beside them, a key to how sure each part is, sourc
 
     python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json [--out <dir>] [--png 3200] [--print] [--page]
 
+A spec's `inset` sets a small flat context map on the sheet (tools/cutaway/context.py): `context`
+(the cached extract), `box` [x, y, width] in sheet units, `caption`, and its own `labels`,
+`lines` and `arrows` in lon/lat.
+
 It builds the region (isoscape build <region> --year <year> --no-archive), which writes the
 cutaway, its flat section and where each part is drawn in both (*.anchors.json), then lays the
 sheet out at 32 x 24 in, 300 dpi (9,600 x 7,200 units), the set-sheet size, as one SVG with both
@@ -231,6 +235,20 @@ def main():
         out.append(f'<svg x="{cross_box[0]:.1f}" y="{cross_box[1]:.1f}" width="{cross_box[2]:.1f}" height="{cross_box[3]:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in cvb)}">{cross_body}</svg>')
         drawings.append(('cross', cross_a, cross_a.get('frame'), (cross_box[0] - cvb[0] * s_sec, cross_box[1] - cvb[1] * s_sec, s_sec)))
     iso_rect = (iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2, iso_box[1], iso_vb[2] * s_iso, iso_h)
+    if spec.get('inset'):
+        # A small flat map of where the building stands and what its work joined
+        # (tools/cutaway/context.py), at `box` [x, y, width] in sheet units, its caption beneath.
+        import context
+        ins = spec['inset']
+        iw, ih, ibody = context.render(ins, ROOT)
+        bx, by, bw = ins['box']
+        bh = bw * ih / iw
+        out.append(f'<rect x="{bx - 24:.1f}" y="{by - 24:.1f}" width="{bw + 48:.1f}" height="{bh + 48:.1f}" fill="{PAPER}"/>')
+        out.append(f'<svg x="{bx:.1f}" y="{by:.1f}" width="{bw:.1f}" height="{bh:.1f}" viewBox="0 0 {iw:.1f} {ih:.1f}">{ibody}</svg>')
+        cy = by + bh + 90
+        for line in wrap(ins.get('caption', ''), 'italic', 50, bw):
+            out.append(text(bx, cy, line, 50, 'italic', DIM))
+            cy += 66
 
     def locate(lonlat):
         r = subprocess.run(['node', 'bin/isoscape.js', 'locate', region, '--year', str(year), '--', f'{lonlat[0]},{lonlat[1]}'], cwd=ROOT, check=True, capture_output=True, text=True)
