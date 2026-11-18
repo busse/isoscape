@@ -611,7 +611,10 @@ section draws it; `cutaway.order: "components"` breaks a cycle in the paint orde
 that lies in one, rather than at the farthest item left.
 A cutaway may trace a second way beside its route, `cutaway.pumped` (and `section.pumped` in
 its section), in the palette's `pumped` blue: the water a works lifts, beside the water that
-drives it. A sheet's `sections` (each `region`, `caption` and `as`, the key its callouts anchor
+drives it. With `section.ribbon` both are drawn as water rather than dashes: a pale band (60%
+opaque) under a thin line with arrowheads every 3 m, the route in the palette's `drive` teal
+(never the route's red, which reads as warm water), each end tagged from `routeEnds` and
+`pumpedEnds`. An inset with `water` draws its mains in the same blue. A sheet's `sections` (each `region`, `caption` and `as`, the key its callouts anchor
 to) sets the flat sections along its foot in place of the region's own and `crossSection`; its
 `inset` sets a small flat context map with a heading, a caption and `why`, a few short
 paragraphs on the building's purpose (`tools/cutaway/context.py`, from a cached OpenStreetMap

@@ -19,7 +19,7 @@ import argparse, json, math, os, sys, urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, '..', '..'))
 
-LAND, WATER, WATER_LINE, INK, ROUTE, DIM, GREEN = '#ebe5d6', '#a8cad8', '#7fa9bc', '#2c2b33', '#b5392f', '#6d6a72', '#d3dfb9'   # palette.ts, paper
+LAND, WATER, WATER_LINE, INK, ROUTE, DIM, GREEN, PUMPED = '#ebe5d6', '#a8cad8', '#7fa9bc', '#2c2b33', '#b5392f', '#6d6a72', '#d3dfb9', '#2f6690'   # palette.ts, paper
 SERIF = "'Libre Baskerville', Baskerville, Georgia, serif"
 API = 'https://api.openstreetmap.org/api/0.6/map.json?bbox={},{},{},{}'
 
@@ -80,6 +80,8 @@ def render(inset, root=ROOT):
     P = lambda lon, lat: ((lon - w) * kx, (n - lat) * ky)
     pts = lambda cs: ' '.join(f'{x:.1f},{y:.1f}' for x, y in (P(*c) for c in cs))
     u = W / 1000           # one unit of the inset's type and strokes: a thousandth of its width
+    # `water`: the mains and their arrows in the pumped water's blue, the building's ring in ink.
+    MAIN, MARK = (PUMPED, INK) if inset.get('water') else (ROUTE, ROUTE)
     out = [f'<rect x="0" y="0" width="{W:.1f}" height="{H:.1f}" fill="{LAND}"/>']
     out.append(f'<clipPath id="ctx-clip"><rect x="0" y="0" width="{W:.1f}" height="{H:.1f}"/></clipPath><g clip-path="url(#ctx-clip)">')
     # Parks and cemeteries, for finding one's way; then the river: every water relation kept as
@@ -103,7 +105,7 @@ def render(inset, root=ROOT):
             xs = [P(*c) for c in f['coords']]
             cx, cy = sum(x for x, _ in xs) / len(xs), sum(y for _, y in xs) / len(xs)
             ring = inset.get('ring', 45) * u
-            out.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{ring:.1f}" fill="none" stroke="{ROUTE}" stroke-width="{3 * u:.1f}"/>')
+            out.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{ring:.1f}" fill="none" stroke="{MARK}" stroke-width="{3 * u:.1f}"/>')
     # Curated lines: a main in the route's red, dashed where its line is approximate; a canal in water.
     for ln in inset.get('lines', []):
         if ln.get('kind') == 'canal':
@@ -111,11 +113,11 @@ def render(inset, root=ROOT):
             out.append(f'<polyline points="{pts(ln["coords"])}" fill="none" stroke="{WATER}" stroke-width="{ln.get("width", 14):.1f}" stroke-linejoin="round"/>')
             continue
         dash = f' stroke-dasharray="{9 * u:.1f} {6 * u:.1f}"' if ln.get('approximate') else ''
-        out.append(f'<polyline points="{pts(ln["coords"])}" fill="none" stroke="{ROUTE}" stroke-width="{3.2 * u:.1f}" stroke-linecap="round"{dash}/>')
+        out.append(f'<polyline points="{pts(ln["coords"])}" fill="none" stroke="{MAIN}" stroke-width="{3.2 * u:.1f}" stroke-linecap="round"{dash}/>')
     # Flow arrows: a short line with a head, in the water's or the main's color.
     for ar in inset.get('arrows', []):
         (x0, y0), (x1, y1) = P(*ar['from']), P(*ar['to'])
-        col = ROUTE if ar.get('kind') == 'main' else INK
+        col = MAIN if ar.get('kind') == 'main' else INK
         l = math.hypot(x1 - x0, y1 - y0)
         ux, uy = (x1 - x0) / l, (y1 - y0) / l
         hs = 12 * u

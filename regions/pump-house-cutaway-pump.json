@@ -99,6 +99,11 @@
           "facing": -1,
           "figure": "visitor-skirt"
         }
+      ],
+      "ribbon": true,
+      "pumpedEnds": [
+        "IN: FOREBAY",
+        "OUT: TO RESERVOIR"
       ]
     }
   }

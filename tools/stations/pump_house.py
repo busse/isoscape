@@ -706,5 +706,14 @@ c['section'] = {'from': -4, 'to': 40, 'beyond': 25, 'slice': {'parts': ['^histor
                 'pumped': [[r3([b])[0], r3([z])[0]] for b, z in ((36, FOREBAY - 0.6), (B1 + 0.2, FOREBAY - 0.6), (B_IN_N + 0.3, 27.6), (HUB_B + 1.75, 27.6),
                                                                (HUB_B + 0.37, 27.2), (HUB_B + 0.37, 25.2), (12.4, 25.2), (40, 25.2))],
                 'travelers': [{'s': 5.0, 'floor': PAV, 'facing': 1, 'figure': 'visitor'}, {'s': 12.5, 'floor': PAV, 'facing': -1, 'figure': 'visitor-skirt'}]}
+c['section']['ribbon'] = True
+c['section']['pumpedEnds'] = ['IN: FOREBAY', 'OUT: TO RESERVOIR']
 (ROOT / 'regions' / 'pump-house-cutaway-pump.json').write_text(json.dumps(pump, indent=2) + '\n')
-print('variant regions written: pump-house-cutaway-pumped, pump-house-cutaway-pump')
+
+# The wheel's cut again for the variant, its way drawn as water too (d2's stays as it is).
+wheel = json.loads(json.dumps(across))
+wheel['title'] = 'The New Pump-House, about 1885: cut across through the middle wheel, ways as water (working draft, variant)'
+wheel['cutaway']['section']['ribbon'] = True
+wheel['cutaway']['section']['routeEnds'] = ['IN: FOREBAY', 'OUT: LOWER CANAL']
+(ROOT / 'regions' / 'pump-house-cutaway-across-water.json').write_text(json.dumps(wheel, indent=2) + '\n')
+print('variant regions written: pump-house-cutaway-pumped, pump-house-cutaway-pump, pump-house-cutaway-across-water')

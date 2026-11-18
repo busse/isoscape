@@ -181,6 +181,14 @@ export interface Cutaway {
     /** The second way (`cutaway.pumped`), in the palette's `pumped` color: points as `route`'s. */
     readonly pumped?: readonly (readonly [number, number])[]
     /**
+     * Draw the ways as water rather than as dashes: a pale band under a thin line with
+     * arrowheads, the route in the palette's `drive` teal and `pumped` in its blue, each end
+     * tagged with `routeEnds` / `pumpedEnds` ([in, out] labels, e.g. "IN: FOREBAY").
+     */
+    readonly ribbon?: boolean
+    readonly routeEnds?: readonly [string, string]
+    readonly pumpedEnds?: readonly [string, string]
+    /**
      * Stairs hidden from the plane behind a wall (regular expressions on item ids): drawn as
      * their dashed outline, as a stair on the side lifted away is.
      */

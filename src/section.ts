@@ -151,8 +151,26 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
     const box: Box = [Math.min(...all.map((q) => q[0])), Math.min(...all.map((q) => q[1])), Math.max(...all.map((q) => q[0])), Math.max(...all.map((q) => q[1]))]
     return { polys, box }
   })
-  // The route, and a second way (`pumped`) in its own color, drawn alike.
+  // The route, and a second way (`pumped`) in its own color, drawn alike: as dashes, or as water.
+  const tags: string[] = []
+  if (cut.section.ribbon === true) {
+    for (const [line, color, band, ends] of [[cut.section.route, p.drive, p.driveBand, cut.section.routeEnds], [cut.section.pumped, p.pumped, p.pumpedBand, cut.section.pumpedEnds]] as const) {
+      if (line === undefined || line.length < 2) continue
+      const pts = line.map(([s, e]) => P(s, zOf(e)))
+      out.push(`<path fill="none" stroke="${band}" stroke-opacity="${RIBBON_OPACITY}" stroke-width="${f(RIBBON * view.scale)}" stroke-linecap="round" stroke-linejoin="round" d="${path(pts, false)}"/>`)
+      out.push(`<path fill="none" stroke="${color}" stroke-width="${f(p.routeWidth * 0.9)}" stroke-linejoin="round" d="${path(pts, false)}"/>`)
+      for (const [x, y, ux, uy] of every(pts, RIBBON_ARROWS * view.scale)) {
+        const s = 0.65 * view.scale
+        out.push(`<path fill="${color}" stroke="${p.sky}" stroke-width="1.2" d="${path([[x + ux * s, y + uy * s], [x - ux * s * 0.6 - uy * s * 0.75, y - uy * s * 0.6 + ux * s * 0.75], [x - ux * s * 0.6 + uy * s * 0.75, y - uy * s * 0.6 - ux * s * 0.75]])}"/>`)
+      }
+      if (ends !== undefined) {
+        const mid = (minX + maxX) / 2
+        tags.push(endTag(pts[0], ends[0], color, p.sky, -3 * view.scale, pts[0][0] > mid), endTag(pts[pts.length - 1], ends[1], color, p.sky, 3 * view.scale, pts[pts.length - 1][0] > mid))
+      }
+    }
+  }
   for (const [line, color] of [[cut.section.route, p.route], [cut.section.pumped, p.pumped]] as const) {
+    if (cut.section.ribbon === true) break
     if (line === undefined || line.length < 2) continue
     const clear = ROUTE_CLEAR * view.scale
     const keepOff: Box[] = [
@@ -167,6 +185,9 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
     }
   }
   for (const t of travelers) out.push(`<g class="traveler">${t.polys.map((poly) => `<path fill="${p.route}" d="${path(poly)}"/>`).join('')}</g>`)
+  out.push(...tags)
+  // The tags stand past the drawing's edge where a way ends at it: the box grows to hold them.
+  for (const t of tags) for (const m of t.matchAll(/data-box="([^"]+)"/g)) { const [x0, y0, x1, y1] = m[1].split(' ').map(Number); grow([x0, y0]); grow([x1, y1]) }
   const pad = 20
   const vb: [number, number, number, number] = [minX - pad, minY - pad, maxX - minX + 2 * pad, maxY - minY + 2 * pad]
   const svg = [
@@ -183,6 +204,50 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
 type Box = [number, number, number, number]
 
 /** The path stops this far (m) short of a traveler, and half this short of a car end. */
+/** A water way's band, in meters wide, how see-through it is, and its arrowheads' spacing (m). */
+export const RIBBON = 1.6
+export const RIBBON_OPACITY = 0.6
+export const RIBBON_ARROWS = 3
+
+/** Points every `step` along a polyline, each with the direction it runs ([x, y, ux, uy]). */
+const every = (pts: readonly Vec2[], step: number): [number, number, number, number][] => {
+  const out: [number, number, number, number][] = []
+  let d0 = step / 2
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const [x0, y0] = pts[i]
+    const [x1, y1] = pts[i + 1]
+    const l = Math.hypot(x1 - x0, y1 - y0)
+    if (l === 0) continue
+    const ux = (x1 - x0) / l
+    const uy = (y1 - y0) / l
+    let t = d0
+    for (; t < l; t += step) out.push([x0 + ux * t, y0 + uy * t, ux, uy])
+    d0 = t - l
+  }
+  return out
+}
+
+/**
+ * A tag at a way's end ("IN: FOREBAY"): a dot on the end, a leader `dy` up or down, and a pill
+ * with the label, set to the inside of the drawing (`right`: the end lies in its right half).
+ * The pill's width allows the label's letters at 0.68 em and their 1 px spacing, with a full em
+ * of padding each side.
+ */
+const endTag = (at: Vec2, label: string, color: string, paper: string, dy: number, right: boolean): string => {
+  const size = 11
+  const padX = size
+  const w = label.length * (size * 0.68 + 1) + 2 * padX
+  const h = size * 2
+  const [x, y] = at
+  const ty = y + dy
+  const bx = right ? x + 12 - w : x - 12
+  return `<g class="way-end" data-box="${f(bx)} ${f(ty - h / 2)} ${f(bx + w)} ${f(ty + h / 2)}">` +
+    `<path fill="none" stroke="${color}" stroke-width="2" d="${path([[x, y], [x, ty]], false)}"/>` +
+    `<circle cx="${f(x)}" cy="${f(y)}" r="5.5" fill="${color}" stroke="${paper}" stroke-width="2.5"/>` +
+    `<rect x="${f(bx)}" y="${f(ty - h / 2)}" width="${f(w)}" height="${f(h)}" rx="${f(h / 2)}" fill="${color}"/>` +
+    `<text x="${f(bx + w / 2)}" y="${f(ty + size * 0.36)}" font-family="Helvetica, Arial, sans-serif" font-size="${size}" font-weight="bold" letter-spacing="1" fill="${paper}" text-anchor="middle">${esc(label)}</text></g>`
+}
+
 export const ROUTE_CLEAR = 0.35
 /** An arrowhead on the path is this long (m); a stretch shorter than three of them has none. */
 export const ARROW = 0.7

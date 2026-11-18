@@ -14,7 +14,6 @@
  "groups": [
   {
    "title": "The water that drives",
-   "traveler": true,
    "callouts": [
     {
      "n": 1,
@@ -134,8 +133,8 @@
       "part": "history:ph-x-tailwater-1",
       "dx": -0.2,
       "badge": [
-       0,
-       130
+       60,
+       -150
       ]
      },
      "confidence": "approximate"
@@ -234,8 +233,8 @@
       "part": "history:ph-x-main-out",
       "dx": 0.3,
       "badge": [
-       0,
-       140
+       -220,
+       40
       ]
      }
     }
@@ -329,7 +328,7 @@
   ]
  ],
  "marksNote": "The same marks stand by each part in the two sections.",
- "travelerKey": "Visitors to scale, 1.75 m (5 ft 9 in), for size only. Red: the water that drives the wheels. Blue: the water pumped.",
+ "travelerKey": "Visitors to scale, 1.75 m (5 ft 9 in), for size only. Teal: the water that drives the wheels. Blue: the water pumped.",
  "sources": "Sources: The American Engineer, Dec. 26, 1884, pp. 260–261 (HathiTrust); National Register nomination, New Pump-House, 2002; HAER VA-34 (Library of Congress); Pump House Park schematic design study, 2019 (levels); C. E. Bolling, AWWA Proceedings, 1900; OpenStreetMap; USGS 3DEP.",
  "notes": "Machines scaled from the 1884 engravings by their dimensions. Where each gang stood, the tailraces and the roof’s pitch are inferred. Roof lifted, middle of the floor taken up. Canal banks are today’s.",
  "credit": "Drawn with isoscape, built with Claude  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Machinery after The American Engineer, 1884",
@@ -571,11 +570,12 @@
     "italic": true,
     "size": 0.81
    }
-  ]
+  ],
+  "water": true
  },
  "sections": [
   {
-   "region": "pump-house-cutaway-across",
+   "region": "pump-house-cutaway-across-water",
    "caption": "Through a wheel, looking west: the water that drives",
    "as": "cross"
   },

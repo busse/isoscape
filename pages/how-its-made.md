@@ -1006,7 +1006,9 @@ side (to the platforms) is drawn as its stepped profile, dashed. Under it the gr
 building goes below it. Water held in a work (a forebay, a tailrace) and ground modeled as a
 part (a canal's bed) are cut in their own colors, water's blue and the earth's, where every
 other cut part is solid ink. A works that lifts water (the Pump House) may trace that water too, in a darker blue
-beside the red route of the water that drives it. Platforms are drawn 0.35 m over the rails (approximate), rails at true
+beside the route of the water that drives it; drawn as water, the two are a pale band under a
+thin line with arrowheads every 3 m, teal for the water that drives and blue for the water
+pumped, never red, with a tag at each end saying where the water comes in and goes out. Platforms are drawn 0.35 m over the rails (approximate), rails at true
 gauge where tracks cross the plane, and a red dashed line follows the traveler from the street
 to the train. The line runs at waist height, 0.95 m over each floor, with a small arrowhead
 pointing the way on each stretch, and it is broken where it meets a traveler and where it
