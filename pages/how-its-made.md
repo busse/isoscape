@@ -761,7 +761,11 @@ Jackson Ward north of Leigh Street is traced from volume 3 twice: as republished
 first printed in 1925. The 1952 sheets were fitted to street corners; each 1925 sheet is matched
 to its 1952 reprint feature by feature (a homography with a gentle quadratic correction for the
 paper, the matches agreeing to a median of 0.08–0.13 m) and placed by the same fit, then traced
-from its colors, which in 1925 cover every building. A 1925 building is drawn until 1952 and the
+from its colors, which in 1925 cover every building. The color fills keep the stair-steps of the
+scan, so the drawn outlines are then simplified (Douglas-Peucker at 1 m, less where that would
+stray further) and squared where every edge is within 12° of the building's axes, with no wall
+moved more than 1 m and nothing dropped or merged: 61,738 corners become 21,833, about six a
+building, where each corner had drawn an edge and a dot. A 1925 building is drawn until 1952 and the
 1952 tracing carries it on; one the 1952 sheets no longer show ends in 1952, or in 1941 on the
 blocks cleared for Gilpin Court. Before 1952 the coarse buildings from volume 1's small-scale
 overview that fall in those blocks are left out (`leaveOut` with `ids` and `before`), so the two
