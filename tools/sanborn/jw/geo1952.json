@@ -1,0 +1,74 @@
+{
+ "307": {
+  "params": [
+   11248.156875079561,
+   7380.145199598306,
+   -0.6509306937858127,
+   6.337979828381614
+  ],
+  "refined": true,
+  "corners": [
+   "2nd & Baker",
+   "2nd & Duval",
+   "1st & Baker",
+   "1st & Duval",
+   "1st & Charity"
+  ],
+  "resid_m": [
+   3.0,
+   2.6,
+   1.8,
+   1.8,
+   2.0
+  ],
+  "resid_corners_only": [
+   3.8,
+   1.9,
+   1.4,
+   1.0,
+   1.5
+  ],
+  "m_per_px": 0.1578,
+  "block_inliers": 0.2,
+  "block_points": 3647
+ },
+ "308": {
+  "params": [
+   11462.657155043846,
+   5385.559581376066,
+   -0.6517636187246549,
+   6.495003665603591
+  ],
+  "refined": true,
+  "corners": [
+   "2nd & Jackson",
+   "2nd & Leigh",
+   "3rd & Leigh",
+   "4th & Leigh",
+   "2nd & Clay",
+   "3rd & Clay",
+   "1st & Leigh"
+  ],
+  "resid_m": [
+   0.7,
+   0.2,
+   1.5,
+   3.9,
+   1.2,
+   2.9,
+   2.8
+  ],
+  "resid_corners_only": [
+   0.7,
+   0.2,
+   1.5,
+   3.9,
+   1.2,
+   2.9,
+   2.8
+  ],
+  "m_per_px": 0.154,
+  "block_inliers": 0.23,
+  "block_points": 3834
+ }
+}
