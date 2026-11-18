@@ -24,6 +24,24 @@ when. Once anyone has ordered an edition, it stays as it is, and any change beco
 Numbers already printed stay as they are. The [production board](board.md) shows where each piece
 stands. This entry was drafted with Claude.
 
+## November 18, 2026 (Main Street Station corrected)
+
+**Broad Street Station, 1943: Main Street Station redrawn at its measured height.** Nobody had
+ordered these editions, so they are corrected in place as 3.1, and each title block still says 3:
+
+- Main Street Station (BSS·07) 3.1: the station redrawn, and the note corrected.
+- The Railroad Map (BSS·M) 3.1: the station redrawn.
+- The framed set, The Railroads and Fourteen Places (BSS·00) 3.1: the station redrawn on its map and panel 7, and note 7 corrected.
+- The Triple Crossing (BSS·08) 3.1: the station redrawn where it stands at the top edge.
+
+Main Street Station is now drawn at the height measured on three Historic American Buildings
+Survey photographs of 1971 (VA-848-10, -11 and -12), scaled by the front's own width of 102 feet:
+the ridge about 115 feet over Main Street, and the clock tower about 148 feet to the finial (all
+approximate). It had been drawn about a fifth too low, from the 110 feet The Railroad Gazette gave
+in 1900, before the station was built. Stop 7's note now gives the tower as about 148 feet to the
+finial (it said 110 feet). No other print changes. The correction was made with Claude, in code;
+this entry was drafted with Claude.
+
 ## November 18, 2026
 
 **Broad Street Station, 1943: the set is complete.** The set's map, The Railroad Map (plate BSS·M),
