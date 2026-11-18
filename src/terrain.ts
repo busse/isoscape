@@ -204,26 +204,8 @@ export const RESTORE_TOLERANCE = 0.001
  */
 export const restoreGround = (g: HeightGrid, rings: readonly (readonly Vec2[])[], lines: readonly GroundLine[] = []): number => {
   const { elev, nx, ny, x0, y0, cell } = g
-  const inside = new Uint8Array(nx * ny)
-  for (let j = 0; j < ny; j++) {
-    const y = y0 + j * cell
-    const xs: number[] = []
-    for (const r of rings) {
-      for (let k = 0, m = r.length - 1; k < r.length; m = k++) {
-        const [ax, ay] = r[m]
-        const [bx, by] = r[k]
-        if (ay > y !== by > y) xs.push(ax + ((y - ay) / (by - ay)) * (bx - ax))
-      }
-    }
-    xs.sort((a, b) => a - b)
-    for (let k = 0; k + 1 < xs.length; k += 2) {
-      const i0 = Math.max(1, Math.ceil((xs[k] - x0) / cell))
-      const i1 = Math.min(nx - 2, Math.floor((xs[k + 1] - x0) / cell))
-      // The grid's own rim is never rebuilt: the membrane needs measured ground around it.
-      if (j < 1 || j > ny - 2) continue
-      for (let i = i0; i <= i1; i++) inside[j * nx + i] = 1
-    }
-  }
+  // The grid's own rim is never rebuilt: the membrane needs measured ground around it.
+  const inside = insideRings(g, rings)
   const measured = (x: number, y: number): number => {
     const fx = Math.min(nx - 1.001, Math.max(0, (x - x0) / cell))
     const fy = Math.min(ny - 1.001, Math.max(0, (y - y0) / cell))
@@ -304,6 +286,83 @@ export const restoreGround = (g: HeightGrid, rings: readonly (readonly Vec2[])[]
     if (change < RESTORE_TOLERANCE) break
   }
   return rebuilt
+}
+
+/** Meters: the default reach of `lowerGround`, half the width of the widest bank it takes down. */
+export const LOWER_RADIUS = 25
+
+/**
+ * Take down banks a later work raised (a ramp's embankment) inside `rings` (view meters,
+ * even-odd), keeping the broad lie of the land: a grey-scale opening of the measured ground
+ * with a disk of `radius` meters (the lowest ground within reach, then the highest of those
+ * lows), applied only inside. A bank narrower than twice the radius comes down to the ground
+ * beside it; a plateau, a valley side or anything broader is left as measured, and a cut is not
+ * filled (`restoreGround` does that). Returns the number of nodes lowered by more than 1 cm.
+ */
+export const lowerGround = (g: HeightGrid, rings: readonly (readonly Vec2[])[], radius = LOWER_RADIUS): number => {
+  const { elev, nx, ny, cell } = g
+  const inside = insideRings(g, rings)
+  let i0 = nx, i1 = -1, j0 = ny, j1 = -1
+  for (let k = 0; k < inside.length; k++) {
+    if (!inside[k]) continue
+    const i = k % nx, j = (k - i) / nx
+    i0 = Math.min(i0, i); i1 = Math.max(i1, i); j0 = Math.min(j0, j); j1 = Math.max(j1, j)
+  }
+  if (i1 < 0) return 0
+  const r = Math.max(1, Math.round(radius / cell))
+  const offsets: [number, number][] = []
+  for (let dj = -r; dj <= r; dj++) for (let di = -r; di <= r; di++) if (di * di + dj * dj <= r * r) offsets.push([di, dj])
+  // The window the opening needs: the area, and twice the reach around it.
+  const wi0 = Math.max(0, i0 - 2 * r), wi1 = Math.min(nx - 1, i1 + 2 * r)
+  const wj0 = Math.max(0, j0 - 2 * r), wj1 = Math.min(ny - 1, j1 + 2 * r)
+  const pass = (src: Float32Array, pick: (a: number, b: number) => number, start: number, ia: number, ib: number, ja: number, jb: number): Float32Array => {
+    const out = new Float32Array(src)
+    for (let j = ja; j <= jb; j++) {
+      for (let i = ia; i <= ib; i++) {
+        let v = start
+        for (const [di, dj] of offsets) {
+          const ii = i + di, jj = j + dj
+          if (ii < wi0 || jj < wj0 || ii > wi1 || jj > wj1) continue
+          v = pick(v, src[jj * nx + ii])
+        }
+        out[j * nx + i] = v
+      }
+    }
+    return out
+  }
+  const eroded = pass(elev, Math.min, Infinity, wi0, wi1, wj0, wj1)
+  const opened = pass(eroded, Math.max, -Infinity, Math.max(0, i0 - r), Math.min(nx - 1, i1 + r), Math.max(0, j0 - r), Math.min(ny - 1, j1 + r))
+  let lowered = 0
+  for (let k = 0; k < inside.length; k++) {
+    if (!inside[k] || opened[k] >= elev[k]) continue
+    if (elev[k] - opened[k] > 0.01) lowered++
+    elev[k] = opened[k]
+  }
+  return lowered
+}
+
+/** 1 at nodes inside `rings` (even-odd), never on the grid's own outermost rows and columns. */
+const insideRings = (g: HeightGrid, rings: readonly (readonly Vec2[])[]): Uint8Array => {
+  const { nx, ny, x0, y0, cell } = g
+  const inside = new Uint8Array(nx * ny)
+  for (let j = 1; j < ny - 1; j++) {
+    const y = y0 + j * cell
+    const xs: number[] = []
+    for (const r of rings) {
+      for (let k = 0, m = r.length - 1; k < r.length; m = k++) {
+        const [ax, ay] = r[m]
+        const [bx, by] = r[k]
+        if (ay > y !== by > y) xs.push(ax + ((y - ay) / (by - ay)) * (bx - ax))
+      }
+    }
+    xs.sort((a, b) => a - b)
+    for (let k = 0; k + 1 < xs.length; k += 2) {
+      const i0 = Math.max(1, Math.ceil((xs[k] - x0) / cell))
+      const i1 = Math.min(nx - 2, Math.floor((xs[k + 1] - x0) / cell))
+      for (let i = i0; i <= i1; i++) inside[j * nx + i] = 1
+    }
+  }
+  return inside
 }
 
 /** Replace missing samples by the mean of their present neighbors, repeatedly. */

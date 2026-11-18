@@ -19,7 +19,7 @@ import { mix, type Palette } from './palette.ts'
 import type { Region } from './region.ts'
 import { dominantGridAngle, makeView, snapBearing, type View } from './view.ts'
 import { localMetres } from './region.ts'
-import { drawnWet, makeTerrain, rasterize, historicWater, restoreGround, settleWater, traceShore, type HeightGrid, type Terrain } from './terrain.ts'
+import { drawnWet, lowerGround, makeTerrain, rasterize, historicWater, restoreGround, settleWater, traceShore, type HeightGrid, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
@@ -273,8 +273,10 @@ export const buildScene = (
   let restoredNodes = 0
   const restore = restorations.length === 0 ? undefined : (grid: HeightGrid) => {
     for (const g of restorations) {
-      restoredNodes += restoreGround(grid, g.rings.map((r) => r.map(([lon, lat]) => view.toView(lon, lat))),
-        (g.lines ?? []).map((l) => ({ pts: l.line.map(([lon, lat]) => view.toView(lon, lat)), ...(l.elevation === undefined ? {} : { elevation: l.elevation }) })))
+      const rings = g.rings.map((r) => r.map(([lon, lat]) => view.toView(lon, lat)))
+      restoredNodes += g.method === 'lower'
+        ? lowerGround(grid, rings, g.radius)
+        : restoreGround(grid, rings, (g.lines ?? []).map((l) => ({ pts: l.line.map(([lon, lat]) => view.toView(lon, lat)), ...(l.elevation === undefined ? {} : { elevation: l.elevation }) })))
     }
   }
   const terrain = makeTerrain(view, opts.cell ?? 5, useTerrain ? (opts.exaggeration ?? 2) : 1, useTerrain ? elevation : null, useTerrain ? restore : undefined)

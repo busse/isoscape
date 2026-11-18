@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { makeTerrain, restoreGround, type HeightGrid } from '../src/terrain.ts'
+import { lowerGround, makeTerrain, restoreGround, type HeightGrid } from '../src/terrain.ts'
 import { makeView } from '../src/view.ts'
 import type { Region } from '../src/region.ts'
 import type { Vec2 } from '../src/geom.ts'
@@ -62,4 +62,17 @@ test('a terrain built with a restoration rebuilds inside it, and without one is 
   assert.ok(Math.abs(restored.elevation([0, 0]) - 50) < 0.05)
   // The frame's lowest point was the trench's floor; rebuilt, it is the plain.
   assert.ok(Math.abs(restored.datum - 50) < 0.05)
+})
+
+test('a ramp bank is taken down to the ground beside it; broad ground is kept', () => {
+  // A plateau at 50 m falling to 40 m east of x = 200, with a bank 6 m high and 20 m wide on it.
+  const g = grid(81, 61, (x, y) => (x < 200 ? 50 : 40) + (Math.abs(y - 150) <= 10 && x > 60 && x < 340 ? 6 : 0))
+  const all: Vec2[] = [[20, 20], [380, 20], [380, 280], [20, 280]]
+  const n = lowerGround(g, [all])
+  assert.ok(n > 0)
+  assert.ok(Math.abs(at(g, 120, 150) - 50) < 1e-6, `bank on the plateau ${at(g, 120, 150)}`)
+  assert.ok(Math.abs(at(g, 300, 150) - 40) < 1e-6, `bank below ${at(g, 300, 150)}`)
+  // The plateau and the low ground away from the bank are as they were.
+  assert.equal(at(g, 100, 60), 50)
+  assert.equal(at(g, 300, 60), 40)
 })

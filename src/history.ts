@@ -213,6 +213,15 @@ export interface GroundRestoration {
   readonly before: number
   readonly rings: readonly (readonly Vec2[])[]
   /**
+   * How the ground inside is put back: `membrane` (the default) rebuilds it from its rim and its
+   * lines (`restoreGround`), for a cut or a fill across level ground; `lower` takes down banks
+   * narrower than twice `radius` meters (default 25) to the ground beside them and keeps the
+   * rest as measured (`lowerGround`), for ramps raised on ground that was otherwise little
+   * changed. Restorations apply in the order listed.
+   */
+  readonly method?: 'membrane' | 'lower'
+  readonly radius?: number
+  /**
    * Lines the old ground followed: a street that ran through at grade (no `elevation`; its grade
    * is straight between the measured ground at its ends), or a line at a known elevation in
    * meters on the elevation model's datum (a contour read off an old map, converted).
