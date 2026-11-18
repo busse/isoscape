@@ -22,7 +22,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
-- **Main Street Station, about 1952: Cutaway** (MSS·01): released as MSS-01 v1 (record written, check --rebuild OK); the merged product is a DRAFT: go live with merge.py live, then set live_version=1 on_sale=true waiting_on=nothing
 - **The Byrd Theatre: Cutaway**: owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead
 
 ## Rough draft
@@ -60,7 +59,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | BSS·16 | Scott's Addition, Broad Street Station 1943 | set box | 1.0.0 | yes, version 1 |
 | BSS·M | Broad Street Station, 1943: The Railroad Map | set map | 3.1.0 | yes, version 3 |
 | GWY·01 | Gwynn's Island | print | 4.0.0 | yes, version 4 |
-| MSS·01 | Main Street Station, about 1952: Cutaway | cutaway | 1.0.0 | no |
+| MSS·01 | Main Street Station, about 1952: Cutaway | cutaway | 1.0.0 | yes, version 1 |
 | RVA·01 | Richmond, 1925 | print | 5.0.0 | yes, version 5 |
 | RVA·03 | Richmond, 1886 | print | 3.0.0 | yes, version 3 |
 | RVA·04 | Richmond, 1950 | print | 5.0.0 | yes, version 5 |

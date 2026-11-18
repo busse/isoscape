@@ -2759,12 +2759,12 @@
    "status": "active",
    "asset_version": "1.0.0",
    "published_version": 1,
-   "live_version": null,
-   "on_sale": false,
+   "live_version": 1,
+   "on_sale": true,
    "orders": 0,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "released as MSS-01 v1 (record written, check --rebuild OK); the merged product is a DRAFT: go live with merge.py live, then set live_version=1 on_sale=true waiting_on=nothing",
+   "waiting_on": "nothing",
+   "decision": null,
    "accepted_faults": [
     {
      "what": "track floor drawn 0.7 m high (6.5 m above the ground floor; the 1900 section and HABS VA-848-10 give 19 ft, 5.8 m): about 0.4 mm on the 32 in print, not visible at arm's length; correct in a later edition if the model is reworked"
