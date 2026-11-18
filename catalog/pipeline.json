@@ -2868,7 +2868,7 @@
    "orders": null,
    "rounds": 2,
    "waiting_on": "owner",
-   "decision": "rc1 was inspected once; its one fix round (callout 2 in the main view, slanted arrowheads, the marks on 5 and 10, the 175-ft head, about 23 ft) made rc2, which waits on the owner's release approval",
+   "decision": "rc1 inspected once; its one fix round made rc2. Waiting on the owner: (1) a second fix round for the title block (it sits top right over the column, and its taxonomy line is about 4.8 pt at 24x18), (2) the typeface as rendered for print, (3) release approval",
    "accepted_faults": [
     {
      "what": "main view: callout 8's dot falls just west of the visible suction, on the west wheel",
@@ -3004,7 +3004,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "fact check done (143 claims, 44 changes); page round 1 from the owner's review done (headline, numbered figures, link fix, lightbox, route section as prose; branch at e18d02f and after). Waiting on the owner's local review (ISO-TEST/_preview/jackson-ward/), the headline choice and two small decisions; then he shares it with his community reviewers. Not merged, not published.",
+   "decision": "fact check done (143 claims, 44 changes); page rounds 1 and 2 from the owner's review done (headline and deck, numbered figures, link fix, lightbox and grid, route section as prose, four compare sliders; branch at 930c1d4). Waiting on the owner's local review (ISO-TEST/_preview/jackson-ward/), the headline choice and two small decisions; then he shares it with his community reviewers. Not merged, not published.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,

@@ -22,7 +22,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
-- **The Byrd Park Pump House: Cutaway** (BPPH·01): rc1 was inspected once; its one fix round (callout 2 in the main view, slanted arrowheads, the marks on 5 and 10, the 175-ft head, about 23 ft) made rc2, which waits on the owner's release approval
+- **The Byrd Park Pump House: Cutaway** (BPPH·01): rc1 inspected once; its one fix round made rc2. Waiting on the owner: (1) a second fix round for the title block (it sits top right over the column, and its taxonomy line is about 4.8 pt at 24x18), (2) the typeface as rendered for print, (3) release approval
 - **The Byrd Theatre: Cutaway**: owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead
 
 ## Working draft
