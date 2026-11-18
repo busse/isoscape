@@ -25,8 +25,11 @@ test('every link within the Jackson Ward page lands on an id, in the explorer an
 test('every picture on the Jackson Ward page is a numbered figure with a caption', () => {
   const page = loadPages().find((p) => p.slug === 'jackson-ward')
   assert.ok(page)
-  const imgs = [...page.html.matchAll(/<img /g)].length
+  // A compare figure holds two pictures, one figure.
+  const imgs = [...page.html.matchAll(/<img (?!class="cmp-b")/g)].length
   assert.equal(page.figures.length, imgs, 'no picture outside a figure')
+  const sliders = page.figures.filter((f) => f.compare)
+  assert.ok(sliders.length >= 1 && sliders.length <= 4, 'one to four compare sliders')
   assert.ok(page.figures.length >= 20)
   page.figures.forEach((f, i) => assert.equal(f.n, i + 1))
   for (const m of page.html.matchAll(/<figcaption><p><span class="fig-n">Fig\. (\d+)\.<\/span>([^<]*)/g)) assert.ok(m[2].trim().length > 10, `Fig. ${m[1]} has a caption`)
@@ -36,4 +39,18 @@ test('every picture on the Jackson Ward page is a numbered figure with a caption
     assert.ok(at > 0 && page.html.lastIndexOf('<figure', at) > page.html.lastIndexOf('</figure>', at), `the key holding "${n}" is inside its figure`)
   }
   assert.ok(page.deck && page.deck.length > 40, 'the page has a deck')
+})
+
+test('each compare slider on the Jackson Ward page lays two pictures of one size over each other, and no other page has one', () => {
+  const page = loadPages().find((p) => p.slug === 'jackson-ward')
+  assert.ok(page)
+  const cmps = [...page.html.matchAll(/<div class="cmp" [\s\S]*?<\/div>\n<div class="cmp-div"/g)].map((m) => m[0])
+  assert.equal(cmps.length, page.figures.filter((f) => f.compare).length)
+  for (const c of cmps) {
+    const sizes = [...c.matchAll(/<img class="cmp-[ab]" [^>]*width="(\d+)" height="(\d+)"/g)].map((m) => m[1] + 'x' + m[2])
+    assert.equal(sizes.length, 2, 'two pictures with their sizes')
+    assert.equal(sizes[0], sizes[1], 'the same size, so they line up')
+  }
+  // Every other page keeps plain figures (or none).
+  for (const p of loadPages()) if (p.slug !== 'jackson-ward') assert.ok(!p.figures.some((f) => f.compare), p.slug)
 })

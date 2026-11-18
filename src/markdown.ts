@@ -27,6 +27,21 @@
  * `figure` are classes from a fixed list (`wide`: the picture may run wider than the text).
  * GitHub shows the fence lines as text, so the file still reads there. A page without the
  * fence renders as before.
+ *
+ * A compare figure (opt-in too) is a figure whose picture is a slider between two pictures of
+ * the same frame (compare.ts):
+ *
+ *     ::: compare wide
+ *     ![Alt text for the left picture](before.webp) about 1925
+ *     ![Alt text for the right picture](after.webp) 1952
+ *
+ *     The caption.
+ *     :::
+ *
+ * Each picture's line ends with its label. The first picture is on the left of the divider, the
+ * second on the right. It is numbered with the other figures and takes the same classes. Its
+ * expand button links to the first picture's full-size file; each picture carries its own in
+ * `data-large`, for the lightbox. Anything but two pictures makes a plain figure.
  */
 
 export interface Heading {
@@ -50,6 +65,8 @@ export interface Figure {
   /** The anchor, without any prefix: `fig-N`. */
   readonly id: string
   readonly alt: string
+  /** A compare figure (`::: compare`): a slider between two pictures. */
+  readonly compare?: true
 }
 
 export interface MarkdownOptions {
@@ -223,7 +240,7 @@ export const inline = (src: string, opts: InlineOptions = {}): string => {
 // ---- blocks ------------------------------------------------------------------------------------
 
 const FENCE = /^ {0,3}(`{3,}|~{3,})\s*([\w+-]*)\s*$/
-const FIGURE = /^ {0,3}:::\s*figure\b(.*)$/
+const FIGURE = /^ {0,3}:::\s*(figure|compare)\b(.*)$/
 const FIGURE_END = /^ {0,3}:::\s*$/
 /** The classes a figure may ask for. */
 const FIGURE_CLASSES = new Set(['wide'])
@@ -258,8 +275,33 @@ interface Ctx {
   readonly figures: Figure[]
 }
 
-/** A `::: figure` block's lines (between the fences) as HTML. */
-const figure = (classes: string, body: readonly string[], ctx: Ctx): string => {
+/** A compare figure's two lines: the picture, then its label. */
+const COMPARE_LINE = /^(!\[[^\]]*\]\([^)\s]*\))\s*(.*)$/
+
+/** A `::: compare` block's slider, or null when its lines are not two pictures that resolve. */
+const compareSlider = (media: readonly string[], label: string, ctx: Ctx): string | null => {
+  if (media.length !== 2) return null
+  const sides = media.map((m) => {
+    const line = m.match(COMPARE_LINE)
+    if (!line) return null
+    const img = inline(line[1], { ...ctx.opts, inFigure: true })
+    const full = img.match(/ data-full="([^"]*)"/)?.[1]
+    if (!img.startsWith('<img ') || full === undefined) return null
+    return { img: img.replace(/ data-full="/, ' data-large="'), full, label: line[2].trim() || 'here', w: Number(img.match(/ width="(\d+)"/)?.[1]), h: Number(img.match(/ height="(\d+)"/)?.[1]) }
+  })
+  const [a, b] = sides
+  if (!a || !b) return null
+  const ar = a.w > 0 && a.h > 0 ? ` style="--ar: ${Math.round((a.w / a.h) * 10000) / 10000}"` : ''
+  const la = escapeHtml(a.label), lb = escapeHtml(b.label)
+  return `<div class="cmp" data-a="${la}" data-b="${lb}"${ar}>\n` +
+    a.img.replace('<img ', '<img class="cmp-a" ') + '\n' +
+    `<div class="cmp-clip">${b.img.replace('<img ', '<img class="cmp-b" ')}</div>\n` +
+    `<div class="cmp-div" data-badge="${la} │ ${lb}" role="slider" tabindex="0" aria-label="${escapeHtml(label)} Divider: ${la} on the left, ${lb} on the right" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50%: ${la} on the left, ${lb} on the right"></div>\n` +
+    `<a class="fig-open cmp-open" href="${a.full}" aria-label="${escapeHtml(label)} Open larger" title="Open larger">⤢</a>\n</div>`
+}
+
+/** A `::: figure` (or `::: compare`) block's lines (between the fences) as HTML. */
+const figure = (kind: string, classes: string, body: readonly string[], ctx: Ctx): string => {
   let k = 0
   while (k < body.length && body[k].trim() === '') k++
   const media: string[] = []
@@ -267,14 +309,15 @@ const figure = (classes: string, body: readonly string[], ctx: Ctx): string => {
   const n = ctx.figures.length + 1
   const id = `fig-${n}`
   const alt = media.join(' ').match(/!\[([^\]]*)\]/)?.[1] ?? ''
-  ctx.figures.push({ n, id, alt })
   const label = `Fig. ${n}.`
-  const pics = inline(media.join(' '), { ...ctx.opts, inFigure: true }).replace(/<img [^>]*?data-full="([^"]*)"[^>]*>/g, (img, full: string) =>
+  const slider = kind === 'compare' ? compareSlider(media, label, ctx) : null
+  ctx.figures.push(slider === null ? { n, id, alt } : { n, id, alt, compare: true })
+  const pics = slider ?? inline(media.join(' '), { ...ctx.opts, inFigure: true }).replace(/<img [^>]*?data-full="([^"]*)"[^>]*>/g, (img, full: string) =>
     `<a class="fig-open" href="${full}" aria-label="${escapeHtml(label)} Open larger">${img.replace(/ data-full="[^"]*"/, '')}</a>`)
   let cap = blocks(body.slice(k), ctx)
   const tag = `<span class="fig-n">${label}</span>`
   cap = cap.startsWith('<p>') ? '<p>' + tag + ' ' + cap.slice(3) : `<p>${tag}</p>` + (cap ? '\n' + cap : '')
-  const cls = ['fig', ...classes.split(/\s+/).filter((c) => FIGURE_CLASSES.has(c))].join(' ')
+  const cls = ['fig', ...(slider === null ? [] : ['cmp-fig']), ...classes.split(/\s+/).filter((c) => FIGURE_CLASSES.has(c))].join(' ')
   return `<figure class="${cls}" id="${escapeHtml((ctx.opts.idPrefix ?? '') + id)}">\n${pics}\n<figcaption>${cap}</figcaption>\n</figure>`
 }
 
@@ -304,7 +347,7 @@ const blocks = (lines: readonly string[], ctx: Ctx): string => {
       i++
       while (i < lines.length && !FIGURE_END.test(lines[i])) body.push(lines[i++])
       i++
-      out.push(figure(fig[1], body, ctx))
+      out.push(figure(fig[1], fig[2], body, ctx))
       continue
     }
 

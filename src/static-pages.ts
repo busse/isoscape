@@ -29,6 +29,7 @@ import type { BuildMeta } from './archive.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
 import { MARK, PROSE_CSS, STORY_CSS, THEME_CSS } from './explorer.ts'
 import { FIGURE_CSS, LIGHTBOX_CSS, lightbox } from './lightbox.ts'
+import { COMPARE_CSS, compareSliders, splitAt, splitOf } from './compare.ts'
 import { escapeHtml } from './markdown.ts'
 import { loadPages, PAGES_DIR, type Page } from './pages.ts'
 import {
@@ -279,6 +280,8 @@ interface Head {
   readonly ld: unknown
   /** The page has numbered figures: their styles and the lightbox. */
   readonly figures?: boolean
+  /** The page has compare figures (`::: compare`): the slider's styles. */
+  readonly compare?: boolean
 }
 
 interface Ctx {
@@ -308,7 +311,7 @@ ${ctx.config.siteUrl === undefined ? '' : `<link rel="sitemap" type="application
   ...(ctx.config.siteUrl === undefined ? {} : { url: siteHref(h.path, ctx.config.siteUrl) }),
 })}${ldJson(h.ld)}<style>
 ${THEME_CSS}* { box-sizing: border-box; }
-${PROSE_CSS}${STORY_CSS}${STATIC_CSS}${h.figures ? FIGURE_CSS + LIGHTBOX_CSS : ''}</style>
+${PROSE_CSS}${STORY_CSS}${STATIC_CSS}${h.figures ? FIGURE_CSS + LIGHTBOX_CSS : ''}${h.compare ? COMPARE_CSS : ''}</style>
 </head>
 <body>
 `
@@ -406,10 +409,11 @@ export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}
     ...(modified === undefined ? {} : { dateModified: modified }),
     isPartOf: { '@type': 'WebSite', name: SITE_NAME, ...(ctx.config.siteUrl === undefined ? {} : { url: ctx.config.siteUrl }) },
   }
-  return head({ title: `${page.title} · ${SITE_NAME}`, description, path, type: 'article', ld, ...(page.unlisted ? { noindex: true } : {}), ...(page.figures.length > 0 ? { figures: true } : {}), ...(image === undefined ? {} : { image }), ...(imageAlt === undefined ? {} : { imageAlt }) }, ctx) +
+  return head({ title: `${page.title} · ${SITE_NAME}`, description, path, type: 'article', ld, ...(page.unlisted ? { noindex: true } : {}), ...(page.figures.length > 0 ? { figures: true } : {}), ...(page.figures.some((f) => f.compare) ? { compare: true } : {}), ...(image === undefined ? {} : { image }), ...(imageAlt === undefined ? {} : { imageAlt }) }, ctx) +
     topBar(ctx, page.slug) +
     `<main class="wrap">\n${acts}<article class="prose">\n${html}</article>\n${acts}</main>\n` +
-    footer(ctx) + (page.figures.length > 0 ? `<script>(${lightbox.toString()})(document)</script>\n` : '') + '</body>\n</html>\n'
+    footer(ctx) + (page.figures.length > 0 ? `<script>(${lightbox.toString()})(document)</script>\n` : '') +
+    (page.figures.some((f) => f.compare) ? `<script>(${compareSliders.toString()})(document, { at: ${splitAt.toString()}, of: ${splitOf.toString()} })</script>\n` : '') + '</body>\n</html>\n'
 }
 
 // ---- map pages ----------------------------------------------------------------------------------

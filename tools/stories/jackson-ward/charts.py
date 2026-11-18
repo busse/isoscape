@@ -468,24 +468,27 @@ def chart_profiles(data, out):
 
 
 # ---- 4. the hillshade pair -------------------------------------------------------------------
+# Two pictures of one frame, the same size, for the page's compare slider: today's ground with
+# the trench (left) and the ground rebuilt with it filled (right). Everything but the shading is
+# drawn the same in both, so only the ground changes under the divider.
 
 def chart_hillshade(data, out):
-    fig, axs = plt.subplots(1, 2, figsize=(12, 5.4))
     bounds = (-760, 820, -560, 520)
-    for ax, grid, t in [(axs[0], data.today, 'Today (lidar)'), (axs[1], data.rebuilt, 'Rebuilt for 1952 (estimate)')]:
+    for name, grid, t in [('hillshade-today', data.today, 'Today (lidar)'), ('hillshade-rebuilt', data.rebuilt, 'Rebuilt for 1952 (estimate)')]:
+        fig, ax = plt.subplots(figsize=(10, 7.9))
         plan_axes(ax, data, bounds)
         ax.imshow(shade_rgb(grid, data.cell), origin='lower', extent=data.extent, zorder=0, interpolation='bilinear')
         for r in data.trench['rings']:
             outline(ax, r, color=R['ink'], lw=0.9, dots=False, z=6)
         for r in data.junction['rings']:
             outline(ax, r, color=R['ink'], lw=0.8, dots=False, ls=(0, (4, 2.5)), z=6)
-        ax.set_title(t, fontsize=12)
-    scale_bar(axs[0], -720, -520, 200)
-    north_arrow(axs[0], data, -700, -440, 50)
-    fig.suptitle('The ground alone, lit from the northwest, before and after the trench is filled', x=0.012, ha='left', fontsize=13, fontweight=600)
-    fig.subplots_adjust(left=0.012, right=0.988, top=0.86, bottom=0.08, wspace=0.03)
-    footer(fig, 'Relief exaggerated 4× in the shading. Solid outline: the trench, rebuilt; dashed: the junction, ramp banks taken down. Lidar: USGS 3DEP.')
-    save(fig, out, 'hillshade')
+        ax.set_title(t, fontsize=12, loc='left')
+        scale_bar(ax, -720, -520, 200)
+        north_arrow(ax, data, -700, -440, 50)
+        fig.suptitle('The ground alone, lit from the northwest', x=0.02, ha='left', fontsize=13, fontweight=600)
+        fig.subplots_adjust(left=0.02, right=0.98, top=0.88, bottom=0.085)
+        footer(fig, 'Relief exaggerated 4× in the shading. Solid outline: the trench, rebuilt; dashed: the junction, ramp banks taken down. Lidar: USGS 3DEP.')
+        save(fig, out, name)
 
 
 def save(fig, out, name):

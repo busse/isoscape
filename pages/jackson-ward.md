@@ -108,10 +108,11 @@ that ran where the trench is now are read off the sheets. See
 Working draft.
 :::
 
-::: figure wide
-![The same frame about 1925 (above) and in 1952 (below): most blocks change little, and in 1952 Gilpin Court's long brick buildings stand where Apostle Town's frame houses were](jackson-ward-pair-1925-1952.webp)
+::: compare wide
+![The same frame about 1925 (left of the divider) and in 1952 (right): most blocks change little, and in 1952 Gilpin Court's long brick buildings stand where Apostle Town's frame houses were](jackson-ward-state-1925.webp) about 1925
+![Jackson Ward in 1952, the same frame](jackson-ward-state-1952.webp) 1952
 
-The same frame about 1925 (above) and in 1952 (below). Most blocks change little; in 1952 Gilpin Court's long brick buildings stand where Apostle Town's frame houses were.
+The same frame about 1925 (left of the divider) and in 1952 (right). Drag the divider, or move it with the arrow keys. Most blocks change little; in 1952 Gilpin Court's long brick buildings stand where Apostle Town's frame houses were.
 :::
 
 The 1952 volume is a full reprint, with "Copyright 1952" on every sheet and a new index dated
@@ -171,10 +172,11 @@ were not read for names. See [The tracing](#the-tracing). Working draft.
 | 31 | Leigh St. M.E. Church | not printed | 309 |
 :::
 
-::: figure
-![Second Street about 1925 (above) and in 1952 (below), the same blocks](jackson-ward-pair-second-street.webp)
+::: compare
+![Second Street about 1925 (left of the divider) and in 1952 (right), the same blocks](jackson-ward-second-street-1925-plain.webp) about 1925
+![Second Street in 1952, the same blocks](jackson-ward-second-street-1952-plain.webp) 1952
 
-Second Street about 1925 (above) and in 1952 (below), the same blocks.
+Second Street about 1925 (left of the divider) and in 1952 (right), the same blocks.
 :::
 
 Second Street, "the Deuce," was the ward's main commercial street [[Community Plan 2026](#sources)]. On sheet 308 of the 1952
@@ -365,6 +367,15 @@ Jackson Ward today: the trench crosses the ward, Gilpin Court lies north of it, 
 [How it's made](how-its-made.md).
 :::
 
+::: compare wide
+![Jackson Ward in 1952 (left of the divider) and today (right), the same frame: in 1952 row houses, churches and shops fill the blocks and no highway crosses them; today the trench crosses the ward](jackson-ward-state-1952.webp) 1952
+![Jackson Ward today, the same frame: the trench crosses the ward, and bridges carry some of the old streets across](jackson-ward-state-2026.webp) today
+
+The same frame in 1952 (left of the divider) and today (right). *How this was made:* the 1952
+and today views on this page, drawn in one frame so they line up; the 1952 view stands on ground
+rebuilt as it was before the trench. See [The ground before the trench](#the-ground-before-the-trench).
+:::
+
 Jackson Ward was listed on the Virginia Landmarks Register on April 20, 1976 and the National
 Register on July 30, 1976, and became a National Historic Landmark on June 2, 1978. The state's
 record notes that "redevelopment and expressway construction have reduced its size"
@@ -460,10 +471,11 @@ where it can be read (P4 to P10), it agrees with the rebuilt ground to within 0.
 could not be read. The sheet is weak evidence on level ground: no contour there says only that
 the ground stayed within one 10-foot band.
 
-::: figure wide
-![The ground alone, lit from the northwest: today with the trench, and rebuilt with the trench filled](jackson-ward-hillshade.webp)
+::: compare wide
+![The ground alone, lit from the northwest: today with the trench (left of the divider), and rebuilt with the trench filled (right)](jackson-ward-hillshade-today.webp) today (lidar)
+![The ground rebuilt with the trench filled, the same frame](jackson-ward-hillshade-rebuilt.webp) rebuilt (estimate)
 
-The ground alone, lit from the northwest: today with the trench, and rebuilt with the trench filled.
+The ground alone, lit from the northwest: today with the trench (left of the divider), and rebuilt with the trench filled (right).
 :::
 
 ::: figure

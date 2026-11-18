@@ -18,6 +18,13 @@
  * nothing but its argument and the language itself: no imports, no closures over this module,
  * no template literals. It works from file:// as well as over https: it only sets image sources.
  * Without script the picture is a plain link to its larger file.
+ *
+ * A compare figure (`::: compare`, compare.ts) opens through its expand button. The lightbox
+ * then shows a copy of its slider, with the larger copy of each picture and the divider where it
+ * was, fitted to the window; dragging or clicking on it moves the divider, and while its divider
+ * has focus the arrow keys, Home and End move the divider (compare.ts handles them) instead of
+ * stepping figures. "Full size" is hidden for it. In the grid it is one figure, shown by its first
+ * picture.
  */
 
 export const lightbox = (doc) => {
@@ -63,9 +70,10 @@ export const lightbox = (doc) => {
     const root = (from && from.closest('.prose')) || doc
     return Array.from(root.querySelectorAll('figure.fig a.fig-open')).map((a) => {
       const fig = a.closest('figure')
-      const pic = a.querySelector('img')
+      const cmp = a.closest('.cmp')
+      const pic = a.querySelector('img') || (cmp && cmp.querySelector('img.cmp-a'))
       const caption = fig.querySelector('figcaption')
-      return { a, fig, small: pic ? pic.currentSrc || pic.src : a.href, large: a.href, alt: pic ? pic.alt : '', caption }
+      return { a, fig, cmp, small: pic ? pic.currentSrc || pic.src : a.href, large: a.href, alt: pic ? pic.alt : '', caption }
     })
   }
   const setZoom = (on, x, y) => {
@@ -83,13 +91,41 @@ export const lightbox = (doc) => {
       stage.scrollTop = (img.naturalHeight - stage.clientHeight) / 2
     }
   }
+  // A compare figure: a copy of its slider, with the larger pictures, in place of the picture.
+  const clearCmp = () => {
+    for (const c of stage.querySelectorAll('.cmp')) c.remove()
+    stage.classList.remove('has-cmp')
+    img.hidden = false
+    zoomBtn.hidden = false
+  }
+  const showCmp = (it) => {
+    const c = it.cmp.cloneNode(true)
+    for (const o of c.querySelectorAll('.cmp-open')) o.remove()
+    c.classList.remove('dragging')
+    for (const p of c.querySelectorAll('img')) {
+      p.removeAttribute('loading')
+      const small = p.currentSrc || p.src
+      const large = p.getAttribute('data-large')
+      // The large copy replaces the small one once loaded, so the slider never shows a blank.
+      if (large && large !== small) { const big = new Image(); big.onload = () => { p.src = large }; big.src = large }
+    }
+    img.hidden = true
+    img.removeAttribute('src')
+    zoomBtn.hidden = true
+    stage.classList.add('has-cmp')
+    stage.append(c)
+  }
   const show = (i) => {
     at = (i + items.length) % items.length
     const it = items[at]
     setZoom(false)
-    img.alt = it.alt
-    img.src = it.small
-    if (it.large && it.large !== it.small) {
+    clearCmp()
+    if (it.cmp) showCmp(it)
+    else {
+      img.alt = it.alt
+      img.src = it.small
+    }
+    if (!it.cmp && it.large && it.large !== it.small) {
       const big = new Image()
       big.onload = () => { if (items[at] === it) img.src = it.large }
       big.src = it.large
@@ -101,7 +137,7 @@ export const lightbox = (doc) => {
     prev.hidden = one
     next.hidden = one
   }
-  const focusables = () => Array.from(box.querySelectorAll('button, a[href]')).filter((e) => !e.hidden && !e.closest('[hidden]') && e.offsetParent !== null)
+  const focusables = () => Array.from(box.querySelectorAll('button, a[href], .cmp-div')).filter((e) => !e.hidden && !e.closest('[hidden]') && e.offsetParent !== null)
   const buildGrid = () => {
     grid.innerHTML = ''
     items.forEach((it, i) => {
@@ -147,6 +183,7 @@ export const lightbox = (doc) => {
     if (!isOpen()) return
     setGrid(false)
     box.hidden = true
+    clearCmp()
     img.removeAttribute('src')
     doc.documentElement.classList.remove('lb-on')
     if (refocus !== false && opener && opener.focus) opener.focus({ preventScroll: true })
@@ -170,6 +207,8 @@ export const lightbox = (doc) => {
   // A click on the backdrop closes; on the picture, toggles full size there.
   stage.addEventListener('click', (e) => {
     if (moved) return
+    // On a compare slider a click moves its divider (compare.ts).
+    if (e.target.closest('.cmp')) return
     if (e.target !== img) { close(); return }
     const r = img.getBoundingClientRect()
     if (!full) setZoom(true, (e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height)
@@ -180,7 +219,7 @@ export const lightbox = (doc) => {
   let moved = false
   stage.addEventListener('pointerdown', (e) => {
     moved = false
-    if (!full || e.button !== 0) return
+    if (!full || e.button !== 0 || e.target.closest('.cmp')) return
     drag = { x: e.clientX, y: e.clientY, l: stage.scrollLeft, t: stage.scrollTop }
     stage.setPointerCapture(e.pointerId)
   })
@@ -201,9 +240,12 @@ export const lightbox = (doc) => {
   // While open, every key is the lightbox's: the page's own shortcuts wait until it closes.
   doc.defaultView.addEventListener('keydown', (e) => {
     if (!isOpen()) return
+    const k = e.key
+    // A compare slider's divider with focus takes its own keys (compare.ts, listening after this).
+    if (doc.activeElement && doc.activeElement.classList.contains('cmp-div') && box.contains(doc.activeElement) &&
+      /^(Arrow(Left|Right|Up|Down)|Home|End|PageUp|PageDown)$/.test(k) && !e.metaKey && !e.ctrlKey && !e.altKey) return
     e.stopPropagation()
     if (e.metaKey || e.ctrlKey || e.altKey) return
-    const k = e.key
     if (k === 'Tab') {
       const f = focusables()
       if (f.length === 0) return

@@ -12,6 +12,13 @@ drawn wider than 2,400 px, and, with --full, a full-size PNG of each (under 8,00
 `--large-from DIR` writes only the large copies, from full-size PNGs already in DIR. Pairs and triples are stacked
 with the year in the corner.
 
+The year views (1925, 1952, 1959, today) share one frame. isoscape fits each build's viewBox to
+what it draws, and today's reaches 7.2 units higher (a taller building at the far edge) and 0.1
+lower, so each year's SVG is rasterized in the union of the four, widened to whole units
+(`frame`). Every year view, and every crop of one, is then the same size and lines up pixel for
+pixel with the others: the page's compare sliders need that, and the stacked views get it too.
+Crop boxes are given from the 1952 view's own top left corner, as before.
+
 Numbered views (Second Street) mark every building the sheets name (tools/sanborn/jw/named.csv
 for 1952, named1925.csv for 1925) whose point falls in the crop: the drawn building holding the
 point is found (a traced outline, or today's OSM outline where the scene draws one there), and
@@ -72,10 +79,63 @@ VIEWS = {
     'island': dict(scene='island'),
     'second-street-1952': dict(scene='s1952', box=SECOND, z=4, names='named.csv', edition=1952),
     'second-street-1925': dict(scene='s1925', box=SECOND, z=4, names='named1925.csv', edition=1925),
-    'pair-1925-1952': dict(stack=[('s1925', None, 1, '1925'), ('s1952', None, 1, '1952')]),
-    'pair-second-street': dict(stack=[('s1925', SECOND, 3, '1925'), ('s1952', SECOND, 3, '1952')]),
+    # Second Street unnumbered, for the page's compare slider (1925 against 1952).
+    'second-street-1925-plain': dict(scene='s1925', box=SECOND, z=4),
+    'second-street-1952-plain': dict(scene='s1952', box=SECOND, z=4),
     'apostle-town': dict(stack=[('s1925', APOSTLE, 3, '1925'), ('s1952', APOSTLE, 3, '1952'), ('s2026', APOSTLE, 3, 'today')]),
 }
+
+
+# The scenes drawn in one shared frame (the year views); see `frame`.
+YEARS = ('s1925', 's1952', 's1959', 's2026')
+REF = 's1952'  # crop boxes are measured from this scene's own viewBox corner
+
+
+def viewbox(svg):
+    with open(svg) as f:
+        head = f.read(4000)
+    return [float(v) for v in re.search(r'viewBox="([^"]+)"', head).group(1).split()]
+
+
+_FRAME = {}
+
+
+def frame(work):
+    """The year views' shared viewBox, and how far (whole SVG units) it reaches left of and
+    above the reference scene's: (x, y, w, h), (dx, dy)."""
+    if 'f' not in _FRAME:
+        import math
+        boxes = {s: viewbox(build(work, s)) for s in YEARS}
+        rx, ry, rw, rh = boxes[REF]
+        dx = math.ceil(max(rx - b[0] for b in boxes.values()) - 1e-6)
+        dy = math.ceil(max(ry - b[1] for b in boxes.values()) - 1e-6)
+        dr = math.ceil(max(b[0] + b[2] - (rx + rw) for b in boxes.values()) - 1e-6)
+        db = math.ceil(max(b[1] + b[3] - (ry + rh) for b in boxes.values()) - 1e-6)
+        _FRAME['f'] = ((rx - dx, ry - dy, rw + dx + dr, rh + dy + db), (dx, dy))
+    return _FRAME['f']
+
+
+def fmt(v):
+    return ('%.3f' % v).rstrip('0').rstrip('.')
+
+
+def framed(work, scene):
+    """The scene's SVG with its viewBox, and the paper behind it, set to the shared frame."""
+    svg = build(work, scene)
+    out = svg[:-4] + '-framed.svg'
+    if not os.path.exists(out) or os.path.getmtime(out) < os.path.getmtime(svg):
+        (fx, fy, fw, fh), _ = frame(work)
+        vb = viewbox(svg)
+        s = open(svg).read()
+        old = ' '.join(fmt(v) for v in vb)
+        new = ' '.join(fmt(v) for v in (fx, fy, fw, fh))
+        assert s.count(f'viewBox="{old}"') >= 1, (svg, old)
+        s = s.replace(f'viewBox="{old}"', f'viewBox="{new}"', 1)
+        paper = f'<rect x="{fmt(vb[0])}" y="{fmt(vb[1])}" width="{fmt(vb[2])}" height="{fmt(vb[3])}"'
+        assert paper in s, (svg, paper)
+        s = s.replace(paper, f'<rect x="{fmt(fx)}" y="{fmt(fy)}" width="{fmt(fw)}" height="{fmt(fh)}"', 1)
+        open(out, 'w').write(s)
+    return out
 
 
 def run(cmd):
@@ -95,19 +155,27 @@ def build(work, scene):
 
 
 def raster(work, scene, z):
-    svg = build(work, scene)
+    svg = framed(work, scene) if scene in YEARS else build(work, scene)
     png = svg[:-4] + f'-z{z}.png'
-    if not os.path.exists(png):
+    if not os.path.exists(png) or os.path.getmtime(png) < os.path.getmtime(svg):
         subprocess.run(['rsvg-convert', '-z', str(z), svg, '-o', png], check=True)
     return png
 
 
-def crop(png, box, z):
+def crop(png, box, z, offset=(0, 0)):
+    """Cut `box` (SVG units from the reference corner) out of a raster at zoom `z` whose own
+    corner lies `offset` units left of and above that corner."""
     im = Image.open(png).convert('RGB')
     if box is None:
         return im
     x, y, w, h = box
+    x, y = x + offset[0], y + offset[1]
     return im.crop((round(x * z), round(y * z), round((x + w) * z), round((y + h) * z)))
+
+
+def cut(work, scene, box, z):
+    """A crop of a scene's raster, placed by the shared frame for the year views."""
+    return crop(raster(work, scene, z), box, z, frame(work)[1] if scene in YEARS else (0, 0))
 
 
 def font(size, bold=True):
@@ -275,7 +343,7 @@ def main():
         if 'stack' in v:
             ims = []
             for scene, box, z, lab in v['stack']:
-                im = crop(raster(a.work, scene, z), box, z)
+                im = cut(a.work, scene, box, z)
                 ims.append(corner_label(im, lab, scale=im.width / 3000))
             W = max(i.width for i in ims)
             gap = round(W / 150)
@@ -290,9 +358,12 @@ def main():
             save(out, name, a.full)
         elif 'box' in v:
             z = v['z']
-            im = crop(raster(a.work, v['scene'], z), v['box'], z)
-            im, key = numbered(im, build(a.work, v['scene']), v['box'], z, v['names'], v['edition'])
-            save(im, name, a.full, key)
+            im = cut(a.work, v['scene'], v['box'], z)
+            if 'names' in v:
+                im, key = numbered(im, build(a.work, v['scene']), v['box'], z, v['names'], v['edition'])
+                save(im, name, a.full, key)
+            else:
+                save(im, name, a.full)
         else:
             im = Image.open(raster(a.work, v['scene'], 2)).convert('RGB')
             save(im, name, a.full)

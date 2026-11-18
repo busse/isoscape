@@ -50,6 +50,7 @@ import type { Page } from './pages.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
 import { buyLinks, escAttr, pageMapRefs, pageShop, printLinks, shopCta, siteTags, type SiteCard } from './social.ts'
 import { FIGURE_CSS, LIGHTBOX_CSS, lightbox } from './lightbox.ts'
+import { COMPARE_CSS, compareSliders, splitAt, splitOf } from './compare.ts'
 import { makeStory } from './story.ts'
 
 /**
@@ -239,9 +240,7 @@ main { display: grid; grid-template-rows: 1fr auto; min-height: 0; min-width: 0;
 #stage.dragging { cursor: grabbing; }
 #stage img { position: absolute; max-width: none; pointer-events: none; image-rendering: auto; }
 #clipB { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-#divider { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--accent); cursor: ew-resize; display: none; }
-#divider::after { content: "A │ B"; position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; background: var(--accent); color: var(--panel); }
-#divider::before { content: ""; position: absolute; inset: 0 -8px; }
+#divider { display: none; }
 #empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--dim); text-align: center; padding: 40px; }
 #toolbar { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; align-items: center; }
 #toolbar button, #toolbar select { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 4px 9px; cursor: pointer; font: inherit; color: var(--ink); }
@@ -381,7 +380,7 @@ body.reading main { grid-template-rows: 1fr; }
 .doc .back:hover { border-color: var(--accent); }
 .doc #pageLink { margin-left: 6px; }
 .doc #pageLink.on { border-color: var(--accent); background: var(--accent-soft); }
-${PROSE_CSS}${FIGURE_CSS}${LIGHTBOX_CSS}/* Wide figures run past the text column, over the margin and the contents list beside it. */
+${PROSE_CSS}${FIGURE_CSS}${LIGHTBOX_CSS}${COMPARE_CSS}/* Wide figures run past the text column, over the margin and the contents list beside it. */
 #page { container-type: inline-size; }
 .doc .prose figure.fig.wide { position: relative; z-index: 2; margin-left: calc(-1 * min(var(--bleed), 200px)); width: calc(100% + 276px + min(var(--bleed), 200px)); --bleed: calc((100cqw - 100% - 276px) / 2 - 24px); }
 .doc .prose figure.fig.wide img { background: var(--panel); }
@@ -421,7 +420,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   <div id="stage">
     <img id="imgA" alt="">
     <div id="clipB"><img id="imgB" alt=""></div>
-    <div id="divider"></div>
+    <div id="divider" class="cmp-div" data-badge="A │ B"></div>
     <div id="empty"></div>
     <div id="loading">loading…</div>
     <div id="timeline" hidden></div>
@@ -453,6 +452,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const byId = new Map(builds.map((b) => [b.id, b]))
   const $ = (id) => document.getElementById(id)
   const stage = $('stage'), imgA = $('imgA'), imgB = $('imgB'), clipB = $('clipB'), divider = $('divider')
+  // The compare divider's moves, shared with the compare figures on pages (compare.ts).
+  const split = { at: (${splitAt.toString()}), of: (${splitOf.toString()}) }
   const state = { a: null, b: null, compare: false, zoom: 1, panX: 0, panY: 0, split: 0.5, filter: '', tab: 'details', page: null, refit: false, pendingView: null }
   const pages = JSON.parse(document.getElementById('pagesData').textContent)
   const pageBySlug = new Map(pages.map((p) => [p.slug, p]))
@@ -595,9 +596,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     divider.style.display = b ? 'block' : 'none'
     if (b) {
       place(imgB, b)
-      const x = stage.clientWidth * state.split
-      clipB.style.clipPath = 'inset(0 0 0 ' + x + 'px)'
-      divider.style.left = x + 'px'
+      split.at(clipB, divider, stage.clientWidth * state.split + 'px')
     }
     $('zoom').textContent = Math.round(state.zoom * 100) + '%'
     scheduleHash()
@@ -678,8 +677,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     }
     if (!drag) return
     if (drag.divider) {
-      const r = stage.getBoundingClientRect()
-      state.split = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width))
+      state.split = split.of(e.clientX, stage.getBoundingClientRect())
     } else {
       state.panX += e.clientX - drag.x
       state.panY += e.clientY - drag.y
@@ -784,6 +782,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   // A build's own story, from story.ts (its source is embedded here; static map pages run the same code).
   // Numbered figures on a page open in a lightbox (lightbox.ts); it takes the keys while open.
   ;(${lightbox.toString()})(document)
+  // Compare figures on a page (compare.ts) share the viewer's divider: its moves and its look.
+  ;(${compareSliders.toString()})(document, split)
   const story = (${makeStory.toString()})({ esc, label, when, mb, fmt, demSources, pageHref: (slug, section) => (pageBySlug.has(slug) ? '#/' + slug + (section ? '/' + section : '') : null) })
   $('toggleInfo').addEventListener('click', () => toggleInfo())
   // Phones: the build list is a drawer behind the menu button; the info panel starts folded.
