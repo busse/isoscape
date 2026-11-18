@@ -215,6 +215,19 @@ the board's `on_sale`: only set boxes, maps and framed maps that the board has o
 store has active. Rerun it whenever a piece goes on or off sale (`--check` says whether it is
 current, and it warns of a piece no page links to).
 
+Where more than one print is made from the same view, its `onSale` value is a list: the first
+entry is the view's own buy link (a URL, or `{ "url", "label" }` to name it), and each further
+`{ "url", "label" }` is shown beside it, in the explorer's info bar and on the view's map page:
+
+```json
+"richmond-downtown-time:2026": [
+  { "url": "https://chrisbusse.com/products/richmond-2026", "label": "Buy Richmond, 2026 ↗" },
+  { "url": "https://chrisbusse.com/products/richmond-then-and-now", "label": "Buy Richmond, Then & Now ↗" }
+]
+```
+
+Everywhere else (sections, content pages) the key counts as on sale under its first URL.
+
 `cta` replaces "Shop prints" in the header only while something is on sale. With `onSale`
 empty, nothing anywhere links to a product or collection, and no text says so. Per-view or
 per-section `shop` URLs, and the old `shop.links`, are ignored. To put a design on sale, add its

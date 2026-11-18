@@ -244,8 +244,8 @@ main { display: grid; grid-template-rows: 1fr auto; min-height: 0; min-width: 0;
 #info { border-top: 1px solid var(--line); background: var(--panel); max-height: 38vh; overflow: auto; }
 #info.closed .body { display: none; }
 #info .bar { display: flex; align-items: center; gap: 10px; padding: 8px 16px; position: sticky; top: 0; background: var(--panel); border-bottom: 1px solid var(--line); }
-#info .bar h1 { font-size: 14px; margin: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#info .bar .links { margin-left: auto; display: flex; gap: 12px; white-space: nowrap; }
+#info .bar h1 { font-size: 14px; margin: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 10em; }
+#info .bar .links { margin-left: auto; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 12px; white-space: nowrap; min-width: 0; }
 #info .bar a { color: var(--accent); text-decoration: none; font-size: 12px; }
 #info .bar a.buy { background: var(--accent); color: var(--panel); padding: 3px 11px; border-radius: 12px; font-weight: 600; }
 #info .bar button { border: none; background: none; cursor: pointer; color: var(--dim); }
@@ -291,7 +291,7 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
   #info.made { max-height: 62vh; }
   #info .bar { flex-wrap: wrap; row-gap: 4px; padding: 8px 12px; }
   #info .bar h1 { flex: 1 1 0; min-width: 0; }
-  #info .bar .links { margin-left: 0; width: 100%; flex-wrap: wrap; gap: 6px 12px; }
+  #info .bar .links { margin-left: 0; width: 100%; flex-wrap: wrap; justify-content: flex-start; gap: 6px 12px; }
   #info .tabs { margin-left: 0; }
   #info .body, #info .body.stories { grid-template-columns: 1fr; gap: 16px; padding: 12px 14px 16px; }
   #home, #page { flex: 1; min-height: 0; }
@@ -379,8 +379,8 @@ ${PROSE_CSS}#toc { position: sticky; top: 28px; align-self: start; font-size: 12
 #toc a.on { color: var(--accent); border-left-color: var(--accent); }
 
 /* ---- info: tabs and the per-build story ---------------------------------------- */
-#info .tabs { display: flex; gap: 2px; margin-left: 8px; }
-#info .bar .tabs button { padding: 2px 10px; border-radius: 12px; font-size: 12px; color: var(--dim); }
+#info .tabs { display: flex; gap: 2px; margin-left: 8px; flex: none; }
+#info .bar .tabs button { padding: 2px 10px; border-radius: 12px; font-size: 12px; color: var(--dim); white-space: nowrap; }
 #info .bar .tabs button:hover { color: var(--ink); background: var(--chip); }
 #info .bar .tabs button.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
 #info.made { max-height: 52vh; }
@@ -721,7 +721,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     $('links').innerHTML = '<a href="' + esc(a.files.svg) + '" target="_blank"' + (phone() ? ' title="The full drawing: large, may not open on a phone"' : '') + '>' + (phone() ? 'Full drawing ↗' : 'Open A’s SVG ↗') + '</a>' +
       (b ? '<a href="' + esc(b.files.svg) + '" target="_blank">Open B’s SVG ↗</a>' : '') +
       (site.latestPages ? '<a href="' + esc(a.name) + '.html" target="_blank" title="The latest build of this region, with hover labels">Latest page ↗</a>' : '') +
-      (buy ? '<a class="buy" href="' + esc(buy.url) + '" target="_blank" rel="noopener">' + esc(buy.label) + '</a>' : '')
+      (buy ? '<a class="buy" href="' + esc(buy.url) + '" target="_blank" rel="noopener">' + esc(buy.label) + '</a>' +
+        (buy.more || []).map((m) => '<a class="buy" href="' + esc(m.url) + '" target="_blank" rel="noopener">' + esc(m.label) + '</a>').join('') : '')
     $('info').classList.toggle('made', state.tab === 'made')
     for (const t of $('tabs').children) t.classList.toggle('on', t.dataset.tab === state.tab)
     if (state.tab === 'made') {

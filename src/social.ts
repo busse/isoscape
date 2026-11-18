@@ -50,9 +50,11 @@ export interface SiteConfig {
    * on each map, section, set or page that is in `onSale` (see `onSaleUrl`), and nowhere else.
    * A key `<region>:<year>` (the explorer's route for a year) puts it on that year's view only.
    * `cta` is the header's wording while anything is on sale. `products` puts each piece's own
-   * print beside the links to its view in the content pages (see `printLinks`).
+   * print beside the links to its view in the content pages (see `printLinks`). An `onSale` value
+   * may be a list instead of a URL, when more than one print is made from the same view: its first
+   * entry is the view's own buy link, the rest are shown beside it (`prints`, see `shopFor`).
    */
-  readonly shop?: { readonly label: string; readonly url: string; readonly cta?: string; readonly onSale?: OnSale; readonly products?: Products }
+  readonly shop?: { readonly label: string; readonly url: string; readonly cta?: string; readonly onSale?: OnSale; readonly prints?: Prints; readonly products?: Products }
   /** Optional front page for the explorer: featured views, then the rest in sections. */
   readonly home?: HomeConfig
   /** False on a published site that does not carry out/<region>.html, to hide the "Latest page" link. */
@@ -117,6 +119,13 @@ export const normaliseSiteUrl = (raw: string | undefined): string | undefined =>
 /** What is for sale: region prefix, set slug or page slug → the product or collection URL. */
 export type OnSale = Readonly<Record<string, string>>
 
+/**
+ * The `onSale` keys whose value in the file is a list: key → every print made from that view, the
+ * first being the one `onSale` keeps (its label, when given, replaces "Buy a print ↗"), the rest
+ * shown beside it. Each entry is a URL or `{ "url", "label" }`; past the first, a label is needed.
+ */
+export type Prints = Readonly<Record<string, readonly { readonly url: string; readonly label?: string }[]>>
+
 /** One piece's print in the shop: its product page, the link's words, and the store's design key. */
 export interface Product {
   readonly url: string
@@ -136,14 +145,32 @@ const isShop = (v: unknown): v is NonNullable<SiteConfig['shop']> =>
   typeof v === 'object' && v !== null && typeof (v as { label?: unknown }).label === 'string' && typeof (v as { url?: unknown }).url === 'string'
 
 /**
- * The shop as the site uses it: label, url, cta and `onSale` (only string URLs kept). Anything
- * else (an old `links` map) is dropped, so no URL but these reaches a page.
+ * The shop as the site uses it: label, url, cta and `onSale` (only string URLs kept, a list
+ * reduced to its first URL, the whole list kept in `prints`). Anything else (an old `links` map)
+ * is dropped, so no URL but these reaches a page.
  */
 const shopOf = (v: NonNullable<SiteConfig['shop']>): NonNullable<SiteConfig['shop']> => {
   const raw = (v as { onSale?: unknown }).onSale
-  const onSale = typeof raw === 'object' && raw !== null && !Array.isArray(raw)
-    ? Object.fromEntries(Object.entries(raw).filter((e): e is [string, string] => e[0] !== '' && typeof e[1] === 'string' && e[1] !== ''))
-    : {}
+  const onSale: Record<string, string> = {}
+  const prints: Record<string, { url: string; label?: string }[]> = {}
+  const isUrl = (x: unknown): x is string => typeof x === 'string' && /^https?:\/\//.test(x)
+  if (typeof raw === 'object' && raw !== null && !Array.isArray(raw)) {
+    for (const [key, val] of Object.entries(raw)) {
+      if (key === '') continue
+      if (typeof val === 'string') { if (val !== '') onSale[key] = val; continue }
+      if (!Array.isArray(val)) continue
+      const list = val.flatMap((x, i): { url: string; label?: string }[] => {
+        if (isUrl(x)) return i === 0 ? [{ url: x }] : []
+        if (typeof x !== 'object' || x === null || !isUrl((x as { url?: unknown }).url)) return []
+        const label = (x as { label?: unknown }).label
+        if (typeof label === 'string' && label !== '') return [{ url: (x as { url: string }).url, label }]
+        return i === 0 ? [{ url: (x as { url: string }).url }] : []
+      })
+      if (list.length === 0 || list[0].url !== (isUrl(val[0]) ? val[0] : (val[0] as { url?: unknown } | null)?.url)) continue
+      onSale[key] = list[0].url
+      if (list.length > 1 || list[0].label !== undefined) prints[key] = list
+    }
+  }
   const rawProducts = (v as { products?: unknown }).products
   const products: Record<string, Product[]> = {}
   if (typeof rawProducts === 'object' && rawProducts !== null && !Array.isArray(rawProducts)) {
@@ -154,7 +181,7 @@ const shopOf = (v: NonNullable<SiteConfig['shop']>): NonNullable<SiteConfig['sho
       if (view !== '' && ok.length > 0) products[view] = ok
     }
   }
-  return { label: v.label, url: v.url, ...(typeof v.cta === 'string' && v.cta !== '' ? { cta: v.cta } : {}), onSale, ...(Object.keys(products).length > 0 ? { products } : {}) }
+  return { label: v.label, url: v.url, ...(typeof v.cta === 'string' && v.cta !== '' ? { cta: v.cta } : {}), onSale, ...(Object.keys(prints).length > 0 ? { prints } : {}), ...(Object.keys(products).length > 0 ? { products } : {}) }
 }
 
 /** A front page without per-view or per-section shop URLs: where to buy comes from `shop.onSale` only. */
@@ -544,10 +571,13 @@ export const flagshipOf = (builds: readonly BuildMeta[], flagship?: string): Bui
  * only when it is the whole subject. No entry, no URL: nothing links to the shop for it.
  */
 export const onSaleUrl = (onSale: OnSale | undefined, subject: string): string | undefined => {
-  if (onSale === undefined) return undefined
-  const key = Object.keys(onSale).filter((k) => k !== '' && (k.includes(':') ? k === subject : subject.startsWith(k))).sort((a, b) => b.length - a.length)[0]
-  return key === undefined ? undefined : onSale[key]
+  const key = onSaleKey(onSale, subject)
+  return key === undefined ? undefined : onSale?.[key]
 }
+
+/** The `onSale` key a subject is on sale under (see `onSaleUrl`), if any. */
+export const onSaleKey = (onSale: OnSale | undefined, subject: string): string | undefined =>
+  onSale === undefined ? undefined : Object.keys(onSale).filter((k) => k !== '' && (k.includes(':') ? k === subject : subject.startsWith(k))).sort((a, b) => b.length - a.length)[0]
 
 /** True while anything at all is on sale. */
 export const anyOnSale = (config: Pick<SiteConfig, 'shop'>): boolean => Object.keys(config.shop?.onSale ?? {}).length > 0
@@ -563,11 +593,21 @@ export const shopCta = (config: Pick<SiteConfig, 'shop'>): string | undefined =>
  * `richmond-downtown-time:1925` that year's view alone (not the series' page, nor another year).
  * The explorer gets these resolved (`buyLinks`).
  */
-export const shopFor = (config: Pick<SiteConfig, 'shop' | 'home'>, region: string, year?: number): { url: string; label: string } | undefined => {
-  const url = onSaleUrl(config.shop?.onSale, year === undefined ? region : `${region}:${year}`)
-  if (url === undefined) return undefined
+export const shopFor = (config: Pick<SiteConfig, 'shop' | 'home'>, region: string, year?: number): ShopLink | undefined => {
+  const key = onSaleKey(config.shop?.onSale, year === undefined ? region : `${region}:${year}`)
+  const url = key === undefined ? undefined : config.shop?.onSale?.[key]
+  if (key === undefined || url === undefined) return undefined
   const hero = config.home?.heroes.find((h) => h.region === region)
-  return { url, label: hero?.shopLabel ?? 'Buy a print ↗' }
+  const prints = config.shop?.prints?.[key]
+  const more = (prints ?? []).slice(1).filter((p): p is Product => p.label !== undefined).map((p) => ({ url: p.url, label: p.label }))
+  return { url, label: prints?.[0]?.label ?? hero?.shopLabel ?? 'Buy a print ↗', ...(more.length > 0 ? { more } : {}) }
+}
+
+/** A map's buy link, and any other prints made from the same view (`prints`), shown beside it. */
+export interface ShopLink {
+  readonly url: string
+  readonly label: string
+  readonly more?: readonly Product[]
 }
 
 /**
@@ -647,8 +687,8 @@ export const printLinks = (html: string, products: Products | undefined, prefix 
  * Every shop link the explorer's script shows, resolved here: per region and per `<region>:<year>`
  * (each given as such a string), and per front-page section (null when not on sale).
  */
-export const buyLinks = (config: Pick<SiteConfig, 'shop' | 'home'>, regions: Iterable<string>): { regions: Record<string, { url: string; label: string }>; sections: ({ url: string; label: string } | null)[] } => {
-  const out: Record<string, { url: string; label: string }> = {}
+export const buyLinks = (config: Pick<SiteConfig, 'shop' | 'home'>, regions: Iterable<string>): { regions: Record<string, ShopLink>; sections: ({ url: string; label: string } | null)[] } => {
+  const out: Record<string, ShopLink> = {}
   for (const r of regions) {
     const m = /^(.*):(\d+)$/.exec(r)
     const s = m === null ? shopFor(config, r) : shopFor(config, m[1], Number(m[2]))

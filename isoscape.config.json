@@ -23,7 +23,11 @@
       "richmond-downtown-time:1886": "https://chrisbusse.com/products/richmond-1886",
       "richmond-downtown-time:1925": "https://chrisbusse.com/products/richmond-1925",
       "richmond-downtown-time:1950": "https://chrisbusse.com/products/richmond-1950",
-      "richmond-downtown-time:2026": "https://chrisbusse.com/products/richmond-2026"
+      "richmond-downtown-time:2026": [
+        { "url": "https://chrisbusse.com/products/richmond-2026", "label": "Buy Richmond, 2026 ↗" },
+        { "url": "https://chrisbusse.com/products/richmond-then-and-now", "label": "Buy Richmond, Then & Now ↗" },
+        { "url": "https://chrisbusse.com/products/richmond-and-the-james", "label": "Buy Richmond and the James ↗" }
+      ]
     },
     "products": {
       "broad-street-lines:1943": [
