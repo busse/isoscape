@@ -24,6 +24,18 @@ when. Once anyone has ordered an edition, it stays as it is, and any change beco
 Numbers already printed stay as they are. The [production board](board.md) shows where each piece
 stands. This entry was drafted with Claude.
 
+## November 18, 2026 (Main Street Station cutaway)
+
+**New: Main Street Station, about 1952: Cutaway (plate MSS·01, version 1).** Richmond's Main
+Street Station cut through its waiting rooms, from Main Street up to the trains of the Seaboard
+Air Line and the Chesapeake and Ohio, with the same cut seen flat below it, the train shed cut
+across beside that, and a traveler's way from the street to the train. It opens a new set in
+Buildings in their time, Main Street Station, 1952. Every part is marked by how sure it is: drawn
+from a plan or section, from written accounts, or approximate.
+[The cutaway, its callouts and its sources](main-street-cutaway.md)
+
+*Drafted with Claude; see the [artist statement](artist-statement.md).*
+
 ## November 18, 2026 (Main Street Station corrected)
 
 **Broad Street Station, 1943: Main Street Station redrawn at its measured height.** Nobody had

@@ -396,5 +396,18 @@
   "region": "main-street-station-shed-section",
   "caption": "The shed cut across, looking north"
  },
- "columnEnd": 6560
+ "columnEnd": 6560,
+ "page": {
+  "slug": "main-street-cutaway",
+  "title": "Main Street Station, about 1952: the cutaway",
+  "order": 48,
+  "summary": "Richmond's Main Street Station cut through its waiting rooms, from Main Street up to the trains, as it stood about 1952, with how sure each part is.",
+  "intro": "Main Street Station opened in November 1901; the Seaboard Air Line's trains used its west side and the Chesapeake and Ohio's its east. This drawing cuts it through its waiting rooms, from Main Street up the main stair to the waiting room and across the concourse to the trains under the shed, as it stood about 1952. The east side is lifted away down to its ground floor, so its rooms read as a plan, and beneath it the same cut is drawn flat, with the traveler's way from the street to the train dashed in red. Beside the flat section, the train shed is cut across, looking north.",
+  "image_alt": "The cutaway sheet: the station cut through its waiting rooms above, the same cut seen flat and the train shed cut across below, and the numbered callouts beside them",
+  "key_intro": "Every part of the drawing says how it is known, and each numbered badge shows it:",
+  "wayfinding_heading": "Where the trains went",
+  "how": "The station is a model made of parts. The rooms of the two public floors are traced from the Entrance Floor and Main Floor plans printed in The Railroad Gazette of July 13, 1900, fitted to OpenStreetMap's outline of the head house, and the floor levels come from its section. The roof's ridge and the clock tower's stages are measured on Historic American Buildings Survey photographs of 1971 (VA-848-10 to -12) against the 102-foot front. The train shed is traced node by node from the cross section in HAER VA-4 (sheet 3). The model is cut along one vertical plane through the two waiting rooms. Every face the cut opens is drawn solid in ink; on the side lifted away, everything up to 1.5 m above the ground floor stays, so the ground floor reads as a plan. The flat section below is the same plane seen square and level, with the building drawn 35 m deep behind it, and beside it the shed is cut across 1.2 m south of a truss. Chris Busse drew it with isoscape, the open-source tool he built with Claude.",
+  "drafted": "This page was drafted with Claude, Anthropic's AI (Claude Opus 5.5), from the sheet and its sources. More on how we work in the [artist statement](artist-statement.md).",
+  "traveler_note": "The small red figures are travelers drawn to scale, 1.75 m (5 ft 9 in) tall; their height is a convention, not a claim from a source. The red line is the way from the street to the train."
+ }
 }

@@ -11,10 +11,12 @@
     "cta": "Buy prints of these maps",
     "onSale": {
       "broad-street-cutaway": "https://chrisbusse.com/products/broad-street-station-1943-cutaway",
+      "main-street-cutaway": "https://chrisbusse.com/products/main-street-station-about-1952-cutaway",
       "streetcars": "https://chrisbusse.com/collections/richmond-streetcars-1925",
       "richmond-streetcars": "https://chrisbusse.com/collections/richmond-streetcars-1925",
       "broad-street": "https://chrisbusse.com/collections/broad-street-station-1943",
       "broad-street-station-cutaway": "https://chrisbusse.com/products/broad-street-station-1943-cutaway",
+      "main-street-station-cutaway": "https://chrisbusse.com/products/main-street-station-about-1952-cutaway",
       "richmond-i195-rocketts": "https://chrisbusse.com/products/the-james-i-195-to-rocketts-landing",
       "gwynns-island": "https://chrisbusse.com/products/gwynns-island",
       "richmond-downtown-time:1737": "https://chrisbusse.com/products/richmond-1737-2026",
@@ -276,7 +278,8 @@
       {
         "title": "Buildings in their time",
         "prefixes": [
-          "broad-street"
+          "broad-street",
+          "main-street"
         ],
         "blurb": "One building drawn close up in its own time, from its plans, photographs and fire-insurance maps, with the places around it. The first is Broad Street Station in 1943, at its wartime height.",
         "page": "#/broad-street",
