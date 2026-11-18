@@ -250,6 +250,7 @@
         ]
       ],
       "weight": 0.53
-    }
+    },
+    "order": "components"
   }
 }

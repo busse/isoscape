@@ -127,6 +127,8 @@ export interface Cutaway {
    * the two read alike (the section's scale on the sheet over the cutaway's).
    */
   readonly route?: { readonly points: readonly (readonly [number, number, number])[]; readonly weight?: number }
+  /** How a cycle in the paint order is broken: `components` at its start (see `paintOrder`); by default, at the farthest item left. */
+  readonly order?: 'components'
   /**
    * The flat section: the same plane, seen square on, everything on the removed side gone.
    * `from` and `to` are its ends, in meters along the plane from `through`; `beyond` is how far

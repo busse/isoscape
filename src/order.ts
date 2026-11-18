@@ -43,6 +43,11 @@ const screenBox = (item: Item): Box => {
  * parts, use it; other views keep the plain rule.
  */
 export const compare = (a: Item, b: Item, stacked = false): number => {
+  // A part standing over a roof's shell (a dormer on it, a tower's upper stages rising through
+  // it) is in front of every piece of that shell, apart or not: a piece's box reaches up to the
+  // ridge, so beside a tower it would otherwise stand in front of stages far above the roof.
+  if (b.shell !== undefined && a.over === b.shell.id) return 1
+  if (a.shell !== undefined && b.over === a.shell.id) return -1
   // Modeled parts that abut may overlap by the centimeter their corners were rounded to.
   const axis: Vec2 | null = separatingAxis(a.hull, b.hull, stacked ? STACK_TOLERANCE : 1e-6)
   if (axis !== null) {
@@ -59,8 +64,6 @@ export const compare = (a: Item, b: Item, stacked = false): number => {
   // are covered by it.
   if (a.shell !== undefined && b.within === a.shell.id) return a.shell.faces
   if (b.shell !== undefined && a.within === b.shell.id) return -b.shell.faces
-  if (b.shell !== undefined && a.over === b.shell.id) return 1
-  if (a.shell !== undefined && b.over === a.shell.id) return -1
   // A pier under a deck, its own or another's, stands behind it.
   if (a.kind === 'bridge' && b.kind === 'bridge' && a.pier !== b.pier) return a.pier === true ? -1 : 1
   // Overlapping footprints at overlapping heights: a bridge over a low building, or bad data.
@@ -119,7 +122,14 @@ export const spanOrder = (a: Span, b: Span): number => {
 /** How far (meters) two footprints may overlap and still count as apart, with `stacked`. */
 export const STACK_TOLERANCE = 0.03
 
-export const paintOrder = (items: readonly Item[], cell = 96, stacked = false): Item[] => {
+/**
+ * `components`: break a cycle where it starts. The plain rule forces the farthest unplaced item,
+ * which may stand nowhere near the cycle (a tower behind a building whose attic floors and roof
+ * form one), and paints it before parts it should follow. With `components`, the item forced is
+ * the farthest of a cycle (a strongly connected group of the items left) that nothing else left
+ * must precede. A region's `cutaway.order` asks for it; others keep the plain rule.
+ */
+export const paintOrder = (items: readonly Item[], cell = 96, stacked = false, components = false): Item[] => {
   const n = items.length
   const boxes = items.map(screenBox)
   // Spatial hash on screen boxes, so only near neighbors are compared.
@@ -166,9 +176,12 @@ export const paintOrder = (items: readonly Item[], cell = 96, stacked = false): 
   while (out.length < n) {
     let i = heap.pop()
     if (i === undefined) {
-      // A cycle: force the farthest unplaced item.
-      while (done[byDepth[cursor]]) cursor++
-      i = byDepth[cursor]
+      if (components) i = cycleStart(after, done, farFirst)
+      else {
+        // A cycle: force the farthest unplaced item.
+        while (done[byDepth[cursor]]) cursor++
+        i = byDepth[cursor]
+      }
     }
     if (done[i]) continue
     done[i] = true
@@ -179,6 +192,72 @@ export const paintOrder = (items: readonly Item[], cell = 96, stacked = false): 
     }
   }
   return out
+}
+
+/**
+ * The item to force when every item left waits on another: among the strongly connected groups
+ * of the items left (Tarjan's algorithm), one that no other group left must precede, and in it
+ * the item `first` puts first.
+ */
+const cycleStart = (after: readonly number[][], done: readonly boolean[], first: (i: number, j: number) => number): number => {
+  const n = after.length
+  const index = new Array<number>(n).fill(-1)
+  const low = new Array<number>(n).fill(0)
+  const group = new Array<number>(n).fill(-1)
+  const onStack = new Array<boolean>(n).fill(false)
+  const stack: number[] = []
+  let next = 0
+  let groups = 0
+  // Iterative, so a long chain cannot overflow the call stack.
+  for (let root = 0; root < n; root++) {
+    if (done[root] || index[root] >= 0) continue
+    const work: [number, number][] = [[root, 0]]
+    index[root] = low[root] = next++
+    stack.push(root)
+    onStack[root] = true
+    while (work.length > 0) {
+      const top = work[work.length - 1]
+      const [v, k] = top
+      if (k < after[v].length) {
+        top[1]++
+        const w = after[v][k]
+        if (done[w]) continue
+        if (index[w] < 0) {
+          index[w] = low[w] = next++
+          stack.push(w)
+          onStack[w] = true
+          work.push([w, 0])
+        } else if (onStack[w]) low[v] = Math.min(low[v], index[w])
+        continue
+      }
+      work.pop()
+      if (work.length > 0) {
+        const u = work[work.length - 1][0]
+        low[u] = Math.min(low[u], low[v])
+      }
+      if (low[v] === index[v]) {
+        let w: number
+        do {
+          w = stack.pop()!
+          onStack[w] = false
+          group[w] = groups
+        } while (w !== v)
+        groups++
+      }
+    }
+  }
+  // A group is a source when no edge from another group left comes into it.
+  const fed = new Array<boolean>(groups).fill(false)
+  for (let v = 0; v < n; v++) {
+    if (done[v]) continue
+    for (const w of after[v]) if (!done[w] && group[w] !== group[v]) fed[group[w]] = true
+  }
+  let best = -1
+  for (let v = 0; v < n; v++) {
+    if (done[v] || fed[group[v]]) continue
+    if (best < 0 || first(v, best) < 0) best = v
+  }
+  return best
 }
 
 class Heap<T> {

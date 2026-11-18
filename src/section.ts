@@ -71,7 +71,7 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
   const along = (s: number): Vec2 => [pl.p[0] + pl.u[0] * s, pl.p[1] + pl.u[1] * s]
   const P = (s: number, z: number): Vec2 => view.toScreen(along(s), z)
   const zOf = (e: number) => (e - T.datum) * T.exaggeration
-  const items = paintOrder(scene.items, 96, true)
+  const items = paintOrder(scene.items, 96, true, cut.order === 'components')
   // The ground along the plane, dug out under whatever the building cut puts below it.
   const step = 0.5
   const ground: [number, number][] = []

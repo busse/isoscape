@@ -11626,7 +11626,8 @@
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-cornice",
@@ -11652,56 +11653,9 @@
      37.5343713
     ]
    ],
-   "height": 0.5,
+   "height": 0.95,
    "tone": "stone",
    "elevation": 35.7,
-   "upTo": 36.2,
-   "note": "The balcony at the shaft's top, on a corbel table, with a balustrade round the clock stage (HABS photographs VA-848-10 to -12; Detroit Publishing 4a10737). Its height is measured on VA-848-10 (approximate); its corbels and balustrade are drawn plain.",
-   "sources": [
-    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
-    "https://www.loc.gov/resource/sn85034438/1901-11-24/ed-1/?sp=1&st=text",
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
-    "https://www.openstreetmap.org/way/366226942",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305470p",
-    "https://www.loc.gov/item/sanborn09064_003/",
-    "https://www.loc.gov/item/sanborn09064_016/",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written"
-  },
-  {
-   "id": "mss-h-tower-balcony-rail-0",
-   "name": "Main Street Station: clock tower",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4296279,
-     37.5343172
-    ],
-    [
-     -77.4295658,
-     37.53428
-    ],
-    [
-     -77.4295648,
-     37.5342811
-    ],
-    [
-     -77.4296269,
-     37.5343183
-    ]
-   ],
-   "height": 0.45,
-   "tone": "stone",
-   "elevation": 36.2,
    "upTo": 36.65,
    "note": "The balcony at the shaft's top, on a corbel table, with a balustrade round the clock stage (HABS photographs VA-848-10 to -12; Detroit Publishing 4a10737). Its height is measured on VA-848-10 (approximate); its corbels and balustrade are drawn plain.",
    "sources": [
@@ -11720,148 +11674,8 @@
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
-   "confidence": "written"
-  },
-  {
-   "id": "mss-h-tower-balcony-rail-1",
-   "name": "Main Street Station: clock tower",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4295662,
-     37.5342819
-    ],
-    [
-     -77.4295648,
-     37.5342811
-    ],
-    [
-     -77.4295165,
-     37.5343324
-    ],
-    [
-     -77.4295179,
-     37.5343332
-    ]
-   ],
-   "height": 0.45,
-   "tone": "stone",
-   "elevation": 36.2,
-   "upTo": 36.65,
-   "note": "The balcony at the shaft's top, on a corbel table, with a balustrade round the clock stage (HABS photographs VA-848-10 to -12; Detroit Publishing 4a10737). Its height is measured on VA-848-10 (approximate); its corbels and balustrade are drawn plain.",
-   "sources": [
-    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
-    "https://www.loc.gov/resource/sn85034438/1901-11-24/ed-1/?sp=1&st=text",
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
-    "https://www.openstreetmap.org/way/366226942",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305470p",
-    "https://www.loc.gov/item/sanborn09064_003/",
-    "https://www.loc.gov/item/sanborn09064_016/",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written"
-  },
-  {
-   "id": "mss-h-tower-balcony-rail-2",
-   "name": "Main Street Station: clock tower",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4295786,
-     37.5343696
-    ],
-    [
-     -77.4295165,
-     37.5343324
-    ],
-    [
-     -77.4295155,
-     37.5343335
-    ],
-    [
-     -77.4295776,
-     37.5343707
-    ]
-   ],
-   "height": 0.45,
-   "tone": "stone",
-   "elevation": 36.2,
-   "upTo": 36.65,
-   "note": "The balcony at the shaft's top, on a corbel table, with a balustrade round the clock stage (HABS photographs VA-848-10 to -12; Detroit Publishing 4a10737). Its height is measured on VA-848-10 (approximate); its corbels and balustrade are drawn plain.",
-   "sources": [
-    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
-    "https://www.loc.gov/resource/sn85034438/1901-11-24/ed-1/?sp=1&st=text",
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
-    "https://www.openstreetmap.org/way/366226942",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305470p",
-    "https://www.loc.gov/item/sanborn09064_003/",
-    "https://www.loc.gov/item/sanborn09064_016/",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written"
-  },
-  {
-   "id": "mss-h-tower-balcony-rail-3",
-   "name": "Main Street Station: clock tower",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4296269,
-     37.5343183
-    ],
-    [
-     -77.4296255,
-     37.5343174
-    ],
-    [
-     -77.4295772,
-     37.5343688
-    ],
-    [
-     -77.4295786,
-     37.5343696
-    ]
-   ],
-   "height": 0.45,
-   "tone": "stone",
-   "elevation": 36.2,
-   "upTo": 36.65,
-   "note": "The balcony at the shaft's top, on a corbel table, with a balustrade round the clock stage (HABS photographs VA-848-10 to -12; Detroit Publishing 4a10737). Its height is measured on VA-848-10 (approximate); its corbels and balustrade are drawn plain.",
-   "sources": [
-    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
-    "https://www.loc.gov/resource/sn85034438/1901-11-24/ed-1/?sp=1&st=text",
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://archipediavm.upress.virginia.edu/buildings/VA-01-RI38",
-    "https://www.openstreetmap.org/way/366226942",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305470p",
-    "https://www.loc.gov/item/sanborn09064_003/",
-    "https://www.loc.gov/item/sanborn09064_016/",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written"
+   "confidence": "written",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-pinnacle-0",
@@ -11875,22 +11689,22 @@
      37.5343172
     ],
     [
-     -77.4296243,
-     37.534315
-    ],
-    [
-     -77.4296216,
-     37.5343179
-    ],
-    [
      -77.4296252,
-     37.5343201
+     37.5343155
+    ],
+    [
+     -77.4296231,
+     37.5343177
+    ],
+    [
+     -77.4296259,
+     37.5343193
     ]
    ],
-   "height": 1.6,
+   "height": 1.4,
    "tone": "stone",
-   "elevation": 36.2,
-   "upTo": 37.8,
+   "elevation": 36.65,
+   "upTo": 38.05,
    "note": "A pinnacle at a corner of the balcony under the clock stage, as the Detroit Publishing photographs show them. Size approximate.",
    "sources": [
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
@@ -11907,16 +11721,17 @@
      9
     ],
     [
-     0.9,
+     0.7,
      0,
      9
     ],
     [
-     1.6,
-     0.19,
+     1.4,
+     0.14,
      9
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-pinnacle-1",
@@ -11926,26 +11741,26 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295695,
-     37.5342822
+     -77.4295686,
+     37.5342816
     ],
     [
      -77.4295658,
      37.53428
     ],
     [
-     -77.4295631,
-     37.5342829
+     -77.4295638,
+     37.5342822
     ],
     [
-     -77.4295667,
-     37.534285
+     -77.4295665,
+     37.5342838
     ]
    ],
-   "height": 1.6,
+   "height": 1.4,
    "tone": "stone",
-   "elevation": 36.2,
-   "upTo": 37.8,
+   "elevation": 36.65,
+   "upTo": 38.05,
    "note": "A pinnacle at a corner of the balcony under the clock stage, as the Detroit Publishing photographs show them. Size approximate.",
    "sources": [
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
@@ -11962,16 +11777,17 @@
      9
     ],
     [
-     0.9,
+     0.7,
      0,
      9
     ],
     [
-     1.6,
-     0.19,
+     1.4,
+     0.14,
      9
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-pinnacle-2",
@@ -11981,26 +11797,26 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295219,
-     37.5343328
+     -77.4295203,
+     37.534333
     ],
     [
-     -77.4295182,
-     37.5343306
+     -77.4295176,
+     37.5343313
     ],
     [
      -77.4295155,
      37.5343335
     ],
     [
-     -77.4295191,
-     37.5343357
+     -77.4295182,
+     37.5343351
     ]
    ],
-   "height": 1.6,
+   "height": 1.4,
    "tone": "stone",
-   "elevation": 36.2,
-   "upTo": 37.8,
+   "elevation": 36.65,
+   "upTo": 38.05,
    "note": "A pinnacle at a corner of the balcony under the clock stage, as the Detroit Publishing photographs show them. Size approximate.",
    "sources": [
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
@@ -12017,16 +11833,17 @@
      9
     ],
     [
-     0.9,
+     0.7,
      0,
      9
     ],
     [
-     1.6,
-     0.19,
+     1.4,
+     0.14,
      9
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-pinnacle-3",
@@ -12036,26 +11853,26 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295803,
-     37.5343678
-    ],
-    [
-     -77.4295767,
-     37.5343656
-    ],
-    [
-     -77.4295739,
+     -77.4295796,
      37.5343685
+    ],
+    [
+     -77.4295769,
+     37.5343669
+    ],
+    [
+     -77.4295749,
+     37.5343691
     ],
     [
      -77.4295776,
      37.5343707
     ]
    ],
-   "height": 1.6,
+   "height": 1.4,
    "tone": "stone",
-   "elevation": 36.2,
-   "upTo": 37.8,
+   "elevation": 36.65,
+   "upTo": 38.05,
    "note": "A pinnacle at a corner of the balcony under the clock stage, as the Detroit Publishing photographs show them. Size approximate.",
    "sources": [
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
@@ -12072,16 +11889,17 @@
      9
     ],
     [
-     0.9,
+     0.7,
      0,
      9
     ],
     [
-     1.6,
-     0.19,
+     1.4,
+     0.14,
      9
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-clock-stage",
@@ -12107,9 +11925,9 @@
      37.5343625
     ]
    ],
-   "height": 6.8,
+   "height": 6.35,
    "tone": "brick",
-   "elevation": 36.2,
+   "elevation": 36.65,
    "upTo": 43.0,
    "note": "The clock tower at the southwest corner, with a clock face on each side (The Railroad Gazette, 1900; HABS VA-848). Its outline is OSM's. Its stages are measured on HABS photographs VA-848-10, -11 and -12 (1971) against the 102-ft front, approximate to within about 1.5 m: the shaft to about 90 ft over the ground floor, as the Sanborn atlases (1905, 1952) mark it (\"Clock Tower 90'\"), the finial about 148 ft over Main Street. The 110 ft given in 1900 was for the tower as then designed, and does not fit the photographs.",
    "sources": [
@@ -12128,7 +11946,8 @@
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-entablature",
@@ -12175,7 +11994,8 @@
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-drum",
@@ -12222,7 +12042,8 @@
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-dome",
@@ -12327,7 +12148,8 @@
      2.575,
      9
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-lantern",
@@ -12353,9 +12175,9 @@
      37.5343298
     ]
    ],
-   "height": 0.7,
+   "height": 0.6,
    "tone": "stone",
-   "elevation": 48.6,
+   "elevation": 48.7,
    "upTo": 49.3,
    "note": "The base of the bronze finial on the dome (HABS VA-848). Size approximate.",
    "sources": [
@@ -12374,7 +12196,8 @@
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-finial",
@@ -12439,7 +12262,8 @@
      0.219,
      9
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-clock-s",
@@ -12531,7 +12355,8 @@
      2.634,
      0.933
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-clock-e",
@@ -12623,7 +12448,8 @@
      2.634,
      0.933
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-hands-s",
@@ -12687,7 +12513,8 @@
      1.053,
      0.13
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-hands-e",
@@ -12751,7 +12578,8 @@
      1.053,
      0.13
     ]
-   ]
+   ],
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-column-0",
@@ -12761,25 +12589,25 @@
    "to": 1985,
    "ring": [
     [
-     -77.4296243,
-     37.5343176
+     -77.4296223,
+     37.5343178
+    ],
+    [
+     -77.4296147,
+     37.5343132
+    ],
+    [
+     -77.429609,
+     37.5343193
     ],
     [
      -77.4296166,
-     37.534313
-    ],
-    [
-     -77.4296109,
-     37.5343191
-    ],
-    [
-     -77.4296185,
-     37.5343237
+     37.5343239
     ]
    ],
-   "height": 6.8,
+   "height": 6.35,
    "tone": "stone",
-   "elevation": 36.2,
+   "elevation": 36.65,
    "upTo": 43.0,
    "note": "Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.",
    "sources": [
@@ -12798,7 +12626,8 @@
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-column-1",
@@ -12808,25 +12637,25 @@
    "to": 1985,
    "ring": [
     [
-     -77.429574,
-     37.5342875
-    ],
-    [
-     -77.4295664,
-     37.5342829
-    ],
-    [
-     -77.4295607,
+     -77.4295742,
      37.534289
     ],
     [
-     -77.4295683,
-     37.5342935
+     -77.4295666,
+     37.5342844
+    ],
+    [
+     -77.4295609,
+     37.5342905
+    ],
+    [
+     -77.4295685,
+     37.534295
     ]
    ],
-   "height": 6.8,
+   "height": 6.35,
    "tone": "stone",
-   "elevation": 36.2,
+   "elevation": 36.65,
    "upTo": 43.0,
    "note": "Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.",
    "sources": [
@@ -12845,7 +12674,8 @@
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-column-2",
@@ -12855,25 +12685,25 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295325,
-     37.5343316
-    ],
-    [
-     -77.4295249,
-     37.534327
-    ],
-    [
-     -77.4295192,
-     37.5343331
+     -77.4295344,
+     37.5343314
     ],
     [
      -77.4295268,
-     37.5343376
+     37.5343268
+    ],
+    [
+     -77.4295211,
+     37.5343329
+    ],
+    [
+     -77.4295287,
+     37.5343374
     ]
    ],
-   "height": 6.8,
+   "height": 6.35,
    "tone": "stone",
-   "elevation": 36.2,
+   "elevation": 36.65,
    "upTo": 43.0,
    "note": "Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.",
    "sources": [
@@ -12892,7 +12722,8 @@
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-column-3",
@@ -12902,25 +12733,25 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295828,
+     -77.4295825,
+     37.5343602
+    ],
+    [
+     -77.4295749,
+     37.5343556
+    ],
+    [
+     -77.4295692,
      37.5343617
     ],
     [
-     -77.4295752,
-     37.5343571
-    ],
-    [
-     -77.4295694,
-     37.5343632
-    ],
-    [
-     -77.429577,
-     37.5343678
+     -77.4295768,
+     37.5343663
     ]
    ],
-   "height": 6.8,
+   "height": 6.35,
    "tone": "stone",
-   "elevation": 36.2,
+   "elevation": 36.65,
    "upTo": 43.0,
    "note": "Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.",
    "sources": [
@@ -12939,7 +12770,8 @@
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
-   "confidence": "written"
+   "confidence": "written",
+   "over": "mss-h-roof"
   },
   {
    "id": "mss-h-tower-window-s-0-0",

@@ -316,22 +316,23 @@ def build(part, rect, ring, plane, SRC, L):
     BAND = 'A stone band round the tower between its stages, as the photographs show them. Places approximate.'
     for k, zb in enumerate((L2 + 0.1, FF + 11.6)):
         p(f'tower-band-{k}', 'Main Street Station: clock tower', rect(a0 - 0.15, a1 + 0.15, b0 - 0.15, b1 + 0.15), zb, zb + 0.3, 'stone', 'approximate', BAND, PH)
+    # From the balcony up, the tower's parts stand over the roof's shell: the roof's footprint takes in
+    # the tower's, so without it they would sort by depth against the roof, inside the tower.
     BALC = ('The balcony at the shaft\'s top, on a corbel table, with a balustrade round the clock stage (HABS photographs VA-848-10 to -12; '
             'Detroit Publishing 4a10737). Its height is measured on VA-848-10 (approximate); its corbels and balustrade are drawn plain.')
-    p('tower-corbels', 'Main Street Station: clock tower', rect(a0 - 0.2, a1 + 0.2, b0 - 0.2, b1 + 0.2), SHAFT - 1.4, SHAFT - 0.2, 'stone', 'written', BALC, TSRC)
-    p('tower-cornice', 'Main Street Station: clock tower', rect(a0 - 0.4, a1 + 0.4, b0 - 0.4, b1 + 0.4), SHAFT - 0.2, SHAFT + 0.3, 'stone', 'written', BALC, TSRC)
-    e0, e1, f0, f1 = a0 - 0.35, a1 + 0.35, b0 - 0.35, b1 + 0.35
-    for k, rg in enumerate((rect(e0, e1, f0, f0 + 0.15), rect(e1 - 0.15, e1, f0 + 0.15, f1 - 0.15), rect(e0, e1, f1 - 0.15, f1), rect(e0, e0 + 0.15, f0 + 0.15, f1 - 0.15))):
-        p(f'tower-balcony-rail-{k}', 'Main Street Station: clock tower', rg, SHAFT + 0.3, SHAFT + 0.75, 'stone', 'written', BALC, TSRC)
+    p('tower-corbels', 'Main Street Station: clock tower', rect(a0 - 0.2, a1 + 0.2, b0 - 0.2, b1 + 0.2), SHAFT - 1.4, SHAFT - 0.2, 'stone', 'written', BALC, TSRC, over='mss-h-roof')
+    # The balcony's floor and its balustrade, drawn as one solid band: four thin rails, each with a
+    # footprint of its own, would sort against the roof's shell one by one.
+    p('tower-cornice', 'Main Street Station: clock tower', rect(a0 - 0.4, a1 + 0.4, b0 - 0.4, b1 + 0.4), SHAFT - 0.2, SHAFT + 0.75, 'stone', 'written', BALC, TSRC, over='mss-h-roof')
     PIN = 'A pinnacle at a corner of the balcony under the clock stage, as the Detroit Publishing photographs show them. Size approximate.'
-    for k, (x, y) in enumerate([(a0 - 0.15, b0 - 0.15), (a1 + 0.15, b0 - 0.15), (a1 + 0.15, b1 + 0.15), (a0 - 0.15, b1 + 0.15)]):
-        p(f'tower-pinnacle-{k}', 'Main Street Station: clock tower', rect(x - 0.2, x + 0.2, y - 0.2, y + 0.2), SHAFT + 0.3, SHAFT + 1.9, 'stone', 'approximate', PIN, PH,
-          shape='inset', levels=[[0, 0, 9], [0.9, 0, 9], [1.6, 0.19, 9]])
-    p('tower-clock-stage', 'Main Street Station: clock tower', rect(a0 + 0.3, a1 - 0.3, b0 + 0.3, b1 - 0.3), SHAFT + 0.3, STAGE, 'brick', 'written', TW, TSRC)
+    for k, (x, y) in enumerate([(a0 - 0.2, b0 - 0.2), (a1 + 0.2, b0 - 0.2), (a1 + 0.2, b1 + 0.2), (a0 - 0.2, b1 + 0.2)]):
+        p(f'tower-pinnacle-{k}', 'Main Street Station: clock tower', rect(x - 0.15, x + 0.15, y - 0.15, y + 0.15), SHAFT + 0.75, SHAFT + 2.15, 'stone', 'approximate', PIN, PH,
+          shape='inset', levels=[[0, 0, 9], [0.7, 0, 9], [1.4, 0.14, 9]], over='mss-h-roof')
+    p('tower-clock-stage', 'Main Street Station: clock tower', rect(a0 + 0.3, a1 - 0.3, b0 + 0.3, b1 - 0.3), SHAFT + 0.75, STAGE, 'brick', 'written', TW, TSRC, over='mss-h-roof')
     p('tower-entablature', 'Main Street Station: clock tower', rect(a0 - 0.1, a1 + 0.1, b0 - 0.1, b1 + 0.1), STAGE, STAGE + 0.5, 'stone', 'written',
-      'The entablature on the clock stage\'s coupled columns (HABS VA-848), its top measured on HABS photograph VA-848-10. Size approximate.', TSRC)
+      'The entablature on the clock stage\'s coupled columns (HABS VA-848), its top measured on HABS photograph VA-848-10. Size approximate.', TSRC, over='mss-h-roof')
     p('tower-drum', 'Main Street Station: clock tower', rect(a0 + 0.45, a1 - 0.45, b0 + 0.45, b1 - 0.45), STAGE + 0.5, DRUM, 'stone', 'written',
-      'The low base of the dome over the entablature (HABS photographs VA-848-10 and -13). Height measured on VA-848-10 (approximate).', TSRC)
+      'The low base of the dome over the entablature (HABS photographs VA-848-10 and -13). Height measured on VA-848-10 (approximate).', TSRC, over='mss-h-roof')
     # The dome: a quarter-ellipse in profile, its crown about half the clock stage's height
     # above its foot (HABS VA-848-10: dome and drum 51 px over a 91-px clock stage).
     H = DOME - DRUM
@@ -339,14 +340,14 @@ def build(part, rect, ring, plane, SRC, L):
     dome = [[round(H * k / 10, 3), round(w * (1 - math.sqrt(max(0.0, 1 - (k / 10) ** 2))), 3), 9] for k in range(11)]
     p('tower-dome', 'Main Street Station: clock tower', rect(a0 + 0.5, a1 - 0.5, b0 + 0.5, b1 - 0.5), DRUM, DOME, 'tile', 'written',
       'The tower\'s square ribbed dome of tile (HABS VA-848; HABS photographs VA-848-10, -11 and -13), its crown about 48.7 m above sea level, '
-      'measured on VA-848-10 against the 102-ft front: approximate.', TSRC, shape='inset', levels=dome)
-    p('tower-lantern', 'Main Street Station: clock tower', rect(cx - 0.35, cx + 0.35, cb - 0.35, cb + 0.35), DOME - 0.1, DOME + 0.6, 'stone', 'written',
-      'The base of the bronze finial on the dome (HABS VA-848). Size approximate.', TSRC)
+      'measured on VA-848-10 against the 102-ft front: approximate.', TSRC, shape='inset', levels=dome, over='mss-h-roof')
+    p('tower-lantern', 'Main Street Station: clock tower', rect(cx - 0.35, cx + 0.35, cb - 0.35, cb + 0.35), DOME, DOME + 0.6, 'stone', 'written',
+      'The base of the bronze finial on the dome (HABS VA-848). Size approximate.', TSRC, over='mss-h-roof')
     p('tower-finial', 'Main Street Station: clock tower', rect(cx - 0.22, cx + 0.22, cb - 0.22, cb + 0.22), DOME + 0.6, FINIAL, 'iron', 'written',
       'The bronze finial (HABS VA-848), drawn as a plain spire; its tip about 148 ft over Main Street, measured on HABS photographs VA-848-10 '
       'and -12 against the 102-ft front (approximate, to within about 8 ft). The Railroad Gazette (1900) and SAH Archipedia give 110 ft, '
       'which fits the tower as designed in 1900, not as photographed. Its form is approximate.', TSRC,
-      shape='inset', levels=[[0, 0, 9], [0.8, 0.05, 9], [round(FINIAL - DOME - 0.6, 3), 0.219, 9]])
+      shape='inset', levels=[[0, 0, 9], [0.8, 0.05, 9], [round(FINIAL - DOME - 0.6, 3), 0.219, 9]], over='mss-h-roof')
     r = R
     disc = []
     for i in range(20):
@@ -354,15 +355,15 @@ def build(part, rect, ring, plane, SRC, L):
         disc += [round(r + r * math.cos(t), 3), round(r + r * math.sin(t), 3)]
     CLK = ('A clock face, one on each of the tower\'s four sides (The Railroad Gazette, 1900; HABS VA-848). About 9 ft across with its bezel and '
            'its center about 40.3 m above sea level, measured on HABS photographs VA-848-10 and -12 (approximate).')
-    p('tower-clock-s', 'Main Street Station: clock', plane(cx - r, b0 + 0.26, cx + r, b0 + 0.26, 0.04), ZC - r, ZC + r, 'plaster', 'written', CLK, TSRC, shape='frame', members=[disc])
-    p('tower-clock-e', 'Main Street Station: clock', plane(a1 - 0.26, cb - r, a1 - 0.26, cb + r, 0.04), ZC - r, ZC + r, 'plaster', 'written', CLK, TSRC, shape='frame', members=[disc])
+    p('tower-clock-s', 'Main Street Station: clock', plane(cx - r, b0 + 0.26, cx + r, b0 + 0.26, 0.04), ZC - r, ZC + r, 'plaster', 'written', CLK, TSRC, shape='frame', members=[disc], over='mss-h-roof')
+    p('tower-clock-e', 'Main Street Station: clock', plane(a1 - 0.26, cb - r, a1 - 0.26, cb + r, 0.04), ZC - r, ZC + r, 'plaster', 'written', CLK, TSRC, shape='frame', members=[disc], over='mss-h-roof')
     HANDS = 'The clock\'s hands; the time they show is arbitrary (approximate).'
     hands = [[r, r, r, round(r + 0.74 * r, 3), 0.1], [r, r, round(r + 0.48 * r, 3), round(r - 0.22 * r, 3), 0.13]]
-    p('tower-hands-s', 'Main Street Station: clock', plane(cx - r, b0 + 0.19, cx + r, b0 + 0.19, 0.04), ZC - r, ZC + r, 'coal', 'approximate', HANDS, TSRC, shape='frame', members=hands)
-    p('tower-hands-e', 'Main Street Station: clock', plane(a1 - 0.19, cb - r, a1 - 0.19, cb + r, 0.04), ZC - r, ZC + r, 'coal', 'approximate', HANDS, TSRC, shape='frame', members=hands)
-    for k, (x, y) in enumerate([(a0 + 0.3, b0 + 0.3), (a1 - 0.3, b0 + 0.3), (a1 - 0.3, b1 - 0.3), (a0 + 0.3, b1 - 0.3)]):
-        p(f'tower-column-{k}', 'Main Street Station: clock tower', rect(x - 0.42, x + 0.42, y - 0.42, y + 0.42), SHAFT + 0.3, STAGE, 'stone', 'written',
-          'Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.', TSRC)
+    p('tower-hands-s', 'Main Street Station: clock', plane(cx - r, b0 + 0.19, cx + r, b0 + 0.19, 0.04), ZC - r, ZC + r, 'coal', 'approximate', HANDS, TSRC, shape='frame', members=hands, over='mss-h-roof')
+    p('tower-hands-e', 'Main Street Station: clock', plane(a1 - 0.19, cb - r, a1 - 0.19, cb + r, 0.04), ZC - r, ZC + r, 'coal', 'approximate', HANDS, TSRC, shape='frame', members=hands, over='mss-h-roof')
+    for k, (x, y) in enumerate([(a0 + 0.42, b0 + 0.42), (a1 - 0.42, b0 + 0.42), (a1 - 0.42, b1 - 0.42), (a0 + 0.42, b1 - 0.42)]):
+        p(f'tower-column-{k}', 'Main Street Station: clock tower', rect(x - 0.42, x + 0.42, y - 0.42, y + 0.42), SHAFT + 0.75, STAGE, 'stone', 'written',
+          'Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.', TSRC, over='mss-h-roof')
     TWIN = ('A window of the clock tower, as the photographs show them: single at the ground and first floors, paired above. Heights '
             'measured on HABS photograph VA-848-10 (approximate).')
     for k, (z0, z1, pair) in enumerate([(G + 1.2, G + 3.6, False), (FF + 1.0, FF + 4.0, False), (L2 + 0.6, L2 + 2.6, True), (FF + 12.6, FF + 15.0, True), (FF + 16.8, FF + 19.2, True)]):
