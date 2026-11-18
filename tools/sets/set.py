@@ -97,7 +97,10 @@ def prepare(S):
         groups = {}
         for s in S.boxes: groups.setdefault(S.scene_of() if which == 'map' else S.scene_of(s), []).append(s)
         for (region, year), ss in groups.items():
-            args = [f"{s['at'][0]},{s['at'][1]}" for s in ss]
+            # A box may pin its place on the big map apart from its own window (`map_at`), so the
+            # marker's leader ends on the subject when the box is framed off it.
+            at = [(s.get('map_at') if which == 'map' else None) or s['at'] for s in ss]
+            args = [f"{a[0]},{a[1]}" for a in at]
             r = subprocess.run(['node', 'bin/isoscape.js', 'locate', region] + (['--year', str(year)] if year is not None else []) + ['--', *args],
                                cwd=ROOT, capture_output=True, text=True, check=True)
             for s, p in zip(ss, json.loads(r.stdout)): pts[which][s['id']] = [p['x'], p['y']]

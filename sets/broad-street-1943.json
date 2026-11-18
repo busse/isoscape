@@ -59,20 +59,25 @@
   },
   {
    "n": 3,
-   "id": "hermitage-road",
-   "title": "Hermitage Road",
-   "subtitle": "Industry along the tracks",
+   "id": "scotts-addition",
+   "title": "Scott's Addition",
+   "subtitle": "Warehouses between the RF&P and the Belt Line",
    "at": [
-    -77.4604,
-    37.5651
+    -77.4722,
+    37.5678
    ],
-   "ground": 560,
-   "note": "Once the Seaboard Air Line met the RF&P just south of here in 1900, the land between the two railroads filled with warehouses and plants along Hermitage and Overbrook roads, from 1913 on: Export Leaf Tobacco, the purchasing arm of British American Tobacco, J. P. Taylor of Universal Leaf, Miller & Rhoads and A. H. Robins among them. Drawn are those standing today that the city dates to 1943 or before. They are a historic district today.",
+   "ground": 1150,
+   "note": "Laid out for houses west of the Boulevard, Scott's Addition was zoned for industry in 1927, and spurs from the railroads ran into its streets. By 1943 the National Biscuit Company, here since 1923, had General Baking's new plant, two dairies and a bag factory for neighbors. The warehouses now hold breweries, cideries and apartments.",
    "sources": [
-    "https://www.dhr.virginia.gov/historic-registers/127-6730/",
-    "https://www.dhr.virginia.gov/pdf_files/127-7825_Hermitage_Road_Warehouse_HD_Update_BI_2023_NRHP_DraftFinal051023.pdf"
+    "https://www.dhr.virginia.gov/historic-registers/127-6136/",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6136_ScottsAdditionHD_2005_NRHP_Final.pdf",
+    "https://richmondbizsense.com/2022/06/24/scotts-addition-in-three-parts-the-eclectic-architecture-of-a-former-warehouse-district-guest-commentary/",
+    "https://en.wikipedia.org/wiki/Scott%27s_Addition_Historic_District"
    ],
-   "region": "broad-street-hermitage"
+   "badge": [
+    1.8,
+    -2.8
+   ]
   },
   {
    "n": 4,
@@ -142,6 +147,10 @@
    "at": [
     -77.429,
     37.5341
+   ],
+   "map_at": [
+    -77.42916,
+    37.5346
    ],
    "ground": 750,
    "note": "Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened in 1901: a head house under a steep hipped roof of red tile, its clock tower 110 feet to the finial, and behind it a gable-roofed train shed more than 500 feet long on the tracks' trestle, here in plain massing. The Seaboard moved to Broad Street in 1959; the C&O stayed until Amtrak took over in 1971.",
