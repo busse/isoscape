@@ -264,6 +264,13 @@ def public(e):
     return {k: v for k, v in e.items() if k not in PRIVATE}
 
 
+def long_date(d):
+    """2026-11-18 -> November 18, 2026, as the pages write dates."""
+    try: x = datetime.date.fromisoformat(d)
+    except (TypeError, ValueError): return d
+    return f'{x:%B} {x.day}, {x.year}'
+
+
 def page(b):
     items = {k: public(e) for k, e in b['items'].items()}
     L = ['---', 'title: Production board', 'order: 97',
@@ -275,7 +282,7 @@ def page(b):
          'is counted in draft rounds (d1, d2) and release candidates (rc1, rc2). The rules are in '
          '[Changes](changes.md#how-versions-work-from-here) and [How it\'s made](how-its-made.md#stages-and-inspection).', '',
          f'This page is generated from the project\'s board (`catalog/pipeline.json`) by `tools/release/board.py page`. '
-         f'It was last updated on {b.get("updated")}. The page and the board were set up with Claude.', '']
+         f'It was last updated on {long_date(b.get("updated"))}. The page and the board were set up with Claude.', '']
     counts = {}
     for e in items.values(): counts[group_name(group_key(e))] = counts.get(group_name(group_key(e)), 0) + 1
     L += ['| Stage | Entries |', '|---|---|'] + [f'| {s} | {n} |' for s, n in sorted(counts.items(), key=lambda x: (ORDER + list(STATUS)).index(x[0]))] + ['']
