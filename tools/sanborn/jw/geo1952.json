@@ -351,5 +351,33 @@
   "m_per_px": 0.1575,
   "block_inliers": 0.1,
   "block_points": 4825
+ },
+ "309": {
+  "params": [
+   -3045.2880577319993,
+   9724.312855064018,
+   0.9414190386967777,
+   6.561683070866141
+  ],
+  "refined": true,
+  "corners": [
+   "4th & Leigh",
+   "5th & Leigh",
+   "4th & Jackson"
+  ],
+  "resid_m": [
+   2.1,
+   1.9,
+   2.3
+  ],
+  "resid_corners_only": [
+   2.1,
+   1.9,
+   2.3
+  ],
+  "m_per_px": 0.1524,
+  "block_inliers": 0.09,
+  "block_points": 3495,
+  "scale_bar_m_per_px_full": 0.0762
  }
 }
