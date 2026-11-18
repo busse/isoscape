@@ -77,16 +77,30 @@ SRC = {
     'osm-station': 'https://www.openstreetmap.org/way/113030476',
     'sanborn-1952': 'https://www.loc.gov/item/sanborn09064_016/',
     'dhr': 'https://www.dhr.virginia.gov/?p=15225',
+    'habs-12': f'{LOC}/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg',
+    'sanborn-1905': 'https://www.loc.gov/item/sanborn09064_003/',
 }
 
 # ---- levels, meters above sea level (main_street.py) ------------------------------------------
 MAIN_ST = 6.1          # Main Street in front of the station (USGS 3DEP)
 G = 8.4                # the ground floor, raised about 8 ft above the street (The Railroad Gazette)
 FF = 14.9              # the track floor and the platforms (scaled from photographs: approximate)
-CORNICE = FF + 11.8    # where the roof springs
-RIDGE = FF + 23.0
+# Heights measured on HABS VA-848-12 (Library of Congress, photograph 305472, J. E. Boucher, 1971), an
+# oblique view of the front from Main Street, along the tower's corner against the finial's 110 ft
+# above the street (The Railroad Gazette, 1900): the eaves about 56 ft, the ridge about 80 ft (set
+# back 31 ft, so less sure), the clock stage from about 78.5 ft, the clock faces' centers about
+# 85 ft and their diameter about 7.5 ft, the dome from about 93 ft (Sanborn, 1905 and 1952:
+# "Clock Tower 90'") to about 102 ft. All approximate, to within about 5 ft.
+FTM = 0.3048
+CORNICE = MAIN_ST + 56 * FTM     # where the roof springs
+RIDGE = MAIN_ST + 80 * FTM
+SHAFT = MAIN_ST + 78.5 * FTM - 0.3   # the tower's shaft, to the balcony under the clock stage
+STAGE_TOP = MAIN_ST + 93 * FTM
+DOME_TOP = MAIN_ST + 102 * FTM
+FINIAL = MAIN_ST + 110 * FTM
+CLOCK = MAIN_ST + 85 * FTM
+CLOCK_R = 7.5 * FTM / 2      # the tower's shaft, to the balcony under the clock stage
 DECK_BOTTOM = FF - 1.4
-SHAFT = FF + 17.5      # the tower's shaft, to the balcony under the clock stage
 
 # ---- plan (main_street_plan.py) ---------------------------------------------------------------
 HH_W, HH_E, HH_N = -15.25, 15.25, 19.64     # the head house (OSM way 366226941)
@@ -124,7 +138,9 @@ PLAN = [SRC['rg-1900']]
 HABS = [SRC['habs-data']]
 PH = [SRC['habs-photo-side'], SRC['detroit-east']]
 SHED = [SRC['haer-data'], SRC['haer-3'], SRC['haer-2']]
-APPROX = ' Its heights are scaled from photographs against the 110-ft tower (approximate).'
+MEASURED = (' Heights measured on HABS photograph VA-848-12 (1971), an oblique view of the front, against the finial\'s 110 ft above '
+            'the street: approximate, to within about 5 ft.')
+APPROX = ' Its cornice, about 56 ft above Main Street, is measured on HABS photograph VA-848-12 (1971) against the 110-ft tower (approximate).'
 
 HH_NOTE = ('The head house, 102 ft by 62 ft 4 in (The Railroad Gazette, July 13, 1900), of golden Roman brick over a base of rough stone '
            '(HABS VA-848), drawn as a plain block to its cornice; its outline is OpenStreetMap\'s, which matches the plan.' + APPROX)
@@ -135,26 +151,41 @@ part('mss-head-house', 'Main Street Station (head house)', rect(T1, HH_E, 0.0, H
 part('mss-head-house-west', 'Main Street Station (head house)', rect(HH_W, T1, TOWER[3], HH_N), MAIN_ST, CORNICE, 'stone', 'drawn', HH_NOTE,
      PLAN + HABS + [SRC['osm-headhouse']] + PH)
 part('mss-head-house-roof', 'Main Street Station (roof)', rect(T1 + 0.3, HH_E - 0.6, 0.6, HH_N - 0.6), CORNICE, RIDGE, 'tile', 'written',
-     'The very steep hipped roof of red tile (The Railroad Gazette, 1900; HABS VA-848), about 11 m from cornice to ridge, drawn plain, '
-     'without its two rows of dormers and its chimney, and from the tower east (behind the tower it is left flat). Its pitch and ridge '
-     'are scaled from photographs (approximate).',
-     PLAN + HABS + PH, shape='hip')
+     'The steep hipped roof of red tile (The Railroad Gazette, 1900; HABS VA-848), from the cornice at about 56 ft to the ridge at about '
+     '80 ft above Main Street, drawn plain, without its two rows of dormers and its chimney, and from the tower east (behind the tower it '
+     'is left flat).' + MEASURED,
+     PLAN + HABS + PH + [SRC['habs-12']], shape='hip')
 
 a0, a1, b0, b1 = TOWER
 TW = ('The clock tower at the southwest corner, 110 ft high to its finial with a clock face on each side (The Railroad Gazette, 1900; '
       'HABS VA-848; SAH Archipedia), drawn in plain stages: shaft, clock stage, dome and finial. Its outline is OpenStreetMap\'s; '
       'its stages are scaled from photographs (approximate).')
-TSRC = PLAN + HABS + [SRC['archipedia'], SRC['osm-tower']] + PH
+TSRC = PLAN + HABS + [SRC['archipedia'], SRC['osm-tower'], SRC['habs-12'], SRC['sanborn-1905'], SRC['sanborn-1952']] + PH
+TW = TW + MEASURED + ' The Sanborn sheets of 1905 and 1952 mark it "Clock Tower 90\'", about the top of its masonry.'
 part('mss-clock-tower', 'Main Street Station (clock tower)', rect(a0, a1, b0, b1), MAIN_ST, SHAFT + 0.3, 'stone', 'written', TW, TSRC)
-part('mss-clock-stage', 'Main Street Station (clock tower)', rect(a0 + 0.3, a1 - 0.3, b0 + 0.3, b1 - 0.3), SHAFT + 0.3, FF + 21.8, 'stone', 'written', TW, TSRC)
+part('mss-clock-stage', 'Main Street Station (clock tower)', rect(a0 + 0.3, a1 - 0.3, b0 + 0.3, b1 - 0.3), SHAFT + 0.3, STAGE_TOP, 'stone', 'written', TW, TSRC)
 # The square ribbed dome, as a revolve on the tower's square (main_street_plan.py: its levels).
-part('mss-clock-dome', 'Main Street Station (clock tower)', rect(a0 + 0.2, a1 - 0.2, b0 + 0.2, b1 - 0.2), FF + 21.8, FF + 25.4, 'tile', 'written',
-     'The tower\'s square ribbed dome of tile (HABS VA-848), scaled from photographs: approximate.', TSRC, shape='revolve',
-     levels=[[0, 1, 0], [0.8, 0.96, 0], [1.6, 0.86, 0], [2.4, 0.66, 0], [3.0, 0.42, 0], [3.6, 0.08, 0]])
+part('mss-clock-dome', 'Main Street Station (clock tower)', rect(a0 + 0.2, a1 - 0.2, b0 + 0.2, b1 - 0.2), STAGE_TOP, DOME_TOP, 'tile', 'written',
+     'The tower\'s square ribbed dome of tile (HABS VA-848), from about 93 ft to about 102 ft above Main Street.' + MEASURED, TSRC, shape='revolve',
+     levels=[[0, 1, 0], [0.2, 1.06, 0], [0.4, 1.0, 0], [1.2, 0.93, 0], [2.0, 0.78, 0], [2.6, 0.5, 0], [round(DOME_TOP - STAGE_TOP, 3), 0.12, 0]])
 cx, cb = (a0 + a1) / 2, (b0 + b1) / 2
-part('mss-clock-finial', 'Main Street Station (clock tower)', rect(cx - 0.25, cx + 0.25, cb - 0.25, cb + 0.25), FF + 25.4, G + 33.5, 'iron', 'written',
-     'The bronze finial, its top 110 ft above the ground (The Railroad Gazette, 1900; SAH Archipedia), drawn as a plain spire; its form is approximate.',
-     TSRC, shape='revolve', levels=[[0, 1, 0], [round(G + 33.5 - FF - 25.4, 3), 0.15, 0]])
+part('mss-clock-finial', 'Main Street Station (clock tower)', rect(cx - 0.25, cx + 0.25, cb - 0.25, cb + 0.25), DOME_TOP, FINIAL, 'iron', 'written',
+     'The bronze finial, its top 110 ft above the street (The Railroad Gazette, 1900; SAH Archipedia), drawn as a plain spire; its form is approximate.',
+     TSRC, shape='revolve', levels=[[0, 1, 0], [round(FINIAL - DOME_TOP, 3), 0.15, 0]])
+CLK = ('A clock face, one on each of the tower\'s four sides (The Railroad Gazette, 1900), about 7.5 ft across, its center about 85 ft above '
+       'Main Street.' + MEASURED)
+for side, (p0, p1, q) in {'s': ((a0 + 0.3, b0 + 0.27), (a1 - 0.3, b0 + 0.27), (0, -0.06)),
+                          'e': ((a1 - 0.27, b0 + 0.3), (a1 - 0.27, b1 - 0.3), (0.06, 0)),
+                          'n': ((a1 - 0.3, b1 - 0.27), (a0 + 0.3, b1 - 0.27), (0, 0.06)),
+                          'w': ((a0 + 0.27, b1 - 0.3), (a0 + 0.27, b0 + 0.3), (-0.06, 0))}.items():
+    mid = ((p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2)
+    ua = ((p1[0] - p0[0]), (p1[1] - p0[1]))
+    ln = (ua[0] ** 2 + ua[1] ** 2) ** 0.5
+    ua = (ua[0] / ln, ua[1] / ln)
+    d0 = (mid[0] - ua[0] * CLOCK_R, mid[1] - ua[1] * CLOCK_R)
+    d1 = (mid[0] + ua[0] * CLOCK_R, mid[1] + ua[1] * CLOCK_R)
+    ring_ = [lonlat(*d0), lonlat(*d1), lonlat(d1[0] + q[0], d1[1] + q[1]), lonlat(d0[0] + q[0], d0[1] + q[1])]
+    part(f'mss-clock-face-{side}', 'Main Street Station (clock)', ring_, CLOCK - CLOCK_R, CLOCK + CLOCK_R, 'plaster', 'written', CLK, TSRC, shape='disc')
 
 part('mss-concourse', 'Main Street Station (concourse)', rect(ELL[0], ELL[1], ELL[2], ELL[3]), G - 0.4, FF + 7.3, 'stone', 'drawn',
      'The concourse (the "lobby" of the 1900 plan), 82 ft wide behind the head house, one story at the level of the platforms under a flat '

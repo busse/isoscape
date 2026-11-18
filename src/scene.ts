@@ -984,8 +984,9 @@ export const buildScene = (
           // A series can draw its turned parts (a dome) as shaded faces inked only at their foot
           // (revolveInkFoot): inked facet by facet, a dome a few dozen meters across reads as a
           // black disc at a map's scale.
-          const roof = h.shape === 'hip' || h.shape === 'gable'
-          const solids = h.shape === 'revolve' || roof ? partSolids({ h, outer, seat, top }).solids : []
+          const roof = h.shape === 'hip' || h.shape === 'gable' || h.shape === 'disc'
+          // A disc keeps its corners in order: its first edge is its diameter.
+          const solids = h.shape === 'revolve' || roof ? partSolids({ h, outer: h.shape === 'disc' ? toViewRing(view, h.ring) : outer, seat, top }).solids : []
           const footZ = Math.min(...solids.flatMap((sl) => sl.faces.flatMap((f) => f.pts.map((q) => q[2]))))
           const solid = h.shape === 'revolve'
             ? solidItem(view, partTones(pal, h), `history:${h.id}`, solids, h.name, time?.history.revolveInkFoot === true ? (q) => q[2] > footZ + 0.01 : undefined)
@@ -2727,13 +2728,37 @@ const separateCrossings = (chains: readonly BridgeChain[], lines: readonly DeckL
     }
     return best <= PAIR ? sb : null
   }
+  // The change is carried on, still fading, into any rail deck that continues one it was given
+  // to end to end (a line whose layer changes along it), so no step shows at the joint.
+  const fadeOf = (dz: number, d: number) => Math.sign(dz) * Math.max(0, Math.abs(dz) - CROSSING_GRADE * d)
   const shift = (lay: number, P: Vec2, dz: number) => {
+    const done = new Set<number>()
+    const front: { k: number; s0: number; off: number }[] = []
     for (let k = 0; k < chains.length; k++) {
       if (!isRail(chains[k].line.tags) || layer(chains[k]) !== lay) continue
       const s0 = near(out[k], P)
       if (s0 === null) continue
+      front.push({ k, s0, off: 0 })
+      done.add(k)
+    }
+    while (front.length > 0) {
+      const { k, s0, off } = front.shift()!
       const z = out[k].zAt
-      out[k] = { ...out[k], zAt: (s: number) => z(s) + Math.sign(dz) * Math.max(0, Math.abs(dz) - CROSSING_GRADE * Math.abs(s - s0)) }
+      out[k] = { ...out[k], zAt: (s: number) => z(s) + fadeOf(dz, off + Math.abs(s - s0)) }
+      const L = out[k]
+      for (const [e, se] of [[L.pts[0], 0], [L.pts[L.pts.length - 1], L.total]] as const) {
+        const left = off + Math.abs(se - s0)
+        if (fadeOf(dz, left) === 0) continue
+        for (let j = 0; j < chains.length; j++) {
+          if (done.has(j) || !isRail(chains[j].line.tags)) continue
+          const M = out[j]
+          const at0 = Math.hypot(M.pts[0][0] - e[0], M.pts[0][1] - e[1]) < 1
+          const at1 = Math.hypot(M.pts[M.pts.length - 1][0] - e[0], M.pts[M.pts.length - 1][1] - e[1]) < 1
+          if (!at0 && !at1) continue
+          done.add(j)
+          front.push({ k: j, s0: at0 ? 0 : M.total, off: left })
+        }
+      }
     }
   }
   for (let i = 0; i < chains.length; i++) {

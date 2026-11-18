@@ -58,7 +58,7 @@ export interface HistoryFeature {
   readonly base?: number
   readonly seat?: 'min' | 'max'
   readonly on?: string
-  readonly shape?: 'prism' | 'dome' | 'revolve' | 'stair' | 'arch' | 'hip' | 'gable'
+  readonly shape?: 'prism' | 'dome' | 'revolve' | 'stair' | 'arch' | 'hip' | 'gable' | 'disc'
   readonly tone?: PartTone
   /**
    * The modeled building a part belongs to, where a history holds more than one: the parts of
@@ -85,7 +85,8 @@ export interface HistoryFeature {
    * arched window on the ring's first edge (its span), rising to a half ellipse at the top.
    * `hip`: a roof rising from every edge of its (convex) ring at one pitch to a ridge at its
    * top; `gable`: a roof rising from the ring's first and third edges (its eaves) to a ridge
-   * midway between them at its top, the second and fourth edges its gable ends.
+   * midway between them at its top, the second and fourth edges its gable ends. `disc`: a disc
+   * standing on the ring's first edge (its diameter), as thick as the second (a clock face).
    */
   readonly steps?: number
   /** How the part is known: see `confidenceOf`. */
