@@ -165,6 +165,8 @@ const paper: Palette = {
     loco: ['#6b6c70', '#4a4b4f', '#5a5b5f'],
     coal: ['#403e3b', '#2f2e2c', '#4a4744'],
     carRoof: ['#43553d', '#2f3d2b', '#4a5d43'],
+    // Water held in a modeled work (a forebay, a wheel pit), drawn as a solid at its level.
+    water: ['#a8cad8', '#8fb3c4', '#b4d3df'],
   },
   poche: '#2c2b33',
   cutOutline: '#2c2b33',
@@ -258,6 +260,7 @@ const night: Palette = {
     loco: ['#3a3b40', '#26272c', '#303136'],
     coal: ['#1f1f22', '#161618', '#29292c'],
     carRoof: ['#24382a', '#18261c', '#2a3e2f'],
+    water: ['#1b2e3b', '#16252f', '#223847'],
   },
   poche: '#c9d1e6',
   cutOutline: '#c9d1e6',

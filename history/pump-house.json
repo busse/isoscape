@@ -1,0 +1,7670 @@
+{
+ "title": "The New Pump-House, about 1885 (rough draft)",
+ "method": "Rough draft, modeled with Claude for Chris Busse from curated parts in tools/stations/pump_house.py: outline from OpenStreetMap; levels from the 2019 schematic design study; machinery from The American Engineer (1884); rooms from the 2002 National Register nomination and HAER VA-34. Every part names its sources and how it is known.",
+ "present": 2026,
+ "about": "Richmond's New Pump-House, 1881-83, by Col. Wilfred Emory Cutshaw: canal water turned three turbines that drove nine pumps, lifting drinking water to the Byrd Park reservoir; an open-air pavilion over the machines held dances and pleasure parties.",
+ "epochs": [
+  {
+   "year": 1885,
+   "title": "The New Pump-House at work",
+   "note": "The original Ramsay machinery, two years in service; the pavilion still open."
+  }
+ ],
+ "features": [
+  {
+   "id": "ph-w-w-walls",
+   "name": "The New Pump-House: west wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4861874,
+     37.5365919
+    ],
+    [
+     -77.4861136,
+     37.53655829
+    ],
+    [
+     -77.48602155,
+     37.53668713
+    ],
+    [
+     -77.48609535,
+     37.53672073
+    ]
+   ],
+   "elevation": 23.6,
+   "upTo": 38.4,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the gentlemen's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://www.openstreetmap.org/way/236152567"
+   ]
+  },
+  {
+   "id": "ph-w-w-roof",
+   "name": "The New Pump-House: west wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48611233,
+     37.53655459
+    ],
+    [
+     -77.48601691,
+     37.53668814
+    ],
+    [
+     -77.48609662,
+     37.53672443
+    ],
+    [
+     -77.48619204,
+     37.53659089
+    ]
+   ],
+   "elevation": 38.4,
+   "upTo": 43.9,
+   "tone": "roof",
+   "confidence": "approximate",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the gentlemen's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ],
+   "shape": "gable"
+  },
+  {
+   "id": "ph-w-w-pinnacle-0",
+   "name": "The New Pump-House: west wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48615682,
+     37.53657173
+    ],
+    [
+     -77.48615091,
+     37.53656904
+    ],
+    [
+     -77.48614755,
+     37.53657375
+    ],
+    [
+     -77.48615345,
+     37.53657644
+    ]
+   ],
+   "elevation": 43.3,
+   "upTo": 44.8,
+   "tone": "stone",
+   "confidence": "approximate",
+   "note": "A flat-topped pinnacle crowning the gable (NRHP 2002). Size approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  },
+  {
+   "id": "ph-w-w-pinnacle-1",
+   "name": "The New Pump-House: west wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4860614,
+     37.53670527
+    ],
+    [
+     -77.4860555,
+     37.53670259
+    ],
+    [
+     -77.48605213,
+     37.5367073
+    ],
+    [
+     -77.48605803,
+     37.53670999
+    ]
+   ],
+   "elevation": 43.3,
+   "upTo": 44.8,
+   "tone": "stone",
+   "confidence": "approximate",
+   "note": "A flat-topped pinnacle crowning the gable (NRHP 2002). Size approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  },
+  {
+   "id": "ph-w-e-walls",
+   "name": "The New Pump-House: east wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48587349,
+     37.53644896
+    ],
+    [
+     -77.48579969,
+     37.53641536
+    ],
+    [
+     -77.48570764,
+     37.53654419
+    ],
+    [
+     -77.48578144,
+     37.5365778
+    ]
+   ],
+   "elevation": 23.6,
+   "upTo": 38.4,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the ladies's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://www.openstreetmap.org/way/236152567"
+   ]
+  },
+  {
+   "id": "ph-w-e-roof",
+   "name": "The New Pump-House: east wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48579842,
+     37.53641166
+    ],
+    [
+     -77.48570301,
+     37.5365452
+    ],
+    [
+     -77.48578271,
+     37.5365815
+    ],
+    [
+     -77.48587813,
+     37.53644795
+    ]
+   ],
+   "elevation": 38.4,
+   "upTo": 43.9,
+   "tone": "roof",
+   "confidence": "approximate",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the ladies's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ],
+   "shape": "gable"
+  },
+  {
+   "id": "ph-w-e-pinnacle-0",
+   "name": "The New Pump-House: east wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48584291,
+     37.53642879
+    ],
+    [
+     -77.48583701,
+     37.5364261
+    ],
+    [
+     -77.48583364,
+     37.53643082
+    ],
+    [
+     -77.48583955,
+     37.5364335
+    ]
+   ],
+   "elevation": 43.3,
+   "upTo": 44.8,
+   "tone": "stone",
+   "confidence": "approximate",
+   "note": "A flat-topped pinnacle crowning the gable (NRHP 2002). Size approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  },
+  {
+   "id": "ph-w-e-pinnacle-1",
+   "name": "The New Pump-House: east wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48574749,
+     37.53656234
+    ],
+    [
+     -77.48574159,
+     37.53655965
+    ],
+    [
+     -77.48573822,
+     37.53656436
+    ],
+    [
+     -77.48574413,
+     37.53656705
+    ]
+   ],
+   "elevation": 43.3,
+   "upTo": 44.8,
+   "tone": "stone",
+   "confidence": "approximate",
+   "note": "A flat-topped pinnacle crowning the gable (NRHP 2002). Size approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  },
+  {
+   "id": "ph-c-wall-south",
+   "name": "The New Pump-House: south wall",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48610686,
+     37.53656772
+    ],
+    [
+     -77.48586676,
+     37.53645839
+    ],
+    [
+     -77.48586171,
+     37.53646546
+    ],
+    [
+     -77.48610181,
+     37.53657479
+    ]
+   ],
+   "elevation": 23.6,
+   "upTo": 34.47,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. The north wall stands in the forebay's water to the walkway, so the machine room is below water on that side (NRHP 2002). Five bays of double lancet windows lit the machine room from the south (NRHP 2002); not drawn in the rough draft.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://www.openstreetmap.org/way/236152567"
+   ]
+  },
+  {
+   "id": "ph-c-wall-north",
+   "name": "The New Pump-House: north wall",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48602941,
+     37.53667613
+    ],
+    [
+     -77.4857893,
+     37.5365668
+    ],
+    [
+     -77.48578425,
+     37.53657387
+    ],
+    [
+     -77.48602435,
+     37.5366832
+    ]
+   ],
+   "elevation": 23.6,
+   "upTo": 34.47,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. The north wall stands in the forebay's water to the walkway, so the machine room is below water on that side (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://www.openstreetmap.org/way/236152567"
+   ]
+  },
+  {
+   "id": "ph-c-floor-0",
+   "name": "The New Pump-House: machine room floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48610181,
+     37.53657479
+    ],
+    [
+     -77.48609886,
+     37.53657345
+    ],
+    [
+     -77.48602645,
+     37.53667478
+    ],
+    [
+     -77.48602941,
+     37.53667613
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The machine room floor: wood in its day, \"long removed\"; granite and earth today (NRHP 2002). Level from the 2019 study. The pits' outlines here are approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-c-floor-1",
+   "name": "The New Pump-House: machine room floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48602407,
+     37.53653939
+    ],
+    [
+     -77.48601915,
+     37.53653715
+    ],
+    [
+     -77.48594675,
+     37.53663849
+    ],
+    [
+     -77.48595167,
+     37.53664073
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The machine room floor: wood in its day, \"long removed\"; granite and earth today (NRHP 2002). Level from the 2019 study. The pits' outlines here are approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-c-floor-2",
+   "name": "The New Pump-House: machine room floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48594437,
+     37.5365031
+    ],
+    [
+     -77.48593945,
+     37.53650086
+    ],
+    [
+     -77.48586704,
+     37.5366022
+    ],
+    [
+     -77.48587196,
+     37.53660444
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The machine room floor: wood in its day, \"long removed\"; granite and earth today (NRHP 2002). Level from the 2019 study. The pits' outlines here are approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-c-floor-3",
+   "name": "The New Pump-House: machine room floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48586466,
+     37.5364668
+    ],
+    [
+     -77.48586171,
+     37.53646546
+    ],
+    [
+     -77.4857893,
+     37.5365668
+    ],
+    [
+     -77.48579225,
+     37.53656814
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The machine room floor: wood in its day, \"long removed\"; granite and earth today (NRHP 2002). Level from the 2019 study. The pits' outlines here are approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-c-floor-s0",
+   "name": "The New Pump-House: machine room floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48609886,
+     37.53657345
+    ],
+    [
+     -77.48602407,
+     37.53653939
+    ],
+    [
+     -77.48601341,
+     37.53655432
+    ],
+    [
+     -77.48608819,
+     37.53658837
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The machine room floor: wood in its day, \"long removed\"; granite and earth today (NRHP 2002). Level from the 2019 study. The pits' outlines here are approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-c-floor-n0",
+   "name": "The New Pump-House: machine room floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48603768,
+     37.53665907
+    ],
+    [
+     -77.48596289,
+     37.53662502
+    ],
+    [
+     -77.48595167,
+     37.53664073
+    ],
+    [
+     -77.48602645,
+     37.53667478
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The machine room floor: wood in its day, \"long removed\"; granite and earth today (NRHP 2002). Level from the 2019 study. The pits' outlines here are approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-c-pit-0",
+   "name": "The New Pump-House: pump pit",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48607147,
+     37.53658076
+    ],
+    [
+     -77.48601341,
+     37.53655432
+    ],
+    [
+     -77.48596289,
+     37.53662502
+    ],
+    [
+     -77.48602095,
+     37.53665146
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 26.31,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "A pump pit, its floor at \"Level 1 lower\" (2019 study); the pits hold water today (NRHP 2002). Outline approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-floor-s1",
+   "name": "The New Pump-House: machine room floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48601915,
+     37.53653715
+    ],
+    [
+     -77.48594437,
+     37.5365031
+    ],
+    [
+     -77.4859337,
+     37.53651802
+    ],
+    [
+     -77.48600849,
+     37.53655208
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The machine room floor: wood in its day, \"long removed\"; granite and earth today (NRHP 2002). Level from the 2019 study. The pits' outlines here are approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-c-floor-n1",
+   "name": "The New Pump-House: machine room floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48595797,
+     37.53662278
+    ],
+    [
+     -77.48588319,
+     37.53658873
+    ],
+    [
+     -77.48587196,
+     37.53660444
+    ],
+    [
+     -77.48594675,
+     37.53663849
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The machine room floor: wood in its day, \"long removed\"; granite and earth today (NRHP 2002). Level from the 2019 study. The pits' outlines here are approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-c-pit-1",
+   "name": "The New Pump-House: pump pit",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48599176,
+     37.53654446
+    ],
+    [
+     -77.4859337,
+     37.53651802
+    ],
+    [
+     -77.48588319,
+     37.53658873
+    ],
+    [
+     -77.48594124,
+     37.53661516
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 26.31,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "A pump pit, its floor at \"Level 1 lower\" (2019 study); the pits hold water today (NRHP 2002). Outline approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-floor-s2",
+   "name": "The New Pump-House: machine room floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48593945,
+     37.53650086
+    ],
+    [
+     -77.48586466,
+     37.5364668
+    ],
+    [
+     -77.485854,
+     37.53648173
+    ],
+    [
+     -77.48592878,
+     37.53651578
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The machine room floor: wood in its day, \"long removed\"; granite and earth today (NRHP 2002). Level from the 2019 study. The pits' outlines here are approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-c-floor-n2",
+   "name": "The New Pump-House: machine room floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48587827,
+     37.53658648
+    ],
+    [
+     -77.48580348,
+     37.53655243
+    ],
+    [
+     -77.48579225,
+     37.53656814
+    ],
+    [
+     -77.48586704,
+     37.5366022
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The machine room floor: wood in its day, \"long removed\"; granite and earth today (NRHP 2002). Level from the 2019 study. The pits' outlines here are approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-c-pit-2",
+   "name": "The New Pump-House: pump pit",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48591205,
+     37.53650817
+    ],
+    [
+     -77.485854,
+     37.53648173
+    ],
+    [
+     -77.48580348,
+     37.53655243
+    ],
+    [
+     -77.48586154,
+     37.53657887
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 26.31,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "A pump pit, its floor at \"Level 1 lower\" (2019 study); the pits hold water today (NRHP 2002). Outline approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-wheelpit-0",
+   "name": "The New Pump-House: wheel pit",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48608857,
+     37.53658784
+    ],
+    [
+     -77.48607283,
+     37.53658068
+    ],
+    [
+     -77.48602156,
+     37.53665243
+    ],
+    [
+     -77.4860373,
+     37.5366596
+    ]
+   ],
+   "elevation": 23.404,
+   "upTo": 23.704,
+   "tone": "stone",
+   "confidence": "approximate",
+   "note": "The wheel's pit, down to the tail water, where the cast-iron diffuser under the wheel let the spent water go to the tailrace (The American Engineer, 1884). Depth and size approximate. Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-tailpit-0",
+   "name": "The New Pump-House: tail water",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48608857,
+     37.53658784
+    ],
+    [
+     -77.48607283,
+     37.53658068
+    ],
+    [
+     -77.48602156,
+     37.53665243
+    ],
+    [
+     -77.4860373,
+     37.5366596
+    ]
+   ],
+   "elevation": 23.704,
+   "upTo": 24.604,
+   "tone": "water",
+   "confidence": "approximate",
+   "note": "Tail water in the wheel pit, 20 ft below the forebay (The American Engineer, 1884). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-diffuser-0",
+   "name": "The New Pump-House: diffuser",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4860743,
+     37.53660599
+    ],
+    [
+     -77.48606052,
+     37.53659972
+    ],
+    [
+     -77.48603583,
+     37.53663428
+    ],
+    [
+     -77.4860496,
+     37.53664056
+    ]
+   ],
+   "elevation": 24.404,
+   "upTo": 24.883,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A large cast-iron diffuser below the wheel \"delivers the water into the tail-race with the least possible loss\" (The American Engineer, 1884). Shape approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-wheel-0",
+   "name": "The New Pump-House: turbine wheel 1",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48608344,
+     37.53658863
+    ],
+    [
+     -77.48603554,
+     37.53665568
+    ],
+    [
+     -77.48602669,
+     37.53665164
+    ],
+    [
+     -77.48607459,
+     37.5365846
+    ]
+   ],
+   "elevation": 24.733,
+   "upTo": 33.267,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A partial vertical turbine of the outward-flow (Fourneyron) type, all iron, 21 ft inside and 28 ft outside; water under a 20-ft head entered through its center into a guide chamber that turned it onto about a quarter of the buckets. The American Engineer, December 26, 1884: designed by the late Prof. Charles A. Smith, built and erected by H. A. Ramsay (Ramsay Engineering Works, Baltimore) under contract with Col. W. E. Cutshaw. Bolling (1900) gives 23 1/2 ft. Replaced in 1891 by geared Leffel wheels (NRHP 2002). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "http://www.waterworkshistory.us/VA/Richmond/RichmondWaterWorks1900.pdf",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ],
+   "shape": "disc"
+  },
+  {
+   "id": "ph-c-penstock-0",
+   "name": "The New Pump-House: penstock 1",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4860773,
+     37.53663026
+    ],
+    [
+     -77.48606235,
+     37.53662345
+    ],
+    [
+     -77.48598377,
+     37.53673343
+    ],
+    [
+     -77.48599872,
+     37.53674024
+    ]
+   ],
+   "elevation": 28.24,
+   "upTo": 29.76,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An iron penstock 5 ft in diameter, from the forebay through the north wall into the wheel's center (The American Engineer, 1884); three openings in the north wall (NRHP 2002; HAER VA-34-5). Drawn level and square; in the engraving it drops to the wheel on a slant. Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-penstock-elbow-0",
+   "name": "The New Pump-House: penstock 1",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48608157,
+     37.53662429
+    ],
+    [
+     -77.48606376,
+     37.53661618
+    ],
+    [
+     -77.48605523,
+     37.53662812
+    ],
+    [
+     -77.48607304,
+     37.53663624
+    ]
+   ],
+   "elevation": 28.24,
+   "upTo": 29.76,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The penstock's elbow into the wheel's center (The American Engineer, 1884). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-x-gate-0",
+   "name": "The New Pump-House: head gate 1",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48600712,
+     37.5367347
+    ],
+    [
+     -77.48598547,
+     37.53672484
+    ],
+    [
+     -77.48597986,
+     37.5367327
+    ],
+    [
+     -77.48600151,
+     37.53674255
+    ]
+   ],
+   "elevation": 24.604,
+   "upTo": 32.3,
+   "tone": "wood",
+   "confidence": "written",
+   "note": "A sluice gate 6 ft by 6 ft at the penstock's head, worked by a hydraulic cylinder 10 in in diameter (The American Engineer, 1884). Frame drawn as a block; place approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-x-gate-cyl-0",
+   "name": "The New Pump-House: head gate 1",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48599103,
+     37.53673258
+    ],
+    [
+     -77.48599068,
+     37.53673394
+    ],
+    [
+     -77.4859914,
+     37.53673522
+    ],
+    [
+     -77.48599292,
+     37.53673591
+    ],
+    [
+     -77.48599466,
+     37.53673576
+    ],
+    [
+     -77.48599595,
+     37.53673482
+    ],
+    [
+     -77.48599631,
+     37.53673345
+    ],
+    [
+     -77.48599559,
+     37.53673217
+    ],
+    [
+     -77.48599406,
+     37.53673148
+    ],
+    [
+     -77.48599233,
+     37.53673164
+    ]
+   ],
+   "elevation": 32.3,
+   "upTo": 33.7,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The gate's hydraulic cylinder, 10 in (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-x-tailrace-0",
+   "name": "The New Pump-House: tailrace 1",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48616214,
+     37.5364867
+    ],
+    [
+     -77.48614443,
+     37.53647863
+    ],
+    [
+     -77.48607184,
+     37.53658023
+    ],
+    [
+     -77.48608956,
+     37.53658829
+    ]
+   ],
+   "elevation": 23.704,
+   "upTo": 24.604,
+   "tone": "water",
+   "confidence": "approximate",
+   "note": "A tunnel under the stone walkway carried the spent water out to the canal on the south side (NRHP 2002; Friends of Pump House tour). Number, size and line approximate: one per wheel is assumed.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.friendsofpumphouse.org/pump-house-tour.html"
+   ]
+  },
+  {
+   "id": "ph-c-shaft-0",
+   "name": "The New Pump-House: shaft 1",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48606192,
+     37.53662149
+    ],
+    [
+     -77.48599304,
+     37.53659013
+    ],
+    [
+     -77.48599113,
+     37.5365928
+    ],
+    [
+     -77.48606001,
+     37.53662416
+    ]
+   ],
+   "elevation": 28.83,
+   "upTo": 29.17,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A wrought-iron shaft 12 in in diameter, keyed to the wheel, with three cranks of 36-in throw set 120 deg apart (The American Engineer, 1884). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crank-0-0",
+   "name": "The New Pump-House: crank",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48603431,
+     37.53660757
+    ],
+    [
+     -77.48603195,
+     37.53660649
+    ],
+    [
+     -77.48602858,
+     37.5366112
+    ],
+    [
+     -77.48603094,
+     37.53661228
+    ]
+   ],
+   "elevation": 28.5,
+   "upTo": 29.95,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crank of 36-in throw (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-rod-0-0",
+   "name": "The New Pump-House: connecting rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48603284,
+     37.53660908
+    ],
+    [
+     -77.48603107,
+     37.53660827
+    ],
+    [
+     -77.48603006,
+     37.53660969
+    ],
+    [
+     -77.48603183,
+     37.53661049
+    ]
+   ],
+   "elevation": 29.9,
+   "upTo": 33.87,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A connecting rod 16 ft long, 4 by 9 in, up to the crosshead overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crosshead-0-0",
+   "name": "The New Pump-House: crosshead",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48603812,
+     37.53660461
+    ],
+    [
+     -77.4860332,
+     37.53660237
+    ],
+    [
+     -77.48602478,
+     37.53661416
+    ],
+    [
+     -77.4860297,
+     37.5366164
+    ]
+   ],
+   "elevation": 33.87,
+   "upTo": 34.22,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crosshead working in fixed guides held by lattice girders overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-0-0-s",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48603559,
+     37.5366045
+    ],
+    [
+     -77.4860346,
+     37.53660405
+    ],
+    [
+     -77.48603404,
+     37.53660484
+    ],
+    [
+     -77.48603503,
+     37.53660529
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-0-0-n",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48602885,
+     37.53661393
+    ],
+    [
+     -77.48602787,
+     37.53661348
+    ],
+    [
+     -77.48602731,
+     37.53661427
+    ],
+    [
+     -77.48602829,
+     37.53661471
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-plunger-0-0",
+   "name": "The New Pump-House: plunger",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48604226,
+     37.53660702
+    ],
+    [
+     -77.48602849,
+     37.53660075
+    ],
+    [
+     -77.48602063,
+     37.53661175
+    ],
+    [
+     -77.48603441,
+     37.53661802
+    ]
+   ],
+   "elevation": 28.26,
+   "upTo": 28.46,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The yoke where the two pump rods take the plunger (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pump-0-0",
+   "name": "The New Pump-House: pump 1",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48602692,
+     37.53660732
+    ],
+    [
+     -77.48602627,
+     37.53660984
+    ],
+    [
+     -77.48602759,
+     37.53661218
+    ],
+    [
+     -77.48603039,
+     37.53661346
+    ],
+    [
+     -77.48603359,
+     37.53661318
+    ],
+    [
+     -77.48603597,
+     37.53661145
+    ],
+    [
+     -77.48603663,
+     37.53660893
+    ],
+    [
+     -77.4860353,
+     37.53660658
+    ],
+    [
+     -77.4860325,
+     37.53660531
+    ],
+    [
+     -77.4860293,
+     37.53660559
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 28.26,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "One of nine vertical single-acting plunger pumps: a plunger 14 in in diameter in a chamber 36 in across, with double-beat Cornish valves of 20 in (The American Engineer, 1884); stroke 6 ft (NRHP 2002). Twelve million gallons a day for the nine against a head of 175 ft (The American Engineer). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-airvessel-0-0",
+   "name": "The New Pump-House: air vessel",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48601697,
+     37.53662362
+    ],
+    [
+     -77.48601651,
+     37.53662542
+    ],
+    [
+     -77.48601746,
+     37.5366271
+    ],
+    [
+     -77.48601946,
+     37.53662802
+    ],
+    [
+     -77.48602176,
+     37.53662782
+    ],
+    [
+     -77.48602347,
+     37.53662657
+    ],
+    [
+     -77.48602394,
+     37.53662477
+    ],
+    [
+     -77.48602299,
+     37.53662309
+    ],
+    [
+     -77.48602098,
+     37.53662217
+    ],
+    [
+     -77.48601868,
+     37.53662238
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 30.06,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An air vessel over each pump's discharge (The American Engineer, 1884). Size approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-branch-0-0",
+   "name": "The New Pump-House: discharge branch",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48603117,
+     37.53661342
+    ],
+    [
+     -77.48602723,
+     37.53661163
+    ],
+    [
+     -77.48600085,
+     37.53664855
+    ],
+    [
+     -77.48600479,
+     37.53665034
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 26.71,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "From the pump to the main (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crank-0-1",
+   "name": "The New Pump-House: crank",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48601758,
+     37.53659995
+    ],
+    [
+     -77.48601522,
+     37.53659887
+    ],
+    [
+     -77.48601185,
+     37.53660359
+    ],
+    [
+     -77.48601422,
+     37.53660466
+    ]
+   ],
+   "elevation": 28.5,
+   "upTo": 29.95,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crank of 36-in throw (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-rod-0-1",
+   "name": "The New Pump-House: connecting rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48601611,
+     37.53660146
+    ],
+    [
+     -77.48601434,
+     37.53660066
+    ],
+    [
+     -77.48601333,
+     37.53660207
+    ],
+    [
+     -77.4860151,
+     37.53660288
+    ]
+   ],
+   "elevation": 29.9,
+   "upTo": 33.87,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A connecting rod 16 ft long, 4 by 9 in, up to the crosshead overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crosshead-0-1",
+   "name": "The New Pump-House: crosshead",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48602139,
+     37.536597
+    ],
+    [
+     -77.48601647,
+     37.53659476
+    ],
+    [
+     -77.48600805,
+     37.53660654
+    ],
+    [
+     -77.48601297,
+     37.53660878
+    ]
+   ],
+   "elevation": 33.87,
+   "upTo": 34.22,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crosshead working in fixed guides held by lattice girders overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-0-1-s",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48601886,
+     37.53659688
+    ],
+    [
+     -77.48601788,
+     37.53659644
+    ],
+    [
+     -77.48601731,
+     37.53659722
+    ],
+    [
+     -77.4860183,
+     37.53659767
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-0-1-n",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48601212,
+     37.53660631
+    ],
+    [
+     -77.48601114,
+     37.53660586
+    ],
+    [
+     -77.48601058,
+     37.53660665
+    ],
+    [
+     -77.48601156,
+     37.5366071
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-plunger-0-1",
+   "name": "The New Pump-House: plunger",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48602554,
+     37.5365994
+    ],
+    [
+     -77.48601176,
+     37.53659313
+    ],
+    [
+     -77.4860039,
+     37.53660413
+    ],
+    [
+     -77.48601768,
+     37.5366104
+    ]
+   ],
+   "elevation": 28.26,
+   "upTo": 28.46,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The yoke where the two pump rods take the plunger (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pump-0-1",
+   "name": "The New Pump-House: pump 2",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48601019,
+     37.53659971
+    ],
+    [
+     -77.48600954,
+     37.53660222
+    ],
+    [
+     -77.48601086,
+     37.53660457
+    ],
+    [
+     -77.48601366,
+     37.53660584
+    ],
+    [
+     -77.48601686,
+     37.53660556
+    ],
+    [
+     -77.48601925,
+     37.53660383
+    ],
+    [
+     -77.4860199,
+     37.53660131
+    ],
+    [
+     -77.48601857,
+     37.53659897
+    ],
+    [
+     -77.48601578,
+     37.53659769
+    ],
+    [
+     -77.48601257,
+     37.53659798
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 28.26,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "One of nine vertical single-acting plunger pumps: a plunger 14 in in diameter in a chamber 36 in across, with double-beat Cornish valves of 20 in (The American Engineer, 1884); stroke 6 ft (NRHP 2002). Twelve million gallons a day for the nine against a head of 175 ft (The American Engineer). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-airvessel-0-1",
+   "name": "The New Pump-House: air vessel",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48600025,
+     37.536616
+    ],
+    [
+     -77.48599978,
+     37.53661781
+    ],
+    [
+     -77.48600073,
+     37.53661949
+    ],
+    [
+     -77.48600274,
+     37.5366204
+    ],
+    [
+     -77.48600503,
+     37.5366202
+    ],
+    [
+     -77.48600674,
+     37.53661896
+    ],
+    [
+     -77.48600721,
+     37.53661715
+    ],
+    [
+     -77.48600626,
+     37.53661547
+    ],
+    [
+     -77.48600425,
+     37.53661456
+    ],
+    [
+     -77.48600196,
+     37.53661476
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 30.06,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An air vessel over each pump's discharge (The American Engineer, 1884). Size approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-branch-0-1",
+   "name": "The New Pump-House: discharge branch",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48601444,
+     37.53660581
+    ],
+    [
+     -77.48601051,
+     37.53660401
+    ],
+    [
+     -77.48598413,
+     37.53664093
+    ],
+    [
+     -77.48598806,
+     37.53664273
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 26.71,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "From the pump to the main (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crank-0-2",
+   "name": "The New Pump-House: crank",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48600086,
+     37.53659233
+    ],
+    [
+     -77.48599849,
+     37.53659126
+    ],
+    [
+     -77.48599513,
+     37.53659597
+    ],
+    [
+     -77.48599749,
+     37.53659704
+    ]
+   ],
+   "elevation": 28.5,
+   "upTo": 29.95,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crank of 36-in throw (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-rod-0-2",
+   "name": "The New Pump-House: connecting rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48599938,
+     37.53659385
+    ],
+    [
+     -77.48599761,
+     37.53659304
+    ],
+    [
+     -77.4859966,
+     37.53659445
+    ],
+    [
+     -77.48599837,
+     37.53659526
+    ]
+   ],
+   "elevation": 29.9,
+   "upTo": 33.87,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A connecting rod 16 ft long, 4 by 9 in, up to the crosshead overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crosshead-0-2",
+   "name": "The New Pump-House: crosshead",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48600466,
+     37.53658938
+    ],
+    [
+     -77.48599974,
+     37.53658714
+    ],
+    [
+     -77.48599132,
+     37.53659892
+    ],
+    [
+     -77.48599624,
+     37.53660116
+    ]
+   ],
+   "elevation": 33.87,
+   "upTo": 34.22,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crosshead working in fixed guides held by lattice girders overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-0-2-s",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48600213,
+     37.53658927
+    ],
+    [
+     -77.48600115,
+     37.53658882
+    ],
+    [
+     -77.48600059,
+     37.53658961
+    ],
+    [
+     -77.48600157,
+     37.53659005
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-0-2-n",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4859954,
+     37.53659869
+    ],
+    [
+     -77.48599441,
+     37.53659825
+    ],
+    [
+     -77.48599385,
+     37.53659903
+    ],
+    [
+     -77.48599483,
+     37.53659948
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-plunger-0-2",
+   "name": "The New Pump-House: plunger",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48600881,
+     37.53659179
+    ],
+    [
+     -77.48599503,
+     37.53658551
+    ],
+    [
+     -77.48598717,
+     37.53659651
+    ],
+    [
+     -77.48600095,
+     37.53660279
+    ]
+   ],
+   "elevation": 28.26,
+   "upTo": 28.46,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The yoke where the two pump rods take the plunger (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pump-0-2",
+   "name": "The New Pump-House: pump 3",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48599346,
+     37.53659209
+    ],
+    [
+     -77.48599281,
+     37.53659461
+    ],
+    [
+     -77.48599414,
+     37.53659695
+    ],
+    [
+     -77.48599693,
+     37.53659822
+    ],
+    [
+     -77.48600014,
+     37.53659794
+    ],
+    [
+     -77.48600252,
+     37.53659621
+    ],
+    [
+     -77.48600317,
+     37.53659369
+    ],
+    [
+     -77.48600184,
+     37.53659135
+    ],
+    [
+     -77.48599905,
+     37.53659008
+    ],
+    [
+     -77.48599585,
+     37.53659036
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 28.26,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "One of nine vertical single-acting plunger pumps: a plunger 14 in in diameter in a chamber 36 in across, with double-beat Cornish valves of 20 in (The American Engineer, 1884); stroke 6 ft (NRHP 2002). Twelve million gallons a day for the nine against a head of 175 ft (The American Engineer). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-airvessel-0-2",
+   "name": "The New Pump-House: air vessel",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48598352,
+     37.53660838
+    ],
+    [
+     -77.48598305,
+     37.53661019
+    ],
+    [
+     -77.485984,
+     37.53661187
+    ],
+    [
+     -77.48598601,
+     37.53661278
+    ],
+    [
+     -77.4859883,
+     37.53661258
+    ],
+    [
+     -77.48599001,
+     37.53661134
+    ],
+    [
+     -77.48599048,
+     37.53660953
+    ],
+    [
+     -77.48598953,
+     37.53660785
+    ],
+    [
+     -77.48598752,
+     37.53660694
+    ],
+    [
+     -77.48598523,
+     37.53660714
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 30.06,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An air vessel over each pump's discharge (The American Engineer, 1884). Size approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-branch-0-2",
+   "name": "The New Pump-House: discharge branch",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48599771,
+     37.53659819
+    ],
+    [
+     -77.48599378,
+     37.5365964
+    ],
+    [
+     -77.4859674,
+     37.53663332
+    ],
+    [
+     -77.48597133,
+     37.53663511
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 26.71,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "From the pump to the main (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-girder-0-s",
+   "name": "The New Pump-House: lattice girder",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48604561,
+     37.53660417
+    ],
+    [
+     -77.4859964,
+     37.53658177
+    ],
+    [
+     -77.48599506,
+     37.53658365
+    ],
+    [
+     -77.48604426,
+     37.53660606
+    ]
+   ],
+   "elevation": 33.47,
+   "upTo": 34.45,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Lattice girders over the pumps, holding the crosshead guides (The American Engineer, 1884); metal trusses under the pavilion floor are seen in HAER VA-34-5.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-girder-0-n",
+   "name": "The New Pump-House: lattice girder",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48603438,
+     37.53661988
+    ],
+    [
+     -77.48598518,
+     37.53659748
+    ],
+    [
+     -77.48598383,
+     37.53659936
+    ],
+    [
+     -77.48603303,
+     37.53662177
+    ]
+   ],
+   "elevation": 33.47,
+   "upTo": 34.45,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Lattice girders over the pumps, holding the crosshead guides (The American Engineer, 1884); metal trusses under the pavilion floor are seen in HAER VA-34-5.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-wheelpit-1",
+   "name": "The New Pump-House: wheel pit",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48600887,
+     37.53655155
+    ],
+    [
+     -77.48599312,
+     37.53654438
+    ],
+    [
+     -77.48594185,
+     37.53661614
+    ],
+    [
+     -77.4859576,
+     37.53662331
+    ]
+   ],
+   "elevation": 23.404,
+   "upTo": 23.704,
+   "tone": "stone",
+   "confidence": "approximate",
+   "note": "The wheel's pit, down to the tail water, where the cast-iron diffuser under the wheel let the spent water go to the tailrace (The American Engineer, 1884). Depth and size approximate. Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-tailpit-1",
+   "name": "The New Pump-House: tail water",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48600887,
+     37.53655155
+    ],
+    [
+     -77.48599312,
+     37.53654438
+    ],
+    [
+     -77.48594185,
+     37.53661614
+    ],
+    [
+     -77.4859576,
+     37.53662331
+    ]
+   ],
+   "elevation": 23.704,
+   "upTo": 24.604,
+   "tone": "water",
+   "confidence": "approximate",
+   "note": "Tail water in the wheel pit, 20 ft below the forebay (The American Engineer, 1884). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-diffuser-1",
+   "name": "The New Pump-House: diffuser",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48599459,
+     37.5365697
+    ],
+    [
+     -77.48598082,
+     37.53656342
+    ],
+    [
+     -77.48595612,
+     37.53659799
+    ],
+    [
+     -77.4859699,
+     37.53660426
+    ]
+   ],
+   "elevation": 24.404,
+   "upTo": 24.883,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A large cast-iron diffuser below the wheel \"delivers the water into the tail-race with the least possible loss\" (The American Engineer, 1884). Shape approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-wheel-1",
+   "name": "The New Pump-House: turbine wheel 2",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48600374,
+     37.53655234
+    ],
+    [
+     -77.48595584,
+     37.53661938
+    ],
+    [
+     -77.48594698,
+     37.53661535
+    ],
+    [
+     -77.48599488,
+     37.53654831
+    ]
+   ],
+   "elevation": 24.733,
+   "upTo": 33.267,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A partial vertical turbine of the outward-flow (Fourneyron) type, all iron, 21 ft inside and 28 ft outside; water under a 20-ft head entered through its center into a guide chamber that turned it onto about a quarter of the buckets. The American Engineer, December 26, 1884: designed by the late Prof. Charles A. Smith, built and erected by H. A. Ramsay (Ramsay Engineering Works, Baltimore) under contract with Col. W. E. Cutshaw. Bolling (1900) gives 23 1/2 ft. Replaced in 1891 by geared Leffel wheels (NRHP 2002). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "http://www.waterworkshistory.us/VA/Richmond/RichmondWaterWorks1900.pdf",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ],
+   "shape": "disc"
+  },
+  {
+   "id": "ph-c-penstock-1",
+   "name": "The New Pump-House: penstock 2",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4859976,
+     37.53659397
+    ],
+    [
+     -77.48598264,
+     37.53658716
+    ],
+    [
+     -77.48590406,
+     37.53669714
+    ],
+    [
+     -77.48591902,
+     37.53670395
+    ]
+   ],
+   "elevation": 28.24,
+   "upTo": 29.76,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An iron penstock 5 ft in diameter, from the forebay through the north wall into the wheel's center (The American Engineer, 1884); three openings in the north wall (NRHP 2002; HAER VA-34-5). Drawn level and square; in the engraving it drops to the wheel on a slant. Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-penstock-elbow-1",
+   "name": "The New Pump-House: penstock 2",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48600186,
+     37.536588
+    ],
+    [
+     -77.48598405,
+     37.53657989
+    ],
+    [
+     -77.48597552,
+     37.53659183
+    ],
+    [
+     -77.48599333,
+     37.53659994
+    ]
+   ],
+   "elevation": 28.24,
+   "upTo": 29.76,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The penstock's elbow into the wheel's center (The American Engineer, 1884). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-x-gate-1",
+   "name": "The New Pump-House: head gate 2",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592741,
+     37.5366984
+    ],
+    [
+     -77.48590577,
+     37.53668855
+    ],
+    [
+     -77.48590015,
+     37.5366964
+    ],
+    [
+     -77.4859218,
+     37.53670626
+    ]
+   ],
+   "elevation": 24.604,
+   "upTo": 32.3,
+   "tone": "wood",
+   "confidence": "written",
+   "note": "A sluice gate 6 ft by 6 ft at the penstock's head, worked by a hydraulic cylinder 10 in in diameter (The American Engineer, 1884). Frame drawn as a block; place approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-x-gate-cyl-1",
+   "name": "The New Pump-House: head gate 2",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48591132,
+     37.53669628
+    ],
+    [
+     -77.48591097,
+     37.53669765
+    ],
+    [
+     -77.48591169,
+     37.53669892
+    ],
+    [
+     -77.48591321,
+     37.53669962
+    ],
+    [
+     -77.48591495,
+     37.53669946
+    ],
+    [
+     -77.48591624,
+     37.53669852
+    ],
+    [
+     -77.4859166,
+     37.53669715
+    ],
+    [
+     -77.48591588,
+     37.53669588
+    ],
+    [
+     -77.48591436,
+     37.53669519
+    ],
+    [
+     -77.48591262,
+     37.53669534
+    ]
+   ],
+   "elevation": 32.3,
+   "upTo": 33.7,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The gate's hydraulic cylinder, 10 in (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-x-tailrace-1",
+   "name": "The New Pump-House: tailrace 2",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48608244,
+     37.5364504
+    ],
+    [
+     -77.48606473,
+     37.53644234
+    ],
+    [
+     -77.48599214,
+     37.53654393
+    ],
+    [
+     -77.48600985,
+     37.536552
+    ]
+   ],
+   "elevation": 23.704,
+   "upTo": 24.604,
+   "tone": "water",
+   "confidence": "approximate",
+   "note": "A tunnel under the stone walkway carried the spent water out to the canal on the south side (NRHP 2002; Friends of Pump House tour). Number, size and line approximate: one per wheel is assumed.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.friendsofpumphouse.org/pump-house-tour.html"
+   ]
+  },
+  {
+   "id": "ph-c-shaft-1",
+   "name": "The New Pump-House: shaft 2",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48598222,
+     37.5365852
+    ],
+    [
+     -77.48591333,
+     37.53655383
+    ],
+    [
+     -77.48591143,
+     37.5365565
+    ],
+    [
+     -77.48598031,
+     37.53658787
+    ]
+   ],
+   "elevation": 28.83,
+   "upTo": 29.17,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A wrought-iron shaft 12 in in diameter, keyed to the wheel, with three cranks of 36-in throw set 120 deg apart (The American Engineer, 1884). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crank-1-0",
+   "name": "The New Pump-House: crank",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48595461,
+     37.53657127
+    ],
+    [
+     -77.48595224,
+     37.5365702
+    ],
+    [
+     -77.48594888,
+     37.53657491
+    ],
+    [
+     -77.48595124,
+     37.53657598
+    ]
+   ],
+   "elevation": 28.5,
+   "upTo": 29.95,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crank of 36-in throw (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-rod-1-0",
+   "name": "The New Pump-House: connecting rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48595313,
+     37.53657279
+    ],
+    [
+     -77.48595136,
+     37.53657198
+    ],
+    [
+     -77.48595035,
+     37.53657339
+    ],
+    [
+     -77.48595212,
+     37.5365742
+    ]
+   ],
+   "elevation": 29.9,
+   "upTo": 33.87,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A connecting rod 16 ft long, 4 by 9 in, up to the crosshead overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crosshead-1-0",
+   "name": "The New Pump-House: crosshead",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48595841,
+     37.53656832
+    ],
+    [
+     -77.48595349,
+     37.53656608
+    ],
+    [
+     -77.48594507,
+     37.53657786
+    ],
+    [
+     -77.48594999,
+     37.5365801
+    ]
+   ],
+   "elevation": 33.87,
+   "upTo": 34.22,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crosshead working in fixed guides held by lattice girders overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-1-0-s",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48595588,
+     37.53656821
+    ],
+    [
+     -77.4859549,
+     37.53656776
+    ],
+    [
+     -77.48595434,
+     37.53656855
+    ],
+    [
+     -77.48595532,
+     37.53656899
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-1-0-n",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48594915,
+     37.53657763
+    ],
+    [
+     -77.48594816,
+     37.53657719
+    ],
+    [
+     -77.4859476,
+     37.53657797
+    ],
+    [
+     -77.48594858,
+     37.53657842
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-plunger-1-0",
+   "name": "The New Pump-House: plunger",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48596256,
+     37.53657073
+    ],
+    [
+     -77.48594878,
+     37.53656445
+    ],
+    [
+     -77.48594092,
+     37.53657545
+    ],
+    [
+     -77.4859547,
+     37.53658173
+    ]
+   ],
+   "elevation": 28.26,
+   "upTo": 28.46,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The yoke where the two pump rods take the plunger (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pump-1-0",
+   "name": "The New Pump-House: pump 4",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48594721,
+     37.53657103
+    ],
+    [
+     -77.48594656,
+     37.53657355
+    ],
+    [
+     -77.48594789,
+     37.53657589
+    ],
+    [
+     -77.48595068,
+     37.53657716
+    ],
+    [
+     -77.48595389,
+     37.53657688
+    ],
+    [
+     -77.48595627,
+     37.53657515
+    ],
+    [
+     -77.48595692,
+     37.53657263
+    ],
+    [
+     -77.4859556,
+     37.53657029
+    ],
+    [
+     -77.4859528,
+     37.53656902
+    ],
+    [
+     -77.4859496,
+     37.5365693
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 28.26,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "One of nine vertical single-acting plunger pumps: a plunger 14 in in diameter in a chamber 36 in across, with double-beat Cornish valves of 20 in (The American Engineer, 1884); stroke 6 ft (NRHP 2002). Twelve million gallons a day for the nine against a head of 175 ft (The American Engineer). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-airvessel-1-0",
+   "name": "The New Pump-House: air vessel",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48593727,
+     37.53658732
+    ],
+    [
+     -77.4859368,
+     37.53658913
+    ],
+    [
+     -77.48593775,
+     37.53659081
+    ],
+    [
+     -77.48593976,
+     37.53659172
+    ],
+    [
+     -77.48594205,
+     37.53659152
+    ],
+    [
+     -77.48594376,
+     37.53659028
+    ],
+    [
+     -77.48594423,
+     37.53658847
+    ],
+    [
+     -77.48594328,
+     37.53658679
+    ],
+    [
+     -77.48594127,
+     37.53658588
+    ],
+    [
+     -77.48593898,
+     37.53658608
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 30.06,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An air vessel over each pump's discharge (The American Engineer, 1884). Size approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-branch-1-0",
+   "name": "The New Pump-House: discharge branch",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48595146,
+     37.53657713
+    ],
+    [
+     -77.48594753,
+     37.53657534
+    ],
+    [
+     -77.48592115,
+     37.53661226
+    ],
+    [
+     -77.48592508,
+     37.53661405
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 26.71,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "From the pump to the main (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crank-1-1",
+   "name": "The New Pump-House: crank",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48593788,
+     37.53656365
+    ],
+    [
+     -77.48593552,
+     37.53656258
+    ],
+    [
+     -77.48593215,
+     37.53656729
+    ],
+    [
+     -77.48593451,
+     37.53656837
+    ]
+   ],
+   "elevation": 28.5,
+   "upTo": 29.95,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crank of 36-in throw (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-rod-1-1",
+   "name": "The New Pump-House: connecting rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4859364,
+     37.53656517
+    ],
+    [
+     -77.48593463,
+     37.53656436
+    ],
+    [
+     -77.48593362,
+     37.53656578
+    ],
+    [
+     -77.48593539,
+     37.53656658
+    ]
+   ],
+   "elevation": 29.9,
+   "upTo": 33.87,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A connecting rod 16 ft long, 4 by 9 in, up to the crosshead overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crosshead-1-1",
+   "name": "The New Pump-House: crosshead",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48594168,
+     37.5365607
+    ],
+    [
+     -77.48593676,
+     37.53655846
+    ],
+    [
+     -77.48592834,
+     37.53657024
+    ],
+    [
+     -77.48593326,
+     37.53657248
+    ]
+   ],
+   "elevation": 33.87,
+   "upTo": 34.22,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crosshead working in fixed guides held by lattice girders overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-1-1-s",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48593915,
+     37.53656059
+    ],
+    [
+     -77.48593817,
+     37.53656014
+    ],
+    [
+     -77.48593761,
+     37.53656093
+    ],
+    [
+     -77.48593859,
+     37.53656138
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-1-1-n",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48593242,
+     37.53657002
+    ],
+    [
+     -77.48593143,
+     37.53656957
+    ],
+    [
+     -77.48593087,
+     37.53657035
+    ],
+    [
+     -77.48593186,
+     37.5365708
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-plunger-1-1",
+   "name": "The New Pump-House: plunger",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48594583,
+     37.53656311
+    ],
+    [
+     -77.48593205,
+     37.53655684
+    ],
+    [
+     -77.4859242,
+     37.53656784
+    ],
+    [
+     -77.48593797,
+     37.53657411
+    ]
+   ],
+   "elevation": 28.26,
+   "upTo": 28.46,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The yoke where the two pump rods take the plunger (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pump-1-1",
+   "name": "The New Pump-House: pump 5",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48593049,
+     37.53656341
+    ],
+    [
+     -77.48592983,
+     37.53656593
+    ],
+    [
+     -77.48593116,
+     37.53656827
+    ],
+    [
+     -77.48593396,
+     37.53656955
+    ],
+    [
+     -77.48593716,
+     37.53656926
+    ],
+    [
+     -77.48593954,
+     37.53656753
+    ],
+    [
+     -77.48594019,
+     37.53656502
+    ],
+    [
+     -77.48593887,
+     37.53656267
+    ],
+    [
+     -77.48593607,
+     37.5365614
+    ],
+    [
+     -77.48593287,
+     37.53656168
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 28.26,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "One of nine vertical single-acting plunger pumps: a plunger 14 in in diameter in a chamber 36 in across, with double-beat Cornish valves of 20 in (The American Engineer, 1884); stroke 6 ft (NRHP 2002). Twelve million gallons a day for the nine against a head of 175 ft (The American Engineer). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-airvessel-1-1",
+   "name": "The New Pump-House: air vessel",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592054,
+     37.53657971
+    ],
+    [
+     -77.48592007,
+     37.53658151
+    ],
+    [
+     -77.48592102,
+     37.53658319
+    ],
+    [
+     -77.48592303,
+     37.53658411
+    ],
+    [
+     -77.48592533,
+     37.5365839
+    ],
+    [
+     -77.48592703,
+     37.53658266
+    ],
+    [
+     -77.4859275,
+     37.53658086
+    ],
+    [
+     -77.48592655,
+     37.53657918
+    ],
+    [
+     -77.48592455,
+     37.53657826
+    ],
+    [
+     -77.48592225,
+     37.53657846
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 30.06,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An air vessel over each pump's discharge (The American Engineer, 1884). Size approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-branch-1-1",
+   "name": "The New Pump-House: discharge branch",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48593474,
+     37.53656951
+    ],
+    [
+     -77.4859308,
+     37.53656772
+    ],
+    [
+     -77.48590442,
+     37.53660464
+    ],
+    [
+     -77.48590836,
+     37.53660643
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 26.71,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "From the pump to the main (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crank-1-2",
+   "name": "The New Pump-House: crank",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592115,
+     37.53655604
+    ],
+    [
+     -77.48591879,
+     37.53655496
+    ],
+    [
+     -77.48591542,
+     37.53655967
+    ],
+    [
+     -77.48591778,
+     37.53656075
+    ]
+   ],
+   "elevation": 28.5,
+   "upTo": 29.95,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crank of 36-in throw (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-rod-1-2",
+   "name": "The New Pump-House: connecting rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48591967,
+     37.53655755
+    ],
+    [
+     -77.4859179,
+     37.53655675
+    ],
+    [
+     -77.48591689,
+     37.53655816
+    ],
+    [
+     -77.48591866,
+     37.53655897
+    ]
+   ],
+   "elevation": 29.9,
+   "upTo": 33.87,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A connecting rod 16 ft long, 4 by 9 in, up to the crosshead overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crosshead-1-2",
+   "name": "The New Pump-House: crosshead",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592495,
+     37.53655308
+    ],
+    [
+     -77.48592003,
+     37.53655084
+    ],
+    [
+     -77.48591161,
+     37.53656263
+    ],
+    [
+     -77.48591653,
+     37.53656487
+    ]
+   ],
+   "elevation": 33.87,
+   "upTo": 34.22,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crosshead working in fixed guides held by lattice girders overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-1-2-s",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592242,
+     37.53655297
+    ],
+    [
+     -77.48592144,
+     37.53655253
+    ],
+    [
+     -77.48592088,
+     37.53655331
+    ],
+    [
+     -77.48592186,
+     37.53655376
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-1-2-n",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48591569,
+     37.5365624
+    ],
+    [
+     -77.48591471,
+     37.53656195
+    ],
+    [
+     -77.48591414,
+     37.53656274
+    ],
+    [
+     -77.48591513,
+     37.53656319
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-plunger-1-2",
+   "name": "The New Pump-House: plunger",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4859291,
+     37.53655549
+    ],
+    [
+     -77.48591532,
+     37.53654922
+    ],
+    [
+     -77.48590747,
+     37.53656022
+    ],
+    [
+     -77.48592124,
+     37.53656649
+    ]
+   ],
+   "elevation": 28.26,
+   "upTo": 28.46,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The yoke where the two pump rods take the plunger (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pump-1-2",
+   "name": "The New Pump-House: pump 6",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48591376,
+     37.53655579
+    ],
+    [
+     -77.4859131,
+     37.53655831
+    ],
+    [
+     -77.48591443,
+     37.53656066
+    ],
+    [
+     -77.48591723,
+     37.53656193
+    ],
+    [
+     -77.48592043,
+     37.53656165
+    ],
+    [
+     -77.48592281,
+     37.53655992
+    ],
+    [
+     -77.48592346,
+     37.5365574
+    ],
+    [
+     -77.48592214,
+     37.53655506
+    ],
+    [
+     -77.48591934,
+     37.53655378
+    ],
+    [
+     -77.48591614,
+     37.53655406
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 28.26,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "One of nine vertical single-acting plunger pumps: a plunger 14 in in diameter in a chamber 36 in across, with double-beat Cornish valves of 20 in (The American Engineer, 1884); stroke 6 ft (NRHP 2002). Twelve million gallons a day for the nine against a head of 175 ft (The American Engineer). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-airvessel-1-2",
+   "name": "The New Pump-House: air vessel",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48590381,
+     37.53657209
+    ],
+    [
+     -77.48590334,
+     37.53657389
+    ],
+    [
+     -77.48590429,
+     37.53657558
+    ],
+    [
+     -77.4859063,
+     37.53657649
+    ],
+    [
+     -77.4859086,
+     37.53657629
+    ],
+    [
+     -77.48591031,
+     37.53657505
+    ],
+    [
+     -77.48591077,
+     37.53657324
+    ],
+    [
+     -77.48590982,
+     37.53657156
+    ],
+    [
+     -77.48590782,
+     37.53657064
+    ],
+    [
+     -77.48590552,
+     37.53657085
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 30.06,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An air vessel over each pump's discharge (The American Engineer, 1884). Size approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-branch-1-2",
+   "name": "The New Pump-House: discharge branch",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48591801,
+     37.53656189
+    ],
+    [
+     -77.48591407,
+     37.5365601
+    ],
+    [
+     -77.48588769,
+     37.53659702
+    ],
+    [
+     -77.48589163,
+     37.53659882
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 26.71,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "From the pump to the main (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-girder-1-s",
+   "name": "The New Pump-House: lattice girder",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4859659,
+     37.53656788
+    ],
+    [
+     -77.4859167,
+     37.53654547
+    ],
+    [
+     -77.48591535,
+     37.53654736
+    ],
+    [
+     -77.48596455,
+     37.53656976
+    ]
+   ],
+   "elevation": 33.47,
+   "upTo": 34.45,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Lattice girders over the pumps, holding the crosshead guides (The American Engineer, 1884); metal trusses under the pavilion floor are seen in HAER VA-34-5.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-girder-1-n",
+   "name": "The New Pump-House: lattice girder",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48595467,
+     37.53658359
+    ],
+    [
+     -77.48590547,
+     37.53656118
+    ],
+    [
+     -77.48590413,
+     37.53656307
+    ],
+    [
+     -77.48595333,
+     37.53658547
+    ]
+   ],
+   "elevation": 33.47,
+   "upTo": 34.45,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Lattice girders over the pumps, holding the crosshead guides (The American Engineer, 1884); metal trusses under the pavilion floor are seen in HAER VA-34-5.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-wheelpit-2",
+   "name": "The New Pump-House: wheel pit",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592916,
+     37.53651526
+    ],
+    [
+     -77.48591341,
+     37.53650809
+    ],
+    [
+     -77.48586214,
+     37.53657984
+    ],
+    [
+     -77.48587789,
+     37.53658701
+    ]
+   ],
+   "elevation": 23.404,
+   "upTo": 23.704,
+   "tone": "stone",
+   "confidence": "approximate",
+   "note": "The wheel's pit, down to the tail water, where the cast-iron diffuser under the wheel let the spent water go to the tailrace (The American Engineer, 1884). Depth and size approximate. Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-tailpit-2",
+   "name": "The New Pump-House: tail water",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592916,
+     37.53651526
+    ],
+    [
+     -77.48591341,
+     37.53650809
+    ],
+    [
+     -77.48586214,
+     37.53657984
+    ],
+    [
+     -77.48587789,
+     37.53658701
+    ]
+   ],
+   "elevation": 23.704,
+   "upTo": 24.604,
+   "tone": "water",
+   "confidence": "approximate",
+   "note": "Tail water in the wheel pit, 20 ft below the forebay (The American Engineer, 1884). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-diffuser-2",
+   "name": "The New Pump-House: diffuser",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48591489,
+     37.5365334
+    ],
+    [
+     -77.48590111,
+     37.53652713
+    ],
+    [
+     -77.48587642,
+     37.5365617
+    ],
+    [
+     -77.48589019,
+     37.53656797
+    ]
+   ],
+   "elevation": 24.404,
+   "upTo": 24.883,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A large cast-iron diffuser below the wheel \"delivers the water into the tail-race with the least possible loss\" (The American Engineer, 1884). Shape approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-wheel-2",
+   "name": "The New Pump-House: turbine wheel 3",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592403,
+     37.53651604
+    ],
+    [
+     -77.48587613,
+     37.53658309
+    ],
+    [
+     -77.48586727,
+     37.53657905
+    ],
+    [
+     -77.48591517,
+     37.53651201
+    ]
+   ],
+   "elevation": 24.733,
+   "upTo": 33.267,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A partial vertical turbine of the outward-flow (Fourneyron) type, all iron, 21 ft inside and 28 ft outside; water under a 20-ft head entered through its center into a guide chamber that turned it onto about a quarter of the buckets. The American Engineer, December 26, 1884: designed by the late Prof. Charles A. Smith, built and erected by H. A. Ramsay (Ramsay Engineering Works, Baltimore) under contract with Col. W. E. Cutshaw. Bolling (1900) gives 23 1/2 ft. Replaced in 1891 by geared Leffel wheels (NRHP 2002). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "http://www.waterworkshistory.us/VA/Richmond/RichmondWaterWorks1900.pdf",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ],
+   "shape": "disc"
+  },
+  {
+   "id": "ph-c-penstock-2",
+   "name": "The New Pump-House: penstock 3",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48591789,
+     37.53655768
+    ],
+    [
+     -77.48590293,
+     37.53655087
+    ],
+    [
+     -77.48582435,
+     37.53666084
+    ],
+    [
+     -77.48583931,
+     37.53666766
+    ]
+   ],
+   "elevation": 28.24,
+   "upTo": 29.76,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An iron penstock 5 ft in diameter, from the forebay through the north wall into the wheel's center (The American Engineer, 1884); three openings in the north wall (NRHP 2002; HAER VA-34-5). Drawn level and square; in the engraving it drops to the wheel on a slant. Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-penstock-elbow-2",
+   "name": "The New Pump-House: penstock 3",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592216,
+     37.53655171
+    ],
+    [
+     -77.48590435,
+     37.5365436
+    ],
+    [
+     -77.48589581,
+     37.53655554
+    ],
+    [
+     -77.48591362,
+     37.53656365
+    ]
+   ],
+   "elevation": 28.24,
+   "upTo": 29.76,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The penstock's elbow into the wheel's center (The American Engineer, 1884). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-x-gate-2",
+   "name": "The New Pump-House: head gate 3",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48584771,
+     37.53666211
+    ],
+    [
+     -77.48582606,
+     37.53665225
+    ],
+    [
+     -77.48582045,
+     37.53666011
+    ],
+    [
+     -77.4858421,
+     37.53666996
+    ]
+   ],
+   "elevation": 24.604,
+   "upTo": 32.3,
+   "tone": "wood",
+   "confidence": "written",
+   "note": "A sluice gate 6 ft by 6 ft at the penstock's head, worked by a hydraulic cylinder 10 in in diameter (The American Engineer, 1884). Frame drawn as a block; place approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-x-gate-cyl-2",
+   "name": "The New Pump-House: head gate 3",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48583162,
+     37.53665999
+    ],
+    [
+     -77.48583126,
+     37.53666136
+    ],
+    [
+     -77.48583198,
+     37.53666263
+    ],
+    [
+     -77.4858335,
+     37.53666332
+    ],
+    [
+     -77.48583524,
+     37.53666317
+    ],
+    [
+     -77.48583654,
+     37.53666223
+    ],
+    [
+     -77.48583689,
+     37.53666086
+    ],
+    [
+     -77.48583617,
+     37.53665959
+    ],
+    [
+     -77.48583465,
+     37.53665889
+    ],
+    [
+     -77.48583291,
+     37.53665905
+    ]
+   ],
+   "elevation": 32.3,
+   "upTo": 33.7,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The gate's hydraulic cylinder, 10 in (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-x-tailrace-2",
+   "name": "The New Pump-House: tailrace 3",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48600273,
+     37.53641411
+    ],
+    [
+     -77.48598502,
+     37.53640604
+    ],
+    [
+     -77.48591243,
+     37.53650764
+    ],
+    [
+     -77.48593014,
+     37.5365157
+    ]
+   ],
+   "elevation": 23.704,
+   "upTo": 24.604,
+   "tone": "water",
+   "confidence": "approximate",
+   "note": "A tunnel under the stone walkway carried the spent water out to the canal on the south side (NRHP 2002; Friends of Pump House tour). Number, size and line approximate: one per wheel is assumed.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.friendsofpumphouse.org/pump-house-tour.html"
+   ]
+  },
+  {
+   "id": "ph-c-shaft-2",
+   "name": "The New Pump-House: shaft 3",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48590251,
+     37.5365489
+    ],
+    [
+     -77.48583363,
+     37.53651754
+    ],
+    [
+     -77.48583172,
+     37.53652021
+    ],
+    [
+     -77.4859006,
+     37.53655157
+    ]
+   ],
+   "elevation": 28.83,
+   "upTo": 29.17,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A wrought-iron shaft 12 in in diameter, keyed to the wheel, with three cranks of 36-in throw set 120 deg apart (The American Engineer, 1884). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crank-2-0",
+   "name": "The New Pump-House: crank",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4858749,
+     37.53653498
+    ],
+    [
+     -77.48587254,
+     37.5365339
+    ],
+    [
+     -77.48586917,
+     37.53653861
+    ],
+    [
+     -77.48587153,
+     37.53653969
+    ]
+   ],
+   "elevation": 28.5,
+   "upTo": 29.95,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crank of 36-in throw (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-rod-2-0",
+   "name": "The New Pump-House: connecting rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48587343,
+     37.53653649
+    ],
+    [
+     -77.48587165,
+     37.53653569
+    ],
+    [
+     -77.48587064,
+     37.5365371
+    ],
+    [
+     -77.48587242,
+     37.53653791
+    ]
+   ],
+   "elevation": 29.9,
+   "upTo": 33.87,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A connecting rod 16 ft long, 4 by 9 in, up to the crosshead overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crosshead-2-0",
+   "name": "The New Pump-House: crosshead",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4858787,
+     37.53653202
+    ],
+    [
+     -77.48587378,
+     37.53652978
+    ],
+    [
+     -77.48586537,
+     37.53654157
+    ],
+    [
+     -77.48587029,
+     37.53654381
+    ]
+   ],
+   "elevation": 33.87,
+   "upTo": 34.22,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crosshead working in fixed guides held by lattice girders overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-2-0-s",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48587618,
+     37.53653191
+    ],
+    [
+     -77.48587519,
+     37.53653147
+    ],
+    [
+     -77.48587463,
+     37.53653225
+    ],
+    [
+     -77.48587561,
+     37.5365327
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-2-0-n",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48586944,
+     37.53654134
+    ],
+    [
+     -77.48586846,
+     37.53654089
+    ],
+    [
+     -77.48586789,
+     37.53654168
+    ],
+    [
+     -77.48586888,
+     37.53654213
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-plunger-2-0",
+   "name": "The New Pump-House: plunger",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48588285,
+     37.53653443
+    ],
+    [
+     -77.48586908,
+     37.53652816
+    ],
+    [
+     -77.48586122,
+     37.53653916
+    ],
+    [
+     -77.48587499,
+     37.53654543
+    ]
+   ],
+   "elevation": 28.26,
+   "upTo": 28.46,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The yoke where the two pump rods take the plunger (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pump-2-0",
+   "name": "The New Pump-House: pump 7",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48586751,
+     37.53653473
+    ],
+    [
+     -77.48586686,
+     37.53653725
+    ],
+    [
+     -77.48586818,
+     37.5365396
+    ],
+    [
+     -77.48587098,
+     37.53654087
+    ],
+    [
+     -77.48587418,
+     37.53654059
+    ],
+    [
+     -77.48587656,
+     37.53653886
+    ],
+    [
+     -77.48587721,
+     37.53653634
+    ],
+    [
+     -77.48587589,
+     37.536534
+    ],
+    [
+     -77.48587309,
+     37.53653272
+    ],
+    [
+     -77.48586989,
+     37.536533
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 28.26,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "One of nine vertical single-acting plunger pumps: a plunger 14 in in diameter in a chamber 36 in across, with double-beat Cornish valves of 20 in (The American Engineer, 1884); stroke 6 ft (NRHP 2002). Twelve million gallons a day for the nine against a head of 175 ft (The American Engineer). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-airvessel-2-0",
+   "name": "The New Pump-House: air vessel",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48585756,
+     37.53655103
+    ],
+    [
+     -77.48585709,
+     37.53655283
+    ],
+    [
+     -77.48585804,
+     37.53655452
+    ],
+    [
+     -77.48586005,
+     37.53655543
+    ],
+    [
+     -77.48586235,
+     37.53655523
+    ],
+    [
+     -77.48586406,
+     37.53655399
+    ],
+    [
+     -77.48586452,
+     37.53655218
+    ],
+    [
+     -77.48586357,
+     37.5365505
+    ],
+    [
+     -77.48586157,
+     37.53654958
+    ],
+    [
+     -77.48585927,
+     37.53654979
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 30.06,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An air vessel over each pump's discharge (The American Engineer, 1884). Size approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-branch-2-0",
+   "name": "The New Pump-House: discharge branch",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48587176,
+     37.53654083
+    ],
+    [
+     -77.48586782,
+     37.53653904
+    ],
+    [
+     -77.48584144,
+     37.53657596
+    ],
+    [
+     -77.48584538,
+     37.53657776
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 26.71,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "From the pump to the main (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crank-2-1",
+   "name": "The New Pump-House: crank",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48585817,
+     37.53652736
+    ],
+    [
+     -77.48585581,
+     37.53652628
+    ],
+    [
+     -77.48585244,
+     37.536531
+    ],
+    [
+     -77.4858548,
+     37.53653207
+    ]
+   ],
+   "elevation": 28.5,
+   "upTo": 29.95,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crank of 36-in throw (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-rod-2-1",
+   "name": "The New Pump-House: connecting rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4858567,
+     37.53652887
+    ],
+    [
+     -77.48585493,
+     37.53652807
+    ],
+    [
+     -77.48585392,
+     37.53652948
+    ],
+    [
+     -77.48585569,
+     37.53653029
+    ]
+   ],
+   "elevation": 29.9,
+   "upTo": 33.87,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A connecting rod 16 ft long, 4 by 9 in, up to the crosshead overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crosshead-2-1",
+   "name": "The New Pump-House: crosshead",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48586198,
+     37.53652441
+    ],
+    [
+     -77.48585706,
+     37.53652217
+    ],
+    [
+     -77.48584864,
+     37.53653395
+    ],
+    [
+     -77.48585356,
+     37.53653619
+    ]
+   ],
+   "elevation": 33.87,
+   "upTo": 34.22,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crosshead working in fixed guides held by lattice girders overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-2-1-s",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48585945,
+     37.5365243
+    ],
+    [
+     -77.48585846,
+     37.53652385
+    ],
+    [
+     -77.4858579,
+     37.53652463
+    ],
+    [
+     -77.48585889,
+     37.53652508
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-2-1-n",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48585271,
+     37.53653372
+    ],
+    [
+     -77.48585173,
+     37.53653327
+    ],
+    [
+     -77.48585117,
+     37.53653406
+    ],
+    [
+     -77.48585215,
+     37.53653451
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-plunger-2-1",
+   "name": "The New Pump-House: plunger",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48586612,
+     37.53652682
+    ],
+    [
+     -77.48585235,
+     37.53652054
+    ],
+    [
+     -77.48584449,
+     37.53653154
+    ],
+    [
+     -77.48585827,
+     37.53653781
+    ]
+   ],
+   "elevation": 28.26,
+   "upTo": 28.46,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The yoke where the two pump rods take the plunger (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pump-2-1",
+   "name": "The New Pump-House: pump 8",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48585078,
+     37.53652712
+    ],
+    [
+     -77.48585013,
+     37.53652963
+    ],
+    [
+     -77.48585145,
+     37.53653198
+    ],
+    [
+     -77.48585425,
+     37.53653325
+    ],
+    [
+     -77.48585745,
+     37.53653297
+    ],
+    [
+     -77.48585983,
+     37.53653124
+    ],
+    [
+     -77.48586049,
+     37.53652872
+    ],
+    [
+     -77.48585916,
+     37.53652638
+    ],
+    [
+     -77.48585636,
+     37.5365251
+    ],
+    [
+     -77.48585316,
+     37.53652539
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 28.26,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "One of nine vertical single-acting plunger pumps: a plunger 14 in in diameter in a chamber 36 in across, with double-beat Cornish valves of 20 in (The American Engineer, 1884); stroke 6 ft (NRHP 2002). Twelve million gallons a day for the nine against a head of 175 ft (The American Engineer). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-airvessel-2-1",
+   "name": "The New Pump-House: air vessel",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48584083,
+     37.53654341
+    ],
+    [
+     -77.48584036,
+     37.53654522
+    ],
+    [
+     -77.48584132,
+     37.5365469
+    ],
+    [
+     -77.48584332,
+     37.53654781
+    ],
+    [
+     -77.48584562,
+     37.53654761
+    ],
+    [
+     -77.48584733,
+     37.53654637
+    ],
+    [
+     -77.4858478,
+     37.53654456
+    ],
+    [
+     -77.48584685,
+     37.53654288
+    ],
+    [
+     -77.48584484,
+     37.53654197
+    ],
+    [
+     -77.48584254,
+     37.53654217
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 30.06,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An air vessel over each pump's discharge (The American Engineer, 1884). Size approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-branch-2-1",
+   "name": "The New Pump-House: discharge branch",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48585503,
+     37.53653322
+    ],
+    [
+     -77.48585109,
+     37.53653142
+    ],
+    [
+     -77.48582471,
+     37.53656835
+    ],
+    [
+     -77.48582865,
+     37.53657014
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 26.71,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "From the pump to the main (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crank-2-2",
+   "name": "The New Pump-House: crank",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48584144,
+     37.53651974
+    ],
+    [
+     -77.48583908,
+     37.53651867
+    ],
+    [
+     -77.48583571,
+     37.53652338
+    ],
+    [
+     -77.48583807,
+     37.53652446
+    ]
+   ],
+   "elevation": 28.5,
+   "upTo": 29.95,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crank of 36-in throw (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-rod-2-2",
+   "name": "The New Pump-House: connecting rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48583997,
+     37.53652126
+    ],
+    [
+     -77.4858382,
+     37.53652045
+    ],
+    [
+     -77.48583719,
+     37.53652186
+    ],
+    [
+     -77.48583896,
+     37.53652267
+    ]
+   ],
+   "elevation": 29.9,
+   "upTo": 33.87,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A connecting rod 16 ft long, 4 by 9 in, up to the crosshead overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-crosshead-2-2",
+   "name": "The New Pump-House: crosshead",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48584525,
+     37.53651679
+    ],
+    [
+     -77.48584033,
+     37.53651455
+    ],
+    [
+     -77.48583191,
+     37.53652633
+    ],
+    [
+     -77.48583683,
+     37.53652857
+    ]
+   ],
+   "elevation": 33.87,
+   "upTo": 34.22,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A crosshead working in fixed guides held by lattice girders overhead (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-2-2-s",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48584272,
+     37.53651668
+    ],
+    [
+     -77.48584173,
+     37.53651623
+    ],
+    [
+     -77.48584117,
+     37.53651702
+    ],
+    [
+     -77.48584216,
+     37.53651746
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pumprod-2-2-n",
+   "name": "The New Pump-House: pump rod",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48583598,
+     37.53652611
+    ],
+    [
+     -77.485835,
+     37.53652566
+    ],
+    [
+     -77.48583444,
+     37.53652644
+    ],
+    [
+     -77.48583542,
+     37.53652689
+    ]
+   ],
+   "elevation": 28.36,
+   "upTo": 34.02,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Two pump rods to each pump, from the crosshead down to the plunger (The American Engineer, 1884).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-plunger-2-2",
+   "name": "The New Pump-House: plunger",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48584939,
+     37.5365192
+    ],
+    [
+     -77.48583562,
+     37.53651293
+    ],
+    [
+     -77.48582776,
+     37.53652392
+    ],
+    [
+     -77.48584154,
+     37.5365302
+    ]
+   ],
+   "elevation": 28.26,
+   "upTo": 28.46,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The yoke where the two pump rods take the plunger (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-pump-2-2",
+   "name": "The New Pump-House: pump 9",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48583405,
+     37.5365195
+    ],
+    [
+     -77.4858334,
+     37.53652202
+    ],
+    [
+     -77.48583472,
+     37.53652436
+    ],
+    [
+     -77.48583752,
+     37.53652563
+    ],
+    [
+     -77.48584072,
+     37.53652535
+    ],
+    [
+     -77.4858431,
+     37.53652362
+    ],
+    [
+     -77.48584376,
+     37.5365211
+    ],
+    [
+     -77.48584243,
+     37.53651876
+    ],
+    [
+     -77.48583963,
+     37.53651749
+    ],
+    [
+     -77.48583643,
+     37.53651777
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 28.26,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "One of nine vertical single-acting plunger pumps: a plunger 14 in in diameter in a chamber 36 in across, with double-beat Cornish valves of 20 in (The American Engineer, 1884); stroke 6 ft (NRHP 2002). Twelve million gallons a day for the nine against a head of 175 ft (The American Engineer). Its place in the room is approximate: no plan of the room with the machines was found that can be scaled.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-airvessel-2-2",
+   "name": "The New Pump-House: air vessel",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4858241,
+     37.53653579
+    ],
+    [
+     -77.48582364,
+     37.5365376
+    ],
+    [
+     -77.48582459,
+     37.53653928
+    ],
+    [
+     -77.48582659,
+     37.53654019
+    ],
+    [
+     -77.48582889,
+     37.53653999
+    ],
+    [
+     -77.4858306,
+     37.53653875
+    ],
+    [
+     -77.48583107,
+     37.53653694
+    ],
+    [
+     -77.48583012,
+     37.53653526
+    ],
+    [
+     -77.48582811,
+     37.53653435
+    ],
+    [
+     -77.48582581,
+     37.53653455
+    ]
+   ],
+   "elevation": 25.91,
+   "upTo": 30.06,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An air vessel over each pump's discharge (The American Engineer, 1884). Size approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-branch-2-2",
+   "name": "The New Pump-House: discharge branch",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4858383,
+     37.5365256
+    ],
+    [
+     -77.48583436,
+     37.53652381
+    ],
+    [
+     -77.48580798,
+     37.53656073
+    ],
+    [
+     -77.48581192,
+     37.53656252
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 26.71,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "From the pump to the main (approximate).",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-girder-2-s",
+   "name": "The New Pump-House: lattice girder",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48588619,
+     37.53653158
+    ],
+    [
+     -77.48583699,
+     37.53650918
+    ],
+    [
+     -77.48583564,
+     37.53651106
+    ],
+    [
+     -77.48588485,
+     37.53653347
+    ]
+   ],
+   "elevation": 33.47,
+   "upTo": 34.45,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Lattice girders over the pumps, holding the crosshead guides (The American Engineer, 1884); metal trusses under the pavilion floor are seen in HAER VA-34-5.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-girder-2-n",
+   "name": "The New Pump-House: lattice girder",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48587497,
+     37.53654729
+    ],
+    [
+     -77.48582577,
+     37.53652489
+    ],
+    [
+     -77.48582442,
+     37.53652677
+    ],
+    [
+     -77.48587362,
+     37.53654918
+    ]
+   ],
+   "elevation": 33.47,
+   "upTo": 34.45,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "Lattice girders over the pumps, holding the crosshead guides (The American Engineer, 1884); metal trusses under the pavilion floor are seen in HAER VA-34-5.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va1300/va1319/photos/162148pv.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-main",
+   "name": "The New Pump-House: discharge main",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48601631,
+     37.53665247
+    ],
+    [
+     -77.48580376,
+     37.53655568
+    ],
+    [
+     -77.4857995,
+     37.53656165
+    ],
+    [
+     -77.48601205,
+     37.53665844
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 27.07,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The nine pumps discharge \"through a common discharge pipe 30 in in diameter\" (The American Engineer, 1884). Its line in the room is approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg"
+   ]
+  },
+  {
+   "id": "ph-c-suction",
+   "name": "The New Pump-House: suction",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48603052,
+     37.53666727
+    ],
+    [
+     -77.48579927,
+     37.53656197
+    ],
+    [
+     -77.48579422,
+     37.53656904
+    ],
+    [
+     -77.48602547,
+     37.53667434
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 27.22,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The nine pumps drew \"from one common suction pipe 36 in in diameter\" (The American Engineer, 1884), from the forebay (1909 annual report: about 16 ft of head on it). A rising-stem valve in the northwest corner survives (NRHP 2002). Line approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-x-main-out",
+   "name": "The New Pump-House: main to the reservoir",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48591309,
+     37.53662317
+    ],
+    [
+     -77.48590561,
+     37.53661976
+    ],
+    [
+     -77.48586632,
+     37.53667475
+    ],
+    [
+     -77.4858738,
+     37.53667816
+    ]
+   ],
+   "elevation": 26.31,
+   "upTo": 27.07,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The 30-in main leaves the house northward, under the forebay, for the Byrd Park reservoir 3,600 ft away and 175 ft up (The American Engineer, 1884; NRHP 2002 sketch map, \"pipe to Byrd Park reservoir\"). Bolling (1900) gives a lift of 165 ft.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "http://www.waterworkshistory.us/VA/Richmond/RichmondWaterWorks1900.pdf"
+   ]
+  },
+  {
+   "id": "ph-x-main-hill-0",
+   "name": "The New Pump-House: main to the reservoir",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48579522,
+     37.53678813
+    ],
+    [
+     -77.48578775,
+     37.53678473
+    ],
+    [
+     -77.48575407,
+     37.53683186
+    ],
+    [
+     -77.48576155,
+     37.53683527
+    ]
+   ],
+   "height": 0.76,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "The 30-in main up the hill toward the reservoir, drawn on the ground; it ran buried (NRHP 2002 sketch map: a dashed pipe). Line approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-x-main-hill-1",
+   "name": "The New Pump-House: main to the reservoir",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48576155,
+     37.53683527
+    ],
+    [
+     -77.48575407,
+     37.53683186
+    ],
+    [
+     -77.48572039,
+     37.536879
+    ],
+    [
+     -77.48572787,
+     37.5368824
+    ]
+   ],
+   "height": 0.76,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "The 30-in main up the hill toward the reservoir, drawn on the ground; it ran buried (NRHP 2002 sketch map: a dashed pipe). Line approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-x-main-hill-2",
+   "name": "The New Pump-House: main to the reservoir",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48572787,
+     37.5368824
+    ],
+    [
+     -77.48572039,
+     37.536879
+    ],
+    [
+     -77.48568671,
+     37.53692613
+    ],
+    [
+     -77.48569419,
+     37.53692954
+    ]
+   ],
+   "height": 0.76,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "The 30-in main up the hill toward the reservoir, drawn on the ground; it ran buried (NRHP 2002 sketch map: a dashed pipe). Line approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-x-main-hill-3",
+   "name": "The New Pump-House: main to the reservoir",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48569419,
+     37.53692954
+    ],
+    [
+     -77.48568671,
+     37.53692613
+    ],
+    [
+     -77.48565304,
+     37.53697327
+    ],
+    [
+     -77.48566052,
+     37.53697667
+    ]
+   ],
+   "height": 0.76,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "The 30-in main up the hill toward the reservoir, drawn on the ground; it ran buried (NRHP 2002 sketch map: a dashed pipe). Line approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-x-main-hill-4",
+   "name": "The New Pump-House: main to the reservoir",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48566052,
+     37.53697667
+    ],
+    [
+     -77.48565304,
+     37.53697327
+    ],
+    [
+     -77.48561936,
+     37.5370204
+    ],
+    [
+     -77.48562684,
+     37.5370238
+    ]
+   ],
+   "height": 0.76,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "The 30-in main up the hill toward the reservoir, drawn on the ground; it ran buried (NRHP 2002 sketch map: a dashed pipe). Line approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-x-main-hill-5",
+   "name": "The New Pump-House: main to the reservoir",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48562684,
+     37.5370238
+    ],
+    [
+     -77.48561936,
+     37.5370204
+    ],
+    [
+     -77.48558568,
+     37.53706753
+    ],
+    [
+     -77.48559316,
+     37.53707094
+    ]
+   ],
+   "height": 0.76,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "The 30-in main up the hill toward the reservoir, drawn on the ground; it ran buried (NRHP 2002 sketch map: a dashed pipe). Line approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-x-main-hill-6",
+   "name": "The New Pump-House: main to the reservoir",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48559316,
+     37.53707094
+    ],
+    [
+     -77.48558568,
+     37.53706753
+    ],
+    [
+     -77.48555201,
+     37.53711467
+    ],
+    [
+     -77.48555949,
+     37.53711807
+    ]
+   ],
+   "height": 0.76,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "The 30-in main up the hill toward the reservoir, drawn on the ground; it ran buried (NRHP 2002 sketch map: a dashed pipe). Line approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-x-main-hill-7",
+   "name": "The New Pump-House: main to the reservoir",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48555949,
+     37.53711807
+    ],
+    [
+     -77.48555201,
+     37.53711467
+    ],
+    [
+     -77.48551833,
+     37.5371618
+    ],
+    [
+     -77.48552581,
+     37.53716521
+    ]
+   ],
+   "height": 0.76,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "The 30-in main up the hill toward the reservoir, drawn on the ground; it ran buried (NRHP 2002 sketch map: a dashed pipe). Line approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-x-main-hill-8",
+   "name": "The New Pump-House: main to the reservoir",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48552581,
+     37.53716521
+    ],
+    [
+     -77.48551833,
+     37.5371618
+    ],
+    [
+     -77.48548465,
+     37.53720893
+    ],
+    [
+     -77.48549213,
+     37.53721234
+    ]
+   ],
+   "height": 0.76,
+   "tone": "iron",
+   "confidence": "approximate",
+   "note": "The 30-in main up the hill toward the reservoir, drawn on the ground; it ran buried (NRHP 2002 sketch map: a dashed pipe). Line approximate.",
+   "sources": [
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/the-american-engineer_orig.jpg",
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-catwalk-grease-0",
+   "name": "The New Pump-House: greasing catwalk",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48603202,
+     37.53662318
+    ],
+    [
+     -77.48598282,
+     37.53660078
+    ],
+    [
+     -77.48597833,
+     37.53660706
+    ],
+    [
+     -77.48602753,
+     37.53662947
+    ]
+   ],
+   "elevation": 32.57,
+   "upTo": 32.72,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A catwalk \"originally used to service and grease the joints\", reached by a cast-iron spiral stair at the east end (NRHP 2002; HAER VA-34-6). Height and line approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  },
+  {
+   "id": "ph-c-catwalk-grease-1",
+   "name": "The New Pump-House: greasing catwalk",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48595232,
+     37.53658689
+    ],
+    [
+     -77.48590312,
+     37.53656448
+    ],
+    [
+     -77.48589863,
+     37.53657077
+    ],
+    [
+     -77.48594783,
+     37.53659317
+    ]
+   ],
+   "elevation": 32.57,
+   "upTo": 32.72,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A catwalk \"originally used to service and grease the joints\", reached by a cast-iron spiral stair at the east end (NRHP 2002; HAER VA-34-6). Height and line approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  },
+  {
+   "id": "ph-c-catwalk-grease-2",
+   "name": "The New Pump-House: greasing catwalk",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48587261,
+     37.53655059
+    ],
+    [
+     -77.48582341,
+     37.53652819
+    ],
+    [
+     -77.48581892,
+     37.53653447
+    ],
+    [
+     -77.48586812,
+     37.53655688
+    ]
+   ],
+   "elevation": 32.57,
+   "upTo": 32.72,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "A catwalk \"originally used to service and grease the joints\", reached by a cast-iron spiral stair at the east end (NRHP 2002; HAER VA-34-6). Height and line approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  },
+  {
+   "id": "ph-c-spiral",
+   "name": "The New Pump-House: spiral stair",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48582018,
+     37.53653088
+    ],
+    [
+     -77.48581904,
+     37.53653526
+    ],
+    [
+     -77.48582135,
+     37.53653934
+    ],
+    [
+     -77.48582621,
+     37.53654155
+    ],
+    [
+     -77.48583178,
+     37.53654106
+    ],
+    [
+     -77.48583592,
+     37.53653805
+    ],
+    [
+     -77.48583706,
+     37.53653367
+    ],
+    [
+     -77.48583475,
+     37.5365296
+    ],
+    [
+     -77.48582989,
+     37.53652738
+    ],
+    [
+     -77.48582432,
+     37.53652787
+    ]
+   ],
+   "elevation": 28.06,
+   "upTo": 32.72,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "An \"ornate cast-iron spiral staircase at the east end\" up to the greasing catwalk (NRHP 2002; HAER VA-34-6). The Friends' tour puts it in the northwest corner.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://www.friendsofpumphouse.org/pump-house-tour.html"
+   ]
+  },
+  {
+   "id": "ph-c-catwalk-view",
+   "name": "The New Pump-House: viewing catwalk",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48610181,
+     37.53657479
+    ],
+    [
+     -77.48586171,
+     37.53646546
+    ],
+    [
+     -77.48585553,
+     37.5364741
+    ],
+    [
+     -77.48609564,
+     37.53658343
+    ]
+   ],
+   "elevation": 30.53,
+   "upTo": 30.68,
+   "tone": "wood",
+   "confidence": "written",
+   "note": "A catwalk hung on the south wall, reached from landings on the stairs at the south corners, where workers and pavilion visitors watched the machinery (NRHP 2002; Friends of Pump House). Height approximate (the 2019 study's mezzanine landing is 4 ft 2 in over the floor).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.friendsofpumphouse.org/pump-house-tour.html",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-0-0",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48610686,
+     37.53656772
+    ],
+    [
+     -77.48607685,
+     37.53655405
+    ],
+    [
+     -77.48604261,
+     37.53660197
+    ],
+    [
+     -77.48607262,
+     37.53661564
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-0-1",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48607262,
+     37.53661564
+    ],
+    [
+     -77.48604261,
+     37.53660197
+    ],
+    [
+     -77.48602914,
+     37.53662083
+    ],
+    [
+     -77.48605915,
+     37.53663449
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-0-2",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48605915,
+     37.53663449
+    ],
+    [
+     -77.48602914,
+     37.53662083
+    ],
+    [
+     -77.48599434,
+     37.53666953
+    ],
+    [
+     -77.48602435,
+     37.5366832
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-1-0",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48607685,
+     37.53655405
+    ],
+    [
+     -77.48604684,
+     37.53654039
+    ],
+    [
+     -77.4860126,
+     37.53658831
+    ],
+    [
+     -77.48604261,
+     37.53660197
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-1-1",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48604261,
+     37.53660197
+    ],
+    [
+     -77.4860126,
+     37.53658831
+    ],
+    [
+     -77.48599913,
+     37.53660716
+    ],
+    [
+     -77.48602914,
+     37.53662083
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-1-2",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48602914,
+     37.53662083
+    ],
+    [
+     -77.48599913,
+     37.53660716
+    ],
+    [
+     -77.48596433,
+     37.53665587
+    ],
+    [
+     -77.48599434,
+     37.53666953
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-2-0",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48604684,
+     37.53654039
+    ],
+    [
+     -77.48601682,
+     37.53652672
+    ],
+    [
+     -77.48598259,
+     37.53657464
+    ],
+    [
+     -77.4860126,
+     37.53658831
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-2-1",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4860126,
+     37.53658831
+    ],
+    [
+     -77.48598259,
+     37.53657464
+    ],
+    [
+     -77.48596911,
+     37.53659349
+    ],
+    [
+     -77.48599913,
+     37.53660716
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-2-2",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48599913,
+     37.53660716
+    ],
+    [
+     -77.48596911,
+     37.53659349
+    ],
+    [
+     -77.48593432,
+     37.5366422
+    ],
+    [
+     -77.48596433,
+     37.53665587
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-3-0",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48601682,
+     37.53652672
+    ],
+    [
+     -77.48598681,
+     37.53651306
+    ],
+    [
+     -77.48595257,
+     37.53656097
+    ],
+    [
+     -77.48598259,
+     37.53657464
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-3-1",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48598259,
+     37.53657464
+    ],
+    [
+     -77.48595257,
+     37.53656097
+    ],
+    [
+     -77.4859391,
+     37.53657983
+    ],
+    [
+     -77.48596911,
+     37.53659349
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-3-2",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48596911,
+     37.53659349
+    ],
+    [
+     -77.4859391,
+     37.53657983
+    ],
+    [
+     -77.4859043,
+     37.53662853
+    ],
+    [
+     -77.48593432,
+     37.5366422
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-4-0",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48598681,
+     37.53651306
+    ],
+    [
+     -77.4859568,
+     37.53649939
+    ],
+    [
+     -77.48592256,
+     37.53654731
+    ],
+    [
+     -77.48595257,
+     37.53656097
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-4-1",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48595257,
+     37.53656097
+    ],
+    [
+     -77.48592256,
+     37.53654731
+    ],
+    [
+     -77.48590909,
+     37.53656616
+    ],
+    [
+     -77.4859391,
+     37.53657983
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-4-2",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4859391,
+     37.53657983
+    ],
+    [
+     -77.48590909,
+     37.53656616
+    ],
+    [
+     -77.48587429,
+     37.53661487
+    ],
+    [
+     -77.4859043,
+     37.53662853
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-5-0",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4859568,
+     37.53649939
+    ],
+    [
+     -77.48592678,
+     37.53648572
+    ],
+    [
+     -77.48589255,
+     37.53653364
+    ],
+    [
+     -77.48592256,
+     37.53654731
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-5-1",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592256,
+     37.53654731
+    ],
+    [
+     -77.48589255,
+     37.53653364
+    ],
+    [
+     -77.48587908,
+     37.5365525
+    ],
+    [
+     -77.48590909,
+     37.53656616
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-5-2",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48590909,
+     37.53656616
+    ],
+    [
+     -77.48587908,
+     37.5365525
+    ],
+    [
+     -77.48584428,
+     37.5366012
+    ],
+    [
+     -77.48587429,
+     37.53661487
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-6-0",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592678,
+     37.53648572
+    ],
+    [
+     -77.48589677,
+     37.53647206
+    ],
+    [
+     -77.48586253,
+     37.53651998
+    ],
+    [
+     -77.48589255,
+     37.53653364
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-6-1",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48589255,
+     37.53653364
+    ],
+    [
+     -77.48586253,
+     37.53651998
+    ],
+    [
+     -77.48584906,
+     37.53653883
+    ],
+    [
+     -77.48587908,
+     37.5365525
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-6-2",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48587908,
+     37.5365525
+    ],
+    [
+     -77.48584906,
+     37.53653883
+    ],
+    [
+     -77.48581426,
+     37.53658753
+    ],
+    [
+     -77.48584428,
+     37.5366012
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-7-0",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48589677,
+     37.53647206
+    ],
+    [
+     -77.48586676,
+     37.53645839
+    ],
+    [
+     -77.48583252,
+     37.53650631
+    ],
+    [
+     -77.48586253,
+     37.53651998
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-7-1",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48586253,
+     37.53651998
+    ],
+    [
+     -77.48583252,
+     37.53650631
+    ],
+    [
+     -77.48581905,
+     37.53652516
+    ],
+    [
+     -77.48584906,
+     37.53653883
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-pav-floor-7-2",
+   "name": "The New Pump-House: pavilion floor",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48584906,
+     37.53653883
+    ],
+    [
+     -77.48581905,
+     37.53652516
+    ],
+    [
+     -77.48578425,
+     37.53657387
+    ],
+    [
+     -77.48581426,
+     37.53658753
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). Level from the 2019 study.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig",
+    "https://www.friendsofpumphouse.org/uploads/1/1/5/3/115357711/pump_house_vision_plan.pdf"
+   ]
+  },
+  {
+   "id": "ph-c-col-s0",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48610609,
+     37.53656789
+    ],
+    [
+     -77.48610314,
+     37.53656655
+    ],
+    [
+     -77.48610145,
+     37.5365689
+    ],
+    [
+     -77.48610441,
+     37.53657025
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-s1",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48607657,
+     37.53655445
+    ],
+    [
+     -77.48607362,
+     37.5365531
+    ],
+    [
+     -77.48607193,
+     37.53655546
+    ],
+    [
+     -77.48607488,
+     37.5365568
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-s2",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48603229,
+     37.53653428
+    ],
+    [
+     -77.48602934,
+     37.53653294
+    ],
+    [
+     -77.48602765,
+     37.5365353
+    ],
+    [
+     -77.4860306,
+     37.53653664
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-s3",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48598801,
+     37.53651412
+    ],
+    [
+     -77.48598505,
+     37.53651278
+    ],
+    [
+     -77.48598337,
+     37.53651513
+    ],
+    [
+     -77.48598632,
+     37.53651648
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-s4",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48594372,
+     37.53649396
+    ],
+    [
+     -77.48594077,
+     37.53649261
+    ],
+    [
+     -77.48593909,
+     37.53649497
+    ],
+    [
+     -77.48594204,
+     37.53649631
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-s5",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48589944,
+     37.53647379
+    ],
+    [
+     -77.48589649,
+     37.53647245
+    ],
+    [
+     -77.48589481,
+     37.53647481
+    ],
+    [
+     -77.48589776,
+     37.53647615
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-s6",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48586992,
+     37.53646035
+    ],
+    [
+     -77.48586697,
+     37.53645901
+    ],
+    [
+     -77.48586529,
+     37.53646136
+    ],
+    [
+     -77.48586824,
+     37.53646271
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-arcade-head-s",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48610686,
+     37.53656772
+    ],
+    [
+     -77.48586676,
+     37.53645839
+    ],
+    [
+     -77.48586451,
+     37.53646153
+    ],
+    [
+     -77.48610462,
+     37.53657086
+    ]
+   ],
+   "elevation": 37.5,
+   "upTo": 38.4,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). The arches and tin spandrels are drawn as a plain band (rough draft).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  },
+  {
+   "id": "ph-c-rail-s",
+   "name": "The New Pump-House: pavilion railing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48610596,
+     37.53656898
+    ],
+    [
+     -77.48586586,
+     37.53645965
+    ],
+    [
+     -77.48586541,
+     37.53646028
+    ],
+    [
+     -77.48610552,
+     37.53656961
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 35.77,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  },
+  {
+   "id": "ph-c-col-n0",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48602583,
+     37.53668023
+    ],
+    [
+     -77.48602287,
+     37.53667888
+    ],
+    [
+     -77.48602119,
+     37.53668124
+    ],
+    [
+     -77.48602414,
+     37.53668258
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-n1",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48599631,
+     37.53666678
+    ],
+    [
+     -77.48599335,
+     37.53666544
+    ],
+    [
+     -77.48599167,
+     37.5366678
+    ],
+    [
+     -77.48599462,
+     37.53666914
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-n2",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48595202,
+     37.53664662
+    ],
+    [
+     -77.48594907,
+     37.53664528
+    ],
+    [
+     -77.48594739,
+     37.53664763
+    ],
+    [
+     -77.48595034,
+     37.53664898
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-n3",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48590774,
+     37.53662646
+    ],
+    [
+     -77.48590479,
+     37.53662511
+    ],
+    [
+     -77.48590311,
+     37.53662747
+    ],
+    [
+     -77.48590606,
+     37.53662881
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-n4",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48586346,
+     37.53660629
+    ],
+    [
+     -77.48586051,
+     37.53660495
+    ],
+    [
+     -77.48585883,
+     37.5366073
+    ],
+    [
+     -77.48586178,
+     37.53660865
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-n5",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48581918,
+     37.53658613
+    ],
+    [
+     -77.48581623,
+     37.53658478
+    ],
+    [
+     -77.48581454,
+     37.53658714
+    ],
+    [
+     -77.4858175,
+     37.53658849
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-col-n6",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48578966,
+     37.53657269
+    ],
+    [
+     -77.48578671,
+     37.53657134
+    ],
+    [
+     -77.48578502,
+     37.5365737
+    ],
+    [
+     -77.48578798,
+     37.53657504
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 37.5,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://rvanews.com/news/pumphouse-circa-1897/124415"
+   ]
+  },
+  {
+   "id": "ph-c-arcade-head-n",
+   "name": "The New Pump-House: pavilion arcade",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4860266,
+     37.53668006
+    ],
+    [
+     -77.4857865,
+     37.53657073
+    ],
+    [
+     -77.48578425,
+     37.53657387
+    ],
+    [
+     -77.48602435,
+     37.5366832
+    ]
+   ],
+   "elevation": 37.5,
+   "upTo": 38.4,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002). The arches and tin spandrels are drawn as a plain band (rough draft).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  },
+  {
+   "id": "ph-c-rail-n",
+   "name": "The New Pump-House: pavilion railing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4860257,
+     37.53668131
+    ],
+    [
+     -77.4857856,
+     37.53657198
+    ],
+    [
+     -77.48578515,
+     37.53657261
+    ],
+    [
+     -77.48602525,
+     37.53668194
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 35.77,
+   "tone": "iron",
+   "confidence": "written",
+   "note": "The open-air pavilion over the machine room, 3,392 sq ft (Quinn Evans plan): a painted pine floor, a Gothic arcade of six Tudor arches each side on seven cast-iron columns, the two end arches narrower, with railings of zinc-coated tin; a flat ceiling on wooden trusses. Enclosed with glass in 1899 because rain came through the floor onto the machinery (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  },
+  {
+   "id": "ph-c-roof",
+   "name": "The New Pump-House: roof",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48610911,
+     37.53656458
+    ],
+    [
+     -77.485869,
+     37.53645525
+    ],
+    [
+     -77.48578201,
+     37.53657701
+    ],
+    [
+     -77.48602211,
+     37.53668634
+    ]
+   ],
+   "elevation": 38.4,
+   "upTo": 42.081,
+   "tone": "roof",
+   "confidence": "approximate",
+   "note": "A steep slate roof with rows of imbrication and iron cresting on the ridge, on large wooden trusses (NRHP 2002). Ridge at the 2019 study's 46 ft; pitch approximate. Lifted off in the cutaway, so the dance floor shows.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ],
+   "shape": "gable",
+   "only": "whole"
+  },
+  {
+   "id": "site-forebay-0",
+   "name": "Pump House Canal (the forebay)",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48631165,
+     37.53682726
+    ],
+    [
+     -77.48628598,
+     37.53681899
+    ],
+    [
+     -77.48625908,
+     37.53685664
+    ]
+   ],
+   "elevation": 30.6,
+   "upTo": 30.7,
+   "tone": "water",
+   "confidence": "written",
+   "note": "Drawn as its surface only. The forebay: the Pump House Canal, turned off above the Three Mile Locks and dammed at the east end of the house; its waterline level with the walkway round the north front (NRHP 2002). The channel's banks are today's lidar (3DEP); its 1885 level is inferred, not measured.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.usgs.gov/3d-elevation-program"
+   ]
+  },
+  {
+   "id": "site-forebay-1",
+   "name": "Pump House Canal (the forebay)",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48628598,
+     37.53681899
+    ],
+    [
+     -77.48606392,
+     37.53676472
+    ],
+    [
+     -77.48597973,
+     37.53688256
+    ],
+    [
+     -77.4861377,
+     37.53692449
+    ],
+    [
+     -77.48625908,
+     37.53685664
+    ]
+   ],
+   "elevation": 30.6,
+   "upTo": 30.7,
+   "tone": "water",
+   "confidence": "written",
+   "note": "Drawn as its surface only. The forebay: the Pump House Canal, turned off above the Three Mile Locks and dammed at the east end of the house; its waterline level with the walkway round the north front (NRHP 2002). The channel's banks are today's lidar (3DEP); its 1885 level is inferred, not measured.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.usgs.gov/3d-elevation-program"
+   ]
+  },
+  {
+   "id": "site-forebay-2",
+   "name": "Pump House Canal (the forebay)",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48606392,
+     37.53676472
+    ],
+    [
+     -77.48564782,
+     37.53658046
+    ],
+    [
+     -77.48558047,
+     37.53667473
+    ],
+    [
+     -77.48568732,
+     37.53674421
+    ],
+    [
+     -77.48597973,
+     37.53688256
+    ]
+   ],
+   "elevation": 30.6,
+   "upTo": 30.7,
+   "tone": "water",
+   "confidence": "written",
+   "note": "Drawn as its surface only. The forebay: the Pump House Canal, turned off above the Three Mile Locks and dammed at the east end of the house; its waterline level with the walkway round the north front (NRHP 2002). The channel's banks are today's lidar (3DEP); its 1885 level is inferred, not measured.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.usgs.gov/3d-elevation-program"
+   ]
+  },
+  {
+   "id": "site-forebay-dam",
+   "name": "Pump House Canal: the dam",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48565904,
+     37.53656475
+    ],
+    [
+     -77.48563936,
+     37.53655579
+    ],
+    [
+     -77.48555798,
+     37.53666969
+    ],
+    [
+     -77.48557766,
+     37.53667865
+    ]
+   ],
+   "elevation": 21.4,
+   "upTo": 31.3,
+   "tone": "stone",
+   "confidence": "approximate",
+   "note": "The forebay was dammed off at the far east side of the building (NRHP 2002). Its line and form are approximate; the 1924 hydroelectric station stands on it today.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ]
+  },
+  {
+   "id": "site-lower-0",
+   "name": "James River and Kanawha Canal, below the locks",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48644813,
+     37.53659205
+    ],
+    [
+     -77.48643753,
+     37.53660689
+    ],
+    [
+     -77.48647642,
+     37.5366243
+    ]
+   ],
+   "elevation": 24.504,
+   "upTo": 24.604,
+   "tone": "water",
+   "confidence": "written",
+   "note": "The canal's lower (\"Richmond\") level, below the Three Mile Locks, where the tailraces ran out and the water went on to the mills downtown (NRHP 2002; Bolling 1900). Its 1885 level here is the forebay's less the 20-ft fall (approximate). The channel's banks are today's lidar (3DEP); its 1885 level is inferred, not measured.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "http://www.waterworkshistory.us/VA/Richmond/RichmondWaterWorks1900.pdf",
+    "https://www.usgs.gov/3d-elevation-program"
+   ]
+  },
+  {
+   "id": "site-lower-1",
+   "name": "James River and Kanawha Canal, below the locks",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4864213,
+     37.53656146
+    ],
+    [
+     -77.48627721,
+     37.53646621
+    ],
+    [
+     -77.4862295,
+     37.53653298
+    ],
+    [
+     -77.48643753,
+     37.53660689
+    ],
+    [
+     -77.48644813,
+     37.53659205
+    ]
+   ],
+   "elevation": 24.504,
+   "upTo": 24.604,
+   "tone": "water",
+   "confidence": "written",
+   "note": "The canal's lower (\"Richmond\") level, below the Three Mile Locks, where the tailraces ran out and the water went on to the mills downtown (NRHP 2002; Bolling 1900). Its 1885 level here is the forebay's less the 20-ft fall (approximate). The channel's banks are today's lidar (3DEP); its 1885 level is inferred, not measured.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "http://www.waterworkshistory.us/VA/Richmond/RichmondWaterWorks1900.pdf",
+    "https://www.usgs.gov/3d-elevation-program"
+   ]
+  },
+  {
+   "id": "site-lower-2",
+   "name": "James River and Kanawha Canal, below the locks",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48627721,
+     37.53646621
+    ],
+    [
+     -77.4861253,
+     37.53631375
+    ],
+    [
+     -77.48606356,
+     37.53640016
+    ],
+    [
+     -77.4862295,
+     37.53653298
+    ]
+   ],
+   "elevation": 24.504,
+   "upTo": 24.604,
+   "tone": "water",
+   "confidence": "written",
+   "note": "The canal's lower (\"Richmond\") level, below the Three Mile Locks, where the tailraces ran out and the water went on to the mills downtown (NRHP 2002; Bolling 1900). Its 1885 level here is the forebay's less the 20-ft fall (approximate). The channel's banks are today's lidar (3DEP); its 1885 level is inferred, not measured.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "http://www.waterworkshistory.us/VA/Richmond/RichmondWaterWorks1900.pdf",
+    "https://www.usgs.gov/3d-elevation-program"
+   ]
+  },
+  {
+   "id": "site-lower-3",
+   "name": "James River and Kanawha Canal, below the locks",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4861253,
+     37.53631375
+    ],
+    [
+     -77.48591439,
+     37.53617086
+    ],
+    [
+     -77.4858302,
+     37.53628869
+    ],
+    [
+     -77.48606356,
+     37.53640016
+    ]
+   ],
+   "elevation": 24.504,
+   "upTo": 24.604,
+   "tone": "water",
+   "confidence": "written",
+   "note": "The canal's lower (\"Richmond\") level, below the Three Mile Locks, where the tailraces ran out and the water went on to the mills downtown (NRHP 2002; Bolling 1900). Its 1885 level here is the forebay's less the 20-ft fall (approximate). The channel's banks are today's lidar (3DEP); its 1885 level is inferred, not measured.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "http://www.waterworkshistory.us/VA/Richmond/RichmondWaterWorks1900.pdf",
+    "https://www.usgs.gov/3d-elevation-program"
+   ]
+  },
+  {
+   "id": "site-lower-4",
+   "name": "James River and Kanawha Canal, below the locks",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48592281,
+     37.53615908
+    ],
+    [
+     -77.48588155,
+     37.53614029
+    ],
+    [
+     -77.4856686,
+     37.53625932
+    ],
+    [
+     -77.48551563,
+     37.53647342
+    ],
+    [
+     -77.4856534,
+     37.53653615
+    ]
+   ],
+   "elevation": 24.504,
+   "upTo": 24.604,
+   "tone": "water",
+   "confidence": "written",
+   "note": "The canal's lower (\"Richmond\") level, below the Three Mile Locks, where the tailraces ran out and the water went on to the mills downtown (NRHP 2002; Bolling 1900). Its 1885 level here is the forebay's less the 20-ft fall (approximate). The channel's banks are today's lidar (3DEP); its 1885 level is inferred, not measured.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "http://www.waterworkshistory.us/VA/Richmond/RichmondWaterWorks1900.pdf",
+    "https://www.usgs.gov/3d-elevation-program"
+   ]
+  },
+  {
+   "id": "site-walk-north",
+   "name": "The New Pump-House: north walkway",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48611503,
+     37.53672969
+    ],
+    [
+     -77.48568796,
+     37.53653523
+    ],
+    [
+     -77.48565877,
+     37.53657608
+    ],
+    [
+     -77.48608584,
+     37.53677054
+    ]
+   ],
+   "elevation": 29.7,
+   "upTo": 31.5,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "The stone walkway round the north front, at the forebay's waterline (NRHP 2002; HAER VA-34-1). Width approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/"
+   ]
+  }
+ ],
+ "rules": [
+  {
+   "where": {
+    "tag": "highway"
+   },
+   "eras": [],
+   "note": "Today's paths and drives, not drawn in this rough draft."
+  },
+  {
+   "where": {
+    "tag": "waterway"
+   },
+   "eras": [],
+   "note": "The canals are modeled as parts (forebay, lower level)."
+  }
+ ],
+ "dates": []
+}

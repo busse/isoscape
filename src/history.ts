@@ -143,7 +143,7 @@ export type Confidence = 'drawn' | 'written' | 'approximate'
 /** A part's confidence: what it says, or `approximate` when it says nothing. */
 export const confidenceOf = (h: { readonly confidence?: Confidence }): Confidence => h.confidence ?? 'approximate'
 
-export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof' | 'tile'
+export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof' | 'tile' | 'water'
 
 /**
  * A train on a curated rail line: an engine (unless `engine` is false) and `cars` cars behind

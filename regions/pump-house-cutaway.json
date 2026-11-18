@@ -1,0 +1,83 @@
+{
+  "title": "The New Pump-House, about 1885: cut along the machine room (rough draft)",
+  "data": "richmond-i195-rocketts",
+  "center": [
+    -77.4859486,
+    37.5365665
+  ],
+  "width": 85,
+  "depth": 70,
+  "bearing": 55.0,
+  "snap": false,
+  "scale": 10,
+  "squash": 0.55,
+  "exaggeration": 1.0,
+  "slab": 0,
+  "palette": "paper",
+  "minBuildingArea": 12,
+  "dots": "none",
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 2,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 1,
+    "shade": 0
+  },
+  "time": {
+    "history": "history/pump-house.json"
+  },
+  "cutaway": {
+    "through": [
+      -77.48596548,
+      37.53654291
+    ],
+    "bearing": 119.7,
+    "remove": "right",
+    "floor": 28.06,
+    "keep": 1.5,
+    "parts": "ph-c-",
+    "travelers": [
+      {
+        "at": [
+          -77.48599774,
+          37.53662006
+        ],
+        "floor": 34.77,
+        "facing": 1
+      },
+      {
+        "at": [
+          -77.48593519,
+          37.5366072
+        ],
+        "floor": 34.77,
+        "facing": -1
+      },
+      {
+        "at": [
+          -77.48592463,
+          37.53657636
+        ],
+        "floor": 34.77,
+        "facing": 1
+      },
+      {
+        "at": [
+          -77.48585928,
+          37.53656743
+        ],
+        "floor": 34.77,
+        "facing": -1
+      },
+      {
+        "at": [
+          -77.48596563,
+          37.53655547
+        ],
+        "floor": 28.06,
+        "facing": 1
+      }
+    ]
+  }
+}
