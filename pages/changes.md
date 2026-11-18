@@ -24,6 +24,25 @@ when. Once anyone has ordered an edition, it stays as it is, and any change beco
 Numbers already printed stay as they are. The [production board](board.md) shows where each piece
 stands. This entry was drafted with Claude.
 
+## November 18, 2026
+
+**Broad Street Station, 1943: the set is complete.** The set's map, The Railroad Map (plate BSS·M),
+and the framed set, The Railroads and Fourteen Places (BSS·00), are redrawn as version 3, and box 3
+is now Scott's Addition (BSS·16, version 1). They were redrawn with Claude, in code, and checked
+against the set's inspection list at full print size.
+
+- On the map and the framed set, the numbered badges are set off the stations with leaders, and
+  the labels sit beside their subjects. Both carry the corrections listed below for the fourteen
+  places.
+- Box 3 is now Scott's Addition, the warehouse district between the RF&P and the Belt Line: a new
+  print, plate BSS·16, version 1. It replaces Hermitage Road (BSS·03), which is withdrawn: its
+  picture could not carry the place. Its plate number is not used again.
+- One known fault, stated plainly: Main Street Station is drawn about a fifth too low, on the map
+  and on stop 7, and stop 7's note gives 110 feet to the finial where photographs measure about
+  148 feet. Both will be corrected.
+
+The title block on each print gives its version. This entry was drafted with Claude.
+
 ## November 17, 2026 (Broad Street Station, four more)
 
 **Broad Street Station, 1943: four more of the set's prints redrawn as version 3.** Seaboard Junction
