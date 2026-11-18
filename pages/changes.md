@@ -11,6 +11,29 @@ tools and the research get better, a published map is sometimes corrected and re
 page lists those changes, newest first. A print ordered after a change is made from the new
 version; the version is part of each print file's name (`-v2`, `-v3`).
 
+## November 17, 2026 (Broad Street Station, four more)
+
+**Broad Street Station, 1943: four more of the set's prints redrawn as version 3.** Seaboard Junction
+(plate BSS·04), C.F. Sauer Company (BSS·06), Main Street Station (BSS·07) and The Triple Crossing
+(BSS·08) were redrawn with Claude, in code, and inspected tile by tile at full print size. They carry
+the corrections listed below for the first nine, and these besides:
+
+- Main Street Station (BSS·07) is rebuilt from heights measured on the Historic American Buildings
+  Survey photograph VA-848-12: the cornice about 56 feet up, the clock faces about 85 feet, the finial
+  110 feet (all approximate). It now has its tower, clock faces, hipped roof, concourse and
+  gable-roofed train shed, and the view is framed 45 meters further south.
+- The C&O viaduct's deck is drawn continuous, and the Triple Crossing's three levels are drawn apart
+  (on The Triple Crossing, and also on Main Street Station).
+- On Seaboard Junction (BSS·04), the station loop's tracks are carried on at its north end to meet
+  the line toward the Coast Line (approximate, after the USGS quadrangles of 1934 and 1956).
+- C.F. Sauer Company (BSS·06) is redrawn with its outlines at their proper weight. One known fault
+  remains on it: a present-day street is drawn meeting a 1940 building beside the freight track. It
+  will be corrected in a later version.
+
+The set's map, the framed set and the print of place 3 follow when their corrections are done; until
+then they are not for sale. The title block on each print gives version 3. This entry was drafted
+with Claude.
+
 ## November 17, 2026 (Richmond's Streetcars, the last six)
 
 **Richmond's Streetcars, 1925: the set's map, the framed set and stops 1, 7, 8 and 9 redrawn.** The
