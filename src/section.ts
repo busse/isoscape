@@ -15,6 +15,7 @@ import { paintOrder } from './order.ts'
 import type { Cutaway, Region } from './region.ts'
 import { lonLatFromLocal } from './region.ts'
 import type { Item, Scene } from './scene.ts'
+import type { Palette } from './palette.ts'
 
 const f = (n: number) => (Math.round(n * 10) / 10).toString()
 const path = (pts: readonly Vec2[], close = true) => pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${f(p[0])} ${f(p[1])}`).join('') + (close ? 'Z' : '')
@@ -161,11 +162,11 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
       out.push(`<path fill="none" stroke="${color}" stroke-width="${f(p.routeWidth * 0.9)}" stroke-linejoin="round" d="${path(pts, false)}"/>`)
       for (const [x, y, ux, uy] of every(pts, RIBBON_ARROWS * view.scale)) {
         const s = 0.65 * view.scale
-        out.push(`<path fill="${color}" stroke="${p.sky}" stroke-width="1.2" d="${path([[x + ux * s, y + uy * s], [x - ux * s * 0.6 - uy * s * 0.75, y - uy * s * 0.6 + ux * s * 0.75], [x - ux * s * 0.6 + uy * s * 0.75, y - uy * s * 0.6 - ux * s * 0.75]])}"/>`)
+        out.push(`<path fill="${color}" stroke="${p.sky}" stroke-width="${f(p.wayMarks.arrowEdge)}" d="${path([[x + ux * s, y + uy * s], [x - ux * s * 0.6 - uy * s * 0.75, y - uy * s * 0.6 + ux * s * 0.75], [x - ux * s * 0.6 + uy * s * 0.75, y - uy * s * 0.6 - ux * s * 0.75]])}"/>`)
       }
       if (ends !== undefined) {
         const mid = (minX + maxX) / 2
-        tags.push(endTag(pts[0], ends[0], color, p.sky, -3 * view.scale, pts[0][0] > mid), endTag(pts[pts.length - 1], ends[1], color, p.sky, 3 * view.scale, pts[pts.length - 1][0] > mid))
+        tags.push(endTag(pts[0], ends[0], color, p.sky, p.wayMarks, -3 * view.scale, pts[0][0] > mid), endTag(pts[pts.length - 1], ends[1], color, p.sky, p.wayMarks, 3 * view.scale, pts[pts.length - 1][0] > mid))
       }
     }
   }
@@ -233,7 +234,7 @@ const every = (pts: readonly Vec2[], step: number): [number, number, number, num
  * The pill's width allows the label's letters at 0.68 em and their 1 px spacing, with a full em
  * of padding each side.
  */
-const endTag = (at: Vec2, label: string, color: string, paper: string, dy: number, right: boolean): string => {
+const endTag = (at: Vec2, label: string, color: string, paper: string, marks: Palette['wayMarks'], dy: number, right: boolean): string => {
   const size = 11
   const padX = size
   const w = label.length * (size * 0.68 + 1) + 2 * padX
@@ -242,8 +243,8 @@ const endTag = (at: Vec2, label: string, color: string, paper: string, dy: numbe
   const ty = y + dy
   const bx = right ? x + 12 - w : x - 12
   return `<g class="way-end" data-box="${f(bx)} ${f(ty - h / 2)} ${f(bx + w)} ${f(ty + h / 2)}">` +
-    `<path fill="none" stroke="${color}" stroke-width="2" d="${path([[x, y], [x, ty]], false)}"/>` +
-    `<circle cx="${f(x)}" cy="${f(y)}" r="5.5" fill="${color}" stroke="${paper}" stroke-width="2.5"/>` +
+    `<path fill="none" stroke="${color}" stroke-width="${f(marks.leader)}" d="${path([[x, y], [x, ty]], false)}"/>` +
+    `<circle cx="${f(x)}" cy="${f(y)}" r="${f(marks.dot)}" fill="${color}" stroke="${paper}" stroke-width="${f(marks.ring)}"/>` +
     `<rect x="${f(bx)}" y="${f(ty - h / 2)}" width="${f(w)}" height="${f(h)}" rx="${f(h / 2)}" fill="${color}"/>` +
     `<text x="${f(bx + w / 2)}" y="${f(ty + size * 0.36)}" font-family="Helvetica, Arial, sans-serif" font-size="${size}" font-weight="bold" letter-spacing="1" fill="${paper}" text-anchor="middle">${esc(label)}</text></g>`
 }

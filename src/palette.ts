@@ -95,6 +95,11 @@ export interface Palette {
   readonly drive: string
   readonly driveBand: string
   readonly pumpedBand: string
+  /**
+   * The water ways' marks in a section (`section.ribbon`), in section pixels: the paper edge
+   * round each arrowhead, and an end tag's leader, its dot's radius and the dot's paper ring.
+   */
+  readonly wayMarks: { readonly arrowEdge: number; readonly leader: number; readonly dot: number; readonly ring: number }
   readonly routeWidth: number
   readonly routeDash: readonly [number, number]
   /** Station platforms, and the running rails of a track at close scale. */
@@ -204,6 +209,7 @@ const paper: Palette = {
   drive: '#1f7a73',
   driveBand: '#9cc9c3',
   pumpedBand: '#a9c4dd',
+  wayMarks: { arrowEdge: 1.2, leader: 2, dot: 5.5, ring: 2.5 },
   routeWidth: 2.6,
   routeDash: [9, 6],
   platform: '#efe9dc',
