@@ -4,11 +4,11 @@
  "version": 1,
  "asset_version": "1.0.0",
  "version_note": null,
- "recorded": "2026-11-18T15:08:13+00:00",
+ "recorded": "2026-11-18T15:15:33+00:00",
  "provenance": "recorded at release",
  "isoscape": {
-  "commit": "db49f8bd6e584742ae67df5e9569bdae01e68022",
-  "subject": "Plates: a new series for Main Street Station (MSS, Main Street Station, 1952, in Buildings in their time); MSS-01 is its cutaway, kind \"Building cutaway\"",
+  "commit": "f537cdffa4b6bce67e16b3db63f925544d8bd3a4",
+  "subject": "Explorer page for the Main Street Station cutaway (MSS-01), its buy links and its Changes entry",
   "dirty": false
  },
  "kind": "cutaway",
@@ -103,7 +103,7 @@
   }
  ],
  "inputs": {
-  "cutaways/main-street-1952.json": "6447015d7bc038cc4f81f85bd17cf91d909dee6decb3f60e899344dff2f0a71c",
+  "cutaways/main-street-1952.json": "85a830cf99483daac2e417013222bb824e929a40995b602d158599a8274cb9ac",
   "tools/cutaway/sheet.py": "35218b83acf42bfe9beea2e2b2c7c893381f66e35928a44c2fd9a9aad448aef3",
   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
   "tools/release/stamp.py": "a71068c515fe9f22382f53275c87f264db4a3dd004f9e35604e7b52bee4dcb88",
@@ -183,7 +183,7 @@
     "handle": "main-street-station-about-1952-cutaway",
     "id": "gid://shopify/Product/9142391242870",
     "format": "all (merged)",
-    "status": "DRAFT",
+    "status": "ACTIVE",
     "variants": 4
    }
   ],
