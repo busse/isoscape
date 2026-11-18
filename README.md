@@ -546,7 +546,18 @@ in a polygon of a GeoJSON file roofed in the palette's `mark` tones (the first p
 later ones lighter), the rest quiet, the outlines drawn on the ground, and, where asked, the
 curated lost streets and some bridges' decks marked. Jackson Ward has two: `count` (the 1952
 buildings in the highway's footprint) and `streets` (the stretches of street it took, and
-today's bridges). Every other build is unchanged.
+today's bridges). A highlight can also take `ids`, a file of the traced ids a count counted in
+each polygon (`tools/sanborn/jw/count.py` writes one), and then roofs exactly those, so the
+picture and the count agree. Every other build is unchanged.
+
+**Islands.** A switch can carry an `island` (`Island` in `src/history.ts`): the scene is cut
+to one polygon and drawn alone on blank paper. The ground is painted strip by strip as always,
+each strip clipped to the polygon's part of its band (densified and draped); the cut faces that
+look toward the camera are drawn as a slab's sides down to a flat bottom `slab` meters below the
+lowest ground inside, with the rim inked; standing things are kept when their center falls
+inside, or, with `ids`, when a count listed them; the frame closes in on the island, and a
+caption line says what its edge is. Jackson Ward has `island-paved` and `island-corridor`: only
+what the Turnpike took, inside today's footprint (a stand-in for the 1958 right-of-way).
 
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
 and elevation and keeps only its year-built parcels in its own `data/` folder. A build looks for

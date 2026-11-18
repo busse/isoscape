@@ -40,3 +40,30 @@ test('a highlight naming a polygon its file lacks fails to load', async () => {
   }))
   await assert.rejects(loadHistory(join(dir, 'h.json')), /no polygon named "right-of-way"/)
 })
+
+test('a highlight with an ids file reads the counted ids in polygon order', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'isoscape-highlight-'))
+  await writeFile(join(dir, 'fp.geojson'), JSON.stringify(polygons))
+  await writeFile(join(dir, 'ids.json'), JSON.stringify({ corridor: ['b'], paved: ['a', 'c'] }))
+  await writeFile(join(dir, 'h.json'), JSON.stringify({
+    epochs: [], features: [], rules: [], present: 2026,
+    switches: { count: { highlight: { file: join(dir, 'fp.geojson'), polygons: ['paved', 'corridor'], ids: join(dir, 'ids.json') } } },
+  }))
+  const on = switchedOn(await loadHistory(join(dir, 'h.json')), ['count']).highlight
+  assert.deepEqual(on?.picked, [['a', 'c'], ['b']])
+})
+
+test('an island switch reads its polygon and the ids it keeps', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'isoscape-island-'))
+  await writeFile(join(dir, 'fp.geojson'), JSON.stringify(polygons))
+  await writeFile(join(dir, 'ids.json'), JSON.stringify({ paved: ['a'], corridor: ['b'] }))
+  await writeFile(join(dir, 'h.json'), JSON.stringify({
+    epochs: [], features: [], rules: [], present: 2026,
+    switches: { isle: { island: { file: join(dir, 'fp.geojson'), polygon: 'corridor', ids: join(dir, 'ids.json'), idLists: ['paved', 'corridor'] } } },
+  }))
+  const h = await loadHistory(join(dir, 'h.json'))
+  assert.equal(switchedOn(h, []).island, undefined)
+  const on = switchedOn(h, ['isle']).island
+  assert.equal(on?.rings?.length, 3)
+  assert.deepEqual(on?.keep, ['a', 'b'])
+})

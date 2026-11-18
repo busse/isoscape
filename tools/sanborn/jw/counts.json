@@ -1,14 +1,14 @@
 {
  "all traced": {
-  "buildings": 3157,
+  "buildings": 2875,
   "at_least_30m2": 2332,
   "by_kind": {
-   "colored brick": 1439,
-   "uncolored outline (frame, by inference)": 1203,
-   "colored frame": 367,
-   "colored stone": 56,
-   "colored iron": 49,
-   "colored special": 34,
+   "colored brick": 1387,
+   "uncolored outline (frame, by inference)": 1114,
+   "colored frame": 248,
+   "colored stone": 51,
+   "colored iron": 35,
+   "colored special": 31,
    "colored fireproof": 9
   },
   "named": [
@@ -78,6 +78,7 @@
    "Sharon Baptist Church (Colored)",
    "Sixth Mount Zion Baptist Church (Colored)",
    "Sixth St. Baptist Church (Colored)",
+   "Southern Aid Society of Va. (Colored), office building; stores; nos. 212-216 E. Clay",
    "St. Joseph's R.C. Church (Colored)",
    "St. Philip's P.E. Church (Colored)",
    "Storage",
@@ -85,7 +86,6 @@
    "Store; hall 2nd",
    "Stores",
    "Stores; hotel entrance; dining room",
-   "Stores; nos. 212-216 (a label \"Southern Aid Society of Va.\" is printed just below: which building it names was not checked)",
    "Stores; office",
    "Stores; office; autos 1st (\"vac. 3rd\")",
    "Stores; upholstering & repair; tire repair",
@@ -103,45 +103,63 @@
    "Warehouse & repair shop"
   ],
   "named_uses": {
-   "church": 12,
-   "dwelling": 32,
+   "church": 18,
+   "dwelling": 310,
+   "garage": 62,
+   "hall": 5,
+   "store": 53,
    "institution": 8,
-   "school": 10,
-   "business": 30,
-   "garage": 7,
-   "store": 11,
-   "hall": 3,
+   "school": 11,
+   "business": 37,
    "theater": 2,
+   "flat": 31,
+   "hotel": 2,
+   "vacant": 3,
    "industry": 6
   },
+  "uses_read": {
+   "dwelling": 280,
+   "garage": 56,
+   "store": 48,
+   "flat": 31,
+   "business": 12,
+   "church": 6,
+   "hall": 3,
+   "vacant": 3,
+   "school": 2,
+   "hotel": 2,
+   "industry": 2,
+   "theater": 1
+  },
+  "stories_read": 203,
   "sheets": {
-   "304": 144,
-   "305": 172,
-   "306": 199,
-   "307": 359,
-   "308": 372,
-   "309": 285,
-   "310": 283,
-   "311": 165,
-   "312": 54,
-   "315": 186,
-   "317": 101,
-   "318": 75,
-   "319": 215,
-   "320": 174,
-   "326": 373
+   "304": 126,
+   "305": 160,
+   "306": 174,
+   "307": 326,
+   "308": 338,
+   "309": 257,
+   "310": 263,
+   "311": 147,
+   "312": 52,
+   "315": 175,
+   "317": 87,
+   "318": 72,
+   "319": 198,
+   "320": 158,
+   "326": 342
   }
  },
  "paved": {
-  "buildings": 238,
+  "buildings": 216,
   "at_least_30m2": 163,
   "by_kind": {
-   "uncolored outline (frame, by inference)": 133,
-   "colored brick": 69,
-   "colored frame": 23,
-   "colored stone": 6,
-   "colored special": 4,
-   "colored iron": 3
+   "uncolored outline (frame, by inference)": 122,
+   "colored brick": 67,
+   "colored frame": 18,
+   "colored stone": 4,
+   "colored special": 3,
+   "colored iron": 2
   },
   "named": [
    "Apartments",
@@ -151,28 +169,43 @@
    "Sunlight Laundry & Dry Cleaning Co. (storage part)"
   ],
   "named_uses": {
-   "business": 4,
-   "dwelling": 1
+   "dwelling": 130,
+   "garage": 25,
+   "store": 11,
+   "church": 4,
+   "flat": 18,
+   "vacant": 2,
+   "business": 7
   },
+  "uses_read": {
+   "dwelling": 130,
+   "garage": 25,
+   "flat": 18,
+   "store": 11,
+   "business": 7,
+   "church": 4,
+   "vacant": 2
+  },
+  "stories_read": 66,
   "sheets": {
-   "304": 33,
-   "307": 40,
-   "310": 55,
-   "315": 33,
-   "317": 10,
-   "326": 67
+   "304": 29,
+   "307": 36,
+   "310": 49,
+   "315": 31,
+   "317": 9,
+   "326": 62
   }
  },
  "corridor": {
-  "buildings": 489,
+  "buildings": 447,
   "at_least_30m2": 344,
   "by_kind": {
-   "uncolored outline (frame, by inference)": 259,
-   "colored brick": 157,
-   "colored frame": 59,
-   "colored stone": 7,
-   "colored special": 4,
-   "colored iron": 3
+   "uncolored outline (frame, by inference)": 242,
+   "colored brick": 151,
+   "colored frame": 44,
+   "colored stone": 5,
+   "colored special": 3,
+   "colored iron": 2
   },
   "named": [
    "Apartments",
@@ -186,19 +219,37 @@
    "The Sisson Fixture Co., mfg. store fixtures"
   ],
   "named_uses": {
+   "dwelling": 270,
+   "garage": 54,
+   "hall": 1,
+   "store": 28,
+   "church": 6,
    "school": 1,
-   "business": 5,
-   "dwelling": 2,
-   "garage": 1,
+   "flat": 29,
+   "vacant": 3,
+   "business": 9,
    "industry": 2
   },
+  "uses_read": {
+   "dwelling": 270,
+   "garage": 54,
+   "flat": 29,
+   "store": 28,
+   "business": 9,
+   "church": 6,
+   "vacant": 3,
+   "industry": 2,
+   "hall": 1,
+   "school": 1
+  },
+  "stories_read": 133,
   "sheets": {
-   "304": 78,
-   "307": 79,
-   "310": 115,
-   "315": 74,
-   "317": 34,
-   "326": 109
+   "304": 71,
+   "307": 74,
+   "310": 102,
+   "315": 68,
+   "317": 31,
+   "326": 101
   }
  }
 }

@@ -106,6 +106,12 @@ export interface Scene {
   readonly cut?: CutPlane
   /** A flat section's cut faces, in plane coordinates: meters along the plane, scene z. */
   readonly sections?: readonly Vec2[][]
+  /**
+   * A scene drawn as an island (a history switch's `island`): the polygon's rings in view meters
+   * (outers counter-clockwise, holes clockwise), the flat bottom of its slab (scene z), and the
+   * caption line saying what its edge is.
+   */
+  readonly island?: { readonly rings: readonly Ring[]; readonly bottom: number; readonly caption?: string }
   /** Traced buildings of the year left out, and why: on water, on a viaduct or track, or buried. */
   readonly tracedLeftOut?: readonly { readonly id: string; readonly why: 'water' | 'viaduct' | 'track' | 'buried' }[]
 }
@@ -273,10 +279,13 @@ export const buildScene = (
   // the roof that gives it, or null where the building keeps its own.
   const mark = time?.history.highlight
   const markPolys = (mark?.rings ?? []).map((rs) => rs.map((r) => toViewRing(view, r)))
-  const markRoof = (ring: Ring): string | null => {
+  const markSets = mark?.picked?.map((ids) => new Set(ids))
+  const markRoof = (ring: Ring, id?: string): string | null => {
     if (mark === undefined) return null
     const c = centroid(ring)
-    const k = mark.pick === false ? -1 : markPolys.findIndex((rs) => pointInPolygon(c, rs))
+    const k = mark.pick === false ? -1
+      : markSets !== undefined ? (id === undefined ? -1 : markSets.findIndex((s) => s.has(id)))
+      : markPolys.findIndex((rs) => pointInPolygon(c, rs))
     if (k >= 0) stats[k === 0 ? 'markPick' : 'markNear'] = (stats[k === 0 ? 'markPick' : 'markNear'] ?? 0) + 1
     return k === 0 ? pal.mark.pick : k > 0 ? pal.mark.near : mark.quiet === true ? pal.mark.quiet : null
   }
@@ -1238,7 +1247,7 @@ export const buildScene = (
       const grounds = outer.map((p) => terrain.z(p))
       const base = Math.min(...grounds)
       const top = Math.max(seatLevel(grounds, terrain.exaggeration) + b.storeys * 3.6, base + 2.5)
-      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, markRoof(outer) ?? pal.traced[b.material], dotsMode, undefined, grounds))
+      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, markRoof(outer, b.id) ?? pal.traced[b.material], dotsMode, undefined, grounds))
       ends[b.end]++
     }
     stats.traced = ends.map + ends.rebuilt + ends.highway + ends.assumed
@@ -1308,8 +1317,38 @@ export const buildScene = (
   }
   if (labels.length > 0) stats.labels = labels.length
 
+  // An island (a switch's `island`): keep only what stands inside its polygon.
+  const isle = time?.history.island
+  let islandOut: Scene['island']
+  let kept = items
+  if (isle?.rings !== undefined) {
+    // Cut to the frame too: ground is drawn only inside it, so where the polygon runs past the
+    // frame the frame's edge is the island's edge.
+    const rings = isle.rings.map((r) => clipRingToRect(toViewRing(view, r), frame)).filter((r) => r.length >= 3)
+    // Orient: a ring inside an odd number of others is a hole (clockwise), else an outer.
+    const oriented = rings.map((r, k) => {
+      const depth = rings.filter((o, m) => m !== k && pointInRing(r[0], o)).length
+      const ccw = signedArea(r) > 0
+      return (depth % 2 === 0) === ccw ? r : r.slice().reverse()
+    })
+    const keepIds = isle.keep === undefined ? undefined : new Set(isle.keep.map((id) => `traced:${id}`))
+    kept = items.filter((it) => {
+      if (keepIds !== undefined && it.id.startsWith('traced:')) return keepIds.has(it.id)
+      return pointInPolygon(centroid(it.footprint ?? it.hull), oriented)
+    })
+    stats.islandKept = kept.length
+    stats.islandLeftOut = items.length - kept.length
+    let low = Infinity
+    for (const r of oriented) for (const pt of r) low = Math.min(low, terrain.z(pt))
+    for (let n = frame.minY; n <= frame.maxY; n += terrain.cell) {
+      for (let e = frame.minX; e <= frame.maxX; e += terrain.cell) if (pointInPolygon([e, n], oriented)) low = Math.min(low, terrain.z([e, n]))
+    }
+    islandOut = { rings: oriented, bottom: low - (isle.slab ?? region.slab ?? 14), ...(isle.caption === undefined ? {} : { caption: isle.caption }) }
+  }
+
   return {
-    region, view, palette: pal, terrain, ground, ribbons, items, stats,
+    region, view, palette: pal, terrain, ground, ribbons, items: kept, stats,
+    ...(islandOut === undefined ? {} : { island: islandOut }),
     ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated, ...(time.history.tieClear === undefined ? {} : { tieClear: time.history.tieClear }), ...(time.history.carLineSeal === true ? { carLineSeal: true } : {}), ...(time.history.carDecks === true ? { carDecks: true } : {}) } }),
     ...(labels.length === 0 ? {} : { labels }),
     ...(railScale > 1 ? { boldRail: true } : {}),

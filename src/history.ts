@@ -405,9 +405,50 @@ export interface History {
    * Settings a build's `--with` names switch on, by name: for corrections made after some years
    * of a series were published, so their scenes stay as sold until each is redrawn.
    */
-  readonly switches?: Readonly<Record<string, { readonly vergeReach?: number; readonly vergeShare?: number; readonly bridgeStreets?: boolean; readonly bridgesClearTraced?: boolean; readonly highlight?: Highlight; readonly note?: string }>>
+  readonly switches?: Readonly<Record<string, { readonly vergeReach?: number; readonly vergeShare?: number; readonly bridgeStreets?: boolean; readonly bridgesClearTraced?: boolean; readonly highlight?: Highlight; readonly island?: Island; readonly note?: string }>>
   /** A pick-out, set only by a switch (`switches.<name>.highlight`): see `Highlight`. */
   readonly highlight?: Highlight
+  /** A scene cut to one polygon and drawn alone, set only by a switch (`switches.<name>.island`): see `Island`. */
+  readonly island?: Island
+}
+
+/**
+ * A scene drawn as an island: only what stands inside one polygon, on its ground cut at the
+ * polygon's edge, the cut faces toward the camera drawn as a slab's sides down to a flat bottom
+ * `slab` meters below the lowest ground inside (the region's slab by default), on blank paper.
+ * Everything outside is left out: ground, streets, water and standing things. A building is kept
+ * when its center falls inside (or, with `ids`, when a count listed it in one of `polygons`).
+ * Off in every build that does not name the switch.
+ */
+export interface Island {
+  /** A GeoJSON file of (multi)polygons, lon/lat, named by `properties.name`. */
+  readonly file: string
+  /** The polygon the island is cut to. */
+  readonly polygon: string
+  /** A count's ids file (see `Highlight.ids`) and the lists in it whose traced buildings are kept. */
+  readonly ids?: string
+  readonly idLists?: readonly string[]
+  /** Slab depth under the island's lowest ground, meters (default: the region's `slab`). */
+  readonly slab?: number
+  /** A line printed under the year caption, saying what the edge is. */
+  readonly caption?: string
+  readonly note?: string
+  /** The polygon's rings (lon/lat, outers and holes, even-odd): read from `file` by `loadHistory`. */
+  readonly rings?: readonly (readonly Vec2[])[]
+  /** The traced ids kept, from `ids`: read by `loadHistory`. */
+  readonly keep?: readonly string[]
+}
+
+const islandRings = async (h: Island): Promise<Island> => {
+  type Geom = { type: 'Polygon'; coordinates: number[][][] } | { type: 'MultiPolygon'; coordinates: number[][][][] }
+  const fc = JSON.parse(await readFile(h.file, 'utf8')) as { features: { properties: { name?: string }; geometry: Geom }[] }
+  const f = fc.features.find((g) => g.properties.name === h.polygon)
+  if (f === undefined) throw new Error(`island: no polygon named "${h.polygon}" in ${h.file}`)
+  const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates
+  const rings = polys.flatMap((poly) => poly.map((ring) => ring.slice(0, -1).map(([x, y]) => [x, y] as Vec2)))
+  if (h.ids === undefined) return { ...h, rings }
+  const lists = JSON.parse(await readFile(h.ids, 'utf8')) as Record<string, string[]>
+  return { ...h, rings, keep: (h.idLists ?? Object.keys(lists)).flatMap((k) => lists[k] ?? []) }
 }
 
 /**
@@ -434,6 +475,15 @@ export interface Highlight {
   /** OSM ids of bridges ("w44888581") whose decks are drawn in the mark's line tone. */
   readonly bridges?: readonly string[]
   readonly note?: string
+  /**
+   * A JSON file listing, for each polygon by name, the ids of the traced buildings a count
+   * counted in it (`{ "paved": ["jw1952-307-12", …], … }`). When given, a traced building is
+   * picked out by its id in the first list that holds it, so the picture draws exactly what the
+   * count counted; buildings not traced are not picked out.
+   */
+  readonly ids?: string
+  /** The `ids` file's lists in `polygons` order: read by `loadHistory`. */
+  readonly picked?: readonly (readonly string[])[]
   /** Each polygon's rings (lon/lat, outers and holes, even-odd), in `polygons` order: read from `file` by `loadHistory`. */
   readonly rings?: readonly (readonly (readonly Vec2[])[])[]
 }
@@ -449,7 +499,10 @@ const highlightRings = async (h: Highlight): Promise<Highlight> => {
     const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates
     return polys.flatMap((poly) => poly.map((ring) => ring.slice(0, -1).map(([x, y]) => [x, y] as Vec2)))
   })
-  return { ...h, rings }
+  if (h.ids === undefined) return { ...h, rings }
+  const lists = JSON.parse(await readFile(h.ids, 'utf8')) as Record<string, string[]>
+  const picked = h.polygons.map((name) => lists[name] ?? [])
+  return { ...h, rings, picked }
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
@@ -468,9 +521,13 @@ export const loadHistory = async (path: string): Promise<History> => {
   }
   // A switch's highlight polygons are read here, so a build that names it has them.
   let switches = raw.switches
-  if (switches !== undefined && Object.values(switches).some((v) => v.highlight !== undefined)) {
+  if (switches !== undefined && Object.values(switches).some((v) => v.highlight !== undefined || v.island !== undefined)) {
     const out: Record<string, NonNullable<History['switches']>[string]> = {}
-    for (const [name, v] of Object.entries(switches)) out[name] = v.highlight === undefined ? v : { ...v, highlight: await highlightRings(v.highlight) }
+    for (const [name, v] of Object.entries(switches)) {
+      let w = v.highlight === undefined ? v : { ...v, highlight: await highlightRings(v.highlight) }
+      if (w.island !== undefined) w = { ...w, island: await islandRings(w.island) }
+      out[name] = w
+    }
     switches = out
   }
   let traced: TracedBuilding[] = []
@@ -599,7 +656,7 @@ export const switchedOn = (h: History, on: readonly string[]): History => {
   for (const name of on) {
     const set = h.switches?.[name]
     if (set === undefined) continue
-    out = { ...out, ...(set.vergeReach === undefined ? {} : { vergeReach: set.vergeReach }), ...(set.vergeShare === undefined ? {} : { vergeShare: set.vergeShare }), ...(set.bridgeStreets === undefined ? {} : { bridgeStreets: set.bridgeStreets }), ...(set.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: set.bridgesClearTraced }), ...(set.highlight === undefined ? {} : { highlight: set.highlight }) }
+    out = { ...out, ...(set.vergeReach === undefined ? {} : { vergeReach: set.vergeReach }), ...(set.vergeShare === undefined ? {} : { vergeShare: set.vergeShare }), ...(set.bridgeStreets === undefined ? {} : { bridgeStreets: set.bridgeStreets }), ...(set.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: set.bridgesClearTraced }), ...(set.highlight === undefined ? {} : { highlight: set.highlight }), ...(set.island === undefined ? {} : { island: set.island }) }
   }
   return out
 }

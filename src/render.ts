@@ -150,6 +150,7 @@ const pathOf = (input: readonly Vec2[], close = true, tol = 0) => {
 /** Draped ground: simplified to a quarter pixel. */
 const groundPath = (pts: readonly Vec2[], close = true) => pathOf(pts, close, 0.25)
 
+
 /** A dot is a zero-length stroke with round caps: the shortest circle SVG has. */
 const dot = ([x, y]: Vec2) => 'M' + pair(num(Math.round(x * 10)), num(Math.round(y * 10))) + 'h0'
 
@@ -353,12 +354,23 @@ export const renderSvg = (scene: Scene): Rendered => {
   const groundTop = Math.max(...xs.map((e) => drape([e, fr.maxY])[1]))
   const groundBottom = Math.min(...front.map((pt) => pt[1]))
   if (square && groundTop < top) top = groundTop
-  const bottom = square ? groundBottom : P([0, fr.minY], -slab)[1]
-  const pad = 24
+  let bottom = square ? groundBottom : P([0, fr.minY], -slab)[1]
+  // An island (a history switch's `island`) is framed on itself: its rim, its slab and what
+  // stands on it, with room around it on blank paper.
+  const isle = scene.island
+  let ix0 = x0
+  let ix1 = x1
+  if (isle !== undefined) {
+    ix0 = Infinity; ix1 = -Infinity; top = Infinity; bottom = -Infinity
+    const grow = (pt: Vec2) => { ix0 = Math.min(ix0, pt[0]); ix1 = Math.max(ix1, pt[0]); top = Math.min(top, pt[1]); bottom = Math.max(bottom, pt[1]) }
+    for (const r of isle.rings) for (const pt of densify(r, c)) { grow(drape(pt)); grow(P(pt, isle.bottom)) }
+    for (const it of items) for (const sh of it.shapes) for (const pt of sh.pts) if (Number.isFinite(pt[0]) && Number.isFinite(pt[1])) grow(pt)
+  }
+  const pad = isle === undefined ? 24 : Math.max(24, (ix1 - ix0) * 0.04)
   // A dated scene carries its year as a caption above the plate, in room of its own.
   const capSize = scene.time === undefined ? 0 : Math.max(28, (x1 - x0) * 0.022)
-  const capRoom = scene.time === undefined ? 0 : capSize * 2.4
-  const vb: [number, number, number, number] = [x0 - pad, top - pad - capRoom, x1 - x0 + 2 * pad, bottom - top + 2 * pad + capRoom]
+  const capRoom = scene.time === undefined ? 0 : capSize * (isle?.caption === undefined ? 2.4 : 3.4)
+  const vb: [number, number, number, number] = [ix0 - pad, top - pad - capRoom, ix1 - ix0 + 2 * pad, bottom - top + 2 * pad + capRoom]
 
   const out: string[] = []
   // A square plate (no slab: a cutaway) keeps the credit line it was sold with: sentences, and
@@ -392,6 +404,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     `.froth{fill:${p.foam}}`,
     `.boulder{fill:${p.boulder};stroke:${p.ink};stroke-width:${p.groundLineWidth};stroke-opacity:.7;stroke-linejoin:round}`,
     `.edge{fill:none;stroke:${p.ink};stroke-width:${p.lineWidth}}`,
+    ...(isle === undefined ? [] : [sealed('islecut', p.slab)]),
     // Hillshade bands: hp1… lit, hm1… shaded. The bands nest (each lies inside the one before),
     // so each class carries only what its band adds to the one below it.
     ...(T.flat ? [] : shadeAlphas(p.shadeLightStep, p.shadeMax).map((a, k) => `.hp${k + 1}{fill:${p.shadeLight};fill-opacity:${a.toFixed(4)}}`)),
@@ -401,7 +414,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   )
 
   // ---- the slab: a cut through the ground along the front edge -------------------------------
-  if (slab > 0) {
+  if (slab > 0 && isle === undefined) {
     const yBase = P([0, fr.minY], -slab)[1]
     out.push(`<path class="i" fill="${p.slab}" d="${pathOf([...front, [x1, yBase], [x0, yBase]])}"/>`)
     // Water in the cut, where the front edge crosses open water: with terrain, from shoreline
@@ -1236,7 +1249,49 @@ export const renderSvg = (scene: Scene): Rendered => {
     }
     // A square plate's ground is cut on its straight lines, strip by strip; a slab's ground is
     // cut along the front ground line with everything else, below.
-    out.push(`<g data-strip="${f(s.n0)}"${square ? ' clip-path="url(#ground)"' : ''}>${parts.join('')}</g>`)
+    if (isle === undefined) {
+      out.push(`<g data-strip="${f(s.n0)}"${square ? ' clip-path="url(#ground)"' : ''}>${parts.join('')}</g>`)
+      return
+    }
+    // An island: the strip's ground is cut to the island's polygon within the strip's band, the
+    // cut densified and draped like the ground it cuts; then the island's cut faces that look
+    // toward the camera in this strip are drawn down to the slab's flat bottom, and its rim.
+    const clipId = `isle${strips.indexOf(s)}`
+    let clip = ''
+    for (const r of isle.rings) {
+      const cut = clipRingToRect(r as Ring, band)
+      if (cut.length >= 3) clip += groundPath(densify(cut, c / 2).map(drape))
+    }
+    if (clip !== '') {
+      out.push(`<clipPath id="${clipId}"><path clip-rule="evenodd" d="${clip}"/></clipPath>`)
+      out.push(`<g data-strip="${f(s.n0)}" clip-path="url(#${clipId})">${parts.join('')}</g>`)
+    }
+    const own: Rect = { minX: -Infinity, maxX: Infinity, minY: s.n0 > fr.minY ? s.n0 : -Infinity, maxY: s.n1 < fr.maxY ? s.n1 : Infinity }
+    let faces = ''
+    let lines = ''
+    for (const r of isle.rings) {
+      for (let k = 0; k < r.length; k++) {
+        const a = r[k]
+        const b = r[(k + 1) % r.length]
+        const seg = clipSegmentToRect(a, b, own)
+        if (seg === null) continue
+        const run = densify([seg[0], seg[1]], c / 2, false)
+        lines += pathOf(run.map(drape), false)
+        // Outward normal (dy, -dx): the face looks toward the camera when its N' part is negative.
+        if (b[0] - a[0] <= 0) continue
+        const topEdge = run.map(drape)
+        const foot = run.map((pt) => P(pt, isle.bottom))
+        faces += pathOf([...topEdge, ...foot.slice().reverse()])
+        lines += pathOf(foot, false)
+        // Where the face turns away at either end, its corner is a line down the slab.
+        const prev = r[(k - 1 + r.length) % r.length]
+        const after = r[(k + 2) % r.length]
+        if (seg[0] === a && !(a[0] - prev[0] > 0)) lines += pathOf([drape(a), P(a, isle.bottom)], false)
+        if (seg[1] === b && !(after[0] - b[0] > 0)) lines += pathOf([drape(b), P(b, isle.bottom)], false)
+      }
+    }
+    if (faces !== '') out.push(`<path class="islecut" d="${faces}"/>`)
+    if (lines !== '') out.push(`<path class="edge" d="${lines}"/>`)
   }
 
   // ---- items, slotted between strips ---------------------------------------------------------------
@@ -1255,7 +1310,7 @@ export const renderSvg = (scene: Scene): Rendered => {
       `<defs><clipPath id="above"><path d="${pathOf([[x0, vb[1]], [x1, vb[1]], [x1, groundBottom], [x0, groundBottom]])}"/></clipPath>` +
         `<clipPath id="ground"><path d="${pathOf([[x0, groundTop], [x1, groundTop], [x1, groundBottom], [x0, groundBottom]])}"/></clipPath></defs>`,
     )
-  } else {
+  } else if (isle === undefined) {
     out.push(`<defs><clipPath id="above"><path d="${pathOf([[vb[0], vb[1]], [vb[0] + vb[2], vb[1]], [vb[0] + vb[2], fx1[1]], ...front.slice().reverse(), [vb[0], fx0[1]]])}"/></clipPath></defs>`)
     out.push(`<g clip-path="url(#above)">`)
   }
@@ -1269,7 +1324,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     out.push(square ? `<g clip-path="url(#above)">${paintItem(it)}</g>` : paintItem(it))
   }
   flushTo(-Infinity)
-  if (!square) {
+  if (!square && isle === undefined) {
     out.push(`</g>`)
     out.push(`<path fill="${p.sky}" d="${pathOf([[vb[0], vb[1]], [x0, vb[1]], [x0, fx0[1]], [vb[0], fx0[1]]])}${pathOf([[x1, vb[1]], [vb[0] + vb[2], vb[1]], [vb[0] + vb[2], fx1[1]], [x1, fx1[1]]])}"/>`)
     // A crisp ink line along the front ground (a square plate ends in its ground's color alone).
@@ -1293,6 +1348,7 @@ export const renderSvg = (scene: Scene): Rendered => {
       `<g class="caption" font-family="Georgia, 'Times New Roman', serif" fill="${p.ink}">`,
       `<text x="${f(tx)}" y="${f(ty)}" font-size="${f(capSize)}" font-weight="bold">${scene.time.year}</text>`,
       scene.time.title === undefined ? '' : `<text x="${f(tx + capSize * 2.6)}" y="${f(ty)}" font-size="${f(capSize * 0.62)}" font-style="italic">${esc(scene.time.title)}</text>`,
+      isle?.caption === undefined ? '' : `<text x="${f(tx)}" y="${f(ty + capSize * 1.05)}" font-size="${f(capSize * 0.42)}">${esc(isle.caption)}</text>`,
       `</g>`,
     )
   }
