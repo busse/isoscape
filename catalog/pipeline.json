@@ -2683,15 +2683,15 @@
   },
   "all-prints-label-size": {
    "plate": null,
-   "status": "active",
+   "status": "backlog",
    "asset_version": null,
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "agent",
-   "decision": "mock-up first (owner): three prints at smallest sold size, current block beside larger options",
+   "waiting_on": "nothing",
+   "decision": "DEPRIORITIZED by the owner (Nov 18): below the current top ten. Taxonomy is a high priority in his design: every field stays on the plate (collection, set, piece, plate, version, drawn, location, facing); do not propose dropping fields. Mock-up kept in outputs/titleblock; only option A keeps all fields",
    "accepted_faults": [],
    "planned_edition": {
     "reason": "improvement",
