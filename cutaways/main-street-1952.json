@@ -1,0 +1,400 @@
+{
+ "about": "The sheet for the Main Street Station cutaway: tools/cutaway/sheet.py. Callouts are anchored to drawn parts (history ids, in the isometric view and the flat section); a badge's style is the anchored part's confidence unless `confidence` says otherwise. Callout text is a working draft, written with Claude, for the artist to edit.",
+ "design": "main-street-1952-cutaway",
+ "region": "main-street-station-cutaway",
+ "year": 1952,
+ "title": "Main Street Station, 1952",
+ "subtitle": "Cut through the waiting rooms, from Main Street up to the trains",
+ "sectionCaption": "The same cut, seen flat: Main Street on the left, the trains on the right",
+ "isoView": [
+  -435,
+  -428,
+  1000,
+  500
+ ],
+ "groups": [
+  {
+   "title": "The way to the train",
+   "traveler": true,
+   "callouts": [
+    {
+     "n": 1,
+     "title": "Main Street",
+     "text": "East Main Street, in Shockoe Valley.",
+     "iso": {
+      "at": [
+       -77.429596,
+       37.5341041
+      ],
+      "badge": [
+       -170,
+       -150
+      ]
+     },
+     "section": {
+      "s": -12,
+      "elevation": 6.4,
+      "badge": [
+       0,
+       -170
+      ]
+     },
+     "confidence": "drawn"
+    },
+    {
+     "n": 2,
+     "title": "The loggia",
+     "text": "Five stone arches over the front steps.",
+     "iso": {
+      "part": "history:mss-h-loggia-pier-2",
+      "badge": [
+       -420,
+       -80
+      ]
+     },
+     "section": {
+      "part": "history:mss-h-loggia-head",
+      "badge": [
+       -150,
+       -130
+      ]
+     }
+    },
+    {
+     "n": 3,
+     "title": "The main stair",
+     "text": "Twelve feet wide, with a marble landing halfway.",
+     "section": {
+      "part": "history:mss-h-stair-2",
+      "dx": 0.1,
+      "badge": [
+       60,
+       170
+      ]
+     }
+    },
+    {
+     "n": 4,
+     "title": "Lower waiting room",
+     "text": "Three ticket windows in 1901; by 1969 tickets were sold upstairs.",
+     "iso": {
+      "part": "history:mss-h-ticket-counter",
+      "badge": [
+       -200,
+       200
+      ]
+     },
+     "section": {
+      "part": "history:mss-h-ticket-counter",
+      "badge": [
+       0,
+       160
+      ]
+     }
+    },
+    {
+     "n": 5,
+     "title": "The waiting room",
+     "text": "Marble columns, a coffered ceiling, three double benches.",
+     "iso": {
+      "part": "history:mss-h-bench-1",
+      "badge": [
+       200,
+       -120
+      ]
+     },
+     "section": {
+      "part": "history:mss-h-bench-1",
+      "badge": [
+       -150,
+       -150
+      ]
+     }
+    },
+    {
+     "n": 6,
+     "title": "Restaurant",
+     "text": "A lunch counter and tables behind a glass screen.",
+     "section": {
+      "part": "history:mss-h-lunch-counter-top",
+      "badge": [
+       150,
+       -190
+      ]
+     },
+     "confidence": "drawn"
+    },
+    {
+     "n": 7,
+     "title": "The concourse",
+     "text": "Open to the shed, with a news stand in the arcade.",
+     "iso": {
+      "part": "history:mss-h-news-stand",
+      "badge": [
+       120,
+       -220
+      ]
+     },
+     "section": {
+      "part": "history:mss-h-news-stand",
+      "badge": [
+       0,
+       -230
+      ]
+     }
+    },
+    {
+     "n": 8,
+     "title": "The gates",
+     "text": "Iron rings, and a numbered gate to each platform.",
+     "iso": {
+      "part": "history:mss-h-gates",
+      "badge": [
+       120,
+       -190
+      ]
+     },
+     "section": {
+      "part": "history:mss-h-gates",
+      "badge": [
+       100,
+       -150
+      ]
+     },
+     "confidence": "written"
+    },
+    {
+     "n": 9,
+     "title": "Platforms and tracks",
+     "text": "Six stub tracks, five platforms; a through track under each eave.",
+     "iso": {
+      "part": "history:mss-d-platform-4-2",
+      "badge": [
+       -170,
+       130
+      ]
+     },
+     "cross": {
+      "part": "history:mss-d-platform-3-4",
+      "badge": [
+       160,
+       170
+      ]
+     }
+    },
+    {
+     "n": 10,
+     "title": "A C&O Hudson",
+     "text": "A 4-6-4 and blue cars, as photographed here in 1953.",
+     "iso": {
+      "part": "history:mss-track-5:0",
+      "badge": [
+       -150,
+       -150
+      ]
+     },
+     "confidence": "written"
+    },
+    {
+     "n": 11,
+     "title": "A Seaboard diesel",
+     "text": "Drawn plain. Seaboard E8s are recorded here in 1955.",
+     "iso": {
+      "part": "history:mss-track-2:0",
+      "badge": [
+       -150,
+       -150
+      ]
+     },
+     "confidence": "approximate"
+    }
+   ]
+  },
+  {
+   "title": "The building",
+   "callouts": [
+    {
+     "n": 12,
+     "title": "The train shed",
+     "text": "Riveted steel by Wilson Brothers, 1900, 123 by 517 ft: trusses 18 ft apart, a monitor on the ridge.",
+     "iso": {
+      "part": "history:mss-s-truss-2",
+      "dy": -0.2,
+      "badge": [
+       0,
+       -180
+      ]
+     },
+     "cross": {
+      "part": "history:mss-s-truss-3",
+      "dx": 0.12,
+      "dy": -0.1,
+      "badge": [
+       220,
+       -90
+      ]
+     }
+    },
+    {
+     "n": 13,
+     "title": "On trestles",
+     "text": "Steel trestles, and bridges over Main Street.",
+     "iso": {
+      "part": "history:mss-d-xbrace-e-2",
+      "badge": [
+       160,
+       60
+      ]
+     },
+     "section": {
+      "part": "history:mss-d-post-2-3",
+      "badge": [
+       170,
+       40
+      ]
+     },
+     "confidence": "written"
+    },
+    {
+     "n": 14,
+     "title": "Baggage room",
+     "text": "Under the concourse, with lifts to the platforms; the mail room by 1969.",
+     "iso": {
+      "part": "history:mss-h-lift-screen-0",
+      "badge": [
+       150,
+       -150
+      ]
+     },
+     "section": {
+      "part": "history:mss-h-bag-counter",
+      "badge": [
+       0,
+       150
+      ]
+     }
+    },
+    {
+     "n": 15,
+     "title": "Offices",
+     "text": "Railroad offices; the Railroad YMCA’s rooms in 1901.",
+     "iso": {
+      "part": "history:mss-h-corridor-second-n-p5",
+      "badge": [
+       -60,
+       -160
+      ]
+     },
+     "section": {
+      "part": "history:mss-h-floor-third",
+      "dx": 0.25,
+      "badge": [
+       140,
+       -120
+      ]
+     },
+     "confidence": "written"
+    },
+    {
+     "n": 16,
+     "title": "The clock tower",
+     "text": "A clock on each side; about 148 ft to the finial, measured on 1971 photographs.",
+     "iso": {
+      "part": "history:mss-h-tower-clock-s",
+      "badge": [
+       -30,
+       -500
+      ]
+     },
+     "section": {
+      "part": "history:mss-h-tower-dome",
+      "badge": [
+       -170,
+       0
+      ]
+     },
+     "confidence": "written"
+    }
+   ]
+  }
+ ],
+ "key": [
+  [
+   "drawn",
+   "drawn from a plan, a section or a survey map"
+  ],
+  [
+   "written",
+   "from written accounts, photographs or timetables"
+  ],
+  [
+   "approximate",
+   "approximate: no drawing or photograph shows it"
+  ]
+ ],
+ "marksNote": "The same marks stand by each place the trains went.",
+ "sources": "Sources: The Railroad Gazette, July 13, 1900; The Times, Richmond, November 24, 1901; Sanborn atlases, 1905 and 1952; HAER VA-4 and HABS VA-848 (Library of Congress); National Register and Landmark nominations; photographs, about 1905–1971; Official Guide, December 1952; OpenStreetMap; USGS 3DEP.",
+ "notes": "Rooms are traced from plans published in 1900; their uses in 1952 are not all recorded. Lifted away: the Pullman office, barber shop, ladies’ retiring room and the concourse’s ticket office. From 1920 Virginia’s Corporation Commission could require separate waiting rooms by race; no source found says where they were here.",
+ "credit": "Drawn with isoscape, built with Claude  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Shed after HAER VA-4 (Library of Congress)",
+ "travelerKey": "A traveler to scale, 1.75 m (5 ft 9 in) tall. The red line is the way to the train.",
+ "wayfinding": [
+  {
+   "id": "co",
+   "at": [
+    -77.4288215,
+    37.5346294
+   ],
+   "place": "top-right",
+   "confidence": "written",
+   "lines": [
+    "Chesapeake and Ohio, on the east side:",
+    "the George Washington's Richmond section, east to Phoebus,",
+    "and west to Gordonsville, where it joined the main train",
+    "between Washington and Cincinnati and Louisville"
+   ],
+   "sources": [
+    "Wikipedia, George Washington (train): a section divided from the main train at Gordonsville and operated through Richmond to Phoebus",
+    "The Railroad Gazette, July 13, 1900, site plan; Sanborn atlas, 1952 (which side each railroad used)"
+   ],
+   "text": "Chesapeake and Ohio, on the east side: the George Washington's Richmond section, east to Phoebus, and west to Gordonsville, where it joined the main train between Washington and Cincinnati and Louisville.",
+   "part": "history:mss-d-track-e-7",
+   "dx": 0.3
+  },
+  {
+   "id": "sal",
+   "at": [
+    -77.429853,
+    37.534162
+   ],
+   "place": "bottom-left",
+   "confidence": "written",
+   "lines": [
+    "Seaboard Air Line,",
+    "on the west side:",
+    "south by Raleigh,",
+    "Columbia and",
+    "Savannah to",
+    "Jacksonville and",
+    "Miami; north by",
+    "the RF&P to",
+    "Washington and",
+    "New York"
+   ],
+   "sources": [
+    "Official Guide, December 1952: the Orange Blossom Special, as transcribed by streamlinerschedules.com",
+    "The Railroad Gazette, July 13, 1900, site plan; Sanborn atlas, 1952; SEABOARD lettered on the west trestle in Detroit Publishing photographs"
+   ],
+   "text": "Seaboard Air Line, on the west side: south by Raleigh, Columbia and Savannah to Jacksonville and Miami; north by the RF&P to Washington and New York.",
+   "part": "history:mss-d-track-w-s3",
+   "label": [
+    340,
+    840
+   ]
+  }
+ ],
+ "crossSection": {
+  "region": "main-street-station-shed-section",
+  "caption": "The shed cut across, looking north"
+ },
+ "columnEnd": 6560
+}
