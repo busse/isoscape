@@ -251,12 +251,12 @@ def main():
         if ins.get('whySource'):
             lines += [(ln, 'italic', 46, DIM) for ln in wrap(ins['whySource'], 'italic', 46, bw)]
         caption = wrap(ins.get('caption', ''), 'italic', 46, bw)
-        top = by - (150 if ins.get('title') else 0)
-        tall = (by - top) + bh + 60 + 62 * len(caption) + 40 + sum(72 if ln else 26 for ln in lines)
-        out.append(f'<rect x="{bx - 40:.1f}" y="{top - 70:.1f}" width="{bw + 80:.1f}" height="{tall + 110:.1f}" fill="{PAPER}" stroke="{INK}" stroke-width="4"/>')
+        ptop = by - (150 if ins.get('title') else 0)
+        tall = (by - ptop) + bh + 60 + 62 * len(caption) + 40 + sum(72 if ln else 26 for ln in lines)
+        out.append(f'<rect x="{bx - 40:.1f}" y="{ptop - 70:.1f}" width="{bw + 80:.1f}" height="{tall + 110:.1f}" fill="{PAPER}" stroke="{INK}" stroke-width="4"/>')
         if ins.get('title'):
-            out.append(text(bx, top + 10, ins['title'].upper(), 58, 'bold', DIM, family=SANS, spacing=4))
-            out.append(f'<line x1="{bx}" y1="{top + 42}" x2="{bx + bw}" y2="{top + 42}" stroke="{INK}" stroke-width="4"/>')
+            out.append(text(bx, ptop + 10, ins['title'].upper(), 58, 'bold', DIM, family=SANS, spacing=4))
+            out.append(f'<line x1="{bx}" y1="{ptop + 42}" x2="{bx + bw}" y2="{ptop + 42}" stroke="{INK}" stroke-width="4"/>')
         out.append(f'<svg x="{bx:.1f}" y="{by:.1f}" width="{bw:.1f}" height="{bh:.1f}" viewBox="0 0 {iw:.1f} {ih:.1f}">{ibody}</svg>')
         cy = by + bh + 70
         for line in caption:
