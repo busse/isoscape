@@ -44,6 +44,7 @@ for outside review".
 | 2026-11-18 | fact check (Opus 5.5, independent) with one fix round | 10 | 24 min (13:04–13:28 ET) | 414,627 | 203 | 0 | 143 claims in a ledger: 95 confirmed, 34 reworded, 6 contradicted and fixed, 4 unsupported and reworded or cut, 4 not opened; 44 changes | Silver (1984) and Campbell (2012) unseen; three more sources not opened; sheet 318 against aerials |
 | 2026-11-18 | page round 1 (Opus 5.5), from the owner's review of the explorer view: headline and deck, numbered figures, link fix, lightbox and grid, route section as prose | owner's review (not in the estimate) | 20 min (13:59–14:19 ET) | 297,108 | 93 | 0 | all five points; 24 figures; 100 in-page links tested; Mac preview updated | phone layout scrolls sideways (older fault) |
 | 2026-11-18 | island trivia image (Opus 5.5) | side request (not in the estimate) | 3 min | 122,330 | 32 | 0 | five unlabeled crops and trivia notes | |
+| 2026-11-18 | page round 2 (Opus 5.5), from the owner's request: compare sliders reusing the viewer's divider; all four years in one shared frame | owner's review (not in the estimate) | 17 min (14:32–14:49 ET) | 262,877 | 101 | 0 | four sliders (Figs. 4, 6, 15, 21); shared `compare.ts`; Mac preview updated | phone layout; divider tab clipped at 0% and 100% |
 
 ## Before the estimate (not counted against it)
 
