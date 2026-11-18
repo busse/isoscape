@@ -37,6 +37,7 @@ for outside review".
 | Date | Run | Lines | Wall clock | Tokens | Tool calls | Restarts | Delivered | Left undone |
 |---|---|---|---|---|---|---|---|---|
 | 2026-11-18 | jw-text (Opus 5.5): story page, timeline, cap study area, ten method charts, How we know | 4, 5, 6, 9 | 31 min (12:45–13:16 ET) | 440,516 | 178 | 0 | page (unlisted), 12 charts by script, 45 claims checked against opened sources, 11 fact-check items | slots for 1925, the island, Second Street; 4 groups of facts still resting on secondary sources; three small number mismatches (count 235 vs 238; bank 10.1 vs 9 m; 1st Street cut 6.2 vs 6.4 m) |
+| 2026-11-18 | jw-1925 (Opus 5.5): find, place and trace the 1925 volume; 1925 epoch; named buildings | 8 | 38 min (11:45–12:23 ET) | 377,761 | 194 | 0 | 15 of 15 sheets, 3,907 outlines, 46 named buildings, 1925 scene builds, three pairs with 1952 | outlines too busy at view size (many vertices); Apostle Town's own streets; stories beyond named buildings; scans not yet on the Mac |
 
 ## Before the estimate (not counted against it)
 
@@ -46,3 +47,4 @@ draft and the outline were done November 17–18, 2026, before this estimate was
 ## Notes for the case study
 
 - The text-and-charts run was estimated at 4½–6 agent-days (lines 4, 5, 6, 9) and took one 31-minute run of 440,000 tokens. Either the estimate was far too high or the unit is wrong; the fact check will show how much of that work stands.
+- The 1925 state was estimated at 3–4 agent-days and its first run took 38 minutes and 378,000 tokens. It could reuse the 1952 fits by matching each 1925 sheet to its 1952 reprint, which the estimate did not foresee.
