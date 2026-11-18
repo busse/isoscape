@@ -836,3 +836,58 @@ export const travelerItem = (view: View, pal: Palette, id: string, at: Vec2, z: 
   const hull: Ring = [[at[0] - r, at[1] - r], [at[0] + r, at[1] - r], [at[0] + r, at[1] + r], [at[0] - r, at[1] + r]]
   return { id, kind: 'building', hull, zMin: z, zMax: z + 1.75, key: at[1], name: 'A traveler, drawn to scale (1.75 m)', dots: [], shapes }
 }
+
+/**
+ * The traveler's way in the cutaway (`cutaway.route`): a polyline through points [view meters,
+ * scene height], cut into dashes the length of the flat section's (the palette's `routeDash`,
+ * times `weight`), measured along the line on the screen, so the dashes read evenly whichever
+ * way it runs. Each dash is an item of its own, with a footprint the width of the line, so it
+ * sorts among what stands near it: a dash behind a wall or under a floor is hidden like
+ * anything else there.
+ */
+export const routeItems = (view: View, pal: Palette, pts: readonly (readonly [Vec2, number])[], weight: number): Item[] => {
+  const [on, off] = pal.routeDash.map((d) => d * weight)
+  const width = pal.routeWidth * weight
+  const at = (i: number, t: number): [Vec2, number] => {
+    const [a, za] = pts[i]
+    const [b, zb] = pts[i + 1]
+    return [[a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t], za + (zb - za) * t]
+  }
+  // Every segment's screen length, and the dashes laid along their sum.
+  const lens = pts.slice(1).map(([b, zb], i) => {
+    const [a, za] = pts[i]
+    const p = view.toScreen(a, za)
+    const q = view.toScreen(b, zb)
+    return Math.hypot(q[0] - p[0], q[1] - p[1])
+  })
+  const total = lens.reduce((s, l) => s + l, 0)
+  const where = (d: number): [number, number] => {
+    let i = 0
+    while (i < lens.length - 1 && d > lens[i]) { d -= lens[i]; i++ }
+    return [i, lens[i] > 0 ? Math.min(1, d / lens[i]) : 0]
+  }
+  const items: Item[] = []
+  for (let d = 0, k = 0; d < total; d += on + off, k++) {
+    const [i0, t0] = where(d)
+    const [i1, t1] = where(Math.min(total, d + on))
+    // A dash that turns a corner keeps the corner's point.
+    const run: [Vec2, number][] = [at(i0, t0)]
+    for (let i = i0; i < i1; i++) run.push(at(i, 1))
+    run.push(at(i1, t1))
+    const xs = run.map(([p]) => p)
+    const r = 0.06
+    const hull = convexHull(xs.flatMap(([x, y]): Vec2[] => [[x - r, y - r], [x + r, y - r], [x + r, y + r], [x - r, y + r]]))
+    items.push({
+      id: `route:${k}`,
+      kind: 'building',
+      hull,
+      zMin: Math.min(...run.map(([, z]) => z)),
+      zMax: Math.max(...run.map(([, z]) => z)),
+      key: xs.reduce((s, p) => s + p[1], 0) / xs.length,
+      name: 'The way to the train',
+      shapes: [{ pts: run.map(([p, z]) => view.toScreen(p, z)), fill: 'none', line: true, stroke: { color: pal.route, width, round: true } }],
+      dots: [],
+    })
+  }
+  return items
+}

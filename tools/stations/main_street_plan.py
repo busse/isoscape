@@ -244,48 +244,67 @@ def build(part, rect, ring, plane, SRC, L):
             u0, u1 = a0 + (a1 - a0) * i / n_p, a0 + (a1 - a0) * (i + 1) / n_p
             p(f'floor-{nm}' + ('' if i == 0 else f'-p{i}'), f'Main Street Station: {label}', rect(u0, u1, b0, b1), z - 0.35, z, 'floor', 'drawn',
               f'The {label}, in the roof: {use}.' + FL, PLAN + HABS, within='mss-h-roof')
+    RIDGE_NOTE = (' Its ridge, about 41.4 m above sea level (some 115 ft over Main Street), runs parallel to the street about 11 m long between '
+                  'its finials, as HABS photograph VA-848-10 (1971) shows it; measured on that photograph against the 102-ft front, with '
+                  'VA-848-11 and -12 (approximate, to within about 1.5 m). The 1900 section draws the ridge about a meter lower.')
     p('roof', 'Main Street Station: roof', rect(*R0), CORNICE, RIDGE, 'tile', 'written',
-      'The very steep hipped roof of dark red tile (The Railroad Gazette, 1900; HABS VA-848), drawn in courses about 1.4 m apart. Its pitch and ridge are scaled from photographs; the section of 1900 draws it taller.',
-      PLAN + HABS + PH, shape='inset', levels=roof_levels)
+      'The very steep hipped roof of dark red tile (The Railroad Gazette, 1900; HABS VA-848), drawn in courses about 1.4 m apart.' + RIDGE_NOTE,
+      PLAN + HABS + PH + [SRC['habs-photo-12']], shape='inset', levels=roof_levels)
     for end, ra in (('w', R0[0] + run), ('e', R0[1] - run)):
-        p(f'ridge-finial-{end}', 'Main Street Station: roof', rect(ra - 0.14, ra + 0.14, HH_N / 2 - 0.14, HH_N / 2 + 0.14), RIDGE, RIDGE + 2.2, 'iron', 'written',
-          'A bronze finial at an end of the ridge (HABS VA-848: "decorative bronze finials appear at each end of the ridge"), drawn as a plain spire. Its height and form are approximate, from the photographs.', HABS + PH,
-          shape='inset', levels=[[0, 0, 9], [0.5, 0.06, 9], [2.2, 0.139, 9]])
+        p(f'ridge-finial-{end}', 'Main Street Station: roof', rect(ra - 0.14, ra + 0.14, HH_N / 2 - 0.14, HH_N / 2 + 0.14), RIDGE, RIDGE + 3.6, 'iron', 'written',
+          'A bronze finial at an end of the ridge (HABS VA-848: "decorative bronze finials appear at each end of the ridge"), drawn as a plain spire. About 3.6 m tall on HABS photograph VA-848-10; its form is approximate.', HABS + PH,
+          shape='inset', levels=[[0, 0, 9], [0.6, 0.06, 9], [3.6, 0.139, 9]])
     # The chimney near the east end (HABS photograph VA-848-14: a tall paneled stack).
     ca, cb = HH_E - 3.2, HH_N - 5.0
-    p('chimney', 'Main Street Station: chimney', rect(ca - 0.6, ca + 0.6, cb - 0.6, cb + 0.6), CORNICE, RIDGE - 4.0, 'brick', 'written',
-      'The tall paneled chimney near the east end of the roof (HABS VA-848, photograph 14). Its place along the roof and its height are scaled from photographs (approximate).', HABS + PH, over='mss-h-roof')
-    p('chimney-cap', 'Main Street Station: chimney', rect(ca - 0.75, ca + 0.75, cb - 0.75, cb + 0.75), RIDGE - 4.0, RIDGE - 3.6, 'stone', 'written',
+    CH = L['CHIMNEY_TOP']
+    p('chimney', 'Main Street Station: chimney', rect(ca - 0.6, ca + 0.6, cb - 0.6, cb + 0.6), CORNICE, CH, 'brick', 'written',
+      'The tall paneled chimney near the east end of the roof (HABS VA-848, photograph 14). Its place along the roof is approximate; its top, about 35.3 m above sea level, is measured on HABS photograph VA-848-10 (approximate).', HABS + PH, over='mss-h-roof')
+    p('chimney-cap', 'Main Street Station: chimney', rect(ca - 0.75, ca + 0.75, cb - 0.75, cb + 0.75), CH, CH + 0.4, 'stone', 'written',
       'The chimney\'s cap (HABS photograph VA-848-14). Size approximate.', HABS + PH, over='mss-h-roof')
-    # Dormers on the front slope: a lower row of pedimented dormers over the bays, an upper row
-    # of small hipped ones between them (HABS photographs 12 and 14).
-    DORM = ('A dormer on the roof\'s front: the lower row pedimented, with scroll consoles, the upper row small and hipped (HABS VA-848; '
-            'HABS photographs VA-848-12 and -14). Places and sizes approximate, from photographs.')
-    lower = [(BAYS[k] + BAYS[k + 1]) / 2 for k in range(0, 5)] + [ec]
-    upper = [BAYS[k] for k in (1, 2, 3, 4)]
-    for row, (z0, z1, centers) in enumerate([(CORNICE + 0.5, CORNICE + 2.7, lower), (CORNICE + 4.4, CORNICE + 6.0, upper)]):
-        for j, c in enumerate(centers):
+    # Dormers on the front slope (HABS photographs VA-848-10 and -14): a lower row over the five
+    # bays and one beyond, pedimented over the first, third and fifth bays and small and hipped
+    # between them; an upper row of five small hipped dormers on the bay lines between.
+    DORM = ('A dormer on the roof\'s front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row '
+            'small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 '
+            'against the 102-ft front (approximate).')
+    mids = [(BAYS[k] + BAYS[k + 1]) / 2 for k in range(5)]
+    lower = [(c, k % 2 == 0) for k, c in enumerate(mids + [mids[4] + (mids[4] - mids[3])])]
+    upper = [(BAYS[k], False) for k in (1, 2, 3, 4, 5)]
+    rows = [(lower, CORNICE + 0.8, {True: (CORNICE + 3.6, 0.95, 1.2), False: (CORNICE + 2.8, 0.6, 1.0)}),
+            (upper, CORNICE + 4.3, {False: (CORNICE + 6.6, 0.6, 1.6)})]
+    for row, (centers, z0, kinds) in enumerate(rows):
+        for j, (c, ped) in enumerate(centers):
+            z1, w, cap = kinds[ped]
             b_front = R0[2] + (z0 - CORNICE) * k_in - 0.4
             b_back = R0[2] + (z1 - CORNICE) * k_in + 0.6
-            w = 0.95 if row == 0 else 0.6
             p(f'dormer-{row}-{j}', 'Main Street Station: dormer', rect(c - w, c + w, b_front, b_back), z0, z1, 'brick', 'written', DORM, HABS + PH, over='mss-h-roof')
-            if row == 0:
-                # A pediment: a low gable across the front.
-                p(f'dormer-{row}-{j}-roof', 'Main Street Station: dormer', rect(c - w - 0.15, c + w + 0.15, b_front - 0.15, b_front + 0.25), z1, z1 + 0.9, 'stone', 'written', DORM, HABS + PH,
-                  shape='frame', members=[[0, 0, round(2 * w + 0.3, 3), 0, round(w + 0.15, 3), 0.9]], over='mss-h-roof')
+            if ped:
+                # A pediment: a gable across the front.
+                p(f'dormer-{row}-{j}-roof', 'Main Street Station: dormer', rect(c - w - 0.15, c + w + 0.15, b_front - 0.15, b_front + 0.25), z1, z1 + cap, 'stone', 'written', DORM, HABS + PH,
+                  shape='frame', members=[[0, 0, round(2 * w + 0.3, 3), 0, round(w + 0.15, 3), cap]], over='mss-h-roof')
             else:
-                p(f'dormer-{row}-{j}-roof', 'Main Street Station: dormer', rect(c - w - 0.15, c + w + 0.15, b_front - 0.15, b_back), z1, z1 + 1.1, 'tile', 'written', DORM, HABS + PH,
-                  shape='inset', levels=[[0, 0, 9], [1.1, w, 9]], over='mss-h-roof')
+                p(f'dormer-{row}-{j}-roof', 'Main Street Station: dormer', rect(c - w - 0.15, c + w + 0.15, b_front - 0.15, b_back), z1, z1 + cap, 'tile', 'written', DORM, HABS + PH,
+                  shape='inset', levels=[[0, 0, 9], [cap, w, 9]], over='mss-h-roof')
             p(f'dormer-{row}-{j}-glass', 'Main Street Station: dormer', ring([(c - w + 0.3, b_front - 0.04), (c + w - 0.3, b_front - 0.04), (c + w - 0.3, b_front), (c - w + 0.3, b_front)]), z0 + 0.4, z1 - 0.3, 'glass', 'written', DORM, HABS + PH, over='mss-h-roof')
 
     # ---- the clock tower ------------------------------------------------------------------------
-    TW = ('The clock tower at the southwest corner, 110 ft high with a clock face on each side (The Railroad Gazette, 1900; HABS VA-848; '
-          'SAH Archipedia). Its outline is OSM\'s; its stages are scaled from photographs (approximate).')
-    TSRC = PLAN + HABS + [SRC['archipedia'], SRC['osm-tower']] + PH
+    # Its stages are measured in round 4 on HABS photographs VA-848-10, -11 and -12 (1971) against
+    # the 102-ft front (main_street.py, levels): a plain shaft to a corbelled balcony, a clock stage
+    # with coupled columns at its corners, an entablature, a low drum and a ribbed dome about half
+    # the clock stage's height, and the finial. The Railroad Gazette (1900) gave the tower as
+    # designed as 110 ft high; the tower as built and photographed is taller, its finial about
+    # 148 ft over Main Street, and Sanborn's "Clock Tower 90'" (1905, 1952) fits its shaft.
+    TW = ('The clock tower at the southwest corner, with a clock face on each side (The Railroad Gazette, 1900; HABS VA-848). Its outline is '
+          'OSM\'s. Its stages are measured on HABS photographs VA-848-10, -11 and -12 (1971) against the 102-ft front, approximate to within '
+          'about 1.5 m: the shaft to about 90 ft over the ground floor, as the Sanborn atlases (1905, 1952) mark it ("Clock Tower 90\'"), '
+          'the finial about 148 ft over Main Street. The 110 ft given in 1900 was for the tower as then designed, and does not fit the '
+          'photographs.')
+    TSRC = PLAN + HABS + [SRC['archipedia'], SRC['osm-tower'], SRC['habs-photo-12'], SRC['habs-photo-1971'], SRC['sanborn-1905'], SRC['sanborn-1952']] + PH
     a0, a1, b0, b1 = TOWER
-    SHAFT = FF + 17.5
+    SHAFT, ZC, R = L['TOWER_SHAFT'], L['CLOCK_Z'], L['CLOCK_R']
+    STAGE, DRUM, DOME, FINIAL = L['STAGE_TOP'], L['DRUM_TOP'], L['DOME_TOP'], L['FINIAL_TOP']
     cx, cb = (a0 + a1) / 2, (b0 + b1) / 2
-    p('tower', 'Main Street Station: clock tower', rect(a0, a1, b0, b1), G - 0.4, SHAFT, 'brick', 'written', TW, TSRC)
+    p('tower', 'Main Street Station: clock tower', rect(a0, a1, b0, b1), G - 0.4, SHAFT - 1.4, 'brick', 'written', TW, TSRC)
     TB_ = 'The rusticated stone base of the tower, as the front\'s base continues round it (HABS VA-848; Detroit Publishing 4a10737). Courses about 0.55 m, approximate.'
     nb = round((FF - G + 0.4) / 0.55)
     for c in range(nb):
@@ -295,42 +314,58 @@ def build(part, rect, ring, plane, SRC, L):
         for j, rg in enumerate(sides):
             p(f'tower-base-{c}-{j}', 'Main Street Station: clock tower', rg, z0, z1, 'stone', 'written', TB_, TSRC)
     BAND = 'A stone band round the tower between its stages, as the photographs show them. Places approximate.'
-    for k, zb in enumerate((L2 + 0.1, FF + 12.3)):
+    for k, zb in enumerate((L2 + 0.1, FF + 11.6)):
         p(f'tower-band-{k}', 'Main Street Station: clock tower', rect(a0 - 0.15, a1 + 0.15, b0 - 0.15, b1 + 0.15), zb, zb + 0.3, 'stone', 'approximate', BAND, PH)
-    p('tower-cornice', 'Main Street Station: clock tower', rect(a0 - 0.3, a1 + 0.3, b0 - 0.3, b1 + 0.3), SHAFT - 0.2, SHAFT + 0.3, 'stone', 'written', TW, TSRC)
+    BALC = ('The balcony at the shaft\'s top, on a corbel table, with a balustrade round the clock stage (HABS photographs VA-848-10 to -12; '
+            'Detroit Publishing 4a10737). Its height is measured on VA-848-10 (approximate); its corbels and balustrade are drawn plain.')
+    p('tower-corbels', 'Main Street Station: clock tower', rect(a0 - 0.2, a1 + 0.2, b0 - 0.2, b1 + 0.2), SHAFT - 1.4, SHAFT - 0.2, 'stone', 'written', BALC, TSRC)
+    p('tower-cornice', 'Main Street Station: clock tower', rect(a0 - 0.4, a1 + 0.4, b0 - 0.4, b1 + 0.4), SHAFT - 0.2, SHAFT + 0.3, 'stone', 'written', BALC, TSRC)
+    e0, e1, f0, f1 = a0 - 0.35, a1 + 0.35, b0 - 0.35, b1 + 0.35
+    for k, rg in enumerate((rect(e0, e1, f0, f0 + 0.15), rect(e1 - 0.15, e1, f0 + 0.15, f1 - 0.15), rect(e0, e1, f1 - 0.15, f1), rect(e0, e0 + 0.15, f0 + 0.15, f1 - 0.15))):
+        p(f'tower-balcony-rail-{k}', 'Main Street Station: clock tower', rg, SHAFT + 0.3, SHAFT + 0.75, 'stone', 'written', BALC, TSRC)
     PIN = 'A pinnacle at a corner of the balcony under the clock stage, as the Detroit Publishing photographs show them. Size approximate.'
     for k, (x, y) in enumerate([(a0 - 0.15, b0 - 0.15), (a1 + 0.15, b0 - 0.15), (a1 + 0.15, b1 + 0.15), (a0 - 0.15, b1 + 0.15)]):
         p(f'tower-pinnacle-{k}', 'Main Street Station: clock tower', rect(x - 0.2, x + 0.2, y - 0.2, y + 0.2), SHAFT + 0.3, SHAFT + 1.9, 'stone', 'approximate', PIN, PH,
           shape='inset', levels=[[0, 0, 9], [0.9, 0, 9], [1.6, 0.19, 9]])
-    p('tower-clock-stage', 'Main Street Station: clock tower', rect(a0 + 0.3, a1 - 0.3, b0 + 0.3, b1 - 0.3), SHAFT + 0.3, FF + 21.3, 'brick', 'written', TW, TSRC)
-    p('tower-entablature', 'Main Street Station: clock tower', rect(a0, a1, b0, b1), FF + 21.3, FF + 21.8, 'stone', 'written',
-      'The entablature on the clock stage\'s coupled columns (HABS VA-848). Size approximate.', TSRC)
-    p('tower-dome', 'Main Street Station: clock tower', rect(a0 + 0.2, a1 - 0.2, b0 + 0.2, b1 - 0.2), FF + 21.8, FF + 25.4, 'tile', 'written',
-      'The tower\'s square ribbed dome (HABS VA-848; HABS photograph VA-848-11), scaled from photographs: approximate.', TSRC, shape='inset',
-      levels=[[0, 0, 9], [0.4, 0.03, 9], [0.8, 0.12, 9], [1.2, 0.27, 9], [1.6, 0.48, 9], [2.0, 0.75, 9], [2.4, 1.1, 9], [2.8, 1.55, 9], [3.2, 2.1, 9], [3.6, 2.9, 9]])
-    p('tower-lantern', 'Main Street Station: clock tower', rect(cx - 0.3, cx + 0.3, cb - 0.3, cb + 0.3), FF + 25.3, FF + 25.9, 'stone', 'written',
+    p('tower-clock-stage', 'Main Street Station: clock tower', rect(a0 + 0.3, a1 - 0.3, b0 + 0.3, b1 - 0.3), SHAFT + 0.3, STAGE, 'brick', 'written', TW, TSRC)
+    p('tower-entablature', 'Main Street Station: clock tower', rect(a0 - 0.1, a1 + 0.1, b0 - 0.1, b1 + 0.1), STAGE, STAGE + 0.5, 'stone', 'written',
+      'The entablature on the clock stage\'s coupled columns (HABS VA-848), its top measured on HABS photograph VA-848-10. Size approximate.', TSRC)
+    p('tower-drum', 'Main Street Station: clock tower', rect(a0 + 0.45, a1 - 0.45, b0 + 0.45, b1 - 0.45), STAGE + 0.5, DRUM, 'stone', 'written',
+      'The low base of the dome over the entablature (HABS photographs VA-848-10 and -13). Height measured on VA-848-10 (approximate).', TSRC)
+    # The dome: a quarter-ellipse in profile, its crown about half the clock stage's height
+    # above its foot (HABS VA-848-10: dome and drum 51 px over a 91-px clock stage).
+    H = DOME - DRUM
+    w = (a1 - a0 - 1.0) / 2
+    dome = [[round(H * k / 10, 3), round(w * (1 - math.sqrt(max(0.0, 1 - (k / 10) ** 2))), 3), 9] for k in range(11)]
+    p('tower-dome', 'Main Street Station: clock tower', rect(a0 + 0.5, a1 - 0.5, b0 + 0.5, b1 - 0.5), DRUM, DOME, 'tile', 'written',
+      'The tower\'s square ribbed dome of tile (HABS VA-848; HABS photographs VA-848-10, -11 and -13), its crown about 48.7 m above sea level, '
+      'measured on VA-848-10 against the 102-ft front: approximate.', TSRC, shape='inset', levels=dome)
+    p('tower-lantern', 'Main Street Station: clock tower', rect(cx - 0.35, cx + 0.35, cb - 0.35, cb + 0.35), DOME - 0.1, DOME + 0.6, 'stone', 'written',
       'The base of the bronze finial on the dome (HABS VA-848). Size approximate.', TSRC)
-    p('tower-finial', 'Main Street Station: clock tower', rect(cx - 0.22, cx + 0.22, cb - 0.22, cb + 0.22), FF + 25.9, G + 33.5, 'iron', 'written',
-      'The bronze finial, its top 110 ft above the ground (The Railroad Gazette, 1900; SAH Archipedia), drawn as a plain spire; its form is approximate.', TSRC,
-      shape='inset', levels=[[0, 0, 9], [0.8, 0.05, 9], [round(G + 33.5 - FF - 25.9, 3), 0.219, 9]])
-    zc = FF + 19.4
-    r = 1.15
+    p('tower-finial', 'Main Street Station: clock tower', rect(cx - 0.22, cx + 0.22, cb - 0.22, cb + 0.22), DOME + 0.6, FINIAL, 'iron', 'written',
+      'The bronze finial (HABS VA-848), drawn as a plain spire; its tip about 148 ft over Main Street, measured on HABS photographs VA-848-10 '
+      'and -12 against the 102-ft front (approximate, to within about 8 ft). The Railroad Gazette (1900) and SAH Archipedia give 110 ft, '
+      'which fits the tower as designed in 1900, not as photographed. Its form is approximate.', TSRC,
+      shape='inset', levels=[[0, 0, 9], [0.8, 0.05, 9], [round(FINIAL - DOME - 0.6, 3), 0.219, 9]])
+    r = R
     disc = []
     for i in range(20):
         t = 2 * math.pi * i / 20
         disc += [round(r + r * math.cos(t), 3), round(r + r * math.sin(t), 3)]
-    CLK = 'A clock face, one on each of the tower\'s four sides (The Railroad Gazette, 1900; HABS VA-848). Size approximate.'
-    p('tower-clock-s', 'Main Street Station: clock', plane(cx - r, b0 + 0.26, cx + r, b0 + 0.26, 0.04), zc - r, zc + r, 'plaster', 'written', CLK, TSRC, shape='frame', members=[disc])
-    p('tower-clock-e', 'Main Street Station: clock', plane(a1 - 0.26, cb - r, a1 - 0.26, cb + r, 0.04), zc - r, zc + r, 'plaster', 'written', CLK, TSRC, shape='frame', members=[disc])
+    CLK = ('A clock face, one on each of the tower\'s four sides (The Railroad Gazette, 1900; HABS VA-848). About 9 ft across with its bezel and '
+           'its center about 40.3 m above sea level, measured on HABS photographs VA-848-10 and -12 (approximate).')
+    p('tower-clock-s', 'Main Street Station: clock', plane(cx - r, b0 + 0.26, cx + r, b0 + 0.26, 0.04), ZC - r, ZC + r, 'plaster', 'written', CLK, TSRC, shape='frame', members=[disc])
+    p('tower-clock-e', 'Main Street Station: clock', plane(a1 - 0.26, cb - r, a1 - 0.26, cb + r, 0.04), ZC - r, ZC + r, 'plaster', 'written', CLK, TSRC, shape='frame', members=[disc])
     HANDS = 'The clock\'s hands; the time they show is arbitrary (approximate).'
-    hands = [[r, r, r, r + 0.85, 0.09], [r, r, r + 0.55, r - 0.25, 0.12]]
-    p('tower-hands-s', 'Main Street Station: clock', plane(cx - r, b0 + 0.19, cx + r, b0 + 0.19, 0.04), zc - r, zc + r, 'coal', 'approximate', HANDS, TSRC, shape='frame', members=hands)
-    p('tower-hands-e', 'Main Street Station: clock', plane(a1 - 0.19, cb - r, a1 - 0.19, cb + r, 0.04), zc - r, zc + r, 'coal', 'approximate', HANDS, TSRC, shape='frame', members=hands)
+    hands = [[r, r, r, round(r + 0.74 * r, 3), 0.1], [r, r, round(r + 0.48 * r, 3), round(r - 0.22 * r, 3), 0.13]]
+    p('tower-hands-s', 'Main Street Station: clock', plane(cx - r, b0 + 0.19, cx + r, b0 + 0.19, 0.04), ZC - r, ZC + r, 'coal', 'approximate', HANDS, TSRC, shape='frame', members=hands)
+    p('tower-hands-e', 'Main Street Station: clock', plane(a1 - 0.19, cb - r, a1 - 0.19, cb + r, 0.04), ZC - r, ZC + r, 'coal', 'approximate', HANDS, TSRC, shape='frame', members=hands)
     for k, (x, y) in enumerate([(a0 + 0.3, b0 + 0.3), (a1 - 0.3, b0 + 0.3), (a1 - 0.3, b1 - 0.3), (a0 + 0.3, b1 - 0.3)]):
-        p(f'tower-column-{k}', 'Main Street Station: clock tower', rect(x - 0.42, x + 0.42, y - 0.42, y + 0.42), SHAFT + 0.3, FF + 21.3, 'stone', 'written',
+        p(f'tower-column-{k}', 'Main Street Station: clock tower', rect(x - 0.42, x + 0.42, y - 0.42, y + 0.42), SHAFT + 0.3, STAGE, 'stone', 'written',
           'Coupled engaged Corinthian columns frame each face of the clock (HABS VA-848); drawn as a plain pier at each corner. Size approximate.', TSRC)
-    TWIN = 'A window of the clock tower, as the photographs show them. Places and sizes approximate.'
-    for k, (z0, z1, pair) in enumerate([(G + 1.2, G + 3.6, False), (FF + 1.0, FF + 4.0, False), (L2 + 0.6, L2 + 2.6, True), (FF + 12.9, FF + 14.5, True), (FF + 15.1, FF + 16.7, True)]):
+    TWIN = ('A window of the clock tower, as the photographs show them: single at the ground and first floors, paired above. Heights '
+            'measured on HABS photograph VA-848-10 (approximate).')
+    for k, (z0, z1, pair) in enumerate([(G + 1.2, G + 3.6, False), (FF + 1.0, FF + 4.0, False), (L2 + 0.6, L2 + 2.6, True), (FF + 12.6, FF + 15.0, True), (FF + 16.8, FF + 19.2, True)]):
         xs = [(cx - 1.25, cx - 0.2), (cx + 0.2, cx + 1.25)] if pair else [(cx - 0.75, cx + 0.75)]
         for j, (x0, x1) in enumerate(xs):
             fb = b0 - (0.17 if z1 <= FF else 0.0)

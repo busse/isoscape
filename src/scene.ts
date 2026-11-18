@@ -23,7 +23,7 @@ import { makeTerrain, rasterize, settleWater, stillWater, traceShore, type Terra
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
-import { cutawayItems, partSolids, partTones, travelerItem, type PlacedPart } from './cutaway-scene.ts'
+import { cutawayItems, partSolids, partTones, routeItems, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
 import { alive, dropUnbuiltStreets, featureAlive, laterWorks, type Dated, type History, type HistoryFeature } from './history.ts'
 
@@ -49,8 +49,11 @@ export interface Shape {
   readonly seal?: boolean
   /** Dots painted with this shape, so whatever paints later can cover them. */
   readonly dots?: readonly Vec2[]
-  /** An open line's own stroke: color, width and dash, in pixels (a cutaway's dashed outline). */
-  readonly stroke?: { readonly color: string; readonly width: number; readonly dash: readonly [number, number] }
+  /**
+   * An open line's own stroke: color, width and dash, in pixels (a cutaway's dashed outline); no
+   * dash for a solid stroke, `round` for round caps (a dash of a cutaway's route).
+   */
+  readonly stroke?: { readonly color: string; readonly width: number; readonly dash?: readonly [number, number]; readonly round?: boolean }
 }
 
 export interface Item {
@@ -696,6 +699,11 @@ export const buildScene = (
           const at = view.toView(t.at[0], t.at[1])
           items.push(travelerItem(view, pal, `traveler:${k + 1}`, at, t.floor === undefined ? terrain.z(at) : zOf(t.floor), t.facing))
         })
+        if (cut.route !== undefined && cut.route.points.length > 1) {
+          const route = routeItems(view, pal, cut.route.points.map(([lon, lat, e]) => [view.toView(lon, lat), zOf(e)] as const), cut.route.weight ?? 1)
+          items.push(...route)
+          stats.routeDashes = route.length
+        }
       }
       for (const [k, v] of Object.entries(done.stats)) stats[k] = v
       cutPlaneOut = done.plane

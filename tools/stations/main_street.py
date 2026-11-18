@@ -18,8 +18,8 @@ tracks and platforms from the same section, its bays (18 ft) and longitudinal br
 plan and side elevation (sheet 2). The head house's rooms on its two public floors are traced
 from the architects' plans in The Railroad Gazette of July 13, 1900, which The Times of November
 24, 1901 describes as built; its floors' levels follow that article's section; its upper floors,
-of which no plan was found, follow HABS VA-848 (1969); its stonework, dormers and tower are
-scaled from photographs (HABS, Detroit Publishing) against the 110-ft tower and the 102-ft front.
+of which no plan was found, follow HABS VA-848 (1969); its stonework, dormers, roof and tower are
+scaled from photographs (HABS, Detroit Publishing) against the 102-ft front.
 
     python3 tools/stations/main_street.py   # writes history/main-street-station.json
 
@@ -110,6 +110,7 @@ SRC = {
     'sanborn-1952': 'https://www.loc.gov/item/sanborn09064_016/',
     'haer-photo-10': f'{LOC}/service/pnp/habshaer/va/va0800/va0897/photos/215883pv.jpg',
     'habs-photo-11': f'{LOC}/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg',
+    'habs-photo-12': f'{LOC}/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg',
     'habs-photo-a1': f'{LOC}/service/pnp/habshaer/va/va1800/va1805/photos/305475pv.jpg',
     'detroit-nw': 'https://www.loc.gov/item/2016818689/',
     'odc-1950': 'https://richmondrailroadmuseum.com/main-street-station',
@@ -120,18 +121,39 @@ SRC = {
 # ---- levels (meters above sea level) --------------------------------------------------------
 # The ground under Main Street and the shed is the elevation model's (USGS 3DEP). The ground
 # floor is set at the ground the model gives round the head house; the first floor, the level
-# of the waiting room, the concourse and the platforms, is scaled from photographs (HABS
-# VA-848-4, Detroit Publishing 4a10737) against the 110-ft tower: about 6.5 m higher.
+# of the waiting room, the concourse and the platforms, was scaled in round 1 from photographs
+# against the 110-ft tower, about 6.5 m higher. Round 4 measured the front square on (HABS
+# VA-848-10, 1971) against its own width, 102 ft: the first floor is 5.8 m (19 ft) over the
+# ground floor there, as the 1900 section draws it, and the 110-ft figure does not fit the
+# tower as built (see the tower's levels below). The floors are left where they were (every
+# room, platform and train hangs on them); the 0.7 m is a known difference.
 MAIN_ST = 6.1          # Main Street in front of the station (3DEP)
 FORECOURT = 7.0        # the sidewalk at the foot of the front steps (3DEP)
 G = 8.4                # the ground floor and the loggia (approximate)
 FF = 14.9              # the first floor and the platforms (approximate)
 L2 = FF + 7.2          # the second floor, the low gallery under the cornice
-CORNICE = FF + 11.8    # the main cornice, where the roof springs
+CORNICE = FF + 11.8    # the main cornice, where the roof springs (checked in round 4: within 0.7 m)
 BALUSTRADE = FF + 12.6
 L3 = FF + 12.2         # the third and fourth floors, in the roof, lit by its two rows of dormers
 L4 = FF + 15.6
-RIDGE = FF + 23.0
+# The roof's ridge and the tower's stages, measured in round 4 (approximate, to within about
+# 1.5 m) on three photographs: HABS VA-848-10 (1971, the front square on from the I-95
+# viaduct, scaled by the front's 102-ft width and checked by its 12-ft bays), VA-848-12 (1971,
+# from Main Street) and VA-848-11 (1971, from the east platform), each read from the cresting
+# over the cornice, which the model already set where these photographs put it. Points set back
+# from the front (the ridge, 9.8 m; the dome, 3.4 m) are corrected for the camera's distance,
+# about 40 m in VA-848-10 (estimated from a pedestrian on the sidewalk and the front steps). The 1900 section's ridge, about
+# 104 ft over the ground floor, agrees to within a meter. Sanborn's "Clock Tower 90'" (1905 and
+# 1952) matches the measured shaft, about 90 ft over the ground floor.
+RIDGE = FF + 26.5      # 41.4: was FF + 23.0 (37.9), which stood above the clock stage
+TOWER_SHAFT = 35.9     # the shaft's top, the balcony's floor under the clock stage (was 32.4)
+CLOCK_Z = 40.3         # the clock faces' centers (was 34.3)
+CLOCK_R = 1.35         # their radius: about 9 ft across with the bezel (was 1.15)
+STAGE_TOP = 43.0       # the clock stage's top, under its entablature (was 36.2)
+DRUM_TOP = 44.8        # the dome's foot, on a low drum over the entablature (was 36.7)
+DOME_TOP = 48.7        # the dome's crown (was 40.3)
+FINIAL_TOP = 51.6      # the finial's tip, about 148 ft over Main Street (was 41.9, "110 ft")
+CHIMNEY_TOP = 35.3     # the east chimney's top (was 33.9)
 DECK = FF - 0.75       # the tops of the deck's girders, under the ties
 DECK_BOTTOM = FF - 1.4
 

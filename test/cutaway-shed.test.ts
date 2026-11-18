@@ -65,7 +65,7 @@ test('a lifted part leaves the dashed outline of its upper face, shared edges on
   const ring: Vec2[] = [[0, 0], [10, 0], [10, 5], [0, 5]]
   const g = ghostItem(view, palette('paper'), 'g', frameSolids(ring, [[0, 1, 5, 3, 0.2], [5, 3, 10, 1, 0.2]]))
   assert.ok(g !== null)
-  assert.ok(g!.shapes.every((s) => s.stroke !== undefined && s.stroke.dash.length === 2))
+  assert.ok(g!.shapes.every((s) => s.stroke !== undefined && s.stroke.dash?.length === 2))
   assert.ok(g!.shapes.length >= 6 && g!.shapes.length <= 8)
 })
 

@@ -254,7 +254,7 @@ const crossing = (pl: NonNullable<Scene['cut']>, a: Vec2, b: Vec2): number | nul
 const paintItem = (it: Item): string => {
   const title = it.name === undefined ? '' : `<title>${esc(it.name)}</title>`
   return `<g data-id="${esc(it.id)}">${title}${it.shapes.map((s) => s.stroke !== undefined
-    ? `<path fill="none" stroke="${s.stroke.color}" stroke-width="${f(s.stroke.width)}" stroke-dasharray="${s.stroke.dash.map(f).join(' ')}" d="${path(s.pts, s.line !== true)}"/>`
+    ? `<path fill="none" stroke="${s.stroke.color}" stroke-width="${f(s.stroke.width)}"${s.stroke.dash === undefined ? '' : ` stroke-dasharray="${s.stroke.dash.map(f).join(' ')}"`} d="${path(s.pts, s.line !== true)}"/>`
     : `<path class="i" fill="${s.fill}" d="${path(s.pts)}"/>`).join('')}</g>`
 }
 
