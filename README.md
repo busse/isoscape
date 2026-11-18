@@ -259,6 +259,43 @@ owner must submit `https://busse.github.io/isoscape/sitemap.xml` once in
 `https://busse.github.io/isoscape/`, verify it with the HTML-file or meta-tag method, then
 Sitemaps → Add), and in Bing Webmaster Tools if wanted. After that, each publish updates it.
 
+### Publishing the site
+
+The live site, https://busse.github.io/isoscape/, is GitHub Pages serving the root of this
+repo's `gh-pages` branch (Settings → Pages: branch `gh-pages`, folder `/`). A push to
+`gh-pages` deploys it in a minute or two. Nothing else publishes it: there is no Actions
+workflow and no `docs/` site.
+
+`gh-pages` is a history of the built site, one commit per publish ("Explorer: …"): `index.html`,
+`p/`, `m/`, `s/`, `sitemap.xml`, `.nojekyll`, and `builds/`, the build folders the pages show
+(SVG, thumbnail, preview images, `meta.json`). Older builds of a view stay there, so share links
+to them keep working. The builds are not in `main`: `out/` is ignored, and each machine's
+`out/builds/` holds only what was built there. The site's own `builds/` is the record of what
+is live.
+
+To publish, from an up-to-date `main` (`git pull`), with an up-to-date checkout of `gh-pages`
+beside it (here `../isoscape-site`, made with `git worktree add ../isoscape-site gh-pages` or
+a clone of that branch):
+
+1. Copy any new build folders the change needs from `out/builds/` into
+   `../isoscape-site/builds/`. A change to pages or `isoscape.config.json` needs none.
+2. `node bin/isoscape.js explorer --out ../isoscape-site`. It lists the builds in the site's
+   own `builds/`, and rewrites `index.html`, `p/`, `m/`, `s/` and `sitemap.xml` from this
+   checkout's pages and config.
+3. Check it: `python3 tools/check/previews.py ../isoscape-site/` and
+   `PLAYWRIGHT_CORE=<dir> node tools/check/browser.mjs ../isoscape-site/`, and look at what
+   changed in a browser, desktop and phone-sized.
+4. In `../isoscape-site`, `git status` should show only what the change meant to touch.
+   Commit ("Explorer: <what changed>") and push `gh-pages`. Then run
+   `python3 tools/check/previews.py https://busse.github.io/isoscape/` once it is live.
+
+`tools/site.py <dest>` assembles a site from scratch: it copies the newest build of every view
+from `out/builds/` and moves every other build in `<dest>/builds/` out to
+`<dest>/../_site_trash_<id>`. Run it only on a machine whose `out/builds/` holds every build
+now live. Otherwise it drops views and old share links from the site, or rolls back a redraw.
+(On November 18, 2026 the copy of this repo in Chris's `ISO-TEST` folder lacked 28 of the 113
+live builds, among them the current Richmond 1925 and 1950.)
+
 ### Adding a page
 
 Pages are Markdown files in `pages/`, compiled into `out/index.html` whenever it is
