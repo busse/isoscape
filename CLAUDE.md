@@ -80,6 +80,7 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | the static pages for search engines (`p/`, `m/`, `sitemap.xml`), their URLs, head tags and JSON-LD | `static-pages.ts`; shared CSS from `explorer.ts`; "Static pages and search" in the README |
 | building an old commit into the archive | `backfill.ts` |
 | dated series: year built, era rules, curated history | `history.ts`, `asOf` in `scene.ts`, `history/<series>.json` |
+| ground put back before a later cut or fill | `ground` in `history/<series>.json`; `restoreGround`, `lowerGround` in `terrain.ts` |
 | tracing fire-insurance maps (georeference, trace, lifespans) | `tools/sanborn/*.py` → `history/sanborn/` |
 | a set: a big map framed by numbered boxes, its prints and page | `sets/<name>.json`, `tools/sets/set.py`; "Making a set" in the README |
 | one building modeled close up (parts, tracks, canopies, trains) | `tools/stations/<name>.py` → `history/<name>.json`; `src/parts.ts` |
@@ -150,6 +151,11 @@ sale. See "Release records" and "Stages and the board" in the README.
   Traced Sanborn buildings that fall on water, within 12 m of a viaduct's center line, on a
   track, or under ground more than 3 m above their floor near a later road (8 m anywhere) are
   left out whole, not trimmed; their heights are assumed from their material.
+- Ground put back before a later work (`ground` in a history file) is an estimate: inside its
+  outline the lidar is replaced by a membrane from the rim and the streets that crossed at grade,
+  or narrow banks are taken down (25 m opening). Relief smaller than the outline's width (a
+  knoll, a ravine head) is lost; in Jackson Ward the error is about 1.5 m mid-trench, 3 m at its
+  ends, and the I-95 bench on the Shockoe Valley side and the Leigh Street cut are kept as measured.
 - Outside the US, terrain is only as fine as its source: Copernicus is a 30 m *surface* model
   (trees and roofs included), and Terrain Tiles is 30 m SRTM in much of the world. Every source
   must carry its credit and license in `dem-sources.ts`; the maps, explorer and prints use them.

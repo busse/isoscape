@@ -12,7 +12,8 @@
  *   roads, rail and water ways existed. Each entry carries its sources; positions are drawn
  *   from today's street grid and published dimensions, not surveyed.
  *
- * The ground itself is today's: the elevation model includes every cut and fill since.
+ * The ground itself is today's: the elevation model includes every cut and fill since, except
+ * where a series puts back the ground a later work took (`ground`, a `GroundRestoration`).
  */
 
 import { readFile, writeFile, mkdir } from 'node:fs/promises'
@@ -31,7 +32,7 @@ export interface Epoch {
 export interface HistoryFeature {
   readonly id: string
   readonly name: string
-  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label' | 'bridge'
+  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label' | 'bridge' | 'street'
   readonly from: number
   readonly to?: number
   /** lon/lat outline (open), for areas and landmarks. */
@@ -123,6 +124,11 @@ export interface HistoryFeature {
    */
   readonly mode?: 'road' | 'rail'
   readonly deck?: number
+  /**
+   * The road's OSM class, for a `bridge` (default secondary) or a `street`: a stretch of street
+   * that is gone, along `line` (lon/lat), drawn at grade as a street of today's map would be
+   * (default residential) and kept in its years whatever the houses near it.
+   */
   readonly highway?: string
   /**
    * Drawn only in builds asked for it by name (`isoscape build --with <name>`): for a feature
@@ -197,6 +203,39 @@ export interface TracedBuilding {
   readonly sheet: number
 }
 
+/**
+ * Ground put back as it stood before later works cut or filled it (a highway's trench, its
+ * embankments), for years before `before`: inside `rings` (lon/lat outlines) the elevation
+ * model is set aside and the surface rebuilt from the measured ground at the rim and from the
+ * `lines` that crossed it (see `restoreGround` in terrain.ts). Every other year, and every series
+ * without one, draws the measured ground unchanged. What it gives is an estimate: `note` says
+ * how good, `sources` what it rests on.
+ */
+export interface GroundRestoration {
+  readonly id: string
+  readonly name: string
+  /** Applies to scenes of years before this one. */
+  readonly before: number
+  readonly rings: readonly (readonly Vec2[])[]
+  /**
+   * How the ground inside is put back: `membrane` (the default) rebuilds it from its rim and its
+   * lines (`restoreGround`), for a cut or a fill across level ground; `lower` takes down banks
+   * narrower than twice `radius` meters (default 25) to the ground beside them and keeps the
+   * rest as measured (`lowerGround`), for ramps raised on ground that was otherwise little
+   * changed. Restorations apply in the order listed.
+   */
+  readonly method?: 'membrane' | 'lower'
+  readonly radius?: number
+  /**
+   * Lines the old ground followed: a street that ran through at grade (no `elevation`; its grade
+   * is straight between the measured ground at its ends), or a line at a known elevation in
+   * meters on the elevation model's datum (a contour read off an old map, converted).
+   */
+  readonly lines?: readonly { readonly name: string; readonly line: readonly Vec2[]; readonly elevation?: number; readonly note?: string }[]
+  readonly note: string
+  readonly sources: readonly string[]
+}
+
 export interface History {
   readonly epochs: readonly Epoch[]
   readonly features: readonly HistoryFeature[]
@@ -220,6 +259,8 @@ export interface History {
     readonly leaveOut?: readonly { readonly edition: number; readonly sheet: string; readonly why: string }[]
   }
   readonly traced: readonly TracedBuilding[]
+  /** Ground rebuilt as it stood before later works, for earlier years (see `GroundRestoration`). */
+  readonly ground?: readonly GroundRestoration[]
   /**
    * Minor streets (tertiary, residential, service, unclassified, living streets and paths) drawn only
    * where a building of the year stands within this many meters: a street with no house on it
@@ -388,6 +429,7 @@ export const loadHistory = async (path: string): Promise<History> => {
   return {
     epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(),
     dates: raw.dates ?? [], ...(raw.sanborn === undefined ? {} : { sanborn: raw.sanborn }), traced,
+    ...(raw.ground === undefined ? {} : { ground: raw.ground }),
     ...(raw.streetsNearBuildings === undefined ? {} : { streetsNearBuildings: raw.streetsNearBuildings }),
     ...(raw.majorStreetsNearBuildings === undefined ? {} : { majorStreetsNearBuildings: raw.majorStreetsNearBuildings }),
     ...(raw.serviceNearBuildings === undefined ? {} : { serviceNearBuildings: raw.serviceNearBuildings }),
@@ -511,6 +553,12 @@ export const bridgeFeature = (h: HistoryFeature): Feature | null => {
   tags['isoscape:seat'] = 'ground'
   if (h.deck !== undefined) tags['isoscape:deck'] = String(h.deck)
   return { type: 'line', id: `history:${h.id}`, tags, points: h.line }
+}
+
+/** A curated lost street (`kind: 'street'`) as a map line, at grade; null for anything else. */
+export const streetFeature = (h: HistoryFeature): Feature | null => {
+  if (h.kind !== 'street' || h.line === undefined || h.line.length < 2) return null
+  return { type: 'line', id: `history:${h.id}`, tags: { highway: h.highway ?? 'residential', name: h.name }, points: h.line }
 }
 
 const MINOR_STREETS = new Set(['tertiary', 'tertiary_link', 'residential', 'service', 'unclassified', 'living_street', 'track', 'footway', 'path', 'cycleway', 'pedestrian', 'steps', 'bridleway'])

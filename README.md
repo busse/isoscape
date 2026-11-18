@@ -533,6 +533,13 @@ shows it gone. The steps are in *How it's made*, under "Time". The 1886, 1895, 1
 1950–52 editions are traced into `history/sanborn/`. The results are sketches: outlines and
 heights are approximate, and some buildings are missing, misplaced or merged.
 
+**Ground before later works.** A history file can put back ground a later work cut or filled
+(`ground`: an outline, a method, the streets that crossed it, a `before` year, a note and
+sources), for scenes of earlier years only. `membrane` rebuilds the ground inside from its rim
+and its streets; `lower` takes down narrow banks such as ramp embankments. Jackson Ward
+(`regions/jackson-ward.json`) puts back the Turnpike's trench before 1955. The method and its
+error are in *How it's made*, under "Time".
+
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
 and elevation and keeps only its year-built parcels in its own `data/` folder. A build looks for
 `yearbuilt.json` in the region's own folder first, then in the shared one, and stops with an

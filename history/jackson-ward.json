@@ -1,0 +1,1019 @@
+{
+ "extends": "history/richmond-downtown.json",
+ "title": "Jackson Ward through time",
+ "epochs": [
+  {
+   "year": 1952,
+   "title": "Before the Turnpike",
+   "note": "The last Sanborn survey before the Richmond-Petersburg Turnpike was cut through the ward in 1955-58. Rough draft: many buildings of the year are not yet traced."
+  },
+  {
+   "year": 2026,
+   "title": "Today"
+  }
+ ],
+ "features": [
+  {
+   "id": "lost-north-1st-street",
+   "name": "North 1st Street",
+   "kind": "street",
+   "highway": "tertiary",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4365773,
+     37.5498361
+    ],
+    [
+     -77.4359486,
+     37.5504787
+    ]
+   ],
+   "note": "The stretch of North 1st Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6035187 and w38006095, 0 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-north-5th-street",
+   "name": "North 5th Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4349335,
+     37.5484094
+    ],
+    [
+     -77.4346997,
+     37.548254
+    ]
+   ],
+   "note": "The stretch of North 5th Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6037438 and w175298379, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-north-7th-street",
+   "name": "North 7th Street",
+   "kind": "street",
+   "highway": "primary",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4302333,
+     37.5475821
+    ],
+    [
+     -77.431005,
+     37.5467584
+    ]
+   ],
+   "note": "The stretch of North 7th Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w44888566 and w279628639, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-east-duval-street",
+   "name": "East Duval Street",
+   "kind": "street",
+   "highway": "tertiary",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4305707,
+     37.5463699
+    ],
+    [
+     -77.4301474,
+     37.5461851
+    ]
+   ],
+   "note": "The stretch of East Duval Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w334083908 and w441708932, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-north-2nd-street",
+   "name": "North 2nd Street",
+   "kind": "street",
+   "highway": "tertiary",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4355345,
+     37.5494468
+    ],
+    [
+     -77.4347449,
+     37.55026
+    ]
+   ],
+   "note": "The stretch of North 2nd Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w374649613 and w6033312, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-chamberlayne-parkway",
+   "name": "Chamberlayne Parkway",
+   "kind": "street",
+   "highway": "primary",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4406833,
+     37.551079
+    ],
+    [
+     -77.4408382,
+     37.5516627
+    ]
+   ],
+   "note": "The stretch of Chamberlayne Parkway the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6035398 and w6035808, 0 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-saint-james-street",
+   "name": "Saint James Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4376579,
+     37.550131
+    ],
+    [
+     -77.4369294,
+     37.5508672
+    ]
+   ],
+   "note": "The stretch of Saint James Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w327205891 and w692873594, 12 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  }
+ ],
+ "ground": [
+  {
+   "id": "junction-ramps",
+   "name": "Ramp banks at the I-64 junction, before 1955",
+   "before": 1955,
+   "method": "lower",
+   "radius": 25,
+   "rings": [
+    [
+     [
+      -77.431816,
+      37.54842
+     ],
+     [
+      -77.430543,
+      37.548671
+     ],
+     [
+      -77.429628,
+      37.549127
+     ],
+     [
+      -77.428935,
+      37.54968
+     ],
+     [
+      -77.42785,
+      37.550997
+     ],
+     [
+      -77.427766,
+      37.551065
+     ],
+     [
+      -77.427681,
+      37.551043
+     ],
+     [
+      -77.428005,
+      37.550447
+     ],
+     [
+      -77.427546,
+      37.550173
+     ],
+     [
+      -77.427369,
+      37.550342
+     ],
+     [
+      -77.427284,
+      37.550274
+     ],
+     [
+      -77.427284,
+      37.550138
+     ],
+     [
+      -77.427622,
+      37.549457
+     ],
+     [
+      -77.428021,
+      37.547877
+     ],
+     [
+      -77.428105,
+      37.54781
+     ],
+     [
+      -77.42824,
+      37.547883
+     ],
+     [
+      -77.42836,
+      37.547645
+     ],
+     [
+      -77.428417,
+      37.546982
+     ],
+     [
+      -77.428275,
+      37.546408
+     ],
+     [
+      -77.428842,
+      37.546408
+     ],
+     [
+      -77.42922,
+      37.5468
+     ],
+     [
+      -77.429854,
+      37.547261
+     ]
+    ],
+    [
+     [
+      -77.430343,
+      37.550093
+     ],
+     [
+      -77.429806,
+      37.550567
+     ],
+     [
+      -77.429496,
+      37.550727
+     ],
+     [
+      -77.429497,
+      37.550863
+     ],
+     [
+      -77.429833,
+      37.551179
+     ],
+     [
+      -77.429692,
+      37.551291
+     ],
+     [
+      -77.429578,
+      37.551291
+     ],
+     [
+      -77.429169,
+      37.551033
+     ],
+     [
+      -77.428985,
+      37.551182
+     ],
+     [
+      -77.42904,
+      37.551404
+     ],
+     [
+      -77.428927,
+      37.551585
+     ],
+     [
+      -77.428729,
+      37.551743
+     ],
+     [
+      -77.428445,
+      37.551698
+     ],
+     [
+      -77.428571,
+      37.551503
+     ],
+     [
+      -77.42853,
+      37.55145
+     ],
+     [
+      -77.429041,
+      37.550861
+     ],
+     [
+      -77.429862,
+      37.550251
+     ],
+     [
+      -77.430258,
+      37.55007
+     ]
+    ],
+    [
+     [
+      -77.432099,
+      37.547244
+     ],
+     [
+      -77.432071,
+      37.547719
+     ],
+     [
+      -77.430542,
+      37.546815
+     ],
+     [
+      -77.430003,
+      37.54643
+     ],
+     [
+      -77.430258,
+      37.546408
+     ],
+     [
+      -77.430372,
+      37.546487
+     ],
+     [
+      -77.430485,
+      37.546408
+     ],
+     [
+      -77.430825,
+      37.546408
+     ],
+     [
+      -77.431023,
+      37.546566
+     ],
+     [
+      -77.431023,
+      37.546747
+     ],
+     [
+      -77.430924,
+      37.54684
+     ],
+     [
+      -77.43097,
+      37.546975
+     ],
+     [
+      -77.431101,
+      37.54708
+     ],
+     [
+      -77.431512,
+      37.547221
+     ]
+    ]
+   ],
+   "note": "Estimate. East of 1st Street the interchange ramps stand on the old plateau rim above Shockoe Valley. The USGS Richmond sheet surveyed 1933-34 shows ground there at about the height the lidar measures today (its 150-foot contour, labeled near the valley rim, falls where today's does), so the ground is kept as measured, except that banks narrower than 50 m (the ramps' embankments, up to 9 m high) are taken down to the ground beside them. The ravine the sheet shows heading into the plateau north of the junction, and the valley side under I-95 south of it, are not rebuilt: the lidar is kept there.",
+   "sources": [
+    "https://apps.nationalmap.gov/3depdem/",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "turnpike-trench",
+   "name": "The Turnpike's trench through the ward, before 1955",
+   "before": 1955,
+   "rings": [
+    [
+     [
+      -77.449492,
+      37.557057
+     ],
+     [
+      -77.449492,
+      37.557238
+     ],
+     [
+      -77.449407,
+      37.557305
+     ],
+     [
+      -77.448217,
+      37.55726
+     ],
+     [
+      -77.447566,
+      37.55674
+     ],
+     [
+      -77.447388,
+      37.556463
+     ],
+     [
+      -77.446999,
+      37.556152
+     ],
+     [
+      -77.446546,
+      37.555655
+     ],
+     [
+      -77.446206,
+      37.555248
+     ],
+     [
+      -77.446315,
+      37.555066
+     ],
+     [
+      -77.445745,
+      37.554473
+     ],
+     [
+      -77.445052,
+      37.55392
+     ],
+     [
+      -77.444086,
+      37.553331
+     ],
+     [
+      -77.443965,
+      37.553292
+     ],
+     [
+      -77.443898,
+      37.553346
+     ],
+     [
+      -77.44411,
+      37.55353
+     ],
+     [
+      -77.44411,
+      37.553665
+     ],
+     [
+      -77.444025,
+      37.553733
+     ],
+     [
+      -77.443487,
+      37.553304
+     ],
+     [
+      -77.443487,
+      37.553213
+     ],
+     [
+      -77.443586,
+      37.553125
+     ],
+     [
+      -77.443522,
+      37.553067
+     ],
+     [
+      -77.442815,
+      37.553524
+     ],
+     [
+      -77.442864,
+      37.553665
+     ],
+     [
+      -77.442779,
+      37.553733
+     ],
+     [
+      -77.442495,
+      37.553733
+     ],
+     [
+      -77.441929,
+      37.553417
+     ],
+     [
+      -77.441674,
+      37.553168
+     ],
+     [
+      -77.442008,
+      37.553036
+     ],
+     [
+      -77.441957,
+      37.552897
+     ],
+     [
+      -77.442014,
+      37.552671
+     ],
+     [
+      -77.442283,
+      37.552399
+     ],
+     [
+      -77.441931,
+      37.552199
+     ],
+     [
+      -77.441089,
+      37.551892
+     ],
+     [
+      -77.440966,
+      37.55197
+     ],
+     [
+      -77.440796,
+      37.55197
+     ],
+     [
+      -77.439998,
+      37.551699
+     ],
+     [
+      -77.436547,
+      37.550794
+     ],
+     [
+      -77.435187,
+      37.550296
+     ],
+     [
+      -77.434903,
+      37.550118
+     ],
+     [
+      -77.434564,
+      37.55007
+     ],
+     [
+      -77.433483,
+      37.549665
+     ],
+     [
+      -77.432797,
+      37.549573
+     ],
+     [
+      -77.432312,
+      37.549573
+     ],
+     [
+      -77.432241,
+      37.549618
+     ],
+     [
+      -77.431682,
+      37.549619
+     ],
+     [
+      -77.430996,
+      37.549756
+     ],
+     [
+      -77.429628,
+      37.550393
+     ],
+     [
+      -77.429048,
+      37.550856
+     ],
+     [
+      -77.428502,
+      37.551472
+     ],
+     [
+      -77.427992,
+      37.551382
+     ],
+     [
+      -77.427737,
+      37.551178
+     ],
+     [
+      -77.427737,
+      37.551088
+     ],
+     [
+      -77.428927,
+      37.549686
+     ],
+     [
+      -77.429634,
+      37.549121
+     ],
+     [
+      -77.430542,
+      37.548669
+     ],
+     [
+      -77.431796,
+      37.548421
+     ],
+     [
+      -77.429862,
+      37.547267
+     ],
+     [
+      -77.429211,
+      37.546793
+     ],
+     [
+      -77.428927,
+      37.546476
+     ],
+     [
+      -77.429012,
+      37.546408
+     ],
+     [
+      -77.429975,
+      37.546408
+     ],
+     [
+      -77.430534,
+      37.546809
+     ],
+     [
+      -77.432056,
+      37.547702
+     ],
+     [
+      -77.4321,
+      37.547289
+     ],
+     [
+      -77.432184,
+      37.547222
+     ],
+     [
+      -77.432468,
+      37.547312
+     ],
+     [
+      -77.432779,
+      37.547561
+     ],
+     [
+      -77.432836,
+      37.547696
+     ],
+     [
+      -77.432787,
+      37.548155
+     ],
+     [
+      -77.433313,
+      37.548528
+     ],
+     [
+      -77.434002,
+      37.548758
+     ],
+     [
+      -77.434192,
+      37.548648
+     ],
+     [
+      -77.434253,
+      37.548419
+     ],
+     [
+      -77.434621,
+      37.548126
+     ],
+     [
+      -77.434734,
+      37.548126
+     ],
+     [
+      -77.434932,
+      37.54833
+     ],
+     [
+      -77.434932,
+      37.54851
+     ],
+     [
+      -77.434766,
+      37.548738
+     ],
+     [
+      -77.435555,
+      37.549279
+     ],
+     [
+      -77.435513,
+      37.549372
+     ],
+     [
+      -77.435576,
+      37.549431
+     ],
+     [
+      -77.438247,
+      37.550611
+     ],
+     [
+      -77.43882,
+      37.550748
+     ],
+     [
+      -77.439153,
+      37.550749
+     ],
+     [
+      -77.440569,
+      37.550975
+     ],
+     [
+      -77.44092,
+      37.55111
+     ],
+     [
+      -77.441078,
+      37.551108
+     ],
+     [
+      -77.441192,
+      37.55102
+     ],
+     [
+      -77.441525,
+      37.551065
+     ],
+     [
+      -77.441646,
+      37.550975
+     ],
+     [
+      -77.44173,
+      37.551043
+     ],
+     [
+      -77.441631,
+      37.551176
+     ],
+     [
+      -77.441697,
+      37.551242
+     ],
+     [
+      -77.442609,
+      37.551517
+     ],
+     [
+      -77.443403,
+      37.552013
+     ],
+     [
+      -77.443848,
+      37.55206
+     ],
+     [
+      -77.444364,
+      37.551879
+     ],
+     [
+      -77.444542,
+      37.552014
+     ],
+     [
+      -77.444931,
+      37.55197
+     ],
+     [
+      -77.445101,
+      37.552015
+     ],
+     [
+      -77.445526,
+      37.552354
+     ],
+     [
+      -77.445583,
+      37.552535
+     ],
+     [
+      -77.445527,
+      37.552619
+     ],
+     [
+      -77.445605,
+      37.552681
+     ],
+     [
+      -77.446008,
+      37.552377
+     ],
+     [
+      -77.446149,
+      37.55249
+     ],
+     [
+      -77.446149,
+      37.55258
+     ],
+     [
+      -77.445698,
+      37.553081
+     ],
+     [
+      -77.445696,
+      37.553521
+     ],
+     [
+      -77.445757,
+      37.553622
+     ],
+     [
+      -77.446829,
+      37.554524
+     ],
+     [
+      -77.44848,
+      37.556384
+     ],
+     [
+      -77.44889,
+      37.556711
+     ]
+    ]
+   ],
+   "lines": [
+    {
+     "name": "North 1st Street",
+     "line": [
+      [
+       -77.436787,
+       37.549622
+      ],
+      [
+       -77.435739,
+       37.550693
+      ]
+     ],
+     "note": "At grade before the Turnpike: today's street ends on either side (w6035187, w38006095) joined straight, as the USGS Richmond sheet of 1934 shows the street running through. Approximate."
+    },
+    {
+     "name": "North 5th Street",
+     "line": [
+      [
+       -77.435195,
+       37.548583
+      ],
+      [
+       -77.434438,
+       37.54808
+      ]
+     ],
+     "note": "At grade before the Turnpike: today's street ends on either side (w6037438, w175298379) joined straight, as the USGS Richmond sheet of 1934 shows the street running through. Approximate."
+    },
+    {
+     "name": "North 7th Street",
+     "line": [
+      [
+       -77.43003,
+       37.547799
+      ],
+      [
+       -77.431209,
+       37.546541
+      ]
+     ],
+     "note": "At grade before the Turnpike: today's street ends on either side (w44888566, w279628639) joined straight, as the USGS Richmond sheet of 1934 shows the street running through. Approximate."
+    },
+    {
+     "name": "East Duval Street",
+     "line": [
+      [
+       -77.430869,
+       37.5465
+      ],
+      [
+       -77.429849,
+       37.546055
+      ]
+     ],
+     "note": "At grade before the Turnpike: today's street ends on either side (w334083908, w441708932) joined straight, as the USGS Richmond sheet of 1934 shows the street running through. Approximate."
+    },
+    {
+     "name": "North 2nd Street",
+     "line": [
+      [
+       -77.435743,
+       37.549232
+      ],
+      [
+       -77.434537,
+       37.550474
+      ]
+     ],
+     "note": "At grade before the Turnpike: today's street ends on either side (w374649613, w6033312) joined straight, as the USGS Richmond sheet of 1934 shows the street running through. Approximate."
+    },
+    {
+     "name": "Chamberlayne Parkway",
+     "line": [
+      [
+       -77.440613,
+       37.550814
+      ],
+      [
+       -77.440909,
+       37.551928
+      ]
+     ],
+     "note": "At grade before the Turnpike: today's street ends on either side (w6035398, w6035808) joined straight, as the USGS Richmond sheet of 1934 shows the street running through. Approximate."
+    },
+    {
+     "name": "Saint James Street",
+     "line": [
+      [
+       -77.437869,
+       37.549918
+      ],
+      [
+       -77.436719,
+       37.55108
+      ]
+     ],
+     "note": "At grade before the Turnpike: today's street ends on either side (w327205891, w692873594) joined straight, as the USGS Richmond sheet of 1934 shows the street running through. Approximate."
+    }
+   ],
+   "note": "Estimate, not a survey. The Richmond-Petersburg Turnpike (1955-58) runs through the ward in a trench up to about 8 m deep (3 to 6.5 m where the old cross streets ran). Inside this outline the lidar is set aside and the ground rebuilt as the smoothest surface (a membrane) that meets the measured ground at the outline and carries each street listed here through at grade, straight between its surviving ends. The outline is today's motorway and ramp ways (OpenStreetMap) buffered 22 m (10 m for ramps), widened over the cut slopes the lidar shows (slopes over 12% within 60 m of a motorway), and simplified; east of 1st and Duval streets it keeps only the main line (30 m either side). Checked by moving the outline onto undisturbed plateau nearby (0.3-1.1 m RMS) and against the USGS Richmond sheet surveyed 1933-34 (10-foot contours: no contour can be read near seven points along the trench, and the rebuilt ground would move at most 0.8 m to agree). Error about 1.5 m (95%) mid-trench, 3 m at its ends; a small ravine the sheet shows near 7th Street is not rebuilt (ground.md in the story folder).",
+   "sources": [
+    "https://apps.nationalmap.gov/3depdem/",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ],
+   "method": "membrane"
+  }
+ ],
+ "atGrade": [
+  {
+   "id": [
+    "w44888565",
+    "w175298374",
+    "w175298375",
+    "w38006094",
+    "w38006096",
+    "w38006103",
+    "w135207685",
+    "w1122219210",
+    "w1122219211",
+    "w1293548427",
+    "w1293548428",
+    "w1121057674",
+    "w1121057682",
+    "w1122219208",
+    "w1122219209",
+    "w1485475446",
+    "w1485475447"
+   ],
+   "before": 1958,
+   "note": "Streets and walks that cross the Turnpike on bridges today crossed level ground before it was cut (the USGS Richmond sheet of 1934 shows them as ordinary streets); before 1958 they are drawn at grade.",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf"
+   ]
+  }
+ ]
+}
