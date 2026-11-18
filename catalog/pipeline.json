@@ -429,7 +429,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "agent",
    "decision": "measured heights approved; in-place revision 3.1.0 being prepared with stop 7 and the framed set",
@@ -468,7 +468,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2725,7 +2725,7 @@
    "published_version": 1,
    "live_version": 1,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2743,7 +2743,8 @@
    "notes": "replaces Hermitage Road as box 3; BSS-16 is added in plates.json on the branch only; inspected once at arm's length (all 20 full-size tiles)",
    "log": [
     "2026-11-18: final draft -> final production"
-   ]
+   ],
+   "orders_counted": "2026-11-18"
   },
   "byrd-1928-cutaway": {
    "plate": null,
