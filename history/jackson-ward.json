@@ -1,8 +1,13 @@
 {
  "extends": "history/richmond-downtown.json",
  "title": "Jackson Ward through time",
- "about": "Jackson Ward before and after the Richmond-Petersburg Turnpike (cleared 1955-58, opened 1958). Each scene draws the buildings standing today that had been built by its year (OSM start_date, else the City of Richmond assessor's year built), plus buildings traced from the Sanborn map of 1952, volume 3 (Leigh Street north to the railroad), and from the earlier downtown tracings south of Leigh. Before 1955 the ground inside the highway's trench is an estimate rebuilt from its edges (see the ground note). Rough draft: not for publication.",
+ "about": "Jackson Ward before and after the Richmond-Petersburg Turnpike (cleared 1955-58, opened 1958). Each scene draws the buildings standing today that had been built by its year (OSM start_date, else the City of Richmond assessor's year built), plus buildings traced from the Sanborn map of volume 3 (Leigh Street north to the railroad) as printed in 1925 and as republished in 1952, and from the earlier downtown tracings south of Leigh. Before 1955 the ground inside the highway's trench is an estimate rebuilt from its edges (see the ground note). Rough draft: not for publication.",
  "epochs": [
+  {
+   "year": 1925,
+   "title": "About 1925",
+   "note": "Buildings north of Leigh Street (and between Clay and Leigh from 1st to 7th Streets) are traced from the Sanborn map of Richmond, volume 3, 1925 (Library of Congress copy received May 16, 1925; its key map's correction table is blank), registered onto the same sheets of the 1952 republication and placed by their fits; south of that from the 1924-25 volume 1 tracing. Apostle Town stands where Gilpin Court was built in 1941-43. The ground inside the Turnpike's later trench is the estimate rebuilt for 1952. Buildings standing today are drawn where the assessor dates them 1925 or earlier. Rough draft."
+  },
   {
    "year": 1952,
    "title": "Before the Turnpike",
@@ -24,7 +29,7 @@
    "name": "North 1st Street",
    "kind": "street",
    "highway": "tertiary",
-   "from": 1934,
+   "from": 1925,
    "to": 1956,
    "line": [
     [
@@ -36,10 +41,11 @@
      37.5504787
     ]
    ],
-   "note": "The stretch of North 1st Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6035187 and w38006095, 0 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "note": "The stretch of North 1st Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6035187 and w38006095, 0 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. The Sanborn sheets of volume 3 printed in 1925 show it too; dated from 1925, the earliest source used (it is older), to 1956, when the corridor was being cleared (approximate: 1955-58).",
    "sources": [
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
-    "https://www.openstreetmap.org/"
+    "https://www.openstreetmap.org/",
+    "https://www.loc.gov/item/sanborn09064_008/"
    ]
   },
   {
@@ -47,7 +53,7 @@
    "name": "North 5th Street",
    "kind": "street",
    "highway": "residential",
-   "from": 1934,
+   "from": 1925,
    "to": 1956,
    "line": [
     [
@@ -59,10 +65,11 @@
      37.548254
     ]
    ],
-   "note": "The stretch of North 5th Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6037438 and w175298379, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "note": "The stretch of North 5th Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6037438 and w175298379, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. The Sanborn sheets of volume 3 printed in 1925 show it too; dated from 1925, the earliest source used (it is older), to 1956, when the corridor was being cleared (approximate: 1955-58).",
    "sources": [
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
-    "https://www.openstreetmap.org/"
+    "https://www.openstreetmap.org/",
+    "https://www.loc.gov/item/sanborn09064_008/"
    ]
   },
   {
@@ -70,7 +77,7 @@
    "name": "North 7th Street",
    "kind": "street",
    "highway": "primary",
-   "from": 1934,
+   "from": 1925,
    "to": 1956,
    "line": [
     [
@@ -82,10 +89,11 @@
      37.5467584
     ]
    ],
-   "note": "The stretch of North 7th Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w44888566 and w279628639, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "note": "The stretch of North 7th Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w44888566 and w279628639, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. The Sanborn sheets of volume 3 printed in 1925 show it too; dated from 1925, the earliest source used (it is older), to 1956, when the corridor was being cleared (approximate: 1955-58).",
    "sources": [
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
-    "https://www.openstreetmap.org/"
+    "https://www.openstreetmap.org/",
+    "https://www.loc.gov/item/sanborn09064_008/"
    ]
   },
   {
@@ -93,7 +101,7 @@
    "name": "East Duval Street",
    "kind": "street",
    "highway": "tertiary",
-   "from": 1934,
+   "from": 1925,
    "to": 1956,
    "line": [
     [
@@ -105,10 +113,11 @@
      37.5461851
     ]
    ],
-   "note": "The stretch of East Duval Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w334083908 and w441708932, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "note": "The stretch of East Duval Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w334083908 and w441708932, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. The Sanborn sheets of volume 3 printed in 1925 show it too; dated from 1925, the earliest source used (it is older), to 1956, when the corridor was being cleared (approximate: 1955-58).",
    "sources": [
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
-    "https://www.openstreetmap.org/"
+    "https://www.openstreetmap.org/",
+    "https://www.loc.gov/item/sanborn09064_008/"
    ]
   },
   {
@@ -116,7 +125,7 @@
    "name": "North 2nd Street",
    "kind": "street",
    "highway": "tertiary",
-   "from": 1934,
+   "from": 1925,
    "to": 1956,
    "line": [
     [
@@ -128,10 +137,11 @@
      37.55026
     ]
    ],
-   "note": "The stretch of North 2nd Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w374649613 and w6033312, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "note": "The stretch of North 2nd Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w374649613 and w6033312, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. The Sanborn sheets of volume 3 printed in 1925 show it too; dated from 1925, the earliest source used (it is older), to 1956, when the corridor was being cleared (approximate: 1955-58).",
    "sources": [
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
-    "https://www.openstreetmap.org/"
+    "https://www.openstreetmap.org/",
+    "https://www.loc.gov/item/sanborn09064_008/"
    ]
   },
   {
@@ -139,7 +149,7 @@
    "name": "Chamberlayne Parkway",
    "kind": "street",
    "highway": "primary",
-   "from": 1934,
+   "from": 1925,
    "to": 1956,
    "line": [
     [
@@ -151,10 +161,11 @@
      37.5516627
     ]
    ],
-   "note": "The stretch of Chamberlayne Parkway the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6035398 and w6035808, 0 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "note": "The stretch of Chamberlayne Parkway the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6035398 and w6035808, 0 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. The Sanborn sheets of volume 3 printed in 1925 show it too; dated from 1925, the earliest source used (it is older), to 1956, when the corridor was being cleared (approximate: 1955-58).",
    "sources": [
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
-    "https://www.openstreetmap.org/"
+    "https://www.openstreetmap.org/",
+    "https://www.loc.gov/item/sanborn09064_008/"
    ]
   },
   {
@@ -162,7 +173,7 @@
    "name": "Saint James Street",
    "kind": "street",
    "highway": "residential",
-   "from": 1934,
+   "from": 1925,
    "to": 1956,
    "line": [
     [
@@ -174,10 +185,11 @@
      37.5508672
     ]
    ],
-   "note": "The stretch of Saint James Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w327205891 and w692873594, 12 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "note": "The stretch of Saint James Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w327205891 and w692873594, 12 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. The Sanborn sheets of volume 3 printed in 1925 show it too; dated from 1925, the earliest source used (it is older), to 1956, when the corridor was being cleared (approximate: 1955-58).",
    "sources": [
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
-    "https://www.openstreetmap.org/"
+    "https://www.openstreetmap.org/",
+    "https://www.loc.gov/item/sanborn09064_008/"
    ]
   }
  ],
@@ -1037,13 +1049,15 @@
  "sanborn": {
   "lost": [
    "history/sanborn/lost.geojson",
-   "history/sanborn/jackson-ward-lost.geojson"
+   "history/sanborn/jackson-ward-lost.geojson",
+   "history/sanborn/jackson-ward-1925-lost.geojson"
   ],
   "editions": [
    1886,
    1895,
    1905,
    1924,
+   1925,
    1950,
    1952
   ],
@@ -1058,6 +1072,38 @@
     "edition": 1905,
     "sheet": "7",
     "why": "3 of its 5 traced buildings fall on the Capitol Square lawn: the same misfit as sheet 5."
+   },
+   {
+    "edition": 1924,
+    "sheet": "cbd",
+    "ids": [
+     "sanborn-1924-1783",
+     "sanborn-1924-1785",
+     "sanborn-1924-1787",
+     "sanborn-1924-1789",
+     "sanborn-1924-1791",
+     "sanborn-1924-1793",
+     "sanborn-1924-1797",
+     "sanborn-1924-1798",
+     "sanborn-1924-1799",
+     "sanborn-1924-1802",
+     "sanborn-1924-1806",
+     "sanborn-1924-1807",
+     "sanborn-1924-1814",
+     "sanborn-1924-1822",
+     "sanborn-1924-1827",
+     "sanborn-1924-1835",
+     "sanborn-1924-1836",
+     "sanborn-1924-1837",
+     "sanborn-1924-1838",
+     "sanborn-1924-1839",
+     "sanborn-1924-1840",
+     "sanborn-1924-1841",
+     "sanborn-1924-1842",
+     "sanborn-1924-1852"
+    ],
+    "before": 1952,
+    "why": "Buildings of the downtown tracing taken from volume 1's small-scale key map (1924-25) whose centers fall in the blocks traced from the 1925 volume 3 sheets (Leigh Street north, and Clay to Leigh from 1st to 7th Streets). At that scale they are coarse and several are misplaced: one, drawn as a six-story fireproof block of 4,222 m2, covers the Leigh Street Memorial M.E. Church, the Salvation Army home and their neighbors on sheet 309; others fall on yards or a street. Before 1952 the volume 3 sheets draw these blocks instead (tools/sanborn/jw/life25.py); from 1952 on they are as before."
    }
   ]
  },
@@ -1174,6 +1220,15 @@
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/GeoTIFF/VA/VA_Richmond_186501_1956_24000_geo.tif"
    ]
+  }
+ ],
+ "dates": [
+  {
+   "id": "w44888568",
+   "name": "Greater Richmond Convention Center",
+   "year": 2003,
+   "source": "https://www.visitrichmondva.com/meetings/blog/home/post/greater-richmond-convention-center-celebrates-20-years/",
+   "note": "Opened February 28, 2003, covering several blocks between Marshall and Leigh Streets; the parcel's recorded year (1900) is an older building's, and without this date it is drawn in 1925 and 1952 over the blocks the Sanborn sheets show built up (the same date as history/richmond-streetcars.json)."
   }
  ],
  "switches": {
