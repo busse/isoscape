@@ -25,7 +25,7 @@ import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
 import { cutawayItems, partSolids, partTones, shedItems, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
-import { WORKS, alive, bridgeFeature, bridgesAtGrade, dropApproaches, mendStreets, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
+import { WORKS, alive, bridgeFeature, bridgesAtGrade, streetFeature, dropApproaches, mendStreets, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
 export interface TimeContext {
@@ -235,6 +235,9 @@ export const buildScene = (
     const have = new Set(features.map((f) => f.id))
     const bridges = curated.map(bridgeFeature).filter((f): f is Feature => f !== null && !have.has(f.id))
     if (bridges.length > 0) features = [...features, ...bridges]
+    // Curated lost streets, likewise, whatever the houses of the year near them.
+    const streets = curated.map(streetFeature).filter((f): f is Feature => f !== null && !have.has(f.id))
+    if (streets.length > 0) { features = [...features, ...streets]; extraStats.streetsCurated = streets.length }
   }
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)

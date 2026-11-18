@@ -12,7 +12,169 @@
    "title": "Today"
   }
  ],
- "features": [],
+ "features": [
+  {
+   "id": "lost-north-1st-street",
+   "name": "North 1st Street",
+   "kind": "street",
+   "highway": "tertiary",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4365773,
+     37.5498361
+    ],
+    [
+     -77.4359486,
+     37.5504787
+    ]
+   ],
+   "note": "The stretch of North 1st Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6035187 and w38006095, 0 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-north-5th-street",
+   "name": "North 5th Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4349335,
+     37.5484094
+    ],
+    [
+     -77.4346997,
+     37.548254
+    ]
+   ],
+   "note": "The stretch of North 5th Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6037438 and w175298379, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-north-7th-street",
+   "name": "North 7th Street",
+   "kind": "street",
+   "highway": "primary",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4302333,
+     37.5475821
+    ],
+    [
+     -77.431005,
+     37.5467584
+    ]
+   ],
+   "note": "The stretch of North 7th Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w44888566 and w279628639, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-east-duval-street",
+   "name": "East Duval Street",
+   "kind": "street",
+   "highway": "tertiary",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4305707,
+     37.5463699
+    ],
+    [
+     -77.4301474,
+     37.5461851
+    ]
+   ],
+   "note": "The stretch of East Duval Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w334083908 and w441708932, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-north-2nd-street",
+   "name": "North 2nd Street",
+   "kind": "street",
+   "highway": "tertiary",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4355345,
+     37.5494468
+    ],
+    [
+     -77.4347449,
+     37.55026
+    ]
+   ],
+   "note": "The stretch of North 2nd Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w374649613 and w6033312, 2 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-chamberlayne-parkway",
+   "name": "Chamberlayne Parkway",
+   "kind": "street",
+   "highway": "primary",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4406833,
+     37.551079
+    ],
+    [
+     -77.4408382,
+     37.5516627
+    ]
+   ],
+   "note": "The stretch of Chamberlayne Parkway the Turnpike took, drawn straight between the street's surviving ends (OSM ways w6035398 and w6035808, 0 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost-saint-james-street",
+   "name": "Saint James Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1934,
+   "to": 1956,
+   "line": [
+    [
+     -77.4376579,
+     37.550131
+    ],
+    [
+     -77.4369294,
+     37.5508672
+    ]
+   ],
+   "note": "The stretch of Saint James Street the Turnpike took, drawn straight between the street's surviving ends (OSM ways w327205891 and w692873594, 12 m off a straight line), as the USGS Richmond sheet surveyed 1933-34 shows it running through. Dated from that survey (it is older) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://www.openstreetmap.org/"
+   ]
+  }
+ ],
  "ground": [
   {
    "id": "junction-ramps",

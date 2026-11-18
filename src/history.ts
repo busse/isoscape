@@ -32,7 +32,7 @@ export interface Epoch {
 export interface HistoryFeature {
   readonly id: string
   readonly name: string
-  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label' | 'bridge'
+  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label' | 'bridge' | 'street'
   readonly from: number
   readonly to?: number
   /** lon/lat outline (open), for areas and landmarks. */
@@ -124,6 +124,11 @@ export interface HistoryFeature {
    */
   readonly mode?: 'road' | 'rail'
   readonly deck?: number
+  /**
+   * The road's OSM class, for a `bridge` (default secondary) or a `street`: a stretch of street
+   * that is gone, along `line` (lon/lat), drawn at grade as a street of today's map would be
+   * (default residential) and kept in its years whatever the houses near it.
+   */
   readonly highway?: string
   /**
    * Drawn only in builds asked for it by name (`isoscape build --with <name>`): for a feature
@@ -548,6 +553,12 @@ export const bridgeFeature = (h: HistoryFeature): Feature | null => {
   tags['isoscape:seat'] = 'ground'
   if (h.deck !== undefined) tags['isoscape:deck'] = String(h.deck)
   return { type: 'line', id: `history:${h.id}`, tags, points: h.line }
+}
+
+/** A curated lost street (`kind: 'street'`) as a map line, at grade; null for anything else. */
+export const streetFeature = (h: HistoryFeature): Feature | null => {
+  if (h.kind !== 'street' || h.line === undefined || h.line.length < 2) return null
+  return { type: 'line', id: `history:${h.id}`, tags: { highway: h.highway ?? 'residential', name: h.name }, points: h.line }
 }
 
 const MINOR_STREETS = new Set(['tertiary', 'tertiary_link', 'residential', 'service', 'unclassified', 'living_street', 'track', 'footway', 'path', 'cycleway', 'pedestrian', 'steps', 'bridleway'])
