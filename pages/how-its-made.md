@@ -626,6 +626,39 @@ narrow basin between 11th and 12th, traced from sheet 11 of the 1886 Sanborn map
 canal's last stretch into it (sheet 10, and the 1886 key map) are drawn as the map shows them.
 A canal mapped only as a line is a blue ribbon on the ground.
 
+**Ground that was cut or filled later.** The ground in every scene is today's lidar, so a
+past year drawn on it shows every cut and fill made since. A series can put back the ground a
+later work took (`ground` in its history file), for the years before it; every other scene,
+and every series without one, draws the measured ground unchanged. The first is Jackson Ward,
+where the Richmond–Petersburg Turnpike (1955–58) runs in a trench up to about 8 m deep (3 to
+6.5 m where the old cross streets ran). Inside a curated outline the lidar is set aside before the
+grid is blurred, so contours, hillshade, the drape and building bases all see the result. The
+outline is today's motorway ways buffered 22 m and ramps 10 m, widened over cut and fill slopes
+the lidar shows (steeper than 12% within 60 m of a motorway), then simplified to 4 m; it covers
+about 28 ha of trench and 9 ha of interchange. Two methods, each an estimate:
+
+- **Membrane** (`restoreGround`), for the trench: the rebuilt ground is the smoothest surface
+  that meets the measured ground at the outline (each free node the mean of its four
+  neighbors, solved by over-relaxation to 1 mm), held along each street that crossed at grade
+  to a straight grade between its surviving ends. Seven such streets are listed; they change
+  the result by 4 cm RMS and 0.5 m at most, so the rim decides it.
+- **Lower** (`lowerGround`), for the ramps at the I-64 junction, which stand on the old
+  plateau rim: a grey-scale opening of the lidar with a 25 m disk, so banks narrower than 50 m
+  (embankments up to 9 m high) come down to the ground beside them and broader ground stays as
+  measured. The USGS Richmond sheet surveyed in 1933–34 shows the rim there at about today's
+  height; a membrane, which would have sloped plateau to valley, was up to 9 m too low.
+
+Two checks set the error. Run on undisturbed plateau beside the trench (the same outline moved
+150 to 450 m southwest, six trials), the membrane misses the measured ground by 0.3 to 1.1 m
+RMS, 95% of nodes within 0.7 to 2.9 m; moved onto the valley edge north of it, 1.8 m RMS and up
+to 8 m. On the USGS sheet (10-foot contours, about 3 m; its datum about 0.32 m above NAVD 88
+here) no contour can be read within 60 m of seven points along the trench from west of St. Peter
+Street to past Fifth Street, and the rebuilt ground there would need to move at most 0.8 m to agree. So the
+error is put at about 1.5 m (95%) mid-trench, 3 m at its ends, and more where the sheet shows
+a small ravine near Seventh Street that neither the lidar nor the membrane has. Streets that cross on bridges today are drawn at
+grade before 1958, and curated lost streets (`kind: "street"`, the stretches the trench took,
+straight between surviving ends) are drawn on the rebuilt ground.
+
 **Bridges that are gone.** A curated bridge is drawn as a bridge of today's map would be, from
 its own line: a road or railroad deck at a stated height over the ground or water under it
 (the Free Bridge of 1873 to 1972, 8 m, an assumption), on piers, ramping down to the ground at
