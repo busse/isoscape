@@ -401,10 +401,7 @@ the ground stayed within one 10-foot band.
 The three-way view shows why the estimate matters. Drawn on today's ground, the 1952 streets
 dip into a trench that did not exist. On the rebuilt ground they cross level.
 
-What would replace the estimate with a survey: the Turnpike Authority's plan-and-profile sheets,
-which show the "existing ground" along the road (Library of Virginia, Accession 40941, reading
-room only, or VDOT), and a 1922 topographic survey of the city at 1:2,400 by R. H. Randall & Co.
-(Library of Virginia, G3884.R5C2 1922 .R53). Neither is online.
+What might replace the estimate with a survey: the Turnpike Authority's records at the Library of Virginia (Accession 40941), open to researchers who visit [[LVA 2024](#sources)], if they hold plan-and-profile sheets showing the ground before construction, or VDOT's own plans; and a 1922 survey at 1:2,400 by R. H. Randall & Co., catalogued as "Topography area surrounding city of Richmond" (Library of Virginia, G3884.R5C2 1922 .R53), if it covers the ward [[LVA map guide](#sources)]. None of these has been seen for this story, and we found none online.
 
 ### The tracing
 
@@ -527,6 +524,7 @@ Opened for this draft unless marked.
 - **NPS, Black Wall Street**: National Park Service, "Jackson Ward and its Black Wall Street." https://www.nps.gov/articles/000/jackson-ward-and-its-black-wall-street.htm
 - **LVA 2024**: Renee Savits, Richmond–Petersburg Turnpike Authority records, Accession 40941, *The UncommonWealth*, Library of Virginia, October 9, 2024. https://uncommonwealth.lva.virginia.gov/?p=42248
 - **LVA 2025**: Ashley Craig, "A Brief History of Public Housing in the City of Richmond," *The UncommonWealth*, November 17, 2025. https://uncommonwealth.lva.virginia.gov/blog/2025/11/17/a-brief-history-of-public-housing-in-the-city-of-richmond
+- **LVA map guide**: Library of Virginia, "Richmond Maps: Topographic Maps" research guide. https://lva-virginia.libguides.com/richmond-maps/topographic-maps
 - **LVA Document Bank**: Library of Virginia, "Urban Renewal in Virginia." https://www.lva.virginia.gov/collections/educator-resources/dbva/items/show/300
 - **LVA, House to Highway**: Library of Virginia and the JXN Project, *House to Highway*. https://www.lva.virginia.gov/events/exhibitions/house-to-highway
 - **Ord. 2024-206**: City of Richmond, Ord. No. 2024-206, accepting $1,350,000 from the U.S. Department of Transportation for the Reconnect Jackson Ward project, adopted September 23, 2024 (Legistar). https://webapi.legistar.com/v1/richmondva/matters/37259
