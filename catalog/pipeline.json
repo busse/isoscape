@@ -2868,11 +2868,11 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "agent",
-   "decision": "rough draft approved to start; proof in progress on branch cutaway-pump-house",
+   "decision": "owner: pursue (2026-11-18); handed to a separate Opus 5.5 session (ISO-TEST/handoff/pump-house/HANDOFF.md); it moves this to working draft when d1 exists",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
-   "branch": null,
+   "branch": "cutaway-pump-house",
    "worktree": null,
    "links": [
     "/mnt/user-data/outputs/cutaway/pump-house.md"
