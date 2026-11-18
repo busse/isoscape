@@ -5,16 +5,20 @@ beside the 1952 one (history/sanborn/jackson-ward-1925-lost.geojson).
 Each traced 1925 building is, in this order:
   1. left out if a point inside it falls in a building of the earlier downtown tracing
      (history/sanborn/lost.geojson) that stands in 1925 (from <= 1925 < to): that tracing already
-     draws it, south of Leigh Street where the two overlap;
+     draws it. The exception is the downtown tracing's buildings from volume 1's small-scale key
+     map (sheet "cbd") whose center falls inside these sheets' coverage: they are coarse and often
+     misplaced here (one of them, a six-story block, covers the Leigh Street Memorial church and
+     its neighbors), so they are listed (written to <out>.leaveout.json) for the history's
+     sanborn.leaveOut, left out before 1952, and these sheets draw those blocks instead;
   2. left out if today's buildings cover half or more of it and one of them is dated 1925 or
      earlier: the scene draws today's building there;
   3. otherwise drawn from 1925 until the first of
        - 1952, if the 1952 tracing (history/sanborn/jackson-ward-1952.geojson) has a building
          covering half of it or holding a point inside it: from 1952 on that tracing draws it
-         (end "continues": the same building, drawn from the 1952 sheet);
-       - 1952, if the 1952 sheets map the spot without it (end "map": gone by 1952, when within
+         (why "continues": the same building, drawn from the 1952 sheet);
+       - 1952, if the 1952 sheets map the spot without it (why "map": gone by 1952, when within
          1925-52 not known; on the Gilpin Court blocks the clearance of 1941 is given instead,
-         end "cleared", see below);
+         why "cleared", see below);
        - the year built of a building standing on half or more of it today, if earlier.
 Apostle Town: a building gone by 1952 whose center falls in the 1952 Gilpin Court site
 (the hull of the buildings the 1952 sheets name as the U.S.H.A. project, grown by 20 m) ends in
@@ -38,8 +42,18 @@ def pm(ring):
 
 
 def main(ed25, ed52, older, today, out):
-    olds = [pm(f['geometry']['coordinates'][0]) for f in json.load(open(older))['features']
-            if f['properties']['from'] <= Y < f['properties']['to']]
+    ed25f = json.load(open(ed25))['features']
+    from shapely.ops import unary_union
+    cov25 = unary_union([pm(f['geometry']['coordinates'][0]) for f in ed25f if f['properties'].get('coverage')])
+    olds, coarse = [], []
+    for f in json.load(open(older))['features']:
+        pr = f['properties']
+        if not (pr['from'] <= Y < pr['to']): continue
+        q = pm(f['geometry']['coordinates'][0])
+        if pr.get('sheet') == 'cbd' and cov25.contains(q.representative_point()):
+            coarse.append(pr['id']); continue
+        olds.append(q)
+    json.dump(coarse, open(out + '.leaveout.json', 'w'))
     otree = STRtree(olds)
     f52 = [f for f in json.load(open(ed52))['features'] if not f['properties'].get('coverage')]
     p52 = [pm(f['geometry']['coordinates'][0]) for f in f52]
@@ -52,7 +66,7 @@ def main(ed25, ed52, older, today, out):
     k = [i for i, p in enumerate(tp) if not p.is_empty]; tb = [tb[i] for i in k]; tp = [tp[i] for i in k]
     ttree = STRtree(tp)
     feats, n = [], {'downtown': 0, 'today': 0, 'continues': 0, 'map': 0, 'cleared': 0, 'rebuilt': 0, 'unmapped52': 0}
-    for f in json.load(open(ed25))['features']:
+    for f in ed25f:
         pr = f['properties']
         if pr.get('coverage'): continue
         p = pm(f['geometry']['coordinates'][0])
@@ -79,14 +93,16 @@ def main(ed25, ed52, older, today, out):
         if rebuilt:
             to, end = min(rebuilt), 'rebuilt'
         n[end] += 1
-        props = {'id': pr['id'], 'from': Y, 'lastSeen': Y, 'to': to, 'end': end, 'material': pr['material'],
+        # the renderer knows four ends (map, rebuilt, highway, assumed); the finer reason is kept in why
+        props = {'id': pr['id'], 'from': Y, 'lastSeen': Y, 'to': to, 'why': end,
+                 'end': {'continues': 'map', 'map': 'map', 'cleared': 'rebuilt', 'rebuilt': 'rebuilt', 'unmapped52': 'assumed'}[end], 'material': pr['material'],
                  'storeys': pr['storeys'], 'storeysFrom': pr.get('storeysFrom', 'assumed'), 'sheet': pr['sheet'],
                  'edition': Y, 'color': pr['color']}
         for key in ('name', 'use', 'byEye'):
             if key in pr: props[key] = pr[key]
         feats.append({'type': 'Feature', 'properties': props, 'geometry': f['geometry']})
     json.dump({'type': 'FeatureCollection', 'editions': [Y], 'features': feats}, open(out, 'w'))
-    print(len(feats), 'drawn in 1925;', n)
+    print(len(feats), 'drawn in 1925;', n, len(coarse), 'coarse downtown buildings to leave out before 1952')
 
 
 if __name__ == '__main__':

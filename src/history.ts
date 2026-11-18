@@ -255,8 +255,13 @@ export interface History {
   /** Fire-insurance maps traced into footprints: the editions used, and the buildings since lost. */
   readonly sanborn?: {
     readonly lost: string | readonly string[]; readonly editions: readonly number[]; readonly source: string
-    /** Sheets whose fit is known to be wrong, left out until they are placed again: each says why. */
-    readonly leaveOut?: readonly { readonly edition: number; readonly sheet: string; readonly why: string }[]
+    /**
+     * Sheets whose fit is known to be wrong, left out until they are placed again: each says why.
+     * `ids` narrows an entry to those buildings of the sheet; `before` leaves them out only in
+     * scenes before that year (their `from` is raised to it), where a finer tracing of the same
+     * blocks takes their place.
+     */
+    readonly leaveOut?: readonly { readonly edition: number; readonly sheet: string; readonly why: string; readonly ids?: readonly string[]; readonly before?: number }[]
   }
   readonly traced: readonly TracedBuilding[]
   /** Ground rebuilt as it stood before later works, for earlier years (see `GroundRestoration`). */
@@ -475,7 +480,11 @@ export const loadHistory = async (path: string): Promise<History> => {
       traced = traced.concat(fc.features.map((f) => ({ ...f.properties, ring: f.geometry.coordinates[0].slice(0, -1).map(([x, y]) => [x, y] as Vec2) })))
     }
     const out = raw.sanborn.leaveOut ?? []
-    traced = traced.filter((b) => !out.some((o) => o.edition === b.edition && o.sheet === String(b.sheet)))
+    const match = (b: TracedBuilding) => out.filter((o) => o.edition === b.edition && o.sheet === String(b.sheet) && (o.ids === undefined || o.ids.includes(b.id)))
+    traced = traced.filter((b) => !match(b).some((o) => o.before === undefined)).map((b) => {
+      const later = Math.max(b.from, ...match(b).map((o) => o.before ?? b.from))
+      return later === b.from ? b : { ...b, from: later }
+    })
   }
   return {
     epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(),

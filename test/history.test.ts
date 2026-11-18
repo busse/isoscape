@@ -193,6 +193,17 @@ test('a sheet whose fit is known to be wrong is left out', async () => {
   assert.deepEqual(h.traced.map((b) => b.id), ['b', 'c'])
 })
 
+test('a sheet\'s listed buildings can be left out only before a year', async () => {
+  const { loadHistory } = await import('../src/history.ts')
+  const dir = await mkdtemp(join(tmpdir(), 'iso-leave-'))
+  const ring = [[0, 0], [1, 0], [1, 1], [0, 0]]
+  const f = (id: string) => ({ type: 'Feature', properties: { id, from: 1886, to: 1960, end: 'assumed', material: 'brick', storeys: 3, edition: 1924, sheet: 'cbd' }, geometry: { type: 'Polygon', coordinates: [ring] } })
+  await writeFile(join(dir, 'lost.geojson'), JSON.stringify({ type: 'FeatureCollection', features: [f('a'), f('b')] }))
+  await writeFile(join(dir, 'h.json'), JSON.stringify({ sanborn: { lost: join(dir, 'lost.geojson'), editions: [1924], source: 'x', leaveOut: [{ edition: 1924, sheet: 'cbd', ids: ['a'], before: 1952, why: 'finer tracing' }] } }))
+  const h = await loadHistory(join(dir, 'h.json'))
+  assert.deepEqual(h.traced.map((b) => [b.id, b.from]), [['a', 1952], ['b', 1886]])
+})
+
 test('a bridge over a road not yet built is drawn at grade, and that road\'s verges are not drawn', async () => {
   const { laterWorks } = await import('../src/history.ts')
   const h = history({ rules: [{ where: { name: 'Turnpike' }, eras: [[1958, null]] }] as History['rules'] })
