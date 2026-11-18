@@ -14,7 +14,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -27,7 +27,8 @@
     "releases/broad-street-1943-01-ay-tower/v3.json",
     "explorer: #/broad-street-lines:1943@-494,-1066,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-02-fair-grounds": {
    "title": "The State Fair grounds, Broad Street Station 1943",
@@ -39,7 +40,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -52,7 +53,8 @@
     "releases/broad-street-1943-02-fair-grounds/v3.json",
     "explorer: #/broad-street-lines:1940@-73,-810,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-03-hermitage-road": {
    "title": "Hermitage Road, Broad Street Station 1943",
@@ -64,7 +66,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "owner",
    "decision": "withdraw when Scott's Addition takes box 3 (decided with Scott's Addition)",
@@ -78,7 +80,8 @@
     "explorer: #/broad-street-lines:1943@83,-517,6"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026"
+   "notes": "off sale since the sweep of November 16, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-04-seaboard-junction": {
    "title": "Seaboard Junction, Broad Street Station 1943",
@@ -90,7 +93,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -103,7 +106,8 @@
     "releases/broad-street-1943-04-seaboard-junction/v3.json",
     "explorer: #/broad-street-lines:1943@28,-502,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-05-loop": {
    "title": "The loop and the sheds, Broad Street Station 1943",
@@ -115,7 +119,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -128,7 +132,8 @@
     "releases/broad-street-1943-05-loop/v3.json",
     "explorer: #/broad-street-station-loop:1943@427,154,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-06-sauer": {
    "title": "C.F. Sauer Company, Broad Street Station 1943",
@@ -140,7 +145,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -164,7 +169,8 @@
     "releases/broad-street-1943-06-sauer/v3.json",
     "explorer: #/broad-street-lines:1943@83,-310,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-07-main-street-station": {
    "title": "Main Street Station, Broad Street Station 1943",
@@ -176,7 +182,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "stays on sale (not visible at arm's length); height and note corrected in the planned edition, or in place if it has no orders",
@@ -197,7 +203,8 @@
     "explorer: #/broad-street-lines:1943@1533,674,6",
     "/mnt/user-data/outputs/cutaway/main-street/round4/round4.md"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-08-triple-crossing": {
    "title": "The Triple Crossing, Broad Street Station 1943",
@@ -209,7 +216,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -222,7 +229,8 @@
     "releases/broad-street-1943-08-triple-crossing/v3.json",
     "explorer: #/broad-street-lines:1943@1478,732,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-09-co-viaduct": {
    "title": "The C&O viaduct, Broad Street Station 1943",
@@ -234,7 +242,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -247,7 +255,8 @@
     "releases/broad-street-1943-09-co-viaduct/v3.json",
     "explorer: #/broad-street-lines:1943@730,682,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-10-hull-street": {
    "title": "Hull Street Station, Broad Street Station 1943",
@@ -259,7 +268,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -272,7 +281,8 @@
     "releases/broad-street-1943-10-hull-street/v3.json",
     "explorer: #/broad-street-lines:1943@1168,965,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-11-belt-line-bridge": {
    "title": "The Belt Line bridge, Broad Street Station 1943",
@@ -284,7 +294,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -297,7 +307,8 @@
     "releases/broad-street-1943-11-belt-line-bridge/v3.json",
     "explorer: #/broad-street-lines:1943@-1445,568,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-12-william-byrd": {
    "title": "Hotel William Byrd, Broad Street Station 1943",
@@ -309,7 +320,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -322,7 +333,8 @@
     "releases/broad-street-1943-12-william-byrd/v3.json",
     "explorer: #/broad-street-station:1943@88,70,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-13-from-the-fan": {
    "title": "Broad Street Station, Broad Street Station 1943",
@@ -334,7 +346,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -347,7 +359,8 @@
     "releases/broad-street-1943-13-from-the-fan/v3.json",
     "explorer: #/broad-street-station:1943@49,-122,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-14-front": {
    "title": "Pope's front, Broad Street Station 1943",
@@ -359,7 +372,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -372,7 +385,8 @@
     "releases/broad-street-1943-14-front/v3.json",
     "explorer: #/broad-street-station-front:1943@70,11,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-cutaway": {
    "title": "Broad Street Station, 1943: The Cutaway",
@@ -384,7 +398,7 @@
    "published_version": 1,
    "live_version": 1,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -396,7 +410,8 @@
    "links": [
     "releases/broad-street-1943-cutaway/v1.json"
    ],
-   "released": "2026-11-16"
+   "released": "2026-11-16",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-map": {
    "title": "Broad Street Station, 1943: The Railroad Map",
@@ -408,7 +423,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 1,
    "waiting_on": "owner",
    "decision": "approve release with Scott's Addition as box 3; and whether Main Street Station's height correction goes into this candidate (rc2) or the next edition",
@@ -431,7 +446,8 @@
     "/mnt/user-data/outputs/wave2/bss-last3/overview-map-v3.jpg"
    ],
    "released": "November 15, 2026",
-   "notes": "rc1 stamped v3 on the branch (prints.txt); inspected once at arm's length: nothing seen after the badge 3 fix"
+   "notes": "rc1 stamped v3 on the branch (prints.txt); inspected once at arm's length: nothing seen after the badge 3 fix",
+   "orders_counted": "2026-11-18"
   },
   "broad-street-1943-menu": {
    "title": "Broad Street Station, 1943: The Railroads and Fourteen Places",
@@ -443,7 +459,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 1,
    "waiting_on": "owner",
    "decision": "approve release with Scott's Addition as box 3 (decided with the map and box 3)",
@@ -460,7 +476,8 @@
     "/mnt/user-data/outputs/wave2/bss-last3/overview-menu-v3.jpg"
    ],
    "released": "November 15, 2026",
-   "notes": "rc1 stamped v3 on the branch (prints.txt); inspected once at arm's length: nothing seen after the badge 3 fix"
+   "notes": "rc1 stamped v3 on the branch (prints.txt); inspected once at arm's length: nothing seen after the badge 3 fix",
+   "orders_counted": "2026-11-18"
   },
   "gwynns-island": {
    "title": "Gwynn's Island",
@@ -472,7 +489,7 @@
    "published_version": 4,
    "live_version": 4,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -485,7 +502,8 @@
     "releases/gwynns-island/v4.json",
     "explorer: #/gwynns-island"
    ],
-   "released": "November 16, 2026"
+   "released": "November 16, 2026",
+   "orders_counted": "2026-11-18"
   },
   "lm-alcatraz": {
    "title": "Alcatraz Island",
@@ -497,7 +515,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -510,7 +528,8 @@
     "releases/lm-alcatraz/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-brooklyn-bridge": {
    "title": "Brooklyn Bridge",
@@ -522,7 +541,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -535,7 +554,8 @@
     "releases/lm-brooklyn-bridge/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-buckingham-fountain": {
    "title": "Buckingham Fountain",
@@ -547,7 +567,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -560,7 +580,8 @@
     "releases/lm-buckingham-fountain/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-bunker-hill": {
    "title": "Bunker Hill Monument",
@@ -572,7 +593,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -585,7 +606,8 @@
     "releases/lm-bunker-hill/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-cape-hatteras-lighthouse": {
    "title": "Cape Hatteras Lighthouse",
@@ -597,7 +619,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -610,7 +632,8 @@
     "releases/lm-cape-hatteras-lighthouse/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-castillo-de-san-marcos": {
    "title": "Castillo de San Marcos",
@@ -622,7 +645,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -635,7 +658,8 @@
     "releases/lm-castillo-de-san-marcos/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-central-park": {
    "title": "Central Park",
@@ -647,7 +671,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -660,7 +684,8 @@
     "releases/lm-central-park/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-chicago-river": {
    "title": "The Chicago River",
@@ -672,7 +697,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -685,7 +710,8 @@
     "releases/lm-chicago-river/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-coit-tower": {
    "title": "Coit Tower",
@@ -697,7 +723,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -710,7 +736,8 @@
     "releases/lm-coit-tower/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-crater-lake": {
    "title": "Crater Lake",
@@ -722,7 +749,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -735,7 +762,8 @@
     "releases/lm-crater-lake/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-delicate-arch": {
    "title": "Delicate Arch",
@@ -747,7 +775,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -760,7 +788,8 @@
     "releases/lm-delicate-arch/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-devils-tower": {
    "title": "Devils Tower",
@@ -772,7 +801,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -785,7 +814,8 @@
     "releases/lm-devils-tower/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-diamond-head": {
    "title": "Waikiki and Diamond Head",
@@ -797,7 +827,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -810,7 +840,8 @@
     "releases/lm-diamond-head/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-eiffel-tower": {
    "title": "Eiffel Tower",
@@ -822,7 +853,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -835,7 +866,8 @@
     "releases/lm-eiffel-tower/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-faneuil-hall": {
    "title": "Faneuil Hall",
@@ -847,7 +879,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -860,7 +892,8 @@
     "releases/lm-faneuil-hall/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-flatiron-building": {
    "title": "Flatiron Building",
@@ -872,7 +905,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -885,7 +918,8 @@
     "releases/lm-flatiron-building/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-fort-sumter": {
    "title": "Fort Sumter",
@@ -897,7 +931,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -910,7 +944,8 @@
     "releases/lm-fort-sumter/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-gateway-arch": {
    "title": "Gateway Arch",
@@ -922,7 +957,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -935,7 +970,8 @@
     "releases/lm-gateway-arch/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-gettysburg": {
    "title": "Gettysburg Battlefield",
@@ -947,7 +983,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -960,7 +996,8 @@
     "releases/lm-gettysburg/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-golden-gate-bridge": {
    "title": "Golden Gate Bridge",
@@ -972,7 +1009,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -985,7 +1022,8 @@
     "releases/lm-golden-gate-bridge/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-grand-canyon": {
    "title": "Grand Canyon",
@@ -997,7 +1035,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1010,7 +1048,8 @@
     "releases/lm-grand-canyon/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-griffith-observatory": {
    "title": "Griffith Observatory",
@@ -1022,7 +1061,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1035,7 +1074,8 @@
     "releases/lm-griffith-observatory/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-half-dome": {
    "title": "Half Dome and Yosemite Valley",
@@ -1047,7 +1087,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1060,7 +1100,8 @@
     "releases/lm-half-dome/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-hearst-castle": {
    "title": "Hearst Castle",
@@ -1072,7 +1113,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1085,7 +1126,8 @@
     "releases/lm-hearst-castle/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-himeji-castle": {
    "title": "Himeji Castle",
@@ -1097,7 +1139,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1110,7 +1152,8 @@
     "releases/lm-himeji-castle/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-hoover-dam": {
    "title": "Hoover Dam",
@@ -1122,7 +1165,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1135,7 +1178,8 @@
     "releases/lm-hoover-dam/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-independence-hall": {
    "title": "Independence Hall",
@@ -1147,7 +1191,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1160,7 +1204,8 @@
     "releases/lm-independence-hall/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-jackson-square": {
    "title": "Jackson Square",
@@ -1172,7 +1217,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1185,7 +1230,8 @@
     "releases/lm-jackson-square/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-jefferson-memorial": {
    "title": "Jefferson Memorial",
@@ -1197,7 +1243,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1210,7 +1256,8 @@
     "releases/lm-jefferson-memorial/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-kennedy-space-center": {
    "title": "Kennedy Space Center",
@@ -1222,7 +1269,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1235,7 +1282,8 @@
     "releases/lm-kennedy-space-center/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-las-vegas-strip": {
    "title": "The Las Vegas Strip",
@@ -1247,7 +1295,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1260,7 +1308,8 @@
     "releases/lm-las-vegas-strip/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-lincoln-memorial": {
    "title": "Lincoln Memorial",
@@ -1272,7 +1321,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1285,7 +1334,8 @@
     "releases/lm-lincoln-memorial/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-lombard-street": {
    "title": "Lombard Street",
@@ -1297,7 +1347,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1310,7 +1360,8 @@
     "releases/lm-lombard-street/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-machu-picchu": {
    "title": "Machu Picchu and Aguas Calientes",
@@ -1322,7 +1373,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1335,7 +1386,8 @@
     "releases/lm-machu-picchu/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-matterhorn": {
    "title": "Matterhorn and Zermatt",
@@ -1347,7 +1399,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1360,7 +1412,8 @@
     "releases/lm-matterhorn/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-monticello": {
    "title": "Monticello",
@@ -1372,7 +1425,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1385,7 +1438,8 @@
     "releases/lm-monticello/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-mount-rushmore": {
    "title": "Mount Rushmore",
@@ -1397,7 +1451,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1410,7 +1464,8 @@
     "releases/lm-mount-rushmore/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-mount-st-helens": {
    "title": "Mount St. Helens",
@@ -1422,7 +1477,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1435,7 +1490,8 @@
     "releases/lm-mount-st-helens/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-mount-vernon": {
    "title": "Mount Vernon",
@@ -1447,7 +1503,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1460,7 +1516,8 @@
     "releases/lm-mount-vernon/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-niagara-falls": {
    "title": "Niagara Falls",
@@ -1472,7 +1529,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1485,7 +1542,8 @@
     "releases/lm-niagara-falls/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-old-faithful": {
    "title": "Old Faithful",
@@ -1497,7 +1555,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1510,7 +1568,8 @@
     "releases/lm-old-faithful/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-pearl-harbor": {
    "title": "Pearl Harbor",
@@ -1522,7 +1581,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1535,7 +1594,8 @@
     "releases/lm-pearl-harbor/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-philadelphia-museum-of-art": {
    "title": "Philadelphia Museum of Art",
@@ -1547,7 +1607,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1560,7 +1620,8 @@
     "releases/lm-philadelphia-museum-of-art/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-plymouth-rock": {
    "title": "Plymouth Rock",
@@ -1572,7 +1633,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1585,7 +1646,8 @@
     "releases/lm-plymouth-rock/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-savannah-squares": {
    "title": "Savannah's Squares",
@@ -1597,7 +1659,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1610,7 +1672,8 @@
     "releases/lm-savannah-squares/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-statue-of-liberty": {
    "title": "Statue of Liberty",
@@ -1622,7 +1685,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1635,7 +1698,8 @@
     "releases/lm-statue-of-liberty/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-sydney-opera-house": {
    "title": "Sydney Opera House and Harbour Bridge",
@@ -1647,7 +1711,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1660,7 +1724,8 @@
     "releases/lm-sydney-opera-house/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-texas-capitol": {
    "title": "Texas State Capitol",
@@ -1672,7 +1737,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1685,7 +1750,8 @@
     "releases/lm-texas-capitol/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-the-alamo": {
    "title": "The Alamo",
@@ -1697,7 +1763,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1710,7 +1776,8 @@
     "releases/lm-the-alamo/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-times-square": {
    "title": "Times Square",
@@ -1722,7 +1789,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1735,7 +1802,8 @@
     "releases/lm-times-square/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-us-capitol": {
    "title": "U.S. Capitol",
@@ -1747,7 +1815,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1760,7 +1828,8 @@
     "releases/lm-us-capitol/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-washington-monument": {
    "title": "Washington Monument",
@@ -1772,7 +1841,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1785,7 +1854,8 @@
     "releases/lm-washington-monument/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-white-house": {
    "title": "The White House",
@@ -1797,7 +1867,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1810,7 +1880,8 @@
     "releases/lm-white-house/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-world-trade-center": {
    "title": "One World Trade Center",
@@ -1822,7 +1893,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1835,7 +1906,8 @@
     "releases/lm-world-trade-center/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "lm-wright-brothers": {
    "title": "Wright Brothers National Memorial",
@@ -1847,7 +1919,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": "on hold by the owner (sweep of November 16, 2026: subjects to be modeled)",
@@ -1860,7 +1932,8 @@
     "releases/lm-wright-brothers/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks"
+   "notes": "off sale since the sweep of November 16, 2026; the owner holds the landmarks",
+   "orders_counted": "2026-11-18"
   },
   "richmond-1865": {
    "title": "Richmond, 1865",
@@ -1872,7 +1945,7 @@
    "published_version": 2,
    "live_version": null,
    "on_sale": false,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -1885,7 +1958,8 @@
     "releases/richmond-1865/v2.json"
    ],
    "released": "November 15, 2026",
-   "notes": "off sale since the sweep of November 16, 2026; blocked on research: pre-1886-buildings"
+   "notes": "off sale since the sweep of November 16, 2026; blocked on research: pre-1886-buildings",
+   "orders_counted": "2026-11-18"
   },
   "richmond-1886": {
    "title": "Richmond, 1886",
@@ -1897,7 +1971,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -1909,7 +1983,8 @@
    "links": [
     "releases/richmond-1886/v3.json"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "richmond-1925": {
    "title": "Richmond, 1925",
@@ -1921,7 +1996,7 @@
    "published_version": 5,
    "live_version": 5,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -1933,7 +2008,8 @@
    "links": [
     "releases/richmond-1925/v5.json"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "richmond-1950": {
    "title": "Richmond, 1950",
@@ -1945,7 +2021,7 @@
    "published_version": 5,
    "live_version": 5,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -1957,7 +2033,8 @@
    "links": [
     "releases/richmond-1950/v5.json"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "richmond-2026": {
    "title": "Richmond, 2026",
@@ -1969,7 +2046,7 @@
    "published_version": 4,
    "live_version": 4,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 1,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -1981,7 +2058,8 @@
    "links": [
     "releases/richmond-2026/v4.json"
    ],
-   "released": "November 16, 2026"
+   "released": "November 16, 2026",
+   "orders_counted": "2026-11-18"
   },
   "richmond-james-2026": {
    "title": "The James, I-195 to Rocketts Landing",
@@ -1993,7 +2071,7 @@
    "published_version": 4,
    "live_version": 4,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2006,7 +2084,8 @@
     "releases/richmond-james-2026/v4.json",
     "explorer: #/richmond-i195-rocketts"
    ],
-   "released": "November 16, 2026"
+   "released": "November 16, 2026",
+   "orders_counted": "2026-11-18"
   },
   "richmond-panorama-2026": {
    "title": "Richmond and the James",
@@ -2018,7 +2097,7 @@
    "published_version": 4,
    "live_version": 4,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2031,7 +2110,8 @@
     "releases/richmond-panorama-2026/v4.json",
     "explorer: #/richmond-downtown-time:2026"
    ],
-   "released": "November 16, 2026"
+   "released": "November 16, 2026",
+   "orders_counted": "2026-11-18"
   },
   "richmond-through-time": {
    "title": "Richmond, 1737–2026",
@@ -2043,7 +2123,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2056,7 +2136,8 @@
     "releases/richmond-through-time/v3.json",
     "explorer: #/richmond-downtown-time:1737"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-01-westhampton": {
    "title": "Westhampton Park, Richmond Streetcars 1925",
@@ -2068,7 +2149,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2088,7 +2169,8 @@
     "/mnt/user-data/outputs/wave2/inspect-stc4/01-westhampton-2.jpg"
    ],
    "released": "November 17, 2026",
-   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)"
+   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-02-fair-grounds": {
    "title": "State Fair Grounds, Richmond Streetcars 1925",
@@ -2100,7 +2182,7 @@
    "published_version": 4,
    "live_version": 4,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2113,7 +2195,8 @@
     "releases/streetcars-1925-02-fair-grounds/v4.json",
     "explorer: #/richmond-streetcars:1925@311,-410,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-03-ginter-park": {
    "title": "Ginter Park, Richmond Streetcars 1925",
@@ -2125,7 +2208,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2138,7 +2221,8 @@
     "releases/streetcars-1925-03-ginter-park/v3.json",
     "explorer: #/richmond-streetcars:1925@777,-789,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-04-barton-heights": {
    "title": "Barton Heights, Richmond Streetcars 1925",
@@ -2150,7 +2234,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2163,7 +2247,8 @@
     "releases/streetcars-1925-04-barton-heights/v3.json",
     "explorer: #/richmond-streetcars:1925@1456,-31,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-05-highland-park": {
    "title": "Highland Park, Richmond Streetcars 1925",
@@ -2175,7 +2260,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2193,7 +2278,8 @@
     "explorer: #/richmond-streetcars:1925@1961,-564,6"
    ],
    "released": "November 17, 2026",
-   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)"
+   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-06-nine-mile": {
    "title": "Nine Mile Road, Richmond Streetcars 1925",
@@ -2205,7 +2291,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2218,7 +2304,8 @@
     "releases/streetcars-1925-06-nine-mile/v3.json",
     "explorer: #/richmond-streetcars:1925@2698,520,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-07-church-hill": {
    "title": "Church Hill and Jefferson Park, Richmond Streetcars 1925",
@@ -2230,7 +2317,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2257,7 +2344,8 @@
     "/mnt/user-data/outputs/wave2/inspect-stc4/07-church-hill-2.jpg"
    ],
    "released": "November 17, 2026",
-   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)"
+   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-08-broad-street": {
    "title": "Seventh and Broad, Richmond Streetcars 1925",
@@ -2269,7 +2357,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2287,7 +2375,8 @@
     "/mnt/user-data/outputs/wave2/inspect-stc4/08-broad-street-4.jpg",
     "/mnt/user-data/outputs/wave2/inspect-stc4/08-broad-street-5.jpg"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-09-manchester": {
    "title": "Manchester, Richmond Streetcars 1925",
@@ -2299,7 +2388,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2338,7 +2427,8 @@
     "/mnt/user-data/outputs/wave2/inspect-stc4/09-manchester-4.jpg"
    ],
    "released": "November 17, 2026",
-   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)"
+   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-10-woodland-heights": {
    "title": "Woodland Heights, Richmond Streetcars 1925",
@@ -2350,7 +2440,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2363,7 +2453,8 @@
     "releases/streetcars-1925-10-woodland-heights/v3.json",
     "explorer: #/richmond-streetcars:1925@446,1194,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-11-forest-hill": {
    "title": "Forest Hill Park, Richmond Streetcars 1925",
@@ -2375,7 +2466,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2388,7 +2479,8 @@
     "releases/streetcars-1925-11-forest-hill/v3.json",
     "explorer: #/richmond-streetcars:1925@-109,1255,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-12-byrd-park": {
    "title": "Byrd Park, Richmond Streetcars 1925",
@@ -2400,7 +2492,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2413,7 +2505,8 @@
     "releases/streetcars-1925-12-byrd-park/v3.json",
     "explorer: #/richmond-streetcars:1925@-446,532,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-13-the-fan": {
    "title": "The Fan, Richmond Streetcars 1925",
@@ -2425,7 +2518,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2438,7 +2531,8 @@
     "releases/streetcars-1925-13-the-fan/v3.json",
     "explorer: #/richmond-streetcars:1925@311,267,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-14-broad-laurel": {
    "title": "Broad and Laurel, Richmond Streetcars 1925",
@@ -2450,7 +2544,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2463,7 +2557,8 @@
     "releases/streetcars-1925-14-broad-laurel/v3.json",
     "explorer: #/richmond-streetcars:1925@815,292,6"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-map": {
    "title": "Richmond's Streetcars, 1925: The System Map",
@@ -2475,7 +2570,7 @@
    "published_version": 4,
    "live_version": 4,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2506,7 +2601,8 @@
     "/mnt/user-data/outputs/wave2/inspect-stc4/map-3.jpg"
    ],
    "released": "November 17, 2026",
-   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)"
+   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)",
+   "orders_counted": "2026-11-18"
   },
   "streetcars-1925-menu": {
    "title": "Richmond's Streetcars, 1925: The Lines and Fourteen Stops",
@@ -2518,7 +2614,7 @@
    "published_version": 4,
    "live_version": 4,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2550,7 +2646,8 @@
     "/mnt/user-data/outputs/wave2/inspect-stc4/menu-4.jpg"
    ],
    "released": "November 17, 2026",
-   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)"
+   "notes": "accepted faults from the final streetcars inspection (wave2/inspect-stc4 and the inspection summaries)",
+   "orders_counted": "2026-11-18"
   },
   "then-and-now": {
    "title": "Richmond, Then & Now",
@@ -2562,7 +2659,7 @@
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
-   "orders": "unknown",
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
    "decision": null,
@@ -2575,7 +2672,8 @@
     "releases/then-and-now/v3.json",
     "explorer: #/richmond-downtown-time:2026"
    ],
-   "released": "November 17, 2026"
+   "released": "November 17, 2026",
+   "orders_counted": "2026-11-18"
   },
   "all-prints-label-size": {
    "plate": null,
