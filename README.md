@@ -197,9 +197,23 @@ and links to buy only what `onSale` names:
   front page, and `m/<region>.html` (a year's: `m/<region>-<year>.html`);
 - a front-page section (its `shopLabel`, else "Buy prints ↗"): when every one of its `prefixes`
   is on sale under one URL, else when the slug of its story `page` is;
-- a content page (a button at its head, in the explorer and in `p/<slug>.html`): when its own
-  slug is on sale, else when every map it links to is on sale under one URL, else when the
-  section whose story it tells is.
+- a content page (a button at its head and its foot, in the explorer and in `p/<slug>.html`, and
+  a link in its share page `s/page-<slug>.html`): when its own slug is on sale, else when every
+  map it links to is on sale under one URL, else when the section whose story it tells is (a
+  set's page on sale as a collection says "Prints of this set ↗");
+- a piece of a set (a place's or stop's print, the map alone, the framed map): beside the
+  link to its view in a content page, from `shop.products` (below).
+
+`shop.products` maps the explorer view each set piece is cut from (the store catalog's
+`explore`, e.g. `"broad-street-lines:1943@-494,-1066,6"`, or the whole map's
+`"broad-street-lines:1943"`) to its prints: `[{ "url", "label", "design" }]`. Where a page links to
+that view, the link to buy goes beside it: after "See it on the map" in a box's line of links
+("Buy a print of this place ↗"), or at the end of the paragraph ("Open the map … Buy a print of
+the map alone ↗ · Buy a print of the map with every place ↗"). It is written, never by hand, by
+`python3 tools/release/products.py <store-dir>` from the store's catalog and product handles and
+the board's `on_sale`: only set boxes, maps and framed maps that the board has on sale and the
+store has active. Rerun it whenever a piece goes on or off sale (`--check` says whether it is
+current, and it warns of a piece no page links to).
 
 `cta` replaces "Shop prints" in the header only while something is on sale. With `onSale`
 empty, nothing anywhere links to a product or collection, and no text says so. Per-view or
@@ -577,10 +591,28 @@ python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json   # out/cutaways/
 python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json --print   # out/cutaways/print/
 ```
 
+Other part shapes: `"shape": "frame"` with `members` (straight members, or convex plates, in
+the vertical plane over the ring's first edge: a truss, a roof slope), `"inset"` with `levels`
+(a hipped roof or a square dome, stepped in by distance), and `"track"` (ties and rails on a
+deck). A rail line with an `elevation` stands its train on a deck and draws no ground track.
+`lift` also lifts modeled parts whole, leaving their outline dashed. In the section,
+`"hidden"` draws stairs behind a wall as their dashed outline and `"slice": {"parts": [...],
+"depth": 1}` draws a roof only that far behind the plane. A sheet's `crossSection` (`region`,
+`caption`) sets a second flat section beside the first, with callouts anchored to it by
+`"cross"`; `marksNote` words the key's line about the wayfinding marks.
+
 A callout's anchor in either drawing may say `"badge": [dx, dy]` (sheet units, 9,600 across):
 the badge then stands that far off the part, with a leader to a dot on it, so it does not hide
 what it names. `travelerKey` adds a line with the traveler's glyph to the key, and a group with
-`"traveler": true` carries the glyph beside its heading.
+`"traveler": true` carries the glyph beside its heading. In the region, `cutaway.route`
+(`points`: [lon, lat, elevation], at waist height, and a `weight`, the section's scale on the
+sheet over the cutaway's) draws the traveler's way in the cutaway too, red and dashed as the
+section draws it; `cutaway.order: "components"` breaks a cycle in the paint order at an item
+that lies in one, rather than at the farthest item left.
+`isoView` (`[x, y, w, h]` in the plate's own units) frames the plate closer, cutting what runs
+past it at its edge; a wayfinding label with `label: [x, y]` (sheet units, its first baseline)
+stands there, its leader leaving the nearest point of its box; `columnEnd` warns when the
+column runs past that height, into the room the print's title block needs.
 
 `--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):
 the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, each with its title
@@ -633,8 +665,9 @@ fourteen places they ran to.
    (300 dpi into `out/sets/<name>/print/`; `--dpi 40` for a quick proof). Look at every one.
 6. **The page**: `set.py <name> page` writes `pages/<page.slug>.md` and its two images from the
    menu print. Link it from a section of `isoscape.config.json` (`page`, `pageLabel`). The page
-   names no shop: once the prints sell, add the page's slug (and, if you like, the region) to
-   `shop.onSale` with the collection's URL, and the explorer adds the shop buttons.
+   names no shop: once the prints sell, add the page's slug and the region to `shop.onSale`
+   with the collection's URL, and run `tools/release/products.py <store-dir>` for each print's
+   own link; the explorer adds the shop buttons and the links.
 
 ## Roadmap
 
@@ -953,6 +986,10 @@ A set's print is redrawn the same way: `set.py <set> boxes <id>` and `set.py <se
 `--dir` to keep them apart from older prints), the unstamped box and its canvas files copied into
 `<store>/print-files/<dir>/drawn/<design>-vN` and its `canvas/`, then `stamp.py --base`; the
 record's scenes are then the set's scene SVGs.
+
+A brand-new design (a new key, as Scott's Addition was) has no catalog entry for `stamp.py --base` to
+read yet: add its entry first (in a scratch copy of the store if the real one must wait), with
+`version` one below the first and `print`/`canvas` naming the unversioned files, then stamp.
 
 `stamp.py --base` writes `<design>-v3_<size>.jpg` (and its canvas files) beside the current
 version's, from the unstamped files in that folder; the record pins the new builds as its

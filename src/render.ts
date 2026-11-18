@@ -331,7 +331,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   /** Water lies on the river's surface, wherever its outline reaches. */
   const drapeWater = (pt: Vec2) => P(pt, T.waterZ(pt))
 
-  const items = paintOrder(scene.items, 96, scene.cut !== undefined)
+  const items = paintOrder(scene.items, 96, scene.cut !== undefined, region.cutaway?.order === 'components')
   const close = view.scale >= CLOSE_RAIL
 
   // ---- the frame on screen -------------------------------------------------------------------
@@ -394,6 +394,8 @@ export const renderSvg = (scene: Scene): Rendered => {
     // so each class carries only what its band adds to the one below it.
     ...(T.flat ? [] : shadeAlphas(p.shadeLightStep, p.shadeMax).map((a, k) => `.hp${k + 1}{fill:${p.shadeLight};fill-opacity:${a.toFixed(4)}}`)),
     ...(T.flat ? [] : shadeAlphas(p.shadeDarkStep, p.shadeMax).map((a, k) => `.hm${k + 1}{fill:${p.shadeDark};fill-opacity:${a.toFixed(4)}}`)),
+    // The finer ink, only where a part asks for it (`ink: "fine"`).
+    ...(items.some((it) => it.shapes.some((s) => s.fine === true)) ? [`.fi{stroke-width:${p.fineLineWidth}}`] : []),
     `</style>`,
     `<rect x="${f(vb[0])}" y="${f(vb[1])}" width="${f(vb[2])}" height="${f(vb[3])}" fill="${p.sky}"/>`,
   )
@@ -1369,11 +1371,15 @@ const paintItem = (it: Item): string => {
   return `<g data-id="${it.id}">${title}${shapes.join('')}${dots}</g>`
 }
 
+/** A stroke's dash and caps, as attributes (none for a solid stroke with square ends). */
+export const strokeDash = (st: NonNullable<Shape['stroke']>): string =>
+  (st.dash === undefined ? '' : ` stroke-dasharray="${st.dash.map(f).join(' ')}"`) + (st.round === true ? ' stroke-linecap="round"' : '')
+
 const paint = (s: Shape): string => {
-  if (s.line && s.stroke !== undefined) return `<path fill="none" stroke="${s.stroke.color}" stroke-width="${f(s.stroke.width)}" stroke-dasharray="${s.stroke.dash.map(f).join(' ')}" d="${pathOf(s.pts, false)}"/>`
+  if (s.line && s.stroke !== undefined) return `<path fill="none" stroke="${s.stroke.color}" stroke-width="${f(s.stroke.width)}"${strokeDash(s.stroke)} d="${pathOf(s.pts, false)}"/>`
   if (s.line) return `<path class="${s.dash ? 'td' : 'i'}" d="${pathOf(s.pts, false)}"/>`
   if (s.seal) return `<path fill="${s.fill}" stroke="${s.fill}" stroke-width="0.5" stroke-linejoin="round" d="${pathOf(s.pts)}"/>`
-  return `<path${s.ink ? ' class="i"' : ''} fill="${s.fill}" d="${pathOf(s.pts)}"/>`
+  return `<path${s.ink ? (s.fine === true ? ' class="i fi"' : ' class="i"') : ''} fill="${s.fill}" d="${pathOf(s.pts)}"/>`
 }
 
 /** A standalone page: the SVG inline, with drag-to-pan and wheel-to-zoom. */

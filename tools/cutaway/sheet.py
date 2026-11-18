@@ -47,6 +47,7 @@ INK, PAPER, DIM = C.INK, C.PAPER, C.DIM
 SERIF = "'Libre Baskerville', Baskerville, Georgia, serif"
 SANS = 'Helvetica, Arial, sans-serif'
 COL_X = 7600                 # the callout column
+MARKS_NOTE = 'The same marks, small, stand before each place the trains and streetcars went.'   # the spec's `marksNote` may say otherwise
 ART_R = COL_X - 200          # the drawings' right edge
 
 
@@ -153,8 +154,11 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     region, year = spec['region'], spec['year']
     build_dir = os.path.join(a.out, 'build')
+    cross = spec.get('crossSection')
     if not a.no_build:
         subprocess.run(['node', 'bin/isoscape.js', 'build', region, '--year', str(year), '--no-archive', '--out', build_dir], cwd=ROOT, check=True)
+        if cross:
+            subprocess.run(['node', 'bin/isoscape.js', 'build', cross['region'], '--year', str(year), '--no-archive', '--out', build_dir], cwd=ROOT, check=True)
     base = os.path.join(build_dir, f'{region}-{year}')
     iso_svg = open(base + '.svg').read()
     sec_svg = open(base + '-section.svg').read()
@@ -175,18 +179,39 @@ def main():
     iso_body = re.sub(r'<text\b[^>]*>.*?</text>', '', iso_body, flags=re.S)
     cap = max(28, (vb[2] - 48) * 0.022) * 2.4
     iso_vb = [vb[0], vb[1] + cap, vb[2], vb[3] - cap]
+    if spec.get('isoView'):
+        # A closer frame on the plate (x, y, w, h in its own units): what runs past it, a track
+        # or a trestle, is cut at the frame's edge.
+        iso_vb = list(spec['isoView'])
     svb, sec_body = inner(sec_svg)
+    if cross:
+        # A second flat section (a cross section), beside the first at the same scale.
+        cbase = os.path.join(build_dir, f"{cross['region']}-{year}")
+        cross_svg = open(cbase + '-section.svg').read()
+        cross_a = json.load(open(cbase + '-section.anchors.json'))
+        cvb, cross_body = inner(cross_svg)
 
     top = 700
     iso_box = (M - 60, top, ART_R - M + 60, 3900)
     s_iso = min(iso_box[2] / iso_vb[2], iso_box[3] / iso_vb[3])
     iso_h = iso_vb[3] * s_iso
-    # The flat section beneath, no taller than SEC_H, from the left edge of the art.
+    # Wayfinding labels under the plate push the sections down when they run past two lines.
+    WF = 50
+    low = max([len(wf['lines']) for wf in spec.get('wayfinding', []) if wf['place'] != 'top-right' and 'label' not in wf] or [0])
+    push = max(0, (low - 2) * WF * 1.42)
+    # The flat section beneath, no taller than SEC_H, from the left edge of the art; with a
+    # cross section, the two side by side at one scale, bottoms level.
     sec_w = ART_R - M
-    s_sec = min(sec_w / svb[2], (H - 330 - (top + iso_h + 330)) / svb[3])
+    sec_top = top + iso_h + 420 + push
+    GAP = 260
+    widths = svb[2] + (cvb[2] if cross else 0)
+    heights = max(svb[3], cvb[3]) if cross else svb[3]
+    s_sec = min((sec_w - (GAP if cross else 0)) / widths, (H - 330 - (sec_top - 90)) / heights)
     sec_h = svb[3] * s_sec
-    sec_top = top + iso_h + 420
-    sec_box = (M, sec_top, svb[2] * s_sec, sec_h)
+    sec_bottom = sec_top + heights * s_sec
+    sec_box = (M, sec_bottom - sec_h, svb[2] * s_sec, sec_h)
+    if cross:
+        cross_box = (M + svb[2] * s_sec + GAP, sec_bottom - cvb[3] * s_sec, cvb[2] * s_sec, cvb[3] * s_sec)
 
     labels = []    # the wayfinding labels' boxes, which the link preview keeps clear of
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
@@ -200,6 +225,11 @@ def main():
     out.append(text(M, sec_top - 70, spec['sectionCaption'], 76, 'italic', DIM))
     out.append(f'<svg x="{sec_box[0]}" y="{sec_box[1]:.1f}" width="{sec_box[2]:.1f}" height="{sec_box[3]:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in svb)}">{sec_body}</svg>')
     ox_sec, oy_sec = sec_box[0] - svb[0] * s_sec, sec_box[1] - svb[1] * s_sec
+    drawings = [('iso', iso_a, None, None), ('section', sec_a, sec_a.get('frame'), (ox_sec, oy_sec, s_sec))]
+    if cross:
+        out.append(text(cross_box[0], sec_top - 70, cross['caption'], 76, 'italic', DIM))
+        out.append(f'<svg x="{cross_box[0]:.1f}" y="{cross_box[1]:.1f}" width="{cross_box[2]:.1f}" height="{cross_box[3]:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in cvb)}">{cross_body}</svg>')
+        drawings.append(('cross', cross_a, cross_a.get('frame'), (cross_box[0] - cvb[0] * s_sec, cross_box[1] - cvb[1] * s_sec, s_sec)))
     iso_rect = (iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2, iso_box[1], iso_vb[2] * s_iso, iso_h)
 
     def locate(lonlat):
@@ -235,7 +265,8 @@ def main():
         y += 170
         for c in g['callouts']:
             conf = c['_conf']
-            for where, anchors, frame, (ox, oy, sc) in (('iso', iso_a, None, (ox_iso, oy_iso, s_iso)), ('section', sec_a, sec_a.get('frame'), (ox_sec, oy_sec, s_sec))):
+            for where, anchors, frame, place_ in drawings:
+                ox, oy, sc = place_ if place_ is not None else (ox_iso, oy_iso, s_iso)
                 if where not in c:
                     continue
                 p = anchor(c[where], anchors, frame)
@@ -251,11 +282,14 @@ def main():
         y += 36
     # Wayfinding: where the trains and streetcars went, in the plate's margins, each with a
     # leader to the track end or the street it belongs to.
-    WF = 50
     for wf in spec.get('wayfinding', []):
         if 'plate' in wf:
             # A place off the plate: pointed to at the plate's edge, as a fraction of its box.
             ax, ay = iso_rect[0] + wf['plate'][0] * iso_rect[2], iso_rect[1] + wf['plate'][1] * iso_rect[3]
+        elif 'part' in wf:
+            # A drawn part (a track on its trestle, above the ground `at` would point to).
+            p = anchor(wf, iso_a)
+            ax, ay = ox_iso + p[0] * s_iso, oy_iso + p[1] * s_iso
         else:
             p = locate(wf['at'])
             ax, ay = ox_iso + p[0] * s_iso, oy_iso + p[1] * s_iso
@@ -265,7 +299,7 @@ def main():
         lines = [ln.upper() for ln in wf['lines']]
         wmax = max(font('bold', WF).getlength(ln) + 3 * len(ln) for ln in lines)
         lh = WF * 1.42
-        x0, y0 = {
+        x0, y0 = wf['label'] if 'label' in wf else {
             'top-right': (ART_R - wmax, top - 215),
             'bottom-right': (ART_R - wmax, iso_rect[1] + iso_rect[3] + 70),
             'bottom-left': (M + 20, iso_rect[1] + iso_rect[3] + 70),
@@ -278,7 +312,12 @@ def main():
         # The leader: from the label's nearer edge to the place, ending in a dot.
         lx = x0 - 30 if ax < x0 else min(ax, x0 + wmax + 60)
         ly = y0 + lh * len(lines) - lh / 2 if ay > y0 else y0 - WF - 26
-        if wf['place'] != 'top-right':
+        if 'label' in wf:
+            # A label set where the spec says (`label`, its first baseline): the leader leaves
+            # the point of its box nearest the place it names, so it stays short.
+            lx = min(max(ax, x0 - 30), x0 + wmax + 60)
+            ly = min(max(ay, y0 - WF - 26), y0 - WF - 26 + lh * len(lines) + 34)
+        elif wf['place'] != 'top-right':
             ly = y0 - WF - 26
             lx = max(x0 - 30, min(ax, x0 + wmax + 60))
         out.append(f'<path d="M{lx:.0f} {ly:.0f}L{ax:.0f} {ay:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>')
@@ -292,7 +331,7 @@ def main():
         out.append(badge(x + 56, ky - 22, None, conf, 42))
         out.append(text(x + 140, ky, msg, 56, 'regular', DIM))
         ky += 92
-    for line in wrap('The same marks, small, stand before each place the trains and streetcars went.', 'regular', 56, W - M - x - 140):
+    for line in wrap(spec.get('marksNote', MARKS_NOTE), 'regular', 56, W - M - x - 140):
         out.append(text(x + 140, ky, line, 56, 'regular', DIM))
         ky += 76
     if spec.get('travelerKey') and traveler:
@@ -308,6 +347,11 @@ def main():
         ky += 68
     if ky > H - 120:
         print(f'warning: the column runs to {ky:.0f}, past the credit line', file=sys.stderr)
+    elif spec.get('columnEnd') and ky > spec['columnEnd']:
+        # The room the print's title block needs below the column (stamp.py places it there).
+        print(f"warning: the column runs to {ky:.0f}, into the title block's room (columnEnd {spec['columnEnd']})", file=sys.stderr)
+    if os.environ.get('SHEET_DEBUG'):
+        print(f'column ends at {ky:.0f}', file=sys.stderr)
     out.append(text(M, H - 150, spec['credit'], 46, 'regular', DIM))
     out.append('</svg>')
     sheet = os.path.join(a.out, f'{name}-sheet.svg')
@@ -365,7 +409,7 @@ def page(spec, print_dir, sheet_svg, iso_rect, labels=()):
             out += [f"### {c['n']}. {c['title']}", '', c['text'], '', f"*How sure: {key[c['_conf']]}.*", '']
     out += ["## How sure each part is", '', P.get('key_intro', ''), '']
     out += [f"- **{marks[k].capitalize()}:** {key[k]}." for k, _ in spec['key']]
-    out += ['', P.get('marks_note', 'The same marks, small, stand before each place the trains and streetcars went.'), '']
+    out += ['', P.get('marks_note', spec.get('marksNote', MARKS_NOTE)), '']
     if spec.get('travelerKey'):
         out += [P.get('traveler_note', spec['travelerKey']), '']
     if spec.get('wayfinding'):

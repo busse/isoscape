@@ -71,6 +71,10 @@ export interface Palette {
    * roofing, the plastered ramp houses, and the trains: Pullman-green coaches, black engines,
    * boxcar-red freight; and, for the larger trains of a cutaway, an engine's iron in a grey
    * light enough for its edges to show, the coal in its tender, and a coach's darker roof.
+   * Main Street Station's buff brick and red clay tile, the painted steel of its train shed, the
+   * ballast of its elevated tracks, and a diesel engine in a plain mid grey, light enough for
+   * its edges to show. The Chesapeake and Ohio's passenger cars of the early 1950s: blue, a
+   * yellow band along the top of the side, gray below the windows, a dark roof.
    */
   readonly parts: Readonly<Record<PartTone, readonly [string, string, string]>>
   /**
@@ -88,6 +92,8 @@ export interface Palette {
   readonly railSteel: string
   readonly roofs: Readonly<Record<'residential' | 'commercial' | 'industrial' | 'civic' | 'other', readonly string[]>>
   readonly lineWidth: number
+  /** The ink of a part drawn with `ink: "fine"` (small repeated work, a row of dormers). */
+  readonly fineLineWidth: number
   readonly groundLineWidth: number
   readonly dotRadius: number
 }
@@ -165,6 +171,16 @@ const paper: Palette = {
     loco: ['#6b6c70', '#4a4b4f', '#5a5b5f'],
     coal: ['#403e3b', '#2f2e2c', '#4a4744'],
     carRoof: ['#43553d', '#2f3d2b', '#4a5d43'],
+    brick: ['#e2c99c', '#b89d72', '#d6bd92'],
+    // Main Street Station's red tile roofs, dormers and tower dome in its own cutaway.
+    roofTile: ['#b46049', '#844232', '#a9553f'],
+    steel: ['#7d7f86', '#5c5e65', '#8e9096'],
+    ballast: ['#b5aa90', '#948a72', '#aca186'],
+    diesel: ['#9a9da1', '#7b7e83', '#8a8d92'],
+    coachBlue: ['#2f4f7a', '#213a5c', '#3a3b3a'],
+    coachBand: ['#e2b93b', '#b8932a', '#c9a433'],
+    coachSkirt: ['#a9adb1', '#868a8f', '#9a9ea3'],
+    coachRoof: ['#4a4b4f', '#36373a', '#4f5054'],
     // Water held in a modeled work (a forebay, a wheel pit), drawn as a solid at its level.
     water: ['#a8cad8', '#8fb3c4', '#b4d3df'],
   },
@@ -184,6 +200,7 @@ const paper: Palette = {
     other: ['#f5f2ea', '#eeeae0'],
   },
   lineWidth: 0.6,
+  fineLineWidth: 0.35,
   groundLineWidth: 0.35,
   dotRadius: 1.45,
 }
@@ -260,6 +277,15 @@ const night: Palette = {
     loco: ['#3a3b40', '#26272c', '#303136'],
     coal: ['#1f1f22', '#161618', '#29292c'],
     carRoof: ['#24382a', '#18261c', '#2a3e2f'],
+    brick: ['#5c5040', '#40382d', '#544a3c'],
+    roofTile: ['#6a3a2e', '#4a2820', '#5e3428'],
+    steel: ['#2c2d33', '#1d1e23', '#34353b'],
+    ballast: ['#4a4840', '#38362f', '#43413a'],
+    diesel: ['#34363b', '#232428', '#2d2f33'],
+    coachBlue: ['#22385a', '#172843', '#26282b'],
+    coachBand: ['#8f7628', '#6c591e', '#7d6723'],
+    coachSkirt: ['#4a4d52', '#36393d', '#414448'],
+    coachRoof: ['#2a2b2e', '#1d1e20', '#2e2f32'],
     water: ['#1b2e3b', '#16252f', '#223847'],
   },
   poche: '#c9d1e6',

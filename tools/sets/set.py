@@ -606,7 +606,8 @@ def write_page(S, pts):
            f'social: {slug}-social.jpg', '---', '', f"# {P['title']}", '', P['intro'], '',
            f"![{P.get('image_alt', P['title'])}]({slug}-menu.jpg)", '',
            # No word of the shop here: the explorer adds the page's shop button while the page's
-           # slug (or its maps) are in shop.onSale in isoscape.config.json, the one list of what sells.
+           # slug (or its maps) are in shop.onSale in isoscape.config.json, the one list of what sells,
+           # and each piece's print beside the link to its view from shop.products (products.py).
            f"[Open the map]({SITE}#{ref}) to pan and zoom, or jump to a {P.get('noun', 'place')} below.",
            '', f"## {P.get('boxes_heading', 'The places')}", '']
     for s in S.boxes:

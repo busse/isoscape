@@ -13,27 +13,16 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Stage | Entries |
 |---|---|
-| research | 1 |
 | rough draft | 1 |
-| working draft | 2 |
-| final draft | 3 |
-| final production | 40 |
+| working draft | 1 |
+| final production | 44 |
 | on hold | 55 |
 | blocked | 1 |
-| backlog | 1 |
+| backlog | 2 |
 
 ## Waiting on a decision
 
-- **The Byrd Theatre: Cutaway**: review the working draft; target on sale about December 1, 2026
-- **Main Street Station, about 1952: Cutaway**: review marks on the working draft (review PDF sent for d3; d4 corrects the tower and roof heights and adds the red route)
-- **The Byrd Park Pump House: Cutaway**: rough draft: worth pursuing to a working draft? (and: year, dancers or empty, locks in frame)
-- **Title-block labels at the smallest sizes**: whether to make an edition of every print for larger title-block labels (they print at about 3 to 4 pt at the smallest sizes sold)
-
-## Research
-
-| Plate | Title | Kind | Version | On sale |
-|---|---|---|---|---|
-| — | Title-block labels at the smallest sizes | batch | — | no |
+- **The Byrd Theatre: Cutaway**: owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead
 
 ## Rough draft
 
@@ -46,28 +35,20 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | The Byrd Theatre: Cutaway | cutaway | 1.0.0-d2 | no |
-| — | Main Street Station, about 1952: Cutaway | cutaway | 1.0.0-d4 | no |
-
-## Final draft
-
-| Plate | Title | Kind | Version | On sale |
-|---|---|---|---|---|
-| BSS·00 | Broad Street Station, 1943: The Railroads and Fourteen Places | set menu | 3.0.0-rc1 | no |
-| BSS·16 | Scott's Addition, Broad Street Station 1943 | set box | 1.0.0-rc1 | no |
-| BSS·M | Broad Street Station, 1943: The Railroad Map | set map | 3.0.0-rc1 | no |
 
 ## Final production
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
+| BSS·00 | Broad Street Station, 1943: The Railroads and Fourteen Places | set menu | 3.1.0 | yes, version 3 |
 | BSS·01 | AY Tower, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·02 | The State Fair grounds, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·03 | Hermitage Road, Broad Street Station 1943 | set box | 2.0.0 | no |
 | BSS·04 | Seaboard Junction, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·05 | The loop and the sheds, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·06 | C.F. Sauer Company, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
-| BSS·07 | Main Street Station, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
-| BSS·08 | The Triple Crossing, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
+| BSS·07 | Main Street Station, Broad Street Station 1943 | set box | 3.1.0 | yes, version 3 |
+| BSS·08 | The Triple Crossing, Broad Street Station 1943 | set box | 3.1.0 | yes, version 3 |
 | BSS·09 | The C&O viaduct, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·10 | Hull Street Station, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·11 | The Belt Line bridge, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
@@ -75,7 +56,10 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | BSS·13 | Broad Street Station, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·14 | Pope's front, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·15 | Broad Street Station, 1943: The Cutaway | cutaway | 1.0.0 | yes, version 1 |
+| BSS·16 | Scott's Addition, Broad Street Station 1943 | set box | 1.0.0 | yes, version 1 |
+| BSS·M | Broad Street Station, 1943: The Railroad Map | set map | 3.1.0 | yes, version 3 |
 | GWY·01 | Gwynn's Island | print | 4.0.0 | yes, version 4 |
+| MSS·01 | Main Street Station, about 1952: Cutaway | cutaway | 1.0.0 | yes, version 1 |
 | RVA·01 | Richmond, 1925 | print | 5.0.0 | yes, version 5 |
 | RVA·03 | Richmond, 1886 | print | 3.0.0 | yes, version 3 |
 | RVA·04 | Richmond, 1950 | print | 5.0.0 | yes, version 5 |
@@ -117,14 +101,13 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
+| — | Title-block labels at the smallest sizes | batch | — | no |
 | — | Richmond before 1886: a traced building layer | research | — | no |
 
 ## Planned editions
 
 Changes to published work are made in planned editions, each for a stated reason: a factual correction, a fault visible on the wall, or an improvement.
 
-- **Main Street Station, Broad Street Station 1943** (BSS·07), factual correction: Main Street Station is drawn about a fifth too low: rebuild the tower and roof to the heights measured on HABS VA-848-10, -11 and -12 (finial about 148 ft over Main Street); the note says "110 feet to the finial"; correct it to about 148 ft (approximate).
-- **Broad Street Station, 1943: The Railroad Map** (BSS·M), factual correction: Main Street Station is drawn about a fifth too low (finial about 148 ft over Main Street, not 110).
 - **Title-block labels at the smallest sizes**, improvement: set the title block's labels at no less than 6 pt at the smallest size sold, on every print.
 
 ## Known faults, accepted
@@ -132,6 +115,7 @@ Changes to published work are made in planned editions, each for a stated reason
 Small faults seen only up close are listed here, so they are known and not reported again at each inspection. Any that matter are fixed in a planned edition.
 
 - **C.F. Sauer Company, Broad Street Station 1943** (BSS·06): a present-day street is drawn meeting a 1940 building beside the freight track.
+- **Main Street Station, about 1952: Cutaway** (MSS·01): track floor drawn 0.7 m high (6.5 m above the ground floor; the 1900 section and HABS VA-848-10 give 19 ft, 5.8 m): about 0.4 mm on the 32 in print, not visible at arm's length; correct in a later edition if the model is reworked; callout 10 dot on a shed diagonal in front of the C&O engine; callout 11 dot on a truss member over the Seaboard diesel; badge 7 stands over the red route at the arcade; main view: the route is hidden on the stair and doubles back in the waiting room, two red lines leaving the traveler; flat section: callout 6 dot on the lunch counter, barely seen behind the glass screen.
 - **Richmond's Streetcars, 1925: The Lines and Fourteen Stops** (STC·00): a stray rock mark in the river; card 5 says "over the Fifth Street viaduct", a viaduct outside box 5's frame.
 - **Westhampton Park, Richmond Streetcars 1925** (STC·01): the line runs beside Three Chopt Road on its own strip (approximate, by design).
 - **Highland Park, Richmond Streetcars 1925** (STC·05): the note says "over the Fifth Street viaduct", a viaduct outside the frame.

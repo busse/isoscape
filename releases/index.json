@@ -28,6 +28,14 @@
    "v2.json"
   ]
  },
+ "broad-street-1943-03-scotts-addition": {
+  "title": "Scott's Addition, Broad Street Station 1943",
+  "current": 1,
+  "kind": "redraw",
+  "records": [
+   "v1.json"
+  ]
+ },
  "broad-street-1943-04-seaboard-junction": {
   "title": "Seaboard Junction, Broad Street Station 1943",
   "current": 3,
@@ -61,22 +69,28 @@
  "broad-street-1943-07-main-street-station": {
   "title": "Main Street Station, Broad Street Station 1943",
   "current": 3,
-  "kind": "redraw",
+  "kind": "revision",
   "records": [
    "v1.json",
    "v2.json",
+   "v3.1.json",
    "v3.json"
-  ]
+  ],
+  "asset_version": "3.1.0",
+  "record": "v3.1.json"
  },
  "broad-street-1943-08-triple-crossing": {
   "title": "The Triple Crossing, Broad Street Station 1943",
   "current": 3,
-  "kind": "redraw",
+  "kind": "revision",
   "records": [
    "v1.json",
    "v2.json",
+   "v3.1.json",
    "v3.json"
-  ]
+  ],
+  "asset_version": "3.1.0",
+  "record": "v3.1.json"
  },
  "broad-street-1943-09-co-viaduct": {
   "title": "The C&O viaduct, Broad Street Station 1943",
@@ -148,21 +162,29 @@
  },
  "broad-street-1943-map": {
   "title": "Broad Street Station, 1943: The Railroad Map",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "revision",
   "records": [
    "v1.json",
-   "v2.json"
-  ]
+   "v2.json",
+   "v3.1.json",
+   "v3.json"
+  ],
+  "asset_version": "3.1.0",
+  "record": "v3.1.json"
  },
  "broad-street-1943-menu": {
   "title": "Broad Street Station, 1943: The Railroads and Fourteen Places",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "revision",
   "records": [
    "v1.json",
-   "v2.json"
-  ]
+   "v2.json",
+   "v3.1.json",
+   "v3.json"
+  ],
+  "asset_version": "3.1.0",
+  "record": "v3.1.json"
  },
  "gwynns-island": {
   "title": "Gwynn's Island",
@@ -668,6 +690,14 @@
   "records": [
    "v1.json",
    "v2.json"
+  ]
+ },
+ "main-street-1952-cutaway": {
+  "title": "Main Street Station, about 1952: Cutaway",
+  "current": 1,
+  "kind": "cutaway",
+  "records": [
+   "v1.json"
   ]
  },
  "richmond-1865": {

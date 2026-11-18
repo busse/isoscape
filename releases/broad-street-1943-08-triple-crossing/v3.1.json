@@ -1,0 +1,366 @@
+{
+ "design": "broad-street-1943-08-triple-crossing",
+ "title": "The Triple Crossing, Broad Street Station 1943",
+ "version": 3,
+ "asset_version": "3.1.0",
+ "version_note": "corrected in place (3.1): Main Street Station, at the top edge, redrawn at its measured height (approximate).",
+ "recorded": "2026-11-18T09:39:05+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "5857686d66df814d3186a9cc83107a2f639c8551",
+  "subject": "Changes: Main Street Station corrected in place as 3.1 on BSS-07, BSS-08, BSS-M and BSS-00 (measured height, about 148 feet to the finial)",
+  "dirty": false
+ },
+ "kind": "revision",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/sets/set.py broad-street-1943 prepare   # where data/ is cached",
+   "python3 tools/sets/set.py broad-street-1943 boxes triple-crossing   # into out/sets/<set>/print (or --dir)",
+   "python3 tools/sets/set.py broad-street-1943 canvas   # into out/sets/<set>/print (or --dir)",
+   "cp <set print>/broad-street-1943-08-triple-crossing_24x18.jpg <store>/print-files/broad-street-1943/drawn/broad-street-1943-08-triple-crossing-v3.1/ && cp <set print>/canvas/<the 16x12 24x18 files> <store>/print-files/broad-street-1943/drawn/broad-street-1943-08-triple-crossing-v3.1/canvas/",
+   "python3 tools/release/stamp.py <store> broad-street-1943-08-triple-crossing --version 3 --base print-files/broad-street-1943/drawn/broad-street-1943-08-triple-crossing-v3.1"
+  ],
+  "redraw": true,
+  "base_kind": "set",
+  "previous_record": "releases/broad-street-1943-08-triple-crossing/v3.json",
+  "pinned": "scenes are the set's scene SVGs below, by SHA-256",
+  "block": {
+   "collection": "Buildings in their time",
+   "set": "Broad Street Station, 1943",
+   "piece": "Box 8",
+   "plate": "BSS-08",
+   "version": "3",
+   "drawn": "2026",
+   "location": "37.533° N 77.430° W",
+   "facing": "0°"
+  },
+  "files": {
+   "broad-street-1943-08-triple-crossing-v3.1_24x18.jpg": {
+    "base": "print-files/broad-street-1943/drawn/broad-street-1943-08-triple-crossing-v3.1/broad-street-1943-08-triple-crossing_24x18.jpg",
+    "base_sha256": "8a367db0a325feac4157c88c765c3f5c23be62755cb33af72cb6ce8e7b34caa9",
+    "at": {
+     "x": 5596,
+     "y": 4980,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   },
+   "broad-street-1943-08-triple-crossing-v3.1_canvas-16x12.jpg": {
+    "base": "print-files/broad-street-1943/drawn/broad-street-1943-08-triple-crossing-v3.1/canvas/broad-street-1943-08-triple-crossing_canvas-16x12.jpg",
+    "base_sha256": "935a337533da1fc14653ef3d984248aa8079ae08f8a5a185821ffb79fbe5708a",
+    "at": {
+     "x": 3975,
+     "y": 3742,
+     "w": 1127,
+     "h": 159,
+     "u": 0.8667,
+     "where": "foot"
+    }
+   },
+   "broad-street-1943-08-triple-crossing-v3.1_canvas-24x18.jpg": {
+    "base": "print-files/broad-street-1943/drawn/broad-street-1943-08-triple-crossing-v3.1/canvas/broad-street-1943-08-triple-crossing_canvas-24x18.jpg",
+    "base_sha256": "a5d5cb31cb88d9017c43cba92c3252a4a412c3ac1bb8ca4f6a7b6cfb2a66d82e",
+    "at": {
+     "x": 6046,
+     "y": 5430,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "a71068c515fe9f22382f53275c87f264db4a3dd004f9e35604e7b52bee4dcb88",
+   "catalog/plates.json": "8880e33ba6416b1b5b8ca7985b6307398fd0def50bdf413b5eb08e0dfef0dfc8"
+  },
+  "tools_match_commit": true,
+  "made_as": "redraw"
+ },
+ "scenes": [
+  {
+   "region": "broad-street-lines",
+   "year": 1940,
+   "flags": [],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-lines-1940.svg",
+   "sha256": "3a4a825f818f71cd60f0a241f45a26ec2a73cd4aa4ab9079ae732c5891b4f82f",
+   "frozen": "data/_releases/scenes/3a4a825f818f71cd60f0a241f45a26ec2a73cd4aa4ab9079ae732c5891b4f82f.svg",
+   "reproduces": true
+  },
+  {
+   "region": "broad-street-lines",
+   "year": 1940,
+   "flags": [
+    "--rail-scale",
+    "1"
+   ],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-lines-1940-fine.svg",
+   "sha256": "bf97d37db9f918cad6e3055b9e83eac6f13ebcd2daf7b0c575ead4d378881728",
+   "frozen": "data/_releases/scenes/bf97d37db9f918cad6e3055b9e83eac6f13ebcd2daf7b0c575ead4d378881728.svg",
+   "reproduces": true
+  },
+  {
+   "region": "broad-street-lines",
+   "year": 1943,
+   "flags": [],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-lines-1943.svg",
+   "sha256": "55245a93376b68477ef70e0210d4c49d3e9b3e193ba5f452ac7a548a31f4acc5",
+   "frozen": "data/_releases/scenes/55245a93376b68477ef70e0210d4c49d3e9b3e193ba5f452ac7a548a31f4acc5.svg",
+   "reproduces": true
+  },
+  {
+   "region": "broad-street-lines",
+   "year": 1943,
+   "flags": [
+    "--rail-scale",
+    "1"
+   ],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-lines-1943-fine.svg",
+   "sha256": "21c963f1cb3f2a3881980c3fad65fe43b81a3491a97b5d215b1f185b27d41be3",
+   "frozen": "data/_releases/scenes/21c963f1cb3f2a3881980c3fad65fe43b81a3491a97b5d215b1f185b27d41be3.svg",
+   "reproduces": true
+  },
+  {
+   "region": "broad-street-station",
+   "year": 1943,
+   "flags": [],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-1943.svg",
+   "sha256": "074b9324c86a524cb0fc6d0e5c264f2f4c488a66a08f06a6c25958a85ab04196",
+   "frozen": "data/_releases/scenes/074b9324c86a524cb0fc6d0e5c264f2f4c488a66a08f06a6c25958a85ab04196.svg",
+   "reproduces": true
+  },
+  {
+   "region": "broad-street-station",
+   "year": 1943,
+   "flags": [
+    "--rail-scale",
+    "1"
+   ],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-1943-fine.svg",
+   "sha256": "074b9324c86a524cb0fc6d0e5c264f2f4c488a66a08f06a6c25958a85ab04196",
+   "frozen": "data/_releases/scenes/074b9324c86a524cb0fc6d0e5c264f2f4c488a66a08f06a6c25958a85ab04196.svg",
+   "reproduces": true
+  },
+  {
+   "region": "broad-street-station-front",
+   "year": 1943,
+   "flags": [],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-front-1943.svg",
+   "sha256": "99a2f7ebeeb3f085f6aaa33abb2120d41bb3b6d91c1c125f00e16858b706cb26",
+   "frozen": "data/_releases/scenes/99a2f7ebeeb3f085f6aaa33abb2120d41bb3b6d91c1c125f00e16858b706cb26.svg",
+   "reproduces": true
+  },
+  {
+   "region": "broad-street-station-front",
+   "year": 1943,
+   "flags": [
+    "--rail-scale",
+    "1"
+   ],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-front-1943-fine.svg",
+   "sha256": "99a2f7ebeeb3f085f6aaa33abb2120d41bb3b6d91c1c125f00e16858b706cb26",
+   "frozen": "data/_releases/scenes/99a2f7ebeeb3f085f6aaa33abb2120d41bb3b6d91c1c125f00e16858b706cb26.svg",
+   "reproduces": true
+  },
+  {
+   "region": "broad-street-station-loop",
+   "year": 1943,
+   "flags": [],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-loop-1943.svg",
+   "sha256": "66bbd7810d9cf99ca19d87cb72b1acbd3a6e00dfdc808c58e5edd272090f5a8a",
+   "frozen": "data/_releases/scenes/66bbd7810d9cf99ca19d87cb72b1acbd3a6e00dfdc808c58e5edd272090f5a8a.svg",
+   "reproduces": true
+  },
+  {
+   "region": "broad-street-station-loop",
+   "year": 1943,
+   "flags": [
+    "--rail-scale",
+    "1"
+   ],
+   "svg": "out/sets/broad-street-1943/scenes/broad-street-station-loop-1943-fine.svg",
+   "sha256": "66bbd7810d9cf99ca19d87cb72b1acbd3a6e00dfdc808c58e5edd272090f5a8a",
+   "frozen": "data/_releases/scenes/66bbd7810d9cf99ca19d87cb72b1acbd3a6e00dfdc808c58e5edd272090f5a8a.svg",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "sets/broad-street-1943.json": "f17c31c5ab096e29b0252019ad8d0a75997b33975998c43c00d64081fa3019f1",
+  "out/sets/broad-street-1943/points.json": "c39d7a7290955630eb8f077fc9ea21c6358013117e3e75a7c3b4683bee4baded",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "a71068c515fe9f22382f53275c87f264db4a3dd004f9e35604e7b52bee4dcb88",
+  "catalog/plates.json": "8880e33ba6416b1b5b8ca7985b6307398fd0def50bdf413b5eb08e0dfef0dfc8",
+  "tools/sets/set.py": "c6a1622718b414c1d65340b16b7209851e341411ad3e685c076903292a0181ca",
+  "regions/broad-street-lines.json": "a77c2beb6abdbd2ab5eae598ef678570b448a7c784c1244dc98c9cd7468de6be",
+  "history/broad-street-lines.json": "02256558d0305725e7d3acbf1f04848ecc0c63e006de886a60adde6be5a3c8c6",
+  "history/sanborn/lost.geojson": "56e62877646394d1e887b3e5fabf887ce2fca992343d2fb5e25aefe995318a0a",
+  "history/sanborn/broad-street-lost.geojson": "e9f423bf6e29304ad5e9352c87ebbe9019ec32be569bcf486b086e079e656ed9",
+  "history/sanborn/fair-grounds.geojson": "ccab37978983fdf8008d49ee3a453e0259a10b51a3587d945b6fe9a8c3a8abd6",
+  "regions/broad-street-station.json": "f6d6cfa0d44ef1343aaed72c8846abef3e9cbc62ee01565057bd4e74a6e644be",
+  "history/broad-street-station-set.json": "b748ad2f1b1c454de3cb99142678a348702ff89951fc48508217b7b56d9a82a1",
+  "regions/broad-street-station-front.json": "121d8023324160abb9c6bbb9f6fe2a39e54b2a15f2779bd7098c0df2cb95ed8c",
+  "regions/broad-street-station-loop.json": "cc0a6ef83fdd6397db34b7e41a39ec092003fe8d3e0eed348230bb016bf91a5b"
+ },
+ "data": {
+  "richmond-streetcars": {
+   "snapshot": "data/_releases/richmond-streetcars@6e9297a3959e",
+   "files": {
+    "dem.bin.gz": "84786d9e1fa5ccdb10f4a551a77100fdc1704b71d3f782290e89356111a4a9d0",
+    "osm.json": "7dbe53ef18944a9c025a688b68194b30502add174241cfc70fa4eaf80e967eee",
+    "yearbuilt.json": "add6087d440260fbde74ce64208d372e2520dabf6e52130c350c8fa2c79b4e63"
+   }
+  },
+  "broad-street-station": {
+   "snapshot": "data/_releases/broad-street-station@1fd3a2bb6c6b",
+   "files": {
+    "dem.bin.gz": "106ea02c5229b62aba8bc21e8b0bd12ab257722d6eec25f4527dbbdca5184b8b",
+    "osm.json": "3aab8a8a78c342097c9e6ffd1f6d8d20f9f7c0be297426475e529d434b72ef7f",
+    "yearbuilt.json": "5f9cb8d05b4edfd7209390b3482fd26ee3ab4283f984fc233792f3d8b228def7"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/broad-street-1943/broad-street-1943-08-triple-crossing-v3.1_24x18.jpg",
+   "sha256": "f89a468869b5b125baca48c60fb14f79f5661219858e2df65191d422da10afe2",
+   "bytes": 3271790,
+   "printful_file_id": 1115427908
+  },
+  "canvas": [
+   {
+    "file": "print-files/broad-street-1943/canvas/broad-street-1943-08-triple-crossing-v3.1_canvas-16x12.jpg",
+    "sha256": "9c07d948c4176a1997e4353998108228aabbb66908026598ec5ce6025f3476d0",
+    "bytes": 2309553,
+    "printful_file_id": 1115428288
+   },
+   {
+    "file": "print-files/broad-street-1943/canvas/broad-street-1943-08-triple-crossing-v3.1_canvas-24x18.jpg",
+    "sha256": "746a73ea19c6ed4ebf3c332b3b127b551a47c26b04ea8b923dc77162b0c210c6",
+    "bytes": 3658445,
+    "printful_file_id": 1115428330
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "place": "Broad Street Station",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print_dir": "print-files/broad-street-1943",
+   "tags": [
+    "broad-street-1943"
+   ],
+   "credit_extra": "Station loop after the USGS Richmond quadrangles of 1934 and 1956, with the sources cited for each place on the <a href=\"https://busse.github.io/isoscape/#/broad-street\">Broad Street page ↗</a>.",
+   "one_mockup": true,
+   "title": "The Triple Crossing, Broad Street Station 1943",
+   "ratio": "3x4",
+   "sizes": [
+    "12x16",
+    "18x24"
+   ],
+   "print": "broad-street-1943-08-triple-crossing-v3.1_24x18.jpg",
+   "canvas": "broad-street-1943-08-triple-crossing-v3.1_canvas-{w}x{h}.jpg",
+   "explore": "broad-street-lines:1943@1478,732,6",
+   "detail": [
+    0.35,
+    0.2,
+    0.65,
+    0.6
+   ],
+   "version": 3,
+   "version_date": "November 18, 2026",
+   "version_note": "corrected in place (3.1): Main Street Station, at the top edge, redrawn at its measured height (approximate).",
+   "plate": "BSS-08",
+   "plate_box": [
+    0.77722,
+    0.92222,
+    0.96889,
+    0.95833
+   ],
+   "asset_version": "3.1.0"
+  },
+  "products": [
+   {
+    "handle": "the-triple-crossing-broad-street-station-1943",
+    "id": "gid://shopify/Product/9137911627894",
+    "format": "all (merged)",
+    "status": "ACTIVE",
+    "variants": 10
+   },
+   {
+    "handle": "the-triple-crossing-broad-street-station-1943-print",
+    "id": "gid://shopify/Product/9136441524342",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "the-triple-crossing-broad-street-station-1943-framed-print",
+    "id": "gid://shopify/Product/9136441557110",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "the-triple-crossing-broad-street-station-1943-framed-canvas",
+    "id": "gid://shopify/Product/9136441589878",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-08-triple-crossing-v3.1_24x18-print.jpg?v=1794994196",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-08-triple-crossing-v3.1_24x18-detail.jpg?v=1794994200",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-08-triple-crossing-v3.1_24x18-plate.jpg?v=1794994204"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-08-triple-crossing-v3.1_24x18-framed-print-black.jpg?v=1794994216",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-08-triple-crossing-v3.1_24x18-framed-print-white.jpg?v=1794994220",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-08-triple-crossing-v3.1_24x18-detail.jpg?v=1794994200",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-08-triple-crossing-v3.1_24x18-plate.jpg?v=1794994204"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-08-triple-crossing-v3.1_24x18-framed-canvas-black.jpg?v=1794994225",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-08-triple-crossing-v3.1_24x18-framed-canvas-white.jpg?v=1794994230",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-08-triple-crossing-v3.1_24x18-detail.jpg?v=1794994200",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/broad-street-1943-08-triple-crossing-v3.1_24x18-plate.jpg?v=1794994204"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "broad-street-lines:1943@1478,732,6"
+ },
+ "supersedes": {
+  "record": "v3.json",
+  "asset_version": "3.0.0",
+  "outputs": [
+   {
+    "file": "print-files/broad-street-1943/broad-street-1943-08-triple-crossing-v3_24x18.jpg",
+    "sha256": "d9e3ae144f640aaa584be16e6cd5a069347e66382b52e0e3c9e37a045469bba2"
+   },
+   {
+    "file": "print-files/broad-street-1943/canvas/broad-street-1943-08-triple-crossing-v3_canvas-16x12.jpg",
+    "sha256": "f0d5db5cf6c8364f57162b3368d2c4a4e6f755a245c387047cd088b022011f40"
+   },
+   {
+    "file": "print-files/broad-street-1943/canvas/broad-street-1943-08-triple-crossing-v3_canvas-24x18.jpg",
+    "sha256": "090d9b15267d05ae8a493bdfd42f70c29275f9375ee37ad66ab21ae0fa5fea42"
+   }
+  ]
+ },
+ "restamped": {
+  "files": 3,
+  "matched": 3
+ },
+ "reproduced": {
+  "scenes": 10,
+  "matched": 10
+ }
+}

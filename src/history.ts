@@ -58,7 +58,13 @@ export interface HistoryFeature {
   readonly base?: number
   readonly seat?: 'min' | 'max'
   readonly on?: string
-  readonly shape?: 'prism' | 'dome' | 'revolve' | 'stair' | 'arch' | 'hip' | 'gable' | 'disc'
+  readonly shape?: 'prism' | 'dome' | 'revolve' | 'stair' | 'arch' | 'hip' | 'gable' | 'disc' | 'inset' | 'frame' | 'track'
+  /**
+   * A `hip` that is one piece of a larger hipped roof (split round a tower that stands in it):
+   * that roof's whole outline (lon, lat, convex). The piece's slopes rise from the whole roof's
+   * eaves, and its own ring only cuts it out, so the pieces meet as one roof.
+   */
+  readonly roofRing?: Vec2[]
   readonly tone?: PartTone
   /**
    * The modeled building a part belongs to, where a history holds more than one: the parts of
@@ -81,6 +87,16 @@ export interface HistoryFeature {
    */
   readonly levels?: readonly (readonly [number, number, number])[]
   /**
+   * `frame`: straight members in the vertical plane over the ring's first edge (a truss, a
+   * bracket, a roof slope), each [u0, z0, u1, z1, depth]: from u0 to u1 meters along that edge
+   * from its start, at z0 and z1 meters above the part's bottom, `depth` deep in that plane,
+   * and as thick as the ring's second edge is long. `inset` uses `levels` as [height, outer
+   * inset, inner inset] in meters in from the ring (a hipped roof, a square dome; an inner inset
+   * past the middle is solid). `track`: ties and two rails on the ring, from its first edge
+   * (across the track) along its second.
+   */
+  readonly members?: readonly (readonly number[])[]
+  /**
    * `stair`: the number of treads; it rises from the ring's first edge to its third. `arch`: an
    * arched window on the ring's first edge (its span), rising to a half ellipse at the top.
    * `hip`: a roof rising from every edge of its (convex) ring at one pitch to a ridge at its
@@ -89,6 +105,12 @@ export interface HistoryFeature {
    * standing on the ring's first edge (its diameter), as thick as the second (a clock face).
    */
   readonly steps?: number
+  /** A part standing inside a roof shell (that part's id): see `Item.within`. */
+  readonly within?: string
+  /** A part standing on a roof shell's outside (that part's id), a dormer: see `Item.over`. */
+  readonly over?: string
+  /** `fine`: its outlines drawn with the palette's finer ink, so small repeated work (a row of dormers) reads as a rhythm. */
+  readonly ink?: 'fine'
   /** How the part is known: see `confidenceOf`. */
   readonly confidence?: Confidence
   /**
@@ -98,7 +120,11 @@ export interface HistoryFeature {
   readonly at?: Vec2
   readonly caption?: string
   readonly anchor?: 'start' | 'middle' | 'end'
-  /** A rail line: a train standing on it, `at` meters from the line's start. */
+  /**
+   * A rail line: a train standing on it, `at` meters from the line's start. A line with an
+   * `elevation` is carried on a deck (an elevated track): its train stands there, and it is not
+   * drawn on the ground (its deck and rails are modeled parts).
+   */
   readonly train?: Train
   /** The train a cutaway draws here instead: a close view places its train to be seen. */
   readonly cutTrain?: Train
@@ -143,7 +169,7 @@ export type Confidence = 'drawn' | 'written' | 'approximate'
 /** A part's confidence: what it says, or `approximate` when it says nothing. */
 export const confidenceOf = (h: { readonly confidence?: Confidence }): Confidence => h.confidence ?? 'approximate'
 
-export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof' | 'tile' | 'water'
+export type PartTone = 'stone' | 'dome' | 'iron' | 'ramp' | 'coach' | 'engine' | 'freight' | 'plaster' | 'floor' | 'wood' | 'glass' | 'tram' | 'roof' | 'loco' | 'coal' | 'carRoof' | 'brick' | 'tile' | 'roofTile' | 'steel' | 'ballast' | 'diesel' | 'coachBlue' | 'coachBand' | 'coachSkirt' | 'coachRoof' | 'water'
 
 /**
  * A train on a curated rail line: an engine (unless `engine` is false) and `cars` cars behind
@@ -153,7 +179,11 @@ export interface Train {
   readonly cars: number
   readonly at: number
   readonly engine?: boolean
+  /** The engine: a steam engine and its tender (the default), or a diesel unit. */
+  readonly power?: 'steam' | 'diesel'
   readonly kind?: 'coach' | 'freight'
+  /** The coaches' paint: Pullman green (the default), or the C&O's blue with a yellow band. */
+  readonly livery?: 'pullman' | 'co'
   readonly reverse?: boolean
 }
 

@@ -178,23 +178,16 @@
    "kind": "set box",
    "stage": "final production",
    "status": "active",
-   "asset_version": "3.0.0",
+   "asset_version": "3.1.0",
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
    "orders": 0,
    "rounds": 0,
    "waiting_on": "nothing",
-   "decision": "stays on sale (not visible at arm's length); height and note corrected in the planned edition, or in place if it has no orders",
+   "decision": null,
    "accepted_faults": [],
-   "planned_edition": {
-    "reason": "factual correction",
-    "fixes": [
-     "Main Street Station is drawn about a fifth too low: rebuild the tower and roof to the heights measured on HABS VA-848-10, -11 and -12 (finial about 148 ft over Main Street)",
-     "the note says \"110 feet to the finial\"; correct it to about 148 ft (approximate)"
-    ],
-    "as": "3.1.0, a revision in place, if BSS-07 has no orders; otherwise edition 4 (4.0.0)"
-   },
+   "planned_edition": null,
    "last_inspected": null,
    "branch": null,
    "worktree": null,
@@ -212,7 +205,7 @@
    "kind": "set box",
    "stage": "final production",
    "status": "active",
-   "asset_version": "3.0.0",
+   "asset_version": "3.1.0",
    "published_version": 3,
    "live_version": 3,
    "on_sale": true,
@@ -417,24 +410,18 @@
    "title": "Broad Street Station, 1943: The Railroad Map",
    "plate": "BSS-M",
    "kind": "set map",
-   "stage": "final draft",
+   "stage": "final production",
    "status": "active",
-   "asset_version": "3.0.0-rc1",
-   "published_version": 2,
-   "live_version": null,
-   "on_sale": false,
+   "asset_version": "3.1.0",
+   "published_version": 3,
+   "live_version": 3,
+   "on_sale": true,
    "orders": 0,
-   "rounds": 1,
-   "waiting_on": "agent",
-   "decision": "approved with Scott's Addition; release in progress; Main Street Station's height corrected afterwards (in place if still unordered)",
+   "rounds": 0,
+   "waiting_on": "nothing",
+   "decision": null,
    "accepted_faults": [],
-   "planned_edition": {
-    "reason": "factual correction",
-    "fixes": [
-     "Main Street Station is drawn about a fifth too low (finial about 148 ft over Main Street, not 110)"
-    ],
-    "as": "rc2 of this candidate if the owner says so; otherwise the next edition"
-   },
+   "planned_edition": null,
    "last_inspected": "45ab973",
    "branch": "bss-box3",
    "worktree": "/home/claude/wt-box3",
@@ -447,22 +434,25 @@
    ],
    "released": "November 15, 2026",
    "notes": "rc1 stamped v3 on the branch (prints.txt); inspected once at arm's length: nothing seen after the badge 3 fix",
-   "orders_counted": "2026-11-18"
+   "orders_counted": "2026-11-18",
+   "log": [
+    "2026-11-18: final draft -> final production"
+   ]
   },
   "broad-street-1943-menu": {
    "title": "Broad Street Station, 1943: The Railroads and Fourteen Places",
    "plate": "BSS-00",
    "kind": "set menu",
-   "stage": "final draft",
+   "stage": "final production",
    "status": "active",
-   "asset_version": "3.0.0-rc1",
-   "published_version": 2,
-   "live_version": null,
-   "on_sale": false,
+   "asset_version": "3.1.0",
+   "published_version": 3,
+   "live_version": 3,
+   "on_sale": true,
    "orders": 0,
-   "rounds": 1,
-   "waiting_on": "agent",
-   "decision": "approved with Scott's Addition; release in progress",
+   "rounds": 0,
+   "waiting_on": "nothing",
+   "decision": null,
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": "45ab973",
@@ -477,7 +467,10 @@
    ],
    "released": "November 15, 2026",
    "notes": "rc1 stamped v3 on the branch (prints.txt); inspected once at arm's length: nothing seen after the badge 3 fix",
-   "orders_counted": "2026-11-18"
+   "orders_counted": "2026-11-18",
+   "log": [
+    "2026-11-18: final draft -> final production"
+   ]
   },
   "gwynns-island": {
    "title": "Gwynn's Island",
@@ -2677,15 +2670,15 @@
   },
   "all-prints-label-size": {
    "plate": null,
-   "status": "active",
+   "status": "backlog",
    "asset_version": null,
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "whether to make an edition of every print for larger title-block labels (they print at about 3 to 4 pt at the smallest sizes sold)",
+   "waiting_on": "nothing",
+   "decision": "DEPRIORITIZED by the owner (Nov 18): below the current top ten. Taxonomy is a high priority in his design: every field stays on the plate (collection, set, piece, plate, version, drawn, location, facing); do not propose dropping fields. Mock-up kept in outputs/titleblock; only option A keeps all fields",
    "accepted_faults": [],
    "planned_edition": {
     "reason": "improvement",
@@ -2707,16 +2700,16 @@
    "title": "Scott's Addition, Broad Street Station 1943",
    "plate": "BSS-16",
    "kind": "set box",
-   "stage": "final draft",
+   "stage": "final production",
    "status": "active",
-   "asset_version": "1.0.0-rc1",
-   "published_version": null,
-   "live_version": null,
-   "on_sale": false,
-   "orders": null,
-   "rounds": 1,
-   "waiting_on": "agent",
-   "decision": "approved by the owner as box 3 (plate BSS-16, version 1); release in progress",
+   "asset_version": "1.0.0",
+   "published_version": 1,
+   "live_version": 1,
+   "on_sale": true,
+   "orders": 0,
+   "rounds": 0,
+   "waiting_on": "nothing",
+   "decision": null,
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": "45ab973",
@@ -2728,7 +2721,11 @@
     "/mnt/user-data/outputs/wave2/bss-last3/box3-before-after.jpg",
     "/mnt/user-data/outputs/wave2/bss-last3/prints.txt"
    ],
-   "notes": "replaces Hermitage Road as box 3; BSS-16 is added in plates.json on the branch only; inspected once at arm's length (all 20 full-size tiles)"
+   "notes": "replaces Hermitage Road as box 3; BSS-16 is added in plates.json on the branch only; inspected once at arm's length (all 20 full-size tiles)",
+   "log": [
+    "2026-11-18: final draft -> final production"
+   ],
+   "orders_counted": "2026-11-18"
   },
   "byrd-1928-cutaway": {
    "plate": null,
@@ -2740,7 +2737,7 @@
    "orders": null,
    "rounds": 2,
    "waiting_on": "owner",
-   "decision": "review the working draft; target on sale about December 1, 2026",
+   "decision": "owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": "21911e5",
@@ -2758,32 +2755,86 @@
    "notes": "open: a source for the segregation caption; the 78% figure is approximate; the notes block is long. Holiday piece."
   },
   "main-street-1952-cutaway": {
-   "plate": null,
+   "plate": "MSS-01",
    "status": "active",
-   "asset_version": "1.0.0-d4",
-   "published_version": null,
-   "live_version": null,
-   "on_sale": false,
-   "orders": null,
-   "rounds": 4,
-   "waiting_on": "owner",
-   "decision": "review marks on the working draft (review PDF sent for d3; d4 corrects the tower and roof heights and adds the red route)",
-   "accepted_faults": [],
+   "asset_version": "1.0.0",
+   "published_version": 1,
+   "live_version": 1,
+   "on_sale": true,
+   "orders": 0,
+   "rounds": 0,
+   "waiting_on": "nothing",
+   "decision": null,
+   "accepted_faults": [
+    {
+     "what": "track floor drawn 0.7 m high (6.5 m above the ground floor; the 1900 section and HABS VA-848-10 give 19 ft, 5.8 m): about 0.4 mm on the 32 in print, not visible at arm's length; correct in a later edition if the model is reworked"
+    },
+    {
+     "what": "callout 10 dot on a shed diagonal in front of the C&O engine",
+     "box": [
+      4560,
+      2890,
+      4800,
+      3130
+     ]
+    },
+    {
+     "what": "callout 11 dot on a truss member over the Seaboard diesel",
+     "box": [
+      4350,
+      2360,
+      4580,
+      2600
+     ]
+    },
+    {
+     "what": "badge 7 stands over the red route at the arcade",
+     "box": [
+      3050,
+      2960,
+      3300,
+      3260
+     ]
+    },
+    {
+     "what": "main view: the route is hidden on the stair and doubles back in the waiting room, two red lines leaving the traveler",
+     "box": [
+      2200,
+      3100,
+      3000,
+      3420
+     ]
+    },
+    {
+     "what": "flat section: callout 6 dot on the lunch counter, barely seen behind the glass screen",
+     "box": [
+      1930,
+      6230,
+      2030,
+      6330
+     ]
+    }
+   ],
    "planned_edition": null,
-   "last_inspected": "113ebc1",
-   "branch": "cutaway-main-street",
-   "worktree": "/home/claude/wt-mss",
+   "last_inspected": "7fb05a9",
+   "branch": null,
+   "worktree": null,
    "links": [
-    "/mnt/user-data/outputs/cutaway/main-street/Main-Street-Station-1952-review.pdf",
-    "/mnt/user-data/outputs/cutaway/main-street/round4/round4.md",
-    "/mnt/user-data/outputs/cutaway/main-street/sources.md",
-    "cutaways/main-street-1952.json (on the branch)"
+    "releases/main-street-1952-cutaway/v1.json",
+    "cutaways/main-street-1952.json",
+    "/mnt/user-data/outputs/cutaway/main-street/rc1/inspection.md",
+    "/mnt/user-data/outputs/cutaway/main-street/sources.md"
    ],
    "title": "Main Street Station, about 1952: Cutaway",
    "kind": "cutaway",
-   "stage": "working draft",
+   "stage": "final production",
    "budget_note": "d1 to d4 were made before the scheme was adopted (November 18, 2026); d5 needs the owner's say-so",
-   "notes": "open: sheet balance after the taller tower; the track floor drawn 0.7 m high"
+   "notes": "five working-draft rounds (d1 to d5) before rc1; the track floor drawn 0.7 m high is an accepted fault",
+   "log": [
+    "2026-11-18: working draft -> final draft",
+    "2026-11-18: final draft -> final production"
+   ],
+   "released": "2026-11-18"
   },
   "pre-1886-buildings": {
    "plate": null,
@@ -2816,13 +2867,13 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "rough draft: worth pursuing to a working draft? (and: year, dancers or empty, locks in frame)",
+   "waiting_on": "agent",
+   "decision": "owner: pursue (2026-11-18); handed to a separate Opus 5.5 session (ISO-TEST/handoff/pump-house/HANDOFF.md); it moves this to working draft when d1 exists",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
    "branch": "cutaway-pump-house",
-   "worktree": "/home/claude/wt-pump",
+   "worktree": null,
    "links": [
     "/mnt/user-data/outputs/cutaway/pump-house.md",
     "/mnt/user-data/outputs/cutaway/pump-house/rough/rough.md"
@@ -2830,7 +2881,7 @@
    "title": "The Byrd Park Pump House: Cutaway",
    "kind": "cutaway",
    "stage": "rough draft",
-   "notes": "rough draft 2026-11-18: long cut from the southwest plus a flat section across a wheel; no measured drawings found online (HAER VA-34 has photos only)",
+   "notes": "research done: feasibility 3.5 of 5 (pump-house.md); rough draft 2026-11-18: long cut from the southwest plus a flat section across a wheel; no measured drawings found online (HAER VA-34 has photos only)",
    "log": [
     "2026-11-18: research -> rough draft"
    ]
@@ -2845,7 +2896,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "agent",
-   "decision": "first story; image rough drafts in progress (ground before the cut: done as a rough draft; tracing the 1952 Sanborn sheets: running); the story shows its work: method charts and a 'How we know' section go in the explorer and the write-up; community reviewers see the working draft before publication",
+   "decision": "first story; rough drafts done on branches jw-ground (ground before the cut) and jw-trace (1952 Sanborn, 15 sheets, 3,157 outlines); next: integrate, outline for the owner; shows its work; community reviewers at working draft",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
