@@ -692,6 +692,14 @@
    "v2.json"
   ]
  },
+ "main-street-1952-cutaway": {
+  "title": "Main Street Station, about 1952: Cutaway",
+  "current": 1,
+  "kind": "cutaway",
+  "records": [
+   "v1.json"
+  ]
+ },
  "richmond-1865": {
   "title": "Richmond, 1865",
   "current": 2,

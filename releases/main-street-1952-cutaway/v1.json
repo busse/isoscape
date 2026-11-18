@@ -1,0 +1,211 @@
+{
+ "design": "main-street-1952-cutaway",
+ "title": "Main Street Station, about 1952: Cutaway",
+ "version": 1,
+ "asset_version": "1.0.0",
+ "version_note": null,
+ "recorded": "2026-11-18T15:08:13+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "db49f8bd6e584742ae67df5e9569bdae01e68022",
+  "subject": "Plates: a new series for Main Street Station (MSS, Main Street Station, 1952, in Buildings in their time); MSS-01 is its cutaway, kind \"Building cutaway\"",
+  "dirty": false
+ },
+ "kind": "cutaway",
+ "recipe": {
+  "tool": "tools/cutaway/sheet.py",
+  "run": [
+   "python3 tools/cutaway/sheet.py cutaways/main-street-1952.json --print   # where data/ is cached; out/cutaways/print/",
+   "python3 tools/release/remake.py main-street-1952-cutaway && python3 tools/cutaway/sheet.py cutaways/main-street-1952.json --no-build --print   # from the frozen scenes"
+  ],
+  "block": {
+   "collection": "Buildings in their time",
+   "set": "Main Street Station, 1952",
+   "piece": "Cutaway",
+   "plate": "MSS-01",
+   "version": "1",
+   "drawn": "2026",
+   "location": "37.534° N 77.429° W",
+   "facing": "325°",
+   "kind": "Building cutaway"
+  },
+  "files": {
+   "main-street-1952-cutaway_32x24.jpg": {
+    "size": [
+     9600,
+     7200
+    ],
+    "quality": 94,
+    "bytes": 6438778,
+    "sha256": "dc6e446a14a91bebf58f4101c8bc9f28424a3651d50d9bf3463ffe423ce82640",
+    "at": {
+     "x": 7679,
+     "y": 6644,
+     "w": 1593,
+     "h": 226,
+     "u": 1.2257,
+     "where": "foot"
+    }
+   },
+   "main-street-1952-cutaway_24x18.jpg": {
+    "size": [
+     7200,
+     5400
+    ],
+    "quality": 94,
+    "bytes": 4273574,
+    "sha256": "6e1db4524fed4a124c62cb0b3028dc923196eee11901c4fd2d0a2dc60e5c44cb",
+    "at": {
+     "x": 5576,
+     "y": 4960,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_printing": {
+   "tools/cutaway/sheet.py": "35218b83acf42bfe9beea2e2b2c7c893381f66e35928a44c2fd9a9aad448aef3",
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "a71068c515fe9f22382f53275c87f264db4a3dd004f9e35604e7b52bee4dcb88",
+   "catalog/plates.json": "e34dfae00677a3b8ca7b20d72067471b469b3888e3ac634905a206d2b5d9c569"
+  },
+  "copied": "out/cutaways/print/<file> is copied unchanged to the store's print_dir"
+ },
+ "scenes": [
+  {
+   "region": "main-street-station-cutaway",
+   "year": 1952,
+   "flags": [],
+   "svg": "out/cutaways/build/main-street-station-cutaway-1952.svg",
+   "sha256": "2d506daf2eabc22c5bf7b30ff1b33505bff8d926ab38e2fe164895789081eba5",
+   "frozen": "data/_releases/scenes/2d506daf2eabc22c5bf7b30ff1b33505bff8d926ab38e2fe164895789081eba5.svg",
+   "reproduces": true
+  },
+  {
+   "region": "main-street-station-cutaway",
+   "year": 1952,
+   "flags": [],
+   "svg": "out/cutaways/build/main-street-station-cutaway-1952-section.svg",
+   "sha256": "50599adbfaf248c3f71e8c1c13c3a810aaff8b0e1de913ce8f29789667c909a6",
+   "frozen": "data/_releases/scenes/50599adbfaf248c3f71e8c1c13c3a810aaff8b0e1de913ce8f29789667c909a6.svg",
+   "output": "-section",
+   "reproduces": true
+  },
+  {
+   "region": null,
+   "year": null,
+   "flags": [],
+   "svg": "out/cutaways/main-street-1952-sheet.svg",
+   "sha256": "9cfd959e53466d328fb569b0b2bda146e351aef08053202519e1ba88a3ec7b74",
+   "frozen": "data/_releases/scenes/9cfd959e53466d328fb569b0b2bda146e351aef08053202519e1ba88a3ec7b74.svg"
+  }
+ ],
+ "inputs": {
+  "cutaways/main-street-1952.json": "6447015d7bc038cc4f81f85bd17cf91d909dee6decb3f60e899344dff2f0a71c",
+  "tools/cutaway/sheet.py": "35218b83acf42bfe9beea2e2b2c7c893381f66e35928a44c2fd9a9aad448aef3",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "a71068c515fe9f22382f53275c87f264db4a3dd004f9e35604e7b52bee4dcb88",
+  "catalog/plates.json": "e34dfae00677a3b8ca7b20d72067471b469b3888e3ac634905a206d2b5d9c569",
+  "regions/main-street-station-cutaway.json": "34bc35b36360a56ae8955a8a82ea0b54a11e868fc4f166c9d8526cf18e31f86d",
+  "history/main-street-station.json": "09ede793fde588504daf2ad3fb50b70eba96bafa5c708d205a97a7e091e8ef82",
+  "history/sanborn/lost.geojson": "56e62877646394d1e887b3e5fabf887ce2fca992343d2fb5e25aefe995318a0a"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/main-street-1952/main-street-1952-cutaway_32x24.jpg",
+   "sha256": "dc6e446a14a91bebf58f4101c8bc9f28424a3651d50d9bf3463ffe423ce82640",
+   "bytes": 6438778,
+   "printful_file_id": 1115565863
+  },
+  "prints": [
+   {
+    "file": "print-files/main-street-1952/main-street-1952-cutaway_24x18.jpg",
+    "sha256": "6e1db4524fed4a124c62cb0b3028dc923196eee11901c4fd2d0a2dc60e5c44cb",
+    "bytes": 4273574,
+    "printful_file_id": 1115565954
+   }
+  ],
+  "canvas": []
+ },
+ "store": {
+  "catalog": {
+   "place": "Main Street Station",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print"
+   ],
+   "print_dir": "print-files/main-street-1952",
+   "tags": [
+    "main-street-1952"
+   ],
+   "credit_extra": "Drawn from the 1900 plans and section published in The Railroad Gazette and the measured drawings of the train shed in HAER VA-4 (Library of Congress), with the other sources listed on the sheet.",
+   "modern": true,
+   "title": "Main Street Station, about 1952: Cutaway",
+   "ratio": "3x4",
+   "sizes": [
+    "18x24",
+    "24x32"
+   ],
+   "print": "main-street-1952-cutaway_32x24.jpg",
+   "prints": {
+    "18x24": "main-street-1952-cutaway_24x18.jpg",
+    "24x32": "main-street-1952-cutaway_32x24.jpg"
+   },
+   "detail": [
+    0.125,
+    0.11,
+    0.425,
+    0.51
+   ],
+   "version": 1,
+   "plate": "MSS-01",
+   "plate_box": [
+    0.7999,
+    0.92278,
+    0.96583,
+    0.95417
+   ]
+  },
+  "products": [
+   {
+    "handle": "main-street-station-about-1952-cutaway",
+    "id": "gid://shopify/Product/9142391242870",
+    "format": "all (merged)",
+    "status": "DRAFT",
+    "variants": 4
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/main-street-1952-cutaway_32x24-print.jpg?v=1795014361",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/main-street-1952-cutaway_32x24-detail.jpg?v=1795014366",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/main-street-1952-cutaway_32x24-plate.jpg?v=1795014370"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/main-street-1952-cutaway_32x24-framed-print-black.jpg?v=1795014375",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/main-street-1952-cutaway_32x24-framed-print-white.jpg?v=1795014381",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/main-street-1952-cutaway_32x24-detail.jpg?v=1795014366",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/main-street-1952-cutaway_32x24-plate.jpg?v=1795014370"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 2
+ }
+}

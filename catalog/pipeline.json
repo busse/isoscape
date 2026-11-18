@@ -2757,37 +2757,84 @@
   "main-street-1952-cutaway": {
    "plate": "MSS-01",
    "status": "active",
-   "asset_version": "1.0.0-rc1",
-   "published_version": null,
+   "asset_version": "1.0.0",
+   "published_version": 1,
    "live_version": null,
    "on_sale": false,
-   "orders": null,
-   "rounds": 1,
+   "orders": 0,
+   "rounds": 0,
    "waiting_on": "owner",
-   "decision": "rc1 inspected once (2 arm's-length and 1 text fault fixed in one round, 7fb05a9; 5 up-close faults accepted, in rc1/inspection.md): waiting on the owner's release approval and a plate number",
+   "decision": "released as MSS-01 v1 (record written, check --rebuild OK); the merged product is a DRAFT: go live with merge.py live, then set live_version=1 on_sale=true waiting_on=nothing",
    "accepted_faults": [
     {
      "what": "track floor drawn 0.7 m high (6.5 m above the ground floor; the 1900 section and HABS VA-848-10 give 19 ft, 5.8 m): about 0.4 mm on the 32 in print, not visible at arm's length; correct in a later edition if the model is reworked"
+    },
+    {
+     "what": "callout 10 dot on a shed diagonal in front of the C&O engine",
+     "box": [
+      4560,
+      2890,
+      4800,
+      3130
+     ]
+    },
+    {
+     "what": "callout 11 dot on a truss member over the Seaboard diesel",
+     "box": [
+      4350,
+      2360,
+      4580,
+      2600
+     ]
+    },
+    {
+     "what": "badge 7 stands over the red route at the arcade",
+     "box": [
+      3050,
+      2960,
+      3300,
+      3260
+     ]
+    },
+    {
+     "what": "main view: the route is hidden on the stair and doubles back in the waiting room, two red lines leaving the traveler",
+     "box": [
+      2200,
+      3100,
+      3000,
+      3420
+     ]
+    },
+    {
+     "what": "flat section: callout 6 dot on the lunch counter, barely seen behind the glass screen",
+     "box": [
+      1930,
+      6230,
+      2030,
+      6330
+     ]
     }
    ],
    "planned_edition": null,
    "last_inspected": "7fb05a9",
-   "branch": "cutaway-main-street",
-   "worktree": "/home/claude/wt-mss",
+   "branch": null,
+   "worktree": null,
    "links": [
-    "/mnt/user-data/outputs/cutaway/main-street/Main-Street-Station-1952-review.pdf",
-    "/mnt/user-data/outputs/cutaway/main-street/round4/round4.md",
-    "/mnt/user-data/outputs/cutaway/main-street/sources.md",
-    "cutaways/main-street-1952.json (on the branch)"
+    "releases/main-street-1952-cutaway/v1.json",
+    "cutaways/main-street-1952.json",
+    "/mnt/user-data/outputs/cutaway/main-street/rc1/inspection.md",
+    "/mnt/user-data/outputs/cutaway/main-street/sources.md"
    ],
    "title": "Main Street Station, about 1952: Cutaway",
    "kind": "cutaway",
-   "stage": "final draft",
+   "stage": "final production",
    "budget_note": "d1 to d4 were made before the scheme was adopted (November 18, 2026); d5 needs the owner's say-so",
    "notes": "five working-draft rounds (d1 to d5) before rc1; the track floor drawn 0.7 m high is an accepted fault",
    "log": [
-    "2026-11-18: working draft -> final draft"
-   ]
+    "2026-11-18: working draft -> final draft",
+    "2026-11-18: final draft -> final production"
+   ],
+   "released": "2026-11-18"
   },
   "pre-1886-buildings": {
    "plate": null,
