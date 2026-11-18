@@ -11,5 +11,5 @@ const parcels = parseParcels(await readFile(`data/${region.name}/yearbuilt.json`
 const polys = features.filter((f): f is PolygonFeature => f.type === 'polygon' && f.tags.building !== undefined)
 const d = dateBuildings(polys, parcels, history.dates, 4, 8, history.parkingFrom)
 const out = polys.map((p) => ({ id: p.id, year: d.get(p.id)?.year ?? null, ring: p.outers[0] }))
-await writeFile('data/sanborn/buildings.json', JSON.stringify(out))
+await writeFile(process.argv[3] ?? 'data/sanborn/buildings.json', JSON.stringify(out))
 console.log(out.length, 'buildings,', out.filter((o) => o.year !== null).length, 'dated')

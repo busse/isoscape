@@ -1,0 +1,21 @@
+{
+ "extends": "history/richmond-streetcars.json",
+ "title": "Jackson Ward, 1952 (proof of the traced Sanborn layer; not for publication)",
+ "about": "Proof only: buildings standing today dated as in the streetcars series, plus buildings traced from the Sanborn 1925 volume 3 as republished in 1951-52 (history/sanborn/jackson-ward-lost.geojson). The ground is today's lidar, so the 1958 highway cut shows under the 1952 buildings.",
+ "sanborn": {
+  "lost": [
+   "history/sanborn/lost.geojson",
+   "history/sanborn/fair-grounds.geojson",
+   "history/sanborn/jackson-ward-lost.geojson"
+  ],
+  "editions": [
+   1886,
+   1895,
+   1905,
+   1924,
+   1950,
+   1952
+  ],
+  "source": "https://www.loc.gov/item/sanborn09064_018/"
+ }
+}
