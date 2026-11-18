@@ -9258,7 +9258,8 @@
      0
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-0-0-pediment",
@@ -9310,7 +9311,8 @@
      1.3
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-0-0-roof",
@@ -9364,7 +9366,8 @@
      9
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-0-0-glass",
@@ -9405,7 +9408,8 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-0-1",
@@ -9459,7 +9463,8 @@
      0
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-0-1-pediment",
@@ -9511,7 +9516,8 @@
      1.3
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-0-1-roof",
@@ -9565,7 +9571,8 @@
      9
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-0-1-glass",
@@ -9606,7 +9613,8 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-0-2",
@@ -9660,7 +9668,8 @@
      0
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-0-2-pediment",
@@ -9712,7 +9721,8 @@
      1.3
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-0-2-roof",
@@ -9766,7 +9776,8 @@
      9
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-0-2-glass",
@@ -9807,7 +9818,8 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-1-0",
@@ -9859,7 +9871,8 @@
      1.6
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-1-0-roof",
@@ -9913,7 +9926,8 @@
      9
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-1-0-glass",
@@ -9954,7 +9968,8 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-1-1",
@@ -10006,7 +10021,8 @@
      1.6
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-1-1-roof",
@@ -10060,7 +10076,8 @@
      9
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-1-1-glass",
@@ -10101,7 +10118,8 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-1-2",
@@ -10153,7 +10171,8 @@
      1.6
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-1-2-roof",
@@ -10207,7 +10226,8 @@
      9
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-1-2-glass",
@@ -10248,7 +10268,8 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-0",
@@ -10300,7 +10321,8 @@
      1.6
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-0-roof",
@@ -10354,7 +10376,8 @@
      9
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-0-glass",
@@ -10395,7 +10418,8 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-1",
@@ -10447,7 +10471,8 @@
      1.6
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-1-roof",
@@ -10501,7 +10526,8 @@
      9
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-1-glass",
@@ -10542,7 +10568,8 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-2",
@@ -10594,7 +10621,8 @@
      1.6
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-2-roof",
@@ -10648,7 +10676,8 @@
      9
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-2-glass",
@@ -10689,7 +10718,8 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-3",
@@ -10741,7 +10771,8 @@
      1.6
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-3-roof",
@@ -10795,7 +10826,8 @@
      9
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-3-glass",
@@ -10836,7 +10868,8 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-4",
@@ -10888,7 +10921,8 @@
      1.6
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-4-roof",
@@ -10942,7 +10976,8 @@
      9
     ]
    ],
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-dormer-2-4-glass",
@@ -10983,7 +11018,8 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "over": "mss-h-roof"
+   "over": "mss-h-roof",
+   "ink": "fine"
   },
   {
    "id": "mss-h-tower",

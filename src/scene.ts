@@ -41,6 +41,8 @@ export interface Shape {
   readonly pts: readonly Vec2[]
   readonly fill: string
   readonly ink?: boolean
+  /** With `ink`, the finer line (`palette.fineLineWidth`). */
+  readonly fine?: boolean
   /** Dashed center line, for track on a bridge. */
   readonly dash?: boolean
   /** Draw as an open polyline instead of a filled polygon. */

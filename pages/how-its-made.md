@@ -857,7 +857,13 @@ Street) are measured on HABS photographs VA-848-10 to -12 (1971) against the 102
 within about 1.5 m. The roof's outline takes in the tower's, so a part marked `over` the shell
 (the dormers, and the tower from its balcony up) is in front of every piece of it, apart on the
 ground or not; a piece's box reaches up to the ridge, and beside the tower it would otherwise
-stand in front of the clock stage. The
+stand in front of the clock stage. Parts inside the shell (`within`) sort against its pieces
+first too, and a part over the shell is in front of a part inside it. The dormers are of two
+kinds, each identical wherever it stands: pedimented wall dormers on the cornice over the
+first, third and fifth bays, and small hipped dormers set into the slope, whose cheeks are
+wedges cut by the roof's plane so they sit on the tiles; they are outlined in a finer ink
+(`ink: "fine"`, 0.35 against 0.6). The tower's drum and dome are sixteen-sided solids of
+revolution. The
 loggia's piers are stacked in courses about 0.55 m high, every other one set 3 cm proud, and its
 segmental arches are plates in eight slices along the arc. Parts that stand inside the shell (`within`:
 the offices in the roof) paint before the slopes that face the camera and after those that face

@@ -89,6 +89,8 @@ export interface HistoryFeature {
   readonly within?: string
   /** A part standing on a roof shell's outside (that part's id), a dormer: see `Item.over`. */
   readonly over?: string
+  /** `fine`: its outlines drawn with the palette's finer ink, so small repeated work (a row of dormers) reads as a rhythm. */
+  readonly ink?: 'fine'
   /** How the part is known: see `confidenceOf`. */
   readonly confidence?: Confidence
   /**

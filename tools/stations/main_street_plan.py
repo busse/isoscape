@@ -296,13 +296,13 @@ def build(part, rect, ring, plane, SRC, L):
         b0 = 0.02
         ub, ur = on_roof(z1) - b0, on_roof(z0) - b0
         p(f'dormer-0-{j}', 'Main Street Station: dormer', plane(c + WP, b0, c + WP, b0 + ub, 2 * WP), z0, z1, 'brick', 'written', DORM, DS,
-          shape='frame', members=[[0, 0, 0, round(WH, 3), round(ub, 3), round(WH, 3), round(ur, 3), 0]], over='mss-h-roof')
+          shape='frame', members=[[0, 0, 0, round(WH, 3), round(ub, 3), round(WH, 3), round(ur, 3), 0]], over='mss-h-roof', ink='fine')
         p(f'dormer-0-{j}-pediment', 'Main Street Station: dormer', plane(c - WP - 0.1, b0 - 0.12, c + WP + 0.1, b0 - 0.12, 0.3), z1, z1 + CAP, 'stone', 'written', DORM, DS,
-          shape='frame', members=[[0, 0, round(2 * WP + 0.2, 3), 0, round(WP + 0.1, 3), CAP]], over='mss-h-roof')
+          shape='frame', members=[[0, 0, round(2 * WP + 0.2, 3), 0, round(WP + 0.1, 3), CAP]], over='mss-h-roof', ink='fine')
         # Its roof, hipped back from the pediment to the slope.
         p(f'dormer-0-{j}-roof', 'Main Street Station: dormer', rect(c - WP - 0.05, c + WP + 0.05, b0 + 0.18, b0 + ub), z1, z1 + CAP, 'tile', 'written', DORM, DS,
-          shape='inset', levels=[[0, 0, 9], [CAP, WP + 0.05, 9]], over='mss-h-roof')
-        p(f'dormer-0-{j}-glass', 'Main Street Station: dormer', ring([(c - 0.45, b0 - 0.04), (c + 0.45, b0 - 0.04), (c + 0.45, b0), (c - 0.45, b0)]), z0 + 0.9, z1 - 0.4, 'glass', 'written', DORM, DS, over='mss-h-roof')
+          shape='inset', levels=[[0, 0, 9], [CAP, WP + 0.05, 9]], over='mss-h-roof', ink='fine')
+        p(f'dormer-0-{j}-glass', 'Main Street Station: dormer', ring([(c - 0.45, b0 - 0.04), (c + 0.45, b0 - 0.04), (c + 0.45, b0), (c - 0.45, b0)]), z0 + 0.9, z1 - 0.4, 'glass', 'written', DORM, DS, over='mss-h-roof', ink='fine')
     # Hipped dormers in the slope: a wedge whose cheeks are triangles on the tiles, a pyramid cap.
     HW, HH, HC = 0.5, 1.6, 1.4
     slope = [(c, CORNICE + 1.0) for c in (mids[1], mids[3], mids[4] + (mids[4] - mids[3]))] + [(BAYS[k], CORNICE + 4.5) for k in (1, 2, 3, 4, 5)]
@@ -313,10 +313,10 @@ def build(part, rect, ring, plane, SRC, L):
         ub = on_roof(z1) - bf
         k = j if row == 1 else j - 3
         p(f'dormer-{row}-{k}', 'Main Street Station: dormer', plane(c + HW, bf, c + HW, bf + ub, 2 * HW), z0, z1, 'tile', 'written', DORM, DS,
-          shape='frame', members=[[0, 0, 0, HH, round(ub, 3), HH]], over='mss-h-roof')
+          shape='frame', members=[[0, 0, 0, HH, round(ub, 3), HH]], over='mss-h-roof', ink='fine')
         p(f'dormer-{row}-{k}-roof', 'Main Street Station: dormer', rect(c - HW - 0.08, c + HW + 0.08, bf - 0.08, bf + ub), z1, z1 + HC, 'tile', 'written', DORM, DS,
-          shape='inset', levels=[[0, 0, 9], [HC, HW + 0.08, 9]], over='mss-h-roof')
-        p(f'dormer-{row}-{k}-glass', 'Main Street Station: dormer', ring([(c - 0.25, bf - 0.04), (c + 0.25, bf - 0.04), (c + 0.25, bf), (c - 0.25, bf)]), z0 + 0.3, z1 - 0.25, 'coal', 'written', DORM, DS, over='mss-h-roof')
+          shape='inset', levels=[[0, 0, 9], [HC, HW + 0.08, 9]], over='mss-h-roof', ink='fine')
+        p(f'dormer-{row}-{k}-glass', 'Main Street Station: dormer', ring([(c - 0.25, bf - 0.04), (c + 0.25, bf - 0.04), (c + 0.25, bf), (c - 0.25, bf)]), z0 + 0.3, z1 - 0.25, 'coal', 'written', DORM, DS, over='mss-h-roof', ink='fine')
 
     # ---- the clock tower ------------------------------------------------------------------------
     # Its stages are measured in round 4 on HABS photographs VA-848-10, -11 and -12 (1971) against

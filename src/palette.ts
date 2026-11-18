@@ -92,6 +92,8 @@ export interface Palette {
   readonly railSteel: string
   readonly roofs: Readonly<Record<'residential' | 'commercial' | 'industrial' | 'civic' | 'other', readonly string[]>>
   readonly lineWidth: number
+  /** The ink of a part drawn with `ink: "fine"` (small repeated work, a row of dormers). */
+  readonly fineLineWidth: number
   readonly groundLineWidth: number
   readonly dotRadius: number
 }
@@ -192,6 +194,7 @@ const paper: Palette = {
     other: ['#f5f2ea', '#eeeae0'],
   },
   lineWidth: 0.6,
+  fineLineWidth: 0.35,
   groundLineWidth: 0.35,
   dotRadius: 1.45,
 }

@@ -170,7 +170,7 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
   const svg = [
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.map(f).join(' ')}" class="isoscape-section" role="img">`,
     `<title>${esc(scene.region.title)}</title>`,
-    `<style>.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}</style>`,
+    `<style>.i{stroke:${p.ink};stroke-width:${p.lineWidth};stroke-linejoin:round}${items.some((it) => it.shapes.some((s) => s.fine === true)) ? `.fi{stroke-width:${p.fineLineWidth}}` : ''}</style>`,
     `<rect x="${f(vb[0])}" y="${f(vb[1])}" width="${f(vb[2])}" height="${f(vb[3])}" fill="${p.sky}"/>`,
     ...out,
     `</svg>`,
@@ -255,7 +255,7 @@ const paintItem = (it: Item): string => {
   const title = it.name === undefined ? '' : `<title>${esc(it.name)}</title>`
   return `<g data-id="${esc(it.id)}">${title}${it.shapes.map((s) => s.stroke !== undefined
     ? `<path fill="none" stroke="${s.stroke.color}" stroke-width="${f(s.stroke.width)}"${s.stroke.dash === undefined ? '' : ` stroke-dasharray="${s.stroke.dash.map(f).join(' ')}"`} d="${path(s.pts, s.line !== true)}"/>`
-    : `<path class="i" fill="${s.fill}" d="${path(s.pts)}"/>`).join('')}</g>`
+    : `<path class="${s.fine === true ? 'i fi' : 'i'}" fill="${s.fill}" d="${path(s.pts)}"/>`).join('')}</g>`
 }
 
 /** Grow the anchor box of an item's part (its id, less any `:near` or piece suffix). */
