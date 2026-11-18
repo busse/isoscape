@@ -61,7 +61,7 @@ const HELP = `isoscape — isometric dot-and-line views of real places
 
 const dataDir = (r: Region) => resolve('data', r.data ?? r.name)
 
-export const loadInputs = async (name: string) => {
+const loadInputs = async (name: string) => {
   const region = await loadRegion(name)
   let json: string
   try {
@@ -111,7 +111,7 @@ let streetcarScale: number | undefined
 /** `--rail-scale`: likewise for railroad track. */
 let railScale: number | undefined
 
-export const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number, section = false) => {
+const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number, section = false) => {
   const extra: Parameters<typeof buildScene>[4] = { ...inp.extra, ...(section ? { section: true } : {}) }
   if (inp.history !== null) {
     const y = year ?? inp.history.present
