@@ -13,7 +13,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Stage | Entries |
 |---|---|
-| research | 5 |
+| research | 2 |
 | working draft | 2 |
 | final draft | 3 |
 | final production | 40 |
@@ -27,14 +27,10 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 - **Broad Street Station, 1943: The Railroad Map** (BSS·M): approve release with Scott's Addition as box 3; and whether Main Street Station's height correction goes into this candidate (rc2) or the next edition
 - **Scott's Addition, Broad Street Station 1943**: approve Scott's Addition as box 3, and its plate: BSS-16 version 1 (a new design takes the next number) or BSS-03 version 3 (then 3.0.0-rc1)
 - **Hermitage Road, Broad Street Station 1943** (BSS·03): withdraw when Scott's Addition takes box 3 (decided with Scott's Addition)
-- **Main Street Station, Broad Street Station 1943** (BSS·07): keep BSS-07 on sale while its height correction is made, or take it off sale until then (the rule of November 16: a piece with a known inaccuracy comes off sale)
 - **The Byrd Theatre: Cutaway**: review the working draft; target on sale about December 1, 2026
 - **Main Street Station, about 1952: Cutaway**: review marks on the working draft (review PDF sent for d3; d4 corrects the tower and roof heights and adds the red route)
 - **Title-block labels at the smallest sizes**: whether to make an edition of every print for larger title-block labels (they print at about 3 to 4 pt at the smallest sizes sold)
 - **The Byrd Park Pump House: Cutaway**: draw it or not
-- **Jackson Ward and the interstate**: take it to an outline, or not
-- **Redlining in Richmond, 1937 to today**: take it to an outline, or not
-- **Richmond and the domestic slave trade**: take it to an outline, or not
 
 ## Research
 
@@ -42,9 +38,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 |---|---|---|---|---|
 | — | Title-block labels at the smallest sizes | batch | — | no |
 | — | The Byrd Park Pump House: Cutaway | cutaway | — | no |
-| — | Jackson Ward and the interstate | story | — | no |
-| — | Redlining in Richmond, 1937 to today | story | — | no |
-| — | Richmond and the domestic slave trade | story | — | no |
 
 ## Working draft
 

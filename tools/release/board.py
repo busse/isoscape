@@ -272,7 +272,8 @@ def long_date(d):
 
 
 def page(b):
-    items = {k: public(e) for k, e in b['items'].items()}
+    # an entry marked private (e.g. a story not yet announced) stays off the public page
+    items = {k: public(e) for k, e in b['items'].items() if not e.get('private')}
     L = ['---', 'title: Production board', 'order: 97',
          'summary: Where each map, print and story stands: its stage, what is on sale, and what is planned.',
          'unlisted: true', '---', '', '# Production board', '',

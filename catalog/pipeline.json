@@ -178,8 +178,8 @@
    "on_sale": true,
    "orders": "unknown",
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "keep BSS-07 on sale while its height correction is made, or take it off sale until then (the rule of November 16: a piece with a known inaccuracy comes off sale)",
+   "waiting_on": "nothing",
+   "decision": "stays on sale (not visible at arm's length); height and note corrected in the planned edition, or in place if it has no orders",
    "accepted_faults": [],
    "planned_edition": {
     "reason": "factual correction",
@@ -2742,8 +2742,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "take it to an outline, or not",
+   "waiting_on": "agent",
+   "decision": "first story; image rough drafts in progress (the ground before the highway cut; tracing the 1952 Sanborn sheets); outline to follow; community reviewers (the owner's contacts) see the working draft before publication",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -2754,8 +2754,13 @@
    ],
    "title": "Jackson Ward and the interstate",
    "kind": "story",
-   "stage": "research",
-   "notes": "editorial first: a web story, perhaps a book; prints are not the goal"
+   "stage": "outline",
+   "notes": "editorial first: a web story, perhaps a book; prints are not the goal",
+   "private": true,
+   "log": [
+    "2026-11-18: research -> rough draft",
+    "2026-11-18: rough draft -> outline"
+   ]
   },
   "story-redlining": {
    "plate": null,
@@ -2766,8 +2771,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "take it to an outline, or not",
+   "waiting_on": "nothing",
+   "decision": "second in order; begins after Jackson Ward's working draft",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -2779,7 +2784,8 @@
    "title": "Redlining in Richmond, 1937 to today",
    "kind": "story",
    "stage": "research",
-   "notes": "editorial first: a web story, perhaps a book; prints are not the goal"
+   "notes": "editorial first: a web story, perhaps a book; prints are not the goal",
+   "private": true
   },
   "story-slave-trade": {
    "plate": null,
@@ -2791,7 +2797,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "take it to an outline, or not",
+   "decision": "third in production; outreach to institutions comes first and is the owner's to make",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -2803,7 +2809,8 @@
    "title": "Richmond and the domestic slave trade",
    "kind": "story",
    "stage": "research",
-   "notes": "editorial first: a web story, perhaps a book; prints are not the goal"
+   "notes": "editorial first: a web story, perhaps a book; prints are not the goal",
+   "private": true
   }
  }
 }
