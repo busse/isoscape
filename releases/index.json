@@ -30,11 +30,12 @@
  },
  "broad-street-1943-04-seaboard-junction": {
   "title": "Seaboard Junction, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-05-loop": {
@@ -49,29 +50,32 @@
  },
  "broad-street-1943-06-sauer": {
   "title": "C.F. Sauer Company, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-07-main-street-station": {
   "title": "Main Street Station, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-08-triple-crossing": {
   "title": "The Triple Crossing, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-09-co-viaduct": {
