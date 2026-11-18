@@ -757,6 +757,16 @@ through sixteen street corners, each snapped to the city's block outlines); and
 1924–25 versions where those were fitted, and read by eye otherwise. Each later edition turns
 "assumed" end dates into ones read from a map.
 
+Jackson Ward north of Leigh Street is traced from volume 3 twice: as republished in 1952, and as
+first printed in 1925. The 1952 sheets were fitted to street corners; each 1925 sheet is matched
+to its 1952 reprint feature by feature (a homography with a gentle quadratic correction for the
+paper, the matches agreeing to a median of 0.08–0.13 m) and placed by the same fit, then traced
+from its colors, which in 1925 cover every building. A 1925 building is drawn until 1952 and the
+1952 tracing carries it on; one the 1952 sheets no longer show ends in 1952, or in 1941 on the
+blocks cleared for Gilpin Court. Before 1952 the coarse buildings from volume 1's small-scale
+overview that fall in those blocks are left out (`leaveOut` with `ids` and `before`), so the two
+sources do not draw one building twice.
+
 **Era rules** date everything else that OSM maps: the first rule matching a feature's name,
 `ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
 Downtown Expressway from 1976, the river viaducts from 1901, Mayo's Bridge from 1788 (today's
