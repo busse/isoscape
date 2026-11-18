@@ -771,6 +771,31 @@ blocks cleared for Gilpin Court. Before 1952 the coarse buildings from volume 1'
 overview that fall in those blocks are left out (`leaveOut` with `ids` and `before`), so the two
 sources do not draw one building twice.
 
+The 1952 layer gets the same simplification where its outlines are busy (more than 10 corners):
+703 of them, 17,243 corners down to 5,574, the largest move 1.00 m. Second Street from Broad to
+Clay is on volume 1 of the 1950–52 printing; its sheets 2 and 3 are fitted again to 13 street
+corners (residuals 0.5–2.9 m) and traced, and 198 outlines the earlier tracing missed join the
+Jackson Ward layer. Streets the trench took are read off the 1952 sheets as center lines and
+placed by each sheet's fit; a 2 m step counts as a street that survives when it lies within 9 m
+of one drawn today running within 30° of its direction, and what is left is kept where at least
+20 m of it, and at least 40% of that, lies in the highway's corridor: 24 stretches, 2,275 m,
+drawn from 1952 to 1956. In the 1925 scene Apostle Town's streets are drawn as the 1925 sheet
+prints them (Cabell, Tyler and Hickory on its old line, until 1941), and the ways laid out with
+Gilpin Court, the 35 that lie at least 80% inside the cleared blocks, from 1941.
+
+**Pick-outs and islands.** A history switch named with `--with` can pick out buildings: those
+whose center falls in a polygon are roofed in the palette's `mark` tones and the rest quiet, or,
+given a count's `ids`, exactly the buildings that count lists, so a picture shows what a number
+counts. Jackson Ward's count of the 1952 outlines in the Turnpike's footprint skips outlines
+under 12 m² (the region's smallest building, which the map would not draw) and a correction
+table's box: 216 in today's paved roadway and ramps, 447 in the corridor of 15 m more each side.
+An `island` switch cuts the scene to one polygon and draws it alone on blank paper: ground is
+painted strip by strip as always, each strip clipped to the polygon, the cut faces that look
+toward the camera are drawn as a slab's sides down to 18 m (the region's `slab`) below the
+lowest ground inside, and only the buildings the count lists stand on it. Jackson Ward's islands
+are cut where the traced sheets end, at about 8th Street, so the ramp loop past it, never traced,
+is not drawn as empty ground.
+
 **Era rules** date everything else that OSM maps: the first rule matching a feature's name,
 `ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
 Downtown Expressway from 1976, the river viaducts from 1901, Mayo's Bridge from 1788 (today's

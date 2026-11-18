@@ -82,6 +82,8 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | dated series: year built, era rules, curated history | `history.ts`, `asOf` in `scene.ts`, `history/<series>.json` |
 | ground put back before a later cut or fill | `ground` in `history/<series>.json`; `restoreGround`, `lowerGround` in `terrain.ts` |
 | tracing fire-insurance maps (georeference, trace, lifespans) | `tools/sanborn/*.py` → `history/sanborn/` |
+| a pick-out (`--with`: buildings in a polygon or a count's ids) or an island (one polygon drawn alone) | `Highlight`, `Island` in `history.ts`; `switches` in `history/<series>.json`; drawn in `scene.ts`, `render.ts` |
+| a story page's text, numbers, charts and views | `tools/stories/<story>/`: `story.md` → `page.py` → `pages/<slug>.md` (never edit the page itself); `charts.py`, `views.py`, `timeline.ts`; counts in one data file (Jackson Ward: `tools/sanborn/jw/counts.json`) |
 | a set: a big map framed by numbered boxes, its prints and page | `sets/<name>.json`, `tools/sets/set.py`; "Making a set" in the README |
 | one building modeled close up (parts, tracks, canopies, trains) | `tools/stations/<name>.py` → `history/<name>.json`; `src/parts.ts` |
 | a cutaway: the cut plane, sections, plan, flat section, its sheet | `cutaway` in `regions/<name>.json`; `src/cutaway.ts`, `src/cutaway-scene.ts`, `src/section.ts`; `cutaways/<name>.json`, `tools/cutaway/sheet.py`; "Cutaways" in the README |
