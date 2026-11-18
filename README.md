@@ -540,6 +540,14 @@ and its streets; `lower` takes down narrow banks such as ramp embankments. Jacks
 (`regions/jackson-ward.json`) puts back the Turnpike's trench before 1955. The method and its
 error are in *How it's made*, under "Time".
 
+**Pick-outs.** A switch in a history file can carry a `highlight` (`Highlight` in
+`src/history.ts`), drawn only by builds that name it with `--with`: buildings whose center falls
+in a polygon of a GeoJSON file roofed in the palette's `mark` tones (the first polygon darker,
+later ones lighter), the rest quiet, the outlines drawn on the ground, and, where asked, the
+curated lost streets and some bridges' decks marked. Jackson Ward has two: `count` (the 1952
+buildings in the highway's footprint) and `streets` (the stretches of street it took, and
+today's bridges). Every other build is unchanged.
+
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
 and elevation and keeps only its year-built parcels in its own `data/` folder. A build looks for
 `yearbuilt.json` in the region's own folder first, then in the shared one, and stops with an
