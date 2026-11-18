@@ -2755,7 +2755,7 @@
    "notes": "open: a source for the segregation caption; the 78% figure is approximate; the notes block is long. Holiday piece."
   },
   "main-street-1952-cutaway": {
-   "plate": null,
+   "plate": "MSS-01",
    "status": "active",
    "asset_version": "1.0.0-rc1",
    "published_version": null,
