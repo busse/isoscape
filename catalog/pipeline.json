@@ -3004,7 +3004,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "fact check done (143 claims, 44 changes); page rounds 1 and 2 from the owner's review done (headline and deck, numbered figures, link fix, lightbox and grid, route section as prose, four compare sliders; branch at 930c1d4). Waiting on the owner's local review (ISO-TEST/_preview/jackson-ward/), the headline choice and two small decisions; then he shares it with his community reviewers. Not merged, not published.",
+   "decision": "live on the explorer since 2026-11-18, unlisted (not in the menu or sitemap, noindex), by the owner's approval: https://busse.github.io/isoscape/#/jackson-ward and /p/jackson-ward.html. Fact check done (143 claims, 44 changes). Waiting on the owner to share it with his community reviewers; open: the headline choice and two small decisions (the Planning Commission's October 20 adoption; the Skipwith-Roper cottage's return).",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3015,13 +3015,14 @@
    ],
    "title": "Jackson Ward and the interstate",
    "kind": "story",
-   "stage": "fact check",
+   "stage": "outside review",
    "notes": "editorial first: a web story, perhaps a book; prints are not the goal",
    "private": true,
    "log": [
     "2026-11-18: research -> rough draft",
     "2026-11-18: rough draft -> outline",
-    "2026-11-18: outline -> fact check"
+    "2026-11-18: outline -> fact check",
+    "2026-11-18: fact check -> outside review"
    ]
   },
   "story-redlining": {
