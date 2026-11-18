@@ -1,7 +1,7 @@
 edition,sheet,lon,lat,u50,v50,name,use,stories,note,in_outline
 1925,308,-77.4380578,37.5472563,556.1,1732.0,Hippodrome Theatre (Colored),theater,1-2,,yes
 1925,308,-77.4373201,37.5471793,925.9,1519.5,"Miller Hotel (Colored): stores, hotel entrance, dining room",hotel,3,name printed in the street beside the building at 2nd and Leigh,yes
-1925,308,-77.4376334,37.546914,898.7,1779.9,Bank,bank,,on N. 2nd St. between Leigh and Clay (no. 529); which bank is not printed,yes
+1925,308,-77.4376334,37.546914,898.7,1779.9,Bank,bank,,"on N. 2nd St. between Leigh and Clay (no. 529); which bank is not printed. A local history site calls 529 N. 2nd the former Commercial Savings Bank building, which Slaughter's Hotel took over by 1931",yes
 1925,308,-77.4376914,37.5468533,898.7,1834.7,Offices,business,,,yes
 1925,308,-77.4380782,37.5471248,604.1,1814.2,"Boarding; ""The Biltmore"" printed along its front",dwelling,3,,yes
 1925,308,-77.4384397,37.5467933,583.7,2129.2,Moving Pictures (Colored); lobby,theater,1-1/2,,yes
@@ -13,6 +13,7 @@ edition,sheet,lon,lat,u50,v50,name,use,stories,note,in_outline
 1925,308,-77.4368338,37.5474213,1042.2,1212.1,Otira Apartments,dwelling,3,,yes
 1925,308,-77.4361641,37.5476988,1226.5,820.8,3rd St. Bethel A.M.E. Church (Colored),church,,,yes
 1925,308,-77.4366088,37.5471069,1281.7,1313.4,Y.M.C.A. (Colored),institution,2,,yes
+1925,308,-77.4375974,37.5459922,1316.7,2293.7,Bank,bank,3-4,"at N. 3rd and E. Clay (no. 214 on the sheet): the building of the Mechanics Savings Bank, which failed in 1922 (NPS, 212 East Clay Street); the sheet prints only ""Bank""",yes
 1925,306,-77.4395583,37.5484185,987.0,1670.4,St. Philip's P.E. Church (Colored),church,1-2,,yes
 1925,306,-77.4388056,37.5478862,941.3,2232.3,"Booker Washington School (Colored); fireproof part ""built in 1923""",school,3,,yes
 1925,306,-77.4391155,37.5481732,998.3,1972.3,Leigh St. Holiness Church (Colored),church,1-1/2,,yes
