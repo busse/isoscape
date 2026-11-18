@@ -641,7 +641,7 @@ about 28 ha of trench and 9 ha of interchange. Two methods, each an estimate:
   that meets the measured ground at the outline (each free node the mean of its four
   neighbors, solved by over-relaxation to 1 mm), held along each street that crossed at grade
   to a straight grade between its surviving ends. Seven such streets are listed; they change
-  the result by 4 cm RMS and 0.5 m at most, so the rim decides it.
+  the result by about 6 cm RMS and 0.58 m at most, so the rim decides it.
 - **Lower** (`lowerGround`), for the ramps at the I-64 junction, which stand on the old
   plateau rim: a grey-scale opening of the lidar with a 25 m disk, so banks narrower than 50 m
   (embankments up to 9 m high) come down to the ground beside them and broader ground stays as
