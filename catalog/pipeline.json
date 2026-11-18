@@ -2861,28 +2861,36 @@
   "pump-house-cutaway": {
    "plate": null,
    "status": "active",
-   "asset_version": null,
+   "asset_version": "1.0.0-rc1",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 0,
+   "rounds": 1,
    "waiting_on": "agent",
-   "decision": "owner: pursue (2026-11-18); handed to a separate Opus 5.5 session (ISO-TEST/handoff/pump-house/HANDOFF.md); it moves this to working draft when d1 exists",
+   "decision": "owner approved the look of d3 (cutaways/pump-house-1885-pumped.json) on 2026-11-18; planning session: merge cutaway-pump-house, give a plate, stamp rc1, one inspection (ISO-TEST/handoff/pump-house/HANDOFF-back.md)",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
    "branch": "cutaway-pump-house",
    "worktree": null,
    "links": [
-    "/mnt/user-data/outputs/cutaway/pump-house.md"
+    "cutaways/pump-house-1885-pumped.json",
+    "cutaways/pump-house-1885.json",
+    "ISO-TEST/handoff/pump-house/HANDOFF-back.md",
+    "ISO-TEST/handoff/pump-house/d3/d3.md"
    ],
    "title": "The Byrd Park Pump House: Cutaway",
    "kind": "cutaway",
-   "stage": "rough draft",
-   "notes": "research done: feasibility 3.5 of 5 (pump-house.md)",
+   "stage": "final draft",
+   "notes": "research done: feasibility 3.5 of 5; rough draft, then d1-d3 on 2026-11-18 on The American Engineer pp. 260-261 (HathiTrust full scans). Approved: d3, the pumped-water variant; d2 kept as cutaways/pump-house-1885.json. Known faults for rc1 (owner: list, not pre-accepted): gang positions along the room inferred; tailraces' size and line inferred; penstocks square in section; south walkway a large blank plane in the cut; sections print small (about 8-9 in each at 32 x 24); context map uses today's OSM river and canal lines, with one gap closed; west wing's end-wall lancets show as slivers; the pumped line crosses the forebay wall schematically (the suction's intake was at the west end). No plate yet.",
    "log": [
-    "2026-11-18: research -> rough draft"
+    "2026-11-18: research -> rough draft",
+    "2026-11-18: rough draft -> working draft (1.0.0-d1)",
+    "2026-11-18: d2: context panel (where the water went, and why) after owner review of d1",
+    "2026-11-18: d3: variant tracing the water pumped (owner asked for it as a variant, keeping d2)",
+    "2026-11-18: d3: ways drawn as water (teal and blue ribbons with IN / OUT tags), owner chose option C",
+    "2026-11-18: working draft -> final draft (1.0.0-rc1): owner approved the look of d3; handed back to the planning session"
    ]
   },
   "story-jackson-ward": {

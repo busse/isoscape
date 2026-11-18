@@ -13,8 +13,8 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Stage | Entries |
 |---|---|
-| rough draft | 1 |
 | working draft | 1 |
+| final draft | 1 |
 | final production | 44 |
 | on hold | 55 |
 | blocked | 1 |
@@ -24,17 +24,17 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 - **The Byrd Theatre: Cutaway**: owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead
 
-## Rough draft
-
-| Plate | Title | Kind | Version | On sale |
-|---|---|---|---|---|
-| — | The Byrd Park Pump House: Cutaway | cutaway | — | no |
-
 ## Working draft
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | The Byrd Theatre: Cutaway | cutaway | 1.0.0-d2 | no |
+
+## Final draft
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | The Byrd Park Pump House: Cutaway | cutaway | 1.0.0-rc1 | no |
 
 ## Final production
 

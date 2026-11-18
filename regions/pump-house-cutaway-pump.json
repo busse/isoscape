@@ -1,0 +1,110 @@
+{
+  "title": "The New Pump-House, about 1885: cut across through a pump (working draft, variant)",
+  "data": "richmond-i195-rocketts",
+  "center": [
+    -77.4859486,
+    37.5365665
+  ],
+  "width": 150,
+  "depth": 150,
+  "bearing": 330.0,
+  "snap": false,
+  "scale": 10,
+  "squash": 0.55,
+  "exaggeration": 1.0,
+  "slab": 0,
+  "palette": "paper",
+  "minBuildingArea": 12,
+  "dots": "none",
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 2,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 1,
+    "shade": 0
+  },
+  "time": {
+    "history": "history/pump-house.json"
+  },
+  "cutaway": {
+    "through": [
+      -77.48597682,
+      37.53649601
+    ],
+    "bearing": 29.7,
+    "remove": "right",
+    "floor": 28.06,
+    "keep": 1.5,
+    "parts": "ph-",
+    "travelers": [],
+    "section": {
+      "from": -4,
+      "to": 40,
+      "beyond": 25,
+      "slice": {
+        "parts": [
+          "^history:ph-w-",
+          "^history:ph-c-(wheel|penstock|diffuser|aframe|tailpit|crank-1-[02]|rod-1-[02])"
+        ],
+        "depth": 0.1
+      },
+      "other": 3,
+      "scale": 10,
+      "earth": 3,
+      "pumped": [
+        [
+          36,
+          30.343
+        ],
+        [
+          16.1,
+          30.343
+        ],
+        [
+          14.341,
+          27.6
+        ],
+        [
+          10.914,
+          27.6
+        ],
+        [
+          9.534,
+          27.2
+        ],
+        [
+          9.534,
+          25.2
+        ],
+        [
+          12.4,
+          25.2
+        ],
+        [
+          40,
+          25.2
+        ]
+      ],
+      "travelers": [
+        {
+          "s": 5.0,
+          "floor": 34.77,
+          "facing": 1,
+          "figure": "visitor"
+        },
+        {
+          "s": 12.5,
+          "floor": 34.77,
+          "facing": -1,
+          "figure": "visitor-skirt"
+        }
+      ],
+      "ribbon": true,
+      "pumpedEnds": [
+        "IN: FOREBAY",
+        "OUT: TO RESERVOIR"
+      ]
+    }
+  }
+}
