@@ -253,7 +253,7 @@ def from_redraw(store, key, d, mine):
         run.append(f'cp <set print>/{os.path.basename(base_print["base"])} <store>/{base_dir}/' + (f' && cp <set print>/canvas/<the {sizes} files> <store>/{base_dir}/canvas/' if canvas else ''))
     run.append(f'python3 tools/release/stamp.py <store> {key} --version {d["version"]} --base {base_dir}')
     recipe = {'tool': 'tools/release/stamp.py', 'run': run, 'redraw': True, 'base_kind': 'compose' if got else 'set',
-              'previous_record': rel(os.path.join(REL, key, d.get('_previous') or f"v{d['version'] - 1}.json")),
+              'previous_record': rel(os.path.join(REL, key, d.get('_previous') or f"v{d['version'] - 1}.json")) if d.get('_previous') or d['version'] > 1 else None,   # a new design's first version has none
               'pinned': made.get('pinned') or 'scenes are the set\'s scene SVGs below, by SHA-256',
               'block': base_print['info'],
               'files': {f: {'base': v['base'], 'base_sha256': v['base_sha256'], 'at': v['at']} for f, v in sorted(mine.items())},

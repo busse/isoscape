@@ -954,6 +954,10 @@ A set's print is redrawn the same way: `set.py <set> boxes <id>` and `set.py <se
 `<store>/print-files/<dir>/drawn/<design>-vN` and its `canvas/`, then `stamp.py --base`; the
 record's scenes are then the set's scene SVGs.
 
+A brand-new design (a new key, as Scott's Addition was) has no catalog entry for `stamp.py --base` to
+read yet: add its entry first (in a scratch copy of the store if the real one must wait), with
+`version` one below the first and `print`/`canvas` naming the unversioned files, then stamp.
+
 `stamp.py --base` writes `<design>-v3_<size>.jpg` (and its canvas files) beside the current
 version's, from the unstamped files in that folder; the record pins the new builds as its
 scenes, freezes their data, and keeps the unstamped files as the stamp's base, so
