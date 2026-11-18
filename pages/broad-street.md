@@ -31,13 +31,13 @@ From 1906 the State Fair filled these grounds north of the tracks every fall, ar
 
 [See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1940@-73,-810,6) · Sources: [1](https://richmondmagazine.com/news/news/a-fair-history/) [2](https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm) [3](https://urbanscalerichmondvirginia.blogspot.com/2014/12/a-brief-history-of-sports-complex-in.html) [4](https://en.wikipedia.org/wiki/The_Diamond_(Richmond,_Virginia))
 
-### 3. Hermitage Road
+### 3. Scott's Addition
 
-*Industry along the tracks*
+*Warehouses between the RF&P and the Belt Line*
 
-Once the Seaboard Air Line met the RF&P just south of here in 1900, the land between the two railroads filled with warehouses and plants along Hermitage and Overbrook roads, from 1913 on: Export Leaf Tobacco, the purchasing arm of British American Tobacco, J. P. Taylor of Universal Leaf, Miller & Rhoads and A. H. Robins among them. Drawn are those standing today that the city dates to 1943 or before. They are a historic district today.
+Laid out for houses west of the Boulevard, Scott's Addition was zoned for industry in 1927, and spurs from the railroads ran into its streets. By 1943 the National Biscuit Company, here since 1923, had General Baking's new plant, two dairies and a bag factory for neighbors. The warehouses now hold breweries, cideries and apartments.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-hermitage:1943@-121,68,6) · Sources: [1](https://www.dhr.virginia.gov/historic-registers/127-6730/) [2](https://www.dhr.virginia.gov/pdf_files/127-7825_Hermitage_Road_Warehouse_HD_Update_BI_2023_NRHP_DraftFinal051023.pdf)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@-450,-669,6) · Sources: [1](https://www.dhr.virginia.gov/historic-registers/127-6136/) [2](https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6136_ScottsAdditionHD_2005_NRHP_Final.pdf) [3](https://richmondbizsense.com/2022/06/24/scotts-addition-in-three-parts-the-eclectic-architecture-of-a-former-warehouse-district-guest-commentary/) [4](https://en.wikipedia.org/wiki/Scott%27s_Addition_Historic_District)
 
 ### 4. Seaboard Junction
 
