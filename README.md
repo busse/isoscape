@@ -579,7 +579,11 @@ deck). A rail line with an `elevation` stands its train on a deck and draws no g
 A callout's anchor in either drawing may say `"badge": [dx, dy]` (sheet units, 9,600 across):
 the badge then stands that far off the part, with a leader to a dot on it, so it does not hide
 what it names. `travelerKey` adds a line with the traveler's glyph to the key, and a group with
-`"traveler": true` carries the glyph beside its heading.
+`"traveler": true` carries the glyph beside its heading. In the region, `cutaway.route`
+(`points`: [lon, lat, elevation], at waist height, and a `weight`, the section's scale on the
+sheet over the cutaway's) draws the traveler's way in the cutaway too, red and dashed as the
+section draws it; `cutaway.order: "components"` breaks a cycle in the paint order at an item
+that lies in one, rather than at the farthest item left.
 `isoView` (`[x, y, w, h]` in the plate's own units) frames the plate closer, cutting what runs
 past it at its edge; a wayfinding label with `label: [x, y]` (sheet units, its first baseline)
 stands there, its leader leaving the nearest point of its box; `columnEnd` warns when the
