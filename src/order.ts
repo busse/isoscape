@@ -48,6 +48,14 @@ export const compare = (a: Item, b: Item, stacked = false): number => {
   // ridge, so beside a tower it would otherwise stand in front of stages far above the roof.
   if (b.shell !== undefined && a.over === b.shell.id) return 1
   if (a.shell !== undefined && b.over === a.shell.id) return -1
+  // Inside a roof shell: its sides facing the camera cover what stands under them, the others
+  // are covered by it, whether or not they lie apart on the ground.
+  if (a.shell !== undefined && b.within === a.shell.id) return a.shell.faces
+  if (b.shell !== undefined && a.within === b.shell.id) return -b.shell.faces
+  // What stands over a shell is in front of what stands inside it (a dormer and the attic's
+  // floor behind its window): otherwise the two sort by depth and close a cycle with the shell.
+  if (a.over !== undefined && a.over === b.within) return 1
+  if (b.over !== undefined && b.over === a.within) return -1
   // Modeled parts that abut may overlap by the centimeter their corners were rounded to.
   const axis: Vec2 | null = separatingAxis(a.hull, b.hull, stacked ? STACK_TOLERANCE : 1e-6)
   if (axis !== null) {
@@ -60,10 +68,6 @@ export const compare = (a: Item, b: Item, stacked = false): number => {
   }
   if (a.zMin >= b.zMax - 0.05) return 1
   if (b.zMin >= a.zMax - 0.05) return -1
-  // Inside a roof shell: its sides facing the camera cover what stands under them, the others
-  // are covered by it.
-  if (a.shell !== undefined && b.within === a.shell.id) return a.shell.faces
-  if (b.shell !== undefined && a.within === b.shell.id) return -b.shell.faces
   // A pier under a deck, its own or another's, stands behind it.
   if (a.kind === 'bridge' && b.kind === 'bridge' && a.pier !== b.pier) return a.pier === true ? -1 : 1
   // Overlapping footprints at overlapping heights: a bridge over a low building, or bad data.

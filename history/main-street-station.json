@@ -5797,6 +5797,162 @@
      37.5344582
     ],
     [
+     -77.4294382,
+     37.5344244
+    ],
+    [
+     -77.4294331,
+     37.5344299
+    ],
+    [
+     -77.4294894,
+     37.5344636
+    ]
+   ],
+   "height": 0.5,
+   "tone": "stone",
+   "elevation": 26.2,
+   "upTo": 26.7,
+   "note": "The shallow entablature round the building (HABS VA-848) and the terra-cotta cresting over it, a row of roundels between small piers (HABS photographs VA-848-12 and -14), drawn as a pierced band. Projection and heights approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+   ],
+   "confidence": "written"
+  },
+  {
+   "id": "mss-h-cornice-n-p1",
+   "name": "Main Street Station: cornice",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294382,
+     37.5344244
+    ],
+    [
+     -77.4293818,
+     37.5343907
+    ],
+    [
+     -77.4293767,
+     37.5343961
+    ],
+    [
+     -77.4294331,
+     37.5344299
+    ]
+   ],
+   "height": 0.5,
+   "tone": "stone",
+   "elevation": 26.2,
+   "upTo": 26.7,
+   "note": "The shallow entablature round the building (HABS VA-848) and the terra-cotta cresting over it, a row of roundels between small piers (HABS photographs VA-848-12 and -14), drawn as a pierced band. Projection and heights approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+   ],
+   "confidence": "written"
+  },
+  {
+   "id": "mss-h-cornice-n-p2",
+   "name": "Main Street Station: cornice",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293818,
+     37.5343907
+    ],
+    [
+     -77.4293255,
+     37.5343569
+    ],
+    [
+     -77.4293204,
+     37.5343623
+    ],
+    [
+     -77.4293767,
+     37.5343961
+    ]
+   ],
+   "height": 0.5,
+   "tone": "stone",
+   "elevation": 26.2,
+   "upTo": 26.7,
+   "note": "The shallow entablature round the building (HABS VA-848) and the terra-cotta cresting over it, a row of roundels between small piers (HABS photographs VA-848-12 and -14), drawn as a pierced band. Projection and heights approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+   ],
+   "confidence": "written"
+  },
+  {
+   "id": "mss-h-cornice-n-p3",
+   "name": "Main Street Station: cornice",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293255,
+     37.5343569
+    ],
+    [
+     -77.4292692,
+     37.5343231
+    ],
+    [
+     -77.4292641,
+     37.5343285
+    ],
+    [
+     -77.4293204,
+     37.5343623
+    ]
+   ],
+   "height": 0.5,
+   "tone": "stone",
+   "elevation": 26.2,
+   "upTo": 26.7,
+   "note": "The shallow entablature round the building (HABS VA-848) and the terra-cotta cresting over it, a row of roundels between small piers (HABS photographs VA-848-12 and -14), drawn as a pierced band. Projection and heights approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+   ],
+   "confidence": "written"
+  },
+  {
+   "id": "mss-h-cornice-n-p4",
+   "name": "Main Street Station: cornice",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4292692,
+     37.5343231
+    ],
+    [
      -77.4292128,
      37.5342893
     ],
@@ -5805,8 +5961,8 @@
      37.5342948
     ],
     [
-     -77.4294894,
-     37.5344636
+     -77.4292641,
+     37.5343285
     ]
    ],
    "height": 0.5,
@@ -7489,6 +7645,162 @@
      37.5344573
     ],
     [
+     -77.4294375,
+     37.5344252
+    ],
+    [
+     -77.4294351,
+     37.5344277
+    ],
+    [
+     -77.4294888,
+     37.5344598
+    ]
+   ],
+   "height": 0.8,
+   "tone": "stone",
+   "elevation": 26.7,
+   "upTo": 27.5,
+   "note": "The shallow entablature round the building (HABS VA-848) and the terra-cotta cresting over it, a row of roundels between small piers (HABS photographs VA-848-12 and -14), drawn as a pierced band. Projection and heights approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+   ],
+   "confidence": "written"
+  },
+  {
+   "id": "mss-h-balustrade-n-p1",
+   "name": "Main Street Station: cresting",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294375,
+     37.5344252
+    ],
+    [
+     -77.4293812,
+     37.5343914
+    ],
+    [
+     -77.4293788,
+     37.5343939
+    ],
+    [
+     -77.4294351,
+     37.5344277
+    ]
+   ],
+   "height": 0.8,
+   "tone": "stone",
+   "elevation": 26.7,
+   "upTo": 27.5,
+   "note": "The shallow entablature round the building (HABS VA-848) and the terra-cotta cresting over it, a row of roundels between small piers (HABS photographs VA-848-12 and -14), drawn as a pierced band. Projection and heights approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+   ],
+   "confidence": "written"
+  },
+  {
+   "id": "mss-h-balustrade-n-p2",
+   "name": "Main Street Station: cresting",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293812,
+     37.5343914
+    ],
+    [
+     -77.4293248,
+     37.5343576
+    ],
+    [
+     -77.4293224,
+     37.5343602
+    ],
+    [
+     -77.4293788,
+     37.5343939
+    ]
+   ],
+   "height": 0.8,
+   "tone": "stone",
+   "elevation": 26.7,
+   "upTo": 27.5,
+   "note": "The shallow entablature round the building (HABS VA-848) and the terra-cotta cresting over it, a row of roundels between small piers (HABS photographs VA-848-12 and -14), drawn as a pierced band. Projection and heights approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+   ],
+   "confidence": "written"
+  },
+  {
+   "id": "mss-h-balustrade-n-p3",
+   "name": "Main Street Station: cresting",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293248,
+     37.5343576
+    ],
+    [
+     -77.4292685,
+     37.5343238
+    ],
+    [
+     -77.4292661,
+     37.5343264
+    ],
+    [
+     -77.4293224,
+     37.5343602
+    ]
+   ],
+   "height": 0.8,
+   "tone": "stone",
+   "elevation": 26.7,
+   "upTo": 27.5,
+   "note": "The shallow entablature round the building (HABS VA-848) and the terra-cotta cresting over it, a row of roundels between small piers (HABS photographs VA-848-12 and -14), drawn as a pierced band. Projection and heights approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+   ],
+   "confidence": "written"
+  },
+  {
+   "id": "mss-h-balustrade-n-p4",
+   "name": "Main Street Station: cresting",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4292685,
+     37.5343238
+    ],
+    [
      -77.4292148,
      37.5342917
     ],
@@ -7497,8 +7809,8 @@
      37.5342942
     ],
     [
-     -77.4294888,
-     37.5344598
+     -77.4292661,
+     37.5343264
     ]
    ],
    "height": 0.8,
@@ -7812,8 +8124,8 @@
    "to": 1985,
    "ring": [
     [
-     -77.4296128,
-     37.5343189
+     -77.4295626,
+     37.5342888
     ],
     [
      -77.4293474,
@@ -7822,6 +8134,43 @@
     [
      -77.429222,
      37.5342931
+    ],
+    [
+     -77.4294371,
+     37.5344221
+    ]
+   ],
+   "height": 0.4,
+   "tone": "floor",
+   "elevation": 21.7,
+   "upTo": 22.1,
+   "note": "The third floor, the gallery story under the cornice: the two railroads' offices in 1901 (The Times) and in 1969 (HABS VA-848). Its level follows the longitudinal section in The Railroad Gazette, July 13, 1900 (ground, track, third and fourth floors, attic), checked against photographs; to within about half a meter.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://www.loc.gov/resource/sn85034438/1901-11-24/ed-1/?sp=1&st=text",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "drawn"
+  },
+  {
+   "id": "mss-h-floor-second-w",
+   "name": "Main Street Station: third floor",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4295713,
+     37.534363
+    ],
+    [
+     -77.4295211,
+     37.5343329
+    ],
+    [
+     -77.4294371,
+     37.5344221
     ],
     [
      -77.4294874,
@@ -7849,12 +8198,12 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295946,
-     37.534321
+     -77.4295609,
+     37.5343568
     ],
     [
-     -77.4295674,
-     37.5343047
+     -77.4295337,
+     37.5343405
     ],
     [
      -77.4294576,
@@ -7887,8 +8236,46 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295674,
-     37.5343047
+     -77.4295337,
+     37.5343405
+    ],
+    [
+     -77.4295211,
+     37.5343329
+    ],
+    [
+     -77.429445,
+     37.5344138
+    ],
+    [
+     -77.4294576,
+     37.5344214
+    ]
+   ],
+   "height": 0.35,
+   "tone": "floor",
+   "elevation": 26.75,
+   "upTo": 27.1,
+   "note": "The fourth floor, in the roof: the Railroad YMCA's rooms and the restaurant's kitchen in 1901 (The Times); offices by 1969 (HABS VA-848). Its level follows the longitudinal section in The Railroad Gazette, July 13, 1900 (ground, track, third and fourth floors, attic), checked against photographs; to within about half a meter.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://www.loc.gov/resource/sn85034438/1901-11-24/ed-1/?sp=1&st=text",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "drawn",
+   "within": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-floor-third-p1-e",
+   "name": "Main Street Station: fourth floor",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4295547,
+     37.5342971
     ],
     [
      -77.4295402,
@@ -7899,8 +8286,8 @@
      37.5344051
     ],
     [
-     -77.4294576,
-     37.5344214
+     -77.429445,
+     37.5344138
     ]
    ],
    "height": 0.35,
@@ -8191,8 +8578,46 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295608,
-     37.5343248
+     -77.4295416,
+     37.5343452
+    ],
+    [
+     -77.4295211,
+     37.5343329
+    ],
+    [
+     -77.4294595,
+     37.5343984
+    ],
+    [
+     -77.42948,
+     37.5344107
+    ]
+   ],
+   "height": 0.35,
+   "tone": "floor",
+   "elevation": 30.15,
+   "upTo": 30.5,
+   "note": "The attic, in the roof: lit by the upper row of dormers. Its level follows the longitudinal section in The Railroad Gazette, July 13, 1900 (ground, track, third and fourth floors, attic), checked against photographs; to within about half a meter.",
+   "sources": [
+    "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
+    "https://www.loc.gov/resource/sn85034438/1901-11-24/ed-1/?sp=1&st=text",
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "drawn",
+   "within": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-floor-fourth-e",
+   "name": "Main Street Station: attic",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4295402,
+     37.5343125
     ],
     [
      -77.429535,
@@ -8203,8 +8628,8 @@
      37.5343952
     ],
     [
-     -77.42948,
-     37.5344107
+     -77.4294595,
+     37.5343984
     ]
    ],
    "height": 0.35,
@@ -8789,36 +9214,102 @@
    "to": 1985,
    "ring": [
     [
-     -77.429553,
-     37.5342842
+     -77.4295414,
+     37.5342695
     ],
     [
-     -77.4295358,
-     37.5342739
+     -77.4295251,
+     37.5342868
     ],
     [
-     -77.4295171,
-     37.5342938
+     -77.4295405,
+     37.5342961
     ],
     [
-     -77.4295343,
-     37.5343041
+     -77.4295568,
+     37.5342787
     ]
    ],
-   "height": 2.8,
+   "height": 2.9,
    "tone": "brick",
-   "elevation": 27.5,
-   "upTo": 30.3,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "elevation": 26.7,
+   "upTo": 29.6,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     0,
+     2.9,
+     2.399,
+     2.9,
+     0.58,
+     0
+    ]
+   ],
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-0-0-pediment",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4295585,
+     37.5342784
+    ],
+    [
+     -77.4295413,
+     37.5342681
+    ],
+    [
+     -77.4295392,
+     37.5342703
+    ],
+    [
+     -77.4295565,
+     37.5342806
+    ]
+   ],
+   "height": 1.3,
+   "tone": "stone",
+   "elevation": 29.6,
+   "upTo": 30.9,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     1.9,
+     0,
+     0.95,
+     1.3
+    ]
+   ],
    "over": "mss-h-roof"
   },
   {
@@ -8829,45 +9320,48 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295554,
-     37.5342839
+     -77.429556,
+     37.5342803
     ],
     [
-     -77.4295355,
-     37.534272
+     -77.4295397,
+     37.5342705
     ],
     [
-     -77.4295328,
-     37.5342749
+     -77.4295246,
+     37.5342866
     ],
     [
-     -77.4295527,
-     37.5342868
+     -77.4295409,
+     37.5342963
     ]
    ],
-   "height": 1.2,
-   "tone": "stone",
-   "elevation": 30.3,
-   "upTo": 31.5,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "height": 1.3,
+   "tone": "tile",
+   "elevation": 29.6,
+   "upTo": 30.9,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "shape": "frame",
-   "members": [
+   "shape": "inset",
+   "levels": [
     [
      0,
      0,
-     2.2,
-     0,
-     1.1,
-     1.2
+     9
+    ],
+    [
+     1.3,
+     0.9,
+     9
     ]
    ],
    "over": "mss-h-roof"
@@ -8880,34 +9374,35 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295506,
-     37.5342823
+     -77.4295534,
+     37.5342763
     ],
     [
-     -77.4295388,
-     37.5342752
+     -77.4295453,
+     37.5342714
     ],
     [
-     -77.4295385,
-     37.5342755
+     -77.429545,
+     37.5342717
     ],
     [
-     -77.4295503,
-     37.5342826
+     -77.4295532,
+     37.5342766
     ]
    ],
-   "height": 2.1,
+   "height": 1.6,
    "tone": "glass",
-   "elevation": 27.9,
-   "upTo": 30.0,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "elevation": 27.6,
+   "upTo": 29.2,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "over": "mss-h-roof"
@@ -8920,36 +9415,102 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295174,
-     37.5342628
+     -77.4294764,
+     37.5342305
     ],
     [
-     -77.4295065,
-     37.5342563
+     -77.42946,
+     37.5342479
     ],
     [
-     -77.4294912,
-     37.5342726
+     -77.4294754,
+     37.5342571
     ],
     [
-     -77.429502,
-     37.5342791
+     -77.4294918,
+     37.5342398
     ]
    ],
-   "height": 2.0,
+   "height": 2.9,
    "tone": "brick",
-   "elevation": 27.5,
-   "upTo": 29.5,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "elevation": 26.7,
+   "upTo": 29.6,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     0,
+     2.9,
+     2.399,
+     2.9,
+     0.58,
+     0
+    ]
+   ],
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-0-1-pediment",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294935,
+     37.5342394
+    ],
+    [
+     -77.4294763,
+     37.5342291
+    ],
+    [
+     -77.4294742,
+     37.5342313
+    ],
+    [
+     -77.4294914,
+     37.5342416
+    ]
+   ],
+   "height": 1.3,
+   "tone": "stone",
+   "elevation": 29.6,
+   "upTo": 30.9,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     1.9,
+     0,
+     0.95,
+     1.3
+    ]
+   ],
    "over": "mss-h-roof"
   },
   {
@@ -8960,34 +9521,35 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295197,
-     37.5342625
+     -77.429491,
+     37.5342413
     ],
     [
-     -77.4295062,
-     37.5342544
+     -77.4294747,
+     37.5342316
     ],
     [
-     -77.4294898,
-     37.5342718
+     -77.4294596,
+     37.5342476
     ],
     [
-     -77.4295034,
-     37.5342799
+     -77.4294759,
+     37.5342574
     ]
    ],
-   "height": 1.0,
+   "height": 1.3,
    "tone": "tile",
-   "elevation": 29.5,
-   "upTo": 30.5,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "elevation": 29.6,
+   "upTo": 30.9,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "shape": "inset",
@@ -8998,8 +9560,8 @@
      9
     ],
     [
-     1.0,
-     0.6,
+     1.3,
+     0.9,
      9
     ]
    ],
@@ -9013,34 +9575,35 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295149,
-     37.5342609
+     -77.4294884,
+     37.5342373
     ],
     [
-     -77.4295095,
-     37.5342576
+     -77.4294803,
+     37.5342324
     ],
     [
-     -77.4295092,
-     37.5342579
+     -77.42948,
+     37.5342327
     ],
     [
-     -77.4295147,
-     37.5342612
+     -77.4294881,
+     37.5342376
     ]
    ],
-   "height": 1.3,
+   "height": 1.6,
    "tone": "glass",
-   "elevation": 27.9,
+   "elevation": 27.6,
    "upTo": 29.2,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "over": "mss-h-roof"
@@ -9053,36 +9616,102 @@
    "to": 1985,
    "ring": [
     [
-     -77.429488,
-     37.5342452
+     -77.4294114,
+     37.5341916
     ],
     [
-     -77.4294708,
-     37.5342349
+     -77.429395,
+     37.5342089
     ],
     [
-     -77.4294521,
-     37.5342548
+     -77.4294104,
+     37.5342181
     ],
     [
-     -77.4294693,
-     37.5342652
+     -77.4294268,
+     37.5342008
     ]
    ],
-   "height": 2.8,
+   "height": 2.9,
    "tone": "brick",
-   "elevation": 27.5,
-   "upTo": 30.3,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "elevation": 26.7,
+   "upTo": 29.6,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     0,
+     2.9,
+     2.399,
+     2.9,
+     0.58,
+     0
+    ]
+   ],
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-0-2-pediment",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294285,
+     37.5342005
+    ],
+    [
+     -77.4294113,
+     37.5341901
+    ],
+    [
+     -77.4294092,
+     37.5341923
+    ],
+    [
+     -77.4294264,
+     37.5342026
+    ]
+   ],
+   "height": 1.3,
+   "tone": "stone",
+   "elevation": 29.6,
+   "upTo": 30.9,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     1.9,
+     0,
+     0.95,
+     1.3
+    ]
+   ],
    "over": "mss-h-roof"
   },
   {
@@ -9093,45 +9722,48 @@
    "to": 1985,
    "ring": [
     [
-     -77.4294904,
-     37.534245
+     -77.429426,
+     37.5342024
     ],
     [
-     -77.4294705,
-     37.534233
+     -77.4294097,
+     37.5341926
     ],
     [
-     -77.4294678,
-     37.5342359
+     -77.4293946,
+     37.5342086
     ],
     [
-     -77.4294877,
-     37.5342479
+     -77.4294109,
+     37.5342184
     ]
    ],
-   "height": 1.2,
-   "tone": "stone",
-   "elevation": 30.3,
-   "upTo": 31.5,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "height": 1.3,
+   "tone": "tile",
+   "elevation": 29.6,
+   "upTo": 30.9,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
-   "shape": "frame",
-   "members": [
+   "shape": "inset",
+   "levels": [
     [
      0,
      0,
-     2.2,
-     0,
-     1.1,
-     1.2
+     9
+    ],
+    [
+     1.3,
+     0.9,
+     9
     ]
    ],
    "over": "mss-h-roof"
@@ -9144,431 +9776,35 @@
    "to": 1985,
    "ring": [
     [
-     -77.4294856,
-     37.5342433
+     -77.4294234,
+     37.5341983
     ],
     [
-     -77.4294738,
-     37.5342363
+     -77.4294152,
+     37.5341934
     ],
     [
-     -77.4294735,
-     37.5342365
+     -77.429415,
+     37.5341937
     ],
     [
-     -77.4294853,
-     37.5342436
+     -77.4294231,
+     37.5341986
     ]
    ],
-   "height": 2.1,
+   "height": 1.6,
    "tone": "glass",
-   "elevation": 27.9,
-   "upTo": 30.0,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
-   "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written",
-   "over": "mss-h-roof"
-  },
-  {
-   "id": "mss-h-dormer-0-3",
-   "name": "Main Street Station: dormer",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4294524,
-     37.5342238
-    ],
-    [
-     -77.4294415,
-     37.5342173
-    ],
-    [
-     -77.4294262,
-     37.5342336
-    ],
-    [
-     -77.429437,
-     37.5342402
-    ]
-   ],
-   "height": 2.0,
-   "tone": "brick",
-   "elevation": 27.5,
-   "upTo": 29.5,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
-   "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written",
-   "over": "mss-h-roof"
-  },
-  {
-   "id": "mss-h-dormer-0-3-roof",
-   "name": "Main Street Station: dormer",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4294547,
-     37.5342236
-    ],
-    [
-     -77.4294411,
-     37.5342154
-    ],
-    [
-     -77.4294248,
-     37.5342328
-    ],
-    [
-     -77.4294384,
-     37.534241
-    ]
-   ],
-   "height": 1.0,
-   "tone": "tile",
-   "elevation": 29.5,
-   "upTo": 30.5,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
-   "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written",
-   "shape": "inset",
-   "levels": [
-    [
-     0,
-     0,
-     9
-    ],
-    [
-     1.0,
-     0.6,
-     9
-    ]
-   ],
-   "over": "mss-h-roof"
-  },
-  {
-   "id": "mss-h-dormer-0-3-glass",
-   "name": "Main Street Station: dormer",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4294499,
-     37.5342219
-    ],
-    [
-     -77.4294445,
-     37.5342187
-    ],
-    [
-     -77.4294442,
-     37.534219
-    ],
-    [
-     -77.4294496,
-     37.5342222
-    ]
-   ],
-   "height": 1.3,
-   "tone": "glass",
-   "elevation": 27.9,
+   "elevation": 27.6,
    "upTo": 29.2,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written",
-   "over": "mss-h-roof"
-  },
-  {
-   "id": "mss-h-dormer-0-4",
-   "name": "Main Street Station: dormer",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.429423,
-     37.5342063
-    ],
-    [
-     -77.4294058,
-     37.5341959
-    ],
-    [
-     -77.4293871,
-     37.5342159
-    ],
-    [
-     -77.4294043,
-     37.5342262
-    ]
-   ],
-   "height": 2.8,
-   "tone": "brick",
-   "elevation": 27.5,
-   "upTo": 30.3,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
-   "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written",
-   "over": "mss-h-roof"
-  },
-  {
-   "id": "mss-h-dormer-0-4-roof",
-   "name": "Main Street Station: dormer",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4294254,
-     37.534206
-    ],
-    [
-     -77.4294055,
-     37.534194
-    ],
-    [
-     -77.4294028,
-     37.5341969
-    ],
-    [
-     -77.4294227,
-     37.5342089
-    ]
-   ],
-   "height": 1.2,
-   "tone": "stone",
-   "elevation": 30.3,
-   "upTo": 31.5,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
-   "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written",
-   "shape": "frame",
-   "members": [
-    [
-     0,
-     0,
-     2.2,
-     0,
-     1.1,
-     1.2
-    ]
-   ],
-   "over": "mss-h-roof"
-  },
-  {
-   "id": "mss-h-dormer-0-4-glass",
-   "name": "Main Street Station: dormer",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4294206,
-     37.5342043
-    ],
-    [
-     -77.4294088,
-     37.5341973
-    ],
-    [
-     -77.4294085,
-     37.5341976
-    ],
-    [
-     -77.4294203,
-     37.5342046
-    ]
-   ],
-   "height": 2.1,
-   "tone": "glass",
-   "elevation": 27.9,
-   "upTo": 30.0,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
-   "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written",
-   "over": "mss-h-roof"
-  },
-  {
-   "id": "mss-h-dormer-0-5",
-   "name": "Main Street Station: dormer",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4293873,
-     37.5341849
-    ],
-    [
-     -77.4293765,
-     37.5341784
-    ],
-    [
-     -77.4293611,
-     37.5341947
-    ],
-    [
-     -77.429372,
-     37.5342012
-    ]
-   ],
-   "height": 2.0,
-   "tone": "brick",
-   "elevation": 27.5,
-   "upTo": 29.5,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
-   "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written",
-   "over": "mss-h-roof"
-  },
-  {
-   "id": "mss-h-dormer-0-5-roof",
-   "name": "Main Street Station: dormer",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4293897,
-     37.5341846
-    ],
-    [
-     -77.4293761,
-     37.5341765
-    ],
-    [
-     -77.4293598,
-     37.5341939
-    ],
-    [
-     -77.4293734,
-     37.534202
-    ]
-   ],
-   "height": 1.0,
-   "tone": "tile",
-   "elevation": 29.5,
-   "upTo": 30.5,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
-   "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written",
-   "shape": "inset",
-   "levels": [
-    [
-     0,
-     0,
-     9
-    ],
-    [
-     1.0,
-     0.6,
-     9
-    ]
-   ],
-   "over": "mss-h-roof"
-  },
-  {
-   "id": "mss-h-dormer-0-5-glass",
-   "name": "Main Street Station: dormer",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4293849,
-     37.534183
-    ],
-    [
-     -77.4293795,
-     37.5341797
-    ],
-    [
-     -77.4293792,
-     37.53418
-    ],
-    [
-     -77.4293846,
-     37.5341833
-    ]
-   ],
-   "height": 1.3,
-   "tone": "glass",
-   "elevation": 27.9,
-   "upTo": 29.2,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
-   "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "over": "mss-h-roof"
@@ -9581,36 +9817,48 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295187,
-     37.5342884
+     -77.4295042,
+     37.5342603
     ],
     [
-     -77.4295078,
-     37.5342819
+     -77.429497,
+     37.5342679
     ],
     [
-     -77.4294912,
-     37.5342996
+     -77.4295061,
+     37.5342733
     ],
     [
-     -77.4295021,
-     37.5343061
+     -77.4295132,
+     37.5342657
     ]
    ],
-   "height": 2.3,
-   "tone": "brick",
-   "elevation": 31.0,
-   "upTo": 33.3,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "height": 1.6,
+   "tone": "tile",
+   "elevation": 27.7,
+   "upTo": 29.3,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     0,
+     1.6,
+     1.054,
+     1.6
+    ]
+   ],
    "over": "mss-h-roof"
   },
   {
@@ -9621,34 +9869,35 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295211,
-     37.5342882
+     -77.4295145,
+     37.5342656
     ],
     [
-     -77.4295075,
-     37.53428
+     -77.429504,
+     37.5342593
     ],
     [
-     -77.4294898,
-     37.5342988
+     -77.4294963,
+     37.5342675
     ],
     [
-     -77.4295034,
-     37.5343069
+     -77.4295068,
+     37.5342738
     ]
    ],
-   "height": 1.6,
+   "height": 1.4,
    "tone": "tile",
-   "elevation": 33.3,
-   "upTo": 34.9,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "elevation": 29.3,
+   "upTo": 30.7,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "shape": "inset",
@@ -9659,8 +9908,8 @@
      9
     ],
     [
-     1.6,
-     0.6,
+     1.4,
+     0.58,
      9
     ]
    ],
@@ -9674,34 +9923,35 @@
    "to": 1985,
    "ring": [
     [
-     -77.4295162,
-     37.5342865
+     -77.4295112,
+     37.5342641
     ],
     [
-     -77.4295108,
-     37.5342833
+     -77.4295067,
+     37.5342614
     ],
     [
-     -77.4295105,
-     37.5342835
+     -77.4295064,
+     37.5342616
     ],
     [
-     -77.429516,
-     37.5342868
+     -77.429511,
+     37.5342644
     ]
    ],
-   "height": 1.6,
-   "tone": "glass",
-   "elevation": 31.4,
-   "upTo": 33.0,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "height": 1.05,
+   "tone": "coal",
+   "elevation": 28.0,
+   "upTo": 29.05,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "over": "mss-h-roof"
@@ -9714,36 +9964,48 @@
    "to": 1985,
    "ring": [
     [
-     -77.4294862,
-     37.534269
+     -77.4294392,
+     37.5342213
     ],
     [
-     -77.4294753,
-     37.5342624
+     -77.429432,
+     37.5342289
     ],
     [
-     -77.4294587,
-     37.5342801
+     -77.4294411,
+     37.5342344
     ],
     [
-     -77.4294696,
-     37.5342866
+     -77.4294482,
+     37.5342267
     ]
    ],
-   "height": 2.3,
-   "tone": "brick",
-   "elevation": 31.0,
-   "upTo": 33.3,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "height": 1.6,
+   "tone": "tile",
+   "elevation": 27.7,
+   "upTo": 29.3,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     0,
+     1.6,
+     1.054,
+     1.6
+    ]
+   ],
    "over": "mss-h-roof"
   },
   {
@@ -9754,34 +10016,35 @@
    "to": 1985,
    "ring": [
     [
-     -77.4294886,
-     37.5342687
+     -77.4294495,
+     37.5342266
     ],
     [
-     -77.429475,
-     37.5342605
+     -77.429439,
+     37.5342203
     ],
     [
-     -77.4294573,
-     37.5342793
+     -77.4294313,
+     37.5342285
     ],
     [
-     -77.4294709,
-     37.5342874
+     -77.4294418,
+     37.5342348
     ]
    ],
-   "height": 1.6,
+   "height": 1.4,
    "tone": "tile",
-   "elevation": 33.3,
-   "upTo": 34.9,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "elevation": 29.3,
+   "upTo": 30.7,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "shape": "inset",
@@ -9792,8 +10055,8 @@
      9
     ],
     [
-     1.6,
-     0.6,
+     1.4,
+     0.58,
      9
     ]
    ],
@@ -9807,34 +10070,35 @@
    "to": 1985,
    "ring": [
     [
-     -77.4294837,
-     37.534267
+     -77.4294462,
+     37.5342251
     ],
     [
-     -77.4294783,
-     37.5342638
+     -77.4294417,
+     37.5342224
     ],
     [
-     -77.429478,
-     37.5342641
+     -77.4294414,
+     37.5342227
     ],
     [
-     -77.4294835,
-     37.5342673
+     -77.429446,
+     37.5342254
     ]
    ],
-   "height": 1.6,
-   "tone": "glass",
-   "elevation": 31.4,
-   "upTo": 33.0,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "height": 1.05,
+   "tone": "coal",
+   "elevation": 28.0,
+   "upTo": 29.05,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "over": "mss-h-roof"
@@ -9847,36 +10111,48 @@
    "to": 1985,
    "ring": [
     [
-     -77.4294537,
-     37.5342495
+     -77.4293741,
+     37.5341823
     ],
     [
-     -77.4294428,
-     37.534243
+     -77.429367,
+     37.53419
     ],
     [
-     -77.4294262,
-     37.5342606
+     -77.429376,
+     37.5341954
     ],
     [
-     -77.4294371,
-     37.5342671
+     -77.4293832,
+     37.5341878
     ]
    ],
-   "height": 2.3,
-   "tone": "brick",
-   "elevation": 31.0,
-   "upTo": 33.3,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "height": 1.6,
+   "tone": "tile",
+   "elevation": 27.7,
+   "upTo": 29.3,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     0,
+     1.6,
+     1.054,
+     1.6
+    ]
+   ],
    "over": "mss-h-roof"
   },
   {
@@ -9887,34 +10163,35 @@
    "to": 1985,
    "ring": [
     [
-     -77.4294561,
-     37.5342492
+     -77.4293845,
+     37.5341876
     ],
     [
-     -77.4294425,
-     37.5342411
+     -77.429374,
+     37.5341813
     ],
     [
-     -77.4294248,
-     37.5342598
+     -77.4293663,
+     37.5341895
     ],
     [
-     -77.4294384,
-     37.5342679
+     -77.4293768,
+     37.5341958
     ]
    ],
-   "height": 1.6,
+   "height": 1.4,
    "tone": "tile",
-   "elevation": 33.3,
-   "upTo": 34.9,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "elevation": 29.3,
+   "upTo": 30.7,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "shape": "inset",
@@ -9925,8 +10202,8 @@
      9
     ],
     [
-     1.6,
-     0.6,
+     1.4,
+     0.58,
      9
     ]
    ],
@@ -9940,114 +10217,128 @@
    "to": 1985,
    "ring": [
     [
-     -77.4294512,
-     37.5342475
+     -77.4293812,
+     37.5341861
     ],
     [
-     -77.4294458,
-     37.5342443
+     -77.4293767,
+     37.5341834
     ],
     [
-     -77.4294455,
-     37.5342446
+     -77.4293764,
+     37.5341837
     ],
     [
-     -77.429451,
-     37.5342478
+     -77.4293809,
+     37.5341864
     ]
    ],
-   "height": 1.6,
-   "tone": "glass",
-   "elevation": 31.4,
-   "upTo": 33.0,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "height": 1.05,
+   "tone": "coal",
+   "elevation": 28.0,
+   "upTo": 29.05,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "over": "mss-h-roof"
   },
   {
-   "id": "mss-h-dormer-1-3",
+   "id": "mss-h-dormer-2-0",
    "name": "Main Street Station: dormer",
    "kind": "landmark",
    "from": 1901,
    "to": 1985,
    "ring": [
     [
-     -77.4294212,
-     37.53423
+     -77.4295055,
+     37.5342859
     ],
     [
-     -77.4294103,
-     37.5342235
+     -77.4294983,
+     37.5342935
     ],
     [
-     -77.4293937,
-     37.5342411
+     -77.4295074,
+     37.534299
     ],
     [
-     -77.4294046,
-     37.5342476
-    ]
-   ],
-   "height": 2.3,
-   "tone": "brick",
-   "elevation": 31.0,
-   "upTo": 33.3,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
-   "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written",
-   "over": "mss-h-roof"
-  },
-  {
-   "id": "mss-h-dormer-1-3-roof",
-   "name": "Main Street Station: dormer",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.4294236,
-     37.5342297
-    ],
-    [
-     -77.42941,
-     37.5342216
-    ],
-    [
-     -77.4293923,
-     37.5342403
-    ],
-    [
-     -77.4294059,
-     37.5342485
+     -77.4295145,
+     37.5342913
     ]
    ],
    "height": 1.6,
    "tone": "tile",
-   "elevation": 33.3,
-   "upTo": 34.9,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "elevation": 31.2,
+   "upTo": 32.8,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     0,
+     1.6,
+     1.054,
+     1.6
+    ]
+   ],
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-2-0-roof",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4295158,
+     37.5342912
+    ],
+    [
+     -77.4295053,
+     37.5342849
+    ],
+    [
+     -77.4294976,
+     37.5342931
+    ],
+    [
+     -77.4295081,
+     37.5342994
+    ]
+   ],
+   "height": 1.4,
+   "tone": "tile",
+   "elevation": 32.8,
+   "upTo": 34.2,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "shape": "inset",
@@ -10058,129 +10349,143 @@
      9
     ],
     [
-     1.6,
-     0.6,
+     1.4,
+     0.58,
      9
     ]
    ],
    "over": "mss-h-roof"
   },
   {
-   "id": "mss-h-dormer-1-3-glass",
+   "id": "mss-h-dormer-2-0-glass",
    "name": "Main Street Station: dormer",
    "kind": "landmark",
    "from": 1901,
    "to": 1985,
    "ring": [
     [
-     -77.4294187,
-     37.5342281
+     -77.4295126,
+     37.5342897
     ],
     [
-     -77.4294133,
-     37.5342248
+     -77.429508,
+     37.534287
     ],
     [
-     -77.429413,
-     37.5342251
+     -77.4295078,
+     37.5342873
     ],
     [
-     -77.4294185,
-     37.5342284
+     -77.4295123,
+     37.53429
     ]
    ],
-   "height": 1.6,
-   "tone": "glass",
-   "elevation": 31.4,
-   "upTo": 33.0,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "height": 1.05,
+   "tone": "coal",
+   "elevation": 31.5,
+   "upTo": 32.55,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "over": "mss-h-roof"
   },
   {
-   "id": "mss-h-dormer-1-4",
+   "id": "mss-h-dormer-2-1",
    "name": "Main Street Station: dormer",
    "kind": "landmark",
    "from": 1901,
    "to": 1985,
    "ring": [
     [
-     -77.4293887,
-     37.5342105
+     -77.429473,
+     37.5342664
     ],
     [
-     -77.4293778,
-     37.534204
+     -77.4294658,
+     37.534274
     ],
     [
-     -77.4293612,
-     37.5342216
+     -77.4294749,
+     37.5342795
     ],
     [
-     -77.4293721,
-     37.5342282
-    ]
-   ],
-   "height": 2.3,
-   "tone": "brick",
-   "elevation": 31.0,
-   "upTo": 33.3,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
-   "sources": [
-    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
-    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
-    "http://hdl.loc.gov/loc.pnp/det.4a10737",
-    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
-   ],
-   "confidence": "written",
-   "over": "mss-h-roof"
-  },
-  {
-   "id": "mss-h-dormer-1-4-roof",
-   "name": "Main Street Station: dormer",
-   "kind": "landmark",
-   "from": 1901,
-   "to": 1985,
-   "ring": [
-    [
-     -77.429391,
-     37.5342102
-    ],
-    [
-     -77.4293775,
-     37.5342021
-    ],
-    [
-     -77.4293598,
-     37.5342208
-    ],
-    [
-     -77.4293734,
-     37.534229
+     -77.429482,
+     37.5342718
     ]
    ],
    "height": 1.6,
    "tone": "tile",
-   "elevation": 33.3,
-   "upTo": 34.9,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "elevation": 31.2,
+   "upTo": 32.8,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     0,
+     1.6,
+     1.054,
+     1.6
+    ]
+   ],
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-2-1-roof",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294833,
+     37.5342717
+    ],
+    [
+     -77.4294728,
+     37.5342654
+    ],
+    [
+     -77.4294651,
+     37.5342736
+    ],
+    [
+     -77.4294756,
+     37.5342799
+    ]
+   ],
+   "height": 1.4,
+   "tone": "tile",
+   "elevation": 32.8,
+   "upTo": 34.2,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "shape": "inset",
@@ -10191,49 +10496,491 @@
      9
     ],
     [
-     1.6,
-     0.6,
+     1.4,
+     0.58,
      9
     ]
    ],
    "over": "mss-h-roof"
   },
   {
-   "id": "mss-h-dormer-1-4-glass",
+   "id": "mss-h-dormer-2-1-glass",
    "name": "Main Street Station: dormer",
    "kind": "landmark",
    "from": 1901,
    "to": 1985,
    "ring": [
     [
-     -77.4293862,
-     37.5342086
+     -77.4294801,
+     37.5342702
     ],
     [
-     -77.4293808,
-     37.5342053
+     -77.4294755,
+     37.5342675
     ],
     [
-     -77.4293805,
-     37.5342056
+     -77.4294752,
+     37.5342678
     ],
     [
-     -77.4293859,
-     37.5342089
+     -77.4294798,
+     37.5342705
     ]
    ],
-   "height": 1.6,
-   "tone": "glass",
-   "elevation": 31.4,
-   "upTo": 33.0,
-   "note": "A dormer on the roof's front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate).",
+   "height": 1.05,
+   "tone": "coal",
+   "elevation": 31.5,
+   "upTo": 32.55,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
    "sources": [
     "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
     "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
     "http://hdl.loc.gov/loc.pnp/det.4a10737",
     "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
-    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-2-2",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294405,
+     37.5342469
+    ],
+    [
+     -77.4294333,
+     37.5342546
+    ],
+    [
+     -77.4294424,
+     37.53426
+    ],
+    [
+     -77.4294495,
+     37.5342524
+    ]
+   ],
+   "height": 1.6,
+   "tone": "tile",
+   "elevation": 31.2,
+   "upTo": 32.8,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     0,
+     1.6,
+     1.054,
+     1.6
+    ]
+   ],
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-2-2-roof",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294508,
+     37.5342522
+    ],
+    [
+     -77.4294403,
+     37.5342459
+    ],
+    [
+     -77.4294326,
+     37.5342541
+    ],
+    [
+     -77.4294431,
+     37.5342604
+    ]
+   ],
+   "height": 1.4,
+   "tone": "tile",
+   "elevation": 32.8,
+   "upTo": 34.2,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "shape": "inset",
+   "levels": [
+    [
+     0,
+     0,
+     9
+    ],
+    [
+     1.4,
+     0.58,
+     9
+    ]
+   ],
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-2-2-glass",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294475,
+     37.5342507
+    ],
+    [
+     -77.429443,
+     37.534248
+    ],
+    [
+     -77.4294427,
+     37.5342483
+    ],
+    [
+     -77.4294473,
+     37.534251
+    ]
+   ],
+   "height": 1.05,
+   "tone": "coal",
+   "elevation": 31.5,
+   "upTo": 32.55,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-2-3",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.429408,
+     37.5342274
+    ],
+    [
+     -77.4294008,
+     37.5342351
+    ],
+    [
+     -77.4294099,
+     37.5342405
+    ],
+    [
+     -77.429417,
+     37.5342329
+    ]
+   ],
+   "height": 1.6,
+   "tone": "tile",
+   "elevation": 31.2,
+   "upTo": 32.8,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     0,
+     1.6,
+     1.054,
+     1.6
+    ]
+   ],
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-2-3-roof",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294183,
+     37.5342327
+    ],
+    [
+     -77.4294078,
+     37.5342264
+    ],
+    [
+     -77.4294001,
+     37.5342346
+    ],
+    [
+     -77.4294106,
+     37.5342409
+    ]
+   ],
+   "height": 1.4,
+   "tone": "tile",
+   "elevation": 32.8,
+   "upTo": 34.2,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "shape": "inset",
+   "levels": [
+    [
+     0,
+     0,
+     9
+    ],
+    [
+     1.4,
+     0.58,
+     9
+    ]
+   ],
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-2-3-glass",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.429415,
+     37.5342312
+    ],
+    [
+     -77.4294105,
+     37.5342285
+    ],
+    [
+     -77.4294102,
+     37.5342288
+    ],
+    [
+     -77.4294148,
+     37.5342315
+    ]
+   ],
+   "height": 1.05,
+   "tone": "coal",
+   "elevation": 31.5,
+   "upTo": 32.55,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-2-4",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293755,
+     37.534208
+    ],
+    [
+     -77.4293683,
+     37.5342156
+    ],
+    [
+     -77.4293774,
+     37.534221
+    ],
+    [
+     -77.4293845,
+     37.5342134
+    ]
+   ],
+   "height": 1.6,
+   "tone": "tile",
+   "elevation": 31.2,
+   "upTo": 32.8,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "shape": "frame",
+   "members": [
+    [
+     0,
+     0,
+     0,
+     1.6,
+     1.054,
+     1.6
+    ]
+   ],
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-2-4-roof",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293858,
+     37.5342133
+    ],
+    [
+     -77.4293753,
+     37.534207
+    ],
+    [
+     -77.4293676,
+     37.5342151
+    ],
+    [
+     -77.4293781,
+     37.5342214
+    ]
+   ],
+   "height": 1.4,
+   "tone": "tile",
+   "elevation": 32.8,
+   "upTo": 34.2,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
+   ],
+   "confidence": "written",
+   "shape": "inset",
+   "levels": [
+    [
+     0,
+     0,
+     9
+    ],
+    [
+     1.4,
+     0.58,
+     9
+    ]
+   ],
+   "over": "mss-h-roof"
+  },
+  {
+   "id": "mss-h-dormer-2-4-glass",
+   "name": "Main Street Station: dormer",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293825,
+     37.5342117
+    ],
+    [
+     -77.429378,
+     37.534209
+    ],
+    [
+     -77.4293777,
+     37.5342093
+    ],
+    [
+     -77.4293823,
+     37.534212
+    ]
+   ],
+   "height": 1.05,
+   "tone": "coal",
+   "elevation": 31.5,
+   "upTo": 32.55,
+   "note": "A dormer on the roof's front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, -11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, without the consoles and spires.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/162774pv.jpg",
+    "http://hdl.loc.gov/loc.pnp/det.4a10737",
+    "http://hdl.loc.gov/loc.pnp/hhh.va0562/photos.305473p",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg",
+    "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg"
    ],
    "confidence": "written",
    "over": "mss-h-roof"
@@ -11523,12 +12270,12 @@
      37.5342825
     ],
     [
-     -77.4295187,
-     37.5343331
+     -77.4295197,
+     37.5343321
     ],
     [
-     -77.4295771,
-     37.5343682
+     -77.4295781,
+     37.5343671
     ]
    ],
    "height": 0.3,
@@ -11560,12 +12307,12 @@
      37.5342825
     ],
     [
-     -77.4295187,
-     37.5343331
+     -77.4295197,
+     37.5343321
     ],
     [
-     -77.4295771,
-     37.5343682
+     -77.4295781,
+     37.5343671
     ]
    ],
    "height": 0.3,
@@ -12005,27 +12752,75 @@
    "to": 1985,
    "ring": [
     [
-     -77.4296152,
-     37.5343186
+     -77.4295439,
+     37.5343147
     ],
     [
-     -77.4295677,
-     37.5342901
+     -77.4295409,
+     37.534324
     ],
     [
-     -77.4295282,
-     37.5343321
+     -77.4295426,
+     37.5343335
     ],
     [
-     -77.4295758,
-     37.5343606
+     -77.4295487,
+     37.5343418
+    ],
+    [
+     -77.4295583,
+     37.5343476
+    ],
+    [
+     -77.42957,
+     37.5343499
+    ],
+    [
+     -77.4295819,
+     37.5343486
+    ],
+    [
+     -77.4295923,
+     37.5343437
+    ],
+    [
+     -77.4295995,
+     37.534336
+    ],
+    [
+     -77.4296025,
+     37.5343267
+    ],
+    [
+     -77.4296008,
+     37.5343172
+    ],
+    [
+     -77.4295947,
+     37.5343089
+    ],
+    [
+     -77.4295851,
+     37.5343031
+    ],
+    [
+     -77.4295734,
+     37.5343007
+    ],
+    [
+     -77.4295615,
+     37.5343021
+    ],
+    [
+     -77.4295511,
+     37.534307
     ]
    ],
    "height": 1.3,
    "tone": "stone",
    "elevation": 43.5,
    "upTo": 44.8,
-   "note": "The low base of the dome over the entablature (HABS photographs VA-848-10 and -13). Height measured on VA-848-10 (approximate).",
+   "note": "The low round base of the dome over the entablature (HABS photographs VA-848-10 and -13). Height measured on VA-848-10 (approximate).",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
     "https://www.loc.gov/resource/sn85034438/1901-11-24/ed-1/?sp=1&st=text",
@@ -12043,6 +12838,19 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
    "confidence": "written",
+   "shape": "revolve",
+   "levels": [
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     1.3,
+     1,
+     0
+    ]
+   ],
    "over": "mss-h-roof"
   },
   {
@@ -12053,27 +12861,75 @@
    "to": 1985,
    "ring": [
     [
-     -77.4296144,
-     37.5343187
+     -77.4295449,
+     37.5343151
     ],
     [
-     -77.4295678,
-     37.5342907
+     -77.429542,
+     37.534324
     ],
     [
-     -77.429529,
-     37.534332
+     -77.4295437,
+     37.5343332
     ],
     [
-     -77.4295756,
-     37.5343599
+     -77.4295496,
+     37.5343412
+    ],
+    [
+     -77.4295588,
+     37.5343467
+    ],
+    [
+     -77.4295701,
+     37.534349
+    ],
+    [
+     -77.4295816,
+     37.5343477
+    ],
+    [
+     -77.4295915,
+     37.534343
+    ],
+    [
+     -77.4295985,
+     37.5343356
+    ],
+    [
+     -77.4296014,
+     37.5343266
+    ],
+    [
+     -77.4295998,
+     37.5343175
+    ],
+    [
+     -77.4295939,
+     37.5343095
+    ],
+    [
+     -77.4295846,
+     37.5343039
+    ],
+    [
+     -77.4295733,
+     37.5343016
+    ],
+    [
+     -77.4295619,
+     37.5343029
+    ],
+    [
+     -77.4295519,
+     37.5343077
     ]
    ],
    "height": 3.9,
    "tone": "tile",
    "elevation": 44.8,
    "upTo": 48.7,
-   "note": "The tower's square ribbed dome of tile (HABS VA-848; HABS photographs VA-848-10, -11 and -13), its crown about 48.7 m above sea level, measured on VA-848-10 against the 102-ft front: approximate.",
+   "note": "The tower's ribbed dome of tile (HABS VA-848, \"square dome\"; HABS photographs VA-848-10, -11 and -13 show it full and rounded), drawn round in sixteen gores; its crown about 48.7 m above sea level, measured on VA-848-10 against the 102-ft front: approximate.",
    "sources": [
     "https://archive.org/details/sim_railway-age_1900-07-13_32_28",
     "https://www.loc.gov/resource/sn85034438/1901-11-24/ed-1/?sp=1&st=text",
@@ -12091,62 +12947,52 @@
     "https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg"
    ],
    "confidence": "written",
-   "shape": "inset",
+   "shape": "revolve",
    "levels": [
     [
      0.0,
-     0.0,
-     9
+     1.0,
+     0
     ],
     [
-     0.39,
-     0.013,
-     9
+     0.488,
+     0.992,
+     0
     ],
     [
-     0.78,
-     0.052,
-     9
+     0.975,
+     0.968,
+     0
     ],
     [
-     1.17,
-     0.119,
-     9
-    ],
-    [
-     1.56,
-     0.215,
-     9
+     1.463,
+     0.927,
+     0
     ],
     [
      1.95,
-     0.345,
-     9
+     0.866,
+     0
     ],
     [
-     2.34,
-     0.515,
-     9
+     2.438,
+     0.781,
+     0
     ],
     [
-     2.73,
-     0.736,
-     9
+     2.925,
+     0.661,
+     0
     ],
     [
-     3.12,
-     1.03,
-     9
-    ],
-    [
-     3.51,
-     1.453,
-     9
+     3.413,
+     0.484,
+     0
     ],
     [
      3.9,
-     2.575,
-     9
+     0.1,
+     0
     ]
    ],
    "over": "mss-h-roof"
@@ -19879,6 +20725,321 @@
      37.5343784
     ],
     [
+     -77.4295303,
+     37.5343625
+    ],
+    [
+     -77.4295287,
+     37.5343642
+    ],
+    [
+     -77.4295552,
+     37.5343801
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-s-p1",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4295303,
+     37.5343625
+    ],
+    [
+     -77.4295038,
+     37.5343466
+    ],
+    [
+     -77.4295021,
+     37.5343483
+    ],
+    [
+     -77.4295287,
+     37.5343642
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-s-p2",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4295038,
+     37.5343466
+    ],
+    [
+     -77.4294772,
+     37.5343307
+    ],
+    [
+     -77.4294756,
+     37.5343324
+    ],
+    [
+     -77.4295021,
+     37.5343483
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-s-p3",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294772,
+     37.5343307
+    ],
+    [
+     -77.4294507,
+     37.5343148
+    ],
+    [
+     -77.4294491,
+     37.5343165
+    ],
+    [
+     -77.4294756,
+     37.5343324
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-s-p4",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294507,
+     37.5343148
+    ],
+    [
+     -77.4294241,
+     37.5342989
+    ],
+    [
+     -77.4294225,
+     37.5343006
+    ],
+    [
+     -77.4294491,
+     37.5343165
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-s-p5",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294241,
+     37.5342989
+    ],
+    [
+     -77.4293976,
+     37.5342829
+    ],
+    [
+     -77.429396,
+     37.5342847
+    ],
+    [
+     -77.4294225,
+     37.5343006
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-s-p6",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293976,
+     37.5342829
+    ],
+    [
+     -77.4293711,
+     37.534267
+    ],
+    [
+     -77.4293694,
+     37.5342688
+    ],
+    [
+     -77.429396,
+     37.5342847
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-s-p7",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293711,
+     37.534267
+    ],
+    [
+     -77.4293445,
+     37.5342511
+    ],
+    [
+     -77.4293429,
+     37.5342529
+    ],
+    [
+     -77.4293694,
+     37.5342688
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-s-p8",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293445,
+     37.5342511
+    ],
+    [
+     -77.429318,
+     37.5342352
+    ],
+    [
+     -77.4293163,
+     37.534237
+    ],
+    [
+     -77.4293429,
+     37.5342529
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-s-p9",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.429318,
+     37.5342352
+    ],
+    [
      -77.4292914,
      37.5342193
     ],
@@ -19887,8 +21048,8 @@
      37.534221
     ],
     [
-     -77.4295552,
-     37.5343801
+     -77.4293163,
+     37.534237
     ]
    ],
    "height": 4.1,
@@ -19914,6 +21075,321 @@
      37.5343911
     ],
     [
+     -77.4295184,
+     37.5343752
+    ],
+    [
+     -77.4295168,
+     37.5343769
+    ],
+    [
+     -77.4295433,
+     37.5343928
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-n-p1",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4295184,
+     37.5343752
+    ],
+    [
+     -77.4294919,
+     37.5343592
+    ],
+    [
+     -77.4294902,
+     37.534361
+    ],
+    [
+     -77.4295168,
+     37.5343769
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-n-p2",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294919,
+     37.5343592
+    ],
+    [
+     -77.4294653,
+     37.5343433
+    ],
+    [
+     -77.4294637,
+     37.5343451
+    ],
+    [
+     -77.4294902,
+     37.534361
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-n-p3",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294653,
+     37.5343433
+    ],
+    [
+     -77.4294388,
+     37.5343274
+    ],
+    [
+     -77.4294371,
+     37.5343292
+    ],
+    [
+     -77.4294637,
+     37.5343451
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-n-p4",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294388,
+     37.5343274
+    ],
+    [
+     -77.4294122,
+     37.5343115
+    ],
+    [
+     -77.4294106,
+     37.5343133
+    ],
+    [
+     -77.4294371,
+     37.5343292
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-n-p5",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4294122,
+     37.5343115
+    ],
+    [
+     -77.4293857,
+     37.5342956
+    ],
+    [
+     -77.4293841,
+     37.5342973
+    ],
+    [
+     -77.4294106,
+     37.5343133
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-n-p6",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293857,
+     37.5342956
+    ],
+    [
+     -77.4293592,
+     37.5342797
+    ],
+    [
+     -77.4293575,
+     37.5342814
+    ],
+    [
+     -77.4293841,
+     37.5342973
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-n-p7",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293592,
+     37.5342797
+    ],
+    [
+     -77.4293326,
+     37.5342638
+    ],
+    [
+     -77.429331,
+     37.5342655
+    ],
+    [
+     -77.4293575,
+     37.5342814
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-n-p8",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293326,
+     37.5342638
+    ],
+    [
+     -77.4293061,
+     37.5342479
+    ],
+    [
+     -77.4293044,
+     37.5342496
+    ],
+    [
+     -77.429331,
+     37.5342655
+    ]
+   ],
+   "height": 4.1,
+   "tone": "plaster",
+   "elevation": 22.1,
+   "upTo": 26.2,
+   "note": "A wall of the central corridor that runs east and west on each floor above the waiting room, rooms on either side (HABS VA-848). No plan of these floors was found: its place is approximate.",
+   "sources": [
+    "https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf",
+    "https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0172_MainSt_Station_1970_Final_Nomination_NRHP.pdf"
+   ],
+   "confidence": "approximate"
+  },
+  {
+   "id": "mss-h-corridor-second-n-p9",
+   "name": "Main Street Station: offices",
+   "kind": "landmark",
+   "from": 1901,
+   "to": 1985,
+   "ring": [
+    [
+     -77.4293061,
+     37.5342479
+    ],
+    [
      -77.4292795,
      37.534232
     ],
@@ -19922,8 +21398,8 @@
      37.5342337
     ],
     [
-     -77.4295433,
-     37.5343928
+     -77.4293044,
+     37.5342496
     ]
    ],
    "height": 4.1,

@@ -10,7 +10,7 @@
   -435,
   -428,
   1000,
-  563
+  500
  ],
  "groups": [
   {
@@ -27,8 +27,8 @@
        37.5341041
       ],
       "badge": [
-       -150,
-       -40
+       -170,
+       -150
       ]
      },
      "section": {
@@ -240,7 +240,7 @@
      "title": "On trestles",
      "text": "Steel trestles, and bridges over Main Street.",
      "iso": {
-      "part": "history:mss-d-side-post-e-2-b",
+      "part": "history:mss-d-xbrace-e-2",
       "badge": [
        160,
        60
@@ -279,7 +279,7 @@
      "title": "Offices",
      "text": "Railroad offices; the Railroad YMCA’s rooms in 1901.",
      "iso": {
-      "part": "history:mss-h-corridor-second-n",
+      "part": "history:mss-h-corridor-second-n-p5",
       "badge": [
        -60,
        -160

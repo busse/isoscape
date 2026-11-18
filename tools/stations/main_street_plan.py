@@ -187,8 +187,11 @@ def build(part, rect, ring, plane, SRC, L):
     CORN = ('The shallow entablature round the building (HABS VA-848) and the terra-cotta cresting over it, a row of roundels between '
             'small piers (HABS photographs VA-848-12 and -14), drawn as a pierced band. Projection and heights approximate.')
     TA, TB = TOWER[1], TOWER[3]
-    for side, rg in (('s', rect(TA, HH_E + 0.3, -0.3, 0.45)), ('n', rect(HH_W - 0.3, HH_E + 0.3, HH_N - 0.45, HH_N + 0.3)),
-                     ('w', rect(HH_W - 0.3, HH_W + 0.45, TB, HH_N - 0.45)), ('e', rect(HH_E - 0.45, HH_E + 0.3, 0.45, HH_N - 0.45))):
+    # The back's cornice and cresting in lengths of about 6 m, so each sorts against what stands near it.
+    NBK = 5
+    backs = [(HH_W - 0.3 + (HH_E - HH_W + 0.6) * i / NBK, HH_W - 0.3 + (HH_E - HH_W + 0.6) * (i + 1) / NBK) for i in range(NBK)]
+    for side, rg in ([('s', rect(TA, HH_E + 0.3, -0.3, 0.45))] + [('n' + ('' if i == 0 else f'-p{i}'), rect(u0, u1, HH_N - 0.45, HH_N + 0.3)) for i, (u0, u1) in enumerate(backs)] +
+                     [('w', rect(HH_W - 0.3, HH_W + 0.45, TB, HH_N - 0.45)), ('e', rect(HH_E - 0.45, HH_E + 0.3, 0.45, HH_N - 0.45))]):
         p(f'cornice-{side}', 'Main Street Station: cornice', rg, CORNICE - 0.5, CORNICE, 'stone', 'written', CORN, HABS + PH)
     # The cresting on the front: roundels (as rings of short members) between piers.
     span = HH_E - TA
@@ -203,8 +206,8 @@ def build(part, rect, ring, plane, SRC, L):
                 crest.append([round(cu + 0.26 * math.cos(t0), 3), round(0.4 + 0.26 * math.sin(t0), 3), round(cu + 0.26 * math.cos(t1), 3), round(0.4 + 0.26 * math.sin(t1), 3), 0.05])
         u += 1.0
     p('balustrade-s', 'Main Street Station: cresting', plane(TA, 0.12, HH_E, 0.12, 0.2), CORNICE, BAL, 'stone', 'written', CORN, HABS + PH, shape='frame', members=crest)
-    for side, rg in (('n', rect(HH_W, HH_E, HH_N - 0.35, HH_N)),
-                     ('w', rect(HH_W, HH_W + 0.35, TB, HH_N - 0.35)), ('e', rect(HH_E - 0.35, HH_E, 0.35, HH_N - 0.35))):
+    for side, rg in ([('n' + ('' if i == 0 else f'-p{i}'), rect(max(u0, HH_W), min(u1, HH_E), HH_N - 0.35, HH_N)) for i, (u0, u1) in enumerate(backs)] +
+                     [('w', rect(HH_W, HH_W + 0.35, TB, HH_N - 0.35)), ('e', rect(HH_E - 0.35, HH_E, 0.35, HH_N - 0.35))]):
         p(f'balustrade-{side}', 'Main Street Station: cresting', rg, CORNICE, BAL, 'stone', 'written', CORN, HABS + PH)
 
     # ---- floors ---------------------------------------------------------------------------------
@@ -221,8 +224,10 @@ def build(part, rect, ring, plane, SRC, L):
     # The floor lights in the upper loggia's floor, over the lower loggia (the plan: "Floor Lights").
     p('floor-lights', 'Main Street Station: floor lights', rect(BAYS[0] + 0.5, BAYS[5] - 0.5, T + 0.3, Y(11.3) - 0.3), FF - 0.02, FF + 0.01, 'glass', 'drawn',
       'Glass floor lights in the floor of the upper loggia, lighting the lower loggia beneath (the 1900 plan).' + PLAN_NOTE, PLAN)
-    p('floor-second', 'Main Street Station: third floor', rect(HH_W + T, HH_E - T, T, HH_N - T), L2 - 0.4, L2, 'floor', 'drawn',
-      'The third floor, the gallery story under the cornice: the two railroads\' offices in 1901 (The Times) and in 1969 (HABS VA-848).' + FL, PLAN + HABS)
+    # The floor stops at the tower's walls, as the ground floor's does.
+    for k, rg in enumerate((rect(TOWER[1], HH_E - T, T, HH_N - T), rect(HH_W + T, TOWER[1], TOWER[3], HH_N - T))):
+        p('floor-second' + ('' if k == 0 else '-w'), 'Main Street Station: third floor', rg, L2 - 0.4, L2, 'floor', 'drawn',
+          'The third floor, the gallery story under the cornice: the two railroads\' offices in 1901 (The Times) and in 1969 (HABS VA-848).' + FL, PLAN + HABS)
     # The roof: a steep hip of red clay tile, springing behind the cresting.
     R0 = (HH_W + 0.6, HH_E - 0.6, 0.6, HH_N - 0.6)
     run = (R0[3] - R0[2]) / 2
@@ -242,8 +247,11 @@ def build(part, rect, ring, plane, SRC, L):
         n_p = max(1, round((a1 - a0) / 3.0))
         for i in range(n_p):
             u0, u1 = a0 + (a1 - a0) * i / n_p, a0 + (a1 - a0) * (i + 1) / n_p
-            p(f'floor-{nm}' + ('' if i == 0 else f'-p{i}'), f'Main Street Station: {label}', rect(u0, u1, b0, b1), z - 0.35, z, 'floor', 'drawn',
-              f'The {label}, in the roof: {use}.' + FL, PLAN + HABS, within='mss-h-roof')
+            # The tower stands in the roof's southwest corner: the floor stops at its walls.
+            pieces = [(u0, u1, b0)] if u0 >= TOWER[1] else [(u0, min(u1, TOWER[1]), max(b0, TOWER[3]))] + ([(TOWER[1], u1, b0)] if u1 > TOWER[1] else [])
+            for q, (v0, v1, c0) in enumerate(pieces):
+                p(f'floor-{nm}' + ('' if i == 0 else f'-p{i}') + ('' if q == 0 else '-e'), f'Main Street Station: {label}', rect(v0, v1, c0, b1), z - 0.35, z, 'floor', 'drawn',
+                  f'The {label}, in the roof: {use}.' + FL, PLAN + HABS, within='mss-h-roof')
     RIDGE_NOTE = (' Its ridge, about 41.4 m above sea level (some 115 ft over Main Street), runs parallel to the street about 11 m long between '
                   'its finials, as HABS photograph VA-848-10 (1971) shows it; measured on that photograph against the 102-ft front, with '
                   'VA-848-11 and -12 (approximate, to within about 1.5 m). The 1900 section draws the ridge about a meter lower.')
@@ -261,31 +269,54 @@ def build(part, rect, ring, plane, SRC, L):
       'The tall paneled chimney near the east end of the roof (HABS VA-848, photograph 14). Its place along the roof is approximate; its top, about 35.3 m above sea level, is measured on HABS photograph VA-848-10 (approximate).', HABS + PH, over='mss-h-roof')
     p('chimney-cap', 'Main Street Station: chimney', rect(ca - 0.75, ca + 0.75, cb - 0.75, cb + 0.75), CH, CH + 0.4, 'stone', 'written',
       'The chimney\'s cap (HABS photograph VA-848-14). Size approximate.', HABS + PH, over='mss-h-roof')
-    # Dormers on the front slope (HABS photographs VA-848-10 and -14): a lower row over the five
-    # bays and one beyond, pedimented over the first, third and fifth bays and small and hipped
-    # between them; an upper row of five small hipped dormers on the bay lines between.
-    DORM = ('A dormer on the roof\'s front: the lower row pedimented, with scroll consoles, alternating with small hipped ones; the upper row '
-            'small and hipped (HABS VA-848; HABS photographs VA-848-10, -12 and -14). Their places and heights are measured on VA-848-10 '
-            'against the 102-ft front (approximate).')
+    # Dormers on the front slope (HABS photographs VA-848-10, -11, -12 and -14), two kinds, each
+    # identical wherever it stands:
+    # - wall dormers, pedimented, of brick with a stone pediment (as the walls), standing on the cornice over the first, third and
+    #   fifth bays, their fronts in the wall's plane;
+    # - small hipped dormers of tile set into the slope: one over the second and fourth bays and
+    #   one beyond the fifth, a little above the cornice, and an upper row of five on the bay lines.
+    # Each is a closed solid that sits on the slope: its cheeks are cut by the roof's plane (a
+    # wedge for a dormer in the slope), so nothing sinks below the tiles or floats above them, and
+    # they stand over the roof's shell in the paint order. None straddles the cut plane.
+    DORM = ('A dormer on the roof\'s front, of two kinds: pedimented wall dormers of brick and stone on the cornice over the first, third and fifth bays, '
+            'and small hipped tile dormers set into the slope between them and in an upper row of five (HABS VA-848; HABS photographs VA-848-10, '
+            '-11, -12 and -14). Their places and heights are measured on VA-848-10 against the 102-ft front (approximate); drawn plain, '
+            'without the consoles and spires.')
+    DS = HABS + PH + [SRC['habs-photo-12']]
+
+    def on_roof(z):
+        """How far back from the front the front slope stands at height z."""
+        return R0[2] + (z - CORNICE) * k_in
+
     mids = [(BAYS[k] + BAYS[k + 1]) / 2 for k in range(5)]
-    lower = [(c, k % 2 == 0) for k, c in enumerate(mids + [mids[4] + (mids[4] - mids[3])])]
-    upper = [(BAYS[k], False) for k in (1, 2, 3, 4, 5)]
-    rows = [(lower, CORNICE + 0.8, {True: (CORNICE + 3.6, 0.95, 1.2), False: (CORNICE + 2.8, 0.6, 1.0)}),
-            (upper, CORNICE + 4.3, {False: (CORNICE + 6.6, 0.6, 1.6)})]
-    for row, (centers, z0, kinds) in enumerate(rows):
-        for j, (c, ped) in enumerate(centers):
-            z1, w, cap = kinds[ped]
-            b_front = R0[2] + (z0 - CORNICE) * k_in - 0.4
-            b_back = R0[2] + (z1 - CORNICE) * k_in + 0.6
-            p(f'dormer-{row}-{j}', 'Main Street Station: dormer', rect(c - w, c + w, b_front, b_back), z0, z1, 'brick', 'written', DORM, HABS + PH, over='mss-h-roof')
-            if ped:
-                # A pediment: a gable across the front.
-                p(f'dormer-{row}-{j}-roof', 'Main Street Station: dormer', rect(c - w - 0.15, c + w + 0.15, b_front - 0.15, b_front + 0.25), z1, z1 + cap, 'stone', 'written', DORM, HABS + PH,
-                  shape='frame', members=[[0, 0, round(2 * w + 0.3, 3), 0, round(w + 0.15, 3), cap]], over='mss-h-roof')
-            else:
-                p(f'dormer-{row}-{j}-roof', 'Main Street Station: dormer', rect(c - w - 0.15, c + w + 0.15, b_front - 0.15, b_back), z1, z1 + cap, 'tile', 'written', DORM, HABS + PH,
-                  shape='inset', levels=[[0, 0, 9], [cap, w, 9]], over='mss-h-roof')
-            p(f'dormer-{row}-{j}-glass', 'Main Street Station: dormer', ring([(c - w + 0.3, b_front - 0.04), (c + w - 0.3, b_front - 0.04), (c + w - 0.3, b_front), (c - w + 0.3, b_front)]), z0 + 0.4, z1 - 0.3, 'glass', 'written', DORM, HABS + PH, over='mss-h-roof')
+    # Wall dormers: the body on the cornice, its cheeks running back to the slope.
+    WP, WH, CAP = 0.85, 2.9, 1.3
+    for j, c in enumerate(mids[0::2]):
+        z0, z1 = CORNICE, CORNICE + WH
+        b0 = 0.02
+        ub, ur = on_roof(z1) - b0, on_roof(z0) - b0
+        p(f'dormer-0-{j}', 'Main Street Station: dormer', plane(c + WP, b0, c + WP, b0 + ub, 2 * WP), z0, z1, 'brick', 'written', DORM, DS,
+          shape='frame', members=[[0, 0, 0, round(WH, 3), round(ub, 3), round(WH, 3), round(ur, 3), 0]], over='mss-h-roof')
+        p(f'dormer-0-{j}-pediment', 'Main Street Station: dormer', plane(c - WP - 0.1, b0 - 0.12, c + WP + 0.1, b0 - 0.12, 0.3), z1, z1 + CAP, 'stone', 'written', DORM, DS,
+          shape='frame', members=[[0, 0, round(2 * WP + 0.2, 3), 0, round(WP + 0.1, 3), CAP]], over='mss-h-roof')
+        # Its roof, hipped back from the pediment to the slope.
+        p(f'dormer-0-{j}-roof', 'Main Street Station: dormer', rect(c - WP - 0.05, c + WP + 0.05, b0 + 0.18, b0 + ub), z1, z1 + CAP, 'tile', 'written', DORM, DS,
+          shape='inset', levels=[[0, 0, 9], [CAP, WP + 0.05, 9]], over='mss-h-roof')
+        p(f'dormer-0-{j}-glass', 'Main Street Station: dormer', ring([(c - 0.45, b0 - 0.04), (c + 0.45, b0 - 0.04), (c + 0.45, b0), (c - 0.45, b0)]), z0 + 0.9, z1 - 0.4, 'glass', 'written', DORM, DS, over='mss-h-roof')
+    # Hipped dormers in the slope: a wedge whose cheeks are triangles on the tiles, a pyramid cap.
+    HW, HH, HC = 0.5, 1.6, 1.4
+    slope = [(c, CORNICE + 1.0) for c in (mids[1], mids[3], mids[4] + (mids[4] - mids[3]))] + [(BAYS[k], CORNICE + 4.5) for k in (1, 2, 3, 4, 5)]
+    for j, (c, z0) in enumerate(slope):
+        row = 1 if j < 3 else 2
+        z1 = z0 + HH
+        bf = on_roof(z0) - 0.05
+        ub = on_roof(z1) - bf
+        k = j if row == 1 else j - 3
+        p(f'dormer-{row}-{k}', 'Main Street Station: dormer', plane(c + HW, bf, c + HW, bf + ub, 2 * HW), z0, z1, 'tile', 'written', DORM, DS,
+          shape='frame', members=[[0, 0, 0, HH, round(ub, 3), HH]], over='mss-h-roof')
+        p(f'dormer-{row}-{k}-roof', 'Main Street Station: dormer', rect(c - HW - 0.08, c + HW + 0.08, bf - 0.08, bf + ub), z1, z1 + HC, 'tile', 'written', DORM, DS,
+          shape='inset', levels=[[0, 0, 9], [HC, HW + 0.08, 9]], over='mss-h-roof')
+        p(f'dormer-{row}-{k}-glass', 'Main Street Station: dormer', ring([(c - 0.25, bf - 0.04), (c + 0.25, bf - 0.04), (c + 0.25, bf), (c - 0.25, bf)]), z0 + 0.3, z1 - 0.25, 'coal', 'written', DORM, DS, over='mss-h-roof')
 
     # ---- the clock tower ------------------------------------------------------------------------
     # Its stages are measured in round 4 on HABS photographs VA-848-10, -11 and -12 (1971) against
@@ -315,8 +346,9 @@ def build(part, rect, ring, plane, SRC, L):
         for j, rg in enumerate(sides):
             p(f'tower-base-{c}-{j}', 'Main Street Station: clock tower', rg, z0, z1, 'stone', 'written', TB_, TSRC)
     BAND = 'A stone band round the tower between its stages, as the photographs show them. Places approximate.'
+    # The bands stop at the tower's back, where the head house's floors meet it.
     for k, zb in enumerate((L2 + 0.1, FF + 11.6)):
-        p(f'tower-band-{k}', 'Main Street Station: clock tower', rect(a0 - 0.15, a1 + 0.15, b0 - 0.15, b1 + 0.15), zb, zb + 0.3, 'stone', 'approximate', BAND, PH)
+        p(f'tower-band-{k}', 'Main Street Station: clock tower', rect(a0 - 0.15, a1 + 0.15, b0 - 0.15, b1), zb, zb + 0.3, 'stone', 'approximate', BAND, PH)
     # From the balcony up, the tower's parts stand over the roof's shell: the roof's footprint takes in
     # the tower's, so without it they would sort by depth against the roof, inside the tower.
     BALC = ('The balcony at the shaft\'s top, on a corbel table, with a balustrade round the clock stage (HABS photographs VA-848-10 to -12; '
@@ -332,16 +364,22 @@ def build(part, rect, ring, plane, SRC, L):
     p('tower-clock-stage', 'Main Street Station: clock tower', rect(a0 + 0.3, a1 - 0.3, b0 + 0.3, b1 - 0.3), SHAFT + 0.75, STAGE, 'brick', 'written', TW, TSRC, over='mss-h-roof')
     p('tower-entablature', 'Main Street Station: clock tower', rect(a0 - 0.1, a1 + 0.1, b0 - 0.1, b1 + 0.1), STAGE, STAGE + 0.5, 'stone', 'written',
       'The entablature on the clock stage\'s coupled columns (HABS VA-848), its top measured on HABS photograph VA-848-10. Size approximate.', TSRC, over='mss-h-roof')
-    p('tower-drum', 'Main Street Station: clock tower', rect(a0 + 0.45, a1 - 0.45, b0 + 0.45, b1 - 0.45), STAGE + 0.5, DRUM, 'stone', 'written',
-      'The low base of the dome over the entablature (HABS photographs VA-848-10 and -13). Height measured on VA-848-10 (approximate).', TSRC, over='mss-h-roof')
-    # The dome: a quarter-ellipse in profile, its crown about half the clock stage's height
-    # above its foot (HABS VA-848-10: dome and drum 51 px over a 91-px clock stage).
+    # The drum and the dome are round, sixteen-sided: HABS VA-848 calls the dome square, but the
+    # photographs (VA-848-10, -11, -13) show a full, ribbed bell, rounder than a square cap; its
+    # sixteen gores stand for the ribs. The dome's crown is about half the clock stage's height
+    # above its foot (VA-848-10: dome and drum 51 px over a 91-px clock stage).
+    def gon(rad, n=16):
+        return ring([(cx + rad * math.cos(2 * math.pi * (i + 0.5) / n), cb + rad * math.sin(2 * math.pi * (i + 0.5) / n)) for i in range(n)])
+    R_DOME = (a1 - a0) / 2 - 0.45
+    p('tower-drum', 'Main Street Station: clock tower', gon(R_DOME + 0.1), STAGE + 0.5, DRUM, 'stone', 'written',
+      'The low round base of the dome over the entablature (HABS photographs VA-848-10 and -13). Height measured on VA-848-10 (approximate).', TSRC,
+      shape='revolve', levels=[[0, 1, 0], [round(DRUM - STAGE - 0.5, 3), 1, 0]], over='mss-h-roof')
     H = DOME - DRUM
-    w = (a1 - a0 - 1.0) / 2
-    dome = [[round(H * k / 10, 3), round(w * (1 - math.sqrt(max(0.0, 1 - (k / 10) ** 2))), 3), 9] for k in range(11)]
-    p('tower-dome', 'Main Street Station: clock tower', rect(a0 + 0.5, a1 - 0.5, b0 + 0.5, b1 - 0.5), DRUM, DOME, 'tile', 'written',
-      'The tower\'s square ribbed dome of tile (HABS VA-848; HABS photographs VA-848-10, -11 and -13), its crown about 48.7 m above sea level, '
-      'measured on VA-848-10 against the 102-ft front: approximate.', TSRC, shape='inset', levels=dome, over='mss-h-roof')
+    dome = [[round(H * k / 8, 3), round(max(0.1, math.sqrt(max(0.0, 1 - (k / 8) ** 2))), 3), 0] for k in range(9)]
+    p('tower-dome', 'Main Street Station: clock tower', gon(R_DOME), DRUM, DOME, 'tile', 'written',
+      'The tower\'s ribbed dome of tile (HABS VA-848, "square dome"; HABS photographs VA-848-10, -11 and -13 show it full and rounded), drawn '
+      'round in sixteen gores; its crown about 48.7 m above sea level, measured on VA-848-10 against the 102-ft front: approximate.', TSRC,
+      shape='revolve', levels=dome, over='mss-h-roof')
     p('tower-lantern', 'Main Street Station: clock tower', rect(cx - 0.35, cx + 0.35, cb - 0.35, cb + 0.35), DOME, DOME + 0.6, 'stone', 'written',
       'The base of the bronze finial on the dome (HABS VA-848). Size approximate.', TSRC, over='mss-h-roof')
     p('tower-finial', 'Main Street Station: clock tower', rect(cx - 0.22, cx + 0.22, cb - 0.22, cb + 0.22), DOME + 0.6, FINIAL, 'iron', 'written',
@@ -547,7 +585,8 @@ def build(part, rect, ring, plane, SRC, L):
             a0, a1 = HH_W + T, HH_E - T
         else:
             a0, a1, _, _ = inset_at(z1, extra)
-        n_p = 1 if nm == 'second' else max(1, round((a1 - a0) / 3.0))
+        # In lengths of about 3 m, so each sorts against what stands near it (the tower, the stair).
+        n_p = max(1, round((a1 - a0) / 3.0))
         for side, b in (('s', 8.95), ('n', 10.7)):
             for i in range(n_p):
                 u0, u1 = a0 + (a1 - a0) * i / n_p, a0 + (a1 - a0) * (i + 1) / n_p
