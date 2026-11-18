@@ -38,6 +38,7 @@ for outside review".
 |---|---|---|---|---|---|---|---|---|
 | 2026-11-18 | jw-text (Opus 5.5): story page, timeline, cap study area, ten method charts, How we know | 4, 5, 6, 9 | 31 min (12:45–13:16 ET) | 440,516 | 178 | 0 | page (unlisted), 12 charts by script, 45 claims checked against opened sources, 11 fact-check items | slots for 1925, the island, Second Street; 4 groups of facts still resting on secondary sources; three small number mismatches (count 235 vs 238; bank 10.1 vs 9 m; 1st Street cut 6.2 vs 6.4 m) |
 | 2026-11-18 | jw-1925 (Opus 5.5): find, place and trace the 1925 volume; 1925 epoch; named buildings | 8 | 38 min (11:45–12:23 ET) | 377,761 | 194 | 0 | 15 of 15 sheets, 3,907 outlines, 46 named buildings, 1925 scene builds, three pairs with 1952 | outlines too busy at view size (many vertices); Apostle Town's own streets; stories beyond named buildings; scans not yet on the Mac |
+| 2026-11-18 | jw-1925 follow-up (Opus 5.5, new agent; the first one's transcript was lost): simplify the 1925 outlines, scans to the Mac | 8 | 7 min | 168,583 | 61 | 0 | corners 61,738 to 21,833, largest move 1.00 m; five proofs replaced; scans on the Mac | Apostle Town's 1925 streets |
 
 ## Before the estimate (not counted against it)
 
