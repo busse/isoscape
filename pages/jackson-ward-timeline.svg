@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 868" width="400" height="868" role="img" aria-labelledby="jw-tl-t jw-tl-d">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 902" width="400" height="902" role="img" aria-labelledby="jw-tl-t jw-tl-d">
 <title id="jw-tl-t">How the Turnpike's route through Jackson Ward was chosen, 1946 to 1958</title>
-<desc id="jw-tl-d">1946: A consultants' master plan for the city proposes expressways through it. (Style Weekly, 2013; Feasibility Study, 2022) June 13, 1950: Voters reject the highway plan in a citywide referendum. Only 8 of 55 precincts vote for it. (Style Weekly, 2013) 1951: A second referendum, forced by former mayor J. Fulmer Bright's petition, fails by almost 2 to 1: 6,002 votes. (Style Weekly, 2013, citing the Times-Dispatch. Silver's notes date it June 13, 1951) August 24, 1953: City Council votes to ask for a turnpike authority. The decision moves to the General Assembly, and no further referendum is held. (Silver, 1984, p. 192, from a student's notes; the book not seen) April 8, 1954: The General Assembly creates the Richmond–Petersburg Turnpike Authority, with the power of eminent domain. (Style Weekly, 2013; Encyclopedia Virginia. Library of Virginia, Wikipedia and VCU give 1955) 1955–1958: Clearance and construction. The Authority photographs the work monthly, mostly 1956–58. (Community Plan, 2026; Library of Virginia, 2024) July 1, 1958: The Turnpike opens: 34.7 miles, $76.7 million, paid for by toll revenue bonds. In August it becomes part of I-95. (Library of Virginia, 2024; Wikipedia)</desc>
+<desc id="jw-tl-d">1946: A consultants' master plan for the city proposes expressways through it. (Style Weekly, 2013; Feasibility Study, 2022) June 13, 1950: Voters reject the highway plan in a citywide referendum. Only 8 of 55 precincts vote for it. (Style Weekly, 2013) 1951: A second referendum, forced by former mayor J. Fulmer Bright's petition, fails by almost 2 to 1. A headline of the day put the margin at 6,002 votes. (Style Weekly, 2013, which shows the headline. Notes on Silver's book date a referendum June 13, 1951) August 24, 1953: City Council votes for a turnpike authority. The decision moves to the General Assembly, and no further referendum is held. (Silver, 1984, p. 192, from a student's notes; the book not seen) April 8, 1954: The General Assembly creates the Richmond–Petersburg Turnpike Authority, with the power of eminent domain. (Acts of Assembly, 1954, ch. 705; Style Weekly, 2013; Encyclopedia Virginia. Library of Virginia, Wikipedia and VCU give 1955) 1955–1958: Clearance and construction. The Authority photographs the work monthly, 1956–58. (Community Plan, 2026; Library of Virginia, 2024) July 1, 1958: The Turnpike opens: 34.7 miles, $76.7 million, paid for by toll revenue bonds. In August it becomes part of I-95. (Library of Virginia, 2024; Wikipedia)</desc>
 <style>
 text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif}
 .d{font:700 15px 'Libre Baskerville', Baskerville, Georgia, serif}
@@ -10,8 +10,8 @@ text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif
 .bg{fill:#f4f1ea}.ink{fill:#2c2b33}.dim{fill:#6e6656}.acc{fill:#8f2a22}.edge{fill:none;stroke:#2c2b33;stroke-width:1.2}.card{fill:#faf7ef;stroke:#2c2b33;stroke-width:1.2}.mark{fill:#f4f1ea;stroke:#2c2b33;stroke-width:1.2}.mark.solid{fill:#2c2b33}.mark.dash{stroke-dasharray:2.6 1.7}
 @media (prefers-color-scheme: dark){.bg{fill:#14161d}.ink{fill:#c9d1e6}.dim{fill:#8a90a2}.acc{fill:#f07a5f}.edge{fill:none;stroke:#c9d1e6;stroke-width:1.2}.card{fill:#1d2029;stroke:#c9d1e6;stroke-width:1.2}.mark{fill:#14161d;stroke:#c9d1e6;stroke-width:1.2}.mark.solid{fill:#c9d1e6}.mark.dash{stroke-dasharray:2.6 1.7}}
 </style>
-<rect width="400" height="868" class="bg"/>
-<path d="M34 51L34 762" class="edge"/>
+<rect width="400" height="902" class="bg"/>
+<path d="M34 51L34 796" class="edge"/>
 <text x="16" y="30" class="h ink">HOW THE ROUTE WAS CHOSEN</text>
 <circle cx="34" cy="51" r="5.2" class="mark solid"/>
 <text x="54" y="56" class="d ink">1946</text>
@@ -26,38 +26,40 @@ text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif
 <circle cx="34" cy="227" r="5.2" class="mark"/>
 <text x="54" y="232" class="d ink">1951</text>
 <text x="54" y="252" class="b ink">A second referendum, forced by former mayor J.</text>
-<text x="54" y="270" class="b ink">Fulmer Bright's petition, fails by almost 2 to 1:</text>
-<text x="54" y="288" class="b ink">6,002 votes.</text>
-<text x="54" y="306" class="s dim">Style Weekly, 2013, citing the Times-Dispatch.</text>
-<text x="54" y="322" class="s dim">Silver's notes date it June 13, 1951</text>
-<circle cx="34" cy="349" r="5.2" class="mark dash"/>
-<text x="54" y="354" class="d ink">August 24, 1953</text>
-<text x="54" y="374" class="b ink">City Council votes to ask for a turnpike</text>
-<text x="54" y="392" class="b ink">authority. The decision moves to the General</text>
-<text x="54" y="410" class="b ink">Assembly, and no further referendum is held.</text>
-<text x="54" y="428" class="s dim">Silver, 1984, p. 192, from a student's notes; the</text>
-<text x="54" y="444" class="s dim">book not seen</text>
-<circle cx="34" cy="471" r="5.2" class="mark"/>
-<text x="54" y="476" class="d ink">April 8, 1954</text>
-<text x="54" y="496" class="b ink">The General Assembly creates the</text>
-<text x="54" y="514" class="b ink">Richmond–Petersburg Turnpike Authority, with the</text>
-<text x="54" y="532" class="b ink">power of eminent domain.</text>
-<text x="54" y="550" class="s dim">Style Weekly, 2013; Encyclopedia Virginia. Library of</text>
-<text x="54" y="566" class="s dim">Virginia, Wikipedia and VCU give 1955</text>
-<circle cx="34" cy="593" r="5.2" class="mark solid"/>
-<text x="54" y="598" class="d ink">1955–1958</text>
-<text x="54" y="618" class="b ink">Clearance and construction. The Authority</text>
-<text x="54" y="636" class="b ink">photographs the work monthly, mostly 1956–58.</text>
-<text x="54" y="654" class="s dim">Community Plan, 2026; Library of Virginia, 2024</text>
-<circle cx="34" cy="681" r="5.2" class="mark solid"/>
-<text x="54" y="686" class="d ink">July 1, 1958</text>
-<text x="54" y="706" class="b ink">The Turnpike opens: 34.7 miles, $76.7 million,</text>
-<text x="54" y="724" class="b ink">paid for by toll revenue bonds. In August it</text>
-<text x="54" y="742" class="b ink">becomes part of I-95.</text>
-<text x="54" y="760" class="s dim">Library of Virginia, 2024; Wikipedia</text>
-<path d="M16 782L384 782" class="edge" style="stroke-width:0.72"/>
-<circle cx="34" cy="796" r="4.6" class="mark solid"/><text x="54" y="800.5" class="b ink">sources opened for this story agree</text>
-<circle cx="34" cy="818" r="4.6" class="mark"/><text x="54" y="822.5" class="b ink">opened sources disagree (named)</text>
-<circle cx="34" cy="840" r="4.6" class="mark dash"/><text x="54" y="844.5" class="b ink">only a summary of the book; unconfirmed</text>
-<circle cx="34" cy="762" r="2.9" class="ink"/>
+<text x="54" y="270" class="b ink">Fulmer Bright's petition, fails by almost 2 to 1.</text>
+<text x="54" y="288" class="b ink">A headline of the day put the margin at 6,002</text>
+<text x="54" y="306" class="b ink">votes.</text>
+<text x="54" y="324" class="s dim">Style Weekly, 2013, which shows the headline. Notes</text>
+<text x="54" y="340" class="s dim">on Silver's book date a referendum June 13, 1951</text>
+<circle cx="34" cy="367" r="5.2" class="mark dash"/>
+<text x="54" y="372" class="d ink">August 24, 1953</text>
+<text x="54" y="392" class="b ink">City Council votes for a turnpike authority. The</text>
+<text x="54" y="410" class="b ink">decision moves to the General Assembly, and no</text>
+<text x="54" y="428" class="b ink">further referendum is held.</text>
+<text x="54" y="446" class="s dim">Silver, 1984, p. 192, from a student's notes; the</text>
+<text x="54" y="462" class="s dim">book not seen</text>
+<circle cx="34" cy="489" r="5.2" class="mark"/>
+<text x="54" y="494" class="d ink">April 8, 1954</text>
+<text x="54" y="514" class="b ink">The General Assembly creates the</text>
+<text x="54" y="532" class="b ink">Richmond–Petersburg Turnpike Authority, with the</text>
+<text x="54" y="550" class="b ink">power of eminent domain.</text>
+<text x="54" y="568" class="s dim">Acts of Assembly, 1954, ch. 705; Style Weekly, 2013;</text>
+<text x="54" y="584" class="s dim">Encyclopedia Virginia. Library of Virginia, Wikipedia</text>
+<text x="54" y="600" class="s dim">and VCU give 1955</text>
+<circle cx="34" cy="627" r="5.2" class="mark solid"/>
+<text x="54" y="632" class="d ink">1955–1958</text>
+<text x="54" y="652" class="b ink">Clearance and construction. The Authority</text>
+<text x="54" y="670" class="b ink">photographs the work monthly, 1956–58.</text>
+<text x="54" y="688" class="s dim">Community Plan, 2026; Library of Virginia, 2024</text>
+<circle cx="34" cy="715" r="5.2" class="mark solid"/>
+<text x="54" y="720" class="d ink">July 1, 1958</text>
+<text x="54" y="740" class="b ink">The Turnpike opens: 34.7 miles, $76.7 million,</text>
+<text x="54" y="758" class="b ink">paid for by toll revenue bonds. In August it</text>
+<text x="54" y="776" class="b ink">becomes part of I-95.</text>
+<text x="54" y="794" class="s dim">Library of Virginia, 2024; Wikipedia</text>
+<path d="M16 816L384 816" class="edge" style="stroke-width:0.72"/>
+<circle cx="34" cy="830" r="4.6" class="mark solid"/><text x="54" y="834.5" class="b ink">sources opened for this story agree</text>
+<circle cx="34" cy="852" r="4.6" class="mark"/><text x="54" y="856.5" class="b ink">opened sources disagree (named)</text>
+<circle cx="34" cy="874" r="4.6" class="mark dash"/><text x="54" y="878.5" class="b ink">only a summary of the book; unconfirmed</text>
+<circle cx="34" cy="796" r="2.9" class="ink"/>
 </svg>

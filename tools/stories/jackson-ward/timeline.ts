@@ -30,10 +30,10 @@ export interface Moment {
 export const MOMENTS: readonly Moment[] = [
   { date: '1946', what: 'A consultants\' master plan for the city proposes expressways through it.', source: 'Style Weekly, 2013; Feasibility Study, 2022', sure: 'opened' },
   { date: 'June 13, 1950', what: 'Voters reject the highway plan in a citywide referendum. Only 8 of 55 precincts vote for it.', source: 'Style Weekly, 2013', sure: 'opened' },
-  { date: '1951', what: 'A second referendum, forced by former mayor J. Fulmer Bright\'s petition, fails by almost 2 to 1: 6,002 votes.', source: 'Style Weekly, 2013, citing the Times-Dispatch. Silver\'s notes date it June 13, 1951', sure: 'disputed' },
-  { date: 'August 24, 1953', what: 'City Council votes to ask for a turnpike authority. The decision moves to the General Assembly, and no further referendum is held.', source: 'Silver, 1984, p. 192, from a student\'s notes; the book not seen', sure: 'unconfirmed' },
-  { date: 'April 8, 1954', what: 'The General Assembly creates the Richmond–Petersburg Turnpike Authority, with the power of eminent domain.', source: 'Style Weekly, 2013; Encyclopedia Virginia. Library of Virginia, Wikipedia and VCU give 1955', sure: 'disputed' },
-  { date: '1955–1958', what: 'Clearance and construction. The Authority photographs the work monthly, mostly 1956–58.', source: 'Community Plan, 2026; Library of Virginia, 2024', sure: 'opened' },
+  { date: '1951', what: 'A second referendum, forced by former mayor J. Fulmer Bright\'s petition, fails by almost 2 to 1. A headline of the day put the margin at 6,002 votes.', source: 'Style Weekly, 2013, which shows the headline. Notes on Silver\'s book date a referendum June 13, 1951', sure: 'disputed' },
+  { date: 'August 24, 1953', what: 'City Council votes for a turnpike authority. The decision moves to the General Assembly, and no further referendum is held.', source: 'Silver, 1984, p. 192, from a student\'s notes; the book not seen', sure: 'unconfirmed' },
+  { date: 'April 8, 1954', what: 'The General Assembly creates the Richmond–Petersburg Turnpike Authority, with the power of eminent domain.', source: 'Acts of Assembly, 1954, ch. 705; Style Weekly, 2013; Encyclopedia Virginia. Library of Virginia, Wikipedia and VCU give 1955', sure: 'disputed' },
+  { date: '1955–1958', what: 'Clearance and construction. The Authority photographs the work monthly, 1956–58.', source: 'Community Plan, 2026; Library of Virginia, 2024', sure: 'opened' },
   { date: 'July 1, 1958', what: 'The Turnpike opens: 34.7 miles, $76.7 million, paid for by toll revenue bonds. In August it becomes part of I-95.', source: 'Library of Virginia, 2024; Wikipedia', sure: 'opened' },
 ]
 

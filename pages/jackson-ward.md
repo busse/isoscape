@@ -36,25 +36,19 @@ the 1952 printing and placed by their fits; south of that from the 1924–25 vol
 and buildings standing today that the city dates to 1925 or before. The ground is the same
 estimate as in 1952. See [The tracing](#the-tracing). Working draft.
 
-The 1925 volume was drawn between January and April 1925 and reached the Library of Congress on
-May 16, 1925, with its correction table blank, so it shows the ward as first surveyed that
-year [[LoC, Sanborn 1925 vol. 3](#sources)]. On these sheets most buildings north of Leigh
+The 1925 volume's sheets carry marks dated early 1925, most of them March, its title page bears the Library of Congress's receipt stamp of May 16, 1925, and its correction table is blank, so it shows the ward as first surveyed for that edition [[LoC, Sanborn 1925 vol. 3](#sources)]. On these sheets most buildings north of Leigh
 Street are frame. The tracing found 3,907 outlines, 2,317 of them colored as frame
 [[1925 notes](#the-tracing)].
 
 Jackson Ward was made a city ward in 1871. The city's 2026 community plan says its lines were
-drawn to dilute Black voting power [[Community Plan 2026](#sources), timeline]. Its institutions
-were old by 1925: Ebenezer Baptist (1858 in the community plan; 1855 in the feasibility study),
+drawn to dilute Black voting power [[Community Plan 2026](#sources), timeline]. Its institutions were old by 1925: Ebenezer Baptist (the church's own history dates its first steps to 1856 and its first building to 1858 [[Ebenezer Baptist Church](#sources)]; the community plan gives 1858 and the feasibility study 1855),
 Sixth Mount Zion, organized by John Jasper in 1867 and in the ward from 1869, John Mitchell
 Jr.'s *Richmond Planet* (1884), the True Reformers' savings bank (1888, the first
 Black-owned bank chartered in the United States), Mechanics' Bank (1902) and Maggie L.
 Walker's St. Luke Penny Savings Bank (1903) [[Community Plan 2026](#sources);
-[Feasibility Study 2022](#sources), §1.4]. The Hippodrome on Second Street opened in 1914 (the
-plan's text says 1913) [[Community Plan 2026](#sources)].
+[Feasibility Study 2022](#sources), §1.4]. The Hippodrome on Second Street opened about 1914, the National Park Service says; the community plan gives 1914 in its timeline and 1913 in its text, as the feasibility study does [[NPS, Hippodrome](#sources); [Community Plan 2026](#sources); [Feasibility Study 2022](#sources), §1.4.1].
 
-It was also a neighborhood hemmed in by law. In 1911 the city passed a residential segregation
-ordinance, block by block [[Silver 1984](#sources), via a student's notes]. On the
-federal "redlining" maps of the 1930s every Black neighborhood in Richmond was marked
+It was also a neighborhood hemmed in by law. In 1911, according to a student's notes on Christopher Silver's history of the city, City Council passed a residential segregation ordinance drawn block by block [[Silver 1984](#sources), via a student's notes]. On the "redlining" maps of the 1930s every Black neighborhood in Richmond was marked
 undesirable, and its residents were barred from loans for houses and businesses [[Feasibility Study 2022](#sources),
 §1.4.2]. By the 1930s more than 8,000 Black Richmonders lived and worked in the ward
 [[Community Plan 2026](#sources), citing Taylor 1994].
@@ -91,9 +85,7 @@ volume 1 tracing, which names none. See [The tracing](#the-tracing).
 | 21 | Miller & Rhoads Private Garage | not printed | 309 |
 | 22 | Leigh St. Memorial M.E. Church | not printed | 309 |
 
-Names are as printed; "(Colored)" is the sheet's own word. The bank at 214 East Clay (20) is
-the building of the Mechanics Savings Bank, built 1909–10, which failed in 1922; the Southern
-Aid Society bought it in 1930 [[NPS, 212 East Clay Street](#sources)]. The National Park
+Names are as printed; "(Colored)" is the sheet's own word. The bank at 212–216 East Clay (20) is the building of the Mechanics Savings Bank, built in 1909 and opened in 1910, which failed in 1922; the Southern Aid Society bought it in 1930 [[NPS, 212 East Clay Street](#sources)]. The National Park
 Service shows True Reformers Hall (9) as a three-story building on Second Street
 [[NPS, Black Wall Street](#sources)]. The sheet does not name the other two banks (10, 19).
 
@@ -114,13 +106,11 @@ Working draft.
 The 1952 volume is a full reprint, with "Copyright 1952" on every sheet and a new index dated
 September 1951. It draws what was built after 1925, such as Gilpin Court and the Armstrong High
 School annex of 1938 [[trace notes](#the-tracing)]. On the 15 sheets traced for this story
-there are 2,875 building outlines of 12 m² or more. The tracing records 122 names and uses
-printed beside them: churches, schools, lodges,
+there are 2,875 building outlines of 12 m² or more. The tracing reads 103 names and uses printed beside them: churches, schools, lodges,
 theaters, a Y.M.C.A., ice plants, laundries and warehouses. They print "(Colored)" beside the
 names of Black institutions, and this page keeps the sheet's own word where it quotes a name.
 
-The ward in 1952 was segregated and crowded, and its housing had been left to decline
-[[Silver 1984](#sources), via a student's notes]. It was also where Black Richmond banked,
+The ward in 1952 was segregated and crowded, and its housing had been left to decline [[Feasibility Study 2022](#sources), §1.4.2; [Silver 1984](#sources), via a student's notes]. It was also where Black Richmond banked,
 worshipped, went to school and to the movies. The map shows both: the dense rows of frame
 houses in the north blocks, and the brick churches and halls along Leigh and Second.
 
@@ -170,38 +160,27 @@ were not read for names. See [The tracing](#the-tracing). Working draft.
 
 ![Second Street about 1925 (above) and in 1952 (below), the same blocks](jackson-ward-pair-second-street.webp)
 
-Second Street, "the Deuce," was the ward's main commercial street. On sheet 308 of the 1952
+Second Street, "the Deuce," was the ward's main commercial street [[Community Plan 2026](#sources)]. On sheet 308 of the 1952
 volume, between Clay and Jackson Streets, the sheet names the Hippodrome Theatre, a second
 moving-picture house, the Elks' Capitol City Lodge, the Leigh Street Y.M.C.A., Third Street
 Bethel A.M.E. and St. Joseph's churches, a hotel entrance with its dining room, restaurants,
 stores, offices, and a "colored hall & meeting rooms" [[trace notes](#the-tracing)]. The
 Hippodrome closed in 1967 [[Community Plan 2026](#sources)]. The label "Southern Aid Society of
 Va." on sheet 308 is printed under the frontage numbers 212, 214 and 216 of one 4-story office
-building on East Clay Street (25). The National Park Service gives 212 East Clay as the
-Society's headquarters from 1930, when it bought the former Mechanics Savings Bank building and
-added two wings [[NPS, 212 East Clay Street](#sources)]. The building stands today, so it is
+building on East Clay Street (25). The National Park Service says the Society bought the former Mechanics Savings Bank building at 212 East Clay in 1930 and added two wings when it became the Society's headquarters [[NPS, 212 East Clay Street](#sources)]. The building stands today, so it is
 drawn from today's map.
 
 ## How the route was chosen
 
-![A timeline from 1946 to 1958: the master plan, two referendums that failed, the council's request for a turnpike authority, the authority's creation, construction, and the opening on July 1, 1958, each with its source](jackson-ward-timeline.svg)
+![A timeline from 1946 to 1958: the master plan, two referendums that failed, the council's vote for a turnpike authority, the authority's creation, construction, and the opening on July 1, 1958, each with its source](jackson-ward-timeline.svg)
 
 Richmond's voters said no to a downtown expressway twice. In the first referendum, on June 13,
-1950, only 8 of 55 precincts voted for it. A second, forced in 1951 by a petition of former mayor
-J. Fulmer Bright, failed by 6,002 votes, almost 2 to 1 [[Style Weekly 2013](#sources)]. On
-August 24, 1953, City Council voted to ask for a turnpike authority instead, which moved the
-decision to the General Assembly and avoided another referendum. Officials pointed to the cost
-of buying industrial land compared with homes [[Silver 1984](#sources), pp. 192–194, via a
-student's notes; the book itself has not been seen]. The General Assembly created the
-Richmond–Petersburg Turnpike Authority on April 8, 1954, with the power of eminent domain
-[[Style Weekly 2013](#sources); [Encyclopedia Virginia](#sources)]. The Library of Virginia,
+1950, only 8 of 55 precincts voted for it. A second, forced in 1951 by a petition of former mayor J. Fulmer Bright, failed by almost 2 to 1; a newspaper headline the article reproduces put the margin at 6,002 votes [[Style Weekly 2013](#sources)]. On August 24, 1953, according to a student's notes on Silver's book, City Council voted for a turnpike authority, which moved the decision to the General Assembly and avoided another referendum, and officials pointed to the cost of buying industrial land compared with homes [[Silver 1984](#sources), p. 192, via a student's notes; the book itself has not been seen]. The General Assembly created the Richmond–Petersburg Turnpike Authority, with the power of eminent domain, by an act approved on April 8, 1954 [[Acts of Assembly 1954](#sources); [Style Weekly 2013](#sources); [Encyclopedia Virginia](#sources)]. The Library of Virginia,
 Wikipedia and VCU Libraries give 1955 for its creation [[LVA 2024](#sources);
 [Wikipedia, Turnpike](#sources); [VCU Libraries](#sources)].
 
 The city's 2022 feasibility study says city officials chose the middle of Jackson Ward as the
-best route through downtown [[Feasibility Study 2022](#sources), §1.4.3]. The
-consultants' report, as Benjamin Campbell quotes it, found that destroying housing "offers no
-serious obstacle to a highway location" [[Campbell 2012](#sources), p. 154, via Wikipedia].
+best route through downtown [[Feasibility Study 2022](#sources), §1.4.3]. Wikipedia's article on Jackson Ward, citing Benjamin Campbell, says the consultants' first report held that destroying housing "offers no serious obstacle to a highway location" [[Campbell 2012](#sources), p. 154, via Wikipedia].
 Which other routes were studied is not known to us yet.
 
 The road opened on July 1, 1958: 34.7 miles from Dinwiddie County to Henrico County, built for
@@ -232,12 +211,12 @@ does not choose among them.
 | Figure | What it covers | Source |
 |---|---|---|
 | about 7,000 people, about 10% of Black Richmonders | the Turnpike, 1955–57 | [Silver 1984](#sources), via a student's notes |
-| more than 1,000 homes and businesses; 7,000 residents; 390 acres | the whole road, citywide | [Feasibility Study 2022](#sources), citing Kollatz 2013 |
-| 1,900 Black families, about 10% of the city's Black population, and 300 more facing the loss of their homes | "the turnpike and related construction," by 1957 | *Richmond Times-Dispatch*, 1957, per [Encyclopedia Virginia](#sources) |
+| more than 1,000 homes and businesses; 7,000 residents; 390 acres; 10% of Black Richmonders by 1958 | across the city | [Feasibility Study 2022](#sources), citing Kollatz 2013 |
+| 1,900 Black families, about 10% of the city's Black population, and 300 more facing the loss of their homes | "Turnpike and related construction," by 1957 | *Richmond Times-Dispatch*, 1957, per [Encyclopedia Virginia](#sources) |
 | 1,900 families | "for four-lane highway through the neighborhood in 1957" | [LVA Document Bank](#sources) |
-| more than 900 families (90% Black); 700 homes and businesses in Jackson Ward; 34 streets rerouted | 1955–57 | [Grant application 2022](#sources) |
+| more than 7,000 people (900 families, 90% of them Black); 700 homes and businesses in Jackson Ward; 34 streets rerouted | 1955–57 | [Grant application 2022](#sources) |
 | more than 700 homes, churches and businesses | Jackson Ward | [Richmond Family Magazine 2022](#sources) |
-| about 1,000 homes; 31 streets blocked | Jackson Ward | [Campbell 2012](#sources), p. 154, via Wikipedia |
+| 1,000 homes; 31 streets blocked | Jackson Ward | [Campbell 2012](#sources), p. 154, via Wikipedia |
 | over 1,000 homes | Jackson Ward and Navy Hill | [VCU Libraries](#sources) |
 | more than 1,000 residents and business owners | Jackson Ward | [LVA, House to Highway](#sources) |
 | over 1,000 families | the Turnpike | [Richmond Free Press 2024](#sources) |
@@ -298,13 +277,9 @@ still stand here, and later clearances are not yet dated building by building. S
 [Measured, inferred, unknown](#measured-inferred-unknown).
 
 The picture is labeled approximate because its edges are. The corridor polygon is today's
-footprint plus 15 m, and the 1958 right-of-way has not been seen. In 1957 the Turnpike Authority
-took the Skipwith family's cottage by eminent domain, a house built in 1793 by Abraham Peyton
-Skipwith, a free Black man; it was sold for about $25 and moved out of the city
+footprint plus 15 m, and the 1958 right-of-way has not been seen. In 1957 the Turnpike Authority and the city took by eminent domain a cottage built in 1793 by Abraham Peyton Skipwith, who had bought his freedom; it was sold for about $25 and moved out of the city
 [[LVA, House to Highway](#sources); [Axios, April 2026](#sources)]. Gilpin Court was enlarged
-in 1957 to house families the Turnpike displaced [[Encyclopedia Virginia](#sources)]. The
-Coliseum was built on cleared blocks of the ward in the late 1960s; a photograph of its
-construction is dated December 30, 1968 [[WVTF 2016](#sources)].
+in 1957 to house families the Turnpike displaced [[Encyclopedia Virginia](#sources)]. The Coliseum was later built on cleared blocks of the ward; a photograph shows it under construction on December 30, 1968 [[WVTF 2016](#sources)].
 
 ## Gilpin Court
 
@@ -319,14 +294,10 @@ replacing 200 houses [[Encyclopedia Virginia](#sources); [Campbell 2012](#source
 
 Additions in 1957 and 1970 added 482 units, and Fay Towers, finished in 1971, completed the
 781-unit project on about 38 acres [[Feasibility Study 2022](#sources), §1.4.4;
-[Community Plan 2026](#sources)]. The Turnpike cut Gilpin Court and the rest of North Jackson
-Ward off from the south side and from downtown [[Encyclopedia Virginia](#sources)].
+[Community Plan 2026](#sources)]. The Turnpike left Gilpin Court and the rest of North Jackson Ward cut off from South Jackson Ward and from the rest of the city [[Encyclopedia Virginia](#sources)].
 
 People live in Gilpin Court today, and it is drawn here as homes. In July 2026 a draft
-agreement between the city and the Richmond Redevelopment and Housing Authority called for
-one-for-one replacement of all 781 units over at least ten years; the housing authority had
-filed plans for a first building of 56 units, aiming to start it in early 2027
-[[Axios, July 2026](#sources)]. Residents' groups, the Gilpin Court Tenant Council and Gilpin
+agreement between the city and the Richmond Redevelopment and Housing Authority called for one-for-one replacement of all 781 units and expected the redevelopment to take at least ten years [[Gilpin Court MOU 2026](#sources)]; the housing authority had filed plans for a first building of 56 units, aiming to start it in early 2027 [[Axios, July 2026](#sources)]. Residents' groups, the Gilpin Court Tenant Council and Gilpin
 Informed Residents, are named in the city's community plan [[Community Plan 2026](#sources)].
 This page takes no position on the plan.
 
@@ -335,8 +306,7 @@ This page takes no position on the plan.
 *How this was made:* the same close crop of the 1925, 1952 and today views. In 1925, where
 Apostle Town's streets differ from today's, they are drawn as sheet 318 prints them: Cabell and Tyler Streets, and Hickory Street on its old
 line, read off the sheet and drawn until 1941; Gilpin Court's own streets and paths are drawn
-from 1941 [[LoC, Sanborn 1925 vol. 3](#sources); [LVA 2025](#sources)]. The 1925 houses on
-the site that the 1952 sheets no longer show (119 of them) are taken to have gone in 1941, when
+from 1941 [[LoC, Sanborn 1925 vol. 3](#sources); [LVA 2025](#sources)]. The 1925 buildings on the site that the 1952 sheets no longer show (119 of them) are taken to have gone in 1941, when
 the clearance began; whether any went earlier is not known. Sheet 318 rests on one control
 point (8.5 m off), so the whole block may sit several meters from where it stood. Working draft.
 
@@ -358,27 +328,17 @@ record notes that "redevelopment and expressway construction have reduced its si
 widths are ours. Approximate.
 
 A cap or lid over the highway is being studied. The 2022 feasibility study, by the state's
-Office of Intermodal Planning and Investment, VDOT and the city, found it would be "technically
-possible" to build a bridge or lid between the Belvidere Street and North 1st Street bridges,
-and found four of six areas feasible [[Feasibility Study 2022](#sources); [Fact sheet
-2023](#sources)]. The U.S. Department of Transportation awarded the city a $1.35 million
-planning grant on February 28, 2023 [[City of Richmond](#sources)], and City Council accepted it
-in September 2024; the city then aimed to hire a consultant by early 2025
-[[VPM 2024](#sources)]. The community plan, edited in July 2026, still lists securing federal funds and "hire a
-consultant team" as next steps [[Community Plan 2026](#sources)]. Whether
-the grant has been obligated, and whether a consultant was hired, we could not find.
+Office of Intermodal Planning and Investment, VDOT and the city, found it would be "technically possible" to build a bridge or lid in a study area that ran from the Belvidere Street bridge to the North 1st Street bridge, and found four of its six areas feasible, from Chamberlayne Parkway to North 1st Street [[Feasibility Study 2022](#sources), §3.2.4; [Fact sheet 2023](#sources)]. On February 28, 2023, the U.S. Department of Transportation announced a $1.35 million planning grant to the city [[City of Richmond](#sources)]. City Council accepted it on September 23, 2024 [[Ord. 2024-206](#sources)], and the city then aimed to hire a consultant by early 2025 [[VPM 2024](#sources)]. Federal records show the whole grant obligated under an agreement signed September 26, 2024, which runs to March 30, 2028 [[USAspending](#sources)]. The community plan, edited in July 2026, still lists securing federal funds and "hire a
+consultant team" as next steps [[Community Plan 2026](#sources)]. Whether a consultant has been hired we could not find.
 
 People in and around the ward hold a range of views on the cap. As reported by Elizabeth
 McGowan for the Virginia Center for Investigative Journalism in July 2024
 [[VCIJ 2024](#sources)]:
 
-- **For it:** business owner David Lambert sees the project as real and hopeful, and as a spur
-  to business.
-- **For it, with conditions:** VCU urban planner Jim Smither would support a park if paired with
-  reparations. City Councilor Ann-Frances Lambert is not opposed but wants the city to address
-  reparations first; she told VPM the city "displaced one of the most robust African American
+- **For it:** business owner David Lambert calls the cap's intent excellent and sees a chance for economic revival, though he asks how it will make money.
+- **For it, with conditions:** VCU urban planner Jim Smither sees a park over the highway as an asset if it comes with an acknowledgment of past harms, and says the conversation must start with reparations. City Councilor Ann-Frances Lambert is not opposed but says the city must first address what happened, and supports action on reparations; she told VPM the city "displaced one of the most robust African American
   communities" [[VPM 2024](#sources)].
-- **Against or doubtful:** historian Gary Flowers dismissed it as a park for dogs and argued for spending on other revitalization. Benjamin Ross, historian of Sixth Mount Zion Baptist
+- **Against or doubtful:** historian Gary Flowers calls it the wrong priority and argues that the city should turn down the grant and spend on Black culture, commerce and education. Benjamin Ross, historian of Sixth Mount Zion Baptist
   Church, asked "reconnect to what?" and worried a cap would hide the church.
 
 This page takes no position on the cap. The study area is outlined; no design is drawn.
@@ -401,8 +361,7 @@ before 1955 could be found online, so the 1952 views use an estimate.
 
 The estimate works like a rubber sheet stretched across the trench and pinned to the measured
 ground at its edge: each point inside takes the average of its neighbors. The seven streets
-that crossed at grade are held straight between their surviving ends; that changes the result
-by about 4 cm typically and 50 cm at most, because the ground there is nearly level. East of
+that crossed at grade are held straight between their surviving ends; as this ground is drawn, that changes the result by about 6 cm on average (root mean square) and 58 cm at most, because the ground there is nearly level. East of
 3rd Street, where the ramps stand on the edge of the Shockoe Valley, the lidar is kept and only
 banks narrower than 50 m are taken down. As this ground is drawn, the most put back in the
 trench is 7.8 m, between Brook Road and Chamberlayne Parkway, and the most taken away is 10.1 m,
@@ -426,7 +385,7 @@ ground nearby seven times, and the ground inside rebuilt and compared with the l
 replaced. On level plateau like the trench's, 95% of points came within 0.66–2.06 m. Where the
 outline crossed the Leigh Street cut or a valley edge, it did worse (2.85 and 4.17 m).
 
-![The 1934 USGS sheet under the trench's outline, with twelve check points along its center line](jackson-ward-1934-checks.webp)
+![The 1934 USGS sheet under the trench's outline, with the check points along its center line (P1 lies beyond the frame)](jackson-ward-1934-checks.webp)
 
 **The 1934 survey.** The USGS Richmond sheet, surveyed in 1933–34 with contours every 10 feet,
 shows the streets running through before the road. At the seven points in the trench's middle
@@ -456,8 +415,7 @@ building outlines were traced in code, then checked against the sheet.
 
 ![Sheet 308 of the 1952 volume, Second Street from Clay to Jackson, with its seven control points and how far each misses after the fit](jackson-ward-sheet-residuals.webp)
 
-After the fit, each corner lands a little off. The mean miss per sheet is 1.1–3.6 m, and the
-worst single corner is 6.7 m, at St. James and Duval on sheet 326. A building may sit a few
+After the fit, each corner lands a little off. On 14 of the 15 sheets the mean miss is 1.1–3.6 m, and the worst single corner is 6.7 m, at St. James and Duval on sheet 326. A building may sit a few
 meters from where it stood, less than a house's width; no block was seen pushed across a
 street. Sheet 318, which draws Gilpin Court, has only one usable corner and was turned and
 shifted to fit the Gilpin Court buildings standing today (8.5 m).
@@ -469,8 +427,7 @@ printing leaves many frame houses uncolored; those are taken to be frame, an inf
 on one sheet against the 1925 printing. Stories and uses were read off the sheets for the
 buildings counted in the corridor and those near Second Street, 479 in all (stories for 164 of
 them); a building is drawn 3.6 m a story where its stories were read, and two stories high
-where they were not. Of the 447 counted in the corridor, the letters read on 403 mark
-270 dwellings (houses, duplexes and apartment houses), 54 private garages, 29 flats, 28 stores,
+where they were not. Of the 447 counted in the corridor, the letters read on 403 include 270 dwellings (houses, duplexes and apartment houses), 54 private garages, 29 flats, 28 stores,
 6 churches and a school. These are buildings, and a dwelling may hold one household or several.
 
 Second Street from Broad to Clay is on volume 1 of the 1950–52 printing. Its sheets 2 and 3 were
@@ -486,9 +443,7 @@ feature (1,300 to 3,500 matches a sheet; the median mismatch is about 0.1 m on t
 placed by the 1952 fits, so their positions carry the same few meters of error. In 1925 every
 building is colored, and the tracer reads the colored fills [[LoC, Sanborn 1925
 vol. 3](#sources)]. That tracer splits more porches and frame fronts into outlines of their own
-than the 1952 one did, so the two tracings read the sheets differently: the 1925 tracing finds
-270 outlines in the paved polygon and 565 in the corridor, against 216 and 447
-in 1952. The difference is not a count of buildings lost between 1925 and 1952, and this page
+than the 1952 one did, so the two tracings read the sheets differently: by the same rule (a point inside an outline of 12 m² or more), the 1925 tracing finds 244 outlines in the paved polygon and 506 in the corridor, against 216 and 447 in 1952. The difference is not a count of buildings lost between 1925 and 1952, and this page
 does not use it as one.
 
 ### The count's polygon and rule
@@ -500,9 +455,9 @@ to its lanes at 3.65 m plus 3 m shoulders, with the gaps between carriageways cl
 from the Belvidere Street ramps to the line of 8th Street, and leaves out I-64 east of the
 junction, built later. The corridor adds 15 m on each side for the cut slopes and walls. A
 building counts when a point inside its outline falls in the polygon. Outlines under 12 m² are
-not counted: the map draws nothing that small (12 m² is the region's smallest building), and
+not counted: the map draws nothing that small (12 m² is the smallest building the region draws), and
 counting them would give a number the pictures cannot show. They are privies and sheds under
-about 3.5 m on a side. One outline on sheet 310, the box of the sheet's correction table, is not
+about 3.5 m on a side. One outline on sheet 317, the box of the sheet's correction table, is not
 a building and is left out. The counts are 216 and 447, from one file,
 `tools/sanborn/jw/counts.json`; the count picture, the plan and the island draw the same
 buildings, from the list the count writes.
@@ -517,13 +472,13 @@ and misses some small buildings.
 | | What | How we know it |
 |---|---|---|
 | **Measured** | Today's ground | USGS lidar, a 5 m grid; a few centimeters on open ground |
-| **Measured** | Each 1952 outline, its position and printed color; the 122 names | Read off the sheets; placed to within a few meters (above) |
+| **Measured** | Each 1952 outline, its position and printed color; the 103 names and uses | Read off the sheets; placed to within a few meters (above) |
 | **Measured** | The 1934 survey's streets and contours | USGS, 10-foot contours; placed by its own projection and a shift of about 15 m |
 | **Inferred** | The ground inside the trench before 1955 | The membrane estimate: about ±1.5 m mid-trench, ±3 m at its ends |
 | **Measured** | 24 stretches of street inside the corridor; Apostle Town's 1925 streets | Read off the 1952 and 1925 sheets and placed by their fits |
 | **Measured** | Uses and stories of 479 buildings | Read off the 1952 sheets, as printed |
 | **Inferred** | The seven lost street stretches | Straight joins between surviving ends, which the 1934 sheet shows running through |
-| **Inferred** | When Apostle Town's houses went | 1941, when the clearance began, for every one the 1952 sheets no longer show |
+| **Inferred** | When Apostle Town's buildings went | 1941, when the clearance began, for every one the 1952 sheets no longer show |
 | **Inferred** | Uncolored outlines are frame buildings; heights where stories were not read | Checked on one sheet; two stories assumed |
 | **Inferred** | Which buildings the road took | A point inside each outline, tested against today's footprint |
 | **Unknown** | The 1958 right-of-way | Library of Virginia, Accession 40941, not yet seen |
@@ -546,41 +501,40 @@ and misses some small buildings.
 
 ## Whose work this rests on
 
-This story rests on the work of the ward's people and institutions, and on scholars and
-journalists who have written its history: the JXN Project and the Library of Virginia's
-*House to Highway*; the Historic Jackson Ward Association; the Black History Museum & Cultural
-Center of Virginia; the Maggie L. Walker National Historic Site; Sixth Mount Zion Baptist
-Church; the Gilpin Court Tenant Council and Gilpin Informed Residents; and the Library of
-Virginia's archivists. Published work drawn on: Christopher Silver, Benjamin Campbell, LaToya
-Gray-Sparks, Elizabeth McGowan, Harry Kollatz Jr., Michael Rogers, Kelley Libby and Cara Davis's
-StoryMap *Under the Highway* (2023). None of them has reviewed this draft yet.
+The ward's history is kept by its own people and institutions, among them the Historic Jackson Ward Association, the Black History Museum & Cultural Center of Virginia, Sixth Mount Zion Baptist Church, Ebenezer Baptist Church, the Gilpin Court Tenant Council and Gilpin Informed Residents. This story draws on published work listed under [Sources](#sources): the Library of Virginia and the JXN Project's *House to Highway* and the Library of Virginia's archivists; the National Park Service; and writers including LaToya Gray-Sparks, Elizabeth McGowan, Michael Rogers, Kelley Libby and Ashley Craig. Christopher Silver's and Benjamin Campbell's books are known here only through others' summaries, and Harry Kollatz Jr.'s article only as the feasibility study cites it. None of these people or institutions was involved in this draft, and none has reviewed it.
 
 ## Sources
 
 Opened for this draft unless marked.
 
+- **Acts of Assembly 1954**: Virginia Acts of Assembly, 1954, chapter 705, approved April 8, 1954 (Code §§ 33-255.27, 33-255.29), as transcribed by the University of Virginia's Modeling Jim Crow project. https://modelingjimcrow.virginia.edu/node/72717
 - **Axios, April 2026**: "Skipwith-Roper Cottage homecoming," Axios Richmond. https://www.axios.com/local/richmond/2026/04/17/jackson-ward-skipwith-roper-cottage-homecoming
 - **Axios, July 2026**: "What's happening with Gilpin Court," Axios Richmond. https://www.axios.com/local/richmond/2026/07/09/whats-happening-with-gilpin-court-richmond
 - **Campbell 2012**: Benjamin Campbell, *Richmond's Unhealed History* (Brandylane, 2012), pp. 152, 154, as cited by Wikipedia, "Jackson Ward." The book has not been seen. https://en.wikipedia.org/wiki/Jackson_Ward
 - **City of Richmond**: Reconnect Jackson Ward page. https://www.rva.gov/planning-development-review/reconnect-jackson-ward
 - **Community Plan 2026**: City of Richmond, Jackson Ward Community Plan, edited July 2026. https://rva.gov/sites/default/files/2026-07/20260716_Jackson%20Ward%20Community%20Plan_editedJuly2026.pdf
 - **DHR 127-0237**: Virginia Department of Historic Resources, Jackson Ward Historic District. https://www.dhr.virginia.gov/historic-registers/127-0237/
+- **Ebenezer Baptist Church**: "Church History." https://www.ebenezerrva.org/church-history
 - **Encyclopedia Virginia**: LaToya Gray-Sparks, "Urban Renewal in Richmond" (2024, updated 2025). https://encyclopediavirginia.org/entries/urban-renewal-in-richmond/
 - **Fact sheet 2023**: City of Richmond, Reconnect Jackson Ward fact sheet. https://rva.gov/sites/default/files/2024-11/RJW-FactSheetv3_12_2023.pdf
+- **Gilpin Court MOU 2026**: City of Richmond and RRHA, Joint Gilpin Transformation Working Group Memorandum of Understanding, draft published July 2026 (unsigned). https://rva.gov/sites/default/files/2026-07/Gilpin%20Court%20MOU%20RRHA%20COR_final%20AATF.pdf
 - **Feasibility Study 2022**: OIPI, VDOT and City of Richmond, Reconnect Jackson Ward Feasibility Study, September 2022. https://www.rva.gov/sites/default/files/2024-11/RJW_FS_Report_2022-09-30v5-FINAL.pdf
 - **Grant application 2022**: City of Richmond, Reconnecting Communities Pilot grant application, October 2022. https://www.rva.gov/sites/default/files/2024-11/UPC114874_RJW_GrantApplicationCombined_2022-10-27.pdf
 - **LoC, Sanborn 1925 vol. 3**: Library of Congress, Sanborn Fire Insurance Map from Richmond, Independent Cities, Virginia, 1924–1925, vol. 3, 1925. https://www.loc.gov/item/sanborn09064_008/
 - **LoC, Sanborn 1952 vol. 3**: Library of Congress, Sanborn Fire Insurance Map from Richmond, 1952, vol. 3. https://www.loc.gov/item/sanborn09064_018/
 - **NPS, 212 East Clay Street**: National Park Service, "212 East Clay Street." https://www.nps.gov/places/212-east-clay-street.htm
+- **NPS, Hippodrome**: National Park Service, "The Hippodrome Theater and W. L. Taylor Mansion." https://www.nps.gov/places/the-hippodrome-theater-and-w-l-taylor-mansion.htm
 - **NPS, Black Wall Street**: National Park Service, "Jackson Ward and its Black Wall Street." https://www.nps.gov/articles/000/jackson-ward-and-its-black-wall-street.htm
 - **LVA 2024**: Renee Savits, Richmond–Petersburg Turnpike Authority records, Accession 40941, *The UncommonWealth*, Library of Virginia, October 9, 2024. https://uncommonwealth.lva.virginia.gov/?p=42248
 - **LVA 2025**: Ashley Craig, "A Brief History of Public Housing in the City of Richmond," *The UncommonWealth*, November 17, 2025. https://uncommonwealth.lva.virginia.gov/blog/2025/11/17/a-brief-history-of-public-housing-in-the-city-of-richmond
 - **LVA Document Bank**: Library of Virginia, "Urban Renewal in Virginia." https://www.lva.virginia.gov/collections/educator-resources/dbva/items/show/300
 - **LVA, House to Highway**: Library of Virginia and the JXN Project, *House to Highway*. https://www.lva.virginia.gov/events/exhibitions/house-to-highway
+- **Ord. 2024-206**: City of Richmond, Ord. No. 2024-206, accepting $1,350,000 from the U.S. Department of Transportation for the Reconnect Jackson Ward project, adopted September 23, 2024 (Legistar). https://webapi.legistar.com/v1/richmondva/matters/37259
 - **Richmond Family Magazine 2022**: "Destroying a community to build a road," March 1, 2022. https://richmondfamilymagazine.com/article/destroying-a-community-to-build-a-road
 - **Richmond Free Press 2024**: September 12, 2024. https://m.richmondfreepress.com/news/2024/sep/12/jxn-project-and-library-of-virginia-unveil-jackson-wards-hidden-history
 - **Silver 1984**: Christopher Silver, *Twentieth-Century Richmond: Planning, Politics, and Race* (1984), as summarized in student notes posted by *Highways and Hallowed Halls*. The book has not been seen. https://highwaysandhallowedhalls.com/wp-content/uploads/2022/08/twentieth-century-richmond-silver-1984.pdf
 - **Style Weekly 2013**: Michael Rogers, "The Voter Detour," *Style Weekly*, December 24, 2013. https://www.styleweekly.com/?p=43492
+- **USAspending**: Federal award 693JJ32440347, Federal Highway Administration to the City of Richmond, $1,350,000 obligated, signed September 26, 2024. https://www.usaspending.gov/award/ASST_NON_693JJ32440347_069
 - **VCIJ 2024**: Elizabeth McGowan, Virginia Center for Investigative Journalism at WHRO, July 16, 2024. https://vcij.org/stories/in-richmond-a-struggle-over-the-future-of-a-harlem-of-the-south
 - **VCU Libraries**: "Interstate Highways," MCV aerial photography exhibit. https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/interstate-highways
 - **VPM 2024**: Keyris Manzanares, VPM News, September 25, 2024. https://www.vpm.org/news/2024-09-25/richmond-city-council-reconnect-jackson-ward-ann-frances-lambert
