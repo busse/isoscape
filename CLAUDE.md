@@ -85,18 +85,45 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | one building modeled close up (parts, tracks, canopies, trains) | `tools/stations/<name>.py` → `history/<name>.json`; `src/parts.ts` |
 | a cutaway: the cut plane, sections, plan, flat section, its sheet | `cutaway` in `regions/<name>.json`; `src/cutaway.ts`, `src/cutaway-scene.ts`, `src/section.ts`; `cutaways/<name>.json`, `tools/cutaway/sheet.py`; "Cutaways" in the README |
 | release records: what each sold design was made from, and how to remake it | `tools/release/` → `releases/` |
+| stages, the production board, asset versions, the inspection checklist | `catalog/pipeline.json`, `tools/release/board.py` (→ `pages/board.md`); "Stages and the board" in the README |
 | plate numbers, the taxonomy, the printed title block | `catalog/plates.json`, `tools/release/plates.py`, `tools/print/titleblock.py`, `tools/release/stamp.py`; "Plates" in the README |
 | a published piece corrected or redrawn | `pages/changes.md` (and the store's `changes_page.py`): every change, dated, with the piece's version |
 | the visual check: watched views, crops, tolerance, its report | `tools/check/views.json`, `tools/check/visual.py`; baseline in `tools/check/baseline/` |
 | placing streetcar lines from named corners | `tools/streetcars/build.py` (routes in `tools/streetcars/routes.json`) |
 
+## Stages
+
+Image work moves rough draft → working draft (d1, d2 …) → final draft (rc1, rc2 …) → final
+production, each only through its gate: Chris says it is worth pursuing; Chris approves the look;
+Chris approves release. Stories move research → outline → fact check → outside review →
+published. The board, `catalog/pipeline.json`, says where everything is; keep it current with
+`tools/release/board.py set`, and `board.py check` must pass. See "Stages and the board" in the
+README for the stages, the inspection checklist and the board.
+
+- A plate version (title block, store) is given only at final production. Drafts never appear in
+  the store, on the Changes pages or in a title block.
+- Files and builds carry an asset version, MAJOR.MINOR.PATCH: MAJOR the edition (the only number
+  the block prints), MINOR a revision of the art within an unsold edition, PATCH the same art
+  re-stamped; drafts are prereleases of the next edition (`1.0.0-d2`, `4.0.0-rc1`).
+- A final draft gets one inspection against the README's fixed checklist, at most one fix round
+  and a targeted recheck. Faults seen only up close go on the design's accepted-faults list and
+  are not reported again; nothing in "Known limits" is reported either.
+- A third fix round at any stage needs Chris's say-so (`budget_note`).
+- After release, changes are batched into planned editions with a stated reason: factual
+  correction, wall-visible fault, or improvement.
+- Version numbers printed before November 18, 2026 stay as they are.
+
 ## Release records
 
 Every design for sale must stay revisitable. Publishing or redrawing one is not done until
 `tools/release/record.py <store> <design> --release` has written its record and
-`tools/release/check.py <store> <design> --rebuild` passes; commit `releases/`. Never change a
-published print in place: redraw it as the next version (`-vN` files, catalog `version`,
-`pages/changes.md`). See "Release records" in the README.
+`tools/release/check.py <store> <design> --rebuild` passes; commit `releases/` with the board.
+**Frozen once sold:** an edition that any order includes is never changed; the next change is a
+new edition (`-vN` files, catalog `version`, `pages/changes.md`). An edition with no orders, as
+the store's counts say (`orders.py counts`, then `board.py orders`; "unknown" counts as sold),
+may be replaced in place by corrected art as a revision (`-v3.1` files, catalog
+`asset_version`, record kind `revision`), with a dated line on `pages/changes.md` if it is on
+sale. See "Release records" and "Stages and the board" in the README.
 
 ## Known limits
 
