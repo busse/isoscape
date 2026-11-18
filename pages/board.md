@@ -15,8 +15,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 |---|---|
 | research | 2 |
 | working draft | 2 |
-| final draft | 3 |
-| final production | 40 |
+| final production | 43 |
 | on hold | 55 |
 | blocked | 1 |
 | backlog | 1 |
@@ -42,18 +41,11 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | — | The Byrd Theatre: Cutaway | cutaway | 1.0.0-d2 | no |
 | — | Main Street Station, about 1952: Cutaway | cutaway | 1.0.0-d4 | no |
 
-## Final draft
-
-| Plate | Title | Kind | Version | On sale |
-|---|---|---|---|---|
-| BSS·00 | Broad Street Station, 1943: The Railroads and Fourteen Places | set menu | 3.0.0-rc1 | no |
-| BSS·16 | Scott's Addition, Broad Street Station 1943 | set box | 1.0.0-rc1 | no |
-| BSS·M | Broad Street Station, 1943: The Railroad Map | set map | 3.0.0-rc1 | no |
-
 ## Final production
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
+| BSS·00 | Broad Street Station, 1943: The Railroads and Fourteen Places | set menu | 3.0.0 | yes, version 3 |
 | BSS·01 | AY Tower, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·02 | The State Fair grounds, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·03 | Hermitage Road, Broad Street Station 1943 | set box | 2.0.0 | no |
@@ -69,6 +61,8 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | BSS·13 | Broad Street Station, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·14 | Pope's front, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·15 | Broad Street Station, 1943: The Cutaway | cutaway | 1.0.0 | yes, version 1 |
+| BSS·16 | Scott's Addition, Broad Street Station 1943 | set box | 1.0.0 | yes, version 1 |
+| BSS·M | Broad Street Station, 1943: The Railroad Map | set map | 3.0.0 | yes, version 3 |
 | GWY·01 | Gwynn's Island | print | 4.0.0 | yes, version 4 |
 | RVA·01 | Richmond, 1925 | print | 5.0.0 | yes, version 5 |
 | RVA·03 | Richmond, 1886 | print | 3.0.0 | yes, version 3 |
