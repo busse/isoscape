@@ -2895,11 +2895,11 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "agent",
-   "decision": "first story; rough drafts done on branches jw-ground (ground before the cut) and jw-trace (1952 Sanborn, 15 sheets, 3,157 outlines); next: integrate, outline for the owner; shows its work; community reviewers at working draft",
+   "decision": "outline approved 2026-11-18 with eight decisions (drafts/jackson-ward/decisions.md on the branch): title 'What stood where the highway runs'; 1925 added; Gilpin Court beat; chronological; cap as study area and range of views; explorer story page; reviewers see the fact-checked draft; 1959 labeled approximate. Estimate and actuals tracked in drafts/jackson-ward/effort.md",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
-   "branch": null,
+   "branch": "story-jackson-ward",
    "worktree": null,
    "links": [
     "/mnt/user-data/outputs/stories/jackson-ward/brief.md"
