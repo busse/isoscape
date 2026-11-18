@@ -1350,7 +1350,9 @@ export const renderSvg = (scene: Scene): Rendered => {
       `<g class="caption" font-family="Georgia, 'Times New Roman', serif" fill="${p.ink}">`,
       `<text x="${f(tx)}" y="${f(ty)}" font-size="${f(capSize)}" font-weight="bold">${scene.time.year}</text>`,
       scene.time.title === undefined ? '' : `<text x="${f(tx + capSize * 2.6)}" y="${f(ty)}" font-size="${f(capSize * 0.62)}" font-style="italic">${esc(scene.time.title)}</text>`,
-      isle?.caption === undefined ? '' : `<text x="${f(tx)}" y="${f(ty + capSize * 1.05)}" font-size="${f(capSize * 0.42)}">${esc(isle.caption)}</text>`,
+      // The island's line is pushed only when there is one, so a scene without it writes the
+      // same bytes as before the island existed (released dated prints are pinned by hash).
+      ...(isle?.caption === undefined ? [] : [`<text x="${f(tx)}" y="${f(ty + capSize * 1.05)}" font-size="${f(capSize * 0.42)}">${esc(isle.caption)}</text>`]),
       `</g>`,
     )
   }
