@@ -50,7 +50,7 @@
      "title": "Sluice gates",
      "text": "A 6-ft gate at the head of each penstock, worked by a hydraulic cylinder.",
      "iso": {
-      "part": "history:ph-x-gate-cyl-1",
+      "part": "history:ph-x-gate-2",
       "badge": [
        -60,
        -160
@@ -86,7 +86,7 @@
     {
      "n": 4,
      "title": "Three turbine wheels",
-     "text": "Partial outward-flow wheels of the Fourneyron type, all iron, 23 ft across.",
+     "text": "Partial outward-flow wheels of the Fourneyron type, all iron, about 23 ft across.",
      "iso": {
       "part": "history:ph-c-wheel-1-rim",
       "badge": [
@@ -108,6 +108,7 @@
      "n": 5,
      "title": "Diffuser",
      "text": "A cast-iron diffuser under each wheel eased the spent water into the tailrace.",
+     "confidence": "drawn",
      "cross": {
       "part": "history:ph-c-diffuser-1",
       "badge": [
@@ -122,8 +123,8 @@
      "text": "Vaulted tunnels under the south walkway to the canal below the locks.",
      "iso": {
       "part": "history:ph-x-tailrace-vault-1",
-      "dx": -0.3,
-      "dy": 0.45,
+      "dx": 0.27,
+      "dy": 0.46,
       "badge": [
        -80,
        150
@@ -208,6 +209,7 @@
      "n": 10,
      "title": "Air vessels",
      "text": "One over each pump’s discharge, to steady the flow in the main.",
+     "confidence": "drawn",
      "pump": {
       "part": "history:ph-c-airvessel-1-1",
       "dy": -0.3,
@@ -220,7 +222,7 @@
     {
      "n": 11,
      "title": "Up to the reservoir",
-     "text": "A 30-in main under the forebay and 3,600 ft up to the New Reservoir, 175 ft higher: 12 million gallons a day.",
+     "text": "A 30-in main under the forebay and 3,600 ft up to the New Reservoir, at a 175-ft head: 12 million gallons a day.",
      "iso": {
       "part": "history:ph-c-main",
       "dx": 0.3,
@@ -345,7 +347,7 @@
   "why": [
    "In 1876 Richmond filled its New Reservoir on a plateau two-thirds of a mile from the river. By 1880 the city drew 5.85 million gallons a day and needed more pumps.",
    "City engineer Wilfred Cutshaw put this pump house on the canal opposite the reservoir, where the canal’s 20-ft fall could work the pumps with water power.",
-   "The pumps lifted canal water 175 ft through a 30-in main to the reservoir. From there it ran down to the city by gravity, through a 30-in main 7,100 ft long.",
+   "The pumps forced canal water through a 30-in main to the reservoir, against a head of 175 ft. From there it ran down to the city by gravity, through a 30-in main 7,100 ft long.",
    "The water that turned the wheels went on down the canal to the mills and works downtown."
   ],
   "whySource": "C. E. Bolling, AWWA Proceedings, 1900; The American Engineer, 1884.",
@@ -522,7 +524,7 @@
      -77.48,
      37.54
     ],
-    "text": "30-in main,\n3,600 ft, 175 ft up",
+    "text": "30-in main,\n3,600 ft, 175-ft head",
     "size": 0.81
    },
    {

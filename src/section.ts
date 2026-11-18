@@ -162,7 +162,8 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
       out.push(`<path fill="none" stroke="${color}" stroke-width="${f(p.routeWidth * 0.9)}" stroke-linejoin="round" d="${path(pts, false)}"/>`)
       for (const [x, y, ux, uy] of every(pts, RIBBON_ARROWS * view.scale)) {
         const s = 0.65 * view.scale
-        out.push(`<path fill="${color}" stroke="${p.sky}" stroke-width="${f(p.wayMarks.arrowEdge)}" d="${path([[x + ux * s, y + uy * s], [x - ux * s * 0.6 - uy * s * 0.75, y - uy * s * 0.6 + ux * s * 0.75], [x - ux * s * 0.6 + uy * s * 0.75, y - uy * s * 0.6 - ux * s * 0.75]])}"/>`)
+        const w = s * RIBBON_ARROW_HALF
+        out.push(`<path fill="${color}" stroke="${p.sky}" stroke-width="${f(p.wayMarks.arrowEdge)}" d="${path([[x + ux * s, y + uy * s], [x - ux * s * 0.6 - uy * w, y - uy * s * 0.6 + ux * w], [x - ux * s * 0.6 + uy * w, y - uy * s * 0.6 - ux * w]])}"/>`)
       }
       if (ends !== undefined) {
         const mid = (minX + maxX) / 2
@@ -209,6 +210,9 @@ type Box = [number, number, number, number]
 export const RIBBON = 1.6
 export const RIBBON_OPACITY = 0.6
 export const RIBBON_ARROWS = 3
+/** An arrowhead's half-width over its length forward of its center: narrow enough (a dart 1.6 long, 0.9 wide)
+ * that it points along the way at any slant; an equilateral head on a penstock's slope read as pointing uphill. */
+export const RIBBON_ARROW_HALF = 0.45
 
 /** Points every `step` along a polyline, each with the direction it runs ([x, y, ux, uy]). */
 const every = (pts: readonly Vec2[], step: number): [number, number, number, number][] => {
