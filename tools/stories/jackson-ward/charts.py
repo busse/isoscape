@@ -888,5 +888,132 @@ def chart_count(data, out):
 CHARTS.update({'sheet-residuals': chart_sheet, 'residuals': chart_residuals, 'count': chart_count})
 
 
+# ---- 3. the three-way view -------------------------------------------------------------------
+
+def chart_threeway(data, out):
+    """Crops of three builds of the region, by the same scene coordinates:
+       <renders>/today.png|svg          node bin/isoscape.js build jackson-ward --year 2026 --png 3400
+       <renders>/today-ground.png|svg   the 1952 build with the history's `ground` removed (a scratch copy)
+       <renders>/rebuilt.png|svg        node bin/isoscape.js build jackson-ward --year 1952 --png 3400"""
+    import re
+    d = out['args'].renders
+    if not d:
+        print('three-way: no --renders folder given; skipped')
+        return
+    panels = [('today', 'Today, 2026: the trench as the lidar measures it'),
+              ('today-ground', '1952 drawn on today\'s ground: the trench runs through a year it did not exist'),
+              ('rebuilt', '1952 on the rebuilt ground: the trench filled by estimate, the lost streets at grade')]
+    crop = (-640, 520, -430, 70)             # scene units (the SVG's): the trench from St. Peter Street to 5th Street
+    fig = plt.figure(figsize=(11, 15.2))
+    for k, (name, title) in enumerate(panels):
+        # Render the SVG cropped to the window by its viewBox, at twice the PNG's scale.
+        svg = open(os.path.join(d, name + '.svg')).read()
+        svg = re.sub(r'viewBox="[^"]+"', f'viewBox="{crop[0]} {crop[2]} {crop[1] - crop[0]} {crop[3] - crop[2]}"', svg, count=1)
+        tmp_svg = os.path.join(out['tmp'], f'three-way-{name}.svg')
+        tmp_png = os.path.join(out['tmp'], f'three-way-{name}.png')
+        open(tmp_svg, 'w').write(svg)
+        subprocess.run(['rsvg-convert', '-w', '2320', tmp_svg, '-o', tmp_png], check=True)
+        im = Image.open(tmp_png).convert('RGB')
+        bg = Image.new('RGB', im.size, tuple(int(v * 255) for v in to_rgb(R['paper'])))
+        ax = fig.add_axes([0.02, 0.665 - k * 0.3, 0.96, 0.262])
+        ax.imshow(np.asarray(Image.open(tmp_png).convert('RGBA')) if False else np.asarray(Image.alpha_composite(bg.convert('RGBA'), Image.open(tmp_png).convert('RGBA')).convert('RGB')))
+        ax.set_xticks([]); ax.set_yticks([])
+        for sp in ax.spines.values():
+            sp.set_visible(True); sp.set_color(R['ink']); sp.set_linewidth(0.9)
+        ax.set_title(title, fontsize=11.5, pad=6)
+    fig.suptitle('The same blocks three ways', x=0.02, ha='left', fontsize=13.5, fontweight=600, y=0.975)
+    footer(fig, 'Crops of three builds of the Jackson Ward view, drawn by Chris Busse with isoscape; the middle one is a check made for this chart only. '
+                'The ground in the bottom view is an estimate, about ±1.5 m mid-trench. Lidar: USGS 3DEP; streets and today\'s buildings: OpenStreetMap; '
+                '1952 buildings: Sanborn, Library of Congress.')
+    save(fig, out, 'three-way')
+
+
+CHARTS.update({'three-way': chart_threeway})
+
+
+# ---- the study area of the cap, over today's ward ----------------------------------------------
+
+# Reconnect Jackson Ward Feasibility Study (OIPI, VDOT, City of Richmond; September 2022),
+# section 3.2.4 and Table 6: the structural assessment areas, each named by the cross streets
+# that bound it, and section 3.3: Areas B, C, D and E "were considered to be technically feasible".
+STUDY_AREAS = [
+    ('A', 'North Belvidere Street', 'Chamberlayne Parkway', False, 'not feasible: no room for piers\nbeside the planned interchange'),
+    ('B', 'Chamberlayne Parkway', 'Saint Paul Street', True, ''),
+    ('C', 'Saint Paul Street', 'Saint John Street', True, ''),
+    ('D', 'Saint John Street', 'Saint James Street', True, ''),
+    ('E', 'Saint James Street', 'North 1st Street', True, ''),
+    ('F', 'North 1st Street', 'North 2nd Street', False, 'not feasible: too little clearance\nover the I-64 ramp'),
+]
+LANDMARKS = [   # a point inside each building, from the 1952 trace's named buildings (named.csv)
+    ('Sixth Mount Zion Baptist', -77.4382508, 37.550512),
+    ('Ebenezer Baptist', -77.4420336, 37.5505201),
+    ('Leigh Street Armory', -77.4413725, 37.5500545),
+    ('Hippodrome', -77.438113, 37.5472903),
+]
+
+
+def chart_study(data, out):
+    from shapely.geometry import LineString, Point, Polygon as SPoly
+    from shapely.ops import substring
+    from matplotlib.collections import PolyCollection
+    pts = centerline(data)
+    head = pts[0] + (pts[0] - pts[1]) / np.linalg.norm(pts[0] - pts[1]) * 900
+    cl = LineString(np.vstack([head, pts]))
+
+    def station(name):
+        P = [p for s in data.d['streets'] if s['name'] == name and s['kind'] not in ('footway', 'service') for p in s['pts']]
+        near = [cl.project(Point(p)) for p in P if cl.distance(Point(p)) < 120]
+        return float(np.mean(near))
+    bounds = (-1250, 520, -330, 1000)
+    fig = plt.figure(figsize=(11.2, 9.6))
+    ax = fig.add_axes([0.02, 0.17, 0.96, 0.75])
+    plan_axes(ax, data, bounds)
+    ax.add_collection(PolyCollection(data.d['buildings'], facecolors=R['quiet'], edgecolors=R['muted'], linewidths=0.25, zorder=2))
+    draw_streets(ax, data, lw=0.5)
+    draw_highway(ax, data, color=R['ink'], lw=0.9)
+    for k, (letter, a, b, ok, why) in enumerate(STUDY_AREAS):
+        s0, s1 = station(a), station(b)
+        band = substring(cl, s0, s1).buffer(48, cap_style=2)
+        ring = np.array(band.exterior.coords)
+        ax.fill(ring[:, 0], ring[:, 1], color=R['pick'] if ok else R['paper'], alpha=0.55 if ok else 0.85, zorder=4, lw=0)
+        ax.plot(ring[:, 0], ring[:, 1], color=R['line'] if ok else R['ink'], lw=1.3, ls='-' if ok else (0, (4, 2.5)), zorder=5)
+        m = substring(cl, (s0 + s1) / 2, (s0 + s1) / 2 + 1).coords[0]
+        ax.text(m[0], m[1], letter, ha='center', va='center', fontsize=13, fontweight=700, color=R['ink'], zorder=7)
+        if why:
+            off = (-330, -60) if letter == 'A' else (230, -150)
+            ax.annotate(why, xy=m, xytext=(m[0] + off[0], m[1] + off[1]), fontsize=8.5, ha='center', zorder=8,
+                        arrowprops=dict(arrowstyle='-', color=R['ink'], lw=0.7),
+                        bbox=dict(boxstyle='round,pad=0.25', fc=R['paper'], ec='none', alpha=0.92))
+    for name, short in [('North Belvidere Street', 'Belvidere'), ('Chamberlayne Parkway', 'Chamberlayne'), ('Saint Paul Street', 'St. Paul'),
+                        ('Saint John Street', 'St. John'), ('Saint James Street', 'St. James'), ('North 1st Street', '1st'), ('North 2nd Street', '2nd')]:
+        p = substring(cl, station(name), station(name) + 1).coords[0]
+        label(ax, p[0] + 62, p[1] + 66, short, size=8.5, color=R['ink'], weight=600)
+    for name, lon, lat in LANDMARKS:
+        x, y = to_view(data, lon, lat)
+        ax.scatter([x], [y], s=34, color=R['ink'], zorder=8)
+        label(ax, x - 14, y - 28, name, size=8.5, ha='right')
+    gx, gy = to_view(data, -77.4391444, 37.5531215)   # the mean of the Gilpin Court blocks the 1952 sheets name
+    label(ax, gx, gy, 'Gilpin Court', size=10, color=R['ink'], weight=600)
+    label(ax, 250, -250, 'toward Broad Street', size=8.5, color=R['muted'])
+    scale_bar(ax, bounds[0] + 40, bounds[2] + 40, 200)
+    north_arrow(ax, data, bounds[0] + 60, bounds[2] + 120, 50)
+    fig.suptitle('Where a cap was studied: the 2022 feasibility study\'s six areas over the highway', x=0.02, ha='left', fontsize=13, fontweight=600, y=0.975)
+    fig.text(0.02, 0.935, 'Each area is drawn between the two cross streets the study names for it; the band\'s width (about 100 m) is ours, not the study\'s. Approximate.',
+             fontsize=9.5, color=R['ink'])
+    from matplotlib.patches import Patch
+    h = [Patch(fc=R['pick'], alpha=0.55, ec=R['line'], label='found technically feasible (Areas B–E)'),
+         Patch(fc=R['paper'], ec=R['ink'], ls='--', label='found not feasible (A, F)')]
+    fig.legend(handles=h, loc='lower left', ncol=2, bbox_to_anchor=(0.02, 0.095), fontsize=9.5)
+    fig.text(0.02, 0.085, 'The study area for its data reached wider, to Lombardy Street, School Street and Valley Road, 7th Street and Broad Street. '
+             'The study proposed no single design;\nit tested whether a bridge or lid could stand here. This chart takes no position on whether one should.',
+             fontsize=9, va='top')
+    footer(fig, 'Source: Reconnect Jackson Ward Feasibility Study, Sept. 2022 (sections 1.1, 3.2.4, 3.3). Today\'s streets and buildings: OpenStreetMap (ODbL). '
+                'Landmarks placed from the 1952 Sanborn trace.')
+    save(fig, out, 'study-area')
+
+
+CHARTS.update({'study-area': chart_study})
+
+
 if __name__ == '__main__':
     main()
