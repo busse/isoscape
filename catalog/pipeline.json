@@ -2868,7 +2868,7 @@
    "orders": null,
    "rounds": 3,
    "waiting_on": "owner",
-   "decision": "d3 is a variant (cutaways/pump-house-1885-pumped.json: the water pumped traced beside the water that drives, a section through a pump in place of the long section); d2 stands as cutaways/pump-house-1885.json (tag pump-house-cutaway-1.0.0-d2). Choose, or approve one for final draft",
+   "decision": "d3 is a variant (cutaways/pump-house-1885-pumped.json: the water pumped traced beside the water that drives, a section through a pump in place of the long section); d2 stands unchanged as cutaways/pump-house-1885.json (commit 619193e). Choose, or approve one for final draft",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
