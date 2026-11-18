@@ -439,5 +439,32 @@
   "m_per_px": 0.1535,
   "block_inliers": 0.1,
   "block_points": 2214
+ },
+ "312": {
+  "params": [
+   -8057.164857317305,
+   10312.895407066046,
+   0.9082616690476396,
+   6.82025172764598
+  ],
+  "refined": false,
+  "corners": [
+   "4th & Hospital",
+   "5th & Hospital",
+   "7th & Hospital"
+  ],
+  "resid_m": [
+   3.3,
+   4.7,
+   1.5
+  ],
+  "resid_corners_only": [
+   3.3,
+   4.7,
+   1.5
+  ],
+  "m_per_px": 0.1466,
+  "block_inliers": 0.11,
+  "block_points": 1929
  }
 }
