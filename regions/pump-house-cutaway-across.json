@@ -1,0 +1,117 @@
+{
+  "title": "The New Pump-House, about 1885: cut across through a wheel (rough draft, second camera)",
+  "data": "richmond-i195-rocketts",
+  "center": [
+    -77.4859486,
+    37.5365665
+  ],
+  "width": 85,
+  "depth": 70,
+  "bearing": 330.0,
+  "snap": false,
+  "scale": 10,
+  "squash": 0.55,
+  "exaggeration": 1.0,
+  "slab": 0,
+  "palette": "paper",
+  "minBuildingArea": 12,
+  "dots": "none",
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 2,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 1,
+    "shade": 0
+  },
+  "time": {
+    "history": "history/pump-house.json"
+  },
+  "cutaway": {
+    "through": [
+      -77.48602307,
+      37.53651707
+    ],
+    "bearing": 29.7,
+    "remove": "right",
+    "floor": 28.06,
+    "keep": 1.5,
+    "parts": "ph-",
+    "travelers": [
+      {
+        "at": [
+          -77.48599774,
+          37.53662006
+        ],
+        "floor": 34.77,
+        "facing": 1
+      },
+      {
+        "at": [
+          -77.48604,
+          37.53662
+        ],
+        "floor": 34.77,
+        "facing": -1
+      },
+      {
+        "at": [
+          -77.48605,
+          37.53656
+        ],
+        "floor": 28.06,
+        "facing": 1
+      }
+    ],
+    "section": {
+      "from": -22,
+      "to": 42,
+      "beyond": 30,
+      "other": 3,
+      "scale": 10,
+      "earth": 4,
+      "route": [
+        [
+          34,
+          30.7
+        ],
+        [
+          22.1,
+          30.7
+        ],
+        [
+          22.1,
+          29.0
+        ],
+        [
+          8.5,
+          29.0
+        ],
+        [
+          8.5,
+          24.6
+        ],
+        [
+          -9,
+          24.6
+        ],
+        [
+          -16,
+          24.5
+        ]
+      ],
+      "travelers": [
+        {
+          "s": 6,
+          "floor": 34.77,
+          "facing": 1
+        },
+        {
+          "s": 11,
+          "floor": 34.77,
+          "facing": -1
+        }
+      ]
+    }
+  }
+}

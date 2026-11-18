@@ -127,7 +127,18 @@ for side, (a0, a1) in (('w', (0.0, WING)), ('e', (L - WING, L))):
     note = (SHELL + ' Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the '
             f'{"gentlemen" if side == "w" else "ladies"}\'s powder room and offices, and a stair at the south corner (NRHP 2002). '
             'The wing roof\'s height is scaled from HAER VA-34-1 (approximate).')
-    part(f'ph-w-{side}-walls', name, rect(a0, a1, 0, D), FOOT, EAVE, 'stone', 'written', note, [NRHP, HAER, OSM])
+    # Walls (hollow, so a cut through a wing reads as a plan), the machine room floor and the upper floor.
+    for wid, rg in (('s', rect(a0, a1, 0, T)), ('n', rect(a0, a1, D - T, D)), ('end', rect(a0, a0 + T, T, D - T) if side == 'w' else rect(a1 - T, a1, T, D - T))):
+        part(f'ph-w-{side}-wall-{wid}', name, rg, FOOT, EAVE, 'stone', 'written', note, [NRHP, HAER, OSM])
+    inner = (a0 + T, a1) if side == 'w' else (a0, a1 - T)
+    part(f'ph-w-{side}-floor1', name, rect(inner[0], inner[1], T, D - T), FLOOR - 0.25, FLOOR, 'floor', 'approximate', note, [NRHP, STUDY])
+    part(f'ph-w-{side}-floor2', name, rect(inner[0], inner[1], T, D - T), PAV - 0.3, PAV, 'floor', 'approximate',
+         'The wing\'s upper floor, level with the pavilion: powder room and offices, with lancet windows opening onto the pavilion (NRHP 2002).', [NRHP, STUDY])
+    part(f'ph-w-{side}-stair', name, rect(inner[0] + 0.3, inner[0] + 1.5, T + 0.2, T + 6.0) if side == 'w' else rect(inner[1] - 1.5, inner[1] - 0.3, T + 0.2, T + 6.0),
+         FLOOR, PAV, 'wood', 'written', 'Stairs at the southern corners of the machine room, with a landing halfway up to the viewing catwalk, then on to the pavilion (NRHP 2002). Form approximate.',
+         [NRHP], shape='stair', steps=20)
+    # Its inner wall toward the central block, above the pavilion floor (lancet windows onto the pavilion: NRHP 2002).
+    part(f'ph-w-{side}-wall-in', name, rect(a1 - T, a1, T, D - T) if side == 'w' else rect(a0, a0 + T, T, D - T), PAV, EAVE, 'plaster', 'written', note, [NRHP])
     # The cross-gable: its eaves on the wing's east and west walls (the ring's first and third edges).
     part(f'ph-w-{side}-roof', name, [lonlat(a1 + 0.3, -0.3), lonlat(a1 + 0.3, D + 0.3), lonlat(a0 - 0.3, D + 0.3), lonlat(a0 - 0.3, -0.3)],
          EAVE, WING_RIDGE, 'roof', 'approximate', note, [NRHP, HAER], shape='gable')
@@ -272,10 +283,10 @@ part('ph-c-roof', f'{PH}: roof', [lonlat(A0, B0 - 0.4), lonlat(A1, B0 - 0.4), lo
 # ---- water and walks (not cut) ---------------------------------------------------------------
 # Water is clipped to the cutaway's frame (regions/pump-house-cutaway.json), since modeled parts
 # are not cut at the plate's edges.
-REGION = json.loads((ROOT / 'regions' / 'pump-house-cutaway.json').read_text())
+REGIONS = [json.loads((ROOT / 'regions' / n).read_text()) for n in ('pump-house-cutaway.json', 'pump-house-cutaway-b55.json', 'pump-house-cutaway-across.json')]
 
 
-def frame_ab():
+def frame_ab(REGION):
     clon, clat = REGION['center']
     cx, cy = (clon - LON0) * KX, (clat - LAT0) * KY
     n, e = unit(REGION['bearing']), unit(REGION['bearing'] + 90)
@@ -305,31 +316,33 @@ def clip(poly, window):
     return out
 
 
-FRAME = frame_ab()
+FRAMES = [frame_ab(r) for r in REGIONS]
 
 WATER_NOTE = (' The channel\'s banks are today\'s lidar (3DEP); its 1885 level is inferred, not measured.')
 FOREBAY_Q = [[(-90, 8.0), (-20, 17.5), (-20, 33.0), (-90, 22.0)], [(-20, 17.5), (0, 22.0), (0, 37.0), (-20, 33.0)],
              [(0, 22.0), (42, 22.5), (42, 34.5), (30, 36.5), (0, 37.0)]]
 for k, q in enumerate(FOREBAY_Q):
-    q = clip(q, FRAME)
+    for fr in FRAMES:
+        q = clip(q, fr) if len(q) >= 3 else q
     if len(q) < 3:
         continue
     part(f'site-forebay-{k}', 'Pump House Canal (the forebay)', quad(q), FOREBAY - 0.1, FOREBAY, 'water', 'written',
          'Drawn as its surface only. The forebay: the Pump House Canal, turned off above the Three Mile Locks and dammed at the east end of the house; its waterline level with the walkway round the north front (NRHP 2002).'
          + WATER_NOTE, [NRHP, SRC['lidar']])
-part('site-forebay-dam', 'Pump House Canal: the dam', rect(42.0, 44.0, 20.5, 35.0), BED, FOREBAY + 0.6, 'stone', 'approximate',
+part('site-forebay-dam', 'Pump House Canal: the dam', rect(42.0, 44.0, 20.5, 35.0), FOREBAY - 1.5, FOREBAY + 0.6, 'stone', 'approximate',
      'The forebay was dammed off at the far east side of the building (NRHP 2002). Its line and form are approximate; the 1924 hydroelectric station stands on it today.', [NRHP])
 LOWER_Q = [[(-90, -13.5), (-20, -12.5), (-20, -9.5), (-90, -10.0)], [(-20, -12.5), (0, -16.0), (0, -7.5), (-20, -9.5)],
            [(0, -16.0), (20, -24.0), (20, -13.0), (0, -7.5)], [(20, -24.0), (44, -28.5), (44, -13.5), (20, -13.0)],
-           [(44, -30.0), (58, -30.0), (58, 18.0), (44, 18.0)]]
+           [(44, -28.5), (62, -31.0), (62, -13.0), (44, -13.5)]]
 for k, q in enumerate(LOWER_Q):
-    q = clip(q, FRAME)
+    for fr in FRAMES:
+        q = clip(q, fr) if len(q) >= 3 else q
     if len(q) < 3:
         continue
     part(f'site-lower-{k}', 'James River and Kanawha Canal, below the locks', quad(q), TAIL - 0.1, TAIL, 'water', 'written',
          'The canal\'s lower ("Richmond") level, below the Three Mile Locks, where the tailraces ran out and the water went on to the mills downtown (NRHP 2002; Bolling 1900).'
          ' Its 1885 level here is the forebay\'s less the 20-ft fall (approximate).' + WATER_NOTE, [NRHP, SRC['bolling-1900'], SRC['lidar']])
-part('site-walk-north', f'{PH}: north walkway', rect(-2.0, L + 2.0, D, 21.6), FOREBAY - 1.0, FOREBAY + 0.8, 'stone', 'written',
+part('site-walk-north', f'{PH}: north walkway', rect(-2.0, L + 2.0, D, 21.6), FOREBAY + 0.5, FOREBAY + 0.8, 'stone', 'written',
      'The stone walkway round the north front, at the forebay\'s waterline (NRHP 2002; HAER VA-34-1). Width approximate.', [NRHP, HAER])
 
 history = {
@@ -348,6 +361,6 @@ history = {
     'dates': [],
 }
 # Figures for scale (cutaway travelers): a few people on the dance floor, an engineer below.
-print('travelers', [lonlat(a, b) for a, b in ((13.0, 11.0), (18.5, 12.5), (21.0, 10.0), (26.5, 12.0), (19.0, 6.2))])
+print('wheel 2 plane', lonlat(GANGS[1] + 0.8, 0), lonlat(GANGS[1] + 0.8, 8));print('travelers', [lonlat(a, b) for a, b in ((13.0, 11.0), (18.5, 12.5), (21.0, 10.0), (26.5, 12.0), (19.0, 6.2))])
 OUT.write_text(json.dumps(history, indent=1, ensure_ascii=False) + '\n')
 print(f'{OUT.relative_to(ROOT)}: {len(features)} parts; through {lonlat(L / 2, CUT_B)}; center {lonlat(L / 2, D / 2)}')

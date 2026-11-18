@@ -2817,19 +2817,23 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "draw it or not",
+   "decision": "rough draft: worth pursuing to a working draft? (and: year, dancers or empty, locks in frame)",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
-   "branch": null,
-   "worktree": null,
+   "branch": "cutaway-pump-house",
+   "worktree": "/home/claude/wt-pump",
    "links": [
-    "/mnt/user-data/outputs/cutaway/pump-house.md"
+    "/mnt/user-data/outputs/cutaway/pump-house.md",
+    "/mnt/user-data/outputs/cutaway/pump-house/rough/rough.md"
    ],
    "title": "The Byrd Park Pump House: Cutaway",
    "kind": "cutaway",
-   "stage": "research",
-   "notes": "research done: feasibility 3.5 of 5 (pump-house.md)"
+   "stage": "rough draft",
+   "notes": "rough draft 2026-11-18: long cut from the southwest plus a flat section across a wheel; no measured drawings found online (HAER VA-34 has photos only)",
+   "log": [
+    "2026-11-18: research -> rough draft"
+   ]
   },
   "story-jackson-ward": {
    "plate": null,

@@ -12,7 +12,7 @@
  ],
  "features": [
   {
-   "id": "ph-w-w-walls",
+   "id": "ph-w-w-wall-s",
    "name": "The New Pump-House: west wing",
    "kind": "landmark",
    "from": 1883,
@@ -25,6 +25,41 @@
     [
      -77.4861136,
      37.53655829
+    ],
+    [
+     -77.48610855,
+     37.53656536
+    ],
+    [
+     -77.48618235,
+     37.53659897
+    ]
+   ],
+   "elevation": 23.6,
+   "upTo": 38.4,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the gentlemen's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://www.openstreetmap.org/way/236152567"
+   ]
+  },
+  {
+   "id": "ph-w-w-wall-n",
+   "name": "The New Pump-House: west wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4861004,
+     37.53671366
+    ],
+    [
+     -77.4860266,
+     37.53668006
     ],
     [
      -77.48602155,
@@ -44,6 +79,177 @@
     "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
     "https://www.loc.gov/item/va1319/",
     "https://www.openstreetmap.org/way/236152567"
+   ]
+  },
+  {
+   "id": "ph-w-w-wall-end",
+   "name": "The New Pump-House: west wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48618235,
+     37.53659897
+    ],
+    [
+     -77.48617349,
+     37.53659494
+    ],
+    [
+     -77.48609155,
+     37.53670963
+    ],
+    [
+     -77.4861004,
+     37.53671366
+    ]
+   ],
+   "elevation": 23.6,
+   "upTo": 38.4,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the gentlemen's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://www.openstreetmap.org/way/236152567"
+   ]
+  },
+  {
+   "id": "ph-w-w-floor1",
+   "name": "The New Pump-House: west wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48617349,
+     37.53659494
+    ],
+    [
+     -77.48610855,
+     37.53656536
+    ],
+    [
+     -77.4860266,
+     37.53668006
+    ],
+    [
+     -77.48609155,
+     37.53670963
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "approximate",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the gentlemen's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-w-w-floor2",
+   "name": "The New Pump-House: west wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48617349,
+     37.53659494
+    ],
+    [
+     -77.48610855,
+     37.53656536
+    ],
+    [
+     -77.4860266,
+     37.53668006
+    ],
+    [
+     -77.48609155,
+     37.53670963
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "approximate",
+   "note": "The wing's upper floor, level with the pavilion: powder room and offices, with lancet windows opening onto the pavilion (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-w-w-stair",
+   "name": "The New Pump-House: west wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48616942,
+     37.53659516
+    ],
+    [
+     -77.48615761,
+     37.53658979
+    ],
+    [
+     -77.48612505,
+     37.53663535
+    ],
+    [
+     -77.48613686,
+     37.53664073
+    ]
+   ],
+   "elevation": 28.06,
+   "upTo": 34.77,
+   "tone": "wood",
+   "confidence": "written",
+   "note": "Stairs at the southern corners of the machine room, with a landing halfway up to the viewing catwalk, then on to the pavilion (NRHP 2002). Form approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ],
+   "shape": "stair",
+   "steps": 20
+  },
+  {
+   "id": "ph-w-w-wall-in",
+   "name": "The New Pump-House: west wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4861174,
+     37.5365694
+    ],
+    [
+     -77.48610855,
+     37.53656536
+    ],
+    [
+     -77.4860266,
+     37.53668006
+    ],
+    [
+     -77.48603546,
+     37.53668409
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 38.4,
+   "tone": "plaster",
+   "confidence": "written",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the gentlemen's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
    ]
   },
   {
@@ -150,7 +356,7 @@
    ]
   },
   {
-   "id": "ph-w-e-walls",
+   "id": "ph-w-e-wall-s",
    "name": "The New Pump-House: east wing",
    "kind": "landmark",
    "from": 1883,
@@ -163,6 +369,41 @@
     [
      -77.48579969,
      37.53641536
+    ],
+    [
+     -77.48579464,
+     37.53642243
+    ],
+    [
+     -77.48586844,
+     37.53645603
+    ]
+   ],
+   "elevation": 23.6,
+   "upTo": 38.4,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the ladies's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://www.openstreetmap.org/way/236152567"
+   ]
+  },
+  {
+   "id": "ph-w-e-wall-n",
+   "name": "The New Pump-House: east wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4857865,
+     37.53657073
+    ],
+    [
+     -77.48571269,
+     37.53653712
     ],
     [
      -77.48570764,
@@ -182,6 +423,177 @@
     "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
     "https://www.loc.gov/item/va1319/",
     "https://www.openstreetmap.org/way/236152567"
+   ]
+  },
+  {
+   "id": "ph-w-e-wall-end",
+   "name": "The New Pump-House: east wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.4858035,
+     37.53642646
+    ],
+    [
+     -77.48579464,
+     37.53642243
+    ],
+    [
+     -77.48571269,
+     37.53653712
+    ],
+    [
+     -77.48572155,
+     37.53654115
+    ]
+   ],
+   "elevation": 23.6,
+   "upTo": 38.4,
+   "tone": "stone",
+   "confidence": "written",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the ladies's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://www.loc.gov/item/va1319/",
+    "https://www.openstreetmap.org/way/236152567"
+   ]
+  },
+  {
+   "id": "ph-w-e-floor1",
+   "name": "The New Pump-House: east wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48586844,
+     37.53645603
+    ],
+    [
+     -77.4858035,
+     37.53642646
+    ],
+    [
+     -77.48572155,
+     37.53654115
+    ],
+    [
+     -77.4857865,
+     37.53657073
+    ]
+   ],
+   "elevation": 27.81,
+   "upTo": 28.06,
+   "tone": "floor",
+   "confidence": "approximate",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the ladies's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-w-e-floor2",
+   "name": "The New Pump-House: east wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48586844,
+     37.53645603
+    ],
+    [
+     -77.4858035,
+     37.53642646
+    ],
+    [
+     -77.48572155,
+     37.53654115
+    ],
+    [
+     -77.4857865,
+     37.53657073
+    ]
+   ],
+   "elevation": 34.47,
+   "upTo": 34.77,
+   "tone": "floor",
+   "confidence": "approximate",
+   "note": "The wing's upper floor, level with the pavilion: powder room and offices, with lancet windows opening onto the pavilion (NRHP 2002).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
+    "https://issuu.com/3north/docs/php_pump_house_park_schematic_desig"
+   ]
+  },
+  {
+   "id": "ph-w-e-stair",
+   "name": "The New Pump-House: east wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48581713,
+     37.53643475
+    ],
+    [
+     -77.48580533,
+     37.53642938
+    ],
+    [
+     -77.48577277,
+     37.53647494
+    ],
+    [
+     -77.48578458,
+     37.53648031
+    ]
+   ],
+   "elevation": 28.06,
+   "upTo": 34.77,
+   "tone": "wood",
+   "confidence": "written",
+   "note": "Stairs at the southern corners of the machine room, with a landing halfway up to the viewing catwalk, then on to the pavilion (NRHP 2002). Form approximate.",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
+   ],
+   "shape": "stair",
+   "steps": 20
+  },
+  {
+   "id": "ph-w-e-wall-in",
+   "name": "The New Pump-House: east wing",
+   "kind": "landmark",
+   "from": 1883,
+   "to": 1899,
+   "ring": [
+    [
+     -77.48586844,
+     37.53645603
+    ],
+    [
+     -77.48585959,
+     37.536452
+    ],
+    [
+     -77.48577764,
+     37.53656669
+    ],
+    [
+     -77.4857865,
+     37.53657073
+    ]
+   ],
+   "elevation": 34.77,
+   "upTo": 38.4,
+   "tone": "plaster",
+   "confidence": "written",
+   "note": "Random-ashlar granite from the site and James Netherwood's quarries, built 1881-83 by Col. Wilfred Emory Cutshaw, city engineer (NRHP 2002). Outline from OpenStreetMap; wall thickness approximate. Each end is a cross-gabled wing with lancet windows, a steep slate roof and pinnacled gables; the upper floor held the ladies's powder room and offices, and a stair at the south corner (NRHP 2002). The wing roof's height is scaled from HAER VA-34-1 (approximate).",
+   "sources": [
+    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf"
    ]
   },
   {
@@ -7298,36 +7710,6 @@
    "only": "whole"
   },
   {
-   "id": "site-forebay-0",
-   "name": "Pump House Canal (the forebay)",
-   "kind": "landmark",
-   "from": 1883,
-   "to": 1899,
-   "ring": [
-    [
-     -77.48631165,
-     37.53682726
-    ],
-    [
-     -77.48628598,
-     37.53681899
-    ],
-    [
-     -77.48625908,
-     37.53685664
-    ]
-   ],
-   "elevation": 30.6,
-   "upTo": 30.7,
-   "tone": "water",
-   "confidence": "written",
-   "note": "Drawn as its surface only. The forebay: the Pump House Canal, turned off above the Three Mile Locks and dammed at the east end of the house; its waterline level with the walkway round the north front (NRHP 2002). The channel's banks are today's lidar (3DEP); its 1885 level is inferred, not measured.",
-   "sources": [
-    "https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-0193_New_Pump_House_2002_Final_Nomination.pdf",
-    "https://www.usgs.gov/3d-elevation-program"
-   ]
-  },
-  {
    "id": "site-forebay-1",
    "name": "Pump House Canal (the forebay)",
    "kind": "landmark",
@@ -7335,8 +7717,8 @@
    "to": 1899,
    "ring": [
     [
-     -77.48628598,
-     37.53681899
+     -77.48621833,
+     37.53680246
     ],
     [
      -77.48606392,
@@ -7347,12 +7729,8 @@
      37.53688256
     ],
     [
-     -77.4861377,
-     37.53692449
-    ],
-    [
-     -77.48625908,
-     37.53685664
+     -77.48602085,
+     37.53689347
     ]
    ],
    "elevation": 30.6,
@@ -7427,7 +7805,7 @@
      37.53667865
     ]
    ],
-   "elevation": 21.4,
+   "elevation": 29.2,
    "upTo": 31.3,
    "tone": "stone",
    "confidence": "approximate",
@@ -7553,8 +7931,12 @@
      37.53631375
     ],
     [
-     -77.48591439,
-     37.53617086
+     -77.48595931,
+     37.53620129
+    ],
+    [
+     -77.48585992,
+     37.5362471
     ],
     [
      -77.4858302,
@@ -7584,24 +7966,16 @@
    "to": 1899,
    "ring": [
     [
-     -77.48592281,
-     37.53615908
+     -77.48579876,
+     37.53627529
     ],
     [
-     -77.48588155,
-     37.53614029
+     -77.4858302,
+     37.53628869
     ],
     [
-     -77.4856686,
-     37.53625932
-    ],
-    [
-     -77.48551563,
-     37.53647342
-    ],
-    [
-     -77.4856534,
-     37.53653615
+     -77.48585992,
+     37.5362471
     ]
    ],
    "elevation": 24.504,
@@ -7639,7 +8013,7 @@
      37.53677054
     ]
    ],
-   "elevation": 29.7,
+   "elevation": 31.2,
    "upTo": 31.5,
    "tone": "stone",
    "confidence": "written",
