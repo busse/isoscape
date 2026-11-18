@@ -197,7 +197,7 @@ def group_name(g):
 def show(b, md=False):
     items = b['items']
     out = []
-    h = (lambda t, n=2: out.append('#' * n + ' ' + t)) if md else (lambda t, n=2: out.append(t.upper() if n == 2 else t))
+    h = (lambda t, n=2: out.extend(['#' * n + ' ' + t, ''])) if md else (lambda t, n=2: out.append(t.upper() if n == 2 else t))
     h('Production board', 1)
     out.append(f"{len(items)} entries, updated {b.get('updated')}. The scheme: README \"Stages and the board\".")
     counts = {}
