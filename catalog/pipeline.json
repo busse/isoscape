@@ -2902,24 +2902,25 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "agent",
-   "decision": "first story; rough drafts done on branches jw-ground (ground before the cut) and jw-trace (1952 Sanborn, 15 sheets, 3,157 outlines); next: integrate, outline for the owner; shows its work; community reviewers at working draft",
+   "waiting_on": "owner",
+   "decision": "fact check done (143 claims, 44 changes); page round 1 from the owner's review done (headline, numbered figures, link fix, lightbox, route section as prose; branch at e18d02f and after). Waiting on the owner's local review (ISO-TEST/_preview/jackson-ward/), the headline choice and two small decisions; then he shares it with his community reviewers. Not merged, not published.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
-   "branch": null,
+   "branch": "story-jackson-ward",
    "worktree": null,
    "links": [
     "/mnt/user-data/outputs/stories/jackson-ward/brief.md"
    ],
    "title": "Jackson Ward and the interstate",
    "kind": "story",
-   "stage": "outline",
+   "stage": "fact check",
    "notes": "editorial first: a web story, perhaps a book; prints are not the goal",
    "private": true,
    "log": [
     "2026-11-18: research -> rough draft",
-    "2026-11-18: rough draft -> outline"
+    "2026-11-18: rough draft -> outline",
+    "2026-11-18: outline -> fact check"
    ]
   },
   "story-redlining": {
