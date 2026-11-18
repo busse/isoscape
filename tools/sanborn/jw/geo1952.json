@@ -276,5 +276,38 @@
   ],
   "how": "one corner and the scale bar, rotation and shift searched (0.5 deg, 3 m steps) against the outlines of the Gilpin Court buildings that stand today (OSM): they fall on their 1952 outlines (rotsearch.py)",
   "m_per_px": 0.1524
+ },
+ "320": {
+  "params": [
+   -9944.551914039148,
+   9277.98368102632,
+   1.2359368541240965,
+   6.4402222965635625
+  ],
+  "refined": false,
+  "corners": [
+   "St James & Federal (pipes)",
+   "Charity & 1st (pipes)",
+   "Federal & 2nd (pipes)",
+   "Hill & 1st (pipes)",
+   "Charity & 2nd (pipes)"
+  ],
+  "resid_m": [
+   4.8,
+   1.1,
+   3.0,
+   4.4,
+   3.2
+  ],
+  "resid_corners_only": [
+   4.8,
+   1.1,
+   3.0,
+   4.4,
+   3.2
+  ],
+  "m_per_px": 0.1553,
+  "block_inliers": 0.13,
+  "block_points": 4492
  }
 }

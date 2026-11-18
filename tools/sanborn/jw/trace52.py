@@ -7,7 +7,8 @@ anything dark), thickened by 1 px, and the paper between them split into closed 
 is a building part when:
   - most of it is colored (pink brick, yellow frame, blue, gray, green, olive): material by vote; or
   - it is uncolored and holds a glyph-sized printed mark inside it (the story number, the use
-    letter "D", the roof circle), and is not a yard or a lot strip: area 6-350 m2 (a larger outline
+    letter "D", the roof circle; under 120 m2 an open mark, the F of a flat or a story number, is
+    enough), and is not a yard or a lot strip: area 6-350 m2 (a larger outline
     on these sheets is a yard; none of the plain outlines checked by eye was a building that big), it
     fills at least half its rotated bounding box, and it is not more than 5 times longer than
     wide. Yards that hold a printed dimension or a block number pass this test too: looking at
@@ -68,8 +69,9 @@ def regions(im, close_angles=()):
     return n, lab, st, ink
 
 def glyph_boxes(ink):
-    """Printed marks the size of a letter or the roof circle that close around a counter: ink
-    pieces standing alone, 5-19 px across (the 50% scan), 25-300 px of ink, with a hole. Dashes are
+    """Printed marks the size of a letter or the roof circle: ink
+    pieces standing alone, 5-19 px across (the 50% scan), 25-300 px of ink; those closing around a
+    counter (D, A, the roof circle) count 1, open ones at least 7 x 9 px (F, 2, S) count a half. Dashes are
     thinner than 5 px; block numbers ('65N') are taller than 19."""
     n, lab, st, _ = cv2.connectedComponentsWithStats(ink, connectivity=8)
     k = (st[:, 4] >= 25) & (st[:, 4] <= 300) & (np.minimum(st[:, 2], st[:, 3]) >= 5) & (st[:, 2] <= 19) & (st[:, 3] <= 19)
@@ -81,21 +83,23 @@ def glyph_boxes(ink):
         # (a printed dimension, 15' or 25', mostly does not)
         sub = (lab[y:y + h, x:x + w] == i).astype(np.uint8)
         cs, hier = cv2.findContours(np.pad(sub, 1), cv2.RETR_CCOMP, cv2.CHAIN_APPROX_NONE)
-        if hier is not None and any(hh[3] >= 0 and cv2.contourArea(c) >= 2 for c, hh in zip(cs, hier[0])):
-            out.append((x, y, w, h))
-    return np.array(out).reshape(-1, 4)
+        closed = hier is not None and any(hh[3] >= 0 and cv2.contourArea(c) >= 2 for c, hh in zip(cs, hier[0]))
+        if closed or (w >= 7 and h >= 9):
+            out.append((x, y, w, h, int(closed)))
+    return np.array(out).reshape(-1, 5)
 
 def count_glyphs(lab, boxes):
     """Each mark is given to the region that holds three quarters of the paper around it."""
     out = {}
     H, W = lab.shape
-    for x, y, w, h in boxes:
+    for x, y, w, h, closed in boxes:
         x0, y0, x1, y1 = max(0, x - 2), max(0, y - 2), min(W, x + w + 2), min(H, y + h + 2)
         v = lab[y0:y1, x0:x1].ravel(); v = v[v > 0]
         if v.size:
             bc = np.bincount(v); r = int(bc.argmax())
             if bc[r] >= 0.75 * v.size:  # a mark on a line between two regions (an address, a width) is no one's
-                out[r] = out.get(r, 0) + 1
+                # a closed mark counts whole; an open one (the F of a flat, the story number 2) half
+                out[r] = out.get(r, 0) + (1 if closed else 0.5)
     return out
 
 def grid_angles(im):
@@ -192,7 +196,7 @@ def collect(pass_, n, lab, st, cls, m2, W, H, drop, adds, gcount):
             if mat == 'stone' and am > 1500:
                 continue  # water
             kind = 'colored'
-        elif (pass_ == 2 and i in added) or ( (glyphs >= 1 and 6 <= am <= 350 and fill >= 0.5 and elong <= 5 and colored < 0.2)):
+        elif (pass_ == 2 and i in added) or ( ((glyphs >= 1 or (glyphs >= 0.5 and am <= 120)) and 6 <= am <= 350 and fill >= 0.5 and elong <= 5 and colored < 0.2)):
             mat, kind = 'frame', 'uncolored'
         else:
             continue
