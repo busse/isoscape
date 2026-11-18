@@ -613,6 +613,7 @@ fourteen places they ran to.
      "subtitle": "Highland Park line, over the Fifth Street viaduct",   // or "line"
      "at": [-77.42, 37.5765],      // lon, lat the box is centered on
      "year": 1925,                 // optional: draw this box from another year of the series
+     "map_at": [-77.42, 37.577],   // optional: its place on the big map, if not `at` (the leader ends here)
      "ground": 1800,               // optional: meters across (menu 1,800, single print 2,100)
      "note": "About 50 words, written from the sources…",
      "sources": ["https://…", "https://…"] }
