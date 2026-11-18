@@ -291,14 +291,15 @@ def build(part, rect, ring, plane, SRC, L):
     # Its stages are measured in round 4 on HABS photographs VA-848-10, -11 and -12 (1971) against
     # the 102-ft front (main_street.py, levels): a plain shaft to a corbelled balcony, a clock stage
     # with coupled columns at its corners, an entablature, a low drum and a ribbed dome about half
-    # the clock stage's height, and the finial. The Railroad Gazette (1900) gave the tower as
-    # designed as 110 ft high; the tower as built and photographed is taller, its finial about
-    # 148 ft over Main Street, and Sanborn's "Clock Tower 90'" (1905, 1952) fits its shaft.
+    # the clock stage's height, and the finial. The Railroad Gazette (1900), before construction,
+    # gave the tower as 110 ft high, beside a perspective whose tower differs from the one built;
+    # as photographed its finial is about 148 ft over Main Street, and Sanborn's "Clock Tower 90'"
+    # (1905, 1952) fits its shaft, about 90 ft over the ground floor.
     TW = ('The clock tower at the southwest corner, with a clock face on each side (The Railroad Gazette, 1900; HABS VA-848). Its outline is '
           'OSM\'s. Its stages are measured on HABS photographs VA-848-10, -11 and -12 (1971) against the 102-ft front, approximate to within '
           'about 1.5 m: the shaft to about 90 ft over the ground floor, as the Sanborn atlases (1905, 1952) mark it ("Clock Tower 90\'"), '
-          'the finial about 148 ft over Main Street. The 110 ft given in 1900 was for the tower as then designed, and does not fit the '
-          'photographs.')
+          'the finial about 148 ft over Main Street. The 110 ft in The Railroad Gazette (1900) was written before the station was built, '
+          'beside a perspective whose tower differs from the one built; it does not fit the photographs.')
     TSRC = PLAN + HABS + [SRC['archipedia'], SRC['osm-tower'], SRC['habs-photo-12'], SRC['habs-photo-1971'], SRC['sanborn-1905'], SRC['sanborn-1952']] + PH
     a0, a1, b0, b1 = TOWER
     SHAFT, ZC, R = L['TOWER_SHAFT'], L['CLOCK_Z'], L['CLOCK_R']
@@ -345,8 +346,8 @@ def build(part, rect, ring, plane, SRC, L):
       'The base of the bronze finial on the dome (HABS VA-848). Size approximate.', TSRC, over='mss-h-roof')
     p('tower-finial', 'Main Street Station: clock tower', rect(cx - 0.22, cx + 0.22, cb - 0.22, cb + 0.22), DOME + 0.6, FINIAL, 'iron', 'written',
       'The bronze finial (HABS VA-848), drawn as a plain spire; its tip about 148 ft over Main Street, measured on HABS photographs VA-848-10 '
-      'and -12 against the 102-ft front (approximate, to within about 8 ft). The Railroad Gazette (1900) and SAH Archipedia give 110 ft, '
-      'which fits the tower as designed in 1900, not as photographed. Its form is approximate.', TSRC,
+      'and -12 against the 102-ft front (approximate, to within about 8 ft). The Railroad Gazette (1900, before the station was built) and SAH Archipedia give '
+      '110 ft, which does not fit the photographs. Its form is approximate.', TSRC,
       shape='inset', levels=[[0, 0, 9], [0.8, 0.05, 9], [round(FINIAL - DOME - 0.6, 3), 0.219, 9]], over='mss-h-roof')
     r = R
     disc = []

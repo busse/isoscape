@@ -507,7 +507,11 @@ on screen:
 - Otherwise the nearer center wins.
 
 A topological sort turns these pairwise results into one order. The rare cycle, from concave
-footprints that interlock, is broken by depth.
+footprints that interlock, is broken by depth: the farthest item left is painted next. That item
+may lie in no cycle at all (a tower behind a building whose attic floors and roof form one) and
+then paints before parts it should follow, so a cutaway can ask instead (`cutaway.order:
+"components"`, Main Street Station) for the farthest item that lies in a cycle, found as the
+strongly connected groups of the items left.
 
 Code: `src/order.ts`.
 
@@ -793,6 +797,11 @@ gauge where tracks cross the plane, and a red dashed line follows the traveler f
 to the train. The line runs at waist height, 0.95 m over each floor, with a small arrowhead
 pointing the way on each stretch, and it is broken where it meets a traveler and where it
 would cross a car end seen square on, so it passes behind the car rather than over its face.
+A cutaway may draw the same way through its travelers (`cutaway.route`: points with their
+elevations, at waist height): it is cut into dashes as long, along the line on the screen, as
+the section's, each dash an item in the paint order, so a wall or a floor in front of it hides
+it. Its width and dashes are the section's times a `weight`, the section's scale on the sheet
+over the cutaway's (0.52 for Main Street Station), so the two read alike there.
 
 **Travelers.** A plain standing figure, 1.75 m (5 ft 9 in) tall, in the route's red, gives
 the drawings their scale: head, body, legs in a short stride and a small suitcase
@@ -841,7 +850,14 @@ of HAER VA-4 (sheet 3); a frame longer than 12 m is drawn in pieces of members 6
 it, so a train or a column under it sorts against the piece above it rather than the whole span.
 The hipped roof of the head house is an `inset` shell, each side stepped in by the same distance
 so its four slopes rise alike to the ridge, in courses about 1.4 m apart up the slope, and drawn
-side by side in lengths of about 6 m, so a dormer sorts against the length of roof under it. The
+side by side in lengths of about 6 m, so a dormer sorts against the length of roof under it. Its
+ridge, 41.4 m above sea level, and the tower's stages (the balcony at 35.9 m, the clocks' centers
+at 40.3 m, the dome from 44.8 to 48.7 m, the finial's tip at 51.6 m, about 148 ft over Main
+Street) are measured on HABS photographs VA-848-10 to -12 (1971) against the 102-ft front, to
+within about 1.5 m. The roof's outline takes in the tower's, so a part marked `over` the shell
+(the dormers, and the tower from its balcony up) is in front of every piece of it, apart on the
+ground or not; a piece's box reaches up to the ridge, and beside the tower it would otherwise
+stand in front of the clock stage. The
 loggia's piers are stacked in courses about 0.55 m high, every other one set 3 cm proud, and its
 segmental arches are plates in eight slices along the arc. Parts that stand inside the shell (`within`:
 the offices in the roof) paint before the slopes that face the camera and after those that face
