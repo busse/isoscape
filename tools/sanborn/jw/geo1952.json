@@ -168,5 +168,68 @@
   "block_inliers": 0.07,
   "block_points": 1846,
   "scale_bar_m_per_px_full": 0.0762
+ },
+ "305": {
+  "params": [
+   -3066.8195477990203,
+   15130.089226900196,
+   0.9396204130992073,
+   6.587230433816059
+  ],
+  "refined": true,
+  "corners": [
+   "Leigh & Judah",
+   "Leigh & St Peter",
+   "Leigh & Price",
+   "Leigh & Adams",
+   "Duval & Judah"
+  ],
+  "resid_m": [
+   0.7,
+   3.4,
+   3.8,
+   2.3,
+   1.3
+  ],
+  "resid_corners_only": [
+   0.7,
+   3.4,
+   3.8,
+   2.3,
+   1.3
+  ],
+  "m_per_px": 0.1518,
+  "block_inliers": 0.13,
+  "block_points": 4300
+ },
+ "315": {
+  "params": [
+   -3639.3500654075715,
+   16320.048525359232,
+   0.9126001056752671,
+   6.548250627728083
+  ],
+  "refined": true,
+  "corners": [
+   "Leigh & Judah",
+   "Duval & Judah",
+   "Duval & St Peter",
+   "Leigh & Munford"
+  ],
+  "resid_m": [
+   2.7,
+   2.8,
+   1.3,
+   2.0
+  ],
+  "resid_corners_only": [
+   3.2,
+   2.6,
+   0.8,
+   1.4
+  ],
+  "m_per_px": 0.1527,
+  "block_inliers": 0.16,
+  "block_points": 2878
  }
 }
