@@ -1,0 +1,188 @@
+[
+ {
+  "n": 1,
+  "name": "Furniture storage warehouse; loading shed; furniture repair",
+  "stories": "",
+  "sheet": "306"
+ },
+ {
+  "n": 2,
+  "name": "St. Joseph's R.C. Church (Colored)",
+  "stories": "",
+  "sheet": "308"
+ },
+ {
+  "n": 3,
+  "name": "Sharon Baptist Church (Colored)",
+  "stories": "1-2",
+  "sheet": "306"
+ },
+ {
+  "n": 4,
+  "name": "Undertaker",
+  "stories": "2",
+  "sheet": "307"
+ },
+ {
+  "n": 5,
+  "name": "Auto repair",
+  "stories": "",
+  "sheet": "306"
+ },
+ {
+  "n": 6,
+  "name": "Storage house (vacant)",
+  "stories": "4",
+  "sheet": "308"
+ },
+ {
+  "n": 7,
+  "name": "Colored hall & meeting rooms 2nd & 3rd; club; store",
+  "stories": "3",
+  "sheet": "308"
+ },
+ {
+  "n": 8,
+  "name": "Filling station; auto repair",
+  "stories": "",
+  "sheet": "308"
+ },
+ {
+  "n": 9,
+  "name": "Apartments",
+  "stories": "2",
+  "sheet": "308"
+ },
+ {
+  "n": 10,
+  "name": "Store; hall 2nd",
+  "stories": "2",
+  "sheet": "308"
+ },
+ {
+  "n": 11,
+  "name": "Restaurant; hall 2nd (Colored)",
+  "stories": "3",
+  "sheet": "307"
+ },
+ {
+  "n": 12,
+  "name": "Stores; upholstering & repair; tire repair",
+  "stories": "",
+  "sheet": "306"
+ },
+ {
+  "n": 13,
+  "name": "Hippodrome Theatre (Colored), movies",
+  "stories": "1-2",
+  "sheet": "308"
+ },
+ {
+  "n": 14,
+  "name": "Leigh St. Y.M.C.A. (Colored)",
+  "stories": "3",
+  "sheet": "308"
+ },
+ {
+  "n": 15,
+  "name": "Auto & casket storage",
+  "stories": "2",
+  "sheet": "308"
+ },
+ {
+  "n": 16,
+  "name": "Storage",
+  "stories": "",
+  "sheet": "308"
+ },
+ {
+  "n": 17,
+  "name": "Third St. Bethel A.M.E. Church (Colored)",
+  "stories": "",
+  "sheet": "308"
+ },
+ {
+  "n": 18,
+  "name": "Moving pictures (Colored); restaurant; lobby; store",
+  "stories": "1-2",
+  "sheet": "308"
+ },
+ {
+  "n": 19,
+  "name": "Restaurant",
+  "stories": "2",
+  "sheet": "308"
+ },
+ {
+  "n": 20,
+  "name": "Rest. (restaurant); \"Fl. abv. 1st\"",
+  "stories": "3",
+  "sheet": "308"
+ },
+ {
+  "n": 21,
+  "name": "Stores; hotel entrance; dining room",
+  "stories": "3",
+  "sheet": "308"
+ },
+ {
+  "n": 22,
+  "name": "Restaurant; store",
+  "stories": "",
+  "sheet": "308"
+ },
+ {
+  "n": 23,
+  "name": "Restaurant; hotel",
+  "stories": "2",
+  "sheet": "308"
+ },
+ {
+  "n": 24,
+  "name": "Offices",
+  "stories": "2",
+  "sheet": "308"
+ },
+ {
+  "n": 25,
+  "name": "Stores; office; Southern Aid Society of Va. (Colored), office building; stores; nos. 212-216 E. Clay",
+  "stories": "4",
+  "sheet": "308"
+ },
+ {
+  "n": 26,
+  "name": "Apartments",
+  "stories": "2",
+  "sheet": "308"
+ },
+ {
+  "n": 27,
+  "name": "Offices",
+  "stories": "2",
+  "sheet": "308"
+ },
+ {
+  "n": 28,
+  "name": "Miller & Rhoads furniture warehouse; garage 1st, upholstering 2nd, furniture repair 3rd (\"fireproof construction built 1936\"; \"built 1941\")",
+  "stories": "",
+  "sheet": "309"
+ },
+ {
+  "n": 29,
+  "name": "Elks Home, Williams Lodge (Colored)",
+  "stories": "",
+  "sheet": "309"
+ },
+ {
+  "n": 30,
+  "name": "Miller & Rhoads furniture storage",
+  "stories": "2",
+  "sheet": "309"
+ },
+ {
+  "n": 31,
+  "name": "Leigh St. M.E. Church",
+  "stories": "",
+  "sheet": "309"
+ }
+]
