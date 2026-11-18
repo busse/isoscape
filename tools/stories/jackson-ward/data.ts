@@ -74,8 +74,9 @@ const footprint = Object.fromEntries(foot.features.map((ft) => {
   const polys: number[][][][] = ft.geometry.type === 'Polygon' ? [ft.geometry.coordinates] : ft.geometry.coordinates
   return [ft.properties.name, polys.map((poly) => poly.map((ring) => ring.map(v)))]
 }))
-const traced = JSON.parse(await readFile('history/sanborn/jackson-ward-1952.geojson', 'utf8')) as { features: { properties: { sheet: string; area: number; material: string }; geometry: { coordinates: number[][][] } }[] }
-const tracedOut = traced.features.map((ft) => {
+const traced = JSON.parse(await readFile('history/sanborn/jackson-ward-1952.geojson', 'utf8')) as { features: { properties: { sheet: string; area: number; material: string; coverage?: unknown }; geometry: { coordinates: number[][][] } }[] }
+// The edition file also holds each sheet's coverage outline: not a building (count.py skips it too).
+const tracedOut = traced.features.filter((ft) => !ft.properties.coverage).map((ft) => {
   const ring = ft.geometry.coordinates[0].slice(0, -1).map(v)
   return { sheet: ft.properties.sheet, area: ft.properties.area, material: ft.properties.material, c: centroid(ring), ring }
 })

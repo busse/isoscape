@@ -514,6 +514,7 @@ def main():
     ap.add_argument('--topo', default=None)
     ap.add_argument('--sheet', default=None)
     ap.add_argument('--renders', default=None)
+    ap.add_argument('--streets-check', action='store_true', help='draw today\'s streets over the 1934 sheet, to check its placing')
     a = ap.parse_args()
     data = Data(a.data)
     tmp = os.path.join(ROOT, 'out/stories/jackson-ward/png')
@@ -525,6 +526,366 @@ def main():
 
 
 CHARTS.update({'cut-fill': chart_cut_fill, 'profiles': chart_profiles, 'hillshade': chart_hillshade})
+
+
+# ---- view meters and lon/lat (src/region.ts localMetres, src/view.ts makeView) ---------------
+
+M_PER_DEG_LAT = 110_574
+
+
+def from_view(data, pts):
+    lon0, lat0 = data.d['center']
+    kx = 111_320 * math.cos(math.radians(lat0))
+    b = math.radians(data.bearing)
+    x, y = np.asarray(pts)[..., 0], np.asarray(pts)[..., 1]
+    e = x * math.cos(b) + y * math.sin(b)
+    n = -x * math.sin(b) + y * math.cos(b)
+    return lon0 + e / kx, lat0 + n / M_PER_DEG_LAT
+
+
+def to_view(data, lon, lat):
+    lon0, lat0 = data.d['center']
+    kx = 111_320 * math.cos(math.radians(lat0))
+    b = math.radians(data.bearing)
+    e, n = (np.asarray(lon) - lon0) * kx, (np.asarray(lat) - lat0) * M_PER_DEG_LAT
+    return e * math.cos(b) - n * math.sin(b), e * math.sin(b) + n * math.cos(b)
+
+
+# ---- 5. the 1934 sheet, with the outline and the twelve check points ---------------------------
+
+# View meters (E', N') the sheet is moved after its own projection and datum, found by a search
+# (2 m steps, 40 m reach) for the shift that best puts today's street center lines between the
+# sheet's printed street edges, away from the trench. The ground report's own fit found a shift
+# of similar size (about 15 m). What is left over is the sheet's own error: under the National
+# Map Accuracy Standards, 90% of well-defined points within about 12 m at 1:24,000.
+TOPO_SHIFT = (6.0, 14.0)
+
+
+def topo_on_view(data, path, bounds, res=1.5, shift=TOPO_SHIFT):
+    """The 1934 USGS sheet resampled onto view meters (nearest pixel)."""
+    import pyproj
+    Image.MAX_IMAGE_PIXELS = None
+    im = Image.open(path)
+    tie = im.tag_v2[33922]
+    px = im.tag_v2[33550]
+    arr = np.asarray(im.convert('RGB'))
+    # The sheet's own projection, from its GeoTIFF keys: polyconic about 37.5 N, 77.4375 W, NAD27.
+    crs = pyproj.CRS('+proj=poly +lat_0=37.5 +lon_0=-77.4375 +x_0=0 +y_0=0 +datum=NAD27 +units=m +no_defs')
+    tr = pyproj.Transformer.from_crs('EPSG:4326', crs, always_xy=True)
+    xs = np.arange(bounds[0], bounds[1], res)
+    ys = np.arange(bounds[2], bounds[3], res)
+    X, Y = np.meshgrid(xs, ys)
+    lon, lat = from_view(data, np.stack([X - shift[0], Y - shift[1]], -1))
+    gx, gy = tr.transform(lon, lat)
+    col = np.round((gx - tie[3]) / px[0]).astype(int)
+    row = np.round((tie[4] - gy) / px[1]).astype(int)
+    ok = (col >= 0) & (row >= 0) & (col < arr.shape[1]) & (row < arr.shape[0])
+    out = np.ones(X.shape + (3,), dtype=np.uint8) * 255
+    out[ok] = arr[row[ok], col[ok]]
+    return out, (xs[0], xs[-1] + res, ys[0], ys[-1] + res)
+
+
+GROUND_CHECKS = {   # ground.md, check 2: today (lidar), rebuilt, and the sheet's reading
+    'P1': 'contours curve; levels not read', 'P2': 'one line; level not read', 'P3': 'one line; level not read',
+    'P4': 'no contour: agrees (0.05 m)', 'P5': 'no contour: agrees within 0.8 m', 'P6': 'no contour: agrees',
+    'P7': 'no contour: agrees', 'P8': 'no contour: agrees within 0.8 m', 'P9': 'no contour: agrees',
+    'P10': 'no contour: agrees', 'P11': 'five contours bunched: a ravine head; disagrees', 'P12': 'the valley wall; kept as measured',
+}
+
+
+def chart_topo(data, out):
+    path = out['args'].topo
+    if not path:
+        print('topo: no --topo sheet given; skipped')
+        return
+    bounds = (-780, 860, -560, 600)
+    img, ext = topo_on_view(data, path, bounds)
+    fig = plt.figure(figsize=(11.2, 8.6))
+    ax = fig.add_axes([0.03, 0.12, 0.94, 0.80])
+    plan_axes(ax, data, bounds)
+    ax.imshow(img, origin='lower', extent=ext, zorder=0, interpolation='bilinear')
+    ax.imshow(np.ones(img.shape[:2] + (4,)) * np.array(list(to_rgb(R['paper'])) + [0.25]), origin='lower', extent=ext, zorder=0.5)
+    for r in data.trench['rings']:
+        outline(ax, r, color=R['pick'], lw=1.6, dots=False, z=6)
+    for r in data.junction['rings']:
+        outline(ax, r, color=R['pick'], lw=1.3, dots=False, ls=(0, (4, 2.5)), z=6)
+    if out['args'].streets_check:
+        draw_streets(ax, data, lw=0.8, color=R['fill'])
+    for c in data.d['checks']:
+        x, y = c['p']
+        if not (bounds[0] < x < bounds[1] and bounds[2] < y < bounds[3]):
+            continue
+        kind = CHECKS[c['id']][0]
+        if kind == 'agrees':
+            ax.scatter([x], [y], s=110, facecolor=R['paper'], edgecolor=R['ink'], lw=2, zorder=8)
+        elif kind == 'disagrees':
+            ax.scatter([x], [y], s=110, color=R['ink'], zorder=8)
+        else:
+            ax.scatter([x], [y], s=110, facecolor=R['paper'], edgecolor=R['ink'], lw=1.5, linestyle=(0, (2, 1.5)), zorder=8)
+        ax.add_patch(plt.Circle((x, y), 60, fill=False, ec=R['ink'], lw=0.6, ls=(0, (2, 2)), zorder=7))
+        label(ax, x + 42, y + 42, c['id'], size=9, weight=600)
+    scale_bar(ax, -740, -525, 200)
+    north_arrow(ax, data, -720, -440, 50)
+    ax.set_title('The 1934 survey under the trench\'s outline, and the twelve points checked against it', fontsize=13, pad=8)
+    from matplotlib.lines import Line2D
+    h = [Line2D([], [], color=R['pick'], lw=1.6, label='the trench\'s outline (rebuilt inside)'),
+         Line2D([], [], marker='o', ls='', mfc=R['paper'], mec=R['ink'], mew=2, ms=9, label='the sheet agrees with the rebuilt ground'),
+         Line2D([], [], marker='o', ls='', color=R['ink'], ms=9, label='the sheet disagrees (P11)'),
+         Line2D([], [], marker='o', ls='', mfc=R['paper'], mec=R['ink'], mew=1.2, ms=9, label='level could not be read'),
+         Line2D([], [], color=R['ink'], lw=0.6, ls=(0, (2, 2)), label='60 m around each point, the reach read')]
+    fig.legend(handles=h, loc='lower left', ncol=3, bbox_to_anchor=(0.03, 0.035), fontsize=9)
+    footer(fig, 'USGS Richmond, Va., 1:24,000, surveyed 1933–34 (public domain), placed on today\'s view by its own projection (polyconic, NAD27). '
+                'P1 lies past the top of this frame. Readings from the ground report, check 2.')
+    save(fig, out, '1934-checks')
+
+
+# ---- 6. the hold-out test ----------------------------------------------------------------------
+
+HOLDOUT = [   # ground.md, check 1: the fence moved onto undisturbed ground (m east, m north), RMS, 95%, worst
+    ((-250, -330), 0.69, 1.59, 4.6, ''),
+    ((-150, -450), 0.83, 2.06, 4.5, ''),
+    ((-350, -250), 0.47, 0.90, 3.6, ''),
+    ((0, -500), 1.13, 2.85, 6.0, 'crosses the Leigh Street cut'),
+    ((-450, -150), 0.64, 1.31, 4.7, ''),
+    ((-200, -600), 0.31, 0.66, 1.9, ''),
+    ((200, 250), 1.82, 4.17, 8.3, 'onto the valley edge'),
+]
+
+
+def chart_holdout(data, out):
+    rows = sorted(HOLDOUT, key=lambda r: r[2])
+    fig, ax = plt.subplots(figsize=(10.5, 5.2))
+    fig.subplots_adjust(left=0.30, right=0.97, top=0.80, bottom=0.2)
+    ax.axvspan(0, 1.5, color=R['band'], alpha=0.35, lw=0, zorder=0)
+    ax.axvline(1.5, color=R['rebuilt'], lw=1.2, zorder=1)
+    ax.text(1.55, -0.5, 'stated error mid-trench: 1.5 m', fontsize=9, color=R['rebuilt'], va='center')
+    ax.axvline(3.0, color=R['rebuilt'], lw=1.0, ls=(0, (3, 2)), zorder=1)
+    ax.text(3.05, len(rows) - 0.45, 'at the trench\'s ends: 3 m', fontsize=9, color=R['rebuilt'], va='center')
+    for k, (sh, rms, p95, worst, note) in enumerate(rows):
+        ax.plot([0, worst], [k, k], color=R['faint'], lw=1, zorder=1)
+        ax.scatter([rms], [k], s=60, color=R['ink'], zorder=4)
+        ax.scatter([p95], [k], s=80, color=R['rebuilt'], zorder=4, edgecolor=R['paper'], lw=1.5)
+        ax.scatter([worst], [k], s=60, facecolor=R['paper'], edgecolor=R['ink'], lw=1.5, zorder=4)
+        ax.text(p95, k + 0.28, f'{p95:.2f}', fontsize=8.5, ha='center', color=R['ink'])
+        lab = f'moved {sh[0]:+d} m east, {sh[1]:+d} m north'
+        ax.text(-0.15, k, lab + ('\n' + note if note else ''), ha='right', va='center', fontsize=9.5, transform=ax.get_yaxis_transform() if False else ax.transData)
+    ax.set_yticks([])
+    ax.spines['left'].set_visible(False)
+    ax.set_xlim(0, 9)
+    ax.set_ylim(-0.8, len(rows) - 0.2)
+    ax.set_xlabel('error of the rebuilt ground against the measured ground it replaced, meters')
+    from matplotlib.lines import Line2D
+    h = [Line2D([], [], marker='o', ls='', color=R['ink'], ms=7, label='typical (RMS)'),
+         Line2D([], [], marker='o', ls='', color=R['rebuilt'], ms=8, label='95% of points within'),
+         Line2D([], [], marker='o', ls='', mfc=R['paper'], mec=R['ink'], mew=1.5, ms=7, label='worst point')]
+    ax.legend(handles=h, loc='lower right', fontsize=9)
+    fig.suptitle('The method tried where the answer is known', x=0.012, ha='left', fontsize=13, fontweight=600, y=0.97)
+    fig.text(0.012, 0.87, 'The trench\'s outline was moved onto undisturbed ground nearby, seven times. Each time the ground inside was rebuilt the same way and\n'
+                          'compared with the lidar it replaced. On level plateau like the trench\'s, 95% of points come within about 0.7–2 m.', fontsize=9.5, va='top', color=R['ink'])
+    footer(fig, 'Lidar: USGS 3DEP, 5 m grid. Numbers from the ground report, check 1.')
+    save(fig, out, 'holdout')
+
+
+CHARTS.update({'1934-checks': chart_topo, 'holdout': chart_holdout})
+
+
+# ---- 7 and 8. the 1952 sheets' fit residuals -------------------------------------------------
+
+def residuals():
+    rows = list(csv.DictReader(open(os.path.join(HERE, 'residuals.csv'))))
+    for r in rows:
+        r['residual'] = float(r['residual m'])
+        r['u'], r['v'] = float(r['u (full-res px)']), float(r['v (full-res px)'])
+        r['mpp'] = float(r['m per full-res px'])
+    return rows
+
+
+def chart_sheet(data, out):
+    path = out['args'].sheet
+    if not path:
+        print('sheet: no --sheet overlay given; skipped')
+        return
+    sheet = os.path.basename(path).split('-')[1]
+    rows = [r for r in residuals() if r['sheet'] == sheet]
+    im = Image.open(path).convert('RGB')
+    MAG = 5                                   # disks drawn five times the sheet's scale, to be seen
+    k = im.width / 4350.0                     # the overlay is the full-size scan scaled down
+    fig = plt.figure(figsize=(11.2, 10.6))
+    ax = fig.add_axes([0.02, 0.06, 0.62, 0.86])
+    ax.imshow(np.asarray(im), zorder=0)
+    ax.imshow(np.ones((im.height, im.width, 4)) * np.array(list(to_rgb(R['paper'])) + [0.35]), zorder=0.5)
+    ax.set_xticks([]); ax.set_yticks([])
+    for s in ax.spines.values():
+        s.set_visible(True); s.set_color(R['ink'])
+    for r in rows:
+        x, y = r['u'] * k, r['v'] * k
+        rad = r['residual'] / r['mpp'] * k * MAG
+        ax.add_patch(plt.Circle((x, y), max(rad, 2.5), fill=True, fc=R['pick'], alpha=0.35, ec=R['pick'], lw=1.5, zorder=5))
+        ax.scatter([x], [y], s=28, color=R['ink'], zorder=6, lw=0)
+        ax.annotate(f"{r['control point']}\n{r['residual']:.1f} m", xy=(x, y), xytext=(x + (40 if x < im.width * 0.75 else -150), y - 56), fontsize=8.5, zorder=7,
+                    arrowprops=dict(arrowstyle='-', color=R['ink'], lw=0.7),
+                    bbox=dict(boxstyle='round,pad=0.2', fc=R['paper'], ec='none', alpha=0.9))
+    mean = sum(r['residual'] for r in rows) / len(rows)
+    worst = max(r['residual'] for r in rows)
+    fig.suptitle(f'One sheet, fitted to today\'s street corners: sheet {sheet} of the 1952 volume', x=0.02, ha='left', fontsize=13, fontweight=600, y=0.975)
+    tx = 0.67
+    lines = [
+        ('How the sheet is placed', 600),
+        (f'{len(rows)} street corners were read on the sheet (black dots) and matched to where today\'s street center lines cross. '
+         'One fit (a shift, a turn and a scale) carries the whole sheet onto the map.', None),
+        ('What a red disk means', 600),
+        ('After the fit, each corner lands a little off. The disk\'s radius is that miss, drawn five times larger than the sheet\'s scale so it can be seen. '
+         f'On this sheet the misses average {mean:.1f} m; the largest is {worst:.1f} m.', None),
+        ('What it means for a building', 600),
+        ('A building on this sheet may sit a few meters from where it stood, less than a house\'s width. '
+         'No block was seen pushed across a street. Part of each miss is today\'s streets, some moved since 1952.', None),
+        ('Colors on the sheet', 600),
+        ('Pink: brick; yellow: frame; blue: stone or concrete block, as the sheet prints them. Magenta outlines: the tracing. '
+         'Blue lines: today\'s streets (OpenStreetMap).', None),
+    ]
+    y = 0.90
+    import textwrap
+    for t, w in lines:
+        txt = t if w else '\n'.join(textwrap.wrap(t, 46))
+        fig.text(tx, y, txt, fontsize=10 if w else 9.5, fontweight=w or 400, va='top', color=R['ink'])
+        y -= 0.03 if w else 0.022 * (txt.count('\n') + 1) + 0.03
+    footer(fig, 'Sanborn Fire Insurance Map, Richmond, 1952, vol. 3, sheet ' + sheet + ' (Library of Congress, Geography and Map Division, Sanborn Maps Collection; public domain), with the trace\'s overlay.')
+    save(fig, out, 'sheet-residuals')
+
+
+def chart_residuals(data, out):
+    rows = residuals()
+    sheets = sorted({r['sheet'] for r in rows}, key=int)
+    pick = out['args'].sheet and os.path.basename(out['args'].sheet).split('-')[1]
+    fig, ax = plt.subplots(figsize=(11, 7.4))
+    fig.subplots_adjust(left=0.09, right=0.56, top=0.84, bottom=0.12)
+    import textwrap
+    for k, sh in enumerate(sheets):
+        v = [r['residual'] for r in rows if r['sheet'] == sh]
+        y = len(sheets) - 1 - k
+        ax.plot([0, 9.5], [y, y], color=R['faint'], lw=0.6, zorder=0)
+        col = R['pick'] if sh == pick else R['ink']
+        ax.scatter(v, [y] * len(v), s=36, color=col, alpha=0.85, zorder=3, lw=0)
+        m = sum(v) / len(v)
+        ax.plot([m, m], [y - 0.32, y + 0.32], color=col, lw=2.2, zorder=4)
+        note = {'318': 'one corner; turned and shifted to fit the Gilpin Court buildings standing today',
+                '326': 'worst: St. James & Duval',
+                '309': 'scale from the sheet\'s scale bar; 7th St. corners left out (9–12 m)',
+                '310': 'scale from the scale bar; corners on one street',
+                '311': 'two corners carried from sheet 310',
+                '317': 'two corners carried from 315; Webster St. corner left out (10.6 m)',
+                '304': 'corners by water-pipe crossings', '320': 'corners by water-pipe crossings'}.get(sh, '')
+        head = f"{len(v)} point{'s' if len(v) > 1 else ''}, mean {m:.1f} m"
+        ax.text(9.8, y, '\n'.join(textwrap.wrap(head + (f'; {note}' if note else ''), 58)), fontsize=8.3, linespacing=1.05, va='center', color=R['muted'] if sh != pick else R['pick'], clip_on=False)
+    ax.set_yticks(range(len(sheets)))
+    ax.set_yticklabels([f'sheet {s}' for s in reversed(sheets)], fontsize=9.5)
+    ax.tick_params(axis='y', length=0)
+    ax.spines['left'].set_visible(False)
+    ax.set_xlim(0, 9.5)
+    ax.set_ylim(-0.7, len(sheets) - 0.3)
+    ax.set_xlabel('how far each street corner lands from where the fit puts it, meters')
+    fig.suptitle('Every sheet\'s fit: how far each control point misses', x=0.012, ha='left', fontsize=13, fontweight=600, y=0.97)
+    fig.text(0.012, 0.905, f'{len(rows)} control points on {len(sheets)} sheets of the 1952 volume 3. Dots: one point each. Bar: the sheet\'s mean.'
+             + (f' Sheet {pick} is the one shown up close.' if pick else ''), fontsize=9.5)
+    footer(fig, 'Residuals from the 1952 trace (residuals.csv).')
+    save(fig, out, 'residuals')
+
+
+# ---- 9. the count: its polygons, and the count by sheet ---------------------------------------
+
+def counts():
+    return json.load(open(os.path.join(ROOT, 'tools/sanborn/jw/counts.json')))
+
+
+def chart_count(data, out):
+    from shapely.geometry import Polygon as SPoly
+    from matplotlib.collections import PolyCollection
+    c = counts()
+    paved = [SPoly(poly[0], poly[1:]) for poly in data.d['footprint']['paved']]
+    corridor = [SPoly(poly[0], poly[1:]) for poly in data.d['footprint']['corridor']]
+    # Turn the plan so the corridor runs across the page (its long axis), north marked.
+    pts = np.concatenate([np.array(poly[0]) for poly in data.d['footprint']['corridor']])
+    ctr = pts.mean(axis=0)
+    u, sv, vt = np.linalg.svd(pts - ctr)
+    ang = math.atan2(vt[0][1], vt[0][0])
+    ca, sa = math.cos(-ang), math.sin(-ang)
+
+    def T(q):
+        q = np.asarray(q, dtype=float) - ctr
+        return np.column_stack([q[..., 0] * ca - q[..., 1] * sa, q[..., 0] * sa + q[..., 1] * ca]) if q.ndim == 2 else np.array([q[0] * ca - q[1] * sa, q[0] * sa + q[1] * ca])
+
+    groups = {'quiet': [], 'near': [], 'pick': []}
+    n_in = {'paved': 0, 'corridor': 0}
+    for b_ in data.d['traced']:
+        g = SPoly(b_['ring']).buffer(0)
+        q = g.representative_point()        # count.py's rule: a point inside the outline
+        in_p = any(p.contains(q) for p in paved)
+        in_c = any(p.contains(q) for p in corridor)
+        n_in['paved'] += in_p
+        n_in['corridor'] += in_c
+        groups['pick' if in_p else 'near' if in_c else 'quiet'].append(T(b_['ring']))
+    tp = T(pts)
+    bounds = (tp[:, 0].min() - 40, tp[:, 0].max() + 40, tp[:, 1].min() - 150, tp[:, 1].max() + 150)
+    fig = plt.figure(figsize=(13, 7.6))
+    ax = fig.add_axes([0.015, 0.36, 0.97, 0.54])
+    plan_axes(ax, data, bounds)
+    for st in data.d['streets']:
+        if st['kind'] in ('residential', 'tertiary', 'primary', 'secondary', 'unclassified'):
+            q = T(st['pts'])
+            ax.plot(q[:, 0], q[:, 1], color=R['street'], lw=0.45, zorder=2)
+    for g, fc in (('quiet', R['quiet']), ('near', R['near']), ('pick', R['pick'])):
+        ax.add_collection(PolyCollection(groups[g], facecolors=fc, edgecolors=R['ink'], linewidths=0.25 if g == 'quiet' else 0.45, zorder=3 if g == 'quiet' else 4))
+    for poly in data.d['footprint']['corridor']:
+        for r in poly:
+            q = T(r)
+            ax.plot(np.append(q[:, 0], q[0, 0]), np.append(q[:, 1], q[0, 1]), color=R['ink'], lw=1.0, ls=(0, (4, 2.5)), zorder=6)
+    for poly in data.d['footprint']['paved']:
+        for r in poly:
+            q = T(r)
+            ax.plot(np.append(q[:, 0], q[0, 0]), np.append(q[:, 1], q[0, 1]), color=R['line'], lw=1.3, zorder=6)
+    scale_bar(ax, bounds[0] + 30, bounds[2] + 30, 200)
+    nv = T(np.array(data.north()) + ctr)
+    x0, y0 = bounds[0] + 330, bounds[2] + 40
+    ax.annotate('', xy=(x0 + nv[0] * 60, y0 + nv[1] * 60), xytext=(x0, y0), arrowprops=dict(arrowstyle='-|>', color=R['ink'], lw=1.2, mutation_scale=12), zorder=9)
+    ax.text(x0 + nv[0] * 76, y0 + nv[1] * 76, 'N', ha='center', va='center', fontsize=9.5, fontweight=600, zorder=9)
+    label(ax, bounds[0] + 120, bounds[3] - 40, 'west: Brook Road and the Belvidere ramps', size=8.5, color=R['muted'], ha='left')
+    label(ax, bounds[1] - 30, bounds[3] - 40, 'east: the I-64 junction, cut at the line of 8th Street', size=8.5, color=R['muted'], ha='right')
+    fig.suptitle('What the count counts: outlines on the 1952 sheets whose center falls inside each polygon', x=0.015, ha='left', fontsize=13, fontweight=600, y=0.975)
+    fig.text(0.015, 0.925, 'The plan is turned so the highway runs across the page.', fontsize=9.5, color=R['muted'])
+    # the numbers, from counts.json, and the count by sheet
+    fig.text(0.015, 0.31, 'Buildings on the 1952 Sanborn sheets within this polygon', fontsize=11.5, fontweight=600, va='top')
+    fig.text(0.015, 0.265, f"Paved polygon (today's roadway and ramps): {c['paved']['buildings']}", fontsize=10.5, va='top')
+    fig.text(0.015, 0.23, f"Corridor (the paved polygon plus 15 m each side): {c['corridor']['buildings']}", fontsize=10.5, va='top')
+    fig.text(0.015, 0.18, 'A count of outlines on a map. Sheds and porches over 6 m² count;\nan apartment house is one. Not homes, families or people.\n'
+                          'The polygon is today\'s footprint, standing in for the 1958\nright-of-way, which has not been seen.', fontsize=9.5, va='top')
+    bx = fig.add_axes([0.55, 0.075, 0.40, 0.185])
+    sheets = sorted(c['corridor']['sheets'], key=int)
+    xs = np.arange(len(sheets))
+    pv = [c['paved']['sheets'].get(s_, 0) for s_ in sheets]
+    cv = [c['corridor']['sheets'][s_] for s_ in sheets]
+    bx.bar(xs, cv, color=R['near'], width=0.6, zorder=2)
+    bx.bar(xs, pv, color=R['pick'], width=0.6, zorder=3)
+    for x, a_, b2 in zip(xs, pv, cv):
+        bx.text(x, b2 + 3, f'{a_} · {b2}', ha='center', fontsize=9)
+    bx.set_xticks(xs)
+    bx.set_xticklabels([f'sheet {s_}' for s_ in sheets], fontsize=9)
+    bx.tick_params(axis='x', length=0)
+    bx.set_ylim(0, max(cv) * 1.25)
+    bx.set_yticks([0, 50, 100])
+    bx.set_title('By sheet: paved · corridor', fontsize=10.5)
+    from matplotlib.patches import Patch
+    from matplotlib.lines import Line2D
+    h = [Patch(color=R['pick'], label='center in the paved polygon'), Patch(color=R['near'], label='in the corridor only'),
+         Patch(color=R['quiet'], label='every other 1952 outline'),
+         Line2D([], [], color=R['line'], lw=1.3, label='paved polygon'), Line2D([], [], color=R['ink'], lw=1.0, ls=(0, (4, 2.5)), label='corridor polygon')]
+    fig.legend(handles=h, loc='upper left', ncol=5, bbox_to_anchor=(0.015, 0.355), fontsize=9, handlelength=1.6, columnspacing=1.2)
+    note = '' if (n_in['paved'], n_in['corridor']) == (c['paved']['buildings'], c['corridor']['buildings']) else \
+        f" This plan's own test, in view meters, finds {n_in['paved']} and {n_in['corridor']}: outlines that straddle a polygon's edge can fall either way."
+    footer(fig, 'Counts: tools/sanborn/jw/counts.json (count.py).' + note + ' Sanborn, Richmond 1952 vol. 3 (Library of Congress, public domain); streets: OpenStreetMap (ODbL).')
+    save(fig, out, 'count')
+
+
+CHARTS.update({'sheet-residuals': chart_sheet, 'residuals': chart_residuals, 'count': chart_count})
 
 
 if __name__ == '__main__':
