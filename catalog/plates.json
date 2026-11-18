@@ -745,6 +745,13 @@
    "piece": "Cutaway",
    "place": "Broad Street Station",
    "kind": "Building cutaway"
+  },
+  {
+   "plate": "BSS-16",
+   "design": "broad-street-1943-03-scotts-addition",
+   "title": "Scott's Addition, Broad Street Station 1943",
+   "piece": "Box 3",
+   "place": "Broad Street Station"
   }
  ]
 }
