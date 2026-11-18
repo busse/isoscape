@@ -1,11 +1,17 @@
 {
  "extends": "history/richmond-downtown.json",
  "title": "Jackson Ward through time",
+ "about": "Jackson Ward before and after the Richmond-Petersburg Turnpike (cleared 1955-58, opened 1958). Each scene draws the buildings standing today that had been built by its year (OSM start_date, else the City of Richmond assessor's year built), plus buildings traced from the Sanborn map of 1952, volume 3 (Leigh Street north to the railroad), and from the earlier downtown tracings south of Leigh. Before 1955 the ground inside the highway's trench is an estimate rebuilt from its edges (see the ground note). Rough draft: not for publication.",
  "epochs": [
   {
    "year": 1952,
    "title": "Before the Turnpike",
-   "note": "The last Sanborn survey before the Richmond-Petersburg Turnpike was cut through the ward in 1955-58. Rough draft: many buildings of the year are not yet traced."
+   "note": "The last Sanborn survey before the Richmond-Petersburg Turnpike was cut through the ward in 1955-58. Buildings north of Leigh Street are traced from the 1952 volume 3 sheets; south of Leigh from the 1924-25 and 1950-52 volume 1 tracings. Rough draft."
+  },
+  {
+   "year": 1959,
+   "title": "After the road (about 1960)",
+   "note": "A year after the Turnpike opened (July 1, 1958). Traced 1952 buildings whose center falls in the highway's corridor polygon (today's paved roadway and ramps plus 15 m each side, a stand-in for the 1958 right-of-way) are gone from 1956 (tools/sanborn/jw/corridor_ends.py); those outside it are drawn standing, because when each was lost is not yet dated. Beyond the corridor this is an approximation: later clearances (the Coliseum, the 1970s renewal, Gilpin Court's additions of 1957 and 1970) are not yet dated building by building. Drawn as 1959 so that buildings whose end is assumed (1960, the downtown series' rule) still stand."
   },
   {
    "year": 2026,
@@ -1015,5 +1021,32 @@
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf"
    ]
   }
- ]
+ ],
+ "sanborn": {
+  "lost": [
+   "history/sanborn/lost.geojson",
+   "history/sanborn/jackson-ward-lost.geojson"
+  ],
+  "editions": [
+   1886,
+   1895,
+   1905,
+   1924,
+   1950,
+   1952
+  ],
+  "source": "https://www.loc.gov/item/sanborn09064_018/",
+  "leaveOut": [
+   {
+    "edition": 1905,
+    "sheet": "5",
+    "why": "28 of its 57 traced buildings fall on the Capitol Square lawn, a public square since the Capitol was built (https://vga.virginia.gov/?p=73), so the sheet's fit (read by eye) is wrong; its other buildings are taken to be out of place too. Left out until the sheet is placed again."
+   },
+   {
+    "edition": 1905,
+    "sheet": "7",
+    "why": "3 of its 5 traced buildings fall on the Capitol Square lawn: the same misfit as sheet 5."
+   }
+  ]
+ }
 }
