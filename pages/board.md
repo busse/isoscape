@@ -16,6 +16,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | working draft | 1 |
 | final draft | 1 |
 | final production | 44 |
+| owner test | 1 |
 | on hold | 55 |
 | blocked | 1 |
 | backlog | 2 |
@@ -23,6 +24,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 ## Waiting on a decision
 
 - **The Byrd Park Pump House: Cutaway** (BPPH·01): rc1 inspected once; its one fix round made rc2. Waiting on the owner: (1) a second fix round for the title block (it sits top right over the column, and its taxonomy line is about 4.8 pt at 24x18), (2) the typeface as rendered for print, (3) release approval
+- **Explorer on a phone: no sideways scroll; compare sliders by thumb**: built and tested in Chrome's phone emulation only (branch fix/mobile-overflow, 65fafe7; not merged, not pushed). The owner will test it on his iPhone later: say the word and it is merged and pushed for that test. Check: no horizontal bar or sideways drift on #/jackson-ward and p/jackson-ward.html; a slider's sideways drag and tap move the divider and a vertical swipe scrolls; the label tab stays whole at both edges; tables and the FAQ's code block scroll in their own box; lightbox buttons are easy to hit. Notes: /mnt/user-data/outputs/explorer/mobile-overflow/fix.md
 - **The Byrd Theatre: Cutaway**: owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead
 
 ## Working draft
@@ -85,6 +87,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | STC·13 | The Fan, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·14 | Broad and Laurel, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·M | Richmond's Streetcars, 1925: The System Map | set map | 4.0.0 | yes, version 4 |
+
+## Owner test
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Explorer on a phone: no sideways scroll; compare sliders by thumb | site | — | no |
 
 ## On hold
 

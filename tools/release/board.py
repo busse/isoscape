@@ -25,11 +25,14 @@ PAGE = os.path.join(ISO, 'pages', 'board.md')
 
 IMAGE = ['research', 'rough draft', 'working draft', 'final draft', 'final production']
 STORY = ['research', 'outline', 'fact check', 'outside review', 'published']
+# Changes to the explorer or the store's own pages: built, then tried by the owner where they
+# run (a phone, the live site), then live.
+SITE = ['in work', 'owner test', 'live']
 STAGES = {'print': IMAGE, 'set box': IMAGE, 'set map': IMAGE, 'set menu': IMAGE, 'cutaway': IMAGE,
-          'batch': IMAGE, 'research': ['research', 'done'], 'story': STORY}
-ORDER = IMAGE + [s for s in STORY + ['done'] if s not in IMAGE]
+          'batch': IMAGE, 'research': ['research', 'done'], 'story': STORY, 'site': SITE}
+ORDER = IMAGE + [s for s in STORY + SITE + ['done'] if s not in IMAGE]
 # The "waiting on the owner" list, nearest to the store first.
-URGENT = ['final draft', 'final production', 'working draft', 'rough draft', 'outside review', 'fact check', 'outline', 'research']
+URGENT = ['final draft', 'owner test', 'final production', 'working draft', 'rough draft', 'outside review', 'fact check', 'outline', 'in work', 'research']
 STATUS = ('active', 'on hold', 'blocked', 'backlog')
 WAITING = ('owner', 'agent', 'nothing')
 REASONS = ('factual correction', 'wall-visible fault', 'improvement')

@@ -71,6 +71,13 @@ class Check(unittest.TestCase):
         b = good(); b['items']['bss-07']['planned_edition'] = {'reason': 'because', 'fixes': ['x']}
         self.assertTrue(any('reason' in x for x in bad(b)))
 
+    def test_site_stages(self):
+        b = good(); b['items']['x'] = entry(kind='site', stage='owner test', asset_version=None, published_version=None, live_version=None,
+                                            plate=None, on_sale=False, waiting_on='owner', decision='try it on a phone')
+        self.assertEqual(bad(b), [])
+        b['items']['x']['stage'] = 'final draft'
+        self.assertTrue(any('not a stage of a site' in x for x in bad(b)))
+
     def test_story_stages_are_editorial(self):
         b = good(); b['items']['s'] = entry(kind='story', stage='outline', asset_version=None, published_version=None, live_version=None,
                                             on_sale=False, orders=None)

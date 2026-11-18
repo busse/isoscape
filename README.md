@@ -1039,6 +1039,18 @@ Its stages are:
    people with standing in it: historians, and the communities it is about.
 5. **published**: Gate: Chris approves publication.
 
+### Site changes
+
+A change to the explorer or to the store's own pages (a layout fix, a new page feature) is a
+`site` entry. Its stages are:
+
+1. **in work**: built on a branch, with tests.
+2. **owner test**: ready for Chris to try where it runs. A desktop change is tried from the
+   local preview (`ISO-TEST/_preview/`) before anything is pushed. A change that can only be
+   judged on a phone or the live site is pushed when he says so and tried there. The entry's
+   `decision` lists what to check.
+3. **live**: Gate: Chris says it works.
+
 ### The board
 
 `catalog/pipeline.json` has one entry per design or piece of work. It is keyed by the store's
@@ -1046,7 +1058,8 @@ design key where there is one, and every plate in `catalog/plates.json` has an e
 holds:
 
 - `title`, `plate`, and `kind` (`print`, `set box`, `set map`, `set menu`, `cutaway`,
-  `story`, `research`, or `batch` for a change across many designs)
+  `story`, `research`, `site` for a change to the explorer or the store's own pages, or `batch`
+  for a change across many designs)
 - `stage`, and `status` (`active`, `on hold`, `blocked` or `backlog`)
 - `asset_version`, `published_version` (the latest release record), `live_version` (on sale
   now, or null), `on_sale`, and `orders`
