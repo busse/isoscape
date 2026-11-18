@@ -31,7 +31,7 @@ import { MARK, PROSE_CSS, STORY_CSS, THEME_CSS } from './explorer.ts'
 import { escapeHtml } from './markdown.ts'
 import { loadPages, PAGES_DIR, type Page } from './pages.ts'
 import {
-  buildCard, clip, escAttr, firstParagraph, flagshipOf, pageDescription, imageSize, metaTags, pageShop, previewOf, shopFor, siteHref, withCampaign, type ShareDoor,
+  buildCard, clip, escAttr, firstParagraph, flagshipOf, pageDescription, imageSize, metaTags, pageShop, previewOf, printLinks, shopFor, siteHref, withCampaign, type ShareDoor,
   SITE_NAME, statsLine, type HomeConfig, type Preview, type SiteConfig,
 } from './social.ts'
 import { makeStory } from './story.ts'
@@ -384,6 +384,7 @@ export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}
   const image = imgs.own ?? imgs.flagship
   const imageAlt = imgs.own === undefined ? imgs.flagshipAlt : page.summary ?? page.title
   const shop = pageShop(page.slug, mapRefs(page.html), ctx.config)
+  const html = printLinks(page.html, ctx.config.shop?.products, '../index.html#', (u) => withCampaign(u, page.slug, ctx.config.shop?.url))
   const acts = `<p class="acts"><a class="btn ghost" href="../index.html#/${escAttr(page.slug)}">Open this in the explorer</a>${shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, page.slug, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`}</p>\n`
   const url = abs(path, ctx)
   const faq = page.schema === 'FAQPage' ? faqEntries(page.html) : []
@@ -402,7 +403,7 @@ export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}
   }
   return head({ title: `${page.title} · ${SITE_NAME}`, description, path, type: 'article', ld, ...(page.unlisted ? { noindex: true } : {}), ...(image === undefined ? {} : { image }), ...(imageAlt === undefined ? {} : { imageAlt }) }, ctx) +
     topBar(ctx, page.slug) +
-    `<main class="wrap">\n${acts}<article class="prose">\n${page.html}</article>\n${acts}</main>\n` +
+    `<main class="wrap">\n${acts}<article class="prose">\n${html}</article>\n${acts}</main>\n` +
     footer(ctx) + '</body>\n</html>\n'
 }
 
