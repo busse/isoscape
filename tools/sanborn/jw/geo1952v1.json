@@ -1,0 +1,77 @@
+{
+ "v1-0002": {
+  "params": [
+   12541.118593742072,
+   3052.9581169808725,
+   -0.6459686501705586,
+   6.375849178779937
+  ],
+  "refined": true,
+  "corners": [
+   "1st & Marshall",
+   "2nd & Marshall",
+   "1st & Broad",
+   "2nd & Broad",
+   "Foushee & Broad",
+   "1st & Clay"
+  ],
+  "resid_m": [
+   1.2,
+   1.0,
+   0.8,
+   1.6,
+   0.6,
+   0.5
+  ],
+  "resid_corners_only": [
+   0.5,
+   0.3,
+   0.7,
+   0.9,
+   0.7,
+   0.8
+  ],
+  "m_per_px": 0.1568,
+  "block_inliers": 0.23,
+  "block_points": 4337
+ },
+ "v1-0003": {
+  "params": [
+   11063.26913642064,
+   3068.537780844118,
+   -0.6511242914951023,
+   6.439455675193837
+  ],
+  "refined": true,
+  "corners": [
+   "2nd & Marshall",
+   "3rd & Marshall",
+   "2nd & Broad",
+   "3rd & Broad",
+   "4th & Broad",
+   "2nd & Clay",
+   "3rd & Clay"
+  ],
+  "resid_m": [
+   1.1,
+   1.3,
+   1.7,
+   0.8,
+   2.9,
+   1.7,
+   0.9
+  ],
+  "resid_corners_only": [
+   0.8,
+   1.5,
+   1.3,
+   0.2,
+   2.7,
+   1.3,
+   1.6
+  ],
+  "m_per_px": 0.1553,
+  "block_inliers": 0.16,
+  "block_points": 3666
+ }
+}
