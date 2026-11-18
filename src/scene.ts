@@ -80,7 +80,7 @@ export interface GroundPolygon {
 }
 
 export interface Ribbon {
-  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir' | 'tram' | 'racetrack'
+  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir' | 'tram' | 'racetrack' | 'mark'
   /** View-meter quads, draped over the terrain when drawn. */
   readonly quads: Vec2[][]
   /** View-meter center segments, for rail ties and weir crests. */
@@ -269,6 +269,17 @@ export const buildScene = (
   }
   const frame = view.frame
   const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}), ...(later.atGrade ? { bridgesAtGrade: later.atGrade } : {}), ...(later.verges ? { vergesLater: later.verges } : {}), ...(past.canalBridges ? { canalBridgesLater: past.canalBridges } : {}), ...(past.orphanBridges ? { bridgesWithoutRoads: past.orphanBridges } : {}), ...(past.plantings ? { plantingsLater: past.plantings } : {}), ...(past.spurs ? { spursLater: past.spurs } : {}), ...extraStats }
+  // A pick-out the build switched on (`Highlight`): which polygon a ring's center falls in, and
+  // the roof that gives it, or null where the building keeps its own.
+  const mark = time?.history.highlight
+  const markPolys = (mark?.rings ?? []).map((rs) => rs.map((r) => toViewRing(view, r)))
+  const markRoof = (ring: Ring): string | null => {
+    if (mark === undefined) return null
+    const c = centroid(ring)
+    const k = mark.pick === false ? -1 : markPolys.findIndex((rs) => pointInPolygon(c, rs))
+    if (k >= 0) stats[k === 0 ? 'markPick' : 'markNear'] = (stats[k === 0 ? 'markPick' : 'markNear'] ?? 0) + 1
+    return k === 0 ? pal.mark.pick : k > 0 ? pal.mark.near : mark.quiet === true ? pal.mark.quiet : null
+  }
   const opts = region.terrain ?? {}
   const useTerrain = elevation !== null && region.terrain !== undefined && opts.enabled !== false
   // Ground a later work cut or filled, put back for the years before it (`GroundRestoration`).
@@ -499,7 +510,7 @@ export const buildScene = (
     }
     const w = roadWidth(t)
     if (w !== null) {
-      const r = ribbonOf(isPath(t) ? 'path' : 'road', f, w)
+      const r = ribbonOf(mark?.streets === true && f.id.startsWith('history:') ? 'mark' : isPath(t) ? 'path' : 'road', f, w)
       if (r) ribbons.push(r)
     } else if (isRail(t)) {
       // A series can draw yard and siding track at its own scale (railScaleService): a yard of a
@@ -529,6 +540,15 @@ export const buildScene = (
     for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
       const r = ribbonOf('rail', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, (h.width ?? 3.2) * railScale, false)
       if (r) ribbons.push(r)
+    }
+  }
+  // A pick-out's polygons, outlined on the ground.
+  if (mark !== undefined && mark.outline !== false) {
+    for (const [k, rs] of (mark.rings ?? []).entries()) {
+      for (const [m, ring] of rs.entries()) {
+        const r = ribbonOf('mark', { type: 'line', id: `mark:${k}:${m}`, tags: {}, points: [...ring, ring[0]] }, k === 0 ? 3 : 2, false)
+        if (r) ribbons.push(r)
+      }
     }
   }
   // A racecourse or promenade that is gone: a closed loop drawn as a path.
@@ -880,6 +900,7 @@ export const buildScene = (
       roof = pal.fresh
       fresh++
     }
+    roof = markRoof(outer) ?? roof
     // A parcel's year built decided something here: whether the building stands in a past
     // year, or that it is drawn as new since the previous one. Today's scene otherwise draws
     // every building whatever its date.
@@ -1217,7 +1238,7 @@ export const buildScene = (
       const grounds = outer.map((p) => terrain.z(p))
       const base = Math.min(...grounds)
       const top = Math.max(seatLevel(grounds, terrain.exaggeration) + b.storeys * 3.6, base + 2.5)
-      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, pal.traced[b.material], dotsMode, undefined, grounds))
+      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, markRoof(outer) ?? pal.traced[b.material], dotsMode, undefined, grounds))
       ends[b.end]++
     }
     stats.traced = ends.map + ends.rebuilt + ends.highway + ends.assumed
@@ -1269,7 +1290,7 @@ export const buildScene = (
   let mergedPieces = 0
   for (let c = 0; c < chains.length; c++) {
     const onLineDeck = deckOnLine.size > 0 && deckOnLine.has(chains[c].line.id)
-    const all = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }), ...(onLineDeck ? { onLine: true } : {}) } : undefined)
+    const all = bridgePieces(view, mark?.bridges?.includes(chains[c].line.id) === true ? { ...pal, deck: pal.mark.line } : pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }), ...(onLineDeck ? { onLine: true } : {}) } : undefined)
     const pieces = all.filter((p) => !merged(c, p))
     mergedPieces += all.length - pieces.length
     spans += pieces.filter((p) => p.pier !== true).length

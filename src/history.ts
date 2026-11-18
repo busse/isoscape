@@ -400,7 +400,51 @@ export interface History {
    * Settings a build's `--with` names switch on, by name: for corrections made after some years
    * of a series were published, so their scenes stay as sold until each is redrawn.
    */
-  readonly switches?: Readonly<Record<string, { readonly vergeReach?: number; readonly vergeShare?: number; readonly bridgeStreets?: boolean; readonly bridgesClearTraced?: boolean; readonly note?: string }>>
+  readonly switches?: Readonly<Record<string, { readonly vergeReach?: number; readonly vergeShare?: number; readonly bridgeStreets?: boolean; readonly bridgesClearTraced?: boolean; readonly highlight?: Highlight; readonly note?: string }>>
+  /** A pick-out, set only by a switch (`switches.<name>.highlight`): see `Highlight`. */
+  readonly highlight?: Highlight
+}
+
+/**
+ * A picture that picks something out, switched on by name (a story's count of what a highway
+ * took): the buildings whose center falls in a polygon roofed in the palette's `mark.pick` (the
+ * first polygon) or `mark.near` (any later one), every other building's roof `mark.quiet` when
+ * `quiet` is set, each polygon's outline drawn on the ground in `mark.line`, and, where asked,
+ * the curated lost streets and some bridges' decks in `mark.line` too. Off in every build that
+ * does not name the switch, so no other scene changes.
+ */
+export interface Highlight {
+  /** A GeoJSON file of (multi)polygons, lon/lat, named by `properties.name`. */
+  readonly file?: string
+  /** The polygons picked out, by name, innermost first. */
+  readonly polygons?: readonly string[]
+  /** Pick out the buildings in the polygons (default true); false: the polygons are only outlined. */
+  readonly pick?: boolean
+  /** Draw each polygon's outline on the ground (default true). */
+  readonly outline?: boolean
+  /** Every building not picked out gets the quiet roof. */
+  readonly quiet?: boolean
+  /** Draw the curated lost streets (`kind: 'street'`) in the mark's line tone. */
+  readonly streets?: boolean
+  /** OSM ids of bridges ("w44888581") whose decks are drawn in the mark's line tone. */
+  readonly bridges?: readonly string[]
+  readonly note?: string
+  /** Each polygon's rings (lon/lat, outers and holes, even-odd), in `polygons` order: read from `file` by `loadHistory`. */
+  readonly rings?: readonly (readonly (readonly Vec2[])[])[]
+}
+
+/** A highlight's polygons read from its file, as rings in `polygons` order. */
+const highlightRings = async (h: Highlight): Promise<Highlight> => {
+  if (h.file === undefined || h.polygons === undefined) return h
+  type Geom = { type: 'Polygon'; coordinates: number[][][] } | { type: 'MultiPolygon'; coordinates: number[][][][] }
+  const fc = JSON.parse(await readFile(h.file, 'utf8')) as { features: { properties: { name?: string }; geometry: Geom }[] }
+  const rings = h.polygons.map((name) => {
+    const f = fc.features.find((g) => g.properties.name === name)
+    if (f === undefined) throw new Error(`highlight: no polygon named "${name}" in ${h.file}`)
+    const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates
+    return polys.flatMap((poly) => poly.map((ring) => ring.slice(0, -1).map(([x, y]) => [x, y] as Vec2)))
+  })
+  return { ...h, rings }
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
@@ -416,6 +460,13 @@ export const loadHistory = async (path: string): Promise<History> => {
       dates: [...(raw.dates ?? []), ...(base.dates ?? [])],
       features: [...(base.features ?? []).filter((f) => !(raw.features ?? []).some((g) => g.id === f.id)), ...(raw.features ?? [])],
     }
+  }
+  // A switch's highlight polygons are read here, so a build that names it has them.
+  let switches = raw.switches
+  if (switches !== undefined && Object.values(switches).some((v) => v.highlight !== undefined)) {
+    const out: Record<string, NonNullable<History['switches']>[string]> = {}
+    for (const [name, v] of Object.entries(switches)) out[name] = v.highlight === undefined ? v : { ...v, highlight: await highlightRings(v.highlight) }
+    switches = out
   }
   let traced: TracedBuilding[] = []
   if (raw.sanborn !== undefined) {
@@ -465,7 +516,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: raw.bridgesClearTraced }),
     ...(raw.streetEnds === undefined ? {} : { streetEnds: raw.streetEnds }),
     ...(raw.bridgeAnchors === undefined ? {} : { bridgeAnchors: raw.bridgeAnchors }),
-    ...(raw.switches === undefined ? {} : { switches: raw.switches }),
+    ...(switches === undefined ? {} : { switches }),
   }
 }
 
@@ -539,7 +590,7 @@ export const switchedOn = (h: History, on: readonly string[]): History => {
   for (const name of on) {
     const set = h.switches?.[name]
     if (set === undefined) continue
-    out = { ...out, ...(set.vergeReach === undefined ? {} : { vergeReach: set.vergeReach }), ...(set.vergeShare === undefined ? {} : { vergeShare: set.vergeShare }), ...(set.bridgeStreets === undefined ? {} : { bridgeStreets: set.bridgeStreets }), ...(set.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: set.bridgesClearTraced }) }
+    out = { ...out, ...(set.vergeReach === undefined ? {} : { vergeReach: set.vergeReach }), ...(set.vergeShare === undefined ? {} : { vergeShare: set.vergeShare }), ...(set.bridgeStreets === undefined ? {} : { bridgeStreets: set.bridgeStreets }), ...(set.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: set.bridgesClearTraced }), ...(set.highlight === undefined ? {} : { highlight: set.highlight }) }
   }
   return out
 }

@@ -377,6 +377,8 @@ export const renderSvg = (scene: Scene): Rendered => {
     ...Object.entries(p.cover).map(([g, color]) => sealed(`cv-${g}`, color)), sealed('I', p.land), sealed('W', p.water), sealed('green', p.green), sealed('wood', p.wood), sealed('marsh', p.marsh), sealed('sand', p.sand), sealed('rock', p.rock),
     sealed('parking', p.parking), sealed('cemetery', p.cemetery), sealed('plan', p.plan), sealed('grounds', p.grounds), sealed('racetrack', p.racetrack), sealed('burned', p.burned), sealed('platform', p.platform), sealed('canal', p.water), sealed('path', p.path),
     sealed('road', p.road), sealed('rail', scene.boldRail ? p.railTie : p.rail), sealed('tram', p.tram), sealed('weir', p.foam),
+    // A story's pick-out (Highlight), only in a scene that has one.
+    ...(scene.ribbons.some((rb) => rb.kind === 'mark') ? [sealed('mark', p.mark.line)] : []),
     // At close scale (CLOSE_RAIL px per meter or more) a track shows its ties, each a
     // rectangle on the ground square to the track (TIE: 2 m by 0.25 m, every 0.67 m, painted in
     // the strips like the rest of the ground), and its two running rails, 1.44 m apart.
@@ -492,6 +494,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     // ground where they lap, and a see-through tie would come out darker there).
     { cls: 'tie', small: true, entries: close ? tiesAlong(scene.ribbons.filter((rb) => rb.kind === 'rail').flatMap((rb) => rb.center), scene.time?.tieClear ?? 0).map((q) => entryOf([q])) : [] },
     ribbonLayer('tram'),
+    ribbonLayer('mark'),
   ]
   const lineLayer = (kind: string, cls: string) => ({
     cls,

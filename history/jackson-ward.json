@@ -1175,5 +1175,51 @@
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/GeoTIFF/VA/VA_Richmond_186501_1956_24000_geo.tif"
    ]
   }
- ]
+ ],
+ "switches": {
+  "count": {
+   "note": "The count picture: buildings traced from the 1952 Sanborn sheets whose center falls in the highway's paved footprint (today's roadway and ramps) in the darker tone, in the corridor (paved plus 15 m each side) in the lighter, every other building quiet, and both outlines. Polygons from tools/sanborn/jw/footprint.py; counts in tools/sanborn/jw/counts.json.",
+   "highlight": {
+    "file": "tools/sanborn/jw/highway-footprint.geojson",
+    "polygons": [
+     "paved",
+     "corridor"
+    ],
+    "outline": true,
+    "quiet": true
+   }
+  },
+  "streets": {
+   "note": "The lost streets picture: the curated stretches of street the Turnpike took drawn in the mark's tone, the corridor outlined, buildings quiet; in today's scene the decks of the bridges that carry the surviving streets over the trench in the same tone.",
+   "highlight": {
+    "file": "tools/sanborn/jw/highway-footprint.geojson",
+    "polygons": [
+     "corridor"
+    ],
+    "pick": false,
+    "outline": true,
+    "quiet": true,
+    "streets": true,
+    "bridges": [
+     "w44888565",
+     "w175298374",
+     "w175298375",
+     "w38006094",
+     "w38006096",
+     "w38006103",
+     "w135207685",
+     "w1122219210",
+     "w1122219211",
+     "w1293548427",
+     "w1293548428",
+     "w1121057674",
+     "w1121057682",
+     "w1122219208",
+     "w1122219209",
+     "w1485475446",
+     "w1485475447"
+    ]
+   }
+  }
+ }
 }

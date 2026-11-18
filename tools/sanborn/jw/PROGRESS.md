@@ -26,3 +26,18 @@ Source: Sanborn, Richmond vol. 3, 1952 (LoC sanborn09064_018). Worktree /home/cl
 | 1952 vol. 1 sheets 2–3 (2nd St, Broad–Clay) | identified | no | traced earlier by the repo, sparse | | re-trace next |
 
 Done: edition file, lifespans, cleaning, counts (238 paved / 489 corridor), named CSV (122), overlays (15 + 1), proof renders (restored ground and today's ground), trace.md.
+
+## Story integration (branch story-jackson-ward)
+
+After `finish.py` and the cleaning, two passes on `history/sanborn/jackson-ward-lost.geojson`:
+
+1. `uncovered.py <edition> <lost> <buildings> drawn-1952-osm.txt history/sanborn/lost.geojson`:
+   614 traced 1952 buildings that lifespans.py took to be standing today (today's buildings cover
+   half or more) but that the 1952 scene did not draw (the buildings on them today are dated after
+   1952 or not dated) are put back, ending at the year of what replaced them or 2026. Among them
+   Sixth Mount Zion, Ebenezer, Third St. Bethel, the Hippodrome, the Leigh St. Y.M.C.A. and most
+   of Gilpin Court. `<buildings>` is `node tools/sanborn/dates.ts jackson-ward <out>` (run with
+   `data/jackson-ward` linked to the region's cache, since dates.ts reads parcels by region name);
+   `drawn-1952-osm.txt` is the OSM ids the 1952 scene drew before this pass, from its SVG.
+2. `corridor_ends.py <lost> highway-footprint.geojson`: 405 buildings whose center falls in the
+   corridor polygon end in 1956 (cleared 1955-58), the rule the 1959 scene and count.py share.
