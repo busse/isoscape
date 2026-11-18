@@ -8,8 +8,8 @@ social: jackson-ward-social.jpg
 
 # What stood where the highway runs
 
-> **Unpublished working draft, for review.** Not for circulation. The facts are being checked
-> against their sources, and the community reviewers have not yet read it. The numbers,
+> **Unpublished working draft, for review.** Not for circulation. The facts were checked
+> against their sources on November 18, 2026. The community reviewers have not yet read it. The numbers,
 > pictures and wording may change. Drafted with Claude for Chris Busse, November 18, 2026.
 
 Between 1955 and 1958 the Richmond–Petersburg Turnpike, now I-95 and I-64, was cut through
