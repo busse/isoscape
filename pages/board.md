@@ -23,10 +23,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
-- **Broad Street Station, 1943: The Railroads and Fourteen Places** (BSS·00): approve release with Scott's Addition as box 3 (decided with the map and box 3)
-- **Broad Street Station, 1943: The Railroad Map** (BSS·M): approve release with Scott's Addition as box 3; and whether Main Street Station's height correction goes into this candidate (rc2) or the next edition
-- **Scott's Addition, Broad Street Station 1943**: approve Scott's Addition as box 3, and its plate: BSS-16 version 1 (a new design takes the next number) or BSS-03 version 3 (then 3.0.0-rc1)
-- **Hermitage Road, Broad Street Station 1943** (BSS·03): withdraw when Scott's Addition takes box 3 (decided with Scott's Addition)
 - **The Byrd Theatre: Cutaway**: review the working draft; target on sale about December 1, 2026
 - **Main Street Station, about 1952: Cutaway**: review marks on the working draft (review PDF sent for d3; d4 corrects the tower and roof heights and adds the red route)
 - **Title-block labels at the smallest sizes**: whether to make an edition of every print for larger title-block labels (they print at about 3 to 4 pt at the smallest sizes sold)
@@ -51,8 +47,8 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | BSS·00 | Broad Street Station, 1943: The Railroads and Fourteen Places | set menu | 3.0.0-rc1 | no |
+| BSS·16 | Scott's Addition, Broad Street Station 1943 | set box | 1.0.0-rc1 | no |
 | BSS·M | Broad Street Station, 1943: The Railroad Map | set map | 3.0.0-rc1 | no |
-| — | Scott's Addition, Broad Street Station 1943 | set box | 1.0.0-rc1 | no |
 
 ## Final production
 
