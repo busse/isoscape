@@ -1021,5 +1021,77 @@ def chart_study(data, out):
 CHARTS.update({'study-area': chart_study})
 
 
+
+# ---- 11. the overlay plan: the highway over the 1952 houses over today's ward ------------------
+
+COLISEUM = (-77.43443, 37.54463)   # The Richmond Coliseum: the center of its OSM outline (way 321367756)
+
+
+def chart_overlay(data, out):
+    """Decision 11: the early plan view, redrawn flat. Today's buildings in gray under today's street
+    plan, the 1952 traced outlines in their printed colors over them, and the highway's paved
+    footprint and corridor over both."""
+    from matplotlib.collections import PolyCollection
+    from matplotlib.patches import Patch
+    from matplotlib.lines import Line2D
+    gray = mix(P['ink'], P['sky'], 0.80)
+    fig = plt.figure(figsize=(13, 10.6))
+    ax = fig.add_axes([0.012, 0.14, 0.976, 0.79])
+    bounds = (-950, 950, -790, 600)     # the region's frame, run south to take in the Coliseum
+    plan_axes(ax, data, bounds)
+    # Today's buildings and streets from the region's OSM cache, which reaches past the frame.
+    osm = json.load(open(os.path.join(ROOT, 'data/richmond-streetcars/osm.json')))['elements']
+    kinds = ('residential', 'tertiary', 'primary', 'secondary', 'primary_link', 'secondary_link', 'tertiary_link', 'unclassified', 'living_street', 'motorway', 'motorway_link', 'trunk')
+    blds = []
+    for e in osm:
+        if e['type'] != 'way' or len(e.get('geometry', [])) < 2:
+            continue
+        g = e['geometry']
+        x, y = to_view(data, [q['lon'] for q in g], [q['lat'] for q in g])
+        if x.max() < bounds[0] - 50 or x.min() > bounds[1] + 50 or y.max() < bounds[2] - 50 or y.min() > bounds[3] + 50:
+            continue
+        t = e.get('tags', {})
+        if 'building' in t and len(g) > 3:
+            blds.append(np.column_stack([x, y]))
+        elif t.get('highway') in kinds:
+            ax.plot(x, y, color=R['street'], lw=0.5, zorder=2)
+    ax.add_collection(PolyCollection(blds, facecolors=gray, edgecolors=mix(P['ink'], P['sky'], 0.6), linewidths=0.2, zorder=1))
+    by = {}
+    for t in data.d['traced']:
+        if t['m2'] >= 12:
+            by.setdefault(t['material'], []).append(np.array(t['ring']))
+    for mat, rings in by.items():
+        ax.add_collection(PolyCollection(rings, facecolors=P['traced'][mat], edgecolors=R['ink'], linewidths=0.22, zorder=3))
+    for name, fc, a, ls, lw in (('corridor', R['near'], 0.32, (0, (4, 2.5)), 1.0), ('paved', R['pick'], 0.42, '-', 1.2)):
+        for poly in data.d['footprint'][name]:
+            for k, r in enumerate(poly):
+                q = np.array(r)
+                if k == 0:
+                    ax.fill(q[:, 0], q[:, 1], color=fc, alpha=a, lw=0, zorder=4)
+                ax.plot(np.append(q[:, 0], q[0, 0]), np.append(q[:, 1], q[0, 1]), color=R['line'], lw=lw, ls=ls, zorder=5)
+    cx, cy = to_view(data, *COLISEUM)
+    label(ax, cx + 150, cy + 20, 'the Coliseum (today)', size=9)
+    for nm, lon, lat in (('Gilpin Court', -77.4405, 37.5545), ('Second Street', -77.4382, 37.5468), ('Leigh Street', -77.4318, 37.5468), ('Broad Street', -77.4420, 37.5452)):
+        x, y = to_view(data, lon, lat)
+        label(ax, x, y, nm, size=8.5, color=R['muted'])
+    scale_bar(ax, -920, -765, 200)
+    north_arrow(ax, data, -880, -690, 50)
+    ax.set_title('The highway laid over the 1952 sheets, over today\'s ward', pad=8, fontsize=13)
+    h = [Patch(color=R['pick'], alpha=0.6, label='highway: today\'s paved roadway and ramps'),
+         Patch(facecolor=R['near'], alpha=0.5, edgecolor=R['line'], ls='--', label='corridor: plus 15 m each side'),
+         Patch(color=P['traced']['brick'], label='1952 outline, brick'), Patch(color=P['traced']['frame'], label='1952 outline, frame'),
+         Patch(color=P['traced']['stone'], label='1952, stone or concrete'), Patch(color=P['traced']['special'], label='1952, other materials'),
+         Patch(color=gray, label='buildings today (OSM)'), Line2D([], [], color=R['street'], lw=1, label='streets today (OSM)')]
+    fig.legend(handles=h, loc='lower left', ncol=4, bbox_to_anchor=(0.012, 0.062), fontsize=9, handlelength=1.6, columnspacing=1.2, frameon=False)
+    footer(fig, 'Plan of the ward, north about 10° right of up. 1952 outlines: Sanborn Map Co., Richmond, Va., 1952, vol. 3, sheets 304–312, 315, '
+                '317–320 and 326 (Library of Congress, Geography and Map Division, Sanborn Maps Collection; public domain), traced in code and fitted to '
+                'today\'s street corners (a few meters off). Uncolored 1952 outlines are drawn as frame. Today\'s buildings and streets: OpenStreetMap '
+                'contributors (ODbL). The highway polygons are today\'s footprint, a stand-in for the 1958 right-of-way.')
+    save(fig, out, 'overlay')
+
+
+CHARTS.update({'overlay': chart_overlay})
+
+
 if __name__ == '__main__':
     main()
