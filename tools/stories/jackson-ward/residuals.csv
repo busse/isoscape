@@ -1,0 +1,67 @@
+sheet,control point,lon,lat,u (full-res px),v (full-res px),residual m,fit,m per full-res px,buildings exported
+304,Leigh & Munford (pipes),-77.4448641,37.5518775,3905,4930,0.5,similarity (scale free); refined against city block outlines,0.0767,144
+304,Leigh & Gilmer (pipes),-77.4459857,37.5525215,2310,4920,1.0,similarity (scale free); refined against city block outlines,0.0767,144
+304,Leigh & Goshen (pipes),-77.4468308,37.5530155,1140,4955,3.4,similarity (scale free); refined against city block outlines,0.0767,144
+304,Axtel & Goshen (pipes),-77.4464028,37.5534704,1130,4060,2.9,similarity (scale free); refined against city block outlines,0.0767,144
+305,Leigh & Judah,-77.4423648,37.5503884,2450,1560,0.7,similarity (scale free); refined against city block outlines,0.0759,172
+305,Leigh & St Peter,-77.4416768,37.5499819,2480,2590,3.4,similarity (scale free); refined against city block outlines,0.0759,172
+305,Leigh & Price,-77.4406178,37.549352,2430,4040,3.8,similarity (scale free); refined against city block outlines,0.0759,172
+305,Leigh & Adams,-77.4401974,37.5490988,2420,4730,2.3,similarity (scale free); refined against city block outlines,0.0759,172
+305,Duval & Judah,-77.4415891,37.5512375,3990,1540,1.3,similarity (scale free); refined against city block outlines,0.0759,172
+306,Clay & Adams,-77.441209,37.5479032,300,2240,4.5,similarity (scale free),0.0788,199
+306,Leigh & Adams,-77.4401974,37.5490988,2280,2240,4.2,similarity (scale free),0.0788,199
+306,Leigh & St James,-77.4392582,37.5485373,2285,3510,1.9,similarity (scale free),0.0788,199
+306,Clay & St James,-77.4403331,37.5473849,300,3520,0.7,similarity (scale free),0.0788,199
+306,Leigh & 1st,-77.4383428,37.5479753,2290,4810,0.5,similarity (scale free),0.0788,199
+306,Clay & 1st,-77.4394285,37.5468258,300,4820,2.7,similarity (scale free),0.0788,199
+306,Jackson & St James,-77.4384866,37.5493621,3770,3510,1.2,similarity (scale free),0.0788,199
+306,Leigh & Price,-77.4406178,37.549352,2300,1580,2.0,similarity (scale free),0.0788,199
+307,2nd & Baker,-77.4347449,37.55026,1625,2054,3.0,similarity (scale free); refined against city block outlines,0.0789,359
+307,2nd & Duval,-77.4355345,37.5494468,1625,3435,2.6,similarity (scale free); refined against city block outlines,0.0789,359
+307,1st & Baker,-77.435864,37.5505615,350,2420,1.8,similarity (scale free); refined against city block outlines,0.0789,359
+307,1st & Duval,-77.4365773,37.5498361,350,3710,1.8,similarity (scale free); refined against city block outlines,0.0789,359
+307,1st & Charity,-77.4351628,37.5512978,350,1120,2.0,similarity (scale free); refined against city block outlines,0.0789,359
+308,2nd & Jackson,-77.4366301,37.5482744,1527,1318,0.7,similarity (scale free); refined against city block outlines,0.077,372
+308,2nd & Leigh,-77.4374348,37.5474306,1527,2830,0.2,similarity (scale free); refined against city block outlines,0.077,372
+308,3rd & Leigh,-77.4365262,37.5468848,2815,2833,1.5,similarity (scale free); refined against city block outlines,0.077,372
+308,4th & Leigh,-77.435676,37.546314,4118,2835,3.9,similarity (scale free); refined against city block outlines,0.077,372
+308,2nd & Clay,-77.4385277,37.5462848,1527,4915,1.2,similarity (scale free); refined against city block outlines,0.077,372
+308,3rd & Clay,-77.4376118,37.5457378,2815,4915,2.9,similarity (scale free); refined against city block outlines,0.077,372
+308,1st & Leigh,-77.4383428,37.5479753,261,2830,2.8,similarity (scale free); refined against city block outlines,0.077,372
+309,4th & Leigh,-77.435676,37.546314,2300,645,2.1,"rotation and shift, scale from the scale bar; refined against city block outlines",0.0762,285
+309,5th & Leigh,-77.434753,37.5457956,2300,1915,1.9,"rotation and shift, scale from the scale bar; refined against city block outlines",0.0762,285
+309,4th & Jackson,-77.4347897,37.5472339,4010,645,2.3,"rotation and shift, scale from the scale bar; refined against city block outlines",0.0762,285
+310,4th & Jackson,-77.4347897,37.5472339,392,613,0.5,"rotation and shift, scale from the scale bar; refined against city block outlines",0.0762,283
+310,5th & Jackson,-77.433895,37.5466996,390,1915,1.1,"rotation and shift, scale from the scale bar; refined against city block outlines",0.0762,283
+310,7th & Jackson,-77.4320817,37.5456286,390,4492,1.6,"rotation and shift, scale from the scale bar; refined against city block outlines",0.0762,283
+311,4th & Baker (from sheet 310's fit),-77.4329592,37.5491887,375,665,0.9,"rotation and shift, scale from the scale bar; refined against city block outlines",0.0762,165
+311,7th & Baker (from sheet 310's fit),-77.4302654,37.5475941,455,4520,2.2,"rotation and shift, scale from the scale bar; refined against city block outlines",0.0762,165
+311,4th & Preston,-77.4324116,37.549783,1415,665,2.6,"rotation and shift, scale from the scale bar; refined against city block outlines",0.0762,165
+312,4th & Hospital,-77.4301129,37.5520232,2885,800,3.3,similarity (scale free),0.0733,54
+312,5th & Hospital,-77.4292917,37.5515544,2880,1920,4.7,similarity (scale free),0.0733,54
+312,7th & Hospital,-77.4270513,37.5511757,4140,4465,1.5,similarity (scale free),0.0733,54
+315,Leigh & Judah,-77.4423648,37.5503884,520,3870,2.7,similarity (scale free); refined against city block outlines,0.0764,186
+315,Duval & Judah,-77.4415891,37.5512375,1990,3875,2.8,similarity (scale free); refined against city block outlines,0.0764,186
+315,Duval & St Peter,-77.4406549,37.550972,2350,4930,1.3,similarity (scale free); refined against city block outlines,0.0764,186
+315,Leigh & Munford,-77.4448641,37.5518775,405,270,2.0,similarity (scale free); refined against city block outlines,0.0764,186
+317,Brook & Mitchell (water-pipe crossing),-77.4439955,37.5554676,205,1505,2.0,"rotation and shift, scale from the scale bar",0.0762,101
+317,hydrant at W. Baker & Roane (from sheet 315's fit),-77.4422956,37.5524328,3740,4895,4.6,"rotation and shift, scale from the scale bar",0.0762,101
+317,W. Charity & Roane (from sheet 315's fit),-77.4417289,37.5529559,3960,3950,3.8,"rotation and shift, scale from the scale bar",0.0762,101
+318,Hickory & W. Charity (water-pipe crossing),-77.4400859,37.5524464,2610,3955,8.5,"one corner and the scale bar, rotation and shift searched (0.5 deg, 3 m steps) against the outlines of the Gilpin Court buildings that stand today (OSM): they fall on their 1952 outlines (rotsearch.py)",0.0762,75
+319,Federal & St John (pipes),-77.436621,37.5526437,1450,2915,3.2,similarity (scale free); refined against city block outlines,0.078,215
+319,Charity & St John,-77.4372844,37.5519252,185,2600,1.6,similarity (scale free); refined against city block outlines,0.078,215
+319,Charity & St James,-77.4362244,37.55162,185,3860,3.4,similarity (scale free); refined against city block outlines,0.078,215
+319,Federal & St James,-77.4355546,37.5523327,1455,4145,3.2,similarity (scale free); refined against city block outlines,0.078,215
+320,St James & Federal (pipes),-77.4355546,37.5523327,1440,590,4.8,similarity (scale free),0.0776,174
+320,Charity & 1st (pipes),-77.4351628,37.5512978,245,1490,1.1,similarity (scale free),0.0776,174
+320,Federal & 2nd (pipes),-77.4333667,37.5517221,1515,3175,3.0,similarity (scale free),0.0776,174
+320,Hill & 1st (pipes),-77.433164,37.5534689,3955,2655,4.4,similarity (scale free),0.0776,174
+320,Charity & 2nd (pipes),-77.4340561,37.5509851,262,2775,3.2,similarity (scale free),0.0776,174
+326,Jackson & St James,-77.4384866,37.5493621,105,3575,3.8,similarity (scale free),0.0763,373
+326,Jackson & Price,-77.4398498,37.5501801,120,1645,3.5,similarity (scale free),0.0763,373
+326,Jackson & Cameo,-77.4389034,37.5496189,120,2980,3.1,similarity (scale free),0.0763,373
+326,St James & Duval,-77.4376579,37.550131,1700,3650,6.7,similarity (scale free),0.0763,373
+326,St John & Baker,-77.4379902,37.5511607,2545,2490,2.9,similarity (scale free),0.0763,373
+326,St Paul & Baker,-77.4390606,37.5514563,2250,1270,5.9,similarity (scale free),0.0763,373
+326,St James & Baker,-77.4369294,37.5508672,2985,3715,0.6,similarity (scale free),0.0763,373
+326,1st & Duval,-77.4365773,37.5498361,2030,4915,2.0,similarity (scale free),0.0763,373
