@@ -124,6 +124,8 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 .foot { max-width: 1040px; margin: 0 auto; padding: 14px 20px 48px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--dim); }
 .foot p { margin: 0 0 6px; }
 .foot a { color: var(--accent); }
+/* Wide figures run past the text column, as far as the window allows. */
+.wrap .prose figure.fig.wide { --w: min(1120px, 100vw - 56px); width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
 @media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; } .top nav { margin-left: 0; } }
 </style>
 </head>
@@ -134,7 +136,7 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 <article class="prose">
 <h1 id="richmonds-streetcars-1925">Richmond&#39;s streetcars, 1925</h1>
 <p>By May 1888 Frank Sprague&#39;s electric cars were running on Richmond&#39;s hills, the first big electric street railway that worked, and the city grew out along the lines. This map draws the system as it stood in 1925: sixteen car lines over the buildings then standing, with fourteen places the cars ran to framed around it, from the suburbs they made to the trolley parks at the ends of the line.</p>
-<p><img src="streetcars-menu.jpg" alt="The 1925 map, framed by its fourteen stops" loading="lazy"></p>
+<p><img src="streetcars-menu.jpg" alt="The 1925 map, framed by its fourteen stops" width="1800" height="1350" loading="lazy"></p>
 <p><a href="../index.html#richmond-streetcars:1925">Open the map</a> to pan and zoom, or jump to a stop below. <a class="buy" href="https://chrisbusse.com/products/richmonds-streetcars-1925-the-system-map?utm_source=isoscape-explorer&amp;utm_medium=referral&amp;utm_campaign=streetcars" target="_blank" rel="noopener">Buy a print of the map alone ↗</a> · <a class="buy" href="https://chrisbusse.com/products/richmonds-streetcars-1925-the-lines-and-fourteen-stops?utm_source=isoscape-explorer&amp;utm_medium=referral&amp;utm_campaign=streetcars" target="_blank" rel="noopener">Buy a print of the map with every stop ↗</a></p>
 <h2 id="the-stops">The stops</h2>
 <h3 id="1-westhampton-park">1. Westhampton Park</h3>

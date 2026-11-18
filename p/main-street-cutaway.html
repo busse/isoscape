@@ -124,6 +124,8 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 .foot { max-width: 1040px; margin: 0 auto; padding: 14px 20px 48px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--dim); }
 .foot p { margin: 0 0 6px; }
 .foot a { color: var(--accent); }
+/* Wide figures run past the text column, as far as the window allows. */
+.wrap .prose figure.fig.wide { --w: min(1120px, 100vw - 56px); width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
 @media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; } .top nav { margin-left: 0; } }
 </style>
 </head>
@@ -135,7 +137,7 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 <h1 id="main-street-station-about-1952-the-cutaway">Main Street Station, about 1952: the cutaway</h1>
 <p><em>Building cutaway · Plate MSS·01</em></p>
 <p>Main Street Station opened in November 1901; the Seaboard Air Line&#39;s trains used its west side and the Chesapeake and Ohio&#39;s its east. This drawing cuts it through its waiting rooms, from Main Street up the main stair to the waiting room and across the concourse to the trains under the shed, as it stood about 1952. The east side is lifted away down to its ground floor, so its rooms read as a plan, and beneath it the same cut is drawn flat, with the traveler&#39;s way from the street to the train dashed in red. Beside the flat section, the train shed is cut across, looking north.</p>
-<p><img src="main-street-cutaway-sheet.jpg" alt="The cutaway sheet: the station cut through its waiting rooms above, the same cut seen flat and the train shed cut across below, and the numbered callouts beside them" loading="lazy"></p>
+<p><img src="main-street-cutaway-sheet.jpg" alt="The cutaway sheet: the station cut through its waiting rooms above, the same cut seen flat and the train shed cut across below, and the numbered callouts beside them" width="1800" height="1350" loading="lazy"></p>
 <h2 id="the-way-to-the-train">The way to the train</h2>
 <h3 id="1-main-street">1. Main Street</h3>
 <p>East Main Street, in Shockoe Valley.</p>

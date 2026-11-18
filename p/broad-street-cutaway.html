@@ -124,6 +124,8 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 .foot { max-width: 1040px; margin: 0 auto; padding: 14px 20px 48px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--dim); }
 .foot p { margin: 0 0 6px; }
 .foot a { color: var(--accent); }
+/* Wide figures run past the text column, as far as the window allows. */
+.wrap .prose figure.fig.wide { --w: min(1120px, 100vw - 56px); width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
 @media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; } .top nav { margin-left: 0; } }
 </style>
 </head>
@@ -135,7 +137,7 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 <h1 id="broad-street-station-1943-the-cutaway">Broad Street Station, 1943: the cutaway</h1>
 <p><em>Building cutaway · Plate BSS·15</em></p>
 <p>Broad Street Station opened in January 1919 for the RF&amp;P and the Atlantic Coast Line. This drawing cuts it down the middle, from the Broad Street doors through the portico, the White Waiting Room under the dome and the concourse out over the tracks, as it stood in 1943. The east half is lifted away down to its first floor, so its rooms read as a plan, and beneath it the same cut is drawn flat, with the traveler&#39;s way from the street to the train dashed in red. It belongs to the <a href="broad-street.html">Broad Street Station, 1943</a> set.</p>
-<p><img src="broad-street-cutaway-sheet.jpg" alt="The cutaway sheet: the station cut down the middle above, the same cut seen flat below, and the numbered callouts beside them" loading="lazy"></p>
+<p><img src="broad-street-cutaway-sheet.jpg" alt="The cutaway sheet: the station cut down the middle above, the same cut seen flat below, and the numbered callouts beside them" width="1800" height="1350" loading="lazy"></p>
 <h2 id="the-way-to-the-train">The way to the train</h2>
 <h3 id="1-broad-street">1. Broad Street</h3>
 <p>The front of the station, facing West Broad Street.</p>
