@@ -23,6 +23,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
+- **Main Street Station, about 1952: Cutaway**: rc1 inspected once (2 arm's-length and 1 text fault fixed in one round, 7fb05a9; 5 up-close faults accepted, in rc1/inspection.md): waiting on the owner's release approval and a plate number
 - **The Byrd Theatre: Cutaway**: owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead
 
 ## Rough draft
