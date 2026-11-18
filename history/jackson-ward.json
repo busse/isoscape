@@ -1,0 +1,16 @@
+{
+ "extends": "history/richmond-downtown.json",
+ "title": "Jackson Ward through time",
+ "epochs": [
+  {
+   "year": 1952,
+   "title": "Before the Turnpike",
+   "note": "The last Sanborn survey before the Richmond-Petersburg Turnpike was cut through the ward in 1955-58. Rough draft: many buildings of the year are not yet traced."
+  },
+  {
+   "year": 2026,
+   "title": "Today"
+  }
+ ],
+ "features": []
+}
