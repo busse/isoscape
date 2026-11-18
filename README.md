@@ -79,7 +79,8 @@ rewrites `out/index.html`, a single local page over all of them:
 - **Bottom:** when and from what it was built, its measures, and its settings.
 - **Compare** (`C`, or ⌥-click a second build): B is laid over A in the same scene
   coordinates, with a divider to drag. The info panel shows the change in every measure and
-  every setting that differs.
+  every setting that differs. The divider's moves and look live in `src/compare.ts`, shared
+  with the compare figures a content page can place (`::: compare`, under "Adding a page").
 - **How this view was made** (`M`, a tab in the info panel): the selected build explained in
   sentences, written from its `meta.json`: the frame and camera, which data went in, the
   elevation range, where the building heights came from, bridge rules, rapids, the commit.
@@ -379,6 +380,32 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   shows that; it is linked, not inlined, from `p/`, so it costs nothing until opened (the
   Jackson Ward views have 3,200 px copies, written by `views.py`). Pages without the block
   render as before. GitHub shows the `:::` lines as text.
+- **Compare figures** are opt-in too: a slider between two pictures of the same frame, numbered
+  with the other figures and taking the same classes. Each picture's line ends with its label;
+  the first picture is on the left of the divider:
+
+  ```markdown
+  ::: compare wide
+  ![Alt text for the left picture](jackson-ward-state-1952.webp) 1952
+  ![Alt text for the right picture](jackson-ward-state-2026.webp) today
+
+  Short caption.
+  :::
+  ```
+
+  The two pictures must be the same size and drawn from the same frame (nothing scales one to
+  fit the other; `views.py` renders the Jackson Ward years in one shared viewBox for this).
+  Press or drag anywhere on the pictures to move the divider (mouse or touch; a vertical swipe
+  still scrolls). The divider is a focusable slider (`role="slider"`, with `aria-valuenow` and a
+  text naming both sides): ← and → move it 2%, with Shift or PageUp/PageDown 10%, Home and End
+  to the edges. Its tab shows the two labels, one each side of the line. The expand button (⤢)
+  opens the same slider large in the lightbox, with each picture's `-large` copy and the divider
+  where it was; there the arrow keys move the divider while it has focus and step figures
+  otherwise, and **Full size** is hidden. In the grid it is one figure, shown by its first
+  picture. Without script it shows the two halves at 50% and the expand button links to the
+  first picture's larger copy. The slider shares the viewer's divider (`src/compare.ts`):
+  the same moves and the same look. Only pages with the block get its styles and script on
+  `p/`. Anything but two pictures makes a plain figure.
 - Raster images carry their width and height, so the page holds its layout while they load.
 - The converter (`src/markdown.ts`) escapes all text and drops raw HTML and unsafe link
   schemes. Files starting with `_` (drafts) and `README.md` are skipped.

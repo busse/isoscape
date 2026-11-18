@@ -1311,7 +1311,11 @@ build list and these pages embedded in it, so it opens from disk with no server.
 Markdown files in `pages/`. To add one, see the README. A page may number its pictures as
 figures, each with a caption under it; clicking one opens it large in a lightbox, with the
 page's other figures a step away and a grid of them all. The Jackson Ward story's views open at
-3,200 pixels wide there, twice the 1,600 the page shows; its charts open at their own 1,600.
+3,200 pixels wide there, twice the 1,600 the page shows; its charts open at their own 1,600. A
+figure can also be a compare slider: two pictures of one frame laid over each other, with the
+same divider the explorer uses to compare two builds, dragged or moved with the arrow keys. Its
+expand button opens the same slider large in the lightbox. The Jackson Ward year views are drawn
+in one shared frame for this, so every year lines up with the others pixel for pixel.
 
 Beside it go plain pages that need no script, for search engines and link previews: each of
 these pages as `p/<slug>.html`, each map as `m/<region>.html` (and each year of a dated series
