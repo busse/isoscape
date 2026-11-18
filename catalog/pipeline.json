@@ -184,8 +184,8 @@
    "on_sale": true,
    "orders": 0,
    "rounds": 0,
-   "waiting_on": "nothing",
-   "decision": "stays on sale (not visible at arm's length); height and note corrected in the planned edition, or in place if it has no orders",
+   "waiting_on": "agent",
+   "decision": "measured heights approved by the owner; in-place revision 3.1.0 being prepared (needs orders = 0 recounted)",
    "accepted_faults": [],
    "planned_edition": {
     "reason": "factual correction",
@@ -425,8 +425,8 @@
    "on_sale": true,
    "orders": "unknown",
    "rounds": 0,
-   "waiting_on": "nothing",
-   "decision": null,
+   "waiting_on": "agent",
+   "decision": "measured heights approved; in-place revision 3.1.0 being prepared with stop 7 and the framed set",
    "accepted_faults": [],
    "planned_edition": {
     "reason": "factual correction",
@@ -2690,8 +2690,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "whether to make an edition of every print for larger title-block labels (they print at about 3 to 4 pt at the smallest sizes sold)",
+   "waiting_on": "agent",
+   "decision": "mock-up first (owner): three prints at smallest sold size, current block beside larger options",
    "accepted_faults": [],
    "planned_edition": {
     "reason": "improvement",
@@ -2775,8 +2775,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 4,
-   "waiting_on": "owner",
-   "decision": "review marks on the working draft (review PDF sent for d3; d4 corrects the tower and roof heights and adds the red route)",
+   "waiting_on": "agent",
+   "decision": "measured heights approved; round 5 approved by the owner: dormers rebuilt clean, dome rounded; then his review",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": "113ebc1",
@@ -2825,8 +2825,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "draw it or not",
+   "waiting_on": "agent",
+   "decision": "rough draft approved to start; proof in progress on branch cutaway-pump-house",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -2837,8 +2837,11 @@
    ],
    "title": "The Byrd Park Pump House: Cutaway",
    "kind": "cutaway",
-   "stage": "research",
-   "notes": "research done: feasibility 3.5 of 5 (pump-house.md)"
+   "stage": "rough draft",
+   "notes": "research done: feasibility 3.5 of 5 (pump-house.md)",
+   "log": [
+    "2026-11-18: research -> rough draft"
+   ]
   },
   "story-jackson-ward": {
    "plate": null,
@@ -2850,7 +2853,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "agent",
-   "decision": "first story; image rough drafts in progress (ground before the cut: done as a rough draft; tracing the 1952 Sanborn sheets: running); the story shows its work: method charts and a 'How we know' section go in the explorer and the write-up; community reviewers see the working draft before publication",
+   "decision": "first story; rough drafts done on branches jw-ground (ground before the cut) and jw-trace (1952 Sanborn, 15 sheets, 3,157 outlines); next: integrate, outline for the owner; shows its work; community reviewers at working draft",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
