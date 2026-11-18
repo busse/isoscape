@@ -42,15 +42,15 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
-| BSS·00 | Broad Street Station, 1943: The Railroads and Fourteen Places | set menu | 3.0.0 | yes, version 3 |
+| BSS·00 | Broad Street Station, 1943: The Railroads and Fourteen Places | set menu | 3.1.0 | yes, version 3 |
 | BSS·01 | AY Tower, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·02 | The State Fair grounds, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·03 | Hermitage Road, Broad Street Station 1943 | set box | 2.0.0 | no |
 | BSS·04 | Seaboard Junction, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·05 | The loop and the sheds, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·06 | C.F. Sauer Company, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
-| BSS·07 | Main Street Station, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
-| BSS·08 | The Triple Crossing, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
+| BSS·07 | Main Street Station, Broad Street Station 1943 | set box | 3.1.0 | yes, version 3 |
+| BSS·08 | The Triple Crossing, Broad Street Station 1943 | set box | 3.1.0 | yes, version 3 |
 | BSS·09 | The C&O viaduct, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·10 | Hull Street Station, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·11 | The Belt Line bridge, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
@@ -59,7 +59,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | BSS·14 | Pope's front, Broad Street Station 1943 | set box | 3.0.0 | yes, version 3 |
 | BSS·15 | Broad Street Station, 1943: The Cutaway | cutaway | 1.0.0 | yes, version 1 |
 | BSS·16 | Scott's Addition, Broad Street Station 1943 | set box | 1.0.0 | yes, version 1 |
-| BSS·M | Broad Street Station, 1943: The Railroad Map | set map | 3.0.0 | yes, version 3 |
+| BSS·M | Broad Street Station, 1943: The Railroad Map | set map | 3.1.0 | yes, version 3 |
 | GWY·01 | Gwynn's Island | print | 4.0.0 | yes, version 4 |
 | RVA·01 | Richmond, 1925 | print | 5.0.0 | yes, version 5 |
 | RVA·03 | Richmond, 1886 | print | 3.0.0 | yes, version 3 |
@@ -109,9 +109,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 Changes to published work are made in planned editions, each for a stated reason: a factual correction, a fault visible on the wall, or an improvement.
 
-- **Main Street Station, Broad Street Station 1943** (BSS·07), factual correction: Main Street Station is drawn about a fifth too low: rebuild the tower and roof to the heights measured on HABS VA-848-10, -11 and -12 (finial about 148 ft over Main Street); the note says "110 feet to the finial"; correct it to about 148 ft (approximate).
-- **The Triple Crossing, Broad Street Station 1943** (BSS·08), factual correction: Main Street Station, at the box's top edge, is drawn about a fifth too low (finial about 148 ft over Main Street).
-- **Broad Street Station, 1943: The Railroad Map** (BSS·M), factual correction: Main Street Station is drawn about a fifth too low (finial about 148 ft over Main Street, not 110).
 - **Title-block labels at the smallest sizes**, improvement: set the title block's labels at no less than 6 pt at the smallest size sold, on every print.
 
 ## Known faults, accepted
