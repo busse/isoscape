@@ -14,9 +14,11 @@ level (`elevation`, `upTo`); every part belongs to the model `mss`, so its level
 the ground under the station alone.
 
   - the head house, 102 ft by 62 ft 4 in (The Railroad Gazette, July 13, 1900; OSM way
-    366226941, 30.5 by 19.6 m), to its cornice, under a steep hipped roof of red tile;
-  - the clock tower at the southwest corner (OSM way 366226942), 110 ft to the finial (The
-    Railroad Gazette; SAH Archipedia), its shaft, clock stage, dome and finial;
+    366226941, 30.5 by 19.6 m), to its cornice, under a steep hipped roof of red tile whose
+    ridge, about 11 m long, is measured on HABS photographs (1971);
+  - the clock tower at the southwest corner (OSM way 366226942), about 148 ft to the finial as
+    measured on HABS photographs VA-848-10, -11 and -12 (1971): its shaft, balcony, clock stage,
+    entablature, drum, dome and finial;
   - the one-story concourse behind it, 82 ft wide (the 1900 plan), 35 ft deep (HAER VA-4);
   - the train shed, 123 ft between its columns and 517 ft long (HAER VA-4), its gable roof
     from the eaves 21 ft 1 in to the ridge 44 ft 9 in above the platforms (HAER VA-4, sheet 3),
@@ -79,27 +81,36 @@ SRC = {
     'dhr': 'https://www.dhr.virginia.gov/?p=15225',
     'habs-12': f'{LOC}/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg',
     'sanborn-1905': 'https://www.loc.gov/item/sanborn09064_003/',
+    'habs-10': f'{LOC}/master/pnp/habshaer/va/va0500/va0562/photos/305470p.jpg',
+    'habs-11': f'{LOC}/service/pnp/habshaer/va/va0500/va0562/photos/305471pv.jpg',
 }
 
 # ---- levels, meters above sea level (main_street.py) ------------------------------------------
 MAIN_ST = 6.1          # Main Street in front of the station (USGS 3DEP)
 G = 8.4                # the ground floor, raised about 8 ft above the street (The Railroad Gazette)
 FF = 14.9              # the track floor and the platforms (scaled from photographs: approximate)
-# Heights measured on HABS VA-848-12 (Library of Congress, photograph 305472, J. E. Boucher, 1971), an
-# oblique view of the front from Main Street, along the tower's corner against the finial's 110 ft
-# above the street (The Railroad Gazette, 1900): the eaves about 56 ft, the ridge about 80 ft (set
-# back 31 ft, so less sure), the clock stage from about 78.5 ft, the clock faces' centers about
-# 85 ft and their diameter about 7.5 ft, the dome from about 93 ft (Sanborn, 1905 and 1952:
-# "Clock Tower 90'") to about 102 ft. All approximate, to within about 5 ft.
-FTM = 0.3048
-CORNICE = MAIN_ST + 56 * FTM     # where the roof springs
-RIDGE = MAIN_ST + 80 * FTM
-SHAFT = MAIN_ST + 78.5 * FTM - 0.3   # the tower's shaft, to the balcony under the clock stage
-STAGE_TOP = MAIN_ST + 93 * FTM
-DOME_TOP = MAIN_ST + 102 * FTM
-FINIAL = MAIN_ST + 110 * FTM
-CLOCK = MAIN_ST + 85 * FTM
-CLOCK_R = 7.5 * FTM / 2      # the tower's shaft, to the balcony under the clock stage
+# The roof's ridge and the tower's stages, as the Main Street Station cutaway measured them in its
+# round 4 (branch cutaway-main-street: tools/stations/main_street.py, levels; its sources.md,
+# Round 4), copied here as data. Measured on three HABS photographs of 1971 (J. E. Boucher):
+# VA-848-10 (photograph 305470, the front square on from the I-95 viaduct), scaled by the
+# front's own width, 102 ft, and checked by its 12-ft bays and the 1900 section's floors;
+# VA-848-12 (305472, from Main Street) and VA-848-11 (305471, from the east platform), which agree
+# to within about 1.5 m and 1 m. Read from the cresting over the cornice; points set back from the
+# front corrected for the camera's distance (about 40 m). All approximate, to within about 1.5 m
+# (the finial to within about 8 ft). Sanborn's "Clock Tower 90'" (1905, 1952) fits the measured
+# shaft, about 90 ft over the ground floor. The Railroad Gazette's 110 ft (1900), written before
+# the station was built beside a perspective of a different tower, does not fit the photographs.
+CORNICE = FF + 11.8    # 26.7: the main cornice, where the roof springs (about 68 ft over Main Street)
+RIDGE = 41.4           # the ridge, about 115 ft over Main Street, about 11 m long between its finials
+SHAFT = 35.9           # the tower's shaft, to the balcony's floor under the clock stage
+BALCONY = 36.65        # the top of the balcony's balustrade
+CLOCK = 40.3           # the clock faces' centers
+CLOCK_R = 1.35         # the faces' radius: about 9 ft across with the bezel
+STAGE_TOP = 43.0       # the clock stage's top, under its entablature
+ENTAB = 43.5           # the entablature's top, the drum's foot
+DRUM_TOP = 44.8        # the dome's foot
+DOME_TOP = 48.7        # the dome's crown
+FINIAL = 51.6          # the finial's tip, about 148 ft over Main Street
 DECK_BOTTOM = FF - 1.4
 
 # ---- plan (main_street_plan.py) ---------------------------------------------------------------
@@ -138,42 +149,66 @@ PLAN = [SRC['rg-1900']]
 HABS = [SRC['habs-data']]
 PH = [SRC['habs-photo-side'], SRC['detroit-east']]
 SHED = [SRC['haer-data'], SRC['haer-3'], SRC['haer-2']]
-MEASURED = (' Heights measured on HABS photograph VA-848-12 (1971), an oblique view of the front, against the finial\'s 110 ft above '
-            'the street: approximate, to within about 5 ft.')
-APPROX = ' Its cornice, about 56 ft above Main Street, is measured on HABS photograph VA-848-12 (1971) against the 110-ft tower (approximate).'
+MEASURED = (' Heights measured on HABS photographs VA-848-10, -11 and -12 (1971) against the front\'s own width, 102 ft: approximate, '
+            'to within about 1.5 m (5 ft).')
+APPROX = (' Its cornice, about 26.7 m above sea level (some 68 ft over Main Street), is as the 1900 section draws it and as HABS photographs '
+          'VA-848-10 and -12 (1971) show it (approximate).')
+H10 = [SRC['habs-10'], SRC['habs-11'], SRC['habs-12']]
 
 HH_NOTE = ('The head house, 102 ft by 62 ft 4 in (The Railroad Gazette, July 13, 1900), of golden Roman brick over a base of rough stone '
            '(HABS VA-848), drawn as a plain block to its cornice; its outline is OpenStreetMap\'s, which matches the plan.' + APPROX)
 T1 = TOWER[1]
 # In two pieces round the tower, which stands in its southwest corner, so the tower is drawn whole.
 part('mss-head-house', 'Main Street Station (head house)', rect(T1, HH_E, 0.0, HH_N), MAIN_ST, CORNICE, 'stone', 'drawn', HH_NOTE,
-     PLAN + HABS + [SRC['osm-headhouse']] + PH)
+     PLAN + HABS + [SRC['osm-headhouse']] + PH + H10)
 part('mss-head-house-west', 'Main Street Station (head house)', rect(HH_W, T1, TOWER[3], HH_N), MAIN_ST, CORNICE, 'stone', 'drawn', HH_NOTE,
-     PLAN + HABS + [SRC['osm-headhouse']] + PH)
+     PLAN + HABS + [SRC['osm-headhouse']] + PH + H10)
+# The roof: one equal-pitched hip over the whole head house, its ridge parallel to Main Street
+# (29.3 m long, 18.4 m deep at the eaves: the ridge about 10.9 m), drawn in two pieces that stand
+# clear of the tower, east of it and behind it; where the roof meets the tower it is inside it.
+ROOF = rect(HH_W + 0.6, HH_E - 0.6, 0.6, HH_N - 0.6)
+ROOF_NOTE = ('The steep hipped roof of red tile (The Railroad Gazette, 1900; HABS VA-848), from the cornice to its ridge about 41.4 m above sea '
+             'level (some 115 ft over Main Street), the ridge parallel to the street and about 11 m long, as HABS photograph VA-848-10 shows it; '
+             'drawn plain, without its two rows of dormers, its ridge finials and its chimney.' + MEASURED)
+ROOF_SRC = PLAN + HABS + PH + H10
 part('mss-head-house-roof', 'Main Street Station (roof)', rect(T1 + 0.3, HH_E - 0.6, 0.6, HH_N - 0.6), CORNICE, RIDGE, 'tile', 'written',
-     'The steep hipped roof of red tile (The Railroad Gazette, 1900; HABS VA-848), from the cornice at about 56 ft to the ridge at about '
-     '80 ft above Main Street, drawn plain, without its two rows of dormers and its chimney, and from the tower east (behind the tower it '
-     'is left flat).' + MEASURED,
-     PLAN + HABS + PH + [SRC['habs-12']], shape='hip')
+     ROOF_NOTE, ROOF_SRC, shape='hip', roofRing=ROOF)
+part('mss-head-house-roof-west', 'Main Street Station (roof)', rect(HH_W + 0.6, T1 + 0.3, TOWER[3] + 0.3, HH_N - 0.6), CORNICE, RIDGE, 'tile', 'written',
+     ROOF_NOTE, ROOF_SRC, shape='hip', roofRing=ROOF)
 
 a0, a1, b0, b1 = TOWER
-TW = ('The clock tower at the southwest corner, 110 ft high to its finial with a clock face on each side (The Railroad Gazette, 1900; '
-      'HABS VA-848; SAH Archipedia), drawn in plain stages: shaft, clock stage, dome and finial. Its outline is OpenStreetMap\'s; '
-      'its stages are scaled from photographs (approximate).')
-TSRC = PLAN + HABS + [SRC['archipedia'], SRC['osm-tower'], SRC['habs-12'], SRC['sanborn-1905'], SRC['sanborn-1952']] + PH
-TW = TW + MEASURED + ' The Sanborn sheets of 1905 and 1952 mark it "Clock Tower 90\'", about the top of its masonry.'
-part('mss-clock-tower', 'Main Street Station (clock tower)', rect(a0, a1, b0, b1), MAIN_ST, SHAFT + 0.3, 'stone', 'written', TW, TSRC)
-part('mss-clock-stage', 'Main Street Station (clock tower)', rect(a0 + 0.3, a1 - 0.3, b0 + 0.3, b1 - 0.3), SHAFT + 0.3, STAGE_TOP, 'stone', 'written', TW, TSRC)
-# The square ribbed dome, as a revolve on the tower's square (main_street_plan.py: its levels).
-part('mss-clock-dome', 'Main Street Station (clock tower)', rect(a0 + 0.2, a1 - 0.2, b0 + 0.2, b1 - 0.2), STAGE_TOP, DOME_TOP, 'tile', 'written',
-     'The tower\'s square ribbed dome of tile (HABS VA-848), from about 93 ft to about 102 ft above Main Street.' + MEASURED, TSRC, shape='revolve',
-     levels=[[0, 1, 0], [0.2, 1.06, 0], [0.4, 1.0, 0], [1.2, 0.93, 0], [2.0, 0.78, 0], [2.6, 0.5, 0], [round(DOME_TOP - STAGE_TOP, 3), 0.12, 0]])
+TW = ('The clock tower at the southwest corner, with a clock face on each side (The Railroad Gazette, 1900; HABS VA-848), drawn in plain '
+      'stages: shaft, balcony, clock stage, entablature, drum, dome and finial. Its outline is OpenStreetMap\'s. Its stages are measured on '
+      'HABS photographs VA-848-10, -11 and -12 (1971) against the 102-ft front, approximate to within about 1.5 m: the shaft to about 35.9 m '
+      'above sea level, some 90 ft over the ground floor, as the Sanborn atlases (1905, 1952) mark it ("Clock Tower 90\'"); the finial about '
+      '148 ft over Main Street. The 110 ft in The Railroad Gazette (1900), written before the station was built beside a perspective whose '
+      'tower differs from the one built, does not fit the photographs.')
+TSRC = PLAN + HABS + [SRC['archipedia'], SRC['osm-tower']] + H10 + [SRC['sanborn-1905'], SRC['sanborn-1952']] + PH
+part('mss-clock-tower', 'Main Street Station (clock tower)', rect(a0, a1, b0, b1), MAIN_ST, SHAFT, 'stone', 'written', TW, TSRC)
+part('mss-clock-balcony', 'Main Street Station (clock tower)', rect(a0 - 0.3, a1 + 0.3, b0 - 0.3, b1 + 0.3), SHAFT, BALCONY, 'stone', 'written',
+     'The balcony at the top of the shaft, with its balustrade round the clock stage (HABS photographs VA-848-10 to -12), drawn as one plain '
+     'band; its floor about 35.9 m and its balustrade\'s top about 36.65 m above sea level, measured on VA-848-10 (approximate).', TSRC)
+part('mss-clock-stage', 'Main Street Station (clock tower)', rect(a0 + 0.3, a1 - 0.3, b0 + 0.3, b1 - 0.3), BALCONY, STAGE_TOP, 'stone', 'written', TW, TSRC)
+part('mss-clock-entablature', 'Main Street Station (clock tower)', rect(a0 - 0.1, a1 + 0.1, b0 - 0.1, b1 + 0.1), STAGE_TOP, ENTAB, 'stone', 'written',
+     'The entablature over the clock stage (HABS VA-848), its top about 43.5 m above sea level, measured on HABS photograph VA-848-10 '
+     '(approximate).', TSRC)
+part('mss-clock-drum', 'Main Street Station (clock tower)', rect(a0 + 0.45, a1 - 0.45, b0 + 0.45, b1 - 0.45), ENTAB, DRUM_TOP, 'stone', 'written',
+     'The low drum the dome stands on (HABS VA-848), to about 44.8 m above sea level, measured on HABS photograph VA-848-10 '
+     '(approximate).', TSRC)
+# The square ribbed dome, as a revolve on the tower's square: a quarter-ellipse in profile, its
+# crown about half the clock stage's height over its foot (HABS VA-848-10).
+DH = DOME_TOP - DRUM_TOP
+part('mss-clock-dome', 'Main Street Station (clock tower)', rect(a0 + 0.5, a1 - 0.5, b0 + 0.5, b1 - 0.5), DRUM_TOP, DOME_TOP, 'tile', 'written',
+     'The tower\'s square ribbed dome of tile (HABS VA-848), from about 44.8 m to about 48.7 m above sea level, drawn plain.' + MEASURED, TSRC,
+     shape='revolve', levels=[[round(DH * k / 10, 3), round(max(0.1, math.sqrt(1 - (k / 10) ** 2)), 3), 0] for k in range(11)])
 cx, cb = (a0 + a1) / 2, (b0 + b1) / 2
 part('mss-clock-finial', 'Main Street Station (clock tower)', rect(cx - 0.25, cx + 0.25, cb - 0.25, cb + 0.25), DOME_TOP, FINIAL, 'iron', 'written',
-     'The bronze finial, its top 110 ft above the street (The Railroad Gazette, 1900; SAH Archipedia), drawn as a plain spire; its form is approximate.',
+     'The bronze finial (HABS VA-848), drawn as a plain spire, its tip about 51.6 m above sea level, about 148 ft over Main Street, measured '
+     'on HABS photographs VA-848-10 and -12 against the 102-ft front (approximate, to within about 8 ft). The Railroad Gazette (1900, '
+     'before the station was built) and SAH Archipedia give 110 ft, which does not fit the photographs. Its form is approximate.',
      TSRC, shape='revolve', levels=[[0, 1, 0], [round(FINIAL - DOME_TOP, 3), 0.15, 0]])
-CLK = ('A clock face, one on each of the tower\'s four sides (The Railroad Gazette, 1900), about 7.5 ft across, its center about 85 ft above '
-       'Main Street.' + MEASURED)
+CLK = ('A clock face, one on each of the tower\'s four sides (The Railroad Gazette, 1900; HABS VA-848), about 9 ft across with its bezel, its '
+       'center about 40.3 m above sea level (some 112 ft over Main Street).' + MEASURED)
 for side, (p0, p1, q) in {'s': ((a0 + 0.3, b0 + 0.27), (a1 - 0.3, b0 + 0.27), (0, -0.06)),
                           'e': ((a1 - 0.27, b0 + 0.3), (a1 - 0.27, b1 - 0.3), (0.06, 0)),
                           'n': ((a1 - 0.3, b1 - 0.27), (a0 + 0.3, b1 - 0.27), (0, 0.06)),

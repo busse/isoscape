@@ -19,7 +19,11 @@ import {
 } from './cutaway.ts'
 
 /** A modeled part placed in the view: its outline, bottom and top. */
-export interface PlacedPart { readonly h: HistoryFeature; readonly outer: Ring; readonly seat: number; readonly top: number }
+export interface PlacedPart {
+  readonly h: HistoryFeature; readonly outer: Ring; readonly seat: number; readonly top: number
+  /** A hip piece's whole roof (`roofRing`), in view meters, counter-clockwise. */
+  readonly roof?: Ring
+}
 
 /** The solids a placed part is made of. Non-convex prisms are drawn on their convex hull. */
 export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean } => {
@@ -62,6 +66,7 @@ export const partSolids = (p: PlacedPart): { solids: Solid[]; hulled: boolean } 
     return { solids: [sweep(profile, p0, u, w, 0, thick)], hulled: false }
   }
   if (h.shape === 'stair') return { solids: stair(outer, seat, top, h.steps ?? 12), hulled: false }
+  if (h.shape === 'hip' && p.roof !== undefined && isConvex(p.roof) && isConvex(outer)) return { solids: [roofPiece(p.roof, outer, seat, top)], hulled: false }
   if ((h.shape === 'hip' || h.shape === 'gable') && isConvex(outer)) return { solids: [roofSolid(outer, seat, top, h.shape)], hulled: false }
   if (isConvex(outer)) return { solids: [prism(outer, seat, top)], hulled: false }
   return { solids: [prism(convexHull(outer), seat, top)], hulled: true }
@@ -96,6 +101,24 @@ export const roofSolid = (ring: readonly Vec2[], seat: number, top: number, kind
     s = clipSolid(s, { n: [-slope * nx, -slope * ny, 1], d: seat - slope * (a[0] * nx + a[1] * ny) })
   }
   if (s === null) return prism(ring, seat, top)
+  return { faces: s.faces.map((f) => (f.role === 'cut' ? { pts: f.pts, role: 'side' as const } : f)) }
+}
+
+/**
+ * A piece of the hipped roof on `whole` (convex, counter-clockwise): the whole roof's solid, cut
+ * to the piece's own ring `piece` by a wall standing on each of its edges.
+ */
+export const roofPiece = (whole: readonly Vec2[], piece: readonly Vec2[], seat: number, top: number): Solid => {
+  let s: Solid | null = roofSolid(whole, seat, top, 'hip')
+  const n = piece.length
+  for (let i = 0; i < n && s !== null; i++) {
+    const a = piece[i], b = piece[(i + 1) % n]
+    const l = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
+    const nx = -(b[1] - a[1]) / l, ny = (b[0] - a[0]) / l
+    // Keep the inward side: (p − a) · n ≥ 0.
+    s = clipSolid(s, { n: [-nx, -ny, 0], d: -(a[0] * nx + a[1] * ny) })
+  }
+  if (s === null) return prism(piece, seat, seat + 0.01)
   return { faces: s.faces.map((f) => (f.role === 'cut' ? { pts: f.pts, role: 'side' as const } : f)) }
 }
 
