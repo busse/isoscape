@@ -1750,7 +1750,7 @@
  ],
  "switches": {
   "count": {
-   "note": "The count picture: buildings traced from the 1952 Sanborn sheets whose center falls in the highway's paved footprint (today's roadway and ramps) in the darker tone, in the corridor (paved plus 15 m each side) in the lighter, every other building quiet, and both outlines. Polygons from tools/sanborn/jw/footprint.py; counts in tools/sanborn/jw/counts.json.",
+   "note": "The count picture: buildings traced from the 1952 Sanborn sheets counted in the highway's paved footprint (today's roadway and ramps) in the darker tone, those counted in the corridor (paved plus 15 m each side) only in the lighter, every other building quiet, and both outlines. Polygons from tools/sanborn/jw/footprint.py; counts and the counted ids (tools/sanborn/jw/counted-ids.json) from count.py, so the picture roofs exactly the buildings counted.",
    "highlight": {
     "file": "tools/sanborn/jw/highway-footprint.geojson",
     "polygons": [
@@ -1758,7 +1758,8 @@
      "corridor"
     ],
     "outline": true,
-    "quiet": true
+    "quiet": true,
+    "ids": "tools/sanborn/jw/counted-ids.json"
    }
   },
   "streets": {

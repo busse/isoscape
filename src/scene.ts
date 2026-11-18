@@ -273,10 +273,13 @@ export const buildScene = (
   // the roof that gives it, or null where the building keeps its own.
   const mark = time?.history.highlight
   const markPolys = (mark?.rings ?? []).map((rs) => rs.map((r) => toViewRing(view, r)))
-  const markRoof = (ring: Ring): string | null => {
+  const markSets = mark?.picked?.map((ids) => new Set(ids))
+  const markRoof = (ring: Ring, id?: string): string | null => {
     if (mark === undefined) return null
     const c = centroid(ring)
-    const k = mark.pick === false ? -1 : markPolys.findIndex((rs) => pointInPolygon(c, rs))
+    const k = mark.pick === false ? -1
+      : markSets !== undefined ? (id === undefined ? -1 : markSets.findIndex((s) => s.has(id)))
+      : markPolys.findIndex((rs) => pointInPolygon(c, rs))
     if (k >= 0) stats[k === 0 ? 'markPick' : 'markNear'] = (stats[k === 0 ? 'markPick' : 'markNear'] ?? 0) + 1
     return k === 0 ? pal.mark.pick : k > 0 ? pal.mark.near : mark.quiet === true ? pal.mark.quiet : null
   }
@@ -1238,7 +1241,7 @@ export const buildScene = (
       const grounds = outer.map((p) => terrain.z(p))
       const base = Math.min(...grounds)
       const top = Math.max(seatLevel(grounds, terrain.exaggeration) + b.storeys * 3.6, base + 2.5)
-      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, markRoof(outer) ?? pal.traced[b.material], dotsMode, undefined, grounds))
+      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, markRoof(outer, b.id) ?? pal.traced[b.material], dotsMode, undefined, grounds))
       ends[b.end]++
     }
     stats.traced = ends.map + ends.rebuilt + ends.highway + ends.assumed

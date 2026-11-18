@@ -429,6 +429,15 @@ export interface Highlight {
   /** OSM ids of bridges ("w44888581") whose decks are drawn in the mark's line tone. */
   readonly bridges?: readonly string[]
   readonly note?: string
+  /**
+   * A JSON file listing, for each polygon by name, the ids of the traced buildings a count
+   * counted in it (`{ "paved": ["jw1952-307-12", …], … }`). When given, a traced building is
+   * picked out by its id in the first list that holds it, so the picture draws exactly what the
+   * count counted; buildings not traced are not picked out.
+   */
+  readonly ids?: string
+  /** The `ids` file's lists in `polygons` order: read by `loadHistory`. */
+  readonly picked?: readonly (readonly string[])[]
   /** Each polygon's rings (lon/lat, outers and holes, even-odd), in `polygons` order: read from `file` by `loadHistory`. */
   readonly rings?: readonly (readonly (readonly Vec2[])[])[]
 }
@@ -444,7 +453,10 @@ const highlightRings = async (h: Highlight): Promise<Highlight> => {
     const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates
     return polys.flatMap((poly) => poly.map((ring) => ring.slice(0, -1).map(([x, y]) => [x, y] as Vec2)))
   })
-  return { ...h, rings }
+  if (h.ids === undefined) return { ...h, rings }
+  const lists = JSON.parse(await readFile(h.ids, 'utf8')) as Record<string, string[]>
+  const picked = h.polygons.map((name) => lists[name] ?? [])
+  return { ...h, rings, picked }
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
