@@ -17,3 +17,13 @@ Recorded with Claude.
    first; the community reviewers get the fact-checked draft (the "outside review" stage).
    Sharing it is the owner's to do. Nothing is published before their review.
 8. **The 1959 view:** published labeled approximate, before every later clearance is dated.
+
+## Added by the owner the same day (11:43 ET)
+
+9. **The island.** One image of only what was removed: the buildings, streets and ground of
+   1952 inside the highway's boundary, drawn alone, like an island floating in space, with the
+   boundary as its edge ("inside the membrane boundary or something").
+10. **Keep the data visualizations.** The charts shown during the ground work stay in the
+    story and its write-up: the plan of where the trench was filled (its coverage), the three
+    street-level cross sections (today, rebuilt, the 1934 points), and the rest of the method
+    charts.

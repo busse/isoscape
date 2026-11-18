@@ -17,7 +17,8 @@ against what the work took, for a case study and for better estimates later.
 | 8 | 1925 state (approved) | 3–4 |
 | 9 | Gilpin Court beat (added by the owner's decision; estimated November 18) | ½–1 |
 | 10 | Fact check by a separate agent, and one fix round (not in the outline's table) | 1–2 |
-| | **Total** | **outline: 11–14 with 1925; with lines 9 and 10: about 12½–17** |
+| 11 | The island image: only what was removed, inside the boundary (added by the owner; estimated November 18) | 1 |
+| | **Total** | **outline: 11–14 with 1925; with lines 9 to 11: about 13½–18** |
 
 **The unit was never defined when the estimate was made.** That is the first lesson. From here
 an agent-day means one agent's full working session on one line of work. The log below records
