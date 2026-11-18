@@ -763,6 +763,110 @@
     "https://www.loc.gov/item/sanborn09064_018/",
     "https://www.openstreetmap.org/"
    ]
+  },
+  {
+   "id": "lost25-318-cabell-street",
+   "name": "Cabell Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1925,
+   "to": 1941,
+   "line": [
+    [
+     -77.4411406,
+     37.5533257
+    ],
+    [
+     -77.4404683,
+     37.5531279
+    ],
+    [
+     -77.4397954,
+     37.5529315
+    ]
+   ],
+   "note": "Cabell Street in Apostle Town as the 1925 Sanborn sheet 318 (volume 3) prints it, where no street runs today or today's runs on another line: its center line read off the sheet (tools/sanborn/jw/streets1925.json) and placed by the sheet's fit, which rests on one corner (good to about 10 m). 126 m. Drawn from the 1925 survey (the street is older; earlier sheets not checked) to 1941, when the city began clearing Apostle Town for Gilpin Court; the 1952 sheet prints the project's layout here instead.",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_008/",
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://uncommonwealth.lva.virginia.gov/blog/2025/11/17/a-brief-history-of-public-housing-in-the-city-of-richmond"
+   ]
+  },
+  {
+   "id": "lost25-318-tyler-street",
+   "name": "Tyler Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1925,
+   "to": 1941,
+   "line": [
+    [
+     -77.4399812,
+     37.5538139
+    ],
+    [
+     -77.4400821,
+     37.5536969
+    ],
+    [
+     -77.4403896,
+     37.5533472
+    ],
+    [
+     -77.4405423,
+     37.5531471
+    ],
+    [
+     -77.440756,
+     37.552868
+    ],
+    [
+     -77.4408639,
+     37.5527163
+    ]
+   ],
+   "note": "Tyler Street in Apostle Town as the 1925 Sanborn sheet 318 (volume 3) prints it, where no street runs today or today's runs on another line: its center line read off the sheet (tools/sanborn/jw/streets1925.json) and placed by the sheet's fit, which rests on one corner (good to about 10 m). 144 m. Drawn from the 1925 survey (the street is older; earlier sheets not checked) to 1941, when the city began clearing Apostle Town for Gilpin Court; the 1952 sheet prints the project's layout here instead.",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_008/",
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://uncommonwealth.lva.virginia.gov/blog/2025/11/17/a-brief-history-of-public-housing-in-the-city-of-richmond"
+   ]
+  },
+  {
+   "id": "lost25-318-hickory-street",
+   "name": "Hickory Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1925,
+   "to": 1941,
+   "line": [
+    [
+     -77.4391263,
+     37.5536323
+    ],
+    [
+     -77.4392352,
+     37.5535177
+    ],
+    [
+     -77.439669,
+     37.552985
+    ],
+    [
+     -77.4400483,
+     37.5525096
+    ],
+    [
+     -77.4400854,
+     37.5524618
+    ]
+   ],
+   "note": "Hickory Street in Apostle Town as the 1925 Sanborn sheet 318 (volume 3) prints it, where no street runs today or today's runs on another line: its center line read off the sheet (tools/sanborn/jw/streets1925.json) and placed by the sheet's fit, which rests on one corner (good to about 10 m). 155 m. Drawn from the 1925 survey (the street is older; earlier sheets not checked) to 1941, when the city began clearing Apostle Town for Gilpin Court; the 1952 sheet prints the project's layout here instead.",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_008/",
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://uncommonwealth.lva.virginia.gov/blog/2025/11/17/a-brief-history-of-public-housing-in-the-city-of-richmond"
+   ]
   }
  ],
  "ground": [
@@ -1791,6 +1895,59 @@
     "https://bridgelookup.com/bridge/583420",
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/GeoTIFF/VA/VA_Richmond_186501_1956_24000_geo.tif"
+   ]
+  },
+  {
+   "where": {
+    "id": [
+     "w1223669992",
+     "w1225580677",
+     "w1225580678",
+     "w1225580679",
+     "w1225580681",
+     "w1225580682",
+     "w1225580683",
+     "w1225580685",
+     "w1225580695",
+     "w1225827586",
+     "w1225827587",
+     "w1225827588",
+     "w1225827589",
+     "w1225827590",
+     "w1225827591",
+     "w1225827592",
+     "w1225827593",
+     "w1225827595",
+     "w1225827596",
+     "w1484769660",
+     "w182380845",
+     "w182380848",
+     "w182380851",
+     "w182380858",
+     "w182380859",
+     "w182380863",
+     "w182380864",
+     "w182380865",
+     "w182380866",
+     "w182380869",
+     "w182380873",
+     "w182380875",
+     "w182380878",
+     "w182380879",
+     "w6034162"
+    ]
+   },
+   "eras": [
+    [
+     1941,
+     null
+    ]
+   ],
+   "note": "Hickory Street's present line and the paths between Gilpin Court's buildings: the 1952 Sanborn sheet 318 prints them, the 1925 sheet does not (it prints Hickory on another line, with Tyler and Cabell Streets; tools/sanborn/jw/streets1925.json). Dated from 1941, when the clearance for Gilpin Court began (approximate: the project was built 1941-43). Before then the 1925 streets are drawn.",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_008/",
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://uncommonwealth.lva.virginia.gov/blog/2025/11/17/a-brief-history-of-public-housing-in-the-city-of-richmond"
    ]
   }
  ],
