@@ -12,7 +12,8 @@
  *   roads, rail and water ways existed. Each entry carries its sources; positions are drawn
  *   from today's street grid and published dimensions, not surveyed.
  *
- * The ground itself is today's: the elevation model includes every cut and fill since.
+ * The ground itself is today's: the elevation model includes every cut and fill since, except
+ * where a series puts back the ground a later work took (`ground`, a `GroundRestoration`).
  */
 
 import { readFile, writeFile, mkdir } from 'node:fs/promises'
@@ -31,7 +32,7 @@ export interface Epoch {
 export interface HistoryFeature {
   readonly id: string
   readonly name: string
-  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label' | 'bridge'
+  readonly kind: 'water' | 'burned' | 'plan' | 'landmark' | 'creek' | 'streetcar' | 'grounds' | 'track' | 'rail' | 'platform' | 'canopy' | 'site' | 'wood' | 'label' | 'bridge' | 'street'
   readonly from: number
   readonly to?: number
   /** lon/lat outline (open), for areas and landmarks. */
@@ -149,6 +150,11 @@ export interface HistoryFeature {
    */
   readonly mode?: 'road' | 'rail'
   readonly deck?: number
+  /**
+   * The road's OSM class, for a `bridge` (default secondary) or a `street`: a stretch of street
+   * that is gone, along `line` (lon/lat), drawn at grade as a street of today's map would be
+   * (default residential) and kept in its years whatever the houses near it.
+   */
   readonly highway?: string
   /**
    * Drawn only in builds asked for it by name (`isoscape build --with <name>`): for a feature
@@ -227,6 +233,39 @@ export interface TracedBuilding {
   readonly sheet: number
 }
 
+/**
+ * Ground put back as it stood before later works cut or filled it (a highway's trench, its
+ * embankments), for years before `before`: inside `rings` (lon/lat outlines) the elevation
+ * model is set aside and the surface rebuilt from the measured ground at the rim and from the
+ * `lines` that crossed it (see `restoreGround` in terrain.ts). Every other year, and every series
+ * without one, draws the measured ground unchanged. What it gives is an estimate: `note` says
+ * how good, `sources` what it rests on.
+ */
+export interface GroundRestoration {
+  readonly id: string
+  readonly name: string
+  /** Applies to scenes of years before this one. */
+  readonly before: number
+  readonly rings: readonly (readonly Vec2[])[]
+  /**
+   * How the ground inside is put back: `membrane` (the default) rebuilds it from its rim and its
+   * lines (`restoreGround`), for a cut or a fill across level ground; `lower` takes down banks
+   * narrower than twice `radius` meters (default 25) to the ground beside them and keeps the
+   * rest as measured (`lowerGround`), for ramps raised on ground that was otherwise little
+   * changed. Restorations apply in the order listed.
+   */
+  readonly method?: 'membrane' | 'lower'
+  readonly radius?: number
+  /**
+   * Lines the old ground followed: a street that ran through at grade (no `elevation`; its grade
+   * is straight between the measured ground at its ends), or a line at a known elevation in
+   * meters on the elevation model's datum (a contour read off an old map, converted).
+   */
+  readonly lines?: readonly { readonly name: string; readonly line: readonly Vec2[]; readonly elevation?: number; readonly note?: string }[]
+  readonly note: string
+  readonly sources: readonly string[]
+}
+
 export interface History {
   readonly epochs: readonly Epoch[]
   readonly features: readonly HistoryFeature[]
@@ -246,10 +285,17 @@ export interface History {
   /** Fire-insurance maps traced into footprints: the editions used, and the buildings since lost. */
   readonly sanborn?: {
     readonly lost: string | readonly string[]; readonly editions: readonly number[]; readonly source: string
-    /** Sheets whose fit is known to be wrong, left out until they are placed again: each says why. */
-    readonly leaveOut?: readonly { readonly edition: number; readonly sheet: string; readonly why: string }[]
+    /**
+     * Sheets whose fit is known to be wrong, left out until they are placed again: each says why.
+     * `ids` narrows an entry to those buildings of the sheet; `before` leaves them out only in
+     * scenes before that year (their `from` is raised to it), where a finer tracing of the same
+     * blocks takes their place.
+     */
+    readonly leaveOut?: readonly { readonly edition: number; readonly sheet: string; readonly why: string; readonly ids?: readonly string[]; readonly before?: number }[]
   }
   readonly traced: readonly TracedBuilding[]
+  /** Ground rebuilt as it stood before later works, for earlier years (see `GroundRestoration`). */
+  readonly ground?: readonly GroundRestoration[]
   /**
    * Minor streets (tertiary, residential, service, unclassified, living streets and paths) drawn only
    * where a building of the year stands within this many meters: a street with no house on it
@@ -389,7 +435,104 @@ export interface History {
    * Settings a build's `--with` names switch on, by name: for corrections made after some years
    * of a series were published, so their scenes stay as sold until each is redrawn.
    */
-  readonly switches?: Readonly<Record<string, { readonly vergeReach?: number; readonly vergeShare?: number; readonly bridgeStreets?: boolean; readonly bridgesClearTraced?: boolean; readonly note?: string }>>
+  readonly switches?: Readonly<Record<string, { readonly vergeReach?: number; readonly vergeShare?: number; readonly bridgeStreets?: boolean; readonly bridgesClearTraced?: boolean; readonly highlight?: Highlight; readonly island?: Island; readonly note?: string }>>
+  /** A pick-out, set only by a switch (`switches.<name>.highlight`): see `Highlight`. */
+  readonly highlight?: Highlight
+  /** A scene cut to one polygon and drawn alone, set only by a switch (`switches.<name>.island`): see `Island`. */
+  readonly island?: Island
+}
+
+/**
+ * A scene drawn as an island: only what stands inside one polygon, on its ground cut at the
+ * polygon's edge, the cut faces toward the camera drawn as a slab's sides down to a flat bottom
+ * `slab` meters below the lowest ground inside (the region's slab by default), on blank paper.
+ * Everything outside is left out: ground, streets, water and standing things. A building is kept
+ * when its center falls inside (or, with `ids`, when a count listed it in one of `polygons`).
+ * Off in every build that does not name the switch.
+ */
+export interface Island {
+  /** A GeoJSON file of (multi)polygons, lon/lat, named by `properties.name`. */
+  readonly file: string
+  /** The polygon the island is cut to. */
+  readonly polygon: string
+  /** A count's ids file (see `Highlight.ids`) and the lists in it whose traced buildings are kept. */
+  readonly ids?: string
+  readonly idLists?: readonly string[]
+  /** Slab depth under the island's lowest ground, meters (default: the region's `slab`). */
+  readonly slab?: number
+  /** A line printed under the year caption, saying what the edge is. */
+  readonly caption?: string
+  readonly note?: string
+  /** The polygon's rings (lon/lat, outers and holes, even-odd): read from `file` by `loadHistory`. */
+  readonly rings?: readonly (readonly Vec2[])[]
+  /** The traced ids kept, from `ids`: read by `loadHistory`. */
+  readonly keep?: readonly string[]
+}
+
+const islandRings = async (h: Island): Promise<Island> => {
+  type Geom = { type: 'Polygon'; coordinates: number[][][] } | { type: 'MultiPolygon'; coordinates: number[][][][] }
+  const fc = JSON.parse(await readFile(h.file, 'utf8')) as { features: { properties: { name?: string }; geometry: Geom }[] }
+  const f = fc.features.find((g) => g.properties.name === h.polygon)
+  if (f === undefined) throw new Error(`island: no polygon named "${h.polygon}" in ${h.file}`)
+  const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates
+  const rings = polys.flatMap((poly) => poly.map((ring) => ring.slice(0, -1).map(([x, y]) => [x, y] as Vec2)))
+  if (h.ids === undefined) return { ...h, rings }
+  const lists = JSON.parse(await readFile(h.ids, 'utf8')) as Record<string, string[]>
+  return { ...h, rings, keep: (h.idLists ?? Object.keys(lists)).flatMap((k) => lists[k] ?? []) }
+}
+
+/**
+ * A picture that picks something out, switched on by name (a story's count of what a highway
+ * took): the buildings whose center falls in a polygon roofed in the palette's `mark.pick` (the
+ * first polygon) or `mark.near` (any later one), every other building's roof `mark.quiet` when
+ * `quiet` is set, each polygon's outline drawn on the ground in `mark.line`, and, where asked,
+ * the curated lost streets and some bridges' decks in `mark.line` too. Off in every build that
+ * does not name the switch, so no other scene changes.
+ */
+export interface Highlight {
+  /** A GeoJSON file of (multi)polygons, lon/lat, named by `properties.name`. */
+  readonly file?: string
+  /** The polygons picked out, by name, innermost first. */
+  readonly polygons?: readonly string[]
+  /** Pick out the buildings in the polygons (default true); false: the polygons are only outlined. */
+  readonly pick?: boolean
+  /** Draw each polygon's outline on the ground (default true). */
+  readonly outline?: boolean
+  /** Every building not picked out gets the quiet roof. */
+  readonly quiet?: boolean
+  /** Draw the curated lost streets (`kind: 'street'`) in the mark's line tone. */
+  readonly streets?: boolean
+  /** OSM ids of bridges ("w44888581") whose decks are drawn in the mark's line tone. */
+  readonly bridges?: readonly string[]
+  readonly note?: string
+  /**
+   * A JSON file listing, for each polygon by name, the ids of the traced buildings a count
+   * counted in it (`{ "paved": ["jw1952-307-12", …], … }`). When given, a traced building is
+   * picked out by its id in the first list that holds it, so the picture draws exactly what the
+   * count counted; buildings not traced are not picked out.
+   */
+  readonly ids?: string
+  /** The `ids` file's lists in `polygons` order: read by `loadHistory`. */
+  readonly picked?: readonly (readonly string[])[]
+  /** Each polygon's rings (lon/lat, outers and holes, even-odd), in `polygons` order: read from `file` by `loadHistory`. */
+  readonly rings?: readonly (readonly (readonly Vec2[])[])[]
+}
+
+/** A highlight's polygons read from its file, as rings in `polygons` order. */
+const highlightRings = async (h: Highlight): Promise<Highlight> => {
+  if (h.file === undefined || h.polygons === undefined) return h
+  type Geom = { type: 'Polygon'; coordinates: number[][][] } | { type: 'MultiPolygon'; coordinates: number[][][][] }
+  const fc = JSON.parse(await readFile(h.file, 'utf8')) as { features: { properties: { name?: string }; geometry: Geom }[] }
+  const rings = h.polygons.map((name) => {
+    const f = fc.features.find((g) => g.properties.name === name)
+    if (f === undefined) throw new Error(`highlight: no polygon named "${name}" in ${h.file}`)
+    const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates
+    return polys.flatMap((poly) => poly.map((ring) => ring.slice(0, -1).map(([x, y]) => [x, y] as Vec2)))
+  })
+  if (h.ids === undefined) return { ...h, rings }
+  const lists = JSON.parse(await readFile(h.ids, 'utf8')) as Record<string, string[]>
+  const picked = h.polygons.map((name) => lists[name] ?? [])
+  return { ...h, rings, picked }
 }
 
 export const loadHistory = async (path: string): Promise<History> => {
@@ -406,6 +549,17 @@ export const loadHistory = async (path: string): Promise<History> => {
       features: [...(base.features ?? []).filter((f) => !(raw.features ?? []).some((g) => g.id === f.id)), ...(raw.features ?? [])],
     }
   }
+  // A switch's highlight polygons are read here, so a build that names it has them.
+  let switches = raw.switches
+  if (switches !== undefined && Object.values(switches).some((v) => v.highlight !== undefined || v.island !== undefined)) {
+    const out: Record<string, NonNullable<History['switches']>[string]> = {}
+    for (const [name, v] of Object.entries(switches)) {
+      let w = v.highlight === undefined ? v : { ...v, highlight: await highlightRings(v.highlight) }
+      if (w.island !== undefined) w = { ...w, island: await islandRings(w.island) }
+      out[name] = w
+    }
+    switches = out
+  }
   let traced: TracedBuilding[] = []
   if (raw.sanborn !== undefined) {
     for (const file of typeof raw.sanborn.lost === 'string' ? [raw.sanborn.lost] : raw.sanborn.lost) {
@@ -413,11 +567,16 @@ export const loadHistory = async (path: string): Promise<History> => {
       traced = traced.concat(fc.features.map((f) => ({ ...f.properties, ring: f.geometry.coordinates[0].slice(0, -1).map(([x, y]) => [x, y] as Vec2) })))
     }
     const out = raw.sanborn.leaveOut ?? []
-    traced = traced.filter((b) => !out.some((o) => o.edition === b.edition && o.sheet === String(b.sheet)))
+    const match = (b: TracedBuilding) => out.filter((o) => o.edition === b.edition && o.sheet === String(b.sheet) && (o.ids === undefined || o.ids.includes(b.id)))
+    traced = traced.filter((b) => !match(b).some((o) => o.before === undefined)).map((b) => {
+      const later = Math.max(b.from, ...match(b).map((o) => o.before ?? b.from))
+      return later === b.from ? b : { ...b, from: later }
+    })
   }
   return {
     epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(),
     dates: raw.dates ?? [], ...(raw.sanborn === undefined ? {} : { sanborn: raw.sanborn }), traced,
+    ...(raw.ground === undefined ? {} : { ground: raw.ground }),
     ...(raw.streetsNearBuildings === undefined ? {} : { streetsNearBuildings: raw.streetsNearBuildings }),
     ...(raw.majorStreetsNearBuildings === undefined ? {} : { majorStreetsNearBuildings: raw.majorStreetsNearBuildings }),
     ...(raw.serviceNearBuildings === undefined ? {} : { serviceNearBuildings: raw.serviceNearBuildings }),
@@ -453,7 +612,7 @@ export const loadHistory = async (path: string): Promise<History> => {
     ...(raw.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: raw.bridgesClearTraced }),
     ...(raw.streetEnds === undefined ? {} : { streetEnds: raw.streetEnds }),
     ...(raw.bridgeAnchors === undefined ? {} : { bridgeAnchors: raw.bridgeAnchors }),
-    ...(raw.switches === undefined ? {} : { switches: raw.switches }),
+    ...(switches === undefined ? {} : { switches }),
   }
 }
 
@@ -527,7 +686,7 @@ export const switchedOn = (h: History, on: readonly string[]): History => {
   for (const name of on) {
     const set = h.switches?.[name]
     if (set === undefined) continue
-    out = { ...out, ...(set.vergeReach === undefined ? {} : { vergeReach: set.vergeReach }), ...(set.vergeShare === undefined ? {} : { vergeShare: set.vergeShare }), ...(set.bridgeStreets === undefined ? {} : { bridgeStreets: set.bridgeStreets }), ...(set.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: set.bridgesClearTraced }) }
+    out = { ...out, ...(set.vergeReach === undefined ? {} : { vergeReach: set.vergeReach }), ...(set.vergeShare === undefined ? {} : { vergeShare: set.vergeShare }), ...(set.bridgeStreets === undefined ? {} : { bridgeStreets: set.bridgeStreets }), ...(set.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: set.bridgesClearTraced }), ...(set.highlight === undefined ? {} : { highlight: set.highlight }), ...(set.island === undefined ? {} : { island: set.island }) }
   }
   return out
 }
@@ -541,6 +700,12 @@ export const bridgeFeature = (h: HistoryFeature): Feature | null => {
   tags['isoscape:seat'] = 'ground'
   if (h.deck !== undefined) tags['isoscape:deck'] = String(h.deck)
   return { type: 'line', id: `history:${h.id}`, tags, points: h.line }
+}
+
+/** A curated lost street (`kind: 'street'`) as a map line, at grade; null for anything else. */
+export const streetFeature = (h: HistoryFeature): Feature | null => {
+  if (h.kind !== 'street' || h.line === undefined || h.line.length < 2) return null
+  return { type: 'line', id: `history:${h.id}`, tags: { highway: h.highway ?? 'residential', name: h.name }, points: h.line }
 }
 
 const MINOR_STREETS = new Set(['tertiary', 'tertiary_link', 'residential', 'service', 'unclassified', 'living_street', 'track', 'footway', 'path', 'cycleway', 'pedestrian', 'steps', 'bridleway'])

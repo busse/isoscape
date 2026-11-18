@@ -630,6 +630,39 @@ narrow basin between 11th and 12th, traced from sheet 11 of the 1886 Sanborn map
 canal's last stretch into it (sheet 10, and the 1886 key map) are drawn as the map shows them.
 A canal mapped only as a line is a blue ribbon on the ground.
 
+**Ground that was cut or filled later.** The ground in every scene is today's lidar, so a
+past year drawn on it shows every cut and fill made since. A series can put back the ground a
+later work took (`ground` in its history file), for the years before it; every other scene,
+and every series without one, draws the measured ground unchanged. The first is Jackson Ward,
+where the Richmond–Petersburg Turnpike (1955–58) runs in a trench up to about 8 m deep (3 to
+6.5 m where the old cross streets ran). Inside a curated outline the lidar is set aside before the
+grid is blurred, so contours, hillshade, the drape and building bases all see the result. The
+outline is today's motorway ways buffered 22 m and ramps 10 m, widened over cut and fill slopes
+the lidar shows (steeper than 12% within 60 m of a motorway), then simplified to 4 m; it covers
+about 28 ha of trench and 9 ha of interchange. Two methods, each an estimate:
+
+- **Membrane** (`restoreGround`), for the trench: the rebuilt ground is the smoothest surface
+  that meets the measured ground at the outline (each free node the mean of its four
+  neighbors, solved by over-relaxation to 1 mm), held along each street that crossed at grade
+  to a straight grade between its surviving ends. Seven such streets are listed; they change
+  the result by about 6 cm RMS and 0.58 m at most, so the rim decides it.
+- **Lower** (`lowerGround`), for the ramps at the I-64 junction, which stand on the old
+  plateau rim: a grey-scale opening of the lidar with a 25 m disk, so banks narrower than 50 m
+  (embankments up to 9 m high) come down to the ground beside them and broader ground stays as
+  measured. The USGS Richmond sheet surveyed in 1933–34 shows the rim there at about today's
+  height; a membrane, which would have sloped plateau to valley, was up to 9 m too low.
+
+Two checks set the error. Run on undisturbed plateau beside the trench (the same outline moved
+150 to 450 m southwest, six trials), the membrane misses the measured ground by 0.3 to 1.1 m
+RMS, 95% of nodes within 0.7 to 2.9 m; moved onto the valley edge north of it, 1.8 m RMS and up
+to 8 m. On the USGS sheet (10-foot contours, about 3 m; its datum about 0.32 m above NAVD 88
+here) no contour can be read within 60 m of seven points along the trench from west of St. Peter
+Street to past Fifth Street, and the rebuilt ground there would need to move at most 0.8 m to agree. So the
+error is put at about 1.5 m (95%) mid-trench, 3 m at its ends, and more where the sheet shows
+a small ravine near Seventh Street that neither the lidar nor the membrane has. Streets that cross on bridges today are drawn at
+grade before 1958, and curated lost streets (`kind: "street"`, the stretches the trench took,
+straight between surviving ends) are drawn on the rebuilt ground.
+
 **Bridges that are gone.** A curated bridge is drawn as a bridge of today's map would be, from
 its own line: a road or railroad deck at a stated height over the ground or water under it
 (the Free Bridge of 1873 to 1972, 8 m, an assumption), on piers, ramping down to the ground at
@@ -727,6 +760,45 @@ through sixteen street corners, each snapped to the city's block outlines); and
 **1950–52**, a corrected reprint whose sheets were matched feature by feature to their
 1924–25 versions where those were fitted, and read by eye otherwise. Each later edition turns
 "assumed" end dates into ones read from a map.
+
+Jackson Ward north of Leigh Street is traced from volume 3 twice: as republished in 1952, and as
+first printed in 1925. The 1952 sheets were fitted to street corners; each 1925 sheet is matched
+to its 1952 reprint feature by feature (a homography with a gentle quadratic correction for the
+paper, the matches agreeing to a median of 0.08–0.13 m) and placed by the same fit, then traced
+from its colors, which in 1925 cover every building. The color fills keep the stair-steps of the
+scan, so the drawn outlines are then simplified (Douglas-Peucker at 1 m, less where that would
+stray further) and squared where every edge is within 12° of the building's axes, with no wall
+moved more than 1 m and nothing dropped or merged: 61,738 corners become 21,833, about six a
+building, where each corner had drawn an edge and a dot. A 1925 building is drawn until 1952 and the
+1952 tracing carries it on; one the 1952 sheets no longer show ends in 1952, or in 1941 on the
+blocks cleared for Gilpin Court. Before 1952 the coarse buildings from volume 1's small-scale
+overview that fall in those blocks are left out (`leaveOut` with `ids` and `before`), so the two
+sources do not draw one building twice.
+
+The 1952 layer gets the same simplification where its outlines are busy (more than 10 corners):
+703 of them, 17,243 corners down to 5,574, the largest move 1.00 m. Second Street from Broad to
+Clay is on volume 1 of the 1950–52 printing; its sheets 2 and 3 are fitted again to 13 street
+corners (residuals 0.5–2.9 m) and traced, and 198 outlines the earlier tracing missed join the
+Jackson Ward layer. Streets the trench took are read off the 1952 sheets as center lines and
+placed by each sheet's fit; a 2 m step counts as a street that survives when it lies within 9 m
+of one drawn today running within 30° of its direction, and what is left is kept where at least
+20 m of it, and at least 40% of that, lies in the highway's corridor: 24 stretches, 2,275 m,
+drawn from 1952 to 1956. In the 1925 scene Apostle Town's streets are drawn as the 1925 sheet
+prints them (Cabell, Tyler and Hickory on its old line, until 1941), and the ways laid out with
+Gilpin Court, the 35 that lie at least 80% inside the cleared blocks, from 1941.
+
+**Pick-outs and islands.** A history switch named with `--with` can pick out buildings: those
+whose center falls in a polygon are roofed in the palette's `mark` tones and the rest quiet, or,
+given a count's `ids`, exactly the buildings that count lists, so a picture shows what a number
+counts. Jackson Ward's count of the 1952 outlines in the Turnpike's footprint skips outlines
+under 12 m² (the region's smallest building, which the map would not draw) and a correction
+table's box: 216 in today's paved roadway and ramps, 447 in the corridor of 15 m more each side.
+An `island` switch cuts the scene to one polygon and draws it alone on blank paper: ground is
+painted strip by strip as always, each strip clipped to the polygon, the cut faces that look
+toward the camera are drawn as a slab's sides down to 18 m (the region's `slab`) below the
+lowest ground inside, and only the buildings the count lists stand on it. Jackson Ward's islands
+are cut where the traced sheets end, at about 8th Street, so the ramp loop past it, never traced,
+is not drawn as empty ground.
 
 **Era rules** date everything else that OSM maps: the first rule matching a feature's name,
 `ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
@@ -1243,7 +1315,14 @@ include outputs from before it existed.
 
 After every build, `out/index.html` is rewritten: this explorer. It is a single file with the
 build list and these pages embedded in it, so it opens from disk with no server. The pages are
-Markdown files in `pages/`. To add one, see the README.
+Markdown files in `pages/`. To add one, see the README. A page may number its pictures as
+figures, each with a caption under it; clicking one opens it large in a lightbox, with the
+page's other figures a step away and a grid of them all. The Jackson Ward story's views open at
+3,200 pixels wide there, twice the 1,600 the page shows; its charts open at their own 1,600. A
+figure can also be a compare slider: two pictures of one frame laid over each other, with the
+same divider the explorer uses to compare two builds, dragged or moved with the arrow keys. Its
+expand button opens the same slider large in the lightbox. The Jackson Ward year views are drawn
+in one shared frame for this, so every year lines up with the others pixel for pixel.
 
 Beside it go plain pages that need no script, for search engines and link previews: each of
 these pages as `p/<slug>.html`, each map as `m/<region>.html` (and each year of a dated series

@@ -1,0 +1,67 @@
+{
+ "_about": "Street center lines of Apostle Town read off the 1925 Sanborn sheet 318 (volume 3, https://www.loc.gov/item/sanborn09064_008/), where they differ from today's: in pixels [u, v] of the sheet as warped into the 1952 half-size scan's frame (reg25.py), so the 1952 fit (geo1952.json) places them. Read at the middles of the printed street widths, on crops with a 100 px grid (Claude, November 18, 2026). Sheet 318's fit rests on one corner (8.5 m residual), so a line is good to about 10 m. Names as printed. Calhoun, Tazewell (West Charity on the 1952 sheet), West Baker, Saint Peter and Chamberlayne Parkway run where today's streets do, within that error, and are not read again.",
+ "318": {
+  "Cabell Street": [
+   [
+    560,
+    1617
+   ],
+   [
+    975,
+    1615
+   ],
+   [
+    1390,
+    1612
+   ]
+  ],
+  "Tyler Street": [
+   [
+    1065,
+    1050
+   ],
+   [
+    1040,
+    1150
+   ],
+   [
+    962,
+    1450
+   ],
+   [
+    930,
+    1617
+   ],
+   [
+    885,
+    1850
+   ],
+   [
+    865,
+    1975
+   ]
+  ],
+  "Hickory Street": [
+   [
+    1575,
+    1000
+   ],
+   [
+    1545,
+    1100
+   ],
+   [
+    1445,
+    1550
+   ],
+   [
+    1360,
+    1950
+   ],
+   [
+    1352,
+    1990
+   ]
+  ]
+ }
+}

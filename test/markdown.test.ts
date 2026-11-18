@@ -87,3 +87,40 @@ test('code fences, quotes, rules', () => {
 test('an unclosed fence runs to the end without losing text', () => {
   assert.equal(md('```\na\nb'), '<pre><code>a\nb</code></pre>')
 })
+
+test('a figure block numbers its picture, links it to its full file and keeps its caption, tables included', () => {
+  const src = 'Before.\n\n::: figure wide bogus\n![A wide view](a.webp)\n\nThe caption. *How this was made:* in code.\n\n| # | Name |\n|---|---|\n| 1 | Hall |\n:::\n\n::: figure\n![Second](b.webp)\n:::\n\nAfter.'
+  const r = markdown(src, { idPrefix: 'p-x-', image: (s) => ({ src: 'data:' + s, width: 1600, height: 680, full: 'p/' + s.replace('.webp', '-large.webp') }) })
+  assert.deepEqual(r.figures, [{ n: 1, id: 'fig-1', alt: 'A wide view' }, { n: 2, id: 'fig-2', alt: 'Second' }])
+  assert.match(r.html, /<figure class="fig wide" id="p-x-fig-1">\n<a class="fig-open" href="p\/a-large\.webp" aria-label="Fig\. 1\. Open larger"><img src="data:a\.webp" alt="A wide view" width="1600" height="680" loading="lazy"><\/a>/)
+  assert.match(r.html, /<figcaption><p><span class="fig-n">Fig\. 1\.<\/span> The caption\. <em>How this was made:<\/em> in code\.<\/p>\n<div class="table"><table>[\s\S]*Hall[\s\S]*<\/table><\/div><\/figcaption>\n<\/figure>/)
+  // A figure without a caption still gets its number; the text around figures is untouched.
+  assert.match(r.html, /<figure class="fig" id="p-x-fig-2">[\s\S]*<figcaption><p><span class="fig-n">Fig\. 2\.<\/span><\/p><\/figcaption>/)
+  assert.match(r.html, /^<p>Before\.<\/p>\n<figure/)
+  assert.match(r.html, /<\/figure>\n<p>After\.<\/p>$/)
+  assert.doesNotMatch(r.html, /bogus|data-full/)
+})
+
+test('a compare block makes a numbered slider figure: two pictures, their labels, a keyboard slider and an expand link', () => {
+  const src = '::: figure\n![One](a.webp)\n:::\n\n::: compare wide\n![Before <b>](a.webp) about 1925\n![After](b.webp) 1952\n\nThe caption.\n:::'
+  const r = markdown(src, { idPrefix: 'p-x-', image: (s) => ({ src: 'data:' + s, width: 1600, height: 680, full: 'p/' + s.replace('.webp', '-large.webp') }) })
+  assert.deepEqual(r.figures, [{ n: 1, id: 'fig-1', alt: 'One' }, { n: 2, id: 'fig-2', alt: 'Before <b>', compare: true }])
+  const fig = r.html.slice(r.html.indexOf('<figure class="fig cmp-fig wide" id="p-x-fig-2">'))
+  assert.ok(fig.length > 0, 'a compare figure, with its classes')
+  assert.match(fig, /<div class="cmp" data-a="about 1925" data-b="1952" style="--ar: 2\.3529">/)
+  assert.match(fig, /<img class="cmp-a" src="data:a\.webp" alt="Before &lt;b&gt;" width="1600" height="680" data-large="p\/a-large\.webp" loading="lazy">/)
+  assert.match(fig, /<div class="cmp-clip"><img class="cmp-b" src="data:b\.webp" alt="After" [^>]*data-large="p\/b-large\.webp"/)
+  assert.match(fig, /<div class="cmp-div" data-badge="about 1925 │ 1952" role="slider" tabindex="0" aria-label="Fig\. 2\. Divider: about 1925 on the left, 1952 on the right" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"/)
+  assert.match(fig, /<a class="fig-open cmp-open" href="p\/a-large\.webp" aria-label="Fig\. 2\. Open larger"/)
+  assert.match(fig, /<figcaption><p><span class="fig-n">Fig\. 2\.<\/span> The caption\.<\/p><\/figcaption>/)
+  // Anything but two pictures is a plain figure.
+  const one = markdown('::: compare\n![Only](a.webp) x\n:::', { image: (s) => ({ src: s, full: s }) })
+  assert.deepEqual(one.figures, [{ n: 1, id: 'fig-1', alt: 'Only' }])
+  assert.match(one.html, /<figure class="fig" id="fig-1">\n<a class="fig-open"/)
+})
+
+test('without a figure block, images render as before (plus their size when known)', () => {
+  assert.equal(md('![d](d.svg)'), '<p><img src="d.svg" alt="d" loading="lazy"></p>')
+  assert.equal(markdown('![d](d.webp)', { image: (s) => ({ src: s, width: 4, height: 3, full: 'x' }) }).html, '<p><img src="d.webp" alt="d" width="4" height="3" loading="lazy"></p>')
+  assert.deepEqual(markdown('![d](d.svg)').figures, [])
+})

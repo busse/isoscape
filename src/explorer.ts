@@ -49,7 +49,17 @@ import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
 import { buyLinks, escAttr, pageMapRefs, pageShop, printLinks, shopCta, siteTags, type SiteCard } from './social.ts'
+import { FIGURE_CSS, LIGHTBOX_CSS, lightbox } from './lightbox.ts'
+import { COMPARE_CSS, compareSliders, splitAt, splitOf } from './compare.ts'
 import { makeStory } from './story.ts'
+
+/**
+ * The address of this document with its fragment replaced by `hash`. The explorer routes with
+ * the fragment, and history must be given this absolute form: under `<base href="./">` a bare
+ * `#/page` resolves against the folder, and from file:// that is another document, which
+ * pushState refuses (every in-page link and section link then did nothing).
+ */
+export const fragmentUrl = (href: string, hash: string): string => href.replace(/#.*$/, '') + hash
 
 // The isoscape mark (one isometric building), for the browser tab.
 export const MARK = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><g stroke="#2c2b33" stroke-width="3" stroke-linejoin="round">' +
@@ -230,9 +240,7 @@ main { display: grid; grid-template-rows: 1fr auto; min-height: 0; min-width: 0;
 #stage.dragging { cursor: grabbing; }
 #stage img { position: absolute; max-width: none; pointer-events: none; image-rendering: auto; }
 #clipB { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-#divider { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--accent); cursor: ew-resize; display: none; }
-#divider::after { content: "A │ B"; position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; background: var(--accent); color: var(--panel); }
-#divider::before { content: ""; position: absolute; inset: 0 -8px; }
+#divider { display: none; }
 #empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--dim); text-align: center; padding: 40px; }
 #toolbar { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; align-items: center; }
 #toolbar button, #toolbar select { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 4px 9px; cursor: pointer; font: inherit; color: var(--ink); }
@@ -372,7 +380,14 @@ body.reading main { grid-template-rows: 1fr; }
 .doc .back:hover { border-color: var(--accent); }
 .doc #pageLink { margin-left: 6px; }
 .doc #pageLink.on { border-color: var(--accent); background: var(--accent-soft); }
-${PROSE_CSS}#toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
+${PROSE_CSS}${FIGURE_CSS}${LIGHTBOX_CSS}${COMPARE_CSS}/* Wide figures run past the text column, over the margin and the contents list beside it. */
+#page { container-type: inline-size; }
+.doc .prose figure.fig.wide { position: relative; z-index: 2; margin-left: calc(-1 * min(var(--bleed), 200px)); width: calc(100% + 276px + min(var(--bleed), 200px)); --bleed: calc((100cqw - 100% - 276px) / 2 - 24px); }
+.doc .prose figure.fig.wide img { background: var(--panel); }
+@media (max-width: 1180px) { .doc .prose figure.fig.wide { --bleed: calc((100cqw - 100%) / 2 - 24px); margin-left: calc(-1 * var(--bleed)); width: calc(100% + 2 * var(--bleed)); } }
+#toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
+#toc { transition: opacity .15s; }
+#toc.under { opacity: 0; pointer-events: none; }
 #toc h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 6px 0 8px; }
 #toc a { display: block; padding: 3px 0 3px 10px; border-left: 2px solid var(--line); color: var(--dim); text-decoration: none; }
 #toc a:hover { color: var(--ink); }
@@ -405,7 +420,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   <div id="stage">
     <img id="imgA" alt="">
     <div id="clipB"><img id="imgB" alt=""></div>
-    <div id="divider"></div>
+    <div id="divider" class="cmp-div" data-badge="A │ B"></div>
     <div id="empty"></div>
     <div id="loading">loading…</div>
     <div id="timeline" hidden></div>
@@ -437,6 +452,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const byId = new Map(builds.map((b) => [b.id, b]))
   const $ = (id) => document.getElementById(id)
   const stage = $('stage'), imgA = $('imgA'), imgB = $('imgB'), clipB = $('clipB'), divider = $('divider')
+  // The compare divider's moves, shared with the compare figures on pages (compare.ts).
+  const split = { at: (${splitAt.toString()}), of: (${splitOf.toString()}) }
   const state = { a: null, b: null, compare: false, zoom: 1, panX: 0, panY: 0, split: 0.5, filter: '', tab: 'details', page: null, refit: false, pendingView: null }
   const pages = JSON.parse(document.getElementById('pagesData').textContent)
   const pageBySlug = new Map(pages.map((p) => [p.slug, p]))
@@ -579,9 +596,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     divider.style.display = b ? 'block' : 'none'
     if (b) {
       place(imgB, b)
-      const x = stage.clientWidth * state.split
-      clipB.style.clipPath = 'inset(0 0 0 ' + x + 'px)'
-      divider.style.left = x + 'px'
+      split.at(clipB, divider, stage.clientWidth * state.split + 'px')
     }
     $('zoom').textContent = Math.round(state.zoom * 100) + '%'
     scheduleHash()
@@ -662,8 +677,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     }
     if (!drag) return
     if (drag.divider) {
-      const r = stage.getBoundingClientRect()
-      state.split = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width))
+      state.split = split.of(e.clientX, stage.getBoundingClientRect())
     } else {
       state.panX += e.clientX - drag.x
       state.panY += e.clientY - drag.y
@@ -766,6 +780,10 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   }
   // ---- how this view was made ------------------------------------------------------------------
   // A build's own story, from story.ts (its source is embedded here; static map pages run the same code).
+  // Numbered figures on a page open in a lightbox (lightbox.ts); it takes the keys while open.
+  ;(${lightbox.toString()})(document)
+  // Compare figures on a page (compare.ts) share the viewer's divider: its moves and its look.
+  ;(${compareSliders.toString()})(document, split)
   const story = (${makeStory.toString()})({ esc, label, when, mb, fmt, demSources, pageHref: (slug, section) => (pageBySlug.has(slug) ? '#/' + slug + (section ? '/' + section : '') : null) })
   $('toggleInfo').addEventListener('click', () => toggleInfo())
   // Phones: the build list is a drawer behind the menu button; the info panel starts folded.
@@ -859,14 +877,17 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const canonical = document.querySelector('link[rel="canonical"]')
   const siteCanonical = canonical ? canonical.getAttribute('href') : null
   // Set the address for a route: the share page's path (on a server), with the route's fragment.
+  // Every URL given to history is absolute: <base href="./"> would resolve a bare '#…' against
+  // this file's folder, which from file:// is another document and throws (fragmentUrl).
+  const fragmentUrl = (${fragmentUrl.toString()})
   const setAddress = (hash, push) => {
     const d = doorFor(hash)
     if (canonical && site.siteUrl) canonical.setAttribute('href', d && d.page ? site.siteUrl + d.page : siteCanonical)
     const same = location.hash === hash
-    const url = canDoor ? new URL((d ? d.path : '') + hash, appDir).href : null
-    if (same && (url === null || url === location.href)) return
+    const url = canDoor ? new URL((d ? d.path : '') + hash, appDir).href : fragmentUrl(location.href, hash)
+    if (same && url === location.href) return
     const how = push && !same ? 'pushState' : 'replaceState'
-    try { history[how](null, '', url || hash) } catch (err) { if (!same) history[how](null, '', hash) }
+    try { history[how](null, '', url) } catch (err) { if (!same) history[how](null, '', fragmentUrl(location.href, hash)) }
   }
   const copied = (text, btn) => {
     btn.textContent = text
@@ -1030,6 +1051,14 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
       if (el && el.offsetTop - page.scrollTop <= 80) current = a
     }
     for (const a of $('toc').querySelectorAll('a')) a.classList.toggle('on', a === current)
+    // A wide figure runs over the contents list: the list steps aside while one is beside it.
+    const t = $('toc').getBoundingClientRect()
+    let under = false
+    for (const f of $('article').querySelectorAll('figure.fig.wide')) {
+      const r = f.getBoundingClientRect()
+      if (r.right > t.left && r.top < t.bottom && r.bottom > t.top) { under = true; break }
+    }
+    $('toc').classList.toggle('under', under)
   }
   $('page').addEventListener('scroll', markToc, { passive: true })
   // ---- front page -------------------------------------------------------------------------------

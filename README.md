@@ -79,7 +79,8 @@ rewrites `out/index.html`, a single local page over all of them:
 - **Bottom:** when and from what it was built, its measures, and its settings.
 - **Compare** (`C`, or ⌥-click a second build): B is laid over A in the same scene
   coordinates, with a divider to drag. The info panel shows the change in every measure and
-  every setting that differs.
+  every setting that differs. The divider's moves and look live in `src/compare.ts`, shared
+  with the compare figures a content page can place (`::: compare`, under "Adding a page").
 - **How this view was made** (`M`, a tab in the info panel): the selected build explained in
   sentences, written from its `meta.json`: the frame and camera, which data went in, the
   elevation range, where the building heights came from, bridge rules, rapids, the commit.
@@ -354,6 +355,58 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   `pipeline.svg` and the FAQ's diagrams (`faq-*.svg`) are written by
   `node tools/diagrams/faq.ts`, with every color from `src/palette.ts`. Edit the script and run
   it again. `npm test` fails when a file in `pages/` differs from what the script writes.
+- `deck` (optional) is one sentence set under the page's title in larger, dimmer type: what the
+  reader will see.
+- **Numbered figures** are opt-in. A picture in a fenced block becomes a figure, numbered
+  "Fig. 1.", "Fig. 2." … in page order, with everything after the picture as its caption in
+  small type on a light ground (a table keyed to the picture goes inside, so it stays with it):
+
+  ```markdown
+  ::: figure wide
+  ![Alt text: what the picture shows](jackson-ward-state-1952.webp)
+
+  Short caption. *How this was made:* the method, with [links](#the-tracing).
+  :::
+  ```
+
+  `wide` lets the picture run past the text column where the window allows (over the margin
+  and the explorer's contents list). Figures get ids `fig-1`, `fig-2` …, so `[Fig. 3](#fig-3)`
+  links one. On a page with figures, clicking a picture opens a lightbox (`src/lightbox.ts`):
+  the picture fitted to the window with its caption, previous and next (arrow keys), a counter,
+  **Full size** (Z, or click the picture) to see it at its own size and pan by dragging,
+  **All figures** (G) for a grid of every figure on the page, Esc to close. It works by
+  keyboard alone, keeps focus inside while open, and takes the explorer's shortcut keys until
+  it closes. Where a larger copy sits beside the picture as `<name>-large.<ext>`, the lightbox
+  shows that; it is linked, not inlined, from `p/`, so it costs nothing until opened (the
+  Jackson Ward views have 3,200 px copies, written by `views.py`). Pages without the block
+  render as before. GitHub shows the `:::` lines as text.
+- **Compare figures** are opt-in too: a slider between two pictures of the same frame, numbered
+  with the other figures and taking the same classes. Each picture's line ends with its label;
+  the first picture is on the left of the divider:
+
+  ```markdown
+  ::: compare wide
+  ![Alt text for the left picture](jackson-ward-state-1952.webp) 1952
+  ![Alt text for the right picture](jackson-ward-state-2026.webp) today
+
+  Short caption.
+  :::
+  ```
+
+  The two pictures must be the same size and drawn from the same frame (nothing scales one to
+  fit the other; `views.py` renders the Jackson Ward years in one shared viewBox for this).
+  Press or drag anywhere on the pictures to move the divider (mouse or touch; a vertical swipe
+  still scrolls). The divider is a focusable slider (`role="slider"`, with `aria-valuenow` and a
+  text naming both sides): ← and → move it 2%, with Shift or PageUp/PageDown 10%, Home and End
+  to the edges. Its tab shows the two labels, one each side of the line. The expand button (⤢)
+  opens the same slider large in the lightbox, with each picture's `-large` copy and the divider
+  where it was; there the arrow keys move the divider while it has focus and step figures
+  otherwise, and **Full size** is hidden. In the grid it is one figure, shown by its first
+  picture. Without script it shows the two halves at 50% and the expand button links to the
+  first picture's larger copy. The slider shares the viewer's divider (`src/compare.ts`):
+  the same moves and the same look. Only pages with the block get its styles and script on
+  `p/`. Anything but two pictures makes a plain figure.
+- Raster images carry their width and height, so the page holds its layout while they load.
 - The converter (`src/markdown.ts`) escapes all text and drops raw HTML and unsafe link
   schemes. Files starting with `_` (drafts) and `README.md` are skipped.
 - `npm test` checks that every in-page link in `pages/` lands on a real section, and that the
@@ -596,6 +649,32 @@ colored fills, and follows each building until a later map, a newer building or 
 shows it gone. The steps are in *How it's made*, under "Time". The 1886, 1895, 1905, 1924–25 and
 1950–52 editions are traced into `history/sanborn/`. The results are sketches: outlines and
 heights are approximate, and some buildings are missing, misplaced or merged.
+
+**Ground before later works.** A history file can put back ground a later work cut or filled
+(`ground`: an outline, a method, the streets that crossed it, a `before` year, a note and
+sources), for scenes of earlier years only. `membrane` rebuilds the ground inside from its rim
+and its streets; `lower` takes down narrow banks such as ramp embankments. Jackson Ward
+(`regions/jackson-ward.json`) puts back the Turnpike's trench before 1955. The method and its
+error are in *How it's made*, under "Time".
+
+**Pick-outs.** A switch in a history file can carry a `highlight` (`Highlight` in
+`src/history.ts`), drawn only by builds that name it with `--with`: buildings whose center falls
+in a polygon of a GeoJSON file roofed in the palette's `mark` tones (the first polygon darker,
+later ones lighter), the rest quiet, the outlines drawn on the ground, and, where asked, the
+curated lost streets and some bridges' decks marked. Jackson Ward has two: `count` (the 1952
+buildings in the highway's footprint) and `streets` (the stretches of street it took, and
+today's bridges). A highlight can also take `ids`, a file of the traced ids a count counted in
+each polygon (`tools/sanborn/jw/count.py` writes one), and then roofs exactly those, so the
+picture and the count agree. Every other build is unchanged.
+
+**Islands.** A switch can carry an `island` (`Island` in `src/history.ts`): the scene is cut
+to one polygon and drawn alone on blank paper. The ground is painted strip by strip as always,
+each strip clipped to the polygon's part of its band (densified and draped); the cut faces that
+look toward the camera are drawn as a slab's sides down to a flat bottom `slab` meters below the
+lowest ground inside, with the rim inked; standing things are kept when their center falls
+inside, or, with `ids`, when a count listed them; the frame closes in on the island, and a
+caption line says what its edge is. Jackson Ward has `island-paved` and `island-corridor`: only
+what the Turnpike took, inside today's footprint (a stand-in for the 1958 right-of-way).
 
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
 and elevation and keeps only its year-built parcels in its own `data/` folder. A build looks for

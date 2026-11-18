@@ -23,12 +23,21 @@
  * is a section of this page, `about.md` or `about.md#data` another page. Both are rewritten to
  * explorer routes. Images (`![alt](diagram.svg)`) name files beside the page and are inlined
  * as data: URIs; anything that is not a plain file name in `pages/` is dropped to its alt text.
+ * Raster images carry their width and height, so the page keeps its layout while they load and
+ * a section link lands where it should.
+ *
+ * Numbered figures (`::: figure`, see markdown.ts) open in a lightbox (lightbox.ts). A figure's
+ * picture opens its larger copy when one sits beside it as `<name>-large.<ext>`
+ * (`jackson-ward-state-1952.webp` → `jackson-ward-state-1952-large.webp`); the explorer links it
+ * in `p/`, where the static pages put it, so it is fetched only when opened. `deck: …` in the
+ * front matter is a one-sentence standfirst, set under the page's title.
  */
 
 import { readdirSync, readFileSync } from 'node:fs'
 import { basename, extname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { markdown, type Heading } from './markdown.ts'
+import { inline, markdown, type Figure, type Heading } from './markdown.ts'
+import { imageSize } from './social.ts'
 
 export interface Page {
   readonly slug: string
@@ -39,6 +48,10 @@ export interface Page {
   readonly file: string
   readonly html: string
   readonly headings: Heading[]
+  /** Its numbered figures (`::: figure`), in order. */
+  readonly figures: Figure[]
+  /** The standfirst under the title (`deck:`), as text. */
+  readonly deck?: string
   /** The link-preview image named by `social:`, with its bytes, read from beside the page. */
   readonly social?: { readonly name: string; readonly bytes: Buffer }
   /** Reachable at its address but listed nowhere (`unlisted: true`). */
@@ -92,6 +105,8 @@ export interface CompileMode {
   readonly route?: (href: string, slug: string) => string
   /** Link an image file beside the page by this href instead of inlining it (called only for files that exist). */
   readonly imageHref?: (name: string) => string
+  /** The href of a file beside the page that is linked, never inlined (a figure's larger copy): by default `p/<name>`, where the static pages put it. */
+  readonly fileHref?: (name: string) => string
 }
 
 /**
@@ -108,14 +123,30 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     link: (href) => (mode.route === undefined ? pageLink(slug, href, siteUrl) : mode.route(pageLink(slug, href, siteUrl), slug)),
     image: (src) => {
       const name = src.replace(/^\.\//, '')
-      const mime = MIME[extname(name).toLowerCase()]
+      const ext = extname(name)
+      const mime = MIME[ext.toLowerCase()]
       if (mime === undefined || !/^[\w.-]+$/.test(name) || name.startsWith('.')) return /^https?:/i.test(src) ? src : null
       const bytes = readAsset(name)
       if (bytes === null) return null
-      return mode.imageHref === undefined ? `data:${mime};base64,${bytes.toString('base64')}` : mode.imageHref(name)
+      const size = imageSize(bytes)
+      const large = name.slice(0, -ext.length) + '-large' + ext
+      const hasLarge = readAsset(large) !== null
+      const linked = (n: string) => (mode.imageHref !== undefined ? mode.imageHref(n) : mode.fileHref !== undefined ? mode.fileHref(n) : `p/${n}`)
+      return {
+        src: mode.imageHref === undefined ? `data:${mime};base64,${bytes.toString('base64')}` : mode.imageHref(name),
+        ...(size === undefined ? {} : size),
+        full: linked(hasLarge ? large : name),
+      }
     },
   })
   const first = result.headings.find((h) => h.level === 1)
+  // The deck sits straight under the first heading (or at the top, without one).
+  let html = result.html
+  if (data.deck) {
+    const deck = `<p class="deck">${inline(data.deck, { link: (href) => (mode.route === undefined ? pageLink(slug, href, siteUrl) : mode.route(pageLink(slug, href, siteUrl), slug)) })}</p>`
+    const end = html.indexOf('</h1>')
+    html = end === -1 ? deck + '\n' + html : html.slice(0, end + 5) + '\n' + deck + html.slice(end + 5)
+  }
   let social: Page['social']
   if (data.social) {
     const name = data.social.replace(/^\.\//, '')
@@ -131,8 +162,10 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     order: Number.isFinite(order) ? order : 100,
     ...(data.summary ? { summary: data.summary } : {}),
     file: `pages/${fileName}`,
-    html: result.html,
+    html,
     headings: result.headings,
+    figures: result.figures,
+    ...(data.deck ? { deck: data.deck } : {}),
     ...(social === undefined ? {} : { social }),
     ...(data.unlisted === 'true' ? { unlisted: true } : {}),
     ...(data.schema === 'FAQPage' ? { schema: 'FAQPage' as const } : {}),

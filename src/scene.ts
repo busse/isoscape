@@ -19,13 +19,13 @@ import { mix, type Palette } from './palette.ts'
 import type { Region } from './region.ts'
 import { dominantGridAngle, makeView, snapBearing, type View } from './view.ts'
 import { localMetres } from './region.ts'
-import { drawnWet, makeTerrain, rasterize, historicWater, settleWater, traceShore, type Terrain } from './terrain.ts'
+import { drawnWet, lowerGround, makeTerrain, rasterize, historicWater, restoreGround, settleWater, traceShore, type HeightGrid, type Terrain } from './terrain.ts'
 import { chainCoast, waterFromCoast } from './coast.ts'
 import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
 import { cutawayItems, partSolids, partTones, routeItems, shedItems, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
-import { WORKS, alive, bridgeFeature, bridgesAtGrade, dropApproaches, mendStreets, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
+import { WORKS, alive, bridgeFeature, bridgesAtGrade, streetFeature, dropApproaches, mendStreets, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
 export interface TimeContext {
@@ -94,7 +94,7 @@ export interface GroundPolygon {
 }
 
 export interface Ribbon {
-  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir' | 'tram' | 'racetrack'
+  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir' | 'tram' | 'racetrack' | 'mark'
   /** View-meter quads, draped over the terrain when drawn. */
   readonly quads: Vec2[][]
   /** View-meter center segments, for rail ties and weir crests. */
@@ -120,6 +120,12 @@ export interface Scene {
   readonly cut?: CutPlane
   /** A flat section's cut faces, in plane coordinates: meters along the plane, scene z. */
   readonly sections?: readonly Vec2[][]
+  /**
+   * A scene drawn as an island (a history switch's `island`): the polygon's rings in view meters
+   * (outers counter-clockwise, holes clockwise), the flat bottom of its slab (scene z), and the
+   * caption line saying what its edge is.
+   */
+  readonly island?: { readonly rings: readonly Ring[]; readonly bottom: number; readonly caption?: string }
   /** Traced buildings of the year left out, and why: on water, on a viaduct or track, or buried. */
   readonly tracedLeftOut?: readonly { readonly id: string; readonly why: 'water' | 'viaduct' | 'track' | 'buried' }[]
 }
@@ -249,6 +255,9 @@ export const buildScene = (
     const have = new Set(features.map((f) => f.id))
     const bridges = curated.map(bridgeFeature).filter((f): f is Feature => f !== null && !have.has(f.id))
     if (bridges.length > 0) features = [...features, ...bridges]
+    // Curated lost streets, likewise, whatever the houses of the year near them.
+    const streets = curated.map(streetFeature).filter((f): f is Feature => f !== null && !have.has(f.id))
+    if (streets.length > 0) { features = [...features, ...streets]; extraStats.streetsCurated = streets.length }
   }
   const bearing = chooseBearing(region, features)
   const view = makeView(region, bearing)
@@ -280,9 +289,35 @@ export const buildScene = (
   }
   const frame = view.frame
   const stats: Record<string, number> = { features: features.length, ...(unbuiltStreets ? { unbuiltStreets } : {}), ...(later.atGrade ? { bridgesAtGrade: later.atGrade } : {}), ...(later.verges ? { vergesLater: later.verges } : {}), ...(past.canalBridges ? { canalBridgesLater: past.canalBridges } : {}), ...(past.orphanBridges ? { bridgesWithoutRoads: past.orphanBridges } : {}), ...(past.plantings ? { plantingsLater: past.plantings } : {}), ...(past.spurs ? { spursLater: past.spurs } : {}), ...extraStats }
+  // A pick-out the build switched on (`Highlight`): which polygon a ring's center falls in, and
+  // the roof that gives it, or null where the building keeps its own.
+  const mark = time?.history.highlight
+  const markPolys = (mark?.rings ?? []).map((rs) => rs.map((r) => toViewRing(view, r)))
+  const markSets = mark?.picked?.map((ids) => new Set(ids))
+  const markRoof = (ring: Ring, id?: string): string | null => {
+    if (mark === undefined) return null
+    const c = centroid(ring)
+    const k = mark.pick === false ? -1
+      : markSets !== undefined ? (id === undefined ? -1 : markSets.findIndex((s) => s.has(id)))
+      : markPolys.findIndex((rs) => pointInPolygon(c, rs))
+    if (k >= 0) stats[k === 0 ? 'markPick' : 'markNear'] = (stats[k === 0 ? 'markPick' : 'markNear'] ?? 0) + 1
+    return k === 0 ? pal.mark.pick : k > 0 ? pal.mark.near : mark.quiet === true ? pal.mark.quiet : null
+  }
   const opts = region.terrain ?? {}
   const useTerrain = elevation !== null && region.terrain !== undefined && opts.enabled !== false
-  const terrain = makeTerrain(view, opts.cell ?? 5, useTerrain ? (opts.exaggeration ?? 2) : 1, useTerrain ? elevation : null)
+  // Ground a later work cut or filled, put back for the years before it (`GroundRestoration`).
+  const restorations = time === undefined ? [] : (time.history.ground ?? []).filter((g) => time.year < g.before)
+  let restoredNodes = 0
+  const restore = restorations.length === 0 ? undefined : (grid: HeightGrid) => {
+    for (const g of restorations) {
+      const rings = g.rings.map((r) => r.map(([lon, lat]) => view.toView(lon, lat)))
+      restoredNodes += g.method === 'lower'
+        ? lowerGround(grid, rings, g.radius)
+        : restoreGround(grid, rings, (g.lines ?? []).map((l) => ({ pts: l.line.map(([lon, lat]) => view.toView(lon, lat)), ...(l.elevation === undefined ? {} : { elevation: l.elevation }) })))
+    }
+  }
+  const terrain = makeTerrain(view, opts.cell ?? 5, useTerrain ? (opts.exaggeration ?? 2) : 1, useTerrain ? elevation : null, useTerrain ? restore : undefined)
+  if (restoredNodes > 0) stats.groundRestored = restoredNodes
 
   // ---- ground ----------------------------------------------------------------------------
   const ground: GroundPolygon[] = []
@@ -498,7 +533,7 @@ export const buildScene = (
     }
     const w = roadWidth(t)
     if (w !== null) {
-      const r = ribbonOf(isPath(t) ? 'path' : 'road', f, w)
+      const r = ribbonOf(mark?.streets === true && f.id.startsWith('history:') ? 'mark' : isPath(t) ? 'path' : 'road', f, w)
       if (r) ribbons.push(r)
     } else if (isRail(t)) {
       // A series can draw yard and siding track at its own scale (railScaleService): a yard of a
@@ -529,6 +564,15 @@ export const buildScene = (
     for (const [k, run] of [...(h.line ? [h.line] : []), ...(h.lines ?? [])].entries()) {
       const r = ribbonOf('rail', { type: 'line', id: `${h.id}:${k}`, tags: {}, points: run }, (h.width ?? 3.2) * railScale, false)
       if (r) ribbons.push(r)
+    }
+  }
+  // A pick-out's polygons, outlined on the ground.
+  if (mark !== undefined && mark.outline !== false) {
+    for (const [k, rs] of (mark.rings ?? []).entries()) {
+      for (const [m, ring] of rs.entries()) {
+        const r = ribbonOf('mark', { type: 'line', id: `mark:${k}:${m}`, tags: {}, points: [...ring, ring[0]] }, k === 0 ? 3 : 2, false)
+        if (r) ribbons.push(r)
+      }
     }
   }
   // A racecourse or promenade that is gone: a closed loop drawn as a path.
@@ -880,6 +924,7 @@ export const buildScene = (
       roof = pal.fresh
       fresh++
     }
+    roof = markRoof(outer) ?? roof
     // A parcel's year built decided something here: whether the building stands in a past
     // year, or that it is drawn as new since the previous one. Today's scene otherwise draws
     // every building whatever its date.
@@ -1229,7 +1274,7 @@ export const buildScene = (
       const grounds = outer.map((p) => terrain.z(p))
       const base = Math.min(...grounds)
       const top = Math.max(seatLevel(grounds, terrain.exaggeration) + b.storeys * 3.6, base + 2.5)
-      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, pal.traced[b.material], dotsMode, undefined, grounds))
+      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, markRoof(outer, b.id) ?? pal.traced[b.material], dotsMode, undefined, grounds))
       ends[b.end]++
     }
     stats.traced = ends.map + ends.rebuilt + ends.highway + ends.assumed
@@ -1281,7 +1326,7 @@ export const buildScene = (
   let mergedPieces = 0
   for (let c = 0; c < chains.length; c++) {
     const onLineDeck = deckOnLine.size > 0 && deckOnLine.has(chains[c].line.id)
-    const all = bridgePieces(view, pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }), ...(onLineDeck ? { onLine: true } : {}) } : undefined)
+    const all = bridgePieces(view, mark?.bridges?.includes(chains[c].line.id) === true ? { ...pal, deck: pal.mark.line } : pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }), ...(onLineDeck ? { onLine: true } : {}) } : undefined)
     const pieces = all.filter((p) => !merged(c, p))
     mergedPieces += all.length - pieces.length
     spans += pieces.filter((p) => p.pier !== true).length
@@ -1299,8 +1344,38 @@ export const buildScene = (
   }
   if (labels.length > 0) stats.labels = labels.length
 
+  // An island (a switch's `island`): keep only what stands inside its polygon.
+  const isle = time?.history.island
+  let islandOut: Scene['island']
+  let kept = items
+  if (isle?.rings !== undefined) {
+    // Cut to the frame too: ground is drawn only inside it, so where the polygon runs past the
+    // frame the frame's edge is the island's edge.
+    const rings = isle.rings.map((r) => clipRingToRect(toViewRing(view, r), frame)).filter((r) => r.length >= 3)
+    // Orient: a ring inside an odd number of others is a hole (clockwise), else an outer.
+    const oriented = rings.map((r, k) => {
+      const depth = rings.filter((o, m) => m !== k && pointInRing(r[0], o)).length
+      const ccw = signedArea(r) > 0
+      return (depth % 2 === 0) === ccw ? r : r.slice().reverse()
+    })
+    const keepIds = isle.keep === undefined ? undefined : new Set(isle.keep.map((id) => `traced:${id}`))
+    kept = items.filter((it) => {
+      if (keepIds !== undefined && it.id.startsWith('traced:')) return keepIds.has(it.id)
+      return pointInPolygon(centroid(it.footprint ?? it.hull), oriented)
+    })
+    stats.islandKept = kept.length
+    stats.islandLeftOut = items.length - kept.length
+    let low = Infinity
+    for (const r of oriented) for (const pt of r) low = Math.min(low, terrain.z(pt))
+    for (let n = frame.minY; n <= frame.maxY; n += terrain.cell) {
+      for (let e = frame.minX; e <= frame.maxX; e += terrain.cell) if (pointInPolygon([e, n], oriented)) low = Math.min(low, terrain.z([e, n]))
+    }
+    islandOut = { rings: oriented, bottom: low - (isle.slab ?? region.slab ?? 14), ...(isle.caption === undefined ? {} : { caption: isle.caption }) }
+  }
+
   return {
-    region, view, palette: pal, terrain, ground, ribbons, items, stats,
+    region, view, palette: pal, terrain, ground, ribbons, items: kept, stats,
+    ...(islandOut === undefined ? {} : { island: islandOut }),
     ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated, ...(time.history.tieClear === undefined ? {} : { tieClear: time.history.tieClear }), ...(time.history.carLineSeal === true ? { carLineSeal: true } : {}), ...(time.history.carDecks === true ? { carDecks: true } : {}) } }),
     ...(labels.length === 0 ? {} : { labels }),
     ...(railScale > 1 ? { boldRail: true } : {}),

@@ -449,9 +449,17 @@ export const renderSocial = async (svgPath: string, pngPath: string, viewBox: re
   }
 }
 
-/** Width and height of a PNG or JPEG held in memory; undefined if it is neither. */
+/** Width and height of a PNG, JPEG or WebP held in memory; undefined if it is none of them. */
 export const imageSize = (buf: Buffer): { width: number; height: number } | undefined => {
   if (buf.length >= 24 && buf.readUInt32BE(0) === 0x89504e47) return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) }
+  // WebP: a RIFF file whose first chunk is VP8X (extended), VP8L (lossless) or VP8 (lossy).
+  if (buf.length >= 30 && buf.toString('ascii', 0, 4) === 'RIFF' && buf.toString('ascii', 8, 12) === 'WEBP') {
+    const chunk = buf.toString('ascii', 12, 16)
+    if (chunk === 'VP8X') return { width: 1 + buf.readUIntLE(24, 3), height: 1 + buf.readUIntLE(27, 3) }
+    if (chunk === 'VP8L') { const b = buf.readUInt32LE(21); return { width: 1 + (b & 0x3fff), height: 1 + ((b >> 14) & 0x3fff) } }
+    if (chunk === 'VP8 ') return { width: buf.readUInt16LE(26) & 0x3fff, height: buf.readUInt16LE(28) & 0x3fff }
+    return undefined
+  }
   if (buf.length < 4 || buf[0] !== 0xff || buf[1] !== 0xd8) return undefined
   // JPEG: walk the segments to the first start-of-frame marker (C0–CF, except C4, C8 and CC).
   for (let i = 2; i + 9 < buf.length; ) {

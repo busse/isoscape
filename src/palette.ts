@@ -60,6 +60,12 @@ export interface Palette {
   /** Vanished pleasure grounds (a fairground), and a racetrack's dirt oval. */
   readonly grounds: string
   readonly racetrack: string
+  /**
+   * A story's pick-out (`Highlight` in history.ts): roofs inside its first polygon (`pick`) and
+   * its later ones (`near`), every other roof (`quiet`), and the outlines, lost streets and
+   * bridges it marks (`line`).
+   */
+  readonly mark: { readonly pick: string; readonly near: string; readonly quiet: string; readonly line: string }
   /** Roofs of buildings traced from fire-insurance maps, in the maps' own color code. */
   readonly traced: Readonly<Record<'brick' | 'frame' | 'stone' | 'iron' | 'special' | 'fireproof', string>>
   /** Streetcar lines on the ground, and the cars on them: side lit, side in shade, roof. */
@@ -163,6 +169,7 @@ const paper: Palette = {
   plan: '#e4dcc4',
   grounds: '#ddd0a8',
   racetrack: '#b39a6c',
+  mark: { pick: '#c4553b', near: '#e8a88f', quiet: '#ebe6db', line: '#8f2a22' },
   traced: { brick: '#e9c2b8', frame: '#efe0a6', stone: '#c3d3e2', iron: '#cfcdc8', special: '#c5dcc0', fireproof: '#cfc6a4' },
   tram: '#b8362c',
   tramCar: ['#c9473a', '#8f2a22', '#e8d9b0'],
@@ -278,6 +285,7 @@ const night: Palette = {
   plan: '#252836',
   grounds: '#2e2c2a',
   racetrack: '#4a3f30',
+  mark: { pick: '#e0614f', near: '#8a4a3e', quiet: '#2f3340', line: '#f07a5f' },
   traced: { brick: '#5a3c3a', frame: '#5a5236', stone: '#34465a', iron: '#45454a', special: '#3a4f3c', fireproof: '#4f4a36' },
   tram: '#e0614f',
   tramCar: ['#f07a5f', '#b04a3a', '#f2e2b8'],
