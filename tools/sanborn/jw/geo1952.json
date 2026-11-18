@@ -409,5 +409,35 @@
   "m_per_px": 0.1559,
   "block_inliers": 0.12,
   "block_points": 7257
+ },
+ "304": {
+  "params": [
+   17904.08549816944,
+   6847.809253547822,
+   -0.6236925152355829,
+   6.512596967505455
+  ],
+  "refined": true,
+  "corners": [
+   "Leigh & Munford (pipes)",
+   "Leigh & Gilmer (pipes)",
+   "Leigh & Goshen (pipes)",
+   "Axtel & Goshen (pipes)"
+  ],
+  "resid_m": [
+   0.5,
+   1.0,
+   3.4,
+   2.9
+  ],
+  "resid_corners_only": [
+   0.5,
+   1.0,
+   3.4,
+   2.9
+  ],
+  "m_per_px": 0.1535,
+  "block_inliers": 0.1,
+  "block_points": 2214
  }
 }
