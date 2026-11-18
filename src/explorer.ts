@@ -387,6 +387,8 @@ ${PROSE_CSS}${FIGURE_CSS}${LIGHTBOX_CSS}/* Wide figures run past the text column
 .doc .prose figure.fig.wide img { background: var(--panel); }
 @media (max-width: 1180px) { .doc .prose figure.fig.wide { --bleed: calc((100cqw - 100%) / 2 - 24px); margin-left: calc(-1 * var(--bleed)); width: calc(100% + 2 * var(--bleed)); } }
 #toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
+#toc { transition: opacity .15s; }
+#toc.under { opacity: 0; pointer-events: none; }
 #toc h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 6px 0 8px; }
 #toc a { display: block; padding: 3px 0 3px 10px; border-left: 2px solid var(--line); color: var(--dim); text-decoration: none; }
 #toc a:hover { color: var(--ink); }
@@ -1049,6 +1051,14 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
       if (el && el.offsetTop - page.scrollTop <= 80) current = a
     }
     for (const a of $('toc').querySelectorAll('a')) a.classList.toggle('on', a === current)
+    // A wide figure runs over the contents list: the list steps aside while one is beside it.
+    const t = $('toc').getBoundingClientRect()
+    let under = false
+    for (const f of $('article').querySelectorAll('figure.fig.wide')) {
+      const r = f.getBoundingClientRect()
+      if (r.right > t.left && r.top < t.bottom && r.bottom > t.top) { under = true; break }
+    }
+    $('toc').classList.toggle('under', under)
   }
   $('page').addEventListener('scroll', markToc, { passive: true })
   // ---- front page -------------------------------------------------------------------------------

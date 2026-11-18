@@ -108,9 +108,14 @@ export const lightbox = (doc) => {
       const b = el('button', 'lb-thumb', { type: 'button', role: 'listitem', 'aria-label': 'Open ' + (it.caption ? (it.caption.querySelector('.fig-n') || {}).textContent || '' : '') + ' ' + it.alt })
       const t = el('img', '', { alt: '', loading: 'lazy' })
       t.src = it.small
-      const n = el('span')
-      n.textContent = it.caption && it.caption.querySelector('.fig-n') ? it.caption.querySelector('.fig-n').textContent : String(i + 1)
-      b.append(t, n)
+      const n = el('b')
+      const fn = it.caption && it.caption.querySelector('.fig-n')
+      n.textContent = fn ? fn.textContent : String(i + 1)
+      // The caption's opening words, after the number (cut to two lines by the style).
+      const first = it.caption && it.caption.querySelector('p')
+      const words = el('span')
+      words.textContent = first ? first.textContent.replace(n.textContent, '').trim() : ''
+      b.append(t, n, words)
       b.addEventListener('click', () => { setGrid(false); show(i); closeBtn.focus() })
       grid.append(b)
     })
@@ -239,7 +244,7 @@ export const lightbox = (doc) => {
 
 /** The lightbox's look: colors from the shared theme (THEME_CSS), nothing else. */
 export const LIGHTBOX_CSS = `html.lb-on, html.lb-on body { overflow: hidden; }
-.lb { position: fixed; inset: 0; z-index: 1000; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; background: color-mix(in srgb, var(--stage) 97%, transparent); color: var(--ink); overscroll-behavior: contain; }
+.lb { position: fixed; inset: 0; z-index: 1000; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; background: var(--stage); color: var(--ink); overscroll-behavior: contain; }
 .lb[hidden] { display: none; }
 .lb-bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: var(--panel); font-size: 13px; }
 .lb-count { margin-right: auto; color: var(--dim); font-variant-numeric: tabular-nums; }
@@ -263,8 +268,9 @@ export const LIGHTBOX_CSS = `html.lb-on, html.lb-on body { overflow: hidden; }
 .lb.gridding .lb-stage, .lb.gridding .lb-prev, .lb.gridding .lb-next, .lb.gridding .lb-cap, .lb.gridding .lb-zoom { display: none; }
 .lb-grid { grid-row: 2 / 4; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; padding: 18px 20px 28px; align-content: start; }
 .lb-grid[hidden] { display: none; }
-.lb-thumb { display: flex; flex-direction: column; gap: 6px; padding: 8px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); color: var(--ink); font: inherit; font-size: 12.5px; font-weight: 600; text-align: left; cursor: pointer; }
+.lb-thumb { display: flex; flex-direction: column; gap: 6px; padding: 8px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); color: var(--ink); font: inherit; font-size: 12.5px; line-height: 1.35; text-align: left; cursor: pointer; }
 .lb-thumb:hover { border-color: var(--accent); }
+.lb-thumb span { font-weight: 400; color: var(--dim); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .lb-thumb img { width: 100%; aspect-ratio: 16 / 10; object-fit: contain; background: var(--bg); border-radius: 5px; }
 @media (max-width: 600px) { .lb-stage { padding: 8px; } .lb-prev, .lb-next { top: auto; bottom: 8px; transform: none; } .lb-gridbtn { font-size: 0; } .lb-gridbtn::before { content: "▦"; font-size: 14px; } }
 `

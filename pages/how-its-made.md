@@ -1308,7 +1308,10 @@ include outputs from before it existed.
 
 After every build, `out/index.html` is rewritten: this explorer. It is a single file with the
 build list and these pages embedded in it, so it opens from disk with no server. The pages are
-Markdown files in `pages/`. To add one, see the README.
+Markdown files in `pages/`. To add one, see the README. A page may number its pictures as
+figures, each with a caption under it; clicking one opens it large in a lightbox, with the
+page's other figures a step away and a grid of them all. The Jackson Ward story's views open at
+3,200 pixels wide there, twice the 1,600 the page shows; its charts open at their own 1,600.
 
 Beside it go plain pages that need no script, for search engines and link previews: each of
 these pages as `p/<slug>.html`, each map as `m/<region>.html` (and each year of a dated series

@@ -354,6 +354,32 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   `pipeline.svg` and the FAQ's diagrams (`faq-*.svg`) are written by
   `node tools/diagrams/faq.ts`, with every color from `src/palette.ts`. Edit the script and run
   it again. `npm test` fails when a file in `pages/` differs from what the script writes.
+- `deck` (optional) is one sentence set under the page's title in larger, dimmer type: what the
+  reader will see.
+- **Numbered figures** are opt-in. A picture in a fenced block becomes a figure, numbered
+  "Fig. 1.", "Fig. 2." … in page order, with everything after the picture as its caption in
+  small type on a light ground (a table keyed to the picture goes inside, so it stays with it):
+
+  ```markdown
+  ::: figure wide
+  ![Alt text: what the picture shows](jackson-ward-state-1952.webp)
+
+  Short caption. *How this was made:* the method, with [links](#the-tracing).
+  :::
+  ```
+
+  `wide` lets the picture run past the text column where the window allows (over the margin
+  and the explorer's contents list). Figures get ids `fig-1`, `fig-2` …, so `[Fig. 3](#fig-3)`
+  links one. On a page with figures, clicking a picture opens a lightbox (`src/lightbox.ts`):
+  the picture fitted to the window with its caption, previous and next (arrow keys), a counter,
+  **Full size** (Z, or click the picture) to see it at its own size and pan by dragging,
+  **All figures** (G) for a grid of every figure on the page, Esc to close. It works by
+  keyboard alone, keeps focus inside while open, and takes the explorer's shortcut keys until
+  it closes. Where a larger copy sits beside the picture as `<name>-large.<ext>`, the lightbox
+  shows that; it is linked, not inlined, from `p/`, so it costs nothing until opened (the
+  Jackson Ward views have 3,200 px copies, written by `views.py`). Pages without the block
+  render as before. GitHub shows the `:::` lines as text.
+- Raster images carry their width and height, so the page holds its layout while they load.
 - The converter (`src/markdown.ts`) escapes all text and drops raw HTML and unsafe link
   schemes. Files starting with `_` (drafts) and `README.md` are skipped.
 - `npm test` checks that every in-page link in `pages/` lands on a real section, and that the

@@ -1,12 +1,13 @@
 ---
-title: What stood where the highway runs
+title: Jackson Ward before I-95, block by block
+deck: Richmond's Sanborn fire-insurance maps of 1925 and 1952, drawn on the ground as it stood, show the buildings and streets the Richmond–Petersburg Turnpike cut through, and the same blocks about a year after the road opened and today.
 order: 60
 summary: Jackson Ward, Richmond, before and after the Richmond–Petersburg Turnpike: the 1952 fire-insurance maps drawn on the ground as it stood, and how we know. A working draft for review.
 unlisted: true
 social: jackson-ward-social.jpg
 ---
 
-# What stood where the highway runs
+# Jackson Ward before I-95, block by block
 
 > **Unpublished working draft, for review.** Not for circulation. The facts were checked
 > against their sources on November 18, 2026. The community reviewers have not yet read it. The numbers,
@@ -28,13 +29,15 @@ churches and institutions, whose work this rests on (see
 
 ## 1925
 
+::: figure wide
 ![Jackson Ward about 1925, from Belvidere Street to 7th Street and from Broad Street to the railroad, seen from the south: frame houses in yellow and brick in pink fill the blocks north of Leigh Street, and Apostle Town stands where Gilpin Court was later built](jackson-ward-state-1925.webp)
 
-*How this was made:* buildings north of Leigh Street (and between Clay and Leigh from 1st to
+Jackson Ward about 1925, seen from the south, from Belvidere Street to 7th Street and from Broad Street to the railroad. Frame houses are yellow, brick pink. *How this was made:* buildings north of Leigh Street (and between Clay and Leigh from 1st to
 7th Streets) from the 15 sheets of the 1925 Sanborn volume 3, registered onto the same sheets of
 the 1952 printing and placed by their fits; south of that from the 1924–25 volume 1 tracing;
 and buildings standing today that the city dates to 1925 or before. The ground is the same
 estimate as in 1952. See [The tracing](#the-tracing). Working draft.
+:::
 
 The 1925 volume's sheets carry marks dated early 1925, most of them March, its title page bears the Library of Congress's receipt stamp of May 16, 1925, and its correction table is blank, so it shows the ward as first surveyed for that edition [[LoC, Sanborn 1925 vol. 3](#sources)]. On these sheets most buildings north of Leigh
 Street are frame. The tracing found 3,907 outlines, 2,317 of them colored as frame
@@ -53,9 +56,10 @@ undesirable, and its residents were barred from loans for houses and businesses 
 §1.4.2]. By the 1930s more than 8,000 Black Richmonders lived and worked in the ward
 [[Community Plan 2026](#sources), citing Taylor 1994].
 
+::: figure
 ![Second Street about 1925, from Broad Street at the near edge to past Leigh Street, with 22 buildings numbered where the 1925 sheets print a name or use](jackson-ward-second-street-1925.webp)
 
-*How this was made:* a close crop of the 1925 view, numbered where the 1925 sheets print a name
+Second Street about 1925, from Broad Street at the near edge to past Leigh Street. The 22 numbers are keyed in the table below. *How this was made:* a close crop of the 1925 view, numbered where the 1925 sheets print a name
 or use beside a building that is drawn here (`tools/sanborn/jw/named1925.csv`). Numbers run
 from the top of the picture down. South of Clay Street the buildings come from the older
 volume 1 tracing, which names none. See [The tracing](#the-tracing).
@@ -84,6 +88,7 @@ volume 1 tracing, which names none. See [The tracing](#the-tracing).
 | 20 | Bank | 3-4 | 308 |
 | 21 | Miller & Rhoads Private Garage | not printed | 309 |
 | 22 | Leigh St. Memorial M.E. Church | not printed | 309 |
+:::
 
 Names are as printed; "(Colored)" is the sheet's own word. The bank at 212–216 East Clay (20) is the building of the Mechanics Savings Bank, built in 1909 and opened in 1910, which failed in 1922; the Southern Aid Society bought it in 1930 [[NPS, 212 East Clay Street](#sources)]. The National Park
 Service shows True Reformers Hall (9) as a three-story building on Second Street
@@ -91,17 +96,23 @@ Service shows True Reformers Hall (9) as a three-story building on Second Street
 
 ## 1952: the last survey before the road
 
+::: figure wide
 ![Jackson Ward in 1952, from Belvidere Street to 7th Street and from Broad Street to the railroad, seen from the south: row houses, churches and shops fill the blocks, and no highway crosses them](jackson-ward-state-1952.webp)
 
-*How this was made:* buildings north of Leigh Street from the 1952 Sanborn volume 3, south of
+Jackson Ward in 1952, the same frame: the last survey before the road. *How this was made:* buildings north of Leigh Street from the 1952 Sanborn volume 3, south of
 it from the 1924–25 and 1950–52 volume 1 tracings (Second Street from Broad to Clay traced
 again for this story), and buildings standing today that the city dates to 1952 or before, on
 ground rebuilt as it was before the trench (an estimate, about ±1.5 m in its middle). Streets
 that ran where the trench is now are read off the sheets. See
 [The ground before the trench](#the-ground-before-the-trench) and [The tracing](#the-tracing).
 Working draft.
+:::
 
+::: figure wide
 ![The same frame about 1925 (above) and in 1952 (below): most blocks change little, and in 1952 Gilpin Court's long brick buildings stand where Apostle Town's frame houses were](jackson-ward-pair-1925-1952.webp)
+
+The same frame about 1925 (above) and in 1952 (below). Most blocks change little; in 1952 Gilpin Court's long brick buildings stand where Apostle Town's frame houses were.
+:::
 
 The 1952 volume is a full reprint, with "Copyright 1952" on every sheet and a new index dated
 September 1951. It draws what was built after 1925, such as Gilpin Court and the Armstrong High
@@ -116,9 +127,10 @@ houses in the north blocks, and the brick churches and halls along Leigh and Sec
 
 ## Second Street
 
+::: figure
 ![Second Street in 1952, from Broad Street at the near edge to past Leigh Street, with 31 buildings numbered where the sheets print a name or use: the Hippodrome, the Leigh Street Y.M.C.A., Third Street Bethel A.M.E., the Southern Aid Society's office building and others](jackson-ward-second-street-1952.webp)
 
-*How this was made:* a close crop of the 1952 view, numbered where the 1952 sheets print a name
+Second Street in 1952, from Broad Street at the near edge to past Leigh Street. The 31 numbers are keyed in the table below. *How this was made:* a close crop of the 1952 view, numbered where the 1952 sheets print a name
 or use beside a building that is drawn here (`tools/sanborn/jw/named.csv`). Numbers run from
 the top of the picture down; a marker stands over the top of its roof. South of Clay Street
 the buildings come from volume 1 sheets 2 and 3, fitted again and traced for this story, which
@@ -157,8 +169,13 @@ were not read for names. See [The tracing](#the-tracing). Working draft.
 | 29 | Elks Home, Williams Lodge (Colored) | not printed | 309 |
 | 30 | Miller & Rhoads furniture storage | 2 | 309 |
 | 31 | Leigh St. M.E. Church | not printed | 309 |
+:::
 
+::: figure
 ![Second Street about 1925 (above) and in 1952 (below), the same blocks](jackson-ward-pair-second-street.webp)
+
+Second Street about 1925 (above) and in 1952 (below), the same blocks.
+:::
 
 Second Street, "the Deuce," was the ward's main commercial street [[Community Plan 2026](#sources)]. On sheet 308 of the 1952
 volume, between Clay and Jackson Streets, the sheet names the Hippodrome Theatre, a second
@@ -172,10 +189,21 @@ drawn from today's map.
 
 ## How the route was chosen
 
-![A timeline from 1946 to 1958: the master plan, two referendums that failed, the council's vote for a turnpike authority, the authority's creation, construction, and the opening on July 1, 1958, each with its source](jackson-ward-timeline.svg)
+A consultants' master plan for the city, made in 1946, proposed expressways through it
+[[Style Weekly 2013](#sources); [Feasibility Study 2022](#sources), §1.4.3]. Richmond's voters
+said no to a downtown expressway twice. In the first referendum, on June 13, 1950, only 8 of 55
+precincts voted for it. A second, forced in 1951 by a petition of former mayor J. Fulmer Bright,
+failed by almost 2 to 1; a newspaper headline the article reproduces put the margin at 6,002
+votes [[Style Weekly 2013](#sources)]. Notes on Silver's book date a referendum June 13, 1951
+[[Silver 1984](#sources), via a student's notes].
 
-Richmond's voters said no to a downtown expressway twice. In the first referendum, on June 13,
-1950, only 8 of 55 precincts voted for it. A second, forced in 1951 by a petition of former mayor J. Fulmer Bright, failed by almost 2 to 1; a newspaper headline the article reproduces put the margin at 6,002 votes [[Style Weekly 2013](#sources)]. On August 24, 1953, according to a student's notes on Silver's book, City Council voted for a turnpike authority, which moved the decision to the General Assembly and avoided another referendum, and officials pointed to the cost of buying industrial land compared with homes [[Silver 1984](#sources), p. 192, via a student's notes; the book itself has not been seen]. The General Assembly created the Richmond–Petersburg Turnpike Authority, with the power of eminent domain, by an act approved on April 8, 1954 [[Acts of Assembly 1954](#sources); [Style Weekly 2013](#sources); [Encyclopedia Virginia](#sources)]. The Library of Virginia,
+On August 24, 1953, according to a student's notes on Silver's book, City Council voted for a
+turnpike authority, which moved the decision to the General Assembly and avoided another
+referendum, and officials pointed to the cost of buying industrial land compared with homes
+[[Silver 1984](#sources), p. 192, via a student's notes; the book itself has not been seen].
+The General Assembly created the Richmond–Petersburg Turnpike Authority, with the power of
+eminent domain, by an act approved on April 8, 1954 [[Acts of Assembly 1954](#sources);
+[Style Weekly 2013](#sources); [Encyclopedia Virginia](#sources)]. The Library of Virginia,
 Wikipedia and VCU Libraries give 1955 for its creation [[LVA 2024](#sources);
 [Wikipedia, Turnpike](#sources); [VCU Libraries](#sources)].
 
@@ -183,6 +211,8 @@ The city's 2022 feasibility study says city officials chose the middle of Jackso
 best route through downtown [[Feasibility Study 2022](#sources), §1.4.3]. Wikipedia's article on Jackson Ward, citing Benjamin Campbell, says the consultants' first report held that destroying housing "offers no serious obstacle to a highway location" [[Campbell 2012](#sources), p. 154, via Wikipedia].
 Which other routes were studied is not known to us yet.
 
+Clearance and construction ran from 1955 to 1958 [[Community Plan 2026](#sources), timeline],
+and the Authority photographed the work every month from 1956 to 1958 [[LVA 2024](#sources)].
 The road opened on July 1, 1958: 34.7 miles from Dinwiddie County to Henrico County, built for
 $76.7 million with toll revenue bonds [[LVA 2024](#sources)]. In August 1958 it became part of
 I-95 [[Wikipedia, Turnpike](#sources)]. It was the only part of Virginia's I-95 not built with
@@ -191,17 +221,21 @@ federal money [[Richmond Family Magazine 2022](#sources)]. Tolls ended in 1992
 
 ## The count
 
+::: figure wide
 ![The 1952 view with every building quiet except those whose center falls in the highway's footprint: darker for today's paved roadway and ramps, lighter for the corridor of 15 m either side](jackson-ward-count-1952.webp)
 
-*How this was made:* the 1952 view, with exactly the buildings the count counts picked out
+The buildings the count counts, picked out in the 1952 view: darker for today's paved roadway and ramps, lighter for the corridor of 15 m either side. *How this was made:* the 1952 view, with exactly the buildings the count counts picked out
 (the count's own list of them), by the polygons in
 [The count's polygon and rule](#the-counts-polygon-and-rule). Working draft.
+:::
 
+::: figure wide
 ![A plan of the ward, north near the top: the highway's paved footprint and its corridor in red over the 1952 outlines in their printed colors, over today's street plan and today's buildings in gray, with the round Coliseum at lower right](jackson-ward-overlay.webp)
 
-*How this was made:* drawn in code from the same files as the maps: the 1952 outlines, today's
+The highway's paved footprint and its corridor (red) over the 1952 outlines in their printed colors, over today's streets and buildings (gray). North is near the top; the round Coliseum is at lower right. *How this was made:* drawn in code from the same files as the maps: the 1952 outlines, today's
 OpenStreetMap buildings and streets, and the count's two polygons. Today's buildings show where
 the blocks were rebuilt after the road, among them the Coliseum on cleared blocks south of it.
+:::
 
 How much the road destroyed has been counted many ways, and the counts disagree. They cover
 different areas (the ward, the ward and Navy Hill, or the whole 34.7-mile road), and they count
@@ -233,16 +267,22 @@ made is in [The count's polygon and rule](#the-counts-polygon-and-rule).
 
 ## The lost streets
 
+::: figure wide
 ![1952: the 31 stretches of street and alley the trench took, drawn in red across the corridor, with the corridor outlined](jackson-ward-streets-1952.webp)
 
-![Today: the same corridor, with the bridges that now carry the surviving streets over the trench in red](jackson-ward-streets-2026.webp)
-
-*How this was made:* seven stretches join a street's two surviving ends straight across the
+1952: the 31 stretches of street and alley the trench took (red), with the corridor outlined. *How this was made:* seven stretches join a street's two surviving ends straight across the
 trench, as the 1934 USGS survey shows them running through. The other 24 are read off the 1952
 sheets: each street's center line, placed by the sheet's fit, kept where no street runs today
 and where at least 20 m of it, and at least 40% of that, lies in the corridor. See
 [The ground before the trench](#the-ground-before-the-trench) and [The tracing](#the-tracing).
 Working draft.
+:::
+
+::: figure wide
+![Today: the same corridor, with the bridges that now carry the surviving streets over the trench in red](jackson-ward-streets-2026.webp)
+
+Today: the same corridor, with the bridges that now carry the surviving streets over the trench (red).
+:::
 
 Seven streets that ran through at grade now end at the trench or cross it on a bridge:
 Chamberlayne Parkway, St. James, 1st, 2nd, Duval, 5th (now Maggie L. Walker Place) and 7th.
@@ -257,24 +297,28 @@ of the streets cut run to 31 [[Campbell 2012](#sources), via Wikipedia] and 34
 
 ## The island
 
+::: figure wide
 ![Only what the highway took: the 1952 blocks inside the corridor, buildings, streets and ground, drawn alone as a slab floating on blank paper, from the Belvidere ramps at upper left to about 8th Street at lower right](jackson-ward-island.webp)
 
-*How this was made:* the 1952 view cut to the corridor polygon (today's roadway and ramps plus
+Only what the highway took: the 1952 blocks inside the corridor, drawn alone. *How this was made:* the 1952 view cut to the corridor polygon (today's roadway and ramps plus
 15 m each side) and drawn alone, with the ground's cut edge as the slab's sides. It holds the
 {{corridor}} buildings the count counts in the corridor, {{paved}} of them in the paved
 polygon, with the streets and the ground as rebuilt before the trench. The edge is today's
 footprint, standing in for the 1958 right-of-way. At its east end the island stops where the
 traced 1952 sheets stop, at about 8th Street: the ramp loop beyond was not traced, so it is left
 off. Working draft.
+:::
 
 ## 1959, about a year after
 
+::: figure wide
 ![Jackson Ward in 1959: the Turnpike's trench crosses the ward from the upper left to the lower right, and the blocks along it are empty](jackson-ward-state-1959.webp)
 
-*How this was made:* the 1952 view, less every traced building whose center falls in the
+Jackson Ward in 1959, about a year after the road opened. Approximate. *How this was made:* the 1952 view, less every traced building whose center falls in the
 corridor, on today's ground. **Approximate.** Buildings the road took outside that corridor
 still stand here, and later clearances are not yet dated building by building. See
 [Measured, inferred, unknown](#measured-inferred-unknown).
+:::
 
 The picture is labeled approximate because its edges are. The corridor polygon is today's
 footprint plus 15 m, and the 1958 right-of-way has not been seen. In 1957 the Turnpike Authority and the city took by eminent domain a cottage built in 1793 by Abraham Peyton Skipwith, who had bought his freedom; it was sold for about $25 and moved out of the city
@@ -301,31 +345,37 @@ agreement between the city and the Richmond Redevelopment and Housing Authority 
 Informed Residents, are named in the city's community plan [[Community Plan 2026](#sources)].
 This page takes no position on the plan.
 
+::: figure
 ![Apostle Town about 1925 (top): rows of frame houses on narrow lots; Gilpin Court in 1952 (middle): long brick buildings on a new plan; and today (bottom)](jackson-ward-apostle-town.webp)
 
-*How this was made:* the same close crop of the 1925, 1952 and today views. In 1925, where
+Apostle Town about 1925 (top), Gilpin Court in 1952 (middle), and today (bottom). *How this was made:* the same close crop of the 1925, 1952 and today views. In 1925, where
 Apostle Town's streets differ from today's, they are drawn as sheet 318 prints them: Cabell and Tyler Streets, and Hickory Street on its old
 line, read off the sheet and drawn until 1941; Gilpin Court's own streets and paths are drawn
 from 1941 [[LoC, Sanborn 1925 vol. 3](#sources); [LVA 2025](#sources)]. The 1925 buildings on the site that the 1952 sheets no longer show (119 of them) are taken to have gone in 1941, when
 the clearance began; whether any went earlier is not known. Sheet 318 rests on one control
 point (8.5 m off), so the whole block may sit several meters from where it stood. Working draft.
+:::
 
 ## Today, and the cap
 
+::: figure wide
 ![Jackson Ward today: the trench crosses the ward, Gilpin Court lies north of it, and bridges carry some of the old streets across](jackson-ward-state-2026.webp)
 
-*How this was made:* drawn from OpenStreetMap and USGS lidar, as every isoscape view is. See
+Jackson Ward today: the trench crosses the ward, Gilpin Court lies north of it, and bridges carry some of the old streets across. *How this was made:* drawn from OpenStreetMap and USGS lidar, as every isoscape view is. See
 [How it's made](how-its-made.md).
+:::
 
 Jackson Ward was listed on the Virginia Landmarks Register on April 20, 1976 and the National
 Register on July 30, 1976, and became a National Historic Landmark on June 2, 1978. The state's
 record notes that "redevelopment and expressway construction have reduced its size"
 [[DHR 127-0237](#sources)].
 
+::: figure
 ![A plan of today's ward with the six areas over I-95 that the 2022 feasibility study tested for a cap: four found feasible between Chamberlayne Parkway and 1st Street, two not](jackson-ward-study-area.webp)
 
-*How this was made:* each area is drawn between the cross streets the study names for it; the
+The six areas over I-95 that the 2022 feasibility study tested for a cap: four found feasible, between Chamberlayne Parkway and 1st Street, and two not. *How this was made:* each area is drawn between the cross streets the study names for it; the
 widths are ours. Approximate.
+:::
 
 A cap or lid over the highway is being studied. The 2022 feasibility study, by the state's
 Office of Intermodal Planning and Investment, VDOT and the city, found it would be "technically possible" to build a bridge or lid in a study area that ran from the Belvidere Street bridge to the North 1st Street bridge, and found four of its six areas feasible, from Chamberlayne Parkway to North 1st Street [[Feasibility Study 2022](#sources), §3.2.4; [Fact sheet 2023](#sources)]. On February 28, 2023, the U.S. Department of Transportation announced a $1.35 million planning grant to the city [[City of Richmond](#sources)]. City Council accepted it on September 23, 2024 [[Ord. 2024-206](#sources)], and the city then aimed to hire a consultant by early 2025 [[VPM 2024](#sources)]. Federal records show the whole grant obligated under an agreement signed September 26, 2024, which runs to March 30, 2028 [[USAspending](#sources)]. The community plan, edited in July 2026, still lists securing federal funds and "hire a
@@ -357,7 +407,11 @@ trench: about 80–100 m wide and 3 to 6.5 m deep under the old cross streets, a
 8 m deep between Brook Road and Chamberlayne Parkway. No survey of the ground inside the trench
 before 1955 could be found online, so the 1952 views use an estimate.
 
+::: figure
 ![A plan of the ward: where the trench was filled (red, deeper toward dark red) and where ramp banks were taken down (blue), with the outlines of each method and the seven streets held at grade](jackson-ward-cut-fill.webp)
+
+Where the trench was filled (red, deeper toward dark red) and where ramp banks were taken down (blue), with the outlines of each method and the seven streets held at grade.
+:::
 
 The estimate works like a rubber sheet stretched across the trench and pinned to the measured
 ground at its edge: each point inside takes the average of its neighbors. The seven streets
@@ -367,7 +421,11 @@ banks narrower than 50 m are taken down. As this ground is drawn, the most put b
 trench is 7.8 m, between Brook Road and Chamberlayne Parkway, and the most taken away is 10.1 m,
 where a ramp's bank stands inside the trench's outline at the junction.
 
+::: figure
 ![Four profiles: St. Peter, North 1st and North 5th Streets across the trench, and the trench's center line with the 1934 survey's check points](jackson-ward-profiles.webp)
+
+St. Peter, North 1st and North 5th Streets across the trench, and the trench's center line with the 1934 survey's check points.
+:::
 
 The street profiles show the cut under three streets that once crossed: about 5.7 m under St.
 Peter Street, 6.2 m under 1st Street and 5.3 m under 5th Street, as this ground is drawn. The
@@ -378,14 +436,22 @@ than the trench is wide, such as a knoll or a dip, is lost everywhere.
 
 Two checks support those numbers.
 
+::: figure
 ![Seven trials of the method on undisturbed ground: 95% of points within 0.66 to 2.06 m on level plateau, worse where the outline crosses the Leigh Street cut or a valley edge](jackson-ward-holdout.webp)
+
+Seven trials of the method on undisturbed ground.
+:::
 
 **The method tried where the answer is known.** The trench's outline was moved onto undisturbed
 ground nearby seven times, and the ground inside rebuilt and compared with the lidar it
 replaced. On level plateau like the trench's, 95% of points came within 0.66–2.06 m. Where the
 outline crossed the Leigh Street cut or a valley edge, it did worse (2.85 and 4.17 m).
 
+::: figure
 ![The 1934 USGS sheet under the trench's outline, with the check points along its center line (P1 lies beyond the frame)](jackson-ward-1934-checks.webp)
+
+The 1934 USGS sheet under the trench's outline, with the check points along its center line (P1 lies beyond the frame).
+:::
 
 **The 1934 survey.** The USGS Richmond sheet, surveyed in 1933–34 with contours every 10 feet,
 shows the streets running through before the road. At the seven points in the trench's middle
@@ -394,9 +460,17 @@ where it can be read (P4 to P10), it agrees with the rebuilt ground to within 0.
 could not be read. The sheet is weak evidence on level ground: no contour there says only that
 the ground stayed within one 10-foot band.
 
+::: figure wide
 ![The ground alone, lit from the northwest: today with the trench, and rebuilt with the trench filled](jackson-ward-hillshade.webp)
 
+The ground alone, lit from the northwest: today with the trench, and rebuilt with the trench filled.
+:::
+
+::: figure
 ![The same blocks three ways: today; 1952 drawn on today's ground, with the trench showing; 1952 on the rebuilt ground](jackson-ward-three-way.webp)
+
+The same blocks three ways: today; 1952 drawn on today's ground, with the trench showing; 1952 on the rebuilt ground.
+:::
 
 The three-way view shows why the estimate matters. Drawn on today's ground, the 1952 streets
 dip into a trench that did not exist. On the rebuilt ground they cross level.
@@ -410,14 +484,22 @@ in 1952 (sheets 304–312, 315, 317–320 and 326), at the Library of Congress
 [[LoC, Sanborn 1952 vol. 3](#sources)]. Each sheet was fitted to today's street corners, and its
 building outlines were traced in code, then checked against the sheet.
 
+::: figure
 ![Sheet 308 of the 1952 volume, Second Street from Clay to Jackson, with its seven control points and how far each misses after the fit](jackson-ward-sheet-residuals.webp)
+
+Sheet 308 of the 1952 volume, Second Street from Clay to Jackson, with its seven control points and how far each misses after the fit.
+:::
 
 After the fit, each corner lands a little off. On 14 of the 15 sheets the mean miss is 1.1–3.6 m, and the worst single corner is 6.7 m, at St. James and Duval on sheet 326. A building may sit a few
 meters from where it stood, less than a house's width; no block was seen pushed across a
 street. Sheet 318, which draws Gilpin Court, has only one usable corner and was turned and
 shifted to fit the Gilpin Court buildings standing today (8.5 m).
 
+::: figure
 ![Every control point on all 15 sheets, with each sheet's mean](jackson-ward-residuals.webp)
+
+Every control point on all 15 sheets, with each sheet's mean.
+:::
 
 Colors on the sheets give each building's material: pink for brick, yellow for frame. The 1952
 printing leaves many frame houses uncolored; those are taken to be frame, an inference checked
@@ -445,7 +527,11 @@ does not use it as one.
 
 ### The count's polygon and rule
 
+::: figure
 ![The count's two polygons along the highway, turned to run across the page, with the 1952 outlines inside each and the count by sheet](jackson-ward-count.webp)
+
+The count's two polygons along the highway, turned to run across the page, with the 1952 outlines inside each and the count by sheet.
+:::
 
 The polygon is built from today's OpenStreetMap ways of the Turnpike and its ramps, each widened
 to its lanes at 3.65 m plus 3 m shoulders, with the gaps between carriageways closed. It runs
