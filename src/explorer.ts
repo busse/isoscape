@@ -51,6 +51,14 @@ import { DEM_SOURCES } from './dem-sources.ts'
 import { buyLinks, escAttr, pageMapRefs, pageShop, printLinks, shopCta, siteTags, type SiteCard } from './social.ts'
 import { makeStory } from './story.ts'
 
+/**
+ * The address of this document with its fragment replaced by `hash`. The explorer routes with
+ * the fragment, and history must be given this absolute form: under `<base href="./">` a bare
+ * `#/page` resolves against the folder, and from file:// that is another document, which
+ * pushState refuses (every in-page link and section link then did nothing).
+ */
+export const fragmentUrl = (href: string, hash: string): string => href.replace(/#.*$/, '') + hash
+
 // The isoscape mark (one isometric building), for the browser tab.
 export const MARK = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><g stroke="#2c2b33" stroke-width="3" stroke-linejoin="round">' +
   '<path d="M60 18 L100 41 L60 64 L20 41 Z" fill="#f2c879"/><path d="M20 41 L60 64 L60 104 L20 81 Z" fill="#ece7dc"/><path d="M100 41 L60 64 L60 104 L100 81 Z" fill="#c3bbac"/></g>' +
@@ -859,14 +867,17 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const canonical = document.querySelector('link[rel="canonical"]')
   const siteCanonical = canonical ? canonical.getAttribute('href') : null
   // Set the address for a route: the share page's path (on a server), with the route's fragment.
+  // Every URL given to history is absolute: <base href="./"> would resolve a bare '#…' against
+  // this file's folder, which from file:// is another document and throws (fragmentUrl).
+  const fragmentUrl = (${fragmentUrl.toString()})
   const setAddress = (hash, push) => {
     const d = doorFor(hash)
     if (canonical && site.siteUrl) canonical.setAttribute('href', d && d.page ? site.siteUrl + d.page : siteCanonical)
     const same = location.hash === hash
-    const url = canDoor ? new URL((d ? d.path : '') + hash, appDir).href : null
-    if (same && (url === null || url === location.href)) return
+    const url = canDoor ? new URL((d ? d.path : '') + hash, appDir).href : fragmentUrl(location.href, hash)
+    if (same && url === location.href) return
     const how = push && !same ? 'pushState' : 'replaceState'
-    try { history[how](null, '', url || hash) } catch (err) { if (!same) history[how](null, '', hash) }
+    try { history[how](null, '', url) } catch (err) { if (!same) history[how](null, '', fragmentUrl(location.href, hash)) }
   }
   const copied = (text, btn) => {
     btn.textContent = text

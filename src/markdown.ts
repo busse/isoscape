@@ -12,6 +12,21 @@
  *
  * Headings get GitHub-style ids (lower case, punctuation dropped, spaces to hyphens), so a
  * page reads the same, anchors included, on GitHub and in the explorer.
+ *
+ * Figures (opt-in, for pages that want numbered, captioned pictures): a fenced block
+ *
+ *     ::: figure
+ *     ![Alt text for the picture](picture.webp)
+ *
+ *     The caption: any blocks, tables included (a table keyed to the picture stays with it).
+ *     :::
+ *
+ * becomes `<figure class="fig" id="fig-N">`: the picture, wrapped in a link to its full-size
+ * file (`MarkdownOptions.image`'s `full`, else the picture), then a `<figcaption>` that begins
+ * "Fig. N." and holds the rest. Figures are numbered 1, 2, 3 … in page order. Words after
+ * `figure` are classes from a fixed list (`wide`: the picture may run wider than the text).
+ * GitHub shows the fence lines as text, so the file still reads there. A page without the
+ * fence renders as before.
  */
 
 export interface Heading {
@@ -21,18 +36,41 @@ export interface Heading {
   readonly text: string
 }
 
+/** An image as `MarkdownOptions.image` resolves it: its URL, its size when known, and a full-size file to open. */
+export interface ImageRef {
+  readonly src: string
+  readonly width?: number
+  readonly height?: number
+  /** The file a figure's picture links to (a larger copy, say); figures only. */
+  readonly full?: string
+}
+
+export interface Figure {
+  readonly n: number
+  /** The anchor, without any prefix: `fig-N`. */
+  readonly id: string
+  readonly alt: string
+}
+
 export interface MarkdownOptions {
   /** Prepended to every heading id in the HTML (not in `headings`), to keep ids unique in a page that holds several documents. */
   readonly idPrefix?: string
   /** Rewrite a link target; called with targets that have already passed the safety check. */
   readonly link?: (href: string) => string
-  /** Resolve an image source to a URL (a data: URI, say). Null drops the image to its alt text. */
-  readonly image?: (src: string) => string | null
+  /** Resolve an image source to a URL (a data: URI, say), with its size if known. Null drops the image to its alt text. */
+  readonly image?: (src: string) => string | ImageRef | null
+}
+
+/** Options inside a figure: images there carry the file they open. */
+interface InlineOptions extends MarkdownOptions {
+  readonly inFigure?: boolean
 }
 
 export interface MarkdownResult {
   readonly html: string
   readonly headings: Heading[]
+  /** The figures (`::: figure`), in page order. */
+  readonly figures: Figure[]
 }
 
 export const escapeHtml = (s: string): string =>
@@ -55,7 +93,7 @@ export const slugify = (text: string): string =>
 const PUNCT = /[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/
 
 /** Inline markup to HTML. */
-export const inline = (src: string, opts: MarkdownOptions = {}): string => {
+export const inline = (src: string, opts: InlineOptions = {}): string => {
   let out = ''
   let i = 0
   const n = src.length
@@ -120,10 +158,13 @@ export const inline = (src: string, opts: MarkdownOptions = {}): string => {
       const p = linkParts(i + 1)
       if (p !== null) {
         const safe = safeHref(p.href)
-        const url = safe === null ? null : opts.image ? opts.image(safe) : safe
-        out += url === null
+        const got = safe === null ? null : opts.image ? opts.image(safe) : safe
+        const ref: ImageRef | null = typeof got === 'string' ? { src: got } : got
+        const size = ref?.width && ref.height ? ' width="' + ref.width + '" height="' + ref.height + '"' : ''
+        const full = opts.inFigure && ref ? ' data-full="' + escapeHtml(ref.full ?? ref.src) + '"' : ''
+        out += ref === null
           ? escapeHtml(p.text)
-          : '<img src="' + escapeHtml(url) + '" alt="' + escapeHtml(p.text) + '" loading="lazy">'
+          : '<img src="' + escapeHtml(ref.src) + '" alt="' + escapeHtml(p.text) + '"' + size + full + ' loading="lazy">'
         i = p.end
         continue
       }
@@ -182,6 +223,10 @@ export const inline = (src: string, opts: MarkdownOptions = {}): string => {
 // ---- blocks ------------------------------------------------------------------------------------
 
 const FENCE = /^ {0,3}(`{3,}|~{3,})\s*([\w+-]*)\s*$/
+const FIGURE = /^ {0,3}:::\s*figure\b(.*)$/
+const FIGURE_END = /^ {0,3}:::\s*$/
+/** The classes a figure may ask for. */
+const FIGURE_CLASSES = new Set(['wide'])
 const HEADING = /^ {0,3}(#{1,6})\s+(.*?)\s*#*\s*$/
 const RULE = /^ {0,3}([-*_])(?:\s*\1){2,}\s*$/
 const QUOTE = /^ {0,3}>\s?/
@@ -189,7 +234,7 @@ const ITEM = /^( {0,3})([-*+]|\d{1,9}[.)])(\s+|$)/
 const TABLE_SEP = /^\s*\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)*\|?\s*$/
 
 const startsBlock = (line: string): boolean =>
-  FENCE.test(line) || HEADING.test(line) || RULE.test(line) || QUOTE.test(line) || ITEM.test(line)
+  FENCE.test(line) || FIGURE.test(line) || HEADING.test(line) || RULE.test(line) || QUOTE.test(line) || ITEM.test(line)
 
 const cells = (row: string): string[] => {
   let s = row.trim()
@@ -210,6 +255,27 @@ interface Ctx {
   readonly opts: MarkdownOptions
   readonly headings: Heading[]
   readonly used: Map<string, number>
+  readonly figures: Figure[]
+}
+
+/** A `::: figure` block's lines (between the fences) as HTML. */
+const figure = (classes: string, body: readonly string[], ctx: Ctx): string => {
+  let k = 0
+  while (k < body.length && body[k].trim() === '') k++
+  const media: string[] = []
+  while (k < body.length && body[k].trim() !== '') media.push(body[k++].trim())
+  const n = ctx.figures.length + 1
+  const id = `fig-${n}`
+  const alt = media.join(' ').match(/!\[([^\]]*)\]/)?.[1] ?? ''
+  ctx.figures.push({ n, id, alt })
+  const label = `Fig. ${n}.`
+  const pics = inline(media.join(' '), { ...ctx.opts, inFigure: true }).replace(/<img [^>]*?data-full="([^"]*)"[^>]*>/g, (img, full: string) =>
+    `<a class="fig-open" href="${full}" aria-label="${escapeHtml(label)} Open larger">${img.replace(/ data-full="[^"]*"/, '')}</a>`)
+  let cap = blocks(body.slice(k), ctx)
+  const tag = `<span class="fig-n">${label}</span>`
+  cap = cap.startsWith('<p>') ? '<p>' + tag + ' ' + cap.slice(3) : `<p>${tag}</p>` + (cap ? '\n' + cap : '')
+  const cls = ['fig', ...classes.split(/\s+/).filter((c) => FIGURE_CLASSES.has(c))].join(' ')
+  return `<figure class="${cls}" id="${escapeHtml((ctx.opts.idPrefix ?? '') + id)}">\n${pics}\n<figcaption>${cap}</figcaption>\n</figure>`
 }
 
 const blocks = (lines: readonly string[], ctx: Ctx): string => {
@@ -229,6 +295,16 @@ const blocks = (lines: readonly string[], ctx: Ctx): string => {
       i++
       const lang = fence[2] ? ' class="language-' + escapeHtml(fence[2]) + '"' : ''
       out.push('<pre><code' + lang + '>' + escapeHtml(body.join('\n')) + '</code></pre>')
+      continue
+    }
+
+    const fig = line.match(FIGURE)
+    if (fig) {
+      const body: string[] = []
+      i++
+      while (i < lines.length && !FIGURE_END.test(lines[i])) body.push(lines[i++])
+      i++
+      out.push(figure(fig[1], body, ctx))
       continue
     }
 
@@ -339,8 +415,8 @@ const blocks = (lines: readonly string[], ctx: Ctx): string => {
 }
 
 export const markdown = (src: string, opts: MarkdownOptions = {}): MarkdownResult => {
-  const ctx: Ctx = { opts, headings: [], used: new Map() }
+  const ctx: Ctx = { opts, headings: [], used: new Map(), figures: [] }
   // HTML comments are notes for whoever edits the page, never shown.
   const lines = src.replace(/\r\n?/g, '\n').replace(/<!--[\s\S]*?-->\n?/g, '').replace(/\t/g, '    ').split('\n')
-  return { html: blocks(lines, ctx), headings: ctx.headings }
+  return { html: blocks(lines, ctx), headings: ctx.headings, figures: ctx.figures }
 }
