@@ -179,6 +179,578 @@
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
     "https://www.openstreetmap.org/"
    ]
+  },
+  {
+   "id": "lost52-304-moore-street",
+   "name": "Moore Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4459021,
+     37.5539482
+    ],
+    [
+     -77.445157,
+     37.5535305
+    ],
+    [
+     -77.4446129,
+     37.553563
+    ],
+    [
+     -77.4441599,
+     37.5535274
+    ]
+   ],
+   "note": "A stretch of Moore Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 304 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 169 m, 83% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-304-gilmer-street",
+   "name": "Gilmer Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4451457,
+     37.5535155
+    ],
+    [
+     -77.4458655,
+     37.5526859
+    ]
+   ],
+   "note": "A stretch of Gilmer Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 304 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 112 m, 82% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-304-vance-street",
+   "name": "Vance Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4448111,
+     37.5534944
+    ],
+    [
+     -77.4448387,
+     37.5530592
+    ],
+    [
+     -77.444925,
+     37.5526153
+    ]
+   ],
+   "note": "A stretch of Vance Street (Walker) inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 304 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 98 m, 74% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-304-west-duval-street",
+   "name": "West Duval Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4457502,
+     37.5528328
+    ],
+    [
+     -77.4445924,
+     37.5521678
+    ]
+   ],
+   "note": "A stretch of West Duval Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 304 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 126 m, 57% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-304-axtel-street",
+   "name": "Axtel Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4453266,
+     37.5525895
+    ],
+    [
+     -77.4451112,
+     37.5528285
+    ]
+   ],
+   "note": "A stretch of Axtel Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 304 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 33 m, 100% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-304-brook-road",
+   "name": "Brook Road",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4439929,
+     37.5532512
+    ],
+    [
+     -77.4439249,
+     37.5529084
+    ]
+   ],
+   "note": "A stretch of Brook Road inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 304 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 38 m, 100% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-304-munford-street",
+   "name": "Munford Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4447893,
+     37.5519432
+    ],
+    [
+     -77.4439261,
+     37.5528833
+    ]
+   ],
+   "note": "A stretch of Munford Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 304 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 129 m, 86% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-315-brook-road",
+   "name": "Brook Road",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4434934,
+     37.5517885
+    ],
+    [
+     -77.443692,
+     37.5522269
+    ],
+    [
+     -77.4438549,
+     37.5526252
+    ],
+    [
+     -77.4439294,
+     37.5527779
+    ]
+   ],
+   "note": "A stretch of Brook Road inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 315 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 116 m, 79% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-315-west-baker-street",
+   "name": "West Baker Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4432499,
+     37.5528473
+    ],
+    [
+     -77.4422696,
+     37.5524588
+    ]
+   ],
+   "note": "A stretch of West Baker Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 315 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 97 m, 63% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-315-shooks-street",
+   "name": "Shooks Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4428484,
+     37.5517266
+    ],
+    [
+     -77.4424169,
+     37.5524204
+    ]
+   ],
+   "note": "A stretch of Shooks Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 315 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 86 m, 97% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-317-calhoun-street",
+   "name": "Calhoun Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4440318,
+     37.5531991
+    ],
+    [
+     -77.4429258,
+     37.5533654
+    ]
+   ],
+   "note": "A stretch of Calhoun Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 317 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 99 m, 44% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-317-west-charity-street",
+   "name": "West Charity Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4429322,
+     37.5533526
+    ],
+    [
+     -77.4419224,
+     37.552993
+    ]
+   ],
+   "note": "A stretch of West Charity Street (Tazewell) inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 317 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 98 m, 99% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-326-west-baker-street",
+   "name": "West Baker Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4373668,
+     37.5509017
+    ],
+    [
+     -77.436268,
+     37.5505572
+    ]
+   ],
+   "note": "A stretch of West Baker Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 326 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 104 m, 100% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-326-saint-paul-street",
+   "name": "Saint Paul Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4397025,
+     37.5507442
+    ],
+    [
+     -77.439109,
+     37.5513755
+    ]
+   ],
+   "note": "A stretch of Saint Paul Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 326 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 87 m, 80% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-326-saint-john-street",
+   "name": "Saint John Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4383354,
+     37.5507497
+    ],
+    [
+     -77.4380308,
+     37.5510737
+    ]
+   ],
+   "note": "A stretch of Saint John Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 326 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 45 m, 100% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-307-north-3rd-street",
+   "name": "North 3rd Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4339243,
+     37.5496537
+    ],
+    [
+     -77.4345191,
+     37.5490302
+    ]
+   ],
+   "note": "A stretch of North 3rd Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 307 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 87 m, 71% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-307-north-4th-street",
+   "name": "North 4th Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4329516,
+     37.5491308
+    ],
+    [
+     -77.4335689,
+     37.5484838
+    ]
+   ],
+   "note": "A stretch of North 4th Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 307 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 90 m, 68% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-307-cave-alley",
+   "name": "Cave Alley",
+   "kind": "street",
+   "highway": "service",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4352653,
+     37.5494256
+    ],
+    [
+     -77.4341903,
+     37.5497046
+    ]
+   ],
+   "note": "A stretch of Cave Alley inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 307 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 100 m, 76% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-307-paradise-alley",
+   "name": "Paradise Alley",
+   "kind": "street",
+   "highway": "service",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4353027,
+     37.550399
+    ],
+    [
+     -77.4359525,
+     37.5497179
+    ]
+   ],
+   "note": "A stretch of Paradise Alley inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 307 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 95 m, 70% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-307-cottage-alley",
+   "name": "Cottage Alley",
+   "kind": "street",
+   "highway": "service",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4334245,
+     37.5494004
+    ],
+    [
+     -77.4340336,
+     37.548762
+    ]
+   ],
+   "note": "A stretch of Cottage Alley inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 307 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 89 m, 68% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-310-east-duval-street",
+   "name": "East Duval Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.432809,
+     37.5478515
+    ],
+    [
+     -77.4316962,
+     37.5471928
+    ]
+   ],
+   "note": "A stretch of East Duval Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 310 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 122 m, 98% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-310-north-5th-street",
+   "name": "North 5th Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.43265,
+     37.5480868
+    ],
+    [
+     -77.4321585,
+     37.5486161
+    ]
+   ],
+   "note": "A stretch of North 5th Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 310 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 73 m, 100% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-310-north-6th-street",
+   "name": "North 6th Street",
+   "kind": "street",
+   "highway": "residential",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.4319391,
+     37.5473366
+    ],
+    [
+     -77.4312502,
+     37.5480784
+    ]
+   ],
+   "note": "A stretch of North 6th Street inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 310 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 102 m, 93% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
+  },
+  {
+   "id": "lost52-310-gilbert-alley",
+   "name": "Gilbert Alley",
+   "kind": "street",
+   "highway": "service",
+   "from": 1952,
+   "to": 1956,
+   "line": [
+    [
+     -77.431284,
+     37.5471742
+    ],
+    [
+     -77.4307301,
+     37.5477705
+    ]
+   ],
+   "note": "A stretch of Gilbert Alley inside the Turnpike's corridor, where no street runs today, as printed on the 1952 Sanborn sheet 310 (volume 3): its center line read off the sheet (tools/sanborn/jw/streets1952.json) and carried to the ground by the sheet's fit (good to about 3-6 m). 82 m, 96% of it in the corridor polygon. Drawn from the 1952 survey (it is older; earlier sheets not checked for it) to 1956, when the corridor was being cleared (approximate: 1955-58).",
+   "sources": [
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://www.openstreetmap.org/"
+   ]
   }
  ],
  "ground": [
