@@ -2861,14 +2861,14 @@
   "pump-house-cutaway": {
    "plate": null,
    "status": "active",
-   "asset_version": "1.0.0-d1",
+   "asset_version": "1.0.0-d2",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 1,
+   "rounds": 2,
    "waiting_on": "owner",
-   "decision": "d1: approve the look (subject, framing, notes) to go to final draft, or send changes",
+   "decision": "d2: approve the look (subject, framing, notes) to go to final draft, or send changes",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -2884,7 +2884,8 @@
    "notes": "research done: feasibility 3.5 of 5; rough draft 2026-11-18; d1 2026-11-18 on The American Engineer pp. 260-261 (HathiTrust full scans). Known faults at d1: gang positions along the room approximate; tailraces' size and line inferred; penstocks drawn square in section; the south walkway reads as a large blank plane in the iso; inset river and canal lines are today's OSM; long and cross sections are small at one shared scale; roof lifted (Chris chose this over a cut shell).",
    "log": [
     "2026-11-18: research -> rough draft",
-    "2026-11-18: rough draft -> working draft (1.0.0-d1)"
+    "2026-11-18: rough draft -> working draft (1.0.0-d1)",
+    "2026-11-18: d2: context panel (where the water went, and why) after owner review of d1"
    ]
   },
   "story-jackson-ward": {

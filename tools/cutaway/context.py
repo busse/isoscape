@@ -19,15 +19,20 @@ import argparse, json, math, os, sys, urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, '..', '..'))
 
-LAND, WATER, WATER_LINE, INK, ROUTE, DIM = '#ebe5d6', '#a8cad8', '#7fa9bc', '#2c2b33', '#b5392f', '#6d6a72'   # palette.ts, paper
+LAND, WATER, WATER_LINE, INK, ROUTE, DIM, GREEN = '#ebe5d6', '#a8cad8', '#7fa9bc', '#2c2b33', '#b5392f', '#6d6a72', '#d3dfb9'   # palette.ts, paper
 SERIF = "'Libre Baskerville', Baskerville, Georgia, serif"
 API = 'https://api.openstreetmap.org/api/0.6/map.json?bbox={},{},{},{}'
 
 
-def fetch(path):
+def fetch(path, local=None):
     ctx = json.load(open(path))
     w, s, e, n = ctx['bbox']
     nodes, ways, rels = {}, {}, {}
+    if local:
+        # An extract already fetched from the same API (its `elements`), instead of asking again.
+        for el in json.load(open(local))['elements']:
+            {'node': nodes, 'way': ways, 'relation': rels}[el['type']][el['id']] = el
+        e = w   # skip the tiles
     # The API serves at most 0.25 square degrees and 50,000 nodes: ask in tiles.
     step = 0.008
     lon = w
@@ -77,22 +82,28 @@ def render(inset, root=ROOT):
     u = W / 1000           # one unit of the inset's type and strokes: a thousandth of its width
     out = [f'<rect x="0" y="0" width="{W:.1f}" height="{H:.1f}" fill="{LAND}"/>']
     out.append(f'<clipPath id="ctx-clip"><rect x="0" y="0" width="{W:.1f}" height="{H:.1f}"/></clipPath><g clip-path="url(#ctx-clip)">')
-    # Water areas: a relation's outer ways closed along the frame where it cuts them.
+    # Parks and cemeteries, for finding one's way; then the river: every water relation kept as
+    # `river`, its outer ways closed along the frame where it cuts them.
     for f in ctx['features']:
-        if f.get('role') != 'river':
-            continue
-        out.append(water_area(f, P, W, H, u))
+        if f.get('role') == 'green':
+            out.append(f'<polygon points="{pts(f["coords"])}" fill="{GREEN}" stroke="none"/>')
+    rivers = [f for f in ctx['features'] if f.get('role') == 'river']
+    if rivers:
+        out.append(water_area({'members': [m for f in rivers for m in f['members']], 'inside': [c for f in rivers for c in f.get('inside', [])]}, P, W, H, u))
     for f in ctx['features']:
         if f.get('role') == 'canal':
             out.append(f'<polyline points="{pts(f["coords"])}" fill="none" stroke="{WATER}" stroke-width="{f.get("width", 16):.1f}" stroke-linejoin="round" stroke-linecap="butt"/>')
     for f in ctx['features']:
+        if f.get('role') == 'landmark':
+            out.append(f'<polygon points="{pts(f["coords"])}" fill="{INK}" stroke="{INK}" stroke-width="{1.5 * u:.1f}"/>')
         if f.get('role') == 'reservoir':
             out.append(f'<polygon points="{pts(f["coords"])}" fill="{WATER}" stroke="{INK}" stroke-width="{1.2 * u:.1f}"/>')
         if f.get('role') == 'subject':
             out.append(f'<polygon points="{pts(f["coords"])}" fill="{INK}" stroke="{INK}" stroke-width="{2.5 * u:.1f}"/>')
             xs = [P(*c) for c in f['coords']]
             cx, cy = sum(x for x, _ in xs) / len(xs), sum(y for _, y in xs) / len(xs)
-            out.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{45 * u:.1f}" fill="none" stroke="{ROUTE}" stroke-width="{3 * u:.1f}"/>')
+            ring = inset.get('ring', 45) * u
+            out.append(f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{ring:.1f}" fill="none" stroke="{ROUTE}" stroke-width="{3 * u:.1f}"/>')
     # Curated lines: a main in the route's red, dashed where its line is approximate; a canal in water.
     for ln in inset.get('lines', []):
         if ln.get('kind') == 'canal':
@@ -173,9 +184,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('cmd', choices=['fetch', 'preview'])
     ap.add_argument('path')
+    ap.add_argument('--local', help='an OSM API extract already on disk (its elements), in place of the network')
     a = ap.parse_args()
     if a.cmd == 'fetch':
-        fetch(a.path)
+        fetch(a.path, a.local)
         return
     spec = json.load(open(a.path))
     W, H, body = render(spec['inset'])

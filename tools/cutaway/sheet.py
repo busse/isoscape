@@ -243,12 +243,32 @@ def main():
         iw, ih, ibody = context.render(ins, ROOT)
         bx, by, bw = ins['box']
         bh = bw * ih / iw
-        out.append(f'<rect x="{bx - 24:.1f}" y="{by - 24:.1f}" width="{bw + 48:.1f}" height="{bh + 48:.1f}" fill="{PAPER}"/>')
+        # Its panel: a heading as the column's are, the map, its caption, then `why`, the
+        # building's purpose in a few short paragraphs, and their sources.
+        lines = []
+        for para in ins.get('why', []):
+            lines += [(ln, 'regular', BODY, DIM) for ln in wrap(para, 'regular', BODY, bw)] + [None]
+        if ins.get('whySource'):
+            lines += [(ln, 'italic', 46, DIM) for ln in wrap(ins['whySource'], 'italic', 46, bw)]
+        caption = wrap(ins.get('caption', ''), 'italic', 46, bw)
+        top = by - (150 if ins.get('title') else 0)
+        tall = (by - top) + bh + 60 + 62 * len(caption) + 40 + sum(72 if ln else 26 for ln in lines)
+        out.append(f'<rect x="{bx - 40:.1f}" y="{top - 70:.1f}" width="{bw + 80:.1f}" height="{tall + 110:.1f}" fill="{PAPER}" stroke="{INK}" stroke-width="4"/>')
+        if ins.get('title'):
+            out.append(text(bx, top + 10, ins['title'].upper(), 58, 'bold', DIM, family=SANS, spacing=4))
+            out.append(f'<line x1="{bx}" y1="{top + 42}" x2="{bx + bw}" y2="{top + 42}" stroke="{INK}" stroke-width="4"/>')
         out.append(f'<svg x="{bx:.1f}" y="{by:.1f}" width="{bw:.1f}" height="{bh:.1f}" viewBox="0 0 {iw:.1f} {ih:.1f}">{ibody}</svg>')
-        cy = by + bh + 90
-        for line in wrap(ins.get('caption', ''), 'italic', 50, bw):
-            out.append(text(bx, cy, line, 50, 'italic', DIM))
-            cy += 66
+        cy = by + bh + 70
+        for line in caption:
+            out.append(text(bx, cy, line, 46, 'italic', DIM))
+            cy += 62
+        cy += 50
+        for ln in lines:
+            if ln is None:
+                cy += 26
+                continue
+            out.append(text(bx, cy, ln[0], ln[2], ln[1], ln[3] if ln[1] == 'italic' else INK))
+            cy += 72
 
     def locate(lonlat):
         r = subprocess.run(['node', 'bin/isoscape.js', 'locate', region, '--year', str(year), '--', f'{lonlat[0]},{lonlat[1]}'], cwd=ROOT, check=True, capture_output=True, text=True)
