@@ -232,7 +232,9 @@ def main():
         bx_, by_, bw_, bh_ = x['_box']
         vb_ = x['_vb']
         out.append(text(bx_, sec_top - 70, x['caption'], 76, 'italic', DIM))
-        out.append(f'<svg x="{bx_:.1f}" y="{by_:.1f}" width="{bw_:.1f}" height="{bh_:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in vb_)}">{x["_body"]}</svg>')
+        # The first section stands at the margin, written as the integer it is, as the sheets
+        # released before `sections` existed wrote it, so they rebuild byte for byte.
+        out.append(f'<svg x="{bx_ if isinstance(bx_, int) else f"{bx_:.1f}"}" y="{by_:.1f}" width="{bw_:.1f}" height="{bh_:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in vb_)}">{x["_body"]}</svg>')
         drawings.append((x['as'], x['_a'], x['_a'].get('frame'), (bx_ - vb_[0] * s_sec, by_ - vb_[1] * s_sec, s_sec)))
     iso_rect = (iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2, iso_box[1], iso_vb[2] * s_iso, iso_h)
     if spec.get('inset'):
