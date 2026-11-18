@@ -395,10 +395,13 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
 
   The two pictures must be the same size and drawn from the same frame (nothing scales one to
   fit the other; `views.py` renders the Jackson Ward years in one shared viewBox for this).
-  Press or drag anywhere on the pictures to move the divider (mouse or touch; a vertical swipe
-  still scrolls). The divider is a focusable slider (`role="slider"`, with `aria-valuenow` and a
+  Press or drag anywhere on the pictures to move the divider. A finger moves it by dragging
+  sideways or by a tap; a vertical swipe that starts on the pictures scrolls the page and leaves
+  the divider where it was, and the page itself never pans sideways (`touch-action: pan-y`). On a
+  touch screen the line takes touches 22 px either side, and the expand button is 44 px. The divider is a focusable slider (`role="slider"`, with `aria-valuenow` and a
   text naming both sides): ← and → move it 2%, with Shift or PageUp/PageDown 10%, Home and End
-  to the edges. Its tab shows the two labels, one each side of the line. The expand button (⤢)
+  to the edges. Its tab shows the two labels, one each side of the line, and slides along the
+  line near either edge so it stays whole inside the picture. The expand button (⤢)
   opens the same slider large in the lightbox, with each picture's `-large` copy and the divider
   where it was; there the arrow keys move the divider while it has focus and step figures
   otherwise, and **Full size** is hidden. In the grid it is one figure, shown by its first
@@ -407,6 +410,12 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   the same moves and the same look. Only pages with the block get its styles and script on
   `p/`. Anything but two pictures makes a plain figure.
 - Raster images carry their width and height, so the page holds its layout while they load.
+- On a phone nothing in a page is wider than the screen: long words, bare URLs and inline code
+  wrap inside the text column, a table scrolls sideways inside its own wrapper (its cells keep
+  whole words), and a code block scrolls inside its own box. Wide figures shrink to the column.
+  As a guard, on a phone the explorer's reading view and front page (`#page`, `#home`) and the
+  static pages' column (`.wrap`) clip anything wider rather than scroll sideways. On a phone the
+  lightbox's buttons are at least 44 px, and previous and next sit above the caption.
 - The converter (`src/markdown.ts`) escapes all text and drops raw HTML and unsafe link
   schemes. Files starting with `_` (drafts) and `README.md` are skipped.
 - `npm test` checks that every in-page link in `pages/` lands on a real section, and that the
