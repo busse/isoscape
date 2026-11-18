@@ -1073,9 +1073,11 @@ Frozen data and scenes are large and stay out of git; keep them backed up with t
 ## Plates
 
 Every design has a plate: a permanent catalog number, kept in `catalog/plates.json` with the
-taxonomy it sits in (isoscape › collection › set › piece). A plate is the set's three-letter
-code and the piece's number in the set (`RVA-01`, `STC-02`; `00` is a set's framed sheet of
-boxes and `M` its map), printed with a middle dot (RVA·01). Numbers follow the order of first
+taxonomy it sits in (isoscape › collection › set › piece). A plate is the set's code, three or
+four capital letters, and the piece's number in the set (`RVA-01`, `STC-02`, `BPPH-01`; `00` is
+a set's framed sheet of boxes and `M` its map), printed with a middle dot (RVA·01). Codes were
+three letters until November 18, 2026, when Chris asked for a four-letter one (BPPH); the
+existing codes stay as they are. Numbers follow the order of first
 release and are never reused; a redraw changes a design's version, never its plate.
 
 Every print carries a title block (`tools/print/titleblock.py`): the cube and maker, the

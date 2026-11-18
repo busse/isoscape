@@ -34,7 +34,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
-| — | The Byrd Park Pump House: Cutaway | cutaway | 1.0.0-rc1 | no |
+| BPPH·01 | The Byrd Park Pump House: Cutaway | cutaway | 1.0.0-rc1 | no |
 
 ## Final production
 

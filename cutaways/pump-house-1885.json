@@ -1,6 +1,6 @@
 {
  "about": "The sheet for the Pump House cutaway (working draft): tools/cutaway/sheet.py. Callouts are anchored to drawn parts (history ids, in the isometric view and the two flat sections); a badge's style is the anchored part's confidence unless `confidence` says otherwise. Callout text is a working draft, written with Claude, for the artist to edit.",
- "design": "pump-house-cutaway",
+ "design": "pump-house-cutaway-long",
  "region": "pump-house-cutaway",
  "year": 1885,
  "title": "The New Pump-House, Richmond, about 1885",

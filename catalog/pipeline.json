@@ -2859,7 +2859,7 @@
    "notes": "needed to redraw Richmond, 1865 (RVA-02), which is off sale and blocked until it exists"
   },
   "pump-house-cutaway": {
-   "plate": null,
+   "plate": "BPPH-01",
    "status": "active",
    "asset_version": "1.0.0-rc1",
    "published_version": null,
@@ -2872,7 +2872,7 @@
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
-   "branch": "cutaway-pump-house",
+   "branch": null,
    "worktree": null,
    "links": [
     "cutaways/pump-house-1885-pumped.json",
