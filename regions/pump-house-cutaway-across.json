@@ -1,12 +1,12 @@
 {
-  "title": "The New Pump-House, about 1885: cut across through a wheel (rough draft, second camera)",
+  "title": "The New Pump-House, about 1885: cut across through the middle wheel (working draft)",
   "data": "richmond-i195-rocketts",
   "center": [
     -77.4859486,
     37.5365665
   ],
-  "width": 85,
-  "depth": 70,
+  "width": 150,
+  "depth": 150,
   "bearing": 330.0,
   "snap": false,
   "scale": 10,
@@ -29,8 +29,8 @@
   },
   "cutaway": {
     "through": [
-      -77.48602307,
-      37.53651707
+      -77.48601372,
+      37.53651281
     ],
     "bearing": 29.7,
     "remove": "right",
@@ -40,76 +40,86 @@
     "travelers": [
       {
         "at": [
-          -77.48599774,
-          37.53662006
+          -77.48597658,
+          37.53661043
         ],
         "floor": 34.77,
-        "facing": 1
+        "facing": 1,
+        "figure": "visitor-skirt"
       },
       {
         "at": [
-          -77.48604,
-          37.53662
+          -77.48601379,
+          37.53658573
         ],
         "floor": 34.77,
-        "facing": -1
-      },
-      {
-        "at": [
-          -77.48605,
-          37.53656
-        ],
-        "floor": 28.06,
-        "facing": 1
+        "facing": -1,
+        "figure": "visitor"
       }
     ],
     "section": {
-      "from": -22,
-      "to": 42,
-      "beyond": 30,
+      "from": -27,
+      "to": 41,
+      "beyond": 25,
+      "slice": {
+        "parts": [
+          "^history:ph-w-"
+        ],
+        "depth": 0.1
+      },
       "other": 3,
       "scale": 10,
-      "earth": 4,
+      "earth": 3,
       "route": [
         [
-          34,
-          30.7
+          36,
+          30.343
         ],
         [
-          22.1,
-          30.7
+          16.1,
+          30.343
         ],
         [
-          22.1,
-          29.0
+          16.1,
+          30.196
         ],
         [
-          8.5,
-          29.0
+          14.041,
+          30.096
         ],
         [
-          8.5,
-          24.6
+          9.464,
+          27.596
         ],
         [
-          -9,
-          24.6
+          9.164,
+          28.596
         ],
         [
-          -16,
-          24.5
+          9.164,
+          23.947
+        ],
+        [
+          -12.436,
+          23.947
+        ],
+        [
+          -17.436,
+          24.247
         ]
       ],
       "travelers": [
         {
-          "s": 6,
+          "s": 4.5,
           "floor": 34.77,
-          "facing": 1
+          "facing": 1,
+          "figure": "visitor-skirt"
         },
         {
-          "s": 11,
+          "s": 12.0,
           "floor": 34.77,
-          "facing": -1
+          "facing": -1,
+          "figure": "visitor"
         }
       ]
     }

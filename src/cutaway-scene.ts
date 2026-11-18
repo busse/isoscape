@@ -12,7 +12,7 @@ import { boxItem, domeProfile, STOCK, toned, type Box } from './parts.ts'
 import type { Cutaway } from './region.ts'
 import type { Item, Shape } from './scene.ts'
 import type { View } from './view.ts'
-import { travelerShapes } from './traveler.ts'
+import { travelerShapes, type Figure } from './traveler.ts'
 import {
   above, behind, below, clipAll, corners, clipSolid, cutPlane, frameSolids, newell, insetSolids, sweep, trackSolids, type FaceRole, type Vec3, isConvex, prism, revolve, sectionOf, sideOf, solidItem, splitSolids, stair, unionOutline, within,
   type CutPlane, type Solid, type Tones,
@@ -182,7 +182,8 @@ export const FRAME_PIECE = 6
 export const partTones = (pal: Palette, h: HistoryFeature): Tones => {
   const [lit, shade, roof] = pal.parts[h.tone ?? 'stone']
   const [il, is] = pal.parts.plaster
-  return { lit, shade, roof, cut: pal.poche, inner: [il, is] }
+  // Water held in a work is cut in its own shade, so a section reads it as water, not as ink.
+  return { lit, shade, roof, cut: h.tone === 'water' ? shade : pal.poche, inner: [il, is] }
 }
 
 const boxTones = (pal: Palette, b: Box): Tones => {
@@ -893,16 +894,16 @@ export const stairProfile = (view: View, pal: Palette, pl: CutPlane, id: string,
  * across the picture (1 right, -1 left), in the route's color. Its footprint is a small square
  * where it stands, so it sorts among what stands near it like any other item.
  */
-export const travelerItem = (view: View, pal: Palette, id: string, at: Vec2, z: number, facing: 1 | -1): Item => {
+export const travelerItem = (view: View, pal: Palette, id: string, at: Vec2, z: number, facing: 1 | -1, figure: Figure = 'traveler'): Item => {
   const [bx, by] = view.toScreen(at, z)
   const up = by - view.toScreen(at, z + 1)[1]       // screen pixels per meter of height
-  const shapes: Shape[] = travelerShapes().map((poly) => ({
+  const shapes: Shape[] = travelerShapes(undefined, figure).map((poly) => ({
     pts: poly.map(([x, y]): Vec2 => [bx + x * facing * view.scale, by - y * up]),
     fill: pal.route,
   }))
   const r = 0.25
   const hull: Ring = [[at[0] - r, at[1] - r], [at[0] + r, at[1] - r], [at[0] + r, at[1] + r], [at[0] - r, at[1] + r]]
-  return { id, kind: 'building', hull, zMin: z, zMax: z + 1.75, key: at[1], name: 'A traveler, drawn to scale (1.75 m)', dots: [], shapes }
+  return { id, kind: 'building', hull, zMin: z, zMax: z + 1.75, key: at[1], name: figure === 'traveler' ? 'A traveler, drawn to scale (1.75 m)' : 'A visitor, drawn to scale (1.75 m)', dots: [], shapes }
 }
 
 /**

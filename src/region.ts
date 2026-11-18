@@ -5,6 +5,7 @@
 
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import type { Figure } from './traveler.ts'
 
 export interface BridgeRule {
   /** Case-insensitive substring of the way's `name` (or `bridge:name`). */
@@ -143,9 +144,10 @@ export interface Cutaway {
   /**
    * Travelers drawn to scale in the cutaway (src/traveler.ts): where each stands, the floor it
    * stands on (m above sea level; on the ground where none is given), and which way it faces
-   * across the picture (1 right, -1 left).
+   * across the picture (1 right, -1 left); `figure`, a visitor in place of the traveler
+   * (src/traveler.ts).
    */
-  readonly travelers?: readonly { readonly at: readonly [number, number]; readonly floor?: number; readonly facing: 1 | -1 }[]
+  readonly travelers?: readonly { readonly at: readonly [number, number]; readonly floor?: number; readonly facing: 1 | -1; readonly figure?: Figure }[]
   /**
    * The traveler's way in the cutaway, as the flat section's `route` draws it: points [lon, lat,
    * elevation in meters above sea level] (waist height), drawn in the route's color and dashed,
@@ -183,7 +185,7 @@ export interface Cutaway {
      */
     readonly slice?: { readonly parts: readonly string[]; readonly depth?: number }
     /** Travelers on the path: meters along the plane, the floor's elevation, and facing (1 toward `to`). */
-    readonly travelers?: readonly { readonly s: number; readonly floor: number; readonly facing: 1 | -1 }[]
+    readonly travelers?: readonly { readonly s: number; readonly floor: number; readonly facing: 1 | -1; readonly figure?: Figure }[]
   }
 }
 

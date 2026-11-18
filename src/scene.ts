@@ -1093,7 +1093,7 @@ export const buildScene = (
       if (extra.section !== true) {
         (cut.travelers ?? []).forEach((t, k) => {
           const at = view.toView(t.at[0], t.at[1])
-          items.push(travelerItem(view, pal, `traveler:${k + 1}`, at, t.floor === undefined ? terrain.z(at) : zOf(t.floor), t.facing))
+          items.push(travelerItem(view, pal, `traveler:${k + 1}`, at, t.floor === undefined ? terrain.z(at) : zOf(t.floor), t.facing, t.figure))
         })
         if (cut.route !== undefined && cut.route.points.length > 1) {
           const route = routeItems(view, pal, cut.route.points.map(([lon, lat, e]) => [view.toView(lon, lat), zOf(e)] as const), cut.route.weight ?? 1)

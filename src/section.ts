@@ -146,7 +146,7 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
   // runs between them) and of a car end seen square on (it passes behind the car, never across
   // its face), and carries a small arrowhead, pointing the way, on each stretch long enough.
   const travelers = (cut.section.travelers ?? []).map((t) => {
-    const polys = travelerShapes().map((poly) => poly.map(([x, y]) => P(t.s + x * t.facing, zOf(t.floor) + y)))
+    const polys = travelerShapes(undefined, t.figure).map((poly) => poly.map(([x, y]) => P(t.s + x * t.facing, zOf(t.floor) + y)))
     const all = polys.flat()
     const box: Box = [Math.min(...all.map((q) => q[0])), Math.min(...all.map((q) => q[1])), Math.max(...all.map((q) => q[0])), Math.max(...all.map((q) => q[1]))]
     return { polys, box }
