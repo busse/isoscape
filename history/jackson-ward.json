@@ -1793,6 +1793,31 @@
      "w1485475447"
     ]
    }
+  },
+  "island-paved": {
+   "note": "The island: only what the highway took, inside today's paved roadway and ramps, drawn alone on blank paper (the 1952 buildings the count counts in the paved polygon, the streets and the ground as rebuilt before the trench), the ground cut at the polygon's edge and drawn as a floating slab. The edge is today's footprint, a stand-in for the 1958 right-of-way (Library of Virginia, Acc. 40941, not yet seen).",
+   "island": {
+    "file": "tools/sanborn/jw/highway-footprint.geojson",
+    "ids": "tools/sanborn/jw/counted-ids.json",
+    "polygon": "paved",
+    "idLists": [
+     "paved"
+    ],
+    "caption": "Only what the highway took: inside today's paved roadway and ramps, a stand-in for the 1958 right-of-way"
+   }
+  },
+  "island-corridor": {
+   "note": "The island: as island-paved, inside the corridor (today's paved roadway and ramps plus 15 m each side for cut slopes and walls): the buildings the count counts in the paved and the corridor polygons.",
+   "island": {
+    "file": "tools/sanborn/jw/highway-footprint.geojson",
+    "ids": "tools/sanborn/jw/counted-ids.json",
+    "polygon": "corridor",
+    "idLists": [
+     "paved",
+     "corridor"
+    ],
+    "caption": "Only what the highway took: inside today's roadway and ramps plus 15 m each side, a stand-in for the 1958 right-of-way"
+   }
   }
  }
 }
