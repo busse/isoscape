@@ -451,5 +451,73 @@
     "note": "Tire & Rubber Goodrich Ho (olive fireproof fill missed by the color rule); outline placed by eye"
    }
   ]
+ },
+ "319": {
+  "exclude": [
+   {
+    "uv": [
+     [
+      30,
+      2250
+     ],
+     [
+      700,
+      2250
+     ],
+     [
+      700,
+      2330
+     ],
+     [
+      30,
+      2330
+     ]
+    ],
+    "why": "scale bar"
+   },
+   {
+    "uv": [
+     [
+      700,
+      2290
+     ],
+     [
+      1700,
+      2290
+     ],
+     [
+      1700,
+      2360
+     ],
+     [
+      700,
+      2360
+     ]
+    ],
+    "why": "correction table"
+   }
+  ],
+  "droppt": [
+   [
+    1322,
+    155
+   ],
+   [
+    178,
+    89
+   ],
+   [
+    667,
+    644
+   ],
+   [
+    1600,
+    2089
+   ],
+   [
+    1600,
+    1467
+   ]
+  ]
  }
 }

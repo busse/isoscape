@@ -379,5 +379,35 @@
   "block_inliers": 0.09,
   "block_points": 3495,
   "scale_bar_m_per_px_full": 0.0762
+ },
+ "319": {
+  "params": [
+   -9520.96882709095,
+   11509.782789919296,
+   1.1917219737524811,
+   6.414406435983596
+  ],
+  "refined": true,
+  "corners": [
+   "Federal & St John (pipes)",
+   "Charity & St John",
+   "Charity & St James",
+   "Federal & St James"
+  ],
+  "resid_m": [
+   3.2,
+   1.6,
+   3.4,
+   3.2
+  ],
+  "resid_corners_only": [
+   3.2,
+   1.6,
+   3.4,
+   3.2
+  ],
+  "m_per_px": 0.1559,
+  "block_inliers": 0.12,
+  "block_points": 7257
  }
 }
