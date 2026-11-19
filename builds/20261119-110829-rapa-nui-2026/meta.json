@@ -1,0 +1,245 @@
+{
+  "name": "rapa-nui-2026",
+  "region": "rapa-nui",
+  "title": "Rapa Nui (Easter Island) — the whole island, 2026",
+  "palette": "paper",
+  "note": "Tutorial 1: Rapa Nui from open data (Copernicus GLO-30, OpenStreetMap)",
+  "viewBox": [
+    -5124,
+    -2412.580794963662,
+    10248,
+    4300.437201424213
+  ],
+  "bearing": 0,
+  "ms": 14554,
+  "stats": {
+    "features": 6442,
+    "coastWays": 131,
+    "ground": 848,
+    "elevationDatum": 0,
+    "elevationTop": 505.6,
+    "streetcarLines": 0,
+    "ribbons": 1217,
+    "footprintsAdded": 0,
+    "footprintsDrawn": 0,
+    "datedFromParcels": 0,
+    "buildings": 4105,
+    "streetcars": 0,
+    "heightFromTag": 2,
+    "heightFromModel": 0,
+    "heightFromLevels": 2693,
+    "heightGuessed": 1410,
+    "year": 2026,
+    "newSincePrevious": 0,
+    "datedCurated": 0,
+    "datedOsm": 1,
+    "datedParcel": 0,
+    "undatedToday": 4104,
+    "landmarks": 0,
+    "traced": 0,
+    "tracedEndMap": 0,
+    "tracedEndRebuilt": 0,
+    "tracedEndHighway": 0,
+    "tracedEndAssumed": 0,
+    "curated": 12,
+    "bridgePieces": 2,
+    "labels": 12,
+    "contourSegments": 61851,
+    "rapidCells": 0,
+    "rapidsReach": 200,
+    "strips": 463
+  },
+  "credits": [
+    "Map data © OpenStreetMap contributors (ODbL)",
+    "Elevation: produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved"
+  ],
+  "config": {
+    "bearing": 0,
+    "snap": false,
+    "title": "Rapa Nui (Easter Island) — the whole island",
+    "center": [
+      -109.345,
+      -27.125
+    ],
+    "width": 25500,
+    "depth": 18500,
+    "scale": 0.4,
+    "squash": 0.5,
+    "exaggeration": 1,
+    "slab": 40,
+    "palette": "paper",
+    "bridgeDeck": 6,
+    "bridges": [],
+    "minBuildingArea": 12,
+    "dots": "none",
+    "fetchTile": 4000,
+    "terrain": {
+      "source": "copernicus",
+      "exaggeration": 2,
+      "cell": 20,
+      "contour": 20,
+      "majorEvery": 5,
+      "rapids": 0,
+      "rocks": false,
+      "demResolution": 30
+    },
+    "time": {
+      "history": "history/rapa-nui.json"
+    },
+    "name": "rapa-nui"
+  },
+  "sky": "#f4f1ea",
+  "time": {
+    "year": 2026,
+    "series": "rapa-nui",
+    "title": "Rapa Nui today",
+    "note": "Open data only: OpenStreetMap and Copernicus GLO-30.",
+    "curated": [
+      {
+        "id": "rn-label-hanga-roa",
+        "name": "Hanga Roa",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/node/214231955"
+        ]
+      },
+      {
+        "id": "rn-label-rano-kau",
+        "name": "Rano Kau",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/node/612974210"
+        ]
+      },
+      {
+        "id": "rn-label-orongo",
+        "name": "Orongo",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/way/208002899"
+        ]
+      },
+      {
+        "id": "rn-label-tahai",
+        "name": "Ahu Tahai",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/way/222144438"
+        ]
+      },
+      {
+        "id": "rn-label-vinapu",
+        "name": "Ahu Vinapu",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/node/2307664656"
+        ]
+      },
+      {
+        "id": "rn-label-puna-pau",
+        "name": "Puna Pau",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/node/6556430294"
+        ]
+      },
+      {
+        "id": "rn-label-akivi",
+        "name": "Ahu Akivi",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/way/502222393"
+        ]
+      },
+      {
+        "id": "rn-label-terevaka",
+        "name": "Terevaka",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/node/305166217"
+        ]
+      },
+      {
+        "id": "rn-label-anakena",
+        "name": "Anakena",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/way/26273549"
+        ]
+      },
+      {
+        "id": "rn-label-rano-raraku",
+        "name": "Rano Raraku",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/node/2311203621"
+        ]
+      },
+      {
+        "id": "rn-label-tongariki",
+        "name": "Ahu Tongariki",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/way/221696391"
+        ]
+      },
+      {
+        "id": "rn-label-poike",
+        "name": "Poike",
+        "kind": "label",
+        "from": 1000,
+        "to": 9999,
+        "note": "Position from OpenStreetMap.",
+        "sources": [
+          "https://www.openstreetmap.org/node/4310358151"
+        ]
+      }
+    ]
+  },
+  "id": "20261119-110829-rapa-nui-2026",
+  "createdAt": "2026-11-19T16:08:29.282Z",
+  "bytes": 15252824,
+  "git": {
+    "commit": "47bccf5",
+    "dirty": false,
+    "subject": "Tutorial 1: map any place from open data with an AI chat, using Rapa Nui (Easter Island)"
+  },
+  "files": {
+    "svg": "builds/20261119-110829-rapa-nui-2026/image.svg",
+    "thumb": "builds/20261119-110829-rapa-nui-2026/thumb.png",
+    "social": "builds/20261119-110829-rapa-nui-2026/social.png"
+  }
+}
