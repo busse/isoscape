@@ -1180,7 +1180,9 @@ scale, and wayfinding labels under the plate that run past two lines push the se
 make room; a label may instead be set where the spec says (`label`), its leader leaving the
 nearest point of its box. A sheet may frame the plate closer (`isoView`, a box in the plate's
 own units), cutting what runs past it at the edge, and may say where its column must end
-(`columnEnd`), to keep room for the title block; Main Street's ends by 6,560 of the 7,200. A badge that would hide the part it names is set off it into clear space, with a thin
+(`columnEnd`), to keep room for the title block; Main Street's ends by 6,560 of the 7,200, and
+the Pump House's by 6,520, its spacing between callouts, groups and the key's rows tightened to
+get there (`column`). A badge that would hide the part it names is set off it into clear space, with a thin
 leader to a small dot on the part, drawn like the wayfinding labels' leaders. Callout text is 54 pixels (13 pt; 9.7 pt on the 24 × 18 in print), and the smallest text
 on the sheet, the two-digit numbers in the badges on the drawings, is 40 pixels (9.6 pt; 7.2 pt
 at 24 × 18). There are no canvas files: a canvas's 1.5 in of mirrored wrap would carry the
@@ -1293,7 +1295,10 @@ height wide. Where the foot of a sheet is full (the two set sheets) it sits in t
 instead, and only if no place fits at full size is it shrunk, in steps of a tenth. On a canvas it
 goes on the face, never the wrap. A piece that is not a map can say what it is in one more
 line under the maker, at 28 units, about 7 pt on a 24 × 18 in sheet: the Broad Street cutaway's
-says "Building cutaway". The plates themselves are listed in `catalog/plates.json`.
+says "Building cutaway". A long set name shrinks the collection › set › piece line to fit its
+cell; a sheet can ask for a floor instead, and the Pump House cutaway's line, which would print
+at under 5 pt on one line, goes on two at 6 pt on the 24 × 18 in print, every field kept. The
+plates themselves are listed in `catalog/plates.json`.
 
 ## Archive and explorer
 

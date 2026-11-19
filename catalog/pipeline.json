@@ -2861,14 +2861,14 @@
   "pump-house-cutaway": {
    "plate": "BPPH-01",
    "status": "active",
-   "asset_version": "1.0.0-rc2",
+   "asset_version": "1.0.0-rc3",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 2,
-   "waiting_on": "owner",
-   "decision": "rc1 inspected once; its one fix round made rc2. Waiting on the owner: (1) a second fix round for the title block (it sits top right over the column, and its taxonomy line is about 4.8 pt at 24x18), (2) the typeface as rendered for print, (3) release approval",
+   "rounds": 3,
+   "waiting_on": "agent",
+   "decision": "rc3: block moved to the bottom-right corner (column spacing tightened, spec `column`), taxonomy on two lines at 6.0 pt at 24x18 (titleblock min_px, spec blockMinPt 6); owner approved release as edition 1 if clean",
    "accepted_faults": [
     {
      "what": "main view: callout 8's dot falls just west of the visible suction, on the west wheel",
@@ -2991,8 +2991,10 @@
     "2026-11-18: d3: variant tracing the water pumped (owner asked for it as a variant, keeping d2)",
     "2026-11-18: d3: ways drawn as water (teal and blue ribbons with IN / OUT tags), owner chose option C",
     "2026-11-18: working draft -> final draft (1.0.0-rc1): owner approved the look of d3; handed back to the planning session",
-    "2026-11-18: rc1 inspected (plate BPPH-01); one fix round -> 1.0.0-rc2; waits on the owner"
-   ]
+    "2026-11-18: rc1 inspected (plate BPPH-01); one fix round -> 1.0.0-rc2; waits on the owner",
+    "2026-11-18: owner approved a further fix round for the title block, the print face (Libre Baskerville as the container renders it) and release if clean; fix round -> 1.0.0-rc3"
+   ],
+   "budget_note": "owner approved a further fix round for the title block, 2026-11-18"
   },
   "story-jackson-ward": {
    "plate": null,

@@ -20,7 +20,8 @@ dashed ring for one that is approximate.
 300 dpi at each size in PRINTS (both 4:3, the set sheet's sizes), with the plate's title block
 (tools/print/titleblock.py, the fields from tools/release/plates.py for the spec's `design`)
 set in the bottom-right corner below the callout column, at the size stamp.py gives a sheet of
-that length. Each is named <design>_<w>x<h>.jpg (version 1 has no -vN suffix) and logged, with
+that length (a spec's `blockMinPt` keeps the block's taxonomy at that size or more, on two lines
+if need be: titleblock.py min_px). Each is named <design>_<w>x<h>.jpg (version 1 has no -vN suffix) and logged, with
 the block's fields, placement and every file's SHA-256, in print/prints.json. No canvas files:
 a canvas's 1.5 in of mirrored wrap would carry the title, the credit line and the column's text,
 all within 1.5 in of the sheet's edges, mirrored round its sides.
@@ -294,6 +295,12 @@ def main():
     # Callout badges on the drawings, and the column beside them. The column's first heading
     # stands on the subtitle's baseline, which leaves the foot of the column clear for the
     # print's title block (tools/print/titleblock.py) at both print sizes.
+    # A spec's `column` may tighten the column's spacing (sheet units; the defaults are every
+    # released sheet's): `head`, a group heading to its first callout; `callout`, after a
+    # callout's last line; `group`, after a group; `keyHead`, the key's heading to its first
+    # row; `keyRow`, between the key's rows; `traveler`, before the traveler's note; `notes`,
+    # before the sources; `between`, the gap between the sources and the notes.
+    col = {**dict(head=170, callout=58, group=36, keyHead=150, keyRow=92, traveler=26, notes=40, between=68), **spec.get('column', {})}
     y = 570
     x = COL_X
     for g in spec['groups']:
@@ -302,7 +309,7 @@ def main():
             tw = font('bold', 58).getlength(g['title'].upper()) + 4 * len(g['title'])
             out.append(figure(x + tw + 40, y + 4, 82, traveler['shapes'], route))
         out.append(f'<line x1="{x}" y1="{y + 32}" x2="{W - M}" y2="{y + 32}" stroke="{INK}" stroke-width="4"/>')
-        y += 170
+        y += col['head']
         for c in g['callouts']:
             conf = c['_conf']
             for where, anchors, frame, place_ in drawings:
@@ -318,8 +325,8 @@ def main():
             for line in wrap(c['text'], 'regular', BODY, W - M - x - 140):
                 out.append(text(x + 140, yy, line, BODY, 'regular', DIM))
                 yy += 72
-            y = yy + 58
-        y += 36
+            y = yy + col['callout']
+        y += col['group']
     # Wayfinding: where the trains and streetcars went, in the plate's margins, each with a
     # leader to the track end or the street it belongs to.
     for wf in spec.get('wayfinding', []):
@@ -366,24 +373,26 @@ def main():
     ky = y + 40
     out.append(text(x, ky, 'HOW SURE EACH PART IS', 58, 'bold', DIM, family=SANS, spacing=4))
     out.append(f'<line x1="{x}" y1="{ky + 32}" x2="{W - M}" y2="{ky + 32}" stroke="{INK}" stroke-width="4"/>')
-    ky += 150
+    ky += col['keyHead']
     for conf, msg in spec['key']:
         out.append(badge(x + 56, ky - 22, None, conf, 42))
         out.append(text(x + 140, ky, msg, 56, 'regular', DIM))
-        ky += 92
+        ky += col['keyRow']
     for line in wrap(spec.get('marksNote', MARKS_NOTE), 'regular', 56, W - M - x - 140):
         out.append(text(x + 140, ky, line, 56, 'regular', DIM))
         ky += 76
     if spec.get('travelerKey') and traveler:
-        ky += 26
+        ky += col['traveler']
         out.append(figure(x + 56, ky + 14, 90, traveler['shapes'], route))
         for line in wrap(spec['travelerKey'], 'regular', 56, W - M - x - 140):
             out.append(text(x + 140, ky, line, 56, 'regular', DIM))
             ky += 76
-    ky += 40
-    for line in wrap(spec['sources'], 'italic', 50, W - M - x) + [''] + wrap(spec['notes'], 'italic', 50, W - M - x):
-        if line:
-            out.append(text(x, ky, line, 50, 'italic', DIM))
+    ky += col['notes']
+    for line in wrap(spec['sources'], 'italic', 50, W - M - x) + [None] + wrap(spec['notes'], 'italic', 50, W - M - x):
+        if line is None:
+            ky += col['between']
+            continue
+        out.append(text(x, ky, line, 50, 'italic', DIM))
         ky += 68
     if ky > H - 120:
         print(f'warning: the column runs to {ky:.0f}, past the credit line', file=sys.stderr)
@@ -485,16 +494,18 @@ def prints(spec, sheet, out_dir, version=1):
     design = spec['design']
     info = plates.info(design, version)
     os.makedirs(out_dir, exist_ok=True)
+    # A spec's `blockMinPt`: the smallest the block's taxonomy may print (titleblock.py min_px).
+    min_px = round(spec['blockMinPt'] * 300 / 72) if spec.get('blockMinPt') else None
     log = {'design': design, 'version': version, 'sheet': os.path.relpath(sheet, ROOT), 'sheet_sha256': sha(sheet), 'info': info,
            'tools': {f: sha(os.path.join(ROOT, f)) for f in ('tools/cutaway/sheet.py', 'tools/print/titleblock.py', 'tools/release/stamp.py', 'catalog/plates.json')},
-           'files': {}}
+           'files': {}, **({'block_min_px': min_px} if min_px else {})}
     for w_in, h_in in PRINTS:
         with tempfile.TemporaryDirectory() as tmp:
             png = os.path.join(tmp, 'sheet.png')
             C.svg_to_png(sheet, png, w_in * 300, h_in * 300, background=PAPER)
             im = Image.open(png).convert('RGB')
         assert im.size == (w_in * 300, h_in * 300), im.size
-        im, at = titleblock.stamp(im, info, stamp.size_u(w_in, 300), where=('foot', 'corner', 'head'))
+        im, at = titleblock.stamp(im, info, stamp.size_u(w_in, 300), where=('foot', 'corner', 'head'), min_px=min_px)
         p = os.path.join(out_dir, f'{design}_{w_in}x{h_in}.jpg')
         for q in (94, 90, 86, 82, 78):
             im.save(p, quality=q, dpi=(300, 300), optimize=True)

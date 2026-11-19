@@ -751,7 +751,12 @@ extract).
 `isoView` (`[x, y, w, h]` in the plate's own units) frames the plate closer, cutting what runs
 past it at its edge; a wayfinding label with `label: [x, y]` (sheet units, its first baseline)
 stands there, its leader leaving the nearest point of its box; `columnEnd` warns when the
-column runs past that height, into the room the print's title block needs.
+column runs past that height, into the room the print's title block needs. A spec's `column`
+tightens the column's spacing (sheet units: `head`, `callout`, `group`, `keyHead`, `keyRow`,
+`traveler`, `notes`, `between`; the defaults, 170, 58, 36, 150, 92, 26, 40 and 68, are the
+released sheets'); the Pump House sheet uses it to end its column by 6,520 and free the corner.
+`blockMinPt` keeps the title block's taxonomy at that size or more on the 24 × 18 in print (see
+"Plates").
 
 `--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):
 the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, each with its title
@@ -1184,6 +1189,14 @@ and the maker's two lines move up to make room. A plate with no kind prints noth
 its block is the same, byte for byte, as before kinds existed. The Broad Street cutaway
 (`BSS-15`) is the first with one. A cutaway's location and facing come from its own region
 (the sheet spec in `cutaways/` names its `design`), not the set's map.
+
+A long set name shrinks the taxonomy to fit its cell (Main Street's prints at about 5 pt on the
+24 × 18). `titleblock.stamp(..., min_px=)` sets a floor: a taxonomy that would shrink below it
+on one line goes on two, broken after a ›, as large as fits up to the full 24 units and never
+under the floor, every field kept, with the top row's labels moved up to make room. Without
+`min_px`, or when the line fits at that size, the block is byte for byte what it was, so the
+released blocks stay as they are. A cutaway spec's `blockMinPt` turns it on (6 pt is 25 pixels
+at 300 dpi); BPPH-01 is the first, its taxonomy 6.0 pt at 24 × 18 in and 7.0 pt at 32 × 24.
 
 - `python3 tools/release/plates.py check <store-dir>`: every plate unique and well formed, and
   every design in the store has one, and every kind is a short line of text.

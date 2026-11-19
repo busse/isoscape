@@ -334,6 +334,18 @@
  "sources": "Sources: The American Engineer, Dec. 26, 1884, pp. 260–261 (HathiTrust); National Register nomination, New Pump-House, 2002; HAER VA-34 (Library of Congress); Pump House Park schematic design study, 2019 (levels); C. E. Bolling, AWWA Proceedings, 1900; OpenStreetMap; USGS 3DEP.",
  "notes": "Machines scaled from the 1884 engravings by their dimensions. Where each gang stood, the tailraces and the roof’s pitch are inferred. Roof lifted, middle of the floor taken up. Canal banks are today’s.",
  "credit": "Drawn with isoscape, built with Claude  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Machinery after The American Engineer, 1884",
+ "column": {
+  "head": 150,
+  "callout": 40,
+  "group": 20,
+  "keyHead": 122,
+  "keyRow": 92,
+  "traveler": 10,
+  "notes": 22,
+  "between": 34
+ },
+ "columnEnd": 6520,
+ "blockMinPt": 6,
  "inset": {
   "context": "cutaways/pump-house-context.json",
   "box": [

@@ -57,6 +57,28 @@ class Block(unittest.TestCase):
         self.assertLess(width, titleblock.NAME_W - 36)   # fits without shrinking
         self.assertGreaterEqual(pt(titleblock.KIND_SIZE, 24), 7.0)
 
+    def test_min_px_changes_only_a_block_whose_taxonomy_would_fall_under_it(self):
+        u = stamp.size_u(24, 300)
+        for design in ('main-street-1952-cutaway', 'broad-street-1943-cutaway', 'richmond-1925'):
+            info = plates.info(design)
+            self.assertEqual(titleblock.block(info, u).tobytes(), titleblock.block(info, u, None).tobytes())
+        short = dict(FIXED)
+        self.assertEqual(titleblock.block(short, u).tobytes(), titleblock.block(short, u, 25).tobytes())
+
+    def test_a_long_taxonomy_goes_on_two_lines_at_6_pt_or_more(self):
+        info = plates.info('pump-house-cutaway')
+        d = ImageDraw.Draw(Image.new('RGB', (4, 4)))
+        for long_in in (24, 32):
+            u = stamp.size_u(long_in, 300)
+            one = titleblock._fit(d, titleblock.taxonomy(info), 'regular', 24 * u, 624 * u)
+            self.assertLess(one.size * 72 / 300, 6)    # on one line it would print under 6 pt
+            lines, f = titleblock._two_lines(d, titleblock.taxonomy(info), 24 * u, 624 * u, 25)
+            self.assertEqual(' '.join(lines), titleblock.taxonomy(info))    # every field kept
+            self.assertGreaterEqual(f.size * 72 / 300, 6)
+            self.assertTrue(all(d.textlength(x, font=f) <= 624 * u for x in lines))
+            a, b = titleblock.block(info, u), titleblock.block(info, u, 25)
+            self.assertEqual(a.size, b.size)
+
 
 if __name__ == '__main__':
     unittest.main()
