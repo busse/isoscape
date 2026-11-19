@@ -9,12 +9,13 @@ unlisted: true
 
 Every piece of work on isoscape, from a first look at a subject to a print for sale, moves through the same stages: rough draft, working draft, final draft and final production. A version number in a print's title block is given only at final production, and names an edition someone could own. Before that, work is counted in draft rounds (d1, d2) and release candidates (rc1, rc2). The rules are in [Changes](changes.md#how-versions-work-from-here) and [How it's made](how-its-made.md#stages-and-inspection).
 
-This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 18, 2026. The page and the board were set up with Claude.
+This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 19, 2026. The page and the board were set up with Claude.
 
 | Stage | Entries |
 |---|---|
 | working draft | 1 |
 | final production | 45 |
+| in work | 1 |
 | owner test | 1 |
 | on hold | 55 |
 | blocked | 1 |
@@ -80,6 +81,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | STC·13 | The Fan, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·14 | Broad and Laurel, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·M | Richmond's Streetcars, 1925: The System Map | set map | 4.0.0 | yes, version 4 |
+
+## In work
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Tutorial: exploring a place with a chat, with Rapa Nui (Easter Island) as the example | site | — | no |
 
 ## Owner test
 

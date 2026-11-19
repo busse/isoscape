@@ -1,7 +1,7 @@
 {
  "about": "The production board: one entry per design or piece of work. The scheme is README \"Stages and the board\"; edit it with `tools/release/board.py set`; `board.py check` validates it.",
  "scheme": "README.md#stages-and-the-board",
- "updated": "2026-11-18",
+ "updated": "2026-11-19",
  "sources": "backfilled November 18, 2026 from catalog/plates.json, releases/ (latest record per design) and the storefront (https://chrisbusse.com/products.json: 39 products live). Orders are \"unknown\" until the store's orders.py has been run.",
  "items": {
   "broad-street-1943-01-ay-tower": {
@@ -3103,6 +3103,30 @@
    "links": [],
    "log": [
     "2026-11-18: rough draft -> owner test"
+   ]
+  },
+  "tutorial-explore-with-chat": {
+   "title": "Tutorial: exploring a place with a chat, with Rapa Nui (Easter Island) as the example",
+   "plate": null,
+   "kind": "site",
+   "stage": "in work",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "agent",
+   "decision": "handed to a separate Opus 5.5 session on 2026-11-19 (ISO-TEST/handoff/easter-island/HANDOFF.md). A method tutorial on open data: no prints or store listing for this island; cultural rules in the handoff. Rough draft of the island and a one-page outline come to the owner first; local preview before any push.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-19: rough draft -> in work"
    ]
   }
  }
