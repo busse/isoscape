@@ -41,16 +41,20 @@ test('every picture on the Jackson Ward page is a numbered figure with a caption
   assert.ok(page.deck && page.deck.length > 40, 'the page has a deck')
 })
 
-test('each compare slider on the Jackson Ward page lays two pictures of one size over each other, and no other page has one', () => {
-  const page = loadPages().find((p) => p.slug === 'jackson-ward')
-  assert.ok(page)
-  const cmps = [...page.html.matchAll(/<div class="cmp" [\s\S]*?<\/div>\n<div class="cmp-div"/g)].map((m) => m[0])
-  assert.equal(cmps.length, page.figures.filter((f) => f.compare).length)
-  for (const c of cmps) {
-    const sizes = [...c.matchAll(/<img class="cmp-[ab]" [^>]*width="(\d+)" height="(\d+)"/g)].map((m) => m[1] + 'x' + m[2])
-    assert.equal(sizes.length, 2, 'two pictures with their sizes')
-    assert.equal(sizes[0], sizes[1], 'the same size, so they line up')
+test('each compare slider lays two pictures of one size over each other, and only the pages that ask for one have one', () => {
+  const withCompare = ['jackson-ward', 'explore-with-chat']
+  for (const slug of withCompare) {
+    const page = loadPages().find((p) => p.slug === slug)
+    assert.ok(page, slug)
+    const cmps = [...page.html.matchAll(/<div class="cmp" [\s\S]*?<\/div>\n<div class="cmp-div"/g)].map((m) => m[0])
+    assert.ok(cmps.length > 0, slug)
+    assert.equal(cmps.length, page.figures.filter((f) => f.compare).length)
+    for (const c of cmps) {
+      const sizes = [...c.matchAll(/<img class="cmp-[ab]" [^>]*width="(\d+)" height="(\d+)"/g)].map((m) => m[1] + 'x' + m[2])
+      assert.equal(sizes.length, 2, 'two pictures with their sizes')
+      assert.equal(sizes[0], sizes[1], 'the same size, so they line up')
+    }
   }
   // Every other page keeps plain figures (or none).
-  for (const p of loadPages()) if (p.slug !== 'jackson-ward') assert.ok(!p.figures.some((f) => f.compare), p.slug)
+  for (const p of loadPages()) if (!withCompare.includes(p.slug)) assert.ok(!p.figures.some((f) => f.compare), p.slug)
 })

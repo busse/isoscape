@@ -282,6 +282,21 @@
         "pageLabel": "Richmond's streetcars, 1925: the lines and fourteen stops"
       },
       {
+        "title": "Tutorials",
+        "prefixes": [
+          "rapa-nui"
+        ],
+        "blurb": "How to explore a place with a chat: find open data, check it, and draw it with isoscape. The first works through Rapa Nui (Easter Island) from open data alone.",
+        "page": "#/explore-with-chat",
+        "pageLabel": "Tutorial: map any place from open data with an AI chat, using Rapa Nui (Easter Island)",
+        "order": [
+          "rapa-nui",
+          "rapa-nui-rano-kau",
+          "rapa-nui-poike",
+          "rapa-nui-hanga-roa"
+        ]
+      },
+      {
         "title": "Buildings in their time",
         "prefixes": [
           "broad-street",

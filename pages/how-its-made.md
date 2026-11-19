@@ -186,7 +186,8 @@ OSM does not map the sea, or tidal water like the Chesapeake Bay, as water polyg
 the coastline as lines with the land always on their left. isoscape joins those lines into
 chains and cuts them where they cross the frame. It closes each piece of land by walking the
 frame's edge, and the water is the frame minus the land. The result can be wrong if the
-coastline near the frame is broken or mis-tagged.
+coastline near the frame is broken or mis-tagged. A nature reserve whose outline lies wholly
+in the sea is an underwater park, so it is not drawn as green ground.
 
 Code: `src/coast.ts`.
 

@@ -15,11 +15,10 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 |---|---|
 | working draft | 1 |
 | final production | 45 |
-| in work | 1 |
-| owner test | 1 |
+| owner test | 2 |
 | on hold | 55 |
 | blocked | 1 |
-| backlog | 2 |
+| backlog | 3 |
 
 ## Waiting on a decision
 
@@ -82,17 +81,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | STC·14 | Broad and Laurel, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·M | Richmond's Streetcars, 1925: The System Map | set map | 4.0.0 | yes, version 4 |
 
-## In work
-
-| Plate | Title | Kind | Version | On sale |
-|---|---|---|---|---|
-| — | Tutorial: exploring a place with a chat, with Rapa Nui (Easter Island) as the example | site | — | no |
-
 ## Owner test
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Explorer on a phone: no sideways scroll; compare sliders by thumb | site | — | no |
+| — | Tutorial: exploring a place with a chat, with Rapa Nui (Easter Island) as the example | site | — | no |
 
 ## On hold
 
@@ -112,6 +106,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 |---|---|---|---|---|
 | — | Title-block labels at the smallest sizes | batch | — | no |
 | — | Richmond before 1886: a traced building layer | research | — | no |
+| — | Rano Raraku quarry from the 2025 drone model (Phase 2 of the Rapa Nui tutorial) | research | — | no |
 
 ## Planned editions
 

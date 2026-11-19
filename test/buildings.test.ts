@@ -142,3 +142,23 @@ test('segments cross only through each other, not at a shared end', () => {
   assert.equal(segmentsCross([0, 0], [1, 1], [1, 1], [2, 0]), false)
   assert.equal(segmentsCross([0, 0], [1, 0], [0, 1], [1, 1]), false)
 })
+
+test('a nature reserve wholly in the sea is not drawn as ground; one on the shore stays', async () => {
+  const { buildScene } = await import('../src/scene.ts')
+  const { palette } = await import('../src/palette.ts')
+  const { lonLatFromLocal } = await import('../src/region.ts')
+  const region = { name: 't', title: 't', center: [0, 0], width: 400, depth: 400, bearing: 0, scale: 1 } as const
+  const ll = lonLatFromLocal(region as never)
+  const sq = (x: number, y: number, s: number): Vec2[] => square(x, y, s).map(([e, n]) => ll(e, n) as Vec2)
+  // Coastline running west along y = 0, land on its left (south), sea to the north.
+  const coast = { type: 'line' as const, id: 'c1', tags: { natural: 'coastline' }, points: [ll(400, 0) as Vec2, ll(-400, 0) as Vec2] }
+  const marine = { type: 'polygon' as const, id: 'r1', tags: { leisure: 'nature_reserve' }, outers: [sq(-50, 60, 40)], inners: [] }
+  const shore = { type: 'polygon' as const, id: 'r2', tags: { leisure: 'nature_reserve' }, outers: [sq(60, -30, 60)], inners: [] }
+  const park = { type: 'polygon' as const, id: 'p1', tags: { leisure: 'park' }, outers: [sq(-150, 60, 40)], inners: [] }
+  // A marine reserve running out past the frame's far edge is cut there, and still dropped.
+  const past = { type: 'polygon' as const, id: 'r3', tags: { leisure: 'nature_reserve' }, outers: [sq(100, 150, 200)], inners: [] }
+  const scene = buildScene(region as never, [coast, marine, shore, park, past], palette('paper'), null)
+  const greens = scene.ground.filter((g) => g.kind === 'green')
+  assert.equal(greens.length, 2)
+  assert.ok(scene.ground.some((g) => g.kind === 'water'))
+})

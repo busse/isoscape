@@ -327,6 +327,8 @@ export const buildScene = (
   const plainWater: Ring[][] = []
   // Water of a past year that is gone today (see `historicWater`).
   const historicBodies: Ring[][] = []
+  // Nature reserves, which may be marine: one wholly in the sea is dropped once the sea is known.
+  const reserves: GroundPolygon[] = []
   const margin = 40
   const wide = { minX: frame.minX - margin, maxX: frame.maxX + margin, minY: frame.minY - margin, maxY: frame.maxY + margin }
   for (const f of features) {
@@ -340,7 +342,9 @@ export const buildScene = (
       ...f.inners.map((r) => orient(clipRingToRect(toViewRing(view, r), wide), false)),
     ].filter((r) => r.length >= 3 && Math.abs(signedArea(r)) > 1)
     if (rings.length === 0) continue
-    ground.push({ kind, rings })
+    const g = { kind, rings }
+    ground.push(g)
+    if (f.tags.leisure === 'nature_reserve') reserves.push(g)
     if (kind === 'water' && time !== undefined && featureHistoric(f, time.year, time.history)) {
       historicBodies.push(rings)
       continue
@@ -365,6 +369,13 @@ export const buildScene = (
     const chains = chainCoast(coastWays).map((c) => c.map(([lon, lat]) => view.toView(lon, lat)))
     const sea = waterFromCoast(chains, wide)
     if (sea !== null) {
+      // A marine reserve (an underwater park) is sea, not a green field: drop any reserve
+      // whose outline lies wholly in the sea.
+      // Points on the frame's edge (where both were clipped) are on the sea's own edge and say nothing.
+      const onEdge = (p: Vec2) => Math.min(Math.abs(p[0] - wide.minX), Math.abs(p[0] - wide.maxX), Math.abs(p[1] - wide.minY), Math.abs(p[1] - wide.maxY)) < 1e-6
+      for (const g of reserves) {
+        if (g.rings.every((r) => signedArea(r) < 0 || r.every((p) => onEdge(p) || pointInPolygon(p, sea)))) ground.splice(ground.indexOf(g), 1)
+      }
       ground.unshift({ kind: 'water', rings: sea })
       stillWaters.push(sea)
     }
