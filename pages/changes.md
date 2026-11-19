@@ -24,6 +24,19 @@ when. Once anyone has ordered an edition, it stays as it is, and any change beco
 Numbers already printed stay as they are. The [production board](board.md) shows where each piece
 stands. This entry was drafted with Claude.
 
+## November 18, 2026 (Byrd Park Pump House cutaway)
+
+**New: The New Pump-House, Richmond, about 1885: Cutaway (plate BPPH·01, version 1).**
+Richmond's pump house on the canal at Byrd Park cut open to its machine room, where canal water
+turned three turbine wheels and the wheels pumped drinking water up to the New Reservoir. Below
+it, two flat sections follow the water through a wheel and through a pump, and a small map shows
+where the water went. It opens a new set in Buildings in their time, Byrd Park Pump House, 1885.
+Every part is marked by how sure it is: drawn from a plan, a section or a survey, from written
+accounts or photographs, or approximate.
+[The cutaway, its callouts and its sources](pump-house-cutaway.md)
+
+*Drafted with Claude; see the [artist statement](artist-statement.md).*
+
 ## November 18, 2026 (Main Street Station cutaway)
 
 **New: Main Street Station, about 1952: Cutaway (plate MSS·01, version 1).** Richmond's Main

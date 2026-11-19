@@ -598,5 +598,17 @@
    "caption": "Through a pump, looking west: the water that’s pumped",
    "as": "pump"
   }
- ]
+ ],
+ "page": {
+  "slug": "pump-house-cutaway",
+  "title": "The New Pump-House, Richmond, about 1885: the cutaway",
+  "order": 49,
+  "summary": "Richmond's New Pump-House cut open to its machine room as it worked about 1885: canal water turning three wheels, and nine pumps sending drinking water up to the reservoir, with how sure each part is.",
+  "intro": "This drawing cuts Richmond's New Pump-House open to its machine room as it worked about 1885. Canal water from the forebay fell through three turbine wheels, and each wheel drove three plunger pumps that forced drinking water up to the New Reservoir. The roof is lifted and the middle of the pavilion floor is taken up, so the wheels, shafts and pumps show from above. Beneath it, two flat cuts across the building, looking west, follow the water: through a wheel, in teal, the water that drives the wheels; through a pump, in blue, the water pumped. A small map at the top left shows where the water went.",
+  "image_alt": "The cutaway sheet: the pump house open to its machine room above, a cut through a wheel and a cut through a pump below, a small map at the top left, and the numbered callouts beside them",
+  "key_intro": "Every part of the drawing says how it is known, and each numbered badge shows it:",
+  "how": "The pump house is a model made of parts. Its outline is OpenStreetMap's, and its floor levels come from the 2019 schematic design study for Pump House Park. The roof's eaves and ridges are estimated from the Historic American Engineering Record's photographs (HAER VA-34), so the roof's pitch is inferred. The machines are scaled by their stated dimensions from the engravings and text in The American Engineer of December 26, 1884: the 5-ft penstocks, the wheels, the 12-in shafts with three cranks 120° apart, the 16-ft rods, the nine pumps and their air vessels. Where each gang stood along the room is inferred, the gangs set evenly along the central block, and so are the tailraces, one vaulted tunnel to each wheel. The banks and beds of the forebay and of the canal below the locks are today's lidar (USGS 3DEP), with the water set at levels inferred for 1885. The model is cut along one vertical plane down the length of the machine room: the south side is taken away down to 1.5 m above the machine-room floor, the roof is lifted and the middle of the pavilion floor taken up. The two flat sections are vertical cuts across the building, through the middle wheel and through one of its pumps, drawn square and level, with the water's ways drawn as bands of water. The small map is drawn from a cached OpenStreetMap extract, with the mains' lines approximate. Chris Busse drew it with isoscape, the open-source tool he built with Claude.",
+  "drafted": "This page was drafted with Claude, Anthropic's AI (Claude Opus 5.5), from the sheet and its sources. More on how we work in the [artist statement](artist-statement.md).",
+  "traveler_note": "The small red figures are visitors on the pavilion floor, drawn to scale at 1.75 m (5 ft 9 in) tall; their height is a convention for size only. Teal marks the water that drives the wheels, and blue the water pumped."
+ }
 }

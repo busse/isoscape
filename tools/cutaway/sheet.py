@@ -452,6 +452,13 @@ def page(spec, print_dir, sheet_svg, iso_rect, labels=()):
            f'social: {slug}-social.jpg', '---', '', f"# {P['title']}", '',
            f"*{plate['kind']} · Plate {plate['plate'].replace('-', '·')}*" if plate.get('kind') else f"*Plate {plate['plate'].replace('-', '·')}*", '',
            P['intro'], '', f"![{P.get('image_alt', P['title'])}]({slug}-sheet.jpg)", '']
+    ins = spec.get('inset') or {}
+    if ins.get('why'):     # the inset panel's few paragraphs on the building's purpose, as on the sheet
+        out += [f"## {ins.get('title', 'Why it was built')}", '']
+        for para in ins['why']:
+            out += [para, '']
+        if ins.get('whySource'):
+            out += [f"*Sources: {ins['whySource']}*", '']
     for g in spec['groups']:
         out += [f"## {g['title']}", '']
         for c in g['callouts']:
