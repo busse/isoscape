@@ -2863,12 +2863,12 @@
    "status": "active",
    "asset_version": "1.0.0",
    "published_version": 1,
-   "live_version": null,
-   "on_sale": false,
+   "live_version": 1,
+   "on_sale": true,
    "orders": 0,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "released as edition 1 (BPPH-01, 1.0.0) up to go-live: product is a Shopify DRAFT; go-live (merge.py live) is the planning session's step",
+   "waiting_on": "nothing",
+   "decision": null,
    "accepted_faults": [
     {
      "what": "main view: callout 8's dot falls just west of the visible suction, on the west wheel",
