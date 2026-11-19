@@ -15,7 +15,8 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 |---|---|
 | working draft | 1 |
 | final production | 45 |
-| owner test | 2 |
+| owner test | 1 |
+| live | 1 |
 | on hold | 55 |
 | blocked | 1 |
 | backlog | 3 |
@@ -86,6 +87,11 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Explorer on a phone: no sideways scroll; compare sliders by thumb | site | — | no |
+
+## Live
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
 | — | Tutorial: exploring a place with a chat, with Rapa Nui (Easter Island) as the example | site | — | no |
 
 ## On hold

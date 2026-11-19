@@ -3109,7 +3109,7 @@
    "title": "Tutorial: exploring a place with a chat, with Rapa Nui (Easter Island) as the example",
    "plate": null,
    "kind": "site",
-   "stage": "owner test",
+   "stage": "live",
    "status": "active",
    "asset_version": null,
    "published_version": null,
@@ -3117,8 +3117,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "agent",
-   "decision": "Chris approved the local preview on 2026-11-19 and asked to ship. Planning session: merge tutorial/explore-with-chat to main, publish gh-pages, then set stage live.",
+   "waiting_on": "nothing",
+   "decision": "live on the explorer since 2026-11-19 (https://busse.github.io/isoscape/#/explore-with-chat), first page of the new Tutorials section, with four Rapa Nui views. The owner approved the local preview. No prints or store listing for this island. Open: the lidar-group reply needs the live link; the phone layout fix (explorer-mobile-layout) is not yet live.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3129,7 +3129,8 @@
     "2026-11-19: rough draft -> in work",
     "2026-11-19: in work -> owner test (local preview)",
     "2026-11-19: in work -> owner test",
-    "2026-11-19: owner approved the preview; ready to merge and publish"
+    "2026-11-19: owner approved the preview; ready to merge and publish",
+    "2026-11-19: owner test -> live"
    ]
   },
   "rapa-nui-quarry": {
