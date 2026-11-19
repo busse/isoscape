@@ -4,11 +4,11 @@
  "version": 1,
  "asset_version": "1.0.0",
  "version_note": null,
- "recorded": "2026-11-19T00:13:44+00:00",
+ "recorded": "2026-11-19T00:19:57+00:00",
  "provenance": "recorded at release",
  "isoscape": {
-  "commit": "e002a18f9112b54671a98d63ebacbd74d6517edf",
-  "subject": "record.py: a cutaway record pins every section its sheet draws and its inset's map extract",
+  "commit": "7fcac5f9fb7fafe64c0c9c0930b5a07d777f8eb9",
+  "subject": "The New Pump-House cutaway (BPPH-01): its explorer page, Changes entry and shop links",
   "dirty": false
  },
  "kind": "cutaway",
@@ -113,8 +113,8 @@
   }
  ],
  "inputs": {
-  "cutaways/pump-house-1885-pumped.json": "9e4e64b257f06db716a60c12665ac0fc16ed4bdb2b842287f50ba8bb1e828bd2",
-  "tools/cutaway/sheet.py": "a38ed3bff72d0ed8135a68f1fe01c180e78d3df75d264d9f4c623f1e93fe0bc7",
+  "cutaways/pump-house-1885-pumped.json": "d6ae5b864b300ba9fef2bfa5706af12217cc408dfef4216024f124a7aabc3453",
+  "tools/cutaway/sheet.py": "bf1f93dbaba2e4dd4bba5fa83bf6fc79851df6155a4c65734c598110428eabcd",
   "tools/print/titleblock.py": "bd2362c53e0a73a2d9ed9825ed4513e697f1a2094256b39a9a8ef5c79425d8a6",
   "tools/release/stamp.py": "a71068c515fe9f22382f53275c87f264db4a3dd004f9e35604e7b52bee4dcb88",
   "catalog/plates.json": "a2670d7cb81ba16f168e734251b3834b87e804c8759d2207157ade9165a6ae7e",
@@ -196,7 +196,7 @@
     "handle": "the-new-pump-house-richmond-about-1885-cutaway",
     "id": "gid://shopify/Product/9143184392310",
     "format": "all (merged)",
-    "status": "DRAFT",
+    "status": "ACTIVE",
     "variants": 4
    }
   ],
