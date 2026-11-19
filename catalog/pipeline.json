@@ -2861,14 +2861,14 @@
   "pump-house-cutaway": {
    "plate": "BPPH-01",
    "status": "active",
-   "asset_version": "1.0.0-rc3",
-   "published_version": null,
+   "asset_version": "1.0.0",
+   "published_version": 1,
    "live_version": null,
    "on_sale": false,
-   "orders": null,
-   "rounds": 3,
-   "waiting_on": "agent",
-   "decision": "rc3: block moved to the bottom-right corner (column spacing tightened, spec `column`), taxonomy on two lines at 6.0 pt at 24x18 (titleblock min_px, spec blockMinPt 6); owner approved release as edition 1 if clean",
+   "orders": 0,
+   "rounds": 0,
+   "waiting_on": "owner",
+   "decision": "released as edition 1 (BPPH-01, 1.0.0) up to go-live: product is a Shopify DRAFT; go-live (merge.py live) is the planning session's step",
    "accepted_faults": [
     {
      "what": "main view: callout 8's dot falls just west of the visible suction, on the west wheel",
@@ -2971,18 +2971,19 @@
     }
    ],
    "planned_edition": null,
-   "last_inspected": "f67df4e",
+   "last_inspected": "d79b921",
    "branch": null,
    "worktree": null,
    "links": [
+    "releases/pump-house-cutaway/v1.json",
     "cutaways/pump-house-1885-pumped.json",
     "cutaways/pump-house-1885.json",
-    "ISO-TEST/handoff/pump-house/HANDOFF-back.md",
-    "ISO-TEST/handoff/pump-house/d3/d3.md"
+    "/mnt/user-data/outputs/cutaway/pump-house/rc1/inspection.md",
+    "/mnt/user-data/outputs/cutaway/pump-house/release/release.md"
    ],
    "title": "The Byrd Park Pump House: Cutaway",
    "kind": "cutaway",
-   "stage": "final draft",
+   "stage": "final production",
    "notes": "research done: feasibility 3.5 of 5; rough draft, then d1-d3 on 2026-11-18 on The American Engineer pp. 260-261 (HathiTrust full scans). Approved: d3, the pumped-water variant; d2 kept as cutaways/pump-house-1885.json. Known faults for rc1 (owner: list, not pre-accepted): gang positions along the room inferred; tailraces' size and line inferred; penstocks square in section; south walkway a large blank plane in the cut; sections print small (about 8-9 in each at 32 x 24); context map uses today's OSM river and canal lines, with one gap closed; west wing's end-wall lancets show as slivers; the pumped line crosses the forebay wall schematically (the suction's intake was at the west end). Plate BPPH-01, set BPPH (2026-11-18). rc1 inspected once; fix round -> rc2 (f67df4e).",
    "log": [
     "2026-11-18: research -> rough draft",
@@ -2992,9 +2993,12 @@
     "2026-11-18: d3: ways drawn as water (teal and blue ribbons with IN / OUT tags), owner chose option C",
     "2026-11-18: working draft -> final draft (1.0.0-rc1): owner approved the look of d3; handed back to the planning session",
     "2026-11-18: rc1 inspected (plate BPPH-01); one fix round -> 1.0.0-rc2; waits on the owner",
-    "2026-11-18: owner approved a further fix round for the title block, the print face (Libre Baskerville as the container renders it) and release if clean; fix round -> 1.0.0-rc3"
+    "2026-11-18: owner approved a further fix round for the title block, the print face (Libre Baskerville as the container renders it) and release if clean; fix round -> 1.0.0-rc3",
+    "2026-11-18: rc3 rechecked clean (block bottom right, taxonomy 6.0 pt at 24x18); final draft -> final production as 1.0.0, edition 1, by the owner's approval",
+    "2026-11-18: final draft -> final production"
    ],
-   "budget_note": "owner approved a further fix round for the title block, 2026-11-18"
+   "budget_note": "owner approved a further fix round for the title block, 2026-11-18",
+   "released": "2026-11-18"
   },
   "story-jackson-ward": {
    "plate": null,

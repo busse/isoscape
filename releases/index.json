@@ -700,6 +700,14 @@
    "v1.json"
   ]
  },
+ "pump-house-cutaway": {
+  "title": "The New Pump-House, Richmond, about 1885: Cutaway",
+  "current": 1,
+  "kind": "cutaway",
+  "records": [
+   "v1.json"
+  ]
+ },
  "richmond-1865": {
   "title": "Richmond, 1865",
   "current": 2,
