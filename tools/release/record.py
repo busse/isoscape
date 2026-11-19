@@ -121,16 +121,24 @@ def sets_by_slug():
 
 def from_cutaway(key, d):
     """A cutaway sheet (tools/cutaway/sheet.py --print): its spec in cutaways/ names the design.
-    Its scenes are the region's cutaway and flat section, both written by one build, and the
-    sheet SVG composed from them (frozen, not rebuilt: sheet.py makes it again from the two)."""
+    Its scenes are the region's cutaway, every flat section the sheet draws (its own and a
+    `crossSection`, or each region in `sections`; each written by its region's build), and the
+    sheet SVG composed from them (frozen, not rebuilt: sheet.py makes it again from them). An
+    `inset`'s cached map extract and context.py are inputs. (Records before November 18, 2026
+    pinned only the region's own section: MSS-01's v1 lacks its shed section.)"""
     for sp in sorted(glob.glob(os.path.join(ISO, 'cutaways', '*.json'))):
         C = json.load(open(sp))
         if C.get('design') != key: continue
         name = os.path.splitext(os.path.basename(sp))[0]
         region, year = C['region'], C['year']
-        build = os.path.join(ISO, 'out', 'cutaways', 'build', f'{region}-{year}')
-        scenes = [scene(region, year, build + '.svg'), dict(scene(region, year, build + '-section.svg'), output='-section'),
-                  scene(None, None, os.path.join(ISO, 'out', 'cutaways', f'{name}-sheet.svg'))]
+        bdir = os.path.join(ISO, 'out', 'cutaways', 'build')
+        build = os.path.join(bdir, f'{region}-{year}')
+        # Every flat section the sheet draws, as sheet.py lays them out: a spec's `sections` list,
+        # else the region's own section and any `crossSection` (each region's build writes it).
+        secs = [x['region'] for x in C['sections']] if C.get('sections') else [region] + ([C['crossSection']['region']] if C.get('crossSection') else [])
+        scenes = [scene(region, year, build + '.svg')]
+        scenes += [dict(scene(r, year, os.path.join(bdir, f'{r}-{year}-section.svg')), output='-section') for r in secs]
+        scenes += [scene(None, None, os.path.join(ISO, 'out', 'cutaways', f'{name}-sheet.svg'))]
         log_p = os.path.join(ISO, 'out', 'cutaways', 'print', 'prints.json')
         log = json.load(open(log_p)) if os.path.exists(log_p) else {}
         recipe = {'tool': 'tools/cutaway/sheet.py',
@@ -141,6 +149,9 @@ def from_cutaway(key, d):
         inputs = {rel(sp): sha(sp)}
         for f in ('tools/cutaway/sheet.py', 'tools/print/titleblock.py', 'tools/release/stamp.py', 'catalog/plates.json'):
             inputs[f] = sha(os.path.join(ISO, f))
+        if C.get('inset'):    # the context map: its cached extract and the tool that draws it
+            for f in (C['inset']['context'], 'tools/cutaway/context.py'):
+                inputs[f] = sha(os.path.join(ISO, f))
         return 'cutaway', recipe, scenes, inputs
     return None
 
