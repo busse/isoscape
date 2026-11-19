@@ -1124,7 +1124,9 @@ scale, and wayfinding labels under the plate that run past two lines push the se
 make room; a label may instead be set where the spec says (<code>label</code>), its leader leaving the
 nearest point of its box. A sheet may frame the plate closer (<code>isoView</code>, a box in the plate&#39;s
 own units), cutting what runs past it at the edge, and may say where its column must end
-(<code>columnEnd</code>), to keep room for the title block; Main Street&#39;s ends by 6,560 of the 7,200. A badge that would hide the part it names is set off it into clear space, with a thin
+(<code>columnEnd</code>), to keep room for the title block; Main Street&#39;s ends by 6,560 of the 7,200, and
+the Pump House&#39;s by 6,520, its spacing between callouts, groups and the key&#39;s rows tightened to
+get there (<code>column</code>). A badge that would hide the part it names is set off it into clear space, with a thin
 leader to a small dot on the part, drawn like the wayfinding labels&#39; leaders. Callout text is 54 pixels (13 pt; 9.7 pt on the 24 × 18 in print), and the smallest text
 on the sheet, the two-digit numbers in the badges on the drawings, is 40 pixels (9.6 pt; 7.2 pt
 at 24 × 18). There are no canvas files: a canvas&#39;s 1.5 in of mirrored wrap would carry the
@@ -1221,7 +1223,10 @@ height wide. Where the foot of a sheet is full (the two set sheets) it sits in t
 instead, and only if no place fits at full size is it shrunk, in steps of a tenth. On a canvas it
 goes on the face, never the wrap. A piece that is not a map can say what it is in one more
 line under the maker, at 28 units, about 7 pt on a 24 × 18 in sheet: the Broad Street cutaway&#39;s
-says &quot;Building cutaway&quot;. The plates themselves are listed in <code>catalog/plates.json</code>.</p>
+says &quot;Building cutaway&quot;. A long set name shrinks the collection › set › piece line to fit its
+cell; a sheet can ask for a floor instead, and the Pump House cutaway&#39;s line, which would print
+at under 5 pt on one line, goes on two at 6 pt on the 24 × 18 in print, every field kept. The
+plates themselves are listed in <code>catalog/plates.json</code>.</p>
 <h2 id="archive-and-explorer">Archive and explorer</h2>
 <p>Every build is kept under <code>out/builds/&lt;timestamp&gt;-&lt;name&gt;/</code> as the SVG, a thumbnail and a
 <code>meta.json</code>. The meta file records:</p>
@@ -1286,7 +1291,7 @@ of San Francisco (<a href="https://www.justinchavez.com/blog/isometric-sf-how/" 
 </main>
 <footer class="foot">
 <p>Maps by Chris Busse, drawn with isoscape, a free, open-source tool he built with Claude (see the <a href="../p/artist-statement.html">artist statement</a>), from OpenStreetMap and public elevation data. Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors (ODbL).</p>
-<p><a href="../index.html">Open the explorer</a> · <a href="../p/artist-statement.html">Artist statement</a> · <a href="../p/how-its-made.html">How it&#39;s made</a> · <a href="../p/world-landmarks.html">Landmarks around the world</a> · <a href="../p/streetcars.html">Richmond&#39;s streetcars, 1925</a> · <a href="../p/broad-street.html">Broad Street Station, 1943</a> · <a href="../p/broad-street-cutaway.html">Broad Street Station, 1943: the cutaway</a> · <a href="../p/main-street-cutaway.html">Main Street Station, about 1952: the cutaway</a> · <a href="../p/about.html">About, credits and licenses</a> · <a href="../p/data.html">Data</a> · <a href="../p/faq.html">Questions and answers</a> · <a href="../p/changes.html">Changes</a> · <a href="https://github.com/busse/isoscape">isoscape on GitHub</a></p>
+<p><a href="../index.html">Open the explorer</a> · <a href="../p/artist-statement.html">Artist statement</a> · <a href="../p/how-its-made.html">How it&#39;s made</a> · <a href="../p/world-landmarks.html">Landmarks around the world</a> · <a href="../p/streetcars.html">Richmond&#39;s streetcars, 1925</a> · <a href="../p/broad-street.html">Broad Street Station, 1943</a> · <a href="../p/broad-street-cutaway.html">Broad Street Station, 1943: the cutaway</a> · <a href="../p/main-street-cutaway.html">Main Street Station, about 1952: the cutaway</a> · <a href="../p/pump-house-cutaway.html">The New Pump-House, Richmond, about 1885: the cutaway</a> · <a href="../p/about.html">About, credits and licenses</a> · <a href="../p/data.html">Data</a> · <a href="../p/faq.html">Questions and answers</a> · <a href="../p/changes.html">Changes</a> · <a href="https://github.com/busse/isoscape">isoscape on GitHub</a></p>
 </footer>
 </body>
 </html>
