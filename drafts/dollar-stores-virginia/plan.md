@@ -83,5 +83,8 @@ Total about 10-15 sessions. Actuals go in effort.md.
 - Two versions: an "editorial reporting" poster (layout A, grid of plan-view maps first, with
   the charts and honesty panel) and a "simplified artistic" version, denser, with fewer and
   coarser elements per town.
-- Still open: grid count for each version, poster size and whether either is for the shop,
-  change over time.
+- Editorial grid: 20 towns, 5 regions x 4 size bands, seeded draw.
+- Artistic grid: every incorporated town and independent city (189 + 38), as small tiles
+  with the limits outline, the edge ring and the store marks.
+- Time: one chart of opening year (2006 on); the maps show today.
+- Both 24 x 36 in, editorial only for now.
