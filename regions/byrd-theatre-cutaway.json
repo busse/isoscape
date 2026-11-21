@@ -88,45 +88,85 @@
         {
           "s": -2.2,
           "floor": 67.25,
-          "facing": 1
+          "facing": 1,
+          "figure": "patron-hat"
         },
         {
           "s": 7.0,
           "floor": 67.55,
-          "facing": 1
+          "facing": 1,
+          "figure": "patron"
         },
         {
           "s": 24.8,
           "floor": 66.575,
-          "facing": 1
+          "facing": 1,
+          "figure": "patron"
+        },
+        {
+          "s": 32.31,
+          "floor": 66.65,
+          "facing": 1,
+          "figure": "seated"
         }
       ]
     },
     "travelers": [
       {
         "at": [
-          -77.47798496,
-          37.55226864
+          -77.47794441,
+          37.55225575
         ],
         "floor": 67.25,
-        "facing": 1
+        "facing": -1,
+        "figure": "patron-hat"
       },
       {
         "at": [
-          -77.47787131,
-          37.55230356
+          -77.47795407,
+          37.55225621
+        ],
+        "floor": 67.25,
+        "facing": 1,
+        "figure": "patron"
+      },
+      {
+        "at": [
+          -77.47789134,
+          37.55233886
         ],
         "floor": 67.55,
-        "facing": 1
+        "facing": 1,
+        "figure": "patron"
       },
       {
         "at": [
-          -77.47777552,
-          37.55245564
+          -77.47790313,
+          37.55245358
         ],
-        "floor": 66.575,
-        "facing": 1
+        "floor": 67.025,
+        "facing": 1,
+        "figure": "patron-hat"
+      },
+      {
+        "at": [
+          -77.47790069,
+          37.55245796
+        ],
+        "floor": 73.65,
+        "facing": 1,
+        "figure": "patron"
+      },
+      {
+        "at": [
+          -77.47779379,
+          37.55253643
+        ],
+        "floor": 66.65,
+        "facing": 1,
+        "figure": "seated"
       }
-    ]
+    ],
+    "order": "components"
   }
 }
