@@ -19,6 +19,8 @@ Raw downloads stay out of git. Each line: what, URL, date fetched, size, SHA-256
 | Geofabrik OpenStreetMap extract, Virginia | https://download.geofabrik.de/north-america/us/virginia/virginia-latest.osm.pbf | 2026-11-21 | 429,912,960 B | md5 fa4a5272b012447062f4c09ad078dc91 (matches Geofabrik's .md5) | ODbL |
 | The same, filtered on the Mac to drivable highways and the three chains' brand:wikidata (pyosmium BackReferenceWriter) | virginia-roads.osm.pbf | 2026-11-21 | 67,219,024 B | 11ab9f74eb1941a23f4ad01aa3a233eab85e50acfb29b159aa8f4e27316812f7 | ODbL |
 | NLCD 2021 impervious and descriptor, 20 editorial windows | MRLC WCS, as above | 2026-11-21 | 40 files | checksums in raw/nlcd-editorial20.sha256 on the Mac | Public domain |
+| NLCD 2021 impervious and descriptor, all 227 places | MRLC WCS | 2026-11-21 | 454 files, archive 34,313,690 B | raw/nlcd-all-places.sha256 on the Mac | Public domain |
+| NLCD 2001 impervious, all 227 places | MRLC WCS, coverage mrlc_download__NLCD_2001_Impervious_L48 | 2026-11-21 | 227 files, archive 21,596,149 B | raw/nlcd2001-all-places.sha256 on the Mac | Public domain |
 | Planning district membership | https://www.vapdc.org/pdc-directory (opened, not downloaded) | 2026-11-21 | | | Facts, used in regions.json |
 
 Raw files are kept on the Mac in `ISO-TEST/isoscape-work/dollar-stores/raw/`.

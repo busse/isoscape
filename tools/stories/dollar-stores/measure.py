@@ -172,7 +172,8 @@ def main():
             _, _, sc = score(area, center, p)
             _, _, sc2 = score(areas["loose"], center, p)
             _, _, sc3 = score(areas["lead"], center, p)
-            null.append({"A": sc, "A_loose": sc2, "A_lead": sc3, "B": line_b(p, place, ua)})
+            null.append({"x": p.x, "y": p.y,
+                         "A": sc, "A_loose": sc2, "A_lead": sc3, "B": line_b(p, place, ua)})
         pd.DataFrame(null).to_csv(f"{d}/null.csv", index=False)
 
         # OSM points of the three chains against the nearest SNAP point of the same chain

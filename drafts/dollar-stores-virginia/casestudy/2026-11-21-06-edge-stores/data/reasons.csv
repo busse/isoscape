@@ -1,0 +1,34 @@
+reason,group,k,n,share,ci_low,ci_high,verdict_vs_random
+1 Road into town,Three chains,16.0,48,0.333,0.217,0.475,cannot tell
+1 Road into town,Dollar General,13.0,34,0.382,0.239,0.55,supported
+1 Road into town,Random road points,456.0,1920,0.237,0.219,0.257,
+1 Road into town,Supermarkets and groceries,3.0,28,0.107,0.037,0.272,
+1 Road into town,Convenience stores,28.0,106,0.264,0.19,0.355,
+2 Crossroads,Three chains,9.0,48,0.188,0.102,0.319,supported
+2 Crossroads,Dollar General,7.0,34,0.206,0.103,0.368,supported
+2 Crossroads,Random road points,96.0,1920,0.05,0.041,0.061,
+2 Crossroads,Supermarkets and groceries,4.0,28,0.143,0.057,0.315,
+2 Crossroads,Convenience stores,14.0,106,0.132,0.08,0.21,
+3 Outside town limits,Three chains,31.0,48,0.646,0.504,0.766,contradicted
+3 Outside town limits,Dollar General,22.0,34,0.647,0.479,0.785,contradicted
+3 Outside town limits,Random road points,1645.0,1920,0.857,0.84,0.872,
+3 Outside town limits,Supermarkets and groceries,13.0,28,0.464,0.295,0.642,
+3 Outside town limits,Convenience stores,81.0,106,0.764,0.675,0.835,
+4 Built on open land after 2001,Three chains,4.0,48,0.083,0.033,0.196,supported
+4 Built on open land after 2001,Dollar General,1.0,34,0.029,0.005,0.149,cannot tell
+4 Built on open land after 2001,Random road points,28.0,1920,0.015,0.01,0.021,
+4 Built on open land after 2001,Supermarkets and groceries,7.0,28,0.25,0.127,0.434,
+4 Built on open land after 2001,Convenience stores,5.0,106,0.047,0.02,0.106,
+6 Other side of town from the supermarket,Three chains,6.0,48,0.125,0.059,0.247,contradicted
+6 Other side of town from the supermarket,Dollar General,6.0,34,0.176,0.083,0.335,cannot tell
+6 Other side of town from the supermarket,Random road points,475.0,1920,0.247,0.229,0.267,
+6 Other side of town from the supermarket,Supermarkets and groceries,1.0,28,0.036,0.006,0.177,
+6 Other side of town from the supermarket,Convenience stores,16.0,106,0.151,0.095,0.231,
+5 Reaching people outside town (mean share),Three chains,,48,0.529,0.452,0.606,cannot tell
+5 Reaching people outside town (mean share),Dollar General,,34,0.547,0.459,0.634,cannot tell
+5 Reaching people outside town (mean share),Random road points,,1918,0.526,0.513,0.538,
+5 Reaching people outside town (mean share),Supermarkets and groceries,,28,0.387,0.283,0.49,
+5 Reaching people outside town (mean share),Convenience stores,,106,0.533,0.478,0.588,
+7 Authorized after 2005,"Dollar General, edge",25.0,34,0.735,0.569,0.854,
+7 Authorized after 2005,"Dollar General, in town",122.0,264,0.462,0.403,0.522,
+7 Authorized after 2005,"Dollar General, between places",36.0,41,0.878,0.745,0.947,

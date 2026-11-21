@@ -168,3 +168,28 @@ Folder: `2026-11-21-05-editorial-20/`, with `findings.md`.
   result and was rewritten.
 - **Open.** Two calls are still waiting on Chris: the region grouping, and the Hartfield label
   round.
+
+## Step 6: why are the edge stores where they are? (12:40-12:59)
+
+Folder: `2026-11-21-06-edge-stores/`, with `hypotheses.md` (written first) and `findings.md`.
+
+- **Chris's direction (12:40).** He left the region grouping to Claude. He approved round 4
+  for the Hartfield label, which is done. He asked to focus the editorial on the edge stores:
+  "why are the edge ones where they are?"
+- **Hypotheses first.** Seven reasons and their tests were written at 12:45, before any edge
+  store statewide was scored.
+- **Scope.**
+  - Scored all 227 Virginia towns and cities. NLCD 2001 and 2021 were fetched on the Mac in
+    parallel and brought across as two archives.
+  - 34 Dollar General stores sit at the edge band.
+- **Results.**
+  - Edge Dollar General stores are four times as likely as random edge sites to sit at a
+    junction of state routes.
+  - They are a little more likely to be on the road into town.
+  - They are less likely to be outside the town limits.
+  - They are newer than in-town stores.
+  - Open land, rural reach and the far side from the supermarket: the data cannot tell.
+  - Split after the fact into towns and cities: in towns the pattern is strong (18 stores).
+- **Fixes.**
+  - A snapping bug in the 5 km reach was fixed and rerun; the run-1 output is kept.
+  - The first chart title overstated what the data says about land, and was rewritten.

@@ -44,7 +44,11 @@ def main():
     for t in slugs:
         m = json.load(open(f"{work}/{t}/meta.json"))
         own = gpd.read_file(f"{work}/{t}/place.gpkg")["GEOID"].iloc[0]
-        s = pd.read_csv(f"{work}/{t}/scores.csv").assign(town=t)
+        try:
+            s = pd.read_csv(f"{work}/{t}/scores.csv").assign(town=t)
+        except pd.errors.EmptyDataError:  # no stores of these kinds within the window
+            metas[t] = m
+            continue
         g = gpd.GeoDataFrame(s, geometry=gpd.points_from_xy(s.x, s.y), crs=32617)
         j = gpd.sjoin(g, places[places.GEOID != own], how="left", predicate="within")
         j = j[~j.index.duplicated()]

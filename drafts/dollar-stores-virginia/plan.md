@@ -100,3 +100,6 @@ Total about 10-15 sessions. Actuals go in effort.md.
 - Owner's choice, added to the editorial grid and labeled as such: Mathews County and
   Middlesex County (no town there fits the rule). Shown store first: each Dollar General's
   catchment by road and its population center (`tools/stories/dollar-stores/catchment.py`).
+- Region grouping: Chris left it to Claude (12:40); kept as drawn (Piedmont joined to Southside).
+- Editorial focus (Chris, 12:40): the edge-of-town stores, and why they are where they are.
+  Non-edge stores are context only.
