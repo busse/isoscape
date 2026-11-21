@@ -41,6 +41,10 @@ CRS = 32617
 # lead:   the loose edge plus any block whose mean impervious cover is 20 percent or more, the
 #         Census's impervious test for urban cores
 SETTINGS = {"strict": (164.1, 200, None), "loose": (77.2, 400, None), "lead": (77.2, 400, 20)}
+# MEASURE_FAST=1 (replication states): the strict and loose edges are copies of the lead edge, so
+# only the lead edge is traced. None of the replication tests use strict or loose. Saves about
+# two thirds of the run time on two processors.
+FAST = os.environ.get("MEASURE_FAST") == "1"
 RAY_M = 20000
 NULL_N = 4000
 SEED = 20261121
@@ -132,7 +136,11 @@ def main():
         w = inside["POP20"].astype(float)
         c = inside.geometry.centroid
         center = Point((c.x * w).sum() / w.sum(), (c.y * w).sum() / w.sum())
-        areas = {k: builtup(blocks, center, *v) for k, v in SETTINGS.items()}
+        if FAST:
+            lead_area = builtup(blocks, center, *SETTINGS["lead"])
+            areas = {"strict": lead_area, "loose": lead_area, "lead": lead_area}
+        else:
+            areas = {k: builtup(blocks, center, *v) for k, v in SETTINGS.items()}
         # Rule (set 2026-11-21, before store results were read): a town whose built-up area is
         # under 1 km2 (fewer than ~200 homes per sq mi anywhere) takes its legal limits as part
         # of its edge, so the edge is never smaller than the town.
@@ -145,9 +153,12 @@ def main():
 
         rows = []
         for _, s in stores.iterrows():
-            dist, edge, sc = score(area, center, s.geometry)
-            _, edge2, sc2 = score(areas["loose"], center, s.geometry)
-            _, edge3, sc3 = score(areas["lead"], center, s.geometry)
+            dist, edge3, sc3 = score(areas["lead"], center, s.geometry)
+            if FAST:
+                edge, sc, edge2, sc2 = edge3, sc3, edge3, sc3
+            else:
+                _, edge, sc = score(area, center, s.geometry)
+                _, edge2, sc2 = score(areas["loose"], center, s.geometry)
             rows.append({"id": s["Record ID"], "name": s["Store Name"].strip(), "kind": s["kind"],
                          "address": f'{s["Street Number"]} {s["Street Name"]}'.strip(),
                          "auth_year": pd.Timestamp(s["auth"]).year,
@@ -169,9 +180,12 @@ def main():
         null = []
         for i in pick:
             p = lines[i].interpolate(rng.uniform(0, lines[i].length))
-            _, _, sc = score(area, center, p)
-            _, _, sc2 = score(areas["loose"], center, p)
             _, _, sc3 = score(areas["lead"], center, p)
+            if FAST:
+                sc = sc2 = sc3
+            else:
+                _, _, sc = score(area, center, p)
+                _, _, sc2 = score(areas["loose"], center, p)
             null.append({"x": p.x, "y": p.y,
                          "A": sc, "A_loose": sc2, "A_lead": sc3, "B": line_b(p, place, ua)})
         pd.DataFrame(null).to_csv(f"{d}/null.csv", index=False)

@@ -1,6 +1,9 @@
 """Cut town windows out of a filtered Virginia OSM file into Overpass-style JSON.
 
-Usage: python3 osm_extract.py <virginia-roads.osm.pbf> <bboxes.txt> <out-dir>
+Usage: python3 osm_extract.py <virginia-roads.osm.pbf> <bboxes.txt> <out-dir> [batch]
+
+Windows are written in batches (default 60 per pass over the file): holding all of
+Virginia's 461 CDP windows at once ran out of memory on the first try.
 
 The input is Geofabrik's Virginia extract filtered on the Mac to drivable highways and the
 three chains' brand:wikidata tags (filter recorded in sources.md). bboxes.txt lines are
@@ -18,12 +21,20 @@ CHAINS = ("Q145168", "Q5433101", "Q5289230")
 
 def main():
     src, boxes, out = sys.argv[1:4]
+    batch = int(sys.argv[4]) if len(sys.argv) > 4 else 60
     os.makedirs(out, exist_ok=True)
-    wins = []
+    allw = []
     for line in open(boxes):
         slug, bb = line.split()[:2]
+        if os.path.exists(f"{out}/{slug}.json"):
+            continue
         s, w, n, e = map(float, bb.split(","))
-        wins.append((slug, s, w, n, e, []))
+        allw.append((slug, s, w, n, e))
+    for i in range(0, len(allw), batch):
+        run(src, [(*x, []) for x in allw[i:i + batch]], out)
+
+
+def run(src, wins, out):
     fp = osmium.FileProcessor(src).with_locations()
     for o in fp:
         if o.is_way():
