@@ -9,10 +9,11 @@ unlisted: true
 
 Every piece of work on isoscape, from a first look at a subject to a print for sale, moves through the same stages: rough draft, working draft, final draft and final production. A version number in a print's title block is given only at final production, and names an edition someone could own. Before that, work is counted in draft rounds (d1, d2) and release candidates (rc1, rc2). The rules are in [Changes](changes.md#how-versions-work-from-here) and [How it's made](how-its-made.md#stages-and-inspection).
 
-This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 19, 2026. The page and the board were set up with Claude.
+This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 21, 2026. The page and the board were set up with Claude.
 
 | Stage | Entries |
 |---|---|
+| research | 1 |
 | working draft | 1 |
 | final production | 45 |
 | owner test | 1 |
@@ -25,6 +26,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: built and tested in Chrome's phone emulation only (branch fix/mobile-overflow, 65fafe7; not merged, not pushed). The owner will test it on his iPhone later: say the word and it is merged and pushed for that test. Check: no horizontal bar or sideways drift on #/jackson-ward and p/jackson-ward.html; a slider's sideways drag and tap move the divider and a vertical swipe scrolls; the label tab stays whole at both edges; tables and the FAQ's code block scroll in their own box; lightbox buttons are easy to hit. Notes: /mnt/user-data/outputs/explorer/mobile-overflow/fix.md
 - **The Byrd Theatre: Cutaway**: owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead
+
+## Research
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Data visualization: why is there a Dollar General on the edge of town? (Virginia) | story | — | no |
 
 ## Working draft
 
