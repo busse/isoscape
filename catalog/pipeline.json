@@ -3041,12 +3041,12 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "nothing",
-   "decision": "second in order; begins after Jackson Ward's working draft",
+   "waiting_on": "agent",
+   "decision": "started 2026-11-21 (Jackson Ward is in outside review): an outline and a rough draft of the hero image (the 1937 city in four tints) plus two more rough images, on branch story-redlining; local preview to ISO-TEST/_preview/redlining/. Mapping Inequality polygons are CC BY-NC: editorial only, never prints. Review by others before publication.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
-   "branch": null,
+   "branch": "story-redlining",
    "worktree": null,
    "links": [
     "/mnt/user-data/outputs/stories/redlining/brief.md"
