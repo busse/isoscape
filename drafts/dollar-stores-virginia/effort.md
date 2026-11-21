@@ -25,5 +25,5 @@ owner's go-ahead to a delivered preview.
 | Date | Lines | Wall clock | Tool calls | Delivered | Left undone |
 |---|---|---|---|---|---|
 | 2026-11-21 | plan | 11:12-11:25 | ~30 | plan.md, sources.md, first SNAP counts, owner decisions | none |
-| 2026-11-21 | 2 (edge test), part of 1 | 11:25-11:50 | ~45 | prep.py, measure.py, test_maps.py; three test maps and the score chart; findings-edge-test.md; sources.md with checksums | impervious cover not yet added; null model window to tighten |
-| 2026-11-21 | 3 (lead edge), editorial draw (part of 4), case-study record | 11:45-12:20 | ~40 | case-study folder and rule; impervious edge in two rounds; regions.json, draw.py, the 20 towns | full analysis of the 20 towns |
+| 2026-11-21 | 2 (edge test), part of 1 | 11:25-11:45 | ~45 | prep.py, measure.py, test_maps.py; three test maps and the score chart; findings-edge-test.md; sources.md with checksums | impervious cover not yet added; null model window to tighten |
+| 2026-11-21 | 3 (lead edge), editorial draw (part of 4), case-study record | 11:45-11:52 | ~40 | case-study folder and rule; impervious edge in two rounds; regions.json, draw.py, the 20 towns | full analysis of the 20 towns |

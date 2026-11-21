@@ -43,7 +43,7 @@ Folder: `2026-11-21-01-plan/`.
   - 24 x 36 in, editorial only for now.
 - Result: `plan-after-decisions.md`.
 
-## Step 2: the edge-of-town test (11:25-11:50)
+## Step 2: the edge-of-town test (11:25-11:45)
 
 Folder: `2026-11-21-02-edge-test/`.
 
@@ -102,7 +102,7 @@ Preserve all work as it goes, for case studies: every render and chart that was 
 looked at, every round (never overwritten), notes, questions with answers, decisions, dead
 ends and timings. Written into CLAUDE.md as "Keep the case-study record".
 
-## Step 3: the lead edge and the editorial draw (11:45-12:20)
+## Step 3: the lead edge and the editorial draw (11:45-11:52)
 
 Folder: `2026-11-21-03-lead-edge-and-draw/`, with its own `notes.md`.
 

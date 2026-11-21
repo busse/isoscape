@@ -1,4 +1,4 @@
-# Step 3: the lead edge and the editorial draw (November 21, 11:45-12:20)
+# Step 3: the lead edge and the editorial draw (November 21, 11:45-11:52)
 
 ## The lead edge: homes plus paved land
 
