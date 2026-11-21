@@ -419,6 +419,17 @@ def main():
         y = max(col_y)
         if SHEET_COLS[0] is None:
             SHEET_COLS[0] = col_y
+    # Room names set in a flat section (`drawingLabels`: `in`, the drawing's key; `s` and
+    # `elevation`, the label's middle; `text`), in small capitals, light on the dark section.
+    for lb in spec.get('drawingLabels', []):
+        for where, anchors, frame, place_ in drawings:
+            if where != lb['in'] or frame is None:
+                continue
+            ox, oy, sc = place_
+            p = anchor(lb, anchors, frame)
+            px_ = lb.get('px', 36)
+            for i, ln in enumerate(lb['text'].upper().split('|')):
+                out.append(text(ox + p[0] * sc, oy + p[1] * sc + px_ * 0.35 + i * px_ * 1.25, ln, px_, 'bold', PAPER, 'middle', SANS, 2))
     # Wayfinding: where the trains and streetcars went, in the plate's margins, each with a
     # leader to the track end or the street it belongs to.
     for wf in spec.get('wayfinding', []):

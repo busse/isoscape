@@ -771,10 +771,15 @@ released sheets'); the Pump House sheet uses it to end its column by 6,520 and f
 A spec may also set `theme` (`"holiday"`: accents from `SHEET_THEMES` in `src/palette.ts`, a
 border with holly at the corners; margins only), `halo` (leaders drawn over a paper halo, for a
 dark plate), `mapData: false` (no OpenStreetMap credit in the drawing's metadata, for a plate
-drawn without its data), `keyNote` (the line under the key), and `layout` (`isoHeight`,
-`isoAlign: "left"`, `bottom`, `sectionW`, `key: {x, y, w}` to set the key in a block of its
-own, and `notes: {x, y, w}` to set the sources and notes beside the section, or under the key
-when `y` is left out). A callout may name a list of anchors in one drawing. A wayfinding label can stand `inside-left-above` or `inside-left-below` the place it
+drawn without its data), and `layout` (`isoHeight`, `isoAlign: "left"`, `bottom`, `sectionW`,
+`key: {x, y, w}` to set the key in a block of its own, or `key: {column}` to set it under a
+callout column, and `notes: {x, y, w}` to set the sources and notes beside the section, or under
+the key when `y` is left out, with `cols`, `gap` and `px` to run them in columns at their own
+size). For a sheet with many callouts, `layout.iso` and `layout.sections` (`[x, y, w, h]`) set
+the plate and the flat sections in boxes of their own, `layout.columns` (`[[x, w], ...]`) sets
+the callouts in columns, each group in the one its `column` names, and `layout.body` sets the
+callout text's size. `drawingLabels` (`in`, `s`, `elevation`, `text`, `px`) names rooms inside a
+flat section in small capitals. A callout may name a list of anchors in one drawing. A wayfinding label can stand `inside-left-above` or `inside-left-below` the place it
 points to on the plate's left edge, or `below` the plate, and be nudged by `offset`.
 
 `--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):

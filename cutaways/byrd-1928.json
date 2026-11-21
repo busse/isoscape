@@ -354,9 +354,6 @@
           },
           "section": {
             "part": "history:byrd-c-stage-floor"
-          },
-          "cross": {
-            "part": "history:byrd-c-stage-floor"
           }
         },
         {
@@ -401,7 +398,7 @@
       330,
       4420,
       5200,
-      1800
+      1740
     ],
     "columns": [
       [
@@ -421,7 +418,7 @@
     },
     "notes": {
       "x": 330,
-      "y": 6450,
+      "y": 6390,
       "w": 5200,
       "cols": 3,
       "gap": 140,
@@ -494,5 +491,63 @@
   "column": {
     "head": 150,
     "callout": 44
-  }
+  },
+  "drawingLabels": [
+    {
+      "in": "cross",
+      "s": -8.6,
+      "elevation": 65.65,
+      "text": "Coal room",
+      "px": 36
+    },
+    {
+      "in": "cross",
+      "s": -1.1,
+      "elevation": 66.35,
+      "text": "Boiler",
+      "px": 36
+    },
+    {
+      "in": "cross",
+      "s": 7.7,
+      "elevation": 65.55,
+      "text": "Spring room",
+      "px": 36
+    },
+    {
+      "in": "cross",
+      "s": -5.0,
+      "elevation": 71.75,
+      "text": "The stage",
+      "px": 36
+    },
+    {
+      "in": "cross",
+      "s": -10.95,
+      "elevation": 83.25,
+      "text": "Relay",
+      "px": 34
+    },
+    {
+      "in": "cross",
+      "s": -3.2,
+      "elevation": 83.3,
+      "text": "Main",
+      "px": 36
+    },
+    {
+      "in": "cross",
+      "s": 6.2,
+      "elevation": 83.3,
+      "text": "Solo",
+      "px": 36
+    },
+    {
+      "in": "cross",
+      "s": 10.9,
+      "elevation": 83.25,
+      "text": "Blower",
+      "px": 34
+    }
+  ]
 }

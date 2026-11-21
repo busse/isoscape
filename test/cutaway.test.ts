@@ -201,3 +201,19 @@ test('a piece of a hipped roof keeps the whole roof\'s slopes', async () => {
   assert.ok(Math.abs(top(west) - 6) < 1e-6)
   assert.equal(west.faces.filter((f) => f.role === 'cut').length, 0)
 })
+
+test('the 1928 patrons stand at the stated height, hats aside; the seated figure is lower and reaches forward', async () => {
+  const { travelerShapes } = await import('../src/traveler.ts')
+  const top = (f: Parameters<typeof travelerShapes>[1]) => Math.max(...travelerShapes(1.75, f).flat().map((p) => p[1]))
+  const front = (f: Parameters<typeof travelerShapes>[1]) => Math.max(...travelerShapes(1.75, f).flat().map((p) => p[0]))
+  assert.ok(Math.abs(top('visitor') - 1.75) < 0.01)
+  // The cloche sits on the head; the brimmed hat stands a little above it.
+  assert.ok(top('patron') > 1.75 && top('patron') < 1.8)
+  assert.ok(top('patron-hat') > 1.8 && top('patron-hat') < 1.86)
+  // Every figure stands on the floor.
+  for (const f of ['patron', 'patron-hat', 'seated'] as const) {
+    assert.ok(Math.abs(Math.min(...travelerShapes(1.75, f).flat().map((p) => p[1]))) < 1e-9, f)
+  }
+  assert.ok(top('seated') < 1.5)
+  assert.ok(front('seated') > 0.35)
+})
