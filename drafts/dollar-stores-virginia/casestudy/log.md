@@ -101,3 +101,28 @@ Folder: `2026-11-21-02-edge-test/`.
 Preserve all work as it goes, for case studies: every render and chart that was shown or
 looked at, every round (never overwritten), notes, questions with answers, decisions, dead
 ends and timings. Written into CLAUDE.md as "Keep the case-study record".
+
+## Step 3: the lead edge and the editorial draw (11:45-12:20)
+
+Folder: `2026-11-21-03-lead-edge-and-draw/`, with its own `notes.md`.
+
+- **The record.**
+  - Set up this case-study record. Wrote the standing rule into CLAUDE.md.
+  - Unpushed commits are kept on the Mac as a git bundle, because the cloud workspace does
+    not last: `ISO-TEST/isoscape-work/dollar-stores/viz-dollar-stores-virginia.bundle`.
+- **Impervious cover, round 1.**
+  - NLCD 2021 impervious chained Marion's built-up area 10 km along I-81. Kept as round 1.
+- **Impervious cover, round 2.**
+  - Non-road impervious only, using NLCD's descriptor class 24, which the NLCD legend
+    confirms.
+  - All supermarkets and pharmacies are now in town.
+  - Dollar General splits the same way as before: six in town, four between towns, none at
+    the edge.
+- **Regions.**
+  - Regions are groups of planning district commissions, from the VAPDC directory.
+  - The central Piedmont, missing from the handoff's five regions, was joined to Southside.
+    To show Chris.
+- **The draw.**
+  - Seeded draw of 20 towns.
+  - One empty cell, the coastal region at 10,000 or more, was filled statewide by the rule
+    written before the draw: Leesburg.

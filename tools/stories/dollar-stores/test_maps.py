@@ -60,8 +60,8 @@ def town_map(d, slug, out):
         sel = b[(b["hu"] >= lo) & (b["hu"] < hi)]
         if len(sel):
             sel.plot(ax=ax, color=c, linewidth=0)
-    built[built["setting"] == "loose"].plot(ax=ax, color=BLUE_FILL, alpha=0.75, linewidth=0)
-    built[built["setting"] == "strict"].boundary.plot(ax=ax, color=BLUE, linewidth=1.6)
+    built[built["setting"] == "lead"].plot(ax=ax, color=BLUE_FILL, alpha=0.75, linewidth=0)
+    built[built["setting"] == "loose"].boundary.plot(ax=ax, color=BLUE, linewidth=1.6)
     minor = roads[~roads["highway"].isin(MAIN)]
     major = roads[roads["highway"].isin(MAIN)]
     minor.plot(ax=ax, color=ROAD, linewidth=0.5)
@@ -81,7 +81,7 @@ def town_map(d, slug, out):
                    linewidths=1.8, zorder=6)
         for _, r in o.iterrows():
             if abs(r.x - cx) < HALF - 600 and abs(r.y - cy) < HALF - 400:
-                ax.annotate(f'A {r.A_loose:.1f} · {r.A:.1f}', (r.x, r.y), xytext=(9, -3),
+                ax.annotate(f'A {r.A_lead:.1f} · {r.A_loose:.1f}', (r.x, r.y), xytext=(9, -3),
                             textcoords="offset points", fontsize=7.5, color=INK, zorder=7,
                             bbox=dict(boxstyle="round,pad=0.15", fc=SURFACE, ec="none", alpha=0.85))
     ax.set_xlim(cx - HALF, cx + HALF)
@@ -101,7 +101,7 @@ def town_map(d, slug, out):
     ax.set_title(f"{name.replace(' town', '')}, Virginia", loc="left", fontsize=14,
                  fontweight="bold", pad=22)
     ax.text(0, 1.012, f'{meta["pop_in_limits"]:,} people in the town limits (2020). '
-            f'Built-up area: strict {meta["builtup_km2"]["strict"]} km², loose {meta["builtup_km2"]["loose"]} km². '
+            f'Built-up area: homes + paved {meta["builtup_km2"]["lead"]} km², homes only {meta["builtup_km2"]["loose"]} km². '
             f'Urban area: {", ".join(meta["ua"]) if meta["ua"] else "none"}.',
             transform=ax.transAxes, fontsize=7.5, color=INK2)
     handles = [
@@ -114,15 +114,15 @@ def town_map(d, slug, out):
         Line2D([], [], marker="+", ls="", color=INK, ms=10, mew=2, label="Population-weighted center"),
         Line2D([], [], color=INK, lw=1.4, label="Town limits (2024)"),
         Line2D([], [], color=INK2, lw=1.0, ls=(0, (5, 3)), label="Census urban area (2020)"),
-        Line2D([], [], color=BLUE, lw=1.6, label="Built-up edge, strict"),
-        Patch(fc=BLUE_FILL, ec="none", label="Built-up area, loose"),
+        Line2D([], [], color=BLUE, lw=1.6, label="Built-up edge, homes only"),
+        Patch(fc=BLUE_FILL, ec="none", label="Built-up area, homes + paved"),
         Patch(fc=GRAYS[2], ec="none", label="425+ homes per sq mi"),
         Patch(fc=GRAYS[1], ec="none", label="200-425 homes per sq mi"),
     ]
     fig.legend(handles=handles, loc="lower center", ncol=4, fontsize=7.2, frameon=False,
                bbox_to_anchor=(0.5, 0.045))
-    fig.text(0.02, 0.012, "Labels: score A loose · strict (0 center, 1 built-up edge, above 1 beyond it). "
-             "Stores: USDA SNAP retailers authorized as of 2025. Blocks: Census 2020. Roads: © OpenStreetMap contributors (ODbL). "
+    fig.text(0.02, 0.012, "Labels: score A homes + paved · homes only (0 center, 1 built-up edge, above 1 beyond it). "
+             "Stores: USDA SNAP retailers authorized as of 2025. Blocks: Census 2020. Non-road impervious: NLCD 2021. Roads: © OpenStreetMap contributors (ODbL). "
              "Research draft made with Claude, not affiliated with any company named.",
              fontsize=6.3, color=INK2, wrap=True)
     fig.subplots_adjust(left=0.02, right=0.98, top=0.92, bottom=0.17)
@@ -142,8 +142,8 @@ def score_chart(work, slugs, out):
     fig.patch.set_facecolor(SURFACE)
     cap = 8
     rng = np.random.default_rng(1)
-    for ax, col, title in [(axes[0], "A_loose", "Loose edge (200 homes per sq mi)"),
-                           (axes[1], "A", "Strict edge (425 homes per sq mi)")]:
+    for ax, col, title in [(axes[0], "A_lead", "Homes + paved (200 homes per sq mi or 20% impervious)"),
+                           (axes[1], "A_loose", "Homes only (200 homes per sq mi)")]:
         ax.set_facecolor(SURFACE)
         ylab = ["Random main-road points"] + [LABEL.get(r, r) for r in ROWS][::-1]
         q = np.clip(null[col].quantile([0.1, 0.25, 0.5, 0.75, 0.9]).values, 0, cap)

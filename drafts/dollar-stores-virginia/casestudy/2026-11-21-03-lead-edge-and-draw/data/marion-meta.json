@@ -1,0 +1,35 @@
+{
+ "center": [
+  453862.0611021862,
+  4076910.2875204748
+ ],
+ "pop_in_limits": 5751,
+ "builtup_km2": {
+  "strict": 5.16,
+  "loose": 11.88,
+  "lead": 13.5
+ },
+ "limits_km2": 12.52,
+ "ua": [
+  "Marion, VA"
+ ],
+ "settings": {
+  "strict": [
+   164.1,
+   200,
+   null
+  ],
+  "loose": [
+   77.2,
+   400,
+   null
+  ],
+  "lead": [
+   77.2,
+   400,
+   20
+  ]
+ },
+ "null_n": 4000,
+ "seed": 20261121
+}

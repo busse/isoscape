@@ -1,6 +1,11 @@
 """Edge-of-town measures A and B for each town prepared by prep.py.
 
-Usage: python3 measure.py <work-dir> <osm-dir> <town-slug> [...]
+Usage: python3 measure.py <work-dir> <osm-dir> <nlcd-dir> <town-slug> [...]
+
+<nlcd-dir> holds imperv2021-<slug>.tif (NLCD 2021 percent impervious) and impdesc2021-<slug>.tif
+(its descriptor), clipped to the town's window (EPSG:5070). Only non-road impervious counts
+(descriptor class 24, "non-road non-energy"): with roads in, an interstate's own blocks chain
+the built-up area for kilometers along the corridor (Marion, first try).
 
 A, relative radius
   center   population-weighted mean of 2020 block centroids inside the town limits
@@ -22,6 +27,8 @@ import os
 import sys
 
 import geopandas as gpd
+import rasterio
+from rasterstats import zonal_stats
 import numpy as np
 import pandas as pd
 from shapely.geometry import LineString, Point
@@ -31,18 +38,24 @@ CRS = 32617
 # Two settings of the built-up edge, to show how much the answer leans on the choice.
 # strict: 425 housing units per square mile (164.1 per km2), the 2020 urban-area core threshold
 # loose:  200 housing units per square mile (77.2 per km2), closed over wider gaps
-SETTINGS = {"strict": (164.1, 200), "loose": (77.2, 400)}
+# lead:   the loose edge plus any block whose mean impervious cover is 20 percent or more, the
+#         Census's impervious test for urban cores
+SETTINGS = {"strict": (164.1, 200, None), "loose": (77.2, 400, None), "lead": (77.2, 400, 20)}
 RAY_M = 20000
 NULL_N = 4000
 SEED = 20261121
 NULL_ROADS = {"trunk", "primary", "secondary", "tertiary", "trunk_link", "primary_link"}
+NONROAD = 24  # NLCD impervious descriptor: non-road non-energy impervious
 CHAIN_IDS = {"Q145168": "Dollar General", "Q5433101": "Family Dollar", "Q5289230": "Dollar Tree"}
 
 
-def builtup(blocks, center, density, close_m):
+def builtup(blocks, center, density, close_m, imperv_min):
     b = blocks[blocks["ALAND20"] > 0].copy()
     b["hu_km2"] = b["HOUSING20"].astype(float) / (b["ALAND20"].astype(float) / 1e6)
-    dense = unary_union(b[b["hu_km2"] >= density].geometry.buffer(0))
+    keep_b = b["hu_km2"] >= density
+    if imperv_min is not None:
+        keep_b |= b["imperv"].fillna(0) >= imperv_min
+    dense = unary_union(b[keep_b].geometry.buffer(0))
     closed = dense.buffer(close_m).buffer(-close_m)
     parts = list(getattr(closed, "geoms", [closed]))
     keep = [g for g in parts if g.contains(center)]
@@ -98,12 +111,19 @@ def osm_layers(path):
 
 
 def main():
-    work, osm_dir, slugs = sys.argv[1], sys.argv[2], sys.argv[3:]
+    work, osm_dir, nlcd_dir, slugs = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4:]
     rng = np.random.default_rng(SEED)
     for slug in slugs:
         d = os.path.join(work, slug)
         place = gpd.read_file(f"{d}/place.gpkg").geometry.iloc[0]
         blocks = gpd.read_file(f"{d}/blocks.gpkg")
+        with rasterio.open(f"{nlcd_dir}/imperv2021-{slug}.tif") as r:
+            imp, aff = r.read(1).astype("float32"), r.transform
+        with rasterio.open(f"{nlcd_dir}/impdesc2021-{slug}.tif") as r:
+            desc = r.read(1)
+        imp[(imp > 100) | (desc != NONROAD)] = 0
+        zs = zonal_stats(blocks.to_crs(5070), imp, affine=aff, stats=["mean"], nodata=-1)
+        blocks["imperv"] = [z["mean"] for z in zs]
         uag = gpd.read_file(f"{d}/ua.gpkg")
         ua = unary_union(uag.geometry) if len(uag) else None
         stores = gpd.read_file(f"{d}/stores.gpkg")
@@ -120,12 +140,14 @@ def main():
         for _, s in stores.iterrows():
             dist, edge, sc = score(area, center, s.geometry)
             _, edge2, sc2 = score(areas["loose"], center, s.geometry)
+            _, edge3, sc3 = score(areas["lead"], center, s.geometry)
             rows.append({"id": s["Record ID"], "name": s["Store Name"].strip(), "kind": s["kind"],
                          "address": f'{s["Street Number"]} {s["Street Name"]}'.strip(),
                          "auth_year": pd.Timestamp(s["auth"]).year,
                          "x": s.geometry.x, "y": s.geometry.y, "dist_m": round(dist),
                          "edge_m": round(edge), "A": round(sc, 2),
                          "edge_loose_m": round(edge2), "A_loose": round(sc2, 2),
+                         "edge_lead_m": round(edge3), "A_lead": round(sc3, 2),
                          "B": line_b(s.geometry, place, ua)})
         pd.DataFrame(rows).to_csv(f"{d}/scores.csv", index=False)
 
@@ -142,7 +164,8 @@ def main():
             p = lines[i].interpolate(rng.uniform(0, lines[i].length))
             _, _, sc = score(area, center, p)
             _, _, sc2 = score(areas["loose"], center, p)
-            null.append({"A": sc, "A_loose": sc2, "B": line_b(p, place, ua)})
+            _, _, sc3 = score(areas["lead"], center, p)
+            null.append({"A": sc, "A_loose": sc2, "A_lead": sc3, "B": line_b(p, place, ua)})
         pd.DataFrame(null).to_csv(f"{d}/null.csv", index=False)
 
         # OSM points of the three chains against the nearest SNAP point of the same chain

@@ -1,0 +1,33 @@
+{
+ "center": [
+  726466.5931934814,
+  4075576.5186873665
+ ],
+ "pop_in_limits": 2053,
+ "builtup_km2": {
+  "strict": 3.63,
+  "loose": 4.56,
+  "lead": 5.01
+ },
+ "limits_km2": 5.67,
+ "ua": null,
+ "settings": {
+  "strict": [
+   164.1,
+   200,
+   null
+  ],
+  "loose": [
+   77.2,
+   400,
+   null
+  ],
+  "lead": [
+   77.2,
+   400,
+   20
+  ]
+ },
+ "null_n": 4000,
+ "seed": 20261121
+}

@@ -88,3 +88,12 @@ Total about 10-15 sessions. Actuals go in effort.md.
   with the limits outline, the edge ring and the store marks.
 - Time: one chart of opening year (2006 on); the maps show today.
 - Both 24 x 36 in, editorial only for now.
+
+## 7. Decisions and changes (November 21, 2026, later)
+
+- Edge: lead with the built-up edge from 200 homes per square mile or 20 percent non-road
+  impervious cover (NLCD 2021). Town limits on every map. Classes: in town (A at or below 1),
+  fringe (1 to 2), between towns (above 2). Approved by Chris at 11:45.
+- Regions: groups of planning district commissions (`tools/stories/dollar-stores/regions.json`).
+  The central Piedmont joined Southside.
+- The editorial 20: `editorial-draw.csv` (seed 20261121).

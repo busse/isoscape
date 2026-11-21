@@ -13,6 +13,10 @@ Raw downloads stay out of git. Each line: what, URL, date fetched, size, SHA-256
 | OSM via Overpass, South Hill window | same | 2026-11-21 | 3,001,057 B | 8fd468bd73861b68e9a2d8b9937ed766d88a242f6fc0544362620dfb9a6e2419 | ODbL |
 | OSM via Overpass, Chase City window | same | 2026-11-21 | 1,114,898 B | 1d0be0fbfd96a13d24529cdd7355940876fc9d0d670c1fc99ca99bf190845883 | ODbL |
 
+| NLCD 2021 percent impervious, three test windows (WCS) | https://www.mrlc.gov/geoserver/ows, coverage mrlc_download__NLCD_2021_Impervious_L48 | 2026-11-21 | 1,050,540 B each | marion c6015d40..., south-hill 685443da..., chase-city eb4aa2ec... | Public domain (USGS/MRLC) |
+| NLCD 2021 impervious descriptor, same windows | coverage mrlc_download__NLCD_2021_Impervious_descriptor_L48 | 2026-11-21 | 1,050,540 B each | marion 7a0d49c3..., south-hill c9292175..., chase-city ade60bbd... | Public domain |
+| Planning district membership | https://www.vapdc.org/pdc-directory (opened, not downloaded) | 2026-11-21 | | | Facts, used in regions.json |
+
 Raw files are kept on the Mac in `ISO-TEST/isoscape-work/dollar-stores/raw/`.
 
 ## First reads of the SNAP file (2026-11-21)
