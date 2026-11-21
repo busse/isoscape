@@ -1216,11 +1216,12 @@ the red seats. Its basement is drawn a second time in a flat section across the 
 2.5 m in front of the back wall, looking toward the alley, with the rooms named in small
 capitals on the section itself (`drawingLabels`, 34 pixels at the least: 8.2 pt, 6.1 pt at
 24 × 18 in). A part the model keeps whole that stands wholly on the side the cut lifts away,
-above the 1.5 m that side keeps (the Solo chamber's pipes, the piano in the far box), is made a
+above the 1.5 m that side keeps (the Solo chamber's pipes, the harp in the far box), is made a
 cut part, so it goes with that side rather than float over the plan. With more callouts than one
 column holds, a sheet sets them in two columns (`layout.columns`), its plate and sections in
 boxes of their own (`layout.iso`, `layout.sections`), its callout text at 48 pixels (11.5 pt;
-8.6 pt at 24 × 18 in) and its sources and notes in three columns at 36 pixels (8.6 pt; 6.5 pt).
+8.6 pt at 24 × 18 in) and its sources and notes flowing through four boxes, three columns under the
+sections and one under the key, at 39 pixels (9.4 pt; 7 pt at 24 × 18 in).
 
 ## Sets: a map framed by its places
 

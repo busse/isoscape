@@ -775,7 +775,7 @@ drawn without its data), and `layout` (`isoHeight`, `isoAlign: "left"`, `bottom`
 `key: {x, y, w}` to set the key in a block of its own, or `key: {column}` to set it under a
 callout column, and `notes: {x, y, w}` to set the sources and notes beside the section, or under
 the key when `y` is left out, with `cols`, `gap` and `px` to run them in columns at their own
-size). For a sheet with many callouts, `layout.iso` and `layout.sections` (`[x, y, w, h]`) set
+size, or `notes: {px, flow}` to flow them through boxes of their own, `[x, y, w, bottom]` each in reading order, a `y` of null starting under the key). For a sheet with many callouts, `layout.iso` and `layout.sections` (`[x, y, w, h]`) set
 the plate and the flat sections in boxes of their own, `layout.columns` (`[[x, w], ...]`) sets
 the callouts in columns, each group in the one its `column` names, and `layout.body` sets the
 callout text's size. `drawingLabels` (`in`, `s`, `elevation`, `text`, `px`) names rooms inside a
