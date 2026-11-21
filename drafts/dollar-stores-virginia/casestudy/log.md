@@ -227,3 +227,10 @@ Folder: `2026-11-21-07-traffic/`, with `hypotheses.md` (13:08, before fetching) 
 - **Rounds.**
   - Heat-map gallery in 2, after its validator fix (the light end of the ramp was too faint).
   - Chart in 2.
+
+## Step 8: editorial lines steelmanned (15:41)
+
+Folder: `2026-11-21-08-editorial-lines/`. Chris asked, in chat, for the possible editorial
+lines and their data viz, each argued at its strongest. Six lines are set out in
+`steelman.md`, with the evidence, the viz and the weak spot for each, and a suggested
+combination.
