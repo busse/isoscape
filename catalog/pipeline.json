@@ -3041,8 +3041,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "agent",
-   "decision": "started 2026-11-21 (Jackson Ward is in outside review): an outline and a rough draft of the hero image (the 1937 city in four tints) plus two more rough images, on branch story-redlining; local preview to ISO-TEST/_preview/redlining/. Mapping Inequality polygons are CC BY-NC: editorial only, never prints. Review by others before publication.",
+   "waiting_on": "owner",
+   "decision": "outline and rough draft done 2026-11-21 (branch story-redlining, 48002d8): the 1937 grades tinted on the terrain, the highways over them, an A/D pair, two method charts, an unlisted draft page; preview in ISO-TEST/_preview/redlining/. Waiting on the owner: the look of the rough draft and nine questions in rough/outline.md. Polygons are CC BY-NC 2.5: editorial only. Review by others before publication.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3053,9 +3053,12 @@
    ],
    "title": "Redlining in Richmond, 1937 to today",
    "kind": "story",
-   "stage": "research",
+   "stage": "outline",
    "notes": "editorial first: a web story, perhaps a book; prints are not the goal",
-   "private": true
+   "private": true,
+   "log": [
+    "2026-11-21: research -> outline"
+   ]
   },
   "story-slave-trade": {
    "plate": null,
