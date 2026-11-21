@@ -777,7 +777,7 @@ callout column, and `notes: {x, y, w}` to set the sources and notes beside the s
 the key when `y` is left out, with `cols`, `gap` and `px` to run them in columns at their own
 size, or `notes: {px, flow}` to flow them through boxes of their own, `[x, y, w, bottom]` each in reading order, a `y` of null starting under the key). For a sheet with many callouts, `layout.iso` and `layout.sections` (`[x, y, w, h]`) set
 the plate and the flat sections in boxes of their own, `layout.columns` (`[[x, w], ...]`) sets
-the callouts in columns, each group in the one its `column` names, and `layout.body` sets the
+the callouts in columns, each group in the one its `column` names (a group's `y` sets its heading's baseline, to line it up with the heading beside it; the column only moves down), and `layout.body` sets the
 callout text's size. `drawingLabels` (`in`, `s`, `elevation`, `text`, `px`) names rooms inside a
 flat section in small capitals. A callout may name a list of anchors in one drawing. A wayfinding label can stand `inside-left-above` or `inside-left-below` the place it
 points to on the plate's left edge, or `below` the plate, and be nudged by `offset`.

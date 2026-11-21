@@ -388,6 +388,9 @@ def main():
             ci = g.get('column', 0)
             x, col_w = cols[ci]
             y = col_y[ci]
+        # A group may set its heading's baseline (`y`, sheet units) to line it up with the
+        # heading beside it in the next column; the column only moves down, never up.
+        y = max(y, g.get('y', y))
         out.append(text(x, y, g['title'].upper(), 58, 'bold', head_ink, family=SANS, spacing=4))
         if g.get('traveler') and traveler:
             tw = font('bold', 58).getlength(g['title'].upper()) + 4 * len(g['title'])

@@ -1,5 +1,5 @@
 {
-  "about": "The sheet for the Byrd Theatre cutaway: tools/cutaway/sheet.py. Callouts are anchored to drawn parts (history ids, in the isometric view and the flat section); each callout gives its badge's confidence. Callout text is working draft 4 (asset version 1.0.0-d4), written with Claude, for the artist to edit. The holly border and the red and green of the title and headings are sheet decoration, not part of the drawing.",
+  "about": "The sheet for the Byrd Theatre cutaway: tools/cutaway/sheet.py. Callouts are anchored to drawn parts (history ids, in the isometric view and the flat section); each callout gives its badge's confidence. Callout text is final draft 1 (asset version 1.0.0-rc1), written with Claude, for the artist to edit. The holly border and the red and green of the title and headings are sheet decoration, not part of the drawing.",
   "design": "byrd-1928-cutaway",
   "region": "byrd-theatre-cutaway",
   "year": 1928,
@@ -114,7 +114,8 @@
             "part": "history:byrd-c-room-lobby-wall-1-door"
           }
         }
-      ]
+      ],
+      "y": 2664
     },
     {
       "title": "The house",
@@ -395,57 +396,63 @@
     "iso": [
       330,
       700,
-      5200,
+      5316,
       3560
     ],
     "sections": [
       330,
       4420,
-      4300,
+      4410,
       1860
     ],
     "columns": [
       [
-        5730,
-        1690
+        5766,
+        1692
       ],
       [
-        7580,
-        1690
+        7578,
+        1692
       ]
     ],
     "body": 48,
     "key": {
-      "x": 4660,
+      "x": 4706,
       "y": 4560,
-      "w": 870
+      "w": 940
     },
     "notes": {
       "px": 39,
       "flow": [
         [
           330,
-          6480,
-          1320,
-          6900
+          6500,
+          1239,
+          6890
         ],
         [
-          1770,
-          6480,
-          1320,
-          6900
+          1689,
+          6500,
+          1239,
+          6890
         ],
         [
-          3210,
-          6480,
-          1320,
-          6900
+          3048,
+          6500,
+          1239,
+          6890
         ],
         [
-          4660,
-          null,
-          870,
-          6900
+          4407,
+          6500,
+          1239,
+          6890
+        ],
+        [
+          5766,
+          6500,
+          1239,
+          6890
         ]
       ]
     }
@@ -469,7 +476,7 @@
       ],
       "text": "Sheppard Street, the next corner west: the Belmont car line, north to Broad Street and south toward Byrd Park.",
       "label": [
-        1000,
+        1058,
         960
       ],
       "place": "bottom-left"
@@ -490,7 +497,7 @@
       ],
       "text": "West Cary Street, east to the Boulevard and on toward downtown.",
       "label": [
-        1500,
+        1558,
         4140
       ],
       "place": "bottom-left"
@@ -515,8 +522,10 @@
     830
   ],
   "column": {
-    "head": 150,
-    "callout": 44
+    "head": 140,
+    "callout": 44,
+    "between": 53,
+    "group": 26
   },
   "drawingLabels": [
     {

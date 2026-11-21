@@ -1220,8 +1220,11 @@ above the 1.5 m that side keeps (the Solo chamber's pipes, the harp in the far b
 cut part, so it goes with that side rather than float over the plan. With more callouts than one
 column holds, a sheet sets them in two columns (`layout.columns`), its plate and sections in
 boxes of their own (`layout.iso`, `layout.sections`), its callout text at 48 pixels (11.5 pt;
-8.6 pt at 24 × 18 in) and its sources and notes flowing through four boxes, three columns under the
-sections and one under the key, at 39 pixels (9.4 pt; 7 pt at 24 × 18 in).
+8.6 pt at 24 × 18 in) and its sources and notes in one block of five even columns along the
+foot, under the sections and the first callout column, at 39 pixels (9.4 pt; 7 pt at 24 × 18 in),
+about 67 characters a line. The callout and notes columns stand on one grid of 20 units with
+120-pixel gutters (a callout column four units, a notes column three), and a group may set its heading's
+baseline (`y`) to line it up with the heading beside it.
 
 ## Sets: a map framed by its places
 
