@@ -314,7 +314,11 @@
           "confidence": "approximate",
           "text": "A piano in one box and a harp in the other, worked from the console (nomination). The harp, a Browne & Buckwell, does not play: a marimba below makes its sound (Richmond magazine, 2021). Which box held which is not known.",
           "iso": {
-            "part": "history:byrd-k-harp-column"
+            "part": "history:byrd-k-marimba-frame",
+            "badge": [
+              40,
+              170
+            ]
           },
           "section": {
             "part": "history:byrd-c-box-west-front"
