@@ -133,6 +133,13 @@ def main():
         c = inside.geometry.centroid
         center = Point((c.x * w).sum() / w.sum(), (c.y * w).sum() / w.sum())
         areas = {k: builtup(blocks, center, *v) for k, v in SETTINGS.items()}
+        # Rule (set 2026-11-21, before store results were read): a town whose built-up area is
+        # under 1 km2 (fewer than ~200 homes per sq mi anywhere) takes its legal limits as part
+        # of its edge, so the edge is never smaller than the town.
+        lead_rule = "built-up"
+        if areas["lead"].area < 1e6:
+            areas["lead"] = areas["lead"].union(place)
+            lead_rule = "built-up joined with the town limits (built-up under 1 km2)"
         gpd.GeoDataFrame({"setting": list(areas)}, geometry=list(areas.values()), crs=CRS).to_file(f"{d}/builtup.gpkg")
         area = areas["strict"]
 
@@ -177,7 +184,10 @@ def main():
         pd.DataFrame(chk, columns=["chain", "osm", "nearest_snap_m"]).to_csv(f"{d}/osm_check.csv", index=False)
 
         meta = {"center": [center.x, center.y], "pop_in_limits": int(w.sum()),
-                "builtup_km2": {k: round(a.area / 1e6, 2) for k, a in areas.items()}, "limits_km2": round(place.area / 1e6, 2),
+                "builtup_km2": {k: round(a.area / 1e6, 2) for k, a in areas.items()}, "limits_km2": round(place.area / 1e6, 2), "lead_rule": lead_rule,
+                # Rule (same date): a town whose built-up area is more than 5 times its limits and
+                # over 30 km2 is joined to a larger urban area and has no edge of its own.
+                "in_larger_urban_area": bool(areas["lead"].area > 5 * place.area and areas["lead"].area > 30e6),
                 "ua": None if ua is None else list(uag["NAME20"]),
                 "settings": SETTINGS, "null_n": NULL_N, "seed": SEED}
         json.dump(meta, open(f"{d}/meta.json", "w"), indent=1)

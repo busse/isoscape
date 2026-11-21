@@ -1,0 +1,699 @@
+id,name,kind,address,auth_year,x,y,dist_m,edge_m,A,edge_loose_m,A_loose,edge_lead_m,A_lead,B,town,other_place,metro,class
+1139407,7-eleven 35271A,convenience,7 E Gerrard St,2014,744621.0202402059,4340193.770152866,279,3869,0.07,4319,0.06,8845,0.03,inside limits,winchester,,False,in town
+1656898,Halal Point,grocery,707 E Market St,2025,798435.9586121773,4334198.293619245,403,810,0.5,7539,0.05,7539,0.05,inside limits,leesburg,,False,in town
+1274721,Stop N Stop Shell,convenience,535 Hardy Rd,2017,598091.7900438574,4125799.144871152,565,10872,0.05,10872,0.05,10872,0.05,inside limits,vinton,,True,in town
+1665979,Wawa Store 6612,convenience,3600 Pointe Center Ct,2025,820592.2268223597,4275391.694348761,566,10006,0.06,10183,0.06,10183,0.06,inside limits,dumfries,,True,in town
+1348231,7eleven Store 40424,convenience,615 E Market St,2024,798338.8280406011,4334338.015279042,301,1162,0.26,5063,0.06,5063,0.06,inside limits,leesburg,,False,in town
+563890,CVS PHARMACY 1415,pharmacy,616 E Market St,2003,798377.0322190659,4334358.368017197,343,1207,0.28,4619,0.07,4619,0.07,inside limits,leesburg,,False,in town
+1599366,Sadaqat Halal Market,grocery,2037 Plank Rd,2024,806608.7366251096,4244517.323932021,992,9582,0.1,11904,0.08,11904,0.08,inside limits,fredericksburg,,True,in town
+653158,Dollar General 4391,Dollar General,2003 Plank Rd,2004,806608.7366251096,4244517.323932021,992,9582,0.1,11904,0.08,11904,0.08,inside limits,fredericksburg,,True,in town
+1504581,The Market At Preston,convenience,601 Preston Ave,2022,720675.6870620437,4212759.588218185,510,3434,0.15,5840,0.09,5840,0.09,inside limits,charlottesville,,False,in town
+1559091,King Halal Market 1,grocery,17505 Fraley Blvd,2023,820826.2487474558,4275737.995645935,984,9999,0.1,10232,0.1,10232,0.1,inside limits,dumfries,,True,in town
+1189965,Metro Express 3,convenience,104 Gus Nicks Blvd,2015,597688.3909212319,4126631.067374343,1026,7948,0.13,10439,0.1,10562,0.1,inside limits,vinton,,True,in town
+1195423,Tema African & Caribbean Mkt,grocery,17499 Jefferson Davis Hwy,2015,820920.1739897642,4275768.451607638,1063,10705,0.1,10763,0.1,10763,0.1,inside limits,dumfries,,True,in town
+1456475,Royal Farms 335,convenience,2120-221 Plank Rd,2021,806416.5180815852,4244434.435100477,1201,9562,0.13,11924,0.1,11924,0.1,inside limits,fredericksburg,,True,in town
+1033085,Bo's Xpress Markets 103,convenience,202 E Cork St,2011,745045.9364128835,4340737.058734206,966,2973,0.32,4657,0.21,8428,0.11,inside limits,winchester,,False,in town
+838498,7-Eleven Inc F 15103A,convenience,22 Plaza St NE,2007,798318.2139041631,4334492.876510775,346,2763,0.13,3272,0.11,3272,0.11,inside limits,leesburg,,False,in town
+1489562,Be Quick Market #2 N/A,convenience,210 W Virginia Ave,2022,597349.3959546423,4126122.26139585,1219,10771,0.11,10771,0.11,11151,0.11,inside limits,vinton,,True,in town
+971872,Sunshine Minimart,convenience,827 Cherry Ave,2010,719923.0029123552,4211974.059230626,600,5224,0.11,5246,0.11,5246,0.11,inside limits,charlottesville,,False,in town
+1465545,Cherry Ave Marketplace,convenience,701 Cherry Ave,2021,720163.2021723005,4211895.022630153,589,4375,0.13,5019,0.12,5019,0.12,inside limits,charlottesville,,False,in town
+1416099,Prospect Market And Deli,convenience,832 Cherry Ave,2020,719876.3476863783,4211945.0368284285,651,5517,0.12,5516,0.12,5516,0.12,inside limits,charlottesville,,False,in town
+553393,GIANT FOOD 770,grocery,1245 Jefferson Davis Hwy,1970,807781.897853509,4245618.048361297,798,5451,0.15,6349,0.13,6349,0.13,inside limits,fredericksburg,,True,in town
+964006,WAWA 667,convenience,2390 Plank Rd,2010,806091.6748583289,4244406.552718918,1518,10346,0.15,11993,0.13,11993,0.13,inside limits,fredericksburg,,True,in town
+1553118,Mercadito Latino Llc,grocery,103 Weems Ln,2023,743867.0553528629,4338411.384485095,1687,4268,0.4,6182,0.27,13110,0.13,inside limits,winchester,,False,in town
+1087328,CVS 2019,pharmacy,2019 Dumfries,2013,820841.7381395214,4276309.038150291,1501,10034,0.15,10377,0.14,10377,0.14,outside both,dumfries,Cherry Hill CDP,True,in town
+1628639,"7-Eleven, Inc. 34910J",convenience,17306 Dumfries Rd,2024,820828.6415270478,4276287.385788028,1476,10012,0.15,10370,0.14,10370,0.14,inside limits,dumfries,,True,in town
+944916,CVS Pharmacy 4656,pharmacy,1417 University Ave,2010,719389.0638723081,4212588.274108534,868,1634,0.53,5791,0.15,5791,0.15,inside limits,charlottesville,,False,in town
+1428494,Win Mart Llc,convenience,11 S Loudoun St,2020,744791.1444814471,4341003.529668028,1065,3593,0.3,4544,0.23,7003,0.15,inside limits,winchester,,False,in town
+858610,Dollar Tree 304,Dollar Tree,2057 S Pleasant Valley Rd,2008,744567.0116350751,4338683.205628221,1334,1002,1.33,2997,0.45,9130,0.15,inside limits,winchester,,False,in town
+1523681,Tienda Hispana Marquez,convenience,215 Weems Ln,2022,743707.7727663981,4338443.093056937,1716,3939,0.44,6014,0.29,11346,0.15,inside limits,winchester,,False,in town
+1510160,Holtzman Express Leesburg,convenience,148 Catoctin Cir SE,2022,797591.3843399591,4334381.889590445,461,2901,0.16,2901,0.16,2901,0.16,inside limits,leesburg,,False,in town
+725916,Food Lion 1221,grocery,100 Winters St,1995,870418.1677092689,4164415.676895444,341,2011,0.17,2141,0.16,2141,0.16,inside limits,west-point,,False,in town
+300638,Food Lion 1471,grocery,17120 Jefferson Davis Hwy,1998,821174.1603489621,4276594.81229014,1900,10867,0.17,10867,0.17,10867,0.17,outside both,dumfries,Cherry Hill CDP,True,in town
+1308787,Murphy USA 7634,convenience,2302 S Pleasant Valley Rd,2017,744374.9916476624,4338211.661879246,1797,1321,1.36,3741,0.48,10434,0.17,inside limits,winchester,,False,in town
+675558,Food Lion 399,grocery,1200 Tyler ave,1987,540234.0672732044,4109189.052388685,1116,4368,0.26,6546,0.17,6546,0.17,inside limits,radford,,False,in town
+1560173,Finest Halal Market,grocery,2342 Plank Rd,2023,806098.3573032133,4244137.785441947,1612,9529,0.17,9529,0.17,9529,0.17,inside limits,fredericksburg,,True,in town
+1429534,ALDI 71140,grocery,125 Robinson Mill Plaza,2020,799912.0431345318,4333086.111372136,2221,707,3.14,12789,0.17,12789,0.17,inside limits,leesburg,,False,in town
+754673,Dollar General 439,Dollar General,2900 King William Ave,2005,870261.4157517012,4164197.3151704697,462,876,0.53,2577,0.18,2577,0.18,inside limits,west-point,,False,in town
+929327,Quick Mart,convenience,1207 Grady Ave,2010,719865.2334216051,4213171.9407911785,794,4405,0.18,4415,0.18,4415,0.18,inside limits,charlottesville,,False,in town
+740515,Dollar General 583,Dollar General,1220 Tyler Ave,2005,540340.4529568648,4109232.826985199,1223,4497,0.27,6695,0.18,6695,0.18,inside limits,radford,,False,in town
+1180512,Walmart Neighborhood Market 3614,grocery,2141 Dale Ave SE,2014,596556.538270299,4125827.931182088,2031,11093,0.18,11105,0.18,11105,0.18,"urban area, outside limits",vinton,Roanoke city,True,in town
+767906,Afghan Grand Market,grocery,323 W Main St,2013,720642.8110991354,4212188.961562917,487,2654,0.18,2654,0.18,2654,0.18,inside limits,charlottesville,,False,in town
+1463520,U Mart,grocery,17987 Dumfries Shopping Plz,2021,819973.4556409332,4274580.783894082,458,2111,0.22,2387,0.19,2465,0.19,inside limits,dumfries,,True,in town
+1665170,Wawa Store 6623,convenience,200 Tevis St,2025,743622.4297665433,4337682.675397198,2456,4269,0.58,6185,0.4,13108,0.19,inside limits,winchester,,False,in town
+1430701,7-eleven 30484c 30484C,convenience,17105 Old Stage Rd,2020,820016.892646662,4276854.172663932,1958,10287,0.19,10287,0.19,10287,0.19,outside both,dumfries,Montclair CDP,True,in town
+1443573,La Buena Fe Supermarket 1,grocery,116 Featherbed Ln,2021,744656.2016502047,4338929.322510175,1106,948,1.17,5703,0.19,5703,0.19,inside limits,winchester,,False,in town
+1156215,Happy Shopper,convenience,931 Gus W Nicks Blvd,2021,596865.0553266802,4127444.829316056,2169,11203,0.19,11603,0.19,11603,0.19,"urban area, outside limits",vinton,Roanoke city,True,in town
+1636341,Corner Mart ES04,convenience,114 Market St,2025,963830.1149817324,4186675.52574075,271,1257,0.22,1392,0.19,1392,0.19,inside limits,onancock,,False,in town
+944032,CVS Pharmacy 67,pharmacy,208 E Main St,2010,721132.084798761,4212189.993996089,928,4758,0.19,4758,0.19,4758,0.19,inside limits,charlottesville,,False,in town
+937667,Rt 1 BP,convenience,2307 Emancipation Hwy,2010,806971.9964193961,4242657.968096021,2272,9655,0.24,11959,0.19,11959,0.19,inside limits,fredericksburg,,True,in town
+527717,Walmart Supercenter 1406,grocery,2350 S Pleasant Valley Rd,1996,744329.9999082651,4337879.151547891,2130,3855,0.55,3855,0.55,10436,0.2,inside limits,winchester,,False,in town
+673926,CVS Pharmacy 4161,pharmacy,1022 Hardy Rd,2001,599048.0375209568,4125769.328956204,584,2952,0.2,2952,0.2,2952,0.2,inside limits,vinton,,True,in town
+911016,Market Street Market,grocery,400 E Market St,2009,721276.4428514545,4212211.678342002,1060,5252,0.2,5252,0.2,5252,0.2,inside limits,charlottesville,,False,in town
+1230688,Circle K 101,convenience,407 E Main St,2016,560919.5306427543,4085312.0358725656,159,699,0.23,783,0.2,783,0.2,inside limits,floyd,,False,in town
+1081725,Stop And Shop,convenience,601 Berryville Ave,2012,745909.6465824456,4341128.594420564,1870,3529,0.53,4417,0.42,8979,0.21,inside limits,winchester,,False,in town
+377509,Dollar General 3766,Dollar General,2312 Orange Ave NE,2004,596550.983464027,4127772.9725101623,2619,11902,0.22,11902,0.22,11902,0.22,"urban area, outside limits",vinton,Roanoke city,True,in town
+1262996,ALDI 80071,grocery,17010 Jefferson Davis Hwy,2016,821418.3913310808,4276859.264465178,2250,10047,0.22,10349,0.22,10349,0.22,outside both,dumfries,Cherry Hill CDP,True,in town
+631171,Walmart Supercenter 3588,grocery,17041 Jefferson Davis Hwy,2004,821410.8381703703,4276830.05022414,2221,10025,0.22,10297,0.22,10297,0.22,outside both,dumfries,Cherry Hill CDP,True,in town
+1011322,Speedway 4633,convenience,2121 Orange Ave NE,2011,596597.1444586135,4127613.723694225,2484,11274,0.22,11445,0.22,11445,0.22,"urban area, outside limits",vinton,Roanoke city,True,in town
+341179,Giant Food 799,grocery,61 Catoctin Cir NE,1989,798046.9502105735,4334907.253245952,623,2475,0.25,2475,0.25,2829,0.22,inside limits,leesburg,,False,in town
+1642160,7-Eleven 11119J,convenience,905 Lafayette Blvd,2025,809122.3191626573,4244400.818821814,1646,5343,0.31,7650,0.22,7650,0.22,inside limits,fredericksburg,,True,in town
+764902,Target Store 772,grocery,1180 Carl D Silver Pkwy,2005,804917.6387588156,4244850.148511134,2623,10916,0.24,11823,0.22,11823,0.22,inside limits,fredericksburg,,True,in town
+277374,CVS PHARMACY  1565,pharmacy,591 Jefferson Davis Hwy,2001,808030.3355190435,4246177.808497034,1408,6546,0.22,6546,0.22,6546,0.22,inside limits,fredericksburg,,True,in town
+873374,Walgreens 11573,pharmacy,645 E Jubal Early Dr,2008,745097.4263462787,4338898.674299531,1304,916,1.42,5776,0.23,5776,0.23,inside limits,winchester,,False,in town
+964000,WAWA 660,convenience,1140 Carl D Silver Pkwy,2010,804901.7961216639,4244550.519083787,2657,8963,0.3,11385,0.23,11385,0.23,inside limits,fredericksburg,,True,in town
+764914,Target Store 1234,grocery,2340 Legge Blvd,2005,744634.6896017627,4337928.659550902,2091,1013,2.06,3010,0.69,9143,0.23,inside limits,winchester,,False,in town
+251987,Food Master,convenience,308 Ridge St,2021,720654.8094670217,4211972.719486297,647,2842,0.23,2862,0.23,2862,0.23,inside limits,charlottesville,,False,in town
+884558,Manshu Check & Cash,convenience,3335 Fall Hill Ave,2015,806140.8341255076,4246690.651354327,2307,5233,0.44,9851,0.23,9851,0.23,inside limits,fredericksburg,,True,in town
+1063761,7-Eleven Store 40039H,convenience,3201 Plank Rd,2012,804725.6706336717,4244342.664577826,2862,11892,0.24,11942,0.24,11942,0.24,inside limits,fredericksburg,,True,in town
+792140,Dollar Tree 0630,Dollar Tree,3061 Plank Rd,2006,804855.7672035615,4244539.888150672,2704,8954,0.3,11377,0.24,11377,0.24,inside limits,fredericksburg,,True,in town
+1506838,Gobble Stop 13,convenience,1401 Tyler Ave,2022,540744.6095032071,4109235.8797632353,1627,4820,0.34,6715,0.24,6715,0.24,inside limits,radford,,False,in town
+923671,Costco Wholesale 0340,grocery,3102 Plank Rd # 600,2009,804690.9804857597,4244286.885490174,2906,11930,0.24,11980,0.24,11980,0.24,"urban area, outside limits",fredericksburg,,True,in town
+1395556,D Mart,convenience,2700 Lafayette Blvd,2020,807627.9412111677,4241862.500938934,2996,8247,0.36,11942,0.25,11942,0.25,"urban area, outside limits",fredericksburg,,True,in town
+934770,Fiesta Supermarket,grocery,104 Olde Greenwich Dr,2019,807722.2486863611,4241779.38060997,3083,8144,0.38,11656,0.26,11656,0.26,"urban area, outside limits",fredericksburg,,True,in town
+1599272,Handymart 15,convenience,303 W Boscawen St,2024,744384.864249786,4341109.720903798,1102,3530,0.31,4213,0.26,4213,0.26,inside limits,winchester,,False,in town
+1429065,Economy Food Market,convenience,1806 Fall Hill Avenue,2025,808785.024273794,4246095.476738969,1755,6826,0.26,6826,0.26,6826,0.26,inside limits,fredericksburg,,True,in town
+1152433,7-eleven 32767,convenience,4100 Talon Dr,2014,819263.2044037639,4277237.660632597,2538,9673,0.26,9673,0.26,9673,0.26,outside both,dumfries,,True,in town
+550996,Kroger 322,grocery,915 Hardy Rd,1971,598685.4154096248,4125614.149423885,502,1698,0.3,1958,0.26,1958,0.26,inside limits,vinton,,True,in town
+862445,Dollar Tree 1957,Dollar Tree,905 Hardy Rd,2008,598685.4154096248,4125614.149423885,502,1698,0.3,1958,0.26,1958,0.26,inside limits,vinton,,True,in town
+1296106,"Dollar Days, Llc",convenience,109 N Main St,2024,645957.8049885485,4090886.244360584,266,993,0.27,1009,0.26,1009,0.26,inside limits,gretna,,False,in town
+1663541,New Madina Market,grocery,523 Emancipation Hwy,2025,808007.9531205894,4246397.068061028,1609,5356,0.3,6290,0.26,6290,0.26,inside limits,fredericksburg,,True,in town
+634506,Martins Food Market 6078,grocery,1950 S Pleasant Valley Rd,1984,744812.1352563819,4338534.198030121,1527,916,1.67,5764,0.26,5764,0.26,inside limits,winchester,,False,in town
+1567632,Livwell Organic Market N/A,convenience,305 E Market St,2023,797439.070965661,4334835.261608663,817,3188,0.26,3188,0.26,3188,0.26,inside limits,leesburg,,False,in town
+1561439,9th Street Market,convenience,209 9th St Ne,2023,721602.9830798905,4212156.127654483,1390,5437,0.26,5438,0.26,5438,0.26,inside limits,charlottesville,,False,in town
+368826,Food Lion 2529,grocery,100 Vaden Dr,2001,645719.5345938918,4090498.1653326354,329,721,0.46,1225,0.27,1225,0.27,inside limits,gretna,,False,in town
+1057857,S Fuel Co,convenience,901 E Market St,2012,721626.5602589995,4212129.003003552,1420,5302,0.27,5302,0.27,5302,0.27,inside limits,charlottesville,,False,in town
+416320,Dollar General 7844,Dollar General,100B Vaden Dr,2004,645719.5345938918,4090498.1653326354,329,721,0.46,1225,0.27,1225,0.27,inside limits,gretna,,False,in town
+1673338,Megamart Supermarket,grocery,515 Emancipation Hwy,2025,808007.6386199037,4246497.107794655,1705,5049,0.34,6211,0.27,6211,0.27,inside limits,fredericksburg,,True,in town
+1517412,Sheetz 742,convenience,3353 Orange Ave NE,2022,598054.8111658702,4128732.478112964,2679,9822,0.27,9822,0.27,9822,0.27,"urban area, outside limits",vinton,Roanoke city,True,in town
+1120967,Sheetz 532,convenience,2807 Lafayette Blvd,2013,807599.7082946158,4241660.214124297,3198,8266,0.39,11938,0.27,11938,0.27,"urban area, outside limits",fredericksburg,,True,in town
+1246378,El Paraiso Winchester Deli & Grocery Inc.,convenience,744 Berryville Ave,2021,746320.8971522526,4341414.864278189,2371,3536,0.67,4428,0.54,8945,0.27,inside limits,winchester,,False,in town
+1032688,Sharp Shopper Grocery Outlet,grocery,802 Berryville Ave,2011,746394.5037847774,4341301.62435918,2367,4483,0.53,4538,0.52,8757,0.27,inside limits,winchester,,False,in town
+920211,Wegmans 44,grocery,101 Crosstrail Blvd SE,2009,800964.9474322047,4332310.369011727,3527,704,5.01,13015,0.27,13015,0.27,inside limits,leesburg,,False,in town
+1118146,Dollar General 14606,Dollar General,1302 Jamison Ave SE,2013,595642.2471308825,4125524.525079973,2983,10924,0.27,11184,0.27,11184,0.27,"urban area, outside limits",vinton,Roanoke city,True,in town
+932902,Walgreens 17858,pharmacy,18039 Dumfries Shopping Center,2010,819825.613582134,4274413.643116416,681,2113,0.32,2373,0.29,2474,0.28,inside limits,dumfries,,True,in town
+1173303,7-Eleven 32149C,convenience,16806 Jefferson Davis Hwy,2014,821713.6106819233,4277526.079283848,2976,10472,0.28,10605,0.28,10605,0.28,outside both,dumfries,Cherry Hill CDP,True,in town
+1086041,DOLLAR GENERAL 14083,Dollar General,104 Old Virginia Ave,2012,517343.9187962991,4132049.596505302,376,1202,0.31,1352,0.28,1352,0.28,inside limits,narrows,,False,in town
+588280,Fas Mart 47,convenience,3530 Plank Rd,2003,804306.0449498142,4244086.729268568,3325,12068,0.28,12068,0.28,12068,0.28,"urban area, outside limits",fredericksburg,,True,in town
+1156423,Family Dollar Store 10589,Family Dollar,2017 Lafayette Blvd,2014,807830.6179485605,4242500.536933645,2374,8143,0.29,8389,0.28,8389,0.28,inside limits,fredericksburg,,True,in town
+878737,Family Dollar Store 3396,Family Dollar,517 Jefferson Davis Hwy,2009,808166.2968509413,4246470.9257214535,1731,6149,0.28,6283,0.28,6283,0.28,inside limits,fredericksburg,,True,in town
+604981,D&G MART,convenience,1219 Jamison Ave SE,2001,595465.1961011193,4125420.4266471136,3177,11020,0.29,11128,0.29,11128,0.29,"urban area, outside limits",vinton,Roanoke city,True,in town
+1615154,Circle K 2652073,convenience,1021 Orange Ave NE,2025,595486.5665927668,4126814.303654711,3163,10889,0.29,10918,0.29,10918,0.29,"urban area, outside limits",vinton,Roanoke city,True,in town
+1415471,Olde Towne Butcher,grocery,401 William St,2020,809398.4797268716,4245356.340601382,1924,6684,0.29,6684,0.29,6684,0.29,inside limits,fredericksburg,,True,in town
+756657,Dollar General 483,Dollar General,206 N Main St,2005,820451.3732759448,4217838.443306287,268,884,0.3,905,0.3,905,0.3,inside limits,bowling-green,,False,in town
+513444,GIANT FOOD 250,grocery,635 Potomac Station Dr NE,2004,800423.5177863261,4333416.97104582,2534,757,3.35,8383,0.3,8383,0.3,inside limits,leesburg,,False,in town
+1166656,Selectos Latin Market & Deli,grocery,11158 Patriot Hwy,2014,806732.8901663967,4241384.931797323,3565,9304,0.38,11798,0.3,11798,0.3,"urban area, outside limits",fredericksburg,,True,in town
+612285,Fas Mart 50,convenience,501 Jefferson Davis Hwy,2003,808210.8391588699,4246566.008564907,1835,6106,0.3,6204,0.3,6204,0.3,inside limits,fredericksburg,,True,in town
+1643205,Freedom Food Mart 14,convenience,1613 Dixon St,2025,810145.1723390643,4243043.729711262,3174,3253,0.98,10458,0.3,10458,0.3,inside limits,fredericksburg,,True,in town
+1566241,Connies Mart,convenience,3901 Graham Park Rd,2023,820008.0100058466,4274240.8081402695,729,2322,0.31,2375,0.31,2415,0.3,inside limits,dumfries,,True,in town
+1673500,Megamart,grocery,703 Fort Collier Rd,2025,746641.9937748252,4341460.53415012,2661,4489,0.59,4541,0.59,8754,0.3,inside limits,winchester,,False,in town
+1666148,Kabul Mart,grocery,433 Emancipation Hwy,2025,808226.6144538266,4246703.348858685,1969,6536,0.3,6536,0.3,6536,0.3,inside limits,fredericksburg,,True,in town
+1569272,Orange Avenue Foodmart,convenience,815 Orange Ave NE,2023,595301.0334271435,4126756.713508019,3332,11171,0.3,11202,0.3,11202,0.3,"urban area, outside limits",vinton,Roanoke city,True,in town
+1574506,Mundo Fresco Supermarket Llc,grocery,742 Baker Ln,2024,746618.8444417204,4341810.921557014,2849,3563,0.8,4356,0.65,9237,0.31,"urban area, outside limits",winchester,,False,in town
+1487798,Todos Neighborhood Market,grocery,16593 River Ridge Blvd,2022,821959.4306330627,4277641.615649258,3199,10045,0.32,10177,0.31,10177,0.31,outside both,dumfries,Cherry Hill CDP,True,in town
+1653884,8 A's,convenience,1024 Jamison Ave SE,2025,595212.956726154,4125377.614677364,3433,10968,0.31,11127,0.31,11127,0.31,"urban area, outside limits",vinton,Roanoke city,True,in town
+1338098,Dollar Tree 7626,Dollar Tree,3418 Orange Ave NE,2018,598137.9124251878,4129054.1245609545,2983,9708,0.31,9713,0.31,9713,0.31,"urban area, outside limits",vinton,Roanoke city,True,in town
+1426336,Family Dollar 12606,Family Dollar,326 Amherst St,2020,744288.43542464,4341345.597495898,1343,3659,0.37,4203,0.32,4203,0.32,inside limits,winchester,,False,in town
+873373,Walgreens 09838,pharmacy,526 Fort Evans Rd,2008,800124.8093396988,4334250.489589135,2083,945,2.2,6425,0.32,6425,0.32,inside limits,leesburg,,False,in town
+960096,Dollar Tree 264,Dollar Tree,508 Fort Evans Rd,2010,800046.48557133,4334305.305935003,2004,969,2.07,6293,0.32,6293,0.32,inside limits,leesburg,,False,in town
+880577,B Js Wholesale Club 69,grocery,3985 Plank Rd,2009,803807.3615547572,4243858.969788428,3865,11897,0.32,11964,0.32,11964,0.32,"urban area, outside limits",fredericksburg,,True,in town
+883196,Walgreens 18268,pharmacy,507 Amherst St,2009,744060.590777952,4341276.266613475,1316,3624,0.36,4048,0.33,4048,0.33,inside limits,winchester,,False,in town
+395232,CVS PHARMACY 6285,pharmacy,702 9th St SE,2001,595033.3998453232,4125102.622254332,3674,10630,0.35,10668,0.34,10668,0.34,"urban area, outside limits",vinton,Roanoke city,True,in town
+1330412,Lidl 1059,grocery,16601 Dumfries Rd,2018,819281.0745806193,4278078.980937436,3320,9792,0.34,9813,0.34,9813,0.34,outside both,dumfries,Montclair CDP,True,in town
+963996,WAWA 653,convenience,4625 Harrison Rd,2010,806657.0512032121,4240935.168751791,4020,9240,0.44,11801,0.34,11801,0.34,"urban area, outside limits",fredericksburg,,True,in town
+1206201,Star Valley Food Mart,convenience,1614 9th St SE,2015,595314.9563032866,4124204.839628005,3766,11186,0.34,11193,0.34,11193,0.34,"urban area, outside limits",vinton,Roanoke city,True,in town
+673919,Star Valley Minute Mart,convenience,831 Highland Ave SE,2023,595048.233559218,4124967.421885901,3699,10765,0.34,10827,0.34,10827,0.34,"urban area, outside limits",vinton,Roanoke city,True,in town
+439481,Food Lion 607,grocery,2110 Bennington St SE,1988,596082.2516529143,4123418.0222400976,3659,10711,0.34,10711,0.34,10711,0.34,"urban area, outside limits",vinton,Roanoke city,True,in town
+1282386,Joy Mart,convenience,2118 Bennington St SE,2017,596055.1781697655,4123381.096256043,3704,10757,0.34,10757,0.34,10757,0.34,"urban area, outside limits",vinton,Roanoke city,True,in town
+1612111,TRADER JOE'S LEESBURG 817,grocery,504 Fort Evans Rd,2024,800044.8391564395,4334484.238625877,2012,1064,1.89,5761,0.35,5761,0.35,inside limits,leesburg,,False,in town
+1507846,Hop-in 1,convenience,1099 Rio Road East,2022,722329.678751301,4216238.5443626605,4298,7517,0.57,12252,0.35,12252,0.35,"urban area, outside limits",charlottesville,,False,in town
+923632,Costco Wholesale 0239,grocery,251 Front Royal Pike,2009,745602.8093029235,4338228.950657327,2140,972,2.2,6103,0.35,6103,0.35,"urban area, outside limits",winchester,,False,in town
+807087,7-Eleven 25566E,convenience,340 Amaret St,2025,808374.5564206764,4246751.245208955,2069,5916,0.35,5986,0.35,5986,0.35,inside limits,fredericksburg,,True,in town
+1540455,B B Corner Store & Deli,convenience,1111 Rio Road East,2023,722310.133080195,4216279.10398643,4324,7509,0.58,12307,0.35,12307,0.35,"urban area, outside limits",charlottesville,,False,in town
+1624107,A And M Market,convenience,2521 Hollins Rd NE,2024,595267.5319424327,4128533.8843551823,4100,11363,0.36,11397,0.36,11397,0.36,"urban area, outside limits",vinton,Roanoke city,True,in town
+1441950,Sheetz 687,convenience,601 California Dr NE,2021,800497.6981702198,4333945.682633884,2479,853,2.9,6931,0.36,6931,0.36,inside limits,leesburg,,False,in town
+916470,7-Eleven Inc F 21878B,convenience,1701 9th St SE,2009,595360.9295954683,4123983.4465866582,3844,10663,0.36,10673,0.36,10673,0.36,"urban area, outside limits",vinton,Roanoke city,True,in town
+581635,KROGER 364,grocery,72 Kingston Dr,1999,596493.6443063088,4139421.983504049,3617,583,6.2,3485,1.04,10148,0.36,outside both,troutville,Daleville CDP,True,in town
+996843,CVS 4194,pharmacy,2207 Valley Ave,2011,743247.6998003693,4338523.234340117,1887,3700,0.51,4825,0.39,5310,0.36,inside limits,winchester,,False,in town
+1262271,Weis Markets 298,grocery,4153 Plank Rd,2016,803418.0121821285,4243658.693956864,4293,12006,0.36,12006,0.36,12006,0.36,"urban area, outside limits",fredericksburg,,True,in town
+1280213,Pilot Travel Center 258,convenience,2966 Lee Hwy,2017,597267.269251939,4138595.4231377,3748,615,6.09,2170,1.73,10484,0.36,"urban area, outside limits",troutville,,True,in town
+1311765,"Dawson's Grocery, Inc.",grocery,600 Pittsylvania Ave,2018,652161.2081822715,4108562.813716465,1040,1114,0.93,2783,0.37,2783,0.37,inside limits,altavista,,False,in town
+1607976,The King Market 1,grocery,3343 Valley Pike,2024,742821.4975698864,4335472.322317243,4807,4260,1.13,6167,0.78,12882,0.37,"urban area, outside limits",winchester,,False,in town
+973985,ALDI 80015 80015,grocery,4173 Plank Rd,2010,803212.5800726116,4243809.940792431,4453,12067,0.37,12067,0.37,12067,0.37,"urban area, outside limits",fredericksburg,,True,in town
+1531902,Valley Gas,convenience,3323 Valley Pike,2023,742850.8656069513,4335529.896776843,4743,4262,1.11,6171,0.77,12937,0.37,"urban area, outside limits",winchester,,False,in town
+244480,CVS PHARMACY 7589,pharmacy,4201 Plank Rd,2001,803265.1584141448,4243599.596123952,4457,12021,0.37,12021,0.37,12021,0.37,"urban area, outside limits",fredericksburg,,True,in town
+1416217,Dollar Tree 8560,Dollar Tree,1322 Riverland Rd SE,2020,595892.6684570105,4123242.759919328,3916,10550,0.37,10550,0.37,10550,0.37,"urban area, outside limits",vinton,Roanoke city,True,in town
+778886,TARGET STORE 2017,grocery,4310 Fortuna Center Plz,2006,819374.2682998956,4278476.3242113255,3676,8841,0.42,9998,0.37,9998,0.37,outside both,dumfries,Montclair CDP,True,in town
+1597579,7-Eleven 18775J,convenience,3158 Valley Pike,2024,742766.1452602339,4336086.1437530285,4253,4127,1.03,6056,0.7,11403,0.37,"urban area, outside limits",winchester,,False,in town
+1673935,7-Eleven 35781H,convenience,302 Tyler Ave,2025,539661.9418769545,4110335.6710923975,1267,2087,0.61,3296,0.38,3296,0.38,inside limits,radford,,False,in town
+1268396,Mr A's Mart,convenience,421 Campbell Ave SE,2017,594408.1827819643,4125578.227629449,4193,9674,0.43,10940,0.38,10940,0.38,"urban area, outside limits",vinton,Roanoke city,True,in town
+822192,Dollar General Market 12023,Dollar General,2710 Lee Hwy,2007,597284.6637120185,4138166.206739472,4112,543,7.57,1051,3.91,10842,0.38,"urban area, outside limits",troutville,,True,in town
+470113,Dollar General 2507,Dollar General,2227 Garden City Blvd SE,2004,595756.6198154032,4123039.263715492,4158,10856,0.38,10856,0.38,10856,0.38,"urban area, outside limits",vinton,Roanoke city,True,in town
+629834,DOLLAR GENERAL 3576,Dollar General,18109 Triangle Shopping Plz,2004,819568.569806867,4274269.939933962,965,1986,0.49,2449,0.39,2450,0.39,inside limits,dumfries,,True,in town
+884890,Circle K 2723707,convenience,2765 Lee Hwy,2009,597116.5511035523,4138308.49958882,4072,609,6.69,2093,1.95,10542,0.39,"urban area, outside limits",troutville,,True,in town
+963120,Walgreens 10690,pharmacy,424 Sycolin Rd S E,2010,798094.0128333058,4332596.608988211,1689,2261,0.75,2365,0.71,4349,0.39,inside limits,leesburg,,False,in town
+857155,7-Eleven Inc F 32331C,convenience,4248 Plank Rd,2008,803021.1879346583,4243493.729940359,4721,12011,0.39,12011,0.39,12011,0.39,"urban area, outside limits",fredericksburg,,True,in town
+1541578,Easy Mart,convenience,507 Stewart St,2023,722479.5046891151,4212259.951051563,2240,5774,0.39,5811,0.39,5811,0.39,inside limits,charlottesville,,False,in town
+336244,CVSPHARMACY 7592,pharmacy,31 W Main St,2003,538272.3384937891,4110251.589229886,1356,3166,0.43,3232,0.42,3433,0.4,inside limits,radford,,False,in town
+1583906,Bp Gas Station,convenience,401 Elm Ave SE,2024,594402.562324219,4124974.555495645,4316,10692,0.4,10700,0.4,10700,0.4,"urban area, outside limits",vinton,Roanoke city,True,in town
+600516,Sheetz 203,convenience,2311 Valley Ave,2025,743132.5067171195,4338332.995582999,2108,3735,0.56,4822,0.44,5325,0.4,inside limits,winchester,,False,in town
+634928,Food Lion 1185,grocery,720 S King St,1994,796651.8327668868,4334055.031877124,1409,3561,0.4,3561,0.4,3561,0.4,inside limits,leesburg,,False,in town
+1119779,Dodge Store 8202,convenience,2644 Lee Hwy,2013,597121.5418710476,4138107.71842027,4242,568,7.47,1161,3.65,10669,0.4,"urban area, outside limits",troutville,,True,in town
+1423170,7-Eleven 34507B,convenience,502 S King St,2020,796775.6456431884,4334285.395460736,1267,3157,0.4,3157,0.4,3157,0.4,inside limits,leesburg,,False,in town
+1195491,People's Market & Deli,convenience,11901 Tidewater Trl,2015,810587.2236072515,4242212.474281733,4034,3318,1.22,10209,0.4,10209,0.4,"urban area, outside limits",fredericksburg,,True,in town
+1532909,Harvest Moon Store,grocery,227 N Locust St,2023,560551.9845418831,4085634.461527284,351,502,0.7,886,0.4,886,0.4,inside limits,floyd,,False,in town
+490308,CVS PHARMACY 1564,pharmacy,4501 Lafayette Blvd,2001,806734.9399781352,4240198.872512323,4728,9888,0.48,11724,0.4,11724,0.4,"urban area, outside limits",fredericksburg,,True,in town
+1287241,Super Val-u,convenience,2713 Virginia Ave,2017,517630.88079395896,4132074.602982377,611,791,0.77,1528,0.4,1528,0.4,inside limits,narrows,,False,in town
+878731,Family Dollar Store 3763,Family Dollar,5095 Jefferson Davis Hwy,2009,806283.8806927293,4240050.6013892405,4968,9666,0.51,12012,0.41,12012,0.41,"urban area, outside limits",fredericksburg,,True,in town
+964004,WAWA 664,convenience,4527 Plank Rd,2010,802792.2219059769,4243641.881006255,4902,11960,0.41,12010,0.41,12010,0.41,"urban area, outside limits",fredericksburg,,True,in town
+1529475,One Stop Market,convenience,1016 Millwood Pike,2023,745911.8437056936,4338387.535386267,2208,1434,1.54,1774,1.24,5384,0.41,"urban area, outside limits",winchester,,False,in town
+815511,ALDI 44070 44070,grocery,5099 Jefferson Davis Hwy,2007,806476.4790220419,4240080.131112399,4894,9228,0.53,11807,0.41,11807,0.41,"urban area, outside limits",fredericksburg,,True,in town
+773771,DOLLAR TREE 2120,Dollar Tree,5073 Jefferson Davis Hwy,2005,806283.8806927293,4240050.6013892405,4968,9666,0.51,12012,0.41,12012,0.41,"urban area, outside limits",fredericksburg,,True,in town
+700554,ONE STOP MARKET,convenience,2223 Williamson Rd NE,1993,594390.1160303243,4127891.493608628,4545,11181,0.41,11181,0.41,11181,0.41,"urban area, outside limits",vinton,Roanoke city,True,in town
+1397420,Uncle Sean's Convenient Store,convenience,508 Caroline St,2020,809873.5008061939,4244939.881173203,2334,5182,0.45,5715,0.41,5715,0.41,inside limits,fredericksburg,,True,in town
+1122862,7-Eleven 39701A,convenience,1026 Millwood Pike,2013,745936.138248353,4338412.742671521,2206,1422,1.55,1791,1.23,5399,0.41,"urban area, outside limits",winchester,,False,in town
+1567181,Centro Americana Latin Market,convenience,805 N Loudoun St,2023,745480.3454904257,4342739.570969458,2933,3594,0.82,4558,0.64,7047,0.42,inside limits,winchester,,False,in town
+933046,Walgreens 18101,pharmacy,448 S King St,2010,796804.1105642437,4334448.784982939,1249,2969,0.42,2969,0.42,2969,0.42,inside limits,leesburg,,False,in town
+1286384,Nishi Food Mart 8,convenience,1551 E Washington Ave,2017,600115.7516271124,4126282.436601673,1558,3617,0.43,3676,0.42,3676,0.42,"urban area, outside limits",vinton,,True,in town
+1407341,Northside Mart,convenience,823 N Loudoun St,2020,745560.4529616716,4342776.530115447,2997,3399,0.88,4591,0.65,7157,0.42,inside limits,winchester,,False,in town
+583735,SAFEWAY 4218,grocery,437 S King St,1979,796790.1210817917,4334429.356284543,1261,2981,0.42,2981,0.42,2981,0.42,inside limits,leesburg,,False,in town
+1319045,"Jack's Market, Inc.",convenience,2419 Williamson Rd NE,2018,594304.8364587058,4128064.7375360425,4693,11090,0.42,11090,0.42,11090,0.42,"urban area, outside limits",vinton,Roanoke city,True,in town
+1500863,Snappy Food Mart,convenience,617 Liberty Rd NE,2022,594833.9299128356,4128467.9385954207,4420,7752,0.57,10364,0.43,10519,0.42,"urban area, outside limits",vinton,Roanoke city,True,in town
+919000,E & C Enterprises VA646,convenience,2680 King William Ave,2009,870480.8166665051,4164004.65541292,347,565,0.61,565,0.61,822,0.42,inside limits,west-point,,False,in town
+1612305,New York Fas Mart,convenience,11517 Tidewater Trl,2024,810763.5212689517,4242049.159403362,4274,3313,1.29,10205,0.42,10206,0.42,"urban area, outside limits",fredericksburg,,True,in town
+483212,CVS Pharmacy 1551,pharmacy,1341 Long St,2001,722944.0487737311,4212812.396494073,2715,5346,0.51,6452,0.42,6452,0.42,inside limits,charlottesville,,False,in town
+1272996,7-eleven 39522b 39522B,convenience,600 4th St,2017,707545.4668235241,4262320.738759856,378,690,0.55,892,0.42,892,0.42,inside limits,shenandoah,,False,in town
+1453923,ALDI 80041,grocery,100 Albermarle Square,2021,721742.3965613252,4217814.053931152,5541,6995,0.79,11504,0.48,12858,0.43,"urban area, outside limits",charlottesville,Rio CDP,False,in town
+1423228,7-eleven 21325c 21325C,convenience,503 S King St,2020,796703.503905521,4334314.90685691,1339,3128,0.43,3128,0.43,3128,0.43,inside limits,leesburg,,False,in town
+340945,Sheetz 267,convenience,915 Edwards Ferry Rd NE,1999,799185.1410978751,4335086.221101089,1396,2802,0.5,3262,0.43,3262,0.43,inside limits,leesburg,,False,in town
+1068687,Bo's Xpress Market 112,convenience,3612 Valley Pike,2012,742604.1201455551,4334611.178766451,5692,4274,1.33,6192,0.92,13104,0.43,"urban area, outside limits",winchester,,False,in town
+477375,Dollar General 3920,Dollar General,3422 Plantation Rd NE,2004,594589.3570629316,4129402.771147708,5169,11901,0.43,11901,0.43,11901,0.43,"urban area, outside limits",vinton,Roanoke city,True,in town
+312780,PAINTERS THRIFTWAY MKT,grocery,5414 Lee Hwy,1974,599499.0122618446,4141812.987357991,273,257,1.06,279,0.98,635,0.43,inside limits,troutville,,True,in town
+912857,CVS Pharmacy 1569,pharmacy,450 Chatham Heights Rd,2009,810306.0415200302,4246746.355350508,3349,6386,0.52,7847,0.43,7847,0.43,"urban area, outside limits",fredericksburg,,True,in town
+1274551,CVS Pharmacy 10746,pharmacy,1700 Seminole Trl,2017,721586.3510884774,4217999.72158649,5681,5576,1.02,8085,0.7,13047,0.44,"urban area, outside limits",charlottesville,Rio CDP,False,in town
+1221765,Express Stop,convenience,3509 Plantation Rd NE,2022,594684.0235774708,4129574.7165327375,5210,11713,0.44,11724,0.44,11724,0.44,"urban area, outside limits",vinton,Roanoke city,True,in town
+542460,FOODWAY MARKET,convenience,2201 Liberty Rd NW,1999,593968.4956143969,4127781.345744472,4897,10786,0.45,11206,0.44,11206,0.44,"urban area, outside limits",vinton,Roanoke city,True,in town
+1647782,7-Eleven 10640B,convenience,705 N Loudoun St,2025,745321.2903809716,4342573.468950136,2722,3596,0.76,4510,0.6,6233,0.44,inside limits,winchester,,False,in town
+964021,WAWA 688,convenience,275 Butler Rd,2010,810360.9261694418,4246799.605098145,3424,6345,0.54,7861,0.44,7861,0.44,"urban area, outside limits",fredericksburg,,True,in town
+1441644,Medina Market,grocery,214 Albemarle Sq,2021,721765.8105422693,4217889.103158955,5620,6996,0.8,11516,0.49,12847,0.44,"urban area, outside limits",charlottesville,Rio CDP,False,in town
+1241735,Nishi Food Mart 3,convenience,3609 Plantation Rd NE,2022,594672.5991684264,4129644.49117656,5265,11637,0.45,11637,0.45,11637,0.45,"urban area, outside limits",vinton,Roanoke city,True,in town
+756293,GRANTS SUPERMARKET 2,grocery,629 E Riverside Dr,2005,455698.00244447385,4109785.223446396,1458,2932,0.5,3266,0.45,3266,0.45,inside limits,tazewell,,False,in town
+1006091,Whole Foods Market 10205,grocery,1797 Hydraulic Rd,2011,720282.5365000824,4215411.064267964,2934,5659,0.52,6501,0.45,6501,0.45,inside limits,charlottesville,,False,in town
+1206294,7-eleven 26082a 26082A,convenience,16170 Country Club Dr,2015,818716.8793588445,4279074.959710884,4446,9769,0.46,9780,0.45,9780,0.45,outside both,dumfries,Montclair CDP,True,in town
+1594603,Handy Mart 6,convenience,2605 Valley Ave,2024,743038.2187431739,4337831.193374215,2574,4122,0.62,4896,0.53,5681,0.45,inside limits,winchester,,False,in town
+1364175,Community Grocery 1,convenience,124 Elm Ave SW,2025,593675.3683317908,4124976.389711224,5021,11149,0.45,11155,0.45,11155,0.45,"urban area, outside limits",vinton,Roanoke city,True,in town
+740509,Dollar General 0359,Dollar General,631 E Riverside Dr,2005,455703.3317243937,4109785.195441027,1462,2930,0.5,3261,0.45,3261,0.45,inside limits,tazewell,,False,in town
+1675524,STOP IN FOOD STORES 8064,convenience,1129 Richmond Rd,2025,723101.1250808175,4212593.456667331,2853,4831,0.59,6177,0.46,6177,0.46,"urban area, outside limits",charlottesville,Pantops CDP,False,in town
+344524,GAS N SHOP,convenience,401 Walnut Ave SE,1997,594184.0839043669,4124055.5924703833,4839,10582,0.46,10582,0.46,10582,0.46,"urban area, outside limits",vinton,Roanoke city,True,in town
+953233,CVS 4038,pharmacy,19305 Ruby Dr,2010,803072.5553146817,4331672.1135269785,5668,723,7.84,12281,0.46,12281,0.46,outside both,leesburg,Lansdowne CDP,False,in town
+1619676,Kabul Mart,grocery,1646 Seminole Trl,2024,721475.8497921838,4217898.980616552,5558,5405,1.03,8142,0.68,12096,0.46,"urban area, outside limits",charlottesville,Rio CDP,False,in town
+1310711,Royal Farms 297,convenience,5000 Plank Rd,2018,802024.4479521163,4243579.788841435,5662,12072,0.47,12072,0.47,12072,0.47,"urban area, outside limits",fredericksburg,,True,in town
+964024,WAWA 691,convenience,199 Falcon Dr,2010,806823.2650229763,4239326.239113247,5577,11835,0.47,11835,0.47,11835,0.47,"urban area, outside limits",fredericksburg,,True,in town
+1132699,7-Eleven 11136K,convenience,1849 Seminole Trl,2014,721837.0800399792,4218527.430818223,6254,6275,1.0,8040,0.78,13391,0.47,"urban area, outside limits",charlottesville,,False,in town
+934315,Amigo Mercado Latino,grocery,907 Gardens Blvd,2010,721857.7982507746,4218282.547928016,6023,6941,0.87,11325,0.53,12952,0.47,"urban area, outside limits",charlottesville,Rio CDP,False,in town
+798372,Harris Teeter 100,grocery,19350 Winmeade Dr,2006,803132.0623468228,4331612.149267213,5748,722,7.96,12297,0.47,12297,0.47,outside both,leesburg,Lansdowne CDP,False,in town
+849247,Dollar Tree 3118,Dollar Tree,420 Pantops Ctr,2008,723039.0050016223,4212295.221617542,2795,5698,0.49,5900,0.47,5900,0.47,"urban area, outside limits",charlottesville,Pantops CDP,False,in town
+307662,Food Lion 137,grocery,1952 E Washington Ave,1983,600547.9213967784,4126622.707705471,2047,3398,0.6,4397,0.47,4397,0.47,"urban area, outside limits",vinton,,True,in town
+620693,Food Lion 238,grocery,1131 5th St SW,1984,719321.9575415512,4210215.372629634,2445,5183,0.47,5182,0.47,5182,0.47,inside limits,charlottesville,,False,in town
+908353,Wawa Food Market 658,convenience,3402 Shannon Park Dr,2009,810503.7528236791,4241739.013427815,4301,667,6.45,9155,0.47,9155,0.47,outside both,fredericksburg,,True,in town
+1151338,WALGREENS 15445,pharmacy,50 White Oak Rd,2014,810783.5610300472,4246605.755103614,3684,6597,0.56,7695,0.48,7695,0.48,"urban area, outside limits",fredericksburg,,True,in town
+1175209,7-Eleven Inc F 34369A,convenience,131 Kernstown Commons Blvd,2014,742502.1942542505,4333989.160890345,6315,4291,1.47,4937,1.28,13108,0.48,"urban area, outside limits",winchester,,False,in town
+1375399,Royal Farms 359,convenience,5301 Jefferson Davis Hwy,2019,806399.8018588207,4239281.284822128,5692,9228,0.62,11754,0.48,11754,0.48,"urban area, outside limits",fredericksburg,,True,in town
+1641954,Wawa Store 8690,convenience,1150 5th St SW,2025,719311.5006530801,4210114.028752508,2543,5254,0.48,5254,0.48,5254,0.48,inside limits,charlottesville,,False,in town
+882532,Dollar General 11307,Dollar General,727 4th St,2009,707738.242640166,4262022.539457411,658,455,1.45,1383,0.48,1383,0.48,inside limits,shenandoah,,False,in town
+1320875,The Cave,convenience,1397 Fincastle Tpke,2018,455353.431413448,4108623.281415133,735,1519,0.48,1530,0.48,1530,0.48,inside limits,tazewell,,False,in town
+1096046,Dollar Tree 4968,Dollar Tree,3016 Williamson Rd NW,2013,593966.5143080885,4128511.426088745,5194,10851,0.48,10851,0.48,10851,0.48,"urban area, outside limits",vinton,Roanoke city,True,in town
+1544577,7-Eleven #41814H 41814H,convenience,10803 Courthouse Rd,2023,805829.3324006533,4239484.247842543,5639,9976,0.57,11723,0.48,11723,0.48,"urban area, outside limits",fredericksburg,,True,in town
+1080570,Family Dollar 9403,Family Dollar,501 S Main St,2012,645782.7077226536,4090242.892031391,589,354,1.66,1213,0.49,1213,0.49,inside limits,gretna,,False,in town
+946925,Fas Mart 35,convenience,5022 Plank Rd,2010,801758.4798101773,4243546.505090917,5929,12075,0.49,12075,0.49,12075,0.49,"urban area, outside limits",fredericksburg,,True,in town
+744808,Dollar General 9623,Dollar General,10611 Spotsylvania Ave,2005,806908.438119438,4238975.96406595,5915,11756,0.5,11757,0.5,11757,0.5,"urban area, outside limits",fredericksburg,,True,in town
+990132,Dollar Tree 152,Dollar Tree,2020 Rio Hill Ctr,2011,721687.7873762138,4218626.65153881,6315,5459,1.16,8111,0.78,12518,0.5,"urban area, outside limits",charlottesville,Rio CDP,False,in town
+895724,ALDI 71010,grocery,221 Kernstown Commons Blvd,2009,742432.5332245404,4333694.796861349,6616,4294,1.54,4923,1.34,13110,0.5,"urban area, outside limits",winchester,,False,in town
+1499623,The Market At 5th Street 50,convenience,1154 5th St SW,2022,719287.7669492237,4210048.977414347,2612,5256,0.5,5256,0.5,5256,0.5,inside limits,charlottesville,,False,in town
+1302448,Dollar Tree 7294,Dollar Tree,335 Merchant Walk Sq,2017,719471.8653196836,4209933.982269236,2660,5293,0.5,5292,0.5,5292,0.5,"urban area, outside limits",charlottesville,,False,in town
+1263458,Weis Markets 301,grocery,10601 Spotsylvania Ave,2016,806722.2613792671,4238984.466238998,5930,11879,0.5,11879,0.5,11879,0.5,"urban area, outside limits",fredericksburg,,True,in town
+1657800,Ishtar Market,grocery,2171 Ivy Rd,2025,718216.5584653565,4213632.968125803,2339,4606,0.51,4606,0.51,4606,0.51,inside limits,charlottesville,,False,in town
+1484838,Chester's Shell Station,convenience,1919 10th St NW,2022,593220.1720145186,4127871.741123646,5633,10759,0.52,10969,0.51,10969,0.51,"urban area, outside limits",vinton,Roanoke city,True,in town
+760644,Family Dollar 22,Family Dollar,3215 Williamson Rd NW,2005,593761.6170665087,4128761.005084088,5493,10784,0.51,10784,0.51,10784,0.51,"urban area, outside limits",vinton,Roanoke city,True,in town
+1491123,International Asian Halal Market,grocery,3202 Williamson Rd NW,2022,593758.5685312423,4128716.587826937,5474,10806,0.51,10806,0.51,10806,0.51,"urban area, outside limits",vinton,Roanoke city,True,in town
+1646164,Everest Grocery,grocery,198 Zan Rd,2025,720314.3921394867,4215791.751279053,3315,5693,0.58,6485,0.51,6485,0.51,inside limits,charlottesville,,False,in town
+1356451,Dollar Tree 7824,Dollar Tree,5215 Plank Rd,2019,801501.4997839872,4243671.411816807,6155,11901,0.52,11962,0.51,11962,0.51,"urban area, outside limits",fredericksburg,,True,in town
+1349003,A & A Cash Market,convenience,631 Moorman Ave NW,2024,593034.8830585853,4126275.226155304,5536,10630,0.52,10693,0.52,10894,0.51,"urban area, outside limits",vinton,Roanoke city,True,in town
+432097,Food Lion 253,grocery,570 RIVERBEND DR.,1984,723247.8944664637,4212302.046683988,3003,5684,0.53,5941,0.51,5941,0.51,"urban area, outside limits",charlottesville,Pantops CDP,False,in town
+1284529,Sunnyside Market,convenience,502 Mountain Ave SW,2017,593026.0069594085,4124917.0138164624,5668,10950,0.52,11127,0.51,11127,0.51,"urban area, outside limits",vinton,Roanoke city,True,in town
+800049,FIVE MILE INTERNATIONAL MARKET,grocery,6322 Five Mile Centre Park,2007,801438.7080302136,4243428.964561189,6267,12071,0.52,12071,0.52,12071,0.52,"urban area, outside limits",fredericksburg,,True,in town
+1674579,Wawa Store 6619,convenience,1230 Millwood Pike,2025,746477.7991948259,4338023.097927386,2864,1388,2.06,1862,1.54,5482,0.52,"urban area, outside limits",winchester,,False,in town
+959014,Tienda el Sol Latino Inc,convenience,4102 Plantation Rd NE,2010,594513.3588456163,4130011.074541824,5632,10771,0.52,10849,0.52,10849,0.52,"urban area, outside limits",vinton,Roanoke city,True,in town
+851681,Family Dollar 86,Family Dollar,600 W Hurt Rd,2008,651084.237864971,4107651.140753377,2041,1062,1.92,3918,0.52,3918,0.52,"urban area, outside limits",altavista,Hurt town,False,in town
+329309,CVS Pharmacy 7503,pharmacy,3909 Challenger Ave,2001,598885.8394051606,4129970.573064894,3881,7474,0.52,7476,0.52,7476,0.52,"urban area, outside limits",vinton,,True,in town
+611708,Harris Teeter 177,grocery,975 Emmet St,1997,718975.003031149,4214334.091712953,2252,4131,0.55,4266,0.53,4266,0.53,inside limits,charlottesville,,False,in town
+1380727,7-Eleven 40041A,convenience,10359 Patriot Hwy,2019,806471.1523401253,4238693.702419322,6256,9883,0.63,11721,0.53,11721,0.53,"urban area, outside limits",fredericksburg,,True,in town
+1045427,CVS Pharmacy 4292,pharmacy,840 Berryville Ave,2012,746519.3546362426,4341291.111641833,2467,4645,0.53,4644,0.53,4644,0.53,inside limits,winchester,,False,in town
+1555679,La Vaquita Market 2,grocery,367 Warrenton Rd,2023,806957.7361165012,4249090.6630998375,4273,4189,1.02,8083,0.53,8083,0.53,"urban area, outside limits",fredericksburg,,True,in town
+334001,Dollar General 9566,Dollar General,2824 Valley Ave,2004,743025.7939604099,4337171.936657287,3157,3914,0.81,5965,0.53,5965,0.53,inside limits,winchester,,False,in town
+580112,CVS PHARMACY 1568,pharmacy,5832 Harrison Rd,2001,802925.7239449618,4241412.553034292,5759,9783,0.59,10923,0.53,10923,0.53,"urban area, outside limits",fredericksburg,,True,in town
+982999,Walgreens 12135,pharmacy,10600 Rollingwood Dr,2010,805249.4503145171,4239147.750898309,6152,11386,0.54,11535,0.53,11535,0.53,"urban area, outside limits",fredericksburg,,True,in town
+908358,Wawa Food Market 680,convenience,15809 Jefferson Davis Hwy,2009,822992.9779851718,4280009.567671078,5769,10861,0.53,10861,0.53,10861,0.53,outside both,dumfries,Leesylvania CDP,True,in town
+1556409,Meera Food 1,convenience,1102 Orange Ave NW,2023,592553.6566752103,4126816.918651885,6057,11514,0.53,11514,0.53,11514,0.53,"urban area, outside limits",vinton,Roanoke city,True,in town
+1675526,STOP IN FOOD STORES 8070,convenience,2212 Ivy Rd,2025,718008.8106059375,4213650.732636288,2530,4729,0.53,4729,0.53,4729,0.53,"urban area, outside limits",charlottesville,University of Virginia CDP,False,in town
+1662161,Rutter's 116,convenience,1510 Coverstone Drive,2025,746478.9433710639,4337354.239678195,3363,1070,3.14,6322,0.53,6322,0.53,"urban area, outside limits",winchester,,False,in town
+369422,KROGER  359,grocery,1159 Emmet St N,1995,719193.6694380195,4214497.672346624,2280,4269,0.53,4269,0.53,4269,0.53,inside limits,charlottesville,,False,in town
+1635352,Warrenton Exxon,convenience,375 Warrenton Rd,2025,806980.5265332807,4249135.997830199,4315,4152,1.04,8064,0.54,8064,0.54,"urban area, outside limits",fredericksburg,,True,in town
+1542715,Browns Market,convenience,1218 Avon St,2023,721022.3819957667,4211018.668851988,1651,2687,0.61,3040,0.54,3040,0.54,inside limits,charlottesville,,False,in town
+1263564,Wegmans 127,grocery,100 Wegmans Way,2016,719314.3289344285,4209779.819864505,2855,5275,0.54,5275,0.54,5275,0.54,"urban area, outside limits",charlottesville,,False,in town
+971719,Dollar Tree 944,Dollar Tree,101 Washington Sq Plaza,2010,811552.0565962592,4243486.963795045,4239,4950,0.86,7797,0.54,7797,0.54,"urban area, outside limits",fredericksburg,,True,in town
+1342204,"Shu One, Inc.",convenience,943 Berryville Ave,2018,746695.7339758537,4341264.446989497,2606,4779,0.55,4782,0.54,4782,0.54,inside limits,winchester,,False,in town
+1493158,Royal Farms 413,convenience,920 Berryville Ave,2022,746611.204149379,4341285.11650043,2543,4719,0.54,4719,0.54,4719,0.54,inside limits,winchester,,False,in town
+425072,CVS Pharmacy 7577,pharmacy,4216 Plantation Rd NE,2001,594518.6074288378,4130174.242619191,5743,10620,0.54,10631,0.54,10631,0.54,"urban area, outside limits",vinton,Roanoke city,True,in town
+600177,Go Mart 94,convenience,3519 Williamson Rd NW,2002,593586.2882073082,4128983.1796088247,5755,10662,0.54,10662,0.54,10662,0.54,"urban area, outside limits",vinton,Roanoke city,True,in town
+1434955,Asian Grocery & Halal Food,grocery,3416 Williamson Rd NW,2021,593573.4899557536,4128938.653524805,5744,10713,0.54,10719,0.54,10719,0.54,"urban area, outside limits",vinton,Roanoke city,True,in town
+1623331,"7-Eleven, Inc. 11961J",convenience,2127 Crystal Spring Ave SW,2024,593406.24332577,4123022.7666506944,6011,11171,0.54,11171,0.54,11171,0.54,"urban area, outside limits",vinton,Roanoke city,True,in town
+1556795,7-eleven 41812A,convenience,5900 Harrison Road,2023,802841.8386874702,4241429.41872053,5816,9776,0.59,10862,0.54,10862,0.54,"urban area, outside limits",fredericksburg,,True,in town
+971873,Oakhill Market And Deli,convenience,667 Country Green Rd,2022,717458.5073138537,4209285.948816177,4240,5633,0.75,7667,0.55,7667,0.55,"urban area, outside limits",charlottesville,,False,in town
+1300184,7-eleven 26941C,convenience,15621 Jefferson Davis Hwy,2017,823065.2266256893,4280229.325474417,5997,10882,0.55,10882,0.55,10882,0.55,outside both,dumfries,Leesylvania CDP,True,in town
+401498,Walmart Supercenter 1780,grocery,975 Hilltop Heights Rd,2004,722145.6954582563,4219634.25627226,7403,6332,1.17,9801,0.76,13387,0.55,"urban area, outside limits",charlottesville,,False,in town
+598736,Walmart 2520,grocery,125 Washington Square Plz,2003,811507.8430993857,4243451.906925811,4209,4946,0.85,7715,0.55,7715,0.55,"urban area, outside limits",fredericksburg,,True,in town
+1067390,Milagrito Market And Bakery,grocery,10705 Courthouse Rd,2012,805127.3766191467,4239014.196226048,6322,11447,0.55,11482,0.55,11482,0.55,"urban area, outside limits",fredericksburg,,True,in town
+982301,Walgreens 12802,pharmacy,131 Valley Mill Rd,2010,747598.5621090541,4341126.288234618,3377,6123,0.55,6128,0.55,6128,0.55,"urban area, outside limits",winchester,,False,in town
+1045018,Smoketown Shell,convenience,15550 Neabsco Mills Rd,2023,823007.6034919224,4280230.329816586,5971,10908,0.55,10908,0.55,10908,0.55,outside both,dumfries,Leesylvania CDP,True,in town
+1570156,7-eleven 11974B,convenience,3602 Williamson Rd NW,2023,593494.2852460133,4129046.507893024,5866,10649,0.55,10648,0.55,10649,0.55,"urban area, outside limits",vinton,Roanoke city,True,in town
+1010148,Food Maxx 1,grocery,1107 Berryville Ave,2011,746829.9251077955,4341232.010946975,2710,4798,0.56,4808,0.56,4808,0.56,inside limits,winchester,,False,in town
+996753,CVS 393,pharmacy,1920 Senseny Rd,2011,748691.1484975211,4339235.307935101,4348,6539,0.66,7713,0.56,7713,0.56,"urban area, outside limits",winchester,,False,in town
+310341,Sheetz 264,convenience,10 Washington Square Plz,1999,811641.8040941886,4243568.246613771,4299,5041,0.85,7729,0.56,7729,0.56,"urban area, outside limits",fredericksburg,,True,in town
+850653,CVS Pharmacy 1555,pharmacy,1133 5th St SW,2008,719209.9422906439,4210231.2434118055,2476,4433,0.56,4440,0.56,4440,0.56,inside limits,charlottesville,,False,in town
+897475,Family Dollar Store 1135,Family Dollar,1135 5th St SW,2009,719209.9422906439,4210231.2434118055,2476,4433,0.56,4440,0.56,4440,0.56,inside limits,charlottesville,,False,in town
+1308786,Murphy USA 7633,convenience,4530 Challenger Ave,2017,600066.7003754778,4131427.0894994265,5531,3914,1.41,5680,0.97,9859,0.56,"urban area, outside limits",vinton,,True,in town
+1519278,A1 Afghan Mart 1,grocery,3626 Williamson Rd NW,2022,593450.8292528283,4129128.131802255,5945,10399,0.57,10508,0.57,10589,0.56,"urban area, outside limits",vinton,Roanoke city,True,in town
+1310179,Lidl 1038,grocery,5455 Plank Rd,2018,800909.1791470852,4243673.779012986,6736,11920,0.57,11949,0.56,11949,0.56,outside both,fredericksburg,,True,in town
+865053,Sam's Club 6365,grocery,970 Hilton Heights Rd,2008,722158.329067163,4219782.314651072,7550,6230,1.21,8043,0.94,13393,0.56,"urban area, outside limits",charlottesville,,False,in town
+901677,Food Lion 2698,grocery,110 Market Center Way,2009,596484.1661250317,4141773.138294512,2742,419,6.55,4923,0.56,4923,0.56,"urban area, outside limits",troutville,Daleville CDP,True,in town
+1026291,CVS Pharmacy 7525,pharmacy,1100 Main St,2011,652838.392533512,4109207.674761488,1063,1619,0.66,1619,0.66,1879,0.57,inside limits,altavista,,False,in town
+434475,Food Lion 1249,grocery,5227 Waterway Dr,1997,817092.2793631582,4279624.052630231,5690,8809,0.65,9903,0.57,9903,0.57,outside both,dumfries,Montclair CDP,True,in town
+1325359,DOLLAR GENERAL 18962,Dollar General,35611 General Mahone Blvd,2018,865857.7198387788,4092471.126558511,514,295,1.74,909,0.57,909,0.57,inside limits,ivor,,False,in town
+1107369,Dollar Tree 1033,Dollar Tree,5275 Waterway Dr,2013,817052.9263346116,4279582.462066039,5678,8795,0.65,9917,0.57,9917,0.57,outside both,dumfries,Montclair CDP,True,in town
+1220060,Greenway Market,convenience,1338 Lee Hwy,2015,596459.9626992312,4136204.848283395,6234,524,11.89,957,6.51,10884,0.57,"urban area, outside limits",troutville,Cloverdale CDP,True,in town
+964003,WAWA 663,convenience,10626 Courthouse Rd,2010,804938.4648552882,4238955.938134065,6450,11305,0.57,11305,0.57,11305,0.57,"urban area, outside limits",fredericksburg,,True,in town
+1309398,Murphy Express 8731,convenience,450 Kings Hwy,2017,811759.6896405299,4243556.119413143,4415,5107,0.86,7711,0.57,7711,0.57,"urban area, outside limits",fredericksburg,,True,in town
+850728,CVS Pharmacy 1556,pharmacy,1170 Emmet St N,2008,719442.2200683834,4214562.110805369,2236,3907,0.57,3934,0.57,3934,0.57,inside limits,charlottesville,,False,in town
+1656457,7-eleven #32713c 32713C,convenience,12135 Gordon Rd,2025,800866.1603715345,4243582.138244352,6795,11882,0.57,11946,0.57,11946,0.57,"urban area, outside limits",fredericksburg,,True,in town
+346514,Food Lion 1186,grocery,585 Branchlands Blvd,1994,721137.6330966899,4216905.784397815,4516,5351,0.84,7993,0.57,7993,0.57,"urban area, outside limits",charlottesville,,False,in town
+1356757,Wasena Market,convenience,1115 Main St SW,2019,592331.4013662033,4124697.412858784,6393,11104,0.58,11138,0.57,11138,0.57,"urban area, outside limits",vinton,Roanoke city,True,in town
+1206439,Whole Foods Market 10534,grocery,19800 Belmont Chase Dr,2015,804147.3166504775,4330233.8356147455,7326,705,10.4,12939,0.57,12939,0.57,outside both,leesburg,Belmont CDP,False,in town
+1256742,Gobble Stop 1,convenience,2771 Virginia Ave,2016,517833.4429415855,4132213.707480016,856,811,1.06,1512,0.57,1512,0.57,inside limits,narrows,,False,in town
+244445,CVS Pharmacy 3336,pharmacy,48 Marketplace Dr,2001,596381.4639493235,4141623.263223114,2850,432,6.59,4907,0.58,4907,0.58,"urban area, outside limits",troutville,Daleville CDP,True,in town
+329707,Walgreens 17550,pharmacy,345 14th St,1992,871159.2833569569,4162717.88050032,1600,96,16.65,2127,0.75,2765,0.58,inside limits,west-point,,False,in town
+343286,Kroger 239,grocery,1904 Emmet St N,1980,719983.1968574829,4215505.152745842,3039,5218,0.58,5218,0.58,5218,0.58,inside limits,charlottesville,,False,in town
+1072608,Bo's Xpress Market 101,convenience,1217 Berryville Ave,2012,747004.8598850312,4341196.418426123,2852,4930,0.58,4930,0.58,4930,0.58,inside limits,winchester,,False,in town
+1046871,Fas Mart 11,convenience,11035 Leavells Rd,2012,802814.7053258024,4240422.400861905,6481,9193,0.71,11108,0.58,11108,0.58,"urban area, outside limits",fredericksburg,,True,in town
+328116,CVS Pharmacy 3949,pharmacy,2001 Colonial Ave SW,2001,592777.6238652846,4123801.36741917,6231,10658,0.58,10694,0.58,10694,0.58,"urban area, outside limits",vinton,Roanoke city,True,in town
+860807,La Estrella Latina,grocery,3728 Williamson Rd NW,2008,593360.7911819972,4129333.509372311,6128,7826,0.78,10371,0.59,10546,0.58,"urban area, outside limits",vinton,Roanoke city,True,in town
+1662759,Altavista Petrolium Llc,convenience,1043 Main St,2025,652846.2974928052,4109065.756476464,1123,1584,0.71,1584,0.71,1904,0.59,inside limits,altavista,,False,in town
+885437,Walgreens 11571,pharmacy,5650 Plank Rd,2009,800563.4011998696,4243666.462859388,7078,11912,0.59,11912,0.59,11912,0.59,"urban area, outside limits",fredericksburg,,True,in town
+1676162,Sheetz 905,convenience,567 Warrenton Rd,2025,805976.7264344818,4249861.558590631,5243,4268,1.23,8927,0.59,8927,0.59,"urban area, outside limits",fredericksburg,Southern Gateway CDP,True,in town
+878763,Family Dollar Store 2023,Family Dollar,346 W Broaddus St,2009,819694.8265602784,4217425.151436785,750,758,0.99,1263,0.59,1263,0.59,inside limits,bowling-green,,False,in town
+764731,Target Store 1162,grocery,4737 Valley View Blvd NW,2005,592471.1414340159,4128590.2131020497,6585,10860,0.61,11222,0.59,11222,0.59,"urban area, outside limits",vinton,Roanoke city,True,in town
+1015305,Speedway 4653,convenience,2235 Seminole Ln,2011,722365.4330996429,4219654.695997377,7482,7044,1.06,12091,0.62,12619,0.59,"urban area, outside limits",charlottesville,,False,in town
+1309377,Murphy Express 8712,convenience,111 Farrow Dr,2017,741930.4710544908,4333163.764954532,7280,4250,1.71,6148,1.18,12246,0.59,outside both,winchester,,False,in town
+758791,Family Dollar 3869,Family Dollar,715 Fort Collier Rd,2005,746680.831886027,4341462.8694901,2695,4561,0.59,4565,0.59,4565,0.59,inside limits,winchester,,False,in town
+1247938,Family Dollar 11518,Family Dollar,1626 Orange Ave NW,2016,591843.2140632024,4127004.389590365,6785,11523,0.59,11523,0.59,11523,0.59,"urban area, outside limits",vinton,Roanoke city,True,in town
+1621011,C'ville Oriental Market,grocery,1195 Seminole Trl,2024,720681.2975476948,4216444.72183171,3990,6021,0.66,6745,0.59,6745,0.59,"urban area, outside limits",charlottesville,,False,in town
+1564134,Star City Market N/A,convenience,3745 Williamson Rd NW,2023,593351.9744293789,4129408.862418138,6176,7750,0.8,10364,0.6,10518,0.59,"urban area, outside limits",vinton,Roanoke city,True,in town
+511831,Food Lion 383,grocery,4812 Hollins Rd,1985,594515.6274471891,4131066.315231616,6408,9867,0.65,10890,0.59,10890,0.59,"urban area, outside limits",vinton,Hollins CDP,True,in town
+615452,KROGER 400,grocery,614 Brandon Ave SW,1999,592500.7870394012,4123731.737506676,6514,10716,0.61,10788,0.6,10788,0.6,"urban area, outside limits",vinton,Roanoke city,True,in town
+1071591,The Fresh Market 067,grocery,2207 Colonial Ave SW,2012,592500.7870394012,4123731.737506676,6514,10716,0.61,10788,0.6,10788,0.6,"urban area, outside limits",vinton,Roanoke city,True,in town
+1426207,Royal Deli Mart,convenience,1705 Melrose Ave NW,2021,591741.9988856993,4126936.707275408,6877,11515,0.6,11515,0.6,11515,0.6,"urban area, outside limits",vinton,Roanoke city,True,in town
+1000478,Family Dollar 8599,Family Dollar,10604 Courthouse Rd,2011,804711.3620839497,4238934.041369474,6564,11027,0.6,11028,0.6,11028,0.6,"urban area, outside limits",fredericksburg,,True,in town
+1571123,Wawa Store 8660,convenience,1215 Seminole Trl,2023,720703.9090340815,4216517.523901233,4065,6024,0.67,6760,0.6,6760,0.6,"urban area, outside limits",charlottesville,,False,in town
+1057150,7-Eleven Inc F 35273A,convenience,1907 Emmet St N,2012,720037.7006105306,4215665.440037209,3195,5320,0.6,5320,0.6,5320,0.6,inside limits,charlottesville,,False,in town
+743594,Walmart Supercenter 5343,grocery,10001 Southpoint Pkwy,2005,805749.374304638,4237934.936278237,7150,9655,0.74,11962,0.6,11962,0.6,"urban area, outside limits",fredericksburg,,True,in town
+1406110,Earth Fare 770,grocery,2203 Franklin Rd SW,2020,592820.0353046823,4123334.70920502,6380,10622,0.6,10628,0.6,10628,0.6,"urban area, outside limits",vinton,Roanoke city,True,in town
+1205909,Costco Wholesale 1184,grocery,3171 District Ave,2015,720097.3608261028,4216382.278098652,3908,5454,0.72,6477,0.6,6477,0.6,"urban area, outside limits",charlottesville,,False,in town
+1128785,Wawa 8627,convenience,9 S Gateway Dr,2013,806212.0846625374,4249819.35844709,5137,4418,1.16,8518,0.6,8518,0.6,"urban area, outside limits",fredericksburg,Southern Gateway CDP,True,in town
+1565822,Friendly Mart,convenience,1801 Orange Ave NW,2023,591650.1594932786,4127065.522102788,6985,11527,0.61,11527,0.61,11527,0.61,"urban area, outside limits",vinton,Roanoke city,True,in town
+1667473,7-Eleven 36085J,convenience,1245 Seminole Trl,2025,720763.308206078,4216593.544237215,4148,6015,0.69,6826,0.61,6826,0.61,"urban area, outside limits",charlottesville,,False,in town
+1310362,Dollar Tree 7308,Dollar Tree,416 13th St,2018,871335.6946352925,4162655.692648866,1715,95,17.98,2810,0.61,2810,0.61,inside limits,west-point,,False,in town
+898916,Wegmans 41,grocery,2281 Carl D Silver Pkwy,2009,805291.2309990716,4246321.634867554,2684,4425,0.61,4425,0.61,4425,0.61,inside limits,fredericksburg,,True,in town
+1316538,Dollar Tree 1311,Dollar Tree,7520 Lee Hwy,2018,537592.4888869015,4110539.1895222175,2036,2683,0.76,3142,0.65,3360,0.61,"urban area, outside limits",radford,Fairlawn CDP,False,in town
+350655,ANNWIL GROCERIES,convenience,1548 Rugby Blvd NW,2010,592051.0500829301,4127615.822670248,6691,10891,0.61,10915,0.61,10915,0.61,"urban area, outside limits",vinton,Roanoke city,True,in town
+1181256,Walmart Neighborhood Market 3622,grocery,4950 Plantation Rd,2014,594396.7852211058,4131074.960692495,6490,9921,0.65,10703,0.61,10703,0.61,"urban area, outside limits",vinton,Hollins CDP,True,in town
+1020404,Harris Teeter 310,grocery,42780 Creek View Plz,2011,801042.2477016464,4327329.23410304,7574,3139,2.41,12386,0.61,12386,0.61,outside both,leesburg,Goose Creek Village CDP,False,in town
+838175,Jacks Shop In,convenience,1825 Melrose Ave NW,2012,591530.6427289464,4126968.7935597366,7091,11516,0.62,11516,0.62,11516,0.62,"urban area, outside limits",vinton,Roanoke city,True,in town
+1486154,Murphy USA 5528,convenience,4807 Valley View Blvd. NW,2022,592096.2653416405,4128744.753025951,6991,10868,0.64,11222,0.62,11222,0.62,"urban area, outside limits",vinton,Roanoke city,True,in town
+1364135,S & S Grocery & Deli,convenience,1303 Patterson Ave SW,2024,591866.9066754675,4125650.977670453,6717,10440,0.64,10600,0.63,10866,0.62,"urban area, outside limits",vinton,Roanoke city,True,in town
+1675525,STOP IN FOOD STORES 8067,convenience,1220 Seminole Trl,2025,720591.4096316069,4216586.665980989,4123,5970,0.69,6635,0.62,6635,0.62,"urban area, outside limits",charlottesville,,False,in town
+1575427,Jennifer Grocery,convenience,1312 Patterson Ave SW,2024,591844.6688220412,4125576.3932260913,6744,10270,0.66,10625,0.63,10814,0.62,"urban area, outside limits",vinton,Roanoke city,True,in town
+950785,Walgreens 11771,pharmacy,42820 Creek View Plz,2010,801106.4077920308,4327283.884627531,7642,3146,2.43,12387,0.62,12387,0.62,outside both,leesburg,Goose Creek Village CDP,False,in town
+856829,Kroger 391,grocery,3970 Valley Gateway Blvd,2008,599232.8914310003,4130226.5579305687,4177,6685,0.62,6685,0.62,6685,0.62,"urban area, outside limits",vinton,,True,in town
+1036610,Boulevard Mart,convenience,3314 Garden City Blvd SE,2012,595056.120969484,4121216.041612746,6018,6793,0.89,6949,0.87,9743,0.62,"urban area, outside limits",vinton,Roanoke city,True,in town
+977981,La Esquina Latina & Dollar Items,grocery,4117 Williamson Rd NW,2022,593082.9135250929,4129853.027920064,6645,10424,0.64,10557,0.63,10678,0.62,"urban area, outside limits",vinton,Roanoke city,True,in town
+304786,CVS PHARMACY 6284,pharmacy,1916 Orange Ave NW,2001,591480.6277968166,4127083.6425504913,7155,11526,0.62,11526,0.62,11526,0.62,"urban area, outside limits",vinton,Roanoke city,True,in town
+644969,Target Store 1874,grocery,1200 Edwards Ferry Rd NE,2004,799595.7099981146,4335130.799398442,1769,2644,0.67,2801,0.63,2801,0.63,inside limits,leesburg,,False,in town
+1088289,Tienda La Preferida LLC,grocery,4720 Williamson Rd NW,2018,592666.4284770085,4130327.7465890567,7258,11437,0.63,11436,0.63,11436,0.63,"urban area, outside limits",vinton,Roanoke city,True,in town
+1074824,Trader Joe's 661,grocery,2025 Bond St,2012,720098.367824166,4215922.516603546,3448,5431,0.63,5448,0.63,5448,0.63,"urban area, outside limits",charlottesville,,False,in town
+549078,Food Lion 1176,grocery,248 Market St,1993,456486.4123428901,4110750.731702917,2699,3039,0.89,3272,0.82,4279,0.63,inside limits,tazewell,,False,in town
+1530766,7-Eleven 35042J,convenience,5002 Plantation Rd,2022,594190.9356605267,4131413.2847218825,6882,9883,0.7,10854,0.63,10854,0.63,"urban area, outside limits",vinton,Hollins CDP,True,in town
+1015899,I-95 Fuel Stop,convenience,5416 Jefferson Davis Hwy,2021,806180.14770726,4237579.934794648,7403,9569,0.77,11693,0.63,11693,0.63,"urban area, outside limits",fredericksburg,,True,in town
+913421,Walgreens 07605,pharmacy,2351 Franklin Rd SW,2009,592611.6320272253,4123090.522045246,6675,10607,0.63,10643,0.63,10643,0.63,"urban area, outside limits",vinton,Roanoke city,True,in town
+926368,7-Eleven Inc F 10638A,convenience,110 Dry Mill Rd SW,2009,796431.1523628994,4335172.869402402,1840,2911,0.63,2935,0.63,2935,0.63,inside limits,leesburg,,False,in town
+1371729,Fas Mart 3510,convenience,1159 Millmont St,2019,719279.4353185066,4214769.852515346,2489,3971,0.63,3973,0.63,3973,0.63,inside limits,charlottesville,,False,in town
+1523275,Al Kareem Llc 1710,convenience,626 Warrenton Rd,2022,805871.3796877465,4250192.171915713,5590,4266,1.31,8930,0.63,8930,0.63,"urban area, outside limits",fredericksburg,Southern Gateway CDP,True,in town
+881336,Family Dollar Store 357,Family Dollar,609 Market St,2009,456198.4407065226,4110025.566704716,1994,2936,0.68,3119,0.64,3119,0.64,inside limits,tazewell,,False,in town
+1479010,7ElevenStore 16543H,convenience,385 Greenbrier Dr,2021,720522.2920672634,4216642.545984373,4174,5893,0.71,6548,0.64,6548,0.64,"urban area, outside limits",charlottesville,,False,in town
+1468579,Nu Deli Mart,convenience,1016 Hershberger Rd NW,2021,592712.0677461235,4130527.975662575,7340,11295,0.65,11412,0.64,11412,0.64,"urban area, outside limits",vinton,Roanoke city,True,in town
+527877,Walmart Supercenter 2312,grocery,4807 Valley View Blvd NW,1996,592209.4815042729,4129088.856227777,7025,11050,0.64,11050,0.64,11050,0.64,"urban area, outside limits",vinton,Roanoke city,True,in town
+1585572,La Bodega Hispana,grocery,5225 Williamson Rd,2024,592700.7812875772,4131067.105561724,7686,11901,0.65,11901,0.65,11901,0.65,"urban area, outside limits",vinton,Roanoke city,True,in town
+844854,Walgreens 05217,pharmacy,4841 Williamson Rd NW,2008,592604.7861498501,4130452.44687123,7381,11389,0.65,11404,0.65,11404,0.65,"urban area, outside limits",vinton,Roanoke city,True,in town
+1325917,R & R Market NA,convenience,1611 Wadsworth St,2018,538635.4270672218,4108157.610613602,1141,1750,0.65,1750,0.65,1750,0.65,inside limits,radford,,False,in town
+1465393,Garry's,convenience,3631 Radford Rd,2024,543523.061620522,4109259.748935375,4405,4622,0.95,6770,0.65,6770,0.65,"urban area, outside limits",radford,Plum Creek CDP,False,in town
+1599315,7-Eleven #20560F 20560F,convenience,10501 Courthouse Rd,2024,804162.2045128515,4238641.029359717,7075,10056,0.7,10908,0.65,10908,0.65,"urban area, outside limits",fredericksburg,,True,in town
+1492310,Crossroads Foodmart,convenience,4840 Williamson Rd NW,2022,592561.6614146276,4130425.340228413,7400,11427,0.65,11428,0.65,11428,0.65,"urban area, outside limits",vinton,Roanoke city,True,in town
+1323783,Super Asian Fresh Market,grocery,5217 Williamson Rd,2018,592640.9726290049,4131026.4987273407,7706,11901,0.65,11901,0.65,11901,0.65,"urban area, outside limits",vinton,Roanoke city,True,in town
+557343,Flowers Bakery Outlet 396,convenience,360 Greenbrier Dr,2000,720469.6706293873,4216737.744189534,4266,5831,0.73,6501,0.66,6501,0.66,"urban area, outside limits",charlottesville,,False,in town
+1619407,Wawa Store 8698,convenience,1544 Martinsburg Pike,2024,746829.1340619922,4344572.056984323,5164,2614,1.98,4471,1.16,7819,0.66,"urban area, outside limits",winchester,,False,in town
+277541,Sheetz 309,convenience,1574 Martinsburg Pike,2001,746956.1480463212,4344628.291885881,5274,2612,2.02,4489,1.17,8045,0.66,"urban area, outside limits",winchester,,False,in town
+870674,Walgreens 09837,pharmacy,20321 Susan Leslie Dr,2008,803986.8625753359,4328735.566507704,8132,694,11.72,12329,0.66,12329,0.66,outside both,leesburg,Ashburn CDP,False,in town
+1430831,Speedway 4654,convenience,1600 Seminole Trl,2020,721413.5904467241,4217767.345159455,5416,5380,1.01,8157,0.66,8157,0.66,"urban area, outside limits",charlottesville,Rio CDP,False,in town
+1598986,K&S African Market,convenience,2206 Melrose Ave NW,2024,591058.1613007662,4127044.646435223,7569,11517,0.66,11517,0.66,11517,0.66,"urban area, outside limits",vinton,Roanoke city,True,in town
+1620202,Sprouts Farmers Market 888,grocery,1021B Edwards Ferry Rd NE,2024,799735.0065553824,4334976.026479799,1828,2468,0.74,2753,0.66,2753,0.66,inside limits,leesburg,,False,in town
+1385495,Lidl 1394,grocery,44175 Ashbrook Marketplace Plaza,2019,805164.4310677685,4329508.33969093,8575,704,12.18,12984,0.66,12984,0.66,outside both,leesburg,Ashburn CDP,False,in town
+1304186,Reyna Produce,convenience,5324 Williamson Rd,2018,592681.328722319,4131223.340750931,7802,11878,0.66,11878,0.66,11878,0.66,"urban area, outside limits",vinton,Roanoke city,True,in town
+831824,Target Stores 2175,grocery,25 Auction Dr,2007,806627.7741980648,4250123.082739509,5344,4512,1.18,8115,0.66,8115,0.66,"urban area, outside limits",fredericksburg,Southern Gateway CDP,True,in town
+549916,GIANT FOOD 256,grocery,10346 Courthouse Rd,1999,803769.5954595763,4238730.770411229,7194,10324,0.7,10772,0.67,10772,0.67,"urban area, outside limits",fredericksburg,,True,in town
+1262269,Weis Markets 296,grocery,10871 Tidewater Trl,2016,812511.2557448976,4240185.466782846,6821,672,10.15,10042,0.68,10156,0.67,"urban area, outside limits",fredericksburg,,True,in town
+487330,GIANT FOOD 251,grocery,1900 Abbey Rd,2002,724159.1913275672,4212162.665429264,3922,5733,0.68,5841,0.67,5841,0.67,"urban area, outside limits",charlottesville,Pantops CDP,False,in town
+1235700,Stop In Food Stores 8205,convenience,6767 Cloverdale Rd,2016,598845.3529182633,4134522.807338021,7278,310,23.46,504,14.45,10908,0.67,"urban area, outside limits",troutville,Cloverdale CDP,True,in town
+1462533,Quick Way C,convenience,2702 Colonial Ave SW,2021,592038.3647873105,4123196.282394518,7148,10520,0.68,10522,0.68,10522,0.68,"urban area, outside limits",vinton,Roanoke city,True,in town
+1650021,Costco Wholesale 0337,grocery,1300 Edwards Ferry Rd NE,2025,799780.3824546367,4335352.427937151,2040,2810,0.73,2997,0.68,2997,0.68,inside limits,leesburg,,False,in town
+1642477,Lafayette Mini Mart,convenience,1035 Lafayette Blvd NW,2025,590779.2559296269,4127584.198484367,7929,11593,0.68,11593,0.68,11593,0.68,"urban area, outside limits",vinton,Roanoke city,True,in town
+1667538,7-eleven #10756c 10756C,convenience,14820 Cloverdale Rd,2025,820054.163741878,4282041.698400458,7130,10427,0.68,10427,0.68,10427,0.68,outside both,dumfries,Dale City CDP,True,in town
+752135,Harris Teeter 242,grocery,20070 Ashbrook Commons Plz Unit 151,2005,805373.8307529474,4329428.640011957,8794,705,12.48,12932,0.68,12932,0.68,outside both,leesburg,Ashburn CDP,False,in town
+1628319,Triple S,convenience,2635 Colonial Ave SW,2025,592003.0837183091,4123259.140633013,7155,10488,0.68,10515,0.68,10515,0.68,"urban area, outside limits",vinton,Roanoke city,True,in town
+1230369,"Food Giant, Inc.",grocery,509 24th St Nw,2016,590755.9383205611,4127035.8212673753,7868,11514,0.68,11514,0.68,11514,0.68,"urban area, outside limits",vinton,Roanoke city,True,in town
+1648823,Costco Wholesale 0337,grocery,1300 Edwards Ferry Rd NE,2025,799780.3824546367,4335352.427937151,2040,2810,0.73,2997,0.68,2997,0.68,inside limits,leesburg,,False,in town
+693358,Food Lion 2107,grocery,350 W Main St,2004,560252.538385541,4085276.217427224,521,734,0.71,761,0.68,761,0.68,inside limits,floyd,,False,in town
+985021,7-Eleven Inc F 33605A,convenience,25 Solomon Dr,2011,807838.269518422,4248731.804945894,3886,5729,0.68,5732,0.68,5732,0.68,"urban area, outside limits",fredericksburg,,True,in town
+1584395,7-ELEVEN 32170H,convenience,1 Commerce Pkwy,2024,805225.5770891927,4250577.893175215,6171,3932,1.57,9089,0.68,9089,0.68,"urban area, outside limits",fredericksburg,Southern Gateway CDP,True,in town
+1393718,7-Eleven Store 39290H,convenience,1511 Martinsburg Pike,2020,746641.7767379446,4344592.810932421,5098,2627,1.94,4474,1.14,7388,0.69,"urban area, outside limits",winchester,,False,in town
+1066786,CVS Pharmacy 1539,pharmacy,10805 Tidewater Trl,2012,812671.3036102358,4240013.775582882,7056,672,10.5,10037,0.7,10154,0.69,"urban area, outside limits",fredericksburg,,True,in town
+1280647,Va Oms 2 Llc,convenience,1828 Memorial Ave SW,2017,590825.654226216,4124855.177267085,7843,11349,0.69,11349,0.69,11349,0.69,"urban area, outside limits",vinton,Roanoke city,True,in town
+1571150,Handymart 20,convenience,1571 Martinsburg Pike,2023,746819.7823818465,4344703.987171052,5277,2613,2.02,4465,1.18,7649,0.69,"urban area, outside limits",winchester,,False,in town
+526721,Kroger 215,grocery,7480 Lee Hwy,1973,537257.1203242633,4110660.842430203,2371,1524,1.56,2973,0.8,3450,0.69,"urban area, outside limits",radford,Fairlawn CDP,False,in town
+980057,CVS 6302,pharmacy,265 MARKET ST,2010,456356.48638344,4110014.762334465,2114,2976,0.71,3083,0.69,3083,0.69,inside limits,tazewell,,False,in town
+1508248,Royal Farms 430,convenience,4 Commerce Pkwy,2022,805160.6882175448,4250673.261788937,6284,3914,1.61,9093,0.69,9093,0.69,"urban area, outside limits",fredericksburg,Southern Gateway CDP,True,in town
+745427,Dollar General 7906,Dollar General,20 Plantation Dr,2005,805307.7590172258,4250765.541299405,6316,4034,1.57,9138,0.69,9138,0.69,"urban area, outside limits",fredericksburg,Southern Gateway CDP,True,in town
+1113817,Fas Mart 3543,convenience,240 Rolkin Rd,2013,724344.0102309485,4212214.392899653,4102,5696,0.72,5905,0.69,5905,0.69,"urban area, outside limits",charlottesville,Pantops CDP,False,in town
+883212,Walgreens 17626,pharmacy,314 Rolkin Rd,2009,724442.8763991534,4212324.844212596,4195,5022,0.84,6096,0.69,6096,0.69,"urban area, outside limits",charlottesville,Pantops CDP,False,in town
+1472063,7-eleven 16728g 16728G,convenience,2155 Barracks Rd,2021,719180.0300703224,4215004.844808036,2744,3971,0.69,3973,0.69,3973,0.69,inside limits,charlottesville,,False,in town
+1066167,APlus 40038H,convenience,15701 Carrs Brooke Way,2012,815701.184892935,4280032.580436199,6871,9631,0.71,9987,0.69,9987,0.69,outside both,dumfries,Independent Hill CDP,True,in town
+292600,Sheetz 346,convenience,2001 Carl D Silver Pkwy,2003,804900.5221308458,4246022.284091125,2886,4161,0.69,4175,0.69,4175,0.69,inside limits,fredericksburg,,True,in town
+723472,Walmart Supercenter 1833,grocery,1800 Carl D Silver Pkwy,2002,804842.8626380056,4245577.672785528,2792,3946,0.71,4062,0.69,4062,0.69,inside limits,fredericksburg,,True,in town
+1619986,Market On Melrose,grocery,2502 Melrose Ave NW,2024,590616.5590865717,4127135.2837481806,8019,11520,0.7,11520,0.7,11520,0.7,"urban area, outside limits",vinton,Roanoke city,True,in town
+1113814,Fas Mart 3542,convenience,241 Rolkin Rd,2013,724355.2693923754,4212220.255736053,4113,5692,0.72,5914,0.7,5914,0.7,"urban area, outside limits",charlottesville,Pantops CDP,False,in town
+891555,7-Eleven Inc F 32910B,convenience,4640 Lee Hill School Dr,2009,807210.0316917101,4236503.972450717,8360,9321,0.9,11892,0.7,11892,0.7,"urban area, outside limits",fredericksburg,,True,in town
+1406067,Be Quick Market NONE,convenience,2116 Hardy Rd,2020,600556.0690363889,4125203.624488999,2182,3037,0.72,3118,0.7,3118,0.7,"urban area, outside limits",vinton,,True,in town
+1556753,CVS/Pharmacy 10440,pharmacy,709 E Main St,2023,561335.590337093,4085677.8014547513,653,901,0.72,932,0.7,932,0.7,inside limits,floyd,,False,in town
+1455925,"Maihan Halal Market Llc,",grocery,20 Plantation Dr,2021,805290.8114006753,4250889.405069877,6438,4051,1.59,9163,0.7,9163,0.7,"urban area, outside limits",fredericksburg,Southern Gateway CDP,True,in town
+840043,7-Eleven 11976,convenience,1410 Grandin Rd SW,2007,590673.2284707845,4124681.5466694953,8022,11333,0.71,11333,0.71,11333,0.71,"urban area, outside limits",vinton,Roanoke city,True,in town
+1008808,Speedway 4621,convenience,7455 Lee Hwy,2011,537371.8766509895,4110818.8838031664,2387,2859,0.83,3146,0.76,3354,0.71,"urban area, outside limits",radford,Fairlawn CDP,False,in town
+1613167,Cove Market 1,convenience,1723 Cove Rd NW,2025,591148.8927543863,4128402.632205067,7768,10919,0.71,10960,0.71,10960,0.71,"urban area, outside limits",vinton,Roanoke city,True,in town
+596034,Martins Food Market 6283,grocery,400 Gateway Dr,1995,747564.1966274923,4341501.877429114,3488,4885,0.71,4885,0.71,4885,0.71,"urban area, outside limits",winchester,,False,in town
+1103353,7-eleven 36762A,convenience,15052 Cardinal Dr,2013,818092.2225942701,4281547.388234263,6986,9842,0.71,9846,0.71,9846,0.71,outside both,dumfries,Montclair CDP,True,in town
+964184,WAWA 8617,convenience,10060 Jefferson Davis Hwy,2010,805892.840922815,4236644.189286779,8377,9248,0.91,11729,0.71,11729,0.71,"urban area, outside limits",fredericksburg,,True,in town
+1120732,Family Dollar Store 10737,Family Dollar,10744 Tidewater Trl,2013,812774.6649813782,4239879.91702504,7223,671,10.76,10030,0.72,10150,0.71,"urban area, outside limits",fredericksburg,,True,in town
+1469553,7-eleven 18551d 18551D,convenience,324 White Oak Rd,2021,812263.9193217161,4246332.712601465,4948,6902,0.72,6903,0.72,6903,0.72,"urban area, outside limits",fredericksburg,,True,in town
+857366,Target 2379,grocery,191 Market St,2008,747335.2975621445,4345156.960830693,5921,2609,2.27,4516,1.31,8260,0.72,"urban area, outside limits",winchester,,False,in town
+1509574,The Lucky Dog,convenience,1313 Tazewell Ave,2022,453195.8437288712,4109627.896162644,1669,449,3.71,2319,0.72,2319,0.72,inside limits,tazewell,,False,in town
+1089240,Brother's Mart,convenience,2801 Melrose Ave NW,2013,590321.6636117279,4127351.7945172926,8341,11537,0.72,11537,0.72,11537,0.72,"urban area, outside limits",vinton,Roanoke city,True,in town
+1152045,Sheetz 543,convenience,9825 Hospital Blvd,2014,807109.017425306,4236323.387564467,8545,9439,0.91,11867,0.72,11867,0.72,"urban area, outside limits",fredericksburg,,True,in town
+828736,Super Giant 235,grocery,5701 Plank Rd,2007,800285.0544111757,4243730.585772409,7343,10158,0.72,10158,0.72,10158,0.72,outside both,fredericksburg,,True,in town
+760598,Family Dollar 28,Family Dollar,324 24th St NW,2005,590723.8256154783,4126890.120862523,7884,10745,0.73,10879,0.72,10933,0.72,"urban area, outside limits",vinton,Roanoke city,True,in town
+984358,CVS 4335,pharmacy,1 McWhirt Loop,2010,804929.551857562,4250882.3973931465,6567,3824,1.72,9024,0.73,9024,0.73,"urban area, outside limits",fredericksburg,Southern Gateway CDP,True,in town
+1535308,7-Eleven 39313A,convenience,2990 Dale Blvd,2023,821862.3584741189,4281975.440846955,7234,8502,0.85,8506,0.85,9898,0.73,outside both,dumfries,Potomac Mills CDP,True,in town
+1590265,7-eleven #33641b 33641B,convenience,10740 Tidewater Trl,2024,812764.4461968585,4239736.107860203,7315,669,10.93,9990,0.73,10017,0.73,"urban area, outside limits",fredericksburg,,True,in town
+1220645,ALDI 66042 66042,grocery,1521 Hershberger Rd NW,2015,592149.0342047261,4130313.16058234,7677,10399,0.74,10406,0.74,10532,0.73,"urban area, outside limits",vinton,Roanoke city,True,in town
+247707,ANNWIL GROCERIES 2,grocery,217 24th St NW,2024,590715.2628298257,4126780.181446839,7882,10771,0.73,10809,0.73,10863,0.73,"urban area, outside limits",vinton,Roanoke city,True,in town
+1341780,BJ's Wholesale Club 219,grocery,1419 Hershberger Rd NW,2018,592180.8245064417,4130323.496638,7656,10391,0.74,10420,0.73,10545,0.73,"urban area, outside limits",vinton,Roanoke city,True,in town
+1355913,Aum Petroleum 5406652800,convenience,1832 Berryville Pike,2019,748663.5762799581,4341464.51039776,4494,6149,0.73,6158,0.73,6158,0.73,"urban area, outside limits",winchester,,False,in town
+1371856,Sheetz 665,convenience,1731 Roanoke Rd,2019,596191.7576606834,4140882.073488209,3168,523,6.05,4320,0.73,4320,0.73,"urban area, outside limits",troutville,Daleville CDP,True,in town
+645142,GIANT FOOD 789,grocery,35 Town and Country Dr,2004,812340.8351729591,4246133.351305331,4967,6671,0.74,6671,0.74,6671,0.74,"urban area, outside limits",fredericksburg,,True,in town
+1306939,7-eleven 33383b 33383B,convenience,20630 Ashburn Rd,2018,804146.0411745583,4327847.824416855,8870,695,12.77,11965,0.74,11965,0.74,outside both,leesburg,Ashburn CDP,False,in town
+878721,Family Dollar Store 6070,Family Dollar,2900 Dale Blvd,2009,822094.0399740108,4282027.0444718255,7338,5608,1.31,6923,1.06,9923,0.74,outside both,dumfries,Potomac Mills CDP,True,in town
+1100187,Hershberger Bp,convenience,1650 Hershberger Rd NW,2023,591872.0958115528,4130191.393352284,7846,7885,1.0,10395,0.75,10549,0.74,"urban area, outside limits",vinton,Roanoke city,True,in town
+1604012,Madina Halal Supermarket,grocery,2904 Dale Blvd,2024,822069.3877778526,4282032.721127787,7338,5619,1.31,6933,1.06,9912,0.74,outside both,dumfries,Potomac Mills CDP,True,in town
+964007,WAWA 668,convenience,830 Warrenton Rd,2010,804881.6466470025,4250991.75023538,6686,3823,1.75,9023,0.74,9023,0.74,"urban area, outside limits",fredericksburg,Southern Gateway CDP,True,in town
+1377715,Super Amanecer 2 0,grocery,1398 Towne Square Blvd NW,2025,592011.1382410116,4130603.4624216,7953,10440,0.76,10589,0.75,10709,0.74,"urban area, outside limits",vinton,Roanoke city,True,in town
+1113772,Fas Mart 3520,convenience,2404 Fontaine Ave,2013,717719.2480276097,4211600.655152299,2679,3023,0.89,3384,0.79,3618,0.74,inside limits,charlottesville,,False,in town
+1389731,7-eleven 40052a 40052A,convenience,43305 Junction Plz,2019,802702.341722684,4326659.185679187,8936,3265,2.74,12011,0.74,12011,0.74,outside both,leesburg,Ashburn CDP,False,in town
+1007027,604 Minute Market,convenience,5981 Cloverdale Rd,2011,599346.4237657643,4133429.120502857,8363,286,29.26,470,17.79,11154,0.75,"urban area, outside limits",troutville,,True,in town
+796247,TARGET STORES 2138,grocery,9785 Jefferson Davis Hwy,2006,805812.3993049853,4236266.529632112,8763,9245,0.95,11732,0.75,11732,0.75,"urban area, outside limits",fredericksburg,,True,in town
+789901,Martins Food Market 6295,grocery,240 Elizabeth Dr,2006,742002.979824873,4329743.943152598,10543,3432,3.07,4864,2.17,14053,0.75,"urban area, outside limits",winchester,,False,in town
+938486,Fast Stop Mart 1,convenience,2502 Shenandoah Ave NW,2022,590454.9458936544,4126666.412572764,8133,10788,0.75,10788,0.75,10842,0.75,"urban area, outside limits",vinton,Roanoke city,True,in town
+403546,GIANT FOOD 262,grocery,43330 Junction Plaza,2001,802799.1082891336,4326600.650287501,9037,3258,2.77,11977,0.75,11977,0.75,outside both,leesburg,Ashburn CDP,False,in town
+1506997,The Market At Mill Creek (Exxon) 83,convenience,1345 Parham Cir,2022,719699.6514869786,4208750.674757556,3767,3793,0.99,5005,0.75,5005,0.75,"urban area, outside limits",charlottesville,,False,in town
+945324,CVS Pharmacy 7951,pharmacy,10000 Jefferson Davis Hwy,2010,805762.4097987544,4236220.176404292,8818,9223,0.96,11763,0.75,11763,0.75,"urban area, outside limits",fredericksburg,,True,in town
+867309,Dollar Tree 3961,Dollar Tree,160 Getty Ln,2008,747792.2725289401,4341535.763705727,3709,4949,0.75,4949,0.75,4949,0.75,"urban area, outside limits",winchester,,False,in town
+1328039,Pop Shop 1,convenience,1005 Fincastle Tpke,2018,456620.5067191304,4110057.775413785,2357,2992,0.79,3119,0.76,3119,0.76,inside limits,tazewell,,False,in town
+696515,Food Lion 2539,grocery,1301 Main St Ste A,2001,653319.7905189005,4109665.906417753,1492,351,4.25,1485,1.0,1960,0.76,inside limits,altavista,,False,in town
+1153799,7 Eleven 10757A,convenience,18750 Fuller Heights Rd,2014,819687.7519330926,4272663.545735069,2330,2946,0.79,3057,0.76,3057,0.76,outside both,dumfries,Triangle CDP,True,in town
+1499770,Nishi Food Mart 7,convenience,2825 Hershberger Rd NW,2022,590547.1083809175,4129295.965770724,8634,10739,0.8,11222,0.77,11222,0.77,"urban area, outside limits",vinton,Roanoke city,True,in town
+1074423,African Market Place Llc,grocery,1901 Commonwealth Dr,2012,719688.2750350637,4216184.65506031,3749,4850,0.77,4850,0.77,4850,0.77,"urban area, outside limits",charlottesville,,False,in town
+1353892,Dollar Tree 7803,Dollar Tree,410 Fairfax Pike,2019,741968.3405061157,4329462.890484699,10825,3429,3.16,4869,2.22,14027,0.77,outside both,winchester,,False,in town
+1570189,Handymart 9,convenience,5116 Main St,2024,741122.6894319202,4330409.051914901,10147,4267,2.38,6180,1.64,13112,0.77,"urban area, outside limits",winchester,Stephens City town,False,in town
+1053949,Grants Supermarket 10,grocery,103 Macarthur Ln,2012,516668.70491402847,4131704.3100711927,444,419,1.06,581,0.77,581,0.77,inside limits,narrows,,False,in town
+852980,Wegmans 55,grocery,14801 Dining Way,2008,823071.1868892876,4282387.9115167605,7975,9834,0.81,10383,0.77,10383,0.77,outside both,dumfries,Leesylvania CDP,True,in town
+607951,Kroger 325,grocery,5050 Rutgers St NW,1994,591803.9503773102,4130667.762730063,8161,10393,0.79,10485,0.78,10608,0.77,"urban area, outside limits",vinton,Roanoke city,True,in town
+485893,ONE STOP MARKET 3,convenience,801 Bridge St SW,2002,590273.3898275759,4125494.979338681,8317,10357,0.8,10608,0.78,10832,0.77,"urban area, outside limits",vinton,Roanoke city,True,in town
+335081,Food Lion 1536,grocery,32 Mill Creek Dr,1999,719795.4149012099,4208784.348026887,3721,3775,0.99,4862,0.77,4862,0.77,"urban area, outside limits",charlottesville,,False,in town
+678539,Dollar General 3689,Dollar General,1239 Main St,2004,653261.5507314315,4109447.315167617,1433,405,3.54,1424,1.01,1856,0.77,inside limits,altavista,,False,in town
+352035,Kroger 334,grocery,1980 Rio Hill Ctr,1993,721448.6022553417,4218577.937658032,6217,5352,1.16,7953,0.78,7953,0.78,"urban area, outside limits",charlottesville,Rio CDP,False,in town
+772836,DOLLAR TREE 246,Dollar Tree,3300 Ferncliff Ave NW,2005,590363.3009010652,4129245.1600799416,8786,10716,0.82,11214,0.78,11214,0.78,"urban area, outside limits",vinton,Roanoke city,True,in town
+1560732,7-eleven 10789B,convenience,14797 Darbydale Ave,2023,818422.6998392034,4282467.887570684,7779,9599,0.81,10011,0.78,10011,0.78,outside both,dumfries,Dale City CDP,True,in town
+1311890,Royal Farms 249,convenience,43101 Van Metre Drvie,2018,802067.0498417127,4325748.667997141,9437,3184,2.96,12132,0.78,12175,0.78,outside both,leesburg,Broadlands CDP,False,in town
+1008807,Speedway 4620,convenience,1102 W Main St,2011,536768.8098209454,4108994.617779336,2358,2390,0.99,2390,0.99,3033,0.78,inside limits,radford,,False,in town
+1453188,Stop & Save 2,convenience,210 W Riverside Dr,2021,452950.1686374478,4109694.718575749,1916,446,4.3,2448,0.78,2448,0.78,inside limits,tazewell,,False,in town
+1499765,Nishi Food Mart 6,convenience,2941 Hershberger Rd NW,2022,590449.4804951169,4129226.117951112,8699,10714,0.81,11215,0.78,11215,0.78,"urban area, outside limits",vinton,Roanoke city,True,in town
+1653354,7-Eleven 32356J,convenience,2035 Northwestern Pike,2025,741606.9125804016,4341631.225767111,3241,3342,0.97,3390,0.96,4137,0.78,"urban area, outside limits",winchester,,False,in town
+1257161,Dollar Tree 6398,Dollar Tree,1991 Daniel Stuart Sq,2016,824199.6653736137,4282521.53680591,8554,10903,0.78,10903,0.78,10903,0.78,outside both,dumfries,Leesylvania CDP,True,in town
+1329872,CVS Pharmacy 11179,pharmacy,6010 Plank Rd,2018,798658.1369573076,4243851.449300191,8939,8983,1.0,11399,0.78,11399,0.78,"urban area, outside limits",fredericksburg,,True,in town
+1313522,Lidl 1215,grocery,21285 Coopers Hawk Dr,2018,801992.1170071971,4325622.383399292,9520,3166,3.01,12275,0.78,12275,0.78,outside both,leesburg,Broadlands CDP,False,in town
+1326312,Publix 1632,grocery,9601 Patriot Hwy,2018,805842.9152701569,4235899.731530098,9117,9452,0.96,11695,0.78,11695,0.78,"urban area, outside limits",fredericksburg,,True,in town
+964002,WAWA 662,convenience,2051 Daniel Stuart Sq,2010,824224.8371630557,4282610.407398871,8645,10909,0.79,10909,0.79,10909,0.79,outside both,dumfries,Leesylvania CDP,True,in town
+865061,Sam's Club 8220,grocery,1455 Towne Square Blvd NW,2008,591606.2213002606,4130677.802458369,8331,10398,0.8,10409,0.8,10534,0.79,"urban area, outside limits",vinton,Roanoke city,True,in town
+491141,Giant Food 797,grocery,44110 Ashburn Shopping Cntr,1994,805132.2262427101,4327613.641409081,9735,694,14.03,12279,0.79,12288,0.79,outside both,leesburg,Ashburn CDP,False,in town
+1482464,7-eleven #34371b 34371B,convenience,700 Fieldstone Dr NE,2021,798607.2643392226,4336432.772760127,2221,2714,0.82,2714,0.82,2784,0.8,inside limits,leesburg,,False,in town
+1158990,Dollar General 14892,Dollar General,321 Fairfax Pike,2014,741691.4597297185,4329455.47767658,10898,3479,3.13,4843,2.25,13617,0.8,"urban area, outside limits",winchester,,False,in town
+1302298,Aldi 71085,grocery,43150 Broadlands Center Plz,2017,802258.2135001152,4325558.112860332,9691,3197,3.03,12029,0.81,12154,0.8,outside both,leesburg,Broadlands CDP,False,in town
+1337475,Quickway,convenience,2209 Brandon Ave SW,2018,589874.9441524666,4124199.1765380735,8899,11004,0.81,11128,0.8,11128,0.8,"urban area, outside limits",vinton,Roanoke city,True,in town
+1463752,"Fresh World Woodbridge, Inc.",grocery,2042 Daniel Stuart Sq,2021,824344.941507234,4282659.7694995655,8744,10879,0.8,10879,0.8,10879,0.8,outside both,dumfries,Leesylvania CDP,True,in town
+740471,Dollar General 7,Dollar General,3323 Melrose Ave NW,2005,589470.0594853808,4127734.335940562,9243,11576,0.8,11576,0.8,11576,0.8,"urban area, outside limits",vinton,Roanoke city,True,in town
+1483915,Duck In Market Llc,convenience,3630 Franklin Rd SW,2021,591350.9138015864,4121406.8226094497,8611,10751,0.8,10751,0.8,10751,0.8,"urban area, outside limits",vinton,Roanoke city,True,in town
+1140426,Dollar Tree 5541,Dollar Tree,43150 Broadlands Center Plz,2014,802230.8450561622,4325548.167152413,9688,3193,3.03,12059,0.8,12157,0.8,outside both,leesburg,Broadlands CDP,False,in town
+1539027,Hollins Foodmart,convenience,8201 Williamson Rd,2023,594778.5423790432,4134766.441207987,8314,607,13.71,2980,2.79,10349,0.8,"urban area, outside limits",troutville,Hollins CDP,True,in town
+322864,Food Lion 1087,grocery,15432 Rogers Clark Blvd,1994,819552.8233148693,4217235.024776421,940,928,1.01,1158,0.81,1158,0.81,outside both,bowling-green,,False,in town
+1433293,7-eleven 15987b 15987B,convenience,1001 Aylor Rd,2021,741236.2925337014,4329895.904157481,10599,4294,2.47,4924,2.15,13110,0.81,"urban area, outside limits",winchester,,False,in town
+1474908,7-Eleven Store 40109H,convenience,44111 Ashburn Shopping Plz,2021,805111.321661022,4327392.688193804,9872,694,14.23,12076,0.82,12191,0.81,outside both,leesburg,Ashburn CDP,False,in town
+1557446,Taza Bazar,grocery,14816 Build America Dr,2023,824474.7202127317,4282492.68726199,8658,10469,0.83,10562,0.82,10562,0.82,outside both,dumfries,Woodbridge CDP,True,in town
+927821,ALI GROCERY & HALAL MEAT,grocery,14808 Build America Dr,2009,824506.3203794527,4282530.668538605,8707,10471,0.83,10554,0.82,10554,0.82,outside both,dumfries,Woodbridge CDP,True,in town
+595557,Sheetz 207,convenience,1683 Berryville Pike,1994,748246.0540847254,4341514.589586112,4119,4937,0.83,4970,0.83,4970,0.83,"urban area, outside limits",winchester,,False,in town
+1344343,Dollar Tree 7702,Dollar Tree,1095 International Pkwy,2018,804314.8609243564,4251420.543353576,7313,3619,2.02,7693,0.95,8768,0.83,"urban area, outside limits",fredericksburg,Southern Gateway CDP,True,in town
+1045447,CVS Pharmacy 7843,pharmacy,1725 Amherst St,2012,742567.3303988118,4341720.938426334,2518,2497,1.01,2622,0.96,3046,0.83,inside limits,winchester,,False,in town
+615159,Food Lion 1160,grocery,1641 Blue Ridge Blvd,1993,602190.5285364895,4133988.230475635,8678,1860,4.67,2736,3.17,10423,0.83,"urban area, outside limits",vinton,,True,in town
+1331727,Trader Joe's 619,grocery,44755 Brimfield Dr,2018,807020.4447059019,4328395.402140813,10737,705,15.22,12891,0.83,12891,0.83,outside both,leesburg,One Loudoun CDP,False,in town
+1218182,Melrose Stop Mart,convenience,3458 Melrose Ave NW,2015,589142.7489847592,4127836.25632534,9584,11583,0.83,11583,0.83,11583,0.83,"urban area, outside limits",vinton,Roanoke city,True,in town
+1262270,Weis Markets 297,grocery,282 Deacon Rd,2016,811329.8122171608,4248225.483013526,5070,6083,0.83,6083,0.83,6083,0.83,"urban area, outside limits",fredericksburg,,True,in town
+815321,Super Giant 234,grocery,550 Celebrate Virginia Pkwy,2007,803923.9842673064,4251456.925403388,7526,3468,2.17,9035,0.83,9035,0.83,"urban area, outside limits",fredericksburg,,True,in town
+897629,Kumasi Supermarket Inc,grocery,14790 Build America Dr,2009,824547.7952645645,4282604.635690672,8792,10471,0.84,10554,0.83,10554,0.83,outside both,dumfries,Woodbridge CDP,True,in town
+1395180,Patel Brothers,grocery,43761 Parkhurst Plz,2020,804145.1248959799,4325921.016491869,10353,2998,3.45,11372,0.91,12441,0.83,outside both,leesburg,Ashburn CDP,False,in town
+850733,CVS Pharmacy 6852,pharmacy,16712 Jefferson Davis Hwy,2008,824532.9071493313,4282691.878008461,8861,10473,0.85,10610,0.84,10610,0.84,outside both,dumfries,Woodbridge CDP,True,in town
+450454,Flowers Bakery Outlet 379,convenience,3527 Melrose Ave NW,2000,589041.8815879873,4127901.757571953,9695,11590,0.84,11590,0.84,11590,0.84,"urban area, outside limits",vinton,Roanoke city,True,in town
+1064303,7-Eleven Inc F 19125A,convenience,14410 Minnieville Rd,2012,817448.2245264549,4282672.557455273,8260,9870,0.84,9870,0.84,9870,0.84,outside both,dumfries,Montclair CDP,True,in town
+1596843,ABS Convenience Store,convenience,121 Fairfax Pike,2024,741042.5943506522,4329492.203645122,11043,4288,2.58,4950,2.23,13106,0.84,"urban area, outside limits",winchester,,False,in town
+1621646,Publix North Carolina LP 1885,grocery,5940 Plank Rd,2024,799169.086661337,4243798.10759315,8438,8934,0.94,10072,0.84,10072,0.84,"urban area, outside limits",fredericksburg,,True,in town
+1477388,7-Eleven 40053,convenience,4370 Parkhurst Plz,2023,804087.0439400666,4325853.174287744,10374,3126,3.32,11385,0.91,12414,0.84,outside both,leesburg,Ashburn CDP,False,in town
+504236,Kroger 202,grocery,4488 Electric Rd,1973,590773.6321342934,4121218.596485417,9198,10968,0.84,10968,0.84,10968,0.84,"urban area, outside limits",vinton,Cave Spring CDP,True,in town
+1496876,Wawa Store 8662,convenience,45950 Russell Branch Pkwy,2022,807207.4323213699,4328313.759296423,10938,706,15.5,12861,0.85,12861,0.85,outside both,leesburg,Ashburn CDP,False,in town
+1396002,Tiger Mart N/A,convenience,5420 Peters Creek Rd,2020,590862.4363864918,4132662.489714344,10120,11898,0.85,11898,0.85,11898,0.85,"urban area, outside limits",vinton,Hollins CDP,True,in town
+1378724,Dollar General 21480,Dollar General,4136 Dale Blvd,2019,819022.8080495592,4283578.21063314,8755,10257,0.85,10257,0.85,10257,0.85,outside both,dumfries,Dale City CDP,True,in town
+1647745,Sheetz 860,convenience,1783 Blue Ridge Boulevard,2025,602369.4634895835,4133989.3089086106,8755,1942,4.51,2702,3.24,10289,0.85,"urban area, outside limits",vinton,Laymantown CDP,True,in town
+1344903,CVS Pharmacy 10563,pharmacy,44835 Russell Branch Pkwy,2018,807203.3209849072,4328308.039324126,10938,706,15.5,12868,0.85,12868,0.85,outside both,leesburg,Ashburn CDP,False,in town
+1423067,Tia Mart,convenience,6405 Williamson Rd,2020,592622.1200438177,4132489.825166871,8727,10117,0.86,10282,0.85,10282,0.85,"urban area, outside limits",vinton,Hollins CDP,True,in town
+1675529,STOP IN FOOD STORES 8093,convenience,4111 Franklin Rd,2025,591351.8158842,4120508.092487176,9131,10560,0.86,10566,0.86,10566,0.86,"urban area, outside limits",vinton,Cave Spring CDP,True,in town
+1206988,MOM's Organic Market 13,grocery,14470 Smoketown Rd,2015,822171.4713121247,4283176.607279629,8474,8479,1.0,8480,1.0,9897,0.86,outside both,dumfries,Dale City CDP,True,in town
+628775,Sheetz 197,convenience,747 Fairfax St,1993,740734.4599642971,4329600.524680966,11038,4258,2.59,6163,1.79,12833,0.86,"urban area, outside limits",winchester,Stephens City town,False,in town
+685560,Food Lion 1226,grocery,14641 Jefferson Davis Hwy,1996,824742.701538502,4282830.519971143,9084,10494,0.87,10516,0.86,10516,0.86,outside both,dumfries,Woodbridge CDP,True,in town
+1113803,Fas Mart 3535,convenience,1800 Monticello Rd,2013,721838.185474312,4210548.807008614,2498,2854,0.88,2864,0.87,2864,0.87,inside limits,charlottesville,,False,in town
+912894,CVS Pharmacy 1819,pharmacy,1400 Tasker Rd,2009,744185.3457484235,4330963.675209913,9047,3770,2.4,3770,2.4,10427,0.87,"urban area, outside limits",winchester,,False,in town
+672326,SAFEWAY  1702,grocery,4215 Cheshire Station Plz,2002,819102.9867757518,4283753.766751987,8918,10309,0.87,10309,0.87,10309,0.87,outside both,dumfries,Dale City CDP,True,in town
+1449544,WAWA 8667,convenience,820 Pantops Corner Way,2021,725591.511452355,4212530.902282908,5342,4816,1.11,6131,0.87,6131,0.87,outside both,charlottesville,,False,in town
+1071508,Lotte Plaza,grocery,43930 Farmwell Rd,2012,804507.5978412721,4325518.108452581,10892,2926,3.72,11367,0.96,12459,0.87,outside both,leesburg,Ashburn CDP,False,in town
+1594712,Afghanistan Market No,grocery,14216 Smoketown Rd,2024,821965.3056888895,4283379.555599258,8629,8787,0.98,8787,0.98,9888,0.87,outside both,dumfries,Dale City CDP,True,in town
+1312388,Skymart,convenience,3902 Melrose Ave NW,2025,588611.4962954712,4128028.1236623535,10141,11599,0.87,11598,0.87,11598,0.87,"urban area, outside limits",vinton,Roanoke city,True,in town
+810344,Dollar General 8906,Dollar General,304 Deacon Rd,2007,811491.129100254,4248266.175064084,5218,6013,0.87,6014,0.87,6014,0.87,"urban area, outside limits",fredericksburg,,True,in town
+933019,Walgreens 18200,pharmacy,104 W Broaddus Ave,2010,820202.9370036415,4218119.96295976,594,0,inf,676,0.88,676,0.88,inside limits,bowling-green,,False,in town
+1603808,7-eleven #10783b 10783B,convenience,14517 Richmond Hwy,2024,824763.2009792444,4283098.235474751,9328,10471,0.89,10602,0.88,10602,0.88,outside both,dumfries,Woodbridge CDP,True,in town
+1675535,STOP IN FOOD STORES 8200,convenience,2939 Edgewood St SW,2025,588677.9827428426,4124422.7754974873,10032,11341,0.88,11341,0.88,11341,0.88,"urban area, outside limits",vinton,Roanoke city,True,in town
+1454764,Roanoke Grocery Market Rgm Beirut 1,grocery,3805 Melrose Ave NW,2021,588787.0174786932,4128027.762300503,9969,11222,0.89,11279,0.88,11279,0.88,"urban area, outside limits",vinton,Roanoke city,True,in town
+945251,CVS Pharmacy 5750,pharmacy,1379 N Frederick Pike,2010,743975.7791568848,4343690.269261909,3708,3715,1.0,4192,0.88,4192,0.88,"urban area, outside limits",winchester,,False,in town
+1634162,"7-Eleven, Inc. 34914H",convenience,14400 Gideon Dr,2025,822404.0949299501,4283355.026495092,8702,5618,1.55,6932,1.26,9913,0.88,outside both,dumfries,Potomac Mills CDP,True,in town
+1621264,Nu-deli Mart,convenience,3459 Shenandoah Ave NW,2025,589039.6785123366,4126606.8806190793,9542,10700,0.89,10704,0.89,10808,0.88,"urban area, outside limits",vinton,Roanoke city,True,in town
+760627,Dollar Tree 6678,Dollar Tree,2917 Brandon Ave SW,2005,588709.8394911392,4124345.4436745583,10014,11334,0.88,11334,0.88,11334,0.88,"urban area, outside limits",vinton,Roanoke city,True,in town
+1662860,Sheetz 887,convenience,4143 Franklin Rd,2025,591381.3511605418,4120403.006007414,9173,10309,0.89,10429,0.88,10429,0.88,"urban area, outside limits",vinton,Cave Spring CDP,True,in town
+1187192,Circle K 2723718,convenience,7107 Williamson Rd,2015,592484.8691228344,4133524.655688955,9597,9872,0.97,10873,0.88,10873,0.88,"urban area, outside limits",vinton,Hollins CDP,True,in town
+1646067,Sandstone Market,convenience,2930 Radford Rd,2025,544977.222371685,4109421.5873948815,5864,4464,1.31,6685,0.88,6685,0.88,outside both,radford,Plum Creek CDP,False,in town
+1054291,Dollar Tree 249,Dollar Tree,4208 Franklin Rd SW,2012,591729.1738928852,4120239.2535932288,9009,10143,0.89,10154,0.89,10154,0.89,"urban area, outside limits",vinton,Roanoke city,True,in town
+1184359,Dollar Tree 5891,Dollar Tree,7208 Williamson Rd,2015,592439.0600013214,4133661.737496569,9732,9863,0.99,10925,0.89,10925,0.89,"urban area, outside limits",vinton,Hollins CDP,True,in town
+268629,Kroger 209,grocery,7223 Williamson Rd NW,1972,592516.209575599,4133734.713250069,9740,9821,0.99,10974,0.89,10974,0.89,"urban area, outside limits",vinton,Hollins CDP,True,in town
+1621511,7-Eleven 27822B,convenience,14116 Minnieville Rd,2024,818962.7125980337,4283990.553945409,9172,10257,0.89,10257,0.89,10257,0.89,outside both,dumfries,Dale City CDP,True,in town
+1349554,Barracks Road Market,convenience,2613 Barracks Rd,2019,718161.3298581203,4215696.056884451,3837,4278,0.9,4296,0.89,4296,0.89,"urban area, outside limits",charlottesville,,False,in town
+898366,Target Store 1858,grocery,3290 Seminole Trl,2009,724359.8529273125,4223110.258536564,11399,7153,1.59,12825,0.89,12825,0.89,"urban area, outside limits",charlottesville,Hollymead CDP,False,in town
+648167,CVS Pharmacy 6292,pharmacy,7215 Williamson Rd,2001,592527.3316870447,4133770.342904576,9762,9786,1.0,10953,0.89,10953,0.89,"urban area, outside limits",vinton,Hollins CDP,True,in town
+1470256,Dollar General 23058,Dollar General,2001 W Main St,2021,536387.6157239176,4107784.845374153,3072,3128,0.98,3223,0.95,3446,0.89,inside limits,radford,,False,in town
+1021197,Americana Grocery 4,grocery,14428 Jefferson Davis Hwy,2011,824788.6741823817,4283415.082098459,9619,10865,0.89,10865,0.89,10865,0.89,outside both,dumfries,Woodbridge CDP,True,in town
+923735,Costco Wholesale 0626,grocery,2700 Potomac Mills Cir,2009,822445.1425971945,4283504.578134262,8857,5617,1.58,6931,1.28,9914,0.89,outside both,dumfries,Potomac Mills CDP,True,in town
+394683,CVS PHARMACY 2111,pharmacy,43930 Farmwell Hunt Plz Ste 140,2003,804649.9373753779,4325291.249188039,11160,2951,3.78,11369,0.98,12453,0.9,outside both,leesburg,Ashburn CDP,False,in town
+754672,Dollar General 3971,Dollar General,6913 Williamson Rd,2005,592433.5024265994,4133122.419553161,9323,9994,0.93,10344,0.9,10344,0.9,"urban area, outside limits",vinton,Hollins CDP,True,in town
+271262,GIANT FOOD 754,grocery,4309 Dale Blvd,1978,818591.7599448366,4283846.741497869,9091,9588,0.95,10105,0.9,10105,0.9,outside both,dumfries,Dale City CDP,True,in town
+1188652,Metro Express 1,convenience,3911 Melrose Ave Nw,2020,588626.0832273121,4128073.769760972,10136,11196,0.91,11241,0.9,11241,0.9,"urban area, outside limits",vinton,Roanoke city,True,in town
+821740,7-Eleven Inc F 22511A,convenience,1701 Featherstone Rd,2007,825052.331881157,4282766.402486661,9185,10019,0.92,10192,0.9,10192,0.9,outside both,dumfries,Woodbridge CDP,True,in town
+297125,Wilmont Market,convenience,3605 Shenandoah Ave NW,2021,588888.2747083935,4126587.521200246,9692,10679,0.91,10694,0.91,10810,0.9,"urban area, outside limits",vinton,Roanoke city,True,in town
+1086859,Aldi 80013,grocery,1030 Warrenton Rd,2013,803951.4785701939,4251888.168290496,7894,3560,2.22,7736,1.02,8783,0.9,"urban area, outside limits",fredericksburg,,True,in town
+1627515,"7-Eleven, Inc. 28596L",convenience,327 Deacon Rd,2024,811632.4946144721,4248347.2339791125,5378,5986,0.9,5993,0.9,5993,0.9,"urban area, outside limits",fredericksburg,,True,in town
+432290,Walmart Supercenter 3243,grocery,4524 Challenger Ave,2002,599814.0661980248,4131582.7474270137,5620,5204,1.08,5886,0.95,6270,0.9,"urban area, outside limits",vinton,,True,in town
+1479177,7-Eleven 40047H,convenience,43971 Farmwell Hunt Plz,2021,804801.3962468207,4325299.338735911,11243,2790,4.03,11372,0.99,12485,0.9,outside both,leesburg,Ashburn CDP,False,in town
+1453620,Sheetz 710,convenience,19910 Riverside Commons Plaza,2021,807917.3415669587,4329733.597748848,10873,733,14.83,11924,0.91,11924,0.91,outside both,leesburg,University Center CDP,False,in town
+902485,Birago International Market Inc,grocery,4357 Dale Blvd,2009,818524.6414498258,4283955.251846168,9210,9568,0.96,10104,0.91,10104,0.91,outside both,dumfries,Dale City CDP,True,in town
+1018070,Dollar General 12994,Dollar General,3318 Brandon Ave SW,2011,588380.3063105105,4124562.7665330297,10304,11348,0.91,11348,0.91,11348,0.91,"urban area, outside limits",vinton,Roanoke city,True,in town
+652882,Food Lion 1572,grocery,5592 Staples Mill Plz,2000,815673.4737568797,4282320.825312387,8725,9343,0.93,9620,0.91,9620,0.91,outside both,dumfries,Dale City CDP,True,in town
+763885,HARRIS TEETER 132,grocery,159 Community St,2005,724134.4716285153,4223075.163770364,11287,7074,1.6,12299,0.92,12299,0.92,"urban area, outside limits",charlottesville,Hollymead CDP,False,in town
+875081,Fas Mart 17,convenience,9815 Courthouse Rd,2008,801296.8898372212,4237381.112234085,9741,9096,1.07,10606,0.92,10606,0.92,"urban area, outside limits",fredericksburg,,True,in town
+648302,CVS Pharmacy 1832,pharmacy,4338 Dale Blvd,2001,818610.7809321266,4284025.4083393365,9263,9633,0.96,10114,0.92,10114,0.92,outside both,dumfries,Dale City CDP,True,in town
+1263463,Weis Markets 304,grocery,9801 Courthouse Rd,2016,801189.8501411722,4237336.000058819,9844,9133,1.08,10666,0.92,10666,0.92,"urban area, outside limits",fredericksburg,,True,in town
+1573224,Duck In Deli #9,convenience,2307 W Main St,2024,536384.0889860842,4107366.5930495095,3287,3344,0.98,3365,0.98,3579,0.92,inside limits,radford,,False,in town
+1282086,Woodbridge International Market,grocery,14350 Jefferson Davis Hwy,2017,824945.0948014999,4283535.990404964,9799,10488,0.93,10671,0.92,10671,0.92,outside both,dumfries,Woodbridge CDP,True,in town
+250249,Flowers Bakery Outlet 467,convenience,7310 Peppers Ferry Blvd,2002,536851.9418203962,4111313.600297738,3105,2868,1.08,3147,0.99,3355,0.93,"urban area, outside limits",radford,Fairlawn CDP,False,in town
+1641733,Sam Mart 88,convenience,7409 Williamson Rd,2025,592827.0098666537,4133906.81324048,9689,9739,0.99,10396,0.93,10396,0.93,"urban area, outside limits",vinton,Hollins CDP,True,in town
+914492,Walmart Supercenter 4258,grocery,11 Village Pkwy,2009,803229.2973557187,4252495.696255074,8771,3452,2.54,9393,0.93,9393,0.93,"urban area, outside limits",fredericksburg,,True,in town
+734541,Sheetz 358,convenience,7335 Lee Hwy,2004,536687.03583487,4111250.754867269,3186,1513,2.11,3098,1.03,3382,0.94,"urban area, outside limits",radford,,False,in town
+1662166,7-Eleven 35272J,convenience,3455 Seminole Trl,2025,724728.4070186766,4223424.76043908,11828,7265,1.63,12533,0.94,12533,0.94,"urban area, outside limits",charlottesville,Hollymead CDP,False,in town
+870693,Walgreens 10503,pharmacy,43250 Southern Walk Plz,2008,802600.1269861714,4323544.468812131,11667,3131,3.73,12398,0.94,12398,0.94,outside both,leesburg,Broadlands CDP,False,in town
+469327,CVS Pharmacy 3397,pharmacy,9767 Courthouse Rd,2001,801198.3999046788,4237224.049230616,9924,9079,1.09,10585,0.94,10585,0.94,outside both,fredericksburg,,True,in town
+1410092,Sheetz 681,convenience,3300 Noble Pond Way,2020,821377.8515691315,4284279.898465763,9428,9292,1.01,9296,1.01,9980,0.94,outside both,dumfries,Potomac Mills CDP,True,in town
+1185480,A & M Market,convenience,251 Potomac Ave,2015,823397.5600304061,4270215.067185882,5637,2901,1.94,5799,0.97,5987,0.94,outside both,dumfries,Quantico town,True,in town
+865055,Sam's Club 6371,grocery,14050 Worth Ave,2008,822263.5026685343,4284093.252108782,9389,8560,1.1,8564,1.1,9899,0.95,outside both,dumfries,Potomac Mills CDP,True,in town
+817739,Harris Teeter 284,grocery,43300 Southern Walk Plz,2007,802785.4159710509,4323508.233446769,11774,3149,3.74,12391,0.95,12391,0.95,outside both,leesburg,Broadlands CDP,False,in town
+1242365,Apple Market 519,convenience,519 N Main St,2016,646388.8901010661,4091660.531833189,1082,517,2.09,1137,0.95,1137,0.95,inside limits,gretna,,False,in town
+682073,Food Lion 864,grocery,1740 Timberwood Blvd,1990,724741.7281371993,4223228.541916976,11651,7288,1.6,12307,0.95,12307,0.95,"urban area, outside limits",charlottesville,Hollymead CDP,False,in town
+355719,Walmart 1904,grocery,19360 Compass Creek Parkway,2004,797288.2427488378,4331156.37451799,3218,1651,1.95,2111,1.52,3399,0.95,outside both,leesburg,,False,in town
+547191,Sheetz 186,convenience,1503 N Frederick Pike,1995,743608.5071584969,4343853.261736995,3928,3891,1.01,4126,0.95,4126,0.95,"urban area, outside limits",winchester,,False,in town
+577253,Fas Mart 19,convenience,620 Cambridge St,2003,809540.9541573715,4250750.262670082,6223,6449,0.96,6449,0.96,6449,0.96,"urban area, outside limits",fredericksburg,,True,in town
+1503316,Sheetz 728,convenience,3510 Seminole Trl,2022,724768.4224787008,4223659.105747074,12060,7257,1.66,12562,0.96,12562,0.96,outside both,charlottesville,Hollymead CDP,False,in town
+1507666,More Groceries,grocery,43540 Yukon Dr,2022,803647.0247337313,4323839.38135419,11854,3260,3.64,11776,1.01,12382,0.96,outside both,leesburg,Ashburn CDP,False,in town
+1571004,Handymart 18,convenience,1462 N Frederick Pike,2024,743705.1893118824,4343912.940670537,3969,3863,1.03,4151,0.96,4151,0.96,"urban area, outside limits",winchester,,False,in town
+1187337,Brambleton Neighborhood Store,convenience,3041 Brambleton Ave SW,2025,589219.8779482857,4122166.1453645504,10143,10488,0.97,10538,0.96,10538,0.96,"urban area, outside limits",vinton,Roanoke city,True,in town
+880503,B Js Wholesale Club 41,grocery,14123 Noblewood Plz,2009,820861.6607155739,4284365.8560820045,9468,9223,1.03,9228,1.03,9892,0.96,outside both,dumfries,Potomac Mills CDP,True,in town
+372594,Food Lion 1652,grocery,629 Peters Creek Rd NW,1988,588071.860757378,4126404.7057764186,10501,10640,0.99,10700,0.98,10917,0.96,"urban area, outside limits",vinton,Roanoke city,True,in town
+1307761,Wigs Global Food,grocery,14130 Noblewood Plz,2018,820826.2136100128,4284336.630862808,9437,9252,1.02,9254,1.02,9877,0.96,outside both,dumfries,Potomac Mills CDP,True,in town
+796565,Martins Food Market 6299,grocery,200 Rivendell Ct,2006,743902.3497907118,4344021.30984816,4046,3734,1.08,4188,0.97,4188,0.97,"urban area, outside limits",winchester,,False,in town
+555399,Walmart Supercenter 1852,grocery,14000 Worth Ave,2001,822449.2801962071,4284286.462232189,9618,8469,1.14,8469,1.14,9897,0.97,outside both,dumfries,Potomac Mills CDP,True,in town
+1404375,Food City 858,grocery,1701 Tyler Ave,2020,541536.5926496736,4108229.0873462735,2603,2550,1.02,2627,0.99,2675,0.97,inside limits,radford,,False,in town
+856836,Dollar Tree 3622,Dollar Tree,180 Rivendell Ct,2008,743902.3497907118,4344021.30984816,4046,3734,1.08,4188,0.97,4188,0.97,"urban area, outside limits",winchester,,False,in town
+1449545,WAWA 8659,convenience,3267 Proffit Rd.,2021,724888.6364922404,4223594.680971811,12046,7287,1.65,12317,0.98,12317,0.98,outside both,charlottesville,Hollymead CDP,False,in town
+1194732,Dollar General 14856,Dollar General,7530 Smith Station Rd,2015,799061.3399644559,4239866.990553769,9839,9837,1.0,9992,0.98,9992,0.98,"urban area, outside limits",fredericksburg,,True,in town
+1263461,Weis Markets 303,grocery,7100 Salem Fields Blvd,2016,799194.4048740375,4240605.538062,9367,9586,0.98,9586,0.98,9586,0.98,"urban area, outside limits",fredericksburg,,True,in town
+1429038,Tuckersmarket No,convenience,551 Dearing Ford Rd,2024,650986.3444437338,4112470.5572346714,3041,454,6.69,3067,0.99,3067,0.99,"urban area, outside limits",altavista,,False,in town
+1301747,Lidl 1039,grocery,1175 Warrenton Rd,2017,803528.2072017796,4252575.876610289,8699,3532,2.46,7775,1.12,8808,0.99,"urban area, outside limits",fredericksburg,,True,in town
+1320883,Happy Mart,convenience,27922 Governor G C Peery Hwy,2018,457256.7487896156,4111865.063888882,4044,0,inf,3306,1.22,4090,0.99,inside limits,tazewell,,False,in town
+870686,Walgreens 10394,pharmacy,701 Fairfax Pike,2008,742900.2669011789,4329318.326042606,10796,4565,2.37,4565,2.37,10796,1.0,"urban area, outside limits",winchester,,False,in town
+1319606,7-eleven 33288C,convenience,11119 Gordon Rd,2018,798995.0707490337,4240450.327747891,9615,9619,1.0,9619,1.0,9619,1.0,"urban area, outside limits",fredericksburg,,True,in town
+1283280,Royal Farms 237,convenience,1221 Warrenton Rd,2017,803157.2136260567,4252806.463660641,9078,3463,2.62,9087,1.0,9087,1.0,"urban area, outside limits",fredericksburg,,True,in town
+765123,Walmart Supercenter 3344,grocery,501 Wal Mart Dr,2005,741329.2738043903,4341942.646621228,3640,3011,1.21,3116,1.17,3639,1.0,outside both,winchester,,False,in town
+1484090,7-eleven 28422D,convenience,552 White Oak Rd,2022,813985.8535906686,4246496.242767698,6650,6605,1.01,6606,1.01,6606,1.01,outside both,fredericksburg,,True,fringe
+724352,Walmart Supercenter 2762,grocery,7373 Peppers Ferry Blvd,1999,536855.8140453037,4111849.4525082177,3491,3073,1.14,3184,1.1,3401,1.03,outside both,radford,,False,fringe
+765281,Dollar General 5738,Dollar General,114 Floyd Hwy N,2005,561619.3082517827,4085862.904920835,991,902,1.1,935,1.06,935,1.06,outside both,floyd,,False,fringe
+1444173,Round Hill Shopping Center,convenience,2578 Northwestern Pike,2021,739903.7603275019,4341993.246706671,4927,3427,1.44,4559,1.08,4559,1.08,outside both,winchester,,False,fringe
+1571267,Sheetz 808,convenience,133 Botanical Blvd,2023,741612.054471826,4341884.709567249,3371,2997,1.12,3028,1.11,3114,1.08,outside both,winchester,,False,fringe
+1548833,Wawa Store 8677,convenience,860 Richmond Hwy,2023,809596.8788574142,4252210.986018139,7636,5013,1.52,6190,1.23,6190,1.23,outside both,fredericksburg,,True,fringe
+1596004,Mk Fast Fuel LLC,convenience,3430 Northwestern Pike,2024,737416.0989241322,4342688.417822098,7492,3001,2.5,5623,1.33,5623,1.33,outside both,winchester,,False,fringe
+1541418,Nrvminimart Inc,convenience,2753 Peppers Fry Rd NW,2023,544792.2532709094,4113970.267849532,7418,1629,4.55,3335,2.22,5437,1.36,outside both,radford,Belview CDP,False,fringe
+374628,Walmart 1301,grocery,5350 Clearbrook Village Ln,2003,593098.2703531432,4118315.912501021,9516,6770,1.41,6953,1.37,6953,1.37,outside both,vinton,,True,fringe
+1026625,Walmart 4514,grocery,201 Maranto Manor Dr,2011,746486.9155935275,4329937.819644664,10282,952,10.81,2994,3.43,7506,1.37,outside both,winchester,,False,fringe
+881307,Family Dollar Store 4659,Family Dollar,369 Webbs Mill Rd N,2009,560094.4785764067,4086463.2592552034,1295,529,2.45,862,1.5,862,1.5,outside both,floyd,,False,fringe
+1662462,Carter's 2,convenience,1344 W Gretna Rd,2025,643914.7102720067,4091037.779962408,1797,768,2.34,1118,1.61,1165,1.54,outside both,gretna,,False,fringe
+1068600,One Stop Mart,convenience,1305 W Gretna Rd,2022,643950.4841914503,4090924.0809508096,1751,741,2.36,973,1.8,1116,1.57,outside both,gretna,,False,fringe
+912185,Christy Stephens LLC,convenience,3410 Peppers Ferry Rd,2009,542943.3454983956,4114071.573781065,6201,978,6.34,3899,1.59,3899,1.59,outside both,radford,Belview CDP,False,fringe
+1265852,Dollar General Store 16747,Dollar General,3262 Peppers Ferry Rd,2016,543292.6916933209,4113984.6107439976,6356,952,6.68,3875,1.64,3875,1.64,outside both,radford,Belview CDP,False,fringe
+728815,West End Market,convenience,269 Floyd Hwy S,1993,559575.4964636128,4084894.250862393,1278,599,2.13,735,1.74,735,1.74,outside both,floyd,,False,fringe
+1474374,White Oak Mart,convenience,1175 White Oak Rd,2021,818356.321423046,4245294.356105959,10824,5170,2.09,5715,1.89,5715,1.89,outside both,fredericksburg,,True,fringe
+1145394,Dollar General 15056,Dollar General,15682 Stewartsville Rd,2014,605795.5425407703,4125612.054482851,7244,3409,2.12,3777,1.92,3777,1.92,outside both,vinton,,True,fringe
+366315,Food Lion 490,grocery,25102 Lankford Hwy,1987,966103.2523064652,4185893.54409244,2674,1257,2.13,1392,1.92,1392,1.92,outside both,onancock,,False,fringe
+1216956,Dollar General Store 16142,Dollar General,1051 Adria Rd,2015,451611.7751792754,4111277.655262954,3919,504,7.77,1979,1.98,1979,1.98,"urban area, outside limits",tazewell,,False,fringe
+951772,Onley Goose Creek 18,convenience,25188 Lankford Hwy,2010,965950.408001516,4185621.9440020206,2636,873,3.02,1253,2.1,1253,2.1,outside both,onancock,Onley town,False,another place
+1554677,Pop Shop 2,convenience,8306 Baptist Valley Rd,2023,450969.1487327072,4111337.950257175,4468,467,9.57,2117,2.11,2117,2.11,outside both,tazewell,,False,between places
+792202,Walmart 3768,grocery,125 Clarion Rd,2006,653654.534810801,4112169.194919929,3191,416,7.66,1487,2.15,1487,2.15,inside limits,altavista,,False,between places
+877859,Dollar Tree 6716,Dollar Tree,25105 Lankford Hwy,2009,966200.3425318575,4185632.7401587735,2859,900,3.18,1315,2.17,1315,2.17,outside both,onancock,,False,between places
+1083341,Royal Farms 134,convenience,25220 Lankford Hwy,2012,965817.9965600284,4185442.868552202,2604,853,3.05,1184,2.2,1184,2.2,outside both,onancock,Onley town,False,another place
+902893,Dollar Tree 4055,Dollar Tree,105 Clarion Rd,2009,653868.5097409657,4112177.539631532,3324,407,8.17,1507,2.21,1507,2.21,inside limits,altavista,,False,between places
+1302773,Shop In,convenience,7865 Jordantown Rd,2017,607050.9940312649,4125561.4068891183,8500,3447,2.47,3755,2.26,3755,2.26,outside both,vinton,Stewartsville CDP,True,another place
+714083,CVS PHARMACY 1570,pharmacy,25201 Lankford Hwy,2003,966005.089191438,4185453.448060844,2761,858,3.22,1210,2.28,1210,2.28,outside both,onancock,Onley town,False,another place
+546736,Slaughters Supermarket,grocery,536 Floyd Hwy S,2024,558757.4617354664,4084922.947039067,2056,734,2.8,784,2.62,784,2.62,outside both,floyd,,False,between places
+438852,Dollar General 3670,Dollar General,25296 Lankford Hwy,2004,965618.8359351166,4185316.8483737423,2505,854,2.93,938,2.67,938,2.67,outside both,onancock,Onley town,False,another place
+1235844,Stop In Food Stores 8142,convenience,5150 State Park Rd,2016,531056.1216445914,4104412.118918638,9372,3317,2.83,3317,2.83,3500,2.68,outside both,radford,,False,between places
+1052275,Circle K 2723711,convenience,5149 State Park Rd,2012,531049.9084249827,4104409.877332767,9379,3317,2.83,3317,2.83,3500,2.68,outside both,radford,,False,between places
+1321577,Snuffy's General Store,convenience,4351 Prices Fork Rd,2024,544790.2918415549,4118006.295189765,10482,1963,5.34,3829,2.74,3829,2.74,"urban area, outside limits",radford,Prices Fork CDP,False,another place
+1231867,Riverway,convenience,4338 Prices Fork Rd,2016,544819.2253523254,4118071.904850418,10553,1967,5.36,3826,2.76,3826,2.76,"urban area, outside limits",radford,Prices Fork CDP,False,another place
+1257373,Dollar General 17153,Dollar General,123 Royal Oak Rd,2016,461372.6936472348,4114770.661875422,9011,2929,3.08,3211,2.81,3211,2.81,outside both,tazewell,,False,between places
+1295651,Gobble Stop 12,convenience,6011 Wright Ave,2017,530223.5941708481,4108309.648207918,8938,2424,3.69,2424,3.69,3073,2.91,"urban area, outside limits",radford,,False,between places
+1468990,Shop N Fill Mart 1,convenience,15421 Antioch Rd,2021,818358.561760712,4214586.752905045,3633,450,8.08,1206,3.01,1206,3.01,outside both,bowling-green,,False,between places
+985083,7-Eleven Inc F 19966A,convenience,19250 Eltham Rd,2010,869428.6991809215,4161775.179875697,2797,580,4.82,580,4.82,920,3.04,outside both,west-point,,False,between places
+1352322,Dollar General 19540,Dollar General,416 Highway View Rd,2019,647451.0007589983,4103892.288993453,7156,1208,5.92,1628,4.4,2061,3.47,outside both,altavista,Motley CDP,False,another place
+1611034,Short Stop,convenience,7149 James D Hagood Hwy,2024,695003.795079677,4072648.018470699,3225,0,inf,0,inf,885,3.65,outside both,scottsburg,,False,between places
+1325364,DOLLAR GENERAL 18909,Dollar General,7080 Bethel Rd,2018,694987.9434479158,4072716.48257617,3284,0,inf,0,inf,876,3.75,outside both,scottsburg,,False,between places
+1590836,Buds Shopping Center,convenience,2756 Adria Rd,2024,451589.04294809455,4113811.684015571,5878,0,inf,1480,3.97,1480,3.97,outside both,tazewell,,False,between places
+1410635,Super 7 Dell Mart,convenience,3740 Grit Rd,2020,655513.5366483651,4104198.90961094,6495,1300,5.0,1300,5.0,1607,4.04,outside both,altavista,,False,between places
+1545547,KDR Convenience,convenience,13109 Rockford School Rd,2023,645738.0361844519,4103642.822523144,8487,1042,8.14,1640,5.17,1885,4.5,outside both,altavista,Motley CDP,False,another place
+1068531,El Cruzero Tienda Hispana,grocery,12164 Lankford Hwy,2012,978720.428828357,4205579.281545731,2786,522,5.34,524,5.31,615,4.53,outside both,hallwood,,False,between places
+956856,Walmart Supercenter 4378,grocery,26036 Lankford Hwy,2010,965345.3860619172,4184044.587549137,3245,563,5.76,663,4.9,663,4.9,outside both,onancock,,False,between places
+1550428,Super Amanecer 3 Incorporated 1,grocery,510 Peppers Fry Rd NW,2023,550252.6017983427,4113018.1474497775,11774,2035,5.78,2035,5.78,2364,4.98,"urban area, outside limits",radford,Christiansburg town,False,another place
+817052,Target Stores 1292,grocery,195 Conston Ave,2007,551266.749145521,4112409.642348295,12568,2200,5.71,2200,5.71,2434,5.16,"urban area, outside limits",radford,Christiansburg town,False,another place
+1675534,STOP IN FOOD STORES 8160,convenience,955 Federal St,2025,517491.8088808369,4138842.80788585,7097,1370,5.18,1370,5.18,1370,5.18,outside both,narrows,,False,between places
+844860,Walgreens 07606,pharmacy,2460 N Franklin St,2008,551197.9837886465,4113058.234056928,12684,2079,6.1,2079,6.1,2374,5.34,"urban area, outside limits",radford,Christiansburg town,False,another place
+746458,Dollar General 6403,Dollar General,411 Old Virginia Avenue,2005,515780.6199106163,4137094.295554871,5502,886,6.21,1009,5.45,1009,5.45,outside both,narrows,Rich Creek town,False,another place
+1396911,Country Side Market,convenience,1285 North East Side Hwy,2020,707905.4466464433,4255388.997544865,7292,449,16.22,1280,5.7,1280,5.7,outside both,shenandoah,Elkton town,False,another place
+334029,Jewells Market,grocery,1525 Virginia Ave,1980,515578.31022001314,4137340.2047764338,5791,883,6.56,1005,5.76,1005,5.76,outside both,narrows,Rich Creek town,False,another place
+863477,Grant's Supermarket 6,grocery,778 Federal Street,2008,515836.5457467484,4137481.585348101,5866,892,6.58,1015,5.78,1015,5.78,outside both,narrows,Rich Creek town,False,another place
+1568794,Zuni Food Mart,convenience,5445 Windsor Blvd,2023,872009.2525314053,4088143.763208272,7864,216,36.38,216,36.38,1255,6.27,outside both,ivor,,False,between places
+1012674,Stop In 8170,convenience,505 Virginia Ave,2017,513190.347093281,4136439.692146828,6108,894,6.83,894,6.83,894,6.83,outside both,narrows,Glen Lyn town,False,another place
+897350,Family Dollar Store 476,Family Dollar,107 S Stuart Ave,2009,707910.0520995342,4253892.080154216,8788,449,19.56,1275,6.89,1275,6.89,"urban area, outside limits",shenandoah,Elkton town,False,another place
+1479012,7ElevenStore 28552J,convenience,203 S Stuart Ave,2021,707945.5869571513,4253801.932358944,8879,449,19.76,1279,6.94,1279,6.94,"urban area, outside limits",shenandoah,Elkton town,False,another place
+383349,Va Hillbilly 4,convenience,4172 Stoney Ridge Road,1998,450623.4621550856,4117505.003297149,9599,0,inf,1374,6.99,1374,6.99,outside both,tazewell,,False,between places
+1255764,Dollar General 17157,Dollar General,44 Marysville Rd,2016,659485.735428801,4116864.823262576,10587,382,27.68,1514,6.99,1514,6.99,outside both,altavista,,False,between places
+1426917,340 Market & Deli,convenience,150 South East Side Hwy,2024,707808.6844344218,4253147.609203253,9530,449,21.22,1264,7.54,1264,7.54,"urban area, outside limits",shenandoah,Elkton town,False,another place
+1646398,Trip Stop,convenience,32677 US-29,2025,646005.7565105659,4098798.737711964,7978,796,10.03,1044,7.64,1044,7.64,outside both,gretna,,False,between places
+1400526,Sycamore Grocery,convenience,32677 U S Highway 29,2020,646034.1656837325,4098802.557345965,7983,797,10.02,1045,7.64,1045,7.64,outside both,gretna,,False,between places
+1140759,Thevillagestore,convenience,22076 US Highway 29,2014,642595.4261484209,4084100.632869774,7407,711,10.42,893,8.29,947,7.82,outside both,gretna,,False,between places
+1624598,Sunnyside Food Mart,convenience,5527 E Lewis B Puller Memorial Hwy,2025,875382.9928921387,4163466.4220643137,4730,114,41.39,578,8.18,578,8.18,outside both,west-point,,False,between places
+1603943,The Valley Pantry & Deli,convenience,15451 Old Spotswood Trl,2024,705972.4266285866,4253872.239869788,8967,485,18.51,994,9.02,994,9.02,"urban area, outside limits",shenandoah,Elkton town,False,another place
+1554652,Valley Mart 1,convenience,4061 Baptist Valley Rd,2023,444165.747783445,4109100.418890863,10475,1006,10.41,1065,9.84,1065,9.84,outside both,tazewell,,False,between places
+1326271,Tracey's Place,convenience,8075 Dryburg Rd,2018,703450.1204492636,4067575.204418128,6765,0,inf,0,inf,666,10.16,outside both,scottsburg,,False,between places
+636792,Food Lion 596,grocery,14811 Spotswood Trl,1988,705013.7978691498,4253634.53940172,9425,556,16.96,924,10.2,924,10.2,"urban area, outside limits",shenandoah,Elkton town,False,another place
+902020,Walgreens 17535,pharmacy,14813 Spotswood Trl,2009,705013.7978691498,4253634.53940172,9425,556,16.96,924,10.2,924,10.2,"urban area, outside limits",shenandoah,Elkton town,False,another place
+1596111,Dollar General 30541,Dollar General,19539 Governor G C Peery Hwy,2024,444677.8168862149,4107263.17171285,10074,986,10.22,987,10.2,987,10.2,outside both,tazewell,,False,between places
+1500455,JOE'S KWIK MARTS 8302,convenience,100 Ball Ave,2022,511712.8829358174,4135640.937879121,6650,649,10.25,649,10.25,649,10.25,outside both,narrows,Glen Lyn town,False,another place
+1347000,Dollar General 19689,Dollar General,14093 Lankford Hwy,2018,978220.091773935,4202769.319590876,3973,378,10.5,380,10.45,380,10.45,outside both,hallwood,Mappsville CDP,False,another place
+914950,Maxi Mart,convenience,5944 E Gretna Rd,2009,653947.8378517262,4089242.8722914914,8399,683,12.29,765,10.98,765,10.98,outside both,gretna,,False,between places
+1282459,Dollar General 17508,Dollar General,3736 Lewis B Puller Memorial Hwy,2017,878059.2561534629,4164223.255448977,7340,562,13.07,665,11.03,665,11.03,outside both,west-point,,False,between places
+1658299,Main Street Market,convenience,220 N Main St,2025,523354.3811890189,4131426.302378191,6253,361,17.34,480,13.03,480,13.03,outside both,narrows,Pearisburg town,False,another place
+890936,Walgreens 17869,pharmacy,121 N Main St,2009,523433.9106465537,4131182.4553417214,6350,373,17.02,486,13.07,486,13.07,outside both,narrows,Pearisburg town,False,another place
+652866,Food Lion 130,grocery,302 S Main St,1982,523576.5324537159,4130873.3316375553,6526,394,16.55,495,13.18,495,13.18,outside both,narrows,Pearisburg town,False,another place
+1636357,Corner Mart ES06,convenience,10361 Lankford Hwy,2025,979518.0248745224,4208040.080176596,4066,185,22.02,232,17.5,289,14.07,outside both,hallwood,Temperanceville CDP,False,another place
+740538,Dollar General 2709,Dollar General,900 Wenonah Ave,2005,524000.28609510016,4131093.08866749,6922,375,18.45,487,14.21,487,14.21,outside both,narrows,Pearisburg town,False,another place
+1558028,Star Mart,convenience,1325 Wenonah Ave,2024,524615.7721441124,4131179.1907605473,7528,368,20.46,483,15.57,483,15.57,outside both,narrows,Pearisburg town,False,another place
+428797,BLUE RIDGE MINUTE MARKET,convenience,42 Blue Ridge Dr,2003,606153.7714357756,4138190.990715994,7807,193,40.47,266,29.36,500,15.62,"urban area, outside limits",troutville,Blue Ridge CDP,True,another place
+865831,DOLLAR GENERAL 11193,Dollar General,8505 Roanoke Rd,2008,599081.207595612,4150520.837693039,8731,105,83.08,525,16.62,525,16.62,outside both,troutville,Fincastle town,True,another place
+1127370,Heritage Family Market Inc,grocery,36 Botetourt Rd,2014,599064.1067511402,4150620.501520695,8831,105,84.0,524,16.84,524,16.84,outside both,troutville,Fincastle town,True,another place
+1230250,Dollar Tree 6155,Dollar Tree,120 Kinter Way,2016,525712.1903299445,4131304.521504412,8614,361,23.89,480,17.95,480,17.95,outside both,narrows,Pearisburg town,False,another place
+450695,Walmart Supercenter 2646,grocery,160 Kinter Way,1998,525823.3687433267,4131450.196265283,8719,356,24.5,478,18.24,478,18.24,outside both,narrows,Pearisburg town,False,another place
+1307238,Pearisburg Fast Fuels 1,convenience,165 Kinter Way,2017,525854.9033333925,4131279.444685214,8758,361,24.25,480,18.24,480,18.24,outside both,narrows,Pearisburg town,False,another place
+1642424,Corner Mart ES05,convenience,16110 Lankford Hwy,2025,976499.1144260924,4199672.245729104,6396,330,19.38,331,19.35,331,19.35,outside both,hallwood,Nelsonia CDP,False,another place
+925258,Royal Farms 105,convenience,16135 Lankford Hwy,2009,976546.3559224552,4199559.085582414,6513,330,19.75,330,19.71,330,19.71,outside both,hallwood,Nelsonia CDP,False,another place
+1559559,Blueridge Service Center,convenience,3750 Blue Ridge Blvd,2023,604741.0035707556,4136109.225318509,7918,189,41.93,346,22.85,395,20.04,outside both,troutville,Blue Ridge CDP,True,another place

@@ -144,3 +144,27 @@ Folder: `2026-11-21-04-mathews-middlesex/`, with `notes.md`.
   - All seven are near route junctions. The junction test needs a cleaner rule.
 - **Rounds.** The map took three. The Hartfield label is left as a listed fault because of
   the round budget.
+
+## Step 5: the editorial 20, first full pass (12:02-12:26)
+
+Folder: `2026-11-21-05-editorial-20/`, with `findings.md`.
+
+- **Data.**
+  - NLCD for 20 windows.
+  - Overpass was at capacity again, after half the towns. Switched to Geofabrik's Virginia
+    extract (430 MB, too big to bring across). Filtered it on the Mac to roads and the three
+    chains (67 MB).
+  - Checked the extract against Overpass on Chase City: 299 against 298 road ways.
+- **Rules.** The first run showed two cases the measure had no rule for: tiny towns with no
+  built-up core (Scottsburg) and towns swallowed by a metro (Vinton). Wrote rules for both
+  before reading any store results.
+- **Results.**
+  - 40 percent of Dollar General stores are beyond their town, against 11 percent of
+    supermarkets.
+  - Dollar General is no more often in the edge band than road frontage is.
+  - The five stores between places were all authorized 2016-24. In town, 8 of 12 date to
+    2004-05.
+- **Rounds.** Contact sheet in 2, pooled chart in 2. The first chart title overstated the
+  result and was rewritten.
+- **Open.** Two calls are still waiting on Chris: the region grouping, and the Hartfield label
+  round.

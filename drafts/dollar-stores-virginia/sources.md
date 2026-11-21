@@ -16,6 +16,9 @@ Raw downloads stay out of git. Each line: what, URL, date fetched, size, SHA-256
 | NLCD 2021 percent impervious, three test windows (WCS) | https://www.mrlc.gov/geoserver/ows, coverage mrlc_download__NLCD_2021_Impervious_L48 | 2026-11-21 | 1,050,540 B each | marion c6015d40..., south-hill 685443da..., chase-city eb4aa2ec... | Public domain (USGS/MRLC) |
 | NLCD 2021 impervious descriptor, same windows | coverage mrlc_download__NLCD_2021_Impervious_descriptor_L48 | 2026-11-21 | 1,050,540 B each | marion 7a0d49c3..., south-hill c9292175..., chase-city ade60bbd... | Public domain |
 | OSM via Overpass, Middle Peninsula and lower Northern Neck roads (bbox 37.15,-77.05,38.05,-76.15) | overpass-api.de | 2026-11-21 (OSM base 16:52 UTC) | 31,350,083 B | c7907e8ccebb170d413b43ce9f4b8aaed895aa233ad287a2a2cfe9fe37c8ce3b | ODbL |
+| Geofabrik OpenStreetMap extract, Virginia | https://download.geofabrik.de/north-america/us/virginia/virginia-latest.osm.pbf | 2026-11-21 | 429,912,960 B | md5 fa4a5272b012447062f4c09ad078dc91 (matches Geofabrik's .md5) | ODbL |
+| The same, filtered on the Mac to drivable highways and the three chains' brand:wikidata (pyosmium BackReferenceWriter) | virginia-roads.osm.pbf | 2026-11-21 | 67,219,024 B | 11ab9f74eb1941a23f4ad01aa3a233eab85e50acfb29b159aa8f4e27316812f7 | ODbL |
+| NLCD 2021 impervious and descriptor, 20 editorial windows | MRLC WCS, as above | 2026-11-21 | 40 files | checksums in raw/nlcd-editorial20.sha256 on the Mac | Public domain |
 | Planning district membership | https://www.vapdc.org/pdc-directory (opened, not downloaded) | 2026-11-21 | | | Facts, used in regions.json |
 
 Raw files are kept on the Mac in `ISO-TEST/isoscape-work/dollar-stores/raw/`.

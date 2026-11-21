@@ -80,7 +80,9 @@ def main():
         s = snap[snap.within(window)]
         s.to_file(f"{d}/stores.gpkg")
         w, s_, e, n = win.to_crs(4326).total_bounds
-        json.dump({"town": town, "bbox": [s_, w, n, e]}, open(f"{d}/bbox.json", "w"))
+        a = win.to_crs(5070).buffer(500).total_bounds
+        json.dump({"town": town, "bbox": [s_, w, n, e], "bbox5070": [round(v, -1) for v in a]},
+                  open(f"{d}/bbox.json", "w"))
         print(town, "blocks", len(b), "stores", s["kind"].value_counts().to_dict())
 
 

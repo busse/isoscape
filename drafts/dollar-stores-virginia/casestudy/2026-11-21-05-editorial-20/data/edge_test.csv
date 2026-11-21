@@ -1,0 +1,7 @@
+kind,stores_A_le_3,in_fringe,share,ci95_low,ci95_high,random_road_share
+Dollar General,17,3,0.176,0.062,0.41,0.308
+Family Dollar,8,1,0.125,0.022,0.471,0.321
+Dollar Tree,13,0,0.0,0.0,0.228,0.256
+grocery,90,3,0.033,0.011,0.093,0.23
+pharmacy,34,0,0.0,0.0,0.102,0.241
+convenience,136,8,0.059,0.03,0.112,0.262
