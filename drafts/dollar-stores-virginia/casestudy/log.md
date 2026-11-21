@@ -234,3 +234,39 @@ Folder: `2026-11-21-08-editorial-lines/`. Chris asked, in chat, for the possible
 lines and their data viz, each argued at its strongest. Six lines are set out in
 `steelman.md`, with the evidence, the viz and the weak spot for each, and a suggested
 combination.
+
+## Step 9: more coverage, an independent review, and the replication plan (15:44 onward)
+
+Folder: `2026-11-21-09-replication/`.
+
+- **Chris (15:44).** "I believe the sample is too weak a link to declare editorial coverage.
+  Get more/total coverage of data then let's analyze more deeply. Consider if we should use
+  Fable."
+- **Chris's choices.**
+  - Virginia in full: its 461 CDPs added as held-out set A.
+  - Replication in NC, TN, KY, WV, MD and SC as held-out set B.
+  - An independent Fable agent to review the plan and later the findings.
+- **Plan v1 (15:58).** Frozen before any held-out result was read.
+- **Fable review (about 16:05).** "Not ready to run as frozen." It found seven must-fixes:
+  - The discovery numbers were quoted on the wrong unit.
+  - The wording was absolute while the tests were relative.
+  - The test needed to be place-conditional with a cluster bootstrap.
+  - The junction rule was Virginia-only.
+  - Edge-following roads counted as crossings.
+  - C5 was partly made by the stores' own pavement.
+  - Some code would break or reuse stores outside Virginia.
+  It also found that Virginia's own C1 does not clear under the fairer test.
+- **Plan v2 (16:15).** Adopts all seven must-fixes; the should-fixes become stated
+  sensitivities. The route-number prefixes were tabulated from OSM for each state first,
+  which involves no outcomes.
+- **Chris (16:16).** "Keep in mind that our goal is to answer the 'Why?' first and foremost,
+  then visualize it, but we need to bias toward the town edge angle because it is so
+  noticeable to drivers who drive the state highways through many of these towns." Taken as
+  the frame for the findings and the visuals: the driver's view along state highways through
+  towns. The frozen tests stay as they are. C1 and C2 already ask the driver's question.
+- **Data fetched.** For the six states: TIGER places and 2020 blocks, Geofabrik extracts
+  (md5 checked, then filtered on the Mac one at a time after two ran out of memory together),
+  and HPMS 2024 (counts match the API's totals).
+- **Fixes on the way.**
+  - The first CDP OSM cut ran out of memory and wrote nothing; it now runs in batches of 60.
+  - prep.py now takes a state and GEOIDs, because Virginia has duplicate CDP names.

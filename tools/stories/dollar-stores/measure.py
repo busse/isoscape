@@ -41,14 +41,14 @@ CRS = 32617
 # lead:   the loose edge plus any block whose mean impervious cover is 20 percent or more, the
 #         Census's impervious test for urban cores
 SETTINGS = {"strict": (164.1, 200, None), "loose": (77.2, 400, None), "lead": (77.2, 400, 20)}
-# MEASURE_FAST=1 (replication states): the strict and loose edges are copies of the lead edge, so
-# only the lead edge is traced. None of the replication tests use strict or loose. Saves about
-# two thirds of the run time on two processors.
+# MEASURE_FAST=1 (replication states): the strict edge is not traced (it is a copy of the lead
+# edge in the outputs); no replication test uses it. The loose edge is kept for test C5.
 FAST = os.environ.get("MEASURE_FAST") == "1"
 RAY_M = 20000
 NULL_N = 4000
 SEED = 20261121
 NULL_ROADS = {"trunk", "primary", "secondary", "tertiary", "trunk_link", "primary_link"}
+GAP_FALLBACK = []  # set when the center falls in a gap of the built-up area
 NONROAD = 24  # NLCD impervious descriptor: non-road non-energy impervious
 CHAIN_IDS = {"Q145168": "Dollar General", "Q5433101": "Family Dollar", "Q5289230": "Dollar Tree"}
 
@@ -63,8 +63,9 @@ def builtup(blocks, center, density, close_m, imperv_min):
     closed = dense.buffer(close_m).buffer(-close_m)
     parts = list(getattr(closed, "geoms", [closed]))
     keep = [g for g in parts if g.contains(center)]
-    if not keep:  # center fell in a gap: take the nearest piece
+    if not keep:  # center fell in a gap: take the nearest piece (logged in meta.json)
         keep = [min(parts, key=lambda g: g.distance(center))]
+        GAP_FALLBACK.append(True)
     return keep[0]
 
 
@@ -136,9 +137,10 @@ def main():
         w = inside["POP20"].astype(float)
         c = inside.geometry.centroid
         center = Point((c.x * w).sum() / w.sum(), (c.y * w).sum() / w.sum())
-        if FAST:
+        GAP_FALLBACK.clear()
+        if FAST:  # lead and loose only (loose is needed for C5 on the homes-only edge)
             lead_area = builtup(blocks, center, *SETTINGS["lead"])
-            areas = {"strict": lead_area, "loose": lead_area, "lead": lead_area}
+            areas = {"strict": lead_area, "loose": builtup(blocks, center, *SETTINGS["loose"]), "lead": lead_area}
         else:
             areas = {k: builtup(blocks, center, *v) for k, v in SETTINGS.items()}
         # Rule (set 2026-11-21, before store results were read): a town whose built-up area is
@@ -155,7 +157,8 @@ def main():
         for _, s in stores.iterrows():
             dist, edge3, sc3 = score(areas["lead"], center, s.geometry)
             if FAST:
-                edge, sc, edge2, sc2 = edge3, sc3, edge3, sc3
+                edge, sc = edge3, sc3
+                _, edge2, sc2 = score(areas["loose"], center, s.geometry)
             else:
                 _, edge, sc = score(area, center, s.geometry)
                 _, edge2, sc2 = score(areas["loose"], center, s.geometry)
@@ -182,7 +185,8 @@ def main():
             p = lines[i].interpolate(rng.uniform(0, lines[i].length))
             _, _, sc3 = score(areas["lead"], center, p)
             if FAST:
-                sc = sc2 = sc3
+                sc = sc3
+                _, _, sc2 = score(areas["loose"], center, p)
             else:
                 _, _, sc = score(area, center, p)
                 _, _, sc2 = score(areas["loose"], center, p)
@@ -200,6 +204,7 @@ def main():
 
         meta = {"center": [center.x, center.y], "pop_in_limits": int(w.sum()),
                 "builtup_km2": {k: round(a.area / 1e6, 2) for k, a in areas.items()}, "limits_km2": round(place.area / 1e6, 2), "lead_rule": lead_rule,
+                "center_gap_fallback": bool(GAP_FALLBACK),
                 # Rule (same date): a town whose built-up area is more than 5 times its limits and
                 # over 30 km2 is joined to a larger urban area and has no edge of its own.
                 "in_larger_urban_area": bool(areas["lead"].area > 5 * place.area and areas["lead"].area > 30e6),
