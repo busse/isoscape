@@ -45,7 +45,7 @@ in this round.
 ::: figure wide
 ![Richmond in 1937 seen from the south, the James River across the lower half: the HOLC's graded areas tinted on the ground, green for A in the West End and Windsor Farms, blue for B, yellow for C in the Fan and the north side, and red for D in Jackson Ward, Church Hill, Fulton, Randolph, Manchester and Blackwell, with the twelve D areas labeled](redlining-grades-1937.webp)
 
-Figure 1. Richmond in 1937, from the south, with the HOLC's grades on the ground. *How this
+Richmond in 1937, from the south, with the HOLC's grades on the ground. *How this
 was made:* the grades as Mapping Inequality digitized them from the 1937 map; buildings standing
 today that the city dates to 1937 or before, and in Jackson Ward the buildings on the 1925 and
 1952 Sanborn sheets; the ground from 2010s lidar. Most buildings of 1937 that are gone are
@@ -62,7 +62,7 @@ more area is marked "Industrial and Commercial" and left ungraded
 ::: figure
 ![A bar chart of graded land by grade: A 7.7 square kilometers, B 12.6, C 13.7, D 14.6](redlining-land.webp)
 
-Figure 2. Graded land by grade, measured from the digitized map.
+Graded land by grade, measured from the digitized map.
 :::
 
 D was 30% of the graded land, the largest of the four grades by area. The descriptions
@@ -101,7 +101,7 @@ found.
 ::: figure wide
 ![Four views at the same scale: A5, Windsor Farms, in 1937 and today, on the left; D1, Jackson Ward and Gilpin, in 1937 and today, on the right, with the interstate crossing D1 today](redlining-pair.webp)
 
-Figure 3. A5 (Windsor Farms) and D1 (Jackson Ward and Gilpin), the same ground width
+A5 (Windsor Farms) and D1 (Jackson Ward and Gilpin), the same ground width
 (2.6 km), in 1937 and today. *How this was made:* as figure 1; today, the buildings and streets
 of OpenStreetMap. Rough draft.
 :::
@@ -116,10 +116,10 @@ crosses it.
 ::: compare wide
 ![Richmond in 1937 with the HOLC's grades on the ground](redlining-grades-1937.webp) 1937
 ![Richmond today with the same grades under it and the limited-access highways in black](redlining-built-2026.webp) today
-:::
 
-Figure 4. The same frame in 1937 and today. Drag the divider. Today's limited-access highways
-are drawn in black over the 1937 grades.
+The same frame in 1937 (left of the divider) and today (right). Drag the divider, or move it
+with the arrow keys. Today's limited-access highways are drawn in black over the 1937 grades.
+:::
 
 - **Gilpin Court.** The Richmond Housing Authority's first clearance was Apostle Town in D1.
   Gilpin Court, 300 units, replaced it and displaced 250 Black families
@@ -142,13 +142,13 @@ are drawn in black over the 1937 grades.
 ::: figure wide
 ![A closer view of today: I-95 and I-64 cross D1 north of downtown and run along D5's edge, and the Downtown Expressway runs through D8 west of downtown, all drawn in black over the 1937 red](redlining-built-close.webp)
 
-Figure 5. D1, D5 and D8 today, with I-95, I-64 and the Downtown Expressway in black. Rough draft.
+D1, D5 and D8 today, with I-95, I-64 and the Downtown Expressway in black. Rough draft.
 :::
 
 ::: figure
 ![Two bars split by grade: graded land is A 16%, B 26%, C 28%, D 30%; the limited-access highway inside graded land is A 4%, B 9%, C 23%, D 64%](redlining-highways.webp)
 
-Figure 6. Of the 19.6 km of limited-access carriageway inside the 1937 graded areas,
+Of the 19.6 km of limited-access carriageway inside the 1937 graded areas,
 64% lies in D areas, which were 30% of the graded land.
 :::
 
