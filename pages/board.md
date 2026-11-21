@@ -14,7 +14,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Stage | Entries |
 |---|---|
 | research | 1 |
-| working draft | 1 |
+| final draft | 1 |
 | final production | 45 |
 | live | 2 |
 | on hold | 55 |
@@ -31,11 +31,11 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 |---|---|---|---|---|
 | — | Data visualization: why is there a Dollar General on the edge of town? (Virginia) | story | — | no |
 
-## Working draft
+## Final draft
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
-| — | The Byrd Theatre: Cutaway | cutaway | 1.0.0-d2 | no |
+| — | The Byrd Theatre: Cutaway | cutaway | 1.0.0-rc1 | no |
 
 ## Final production
 
