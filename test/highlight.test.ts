@@ -67,3 +67,25 @@ test('an island switch reads its polygon and the ids it keeps', async () => {
   assert.equal(on?.rings?.length, 3)
   assert.deepEqual(on?.keep, ['a', 'b'])
 })
+
+test('a tint switch reads each graded polygon with its tone and leaves other values out', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'isoscape-tint-'))
+  await writeFile(join(dir, 'g.geojson'), JSON.stringify({
+    type: 'FeatureCollection',
+    features: [
+      { type: 'Feature', properties: { grade: 'D' }, geometry: polygons.features[1].geometry },
+      { type: 'Feature', properties: { grade: 'A' }, geometry: polygons.features[0].geometry },
+      { type: 'Feature', properties: { grade: null }, geometry: polygons.features[0].geometry },
+    ],
+  }))
+  await writeFile(join(dir, 'h.json'), JSON.stringify({
+    epochs: [], features: [], rules: [], present: 2026,
+    switches: { grades: { tint: { file: join(dir, 'g.geojson'), property: 'grade', values: ['A', 'B', 'C', 'D'], roads: ['motorway'] } } },
+  }))
+  const h = await loadHistory(join(dir, 'h.json'))
+  assert.equal(switchedOn(h, []).tint, undefined)
+  const on = switchedOn(h, ['grades']).tint
+  // D (tone 3): two polygons, the first with its hole; A (tone 0): one; the ungraded one is left out.
+  assert.deepEqual(on?.areas?.map((a) => [a.tone, a.polygons.map((p) => p.length)]), [[3, [2, 1]], [0, [1]]])
+  assert.deepEqual(on?.roads, ['motorway'])
+})

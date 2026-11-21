@@ -93,24 +93,34 @@
   "A": {
    "parcels": 3264,
    "by1937": 1166,
-   "share_by1937": 0.357
+   "since2000": 57,
+   "share_by1937": 0.357,
+   "share_2000_on": 0.017
   },
   "B": {
    "parcels": 8454,
    "by1937": 4192,
-   "share_by1937": 0.496
+   "since2000": 197,
+   "share_by1937": 0.496,
+   "share_2000_on": 0.023
   },
   "C": {
    "parcels": 12997,
    "by1937": 9356,
-   "share_by1937": 0.72
+   "since2000": 299,
+   "share_by1937": 0.72,
+   "share_2000_on": 0.023
   },
   "D": {
    "parcels": 10376,
    "by1937": 5037,
-   "share_by1937": 0.485
+   "since2000": 1343,
+   "share_by1937": 0.485,
+   "share_2000_on": 0.129
   }
  },
+ "courts": {},
+ "courts_note": "Empty when the OSM cache holds no outline named for the court (true of the November 16, 2026 cache): the brief's placements are not yet rechecked here.",
  "jackson_ward_1952_survival": {
   "outlines_1952": 3158,
   "gone_today": 2744,

@@ -801,6 +801,13 @@ lowest ground inside, and only the buildings the count lists stand on it. Jackso
 are cut where the traced sheets end, at about 8th Street, so the ramp loop past it, never traced,
 is not drawn as empty ground.
 
+**Graded ground.** A `tint` switch paints polygons from a GeoJSON file on the ground by one of
+their values, in the palette's four `tint` tones: Richmond's 1937 HOLC grades, A to D, as
+Mapping Inequality digitized them. The tint is ground cover like a park, painted strip by strip,
+clipped, densified and draped; it goes over parks and woods and under water, streets and rail,
+and the hillshade lies over it. A key is set under the year caption. The switch can also draw
+named kinds of road (the limited-access highways) in the palette's `tint.road`, decks included.
+
 **Era rules** date everything else that OSM maps: the first rule matching a feature's name,
 `ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
 Downtown Expressway from 1976, the river viaducts from 1901, Mayo's Bridge from 1788 (today's

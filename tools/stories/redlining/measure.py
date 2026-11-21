@@ -118,7 +118,7 @@ def main():
     # Buildings drawn for 1937: today's parcels the city dates to 1937 or before, by grade.
     yb = json.load(open(root('data/richmond-streetcars/yearbuilt.json')))
     prepared = {g: prep(by[g]) for g in GRADES}
-    yb_counts = {g: {'parcels': 0, 'by1937': 0} for g in GRADES}
+    yb_counts = {g: {'parcels': 0, 'by1937': 0, 'since2000': 0} for g in GRADES}
     for f in yb['features']:
         y = f['properties'].get('Year_Built')
         try:
@@ -131,10 +131,28 @@ def main():
                 yb_counts[g]['parcels'] += 1
                 if isinstance(y, (int, float)) and 1700 < y <= 1937:
                     yb_counts[g]['by1937'] += 1
+                if isinstance(y, (int, float)) and y >= 2000:
+                    yb_counts[g]['since2000'] += 1
                 break
     for g in GRADES:
         c = yb_counts[g]
         c['share_by1937'] = round(c['by1937'] / c['parcels'], 3) if c['parcels'] else None
+        c['share_2000_on'] = round(c['since2000'] / c['parcels'], 3) if c['parcels'] else None
+
+    # The public-housing courts the brief names: which area each OSM outline's center falls in,
+    # and how far it lies from the nearest D land.
+    courts = {}
+    names = ['Gilpin Court', 'Mosby Court', 'Creighton Court', 'Fairfield Court', 'Whitcomb Court', 'Hillside Court']
+    for e in osm['elements']:
+        nm = e.get('tags', {}).get('name', '')
+        if e['type'] != 'way' or nm not in names or 'geometry' not in e or nm in courts:
+            continue
+        pts = [xy(q['lon'], q['lat']) for q in e['geometry']]
+        if len(pts) < 4 or pts[0] != pts[-1]:
+            continue
+        c = Polygon(pts).centroid
+        inside = [k for k, a in areas.items() if a['geom'].contains(c)]
+        courts[nm] = {'osm': f"w{e['id']}", 'in': inside or ['ungraded'], 'm_to_D': round(by['D'].distance(c))}
 
     # A check on survival where the 1952 Sanborn sheets were traced (Jackson Ward).
     jw52 = json.load(open(root('history/sanborn/jackson-ward-1952.geojson')))
@@ -150,7 +168,8 @@ def main():
         'extent_km': [round((graded.bounds[2] - graded.bounds[0]) / 1000, 1), round((graded.bounds[3] - graded.bounds[1]) / 1000, 1)],
         'frame': {'share_of_grade_inside': in_frame, 'areas_cut_by_frame': cut},
         'motorway': motor, 'motorway_and_links': with_links, 'motorway_in_d_by_road_km': road_d, 'motorway_in_d_by_area_km': d_crossed,
-        'yearbuilt_by_grade': yb_counts,
+        'yearbuilt_by_grade': yb_counts, 'courts': courts,
+        'courts_note': 'Empty when the OSM cache holds no outline named for the court (true of the November 16, 2026 cache): the brief\'s placements are not yet rechecked here.',
         'jackson_ward_1952_survival': jw,
     }
     path = os.path.join(HERE, 'numbers.json')

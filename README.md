@@ -676,6 +676,14 @@ today's bridges). A highlight can also take `ids`, a file of the traced ids a co
 each polygon (`tools/sanborn/jw/count.py` writes one), and then roofs exactly those, so the
 picture and the count agree. Every other build is unchanged.
 
+**Graded ground.** A switch can carry a `tint` (`Tint` in `src/history.ts`): polygons from a
+GeoJSON file painted on the ground by one property's value (`values`, in the order of the
+palette's `tint.tones`), strip by strip with the other ground cover, under water, streets and
+rail. `legend` sets a key under the year caption; `roads` draws the listed OSM `highway` kinds in
+`tint.road`. The redlining story (`history/richmond-1937.json`, written by
+`tools/stories/redlining/history.py`) has `grades` and `built`. Its polygons are CC BY-NC and are
+kept in `data/holc/`, outside git (see `tools/stories/redlining/sources.md`).
+
 **Islands.** A switch can carry an `island` (`Island` in `src/history.ts`): the scene is cut
 to one polygon and drawn alone on blank paper. The ground is painted strip by strip as always,
 each strip clipped to the polygon's part of its band (densified and draped); the cut faces that

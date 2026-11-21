@@ -54,8 +54,14 @@ def main():
                 'sources': [SOURCE_MI],
             })
     tint = {'file': GRADES, 'property': 'grade', 'values': ['A', 'B', 'C', 'D'], 'legend': LEGEND}
+    # Jackson Ward's traced buildings (the 1925 and 1952 Sanborn sheets) and its ground before the
+    # Turnpike's trench, as the Jackson Ward story drew them: without them D1 in 1937 shows only
+    # the few buildings that still stand.
+    jw = json.load(open(os.path.join(ROOT, 'history/jackson-ward.json')))
     out = {
         'extends': 'history/richmond-streetcars.json',
+        'sanborn': jw['sanborn'],
+        'ground': jw['ground'],
         'title': "Richmond in 1937, as the Home Owners' Loan Corporation graded it",
         'about': "In 1937 the federal Home Owners' Loan Corporation graded Richmond's residential areas from A to D. "
                  'The redlining story draws its grades on the ground, with the buildings standing then.',
