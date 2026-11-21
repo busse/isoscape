@@ -3169,15 +3169,16 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "agent",
-   "decision": "Plan approved in part (2026-11-21): three chains shown apart; editorial poster in layout A plus a denser simplified artistic version; next, edge-of-town measures A and B tested on three towns for Chris to choose.",
+   "waiting_on": "owner",
+   "decision": "Edge test on Marion, South Hill, Chase City is in _preview/dollar-stores/edge-test/. Owner picks the lead measure; proposed: loose built-up edge (200 homes/sq mi) plus impervious cover, town limits drawn on every map, classes in town / fringe / between towns.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
    "branch": "viz/dollar-stores-virginia",
    "worktree": null,
    "links": [
-    "drafts/dollar-stores-virginia/plan.md"
+    "drafts/dollar-stores-virginia/plan.md",
+    "drafts/dollar-stores-virginia/findings-edge-test.md"
    ],
    "log": [
     "2026-11-21: rough draft -> research"
