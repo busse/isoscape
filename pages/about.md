@@ -15,8 +15,9 @@ the world, and the data decides the rest. [How it's made](how-its-made.md) expla
 
 isoscape was built, and the holiday shop is run, in chats with Claude, Anthropic's AI, using
 Claude Opus 5.5, directed and reviewed by Chris Busse. Claude wrote the code, traced the
-historic buildings, laid out the prints, and set up the shop. The maps are drawn by software
-from open data, not by hand. The historic years are machine-traced sketches.
+historic buildings, laid out the prints, and set up the shop. Chris Busse draws the maps with
+isoscape, in code, from open data; nothing is drawn by hand. The historic years are
+machine-traced sketches.
 
 ## Try it yourself
 
@@ -95,7 +96,8 @@ the public domain.
 by the [Library of Congress](https://www.loc.gov/collections/sanborn-maps/). The editions used
 were published long enough ago to be out of US copyright. Check each item's rights statement
 on the Library's site before reusing the scans. The traced footprints in `history/sanborn/`
-are derived from them.
+are derived from them, and are free to reuse under CC0: see [Data](data.md) for those and
+the other datasets made for these maps, with their licenses.
 
 **Years built (dated series).** The Richmond series uses the City of Richmond's *Year of
 Construction* layer, published on the city's ArcGIS open data service. Check the city's terms

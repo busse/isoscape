@@ -1,5 +1,10 @@
 {
  "about": "Richmond's car lines in 1925, as Harland Bartholomew & Associates drew them for the City Planning Commission (plate 53, 'Early Transit Routes, 1888 & 1925', 31 January 1943), within the city limits of the day, plus the interurban to Ashland, which ran on its own. The plate is a small diagram: each line here follows the streets it names, placed on today's OpenStreetMap streets, with the details from the sources given per line. Where a source is silent, a line's ends are approximate; the notes say which.",
+ "placing": {
+  "middle": 40,
+  "smooth": 10,
+  "note": "Each line is drawn down the middle of a street that today is mapped as two one-way carriageways (within 40 m), and smoothed along its length (a 10 m Gaussian), so it does not step from one carriageway or one mapped way to the next; at corners it cuts in by about 6 m. The tracks' exact place in each street is approximate."
+ },
  "routes": [
   {
    "id": "car-westhampton",
@@ -42,10 +47,34 @@
      }
     ]
    ],
-   "note": "West on Floyd Avenue from Robinson Street to the belt line railroad, under it in a tunnel, then a little north to Grove Avenue; out Grove to Three Chopt Road; then on its own right-of-way beside Three Chopt to Towana Road, and on (the line of today's Campus Drive) to Westhampton Park, which became the University of Richmond's campus in 1914. The right-of-way beside Three Chopt is drawn along the road itself.",
+   "note": "West on Floyd Avenue from Robinson Street to the belt line railroad, under it in a tunnel, then a little north to Grove Avenue; out Grove to Three Chopt Road; then on its own right-of-way beside Three Chopt to Towana Road, and on (the line of today's Campus Drive) to Westhampton Park, which became the University of Richmond's campus in 1914. The right-of-way beside Three Chopt is drawn down the strip between today's road and the frontage street beside it, halfway between them: approximate.",
    "sources": [
     "https://dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6064_Three_Chopt_Road_HD_2012_NR_FINAL.pdf",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+   ],
+   "patches": [
+    {
+     "from": [
+      -77.5218135,
+      37.5728545
+     ],
+     "to": [
+      -77.5270789,
+      37.5776713
+     ],
+     "toward": {
+      "ways": [
+       308298210,
+       1516913087,
+       204596277
+      ],
+      "share": 0.5,
+      "reach": 60
+     },
+     "taper": 30,
+     "smooth": 25,
+     "round": 0.5
+    }
    ]
   },
   {
@@ -217,10 +246,16 @@
        37.5405
       ],
       "on": "Lakeview Avenue"
+     },
+     {
+      "direct": [
+       -77.4775,
+       37.5405
+      ]
      }
     ]
    ],
-   "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. The far end is approximate.",
+   "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. Lakeview Avenue is mapped today only to Shields Lake; the last 450 m, to the end of the line, are drawn straight and are approximate.",
    "sources": [
     "https://museumdistrict.org/history",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
@@ -267,10 +302,19 @@
       "1st Street",
       "Monteiro Street"
      ],
-     [
-      "Monteiro Street",
-      "Dove Street"
-     ],
+     {
+      "at": [
+       -77.4302801,
+       37.561072
+      ],
+      "on": "Monteiro Street"
+     },
+     {
+      "straight": [
+       "Monteiro Street",
+       "Dove Street"
+      ]
+     },
      [
       "North Avenue",
       "Dove Street"
@@ -304,7 +348,7 @@
      }
     ]
    ],
-   "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate.",
+   "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate. OSM maps Monteiro Street with a gap north of Lakewood Street; the line is drawn straight across it.",
    "sources": [
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
@@ -323,6 +367,26 @@
       "5th Street",
       "Broad Street"
      ],
+     {
+      "at": [
+       -77.4327923,
+       37.5478695
+      ],
+      "on": "5th Street"
+     },
+     {
+      "direct": [
+       -77.4324402,
+       37.54872
+      ]
+     },
+     {
+      "at": [
+       -77.4324402,
+       37.54872
+      ],
+      "on": "5th Street"
+     },
      [
       "Meadowbridge Road",
       "Milton Street"
@@ -349,11 +413,12 @@
      ]
     ]
    ],
-   "note": "North on Fifth Street over the Northside Viaduct (1892) to Chestnut Hill and Highland Park, and after 1908 round a loop by Meadowbridge Road, Milton Street and Highland Street (the cross street joining them, Second Avenue here, is approximate). The Hull Street–Highland Park line was Richmond's last: the last car ran on 25 November 1949.",
+   "note": "North on Fifth Street over the Northside Viaduct (opened in 1891, an iron bridge 1,200 feet long) to Chestnut Hill and Highland Park, and after 1908 round a loop by Meadowbridge Road, Milton Street and Highland Street (the cross street joining them, Second Avenue here, is approximate). The Hull Street–Highland Park line was Richmond's last: the last car ran on 25 November 1949. Fifth Street is drawn straight across today's interstate, as it ran then.",
    "sources": [
     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
     "https://rvanews.com/?p=20453",
-    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://en.wikipedia.org/wiki/Fifth_Street_Viaduct"
    ]
   },
   {
@@ -394,10 +459,40 @@
      }
     ]
    ],
-   "note": "Across Shockoe Valley on the Marshall Street Viaduct (1911, since demolished: drawn straight) from College Street to 21st Street at Jefferson Park, out Marshall Street, and down to Fulton along Williamsburg Avenue. The route from Marshall Street down to Fulton is approximate.",
+   "note": "Across Shockoe Valley on the Marshall Street Viaduct (1911, since demolished: drawn straight) from College Street to 21st Street at Jefferson Park, out Marshall Street, and down to Fulton along Williamsburg Avenue. The route from Marshall Street down to Fulton is approximate. Along Williamsburg Avenue in front of the Armitage Manufacturing Company's building (1900) the line is drawn on the avenue's far side, clear of the wall: approximate.",
    "sources": [
     "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts",
-    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+    "https://www.dhr.virginia.gov/historic-registers/127-6693/"
+   ],
+   "patches": [
+    {
+     "from": [
+      -77.4153086,
+      37.5267575
+     ],
+     "to": [
+      -77.4158557,
+      37.5245582
+     ],
+     "taper": 20,
+     "smooth": 15,
+     "round": 0.5
+    },
+    {
+     "from": [
+      -77.4163556,
+      37.5248024
+     ],
+     "to": [
+      -77.4135603,
+      37.5231405
+     ],
+     "offset": 11,
+     "taper": 25,
+     "smooth": 10,
+     "round": 0.5
+    }
    ]
   },
   {
@@ -571,7 +666,7 @@
      }
     ]
    ],
-   "note": "The interurban to Ashland, built as the Richmond and Chesapeake Bay Railway (1907) and run as the Richmond–Ashland Railway from 1919 to 1938: from its terminal at Broad and Laurel Streets (814 West Broad), over a half-mile concrete trestle across Bacon's Quarter Branch (drawn straight), then up Brook Road and on to Ashland.",
+   "note": "The interurban to Ashland, built as the Richmond and Chesapeake Bay Railway (1907) and run as the Richmond–Ashland Railway from 1919 to 1938: from its terminal at Broad and Laurel Streets (814 West Broad), where the cars left from the second floor, north on a half-mile concrete viaduct over the Seaboard's tracks to just south of Brook Road (drawn straight, its line approximate), then beside Brook Road and on to Ashland on its own right-of-way.",
    "sources": [
     "https://pantographblog.blogspot.com/2009/08/richmond-and-chesapeake-bay-railway.html",
     "https://varails.com/trolley-lines/the-richmond-ashland-railway",

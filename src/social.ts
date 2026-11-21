@@ -6,9 +6,17 @@
  * and Twitter card tags, and a script that sends a visitor on to the explorer, keeping any
  * fragment they arrived with: `s/<id>.html#<id>@cx,cy,z` opens that exact view.
  *
+ * Each map also gets a share page that outlives its builds, `out/s/<name>.html`, named as its
+ * static page `m/<name>.html` is, and sending a visitor to its lasting route (`#<region>` or
+ * `#<region>:<year>`): the explorer's Link button hands these out, and its address bar shows
+ * them. Share pages of builds that are gone are rewritten to their region's card, so links
+ * already shared keep a preview whose image exists.
+ *
  * Each build gets a 1200×630 preview image, `out/builds/<id>/social.png`: the picture cropped
  * (not letterboxed) to 1.91:1 around its center, rasterized with rsvg-convert, else headless
- * Chrome. Without either, the thumbnail stands in.
+ * Chrome. Without either, the thumbnail stands in. Previews use `social.jpg`, the same picture
+ * as a JPEG (a quarter of the bytes; some apps drop images near 1 MB), made with ImageMagick or
+ * Python's Pillow where either is installed.
  *
  * Open Graph wants absolute URLs. The site's public address comes from `--site-url`, else
  * `ISOSCAPE_SITE_URL`, else `siteUrl` in `isoscape.config.json`; without one, URLs are
@@ -16,7 +24,7 @@
  */
 
 import { execFile } from 'node:child_process'
-import { access, mkdir, open, readFile, rm, writeFile } from 'node:fs/promises'
+import { access, mkdir, open, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { extname, join, resolve } from 'node:path'
 import { pathToFileURL } from 'node:url'
@@ -40,9 +48,13 @@ export interface SiteConfig {
   /**
    * Optional shop for prints: a link to its front page in the header (always), plus a link to buy
    * on each map, section, set or page that is in `onSale` (see `onSaleUrl`), and nowhere else.
-   * `cta` is the header's wording while anything is on sale.
+   * A key `<region>:<year>` (the explorer's route for a year) puts it on that year's view only.
+   * `cta` is the header's wording while anything is on sale. `products` puts each piece's own
+   * print beside the links to its view in the content pages (see `printLinks`). An `onSale` value
+   * may be a list instead of a URL, when more than one print is made from the same view: its first
+   * entry is the view's own buy link, the rest are shown beside it (`prints`, see `shopFor`).
    */
-  readonly shop?: { readonly label: string; readonly url: string; readonly cta?: string; readonly onSale?: OnSale }
+  readonly shop?: { readonly label: string; readonly url: string; readonly cta?: string; readonly onSale?: OnSale; readonly prints?: Prints; readonly products?: Products }
   /** Optional front page for the explorer: featured views, then the rest in sections. */
   readonly home?: HomeConfig
   /** False on a published site that does not carry out/<region>.html, to hide the "Latest page" link. */
@@ -107,19 +119,69 @@ export const normaliseSiteUrl = (raw: string | undefined): string | undefined =>
 /** What is for sale: region prefix, set slug or page slug → the product or collection URL. */
 export type OnSale = Readonly<Record<string, string>>
 
+/**
+ * The `onSale` keys whose value in the file is a list: key → every print made from that view, the
+ * first being the one `onSale` keeps (its label, when given, replaces "Buy a print ↗"), the rest
+ * shown beside it. Each entry is a URL or `{ "url", "label" }`; past the first, a label is needed.
+ */
+export type Prints = Readonly<Record<string, readonly { readonly url: string; readonly label?: string }[]>>
+
+/** One piece's print in the shop: its product page, the link's words, and the store's design key. */
+export interface Product {
+  readonly url: string
+  readonly label: string
+  readonly design?: string
+}
+
+/**
+ * The pieces on sale, by the explorer view each is cut from (`<region>:<year>@<x>,<y>,<zoom>`, or
+ * a whole map's `<region>:<year>`), as the store's catalog names it (`explore`): a set's places
+ * and stops, its map alone and its framed map. Written by tools/release/products.py from the
+ * store's catalog and the board's `on_sale`, never by hand.
+ */
+export type Products = Readonly<Record<string, readonly Product[]>>
+
 const isShop = (v: unknown): v is NonNullable<SiteConfig['shop']> =>
   typeof v === 'object' && v !== null && typeof (v as { label?: unknown }).label === 'string' && typeof (v as { url?: unknown }).url === 'string'
 
 /**
- * The shop as the site uses it: label, url, cta and `onSale` (only string URLs kept). Anything
- * else (an old `links` map) is dropped, so no URL but these reaches a page.
+ * The shop as the site uses it: label, url, cta and `onSale` (only string URLs kept, a list
+ * reduced to its first URL, the whole list kept in `prints`). Anything else (an old `links` map)
+ * is dropped, so no URL but these reaches a page.
  */
 const shopOf = (v: NonNullable<SiteConfig['shop']>): NonNullable<SiteConfig['shop']> => {
   const raw = (v as { onSale?: unknown }).onSale
-  const onSale = typeof raw === 'object' && raw !== null && !Array.isArray(raw)
-    ? Object.fromEntries(Object.entries(raw).filter((e): e is [string, string] => e[0] !== '' && typeof e[1] === 'string' && e[1] !== ''))
-    : {}
-  return { label: v.label, url: v.url, ...(typeof v.cta === 'string' && v.cta !== '' ? { cta: v.cta } : {}), onSale }
+  const onSale: Record<string, string> = {}
+  const prints: Record<string, { url: string; label?: string }[]> = {}
+  const isUrl = (x: unknown): x is string => typeof x === 'string' && /^https?:\/\//.test(x)
+  if (typeof raw === 'object' && raw !== null && !Array.isArray(raw)) {
+    for (const [key, val] of Object.entries(raw)) {
+      if (key === '') continue
+      if (typeof val === 'string') { if (val !== '') onSale[key] = val; continue }
+      if (!Array.isArray(val)) continue
+      const list = val.flatMap((x, i): { url: string; label?: string }[] => {
+        if (isUrl(x)) return i === 0 ? [{ url: x }] : []
+        if (typeof x !== 'object' || x === null || !isUrl((x as { url?: unknown }).url)) return []
+        const label = (x as { label?: unknown }).label
+        if (typeof label === 'string' && label !== '') return [{ url: (x as { url: string }).url, label }]
+        return i === 0 ? [{ url: (x as { url: string }).url }] : []
+      })
+      if (list.length === 0 || list[0].url !== (isUrl(val[0]) ? val[0] : (val[0] as { url?: unknown } | null)?.url)) continue
+      onSale[key] = list[0].url
+      if (list.length > 1 || list[0].label !== undefined) prints[key] = list
+    }
+  }
+  const rawProducts = (v as { products?: unknown }).products
+  const products: Record<string, Product[]> = {}
+  if (typeof rawProducts === 'object' && rawProducts !== null && !Array.isArray(rawProducts)) {
+    for (const [view, list] of Object.entries(rawProducts)) {
+      const ok = (Array.isArray(list) ? list : [list]).filter((x): x is Product =>
+        typeof x === 'object' && x !== null && typeof x.url === 'string' && /^https?:\/\//.test(x.url) && typeof x.label === 'string' && x.label !== '')
+        .map((x) => ({ url: x.url, label: x.label, ...(typeof x.design === 'string' ? { design: x.design } : {}) }))
+      if (view !== '' && ok.length > 0) products[view] = ok
+    }
+  }
+  return { label: v.label, url: v.url, ...(typeof v.cta === 'string' && v.cta !== '' ? { cta: v.cta } : {}), onSale, ...(Object.keys(prints).length > 0 ? { prints } : {}), ...(Object.keys(products).length > 0 ? { products } : {}) }
 }
 
 /** A front page without per-view or per-section shop URLs: where to buy comes from `shop.onSale` only. */
@@ -254,6 +316,13 @@ export const buildCard = (b: BuildMeta): { title: string; description: string; a
   return { title, description: clip(description, 300), alt: `Isometric drawing: ${place}` }
 }
 
+/** What isoscape makes, in a sentence: the site's description, and any page's that has none of its own. */
+export const SITE_DESCRIPTION = 'Isometric dot-and-line drawings of real places, built from OpenStreetMap and public elevation data.'
+
+/** A content page's description: its summary, else its first paragraph, else the site's. */
+export const pageDescription = (p: Pick<Page, 'summary' | 'html'>): string =>
+  clip(p.summary || firstParagraph(p.html) || SITE_DESCRIPTION, 300)
+
 /** The text of a page's first paragraph, for its description when it has no summary. */
 export const firstParagraph = (html: string): string => {
   const m = html.match(/<p>([\s\S]*?)<\/p>/)
@@ -269,7 +338,7 @@ export const firstParagraph = (html: string): string => {
  * without script. No meta refresh: some crawlers (Facebook's) follow one, and would take the
  * index page's card instead of this one.
  */
-export const sharePage = (card: Card, route: string, more?: { readonly href: string; readonly label: string }): string => {
+export const sharePage = (card: Card, route: string, more?: { readonly href: string; readonly label: string }, buy?: { readonly href: string; readonly label: string }): string => {
   const target = `../index.html${route}`
   return `<!doctype html>
 <html lang="en">
@@ -283,7 +352,7 @@ ${metaTags(card)}<script>location.replace('../index.html' + (location.hash.lengt
 <body>
 <p><a href="${escAttr(target)}">${escAttr(card.title)}</a></p>
 ${card.image === undefined ? '' : `<p><a href="${escAttr(target)}"><img src="${escAttr(card.image)}" alt="${escAttr(card.imageAlt ?? '')}"></a></p>\n`}<p>${escAttr(card.description)}</p>
-${more === undefined ? '' : `<p><a href="${escAttr(more.href)}">${escAttr(more.label)}</a></p>\n`}</body>
+${more === undefined ? '' : `<p><a href="${escAttr(more.href)}">${escAttr(more.label)}</a></p>\n`}${buy === undefined ? '' : `<p><a href="${escAttr(buy.href)}">${escAttr(buy.label)}</a></p>\n`}</body>
 </html>
 `
 }
@@ -380,9 +449,17 @@ export const renderSocial = async (svgPath: string, pngPath: string, viewBox: re
   }
 }
 
-/** Width and height of a PNG or JPEG held in memory; undefined if it is neither. */
+/** Width and height of a PNG, JPEG or WebP held in memory; undefined if it is none of them. */
 export const imageSize = (buf: Buffer): { width: number; height: number } | undefined => {
   if (buf.length >= 24 && buf.readUInt32BE(0) === 0x89504e47) return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) }
+  // WebP: a RIFF file whose first chunk is VP8X (extended), VP8L (lossless) or VP8 (lossy).
+  if (buf.length >= 30 && buf.toString('ascii', 0, 4) === 'RIFF' && buf.toString('ascii', 8, 12) === 'WEBP') {
+    const chunk = buf.toString('ascii', 12, 16)
+    if (chunk === 'VP8X') return { width: 1 + buf.readUIntLE(24, 3), height: 1 + buf.readUIntLE(27, 3) }
+    if (chunk === 'VP8L') { const b = buf.readUInt32LE(21); return { width: 1 + (b & 0x3fff), height: 1 + ((b >> 14) & 0x3fff) } }
+    if (chunk === 'VP8 ') return { width: buf.readUInt16LE(26) & 0x3fff, height: buf.readUInt16LE(28) & 0x3fff }
+    return undefined
+  }
   if (buf.length < 4 || buf[0] !== 0xff || buf[1] !== 0xd8) return undefined
   // JPEG: walk the segments to the first start-of-frame marker (C0–CF, except C4, C8 and CC).
   for (let i = 2; i + 9 < buf.length; ) {
@@ -421,14 +498,75 @@ export interface Preview {
   readonly height: number
 }
 
-/** The best preview image a build has on disk: social.png, else its thumbnail. */
+/** Width and height of a PNG or JPEG file; undefined if it is missing or neither. */
+export const fileImageSize = async (path: string): Promise<{ width: number; height: number } | undefined> => {
+  try {
+    return imageSize(await readFile(path))
+  } catch {
+    return undefined
+  }
+}
+
+/** The best preview image a build has on disk: social.jpg, else social.png, else its thumbnail. */
 export const previewOf = async (outDir: string, b: BuildMeta): Promise<Preview | undefined> => {
-  for (const path of [`builds/${b.id}/social.png`, b.files?.thumb]) {
+  for (const path of [`builds/${b.id}/social.jpg`, `builds/${b.id}/social.png`, b.files?.thumb]) {
     if (path === undefined) continue
-    const size = await pngSize(resolve(outDir, path))
+    const size = await fileImageSize(resolve(outDir, path))
     if (size !== undefined) return { path, ...size }
   }
   return undefined
+}
+
+/** JPEG quality for preview images: high enough that thin lines keep their color (no chroma subsampling either). */
+export const SOCIAL_JPEG_QUALITY = 86
+
+type JpegEncoder = (png: string, jpg: string) => Promise<unknown>
+const q = String(SOCIAL_JPEG_QUALITY)
+const PIL = `import sys\nfrom PIL import Image\nImage.open(sys.argv[1]).convert('RGB').save(sys.argv[2], quality=${q}, subsampling=0, optimize=True)`
+/** JPEG encoders, tried in order: ImageMagick 7, ImageMagick 6, Python's Pillow; each with how to tell it is installed. */
+const JPEG_ENCODERS: readonly { readonly probe: readonly [string, readonly string[]]; readonly encode: JpegEncoder }[] = [
+  { probe: ['magick', ['-version']], encode: (png, jpg) => run('magick', [png, '-quality', q, '-sampling-factor', '4:4:4', '-strip', jpg], { timeout: 60_000 }) },
+  { probe: ['convert', ['-version']], encode: (png, jpg) => run('convert', [png, '-quality', q, '-sampling-factor', '4:4:4', '-strip', jpg], { timeout: 60_000 }) },
+  { probe: ['python3', ['-c', 'import PIL']], encode: (png, jpg) => run('python3', ['-c', PIL, png, jpg], { timeout: 60_000 }) },
+]
+let jpegEncoder: Promise<JpegEncoder | null> | undefined
+
+/** What is installed to write JPEGs, found once. */
+const findJpegEncoder = (): Promise<JpegEncoder | null> =>
+  (jpegEncoder ??= (async () => {
+    for (const e of JPEG_ENCODERS) {
+      try {
+        await run(e.probe[0], [...e.probe[1]], { timeout: 20_000 })
+        return e.encode
+      } catch {
+        // next
+      }
+    }
+    return null
+  })())
+
+/** Write `jpg`, a JPEG of the PNG at `png`. False when no encoder is installed, or this PNG would not convert. */
+export const writeJpeg = async (png: string, jpg: string): Promise<boolean> => {
+  const enc = await findJpegEncoder()
+  if (enc === null) return false
+  try {
+    await enc(png, jpg)
+    if ((await fileImageSize(jpg)) !== undefined) return true
+  } catch {
+    // fall through
+  }
+  await rm(jpg, { force: true }).catch(() => undefined)
+  return false
+}
+
+/** True when `a` is missing or older than `b`. */
+const staler = async (a: string, b: string): Promise<boolean> => {
+  try {
+    const [sa, sb] = await Promise.all([stat(a), stat(b)])
+    return sa.mtimeMs < sb.mtimeMs
+  } catch {
+    return true
+  }
 }
 
 /** The site's preview build: the newest of the configured flagship, else the newest build. */
@@ -436,14 +574,18 @@ export const flagshipOf = (builds: readonly BuildMeta[], flagship?: string): Bui
   (flagship === undefined ? undefined : builds.find((b) => b.id === flagship || b.region === flagship || b.name === flagship)) ?? builds[0]
 
 /**
- * The URL `onSale` gives a subject (a region, a set slug or a page slug): the entry under the
- * longest key the subject starts with. No entry, no URL: nothing links to the shop for it.
+ * The URL `onSale` gives a subject (a region, a set slug, a page slug, or `<region>:<year>`): the
+ * entry under the longest key the subject starts with; a key with a year (`<region>:<year>`)
+ * only when it is the whole subject. No entry, no URL: nothing links to the shop for it.
  */
 export const onSaleUrl = (onSale: OnSale | undefined, subject: string): string | undefined => {
-  if (onSale === undefined) return undefined
-  const key = Object.keys(onSale).filter((k) => k !== '' && subject.startsWith(k)).sort((a, b) => b.length - a.length)[0]
-  return key === undefined ? undefined : onSale[key]
+  const key = onSaleKey(onSale, subject)
+  return key === undefined ? undefined : onSale?.[key]
 }
+
+/** The `onSale` key a subject is on sale under (see `onSaleUrl`), if any. */
+export const onSaleKey = (onSale: OnSale | undefined, subject: string): string | undefined =>
+  onSale === undefined ? undefined : Object.keys(onSale).filter((k) => k !== '' && (k.includes(':') ? k === subject : subject.startsWith(k))).sort((a, b) => b.length - a.length)[0]
 
 /** True while anything at all is on sale. */
 export const anyOnSale = (config: Pick<SiteConfig, 'shop'>): boolean => Object.keys(config.shop?.onSale ?? {}).length > 0
@@ -453,14 +595,27 @@ export const shopCta = (config: Pick<SiteConfig, 'shop'>): string | undefined =>
   anyOnSale(config) ? config.shop?.cta : undefined
 
 /**
- * Where "Buy a print" goes for a region: `onSale` by the region's longest matching prefix, with
- * its featured view's button text. The explorer gets these resolved (`buyLinks`).
+ * Where "Buy a print" goes for a region, or for one year of it: `onSale` by the longest key that
+ * `<region>` (or `<region>:<year>`, the explorer's route for that year) starts with, with its
+ * featured view's button text. So a region's key covers every year, and a key such as
+ * `richmond-downtown-time:1925` that year's view alone (not the series' page, nor another year).
+ * The explorer gets these resolved (`buyLinks`).
  */
-export const shopFor = (config: Pick<SiteConfig, 'shop' | 'home'>, region: string): { url: string; label: string } | undefined => {
-  const url = onSaleUrl(config.shop?.onSale, region)
-  if (url === undefined) return undefined
+export const shopFor = (config: Pick<SiteConfig, 'shop' | 'home'>, region: string, year?: number): ShopLink | undefined => {
+  const key = onSaleKey(config.shop?.onSale, year === undefined ? region : `${region}:${year}`)
+  const url = key === undefined ? undefined : config.shop?.onSale?.[key]
+  if (key === undefined || url === undefined) return undefined
   const hero = config.home?.heroes.find((h) => h.region === region)
-  return { url, label: hero?.shopLabel ?? 'Buy a print ↗' }
+  const prints = config.shop?.prints?.[key]
+  const more = (prints ?? []).slice(1).filter((p): p is Product => p.label !== undefined).map((p) => ({ url: p.url, label: p.label }))
+  return { url, label: prints?.[0]?.label ?? hero?.shopLabel ?? 'Buy a print ↗', ...(more.length > 0 ? { more } : {}) }
+}
+
+/** A map's buy link, and any other prints made from the same view (`prints`), shown beside it. */
+export interface ShopLink {
+  readonly url: string
+  readonly label: string
+  readonly more?: readonly Product[]
 }
 
 /**
@@ -480,13 +635,14 @@ export const sectionShop = (config: Pick<SiteConfig, 'shop'>, sec: Pick<HomeSect
 
 /**
  * Where a content page's shop button goes: its own slug in `onSale` (a set's or a cutaway's
- * page), else the one URL every map it links to is on sale under, else its section's (the
- * section whose story it tells). `maps` are the regions the page links into, in order.
+ * page; "Prints of this set ↗" when that is a collection), else the one URL every map it links
+ * to is on sale under, else its section's (the section whose story it tells). `maps` are the
+ * regions the page links into, in order.
  */
 export const pageShop = (slug: string, maps: readonly string[], config: Pick<SiteConfig, 'shop' | 'home'>): { url: string; label: string } | undefined => {
   const label = maps.length > 1 ? 'Prints of these maps ↗' : maps.length === 1 ? 'Prints of this map ↗' : 'Buy a print ↗'
   const own = onSaleUrl(config.shop?.onSale, slug)
-  if (own !== undefined) return { url: own, label }
+  if (own !== undefined) return { url: own, label: /\/collections\//.test(own) ? 'Prints of this set ↗' : label }
   const urls = new Set(maps.map((r) => onSaleUrl(config.shop?.onSale, r)))
   const shared = urls.size === 1 ? [...urls][0] : undefined
   if (shared !== undefined) return { url: shared, label }
@@ -495,11 +651,55 @@ export const pageShop = (slug: string, maps: readonly string[], config: Pick<Sit
   return viaSection === undefined ? undefined : { url: viaSection.url, label }
 }
 
-/** Every shop link the explorer's script shows, resolved here: per region, and per front-page section (null when not on sale). */
-export const buyLinks = (config: Pick<SiteConfig, 'shop' | 'home'>, regions: Iterable<string>): { regions: Record<string, { url: string; label: string }>; sections: ({ url: string; label: string } | null)[] } => {
-  const out: Record<string, { url: string; label: string }> = {}
+/**
+ * The maps a content page links into, in order of first link: the region of each link to a view,
+ * written as the explorer has it (`#<region>…`) or as a static page does (`../index.html#<region>…`).
+ */
+export const pageMapRefs = (html: string): string[] => {
+  const out: string[] = []
+  for (const m of html.matchAll(/href="(?:\.\.\/index\.html)?#([a-z0-9][a-z0-9-]*)(?=[:@"])/g)) if (m[1] !== 'home' && !out.includes(m[1])) out.push(m[1])
+  return out
+}
+
+/**
+ * A content page with each piece's print beside the link to its view: where a link to a view in
+ * `products` (written `<prefix><view>`, `#` in the explorer, `../index.html#` in a static page)
+ * leads a list of links (`See it on the map · Sources: …`), its prints follow it in that list;
+ * otherwise they close its paragraph. Each view's prints are given once, at its first link.
+ * `href` may tag a shop URL (`withCampaign`). Nothing changes for a view not on sale.
+ */
+export const printLinks = (html: string, products: Products | undefined, prefix = '#', href: (url: string) => string = (u) => u): string => {
+  if (products === undefined || Object.keys(products).length === 0) return html
+  const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string)
+  const done = new Set<string>()
+  // Paragraph by paragraph, so a print never lands outside the paragraph that links to its view.
+  return html.replace(/<p>([\s\S]*?)<\/p>/g, (whole, body: string) => {
+    let text = body
+    let tail = ''
+    for (const [view, list] of Object.entries(products)) {
+      if (done.has(view)) continue
+      const open = `<a href="${esc(prefix + view)}">`
+      const at = text.indexOf(open)
+      if (at < 0) continue
+      done.add(view)
+      const links = list.map((p) => `<a class="buy" href="${esc(href(p.url))}" target="_blank" rel="noopener">${esc(p.label)}</a>`).join(' · ')
+      const end = text.indexOf('</a>', at) + 4
+      if (text.startsWith(' · ', end)) text = text.slice(0, end) + ' · ' + links + text.slice(end)
+      else tail += (/[.!?]$/.test((text + tail).replace(/<[^>]*>/g, '').trimEnd()) ? ' ' : ' · ') + links
+    }
+    return text === body && tail === '' ? whole : `<p>${text}${tail}</p>`
+  })
+}
+
+/**
+ * Every shop link the explorer's script shows, resolved here: per region and per `<region>:<year>`
+ * (each given as such a string), and per front-page section (null when not on sale).
+ */
+export const buyLinks = (config: Pick<SiteConfig, 'shop' | 'home'>, regions: Iterable<string>): { regions: Record<string, ShopLink>; sections: ({ url: string; label: string } | null)[] } => {
+  const out: Record<string, ShopLink> = {}
   for (const r of regions) {
-    const s = shopFor(config, r)
+    const m = /^(.*):(\d+)$/.exec(r)
+    const s = m === null ? shopFor(config, r) : shopFor(config, m[1], Number(m[2]))
     if (s !== undefined) out[r] = s
   }
   return { regions: out, sections: (config.home?.sections ?? []).map((s) => sectionShop(config, s) ?? null) }
@@ -543,13 +743,42 @@ export interface SiteCard {
   readonly plain?: readonly { readonly title: string; readonly links: readonly { readonly href: string; readonly label: string }[] }[]
   /** True when sitemap.xml is written beside index.html. */
   readonly sitemap?: boolean
+  /** The share pages that outlive builds, for the explorer's Link button and address bar (see `Shares`). */
+  readonly shares?: Shares
 }
+
+/**
+ * A map's lasting share page: `s/<name>.html`, named as its static page `m/<name>.html` is,
+ * opening the explorer at `route` (`#<region>` or `#<region>:<year>`) with `build`'s card.
+ */
+export interface ShareDoor {
+  readonly name: string
+  readonly route: string
+  readonly build: BuildMeta
+  /** The card's title (the map page's heading), before " · isoscape"; default from the build. */
+  readonly title?: string
+  /** Its key in `Shares.maps`, when not the route without its '#': a series page's is its region. */
+  readonly key?: string
+}
+
+/**
+ * What the explorer needs to hand out share pages: `maps`, a map's route without its '#'
+ * (`<region>` or `<region>:<year>`) → its name (`s/<name>.html`, `m/<name>.html`), and `pages`,
+ * the slugs of the content pages (`s/page-<slug>.html`, `p/<slug>.html`).
+ */
+export interface Shares {
+  readonly maps: Readonly<Record<string, string>>
+  readonly pages: readonly string[]
+}
+
+/** A file name in s/ that a map's lasting share page may not take: a build's, or a content page's. */
+export const doorNameClashes = (name: string): boolean => /^\d{8}-\d{6}-/.test(name) || name.startsWith('page-')
 
 /** The site-wide tags for index.html (which sits at out/, depth 0). */
 export const siteTags = (site: SiteCard, buildCount: number): string =>
   metaTags({
     title: `${SITE_NAME}: isometric views of real places`,
-    description: `Isometric dot-and-line drawings of real places, built from OpenStreetMap and public elevation data${buildCount > 1 ? `: ${buildCount} views, with how each was made` : ''}.`,
+    description: buildCount > 1 ? `${SITE_DESCRIPTION.slice(0, -1)}: ${buildCount} views, with how each was made.` : SITE_DESCRIPTION,
     ...(site.image === undefined ? {} : {
       image: siteHref(site.image.path, site.siteUrl),
       imageWidth: site.image.width,
@@ -572,7 +801,9 @@ export const writeSocial = async (
   log: (line: string) => void = () => undefined,
   /** The static page (path under out/) a build or content page is best read at: the share page names it as canonical and links to it. */
   staticOf: (target: { build: BuildMeta } | { page: string }) => string | undefined = () => undefined,
-): Promise<SiteCard & { rendered: number; missing: number }> => {
+  /** The maps' lasting share pages (see `ShareDoor`), from the static plan (`shareDoors` in static-pages.ts). */
+  doors: readonly ShareDoor[] = [],
+): Promise<SiteCard & { rendered: number; missing: number; stale: number }> => {
   const base = config.siteUrl
   // A share page is a door into the explorer; the static page is what a search engine should index.
   const pointTo = (path: string | undefined, label: string) => path === undefined ? { card: {}, more: undefined } : {
@@ -597,6 +828,14 @@ export const writeSocial = async (
     }
     missing++
   }
+  // The JPEG beside each social.png, made again whenever the PNG is newer.
+  for (const b of builds) {
+    const png = resolve(outDir, 'builds', b.id, 'social.png')
+    const jpg = resolve(outDir, 'builds', b.id, 'social.jpg')
+    if ((await pngSize(png)) === undefined || !(await staler(jpg, png))) continue
+    if ((await findJpegEncoder()) === null) break
+    await writeJpeg(png, jpg)
+  }
   await mkdir(resolve(outDir, 's'), { recursive: true })
   const previews = new Map<string, Preview | undefined>()
   for (const b of builds) {
@@ -615,6 +854,49 @@ export const writeSocial = async (
   const flag = flagshipOf(builds, config.flagship)
   const image = flag === undefined ? undefined : previews.get(flag.id)
   const imageAlt = flag === undefined ? undefined : buildCard(flag).alt
+  // The maps' lasting share pages, and the card each gives.
+  const doorCard = (d: ShareDoor): Card => {
+    const preview = previews.get(d.build.id)
+    const card = buildCard(d.build)
+    return {
+      title: d.title === undefined ? card.title : `${d.title} · ${SITE_NAME}`,
+      description: card.description,
+      type: 'article',
+      ...(preview === undefined ? {} : { image: siteHref(preview.path, base, 1), imageWidth: preview.width, imageHeight: preview.height, imageAlt: card.alt }),
+      ...(base === undefined ? {} : { url: siteHref(`s/${d.name}.html`, base) }),
+    }
+  }
+  const maps: Record<string, string> = {}
+  const written = new Set(builds.map((b) => shareFile({ build: b.id })))
+  for (const d of doors) {
+    if (doorNameClashes(d.name) || written.has(`${d.name}.html`)) continue
+    written.add(`${d.name}.html`)
+    maps[d.key ?? d.route.replace(/^#/, '')] = d.name
+    const to = pointTo(staticOf({ build: d.build }), 'About this map')
+    await writeFile(resolve(outDir, 's', `${d.name}.html`), sharePage({ ...doorCard(d), ...to.card }, d.route, to.more))
+  }
+  // Share pages of builds no longer here (links already shared): their region's card, newest
+  // first by the build's name, then its region; else the site's. The fragment still passes on,
+  // and the explorer opens a gone build id as the newest build of the same name.
+  let stale = 0
+  const newestFirst = [...builds].sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
+  for (const f of await readdir(resolve(outDir, 's'))) {
+    const m = /^\d{8}-\d{6}-(.+)\.html$/.exec(f)
+    if (m === null || written.has(f)) continue
+    const now = newestFirst.find((b) => b.name === m[1]) ?? newestFirst.find((b) => b.region === m[1])
+    const door = now === undefined ? undefined : doors.find((d) => d.build.id === now.id) ?? doors.find((d) => d.build.region === now.region)
+    const url = base === undefined ? {} : { url: siteHref(`s/${f}`, base) }
+    const card: Card = door !== undefined ? { ...doorCard(door), ...url }
+      : now !== undefined ? (() => {
+        const c = buildCard(now)
+        const p = previews.get(now.id)
+        return { title: c.title, description: c.description, type: 'article' as const, ...(p === undefined ? {} : { image: siteHref(p.path, base, 1), imageWidth: p.width, imageHeight: p.height, imageAlt: c.alt }), ...url }
+      })()
+      : { title: `${SITE_NAME}: isometric views of real places`, description: SITE_DESCRIPTION, ...(image === undefined ? {} : { image: siteHref(image.path, base, 1), imageWidth: image.width, imageHeight: image.height, ...(imageAlt === undefined ? {} : { imageAlt }) }), ...url }
+    const to = now === undefined ? { card: {}, more: undefined } : pointTo(staticOf({ build: now }), 'About this map')
+    await writeFile(resolve(outDir, 's', f), sharePage({ ...card, ...to.card }, door?.route ?? (now === undefined ? '#home' : `#${now.id}`), to.more))
+    stale++
+  }
   for (const p of pages) {
     const file = shareFile({ page: p.slug })
     // A page with its own `social:` image gets it, copied beside its share page as
@@ -629,20 +911,24 @@ export const writeSocial = async (
     const pic = own ?? image
     const alt = own === undefined ? imageAlt : p.summary ?? p.title
     const to = pointTo(staticOf({ page: p.slug }), 'Read it as a plain page')
+    // Its shop button, as the explorer and the static page show it.
+    const shop = config.shop === undefined ? undefined : pageShop(p.slug, pageMapRefs(p.html), config)
     await writeFile(resolve(outDir, 's', file), sharePage({
       title: `${p.title} · ${SITE_NAME}`,
-      description: clip(p.summary ?? firstParagraph(p.html), 300),
+      description: pageDescription(p),
       type: 'article',
       ...(pic === undefined ? {} : { image: siteHref(pic.path, base, 1), imageWidth: pic.width, imageHeight: pic.height, ...(alt === undefined ? {} : { imageAlt: alt }) }),
       ...(base === undefined ? {} : { url: siteHref(`s/${file}`, base) }),
       ...to.card,
-    }, `#/${p.slug}`, to.more))
+    }, `#/${p.slug}`, to.more, shop === undefined ? undefined : { href: withCampaign(shop.url, p.slug, config.shop?.url), label: shop.label }))
   }
   return {
     ...(base === undefined ? {} : { siteUrl: base }),
     ...(image === undefined ? {} : { image }),
     ...(imageAlt === undefined ? {} : { imageAlt }),
+    shares: { maps, pages: pages.map((p) => p.slug) },
     rendered,
     missing,
+    stale,
   }
 }

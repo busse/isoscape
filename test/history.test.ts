@@ -151,32 +151,145 @@ test('a dated series: what no rule dates is drawn today only, except the street 
     [area({ landuse: 'cemetery' }), false, 'an undated cemetery'],
     [area({ natural: 'water', water: 'river' }), true, 'the river'],
     [area({ natural: 'wood' }), true, 'woods'],
-    [line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), false, 'the 1913 Mayo Bridge in 1900'],
   ] as const) assert.equal(featureAlive(f, 1900, h), early, why)
+  // Mayo's Bridge stood from 1788, but not in the scene after the fire of April 1865, which burned it.
+  assert.ok(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1886, h))
+  assert.equal(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1865, h), false)
   assert.ok(featureAlive(line({ highway: 'primary', name: 'Mayo Bridge', bridge: 'yes' }), 1913, h))
   assert.ok(featureAlive(area({ leisure: 'park' }), 2026, h))
 })
 
-test('a curated street and sidewalk are drawn as a road and a path where no map data covers the place', async () => {
-  const { buildScene } = await import('../src/scene.ts')
-  const { palette } = await import('../src/palette.ts')
-  const { lonLatFromLocal } = await import('../src/region.ts')
-  const region = { name: 't', title: 't', center: [0, 0], width: 200, depth: 200, bearing: 0, scale: 1 } as const
-  const ll = lonLatFromLocal(region as never)
-  const line = (n: number) => [ll(-90, n), ll(90, n)] as [number, number][]
-  const history = {
-    title: 't', present: 2026, epochs: [{ year: 1928, title: 't' }], rules: [], dates: [], traced: [],
-    features: [
-      { id: 'st', name: 'A street', kind: 'street', from: 1900, line: line(0), width: 12, note: 'n', sources: [] },
-      { id: 'wk', name: 'A sidewalk', kind: 'walk', from: 1900, line: line(10), width: 3.5, note: 'n', sources: [] },
-      { id: 'gone', name: 'Built later', kind: 'street', from: 1950, line: line(-40), width: 12, note: 'n', sources: [] },
-    ],
+test('service roads can be held to a closer test than streets (serviceNearBuildings)', () => {
+  const ids = (r: { kept: { id: string }[] }) => r.kept.map((f) => f.id).sort()
+  // A house at the origin; a street and a yard road each about 100 m off (0.0009° of latitude).
+  const line = (id: string, highway: string, y: number): LineFeature => ({ type: 'line', id, tags: { highway }, points: [[0, y], [0.0002, y]] })
+  const feats = [building('h', 0, 0), line('street', 'residential', 0.0009), line('yard', 'service', 0.0009), line('drive', 'service', 0.0002)]
+  // With streets kept within 60 m (cells of 60 m, so up to about 120 m), both survive.
+  assert.deepEqual(ids(dropUnbuiltStreets(feats, 60)), ['drive', 'h', 'street', 'yard'])
+  // Service roads within 25 m: the yard road goes, the drive by the house stays.
+  assert.deepEqual(ids(dropUnbuiltStreets(feats, 60, [], [], false, false, 25)), ['drive', 'h', 'street'])
+})
+
+test('every curated year cites a source, and a curated height says where it comes from', async () => {
+  const { loadHistory } = await import('../src/history.ts')
+  const h = await loadHistory('history/richmond-downtown.json')
+  const ids = new Set<string>()
+  for (const d of h.dates) {
+    assert.match(d.source, /^https:\/\//, d.id)
+    assert.ok(!ids.has(d.id), `${d.id} is dated twice`)
+    ids.add(d.id)
+    if (d.height !== undefined) assert.ok(d.height > 0 && (d.note ?? '').length > 0, `${d.id}: a height needs a note`)
   }
-  const scene = buildScene(region as never, [], palette('paper'), null, { time: { year: 1928, history: history as never, dates: new Map() } })
-  const kinds = scene.ribbons.map((r) => r.kind).sort()
-  assert.deepEqual(kinds, ['path', 'road'])
-  // The road is the street's width across: 12 m, at 1 px a meter.
-  const q = scene.ribbons.find((r) => r.kind === 'road')!.quads[0]
-  const ys = q.map((p) => p[1])
-  assert.ok(Math.abs(Math.max(...ys) - Math.min(...ys) - 12) < 0.01)
+})
+
+test('a sheet whose fit is known to be wrong is left out', async () => {
+  const { loadHistory } = await import('../src/history.ts')
+  const dir = await mkdtemp(join(tmpdir(), 'iso-leave-'))
+  const ring = [[0, 0], [1, 0], [1, 1], [0, 0]]
+  const f = (id: string, sheet: string, edition: number) => ({ type: 'Feature', properties: { id, from: edition, to: 1960, end: 'assumed', material: 'brick', storeys: 3, edition, sheet }, geometry: { type: 'Polygon', coordinates: [ring] } })
+  await writeFile(join(dir, 'lost.geojson'), JSON.stringify({ type: 'FeatureCollection', features: [f('a', '5', 1905), f('b', '6', 1905), f('c', '5', 1886)] }))
+  await writeFile(join(dir, 'h.json'), JSON.stringify({ sanborn: { lost: join(dir, 'lost.geojson'), editions: [1886, 1905], source: 'x', leaveOut: [{ edition: 1905, sheet: '5', why: 'misfit' }] } }))
+  const h = await loadHistory(join(dir, 'h.json'))
+  assert.deepEqual(h.traced.map((b) => b.id), ['b', 'c'])
+})
+
+test('a sheet\'s listed buildings can be left out only before a year', async () => {
+  const { loadHistory } = await import('../src/history.ts')
+  const dir = await mkdtemp(join(tmpdir(), 'iso-leave-'))
+  const ring = [[0, 0], [1, 0], [1, 1], [0, 0]]
+  const f = (id: string) => ({ type: 'Feature', properties: { id, from: 1886, to: 1960, end: 'assumed', material: 'brick', storeys: 3, edition: 1924, sheet: 'cbd' }, geometry: { type: 'Polygon', coordinates: [ring] } })
+  await writeFile(join(dir, 'lost.geojson'), JSON.stringify({ type: 'FeatureCollection', features: [f('a'), f('b')] }))
+  await writeFile(join(dir, 'h.json'), JSON.stringify({ sanborn: { lost: join(dir, 'lost.geojson'), editions: [1924], source: 'x', leaveOut: [{ edition: 1924, sheet: 'cbd', ids: ['a'], before: 1952, why: 'finer tracing' }] } }))
+  const h = await loadHistory(join(dir, 'h.json'))
+  assert.deepEqual(h.traced.map((b) => [b.id, b.from]), [['a', 1952], ['b', 1886]])
+})
+
+test('a bridge over a road not yet built is drawn at grade, and that road\'s verges are not drawn', async () => {
+  const { laterWorks } = await import('../src/history.ts')
+  const h = history({ rules: [{ where: { name: 'Turnpike' }, eras: [[1958, null]] }] as History['rules'] })
+  const line = (id: string, tags: Record<string, string>, points: [number, number][]): LineFeature => ({ type: 'line', id, tags, points })
+  const pike = line('pike', { highway: 'motorway', name: 'Turnpike' }, [[0, -0.001], [0, 0.001]])
+  const span = line('span', { highway: 'primary', name: 'Broad', bridge: 'yes', layer: '1' }, [[-0.0002, 0], [0.0002, 0]])
+  const side = line('side', { highway: 'primary', name: 'Broad', bridge: 'yes', layer: '1' }, [[0.0002, 0], [0.0004, 0]])
+  const rail = line('rail', { railway: 'rail' }, [[0.001, -0.001], [0.001, 0.001]])
+  const overRail = line('over', { highway: 'primary', name: 'Main', bridge: 'yes' }, [[0.0009, 0.0005], [0.0011, 0.0005]])
+  const verge: PolygonFeature = { type: 'polygon', id: 'verge', tags: { natural: 'wood' }, outers: [[[0.00005, -0.0005], [0.0001, -0.0005], [0.0001, 0.0005], [0.00005, 0.0005]]], inners: [] }
+  const woods: PolygonFeature = { type: 'polygon', id: 'woods', tags: { natural: 'wood' }, outers: [[[0.003, 0], [0.004, 0], [0.004, 0.001], [0.003, 0.001]]], inners: [] }
+  const all = [pike, span, side, rail, overRail, verge, woods]
+  const early = laterWorks(all, [span, side, rail, overRail, verge, woods], 1950, h)
+  assert.equal(early.atGrade, 2)
+  assert.deepEqual(early.kept.filter((f) => f.tags.bridge).map((f) => f.id), ['over'])
+  assert.ok(early.kept.some((f) => f.id === 'span' && f.tags.layer === undefined))
+  assert.deepEqual(early.kept.filter((f) => f.type === 'polygon').map((f) => f.id), ['woods'])
+  const late = laterWorks(all, all, 1960, h)
+  assert.equal(late.atGrade, 0)
+  assert.equal(late.verges, 0)
+})
+
+test('laid-out ground and service roads take the year of the parcel they lie in (groundsByParcel)', async () => {
+  const { dateGrounds } = await import('../src/history.ts')
+  const sq = (x: number, y: number, s: number): [number, number][] => [[x, y], [x + s, y], [x + s, y + s], [x, y + s]]
+  const parcels: Parcel[] = [{ ring: sq(0, 0, 0.001), year: 2017 }, { ring: sq(0.002, 0, 0.001), year: 1900 }]
+  const lawn: PolygonFeature = { type: 'polygon', id: 'lawn', tags: { landuse: 'grass' }, outers: [sq(0.0002, 0.0002, 0.0002)], inners: [] }
+  const wood: PolygonFeature = { type: 'polygon', id: 'wood', tags: { natural: 'wood' }, outers: [sq(0.0002, 0.0002, 0.0002)], inners: [] }
+  const drive: LineFeature = { type: 'line', id: 'drive', tags: { highway: 'service' }, points: [[0.0021, 0.0005], [0.0029, 0.0005]] }
+  const d = dateGrounds([lawn, wood, drive], parcels)
+  assert.equal(d.get('lawn')?.year, 2017)
+  assert.equal(d.get('wood'), undefined)
+  assert.equal(d.get('drive')?.year, 1900)
+  // In a scene of 1943, the lawn of 2017 is not drawn; the 1900 drive is.
+  const h = history({ groundsByParcel: true })
+  const kept = asOf([lawn, drive], { year: 1943, history: h, dates: d })
+  assert.deepEqual(kept.map((f) => f.id), ['drive'])
+  // Without the flag the parcel's year is not read.
+  assert.equal(asOf([lawn], { year: 1943, history: history(), dates: d }).length, 1)
+  // A parcel holding a building with a curated year dates nothing else.
+  const station: PolygonFeature = { type: 'polygon', id: 'station', tags: { building: 'train_station' }, outers: [sq(0.0006, 0.0006, 0.0002)], inners: [] }
+  assert.equal(dateGrounds([lawn, station], parcels, [{ id: 'station', year: 1919, source: 'https://x' }]).get('lawn'), undefined)
+})
+
+test('a bridge not drawn takes the ways that lead only to it; a listed bridge is drawn at grade', async () => {
+  const { dropApproaches, bridgesAtGrade } = await import('../src/history.ts')
+  const ln = (id: string, tags: Record<string, string>, points: [number, number][]): LineFeature => ({ type: 'line', id, tags, points })
+  const cross = ln('cross', { highway: 'residential' }, [[0, -1], [0, 1]])
+  const approach = ln('approach', { highway: 'primary' }, [[0, 0], [1, 0]])
+  const ramp = ln('ramp', { highway: 'primary' }, [[1, 0], [2, 0]])
+  const bridge = ln('bridge', { highway: 'primary', bridge: 'yes' }, [[2, 0], [3, 0]])
+  const through = ln('through', { highway: 'residential' }, [[5, -1], [5, 0], [5, 1]])
+  const far = ln('far', { highway: 'primary' }, [[3, 0], [4, 0], [5, 0]])
+  const all = [cross, approach, ramp, bridge, far, through]
+  const r = dropApproaches(all, [cross, approach, ramp, far, through])
+  // Back to the junction with a street on either side.
+  assert.deepEqual(r.kept.map((f) => f.id), ['cross', 'through'])
+  // A way with a street joining it along the way is a street of its own, and stays.
+  const long = ln('long', { highway: 'primary' }, [[3, 0], [5, 0], [6, 0]])
+  assert.deepEqual(dropApproaches([bridge, long, through], [long, through]).kept.map((f) => f.id), ['long', 'through'])
+  assert.equal(dropApproaches(all, all).dropped, 0)
+  const h = history({ atGrade: [{ id: ['bridge'], before: 1960, note: 'x' }] })
+  assert.equal(bridgesAtGrade([bridge], 1925, h).kept[0].tags.bridge, undefined)
+  assert.equal(bridgesAtGrade([bridge], 1960, h).kept[0].tags.bridge, 'yes')
+})
+
+test('a history can extend another: its rules and dates first', async () => {
+  const { loadHistory } = await import('../src/history.ts')
+  const dir = await mkdtemp(join(tmpdir(), 'iso-ext-'))
+  await writeFile(join(dir, 'base.json'), JSON.stringify({ present: 2026, rules: [{ where: { tag: 'amenity' }, eras: [] }], dates: [{ id: 'a', year: 1900, source: 'https://x' }], streetcarScale: 2 }))
+  await writeFile(join(dir, 'set.json'), JSON.stringify({ extends: join(dir, 'base.json'), rules: [{ where: { tag: 'service' }, eras: [[1950, null]] }], dates: [{ id: 'b', year: 1910, source: 'https://y' }], groundsByParcel: true }))
+  const h = await loadHistory(join(dir, 'set.json'))
+  assert.deepEqual(h.rules.map((r) => r.where.tag), ['service', 'amenity'])
+  assert.deepEqual(h.dates.map((d) => d.id), ['b', 'a'])
+  assert.equal(h.streetcarScale, 2)
+  assert.equal(h.groundsByParcel, true)
+})
+
+test('a bridge with an end no road reaches is left out', async () => {
+  const { dropOrphanBridges } = await import('../src/history.ts')
+  const ln = (id: string, tags: Record<string, string>, points: [number, number][]): LineFeature => ({ type: 'line', id, tags, points })
+  const west = ln('west', { highway: 'primary' }, [[0, 0], [1, 0]])
+  const span1 = ln('span1', { highway: 'primary', bridge: 'yes' }, [[1, 0], [2, 0]])
+  const span2 = ln('span2', { highway: 'primary', bridge: 'yes' }, [[2, 0], [3, 0]])
+  const east = ln('east', { highway: 'primary' }, [[3, 0], [4, 0]])
+  assert.equal(dropOrphanBridges([west, span1, span2, east]).dropped, 0)
+  // Without the east approach the chain stands in the air at its east end.
+  assert.deepEqual(dropOrphanBridges([west, span1, span2]).kept.map((f) => f.id), ['west'])
 })

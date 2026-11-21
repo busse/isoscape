@@ -57,8 +57,9 @@ Copernicus's 30 m model for the rest of the world (see [Elevation sources](#elev
 
 **How isoscape was made.** isoscape was built, and the holiday shop is run, in chats with
 Claude, Anthropic's AI, using Claude Opus 5.5, directed and reviewed by Chris Busse. Claude wrote
-the code, traced the historic buildings, laid out the prints, and set up the shop. The maps are
-drawn by software from open data, not by hand; the historic years are machine-traced sketches.
+the code, traced the historic buildings, laid out the prints, and set up the shop. Chris Busse
+draws the maps with isoscape, in code, from open data; nothing is drawn by hand. The historic
+years are machine-traced sketches.
 
 Prints of some of the designs on the isoscape site are sold in a holiday shop at
 [chrisbusse.com](https://chrisbusse.com), open through December 31, 2026; the site links to a
@@ -78,7 +79,8 @@ rewrites `out/index.html`, a single local page over all of them:
 - **Bottom:** when and from what it was built, its measures, and its settings.
 - **Compare** (`C`, or ⌥-click a second build): B is laid over A in the same scene
   coordinates, with a divider to drag. The info panel shows the change in every measure and
-  every setting that differs.
+  every setting that differs. The divider's moves and look live in `src/compare.ts`, shared
+  with the compare figures a content page can place (`::: compare`, under "Adding a page").
 - **How this view was made** (`M`, a tab in the info panel): the selected build explained in
   sentences, written from its `meta.json`: the frame and camera, which data went in, the
   elevation range, where the building heights came from, bridge rules, rapids, the commit.
@@ -95,17 +97,70 @@ the next build) keeps your place, and Back and Forward move between pages and th
 
 ### Link previews
 
-Chat apps and social sites ignore the `#…` part of a link and run no script, so each build
-also gets a share page, `out/s/<id>.html` (and each page `out/s/page-<slug>.html`), with its
-own title, description and a 1200×630 preview image, `out/builds/<id>/social.png` (the picture
-cropped to fit; `rsvg-convert` or Chrome renders it, else the thumbnail stands in). A share
-page forwards to the explorer and keeps the fragment, so the **Link** button (`L`) copies
-`s/<id>.html#<the exact view>`. `isoscape explorer` makes any missing images and pages.
+Chat apps and social sites (Facebook, Threads, LinkedIn, iMessage, Slack, X, Bluesky, Discord)
+run no script and never send the `#…` part of a link, so every `index.html#…` address previews
+as `index.html` itself: the site's card, never the map or page it names. So the explorer also
+writes share pages in `out/s/`, each with its own title, description, canonical link and
+1200×630 picture, and a script that sends a visitor on into the explorer, keeping any fragment
+the link carries:
+
+- `s/<name>.html` for each map and each year of a dated series, named as its static page
+  `m/<name>.html` is and opening its lasting route (`#<region>` or `#<region>:<year>`), so the
+  address outlives rebuilds;
+- `s/page-<slug>.html` for each content page;
+- `s/<id>.html` for each build. One left from a build that is gone is rewritten to its region's
+  card, and the explorer opens a gone build id as the newest build of the same name, so links
+  already shared keep working and keep a picture that exists.
+
+The **Link** button (`L`, and "Copy link" on a page; on a phone, the share sheet) copies the
+share page's address, with the view in the fragment: `s/lm-grand-canyon.html#lm-grand-canyon@…`.
+Served over http(s), the explorer also shows that address in the address bar (with
+`history.replaceState`; `<base href="./">` keeps every relative URL beside `index.html`), so an
+address copied from there previews too, and reloading it comes back to the same view. Its
+canonical link follows the `p/` or `m/` page of what is shown, which is what a browser's own
+Share sends in Chrome. Analytics still report the explorer's own path with the route
+(`/isoscape/#lm-grand-canyon`), as before. An address written by hand as `index.html#…` still
+opens the view, and still previews as the site.
+
+The picture for a build is `out/builds/<id>/social.png` (the picture cropped to 1.91:1;
+`rsvg-convert` or Chrome renders it, else the thumbnail stands in), and previews use
+`social.jpg` beside it (ImageMagick or Python's Pillow makes it, about a fifth the bytes; some
+apps drop pictures near 1 MB). A page's own picture is its front matter's `social:` (below).
+`isoscape explorer` makes any missing images and pages.
+
 Previews need absolute URLs: before publishing, give the public address of `out/` in
 `isoscape.config.json` (`{ "siteUrl": "https://example.org/isoscape/" }`), in
 `ISOSCAPE_SITE_URL`, or as `--site-url` on `build`, `series` or `explorer`, and rebuild the
 page. `"flagship": "<region>"` there picks the site's own preview image (default: the newest build), which content
 pages share unless their front matter names their own (`social:`, below).
+
+To check every page's preview tags, in an output directory or on the live site:
+
+```sh
+python3 tools/check/previews.py out/
+python3 tools/check/previews.py https://busse.github.io/isoscape/
+```
+
+It lists each page with a missing tag, a relative URL, an image that is not served (or not in
+the directory), not 1.91:1, not the size its tags say, or over 1 MB, and exits 1 if any has
+one.
+
+To check the addresses and Link buttons in a real browser before publishing, offline:
+
+```sh
+PLAYWRIGHT_CORE=<folder of playwright-core> node tools/check/browser.mjs out/
+```
+
+It serves the directory at `/isoscape/` (a path, as GitHub Pages does) and blocks every other
+host. In headless Chrome, on a desktop window and a phone-sized one, it follows links to a
+page, a map, a year and a set, then goes Back and Forward. It reloads each kind of share address and
+opens old `#…` links and an old build's share page. It follows the static pages' links in,
+presses Link and fetches what it copied as a crawler would, and checks the shop link's tags. It
+prints PASS or FAIL for each, with screenshots in `out/check/browser/`, and says "skipped"
+without playwright-core (`npm install playwright-core` anywhere; it is not a dependency) or
+Chrome (`$CHROME`). Platforms cache a preview for days or weeks after first fetching a URL; to see a fixed one
+at once, ask for it again in Facebook's Sharing Debugger or LinkedIn's Post Inspector, or share
+the URL with a `?v=2` on the end.
 
 The same file can give the explorer a front page. `"home"` has a `title`, an `intro`, `heroes`
 (featured views, each a `region`, optional `year` in a dated series, `title`, `blurb`, and
@@ -132,17 +187,47 @@ what is for sale:
 Each key of `onSale` is a region prefix, a set's page slug or a content page's slug, and its
 value the product or collection URL. A subject (a region, or a page's slug) is on sale under the
 longest key it starts with: `"richmond"` covers every `richmond-…` region, and a longer
-`"richmond-streetcars"` overrides it for those. The site always links to the shop's front page
+`"richmond-streetcars"` overrides it for those. A key with a year, `"<region>:<year>"` (the
+explorer's route for that year, e.g. `"richmond-downtown-time:1925"`), names that one year's
+view of a dated region and nothing else: not its other years, nor the series' page
+(`m/<region>.html`); it must match the year exactly. The site always links to the shop's front page
 (the explorer's header, the front page's banner and "Shop prints ↗" atop every static page),
 and links to buy only what `onSale` names:
 
 - a map ("Buy a print ↗", or its featured view's `shopLabel`): the explorer's info bar, its
-  front page, and `m/<region>.html`;
+  front page, and `m/<region>.html` (a year's: `m/<region>-<year>.html`);
 - a front-page section (its `shopLabel`, else "Buy prints ↗"): when every one of its `prefixes`
   is on sale under one URL, else when the slug of its story `page` is;
-- a content page (a button at its head, in the explorer and in `p/<slug>.html`): when its own
-  slug is on sale, else when every map it links to is on sale under one URL, else when the
-  section whose story it tells is.
+- a content page (a button at its head and its foot, in the explorer and in `p/<slug>.html`, and
+  a link in its share page `s/page-<slug>.html`): when its own slug is on sale, else when every
+  map it links to is on sale under one URL, else when the section whose story it tells is (a
+  set's page on sale as a collection says "Prints of this set ↗");
+- a piece of a set (a place's or stop's print, the map alone, the framed map): beside the
+  link to its view in a content page, from `shop.products` (below).
+
+`shop.products` maps the explorer view each set piece is cut from (the store catalog's
+`explore`, e.g. `"broad-street-lines:1943@-494,-1066,6"`, or the whole map's
+`"broad-street-lines:1943"`) to its prints: `[{ "url", "label", "design" }]`. Where a page links to
+that view, the link to buy goes beside it: after "See it on the map" in a box's line of links
+("Buy a print of this place ↗"), or at the end of the paragraph ("Open the map … Buy a print of
+the map alone ↗ · Buy a print of the map with every place ↗"). It is written, never by hand, by
+`python3 tools/release/products.py <store-dir>` from the store's catalog and product handles and
+the board's `on_sale`: only set boxes, maps and framed maps that the board has on sale and the
+store has active. Rerun it whenever a piece goes on or off sale (`--check` says whether it is
+current, and it warns of a piece no page links to).
+
+Where more than one print is made from the same view, its `onSale` value is a list: the first
+entry is the view's own buy link (a URL, or `{ "url", "label" }` to name it), and each further
+`{ "url", "label" }` is shown beside it, in the explorer's info bar and on the view's map page:
+
+```json
+"richmond-downtown-time:2026": [
+  { "url": "https://chrisbusse.com/products/richmond-2026", "label": "Buy Richmond, 2026 ↗" },
+  { "url": "https://chrisbusse.com/products/richmond-then-and-now", "label": "Buy Richmond, Then & Now ↗" }
+]
+```
+
+Everywhere else (sections, content pages) the key counts as on sale under its first URL.
 
 `cta` replaces "Shop prints" in the header only while something is on sale. With `onSale`
 empty, nothing anywhere links to a product or collection, and no text says so. Per-view or
@@ -188,6 +273,43 @@ owner must submit `https://busse.github.io/isoscape/sitemap.xml` once in
 `https://busse.github.io/isoscape/`, verify it with the HTML-file or meta-tag method, then
 Sitemaps → Add), and in Bing Webmaster Tools if wanted. After that, each publish updates it.
 
+### Publishing the site
+
+The live site, https://busse.github.io/isoscape/, is GitHub Pages serving the root of this
+repo's `gh-pages` branch (Settings → Pages: branch `gh-pages`, folder `/`). A push to
+`gh-pages` deploys it in a minute or two. Nothing else publishes it: there is no Actions
+workflow and no `docs/` site.
+
+`gh-pages` is a history of the built site, one commit per publish ("Explorer: …"): `index.html`,
+`p/`, `m/`, `s/`, `sitemap.xml`, `.nojekyll`, and `builds/`, the build folders the pages show
+(SVG, thumbnail, preview images, `meta.json`). Older builds of a view stay there, so share links
+to them keep working. The builds are not in `main`: `out/` is ignored, and each machine's
+`out/builds/` holds only what was built there. The site's own `builds/` is the record of what
+is live.
+
+To publish, from an up-to-date `main` (`git pull`), with an up-to-date checkout of `gh-pages`
+beside it (here `../isoscape-site`, made with `git worktree add ../isoscape-site gh-pages` or
+a clone of that branch):
+
+1. Copy any new build folders the change needs from `out/builds/` into
+   `../isoscape-site/builds/`. A change to pages or `isoscape.config.json` needs none.
+2. `node bin/isoscape.js explorer --out ../isoscape-site`. It lists the builds in the site's
+   own `builds/`, and rewrites `index.html`, `p/`, `m/`, `s/` and `sitemap.xml` from this
+   checkout's pages and config.
+3. Check it: `python3 tools/check/previews.py ../isoscape-site/` and
+   `PLAYWRIGHT_CORE=<dir> node tools/check/browser.mjs ../isoscape-site/`, and look at what
+   changed in a browser, desktop and phone-sized.
+4. In `../isoscape-site`, `git status` should show only what the change meant to touch.
+   Commit ("Explorer: <what changed>") and push `gh-pages`. Then run
+   `python3 tools/check/previews.py https://busse.github.io/isoscape/` once it is live.
+
+`tools/site.py <dest>` assembles a site from scratch: it copies the newest build of every view
+from `out/builds/` and moves every other build in `<dest>/builds/` out to
+`<dest>/../_site_trash_<id>`. Run it only on a machine whose `out/builds/` holds every build
+now live. Otherwise it drops views and old share links from the site, or rolls back a redraw.
+(On November 18, 2026 the copy of this repo in Chris's `ISO-TEST` folder lacked 28 of the 113
+live builds, among them the current Richmond 1925 and 1950.)
+
 ### Adding a page
 
 Pages are Markdown files in `pages/`, compiled into `out/index.html` whenever it is
@@ -211,15 +333,89 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
 
 - `social` (optional) names a 1200×630 PNG or JPEG beside the page for its link preview; it
   is copied to `out/s/page-<slug>.jpg` (or `.png`). Without it, a page previews with the
-  site's flagship view. `world-landmarks-social.jpg` is one, made from the five maps.
+  site's flagship view. `world-landmarks-social.jpg` is one, made from the five maps. Make it
+  the drawing, not the whole sheet: at the size a preview shows, a sheet's text cannot be
+  read. A set's (`tools/sets/set.py`) is its big map whole, and a cutaway's
+  (`tools/cutaway/sheet.py --page`) is the isometric cut alone.
 - `title` is the nav label (default: the first `#` heading). `order` sorts the nav, lowest
   first (default 100); the shipped pages use 10 and 90. `slug` overrides the file name.
+- `unlisted: true` keeps a page out of the nav, the static pages' footers, the front page's
+  plain list and the sitemap, and asks search engines not to index `p/<slug>.html` (`noindex`).
+  It still opens at its address (`#/<slug>`, `p/<slug>.html`, `s/page-<slug>.html`). Use it
+  for a page someone has to read before it goes out, and delete the line to publish it.
+- `schema: FAQPage` gives the static page `FAQPage` JSON-LD in place of `Article`. Each heading
+  that ends in a question mark is a question, and the text under it, up to the next heading, is
+  its answer (`faqEntries` in `src/static-pages.ts`).
 - Section ids follow GitHub's rule (lower case, punctuation dropped, spaces to hyphens), and
   links are written as they would be for GitHub, so the files read the same on GitHub as in
   the explorer.
 - Images must be `.svg`, `.png`, `.jpg` or `.webp` files in `pages/` itself, and are
   embedded as data URIs so the explorer stays one file. An SVG can follow light and dark
   mode with a `prefers-color-scheme` media query, as `pipeline.svg` does.
+  `pipeline.svg` and the FAQ's diagrams (`faq-*.svg`) are written by
+  `node tools/diagrams/faq.ts`, with every color from `src/palette.ts`. Edit the script and run
+  it again. `npm test` fails when a file in `pages/` differs from what the script writes.
+- `deck` (optional) is one sentence set under the page's title in larger, dimmer type: what the
+  reader will see.
+- **Numbered figures** are opt-in. A picture in a fenced block becomes a figure, numbered
+  "Fig. 1.", "Fig. 2." … in page order, with everything after the picture as its caption in
+  small type on a light ground (a table keyed to the picture goes inside, so it stays with it):
+
+  ```markdown
+  ::: figure wide
+  ![Alt text: what the picture shows](jackson-ward-state-1952.webp)
+
+  Short caption. *How this was made:* the method, with [links](#the-tracing).
+  :::
+  ```
+
+  `wide` lets the picture run past the text column where the window allows (over the margin
+  and the explorer's contents list). Figures get ids `fig-1`, `fig-2` …, so `[Fig. 3](#fig-3)`
+  links one. On a page with figures, clicking a picture opens a lightbox (`src/lightbox.ts`):
+  the picture fitted to the window with its caption, previous and next (arrow keys), a counter,
+  **Full size** (Z, or click the picture) to see it at its own size and pan by dragging,
+  **All figures** (G) for a grid of every figure on the page, Esc to close. It works by
+  keyboard alone, keeps focus inside while open, and takes the explorer's shortcut keys until
+  it closes. Where a larger copy sits beside the picture as `<name>-large.<ext>`, the lightbox
+  shows that; it is linked, not inlined, from `p/`, so it costs nothing until opened (the
+  Jackson Ward views have 3,200 px copies, written by `views.py`). Pages without the block
+  render as before. GitHub shows the `:::` lines as text.
+- **Compare figures** are opt-in too: a slider between two pictures of the same frame, numbered
+  with the other figures and taking the same classes. Each picture's line ends with its label;
+  the first picture is on the left of the divider:
+
+  ```markdown
+  ::: compare wide
+  ![Alt text for the left picture](jackson-ward-state-1952.webp) 1952
+  ![Alt text for the right picture](jackson-ward-state-2026.webp) today
+
+  Short caption.
+  :::
+  ```
+
+  The two pictures must be the same size and drawn from the same frame (nothing scales one to
+  fit the other; `views.py` renders the Jackson Ward years in one shared viewBox for this).
+  Press or drag anywhere on the pictures to move the divider. A finger moves it by dragging
+  sideways or by a tap; a vertical swipe that starts on the pictures scrolls the page and leaves
+  the divider where it was, and the page itself never pans sideways (`touch-action: pan-y`). On a
+  touch screen the line takes touches 22 px either side, and the expand button is 44 px. The divider is a focusable slider (`role="slider"`, with `aria-valuenow` and a
+  text naming both sides): ← and → move it 2%, with Shift or PageUp/PageDown 10%, Home and End
+  to the edges. Its tab shows the two labels, one each side of the line, and slides along the
+  line near either edge so it stays whole inside the picture. The expand button (⤢)
+  opens the same slider large in the lightbox, with each picture's `-large` copy and the divider
+  where it was; there the arrow keys move the divider while it has focus and step figures
+  otherwise, and **Full size** is hidden. In the grid it is one figure, shown by its first
+  picture. Without script it shows the two halves at 50% and the expand button links to the
+  first picture's larger copy. The slider shares the viewer's divider (`src/compare.ts`):
+  the same moves and the same look. Only pages with the block get its styles and script on
+  `p/`. Anything but two pictures makes a plain figure.
+- Raster images carry their width and height, so the page holds its layout while they load.
+- On a phone nothing in a page is wider than the screen: long words, bare URLs and inline code
+  wrap inside the text column, a table scrolls sideways inside its own wrapper (its cells keep
+  whole words), and a code block scrolls inside its own box. Wide figures shrink to the column.
+  As a guard, on a phone the explorer's reading view and front page (`#page`, `#home`) and the
+  static pages' column (`.wrap`) clip anything wider rather than scroll sideways. On a phone the
+  lightbox's buttons are at least 44 px, and previous and next sit above the caption.
 - The converter (`src/markdown.ts`) escapes all text and drops raw HTML and unsafe link
   schemes. Files starting with `_` (drafts) and `README.md` are skipped.
 - `npm test` checks that every in-page link in `pages/` lands on a real section, and that the
@@ -337,9 +533,11 @@ stand above it. The surface at each water node is taken as a low percentile of t
 within 30 m, then smoothed along the water. Anything a meter or more above that surface is
 drawn as exposed rock, which gives the boulder fields. The water drapes on the surface, so
 it lies level across the river and falls along it. **Rapids** are drawn where that surface
-falls faster than `terrain.rapids` (m/m) measured over 40 m: white strokes across the
-current, with froth where it drops hardest. OSM weirs are drawn as white crests. Rocks and
-rapids are only read at least two cells (10 m) from shore. **The shoreline follows the
+falls faster than `terrain.rapids` (m/m, 4 m per km by default) along the river's channel,
+measured over a 200 m reach: white strokes across the current, as thick as the fall. OSM
+weirs are drawn as white crests. Rocks and rapids are only read on rivers (not lakes, basins
+or the sea), at least two cells (10 m) from shore, and never on ground painted over the
+water. **The shoreline follows the
 lidar, not OSM's outline:** near-shore "water" standing more than a meter above the river is
 given back to the land at its own height. The water's edge is then traced through the
 corrected water grid (marching squares over a lightly smoothed mask) and drawn at the
@@ -384,7 +582,7 @@ same pipeline on a flat plate.
     "cell": 5,                    // grid spacing, meters
     "contour": 2,                 // contour interval, meters (0 for none)
     "majorEvery": 5,              // every 5th contour heavier
-    "rapids": 0.035,              // water-surface fall (m/m over 40 m) that reads as rapids
+    "rapids": 0.004,              // river fall along its channel (m/m over 200 m) that reads as rapids
     "demResolution": 1,           // meters per pixel to fetch (default 1, or the source's own spacing)
     "source": "3dep",             // where the heights come from; see Elevation sources
     "fillFrom": "copernicus"      // optional: a second source for gaps (a national model stops at the border)
@@ -429,8 +627,9 @@ in the countryside:
   Database](https://www.mrlc.gov/) (NLCD 2021, 30 m, public domain), under OSM's own land use.
 
 `fetch` gets them along with everything else; `fetch <region> --extras-only` gets just these.
-For tidal water, set `terrain.rocks: false` and `terrain.rapids: 0`: river logic has nothing to
-find there.
+The sea (drawn from the coastline) and still water get no rocks or rapids. For a tidal river
+mapped as a river, set `terrain.rocks: false` and `terrain.rapids: 0`: river logic has nothing
+to find there.
 
 ## Time
 
@@ -459,6 +658,32 @@ colored fills, and follows each building until a later map, a newer building or 
 shows it gone. The steps are in *How it's made*, under "Time". The 1886, 1895, 1905, 1924–25 and
 1950–52 editions are traced into `history/sanborn/`. The results are sketches: outlines and
 heights are approximate, and some buildings are missing, misplaced or merged.
+
+**Ground before later works.** A history file can put back ground a later work cut or filled
+(`ground`: an outline, a method, the streets that crossed it, a `before` year, a note and
+sources), for scenes of earlier years only. `membrane` rebuilds the ground inside from its rim
+and its streets; `lower` takes down narrow banks such as ramp embankments. Jackson Ward
+(`regions/jackson-ward.json`) puts back the Turnpike's trench before 1955. The method and its
+error are in *How it's made*, under "Time".
+
+**Pick-outs.** A switch in a history file can carry a `highlight` (`Highlight` in
+`src/history.ts`), drawn only by builds that name it with `--with`: buildings whose center falls
+in a polygon of a GeoJSON file roofed in the palette's `mark` tones (the first polygon darker,
+later ones lighter), the rest quiet, the outlines drawn on the ground, and, where asked, the
+curated lost streets and some bridges' decks marked. Jackson Ward has two: `count` (the 1952
+buildings in the highway's footprint) and `streets` (the stretches of street it took, and
+today's bridges). A highlight can also take `ids`, a file of the traced ids a count counted in
+each polygon (`tools/sanborn/jw/count.py` writes one), and then roofs exactly those, so the
+picture and the count agree. Every other build is unchanged.
+
+**Islands.** A switch can carry an `island` (`Island` in `src/history.ts`): the scene is cut
+to one polygon and drawn alone on blank paper. The ground is painted strip by strip as always,
+each strip clipped to the polygon's part of its band (densified and draped); the cut faces that
+look toward the camera are drawn as a slab's sides down to a flat bottom `slab` meters below the
+lowest ground inside, with the rim inked; standing things are kept when their center falls
+inside, or, with `ids`, when a count listed them; the frame closes in on the island, and a
+caption line says what its edge is. Jackson Ward has `island-paved` and `island-corridor`: only
+what the Turnpike took, inside today's footprint (a stand-in for the 1958 right-of-way).
 
 `regions/richmond-downtown-time.json` reuses the I-195 to Rocketts cache (`"data"`) for OSM
 and elevation and keeps only its year-built parcels in its own `data/` folder. A build looks for
@@ -505,10 +730,43 @@ python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json   # out/cutaways/
 python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json --print   # out/cutaways/print/
 ```
 
+Other part shapes: `"shape": "frame"` with `members` (straight members, or convex plates, in
+the vertical plane over the ring's first edge: a truss, a roof slope), `"inset"` with `levels`
+(a hipped roof or a square dome, stepped in by distance), and `"track"` (ties and rails on a
+deck). A rail line with an `elevation` stands its train on a deck and draws no ground track.
+`lift` also lifts modeled parts whole, leaving their outline dashed. In the section,
+`"hidden"` draws stairs behind a wall as their dashed outline and `"slice": {"parts": [...],
+"depth": 1}` draws a roof only that far behind the plane. A sheet's `crossSection` (`region`,
+`caption`) sets a second flat section beside the first, with callouts anchored to it by
+`"cross"`; `marksNote` words the key's line about the wayfinding marks.
+
 A callout's anchor in either drawing may say `"badge": [dx, dy]` (sheet units, 9,600 across):
 the badge then stands that far off the part, with a leader to a dot on it, so it does not hide
 what it names. `travelerKey` adds a line with the traveler's glyph to the key, and a group with
-`"traveler": true` carries the glyph beside its heading.
+`"traveler": true` carries the glyph beside its heading. In the region, `cutaway.route`
+(`points`: [lon, lat, elevation], at waist height, and a `weight`, the section's scale on the
+sheet over the cutaway's) draws the traveler's way in the cutaway too, red and dashed as the
+section draws it; `cutaway.order: "components"` breaks a cycle in the paint order at an item
+that lies in one, rather than at the farthest item left.
+A cutaway may trace a second way beside its route, `cutaway.pumped` (and `section.pumped` in
+its section), in the palette's `pumped` blue: the water a works lifts, beside the water that
+drives it. With `section.ribbon` both are drawn as water rather than dashes: a pale band (60%
+opaque) under a thin line with arrowheads every 3 m, the route in the palette's `drive` teal
+(never the route's red, which reads as warm water), each end tagged from `routeEnds` and
+`pumpedEnds`. An inset with `water` draws its mains in the same blue. A sheet's `sections` (each `region`, `caption` and `as`, the key its callouts anchor
+to) sets the flat sections along its foot in place of the region's own and `crossSection`; its
+`inset` sets a small flat context map with a heading, a caption and `why`, a few short
+paragraphs on the building's purpose (`tools/cutaway/context.py`, from a cached OpenStreetMap
+extract).
+`isoView` (`[x, y, w, h]` in the plate's own units) frames the plate closer, cutting what runs
+past it at its edge; a wayfinding label with `label: [x, y]` (sheet units, its first baseline)
+stands there, its leader leaving the nearest point of its box; `columnEnd` warns when the
+column runs past that height, into the room the print's title block needs. A spec's `column`
+tightens the column's spacing (sheet units: `head`, `callout`, `group`, `keyHead`, `keyRow`,
+`traveler`, `notes`, `between`; the defaults, 170, 58, 36, 150, 92, 26, 40 and 68, are the
+released sheets'); the Pump House sheet uses it to end its column by 6,520 and free the corner.
+`blockMinPt` keeps the title block's taxonomy at that size or more on the 24 × 18 in print (see
+"Plates").
 
 A spec may also set `theme` (`"holiday"`: accents from `SHEET_THEMES` in `src/palette.ts`, a
 border with holly at the corners; margins only), `halo` (leaders drawn over a paper halo, for a
@@ -550,6 +808,7 @@ fourteen places they ran to.
      "subtitle": "Highland Park line, over the Fifth Street viaduct",   // or "line"
      "at": [-77.42, 37.5765],      // lon, lat the box is centered on
      "year": 1925,                 // optional: draw this box from another year of the series
+     "map_at": [-77.42, 37.577],   // optional: its place on the big map, if not `at` (the leader ends here)
      "ground": 1800,               // optional: meters across (menu 1,800, single print 2,100)
      "note": "About 50 words, written from the sources…",
      "sources": ["https://…", "https://…"] }
@@ -558,8 +817,9 @@ fourteen places they ran to.
    ("Over the Fifth Street viaduct and round the loop…") and then says what became of the place.
    American spelling. A box with no source does not go in.
 3. **The set file**, `sets/<name>.json`: `slug` (the print files' prefix), `title`, `subtitle`,
-   `note` (what is approximate), `credit`, `map` (`region`, `year`), `boxes`, an optional
-   `key` (up to sixteen names in the title band, from a list in a JSON file), optional `fine`
+   `note` (what is approximate), `credit`, `ground_note` (for a dated set, that the ground is
+   today's), `map` (`region`, `year`), `boxes`, an optional
+   `key` (up to sixteen names in the title band, from a list in a JSON file, set as a plain list), optional `fine`
    (extra `build` flags for the single prints, e.g. `["--streetcar-scale", "1.5"]`), and `page`
    (`slug`, `title`, `summary`, `intro`, `how`, `noun`, and an optional `table`).
 4. **Scenes**, where the region's data is cached: `python3 tools/sets/set.py <name> prepare`
@@ -568,8 +828,9 @@ fourteen places they ran to.
    (300 dpi into `out/sets/<name>/print/`; `--dpi 40` for a quick proof). Look at every one.
 6. **The page**: `set.py <name> page` writes `pages/<page.slug>.md` and its two images from the
    menu print. Link it from a section of `isoscape.config.json` (`page`, `pageLabel`). The page
-   names no shop: once the prints sell, add the page's slug (and, if you like, the region) to
-   `shop.onSale` with the collection's URL, and the explorer adds the shop buttons.
+   names no shop: once the prints sell, add the page's slug and the region to `shop.onSale`
+   with the collection's URL, and run `tools/release/products.py <store-dir>` for each print's
+   own link; the explorer adds the shop buttons and the links.
 
 ## Roadmap
 
@@ -642,6 +903,233 @@ the pictures differ for that reason, not the code. Builds are deterministic, so 
 commit and data give the same SVG. The check needs Python 3 with Pillow and numpy, and
 `rsvg-convert`. Its comparison has unit tests: `cd tools/check && python3 -m unittest`.
 
+## Stages and the board
+
+Every piece of work, from a first look at a subject to a print for sale, is at one stage and
+moves on only through that stage's gate. The board, `catalog/pipeline.json`, says where each
+piece is, what is on sale, and what it waits on. This scheme was agreed with Chris on
+November 18, 2026, and applies from then on. Version numbers printed before that date stay as
+they are.
+
+### Stages of image work
+
+Image work is prints, set boxes, set maps, set menus and cutaways.
+
+| Stage | What it is | Number | Gate to the next stage |
+|---|---|---|---|
+| research (optional) | A brief on whether the subject can be drawn honestly, with the sources found and opened. No image. | none | Chris says draw it. |
+| rough draft | A proof-size render to test the subject, the framing, and whether the data can carry it. No notes are needed, and there is no stamp. | none | Chris says it is worth pursuing. |
+| working draft | The full composition at print size. Notes are written and sourced, and known faults are listed on the board. Iterate freely. | d1, d2, … | Chris approves the look: subject, framing and notes. |
+| final draft | A release candidate. Facts are checked against sources that were opened. It gets one inspection against the checklist below, at most one fix round, and a targeted recheck of what changed. | rc1, rc2, … | Chris approves release. |
+| final production | Stamped, uploaded and live, with its release record written and checked. | version 1, 2, … | None. Later changes are planned editions. |
+
+A plate version, the number in the printed title block and in the store, is given only at
+final production. Drafts never appear in the store, on the Changes pages, or in a title block.
+A release candidate is stamped for inspection with the version it will have if released
+(`stamp.py --asset 3.0.0-rc1 --out <dir>`). The block prints only `3`, and the file never goes
+into the store.
+
+### The acceptance bar at each stage
+
+- **Rough draft:** the subject reads at proof size, the data covers the frame (no holes, no
+  missing heights where they matter), and the subject sits clear of the edges.
+- **Working draft:** the composition is at print size, every fact in the notes has a source,
+  and every known fault is listed on the board. Faults are allowed if they are listed.
+- **Final draft:** nothing a person would notice at arm's length; every fact on the print
+  sourced; text legible; the plate block correct. Faults seen only up close go on the design's
+  accepted-faults list on the board, with their pixel boxes, so later inspections do not report
+  them again. If they matter, they are fixed in a planned edition.
+- **Final production:** `record.py --release` has written the record, `check.py --rebuild`
+  passes, the store's files match the record, and the product is live.
+
+### The final-draft inspection
+
+A final draft gets one inspection. Hand the inspector this list as it stands, with the design
+key, its asset version (for example `3.0.0-rc1`), the commit, the print file's path, and its
+board entry.
+
+1. Open the print file at its largest size sold. First look at the whole sheet scaled to your
+   screen, about 1,500 px across. That is arm's length: a framed print seen from about a
+   meter (3 ft). Then go over it in tiles of about 1,200 px at 100%.
+2. Open the sources. For every fact printed on the sheet (note, captions, labels, names, dates,
+   heights, counts), open the source cited for it in the set, cutaway or print spec, and
+   confirm it says that. A fact with no source, or a source that does not say it, is a
+   finding.
+3. At arm's length these count: a building, bridge or line floating, cut through, standing in
+   water, or of the wrong era where it draws the eye; a label or badge that covers a subject or
+   collides with another; text that is cut off, overlapping, misspelled or wrong; a subject
+   named in the title or the note that is missing or unrecognizable; a seam, blank patch or
+   stray mark visible on the whole-sheet view; color or line weight clearly off from the rest of
+   its set.
+4. Text: body text measures at least 6 pt at the smallest size sold. The title block's own
+   small labels are a board-wide item (`all-prints-label-size`): do not report them.
+5. The plate block: plate, version (the MAJOR of the asset version), collection › set › piece,
+   year drawn, location, facing, and kind must match `python3 tools/release/plates.py info
+   <design> --version <MAJOR>`.
+6. Do not report anything in the design's `accepted_faults` on the board, anything in
+   CLAUDE.md "Known limits", anything visible only above 100%, faults already listed in its
+   `planned_edition`, or matters of subject and framing (Chris approved the look at working
+   draft).
+7. Grade each finding:
+   - **A**: seen at arm's length. Blocks release.
+   - **C**: a fact that is wrong or unsourced. Blocks release.
+   - **B**: seen only up close. Goes on the accepted-faults list with its box, unless the one
+     fix round fixes it at no risk.
+8. Report a table with columns for grade, pixel box on the full print file (x0, y0, x1, y1),
+   one line of description, and the crop's file name. Give a verdict: **pass** (no A or C
+   findings) or **fix** (with the A and C findings listed).
+9. After the fix round (rc2), recheck only the boxes and text that changed, not the whole
+   sheet. Record the commit in the board's `last_inspected`.
+
+### Round budget
+
+A round is one pass of changes made in answer to a review or an inspection. The board's
+`rounds` is the number of the current draft or candidate (`d4` is 4, `rc1` is 1).
+
+- A third fix round at any stage needs Chris's say-so. For a working draft (or a rough draft's
+  proofs), that is round 4. Record it in the entry's `budget_note`; `board.py check` fails
+  without one.
+- A final draft has one fix round (rc2). A second fix round (rc3) also needs his say-so, and
+  usually means the piece goes back to working draft.
+
+### After release: planned editions
+
+Changes to published work are batched into planned editions. Each has a stated reason:
+**factual correction**, **wall-visible fault** (seen at arm's length), or **improvement**. The
+board's `planned_edition` holds the reason and the list of fixes queued. Its work then runs
+through the stages again as the next edition's drafts: `4.0.0-d1`, then `4.0.0-rc1`. A piece
+with a known factual error comes off sale until it is fixed (rule of November 16, 2026),
+unless Chris decides otherwise for that piece.
+
+### Asset versions
+
+Inside the pipeline and the explorer, files and builds carry an asset version, `MAJOR.MINOR.PATCH`:
+
+- **MAJOR** is the plate version, the edition. It is the only number the title block prints.
+- **MINOR** is a revision of the art within an edition. It is possible only while the edition
+  has no orders.
+- **PATCH** is a re-stamp or re-export with identical art.
+- **Drafts** are prereleases of the next edition: `-dN` for working drafts and `-rcN` for
+  release candidates.
+
+| Asset version | Meaning | Print file | Record |
+|---|---|---|---|
+| `1.0.0-d2` | second working draft of a new design | not in the store | none |
+| `1.0.0-rc1` | its first release candidate | `--out` only | none |
+| `1.0.0` | released as version 1 | `<design>-v1_<size>.jpg` | `v1.json` |
+| `1.1.0` | corrected in place before anyone ordered it; the block still says 1 | `-v1.1_` | `v1.1.json`, kind `revision` |
+| `1.1.1` | the same art re-stamped or re-exported | `-v1.1.1_` | `v1.1.1.json` |
+| `2.0.0-rc1` | candidate for edition 2 (edition 1 has orders, so it is frozen) | `--out` only | none |
+| `4.0.0-rc1` | candidate for a fourth edition of a design now at 3 | `--out` only | none |
+
+Two cases on the board today: Main Street Station (BSS·07, `3.0.0`) will be corrected as
+`3.1.0` if it has no orders, or as `4.0.0` if it has any. Scott's Addition is `1.0.0-rc1` as
+BSS·16, or would be `3.0.0-rc1` as BSS·03.
+
+`stamp.py --asset 3.1.0` writes `-v3.1` files and logs the asset version. The store catalog's
+`asset_version` (default `<version>.0.0`) tells `record.py` which files to record.
+
+### Frozen once sold: "no orders"
+
+Once any order includes an edition, that edition is frozen, and the next change is a new
+edition. While it has no orders, a live print may be replaced in place by a corrected file
+(a MINOR revision), in the store and on the plate, without a new plate version.
+
+"No orders" comes only from the store:
+
+1. On the Mac, in the store's pipeline, `python3 orders.py counts` reads every order. It needs
+   the Admin API scope `read_orders`, plus `read_all_orders` for orders older than 60 days. It
+   writes `state/orders.json` with counts only: per design key, the number of orders that
+   include any of its products. Cancelled and refunded orders count; test orders do not.
+2. `python3 tools/release/board.py orders <store-dir>` copies those counts onto the board, with
+   the date they were counted (`orders`, `orders_counted`).
+3. Until then, `orders` is `"unknown"`, and unknown counts as sold.
+
+`record.py` refuses a revision unless the board says `orders: 0`, counted within the last two
+days. A revision of a design on sale also needs a one-line, dated entry on `pages/changes.md`
+(and the store's Changes page) that names its plate and the revision, such as "BSS·07 … 3.1",
+and says what was corrected. The record keeps the superseded files' hashes (`supersedes`), and
+`check.py` confirms those files are still there, so nothing is lost.
+
+### Stories
+
+A story package is editorial first: a web story, and perhaps a book. Prints are not the goal.
+Its stages are:
+
+1. **research**: a brief, with every source opened. Gate: Chris says take it to an outline.
+2. **outline**: Gate: Chris approves the outline.
+3. **fact check**: every claim is checked against a source that was opened, and listed.
+4. **outside review**: where the subject calls for it (slavery, redlining, displacement), by
+   people with standing in it: historians, and the communities it is about.
+5. **published**: Gate: Chris approves publication.
+
+### Site changes
+
+A change to the explorer or to the store's own pages (a layout fix, a new page feature) is a
+`site` entry. Its stages are:
+
+1. **in work**: built on a branch, with tests.
+2. **owner test**: ready for Chris to try where it runs. A desktop change is tried from the
+   local preview (`ISO-TEST/_preview/`) before anything is pushed. A change that can only be
+   judged on a phone or the live site is pushed when he says so and tried there. The entry's
+   `decision` lists what to check.
+3. **live**: Gate: Chris says it works.
+
+### The board
+
+`catalog/pipeline.json` has one entry per design or piece of work. It is keyed by the store's
+design key where there is one, and every plate in `catalog/plates.json` has an entry. Each entry
+holds:
+
+- `title`, `plate`, and `kind` (`print`, `set box`, `set map`, `set menu`, `cutaway`,
+  `story`, `research`, `site` for a change to the explorer or the store's own pages, or `batch`
+  for a change across many designs)
+- `stage`, and `status` (`active`, `on hold`, `blocked` or `backlog`)
+- `asset_version`, `published_version` (the latest release record), `live_version` (on sale
+  now, or null), `on_sale`, and `orders`
+- `rounds`, `waiting_on` (`owner`, `agent` or `nothing`), and `decision` (the decision needed,
+  in one line)
+- `accepted_faults` (one-line items, with a `box` of print pixels `[x0, y0, x1, y1]` where
+  known), and `planned_edition` (`reason`, `fixes`)
+- `last_inspected` (a commit), `branch`, `worktree`, and `links`
+- private `notes`, and a `log` of stage changes
+
+Commands:
+
+- `python3 tools/release/board.py check` validates the board. Every plate has an entry, and
+  each entry's plate matches `plates.json`. Published and live versions agree with the latest
+  release record. A draft's asset version is a prerelease of the next edition (or a revision of
+  an unsold one), its `-dN`/`-rcN` agrees with `rounds`, and the round budget holds.
+- `python3 tools/release/board.py show [--md]` prints a plain table grouped by stage, with the
+  "waiting on the owner" list first.
+- `python3 tools/release/board.py set <key> field=value …` edits one entry, and `--new` adds
+  one. Values are JSON where they parse; `field+=value` appends to a list (`accepted_faults+="what
+  @ x0,y0,x1,y1"`); `planned_edition.reason=…` sets a field inside an object.
+- `python3 tools/release/board.py page` writes `pages/board.md`, the explorer's unlisted
+  "Production board" page. It never shows orders, notes, links, branches, worktrees, logs or
+  commits.
+- `python3 tools/release/board.py orders <store-dir>` takes the store's counts (see above).
+
+Tests: `cd tools/release && python3 -m unittest test_board`.
+
+### Moving a piece between stages
+
+Each move is one `board.py set` after the gate is passed, and `check` keeps the fields
+consistent. For example, after Chris approves a working draft:
+
+```sh
+python3 tools/release/board.py set <key> stage="final draft" asset_version=1.0.0-rc1 rounds=1 waiting_on=agent decision=null
+```
+
+At release, after stamping, uploading, `record.py --release` and `check.py --rebuild`:
+
+```sh
+python3 tools/release/board.py set <key> stage="final production" asset_version=1.0.0 published_version=1 live_version=1 on_sale=true rounds=0 waiting_on=nothing orders=0
+```
+
+Then write the Changes entry, run `board.py page`, and commit `releases/`,
+`catalog/pipeline.json` and `pages/` together.
+
 ## Release records
 
 Every design for sale has a record in `releases/<design>/v<N>.json`, so it can always be
@@ -654,11 +1142,38 @@ Printful file ID, and the Shopify products, mockups and explorer view. `releases
 lists them.
 
 - `python3 tools/release/record.py <store-dir> [design...] --release`: write the record when a
-  design is published or redrawn (a redrawn design is a new version: see `pages/changes.md`).
+  design is published or redrawn (a redrawn design is a new edition: see `pages/changes.md`; an
+  unsold edition corrected in place is a `revision`, `v3.1.json`: see "Stages and the board").
 - `python3 tools/release/check.py <store-dir> [--rebuild]`: verify every pinned file, and
   rebuild every scene from its commit and frozen data, byte for byte.
 - `python3 tools/release/remake.py <design> [--compose <store-dir>]`: put a design's frozen
   scenes back where its recipe reads them, and remake the print.
+
+A redraw (new art for a published design) is composed into a folder in the store, then
+stamped as the next version, and recorded as kind `redraw`:
+
+```sh
+python3 tools/print/compose.py tools/print/spec.json out/builds <store>/print-files/drawn/<design>-v3 --only <design>
+python3 tools/print/canvas.py <store>/print-files/drawn/<design>-v3/<design>_36x24.jpg <store>/print-files/drawn/<design>-v3/canvas 18x12 30x20 36x24
+python3 tools/release/stamp.py <store> <design> --base print-files/drawn/<design>-v3   # before the catalog's version is raised
+```
+
+A set's print is redrawn the same way: `set.py <set> boxes <id>` and `set.py <set> canvas` (with
+`--dir` to keep them apart from older prints), the unstamped box and its canvas files copied into
+`<store>/print-files/<dir>/drawn/<design>-vN` and its `canvas/`, then `stamp.py --base`; the
+record's scenes are then the set's scene SVGs.
+
+A brand-new design (a new key, as Scott's Addition was) has no catalog entry for `stamp.py --base` to
+read yet: add its entry first (in a scratch copy of the store if the real one must wait), with
+`version` one below the first and `print`/`canvas` naming the unversioned files, then stamp.
+
+`stamp.py --base` writes `<design>-v3_<size>.jpg` (and its canvas files) beside the current
+version's, from the unstamped files in that folder; the record pins the new builds as its
+scenes, freezes their data, and keeps the unstamped files as the stamp's base, so
+`check.py --rebuild` both rebuilds the scenes and stamps the files again. Canvas files are the
+print resized to each face with 1.5 in of mirrored wrap (`canvas.py`, as `set.py canvas`). A
+record lists every print file of a catalog `prints` map (one file per size) and the design's
+products: its merged product (`state/merged.json`) first, then any per-format ones.
 
 A cutaway sheet is recorded as kind `cutaway` (`tools/cutaway/sheet.py --print`): its scenes
 are the region's cutaway and flat section (`"output": "-section"`, which `check.py --rebuild`
@@ -674,9 +1189,11 @@ Frozen data and scenes are large and stay out of git; keep them backed up with t
 ## Plates
 
 Every design has a plate: a permanent catalog number, kept in `catalog/plates.json` with the
-taxonomy it sits in (isoscape › collection › set › piece). A plate is the set's three-letter
-code and the piece's number in the set (`RVA-01`, `STC-02`; `00` is a set's framed sheet of
-boxes and `M` its map), printed with a middle dot (RVA·01). Numbers follow the order of first
+taxonomy it sits in (isoscape › collection › set › piece). A plate is the set's code, three or
+four capital letters, and the piece's number in the set (`RVA-01`, `STC-02`, `BPPH-01`; `00` is
+a set's framed sheet of boxes and `M` its map), printed with a middle dot (RVA·01). Codes were
+three letters until November 18, 2026, when Chris asked for a four-letter one (BPPH); the
+existing codes stay as they are. Numbers follow the order of first
 release and are never reused; a redraw changes a design's version, never its plate.
 
 Every print carries a title block (`tools/print/titleblock.py`): the cube and maker, the
@@ -691,6 +1208,14 @@ and the maker's two lines move up to make room. A plate with no kind prints noth
 its block is the same, byte for byte, as before kinds existed. The Broad Street cutaway
 (`BSS-15`) is the first with one. A cutaway's location and facing come from its own region
 (the sheet spec in `cutaways/` names its `design`), not the set's map.
+
+A long set name shrinks the taxonomy to fit its cell (Main Street's prints at about 5 pt on the
+24 × 18). `titleblock.stamp(..., min_px=)` sets a floor: a taxonomy that would shrink below it
+on one line goes on two, broken after a ›, as large as fits up to the full 24 units and never
+under the floor, every field kept, with the top row's labels moved up to make room. Without
+`min_px`, or when the line fits at that size, the block is byte for byte what it was, so the
+released blocks stay as they are. A cutaway spec's `blockMinPt` turns it on (6 pt is 25 pixels
+at 300 dpi); BPPH-01 is the first, its taxonomy 6.0 pt at 24 × 18 in and 7.0 pt at 32 × 24.
 
 - `python3 tools/release/plates.py check <store-dir>`: every plate unique and well formed, and
   every design in the store has one, and every kind is a short line of text.

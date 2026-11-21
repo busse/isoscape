@@ -1,0 +1,127 @@
+{
+  "title": "The New Pump-House, about 1885: cut across through the middle wheel (working draft)",
+  "data": "richmond-i195-rocketts",
+  "center": [
+    -77.4859486,
+    37.5365665
+  ],
+  "width": 150,
+  "depth": 150,
+  "bearing": 330.0,
+  "snap": false,
+  "scale": 10,
+  "squash": 0.55,
+  "exaggeration": 1.0,
+  "slab": 0,
+  "palette": "paper",
+  "minBuildingArea": 12,
+  "dots": "none",
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 2,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 1,
+    "shade": 0
+  },
+  "time": {
+    "history": "history/pump-house.json"
+  },
+  "cutaway": {
+    "through": [
+      -77.48601372,
+      37.53651281
+    ],
+    "bearing": 29.7,
+    "remove": "right",
+    "floor": 28.06,
+    "keep": 1.5,
+    "parts": "ph-",
+    "travelers": [
+      {
+        "at": [
+          -77.48597658,
+          37.53661043
+        ],
+        "floor": 34.77,
+        "facing": 1,
+        "figure": "visitor-skirt"
+      },
+      {
+        "at": [
+          -77.48601379,
+          37.53658573
+        ],
+        "floor": 34.77,
+        "facing": -1,
+        "figure": "visitor"
+      }
+    ],
+    "section": {
+      "from": -27,
+      "to": 41,
+      "beyond": 25,
+      "slice": {
+        "parts": [
+          "^history:ph-w-"
+        ],
+        "depth": 0.1
+      },
+      "other": 3,
+      "scale": 10,
+      "earth": 3,
+      "route": [
+        [
+          36,
+          30.343
+        ],
+        [
+          16.1,
+          30.343
+        ],
+        [
+          16.1,
+          30.196
+        ],
+        [
+          14.041,
+          30.096
+        ],
+        [
+          9.464,
+          27.596
+        ],
+        [
+          9.164,
+          28.596
+        ],
+        [
+          9.164,
+          23.947
+        ],
+        [
+          -12.436,
+          23.947
+        ],
+        [
+          -17.436,
+          24.247
+        ]
+      ],
+      "travelers": [
+        {
+          "s": 4.5,
+          "floor": 34.77,
+          "facing": 1,
+          "figure": "visitor-skirt"
+        },
+        {
+          "s": 12.0,
+          "floor": 34.77,
+          "facing": -1,
+          "figure": "visitor"
+        }
+      ]
+    }
+  }
+}

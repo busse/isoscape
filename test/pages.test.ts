@@ -60,7 +60,7 @@ test('the shipped pages load, and carry the sections the explorer links to', () 
     assert.ok(ids.has(id), `how-its-made has a "${id}" section`)
   }
   // And every in-page link on the shipped pages lands on a real section.
-  const all = new Map(pages.map((p) => [p.slug, new Set(p.headings.map((h) => h.id))]))
+  const all = new Map(pages.map((p) => [p.slug, new Set([...p.headings.map((h) => h.id), ...p.figures.map((f) => f.id)])]))
   for (const p of pages) {
     for (const [, slug, section] of p.html.matchAll(/href="#\/([a-z0-9-]+)(?:\/([^"]+))?"/g)) {
       assert.ok(all.has(slug), `${p.file} links to a page "${slug}"`)
@@ -104,4 +104,22 @@ test('a page can name its own link-preview image, and the share page uses it', a
   assert.match(html, /og:image" content="https:\/\/example.org\/iso\/s\/page-world.jpg"/)
   assert.match(html, /og:image:width" content="2"/)
   assert.deepEqual(readFileSync(join(out, 's', 'page-world.jpg')), jpeg)
+})
+
+test('a page\'s raster images carry their size, a figure links its larger copy, and a deck sits under the title', async () => {
+  const { imageSize } = await import('../src/social.ts')
+  // A minimal lossy WebP header (VP8): 320 × 136.
+  const webp = Buffer.alloc(30)
+  webp.write('RIFF', 0, 'ascii'); webp.write('WEBP', 8, 'ascii'); webp.write('VP8 ', 12, 'ascii')
+  webp.writeUInt16LE(320, 26); webp.writeUInt16LE(136, 28)
+  assert.deepEqual(imageSize(webp), { width: 320, height: 136 })
+  const files: Record<string, Buffer> = { 'a.webp': webp, 'a-large.webp': webp, 'b.webp': webp }
+  const src = '---\ndeck: What you will see, [and how](#how).\n---\n# T\n\n::: figure\n![A](a.webp)\n:::\n\n::: figure\n![B](b.webp)\n:::\n\n![C](b.webp)\n\n## How\n'
+  const p = compilePage(src, 'f.md', (n) => files[n] ?? null)
+  assert.equal(p.deck, 'What you will see, [and how](#how).')
+  assert.match(p.html, /<h1 id="p-f-t">T<\/h1>\n<p class="deck">What you will see, <a href="#\/f\/how">and how<\/a>\.<\/p>/)
+  assert.match(p.html, /<a class="fig-open" href="p\/a-large\.webp"[^>]*><img src="data:image\/webp;base64,[^"]+" alt="A" width="320" height="136"/)
+  assert.match(p.html, /<a class="fig-open" href="p\/b\.webp"/)
+  assert.match(p.html, /<p><img src="data:image\/webp;base64,[^"]+" alt="C" width="320" height="136" loading="lazy"><\/p>/)
+  assert.deepEqual(p.figures.map((f) => f.id), ['fig-1', 'fig-2'])
 })

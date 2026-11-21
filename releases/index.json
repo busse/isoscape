@@ -1,20 +1,22 @@
 {
  "broad-street-1943-01-ay-tower": {
   "title": "AY Tower, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-02-fair-grounds": {
   "title": "The State Fair grounds, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-03-hermitage-road": {
@@ -26,103 +28,128 @@
    "v2.json"
   ]
  },
+ "broad-street-1943-03-scotts-addition": {
+  "title": "Scott's Addition, Broad Street Station 1943",
+  "current": 1,
+  "kind": "redraw",
+  "records": [
+   "v1.json"
+  ]
+ },
  "broad-street-1943-04-seaboard-junction": {
   "title": "Seaboard Junction, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-05-loop": {
   "title": "The loop and the sheds, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-06-sauer": {
   "title": "C.F. Sauer Company, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-07-main-street-station": {
   "title": "Main Street Station, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "revision",
   "records": [
    "v1.json",
-   "v2.json"
-  ]
+   "v2.json",
+   "v3.1.json",
+   "v3.json"
+  ],
+  "asset_version": "3.1.0",
+  "record": "v3.1.json"
  },
  "broad-street-1943-08-triple-crossing": {
   "title": "The Triple Crossing, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "revision",
   "records": [
    "v1.json",
-   "v2.json"
-  ]
+   "v2.json",
+   "v3.1.json",
+   "v3.json"
+  ],
+  "asset_version": "3.1.0",
+  "record": "v3.1.json"
  },
  "broad-street-1943-09-co-viaduct": {
   "title": "The C&O viaduct, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-10-hull-street": {
   "title": "Hull Street Station, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-11-belt-line-bridge": {
   "title": "The Belt Line bridge, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-12-william-byrd": {
   "title": "Hotel William Byrd, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-13-from-the-fan": {
   "title": "Broad Street Station, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-14-front": {
   "title": "Pope's front, Broad Street Station 1943",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "broad-street-1943-cutaway": {
@@ -135,29 +162,39 @@
  },
  "broad-street-1943-map": {
   "title": "Broad Street Station, 1943: The Railroad Map",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "revision",
   "records": [
    "v1.json",
-   "v2.json"
-  ]
+   "v2.json",
+   "v3.1.json",
+   "v3.json"
+  ],
+  "asset_version": "3.1.0",
+  "record": "v3.1.json"
  },
  "broad-street-1943-menu": {
   "title": "Broad Street Station, 1943: The Railroads and Fourteen Places",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "revision",
   "records": [
    "v1.json",
-   "v2.json"
-  ]
+   "v2.json",
+   "v3.1.json",
+   "v3.json"
+  ],
+  "asset_version": "3.1.0",
+  "record": "v3.1.json"
  },
  "gwynns-island": {
   "title": "Gwynn's Island",
-  "current": 2,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json",
+   "v4.json"
   ]
  },
  "lm-alcatraz": {
@@ -655,6 +692,22 @@
    "v2.json"
   ]
  },
+ "main-street-1952-cutaway": {
+  "title": "Main Street Station, about 1952: Cutaway",
+  "current": 1,
+  "kind": "cutaway",
+  "records": [
+   "v1.json"
+  ]
+ },
+ "pump-house-cutaway": {
+  "title": "The New Pump-House, Richmond, about 1885: Cutaway",
+  "current": 1,
+  "kind": "cutaway",
+  "records": [
+   "v1.json"
+  ]
+ },
  "richmond-1865": {
   "title": "Richmond, 1865",
   "current": 2,
@@ -666,218 +719,249 @@
  },
  "richmond-1886": {
   "title": "Richmond, 1886",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "richmond-1925": {
   "title": "Richmond, 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 5,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json",
+   "v4.json",
+   "v5.json"
   ]
  },
  "richmond-1950": {
   "title": "Richmond, 1950",
-  "current": 2,
-  "kind": "stamp",
+  "current": 5,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json",
+   "v4.json",
+   "v5.json"
   ]
  },
  "richmond-2026": {
   "title": "Richmond, 2026",
-  "current": 2,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json",
+   "v4.json"
   ]
  },
  "richmond-james-2026": {
   "title": "The James, I-195 to Rocketts Landing",
-  "current": 2,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json",
+   "v4.json"
   ]
  },
  "richmond-panorama-2026": {
   "title": "Richmond and the James",
-  "current": 2,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json",
+   "v4.json"
   ]
  },
  "richmond-through-time": {
   "title": "Richmond, 1737–2026",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-01-westhampton": {
   "title": "Westhampton Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-02-fair-grounds": {
   "title": "State Fair Grounds, Richmond Streetcars 1925",
-  "current": 3,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v2.json",
-   "v3.json"
+   "v3.json",
+   "v4.json"
   ]
  },
  "streetcars-1925-03-ginter-park": {
   "title": "Ginter Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-04-barton-heights": {
   "title": "Barton Heights, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-05-highland-park": {
   "title": "Highland Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-06-nine-mile": {
   "title": "Nine Mile Road, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-07-church-hill": {
   "title": "Church Hill and Jefferson Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-08-broad-street": {
   "title": "Seventh and Broad, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-09-manchester": {
   "title": "Manchester, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-10-woodland-heights": {
   "title": "Woodland Heights, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-11-forest-hill": {
   "title": "Forest Hill Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-12-byrd-park": {
   "title": "Byrd Park, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-13-the-fan": {
   "title": "The Fan, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-14-broad-laurel": {
   "title": "Broad and Laurel, Richmond Streetcars 1925",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  },
  "streetcars-1925-map": {
   "title": "Richmond's Streetcars, 1925: The System Map",
-  "current": 3,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v2.json",
-   "v3.json"
+   "v3.json",
+   "v4.json"
   ]
  },
  "streetcars-1925-menu": {
   "title": "Richmond's Streetcars, 1925: The Lines and Fourteen Stops",
-  "current": 3,
-  "kind": "stamp",
+  "current": 4,
+  "kind": "redraw",
   "records": [
    "v2.json",
-   "v3.json"
+   "v3.json",
+   "v4.json"
   ]
  },
  "then-and-now": {
   "title": "Richmond, Then & Now",
-  "current": 2,
-  "kind": "stamp",
+  "current": 3,
+  "kind": "redraw",
   "records": [
    "v1.json",
-   "v2.json"
+   "v2.json",
+   "v3.json"
   ]
  }
 }

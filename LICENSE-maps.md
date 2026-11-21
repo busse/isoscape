@@ -24,3 +24,13 @@ and adapt them with credit, but not for sale. Prints of them are in the holiday 
   [Microsoft Global ML Building Footprints](https://github.com/microsoft/GlobalMLBuildingFootprints) (ODbL).
 - Historic Richmond: buildings traced from [Sanborn Fire Insurance Maps](https://www.loc.gov/collections/sanborn-maps/)
   in the Library of Congress (public domain); year-built from City of Richmond open data.
+
+**Datasets made for these maps** (listed on the site's Data page, `pages/data.md`):
+- Under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), no rights reserved: the
+  Sanborn traces by edition (`history/sanborn/<edition>.geojson`) and Richmond's lost buildings
+  (`history/sanborn/lost.geojson`, with `clean-dropped.json` and `clean-shapes.json`). They are
+  made from public-domain maps and hold no OpenStreetMap data.
+- Under the [ODbL](https://opendatacommons.org/licenses/odbl/), because their coordinates come
+  from OpenStreetMap: the georeferencing control points (`tools/sanborn/cps*.json`), the
+  streetcar routes and stops (`tools/streetcars/*.json`), and the dated history files
+  (`history/*.json`). Credit © OpenStreetMap contributors.

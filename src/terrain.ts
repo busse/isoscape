@@ -27,12 +27,26 @@ export interface Terrain {
   readonly rocks: Uint8Array
   /** 1 where a water node is at least two cells from any shore: where rocks and rapids are read. */
   readonly interior: Uint8Array
+  /**
+   * 1 where a water node is a flowing river (mapped as a river, or still water a river runs
+   * through), 0 on a lake, pond, basin, canal or the sea: only a river gets rocks and rapids.
+   */
+  readonly flowing: Uint8Array
+  /** How fast the river's surface falls along its channel at each node, m/m (see `channelFall`). */
+  readonly fall: Float32Array
+  /** The direction the river runs at each node (unit E′, N′ pairs); 0, 0 where unknown. */
+  readonly current: Float32Array
   /** The river's surface elevation, carried a few cells inland past the shore; NaN beyond. */
   readonly level: Float32Array
   /** Land cover class (NLCD code) at each node; 0 where unknown. */
   readonly cover: Uint8Array
   /** Scene z of the water surface at a point; the ground's own z where there is no water near. */
   readonly waterZ: (p: Vec2) => number
+  /**
+   * The shoreline field at each node: one half on the mapped shoreline, more over water, less
+   * on land (see `traceShore`); 0 everywhere until the shore is traced.
+   */
+  readonly shore: Float32Array
   readonly datum: number
   readonly exaggeration: number
   readonly flat: boolean
@@ -47,6 +61,7 @@ export const makeTerrain = (
   cell: number,
   exaggeration: number,
   sample: ((lon: number, lat: number) => number) | null,
+  restore?: (grid: HeightGrid) => void,
 ): Terrain => {
   const f = view.frame
   // One cell of margin past every edge, so lookups at the frame's rim interpolate.
@@ -65,6 +80,9 @@ export const makeTerrain = (
     }
     for (let k = 0; k < elev.length; k++) if (Number.isNaN(elev[k])) filled[k] = 1
     fillGaps(elev, nx, ny)
+    // A dated scene may put back ground that later works cut or filled (`restoreGround`),
+    // before the blur, so the rebuilt ground and the measured ground blend at its rim.
+    if (restore !== undefined) restore({ elev, nx, ny, x0, y0, cell })
     // Lidar at 1 m carries curbs, rubble and noise that a 5 m grid aliases into speckle.
     // A light blur keeps the landforms and loses the grit.
     blur(elev, nx, ny, 2)
@@ -87,7 +105,34 @@ export const makeTerrain = (
     return a * (1 - tx) * (1 - ty) + b * tx * (1 - ty) + c * (1 - tx) * ty + d * tx * ty
   }
   const level = new Float32Array(nx * ny).fill(NaN)
-  const z = (p: Vec2) => (elevation(p) - datum) * exaggeration
+  const shore = new Float32Array(nx * ny)
+  const ground = (p: Vec2) => (elevation(p) - datum) * exaggeration
+  /**
+   * The drawn ground meets the water at the traced shoreline: over the water side of it, the
+   * ground lies on the water's surface, and on the land side it rises from that surface to its
+   * own height a cell inland (see shoreRise). Without this a shoreline between two grid nodes
+   * was draped partway up the bank, at a height that changed with where it crossed each cell.
+   */
+  const edge = SHORE_EDGE
+  const z = (p: Vec2): number => {
+    const fx = Math.min(nx - 1.001, Math.max(0, (p[0] - x0) / cell))
+    const fy = Math.min(ny - 1.001, Math.max(0, (p[1] - y0) / cell))
+    const i = Math.floor(fx)
+    const j = Math.floor(fy)
+    const k = j * nx + i
+    const a = shore[k]
+    const b = shore[k + 1]
+    const c = shore[k + nx]
+    const d = shore[k + nx + 1]
+    // Far from any shore (the field is low at all four corners), the ground is the ground.
+    if (a < edge && b < edge && c < edge && d < edge) return ground(p)
+    const tx = fx - i
+    const ty = fy - j
+    const wet = a * (1 - tx) * (1 - ty) + b * tx * (1 - ty) + c * (1 - tx) * ty + d * tx * ty
+    const surface = waterZ(p)
+    if (wet >= 0.5) return surface
+    return surface + (ground(p) - surface) * shoreRise(wet)
+  }
   const waterZ = ([e, n]: Vec2): number => {
     const fx = Math.min(nx - 1.001, Math.max(0, (e - x0) / cell))
     const fy = Math.min(ny - 1.001, Math.max(0, (n - y0) / cell))
@@ -101,22 +146,223 @@ export const makeTerrain = (
       const v = level[(j + dj) * nx + i + di]
       if (!Number.isNaN(v) && wt > 0) { s += v * wt; w += wt }
     }
-    return w > 0 ? (s / w - datum) * exaggeration : z([e, n])
+    return w > 0 ? (s / w - datum) * exaggeration : ground([e, n])
   }
   return {
     cell, nx, ny, x0, y0, elev, filled,
     water: new Uint8Array(nx * ny),
     rocks: new Uint8Array(nx * ny),
     interior: new Uint8Array(nx * ny),
+    flowing: new Uint8Array(nx * ny),
+    fall: new Float32Array(nx * ny),
+    current: new Float32Array(2 * nx * ny),
     cover: new Uint8Array(nx * ny),
     level,
     waterZ,
+    shore,
     datum,
     exaggeration,
     flat: sample === null,
     elevation,
     z,
   }
+}
+
+/** A bare height grid in view meters: row-major from the near edge, as in `Terrain`. */
+export interface HeightGrid {
+  readonly elev: Float32Array
+  readonly nx: number
+  readonly ny: number
+  readonly x0: number
+  readonly y0: number
+  readonly cell: number
+}
+
+/** A line the rebuilt ground must follow, in view meters (see `restoreGround`). */
+export interface GroundLine {
+  readonly pts: readonly Vec2[]
+  /**
+   * Its elevation (meters, the DEM's datum) where a source gives one, such as a contour of an
+   * old map. Absent: a street that ran through at grade, its surface taken as a straight grade
+   * along the line between the measured ground where it leaves the area on either side.
+   */
+  readonly elevation?: number
+}
+
+/** How closely the membrane is solved: meters of change in the last sweep. */
+export const RESTORE_TOLERANCE = 0.001
+
+/**
+ * Rebuild the ground inside `rings` (view meters, even-odd) as it stood before later works cut
+ * or filled it: the measured heights there are discarded, and the surface is rebuilt from what
+ * bounds it. The measured ground just outside the rings holds the edge; each line in `lines`
+ * holds the nodes it passes over inside them (a street that ran through at grade: a straight
+ * grade between its ends at the rim; a line with an elevation: that elevation); every other
+ * node inside takes the mean of its four neighbors, a membrane (harmonic) surface, solved by
+ * successive over-relaxation. Returns the number of nodes rebuilt. What this gives is an
+ * estimate: the smoothest surface that meets its bounds, not a survey.
+ */
+export const restoreGround = (g: HeightGrid, rings: readonly (readonly Vec2[])[], lines: readonly GroundLine[] = []): number => {
+  const { elev, nx, ny, x0, y0, cell } = g
+  // The grid's own rim is never rebuilt: the membrane needs measured ground around it.
+  const inside = insideRings(g, rings)
+  const measured = (x: number, y: number): number => {
+    const fx = Math.min(nx - 1.001, Math.max(0, (x - x0) / cell))
+    const fy = Math.min(ny - 1.001, Math.max(0, (y - y0) / cell))
+    const i = Math.floor(fx), j = Math.floor(fy), tx = fx - i, ty = fy - j
+    return elev[j * nx + i] * (1 - tx) * (1 - ty) + elev[j * nx + i + 1] * tx * (1 - ty) + elev[(j + 1) * nx + i] * (1 - tx) * ty + elev[(j + 1) * nx + i + 1] * tx * ty
+  }
+  const measuredAt = (step: { p: Vec2 } | null): number => (step === null ? 0 : measured(step.p[0], step.p[1]))
+  const nodeOf = (x: number, y: number): number => {
+    const i = Math.round((x - x0) / cell), j = Math.round((y - y0) / cell)
+    return i < 0 || j < 0 || i >= nx || j >= ny ? -1 : j * nx + i
+  }
+  // Nodes a line holds: their value, and how many lines set it (two streets crossing average).
+  const held = new Float64Array(nx * ny)
+  const holds = new Uint16Array(nx * ny)
+  for (const line of lines) {
+    // Walk the line in half-cell steps, remembering the distance along it.
+    const steps: { p: Vec2; s: number; k: number; in: boolean }[] = []
+    let s = 0
+    for (let a = 0; a + 1 < line.pts.length; a++) {
+      const p = line.pts[a], q = line.pts[a + 1]
+      const len = Math.hypot(q[0] - p[0], q[1] - p[1])
+      const n = Math.max(1, Math.ceil(len / (cell / 2)))
+      for (let t = 0; t < n + (a + 2 === line.pts.length ? 1 : 0); t++) {
+        const pt: Vec2 = [p[0] + ((q[0] - p[0]) * t) / n, p[1] + ((q[1] - p[1]) * t) / n]
+        const k = nodeOf(pt[0], pt[1])
+        steps.push({ p: pt, s: s + (len * t) / n, k, in: k >= 0 && inside[k] === 1 })
+      }
+      s += len
+    }
+    for (let a = 0; a < steps.length; a++) {
+      if (!steps[a].in) continue
+      let b = a
+      while (b + 1 < steps.length && steps[b + 1].in) b++
+      // A run inside the area: at grade, it needs measured ground at both ends.
+      const before = a > 0 ? steps[a - 1] : null
+      const after = b + 1 < steps.length ? steps[b + 1] : null
+      if (line.elevation !== undefined || (before !== null && after !== null)) {
+        // The measured node just outside each end (a point between nodes would mix in the
+        // discarded heights inside).
+        const za = before === null || before.k < 0 ? measuredAt(before) : elev[before.k]
+        const zb = after === null || after.k < 0 ? measuredAt(after) : elev[after.k]
+        for (let c = a; c <= b; c++) {
+          const v = line.elevation ?? za + ((zb - za) * (steps[c].s - before!.s)) / Math.max(1e-9, after!.s - before!.s)
+          const k = steps[c].k
+          held[k] = holds[k] === 0 ? v : held[k] + v
+          holds[k]++
+        }
+      }
+      a = b
+    }
+  }
+  const free: number[] = []
+  let rebuilt = 0
+  let sum = 0, count = 0
+  for (let k = 0; k < inside.length; k++) {
+    if (inside[k] !== 1) continue
+    rebuilt++
+    if (holds[k] > 0) elev[k] = held[k] / holds[k]
+    else free.push(k)
+  }
+  // Start the free nodes from the mean of the area's rim, then relax.
+  for (let k = 0; k < inside.length; k++) {
+    if (inside[k] === 1) continue
+    const i = k % nx
+    if ((i > 0 && inside[k - 1]) || (i + 1 < nx && inside[k + 1]) || (k >= nx && inside[k - nx]) || (k + nx < inside.length && inside[k + nx])) { sum += elev[k]; count++ }
+  }
+  const start = count > 0 ? sum / count : 0
+  for (const k of free) elev[k] = start
+  const omega = 1.9
+  for (let sweep = 0; sweep < 20000; sweep++) {
+    let change = 0
+    for (const k of free) {
+      const v = (elev[k - 1] + elev[k + 1] + elev[k - nx] + elev[k + nx]) / 4
+      const d = omega * (v - elev[k])
+      elev[k] += d
+      change = Math.max(change, Math.abs(d))
+    }
+    if (change < RESTORE_TOLERANCE) break
+  }
+  return rebuilt
+}
+
+/** Meters: the default reach of `lowerGround`, half the width of the widest bank it takes down. */
+export const LOWER_RADIUS = 25
+
+/**
+ * Take down banks a later work raised (a ramp's embankment) inside `rings` (view meters,
+ * even-odd), keeping the broad lie of the land: a grey-scale opening of the measured ground
+ * with a disk of `radius` meters (the lowest ground within reach, then the highest of those
+ * lows), applied only inside. A bank narrower than twice the radius comes down to the ground
+ * beside it; a plateau, a valley side or anything broader is left as measured, and a cut is not
+ * filled (`restoreGround` does that). Returns the number of nodes lowered by more than 1 cm.
+ */
+export const lowerGround = (g: HeightGrid, rings: readonly (readonly Vec2[])[], radius = LOWER_RADIUS): number => {
+  const { elev, nx, ny, cell } = g
+  const inside = insideRings(g, rings)
+  let i0 = nx, i1 = -1, j0 = ny, j1 = -1
+  for (let k = 0; k < inside.length; k++) {
+    if (!inside[k]) continue
+    const i = k % nx, j = (k - i) / nx
+    i0 = Math.min(i0, i); i1 = Math.max(i1, i); j0 = Math.min(j0, j); j1 = Math.max(j1, j)
+  }
+  if (i1 < 0) return 0
+  const r = Math.max(1, Math.round(radius / cell))
+  const offsets: [number, number][] = []
+  for (let dj = -r; dj <= r; dj++) for (let di = -r; di <= r; di++) if (di * di + dj * dj <= r * r) offsets.push([di, dj])
+  // The window the opening needs: the area, and twice the reach around it.
+  const wi0 = Math.max(0, i0 - 2 * r), wi1 = Math.min(nx - 1, i1 + 2 * r)
+  const wj0 = Math.max(0, j0 - 2 * r), wj1 = Math.min(ny - 1, j1 + 2 * r)
+  const pass = (src: Float32Array, pick: (a: number, b: number) => number, start: number, ia: number, ib: number, ja: number, jb: number): Float32Array => {
+    const out = new Float32Array(src)
+    for (let j = ja; j <= jb; j++) {
+      for (let i = ia; i <= ib; i++) {
+        let v = start
+        for (const [di, dj] of offsets) {
+          const ii = i + di, jj = j + dj
+          if (ii < wi0 || jj < wj0 || ii > wi1 || jj > wj1) continue
+          v = pick(v, src[jj * nx + ii])
+        }
+        out[j * nx + i] = v
+      }
+    }
+    return out
+  }
+  const eroded = pass(elev, Math.min, Infinity, wi0, wi1, wj0, wj1)
+  const opened = pass(eroded, Math.max, -Infinity, Math.max(0, i0 - r), Math.min(nx - 1, i1 + r), Math.max(0, j0 - r), Math.min(ny - 1, j1 + r))
+  let lowered = 0
+  for (let k = 0; k < inside.length; k++) {
+    if (!inside[k] || opened[k] >= elev[k]) continue
+    if (elev[k] - opened[k] > 0.01) lowered++
+    elev[k] = opened[k]
+  }
+  return lowered
+}
+
+/** 1 at nodes inside `rings` (even-odd), never on the grid's own outermost rows and columns. */
+const insideRings = (g: HeightGrid, rings: readonly (readonly Vec2[])[]): Uint8Array => {
+  const { nx, ny, x0, y0, cell } = g
+  const inside = new Uint8Array(nx * ny)
+  for (let j = 1; j < ny - 1; j++) {
+    const y = y0 + j * cell
+    const xs: number[] = []
+    for (const r of rings) {
+      for (let k = 0, m = r.length - 1; k < r.length; m = k++) {
+        const [ax, ay] = r[m]
+        const [bx, by] = r[k]
+        if (ay > y !== by > y) xs.push(ax + ((y - ay) / (by - ay)) * (bx - ax))
+      }
+    }
+    xs.sort((a, b) => a - b)
+    for (let k = 0; k + 1 < xs.length; k += 2) {
+      const i0 = Math.max(1, Math.ceil((xs[k] - x0) / cell))
+      const i1 = Math.min(nx - 2, Math.floor((xs[k + 1] - x0) / cell))
+      for (let i = i0; i <= i1; i++) inside[j * nx + i] = 1
+    }
+  }
+  return inside
 }
 
 /** Replace missing samples by the mean of their present neighbors, repeatedly. */
@@ -147,9 +393,22 @@ const fillGaps = (a: Float32Array, nx: number, ny: number): void => {
 
 /**
  * Mark grid nodes inside a set of polygons (even-odd across all their rings), by scanline.
- * `value` 1 marks water; 0 clears it again for islands.
+ * `value` 1 marks water; 0 clears it again for islands. Water marked here is a flowing river
+ * unless `flowing` is false (a lake, a basin, the sea): marked later, still water wins.
  */
-export const rasterize = (t: Terrain, polygons: readonly (readonly Ring[])[], value: 0 | 1): void => {
+export const rasterize = (t: Terrain, polygons: readonly (readonly Ring[])[], value: 0 | 1, flowing = true): void => {
+  const flow = value === 1 && flowing ? 1 : 0
+  scanPolygons(t, polygons, (k) => { t.water[k] = value; t.flowing[k] = flow })
+}
+
+/** 1 at every grid node inside the polygons (even-odd across all their rings). */
+export const polygonMask = (t: Terrain, polygons: readonly (readonly Ring[])[]): Uint8Array => {
+  const mask = new Uint8Array(t.nx * t.ny)
+  scanPolygons(t, polygons, (k) => { mask[k] = 1 })
+  return mask
+}
+
+const scanPolygons = (t: Terrain, polygons: readonly (readonly Ring[])[], mark: (k: number) => void): void => {
   for (const rings of polygons) {
     let minY = Infinity
     let maxY = -Infinity
@@ -170,7 +429,7 @@ export const rasterize = (t: Terrain, polygons: readonly (readonly Ring[])[], va
       for (let k = 0; k + 1 < xs.length; k += 2) {
         const i0 = Math.max(0, Math.ceil((xs[k] - t.x0) / t.cell))
         const i1 = Math.min(t.nx - 1, Math.floor((xs[k + 1] - t.x0) / t.cell))
-        for (let i = i0; i <= i1; i++) t.water[j * t.nx + i] = value
+        for (let i = i0; i <= i1; i++) mark(j * t.nx + i)
       }
     }
   }
@@ -187,7 +446,7 @@ export const nodeShade = (t: Terrain, light: readonly [number, number, number]):
   const z = new Float32Array(nx * ny)
   const clampI = (i: number) => Math.max(0, Math.min(nx - 1, i))
   const clampJ = (j: number) => Math.max(0, Math.min(ny - 1, j))
-  const raw = (i: number, j: number) => t.elev[clampJ(j) * nx + clampI(i)]
+  const raw = (i: number, j: number) => drawnElevation(t, clampJ(j) * nx + clampI(i))
   for (let j = 0; j < ny; j++) {
     for (let i = 0; i < nx; i++) {
       let sum = 0
@@ -379,8 +638,12 @@ export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0, markRocks
   }
   markInterior()
   for (let k = 0; k < elev.length; k++) {
+    if (water[k] !== 1 || !markRocks || t.flowing[k] !== 1 || t.interior[k] !== 1 || guessed[k] === 1) continue
+    if (elev[k] - surface[k] > rockHeight) t.rocks[k] = 1
+  }
+  const raw = elev.slice()
+  for (let k = 0; k < elev.length; k++) {
     if (water[k] !== 1) continue
-    if (markRocks && t.interior[k] === 1 && guessed[k] !== 1 && elev[k] - surface[k] > rockHeight) t.rocks[k] = 1
     elev[k] = surface[k]
     t.level[k] = surface[k]
   }
@@ -405,32 +668,258 @@ export const settleWater = (t: Terrain, radius = 30, rockHeight = 1.0, markRocks
     }
     frontier = next
   }
+  const up = channelFall(t)
+  // Where a hydro-flattened river steps down, the water just above the step stands clear of a
+  // surface read partly below it, and would read as a line of rock along the step. A rock must
+  // stand clear of the water level with it and above it, too: the surface is read again, from
+  // the water within `radius` that is no more than one cell further down the channel.
+  if (up === null) return
+  const prune: number[] = []
+  for (let k = 0; k < elev.length; k++) {
+    if (t.rocks[k] !== 1 || !Number.isFinite(up[k])) continue
+    const i = k % nx
+    const j = (k - i) / nx
+    values.length = 0
+    for (let dj = -reach; dj <= reach; dj++) {
+      for (let di = -reach; di <= reach; di++) {
+        if (di * di + dj * dj > reach * reach) continue
+        const ii = i + di
+        const jj = j + dj
+        if (ii < 0 || jj < 0 || ii >= nx || jj >= ny) continue
+        const kk = jj * nx + ii
+        if (water[kk] === 1 && up[kk] >= up[k] - t.cell) values.push(raw[kk])
+      }
+    }
+    values.sort((a, b) => a - b)
+    if (values.length > 0 && raw[k] - values[Math.floor(values.length * 0.15)] <= rockHeight) prune.push(k)
+  }
+  for (const k of prune) t.rocks[k] = 0
+}
+
+/** The reach, in meters along the channel, over which `channelFall` measures the river's fall. */
+export const FALL_REACH = 200
+
+/** The default fall along the channel (m/m) above which a river reads as rapids: 4 m per km. */
+export const RAPIDS = 0.004
+
+/**
+ * How fast the river's surface falls along its channel, at every flowing water node.
+ *
+ * A hydro-flattened river is level across and steps down along its course, and its steps are a
+ * meter or less: measured across a few cells, the fall is all at the step lines and nil between
+ * them. So the fall is measured along the channel, over a reach. Each flowing node's distance
+ * up the channel is found first: the shortest path through the river's own water from the
+ * lowest water of its stretch of river. At each node away from the shore, the surface height of
+ * the river around it (within `reach` meters, and from a quarter of `reach` below it to `reach`
+ * above it along the channel) is fitted against that distance; the slope of the fit is the
+ * fall. It spreads a step's drop over the reach below it, where the water runs white, and
+ * reads a pool above a dam as calm up to a short way above the crest. The current runs down
+ * the distance. No fall is read on, or from, nodes the source had no heights for. Returns the
+ * distance up the channel at each node (Infinity off the river), or null with no river.
+ */
+export const channelFall = (t: Terrain, reach = FALL_REACH): Float64Array | null => {
+  const { nx, ny, elev, flowing, water } = t
+  t.fall.fill(0)
+  t.current.fill(0)
+  if (t.flat) return null
+  const n = nx * ny
+  const wet = (k: number) => water[k] === 1 && flowing[k] === 1
+  const nodes: number[] = []
+  for (let k = 0; k < n; k++) if (wet(k)) nodes.push(k)
+  if (nodes.length === 0) return null
+  // Distance up the channel: Dijkstra over 8-connected flowing water, from the lowest water of
+  // each connected stretch (every node within 5 cm of its lowest, so a level pool at the
+  // bottom, such as a tidal reach, is all where the channel starts).
+  nodes.sort((a, b) => elev[a] - elev[b])
+  const up = new Float64Array(n).fill(Infinity)
+  const heap = new MinHeap()
+  const steps: [number, number, number][] = [[1, 0, 1], [-1, 0, 1], [0, 1, 1], [0, -1, 1], [1, 1, Math.SQRT2], [1, -1, Math.SQRT2], [-1, 1, Math.SQRT2], [-1, -1, Math.SQRT2]]
+  const reached = new Uint8Array(n)
+  for (const seed of nodes) {
+    if (reached[seed] === 1) continue
+    // The stretch of river this node lies in, and the water at its lowest level.
+    const stretch: number[] = [seed]
+    reached[seed] = 1
+    for (let q = 0; q < stretch.length; q++) {
+      const i = stretch[q] % nx
+      const j = (stretch[q] - i) / nx
+      for (const [di, dj] of steps) {
+        const ii = i + di
+        const jj = j + dj
+        if (ii < 0 || jj < 0 || ii >= nx || jj >= ny) continue
+        const kk = jj * nx + ii
+        if (reached[kk] === 1 || !wet(kk)) continue
+        reached[kk] = 1
+        stretch.push(kk)
+      }
+    }
+    // The channel starts where the water rises out of that lowest pool; the pool itself lies
+    // below the start, at minus its distance from there, so the distance runs on through it.
+    const pool = (k: number) => elev[k] <= elev[seed] + 0.05
+    for (const k of stretch) {
+      if (!pool(k)) continue
+      const i = k % nx
+      const j = (k - i) / nx
+      let edge = false
+      for (const [di, dj] of steps) {
+        const ii = i + di
+        const jj = j + dj
+        const kk = jj * nx + ii
+        if (ii >= 0 && jj >= 0 && ii < nx && jj < ny && wet(kk) && !pool(kk)) { edge = true; break }
+      }
+      if (edge) { up[k] = 0; heap.push(k, 0) }
+    }
+    // A pool the water never rises out of (a level river, all of it in frame) starts anywhere.
+    if (heap.size === 0) { up[seed] = 0; heap.push(seed, 0) }
+    while (heap.size > 0) {
+      const [k, d] = heap.pop()
+      if (d > up[k]) continue
+      const i = k % nx
+      const j = (k - i) / nx
+      for (const [di, dj, len] of steps) {
+        const ii = i + di
+        const jj = j + dj
+        if (ii < 0 || jj < 0 || ii >= nx || jj >= ny) continue
+        const kk = jj * nx + ii
+        if (!wet(kk)) continue
+        const dd = d + len * t.cell
+        if (dd < up[kk]) { up[kk] = dd; heap.push(kk, dd) }
+      }
+    }
+    for (const k of stretch) if (pool(k)) up[k] = -up[k]
+  }
+  // The fit, over every other node of a disc (enough to fit a plane, a quarter of the work).
+  const r = Math.max(2, Math.round(reach / t.cell))
+  const disc: number[] = []
+  for (let dj = -r; dj <= r; dj += 2) for (let di = -r; di <= r; di += 2) if (di * di + dj * dj <= r * r) disc.push(di, dj)
+  for (const k of nodes) {
+    if (t.interior[k] !== 1 || t.filled[k] === 1) continue
+    const i = k % nx
+    const j = (k - i) / nx
+    const d0 = up[k]
+    let m = 0
+    let sd = 0
+    let sz = 0
+    let sdd = 0
+    let sdz = 0
+    // And a plane through the same heights, for the way it runs where the distance cannot say
+    // (the level pool the channel starts from).
+    let sx = 0
+    let sy = 0
+    let sxx = 0
+    let syy = 0
+    let sxy = 0
+    let sxz = 0
+    let syz = 0
+    for (let q = 0; q < disc.length; q += 2) {
+      const ii = i + disc[q]
+      const jj = j + disc[q + 1]
+      if (ii < 0 || jj < 0 || ii >= nx || jj >= ny) continue
+      const kk = jj * nx + ii
+      if (!wet(kk) || t.filled[kk] === 1) continue
+      const d = up[kk] - d0
+      if (d < -reach / 4 || d > reach) continue
+      m++
+      sd += d
+      sz += elev[kk]
+      sdd += d * d
+      sdz += d * elev[kk]
+      const x = disc[q]
+      const y = disc[q + 1]
+      sx += x
+      sy += y
+      sxx += x * x
+      syy += y * y
+      sxy += x * y
+      sxz += x * elev[kk]
+      syz += y * elev[kk]
+    }
+    if (m < 12) continue
+    const vd = sdd / m - (sd / m) ** 2
+    // A window too short along the channel (a pocket of water) cannot say how it falls.
+    if (vd < (reach / 8) ** 2) continue
+    t.fall[k] = Math.max(0, (sdz / m - (sd / m) * (sz / m)) / vd)
+    // Down the channel: against the distance's gradient.
+    const at = (ii: number, jj: number) => {
+      const kk = jj * nx + ii
+      return ii >= 0 && jj >= 0 && ii < nx && jj < ny && wet(kk) ? up[kk] : d0
+    }
+    const gx = at(i + 1, j) - at(i - 1, j)
+    const gy = at(i, j + 1) - at(i, j - 1)
+    const len = Math.hypot(gx, gy)
+    if (len > 0) { t.current[2 * k] = -gx / len; t.current[2 * k + 1] = -gy / len; continue }
+    const cxx = sxx / m - (sx / m) ** 2
+    const cyy = syy / m - (sy / m) ** 2
+    const cxy = sxy / m - (sx / m) * (sy / m)
+    const cxz = sxz / m - (sx / m) * (sz / m)
+    const cyz = syz / m - (sy / m) * (sz / m)
+    const det = cxx * cyy - cxy * cxy
+    if (det <= 0) continue
+    const bx = (cxz * cyy - cyz * cxy) / det
+    const by = (cyz * cxx - cxz * cxy) / det
+    const blen = Math.hypot(bx, by)
+    if (blen > 0) { t.current[2 * k] = -bx / blen; t.current[2 * k + 1] = -by / blen }
+  }
+  return up
+}
+
+/** A binary min-heap of node indices keyed by distance. */
+class MinHeap {
+  private keys: number[] = []
+  private vals: number[] = []
+  get size(): number { return this.keys.length }
+  push(k: number, v: number): void {
+    const { keys, vals } = this
+    let c = keys.length
+    keys.push(k)
+    vals.push(v)
+    while (c > 0) {
+      const p = (c - 1) >> 1
+      if (vals[p] <= v) break
+      keys[c] = keys[p]
+      vals[c] = vals[p]
+      c = p
+    }
+    keys[c] = k
+    vals[c] = v
+  }
+  pop(): [number, number] {
+    const { keys, vals } = this
+    const top: [number, number] = [keys[0], vals[0]]
+    const k = keys.pop() as number
+    const v = vals.pop() as number
+    if (keys.length > 0) {
+      let c = 0
+      for (;;) {
+        const l = 2 * c + 1
+        if (l >= keys.length) break
+        const rr = l + 1
+        const s = rr < keys.length && vals[rr] < vals[l] ? rr : l
+        if (vals[s] >= v) break
+        keys[c] = keys[s]
+        vals[c] = vals[s]
+        c = s
+      }
+      keys[c] = k
+      vals[c] = v
+    }
+    return top
+  }
 }
 
 /**
- * How fast the river's surface falls at a water node, measured across `span` meters so that one
- * noisy node cannot fake a rapid, with the direction it falls in (unit vector, downhill).
+ * How fast the river falls at a water node (`channelFall`), with the direction it runs (unit
+ * vector, downstream); null where no fall is read: off the river, near the shore, on a gap in
+ * the source, or where it does not fall at all.
  */
-export const riverFall = (t: Terrain, i: number, j: number, span = 20): { slope: number; down: Vec2 } | null => {
-  const k = Math.max(1, Math.round(span / t.cell))
-  if (i < k || j < k || i >= t.nx - k || j >= t.ny - k) return null
-  if (t.interior[j * t.nx + i] !== 1 || t.filled[j * t.nx + i] === 1) return null
-  let gx = 0
-  let gy = 0
-  let best = 0
-  for (const [di, dj] of [[1, 0], [0, 1], [1, 1], [1, -1]] as const) {
-    const a = (j + dj * k) * t.nx + (i + di * k)
-    const b = (j - dj * k) * t.nx + (i - di * k)
-    if (t.interior[a] !== 1 || t.interior[b] !== 1 || t.filled[a] === 1 || t.filled[b] === 1) continue
-    const run = 2 * k * t.cell * Math.hypot(di, dj)
-    const g = (t.elev[a] - t.elev[b]) / run
-    if (Math.abs(g) > best) best = Math.abs(g)
-    gx += (g * di) / Math.hypot(di, dj)
-    gy += (g * dj) / Math.hypot(di, dj)
-  }
-  const len = Math.hypot(gx, gy)
-  if (best === 0 || len === 0) return null
-  return { slope: best, down: [-gx / len, -gy / len] }
+export const riverFall = (t: Terrain, i: number, j: number): { slope: number; down: Vec2 } | null => {
+  if (i < 0 || j < 0 || i >= t.nx || j >= t.ny) return null
+  const k = j * t.nx + i
+  if (t.water[k] !== 1 || t.flowing[k] !== 1 || t.interior[k] !== 1 || t.filled[k] === 1) return null
+  const slope = t.fall[k]
+  const down: Vec2 = [t.current[2 * k], t.current[2 * k + 1]]
+  if (!(slope > 0) || (down[0] === 0 && down[1] === 0)) return null
+  return { slope, down }
 }
 
 /**
@@ -452,7 +941,240 @@ export const stillWater = (t: Terrain, rings: Vec2[][][]): void => {
     t.water[k] = 1
     t.rocks[k] = 0
     t.interior[k] = 0
+    t.flowing[k] = 0
+    t.fall[k] = 0
     t.elev[k] = low
     t.level[k] = low
   }
+}
+
+/** How far above its water a historic water body's bank stands, in meters (`historicWater`). */
+export const HISTORIC_BANK = 1
+/** How far out from a historic water body its bank eases back into today's ground, in meters. */
+export const HISTORIC_BAND = 20
+
+/**
+ * Water that is gone today (a filled canal basin, a canal since drained or rebuilt), drawn in a
+ * past year on today's ground. Today's ground has no bank for it: the basin was filled, the
+ * canal bed cut through or built over, so read as it is, the water's edge comes out as a cliff
+ * where the ground stands high and as broken shards where it dips. Each body is drawn instead
+ * as still water at its own level, with a smooth bank:
+ *
+ * - its level is the median of today's ground in the band around it, less `bank` meters (the
+ *   ground about a filled basin stands near its old banks);
+ * - every node inside it is that water;
+ * - out to `band` meters from its edge, the ground eases from `bank` meters above the water at
+ *   the edge back to today's ground (a smoothstep in distance), raising a low side into an
+ *   embankment and grading a high one down to the water. Today's own water is left alone.
+ *
+ * `bodies` are polygons in view meters (rings), one entry per body. Used only for a dated
+ * scene's past years: nothing of today's has such water.
+ */
+export const historicWater = (t: Terrain, bodies: readonly (readonly Ring[])[], bank = HISTORIC_BANK, band = HISTORIC_BAND): void => {
+  if (t.flat) return
+  const { nx, ny, cell } = t
+  for (const rings of bodies) {
+    const mask = polygonMask(t, [rings])
+    // Distance from each node near the body to its outline.
+    const dist = new Float32Array(nx * ny).fill(Infinity)
+    let i0 = nx, i1 = -1, j0 = ny, j1 = -1
+    for (const r of rings) {
+      for (let k = 0, m = r.length - 1; k < r.length; m = k++) {
+        const [ax, ay] = r[m]
+        const [bx, by] = r[k]
+        const a0 = Math.max(0, Math.floor((Math.min(ax, bx) - band - t.x0) / cell))
+        const a1 = Math.min(nx - 1, Math.ceil((Math.max(ax, bx) + band - t.x0) / cell))
+        const b0 = Math.max(0, Math.floor((Math.min(ay, by) - band - t.y0) / cell))
+        const b1 = Math.min(ny - 1, Math.ceil((Math.max(ay, by) + band - t.y0) / cell))
+        i0 = Math.min(i0, a0); i1 = Math.max(i1, a1); j0 = Math.min(j0, b0); j1 = Math.max(j1, b1)
+        const dx = bx - ax
+        const dy = by - ay
+        const len2 = dx * dx + dy * dy
+        for (let j = b0; j <= b1; j++) {
+          const y = t.y0 + j * cell
+          for (let i = a0; i <= a1; i++) {
+            const x = t.x0 + i * cell
+            const u = len2 > 0 ? Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / len2)) : 0
+            const d = Math.hypot(x - ax - dx * u, y - ay - dy * u)
+            const q = j * nx + i
+            if (d < dist[q]) dist[q] = d
+          }
+        }
+      }
+    }
+    if (i1 < 0) continue
+    const around: number[] = []
+    let inside = 0
+    for (let j = j0; j <= j1; j++) {
+      for (let i = i0; i <= i1; i++) {
+        const q = j * nx + i
+        if (mask[q] === 1) inside++
+        else if (dist[q] <= band && t.water[q] === 0) around.push(t.elev[q])
+      }
+    }
+    if (inside === 0 || around.length === 0) continue
+    around.sort((a, b) => a - b)
+    const level = around[Math.floor(around.length / 2)] - bank
+    const top = level + bank
+    for (let j = j0; j <= j1; j++) {
+      for (let i = i0; i <= i1; i++) {
+        const q = j * nx + i
+        if (mask[q] === 1) {
+          t.water[q] = 1
+          t.rocks[q] = 0
+          t.interior[q] = 0
+          t.flowing[q] = 0
+          t.fall[q] = 0
+          t.elev[q] = level
+          t.level[q] = level
+          continue
+        }
+        if (t.water[q] === 1 || dist[q] > band) continue
+        const s = dist[q] / band
+        const ease = s * s * (3 - 2 * s)
+        t.elev[q] = top + (t.elev[q] - top) * ease
+        // The water's level carried onto the bank, as settleWater carries a river's: the shore is
+        // then traced along the outline, not the grid.
+        if (dist[q] <= SHORE_CELLS * cell) t.level[q] = level
+      }
+    }
+  }
+}
+
+/**
+ * Mapped water the lidar gave back to the land (see settleWater) is still drawn as water, up
+ * to the outline, if it stands no more than this many meters above the river and lies within
+ * SHORE_CELLS cells of the outline: the two often disagree by a few meters, and the outline is
+ * the smoother line. Higher (a bluff the outline overlaps, a creek in its ravine) or further
+ * out (a bar or a rock in midstream), it stays land.
+ */
+const SHORE_BANK = 1.5
+/** The shoreline field reaches this many cells either side of the line (see `shoreField`). */
+const SHORE_CELLS = 2
+/** In the field, 1 is this many cells: field = 0.5 ± distance / (SHORE_REACH · cell). */
+const SHORE_REACH = 2 * SHORE_CELLS
+/**
+ * The drawn ground rises from the water's surface at the shoreline to its own height one cell
+ * inland, in proportion to the distance: as a fraction of that rise, at a field value `wet`.
+ */
+export const shoreRise = (wet: number): number => Math.max(0, Math.min(1, (0.5 - wet) * SHORE_REACH))
+/** At or below this field value (a cell or more inland) the drawn ground is the ground. */
+const SHORE_EDGE = 0.5 - 1 / SHORE_REACH
+
+/** Elevation of the drawn ground at node k: eased to the water's surface near the shore. */
+export const drawnElevation = (t: Terrain, k: number): number => {
+  const f = t.shore[k]
+  const e = t.elev[k]
+  if (f <= SHORE_EDGE || Number.isNaN(t.level[k])) return e
+  return t.level[k] + (e - t.level[k]) * shoreRise(f)
+}
+
+/**
+ * Is a view-meter point on water as drawn: past the traced shoreline (the shore field, read
+ * between its nodes, over one half)? Null before the shore is traced or on flat ground, where
+ * only the mapped outlines say.
+ */
+export const drawnWet = (t: Terrain, p: Vec2): boolean | null => {
+  if (t.flat) return null
+  const fx = (p[0] - t.x0) / t.cell
+  const fy = (p[1] - t.y0) / t.cell
+  const i = Math.floor(fx)
+  const j = Math.floor(fy)
+  if (i < 0 || j < 0 || i + 1 >= t.nx || j + 1 >= t.ny) return null
+  const u = fx - i
+  const v = fy - j
+  const at = (ii: number, jj: number) => t.shore[jj * t.nx + ii]
+  const f = (at(i, j) * (1 - u) + at(i + 1, j) * u) * (1 - v) + (at(i, j + 1) * (1 - u) + at(i + 1, j + 1) * u) * v
+  return f > 0.5
+}
+
+/** Trace the shoreline into `t.shore`, so the drawn ground meets the water on it. */
+export const traceShore = (t: Terrain, water: readonly (readonly Ring[])[], islands: readonly (readonly Ring[])[]): void => {
+  if (t.flat) return
+  t.shore.set(shoreField(t, water, islands))
+}
+
+/**
+ * Where the shoreline runs, as a field over the grid nodes that is one half on it.
+ *
+ * The water grid knows only which nodes are wet, so a shoreline traced from it alone can pass
+ * only halfway between a wet node and a dry one: a shore running slantwise across the grid
+ * came out as a staircase, a run of nodes long and a cell high, and on a print the bank read as
+ * a saw. The mapped outline knows better. Each node's field is its signed distance to the
+ * nearest edge of the mapped water and islands (wet nodes positive), over SHORE_CELLS cells
+ * either way, so the one-half line traced between nodes is the outline itself, straight edges
+ * exactly. Where the lidar moved the shore (see SHORE_BANK), the grid decides, and near those
+ * nodes the line is traced as before, through the wet and dry nodes smoothed over 3 × 3.
+ */
+export const shoreField = (
+  t: Terrain,
+  water: readonly (readonly Ring[])[],
+  islands: readonly (readonly Ring[])[],
+): Float32Array => {
+  const { nx, ny, cell } = t
+  const reach = SHORE_CELLS * cell
+  const dist = new Float32Array(nx * ny).fill(reach)
+  for (const rings of [...water, ...islands]) {
+    for (const r of rings) {
+      for (let k = 0, m = r.length - 1; k < r.length; m = k++) {
+        const [ax, ay] = r[m]
+        const [bx, by] = r[k]
+        const i0 = Math.max(0, Math.floor((Math.min(ax, bx) - reach - t.x0) / cell))
+        const i1 = Math.min(nx - 1, Math.ceil((Math.max(ax, bx) + reach - t.x0) / cell))
+        const j0 = Math.max(0, Math.floor((Math.min(ay, by) - reach - t.y0) / cell))
+        const j1 = Math.min(ny - 1, Math.ceil((Math.max(ay, by) + reach - t.y0) / cell))
+        const dx = bx - ax
+        const dy = by - ay
+        const len2 = dx * dx + dy * dy
+        for (let j = j0; j <= j1; j++) {
+          const y = t.y0 + j * cell
+          for (let i = i0; i <= i1; i++) {
+            const x = t.x0 + i * cell
+            const u = len2 > 0 ? Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / len2)) : 0
+            const d = Math.hypot(x - ax - dx * u, y - ay - dy * u)
+            const q = j * nx + i
+            if (d < dist[q]) dist[q] = d
+          }
+        }
+      }
+    }
+  }
+  // Which nodes the outline itself holds, before the lidar corrected it.
+  const mapped = { ...t, water: new Uint8Array(nx * ny) }
+  rasterize(mapped, water, 1)
+  rasterize(mapped, islands, 0)
+  // The outline decides which side a node is on, unless the lidar put the node on the bank
+  // and it stands well clear of the water (a creek in its ravine, a bluff the outline
+  // overlaps). There the grid decides, and the line is traced as it was before the outline
+  // was read: where the grid's water, smoothed over 3 × 3 nodes (weights 4, 2, 1), is one half.
+  const wet = new Uint8Array(nx * ny)
+  const byGrid = new Uint8Array(nx * ny)
+  for (let q = 0; q < wet.length; q++) {
+    const outline = mapped.water[q] === t.water[q] || (dist[q] < reach && t.elev[q] - t.level[q] <= SHORE_BANK)
+    wet[q] = outline ? mapped.water[q] : t.water[q]
+    byGrid[q] = outline ? 0 : 1
+  }
+  const out = new Float32Array(nx * ny)
+  for (let j = 0; j < ny; j++) {
+    for (let i = 0; i < nx; i++) {
+      const q = j * nx + i
+      let near = false
+      let sum = 0
+      let wsum = 0
+      for (let dj = -1; dj <= 1; dj++) {
+        for (let di = -1; di <= 1; di++) {
+          const ii = i + di
+          const jj = j + dj
+          if (ii < 0 || jj < 0 || ii >= nx || jj >= ny) continue
+          const k = jj * nx + ii
+          if (byGrid[k] === 1) near = true
+          const w = di === 0 && dj === 0 ? 4 : di === 0 || dj === 0 ? 2 : 1
+          sum += wet[k] * w
+          wsum += w
+        }
+      }
+      out[q] = near ? sum / wsum : 0.5 + (wet[q] === 1 ? 1 : -1) * (dist[q] / (SHORE_REACH * cell))
+    }
+  }
+  return out
 }

@@ -6,7 +6,7 @@ import { join } from 'node:path'
 import type { BuildMeta } from '../src/archive.ts'
 import { renderExplorer } from '../src/explorer.ts'
 import {
-  buildCard, clip, escAttr, flagshipOf, loadSiteConfig, metaTags, normaliseSiteUrl, reframeSvg, shareFile, sharePage, siteHref, socialCrop,
+  buildCard, buyLinks, clip, escAttr, flagshipOf, loadSiteConfig, metaTags, normaliseSiteUrl, onSaleUrl, reframeSvg, shareFile, sharePage, shopFor, siteHref, socialCrop,
 } from '../src/social.ts'
 
 const build = (id: string, extra: Partial<BuildMeta> = {}): BuildMeta => ({
@@ -107,10 +107,12 @@ test('the explorer carries the site card and copies share-page links', () => {
   const html = renderExplorer(builds, [], { siteUrl: 'https://x.org/iso/', image: { path: 'builds/new/social.png', width: 1200, height: 630 } })
   assert.match(html, /<meta property="og:image" content="https:\/\/x.org\/iso\/builds\/new\/social.png">/)
   assert.match(html, /<meta property="og:url" content="https:\/\/x.org\/iso\/">/)
-  assert.match(html, /<script type="application\/json" id="site">\{"siteUrl":"https:\/\/x.org\/iso\/","shop":null,"home":null,"latestPages":true,"buy":null\}<\/script>/)
-  assert.match(html, /'s\/' \+ encodeURIComponent\(file\) \+ '\.html' \+ location\.hash/)
+  assert.match(html, /<script type="application\/json" id="site">\{"siteUrl":"https:\/\/x.org\/iso\/","shop":null,"home":null,"latestPages":true,"shares":null,"buy":null\}<\/script>/)
+  assert.match(html, /return d \? root \+ d\.path \+ d\.hash : root \+ hash/)
+  const shared = renderExplorer(builds, [], { siteUrl: 'https://x.org/iso/', shares: { maps: { r: 'r' }, pages: ['about'] } })
+  assert.match(shared, /"shares":\{"maps":\{"r":"r"\},"pages":\["about"\]\}/)
   const bare = renderExplorer(builds)
-  assert.doesNotMatch(bare, /og:url|canonical/)
+  assert.doesNotMatch(bare.split('</head>')[0], /og:url|canonical/)
   assert.match(bare, /og:title/)
 })
 
@@ -131,4 +133,22 @@ test('a front page comes from the config, and a malformed one is ignored', async
   assert.match(selling, /<a class="shop" href="https:\/\/s\/"[^>]*><b>Buy ↗<\/b><span>L<\/span><\/a>/)
   await writeFile(join(dir, 'isoscape.config.json'), JSON.stringify({ home: { title: 'T', heroes: 'no', sections: [] } }))
   assert.equal((await loadSiteConfig(undefined, dir, {})).home, undefined)
+})
+
+test('an onSale list: its first print is the view’s buy link, the rest are shown beside it', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'iso-prints-'))
+  await writeFile(join(dir, 'isoscape.config.json'), JSON.stringify({ shop: { label: 'Shop', url: 'https://s/', onSale: {
+    'r:2026': ['https://s/p/a', { url: 'https://s/p/b', label: 'Buy B ↗' }, { url: 'https://s/p/c' }, 'https://s/p/d', { url: 'ftp://x', label: 'no' }],
+    'q:1925': [{ url: 'https://s/p/q', label: 'Buy Q ↗' }],
+    bad: [{ url: 'https://s/p/z' }].slice(1),
+    'r': 'https://s/p/r',
+  } } }))
+  const config = await loadSiteConfig(undefined, dir, {})
+  assert.deepEqual(config.shop?.onSale, { 'r:2026': 'https://s/p/a', 'q:1925': 'https://s/p/q', r: 'https://s/p/r' })
+  // Only the first entry may go without a label; one with no label past it, or not http(s), is dropped.
+  assert.deepEqual(shopFor(config, 'r', 2026), { url: 'https://s/p/a', label: 'Buy a print ↗', more: [{ url: 'https://s/p/b', label: 'Buy B ↗' }] })
+  assert.deepEqual(shopFor(config, 'q', 1925), { url: 'https://s/p/q', label: 'Buy Q ↗' })
+  assert.deepEqual(shopFor(config, 'r', 1925), { url: 'https://s/p/r', label: 'Buy a print ↗' })
+  assert.equal(onSaleUrl(config.shop?.onSale, 'r:2026'), 'https://s/p/a')
+  assert.deepEqual(buyLinks(config, ['r:2026']).regions['r:2026'].more, [{ url: 'https://s/p/b', label: 'Buy B ↗' }])
 })

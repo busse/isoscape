@@ -10,7 +10,248 @@
     "url": "https://chrisbusse.com/",
     "cta": "Buy prints of these maps",
     "onSale": {
-      "broad-street-cutaway": "https://chrisbusse.com/products/broad-street-station-1943-cutaway"
+      "broad-street-cutaway": "https://chrisbusse.com/products/broad-street-station-1943-cutaway",
+      "main-street-cutaway": "https://chrisbusse.com/products/main-street-station-about-1952-cutaway",
+      "pump-house-cutaway": "https://chrisbusse.com/products/the-new-pump-house-richmond-about-1885-cutaway",
+      "streetcars": "https://chrisbusse.com/collections/richmond-streetcars-1925",
+      "richmond-streetcars": "https://chrisbusse.com/collections/richmond-streetcars-1925",
+      "broad-street": "https://chrisbusse.com/collections/broad-street-station-1943",
+      "broad-street-station-cutaway": "https://chrisbusse.com/products/broad-street-station-1943-cutaway",
+      "main-street-station-cutaway": "https://chrisbusse.com/products/main-street-station-about-1952-cutaway",
+      "pump-house-cutaway-pumped": "https://chrisbusse.com/products/the-new-pump-house-richmond-about-1885-cutaway",
+      "richmond-i195-rocketts": "https://chrisbusse.com/products/the-james-i-195-to-rocketts-landing",
+      "gwynns-island": "https://chrisbusse.com/products/gwynns-island",
+      "richmond-downtown-time:1737": "https://chrisbusse.com/products/richmond-1737-2026",
+      "richmond-downtown-time:1886": "https://chrisbusse.com/products/richmond-1886",
+      "richmond-downtown-time:1925": "https://chrisbusse.com/products/richmond-1925",
+      "richmond-downtown-time:1950": "https://chrisbusse.com/products/richmond-1950",
+      "richmond-downtown-time:2026": [
+        { "url": "https://chrisbusse.com/products/richmond-2026", "label": "Buy Richmond, 2026 ↗" },
+        { "url": "https://chrisbusse.com/products/richmond-then-and-now", "label": "Buy Richmond, Then & Now ↗" },
+        { "url": "https://chrisbusse.com/products/richmond-and-the-james", "label": "Buy Richmond and the James ↗" }
+      ]
+    },
+    "products": {
+      "broad-street-lines:1943": [
+        {
+          "url": "https://chrisbusse.com/products/broad-street-station-1943-the-railroad-map",
+          "label": "Buy a print of the map alone ↗",
+          "design": "broad-street-1943-map"
+        },
+        {
+          "url": "https://chrisbusse.com/products/broad-street-station-1943-the-railroads-and-fourteen-places",
+          "label": "Buy a print of the map with every place ↗",
+          "design": "broad-street-1943-menu"
+        }
+      ],
+      "richmond-streetcars:1925": [
+        {
+          "url": "https://chrisbusse.com/products/richmonds-streetcars-1925-the-system-map",
+          "label": "Buy a print of the map alone ↗",
+          "design": "streetcars-1925-map"
+        },
+        {
+          "url": "https://chrisbusse.com/products/richmonds-streetcars-1925-the-lines-and-fourteen-stops",
+          "label": "Buy a print of the map with every stop ↗",
+          "design": "streetcars-1925-menu"
+        }
+      ],
+      "broad-street-lines:1943@-494,-1066,6": [
+        {
+          "url": "https://chrisbusse.com/products/ay-tower-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-01-ay-tower"
+        }
+      ],
+      "broad-street-lines:1940@-73,-810,6": [
+        {
+          "url": "https://chrisbusse.com/products/the-state-fair-grounds-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-02-fair-grounds"
+        }
+      ],
+      "broad-street-lines:1943@-450,-669,6": [
+        {
+          "url": "https://chrisbusse.com/products/scotts-addition-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-03-scotts-addition"
+        }
+      ],
+      "broad-street-lines:1943@28,-502,6": [
+        {
+          "url": "https://chrisbusse.com/products/seaboard-junction-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-04-seaboard-junction"
+        }
+      ],
+      "broad-street-station-loop:1943@427,154,6": [
+        {
+          "url": "https://chrisbusse.com/products/the-loop-and-the-sheds-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-05-loop"
+        }
+      ],
+      "broad-street-lines:1943@83,-310,6": [
+        {
+          "url": "https://chrisbusse.com/products/cf-sauer-company-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-06-sauer"
+        }
+      ],
+      "broad-street-lines:1943@1533,674,6": [
+        {
+          "url": "https://chrisbusse.com/products/main-street-station-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-07-main-street-station"
+        }
+      ],
+      "broad-street-lines:1943@1478,732,6": [
+        {
+          "url": "https://chrisbusse.com/products/the-triple-crossing-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-08-triple-crossing"
+        }
+      ],
+      "broad-street-lines:1943@730,682,6": [
+        {
+          "url": "https://chrisbusse.com/products/the-cando-viaduct-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-09-co-viaduct"
+        }
+      ],
+      "broad-street-lines:1943@1168,965,6": [
+        {
+          "url": "https://chrisbusse.com/products/hull-street-station-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-10-hull-street"
+        }
+      ],
+      "broad-street-lines:1943@-1445,568,6": [
+        {
+          "url": "https://chrisbusse.com/products/the-belt-line-bridge-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-11-belt-line-bridge"
+        }
+      ],
+      "broad-street-station:1943@88,70,6": [
+        {
+          "url": "https://chrisbusse.com/products/hotel-william-byrd-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-12-william-byrd"
+        }
+      ],
+      "broad-street-station:1943@49,-122,6": [
+        {
+          "url": "https://chrisbusse.com/products/broad-street-station-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-13-from-the-fan"
+        }
+      ],
+      "broad-street-station-front:1943@70,11,6": [
+        {
+          "url": "https://chrisbusse.com/products/popes-front-broad-street-station-1943",
+          "label": "Buy a print of this place ↗",
+          "design": "broad-street-1943-14-front"
+        }
+      ],
+      "richmond-streetcars:1925@-2388,-667,6": [
+        {
+          "url": "https://chrisbusse.com/products/westhampton-park-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-01-westhampton"
+        }
+      ],
+      "richmond-streetcars:1925@311,-410,6": [
+        {
+          "url": "https://chrisbusse.com/products/state-fair-grounds-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-02-fair-grounds"
+        }
+      ],
+      "richmond-streetcars:1925@777,-789,6": [
+        {
+          "url": "https://chrisbusse.com/products/ginter-park-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-03-ginter-park"
+        }
+      ],
+      "richmond-streetcars:1925@1456,-31,6": [
+        {
+          "url": "https://chrisbusse.com/products/barton-heights-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-04-barton-heights"
+        }
+      ],
+      "richmond-streetcars:1925@1961,-564,6": [
+        {
+          "url": "https://chrisbusse.com/products/highland-park-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-05-highland-park"
+        }
+      ],
+      "richmond-streetcars:1925@2698,520,6": [
+        {
+          "url": "https://chrisbusse.com/products/nine-mile-road-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-06-nine-mile"
+        }
+      ],
+      "richmond-streetcars:1925@2019,823,6": [
+        {
+          "url": "https://chrisbusse.com/products/church-hill-and-jefferson-park-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-07-church-hill"
+        }
+      ],
+      "richmond-streetcars:1925@1262,483,6": [
+        {
+          "url": "https://chrisbusse.com/products/seventh-and-broad-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-08-broad-street"
+        }
+      ],
+      "richmond-streetcars:1925@1204,1172,6": [
+        {
+          "url": "https://chrisbusse.com/products/manchester-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-09-manchester"
+        }
+      ],
+      "richmond-streetcars:1925@446,1194,6": [
+        {
+          "url": "https://chrisbusse.com/products/woodland-heights-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-10-woodland-heights"
+        }
+      ],
+      "richmond-streetcars:1925@-109,1255,6": [
+        {
+          "url": "https://chrisbusse.com/products/forest-hill-park-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-11-forest-hill"
+        }
+      ],
+      "richmond-streetcars:1925@-446,532,6": [
+        {
+          "url": "https://chrisbusse.com/products/byrd-park-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-12-byrd-park"
+        }
+      ],
+      "richmond-streetcars:1925@311,267,6": [
+        {
+          "url": "https://chrisbusse.com/products/the-fan-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-13-the-fan"
+        }
+      ],
+      "richmond-streetcars:1925@815,292,6": [
+        {
+          "url": "https://chrisbusse.com/products/broad-and-laurel-richmond-streetcars-1925",
+          "label": "Buy a print of this stop ↗",
+          "design": "streetcars-1925-14-broad-laurel"
+        }
+      ]
     }
   },
   "home": {
@@ -41,9 +282,26 @@
         "pageLabel": "Richmond's streetcars, 1925: the lines and fourteen stops"
       },
       {
+        "title": "Tutorials",
+        "prefixes": [
+          "rapa-nui"
+        ],
+        "blurb": "How to explore a place with a chat: find open data, check it, and draw it with isoscape. The first works through Rapa Nui (Easter Island) from open data alone.",
+        "page": "#/explore-with-chat",
+        "pageLabel": "Tutorial: map any place from open data with an AI chat, using Rapa Nui (Easter Island)",
+        "order": [
+          "rapa-nui",
+          "rapa-nui-rano-kau",
+          "rapa-nui-poike",
+          "rapa-nui-hanga-roa"
+        ]
+      },
+      {
         "title": "Buildings in their time",
         "prefixes": [
-          "broad-street"
+          "broad-street",
+          "main-street",
+          "pump-house"
         ],
         "blurb": "One building drawn close up in its own time, from its plans, photographs and fire-insurance maps, with the places around it. The first is Broad Street Station in 1943, at its wartime height.",
         "page": "#/broad-street",

@@ -1,0 +1,249 @@
+{
+ "design": "streetcars-1925-08-broad-street",
+ "title": "Seventh and Broad, Richmond Streetcars 1925",
+ "version": 3,
+ "version_note": "redrawn: car lines run down the middle of divided streets and no longer jog between street pieces; bridges that carry a line are drawn at the line's width and follow the line; clearings that later roads cut through the woods are filled.",
+ "recorded": "2026-11-17T23:58:03+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "7d72a12f29893761b816f8a4ef8077ffb795a949",
+  "subject": "Release records: the streetcar set's last six (draft of the records, rewritten next)",
+  "dirty": true
+ },
+ "kind": "redraw",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/sets/set.py streetcars-1925 prepare   # where data/ is cached",
+   "python3 tools/sets/set.py streetcars-1925 boxes broad-street   # into out/sets/<set>/print (or --dir)",
+   "python3 tools/sets/set.py streetcars-1925 canvas   # into out/sets/<set>/print (or --dir)",
+   "cp <set print>/streetcars-1925-08-broad-street_24x18.jpg <store>/print-files/streetcars/drawn/streetcars-1925-08-broad-street-v3/ && cp <set print>/canvas/<the 16x12 24x18 files> <store>/print-files/streetcars/drawn/streetcars-1925-08-broad-street-v3/canvas/",
+   "python3 tools/release/stamp.py <store> streetcars-1925-08-broad-street --version 3 --base print-files/streetcars/drawn/streetcars-1925-08-broad-street-v3"
+  ],
+  "redraw": true,
+  "base_kind": "set",
+  "previous_record": "releases/streetcars-1925-08-broad-street/v2.json",
+  "pinned": "scenes are the set's scene SVGs below, by SHA-256",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond's Streetcars, 1925",
+   "piece": "Box 8",
+   "plate": "STC-08",
+   "version": "3",
+   "drawn": "2026",
+   "location": "37.544° N 77.438° W",
+   "facing": "0°"
+  },
+  "files": {
+   "streetcars-1925-08-broad-street-v3_24x18.jpg": {
+    "base": "print-files/streetcars/drawn/streetcars-1925-08-broad-street-v3/streetcars-1925-08-broad-street_24x18.jpg",
+    "base_sha256": "909b894dc3cb4f63c082b4a322bf6f80899ab69fae38b28ffc752e5b77ad959e",
+    "at": {
+     "x": 5596,
+     "y": 4980,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-08-broad-street-v3_canvas-16x12.jpg": {
+    "base": "print-files/streetcars/drawn/streetcars-1925-08-broad-street-v3/canvas/streetcars-1925-08-broad-street_canvas-16x12.jpg",
+    "base_sha256": "02152ca03de25abf90d36a587c906df78b6a74a823c6b7357ea2a49b5ddbc14a",
+    "at": {
+     "x": 3975,
+     "y": 3742,
+     "w": 1127,
+     "h": 159,
+     "u": 0.8667,
+     "where": "foot"
+    }
+   },
+   "streetcars-1925-08-broad-street-v3_canvas-24x18.jpg": {
+    "base": "print-files/streetcars/drawn/streetcars-1925-08-broad-street-v3/canvas/streetcars-1925-08-broad-street_canvas-24x18.jpg",
+    "base_sha256": "96169661450048879822370cfed30ea280bf6aac8a01363c04d4792c6daa0495",
+    "at": {
+     "x": 6046,
+     "y": 5430,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925.svg",
+   "sha256": "dee87ccb41bfd046fc43909279ba39adbaa553066c0fad30152c19cb05d2bb9f",
+   "frozen": "data/_releases/scenes/dee87ccb41bfd046fc43909279ba39adbaa553066c0fad30152c19cb05d2bb9f.svg",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-streetcars",
+   "year": 1925,
+   "flags": [
+    "--streetcar-scale",
+    "1.5"
+   ],
+   "svg": "out/sets/streetcars-1925/scenes/richmond-streetcars-1925-fine.svg",
+   "sha256": "eab8d7dd661793a662d91d11953a36a147edcae6c78c30a50f0fa3c3e517013a",
+   "frozen": "data/_releases/scenes/eab8d7dd661793a662d91d11953a36a147edcae6c78c30a50f0fa3c3e517013a.svg",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "sets/streetcars-1925.json": "b4b3cd09813c238b1c12abca70afb2c61dfe4690103125d447401fb2145226b4",
+  "tools/streetcars/stops.json": "5de22bc934099b6690a640ad4b853964f5a7b9832136779e413e1240ab7efa76",
+  "out/sets/streetcars-1925/points.json": "1f76c732128d3540c5ec142fce6528194a693538d94f3f326fd9eae7a476f4ee",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "tools/sets/set.py": "090bac67d92805c22088520b9cd8b3425b0ffa4f5c4a790f4bd73f24232a95a1",
+  "regions/richmond-streetcars.json": "194be82bc8e421cf50010f172b3aeb5c5359a7df043ebabf94cb643fe9350754",
+  "history/richmond-streetcars.json": "5f980cb5f5b5a6de4ed6878dd3ef4427deecad80670f58e26bad20a50852b703",
+  "history/sanborn/lost.geojson": "56e62877646394d1e887b3e5fabf887ce2fca992343d2fb5e25aefe995318a0a",
+  "history/sanborn/fair-grounds.geojson": "ccab37978983fdf8008d49ee3a453e0259a10b51a3587d945b6fe9a8c3a8abd6"
+ },
+ "data": {
+  "richmond-streetcars": {
+   "snapshot": "data/_releases/richmond-streetcars@6e9297a3959e",
+   "files": {
+    "dem.bin.gz": "84786d9e1fa5ccdb10f4a551a77100fdc1704b71d3f782290e89356111a4a9d0",
+    "osm.json": "7dbe53ef18944a9c025a688b68194b30502add174241cfc70fa4eaf80e967eee",
+    "yearbuilt.json": "add6087d440260fbde74ce64208d372e2520dabf6e52130c350c8fa2c79b4e63"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/streetcars/streetcars-1925-08-broad-street-v3_24x18.jpg",
+   "sha256": "34eef4d6ecb8a96788588469729e5f2204ff9beeca6d456348089a0c133a9268",
+   "bytes": 5258558,
+   "printful_file_id": 1115028351
+  },
+  "canvas": [
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-08-broad-street-v3_canvas-16x12.jpg",
+    "sha256": "59a6a33a778dc24b3d81e95a07209f07173704f2b19dda1b546ce2882ceb1afc",
+    "bytes": 3282152,
+    "printful_file_id": 1115026552
+   },
+   {
+    "file": "print-files/streetcars/canvas/streetcars-1925-08-broad-street-v3_canvas-24x18.jpg",
+    "sha256": "fd2b061c0bb14bb977ff30e30315ea55083a1ac5cfa18316823156e107f89b62",
+    "bytes": 5374805,
+    "printful_file_id": 1115026733
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "place": "Richmond streetcars",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print_dir": "print-files/streetcars",
+   "tags": [
+    "streetcars-1925"
+   ],
+   "credit_extra": "Routes after Harland Bartholomew &amp; Associates for the City Planning Commission, plate 53 (1943), with the sources cited for each stop on the <a href=\"https://busse.github.io/isoscape/#/streetcars\">streetcars page ↗</a>.",
+   "one_mockup": true,
+   "title": "Seventh and Broad, Richmond Streetcars 1925",
+   "ratio": "3x4",
+   "sizes": [
+    "12x16",
+    "18x24"
+   ],
+   "print": "streetcars-1925-08-broad-street-v3_24x18.jpg",
+   "canvas": "streetcars-1925-08-broad-street-v3_canvas-{w}x{h}.jpg",
+   "explore": "richmond-streetcars:1925@1262,483,6",
+   "detail": [
+    0.35,
+    0.2,
+    0.65,
+    0.6
+   ],
+   "version": 3,
+   "version_date": "November 17, 2026",
+   "version_note": "redrawn: car lines run down the middle of divided streets and no longer jog between street pieces; bridges that carry a line are drawn at the line's width and follow the line; clearings that later roads cut through the woods are filled.",
+   "plate": "STC-08",
+   "plate_box": [
+    0.77722,
+    0.92222,
+    0.96889,
+    0.95833
+   ]
+  },
+  "products": [
+   {
+    "handle": "seventh-and-broad-richmond-streetcars-1925",
+    "id": "gid://shopify/Product/9137910972534",
+    "format": "all (merged)",
+    "status": "ACTIVE",
+    "variants": 10
+   },
+   {
+    "handle": "seventh-and-broad-richmond-streetcars-1925-print",
+    "id": "gid://shopify/Product/9135596896374",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "seventh-and-broad-richmond-streetcars-1925-framed-print",
+    "id": "gid://shopify/Product/9135596994678",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "seventh-and-broad-richmond-streetcars-1925-framed-canvas",
+    "id": "gid://shopify/Product/9135597125750",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-08-broad-street-v3_24x18-print.jpg?v=1794958586",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-08-broad-street-v3_24x18-detail.jpg?v=1794958589",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-08-broad-street-v3_24x18-plate.jpg?v=1794958593"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-08-broad-street-v3_24x18-framed-print-black.jpg?v=1794958598",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-08-broad-street-v3_24x18-framed-print-white.jpg?v=1794958602",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-08-broad-street-v3_24x18-detail.jpg?v=1794958589",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-08-broad-street-v3_24x18-plate.jpg?v=1794958593"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-08-broad-street-v3_24x18-framed-canvas-black.jpg?v=1794958607",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-08-broad-street-v3_24x18-framed-canvas-white.jpg?v=1794958612",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-08-broad-street-v3_24x18-detail.jpg?v=1794958589",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/streetcars-1925-08-broad-street-v3_24x18-plate.jpg?v=1794958593"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-streetcars:1925@1262,483,6"
+ },
+ "restamped": {
+  "files": 3,
+  "matched": 3
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 2
+ }
+}

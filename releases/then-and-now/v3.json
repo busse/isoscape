@@ -1,0 +1,245 @@
+{
+ "design": "then-and-now",
+ "title": "Richmond, Then & Now",
+ "version": 3,
+ "version_note": "redrawn: the 1886 panel's canal and what was left of the Great Basin are drawn as water at their own level, with clean banks; Mayo's Bridge, the Free Bridge and the railroad bridges cross the river as in 1886, and the Seaboard's line (1900) is left out; the print says the ground is today's and that traced buildings' heights are assumed from their material.",
+ "recorded": "2026-11-17T14:57:43+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "01a2cb85e39a235725e0bcf216f121dab3bd907b",
+  "subject": "Merge wave4-richmond-early: Richmond 1886, Then & Now and through time corrected (the canal and basin as water of their own, the river's bridges by year with the Free Bridge, the Seaboard and platforms dated, tall buildings sourced, print text); the published 1925 and 1950 scenes unchanged",
+  "dirty": false
+ },
+ "kind": "redraw",
+ "recipe": {
+  "tool": "tools/release/stamp.py",
+  "run": [
+   "python3 tools/print/compose.py tools/print/spec.json out/builds <store>/print-files/drawn/then-and-now-v3 --only then-and-now",
+   "python3 tools/print/canvas.py <store>/print-files/drawn/then-and-now-v3/then-and-now_24x36.jpg <store>/print-files/drawn/then-and-now-v3/canvas 12x18 20x30 24x36",
+   "python3 tools/release/stamp.py <store> then-and-now --version 3 --base print-files/drawn/then-and-now-v3"
+  ],
+  "redraw": true,
+  "base_kind": "compose",
+  "previous_record": "releases/then-and-now/v2.json",
+  "pinned": "panels use the builds named in scenes[].build, not the newest",
+  "block": {
+   "collection": "Places through time",
+   "set": "Richmond",
+   "piece": "Then & Now",
+   "plate": "RVA-07",
+   "version": "3",
+   "drawn": "2026",
+   "location": "37.534° N 77.427° W",
+   "facing": "351°"
+  },
+  "files": {
+   "then-and-now-v3_24x36.jpg": {
+    "base": "print-files/drawn/then-and-now-v3/then-and-now_24x36.jpg",
+    "base_sha256": "f5d98a95b4ad0d8bf94b99d694241bf9ae56aaa6dd89e7d4537c2aff1fdac5fa",
+    "at": {
+     "x": 5154,
+     "y": 10204,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   },
+   "then-and-now-v3_canvas-12x18.jpg": {
+    "base": "print-files/drawn/then-and-now-v3/canvas/then-and-now_canvas-12x18.jpg",
+    "base_sha256": "3406ad91b35fcc034cb12999c26ca563a88f9c7bcf5c04c4894931628200e538",
+    "at": {
+     "x": 2679,
+     "y": 5502,
+     "w": 1195,
+     "h": 169,
+     "u": 0.9192,
+     "where": "foot"
+    }
+   },
+   "then-and-now-v3_canvas-20x30.jpg": {
+    "base": "print-files/drawn/then-and-now-v3/canvas/then-and-now_canvas-20x30.jpg",
+    "base_sha256": "401ae5b0463ebfd48cd17ddc6ce68f2edfced26ac25e4abb2a6c895aee455812",
+    "at": {
+     "x": 4611,
+     "y": 8934,
+     "w": 1543,
+     "h": 218,
+     "u": 1.1867,
+     "where": "foot"
+    }
+   },
+   "then-and-now-v3_canvas-24x36.jpg": {
+    "base": "print-files/drawn/then-and-now-v3/canvas/then-and-now_canvas-24x36.jpg",
+    "base_sha256": "1fc8cfa90626d3c4c66033585750418d039f114b0e276850dc0547b173cff4ac",
+    "at": {
+     "x": 5604,
+     "y": 10654,
+     "w": 1690,
+     "h": 239,
+     "u": 1.3,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_stamping": {
+   "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+   "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+   "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058"
+  },
+  "tools_match_commit": true
+ },
+ "scenes": [
+  {
+   "region": "richmond-downtown-time",
+   "year": 1886,
+   "flags": [
+    "--with",
+    "next"
+   ],
+   "svg": "out/builds/20261117-093418-richmond-downtown-time-1886/image.svg",
+   "sha256": "17aa0cb0dc84be991713236b6f7b9eb4c0cda827bf1732eacd7840ec5528a4df",
+   "frozen": "data/_releases/scenes/17aa0cb0dc84be991713236b6f7b9eb4c0cda827bf1732eacd7840ec5528a4df.svg",
+   "build": "20261117-093418-richmond-downtown-time-1886",
+   "commit": "01a2cb8",
+   "reproduces": true
+  },
+  {
+   "region": "richmond-downtown-time",
+   "year": 2026,
+   "flags": [],
+   "svg": "out/builds/20261117-093626-richmond-downtown-time-2026/image.svg",
+   "sha256": "1084d01685559cde06bfe76164a754d34b2ce76210ba4a805943be0b67537a39",
+   "frozen": "data/_releases/scenes/1084d01685559cde06bfe76164a754d34b2ce76210ba4a805943be0b67537a39.svg",
+   "build": "20261117-093626-richmond-downtown-time-2026",
+   "commit": "01a2cb8",
+   "reproduces": true
+  }
+ ],
+ "inputs": {
+  "tools/print/spec.json": "caf6b357925e6dc6bfb64097a344425f65a1a789b5e888abd8c99577ebcc35e6",
+  "tools/print/titleblock.py": "d4ada12a8f750d3fc866ac9d5dd532c5cb97e7525b94f00dfb663bc26f9805b6",
+  "tools/release/stamp.py": "807b8b650a2f363c77e8a8c5443f06cfbdff2f55fbf223cf692ddaaf9ceb24bc",
+  "catalog/plates.json": "2e1868bfb750aa96c2a667645e1320dd3dff2cf633df0ae9b25b4918e89ec058",
+  "tools/print/canvas.py": "7d6950595979a5f62d60b4509ff0b9bf36766594acbc294615eca26883ce283f",
+  "regions/richmond-downtown-time.json": "498df0bb97a286cde8d08816566be631db130090de8a1928fd7f6ba3ee831681",
+  "history/richmond-downtown.json": "168cfd359a00521786d598642759bcf76bb047e103fca95d46d23d2cc9d7f43d",
+  "history/sanborn/lost.geojson": "56e62877646394d1e887b3e5fabf887ce2fca992343d2fb5e25aefe995318a0a"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/then-and-now-v3_24x36.jpg",
+   "sha256": "89006e88f5434026aada99480e0f8c44290aea44a3cf4d77ec777c9811b0045d",
+   "bytes": 11677877,
+   "printful_file_id": 1114443973
+  },
+  "canvas": [
+   {
+    "file": "print-files/canvas/then-and-now-v3_canvas-12x18.jpg",
+    "sha256": "7f936d7712ff7ae249e7c352e03820c027473b50e4ffab70cd501c0feb01ca36",
+    "bytes": 4198949,
+    "printful_file_id": 1114444118
+   },
+   {
+    "file": "print-files/canvas/then-and-now-v3_canvas-20x30.jpg",
+    "sha256": "707571a9fee3126e131d1a8c19b4f3ce1d33a089df609d7c35721c8c210d21ac",
+    "bytes": 7723144,
+    "printful_file_id": 1114444458
+   },
+   {
+    "file": "print-files/canvas/then-and-now-v3_canvas-24x36.jpg",
+    "sha256": "a2f94d15af399bcc86b390b625a9f48b05b6eee8652a1dc757b382fe278c4ff4",
+    "bytes": 9821523,
+    "printful_file_id": 1114444725
+   }
+  ]
+ },
+ "store": {
+  "catalog": {
+   "title": "Richmond, Then & Now",
+   "place": "Richmond",
+   "orientation": "vertical",
+   "formats": [
+    "Print",
+    "Framed Print",
+    "Framed Canvas"
+   ],
+   "print": "then-and-now-v3_24x36.jpg",
+   "canvas": "then-and-now-v3_canvas-{w}x{h}.jpg",
+   "explore": "richmond-downtown-time:2026",
+   "version": 3,
+   "version_date": "November 17, 2026",
+   "version_note": "redrawn: the 1886 panel's canal and what was left of the Great Basin are drawn as water at their own level, with clean banks; Mayo's Bridge, the Free Bridge and the railroad bridges cross the river as in 1886, and the Seaboard's line (1900) is left out; the print says the ground is today's and that traced buildings' heights are assumed from their material.",
+   "plate": "RVA-07",
+   "plate_box": [
+    0.71583,
+    0.94481,
+    0.95056,
+    0.96694
+   ]
+  },
+  "products": [
+   {
+    "handle": "richmond-then-and-now",
+    "id": "gid://shopify/Product/9137908449398",
+    "format": "all (merged)",
+    "status": "DRAFT",
+    "variants": 16
+   },
+   {
+    "handle": "richmond-then-and-now-print",
+    "id": "gid://shopify/Product/9132813090934",
+    "format": "Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-then-and-now-framed-print",
+    "id": "gid://shopify/Product/9132813123702",
+    "format": "Framed Print",
+    "status": "DRAFT"
+   },
+   {
+    "handle": "richmond-then-and-now-framed-canvas",
+    "id": "gid://shopify/Product/9132813156470",
+    "format": "Framed Canvas",
+    "status": "DRAFT"
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v3_24x36-print.jpg?v=1794926940",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v3_24x36-plate.jpg?v=1794926944"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v3_24x36-framed-print-black.jpg?v=1794926950",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v3_24x36-framed-print-white.jpg?v=1794926954",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v3_24x36-plate.jpg?v=1794926944"
+   ],
+   "Framed Canvas": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v3_24x36-framed-canvas-black.jpg?v=1794926960",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v3_24x36-framed-canvas-white.jpg?v=1794926965",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/then-and-now-v3_24x36-plate.jpg?v=1794926944"
+   ]
+  }
+ },
+ "explorer": {
+  "view": "richmond-downtown-time:2026"
+ },
+ "restamped": {
+  "files": 4,
+  "matched": 4
+ },
+ "reproduced": {
+  "scenes": 2,
+  "matched": 2
+ }
+}

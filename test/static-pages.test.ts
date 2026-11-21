@@ -2,13 +2,14 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
+import { crc32, deflateSync } from 'node:zlib'
 import { dirname, join, normalize } from 'node:path'
 import type { BuildMeta } from '../src/archive.ts'
 import { renderExplorer } from '../src/explorer.ts'
 import { loadPages } from '../src/pages.ts'
-import { anyOnSale, buyLinks, loadSiteConfig, onSaleUrl, pageShop, sectionShop, shopCta, shopFor, withCampaign, writeSocial, type SiteConfig } from '../src/social.ts'
+import { anyOnSale, buyLinks, imageSize, loadSiteConfig, onSaleUrl, pageMapRefs, pageShop, printLinks, sectionShop, shopCta, shopFor, withCampaign, writeSocial, type SiteConfig } from '../src/social.ts'
 import {
-  loadStaticPages, mapRefs, plainLinks, planStatic, sitemapXml, staticRoute, writeStatic,
+  loadStaticPages, mapRefs, plainLinks, planStatic, shareDoors, sitemapXml, staticRoute, writeStatic,
 } from '../src/static-pages.ts'
 import { makeStory } from '../src/story.ts'
 
@@ -97,6 +98,15 @@ test('links in a static page go to files, sections to anchors, maps to the explo
   assert.deepEqual(shopFor(CONFIG, 'town-time'), { url: 'https://shop.example/c/town', label: 'Buy a print ↗' })
   assert.equal(shopFor(CONFIG, 'lm-tower')?.url, 'https://shop.example/c/landmarks')
   assert.equal(shopFor(CONFIG, 'elsewhere'), undefined)
+  // A region's key covers every year; a <region>:<year> key only that year's view.
+  assert.equal(shopFor(CONFIG, 'town-time', 1925)?.url, 'https://shop.example/c/town')
+  const years = { shop: { label: 'L', url: 'https://s/', onSale: { 'rva-time:1925': 'https://s/p/1925', 'rva-time:2026': 'https://s/p/2026' } } }
+  assert.equal(shopFor(years, 'rva-time', 1925)?.url, 'https://s/p/1925')
+  assert.equal(shopFor(years, 'rva-time', 2026)?.url, 'https://s/p/2026')
+  assert.equal(shopFor(years, 'rva-time', 1886), undefined)
+  assert.equal(shopFor(years, 'rva-time'), undefined)
+  assert.equal(shopFor(years, 'rva-time', 19250), undefined)
+  assert.deepEqual(buyLinks(years, ['rva-time', 'rva-time:1925', 'rva-time:1886']).regions, { 'rva-time:1925': { url: 'https://s/p/1925', label: 'Buy a print ↗' } })
   assert.deepEqual(mapRefs('<a href="../index.html#cars:1925@1">a</a><a href="../index.html#lm-tower">b</a><a href="#below">c</a><a href="../index.html#/how-its-made">d</a>'), ['cars', 'lm-tower'])
 })
 
@@ -243,6 +253,8 @@ test('what is on sale: the longest key a region, set or page slug starts with', 
   // A page: its own slug first (the cutaway turns on by its slug alone), then its maps', then its section's.
   assert.deepEqual(pageShop('broad-street-cutaway', [], config), { url: 'https://s/p/cut', label: 'Buy a print ↗' })
   assert.equal(pageShop('broad-street', ['broad-street-lines'], config), undefined)
+  // A set's page whose own slug sells as a collection says so.
+  assert.deepEqual(pageShop('cars-set', ['cars'], { shop: { label: 'L', url: 'https://s/', onSale: { 'cars-set': 'https://s/collections/cars' } } }), { url: 'https://s/collections/cars', label: 'Prints of this set ↗' })
   assert.deepEqual(pageShop('streetcars', ['richmond-streetcars', 'richmond-streetcars-west'], config), { url: 'https://s/c/cars', label: 'Prints of these maps ↗' })
   assert.equal(pageShop('landmarks', ['richmond-streetcars', 'gwynns-island'], config), undefined)
   assert.deepEqual(pageShop('streetcars', [], config), { url: 'https://s/c/rva', label: 'Buy a print ↗' })
@@ -291,4 +303,176 @@ test('with nothing on sale, no page links to anything in the shop but its front 
   assert.match(index, /<a class="shop" href="https:\/\/shop.example\/"[^>]*><b>Shop prints ↗<\/b><span>Holiday shop<\/span><\/a>/)
   assert.match(index, /"buy":\{"regions":\{\},"sections":\[null,null\]\}/)
   assert.match(readFileSync(join(out, 'p', 'story.html'), 'utf8'), /<p class="acts"><a class="btn ghost" href="\.\.\/index\.html#\/story">Open this in the explorer<\/a><\/p>/)
+})
+
+test("each piece's print sits beside the link to its view, once, and only for what is in products", () => {
+  const products = {
+    'cars:1925': [{ url: 'https://s/products/map', label: 'Buy a print of the map alone ↗' }, { url: 'https://s/products/menu', label: 'Buy a print of the map with every stop ↗' }],
+    'cars:1925@1,2,6': [{ url: 'https://s/products/one', label: 'Buy a print of this stop ↗', design: 'cars-01-one' }],
+  }
+  const html = '<p><a href="#cars:1925">Open the map</a> to pan and zoom, or jump to a stop below.</p>\n' +
+    '<h3>1. One</h3>\n<p><a href="#cars:1925@1,2,6">See it on the map</a> · Sources: <a href="https://src/1">1</a></p>\n' +
+    '<p><a href="#cars:1925@3,4,6">See it on the map</a> · Sources: <a href="https://src/2">1</a></p>\n' +
+    '<p>Again: <a href="#cars:1925@1,2,6">here</a></p>\n'
+  const out = printLinks(html, products)
+  // In a list of links, right after the view's link; else closing its paragraph.
+  assert.ok(out.includes('<a href="#cars:1925@1,2,6">See it on the map</a> · <a class="buy" href="https://s/products/one" target="_blank" rel="noopener">Buy a print of this stop ↗</a> · Sources:'))
+  assert.ok(out.includes('or jump to a stop below. <a class="buy" href="https://s/products/map" target="_blank" rel="noopener">Buy a print of the map alone ↗</a> · <a class="buy" href="https://s/products/menu"'))
+  // A view not on sale, and a second link to one already given, get nothing.
+  assert.ok(out.includes('<p><a href="#cars:1925@3,4,6">See it on the map</a> · Sources: <a href="https://src/2">1</a></p>'))
+  assert.ok(out.includes('<p>Again: <a href="#cars:1925@1,2,6">here</a></p>'))
+  assert.equal((out.match(/class="buy"/g) ?? []).length, 3)
+  // The static page's links, tagged; nothing at all without products.
+  const st = printLinks(html.replace(/href="#/g, 'href="../index.html#'), products, '../index.html#', (u) => withCampaign(u, 'cars', 'https://s/'))
+  assert.ok(st.includes('href="https://s/products/one?utm_source=isoscape-explorer&amp;utm_medium=referral&amp;utm_campaign=cars"'))
+  assert.equal(printLinks(html, undefined), html)
+  assert.equal(printLinks(html, {}), html)
+  assert.deepEqual(pageMapRefs(html), ['cars'])
+  assert.deepEqual(pageMapRefs('<a href="../index.html#town-time:1925">x</a> <a href="#home">h</a>'), ['town-time'])
+})
+
+test("a set's page links to its collection in the explorer, its static page and its share page, and to each piece's print", async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'iso-cfg-'))
+  writeFileSync(join(dir, 'isoscape.config.json'), JSON.stringify({
+    ...CONFIG,
+    shop: { label: 'Holiday shop', url: 'https://shop.example/', onSale: { 'cars-set': 'https://shop.example/collections/cars' },
+      products: {
+        'cars:1925@1,2,6': [{ url: 'https://shop.example/products/stop-one', label: 'Buy a print of this stop ↗', design: 'cars-01-one' }],
+        'cars:1925@9,9,6': { url: 'javascript:alert(1)', label: 'bad' },
+        'cars:1925@8,8,6': [{ url: 'https://shop.example/products/x' }],
+      } },
+  }))
+  const config = await loadSiteConfig(undefined, dir, {})
+  // Only well-formed entries are kept.
+  assert.deepEqual(Object.keys(config.shop?.products ?? {}), ['cars:1925@1,2,6'])
+  const { out, pagesDir } = site()
+  writeFileSync(join(pagesDir, 'cars-set.md'), '---\ntitle: The cars\n---\n\n# The cars\n\n[Open the map](https://example.org/iso/#cars:1925) to pan.\n\n### 1. One\n\n[See it on the map](https://example.org/iso/#cars:1925@1,2,6) · Sources: [1](https://src.example/1)\n')
+  const pages = loadPages(pagesDir, config.siteUrl)
+  const plan = planStatic(BUILDS, pages.map((p) => p.slug), config.home)
+  await writeSocial(out, BUILDS, pages, config, undefined, (t) => ('build' in t ? plan.forBuild(t.build) : plan.forPage(t.page)))
+  await writeStatic(out, BUILDS, plan, config, { pagesDir })
+  const index = renderExplorer(BUILDS, pages, { shop: config.shop, home: config.home })
+  const tagged = (path: string) => `https://shop.example/${path}?utm_source=isoscape-explorer&amp;utm_medium=referral&amp;utm_campaign=cars-set`
+  const staticPage = readFileSync(join(out, 'p', 'cars-set.html'), 'utf8')
+  assert.equal(staticPage.split(`<a class="btn" href="${tagged('collections/cars')}">Prints of this set ↗</a>`).length - 1, 2)
+  assert.ok(staticPage.includes(`See it on the map</a> · <a class="buy" href="${tagged('products/stop-one')}" target="_blank" rel="noopener">Buy a print of this stop ↗</a> · Sources:`))
+  const share = readFileSync(join(out, 's', 'page-cars-set.html'), 'utf8')
+  assert.ok(share.includes(`<p><a href="${tagged('collections/cars')}">Prints of this set ↗</a></p>`))
+  assert.ok(index.includes('"shop":{"url":"https://shop.example/collections/cars","label":"Prints of this set ↗"}'))
+  assert.ok(index.includes('See it on the map\\u003c/a> · \\u003ca class=\\"buy\\" href=\\"https://shop.example/products/stop-one\\"'))
+})
+
+/** A real (solid) PNG of this size, so encoders can read it. */
+const realPng = (w: number, h: number): Buffer => {
+  const chunk = (type: string, data: Buffer) => {
+    const len = Buffer.alloc(4)
+    len.writeUInt32BE(data.length)
+    const body = Buffer.concat([Buffer.from(type, 'latin1'), data])
+    const crc = Buffer.alloc(4)
+    crc.writeUInt32BE(crc32(body))
+    return Buffer.concat([len, body, crc])
+  }
+  const ihdr = Buffer.alloc(13)
+  ihdr.writeUInt32BE(w, 0)
+  ihdr.writeUInt32BE(h, 4)
+  ihdr.set([8, 2, 0, 0, 0], 8)
+  const row = Buffer.concat([Buffer.from([0]), Buffer.alloc(w * 3, 0xd0)])
+  return Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), chunk('IHDR', ihdr), chunk('IDAT', deflateSync(Buffer.concat(Array(h).fill(row)))), chunk('IEND', Buffer.alloc(0))])
+}
+
+/** The preview tags of a page's head: property or name → content (first wins), and the canonical link. */
+const previewTags = (html: string): Record<string, string> => {
+  const head = html.split('</head>')[0]
+  const out: Record<string, string> = {}
+  for (const m of head.matchAll(/<meta (?:property|name)="([^"]+)" content="([^"]*)">/g)) out[m[1]] ??= m[2].replace(/&amp;/g, '&')
+  const c = /<link rel="canonical" href="([^"]+)">/.exec(head)
+  if (c) out.canonical = c[1]
+  return out
+}
+
+test('every page carries a whole preview: absolute URLs, an image in the output, its true size, alt text', async () => {
+  const { out, pagesDir } = site()
+  const png = realPng(1200, 630)
+  for (const b of BUILDS) writeFileSync(join(out, 'builds', b.id, 'social.png'), png)
+  // A share page left from a build that is gone, pointing at an image that is gone too.
+  mkdirSync(join(out, 's'), { recursive: true })
+  writeFileSync(join(out, 's', '20250101-000000-lm-tower.html'), '<meta property="og:image" content="https://example.org/iso/builds/20250101-000000-lm-tower/social.png">')
+  const pages = loadPages(pagesDir, CONFIG.siteUrl)
+  const plan = planStatic(BUILDS, pages.map((p) => p.slug), CONFIG.home)
+  const site_ = await writeSocial(out, BUILDS, pages, CONFIG, undefined, (t) => ('build' in t ? plan.forBuild(t.build) : plan.forPage(t.page)), shareDoors(plan, CONFIG.home))
+  await writeStatic(out, BUILDS, plan, CONFIG, { pagesDir })
+  writeFileSync(join(out, 'index.html'), renderExplorer(BUILDS, pages, { ...site_, ...CONFIG, plain: plainLinks(plan, pages, CONFIG.home), sitemap: true }))
+  assert.equal(site_.stale, 1)
+
+  const files = ['index.html', ...['s', 'p', 'm'].flatMap((d) => readdirSync(join(out, d)).filter((f) => f.endsWith('.html')).map((f) => `${d}/${f}`))]
+  assert.ok(files.length > 15)
+  for (const f of files) {
+    const t = previewTags(readFileSync(join(out, f), 'utf8'))
+    for (const k of ['og:title', 'og:description', 'og:url', 'og:type', 'og:site_name', 'og:image', 'og:image:width', 'og:image:height', 'og:image:alt', 'twitter:card', 'twitter:image', 'canonical']) {
+      assert.ok(t[k], `${f}: no ${k}`)
+    }
+    for (const k of ['og:url', 'og:image', 'twitter:image', 'canonical']) assert.ok(t[k].startsWith(CONFIG.siteUrl!), `${f}: ${k} ${t[k]} is not absolute`)
+    assert.equal(t['twitter:card'], 'summary_large_image', f)
+    const path = join(out, t['og:image'].slice(CONFIG.siteUrl!.length))
+    assert.ok(existsSync(path), `${f}: og:image ${t['og:image']} is not in the output`)
+    const size = imageSize(readFileSync(path))
+    assert.deepEqual([t['og:image:width'], t['og:image:height']], [String(size?.width), String(size?.height)], f)
+    assert.equal(t['og:image:type'], t['og:image'].endsWith('.jpg') ? 'image/jpeg' : 'image/png', f)
+  }
+
+  // Each map and year has a share page that outlives its builds, named as its static page is.
+  const door = readFileSync(join(out, 's', 'lm-tower.html'), 'utf8')
+  assert.match(door, /location\.replace\('\.\.\/index\.html' \+ \(location\.hash\.length > 1 \? location\.hash : "#lm-tower"\)\)/)
+  assert.match(door, /<link rel="canonical" href="https:\/\/example.org\/iso\/m\/lm-tower.html">/)
+  assert.match(door, /<meta property="og:url" content="https:\/\/example.org\/iso\/s\/lm-tower.html">/)
+  assert.match(readFileSync(join(out, 's', 'town-time-1888.html'), 'utf8'), /"#town-time:1888"/)
+  assert.match(readFileSync(join(out, 's', 'town-time.html'), 'utf8'), /<title>The town through time · isoscape<\/title>/)
+  assert.deepEqual(site_.shares, { maps: { 'cars:1925': 'cars', 'lm-tower': 'lm-tower', 'town-time': 'town-time', 'town-time:1888': 'town-time-1888', 'town-time:1925': 'town-time-1925' }, pages: ['how-its-made', 'story'] })
+  // The gone build's share page now gives its region's card, and still passes the fragment on.
+  const old = readFileSync(join(out, 's', '20250101-000000-lm-tower.html'), 'utf8')
+  assert.match(old, /og:url" content="https:\/\/example.org\/iso\/s\/20250101-000000-lm-tower.html"/)
+  assert.match(old, /location\.hash\.length > 1 \? location\.hash : "#lm-tower"/)
+  // With an encoder installed, previews are JPEGs beside the PNGs.
+  if (existsSync(join(out, 'builds', 'l2', 'social.jpg'))) assert.match(door, /og:image" content="https:\/\/example.org\/iso\/builds\/l2\/social.jpg"/)
+})
+
+test('an unlisted page is reachable but named nowhere, and a FAQ page carries FAQPage data', async () => {
+  const { out, pagesDir } = site()
+  writeFileSync(join(pagesDir, 'faq.md'), '---\ntitle: Questions\nunlisted: true\nschema: FAQPage\nsummary: Short answers.\n---\n\n# Questions\n\n*A note.*\n\n## About the maps\n\n### Is it <b>drawn</b> by a model?\n\nNo. The code draws it from `data` & [rules](#about-the-maps):\n\n- one;\n- two.\n\n![A plan](plan.svg)\n\n### Not a question\n\nSkipped.\n\n### Where does it come from?\n\nOpenStreetMap.\n')
+  const pages = loadPages(pagesDir, CONFIG.siteUrl)
+  const faq = pages.find((p) => p.slug === 'faq')
+  assert.equal(faq?.unlisted, true)
+  assert.equal(faq?.schema, 'FAQPage')
+  assert.equal(pages.find((p) => p.slug === 'story')?.unlisted, undefined)
+  const plan = planStatic(BUILDS, pages.map((p) => p.slug), CONFIG.home)
+  await writeStatic(out, BUILDS, plan, CONFIG, { pagesDir })
+
+  // Reachable at its address, kept out of search, and its questions and answers as data.
+  const html = readFileSync(join(out, 'p', 'faq.html'), 'utf8')
+  assert.match(html, /<meta name="robots" content="noindex">/)
+  assert.match(html, /<h3 id="is-it-bdrawnb-by-a-model">/)
+  const ld = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)?.[1] ?? 'null')
+  assert.equal(ld['@type'], 'FAQPage')
+  assert.equal(ld.name, 'Questions')
+  assert.equal(ld.author.name, 'Chris Busse')
+  assert.deepEqual(ld.mainEntity.map((q: { name: string }) => q.name), ['Is it <b>drawn</b> by a model?', 'Where does it come from?'])
+  assert.equal(ld.mainEntity[0].acceptedAnswer.text, 'No. The code draws it from data & rules: one; two.')
+  assert.equal(ld.mainEntity[1]['@type'], 'Question')
+  assert.equal(ld.mainEntity[1].acceptedAnswer['@type'], 'Answer')
+
+  // Named nowhere: not in another page's footer, the sitemap, or the explorer's nav and plain list.
+  const story = readFileSync(join(out, 'p', 'story.html'), 'utf8')
+  assert.doesNotMatch(story, /faq\.html/)
+  assert.doesNotMatch(story, /noindex/)
+  assert.doesNotMatch(readFileSync(join(out, 'sitemap.xml'), 'utf8'), /faq/)
+  assert.ok(!plainLinks(plan, pages, CONFIG.home).some((g) => g.links.some((l) => l.href.includes('faq'))))
+  const explorer = renderExplorer(BUILDS, pages, { plain: plainLinks(plan, pages, CONFIG.home) })
+  assert.match(explorer, /"slug":"faq","title":"Questions","summary":"Short answers\.","file":"pages\/faq\.md","unlisted":true/)
+  assert.match(explorer, /const listed = pages\.filter\(\(p\) => !p\.unlisted\)/)
+  assert.doesNotMatch(explorer.replace(/<script\b[\s\S]*?<\/script>/g, ''), /faq/)
+
+  // A page without the schema stays an Article.
+  const art = JSON.parse(story.match(/<script type="application\/ld\+json">(.*?)<\/script>/)?.[1] ?? 'null')
+  assert.equal(art['@type'], 'Article')
+  assert.throws(() => loadPages(((d) => (writeFileSync(join(d, 'x.md'), '---\nschema: Recipe\n---\n# X\n'), d))(mkdtempSync(join(tmpdir(), 'iso-pages-')))), /schema "Recipe"/)
 })

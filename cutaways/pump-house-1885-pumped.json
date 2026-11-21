@@ -1,0 +1,614 @@
+{
+ "about": "Variant of the Pump House sheet (cutaways/pump-house-1885.json) that traces the water pumped beside the water that drives: both ways in the cutaway, and a third cut, through a pump, in place of the long section. Callout text is a working draft, written with Claude, for the artist to edit.",
+ "design": "pump-house-cutaway",
+ "region": "pump-house-cutaway-pumped",
+ "year": 1885,
+ "title": "The New Pump-House, Richmond, about 1885",
+ "subtitle": "Canal water turns the wheels; the wheels pump drinking water up to the city’s reservoir",
+ "isoView": [
+  -449,
+  -268,
+  809,
+  400
+ ],
+ "groups": [
+  {
+   "title": "The water that drives",
+   "callouts": [
+    {
+     "n": 1,
+     "title": "The forebay",
+     "text": "Dammed at the east end. It fed both the wheels and the pumps.",
+     "iso": {
+      "part": "history:ph-s-forebay-2",
+      "dx": -0.1,
+      "dy": -0.25,
+      "badge": [
+       0,
+       0
+      ]
+     },
+     "cross": {
+      "s": 30,
+      "elevation": 28.0,
+      "badge": [
+       0,
+       0
+      ]
+     },
+     "pump": {
+      "s": 30,
+      "elevation": 28.4,
+      "badge": [
+       0,
+       0
+      ]
+     }
+    },
+    {
+     "n": 2,
+     "title": "Sluice gates",
+     "text": "A 6-ft gate at the head of each penstock, worked by a hydraulic cylinder.",
+     "iso": {
+      "part": "history:ph-x-gate-2",
+      "badge": [
+       -60,
+       -160
+      ]
+     },
+     "cross": {
+      "part": "history:ph-x-gate-cyl-1",
+      "badge": [
+       120,
+       -140
+      ]
+     }
+    },
+    {
+     "n": 3,
+     "title": "Penstocks",
+     "text": "Iron pipes 5 ft across, falling under a 20-ft head into the center of each wheel.",
+     "iso": {
+      "part": "history:ph-c-penstock-1",
+      "badge": [
+       -120,
+       -140
+      ]
+     },
+     "cross": {
+      "part": "history:ph-c-penstock-1",
+      "badge": [
+       220,
+       -30
+      ]
+     }
+    },
+    {
+     "n": 4,
+     "title": "Three turbine wheels",
+     "text": "Partial outward-flow wheels of the Fourneyron type, all iron, about 23 ft across.",
+     "iso": {
+      "part": "history:ph-c-wheel-1-rim",
+      "badge": [
+       60,
+       150
+      ]
+     },
+     "cross": {
+      "part": "history:ph-c-wheel-1-rim",
+      "dx": -0.3,
+      "dy": -0.3,
+      "badge": [
+       -150,
+       -120
+      ]
+     }
+    },
+    {
+     "n": 5,
+     "title": "Diffuser",
+     "text": "A cast-iron diffuser under each wheel eased the spent water into the tailrace.",
+     "confidence": "drawn",
+     "cross": {
+      "part": "history:ph-c-diffuser-1",
+      "badge": [
+       -150,
+       120
+      ]
+     }
+    },
+    {
+     "n": 6,
+     "title": "Tailraces",
+     "text": "Vaulted tunnels under the south walkway to the canal below the locks.",
+     "iso": {
+      "part": "history:ph-x-tailrace-vault-1",
+      "dx": 0.27,
+      "dy": 0.46,
+      "badge": [
+       -80,
+       150
+      ]
+     },
+     "cross": {
+      "part": "history:ph-x-tailwater-1",
+      "dx": -0.2,
+      "badge": [
+       60,
+       -150
+      ]
+     },
+     "confidence": "approximate"
+    },
+    {
+     "n": 7,
+     "title": "The canal below the locks",
+     "text": "20 ft below the forebay, on to the mills downtown.",
+     "iso": {
+      "part": "history:ph-s-canal-wall-3",
+      "dy": 0.5,
+      "badge": [
+       220,
+       40
+      ]
+     },
+     "cross": {
+      "s": -21,
+      "elevation": 23.0,
+      "badge": [
+       0,
+       0
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "title": "The water that’s pumped",
+   "callouts": [
+    {
+     "n": 8,
+     "title": "The suction",
+     "text": "One 36-in pipe along the forebay wall drew for all nine pumps, from an intake at the west end.",
+     "iso": {
+      "part": "history:ph-c-suction",
+      "dx": -0.35,
+      "badge": [
+       -120,
+       -130
+      ]
+     },
+     "pump": {
+      "part": "history:ph-c-suction",
+      "badge": [
+       150,
+       -150
+      ]
+     }
+    },
+    {
+     "n": 9,
+     "title": "Nine plunger pumps",
+     "text": "Three to a wheel, each a 14-in plunger with a 6-ft stroke and two valves.",
+     "iso": {
+      "part": "history:ph-c-pump-2-1",
+      "badge": [
+       130,
+       120
+      ]
+     },
+     "pump": {
+      "part": "history:ph-c-pump-1-1",
+      "badge": [
+       -230,
+       120
+      ]
+     }
+    },
+    {
+     "n": 10,
+     "title": "Air vessels",
+     "text": "One over each pump’s discharge, to steady the flow in the main.",
+     "confidence": "drawn",
+     "pump": {
+      "part": "history:ph-c-airvessel-1-1",
+      "dy": -0.3,
+      "badge": [
+       60,
+       -200
+      ]
+     }
+    },
+    {
+     "n": 11,
+     "title": "Up to the reservoir",
+     "text": "A 30-in main under the forebay and 3,600 ft up to the New Reservoir, at a 175-ft head: 12 million gallons a day.",
+     "iso": {
+      "part": "history:ph-c-main",
+      "dx": 0.3,
+      "badge": [
+       120,
+       140
+      ]
+     },
+     "pump": {
+      "part": "history:ph-x-main-out",
+      "dx": 0.3,
+      "badge": [
+       -220,
+       40
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "title": "The machines",
+   "callouts": [
+    {
+     "n": 12,
+     "title": "Shafts, cranks and rods",
+     "text": "A 12-in shaft per wheel, three cranks 120° apart, 16-ft rods up to crossheads.",
+     "iso": {
+      "part": "history:ph-c-rod-1-1",
+      "badge": [
+       -140,
+       -120
+      ]
+     },
+     "pump": {
+      "part": "history:ph-c-rod-1-1",
+      "badge": [
+       -230,
+       -40
+      ]
+     }
+    },
+    {
+     "n": 13,
+     "title": "Lattice girders",
+     "text": "Iron girders across the room held the crosshead guides.",
+     "iso": {
+      "part": "history:ph-c-girder-0-1-3",
+      "badge": [
+       -140,
+       -80
+      ]
+     },
+     "cross": {
+      "part": "history:ph-c-girder-0-1-2",
+      "badge": [
+       0,
+       -150
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "title": "The building",
+   "callouts": [
+    {
+     "n": 14,
+     "title": "The pavilion",
+     "text": "An open-air dance floor; glazed in 1899 to keep rain off the machines.",
+     "iso": {
+      "part": "history:ph-c-pav-floor-n-1",
+      "badge": [
+       -100,
+       -120
+      ]
+     }
+    },
+    {
+     "n": 15,
+     "title": "The wings",
+     "text": "Granite, slate roofs and lancet windows.",
+     "iso": {
+      "part": "history:ph-w-e-roof",
+      "badge": [
+       150,
+       -120
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "key": [
+  [
+   "drawn",
+   "drawn from a plan, a section or a survey"
+  ],
+  [
+   "written",
+   "from written accounts or photographs"
+  ],
+  [
+   "approximate",
+   "approximate: place or size inferred"
+  ]
+ ],
+ "marksNote": "The same marks stand by each part in the two sections.",
+ "travelerKey": "Visitors to scale, 1.75 m (5 ft 9 in), for size only. Teal: the water that drives the wheels. Blue: the water pumped.",
+ "sources": "Sources: The American Engineer, Dec. 26, 1884, pp. 260–261 (HathiTrust); National Register nomination, New Pump-House, 2002; HAER VA-34 (Library of Congress); Pump House Park schematic design study, 2019 (levels); C. E. Bolling, AWWA Proceedings, 1900; OpenStreetMap; USGS 3DEP.",
+ "notes": "Machines scaled from the 1884 engravings by their dimensions. Where each gang stood, the tailraces and the roof’s pitch are inferred. Roof lifted, middle of the floor taken up. Canal banks are today’s.",
+ "credit": "Drawn with isoscape, built with Claude  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Machinery after The American Engineer, 1884",
+ "column": {
+  "head": 150,
+  "callout": 40,
+  "group": 20,
+  "keyHead": 122,
+  "keyRow": 92,
+  "traveler": 10,
+  "notes": 22,
+  "between": 34
+ },
+ "columnEnd": 6520,
+ "blockMinPt": 6,
+ "inset": {
+  "context": "cutaways/pump-house-context.json",
+  "box": [
+   330,
+   930,
+   1850
+  ],
+  "ring": 9,
+  "title": "Where the water went, and why",
+  "caption": "Plan, north up. Today’s river and canal lines (OpenStreetMap), the canal’s gap at Oregon Hill closed. The mains’ lines are approximate.",
+  "why": [
+   "In 1876 Richmond filled its New Reservoir on a plateau two-thirds of a mile from the river. By 1880 the city drew 5.85 million gallons a day and needed more pumps.",
+   "City engineer Wilfred Cutshaw put this pump house on the canal opposite the reservoir, where the canal’s 20-ft fall could work the pumps with water power.",
+   "The pumps forced canal water through a 30-in main to the reservoir, against a head of 175 ft. From there it ran down to the city by gravity, through a 30-in main 7,100 ft long.",
+   "The water that turned the wheels went on down the canal to the mills and works downtown."
+  ],
+  "whySource": "C. E. Bolling, AWWA Proceedings, 1900; The American Engineer, 1884.",
+  "scaleFeet": 2000,
+  "lines": [
+   {
+    "kind": "canal",
+    "coords": [
+     [
+      -77.4883,
+      37.5359
+     ],
+     [
+      -77.487,
+      37.53585
+     ],
+     [
+      -77.4856,
+      37.5358
+     ]
+    ],
+    "width": 22
+   },
+   {
+    "kind": "canal",
+    "coords": [
+     [
+      -77.4533,
+      37.5346
+     ],
+     [
+      -77.449,
+      37.5345
+     ],
+     [
+      -77.4453,
+      37.5343
+     ]
+    ],
+    "width": 30
+   },
+   {
+    "coords": [
+     [
+      -77.48585,
+      37.5367
+     ],
+     [
+      -77.4855,
+      37.5378
+     ],
+     [
+      -77.4797,
+      37.5447
+     ]
+    ],
+    "approximate": true
+   },
+   {
+    "coords": [
+     [
+      -77.4778,
+      37.5455
+     ],
+     [
+      -77.47,
+      37.5452
+     ],
+     [
+      -77.4545,
+      37.544
+     ]
+    ],
+    "approximate": true
+   }
+  ],
+  "arrows": [
+   {
+    "from": [
+     -77.4948,
+     37.5425
+    ],
+    "to": [
+     -77.4912,
+     37.5397
+    ]
+   },
+   {
+    "from": [
+     -77.4745,
+     37.5313
+    ],
+    "to": [
+     -77.4685,
+     37.5304
+    ]
+   },
+   {
+    "from": [
+     -77.4445,
+     37.5352
+    ],
+    "to": [
+     -77.439,
+     37.5341
+    ]
+   },
+   {
+    "from": [
+     -77.4836,
+     37.5408
+    ],
+    "to": [
+     -77.4816,
+     37.543
+    ],
+    "kind": "main"
+   },
+   {
+    "from": [
+     -77.456,
+     37.5441
+    ],
+    "to": [
+     -77.4505,
+     37.5437
+    ],
+    "kind": "main"
+   }
+  ],
+  "labels": [
+   {
+    "at": [
+     -77.47,
+     37.5278
+    ],
+    "text": "James River",
+    "italic": true,
+    "water": true,
+    "size": 1.3,
+    "anchor": "middle"
+   },
+   {
+    "at": [
+     -77.4946,
+     37.548
+    ],
+    "text": "canal from the James,\nabove Bosher’s Dam",
+    "italic": true,
+    "size": 0.81
+   },
+   {
+    "at": [
+     -77.485,
+     37.5352
+    ],
+    "text": "The New Pump-House",
+    "bold": true,
+    "size": 0.98,
+    "anchor": "start"
+   },
+   {
+    "at": [
+     -77.4772,
+     37.5468
+    ],
+    "text": "New Reservoir, 1876",
+    "bold": true,
+    "size": 0.98,
+    "anchor": "start"
+   },
+   {
+    "at": [
+     -77.48,
+     37.54
+    ],
+    "text": "30-in main,\n3,600 ft, 175-ft head",
+    "size": 0.81
+   },
+   {
+    "at": [
+     -77.4735,
+     37.5428
+    ],
+    "text": "30-in main to the city, 7,100 ft",
+    "size": 0.81
+   },
+   {
+    "at": [
+     -77.449,
+     37.5452
+    ],
+    "text": "THE CITY",
+    "bold": true,
+    "size": 0.98
+   },
+   {
+    "at": [
+     -77.4343,
+     37.5405
+    ],
+    "text": "Capitol",
+    "size": 0.81,
+    "anchor": "end"
+   },
+   {
+    "at": [
+     -77.46,
+     37.539
+    ],
+    "text": "Hollywood\nCemetery",
+    "italic": true,
+    "size": 0.72,
+    "anchor": "middle"
+   },
+   {
+    "at": [
+     -77.464,
+     37.5323
+    ],
+    "text": "canal below the locks, to the\nmills and works downtown",
+    "italic": true,
+    "size": 0.81
+   }
+  ],
+  "water": true
+ },
+ "sections": [
+  {
+   "region": "pump-house-cutaway-across-water",
+   "caption": "Through a wheel, looking west: the water that drives",
+   "as": "cross"
+  },
+  {
+   "region": "pump-house-cutaway-pump",
+   "caption": "Through a pump, looking west: the water that’s pumped",
+   "as": "pump"
+  }
+ ],
+ "page": {
+  "slug": "pump-house-cutaway",
+  "title": "The New Pump-House, Richmond, about 1885: the cutaway",
+  "order": 49,
+  "summary": "Richmond's New Pump-House cut open to its machine room as it worked about 1885: canal water turning three wheels, and nine pumps sending drinking water up to the reservoir, with how sure each part is.",
+  "intro": "This drawing cuts Richmond's New Pump-House open to its machine room as it worked about 1885. Canal water from the forebay fell through three turbine wheels, and each wheel drove three plunger pumps that forced drinking water up to the New Reservoir. The roof is lifted and the middle of the pavilion floor is taken up, so the wheels, shafts and pumps show from above. Beneath it, two flat cuts across the building, looking west, follow the water: through a wheel, in teal, the water that drives the wheels; through a pump, in blue, the water pumped. A small map at the top left shows where the water went.",
+  "image_alt": "The cutaway sheet: the pump house open to its machine room above, a cut through a wheel and a cut through a pump below, a small map at the top left, and the numbered callouts beside them",
+  "key_intro": "Every part of the drawing says how it is known, and each numbered badge shows it:",
+  "how": "The pump house is a model made of parts. Its outline is OpenStreetMap's, and its floor levels come from the 2019 schematic design study for Pump House Park. The roof's eaves and ridges are estimated from the Historic American Engineering Record's photographs (HAER VA-34), so the roof's pitch is inferred. The machines are scaled by their stated dimensions from the engravings and text in The American Engineer of December 26, 1884: the 5-ft penstocks, the wheels, the 12-in shafts with three cranks 120° apart, the 16-ft rods, the nine pumps and their air vessels. Where each gang stood along the room is inferred, the gangs set evenly along the central block, and so are the tailraces, one vaulted tunnel to each wheel. The banks and beds of the forebay and of the canal below the locks are today's lidar (USGS 3DEP), with the water set at levels inferred for 1885. The model is cut along one vertical plane down the length of the machine room: the south side is taken away down to 1.5 m above the machine-room floor, the roof is lifted and the middle of the pavilion floor taken up. The two flat sections are vertical cuts across the building, through the middle wheel and through one of its pumps, drawn square and level, with the water's ways drawn as bands of water. The small map is drawn from a cached OpenStreetMap extract, with the mains' lines approximate. Chris Busse drew it with isoscape, the open-source tool he built with Claude.",
+  "drafted": "This page was drafted with Claude, Anthropic's AI (Claude Opus 5.5), from the sheet and its sources. More on how we work in the [artist statement](artist-statement.md).",
+  "traveler_note": "The small red figures are visitors on the pavilion floor, drawn to scale at 1.75 m (5 ft 9 in) tall; their height is a convention for size only. Teal marks the water that drives the wheels, and blue the water pumped."
+ }
+}

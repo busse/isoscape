@@ -35,17 +35,31 @@
  * The view is left out while it is the fitted view. Anything malformed falls back to fit. The
  * hash follows panning and zooming (debounced, with replaceState, so Back is not flooded);
  * choosing a build, comparing or changing tab still makes a history entry. The Link button
- * (or L) copies the URL of the build's (or page's) share page, `s/<id>.html` or
- * `s/page-<slug>.html`, with the current fragment: link previews then show that build, and
- * the share page passes the fragment on, so the link still opens this exact view (see
- * social.ts). Under the site URL when one is set, else beside this file.
+ * (or L; "Copy link" on a page) copies the URL of what is shown's share page (see social.ts):
+ * `s/<name>.html` for a map or a year (with its lasting name in the fragment in place of the
+ * build id), `s/page-<slug>.html` for a page, `s/<id>.html` for an older build, with the rest
+ * of the fragment: link previews then show that map or page, and the share page passes the
+ * fragment on, so the link still opens this exact view. Under the site URL when one is set,
+ * else beside this file. Served over http(s), the address bar shows the share page's path with
+ * the route's fragment (`<base href="./">` keeps relative URLs resolving here), so a copied
+ * address previews too; analytics still report this file's own path.
  */
 
 import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
-import { buyLinks, escAttr, pageShop, shopCta, siteTags, type SiteCard } from './social.ts'
+import { buyLinks, escAttr, pageMapRefs, pageShop, printLinks, shopCta, siteTags, type SiteCard } from './social.ts'
+import { FIGURE_CSS, LIGHTBOX_CSS, lightbox } from './lightbox.ts'
+import { COMPARE_CSS, compareSliders, splitAt, splitOf } from './compare.ts'
 import { makeStory } from './story.ts'
+
+/**
+ * The address of this document with its fragment replaced by `hash`. The explorer routes with
+ * the fragment, and history must be given this absolute form: under `<base href="./">` a bare
+ * `#/page` resolves against the folder, and from file:// that is another document, which
+ * pushState refuses (every in-page link and section link then did nothing).
+ */
+export const fragmentUrl = (href: string, hash: string): string => href.replace(/#.*$/, '') + hash
 
 // The isoscape mark (one isometric building), for the browser tab.
 export const MARK = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><g stroke="#2c2b33" stroke-width="3" stroke-linejoin="round">' +
@@ -66,7 +80,8 @@ export const THEME_CSS = `:root {
 `
 
 /** The reading view's typography, shared with the static content pages. */
-export const PROSE_CSS = `.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; }
+export const PROSE_CSS = `.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; overflow-wrap: anywhere; }
+/* A long URL, word or code span wraps inside the column instead of widening it (on a phone that made the page scroll sideways). Tables keep whole words and scroll in their own wrapper; code blocks scroll in their own box. */
 .prose h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 18px; font-weight: 650; }
 .prose h2 { font-size: 20px; letter-spacing: -.01em; margin: 2.2em 0 .5em; padding-top: .6em; border-top: 1px solid var(--line); font-weight: 650; }
 .prose h3 { font-size: 16px; margin: 1.6em 0 .4em; }
@@ -78,15 +93,16 @@ export const PROSE_CSS = `.prose { font-size: 15.5px; line-height: 1.65; color: 
 .prose li::marker { color: var(--faint); }
 .prose a { color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); text-underline-offset: 2px; }
 .prose a:hover { text-decoration-color: var(--accent); }
+.prose a.buy { font-weight: 600; white-space: nowrap; }
 .prose code { font: .86em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: .05em .25em; border-radius: 4px; }
-.prose pre { max-height: none; font-size: 12.5px; }
+.prose pre { max-height: none; font-size: 12.5px; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
 .prose pre code { background: none; padding: 0; font-size: inherit; }
 .prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 0 6px 6px 0; }
 .prose blockquote p:last-child { margin-bottom: 0; }
 .prose img { display: block; max-width: 100%; height: auto; margin: 1.4em auto; }
 .prose hr { border: none; border-top: 1px solid var(--line); margin: 2em 0; }
-.prose .table { overflow-x: auto; }
-.prose table { font-size: 13.5px; font-variant-numeric: normal; }
+.prose .table { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+.prose table { font-size: 13.5px; font-variant-numeric: normal; overflow-wrap: normal; }
 .prose th, .prose td { text-align: left; white-space: normal; vertical-align: top; padding: 6px 10px 6px 0; color: var(--ink); }
 .prose th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); border-bottom: 1.5px solid var(--line); }
 .prose td:first-child { color: var(--ink); font-weight: 500; }
@@ -144,11 +160,6 @@ const homeCard = (site: SiteCard) => {
 }
 
 /** The regions a page, as the explorer shows it, links into (`#<region>…`), in order of first mention. */
-const explorerMapRefs = (html: string): string[] => {
-  const out: string[] = []
-  for (const m of html.matchAll(/href="#([a-z0-9][a-z0-9-]*)(?=[:@"])/g)) if (m[1] !== 'home' && !out.includes(m[1])) out.push(m[1])
-  return out
-}
 
 const escHtml = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string)
 const json = (v: unknown) => JSON.stringify(v).replace(/</g, '\\u003c')
@@ -158,6 +169,7 @@ export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Pag
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="./">
 <title>isoscape explorer</title>
 ${site.analytics ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${escAttr(site.analytics.ga)}"></script>
 <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)} gtag('js', new Date()); gtag('config', '${escAttr(site.analytics.ga)}', { send_page_view: false })</script>
@@ -229,9 +241,7 @@ main { display: grid; grid-template-rows: 1fr auto; min-height: 0; min-width: 0;
 #stage.dragging { cursor: grabbing; }
 #stage img { position: absolute; max-width: none; pointer-events: none; image-rendering: auto; }
 #clipB { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-#divider { position: absolute; top: 0; bottom: 0; width: 2px; margin-left: -1px; background: var(--accent); cursor: ew-resize; display: none; }
-#divider::after { content: "A │ B"; position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 10px; background: var(--accent); color: var(--panel); }
-#divider::before { content: ""; position: absolute; inset: 0 -8px; }
+#divider { display: none; }
 #empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--dim); text-align: center; padding: 40px; }
 #toolbar { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; align-items: center; }
 #toolbar button, #toolbar select { border: 1px solid var(--line); background: var(--panel); border-radius: 6px; padding: 4px 9px; cursor: pointer; font: inherit; color: var(--ink); }
@@ -243,8 +253,8 @@ main { display: grid; grid-template-rows: 1fr auto; min-height: 0; min-width: 0;
 #info { border-top: 1px solid var(--line); background: var(--panel); max-height: 38vh; overflow: auto; }
 #info.closed .body { display: none; }
 #info .bar { display: flex; align-items: center; gap: 10px; padding: 8px 16px; position: sticky; top: 0; background: var(--panel); border-bottom: 1px solid var(--line); }
-#info .bar h1 { font-size: 14px; margin: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#info .bar .links { margin-left: auto; display: flex; gap: 12px; white-space: nowrap; }
+#info .bar h1 { font-size: 14px; margin: 0; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 10em; }
+#info .bar .links { margin-left: auto; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 12px; white-space: nowrap; min-width: 0; }
 #info .bar a { color: var(--accent); text-decoration: none; font-size: 12px; }
 #info .bar a.buy { background: var(--accent); color: var(--panel); padding: 3px 11px; border-radius: 12px; font-weight: 600; }
 #info .bar button { border: none; background: none; cursor: pointer; color: var(--dim); }
@@ -290,11 +300,10 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
   #info.made { max-height: 62vh; }
   #info .bar { flex-wrap: wrap; row-gap: 4px; padding: 8px 12px; }
   #info .bar h1 { flex: 1 1 0; min-width: 0; }
-  #info .bar .links { margin-left: 0; width: 100%; flex-wrap: wrap; gap: 6px 12px; }
+  #info .bar .links { margin-left: 0; width: 100%; flex-wrap: wrap; justify-content: flex-start; gap: 6px 12px; }
   #info .tabs { margin-left: 0; }
   #info .body, #info .body.stories { grid-template-columns: 1fr; gap: 16px; padding: 12px 14px 16px; }
   #home, #page { flex: 1; min-height: 0; }
-  .doc { padding: 18px 16px 60px; }
   .prose h1 { font-size: 25px; }
   #nav { position: fixed; top: 0; bottom: 0; left: 0; width: min(86vw, 320px); z-index: 20; transform: translateX(-100%); transition: transform .2s ease; }
   body.navopen #nav { transform: none; box-shadow: 0 0 28px rgba(0, 0, 0, .3); }
@@ -307,7 +316,10 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
   .hm .banner .btn { margin-left: 0; }
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .card b { font-size: 12px; }
-  .hm section.sec header .btn { margin-left: 0; }
+  .hm section.sec header .btn { margin-left: 0; white-space: normal; }
+  /* A guard: nothing in a page should be wider than the phone (the rules above see to that), but if
+     something ever is, it is cut off rather than turning the page into a sideways scroller. */
+  #page, #home { overflow-x: hidden; }
 }
 
 /* ---- front page ------------------------------------------------------------------ */
@@ -367,17 +379,27 @@ body.reading #page { display: block; }
 body.reading main { grid-template-rows: 1fr; }
 .doc { display: grid; grid-template-columns: minmax(0, 70ch) 220px; gap: 56px; justify-content: center; padding: 28px 40px 80px; }
 @media (max-width: 1180px) { .doc { grid-template-columns: minmax(0, 70ch); } #toc { display: none; } }
+@media (max-width: 760px) { .doc { padding: 18px 16px 60px; } }
 .doc .back { display: inline-block; margin-bottom: 18px; font-size: 12.5px; color: var(--accent); text-decoration: none; border: 1px solid var(--line); border-radius: 14px; padding: 3px 11px; background: var(--bg); cursor: pointer; }
 .doc .back:hover { border-color: var(--accent); }
-${PROSE_CSS}#toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
+.doc #pageLink { margin-left: 6px; }
+.doc #pageLink.on { border-color: var(--accent); background: var(--accent-soft); }
+${PROSE_CSS}${FIGURE_CSS}${LIGHTBOX_CSS}${COMPARE_CSS}/* Wide figures run past the text column, over the margin and the contents list beside it. */
+#page { container-type: inline-size; }
+.doc .prose figure.fig.wide { position: relative; z-index: 2; margin-left: calc(-1 * min(var(--bleed), 200px)); width: calc(100% + 276px + min(var(--bleed), 200px)); --bleed: calc((100cqw - 100% - 276px) / 2 - 24px); }
+.doc .prose figure.fig.wide img { background: var(--panel); }
+@media (max-width: 1180px) { .doc .prose figure.fig.wide { --bleed: max(0px, (100cqw - 100%) / 2 - 24px); margin-left: calc(-1 * var(--bleed)); width: calc(100% + 2 * var(--bleed)); } }
+#toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
+#toc { transition: opacity .15s; }
+#toc.under { opacity: 0; pointer-events: none; }
 #toc h3 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 6px 0 8px; }
 #toc a { display: block; padding: 3px 0 3px 10px; border-left: 2px solid var(--line); color: var(--dim); text-decoration: none; }
 #toc a:hover { color: var(--ink); }
 #toc a.on { color: var(--accent); border-left-color: var(--accent); }
 
 /* ---- info: tabs and the per-build story ---------------------------------------- */
-#info .tabs { display: flex; gap: 2px; margin-left: 8px; }
-#info .bar .tabs button { padding: 2px 10px; border-radius: 12px; font-size: 12px; color: var(--dim); }
+#info .tabs { display: flex; gap: 2px; margin-left: 8px; flex: none; }
+#info .bar .tabs button { padding: 2px 10px; border-radius: 12px; font-size: 12px; color: var(--dim); white-space: nowrap; }
 #info .bar .tabs button:hover { color: var(--ink); background: var(--chip); }
 #info .bar .tabs button.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
 #info.made { max-height: 52vh; }
@@ -402,7 +424,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   <div id="stage">
     <img id="imgA" alt="">
     <div id="clipB"><img id="imgB" alt=""></div>
-    <div id="divider"></div>
+    <div id="divider" class="cmp-div" data-badge="A │ B"></div>
     <div id="empty"></div>
     <div id="loading">loading…</div>
     <div id="timeline" hidden></div>
@@ -422,21 +444,25 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     <div class="body" id="infoBody"></div>
   </section>
   <section id="home" tabindex="-1"><div class="hm" id="homeBody"></div>${plainList(site)}</section>
-  <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
+  <section id="page" tabindex="-1"><div class="doc"><div><a class="back" id="back" hidden></a><button class="back" id="pageLink" title="Copy a link to this page, with its link preview (L)">Copy link</button><article class="prose" id="article"></article></div><aside id="toc"></aside></div></section>
 </main>
-<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, buy: site.shop ? buyLinks(site, new Set(builds.map((b) => b.region))) : null })}</script>
+<script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, shares: site.shares ?? null, buy: site.shop ? buyLinks(site, new Set(builds.flatMap((b) => (b.time ? [b.region, `${b.region}:${b.time.year}`] : [b.region])))) : null })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, license: d.license, link: d.link }])))}</script>
-<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, html: p.html, headings: p.headings.filter((h) => h.level === 2), shop: (site.shop && pageShop(p.slug, explorerMapRefs(p.html), site)) ?? null })))}</script>
+<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, ...(p.unlisted ? { unlisted: true } : {}), html: printLinks(p.html, site.shop?.products), headings: p.headings.filter((h) => h.level === 2), shop: (site.shop && pageShop(p.slug, pageMapRefs(p.html), site)) ?? null })))}</script>
 <script>
 (() => {
   const builds = JSON.parse(document.getElementById('builds').textContent)
   const byId = new Map(builds.map((b) => [b.id, b]))
   const $ = (id) => document.getElementById(id)
   const stage = $('stage'), imgA = $('imgA'), imgB = $('imgB'), clipB = $('clipB'), divider = $('divider')
+  // The compare divider's moves, shared with the compare figures on pages (compare.ts).
+  const split = { at: (${splitAt.toString()}), of: (${splitOf.toString()}) }
   const state = { a: null, b: null, compare: false, zoom: 1, panX: 0, panY: 0, split: 0.5, filter: '', tab: 'details', page: null, refit: false, pendingView: null }
   const pages = JSON.parse(document.getElementById('pagesData').textContent)
   const pageBySlug = new Map(pages.map((p) => [p.slug, p]))
+  // An unlisted page (front matter \`unlisted: true\`) opens at its address but is named nowhere.
+  const listed = pages.filter((p) => !p.unlisted)
   const site = JSON.parse(document.getElementById('site').textContent)
   const demSources = JSON.parse(document.getElementById('demSources').textContent)
   const home = site.home
@@ -481,8 +507,9 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     return i < 0 ? home.sections.length : i
   }
   // Where "Buy a print" goes for a build, with its button text: resolved from the shop's onSale
-  // when the page was written (buyLinks in social.ts); nothing when its region is not on sale.
-  const buyOf = (b) => (b && site.buy && site.buy.regions[b.region]) || null
+  // when the page was written (buyLinks in social.ts); nothing when its region (or, for a dated
+  // build, its region and year) is not on sale.
+  const buyOf = (b) => (b && site.buy && ((b.time && site.buy.regions[b.region + ':' + b.time.year]) || site.buy.regions[b.region])) || null
   const renderList = () => {
     const list = visible()
     $('count').textContent = builds.length + (builds.length === 1 ? ' build' : ' builds')
@@ -573,9 +600,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     divider.style.display = b ? 'block' : 'none'
     if (b) {
       place(imgB, b)
-      const x = stage.clientWidth * state.split
-      clipB.style.clipPath = 'inset(0 0 0 ' + x + 'px)'
-      divider.style.left = x + 'px'
+      split.at(clipB, divider, stage.clientWidth * state.split + 'px')
     }
     $('zoom').textContent = Math.round(state.zoom * 100) + '%'
     scheduleHash()
@@ -656,8 +681,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     }
     if (!drag) return
     if (drag.divider) {
-      const r = stage.getBoundingClientRect()
-      state.split = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width))
+      state.split = split.of(e.clientX, stage.getBoundingClientRect())
     } else {
       state.panX += e.clientX - drag.x
       state.panY += e.clientY - drag.y
@@ -715,7 +739,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     $('links').innerHTML = '<a href="' + esc(a.files.svg) + '" target="_blank"' + (phone() ? ' title="The full drawing: large, may not open on a phone"' : '') + '>' + (phone() ? 'Full drawing ↗' : 'Open A’s SVG ↗') + '</a>' +
       (b ? '<a href="' + esc(b.files.svg) + '" target="_blank">Open B’s SVG ↗</a>' : '') +
       (site.latestPages ? '<a href="' + esc(a.name) + '.html" target="_blank" title="The latest build of this region, with hover labels">Latest page ↗</a>' : '') +
-      (buy ? '<a class="buy" href="' + esc(buy.url) + '" target="_blank" rel="noopener">' + esc(buy.label) + '</a>' : '')
+      (buy ? '<a class="buy" href="' + esc(buy.url) + '" target="_blank" rel="noopener">' + esc(buy.label) + '</a>' +
+        (buy.more || []).map((m) => '<a class="buy" href="' + esc(m.url) + '" target="_blank" rel="noopener">' + esc(m.label) + '</a>').join('') : '')
     $('info').classList.toggle('made', state.tab === 'made')
     for (const t of $('tabs').children) t.classList.toggle('on', t.dataset.tab === state.tab)
     if (state.tab === 'made') {
@@ -759,6 +784,10 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   }
   // ---- how this view was made ------------------------------------------------------------------
   // A build's own story, from story.ts (its source is embedded here; static map pages run the same code).
+  // Numbered figures on a page open in a lightbox (lightbox.ts); it takes the keys while open.
+  ;(${lightbox.toString()})(document)
+  // Compare figures on a page (compare.ts) share the viewer's divider: its moves and its look.
+  ;(${compareSliders.toString()})(document, split)
   const story = (${makeStory.toString()})({ esc, label, when, mb, fmt, demSources, pageHref: (slug, section) => (pageBySlug.has(slug) ? '#/' + slug + (section ? '/' + section : '') : null) })
   $('toggleInfo').addEventListener('click', () => toggleInfo())
   // Phones: the build list is a drawer behind the menu button; the info panel starts folded.
@@ -810,15 +839,67 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   $('actual').addEventListener('click', actual)
 
   // ---- links ----------------------------------------------------------------------------------
-  // Copy the full URL of what is on screen, view included.
-  const copied = (text) => {
-    const btn = $('link')
+  // Link-preview crawlers (chat apps, social sites) never see the '#…' part of an address and run
+  // no script, so every '#<route>' address previews as the whole site. Each map, year and page has
+  // a share page in s/ with its own preview, which opens this page at the fragment it carries, or
+  // at its own route. The Link buttons copy that page's address (on a phone, they offer the share
+  // sheet), and on a server the address bar shows it too, so an address copied from there previews
+  // as what it shows. <base href="./"> keeps every relative URL resolving beside this file.
+  const shares = site.shares || { maps: {}, pages: [] }
+  const appDir = document.baseURI.replace(/[#?].*$/, '').replace(/[^/]*$/, '')
+  // Analytics report the explorer's own path, whatever the address bar shows (see trackView).
+  const appPath = location.pathname
+  const canDoor = /^https?:$/.test(location.protocol) && (Object.keys(shares.maps).length > 0 || shares.pages.length > 0)
+  // A build's lasting name, when that name opens it: '<region>:<year>' or '<region>'.
+  const lastingRef = (b) => {
+    if (b.time) return latestOf(b.region, b.time.year) === b && shares.maps[b.region + ':' + b.time.year] ? b.region + ':' + b.time.year : null
+    return latestOf(b.region) === b && shares.maps[b.region] ? b.region : null
+  }
+  // The share page for a route: its path, the fragment it still needs ('' when its own route is
+  // enough; a lasting name stands for the build id), and the static page it names as canonical.
+  const doorFor = (hash) => {
+    let h = hash.replace(/^#/, '')
+    try { h = decodeURIComponent(h) } catch (err) { /* keep it raw */ }
+    if (h === '' || h === 'home') return null
+    if (h.startsWith('/')) {
+      const [slug, ...rest] = h.slice(1).split('/')
+      if (!pageBySlug.has(slug) || !shares.pages.includes(slug)) return null
+      const section = rest.join('/')
+      return { path: 's/page-' + slug + '.html', hash: section ? '#/' + slug + '/' + section : '', page: 'p/' + slug + '.html' }
+    }
+    const m = /^([^.@~/]+)(.*)$/.exec(h)
+    const b = m ? byId.get(resolveRef(m[1])) : null
+    if (!b) return null
+    const ref = lastingRef(b)
+    const own = shares.maps[b.time ? b.region + ':' + b.time.year : b.region] || shares.maps[b.region]
+    if (ref) return { path: 's/' + shares.maps[ref] + '.html', hash: m[2] ? '#' + ref + m[2] : '', page: 'm/' + shares.maps[ref] + '.html' }
+    return { path: 's/' + encodeURIComponent(b.id) + '.html', hash: '#' + b.id + m[2], page: own ? 'm/' + own + '.html' : null }
+  }
+  // The canonical link follows what is shown (its static page), so a browser's own Share (Chrome's
+  // uses the canonical address) sends a page with its own preview. Search engines read this page
+  // without a fragment, at the front page, where it stays the site's address.
+  const canonical = document.querySelector('link[rel="canonical"]')
+  const siteCanonical = canonical ? canonical.getAttribute('href') : null
+  // Set the address for a route: the share page's path (on a server), with the route's fragment.
+  // Every URL given to history is absolute: <base href="./"> would resolve a bare '#…' against
+  // this file's folder, which from file:// is another document and throws (fragmentUrl).
+  const fragmentUrl = (${fragmentUrl.toString()})
+  const setAddress = (hash, push) => {
+    const d = doorFor(hash)
+    if (canonical && site.siteUrl) canonical.setAttribute('href', d && d.page ? site.siteUrl + d.page : siteCanonical)
+    const same = location.hash === hash
+    const url = canDoor ? new URL((d ? d.path : '') + hash, appDir).href : fragmentUrl(location.href, hash)
+    if (same && url === location.href) return
+    const how = push && !same ? 'pushState' : 'replaceState'
+    try { history[how](null, '', url) } catch (err) { if (!same) history[how](null, '', fragmentUrl(location.href, hash)) }
+  }
+  const copied = (text, btn) => {
     btn.textContent = text
     btn.classList.add('on')
-    clearTimeout(copied.t)
-    copied.t = setTimeout(() => { btn.textContent = 'Link'; btn.classList.remove('on') }, 1400)
+    clearTimeout(btn.copiedTimer)
+    btn.copiedTimer = setTimeout(() => { btn.textContent = btn.dataset.label; btn.classList.remove('on') }, 1400)
   }
-  const copyFallback = (url) => {
+  const copyFallback = (url, btn) => {
     const ta = document.createElement('textarea')
     ta.value = url
     ta.setAttribute('readonly', '')
@@ -829,24 +910,32 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     let ok = false
     try { ok = document.execCommand('copy') } catch (err) { ok = false }
     ta.remove()
-    if (ok) copied('Copied')
+    if (ok) copied('Copied', btn)
     else window.prompt('Copy this link:', url)
   }
-  // The share page (s/<id>.html, s/page-<slug>.html) carries the link preview and passes the
-  // fragment on to this page, so the link both previews well and opens this exact view.
+  // The address to share for what is on screen: its share page, under the site URL when one is set.
   const shareUrl = () => {
-    const file = state.page !== null ? 'page-' + state.page : state.a
-    if (!file) return location.href
-    const root = site.siteUrl || location.href.replace(/[#?].*$/, '').replace(/[^/]*$/, '')
-    return root + 's/' + encodeURIComponent(file) + '.html' + location.hash
+    const root = site.siteUrl || appDir
+    if (state.home || (state.page === null && !byId.has(state.a))) return root
+    const hash = state.page !== null ? location.hash : viewerHash()
+    const d = doorFor(hash)
+    return d ? root + d.path + d.hash : root + hash
   }
   const copyLink = () => {
     writeHash()
+    const btn = state.page !== null ? $('pageLink') : $('link')
+    if (!btn.dataset.label) btn.dataset.label = btn.textContent
     const url = shareUrl()
+    // A phone's share sheet, where there is one; else the clipboard.
+    if (navigator.share && window.matchMedia && matchMedia('(pointer: coarse)').matches) {
+      navigator.share({ title: document.title.replace(/ · isoscape explorer$/, ''), url }).catch(() => undefined)
+      return
+    }
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(() => copied('Copied'), () => copyFallback(url))
-    } else copyFallback(url)
+      navigator.clipboard.writeText(url).then(() => copied('Copied', btn), () => copyFallback(url, btn))
+    } else copyFallback(url, btn)
   }
+  $('pageLink').addEventListener('click', copyLink)
   $('link').addEventListener('click', copyLink)
 
   // ---- selection, history, keys ------------------------------------------------------------------
@@ -879,8 +968,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const writeHash = () => {
     clearTimeout(hashTimer)
     if (state.page !== null || state.home || !byId.has(state.a)) return
-    const hash = viewerHash()
-    if (location.hash !== hash) history.replaceState(null, '', hash)
+    setAddress(viewerHash(), false)
     routed = location.hash
   }
   const scheduleHash = () => {
@@ -941,8 +1029,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
       if (!state.refit && state.pendingView) { const v = state.pendingView; state.pendingView = null; applyView(v) }
     } else layout()
     clearTimeout(hashTimer)
-    const hash = viewerHash()
-    if (location.hash !== hash) history[push ? 'pushState' : 'replaceState'](null, '', hash)
+    setAddress(viewerHash(), push)
     routed = location.hash
   }
   const setTab = (tab) => {
@@ -956,8 +1043,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   // #/<slug> and #/<slug>/<section> open a page; anything else is a build selection.
   let routed = null
   const renderPages = () => {
-    $('pages').hidden = pages.length === 0 && !home
-    $('pages').innerHTML = (home ? '<a class="home' + (state.home ? ' on' : '') + '" href="#home">Front page</a>' : '') + pages.map((p) => '<a href="#/' + esc(p.slug) + '"' + (state.page === p.slug ? ' class="on"' : '') +
+    $('pages').hidden = listed.length === 0 && !home
+    $('pages').innerHTML = (home ? '<a class="home' + (state.home ? ' on' : '') + '" href="#home">Front page</a>' : '') + listed.map((p) => '<a href="#/' + esc(p.slug) + '"' + (state.page === p.slug ? ' class="on"' : '') +
       (p.summary ? ' title="' + esc(p.summary) + '"' : '') + '>' + esc(p.title) + '</a>').join('')
   }
   const markToc = () => {
@@ -968,6 +1055,14 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
       if (el && el.offsetTop - page.scrollTop <= 80) current = a
     }
     for (const a of $('toc').querySelectorAll('a')) a.classList.toggle('on', a === current)
+    // A wide figure runs over the contents list: the list steps aside while one is beside it.
+    const t = $('toc').getBoundingClientRect()
+    let under = false
+    for (const f of $('article').querySelectorAll('figure.fig.wide')) {
+      const r = f.getBoundingClientRect()
+      if (r.right > t.left && r.top < t.bottom && r.bottom > t.top) { under = true; break }
+    }
+    $('toc').classList.toggle('under', under)
   }
   $('page').addEventListener('scroll', markToc, { passive: true })
   // ---- front page -------------------------------------------------------------------------------
@@ -1025,14 +1120,16 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   }
 
   const openPage = (slug, section) => {
-    const p = pageBySlug.get(slug) || pages[0]
+    const p = pageBySlug.get(slug) || listed[0]
     if (!p) return
     if (state.home) closeHome()
     state.page = p.slug
     document.body.classList.add('reading')
     if ($('article').dataset.slug !== p.slug) {
       $('article').dataset.slug = p.slug
-      $('article').innerHTML = (p.shop ? '<p class="buyp"><a class="btn" href="' + esc(p.shop.url) + '" target="_blank" rel="noopener">' + esc(p.shop.label) + '</a></p>' : '') + p.html + '<p class="source">This page is <code>' + esc(p.file) + '</code>. Edit it there; the next build, or <code>isoscape explorer</code>, puts the change here.</p>'
+      // The page's shop button above it and again at its foot, as on its static page.
+      const buyp = p.shop ? '<p class="buyp"><a class="btn" href="' + esc(p.shop.url) + '" target="_blank" rel="noopener">' + esc(p.shop.label) + '</a></p>' : ''
+      $('article').innerHTML = buyp + p.html + buyp + '<p class="source">This page is <code>' + esc(p.file) + '</code>. Edit it there; the next build, or <code>isoscape explorer</code>, puts the change here.</p>'
       $('toc').innerHTML = p.headings.length < 2 ? '' : '<h3>On this page</h3>' + p.headings.map((h) =>
         '<a href="#/' + esc(p.slug) + '/' + esc(h.id) + '" data-id="' + esc(h.id) + '">' + esc(h.text) + '</a>').join('')
     }
@@ -1061,14 +1158,21 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     if (!x || byId.has(x)) return x
     const m = /^(.+):([0-9]{1,4})$/.exec(x)
     const b = m ? latestOf(m[1], Number(m[2])) : latestOf(x)
-    return b ? b.id : x
+    if (b) return b.id
+    // A build no longer here (an old link): the newest build of the same name, else its region's.
+    const gone = /^[0-9]{8}-[0-9]{6}-(.+)$/.exec(x)
+    if (!gone) return x
+    let best = null
+    for (const y of builds) if (y.name === gone[1] && (!best || y.createdAt > best.createdAt)) best = y
+    best = best || latestOf(gone[1])
+    return best ? best.id : x
   }
   const parseHash = () => {
     let h = location.hash.slice(1)
     try { h = decodeURIComponent(h) } catch (err) { /* keep it raw */ }
     if (h.startsWith('/')) {
       const parts = h.slice(1).split('/')
-      return { page: parts[0] || (pages[0] ? pages[0].slug : ''), section: parts.slice(1).join('/') }
+      return { page: parts[0] || (listed[0] ? listed[0].slug : ''), section: parts.slice(1).join('/') }
     }
     const [whole, tab] = h.split('/')
     let sel = whole || '', view = null, split = null
@@ -1094,15 +1198,15 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     const where = location.hash.split('@')[0] || '#home'
     if (where === viewed) return
     viewed = where
-    gtag('event', 'page_view', { page_location: location.origin + location.pathname + where, page_title: document.title })
+    gtag('event', 'page_view', { page_location: location.origin + appPath + where, page_title: document.title })
   }
   const route = () => {
     closeDrawer()
     routed = location.hash
     setTimeout(trackView, 0)
     const r = parseHash()
-    if (r.page !== undefined && pageBySlug.size > 0) { openPage(r.page, r.section); return }
-    if (home && (r.a === 'home' || !r.a)) { openHome(); return }
+    if (r.page !== undefined && pageBySlug.size > 0) { openPage(r.page, r.section); setAddress(location.hash, false); return }
+    if (home && (r.a === 'home' || !r.a)) { openHome(); setAddress(location.hash, false); return }
     if (state.page !== null) closePage()
     if (state.home) closeHome()
     if (builds.length === 0) return
@@ -1140,8 +1244,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     const link = e.target.closest('a[href^="#"]')
     if (!link || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
     e.preventDefault()
-    const href = link.getAttribute('href')
-    if (href !== location.hash) history.pushState(null, '', href)
+    setAddress(link.getAttribute('href'), true)
     route()
   })
   const onNavigate = () => { if (location.hash !== routed) route() }
@@ -1156,8 +1259,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     }
     if (state.page !== null) {
       // Reading: the arrows scroll the page. Esc goes back to the viewer.
-      if (e.key === 'Escape' && byId.has(state.a)) { history.pushState(null, '', viewerHash()); route() }
-      else if (e.key === 'Escape' && home) { history.pushState(null, '', '#home'); route() }
+      if (e.key === 'Escape' && byId.has(state.a)) { setAddress(viewerHash(), true); route() }
+      else if (e.key === 'Escape' && home) { setAddress('#home', true); route() }
       else if (e.key === '/') { $('filter').focus(); e.preventDefault() }
       else if (e.key === 'l' || e.key === 'L') copyLink()
       return
@@ -1181,7 +1284,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const start = parseHash()
   if (builds.length === 0) {
     $('empty').innerHTML = '<div><b>No builds yet.</b><br>Run <code>node bin/isoscape.js build &lt;region&gt;</code> and reload.' +
-      (pages.length ? '<br><br>Meanwhile: <a href="#/' + esc(pages[0].slug) + '">' + esc(pages[0].title) + '</a>' : '') + '</div>'
+      (listed.length ? '<br><br>Meanwhile: <a href="#/' + esc(listed[0].slug) + '">' + esc(listed[0].title) + '</a>' : '') + '</div>'
     renderList()
   } else if (home && start.page === undefined && !(start.a && byId.has(start.a))) {
     routed = location.hash

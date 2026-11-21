@@ -35,7 +35,7 @@
     ]
    ],
    "height": 19.6,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 67.25,
    "upTo": 86.85,
    "confidence": "approximate",
@@ -69,7 +69,7 @@
     ]
    ],
    "height": 20.4,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 67.25,
    "upTo": 87.65,
    "confidence": "written",
@@ -103,7 +103,7 @@
     ]
    ],
    "height": 20.4,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 67.25,
    "upTo": 87.65,
    "confidence": "written",
@@ -137,7 +137,7 @@
     ]
    ],
    "height": 16.8,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 70.85,
    "upTo": 87.65,
    "confidence": "written",
@@ -2131,7 +2131,7 @@
     ]
    ],
    "height": 19.6,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 67.25,
    "upTo": 86.85,
    "confidence": "approximate",
@@ -2164,7 +2164,7 @@
     ]
    ],
    "height": 21.15,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 65.7,
    "upTo": 86.85,
    "confidence": "approximate",
@@ -2197,7 +2197,7 @@
     ]
    ],
    "height": 21.2,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 65.65,
    "upTo": 86.85,
    "confidence": "approximate",
@@ -2230,7 +2230,7 @@
     ]
    ],
    "height": 20.5,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 63.65,
    "upTo": 84.15,
    "confidence": "approximate",
@@ -2263,7 +2263,7 @@
     ]
    ],
    "height": 3.6,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 63.65,
    "upTo": 67.25,
    "confidence": "approximate",
@@ -2296,7 +2296,7 @@
     ]
    ],
    "height": 19.6,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 67.25,
    "upTo": 86.85,
    "confidence": "approximate",
@@ -2329,7 +2329,7 @@
     ]
    ],
    "height": 21.15,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 65.7,
    "upTo": 86.85,
    "confidence": "approximate",
@@ -2362,7 +2362,7 @@
     ]
    ],
    "height": 21.2,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 65.65,
    "upTo": 86.85,
    "confidence": "approximate",
@@ -2395,7 +2395,7 @@
     ]
    ],
    "height": 18.5,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 65.65,
    "upTo": 84.15,
    "confidence": "approximate",
@@ -2797,7 +2797,7 @@
     ]
    ],
    "height": 20.5,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 63.65,
    "upTo": 84.15,
    "confidence": "approximate",
@@ -2830,7 +2830,7 @@
     ]
    ],
    "height": 18.5,
-   "tone": "brick",
+   "tone": "redBrick",
    "elevation": 65.65,
    "upTo": 84.15,
    "confidence": "approximate",

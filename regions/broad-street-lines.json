@@ -3,10 +3,10 @@
   "data": "richmond-streetcars",
   "center": [
     -77.4624,
-    37.554317
+    37.552067
   ],
-  "width": 7000,
-  "depth": 6500,
+  "width": 7400,
+  "depth": 7000,
   "bearing": 0,
   "snap": false,
   "scale": 0.52,
@@ -22,8 +22,8 @@
     "cell": 12,
     "contour": 0,
     "majorEvery": 5,
-    "rapids": 0.035,
-    "demResolution": 5
+    "demResolution": 5,
+    "rapidsMarks": 1
   },
   "time": {
     "history": "history/broad-street-lines.json",
@@ -31,5 +31,25 @@
       "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
       "field": "Year_Built"
     }
-  }
+  },
+  "bridges": [
+    {
+      "match": "Free Bridge (Ninth Street)",
+      "deck": 4
+    },
+    {
+      "match": "Rivanna Subdivision",
+      "deck": 12
+    },
+    {
+      "match": "Bellwood Subdivision",
+      "deck": 6
+    }
+  ],
+  "railPiersOverWater": true,
+  "groupRailDecks": true,
+  "railCrossings": 6,
+  "labelHalo": 0.5,
+  "ribbonJoins": true,
+  "tieRunClear": 5
 }

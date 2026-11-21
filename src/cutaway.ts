@@ -135,6 +135,125 @@ export const revolve = (ring: readonly Vec2[], levels: readonly Level[]): Solid[
   return out
 }
 
+/** A level of an inset solid: height, and how far in from the ring its outer and inner faces stand (m). */
+export interface InsetLevel { readonly z: number; readonly outer: number; readonly inner: number }
+
+/**
+ * A convex ring moved in by `d` meters on every side, no further than the ring can go before it
+ * turns inside out (a rectangle stops at a line down its middle: a hipped roof's ridge).
+ */
+export const insetRing = (ring: readonly Vec2[], d: number): Vec2[] => {
+  const ok = (k: number) => {
+    const r = offsetConvex(ring, -k)
+    return r.every((a, i) => {
+      const b = r[(i + 1) % r.length]
+      const p = ring[i]
+      const q = ring[(i + 1) % ring.length]
+      return (b[0] - a[0]) * (q[0] - p[0]) + (b[1] - a[1]) * (q[1] - p[1]) >= -1e-9
+    })
+  }
+  if (d <= 0 || ok(d)) return offsetConvex(ring, -Math.max(0, d))
+  let lo = 0
+  let hi = d
+  for (let i = 0; i < 48; i++) {
+    const mid = (lo + hi) / 2
+    if (ok(mid)) lo = mid
+    else hi = mid
+  }
+  return offsetConvex(ring, -lo)
+}
+
+/**
+ * A solid stepped in from a convex ring level by level, like `revolve` but by distance rather
+ * than by scale, so every side slopes alike: a hipped roof (outer inset growing to the ridge,
+ * an inner inset a roof's thickness more, as a shell) or a square dome. Each slice between two
+ * corners of the ring is one convex piece; faces shared by neighboring pieces are internal.
+ */
+export const insetSolids = (ring: readonly Vec2[], levels: readonly InsetLevel[]): Solid[] => {
+  const rings = levels.map((l) => ({ z: l.z, o: insetRing(ring, l.outer), i: insetRing(ring, Math.max(l.inner, l.outer)) }))
+  const out: Solid[] = []
+  const at = (p: Vec2, z: number): Vec3 => [p[0], p[1], z]
+  for (let l = 0; l + 1 < rings.length; l++) {
+    const lo = rings[l]
+    const hi = rings[l + 1]
+    for (let i = 0; i < ring.length; i++) {
+      const j = (i + 1) % ring.length
+      const oa0 = at(lo.o[i], lo.z), ob0 = at(lo.o[j], lo.z), oa1 = at(hi.o[i], hi.z), ob1 = at(hi.o[j], hi.z)
+      const ia0 = at(lo.i[i], lo.z), ib0 = at(lo.i[j], lo.z), ia1 = at(hi.i[i], hi.z), ib1 = at(hi.i[j], hi.z)
+      out.push(solidOf([
+        faceOf([oa0, ob0, ob1, oa1], 'side'),
+        faceOf([ia0, ia1, ib1, ib0], 'inner'),
+        faceOf([oa0, oa1, ia1, ia0], 'internal'),
+        faceOf([ob0, ib0, ib1, ob1], 'internal'),
+        faceOf([oa0, ia0, ib0, ob0], l === 0 ? 'bottom' : 'internal'),
+        faceOf([oa1, ob1, ib1, ia1], l + 2 === rings.length ? 'top' : 'internal'),
+      ]))
+    }
+  }
+  return out
+}
+
+/**
+ * Straight members in a vertical plane (a truss, a bracket, a roof slope): the plane stands on
+ * the ring's first edge, from ring[0] toward ring[1]; each member runs from (u0, z0) to (u1, z1),
+ * u meters along that edge and z scene height, `depth` deep in the plane, and is as thick as
+ * the ring's second edge (ring[1] to ring[2]) is long. A member of six or more numbers is a
+ * convex plate instead, its corners (u, z) in order. Each member is its own convex solid.
+ */
+export const frameSolids = (ring: readonly Vec2[], members: readonly (readonly number[])[]): Solid[] => {
+  const [p0, p1, p2] = ring
+  const span = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]) || 1
+  const thick = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) || 1
+  const u: Vec2 = [(p1[0] - p0[0]) / span, (p1[1] - p0[1]) / span]
+  const w: Vec2 = [(p2[0] - p1[0]) / thick, (p2[1] - p1[1]) / thick]
+  const out: Solid[] = []
+  for (const m of members) {
+    if (m.length >= 6 && m.length % 2 === 0) {
+      // A convex plate given by its corners (u, z), in order: a clock face, a gusset.
+      const profile: Vec2[] = []
+      for (let i = 0; i < m.length; i += 2) profile.push([m[i], m[i + 1]])
+      out.push(sweep(profile, p0, u, w, 0, thick))
+      continue
+    }
+    const [u0, z0, u1, z1, depth] = m
+    const l = Math.hypot(u1 - u0, z1 - z0)
+    if (l < 1e-6) continue
+    const nu = (-(z1 - z0) / l) * depth / 2
+    const nz = ((u1 - u0) / l) * depth / 2
+    const profile: Vec2[] = [[u0 + nu, z0 + nz], [u1 + nu, z1 + nz], [u1 - nu, z1 - nz], [u0 - nu, z0 - nz]]
+    out.push(sweep(profile, p0, u, w, 0, thick))
+  }
+  return out
+}
+
+/** A track's ties and rails, in meters: standard gauge, ties 8 ft 6 in long, 0.67 m apart. */
+export const TRACK = { gauge: 1.435, tieLength: 2.6, tieWidth: 0.23, tieHeight: 0.18, every: 0.67, railWidth: 0.075, railHeight: 0.16 } as const
+
+/**
+ * A length of track on a deck: ties square to it and two rails on them, from the ring's first
+ * edge (across the track, ring[0] to ring[1]) along its second (ring[1] to ring[2]), from `z`.
+ */
+export const trackSolids = (ring: readonly Vec2[], z: number): Solid[] => {
+  const [p0, p1, p2] = ring
+  const across = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]) || 1
+  const len = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) || 1
+  const u: Vec2 = [(p1[0] - p0[0]) / across, (p1[1] - p0[1]) / across]
+  const w: Vec2 = [(p2[0] - p1[0]) / len, (p2[1] - p1[1]) / len]
+  const origin: Vec2 = [p0[0] + u[0] * across / 2, p0[1] + u[1] * across / 2]
+  const out: Solid[] = []
+  const rect = (a0: number, a1: number, z0: number, z1: number): Vec2[] => [[a0, z0], [a1, z0], [a1, z1], [a0, z1]]
+  const half = TRACK.tieLength / 2
+  for (let s = TRACK.every / 2; s + TRACK.tieWidth / 2 <= len; s += TRACK.every) {
+    out.push(sweep(rect(-half, half, z, z + TRACK.tieHeight), origin, u, w, s - TRACK.tieWidth / 2, s + TRACK.tieWidth / 2))
+  }
+  const top = z + TRACK.tieHeight
+  for (const side of [-1, 1]) {
+    const c = side * (TRACK.gauge / 2 + TRACK.railWidth / 2)
+    out.push(sweep(rect(c - TRACK.railWidth / 2, c + TRACK.railWidth / 2, top, top + TRACK.railHeight), origin, u, w, 0, len))
+  }
+  return out
+}
+
 /**
  * A flight of stairs on a four-cornered footprint: it rises from the edge ring[0]–ring[1] (at
  * z0) to the edge ring[2]–ring[3] (at z1) in `steps` treads, each a solid block down to z0.

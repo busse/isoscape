@@ -22,6 +22,16 @@
     {
       "match": "Boulevard Bridge",
       "deck": 20
+    },
+    {
+      "match": "Free Bridge (Ninth Street)",
+      "deck": 4
+    },
+    {
+      "match": "Marshall Street Viaduct",
+      "deck": 7,
+      "pierSpacing": 75,
+      "abutment": 30
     }
   ],
   "minBuildingArea": 20,
@@ -32,7 +42,6 @@
     "cell": 12,
     "contour": 0,
     "majorEvery": 5,
-    "rapids": 0.035,
     "demResolution": 5
   },
   "time": {
@@ -41,5 +50,7 @@
       "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
       "field": "Year_Built"
     }
-  }
+  },
+  "railPiersOverWater": true,
+  "groupRailDecks": true
 }

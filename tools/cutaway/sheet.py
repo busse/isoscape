@@ -4,6 +4,10 @@ numbered callouts in a column beside them, a key to how sure each part is, sourc
 
     python3 tools/cutaway/sheet.py cutaways/broad-street-1943.json [--out <dir>] [--png 3200] [--print] [--page]
 
+A spec's `inset` sets a small flat context map on the sheet (tools/cutaway/context.py): `context`
+(the cached extract), `box` [x, y, width] in sheet units, `caption`, and its own `labels`,
+`lines` and `arrows` in lon/lat.
+
 It builds the region (isoscape build <region> --year <year> --no-archive), which writes the
 cutaway, its flat section and where each part is drawn in both (*.anchors.json), then lays the
 sheet out at 32 x 24 in, 300 dpi (9,600 x 7,200 units), the set-sheet size, as one SVG with both
@@ -16,14 +20,15 @@ dashed ring for one that is approximate.
 300 dpi at each size in PRINTS (both 4:3, the set sheet's sizes), with the plate's title block
 (tools/print/titleblock.py, the fields from tools/release/plates.py for the spec's `design`)
 set in the bottom-right corner below the callout column, at the size stamp.py gives a sheet of
-that length. Each is named <design>_<w>x<h>.jpg (version 1 has no -vN suffix) and logged, with
+that length (a spec's `blockMinPt` keeps the block's taxonomy at that size or more, on two lines
+if need be: titleblock.py min_px). Each is named <design>_<w>x<h>.jpg (version 1 has no -vN suffix) and logged, with
 the block's fields, placement and every file's SHA-256, in print/prints.json. No canvas files:
 a canvas's 1.5 in of mirrored wrap would carry the title, the credit line and the column's text,
 all within 1.5 in of the sheet's edges, mirrored round its sides.
 
 --page writes the sheet's page in the explorer, pages/<page.slug>.md, from the same callouts,
-key, sources and notes as the sheet, with its two images (<slug>-sheet.jpg, <slug>-social.jpg)
-made from the 32 x 24 print. Like a set's page, it says nothing of the shop: the explorer adds
+key, sources and notes as the sheet, with its two images: <slug>-sheet.jpg, made from the 32 x 24
+print, and <slug>-social.jpg, its link preview, the isometric cutaway alone at 1200 x 630. Like a set's page, it says nothing of the shop: the explorer adds
 its shop button while shop.onSale in isoscape.config.json, the one list of what sells, has an
 entry for the page's slug (e.g. "broad-street-cutaway": "<product URL>").
 """
@@ -47,6 +52,7 @@ INK, PAPER, DIM = C.INK, C.PAPER, C.DIM
 SERIF = "'Libre Baskerville', Baskerville, Georgia, serif"
 SANS = 'Helvetica, Arial, sans-serif'
 COL_X = 7600                 # the callout column
+MARKS_NOTE = 'The same marks, small, stand before each place the trains and streetcars went.'   # the spec's `marksNote` may say otherwise
 ART_R = COL_X - 200          # the drawings' right edge
 
 
@@ -110,7 +116,7 @@ def leader(x0, y0, x1, y1, r=0):
     sx, sy = x0 + (x1 - x0) * r / d, y0 + (y1 - y0) * r / d
     halo = (f'<path d="M{sx:.0f} {sy:.0f}L{x1:.0f} {y1:.0f}" fill="none" stroke="{PAPER}" stroke-width="15" stroke-linecap="round"/>'
             f'<circle cx="{x1:.0f}" cy="{y1:.0f}" r="20" fill="{PAPER}"/>') if HALO[0] else ''
-    return (halo + f'<path d="M{sx:.0f} {sy:.0f}L{x1:.0f} {y1:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>'
+    return halo + (f'<path d="M{sx:.0f} {sy:.0f}L{x1:.0f} {y1:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>'
             f'<circle cx="{x1:.0f}" cy="{y1:.0f}" r="13" fill="{INK}" stroke="{PAPER}" stroke-width="3"/>')
 
 
@@ -190,13 +196,23 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     region, year = spec['region'], spec['year']
     build_dir = os.path.join(a.out, 'build')
+    cross = spec.get('crossSection')
+    # The flat sections along the foot of the sheet, left to right, each with the key its
+    # callouts anchor to: the main region's own (`section`) and a `crossSection` (`cross`), or a
+    # spec's `sections` list in their place (each `region`, `caption` and `as`).
+    secs = spec.get('sections') or ([{'region': region, 'caption': spec['sectionCaption'], 'as': 'section'}] + ([{**cross, 'as': 'cross'}] if cross else []))
     if not a.no_build:
-        subprocess.run(['node', 'bin/isoscape.js', 'build', region, '--year', str(year), '--no-archive', '--out', build_dir], cwd=ROOT, check=True)
+        for r in [region] + [x['region'] for x in secs if x['region'] != region]:
+            subprocess.run(['node', 'bin/isoscape.js', 'build', r, '--year', str(year), '--no-archive', '--out', build_dir], cwd=ROOT, check=True)
     base = os.path.join(build_dir, f'{region}-{year}')
     iso_svg = open(base + '.svg').read()
-    sec_svg = open(base + '-section.svg').read()
     iso_a = json.load(open(base + '.anchors.json'))
-    sec_a = json.load(open(base + '-section.anchors.json'))
+    for x in secs:
+        sb = os.path.join(build_dir, f"{x['region']}-{year}")
+        x['_svg'] = open(sb + '-section.svg').read()
+        x['_a'] = json.load(open(sb + '-section.anchors.json'))
+        x['_vb'], x['_body'] = inner(x['_svg'])
+    sec_svg, sec_a = secs[0]['_svg'], secs[0]['_a']
     history = json.load(open(os.path.join(ROOT, json.load(open(os.path.join(ROOT, 'regions', region + '.json')))['time']['history'])))
     conf_of = {f['id']: f.get('confidence', 'approximate') for f in history['features']}
     # The traveler, as the build drew it, and the route's color, as the section drew it.
@@ -213,6 +229,7 @@ def main():
     accent = theme['red'] if theme else INK
     head_ink = theme['green'] if theme else DIM
     rule_ink = theme['green'] if theme else INK
+    lay = spec.get('layout', {})
 
     # The isometric drawing, without its year caption (the sheet has a title of its own).
     vb, iso_body = inner(iso_svg)
@@ -222,19 +239,36 @@ def main():
         iso_body = re.sub(r'<desc>.*?</desc>', '', iso_body, flags=re.S)
     cap = max(28, (vb[2] - 48) * 0.022) * 2.4
     iso_vb = [vb[0], vb[1] + cap, vb[2], vb[3] - cap]
-    svb, sec_body = inner(sec_svg)
+    if spec.get('isoView'):
+        # A closer frame on the plate (x, y, w, h in its own units): what runs past it, a track
+        # or a trestle, is cut at the frame's edge.
+        iso_vb = list(spec['isoView'])
 
     top = 700
-    iso_box = (M - 60, top, ART_R - M + 60, spec.get('layout', {}).get('isoHeight', 3900))
+    iso_box = (M - 60, top, ART_R - M + 60, lay.get('isoHeight', 3900))
     s_iso = min(iso_box[2] / iso_vb[2], iso_box[3] / iso_vb[3])
     iso_h = iso_vb[3] * s_iso
-    # The flat section beneath, no taller than SEC_H, from the left edge of the art.
-    sec_w = spec.get('layout', {}).get('sectionW', ART_R - M)
-    s_sec = min(sec_w / svb[2], (H - spec.get('layout', {}).get('bottom', 330) - (top + iso_h + 330)) / svb[3])
-    sec_h = svb[3] * s_sec
-    sec_top = top + iso_h + 420
-    sec_box = (M, sec_top, svb[2] * s_sec, sec_h)
+    # Wayfinding labels under the plate push the sections down when they run past two lines.
+    WF = 50
+    low = max([len(wf['lines']) for wf in spec.get('wayfinding', []) if wf['place'] != 'top-right' and 'label' not in wf] or [0])
+    push = max(0, (low - 2) * WF * 1.42)
+    # The flat section beneath, no taller than SEC_H, from the left edge of the art; with a
+    # cross section, the two side by side at one scale, bottoms level.
+    # A spec's `layout` may narrow the sections (`sectionW`) or leave more room under them (`bottom`).
+    sec_w = lay.get('sectionW', ART_R - M)
+    sec_top = top + iso_h + 420 + push
+    GAP = 260
+    widths = sum(x['_vb'][2] for x in secs)
+    heights = max(x['_vb'][3] for x in secs)
+    s_sec = min((sec_w - GAP * (len(secs) - 1)) / widths, (H - lay.get('bottom', 330) - (sec_top - 90)) / heights)
+    sec_bottom = sec_top + heights * s_sec
+    xx = M
+    for x in secs:
+        vb_ = x['_vb']
+        x['_box'] = (xx, sec_bottom - vb_[3] * s_sec, vb_[2] * s_sec, vb_[3] * s_sec)
+        xx += vb_[2] * s_sec + GAP
 
+    labels = []    # the wayfinding labels' boxes, which the link preview keeps clear of
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
            f'<rect width="{W}" height="{H}" fill="{PAPER}"/>']
     if theme:
@@ -250,13 +284,53 @@ def main():
     out.append(text(M, 570, spec['subtitle'], 112, 'italic', DIM))
     # The drawings.
     # The plate is centered over the art, or set against its left edge (`layout.isoAlign`).
-    iso_x = M if spec.get('layout', {}).get('isoAlign') == 'left' else iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2
+    iso_x = M if lay.get('isoAlign') == 'left' else iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2
     ox_iso, oy_iso = iso_x - iso_vb[0] * s_iso, iso_box[1] - iso_vb[1] * s_iso
     out.append(f'<svg x="{iso_x:.1f}" y="{iso_box[1]}" width="{iso_vb[2] * s_iso:.1f}" height="{iso_h:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in iso_vb)}" overflow="hidden">{iso_body}</svg>')
-    out.append(text(M, sec_top - 70, spec['sectionCaption'], 76, 'italic', DIM))
-    out.append(f'<svg x="{sec_box[0]}" y="{sec_box[1]:.1f}" width="{sec_box[2]:.1f}" height="{sec_box[3]:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in svb)}">{sec_body}</svg>')
-    ox_sec, oy_sec = sec_box[0] - svb[0] * s_sec, sec_box[1] - svb[1] * s_sec
+    drawings = [('iso', iso_a, None, None)]
+    for x in secs:
+        bx_, by_, bw_, bh_ = x['_box']
+        vb_ = x['_vb']
+        out.append(text(bx_, sec_top - 70, x['caption'], 76, 'italic', DIM))
+        # The first section stands at the margin, written as the integer it is, as the sheets
+        # released before `sections` existed wrote it, so they rebuild byte for byte.
+        out.append(f'<svg x="{bx_ if isinstance(bx_, int) else f"{bx_:.1f}"}" y="{by_:.1f}" width="{bw_:.1f}" height="{bh_:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in vb_)}">{x["_body"]}</svg>')
+        drawings.append((x['as'], x['_a'], x['_a'].get('frame'), (bx_ - vb_[0] * s_sec, by_ - vb_[1] * s_sec, s_sec)))
     iso_rect = (iso_x, iso_box[1], iso_vb[2] * s_iso, iso_h)
+    if spec.get('inset'):
+        # A small flat map of where the building stands and what its work joined
+        # (tools/cutaway/context.py), at `box` [x, y, width] in sheet units, its caption beneath.
+        import context
+        ins = spec['inset']
+        iw, ih, ibody = context.render(ins, ROOT)
+        bx, by, bw = ins['box']
+        bh = bw * ih / iw
+        # Its panel: a heading as the column's are, the map, its caption, then `why`, the
+        # building's purpose in a few short paragraphs, and their sources.
+        lines = []
+        for para in ins.get('why', []):
+            lines += [(ln, 'regular', BODY, DIM) for ln in wrap(para, 'regular', BODY, bw)] + [None]
+        if ins.get('whySource'):
+            lines += [(ln, 'italic', 46, DIM) for ln in wrap(ins['whySource'], 'italic', 46, bw)]
+        caption = wrap(ins.get('caption', ''), 'italic', 46, bw)
+        ptop = by - (150 if ins.get('title') else 0)
+        tall = (by - ptop) + bh + 60 + 62 * len(caption) + 40 + sum(72 if ln else 26 for ln in lines)
+        out.append(f'<rect x="{bx - 40:.1f}" y="{ptop - 70:.1f}" width="{bw + 80:.1f}" height="{tall + 110:.1f}" fill="{PAPER}" stroke="{INK}" stroke-width="4"/>')
+        if ins.get('title'):
+            out.append(text(bx, ptop + 10, ins['title'].upper(), 58, 'bold', DIM, family=SANS, spacing=4))
+            out.append(f'<line x1="{bx}" y1="{ptop + 42}" x2="{bx + bw}" y2="{ptop + 42}" stroke="{INK}" stroke-width="4"/>')
+        out.append(f'<svg x="{bx:.1f}" y="{by:.1f}" width="{bw:.1f}" height="{bh:.1f}" viewBox="0 0 {iw:.1f} {ih:.1f}">{ibody}</svg>')
+        cy = by + bh + 70
+        for line in caption:
+            out.append(text(bx, cy, line, 46, 'italic', DIM))
+            cy += 62
+        cy += 50
+        for ln in lines:
+            if ln is None:
+                cy += 26
+                continue
+            out.append(text(bx, cy, ln[0], ln[2], ln[1], ln[3] if ln[1] == 'italic' else INK))
+            cy += 72
 
     def locate(lonlat):
         r = subprocess.run(['node', 'bin/isoscape.js', 'locate', region, '--year', str(year), '--', f'{lonlat[0]},{lonlat[1]}'], cwd=ROOT, check=True, capture_output=True, text=True)
@@ -280,6 +354,12 @@ def main():
     # Callout badges on the drawings, and the column beside them. The column's first heading
     # stands on the subtitle's baseline, which leaves the foot of the column clear for the
     # print's title block (tools/print/titleblock.py) at both print sizes.
+    # A spec's `column` may tighten the column's spacing (sheet units; the defaults are every
+    # released sheet's): `head`, a group heading to its first callout; `callout`, after a
+    # callout's last line; `group`, after a group; `keyHead`, the key's heading to its first
+    # row; `keyRow`, between the key's rows; `traveler`, before the traveler's note; `notes`,
+    # before the sources; `between`, the gap between the sources and the notes.
+    col = {**dict(head=170, callout=58, group=36, keyHead=150, keyRow=92, traveler=26, notes=40, between=68), **spec.get('column', {})}
     y = 570
     x = COL_X
     for g in spec['groups']:
@@ -288,10 +368,11 @@ def main():
             tw = font('bold', 58).getlength(g['title'].upper()) + 4 * len(g['title'])
             out.append(figure(x + tw + 40, y + 4, 82, traveler['shapes'], route))
         out.append(f'<line x1="{x}" y1="{y + 32}" x2="{W - M}" y2="{y + 32}" stroke="{rule_ink}" stroke-width="4"/>')
-        y += 170
+        y += col['head']
         for c in g['callouts']:
             conf = c['_conf']
-            for where, anchors, frame, (ox, oy, sc) in (('iso', iso_a, None, (ox_iso, oy_iso, s_iso)), ('section', sec_a, sec_a.get('frame'), (ox_sec, oy_sec, s_sec))):
+            for where, anchors, frame, place_ in drawings:
+                ox, oy, sc = place_ if place_ is not None else (ox_iso, oy_iso, s_iso)
                 if where not in c:
                     continue
                 # One anchor, or a list of them: a callout may name two parts in one drawing.
@@ -305,15 +386,18 @@ def main():
             for line in wrap(c['text'], 'regular', BODY, W - M - x - 140):
                 out.append(text(x + 140, yy, line, BODY, 'regular', DIM))
                 yy += 72
-            y = yy + 58
-        y += 36
+            y = yy + col['callout']
+        y += col['group']
     # Wayfinding: where the trains and streetcars went, in the plate's margins, each with a
     # leader to the track end or the street it belongs to.
-    WF = 50
     for wf in spec.get('wayfinding', []):
         if 'plate' in wf:
             # A place off the plate: pointed to at the plate's edge, as a fraction of its box.
             ax, ay = iso_rect[0] + wf['plate'][0] * iso_rect[2], iso_rect[1] + wf['plate'][1] * iso_rect[3]
+        elif 'part' in wf:
+            # A drawn part (a track on its trestle, above the ground `at` would point to).
+            p = anchor(wf, iso_a)
+            ax, ay = ox_iso + p[0] * s_iso, oy_iso + p[1] * s_iso
         else:
             p = locate(wf['at'])
             ax, ay = ox_iso + p[0] * s_iso, oy_iso + p[1] * s_iso
@@ -323,7 +407,7 @@ def main():
         lines = [ln.upper() for ln in wf['lines']]
         wmax = max(font('bold', WF).getlength(ln) + 3 * len(ln) for ln in lines)
         lh = WF * 1.42
-        x0, y0 = {
+        x0, y0 = wf['label'] if 'label' in wf else {
             'top-right': (ART_R - wmax, top - 215),
             # Inside the plate's top-left corner, over its sky, for a place off to the upper left.
             'inside-top-left': (iso_rect[0] + 90, iso_rect[1] + 150),
@@ -339,13 +423,19 @@ def main():
         # A label may be nudged off what it would cover (sheet units).
         x0, y0 = x0 + wf.get('offset', [0, 0])[0], y0 + wf.get('offset', [0, 0])[1]
         out.append(f'<rect x="{x0 - 30:.0f}" y="{y0 - WF - 26:.0f}" width="{wmax + 90:.0f}" height="{lh * len(lines) + 34:.0f}" fill="{PAPER}" fill-opacity="0.9"/>')
+        labels.append((x0 - 30, y0 - WF - 26, wmax + 90, lh * len(lines) + 34))
         out.append(badge(x0 + 6, y0 - WF * 0.36, None, wf['confidence'], 15))
         for i, ln in enumerate(lines):
             out.append(text(x0 + 44, y0 + i * lh, ln, WF, 'bold', INK, family=SANS, spacing=3))
         # The leader: from the label's nearer edge to the place, ending in a dot.
         lx = x0 - 30 if ax < x0 else min(ax, x0 + wmax + 60)
         ly = y0 + lh * len(lines) - lh / 2 if ay > y0 else y0 - WF - 26
-        if wf['place'] not in ('top-right', 'inside-top-left', 'inside-left-above'):
+        if 'label' in wf:
+            # A label set where the spec says (`label`, its first baseline): the leader leaves
+            # the point of its box nearest the place it names, so it stays short.
+            lx = min(max(ax, x0 - 30), x0 + wmax + 60)
+            ly = min(max(ay, y0 - WF - 26), y0 - WF - 26 + lh * len(lines) + 34)
+        elif wf['place'] not in ('top-right', 'inside-top-left', 'inside-left-above'):
             ly = y0 - WF - 26
             lx = max(x0 - 30, min(ax, x0 + wmax + 60))
         if HALO[0]:
@@ -354,41 +444,52 @@ def main():
         out.append(f'<path d="M{lx:.0f} {ly:.0f}L{ax:.0f} {ay:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>')
         out.append(f'<circle cx="{ax:.0f}" cy="{ay:.0f}" r="13" fill="{INK}"/>')
     # Key, sources and notes, at the foot of the callout column, or the key in a block of its own
-    # (`layout.key`: x, y, w) with the sources and notes under it (`layout.notes` without y).
-    kb = spec.get('layout', {}).get('key')
+    # (`layout.key`: x, y, w; its rows wrapped) with the sources and notes under it, or in a
+    # block of their own (`layout.notes`: x, w, and y if not under the key).
+    kb = lay.get('key')
     kx, ky, kw = (kb['x'], kb['y'], kb['w']) if kb else (x, y + 40, W - M - x)
     out.append(text(kx, ky, 'HOW SURE EACH PART IS', 58, 'bold', head_ink, family=SANS, spacing=4))
     out.append(f'<line x1="{kx}" y1="{ky + 32}" x2="{kx + kw}" y2="{ky + 32}" stroke="{rule_ink}" stroke-width="4"/>')
-    ky += 150
+    ky += col['keyHead']
     for conf, msg in spec['key']:
         out.append(badge(kx + 56, ky - 22, None, conf, 42))
-        for i, line in enumerate(wrap(msg, 'regular', 56, kw - 140)):
+        rows = wrap(msg, 'regular', 56, kw - 140) if kb else [msg]
+        for i, line in enumerate(rows):
             out.append(text(kx + 140, ky, line, 56, 'regular', DIM))
-            ky += 76
-        ky += 16
-    for line in wrap(spec.get('keyNote', 'The same marks, small, stand before each place the trains and streetcars went.'), 'regular', 56, kw - 140):
+            ky += 76 if i < len(rows) - 1 else col['keyRow']
+    for line in wrap(spec.get('marksNote', MARKS_NOTE), 'regular', 56, kw - 140):
         out.append(text(kx + 140, ky, line, 56, 'regular', DIM))
         ky += 76
     if spec.get('travelerKey') and traveler:
-        ky += 26
+        ky += col['traveler']
         out.append(figure(kx + 56, ky + 14, 90, traveler['shapes'], route))
         for line in wrap(spec['travelerKey'], 'regular', 56, kw - 140):
             out.append(text(kx + 140, ky, line, 56, 'regular', DIM))
             ky += 76
-    ky += 40
-    nb = spec.get('layout', {}).get('notes')
+    ky += col['notes']
+    nb = lay.get('notes')
     nx, ny, nw = (nb['x'], nb.get('y', ky + 30), nb['w']) if nb else (kx, ky, kw)
-    for line in wrap(spec['sources'], 'italic', 50, nw) + [''] + wrap(spec['notes'], 'italic', 50, nw):
-        if line:
-            out.append(text(nx, ny, line, 50, 'italic', DIM))
+    for line in wrap(spec['sources'], 'italic', 50, nw) + [None] + wrap(spec['notes'], 'italic', 50, nw):
+        if line is None:
+            ny += col['between']
+            continue
+        out.append(text(nx, ny, line, 50, 'italic', DIM))
         ny += 68
-    if nb is None and kb is None:
+    if kb is None and nb is None:
         ky = ny
-    elif ny > H - 260:
-        print(f'warning: the notes run to {ny:.0f}, past the credit line', file=sys.stderr)
-    if y > H - 120 or (kb is None and ky > H - 120):
-        print(f'warning: the column runs to {max(y, ky):.0f}, past the credit line', file=sys.stderr)
+        if ky > H - 120:
+            print(f'warning: the column runs to {ky:.0f}, past the credit line', file=sys.stderr)
+        elif spec.get('columnEnd') and ky > spec['columnEnd']:
+            # The room the print's title block needs below the column (stamp.py places it there).
+            print(f"warning: the column runs to {ky:.0f}, into the title block's room (columnEnd {spec['columnEnd']})", file=sys.stderr)
+    else:
+        if ny > H - 260:
+            print(f'warning: the notes run to {ny:.0f}, past the credit line', file=sys.stderr)
+        if y > (spec.get('columnEnd') or H - 120):
+            print(f'warning: the column runs to {y:.0f}, past its end', file=sys.stderr)
     LAST[0] = {'column': y, 'key': ky, 'notes': ny}
+    if os.environ.get('SHEET_DEBUG'):
+        print(f'column ends at {y:.0f}, key at {ky:.0f}, notes at {ny:.0f}', file=sys.stderr)
     # Within a theme's border, the credit line stands higher.
     out.append(text(M, H - (230 if theme else 150), spec['credit'], 46, 'regular', DIM))
     out.append('</svg>')
@@ -403,7 +504,7 @@ def main():
     if a.print:
         prints(spec, sheet, os.path.join(a.out, 'print'))
     if a.page:
-        page(spec, os.path.join(a.out, 'print'))
+        page(spec, os.path.join(a.out, 'print'), sheet, iso_rect, labels)
 
 
 def confidence(c, conf_of):
@@ -413,7 +514,24 @@ def confidence(c, conf_of):
     return c.get('confidence') or conf_of.get(part.replace('history:', '').split(':')[0], 'approximate')
 
 
-def page(spec, print_dir):
+def social(sheet, iso_rect, labels, dest):
+    """The page's link preview, 1200 x 630: the isometric cutaway itself, not the whole sheet
+    (title, column and flat section are too small to read at that size): its full height, its
+    ends trimmed to 1.91:1, so no text above or below it is cut through, and its top lowered
+    below any wayfinding label that reaches down into the drawing's top fifth. Rendered from
+    the sheet's vector at twice the size and scaled down."""
+    sw, sh = C.SOCIAL
+    x, y, w, h = iso_rect
+    top = y
+    for lx, ly, lw, lh in labels:
+        if lx < x + w and lx + lw > x and y < ly + lh < y + h / 5:
+            top = max(top, ly + lh + 10)
+    x, y, w, h = C.fit((x, top, w, y + h - top), sw / sh)
+    im = C.raster(sheet, (x, y, w, h), sw * 2, sh * 2)
+    im.resize((sw, sh), Image.LANCZOS).save(dest, quality=86, optimize=True)
+
+
+def page(spec, print_dir, sheet_svg, iso_rect, labels=()):
     """pages/<slug>.md: the sheet, its callouts as text, the key, the sources and notes."""
     import plates
     P = spec['page']
@@ -425,13 +543,20 @@ def page(spec, print_dir):
            f'social: {slug}-social.jpg', '---', '', f"# {P['title']}", '',
            f"*{plate['kind']} · Plate {plate['plate'].replace('-', '·')}*" if plate.get('kind') else f"*Plate {plate['plate'].replace('-', '·')}*", '',
            P['intro'], '', f"![{P.get('image_alt', P['title'])}]({slug}-sheet.jpg)", '']
+    ins = spec.get('inset') or {}
+    if ins.get('why'):     # the inset panel's few paragraphs on the building's purpose, as on the sheet
+        out += [f"## {ins.get('title', 'Why it was built')}", '']
+        for para in ins['why']:
+            out += [para, '']
+        if ins.get('whySource'):
+            out += [f"*Sources: {ins['whySource']}*", '']
     for g in spec['groups']:
         out += [f"## {g['title']}", '']
         for c in g['callouts']:
             out += [f"### {c['n']}. {c['title']}", '', c['text'], '', f"*How sure: {key[c['_conf']]}.*", '']
     out += ["## How sure each part is", '', P.get('key_intro', ''), '']
     out += [f"- **{marks[k].capitalize()}:** {key[k]}." for k, _ in spec['key']]
-    out += ['', P.get('marks_note', 'The same marks, small, stand before each place the trains and streetcars went.'), '']
+    out += ['', P.get('marks_note', spec.get('marksNote', MARKS_NOTE)), '']
     if spec.get('travelerKey'):
         out += [P.get('traveler_note', spec['travelerKey']), '']
     if spec.get('wayfinding'):
@@ -448,10 +573,9 @@ def page(spec, print_dir):
     if os.path.exists(sheet):
         im = Image.open(sheet)
         im.resize((1800, 1350), Image.LANCZOS).save(os.path.join(ROOT, 'pages', f'{slug}-sheet.jpg'), quality=84, optimize=True)
-        w = im.size[0]
-        im.crop((0, 0, w, round(w / 1.905))).resize((1200, 630), Image.LANCZOS).save(os.path.join(ROOT, 'pages', f'{slug}-social.jpg'), quality=86, optimize=True)
     else:
-        print(f'warning: no print at {sheet}; run --print first for the page images', file=sys.stderr)
+        print(f'warning: no print at {sheet}; run --print first for the page\'s sheet image', file=sys.stderr)
+    social(sheet_svg, iso_rect, labels, os.path.join(ROOT, 'pages', f'{slug}-social.jpg'))
     print(f'pages/{slug}.md')
 
 
@@ -468,16 +592,18 @@ def prints(spec, sheet, out_dir, version=1):
     design = spec['design']
     info = plates.info(design, version)
     os.makedirs(out_dir, exist_ok=True)
+    # A spec's `blockMinPt`: the smallest the block's taxonomy may print (titleblock.py min_px).
+    min_px = round(spec['blockMinPt'] * 300 / 72) if spec.get('blockMinPt') else None
     log = {'design': design, 'version': version, 'sheet': os.path.relpath(sheet, ROOT), 'sheet_sha256': sha(sheet), 'info': info,
            'tools': {f: sha(os.path.join(ROOT, f)) for f in ('tools/cutaway/sheet.py', 'tools/print/titleblock.py', 'tools/release/stamp.py', 'catalog/plates.json')},
-           'files': {}}
+           'files': {}, **({'block_min_px': min_px} if min_px else {})}
     for w_in, h_in in PRINTS:
         with tempfile.TemporaryDirectory() as tmp:
             png = os.path.join(tmp, 'sheet.png')
             C.svg_to_png(sheet, png, w_in * 300, h_in * 300, background=PAPER)
             im = Image.open(png).convert('RGB')
         assert im.size == (w_in * 300, h_in * 300), im.size
-        im, at = titleblock.stamp(im, info, stamp.size_u(w_in, 300), where=('foot', 'corner', 'head'))
+        im, at = titleblock.stamp(im, info, stamp.size_u(w_in, 300), where=('foot', 'corner', 'head'), min_px=min_px)
         p = os.path.join(out_dir, f'{design}_{w_in}x{h_in}.jpg')
         for q in (94, 90, 86, 82, 78):
             im.save(p, quality=q, dpi=(300, 300), optimize=True)

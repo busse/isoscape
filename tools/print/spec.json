@@ -51,7 +51,7 @@
     3
    ],
    "labels": true,
-   "band": 0.1,
+   "band": 0.17,
    "sizes": [
     [
      24,
@@ -62,58 +62,67 @@
     {
      "build": "richmond-downtown-time-1737",
      "label": "1737",
-     "sub": "Byrd's plat"
+     "sub": "Mayo’s plan: the streets only"
     },
     {
      "build": "richmond-downtown-time-1788",
      "label": "1788",
-     "sub": "the Capitol"
+     "sub": "the Capitol; only what survives"
     },
     {
      "build": "richmond-downtown-time-1820",
-     "label": "1820"
+     "label": "1820",
+     "sub": "only what survives"
     },
     {
      "build": "richmond-downtown-time-1850",
-     "label": "1850"
+     "label": "1850",
+     "sub": "only what survives, the canal"
     },
     {
      "build": "richmond-downtown-time-1865",
      "label": "1865",
-     "sub": "after the Evacuation Fire"
+     "sub": "after the Fire; only what survives"
     },
     {
      "build": "richmond-downtown-time-1886",
      "label": "1886",
-     "sub": "first Sanborn atlas"
+     "sub": "first Sanborn map"
     },
     {
      "build": "richmond-downtown-time-1905",
-     "label": "1905"
+     "label": "1905",
+     "sub": "Sanborn map"
     },
     {
      "build": "richmond-downtown-time-1925",
-     "label": "1925"
+     "label": "1925",
+     "sub": "Sanborn map"
     },
     {
      "build": "richmond-downtown-time-1950",
-     "label": "1950"
+     "label": "1950",
+     "sub": "Sanborn map"
     },
     {
      "build": "richmond-downtown-time-1970",
      "label": "1970",
-     "sub": "the expressways"
+     "sub": "after the turnpike"
     },
     {
      "build": "richmond-downtown-time-1990",
-     "label": "1990"
+     "label": "1990",
+     "sub": "the expressway"
     },
     {
      "build": "richmond-downtown-time-2026",
      "label": "2026",
      "sub": "today"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it. Traced buildings’ heights are assumed from their material.",
+   "credit": "below",
+   "titleBand": 0.1
   },
   "then-and-now": {
    "title": "Richmond, Then & Now",
@@ -140,7 +149,11 @@
      "build": "richmond-downtown-time-2026",
      "label": "2026"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it. Traced buildings’ heights are assumed from their material.",
+   "credit": "below",
+   "band": 0.19,
+   "titleBand": 0.11
   },
   "richmond-panorama-2026": {
    "title": "Richmond and the James",
@@ -174,11 +187,12 @@
     {
      "build": "richmond-downtown-time-1865"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it."
   },
   "richmond-1886": {
    "title": "Richmond, 1886",
-   "subtitle": "The first Sanborn atlas · downtown and the James",
+   "subtitle": "The first Sanborn map · the James",
    "region": "downtown",
    "sizes": [
     [
@@ -190,7 +204,8 @@
     {
      "build": "richmond-downtown-time-1886"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it. Traced buildings’ heights are assumed from their material."
   },
   "richmond-1925": {
    "title": "Richmond, 1925",
@@ -206,7 +221,8 @@
     {
      "build": "richmond-downtown-time-1925"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it. Traced buildings’ heights are assumed from their material."
   },
   "richmond-1950": {
    "title": "Richmond, 1950",
@@ -222,7 +238,8 @@
     {
      "build": "richmond-downtown-time-1950"
     }
-   ]
+   ],
+   "note": "The ground is today’s, from lidar: cuts and fills made since (the interstate, the floodwall) show in it. Traced buildings’ heights are assumed from their material."
   },
   "richmond-2026": {
    "title": "Richmond, 2026",

@@ -76,45 +76,93 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | the explorer page | `explorer.ts` |
 | a content page (How it's made, About, a new one) | `pages/<slug>.md`; see "Adding a page" in the README |
 | how pages are loaded and linked; the Markdown subset | `pages.ts`, `markdown.ts` |
+| the compare divider, shared by the viewer's Compare mode and a page's `::: compare` figure | `src/compare.ts` |
 | the per-build "How this view was made" text | `makeStory` in `story.ts`, shared by the explorer and the static map pages (it links to `pages/how-its-made.md` section ids) |
 | the static pages for search engines (`p/`, `m/`, `sitemap.xml`), their URLs, head tags and JSON-LD | `static-pages.ts`; shared CSS from `explorer.ts`; "Static pages and search" in the README |
 | building an old commit into the archive | `backfill.ts` |
 | dated series: year built, era rules, curated history | `history.ts`, `asOf` in `scene.ts`, `history/<series>.json` |
+| ground put back before a later cut or fill | `ground` in `history/<series>.json`; `restoreGround`, `lowerGround` in `terrain.ts` |
 | tracing fire-insurance maps (georeference, trace, lifespans) | `tools/sanborn/*.py` → `history/sanborn/` |
+| a pick-out (`--with`: buildings in a polygon or a count's ids) or an island (one polygon drawn alone) | `Highlight`, `Island` in `history.ts`; `switches` in `history/<series>.json`; drawn in `scene.ts`, `render.ts` |
+| a story page's text, numbers, charts and views | `tools/stories/<story>/`: `story.md` → `page.py` → `pages/<slug>.md` (never edit the page itself); `charts.py`, `views.py`, `timeline.ts`; counts in one data file (Jackson Ward: `tools/sanborn/jw/counts.json`) |
 | a set: a big map framed by numbered boxes, its prints and page | `sets/<name>.json`, `tools/sets/set.py`; "Making a set" in the README |
 | one building modeled close up (parts, tracks, canopies, trains) | `tools/stations/<name>.py` → `history/<name>.json`; `src/parts.ts` |
 | a cutaway: the cut plane, sections, plan, flat section, its sheet | `cutaway` in `regions/<name>.json`; `src/cutaway.ts`, `src/cutaway-scene.ts`, `src/section.ts`; `cutaways/<name>.json`, `tools/cutaway/sheet.py`; "Cutaways" in the README |
 | release records: what each sold design was made from, and how to remake it | `tools/release/` → `releases/` |
+| stages, the production board, asset versions, the inspection checklist | `catalog/pipeline.json`, `tools/release/board.py` (→ `pages/board.md`); "Stages and the board" in the README |
 | plate numbers, the taxonomy, the printed title block | `catalog/plates.json`, `tools/release/plates.py`, `tools/print/titleblock.py`, `tools/release/stamp.py`; "Plates" in the README |
 | a published piece corrected or redrawn | `pages/changes.md` (and the store's `changes_page.py`): every change, dated, with the piece's version |
 | the visual check: watched views, crops, tolerance, its report | `tools/check/views.json`, `tools/check/visual.py`; baseline in `tools/check/baseline/` |
 | placing streetcar lines from named corners | `tools/streetcars/build.py` (routes in `tools/streetcars/routes.json`) |
 
+## Stages
+
+Image work moves rough draft → working draft (d1, d2 …) → final draft (rc1, rc2 …) → final
+production, each only through its gate: Chris says it is worth pursuing; Chris approves the look;
+Chris approves release. Stories move research → outline → fact check → outside review →
+published. The board, `catalog/pipeline.json`, says where everything is; keep it current with
+`tools/release/board.py set`, and `board.py check` must pass. See "Stages and the board" in the
+README for the stages, the inspection checklist and the board.
+
+- A plate version (title block, store) is given only at final production. Drafts never appear in
+  the store, on the Changes pages or in a title block.
+- Files and builds carry an asset version, MAJOR.MINOR.PATCH: MAJOR the edition (the only number
+  the block prints), MINOR a revision of the art within an unsold edition, PATCH the same art
+  re-stamped; drafts are prereleases of the next edition (`1.0.0-d2`, `4.0.0-rc1`).
+- A final draft gets one inspection against the README's fixed checklist, at most one fix round
+  and a targeted recheck. Faults seen only up close go on the design's accepted-faults list and
+  are not reported again; nothing in "Known limits" is reported either.
+- A third fix round at any stage needs Chris's say-so (`budget_note`).
+- After release, changes are batched into planned editions with a stated reason: factual
+  correction, wall-visible fault, or improvement.
+- Version numbers printed before November 18, 2026 stay as they are.
+
 ## Release records
 
 Every design for sale must stay revisitable. Publishing or redrawing one is not done until
 `tools/release/record.py <store> <design> --release` has written its record and
-`tools/release/check.py <store> <design> --rebuild` passes; commit `releases/`. Never change a
-published print in place: redraw it as the next version (`-vN` files, catalog `version`,
-`pages/changes.md`). See "Release records" in the README.
+`tools/release/check.py <store> <design> --rebuild` passes; commit `releases/` with the board.
+**Frozen once sold:** an edition that any order includes is never changed; the next change is a
+new edition (`-vN` files, catalog `version`, `pages/changes.md`). An edition with no orders, as
+the store's counts say (`orders.py counts`, then `board.py orders`; "unknown" counts as sold),
+may be replaced in place by corrected art as a revision (`-v3.1` files, catalog
+`asset_version`, record kind `revision`), with a dated line on `pages/changes.md` if it is on
+sale. See "Release records" and "Stages and the board" in the README.
 
 ## Known limits
 
 - The hillshade is drawn as 24 nested bands each way, traced between 5 m grid nodes, so at
   extreme zoom a band's edge shows as a faint step in shade, and its bends as short straight
   runs.
-- Rapids come from the lidar's water surface, read only 10 m or more from shore; a polygon
+- Rapids come from the lidar's water surface, read along the channel over 200 m and only
+  10 m or more from shore, so they sit where the hydro-flattening put its steps (on the James
+  the north channel beside Belle Isle reads level, its drop all at the dam below). A polygon
   far off from the real channel can still produce false falls.
 - Big regions make big SVGs (the I-195 to Rocketts view is about 36 MB; at 25 MB it took a
   browser 10–20 s to open). Use the `--png` render for quick looks.
 - One bad OSM tag must never break a build: parse every numeric tag defensively (one
   building's `building:min_level` is "federal").
 - Bridge ways that fork at a junction ramp at the fork if no other bridge way touches it.
+- Skyways (footbridges up to 80 m with an end at a building) are not drawn: OSM rarely gives
+  their floor. Side-by-side ways of one street are grouped into one deck (`groupDecks`), but only
+  where they run within 15 m of each other their whole length; a sidewalk that turns off its
+  street partway keeps its own profile and can sit a little apart in height.
 - Buildings must sit wholly inside the frame to be drawn. Bridges are cut at the plate's
   edges.
 - A dated series shows only surviving buildings plus what is curated in `history/`; every
   curated item and era rule must cite a source (or say plainly that it is approximate).
+  Traced Sanborn buildings that fall on water, within 12 m of a viaduct's center line, on a
+  track, or under ground more than 3 m above their floor near a later road (8 m anywhere) are
+  left out whole, not trimmed; their heights are assumed from their material.
+- Ground put back before a later work (`ground` in a history file) is an estimate: inside its
+  outline the lidar is replaced by a membrane from the rim and the streets that crossed at grade,
+  or narrow banks are taken down (25 m opening). Relief smaller than the outline's width (a
+  knoll, a ravine head) is lost; in Jackson Ward the error is about 1.5 m mid-trench, 3 m at its
+  ends, and the I-95 bench on the Shockoe Valley side and the Leigh Street cut are kept as measured.
 - Outside the US, terrain is only as fine as its source: Copernicus is a 30 m *surface* model
   (trees and roofs included), and Terrain Tiles is 30 m SRTM in much of the world. Every source
   must carry its credit and license in `dem-sources.ts`; the maps, explorer and prints use them.
 - Concave footprints that interlock can form an ordering cycle, which is broken by depth.
+- With terrain, water mapped as an area narrower than a grid cell, with no grid node inside it,
+  is not drawn; where the lidar finds mapped water more than 1.5 m above the river, or a bar
+  in midstream, the shore there follows the 5 m grid (smoothed) rather than the outline.

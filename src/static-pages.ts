@@ -28,10 +28,12 @@ import { promisify } from 'node:util'
 import type { BuildMeta } from './archive.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
 import { MARK, PROSE_CSS, STORY_CSS, THEME_CSS } from './explorer.ts'
+import { FIGURE_CSS, LIGHTBOX_CSS, lightbox } from './lightbox.ts'
+import { COMPARE_CSS, compareSliders, splitAt, splitOf } from './compare.ts'
 import { escapeHtml } from './markdown.ts'
 import { loadPages, PAGES_DIR, type Page } from './pages.ts'
 import {
-  buildCard, clip, escAttr, firstParagraph, flagshipOf, imageSize, metaTags, pageShop, previewOf, shopFor, siteHref, withCampaign,
+  buildCard, clip, escAttr, firstParagraph, flagshipOf, pageDescription, imageSize, metaTags, pageShop, previewOf, printLinks, shopFor, siteHref, withCampaign, type ShareDoor,
   SITE_NAME, statsLine, type HomeConfig, type Preview, type SiteConfig,
 } from './social.ts'
 import { makeStory } from './story.ts'
@@ -139,6 +141,19 @@ export const planStatic = (builds: readonly BuildMeta[], pageSlugs: readonly str
     forRegion: (region) => byRegion.get(region),
   }
 }
+
+/**
+ * Every map's lasting share page (social.ts writes them as `s/<name>.html`), named as its static
+ * page is: `m/<name>.html` → `s/<name>.html`, with its route and its page's heading.
+ */
+export const shareDoors = (plan: StaticPlan, home?: HomeConfig): ShareDoor[] =>
+  plan.entries.filter((e): e is MapEntry | SeriesEntry => e.kind !== 'page').map((e) => ({
+    name: e.path.replace(/^m\//, '').replace(/\.html$/, ''),
+    route: e.route,
+    build: e.build,
+    title: mapTitle(e, home),
+    ...(e.kind === 'series' ? { key: e.region } : {}),
+  }))
 
 /** The front-page section a region belongs to (the first whose prefixes match), as the explorer groups them. */
 export const sectionOf = (home: HomeConfig | undefined, region: string) =>
@@ -248,10 +263,14 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 .foot { max-width: 1040px; margin: 0 auto; padding: 14px 20px 48px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--dim); }
 .foot p { margin: 0 0 6px; }
 .foot a { color: var(--accent); }
-@media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; } .top nav { margin-left: 0; } }
+/* Wide figures run past the text column, as far as the window allows. */
+.wrap .prose figure.fig.wide { --w: max(100%, min(1120px, 100vw - 56px)); width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
+@media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; overflow-x: clip; } .top nav { margin-left: 0; } }
 `
 
 interface Head {
+  /** Ask search engines not to index the page (an unlisted page, waiting to be reviewed). */
+  readonly noindex?: boolean
   readonly title: string
   readonly description: string
   readonly path: string
@@ -259,6 +278,10 @@ interface Head {
   readonly imageAlt?: string
   readonly type: 'website' | 'article'
   readonly ld: unknown
+  /** The page has numbered figures: their styles and the lightbox. */
+  readonly figures?: boolean
+  /** The page has compare figures (`::: compare`): the slider's styles. */
+  readonly compare?: boolean
 }
 
 interface Ctx {
@@ -276,7 +299,7 @@ const head = (h: Head, ctx: Ctx): string => `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(h.title)}</title>
-${analytics(ctx.config.analytics?.ga)}<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(MARK)}">
+${h.noindex ? '<meta name="robots" content="noindex">\n' : ''}${analytics(ctx.config.analytics?.ga)}<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(MARK)}">
 ${ctx.config.siteUrl === undefined ? '' : `<link rel="sitemap" type="application/xml" title="Sitemap" href="${up(ctx.depth)}sitemap.xml">\n`}${metaTags({
   title: h.title,
   description: h.description,
@@ -288,7 +311,7 @@ ${ctx.config.siteUrl === undefined ? '' : `<link rel="sitemap" type="application
   ...(ctx.config.siteUrl === undefined ? {} : { url: siteHref(h.path, ctx.config.siteUrl) }),
 })}${ldJson(h.ld)}<style>
 ${THEME_CSS}* { box-sizing: border-box; }
-${PROSE_CSS}${STORY_CSS}${STATIC_CSS}</style>
+${PROSE_CSS}${STORY_CSS}${STATIC_CSS}${h.figures ? FIGURE_CSS + LIGHTBOX_CSS : ''}${h.compare ? COMPARE_CSS : ''}</style>
 </head>
 <body>
 `
@@ -309,7 +332,7 @@ const topBar = (ctx: Ctx, campaign: string): string => {
 /** The footer: who draws the maps and how, the credits, every content page. */
 const footer = (ctx: Ctx): string => {
   const u = up(ctx.depth)
-  const links = ctx.pages.map((p) => {
+  const links = ctx.pages.filter((p) => !p.unlisted).map((p) => {
     const path = ctx.plan.forPage(p.slug)
     return path === undefined ? '' : `<a href="${escAttr(u + path)}">${escapeHtml(p.title)}</a>`
   }).filter((x) => x !== '')
@@ -338,19 +361,46 @@ export interface ContentImages {
   readonly flagshipAlt?: string
 }
 
+const ENTITIES: Readonly<Record<string, string>> = { amp: '&', lt: '<', gt: '>', quot: '"', '#39': "'", nbsp: ' ' }
+
+/** Compiled HTML as plain text: tags dropped, entities read, white space collapsed. */
+export const plainText = (html: string): string =>
+  html.replace(/<[^>]*>/g, ' ').replace(/&(amp|lt|gt|quot|#39|nbsp);/g, (_, e: string) => ENTITIES[e] ?? '').replace(/\s+/g, ' ').replace(/ ([.,;:!?)])/g, '$1').replace(/\( /g, '(').trim()
+
+/**
+ * The questions of a compiled page and their answers: every heading whose text ends in a question
+ * mark, with the text under it up to the next heading of any level. For FAQPage structured data.
+ */
+export const faqEntries = (html: string): { question: string; answer: string }[] => {
+  const heads = [...html.matchAll(/<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/g)]
+  const out: { question: string; answer: string }[] = []
+  heads.forEach((m, i) => {
+    const question = plainText(m[2])
+    if (!question.endsWith('?')) return
+    const start = (m.index ?? 0) + m[0].length
+    const end = i + 1 < heads.length ? heads[i + 1].index ?? html.length : html.length
+    const answer = plainText(html.slice(start, end))
+    if (answer !== '') out.push({ question, answer })
+  })
+  return out
+}
+
 /** A content page as a plain HTML document: `p/<slug>.html`. */
 export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}, modified?: string): string => {
   const path = ctx.plan.forPage(page.slug) ?? `p/${page.slug}.html`
-  const description = clip(page.summary ?? firstParagraph(page.html), 300)
+  const description = pageDescription(page)
   const image = imgs.own ?? imgs.flagship
   const imageAlt = imgs.own === undefined ? imgs.flagshipAlt : page.summary ?? page.title
   const shop = pageShop(page.slug, mapRefs(page.html), ctx.config)
+  const html = printLinks(page.html, ctx.config.shop?.products, '../index.html#', (u) => withCampaign(u, page.slug, ctx.config.shop?.url))
   const acts = `<p class="acts"><a class="btn ghost" href="../index.html#/${escAttr(page.slug)}">Open this in the explorer</a>${shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, page.slug, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`}</p>\n`
   const url = abs(path, ctx)
+  const faq = page.schema === 'FAQPage' ? faqEntries(page.html) : []
   const ld = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: page.title,
+    ...(faq.length > 0
+      ? { '@type': 'FAQPage', name: page.title, mainEntity: faq.map((q) => ({ '@type': 'Question', name: q.question, acceptedAnswer: { '@type': 'Answer', text: q.answer } })) }
+      : { '@type': 'Article', headline: page.title }),
     description,
     author: person(ctx),
     inLanguage: 'en',
@@ -359,10 +409,11 @@ export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}
     ...(modified === undefined ? {} : { dateModified: modified }),
     isPartOf: { '@type': 'WebSite', name: SITE_NAME, ...(ctx.config.siteUrl === undefined ? {} : { url: ctx.config.siteUrl }) },
   }
-  return head({ title: `${page.title} · ${SITE_NAME}`, description, path, type: 'article', ld, ...(image === undefined ? {} : { image }), ...(imageAlt === undefined ? {} : { imageAlt }) }, ctx) +
+  return head({ title: `${page.title} · ${SITE_NAME}`, description, path, type: 'article', ld, ...(page.unlisted ? { noindex: true } : {}), ...(page.figures.length > 0 ? { figures: true } : {}), ...(page.figures.some((f) => f.compare) ? { compare: true } : {}), ...(image === undefined ? {} : { image }), ...(imageAlt === undefined ? {} : { imageAlt }) }, ctx) +
     topBar(ctx, page.slug) +
-    `<main class="wrap">\n${acts}<article class="prose">\n${page.html}</article>\n${acts}</main>\n` +
-    footer(ctx) + '</body>\n</html>\n'
+    `<main class="wrap">\n${acts}<article class="prose">\n${html}</article>\n${acts}</main>\n` +
+    footer(ctx) + (page.figures.length > 0 ? `<script>(${lightbox.toString()})(document)</script>\n` : '') +
+    (page.figures.some((f) => f.compare) ? `<script>(${compareSliders.toString()})(document, { at: ${splitAt.toString()}, of: ${splitOf.toString()} })</script>\n` : '') + '</body>\n</html>\n'
 }
 
 // ---- map pages ----------------------------------------------------------------------------------
@@ -452,7 +503,7 @@ export const renderMapPage = (e: MapEntry, ctx: Ctx, previews: ReadonlyMap<strin
   const description = clip(hero?.blurb ? `${hero.blurb} ${card.description}` : card.description, 300)
   const image = previews.get(b.id)
   const alt = mapAlt(b)
-  const shop = shopFor(ctx.config, e.region)
+  const shop = shopFor(ctx.config, e.region, e.year)
   const explore = `${u}index.html${e.route}`
   const series = e.series === undefined ? undefined : ctx.plan.entries.find((x): x is SeriesEntry => x.kind === 'series' && x.path === e.series)
   const story = sec?.page === undefined ? undefined : sec.page.startsWith('#/') ? ctx.plan.forPage(sec.page.slice(2).split('/')[0]) : undefined
@@ -466,6 +517,7 @@ export const renderMapPage = (e: MapEntry, ctx: Ctx, previews: ReadonlyMap<strin
     (image === undefined ? '' : `<figure class="pic"><a href="${escAttr(explore)}"><img src="${escAttr(u + image.path)}" width="${image.width}" height="${image.height}" alt="${escAttr(alt)}"></a><figcaption>${escapeHtml(statsLine(b))}</figcaption></figure>\n`) +
     `<p class="acts"><a class="btn${shop ? ' ghost' : ''}" href="${escAttr(explore)}">Explore this map</a>` +
     (shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, e.region, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`) +
+    (shop?.more ?? []).map((m) => ` <a class="btn" href="${escAttr(withCampaign(m.url, e.region, ctx.config.shop?.url))}">${escapeHtml(m.label)}</a>`).join('') +
     (story === undefined ? '' : ` <a class="btn ghost" href="${escAttr(u + story)}">${escapeHtml(sec?.pageLabel ?? 'Read the story')}</a>`) + `</p>\n` +
     (series === undefined ? '' : `<nav aria-label="Years"><ul class="years">${series.years.map((y) => `<li>${y.year === e.year ? `<span aria-current="page">${y.year}</span>` : `<a href="${escAttr(u + y.path)}"${y.build.time?.title ? ` title="${escAttr(y.build.time.title)}"` : ''}>${y.year}</a>`}</li>`).join('')}</ul></nav>\n`) +
     drawnBy(ctx, series !== undefined) +
@@ -532,7 +584,7 @@ export interface PlainLinks {
 
 export const plainLinks = (plan: StaticPlan, pages: readonly Page[], home?: HomeConfig): PlainLinks[] => {
   const groups: PlainLinks[] = []
-  const pageLinks = pages.map((p) => ({ href: plan.forPage(p.slug) ?? '', label: p.title })).filter((l) => l.href !== '')
+  const pageLinks = pages.filter((p) => !p.unlisted).map((p) => ({ href: plan.forPage(p.slug) ?? '', label: p.title })).filter((l) => l.href !== '')
   if (pageLinks.length) groups.push({ title: 'Pages', links: pageLinks })
   const maps = plan.entries.filter((e): e is MapEntry | SeriesEntry => e.kind !== 'page')
   const label = (e: MapEntry | SeriesEntry) => mapTitle(e, home)
@@ -639,7 +691,8 @@ export const writeStatic = async (
     const base = config.siteUrl
     const day = (iso: string) => iso.slice(0, 10)
     const newestDay = builds.length ? day(newest(builds).createdAt) : undefined
-    const urls = [{ loc: base, ...(newestDay === undefined ? {} : { lastmod: newestDay }) }, ...plan.entries.map((e) => {
+    const hidden = new Set(pages.filter((p) => p.unlisted).map((p) => p.slug))
+    const urls = [{ loc: base, ...(newestDay === undefined ? {} : { lastmod: newestDay }) }, ...plan.entries.filter((e) => e.kind !== 'page' || !hidden.has(e.slug)).map((e) => {
       const lastmod = e.kind === 'page' ? opts.dates?.get(e.slug) : day(e.kind === 'series' ? newest(e.years.map((y) => y.build)).createdAt : e.build.createdAt)
       return { loc: siteHref(e.path, base), ...(lastmod === undefined ? {} : { lastmod }) }
     })]

@@ -1,0 +1,224 @@
+{
+ "design": "pump-house-cutaway",
+ "title": "The New Pump-House, Richmond, about 1885: Cutaway",
+ "version": 1,
+ "asset_version": "1.0.0",
+ "version_note": null,
+ "recorded": "2026-11-19T00:19:57+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "7fcac5f9fb7fafe64c0c9c0930b5a07d777f8eb9",
+  "subject": "The New Pump-House cutaway (BPPH-01): its explorer page, Changes entry and shop links",
+  "dirty": false
+ },
+ "kind": "cutaway",
+ "recipe": {
+  "tool": "tools/cutaway/sheet.py",
+  "run": [
+   "python3 tools/cutaway/sheet.py cutaways/pump-house-1885-pumped.json --print   # where data/ is cached; out/cutaways/print/",
+   "python3 tools/release/remake.py pump-house-cutaway && python3 tools/cutaway/sheet.py cutaways/pump-house-1885-pumped.json --no-build --print   # from the frozen scenes"
+  ],
+  "block": {
+   "collection": "Buildings in their time",
+   "set": "Byrd Park Pump House, 1885",
+   "piece": "Cutaway",
+   "plate": "BPPH-01",
+   "version": "1",
+   "drawn": "2026",
+   "location": "37.537° N 77.486° W",
+   "facing": "40°",
+   "kind": "Building cutaway"
+  },
+  "files": {
+   "pump-house-cutaway_32x24.jpg": {
+    "size": [
+     9600,
+     7200
+    ],
+    "quality": 94,
+    "bytes": 4720524,
+    "sha256": "fec432835df8433c98bdf0c0123544a3ac996580768667012355d6d1e234b7cf",
+    "at": {
+     "x": 7679,
+     "y": 6644,
+     "w": 1593,
+     "h": 226,
+     "u": 1.2257,
+     "where": "foot"
+    }
+   },
+   "pump-house-cutaway_24x18.jpg": {
+    "size": [
+     7200,
+     5400
+    ],
+    "quality": 94,
+    "bytes": 3209599,
+    "sha256": "973c966cf315c3f2da3fb4df90b772ae649789a06ff5887ba13ca6c3916169b5",
+    "at": {
+     "x": 5572,
+     "y": 4956,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_printing": {
+   "tools/cutaway/sheet.py": "a38ed3bff72d0ed8135a68f1fe01c180e78d3df75d264d9f4c623f1e93fe0bc7",
+   "tools/print/titleblock.py": "bd2362c53e0a73a2d9ed9825ed4513e697f1a2094256b39a9a8ef5c79425d8a6",
+   "tools/release/stamp.py": "a71068c515fe9f22382f53275c87f264db4a3dd004f9e35604e7b52bee4dcb88",
+   "catalog/plates.json": "a2670d7cb81ba16f168e734251b3834b87e804c8759d2207157ade9165a6ae7e"
+  },
+  "copied": "out/cutaways/print/<file> is copied unchanged to the store's print_dir"
+ },
+ "scenes": [
+  {
+   "region": "pump-house-cutaway-pumped",
+   "year": 1885,
+   "flags": [],
+   "svg": "out/cutaways/build/pump-house-cutaway-pumped-1885.svg",
+   "sha256": "1564372851898d4c69a4435b4615f6a3a6fc53cc9e31ba9c560c489e531e7013",
+   "frozen": "data/_releases/scenes/1564372851898d4c69a4435b4615f6a3a6fc53cc9e31ba9c560c489e531e7013.svg",
+   "reproduces": true
+  },
+  {
+   "region": "pump-house-cutaway-across-water",
+   "year": 1885,
+   "flags": [],
+   "svg": "out/cutaways/build/pump-house-cutaway-across-water-1885-section.svg",
+   "sha256": "59028fc31b4d3fd0755c824eab5eb07b36925477b888277a3f5eb07887abe4ee",
+   "frozen": "data/_releases/scenes/59028fc31b4d3fd0755c824eab5eb07b36925477b888277a3f5eb07887abe4ee.svg",
+   "output": "-section",
+   "reproduces": true
+  },
+  {
+   "region": "pump-house-cutaway-pump",
+   "year": 1885,
+   "flags": [],
+   "svg": "out/cutaways/build/pump-house-cutaway-pump-1885-section.svg",
+   "sha256": "f594bcbad06531aaa0a8690adacab42e5d32825734228b4d792f100ed72bae4b",
+   "frozen": "data/_releases/scenes/f594bcbad06531aaa0a8690adacab42e5d32825734228b4d792f100ed72bae4b.svg",
+   "output": "-section",
+   "reproduces": true
+  },
+  {
+   "region": null,
+   "year": null,
+   "flags": [],
+   "svg": "out/cutaways/pump-house-1885-pumped-sheet.svg",
+   "sha256": "04fd71875876910d0f5663eef2982f8712d2bb255522604793665a4948311782",
+   "frozen": "data/_releases/scenes/04fd71875876910d0f5663eef2982f8712d2bb255522604793665a4948311782.svg"
+  }
+ ],
+ "inputs": {
+  "cutaways/pump-house-1885-pumped.json": "d6ae5b864b300ba9fef2bfa5706af12217cc408dfef4216024f124a7aabc3453",
+  "tools/cutaway/sheet.py": "bf1f93dbaba2e4dd4bba5fa83bf6fc79851df6155a4c65734c598110428eabcd",
+  "tools/print/titleblock.py": "bd2362c53e0a73a2d9ed9825ed4513e697f1a2094256b39a9a8ef5c79425d8a6",
+  "tools/release/stamp.py": "a71068c515fe9f22382f53275c87f264db4a3dd004f9e35604e7b52bee4dcb88",
+  "catalog/plates.json": "a2670d7cb81ba16f168e734251b3834b87e804c8759d2207157ade9165a6ae7e",
+  "cutaways/pump-house-context.json": "1c335984d37a5da2a9870fe2c6fd684587d1cbc0ceb4ad03ff08b062b01c986a",
+  "tools/cutaway/context.py": "a8fc699e5b4bd454678036d9558c87f5ac5ca9d2ee3e49675998d597848cce12",
+  "regions/pump-house-cutaway-pumped.json": "e5d4743f6ae488e6299141ae5cbef49305639c08e8ef4a050cf1ff2bc9bfb3a7",
+  "history/pump-house.json": "1d75b567d811a5c3dcd8710039f5c796691fb93954ce1f0f0ba16c5c66900fbf",
+  "regions/pump-house-cutaway-across-water.json": "ccdc400ec4397880d1fc87795aa3817eb484e6829cb6b232791e13fef8183d2c",
+  "regions/pump-house-cutaway-pump.json": "38ab8208245f85dc87912d891667de43f7d2ee4e54fa53470dcc1029f58dd57a"
+ },
+ "data": {
+  "richmond-i195-rocketts": {
+   "snapshot": "data/_releases/richmond-i195-rocketts@2ba4af8ceb17",
+   "files": {
+    "dem.bin.gz": "d79e192026f5c6981431a2676a0adc705ca7fa51669de040db23a7252355fc6c",
+    "osm.json": "5d53a15905af727c7e302eb7c482ba6c02d25d01c0b3bfc6651d40789b22b7ce"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/pump-house-1885/pump-house-cutaway_32x24.jpg",
+   "sha256": "fec432835df8433c98bdf0c0123544a3ac996580768667012355d6d1e234b7cf",
+   "bytes": 4720524,
+   "printful_file_id": 1116024799
+  },
+  "prints": [
+   {
+    "file": "print-files/pump-house-1885/pump-house-cutaway_24x18.jpg",
+    "sha256": "973c966cf315c3f2da3fb4df90b772ae649789a06ff5887ba13ca6c3916169b5",
+    "bytes": 3209599,
+    "printful_file_id": 1116024986
+   }
+  ],
+  "canvas": []
+ },
+ "store": {
+  "catalog": {
+   "place": "Byrd Park Pump House",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print"
+   ],
+   "print_dir": "print-files/pump-house-1885",
+   "tags": [
+    "pump-house-1885"
+   ],
+   "credit_extra": "Drawn from the engravings and dimensions published in The American Engineer in 1884 and the National Register nomination of 2002, with the other sources listed on the sheet.",
+   "modern": true,
+   "title": "The New Pump-House, Richmond, about 1885: Cutaway",
+   "ratio": "3x4",
+   "sizes": [
+    "18x24",
+    "24x32"
+   ],
+   "print": "pump-house-cutaway_32x24.jpg",
+   "prints": {
+    "18x24": "pump-house-cutaway_24x18.jpg",
+    "24x32": "pump-house-cutaway_32x24.jpg"
+   },
+   "detail": [
+    0.335,
+    0.19,
+    0.555,
+    0.48333
+   ],
+   "version": 1,
+   "plate": "BPPH-01",
+   "plate_box": [
+    0.7999,
+    0.92278,
+    0.96583,
+    0.95417
+   ]
+  },
+  "products": [
+   {
+    "handle": "the-new-pump-house-richmond-about-1885-cutaway",
+    "id": "gid://shopify/Product/9143184392310",
+    "format": "all (merged)",
+    "status": "ACTIVE",
+    "variants": 4
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/pump-house-cutaway_32x24-print.jpg?v=1795047081",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/pump-house-cutaway_32x24-detail.jpg?v=1795047085",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/pump-house-cutaway_32x24-plate.jpg?v=1795047089"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/pump-house-cutaway_32x24-framed-print-black.jpg?v=1795047098",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/pump-house-cutaway_32x24-framed-print-white.jpg?v=1795047103",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/pump-house-cutaway_32x24-detail.jpg?v=1795047085",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/pump-house-cutaway_32x24-plate.jpg?v=1795047089"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 3,
+  "matched": 3
+ }
+}

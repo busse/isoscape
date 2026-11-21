@@ -27,14 +27,9 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'history' / 'broad-street-station.json'
 STREETCARS = ROOT / 'history' / 'richmond-streetcars.json'
 
+from common import chaikin, densify, lonlat_of, unit  # noqa: E402
+
 LON0, LAT0 = -77.4658, 37.5611
-KX = 111_320 * math.cos(math.radians(LAT0))
-KY = 110_574  # meters per degree of latitude, as region.ts uses
-
-
-def unit(bearing):
-    r = math.radians(bearing)
-    return (math.sin(r), math.cos(r))
 
 
 UA, UB = unit(130.8), unit(40.8)
@@ -49,8 +44,7 @@ def st(s, t):
     return (s * US[0] + t * UT[0], s * US[1] + t * UT[1])
 
 
-def lonlat(p):
-    return [round(LON0 + p[0] / KX, 7), round(LAT0 + p[1] / KY, 7)]
+lonlat = lonlat_of(LON0, LAT0)
 
 
 def ring(pts):
@@ -141,26 +135,6 @@ S_NORTH, S_SOUTH = 230.0, -100.0  # the straight through the station
 # 1956). Meters east and north of the station's center.
 NORTH = [(40, 780), (30, 700), (18, 620), (0, 555), (-25, 500), (-55, 440), (-72, 380), (-76, 300)]
 SOUTH = [(130, -95), (170, -125), (210, -145), (250, -150), (300, -137), (345, -110), (380, -75), (402, -25), (412, 30), (420, 90), (430, 140)]
-
-
-def chaikin(pts, n=3, keep=()):
-    for _ in range(n):
-        out = [pts[0]]
-        for i in range(len(pts) - 1):
-            p, q = pts[i], pts[i + 1]
-            out += [(0.75 * p[0] + 0.25 * q[0], 0.75 * p[1] + 0.25 * q[1]), (0.25 * p[0] + 0.75 * q[0], 0.25 * p[1] + 0.75 * q[1])]
-        out.append(pts[-1])
-        pts = out
-    return pts
-
-
-def densify(pts, step):
-    out = [pts[0]]
-    for p, q in zip(pts, pts[1:]):
-        d = math.dist(p, q)
-        k = max(1, int(d // step))
-        out += [(p[0] + (q[0] - p[0]) * i / k, p[1] + (q[1] - p[1]) * i / k) for i in range(1, k + 1)]
-    return out
 
 
 straight = [st(s, TC) for s in range(int(S_NORTH), int(S_SOUTH) - 1, -10)]

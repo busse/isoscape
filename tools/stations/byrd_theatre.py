@@ -131,7 +131,7 @@ def seats(id_, name, a0, a1, b0, b1, z0, z1, note, src):
 
 
 # ---- the massing, for whole views, and the outline of what the cut lifts away -------------------
-box('byrd-w-mass', 'Byrd Theatre', -W2, W2, 0, LOT_D, 0, Z_ROOF, 'brick', 'approximate',
+box('byrd-w-mass', 'Byrd Theatre', -W2, W2, 0, LOT_D, 0, Z_ROOF, 'redBrick', 'approximate',
     'The theatre as one block on its lot (about 84 x 135 ft, nomination item 10), drawn in views without a cutaway. Height approximate.',
     [NOM], only='whole')
 
@@ -144,8 +144,8 @@ box('byrd-w-mass', 'Byrd Theatre', -W2, W2, 0, LOT_D, 0, Z_ROOF, 'brick', 'appro
 # ---- the front -----------------------------------------------------------------------------------
 FRONT_NOTE = 'The front on Cary Street: red brick with white terra-cotta ornament (nomination), its arched windows, frieze and cornice as the c. 1929 photograph shows them; sizes and places approximate.'
 for k, (a0, a1) in enumerate(((-W2, -6.0), (6.0, W2))):
-    box(C(f'front-pier-{k + 1}'), FACADE, a0, a1, 0, T, 0, Z_FRONT, 'brick', 'written', FRONT_NOTE, [NOM, PHOTO])
-box(C('front-over-doors'), FACADE, -6.0, 6.0, 0, T, 3.6, Z_FRONT, 'brick', 'written', FRONT_NOTE, [NOM, PHOTO])
+    box(C(f'front-pier-{k + 1}'), FACADE, a0, a1, 0, T, 0, Z_FRONT, 'redBrick', 'written', FRONT_NOTE, [NOM, PHOTO])
+box(C('front-over-doors'), FACADE, -6.0, 6.0, 0, T, 3.6, Z_FRONT, 'redBrick', 'written', FRONT_NOTE, [NOM, PHOTO])
 # Black marble round the entrance and the box office between the doors (nomination).
 MARBLE = 'Black Italian marble, framing the main entrance and making the box office (nomination); its extent is approximate.'
 for k, (a0, a1) in enumerate(((-6.4, -6.0), (6.0, 6.4))):
@@ -191,12 +191,12 @@ SIDE = 'An outer side wall of plain brick. Its thickness and height are approxim
 # sidewalk it is hidden by the ground beside it (`ground-east`, below).
 for side, a0, a1 in (('west', -W2, -WI), ('east', WI, W2)):
     west = side == 'west'
-    box(C(f'wall-{side}'), 'Byrd Theatre: side wall', a0, a1, T, B_HOUSE, 0, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
-    box(C(f'wall-{side}-house'), 'Byrd Theatre: side wall', a0, a1, B_HOUSE, B_PIT, Z_FILL, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
-    box(C(f'wall-{side}-front'), 'Byrd Theatre: side wall', a0, a1, B_PIT, B_PROS, -1.6, Z_ROOF, 'brick', 'approximate', SIDE, [NOM])
-    box(C(f'wall-{side}-stage'), 'Byrd Theatre: side wall', a0, a1, B_PROS, LOT_D, Z_BSMT if west else -1.6, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
+    box(C(f'wall-{side}'), 'Byrd Theatre: side wall', a0, a1, T, B_HOUSE, 0, Z_ROOF, 'redBrick', 'approximate', SIDE, [NOM])
+    box(C(f'wall-{side}-house'), 'Byrd Theatre: side wall', a0, a1, B_HOUSE, B_PIT, Z_FILL, Z_ROOF, 'redBrick', 'approximate', SIDE, [NOM])
+    box(C(f'wall-{side}-front'), 'Byrd Theatre: side wall', a0, a1, B_PIT, B_PROS, -1.6, Z_ROOF, 'redBrick', 'approximate', SIDE, [NOM])
+    box(C(f'wall-{side}-stage'), 'Byrd Theatre: side wall', a0, a1, B_PROS, LOT_D, Z_BSMT if west else -1.6, Z_STAGE_ROOF, 'redBrick', 'approximate', SIDE, [NOM])
     if west:
-        box(C(f'wall-{side}-pit'), 'Byrd Theatre: basement wall', a0, a1, B_PIT, B_PROS, Z_BSMT, 0, 'brick', 'approximate', SIDE, [NOM])
+        box(C(f'wall-{side}-pit'), 'Byrd Theatre: basement wall', a0, a1, B_PIT, B_PROS, Z_BSMT, 0, 'redBrick', 'approximate', SIDE, [NOM])
 # ---- the spring under the building ---------------------------------------------------------
 SPRING_SRC = {
     'rm2006': 'https://richmondmagazine.com/best-of-richmond/225-secrets-of-the-city/',
@@ -227,8 +227,8 @@ LINING = 'The plastered inside face of the outer wall. Approximate.'
 # Over the lobby's ceiling nothing is known of the rooms: the wall is left bare.
 box(C('lining-lobby'), LOBBY, -WI, -WI + 0.05, T, B_HOUSE - 0.6, Z_LOBBY, Z_LCEIL, 'plaster', 'approximate', LINING, [NOM])
 box(C('lining-house'), HOUSE, -WI, -WI + 0.05, B_HOUSE, B_PROS, Z_FRONT_ROW - 0.3, Z_CEIL, 'plaster', 'approximate', LINING, [NOM])
-box(C('wall-back'), 'Byrd Theatre: back wall', -WI, 8.0, LOT_D - T, LOT_D, Z_BSMT, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
-box(C('wall-back-east'), 'Byrd Theatre: back wall', 8.0, WI, LOT_D - T, LOT_D, -1.6, Z_STAGE_ROOF, 'brick', 'approximate', SIDE, [NOM])
+box(C('wall-back'), 'Byrd Theatre: back wall', -WI, 8.0, LOT_D - T, LOT_D, Z_BSMT, Z_STAGE_ROOF, 'redBrick', 'approximate', SIDE, [NOM])
+box(C('wall-back-east'), 'Byrd Theatre: back wall', 8.0, WI, LOT_D - T, LOT_D, -1.6, Z_STAGE_ROOF, 'redBrick', 'approximate', SIDE, [NOM])
 # The roof over the auditorium, and the ceiling between the dome and the near side wall, are
 # lifted away in the cutaway (the region's `lift`), so the side wall's niches show; the flat
 # section draws them.

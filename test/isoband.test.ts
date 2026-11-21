@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { isoBand, type BandPoint } from '../src/isoband.ts'
 import { makeTerrain, nodeShade } from '../src/terrain.ts'
 import { makeView } from '../src/view.ts'
-import { shadeAlphas, simplify } from '../src/render.ts'
+import { shadeAlphas, simplify, steepShade } from '../src/render.ts'
 import type { Region } from '../src/region.ts'
 
 const area = (ring: readonly BandPoint[]) => {
@@ -82,6 +82,21 @@ test('nested shade bands add up to the wash a single band of that step would giv
   })
 })
 
+test('steep shade: unchanged under the knee, then darker ever more slowly, never past the clamp', () => {
+  for (const v of [0, 0.7, -2, 3.5, -4.9, 5, -5]) assert.equal(steepShade(v), v)
+  // Symmetric, monotonic, continuous at the knee, and well short of the 12-step clamp.
+  assert.equal(steepShade(-17), -steepShade(17))
+  let last = steepShade(5)
+  for (let v = 5.01; v < 60; v += 0.01) {
+    const s = steepShade(v)
+    assert.ok(s > last && s - last <= 0.01 + 1e-12)
+    last = s
+  }
+  assert.ok(Math.abs(steepShade(5.001) - 5.001) < 1e-5)
+  assert.ok(steepShade(17) > 8.5 && steepShade(17) < 9.5)
+  assert.ok(steepShade(60) < 12)
+})
+
 test('the shade field is zero on flat ground and positive on a slope facing the light', () => {
   const region: Region = { name: 't', title: 't', center: [0, 0], width: 200, depth: 200, bearing: 0, scale: 1 }
   const view = makeView(region, 0)
@@ -113,4 +128,23 @@ test('a simplified draped edge stays within its tolerance of every point, even o
     worst = Math.max(worst, Math.abs(yy - y))
   }
   assert.ok(worst <= 0.26, `off by ${worst}`)
+})
+
+test('rapids clumps: a smooth field from 0.4 to 1.6 that averages about 1', async () => {
+  const { rapidsClumps } = await import('../src/render.ts')
+  let sum = 0
+  let n = 0
+  let jump = 0
+  for (let j = 0; j < 80; j++) {
+    for (let i = 0; i < 80; i++) {
+      const v = rapidsClumps(i, j)
+      assert.ok(v >= 0.4 - 1e-9 && v <= 1.6 + 1e-9)
+      sum += v
+      n++
+      if (i > 0) jump = Math.max(jump, Math.abs(v - rapidsClumps(i - 1, j)))
+    }
+  }
+  assert.ok(Math.abs(sum / n - 1) < 0.1, `mean ${sum / n}`)
+  // Smooth: neighbors never differ by more than about half the range.
+  assert.ok(jump < 0.6, `jump ${jump}`)
 })

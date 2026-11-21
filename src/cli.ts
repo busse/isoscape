@@ -5,6 +5,7 @@ import { parseArgs, promisify } from 'node:util'
 import { archiveBuild, listBuilds } from './archive.ts'
 import { backfill } from './backfill.ts'
 import { cleanDem, fetchDem, loadDem, sampler } from './dem.ts'
+import { sceneCredits } from './credits.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
 import { fetchFootprints, loadFootprints } from './footprints.ts'
 import { coverSampler, fetchLandcover, loadLandcover } from './landcover.ts'
@@ -18,8 +19,8 @@ import { renderPage, renderSvg } from './render.ts'
 import { buildScene, type TimeContext } from './scene.ts'
 import { anchorOf, renderSection, sectionRegion } from './section.ts'
 import { loadSiteConfig, writeSocial } from './social.ts'
-import { pageDates, planStatic, plainLinks, writeStatic } from './static-pages.ts'
-import { dateBuildings, fetchYearBuilt, loadHistory, loadYearBuilt, yearBuiltDirs, type History, type Parcel } from './history.ts'
+import { pageDates, planStatic, plainLinks, shareDoors, writeStatic } from './static-pages.ts'
+import { dateBuildings, dateGrounds, fetchYearBuilt, loadHistory, loadYearBuilt, switchedOn, yearBuiltDirs, type History, type Parcel } from './history.ts'
 import type { PolygonFeature } from './osm.ts'
 
 const run = promisify(execFile)
@@ -51,6 +52,7 @@ const HELP = `isoscape — isometric dot-and-line views of real places
   --year <yyyy>      build a dated region as it stood in that year
   --streetcar-scale <n>  draw streetcar lines and cars at n times life size
                      (else the history's own streetcarScale)
+  --with <names>     draw the curated features switched on by these names (comma-separated)
   --rail-scale <n>   draw railroad track at n times its width (else the history's railScale)
   --no-archive       do not keep this build in out/builds/
   --out <dir>        output directory (default: out)
@@ -98,7 +100,9 @@ const loadInputs = async (name: string) => {
     if (region.time.yearBuilt !== undefined) {
       parcels = (await loadYearBuilt(yearBuiltDirs(region, resolve('data')), region.time.yearBuilt.field, name)).parcels
     }
-    dates = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates)
+    const dated = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates, 4, 8, history.parkingFrom)
+    if (history.groundsByParcel === true) for (const [id, d] of dateGrounds(features, parcels, history.dates)) if (!dated.has(id)) dated.set(id, d)
+    dates = dated
   }
   return { region, features, elevation, extra, history, dates }
 }
@@ -109,6 +113,8 @@ type Inputs = Awaited<ReturnType<typeof loadInputs>>
 let streetcarScale: number | undefined
 /** `--rail-scale`: likewise for railroad track. */
 let railScale: number | undefined
+/** `--with`: curated features switched on by name (see `HistoryFeature.switch`). */
+let switches: string[] = []
 
 const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number, section = false) => {
   const extra: Parameters<typeof buildScene>[4] = { ...inp.extra, ...(section ? { section: true } : {}) }
@@ -116,7 +122,7 @@ const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: nu
     const y = year ?? inp.history.present
     const epoch = inp.history.epochs.find((e) => e.year === y)
     extra.time = {
-      year: y, history: { ...inp.history, ...(streetcarScale === undefined ? {} : { streetcarScale }), ...(railScale === undefined ? {} : { railScale }) }, dates: inp.dates,
+      year: y, history: { ...switchedOn(inp.history, switches), ...(streetcarScale === undefined ? {} : { streetcarScale }), ...(railScale === undefined ? {} : { railScale }) }, dates: inp.dates,
       ...(previous === undefined ? {} : { previous }),
       ...(epoch === undefined ? {} : { title: epoch.title }),
     }
@@ -145,11 +151,13 @@ export const main = async (argv: string[]): Promise<void> => {
       year: { type: 'string' },
       'streetcar-scale': { type: 'string' },
       'rail-scale': { type: 'string' },
+      with: { type: 'string' },
       'site-url': { type: 'string' },
     },
   })
   if (values['streetcar-scale'] !== undefined) streetcarScale = Number(values['streetcar-scale'])
   if (values['rail-scale'] !== undefined) railScale = Number(values['rail-scale'])
+  if (values.with !== undefined) switches = values.with.split(',').map((w) => w.trim()).filter((w) => w.length > 0).sort()
   const [command, name] = positionals
   if (command === undefined || values.help) {
     console.log(HELP)
@@ -215,7 +223,7 @@ export const main = async (argv: string[]): Promise<void> => {
     }
     case 'info': {
       const scene = await loadScene(name, values.palette, values.year === undefined ? undefined : Number(values.year))
-      console.log(JSON.stringify({ region: scene.region.name, bearing: Number(scene.view.bearing.toFixed(2)), ...scene.stats }, null, 2))
+      console.log(JSON.stringify({ region: scene.region.name, bearing: Number(scene.view.bearing.toFixed(2)), ...scene.stats, credits: sceneCredits(scene.region, scene.stats, scene.terrain.flat), ...(scene.tracedLeftOut === undefined ? {} : { tracedLeftOut: scene.tracedLeftOut }) }, null, 2))
       return
     }
     case 'locate': {
@@ -258,7 +266,7 @@ const writeExplorer = async (outDir: string, siteUrl?: string, verbose = false):
   await mkdir(outDir, { recursive: true })
   // Static pages for search engines (static-pages.ts); the share pages name them as canonical.
   const plan = planStatic(builds, pages.map((p) => p.slug), config.home)
-  const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined, (t) => ('build' in t ? plan.forBuild(t.build) : plan.forPage(t.page)))
+  const site = await writeSocial(outDir, builds, pages, config, verbose ? (line) => console.error(line) : undefined, (t) => ('build' in t ? plan.forBuild(t.build) : plan.forPage(t.page)), shareDoors(plan, config.home))
   const statics = await writeStatic(outDir, builds, plan, config, { dates: await pageDates(pages) })
   await writeFile(resolve(outDir, 'index.html'), renderExplorer(builds, pages, {
     ...site, ...(config.shop ? { shop: config.shop } : {}), ...(config.home ? { home: config.home } : {}), ...(config.latestPages === false ? { latestPages: false } : {}), ...(config.analytics ? { analytics: config.analytics } : {}),
@@ -268,7 +276,7 @@ const writeExplorer = async (outDir: string, siteUrl?: string, verbose = false):
     console.error(`wrote ${statics.files.filter((f) => f.endsWith('.html')).length} static pages in ${resolve(outDir, 'p')}/ and ${resolve(outDir, 'm')}/ (${(statics.bytes / 1e6).toFixed(2)} MB)${config.siteUrl === undefined ? '' : ', and sitemap.xml'}`)
     if (site.rendered > 0) console.error(`rendered ${site.rendered} social preview image${site.rendered === 1 ? '' : 's'}`)
     if (site.missing > 0) console.error(`${site.missing} build${site.missing === 1 ? ' has' : 's have'} no social image (no rsvg-convert or Chrome found); their previews use the thumbnail`)
-    console.error(`wrote ${builds.length + pages.length} share pages in ${resolve(outDir, 's')}/`)
+    console.error(`wrote ${builds.length + pages.length + Object.keys(site.shares?.maps ?? {}).length} share pages in ${resolve(outDir, 's')}/${site.stale > 0 ? `, and pointed ${site.stale} left from gone builds at their region's` : ''}`)
     if (config.siteUrl === undefined) console.error('link previews use relative URLs: set "siteUrl" in isoscape.config.json (or ISOSCAPE_SITE_URL, or --site-url) to the public address of out/ before publishing')
   }
   return builds.length
@@ -296,7 +304,7 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
       const sec = sceneOf({ ...inp, region: sectionRegion(scene.region) }, values.palette, year, previous, true)
       const drawn = renderSection(sec, scene.region.cutaway)
       await writeFile(`${base}-section.svg`, drawn.svg)
-      await writeFile(`${base}-section.anchors.json`, JSON.stringify({ viewBox: drawn.viewBox, frame: drawn.frame, anchors: drawn.anchors, traveler: { height: TRAVELER_HEIGHT, shapes: travelerShapes() } }) + '\n')
+      await writeFile(`${base}-section.anchors.json`, JSON.stringify({ viewBox: drawn.viewBox, frame: drawn.frame, anchors: drawn.anchors, traveler: { height: TRAVELER_HEIGHT, shapes: travelerShapes(undefined, scene.region.cutaway.section.travelers?.[0]?.figure) } }) + '\n')
       console.error(`wrote ${base}-section.svg (${sec.items.length} items, ${(sec.sections ?? []).length} cut faces)`)
     }
   }
@@ -318,10 +326,12 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
     title: scene.time === undefined ? scene.region.title : `${scene.region.title}, ${scene.time.year}`,
     palette: paletteName,
     ...(values.note === undefined ? {} : { note: values.note }),
+    ...(switches.length === 0 ? {} : { flags: ['--with', switches.join(',')] }),
     viewBox: rendered.viewBox,
     bearing: scene.view.bearing,
     ms: Math.round(performance.now() - t0),
     stats: { ...scene.stats, ...rendered.stats },
+    credits: sceneCredits(scene.region, scene.stats, scene.terrain.flat),
     config: scene.region,
     sky: scene.palette.sky,
     ...(scene.time === undefined ? {} : {

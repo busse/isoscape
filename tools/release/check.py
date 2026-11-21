@@ -8,8 +8,10 @@ commit and frozen data byte for byte.
 --rebuild checks out each recorded commit into a scratch worktree, points its data/ at the
 frozen copies, builds each scene as recorded, and compares SHA-256. A scene that matches is
 proof the design can be remade exactly; the check writes "reproduces" into the record. A
-stamped version (kind "stamp", stamp.py) is also stamped again from its base files with the
-recorded commit's tools, and every file must come out byte for byte ("restamped").
+stamped version (kind "stamp", stamp.py, or "redraw", stamp.py --base) is also stamped again from its base files with the
+recorded commit's tools, and every file must come out byte for byte ("restamped"). A revision
+(kind "revision": corrected art replacing an unsold edition's files, asset version 3.1.0, record
+v3.1.json) is checked as a redraw, and the files it superseded must still be there unchanged.
 """
 import argparse, hashlib, json, os, shutil, subprocess, sys, tempfile, time
 
@@ -22,6 +24,11 @@ MEMO_P = os.path.join(ISO, 'data', '_releases', 'rebuilt.json')
 MEMO = json.load(open(MEMO_P)) if os.path.exists(MEMO_P) else {}
 
 
+# Kinds whose files are stamped from base files (stamp.py): a new block on the previous version's
+# files ("stamp"), or new art composed and then stamped ("redraw", stamp.py --base).
+STAMPED = ('stamp', 'redraw', 'revision')   # a revision (record.py) is a redraw within an unsold edition
+
+
 def sha(p):
     h = hashlib.sha256()
     with open(p, 'rb') as f:
@@ -29,10 +36,16 @@ def sha(p):
     return h.hexdigest()
 
 
+def outputs(r):
+    """Every output file of a record: its print, any other size's print (a "prints" map), its canvas."""
+    o = r['outputs']
+    return [o['print']] + o.get('prints', []) + o['canvas']
+
+
 def problems(store, r):
     bad = []
     files = json.load(open(os.path.join(store, 'pipeline', 'files.json')))
-    for o in [r['outputs']['print']] + r['outputs']['canvas']:
+    for o in outputs(r):
         p = os.path.join(store, o['file'])
         if o.get('missing') or not os.path.exists(p): bad.append(('output missing', o['file'])); continue
         if sha(p) != o['sha256']: bad.append(('output changed', o['file']))
@@ -46,10 +59,14 @@ def problems(store, r):
     for s in r['scenes']:
         f = os.path.join(ISO, s.get('frozen') or '')
         if s.get('sha256') and (not s.get('frozen') or not os.path.exists(f) or sha(f) != s['sha256']): bad.append(('frozen scene missing or changed', s.get('frozen')))
-    for f, v in ((r.get('recipe') or {}).get('files') or {}).items() if r.get('kind') == 'stamp' else []:
+    for f, v in ((r.get('recipe') or {}).get('files') or {}).items() if r.get('kind') in STAMPED else []:
         q = os.path.join(store, v['base'])
         if not os.path.exists(q): bad.append(('stamp base missing', v['base']))
         elif sha(q) != v['base_sha256']: bad.append(('stamp base changed', v['base']))
+    for o in (r.get('supersedes') or {}).get('outputs', []):   # a revision keeps the files it replaced
+        q = os.path.join(store, o['file'])
+        if not os.path.exists(q): bad.append(('superseded output missing', o['file']))
+        elif o.get('sha256') and sha(q) != o['sha256']: bad.append(('superseded output changed', o['file']))
     c = r['isoscape']['commit']
     if subprocess.run(['git', '-C', ISO, 'cat-file', '-e', c + '^{commit}']).returncode != 0: bad.append(('commit not in repo', c))
     return bad
@@ -99,7 +116,7 @@ def restamp(store, r, keep):
     """(matched, total) files of a stamped version made again from their base files with the
     recorded commit's stamp.py and title block, compared by SHA-256."""
     store = os.path.abspath(store)
-    files = r['recipe']['files']; outs = {os.path.basename(o['file']): o for o in [r['outputs']['print']] + r['outputs']['canvas']}
+    files = r['recipe']['files']; outs = {os.path.basename(o['file']): o for o in outputs(r)}
     wt = worktree(r['isoscape']['commit'], {'data': {}}, keep)
     ok = 0
     with tempfile.TemporaryDirectory() as t:
@@ -123,11 +140,12 @@ def main():
     try:
         for k in a.designs or list(index):
             if time.time() - t0 > a.budget: print('OUT OF TIME: run again to continue'); break
-            p = os.path.join(REL, k, f"v{index[k]['current']}.json")
+            p = os.path.join(REL, k, index[k].get('record') or f"v{index[k]['current']}.json")
             r = json.load(open(p))
             bad = problems(a.store, r)
-            line = f"{k} v{r['version']}: " + ('OK' if not bad else f'{len(bad)} problem(s): {bad[:3]}')
-            if a.rebuild and r.get('kind') == 'stamp' and (a.again or 'restamped' not in r):
+            av = r.get('asset_version')
+            line = f"{k} v{r['version']}" + (f" ({av})" if av and av != f"{r['version']}.0.0" else '') + ': ' + ('OK' if not bad else f'{len(bad)} problem(s): {bad[:3]}')
+            if a.rebuild and r.get('kind') in STAMPED and (a.again or 'restamped' not in r):
                 ok, n = restamp(a.store, r, keep)
                 r['restamped'] = {'files': n, 'matched': ok}
                 json.dump(r, open(p, 'w'), indent=1, ensure_ascii=False)

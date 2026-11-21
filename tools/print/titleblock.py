@@ -14,6 +14,12 @@ info: {collection, set, piece, plate, version, drawn, location, facing} and, opt
 (what sort of piece it is: "Map", "Landmark", "Building cutaway"). A block without a kind is
 drawn exactly as before; with one, the maker's two lines move up and the kind is set beneath
 them, one line at KIND_SIZE on the baseline of the lower row's values.
+
+min_px (block, stamp): the smallest the taxonomy may be set, in the file's pixels (6 pt at
+300 dpi is 25). A taxonomy that would shrink below it to fit its cell on one line (a long set
+name) is set on two lines instead, broken after a ›, as large as fits up to the full value size
+and never under min_px; the top row's labels move up to make room. Without min_px, or when the
+line fits at min_px or more, the block is drawn exactly as before.
 """
 import os
 import numpy as np
@@ -67,7 +73,19 @@ def check_glyphs(text):
         raise ValueError(f'the print face has no glyph for {missing!r} in {text!r}')
 
 
-def block(info, u=1.0):
+def _two_lines(d, text, size, width, min_size):
+    """The taxonomy on two lines, broken after a ›: (lines, font), the longer line as short as
+    can be, at the largest size up to `size` at which both fit, not under `min_size`."""
+    parts = text.split(' › ')
+    f = _font('regular', size)
+    splits = [(' › '.join(parts[:i]) + ' ›', ' › '.join(parts[i:])) for i in range(1, len(parts))]
+    lines = min(splits, key=lambda ls: max(d.textlength(x, font=f) for x in ls))
+    while size * 0.96 >= min_size and max(d.textlength(x, font=f) for x in lines) > width:
+        size *= 0.96; f = _font('regular', size)
+    return lines, f
+
+
+def block(info, u=1.0, min_px=None):
     """The title block for one print, as an RGBA image with a paper ground."""
     for v in list(info.values()) + [taxonomy(info)]:
         check_glyphs(str(v))
@@ -97,14 +115,21 @@ def block(info, u=1.0):
     # two rows of labeled cells
     vals = dict(info, taxonomy=taxonomy(info), plate=info['plate'].replace('-', '·'))
     lab = _font('regular', 17 * u)
+    tw = (TOP[0][2] - 36) * u
+    two = min_px is not None and _fit(d, vals['taxonomy'], 'regular', 24 * u, tw).size < min_px
     for row, y0 in [(TOP, 0), (LOW, mid)]:
         x = c1
         for i, (label, key, w) in enumerate(row):
             if i:
                 d.line((x, y0, x, y0 + mid), fill=INK, width=hair)
-            _spaced(d, x + 18 * u, y0 + 34 * u, label.upper(), lab, DIM, 3 * u)
+            _spaced(d, x + 18 * u, y0 + (28 if two and row is TOP else 34) * u, label.upper(), lab, DIM, 3 * u)
             v = str(vals[key])
-            d.text((x + 18 * u, y0 + 74 * u), v, font=_fit(d, v, 'regular', 24 * u, (w - 36) * u), fill=INK, anchor='ls')
+            if two and key == 'taxonomy':
+                lines, f = _two_lines(d, v, 24 * u, tw, min_px)
+                for ln, base in zip(lines, (53, 80)):
+                    d.text((x + 18 * u, y0 + base * u), ln, font=f, fill=INK, anchor='ls')
+            else:
+                d.text((x + 18 * u, y0 + 74 * u), v, font=_fit(d, v, 'regular', 24 * u, (w - 36) * u), fill=INK, anchor='ls')
             x += w * u
     return im
 
@@ -175,11 +200,11 @@ def find_spot(sheet, bw, bh, face=None, pad=None, step=4, where='foot'):
     return None
 
 
-def stamp(sheet, info, u, face=None, shrink=(1.0, 0.9, 0.8, 0.7, 0.6), where=('foot', 'head')):
+def stamp(sheet, info, u, face=None, shrink=(1.0, 0.9, 0.8, 0.7, 0.6), where=('foot', 'head'), min_px=None):
     """Stamp the block on a copy of `sheet`; returns (sheet, (x, y, w, h, u)). Tries smaller sizes
-    if the corner is too full; raises if nothing fits."""
+    if the corner is too full; raises if nothing fits. min_px: as block's."""
     for s in shrink:                    # full size in the header beats a shrunken block in the foot
-        b = block(info, u * s)
+        b = block(info, u * s, min_px)
         for place in where:
             at = find_spot(sheet, b.width, b.height, face, where=place)
             if at:

@@ -183,3 +183,21 @@ test('a traveler on a palette with a route halo stands over a light outline; wit
   assert.equal(winter.shapes.indexOf(halos[0]), 0)
   assert.equal(travelerItem(view, palette('paper'), 't', [0, 0], 0, 1).shapes.filter((s) => s.line === true).length, 0)
 })
+
+test('a piece of a hipped roof keeps the whole roof\'s slopes', async () => {
+  const { roofPiece, roofSolid } = await import('../src/cutaway-scene.ts')
+  // A hip 30 m by 18 m, 0 to 9 m: the ridge runs 12 m, from x = 9 to x = 21.
+  const whole: Vec2[] = [[0, 0], [30, 0], [30, 18], [0, 18]]
+  const top = (s: Solid) => Math.max(...s.faces.flatMap((f) => f.pts.map((p) => p[2])))
+  const zAt = (s: Solid, x: number) => Math.max(...s.faces.flatMap((f) => f.pts).filter((p) => Math.abs(p[0] - x) < 1e-6).map((p) => p[2]))
+  // The piece east of x = 6 reaches the ridge, and at its cut it stands as the whole roof does (6 m),
+  // not at its eaves as a hip on its own ring would.
+  const east = roofPiece(whole, [[6, 0], [30, 0], [30, 18], [6, 18]], 0, 9)
+  assert.ok(Math.abs(top(east) - 9) < 1e-6)
+  assert.ok(Math.abs(zAt(east, 6) - 6) < 1e-6)
+  assert.ok(zAt(roofSolid([[6, 0], [30, 0], [30, 18], [6, 18]], 0, 9, 'hip'), 6) < 1e-6)
+  // A piece wholly in the west hip stays under it.
+  const west = roofPiece(whole, [[0, 10], [6, 10], [6, 18], [0, 18]], 0, 9)
+  assert.ok(Math.abs(top(west) - 6) < 1e-6)
+  assert.equal(west.faces.filter((f) => f.role === 'cut').length, 0)
+})

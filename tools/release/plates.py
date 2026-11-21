@@ -15,7 +15,7 @@ import argparse, csv, glob, json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ISO = os.path.normpath(os.path.join(HERE, '..', '..'))
 REG = os.path.join(ISO, 'catalog', 'plates.json')
-PLATE = re.compile(r'^[A-Z]{3}-(\d{2,3}|M)$')
+PLATE = re.compile(r'^[A-Z]{3,4}-(\d{2,3}|M)$')   # a set's code is three or four letters (BPPH, Nov. 18, 2026)
 
 
 def load():
@@ -95,6 +95,7 @@ def check(store=None):
     bad += [f'duplicate plate {x}' for x in sorted({x for x in plates if plates.count(x) > 1})]
     bad += [f'duplicate design {x}' for x in sorted({x for x in designs if designs.count(x) > 1})]
     bad += [f'malformed plate {x}' for x in plates if not PLATE.match(x)]
+    bad += [f'malformed set code {s["code"]}' for s in reg['sets'] if not re.fullmatch(r'[A-Z]{3,4}', s['code'])]
     bad += [f'unknown set in {x}' for x in plates if x.split('-')[0] not in codes]
     bad += [f'set {s["code"]} in unknown collection' for s in reg['sets'] if s['collection'] not in cols]
     bad += [f'empty or malformed kind in {p["plate"]}' for p in reg['plates'] if 'kind' in p and (not isinstance(p['kind'], str) or not p['kind'].strip() or len(p['kind']) > 24)]
@@ -117,9 +118,10 @@ def rows(reg=None):
     cols = {c['id']: c['name'] for c in reg['collections']}
     order = {c['id']: i for i, c in enumerate(reg['collections'])}
     setorder = {s['code']: i for i, s in enumerate(reg['sets'])}
-    ps = sorted(reg['plates'], key=lambda p: (order[sets[p['plate'][:3]]['collection']], setorder[p['plate'][:3]], sort_key(p)[1] if sort_key(p)[1] >= 0 else 999))
+    code = lambda p: p['plate'].split('-')[0]
+    ps = sorted(reg['plates'], key=lambda p: (order[sets[code(p)]['collection']], setorder[code(p)], sort_key(p)[1] if sort_key(p)[1] >= 0 else 999))
     for p in ps:
-        s = sets[p['plate'][:3]]
+        s = sets[code(p)]
         yield {'plate': p['plate'].replace('-', '·'), 'title': p['title'], 'piece': p['piece'], 'set': s['name'],
                'collection': cols[s['collection']], 'place': p.get('place') or '', 'design': p['design']}
 
@@ -135,7 +137,7 @@ def main():
     if a.cmd == 'info':
         print(json.dumps(info(a.arg, a.version), ensure_ascii=False, indent=1))
     if a.cmd == 'next':
-        nums = [int(p['plate'][4:]) for p in load()['plates'] if p['plate'].startswith(a.arg + '-') and p['plate'][4:].isdigit()]
+        nums = [int(n) for c, n in (p['plate'].split('-') for p in load()['plates']) if c == a.arg and n.isdigit()]
         print(f'{a.arg}-{(max(nums) if nums else 0) + 1:02d}')
     if a.cmd == 'list':
         rs = list(rows())

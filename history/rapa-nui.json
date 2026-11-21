@@ -1,0 +1,212 @@
+{
+ "title": "Rapa Nui (Easter Island), today",
+ "method": "Today's OpenStreetMap and a 30 m world elevation model. Labels are placed at OpenStreetMap's positions for each named place; only places that open maps already publish are named.",
+ "present": 2026,
+ "about": "Rapa Nui, a Chilean island in the eastern Pacific. About two-fifths of it is Rapa Nui National Park, managed since 2017–18 by the Ma'u Henua Polynesian Indigenous Community.",
+ "epochs": [
+  {
+   "year": 2026,
+   "title": "Rapa Nui today",
+   "note": "Open data only: OpenStreetMap and Copernicus GLO-30."
+  }
+ ],
+ "features": [
+  {
+   "id": "rn-label-hanga-roa",
+   "name": "Hanga Roa",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.42734,
+    -27.14812
+   ],
+   "anchor": "middle",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/node/214231955"
+   ]
+  },
+  {
+   "id": "rn-label-rano-kau",
+   "name": "Rano Kau",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.43489,
+    -27.1868
+   ],
+   "anchor": "middle",
+   "caption": "crater, 320 m",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/node/612974210"
+   ]
+  },
+  {
+   "id": "rn-label-orongo",
+   "name": "Orongo",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.44326,
+    -27.18669
+   ],
+   "anchor": "start",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/way/208002899"
+   ]
+  },
+  {
+   "id": "rn-label-tahai",
+   "name": "Ahu Tahai",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.42693,
+    -27.1395
+   ],
+   "anchor": "end",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/way/222144438"
+   ]
+  },
+  {
+   "id": "rn-label-vinapu",
+   "name": "Ahu Vinapu",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.40665,
+    -27.17678
+   ],
+   "anchor": "middle",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/node/2307664656"
+   ]
+  },
+  {
+   "id": "rn-label-puna-pau",
+   "name": "Puna Pau",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.40373,
+    -27.14766
+   ],
+   "anchor": "middle",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/node/6556430294"
+   ]
+  },
+  {
+   "id": "rn-label-akivi",
+   "name": "Ahu Akivi",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.39515,
+    -27.11587
+   ],
+   "anchor": "middle",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/way/502222393"
+   ]
+  },
+  {
+   "id": "rn-label-terevaka",
+   "name": "Terevaka",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.38039,
+    -27.086
+   ],
+   "anchor": "middle",
+   "caption": "506 m, the highest point",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/node/305166217"
+   ]
+  },
+  {
+   "id": "rn-label-anakena",
+   "name": "Anakena",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.32324,
+    -27.07382
+   ],
+   "anchor": "middle",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/way/26273549"
+   ]
+  },
+  {
+   "id": "rn-label-rano-raraku",
+   "name": "Rano Raraku",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.2885,
+    -27.12208
+   ],
+   "anchor": "middle",
+   "caption": "the moai quarry",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/node/2311203621"
+   ]
+  },
+  {
+   "id": "rn-label-tongariki",
+   "name": "Ahu Tongariki",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.27699,
+    -27.12577
+   ],
+   "anchor": "start",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/way/221696391"
+   ]
+  },
+  {
+   "id": "rn-label-poike",
+   "name": "Poike",
+   "kind": "label",
+   "from": 1000,
+   "to": 9999,
+   "at": [
+    -109.25475,
+    -27.1092
+   ],
+   "anchor": "middle",
+   "note": "Position from OpenStreetMap.",
+   "sources": [
+    "https://www.openstreetmap.org/node/4310358151"
+   ]
+  }
+ ],
+ "rules": [],
+ "dates": []
+}

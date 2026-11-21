@@ -24,12 +24,16 @@ export interface BuildMeta {
   readonly palette: string
   readonly createdAt: string
   readonly note?: string
+  /** Build flags that change the scene (`--with`), as given: a record replays them. */
+  readonly flags?: readonly string[]
   readonly git?: { readonly commit: string; readonly dirty: boolean; readonly subject: string }
   readonly viewBox: readonly [number, number, number, number]
   readonly bearing: number
   readonly ms: number
   readonly bytes: number
   readonly stats: Readonly<Record<string, number>>
+  /** The sources this scene drew from, as its credit line names them (`sceneCredits`). */
+  readonly credits?: readonly string[]
   readonly config: Region
   readonly files: { readonly svg: string; readonly thumb?: string; readonly social?: string; readonly preview?: string }
   /** The page color, for a swatch where there is no thumbnail. */

@@ -8,6 +8,14 @@ the new files can always be made again from them byte for byte (check.py --rebui
 
     python3 tools/release/stamp.py <store-dir> <design>... [--version N] [--out DIR] [--budget S]
     python3 tools/release/stamp.py <store-dir> all --budget 160      every design in the catalog
+    python3 tools/release/stamp.py <store-dir> <design> --base <dir>   a redraw: stamp new art
+
+A redraw (new art, not just a block) is composed first (compose.py, and tools/print/canvas.py
+for its canvas files) into a folder in the store, its files named as those tools name them
+(<design>_<size>.jpg, <design>_canvas-<w>x<h>.jpg, in <dir> or <dir>/canvas). --base <dir>
+stamps those files instead of the catalog's current ones, as the next version, into the
+folders where the current files are; the log marks them "redraw" (record.py then records the
+new art's scenes and data, not the previous version's).
 
 Without --out the new files go beside the old ones, named <stem>-vN_<size>.jpg, and each is
 logged in <store>/pipeline/state/stamps.json: its base file and that file's SHA-256, the block's
@@ -21,7 +29,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ISO = os.path.normpath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, os.path.join(ISO, 'tools', 'print')); sys.path.insert(0, HERE)
 from PIL import Image  # noqa: E402
-import titleblock, plates  # noqa: E402
+import titleblock, plates, board  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
 WRAP = 1.5            # inches of mirrored wrap around a canvas face (tools/sets/set.py, compose.py)
@@ -33,9 +41,15 @@ def size_u(long_in, dpi):
     return round(1.3 * (long_in / 36) ** 0.5 * dpi / 300, 4)
 
 
+VTAG = r'-v\d+(?:\.\d+){0,2}(?:-(?:d|rc)\d+)?$'   # -v3; an asset version's -v3.1, -v3.1.1; a draft's -v3.0.0-rc1
+
+
 def versioned(name, n):
+    """The file's name for version n: an edition number (3 -> -v3) or an asset version's file
+    suffix ("v3.1" for 3.1.0, a revision of an unsold edition; see README "Stages and the board")."""
     stem, size = re.match(r'(.+?)(_(?:canvas-)?\d+x\d+\.jpg)$', name).groups()
-    return re.sub(r'-v\d+$', '', stem) + f'-v{n}' + size
+    tag = n if isinstance(n, str) else f'v{n}'
+    return re.sub(VTAG, '', stem) + '-' + tag + size
 
 
 def sheet_geometry(name, im):
@@ -59,6 +73,24 @@ def files_of(store, d, key):
         for sub in (os.path.join(pdir, 'canvas'), pdir):
             if os.path.isdir(sub):
                 out += sorted(os.path.join(sub, f) for f in os.listdir(sub) if rx.match(f))
+    return out
+
+
+def unversioned(name):
+    """A store file's name as compose.py or canvas.py writes it: without its -vN."""
+    stem, size = re.match(r'(.+?)(_(?:canvas-)?\d+x\d+\.jpg)$', name).groups()
+    return re.sub(VTAG, '', stem) + size
+
+
+def redraw_files(store, d, key, base):
+    """(source, destination folder) for a redraw: each of the catalog's current files, found
+    under its unversioned name in `base` (or `base`/canvas), stamped into the current file's folder."""
+    out = []
+    for cur in files_of(store, d, key):
+        name = unversioned(os.path.basename(cur))
+        src = next((p for p in (os.path.join(base, name), os.path.join(base, 'canvas', name)) if os.path.exists(p)), None)
+        if src is None: raise SystemExit(f'{key}: no {name} in {base} (compose it, and its canvas files, first)')
+        out.append((src, os.path.dirname(cur)))
     return out
 
 
@@ -90,18 +122,31 @@ def main():
     ap.add_argument('--version', type=int, help='the new version (default: the catalog version + 1)')
     ap.add_argument('--drawn', default='2026'); ap.add_argument('--out'); ap.add_argument('--dry', action='store_true')
     ap.add_argument('--budget', type=float, default=1e9)
+    ap.add_argument('--base', help='a redraw: stamp the newly composed files in this folder (see above)')
+    ap.add_argument('--asset', help='the asset version (README "Stages and the board"): 3.1.0 for a revision of an unsold '
+                    'edition (files -v3.1), 3.0.1 for a re-stamp of the same art; the block prints only its MAJOR. '
+                    'A draft (-dN, -rcN) is stamped only with --out, never into the store')
     a = ap.parse_args()
+    asset = a.asset
+    if asset:
+        if not board.parse(asset): raise SystemExit(f'--asset {asset}: MAJOR.MINOR.PATCH[-dN|-rcN]')
+        if a.version and a.version != board.parse(asset)[0]: raise SystemExit(f'--version {a.version} and --asset {asset} disagree')
+        if board.parse(asset)[3] and not a.out: raise SystemExit(f'{asset} is a draft: stamp it only with --out (drafts never go into the store)')
+    base = os.path.join(a.store, a.base) if a.base and not os.path.isabs(a.base) else a.base
     t0 = time.time()
     cat = json.load(open(os.path.join(a.store, 'pipeline', 'catalog.json')))['designs']
     log_p = os.path.join(a.store, 'pipeline', 'state', 'stamps.json')
     log = json.load(open(log_p)) if os.path.exists(log_p) else {}
     report = {}
     for key in (list(cat) if a.designs == ['all'] else a.designs):
-        d = cat[key]; n = a.version or d.get('version', 1) + 1
+        d = cat[key]; n = board.parse(asset)[0] if asset else a.version or d.get('version', 1) + 1
+        tag = (f'v{asset}' if board.parse(asset)[3] else board.file_suffix(asset)) if asset else n   # a draft: -v3.0.0-rc1
         info = plates.info(key, n, a.drawn)
-        report[key] = {'version': n, 'info': info, 'files': {}}
-        for src in files_of(a.store, d, key):
-            dst = os.path.join(a.out or os.path.dirname(src), versioned(os.path.basename(src), n))
+        report[key] = {'version': n, 'asset_version': asset or f'{n}.0.0', 'info': info, 'files': {}}
+        pairs = redraw_files(a.store, d, key, base) if base else [(src, os.path.dirname(src)) for src in files_of(a.store, d, key)]
+        for src, folder in pairs:
+            dst = os.path.join(a.out or folder, versioned(os.path.basename(src), tag))
+            if os.path.abspath(dst) == os.path.abspath(src): raise SystemExit(f'{dst} would overwrite its own base')
             if a.dry: report[key]['files'][os.path.basename(src)] = os.path.basename(dst); continue
             if not a.out and os.path.basename(dst) in log and os.path.exists(dst): continue
             if time.time() - t0 > a.budget:
@@ -109,10 +154,11 @@ def main():
             at = stamp_file(src, dst, info)
             report[key]['files'][os.path.basename(src)] = {'to': os.path.basename(dst), 'at': at}
             if not a.out:
-                log[os.path.basename(dst)] = {'design': key, 'version': n, 'base': os.path.relpath(src, a.store), 'base_sha256': sha(src),
+                log[os.path.basename(dst)] = {'design': key, 'version': n, 'asset_version': asset or f'{n}.0.0', 'base': os.path.relpath(src, a.store), 'base_sha256': sha(src),
                     'file': os.path.relpath(dst, a.store), 'sha256': sha(dst), 'info': info,
                     'at': {'x': at[0], 'y': at[1], 'w': at[2], 'h': at[3], 'u': at[4], 'where': at[5]},
                     'tools': {f: sha(os.path.join(ISO, f)) for f in ('tools/print/titleblock.py', 'tools/release/stamp.py', 'catalog/plates.json')}}
+                if base: log[os.path.basename(dst)]['redraw'] = True
                 json.dump(log, open(log_p, 'w'), indent=1, ensure_ascii=False)
             print(key, os.path.basename(dst), at, flush=True)
     if a.out:

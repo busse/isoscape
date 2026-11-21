@@ -1,7 +1,7 @@
 {
  "about": "The plate register: one permanent catalog number for every isoscape design. A plate never changes when a design is redrawn (that is its version) and is never reused, even if a design is withdrawn. Printed form uses a middle dot (STC·02); data and filenames use a hyphen (STC-02). See \"Plates\" in the README.",
  "scheme": {
-  "plate": "<SET>-<NN>: the set's three-letter code, then the piece's number within the set",
+  "plate": "<SET>-<NN>: the set's code of three or four letters, then the piece's number within the set",
   "numbers": "two digits, given in order of first release within the set and never reused; a set of boxes uses its box numbers, 00 for the set sheet (the framed menu of boxes) and M for its map",
   "taxonomy": "isoscape › collection › set › piece. A collection or set can be renamed without changing any plate.",
   "kind": "optional, per plate: what sort of piece it is (\"Map\", \"Landmark\", \"Building cutaway\"), printed as one line of the title block; absent prints nothing"
@@ -47,6 +47,11 @@
    "slug": "broad-street-1943"
   },
   {
+   "code": "MSS",
+   "name": "Main Street Station, 1952",
+   "collection": "buildings"
+  },
+  {
    "code": "LMA",
    "name": "American Landmarks",
    "collection": "landmarks"
@@ -55,6 +60,11 @@
    "code": "LMW",
    "name": "World Landmarks",
    "collection": "landmarks"
+  },
+  {
+   "code": "BPPH",
+   "name": "Byrd Park Pump House, 1885",
+   "collection": "buildings"
   }
  ],
  "registered": "2026-11-15",
@@ -744,6 +754,29 @@
    "title": "Broad Street Station, 1943: The Cutaway",
    "piece": "Cutaway",
    "place": "Broad Street Station",
+   "kind": "Building cutaway"
+  },
+  {
+   "plate": "BSS-16",
+   "design": "broad-street-1943-03-scotts-addition",
+   "title": "Scott's Addition, Broad Street Station 1943",
+   "piece": "Box 3",
+   "place": "Broad Street Station"
+  },
+  {
+   "plate": "MSS-01",
+   "design": "main-street-1952-cutaway",
+   "title": "Main Street Station, about 1952: Cutaway",
+   "piece": "Cutaway",
+   "place": "Main Street Station",
+   "kind": "Building cutaway"
+  },
+  {
+   "plate": "BPPH-01",
+   "design": "pump-house-cutaway",
+   "title": "The New Pump-House, Richmond, about 1885: Cutaway",
+   "piece": "Cutaway",
+   "place": "Byrd Park Pump House",
    "kind": "Building cutaway"
   }
  ]

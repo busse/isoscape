@@ -19,25 +19,25 @@ John Russell Pope's Broad Street Station opened in January 1919 for the RF&P and
 
 *Where the Coast Line met the RF&P*
 
-About a mile northwest of the station, the RF&P main line from Washington met the Atlantic Coast Line's Belt Line at a wye worked from AY Tower. Trains for the Coast Line swung south onto the Belt Line here; Broad Street trains took the third leg down to the station.
+About a mile northwest of the station, the RF&P main line from Washington met the Atlantic Coast Line's Belt Line at the wye called AY, its switches worked from AY Tower (not drawn: no source here places it). Trains for the Coast Line swung south onto the Belt Line here; Broad Street trains took the third leg down to the station.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@-494,-979,6) · Sources: [1](https://chicagorailfan.com/stbrric.html) [2](https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad) [3](https://www.richmondrailroadmuseum.com/railroad-history)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@-494,-1066,6) · Sources: [1](https://chicagorailfan.com/stbrric.html) [2](https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad) [3](https://www.richmondrailroadmuseum.com/railroad-history)
 
 ### 2. The State Fair grounds
 
 *North Boulevard, 1940*
 
-From 1906 the State Fair filled these grounds north of the tracks every fall, and Parker Field went up on them for baseball in 1934. The fair association bought Strawberry Hill in 1941 and held its first fair there after the war, in 1946. The Diamond stands on the site.
+From 1906 the State Fair filled these grounds north of the tracks every fall, around its racetrack. Parker Field went up on them in 1934 (not drawn here), a ballpark only from 1954. The fair association bought Strawberry Hill in 1941 and held its first fair there after the war, in 1946. The Diamond stands on the site.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1940@-73,-724,6) · Sources: [1](https://richmondmagazine.com/news/news/a-fair-history/) [2](https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm) [3](https://urbanscalerichmondvirginia.blogspot.com/2014/12/a-brief-history-of-sports-complex-in.html)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1940@-73,-810,6) · Sources: [1](https://richmondmagazine.com/news/news/a-fair-history/) [2](https://co-opliving.com/coopliving/issues/2009/September%202009/cover.htm) [3](https://urbanscalerichmondvirginia.blogspot.com/2014/12/a-brief-history-of-sports-complex-in.html) [4](https://en.wikipedia.org/wiki/The_Diamond_(Richmond,_Virginia))
 
-### 3. Hermitage Road
+### 3. Scott's Addition
 
-*Industry along the tracks*
+*Warehouses between the RF&P and the Belt Line*
 
-Once the Seaboard Air Line joined the RF&P here in 1900, firms lined Hermitage Road for the sidings: the Richmond Foundry and Manufacturing Company built at 2300 Hermitage Road in 1906, and the Putney shoe works bought part of the old fair grounds. The warehouses are a historic district today.
+Laid out for houses west of the Boulevard, Scott's Addition was zoned for industry in 1927, and spurs from the railroads ran into its streets. By 1943 the National Biscuit Company, here since 1923, had General Baking's new plant, two dairies and a bag factory for neighbors. The warehouses now hold breweries, cideries and apartments.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@83,-517,6) · Sources: [1](https://dhr.virginia.gov/?p=28752) [2](https://richmondmagazine.com/arts-entertainment/whole-foods-richmond/)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@-450,-669,6) · Sources: [1](https://www.dhr.virginia.gov/historic-registers/127-6136/) [2](https://www.dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6136_ScottsAdditionHD_2005_NRHP_Final.pdf) [3](https://richmondbizsense.com/2022/06/24/scotts-addition-in-three-parts-the-eclectic-architecture-of-a-former-warehouse-district-guest-commentary/) [4](https://en.wikipedia.org/wiki/Scott%27s_Addition_Historic_District)
 
 ### 4. Seaboard Junction
 
@@ -45,7 +45,7 @@ Once the Seaboard Air Line joined the RF&P here in 1900, firms lined Hermitage R
 
 Just north of the station the Seaboard Air Line's main line left the RF&P and ran southeast to Main Street Station. Seaboard trains between Washington and the South passed Broad Street by; only from 1959 did they call there, backing in. The Seaboard and the Coast Line merged in 1967.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@26,-448,6) · Sources: [1](https://chicagorailfan.com/stbrric.html) [2](https://www.richmondrailroadmuseum.com/railroad-history)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@28,-502,6) · Sources: [1](https://chicagorailfan.com/stbrric.html) [2](https://www.richmondrailroadmuseum.com/railroad-history)
 
 ### 5. The loop and the sheds
 
@@ -61,15 +61,15 @@ Trains ran in off the RF&P at one end of the loop and out at the other. Seven pa
 
 The extract house Conrad Sauer founded at 17th and Broad in 1887 moved to Broad and Hermitage in 1911, by the rail sidings. When Sauer died in 1927 it was the country's largest producer of extracts and spices. The headquarters is on the National Register, and the Sauer's Vanilla sign still lights Broad Street.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@110,-185,6) · Sources: [1](https://en.wikipedia.org/wiki/Sauer_Brands) [2](https://rictoday.6amcity.com/business/history-sauer-company-richmond-va) [3](https://www.dhr.virginia.gov/?p=16671)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@83,-310,6) · Sources: [1](https://en.wikipedia.org/wiki/Sauer_Brands) [2](https://rictoday.6amcity.com/business/history-sauer-company-richmond-va) [3](https://www.dhr.virginia.gov/?p=16671)
 
 ### 7. Main Street Station
 
 *The Seaboard and the C&O*
 
-Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened in 1901 under its clock tower, with a gable-roofed train shed 530 feet long behind. The Seaboard moved its trains to Broad Street in 1959; the C&O stayed until Amtrak took over in 1971. Amtrak trains call here again.
+Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened in 1901: a head house under a steep hipped roof of red tile, its clock tower about 148 feet to the finial, and behind it a gable-roofed train shed more than 500 feet long on the tracks' trestle, here in plain massing. The Seaboard moved to Broad Street in 1959; the C&O stayed until Amtrak took over in 1971.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@1524,848,6) · Sources: [1](https://www.dhr.virginia.gov/?p=15225) [2](https://www.greatamericanstations.com/stations/RVM) [3](https://en.wikipedia.org/wiki/Richmond_Main_Street_Station)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@1533,674,6) · Sources: [1](https://www.dhr.virginia.gov/?p=15225) [2](https://archive.org/details/sim_railway-age_1900-07-13_32_28) [3](https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/data/va0562data.pdf) [4](https://tile.loc.gov/storage-services/master/pnp/habshaer/va/va0500/va0562/photos/305470p.jpg) [5](https://tile.loc.gov/storage-services/service/pnp/habshaer/va/va0500/va0562/photos/305472pv.jpg) [6](https://www.greatamericanstations.com/stations/RVM) [7](https://en.wikipedia.org/wiki/Richmond_Main_Street_Station)
 
 ### 8. The Triple Crossing
 
@@ -77,7 +77,7 @@ Downtown, the Seaboard Air Line and the C&O shared Main Street Station, opened i
 
 Just east of 14th and Dock streets the C&O's viaduct crossed over the Seaboard, which crossed over the Southern on the ground: three railroads at three levels, built in 1900 and 1901. Now and then the railroads staged photographs with a train on every level. CSX and Norfolk Southern trains still cross here.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@1478,816,6) · Sources: [1](https://www.richmondrailroadmuseum.com/railroad-history) [2](https://www.virginiaplaces.org/rail/seaboardairline.html) [3](https://en.wikipedia.org/wiki/Triple_Crossing)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@1478,732,6) · Sources: [1](https://www.richmondrailroadmuseum.com/railroad-history) [2](https://www.virginiaplaces.org/rail/seaboardairline.html) [3](https://en.wikipedia.org/wiki/Triple_Crossing)
 
 ### 9. The C&O viaduct
 
@@ -85,7 +85,7 @@ Just east of 14th and Dock streets the C&O's viaduct crossed over the Seaboard, 
 
 In 1901 the C&O raised its line on a viaduct along the north bank of the James, three miles of trestle past Tredegar and down Dock Street, so trains of coal for Newport News bypassed the crowded route through the city. CSX coal trains still run on it.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@730,759,6) · Sources: [1](https://www.virginiaplaces.org/rail/cando.html) [2](https://www.railpictures.net/photoexif/391125) [3](https://industrialscenery.blogspot.com/2021/11/csxc-james-river-viaduct-and-tredegar.html)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@730,682,6) · Sources: [1](https://www.virginiaplaces.org/rail/cando.html) [2](https://www.railpictures.net/photoexif/391125) [3](https://industrialscenery.blogspot.com/2021/11/csxc-james-river-viaduct-and-tredegar.html)
 
 ### 10. Hull Street Station
 
@@ -93,15 +93,15 @@ In 1901 the C&O raised its line on a viaduct along the north bank of the James, 
 
 Across the river, the Southern Railway's trains for Danville left from Hull Street Station, built in 1915 when the Southern gave up its passenger depot on 14th Street. Passenger service ended in 1957. The station reopened in 2011 as the Richmond Railroad Museum.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@1168,1051,6) · Sources: [1](https://www.american-rails.com/varrms.html) [2](https://en.wikipedia.org/wiki/Southern_Railway_Depot_(Richmond,_Virginia)) [3](https://en.wikipedia.org/wiki/Hull_Street_Station)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@1168,965,6) · Sources: [1](https://www.american-rails.com/varrms.html) [2](https://en.wikipedia.org/wiki/Southern_Railway_Depot_(Richmond,_Virginia)) [3](https://en.wikipedia.org/wiki/Hull_Street_Station)
 
 ### 11. The Belt Line bridge
 
 *The Coast Line over the James*
 
-Coast Line trains for Petersburg and Florida crossed the James on the Belt Line's double-track concrete bridge, opened with Broad Street Station in 1919; the stone piers of the single-track bridge of 1891 stood in the river beside it. It carries CSX trains today.
+Coast Line trains for Petersburg and Florida crossed the James on the Belt Line's double-track bridge, opened with Broad Street Station in 1919, drawn here as a deck on piers. It carries CSX trains today.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@-1445,653,6) · Sources: [1](https://virginiaplaces.org/rail/atlanticcoastline.html) [2](https://en.wikipedia.org/wiki/CSX_A-Line_Bridge) [3](https://www.richmondrailroadmuseum.com/railroad-history)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-lines:1943@-1445,568,6) · Sources: [1](https://virginiaplaces.org/rail/atlanticcoastline.html) [2](https://en.wikipedia.org/wiki/CSX_A-Line_Bridge) [3](https://www.richmondrailroadmuseum.com/railroad-history)
 
 ### 12. Hotel William Byrd
 
@@ -109,7 +109,7 @@ Coast Line trains for Petersburg and Florida crossed the James on the Belt Line'
 
 Built in 1925 for the passengers across the street, the eleven-story William Byrd, designed by Marcellus Wright, had nearly 200 rooms; with the station it made the traveler's first picture of Richmond. It closed in the 1980s and has been apartments for older residents since 1996.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-station:1943@52,189,6) · Sources: [1](https://www.dhr.virginia.gov/?p=15215) [2](https://richmondbizsense.com/2017/03/23/5m-renovation-wraps-up-at-william-byrd/)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-station:1943@88,70,6) · Sources: [1](https://www.dhr.virginia.gov/?p=15215) [2](https://richmondbizsense.com/2017/03/23/5m-renovation-wraps-up-at-william-byrd/)
 
 ### 13. Broad Street Station
 
@@ -125,7 +125,7 @@ John Russell Pope set the station back from Broad Street on a built-up mound tha
 
 Opened January 6, 1919, the station was faced in Indiana limestone behind a colonnade after the Doric of St. Peter's Square, under the first dome on a major railroad station, its rotunda 100 feet high. In 1943 the dome was still tile; copper replaced it in 1955.
 
-[See it on the map](https://busse.github.io/isoscape/#broad-street-station-front:1943@70,-10,6) · Sources: [1](https://sah-archipedia.org/node/20518) [2](https://www.dhr.virginia.gov/historic-registers/127-0226/) [3](https://rvanews.com/?p=17011)
+[See it on the map](https://busse.github.io/isoscape/#broad-street-station-front:1943@70,11,6) · Sources: [1](https://sah-archipedia.org/node/20518) [2](https://www.dhr.virginia.gov/historic-registers/127-0226/) [3](https://rvanews.com/?p=17011)
 
 ## How it was drawn
 
