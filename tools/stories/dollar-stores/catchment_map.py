@@ -17,7 +17,8 @@ SURFACE, INK, INK2, MUTED = "#fcfcfb", "#0b0b0b", "#52514e", "#8a8984"
 GRAYS = ["#e2e1dc", "#cfcec8"]
 YELLOW, BLUE = "#eda100", "#2a78d6"
 MAIN = {"trunk", "primary", "secondary"}
-OFFSET = {"Hartfield": (-125, -32), "Deltaville": (12, 8), "Topping": (10, 10)}  # label placement, points
+RIGHT = {"Hartfield"}  # labels set to the left of their store
+OFFSET = {"Hartfield": (-12, -2), "Deltaville": (12, 8), "Topping": (10, 10)}  # label placement, points
 
 
 def main():
@@ -63,7 +64,7 @@ def main():
         ax.scatter([r.x], [r.y], marker="s", s=150, fc=YELLOW, ec=INK, lw=1.8, zorder=8)
         yr = r.authorized.split("/")[-1]
         ax.annotate(f"{r.place} {yr}\n{r.catch_people:,} people · grocery {r.nearest_grocery_road_m / 1000:.1f} km",
-                    (r.x, r.y), xytext=OFFSET.get(r.place, (10, 6)), textcoords="offset points", fontsize=7.2, zorder=9,
+                    (r.x, r.y), xytext=OFFSET.get(r.place, (10, 6)), textcoords="offset points", ha="right" if r.place in RIGHT else "left", va="center" if r.place in RIGHT else "baseline", fontsize=7.2, zorder=9,
                     bbox=dict(boxstyle="round,pad=0.2", fc=SURFACE, ec="none", alpha=0.9))
     ax.set_xlim(x0 - pad, x1 + pad)
     ax.set_ylim(y0 - pad, y1 + pad)

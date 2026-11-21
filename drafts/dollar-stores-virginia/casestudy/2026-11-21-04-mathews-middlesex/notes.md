@@ -66,3 +66,6 @@ labeled that way and kept apart from the seeded 20.
    - Known fault: the Hartfield label sits about 1 km southwest of its store and can read as
      belonging to nothing.
    - A fourth round needs Chris's say-so under the round budget, so it is left as listed.
+4. r4 (Chris, 12:40: "Yes Hartfield label is important to me"; round 4 approved by him). The
+   Hartfield label now sits to the left of its store, on the same line. Seen, and clear of the
+   Dutton label.
