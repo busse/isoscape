@@ -35,7 +35,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
-| — | The Byrd Theatre: Cutaway | cutaway | 1.0.0-rc1 | no |
+| BYRD·01 | The Byrd Theatre: Cutaway | cutaway | 1.0.0-rc1 | no |
 
 ## Final production
 

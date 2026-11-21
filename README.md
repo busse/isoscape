@@ -766,7 +766,11 @@ tightens the column's spacing (sheet units: `head`, `callout`, `group`, `keyHead
 `traveler`, `notes`, `between`; the defaults, 170, 58, 36, 150, 92, 26, 40 and 68, are the
 released sheets'); the Pump House sheet uses it to end its column by 6,520 and free the corner.
 `blockMinPt` keeps the title block's taxonomy at that size or more on the 24 × 18 in print (see
-"Plates").
+"Plates"). `blockFace` (`[x0, y0, x1, y1]`, sheet units) is the area the block is placed in,
+scaled to each print: a themed sheet's border rules run the sheet's width, so without it the
+stamp finds no corner. The Byrd sheet gives the area inside its border, 174 to 9,426 across and
+174 to 7,026 down (130, 130, 7,070, 5,270 pixels at 24 × 18). Without it the whole sheet is
+searched, as for the released sheets, whose prints stay byte for byte as they were.
 
 A spec may also set `theme` (`"holiday"`: accents from `SHEET_THEMES` in `src/palette.ts`, a
 border with holly at the corners; margins only), `halo` (leaders drawn over a paper halo, for a

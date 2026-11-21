@@ -2728,7 +2728,7 @@
    "orders_counted": "2026-11-18"
   },
   "byrd-1928-cutaway": {
-   "plate": null,
+   "plate": "BYRD-01",
    "status": "active",
    "asset_version": "1.0.0-rc1",
    "published_version": null,
@@ -2741,8 +2741,8 @@
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": "21911e5",
-   "branch": "cutaway-byrd",
-   "worktree": "/home/claude/wt-byrd",
+   "branch": "byrd-rc1-stamp",
+   "worktree": "/home/claude/wt-byrd-rc1",
    "links": [
     "/mnt/user-data/outputs/cutaway/byrd/sheet.png",
     "/mnt/user-data/outputs/cutaway/byrd/sources.md",
