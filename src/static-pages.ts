@@ -264,8 +264,8 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 .foot p { margin: 0 0 6px; }
 .foot a { color: var(--accent); }
 /* Wide figures run past the text column, as far as the window allows. */
-.wrap .prose figure.fig.wide { --w: min(1120px, 100vw - 56px); width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
-@media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; } .top nav { margin-left: 0; } }
+.wrap .prose figure.fig.wide { --w: max(100%, min(1120px, 100vw - 56px)); width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
+@media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; overflow-x: clip; } .top nav { margin-left: 0; } }
 `
 
 interface Head {

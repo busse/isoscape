@@ -1326,7 +1326,8 @@ figures, each with a caption under it; clicking one opens it large in a lightbox
 page's other figures a step away and a grid of them all. The Jackson Ward story's views open at
 3,200 pixels wide there, twice the 1,600 the page shows; its charts open at their own 1,600. A
 figure can also be a compare slider: two pictures of one frame laid over each other, with the
-same divider the explorer uses to compare two builds, dragged or moved with the arrow keys. Its
+same divider the explorer uses to compare two builds, dragged or moved with the arrow keys (on a
+phone, a sideways drag moves it and a vertical swipe scrolls the page). Its
 expand button opens the same slider large in the lightbox. The Jackson Ward year views are drawn
 in one shared frame for this, so every year lines up with the others pixel for pixel.
 

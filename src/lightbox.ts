@@ -314,7 +314,8 @@ export const LIGHTBOX_CSS = `html.lb-on, html.lb-on body { overflow: hidden; }
 .lb-thumb:hover { border-color: var(--accent); }
 .lb-thumb span { font-weight: 400; color: var(--dim); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .lb-thumb img { width: 100%; aspect-ratio: 16 / 10; object-fit: contain; background: var(--bg); border-radius: 5px; }
-@media (max-width: 600px) { .lb-stage { padding: 8px; } .lb-prev, .lb-next { top: auto; bottom: 8px; transform: none; } .lb-gridbtn { font-size: 0; } .lb-gridbtn::before { content: "▦"; font-size: 14px; } }
+@media (max-width: 600px) { .lb-stage { padding: 8px; } .lb-prev, .lb-next { grid-row: 2 / 3; top: auto; bottom: 8px; transform: none; } .lb-gridbtn { font-size: 0; } .lb-gridbtn::before { content: "▦"; font-size: 14px; } }
+@media (max-width: 600px), (pointer: coarse) { .lb-bar { padding: 6px 10px; gap: 6px; } .lb-bar .lb-btn { min-width: 44px; min-height: 44px; border-radius: 22px; padding: 4px 12px; } .lb-close { font-size: 17px; } }
 `
 
 /** Numbered figures in the reading column: the picture, then a book-style caption in small type on a light ground. */
