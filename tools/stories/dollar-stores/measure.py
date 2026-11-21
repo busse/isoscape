@@ -71,7 +71,15 @@ def builtup(blocks, center, density, close_m, imperv_min):
 
 def edge_distance(area, center, bearing):
     end = Point(center.x + RAY_M * math.sin(bearing), center.y + RAY_M * math.cos(bearing))
-    hit = area.intersection(LineString([center, end]))
+    ray = LineString([center, end])
+    try:
+        hit = area.intersection(ray)
+    except Exception:  # a few CDP edges are degenerate for GEOS (equal endpoints); repair and retry
+        from shapely import make_valid, set_precision
+        try:
+            hit = set_precision(make_valid(area), 0.01).intersection(ray)
+        except Exception:
+            return float("nan")
     if hit.is_empty:
         return 0.0
     pts = []
@@ -132,11 +140,16 @@ def main():
         uag = gpd.read_file(f"{d}/ua.gpkg")
         ua = unary_union(uag.geometry) if len(uag) else None
         stores = gpd.read_file(f"{d}/stores.gpkg")
+        # a few national SNAP rows have a blank or zero coordinate; they cannot be placed
+        stores = stores[np.isfinite(stores.geometry.x) & np.isfinite(stores.geometry.y)]
 
         inside = blocks[blocks.representative_point().within(place)]
         w = inside["POP20"].astype(float)
         c = inside.geometry.centroid
-        center = Point((c.x * w).sum() / w.sum(), (c.y * w).sum() / w.sum())
+        if w.sum() > 0:
+            center = Point((c.x * w).sum() / w.sum(), (c.y * w).sum() / w.sum())
+        else:  # no one counted inside (a few CDPs): the place's own interior point
+            center = place.representative_point()
         GAP_FALLBACK.clear()
         if FAST:  # lead and loose only (loose is needed for C5 on the homes-only edge)
             lead_area = builtup(blocks, center, *SETTINGS["lead"])

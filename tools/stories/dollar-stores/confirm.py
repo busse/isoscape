@@ -124,8 +124,19 @@ def place_features(args):
         inner, outer = lead.buffer(-MARGIN_M), lead.buffer(MARGIN_M)
         win = pgeom.buffer(8500)
         hp = HP.iloc[list(HP.sindex.query(win, predicate="intersects"))]
-        cand = hp[hp.intersects(lead.boundary.buffer(MARGIN_M))]
-        crosses = cand[cand.intersects(inner) & ~cand.within(outer)]
+        # HPMS sections are short (cut wherever any attribute changes), so the test is made on
+        # each whole road: the road's sections within the window, merged. A road crosses when it
+        # reaches 30 m inside the built-up area and 30 m outside it, and touches the edge line.
+        # Its AADT at the crossing is the highest among its sections within 30 m of the edge line.
+        # (First version tested single sections; on the discovery data that missed most
+        # crossings: fixed before any held-out place was read.)
+        near_edge = hp[hp.intersects(lead.boundary.buffer(MARGIN_M))]
+        ok = []
+        for road in near_edge["road"].unique():
+            geom = hp[hp["road"] == road].geometry.union_all()
+            if geom.intersects(inner) and not geom.within(outer):
+                ok.append(road)
+        crosses = near_edge[near_edge["road"].isin(ok)]
         rank, rank_b = {}, None
         if len(crosses):
             r = crosses.groupby("road")["aadt"].max().sort_values(ascending=False)

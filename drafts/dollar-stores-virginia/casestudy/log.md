@@ -270,3 +270,23 @@ Folder: `2026-11-21-09-replication/`.
 - **Fixes on the way.**
   - The first CDP OSM cut ran out of memory and wrote nothing; it now runs in batches of 60.
   - prep.py now takes a state and GEOIDs, because Virginia has duplicate CDP names.
+- **Chris (16:22).** "It is okay to take a bit of artistic license if needed." Taken as license
+  over form: a schematic "drive in" strip, simplified roads, a composite labeled as
+  illustrative. The facts and numbers stay exact.
+- **A fix to C1 after v2, found on discovery data only.**
+  - The first version of the M5 crossing rule tested each HPMS section alone. Sections are
+    short, so it missed most crossings: Virginia C1 read 5 of 21 against 5.4 expected.
+  - Fixed to test each whole road (its sections merged). Virginia C1 then reads 12 of 21
+    against 8.4 expected, interval −0.03 to +0.38. That matches the Fable review's own
+    estimate.
+  - The run-1 output is kept as `conf_disc_run1_section_bug` in the working folder (not in
+    git).
+  - No held-out place had been read.
+- **Other fixes.**
+  - Three CDPs with no population raised GEOS errors. The center now falls back to the
+    place's interior point, and degenerate geometry is repaired.
+  - run_measure.py now logs a failing place and goes on.
+- **Disk.** Space on the cloud workspace ran low. Deleted Claude's own temporary copies: the
+  unzipped HPMS history (already analyzed) and duplicate Census zips. Each state's OSM cuts,
+  NLCD tiles and block files are removed once the state is scored. The sources stay on the
+  Mac.

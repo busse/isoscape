@@ -1,6 +1,9 @@
 """Cut town windows out of a filtered Virginia OSM file into Overpass-style JSON.
 
-Usage: python3 osm_extract.py <virginia-roads.osm.pbf> <bboxes.txt> <out-dir> [batch]
+Usage: python3 osm_extract.py <roads.osm.pbf>[,<neighbor.osm.pbf>...] <bboxes.txt> <out-dir> [batch]
+
+Several files, comma-separated, are read in turn so a window at a state line gets the
+neighboring state's roads too; an element in two files is kept once.
 
 Windows are written in batches (default 60 per pass over the file): holding all of
 Virginia's 461 CDP windows at once ran out of memory on the first try.
@@ -34,9 +37,21 @@ def main():
         run(src, [(*x, []) for x in allw[i:i + batch]], out)
 
 
-def run(src, wins, out):
+def run(srcs, wins, out):
+    seen = set()
+    for src in srcs.split(","):
+        run_one(src, wins, seen)
+    for slug, *_, acc in wins:
+        json.dump({"source": "Geofabrik extracts, filtered", "elements": acc}, open(f"{out}/{slug}.json", "w"))
+        print(slug, len(acc))
+
+
+def run_one(src, wins, seen):
     fp = osmium.FileProcessor(src).with_locations()
     for o in fp:
+        key = (o.type_str(), o.id)
+        if key in seen:
+            continue
         if o.is_way():
             try:
                 pts = [(nd.lon, nd.lat) for nd in o.nodes]
@@ -49,6 +64,7 @@ def run(src, wins, out):
             pts, ids = [(o.location.lon, o.location.lat)], None
         else:
             continue
+        seen.add(key)
         lons = [p[0] for p in pts]
         lats = [p[1] for p in pts]
         tags = dict(o.tags)
@@ -60,10 +76,6 @@ def run(src, wins, out):
             else:
                 acc.append({"type": "way", "id": o.id, "nodes": ids, "tags": tags,
                             "geometry": [{"lat": la, "lon": lo} for lo, la in pts]})
-    for slug, *_, acc in wins:
-        json.dump({"source": "Geofabrik virginia-latest.osm.pbf, filtered", "elements": acc},
-                  open(f"{out}/{slug}.json", "w"))
-        print(slug, len(acc))
 
 
 if __name__ == "__main__":
