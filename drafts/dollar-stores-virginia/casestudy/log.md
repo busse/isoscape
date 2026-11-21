@@ -193,3 +193,15 @@ Folder: `2026-11-21-06-edge-stores/`, with `hypotheses.md` (written first) and `
 - **Fixes.**
   - A snapping bug in the 5 km reach was fixed and rerun; the run-1 output is kept.
   - The first chart title overstated what the data says about land, and was rewritten.
+
+## Step 7: traffic counts, a licensed source (13:03)
+
+- **The question.** Chris asked: "Is there any data on traffic census to help shake this?"
+- **The source.**
+  - FHWA's HPMS 2024 "Spatial All Sections" on data.transportation.gov (dataset 42um-tgh5).
+  - License: Public Domain U.S. Government, read from the dataset's own metadata.
+  - It has 519,074 Virginia road sections with AADT, local roads included.
+  - It was reached from the Mac and queried by state (stateid 51).
+- **What it replaces.** VDOT's own layer, whose terms limit use to the Commonwealth's
+  official business.
+- **Not yet fetched or used.** The test is proposed to Chris in the reply.
