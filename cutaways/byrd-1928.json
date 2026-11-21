@@ -585,5 +585,7 @@
       "px": 34
     }
   ],
-  "columnEnd": 6520
+  "columnEnd": 6520,
+  "blockMinPt": 6,
+  "blockFace": [174, 174, 9426, 7026]
 }

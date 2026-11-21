@@ -21,7 +21,8 @@ dashed ring for one that is approximate.
 (tools/print/titleblock.py, the fields from tools/release/plates.py for the spec's `design`)
 set in the bottom-right corner below the callout column, at the size stamp.py gives a sheet of
 that length (a spec's `blockMinPt` keeps the block's taxonomy at that size or more, on two lines
-if need be: titleblock.py min_px). Each is named <design>_<w>x<h>.jpg (version 1 has no -vN suffix) and logged, with
+if need be: titleblock.py min_px; its `blockFace`, in sheet units, places the block inside a
+theme's border). Each is named <design>_<w>x<h>.jpg (version 1 has no -vN suffix) and logged, with
 the block's fields, placement and every file's SHA-256, in print/prints.json. No canvas files:
 a canvas's 1.5 in of mirrored wrap would carry the title, the credit line and the column's text,
 all within 1.5 in of the sheet's edges, mirrored round its sides.
@@ -696,7 +697,10 @@ def prints(spec, sheet, out_dir, version=1):
             C.svg_to_png(sheet, png, w_in * 300, h_in * 300, background=PAPER)
             im = Image.open(png).convert('RGB')
         assert im.size == (w_in * 300, h_in * 300), im.size
-        im, at = titleblock.stamp(im, info, stamp.size_u(w_in, 300), where=('foot', 'corner', 'head'), min_px=min_px)
+        # A spec's `blockFace` [x0, y0, x1, y1] (sheet units): the area the block is placed in,
+        # inside a theme's border, whose rules would otherwise leave it no corner; absent, the whole sheet.
+        face = tuple(round(v * w_in * 300 / W) for v in spec['blockFace']) if spec.get('blockFace') else None
+        im, at = titleblock.stamp(im, info, stamp.size_u(w_in, 300), face, where=('foot', 'corner', 'head'), min_px=min_px)
         p = os.path.join(out_dir, f'{design}_{w_in}x{h_in}.jpg')
         for q in (94, 90, 86, 82, 78):
             im.save(p, quality=q, dpi=(300, 300), optimize=True)

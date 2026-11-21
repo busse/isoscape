@@ -2728,7 +2728,7 @@
    "orders_counted": "2026-11-18"
   },
   "byrd-1928-cutaway": {
-   "plate": null,
+   "plate": "BYRD-01",
    "status": "active",
    "asset_version": "1.0.0-rc1",
    "published_version": null,
@@ -2737,12 +2737,12 @@
    "orders": null,
    "rounds": 1,
    "waiting_on": "agent",
-   "decision": "owner approved the look of d4 on 2026-11-21, with the planning session's layout notes (column widths and densities) taken into the revision; harp stays in the right box; no hold for offline research. rc1: layout rebalance, review and merge to main, plate, stamp, one inspection, at most one fix round; then his release approval.",
+   "decision": "rc1 stamped as a proof (BYRD-01, block full size in the corner, 37cb237); the one independent final-draft inspection is still to run, from the packet in outputs/cutaway/byrd/rc1/inspection-packet; then at most one fix round, a targeted recheck, and his release approval.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": "21911e5",
-   "branch": "cutaway-byrd",
-   "worktree": "/home/claude/wt-byrd",
+   "branch": "byrd-rc1-stamp",
+   "worktree": "/home/claude/wt-byrd-rc1",
    "links": [
     "/mnt/user-data/outputs/cutaway/byrd/sheet.png",
     "/mnt/user-data/outputs/cutaway/byrd/sources.md",
@@ -2755,7 +2755,8 @@
    "notes": "open: a source for the segregation caption; the 78% figure is approximate; the notes block is long. Holiday piece.",
    "budget_note": null,
    "log": [
-    "2026-11-21: working draft -> final draft"
+    "2026-11-21: working draft -> final draft",
+    "2026-11-21: plate BYRD-01 assigned; rc1 stamped as the release-candidate proof (blockFace inside the holly border); inspection not yet run"
    ]
   },
   "main-street-1952-cutaway": {

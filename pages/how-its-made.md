@@ -1195,7 +1195,8 @@ at 24 × 18). There are no canvas files: a canvas's 1.5 in of mirrored wrap woul
 title and the column round its sides. Its title block sits in the bottom-right corner, below
 the column. A sheet may carry a theme (`"theme": "holiday"`): the title in deep red, the
 headings and their rules in evergreen, and a plain double rule round the sheet with a sprig of
-holly at each corner, all in the margins and never on the drawing; on a dark plate its leaders
+holly at each corner, all in the margins and never on the drawing (the title block is then
+placed inside the border, in the area the sheet gives it); on a dark plate its leaders
 are drawn over a paper-colored halo. Where the column would run long, the sources and notes can
 stand in a box of their own beside the flat section.
 
