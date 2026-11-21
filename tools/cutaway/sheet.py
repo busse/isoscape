@@ -248,7 +248,7 @@ def main():
     top = 700
     iso_box = (M - 60, top, ART_R - M + 60, lay.get('isoHeight', 3900))
     if lay.get('iso'):
-        # The plate in a box of its own (`layout.iso`: x, y, w, h), set against its left edge.
+        # The plate in a box of its own (`layout.iso`: x, y, w, h), centered in it unless `isoAlign`.
         iso_box = tuple(lay['iso'])
         top = iso_box[1]
     s_iso = min(iso_box[2] / iso_vb[2], iso_box[3] / iso_vb[3])
