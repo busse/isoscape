@@ -2736,8 +2736,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 2,
-   "waiting_on": "owner",
-   "decision": "owner: not yet where a patron would connect; research round 3 done (outputs/cutaway/byrd/research-round3.md): the spring callout is wrong as worded and placed; seats, carpet, vents, front and organ details found; the foundation's 2024 Historic Structures Report would settle the plan (asking for it is the owner's call); next round needs his go-ahead",
+   "waiting_on": "agent",
+   "decision": "owner: another round enriching with the new information (2026-11-21). d3 in work: the spring redrawn and reworded, seats and vents, the front, organ details, finishes, back of house, rooms. No plan or section found; the foundation's 2024 Historic Structures Report is the owner's to ask for.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": "21911e5",
@@ -2752,7 +2752,8 @@
    "title": "The Byrd Theatre: Cutaway",
    "kind": "cutaway",
    "stage": "working draft",
-   "notes": "open: a source for the segregation caption; the 78% figure is approximate; the notes block is long. Holiday piece."
+   "notes": "open: a source for the segregation caption; the 78% figure is approximate; the notes block is long. Holiday piece.",
+   "budget_note": "owner approved a third working-draft round on 2026-11-21: enrich with research round 3"
   },
   "main-street-1952-cutaway": {
    "plate": "MSS-01",
