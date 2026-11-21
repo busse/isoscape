@@ -110,6 +110,11 @@ export interface Palette {
   readonly routeDash: readonly [number, number]
   /** A light halo under the traveler's path and figures, where they cross red or dark ground. */
   readonly routeHalo?: string
+  /**
+   * The halo's widths: `edge`, how far it shows past each dash and arrowhead of the path;
+   * `figure`, its stroke round a figure in the flat section; `plate`, round a figure on the plate.
+   */
+  readonly routeHaloWidth?: { readonly edge: number; readonly figure: number; readonly plate: number }
   /** Station platforms, and the running rails of a track at close scale. */
   readonly platform: string
   readonly railSteel: string
@@ -415,6 +420,7 @@ const winter: Palette = {
   cutOutline: '#e6d3a8',
   route: '#d8392b',
   routeHalo: '#f6ead0',
+  routeHaloWidth: { edge: 1.82, figure: 3.64, plate: 2.34 },
 }
 
 export const PALETTES: Readonly<Record<string, Palette>> = { paper, night, winter }

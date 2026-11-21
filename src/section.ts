@@ -194,8 +194,8 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
     // A halo first, where the palette has one: each dash, the arrowheads and the figures
     // outlined in light, so the red reads over red seats and dark walls.
     const halo = p.routeHalo
-    if (halo !== undefined) {
-      const hw = p.routeWidth * 0.7
+    if (halo !== undefined && p.routeHaloWidth !== undefined) {
+      const hw = p.routeHaloWidth.edge
       for (const run of runs) {
         out.push(`<path fill="none" stroke="${halo}" stroke-width="${f(p.routeWidth + 2 * hw)}" stroke-dasharray="${[p.routeDash[0] + 2 * hw, p.routeDash[1] - 2 * hw].map(f).join(' ')}" stroke-dashoffset="${f(hw)}" stroke-linecap="round" stroke-linejoin="round" d="${path(run, false)}"/>`)
         const head = arrowOn(run, ARROW * view.scale)
@@ -208,7 +208,8 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
       if (head !== null) out.push(`<path fill="${color}" d="${path(head)}"/>`)
     }
   }
-  if (p.routeHalo !== undefined) for (const t of travelers) out.push(`<g class="traveler-halo">${t.polys.map((poly) => `<path fill="${p.routeHalo}" stroke="${p.routeHalo}" stroke-width="${f(p.routeWidth * 1.4)}" stroke-linejoin="round" d="${path(poly)}"/>`).join('')}</g>`)
+  const fh = p.routeHaloWidth?.figure
+  if (p.routeHalo !== undefined && fh !== undefined) for (const t of travelers) out.push(`<g class="traveler-halo">${t.polys.map((poly) => `<path fill="${p.routeHalo}" stroke="${p.routeHalo}" stroke-width="${f(fh)}" stroke-linejoin="round" d="${path(poly)}"/>`).join('')}</g>`)
   for (const t of travelers) out.push(`<g class="traveler">${t.polys.map((poly) => `<path fill="${p.route}" d="${path(poly)}"/>`).join('')}</g>`)
   out.push(...tags)
   // The tags stand past the drawing's edge where a way ends at it: the box grows to hold them.

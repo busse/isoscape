@@ -904,8 +904,9 @@ export const travelerItem = (view: View, pal: Palette, id: string, at: Vec2, z: 
   const polys = travelerShapes(undefined, figure).map((poly) => poly.map(([x, y]): Vec2 => [bx + x * facing * view.scale, by - y * up]))
   // Over a light halo, where the palette has one, so the figure reads on red seats.
   const halo = pal.routeHalo
+  const hw = pal.routeHaloWidth
   const shapes: Shape[] = [
-    ...(halo === undefined ? [] : polys.map((pts): Shape => ({ pts: [...pts, pts[0]], fill: 'none', line: true, stroke: { color: halo, width: pal.routeWidth * 0.9, dash: [1e3, 0] } }))),
+    ...(halo === undefined || hw === undefined ? [] : polys.map((pts): Shape => ({ pts: [...pts, pts[0]], fill: 'none', line: true, stroke: { color: halo, width: hw.plate, dash: [1e3, 0] } }))),
     ...polys.map((pts): Shape => ({ pts, fill: pal.route })),
   ]
   const r = 0.25
