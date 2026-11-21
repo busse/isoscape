@@ -2736,11 +2736,33 @@
    "on_sale": false,
    "orders": null,
    "rounds": 1,
-   "waiting_on": "agent",
-   "decision": "rc1 stamped as a proof (BYRD-01, block full size in the corner, 37cb237); the one independent final-draft inspection is still to run, from the packet in outputs/cutaway/byrd/rc1/inspection-packet; then at most one fix round, a targeted recheck, and his release approval.",
-   "accepted_faults": [],
+   "waiting_on": "owner",
+   "decision": "rc1 stamped as BYRD-01 and inspected once, independently, on 2026-11-21: no arm's-length faults, no fix round needed, 7 up-close faults accepted (outputs/cutaway/byrd/rc1/inspection.md). Waiting on the owner for release approval; plate collection and set still changeable until then.",
+   "accepted_faults": [
+    {
+     "what": "the West Cary Street label covers the foot of the front east corner and sits close to the drawing bottom edge"
+    },
+    {
+     "what": "the key splits \"5 ft 9 in\" across two lines"
+    },
+    {
+     "what": "numbers 4 and 8 almost touch on the route line in the long section"
+    },
+    {
+     "what": "the COAL ROOM label nearly touches number 17 in the cross section"
+    },
+    {
+     "what": "number 13 (Walls) sits on the dome rim in the main drawing"
+    },
+    {
+     "what": "at 24 x 18 the collection, set and piece line wraps to two lines set tight under its label"
+    },
+    {
+     "what": "callout 18 wording \"remembers the building shudder slightly\" is awkward"
+    }
+   ],
    "planned_edition": null,
-   "last_inspected": "21911e5",
+   "last_inspected": "2026-11-21",
    "branch": "byrd-rc1-stamp",
    "worktree": "/home/claude/wt-byrd-rc1",
    "links": [
