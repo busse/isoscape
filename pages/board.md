@@ -23,6 +23,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
+- **The Byrd Theatre: Cutaway**: d4 built 2026-11-21 (branch cutaway-byrd, 2b312a3): 98 statements checked against sources opened by an agent that did not write them (52 confirmed, 38 reworded, 5 not in the source, 2 contradicted, 1 not opened); harp moved to the right box; layout enlarged. Waiting on the owner: approve the look (then final draft), and two questions (harp side; ask the foundation for its 2024 report). Segregation callout still rests on an article that could not be opened.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
 ## Research
@@ -35,7 +36,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
-| — | The Byrd Theatre: Cutaway | cutaway | 1.0.0-d3 | no |
+| — | The Byrd Theatre: Cutaway | cutaway | 1.0.0-d4 | no |
 
 ## Final production
 
