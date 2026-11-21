@@ -104,8 +104,8 @@ Z_FRONT_ROW = Z_LOBBY - RAKE * (ROWS - 1)
 Z_FILL = -1.55                      # the bottom of the raked floor's fill: the tunnels' roof
 B_STAGE = 35.05                     # the stage's front edge
 B_PROS = 35.45                      # the proscenium wall, 35.45–36.25: the stage behind it is
-                                    # 14 ft deep to the back wall (13 to 14 ft: Style Weekly 2014;
-                                    # The Match 2024)
+                                    # 14 ft deep to the back wall (13 to 14 ft: The Match 2024;
+                                    # back 15 ft to the alley: Style Weekly 2014)
 Z_STAGE = -0.2
 Z_BSMT = -3.6                       # basement under the stage and the pit
 Z_PIT = -3.2
@@ -164,8 +164,8 @@ def box(id_, name, a0, a1, b0, b1, z0, z1, tone, conf, note, src, **kw):
 
 SEAT_W = 0.483                      # 19 in (foundation, 2025)
 SEAT_DETAIL = ('The 1928 seats, by the American Seating Company, 19 inches wide: cast-iron end standards in a polychrome finish holding the aisle lights, '
-               'scrolled rock-maple armrests, and backs in a gold and crimson floral mohair velvet (foundation, Curator\'s Corner, 2025; RFP). '
-               'Drawn with a crimson seat and back under a gold band; rows and aisles approximate.')
+               'maple scrolled armrests, and backs in a gold and crimson floral velvet (the curator, Curator\'s Corner, 2025). '
+               'Drawn with a crimson seat and back, trimmed gold along the top; rows and aisles approximate.')
 
 
 def seats(id_, name, a0, a1, b0, b1, z0, z1, note, src, west_only=False):
@@ -186,8 +186,11 @@ def seats(id_, name, a0, a1, b0, b1, z0, z1, note, src, west_only=False):
         parts = [(p0, p1)] if p1 <= CUT_A or p0 >= CUT_A else [(p0, CUT_A), (CUT_A, p1)]
         for k, (p, q) in enumerate(parts):
             box(K(f'{id_}{pid}' + ('' if len(parts) == 1 else f'-{k + 1}')), name, p, q, q0, q1, y0, y1, tone, 'written', note, src)
-    piece('', a0, a1, b0, b0 + 0.12, z0 + 0.25, z0 + 0.75, 'seat')                 # the back
-    piece('-band', a0, a1, b0, b0 + 0.12, z0 + 0.75, z1, 'gold')                   # its gold band
+    # The back, crimson, with a thin gold trim along its rear top edge (d4: the d3 band, 0.1 m
+    # over the whole top, read gold from across the room).
+    piece('', a0, a1, b0 + 0.03, b0 + 0.12, z0 + 0.25, z1, 'seat')                  # the back
+    piece('-rear', a0, a1, b0, b0 + 0.03, z0 + 0.25, z1 - 0.035, 'seat')            # its rear face
+    piece('-band', a0, a1, b0, b0 + 0.03, z1 - 0.035, z1, 'gold')                   # the gold trim
     piece('-cushion', a0, a1, b0 + 0.12, b1 - 0.04, z0 + 0.36, z0 + 0.48, 'seat')
     n = max(1, round((a1 - a0) / SEAT_W))
     for i in range(1, n):
@@ -258,7 +261,7 @@ box(K('marquee-soffit-lights'), 'Byrd Theatre: marquee', -7.3, 7.3, -2.8, -0.2, 
 for k in range(13):
     a = -6.9 + k * 1.15
     box(K(f'marquee-bulb-{k + 1}'), 'Byrd Theatre: marquee', a - 0.1, a + 0.1, -3.06, -3.0, 4.1, 4.3, 'lamp', 'approximate', MARQUEE, [RFP])
-SIGN = ('The vertical BYRD sign, two storeys tall, designed by Fred Bishop (foundation, RFP), lettered with the theatre\'s name as the c. 1929 photograph shows a lettered sign '
+SIGN = ('The vertical BYRD sign, designed by Fred Bishop (RFP), lettered with the theatre\'s name as the c. 1929 photograph shows a lettered sign '
         'at the corner; it came down in 1971 (foundation). Letter shapes and the sign\'s size are approximate.')
 SIGN_SRC = [RFP, PHOTO, SRC['history']]
 box(K('blade-sign'), 'Byrd Theatre: vertical sign', -12.6, -12.1, -2.3, -0.2, 7.6, 15.6, 'bronze', 'written', SIGN, SIGN_SRC)
@@ -326,11 +329,11 @@ for side, a0, a1 in (('west', -W2, -WI), ('east', WI, W2)):
 # foundation's RFP (coal door and coal room at the rear, boiler and air handler in the basement,
 # a brick chimney flue). "Backstage right" may mean stage right (house left) or the walker's right
 # (house right): drawn house right, approximately.
-SPRING = ('The spring room: an underground spring breached in the 1927 excavation feeds a retention pond of about 30 by 30 feet, '
-          'seen from a concrete opening past the boiler (the general manager, Style Weekly, 2014; a 2019 travel piece gives 25 by 25 feet). '
-          'He says the spring was never used for the air conditioning; Cinema Treasures says its water can be pumped for it, and '
+SPRING = ('The spring room (foundation, Tours): an underground spring breached in the 1927 excavation, and a retention pond of 30 by 30 feet, '
+          'seen from a concrete opening past the boiler on the general manager\'s tour (Style Weekly, 2014; a 2019 travel piece gives a room 25 feet square). '
+          'He says the water was never used for the air conditioning; a Byrd engineer on Cinema Treasures says its water can be pumped for it, and '
           'Wikipedia that it used to be. Its side of the stage and its depth are approximate.')
-SPRING_SRC = [STYLE, SRC['mat2019'], SRC['ct'], SRC['rm2006']]
+SPRING_SRC = [STYLE, SRC['mat2019'], SRC['ct'], SRC['wiki'], SRC['tours']]
 # The pond fills its room. The water is never cut: split at nothing, it shows as water in both sections.
 box(C('pond-floor'), 'Byrd Theatre: the spring room', POND_A0, POND_A1, POND_B0, POND_B1, Z_POND0 - 0.3, Z_POND0, 'stone', 'approximate', SPRING, SPRING_SRC)
 box(K('pond-water'), 'Byrd Theatre: the spring room', POND_A0, POND_A1, POND_B0, POND_B1, Z_POND0, Z_POND_W, 'water', 'written', SPRING, SPRING_SRC)
@@ -479,12 +482,12 @@ for k, (a0, a1, b0, b1) in enumerate(((-1.9, -1.65, 32.5, 34.5), (1.65, 1.9, 32.
 box(C('lift-shaft-floor'), ORGAN, -1.9, 1.9, 32.25, 34.75, Z_SHAFT - 0.3, Z_SHAFT, 'stone', 'approximate', LIFT, [RFP])
 
 # ---- the stage, the proscenium, the screen -----------------------------------------------------
-STAGEN = ('The stage, 13 to 14 feet deep, with no dressing rooms and the alley about 15 feet behind the screen (Style Weekly, 2014; The Match, 2024): '
+STAGEN = ('The stage, 13 to 14 feet deep (The Match, 2024); go back 15 feet and you are in the alley, and there are no dressing rooms (Style Weekly, 2014): '
           '"the limited backstage area would not support stage productions" (nomination). Drawn 14 feet deep from the proscenium.')
 # In two pieces: the one on the side the cut lifts away is lifted whole (the region's `lift`), to
 # show the spring room and the boiler room under it.
 for k, (a0, a1, b0) in enumerate(((-WI, -OP, B_PROS + 0.8), (-OP, OP, B_PROS), (OP, WI, B_PROS + 0.8))):
-    box(C('stage-floor' + ('' if k == 1 else f'-{k + 1}')), STAGE, a0, a1, b0, B_BACK, Z_STAGE - 0.3, Z_STAGE, 'wood', 'written', STAGEN, [NOM, STYLE, SRC['match2024']])
+    box(C('stage-floor' + ('' if k == 1 else f'-{k + 1}')), STAGE, a0, a1, b0, B_BACK, Z_STAGE - 0.3, Z_STAGE, 'wood', 'written', STAGEN, [NOM, STYLE, SRC['match2024'], SRC['rfm2015']])
 PROS = 'The proscenium wall. The opening\'s size is approximate; the 1928 photograph shows a deep arch with the original inner proscenium, covered in the 1950s (Rudisill 1986).'
 for k, (a0, a1) in enumerate(((-WI, -OP), (OP, WI))):
     box(C(f'pros-pier-{k + 1}'), STAGE, a0, a1, B_PROS, B_PROS + 0.8, Z_FRONT_ROW - 0.3, Z_ROOF, 'plaster', 'approximate', PROS, [NOM, T86])
@@ -522,10 +525,10 @@ for k, (a0, a1, z0, z1) in enumerate(((-5.8, -5.4, 0.6, 7.4), (5.4, 5.8, 0.6, 7.
     box(C(f'screen-masking-{k + 1}'), STAGE, a0, a1, B_PROS + 1.8, B_PROS + 1.92, z0, z1, 'coal', 'approximate', 'The screen\'s masking, worked from the booth\'s switchboard (nomination). Approximate.', [NOM])
 
 # ---- the organ: chambers over the stage, the console on its lift --------------------------------
-CH = ('The organ\'s rooms, on the fourth floor over the stage, forty-odd steps up (Boomer, 2014): the general manager lists four, the blower, '
-      'Main, Solo and relay rooms (Style Weekly, 2014), the foundation two pipe rooms over the center of the screen with the relays in a room of '
-      'their own, the nomination three chambers; in some tellings the blower is in the basement. Drawn as four rooms side by side; the layout is approximate.')
-CH_SRC = [STYLE, SRC['boomer2014'], SRC['organ'], NOM]
+CH = ('The organ\'s rooms, on the fourth floor over the stage, forty-some steps up (Boomer, 2014): the general manager lists four, the blower room, '
+      'the main and solo chambers and the relay room (Richmond Family Magazine, 2015), the foundation two pipe rooms over the center of the screen with the relays in a room of '
+      'their own, the nomination three chambers. Drawn as four rooms side by side; the layout is approximate.')
+CH_SRC = [SRC['rfm2015'], SRC['boomer2014'], SRC['organ'], NOM]
 box(C('chamber-floor'), ORGAN, -WI, WI, B_PROS + 0.8, B_BACK, Z_CHAMBER - 0.3, Z_CHAMBER, 'floor', 'approximate', CH, CH_SRC)
 for k, (a0, a1) in enumerate(((-9.6, -9.3), (2.9, 3.2), (9.3, 9.6))):
     box(C(f'chamber-wall-{k + 1}'), ORGAN, a0, a1, B_PROS + 0.8, B_BACK, Z_CHAMBER, Z_STAGE_ROOF - 0.4, 'plaster', 'approximate', CH, CH_SRC)
@@ -547,8 +550,8 @@ for r, a in enumerate((1.05, 0.25, -0.6, -1.5, -2.5, -3.6, -4.8, -6.0, -7.3, -8.
 RELAY = 'The relay room, where the console\'s wires meet the valves of the pipes; the relays "occupy their own room above the stage" (foundation). An eight-inch cable of thousands of wires runs to it from the console (RVA Mag, 2026). Placed at the west end; approximate.'
 for k, b in enumerate((37.0, 38.2, 39.4)):
     box(K(f'relay-{k + 1}'), ORGAN, -11.9, -10.1, b, b + 0.8, Z_CHAMBER, Z_CHAMBER + 2.2, 'wood', 'approximate', RELAY, [SRC['organ'], SRC['rvamag2026']])
-BLOWER = 'The organ\'s blower, which fills the chests with wind: in its own room up here by the general manager\'s list (Style Weekly, 2014), in the basement in other tellings. Drawn at the east end; approximate.'
-box(K('blower'), 'Byrd Theatre: organ blower', 10.0, 11.8, 37.2, 39.6, Z_CHAMBER, Z_CHAMBER + 1.4, 'iron', 'approximate', BLOWER, [STYLE])
+BLOWER = 'The organ\'s blower, which fills the chests with wind: in its own room up here by the general manager\'s list (Richmond Family Magazine, 2015). Drawn at the east end; approximate.'
+box(K('blower'), 'Byrd Theatre: organ blower', 10.0, 11.8, 37.2, 39.6, Z_CHAMBER, Z_CHAMBER + 1.4, 'iron', 'approximate', BLOWER, [SRC['rfm2015']])
 P.add(C('blower-motor'), 'Byrd Theatre: organ blower', F.ring([(10.9 + 0.45 * math.cos(2 * math.pi * k / 12), 36.85 + 0.3 * math.sin(2 * math.pi * k / 12)) for k in range(12)]),
       Z_CHAMBER, Z_CHAMBER + 0.9, 'iron', 'approximate', BLOWER, [STYLE], shape='revolve', levels=[[0, 1, 0], [0.9, 1, 0]])
 # The cable from the console to the relay room: along under the stage and up the back wall.
@@ -597,32 +600,37 @@ box(C('house-dado'), HOUSE, -WL, -WL + 0.06, B_HOUSE, B_PROS, Z_FRONT_ROW - 0.3,
 DAMASK = 'A silk damask wall panel between the pilasters (foundation, Curator\'s Corner; RFP), in Brounet Studios\' decorative scheme. Its color is not recorded: drawn a warm gold. Sizes approximate.'
 for k, (b0, b1) in enumerate(((14.9, 18.95), (19.55, 23.45), (24.05, 27.95), (28.55, 30.1))):
     box(C(f'damask-{k + 1}'), HOUSE, -WL, -WL + 0.04, b0, b1, 1.25, 5.5 if k < 2 else 7.5, 'damask', 'written', DAMASK, [SRC['cc-side'], RFP])
-BOXN = 'An opera-style box beside the stage, with a large mural behind it (nomination): a grand piano in one and a harp in the other, played from the organ console (nomination; Rudisill 1986). The harp does not play: a marimba below it makes the harp\'s sound (Richmond magazine, 2021; Richmond Family Magazine, 2015). Which box held which is not known; drawn approximately, the harp on this side.'
-BOX_SRC = [NOM, T86, SRC['rm2021'], SRC['rfm2015']]
+BOXN = ('An opera-style box beside the stage, with a large mural behind it (nomination): a grand piano in one and a harp in the other, played from the organ console (nomination). '
+        'The piano is in the left box and the harp in the right, as Rudisill (1986: "boxes to the left and right of the stage"), Richmond magazine (2021: the harp "in the right balcony") '
+        'and a 2019 account (piano in the left alcove, harp and marimba in the right) agree; drawn so, house left and house right. The harp does not play: a marimba below it makes '
+        'the harp\'s sound (Richmond Family Magazine, 2015; Mid-Atlantic Traveler, 2019).')
+BOX_SRC = [NOM, T86, SRC['rm2021'], SRC['rfm2015'], SRC['mat2019']]
 BB0, BB1 = 30.2, 33.8
 box(C('box-west-floor'), HOUSE, -WL, -10.2, BB0, BB1, 3.6, 3.9, 'floor', 'approximate', BOXN, [NOM, T86])
 box(C('box-west-front'), HOUSE, -10.4, -10.2, BB0, BB1, 3.9, 5.0, 'gold', 'written', BOXN, [NOM, T86])
 box(C('box-west-mural'), HOUSE, -WL, -WL + 0.06, BB0 + 0.2, BB1 - 0.2, 4.4, 8.0, 'bronze', 'written', BOXN, [NOM])
 box(C('box-east-floor'), HOUSE, 10.2, WI, BB0, BB1, 3.6, 3.9, 'floor', 'approximate', BOXN, [NOM, T86])
 box(C('box-east-front'), HOUSE, 10.2, 10.4, BB0, BB1, 3.9, 5.0, 'gold', 'written', BOXN, [NOM, T86])
-box(K('piano'), 'Byrd Theatre: the grand piano', 10.6, 11.9, BB0 + 0.6, BB0 + 2.4, 3.9, 4.95, 'coal', 'written', BOXN, BOX_SRC)
-box(K('piano-lid'), 'Byrd Theatre: the grand piano', 11.8, 11.9, BB0 + 0.6, BB0 + 2.1, 4.95, 5.9, 'coal', 'approximate', BOXN, BOX_SRC)
-# The harp (a Browne & Buckwell, Richmond magazine 2021), in the west box: its column, base, neck
-# and a soundbox slanting up from the base, drawn in steps.
+# The grand piano in the west (house-left) box, its lid raised against the wall side.
+box(K('piano'), 'Byrd Theatre: the grand piano', -11.9, -10.6, BB0 + 0.6, BB0 + 2.4, 3.9, 4.95, 'coal', 'written', BOXN, BOX_SRC)
+box(K('piano-lid'), 'Byrd Theatre: the grand piano', -11.9, -11.8, BB0 + 0.6, BB0 + 2.1, 4.95, 5.9, 'coal', 'approximate', BOXN, BOX_SRC)
+# The harp (a Browne & Buckwell, Richmond magazine 2021), in the east (house-right) box, which
+# goes with the side the cut lifts away: its column, base, neck and a soundbox slanting up from
+# the base, drawn in steps; the marimba below the box.
 HARP = BOXN + ' The harp is a Browne & Buckwell, delivered by the Corley Music Co. from Grace Street (Richmond magazine, 2021).'
 HB = BB0 + 1.2
-box(K('harp-base'), 'Byrd Theatre: the harp', -11.25, -10.8, HB - 0.1, HB + 1.0, 3.9, 4.05, 'gold', 'written', HARP, BOX_SRC)
-box(K('harp-column'), 'Byrd Theatre: the harp', -11.1, -10.95, HB - 0.05, HB + 0.07, 4.05, 5.6, 'gold', 'written', HARP, BOX_SRC)
-box(K('harp-neck'), 'Byrd Theatre: the harp', -11.08, -10.97, HB - 0.05, HB + 0.85, 5.6, 5.75, 'gold', 'written', HARP, BOX_SRC)
+box(K('harp-base'), 'Byrd Theatre: the harp', 10.8, 11.25, HB - 0.1, HB + 1.0, 3.9, 4.05, 'gold', 'written', HARP, BOX_SRC)
+box(K('harp-column'), 'Byrd Theatre: the harp', 10.95, 11.1, HB - 0.05, HB + 0.07, 4.05, 5.6, 'gold', 'written', HARP, BOX_SRC)
+box(K('harp-neck'), 'Byrd Theatre: the harp', 10.97, 11.08, HB - 0.05, HB + 0.85, 5.6, 5.75, 'gold', 'written', HARP, BOX_SRC)
 for i in range(6):
     b = HB + 0.82 - 0.13 * i
-    box(K(f'harp-soundbox-{i + 1}'), 'Byrd Theatre: the harp', -11.12, -10.93, b - 0.09, b + 0.09, 4.05 + 0.26 * i, 4.05 + 0.26 * (i + 1), 'gold', 'written', HARP, BOX_SRC)
+    box(K(f'harp-soundbox-{i + 1}'), 'Byrd Theatre: the harp', 10.93, 11.12, b - 0.09, b + 0.09, 4.05 + 0.26 * i, 4.05 + 0.26 * (i + 1), 'gold', 'written', HARP, BOX_SRC)
 MARIMBA = BOXN + ' The marimba\'s place below the box is approximate.'
-box(K('marimba-frame'), 'Byrd Theatre: marimba', -11.9, -10.6, BB0 + 0.4, BB1 - 0.4, 2.7, 2.85, 'wood', 'written', MARIMBA, BOX_SRC)
+box(K('marimba-frame'), 'Byrd Theatre: marimba', 10.6, 11.9, BB0 + 0.4, BB1 - 0.4, 2.7, 2.85, 'wood', 'written', MARIMBA, BOX_SRC)
 for i in range(12):
     b = BB0 + 0.5 + i * (BB1 - BB0 - 1.0) / 12
-    box(K(f'marimba-bar-{i + 1}'), 'Byrd Theatre: marimba', -11.8 + 0.03 * i, -10.7, b, b + 0.17, 2.85, 2.92, 'wood', 'approximate', MARIMBA, BOX_SRC)
-    box(K(f'marimba-tube-{i + 1}'), 'Byrd Theatre: marimba', -11.0, -10.9, b + 0.04, b + 0.13, 2.7 - 0.6 + 0.03 * i, 2.7, 'pipe', 'approximate', MARIMBA, BOX_SRC)
+    box(K(f'marimba-bar-{i + 1}'), 'Byrd Theatre: marimba', 10.7, 11.8 - 0.03 * i, b, b + 0.17, 2.85, 2.92, 'wood', 'approximate', MARIMBA, BOX_SRC)
+    box(K(f'marimba-tube-{i + 1}'), 'Byrd Theatre: marimba', 10.9, 11.0, b + 0.04, b + 0.13, 2.7 - 0.6 + 0.03 * i, 2.7, 'pipe', 'approximate', MARIMBA, BOX_SRC)
 
 # ---- the balcony and the booth ---------------------------------------------------------------
 BAL = 'The balcony, an integral part of the theatre\'s visual effect (nomination); today 476 seats (Wikipedia). Its depth, rake and rows are approximate; the 1928 photograph shows its curved front, drawn straight.'
@@ -650,9 +658,9 @@ for k, a in enumerate((-1.8, 1.1)):
 box(K('switchboard'), 'Byrd Theatre: switchboard', -5.6, -3.4, B_VEST + 1.4, B_VEST + 1.9, Z_BOOTH, Z_BOOTH + 2.2, 'iron', 'written', BOOTH, [NOM])
 
 # ---- rooms the patrons pass and never see ----------------------------------------------------
-ROOMS = ('The foundation\'s RFP lists, among the building\'s rooms, the general manager\'s office off the main lobby, restrooms off both lobbies with marble '
-         'stall partitions, an office and a vault at balcony level, a rewind room and a dimmer closet by the booth, and an attic over the dome. '
-         'Where each lies is not given: placed approximately.')
+ROOMS = ('The foundation\'s RFP lists, among the building\'s rooms, the general manager\'s office and restrooms off the main lobby, restrooms off the upper lobby, '
+         'an office and vault, a rewind room, an electrical dimmer closet, and the attic. '
+         'Where each lies is not given: placed approximately (the upper lobby\'s restrooms are not drawn).')
 def room_wall(id_, a0, a1, b0, b1, z0, z1, doors, tone='plaster'):
     """A wall along b at a0..a1 from b0 to b1, with door openings (b, width, height)."""
     cuts = sorted(doors)

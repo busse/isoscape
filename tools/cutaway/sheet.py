@@ -514,7 +514,7 @@ def main():
             ky += 76
     ky += col['notes']
     nb = lay.get('notes')
-    nx, ny, nw = (nb['x'], nb.get('y', ky + 30), nb['w']) if nb else (kx, ky, kw)
+    nx, ny, nw = (nb.get('x', kx), nb.get('y', ky + 30), nb.get('w', kw)) if nb else (kx, ky, kw)
     # The sources and notes may run in several columns (`layout.notes.cols`, with `gap`), at
     # their own size (`layout.notes.px`).
     ncols = nb.get('cols', 1) if nb else 1
@@ -522,7 +522,35 @@ def main():
     nlead = round(npx * 68 / 50)
     ngap = nb.get('gap', 120) if nb else 0
     cw = (nw - ngap * (ncols - 1)) / ncols
-    lines = wrap(spec['sources'], 'italic', npx, cw) + [None] + wrap(spec['notes'], 'italic', npx, cw)
+    if nb and nb.get('flow'):
+        # Or flow through boxes of their own, in reading order (`layout.notes.flow`: [x, y, w,
+        # bottom] each; a y of null starts the box under the key): each line wraps to its box's
+        # width, and a line that would pass its box's bottom starts the next box.
+        boxes = [[bx, ky + 30 if by is None else by, bw, bb] for bx, by, bw, bb in nb['flow']]
+        f_ = font('italic', npx)
+        bi, by, nend = 0, boxes[0][1], boxes[0][1]
+        for pi, para in enumerate((spec['sources'], spec['notes'])):
+            if pi:
+                by += col['between']
+            cur = ''
+            for w in para.split() + [None]:
+                trial = (cur + ' ' + w).strip() if w else cur
+                if w is not None and (not cur or f_.getlength(trial) <= boxes[bi][2]):
+                    cur = trial
+                    continue
+                out.append(text(boxes[bi][0], by, cur, npx, 'italic', DIM))
+                by += nlead
+                nend = max(nend, by)
+                cur = w or ''
+                if by > boxes[bi][3] and bi < len(boxes) - 1:
+                    bi, by = bi + 1, boxes[bi + 1][1]   # a line that would pass the box starts the next
+        if nend > H - 260 or by > boxes[-1][3] + nlead:
+            print(f'warning: the notes run to {by:.0f}, past their last box', file=sys.stderr)
+        if os.environ.get('SHEET_DEBUG'):
+            print(f'notes end in box {bi + 1} at {by:.0f}', file=sys.stderr)
+        lines, ny = [], nend
+    else:
+        lines = wrap(spec['sources'], 'italic', npx, cw) + [None] + wrap(spec['notes'], 'italic', npx, cw)
     per = -(-(sum(nlead if ln else col['between'] for ln in lines)) // ncols) if ncols > 1 else None
     ny0, k_col, used, nend = ny, 0, 0, ny
     for line in lines:
