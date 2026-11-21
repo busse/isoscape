@@ -3085,7 +3085,7 @@
    "title": "Explorer on a phone: no sideways scroll; compare sliders by thumb",
    "plate": null,
    "kind": "site",
-   "stage": "owner test",
+   "stage": "live",
    "status": "active",
    "asset_version": null,
    "published_version": null,
@@ -3094,7 +3094,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "built and tested in Chrome's phone emulation only (branch fix/mobile-overflow, 65fafe7; not merged, not pushed). The owner will test it on his iPhone later: say the word and it is merged and pushed for that test. Check: no horizontal bar or sideways drift on #/jackson-ward and p/jackson-ward.html; a slider's sideways drag and tap move the divider and a vertical swipe scrolls; the label tab stays whole at both edges; tables and the FAQ's code block scroll in their own box; lightbox buttons are easy to hit. Notes: /mnt/user-data/outputs/explorer/mobile-overflow/fix.md",
+   "decision": "approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3102,7 +3102,8 @@
    "worktree": "/home/claude/wt-mobile",
    "links": [],
    "log": [
-    "2026-11-18: rough draft -> owner test"
+    "2026-11-18: rough draft -> owner test",
+    "2026-11-21: owner test -> live"
    ]
   },
   "tutorial-explore-with-chat": {
