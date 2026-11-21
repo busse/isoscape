@@ -104,6 +104,7 @@ def badge(x, y, n, conf, r=44):
     return circle + num
 
 
+SHEET_COLS = [None]   # where each callout column ended, for a caller checking the layout
 HALO = [False]   # set from the spec: leaders get a paper halo, to read on a dark plate
 LAST = [None]    # where the column, the key and the notes ended, for a caller checking the layout
 
@@ -246,6 +247,10 @@ def main():
 
     top = 700
     iso_box = (M - 60, top, ART_R - M + 60, lay.get('isoHeight', 3900))
+    if lay.get('iso'):
+        # The plate in a box of its own (`layout.iso`: x, y, w, h), set against its left edge.
+        iso_box = tuple(lay['iso'])
+        top = iso_box[1]
     s_iso = min(iso_box[2] / iso_vb[2], iso_box[3] / iso_vb[3])
     iso_h = iso_vb[3] * s_iso
     # Wayfinding labels under the plate push the sections down when they run past two lines.
@@ -263,6 +268,14 @@ def main():
     s_sec = min((sec_w - GAP * (len(secs) - 1)) / widths, (H - lay.get('bottom', 330) - (sec_top - 90)) / heights)
     sec_bottom = sec_top + heights * s_sec
     xx = M
+    if lay.get('sections'):
+        # The sections in a box of their own (`layout.sections`: x, y, w, h; y is the captions'
+        # baseline, the drawings below it, bottoms level), at one scale that fits the box.
+        bx_, by_, bw_, bh_ = lay['sections']
+        sec_top = by_ + 70
+        s_sec = min((bw_ - GAP * (len(secs) - 1)) / widths, bh_ / heights)
+        sec_bottom = sec_top + 50 + heights * s_sec
+        xx = bx_
     for x in secs:
         vb_ = x['_vb']
         x['_box'] = (xx, sec_bottom - vb_[3] * s_sec, vb_[2] * s_sec, vb_[3] * s_sec)
@@ -362,12 +375,24 @@ def main():
     col = {**dict(head=170, callout=58, group=36, keyHead=150, keyRow=92, traveler=26, notes=40, between=68), **spec.get('column', {})}
     y = 570
     x = COL_X
+    # A spec's `layout.columns` ([x, w] each) sets the callouts in more than one column, each
+    # group in the column its `column` names (default the first); `layout.body` sets the size of
+    # their text (sheet units; its leading in proportion).
+    cols = lay.get('columns') or [[COL_X, W - M - COL_X]]
+    col_y = [570] * len(cols)
+    col_w = W - M - x
+    body = lay.get('body', BODY)
+    lead = round(body * 72 / BODY)
     for g in spec['groups']:
+        if lay.get('columns'):
+            ci = g.get('column', 0)
+            x, col_w = cols[ci]
+            y = col_y[ci]
         out.append(text(x, y, g['title'].upper(), 58, 'bold', head_ink, family=SANS, spacing=4))
         if g.get('traveler') and traveler:
             tw = font('bold', 58).getlength(g['title'].upper()) + 4 * len(g['title'])
             out.append(figure(x + tw + 40, y + 4, 82, traveler['shapes'], route))
-        out.append(f'<line x1="{x}" y1="{y + 32}" x2="{W - M}" y2="{y + 32}" stroke="{rule_ink}" stroke-width="4"/>')
+        out.append(f'<line x1="{x}" y1="{y + 32}" x2="{x + col_w}" y2="{y + 32}" stroke="{rule_ink}" stroke-width="4"/>')
         y += col['head']
         for c in g['callouts']:
             conf = c['_conf']
@@ -383,11 +408,17 @@ def main():
             out.append(badge(x + 56, y - 26, c['n'], conf, 50))
             out.append(text(x + 140, y, c['title'], 70, 'bold'))
             yy = y + 86
-            for line in wrap(c['text'], 'regular', BODY, W - M - x - 140):
-                out.append(text(x + 140, yy, line, BODY, 'regular', DIM))
-                yy += 72
+            for line in wrap(c['text'], 'regular', body, col_w - 140):
+                out.append(text(x + 140, yy, line, body, 'regular', DIM))
+                yy += lead
             y = yy + col['callout']
         y += col['group']
+        if lay.get('columns'):
+            col_y[ci] = y
+    if lay.get('columns'):
+        y = max(col_y)
+        if SHEET_COLS[0] is None:
+            SHEET_COLS[0] = col_y
     # Wayfinding: where the trains and streetcars went, in the plate's margins, each with a
     # leader to the track end or the street it belongs to.
     for wf in spec.get('wayfinding', []):
@@ -447,7 +478,11 @@ def main():
     # (`layout.key`: x, y, w; its rows wrapped) with the sources and notes under it, or in a
     # block of their own (`layout.notes`: x, w, and y if not under the key).
     kb = lay.get('key')
-    kx, ky, kw = (kb['x'], kb['y'], kb['w']) if kb else (x, y + 40, W - M - x)
+    kx, ky, kw = (kb['x'], kb['y'], kb['w']) if kb and 'column' not in kb else (x, y + 40, W - M - x)
+    if kb and 'column' in kb:
+        # The key under the callouts of one column (`layout.key.column`).
+        kx, kw = cols[kb['column']]
+        ky = col_y[kb['column']] + kb.get('y', 40)
     out.append(text(kx, ky, 'HOW SURE EACH PART IS', 58, 'bold', head_ink, family=SANS, spacing=4))
     out.append(f'<line x1="{kx}" y1="{ky + 32}" x2="{kx + kw}" y2="{ky + 32}" stroke="{rule_ink}" stroke-width="4"/>')
     ky += col['keyHead']
@@ -469,12 +504,28 @@ def main():
     ky += col['notes']
     nb = lay.get('notes')
     nx, ny, nw = (nb['x'], nb.get('y', ky + 30), nb['w']) if nb else (kx, ky, kw)
-    for line in wrap(spec['sources'], 'italic', 50, nw) + [None] + wrap(spec['notes'], 'italic', 50, nw):
+    # The sources and notes may run in several columns (`layout.notes.cols`, with `gap`), at
+    # their own size (`layout.notes.px`).
+    ncols = nb.get('cols', 1) if nb else 1
+    npx = nb.get('px', 50) if nb else 50
+    nlead = round(npx * 68 / 50)
+    ngap = nb.get('gap', 120) if nb else 0
+    cw = (nw - ngap * (ncols - 1)) / ncols
+    lines = wrap(spec['sources'], 'italic', npx, cw) + [None] + wrap(spec['notes'], 'italic', npx, cw)
+    per = -(-(sum(nlead if ln else col['between'] for ln in lines)) // ncols) if ncols > 1 else None
+    ny0, k_col, used, nend = ny, 0, 0, ny
+    for line in lines:
+        if per is not None and used >= per and k_col < ncols - 1 and line is not None:
+            k_col, used, ny = k_col + 1, 0, ny0
         if line is None:
             ny += col['between']
+            used += col['between']
             continue
-        out.append(text(nx, ny, line, 50, 'italic', DIM))
-        ny += 68
+        out.append(text(nx + k_col * (cw + ngap), ny, line, npx, 'italic', DIM))
+        ny += nlead
+        used += nlead
+        nend = max(nend, ny)
+    ny = max(ny, nend)
     if kb is None and nb is None:
         ky = ny
         if ky > H - 120:

@@ -148,7 +148,15 @@ def K(id_):
 BOXES = []      # every box, for the overlap check at the end
 
 
+Z_KEEP = 1.8        # the region keeps the side the cut lifts away up to this height (floor + keep)
+
+
 def box(id_, name, a0, a1, b0, b1, z0, z1, tone, conf, note, src, **kw):
+    # A part kept whole that stands wholly on the side the cut lifts away, above what that side
+    # keeps (the Solo chamber's pipes, the piano in the far box), goes with that side: it is
+    # made a cut part, so the cutaway lifts it away and the sections still draw it.
+    if id_.startswith('byrd-k-') and a0 >= CUT_A - 1e-6 and z0 >= Z_KEEP:
+        id_ = 'byrd-c-' + id_[len('byrd-k-'):]
     if kw.get('only') != 'whole':
         BOXES.append((id_, a0, a1, b0, b1, z0, z1))
     return P.box(id_, name, a0, a1, b0, b1, z0, z1, tone, conf, note, src, **kw)
@@ -160,7 +168,7 @@ SEAT_DETAIL = ('The 1928 seats, by the American Seating Company, 19 inches wide:
                'Drawn with a crimson seat and back under a gold band; rows and aisles approximate.')
 
 
-def seats(id_, name, a0, a1, b0, b1, z0, z1, note, src):
+def seats(id_, name, a0, a1, b0, b1, z0, z1, note, src, west_only=False):
     """A row of seats facing the stage, never cut: split at the plane, so the ends show on the
     cut (and in the flat section, as the rows' profiles), and the part on the side lifted away
     stays, below the plan's height. Each row has its back (crimson, a gold band at the top), its
@@ -168,6 +176,11 @@ def seats(id_, name, a0, a1, b0, b1, z0, z1, note, src):
     with an aisle light on its outer face."""
     src = list(src) + [SRC['cc-seats'], RFP]
     note = SEAT_DETAIL
+    # Up in the balcony, the half on the side the cut lifts away goes with the balcony.
+    if west_only:
+        if a0 >= CUT_A:
+            return
+        a1 = min(a1, CUT_A)
 
     def piece(pid, p0, p1, q0, q1, y0, y1, tone):
         parts = [(p0, p1)] if p1 <= CUT_A or p0 >= CUT_A else [(p0, CUT_A), (CUT_A, p1)]
@@ -178,9 +191,13 @@ def seats(id_, name, a0, a1, b0, b1, z0, z1, note, src):
     piece('-cushion', a0, a1, b0 + 0.12, b1 - 0.04, z0 + 0.36, z0 + 0.48, 'seat')
     n = max(1, round((a1 - a0) / SEAT_W))
     for i in range(1, n):
-        a = a0 + (a1 - a0) * i / n
+        a = a0 + SEAT_W * i if west_only else a0 + (a1 - a0) * i / n
+        if a >= a1 - 0.03:
+            break
         box(K(f'{id_}-arm-{i}'), name, a - 0.025, a + 0.025, b0 + 0.12, b1 - 0.02, z0 + 0.48, z0 + 0.6, 'wood', 'written', note, src)
     for j, (a, out) in enumerate(((a0, -1), (a1, 1))):
+        if west_only and a >= CUT_A - 0.01:
+            continue
         box(K(f'{id_}-end-{j + 1}'), name, *sorted((a, a + out * 0.08)), b0, b1 - 0.04, z0, z0 + 0.7, 'bronze', 'written', note, src)
         box(K(f'{id_}-light-{j + 1}'), name, *sorted((a + out * 0.08, a + out * 0.11)), (b0 + b1) / 2 - 0.07, (b0 + b1) / 2 + 0.07, z0 + 0.12, z0 + 0.26, 'lamp', 'written', note, src)
 
@@ -362,8 +379,8 @@ LINING = 'The plastered inside face of the outer wall. Approximate.'
 # Over the lobby's ceiling nothing is known of the rooms: the wall is left bare.
 box(C('lining-lobby'), LOBBY, -WI, -WI + 0.05, T, B_HOUSE - 0.6, Z_LOBBY, Z_LCEIL, 'plaster', 'approximate', LINING, [NOM])
 box(C('lining-house'), HOUSE, -WI, -WI + 0.05, B_HOUSE, B_PROS, Z_FRONT_ROW - 0.3, Z_CEIL, 'plaster', 'approximate', LINING, [NOM])
-box(C('wall-back'), 'Byrd Theatre: back wall', -WI, 8.0, LOT_D - T, LOT_D, Z_BSMT, Z_STAGE_ROOF, 'redBrick', 'approximate', SIDE, [NOM])
-box(C('wall-back-east'), 'Byrd Theatre: back wall', 8.0, WI, LOT_D - T, LOT_D, -1.6, Z_STAGE_ROOF, 'redBrick', 'approximate', SIDE, [NOM])
+box(C('wall-back'), 'Byrd Theatre: back wall', -WI, PW, LOT_D - T, LOT_D, Z_BSMT, Z_STAGE_ROOF, 'redBrick', 'approximate', SIDE, [NOM])
+box(C('wall-back-east'), 'Byrd Theatre: back wall', PW, WI, LOT_D - T, LOT_D, Z_POND0 - 0.3, Z_STAGE_ROOF, 'redBrick', 'approximate', SIDE, [NOM])
 # The roof over the auditorium, and the ceiling between the dome and the near side wall, are
 # lifted away in the cutaway (the region's `lift`), so the side wall's niches show; the flat
 # section draws them.
@@ -423,10 +440,12 @@ VENT = ('A cast-iron "mushroom cap" air vent in the concrete floor under the sea
 VENT_SRC = [SRC['cc-side'], SRC['cc-seats'], SRC['about']]
 
 
-def runners(id_, b0, b1, z, wall=-WL + 0.06):
+def runners(id_, b0, b1, z, wall=-WL + 0.06, west_only=False):
     """Carpet runners in the aisles on one row's step, the two main aisles edged in gold."""
     for j, (a0, a1) in enumerate(((wall, AISLES[0][1]),) + AISLES[1:]):
         p0, p1 = a0 + (0.15 if j > 0 else 0.0), a1 - (0.15 if j < 3 else 0.0)
+        if west_only and p0 >= CUT_A:
+            continue
         box(K(f'{id_}-{j + 1}'), HOUSE, p0, p1, b0, b1, z, z + 0.015, 'carpet', 'written', CARPET, CARPET_SRC)
         if j in (1, 2):
             for e, (q0, q1) in enumerate(((p0, p0 + 0.07), (p1 - 0.07, p1))):
@@ -516,7 +535,7 @@ for i, a in enumerate([-9.15 + 0.6 * j for j in range(20) if -9.15 + 0.6 * j < 2
 # Pipes in the Main and Solo chambers: ranks on their chests, each a row of pipes falling in height.
 PIPES = 'Pipes standing in ranks on their wind chests: the Main chamber (foundation: strings, Tuba, Vox Humana, Tibia Plena and Diaphones) and the Solo. Wurlitzer Opus 1948 has seventeen ranks in all (nomination; foundation). Ranks, pipes and their sizes are drawn approximately.'
 chest_b0, chest_b1 = B_PROS + 1.6, B_BACK - 0.7
-for r, a in enumerate((1.9, 1.05, 0.25, -0.6, -1.5, -2.5, -3.6, -4.8, -6.0, -7.3, -8.5) + (4.1, 5.0, 6.0, 7.1, 8.3)):
+for r, a in enumerate((1.05, 0.25, -0.6, -1.5, -2.5, -3.6, -4.8, -6.0, -7.3, -8.5) + (4.1, 5.0, 6.0, 7.1, 8.3)):
     box(K(f'chest-{r + 1}'), ORGAN, a - 0.32, a + 0.32, chest_b0, chest_b1, Z_CHAMBER, Z_CHAMBER + 0.8, 'wood', 'approximate', PIPES, [SRC['organ'], NOM])
     tall = 4.6 - 0.3 * (r % 11)
     npipe = 9
@@ -530,7 +549,7 @@ for k, b in enumerate((37.0, 38.2, 39.4)):
     box(K(f'relay-{k + 1}'), ORGAN, -11.9, -10.1, b, b + 0.8, Z_CHAMBER, Z_CHAMBER + 2.2, 'wood', 'approximate', RELAY, [SRC['organ'], SRC['rvamag2026']])
 BLOWER = 'The organ\'s blower, which fills the chests with wind: in its own room up here by the general manager\'s list (Style Weekly, 2014), in the basement in other tellings. Drawn at the east end; approximate.'
 box(K('blower'), 'Byrd Theatre: organ blower', 10.0, 11.8, 37.2, 39.6, Z_CHAMBER, Z_CHAMBER + 1.4, 'iron', 'approximate', BLOWER, [STYLE])
-P.add(K('blower-motor'), 'Byrd Theatre: organ blower', F.ring([(10.9 + 0.45 * math.cos(2 * math.pi * k / 12), 36.85 + 0.3 * math.sin(2 * math.pi * k / 12)) for k in range(12)]),
+P.add(C('blower-motor'), 'Byrd Theatre: organ blower', F.ring([(10.9 + 0.45 * math.cos(2 * math.pi * k / 12), 36.85 + 0.3 * math.sin(2 * math.pi * k / 12)) for k in range(12)]),
       Z_CHAMBER, Z_CHAMBER + 0.9, 'iron', 'approximate', BLOWER, [STYLE], shape='revolve', levels=[[0, 1, 0], [0.9, 1, 0]])
 # The cable from the console to the relay room: along under the stage and up the back wall.
 CABLE = 'The cable from the console to the chambers: eight inches thick, thousands of wires (RVA Mag, 2026). Its route is not known: drawn under the stage and up the back wall, approximately.'
@@ -613,8 +632,8 @@ for k in range(BAL_ROWS):
     z = BAL_Z0 + k * BAL_RISE
     box(C(f'bal-tier-{k + 1}'), HOUSE, -WI, WI, b0, b1, z - BAL_RISE - 0.3, z, 'floor', 'approximate', BAL, [NOM, SRC['wiki']])
     for j, (a0, a1) in enumerate(SECTIONS):
-        seats(f'bal-seats-{k + 1}-{j + 1}', HOUSE, a0, a1, b0 + 0.25, b0 + 0.77, z, z + 0.85, SEATS.replace('in a center section between two aisles and two side sections (the foundation speaks of the main auditorium\'s center section)', 'in three sections like the floor\'s'), [NOM, SRC['seats2025']])
-    runners(f'bal-aisle-{k + 1}', b0, b1, z, -WL + 0.27)
+        seats(f'bal-seats-{k + 1}-{j + 1}', HOUSE, a0, a1, b0 + 0.25, b0 + 0.77, z, z + 0.85, SEATS.replace('in a center section between two aisles and two side sections (the foundation speaks of the main auditorium\'s center section)', 'in three sections like the floor\'s'), [NOM, SRC['seats2025']], west_only=True)
+    runners(f'bal-aisle-{k + 1}', b0, b1, z, -WL + 0.27, west_only=True)
 box(C('bal-front'), HOUSE, -WI, WI, BAL_FRONT, BAL_FRONT + 0.3, BAL_Z0 - 0.9, BAL_Z0 + 1.0, 'gold', 'approximate', BAL, [NOM, T86])
 BOOTH = 'The projection booth, "at the rear of the lobby" (nomination), here behind the balcony\'s last row: two 35 mm Simplex projectors and Vitaphone sound (foundation; nomination), and the main switchboard that ran all the lighting, the curtain and the screen masking (nomination). Its size is approximate.'
 box(C('booth-floor'), 'Byrd Theatre: projection booth', -6.0, 6.0, B_VEST + 1.0, B_BOOTH, Z_BOOTH - 0.3, Z_BOOTH, 'floor', 'approximate', BOOTH, [NOM, SRC['about']])
