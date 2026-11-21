@@ -23,7 +23,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
-- **The Byrd Theatre: Cutaway**: d3 built 2026-11-21 from research round 3 (branch cutaway-byrd, a4ca664): the spring as a pond in its own room with the disagreement stated, seats and vents, the Cary Street front with the BYRD sign lettered, organ details, back of house, 26 callouts in six groups, a second section across the stage. Waiting on the owner's review of outputs/cutaway/byrd/d3/sheet.png and six questions in d3.md.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
 ## Research

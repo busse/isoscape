@@ -2736,8 +2736,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 3,
-   "waiting_on": "owner",
-   "decision": "d3 built 2026-11-21 from research round 3 (branch cutaway-byrd, a4ca664): the spring as a pond in its own room with the disagreement stated, seats and vents, the Cary Street front with the BYRD sign lettered, organ details, back of house, 26 callouts in six groups, a second section across the stage. Waiting on the owner's review of outputs/cutaway/byrd/d3/sheet.png and six questions in d3.md.",
+   "waiting_on": "agent",
+   "decision": "d4 in work (2026-11-21): every callout checked against its source by an agent that did not write it (four misattributions to Style Weekly 2014 found by the planning session, in d3/style-weekly-check.md), layout enlarged, seat band thinned. Planning session's calls on d3's questions: spring room house right (approximate), pond 30 ft, BYRD sign lettered, cross section kept and enlarged. The foundation's 2024 report is the owner's to ask for.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": "21911e5",
@@ -2753,7 +2753,7 @@
    "kind": "cutaway",
    "stage": "working draft",
    "notes": "open: a source for the segregation caption; the 78% figure is approximate; the notes block is long. Holiday piece.",
-   "budget_note": "owner approved a third working-draft round on 2026-11-21: enrich with research round 3"
+   "budget_note": "owner approved a third round (2026-11-21) and then a fourth: 'move forward with all deliberate speed' after the Style Weekly check"
   },
   "main-street-1952-cutaway": {
    "plate": "MSS-01",
