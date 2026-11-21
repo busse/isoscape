@@ -182,6 +182,9 @@ export const FRAME_PIECE = 6
 export const partTones = (pal: Palette, h: HistoryFeature): Tones => {
   const [lit, shade, roof] = pal.parts[h.tone ?? 'stone']
   const [il, is] = pal.parts.plaster
+  // The ground's own color, uninked: earth outside a building's walls below the sidewalk, so a
+  // cutaway's plan shows nothing under the ground beyond the cut.
+  if (h.tone === 'land') return { lit: pal.land, shade: pal.land, roof: pal.land, cut: pal.land, ink: false }
   // Water held in a work, and ground modeled as a part, are cut in their own shade, so a
   // section reads them as water and earth, not as ink.
   return { lit, shade, roof, cut: h.tone === 'water' || h.tone === 'earth' ? shade : pal.poche, inner: [il, is] }
@@ -898,10 +901,14 @@ export const stairProfile = (view: View, pal: Palette, pl: CutPlane, id: string,
 export const travelerItem = (view: View, pal: Palette, id: string, at: Vec2, z: number, facing: 1 | -1, figure: Figure = 'traveler'): Item => {
   const [bx, by] = view.toScreen(at, z)
   const up = by - view.toScreen(at, z + 1)[1]       // screen pixels per meter of height
-  const shapes: Shape[] = travelerShapes(undefined, figure).map((poly) => ({
-    pts: poly.map(([x, y]): Vec2 => [bx + x * facing * view.scale, by - y * up]),
-    fill: pal.route,
-  }))
+  const polys = travelerShapes(undefined, figure).map((poly) => poly.map(([x, y]): Vec2 => [bx + x * facing * view.scale, by - y * up]))
+  // Over a light halo, where the palette has one, so the figure reads on red seats.
+  const halo = pal.routeHalo
+  const hw = pal.routeHaloWidth
+  const shapes: Shape[] = [
+    ...(halo === undefined || hw === undefined ? [] : polys.map((pts): Shape => ({ pts: [...pts, pts[0]], fill: 'none', line: true, stroke: { color: halo, width: hw.plate, dash: [1e3, 0] } }))),
+    ...polys.map((pts): Shape => ({ pts, fill: pal.route })),
+  ]
   const r = 0.25
   const hull: Ring = [[at[0] - r, at[1] - r], [at[0] + r, at[1] - r], [at[0] + r, at[1] + r], [at[0] - r, at[1] + r]]
   return { id, kind: 'building', hull, zMin: z, zMax: z + 1.75, key: at[1], name: figure === 'traveler' ? 'A traveler, drawn to scale (1.75 m)' : 'A visitor, drawn to scale (1.75 m)', dots: [], shapes }

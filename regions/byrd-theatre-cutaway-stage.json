@@ -1,0 +1,53 @@
+{
+  "title": "The Byrd Theatre, Christmas Eve 1928: the stage house cut across, looking toward the alley",
+  "data": "byrd-theatre",
+  "center": [
+    -77.47787681,
+    37.55242006
+  ],
+  "width": 78.0,
+  "depth": 49.0,
+  "bearing": 327.95,
+  "snap": false,
+  "scale": 20,
+  "squash": 0.55,
+  "exaggeration": 1.0,
+  "slab": 0,
+  "palette": "winter",
+  "minBuildingArea": 12,
+  "dots": "none",
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 2,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 1,
+    "shade": 0
+  },
+  "time": {
+    "history": "history/byrd-theatre.json",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  },
+  "cutaway": {
+    "through": [
+      -77.47776761,
+      37.55258346
+    ],
+    "bearing": 113.95,
+    "remove": "right",
+    "parts": "byrd-c-",
+    "lift": [],
+    "section": {
+      "from": -13.4,
+      "to": 13.4,
+      "beyond": 3,
+      "other": 3,
+      "scale": 25,
+      "earth": 1.5,
+      "squareEarth": true
+    }
+  }
+}

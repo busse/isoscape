@@ -104,12 +104,20 @@ def badge(x, y, n, conf, r=44):
     return circle + num
 
 
+SHEET_COLS = [None]   # where each callout column ended, for a caller checking the layout
+HALO = [False]   # set from the spec: leaders get a paper halo, to read on a dark plate
+LAST = [None]    # where the column, the key and the notes ended, for a caller checking the layout
+
+
 def leader(x0, y0, x1, y1, r=0):
     """A thin leader from (x0, y0), less r at that end, to a small dot at (x1, y1): the
-    wayfinding labels' leaders, drawn the same."""
+    wayfinding labels' leaders, drawn the same. On a dark plate (`halo` in the spec) each
+    leader and dot is drawn over a paper-colored halo."""
     d = ((x1 - x0) ** 2 + (y1 - y0) ** 2) ** 0.5 or 1
     sx, sy = x0 + (x1 - x0) * r / d, y0 + (y1 - y0) * r / d
-    return (f'<path d="M{sx:.0f} {sy:.0f}L{x1:.0f} {y1:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>'
+    halo = (f'<path d="M{sx:.0f} {sy:.0f}L{x1:.0f} {y1:.0f}" fill="none" stroke="{PAPER}" stroke-width="15" stroke-linecap="round"/>'
+            f'<circle cx="{x1:.0f}" cy="{y1:.0f}" r="20" fill="{PAPER}"/>') if HALO[0] else ''
+    return halo + (f'<path d="M{sx:.0f} {sy:.0f}L{x1:.0f} {y1:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>'
             f'<circle cx="{x1:.0f}" cy="{y1:.0f}" r="13" fill="{INK}" stroke="{PAPER}" stroke-width="3"/>')
 
 
@@ -127,6 +135,36 @@ def figure(x, y, h, shapes, fill, facing=1):
     """The traveler glyph (the build's own shapes, in meters, feet at 0), feet at (x, y), h tall."""
     k = h / 1.75
     return '<g>' + ''.join('<path fill="{}" d="M{}Z"/>'.format(fill, 'L'.join(f'{x + px * k * facing:.1f} {y - py * k:.1f}' for px, py in poly)) for poly in shapes) + '</g>'
+
+
+def theme_colors(name):
+    """A sheet theme's accents, from src/palette.ts (SHEET_THEMES): the one place colors live."""
+    r = subprocess.run(['node', '--input-type=module', '-e', "import('./src/palette.ts').then((m) => console.log(JSON.stringify(m.SHEET_THEMES)))"],
+                       cwd=ROOT, check=True, capture_output=True, text=True)
+    return json.loads(r.stdout)[name]
+
+
+def holly(x, y, k, green, red, flip=1, vflip=1):
+    """A sprig of holly for a holiday sheet's corner: two spiked leaves and three berries, `k`
+    units to a leaf's length, pointing away from the corner (flip -1 mirrors it across, vflip
+    -1 turns it upside down, for the foot of the sheet). Decoration only."""
+    import math
+
+    def leaf(cx, cy, ang):
+        # A holly leaf: a long oval whose edge runs out to a spine at each of seven lobes.
+        pts = []
+        for i in range(15):
+            t = i / 14
+            w = 0.27 * k * math.sin(math.pi * t) ** 0.7 * (1.0 if i % 2 else 0.6)
+            pts.append(((t - 0.5) * k, w))
+        pts += [(u, -w) for u, w in reversed(pts[1:-1])]
+        a = math.radians(ang)
+        return 'M' + 'L'.join(f'{cx + u * math.cos(a) - v * math.sin(a):.0f} {cy + vflip * (u * math.sin(a) + v * math.cos(a)):.0f}' for u, v in pts) + 'Z'
+    d = leaf(x + flip * 0.42 * k, y - vflip * 0.12 * k, -18 * flip) + leaf(x + flip * 0.12 * k, y + vflip * 0.40 * k, 72 * flip)
+    out = f'<path d="{d}" fill="{green}"/>'
+    for bx, by in ((0.0, 0.0), (0.13, -0.09), (0.05, 0.13)):
+        out += f'<circle cx="{x + flip * bx * k:.0f}" cy="{y + vflip * by * k:.0f}" r="{0.075 * k:.0f}" fill="{red}"/>'
+    return out
 
 
 def inner(svg_text):
@@ -185,10 +223,21 @@ def main():
     for g in spec['groups']:
         for c in g['callouts']:
             c['_conf'] = confidence(c, conf_of)
+    HALO[0] = bool(spec.get('halo'))
+    # A theme colors the title, the headings and their rules, and draws a plain border: sheet
+    # decoration, never a claim about the drawing.
+    theme = theme_colors(spec['theme']) if spec.get('theme') else None
+    accent = theme['red'] if theme else INK
+    head_ink = theme['green'] if theme else DIM
+    rule_ink = theme['green'] if theme else INK
+    lay = spec.get('layout', {})
 
     # The isometric drawing, without its year caption (the sheet has a title of its own).
     vb, iso_body = inner(iso_svg)
     iso_body = re.sub(r'<text\b[^>]*>.*?</text>', '', iso_body, flags=re.S)
+    if spec.get('mapData') is False:
+        # The build's metadata credits OpenStreetMap; a plate drawn with none of its data says nothing.
+        iso_body = re.sub(r'<desc>.*?</desc>', '', iso_body, flags=re.S)
     cap = max(28, (vb[2] - 48) * 0.022) * 2.4
     iso_vb = [vb[0], vb[1] + cap, vb[2], vb[3] - cap]
     if spec.get('isoView'):
@@ -197,7 +246,11 @@ def main():
         iso_vb = list(spec['isoView'])
 
     top = 700
-    iso_box = (M - 60, top, ART_R - M + 60, 3900)
+    iso_box = (M - 60, top, ART_R - M + 60, lay.get('isoHeight', 3900))
+    if lay.get('iso'):
+        # The plate in a box of its own (`layout.iso`: x, y, w, h), centered in it unless `isoAlign`.
+        iso_box = tuple(lay['iso'])
+        top = iso_box[1]
     s_iso = min(iso_box[2] / iso_vb[2], iso_box[3] / iso_vb[3])
     iso_h = iso_vb[3] * s_iso
     # Wayfinding labels under the plate push the sections down when they run past two lines.
@@ -206,14 +259,23 @@ def main():
     push = max(0, (low - 2) * WF * 1.42)
     # The flat section beneath, no taller than SEC_H, from the left edge of the art; with a
     # cross section, the two side by side at one scale, bottoms level.
-    sec_w = ART_R - M
+    # A spec's `layout` may narrow the sections (`sectionW`) or leave more room under them (`bottom`).
+    sec_w = lay.get('sectionW', ART_R - M)
     sec_top = top + iso_h + 420 + push
     GAP = 260
     widths = sum(x['_vb'][2] for x in secs)
     heights = max(x['_vb'][3] for x in secs)
-    s_sec = min((sec_w - GAP * (len(secs) - 1)) / widths, (H - 330 - (sec_top - 90)) / heights)
+    s_sec = min((sec_w - GAP * (len(secs) - 1)) / widths, (H - lay.get('bottom', 330) - (sec_top - 90)) / heights)
     sec_bottom = sec_top + heights * s_sec
     xx = M
+    if lay.get('sections'):
+        # The sections in a box of their own (`layout.sections`: x, y, w, h; y is the captions'
+        # baseline, the drawings below it, bottoms level), at one scale that fits the box.
+        bx_, by_, bw_, bh_ = lay['sections']
+        sec_top = by_ + 70
+        s_sec = min((bw_ - GAP * (len(secs) - 1)) / widths, bh_ / heights)
+        sec_bottom = sec_top + 50 + heights * s_sec
+        xx = bx_
     for x in secs:
         vb_ = x['_vb']
         x['_box'] = (xx, sec_bottom - vb_[3] * s_sec, vb_[2] * s_sec, vb_[3] * s_sec)
@@ -222,12 +284,22 @@ def main():
     labels = []    # the wayfinding labels' boxes, which the link preview keeps clear of
     out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">',
            f'<rect width="{W}" height="{H}" fill="{PAPER}"/>']
+    if theme:
+        # The border: an evergreen rule round the sheet, a finer one inside it, holly at the corners.
+        bi = 120
+        out.append(f'<rect x="{bi}" y="{bi}" width="{W - 2 * bi}" height="{H - 2 * bi}" fill="none" stroke="{theme["green"]}" stroke-width="14"/>')
+        out.append(f'<rect x="{bi + 34}" y="{bi + 34}" width="{W - 2 * bi - 68}" height="{H - 2 * bi - 68}" fill="none" stroke="{theme["green"]}" stroke-width="4"/>')
+        for cx, cy, fl, vf in ((bi, bi, 1, 1), (W - bi, bi, -1, 1), (bi, H - bi, 1, -1), (W - bi, H - bi, -1, -1)):
+            out.append(f'<circle cx="{cx}" cy="{cy}" r="96" fill="{PAPER}"/>')
+            out.append(holly(cx, cy, 170, theme['green'], theme['red'], fl, vf))
     # Title.
-    out.append(text(M, 400, spec['title'], 250, 'bold'))
+    out.append(text(M, 400, spec['title'], 250, 'bold', accent))
     out.append(text(M, 570, spec['subtitle'], 112, 'italic', DIM))
     # The drawings.
-    ox_iso, oy_iso = iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2 - iso_vb[0] * s_iso, iso_box[1] - iso_vb[1] * s_iso
-    out.append(f'<svg x="{iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2:.1f}" y="{iso_box[1]}" width="{iso_vb[2] * s_iso:.1f}" height="{iso_h:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in iso_vb)}" overflow="hidden">{iso_body}</svg>')
+    # The plate is centered over the art, or set against its left edge (`layout.isoAlign`).
+    iso_x = M if lay.get('isoAlign') == 'left' else iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2
+    ox_iso, oy_iso = iso_x - iso_vb[0] * s_iso, iso_box[1] - iso_vb[1] * s_iso
+    out.append(f'<svg x="{iso_x:.1f}" y="{iso_box[1]}" width="{iso_vb[2] * s_iso:.1f}" height="{iso_h:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in iso_vb)}" overflow="hidden">{iso_body}</svg>')
     drawings = [('iso', iso_a, None, None)]
     for x in secs:
         bx_, by_, bw_, bh_ = x['_box']
@@ -237,7 +309,7 @@ def main():
         # released before `sections` existed wrote it, so they rebuild byte for byte.
         out.append(f'<svg x="{bx_ if isinstance(bx_, int) else f"{bx_:.1f}"}" y="{by_:.1f}" width="{bw_:.1f}" height="{bh_:.1f}" viewBox="{" ".join(f"{v:.1f}" for v in vb_)}">{x["_body"]}</svg>')
         drawings.append((x['as'], x['_a'], x['_a'].get('frame'), (bx_ - vb_[0] * s_sec, by_ - vb_[1] * s_sec, s_sec)))
-    iso_rect = (iso_box[0] + (iso_box[2] - iso_vb[2] * s_iso) / 2, iso_box[1], iso_vb[2] * s_iso, iso_h)
+    iso_rect = (iso_x, iso_box[1], iso_vb[2] * s_iso, iso_h)
     if spec.get('inset'):
         # A small flat map of where the building stands and what its work joined
         # (tools/cutaway/context.py), at `box` [x, y, width] in sheet units, its caption beneath.
@@ -303,12 +375,27 @@ def main():
     col = {**dict(head=170, callout=58, group=36, keyHead=150, keyRow=92, traveler=26, notes=40, between=68), **spec.get('column', {})}
     y = 570
     x = COL_X
+    # A spec's `layout.columns` ([x, w] each) sets the callouts in more than one column, each
+    # group in the column its `column` names (default the first); `layout.body` sets the size of
+    # their text (sheet units; its leading in proportion).
+    cols = lay.get('columns') or [[COL_X, W - M - COL_X]]
+    col_y = [570] * len(cols)
+    col_w = W - M - x
+    body = lay.get('body', BODY)
+    lead = round(body * 72 / BODY)
     for g in spec['groups']:
-        out.append(text(x, y, g['title'].upper(), 58, 'bold', DIM, family=SANS, spacing=4))
+        if lay.get('columns'):
+            ci = g.get('column', 0)
+            x, col_w = cols[ci]
+            y = col_y[ci]
+        # A group may set its heading's baseline (`y`, sheet units) to line it up with the
+        # heading beside it in the next column; the column only moves down, never up.
+        y = max(y, g.get('y', y))
+        out.append(text(x, y, g['title'].upper(), 58, 'bold', head_ink, family=SANS, spacing=4))
         if g.get('traveler') and traveler:
             tw = font('bold', 58).getlength(g['title'].upper()) + 4 * len(g['title'])
             out.append(figure(x + tw + 40, y + 4, 82, traveler['shapes'], route))
-        out.append(f'<line x1="{x}" y1="{y + 32}" x2="{W - M}" y2="{y + 32}" stroke="{INK}" stroke-width="4"/>')
+        out.append(f'<line x1="{x}" y1="{y + 32}" x2="{x + col_w}" y2="{y + 32}" stroke="{rule_ink}" stroke-width="4"/>')
         y += col['head']
         for c in g['callouts']:
             conf = c['_conf']
@@ -316,17 +403,36 @@ def main():
                 ox, oy, sc = place_ if place_ is not None else (ox_iso, oy_iso, s_iso)
                 if where not in c:
                     continue
-                p = anchor(c[where], anchors, frame)
-                if p is not None:
-                    out.append(badge_at(ox + p[0] * sc, oy + p[1] * sc, c[where].get('badge'), c['n'], conf, 46))
+                # One anchor, or a list of them: a callout may name two parts in one drawing.
+                for w in (c[where] if isinstance(c[where], list) else [c[where]]):
+                    p = anchor(w, anchors, frame)
+                    if p is not None:
+                        out.append(badge_at(ox + p[0] * sc, oy + p[1] * sc, w.get('badge'), c['n'], conf, 46))
             out.append(badge(x + 56, y - 26, c['n'], conf, 50))
             out.append(text(x + 140, y, c['title'], 70, 'bold'))
             yy = y + 86
-            for line in wrap(c['text'], 'regular', BODY, W - M - x - 140):
-                out.append(text(x + 140, yy, line, BODY, 'regular', DIM))
-                yy += 72
+            for line in wrap(c['text'], 'regular', body, col_w - 140):
+                out.append(text(x + 140, yy, line, body, 'regular', DIM))
+                yy += lead
             y = yy + col['callout']
         y += col['group']
+        if lay.get('columns'):
+            col_y[ci] = y
+    if lay.get('columns'):
+        y = max(col_y)
+        if SHEET_COLS[0] is None:
+            SHEET_COLS[0] = col_y
+    # Room names set in a flat section (`drawingLabels`: `in`, the drawing's key; `s` and
+    # `elevation`, the label's middle; `text`), in small capitals, light on the dark section.
+    for lb in spec.get('drawingLabels', []):
+        for where, anchors, frame, place_ in drawings:
+            if where != lb['in'] or frame is None:
+                continue
+            ox, oy, sc = place_
+            p = anchor(lb, anchors, frame)
+            px_ = lb.get('px', 36)
+            for i, ln in enumerate(lb['text'].upper().split('|')):
+                out.append(text(ox + p[0] * sc, oy + p[1] * sc + px_ * 0.35 + i * px_ * 1.25, ln, px_, 'bold', PAPER, 'middle', SANS, 2))
     # Wayfinding: where the trains and streetcars went, in the plate's margins, each with a
     # leader to the track end or the street it belongs to.
     for wf in spec.get('wayfinding', []):
@@ -348,9 +454,19 @@ def main():
         lh = WF * 1.42
         x0, y0 = wf['label'] if 'label' in wf else {
             'top-right': (ART_R - wmax, top - 215),
+            # Inside the plate's top-left corner, over its sky, for a place off to the upper left.
+            'inside-top-left': (iso_rect[0] + 90, iso_rect[1] + 150),
             'bottom-right': (ART_R - wmax, iso_rect[1] + iso_rect[3] + 70),
             'bottom-left': (M + 20, iso_rect[1] + iso_rect[3] + 70),
+            # Inside the plate, at its left edge, just above the place pointed to.
+            'inside-left-above': (iso_rect[0] + 90, ay - lh * len(lines) - 60),
+            # Inside the plate, at its left edge, just below the place pointed to.
+            'inside-left-below': (iso_rect[0] + 90, ay + 160),
+            # Below the plate, starting under the place pointed to on its bottom edge.
+            'below': (ax - 40, iso_rect[1] + iso_rect[3] + 70),
         }[wf['place']]
+        # A label may be nudged off what it would cover (sheet units).
+        x0, y0 = x0 + wf.get('offset', [0, 0])[0], y0 + wf.get('offset', [0, 0])[1]
         out.append(f'<rect x="{x0 - 30:.0f}" y="{y0 - WF - 26:.0f}" width="{wmax + 90:.0f}" height="{lh * len(lines) + 34:.0f}" fill="{PAPER}" fill-opacity="0.9"/>')
         labels.append((x0 - 30, y0 - WF - 26, wmax + 90, lh * len(lines) + 34))
         out.append(badge(x0 + 6, y0 - WF * 0.36, None, wf['confidence'], 15))
@@ -364,44 +480,111 @@ def main():
             # the point of its box nearest the place it names, so it stays short.
             lx = min(max(ax, x0 - 30), x0 + wmax + 60)
             ly = min(max(ay, y0 - WF - 26), y0 - WF - 26 + lh * len(lines) + 34)
-        elif wf['place'] != 'top-right':
+        elif wf['place'] not in ('top-right', 'inside-top-left', 'inside-left-above'):
             ly = y0 - WF - 26
             lx = max(x0 - 30, min(ax, x0 + wmax + 60))
+        if HALO[0]:
+            out.append(f'<path d="M{lx:.0f} {ly:.0f}L{ax:.0f} {ay:.0f}" fill="none" stroke="{PAPER}" stroke-width="15" stroke-linecap="round"/>')
+            out.append(f'<circle cx="{ax:.0f}" cy="{ay:.0f}" r="20" fill="{PAPER}"/>')
         out.append(f'<path d="M{lx:.0f} {ly:.0f}L{ax:.0f} {ay:.0f}" fill="none" stroke="{INK}" stroke-width="5"/>')
         out.append(f'<circle cx="{ax:.0f}" cy="{ay:.0f}" r="13" fill="{INK}"/>')
-    # Key, sources and notes, at the foot of the callout column.
-    ky = y + 40
-    out.append(text(x, ky, 'HOW SURE EACH PART IS', 58, 'bold', DIM, family=SANS, spacing=4))
-    out.append(f'<line x1="{x}" y1="{ky + 32}" x2="{W - M}" y2="{ky + 32}" stroke="{INK}" stroke-width="4"/>')
+    # Key, sources and notes, at the foot of the callout column, or the key in a block of its own
+    # (`layout.key`: x, y, w; its rows wrapped) with the sources and notes under it, or in a
+    # block of their own (`layout.notes`: x, w, and y if not under the key).
+    kb = lay.get('key')
+    kx, ky, kw = (kb['x'], kb['y'], kb['w']) if kb and 'column' not in kb else (x, y + 40, W - M - x)
+    if kb and 'column' in kb:
+        # The key under the callouts of one column (`layout.key.column`).
+        kx, kw = cols[kb['column']]
+        ky = col_y[kb['column']] + kb.get('y', 40)
+    out.append(text(kx, ky, 'HOW SURE EACH PART IS', 58, 'bold', head_ink, family=SANS, spacing=4))
+    out.append(f'<line x1="{kx}" y1="{ky + 32}" x2="{kx + kw}" y2="{ky + 32}" stroke="{rule_ink}" stroke-width="4"/>')
     ky += col['keyHead']
     for conf, msg in spec['key']:
-        out.append(badge(x + 56, ky - 22, None, conf, 42))
-        out.append(text(x + 140, ky, msg, 56, 'regular', DIM))
-        ky += col['keyRow']
-    for line in wrap(spec.get('marksNote', MARKS_NOTE), 'regular', 56, W - M - x - 140):
-        out.append(text(x + 140, ky, line, 56, 'regular', DIM))
+        out.append(badge(kx + 56, ky - 22, None, conf, 42))
+        rows = wrap(msg, 'regular', 56, kw - 140) if kb else [msg]
+        for i, line in enumerate(rows):
+            out.append(text(kx + 140, ky, line, 56, 'regular', DIM))
+            ky += 76 if i < len(rows) - 1 else col['keyRow']
+    for line in wrap(spec.get('marksNote', MARKS_NOTE), 'regular', 56, kw - 140):
+        out.append(text(kx + 140, ky, line, 56, 'regular', DIM))
         ky += 76
     if spec.get('travelerKey') and traveler:
         ky += col['traveler']
-        out.append(figure(x + 56, ky + 14, 90, traveler['shapes'], route))
-        for line in wrap(spec['travelerKey'], 'regular', 56, W - M - x - 140):
-            out.append(text(x + 140, ky, line, 56, 'regular', DIM))
+        out.append(figure(kx + 56, ky + 14, 90, traveler['shapes'], route))
+        for line in wrap(spec['travelerKey'], 'regular', 56, kw - 140):
+            out.append(text(kx + 140, ky, line, 56, 'regular', DIM))
             ky += 76
     ky += col['notes']
-    for line in wrap(spec['sources'], 'italic', 50, W - M - x) + [None] + wrap(spec['notes'], 'italic', 50, W - M - x):
+    nb = lay.get('notes')
+    nx, ny, nw = (nb.get('x', kx), nb.get('y', ky + 30), nb.get('w', kw)) if nb else (kx, ky, kw)
+    # The sources and notes may run in several columns (`layout.notes.cols`, with `gap`), at
+    # their own size (`layout.notes.px`).
+    ncols = nb.get('cols', 1) if nb else 1
+    npx = nb.get('px', 50) if nb else 50
+    nlead = round(npx * 68 / 50)
+    ngap = nb.get('gap', 120) if nb else 0
+    cw = (nw - ngap * (ncols - 1)) / ncols
+    if nb and nb.get('flow'):
+        # Or flow through boxes of their own, in reading order (`layout.notes.flow`: [x, y, w,
+        # bottom] each; a y of null starts the box under the key): each line wraps to its box's
+        # width, and a line that would pass its box's bottom starts the next box.
+        boxes = [[bx, ky + 30 if by is None else by, bw, bb] for bx, by, bw, bb in nb['flow']]
+        f_ = font('italic', npx)
+        bi, by, nend = 0, boxes[0][1], boxes[0][1]
+        for pi, para in enumerate((spec['sources'], spec['notes'])):
+            if pi:
+                by += col['between']
+            cur = ''
+            for w in para.split() + [None]:
+                trial = (cur + ' ' + w).strip() if w else cur
+                if w is not None and (not cur or f_.getlength(trial) <= boxes[bi][2]):
+                    cur = trial
+                    continue
+                out.append(text(boxes[bi][0], by, cur, npx, 'italic', DIM))
+                by += nlead
+                nend = max(nend, by)
+                cur = w or ''
+                if by > boxes[bi][3] and bi < len(boxes) - 1:
+                    bi, by = bi + 1, boxes[bi + 1][1]   # a line that would pass the box starts the next
+        if nend > H - 260 or by > boxes[-1][3] + nlead:
+            print(f'warning: the notes run to {by:.0f}, past their last box', file=sys.stderr)
+        if os.environ.get('SHEET_DEBUG'):
+            print(f'notes end in box {bi + 1} at {by:.0f}', file=sys.stderr)
+        lines, ny = [], nend
+    else:
+        lines = wrap(spec['sources'], 'italic', npx, cw) + [None] + wrap(spec['notes'], 'italic', npx, cw)
+    per = -(-(sum(nlead if ln else col['between'] for ln in lines)) // ncols) if ncols > 1 else None
+    ny0, k_col, used, nend = ny, 0, 0, ny
+    for line in lines:
+        if per is not None and used >= per and k_col < ncols - 1 and line is not None:
+            k_col, used, ny = k_col + 1, 0, ny0
         if line is None:
-            ky += col['between']
+            ny += col['between']
+            used += col['between']
             continue
-        out.append(text(x, ky, line, 50, 'italic', DIM))
-        ky += 68
-    if ky > H - 120:
-        print(f'warning: the column runs to {ky:.0f}, past the credit line', file=sys.stderr)
-    elif spec.get('columnEnd') and ky > spec['columnEnd']:
-        # The room the print's title block needs below the column (stamp.py places it there).
-        print(f"warning: the column runs to {ky:.0f}, into the title block's room (columnEnd {spec['columnEnd']})", file=sys.stderr)
+        out.append(text(nx + k_col * (cw + ngap), ny, line, npx, 'italic', DIM))
+        ny += nlead
+        used += nlead
+        nend = max(nend, ny)
+    ny = max(ny, nend)
+    if kb is None and nb is None:
+        ky = ny
+        if ky > H - 120:
+            print(f'warning: the column runs to {ky:.0f}, past the credit line', file=sys.stderr)
+        elif spec.get('columnEnd') and ky > spec['columnEnd']:
+            # The room the print's title block needs below the column (stamp.py places it there).
+            print(f"warning: the column runs to {ky:.0f}, into the title block's room (columnEnd {spec['columnEnd']})", file=sys.stderr)
+    else:
+        if ny > H - 260:
+            print(f'warning: the notes run to {ny:.0f}, past the credit line', file=sys.stderr)
+        if y > (spec.get('columnEnd') or H - 120):
+            print(f'warning: the column runs to {y:.0f}, past its end', file=sys.stderr)
+    LAST[0] = {'column': y, 'key': ky, 'notes': ny}
     if os.environ.get('SHEET_DEBUG'):
-        print(f'column ends at {ky:.0f}', file=sys.stderr)
-    out.append(text(M, H - 150, spec['credit'], 46, 'regular', DIM))
+        print(f'column ends at {y:.0f}, key at {ky:.0f}, notes at {ny:.0f}', file=sys.stderr)
+    # Within a theme's border, the credit line stands higher.
+    out.append(text(M, H - (230 if theme else 150), spec['credit'], 46, 'regular', DIM))
     out.append('</svg>')
     sheet = os.path.join(a.out, f'{name}-sheet.svg')
     open(sheet, 'w').write('\n'.join(out))
@@ -419,7 +602,8 @@ def main():
 
 def confidence(c, conf_of):
     """A callout's badge: its own `confidence`, else its part's, else approximate."""
-    part = (c.get('iso') or {}).get('part') or (c.get('section') or {}).get('part') or ''
+    first = lambda w: (w[0] if isinstance(w, list) and w else w) or {}
+    part = first(c.get('iso')).get('part') or first(c.get('section')).get('part') or ''
     return c.get('confidence') or conf_of.get(part.replace('history:', '').split(':')[0], 'approximate')
 
 

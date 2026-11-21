@@ -571,7 +571,7 @@ same pipeline on a flat plate.
   "squash": 0.5,                  // sine of the tilt
   "exaggeration": 1.0,            // vertical exaggeration
   "slab": 16,                     // ground slab thickness, meters
-  "palette": "paper",             // paper | night
+  "palette": "paper",             // paper | night | winter
   "bridgeDeck": 7,                // default deck height per OSM layer
   "bridges": [{ "match": "Manchester", "deck": 24 }],  // + "pierSpacing": meters (default 38; long for suspension bridges)
   "minBuildingArea": 12,          // m²
@@ -702,12 +702,13 @@ one side is lifted away, its ground floor left as a plan, and every cut is drawn
   "remove": "right",                      // the side lifted away; stand the camera there
   "floor": 67.4, "keep": 1.5,             // on that side keep what stands up to 1.5 m over this floor (m above sea level)
   "parts": "bss-",                        // only modeled parts with this id prefix are cut
-  "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away whole though not cut
+  "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away whole though not cut; OSM buildings ("^w236026091$"); modeled parts, still drawn in the flat section
   "outline": { "parts": ["bss-c-floor-"], "offset": 1.5 },  // dash the removed footprint
   "travelers": [{ "at": [-77.466035, 37.56091], "floor": 67.4, "facing": 1 }],  // figures to scale (1.75 m); no floor: on the ground
   "section": { "from": -62, "to": 104, "beyond": 35, "other": 3, "scale": 10, "earth": 5,
                "route": [[-60, 64.7], [50.5, 68.3]],   // the flat section and the traveler's path (waist height)
                "travelers": [{ "s": -40, "floor": 65.66, "facing": 1 }] }   // figures on the path
+               // "squareEarth": true digs the earth square at the ends of what lies below the ground
 }
 ```
 
@@ -766,6 +767,20 @@ tightens the column's spacing (sheet units: `head`, `callout`, `group`, `keyHead
 released sheets'); the Pump House sheet uses it to end its column by 6,520 and free the corner.
 `blockMinPt` keeps the title block's taxonomy at that size or more on the 24 × 18 in print (see
 "Plates").
+
+A spec may also set `theme` (`"holiday"`: accents from `SHEET_THEMES` in `src/palette.ts`, a
+border with holly at the corners; margins only), `halo` (leaders drawn over a paper halo, for a
+dark plate), `mapData: false` (no OpenStreetMap credit in the drawing's metadata, for a plate
+drawn without its data), and `layout` (`isoHeight`, `isoAlign: "left"`, `bottom`, `sectionW`,
+`key: {x, y, w}` to set the key in a block of its own, or `key: {column}` to set it under a
+callout column, and `notes: {x, y, w}` to set the sources and notes beside the section, or under
+the key when `y` is left out, with `cols`, `gap` and `px` to run them in columns at their own
+size, or `notes: {px, flow}` to flow them through boxes of their own, `[x, y, w, bottom]` each in reading order, a `y` of null starting under the key). For a sheet with many callouts, `layout.iso` and `layout.sections` (`[x, y, w, h]`) set
+the plate and the flat sections in boxes of their own, `layout.columns` (`[[x, w], ...]`) sets
+the callouts in columns, each group in the one its `column` names (a group's `y` sets its heading's baseline, to line it up with the heading beside it; the column only moves down), and `layout.body` sets the
+callout text's size. `drawingLabels` (`in`, `s`, `elevation`, `text`, `px`) names rooms inside a
+flat section in small capitals. A callout may name a list of anchors in one drawing. A wayfinding label can stand `inside-left-above` or `inside-left-below` the place it
+points to on the plate's left edge, or `below` the plate, and be nudged by `offset`.
 
 `--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):
 the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, each with its title
