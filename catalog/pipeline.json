@@ -3170,7 +3170,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "Edge-store analysis done (casestudy step 6): in towns, edge Dollar Generals sit on the main road in, at the crossroads, mostly just inside the limits; newer than in-town stores. Owner: is this the editorial line? Next: towns-only gallery as the poster core, water/sewer source, then poster rough draft.",
+   "decision": "Traffic tests done (casestudy step 7): in towns, edge Dollar Generals sit on one of the two busiest roads in (13 of 18), roads already busy when the stores came. Owner: editorial line and heat map style for the poster rough draft.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,

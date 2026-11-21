@@ -1,0 +1,11 @@
+town,authorized,count_year,aadt_2024,A,aadt_then,note,change
+colonial-beach,2015,2015,6490.0,1.63,4537.0,aadt in 2015 file,0.43
+drakes-branch,2016,2015,1699.0,1.05,935.0,2015 file (2016 file truncated at source),0.82
+lynchburg,2012,2012,21780.0,1.17,20302.0,AADT_VN in 2012 file,0.07
+lynchburg,2015,2015,,1.3,,nearest counted section 62 m,
+martinsville,2016,2015,5841.0,1.08,5858.0,2015 file (2016 file truncated at source),-0.0
+richmond,2015,2015,8981.0,1.45,9963.0,aadt in 2015 file,-0.1
+roanoke,2014,2014,15638.0,1.31,14808.0,aadt in 2014 file,0.06
+south-boston,2016,2015,1935.0,2.0,1825.0,2015 file (2016 file truncated at source),0.06
+suffolk,2016,2015,20320.0,1.3,16533.0,2015 file (2016 file truncated at source),0.23
+tazewell,2015,2015,2539.0,1.98,3490.0,aadt in 2015 file,-0.27

@@ -1,0 +1,7 @@
+group,n,with_count,median_aadt,ci_low,ci_high,random_median,verdict,on_busiest_crossing,on_top2_crossing,random_on_busiest,random_on_top2,busiest_k,busiest_ci,busiest_verdict,top2_k,top2_ci,top2_verdict
+"Dollar General, all edge",34,30,6209.5,4925.5,9677.0,2955.0,supported,0.294,0.412,0.199,0.323,10,0.17-0.46,cannot tell,14,0.26-0.58,cannot tell
+"Dollar General, towns (follow-up to an exploratory split)",18,16,5851.0,2891.0,9667.0,3139.0,cannot tell,0.5,0.722,0.293,0.465,9,0.29-0.71,cannot tell,13,0.49-0.88,supported
+"Dollar General, cities (same)",16,14,8487.5,4592.0,14254.0,2475.0,supported,0.062,0.062,0.043,0.086,1,0.01-0.28,cannot tell,1,0.01-0.28,cannot tell
+"Three chains, all edge",48,37,7994.0,5773.0,9687.0,2955.0,supported,0.292,0.396,0.199,0.323,14,0.18-0.43,cannot tell,19,0.27-0.54,cannot tell
+"Supermarkets and groceries, edge",28,8,9160.5,5342.0,11563.0,2955.0,supported,0.143,0.179,0.199,0.323,4,0.06-0.31,cannot tell,5,0.08-0.36,cannot tell
+"Convenience stores, edge",106,92,7003.0,6240.0,8850.0,2955.0,supported,0.208,0.377,0.199,0.323,22,0.14-0.29,cannot tell,40,0.29-0.47,cannot tell

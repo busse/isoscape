@@ -21,6 +21,8 @@ Raw downloads stay out of git. Each line: what, URL, date fetched, size, SHA-256
 | NLCD 2021 impervious and descriptor, 20 editorial windows | MRLC WCS, as above | 2026-11-21 | 40 files | checksums in raw/nlcd-editorial20.sha256 on the Mac | Public domain |
 | NLCD 2021 impervious and descriptor, all 227 places | MRLC WCS | 2026-11-21 | 454 files, archive 34,313,690 B | raw/nlcd-all-places.sha256 on the Mac | Public domain |
 | NLCD 2001 impervious, all 227 places | MRLC WCS, coverage mrlc_download__NLCD_2001_Impervious_L48 | 2026-11-21 | 227 files, archive 21,596,149 B | raw/nlcd2001-all-places.sha256 on the Mac | Public domain |
+| FHWA HPMS 2024 Spatial All Sections, Virginia, f_system 1-6 with AADT (262,439 sections, 6 GeoJSON pages) | https://data.transportation.gov/resource/42um-tgh5.geojson (where stateid=51) | 2026-11-21 | archive 28,078,095 B | raw/hpms/va2024.sha256 on the Mac | Public Domain U.S. Government (dataset metadata) |
+| FHWA HPMS Virginia shapefiles 2012, 2014, 2015, 2016 | https://www.fhwa.dot.gov/policyinformation/hpms/shapefiles/virginia<year>.zip | 2026-11-21 | 39,058,420 / 185,087,392 / 287,747,546 / 266,399,970 B | raw/hpms/hist.sha256 on the Mac; the 2016 DBF is truncated at the source (declares 4,381,672,890 B, holds 2,147,485,719) | US government work |
 | Planning district membership | https://www.vapdc.org/pdc-directory (opened, not downloaded) | 2026-11-21 | | | Facts, used in regions.json |
 
 Raw files are kept on the Mac in `ISO-TEST/isoscape-work/dollar-stores/raw/`.

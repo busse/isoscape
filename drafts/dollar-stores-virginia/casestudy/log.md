@@ -205,3 +205,25 @@ Folder: `2026-11-21-06-edge-stores/`, with `hypotheses.md` (written first) and `
 - **What it replaces.** VDOT's own layer, whose terms limit use to the Commonwealth's
   official business.
 - **Not yet fetched or used.** The test is proposed to Chris in the reply.
+
+## Step 7 (continued): traffic tests and the heat map (13:06-13:24)
+
+Folder: `2026-11-21-07-traffic/`, with `hypotheses.md` (13:08, before fetching) and
+`findings.md`.
+
+- **Chris (13:06).** "Yes, this is an interesting thread to pull at and maybe heat map".
+- **Data.**
+  - Fetched HPMS 2024 for Virginia from data.transportation.gov: 262,439 sections with
+    traffic, in six pages.
+  - Fetched FHWA's 2012, 2014, 2015 and 2016 Virginia files. 2014 and 2015 needed resumed
+    downloads.
+  - The 2016 file is truncated at the source, so 2016 stores use 2015.
+- **Results.**
+  - Edge Dollar General stores sit on roads about twice as busy as other edge sites, as do
+    convenience stores and supermarkets.
+  - In towns, 13 of 18 are on one of the two busiest roads in, against 47 percent of random
+    sites. This was stated before, and held.
+  - The roads were already busy when the stores came.
+- **Rounds.**
+  - Heat-map gallery in 2, after its validator fix (the light end of the ramp was too faint).
+  - Chart in 2.
