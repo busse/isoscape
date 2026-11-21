@@ -126,3 +126,21 @@ Folder: `2026-11-21-03-lead-edge-and-draw/`, with its own `notes.md`.
   - Seeded draw of 20 towns.
   - One empty cell, the coastal region at 10,000 or more, was filled statewide by the rule
     written before the draw: Leesburg.
+
+## Step 4: Mathews and Middlesex, store first (11:53-11:59)
+
+Folder: `2026-11-21-04-mathews-middlesex/`, with `notes.md`.
+
+- **The request.** Chris asked to include Mathews and Middlesex specifically, and spitballed
+  "find DGs, infer centroid of why they are there".
+- **How it was read.** Start from the stores. Find who lives nearest each Dollar General by
+  road, and where those people's center is.
+- **The two counties in the grid.** Added as the owner's choice, apart from the seeded 20.
+  Neither has a town the rule could draw (Urbanna has no Dollar General).
+- **What it found.**
+  - The three oldest stores (2005-07) are in the villages, beside the grocery.
+  - The four newer ones (2014-25) are between villages on the state routes, 5 to 13 km from
+    a grocery.
+  - All seven are near route junctions. The junction test needs a cleaner rule.
+- **Rounds.** The map took three. The Hartfield label is left as a listed fault because of
+  the round budget.

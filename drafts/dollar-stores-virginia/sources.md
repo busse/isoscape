@@ -15,6 +15,7 @@ Raw downloads stay out of git. Each line: what, URL, date fetched, size, SHA-256
 
 | NLCD 2021 percent impervious, three test windows (WCS) | https://www.mrlc.gov/geoserver/ows, coverage mrlc_download__NLCD_2021_Impervious_L48 | 2026-11-21 | 1,050,540 B each | marion c6015d40..., south-hill 685443da..., chase-city eb4aa2ec... | Public domain (USGS/MRLC) |
 | NLCD 2021 impervious descriptor, same windows | coverage mrlc_download__NLCD_2021_Impervious_descriptor_L48 | 2026-11-21 | 1,050,540 B each | marion 7a0d49c3..., south-hill c9292175..., chase-city ade60bbd... | Public domain |
+| OSM via Overpass, Middle Peninsula and lower Northern Neck roads (bbox 37.15,-77.05,38.05,-76.15) | overpass-api.de | 2026-11-21 (OSM base 16:52 UTC) | 31,350,083 B | c7907e8ccebb170d413b43ce9f4b8aaed895aa233ad287a2a2cfe9fe37c8ce3b | ODbL |
 | Planning district membership | https://www.vapdc.org/pdc-directory (opened, not downloaded) | 2026-11-21 | | | Facts, used in regions.json |
 
 Raw files are kept on the Mac in `ISO-TEST/isoscape-work/dollar-stores/raw/`.

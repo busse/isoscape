@@ -97,3 +97,6 @@ Total about 10-15 sessions. Actuals go in effort.md.
 - Regions: groups of planning district commissions (`tools/stories/dollar-stores/regions.json`).
   The central Piedmont joined Southside.
 - The editorial 20: `editorial-draw.csv` (seed 20261121).
+- Owner's choice, added to the editorial grid and labeled as such: Mathews County and
+  Middlesex County (no town there fits the rule). Shown store first: each Dollar General's
+  catchment by road and its population center (`tools/stories/dollar-stores/catchment.py`).
