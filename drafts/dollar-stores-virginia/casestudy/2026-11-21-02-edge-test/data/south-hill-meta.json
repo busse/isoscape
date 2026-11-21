@@ -1,0 +1,27 @@
+{
+ "center": [
+  756422.8684867693,
+  4068676.6075558695
+ ],
+ "pop_in_limits": 4690,
+ "builtup_km2": {
+  "strict": 5.8,
+  "loose": 9.87
+ },
+ "limits_km2": 25.62,
+ "ua": [
+  "South Hill, VA"
+ ],
+ "settings": {
+  "strict": [
+   164.1,
+   200
+  ],
+  "loose": [
+   77.2,
+   400
+  ]
+ },
+ "null_n": 4000,
+ "seed": 20261121
+}

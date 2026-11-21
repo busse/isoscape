@@ -30,6 +30,14 @@ someone use isoscape (the reference site and the shop) are in AGENTS.md:
   traced, modeled or set "by hand", and machine work is never "hand-drawn". Where it helps,
   say the work was done with Claude or in code. Anything Claude drafts for publication says so,
   and may point to the artist statement.
+- **Keep the case-study record.** (Chris's standing rule, November 21, 2026.) Preserve the work
+  as it goes so its development can be told later: every render, chart, map and draft that was
+  shown to Chris or looked at, every round of it (write each round to a new file, never over
+  the last), the notes, the questions put to Chris with his answers, decisions, dead ends,
+  fixes and timings. Keep them in `drafts/<piece>/casestudy/`: one dated, numbered folder per
+  step (`2026-11-21-02-edge-test/`) and a running `log.md`, next to the piece's `effort.md`.
+  Files over about 5 MB stay on the Mac in `ISO-TEST/isoscape-work/<piece>/casestudy/`, and
+  the log says where. Commit the record with the work it describes.
 - **Pages say what the code does.** `pages/how-its-made.md` describes the pipeline with real
   numbers (thresholds, defaults, distances). When you change one of those in the code, change
   the page in the same commit.
