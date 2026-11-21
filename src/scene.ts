@@ -94,7 +94,7 @@ export interface GroundPolygon {
 }
 
 export interface Ribbon {
-  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir' | 'tram' | 'racetrack' | 'mark'
+  readonly kind: 'road' | 'path' | 'rail' | 'canal' | 'weir' | 'tram' | 'racetrack' | 'mark' | 'tintroad'
   /** View-meter quads, draped over the terrain when drawn. */
   readonly quads: Vec2[][]
   /** View-meter center segments, for rail ties and weir crests. */
@@ -126,6 +126,13 @@ export interface Scene {
    * caption line saying what its edge is.
    */
   readonly island?: { readonly rings: readonly Ring[]; readonly bottom: number; readonly caption?: string }
+  /**
+   * Graded ground (a history switch's `tint`): each polygon's tone (an index into the palette's
+   * `tint.tones`) and its rings in view meters (outers counter-clockwise, holes clockwise), and
+   * the key set under the year caption.
+   */
+  readonly tints?: readonly { readonly tone: number; readonly rings: readonly Ring[] }[]
+  readonly tintLegend?: { readonly title: string; readonly labels: readonly string[]; readonly source?: string }
   /** Traced buildings of the year left out, and why: on water, on a viaduct or track, or buried. */
   readonly tracedLeftOut?: readonly { readonly id: string; readonly why: 'water' | 'viaduct' | 'track' | 'buried' }[]
 }
@@ -534,6 +541,8 @@ export const buildScene = (
   }
 
   const railScale = time?.history.railScale ?? 1
+  // Graded ground's roads (`Tint.roads`), drawn in the palette's `tint.road`.
+  const tintRoads = time?.history.tint?.roads
   const bridgeLines: LineFeature[] = []
   for (const f of features) {
     if (f.type !== 'line') continue
@@ -544,7 +553,7 @@ export const buildScene = (
     }
     const w = roadWidth(t)
     if (w !== null) {
-      const r = ribbonOf(mark?.streets === true && f.id.startsWith('history:') ? 'mark' : isPath(t) ? 'path' : 'road', f, w)
+      const r = ribbonOf(mark?.streets === true && f.id.startsWith('history:') ? 'mark' : tintRoads?.includes(t.highway ?? '') === true ? 'tintroad' : isPath(t) ? 'path' : 'road', f, w)
       if (r) ribbons.push(r)
     } else if (isRail(t)) {
       // A series can draw yard and siding track at its own scale (railScaleService): a yard of a
@@ -1337,7 +1346,7 @@ export const buildScene = (
   let mergedPieces = 0
   for (let c = 0; c < chains.length; c++) {
     const onLineDeck = deckOnLine.size > 0 && deckOnLine.has(chains[c].line.id)
-    const all = bridgePieces(view, mark?.bridges?.includes(chains[c].line.id) === true ? { ...pal, deck: pal.mark.line } : pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }), ...(onLineDeck ? { onLine: true } : {}) } : undefined)
+    const all = bridgePieces(view, mark?.bridges?.includes(chains[c].line.id) === true ? { ...pal, deck: pal.mark.line } : tintRoads?.includes(chains[c].line.tags.highway ?? '') === true ? { ...pal, deck: pal.tint.road } : pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }), ...(onLineDeck ? { onLine: true } : {}) } : undefined)
     const pieces = all.filter((p) => !merged(c, p))
     mergedPieces += all.length - pieces.length
     spans += pieces.filter((p) => p.pier !== true).length
@@ -1345,6 +1354,20 @@ export const buildScene = (
   }
   if (mergedPieces > 0) stats.railDeckPiecesMerged = mergedPieces
   stats.bridgePieces = spans
+
+  // Graded ground (a switch's `tint`): each polygon in view meters, cut to a margin round the
+  // frame, outers counter-clockwise and holes clockwise.
+  const tint = time?.history.tint
+  const tints: { tone: number; rings: Ring[] }[] = []
+  for (const a of tint?.areas ?? []) {
+    for (const poly of a.polygons) {
+      const ok = (r: Ring) => r.length >= 3 && Math.abs(signedArea(r)) > 1
+      const outer = orient(clipRingToRect(toViewRing(view, poly[0]), wide), true)
+      if (!ok(outer)) continue
+      tints.push({ tone: a.tone, rings: [outer, ...poly.slice(1).map((r) => orient(clipRingToRect(toViewRing(view, r), wide), false)).filter(ok)] })
+    }
+  }
+  if (tints.length > 0) stats.tinted = tints.length
 
   const labels: MapLabel[] = []
   for (const h of curated) {
@@ -1393,6 +1416,8 @@ export const buildScene = (
     ...(cutPlaneOut === undefined ? {} : { cut: cutPlaneOut }),
     ...(sectionsOut === undefined ? {} : { sections: sectionsOut }),
     ...(leftOut === undefined ? {} : { tracedLeftOut: leftOut }),
+    ...(tints.length === 0 ? {} : { tints }),
+    ...(tint?.legend === undefined ? {} : { tintLegend: tint.legend }),
   }
 }
 

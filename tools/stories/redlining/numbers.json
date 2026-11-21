@@ -1,0 +1,120 @@
+{
+ "about": "Computed by tools/stories/redlining/measure.py from the cached data; see its docstring for the method.",
+ "graded_land": {
+  "A": {
+   "areas": 7,
+   "km2": 7.72,
+   "share": 0.159
+  },
+  "B": {
+   "areas": 15,
+   "km2": 12.62,
+   "share": 0.259
+  },
+  "C": {
+   "areas": 14,
+   "km2": 13.73,
+   "share": 0.282
+  },
+  "D": {
+   "areas": 12,
+   "km2": 14.63,
+   "share": 0.3
+  }
+ },
+ "graded_km2_union": 48.7,
+ "overlap_km2": -0.0,
+ "ungraded_features": [
+  "Industrial and Commercial"
+ ],
+ "extent_km": [
+  14.0,
+  10.7
+ ],
+ "frame": {
+  "share_of_grade_inside": {
+   "A": 1.0,
+   "B": 1.0,
+   "C": 0.909,
+   "D": 0.988
+  },
+  "areas_cut_by_frame": [
+   "C12",
+   "C13",
+   "C14",
+   "C6",
+   "D11.5"
+  ]
+ },
+ "motorway": {
+  "km_in_graded": 19.63,
+  "km_total_in_cache": 113.0,
+  "by_grade_km": {
+   "A": 0.71,
+   "B": 1.83,
+   "C": 4.49,
+   "D": 12.61
+  },
+  "by_grade_share": {
+   "A": 0.036,
+   "B": 0.093,
+   "C": 0.229,
+   "D": 0.642
+  }
+ },
+ "motorway_and_links": {
+  "km_in_graded": 31.47,
+  "km_total_in_cache": 176.1,
+  "by_grade_km": {
+   "A": 1.18,
+   "B": 2.32,
+   "C": 7.32,
+   "D": 20.66
+  },
+  "by_grade_share": {
+   "A": 0.037,
+   "B": 0.074,
+   "C": 0.233,
+   "D": 0.656
+  }
+ },
+ "motorway_in_d_by_road_km": {
+  "I 64": 4.88,
+  "VA 195": 3.88,
+  "I 64;I 95": 2.07,
+  "I 95": 1.78
+ },
+ "motorway_in_d_by_area_km": {
+  "D1": 5.42,
+  "D5": 3.31,
+  "D8": 3.88
+ },
+ "yearbuilt_by_grade": {
+  "A": {
+   "parcels": 3264,
+   "by1937": 1166,
+   "share_by1937": 0.357
+  },
+  "B": {
+   "parcels": 8454,
+   "by1937": 4192,
+   "share_by1937": 0.496
+  },
+  "C": {
+   "parcels": 12997,
+   "by1937": 9356,
+   "share_by1937": 0.72
+  },
+  "D": {
+   "parcels": 10376,
+   "by1937": 5037,
+   "share_by1937": 0.485
+  }
+ },
+ "jackson_ward_1952_survival": {
+  "outlines_1952": 3158,
+  "gone_today": 2744,
+  "standing_today": 414,
+  "share_standing": 0.131
+ }
+}

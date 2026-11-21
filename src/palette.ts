@@ -66,6 +66,11 @@ export interface Palette {
    * bridges it marks (`line`).
    */
   readonly mark: { readonly pick: string; readonly near: string; readonly quiet: string; readonly line: string }
+  /**
+   * Graded ground (`Tint` in history.ts): the tones in grade order (a 1937 HOLC map's A to D,
+   * softened from its own green, blue, yellow and red), and the roads drawn over them.
+   */
+  readonly tint: { readonly tones: readonly string[]; readonly road: string }
   /** Roofs of buildings traced from fire-insurance maps, in the maps' own color code. */
   readonly traced: Readonly<Record<'brick' | 'frame' | 'stone' | 'iron' | 'special' | 'fireproof', string>>
   /** Streetcar lines on the ground, and the cars on them: side lit, side in shade, roof. */
@@ -170,6 +175,7 @@ const paper: Palette = {
   grounds: '#ddd0a8',
   racetrack: '#b39a6c',
   mark: { pick: '#c4553b', near: '#e8a88f', quiet: '#ebe6db', line: '#8f2a22' },
+  tint: { tones: ['#8fbf73', '#8eb3db', '#ecd572', '#de8178'], road: '#2c2b33' },
   traced: { brick: '#e9c2b8', frame: '#efe0a6', stone: '#c3d3e2', iron: '#cfcdc8', special: '#c5dcc0', fireproof: '#cfc6a4' },
   tram: '#b8362c',
   tramCar: ['#c9473a', '#8f2a22', '#e8d9b0'],
@@ -286,6 +292,7 @@ const night: Palette = {
   grounds: '#2e2c2a',
   racetrack: '#4a3f30',
   mark: { pick: '#e0614f', near: '#8a4a3e', quiet: '#2f3340', line: '#f07a5f' },
+  tint: { tones: ['#46613d', '#3c5d66', '#6b6235', '#6e3a37'], road: '#e8e4da' },
   traced: { brick: '#5a3c3a', frame: '#5a5236', stone: '#34465a', iron: '#45454a', special: '#3a4f3c', fireproof: '#4f4a36' },
   tram: '#e0614f',
   tramCar: ['#f07a5f', '#b04a3a', '#f2e2b8'],
