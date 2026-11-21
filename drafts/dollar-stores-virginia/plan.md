@@ -75,3 +75,13 @@ triangle for the other two chains, each named in the legend. No logos.
 Data assembly 1-2; edge measure on 3 test towns 1; full analysis and null model 2;
 grid maps 2-3; charts 1-2; poster rough draft 1-2; explorer page 1-2; fact check 1.
 Total about 10-15 sessions. Actuals go in effort.md.
+
+## 6. Decisions (Chris, November 21, 2026)
+
+- Chains: Dollar General, Family Dollar and Dollar Tree, shown apart.
+- Edge of town: test measures A and B on three real towns first; Chris picks after seeing them.
+- Two versions: an "editorial reporting" poster (layout A, grid of plan-view maps first, with
+  the charts and honesty panel) and a "simplified artistic" version, denser, with fewer and
+  coarser elements per town.
+- Still open: grid count for each version, poster size and whether either is for the shop,
+  change over time.

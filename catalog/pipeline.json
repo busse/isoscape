@@ -3170,13 +3170,15 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "agent",
-   "decision": "handed to a separate Opus 5.5 session on 2026-11-21 (ISO-TEST/handoff/dollar-stores-virginia/HANDOFF.md). A poster with a grid of Virginia town maps and the data behind the why. Tested as a question; neutral on policy; no logos; editorial until the owner decides otherwise. A one-page plan and open questions come to the owner first.",
+   "decision": "Plan approved in part (2026-11-21): three chains shown apart; editorial poster in layout A plus a denser simplified artistic version; next, edge-of-town measures A and B tested on three towns for Chris to choose.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
-   "branch": null,
+   "branch": "viz/dollar-stores-virginia",
    "worktree": null,
-   "links": [],
+   "links": [
+    "drafts/dollar-stores-virginia/plan.md"
+   ],
    "log": [
     "2026-11-21: rough draft -> research"
    ]
