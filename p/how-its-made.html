@@ -26,7 +26,7 @@
 <meta name="twitter:description" content="The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.">
 <meta name="twitter:image" content="https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg">
 <meta name="twitter:image:alt" content="Isometric map of Downtown Richmond, from the Capitol to Tobacco Row as it stood in 1925 (The 1924–25 Sanborn map): buildings, streets, water and the lie of the land, seen from above at an angle">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How it's made","description":"The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.","author":{"@type":"Person","name":"Chris Busse","url":"https://busse.github.io/isoscape/p/about.html#contact"},"inLanguage":"en","image":"https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg","url":"https://busse.github.io/isoscape/p/how-its-made.html","mainEntityOfPage":"https://busse.github.io/isoscape/p/how-its-made.html","dateModified":"2026-11-19","isPartOf":{"@type":"WebSite","name":"isoscape","url":"https://busse.github.io/isoscape/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How it's made","description":"The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.","author":{"@type":"Person","name":"Chris Busse","url":"https://busse.github.io/isoscape/p/about.html#contact"},"inLanguage":"en","image":"https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg","url":"https://busse.github.io/isoscape/p/how-its-made.html","mainEntityOfPage":"https://busse.github.io/isoscape/p/how-its-made.html","dateModified":"2026-11-21","isPartOf":{"@type":"WebSite","name":"isoscape","url":"https://busse.github.io/isoscape/"}}</script>
 <style>
 :root {
   --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
@@ -39,7 +39,8 @@
     --accent: #7fb6d4; --accent-soft: #22323d; --stage: #101115; --chip: #252831; --good: #7fc28f; --bad: #e08c7e; --warn: #f2c94c; }
 }
 * { box-sizing: border-box; }
-.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; }
+.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; overflow-wrap: anywhere; }
+/* A long URL, word or code span wraps inside the column instead of widening it (on a phone that made the page scroll sideways). Tables keep whole words and scroll in their own wrapper; code blocks scroll in their own box. */
 .prose h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 18px; font-weight: 650; }
 .prose h2 { font-size: 20px; letter-spacing: -.01em; margin: 2.2em 0 .5em; padding-top: .6em; border-top: 1px solid var(--line); font-weight: 650; }
 .prose h3 { font-size: 16px; margin: 1.6em 0 .4em; }
@@ -53,14 +54,14 @@
 .prose a:hover { text-decoration-color: var(--accent); }
 .prose a.buy { font-weight: 600; white-space: nowrap; }
 .prose code { font: .86em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: .05em .25em; border-radius: 4px; }
-.prose pre { max-height: none; font-size: 12.5px; }
+.prose pre { max-height: none; font-size: 12.5px; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
 .prose pre code { background: none; padding: 0; font-size: inherit; }
 .prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 0 6px 6px 0; }
 .prose blockquote p:last-child { margin-bottom: 0; }
 .prose img { display: block; max-width: 100%; height: auto; margin: 1.4em auto; }
 .prose hr { border: none; border-top: 1px solid var(--line); margin: 2em 0; }
-.prose .table { overflow-x: auto; }
-.prose table { font-size: 13.5px; font-variant-numeric: normal; }
+.prose .table { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+.prose table { font-size: 13.5px; font-variant-numeric: normal; overflow-wrap: normal; }
 .prose th, .prose td { text-align: left; white-space: normal; vertical-align: top; padding: 6px 10px 6px 0; color: var(--ink); }
 .prose th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); border-bottom: 1.5px solid var(--line); }
 .prose td:first-child { color: var(--ink); font-weight: 500; }
@@ -125,8 +126,8 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 .foot p { margin: 0 0 6px; }
 .foot a { color: var(--accent); }
 /* Wide figures run past the text column, as far as the window allows. */
-.wrap .prose figure.fig.wide { --w: min(1120px, 100vw - 56px); width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
-@media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; } .top nav { margin-left: 0; } }
+.wrap .prose figure.fig.wide { --w: max(100%, min(1120px, 100vw - 56px)); width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
+@media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; overflow-x: clip; } .top nav { margin-left: 0; } }
 </style>
 </head>
 <body>
@@ -1243,7 +1244,8 @@ figures, each with a caption under it; clicking one opens it large in a lightbox
 page&#39;s other figures a step away and a grid of them all. The Jackson Ward story&#39;s views open at
 3,200 pixels wide there, twice the 1,600 the page shows; its charts open at their own 1,600. A
 figure can also be a compare slider: two pictures of one frame laid over each other, with the
-same divider the explorer uses to compare two builds, dragged or moved with the arrow keys. Its
+same divider the explorer uses to compare two builds, dragged or moved with the arrow keys (on a
+phone, a sideways drag moves it and a vertical swipe scrolls the page). Its
 expand button opens the same slider large in the lightbox. The Jackson Ward year views are drawn
 in one shared frame for this, so every year lines up with the others pixel for pixel.</p>
 <p>Beside it go plain pages that need no script, for search engines and link previews: each of

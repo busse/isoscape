@@ -39,7 +39,8 @@
     --accent: #7fb6d4; --accent-soft: #22323d; --stage: #101115; --chip: #252831; --good: #7fc28f; --bad: #e08c7e; --warn: #f2c94c; }
 }
 * { box-sizing: border-box; }
-.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; }
+.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; overflow-wrap: anywhere; }
+/* A long URL, word or code span wraps inside the column instead of widening it (on a phone that made the page scroll sideways). Tables keep whole words and scroll in their own wrapper; code blocks scroll in their own box. */
 .prose h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 18px; font-weight: 650; }
 .prose h2 { font-size: 20px; letter-spacing: -.01em; margin: 2.2em 0 .5em; padding-top: .6em; border-top: 1px solid var(--line); font-weight: 650; }
 .prose h3 { font-size: 16px; margin: 1.6em 0 .4em; }
@@ -53,14 +54,14 @@
 .prose a:hover { text-decoration-color: var(--accent); }
 .prose a.buy { font-weight: 600; white-space: nowrap; }
 .prose code { font: .86em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: .05em .25em; border-radius: 4px; }
-.prose pre { max-height: none; font-size: 12.5px; }
+.prose pre { max-height: none; font-size: 12.5px; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
 .prose pre code { background: none; padding: 0; font-size: inherit; }
 .prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 0 6px 6px 0; }
 .prose blockquote p:last-child { margin-bottom: 0; }
 .prose img { display: block; max-width: 100%; height: auto; margin: 1.4em auto; }
 .prose hr { border: none; border-top: 1px solid var(--line); margin: 2em 0; }
-.prose .table { overflow-x: auto; }
-.prose table { font-size: 13.5px; font-variant-numeric: normal; }
+.prose .table { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+.prose table { font-size: 13.5px; font-variant-numeric: normal; overflow-wrap: normal; }
 .prose th, .prose td { text-align: left; white-space: normal; vertical-align: top; padding: 6px 10px 6px 0; color: var(--ink); }
 .prose th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); border-bottom: 1.5px solid var(--line); }
 .prose td:first-child { color: var(--ink); font-weight: 500; }
@@ -125,8 +126,8 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 .foot p { margin: 0 0 6px; }
 .foot a { color: var(--accent); }
 /* Wide figures run past the text column, as far as the window allows. */
-.wrap .prose figure.fig.wide { --w: min(1120px, 100vw - 56px); width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
-@media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; } .top nav { margin-left: 0; } }
+.wrap .prose figure.fig.wide { --w: max(100%, min(1120px, 100vw - 56px)); width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
+@media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; overflow-x: clip; } .top nav { margin-left: 0; } }
 </style>
 </head>
 <body>
