@@ -1,5 +1,5 @@
 """Editorial poster (24 x 36 in): "Why does it always seem like there's a Dollar General on the edge
-of town?" Release candidate 1.0.0-rc2.
+of town?" Version 1.0.0 (released November 22, 2026).
 
 Usage: python3 poster.py <ds-dir> <tests.csv> <dg_classes.csv> <out-stem>
 

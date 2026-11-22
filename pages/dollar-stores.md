@@ -2,16 +2,15 @@
 title: Dollar General on the edge of town
 deck: Every Dollar General near a small town in six states, compared with random spots on the same roads, and every one at the edge of a small Virginia town on a map.
 order: 65
-summary: Why it always seems like there's a Dollar General on the edge of town, checked against public data, and how we know. A draft for review.
-unlisted: true
+summary: Why it always seems like there's a Dollar General on the edge of town, checked against public data, and how we know.
 social: dollar-stores-social.jpg
 ---
 
 # Why does it always seem like there's a Dollar General on the edge of town?
 
-> **Draft for review.** This page is not listed on the site. The numbers were checked against
-> their sources on November 22, 2026. Made with Claude for Chris Busse, November 22, 2026. This work is
-> independent, and it is not affiliated with any company named on this page.
+> Made with Claude for Chris Busse, November 22, 2026. The numbers were checked against their sources
+> on November 22, 2026. This work is independent, and it is not affiliated with any company named
+> on this page.
 
 Most Dollar General stores near small towns are in town. We counted every Dollar General near
 a small town in six states that border or sit close to Virginia. Of the 2,078 stores,
