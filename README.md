@@ -343,6 +343,9 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   plain list and the sitemap, and asks search engines not to index `p/<slug>.html` (`noindex`).
   It still opens at its address (`#/<slug>`, `p/<slug>.html`, `s/page-<slug>.html`). Use it
   for a page someone has to read before it goes out, and delete the line to publish it.
+- `shop: false` shows no shop link while the page is open: the explorer hides its "Shop prints"
+  link and the phone bar's button, and the page's static and share pages carry no shop link,
+  shop button or print link. The story pages (`jackson-ward`, `redlining`) use it.
 - `schema: FAQPage` gives the static page `FAQPage` JSON-LD in place of `Article`. Each heading
   that ends in a question mark is a question, and the text under it, up to the next heading, is
   its answer (`faqEntries` in `src/static-pages.ts`).
@@ -837,9 +840,7 @@ fourteen places they ran to.
    `note` (what is approximate), `credit`, `ground_note` (for a dated set, that the ground is
    today's), `map` (`region`, `year`), `boxes`, an optional
    `key` (up to sixteen names in the title band, from a list in a JSON file, set as a plain list), optional `fine`
-   (extra `build` flags for the single prints, e.g. `["--streetcar-scale", "1.5"]`), optional
-   `with` (a history switch every scene is built with, or a map of year to switch, e.g.
-   `{"1937": "grades", "2026": "built"}` for the redlining set's graded ground), and `page`
+   (extra `build` flags for the single prints, e.g. `["--streetcar-scale", "1.5"]`), and `page`
    (`slug`, `title`, `summary`, `intro`, `how`, `noun`, and an optional `table`).
 4. **Scenes**, where the region's data is cached: `python3 tools/sets/set.py <name> prepare`
    builds each year's SVG into `out/sets/<name>/scenes/` and writes `points.json`.

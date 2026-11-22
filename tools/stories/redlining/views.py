@@ -69,10 +69,18 @@ def view_box(svg):
     return tuple(float(v) for v in re.search(r'viewBox="([^"]+)"', head).group(1).split())
 
 
-def raster(svg, box, width, out):
-    """`svg` drawn inside `box` (x, y, w, h), `width` px wide, on the paper's sky color."""
+def raster(svg, box, width, out, label_px=None):
+    """`svg` drawn inside `box` (x, y, w, h), `width` px wide, on the paper's sky color. With
+    `label_px`, the map's area labels are redrawn `label_px` pixels tall whatever the box's
+    scale, so every close view labels its areas at one size relative to the picture."""
     with open(svg, 'rb') as fh:
         data = fh.read()
+    if label_px is not None:
+        size = label_px * box[2] / width
+        def relabel(m):
+            g = re.sub(rb'stroke-width="[0-9.]+"', b'stroke-width="%.2f"' % (size * 0.22), m.group(0), count=1)
+            return re.sub(rb'font-size="[0-9.]+"', b'font-size="%.2f"' % size, g)
+        data = re.sub(rb'<g class="labels".*?</g>', relabel, data, count=1, flags=re.S)
     head, rest = data[:600].decode('utf8'), data[600:]
     head = re.sub(r'viewBox="[^"]+"', 'viewBox="%.2f %.2f %.2f %.2f"' % box, head, count=1)
     with tempfile.NamedTemporaryFile(suffix='.svg', delete=False, dir=os.path.dirname(out)) as t:
@@ -251,7 +259,7 @@ def main():
             grade = label[0]
             how = {('A5', '1937'): ' Buildings: those standing today that the city dates to 1937 or before.',
                    ('D1', '1937'): ' Buildings: those standing today that the city dates to 1937 or before, and in Jackson Ward those on the 1925 and 1952 Sanborn maps; most others then standing are gone and not drawn.'}.get((label, year), " Today's buildings and streets; limited-access highways in black.")
-            im = raster(svg, box, 3200, tmp)
+            im = raster(svg, box, 3200, tmp, label_px=58)
             # One band for both years: the slider shows one picture's left and the other's right,
             # so a band that differed would read as one broken line.
             how = {'A5': ' 1937: buildings standing today that the city dates to 1937 or before. Today: OpenStreetMap; limited-access highways in black.',
@@ -270,18 +278,9 @@ def main():
         name = f'd-{slug(label)}'
         if want(name) or want('d-all'):
             box, ground = area_box(label)
-            im = raster(b, clamp(box, union), 2400, tmp)
+            im = raster(b, clamp(box, union), 2400, tmp, label_px=46)
             save(keyed(im, f'{label}, {NAMES[label]}: graded D in 1937, seen today',
                        f'About {ground / 1000:.1f} km of ground across, looking north. Interstates and the Downtown Expressway in black.'), name, a.full)
-    # The twelve together, four by three, as one figure the page shows as a grid.
-    if want('d-grid') or want('d-all'):
-        cells = [Image.open(os.path.join(ROOT, 'pages', f'redlining-d-{slug(l)}.webp')).convert('RGB') for l in D_AREAS]
-        cw, gap = 1600, 30
-        ch = max(round(c.height * cw / c.width) for c in cells)
-        grid = Image.new('RGB', (4 * cw + 3 * gap, 3 * ch + 2 * gap), P['sky'])
-        for i, c in enumerate(cells):
-            grid.paste(c.resize((cw, round(c.height * cw / c.width)), Image.LANCZOS), ((i % 4) * (cw + gap), (i // 4) * (ch + gap)))
-        save(grid, 'd-grid', a.full)
     if os.path.exists(tmp):
         os.remove(tmp)
 

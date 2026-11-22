@@ -289,5 +289,47 @@
    "share_since2000": 0.018
   }
  },
+ "terrain_by_grade": {
+  "A": {
+   "nodes": 303844,
+   "elev_mean_m": 59.0,
+   "elev_median_m": 61.3,
+   "elev_p10_m": 31.1,
+   "elev_p90_m": 75.1,
+   "slope_mean_deg": 5.2,
+   "slope_median_deg": 2.4,
+   "share_steeper_10deg": 0.162
+  },
+  "B": {
+   "nodes": 497090,
+   "elev_mean_m": 63.1,
+   "elev_median_m": 61.7,
+   "elev_p10_m": 50.3,
+   "elev_p90_m": 75.8,
+   "slope_mean_deg": 3.0,
+   "slope_median_deg": 1.9,
+   "share_steeper_10deg": 0.046
+  },
+  "C": {
+   "nodes": 502312,
+   "elev_mean_m": 55.9,
+   "elev_median_m": 57.0,
+   "elev_p10_m": 40.5,
+   "elev_p90_m": 67.9,
+   "slope_mean_deg": 3.3,
+   "slope_median_deg": 1.9,
+   "share_steeper_10deg": 0.065
+  },
+  "D": {
+   "nodes": 576007,
+   "elev_mean_m": 45.0,
+   "elev_median_m": 47.3,
+   "elev_p10_m": 26.7,
+   "elev_p90_m": 59.2,
+   "slope_mean_deg": 3.4,
+   "slope_median_deg": 1.9,
+   "share_steeper_10deg": 0.064
+  }
+ },
  "outlines": "history/holc/richmond-1937-redrawn.geojson"
 }

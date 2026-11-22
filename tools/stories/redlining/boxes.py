@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""The twelve D areas as a set: what each 1937 form recorded, what stands on that ground now,
-and the sources for both. One source for the page's grid (page.py) and the framed menu sheet
-(sets/redlining-1937.json, written here for tools/sets/set.py).
+"""The twelve D areas: what each 1937 form recorded, what stands on that ground now, and the
+sources for both, for the page's figures (page.py). The owner chose (November 22, 2026) to keep
+the set as the page's figures, with no framed sheet.
 
     python3 tools/stories/redlining/measure.py     # numbers.json
-    python3 tools/stories/redlining/boxes.py       # sets/redlining-1937.json
+    python3 tools/stories/redlining/boxes.py       # prints the figures' Markdown
 
 Numbers are written as {{tokens}} and filled from numbers.json (see `tokens`), never typed. The
-forms are paraphrased; each box quotes its form at most once, attributed. The set is editorial:
-it has no store section, no print files are made for sale, and it has no plate.
+forms are paraphrased; each box quotes its form at most once, attributed, checked on the scan.
 
 Source keys name entries in the story's Sources section (story.md): `form` is the DSL's
 transcription of the 1937 area descriptions, `osm` today's OpenStreetMap, `parcels` the city's
@@ -32,11 +31,11 @@ URL = {
     'ev': 'https://encyclopediavirginia.org/entries/urban-renewal-in-richmond/',
     'lva': 'https://www.lva.virginia.gov/events/exhibitions/online/oe/exhibits/show/mapping-inequality/mapping-inequality-timeline',
     'craig': 'https://uncommonwealth.lva.virginia.gov/blog/2025/11/17/a-brief-history-of-public-housing-in-the-city-of-richmond',
-    'mosby': 'https://en.wikipedia.org/wiki/Mosby_Court',
+    'mosby': 'https://projects.propublica.org/hud/properties/VA007000008',
     'rmag': 'https://richmondmagazine.com/news/features/house-of-blackwell/',
 }
 LABEL = {'form': 'HOLC area descriptions', 'osm': 'OpenStreetMap', 'parcels': 'City of Richmond parcels',
-         'ev': 'Gray-Sparks', 'lva': 'LVA timeline', 'craig': 'Craig 2025', 'mosby': 'Wikipedia, Mosby Court',
+         'ev': 'Gray-Sparks', 'lva': 'LVA timeline', 'craig': 'Craig 2025', 'mosby': 'HUD via ProPublica',
          'rmag': 'Eshleman 2018', 'measure': 'measured here'}
 
 # at: [lon, lat] the box is centered on (the area's middle); ground: meters across in the menu.
@@ -47,7 +46,7 @@ BOXES = [
      'cite_form': ['form'], 'cite_now': ['measure', 'craig', 'ev'],
      'note': 'In 1937: 95% Black, incomes of $350–750, one home in five owner-occupied, houses forty years old and more. Since: Gilpin Court (1943) on Apostle Town; the Turnpike, now I-95 and I-64; VCU\'s medical campus on most of Navy Hill.'},
     {'label': 'D2', 'at': [-77.4421, 37.5912], 'ground': 1500,
-     'form': 'The form recorded a population entirely Black, flat ground, frame single houses, family incomes of $250 to $750, and half the homes lived in by their owners. The form for C7, which borders it, faults C7 for lying too near D2.',
+     'form': 'The form recorded a population entirely Black, flat ground, frame single houses, family incomes of $350 to $750, and half the homes lived in by their owners. The form for C7, which borders it, faults C7 for lying too near D2.',
      'now': 'Most of what stands is newer than the map: of the {{D2_parcels}} parcels the city dates here, {{D2_1938_77}}% were built between 1938 and 1977. First Baptist Church of Washington Park stands inside the outline.',
      'cite_form': ['form'], 'cite_now': ['parcels', 'osm'],
      'note': 'In 1937: flat ground, frame houses, a population the form recorded as entirely Black, half of homes owner-occupied. Its neighbor C7\'s form faults C7 for lying too near D2. Since: {{D2_1938_77}}% of the houses the city dates here were built 1938–1977.'},
@@ -67,12 +66,12 @@ BOXES = [
      'cite_form': ['form'], 'cite_now': ['measure', 'ev', 'mosby', 'osm'],
      'note': 'In 1937: frame houses about fifteen years old, a population the form recorded as 75% Black, one home in three owner-occupied. Since: Mosby Court (1962), for families the 17th Street renewal displaced; I-64 runs {{D5_mkm}} km through it.'},
     {'label': 'D6', 'at': [-77.4070, 37.5320], 'ground': 2800,
-     'form': 'The form recorded a population 80% Black "and increasing," flats and single frame houses about forty years old in fair repair, one home in three lived in by its owner, and mortgage money at 50% of appraisal.',
+     'form': 'The form is headed Church Hill, bounded by Venable Street, Nine Mile Road, Oakwood Cemetery, the Southern Railway, the river and 17th Street. It recorded a population 80% Black "and increasing," flats and single frame houses about forty years old in fair repair, one home in three lived in by its owner, and mortgage money at 50% of appraisal.',
      'now': 'More of 1937 stands here than in any other D area: {{D6_by1937}}% of the {{D6_parcels}} parcels the city dates here were built by 1937. Many of the houses are marked in OpenStreetMap as historic.',
      'cite_form': ['form'], 'cite_now': ['parcels', 'osm'],
      'note': 'In 1937: flats and frame houses forty years old, a population the form recorded as 80% Black and increasing. Since: more of 1937 stands here than in any other D area; {{D6_by1937}}% of the houses the city dates were built by then.'},
     {'label': 'D7', 'at': [-77.4060, 37.5190], 'ground': 2000,
-     'form': 'The form recorded a population 80% Black, single frame houses about fifty years old in bad repair, one home in four lived in by its owner, and no mortgage money at all.',
+     'form': 'The form is headed Fulton, bounded by Nicholson Street, National Cemetery Road and Williamsburg Avenue. It recorded a population 80% Black, single frame houses about fifty years old in bad repair, one home in four lived in by its owner, and no mortgage money at all.',
      'now': 'A 1967 study called Fulton Bottom, about 850 homes, a slum; the 1970 renewal plan would displace about 785 households, and the last homes on Denny Street came down in the late 1980s. Only {{D7_by1937}}% of the parcels the city dates here were built by 1937. Historic Fulton Memorial Park stands on the ground.',
      'cite_form': ['form'], 'cite_now': ['ev', 'parcels', 'osm'],
      'note': 'In 1937: frame houses fifty years old, "bad" repair, no mortgage money, a population the form recorded as 80% Black. Since: called a slum in 1967 and cleared by the late 1980s; Historic Fulton Memorial Park stands on the ground.'},
@@ -82,7 +81,7 @@ BOXES = [
      'cite_form': ['form'], 'cite_now': ['ev', 'lva', 'measure'],
      'note': 'In 1937: brick flats and frame houses, a population the form recorded as 95% Black, families moving in from D1. Since: the Randolph renewal (1973) and the Downtown Expressway, {{D8_mkm}} km of it through D8, across Randolph and Oregon Hill.'},
     {'label': 'D9', 'at': [-77.4716, 37.5336], 'ground': 1500,
-     'form': 'The form recorded vacant land, "practically undeveloped and inaccessible," and expected it to become a D area once built.',
+     'form': 'The form is headed Riverview. It recorded vacant land, "practically undeveloped and inaccessible," and expected it to become a D area once built.',
      'now': 'It was built after the map: {{D9_1938_77}}% of the {{D9_parcels}} parcels the city dates here are from 1938 to 1977. Riverview Community Park lies inside the outline.',
      'cite_form': ['form'], 'cite_now': ['parcels', 'osm'],
      'note': 'In 1937 the form found vacant land, "practically undeveloped and inaccessible," and graded it D before anyone lived there. Since: {{D9_1938_77}}% of the houses the city dates here were built 1938–1977.'},
@@ -92,15 +91,15 @@ BOXES = [
      'cite_form': ['form'], 'cite_now': ['parcels', 'osm'],
      'note': 'In 1937: frame houses about 25 years old in poor repair, a population the form recorded as 95% Black, two homes in five owner-occupied. Since: about half the houses the city dates here were standing by 1937.'},
     {'label': 'D11', 'at': [-77.4470, 37.5215], 'ground': 1300,
-     'form': 'The only D area recorded as white. The form gave its people as "Laboring Whites," with family incomes of $1,500 to $1,800, the highest recorded for any D area, frame and brick houses about twenty years old in fair repair, three homes in five lived in by their owners, and mortgage money at 60% of appraisal.',
+     'form': 'The only D area recorded as white; the form is headed South Richmond. It gave its people as "Laboring Whites," with family incomes of $1,500 to $1,800, the highest recorded for any D area, frame and brick houses about twenty years old in fair repair, three homes in five lived in by their owners, and mortgage money at 60% of appraisal.',
      'now': 'Of the {{D11_parcels}} parcels the city dates here, {{D11_since2000}}% were built in 2000 or later, the largest share of any D area. Sacred Heart Catholic Church and the Hull Street post office stand inside the outline.',
      'cite_form': ['form'], 'cite_now': ['parcels', 'osm'],
      'note': 'In 1937: the one D area the form recorded as white, "Laboring Whites," with the highest incomes of any D area. Since: {{D11_since2000}}% of the buildings the city dates here are from 2000 or later, the most of any D area.'},
     {'label': 'D11.5', 'at': [-77.4430, 37.5125], 'ground': 2000,
-     'form': 'The form recorded a population 95% Black, family incomes of $500 to $750, frame single houses about 25 years old, three homes in ten lived in by their owners, and mortgage money at 35 to 40% of appraisal.',
+     'form': 'The form recorded a population 95% Black, family incomes of $500 to $750, frame single houses about 25 years old, about a third of the homes (35%) lived in by their owners, and mortgage money at 35 to 40% of appraisal.',
      'now': 'In 1970 the housing authority built 464 scattered-site public housing units here; the neighborhood took its name from James Heyward Blackwell. Of the {{D11_5_parcels}} parcels the city dates, {{D11_5_1938_77}}% were built between 1938 and 1977.',
      'cite_form': ['form'], 'cite_now': ['rmag', 'parcels'],
-     'note': 'In 1937: frame houses about 25 years old, a population the form recorded as 95% Black, three homes in ten owner-occupied, mortgage money at 35–40% of appraisal. Since: 464 scattered-site public housing units, built in 1970.'},
+     'note': 'In 1937: frame houses about 25 years old, a population the form recorded as 95% Black, 35% of homes owner-occupied, mortgage money at 35–40% of appraisal. Since: 464 scattered-site public housing units, built in 1970.'},
 ]
 
 
@@ -144,34 +143,6 @@ def page_grid(t):
     return '\n'.join(out)
 
 
-def write_set(t):
-    boxes = []
-    for i, b in enumerate(BOXES, 1):
-        boxes.append({'n': i, 'id': slug(b['label']), 'title': f"{b['label']}, {NAMES[b['label']]}",
-                      'subtitle': 'Graded D, "Hazardous," in 1937; seen today', 'at': b['at'], 'year': 2026, 'ground': b['ground'],
-                      'note': fill(b['note'], t),
-                      'sources': [URL[k] for k in dict.fromkeys(b['cite_form'] + b['cite_now']) if k in URL]})
-    cfg = {
-        'about': 'Editorial: the redlining story\'s twelve D areas as a set, for the story page and its menu sheet only. No store section, no print files for sale, no plate. Written by tools/stories/redlining/boxes.py; do not edit by hand.',
-        'slug': 'redlining-1937',
-        'title': "Richmond's twelve D areas, 1937 and today",
-        'subtitle': "The Home Owners' Loan Corporation's 1937 map of Richmond on the ground, and each area it graded D, \"Hazardous,\" as it stands now",
-        'note': "The 1937 map shows buildings standing today that the city dates to 1937 or before, and Jackson Ward's from the 1925 and 1952 Sanborn maps; most others standing then are gone and not drawn. Box notes paraphrase the 1937 area descriptions. Working draft, not for sale.",
-        'credit': f"Drawn by Chris Busse with isoscape  ·  {CREDIT}  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Year built: City of Richmond",
-        'ground_note': 'The ground is today\'s, from lidar, except in Jackson Ward, where the Turnpike\'s trench is filled for 1937.',
-        'map': {'region': 'richmond-1937', 'year': 1937},
-        'with': {'1937': 'grades', '2026': 'built'},
-        'key_heading': "The HOLC's grades:",
-        'key': {'items': ['A "Best": green', 'B "Still Desirable": blue', 'C "Definitely Declining": yellow', 'D "Hazardous": red']},
-        'box_label': "Richmond's D areas, 1937",
-        'boxes': boxes,
-    }
-    with open(os.path.join(ROOT, 'sets', 'redlining-1937.json'), 'w') as fh:
-        json.dump(cfg, fh, indent=1, ensure_ascii=False)
-        fh.write('\n')
-    print('wrote sets/redlining-1937.json')
-
-
 if __name__ == '__main__':
     n = json.load(open(os.path.join(HERE, 'numbers.json')))
-    write_set(tokens(n))
+    print(page_grid(tokens(n)))

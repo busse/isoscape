@@ -4,6 +4,7 @@ deck: In 1937 a federal agency graded every residential area of Richmond from A 
 order: 61
 summary: Richmond's 1937 Home Owners' Loan Corporation map drawn on the ground, its twelve D areas one by one, and what was built on graded land up to 1977. A working draft for review.
 unlisted: true
+shop: false
 ---
 
 # Redlining in Richmond: the 1937 federal mortgage map, drawn on the ground it graded
@@ -35,17 +36,17 @@ and the institutions listed under [Whose work this rests on](#whose-work-this-re
 
 In the Great Depression many families could not keep up their mortgage payments and were losing
 their homes. Congress created the Home Owners' Loan Corporation (the HOLC) in the Home Owners'
-Loan Act of June 13, 1933, to refinance home mortgages already in default and so prevent
-foreclosure [[Wikipedia, HOLC](#sources); [Rose 2022](#sources)]. Between 1933 and 1935 it made a
-little over one million loans, then stopped making new ones [[Wikipedia, HOLC](#sources)]. By an
-estimate from the Federal Reserve Bank of Chicago, it had already made 90% of its loans before
+Loan Act, signed on June 13, 1933, to refinance the mortgages of home owners in distress
+[[Harriss 1951](#sources); [Rose 2022](#sources)]. Between August 1933 and June 1936 it made over
+one million refinancing loans, 1,017,821 in its own count, for $3.1 billion, and then made no new
+ones [[Harriss 1951](#sources)]. By an estimate from the Federal Reserve Bank of Chicago, it had already made 90% of its loans before
 its mapping project began in 1935 [[Rose 2022](#sources)].
 
 ### The city survey and its four grades
 
 From late 1935 to 1940 the HOLC surveyed the residential areas of 239 American cities and drew
 a color-coded map of each, its "residential security maps" [[FRED 2021](#sources);
-[Wikipedia, HOLC](#sources)]. Each area got one of four grades. The names are the HOLC's own:
+[NARA RG 195](#sources)]. Each area got one of four grades. The names are the HOLC's own:
 
 | Grade | The HOLC's name | Color on the map | What the grade was meant to say |
 |---|---|---|---|
@@ -86,10 +87,11 @@ keeps it so. -->
 ### Where the word "redlining" comes from
 
 The St. Louis Fed writes that the word comes from the red the maps used for the lowest grade,
-and that it also names discriminatory practices in lending [[FRED 2021](#sources)]. The
-sociologist John McKnight is credited with coining the term in the 1960s, in Chicago, for banks
-marking certain neighborhoods as unworthy of investment because of the race of the people who
-lived there [[Wikipedia, Redlining](#sources)]. In this page "redlining" names the word's history.
+and that it also names discriminatory practices in lending [[FRED 2021](#sources)]. In Chicago
+from about 1969, John McKnight and colleagues at Northwestern University investigated the
+practice of banks systematically denying mortgages by neighborhood, work that helped lay the
+ground for the Home Mortgage Disclosure Act and the Community Reinvestment Act
+[[Northwestern IPR 2024](#sources)]. In this page "redlining" names the word's history.
 What the HOLC map did is the subject of [the dispute below](#did-the-1937-map-cause-what-followed-three-readings).
 
 ## Richmond's own racial lines before the map, 1871 to 1929
@@ -193,11 +195,12 @@ that are gone are missing, so the picture undercounts the densest and most clear
 (see [How we know](#how-we-know)). Working draft.
 :::
 
-Drawn on the terrain, the grades line up with the ground. The A areas lie on the high, rolling land of
-the West End and on the bluffs above the James. Most of the D land lies on slopes and bottoms
-beside downtown: the sides of Shockoe Valley north and east of it, the slopes of Church Hill, the
-bottom of Gillies Creek in Fulton, and south of the river in Manchester and Blackwell. One D area,
-D9, was vacant land the form expected to become a D area once built
+Measured on the lidar, the D land lies lowest. Half of it is below {{tD_med}} m above sea level,
+against {{tC_med}} m for C, {{tA_med}} m for A and {{tB_med}} m for B, and a tenth of it is below
+{{tD_p10}} m. It is no steeper than B or C land:
+about {{tD_steep}}% of D, {{tC_steep}}% of C and {{tB_steep}}% of B is steeper than 10 degrees. The
+steepest graded land is A: {{tA_steep}}% of it is steeper than 10 degrees [[measured here](#how-we-know)]. One D area, D9,
+was vacant land the form expected to become a D area once built
 [[HOLC area description D9](#sources)].
 
 ::: figure
@@ -233,8 +236,9 @@ below is placed by its sources; the D area is from this page's drawing.
   [[Gray-Sparks](#sources)]. Neither is placed on the drawing in this draft.
 - **Mosby Court, D5, 1962**: the 17th Street renewal cleared 150 acres of Shockoe Valley and
   displaced 1,300 mostly Black residents, many of whom moved to Mosby Court, in what Encyclopedia
-  Virginia calls "an isolated, previously redlined neighborhood" [[Gray-Sparks](#sources)]. Its
-  mapped position lies inside D5 [[Wikipedia, Mosby Court](#sources)].
+  Virginia calls "an isolated, previously redlined neighborhood" [[Gray-Sparks](#sources)]. HUD's
+  record gives its address as 1909 Accommodation Street [[HUD via ProPublica](#sources)], and the
+  whole of Accommodation Street lies inside D5 [[measured here](#how-we-know)].
 - **Fulton, D7, 1967 to the late 1980s**: a 1967 study called Fulton Bottom, about 850 homes on
   200 acres, a slum; the 1970 renewal plan would displace about 785 households, nearly 3,000
   people; the last homes on Denny Street came down in the late 1980s [[Gray-Sparks](#sources)].
@@ -281,22 +285,12 @@ in code from the dates in `timeline.ts`, each with its source.
 
 The HOLC graded twelve Richmond areas D. Each figure below shows one of them today, with the 1937
 grades under it, and says what the 1937 form recorded (paraphrased) and what stands on that
-ground now. The forms leave the name field blank, so the names are this page's, placed from the
-streets and landmarks inside each outline. The first figure shows all twelve together; click any
-picture to open it large, where the arrow keys step from one area to the next.
-
-::: figure wide
-![The twelve D areas in a grid of four columns and three rows, D1 to D11.5, each a close view of the area today with the 1937 grades tinted under it, its number and name above it](redlining-d-grid.webp)
-
-The twelve areas the Home Owners' Loan Corporation (HOLC) graded D, "Hazardous", in 1937, each
-seen today, in a grid from D1 at top left to D11.5 at bottom right. Each panel carries its own
-key; each is shown large, with its notes, in the figures that follow. *How this was made:* as the
-figures below, composed in code. Working draft.
-:::
+ground now. The names are this page's, chosen so a reader today can find each place. The 1937
+form has no name field; four of the twelve D forms carry a typed heading with a place name, which
+each figure gives, and the rest are named from the streets and landmarks inside the outline. Click any picture to open it large; there the arrow
+keys step from one area to the next, and **All figures** shows every figure on the page as a grid.
 
 {{BOXES}}
-
-{{MENU}}
 
 ## Did the 1937 map cause what followed? Three readings
 
@@ -341,9 +335,8 @@ after 1937 has not been measured for this page.
 Readers who know the 1937 maps have seen them flat, as colored shapes on a street map. Drawn on
 the ground, three things show that a flat map leaves out.
 
-- **The terrain the lines followed.** The grades are draped on 2010s lidar, three times
-  exaggerated, so the slopes and bottoms under the D areas and the high ground under the A areas
-  can be seen.
+- **The ground under the grades.** The grades are draped on 2010s lidar, three times
+  exaggerated, and measured on it: the D land lies lowest, and the A land is the steepest.
 - **The buildings of 1937 at their true size.** Lot sizes and density read directly, as in the
   Windsor Farms and Jackson Ward figures. Where the Sanborn maps were traced, Jackson Ward is
   drawn building by building as it stood.
@@ -368,9 +361,15 @@ The method and its gaps are set out next.
   share one green field whose printed dividing line has gaps; the line between them here is the
   redraw's estimate and is approximate. The story is built from one set
   named in a single place (`tools/stories/redlining/outlines.py`) and can be rebuilt from either.
-- **The names of the areas** are this page's. Richmond's forms leave the name field blank; each
-  name is placed from the streets, churches and parks inside its outline today (OpenStreetMap)
-  and, for D3, from the D4 form, which names D3 as Oak Park.
+- **The names of the areas** are this page's, chosen to orient a reader today. The 1937 form
+  has no name field. Four D forms carry a typed heading with a place name (D6 Church Hill, D7
+  Fulton, D9 Riverview, D11 South Richmond), and the D4 form names D3 as Oak Park; the other
+  names are placed from the streets, churches and parks inside each outline today
+  (OpenStreetMap).
+- **The forms' words** were read on the National Archives scan (FRASER, `ad_RichmondVA.pdf`, one
+  page per area in grade order). Every quotation on this page was checked there, on November 22,
+  2026. The scan corrected two of the Lab's transcribed figures used here: D2's family incomes
+  ($350 to $750) and D11.5's share of owner-occupied homes (35%).
 - **Buildings of 1937.** A 1937 picture draws the buildings standing today that the city's
   assessor dates to 1937 or before, plus, in Jackson Ward, the buildings on the 1925 and 1952
   Sanborn maps. Buildings since lost elsewhere are missing. This survivorship undercount is
@@ -386,6 +385,9 @@ each counted in the grade its center falls in, by `measure.py`. The shares say n
 many buildings were lost, which is why the Jackson Ward bar is shown beside them.
 :::
 
+- **Elevation and slope by grade** are read from the same 5 m lidar grid at every node inside
+  each grade's outlines (`measure.py`); the grid is today's ground, so the highways' cuts are in
+  it.
 - **Areas and lengths** are measured by `tools/stories/redlining/measure.py` on a local plane.
   Each grade's land is its outlines merged. Highway length is OpenStreetMap's `motorway` ways,
   each carriageway counted, ramps left out; with ramps, D holds {{hlD}}%.
@@ -416,7 +418,7 @@ this draft.*
   Declining" or D "Hazardous".
 - **Area description**: the printed form the surveyors filled in for each graded area.
 - **Redlining**: from the red of the D grade; the word for lenders' refusing credit by
-  neighborhood, coined in the 1960s.
+  neighborhood.
 - **Covenant**: a clause in a deed restricting who may buy or live in a house.
 - **Urban renewal**: federally funded clearance and rebuilding of areas a city declared
   blighted.
@@ -448,11 +450,12 @@ Opened while drafting, on the date given.
   check the redrawn outlines and is not drawn on this page.
 - **HOLC area descriptions** (A5, C7, D1 to D11.5): the 1937 Richmond forms as transcribed by
   the Digital Scholarship Lab, https://github.com/americanpanorama/HOLC_Area_Description_Data
-  (form 19370203), downloaded November 21, 2026. The D11.5 quotation is checked against the
-  scan; the other short quotations are still to be.
+  (form 19370203), downloaded November 21, 2026. Every quotation and figure used here was
+  checked on the scan (see the next entry).
 - **FRASER, Richmond area descriptions**: the 1937 Richmond area descriptions, National
   Archives RG 195, via FRASER, https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/ad_RichmondVA.pdf;
-  the D11.5 form (page 47) read on the scan November 22, 2026.
+  every form quoted or paraphrased here read on the scan November 22, 2026 (A5 page 5, C7 page
+  29, D1 to D11 pages 37 to 46 and 48, D11.5 page 47).
 - **FRASER, Richmond**: "City of Richmond, Virginia and Environs", Home Owners' Loan Corporation,
   April 3, 1937, National Archives RG 195, via FRASER, Federal Reserve Bank of St. Louis,
   https://fraser.stlouisfed.org/archival/6751/item/619201 (opened November 22, 2026); the scan the
@@ -461,12 +464,16 @@ Opened while drafting, on the date given.
 - **NARA RG 195**: National Archives, Guide to Federal Records, Records of the Federal Home Loan
   Bank Board, RG 195, https://www.archives.gov/research/guide-fed-records/groups/195.html (opened
   November 22, 2026). Public domain.
-- **Wikipedia, HOLC**: "Home Owners' Loan Corporation", https://en.wikipedia.org/wiki/Home_Owners%27_Loan_Corporation
-  (opened November 22, 2026).
-- **Wikipedia, Redlining**: "Redlining", https://en.wikipedia.org/wiki/Redlining (opened November
-  22, 2026).
-- **Wikipedia, Mosby Court**: "Mosby Court", https://en.wikipedia.org/wiki/Mosby_Court (opened
-  November 22, 2026), for its coordinates.
+- **Harriss 1951**: C. Lowell Harriss, *History and Policies of the Home Owners' Loan
+  Corporation*, National Bureau of Economic Research, 1951, chapter 2, "Original Lending
+  Activities", https://www.nber.org/chapters/c3207.pdf (opened November 22, 2026).
+- **Northwestern IPR 2024**: "Remembering John McKnight, Community Development Pioneer
+  (1931–2024)", Institute for Policy Research, Northwestern University, November 15, 2024,
+  https://www.ipr.northwestern.edu/news/2024/remembering-john-mcknight.html (opened November 22,
+  2026).
+- **HUD via ProPublica**: HUD's property record for Mosby Ct (VA007000008), as published by
+  ProPublica, https://projects.propublica.org/hud/properties/VA007000008 (opened November 22,
+  2026), for its address.
 - **Rose 2022**: Jonathan Rose, "Revisiting How Two Federal Housing Agencies Propagated Redlining
   in the 1930s", Federal Reserve Bank of Chicago, April 2022,
   https://www.chicagofed.org/research/content-areas/mobility/policy-brief-federal-housing-programs-redlining

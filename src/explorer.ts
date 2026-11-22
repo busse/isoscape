@@ -193,6 +193,8 @@ kbd { font: 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding: 0 4px;
 #nav a.shop b { font-size: 13.5px; }
 #nav a.shop span { font-size: 11.5px; opacity: .85; }
 #nav a.shop:hover { filter: brightness(1.08); }
+/* A page with \`shop: false\` (a story page) shows no shop link while it is open. */
+body.noshop #nav a.shop, body.noshop #mbar .mshop { display: none; }
 #list details.sec { border-top: 1px solid var(--line); }
 #list details.sec:first-child { border-top: none; }
 #list summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: 8px; padding: 10px 8px 4px; font-size: 13px; font-weight: 650; }
@@ -449,7 +451,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
 <script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, shares: site.shares ?? null, buy: site.shop ? buyLinks(site, new Set(builds.flatMap((b) => (b.time ? [b.region, `${b.region}:${b.time.year}`] : [b.region])))) : null })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, license: d.license, link: d.link }])))}</script>
-<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, ...(p.unlisted ? { unlisted: true } : {}), html: printLinks(p.html, site.shop?.products), headings: p.headings.filter((h) => h.level === 2), shop: (site.shop && pageShop(p.slug, pageMapRefs(p.html), site)) ?? null })))}</script>
+<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, ...(p.unlisted ? { unlisted: true } : {}), ...(p.noShop ? { noShop: true } : {}), html: p.noShop ? p.html : printLinks(p.html, site.shop?.products), headings: p.headings.filter((h) => h.level === 2), shop: (!p.noShop && site.shop && pageShop(p.slug, pageMapRefs(p.html), site)) || null })))}</script>
 <script>
 (() => {
   const builds = JSON.parse(document.getElementById('builds').textContent)
@@ -1125,6 +1127,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     if (state.home) closeHome()
     state.page = p.slug
     document.body.classList.add('reading')
+    document.body.classList.toggle('noshop', !!p.noShop)
     if ($('article').dataset.slug !== p.slug) {
       $('article').dataset.slug = p.slug
       // The page's shop button above it and again at its foot, as on its static page.
@@ -1149,6 +1152,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const closePage = () => {
     state.page = null
     document.body.classList.remove('reading')
+    document.body.classList.remove('noshop')
     document.title = 'isoscape explorer'
     renderPages()
   }

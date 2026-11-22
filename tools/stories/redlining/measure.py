@@ -51,6 +51,53 @@ def proj(geom):
     return unary_union(out)
 
 
+def terrain_by_grade(holc):
+    """Elevation (meters above sea level) and slope (degrees) of each grade's land, read from the
+    cached lidar grid (USGS 3DEP, 5 m) at every grid node whose center falls inside the grade's
+    outlines, unnumbered pieces included. The grid is today's bare earth, so the Turnpike's and
+    the expressway's cuts are in it. Slope is from the grid's gradient over 5 m."""
+    import gzip
+    import numpy as np
+    from matplotlib.path import Path
+    raw = gzip.open(os.path.join(ROOT, 'data/richmond-streetcars/dem.bin.gz')).read()
+    nl = raw.index(b'\n')
+    h = json.loads(raw[:nl])
+    q = np.frombuffer(raw[nl + 1:], dtype='<i2').reshape(h['height'], h['width'])
+    z = np.where(q == -32768, np.nan, h['offset'] + q * h['scale']).astype(float)
+    z[z < -5] = np.nan  # the void patches cleanDem marks
+    W, S, E, N, Hh, Ww = h['west'], h['south'], h['east'], h['north'], h['height'], h['width']
+    dx = (E - W) / Ww * 111320 * math.cos(math.radians((N + S) / 2))
+    dy = (N - S) / Hh * 111132
+    gy, gx = np.gradient(z, dy, dx)
+    slope = np.degrees(np.arctan(np.hypot(gx, gy))).ravel()
+    lon, lat = np.meshgrid(W + (np.arange(Ww) + 0.5) * (E - W) / Ww, N - (np.arange(Hh) + 0.5) * (N - S) / Hh)
+    pts = np.column_stack([lon.ravel(), lat.ravel()])
+    zz = z.ravel()
+    picks = {g: [] for g in GRADES}
+    for f in holc['features']:
+        g = f['properties'].get('grade')
+        if g not in picks:
+            continue
+        geom = shape(f['geometry'])
+        for poly in (geom.geoms if geom.geom_type == 'MultiPolygon' else [geom]):
+            x0, y0, x1, y1 = poly.bounds
+            idx = np.where((pts[:, 0] >= x0) & (pts[:, 0] <= x1) & (pts[:, 1] >= y0) & (pts[:, 1] <= y1))[0]
+            inside = Path(np.array(poly.exterior.coords)).contains_points(pts[idx])
+            for hole in poly.interiors:
+                inside &= ~Path(np.array(hole.coords)).contains_points(pts[idx])
+            picks[g].append(idx[inside])
+    out = {}
+    for g in GRADES:
+        i = np.concatenate(picks[g])
+        e, s = zz[i], slope[i]
+        ok = ~np.isnan(e) & ~np.isnan(s)
+        out[g] = {'nodes': int(ok.sum()), 'elev_mean_m': round(float(np.mean(e[ok])), 1), 'elev_median_m': round(float(np.median(e[ok])), 1),
+                  'elev_p10_m': round(float(np.percentile(e[ok], 10)), 1), 'elev_p90_m': round(float(np.percentile(e[ok], 90)), 1),
+                  'slope_mean_deg': round(float(np.mean(s[ok])), 1), 'slope_median_deg': round(float(np.median(s[ok])), 1),
+                  'share_steeper_10deg': round(float(np.mean(s[ok] > 10)), 3)}
+    return out
+
+
 def main():
     root = lambda p: os.path.join(ROOT, p)  # noqa: E731
     holc = load_outlines(ROOT)
@@ -216,6 +263,7 @@ def main():
         'courts_note': 'Empty when the OSM cache holds no outline named for the court (true of the November 16, 2026 cache): the brief\'s placements are not yet rechecked here.',
         'jackson_ward_1952_survival': jw,
         'areas': per_area,
+        'terrain_by_grade': terrain_by_grade(holc),
         'outlines': GRADES_PATH,
     }
     path = os.path.join(HERE, 'numbers.json')

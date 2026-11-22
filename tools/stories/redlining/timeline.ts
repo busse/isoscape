@@ -33,7 +33,7 @@ export const MOMENTS: readonly Moment[] = [
   { date: 'April 1911', what: 'City Council passes a residential segregation ordinance. In 1912 the General Assembly lets every Virginia city do the same.', source: 'Library of Virginia; Encyclopedia Virginia', sure: 'opened' },
   { date: '1917', what: 'In Buchanan v. Warley the Supreme Court strikes down segregation ordinances.', source: 'Library of Virginia', sure: 'opened' },
   { date: '1924 or 1929', what: 'Richmond passes a new ordinance tied to the state\'s Racial Integrity Act. A federal appeals court strikes it down in 1929.', source: 'Encyclopedia Virginia gives 1924; the Library of Virginia gives 1929', sure: 'disputed' },
-  { date: '1933', what: 'Congress creates the Home Owners\' Loan Corporation (HOLC) to refinance home mortgages in default.', source: 'Home Owners\' Loan Act, June 13, 1933 (Wikipedia); Federal Reserve Bank of Chicago, 2022', sure: 'opened' },
+  { date: '1933', what: 'Congress creates the Home Owners\' Loan Corporation (HOLC) to refinance the mortgages of home owners in distress.', source: 'Home Owners\' Loan Act, June 13, 1933 (Harriss, 1951); Federal Reserve Bank of Chicago, 2022', sure: 'opened' },
   { date: 'April 3, 1937', what: 'The HOLC\'s map of Richmond grades its residential areas A to D.', source: 'National Archives, RG 195, via FRASER', sure: 'opened' },
   { date: '1943', what: 'Gilpin Court is dedicated on cleared Apostle Town land in D1.', source: 'Library of Virginia, Craig, 2025; Encyclopedia Virginia', sure: 'opened' },
   { date: '1946', what: 'Harland Bartholomew\'s master plan calls the city\'s Black neighborhoods slums.', source: 'Encyclopedia Virginia', sure: 'opened' },

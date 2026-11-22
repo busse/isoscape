@@ -476,3 +476,27 @@ test('an unlisted page is reachable but named nowhere, and a FAQ page carries FA
   assert.equal(art['@type'], 'Article')
   assert.throws(() => loadPages(((d) => (writeFileSync(join(d, 'x.md'), '---\nschema: Recipe\n---\n# X\n'), d))(mkdtempSync(join(tmpdir(), 'iso-pages-')))), /schema "Recipe"/)
 })
+
+test('a page with shop: false shows no shop link, button or print link, in the explorer or on its static and share pages', async () => {
+  const config: SiteConfig = { ...CONFIG, shop: { label: 'Holiday shop', url: 'https://shop.example/', cta: 'Buy prints of these maps', onSale: { story: 'https://shop.example/collections/story' } } }
+  const { out, pagesDir } = site()
+  writeFileSync(join(pagesDir, 'story.md'), '---\ntitle: A story\nshop: false\n---\n\n# A story\n\n[Open the map](https://example.org/iso/#cars:1925) to pan.\n')
+  writeFileSync(join(pagesDir, 'other.md'), '---\ntitle: Another\n---\n\n# Another\n\nText.\n')
+  const pages = loadPages(pagesDir, config.siteUrl)
+  assert.equal(pages.find((p) => p.slug === 'story')?.noShop, true)
+  assert.equal(pages.find((p) => p.slug === 'other')?.noShop, undefined)
+  const plan = planStatic(BUILDS, pages.map((p) => p.slug), config.home)
+  await writeSocial(out, BUILDS, pages, config, undefined, (t) => ('build' in t ? plan.forBuild(t.build) : plan.forPage(t.page)))
+  await writeStatic(out, BUILDS, plan, config, { pagesDir })
+  const story = readFileSync(join(out, 'p', 'story.html'), 'utf8')
+  assert.ok(!story.includes('shop.example'), 'the story page names no shop')
+  assert.ok(readFileSync(join(out, 'p', 'other.html'), 'utf8').includes('Shop prints ↗'), 'other pages keep the shop link')
+  assert.ok(!readFileSync(join(out, 's', 'page-story.html'), 'utf8').includes('shop.example/collections'), 'nor does its share page')
+  const index = renderExplorer(BUILDS, pages, { shop: config.shop, home: config.home })
+  const data = JSON.parse(index.match(/<script type="application\/json" id="pagesData">([\s\S]*?)<\/script>/)![1]) as { slug: string; noShop?: boolean; shop: unknown }[]
+  const entry = data.find((p) => p.slug === 'story')!
+  assert.equal(entry.noShop, true)
+  assert.equal(entry.shop, null)
+  assert.match(index, /body\.noshop #nav a\.shop, body\.noshop #mbar \.mshop \{ display: none; \}/)
+  assert.ok(index.includes("document.body.classList.toggle('noshop', !!p.noShop)"))
+})

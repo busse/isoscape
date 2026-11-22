@@ -1,8 +1,11 @@
 """The areas the redlining story looks at closely, with the names the page gives them.
 
-The 1937 forms for Richmond leave the area-name field blank, so these names are the story's:
-each is placed from the streets, churches and parks inside the outline today (OpenStreetMap,
-fetched November 16, 2026) and from the forms themselves (D4's form calls D3 "Oak Park").
+The 1937 form has no name field. Some of Richmond's forms carry a typed heading with a place
+name (among the D areas: D6 Church Hill, D7 Fulton, D9 Riverview, D11 South Richmond; and A5
+Windsor Farms), and D4's form calls D3 Oak Park. The names here are the story's, chosen to orient
+a reader today (the owner's decision, November 22, 2026): from those headings where they still
+serve, otherwise from the streets, churches and parks inside the outline today (OpenStreetMap,
+fetched November 16, 2026).
 """
 NAMES = {
     'A5': 'Windsor Farms',
@@ -11,10 +14,10 @@ NAMES = {
     'D3': 'Oak Park, along Laburnum Avenue',
     'D4': 'Around Hunt and Hazelhurst Avenues',
     'D5': 'Fairmount and the blocks around Mosby Court',
-    'D6': 'Union Hill and the slopes of Church Hill',
+    'D6': 'Church Hill and Union Hill',
     'D7': 'Fulton',
     'D8': 'Randolph and Oregon Hill',
-    'D9': 'Beside Maymont, then mostly vacant',
+    'D9': 'Riverview, beside Maymont',
     'D10': 'South of the river, around Bainbridge and Perry Streets',
     'D11': 'Manchester, around Cowardin Avenue',
     'D11.5': 'Blackwell',

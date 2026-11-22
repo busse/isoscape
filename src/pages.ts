@@ -56,6 +56,8 @@ export interface Page {
   readonly social?: { readonly name: string; readonly bytes: Buffer }
   /** Reachable at its address but listed nowhere (`unlisted: true`). */
   readonly unlisted?: boolean
+  /** Shows no shop link or button while it is open (`shop: false`), as a story page asks. */
+  readonly noShop?: boolean
   /** Structured data for the static page beyond `Article` (`schema: FAQPage`). */
   readonly schema?: 'FAQPage'
 }
@@ -168,6 +170,7 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     ...(data.deck ? { deck: data.deck } : {}),
     ...(social === undefined ? {} : { social }),
     ...(data.unlisted === 'true' ? { unlisted: true } : {}),
+    ...(data.shop === 'false' ? { noShop: true } : {}),
     ...(data.schema === 'FAQPage' ? { schema: 'FAQPage' as const } : {}),
   }
 }

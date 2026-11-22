@@ -68,9 +68,13 @@ export interface Palette {
   readonly mark: { readonly pick: string; readonly near: string; readonly quiet: string; readonly line: string }
   /**
    * Graded ground (`Tint` in history.ts): the tones in grade order (a 1937 HOLC map's A to D,
-   * softened from its own green, blue, yellow and red), and the roads drawn over them. Both
-   * modes pass the dataviz palette validator (lightness band, chroma floor, color-vision and
-   * normal-vision separation) against their own sky; contrast is relieved by the key's labels.
+   * softened from its own green, blue, yellow and red), and the roads drawn over them. Mixed a
+   * third of the way toward the paper so hillshade and buildings read through them (the owner's
+   * choice, November 22, 2026), then nudged the least needed to pass the dataviz validator's
+   * color-vision and normal-vision separation (paper: B darker and bluer, clear of the river; D
+   * darker. night: A yellower, B and D more saturated). At this strength they sit outside its
+   * lightness band and under its chroma floor, so grade identity is carried by the key's names
+   * and the area labels on every picture, never by color alone.
    */
   readonly tint: { readonly tones: readonly string[]; readonly road: string }
   /** Roofs of buildings traced from fire-insurance maps, in the maps' own color code. */
@@ -184,7 +188,7 @@ const paper: Palette = {
   grounds: '#ddd0a8',
   racetrack: '#b39a6c',
   mark: { pick: '#c4553b', near: '#e8a88f', quiet: '#ebe6db', line: '#8f2a22' },
-  tint: { tones: ['#89bf77', '#69abe2', '#cfb04a', '#d4716b'], road: '#2c2b33' },
+  tint: { tones: ['#accf9c', '#71b1e1', '#dbc57e', '#db8981'], road: '#2c2b33' },
   traced: { brick: '#e9c2b8', frame: '#efe0a6', stone: '#c3d3e2', iron: '#cfcdc8', special: '#c5dcc0', fireproof: '#cfc6a4' },
   tram: '#b8362c',
   tramCar: ['#c9473a', '#8f2a22', '#e8d9b0'],
@@ -315,7 +319,7 @@ const night: Palette = {
   grounds: '#2e2c2a',
   racetrack: '#4a3f30',
   mark: { pick: '#e0614f', near: '#8a4a3e', quiet: '#2f3340', line: '#f07a5f' },
-  tint: { tones: ['#518346', '#286ea3', '#a18b32', '#9c4343'], road: '#e8e4da' },
+  tint: { tones: ['#445e32', '#005186', '#72642b', '#7a292f'], road: '#e8e4da' },
   traced: { brick: '#5a3c3a', frame: '#5a5236', stone: '#34465a', iron: '#45454a', special: '#3a4f3c', fireproof: '#4f4a36' },
   tram: '#e0614f',
   tramCar: ['#f07a5f', '#b04a3a', '#f2e2b8'],
