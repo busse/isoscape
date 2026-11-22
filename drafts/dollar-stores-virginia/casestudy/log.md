@@ -290,3 +290,13 @@ Folder: `2026-11-21-09-replication/`.
   unzipped HPMS history (already analyzed) and duplicate Census zips. Each state's OSM cuts,
   NLCD tiles and block files are removed once the state is scored. The sources stay on the
   Mac.
+- **Speed (about 17:40).** Maryland took about an hour, which put the six states at 6 to 7
+  hours.
+  - From West Virginia on, each place draws 1,500 random road points instead of 4,000. That
+    still leaves hundreds in each place's edge band. It changes the precision of p_i, not
+    any test.
+  - The ray re-entry count (S6) is computed for stores only, since only stores use it.
+  - Maryland and the Virginia CDPs keep 4,000.
+- **Driver's view (exploratory, not a frozen test).** `drive_in.py` asks, for each road
+  crossing into a place, which store a driver passes first. Debugged on discovery data only;
+  it will be run on the held-out data after the frozen tests, and labeled exploratory.

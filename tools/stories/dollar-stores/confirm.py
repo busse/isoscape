@@ -174,7 +174,7 @@ def place_features(args):
             end = Point(cx + 20000 * math.sin(b), cy + 20000 * math.cos(b))
             h = lead.intersection(LineString([(cx, cy), end]))
             return len(getattr(h, "geoms", [h])) - 1 if not h.is_empty else 0
-        pts["reentries"] = [reentries(x, y) for x, y in zip(pts.x, pts.y)]
+        pts["reentries"] = [reentries(x, y) if st_ else 0 for x, y, st_ in zip(pts.x, pts.y, pts.is_store)]
         pts["geoid"], pts["state"], pts["set"] = geoid, state, set_name
         pts["folder"] = os.path.basename(folder)
         pts["pop"] = meta["pop_in_limits"]

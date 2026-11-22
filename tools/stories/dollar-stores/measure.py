@@ -45,7 +45,7 @@ SETTINGS = {"strict": (164.1, 200, None), "loose": (77.2, 400, None), "lead": (7
 # edge in the outputs); no replication test uses it. The loose edge is kept for test C5.
 FAST = os.environ.get("MEASURE_FAST") == "1"
 RAY_M = 20000
-NULL_N = 4000
+NULL_N = int(os.environ.get("NULL_N", "4000"))  # 1500 for the replication states after Maryland, to save time
 SEED = 20261121
 NULL_ROADS = {"trunk", "primary", "secondary", "tertiary", "trunk_link", "primary_link"}
 GAP_FALLBACK = []  # set when the center falls in a gap of the built-up area
