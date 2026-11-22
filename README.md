@@ -343,6 +343,9 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   plain list and the sitemap, and asks search engines not to index `p/<slug>.html` (`noindex`).
   It still opens at its address (`#/<slug>`, `p/<slug>.html`, `s/page-<slug>.html`). Use it
   for a page someone has to read before it goes out, and delete the line to publish it.
+- `shop: false` shows no shop link while the page is open: the explorer hides its "Shop prints"
+  link and the phone bar's button, and the page's static and share pages carry no shop link,
+  shop button or print link. The Jackson Ward story page uses it.
 - `schema: FAQPage` gives the static page `FAQPage` JSON-LD in place of `Article`. Each heading
   that ends in a question mark is a question, and the text under it, up to the next heading, is
   its answer (`faqEntries` in `src/static-pages.ts`).

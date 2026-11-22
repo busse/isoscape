@@ -912,7 +912,7 @@ export const writeSocial = async (
     const alt = own === undefined ? imageAlt : p.summary ?? p.title
     const to = pointTo(staticOf({ page: p.slug }), 'Read it as a plain page')
     // Its shop button, as the explorer and the static page show it.
-    const shop = config.shop === undefined ? undefined : pageShop(p.slug, pageMapRefs(p.html), config)
+    const shop = config.shop === undefined || p.noShop ? undefined : pageShop(p.slug, pageMapRefs(p.html), config)
     await writeFile(resolve(outDir, 's', file), sharePage({
       title: `${p.title} · ${SITE_NAME}`,
       description: pageDescription(p),

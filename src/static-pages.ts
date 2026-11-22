@@ -317,7 +317,7 @@ ${PROSE_CSS}${STORY_CSS}${STATIC_CSS}${h.figures ? FIGURE_CSS + LIGHTBOX_CSS : '
 `
 
 /** The bar along the top: the site's name into the explorer, the main pages, the shop. */
-const topBar = (ctx: Ctx, campaign: string): string => {
+const topBar = (ctx: Ctx, campaign: string, noShop = false): string => {
   const u = up(ctx.depth)
   const nav: string[] = []
   for (const slug of ['how-its-made', 'about']) {
@@ -325,7 +325,7 @@ const topBar = (ctx: Ctx, campaign: string): string => {
     const path = ctx.plan.forPage(slug)
     if (p !== undefined && path !== undefined) nav.push(`<a href="${escAttr(u + path)}">${escapeHtml(p.title)}</a>`)
   }
-  if (ctx.config.shop) nav.push(`<a href="${escAttr(withCampaign(ctx.config.shop.url, campaign, ctx.config.shop.url))}">Shop prints ↗</a>`)
+  if (ctx.config.shop && !noShop) nav.push(`<a href="${escAttr(withCampaign(ctx.config.shop.url, campaign, ctx.config.shop.url))}">Shop prints ↗</a>`)
   return `<header class="top"><a class="brand" href="${u}index.html" title="Open the isoscape explorer"><b>${SITE_NAME}</b><span>isometric maps of real places</span></a>${nav.length ? `<nav aria-label="Site">${nav.join('')}</nav>` : ''}</header>\n`
 }
 
@@ -391,8 +391,9 @@ export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}
   const description = pageDescription(page)
   const image = imgs.own ?? imgs.flagship
   const imageAlt = imgs.own === undefined ? imgs.flagshipAlt : page.summary ?? page.title
-  const shop = pageShop(page.slug, mapRefs(page.html), ctx.config)
-  const html = printLinks(page.html, ctx.config.shop?.products, '../index.html#', (u) => withCampaign(u, page.slug, ctx.config.shop?.url))
+  // A page with `shop: false` (a story page) carries no shop link, button or print link.
+  const shop = page.noShop ? undefined : pageShop(page.slug, mapRefs(page.html), ctx.config)
+  const html = page.noShop ? page.html : printLinks(page.html, ctx.config.shop?.products, '../index.html#', (u) => withCampaign(u, page.slug, ctx.config.shop?.url))
   const acts = `<p class="acts"><a class="btn ghost" href="../index.html#/${escAttr(page.slug)}">Open this in the explorer</a>${shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, page.slug, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`}</p>\n`
   const url = abs(path, ctx)
   const faq = page.schema === 'FAQPage' ? faqEntries(page.html) : []
@@ -410,7 +411,7 @@ export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}
     isPartOf: { '@type': 'WebSite', name: SITE_NAME, ...(ctx.config.siteUrl === undefined ? {} : { url: ctx.config.siteUrl }) },
   }
   return head({ title: `${page.title} · ${SITE_NAME}`, description, path, type: 'article', ld, ...(page.unlisted ? { noindex: true } : {}), ...(page.figures.length > 0 ? { figures: true } : {}), ...(page.figures.some((f) => f.compare) ? { compare: true } : {}), ...(image === undefined ? {} : { image }), ...(imageAlt === undefined ? {} : { imageAlt }) }, ctx) +
-    topBar(ctx, page.slug) +
+    topBar(ctx, page.slug, page.noShop) +
     `<main class="wrap">\n${acts}<article class="prose">\n${html}</article>\n${acts}</main>\n` +
     footer(ctx) + (page.figures.length > 0 ? `<script>(${lightbox.toString()})(document)</script>\n` : '') +
     (page.figures.some((f) => f.compare) ? `<script>(${compareSliders.toString()})(document, { at: ${splitAt.toString()}, of: ${splitOf.toString()} })</script>\n` : '') + '</body>\n</html>\n'
