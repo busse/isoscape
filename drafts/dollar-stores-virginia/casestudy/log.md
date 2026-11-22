@@ -343,3 +343,15 @@ Folder: `2026-11-21-09-replication/`.
   - The edge ones sit at highway junctions, like convenience stores.
   - They carry newer SNAP authorizations.
   - "Busiest road in" and "just inside the line" do not hold up as headlines.
+
+## Step 10: the editorial poster, rough draft (22:15-22:25)
+
+Folder: `2026-11-21-10-poster-rough/`, with `notes.md`.
+
+- **Chris (22:15).** "go".
+- **The draft.**
+  - The 30 Virginia edge stores, every one, as traffic heat-map squares.
+  - Three charts from the six-state replication.
+  - An honesty panel.
+- **Rounds.** Three. Every number is computed from the test outputs. The board has a new
+  print entry, `viz-dollar-stores-virginia-poster`, at rough draft.

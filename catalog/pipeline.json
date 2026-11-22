@@ -3170,7 +3170,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "Replication done and independently checked (casestudy step 9, findings.md): edge stores are a minority; edge stores sit at US/state route junctions ~3x random, like convenience stores; newer SNAP authorizations. Owner: editorial line for the poster.",
+   "decision": "Findings in casestudy step 9; poster rough draft is viz-dollar-stores-virginia-poster.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3182,6 +3182,29 @@
    ],
    "log": [
     "2026-11-21: rough draft -> research"
+   ]
+  },
+  "viz-dollar-stores-virginia-poster": {
+   "title": "Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36)",
+   "plate": null,
+   "kind": "print",
+   "stage": "rough draft",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 3,
+   "waiting_on": "owner",
+   "decision": "Rough draft r3 in _preview/dollar-stores/poster/: 30 Virginia edge stores as traffic heat-map squares, three six-state charts, honesty panel. Owner: worth pursuing?",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": "viz/dollar-stores-virginia",
+   "worktree": null,
+   "links": [
+    "drafts/dollar-stores-virginia/casestudy/2026-11-21-10-poster-rough/notes.md"
    ]
   }
  }
