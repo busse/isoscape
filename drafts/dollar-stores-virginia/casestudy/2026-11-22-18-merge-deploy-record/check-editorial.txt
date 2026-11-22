@@ -1,0 +1,2 @@
+viz-dollar-stores-virginia-poster v1 (1.0.0, editorial): OK, 15 files match their hashes
+exit 0

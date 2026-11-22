@@ -24,6 +24,11 @@ With no designs, records every design in the store's catalog that has no record 
 version yet. A redrawn design (catalog "version" N) gets a new v<N>.json; older ones are kept.
 check.py verifies records, and with --rebuild remakes each scene from its record.
 
+An editorial piece (released at final production, not for sale: no plate, no store) is recorded
+from a spec instead of the store's catalog (README "Editorial pieces (not for sale)"):
+    python3 tools/release/record.py --editorial releases/editorial/<design>.json --release
+It writes releases/<design>/v<N>.json with kind "editorial", for_sale false and no store section.
+
 Asset versions (README "Stages and the board"): a record stores the design's asset version, the
 store catalog's "asset_version" (default N.0.0, N its "version"). A record whose asset version
 raises MINOR within the same edition (3.0.0 -> 3.1.0: corrected art replacing an unsold edition's
@@ -372,7 +377,67 @@ def revision_gate(key, asset, items=None, changes=None, today=None):
     return None
 
 
+# ---- editorial pieces: released, not for sale ---------------------------------------------------
+
+def editorial(spec_p, release=False):
+    """The record of an editorial piece (a poster for a story page, say): released at final
+    production but in no store, so it has no plate, no title block, no products and no Printful
+    files. Its spec (releases/editorial/<design>.json) names what the store would otherwise say:
+    the recipe, the inputs, the outputs, the data kept outside git, and where the piece is shown.
+    Every input and output is pinned by SHA-256, as in a store record."""
+    S = json.load(open(spec_p))
+    asset = S['asset_version']
+    p = BOARD.parse(asset)
+    if not p or p[3]: raise SystemExit(f"{S['design']}: asset version {asset!r}: a release is MAJOR.MINOR.PATCH, never a draft")
+    if p[0] != S['version']: raise SystemExit(f"{S['design']}: asset version {asset} is not of edition {S['version']}")
+    def pin(f):
+        q = os.path.join(ISO, f)
+        if not os.path.isfile(q): raise SystemExit(f"{S['design']}: {f} is not there; an editorial record pins only files in the repo")
+        return {'file': f, 'sha256': sha(q), 'bytes': os.path.getsize(q)}
+    inputs = {f: pin(f)['sha256'] for f in S['inputs']}
+    inputs[rel(spec_p)] = sha(spec_p)
+    outs = S['outputs']
+    rep = S.get('inspection')
+    return {
+        'design': S['design'], 'title': S['title'], 'version': S['version'], 'asset_version': asset,
+        'version_note': S.get('version_note'), 'recorded': datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds'),
+        'provenance': 'recorded at release' if release else 'reconstructed: recorded after release',
+        'isoscape': commit(), 'kind': 'editorial', 'for_sale': False,
+        'recipe': S['recipe'], 'scenes': [], 'inputs': inputs, 'data': {},
+        'external': S.get('external'),
+        # 'print' is the art itself; 'prints' the same art in other files; 'derived' what was made from it.
+        'outputs': {'print': pin(outs['print']), 'prints': [pin(f) for f in outs.get('prints', [])], 'canvas': [],
+                    'derived': [pin(f) for f in outs.get('derived', [])]},
+        'shown': S.get('shown'), 'explorer': {'view': None, 'page': (S.get('shown') or {}).get('explorer')},
+        'inspection': rep and {'report': rep, 'sha256': sha(os.path.join(ISO, rep))},
+        'notes': S.get('notes', []),
+    }
+
+
+def main_editorial(argv):
+    ap = argparse.ArgumentParser(prog='record.py --editorial', description='record an editorial piece (released, not for sale) from its spec')
+    ap.add_argument('--editorial', required=True, metavar='SPEC', help='releases/editorial/<design>.json')
+    ap.add_argument('--release', action='store_true', help='this record is made at release time (not reconstructed)')
+    ap.add_argument('--force', action='store_true', help='rewrite an existing record of the same version')
+    a = ap.parse_args(argv)
+    r = editorial(a.editorial, a.release)
+    k = r['design']
+    p = os.path.join(REL, k, record_name(r['asset_version']))
+    index_p = os.path.join(REL, 'index.json')
+    index = json.load(open(index_p)) if os.path.exists(index_p) else {}
+    if index.get(k) and index[k].get('kind') != 'editorial':
+        raise SystemExit(f'{k} has store records: once a piece is on sale it is recorded from the store (record.py <store>)')
+    if os.path.exists(p) and not a.force: raise SystemExit(f'{rel(p)} exists (--force to rewrite it)')
+    os.makedirs(os.path.dirname(p), exist_ok=True)
+    json.dump(r, open(p, 'w'), indent=1, ensure_ascii=False)
+    index[k] = {'title': r['title'], 'current': r['version'], 'kind': 'editorial', 'for_sale': False, 'records': sorted(os.listdir(os.path.dirname(p)))}
+    if r['asset_version'] != f"{r['version']}.0.0": index[k].update(asset_version=r['asset_version'], record=os.path.basename(p))
+    json.dump(dict(sorted(index.items())), open(index_p, 'w'), indent=1, ensure_ascii=False)
+    print('recorded', k, f"v{r['version']}", 'editorial', len(r['inputs']), 'inputs', 1 + len(r['outputs']['prints']) + len(r['outputs']['derived']), 'outputs')
+
+
 def main():
+    if any(x == '--editorial' or x.startswith('--editorial=') for x in sys.argv[1:]): return main_editorial(sys.argv[1:])
     ap = argparse.ArgumentParser()
     ap.add_argument('store'); ap.add_argument('designs', nargs='*')
     ap.add_argument('--release', action='store_true', help='this record is made at release time (not reconstructed)')

@@ -135,7 +135,9 @@ new edition (`-vN` files, catalog `version`, `pages/changes.md`). An edition wit
 the store's counts say (`orders.py counts`, then `board.py orders`; "unknown" counts as sold),
 may be replaced in place by corrected art as a revision (`-v3.1` files, catalog
 `asset_version`, record kind `revision`), with a dated line on `pages/changes.md` if it is on
-sale. See "Release records" and "Stages and the board" in the README.
+sale. A piece released but not for sale (no plate, no store) gets an editorial record instead:
+`record.py --editorial` and `check.py --editorial`. See "Release records" and "Stages and the
+board" in the README.
 
 ## Known limits
 

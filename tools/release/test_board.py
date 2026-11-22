@@ -86,6 +86,28 @@ class Check(unittest.TestCase):
         self.assertTrue(any('not a stage of a story' in x for x in bad(b)))
 
 
+class Editorial(unittest.TestCase):
+    """An editorial piece: released (final production, an editorial record) but not for sale, with no plate."""
+    def board(self, **kw):
+        b = good()
+        b['items']['poster'] = entry(kind='print', plate=None, asset_version='1.0.0', published_version=1, live_version=None,
+                                     on_sale=False, orders=0, **kw)
+        return b
+
+    def index(self):
+        return dict(INDEX, poster={'current': 1, 'kind': 'editorial', 'for_sale': False})
+
+    def test_released_unsold_and_unplated_is_legal(self):
+        self.assertEqual(board.problems(self.board(), PLATES, self.index()), [])
+
+    def test_without_its_record_it_is_not_released(self):
+        self.assertTrue(any('poster: 1.0.0: final production but no release record' in x for x in board.problems(self.board(), PLATES, INDEX)))
+
+    def test_an_editorial_record_never_backs_a_sale(self):
+        b = self.board(); b['items']['poster'].update(on_sale=True, live_version=1)
+        self.assertTrue(any('release record is editorial' in x for x in board.problems(b, PLATES, self.index())))
+
+
 class Versions(unittest.TestCase):
     def test_file_suffix_prints_only_what_is_needed(self):
         self.assertEqual([board.file_suffix(a) for a in ('3.0.0', '3.1.0', '3.0.1', '3.1.2')], ['v3', 'v3.1', 'v3.0.1', 'v3.1.2'])

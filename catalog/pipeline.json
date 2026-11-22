@@ -3205,7 +3205,7 @@
    "title": "Data visualization: why is there a Dollar General on the edge of town? (Virginia)",
    "plate": null,
    "kind": "story",
-   "stage": "fact check",
+   "stage": "published",
    "status": "active",
    "asset_version": null,
    "published_version": null,
@@ -3213,36 +3213,39 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "agent",
-   "decision": "Owner approved going live without outside review (Nov 22, 13:04). Page pages/dollar-stores.md is public on the branch (unlisted removed). Set to published when the planning session merges and pushes.",
+   "waiting_on": "nothing",
+   "decision": "Published November 22, 2026. The owner approved going live without outside review on November 22, 2026; the page says how it was made. Live and listed at https://busse.github.io/isoscape/p/dollar-stores.html, with phone and large-screen PDF editions and no shop link.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
-   "branch": "viz/dollar-stores-virginia",
+   "branch": null,
    "worktree": null,
    "links": [
     "drafts/dollar-stores-virginia/plan.md",
-    "drafts/dollar-stores-virginia/findings-edge-test.md"
+    "drafts/dollar-stores-virginia/findings-edge-test.md",
+    "https://busse.github.io/isoscape/p/dollar-stores.html",
+    "pages/dollar-stores.md"
    ],
    "log": [
     "2026-11-21: rough draft -> research",
-    "2026-11-22: research -> fact check"
+    "2026-11-22: research -> fact check",
+    "2026-11-22: fact check -> published"
    ]
   },
   "viz-dollar-stores-virginia-poster": {
    "title": "Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36)",
    "plate": null,
    "kind": "print",
-   "stage": "final draft",
+   "stage": "final production",
    "status": "active",
-   "asset_version": "1.0.0-rc2",
-   "published_version": null,
+   "asset_version": "1.0.0",
+   "published_version": 1,
    "live_version": null,
    "on_sale": false,
-   "orders": null,
-   "rounds": 2,
-   "waiting_on": "agent",
-   "decision": "Owner approved release through live production (Nov 22, 13:04). Ready on branch viz/dollar-stores-virginia: released art 1.0.0 (pixel-identical to the inspected rc2) in casestudy step 17. Waiting on the planning session to merge and push, and to say how a not-for-sale editorial poster gets its release record (record.py and check.py only know store designs); then set final production 1.0.0, published_version 1.",
+   "orders": 0,
+   "rounds": 0,
+   "waiting_on": "nothing",
+   "decision": "Released November 22, 2026 as an editorial poster, not for sale: no plate, no title block, no store listing. Its release record is editorial (releases/viz-dollar-stores-virginia-poster/v1.json, record.py --editorial). Whether it is ever sold is the owner's later decision; selling it means a plate and a store record.",
    "accepted_faults": [
     {
      "what": "Mineral: the town arrow is drawn over a nearby dollar store's square and a grocery diamond",
@@ -3277,17 +3280,19 @@
    ],
    "planned_edition": null,
    "last_inspected": "6ffef55",
-   "branch": "viz/dollar-stores-virginia",
+   "branch": null,
    "worktree": null,
    "links": [
     "drafts/dollar-stores-virginia/casestudy/2026-11-21-10-poster-rough/notes.md",
     "drafts/dollar-stores-virginia/casestudy/2026-11-22-11-poster-d1/notes.md",
     "drafts/dollar-stores-virginia/casestudy/2026-11-22-15-poster-d2/notes.md",
-    "drafts/dollar-stores-virginia/casestudy/2026-11-22-16-poster-rc1/inspection/report.md"
+    "drafts/dollar-stores-virginia/casestudy/2026-11-22-16-poster-rc1/inspection/report.md",
+    "releases/viz-dollar-stores-virginia-poster/v1.json"
    ],
    "log": [
     "2026-11-22: rough draft -> working draft",
-    "2026-11-22: working draft -> final draft"
+    "2026-11-22: working draft -> final draft",
+    "2026-11-22: final draft -> final production"
    ]
   },
   "shop-curation-phase-1": {
