@@ -116,7 +116,7 @@ graded neighborhoods for mortgage lending, every Black neighborhood in Richmond 
 undesirable, and that their residents were "barred" from financing for housing and businesses
 [[Feasibility Study 2022](#sources), §1.4.2]. On the Home Owners' Loan Corporation's 1937 map of
 Richmond, much of the ward north of Leigh Street lies in an area graded D and colored red
-[[Mapping Inequality, Richmond 1937](#sources), area D1].
+[[Mapping Inequality, Richmond 1937](#sources), area D1]. [Redlining in Richmond, VA](redlining.md) draws that map on the ground it graded.
 
 By the 1930s more than 8,000 Black Richmonders lived and worked in the ward, the 2022 study says,
 citing a 1994 University of Richmond master's thesis by M. E. Taylor [[Feasibility Study
