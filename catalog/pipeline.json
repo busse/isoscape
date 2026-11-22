@@ -3072,8 +3072,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "d5, the final draft: the three independent reads made with Claude are applied (scholar: 6 must-fix, 12 should-fix, 11 notes; dignity and harm: 7 must-fix, 13 should-fix; first-time reader and publish readiness: 7 must-fix and its should-fixes). All must-fixes are applied; the few should-fixes left are listed with reasons in working/d5.md. The owner chose publication without outside review (2026-11-22); the page states how it was made and claims no review. Waiting on the owner to approve the preview (working/preview-d5/) and remove unlisted.",
+   "waiting_on": "nothing",
+   "decision": "Published and listed on 2026-11-22 by the owner's approval, without outside review by his decision. Before publication: an independent fact check (154 claims) and three independent reads with Claude (scholar, dignity and harm, first-time reader), all fixes applied; outlines redrawn from the public-domain scan; the highway finding stated with its base rate (D 30% of graded land, 65% of the highway inside it, about 56% expected from location alone). Corrections are dated on the page.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3083,9 +3083,9 @@
     "/mnt/user-data/outputs/stories/redlining/brief.md",
     "/mnt/user-data/outputs/stories/redlining/working/d5.md"
    ],
-   "title": "Redlining in Richmond, 1937 to today",
+   "title": "Redlining in Richmond, VA: the 1937 federal mortgage map, drawn on the ground it graded",
    "kind": "story",
-   "stage": "fact check",
+   "stage": "published",
    "notes": "Reader (owner, 2026-11-22): assume no prior knowledge of the HOLC, grading or redlining; a reader who knows the subject should still learn from the detail and the way it is drawn. Asset: final draft d5 (2026-11-22, branch story-redlining); no asset version is given to a story.",
    "private": true,
    "log": [
@@ -3095,7 +3095,8 @@
     "2026-11-22: outline -> fact check (owner approved the look of d2; d3 edits made)",
     "2026-11-22: outline -> fact check",
     "2026-11-22: working draft d4 (fact check applied)",
-    "2026-11-22: final draft d5 (three reads applied; owner chose publication without outside review)"
+    "2026-11-22: final draft d5 (three reads applied; owner chose publication without outside review)",
+    "2026-11-22: fact check -> published"
    ]
   },
   "story-slave-trade": {
