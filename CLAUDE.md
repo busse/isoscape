@@ -157,8 +157,8 @@ sale. See "Release records" and "Stages and the board" in the README.
 - Ground put back before a later work (`ground` in a history file) is an estimate: inside its
   outline the lidar is replaced by a membrane from the rim and the streets that crossed at grade,
   or narrow banks are taken down (25 m opening). Relief smaller than the outline's width (a
-  knoll, a ravine head) is lost; in Jackson Ward the error is about 1.5 m mid-trench, 3 m at its
-  ends, and the I-95 bench on the Shockoe Valley side and the Leigh Street cut are kept as measured.
+  knoll, a ravine head) is lost; in Jackson Ward the error is about 2 m (95%) mid-trench and 3 to
+  4 m or more at its ends, and the I-95 bench on the Shockoe Valley side and the Leigh Street cut are kept as measured.
 - Outside the US, terrain is only as fine as its source: Copernicus is a 30 m *surface* model
   (trees and roofs included), and Terrain Tiles is 30 m SRTM in much of the world. Every source
   must carry its credit and license in `dem-sources.ts`; the maps, explorer and prints use them.
