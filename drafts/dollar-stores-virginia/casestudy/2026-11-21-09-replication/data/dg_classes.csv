@@ -1,7 +1,7 @@
 set,state,unit,class,stores
 A,VA,CDP,beyond A 2,45
 A,VA,CDP,edge band,12
-A,VA,CDP,in town,69
+A,VA,CDP,in town,68
 A,VA,CDP,on the edge line (margin),15
 A,VA,joined,beyond A 2,2
 A,VA,joined,edge band,4
@@ -10,7 +10,7 @@ A,VA,joined,on the edge line (margin),1
 B,KY,CDP,beyond A 2,25
 B,KY,CDP,edge band,15
 B,KY,CDP,in town,39
-B,KY,CDP,on the edge line (margin),10
+B,KY,CDP,on the edge line (margin),8
 B,KY,joined,beyond A 2,12
 B,KY,joined,edge band,15
 B,KY,joined,in town,81
@@ -22,10 +22,10 @@ B,KY,large,on the edge line (margin),4
 B,KY,small,beyond A 2,150
 B,KY,small,edge band,57
 B,KY,small,in town,254
-B,KY,small,on the edge line (margin),48
+B,KY,small,on the edge line (margin),50
 B,MD,CDP,beyond A 2,11
 B,MD,CDP,edge band,8
-B,MD,CDP,in town,19
+B,MD,CDP,in town,18
 B,MD,CDP,on the edge line (margin),1
 B,MD,joined,beyond A 2,1
 B,MD,joined,edge band,1
@@ -35,24 +35,24 @@ B,MD,large,edge band,2
 B,MD,large,in town,16
 B,MD,small,beyond A 2,14
 B,MD,small,edge band,5
-B,MD,small,in town,45
+B,MD,small,in town,46
 B,MD,small,on the edge line (margin),4
-B,NC,CDP,beyond A 2,31
+B,NC,CDP,beyond A 2,30
 B,NC,CDP,edge band,13
 B,NC,CDP,in town,61
 B,NC,CDP,on the edge line (margin),6
 B,NC,joined,beyond A 2,10
 B,NC,joined,edge band,27
 B,NC,joined,in town,204
-B,NC,joined,on the edge line (margin),16
+B,NC,joined,on the edge line (margin),14
 B,NC,large,beyond A 2,18
 B,NC,large,edge band,30
 B,NC,large,in town,160
-B,NC,large,on the edge line (margin),6
-B,NC,small,beyond A 2,103
+B,NC,large,on the edge line (margin),7
+B,NC,small,beyond A 2,104
 B,NC,small,edge band,54
 B,NC,small,in town,314
-B,NC,small,on the edge line (margin),47
+B,NC,small,on the edge line (margin),48
 B,SC,CDP,beyond A 2,25
 B,SC,CDP,edge band,8
 B,SC,CDP,in town,42
@@ -60,26 +60,26 @@ B,SC,CDP,on the edge line (margin),5
 B,SC,joined,beyond A 2,6
 B,SC,joined,edge band,29
 B,SC,joined,in town,190
-B,SC,joined,on the edge line (margin),14
+B,SC,joined,on the edge line (margin),11
 B,SC,large,beyond A 2,7
 B,SC,large,edge band,14
 B,SC,large,in town,57
-B,SC,large,on the edge line (margin),3
+B,SC,large,on the edge line (margin),5
 B,SC,small,beyond A 2,58
 B,SC,small,edge band,31
 B,SC,small,in town,182
-B,SC,small,on the edge line (margin),16
+B,SC,small,on the edge line (margin),17
 B,TN,CDP,beyond A 2,40
 B,TN,CDP,edge band,11
 B,TN,CDP,in town,48
 B,TN,CDP,on the edge line (margin),8
 B,TN,joined,beyond A 2,6
 B,TN,joined,edge band,6
-B,TN,joined,in town,108
+B,TN,joined,in town,107
 B,TN,joined,on the edge line (margin),9
 B,TN,large,beyond A 2,18
 B,TN,large,edge band,62
-B,TN,large,in town,200
+B,TN,large,in town,201
 B,TN,large,on the edge line (margin),6
 B,TN,small,beyond A 2,111
 B,TN,small,edge band,68
@@ -104,7 +104,7 @@ discovery,VA,joined,beyond A 2,1
 discovery,VA,joined,in town,17
 discovery,VA,large,beyond A 2,2
 discovery,VA,large,edge band,6
-discovery,VA,large,in town,74
+discovery,VA,large,in town,75
 discovery,VA,large,on the edge line (margin),3
 discovery,VA,small,beyond A 2,25
 discovery,VA,small,edge band,18

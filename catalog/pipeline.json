@@ -3161,7 +3161,7 @@
    "title": "Data visualization: why is there a Dollar General on the edge of town? (Virginia)",
    "plate": null,
    "kind": "story",
-   "stage": "research",
+   "stage": "fact check",
    "status": "active",
    "asset_version": null,
    "published_version": null,
@@ -3169,8 +3169,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "Findings in casestudy step 9; poster rough draft is viz-dollar-stores-virginia-poster.",
+   "waiting_on": "agent",
+   "decision": "Story page drafted (pages/dollar-stores.md, unlisted, built by tools/stories/dollar-stores/page.py from counts.json). Facts checked against results files and opened sources on Nov 22; the poster's independent inspection is running. Next: outside review (owner decides who), then publish by removing 'unlisted'.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3181,7 +3181,8 @@
     "drafts/dollar-stores-virginia/findings-edge-test.md"
    ],
    "log": [
-    "2026-11-21: rough draft -> research"
+    "2026-11-21: rough draft -> research",
+    "2026-11-22: research -> fact check"
    ]
   },
   "viz-dollar-stores-virginia-poster": {
