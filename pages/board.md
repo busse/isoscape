@@ -24,7 +24,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
-- **Story PDFs: phone and large-screen editions of each story page**: Built on story-pdf (tools/pdf/story_pdf.py). To check: the four PDFs for Jackson Ward and Redlining (phone and large-screen) and the local preview with the PDF links on. Not live: pdf: true is not set in either story's story.md, and no PDF is published. Approval turns it on: set pdf: true, rebuild both pages and PDFs, publish.
+- **Story PDFs: phone and large-screen editions of each story page**: The owner approved publishing both stories' PDFs with the Read this as a PDF line, after two fixes, now made on story-pdf: pictures are never cropped (title pages included), and the print build rewords instructions to a screen (wording.ts; every change listed by the tool). Publishing is for the planning session: merge, set pdf: true in both story.md files, rerun page.py, build the PDFs into the site's p/, rebuild the explorer, push gh-pages.
 - **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 

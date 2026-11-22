@@ -6,7 +6,8 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { compilePage, PAGES_DIR } from '../src/pages.ts'
 import { imageSize } from '../src/social.ts'
-import { compileForPrint, piecesFor, printDoc, printRoute, shortTitle, stackTables, type Asset } from '../tools/pdf/print.ts'
+import { compileForPrint, piecesFor, printCss, printDoc, printRoute, shortTitle, stackTables, type Asset } from '../tools/pdf/print.ts'
+import { deadInstructions, SHARED, substitute, type Change } from '../tools/pdf/wording.ts'
 
 const STORIES = ['jackson-ward', 'redlining']
 
@@ -37,12 +38,17 @@ test('the print build holds every section, figure and picture of each story', ()
       const doc = printDoc(slug, { edition: ed, assets: assetsFor(slug), date: 'November 22, 2026' })
       for (const h of page.headings) assert.ok(doc.html.includes(`id="${h.id}"`), `${slug} ${ed}: section ${h.id}`)
       for (const f of page.figures) assert.ok(doc.html.includes(`id="${f.id}"`), `${slug} ${ed}: ${f.id}`)
-      for (const m of page.html.matchAll(/<img\b[^>]*?\balt="([^"]*)"/g)) assert.ok(doc.html.includes(`alt="${m[1]}"`), `${slug} ${ed}: picture "${m[1].slice(0, 40)}…"`)
+      // every picture's alt text, as written or with its slider wording for the PDF (wording.ts)
+      for (const m of page.html.matchAll(/<img\b[^>]*?\balt="([^"]*)"/g)) {
+        const reworded = substitute(m[1], SHARED, 'compare', 'alt', [], { a: '', b: '' })
+        assert.ok(doc.html.includes(`alt="${m[1]}"`) || doc.html.includes(`alt="${reworded}"`), `${slug} ${ed}: picture "${m[1].slice(0, 40)}…"`)
+      }
       assert.equal(doc.figures, page.figures.length)
       // every caption, the About note, the sources
       const plain = (h: string) => h.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ')
       const text = plain(doc.html)
-      for (const m of page.html.matchAll(/<figcaption>([\s\S]*?)<\/figcaption>/g)) assert.ok(text.includes(plain(m[1]).slice(0, 200)), `${slug} ${ed}: a caption`)
+      const reword = (h: string) => doc.substitutions.reduce((t, c) => t.split(c.from).join(c.to), h.replace(/\s+/g, ' '))
+      for (const m of page.html.matchAll(/<figcaption>([\s\S]*?)<\/figcaption>/g)) assert.ok(text.includes(plain(reword(m[1])).slice(0, 200)), `${slug} ${ed}: a caption`)
       assert.match(doc.html, /About this page\./)
       assert.match(doc.html, /<h2 id="sources">Sources<\/h2>/)
       // the title page and the colophon
@@ -113,13 +119,50 @@ test('the pdf: setting shows the PDF line only when set', () => {
   assert.doesNotMatch(no.html, /pdf-links/)
 })
 
+test('the PDF says what a reader can do with paper, and the web page keeps its own words', () => {
+  for (const slug of STORIES) {
+    const { page } = compileForPrint(slug)
+    for (const ed of ['phone', 'large'] as const) {
+      const doc = printDoc(slug, { edition: ed, assets: assetsFor(slug), date: 'x' })
+      assert.deepEqual(doc.dead, [], `${slug} ${ed}: instructions to a screen left in the PDF`)
+      assert.ok(doc.substitutions.length > 0)
+      assert.doesNotMatch(doc.html, /divider|arrow keys|Click any picture|All figures/i)
+    }
+    // the page itself is untouched
+    assert.match(page.html, /left of the divider/)
+  }
+  const rl = printDoc('redlining', { edition: 'phone', assets: assetsFor('redlining'), date: 'x' })
+  assert.ok(rl.html.includes('then (first picture) and today (second picture); the two pictures follow, 1937 first, then today.'))
+  assert.ok(rl.html.includes('Content note: the next paragraph quotes a racial slur from the 1937 form.'))
+  const jw = printDoc('jackson-ward', { edition: 'large', assets: assetsFor('jackson-ward'), date: 'x' })
+  assert.ok(jw.html.includes('The same frame about 1925 (first picture) and in 1952 (second picture). The two pictures follow, about 1925 first, then 1952.'))
+  // a rule's labels come from the slider; a sentence about the lightbox goes whole
+  const changes: Change[] = []
+  assert.equal(substitute('A (left of the divider), B (right). Drag the divider, or move it with the arrow keys.', SHARED, 'compare', 'cap', changes, { a: 'then', b: 'now' }),
+    'A (first picture), B (second picture). The two pictures follow, then first, then now.')
+  assert.equal(changes.length, 3)
+  assert.equal(substitute('Maps. Click any picture to open it large; the arrow keys step. Next.', SHARED, 'all', 'text', []), 'Maps. Next.')
+  // the check finds what no rule covers, and lets names and addresses pass
+  assert.equal(deadInstructions('<p>Drag the map to pan. Tap a dot.</p>').length, 2)
+  assert.deepEqual(deadInstructions('<p>The Richmond Free Press reported it (<a href="https://x.org/press-release">x.org/press-release</a>).</p>'), [])
+  assert.deepEqual(deadInstructions('<p>We slide it here.</p>', ['slide']), [])
+})
+
+test('the print layout never cuts a picture or runs past the page', () => {
+  for (const ed of ['phone', 'large'] as const) {
+    const css = printCss(ed, 'Short', 'https://example.org/p/x.html')
+    assert.doesNotMatch(css, /object-fit:\s*cover/, 'pictures are fitted whole')
+    assert.doesNotMatch(css, /margin[^;{}]*:\s*[^;{}]*-\d/, 'no negative margins: Chrome clips at the page edge, or shrinks the document')
+  }
+})
+
 // ---- the PDF itself (needs Chrome, poppler-utils and Python with pikepdf; skipped without them) --
 
 const has = (cmd: string, args: string[]) => spawnSync(cmd, args, { encoding: 'utf8' }).status === 0
 const chrome = ['google-chrome', 'chromium', 'chromium-browser'].find((c) => has(c, ['--version'])) ?? (process.env.CHROME && has(process.env.CHROME, ['--version']) ? process.env.CHROME : undefined)
-const tools = chrome !== undefined && has('pdftotext', ['-v']) && has('pdfinfo', ['-v']) && has('python3', ['-c', 'import pikepdf, PIL'])
+const tools = chrome !== undefined && has('pdftotext', ['-v']) && has('pdfinfo', ['-v']) && has('python3', ['-c', 'import pikepdf, PIL, pdfplumber'])
 
-test('the redlining PDF quotes the slur once, after its content note, and nowhere else', { skip: tools ? false : 'needs Chrome, poppler-utils and pikepdf' }, () => {
+test('the redlining PDF quotes the slur once, after its content note, and nowhere else', { skip: tools ? false : 'needs Chrome, poppler-utils, pikepdf and pdfplumber' }, () => {
   const word = ['dar', 'kies'].join('')
   const out = mkdtempSync(join(tmpdir(), 'story-pdf-test-'))
   try {

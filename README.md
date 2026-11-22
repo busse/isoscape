@@ -854,8 +854,11 @@ sandbox on, from `file://`, no server, no network); the contents' page numbers c
 printing; pikepdf writes the document facts. Pictures are saved as JPEG (4:4:4; quality 78 at up
 to 1,440 px for the phone, 82 at up to 3,200 px for the large edition), because Chrome would
 store a WebP without compression. It needs Node, Chrome or Chromium (`$CHROME`), Python 3 with
-Pillow and pikepdf, poppler-utils, and `rsvg-convert` for tall SVGs. It refuses a PDF with a
-font outside the allowed list (Inter, Libre Baskerville), a Type 3 font, or no tags.
+Pillow, pikepdf and pdfplumber, poppler-utils, and `rsvg-convert` for tall SVGs. It refuses a
+PDF with a font outside the allowed list (Inter, Libre Baskerville), a Type 3 font, no tags, a
+picture squeezed out of its proportions or running outside the text area (other than the
+halves and pieces it cuts on purpose), body type at any size but the edition's (the sign of a
+document shrunk to fit), or an instruction to a screen that no wording rule covers.
 
 What it does to a page, the same for every story, so a new one needs no layout work:
 
@@ -878,6 +881,20 @@ What it does to a page, the same for every story, so a new one needs no layout w
 - **A paragraph that starts "Content note"** is kept on the same page as the start of the
   paragraph after it (the redlining page relies on this).
 - Road numbers such as I-95 are never broken at the hyphen.
+- **No picture is ever cropped.** Every picture is fitted whole (the title page's too); only the
+  halves and pieces above show part of one, and then the whole is shown too. Nothing may be
+  wider than the page: Chrome would shrink the whole document to fit it.
+- **Wording for the screen.** A few phrases tell a web reader to work something a PDF does not
+  have. The print build, and only the print build, rewords them from a short list in
+  `tools/pdf/wording.ts`: in a compare figure "(left of the divider)" or "(left)" becomes "(first
+  picture)", "(right)" becomes "(second picture)", and "drag the divider, or move it with the
+  arrow keys." becomes "the two pictures follow, <first label> first, then <second label>."; a
+  sentence that starts "Click any picture to open it large" (the lightbox and the figure grid) is
+  dropped. A story can add its own rules, and phrases the check should pass, in
+  `tools/stories/<story>/pdf.json` (`{"substitutions": [...], "allow": [...]}`). The tool prints
+  every change it made, and fails if the page's text or alt text still has a word such as drag,
+  click, tap, hover, press, swipe, scroll, zoom, arrow keys, lightbox, slider, divider or "All
+  figures" that no rule covered.
 
 What a page's author must do: nothing beyond writing the page as the site already asks. These
 make a page print well: give every picture real alt text (the PDF carries it); put pictures in

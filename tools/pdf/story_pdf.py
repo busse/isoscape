@@ -20,9 +20,14 @@ How:
      first printing, and it is printed again until they hold.
   4. pikepdf writes the document facts (title, author, subject, keywords, language) and the
      viewer preferences, and the result is checked: fonts embedded and from the allowed list,
-     tagged, every page the expected size.
+     tagged, every page the expected size, no picture squeezed or running off the text area
+     unless cut on purpose, body type at the edition's size (a document Chrome shrank to fit
+     something too wide would not be).
+  5. The print build rewords the page's few instructions to a screen (tools/pdf/wording.ts and
+     tools/stories/<story>/pdf.json), prints every change, and stops if any such instruction is
+     left that no rule covers.
 
-Needs: Node 22.18+, Google Chrome or Chromium ($CHROME), Python 3 with Pillow and pikepdf, and
+Needs: Node 22.18+, Google Chrome or Chromium ($CHROME), Python 3 with Pillow, pikepdf and pdfplumber, and
 rsvg-convert (librsvg) to look for blank rows in a tall SVG. No network.
 """
 import argparse
@@ -288,6 +293,54 @@ def check(pdf_path: str, edition: str) -> dict:
     return {'pages': pages, 'bytes': os.path.getsize(pdf_path), 'fonts': names, 'problems': problems}
 
 
+def placement_problems(pdf_path: str, edition: str, html: str, assets: dict) -> list:
+    """Pictures that are cut, squeezed or run off the page.
+
+    Every raster picture placed in the PDF must keep its own proportions, and must sit inside the
+    page's text area, except where the print build cuts it on purpose (the halves of a wide
+    picture, the pieces of a tall one: a `<div class="crop">` in the print HTML). So for each
+    picture, the placements that leave the text area may not outnumber its deliberate crops.
+    """
+    import pdfplumber
+    margin = {'phone': (22, 18, 40, 18), 'large': (60, 72, 70, 72)}[edition]
+    t, r, b, l = (m * 0.75 for m in margin)
+    # Pictures are told apart by their pixel size (several share one: they are counted together).
+    size_of = {a['file']: (a['w'], a['h']) for a in assets.values() if not a['file'].endswith('.svg')}
+    names = {}
+    for f, wh in size_of.items():
+        names.setdefault(wh, []).append(f)
+    crops = {}
+    for m in re.finditer(r'<div class="crop"[^>]*><img src="([^"]*)"', html):
+        if m.group(1) in size_of:
+            crops[size_of[m.group(1)]] = crops.get(size_of[m.group(1)], 0) + 1
+    outside, problems = {}, []
+    with pdfplumber.open(pdf_path) as pdf:
+        for n, page in enumerate(pdf.pages, 1):
+            W, H = page.width, page.height
+            for im in page.images:
+                sw, sh = im['srcsize']
+                bw, bh = im['x1'] - im['x0'], im['bottom'] - im['top']
+                key = (sw, sh)
+                f = ' or '.join(names.get(key, [f'{sw}x{sh}']))
+                if bw <= 0 or bh <= 0 or abs((bw / bh) / (sw / sh) - 1) > 0.01:
+                    problems.append(f'page {n}: {f} is squeezed ({bw:.0f} x {bh:.0f} pt for {sw} x {sh} px)')
+                if im['x0'] < l - 1 or im['x1'] > W - r + 1 or im['top'] < t - 1 or im['bottom'] > H - b + 1:
+                    outside[key] = outside.get(key, 0) + 1
+                    if outside[key] > crops.get(key, 0):
+                        problems.append(f'page {n}: {f} runs outside the text area and is not a deliberate crop (cut off)')
+        # Chrome shrinks a whole document to fit anything wider than the page: then every size is
+        # off. The commonest type size must be the edition's body size.
+        sizes = {}
+        for page in pdf.pages[2:]:
+            for ch in page.chars:
+                sizes[round(ch['size'], 1)] = sizes.get(round(ch['size'], 1), 0) + 1
+        body = max(sizes, key=sizes.get) if sizes else 0
+        want = {'phone': 17, 'large': 15.5}[edition] * 0.75
+        if abs(body - want) > 0.15:
+            problems.append(f'body type is {body} pt, not {want} pt: something on a page is wider than the page and Chrome shrank the document')
+    return problems
+
+
 def build(slug: str, edition: str, out_dir: str, date: datetime.date, keep: bool) -> dict:
     src = open(os.path.join(PAGES, f'{slug}.md'), encoding='utf-8').read()
     fm = front_matter(src)
@@ -308,12 +361,18 @@ def build(slug: str, edition: str, out_dir: str, date: datetime.date, keep: bool
             if found == pages:
                 break
             pages = found
+        if doc['dead']:
+            sys.exit(f'story_pdf: pages/{slug}.md has wording that tells the reader to work a screen, with no PDF wording for it.\n'
+                     'Add a rule to SHARED in tools/pdf/wording.ts or to tools/stories/<story>/pdf.json (or an allow entry if it is not an instruction):\n  '
+                     + '\n  '.join(doc['dead']))
         missing = [i for i in ids if not (pages or {}).get(i)]
         if missing:
             print(f'story_pdf: no page found for {missing}', file=sys.stderr)
         finish(tmp, doc, slug, edition, date.isoformat() + 'T12:00:00', fm.get('summary') or fm.get('deck') or doc['title'])
         shutil.move(tmp, out)
         result = check(out, edition)
+        result['problems'] += placement_problems(out, edition, open(os.path.join(work, 'page.html'), encoding='utf-8').read(), assets)
+        result['substitutions'] = doc['substitutions']
         result['file'] = out
         result['figures'] = doc['figures']
         result['compares'] = doc['compares']
@@ -339,6 +398,8 @@ def main() -> None:
     failed = False
     for ed in (['phone', 'large'] if a.edition == 'both' else [a.edition]):
         r = build(a.slug, ed, os.path.abspath(a.out), date, a.keep)
+        for c in r['substitutions']:
+            print(f"  wording: pages/{a.slug}.md, {c['where']}: \"{c['from']}\" -> \"{c['to']}\"")
         print(f"{r['file']}: {r['pages']} pages, {r['bytes'] / 1e6:.1f} MB, {r['figures']} figures ({r['compares']} compare), fonts {', '.join(r['fonts'])}")
         for p in r['problems']:
             print(f'  problem: {p}')

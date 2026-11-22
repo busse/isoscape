@@ -3358,7 +3358,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "Built on story-pdf (tools/pdf/story_pdf.py). To check: the four PDFs for Jackson Ward and Redlining (phone and large-screen) and the local preview with the PDF links on. Not live: pdf: true is not set in either story's story.md, and no PDF is published. Approval turns it on: set pdf: true, rebuild both pages and PDFs, publish.",
+   "decision": "The owner approved publishing both stories' PDFs with the Read this as a PDF line, after two fixes, now made on story-pdf: pictures are never cropped (title pages included), and the print build rewords instructions to a screen (wording.ts; every change listed by the tool). Publishing is for the planning session: merge, set pdf: true in both story.md files, rerun page.py, build the PDFs into the site's p/, rebuild the explorer, push gh-pages.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3366,7 +3366,8 @@
    "worktree": "/home/claude/wt-pdf",
    "links": [],
    "log": [
-    "2026-11-22: rough draft -> owner test"
+    "2026-11-22: in work -> owner test",
+    "2026-11-22: owner approved publishing after two fixes (no cropped pictures; PDF wording for screen instructions); fixes made, back at owner test"
    ]
   }
  }

@@ -20,6 +20,10 @@
  *   Tall pictures (a timeline) are cut into page-high pieces at blank rows, in either edition.
  * - On the phone a table of three or more columns becomes a stack of rows.
  * - A paragraph that starts "Content note" is kept with the paragraph after it.
+ * - The few phrases that tell a web reader to work a screen (drag the divider, click a picture)
+ *   are reworded for paper by the rules in wording.ts; every change is reported, and any such
+ *   phrase left without a rule is reported as `dead` (story_pdf.py fails on it).
+ * - No picture is cropped: each is fitted whole, and nothing is wider than the page.
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'
@@ -28,6 +32,7 @@ import { fileURLToPath } from 'node:url'
 import { THEME_CSS } from '../../src/explorer.ts'
 import { escapeHtml } from '../../src/markdown.ts'
 import { compilePage, PAGES_DIR, type Page } from '../../src/pages.ts'
+import { deadInstructions, SHARED, substitute, type Change, type Substitution } from './wording.ts'
 
 export const AUTHOR = 'Chris Busse'
 export const SITE_URL = 'https://busse.github.io/isoscape/'
@@ -198,7 +203,7 @@ const captionHeight = (cap: string, ed: Edition, wide: boolean): number => {
 const IMG = /<img\b[^>]*?\bsrc="([^"]*)"[^>]*?\balt="([^"]*)"[^>]*>/
 
 /** Every figure of the compiled page, laid out for the edition. */
-export const printFigures = (html: string, ed: Edition, assets: PrintOptions['assets'], seen = new Set<string>()): string =>
+export const printFigures = (html: string, ed: Edition, assets: PrintOptions['assets'], seen = new Set<string>(), rules: readonly Substitution[] = SHARED, changes: Change[] = []): string =>
   html.replace(/<figure class="([^"]*)" id="([^"]*)">\n([\s\S]*?)\n<figcaption>([\s\S]*?)<\/figcaption>\n<\/figure>/g, (_m, cls: string, id: string, body: string, cap: string) => {
     // On Letter there is room: in the large edition every landscape photo-like picture (not an
     // SVG diagram) spans the full measure, as the page's own `wide` figures do.
@@ -210,8 +215,11 @@ export const printFigures = (html: string, ed: Edition, assets: PrintOptions['as
     let height: number
     const cmp = body.match(/^<div class="cmp" data-a="([^"]*)" data-b="([^"]*)"/)
     if (cmp !== null) {
+      // The slider's instructions, in its caption and its pictures' alt text, become the PDF's (wording.ts).
+      const labels = { a: unesc(cmp[1]), b: unesc(cmp[2]) }
+      cap = substitute(cap, rules, 'compare', `${label} caption`, changes, labels)
       const imgs = [...body.matchAll(new RegExp(IMG.source, 'g'))].slice(0, 2)
-      const done = imgs.map((m) => picture({ name: m[1], alt: unesc(m[2]) }, wide, ed, assets, seen, label))
+      const done = imgs.map((m, i) => picture({ name: m[1], alt: unesc(substitute(m[2], rules, 'compare', `${label} alt text, picture ${i + 1}`, changes, labels)) }, wide, ed, assets, seen, label))
       pics = done.map((d, i) => `<div class="side"><p class="side-label">${esc(capital(unesc(i === 0 ? cmp[1] : cmp[2])))}</p>\n${d.html}</div>`).join('\n')
       height = done.reduce((t, d) => t + d.height + 30, 0)
     } else {
@@ -263,6 +271,10 @@ export interface PrintDoc {
   readonly sections: readonly { readonly id: string; readonly text: string }[]
   /** Every heading's text, in order (for the PDF's outline). */
   readonly headings: readonly string[]
+  /** Every change of wording the print build made (wording.ts). */
+  readonly substitutions: readonly Change[]
+  /** Likely instructions to a screen left after the substitutions: the build must fail on any. */
+  readonly dead: readonly string[]
   readonly figures: number
   readonly compares: number
 }
@@ -273,6 +285,26 @@ const coverPicture = (src: string, html: string): string | undefined => {
   const fig = html.match(/<figure class="[^"]*" id="[^"]*">\n(?:<a [^>]*>)?<img src="([^"]*)"/)
   if (fig !== null && (fig.index ?? 0) < first) return fig[1]
   return src.match(/^social:\s*(\S+)\s*$/m)?.[1]
+}
+
+/** An address as shown: no scheme, breakable after each slash, the file name never split at its hyphen. */
+const shownUrl = (url: string): string => {
+  const parts = url.replace(/^https:\/\//, '').split('/')
+  const last = parts.pop() ?? ''
+  return parts.map((p) => esc(p) + '/<wbr>').join('') + `<span class="nobr">${esc(last)}</span>`
+}
+
+const STORIES_DIR = fileURLToPath(new URL('../stories/', import.meta.url))
+
+/** A story's own PDF wording (`tools/stories/<slug>/pdf.json`), if it has any. */
+export const storyWording = (slug: string): { substitutions: Substitution[]; allow: string[] } => {
+  try {
+    const j = JSON.parse(readFileSync(join(STORIES_DIR, slug, 'pdf.json'), 'utf8')) as { substitutions?: Substitution[]; allow?: string[] }
+    return { substitutions: j.substitutions ?? [], allow: j.allow ?? [] }
+  } catch (e) {
+    if ((e as { code?: string }).code === 'ENOENT') return { substitutions: [], allow: [] }
+    throw e
+  }
 }
 
 export const printDoc = (slug: string, opts: PrintOptions, dir = PAGES_DIR): PrintDoc => {
@@ -288,7 +320,12 @@ export const printDoc = (slug: string, opts: PrintOptions, dir = PAGES_DIR): Pri
   if (deck !== null) body = body.slice(deck[0].length)
   // The lightbox's links around pictures go; the pictures stay.
   body = body.replace(/<a class="fig-open"[^>]*>(<img [^>]*>)<\/a>/g, '$1')
-  body = printFigures(body, ed, opts.assets)
+  const own = storyWording(slug)
+  const rules = [...SHARED, ...own.substitutions]
+  const changes: Change[] = []
+  body = printFigures(body, ed, opts.assets, new Set(), rules, changes)
+  body = substitute(body, rules, 'all', 'text', changes)
+  const dead = deadInstructions(body, own.allow)
   if (ed === 'phone') body = stackTables(body)
   // A road number (I-95) is not broken at its hyphen.
   body = body.replace(/>([^<]+)</g, (_m, t: string) => '>' + t.replace(/\b([A-Z]{1,3}-\d{1,3})\b/g, '<span class="nobr">$1</span>') + '<')
@@ -321,7 +358,7 @@ ${deck === null ? '' : `<p class="deck">${deck[1]}</p>`}
 ${coverAsset === undefined ? '' : `<div class="cover-pic"><img src="${attr(coverAsset.file)}" alt="" width="${coverAsset.w}" height="${coverAsset.h}"></div>`}
 <p class="byline">${AUTHOR}</p>
 <p class="edition">${edLabel}, ${esc(opts.date)}</p>
-<p class="live">The current version, with any later corrections, is at <a href="${attr(url)}" class="nobr">${esc(url.replace(/^https:\/\//, ''))}</a></p>
+<p class="live">The current version, with any later corrections, is at <a href="${attr(url)}">${shownUrl(url)}</a></p>
 </section>
 <nav class="contents" aria-labelledby="contents">
 <h2 id="contents" class="contents-h">Contents</h2>
@@ -335,7 +372,7 @@ ${body}
 <section class="colophon">
 <h2 id="about-this-pdf">About this PDF</h2>
 <p>Made from the web page with isoscape's PDF tool, drafted with Claude. ${edLabel}, ${esc(opts.date)}, from the page as it stood that day; the page's own note on how it was made is above, unchanged.</p>
-<p>The current version, with any later corrections, is at <a href="${attr(url)}" class="nobr">${esc(url.replace(/^https:\/\//, ''))}</a></p>
+<p>The current version, with any later corrections, is at <a href="${attr(url)}">${shownUrl(url)}</a></p>
 </section>
 </main>
 </body>
@@ -346,6 +383,8 @@ ${body}
     title: page.title,
     short,
     sections: [...sections, { id: 'about-this-pdf', text: 'About this PDF' }],
+    substitutions: changes,
+    dead,
     headings: [...html.matchAll(/<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/g)].map((m) => textOf(m[1]).replace(/\s+/g, ' ')),
     figures: page.figures.length,
     compares: page.figures.filter((f) => f.compare).length,
@@ -389,14 +428,14 @@ code { font: .92em "Inter PDF", sans-serif; background: var(--chip); padding: 0 
 
 /* Title page */
 .cover { break-after: page; break-inside: avoid; }
-.cover h1 { font-size: ${phone ? 25 : 34}px; line-height: 1.15; letter-spacing: -.02em; font-weight: 700; margin: ${phone ? 6 : 40}px 0 ${phone ? 12 : 18}px; }
-.cover .deck { font-size: ${phone ? 15 : 17}px; line-height: 1.45; color: var(--dim); margin: 0 0 ${phone ? 14 : 24}px; ${phone ? '' : 'max-width: 36em;'} }
-.cover .cover-pic { margin: 0 ${phone ? -mr : 0}px ${phone ? 14 : 28}px ${phone ? -ml : 0}px; }
-.cover .cover-pic img { display: block; max-width: 100%; max-height: ${phone ? 150 : 400}px; width: auto; height: auto; margin: 0 auto; }
-.cover .byline { font-size: 18px; font-weight: 600; margin: ${phone ? 0 : 40}px 0 4px; }
-.cover .edition { margin: 0 0 6px; color: var(--dim); font-size: ${small}px; }
+.cover h1 { font-size: ${phone ? 23 : 34}px; line-height: 1.15; letter-spacing: -.02em; font-weight: 700; margin: ${phone ? 0 : 40}px 0 ${phone ? 10 : 18}px; }
+.cover .deck { font-size: ${phone ? 15 : 17}px; line-height: 1.4; color: var(--dim); margin: 0 0 ${phone ? 10 : 24}px; ${phone ? '' : 'max-width: 36em;'} }
+.cover .cover-pic { margin: 0 0 ${phone ? 10 : 28}px; }
+.cover .cover-pic img { display: block; max-width: 100%; object-fit: contain; max-height: ${phone ? 140 : 400}px; width: auto; height: auto; margin: 0 auto; }
+.cover .byline { font-size: ${phone ? 17 : 18}px; font-weight: 600; margin: ${phone ? 0 : 40}px 0 2px; }
+.cover .edition { margin: 0 0 ${phone ? 2 : 6}px; color: var(--dim); font-size: ${small}px; }
 .cover .live { margin: 0; font-size: ${small}px; color: var(--dim); overflow-wrap: anywhere; }
-.cover .live a { display: inline-block; padding: ${phone ? '6px 0' : '0'}; }
+.cover .live a { display: inline-block; padding: ${phone ? '4px 0' : '0'}; }
 
 /* Contents */
 .contents { break-after: page; }
@@ -485,5 +524,5 @@ if (process.argv[1] !== undefined && fileURLToPath(import.meta.url) === process.
     date: arg('--date') ?? new Date().toLocaleDateString('en-US', { dateStyle: 'long' }),
   }, arg('--pages-dir') ?? PAGES_DIR)
   writeFileSync(out, doc.html)
-  process.stdout.write(JSON.stringify({ title: doc.title, short: doc.short, sections: doc.sections, headings: doc.headings, figures: doc.figures, compares: doc.compares }) + '\n')
+  process.stdout.write(JSON.stringify({ title: doc.title, short: doc.short, sections: doc.sections, headings: doc.headings, substitutions: doc.substitutions, dead: doc.dead, figures: doc.figures, compares: doc.compares }) + '\n')
 }
