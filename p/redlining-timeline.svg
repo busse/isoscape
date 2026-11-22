@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 1786" width="400" height="1786" role="img" aria-labelledby="rl-tl-t rl-tl-d">
+<title id="rl-tl-t">Richmond, 1871 to 1977: the city's own ordinances, the HOLC's map, and what was built and cleared later</title>
+<desc id="rl-tl-d">1871: The city's wards are redrawn to create a single Black-majority ward, Jackson Ward. (Library of Virginia, Mapping Inequality timeline) 1888: Electric streetcars open suburbs, most of them kept white by deeds and covenants. (Library of Virginia) April 1911: City Council passes a residential segregation ordinance. In 1912 the General Assembly lets every Virginia city do the same. (Library of Virginia; Encyclopedia Virginia) 1917: In Buchanan v. Warley the Supreme Court strikes down segregation ordinances. (Library of Virginia) 1924 or 1929: Richmond passes a new ordinance tied to the state's Racial Integrity Act. A federal appeals court strikes it down in 1929. (Encyclopedia Virginia gives 1924; the Library of Virginia gives 1929) 1933: Congress creates the Home Owners' Loan Corporation (HOLC) to refinance the mortgages of home owners in distress. (Home Owners' Loan Act, June 13, 1933 (Harriss, 1951); Federal Reserve Bank of Chicago, 2022) April 3, 1937: The HOLC's map of Richmond grades its residential areas A to D. (National Archives, RG 195, via FRASER) 1943: The Richmond Housing Authority dedicates Gilpin Court, public housing, on cleared Apostle Town land in D1. (Library of Virginia, Craig, 2025; Encyclopedia Virginia) 1946: Harland Bartholomew's master plan calls the older, largely Black neighborhoods downtown "slums". (Encyclopedia Virginia) 1948: In Shelley v. Kraemer the Supreme Court makes racial covenants unenforceable. (Library of Virginia) July 1, 1958: The Richmond–Petersburg Turnpike Authority's toll road, now I-95 and I-64, opens through D1. By 1957 the Richmond Times-Dispatch estimated about 1,900 Black families displaced. (VCU Libraries; Encyclopedia Virginia, citing the Richmond Times-Dispatch) 1962: Mosby Court, public housing, opens in D5. Many of the 1,300 people the City's 17th Street Urban Renewal Project displaced move there. (Encyclopedia Virginia) 1967–1970: A study sponsored by the Richmond Redevelopment and Housing Authority (RRHA) labels Fulton (D7) a "slum"; the 1970 plan would displace about 785 households. (Encyclopedia Virginia) 1970: Richmond annexes 23 square miles of Chesterfield County. Public housing, 464 scattered-site units, is built in Blackwell (D11.5). (Library of Virginia; Richmond Magazine, 2018) 1973: HUD approves the Randolph project (D8), about 1,800 to be displaced, for what Encyclopedia Virginia calls "slum clearance" and the Downtown Expressway. (Encyclopedia Virginia)</desc>
+<style>
+text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif}
+.d{font:700 15px 'Libre Baskerville', Baskerville, Georgia, serif}
+.b{font-size:13.5px}
+.s{font-size:11.5px;font-style:italic}
+.h{font:600 12px ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif;letter-spacing:.08em}
+.bg{fill:#f4f1ea}.ink{fill:#2c2b33}.dim{fill:#6e6656}.acc{fill:#8f2a22}.edge{fill:none;stroke:#2c2b33;stroke-width:1.2}.card{fill:#faf7ef;stroke:#2c2b33;stroke-width:1.2}.mark{fill:#f4f1ea;stroke:#2c2b33;stroke-width:1.2}.mark.solid{fill:#2c2b33}.mark.dash{stroke-dasharray:2.6 1.7}
+@media (prefers-color-scheme: dark){.bg{fill:#14161d}.ink{fill:#c9d1e6}.dim{fill:#8a90a2}.acc{fill:#f07a5f}.edge{fill:none;stroke:#c9d1e6;stroke-width:1.2}.card{fill:#1d2029;stroke:#c9d1e6;stroke-width:1.2}.mark{fill:#14161d;stroke:#c9d1e6;stroke-width:1.2}.mark.solid{fill:#c9d1e6}.mark.dash{stroke-dasharray:2.6 1.7}}
+</style>
+<rect width="400" height="1786" class="bg"/>
+<path d="M34 69L34 1680" class="edge"/>
+<text x="16" y="30" class="h ink">RICHMOND, 1871 TO 1977:</text>
+<text x="16" y="48" class="h ink">ITS LAWS, THE 1937 MAP, WHAT WAS BUILT</text>
+<circle cx="34" cy="69" r="5.2" class="mark solid"/>
+<text x="54" y="74" class="d ink">1871</text>
+<text x="54" y="94" class="b ink">The city's wards are redrawn to create a single</text>
+<text x="54" y="112" class="b ink">Black-majority ward, Jackson Ward.</text>
+<text x="54" y="130" class="s dim">Library of Virginia, Mapping Inequality timeline</text>
+<circle cx="34" cy="157" r="5.2" class="mark solid"/>
+<text x="54" y="162" class="d ink">1888</text>
+<text x="54" y="182" class="b ink">Electric streetcars open suburbs, most of them</text>
+<text x="54" y="200" class="b ink">kept white by deeds and covenants.</text>
+<text x="54" y="218" class="s dim">Library of Virginia</text>
+<circle cx="34" cy="245" r="5.2" class="mark solid"/>
+<text x="54" y="250" class="d ink">April 1911</text>
+<text x="54" y="270" class="b ink">City Council passes a residential segregation</text>
+<text x="54" y="288" class="b ink">ordinance. In 1912 the General Assembly lets</text>
+<text x="54" y="306" class="b ink">every Virginia city do the same.</text>
+<text x="54" y="324" class="s dim">Library of Virginia; Encyclopedia Virginia</text>
+<circle cx="34" cy="351" r="5.2" class="mark solid"/>
+<text x="54" y="356" class="d ink">1917</text>
+<text x="54" y="376" class="b ink">In Buchanan v. Warley the Supreme Court strikes</text>
+<text x="54" y="394" class="b ink">down segregation ordinances.</text>
+<text x="54" y="412" class="s dim">Library of Virginia</text>
+<circle cx="34" cy="439" r="5.2" class="mark"/>
+<text x="54" y="444" class="d ink">1924 or 1929</text>
+<text x="54" y="464" class="b ink">Richmond passes a new ordinance tied to the</text>
+<text x="54" y="482" class="b ink">state's Racial Integrity Act. A federal appeals</text>
+<text x="54" y="500" class="b ink">court strikes it down in 1929.</text>
+<text x="54" y="518" class="s dim">Encyclopedia Virginia gives 1924; the Library of</text>
+<text x="54" y="534" class="s dim">Virginia gives 1929</text>
+<circle cx="34" cy="561" r="5.2" class="mark solid"/>
+<text x="54" y="566" class="d ink">1933</text>
+<text x="54" y="586" class="b ink">Congress creates the Home Owners' Loan</text>
+<text x="54" y="604" class="b ink">Corporation (HOLC) to refinance the mortgages</text>
+<text x="54" y="622" class="b ink">of home owners in distress.</text>
+<text x="54" y="640" class="s dim">Home Owners' Loan Act, June 13, 1933 (Harriss,</text>
+<text x="54" y="656" class="s dim">1951); Federal Reserve Bank of Chicago, 2022</text>
+<circle cx="34" cy="683" r="5.2" class="mark solid"/>
+<text x="54" y="688" class="d ink">April 3, 1937</text>
+<text x="54" y="708" class="b ink">The HOLC's map of Richmond grades its</text>
+<text x="54" y="726" class="b ink">residential areas A to D.</text>
+<text x="54" y="744" class="s dim">National Archives, RG 195, via FRASER</text>
+<circle cx="34" cy="771" r="5.2" class="mark solid"/>
+<text x="54" y="776" class="d ink">1943</text>
+<text x="54" y="796" class="b ink">The Richmond Housing Authority dedicates Gilpin</text>
+<text x="54" y="814" class="b ink">Court, public housing, on cleared Apostle Town</text>
+<text x="54" y="832" class="b ink">land in D1.</text>
+<text x="54" y="850" class="s dim">Library of Virginia, Craig, 2025; Encyclopedia</text>
+<text x="54" y="866" class="s dim">Virginia</text>
+<circle cx="34" cy="893" r="5.2" class="mark solid"/>
+<text x="54" y="898" class="d ink">1946</text>
+<text x="54" y="918" class="b ink">Harland Bartholomew's master plan calls the</text>
+<text x="54" y="936" class="b ink">older, largely Black neighborhoods downtown</text>
+<text x="54" y="954" class="b ink">"slums".</text>
+<text x="54" y="972" class="s dim">Encyclopedia Virginia</text>
+<circle cx="34" cy="999" r="5.2" class="mark solid"/>
+<text x="54" y="1004" class="d ink">1948</text>
+<text x="54" y="1024" class="b ink">In Shelley v. Kraemer the Supreme Court makes</text>
+<text x="54" y="1042" class="b ink">racial covenants unenforceable.</text>
+<text x="54" y="1060" class="s dim">Library of Virginia</text>
+<circle cx="34" cy="1087" r="5.2" class="mark solid"/>
+<text x="54" y="1092" class="d ink">July 1, 1958</text>
+<text x="54" y="1112" class="b ink">The Richmond–Petersburg Turnpike Authority's</text>
+<text x="54" y="1130" class="b ink">toll road, now I-95 and I-64, opens through D1.</text>
+<text x="54" y="1148" class="b ink">By 1957 the Richmond Times-Dispatch estimated</text>
+<text x="54" y="1166" class="b ink">about 1,900 Black families displaced.</text>
+<text x="54" y="1184" class="s dim">VCU Libraries; Encyclopedia Virginia, citing the</text>
+<text x="54" y="1200" class="s dim">Richmond Times-Dispatch</text>
+<circle cx="34" cy="1227" r="5.2" class="mark solid"/>
+<text x="54" y="1232" class="d ink">1962</text>
+<text x="54" y="1252" class="b ink">Mosby Court, public housing, opens in D5. Many</text>
+<text x="54" y="1270" class="b ink">of the 1,300 people the City's 17th Street</text>
+<text x="54" y="1288" class="b ink">Urban Renewal Project displaced move there.</text>
+<text x="54" y="1306" class="s dim">Encyclopedia Virginia</text>
+<circle cx="34" cy="1333" r="5.2" class="mark solid"/>
+<text x="54" y="1338" class="d ink">1967–1970</text>
+<text x="54" y="1358" class="b ink">A study sponsored by the Richmond Redevelopment</text>
+<text x="54" y="1376" class="b ink">and Housing Authority (RRHA) labels Fulton (D7)</text>
+<text x="54" y="1394" class="b ink">a "slum"; the 1970 plan would displace about</text>
+<text x="54" y="1412" class="b ink">785 households.</text>
+<text x="54" y="1430" class="s dim">Encyclopedia Virginia</text>
+<circle cx="34" cy="1457" r="5.2" class="mark solid"/>
+<text x="54" y="1462" class="d ink">1970</text>
+<text x="54" y="1482" class="b ink">Richmond annexes 23 square miles of</text>
+<text x="54" y="1500" class="b ink">Chesterfield County. Public housing, 464</text>
+<text x="54" y="1518" class="b ink">scattered-site units, is built in Blackwell</text>
+<text x="54" y="1536" class="b ink">(D11.5).</text>
+<text x="54" y="1554" class="s dim">Library of Virginia; Richmond Magazine, 2018</text>
+<circle cx="34" cy="1581" r="5.2" class="mark solid"/>
+<text x="54" y="1586" class="d ink">1973</text>
+<text x="54" y="1606" class="b ink">HUD approves the Randolph project (D8), about</text>
+<text x="54" y="1624" class="b ink">1,800 to be displaced, for what Encyclopedia</text>
+<text x="54" y="1642" class="b ink">Virginia calls "slum clearance" and the</text>
+<text x="54" y="1660" class="b ink">Downtown Expressway.</text>
+<text x="54" y="1678" class="s dim">Encyclopedia Virginia</text>
+<path d="M16 1700L384 1700" class="edge" style="stroke-width:0.72"/>
+<circle cx="34" cy="1714" r="4.6" class="mark solid"/><text x="54" y="1718.5" class="b ink">sources opened for this story agree</text>
+<circle cx="34" cy="1736" r="4.6" class="mark"/><text x="54" y="1740.5" class="b ink">opened sources disagree (named)</text>
+<circle cx="34" cy="1758" r="4.6" class="mark dash"/><text x="54" y="1762.5" class="b ink">not confirmed by an opened source</text>
+<circle cx="34" cy="1680" r="2.9" class="ink"/>
+</svg>
