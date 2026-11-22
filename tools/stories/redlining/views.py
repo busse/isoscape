@@ -252,7 +252,11 @@ def main():
             how = {('A5', '1937'): ' Buildings: those standing today that the city dates to 1937 or before.',
                    ('D1', '1937'): ' Buildings: those standing today that the city dates to 1937 or before, and in Jackson Ward those on the 1925 and 1952 Sanborn maps; most others then standing are gone and not drawn.'}.get((label, year), " Today's buildings and streets; limited-access highways in black.")
             im = raster(svg, box, 3200, tmp)
-            args = (f'{label}, {title}, {when}: an area the HOLC graded {grade}', f'About {ground / 1000:.1f} km of ground across, looking north.' + how)
+            # One band for both years: the slider shows one picture's left and the other's right,
+            # so a band that differed would read as one broken line.
+            how = {'A5': ' 1937: buildings standing today that the city dates to 1937 or before. Today: OpenStreetMap; limited-access highways in black.',
+                   'D1': ' 1937: buildings standing today that the city dates to 1937 or before, and those on the 1925 and 1952 Sanborn maps; most others then standing are gone and not drawn. Today: OpenStreetMap; highways in black.'}[label]
+            args = (f'{label}, {title}, in 1937 and today: an area the HOLC graded {grade}', f'About {ground / 1000:.1f} km of ground across, looking north.' + how)
             made[year] = (im, args, keyed(im, *args))
         # The two years open in one compare slider, so their pictures must sit at the same height:
         # the shorter band gets the difference.
@@ -269,6 +273,15 @@ def main():
             im = raster(b, clamp(box, union), 2400, tmp)
             save(keyed(im, f'{label}, {NAMES[label]}: graded D in 1937, seen today',
                        f'About {ground / 1000:.1f} km of ground across, looking north. Interstates and the Downtown Expressway in black.'), name, a.full)
+    # The twelve together, four by three, as one figure the page shows as a grid.
+    if want('d-grid') or want('d-all'):
+        cells = [Image.open(os.path.join(ROOT, 'pages', f'redlining-d-{slug(l)}.webp')).convert('RGB') for l in D_AREAS]
+        cw, gap = 1600, 30
+        ch = max(round(c.height * cw / c.width) for c in cells)
+        grid = Image.new('RGB', (4 * cw + 3 * gap, 3 * ch + 2 * gap), P['sky'])
+        for i, c in enumerate(cells):
+            grid.paste(c.resize((cw, round(c.height * cw / c.width)), Image.LANCZOS), ((i % 4) * (cw + gap), (i // 4) * (ch + gap)))
+        save(grid, 'd-grid', a.full)
     if os.path.exists(tmp):
         os.remove(tmp)
 

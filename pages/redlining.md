@@ -278,8 +278,17 @@ in code from the dates in `timeline.ts`, each with its source.
 The HOLC graded twelve Richmond areas D. Each figure below shows one of them today, with the 1937
 grades under it, and says what the 1937 form recorded (paraphrased) and what stands on that
 ground now. The forms leave the name field blank, so the names are this page's, placed from the
-streets and landmarks inside each outline. Click any picture to open it large; in the large view
-the arrow keys step from one area to the next, and **All figures** shows them as a grid.
+streets and landmarks inside each outline. The first figure shows all twelve together; click any
+picture to open it large, where the arrow keys step from one area to the next.
+
+::: figure wide
+![The twelve D areas in a grid of four columns and three rows, D1 to D11.5, each a close view of the area today with the 1937 grades tinted under it, its number and name above it](redlining-d-grid.webp)
+
+The twelve areas the Home Owners' Loan Corporation (HOLC) graded D, "Hazardous", in 1937, each
+seen today, in a grid from D1 at top left to D11.5 at bottom right. Each panel carries its own
+key; each is shown large, with its notes, in the figures that follow. *How this was made:* as the
+figures below, composed in code. Working draft.
+:::
 
 ::: figure
 ![D1, Jackson Ward, Apostle Town and Navy Hill, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d1.webp)
@@ -544,8 +553,8 @@ Opened while drafting, on the date given.
 - **Fishback et al. 2022**: Price V. Fishback, Jonathan Rose, Kenneth A. Snowden and Thomas
   Storrs, "New Evidence on Redlining by Federal Housing Programs in the 1930s", NBER Working
   Paper 29244, September 2021, https://www.nber.org/papers/w29244, published in the *Journal of
-  Urban Economics*, 2022, https://doi.org/10.1016/j.jue.2022.103462; abstract opened November 22,
-  2026.
+  Urban Economics*, 2022, https://doi.org/10.1016/j.jue.2022.103462; abstract opened on
+  November 22, 2026.
 - **LVA timeline**: Library of Virginia, "Mapping Inequality timeline",
   https://www.lva.virginia.gov/events/exhibitions/online/oe/exhibits/show/mapping-inequality/mapping-inequality-timeline
   (opened November 22, 2026).
