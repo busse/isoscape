@@ -1,0 +1,222 @@
+{
+ "design": "byrd-1928-cutaway",
+ "title": "The Byrd Theatre, Christmas Eve 1928: Cutaway",
+ "version": 1,
+ "asset_version": "1.0.0",
+ "version_note": null,
+ "recorded": "2026-11-22T13:45:44+00:00",
+ "provenance": "recorded at release",
+ "isoscape": {
+  "commit": "a7ed2fe5cf8746389bcac389f6891ceda3d25521",
+  "subject": "Board: the Byrd cutaway rc1 inspected, waiting on release approval",
+  "dirty": false
+ },
+ "kind": "cutaway",
+ "recipe": {
+  "tool": "tools/cutaway/sheet.py",
+  "run": [
+   "python3 tools/cutaway/sheet.py cutaways/byrd-1928.json --print   # where data/ is cached; out/cutaways/print/",
+   "python3 tools/release/remake.py byrd-1928-cutaway && python3 tools/cutaway/sheet.py cutaways/byrd-1928.json --no-build --print   # from the frozen scenes"
+  ],
+  "block": {
+   "collection": "Buildings in their time",
+   "set": "The Byrd Theatre, 1928",
+   "piece": "Cutaway",
+   "plate": "BYRD-01",
+   "version": "1",
+   "drawn": "2026",
+   "location": "37.552° N 77.478° W",
+   "facing": "328°",
+   "kind": "Building cutaway"
+  },
+  "files": {
+   "byrd-1928-cutaway_32x24.jpg": {
+    "size": [
+     9600,
+     7200
+    ],
+    "quality": 94,
+    "bytes": 8327873,
+    "sha256": "30b4896f7bb62e3894be62087bc7ff2a307ef181a0f62dccfa0e6a935c48c731",
+    "at": {
+     "x": 7677,
+     "y": 6642,
+     "w": 1593,
+     "h": 226,
+     "u": 1.2257,
+     "where": "foot"
+    }
+   },
+   "byrd-1928-cutaway_24x18.jpg": {
+    "size": [
+     7200,
+     5400
+    ],
+    "quality": 94,
+    "bytes": 5718903,
+    "sha256": "775248b084745d775909ae52d1adebca2db620864a95d51250e100ca29d8ece4",
+    "at": {
+     "x": 5574,
+     "y": 4958,
+     "w": 1380,
+     "h": 195,
+     "u": 1.0614,
+     "where": "foot"
+    }
+   }
+  },
+  "tools_at_printing": {
+   "tools/cutaway/sheet.py": "c7fb4bc8f417118db36aa97138767746092a0d09b42601275d32a28122a9970b",
+   "tools/print/titleblock.py": "bd2362c53e0a73a2d9ed9825ed4513e697f1a2094256b39a9a8ef5c79425d8a6",
+   "tools/release/stamp.py": "a71068c515fe9f22382f53275c87f264db4a3dd004f9e35604e7b52bee4dcb88",
+   "catalog/plates.json": "24ba8ae7d4f5bbc58509b44a451ac39aa3a4175668be44dfbe4fff620e73fe50"
+  },
+  "copied": "out/cutaways/print/<file> is copied unchanged to the store's print_dir"
+ },
+ "scenes": [
+  {
+   "region": "byrd-theatre-cutaway",
+   "year": 1928,
+   "flags": [],
+   "svg": "out/cutaways/build/byrd-theatre-cutaway-1928.svg",
+   "sha256": "bc5bed267037b3b560f65cf9527ea070d9a7e698c32ce2e2d1b0d28b73dd024c",
+   "frozen": "data/_releases/scenes/bc5bed267037b3b560f65cf9527ea070d9a7e698c32ce2e2d1b0d28b73dd024c.svg",
+   "reproduces": true
+  },
+  {
+   "region": "byrd-theatre-cutaway",
+   "year": 1928,
+   "flags": [],
+   "svg": "out/cutaways/build/byrd-theatre-cutaway-1928-section.svg",
+   "sha256": "9e9a33dffe7b6bbf30c744125bd1ba7b6fcc534473d22f2e159aab7032a293a5",
+   "frozen": "data/_releases/scenes/9e9a33dffe7b6bbf30c744125bd1ba7b6fcc534473d22f2e159aab7032a293a5.svg",
+   "output": "-section",
+   "reproduces": true
+  },
+  {
+   "region": "byrd-theatre-cutaway-stage",
+   "year": 1928,
+   "flags": [],
+   "svg": "out/cutaways/build/byrd-theatre-cutaway-stage-1928-section.svg",
+   "sha256": "4dfd1dda9f31367f4df8fe2705d36e3daff83b568b06ac49b7bc92e3ff127b3f",
+   "frozen": "data/_releases/scenes/4dfd1dda9f31367f4df8fe2705d36e3daff83b568b06ac49b7bc92e3ff127b3f.svg",
+   "output": "-section",
+   "reproduces": true
+  },
+  {
+   "region": null,
+   "year": null,
+   "flags": [],
+   "svg": "out/cutaways/byrd-1928-sheet.svg",
+   "sha256": "6a198a37b245f3ba8331f76aca119f426440eeb47b15ff0d4ffffb287a04b91f",
+   "frozen": "data/_releases/scenes/6a198a37b245f3ba8331f76aca119f426440eeb47b15ff0d4ffffb287a04b91f.svg"
+  }
+ ],
+ "inputs": {
+  "cutaways/byrd-1928.json": "74c4176e08fbc9a94269a146eb5627474d3fef9d9746e0db2b4690dccff151b6",
+  "tools/cutaway/sheet.py": "c7fb4bc8f417118db36aa97138767746092a0d09b42601275d32a28122a9970b",
+  "tools/print/titleblock.py": "bd2362c53e0a73a2d9ed9825ed4513e697f1a2094256b39a9a8ef5c79425d8a6",
+  "tools/release/stamp.py": "a71068c515fe9f22382f53275c87f264db4a3dd004f9e35604e7b52bee4dcb88",
+  "catalog/plates.json": "24ba8ae7d4f5bbc58509b44a451ac39aa3a4175668be44dfbe4fff620e73fe50",
+  "regions/byrd-theatre-cutaway.json": "46cb7d05f85a2e4d578b02b31a8258948279b7e44917eb28ef4231c2695d8110",
+  "history/byrd-theatre.json": "76485b694ee9a06397abad99b4d0896393ec42416dadcf6fa5415ee59a74b107",
+  "regions/byrd-theatre-cutaway-stage.json": "15450a42b66c40fe71cec4c2844737a647d9a4c1622026a6b6310d3b2da01988"
+ },
+ "data": {
+  "byrd-theatre": {
+   "snapshot": "data/_releases/byrd-theatre@a4252cbe0efa",
+   "files": {
+    "dem.bin.gz": "eb50d89669268a161d235fe76cfc4be27d6bb191005e37adcf2cbd4e50f7fa91",
+    "osm.json": "3354007b78cae8443a4b4df114dec726ca347855877ce28a5bb98c70a5afb7ca",
+    "yearbuilt.json": "3e0554e921baba537860b85e174211302d56a8b46efc1222f6f223139f1903e6"
+   }
+  }
+ },
+ "outputs": {
+  "print": {
+   "file": "print-files/byrd-1928/byrd-1928-cutaway_32x24.jpg",
+   "sha256": "30b4896f7bb62e3894be62087bc7ff2a307ef181a0f62dccfa0e6a935c48c731",
+   "bytes": 8327873,
+   "printful_file_id": 1119343642
+  },
+  "prints": [
+   {
+    "file": "print-files/byrd-1928/byrd-1928-cutaway_24x18.jpg",
+    "sha256": "775248b084745d775909ae52d1adebca2db620864a95d51250e100ca29d8ece4",
+    "bytes": 5718903,
+    "printful_file_id": 1119343757
+   }
+  ],
+  "canvas": []
+ },
+ "store": {
+  "catalog": {
+   "place": "Byrd Theatre",
+   "orientation": "horizontal",
+   "formats": [
+    "Print",
+    "Framed Print"
+   ],
+   "print_dir": "print-files/byrd-1928",
+   "tags": [
+    "byrd-1928"
+   ],
+   "credit_extra": "Drawn from the National Register nomination of 1977–79 and the Byrd Theatre Foundation's own accounts, with the other sources listed on the sheet.",
+   "modern": true,
+   "title": "The Byrd Theatre, Christmas Eve 1928: Cutaway",
+   "ratio": "3x4",
+   "sizes": [
+    "18x24",
+    "24x32"
+   ],
+   "print": "byrd-1928-cutaway_32x24.jpg",
+   "prints": {
+    "18x24": "byrd-1928-cutaway_24x18.jpg",
+    "24x32": "byrd-1928-cutaway_32x24.jpg"
+   },
+   "detail": [
+    0.215,
+    0.15,
+    0.435,
+    0.44333
+   ],
+   "version": 1,
+   "plate": "BYRD-01",
+   "plate_box": [
+    0.79969,
+    0.9225,
+    0.96563,
+    0.95389
+   ]
+  },
+  "products": [
+   {
+    "handle": "the-byrd-theatre-christmas-eve-1928-cutaway",
+    "id": "gid://shopify/Product/9152101089398",
+    "format": "all (merged)",
+    "status": "DRAFT",
+    "variants": 4
+   }
+  ],
+  "mockups": {
+   "Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/byrd-1928-cutaway_32x24-print.jpg?v=1795355010",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/byrd-1928-cutaway_32x24-detail.jpg?v=1795355014",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/byrd-1928-cutaway_32x24-plate.jpg?v=1795355018"
+   ],
+   "Framed Print": [
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/byrd-1928-cutaway_32x24-framed-print-black.jpg?v=1795355023",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/byrd-1928-cutaway_32x24-framed-print-white.jpg?v=1795355027",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/byrd-1928-cutaway_32x24-detail.jpg?v=1795355014",
+    "https://cdn.shopify.com/s/files/1/0621/8409/5862/files/byrd-1928-cutaway_32x24-plate.jpg?v=1795355018"
+   ]
+  }
+ },
+ "explorer": {
+  "view": null
+ },
+ "reproduced": {
+  "scenes": 3,
+  "matched": 3
+ }
+}

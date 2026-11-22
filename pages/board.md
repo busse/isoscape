@@ -9,13 +9,12 @@ unlisted: true
 
 Every piece of work on isoscape, from a first look at a subject to a print for sale, moves through the same stages: rough draft, working draft, final draft and final production. A version number in a print's title block is given only at final production, and names an edition someone could own. Before that, work is counted in draft rounds (d1, d2) and release candidates (rc1, rc2). The rules are in [Changes](changes.md#how-versions-work-from-here) and [How it's made](how-its-made.md#stages-and-inspection).
 
-This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 21, 2026. The page and the board were set up with Claude.
+This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 22, 2026. The page and the board were set up with Claude.
 
 | Stage | Entries |
 |---|---|
 | research | 1 |
-| final draft | 1 |
-| final production | 45 |
+| final production | 46 |
 | live | 2 |
 | on hold | 55 |
 | blocked | 1 |
@@ -23,7 +22,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
-- **The Byrd Theatre: Cutaway** (BYRD·01): rc1 stamped as BYRD-01 and inspected once, independently, on 2026-11-21: no arm's-length faults, no fix round needed, 7 up-close faults accepted (outputs/cutaway/byrd/rc1/inspection.md). Waiting on the owner for release approval; plate collection and set still changeable until then.
+- **The Byrd Theatre: Cutaway** (BYRD·01): released as edition 1 (BYRD-01, 1.0.0) up to go-live: product is a Shopify DRAFT; go-live (merge.py live) is the planning session's step
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
 ## Research
@@ -31,12 +30,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Data visualization: why is there a Dollar General on the edge of town? (Virginia) | story | — | no |
-
-## Final draft
-
-| Plate | Title | Kind | Version | On sale |
-|---|---|---|---|---|
-| BYRD·01 | The Byrd Theatre: Cutaway | cutaway | 1.0.0-rc1 | no |
 
 ## Final production
 
@@ -61,6 +54,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | BSS·15 | Broad Street Station, 1943: The Cutaway | cutaway | 1.0.0 | yes, version 1 |
 | BSS·16 | Scott's Addition, Broad Street Station 1943 | set box | 1.0.0 | yes, version 1 |
 | BSS·M | Broad Street Station, 1943: The Railroad Map | set map | 3.1.0 | yes, version 3 |
+| BYRD·01 | The Byrd Theatre: Cutaway | cutaway | 1.0.0 | no |
 | GWY·01 | Gwynn's Island | print | 4.0.0 | yes, version 4 |
 | MSS·01 | Main Street Station, about 1952: Cutaway | cutaway | 1.0.0 | yes, version 1 |
 | RVA·01 | Richmond, 1925 | print | 5.0.0 | yes, version 5 |

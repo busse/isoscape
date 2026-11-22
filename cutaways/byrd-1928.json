@@ -587,5 +587,17 @@
   ],
   "columnEnd": 6520,
   "blockMinPt": 6,
-  "blockFace": [174, 174, 9426, 7026]
+  "blockFace": [174, 174, 9426, 7026],
+  "page": {
+    "slug": "byrd-cutaway",
+    "title": "The Byrd Theatre, Christmas Eve 1928: the cutaway",
+    "order": 50,
+    "summary": "The Byrd Theatre in Richmond cut open on its opening night, Christmas Eve 1928, from the Cary Street doors to the screen and across the stage, with how sure each part is.",
+    "intro": "This drawing cuts the Byrd Theatre open as it stood on its opening night, Christmas Eve 1928. The cut runs down the middle from the Cary Street doors to the screen, and the roof over the house is lifted away, so the lobby, the seats, the balcony and the oval dome with its chandelier show from above. Beneath it, the same cut is drawn flat, with Cary Street on the left and the stage on the right. A second flat section crosses the stage house looking toward the alley, through the organ's rooms above the stage and the boiler and spring room below it. The holly border and the title's red and green are the sheet's own decoration.",
+    "image_alt": "The cutaway sheet: the theatre open from the Cary Street front to the stage above, two flat sections below, and the numbered callouts beside them",
+    "key_intro": "Every part of the drawing says how it is known, and each numbered badge shows it:",
+    "wayfinding_heading": "The street and the streetcar",
+    "how": "The theatre is a model made of parts. No plan, section or seating chart was found, so its rooms are placed from written descriptions (the National Register nomination; Theatre Organ, 1986; the Byrd Theatre Foundation) and photographs (the 1928 interior views in Theatre Organ and the front about 1929), inside the city lot the nomination gives, about 84 by 135 ft. Every part names its sources and how it is known. West Cary Street, the neighbors and the ground are today's, from OpenStreetMap and the USGS 3DEP lidar, and a neighbor stands in 1928 only where the city assessor's year built puts it up by then. The model is cut along one vertical plane 5 ft east of the center line, from the Cary Street doors to the screen. The side toward the viewer is taken away down to 1.5 m above the ground floor, and the roof over the house and the ceiling beside the dome are lifted away. The two flat sections are vertical cuts drawn square and level, one along the same plane and one across the stage house. Chris Busse drew it with isoscape, the open-source tool he built with Claude.",
+    "drafted": "This page was drafted with Claude, Anthropic's AI (Claude Opus 5.5), from the sheet and its sources. More on how we work in the [artist statement](artist-statement.md)."
+  }
 }
