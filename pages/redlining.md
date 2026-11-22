@@ -12,15 +12,11 @@ social: redlining-social.jpg
 # Redlining in Richmond: the 1937 federal mortgage map, drawn on the ground it graded
 
 ::: figure wide
-![Richmond in 1937 seen from the south, the James River across the lower half: the HOLC's grades tinted on the ground, green for A in the West End and Windsor Farms, blue for B, yellow for C in the Fan and the north side, and red for D north of downtown, on Church Hill, in Fulton, Randolph, Manchester and Blackwell, with the twelve D areas labeled](redlining-grades-1937.webp)
+![A wide view of Richmond in 1937 from the West End at the left to Church Hill at the right, the James River along the bottom: green and blue areas in the west, yellow through the Fan, and red around downtown and on Church Hill, with a label reading Richmond, Virginia, 1937, how the federal Home Owners' Loan Corporation graded the city for mortgage lending, and a key to the four grades](redlining-hero.webp)
 
-Richmond in 1937, seen from the south, with the grades the Home Owners' Loan Corporation gave
-Richmond's residential areas tinted on the ground; the twelve D areas are labeled. Untinted land
-was not graded: downtown, industry, rail yards, parks and land outside the surveyed city
-[[FRASER, Richmond](#fraser-richmond)]. *How this was made:* the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know); buildings standing today that the
-city dates to 1937 or before, and in Jackson Ward those on the 1925 and 1952 Sanborn maps; the
-ground from 2010s lidar, heights three times true. Most buildings of 1937 that are gone are
-missing, so the picture undercounts the densest and most cleared areas most.
+Richmond in 1937, from the West End at the left to Church Hill at the right, tinted with the grades
+a federal agency gave each residential area. The whole graded city, with its twelve D areas
+labeled, is [further down](#the-whole-city-in-1937-the-four-grades-on-richmonds-terrain).
 :::
 
 > **About this page.** Chris Busse, a Richmond artist, made this page with Claude. It is drawn
@@ -277,7 +273,17 @@ blocks. *How this was made:* as the two figures above.
 
 ## The whole city in 1937: the four grades on Richmond's terrain
 
-The picture at the top of this page shows the whole graded city.
+::: figure wide
+![Richmond in 1937 seen from the south, the James River across the lower half: the HOLC's grades tinted on the ground, green for A in the West End and Windsor Farms, blue for B, yellow for C in the Fan and the north side, and red for D north of downtown, on Church Hill, in Fulton, Randolph, Manchester and Blackwell, with the twelve D areas labeled](redlining-grades-1937.webp)
+
+Richmond in 1937, seen from the south, with the grades the Home Owners' Loan Corporation gave
+Richmond's residential areas tinted on the ground; the twelve D areas are labeled. Untinted land
+was not graded: downtown, industry, rail yards, parks and land outside the surveyed city
+[[FRASER, Richmond](#fraser-richmond)]. *How this was made:* the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know); buildings standing today that the
+city dates to 1937 or before, and in Jackson Ward those on the 1925 and 1952 Sanborn maps; the
+ground from 2010s lidar, heights three times true. Most buildings of 1937 that are gone are
+missing, so the picture undercounts the densest and most cleared areas most.
+:::
 
 Measured on the lidar, the D land lies lowest, as names like Fulton Bottom already say. Half of
 it is below 47 m above sea level, against 57 m for C, 61 m for A and

@@ -385,10 +385,46 @@ def main():
     # The link preview (front matter `social:`): 1200 × 630, a band naming the year and whose
     # grades these are, with the key, over the 1937 citywide view cropped to the D areas around
     # downtown, so the picture reads at the size a preview shows.
+    # The hero at the top of the page: a wide band from the West End (A) across the Fan (C) to
+    # downtown and Church Hill (D), drawn at its own resolution, without area labels, with a
+    # corner label that says the place, the year, whose grades these are and why, and the key.
+    if want('hero'):
+        hero(g, vg, tmp, a.full)
     if want('social'):
         social(a.full)
     if os.path.exists(tmp):
         os.remove(tmp)
+
+
+def hero(svg, vb, tmp, full):
+    x0, y0, w, h = vb
+    W = 3200
+    box = (x0 + w * 0.14, y0 + h * 0.30, w * 0.80, w * 0.80 / 2.5)
+    with open(svg, 'rb') as fh:
+        data = re.sub(rb'<g class="labels".*?</g>', b'', fh.read(), count=1, flags=re.S)
+    bare = os.path.join(os.path.dirname(tmp), 'hero.svg')
+    with open(bare, 'wb') as fh:
+        fh.write(data)
+    im = raster(bare, box, W, tmp, caption='').convert('RGB')
+    os.remove(bare)
+    d = ImageDraw.Draw(im, 'RGBA')
+    u = im.width // 165
+    tf, sf, kf = font(int(u * 2.2), bold=True), font(int(u * 1.25)), font(int(u * 1.2))
+    title = 'Richmond, Virginia, 1937'
+    sub = "How the federal Home Owners' Loan Corporation graded the city for mortgage lending"
+    kw = max(d.textlength(l, font=kf) for l in LEGEND) + u * 3.6
+    bw = int(max(d.textlength(title, font=tf), d.textlength(sub, font=sf), kw * 2) + u * 3)
+    bh = int(u * 11.4)
+    x, y = u * 2, im.height - bh - u * 2
+    sky = tuple(int(P['sky'][i:i + 2], 16) for i in (1, 3, 5))
+    d.rectangle((x, y, x + bw, y + bh), fill=sky + (235,), outline=P['ink'])
+    d.text((x + u * 1.5, y + u * 0.9), title, fill=P['ink'], font=tf)
+    d.text((x + u * 1.5, y + u * 4.0), sub, fill=P['ink'], font=sf)
+    for i, (tone, label) in enumerate(zip(P['tint']['tones'], LEGEND)):
+        cx, cy = x + u * 1.5 + (i % 2) * kw, y + u * 6.5 + (i // 2) * u * 2.2
+        d.rectangle((cx, cy + u * 0.15, cx + u * 1.6, cy + u * 1.55), fill=tone, outline=P['ink'])
+        d.text((cx + u * 2.1, cy), label, fill=P['ink'], font=kf)
+    save(im, 'hero', full)
 
 
 def social(full):
