@@ -1,5 +1,5 @@
 """Editorial poster (24 x 36 in): "Why does it always seem like there's a Dollar General on the edge
-of town?" Release candidate 1.0.0-rc1.
+of town?" Release candidate 1.0.0-rc2.
 
 Usage: python3 poster.py <ds-dir> <tests.csv> <dg_classes.csv> <out-stem>
 
@@ -24,6 +24,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
+import shapely  # noqa: E402
 from matplotlib import font_manager, patheffects  # noqa: E402
 from matplotlib.lines import Line2D  # noqa: E402
 from PIL import ImageFont  # noqa: E402
@@ -89,6 +90,25 @@ def axes(fig, x, y, w, h):
     return fig.add_axes([x / W, 1 - (y + h) / H, w / W, h / H])
 
 
+def caption_traffic(hp, r):
+    """The traffic words under a tile. The count is the busiest counted road within 60 m of the
+    store (the tests' match distance). The rank is printed only when that road is the one the
+    tests matched, so a corner store beside a busier road shows the busier count and no rank.
+    With no counted road within 60 m, the caption says how far the nearest one is."""
+    pt = shapely.Point(r.x, r.y)
+    d = hp.distance(pt)
+    near = hp[d <= 60]
+    if len(near):
+        top = near.aadt.max()
+        bits = [f"{int(top):,} vehicles/day"]
+        if pd.notna(r.aadt) and top <= r.aadt and pd.notna(r["rank"]) and r["rank"] <= 2:
+            bits.append("busiest road into town" if r["rank"] == 1 else "2nd-busiest road into town")
+        return bits
+    i = d.idxmin()
+    ft = int(round(d[i] * 3.2808 / 10) * 10)
+    return [f"{ft:,} ft from a road with {int(hp.aadt[i]):,} vehicles/day"]
+
+
 def tile(fig, ds, hp, stores, r, x, y, size):
     ax = axes(fig, x, y, size, size)
     folder = f"{ds}/work_cdp/{r.folder}" if str(r.folder).isdigit() else f"{ds}/work_all/{r.folder}"
@@ -134,13 +154,11 @@ def tile(fig, ds, hp, stores, r, x, y, size):
         sp.set_color(MUTED)
     yr = int(r.auth_year)
     yr = "by 2005" if yr in (2004, 2005) else str(yr)
-    bits = [f"{int(r.aadt):,} vehicles a day" if pd.notna(r.aadt) else "no traffic count"]
-    if pd.notna(r["rank"]) and r["rank"] <= 2:
-        bits.append("busiest road in" if r["rank"] == 1 else "2nd-busiest road in")
+    bits = caption_traffic(hp, r)
     if r.junction_m <= 250:
         bits.append("at a junction")
     text(fig, x, y - 0.40, f"{r.label}", fontsize=12, fontweight="bold", va="bottom")
-    text(fig, x, y - 0.07, f"{yr} · " + " · ".join(bits), fontsize=7.6, color=INK2, va="bottom")
+    text(fig, x, y - 0.07, f"{yr} · " + " · ".join(bits), fontsize=7.2, color=INK2, va="bottom")
 
 
 def locator(fig, counties, va, x, y, w):
@@ -153,9 +171,9 @@ def locator(fig, counties, va, x, y, w):
         part.plot(ax=ax, color=REGION_FILL[i], edgecolor=SURFACE, linewidth=0.4)
         part.dissolve().boundary.plot(ax=ax, color=INK2, linewidth=0.9)
     ax.scatter(va.x, va.y, s=46, marker="s", fc=YELLOW, ec=INK, lw=1.3, zorder=5)
-    spots = {"Southwest": (0.13, 0.24), "Valley and Blue Ridge": (0.40, 0.72),
-             "Piedmont and Southside": (0.52, 0.08), "Urban crescent": (0.88, 0.90),
-             "Northern Neck, Middle Peninsula and Eastern Shore": (0.885, 0.56)}
+    spots = {"Southwest": (0.13, 0.24), "Valley and Blue Ridge": (0.535, 0.62),
+             "Piedmont and Southside": (0.52, 0.08), "Urban crescent": (0.755, 0.80),
+             "Northern Neck, Middle Peninsula and Eastern Shore": (0.843, 0.501)}
     halo = [patheffects.withStroke(linewidth=4, foreground=SURFACE)]
     key = []
     for i, (k, short) in enumerate(REGIONS):
@@ -177,9 +195,9 @@ def dot_rows(ax, rows, xmax=0.6):
     for y, (lab, dg, lo, hi, rnd, cv) in zip(ys, rows):
         ax.plot([lo, hi], [y, y], color=INK2, lw=2)
         ax.plot([rnd], [y], marker="|", color=INK, ms=26, mew=3.2, zorder=4)
-        ax.scatter([cv], [y - 0.24], marker="o", s=70, fc=SURFACE, ec=INK2, lw=1.6, zorder=4)
+        ax.scatter([cv], [y - 0.2], marker="o", s=70, fc=SURFACE, ec=INK2, lw=1.6, zorder=4)
         ax.scatter([dg], [y], marker="s", s=190, fc=YELLOW, ec=INK, lw=2, zorder=5)
-        ax.text(0, y + 0.36, lab, fontsize=11.5, color=INK, va="bottom")
+        ax.text(0, y + 0.27, lab, fontsize=11.5, color=INK, va="bottom")
         ax.text(xmax, y - 0.05, f"{dg:.0%}", fontsize=13, fontweight="bold", ha="right", va="center")
     ax.set_xlim(-0.01, xmax)
     ax.set_ylim(-0.7, len(rows) - 0.1)
@@ -238,10 +256,10 @@ def main():
     text(fig, 1.0, 2.55, "Dollar General on the edge of town?", fontsize=52, fontweight="bold", va="bottom")
     deck = (f"Most Dollar General stores near small towns are in town. We counted every Dollar General near a "
             f"small town in six states that border or sit close to Virginia. Of the {total:,} stores, {edge} stand "
-            f"just outside the built-up part of town, about one in {round(total / edge)}. Those {edge} tend to be on "
-            f"the busier roads coming in. About one in {round(1 / c2.share)} is within 800 feet of a spot where two "
-            f"US or state highways cross. That is roughly {junction_x:.0f} times what we would expect if the stores "
-            f"had been scattered at random along the same roads. Convenience stores do the same thing. "
+            f"just outside the built-up part of town, about one in {round(total / edge)}. Those {edge} are about "
+            f"{junction_x:.0f} times as likely as a random spot on the same roads to be within 800 feet of a place "
+            f"where two US or state highways cross, although only about one in {round(1 / c2.share)} is. They also "
+            f"sit on roads with more traffic. Convenience stores do the same thing. "
             f"The edge stores are also newer. Of the {edge}, {c4.share:.0%} were first approved to take SNAP "
             f"benefits after 2005, compared with {town_new:.0%} of the stores in town. These are the roads people "
             f"use to get into town, which may be why the edge stores seem so common.")
@@ -325,8 +343,8 @@ def main():
     ax.set_xlim(0, max(vals) * 1.22)
     ax.axis("off")
     para(fig, 1.0, cy0 + 3.6, (f"If the stores had been dropped at random spots along the same main roads, about "
-                               f"{c5.expected / c5.n_stores:.0%} of those within twice the distance to the edge "
-                               f"would have landed in the edge band. Only {c5.share:.0%} did. The edge actually has "
+                               f"{c5.expected / c5.n_stores:.0%} of those within three times the distance to the edge "
+                               f"would have landed in the edge band. Only {c5.share:.0%} did. The edge has "
                                f"fewer Dollar Generals than chance would give it."),
          6.7, 11)
 
@@ -363,7 +381,7 @@ def main():
     ax3.set_xlim(-0.6, 1.6)
     ax3.axis("off")
     para(fig, 16.6, cy0 + 3.85, ("SNAP is the federal food program that used to be called food stamps. A store can be "
-                                 "approved later than the day it opened, and the records only go back to 2005, so "
+                                 "approved later than the day it opened, and the file starts in 2005, so "
                                  "the approval year is a rough stand-in for when a store arrived."),
          6.4, 11)
 
@@ -372,16 +390,17 @@ def main():
     fig.add_artist(Line2D([1.0 / W, 23.0 / W], [1 - (hy - 0.3) / H] * 2, color=GRID, lw=1.5))
     text(fig, 1.0, hy, "How the edge was measured", fontsize=17, fontweight="bold", va="top")
     text(fig, 12.4, hy, "What the data can't show", fontsize=17, fontweight="bold", va="top")
-    left = ("We started at the spot where most of a town's people live, based on 2020 Census counts, and worked "
+    left = ("We started at the middle of where a town's people live (2020 Census) and worked "
             "outward. The built-up part of town ends where there are fewer than 200 homes per square mile and "
             "less than a fifth of the land is built on or paved (not counting roads). A store counts as \"at the edge\" if it is past that line but less than twice as far from the "
-            "center. \"Small town\" here means an incorporated place with fewer than 25,000 people. A separate "
-            "review, also run with Claude, redid every calculation from scratch.")
-    right = ("The maps show where the stores are. Why the company chose a particular site is not in the data. "
-             "Things like zoning and water and sewer lines would matter, and neither is included. There are also "
+            "center. \"Small town\" means an incorporated place with fewer than 25,000 people that isn't "
+            "part of a bigger urban area. A separate review made with Claude recomputed the main results "
+            "with its own code.")
+    right = ("The maps show where the stores are. Why the company chose a particular site is not in the data, and "
+             "neither are zoning or water and sewer lines, which may matter. There are also "
              "exceptions. Most edge stores are outside the town limits, and in West Virginia none of the 19 edge "
              "stores is near a highway crossing. The Virginia maps include every edge store, including the ones "
-             "that don't fit. A yellow square marks a location only. It is not a judgment of any store or town.")
+             "that don't fit. A yellow square shows where a store is and says nothing about the store or the town.")
     para(fig, 1.0, hy + 0.5, left, 10.6, 11)
     para(fig, 12.4, hy + 0.5, right, 10.6, 11)
     src = ("Stores: USDA Food and Nutrition Service, SNAP Retailer Locator historical data, stores authorized as of "
@@ -390,7 +409,7 @@ def main():
            "NLCD 2021. Roads: © OpenStreetMap contributors (ODbL). Regions: groups of Virginia's planning district "
            "commissions. Made with Claude. Independent, and not affiliated with any company named. Chris Busse, "
            "November 2026.")
-    para(fig, 1.0, H - 1.05, src, 22, 9, color=MUTED, linespacing=1.4)
+    para(fig, 1.0, H - 0.92, src, 22, 9, color=MUTED, linespacing=1.4)
     fig.savefig(out + ".png", facecolor=SURFACE)
     fig.savefig(out + ".pdf", facecolor=SURFACE)
     print("bottom of how-we-know text (in):", hy + 0.5 + 5 * 11 * 1.5 / 72, "sources start", H - 1.05)

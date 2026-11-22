@@ -3191,23 +3191,55 @@
    "kind": "print",
    "stage": "final draft",
    "status": "active",
-   "asset_version": "1.0.0-rc1",
+   "asset_version": "1.0.0-rc2",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 1,
-   "waiting_on": "agent",
-   "decision": "Owner (11:31): 'Continue forward to publication' (look approved). rc1 made; inspection under way.",
-   "accepted_faults": [],
+   "rounds": 2,
+   "waiting_on": "owner",
+   "decision": "rc1 inspected (independent Fable inspector, report in casestudy step 16): fix, 1 A + 5 C + 9 B. rc2 fixes all A and C and six B; three B (markers under arrows) accepted. Targeted recheck clean. Owner: approve release, then the planning session merges and pushes (poster is editorial, not for sale; no plate).",
+   "accepted_faults": [
+    {
+     "what": "Mineral: the town arrow is drawn over a nearby dollar store's square and a grocery diamond",
+     "box": [
+      2484,
+      2682,
+      2867,
+      3154
+     ],
+     "on": "poster 24x36 (150 dpi raster)"
+    },
+    {
+     "what": "Lake of the Woods: a grocery diamond is hidden under the store square",
+     "box": [
+      3067,
+      2682,
+      3450,
+      3154
+     ],
+     "on": "poster 24x36 (150 dpi raster)"
+    },
+    {
+     "what": "Honaker: the town arrow touches a nearby dollar store's square",
+     "box": [
+      733,
+      1040,
+      1116,
+      1512
+     ],
+     "on": "poster 24x36 (150 dpi raster)"
+    }
+   ],
    "planned_edition": null,
-   "last_inspected": null,
+   "last_inspected": "6ffef55",
    "branch": "viz/dollar-stores-virginia",
    "worktree": null,
    "links": [
     "drafts/dollar-stores-virginia/casestudy/2026-11-21-10-poster-rough/notes.md",
     "drafts/dollar-stores-virginia/casestudy/2026-11-22-11-poster-d1/notes.md",
-    "drafts/dollar-stores-virginia/casestudy/2026-11-22-15-poster-d2/notes.md"
+    "drafts/dollar-stores-virginia/casestudy/2026-11-22-15-poster-d2/notes.md",
+    "drafts/dollar-stores-virginia/casestudy/2026-11-22-16-poster-rc1/inspection/report.md"
    ],
    "log": [
     "2026-11-22: rough draft -> working draft",

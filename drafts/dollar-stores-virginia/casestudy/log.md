@@ -429,3 +429,23 @@ Folder: `2026-11-22-15-poster-d2/`.
 - **Captions.** The two Martinsville tiles now name the side of town.
 - **Locator.** Region numbers moved inside their regions.
 - **Rounds.** Two layout passes. Board: `1.0.0-d2`, round 2.
+
+## Step 16: final draft, inspection and rc2 (November 22, 11:31-12:05)
+
+Folder: `2026-11-22-16-poster-rc1/`, holding notes.md, the rc1 and rc2 files, the rc2 11x17
+proof, and `inspection/` with report.md and its crops.
+
+- **Chris (11:31).** "Continue forward to publication." Read as approving the look.
+- **rc1.** One independent inspection against the README checklist.
+  - Verdict: fix, with 1 A finding (locator numbers outside Virginia; this log's step 15 entry
+    was wrong to say they had moved) and 5 C findings (chart 1's "twice", the overstated
+    review sentence, five "no traffic count" captions, Union Hall's count and rank, an
+    unsourced "would matter").
+  - All six were confirmed against the data before fixing.
+- **rc2.** Fixes all A and C findings and six B findings; three B are accepted on the board.
+  - Two layout passes inside the fix round.
+  - Targeted recheck clean.
+- **Story page.** `pages/dollar-stores.md`, unlisted, numbers from `counts.json`, figures from
+  rc2.
+- **Chris (11:45).** Use Opus for subagents and inspection from here on. Fable only for its
+  unique capabilities.

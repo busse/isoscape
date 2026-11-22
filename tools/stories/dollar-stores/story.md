@@ -34,8 +34,8 @@ typed in. *How this was made:* drawn in code with Claude from public data, liste
 
 ## How many stores are at the edge
 
-To say a store is "at the edge," we need a line for where a town stops. We started at the spot
-where most of a town's people live and worked outward, block by block, using 2020 Census
+To say a store is "at the edge," we need a line for where a town stops. We started at the middle of
+where a town's people live and worked outward, block by block, using 2020 Census
 counts of homes and the U.S. Geological Survey's map of paved and built-on land. The built-up
 part of town ends where there are fewer than 200 homes per square mile and less than a fifth of
 the land is built on or paved (not counting roads). A store is "at the edge" if it is past that
@@ -44,11 +44,11 @@ line but less than twice as far from the center as the line is.
 We first saw the pattern in Virginia. To check it wasn't a fluke, we wrote the tests down ahead
 of time and then ran them on six other states: North Carolina, Tennessee, Kentucky, West
 Virginia, Maryland and South Carolina. In those states there are {{total}} Dollar Generals near
-small towns (incorporated places with fewer than 25,000 people). {{town}} are in town, {{edge}}
+small towns (incorporated places with fewer than 25,000 people that aren't part of a bigger urban area). {{town}} are in town, {{edge}}
 are at the edge, {{margin}} sit right on the edge line, and {{farther}} are farther out.
 
 If the stores had been dropped at random spots along the same main roads, about
-{{band_expected}} of those within twice the distance to the edge would have landed in the edge
+{{band_expected}} of those within three times the distance to the edge would have landed in the edge
 band. Only {{band_share}} did. So the edge has fewer Dollar Generals than chance would give it.
 The impression that they are always at the edge does not come from their numbers.
 
@@ -112,7 +112,7 @@ Around the 2009 stimulus, the number of stores taking SNAP rose 67% from 2007 to
 of the new ones were stores other than grocers, such as dollar, drug and convenience stores
 [[Byrne and others 2025](#sources)]. In our data, Dollar General's approval years show no large
 jump in 2009, and the edge stores cluster in 2016 and later, so the approval year works as a
-rough stand-in for when a store arrived. The records only go back to 2005.
+rough stand-in for when a store arrived. The file starts in 2005.
 
 ## Does SNAP explain it?
 
@@ -142,11 +142,11 @@ in 2019 the Supreme Court held that the data is confidential [[FMI v. Argus Lead
 ## What the data can't show
 
 The maps show where the stores are. Why the company chose a particular site is not in the data.
-Things like zoning and water and sewer lines would matter, and neither is included. Dollar General
+Zoning and water and sewer lines may matter, and neither is in the data. Dollar General
 says about 80% of its stores serve communities of 20,000 or fewer people
 [[Dollar General](#sources)], which fits a chain built around small towns but doesn't say
-where in a town it builds. A yellow square marks a location only. It is not a judgment of any
-store or town.
+where in a town it builds. A yellow square shows where a store is and says nothing about
+the store or the town.
 
 Other researchers have studied what happens after a dollar store opens. They found that
 independent grocery stores are more likely to close, and more so in rural areas
@@ -171,8 +171,8 @@ store data we don't have, and this page takes no position on them.
 - **Testing.** The tests and what would count as a result were written down before any data from
   the six states was opened. Each result is the average difference between a store and its own
   town's random spots, with a margin of error from resampling whole towns 10,000 times. A
-  separate review, also run with Claude, read the plan before the run and redid the calculations
-  from scratch afterward. It found a mistake in one exploratory number, which was corrected and is
+  separate review, also run with Claude, read the plan before the run and afterward
+  recomputed the main test results with its own code. It found a mistake in one exploratory number, which was corrected and is
   not used here.
 - **The record.** Every step, including dead ends, is kept in the project's case study
   (`drafts/dollar-stores-virginia/casestudy/`). The scripts are in

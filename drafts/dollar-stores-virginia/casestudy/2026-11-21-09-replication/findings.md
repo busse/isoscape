@@ -1,5 +1,13 @@
 # Why does it seem there's a Dollar General on the edge of town? Replication findings
 
+> **Correction note, November 22, 2026 (from the rc1 inspection).** Where this file says
+> "462" stores farther out and "about 180" on the edge line, those came from the first run's
+> class table (unstable tie-break). The stable run, used by the poster and the page, gives 1,198 in
+> town, 234 at the edge, 183 on the edge line and 463 farther out (`data/dg_classes.csv`; the first
+> run's table is kept as `data/dg_classes-run1-unstable-ties.csv`). The tests themselves are
+> unchanged. The text below is left as it was written.
+
+
 Research draft made with Claude, November 21, 2026.
 
 - **How it was tested.** Tests frozen before the data was read (plan v2), run once on held-out

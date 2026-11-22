@@ -35,3 +35,4 @@ owner's go-ahead to a delivered preview.
 | 2026-11-22 | SNAP research (owner): store-level data history; ACS SNAP households test, set B | 10:27-11:05 | ~40 | hypotheses before numbers; snap_test.py; findings: no link within towns | town-level SNAP vs store counts (offered) |
 | 2026-11-22 | Which towns get Dollar Generals (SNAP share across towns) | 10:45-11:00 | ~15 | hypotheses before numbers; snap_towns.py; link holds but is general to food stores | none |
 | 2026-11-22 | Poster working draft d2: copy rewrite (owner: AI-writing tells), Martinsville captions, locator | 11:25-11:50 | ~25 | poster.py d2; two layout passes; 11x17 proof | owner verdict on d2 |
+| 2026-11-22 | Final draft: rc1, independent inspection, fix round rc2, recheck; story page; record fixes | 11:31-12:05 | ~35 | rc2 poster and proof; inspection report; pages/dollar-stores.md with figures; sources and findings corrections | owner release approval |
