@@ -423,7 +423,7 @@ planners and turnpike officials selected for its path areas they considered "bli
 high concentrations of Black Richmonders [[VCU Libraries](#vcu-libraries)]. Encyclopedia Virginia dates
 the Turnpike Authority's creation to 1954 and VCU Libraries to 1955
 [[Gray-Sparks](#gray-sparks); [VCU Libraries](#vcu-libraries)]. The
-[Jackson Ward story](jackson-ward.md#how-the-route-was-chosen) follows how the route was chosen.
+[Jackson Ward story](jackson-ward.md#how-the-turnpike-came-to-run-through-jackson-ward) follows how the Turnpike came to run through the ward.
 
 ::: figure
 ![A timeline from 1871 to 1977: the 1871 wards, streetcar suburbs, the 1911 ordinance, Buchanan v. Warley, the second ordinance, the HOLC's creation in 1933, the 1937 map, Gilpin Court, the 1946 plan, Shelley v. Kraemer, the Turnpike, Mosby Court, Fulton, the 1970 annexation and Blackwell, and the Randolph project](redlining-timeline.svg)
