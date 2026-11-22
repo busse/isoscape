@@ -3,40 +3,44 @@
  "graded_land": {
   "A": {
    "areas": 7,
-   "km2": 7.72,
+   "km2": 7.63,
    "share": 0.159
   },
   "B": {
    "areas": 15,
-   "km2": 12.62,
+   "km2": 12.49,
    "share": 0.259
   },
   "C": {
    "areas": 14,
-   "km2": 13.73,
-   "share": 0.282
+   "km2": 13.5,
+   "share": 0.28
   },
   "D": {
    "areas": 12,
-   "km2": 14.63,
-   "share": 0.3
+   "km2": 14.54,
+   "share": 0.302
   }
  },
- "graded_km2_union": 48.7,
- "overlap_km2": -0.0,
- "ungraded_features": [
-  "Industrial and Commercial"
- ],
+ "graded_km2_union": 48.16,
+ "overlap_km2": 0.001,
+ "ungraded_features": [],
+ "unnumbered_ha_by_grade": {
+  "A": 0.0,
+  "B": 11.3,
+  "C": 0.0,
+  "D": 22.3
+ },
  "extent_km": [
-  14.0,
-  10.7
+  13.5,
+  10.6
  ],
  "frame": {
   "share_of_grade_inside": {
    "A": 1.0,
    "B": 1.0,
-   "C": 0.909,
-   "D": 0.988
+   "C": 0.917,
+   "D": 0.991
   },
   "areas_cut_by_frame": [
    "C12",
@@ -47,76 +51,76 @@
   ]
  },
  "motorway": {
-  "km_in_graded": 19.63,
+  "km_in_graded": 20.26,
   "km_total_in_cache": 113.0,
   "by_grade_km": {
-   "A": 0.71,
-   "B": 1.83,
-   "C": 4.49,
-   "D": 12.61
+   "A": 0.76,
+   "B": 1.86,
+   "C": 4.56,
+   "D": 13.07
   },
   "by_grade_share": {
-   "A": 0.036,
-   "B": 0.093,
-   "C": 0.229,
-   "D": 0.642
+   "A": 0.038,
+   "B": 0.092,
+   "C": 0.225,
+   "D": 0.645
   }
  },
  "motorway_and_links": {
-  "km_in_graded": 31.47,
+  "km_in_graded": 32.12,
   "km_total_in_cache": 176.1,
   "by_grade_km": {
-   "A": 1.18,
-   "B": 2.32,
-   "C": 7.32,
-   "D": 20.66
+   "A": 1.08,
+   "B": 2.42,
+   "C": 7.4,
+   "D": 21.23
   },
   "by_grade_share": {
-   "A": 0.037,
-   "B": 0.074,
-   "C": 0.233,
-   "D": 0.656
+   "A": 0.034,
+   "B": 0.075,
+   "C": 0.23,
+   "D": 0.661
   }
  },
  "motorway_in_d_by_road_km": {
-  "I 64": 4.88,
-  "VA 195": 3.88,
-  "I 64;I 95": 2.07,
-  "I 95": 1.78
+  "I 64": 5.15,
+  "VA 195": 3.85,
+  "I 64;I 95": 2.25,
+  "I 95": 1.82
  },
  "motorway_in_d_by_area_km": {
-  "D1": 5.42,
-  "D5": 3.31,
-  "D8": 3.88
+  "D1": 5.92,
+  "D5": 3.3,
+  "D8": 3.26
  },
  "yearbuilt_by_grade": {
   "A": {
-   "parcels": 3264,
-   "by1937": 1166,
-   "since2000": 57,
-   "share_by1937": 0.357,
+   "parcels": 3278,
+   "by1937": 1172,
+   "since2000": 56,
+   "share_by1937": 0.358,
    "share_2000_on": 0.017
   },
   "B": {
-   "parcels": 8454,
-   "by1937": 4192,
-   "since2000": 197,
+   "parcels": 8388,
+   "by1937": 4163,
+   "since2000": 196,
    "share_by1937": 0.496,
    "share_2000_on": 0.023
   },
   "C": {
-   "parcels": 12997,
-   "by1937": 9356,
-   "since2000": 299,
-   "share_by1937": 0.72,
+   "parcels": 13037,
+   "by1937": 9413,
+   "since2000": 296,
+   "share_by1937": 0.722,
    "share_2000_on": 0.023
   },
   "D": {
-   "parcels": 10376,
-   "by1937": 5037,
-   "since2000": 1343,
-   "share_by1937": 0.485,
-   "share_2000_on": 0.129
+   "parcels": 10276,
+   "by1937": 5005,
+   "since2000": 1336,
+   "share_by1937": 0.487,
+   "share_2000_on": 0.13
   }
  },
  "courts": {},
@@ -129,63 +133,27 @@
  },
  "areas": {
   "D1": {
-   "km2": 2.47,
-   "parcels": 1274,
-   "by1937": 715,
-   "y1938_1977": 223,
-   "since2000": 228,
-   "buildings_osm": 1732,
-   "motorway_km": 5.42,
-   "share_by1937": 0.561,
-   "share_y1938_1977": 0.175,
-   "share_since2000": 0.179
-  },
-  "D10": {
-   "km2": 0.33,
-   "parcels": 237,
-   "by1937": 132,
-   "y1938_1977": 58,
-   "since2000": 19,
-   "buildings_osm": 435,
-   "motorway_km": 0.0,
-   "share_by1937": 0.557,
-   "share_y1938_1977": 0.245,
-   "share_since2000": 0.08
-  },
-  "D11": {
-   "km2": 0.34,
-   "parcels": 238,
-   "by1937": 130,
-   "y1938_1977": 14,
-   "since2000": 84,
-   "buildings_osm": 368,
-   "motorway_km": 0.0,
-   "share_by1937": 0.546,
-   "share_y1938_1977": 0.059,
-   "share_since2000": 0.353
-  },
-  "D11.5": {
-   "km2": 1.41,
-   "parcels": 1230,
-   "by1937": 476,
-   "y1938_1977": 528,
-   "since2000": 218,
-   "buildings_osm": 2060,
-   "motorway_km": 0.0,
-   "share_by1937": 0.387,
-   "share_y1938_1977": 0.429,
+   "km2": 2.5,
+   "parcels": 1285,
+   "by1937": 725,
+   "y1938_1977": 222,
+   "since2000": 227,
+   "buildings_osm": 1744,
+   "motorway_km": 5.92,
+   "share_by1937": 0.564,
+   "share_y1938_1977": 0.173,
    "share_since2000": 0.177
   },
   "D2": {
-   "km2": 0.54,
-   "parcels": 308,
-   "by1937": 53,
-   "y1938_1977": 222,
+   "km2": 0.51,
+   "parcels": 302,
+   "by1937": 52,
+   "y1938_1977": 217,
    "since2000": 8,
-   "buildings_osm": 587,
+   "buildings_osm": 579,
    "motorway_km": 0.0,
    "share_by1937": 0.172,
-   "share_y1938_1977": 0.721,
+   "share_y1938_1977": 0.719,
    "share_since2000": 0.026
   },
   "D3": {
@@ -194,96 +162,132 @@
    "by1937": 0,
    "y1938_1977": 25,
    "since2000": 1,
-   "buildings_osm": 715,
+   "buildings_osm": 700,
    "motorway_km": 0.0,
    "share_by1937": 0.0,
    "share_y1938_1977": 0.926,
    "share_since2000": 0.037
   },
   "D4": {
-   "km2": 0.28,
-   "parcels": 326,
-   "by1937": 164,
-   "y1938_1977": 140,
-   "since2000": 7,
-   "buildings_osm": 572,
+   "km2": 0.27,
+   "parcels": 307,
+   "by1937": 139,
+   "y1938_1977": 149,
+   "since2000": 6,
+   "buildings_osm": 575,
    "motorway_km": 0.0,
-   "share_by1937": 0.503,
-   "share_y1938_1977": 0.429,
-   "share_since2000": 0.021
+   "share_by1937": 0.453,
+   "share_y1938_1977": 0.485,
+   "share_since2000": 0.02
   },
   "D5": {
-   "km2": 3.36,
-   "parcels": 1629,
-   "by1937": 723,
-   "y1938_1977": 715,
-   "since2000": 109,
-   "buildings_osm": 3557,
-   "motorway_km": 3.31,
-   "share_by1937": 0.444,
-   "share_y1938_1977": 0.439,
-   "share_since2000": 0.067
+   "km2": 3.29,
+   "parcels": 1561,
+   "by1937": 685,
+   "y1938_1977": 688,
+   "since2000": 108,
+   "buildings_osm": 3457,
+   "motorway_km": 3.3,
+   "share_by1937": 0.439,
+   "share_y1938_1977": 0.441,
+   "share_since2000": 0.069
   },
   "D6": {
-   "km2": 2.33,
-   "parcels": 2955,
-   "by1937": 2016,
-   "y1938_1977": 522,
-   "since2000": 273,
-   "buildings_osm": 3881,
+   "km2": 2.3,
+   "parcels": 2953,
+   "by1937": 2006,
+   "y1938_1977": 518,
+   "since2000": 275,
+   "buildings_osm": 3892,
    "motorway_km": 0.0,
-   "share_by1937": 0.682,
-   "share_y1938_1977": 0.177,
-   "share_since2000": 0.092
+   "share_by1937": 0.679,
+   "share_y1938_1977": 0.175,
+   "share_since2000": 0.093
   },
   "D7": {
    "km2": 0.94,
-   "parcels": 385,
+   "parcels": 387,
    "by1937": 34,
-   "y1938_1977": 88,
+   "y1938_1977": 89,
    "since2000": 105,
-   "buildings_osm": 666,
+   "buildings_osm": 665,
    "motorway_km": 0.0,
    "share_by1937": 0.088,
-   "share_y1938_1977": 0.229,
-   "share_since2000": 0.273
+   "share_y1938_1977": 0.23,
+   "share_since2000": 0.271
   },
   "D8": {
-   "km2": 1.28,
-   "parcels": 1374,
-   "by1937": 584,
-   "y1938_1977": 151,
-   "since2000": 284,
-   "buildings_osm": 1445,
-   "motorway_km": 3.88,
-   "share_by1937": 0.425,
-   "share_y1938_1977": 0.11,
-   "share_since2000": 0.207
+   "km2": 1.13,
+   "parcels": 1278,
+   "by1937": 534,
+   "y1938_1977": 134,
+   "since2000": 280,
+   "buildings_osm": 1392,
+   "motorway_km": 3.26,
+   "share_by1937": 0.418,
+   "share_y1938_1977": 0.105,
+   "share_since2000": 0.219
   },
   "D9": {
-   "km2": 0.47,
-   "parcels": 393,
+   "km2": 0.48,
+   "parcels": 384,
    "by1937": 10,
-   "y1938_1977": 373,
+   "y1938_1977": 364,
    "since2000": 7,
-   "buildings_osm": 586,
+   "buildings_osm": 575,
    "motorway_km": 0.0,
-   "share_by1937": 0.025,
-   "share_y1938_1977": 0.949,
+   "share_by1937": 0.026,
+   "share_y1938_1977": 0.948,
    "share_since2000": 0.018
   },
+  "D10": {
+   "km2": 0.31,
+   "parcels": 232,
+   "by1937": 130,
+   "y1938_1977": 58,
+   "since2000": 17,
+   "buildings_osm": 423,
+   "motorway_km": 0.0,
+   "share_by1937": 0.56,
+   "share_y1938_1977": 0.25,
+   "share_since2000": 0.073
+  },
+  "D11": {
+   "km2": 0.34,
+   "parcels": 238,
+   "by1937": 129,
+   "y1938_1977": 14,
+   "since2000": 85,
+   "buildings_osm": 370,
+   "motorway_km": 0.0,
+   "share_by1937": 0.542,
+   "share_y1938_1977": 0.059,
+   "share_since2000": 0.357
+  },
+  "D11.5": {
+   "km2": 1.35,
+   "parcels": 1194,
+   "by1937": 482,
+   "y1938_1977": 493,
+   "since2000": 211,
+   "buildings_osm": 2019,
+   "motorway_km": 0.0,
+   "share_by1937": 0.404,
+   "share_y1938_1977": 0.413,
+   "share_since2000": 0.177
+  },
   "A5": {
-   "km2": 2.49,
-   "parcels": 570,
-   "by1937": 89,
-   "y1938_1977": 437,
+   "km2": 2.46,
+   "parcels": 561,
+   "by1937": 82,
+   "y1938_1977": 435,
    "since2000": 10,
-   "buildings_osm": 751,
-   "motorway_km": 0.71,
-   "share_by1937": 0.156,
-   "share_y1938_1977": 0.767,
+   "buildings_osm": 730,
+   "motorway_km": 0.76,
+   "share_by1937": 0.146,
+   "share_y1938_1977": 0.775,
    "share_since2000": 0.018
   }
  },
- "outlines": "data/holc/richmond-1937.geojson"
+ "outlines": "history/holc/richmond-1937-redrawn.geojson"
 }

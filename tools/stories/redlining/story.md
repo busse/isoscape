@@ -57,9 +57,10 @@ a color-coded map of each, its "residential security maps" [[FRED 2021](#sources
 The last column follows the St. Louis Fed's summary [[FRED 2021](#sources)]. Richmond's map,
 "City of Richmond, Virginia and Environs", is dated April 3, 1937, and is held by the National
 Archives in the records of the Federal Home Loan Bank Board, Record Group 195
-[[FRASER, Richmond](#sources); [NARA RG 195](#sources)]. As the University of Richmond's Digital
-Scholarship Lab digitized it for *Mapping Inequality*, it grades {{A_n}} areas A, {{B_n}} B,
-{{C_n}} C and {{D_n}} D [[numbers](#how-we-know)].
+[[FRASER, Richmond](#sources); [NARA RG 195](#sources)]. It grades {{A_n}} areas A, {{B_n}} B,
+{{C_n}} C and {{D_n}} D [[numbers](#how-we-know)], the same count the University of Richmond's
+Digital Scholarship Lab gives in *Mapping Inequality*, the project that digitized and published
+these maps for the whole country [[Mapping Inequality](#sources)].
 
 ### The area descriptions: one printed form for each area
 
@@ -74,13 +75,13 @@ how local real estate professionals judged lending risk [[Fishback et al. 2023](
 The forms record race throughout, and Richmond's use it to judge places and houses. The form for
 C7, on the north side, faults its area for lying too near D2. The form for D11.5, Blackwell,
 rated the condition of its houses by the race of the people who would live in them. Its repair
-field reads, in the form's own words: "Bad for whites; fair for darkies"
-[[HOLC area description D11.5](#sources)]. It is quoted here once, so the reader can see the
+field reads, in the form's own words: "Bad for whites; Fair for darkies"
+[[FRASER, Richmond area descriptions](#sources), p. 47, field 6d]. It is quoted here once, so the reader can see the
 standard the forms applied; elsewhere this page paraphrases.
-<!-- TODO-VERIFY-SCAN: the D11.5 repair-field quotation above is from the DSL's transcription; a
-separate agent is checking it against the National Archives scan. If the scan cannot be read,
-replace the quotation with a sentence saying the form contains a slur, link the scan, and return
-the question to Chris. -->
+<!-- VERIFIED-SCAN: the D11.5 repair-field quotation above was checked against the National
+Archives scan (FRASER, ad_RichmondVA.pdf, page 47, field 6d) on November 22, 2026, and is quoted
+with the scan's capital F. It is the page's only use of the word; test/redlining-page.test.ts
+keeps it so. -->
 
 ### Where the word "redlining" comes from
 
@@ -131,16 +132,15 @@ A5, Windsor Farms, graded A by the Home Owners' Loan Corporation (HOLC) in 1937,
 (left of the divider) and today (right); drag the divider, or move it with the arrow keys. In
 1937 the curving streets were laid out and the houses still few: of today's {{A5_parcels}} parcels
 the city dates here, {{A5_by1937}}% were built by 1937 and {{A5_1938_77}}% between 1938 and 1977
-[[City of Richmond parcels](#sources)]. *How this was made:* the grades as Mapping Inequality
-digitized them from the 1937 map (CC BY-NC 2.5); for 1937, buildings standing today that the city
+[[City of Richmond parcels](#sources)]. *How this was made:* {{HOW}}; for 1937, buildings standing today that the city
 dates to 1937 or before; today, OpenStreetMap's buildings and streets; the ground from 2010s
 lidar, three times exaggerated. Working draft.
 :::
 
 ### D1, Jackson Ward, Apostle Town and Navy Hill: what the form recorded, and the ground
 
-D1 is the largest D area by the number of its parts: six pieces north of downtown, from Jackson
-Ward through Apostle Town to Navy Hill. Its form recorded rolling ground; a population 95% Black;
+D1 is drawn in several pieces north of downtown, from Jackson Ward through Apostle Town to Navy
+Hill. Its form recorded rolling ground; a population 95% Black;
 family incomes of $350 to $750 a year; one home in five lived in by its owner; single houses, 40%
 brick and 60% frame, forty years old and more, in poor to very poor repair; and mortgage money
 at 60% of appraisal. It wrote that the population was falling "because of demolition to save
@@ -186,7 +186,7 @@ made:* as the two figures above. Working draft.
 Richmond in 1937, seen from the south, with the grades the Home Owners' Loan Corporation gave
 each residential area tinted on the ground; the twelve D areas are labeled. Untinted land was not
 graded: downtown, industry, rail yards, parks and land outside the surveyed city. *How this was
-made:* the grades as Mapping Inequality digitized them from the 1937 map (CC BY-NC 2.5); buildings
+made:* {{HOW}}; buildings
 standing today that the city dates to 1937 or before, and in Jackson Ward those on the 1925 and
 1952 Sanborn maps; the ground from 2010s lidar, three times exaggerated. Most buildings of 1937
 that are gone are missing, so the picture undercounts the densest and most cleared areas most
@@ -203,7 +203,7 @@ D9, was vacant land the form expected to become a D area once built
 ::: figure
 ![A bar chart of graded land by grade: A {{A_km2}} square kilometers in {{A_n}} areas, B {{B_km2}} in {{B_n}}, C {{C_km2}} in {{C_n}}, D {{D_km2}} in {{D_n}}](redlining-land.webp)
 
-Richmond's graded land in 1937 by grade, measured from the digitized map. D was {{D_pct}}% of
+Richmond's graded land in 1937 by grade, measured from the redrawn outlines. D was {{D_pct}}% of
 the graded land, the largest of the four grades by area. *How this was made:* each grade's
 outlines merged and measured on a local plane by `measure.py`; see [How we know](#how-we-know).
 :::
@@ -261,8 +261,8 @@ areas, which were {{D_pct}}% of the graded land. *How this was made:* OpenStreet
 [How we know](#how-we-know).
 :::
 
-Inside D land the highway runs through three areas: D1 ({{hD1}} km), D8 ({{hD8}} km) and D5
-({{hD5}} km). Most of the region's limited-access mileage lies outside the 1937 graded areas
+Inside D land the highway runs through three numbered areas, D1 ({{hD1}} km), D8 ({{hD8}} km)
+and D5 ({{hD5}} km), and for {{hUn}} km through D pieces the map leaves unnumbered. Most of the region's limited-access mileage lies outside the 1937 graded areas
 altogether: {{hkm}} of the {{hkm_all}} km in the drawn area [[measured here](#how-we-know)]. The
 chart shows where the roads run. The routes were chosen by the Turnpike Authority, the city and
 the state, and the [Jackson Ward story](jackson-ward.md#how-the-route-was-chosen) follows how the
@@ -345,12 +345,20 @@ The method and its gaps are set out next.
 
 ## How we know
 
-- **The grades.** The outlines are Mapping Inequality's digitization of the 1937 map, downloaded
-  from the University of Richmond's Digital Scholarship Lab on November 21, 2026, and drawn as
-  published. They have not yet been checked against the National Archives scan. A second set,
-  redrawn from the public-domain scan, is being made for comparison; the story is built from one
-  set named in a single place (`tools/stories/redlining/outlines.py`) and can be rebuilt from
-  either.
+- **The grades.** The outlines were redrawn in code, with Claude, from the National Archives'
+  public-domain scan of the 1937 map (Record Group 195, via FRASER): each tint on the scan was
+  traced, each area named from its printed label, and the whole placed on today's city by 33
+  street corners that stood in 1937, matched to OpenStreetMap, with an affine fit whose error
+  is about 12 m in the middle of the map and up to about 24 m at its edges
+  [[FRASER, Richmond](#sources); `tools/holc/`]. Compared with Mapping Inequality's
+  digitization, the two sets agree closely: grade by grade their land overlaps by 92 to 94%, D
+  is {{D_pct}}% of graded land in this set and 30% in theirs, and the highway share in D is the
+  same to within a point [[Mapping Inequality](#sources)]. The map numbers 48 areas and leaves a few
+  small tinted pieces unnumbered; here they keep their grade and belong to no numbered area, so
+  they count in the totals by grade and in no area's own figures (`unnumbered.json`). A5 and A3
+  share one green field whose printed dividing line has gaps; the line between them here is the
+  redraw's estimate and is approximate. The story is built from one set
+  named in a single place (`tools/stories/redlining/outlines.py`) and can be rebuilt from either.
 - **The names of the areas** are this page's. Richmond's forms leave the name field blank; each
   name is placed from the streets, churches and parks inside its outline today (OpenStreetMap)
   and, for D3, from the D4 form, which names D3 as Oak Park.
@@ -407,9 +415,11 @@ this draft.*
 
 ## Whose work this rests on
 
-The 1937 grades were digitized here in Richmond by the University of Richmond's Digital
-Scholarship Lab for *Mapping Inequality* (Robert K. Nelson, LaDale Winling and others); every
-picture that uses their outlines says so. The map and forms are in the National Archives. The
+The 1937 maps were digitized and published, here in Richmond, by the University of Richmond's
+Digital Scholarship Lab for *Mapping Inequality* (Robert K. Nelson, LaDale Winling and others).
+This page's outlines were redrawn from the National Archives scan, and the Lab's digitization was
+used to check them; its transcriptions of the area descriptions were consulted throughout. The
+map and forms are in the National Archives. The
 story of Richmond's segregation and urban renewal has been told by LaToya Gray-Sparks in
 Encyclopedia Virginia, by the Library of Virginia's *Mapping Inequality* exhibition and Ashley
 Craig's history of public housing, and by many others, among them John V. Moeser, Julian Maxwell
@@ -424,15 +434,21 @@ Opened while drafting, on the date given.
 
 - **Mapping Inequality**: Nelson, Robert K., LaDale Winling, et al. "Mapping Inequality: Redlining
   in New Deal America." Edited by Robert K. Nelson. *American Panorama: An Atlas of United States
-  History*, 2023. https://dsl.richmond.edu/panorama/redlining. Spatial data CC BY-NC 2.5
-  (https://creativecommons.org/licenses/by-nc/2.5/); used here noncommercially, with credit.
-  Polygons downloaded November 21, 2026.
+  History*, 2023. https://dsl.richmond.edu/panorama/redlining. Its spatial data (CC BY-NC 2.5,
+  https://creativecommons.org/licenses/by-nc/2.5/), downloaded November 21, 2026, was used only to
+  check the redrawn outlines and is not drawn on this page.
 - **HOLC area descriptions** (A5, C7, D1 to D11.5): the 1937 Richmond forms as transcribed by
   the Digital Scholarship Lab, https://github.com/americanpanorama/HOLC_Area_Description_Data
-  (form 19370203), downloaded November 21, 2026. Quotations to be checked against the scan.
+  (form 19370203), downloaded November 21, 2026. The D11.5 quotation is checked against the
+  scan; the other short quotations are still to be.
+- **FRASER, Richmond area descriptions**: the 1937 Richmond area descriptions, National
+  Archives RG 195, via FRASER, https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/ad_RichmondVA.pdf;
+  the D11.5 form (page 47) read on the scan November 22, 2026.
 - **FRASER, Richmond**: "City of Richmond, Virginia and Environs", Home Owners' Loan Corporation,
   April 3, 1937, National Archives RG 195, via FRASER, Federal Reserve Bank of St. Louis,
-  https://fraser.stlouisfed.org/archival/6751/item/619201 (opened November 22, 2026).
+  https://fraser.stlouisfed.org/archival/6751/item/619201 (opened November 22, 2026); the scan the
+  outlines were redrawn from, https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf
+  (fetched November 22, 2026; public domain).
 - **NARA RG 195**: National Archives, Guide to Federal Records, Records of the Federal Home Loan
   Bank Board, RG 195, https://www.archives.gov/research/guide-fed-records/groups/195.html (opened
   November 22, 2026). Public domain.
@@ -489,4 +505,4 @@ claim is listed in a fact check against them. The maps are drawn by Chris with i
 he draws with, built with Claude; the tinting, measures and charts were done in code from the
 same data as the maps (`tools/stories/redlining/`). See the
 [artist statement](artist-statement.md) for how Chris works with the tool. Nothing here is for
-sale, and nothing made from the Mapping Inequality outlines is used in anything sold.
+sale.

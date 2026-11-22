@@ -41,7 +41,7 @@ P = palette()
 REG = json.load(open(os.path.join(ROOT, 'regions/richmond-1937.json')))
 import sys  # noqa: E402
 sys.path.insert(0, HERE)
-from outlines import PATH as GRADES_PATH, CREDIT  # noqa: E402  the one switch: outlines.py
+from outlines import CREDIT, load as load_outlines  # noqa: E402  the one switch: outlines.py
 from areas import NAMES, D_AREAS, slug  # noqa: E402
 LEGEND = ['A "Best"', 'B "Still Desirable"', 'C "Definitely Declining"', 'D "Hazardous"']
 KEY_TITLE = "The Home Owners' Loan Corporation's (HOLC's) grades, 1937, in its own words"
@@ -176,7 +176,7 @@ def keyed(img, title, sub=None, extra=0):
 def area_box(label, margin=1.18, aspect=0.62, min_ground=1100):
     """A view box that holds one graded area whole: its bounds, a margin, at least `min_ground` m."""
     from shapely.geometry import shape
-    g = [f for f in json.load(open(os.path.join(ROOT, GRADES_PATH)))['features'] if f['properties']['label'].strip() == label][0]
+    g = [f for f in load_outlines(ROOT)['features'] if (f['properties'].get('label') or '').strip() == label][0]
     x0, y0, x1, y1 = shape(g['geometry']).bounds
     kx = 111320 * math.cos(math.radians(REG['center'][1]))
     w_m, d_m = (x1 - x0) * kx * margin, (y1 - y0) * 111132 * margin

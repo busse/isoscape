@@ -23,7 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 sys.path.insert(0, HERE)
 from areas import NAMES, slug  # noqa: E402
-from outlines import CREDIT  # noqa: E402
+from outlines import CREDIT, HOW  # noqa: E402
 
 URL = {
     'form': 'https://github.com/americanpanorama/HOLC_Area_Description_Data',
@@ -139,8 +139,7 @@ def page_grid(t):
                 '',
                 f"**{lab}, {NAMES[lab]}.** *What the 1937 form recorded:* {fill(b['form'], t)} [{cites(b['cite_form'])}] "
                 f"*What stands there now:* {fill(b['now'], t)} [{cites(b['cite_now'])}] "
-                "*How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the 1937 grades as Mapping Inequality digitized them "
-                "(CC BY-NC 2.5) tinted under them. Working draft.",
+                f"*How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with {HOW} tinted under them. Working draft.",
                 ':::', '']
     return '\n'.join(out)
 

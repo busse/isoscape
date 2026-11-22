@@ -10,10 +10,11 @@ features and dates), seen in 1937 and today. Its streetcar lines are put behind 
 grade. Switches:
 
 - `grades`: the 1937 grades as tinted ground, with a key (`Tint` in src/history.ts), and a label
-  on each D area at the point Mapping Inequality labels it.
+  on each D area at the point its label stands in the outlines' set.
 - `built`: the grades, and the limited-access highways built since drawn over them.
 
-The grades come from Mapping Inequality's Richmond GeoJSON, cached in data/holc/ (CC BY-NC:
+The grades come from the outline set named in outlines.py (the one switch). Mapping Inequality's
+Richmond GeoJSON, if chosen, is cached in data/holc/ (CC BY-NC:
 never for anything sold; see tools/stories/redlining/sources.md). The labels are read from it
 here, so the file is written again whenever the cache changes.
 """
@@ -22,7 +23,7 @@ import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
-from outlines import PATH as GRADES, CREDIT  # the one switch: outlines.py
+from outlines import PATH as GRADES, CREDIT, URL as SOURCE_GRADES  # the one switch: outlines.py
 SOURCE_MI = 'https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json'
 SOURCE_NARA = 'https://catalog.archives.gov/id/720357'
 
@@ -50,8 +51,8 @@ def main():
             labels.append({
                 'id': f"holc-{p['label'].lower().replace('.', '-')}-{sw}",
                 'name': p['label'], 'kind': 'label', 'at': [lon, lat], 'switch': sw,
-                'note': "The area's label, at the point Mapping Inequality places it.",
-                'sources': [SOURCE_MI],
+                'note': "The area's label, at the point the outline set places it.",
+                'sources': [SOURCE_GRADES],
             })
     tint = {'file': GRADES, 'property': 'grade', 'values': ['A', 'B', 'C', 'D'], 'legend': LEGEND}
     # Jackson Ward's traced buildings (the 1925 and 1952 Sanborn sheets) and its ground before the
@@ -66,7 +67,7 @@ def main():
         'about': "In 1937 the federal Home Owners' Loan Corporation graded Richmond's residential areas from A to D. "
                  'The redlining story draws its grades on the ground, with the buildings standing then.',
         'epochs': [{'year': 1937, 'title': "The HOLC's grades",
-                    'note': "Buildings standing today that the city dates to 1937 or before, and the series' curated features; the grades from Mapping Inequality's digitization of the 1937 map."},
+                    'note': "Buildings standing today that the city dates to 1937 or before, and the series' curated features; the grades from the 1937 map (outlines.py names the outline set)."},
                    {'year': 2026, 'title': 'Today, over the 1937 grades',
                     'note': "Today's buildings and streets, with the 1937 grades under them."}],
         'features': cars + labels,
@@ -75,7 +76,7 @@ def main():
             'built': {'tint': {**tint, 'roads': ['motorway', 'motorway_link']},
                       'note': 'The grades, and the limited-access highways (OSM motorway and motorway_link) drawn over them.'},
         },
-        'sources': [SOURCE_MI, SOURCE_NARA],
+        'sources': [SOURCE_GRADES, SOURCE_NARA],
     }
     path = os.path.join(ROOT, 'history/richmond-1937.json')
     with open(path, 'w') as fh:

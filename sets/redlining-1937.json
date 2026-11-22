@@ -4,7 +4,7 @@
  "title": "Richmond's twelve D areas, 1937 and today",
  "subtitle": "The Home Owners' Loan Corporation's 1937 map of Richmond on the ground, and each area it graded D, \"Hazardous,\" as it stands now",
  "note": "The 1937 map shows buildings standing today that the city dates to 1937 or before, and Jackson Ward's from the 1925 and 1952 Sanborn maps; most others standing then are gone and not drawn. Box notes paraphrase the 1937 area descriptions. Working draft, not for sale.",
- "credit": "Drawn by Chris Busse with isoscape  ·  Grades: Home Owners' Loan Corporation, 1937 (National Archives, RG 195), as digitized by Mapping Inequality, University of Richmond Digital Scholarship Lab (CC BY-NC 2.5)  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Year built: City of Richmond",
+ "credit": "Drawn by Chris Busse with isoscape  ·  Grades: Home Owners' Loan Corporation, 1937 (National Archives, RG 195, via FRASER); outlines redrawn with Claude from the public-domain scan, positioned with OpenStreetMap street corners (ODbL)  ·  Map data © OpenStreetMap contributors (ODbL)  ·  Elevation: USGS 3DEP  ·  Year built: City of Richmond",
  "ground_note": "The ground is today's, from lidar, except in Jackson Ward, where the Turnpike's trench is filled for 1937.",
  "map": {
   "region": "richmond-1937",
@@ -72,7 +72,7 @@
    ],
    "year": 2026,
    "ground": 1800,
-   "note": "In 1937 the form found \"mostly woods and bushes\" and practically no homes. Since: the woods are built over, 715 buildings in today's OpenStreetMap, with shops along Laburnum Avenue.",
+   "note": "In 1937 the form found \"mostly woods and bushes\" and practically no homes. Since: the woods are built over, 700 buildings in today's OpenStreetMap, with shops along Laburnum Avenue.",
    "sources": [
     "https://github.com/americanpanorama/HOLC_Area_Description_Data",
     "https://www.openstreetmap.org/",
@@ -90,7 +90,7 @@
    ],
    "year": 2026,
    "ground": 1600,
-   "note": "In 1937: \"same as Oak Park, D3,\" the form said: frame houses, a population it recorded as entirely Black, half owner-occupied. Since: about half the houses the city dates here are from before 1937, most of the rest from 1938–1977.",
+   "note": "In 1937: described as the same as Oak Park, D3: frame houses, a population it recorded as entirely Black, half owner-occupied. Since: about half the houses the city dates here are from before 1937, most of the rest from 1938–1977.",
    "sources": [
     "https://github.com/americanpanorama/HOLC_Area_Description_Data",
     "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
@@ -164,7 +164,7 @@
    ],
    "year": 2026,
    "ground": 2600,
-   "note": "In 1937: brick flats and frame houses, a population the form recorded as 95% Black, families moving in from D1. Since: the Randolph renewal (1973) and the Downtown Expressway, 3.9 km of it through D8, across Randolph and Oregon Hill.",
+   "note": "In 1937: brick flats and frame houses, a population the form recorded as 95% Black, families moving in from D1. Since: the Randolph renewal (1973) and the Downtown Expressway, 3.3 km of it through D8, across Randolph and Oregon Hill.",
    "sources": [
     "https://github.com/americanpanorama/HOLC_Area_Description_Data",
     "https://encyclopediavirginia.org/entries/urban-renewal-in-richmond/",
@@ -218,7 +218,7 @@
    ],
    "year": 2026,
    "ground": 1300,
-   "note": "In 1937: the one D area the form recorded as white, \"Laboring Whites,\" with the highest incomes of any D area. Since: 35% of the buildings the city dates here are from 2000 or later, the most of any D area.",
+   "note": "In 1937: the one D area the form recorded as white, \"Laboring Whites,\" with the highest incomes of any D area. Since: 36% of the buildings the city dates here are from 2000 or later, the most of any D area.",
    "sources": [
     "https://github.com/americanpanorama/HOLC_Area_Description_Data",
     "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",

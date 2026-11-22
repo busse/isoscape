@@ -880,7 +880,7 @@
     {
       "year": 1937,
       "title": "The HOLC's grades",
-      "note": "Buildings standing today that the city dates to 1937 or before, and the series' curated features; the grades from Mapping Inequality's digitization of the 1937 map."
+      "note": "Buildings standing today that the city dates to 1937 or before, and the series' curated features; the grades from the 1937 map (outlines.py names the outline set)."
     },
     {
       "year": 2026,
@@ -5412,13 +5412,13 @@
       "name": "D1",
       "kind": "label",
       "at": [
-        -77.44,
-        37.558
+        -77.450775,
+        37.563063
       ],
       "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5426,97 +5426,13 @@
       "name": "D1",
       "kind": "label",
       "at": [
-        -77.44,
-        37.558
+        -77.450775,
+        37.563063
       ],
       "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
-      ]
-    },
-    {
-      "id": "holc-d10-grades",
-      "name": "D10",
-      "kind": "label",
-      "at": [
-        -77.456,
-        37.517
-      ],
-      "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
-      "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
-      ]
-    },
-    {
-      "id": "holc-d10-built",
-      "name": "D10",
-      "kind": "label",
-      "at": [
-        -77.456,
-        37.517
-      ],
-      "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
-      "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
-      ]
-    },
-    {
-      "id": "holc-d11-grades",
-      "name": "D11",
-      "kind": "label",
-      "at": [
-        -77.45,
-        37.52
-      ],
-      "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
-      "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
-      ]
-    },
-    {
-      "id": "holc-d11-built",
-      "name": "D11",
-      "kind": "label",
-      "at": [
-        -77.45,
-        37.52
-      ],
-      "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
-      "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
-      ]
-    },
-    {
-      "id": "holc-d11-5-grades",
-      "name": "D11.5",
-      "kind": "label",
-      "at": [
-        -77.442,
-        37.509
-      ],
-      "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
-      "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
-      ]
-    },
-    {
-      "id": "holc-d11-5-built",
-      "name": "D11.5",
-      "kind": "label",
-      "at": [
-        -77.442,
-        37.509
-      ],
-      "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
-      "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5524,13 +5440,13 @@
       "name": "D2",
       "kind": "label",
       "at": [
-        -77.441,
-        37.591
+        -77.438521,
+        37.591928
       ],
       "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5538,13 +5454,13 @@
       "name": "D2",
       "kind": "label",
       "at": [
-        -77.441,
-        37.591
+        -77.438521,
+        37.591928
       ],
       "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5552,13 +5468,13 @@
       "name": "D3",
       "kind": "label",
       "at": [
-        -77.429,
-        37.589
+        -77.427416,
+        37.586432
       ],
       "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5566,13 +5482,13 @@
       "name": "D3",
       "kind": "label",
       "at": [
-        -77.429,
-        37.589
+        -77.427416,
+        37.586432
       ],
       "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5580,13 +5496,13 @@
       "name": "D4",
       "kind": "label",
       "at": [
-        -77.427,
-        37.579
+        -77.429621,
+        37.578913
       ],
       "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5594,13 +5510,13 @@
       "name": "D4",
       "kind": "label",
       "at": [
-        -77.427,
-        37.579
+        -77.429621,
+        37.578913
       ],
       "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5608,13 +5524,13 @@
       "name": "D5",
       "kind": "label",
       "at": [
-        -77.42,
-        37.55
+        -77.412546,
+        37.551538
       ],
       "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5622,13 +5538,13 @@
       "name": "D5",
       "kind": "label",
       "at": [
-        -77.42,
-        37.55
+        -77.412546,
+        37.551538
       ],
       "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5636,13 +5552,13 @@
       "name": "D6",
       "kind": "label",
       "at": [
-        -77.403,
-        37.535
+        -77.41841,
+        37.536639
       ],
       "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5650,13 +5566,13 @@
       "name": "D6",
       "kind": "label",
       "at": [
-        -77.403,
-        37.535
+        -77.41841,
+        37.536639
       ],
       "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5664,13 +5580,13 @@
       "name": "D7",
       "kind": "label",
       "at": [
-        -77.406,
-        37.519
+        -77.406959,
+        37.518054
       ],
       "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5678,13 +5594,13 @@
       "name": "D7",
       "kind": "label",
       "at": [
-        -77.406,
-        37.519
+        -77.406959,
+        37.518054
       ],
       "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5692,13 +5608,13 @@
       "name": "D8",
       "kind": "label",
       "at": [
-        -77.459,
-        37.543
+        -77.460699,
+        37.542835
       ],
       "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5706,13 +5622,13 @@
       "name": "D8",
       "kind": "label",
       "at": [
-        -77.459,
-        37.543
+        -77.460699,
+        37.542835
       ],
       "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5720,13 +5636,13 @@
       "name": "D9",
       "kind": "label",
       "at": [
-        -77.472,
-        37.534
+        -77.46906,
+        37.534696
       ],
       "switch": "grades",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     },
     {
@@ -5734,20 +5650,104 @@
       "name": "D9",
       "kind": "label",
       "at": [
-        -77.472,
-        37.534
+        -77.46906,
+        37.534696
       ],
       "switch": "built",
-      "note": "The area's label, at the point Mapping Inequality places it.",
+      "note": "The area's label, at the point the outline set places it.",
       "sources": [
-        "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json"
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
+      ]
+    },
+    {
+      "id": "holc-d10-grades",
+      "name": "D10",
+      "kind": "label",
+      "at": [
+        -77.459553,
+        37.514892
+      ],
+      "switch": "grades",
+      "note": "The area's label, at the point the outline set places it.",
+      "sources": [
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
+      ]
+    },
+    {
+      "id": "holc-d10-built",
+      "name": "D10",
+      "kind": "label",
+      "at": [
+        -77.459553,
+        37.514892
+      ],
+      "switch": "built",
+      "note": "The area's label, at the point the outline set places it.",
+      "sources": [
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
+      ]
+    },
+    {
+      "id": "holc-d11-grades",
+      "name": "D11",
+      "kind": "label",
+      "at": [
+        -77.448172,
+        37.520786
+      ],
+      "switch": "grades",
+      "note": "The area's label, at the point the outline set places it.",
+      "sources": [
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
+      ]
+    },
+    {
+      "id": "holc-d11-built",
+      "name": "D11",
+      "kind": "label",
+      "at": [
+        -77.448172,
+        37.520786
+      ],
+      "switch": "built",
+      "note": "The area's label, at the point the outline set places it.",
+      "sources": [
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
+      ]
+    },
+    {
+      "id": "holc-d11-5-grades",
+      "name": "D11.5",
+      "kind": "label",
+      "at": [
+        -77.444053,
+        37.51069
+      ],
+      "switch": "grades",
+      "note": "The area's label, at the point the outline set places it.",
+      "sources": [
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
+      ]
+    },
+    {
+      "id": "holc-d11-5-built",
+      "name": "D11.5",
+      "kind": "label",
+      "at": [
+        -77.444053,
+        37.51069
+      ],
+      "switch": "built",
+      "note": "The area's label, at the point the outline set places it.",
+      "sources": [
+        "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf"
       ]
     }
   ],
   "switches": {
     "grades": {
       "tint": {
-        "file": "data/holc/richmond-1937.geojson",
+        "file": "history/holc/richmond-1937-redrawn.geojson",
         "property": "grade",
         "values": [
           "A",
@@ -5763,14 +5763,14 @@
             "C \"Definitely Declining\"",
             "D \"Hazardous\""
           ],
-          "source": "Grades: Home Owners' Loan Corporation, 1937 (National Archives, RG 195), as digitized by Mapping Inequality, University of Richmond Digital Scholarship Lab (CC BY-NC 2.5)"
+          "source": "Grades: Home Owners' Loan Corporation, 1937 (National Archives, RG 195, via FRASER); outlines redrawn with Claude from the public-domain scan, positioned with OpenStreetMap street corners (ODbL)"
         }
       },
       "note": "The 1937 grades as tinted ground, with a key."
     },
     "built": {
       "tint": {
-        "file": "data/holc/richmond-1937.geojson",
+        "file": "history/holc/richmond-1937-redrawn.geojson",
         "property": "grade",
         "values": [
           "A",
@@ -5786,7 +5786,7 @@
             "C \"Definitely Declining\"",
             "D \"Hazardous\""
           ],
-          "source": "Grades: Home Owners' Loan Corporation, 1937 (National Archives, RG 195), as digitized by Mapping Inequality, University of Richmond Digital Scholarship Lab (CC BY-NC 2.5)"
+          "source": "Grades: Home Owners' Loan Corporation, 1937 (National Archives, RG 195, via FRASER); outlines redrawn with Claude from the public-domain scan, positioned with OpenStreetMap street corners (ODbL)"
         },
         "roads": [
           "motorway",
@@ -5797,7 +5797,7 @@
     }
   },
   "sources": [
-    "https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json",
+    "https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf",
     "https://catalog.archives.gov/id/720357"
   ]
 }

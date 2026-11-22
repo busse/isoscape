@@ -33,7 +33,7 @@ LAT0 = 37.55
 KX = 111320 * math.cos(math.radians(LAT0))
 KY = 111132
 GRADES = ['A', 'B', 'C', 'D']
-from outlines import PATH as GRADES_PATH  # the one switch: outlines.py
+from outlines import PATH as GRADES_PATH, load as load_outlines  # the one switch: outlines.py
 
 
 def xy(lon, lat):
@@ -53,18 +53,22 @@ def proj(geom):
 
 def main():
     root = lambda p: os.path.join(ROOT, p)  # noqa: E731
-    holc = json.load(open(root(GRADES_PATH)))
+    holc = load_outlines(ROOT)
     areas = {}
-    for f in holc['features']:
+    for i, f in enumerate(holc['features']):
         p = f['properties']
-        areas[p['label'].strip()] = {'grade': p.get('grade'), 'geom': proj(f['geometry'])}
+        # Pieces the map prints no number on (unnumbered.json) count in the totals by grade
+        # and in no area's own figures.
+        key = f'unnumbered-{i}' if p.get('unnumbered') else p['label'].strip()
+        areas[key] = {'grade': p.get('grade'), 'geom': proj(f['geometry']), 'numbered': not p.get('unnumbered')}
     by = {g: unary_union([a['geom'] for a in areas.values() if a['grade'] == g]) for g in GRADES}
     graded = unary_union(list(by.values()))
-    n = {g: sum(1 for a in areas.values() if a['grade'] == g) for g in GRADES}
+    n = {g: sum(1 for a in areas.values() if a['grade'] == g and a['numbered']) for g in GRADES}
     total = sum(by[g].area for g in GRADES)
     overlap = total - graded.area
     land = {g: {'areas': n[g], 'km2': round(by[g].area / 1e6, 2), 'share': round(by[g].area / total, 3)} for g in GRADES}
     ungraded = [k for k, a in areas.items() if a['grade'] not in GRADES]
+    unnumbered = {g: round(sum(a['geom'].area for a in areas.values() if a['grade'] == g and not a['numbered']) / 1e4, 1) for g in GRADES}
 
     # The hero's frame (bearing 0: a lon/lat box about the center) and how much of each grade it holds.
     reg = json.load(open(root('regions/richmond-1937.json')))
@@ -75,7 +79,7 @@ def main():
     hd = reg['depth'] / 2
     frame = Polygon([(cx - hw, cy - hd), (cx + hw, cy - hd), (cx + hw, cy + hd), (cx - hw, cy + hd)])
     in_frame = {g: round(by[g].intersection(frame).area / by[g].area, 3) for g in GRADES}
-    cut = sorted(k for k, a in areas.items() if a['grade'] in GRADES and a['geom'].difference(frame).area > 0.02 * a['geom'].area)
+    cut = sorted(k for k, a in areas.items() if a['grade'] in GRADES and a['numbered'] and a['geom'].difference(frame).area > 0.02 * a['geom'].area)
 
     # Highways from the OSM cache.
     osm = json.load(open(root('data/richmond-streetcars/osm.json')))
@@ -110,7 +114,7 @@ def main():
     # Which D areas a highway crosses, and how far.
     d_crossed = {}
     for k, a in areas.items():
-        if a['grade'] != 'D':
+        if a['grade'] != 'D' or not a['numbered']:
             continue
         v = sum(ln.intersection(a['geom']).length for ln in roads['motorway'])
         if v > 0:
@@ -152,14 +156,14 @@ def main():
         if len(pts) < 4 or pts[0] != pts[-1]:
             continue
         c = Polygon(pts).centroid
-        inside = [k for k, a in areas.items() if a['geom'].contains(c)]
+        inside = [k for k, a in areas.items() if a['numbered'] and a['geom'].contains(c)]
         courts[nm] = {'osm': f"w{e['id']}", 'in': inside or ['ungraded'], 'm_to_D': round(by['D'].distance(c))}
 
     # Each D area, and A5 (the worked example's other half): its size, today's dated parcels
     # (how many the city dates to 1937 or before, to 1938-1977, and to 2000 or later), today's
     # OSM building outlines whose center falls inside, and limited-access highway inside it.
     per_area = {}
-    focus = [k for k, a in areas.items() if a['grade'] == 'D'] + ['A5']
+    focus = [k for k, a in areas.items() if a['grade'] == 'D' and a['numbered']] + ['A5']
     for k in focus:
         g = areas[k]['geom']
         pg = prep(g)
@@ -204,6 +208,7 @@ def main():
         'about': 'Computed by tools/stories/redlining/measure.py from the cached data; see its docstring for the method.',
         'graded_land': land, 'graded_km2_union': round(graded.area / 1e6, 2), 'overlap_km2': round(overlap / 1e6, 3),
         'ungraded_features': ungraded,
+        'unnumbered_ha_by_grade': unnumbered,
         'extent_km': [round((graded.bounds[2] - graded.bounds[0]) / 1000, 1), round((graded.bounds[3] - graded.bounds[1]) / 1000, 1)],
         'frame': {'share_of_grade_inside': in_frame, 'areas_cut_by_frame': cut},
         'motorway': motor, 'motorway_and_links': with_links, 'motorway_in_d_by_road_km': road_d, 'motorway_in_d_by_area_km': d_crossed,
