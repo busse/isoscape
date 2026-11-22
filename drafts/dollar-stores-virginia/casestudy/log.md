@@ -320,6 +320,8 @@ Folder: `2026-11-21-09-replication/`.
   - Convenience stores show the same pattern, so the finding is "edge retail on the road in".
 - **Draft findings** are in `findings-draft.md`. They went to an independent Fable agent for
   checking before anything is shown as a finding.
-- **Row-level data.** `points.csv.gz`, about 4.6 million rows, stays on the Mac under
-  `isoscape-work/dollar-stores/casestudy/2026-11-21-09-replication/` because it is too big
-  for git.
+- **Row-level data.**
+  - The full points file (4.6 million rows, 330 MB) is too big to keep. It can be rebuilt
+    from the scripts and the raw files on the Mac.
+  - The stores with all their features (187,464 rows, 14.6 MB) are kept on the Mac as
+    `isoscape-work/dollar-stores/casestudy/2026-11-21-09-replication/stores-with-features.csv.gz`.
