@@ -16,6 +16,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | research | 2 |
 | final production | 46 |
 | in work | 4 |
+| owner test | 1 |
 | live | 2 |
 | on hold | 55 |
 | blocked | 1 |
@@ -23,6 +24,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
+- **Story PDFs: phone and large-screen editions of each story page**: Built on story-pdf (tools/pdf/story_pdf.py). To check: the four PDFs for Jackson Ward and Redlining (phone and large-screen) and the local preview with the PDF links on. Not live: pdf: true is not set in either story's story.md, and no PDF is published. Approval turns it on: set pdf: true, rebuild both pages and PDFs, publish.
 - **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
@@ -92,6 +94,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | — | Shop: default to the unframed print, curated collections and sort order, story and set links, menu | site | — | no |
 | — | Shop: product template, hero layouts for the four cutaways and four collections, Richmond descriptions, place-first titles | site | — | no |
 | — | Shop: from holiday shop to a continuing shop with a holiday promotion; Coming soon, The 2026 Annual; room for photography | site | — | no |
+
+## Owner test
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Story PDFs: phone and large-screen editions of each story page | site | — | no |
 
 ## Live
 

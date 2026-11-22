@@ -3344,6 +3344,30 @@
    "log": [
     "2026-11-22: rough draft -> research"
    ]
+  },
+  "story-pdfs": {
+   "title": "Story PDFs: phone and large-screen editions of each story page",
+   "plate": null,
+   "kind": "site",
+   "stage": "owner test",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "owner",
+   "decision": "Built on story-pdf (tools/pdf/story_pdf.py). To check: the four PDFs for Jackson Ward and Redlining (phone and large-screen) and the local preview with the PDF links on. Not live: pdf: true is not set in either story's story.md, and no PDF is published. Approval turns it on: set pdf: true, rebuild both pages and PDFs, publish.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": "story-pdf",
+   "worktree": "/home/claude/wt-pdf",
+   "links": [],
+   "log": [
+    "2026-11-22: rough draft -> owner test"
+   ]
   }
  }
 }
