@@ -9,7 +9,7 @@ shop: false
 
 # Redlining in Richmond: the 1937 federal mortgage map, drawn on the ground it graded
 
-> **Working draft (d1), for review.** This page is not listed on the site and asks search
+> **Working draft (d2), for review.** This page is not listed on the site and asks search
 > engines not to index it. Nobody outside has reviewed it, and none of the people or
 > institutions whose work it rests on has been asked about it, so their names here imply no
 > endorsement. The numbers, pictures and wording may change. Drafted with Claude for Chris

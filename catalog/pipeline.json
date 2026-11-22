@@ -3072,7 +3072,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "Working draft d1 ready for review (outputs/stories/redlining/working/d1.md; preview at working/preview/). Built from the redrawn outlines; unnumbered pieces in no area. Seven open questions in d1.md; the menu sheet needs a set.py layout option (not done).",
+   "decision": "Working draft d2 ready for review (outputs/stories/redlining/working/d2.md; preview at working/preview-d2/). Three questions in d2.md.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3084,11 +3084,12 @@
    "title": "Redlining in Richmond, 1937 to today",
    "kind": "story",
    "stage": "outline",
-   "notes": "Reader (owner, 2026-11-22): assume no prior knowledge of the HOLC, grading or redlining; a reader who knows the subject should still learn from the detail and the way it is drawn. d1 drafted 2026-11-22 on story-redlining.",
+   "notes": "Reader (owner, 2026-11-22): assume no prior knowledge of the HOLC, grading or redlining; a reader who knows the subject should still learn from the detail and the way it is drawn. Asset: working draft d2 (2026-11-22, branch story-redlining); the board refuses an asset version at the outline stage, so the draft number is kept here and in the decision.",
    "private": true,
    "log": [
     "2026-11-21: research -> outline",
-    "2026-11-22: working draft d1 (outline approved; owner decisions applied)"
+    "2026-11-22: working draft d1 (outline approved; owner decisions applied)",
+    "2026-11-22: working draft d2 (owner decisions on d1 applied)"
    ]
   },
   "story-slave-trade": {

@@ -9,6 +9,7 @@ work, against what the work took. Unit: one agent run of about 30 to 45 minutes 
 |---|---|---|---|---|---|
 | Outline and rough draft | Nov. 21, 2026 | 4.75 runs | 21:57–22:38, about 41 min (1.0 run) | 0 | outline, six rough figures, tint switch (see `outputs/stories/redlining/rough/effort.md`) |
 | Working draft d1 | Nov. 22, 2026 | 9.25 runs (5–7 h) | about 15:00–16:30, about 90 min (2.0–2.5 runs) | 0 | this draft: see `outputs/stories/redlining/working/d1.md` |
+| Working draft d2 | Nov. 22, 2026 | 4.1 runs (2–3 h) | 16:44–17:15, about 30 min (0.75 run) | 0 | see `outputs/stories/redlining/working/d2.md` |
 
 Tokens were not metered from inside the run.
 
@@ -42,3 +43,11 @@ Tokens were not metered from inside the run.
   pieces). Because the outline source sat behind one switch, switching sets cost one rebuild and
   one edit per script, about 15 minutes in all.
 - Not done, and not in the time above: the menu sheet (needs a `set.py` layout option).
+
+## d2 by part
+
+Estimate 4.1 runs; actual about 30 minutes of wall clock (16:44–17:15 UTC), with builds, views
+and checks running in the background while other parts went on. By weight of work, the scan
+(48 pages tiled, 14 read closely) and the shop opt-out (four files and a test) took the most;
+the tones, sources, terrain measure and labels were each a few minutes. Reading the scan paid
+for itself: it corrected two figures and d1's note on the area names.
