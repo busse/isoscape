@@ -3040,8 +3040,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "Three independent reads with Claude (scholar, dignity and harm, first-time reader) were run on the live unlisted page on 2026-11-22. Their fixes are on branch story-jackson-ward-reads (not merged, not published) for the owner's preview (ISO-TEST/stories/jackson-ward/reads/preview, changes.md). Notice per the owner's decision of 2026-11-22: the plain facts of how the page was made, no claim of review; author 'Chris Busse, a Richmond artist'. Substance changed: stated ground error widened to about 2 m mid-trench, 3 to 4 m or more at the ends; count ranges added (central 216/447 unchanged); island and tracing end at about 7th Street, not 8th; route section rests on the 1954 act and attributed sources. Open for the owner: preview and merge; the headline choice.",
+   "waiting_on": "nothing",
+   "decision": "Published and listed on 2026-11-22 by the owner's approval, after three independent reads with Claude (scholar, dignity and harm, first-time reader and recheck) were applied: ground error restated (about 2 m mid-trench, 3 to 4 m or more at the ends), count ranges added (central counts unchanged), route section rebuilt on the 1954 act, plain-facts notice, no shop link. Corrections are dated on the page.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3050,16 +3050,17 @@
    "links": [
     "/mnt/user-data/outputs/stories/jackson-ward/brief.md"
    ],
-   "title": "Jackson Ward and the interstate",
+   "title": "Jackson Ward, Richmond, VA, before I-95, block by block",
    "kind": "story",
-   "stage": "outside review",
+   "stage": "published",
    "notes": "editorial first: a web story, perhaps a book; prints are not the goal",
    "private": true,
    "log": [
     "2026-11-18: research -> rough draft",
     "2026-11-18: rough draft -> outline",
     "2026-11-18: outline -> fact check",
-    "2026-11-18: fact check -> outside review"
+    "2026-11-18: fact check -> outside review",
+    "2026-11-22: outside review -> published"
    ]
   },
   "story-redlining": {
