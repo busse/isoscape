@@ -1,0 +1,49 @@
+set,state,kind,match_rate
+A,VA,Dollar General,0.755
+A,VA,Dollar Tree,0.373
+A,VA,Family Dollar,0.77
+A,VA,convenience,0.806
+A,VA,grocery,0.451
+A,VA,pharmacy,0.604
+B,KY,Dollar General,0.676
+B,KY,Dollar Tree,0.434
+B,KY,Family Dollar,0.662
+B,KY,convenience,0.712
+B,KY,grocery,0.48
+B,KY,pharmacy,0.612
+B,MD,Dollar General,0.604
+B,MD,Dollar Tree,0.504
+B,MD,Family Dollar,0.654
+B,MD,convenience,0.729
+B,MD,grocery,0.436
+B,MD,pharmacy,0.587
+B,NC,Dollar General,0.757
+B,NC,Dollar Tree,0.496
+B,NC,Family Dollar,0.739
+B,NC,convenience,0.836
+B,NC,grocery,0.53
+B,NC,pharmacy,0.834
+B,SC,Dollar General,0.793
+B,SC,Dollar Tree,0.606
+B,SC,Family Dollar,0.787
+B,SC,convenience,0.867
+B,SC,grocery,0.564
+B,SC,pharmacy,0.837
+B,TN,Dollar General,0.72
+B,TN,Dollar Tree,0.573
+B,TN,Family Dollar,0.715
+B,TN,convenience,0.827
+B,TN,grocery,0.58
+B,TN,pharmacy,0.798
+B,WV,Dollar General,0.719
+B,WV,Dollar Tree,0.359
+B,WV,Family Dollar,0.695
+B,WV,convenience,0.779
+B,WV,grocery,0.406
+B,WV,pharmacy,0.75
+discovery,VA,Dollar General,0.721
+discovery,VA,Dollar Tree,0.476
+discovery,VA,Family Dollar,0.731
+discovery,VA,convenience,0.867
+discovery,VA,grocery,0.57
+discovery,VA,pharmacy,0.83

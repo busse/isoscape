@@ -1,0 +1,43 @@
+{
+  "note": "Five regions for the editorial grid, each a group of Virginia's 21 planning district commissions (PDCs). Membership from the Virginia Association of PDCs directory, https://www.vapdc.org/pdc-directory, opened 2026-11-21. Localities in two PDCs are placed by 'dual'.",
+  "regions": {
+    "Southwest": {
+      "Lenowisco": ["Lee County", "Scott County", "Wise County", "Norton city"],
+      "Cumberland Plateau": ["Buchanan County", "Dickenson County", "Russell County", "Tazewell County"],
+      "Mount Rogers": ["Bland County", "Carroll County", "Grayson County", "Smyth County", "Washington County", "Wythe County", "Bristol city", "Galax city"],
+      "New River Valley": ["Floyd County", "Giles County", "Montgomery County", "Pulaski County", "Radford city"]
+    },
+    "Valley and Blue Ridge": {
+      "Roanoke Valley-Alleghany": ["Alleghany County", "Botetourt County", "Craig County", "Roanoke County", "Covington city", "Roanoke city", "Salem city"],
+      "Central Shenandoah": ["Augusta County", "Bath County", "Highland County", "Rockbridge County", "Rockingham County", "Buena Vista city", "Lexington city", "Harrisonburg city", "Staunton city", "Waynesboro city"],
+      "Northern Shenandoah Valley": ["Clarke County", "Frederick County", "Page County", "Shenandoah County", "Warren County", "Winchester city"]
+    },
+    "Piedmont and Southside": {
+      "Central Virginia": ["Amherst County", "Appomattox County", "Bedford County", "Campbell County", "Lynchburg city"],
+      "Rappahannock-Rapidan": ["Culpeper County", "Fauquier County", "Madison County", "Orange County", "Rappahannock County"],
+      "Thomas Jefferson": ["Albemarle County", "Fluvanna County", "Greene County", "Louisa County", "Nelson County", "Charlottesville city"],
+      "West Piedmont": ["Franklin County", "Henry County", "Patrick County", "Pittsylvania County", "Danville city", "Martinsville city"],
+      "Southside": ["Mecklenburg County", "Halifax County", "Brunswick County"],
+      "Commonwealth Regional": ["Amelia County", "Buckingham County", "Charlotte County", "Cumberland County", "Lunenburg County", "Nottoway County", "Prince Edward County"],
+      "Crater": ["Dinwiddie County", "Greensville County", "Prince George County", "Surry County", "Sussex County", "Colonial Heights city", "Petersburg city", "Hopewell city", "Emporia city"]
+    },
+    "Northern Neck, Middle Peninsula and Eastern Shore": {
+      "Northern Neck": ["Lancaster County", "Northumberland County", "Richmond County", "Westmoreland County"],
+      "Middle Peninsula": ["Essex County", "Gloucester County", "King and Queen County", "King William County", "Mathews County", "Middlesex County"],
+      "Accomack-Northampton": ["Accomack County", "Northampton County"]
+    },
+    "Urban crescent": {
+      "Northern Virginia": ["Arlington County", "Fairfax County", "Loudoun County", "Prince William County", "Alexandria city", "Fairfax city", "Falls Church city", "Manassas city", "Manassas Park city"],
+      "George Washington": ["Caroline County", "King George County", "Spotsylvania County", "Stafford County", "Fredericksburg city"],
+      "PlanRVA": ["Charles City County", "Chesterfield County", "Goochland County", "Hanover County", "Henrico County", "New Kent County", "Powhatan County", "Richmond city"],
+      "Hampton Roads": ["Isle of Wight County", "James City County", "Southampton County", "York County", "Chesapeake city", "Franklin city", "Hampton city", "Poquoson city", "Williamsburg city", "Newport News city", "Norfolk city", "Portsmouth city", "Suffolk city", "Virginia Beach city"]
+    }
+  },
+  "dual": {
+    "Franklin County": "West Piedmont (also Roanoke Valley-Alleghany)",
+    "Gloucester County": "Middle Peninsula (also Hampton Roads)",
+    "Surry County": "Crater (also Hampton Roads)",
+    "Charles City County": "PlanRVA (also Crater)",
+    "Chesterfield County": "PlanRVA (also Crater)"
+  }
+}

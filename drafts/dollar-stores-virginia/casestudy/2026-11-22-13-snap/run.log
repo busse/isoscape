@@ -1,0 +1,36 @@
+stores 5246 edge DG 234 null points 357904
+block groups 30286 households 17496395
+  test          measure  primary            kind class  n_stores  n_places  stores_mean  null_mean       D   D_low  D_high      verdict
+0   S1             3 km     True  Dollar General  edge       233       202       0.1636     0.1641 -0.0005 -0.0074  0.0065  cannot tell
+1   S1             8 km    False  Dollar General  edge       234       203       0.1642     0.1635  0.0006 -0.0021  0.0034  cannot tell
+2   S1  own block group    False  Dollar General  edge       224       195       0.1539     0.1541 -0.0001 -0.0124  0.0126  cannot tell
+3   S2             3 km    False  Dollar General  town      1198       859       0.1889     0.1878  0.0011 -0.0007  0.0028  cannot tell
+4   S2             8 km    False  Dollar General  town      1198       859       0.1699     0.1699 -0.0001 -0.0007  0.0005  cannot tell
+5   S2  own block group    False  Dollar General  town      1198       859       0.1855     0.1834  0.0021 -0.0035  0.0077  cannot tell
+6   S3             3 km    False     convenience  edge       459       316       0.1762     0.1687  0.0075  0.0020  0.0128        holds
+7   S3             8 km    False     convenience  edge       462       316       0.1732     0.1712  0.0020 -0.0003  0.0042  cannot tell
+8   S3  own block group    False     convenience  edge       434       303       0.1658     0.1567  0.0091 -0.0006  0.0192  cannot tell
+                     stores  S3_mean  S3_median
+cls  period                                    
+edge by 2005             32   0.1868     0.1746
+     2006-2015           51   0.1738     0.1740
+     2016 and later     151   0.1551     0.1415
+town by 2005            597   0.2015     0.1912
+     2006-2015          260   0.1682     0.1515
+     2016 and later     341   0.1825     0.1719
+exit 0
+
+sha256 of the inputs:
+63ec3a6fa2d0653b3e146613a7185543f1e0bb62f0d6b0f234fb5a55c40f8449  cb_2024_21_bg_500k.zip
+60f0232974c6a1760e671d601148d0913a44458c4d4211a67deb772197628808  cb_2024_24_bg_500k.zip
+9b5cbe1c4a313da62d787800d875c424beebd6ea77493807522336c2e2c81553  cb_2024_37_bg_500k.zip
+04f55768b88696723bfe3993c76418bcb39e3d8ee55167f6a2fccc948f890642  cb_2024_45_bg_500k.zip
+ca30c5a4b5bc38871a18d71a0e950469ef93c34bca388e9465fbc4c3026de811  cb_2024_47_bg_500k.zip
+2680e6ccf1144f2f9f436ab1f27a8f3945965c1e978bbf1bfce21307ec705330  cb_2024_51_bg_500k.zip
+f1f714cfb582f238fd61fec982334e67fe5a4829e9a7f311a0f1112bbc5fc146  cb_2024_54_bg_500k.zip
+728f19fa9b33bfa2a800f998cd263de6ab8ac2c18154ee4d12db72e2b903a3fb  acsdt5y2024-b22010.dat
+Two failed runs first:
+- `bg.snap` is a GeoDataFrame method name (fixed to `bg["snap"]`).
+- Filtering to small places before de-duplicating gave 329 edge stores instead of 234 (fixed to
+  confirm.py's order).
+A third run stopped silently on memory at 8 km and was fixed by chunking.

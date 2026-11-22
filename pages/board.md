@@ -13,8 +13,10 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Stage | Entries |
 |---|---|
-| research | 2 |
+| research | 1 |
+| final draft | 1 |
 | final production | 46 |
+| fact check | 1 |
 | in work | 4 |
 | live | 3 |
 | on hold | 55 |
@@ -31,7 +33,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Our own transcription of Richmond's 48 HOLC area-description forms, from the public-domain scans | research | — | no |
-| — | Data visualization: why is there a Dollar General on the edge of town? (Virginia) | story | — | no |
+
+## Final draft
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36) | print | 1.0.0-rc2 | no |
 
 ## Final production
 
@@ -83,6 +90,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | STC·13 | The Fan, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·14 | Broad and Laurel, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·M | Richmond's Streetcars, 1925: The System Map | set map | 4.0.0 | yes, version 4 |
+
+## Fact check
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Data visualization: why is there a Dollar General on the edge of town? (Virginia) | story | — | no |
 
 ## In work
 
@@ -141,3 +154,4 @@ Small faults seen only up close are listed here, so they are known and not repor
 - **Church Hill and Jefferson Park, Richmond Streetcars 1925** (STC·07): a spur runs through a low building.
 - **Manchester, Richmond Streetcars 1925** (STC·09): the Forest Hill line takes a tight hairpin; the line bends sharply at the Mayo Bridge landing.
 - **Richmond's Streetcars, 1925: The System Map** (STC·M): the Fulton line touches the corner of the Armitage building; a stray rock mark in the river.
+- **Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36)**: Mineral: the town arrow is drawn over a nearby dollar store's square and a grocery diamond; Lake of the Woods: a grocery diamond is hidden under the store square; Honaker: the town arrow touches a nearby dollar store's square.

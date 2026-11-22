@@ -1,0 +1,228 @@
+town,people_2020,joined,edge_rule,builtup_km2,DG_in town,DG_fringe,DG_another place,DG_between places,FD_DT,grocery
+abingdon,8376,False,built-up,38.31,2,0,0,3,1,5
+accomac,519,False,built-up,1.87,0,0,0,0,0,0
+alberta,302,False,built-up joined with the town limits (built-up under 1 km2),5.57,0,0,0,0,1,0
+alexandria,159467,True,built-up,298.48,0,0,0,0,5,117
+altavista,3378,False,built-up,16.21,1,0,1,1,0,2
+amherst,2110,False,built-up,4.26,0,1,0,0,1,1
+appalachia,1444,False,built-up,2.56,1,0,0,0,1,0
+appomattox,1919,False,built-up,6.12,1,0,0,1,2,2
+ashland,7565,False,built-up,89.32,2,0,0,0,2,6
+bedford,7465,False,built-up,17.07,2,1,0,0,1,3
+belle-haven,543,False,built-up,5.82,1,0,0,0,2,1
+berryville,4580,False,built-up,6.46,1,0,0,0,1,1
+big-stone-gap,5254,False,built-up,15.96,2,0,0,0,2,1
+blacksburg,44826,False,built-up,99.26,1,0,0,0,1,6
+blackstone,3352,False,built-up,5.86,1,0,0,1,2,3
+bloxom,387,False,built-up,1.68,0,0,1,0,0,0
+bluefield,5096,False,built-up,16.48,2,0,0,0,1,3
+boones-mill,259,False,built-up joined with the town limits (built-up under 1 km2),1.96,0,0,0,0,0,0
+bowling-green,1168,False,built-up,4.7,1,0,0,0,1,1
+boyce,749,False,built-up joined with the town limits (built-up under 1 km2),0.99,0,0,0,0,0,0
+boydton,302,False,built-up,1.51,1,0,0,0,0,0
+boykins,516,False,built-up,2.2,1,0,0,0,0,0
+branchville,118,False,built-up joined with the town limits (built-up under 1 km2),1.25,0,0,0,0,0,0
+bridgewater,6596,True,built-up,51.52,0,0,0,0,1,1
+bristol,17219,False,built-up,40.19,6,1,0,1,2,9
+broadway,4170,False,built-up,10.75,0,0,0,0,1,0
+brodnax,283,False,built-up,1.02,1,0,0,0,0,0
+brookneal,1090,False,built-up,2.2,1,0,0,0,1,1
+buchanan,1196,False,built-up,3.34,0,0,0,1,1,0
+buena-vista,6641,False,built-up,10.28,0,0,0,1,1,1
+burkeville,417,False,built-up,6.71,1,0,0,0,0,0
+cape-charles,1178,False,built-up,2.42,0,0,0,0,0,0
+capron,141,False,built-up joined with the town limits (built-up under 1 km2),0.56,0,0,0,1,0,0
+cedar-bluff,1069,False,built-up,21.05,1,0,0,0,1,0
+charlotte-court-house,505,False,built-up joined with the town limits (built-up under 1 km2),10.27,1,0,0,0,0,0
+charlottesville,46553,False,built-up,87.91,0,0,0,0,4,28
+chase-city,2053,False,built-up,5.01,2,0,0,0,1,2
+chatham,1232,False,built-up,4.98,0,0,0,1,1,1
+cheriton,486,False,built-up,1.17,0,0,0,1,0,1
+chesapeake,249422,False,built-up,621.56,8,0,0,0,17,32
+chilhowie,1654,False,built-up,7.26,1,0,0,0,1,1
+chincoteague,3344,False,built-up,11.82,1,0,0,0,1,1
+christiansburg,23422,False,built-up,97.34,3,0,2,0,1,8
+claremont,305,False,built-up joined with the town limits (built-up under 1 km2),6.59,0,0,0,1,0,0
+clarksville,1300,False,built-up,5.69,2,0,0,1,0,1
+cleveland,136,False,built-up joined with the town limits (built-up under 1 km2),0.45,0,0,0,0,0,0
+clifton,243,False,built-up joined with the town limits (built-up under 1 km2),0.65,0,0,0,0,0,0
+clifton-forge,3555,False,built-up,10.94,1,0,0,0,0,0
+clinchco,244,False,built-up joined with the town limits (built-up under 1 km2),7.31,0,0,0,0,0,1
+clinchport,64,False,built-up joined with the town limits (built-up under 1 km2),2.33,0,0,0,0,0,0
+clintwood,1377,False,built-up,5.77,1,0,0,0,1,1
+coeburn,1598,False,built-up,6.53,1,0,0,0,1,2
+colonial-beach,3908,False,built-up,16.57,1,1,0,0,1,2
+colonial-heights,18170,True,built-up,237.8,4,0,0,0,5,12
+courtland,1295,False,built-up,2.21,1,0,0,0,0,0
+covington,5737,False,built-up,23.04,1,0,0,0,2,3
+craigsville,899,False,built-up,2.45,1,0,0,0,0,1
+crewe,2262,False,built-up,6.71,1,0,0,0,1,1
+culpeper,20074,False,built-up,23.18,1,0,0,0,2,7
+damascus,788,False,built-up,3.18,0,0,0,0,0,1
+danville,42590,False,built-up,94.06,11,1,0,2,11,15
+dayton,1688,True,built-up,81.67,0,0,0,0,1,4
+dendron,251,False,built-up joined with the town limits (built-up under 1 km2),9.26,0,0,0,0,0,0
+dillwyn,436,False,built-up,1.71,1,0,0,0,1,2
+drakes-branch,533,False,built-up,1.12,0,1,0,0,0,0
+dublin,2682,True,built-up,30.65,1,0,0,0,1,1
+duffield,73,False,built-up,3.62,1,0,0,0,1,0
+dumfries,5679,True,built-up,110.78,1,0,0,0,2,14
+dungannon,257,False,built-up joined with the town limits (built-up under 1 km2),1.01,1,0,0,0,0,0
+eastville,300,False,built-up,1.66,1,0,0,0,0,0
+edinburg,1178,False,built-up,2.74,1,0,0,0,0,0
+elkton,2941,False,built-up,7.53,1,0,1,0,1,1
+emporia,5716,False,built-up,17.11,2,0,0,0,3,3
+exmore,1473,False,built-up,5.82,0,0,0,0,0,1
+fairfax,24146,True,built-up,352.64,0,0,0,0,2,44
+falls-church,14658,True,built-up,290.71,0,0,0,0,1,50
+farmville,7473,False,built-up,17.77,1,0,0,2,2,3
+fincastle,755,False,built-up,2.2,1,0,0,0,0,1
+floyd,448,False,built-up,2.74,0,1,0,0,1,3
+franklin,8180,False,built-up,18.36,1,0,0,0,2,3
+fredericksburg,27982,True,built-up,212.3,5,0,0,0,10,40
+fries,450,False,built-up,2.18,1,0,0,0,0,0
+front-royal,15011,False,built-up,20.47,1,0,0,0,2,5
+galax,6720,False,built-up,19.39,2,1,0,0,2,3
+gate-city,2043,False,built-up,14.75,1,0,0,0,0,2
+glade-spring,1367,False,built-up,5.91,2,0,0,0,0,0
+glasgow,1052,False,built-up,5.28,0,1,0,0,0,0
+glen-lyn,95,False,built-up,1.34,0,0,0,0,0,0
+gordonsville,1402,False,built-up,3.31,0,0,0,0,1,1
+goshen,338,False,built-up joined with the town limits (built-up under 1 km2),4.96,1,0,0,0,0,0
+gretna,1310,False,built-up,3.72,1,0,0,0,1,1
+grottoes,2899,False,built-up,8.29,0,1,1,0,1,1
+grundy,875,False,built-up,3.85,0,0,0,1,2,3
+halifax,1118,False,built-up,4.61,1,0,0,0,0,0
+hallwood,202,False,built-up joined with the town limits (built-up under 1 km2),0.64,0,0,0,0,0,1
+hamilton,619,False,built-up,4.72,0,0,0,0,0,0
+hampton,137148,False,built-up,284.53,7,0,0,0,13,17
+harrisonburg,51814,False,built-up,84.62,2,0,0,0,3,19
+haymarket,1545,True,built-up,90.16,0,1,0,0,1,11
+haysi,484,False,built-up,1.14,1,0,0,0,0,0
+herndon,24655,True,built-up,328.23,0,0,0,0,5,62
+hillsboro,114,False,built-up joined with the town limits (built-up under 1 km2),0.69,0,0,0,0,0,0
+hillsville,2884,False,built-up,7.08,1,1,1,1,0,1
+honaker,1217,False,built-up,3.94,0,1,0,1,1,0
+hopewell,23033,True,built-up,177.76,4,0,0,1,5,6
+hurt,1267,False,built-up,16.21,0,0,0,0,2,1
+independence,1011,False,built-up,2.61,0,1,0,0,0,1
+iron-gate,324,False,built-up,10.94,0,0,0,0,1,1
+irvington,474,False,built-up,6.58,0,0,0,1,1,0
+ivor,312,False,built-up joined with the town limits (built-up under 1 km2),2.88,1,0,0,0,0,0
+jarratt,652,False,built-up,2.66,1,0,0,0,0,0
+jonesville,872,False,built-up,3.32,1,0,0,1,0,2
+keller,144,False,built-up joined with the town limits (built-up under 1 km2),0.92,0,0,0,0,0,0
+kenbridge,1112,False,built-up,2.53,0,1,0,0,0,1
+keysville,807,False,built-up,2.26,1,0,0,0,1,1
+kilmarnock,1445,False,built-up,2.73,0,0,0,0,0,3
+la-crosse,614,False,built-up,12.83,0,0,0,0,1,1
+lawrenceville,1014,False,built-up,4.49,1,0,0,0,1,1
+lebanon,3159,False,built-up,11.05,1,0,0,0,1,2
+leesburg,48250,False,built-up,104.45,0,0,0,0,2,27
+lexington,7320,False,built-up,12.75,1,0,0,0,1,3
+louisa,1987,False,built-up,5.06,1,0,0,1,1,1
+lovettsville,2694,False,built-up,2.5,0,0,0,0,0,0
+luray,4831,False,built-up,8.83,1,1,0,0,0,2
+lynchburg,78993,False,built-up,213.32,10,2,0,1,6,29
+madison,205,False,built-up joined with the town limits (built-up under 1 km2),0.93,1,0,0,0,0,2
+manassas,42772,True,built-up,204.04,0,1,0,0,2,15
+manassas-park,17219,True,built-up,204.3,1,0,0,0,4,24
+marion,5751,False,built-up,13.5,2,0,2,0,1,4
+martinsville,13485,False,built-up,102.02,7,3,1,0,7,9
+mckenney,457,False,built-up joined with the town limits (built-up under 1 km2),2.42,1,0,0,0,1,0
+melfa,396,False,built-up,1.66,0,0,0,0,0,0
+middleburg,669,False,built-up,2.91,0,0,0,0,0,1
+middletown,1355,False,built-up,2.05,1,0,0,0,0,0
+mineral,470,False,built-up,1.54,0,1,0,1,1,1
+monterey,165,False,built-up joined with the town limits (built-up under 1 km2),0.84,1,0,0,0,1,0
+montross,333,False,built-up joined with the town limits (built-up under 1 km2),2.68,1,0,0,0,1,1
+mount-crawford,443,True,built-up,38.01,0,0,0,0,0,0
+mount-jackson,1961,False,built-up,4.55,1,0,0,0,1,1
+narrows,2093,False,built-up,3.84,1,0,0,0,0,1
+nassawadox,533,False,built-up,1.92,0,0,0,0,0,0
+new-castle,125,False,built-up,2.26,0,0,0,0,1,1
+new-market,2155,False,built-up,4.84,1,0,0,0,0,0
+newport-news,186247,False,built-up,368.12,7,0,1,0,13,39
+newsoms,286,False,built-up,1.11,0,0,0,0,0,0
+nickelsville,378,False,built-up,1.46,1,0,0,0,0,0
+norfolk,238005,False,built-up,503.5,10,0,0,0,18,34
+norton,3687,False,built-up,29.93,1,0,0,0,1,2
+occoquan,1035,True,built-up,148.42,2,0,0,0,6,41
+onancock,1169,False,built-up,3.16,0,0,0,0,0,0
+onley,532,False,built-up,1.97,1,0,0,0,1,2
+orange,4880,False,built-up,9.15,2,0,0,0,2,1
+painter,272,False,built-up joined with the town limits (built-up under 1 km2),1.69,1,0,0,0,0,0
+pamplin-city,138,False,built-up,1.19,1,0,0,0,0,0
+parksley,816,False,built-up,2.42,1,0,0,0,0,1
+pearisburg,2909,False,built-up,9.11,1,0,0,0,1,2
+pembroke,1152,False,built-up,4.11,1,0,0,0,0,0
+pennington-gap,1624,False,built-up,3.66,1,0,1,1,1,2
+petersburg,33458,False,built-up,170.27,5,3,0,0,5,8
+phenix,232,False,built-up joined with the town limits (built-up under 1 km2),2.99,1,0,0,0,0,0
+pocahontas,268,False,built-up joined with the town limits (built-up under 1 km2),1.67,1,0,0,0,0,0
+poquoson,12460,False,built-up,216.22,1,0,0,0,1,2
+port-royal,196,False,built-up joined with the town limits (built-up under 1 km2),1.9,0,0,0,0,0,0
+portsmouth,97915,False,built-up,420.65,9,0,0,0,8,24
+pound,877,False,built-up,2.49,1,0,0,0,0,1
+pulaski,8985,False,built-up,37.91,2,0,0,0,1,2
+purcellville,8929,False,built-up,10.3,0,0,0,0,1,2
+quantico,578,True,built-up,47.04,0,0,0,0,0,0
+radford,16070,False,built-up,28.85,2,0,0,0,1,4
+remington,626,False,built-up,2.03,0,0,0,0,1,2
+rich-creek,749,False,built-up,2.11,1,0,0,0,0,2
+richlands,5261,False,built-up,21.05,2,0,0,1,1,4
+richmond,226610,False,built-up,725.62,21,1,0,0,37,141
+ridgeway,752,False,built-up,24.8,1,0,0,0,0,1
+roanoke,100011,False,built-up,286.43,4,1,0,0,10,33
+rocky-mount,4903,False,built-up,20.21,1,0,0,2,1,3
+round-hill,693,False,built-up,5.34,0,0,0,0,0,0
+rural-retreat,1546,False,built-up,5.16,0,1,0,0,1,3
+salem,25346,True,built-up,212.6,2,0,0,0,3,10
+saltville,1824,False,built-up,2.73,1,0,0,0,0,1
+saxis,172,False,built-up,1.09,0,0,0,0,0,0
+scottsburg,127,False,built-up joined with the town limits (built-up under 1 km2),1.94,0,0,0,1,0,0
+scottsville,524,False,built-up,1.27,1,0,0,0,0,1
+shenandoah,2486,False,built-up,4.67,1,0,0,0,0,0
+smithfield,8533,False,built-up,20.29,2,0,1,0,2,4
+south-boston,7966,False,built-up,16.82,2,1,1,0,2,4
+south-hill,4690,False,built-up,12.83,2,0,0,1,0,2
+st.-paul,866,False,built-up,4.46,1,0,0,0,0,1
+stanardsville,349,False,built-up,9.76,1,0,0,0,0,1
+stanley,1703,False,built-up,6.31,1,0,0,0,1,1
+staunton,25750,False,built-up,53.78,4,2,0,0,2,10
+stephens-city,2016,True,built-up,39.91,1,0,0,0,0,2
+stony-creek,209,False,built-up joined with the town limits (built-up under 1 km2),1.49,0,1,0,0,1,0
+strasburg,7083,False,built-up,10.71,1,0,0,0,1,2
+stuart,1431,False,built-up,4.08,1,0,0,0,1,2
+suffolk,94324,False,built-up,61.27,1,1,0,3,5,7
+surry,208,False,built-up joined with the town limits (built-up under 1 km2),2.15,0,1,0,0,1,1
+tangier,436,False,built-up,1.67,0,0,0,0,0,0
+tappahannock,2193,False,built-up,7.51,1,0,0,0,2,2
+tazewell,4486,False,built-up,11.21,1,1,0,2,1,2
+the-plains,245,False,built-up joined with the town limits (built-up under 1 km2),0.74,0,0,0,0,0,1
+timberville,2963,False,built-up,10.75,2,0,0,1,1,2
+toms-brook,276,False,built-up,1.67,1,0,0,0,0,0
+troutdale,145,False,built-up joined with the town limits (built-up under 1 km2),8.09,0,0,1,0,0,0
+troutville,458,True,built-up,36.58,1,0,0,0,0,3
+urbanna,492,False,built-up,5.42,0,0,1,0,0,1
+victoria,1734,False,built-up,3.49,0,0,0,1,1,1
+vienna,16473,True,built-up,328.85,0,0,0,0,2,18
+vinton,8059,True,built-up,167.98,3,0,0,0,3,5
+virgilina,126,False,built-up joined with the town limits (built-up under 1 km2),1.6,0,0,0,0,1,0
+virginia-beach,459470,False,built-up,608.55,10,0,0,0,20,69
+wachapreague,257,False,built-up joined with the town limits (built-up under 1 km2),0.85,0,0,0,0,0,0
+wakefield,759,False,built-up,3.05,1,0,0,0,0,1
+warrenton,10057,False,built-up,45.01,1,0,0,0,1,5
+warsaw,1637,False,built-up,3.29,1,0,0,1,2,1
+washington,86,False,built-up joined with the town limits (built-up under 1 km2),0.69,0,0,0,0,0,0
+waverly,1955,False,built-up,3.29,1,0,0,0,0,0
+waynesboro,22196,False,built-up,47.04,2,0,2,0,2,9
+weber-city,1250,False,built-up,14.75,1,0,1,0,1,1
+west-point,3414,False,built-up,6.87,1,0,0,1,1,1
+white-stone,380,False,built-up,1.08,1,0,0,0,0,0
+williamsburg,15425,True,built-up,142.29,3,0,0,0,4,17
+winchester,28120,False,built-up,100.46,1,0,0,0,6,16
+windsor,2746,False,built-up,6.72,1,0,0,0,1,1
+wise,2971,False,built-up,29.93,0,0,0,0,1,2
+woodstock,5807,False,built-up,10.21,1,0,0,0,1,2
+wytheville,8265,False,built-up,13.87,2,0,1,0,2,4
