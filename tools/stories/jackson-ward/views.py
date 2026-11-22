@@ -69,20 +69,21 @@ APOSTLE = (1380, 320, 1150, 340)
 
 # view name -> recipe
 VIEWS = {
-    'state-1925': dict(scene='s1925'),
-    'state-1952': dict(scene='s1952'),
-    'state-1959': dict(scene='s1959'),
+    'state-1925': dict(scene='s1925', untraced=1925),
+    'state-1952': dict(scene='s1952', untraced=1952),
+    'state-1959': dict(scene='s1959', untraced=1952),
     'state-2026': dict(scene='s2026'),
-    'count-1952': dict(scene='count'),
-    'streets-1952': dict(scene='streets1952'),
+    'count-1952': dict(scene='count', key='Red: where I-95 runs today (built as the Richmond–Petersburg Turnpike, 1955–58), over the 1952 blocks'),
+    'streets-1952': dict(scene='streets1952', key='Red: the streets the Turnpike\'s trench cut; outline: where I-95 runs today (built 1955–58), over the 1952 blocks'),
     'streets-2026': dict(scene='streets2026'),
-    'island': dict(scene='island'),
-    'second-street-1952': dict(scene='s1952', box=SECOND, z=4, names='named.csv', edition=1952),
-    'second-street-1925': dict(scene='s1925', box=SECOND, z=4, names='named1925.csv', edition=1925),
+    'island': dict(scene='island', foot='Jackson Ward, Richmond, Virginia. The Richmond–Petersburg Turnpike Authority, given the power of eminent domain in 1954, built its toll road (now I-95) here in 1955–58.\n'
+                                       'The edge is today\'s roadway and ramps plus 15 m each side, a stand-in for the 1958 right-of-way. The ground is an estimate. Cut at about 7th Street, where the traced sheets end.'),
+    'second-street-1952': dict(scene='s1952', box=SECOND, z=4, names='named.csv', edition=1952, label='Second Street, Jackson Ward, Richmond, 1952'),
+    'second-street-1925': dict(scene='s1925', box=SECOND, z=4, names='named1925.csv', edition=1925, label='Second Street, Jackson Ward, Richmond, about 1925'),
     # Second Street unnumbered, for the page's compare slider (1925 against 1952).
-    'second-street-1925-plain': dict(scene='s1925', box=SECOND, z=4),
-    'second-street-1952-plain': dict(scene='s1952', box=SECOND, z=4),
-    'apostle-town': dict(stack=[('s1925', APOSTLE, 3, '1925'), ('s1952', APOSTLE, 3, '1952'), ('s2026', APOSTLE, 3, 'today')]),
+    'second-street-1925-plain': dict(scene='s1925', box=SECOND, z=4, label='Second Street, Jackson Ward, Richmond, about 1925'),
+    'second-street-1952-plain': dict(scene='s1952', box=SECOND, z=4, label='Second Street, Jackson Ward, Richmond, 1952'),
+    'apostle-town': dict(stack=[('s1925', APOSTLE, 3, 'Apostle Town, Jackson Ward, Richmond, about 1925'), ('s1952', APOSTLE, 3, 'Gilpin Court on the same blocks, 1952'), ('s2026', APOSTLE, 3, 'Gilpin Court today')]),
 }
 
 
@@ -296,6 +297,132 @@ def numbered(im, svg, box, z, names, edition):
     return im, [dict(n=r['n'], name=r['name'], stories=r['stories'], sheet=r['sheet']) for r in uniq]
 
 
+# ---- marking blocks no sheet was traced for -------------------------------------------------
+# Inside the frame, blocks where no building was traced draw only the buildings standing today
+# that the city dates to the scene's year or before, so they can look emptier than they were.
+# They are hatched and labeled "not traced" in the dated views. Each edition file holds its
+# sheets' coverage outline; the outline is placed on the picture by an affine fit from the
+# traced buildings' footprints (meters) to their drawn corner dots (SVG units), good to a few
+# meters, which is enough for a hatch.
+
+COVER = {1925: ('1924', 'jackson-ward-1925'), 1952: ('1924', '1950', 'jackson-ward-1952')}
+MIN_UNTRACED = 20000   # m2: smaller gaps (slivers between sheets) are not marked
+EAST_OF = -77.436      # longitude: only gaps whose center lies east of this (about 5th Street) are marked
+
+
+def _fit(svg):
+    from shapely.geometry import shape
+    from shapely.ops import transform
+    s = open(svg).read()
+    vb = [float(v) for v in re.search(r'viewBox="([^"]+)"', s).group(1).split()]
+    dots = {}
+    for m in re.finditer(r'<g data-id="traced:([^".]+)[^"]*">(.*?)</g>', s, re.S):
+        pts = [(float(a), float(b)) for a, b in re.findall(r'M(-?(?:\d+\.?\d*|\.\d+))[ ,]?(-?(?:\d+\.?\d*|\.\d+))h0', m.group(2))]
+        if pts:
+            dots.setdefault(m.group(1), []).extend(pts)
+    tm = lambda x, y, z=None: to_m(x, y)  # noqa: E731
+    src, dst = [], []
+    for f in ('history/sanborn/jackson-ward-lost.geojson', 'history/sanborn/jackson-ward-1925-lost.geojson'):
+        for ft in json.load(open(os.path.join(ROOT, f)))['features']:
+            i = ft['properties'].get('id')
+            if i in dots:
+                c = transform(tm, shape(ft['geometry'])).centroid
+                q = np.array(dots[i])
+                src.append((c.x, c.y, 1.0))
+                dst.append((q[:, 0].mean() - vb[0], q[:, 1].mean() - vb[1]))
+    A, *_ = np.linalg.lstsq(np.array(src), np.array(dst), rcond=None)
+    return A
+
+
+def untraced(im, work, scene, year, z, label):
+    """Hatch and label the blocks inside the frame that no traced sheet covers."""
+    from shapely.geometry import Polygon, shape
+    from shapely.ops import transform, unary_union
+    tm = lambda x, y, z_=None: to_m(x, y)  # noqa: E731
+    corners = json.load(open(os.path.join(ROOT, 'out/stories/jackson-ward/data.json')))['corners']
+    frame_m = Polygon([to_m(*c) for c in corners])
+    # The coverage outlines are each sheet's convex hull, so they reach over blocks where nothing
+    # was traced; a block is marked where no traced building of the edition stands within 40 m.
+    near = []
+    for f in COVER[year]:
+        for ft in json.load(open(os.path.join(ROOT, f'history/sanborn/{f}.geojson')))['features']:
+            if ft['properties'].get('coverage'):
+                continue
+            try:
+                near.append(transform(tm, shape(ft['geometry'])).buffer(0).buffer(40))
+            except Exception:
+                continue
+    gaps = frame_m.difference(unary_union(near)).buffer(-20).buffer(20)
+    # Only the gap east of about 7th Street (Navy Hill and the rail land) is marked: the frame's west
+    # edge is drawn from the downtown series' own tracings and today's buildings, so it is not bare.
+    gaps = [g for g in getattr(gaps, 'geoms', [gaps]) if g.area >= MIN_UNTRACED and g.centroid.x > to_m(EAST_OF, 0)[0]]
+    A = _fit(build(work, scene))
+    off = frame(work)[1] if scene in YEARS else (0, 0)
+    px = lambda x, y: tuple(((np.array([x, y, 1.0]) @ A) + np.array(off)) * z)  # noqa: E731
+    paper = Image.new('RGB', im.size, PAPER)
+    plate = np.any(np.abs(np.asarray(im).astype(int) - np.asarray(paper).astype(int)) > 6, axis=2)
+    mask = Image.new('L', im.size, 0)
+    md = ImageDraw.Draw(mask)
+    for g in gaps:
+        md.polygon([px(x, y) for x, y in g.exterior.coords], fill=255)
+    m = (np.asarray(mask) > 0) & plate
+    hatch = Image.new('L', im.size, 0)
+    hd = ImageDraw.Draw(hatch)
+    u = im.width / 1600   # one pixel of the page's 1600 px copy
+    step = round(7 * u)
+    for k in range(-im.height, im.width, step):
+        hd.line((k, im.height, k + im.height, 0), fill=255, width=max(1, round(0.8 * u)))
+    hm = Image.fromarray(((np.asarray(hatch) > 0) & m).astype(np.uint8) * 150)
+    ink = Image.new('RGB', im.size, INK)
+    im = Image.composite(ink, im, hm)
+    # one label in each marked area, at the point farthest inside it
+    d = ImageDraw.Draw(im)
+    f = font(round(12 * u))
+    for g in gaps:
+        q = g.centroid if g.contains(g.centroid) else g.representative_point()
+        cx, cy = px(q.x, q.y)
+        lines = label.split('\n')
+        ws = [d.textbbox((0, 0), t, font=f) for t in lines]
+        w = max(b[2] for b in ws); h = sum(b[3] for b in ws) + round(2 * u) * (len(lines) - 1)
+        pad = round(5 * u)
+        x0 = min(max(cx - w / 2, pad), im.width - w - pad)
+        d.rectangle((x0 - pad, cy - h / 2 - pad, x0 + w + pad, cy + h / 2 + pad), fill=PAPER, outline=INK, width=max(1, round(0.8 * u)))
+        y = cy - h / 2
+        for t, b in zip(lines, ws):
+            d.text((x0 + (w - b[2]) / 2, y - round(1 * u)), t, fill=INK, font=f)
+            y += b[3] + round(2 * u)
+    return im
+
+
+def header_note(im, text, color=None, scale=1.0):
+    """A line of text at the right of the picture's title row (the plate's top margin)."""
+    d = ImageDraw.Draw(im)
+    f = font(round(22 * scale), bold=False)
+    tw, th = d.textbbox((0, 0), text, font=f)[2:]
+    x = im.width - tw - round(24 * scale)
+    y = round(30 * scale)
+    d.rectangle((x - round(8 * scale), y - round(6 * scale), x + tw + round(8 * scale), y + th + round(6 * scale)), fill=PAPER)
+    d.text((x, y), text, fill=color or INK, font=f)
+    return im
+
+
+def footer_note(im, text, scale=1.0, color=None):
+    """A line of text along the bottom edge, on a strip added under the picture."""
+    f = font(round(22 * scale), bold=False)
+    d0 = ImageDraw.Draw(im)
+    lines = text.split('\n')
+    th = max(d0.textbbox((0, 0), t, font=f)[3] for t in lines)
+    strip = round(th * 1.45 * len(lines) + 30 * scale)
+    out = Image.new('RGB', (im.width, im.height + strip), PAPER)
+    out.paste(im, (0, 0))
+    d = ImageDraw.Draw(out)
+    y = im.height + round(8 * scale)
+    for t in lines:
+        d.text((round(60 * scale), y), t, fill=color or INK, font=f)
+        y += round(th * 1.45)
+    return out
+
+
 LARGE = 3200       # the lightbox's copy, px wide
 LARGE_FROM = 2400  # only views drawn at least this wide get one
 
@@ -361,11 +488,21 @@ def main():
             im = cut(a.work, v['scene'], v['box'], z)
             if 'names' in v:
                 im, key = numbered(im, build(a.work, v['scene']), v['box'], z, v['names'], v['edition'])
+                corner_label(im, v['label'], scale=im.width / 3000)
                 save(im, name, a.full, key)
             else:
+                if 'label' in v:
+                    corner_label(im, v['label'], scale=im.width / 3000)
                 save(im, name, a.full)
         else:
             im = Image.open(raster(a.work, v['scene'], 2)).convert('RGB')
+            sc = im.width / 1600 * 0.6   # about 13 px on the page's 1600 px copy
+            if 'untraced' in v:
+                im = untraced(im, a.work, v['scene'], v['untraced'], 2, 'No buildings traced here:\nonly those standing today\nare drawn')
+            if 'key' in v:
+                im = footer_note(im, v['key'], color=P['mark']['line'], scale=sc)
+            if 'foot' in v:
+                im = footer_note(im, v['foot'], scale=sc)
             save(im, name, a.full)
     # the link preview: the 1952 view, cropped to 1.91:1 around the corridor, 1200 x 630
     if not a.only:
@@ -374,7 +511,11 @@ def main():
         h = round(im.height * 0.86)
         x0 = (im.width - w) // 2
         y0 = round(im.height * 0.07)
-        im.crop((x0, y0, x0 + w, y0 + h)).resize((1200, 630), Image.LANCZOS).save(os.path.join(ROOT, 'pages', 'jackson-ward-social.jpg'), quality=84)
+        so = im.crop((x0, y0, x0 + w, y0 + h)).resize((1200, 630), Image.LANCZOS)
+        d = ImageDraw.Draw(so)
+        d.rectangle((0, 0, 1200, 58), fill=PAPER)
+        d.text((22, 12), 'Jackson Ward, Richmond, Virginia, 1952, from the Sanborn fire-insurance maps', fill=INK, font=font(24))
+        so.save(os.path.join(ROOT, 'pages', 'jackson-ward-social.jpg'), quality=84)
         print('wrote social')
 
 

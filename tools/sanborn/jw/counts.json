@@ -251,5 +251,37 @@
    "317": 31,
    "326": 101
   }
+ },
+ "sensitivity": {
+  "paved": {
+   "published": 216,
+   "centroid": 211,
+   "half_or_more": 209,
+   "any_overlap": 284,
+   "edge_in_5m": 134,
+   "edge_out_5m": 300,
+   "area_m2": 78148,
+   "beyond_traced_m2": 7822,
+   "beyond_traced_share": 0.1,
+   "beyond_traced_center_lonlat": [
+    -77.42998,
+    37.54702
+   ]
+  },
+  "corridor": {
+   "published": 447,
+   "centroid": 449,
+   "half_or_more": 448,
+   "any_overlap": 513,
+   "edge_in_5m": 366,
+   "edge_out_5m": 515,
+   "area_m2": 159701,
+   "beyond_traced_m2": 17284,
+   "beyond_traced_share": 0.108,
+   "beyond_traced_center_lonlat": [
+    -77.42977,
+    37.54714
+   ]
+  }
  }
 }

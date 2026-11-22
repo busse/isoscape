@@ -3041,12 +3041,12 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "live on the explorer since 2026-11-18, unlisted (not in the menu or sitemap, noindex), by the owner's approval: https://busse.github.io/isoscape/#/jackson-ward and /p/jackson-ward.html. Fact check done (143 claims, 44 changes). Waiting on the owner to share it with his community reviewers; open: the headline choice and two small decisions (the Planning Commission's October 20 adoption; the Skipwith-Roper cottage's return).",
+   "decision": "Three independent reads with Claude (scholar, dignity and harm, first-time reader) were run on the live unlisted page on 2026-11-22. Their fixes are on branch story-jackson-ward-reads (not merged, not published) for the owner's preview (ISO-TEST/stories/jackson-ward/reads/preview, changes.md). Notice per the owner's decision of 2026-11-22: the plain facts of how the page was made, no claim of review; author 'Chris Busse, a Richmond artist'. Substance changed: stated ground error widened to about 2 m mid-trench, 3 to 4 m or more at the ends; count ranges added (central 216/447 unchanged); island and tracing end at about 7th Street, not 8th; route section rests on the 1954 act and attributed sources. Open for the owner: preview and merge; the headline choice.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
-   "branch": "story-jackson-ward",
-   "worktree": null,
+   "branch": "story-jackson-ward-reads",
+   "worktree": "/home/claude/wt-jw-reads",
    "links": [
     "/mnt/user-data/outputs/stories/jackson-ward/brief.md"
    ],

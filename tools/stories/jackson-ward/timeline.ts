@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * The Jackson Ward story's timeline of how the Turnpike's route was chosen, as a flat diagram
+ * The Jackson Ward story's timeline of how the Turnpike came to be built, 1946 to 1958, as a flat diagram
  * in the FAQ's language (tools/diagrams/faq.ts): inked edges, a dot on every corner, colors from
  * src/palette.ts (paper, and night by prefers-color-scheme), text kept as text. Each date carries
  * its source and a mark for how sure it is: a solid disc where a source opened for the story
@@ -28,12 +28,13 @@ export interface Moment {
 
 /** The dates, each from a source opened for the story (see the story page's sources). */
 export const MOMENTS: readonly Moment[] = [
-  { date: '1946', what: 'A consultants\' master plan for the city proposes expressways through it.', source: 'Style Weekly, 2013; Feasibility Study, 2022', sure: 'opened' },
-  { date: 'June 13, 1950', what: 'Voters reject the highway plan in a citywide referendum. Only 8 of 55 precincts vote for it.', source: 'Style Weekly, 2013', sure: 'opened' },
-  { date: '1951', what: 'A second referendum, forced by former mayor J. Fulmer Bright\'s petition, fails by almost 2 to 1. A headline of the day put the margin at 6,002 votes.', source: 'Style Weekly, 2013, which shows the headline. Notes on Silver\'s book date a referendum June 13, 1951', sure: 'disputed' },
-  { date: 'August 24, 1953', what: 'City Council votes for a turnpike authority. The decision moves to the General Assembly, and no further referendum is held.', source: 'Silver, 1984, p. 192, from a student\'s notes; the book not seen', sure: 'unconfirmed' },
-  { date: 'April 8, 1954', what: 'The General Assembly creates the Richmond–Petersburg Turnpike Authority, with the power of eminent domain.', source: 'Acts of Assembly, 1954, ch. 705; Style Weekly, 2013; Encyclopedia Virginia. Library of Virginia, Wikipedia and VCU give 1955', sure: 'disputed' },
-  { date: '1955–1958', what: 'Clearance and construction. The Authority photographs the work monthly, 1956–58.', source: 'Community Plan, 2026; Library of Virginia, 2024', sure: 'opened' },
+  { date: '1946', what: 'Harland Bartholomew and Associates\' master plan for the city, made for the City Planning Commission, proposes expressways through it.', source: 'Encyclopedia Virginia (the plan); Style Weekly, 2013. Wikipedia, citing Campbell, names R. Stuart Royer and Associates as the firm that proposed a turnpike', sure: 'disputed' },
+  { date: 'June 13, 1950', what: 'Voters reject the expressway plan in a citywide referendum. Only 8 of 55 precincts vote for it.', source: 'Style Weekly, 2013; Rogers, 2011, quoting Silver', sure: 'opened' },
+  { date: 'November 1951', what: 'A second referendum, forced by former mayor J. Fulmer Bright\'s petition, fails by almost 2 to 1. A headline of the day put the margin at 6,002 votes.', source: 'Style Weekly, 2013; Rogers, 2011 (the same writer), citing the Times-Dispatch. His notes on Silver give June 13, 1951', sure: 'disputed' },
+  { date: 'August 24, 1953', what: 'City Council, 6 to 1, concurs in a consultant\'s report on toll roads for the Richmond–Petersburg area. Silver writes that this moved the decision to the General Assembly and prevented another referendum.', source: 'Rogers, 2011, from the Council\'s records and quoting Silver, p. 192 (the book not seen)', sure: 'unconfirmed' },
+  { date: 'April 8, 1954', what: 'The General Assembly creates the Richmond–Petersburg Turnpike Authority, with the power of eminent domain. The act lets the Authority fix the road\'s location, subject to the State Highway Commission, and puts its powers beyond any city\'s supervision.', source: 'Acts of Assembly, 1954, ch. 705. Library of Virginia, Wikipedia and VCU give 1955 for the Authority', sure: 'disputed' },
+  { date: 'About four months later', what: 'The Authority announces that the road will run through Jackson Ward.', source: 'Campbell, 2012, p. 154, as cited by Wikipedia (the book not seen)', sure: 'unconfirmed' },
+  { date: '1955–1958', what: 'Clearance and construction. The Authority photographs the work monthly, 1956–58. In 1956 Sixth Mount Zion Baptist Church is spared.', source: 'Community Plan, 2026; Library of Virginia, 2024; DHR nomination, 1996', sure: 'opened' },
   { date: 'July 1, 1958', what: 'The Turnpike opens: 34.7 miles, $76.7 million, paid for by toll revenue bonds. In August it becomes part of I-95.', source: 'Library of Virginia, 2024; Wikipedia', sure: 'opened' },
 ]
 
@@ -78,7 +79,7 @@ export const timeline = (): string => {
   const TW = W - TX - 14
   const parts: string[] = []
   let y = 30
-  parts.push(t(16, y, 'HOW THE ROUTE WAS CHOSEN', 'h ink'))
+  parts.push(t(16, y, 'THE TURNPIKE THROUGH THE WARD, 1946–58', 'h ink'))
   y += 26
   const top = y
   for (const m of MOMENTS) {
@@ -96,13 +97,13 @@ export const timeline = (): string => {
   // the key
   y += 4
   parts.push(`<path d="M16 ${n(y - 14)}L${W - 16} ${n(y - 14)}" class="edge" style="stroke-width:${LINE * 0.6}"/>`)
-  for (const [sure, label] of [['opened', 'sources opened for this story agree'], ['disputed', 'opened sources disagree (named)'], ['unconfirmed', 'only a summary of the book; unconfirmed']] as const) {
+  for (const [sure, label] of [['opened', 'sources opened for this story agree'], ['disputed', 'opened sources disagree (named)'], ['unconfirmed', 'rests on another writer\'s reading of a book not seen']] as const) {
     parts.push(mark(X, y, sure, 4.6) + t(TX, y + 4.5, label, 'b ink'))
     y += 22
   }
   const h = y + 6
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${n(h)}" width="${W}" height="${n(h)}" role="img" aria-labelledby="jw-tl-t jw-tl-d">
-<title id="jw-tl-t">How the Turnpike's route through Jackson Ward was chosen, 1946 to 1958</title>
+<title id="jw-tl-t">How the Richmond–Petersburg Turnpike came to be built through Jackson Ward, Richmond, 1946 to 1958</title>
 <desc id="jw-tl-d">${esc(MOMENTS.map((m) => `${m.date}: ${m.what} (${m.source})`).join(' '))}</desc>
 ${STYLE}
 <rect width="${W}" height="${n(h)}" class="bg"/>

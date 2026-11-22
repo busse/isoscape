@@ -649,7 +649,7 @@ about 28 ha of trench and 9 ha of interchange. Two methods, each an estimate:
   neighbors, solved by over-relaxation to 1 mm), held along each street that crossed at grade
   to a straight grade between its surviving ends. Seven such streets are listed; they change
   the result by about 6 cm RMS and 0.58 m at most, so the rim decides it.
-- **Lower** (`lowerGround`), for the ramps at the I-64 junction, which stand on the old
+- **Lower** (`lowerGround`), for the ramps at the I-64 junction, from about 7th Street east, which stand on the old
   plateau rim: a grey-scale opening of the lidar with a 25 m disk, so banks narrower than 50 m
   (embankments up to 9 m high) come down to the ground beside them and broader ground stays as
   measured. The USGS Richmond sheet surveyed in 1933–34 shows the rim there at about today's
@@ -660,9 +660,12 @@ Two checks set the error. Run on undisturbed plateau beside the trench (the same
 RMS, 95% of nodes within 0.7 to 2.9 m; moved onto the valley edge north of it, 1.8 m RMS and up
 to 8 m. On the USGS sheet (10-foot contours, about 3 m; its datum about 0.32 m above NAVD 88
 here) no contour can be read within 60 m of seven points along the trench from west of St. Peter
-Street to past Fifth Street, and the rebuilt ground there would need to move at most 0.8 m to agree. So the
-error is put at about 1.5 m (95%) mid-trench, 3 m at its ends, and more where the sheet shows
-a small ravine near Seventh Street that neither the lidar nor the membrane has. Streets that cross on bridges today are drawn at
+Street to past Fifth Street, and the rebuilt ground there falls in the sheet's 10-foot band or
+would need to move at most 0.8 m to reach it; that bounds nothing finer than the band. So the
+error is put at about 2 m (95%) mid-trench, the worst of the five plateau trials (0.66 to 2.06 m),
+and 3 to 4 m or more at its ends: 2.85 m where a trial crossed the Leigh Street cut, 4.2 m on the
+valley edge, and at least 3.5 m where the sheet shows a small ravine near Seventh Street that
+neither the lidar nor the membrane has. Streets that cross on bridges today are drawn at
 grade before 1958, and curated lost streets (`kind: "street"`, the stretches the trench took,
 straight between surviving ends) are drawn on the rebuilt ground.
 
@@ -796,12 +799,15 @@ given a count's `ids`, exactly the buildings that count lists, so a picture show
 counts. Jackson Ward's count of the 1952 outlines in the Turnpike's footprint skips outlines
 under 12 m² (the region's smallest building, which the map would not draw) and a correction
 table's box: 216 in today's paved roadway and ramps, 447 in the corridor of 15 m more each side.
+`count.py` also reports how the edge matters: the polygon moved 5 m in or out gives 134 to 300
+and 366 to 515, counting every outline the polygon touches gives 284 and 513, and about a tenth of
+each polygon (the ramp loop past 7th Street) lies beyond the traced sheets.
 An `island` switch cuts the scene to one polygon and draws it alone on blank paper: ground is
 painted strip by strip as always, each strip clipped to the polygon, the cut faces that look
 toward the camera are drawn as a slab's sides down to 18 m (the region's `slab`) below the
 lowest ground inside, and only the buildings the count lists stand on it. Jackson Ward's islands
-are cut where the traced sheets end, at about 8th Street, so the ramp loop past it, never traced,
-is not drawn as empty ground.
+are cut where the traced sheets end, at about 7th Street (the polygons themselves run to 8th
+Street), so the ramp loop past it, never traced, is not drawn as empty ground.
 
 **Era rules** date everything else that OSM maps: the first rule matching a feature's name,
 `ref` or tags decides the spans in which it existed. Interstates appear from 1958, the
