@@ -3071,8 +3071,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "Working draft d2 ready for review (outputs/stories/redlining/working/d2.md; preview at working/preview-d2/). Three questions in d2.md.",
+   "waiting_on": "agent",
+   "decision": "Working draft d3 ready for the independent fact check (outputs/stories/redlining/working/d3.md, factcheck.csv; preview at working/preview-d3/). The owner approved the look on November 22, 2026, tones as built.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3083,13 +3083,15 @@
    ],
    "title": "Redlining in Richmond, 1937 to today",
    "kind": "story",
-   "stage": "outline",
+   "stage": "fact check",
    "notes": "Reader (owner, 2026-11-22): assume no prior knowledge of the HOLC, grading or redlining; a reader who knows the subject should still learn from the detail and the way it is drawn. Asset: working draft d2 (2026-11-22, branch story-redlining); the board refuses an asset version at the outline stage, so the draft number is kept here and in the decision.",
    "private": true,
    "log": [
     "2026-11-21: research -> outline",
     "2026-11-22: working draft d1 (outline approved; owner decisions applied)",
-    "2026-11-22: working draft d2 (owner decisions on d1 applied)"
+    "2026-11-22: working draft d2 (owner decisions on d1 applied)",
+    "2026-11-22: outline -> fact check (owner approved the look of d2; d3 edits made)",
+    "2026-11-22: outline -> fact check"
    ]
   },
   "story-slave-trade": {

@@ -31,8 +31,11 @@ GRADES = ['A', 'B', 'C', 'D']
 import sys  # noqa: E402
 sys.path.insert(0, HERE)
 from outlines import OUTLINES  # noqa: E402  the one switch: outlines.py
-SRC = f"Grades: the Home Owners' Loan Corporation's (HOLC's) 1937 Richmond map, as digitized by {OUTLINES['short']} ({OUTLINES['license']})"
-NAMES = {'A': 'A "Best"', 'B': 'B "Still Desirable"', 'C': 'C "Definitely Declining"', 'D': 'D "Hazardous"'}
+SRC = f"Grades: the Home Owners' Loan Corporation's (HOLC's) 1937 Richmond map, {OUTLINES['short']} ({OUTLINES['license']})"
+from areas import KEY_LABELS, KEY_SOURCE  # noqa: E402
+from areas import GRADE_LEGEND, GRADE_NAME  # noqa: E402
+NAMES = {k: f'{k} {GRADE_LEGEND[k]}\n"{GRADE_NAME[k]}"' for k in GRADES}
+NAMES1 = dict(zip(GRADES, KEY_LABELS))
 
 
 def palette():
@@ -61,8 +64,8 @@ def finish(fig, name, note, full):
 
 def land(n, full):
     g = n['graded_land']
-    fig, ax = plt.subplots(figsize=(8, 3.9), facecolor=PAPER)
-    fig.subplots_adjust(left=0.27, right=0.95, top=0.82, bottom=0.3)
+    fig, ax = plt.subplots(figsize=(8, 4.6), facecolor=PAPER)
+    fig.subplots_adjust(left=0.27, right=0.95, top=0.85, bottom=0.36)
     ax.set_facecolor(PAPER)
     ys = list(range(len(GRADES)))[::-1]
     for y, k in zip(ys, GRADES):
@@ -76,7 +79,7 @@ def land(n, full):
     ax.tick_params(length=0)
     fig.suptitle('Richmond\'s graded land in 1937, by grade', x=0.02, ha='left', fontsize=13.5, fontweight='bold')
     finish(fig, 'land', f"{SRC}. Areas measured on a local plane by "
-                         f"tools/stories/redlining/measure.py; each grade's polygons merged. {n['graded_km2_union']:.1f} km² graded in all. The grade names are the HOLC's own.", full)
+                         f"tools/stories/redlining/measure.py; each grade's polygons merged. {n['graded_km2_union']:.1f} km² graded in all.\n{KEY_SOURCE}.", full)
 
 
 def highways(n, full):
@@ -84,8 +87,8 @@ def highways(n, full):
     land_share = {k: n['graded_land'][k]['share'] for k in GRADES}
     rows = [('Graded land, 1937', land_share, f"{n['graded_km2_union']:.1f} km²"),
             ('Limited-access highway\ninside graded land, today', m['by_grade_share'], f"{m['km_in_graded']:.1f} km of carriageway")]
-    fig, ax = plt.subplots(figsize=(8, 3.6), facecolor=PAPER)
-    fig.subplots_adjust(left=0.27, right=0.97, top=0.70, bottom=0.3)
+    fig, ax = plt.subplots(figsize=(8, 4.2), facecolor=PAPER)
+    fig.subplots_adjust(left=0.27, right=0.97, top=0.66, bottom=0.34)
     ax.set_facecolor(PAPER)
     for y, (label, share, total) in zip([1, 0], rows):
         x = 0.0
@@ -107,10 +110,11 @@ def highways(n, full):
     ax.tick_params(length=0)
     d_land, d_road = round(land_share['D'] * 100), round(m['by_grade_share']['D'] * 100)
     for i, k in enumerate(GRADES):
-        fig.patches.append(matplotlib.patches.Rectangle(((0.02, 0.17, 0.39, 0.66)[i], 0.765), 0.018, 0.035, transform=fig.transFigure, facecolor=TONE[k], edgecolor=INK, linewidth=0.6))
-        fig.text((0.02, 0.17, 0.39, 0.66)[i] + 0.024, 0.768, NAMES[k], fontsize=9)
+        lx, ly = (0.02, 0.5)[i % 2], (0.80, 0.755)[i // 2]
+        fig.patches.append(matplotlib.patches.Rectangle((lx, ly), 0.018, 0.035, transform=fig.transFigure, facecolor=TONE[k], edgecolor=INK, linewidth=0.6))
+        fig.text(lx + 0.024, ly + 0.003, NAMES1[k], fontsize=9)
     fig.suptitle(f'Where the highways run: D was {d_land}% of the graded land and holds\n{d_road}% of the limited-access highway inside it', x=0.02, ha='left', fontsize=13, fontweight='bold')
-    finish(fig, 'highways', f"{SRC}. Highways: OpenStreetMap ways tagged motorway, fetched Nov. 16, 2026 (ODbL).\n"
+    finish(fig, 'highways', f"{SRC}. Highways: OpenStreetMap ways tagged motorway, fetched Nov. 16, 2026 (ODbL). {KEY_SOURCE}.\n"
                             f"Each carriageway counted; ramps left out (with ramps, D holds {round(n['motorway_and_links']['by_grade_share']['D'] * 100)}%). It shows where the roads run; why they run there is in \"How we know\". measure.py.", full)
 
 
@@ -119,8 +123,8 @@ def survival(n, full):
     dated parcels the city dates to 1937 or before, by grade, beside the traced check in Jackson
     Ward (the share of the 1952 Sanborn outlines that still stand)."""
     y, jw = n['yearbuilt_by_grade'], n['jackson_ward_1952_survival']
-    fig, ax = plt.subplots(figsize=(8, 4.2), facecolor=PAPER)
-    fig.subplots_adjust(left=0.30, right=0.95, top=0.80, bottom=0.33)
+    fig, ax = plt.subplots(figsize=(8, 5.3), facecolor=PAPER)
+    fig.subplots_adjust(left=0.30, right=0.95, top=0.83, bottom=0.33)
     ax.set_facecolor(PAPER)
     rows = [(NAMES[k], y[k]['share_by1937'], TONE[k], f"{y[k]['by1937']:,} of {y[k]['parcels']:,}") for k in GRADES]
     rows.append(('Jackson Ward, 1952 Sanborn\noutlines still standing', jw['share_standing'], PAPER, f"{jw['standing_today']:,} of {jw['outlines_1952']:,}"))
@@ -137,7 +141,7 @@ def survival(n, full):
     fig.suptitle("What the 1937 views can draw: the share of today's dated buildings\nthat stood by 1937, by HOLC grade", x=0.02, ha='left', fontsize=13, fontweight='bold')
     finish(fig, 'survival', f"{SRC}. Year built: City of Richmond assessor parcels (cached Nov. 16, 2026), counted where a parcel's center falls in a grade. "
                             f"Buildings gone since 1937 have no parcel, so these shares cannot say how many were lost; where the 1952 Sanborn sheets were traced, only "
-                            f"{round(jw['share_standing'] * 100)}% of the outlines still stand. measure.py.", full)
+                            f"{round(jw['share_standing'] * 100)}% of the outlines still stand. measure.py. {KEY_SOURCE}.", full)
 
 
 def main():

@@ -27,10 +27,11 @@ from outlines import PATH as GRADES, CREDIT, URL as SOURCE_GRADES  # the one swi
 SOURCE_MI = 'https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json'
 SOURCE_NARA = 'https://catalog.archives.gov/id/720357'
 
+from areas import KEY_TITLE, KEY_LABELS, KEY_SOURCE  # noqa: E402
 LEGEND = {
-    'title': "The Home Owners' Loan Corporation's grades, 1937, in its own words",
-    'labels': ['A "Best"', 'B "Still Desirable"', 'C "Definitely Declining"', 'D "Hazardous"'],
-    'source': CREDIT,
+    'title': KEY_TITLE,
+    'labels': KEY_LABELS,
+    'source': CREDIT + '. ' + KEY_SOURCE,
 }
 
 

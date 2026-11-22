@@ -21,7 +21,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 sys.path.insert(0, HERE)
-from areas import NAMES, slug  # noqa: E402
+from areas import title as area_title, slug  # noqa: E402
 from outlines import CREDIT, HOW  # noqa: E402
 
 URL = {
@@ -134,9 +134,9 @@ def page_grid(t):
     for b in BOXES:
         lab = b['label']
         out += ['::: figure',
-                f"![{lab}, {NAMES[lab]}, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-{slug(lab)}.webp)",
+                f"![{area_title(lab)}, graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-{slug(lab)}.webp)",
                 '',
-                f"**{lab}, {NAMES[lab]}.** *What the 1937 form recorded:* {fill(b['form'], t)} [{cites(b['cite_form'])}] "
+                f"**{area_title(lab)}.** *What the 1937 form recorded:* {fill(b['form'], t)} [{cites(b['cite_form'])}] "
                 f"*What stands there now:* {fill(b['now'], t)} [{cites(b['cite_now'])}] "
                 f"*How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with {HOW} tinted under them. Working draft.",
                 ':::', '']

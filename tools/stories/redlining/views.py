@@ -42,9 +42,8 @@ REG = json.load(open(os.path.join(ROOT, 'regions/richmond-1937.json')))
 import sys  # noqa: E402
 sys.path.insert(0, HERE)
 from outlines import CREDIT, load as load_outlines  # noqa: E402  the one switch: outlines.py
-from areas import NAMES, D_AREAS, slug  # noqa: E402
-LEGEND = ['A "Best"', 'B "Still Desirable"', 'C "Definitely Declining"', 'D "Hazardous"']
-KEY_TITLE = "The Home Owners' Loan Corporation's (HOLC's) grades, 1937, in its own words"
+from areas import D_AREAS, slug  # noqa: E402
+from areas import KEY_LABELS as LEGEND, KEY_TITLE, KEY_SOURCE, title as area_title  # noqa: E402
 BASE_CREDIT = 'Map data © OpenStreetMap contributors (ODbL); elevation USGS 3DEP; drawn by Chris Busse with isoscape'
 
 
@@ -69,12 +68,14 @@ def view_box(svg):
     return tuple(float(v) for v in re.search(r'viewBox="([^"]+)"', head).group(1).split())
 
 
-def raster(svg, box, width, out, label_px=None):
+def raster(svg, box, width, out, label_px=None, caption=None):
     """`svg` drawn inside `box` (x, y, w, h), `width` px wide, on the paper's sky color. With
     `label_px`, the map's area labels are redrawn `label_px` pixels tall whatever the box's
     scale, so every close view labels its areas at one size relative to the picture."""
     with open(svg, 'rb') as fh:
         data = fh.read()
+    if caption is not None:
+        data = relaid_caption(data, caption)
     if label_px is not None:
         size = label_px * box[2] / width
         def relabel(m):
@@ -143,7 +144,7 @@ def keyed(img, title, sub=None, extra=0):
     lines = [(r, tf) for r in wrap(title, tf)] + ([(r, sf) for r in wrap(sub, sf)] if sub else [])
     head = sum(f.size * 1.35 for _, f in lines) + u * 0.8 + extra
     key_h = kf.size * 1.6 + u * 0.6
-    credit = CREDIT + '. ' + BASE_CREDIT + '.'
+    credit = CREDIT + '. ' + KEY_SOURCE + '. ' + BASE_CREDIT + '.'
     words, rows, cur = credit.split(' '), [], ''
     for w_ in words:
         t = (cur + ' ' + w_).strip()
@@ -192,6 +193,85 @@ def area_box(label, margin=1.18, aspect=0.62, min_ground=1100):
     return box_at((x0 + x1) / 2, (y0 + y1) / 2, ground, aspect=aspect, lift=45), round(ground)
 
 
+# Public housing the page names, marked where HUD's records place them (the OSM cache has no
+# outlines named for them): the address, found among OSM's address points on the same street.
+# Gilpin Court: 1000 St Paul Street (no 1000 in OSM; placed at the street's south end, below the
+# 1103 address point, so approximate). Mosby Court: 1909 Accommodation Street (between OSM's
+# 1907 and 1911). SVG points from `isoscape locate richmond-1937` (the same in 1937 and 2026).
+HOUSING = [('Gilpin Court (1943)', 1227.1, -45.0), ('Mosby Court (1962)', 1881.4, 114.5)]
+HOUSING_NOTE = ' Gilpin Court and Mosby Court are marked at the addresses in HUD\'s records (circles).'
+
+
+def marked(img, box, places=HOUSING):
+    """`img` (drawn from `box`) with each place inside it marked: a ring and its name, haloed."""
+    x, y, w, h = box
+    k = img.width / w
+    d = ImageDraw.Draw(img)
+    u = max(14, img.width // 110)
+    f = font(round(u * 1.5), bold=True)
+    hit = False
+    for name, sx, sy in places:
+        px, py = (sx - x) * k, (sy - y) * k
+        if not (u * 2 < px < img.width - u * 2 and u * 2 < py < img.height - u * 2):
+            continue
+        hit = True
+        r = u * 1.1
+        d.ellipse((px - r, py - r, px + r, py + r), outline=P['sky'], width=max(3, u // 3))
+        d.ellipse((px - r, py - r, px + r, py + r), outline=P['ink'], width=max(2, u // 6))
+        tw = d.textlength(name, font=f)
+        tx = px + r * 1.4 if px + r * 1.4 + tw < img.width - u else px - r * 1.4 - tw
+        d.text((tx, py - f.size * 0.6), name, font=f, fill=P['ink'], stroke_width=max(2, u // 4), stroke_fill=P['sky'])
+    return img, hit
+
+
+def relaid_caption(data, side):
+    """The scene's caption (year, title, key and source line) laid out again in a block about two
+    fifths of the frame wide, at the `side` ('left' or 'right') of the frame, so the two pictures
+    of a compare slider each keep their caption whole at their own outer edge. The key goes in two
+    columns and the source line wraps. Widths are estimated at 0.46 em a character (Georgia)."""
+    m = re.search(rb'<g class="caption"[^>]*>(.*?)</g>', data, flags=re.S)
+    vb = [float(v) for v in re.search(rb'viewBox="([^"]+)"', data[:600]).group(1).split()]
+    texts = re.findall(rb'<text x="([-0-9.]+)" y="([-0-9.]+)" font-size="([0-9.]+)"([^>]*)>(.*?)</text>', m.group(1))
+    rects = re.findall(rb'<rect [^>]*fill="(#[0-9a-f]{6})"[^>]*/>', m.group(1))
+    year, sub, ktitle = texts[0], texts[1], texts[2]
+    labels, source = texts[3:7], texts[7]
+    x0 = float(year[0])
+    em = lambda fs, t: 0.46 * fs * len(t.decode())  # noqa: E731
+    fs_k, fs_s = float(ktitle[2]), float(source[2])
+    col = max(em(fs_k, l[4]) for l in labels) + fs_k * 2.4
+    # The source line, with its note on the grade names shortened (the full note is under every
+    # picture on the page): two lines at most.
+    text = source[4].decode().replace(KEY_SOURCE.replace("'", '&#39;'), "Quoted grade names: the HOLC's map of Atlanta (RG 195)").replace(KEY_SOURCE, "Quoted grade names: the HOLC's map of Atlanta (RG 195)")
+    words, rows, cur = text.split(' '), [], ''
+    room = vb[2] * 0.47
+    for w_ in words:
+        t = (cur + ' ' + w_).strip()
+        if em(fs_s, t.encode()) > room and cur:
+            rows.append(cur); cur = w_
+        else:
+            cur = t
+    rows.append(cur)
+    width = max(2 * col, em(fs_k, ktitle[4]), max(em(fs_s, r.encode()) for r in rows), em(float(year[2]), year[4]) + em(float(sub[2]), sub[4]) + 60)
+    left = x0 if side == 'left' else vb[0] + vb[2] - (x0 - vb[0]) - width
+    dx = left - x0
+    out = []
+    y = float(year[1])
+    out.append(b'<text x="%.1f" y="%.1f" font-size="%s"%s>%s</text>' % (float(year[0]) + dx, y, year[2], year[3], year[4]))
+    out.append(b'<text x="%.1f" y="%.1f" font-size="%s"%s>%s</text>' % (float(sub[0]) + dx, y, sub[2], sub[3], sub[4]))
+    y = float(ktitle[1])
+    out.append(b'<text x="%.1f" y="%.1f" font-size="%s"%s>%s</text>' % (left, y, ktitle[2], ktitle[3], ktitle[4]))
+    for i, (lab, fill) in enumerate(zip(labels, rects)):
+        cx, cy = left + (i % 2) * col, y + fs_k * 1.25 * (1 + i // 2)
+        out.append(b'<rect x="%.1f" y="%.1f" width="%.1f" height="%.1f" fill="%s" stroke="%s" stroke-width="0.6"/>' % (cx, cy - fs_k * 0.85, fs_k * 1.6, fs_k, fill, P['ink'].encode()))
+        out.append(b'<text x="%.1f" y="%.1f" font-size="%s"%s>%s</text>' % (cx + fs_k * 2.0, cy, lab[2], lab[3], lab[4]))
+    y += fs_k * 1.25 * 2 + fs_s * 1.3
+    for r in rows:
+        out.append(b'<text x="%.1f" y="%.1f" font-size="%s"%s>%s</text>' % (left, y, source[2], source[3], r.encode()))
+        y += fs_s * 1.3
+    head = data[:m.start(1)]
+    return head + b'\n' + b'\n'.join(out) + b'\n' + data[m.end(1):]
+
+
 def clamp(box, within):
     """`box` moved (not resized) to lie inside `within`, so no close view runs off the plate."""
     x, y, w, h = box
@@ -218,15 +298,16 @@ def main():
     want = lambda n: only is None or n in only  # noqa: E731
 
     if want('grades-1937'):
-        save(raster(g, union, 7900, tmp), 'grades-1937', a.full)
+        save(raster(g, union, 7900, tmp, caption='left'), 'grades-1937', a.full)
     if want('built-2026'):
-        save(raster(b, union, 7900, tmp), 'built-2026', a.full)
+        save(raster(b, union, 7900, tmp, caption='right'), 'built-2026', a.full)
     # What was built on D land, close: D1 (Jackson Ward, Gilpin), D5 (Church Hill North) and D8
     # (Randolph) with the interstates and the Downtown Expressway.
     if want('built-close'):
         box = box_at(-77.437, 37.548, 6200, aspect=0.5, lift=60)
-        save(keyed(raster(b, box, 5600, tmp), 'Richmond today, with the 1937 grades under it: I-95, I-64 and the Downtown Expressway (black) across D1, D5 and D8',
-                   'Looking north. The Downtown Expressway crosses D8 at left; the Turnpike, now I-95 and I-64, crosses D1 at center and runs along D5 at right.'), 'built-close', a.full)
+        im, hit = marked(raster(b, box, 5600, tmp), box)
+        save(keyed(im, 'Richmond today, with the 1937 grades under it: I-95, I-64 and the Downtown Expressway (black) across D1, D5 and D8',
+                   'Looking north. The Downtown Expressway crosses D8 at left; the Turnpike, now I-95 and I-64, crosses D1 at center and runs along D5 at right.' + (HOUSING_NOTE if hit else '')), 'built-close', a.full)
     # Side by side at one scale: A5 (Windsor Farms) and D1 (Jackson Ward and Gilpin), the same
     # ground width, 1937 and today.
     if want('pair'):
@@ -234,7 +315,7 @@ def main():
         cells = []
         for svg, year in ((g, '1937'), (b, 'today')):
             row = []
-            for (lon, lat), name in (((-77.5005, 37.5520), 'A5, Windsor Farms'), ((-77.4395, 37.5540), 'D1, Jackson Ward and Gilpin')):
+            for (lon, lat), name in (((-77.5005, 37.5520), area_title('A5')), ((-77.4395, 37.5540), area_title('D1'))):
                 im = raster(svg, box_at(lon, lat, ground, aspect=0.55, lift=45), 2400, tmp)
                 row.append(labeled(im, f'{name}, {year}'))
             cells.append(row)
@@ -245,11 +326,11 @@ def main():
         for r, row in enumerate(cells):
             for c, im in enumerate(row):
                 out.paste(im, (c * (im.width + gap), r * (im.height + gap)))
-        save(keyed(out, 'An A area and a D area at the same scale: Windsor Farms (A5) and Jackson Ward (D1), 1937 and today',
+        save(keyed(out, f"An A area and a D area at the same scale: {area_title('A5')} and {area_title('D1')}, 1937 and today",
                    'Each panel is 2.6 km of ground across, looking north.'), 'pair', a.full)
     # The worked example: A5 and D1 each whole, 1937 and today, in one box per area so each pair
     # makes a compare slider.
-    for label, title in (('A5', 'Windsor Farms'), ('D1', 'Jackson Ward, Apostle Town and Navy Hill')):
+    for label in ('A5', 'D1'):
         box, ground = area_box(label)
         box = clamp(box, union)
         if not (want(f'example-{label.lower()}-1937') or want(f'example-{label.lower()}-today')):
@@ -260,11 +341,16 @@ def main():
             how = {('A5', '1937'): ' Buildings: those standing today that the city dates to 1937 or before.',
                    ('D1', '1937'): ' Buildings: those standing today that the city dates to 1937 or before, and in Jackson Ward those on the 1925 and 1952 Sanborn maps; most others then standing are gone and not drawn.'}.get((label, year), " Today's buildings and streets; limited-access highways in black.")
             im = raster(svg, box, 3200, tmp, label_px=58)
+            hit = False
+            if year == 'today' and label == 'D1':
+                im, hit = marked(im, box, HOUSING[:1])
             # One band for both years: the slider shows one picture's left and the other's right,
             # so a band that differed would read as one broken line.
             how = {'A5': ' 1937: buildings standing today that the city dates to 1937 or before. Today: OpenStreetMap; limited-access highways in black.',
                    'D1': ' 1937: buildings standing today that the city dates to 1937 or before, and those on the 1925 and 1952 Sanborn maps; most others then standing are gone and not drawn. Today: OpenStreetMap; highways in black.'}[label]
-            args = (f'{label}, {title}, in 1937 and today: an area the HOLC graded {grade}', f'About {ground / 1000:.1f} km of ground across, looking north.' + how)
+            if label == 'D1':
+                how += HOUSING_NOTE.replace('Gilpin Court and Mosby Court are marked', 'Today, Gilpin Court is marked').replace('addresses', 'address').replace(' (circles)', ' (circle)')
+            args = (f'{area_title(label)}, in 1937 and today: an area the HOLC graded {grade}', f'About {ground / 1000:.1f} km of ground across, looking north.' + how)
             made[year] = (im, args, keyed(im, *args))
         # The two years open in one compare slider, so their pictures must sit at the same height:
         # the shorter band gets the difference.
@@ -278,9 +364,17 @@ def main():
         name = f'd-{slug(label)}'
         if want(name) or want('d-all'):
             box, ground = area_box(label)
-            im = raster(b, clamp(box, union), 2400, tmp, label_px=46)
-            save(keyed(im, f'{label}, {NAMES[label]}: graded D in 1937, seen today',
-                       f'About {ground / 1000:.1f} km of ground across, looking north. Interstates and the Downtown Expressway in black.'), name, a.full)
+            box = clamp(box, union)
+            im = raster(b, box, 2400, tmp, label_px=46)
+            hit = False
+            one = {'D1': 0, 'D5': 1}.get(label)
+            note = ''
+            if one is not None:
+                im, hit = marked(im, box, HOUSING[one:one + 1])
+                court = HOUSING[one][0].split(' (')[0]
+                note = f" {court} is marked at the address in HUD's record (circle)." if hit else ''
+            save(keyed(im, f'{area_title(label)}: graded D in 1937, seen today',
+                       f'About {ground / 1000:.1f} km of ground across, looking north. Interstates and the Downtown Expressway in black.' + note), name, a.full)
     if os.path.exists(tmp):
         os.remove(tmp)
 

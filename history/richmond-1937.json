@@ -5756,14 +5756,14 @@
           "D"
         ],
         "legend": {
-          "title": "The Home Owners' Loan Corporation's grades, 1937, in its own words",
+          "title": "Grades on the Home Owners' Loan Corporation's (HOLC's) 1937 map",
           "labels": [
-            "A \"Best\"",
-            "B \"Still Desirable\"",
-            "C \"Definitely Declining\"",
-            "D \"Hazardous\""
+            "A First Grade, \"Best\"",
+            "B Second Grade, \"Still Desirable\"",
+            "C Third Grade, \"Definitely Declining\"",
+            "D Fourth Grade, \"Hazardous\""
           ],
-          "source": "Grades: Home Owners' Loan Corporation, 1937 (National Archives, RG 195, via FRASER); outlines redrawn with Claude from the public-domain scan, positioned with OpenStreetMap street corners (ODbL)"
+          "source": "Grades: Home Owners' Loan Corporation, 1937 (National Archives, RG 195, via FRASER); outlines redrawn with Claude from the public-domain scan, positioned with OpenStreetMap street corners (ODbL). Grade names: the Richmond map's legend (First to Fourth Grade); the names in quotation marks as printed on the legend of the HOLC's map of Atlanta (National Archives, RG 195, via FRASER)"
         }
       },
       "note": "The 1937 grades as tinted ground, with a key."
@@ -5779,14 +5779,14 @@
           "D"
         ],
         "legend": {
-          "title": "The Home Owners' Loan Corporation's grades, 1937, in its own words",
+          "title": "Grades on the Home Owners' Loan Corporation's (HOLC's) 1937 map",
           "labels": [
-            "A \"Best\"",
-            "B \"Still Desirable\"",
-            "C \"Definitely Declining\"",
-            "D \"Hazardous\""
+            "A First Grade, \"Best\"",
+            "B Second Grade, \"Still Desirable\"",
+            "C Third Grade, \"Definitely Declining\"",
+            "D Fourth Grade, \"Hazardous\""
           ],
-          "source": "Grades: Home Owners' Loan Corporation, 1937 (National Archives, RG 195, via FRASER); outlines redrawn with Claude from the public-domain scan, positioned with OpenStreetMap street corners (ODbL)"
+          "source": "Grades: Home Owners' Loan Corporation, 1937 (National Archives, RG 195, via FRASER); outlines redrawn with Claude from the public-domain scan, positioned with OpenStreetMap street corners (ODbL). Grade names: the Richmond map's legend (First to Fourth Grade); the names in quotation marks as printed on the legend of the HOLC's map of Atlanta (National Archives, RG 195, via FRASER)"
         },
         "roads": [
           "motorway",
