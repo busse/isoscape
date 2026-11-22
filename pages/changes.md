@@ -24,6 +24,18 @@ when. Once anyone has ordered an edition, it stays as it is, and any change beco
 Numbers already printed stay as they are. The [production board](board.md) shows where each piece
 stands. This entry was drafted with Claude.
 
+## November 22, 2026 (Byrd Theatre cutaway)
+
+**New: The Byrd Theatre, Christmas Eve 1928: Cutaway (plate BYRD·01, version 1).**
+The Byrd Theatre on West Cary Street cut open on its opening night, down the middle from the Cary
+Street doors to the screen. Below it, the same cut is drawn flat, and a second flat section
+crosses the stage house through the organ's rooms above the stage. It opens a new set in
+Buildings in their time, The Byrd Theatre, 1928. Every part is marked by how sure it is. No plan
+or seating chart was found, so the rooms are placed from written accounts and photographs.
+[The cutaway, its callouts and its sources](byrd-cutaway.md)
+
+*Drafted with Claude; see the [artist statement](artist-statement.md).*
+
 ## November 18, 2026 (Byrd Park Pump House cutaway)
 
 **New: The New Pump-House, Richmond, about 1885: Cutaway (plate BPPH·01, version 1).**

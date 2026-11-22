@@ -76,7 +76,18 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
   // The ground along the plane, dug out under whatever the building cut puts below it.
   const step = 0.5
   const ground: [number, number][] = []
-  for (let s = s0; s <= to + 1e-9; s += step) {
+  const samples: number[] = []
+  for (let s = s0; s <= to + 1e-9; s += step) samples.push(s)
+  if (cut.section.squareEarth === true) {
+    // Each end of a section below the ground, sampled just inside and just outside it.
+    for (const sec of scene.sections ?? []) {
+      for (const x of [Math.min(...sec.map((q) => q[0])), Math.max(...sec.map((q) => q[0]))]) {
+        for (const d of [-1e-3, 1e-3]) if (x + d > s0 && x + d < to) samples.push(x + d)
+      }
+    }
+    samples.sort((a, b) => a - b)
+  }
+  for (const s of samples) {
     let z = T.z(along(s))
     for (const sec of scene.sections ?? []) {
       const xs = sec.map((q) => q[0])
@@ -180,12 +191,25 @@ export const renderSection = (scene: Scene, cut: Cutaway): SectionRendered => {
       ...Object.entries(anchors).filter(([id]) => /:end$/.test(id) && /track/.test(id)).map(([, b]): Box => [b[0] - clear / 2, b[1], b[2] + clear / 2, b[3]]),
     ]
     const runs = routeRuns(line.map(([s, e]) => P(s, zOf(e))), keepOff, MIN_RUN * view.scale)
+    // A halo first, where the palette has one: each dash, the arrowheads and the figures
+    // outlined in light, so the red reads over red seats and dark walls.
+    const halo = p.routeHalo
+    if (halo !== undefined && p.routeHaloWidth !== undefined) {
+      const hw = p.routeHaloWidth.edge
+      for (const run of runs) {
+        out.push(`<path fill="none" stroke="${halo}" stroke-width="${f(p.routeWidth + 2 * hw)}" stroke-dasharray="${[p.routeDash[0] + 2 * hw, p.routeDash[1] - 2 * hw].map(f).join(' ')}" stroke-dashoffset="${f(hw)}" stroke-linecap="round" stroke-linejoin="round" d="${path(run, false)}"/>`)
+        const head = arrowOn(run, ARROW * view.scale)
+        if (head !== null) out.push(`<path fill="${halo}" stroke="${halo}" stroke-width="${f(2 * hw)}" stroke-linejoin="round" d="${path(head)}"/>`)
+      }
+    }
     for (const run of runs) {
       out.push(`<path fill="none" stroke="${color}" stroke-width="${f(p.routeWidth)}" stroke-dasharray="${p.routeDash.map(f).join(' ')}" stroke-linecap="round" stroke-linejoin="round" d="${path(run, false)}"/>`)
       const head = arrowOn(run, ARROW * view.scale)
       if (head !== null) out.push(`<path fill="${color}" d="${path(head)}"/>`)
     }
   }
+  const fh = p.routeHaloWidth?.figure
+  if (p.routeHalo !== undefined && fh !== undefined) for (const t of travelers) out.push(`<g class="traveler-halo">${t.polys.map((poly) => `<path fill="${p.routeHalo}" stroke="${p.routeHalo}" stroke-width="${f(fh)}" stroke-linejoin="round" d="${path(poly)}"/>`).join('')}</g>`)
   for (const t of travelers) out.push(`<g class="traveler">${t.polys.map((poly) => `<path fill="${p.route}" d="${path(poly)}"/>`).join('')}</g>`)
   out.push(...tags)
   // The tags stand past the drawing's edge where a way ends at it: the box grows to hold them.

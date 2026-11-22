@@ -51,8 +51,8 @@ Black-owned bank chartered in the United States), Mechanics' Bank (1902) and Mag
 Walker's St. Luke Penny Savings Bank (1903) [[Community Plan 2026](#sources);
 [Feasibility Study 2022](#sources), §1.4]. The Hippodrome on Second Street opened about 1914, the National Park Service says; the community plan gives 1914 in its timeline and 1913 in its text, as the feasibility study does [[NPS, Hippodrome](#sources); [Community Plan 2026](#sources); [Feasibility Study 2022](#sources), §1.4.1].
 
-It was also a neighborhood hemmed in by law. In 1911, according to a student's notes on Christopher Silver's history of the city, City Council passed a residential segregation ordinance drawn block by block [[Silver 1984](#sources), via a student's notes]. On the "redlining" maps of the 1930s every Black neighborhood in Richmond was marked
-undesirable, and its residents were barred from loans for houses and businesses [[Feasibility Study 2022](#sources),
+It was also a neighborhood hemmed in by law. In 1911, according to a student's notes on Christopher Silver's history of the city, City Council passed a residential segregation ordinance drawn block by block [[Silver 1984](#sources), via a student's notes]. The city's 2022 feasibility study says that on the "redlining" maps of the 1930s every Black neighborhood in Richmond was marked
+undesirable and that its residents were barred from loans for houses and businesses [[Feasibility Study 2022](#sources),
 §1.4.2]. By the 1930s more than 8,000 Black Richmonders lived and worked in the ward
 [[Community Plan 2026](#sources), citing Taylor 1994].
 

@@ -10,7 +10,8 @@
  * In a content page (`::: compare`, markdown.ts) the slider is a numbered figure: the first
  * picture on the left, the second on the right, both the same size (they must be rendered from
  * the same frame; nothing here scales one to fit the other). Press or drag anywhere on the
- * pictures to move the divider (a mouse or a finger; a vertical swipe still scrolls the page). The
+ * pictures to move the divider: a mouse from the press, a finger by a sideways drag or a tap (a
+ * vertical swipe still scrolls the page, and leaves the divider where it was). The
  * divider is a focusable slider: the arrow keys move it 2% (with Shift, or PageUp/PageDown, 10%),
  * Home and End take it to either edge, and it carries `aria-valuenow` and a `aria-valuetext` that
  * names the two sides. Its tab shows the two labels, one each side of the line. The figure's
@@ -40,6 +41,7 @@ export const compareSliders = (doc, split) => {
   const set = (cmp, f) => {
     f = Math.min(1, Math.max(0, f))
     cmp.dataset.split = String(f)
+    cmp.style.setProperty('--split', String(f))
     const div = cmp.querySelector('.cmp-div')
     split.at(cmp.querySelector('.cmp-clip'), div, Math.round(f * 1000) / 10 + '%')
     const pct = Math.round(f * 100)
@@ -47,24 +49,40 @@ export const compareSliders = (doc, split) => {
     div.setAttribute('aria-valuetext', pct + '%: ' + cmp.dataset.a + ' on the left, ' + cmp.dataset.b + ' on the right')
   }
   const at = (cmp) => Number(cmp.dataset.split || 0.5)
+  // A mouse moves the divider from the press. A finger or pen waits to see which way it goes: a
+  // sideways drag moves the divider (touch-action: pan-y keeps the browser from panning the page
+  // sideways), a vertical one is left to the browser, which scrolls the page and cancels the
+  // pointer, so the divider stays put. A tap moves it to where it lands.
   let drag = null
   doc.addEventListener('pointerdown', (e) => {
     const cmp = e.target.closest && e.target.closest('.cmp')
     if (!cmp || e.button !== 0 || e.target.closest('.cmp-open')) return
-    drag = { cmp, id: e.pointerId }
-    cmp.setPointerCapture(e.pointerId)
+    const mouse = e.pointerType === 'mouse'
+    drag = { cmp, id: e.pointerId, x0: e.clientX, y0: e.clientY, live: mouse }
+    try { cmp.setPointerCapture(e.pointerId) } catch (err) { /* the pointer is already gone */ }
+    if (!mouse) return
     cmp.classList.add('dragging')
     set(cmp, split.of(e.clientX, cmp.getBoundingClientRect()))
     const div = cmp.querySelector('.cmp-div')
-    if (div && e.pointerType === 'mouse') div.focus({ preventScroll: true })
+    if (div) div.focus({ preventScroll: true })
     e.preventDefault()
   })
   doc.addEventListener('pointermove', (e) => {
     if (!drag || e.pointerId !== drag.id) return
+    if (!drag.live) {
+      const dx = Math.abs(e.clientX - drag.x0)
+      const dy = Math.abs(e.clientY - drag.y0)
+      if (dy > 8 && dy > dx) { drag = null; return }
+      if (dx < 6 || dx < dy) return
+      drag.live = true
+      drag.cmp.classList.add('dragging')
+    }
     set(drag.cmp, split.of(e.clientX, drag.cmp.getBoundingClientRect()))
+    e.preventDefault()
   })
   const end = (e) => {
     if (!drag || e.pointerId !== drag.id) return
+    if (e.type === 'pointerup' && !drag.live) set(drag.cmp, split.of(e.clientX, drag.cmp.getBoundingClientRect()))
     drag.cmp.classList.remove('dragging')
     drag = null
   }
@@ -96,7 +114,9 @@ export const COMPARE_CSS = `.cmp-div { position: absolute; top: 0; bottom: 0; wi
 .cmp-div::before { content: ""; position: absolute; inset: 0 -8px; }
 .cmp-div:focus { outline: none; }
 .cmp-div:focus-visible::after { outline: 2px solid var(--ink); outline-offset: 2px; }
-.cmp { position: relative; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: ew-resize; }
+.cmp { position: relative; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; cursor: ew-resize; container-type: inline-size; }
+.cmp .cmp-div::before { inset: 0 -22px; }
+.cmp .cmp-div::after { transform: translateX(clamp(6px - var(--split, .5) * 100cqw, -50%, 100cqw - 6px - var(--split, .5) * 100cqw - 100%)); }
 .cmp.dragging { cursor: grabbing; }
 .cmp img.cmp-a { display: block; width: 100%; height: auto; max-width: none; margin: 0; pointer-events: none; }
 .cmp .cmp-clip { position: absolute; inset: 0; overflow: hidden; clip-path: inset(0 0 0 50%); pointer-events: none; }
@@ -107,6 +127,7 @@ export const COMPARE_CSS = `.cmp-div { position: absolute; top: 0; bottom: 0; wi
 .cmp a.cmp-open:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .prose figure.fig .cmp img { border-radius: 4px 4px 0 0; }
 .prose figure.fig a.fig-open.cmp-open { display: flex; border-radius: 15px; cursor: zoom-in; }
+@media (pointer: coarse) { .cmp a.cmp-open, .prose figure.fig a.fig-open.cmp-open { width: 44px; height: 44px; border-radius: 22px; top: 6px; right: 6px; font-size: 19px; } }
 .lb-stage.has-cmp { container-type: size; }
 .lb-stage .cmp { width: min(100cqw, 100cqh * var(--ar)); flex: none; background: var(--panel); box-shadow: 0 1px 6px color-mix(in srgb, var(--ink) 18%, transparent); }
 `

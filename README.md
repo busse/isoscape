@@ -395,10 +395,13 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
 
   The two pictures must be the same size and drawn from the same frame (nothing scales one to
   fit the other; `views.py` renders the Jackson Ward years in one shared viewBox for this).
-  Press or drag anywhere on the pictures to move the divider (mouse or touch; a vertical swipe
-  still scrolls). The divider is a focusable slider (`role="slider"`, with `aria-valuenow` and a
+  Press or drag anywhere on the pictures to move the divider. A finger moves it by dragging
+  sideways or by a tap; a vertical swipe that starts on the pictures scrolls the page and leaves
+  the divider where it was, and the page itself never pans sideways (`touch-action: pan-y`). On a
+  touch screen the line takes touches 22 px either side, and the expand button is 44 px. The divider is a focusable slider (`role="slider"`, with `aria-valuenow` and a
   text naming both sides): ← and → move it 2%, with Shift or PageUp/PageDown 10%, Home and End
-  to the edges. Its tab shows the two labels, one each side of the line. The expand button (⤢)
+  to the edges. Its tab shows the two labels, one each side of the line, and slides along the
+  line near either edge so it stays whole inside the picture. The expand button (⤢)
   opens the same slider large in the lightbox, with each picture's `-large` copy and the divider
   where it was; there the arrow keys move the divider while it has focus and step figures
   otherwise, and **Full size** is hidden. In the grid it is one figure, shown by its first
@@ -407,6 +410,12 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   the same moves and the same look. Only pages with the block get its styles and script on
   `p/`. Anything but two pictures makes a plain figure.
 - Raster images carry their width and height, so the page holds its layout while they load.
+- On a phone nothing in a page is wider than the screen: long words, bare URLs and inline code
+  wrap inside the text column, a table scrolls sideways inside its own wrapper (its cells keep
+  whole words), and a code block scrolls inside its own box. Wide figures shrink to the column.
+  As a guard, on a phone the explorer's reading view and front page (`#page`, `#home`) and the
+  static pages' column (`.wrap`) clip anything wider rather than scroll sideways. On a phone the
+  lightbox's buttons are at least 44 px, and previous and next sit above the caption.
 - The converter (`src/markdown.ts`) escapes all text and drops raw HTML and unsafe link
   schemes. Files starting with `_` (drafts) and `README.md` are skipped.
 - `npm test` checks that every in-page link in `pages/` lands on a real section, and that the
@@ -562,7 +571,7 @@ same pipeline on a flat plate.
   "squash": 0.5,                  // sine of the tilt
   "exaggeration": 1.0,            // vertical exaggeration
   "slab": 16,                     // ground slab thickness, meters
-  "palette": "paper",             // paper | night
+  "palette": "paper",             // paper | night | winter
   "bridgeDeck": 7,                // default deck height per OSM layer
   "bridges": [{ "match": "Manchester", "deck": 24 }],  // + "pierSpacing": meters (default 38; long for suspension bridges)
   "minBuildingArea": 12,          // m²
@@ -693,12 +702,13 @@ one side is lifted away, its ground floor left as a plan, and every cut is drawn
   "remove": "right",                      // the side lifted away; stand the camera there
   "floor": 67.4, "keep": 1.5,             // on that side keep what stands up to 1.5 m over this floor (m above sea level)
   "parts": "bss-",                        // only modeled parts with this id prefix are cut
-  "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away whole though not cut
+  "lift": ["^history:bss-canopy-2-south-cut:\\d+$"],  // items lifted away whole though not cut; OSM buildings ("^w236026091$"); modeled parts, still drawn in the flat section
   "outline": { "parts": ["bss-c-floor-"], "offset": 1.5 },  // dash the removed footprint
   "travelers": [{ "at": [-77.466035, 37.56091], "floor": 67.4, "facing": 1 }],  // figures to scale (1.75 m); no floor: on the ground
   "section": { "from": -62, "to": 104, "beyond": 35, "other": 3, "scale": 10, "earth": 5,
                "route": [[-60, 64.7], [50.5, 68.3]],   // the flat section and the traveler's path (waist height)
                "travelers": [{ "s": -40, "floor": 65.66, "facing": 1 }] }   // figures on the path
+               // "squareEarth": true digs the earth square at the ends of what lies below the ground
 }
 ```
 
@@ -756,7 +766,25 @@ tightens the column's spacing (sheet units: `head`, `callout`, `group`, `keyHead
 `traveler`, `notes`, `between`; the defaults, 170, 58, 36, 150, 92, 26, 40 and 68, are the
 released sheets'); the Pump House sheet uses it to end its column by 6,520 and free the corner.
 `blockMinPt` keeps the title block's taxonomy at that size or more on the 24 × 18 in print (see
-"Plates").
+"Plates"). `blockFace` (`[x0, y0, x1, y1]`, sheet units) is the area the block is placed in,
+scaled to each print: a themed sheet's border rules run the sheet's width, so without it the
+stamp finds no corner. The Byrd sheet gives the area inside its border, 174 to 9,426 across and
+174 to 7,026 down (130, 130, 7,070, 5,270 pixels at 24 × 18). Without it the whole sheet is
+searched, as for the released sheets, whose prints stay byte for byte as they were.
+
+A spec may also set `theme` (`"holiday"`: accents from `SHEET_THEMES` in `src/palette.ts`, a
+border with holly at the corners; margins only), `halo` (leaders drawn over a paper halo, for a
+dark plate), `mapData: false` (no OpenStreetMap credit in the drawing's metadata, for a plate
+drawn without its data), and `layout` (`isoHeight`, `isoAlign: "left"`, `bottom`, `sectionW`,
+`key: {x, y, w}` to set the key in a block of its own, or `key: {column}` to set it under a
+callout column, and `notes: {x, y, w}` to set the sources and notes beside the section, or under
+the key when `y` is left out, with `cols`, `gap` and `px` to run them in columns at their own
+size, or `notes: {px, flow}` to flow them through boxes of their own, `[x, y, w, bottom]` each in reading order, a `y` of null starting under the key). For a sheet with many callouts, `layout.iso` and `layout.sections` (`[x, y, w, h]`) set
+the plate and the flat sections in boxes of their own, `layout.columns` (`[[x, w], ...]`) sets
+the callouts in columns, each group in the one its `column` names (a group's `y` sets its heading's baseline, to line it up with the heading beside it; the column only moves down), and `layout.body` sets the
+callout text's size. `drawingLabels` (`in`, `s`, `elevation`, `text`, `px`) names rooms inside a
+flat section in small capitals. A callout may name a list of anchors in one drawing. A wayfinding label can stand `inside-left-above` or `inside-left-below` the place it
+points to on the plate's left edge, or `below` the plate, and be nudged by `offset`.
 
 `--print` makes the print files of the spec's `design` (its plate is in `catalog/plates.json`):
 the sheet rasterized from the vector at 300 dpi, 32 × 24 in and 24 × 18 in, each with its title

@@ -80,7 +80,8 @@ export const THEME_CSS = `:root {
 `
 
 /** The reading view's typography, shared with the static content pages. */
-export const PROSE_CSS = `.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; }
+export const PROSE_CSS = `.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; overflow-wrap: anywhere; }
+/* A long URL, word or code span wraps inside the column instead of widening it (on a phone that made the page scroll sideways). Tables keep whole words and scroll in their own wrapper; code blocks scroll in their own box. */
 .prose h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 18px; font-weight: 650; }
 .prose h2 { font-size: 20px; letter-spacing: -.01em; margin: 2.2em 0 .5em; padding-top: .6em; border-top: 1px solid var(--line); font-weight: 650; }
 .prose h3 { font-size: 16px; margin: 1.6em 0 .4em; }
@@ -94,14 +95,14 @@ export const PROSE_CSS = `.prose { font-size: 15.5px; line-height: 1.65; color: 
 .prose a:hover { text-decoration-color: var(--accent); }
 .prose a.buy { font-weight: 600; white-space: nowrap; }
 .prose code { font: .86em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: .05em .25em; border-radius: 4px; }
-.prose pre { max-height: none; font-size: 12.5px; }
+.prose pre { max-height: none; font-size: 12.5px; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
 .prose pre code { background: none; padding: 0; font-size: inherit; }
 .prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 0 6px 6px 0; }
 .prose blockquote p:last-child { margin-bottom: 0; }
 .prose img { display: block; max-width: 100%; height: auto; margin: 1.4em auto; }
 .prose hr { border: none; border-top: 1px solid var(--line); margin: 2em 0; }
-.prose .table { overflow-x: auto; }
-.prose table { font-size: 13.5px; font-variant-numeric: normal; }
+.prose .table { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+.prose table { font-size: 13.5px; font-variant-numeric: normal; overflow-wrap: normal; }
 .prose th, .prose td { text-align: left; white-space: normal; vertical-align: top; padding: 6px 10px 6px 0; color: var(--ink); }
 .prose th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); border-bottom: 1.5px solid var(--line); }
 .prose td:first-child { color: var(--ink); font-weight: 500; }
@@ -303,7 +304,6 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
   #info .tabs { margin-left: 0; }
   #info .body, #info .body.stories { grid-template-columns: 1fr; gap: 16px; padding: 12px 14px 16px; }
   #home, #page { flex: 1; min-height: 0; }
-  .doc { padding: 18px 16px 60px; }
   .prose h1 { font-size: 25px; }
   #nav { position: fixed; top: 0; bottom: 0; left: 0; width: min(86vw, 320px); z-index: 20; transform: translateX(-100%); transition: transform .2s ease; }
   body.navopen #nav { transform: none; box-shadow: 0 0 28px rgba(0, 0, 0, .3); }
@@ -316,7 +316,10 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
   .hm .banner .btn { margin-left: 0; }
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .card b { font-size: 12px; }
-  .hm section.sec header .btn { margin-left: 0; }
+  .hm section.sec header .btn { margin-left: 0; white-space: normal; }
+  /* A guard: nothing in a page should be wider than the phone (the rules above see to that), but if
+     something ever is, it is cut off rather than turning the page into a sideways scroller. */
+  #page, #home { overflow-x: hidden; }
 }
 
 /* ---- front page ------------------------------------------------------------------ */
@@ -376,6 +379,7 @@ body.reading #page { display: block; }
 body.reading main { grid-template-rows: 1fr; }
 .doc { display: grid; grid-template-columns: minmax(0, 70ch) 220px; gap: 56px; justify-content: center; padding: 28px 40px 80px; }
 @media (max-width: 1180px) { .doc { grid-template-columns: minmax(0, 70ch); } #toc { display: none; } }
+@media (max-width: 760px) { .doc { padding: 18px 16px 60px; } }
 .doc .back { display: inline-block; margin-bottom: 18px; font-size: 12.5px; color: var(--accent); text-decoration: none; border: 1px solid var(--line); border-radius: 14px; padding: 3px 11px; background: var(--bg); cursor: pointer; }
 .doc .back:hover { border-color: var(--accent); }
 .doc #pageLink { margin-left: 6px; }
@@ -384,7 +388,7 @@ ${PROSE_CSS}${FIGURE_CSS}${LIGHTBOX_CSS}${COMPARE_CSS}/* Wide figures run past t
 #page { container-type: inline-size; }
 .doc .prose figure.fig.wide { position: relative; z-index: 2; margin-left: calc(-1 * min(var(--bleed), 200px)); width: calc(100% + 276px + min(var(--bleed), 200px)); --bleed: calc((100cqw - 100% - 276px) / 2 - 24px); }
 .doc .prose figure.fig.wide img { background: var(--panel); }
-@media (max-width: 1180px) { .doc .prose figure.fig.wide { --bleed: calc((100cqw - 100%) / 2 - 24px); margin-left: calc(-1 * var(--bleed)); width: calc(100% + 2 * var(--bleed)); } }
+@media (max-width: 1180px) { .doc .prose figure.fig.wide { --bleed: max(0px, (100cqw - 100%) / 2 - 24px); margin-left: calc(-1 * var(--bleed)); width: calc(100% + 2 * var(--bleed)); } }
 #toc { position: sticky; top: 28px; align-self: start; font-size: 12.5px; max-height: calc(100vh - 56px); overflow-y: auto; }
 #toc { transition: opacity .15s; }
 #toc.under { opacity: 0; pointer-events: none; }
