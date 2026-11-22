@@ -417,3 +417,15 @@ towns_tests.csv, towns_thirds.csv, towns.csv.gz and run.log.
   groceries (1.17x) and convenience stores (1.21x).
 - **So** the link is general to food stores, not special to Dollar General.
 - **Poster.** No change proposed.
+
+## Step 15: poster working draft d2 (November 22, 11:25-11:50)
+
+Folder: `2026-11-22-15-poster-d2/`.
+
+- **Chris (11:25).** The d1 copy still shows signs of AI writing, for example the "How we did
+  this, and what..." heading.
+- **Copy.** All of it was rewritten: no paired headings, no matching question set, no tidy
+  closing line, plain verbs.
+- **Captions.** The two Martinsville tiles now name the side of town.
+- **Locator.** Region numbers moved inside their regions.
+- **Rounds.** Two layout passes. Board: `1.0.0-d2`, round 2.

@@ -1,5 +1,5 @@
 """Editorial poster (24 x 36 in): "Why does it always seem like there's a Dollar General on the edge
-of town?" Working draft d1.
+of town?" Working draft d2.
 
 Usage: python3 poster.py <ds-dir> <tests.csv> <dg_classes.csv> <out-stem>
 
@@ -139,7 +139,7 @@ def tile(fig, ds, hp, stores, r, x, y, size):
         bits.append("busiest road in" if r["rank"] == 1 else "2nd-busiest road in")
     if r.junction_m <= 250:
         bits.append("at a junction")
-    text(fig, x, y - 0.40, f"{r.NAME}", fontsize=12, fontweight="bold", va="bottom")
+    text(fig, x, y - 0.40, f"{r.label}", fontsize=12, fontweight="bold", va="bottom")
     text(fig, x, y - 0.07, f"{yr} · " + " · ".join(bits), fontsize=7.6, color=INK2, va="bottom")
 
 
@@ -153,9 +153,9 @@ def locator(fig, counties, va, x, y, w):
         part.plot(ax=ax, color=REGION_FILL[i], edgecolor=SURFACE, linewidth=0.4)
         part.dissolve().boundary.plot(ax=ax, color=INK2, linewidth=0.9)
     ax.scatter(va.x, va.y, s=46, marker="s", fc=YELLOW, ec=INK, lw=1.3, zorder=5)
-    spots = {"Southwest": (0.06, 0.32), "Valley and Blue Ridge": (0.40, 0.72),
+    spots = {"Southwest": (0.13, 0.24), "Valley and Blue Ridge": (0.40, 0.72),
              "Piedmont and Southside": (0.52, 0.08), "Urban crescent": (0.88, 0.90),
-             "Northern Neck, Middle Peninsula and Eastern Shore": (0.94, 0.62)}
+             "Northern Neck, Middle Peninsula and Eastern Shore": (0.885, 0.56)}
     halo = [patheffects.withStroke(linewidth=4, foreground=SURFACE)]
     key = []
     for i, (k, short) in enumerate(REGIONS):
@@ -211,6 +211,14 @@ def main():
     order = {k: i for i, (k, _) in enumerate(REGIONS)}
     va = va.sort_values(["region", "x"], key=lambda c: c.map(order) if c.name == "region" else c).reset_index(drop=True)
     vstores = st[st.state == "VA"]
+    # two stores at one town's edge: name the side of town each is on
+    va["label"] = va["NAME"]
+    for name, g in va.groupby("NAME"):
+        if len(g) > 1:
+            for i, r in g.iterrows():
+                a = math.degrees(math.atan2(r.x - r.center_x, r.y - r.center_y)) % 360
+                side = ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"][int((a + 22.5) // 45) % 8]
+                va.loc[i, "label"] = f"{name}, {side} side"
 
     six = cls[(cls.set == "B") & (cls.unit == "small")].groupby("class")["stores"].sum()
     total = int(six.sum())
@@ -218,6 +226,9 @@ def main():
     c1, c2, c3, c4, c5, c6 = (T[(PRIMARY, k)] for k in ("C1", "C2", "C3", "C4", "C5 (lead)", "C6"))
     k1, k2, k3 = T[(CONTRAST, "C1")], T[(CONTRAST, "C2")], T[(CONTRAST, "C3")]
     junction_x = c2.share / (c2.expected / c2.n_stores)
+    small = st[(st.set == "B") & (st.unit == "small") & (st.kind == "Dollar General") & (st.edge_dist > 30)]
+    town = small[small.A_lead <= 1]
+    town_new = (town.auth_year > 2005).mean()
 
     fig = plt.figure(figsize=(W, H), dpi=100)
     fig.patch.set_facecolor(SURFACE)
@@ -225,19 +236,20 @@ def main():
     # header: the question, the answer, and where the grid's stores are
     text(fig, 1.0, 1.55, "Why does it always seem like there's a", fontsize=52, fontweight="bold", va="bottom")
     text(fig, 1.0, 2.55, "Dollar General on the edge of town?", fontsize=52, fontweight="bold", va="bottom")
-    deck = (f"Most Dollar General stores are not on the edge of town. In six states around Virginia, only {edge} "
-            f"of the {total:,} Dollar General stores near small towns sit in the band just outside the built-up "
-            f"part of town, about one in {round(total / edge)}. The ones that do sit there tend to be on busier "
-            f"roads. They are about {junction_x:.0f} times as likely as a random roadside spot at the same edge to "
-            f"be near a crossing of two numbered highways, even though only about one in "
-            f"{round(1 / c2.share)} is. Convenience stores follow the same pattern. Most edge stores are also "
-            f"fairly new, and {c4.share:.0%} of them were first approved to accept SNAP benefits after 2005. "
-            f"Because they stand on the main roads into town, they are easy to notice.")
+    deck = (f"Most Dollar General stores near small towns are in town. We counted every Dollar General near a "
+            f"small town in six states that border or sit close to Virginia. Of the {total:,} stores, {edge} stand "
+            f"just outside the built-up part of town, about one in {round(total / edge)}. Those {edge} tend to be on "
+            f"the busier roads coming in. About one in {round(1 / c2.share)} is within 800 feet of a spot where two "
+            f"US or state highways cross. That is roughly {junction_x:.0f} times what we would expect if the stores "
+            f"had been scattered at random along the same roads. Convenience stores do the same thing. "
+            f"The edge stores are also newer. Of the {edge}, {c4.share:.0%} were first approved to take SNAP "
+            f"benefits after 2005, compared with {town_new:.0%} of the stores in town. These are the roads people "
+            f"use to get into town, which may be why the edge stores seem so common.")
     deck_lines = wrap(deck, 15.0, 15).count("\n") + 1
     para(fig, 1.0, 3.2, deck, 15.0, 15)
     counties_b = counties.total_bounds
     lx, lw = 16.9, 6.1
-    text(fig, lx, 0.95, "Where the 30 Virginia stores below are", fontsize=12.5, fontweight="bold", va="bottom")
+    text(fig, lx, 0.95, "The 30 Virginia stores on this poster", fontsize=12.5, fontweight="bold", va="bottom")
     lh = locator(fig, counties, va, lx, 1.15, lw)
     del counties_b
 
@@ -245,9 +257,9 @@ def main():
     gy = max(3.2 + deck_lines * 15 * 1.5 / 72 + 1.0, 1.15 + lh + 1.3)
     text(fig, 1.0, gy, f"Every Dollar General at the edge of a small Virginia town or community ({len(va)} stores)",
          fontsize=20, fontweight="bold", va="bottom")
-    para(fig, 1.0, gy + 0.18, ("Each map is 3 km (1.9 miles) across with north at the top. The yellow square is "
-                               "the store and the arrow points toward the center of town. Maps are grouped by "
-                               "region, west to east."), 22, 12)
+    para(fig, 1.0, gy + 0.18, ("Each map is 3 km (1.9 miles) across, with north at the top. The yellow square is "
+                               "the store, and the arrow points toward the middle of town. The maps are grouped "
+                               "by region and run from west to east."), 22, 12)
     cols, size, gapy = 6, 2.55, 1.1
     gapx = (22.0 - cols * size) / (cols - 1)
     x0, y0 = 1.0, gy + 1.62
@@ -292,13 +304,13 @@ def main():
 
     # charts band: the six other states, where the tests were run
     cy0 = ly + 1.55
-    para(fig, 1.0, cy0 - 0.55, ("The pattern was first noticed in Virginia. The three charts below check it in six "
-                                 "other states (North Carolina, Tennessee, Kentucky, West Virginia, Maryland and "
-                                 "South Carolina), using tests that were written down before their data was opened."),
+    para(fig, 1.0, cy0 - 0.55, ("We first saw this in Virginia. To check it wasn't a fluke, we wrote the tests down ahead "
+                                 "of time and ran them on North Carolina, Tennessee, Kentucky, West Virginia, "
+                                 "Maryland and South Carolina."),
          22, 12.5, color=INK)
     cy0 += 0.55
-    text(fig, 1.0, cy0, "Is it true?", fontsize=21, fontweight="bold", va="bottom")
-    text(fig, 1.0, cy0 + 0.36, "Dollar General stores near small towns, by where they sit", fontsize=11.5,
+    text(fig, 1.0, cy0, "Where the stores are", fontsize=21, fontweight="bold", va="bottom")
+    text(fig, 1.0, cy0 + 0.36, "Dollar Generals near small towns in the six states", fontsize=11.5,
          color=INK2, va="bottom")
     ax = axes(fig, 2.9, cy0 + 0.65, 4.5, 2.7)
     order_ = [("in town", "In town"), ("edge band", "At the edge"), ("on the edge line (margin)", "On the edge line"),
@@ -312,14 +324,14 @@ def main():
         ax.text(v + 25, y_, f"{v:,}", va="center", fontsize=12, fontweight="bold")
     ax.set_xlim(0, max(vals) * 1.22)
     ax.axis("off")
-    para(fig, 1.0, cy0 + 3.6, (f"Suppose the stores had been placed at random spots along the same main roads. "
-                               f"Then about {c5.expected / c5.n_stores:.0%} of the stores within twice the "
-                               f"distance to the edge would fall in the edge band. The real share is only "
-                               f"{c5.share:.0%}, so the edge has fewer stores than chance alone would give it."),
+    para(fig, 1.0, cy0 + 3.6, (f"If the stores had been dropped at random spots along the same main roads, about "
+                               f"{c5.expected / c5.n_stores:.0%} of those within twice the distance to the edge "
+                               f"would have landed in the edge band. Only {c5.share:.0%} did. The edge actually has "
+                               f"fewer Dollar Generals than chance would give it."),
          6.7, 11)
 
-    text(fig, 8.6, cy0, "Where are the ones at the edge?", fontsize=21, fontweight="bold", va="bottom")
-    text(fig, 8.6, cy0 + 0.36, f"The {int(c2.n_stores)} Dollar General stores at the edge of a small town",
+    text(fig, 8.6, cy0, "What the edge stores sit next to", fontsize=21, fontweight="bold", va="bottom")
+    text(fig, 8.6, cy0 + 0.36, f"The {int(c2.n_stores)} Dollar Generals at the edge of a small town",
          fontsize=11.5, color=INK2, va="bottom")
     ax2 = axes(fig, 8.6, cy0 + 0.8, 7.0, 2.6)
 
@@ -331,19 +343,16 @@ def main():
             ("On one of the two busiest roads into town", c1.share, *ci(c1), c1.expected / c1.n_stores, k1.share),
             ("Inside the town limits", c3.share, *ci(c3), c3.expected / c3.n_stores, k3.share)]
     dot_rows(ax2, rows)
-    para(fig, 8.6, cy0 + 3.85, (f"The yellow square is the share of edge stores, and the gray line is its margin "
-                                f"of error. The black tick is what random spots on the same roads at the same "
-                                f"edges would give. The open circle is convenience stores at the edge, which "
-                                f"follow almost the same pattern. The road in front of an edge Dollar General "
-                                f"carries about {c6.share:.1f} times as much traffic as the random spots do."), 7.4, 11)
+    para(fig, 8.6, cy0 + 3.85, (f"Yellow squares show the edge Dollar Generals, with a gray line for the margin of "
+                                f"error. Black ticks show what random spots on the same roads at the same edges "
+                                f"would give. Open circles show convenience stores at the edge, which land in "
+                                f"nearly the same places. On average, the road in front of an edge Dollar General "
+                                f"also carries about {c6.share:.1f} times as much traffic as those random spots."), 7.4, 11)
 
-    text(fig, 16.6, cy0, "When did they come?", fontsize=21, fontweight="bold", va="bottom")
+    text(fig, 16.6, cy0, "How new the stores are", fontsize=21, fontweight="bold", va="bottom")
     text(fig, 16.6, cy0 + 0.36, "Share first approved to accept SNAP after 2005", fontsize=11.5, color=INK2,
          va="bottom")
     ax3 = axes(fig, 17.4, cy0 + 0.7, 4.8, 2.3)
-    small = st[(st.set == "B") & (st.unit == "small") & (st.kind == "Dollar General") & (st.edge_dist > 30)]
-    town = small[small.A_lead <= 1]
-    town_new = (town.auth_year > 2005).mean()
     bars = [("In town", town_new, len(town)), ("At the edge", c4.share, int(c4.n_stores))]
     for i, (lab, v, n) in enumerate(bars):
         ax3.bar(i, v, width=0.6, color=YELLOW if i else "#cfcec8", edgecolor=INK if i else SURFACE,
@@ -353,27 +362,26 @@ def main():
     ax3.set_ylim(0, 1.05)
     ax3.set_xlim(-0.6, 1.6)
     ax3.axis("off")
-    para(fig, 16.6, cy0 + 3.85, ("SNAP is the federal food assistance program once called food stamps. The date "
-                                 "a store was approved for SNAP is not always the date it opened. The records "
-                                 "start in 2005, so a store approved in 2004 or 2005 may be older than that."),
+    para(fig, 16.6, cy0 + 3.85, ("SNAP is the federal food program that used to be called food stamps. A store can be "
+                                 "approved later than the day it opened, and the records only go back to 2005, so "
+                                 "the approval year is a rough stand-in for when a store arrived."),
          6.4, 11)
 
     # how we know
     hy = cy0 + 5.8
     fig.add_artist(Line2D([1.0 / W, 23.0 / W], [1 - (hy - 0.3) / H] * 2, color=GRID, lw=1.5))
-    text(fig, 1.0, hy, "How we did this, and what it can't tell us", fontsize=17, fontweight="bold", va="top")
-    left = ("To find the edge of a town, we started at the point where most of its people live, using 2020 "
-            "Census counts, and moved outward. The built-up town ends where there are fewer than 200 homes per "
-            "square mile and less than a fifth of the ground is paved over by something other than roads. A store "
-            "is \"at the edge\" if it sits past that line but less than twice as far from the center. A small "
-            "town is an incorporated place with fewer than 25,000 people. An independent reviewer recomputed "
-            "every result.")
-    right = ("The maps show where the stores are. They cannot show why a company chose a site, because land "
-             "prices, zoning and water and sewer lines are not in the data. The pattern also has exceptions. Most "
-             "edge stores are outside the town limits, and in West Virginia none of the 19 edge stores is near a "
-             "highway crossing. The Virginia maps include every edge store, even the ones that fit none of the "
-             "patterns. A square on a map marks a location only. It says nothing about the quality of any store "
-             "or town.")
+    text(fig, 1.0, hy, "How the edge was measured", fontsize=17, fontweight="bold", va="top")
+    text(fig, 12.4, hy, "What the data can't show", fontsize=17, fontweight="bold", va="top")
+    left = ("We started at the spot where most of a town's people live, based on 2020 Census counts, and worked "
+            "outward. The built-up part of town ends where there are fewer than 200 homes per square mile and "
+            "less than a fifth of the land is built on or paved (not counting roads). A store counts as \"at the edge\" if it is past that line but less than twice as far from the "
+            "center. \"Small town\" here means an incorporated place with fewer than 25,000 people. A separate "
+            "review, also run with Claude, redid every calculation from scratch.")
+    right = ("The maps show where the stores are. Why the company chose a particular site is not in the data. "
+             "Things like zoning and water and sewer lines would matter, and neither is included. There are also "
+             "exceptions. Most edge stores are outside the town limits, and in West Virginia none of the 19 edge "
+             "stores is near a highway crossing. The Virginia maps include every edge store, including the ones "
+             "that don't fit. A yellow square marks a location only. It is not a judgment of any store or town.")
     para(fig, 1.0, hy + 0.5, left, 10.6, 11)
     para(fig, 12.4, hy + 0.5, right, 10.6, 11)
     src = ("Stores: USDA Food and Nutrition Service, SNAP Retailer Locator historical data, stores authorized as of "
@@ -381,7 +389,7 @@ def main():
            "blocks. Town limits, counties: Census TIGER/Line and cartographic boundaries, 2024. Paved land: USGS "
            "NLCD 2021. Roads: © OpenStreetMap contributors (ODbL). Regions: groups of Virginia's planning district "
            "commissions. Made with Claude. Independent, and not affiliated with any company named. Working draft "
-           "d1, November 2026.")
+           "d2, November 2026.")
     para(fig, 1.0, H - 1.05, src, 22, 9, color=MUTED, linespacing=1.4)
     fig.savefig(out + ".png", facecolor=SURFACE)
     fig.savefig(out + ".pdf", facecolor=SURFACE)

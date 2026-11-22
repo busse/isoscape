@@ -3190,14 +3190,14 @@
    "kind": "print",
    "stage": "working draft",
    "status": "active",
-   "asset_version": "1.0.0-d1",
+   "asset_version": "1.0.0-d2",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 1,
+   "rounds": 2,
    "waiting_on": "owner",
-   "decision": "Working draft d1 (r5) in _preview/dollar-stores/poster/: grid by region with a locator map, Libre Baskerville, text rewritten in a plain teaching voice; two rough-draft errors fixed (six-state counts were placed in Virginia; junction claim overstated). Owner: approve the look, or say what to change.",
+   "decision": "Working draft d2 (r2) in _preview/dollar-stores/poster/: copy rewritten to remove AI-writing habits (paired headings, matching question set, tidy closing line); Martinsville captions name the side of town; locator numbers moved. Owner: approve the look, or say what to change.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3205,7 +3205,8 @@
    "worktree": null,
    "links": [
     "drafts/dollar-stores-virginia/casestudy/2026-11-21-10-poster-rough/notes.md",
-    "drafts/dollar-stores-virginia/casestudy/2026-11-22-11-poster-d1/notes.md"
+    "drafts/dollar-stores-virginia/casestudy/2026-11-22-11-poster-d1/notes.md",
+    "drafts/dollar-stores-virginia/casestudy/2026-11-22-15-poster-d2/notes.md"
    ],
    "log": [
     "2026-11-22: rough draft -> working draft"
