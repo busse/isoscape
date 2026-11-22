@@ -1,0 +1,14 @@
+viz-dollar-stores-virginia-poster v1 (1.0.0, editorial): OK, 15 files match their hashes
+  poster: NOT RUN
+    missing: --data ds=<folder>: the dollar stores working folder (on the Mac, under ISO-TEST/isoscape-work/dollar-stores/ (raw downloads in its raw/); too large for git)
+    missing: Python module geopandas
+  page pictures: reproduced
+    same: pages/dollar-stores-poster.webp: identical bytes
+    same: pages/dollar-stores-poster-large.webp: identical bytes
+    same: pages/dollar-stores-tiles.webp: identical bytes
+    same: pages/dollar-stores-tiles-large.webp: identical bytes
+    same: pages/dollar-stores-charts.webp: identical bytes
+    same: pages/dollar-stores-charts-large.webp: identical bytes
+    same: pages/dollar-stores-social.jpg: identical bytes
+  INCOMPLETE: 1 of 2 steps reproduced; the rest are listed above
+exit 1

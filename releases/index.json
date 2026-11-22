@@ -971,5 +971,14 @@
    "v2.json",
    "v3.json"
   ]
+ },
+ "viz-dollar-stores-virginia-poster": {
+  "title": "Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36)",
+  "current": 1,
+  "kind": "editorial",
+  "for_sale": false,
+  "records": [
+   "v1.json"
+  ]
  }
 }

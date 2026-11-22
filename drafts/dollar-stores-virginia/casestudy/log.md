@@ -465,3 +465,30 @@ Folder: `2026-11-22-17-release/`.
   - a release record for a not-for-sale editorial poster (the release tools only know store
     designs);
   - then final production and published on the board.
+
+## Step 18: merge, deploy, record (November 22, 18:11-18:45)
+
+Folder: `2026-11-22-18-merge-deploy-record/`, holding notes.md and the two check outputs.
+
+- **Merged to main (18:11)** by the planning session: merge commit `f9767e9`.
+- **Published (18:12).**
+  - `d07cf6e` added `shop: false`, `images: link` and `pdf: true` to the page.
+  - gh-pages `e88635a` put the page live and listed at
+    https://busse.github.io/isoscape/p/dollar-stores.html.
+  - Phone and large-screen PDFs were built with `tools/pdf/story_pdf.py`.
+- **Release record.**
+  - The release tools now record a piece that is released but not for sale (README "Editorial
+    pieces (not for sale)").
+  - The poster's record is `releases/viz-dollar-stores-virginia-poster/v1.json`: kind
+    `editorial`, no store.
+- **Checks.**
+  - All 15 pinned files match.
+  - The rebuild made the seven page pictures byte-identical.
+  - The poster itself was not rebuilt here, because its working folder is on the Mac. The
+    check says so (INCOMPLETE). To finish it, run on the Mac
+    `check.py --editorial --rebuild --data ds=<working folder>`.
+- **Board.**
+  - The poster is at final production, `1.0.0`, not on sale; selling it is Chris's later
+    decision.
+  - The story is published.
+- **Changes page.** Nothing goes on `pages/changes.md`: this is a first release.

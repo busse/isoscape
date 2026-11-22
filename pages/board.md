@@ -14,9 +14,8 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Stage | Entries |
 |---|---|
 | research | 1 |
-| final draft | 1 |
-| final production | 46 |
-| fact check | 1 |
+| final production | 47 |
+| published | 1 |
 | in work | 4 |
 | live | 3 |
 | on hold | 55 |
@@ -33,12 +32,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Our own transcription of Richmond's 48 HOLC area-description forms, from the public-domain scans | research | — | no |
-
-## Final draft
-
-| Plate | Title | Kind | Version | On sale |
-|---|---|---|---|---|
-| — | Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36) | print | 1.0.0-rc2 | no |
 
 ## Final production
 
@@ -90,8 +83,9 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | STC·13 | The Fan, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·14 | Broad and Laurel, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·M | Richmond's Streetcars, 1925: The System Map | set map | 4.0.0 | yes, version 4 |
+| — | Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36) | print | 1.0.0 | no |
 
-## Fact check
+## Published
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
