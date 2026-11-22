@@ -372,3 +372,4 @@ Folder: `2026-11-22-11-poster-d1/`, with `notes.md`, five rounds and the rough d
   - It said edge stores "are found" at highway junctions, when 17 percent are.
 - **Rounds.** Five, all layout. Board: `viz-dollar-stores-virginia-poster` at working draft,
   `1.0.0-d1`.
+- **Proofs (08:52).** An 11x17 PDF of the PNG, then a four-page vector proof (whole poster, three bands at 69%) so the captions can be read.

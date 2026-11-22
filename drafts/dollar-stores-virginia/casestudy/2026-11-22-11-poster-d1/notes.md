@@ -68,3 +68,12 @@ Plain textbook register for a first-year college reader:
   goes to Fieldale and Axton.
 - Three of the five regions hold one or two stores, so their runs are short. That is the data.
 - The locator's numbers float beside their regions rather than in them for 1, 4 and 5.
+
+## Proofs for Chris (08:52-09:00)
+
+- `poster-d1-r5-11x17.pdf`: the PNG on one 11x17 sheet, as asked. At 44% the tile captions print
+  at about 3.3 pt, too small to review.
+- `poster-d1-r5-proof-11x17.pdf`: Chris wanted to read the captions. Four pages from the vector
+  PDF: the whole poster, then three landscape bands at 69% (captions about 5 pt), cut in the
+  gaps between grid rows (13.62 in and 25.75 in from the top). The first cut, at 13.75 in, clipped
+  a region label.
