@@ -3072,7 +3072,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "agent",
-   "decision": "Owner answered the nine outline questions 2026-11-22 (outputs/stories/redlining/working/decisions.md): HOLC colors; title \"Redlining in Richmond: the 1937 federal mortgage map, drawn on the ground it graded\"; Windsor Farms and Jackson Ward pair; ends 1977 (an addendum may follow); twelve D boxes yes; the D11.5 slur quoted once, attributed, after a check against the scan; redraw the polygons from the scan and compare before the license decision; explorer story page, unlisted. Working draft in progress.",
+   "decision": "d4: independent fact check applied (154 claims; 6 contradicted, 2 unsupported, 42 partly; all must-fix and should-fix corrected). Owner 2026-11-22: publish without outside review. In its place: three independent reads with Claude (scholar, dignity and harm, first-time reader and publish readiness), fixes, an honest notice on the page; then his approval of the final preview.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
