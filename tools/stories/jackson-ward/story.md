@@ -5,6 +5,7 @@ order: 60
 summary: Jackson Ward in Richmond, Virginia, drawn from the Sanborn fire-insurance maps of 1925 and 1952 on an estimate of the ground before I-95, showing the blocks the Richmond–Petersburg Turnpike was built through in 1955–58, and how we know.
 shop: false
 images: link
+pdf: true
 social: jackson-ward-social.jpg
 ---
 

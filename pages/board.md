@@ -16,15 +16,13 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | research | 2 |
 | final production | 46 |
 | in work | 4 |
-| owner test | 1 |
-| live | 2 |
+| live | 3 |
 | on hold | 55 |
 | blocked | 1 |
 | backlog | 3 |
 
 ## Waiting on a decision
 
-- **Story PDFs: phone and large-screen editions of each story page**: The owner approved publishing both stories' PDFs with the Read this as a PDF line, after two fixes, now made on story-pdf: pictures are never cropped (title pages included), and the print build rewords instructions to a screen (wording.ts; every change listed by the tool). Publishing is for the planning session: merge, set pdf: true in both story.md files, rerun page.py, build the PDFs into the site's p/, rebuild the explorer, push gh-pages.
 - **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
@@ -95,17 +93,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | — | Shop: product template, hero layouts for the four cutaways and four collections, Richmond descriptions, place-first titles | site | — | no |
 | — | Shop: from holiday shop to a continuing shop with a holiday promotion; Coming soon, The 2026 Annual; room for photography | site | — | no |
 
-## Owner test
-
-| Plate | Title | Kind | Version | On sale |
-|---|---|---|---|---|
-| — | Story PDFs: phone and large-screen editions of each story page | site | — | no |
-
 ## Live
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Explorer on a phone: no sideways scroll; compare sliders by thumb | site | — | no |
+| — | Story PDFs: phone and large-screen editions of each story page | site | — | no |
 | — | Tutorial: exploring a place with a chat, with Rapa Nui (Easter Island) as the example | site | — | no |
 
 ## On hold

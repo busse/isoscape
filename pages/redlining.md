@@ -5,6 +5,7 @@ order: 61
 summary: In 1937 the federal Home Owners' Loan Corporation graded Richmond's neighborhoods from A to D and recorded ten of its twelve D areas as Black. This page draws that map on Richmond's ground, walks through the twelve D areas one by one, measures the highways and public housing built on them up to 1977, and sets out what researchers dispute about the map's effects.
 shop: false
 images: link
+pdf: true
 social: redlining-social.jpg
 ---
 

@@ -3349,7 +3349,7 @@
    "title": "Story PDFs: phone and large-screen editions of each story page",
    "plate": null,
    "kind": "site",
-   "stage": "owner test",
+   "stage": "live",
    "status": "active",
    "asset_version": null,
    "published_version": null,
@@ -3357,8 +3357,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "The owner approved publishing both stories' PDFs with the Read this as a PDF line, after two fixes, now made on story-pdf: pictures are never cropped (title pages included), and the print build rewords instructions to a screen (wording.ts; every change listed by the tool). Publishing is for the planning session: merge, set pdf: true in both story.md files, rerun page.py, build the PDFs into the site's p/, rebuild the explorer, push gh-pages.",
+   "waiting_on": "nothing",
+   "decision": "Live on 2026-11-22 by the owner's approval: phone and large-screen PDF editions of Jackson Ward and Redlining, linked near the top and at the end of each page. Rebuild the PDFs only when a story changes: each republish adds about 62 MB to gh-pages history (owner: keep an eye on it). Next story: the dollar-store piece.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3367,7 +3367,8 @@
    "links": [],
    "log": [
     "2026-11-22: in work -> owner test",
-    "2026-11-22: owner approved publishing after two fixes (no cropped pictures; PDF wording for screen instructions); fixes made, back at owner test"
+    "2026-11-22: owner approved publishing after two fixes (no cropped pictures; PDF wording for screen instructions); fixes made, back at owner test",
+    "2026-11-22: owner test -> live"
    ]
   }
  }
