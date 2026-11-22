@@ -26,7 +26,7 @@
 <meta name="twitter:description" content="The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.">
 <meta name="twitter:image" content="https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg">
 <meta name="twitter:image:alt" content="Isometric map of Downtown Richmond, from the Capitol to Tobacco Row as it stood in 1925 (The 1924–25 Sanborn map): buildings, streets, water and the lie of the land, seen from above at an angle">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How it's made","description":"The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.","author":{"@type":"Person","name":"Chris Busse","url":"https://busse.github.io/isoscape/p/about.html#contact"},"inLanguage":"en","image":"https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg","url":"https://busse.github.io/isoscape/p/how-its-made.html","mainEntityOfPage":"https://busse.github.io/isoscape/p/how-its-made.html","dateModified":"2026-11-21","isPartOf":{"@type":"WebSite","name":"isoscape","url":"https://busse.github.io/isoscape/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How it's made","description":"The whole pipeline, from OpenStreetMap and lidar to the drawing. What is measured, what is inferred, what is guessed.","author":{"@type":"Person","name":"Chris Busse","url":"https://busse.github.io/isoscape/p/about.html#contact"},"inLanguage":"en","image":"https://busse.github.io/isoscape/builds/20261117-102305-richmond-downtown-time-1925/social.jpg","url":"https://busse.github.io/isoscape/p/how-its-made.html","mainEntityOfPage":"https://busse.github.io/isoscape/p/how-its-made.html","dateModified":"2026-11-22","isPartOf":{"@type":"WebSite","name":"isoscape","url":"https://busse.github.io/isoscape/"}}</script>
 <style>
 :root {
   --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
@@ -641,7 +641,7 @@ about 28 ha of trench and 9 ha of interchange. Two methods, each an estimate:</p
 that meets the measured ground at the outline (each free node the mean of its four
 neighbors, solved by over-relaxation to 1 mm), held along each street that crossed at grade
 to a straight grade between its surviving ends. Seven such streets are listed; they change
-the result by about 6 cm RMS and 0.58 m at most, so the rim decides it.</li><li><strong>Lower</strong> (<code>lowerGround</code>), for the ramps at the I-64 junction, which stand on the old
+the result by about 6 cm RMS and 0.58 m at most, so the rim decides it.</li><li><strong>Lower</strong> (<code>lowerGround</code>), for the ramps at the I-64 junction, from about 7th Street east, which stand on the old
 plateau rim: a grey-scale opening of the lidar with a 25 m disk, so banks narrower than 50 m
 (embankments up to 9 m high) come down to the ground beside them and broader ground stays as
 measured. The USGS Richmond sheet surveyed in 1933–34 shows the rim there at about today&#39;s
@@ -651,9 +651,12 @@ height; a membrane, which would have sloped plateau to valley, was up to 9 m too
 RMS, 95% of nodes within 0.7 to 2.9 m; moved onto the valley edge north of it, 1.8 m RMS and up
 to 8 m. On the USGS sheet (10-foot contours, about 3 m; its datum about 0.32 m above NAVD 88
 here) no contour can be read within 60 m of seven points along the trench from west of St. Peter
-Street to past Fifth Street, and the rebuilt ground there would need to move at most 0.8 m to agree. So the
-error is put at about 1.5 m (95%) mid-trench, 3 m at its ends, and more where the sheet shows
-a small ravine near Seventh Street that neither the lidar nor the membrane has. Streets that cross on bridges today are drawn at
+Street to past Fifth Street, and the rebuilt ground there falls in the sheet&#39;s 10-foot band or
+would need to move at most 0.8 m to reach it; that bounds nothing finer than the band. So the
+error is put at about 2 m (95%) mid-trench, the worst of the five plateau trials (0.66 to 2.06 m),
+and 3 to 4 m or more at its ends: 2.85 m where a trial crossed the Leigh Street cut, 4.2 m on the
+valley edge, and at least 3.5 m where the sheet shows a small ravine near Seventh Street that
+neither the lidar nor the membrane has. Streets that cross on bridges today are drawn at
 grade before 1958, and curated lost streets (<code>kind: &quot;street&quot;</code>, the stretches the trench took,
 straight between surviving ends) are drawn on the rebuilt ground.</p>
 <p><strong>Bridges that are gone.</strong> A curated bridge is drawn as a bridge of today&#39;s map would be, from
@@ -769,12 +772,15 @@ given a count&#39;s <code>ids</code>, exactly the buildings that count lists, so
 counts. Jackson Ward&#39;s count of the 1952 outlines in the Turnpike&#39;s footprint skips outlines
 under 12 m² (the region&#39;s smallest building, which the map would not draw) and a correction
 table&#39;s box: 216 in today&#39;s paved roadway and ramps, 447 in the corridor of 15 m more each side.
+<code>count.py</code> also reports how the edge matters: the polygon moved 5 m in or out gives 134 to 300
+and 366 to 515, counting every outline the polygon touches gives 284 and 513, and about a tenth of
+each polygon (the ramp loop past 7th Street) lies beyond the traced sheets.
 An <code>island</code> switch cuts the scene to one polygon and draws it alone on blank paper: ground is
 painted strip by strip as always, each strip clipped to the polygon, the cut faces that look
 toward the camera are drawn as a slab&#39;s sides down to 18 m (the region&#39;s <code>slab</code>) below the
 lowest ground inside, and only the buildings the count lists stand on it. Jackson Ward&#39;s islands
-are cut where the traced sheets end, at about 8th Street, so the ramp loop past it, never traced,
-is not drawn as empty ground.</p>
+are cut where the traced sheets end, at about 7th Street (the polygons themselves run to 8th
+Street), so the ramp loop past it, never traced, is not drawn as empty ground.</p>
 <p><strong>Era rules</strong> date everything else that OSM maps: the first rule matching a feature&#39;s name,
 <code>ref</code> or tags decides the spans in which it existed. Interstates appear from 1958, the
 Downtown Expressway from 1976, the river viaducts from 1901, Mayo&#39;s Bridge from 1788 (today&#39;s
@@ -1330,7 +1336,7 @@ of San Francisco (<a href="https://www.justinchavez.com/blog/isometric-sf-how/" 
 </main>
 <footer class="foot">
 <p>Maps by Chris Busse, drawn with isoscape, a free, open-source tool he built with Claude (see the <a href="../p/artist-statement.html">artist statement</a>), from OpenStreetMap and public elevation data. Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors (ODbL).</p>
-<p><a href="../index.html">Open the explorer</a> · <a href="../p/artist-statement.html">Artist statement</a> · <a href="../p/how-its-made.html">How it&#39;s made</a> · <a href="../p/explore-with-chat.html">Tutorial: map any place from open data with an AI chat, using Rapa Nui (Easter Island)</a> · <a href="../p/world-landmarks.html">Landmarks around the world</a> · <a href="../p/streetcars.html">Richmond&#39;s streetcars, 1925</a> · <a href="../p/broad-street.html">Broad Street Station, 1943</a> · <a href="../p/broad-street-cutaway.html">Broad Street Station, 1943: the cutaway</a> · <a href="../p/main-street-cutaway.html">Main Street Station, about 1952: the cutaway</a> · <a href="../p/pump-house-cutaway.html">The New Pump-House, Richmond, about 1885: the cutaway</a> · <a href="../p/byrd-cutaway.html">The Byrd Theatre, Christmas Eve 1928: the cutaway</a> · <a href="../p/about.html">About, credits and licenses</a> · <a href="../p/data.html">Data</a> · <a href="../p/faq.html">Questions and answers</a> · <a href="../p/changes.html">Changes</a> · <a href="https://github.com/busse/isoscape">isoscape on GitHub</a></p>
+<p><a href="../index.html">Open the explorer</a> · <a href="../p/artist-statement.html">Artist statement</a> · <a href="../p/how-its-made.html">How it&#39;s made</a> · <a href="../p/explore-with-chat.html">Tutorial: map any place from open data with an AI chat, using Rapa Nui (Easter Island)</a> · <a href="../p/world-landmarks.html">Landmarks around the world</a> · <a href="../p/streetcars.html">Richmond&#39;s streetcars, 1925</a> · <a href="../p/broad-street.html">Broad Street Station, 1943</a> · <a href="../p/broad-street-cutaway.html">Broad Street Station, 1943: the cutaway</a> · <a href="../p/main-street-cutaway.html">Main Street Station, about 1952: the cutaway</a> · <a href="../p/pump-house-cutaway.html">The New Pump-House, Richmond, about 1885: the cutaway</a> · <a href="../p/byrd-cutaway.html">The Byrd Theatre, Christmas Eve 1928: the cutaway</a> · <a href="../p/jackson-ward.html">Jackson Ward, Richmond, VA, before I-95, block by block</a> · <a href="../p/about.html">About, credits and licenses</a> · <a href="../p/data.html">Data</a> · <a href="../p/faq.html">Questions and answers</a> · <a href="../p/changes.html">Changes</a> · <a href="https://github.com/busse/isoscape">isoscape on GitHub</a></p>
 </footer>
 </body>
 </html>
