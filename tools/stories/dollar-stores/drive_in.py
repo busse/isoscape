@@ -25,7 +25,9 @@ def main():
     files = [a for a in args if a.endswith(".csv.gz")]
     p = pd.concat([pd.read_csv(f, low_memory=False) for f in files], ignore_index=True)
     s = p[p["is_store"] == True].copy()  # noqa: E712
-    s = s.sort_values("A_lead").drop_duplicates("id")
+    # each store once, at its lowest A; ties (a store at the same A from two places) go to the
+    # larger place, then the lower GEOID. Stable sort (the first run left ties to chance).
+    s = s.sort_values(["A_lead", "pop", "geoid"], ascending=[True, False, True], kind="mergesort").drop_duplicates("id")
     s["incorporated"] = (s["LSAD"].astype(str) != "57") & (s["FUNCSTAT"] == "A")
     s["unit"] = np.where(s["joined"], "joined", np.where(~s["incorporated"], "CDP",
                          np.where(s["pop"] < 25000, "small", "large")))

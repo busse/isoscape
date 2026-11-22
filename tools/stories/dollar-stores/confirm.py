@@ -299,7 +299,9 @@ def tests(out):
                          np.where(~p["incorporated"], "CDP", np.where(p["pop"] < SMALL, "small", "large")))
     st = p[p.is_store].copy()
     disc = pd.read_csv(sys.argv[3]) if len(sys.argv) > 3 else None
-    st = st.sort_values("A_lead").drop_duplicates("id")  # each store once, at its lowest A
+    # each store once, at its lowest A; ties (a store at the same A from two places) go to the
+    # larger place, then the lower GEOID. Stable sort (the first run left ties to chance).
+    st = st.sort_values(["A_lead", "pop", "geoid"], ascending=[True, False, True], kind="mergesort").drop_duplicates("id")
     used = set(disc.loc[disc["A_lead"] <= 3, "id"]) if disc is not None else set()
     st["held_out_ok"] = (st["set"] == "discovery") | ~st["id"].isin(used)
     st["usable"] = (st["edge_dist"] > MARGIN_M) & st["held_out_ok"]

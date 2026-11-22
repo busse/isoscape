@@ -3170,7 +3170,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "Traffic tests done (casestudy step 7): in towns, edge Dollar Generals sit on one of the two busiest roads in (13 of 18), roads already busy when the stores came. Owner: editorial line and heat map style for the poster rough draft.",
+   "decision": "Replication done and independently checked (casestudy step 9, findings.md): edge stores are a minority; edge stores sit at US/state route junctions ~3x random, like convenience stores; newer SNAP authorizations. Owner: editorial line for the poster.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,

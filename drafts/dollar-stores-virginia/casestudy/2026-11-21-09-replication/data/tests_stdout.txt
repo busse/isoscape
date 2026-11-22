@@ -17,66 +17,66 @@
 15                  Set B: six states, small incorporated (PRIMARY)          C2  Dollar General       234       203      40.0      13.6  0.171  0.13-0.22  0.113  0.068   0.161        holds
 16                  Set B: six states, small incorporated (PRIMARY)          C3  Dollar General       234       203      54.0      29.3  0.231  0.18-0.29  0.105  0.058   0.155        holds
 17                  Set B: six states, small incorporated (PRIMARY)          C6  Dollar General       178       157       NaN       NaN  1.320        NaN  0.279  0.175   0.384        holds
-18                  Set B: six states, small incorporated (PRIMARY)          C4  Dollar General       234       934       NaN       NaN  0.863        NaN  0.362  0.307   0.416        holds
-19                  Set B: six states, small incorporated (PRIMARY)   C5 (lead)  Dollar General      1573       960     234.0     516.9  0.149        NaN -0.180 -0.197  -0.163        holds
-20                  Set B: six states, small incorporated (PRIMARY)  C5 (loose)  Dollar General      1452       889     264.0     478.2  0.182        NaN -0.148 -0.166  -0.128        holds
+18                  Set B: six states, small incorporated (PRIMARY)          C4  Dollar General       234       935       NaN       NaN  0.863        NaN  0.362  0.306   0.415        holds
+19                  Set B: six states, small incorporated (PRIMARY)   C5 (lead)  Dollar General      1575       961     234.0     517.6  0.149        NaN -0.180 -0.197  -0.163        holds
+20                  Set B: six states, small incorporated (PRIMARY)  C5 (loose)  Dollar General      1453       890     264.0     478.5  0.182        NaN -0.148 -0.167  -0.129        holds
 21                                             Set A: Virginia CDPs          C1  Dollar General         8         8       4.0       2.1  0.500  0.22-0.78  0.237 -0.049   0.534  cannot tell
 22                                             Set A: Virginia CDPs          C2  Dollar General         8         8       0.0       0.2  0.000  0.00-0.32 -0.019 -0.042  -0.002      against
 23                                             Set A: Virginia CDPs          C6  Dollar General         6         6       NaN       NaN  1.690        NaN  0.526 -0.534   1.332  cannot tell
 24                                             Set A: Virginia CDPs          C4  Dollar General         8        49       NaN       NaN  0.750        NaN -0.030 -0.405   0.279  cannot tell
 25                                             Set A: Virginia CDPs   C5 (lead)  Dollar General        63        59       8.0      19.9  0.127        NaN -0.189 -0.265  -0.108        holds
 26                                             Set A: Virginia CDPs  C5 (loose)  Dollar General        39        36      10.0      12.0  0.256        NaN -0.050 -0.170   0.077  cannot tell
-27                                          Set B: six states, CDPs          C1  Dollar General        61        60      24.0      22.6  0.393  0.28-0.52  0.023 -0.087   0.138  cannot tell
-28                                          Set B: six states, CDPs          C2  Dollar General        61        60      13.0       2.4  0.213  0.13-0.33  0.174  0.084   0.272        holds
-29                                          Set B: six states, CDPs          C6  Dollar General        41        41       NaN       NaN  1.160        NaN  0.145 -0.107   0.383  cannot tell
-30                                          Set B: six states, CDPs          C4  Dollar General        61       262       NaN       NaN  0.885        NaN  0.173  0.066   0.268        holds
-31                                          Set B: six states, CDPs   C5 (lead)  Dollar General       349       293      61.0     106.1  0.175        NaN -0.129 -0.168  -0.089        holds
-32                                          Set B: six states, CDPs  C5 (loose)  Dollar General       245       205      47.0      71.3  0.192        NaN -0.099 -0.149  -0.049        holds
+27                                          Set B: six states, CDPs          C1  Dollar General        61        60      24.0      22.5  0.393  0.28-0.52  0.024 -0.087   0.139  cannot tell
+28                                          Set B: six states, CDPs          C2  Dollar General        61        60      13.0       2.4  0.213  0.13-0.33  0.174  0.084   0.271        holds
+29                                          Set B: six states, CDPs          C6  Dollar General        41        41       NaN       NaN  1.170        NaN  0.158 -0.086   0.389  cannot tell
+30                                          Set B: six states, CDPs          C4  Dollar General        61       261       NaN       NaN  0.885        NaN  0.174  0.070   0.271        holds
+31                                          Set B: six states, CDPs   C5 (lead)  Dollar General       347       292      61.0     105.5  0.176        NaN -0.128 -0.167  -0.088        holds
+32                                          Set B: six states, CDPs  C5 (loose)  Dollar General       244       204      47.0      70.9  0.193        NaN -0.098 -0.148  -0.046        holds
 33               Set B: six states, large incorporated (comparison)          C1  Dollar General       125        53      10.0       7.4  0.080  0.04-0.14  0.020 -0.020   0.069  cannot tell
 34               Set B: six states, large incorporated (comparison)          C2  Dollar General       125        53      11.0       2.4  0.088  0.05-0.15  0.069  0.020   0.135        holds
 35               Set B: six states, large incorporated (comparison)          C3  Dollar General       125        53       8.0       7.3  0.064  0.03-0.12  0.005 -0.040   0.062  cannot tell
 36               Set B: six states, large incorporated (comparison)          C6  Dollar General        73        44       NaN       NaN  1.470        NaN  0.387  0.202   0.566        holds
-37               Set B: six states, large incorporated (comparison)          C4  Dollar General       125        91       NaN       NaN  0.824        NaN  0.198  0.080   0.327        holds
-38               Set B: six states, large incorporated (comparison)   C5 (lead)  Dollar General       668        91     125.0     192.9  0.187        NaN -0.102 -0.156  -0.044        holds
-39               Set B: six states, large incorporated (comparison)  C5 (loose)  Dollar General       657        90     128.0     196.6  0.195        NaN -0.104 -0.148  -0.058        holds
-40  Set B: small incorporated, convenience stores (stated contrast)          C1     convenience       460       316     197.0     143.5  0.428  0.38-0.47  0.116  0.072   0.160        holds
-41  Set B: small incorporated, convenience stores (stated contrast)          C2     convenience       460       316      74.0      23.0  0.161  0.13-0.20  0.111  0.079   0.146        holds
-42  Set B: small incorporated, convenience stores (stated contrast)          C3     convenience       460       316     132.0      52.2  0.287  0.25-0.33  0.173  0.134   0.215        holds
-43  Set B: small incorporated, convenience stores (stated contrast)          C6     convenience       344       248       NaN       NaN  1.540        NaN  0.434  0.350   0.518        holds
+37               Set B: six states, large incorporated (comparison)          C4  Dollar General       125        91       NaN       NaN  0.824        NaN  0.197  0.082   0.325        holds
+38               Set B: six states, large incorporated (comparison)   C5 (lead)  Dollar General       669        91     125.0     193.1  0.187        NaN -0.102 -0.156  -0.045        holds
+39               Set B: six states, large incorporated (comparison)  C5 (loose)  Dollar General       658        90     128.0     196.9  0.195        NaN -0.105 -0.148  -0.059        holds
+40  Set B: small incorporated, convenience stores (stated contrast)          C1     convenience       461       315     197.0     143.1  0.427  0.38-0.47  0.117  0.071   0.162        holds
+41  Set B: small incorporated, convenience stores (stated contrast)          C2     convenience       461       315      74.0      23.0  0.161  0.13-0.20  0.111  0.078   0.145        holds
+42  Set B: small incorporated, convenience stores (stated contrast)          C3     convenience       461       315     132.0      52.3  0.286  0.25-0.33  0.173  0.133   0.215        holds
+43  Set B: small incorporated, convenience stores (stated contrast)          C6     convenience       345       248       NaN       NaN  1.540        NaN  0.431  0.346   0.515        holds
 44                         S1: primary, stores 100 m+ from the edge          C1  Dollar General       204       176      79.0      62.9  0.387  0.32-0.46  0.079  0.019   0.140        holds
 45                         S1: primary, stores 100 m+ from the edge          C2  Dollar General       204       176      34.0      11.4  0.167  0.12-0.22  0.111  0.063   0.163        holds
 46                         S1: primary, stores 100 m+ from the edge          C3  Dollar General       204       176      40.0      23.2  0.196  0.15-0.26  0.082  0.034   0.134        holds
 47                         S1: primary, stores 100 m+ from the edge          C6  Dollar General       157       138       NaN       NaN  1.320        NaN  0.274  0.159   0.389        holds
-48                         S1: primary, stores 100 m+ from the edge          C4  Dollar General       204       816       NaN       NaN  0.887        NaN  0.403  0.344   0.456        holds
-49                         S1: primary, stores 100 m+ from the edge   C5 (lead)  Dollar General      1388       845     204.0     455.5  0.147        NaN -0.181 -0.199  -0.163        holds
-50                         S1: primary, stores 100 m+ from the edge  C5 (loose)  Dollar General      1280       777     217.0     421.2  0.170        NaN -0.159 -0.179  -0.140        holds
+48                         S1: primary, stores 100 m+ from the edge          C4  Dollar General       204       817       NaN       NaN  0.887        NaN  0.402  0.344   0.456        holds
+49                         S1: primary, stores 100 m+ from the edge   C5 (lead)  Dollar General      1390       846     204.0     456.2  0.147        NaN -0.181 -0.200  -0.164        holds
+50                         S1: primary, stores 100 m+ from the edge  C5 (loose)  Dollar General      1281       778     217.0     421.5  0.169        NaN -0.160 -0.179  -0.140        holds
 51                                      S1: primary, band 0.75 to 2          C1  Dollar General       497       395     221.0     192.3  0.445  0.40-0.49  0.058  0.015   0.100        holds
 52                                      S1: primary, band 0.75 to 2          C2  Dollar General       497       395     102.0      35.9  0.205  0.17-0.24  0.133  0.100   0.167        holds
 53                                      S1: primary, band 0.75 to 2          C3  Dollar General       497       395     262.0     110.3  0.527  0.48-0.57  0.305  0.264   0.348        holds
 54                                      S1: primary, band 0.75 to 2          C6  Dollar General       372       309       NaN       NaN  1.350        NaN  0.300  0.223   0.373        holds
-55                                      S1: primary, band 0.75 to 2          C4  Dollar General       497       934       NaN       NaN  0.696        NaN  0.195  0.152   0.236        holds
-56                                      S1: primary, band 0.75 to 2   C5 (lead)  Dollar General      1573       960     234.0     516.9  0.149        NaN -0.180 -0.197  -0.163        holds
-57                                      S1: primary, band 0.75 to 2  C5 (loose)  Dollar General      1452       889     264.0     478.2  0.182        NaN -0.148 -0.166  -0.128        holds
+55                                      S1: primary, band 0.75 to 2          C4  Dollar General       497       935       NaN       NaN  0.696        NaN  0.195  0.152   0.236        holds
+56                                      S1: primary, band 0.75 to 2   C5 (lead)  Dollar General      1575       961     234.0     517.6  0.149        NaN -0.180 -0.197  -0.163        holds
+57                                      S1: primary, band 0.75 to 2  C5 (loose)  Dollar General      1453       890     264.0     478.5  0.182        NaN -0.148 -0.167  -0.129        holds
 58                      S3: primary, random points matched by A bin          C1  Dollar General       234       203      91.0      75.2  0.389  0.33-0.45  0.067  0.009   0.124        holds
 59                      S3: primary, random points matched by A bin          C2  Dollar General       234       203      40.0      16.3  0.171  0.13-0.22  0.101  0.058   0.147        holds
 60                      S3: primary, random points matched by A bin          C3  Dollar General       234       203      54.0      33.4  0.231  0.18-0.29  0.088  0.043   0.134        holds
 61                      S3: primary, random points matched by A bin          C6  Dollar General       178       157       NaN       NaN  1.320        NaN  0.279  0.175   0.384        holds
-62                      S3: primary, random points matched by A bin          C4  Dollar General       234       934       NaN       NaN  0.863        NaN  0.362  0.307   0.416        holds
-63                      S3: primary, random points matched by A bin   C5 (lead)  Dollar General      1573       960     234.0     516.9  0.149        NaN -0.180 -0.197  -0.163        holds
-64                      S3: primary, random points matched by A bin  C5 (loose)  Dollar General      1452       889     264.0     478.2  0.182        NaN -0.148 -0.166  -0.128        holds
+62                      S3: primary, random points matched by A bin          C4  Dollar General       234       935       NaN       NaN  0.863        NaN  0.362  0.306   0.415        holds
+63                      S3: primary, random points matched by A bin   C5 (lead)  Dollar General      1575       961     234.0     517.6  0.149        NaN -0.180 -0.197  -0.163        holds
+64                      S3: primary, random points matched by A bin  C5 (loose)  Dollar General      1453       890     264.0     478.5  0.182        NaN -0.148 -0.167  -0.129        holds
 65          S6: primary, without gap-fallback or re-entering places          C1  Dollar General       125       118      55.0      45.6  0.440  0.36-0.53  0.075 -0.010   0.159  cannot tell
 66          S6: primary, without gap-fallback or re-entering places          C2  Dollar General       125       118      28.0       8.2  0.224  0.16-0.30  0.159  0.093   0.229        holds
 67          S6: primary, without gap-fallback or re-entering places          C3  Dollar General       125       118      41.0      17.5  0.328  0.25-0.41  0.188  0.116   0.266        holds
 68          S6: primary, without gap-fallback or re-entering places          C6  Dollar General        93        88       NaN       NaN  1.340        NaN  0.295  0.134   0.451        holds
-69          S6: primary, without gap-fallback or re-entering places          C4  Dollar General       125       675       NaN       NaN  0.848        NaN  0.382  0.305   0.454        holds
-70          S6: primary, without gap-fallback or re-entering places   C5 (lead)  Dollar General       995       694     125.0     328.7  0.126        NaN -0.205 -0.224  -0.184        holds
-71          S6: primary, without gap-fallback or re-entering places  C5 (loose)  Dollar General       967       680     163.0     320.2  0.169        NaN -0.163 -0.185  -0.139        holds
+69          S6: primary, without gap-fallback or re-entering places          C4  Dollar General       125       676       NaN       NaN  0.848        NaN  0.382  0.305   0.453        holds
+70          S6: primary, without gap-fallback or re-entering places   C5 (lead)  Dollar General       996       695     125.0     329.0  0.126        NaN -0.205 -0.225  -0.184        holds
+71          S6: primary, without gap-fallback or re-entering places  C5 (loose)  Dollar General       968       681     163.0     320.5  0.168        NaN -0.163 -0.186  -0.139        holds
 72                       Size sensitivity: six states, under 10,000          C1  Dollar General       172       160      77.0      64.3  0.448  0.38-0.52  0.074  0.003   0.143        holds
 73                       Size sensitivity: six states, under 10,000          C2  Dollar General       172       160      32.0      11.4  0.186  0.13-0.25  0.120  0.066   0.176        holds
 74                       Size sensitivity: six states, under 10,000          C3  Dollar General       172       160      44.0      22.3  0.256  0.20-0.33  0.126  0.070   0.185        holds
 75                       Size sensitivity: six states, under 10,000          C6  Dollar General       132       122       NaN       NaN  1.260        NaN  0.229  0.115   0.342        holds
-76                       Size sensitivity: six states, under 10,000          C4  Dollar General       172       845       NaN       NaN  0.831        NaN  0.345  0.276   0.410        holds
-77                       Size sensitivity: six states, under 10,000   C5 (lead)  Dollar General      1213       870     172.0     400.2  0.142        NaN -0.188 -0.207  -0.169        holds
-78                       Size sensitivity: six states, under 10,000  C5 (loose)  Dollar General      1109       799     198.0     366.5  0.179        NaN -0.152 -0.174  -0.130        holds
+76                       Size sensitivity: six states, under 10,000          C4  Dollar General       172       846       NaN       NaN  0.831        NaN  0.344  0.276   0.408        holds
+77                       Size sensitivity: six states, under 10,000   C5 (lead)  Dollar General      1215       871     172.0     400.9  0.142        NaN -0.188 -0.207  -0.170        holds
+78                       Size sensitivity: six states, under 10,000  C5 (loose)  Dollar General      1110       800     198.0     366.8  0.178        NaN -0.152 -0.174  -0.131        holds
 79                                   S2: C1 with a 100 m road match          C1  Dollar General       234       203     109.0      75.8  0.466  0.40-0.53  0.142  0.087   0.197        holds
 80                       S4: C1, crossings on the store's side only          C1  Dollar General       234       203      95.0      81.8  0.406  0.35-0.47  0.056 -0.004   0.117  cannot tell

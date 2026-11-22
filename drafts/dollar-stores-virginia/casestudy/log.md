@@ -325,3 +325,21 @@ Folder: `2026-11-21-09-replication/`.
     from the scripts and the raw files on the Mac.
   - The stores with all their features (187,464 rows, 14.6 MB) are kept on the Mac as
     `isoscape-work/dollar-stores/casestudy/2026-11-21-09-replication/stores-with-features.csv.gz`.
+- **Independent check (Fable, about 20:45).** The frozen table reproduces; C2 is solid. It
+  also found problems (`fable-check.md`):
+  - C1 is fragile.
+  - The driver's view denominator was wrong ("4 in 10" was really 6 in 100), and the script
+    does not truly measure "first store passed".
+  - Ties among stores were broken by chance.
+  - S5 was not run.
+  - C4 measures SNAP authorization year, not opening year.
+  - West Virginia's 0 of 19 junctions is real, with 0.3 expected.
+- **What was done about it.**
+  - Ties now go to the larger place, by a stable sort. Rerun: verdicts unchanged.
+  - The first run is kept as `data/tests-run1-unstable-ties.csv`.
+  - `findings.md` adopts the checker's corrected answer to "Why?".
+- **The answer (findings.md).**
+  - Most Dollar General stores are not at the edge.
+  - The edge ones sit at highway junctions, like convenience stores.
+  - They carry newer SNAP authorizations.
+  - "Busiest road in" and "just inside the line" do not hold up as headlines.
