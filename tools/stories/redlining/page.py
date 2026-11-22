@@ -11,6 +11,11 @@ import argparse
 import datetime
 import json
 import os
+import re
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import boxes  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
@@ -41,7 +46,19 @@ def main():
         'jw_pct': pct(n['jackson_ward_1952_survival']['share_standing']), 'jw_n': f"{n['jackson_ward_1952_survival']['outlines_1952']:,}",
         'fD': pct(n['frame']['share_of_grade_inside']['D']), 'fC': pct(n['frame']['share_of_grade_inside']['C']),
     })
+    t.update(boxes.tokens(n))
+    t['yB'] = pct(y['B']['share_by1937'])
+    t['BOXES'] = boxes.page_grid(t)
+    # The framed menu sheet of the twelve D areas, when tools/sets/set.py has made it (see
+    # sets/redlining-1937.json): an editorial proof, never a print for sale.
+    menu = os.path.exists(os.path.join(ROOT, 'pages', 'redlining-menu.webp'))
+    t['MENU'] = ('::: figure wide\n![The 1937 map framed by twelve numbered boxes, one for each D area, each a close view of it today with its number, its name and a short note on what the 1937 form recorded and what stands there now](redlining-menu.webp)\n\n'
+                 "The twelve D areas as a set: the 1937 map in the middle, framed by a box for each area today. *How this was made:* composed by `tools/sets/set.py` from "
+                 "`sets/redlining-1937.json` (written by `boxes.py`), from the same builds as the figures above; grades as Mapping Inequality digitized them (CC BY-NC 2.5). "
+                 'An editorial sheet for this page only; it is not for sale. Working draft.\n:::') if menu else ''
     text = open(os.path.join(HERE, 'story.md')).read()
+    # Notes to the drafters (<!-- … -->) stay in story.md only.
+    text = re.sub(r'<!--.*?-->\n?', '', text, flags=re.S)
     for k, v in t.items():
         text = text.replace('{{' + k + '}}', str(v))
     assert '{{' not in text, 'an unfilled {{token}} is left in story.md'
