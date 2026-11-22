@@ -5,22 +5,22 @@
  "epochs": [
   {
    "year": 1925,
-   "title": "About 1925",
+   "title": "Jackson Ward, Richmond, Virginia, from the Sanborn fire-insurance map",
    "note": "Buildings north of Leigh Street (and between Clay and Leigh from 1st to 7th Streets) are traced from the Sanborn map of Richmond, volume 3, 1925 (Library of Congress copy received May 16, 1925; its key map's correction table is blank), registered onto the same sheets of the 1952 republication and placed by their fits; south of that from the 1924-25 volume 1 tracing. Apostle Town stands where Gilpin Court was built in 1941-43. The ground inside the Turnpike's later trench is the estimate rebuilt for 1952. Buildings standing today are drawn where the assessor dates them 1925 or earlier. Rough draft."
   },
   {
    "year": 1952,
-   "title": "Before the Turnpike",
-   "note": "The last Sanborn survey before the Richmond-Petersburg Turnpike was cut through the ward in 1955-58. Buildings north of Leigh Street are traced from the 1952 volume 3 sheets; south of Leigh from the 1924-25 and 1950-52 volume 1 tracings. Rough draft."
+   "title": "Jackson Ward, Richmond, Virginia, before the Turnpike, from the Sanborn map as reissued that year",
+   "note": "The last Sanborn edition before the Richmond-Petersburg Turnpike was built through the ward in 1955-58: the 1925 survey as corrected by the publisher and reissued in 1952, so an outline it did not redraw may show the block as it stood in 1925. Buildings north of Leigh Street are traced from the 1952 volume 3 sheets; south of Leigh from the 1924-25 and 1950-52 volume 1 tracings. Rough draft."
   },
   {
    "year": 1959,
-   "title": "After the road (about 1960)",
+   "title": "Jackson Ward, about a year after the Turnpike opened (approximate)",
    "note": "A year after the Turnpike opened (July 1, 1958). Traced 1952 buildings whose center falls in the highway's corridor polygon (today's paved roadway and ramps plus 15 m each side, a stand-in for the 1958 right-of-way) are gone from 1956 (tools/sanborn/jw/corridor_ends.py); those outside it are drawn standing, because when each was lost is not yet dated. Beyond the corridor this is an approximation: later clearances (the Coliseum, the 1970s renewal, Gilpin Court's additions of 1957 and 1970) are not yet dated building by building. Drawn as 1959 so that buildings whose end is assumed (1960, the downtown series' rule) still stand."
   },
   {
    "year": 2026,
-   "title": "Today"
+   "title": "Jackson Ward, Richmond, Virginia, today"
   }
  ],
  "features": [
@@ -1100,7 +1100,7 @@
      ]
     ]
    ],
-   "note": "Estimate. East of 1st Street the interchange ramps stand on the old plateau rim above Shockoe Valley. The USGS Richmond sheet surveyed 1933-34 shows ground there at about the height the lidar measures today (its 150-foot contour, labeled near the valley rim, falls where today's does), so the ground is kept as measured, except that banks narrower than 50 m (the ramps' embankments, up to 9 m high) are taken down to the ground beside them. The ravine the sheet shows heading into the plateau north of the junction, and the valley side under I-95 south of it, are not rebuilt: the lidar is kept there.",
+   "note": "Estimate. Around the I-95/I-64 junction, from about 7th Street east (the three outlines cross 7th, Duval, 5th and Hospital Streets there), the interchange ramps stand on the old plateau rim above Shockoe Valley. The USGS Richmond sheet surveyed 1933-34 shows ground there at about the height the lidar measures today (its 150-foot contour, labeled near the valley rim, falls where today's does), so the ground is kept as measured, except that banks narrower than 50 m (the ramps' embankments, up to 9 m high) are taken down to the ground beside them. The ravine the sheet shows heading into the plateau north of the junction, and the valley side under I-95 south of it, are not rebuilt: the lidar is kept there.",
    "sources": [
     "https://apps.nationalmap.gov/3depdem/",
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
@@ -1672,7 +1672,7 @@
      "note": "At grade before the Turnpike: today's street ends on either side (w327205891, w692873594) joined straight, as the USGS Richmond sheet of 1934 shows the street running through. Approximate."
     }
    ],
-   "note": "Estimate, not a survey. The Richmond-Petersburg Turnpike (1955-58) runs through the ward in a trench up to about 8 m deep (3 to 6.5 m where the old cross streets ran). Inside this outline the lidar is set aside and the ground rebuilt as the smoothest surface (a membrane) that meets the measured ground at the outline and carries each street listed here through at grade, straight between its surviving ends. The outline is today's motorway and ramp ways (OpenStreetMap) buffered 22 m (10 m for ramps), widened over the cut slopes the lidar shows (slopes over 12% within 60 m of a motorway), and simplified; east of 1st and Duval streets it keeps only the main line (30 m either side). Checked by moving the outline onto undisturbed plateau nearby (0.3-1.1 m RMS) and against the USGS Richmond sheet surveyed 1933-34 (10-foot contours: no contour can be read near seven points along the trench, and the rebuilt ground would move at most 0.8 m to agree). Error about 1.5 m (95%) mid-trench, 3 m at its ends; a small ravine the sheet shows near 7th Street is not rebuilt (ground.md in the story folder).",
+   "note": "Estimate, not a survey. The Richmond-Petersburg Turnpike (1955-58) runs through the ward in a trench up to about 8 m deep (3 to 6.5 m where the old cross streets ran). Inside this outline the lidar is set aside and the ground rebuilt as the smoothest surface (a membrane) that meets the measured ground at the outline and carries each street listed here through at grade, straight between its surviving ends. The outline is today's motorway and ramp ways (OpenStreetMap) buffered 22 m (10 m for ramps), widened over the cut slopes the lidar shows (slopes over 12% within 60 m of a motorway), and simplified; east of 1st and Duval streets it keeps only the main line (30 m either side). Checked by moving the outline onto undisturbed plateau nearby (0.3-1.1 m RMS) and against the USGS Richmond sheet surveyed 1933-34 (10-foot contours: no contour can be read near seven points along the trench, and the rebuilt ground would move at most 0.8 m to agree). Error about 2 m (95% of points) mid-trench, the worst of five trials on level plateau, and 3 to 4 m or more at its ends (4.2 m in the trial on a valley edge; at least 3.5 m against the 1934 sheet near 7th Street); a small ravine the sheet shows near 7th Street is not rebuilt (ground.md in the story folder).",
    "sources": [
     "https://apps.nationalmap.gov/3depdem/",
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
@@ -2007,7 +2007,7 @@
    }
   },
   "island-paved": {
-   "note": "The island: only what the highway took, inside today's paved roadway and ramps, drawn alone on blank paper (the 1952 buildings the count counts in the paved polygon, the streets and the ground as rebuilt before the trench), the ground cut at the polygon's edge and drawn as a floating slab. The edge is today's footprint, a stand-in for the 1958 right-of-way (Library of Virginia, Acc. 40941, not yet seen). The edge is cut where the traced 1952 sheets end, at about 8th Street (tools/sanborn/jw/island.py), so the ramp loop east of it, never traced, is not shown bare.",
+   "note": "The island: only what the highway took, inside today's paved roadway and ramps, drawn alone on blank paper (the 1952 buildings the count counts in the paved polygon, the streets and the ground as rebuilt before the trench), the ground cut at the polygon's edge and drawn as a floating slab. The edge is today's footprint, a stand-in for the 1958 right-of-way (Library of Virginia, Acc. 40941, not yet seen). The edge is cut where the traced 1952 sheets end, at about 7th Street (tools/sanborn/jw/island.py), so the ramp loop east of it, never traced, is not shown bare.",
    "island": {
     "file": "tools/sanborn/jw/island.geojson",
     "ids": "tools/sanborn/jw/counted-ids.json",
@@ -2015,11 +2015,11 @@
     "idLists": [
      "paved"
     ],
-    "caption": "Only what the highway took: inside today's paved roadway and ramps, a stand-in for the 1958 right-of-way; cut where the traced 1952 sheets end, at about 8th Street"
+    "caption": "Only what was cleared for the Turnpike, 1955–58: the 1952 buildings inside today's paved roadway and ramps (216 on the Sanborn sheets), most of them dwellings"
    }
   },
   "island-corridor": {
-   "note": "The island: as island-paved, inside the corridor (today's paved roadway and ramps plus 15 m each side for cut slopes and walls): the buildings the count counts in the paved and the corridor polygons. The edge is cut where the traced 1952 sheets end, at about 8th Street (tools/sanborn/jw/island.py), so the ramp loop east of it, never traced, is not shown bare.",
+   "note": "The island: as island-paved, inside the corridor (today's paved roadway and ramps plus 15 m each side for cut slopes and walls): the buildings the count counts in the paved and the corridor polygons. The edge is cut where the traced 1952 sheets end, at about 7th Street (tools/sanborn/jw/island.py), so the ramp loop east of it, never traced, is not shown bare.",
    "island": {
     "file": "tools/sanborn/jw/island.geojson",
     "ids": "tools/sanborn/jw/counted-ids.json",
@@ -2028,7 +2028,7 @@
      "paved",
      "corridor"
     ],
-    "caption": "Only what the highway took: inside today's roadway and ramps plus 15 m each side, a stand-in for the 1958 right-of-way; cut where the traced 1952 sheets end, at about 8th Street"
+    "caption": "Only what was cleared for the Turnpike, 1955–58: the 447 buildings on the 1952 Sanborn sheets inside today's I-95 corridor, most of them dwellings"
    }
   }
  }

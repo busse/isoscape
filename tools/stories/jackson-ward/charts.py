@@ -108,7 +108,7 @@ plt.rcParams.update({
 LW = P['lineWidth'] * 2 / 0.75 * 0.75 * 1.6   # the maps' line, as the FAQ's diagrams double it
 DOT = P['dotRadius'] * 2
 
-CREDIT = 'Drafted with Claude for Chris Busse; working draft, not for publication.'
+CREDIT = 'Drafted with Claude for Chris Busse, November 2026.'
 
 
 # ---- data ------------------------------------------------------------------------------------
@@ -234,6 +234,36 @@ def footer(fig, text):
     fig.text(0.012, 0.012, text + ' ' + CREDIT, fontsize=8, color=R['muted'], ha='left', va='bottom', wrap=True)
 
 
+# The stated error of the rebuilt ground (see the story's "The ground before the trench"): about
+# 2 m (95% of points) in the trench's middle, the worst of five hold-out trials on level plateau
+# (0.66-2.06 m), and 3 to 4 m or more at its ends (2.85 m where a trial crossed the Leigh Street cut,
+# 4.17 m on a valley edge; the 1934 sheet differs by at least 3.5 m at P11). Mid-trench runs from P4
+# to P10, where the 1934 sheet can be read; the band widens to the end value at P3 and P11.
+ERR_MID, ERR_END_LO, ERR_END = 2.0, 3.0, 4.0
+
+
+def err_at(data, p):
+    """The stated error (m) at a point in view meters, by where it falls along the center line."""
+    cl = centerline(data)
+    seg = np.hypot(np.diff(cl[:, 0]), np.diff(cl[:, 1]))
+    cum = np.concatenate([[0], np.cumsum(seg)])
+    best, at = None, 0.0
+    for k in range(len(cl) - 1):
+        a, b = cl[k], cl[k + 1]
+        d = b - a
+        t = float(np.clip(np.dot(np.asarray(p) - a, d) / np.dot(d, d), 0, 1))
+        dist = float(np.hypot(*(a + t * d - p)))
+        if best is None or dist < best:
+            best, at = dist, cum[k] + t * seg[k]
+    ids = [c['id'] for c in data.d['checks']]
+    p3, p4, p10, p11 = (cum[ids.index(i)] for i in ('P3', 'P4', 'P10', 'P11'))
+    if p4 <= at <= p10:
+        return ERR_MID
+    if at < p4:
+        return ERR_MID + (ERR_END - ERR_MID) * min(1.0, (p4 - at) / (p4 - p3))
+    return ERR_MID + (ERR_END - ERR_MID) * min(1.0, (at - p10) / (p11 - p10))
+
+
 def street_point(data, name, near=None):
     """Points of a named street (OSM), optionally only those within 400 m of a point."""
     pts = []
@@ -326,7 +356,7 @@ def chart_cut_fill(data, out):
     label(ax, 860, -330, 'Shockoe\nValley', size=9, color=R['muted'])
     scale_bar(ax, -900, -560, 200)
     north_arrow(ax, data, -880, -470, 50)
-    ax.set_title('Where the trench was filled, and by how much', pad=8, fontsize=13)
+    ax.set_title('Jackson Ward, Richmond: where the estimate fills the I-95 trench, and by how much', pad=8, fontsize=13)
     # the key, in a strip below the plan
     cax = fig.add_axes([0.03, 0.115, 0.30, 0.022])
     cb = fig.colorbar(im, cax=cax, orientation='horizontal')
@@ -345,7 +375,7 @@ def chart_cut_fill(data, out):
         fig.lines.append(plt.Line2D([x, x + 0.03], [y, y], transform=fig.transFigure, **st))
         fig.text(x + 0.037, y, txt, fontsize=8.8, va='center')
     footer(fig, 'Plan of the ward, north about 10° right of up. Lidar: USGS 3DEP (public domain), 5 m grid. Streets: OpenStreetMap contributors (ODbL). '
-                'The fill is an estimate: about ±1.5 m mid-trench, ±3 m at its ends.')
+                'The fill is an estimate: about ±2 m mid-trench, 3 to 4 m or more at its ends.')
     save(fig, out, 'cut-fill')
 
 
@@ -368,7 +398,7 @@ def chart_profiles(data, out):
     rings_all = data.trench['rings'] + data.junction['rings']
     fig = plt.figure(figsize=(10.5, 13.2))
     gs = fig.add_gridspec(4, 1, height_ratios=[1, 1, 1, 1.25], hspace=0.45, left=0.08, right=0.95, top=0.895, bottom=0.115)
-    fig.suptitle('The ground along the streets the trench cut: today, and rebuilt for 1952', x=0.08, ha='left', fontsize=13.5, fontweight=600)
+    fig.suptitle('Jackson Ward, Richmond: the ground along the streets the I-95 trench cut, today and rebuilt (estimate) for 1952', x=0.08, ha='left', fontsize=12.5, fontweight=600)
     for k, (osm, title) in enumerate(streets):
         ax = fig.add_subplot(gs[k])
         s, line, o, v = cross_section(data, osm)
@@ -382,7 +412,8 @@ def chart_profiles(data, out):
         ax.axvspan(lo, hi, color=R['set_aside'], zorder=0, lw=0)
         ax.text((lo + hi) / 2, 0.97, 'lidar set aside', transform=ax.get_xaxis_transform(), ha='center', va='top', fontsize=8.5, color=R['muted'])
         sel = inside
-        ax.fill_between(s, np.where(sel, rebuilt - 1.5, np.nan), np.where(sel, rebuilt + 1.5, np.nan), color=R['band'], alpha=0.45, lw=0, zorder=1)
+        e = err_at(data, o)
+        ax.fill_between(s, np.where(sel, rebuilt - e, np.nan), np.where(sel, rebuilt + e, np.nan), color=R['band'], alpha=0.45, lw=0, zorder=1)
         ax.fill_between(s, np.where(sel, today, np.nan), np.where(sel, rebuilt, np.nan), where=sel & (rebuilt > today), color=R['cut'], alpha=0.10, lw=0, zorder=1)
         ax.plot(s, today, color=R['today'], lw=2, zorder=3, solid_capstyle='round')
         if np.max(np.abs(memb - rebuilt)[sel]) > 0.15:
@@ -395,8 +426,8 @@ def chart_profiles(data, out):
         ax.annotate('', xy=(s[m], today[m]), xytext=(s[m], rebuilt[m]), arrowprops=dict(arrowstyle='<->', color=R['ink'], lw=0.9, shrinkA=0, shrinkB=0), zorder=6)
         ax.set_title(title, fontsize=12)
         ax.set_xlim(-250, 250)
-        ylo = math.floor(min(today.min(), (rebuilt - 1.5)[sel].min()) - 1)
-        yhi = math.ceil(max(today.max(), (rebuilt + 1.5)[sel].max()) + 1.5)
+        ylo = math.floor(min(today.min(), (rebuilt - e)[sel].min()) - 1)
+        yhi = math.ceil(max(today.max(), (rebuilt + e)[sel].max()) + 1.5)
         ax.set_ylim(ylo, yhi)
         ax.set_ylabel('meters above sea level')
         ax.grid(axis='y', color=R['faint'], lw=0.6)
@@ -404,7 +435,7 @@ def chart_profiles(data, out):
         if k == 0:
             ax.text(-245, today[0] + 0.6, 'today (lidar)', fontsize=9.5, color=R['today'], fontweight=600)
             i_r = np.where(sel)[0][len(np.where(sel)[0]) // 3]
-            ax.text(s[i_r] - 6, rebuilt[i_r] + 1.9, 'rebuilt (estimate) ±1.5 m', fontsize=9.5, color=R['rebuilt'], fontweight=600, ha='right')
+            ax.text(s[i_r] - 6, rebuilt[i_r] + 1.9, f'rebuilt (estimate) ±{err_at(data, o):.0f} m', fontsize=9.5, color=R['rebuilt'], fontweight=600, ha='right')
         ax.set_xlabel('meters along the street, southwest (−) to northeast (+); 0 at the highway\'s center line', fontsize=9)
     # the long profile, with the 1934 sheet's evidence
     ax = fig.add_subplot(gs[3])
@@ -417,14 +448,15 @@ def chart_profiles(data, out):
     pts = np.column_stack([np.interp(s, cum, cl[:, 0]), np.interp(s, cum, cl[:, 1])])
     today = data.sample(data.today, pts)
     rebuilt = data.sample(data.rebuilt, pts)
-    ylo, yhi = math.floor(today.min() - 2), math.ceil(rebuilt.max() + 3)
+    ylo, yhi = math.floor(today.min() - 2), math.ceil(rebuilt.max() + 4.5)
     for ft in range(100, 200, 10):
         z = ft_to_navd(ft)
         if not ylo < z < yhi:
             continue
         ax.axhline(z, color=R['fill'], lw=0.6, alpha=0.55, zorder=0)
         ax.text(cum[-1] + 48, z + 0.25, f'{ft} ft', fontsize=8, color=R['fill'], va='center')
-    ax.fill_between(s, rebuilt - 1.5, rebuilt + 1.5, color=R['band'], alpha=0.45, lw=0, zorder=1)
+    band = np.array([err_at(data, p) for p in pts])
+    ax.fill_between(s, rebuilt - band, rebuilt + band, color=R['band'], alpha=0.45, lw=0, zorder=1)
     ax.plot(s, today, color=R['today'], lw=2, zorder=3)
     ax.plot(s, rebuilt, color=R['rebuilt'], lw=2.4, zorder=4)
     for c, cid in zip(cum, ids):
@@ -453,12 +485,12 @@ def chart_profiles(data, out):
     from matplotlib.lines import Line2D
     h = [Line2D([], [], color=R['today'], lw=2, label='today (USGS lidar)'),
          Line2D([], [], color=R['rebuilt'], lw=2.4, label='rebuilt for 1952 (estimate)'),
-         plt.Rectangle((0, 0), 1, 1, color=R['band'], alpha=0.45, label='stated error, ±1.5 m'),
+         plt.Rectangle((0, 0), 1, 1, color=R['band'], alpha=0.45, label='stated error (±2 m mid-trench, ±4 m at ends)'),
          Line2D([], [], color=R['rebuilt'], lw=1.2, ls=(0, (3, 2)), label='membrane alone, no streets held'),
          Line2D([], [], color=R['fill'], lw=0.6, label='10-ft levels of the 1934 survey'),
-         Line2D([], [], marker='o', ls='', mfc=R['paper'], mec=R['fill'], mew=2, ms=8, label='1934 sheet agrees (number: least move to agree)'),
+         Line2D([], [], marker='o', ls='', mfc=R['paper'], mec=R['fill'], mew=2, ms=8, label='1934 sheet agrees (or m outside its band)'),
          Line2D([], [], marker='o', ls='', color=R['fill'], ms=8, label='1934 sheet disagrees'),
-         Line2D([], [], marker='o', ls='', mfc=R['paper'], mec=R['fill'], mew=1.2, ms=8, label='level not readable on the sheet')]
+         Line2D([], [], marker='o', ls='', mfc=R['paper'], mec=R['fill'], mew=1.2, ms=8, label='1934 level not readable')]
     fig.legend(handles=h, loc='lower center', ncol=3, bbox_to_anchor=(0.52, 0.004), fontsize=9, handlelength=2.2, columnspacing=1.5)
     fig.text(0.08, 0.94, 'Elevations in meters above sea level (NAVD 88). Lidar: USGS 3DEP. 1934: USGS Richmond 1:24,000, surveyed 1933–34,\n'
              'contours every 10 ft (converted). No 1934 contour can be read where the three streets cross the trench; the check points\n'
@@ -485,7 +517,7 @@ def chart_hillshade(data, out):
         ax.set_title(t, fontsize=12, loc='left')
         scale_bar(ax, -720, -520, 200)
         north_arrow(ax, data, -700, -440, 50)
-        fig.suptitle('The ground alone, lit from the northwest', x=0.02, ha='left', fontsize=13, fontweight=600)
+        fig.suptitle('Jackson Ward, Richmond: the ground alone, lit from the northwest', x=0.02, ha='left', fontsize=13, fontweight=600)
         fig.subplots_adjust(left=0.02, right=0.98, top=0.88, bottom=0.085)
         footer(fig, 'Relief exaggerated 4× in the shading. Solid outline: the trench, rebuilt; dashed: the junction, ramp banks taken down. Lidar: USGS 3DEP.')
         save(fig, out, name)
@@ -631,7 +663,7 @@ def chart_topo(data, out):
         label(ax, x + 42, y + 42, c['id'], size=9, weight=600)
     scale_bar(ax, -740, -525, 200)
     north_arrow(ax, data, -720, -440, 50)
-    ax.set_title('The 1934 survey under the trench\'s outline, and the twelve points checked against it', fontsize=13, pad=8)
+    ax.set_title('Jackson Ward, Richmond: the 1934 USGS survey under the I-95 trench\'s outline, and the points checked against it', fontsize=12.5, pad=8)
     from matplotlib.lines import Line2D
     h = [Line2D([], [], color=R['pick'], lw=1.6, label='the trench\'s outline (rebuilt inside)'),
          Line2D([], [], marker='o', ls='', mfc=R['paper'], mec=R['ink'], mew=2, ms=9, label='the sheet agrees with the rebuilt ground'),
@@ -661,11 +693,12 @@ def chart_holdout(data, out):
     rows = sorted(HOLDOUT, key=lambda r: r[2])
     fig, ax = plt.subplots(figsize=(10.5, 5.2))
     fig.subplots_adjust(left=0.30, right=0.97, top=0.80, bottom=0.2)
-    ax.axvspan(0, 1.5, color=R['band'], alpha=0.35, lw=0, zorder=0)
-    ax.axvline(1.5, color=R['rebuilt'], lw=1.2, zorder=1)
-    ax.text(1.55, -0.5, 'stated error mid-trench: 1.5 m', fontsize=9, color=R['rebuilt'], va='center')
-    ax.axvline(3.0, color=R['rebuilt'], lw=1.0, ls=(0, (3, 2)), zorder=1)
-    ax.text(3.05, len(rows) - 0.45, 'at the trench\'s ends: 3 m', fontsize=9, color=R['rebuilt'], va='center')
+    ax.axvspan(0, ERR_MID, color=R['band'], alpha=0.35, lw=0, zorder=0)
+    ax.axvline(ERR_MID, color=R['rebuilt'], lw=1.2, zorder=1)
+    ax.text(ERR_MID - 0.05, -0.5, f'stated error mid-trench: {ERR_MID:g} m', fontsize=9, color=R['rebuilt'], va='center', ha='right')
+    ax.axvspan(ERR_END_LO, ERR_END, color=R['band'], alpha=0.18, lw=0, zorder=0)
+    ax.axvline(ERR_END, color=R['rebuilt'], lw=1.0, ls=(0, (3, 2)), zorder=1)
+    ax.text(ERR_END + 0.05, -0.5, f'at its ends: {ERR_END_LO:g} to {ERR_END:g} m or more', fontsize=9, color=R['rebuilt'], va='center')
     for k, (sh, rms, p95, worst, note) in enumerate(rows):
         ax.plot([0, worst], [k, k], color=R['faint'], lw=1, zorder=1)
         ax.scatter([rms], [k], s=60, color=R['ink'], zorder=4)
@@ -684,7 +717,7 @@ def chart_holdout(data, out):
          Line2D([], [], marker='o', ls='', color=R['rebuilt'], ms=8, label='95% of points within'),
          Line2D([], [], marker='o', ls='', mfc=R['paper'], mec=R['ink'], mew=1.5, ms=7, label='worst point')]
     ax.legend(handles=h, loc='lower right', fontsize=9)
-    fig.suptitle('The method tried where the answer is known', x=0.012, ha='left', fontsize=13, fontweight=600, y=0.97)
+    fig.suptitle('Testing the ground estimate where the answer is known (Jackson Ward, Richmond)', x=0.012, ha='left', fontsize=13, fontweight=600, y=0.97)
     fig.text(0.012, 0.87, 'The trench\'s outline was moved onto undisturbed ground nearby, seven times. Each time the ground inside was rebuilt the same way and\n'
                           'compared with the lidar it replaced. On level plateau like the trench\'s, 95% of points come within about 0.7–2 m.', fontsize=9.5, va='top', color=R['ink'])
     footer(fig, 'Lidar: USGS 3DEP, 5 m grid. Numbers from the ground report, check 1.')
@@ -732,7 +765,7 @@ def chart_sheet(data, out):
                     bbox=dict(boxstyle='round,pad=0.2', fc=R['paper'], ec='none', alpha=0.9))
     mean = sum(r['residual'] for r in rows) / len(rows)
     worst = max(r['residual'] for r in rows)
-    fig.suptitle(f'One sheet, fitted to today\'s street corners: sheet {sheet} of the 1952 volume', x=0.02, ha='left', fontsize=13, fontweight=600, y=0.975)
+    fig.suptitle(f'One Jackson Ward Sanborn sheet fitted to today\'s street corners: sheet {sheet} of the 1952 volume', x=0.02, ha='left', fontsize=13, fontweight=600, y=0.975)
     tx = 0.67
     lines = [
         ('How the sheet is placed', 600),
@@ -789,7 +822,7 @@ def chart_residuals(data, out):
     ax.set_xlim(0, 9.5)
     ax.set_ylim(-0.7, len(sheets) - 0.3)
     ax.set_xlabel('how far each street corner lands from where the fit puts it, meters')
-    fig.suptitle('Every sheet\'s fit: how far each control point misses', x=0.012, ha='left', fontsize=13, fontweight=600, y=0.97)
+    fig.suptitle('Every 1952 Sanborn sheet\'s fit, Jackson Ward: how far each street corner misses', x=0.012, ha='left', fontsize=13, fontweight=600, y=0.97)
     fig.text(0.012, 0.905, f'{len(rows)} control points on {len(sheets)} sheets of the 1952 volume 3. Dots: one point each. Bar: the sheet\'s mean.'
              + (f' Sheet {pick} is the one shown up close.' if pick else ''), fontsize=9.5)
     footer(fig, 'Residuals from the 1952 trace (residuals.csv).')
@@ -861,7 +894,7 @@ def chart_count(data, out):
     ax.text(x0 + nv[0] * 76, y0 + nv[1] * 76, 'N', ha='center', va='center', fontsize=9.5, fontweight=600, zorder=9)
     label(ax, bounds[0] + 120, bounds[3] - 40, 'west: Brook Road and the Belvidere ramps', size=8.5, color=R['muted'], ha='left')
     label(ax, bounds[1] - 30, bounds[3] - 40, 'east: the I-64 junction, cut at the line of 8th Street', size=8.5, color=R['muted'], ha='right')
-    fig.suptitle('What the count counts: outlines on the 1952 sheets whose center falls inside each polygon', x=0.015, ha='left', fontsize=13, fontweight=600, y=0.975)
+    fig.suptitle('Jackson Ward, Richmond: outlines on the 1952 Sanborn sheets with a point inside each polygon of today\'s I-95', x=0.015, ha='left', fontsize=13, fontweight=600, y=0.975)
     fig.text(0.015, 0.925, 'The plan is turned so the highway runs across the page.', fontsize=9.5, color=R['muted'])
     # the numbers, from counts.json, and the count by sheet
     fig.text(0.015, 0.31, 'Buildings on the 1952 Sanborn sheets within this polygon', fontsize=11.5, fontweight=600, va='top')
@@ -886,7 +919,7 @@ def chart_count(data, out):
     bx.set_title('By sheet: paved · corridor', fontsize=10.5)
     from matplotlib.patches import Patch
     from matplotlib.lines import Line2D
-    h = [Patch(color=R['pick'], label='center in the paved polygon'), Patch(color=R['near'], label='in the corridor only'),
+    h = [Patch(color=R['pick'], label='a point inside in the paved polygon'), Patch(color=R['near'], label='in the corridor only'),
          Patch(color=R['quiet'], label='every other 1952 outline'),
          Line2D([], [], color=R['line'], lw=1.3, label='paved polygon'), Line2D([], [], color=R['ink'], lw=1.0, ls=(0, (4, 2.5)), label='corridor polygon')]
     fig.legend(handles=h, loc='upper left', ncol=5, bbox_to_anchor=(0.015, 0.355), fontsize=9, handlelength=1.6, columnspacing=1.2)
@@ -930,9 +963,9 @@ def chart_threeway(data, out):
         for sp in ax.spines.values():
             sp.set_visible(True); sp.set_color(R['ink']); sp.set_linewidth(0.9)
         ax.set_title(title, fontsize=11.5, pad=6)
-    fig.suptitle('The same blocks three ways', x=0.02, ha='left', fontsize=13.5, fontweight=600, y=0.975)
+    fig.suptitle('The same Jackson Ward blocks three ways: today, 1952 on today\'s ground, 1952 on rebuilt ground', x=0.02, ha='left', fontsize=13.5, fontweight=600, y=0.975)
     footer(fig, 'Crops of three builds of the Jackson Ward view, drawn by Chris Busse with isoscape; the middle one is a check made for this chart only. '
-                'The ground in the bottom view is an estimate, about ±1.5 m mid-trench. Lidar: USGS 3DEP; streets and today\'s buildings: OpenStreetMap; '
+                'The ground in the bottom view is an estimate, about ±2 m mid-trench. Lidar: USGS 3DEP; streets and today\'s buildings: OpenStreetMap; '
                 '1952 buildings: Sanborn, Library of Congress.')
     save(fig, out, 'three-way')
 
@@ -1006,7 +1039,7 @@ def chart_study(data, out):
     label(ax, 250, -250, 'toward Broad Street', size=8.5, color=R['muted'])
     scale_bar(ax, bounds[0] + 40, bounds[2] + 40, 200)
     north_arrow(ax, data, bounds[0] + 60, bounds[2] + 120, 50)
-    fig.suptitle('Where a cap was studied: the 2022 feasibility study\'s six areas over the highway', x=0.02, ha='left', fontsize=13, fontweight=600, y=0.975)
+    fig.suptitle('Where a cap over I-95 in Jackson Ward, Richmond, was studied: the 2022 feasibility study\'s six areas', x=0.02, ha='left', fontsize=13, fontweight=600, y=0.975)
     fig.text(0.02, 0.935, 'Each area is drawn between the two cross streets the study names for it; the band\'s width (about 100 m) is ours, not the study\'s. Approximate.',
              fontsize=9.5, color=R['ink'])
     from matplotlib.patches import Patch
@@ -1073,13 +1106,13 @@ def chart_overlay(data, out):
                     ax.fill(q[:, 0], q[:, 1], color=fc, alpha=a, lw=0, zorder=4)
                 ax.plot(np.append(q[:, 0], q[0, 0]), np.append(q[:, 1], q[0, 1]), color=R['line'], lw=lw, ls=ls, zorder=5)
     cx, cy = to_view(data, *COLISEUM)
-    label(ax, cx + 150, cy + 20, 'the Coliseum (today)', size=9)
+    label(ax, cx + 150, cy + 20, 'the Coliseum (standing, Nov. 2026)', size=9)
     for nm, lon, lat in (('Gilpin Court', -77.4405, 37.5545), ('Second Street', -77.4382, 37.5468), ('Leigh Street', -77.4318, 37.5468), ('Broad Street', -77.4420, 37.5452)):
         x, y = to_view(data, lon, lat)
         label(ax, x, y, nm, size=8.5, color=R['muted'])
     scale_bar(ax, -920, -765, 200)
     north_arrow(ax, data, -880, -690, 50)
-    ax.set_title('The highway laid over the 1952 sheets, over today\'s ward', pad=8, fontsize=13)
+    ax.set_title('Jackson Ward, Richmond: today\'s I-95 laid over the 1952 Sanborn sheets and today\'s ward', pad=8, fontsize=13)
     h = [Patch(color=R['pick'], alpha=0.6, label='highway: today\'s paved roadway and ramps'),
          Patch(facecolor=R['near'], alpha=0.5, edgecolor=R['line'], ls='--', label='corridor: plus 15 m each side'),
          Patch(color=P['traced']['brick'], label='1952 outline, brick'), Patch(color=P['traced']['frame'], label='1952 outline, frame'),
