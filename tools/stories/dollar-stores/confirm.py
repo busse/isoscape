@@ -213,18 +213,34 @@ def features(out, hp_path, places_path, specs):
 # ---------------------------------------------------------------- tests
 
 def cluster_boot(df, stat, n=10000, seed=SEED):
-    rng = np.random.default_rng(seed)
-    groups = [g for _, g in df.groupby("geoid")]
-    if len(groups) < 2:
+    """Cluster bootstrap by place. Every statistic here is a mean over rows (or a difference of
+    two such means), so places are resampled as per-place totals: the same estimator as
+    resampling the rows of whole places, without rebuilding tables 10,000 times."""
+    if df["geoid"].nunique() < 2:
         return np.nan, np.nan, np.nan
     est = stat(df)
-    k = len(groups)
-    vals = []
-    for _ in range(n):
-        pick = rng.integers(0, k, k)
-        vals.append(stat(pd.concat([groups[i] for i in pick])))
+    parts = stat(df, parts=True)  # list of (sum_by_place, count_by_place) Series aligned on places
+    places = parts[0][0].index
+    for a, b in parts[1:]:
+        places = places.union(a.index)
+    sums = [a.reindex(places).fillna(0).values for a, _ in parts]
+    cnts = [b.reindex(places).fillna(0).values for _, b in parts]
+    rng = np.random.default_rng(seed)
+    k = len(places)
+    w = np.stack([np.bincount(rng.integers(0, k, k), minlength=k) for _ in range(n)])  # n x k weights
+    means = [(w @ a) / np.where(w @ b == 0, np.nan, w @ b) for a, b in zip(sums, cnts)]
+    vals = means[0] if len(means) == 1 else means[0] - means[1]
     lo, hi = np.nanpercentile(vals, [2.5, 97.5])
     return est, lo, hi
+
+
+def mean_stat(col):
+    """Mean of a column, with per-place parts for the bootstrap."""
+    def f(d, parts=False):
+        if parts:
+            return [(d.groupby("geoid")[col].sum(), d.groupby("geoid")[col].count())]
+        return d[col].mean()
+    return f
 
 
 def wilson(k, n, z=1.96):
@@ -267,7 +283,8 @@ def place_conditional(stores, null, claim, band_col="A_lead", lo=1.0, hi=2.0, ab
     else:
         s["p"] = s["geoid"].map(nb.groupby("geoid")["y"].mean())
     s = s.dropna(subset=["p"])
-    est, l, h = cluster_boot(s, lambda d: (d["x"] - d["p"]).mean())
+    s["dxp"] = s["x"] - s["p"]
+    est, l, h = cluster_boot(s, mean_stat("dxp"))
     k, n = int(s["x"].sum()), len(s)
     wl, wh = wilson(k, n)
     return {"n_stores": n, "n_places": s["geoid"].nunique(), "observed": k, "expected": round(s["p"].sum(), 1),
@@ -310,7 +327,8 @@ def tests(out):
         e6 = e[e["aadt"] > 0].copy()
         e6["p"] = e6["geoid"].map(m)
         e6 = e6.dropna(subset=["p"])
-        est, l, h = cluster_boot(e6, lambda d: (np.log(d["aadt"]) - d["p"]).mean())
+        e6["dl"] = np.log(e6["aadt"]) - e6["p"]
+        est, l, h = cluster_boot(e6, mean_stat("dl"))
         rows.append({"test": "C6", "label": label, "kind": kind, "n_stores": len(e6), "n_places": e6["geoid"].nunique(),
                      "D": round(est, 3), "D_low": round(l, 3), "D_high": round(h, 3), "verdict": verdict(l, h, 1),
                      "share": round(math.exp(est), 2) if not np.isnan(est) else np.nan})
@@ -321,9 +339,12 @@ def tests(out):
         both = pd.concat([e.assign(edge=1), t]).dropna(subset=["auth_year"])
         both["new"] = (both["auth_year"] > 2005).astype(float)
 
-        def diff(d):
-            a, b = d[d.edge == 1]["new"], d[d.edge == 0]["new"]
-            return a.mean() - b.mean() if len(a) and len(b) else np.nan
+        def diff(d, parts=False):
+            a, b = d[d.edge == 1], d[d.edge == 0]
+            if parts:
+                return [(a.groupby("geoid")["new"].sum(), a.groupby("geoid")["new"].count()),
+                        (b.groupby("geoid")["new"].sum(), b.groupby("geoid")["new"].count())]
+            return a["new"].mean() - b["new"].mean() if len(a) and len(b) else np.nan
         est, l, h = cluster_boot(both, diff)
         rows.append({"test": "C4", "label": label, "kind": kind, "n_stores": int((both.edge == 1).sum()),
                      "n_places": both["geoid"].nunique(), "D": round(est, 3), "D_low": round(l, 3),
@@ -337,7 +358,8 @@ def tests(out):
             s3["x"] = ((s3[col] > 1) & (s3[col] <= 2)).astype(float)
             s3["p"] = s3["geoid"].map(n3.groupby("geoid")["y"].mean())
             s3 = s3.dropna(subset=["p"])
-            est, l, h = cluster_boot(s3, lambda d: (d["x"] - d["p"]).mean())
+            s3["dxp"] = s3["x"] - s3["p"]
+            est, l, h = cluster_boot(s3, mean_stat("dxp"))
             rows.append({"test": f"C5 ({'lead' if col == 'A_lead' else 'loose'})", "label": label, "kind": kind,
                          "n_stores": len(s3), "n_places": s3["geoid"].nunique(), "observed": int(s3["x"].sum()),
                          "expected": round(s3["p"].sum(), 1), "share": round(s3["x"].mean(), 3),

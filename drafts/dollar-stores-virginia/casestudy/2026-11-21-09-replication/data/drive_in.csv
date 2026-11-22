@@ -1,0 +1,10 @@
+set,unit,roads_in_with_a_store,first_is_DG,first_is_chain,DG_share_of_gateway_stores,chain_share_of_gateway_stores,roads_with_any_DG,first_is_convenience,first_is_grocery
+A,CDP,90,0.189,0.211,0.193,0.22,0.233,0.667,0.089
+A,joined,21,0.0,0.048,0.094,0.125,0.143,0.81,0.095
+B,CDP,242,0.281,0.322,0.24,0.294,0.335,0.607,0.066
+B,joined,289,0.215,0.263,0.198,0.254,0.273,0.602,0.104
+B,large,284,0.261,0.278,0.196,0.238,0.363,0.641,0.067
+B,small,1073,0.298,0.366,0.259,0.343,0.395,0.534,0.088
+discovery,joined,12,0.083,0.083,0.19,0.19,0.25,0.667,0.083
+discovery,large,46,0.065,0.109,0.093,0.13,0.217,0.674,0.196
+discovery,small,119,0.193,0.261,0.171,0.249,0.261,0.613,0.092

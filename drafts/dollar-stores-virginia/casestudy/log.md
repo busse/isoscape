@@ -300,3 +300,26 @@ Folder: `2026-11-21-09-replication/`.
 - **Driver's view (exploratory, not a frozen test).** `drive_in.py` asks, for each road
   crossing into a place, which store a driver passes first. Debugged on discovery data only;
   it will be run on the held-out data after the frozen tests, and labeled exploratory.
+- **The run (17:00-20:11).**
+  - All six states were scored one at a time, cleaning each state's working files as it
+    went. NLCD was fetched in parallel on the Mac; partial downloads were caught by a TIFF
+    check and fetched again.
+  - No place failed in the six states. Three Virginia CDPs failed before the fixes and were
+    rerun.
+- **The bootstrap (20:11-20:20).** It was too slow as first written (it rebuilt tables 10,000
+  times per test). It was replaced by an equivalent per-place-totals version and checked on
+  discovery: identical results, after one fix to C4's place list.
+- **The frozen tests ran once on all data at 20:20.** Primary (234 edge Dollar General stores,
+  203 small places in six states):
+  - C1 to C6 all hold.
+  - C2 (junctions) is the robust result: 17 percent against 6 percent.
+  - C1 (top-two road in) holds but is small and fragile: 39 against 32 percent, and it cannot
+    tell in two sensitivities.
+  - 77 percent of edge stores are outside the town limits, so Virginia's "just inside" does
+    not carry over.
+  - Convenience stores show the same pattern, so the finding is "edge retail on the road in".
+- **Draft findings** are in `findings-draft.md`. They went to an independent Fable agent for
+  checking before anything is shown as a finding.
+- **Row-level data.** `points.csv.gz`, about 4.6 million rows, stays on the Mac under
+  `isoscape-work/dollar-stores/casestudy/2026-11-21-09-replication/` because it is too big
+  for git.
