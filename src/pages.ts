@@ -30,7 +30,9 @@
  * picture opens its larger copy when one sits beside it as `<name>-large.<ext>`
  * (`jackson-ward-state-1952.webp` → `jackson-ward-state-1952-large.webp`); the explorer links it
  * in `p/`, where the static pages put it, so it is fetched only when opened. `deck: …` in the
- * front matter is a one-sentence standfirst, set under the page's title.
+ * front matter is a one-sentence standfirst, set under the page's title. `pdf: true` adds a line
+ * under the deck and another at the end linking the page's two PDF editions (tools/pdf/story_pdf.py
+ * makes them; they sit beside the static page as `p/<slug>-phone.pdf` and `p/<slug>-large.pdf`).
  */
 
 import { readdirSync, readFileSync } from 'node:fs'
@@ -60,6 +62,8 @@ export interface Page {
   readonly noShop?: boolean
   /** Structured data for the static page beyond `Article` (`schema: FAQPage`). */
   readonly schema?: 'FAQPage'
+  /** Offers the page as PDFs (`pdf: true`): `<slug>-phone.pdf` and `<slug>-large.pdf` in `p/` (tools/pdf). */
+  readonly pdf?: boolean
 }
 
 export const PAGES_DIR = fileURLToPath(new URL('../pages/', import.meta.url))
@@ -109,7 +113,13 @@ export interface CompileMode {
   readonly imageHref?: (name: string) => string
   /** The href of a file beside the page that is linked, never inlined (a figure's larger copy): by default `p/<name>`, where the static pages put it. */
   readonly fileHref?: (name: string) => string
+  /** The href of one of the page's PDFs (`pdf: true`), by file name: by default `p/<name>`; null leaves the line out (the PDF's own print build). */
+  readonly pdfHref?: ((name: string) => string) | null
 }
+
+/** The line a page with `pdf: true` shows near its top and at its end, linking its two PDFs. */
+export const pdfLine = (slug: string, href: (name: string) => string): string =>
+  `<p class="pdf-links" style="font-size: .88em; color: var(--dim)">Read this as a PDF: <a href="${href(`${slug}-phone.pdf`)}" type="application/pdf">phone edition</a>, <a href="${href(`${slug}-large.pdf`)}" type="application/pdf">large-screen edition</a></p>`
 
 /**
  * Compile one page. `readAsset` returns the bytes of a file beside the page, or null; it is
@@ -151,6 +161,13 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     const end = html.indexOf('</h1>')
     html = end === -1 ? deck + '\n' + html : html.slice(0, end + 5) + '\n' + deck + html.slice(end + 5)
   }
+  // `pdf: true`: a line linking the page's PDFs, under the deck (or the title) and at the end.
+  if (data.pdf === 'true' && mode.pdfHref !== null) {
+    const line = pdfLine(slug, mode.pdfHref ?? ((n) => `p/${n}`))
+    const deckEnd = html.indexOf('<p class="deck">') === -1 ? -1 : html.indexOf('</p>', html.indexOf('<p class="deck">')) + 4
+    const at = deckEnd > 3 ? deckEnd : html.indexOf('</h1>') === -1 ? 0 : html.indexOf('</h1>') + 5
+    html = html.slice(0, at) + (at > 0 ? '\n' : '') + line + (at > 0 ? '' : '\n') + html.slice(at) + '\n' + line + '\n'
+  }
   let social: Page['social']
   if (data.social) {
     const name = data.social.replace(/^\.\//, '')
@@ -174,6 +191,7 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     ...(data.unlisted === 'true' ? { unlisted: true } : {}),
     ...(data.shop === 'false' ? { noShop: true } : {}),
     ...(data.schema === 'FAQPage' ? { schema: 'FAQPage' as const } : {}),
+    ...(data.pdf === 'true' ? { pdf: true } : {}),
   }
 }
 

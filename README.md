@@ -350,6 +350,12 @@ page sets `images: link`, below):
 - `images: link` links the page's images in the explorer as their copies in `p/` (which every
   explorer build writes beside `index.html`), in place of inlining them, so a picture-heavy
   page does not add its images to the `index.html` every visitor loads. The story pages use it.
+- `pdf: true` offers the page as two PDFs: a line under the deck and another at the end of the
+  page read "Read this as a PDF: phone edition, large-screen edition", in the explorer and in
+  `p/<slug>.html` (not the share page). They link `p/<slug>-phone.pdf` and `p/<slug>-large.pdf`,
+  which `tools/pdf/story_pdf.py` makes (see "Story PDFs"); `isoscape explorer` warns when a page
+  asks for them and they are missing from `<out>/p/`. For a story, set it in
+  `tools/stories/<story>/story.md` and rerun `page.py`.
 - `schema: FAQPage` gives the static page `FAQPage` JSON-LD in place of `Article`. Each heading
   that ends in a question mark is a question, and the text under it, up to the next heading, is
   its answer (`faqEntries` in `src/static-pages.ts`).
@@ -813,6 +819,84 @@ as text with how sure it is, the key, where the trains and streetcars went with 
 the sources and notes, and the note on how the page was drafted. The page names no shop; once
 the sheet's prints sell, add `"<page.slug>": "<product URL>"` to `shop.onSale` and the explorer
 puts a "Buy a print ↗" button on the page.
+
+## Story PDFs
+
+Any content page, a story page above all, can be had as two PDFs, made from the page's own
+Markdown, so a rebuilt page gives a rebuilt PDF:
+
+```sh
+python3 tools/pdf/story_pdf.py <slug>                    # both editions, into out/pdf/
+python3 tools/pdf/story_pdf.py <slug> --edition phone --out <site>/p --date 2026-11-22
+python3 tools/pdf/look.py out/pdf/<slug>-phone.pdf --out out/pdf/look --sample 1,10 --phone-width 390
+```
+
+- **Phone edition** (`<slug>-phone.pdf`): pages of 270 × 480 pt (9:16), one to a screen when a
+  phone's viewer fits the page's width. Body type 17 px on a 360 px page, which a 390 px wide
+  phone shows at 18.4 px; captions and tables 15 px (16.3 px); 1.6 line spacing; about 38
+  characters to a line; each contents entry at least 37 px tall (40 px on that phone).
+- **Large-screen edition** (`<slug>-large.pdf`): US Letter, 0.75 in margins, for a tablet, a
+  laptop or printing. One column of about 70 characters (15.5 px body); pictures wider than
+  tall span the full 7 in, at up to 3,200 px from each picture's `-large` copy.
+
+Both carry the whole page: a title page (title, deck, a picture, Chris Busse, the edition and
+its date, the live address), a contents list with page numbers, every section, figure,
+caption, table and source, and a closing "About this PDF" saying how it was made and where the
+current version lives. Pages are numbered with a running title in the footer (and the live
+address, in the large edition). The PDF is tagged, with an outline of the headings, the page's
+alt text on every picture, real text in Inter (SIL Open Font License; `tools/pdf/fonts/`, made
+by `tools/pdf/fonts.py`) and Libre Baskerville in the timelines, and document facts (title,
+author, subject, keywords, language en-US).
+
+How it works: `tools/pdf/print.ts` compiles the page with the site's own compiler and lays it out
+for print with its own `@page` sizes and stylesheet; headless Chrome prints it (`--print-to-pdf`,
+sandbox on, from `file://`, no server, no network); the contents' page numbers come from a first
+printing; pikepdf writes the document facts. Pictures are saved as JPEG (4:4:4; quality 78 at up
+to 1,440 px for the phone, 82 at up to 3,200 px for the large edition), because Chrome would
+store a WebP without compression. It needs Node, Chrome or Chromium (`$CHROME`), Python 3 with
+Pillow and pikepdf, poppler-utils, and `rsvg-convert` for tall SVGs. It refuses a PDF with a
+font outside the allowed list (Inter, Libre Baskerville), a Type 3 font, or no tags.
+
+What it does to a page, the same for every story, so a new one needs no layout work:
+
+- **Compare sliders** become their two pictures, one after the other, each under its own label
+  ("1937", "Today"), with the caption after the second.
+- **Links**: links within the page stay in the PDF (citations go to their entry in Sources);
+  links to another page, the explorer or a map go to the live site; the lightbox is dropped and
+  figures are simply large.
+- **Wide pictures** on the phone: a picture 1.8 or more times as wide as tall is shown whole
+  across the page, then as its left and right halves (each 55% of the width, so they overlap by
+  10%), each across the page at 1.8 times the size. A picture that comes back later (in a compare
+  figure) is shown whole. Nothing is turned sideways.
+- **Tall pictures** (a timeline) are cut into pieces no taller than a page allows, at blank rows
+  of the picture where there are any, labeled "Fig. N, continued".
+- **Tables** of three or more columns on the phone become a stack: each row's first cell (with the
+  second, when the first is only a number) in bold, then "Column: value" for the rest. In the
+  large edition tables stay tables, their header repeated on each page.
+- **Figures** keep the picture with the start of its caption. A figure that would fill most of a
+  page may break after its picture, so a long caption runs on.
+- **A paragraph that starts "Content note"** is kept on the same page as the start of the
+  paragraph after it (the redlining page relies on this).
+- Road numbers such as I-95 are never broken at the hyphen.
+
+What a page's author must do: nothing beyond writing the page as the site already asks. These
+make a page print well: give every picture real alt text (the PDF carries it); put pictures in
+`::: figure` or `::: compare` blocks with a caption; mark figures `wide` that should span the
+page; give each picture a `-large` copy (3,200 px) where detail matters; keep a table keyed to a
+picture inside its figure; and keep each SVG's text as text (the tool sets its fonts to the
+embedded ones). Then look at every page (`look.py`) before publishing.
+
+**Where the PDFs live.** They are not in git (each is 7 to 25 MB). They are built into the
+site's `p/`, beside `p/<slug>.html`, and published with the rest of `gh-pages`; `isoscape
+explorer` leaves them in place (it removes only `.html` files there). To publish a story's PDFs:
+
+1. `python3 tools/pdf/story_pdf.py <slug> --out ../isoscape-site/p` (both editions; it prints
+   pages, size and fonts, and exits 1 on a problem).
+2. Look at them: `python3 tools/pdf/look.py ../isoscape-site/p/<slug>-phone.pdf --out /tmp/look`.
+3. Set `pdf: true` in the page's front matter (for a story, in `tools/stories/<story>/story.md`,
+   then rerun its `page.py`), commit, and run `node bin/isoscape.js explorer --out
+   ../isoscape-site` as in "Publishing the site".
+4. Rebuild the PDFs whenever the page changes, in the same publish.
 
 ## Making a set
 
