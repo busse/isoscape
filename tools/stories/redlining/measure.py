@@ -6,7 +6,7 @@
 Writes tools/stories/redlining/numbers.json: the one place the story's computed numbers live
 (page.py and charts.py read them; nothing else types them). Inputs, all cached (see sources.md):
 
-  data/holc/richmond-1937.geojson         Mapping Inequality's Richmond polygons (CC BY-NC)
+  the 1937 outlines named in outlines.py  (Mapping Inequality's, CC BY-NC, or a redraw from the scan)
   data/richmond-streetcars/osm.json        OpenStreetMap, fetched November 16, 2026 (ODbL)
   data/richmond-streetcars/yearbuilt.json  City of Richmond, Year_of_Construction parcels
   history/sanborn/jackson-ward-1952.geojson, jackson-ward-lost.geojson   the 1952 trace
@@ -33,6 +33,7 @@ LAT0 = 37.55
 KX = 111320 * math.cos(math.radians(LAT0))
 KY = 111132
 GRADES = ['A', 'B', 'C', 'D']
+from outlines import PATH as GRADES_PATH  # the one switch: outlines.py
 
 
 def xy(lon, lat):
@@ -52,7 +53,7 @@ def proj(geom):
 
 def main():
     root = lambda p: os.path.join(ROOT, p)  # noqa: E731
-    holc = json.load(open(root('data/holc/richmond-1937.geojson')))
+    holc = json.load(open(root(GRADES_PATH)))
     areas = {}
     for f in holc['features']:
         p = f['properties']
@@ -154,6 +155,44 @@ def main():
         inside = [k for k, a in areas.items() if a['geom'].contains(c)]
         courts[nm] = {'osm': f"w{e['id']}", 'in': inside or ['ungraded'], 'm_to_D': round(by['D'].distance(c))}
 
+    # Each D area, and A5 (the worked example's other half): its size, today's dated parcels
+    # (how many the city dates to 1937 or before, to 1938-1977, and to 2000 or later), today's
+    # OSM building outlines whose center falls inside, and limited-access highway inside it.
+    per_area = {}
+    focus = [k for k, a in areas.items() if a['grade'] == 'D'] + ['A5']
+    for k in focus:
+        g = areas[k]['geom']
+        pg = prep(g)
+        c = {'km2': round(g.area / 1e6, 2), 'parcels': 0, 'by1937': 0, 'y1938_1977': 0, 'since2000': 0, 'buildings_osm': 0}
+        for f in yb['features']:
+            y = f['properties'].get('Year_Built')
+            try:
+                pt = shape(f['geometry']).representative_point()
+            except Exception:
+                continue
+            if not pg.contains(Point(xy(pt.x, pt.y))):
+                continue
+            c['parcels'] += 1
+            if isinstance(y, (int, float)) and 1700 < y <= 1937:
+                c['by1937'] += 1
+            elif isinstance(y, (int, float)) and 1938 <= y <= 1977:
+                c['y1938_1977'] += 1
+            if isinstance(y, (int, float)) and y >= 2000:
+                c['since2000'] += 1
+        for e in osm['elements']:
+            if e['type'] != 'way' or 'building' not in e.get('tags', {}) or not e.get('geometry'):
+                continue
+            pts = [xy(q['lon'], q['lat']) for q in e['geometry'] if q]
+            if len(pts) < 3:
+                continue
+            cx_ = sum(p[0] for p in pts) / len(pts); cy_ = sum(p[1] for p in pts) / len(pts)
+            if pg.contains(Point(cx_, cy_)):
+                c['buildings_osm'] += 1
+        c['motorway_km'] = round(sum(ln.intersection(g).length for ln in roads['motorway']) / 1000, 2)
+        for key in ('by1937', 'y1938_1977', 'since2000'):
+            c['share_' + key] = round(c[key] / c['parcels'], 3) if c['parcels'] else None
+        per_area[k] = c
+
     # A check on survival where the 1952 Sanborn sheets were traced (Jackson Ward).
     jw52 = json.load(open(root('history/sanborn/jackson-ward-1952.geojson')))
     jwlost = json.load(open(root('history/sanborn/jackson-ward-lost.geojson')))
@@ -171,6 +210,8 @@ def main():
         'yearbuilt_by_grade': yb_counts, 'courts': courts,
         'courts_note': 'Empty when the OSM cache holds no outline named for the court (true of the November 16, 2026 cache): the brief\'s placements are not yet rechecked here.',
         'jackson_ward_1952_survival': jw,
+        'areas': per_area,
+        'outlines': GRADES_PATH,
     }
     path = os.path.join(HERE, 'numbers.json')
     with open(path, 'w') as fh:

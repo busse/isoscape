@@ -837,7 +837,9 @@ fourteen places they ran to.
    `note` (what is approximate), `credit`, `ground_note` (for a dated set, that the ground is
    today's), `map` (`region`, `year`), `boxes`, an optional
    `key` (up to sixteen names in the title band, from a list in a JSON file, set as a plain list), optional `fine`
-   (extra `build` flags for the single prints, e.g. `["--streetcar-scale", "1.5"]`), and `page`
+   (extra `build` flags for the single prints, e.g. `["--streetcar-scale", "1.5"]`), optional
+   `with` (a history switch every scene is built with, or a map of year to switch, e.g.
+   `{"1937": "grades", "2026": "built"}` for the redlining set's graded ground), and `page`
    (`slug`, `title`, `summary`, `intro`, `how`, `noun`, and an optional `table`).
 4. **Scenes**, where the region's data is cached: `python3 tools/sets/set.py <name> prepare`
    builds each year's SVG into `out/sets/<name>/scenes/` and writes `points.json`.

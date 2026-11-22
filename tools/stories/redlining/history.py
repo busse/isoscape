@@ -22,14 +22,14 @@ import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
-GRADES = 'data/holc/richmond-1937.geojson'
+from outlines import PATH as GRADES, CREDIT  # the one switch: outlines.py
 SOURCE_MI = 'https://dsl.richmond.edu/panorama/redlining/static/citiesData/VARichmond1937/geojson.json'
 SOURCE_NARA = 'https://catalog.archives.gov/id/720357'
 
 LEGEND = {
     'title': "The Home Owners' Loan Corporation's grades, 1937, in its own words",
     'labels': ['A "Best"', 'B "Still Desirable"', 'C "Definitely Declining"', 'D "Hazardous"'],
-    'source': 'Grades: HOLC, 1937 (National Archives, RG 195), as digitized by Mapping Inequality, University of Richmond Digital Scholarship Lab (CC BY-NC)',
+    'source': CREDIT,
 }
 
 

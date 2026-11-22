@@ -70,6 +70,13 @@ class Set:
         n = f'{region}-{year}' if year is not None else region
         return os.path.join(self.dir, 'scenes', n + ('-fine' if fine else '') + '.svg')
 
+    def switches(self, year):
+        """`--with` for a year's scenes: the set's `with`, a switch name for every year or a map
+        of year to switch name (a story set drawn over a series' switch, e.g. graded ground)."""
+        w = self.cfg.get('with')
+        w = w.get(str(year)) if isinstance(w, dict) else w
+        return ['--with', w] if w else []
+
     def key_items(self):
         k = self.cfg.get('key')
         if not k: return []
@@ -87,7 +94,7 @@ def prepare(S):
         for is_fine in ([False, True] if fine else [False]):
             with tempfile.TemporaryDirectory() as t:
                 cmd = ['node', 'bin/isoscape.js', 'build', region, '--no-archive', '--out', t] + \
-                      (['--year', str(year)] if year is not None else []) + (fine if is_fine else [])
+                      (['--year', str(year)] if year is not None else []) + (fine if is_fine else []) + S.switches(year)
                 subprocess.run(cmd, cwd=ROOT, check=True, capture_output=True)
                 src = os.path.join(t, (f'{region}-{year}' if year is not None else region) + '.svg')
                 shutil.move(src, S.svg(region, year, is_fine))

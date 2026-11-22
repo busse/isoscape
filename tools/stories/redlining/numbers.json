@@ -126,5 +126,164 @@
   "gone_today": 2744,
   "standing_today": 414,
   "share_standing": 0.131
- }
+ },
+ "areas": {
+  "D1": {
+   "km2": 2.47,
+   "parcels": 1274,
+   "by1937": 715,
+   "y1938_1977": 223,
+   "since2000": 228,
+   "buildings_osm": 1732,
+   "motorway_km": 5.42,
+   "share_by1937": 0.561,
+   "share_y1938_1977": 0.175,
+   "share_since2000": 0.179
+  },
+  "D10": {
+   "km2": 0.33,
+   "parcels": 237,
+   "by1937": 132,
+   "y1938_1977": 58,
+   "since2000": 19,
+   "buildings_osm": 435,
+   "motorway_km": 0.0,
+   "share_by1937": 0.557,
+   "share_y1938_1977": 0.245,
+   "share_since2000": 0.08
+  },
+  "D11": {
+   "km2": 0.34,
+   "parcels": 238,
+   "by1937": 130,
+   "y1938_1977": 14,
+   "since2000": 84,
+   "buildings_osm": 368,
+   "motorway_km": 0.0,
+   "share_by1937": 0.546,
+   "share_y1938_1977": 0.059,
+   "share_since2000": 0.353
+  },
+  "D11.5": {
+   "km2": 1.41,
+   "parcels": 1230,
+   "by1937": 476,
+   "y1938_1977": 528,
+   "since2000": 218,
+   "buildings_osm": 2060,
+   "motorway_km": 0.0,
+   "share_by1937": 0.387,
+   "share_y1938_1977": 0.429,
+   "share_since2000": 0.177
+  },
+  "D2": {
+   "km2": 0.54,
+   "parcels": 308,
+   "by1937": 53,
+   "y1938_1977": 222,
+   "since2000": 8,
+   "buildings_osm": 587,
+   "motorway_km": 0.0,
+   "share_by1937": 0.172,
+   "share_y1938_1977": 0.721,
+   "share_since2000": 0.026
+  },
+  "D3": {
+   "km2": 0.88,
+   "parcels": 27,
+   "by1937": 0,
+   "y1938_1977": 25,
+   "since2000": 1,
+   "buildings_osm": 715,
+   "motorway_km": 0.0,
+   "share_by1937": 0.0,
+   "share_y1938_1977": 0.926,
+   "share_since2000": 0.037
+  },
+  "D4": {
+   "km2": 0.28,
+   "parcels": 326,
+   "by1937": 164,
+   "y1938_1977": 140,
+   "since2000": 7,
+   "buildings_osm": 572,
+   "motorway_km": 0.0,
+   "share_by1937": 0.503,
+   "share_y1938_1977": 0.429,
+   "share_since2000": 0.021
+  },
+  "D5": {
+   "km2": 3.36,
+   "parcels": 1629,
+   "by1937": 723,
+   "y1938_1977": 715,
+   "since2000": 109,
+   "buildings_osm": 3557,
+   "motorway_km": 3.31,
+   "share_by1937": 0.444,
+   "share_y1938_1977": 0.439,
+   "share_since2000": 0.067
+  },
+  "D6": {
+   "km2": 2.33,
+   "parcels": 2955,
+   "by1937": 2016,
+   "y1938_1977": 522,
+   "since2000": 273,
+   "buildings_osm": 3881,
+   "motorway_km": 0.0,
+   "share_by1937": 0.682,
+   "share_y1938_1977": 0.177,
+   "share_since2000": 0.092
+  },
+  "D7": {
+   "km2": 0.94,
+   "parcels": 385,
+   "by1937": 34,
+   "y1938_1977": 88,
+   "since2000": 105,
+   "buildings_osm": 666,
+   "motorway_km": 0.0,
+   "share_by1937": 0.088,
+   "share_y1938_1977": 0.229,
+   "share_since2000": 0.273
+  },
+  "D8": {
+   "km2": 1.28,
+   "parcels": 1374,
+   "by1937": 584,
+   "y1938_1977": 151,
+   "since2000": 284,
+   "buildings_osm": 1445,
+   "motorway_km": 3.88,
+   "share_by1937": 0.425,
+   "share_y1938_1977": 0.11,
+   "share_since2000": 0.207
+  },
+  "D9": {
+   "km2": 0.47,
+   "parcels": 393,
+   "by1937": 10,
+   "y1938_1977": 373,
+   "since2000": 7,
+   "buildings_osm": 586,
+   "motorway_km": 0.0,
+   "share_by1937": 0.025,
+   "share_y1938_1977": 0.949,
+   "share_since2000": 0.018
+  },
+  "A5": {
+   "km2": 2.49,
+   "parcels": 570,
+   "by1937": 89,
+   "y1938_1977": 437,
+   "since2000": 10,
+   "buildings_osm": 751,
+   "motorway_km": 0.71,
+   "share_by1937": 0.156,
+   "share_y1938_1977": 0.767,
+   "share_since2000": 0.018
+  }
+ },
+ "outlines": "data/holc/richmond-1937.geojson"
 }
