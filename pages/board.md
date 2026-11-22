@@ -9,13 +9,13 @@ unlisted: true
 
 Every piece of work on isoscape, from a first look at a subject to a print for sale, moves through the same stages: rough draft, working draft, final draft and final production. A version number in a print's title block is given only at final production, and names an edition someone could own. Before that, work is counted in draft rounds (d1, d2) and release candidates (rc1, rc2). The rules are in [Changes](changes.md#how-versions-work-from-here) and [How it's made](how-its-made.md#stages-and-inspection).
 
-This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 21, 2026. The page and the board were set up with Claude.
+This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 22, 2026. The page and the board were set up with Claude.
 
 | Stage | Entries |
 |---|---|
 | research | 1 |
-| working draft | 1 |
-| final production | 45 |
+| final production | 46 |
+| in work | 4 |
 | live | 2 |
 | on hold | 55 |
 | blocked | 1 |
@@ -23,6 +23,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
+- **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
 ## Research
@@ -30,12 +31,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Data visualization: why is there a Dollar General on the edge of town? (Virginia) | story | — | no |
-
-## Working draft
-
-| Plate | Title | Kind | Version | On sale |
-|---|---|---|---|---|
-| — | The Byrd Theatre: Cutaway | cutaway | 1.0.0-d3 | no |
 
 ## Final production
 
@@ -60,6 +55,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | BSS·15 | Broad Street Station, 1943: The Cutaway | cutaway | 1.0.0 | yes, version 1 |
 | BSS·16 | Scott's Addition, Broad Street Station 1943 | set box | 1.0.0 | yes, version 1 |
 | BSS·M | Broad Street Station, 1943: The Railroad Map | set map | 3.1.0 | yes, version 3 |
+| BYRD·01 | The Byrd Theatre: Cutaway | cutaway | 1.0.0 | yes, version 1 |
 | GWY·01 | Gwynn's Island | print | 4.0.0 | yes, version 4 |
 | MSS·01 | Main Street Station, about 1952: Cutaway | cutaway | 1.0.0 | yes, version 1 |
 | RVA·01 | Richmond, 1925 | print | 5.0.0 | yes, version 5 |
@@ -86,6 +82,15 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | STC·13 | The Fan, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·14 | Broad and Laurel, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·M | Richmond's Streetcars, 1925: The System Map | set map | 4.0.0 | yes, version 4 |
+
+## In work
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Explorer: information architecture pass (grouped page menu, builds out of the left column) | site | — | no |
+| — | Shop: default to the unframed print, curated collections and sort order, story and set links, menu | site | — | no |
+| — | Shop: product template, hero layouts for the four cutaways and four collections, Richmond descriptions, place-first titles | site | — | no |
+| — | Shop: from holiday shop to a continuing shop with a holiday promotion; Coming soon, The 2026 Annual; room for photography | site | — | no |
 
 ## Live
 
@@ -126,6 +131,7 @@ Small faults seen only up close are listed here, so they are known and not repor
 
 - **The Byrd Park Pump House: Cutaway** (BPPH·01): main view: callout 8's dot falls just west of the visible suction, on the west wheel; main view: callout 3's dot sits on a girder member just in front of the penstock; main view: callout 11's dot lies on the floor edge under the main, which shows only as a thin strip; main view: the west tailrace mouth shows its tunnel dry, with a stray inner line, where the others show water; map panel: the label The New Pump-House crosses the canal line; map panel: the label canal below the locks crosses the canal line and the cemetery's edge; pump section: badge 11 stands on the main's band, its dot on an arrowhead; pump section: badge 8 covers where the blue line leaves the forebay; main view: the west wing's end-wall lancets show as slivers (handoff known fault); main view: the penstocks are square in section (handoff known fault); pump section: the pumped line crosses the forebay wall schematically; callout 8 gives the real intake (handoff known fault).
 - **C.F. Sauer Company, Broad Street Station 1943** (BSS·06): a present-day street is drawn meeting a 1940 building beside the freight track.
+- **The Byrd Theatre: Cutaway** (BYRD·01): the West Cary Street label covers the foot of the front east corner and sits close to the drawing bottom edge; the key splits "5 ft 9 in" across two lines; numbers 4 and 8 almost touch on the route line in the long section; the COAL ROOM label nearly touches number 17 in the cross section; number 13 (Walls) sits on the dome rim in the main drawing; at 24 x 18 the collection, set and piece line wraps to two lines set tight under its label; callout 18 wording "remembers the building shudder slightly" is awkward.
 - **Main Street Station, about 1952: Cutaway** (MSS·01): track floor drawn 0.7 m high (6.5 m above the ground floor; the 1900 section and HABS VA-848-10 give 19 ft, 5.8 m): about 0.4 mm on the 32 in print, not visible at arm's length; correct in a later edition if the model is reworked; callout 10 dot on a shed diagonal in front of the C&O engine; callout 11 dot on a truss member over the Seaboard diesel; badge 7 stands over the red route at the arcade; main view: the route is hidden on the stair and doubles back in the waiting room, two red lines leaving the traveler; flat section: callout 6 dot on the lunch counter, barely seen behind the glass screen.
 - **Richmond's Streetcars, 1925: The Lines and Fourteen Stops** (STC·00): a stray rock mark in the river; card 5 says "over the Fifth Street viaduct", a viaduct outside box 5's frame.
 - **Westhampton Park, Richmond Streetcars 1925** (STC·01): the line runs beside Three Chopt Road on its own strip (approximate, by design).

@@ -1,7 +1,7 @@
 {
  "about": "The production board: one entry per design or piece of work. The scheme is README \"Stages and the board\"; edit it with `tools/release/board.py set`; `board.py check` validates it.",
  "scheme": "README.md#stages-and-the-board",
- "updated": "2026-11-21",
+ "updated": "2026-11-22",
  "sources": "backfilled November 18, 2026 from catalog/plates.json, releases/ (latest record per design) and the storefront (https://chrisbusse.com/products.json: 39 products live). Orders are \"unknown\" until the store's orders.py has been run.",
  "items": {
   "broad-street-1943-01-ay-tower": {
@@ -2728,32 +2728,62 @@
    "orders_counted": "2026-11-18"
   },
   "byrd-1928-cutaway": {
-   "plate": null,
+   "plate": "BYRD-01",
    "status": "active",
-   "asset_version": "1.0.0-d3",
-   "published_version": null,
-   "live_version": null,
-   "on_sale": false,
-   "orders": null,
-   "rounds": 3,
-   "waiting_on": "agent",
-   "decision": "d4 in work (2026-11-21): every callout checked against its source by an agent that did not write it (four misattributions to Style Weekly 2014 found by the planning session, in d3/style-weekly-check.md), layout enlarged, seat band thinned. Planning session's calls on d3's questions: spring room house right (approximate), pond 30 ft, BYRD sign lettered, cross section kept and enlarged. The foundation's 2024 report is the owner's to ask for.",
-   "accepted_faults": [],
+   "asset_version": "1.0.0",
+   "published_version": 1,
+   "live_version": 1,
+   "on_sale": true,
+   "orders": 0,
+   "rounds": 0,
+   "waiting_on": "nothing",
+   "decision": null,
+   "accepted_faults": [
+    {
+     "what": "the West Cary Street label covers the foot of the front east corner and sits close to the drawing bottom edge"
+    },
+    {
+     "what": "the key splits \"5 ft 9 in\" across two lines"
+    },
+    {
+     "what": "numbers 4 and 8 almost touch on the route line in the long section"
+    },
+    {
+     "what": "the COAL ROOM label nearly touches number 17 in the cross section"
+    },
+    {
+     "what": "number 13 (Walls) sits on the dome rim in the main drawing"
+    },
+    {
+     "what": "at 24 x 18 the collection, set and piece line wraps to two lines set tight under its label"
+    },
+    {
+     "what": "callout 18 wording \"remembers the building shudder slightly\" is awkward"
+    }
+   ],
    "planned_edition": null,
-   "last_inspected": "21911e5",
-   "branch": "cutaway-byrd",
-   "worktree": "/home/claude/wt-byrd",
+   "last_inspected": "a7ed2fe",
+   "branch": null,
+   "worktree": null,
    "links": [
-    "/mnt/user-data/outputs/cutaway/byrd/sheet.png",
-    "/mnt/user-data/outputs/cutaway/byrd/sources.md",
-    "/mnt/user-data/outputs/cutaway/holiday-cutaway.md",
-    "cutaways/byrd-1928.json (on the branch)"
+    "releases/byrd-1928-cutaway/v1.json",
+    "cutaways/byrd-1928.json",
+    "/mnt/user-data/outputs/cutaway/byrd/rc1/inspection.md",
+    "/mnt/user-data/outputs/cutaway/byrd/release/release.md",
+    "/mnt/user-data/outputs/cutaway/byrd/sources.md"
    ],
    "title": "The Byrd Theatre: Cutaway",
    "kind": "cutaway",
-   "stage": "working draft",
+   "stage": "final production",
    "notes": "open: a source for the segregation caption; the 78% figure is approximate; the notes block is long. Holiday piece.",
-   "budget_note": "owner approved a third round (2026-11-21) and then a fourth: 'move forward with all deliberate speed' after the Style Weekly check"
+   "budget_note": null,
+   "log": [
+    "2026-11-21: working draft -> final draft",
+    "2026-11-21: plate BYRD-01 assigned; rc1 stamped as the release-candidate proof (blockFace inside the holly border); inspection not yet run",
+    "2026-11-22: owner approved release (\"Yes, release it\"; plate BYRD-01 kept as assigned); final prints re-made at a7ed2fe, the same art as rc1 (sheet SVG 6a198a37, print files byte for byte the rc1 run)",
+    "2026-11-22: final draft -> final production"
+   ],
+   "released": "2026-11-22"
   },
   "main-street-1952-cutaway": {
    "plate": "MSS-01",
@@ -3041,21 +3071,24 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "nothing",
-   "decision": "second in order; begins after Jackson Ward's working draft",
+   "waiting_on": "agent",
+   "decision": "Owner answered the nine outline questions 2026-11-22 (outputs/stories/redlining/working/decisions.md): HOLC colors; title \"Redlining in Richmond: the 1937 federal mortgage map, drawn on the ground it graded\"; Windsor Farms and Jackson Ward pair; ends 1977 (an addendum may follow); twelve D boxes yes; the D11.5 slur quoted once, attributed, after a check against the scan; redraw the polygons from the scan and compare before the license decision; explorer story page, unlisted. Working draft in progress.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
-   "branch": null,
+   "branch": "story-redlining",
    "worktree": null,
    "links": [
     "/mnt/user-data/outputs/stories/redlining/brief.md"
    ],
    "title": "Redlining in Richmond, 1937 to today",
    "kind": "story",
-   "stage": "research",
-   "notes": "editorial first: a web story, perhaps a book; prints are not the goal",
-   "private": true
+   "stage": "outline",
+   "notes": "Reader (owner, 2026-11-22): assume no prior knowledge of the HOLC, grading or redlining; a reader who knows the subject should still learn from the detail and the way it is drawn. See section 0 of rough/outline.md.",
+   "private": true,
+   "log": [
+    "2026-11-21: research -> outline"
+   ]
   },
   "story-slave-trade": {
    "plate": null,
@@ -3181,6 +3214,102 @@
    "links": [],
    "log": [
     "2026-11-21: rough draft -> research"
+   ]
+  },
+  "shop-curation-phase-1": {
+   "title": "Shop: default to the unframed print, curated collections and sort order, story and set links, menu",
+   "plate": null,
+   "kind": "site",
+   "stage": "in work",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "owner",
+   "decision": "Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-22: rough draft -> in work"
+   ]
+  },
+  "shop-positioning-annual": {
+   "title": "Shop: from holiday shop to a continuing shop with a holiday promotion; Coming soon, The 2026 Annual; room for photography",
+   "plate": null,
+   "kind": "site",
+   "stage": "in work",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "agent",
+   "decision": "Owner decisions 2026-11-22: the shop stays open after December 31 and will carry photography; the Annual says \"soon\"; Byrd Theatre explored as the December hero. Replaces the earlier rule to leave the holiday wording alone. Wording options come to the owner.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-22: rough draft -> in work"
+   ]
+  },
+  "shop-landing-pages": {
+   "title": "Shop: product template, hero layouts for the four cutaways and four collections, Richmond descriptions, place-first titles",
+   "plate": null,
+   "kind": "site",
+   "stage": "in work",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "agent",
+   "decision": "After phases 1 and 2. Cutaways-only Buildings in Their Time and place-first titles approved by the owner 2026-11-22.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-22: rough draft -> in work"
+   ]
+  },
+  "explorer-ia": {
+   "title": "Explorer: information architecture pass (grouped page menu, builds out of the left column)",
+   "plate": null,
+   "kind": "site",
+   "stage": "in work",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "agent",
+   "decision": "Owner 2026-11-22: the menu list at the upper left is getting long and the left column feels overloaded; the shop banner stays. Proposal in REVIEW.md; a clickable local preview comes before any build.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-22: rough draft -> in work"
    ]
   }
  }

@@ -65,6 +65,11 @@
    "code": "BPPH",
    "name": "Byrd Park Pump House, 1885",
    "collection": "buildings"
+  },
+  {
+   "code": "BYRD",
+   "name": "The Byrd Theatre, 1928",
+   "collection": "buildings"
   }
  ],
  "registered": "2026-11-15",
@@ -777,6 +782,14 @@
    "title": "The New Pump-House, Richmond, about 1885: Cutaway",
    "piece": "Cutaway",
    "place": "Byrd Park Pump House",
+   "kind": "Building cutaway"
+  },
+  {
+   "plate": "BYRD-01",
+   "design": "byrd-1928-cutaway",
+   "title": "The Byrd Theatre, Christmas Eve 1928: Cutaway",
+   "piece": "Cutaway",
+   "place": "Byrd Theatre",
    "kind": "Building cutaway"
   }
  ]

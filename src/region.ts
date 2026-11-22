@@ -134,7 +134,11 @@ export interface Cutaway {
   readonly keep?: number
   /** Id prefix of the parts that are cut (default: every modeled part). */
   readonly parts?: string
-  /** Items lifted away whole even though they are not cut (a shed over the nearest platform): regular expressions on item ids. */
+  /**
+   * Items lifted away whole even though they are not cut (a shed over the nearest platform, or a
+   * neighbor in front of the cut): regular expressions on item ids, or on OSM building ids (w123).
+   * A modeled part named here (history:<id>) is lifted from the cutaway but kept in the section.
+   */
   readonly lift?: readonly string[]
   /**
    * Outline, dashed on the ground, the removed side of the union of these parts' footprints
@@ -176,6 +180,11 @@ export interface Cutaway {
     readonly scale?: number
     /** Floor of the earth drawn under the section, in meters below the lowest ground. */
     readonly earth?: number
+    /**
+     * Dig the earth square at the ends of what the cut puts below the ground (it is sampled every
+     * 0.5 m, so without this a dug edge between two samples is a slope, with sky above it).
+     */
+    readonly squareEarth?: boolean
     /** The traveler's path: points [meters along the plane, elevation in meters above sea level]. */
     readonly route?: readonly (readonly [number, number])[]
     /** The second way (`cutaway.pumped`), in the palette's `pumped` color: points as `route`'s. */

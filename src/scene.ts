@@ -893,9 +893,17 @@ export const buildScene = (
   let modelOnWater = 0
   let footprintsDrawn = 0
   let datedFromParcels = 0
+  // A cutaway lifts away whole any building its `lift` names (OSM ids, such as w236026091): a
+  // neighbor on the side lifted away that would stand in front of the cut.
+  const liftBuildings = (region.cutaway?.lift ?? []).map((r) => new RegExp(r))
+  let liftedBuildings = 0
   for (const s of shown) {
     if (!inFrame(s)) continue
     if (sites.length > 0 && sites.some((r) => pointInRing(centroid(s.outer), r))) continue
+    if (liftBuildings.some((r) => r.test(s.id))) {
+      liftedBuildings++
+      continue
+    }
     if (s.tags.source === 'microsoft' && onWater(sc, centroid(s.outer))) {
       modelOnWater++
       continue
@@ -964,6 +972,7 @@ export const buildScene = (
     if (isBridgeTower(s.tags)) towerParts.push({ at: centroid(outer), top })
   }
   if (modelOnWater > 0) stats.footprintsOnWater = modelOnWater
+  if (liftedBuildings > 0) stats.liftedBuildings = liftedBuildings
   stats.footprintsDrawn = footprintsDrawn
   if (time !== undefined) stats.datedFromParcels = datedFromParcels
   const prisms = entries.flatMap((e) => ('prism' in e ? [e.prism] : []))

@@ -160,6 +160,30 @@ test('the section path stops short of what it must not cross, and leaves no scra
   assert.ok(head[0][0] > head[1][0])
 })
 
+test('the land tone stands for the ground: filled in its color, with no ink', async () => {
+  const { partTones } = await import('../src/cutaway-scene.ts')
+  const { palette } = await import('../src/palette.ts')
+  const pal = palette('winter')
+  const tones = partTones(pal, { tone: 'land' } as never)
+  assert.equal(tones.ink, false)
+  assert.equal(tones.lit, pal.land)
+  const view = { squash: 0.6, toScreen: ([e, n]: Vec2, z = 0) => [e * 10, -n * 6 - z * 8] } as unknown as View
+  const item = solidItem(view, tones, 'g', [prism(box, -2, 0)])
+  assert.ok(item !== null && item.shapes.every((s) => s.ink !== true && s.fill === pal.land))
+  assert.notEqual(partTones(pal, { tone: 'brick' } as never).ink, false)
+})
+
+test('a traveler on a palette with a route halo stands over a light outline; without one, not', async () => {
+  const { travelerItem } = await import('../src/cutaway-scene.ts')
+  const { palette } = await import('../src/palette.ts')
+  const view = { scale: 10, squash: 0.6, toScreen: ([e, n]: Vec2, z = 0) => [e * 10, -n * 6 - z * 8] } as unknown as View
+  const winter = travelerItem(view, palette('winter'), 't', [0, 0], 0, 1)
+  const halos = winter.shapes.filter((s) => s.line === true)
+  assert.ok(halos.length > 0 && halos.every((s) => s.stroke?.color === palette('winter').routeHalo))
+  assert.equal(winter.shapes.indexOf(halos[0]), 0)
+  assert.equal(travelerItem(view, palette('paper'), 't', [0, 0], 0, 1).shapes.filter((s) => s.line === true).length, 0)
+})
+
 test('a piece of a hipped roof keeps the whole roof\'s slopes', async () => {
   const { roofPiece, roofSolid } = await import('../src/cutaway-scene.ts')
   // A hip 30 m by 18 m, 0 to 9 m: the ridge runs 12 m, from x = 9 to x = 21.
@@ -176,4 +200,20 @@ test('a piece of a hipped roof keeps the whole roof\'s slopes', async () => {
   const west = roofPiece(whole, [[0, 10], [6, 10], [6, 18], [0, 18]], 0, 9)
   assert.ok(Math.abs(top(west) - 6) < 1e-6)
   assert.equal(west.faces.filter((f) => f.role === 'cut').length, 0)
+})
+
+test('the 1928 patrons stand at the stated height, hats aside; the seated figure is lower and reaches forward', async () => {
+  const { travelerShapes } = await import('../src/traveler.ts')
+  const top = (f: Parameters<typeof travelerShapes>[1]) => Math.max(...travelerShapes(1.75, f).flat().map((p) => p[1]))
+  const front = (f: Parameters<typeof travelerShapes>[1]) => Math.max(...travelerShapes(1.75, f).flat().map((p) => p[0]))
+  assert.ok(Math.abs(top('visitor') - 1.75) < 0.01)
+  // The cloche sits on the head; the brimmed hat stands a little above it.
+  assert.ok(top('patron') > 1.75 && top('patron') < 1.8)
+  assert.ok(top('patron-hat') > 1.8 && top('patron-hat') < 1.86)
+  // Every figure stands on the floor.
+  for (const f of ['patron', 'patron-hat', 'seated'] as const) {
+    assert.ok(Math.abs(Math.min(...travelerShapes(1.75, f).flat().map((p) => p[1]))) < 1e-9, f)
+  }
+  assert.ok(top('seated') < 1.5)
+  assert.ok(front('seated') > 0.35)
 })
