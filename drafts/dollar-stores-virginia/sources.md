@@ -24,6 +24,8 @@ Raw downloads stay out of git. Each line: what, URL, date fetched, size, SHA-256
 | FHWA HPMS 2024 Spatial All Sections, Virginia, f_system 1-6 with AADT (262,439 sections, 6 GeoJSON pages) | https://data.transportation.gov/resource/42um-tgh5.geojson (where stateid=51) | 2026-11-21 | archive 28,078,095 B | raw/hpms/va2024.sha256 on the Mac | Public Domain U.S. Government (dataset metadata) |
 | FHWA HPMS Virginia shapefiles 2012, 2014, 2015, 2016 | https://www.fhwa.dot.gov/policyinformation/hpms/shapefiles/virginia<year>.zip | 2026-11-21 | 39,058,420 / 185,087,392 / 287,747,546 / 266,399,970 B | raw/hpms/hist.sha256 on the Mac; the 2016 DBF is truncated at the source (declares 4,381,672,890 B, holds 2,147,485,719) | US government work |
 | Planning district membership | https://www.vapdc.org/pdc-directory (opened, not downloaded) | 2026-11-21 | | | Facts, used in regions.json |
+| Census 2024 cartographic boundary counties, US, 1:500k (Virginia used for the poster's regions and locator) | https://www2.census.gov/geo/tiger/GENZ2024/shp/cb_2024_us_county_500k.zip | 2026-11-22 | 11,626,066 B | da4051717caec55c75e3748c3608c2a3dbde8d1ff401bbaf4f952e3c3fb63ef1 | Public domain |
+| Libre Baskerville (the prints' typeface, already in the repo) | tools/print/fonts, converted woff to TTF for matplotlib | 2026-11-22 | | | SIL Open Font License (tools/print/fonts/OFL.txt) |
 
 Raw files are kept on the Mac in `ISO-TEST/isoscape-work/dollar-stores/raw/`.
 

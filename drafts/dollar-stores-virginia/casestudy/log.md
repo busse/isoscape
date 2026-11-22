@@ -355,3 +355,20 @@ Folder: `2026-11-21-10-poster-rough/`, with `notes.md`.
   - An honesty panel.
 - **Rounds.** Three. Every number is computed from the test outputs. The board has a new
   print entry, `viz-dollar-stores-virginia-poster`, at rough draft.
+
+## Step 11: the editorial poster, working draft d1 (November 22, 08:02-08:40)
+
+Folder: `2026-11-22-11-poster-d1/`, with `notes.md`, five rounds and the rough draft's script.
+
+- **Chris (08:02).** "continue with your thoughts. don't make the text copy read like AI wrote
+  it. Use a freshman college level educational writing style". Read as "worth pursuing".
+- **What changed.**
+  - The grid is grouped by the five regions, west to east, with a locator map in the header.
+  - The type is Libre Baskerville, the prints' own face.
+  - The bottom gap is closed.
+  - All text is rewritten in a plain teaching voice.
+- **Errors found and fixed.**
+  - The rough deck put the six-state counts in Virginia.
+  - It said edge stores "are found" at highway junctions, when 17 percent are.
+- **Rounds.** Five, all layout. Board: `viz-dollar-stores-virginia-poster` at working draft,
+  `1.0.0-d1`.

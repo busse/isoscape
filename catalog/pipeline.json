@@ -1,7 +1,7 @@
 {
  "about": "The production board: one entry per design or piece of work. The scheme is README \"Stages and the board\"; edit it with `tools/release/board.py set`; `board.py check` validates it.",
  "scheme": "README.md#stages-and-the-board",
- "updated": "2026-11-21",
+ "updated": "2026-11-22",
  "sources": "backfilled November 18, 2026 from catalog/plates.json, releases/ (latest record per design) and the storefront (https://chrisbusse.com/products.json: 39 products live). Orders are \"unknown\" until the store's orders.py has been run.",
  "items": {
   "broad-street-1943-01-ay-tower": {
@@ -3188,23 +3188,27 @@
    "title": "Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36)",
    "plate": null,
    "kind": "print",
-   "stage": "rough draft",
+   "stage": "working draft",
    "status": "active",
-   "asset_version": null,
+   "asset_version": "1.0.0-d1",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 3,
+   "rounds": 1,
    "waiting_on": "owner",
-   "decision": "Rough draft r3 in _preview/dollar-stores/poster/: 30 Virginia edge stores as traffic heat-map squares, three six-state charts, honesty panel. Owner: worth pursuing?",
+   "decision": "Working draft d1 (r5) in _preview/dollar-stores/poster/: grid by region with a locator map, Libre Baskerville, text rewritten in a plain teaching voice; two rough-draft errors fixed (six-state counts were placed in Virginia; junction claim overstated). Owner: approve the look, or say what to change.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
    "branch": "viz/dollar-stores-virginia",
    "worktree": null,
    "links": [
-    "drafts/dollar-stores-virginia/casestudy/2026-11-21-10-poster-rough/notes.md"
+    "drafts/dollar-stores-virginia/casestudy/2026-11-21-10-poster-rough/notes.md",
+    "drafts/dollar-stores-virginia/casestudy/2026-11-22-11-poster-d1/notes.md"
+   ],
+   "log": [
+    "2026-11-22: rough draft -> working draft"
    ]
   }
  }
