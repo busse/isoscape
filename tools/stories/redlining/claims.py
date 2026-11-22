@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Every sentence of the redlining page, with what it cites, for the fact check.
 
-    python3 tools/stories/redlining/claims.py OUT.csv [--findings FINDINGS.csv]
+    python3 tools/stories/redlining/claims.py OUT.csv [--compare EARLIER.md] [--findings FINDINGS.csv]
 
 With --findings (the independent check's findings.csv, keyed by the earlier draft's row
 numbers), each finding is carried to the sentence of this page most like the one it was made on,
@@ -27,21 +27,23 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 SCAN = 'https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/ad_RichmondVA.pdf'
 # Scan pages of the area descriptions (read November 22, 2026), and of the forms' headings.
-PAGE = {'A5': 5, 'C7': 29, 'D1': 37, 'D2': 38, 'D3': 39, 'D4': 40, 'D5': 41, 'D6': 42, 'D7': 43,
+PAGE = {'A5': 5, 'C4': 26, 'C7': 29, 'D1': 37, 'D2': 38, 'D3': 39, 'D4': 40, 'D5': 41, 'D6': 42, 'D7': 43,
         'D8': 44, 'D9': 45, 'D10': 46, 'D11.5': 47, 'D11': 48}
 FORM_KEYS = ('HOLC area description', 'FRASER, Richmond area descriptions')
 
 
 def sources(text):
-    """{key: (urls, opened)} from the Sources section's `- **key**: …` entries."""
+    """{key: (urls, opened)} from the Sources section: from d5 each entry is an H4 (`#### key`)
+    followed by its text; earlier drafts used `- **key**: …` list items, still read."""
     sec = text[text.index('\n## Sources'):]
     sec = sec[:sec.index('\n## ', 5)] if '\n## ' in sec[5:] else sec
     out = {}
-    for m in re.finditer(r'^- \*\*([^*\n]+?)\*\*[^\n:]*:(.*?)(?=^- \*\*|\Z)', sec, flags=re.S | re.M):
+    pat = r'^#### (.+?)\n(.*?)(?=^#### |\Z)' if '\n#### ' in sec else r'^- \*\*([^*\n]+?)\*\*[^\n:]*:(.*?)(?=^- \*\*|\Z)'
+    for m in re.finditer(pat, sec, flags=re.S | re.M):
         body = ' '.join(m.group(2).split())
-        urls = re.findall(r'https?://[^\s),;]+', body)
-        op = re.findall(r'(?:opened|downloaded|fetched|read on the scan|cached)[^;.)]*\d{4}', body)
-        out[m.group(1)] = (' '.join(u.rstrip('.') for u in urls), '; '.join(op))
+        urls = re.findall(r'https?://[^\s),;>]+', body)
+        op = re.findall(r'(?:opened|downloaded|fetched|read on the scan|read|cached)[^;.)]*\d{4}', body)
+        out[m.group(1).strip()] = (' '.join(u.rstrip('.') for u in urls), '; '.join(op))
     return out
 
 
@@ -52,7 +54,7 @@ def sentences(block):
     parts, cur = [], ''
     for tok in re.split(r'(\s+)', block):
         cur += tok
-        if re.search(r'[.!?]["”)\]]?$', tok) and not re.search(r'(\b(St|v|vol|ch|p|pp|No|Jr|Dr|Mr|etc)\.|\b[A-Z]\.)$', tok):
+        if re.search(r'[.!?]["”)\]]?$', tok) and not re.search(r'(\b(St|v|vol|ch|p|pp|No|Jr|Dr|Mr|etc|al)\.|\b[A-Z]\.)$', tok):
             parts.append(cur); cur = ''
     parts.append(cur)
     return [p.strip() for p in parts if re.search(r'[A-Za-z]{3}', p)]
@@ -113,6 +115,8 @@ def main():
             if not re.match(r'^\|[-| ]+\|$', st):
                 rows.append((section, 'table row', ' | '.join(c.strip() for c in st.strip('|').split('|'))))
             continue
+        if st.startswith('> ') and kind == 'notice':
+            buf.append(st[2:]); continue
         if st.startswith('- ') or st.startswith('> '):
             flush(); kind = 'list item' if st.startswith('- ') else 'notice'
             buf.append(st[2:]); continue
@@ -122,16 +126,31 @@ def main():
     flush()
 
     placed = carry(rows, findings) if findings else {}
+    # --compare OLD.md: how each sentence stands against an earlier draft's page.
+    before = []
+    if '--compare' in sys.argv:
+        old_text = open(sys.argv[sys.argv.index('--compare') + 1]).read()
+        old_text = old_text[:old_text.index('\n## Sources')]
+        before = [re.sub(r'\W+', ' ', x).lower() for x in sentences(re.sub(r'\]\(#[a-z0-9-]+\)', '](#)', old_text))]
+
+    def versus(sent):
+        if not before:
+            return ''
+        nrm = re.sub(r'\W+', ' ', re.sub(r'\]\(#[a-z0-9-]+\)', '](#)', sent)).lower()
+        if nrm in before:
+            return 'same'
+        r = max(difflib.SequenceMatcher(None, nrm, b, autojunk=False).ratio() for b in before)
+        return 'revised' if r > 0.75 else 'new'
     with open(out_path, 'w', newline='') as fh:
         w = csv.writer(fh)
-        w.writerow(['n', 'section', 'kind', 'sentence', 'cites', 'source_urls', 'opened', 'scan_pages', 'note',
-                    'd3_rows', 'check_verdict', 'check_severity', 'check_correction', 'match', 'd4_action'])
+        w.writerow(['n', 'section', 'kind', 'sentence', 'cites', 'source_urls', 'opened', 'scan_pages', 'note', 'vs_d4'] +
+                   (['d3_rows', 'check_verdict', 'check_severity', 'check_correction', 'match', 'd4_action'] if findings else []))
         for i, (sec, kind, s) in enumerate(rows, 1):
-            keys = re.findall(r'\[([^\[\]]+)\]\(#(?:sources|how-we-know)\)', s)
-            keys = [k for k in dict.fromkeys(keys)]
+            keys = re.findall(r'\[([^\[\]]+)\]\(#[a-z0-9-]+\)', s)
+            keys = [k for k in dict.fromkeys(keys) if k in src or k in ('numbers', 'measured here', 'counted on the map', 'How we know', 'how we know')]
             urls, opened, notes = [], [], []
             for k in keys:
-                if k in ('numbers', 'measured here', 'How we know', 'how we know'):
+                if k in ('numbers', 'measured here', 'counted on the map', 'How we know', 'how we know'):
                     urls.append('tools/stories/redlining/numbers.json'); opened.append('computed by measure.py')
                     continue
                 base = re.sub(r' [A-D]\d+(\.\d)?$', '', k)
@@ -152,8 +171,8 @@ def main():
                 notes.append('describes the picture')
             fs = placed.get(i - 1, [])
             j = lambda k: ' || '.join(f[k] for f in fs)  # noqa: E731
-            w.writerow([i, sec, kind, s, '; '.join(keys), ' '.join(urls), ' | '.join(opened), pages, '; '.join(notes),
-                        '; '.join(f['row'] for f in fs), j('verdict'), j('severity'), j('correction'), j('match'), j('action')])
+            w.writerow([i, sec, kind, s, '; '.join(keys), ' '.join(urls), ' | '.join(opened), pages, '; '.join(notes), versus(s)] +
+                       (['; '.join(f['row'] for f in fs), j('verdict'), j('severity'), j('correction'), j('match'), j('action')] if findings else []))
     print(f'{len(rows)} sentences to {out_path}')
 
 

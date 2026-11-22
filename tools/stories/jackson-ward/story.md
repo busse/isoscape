@@ -5,6 +5,7 @@ order: 60
 summary: Jackson Ward, Richmond, before and after the Richmond–Petersburg Turnpike: the 1952 fire-insurance maps drawn on the ground as it stood, and how we know. A working draft for review.
 unlisted: true
 shop: false
+images: link
 social: jackson-ward-social.jpg
 ---
 

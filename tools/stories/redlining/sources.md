@@ -53,3 +53,42 @@ and the builds read it from `data/holc/`.
 | Meier & Mitchell, Historic Redlining Indicator (openICPSR) | No license stated ("distributed as received"); not needed. |
 | City of Richmond parcels with assessed value and owner | Not fetched in this round. If used later: values in aggregate only, never owner names. |
 | VCU life-expectancy map, *Planned Destruction*, NYT 2020 graphics | Copyrighted visual work: cited and linked, never reused. |
+
+## Opened for d5, November 22, 2026
+
+Every new or changed factual sentence in d5 rests on a source opened on this date, by Claude,
+from the session's own network (no logins, no paid sources). Quotations on the page are a few
+words at most, one per source; the rest is paraphrase.
+
+| Source | What it supports on the page | Notes |
+|---|---|---|
+| Hillier 2003, *Journal of Urban History* 29(4), author's postprint, https://core.ac.uk/download/76393191.pdf | Maps not widely distributed, none to private interests, some lenders and the FHA had access (pp. 398–402); more than 60% of HOLC loans in Philadelphia to areas later red (p. 397); lending already withheld before the maps (p. 398, p. 412); grades explain interest rates only (abstract, p. 412); the 1935 Underwriting Manual (p. 403, n. 39); the City Survey Program's name | Read through a fetch tool's summary with page numbers. |
+| Fishback, LaVoice, Shertzer and Walsh, *JEH* 83(4), 2023, open access, https://doi.org/10.1017/S0022050723000475 | HOLC kept maps confidential inside government; FHA shared its maps; maps had virtually no influence on HOLC refinancing; HOLC finished lending June 1936; Black share 4.5% of HOLC mortgages in 1940; FHA established 1934; the 4 to 20 percent; Michney and Winling citations | Full text. |
+| Aaronson, Hartley and Mazumder, Chicago Fed WP 2017-12, revised August 2020 | Pre-existing differences and propensity weighting; D–C racial gap 15 to 17 points in 1950–1970, 3.1 points by 2010; estimates "capture the sum of any HOLC and FHA effects where the boundaries align"; "We will likely never know the degree to which lenders used the actual maps" | Full text (pdftotext). The page paraphrases. |
+| Aaronson, Mazumder, Hartley and Stinson, Chicago Fed WP 2022-13 | Estimates as a proxy for redlining practices that arose largely through federal housing policy | Full text. |
+| Fishback, Rose, Snowden and Storrs, NBER w29244 (full text) and the University of Arizona record of *JUE* 141: 103462 (May 2024) | The racial clause of the abstract; loan data from Baltimore, Peoria and Greensboro; early Underwriting Manuals advised against insuring in racially integrated areas; the corrected citation | Full text and record. |
+| Michney 2022; Winling and Michney 2021 | Cited by title only | Publisher pages blocked by a verification wall; not opened, not summarized. Titles and volumes from Fishback et al. 2023's reference list. |
+| CFPB, "Mortgage data (HMDA)", https://www.consumerfinance.gov/data-research/hmda/ | HMDA enacted 1975; requires reporting and public disclosure | |
+| Federal Reserve, "Community Reinvestment Act (CRA)", https://www.federalreserve.gov/consumerscommunities/cra_about.htm | CRA enacted 1977; what it directs regulators to do | |
+| FRED Blog 2021 (reopened) | What the maps rated; informed the Federal Home Loan Bank Board's supervision; no mention of race in the grade summary | |
+| Encyclopedia Virginia, "Urban Renewal in Richmond" (reopened) | Richmond Housing Authority (1940), RRHA; Apostle Town; Turnpike referendums and Authority (1954); Gilpin expanded 1957; Fairfield and Whitcomb 1958; 17th Street Urban Renewal Project; Mosby Court; RRHA-sponsored 1967 Fulton study ("slum"); RRHA razing from the early 1970s; Randolph; the 1924 ordinance and the Racial Integrity Act; Bartholomew's plan | |
+| Encyclopedia Virginia, "James H. Blackwell (ca. 1864–1931)" | Principal of Manchester's school for Black students from 1888; demoted after the 1910 consolidation; school named for him 1951; the neighborhood's name | |
+| Craig 2025 (reopened) | RHA built Creighton, Mosby, Whitcomb, Fairfield and Hillside Courts; Hillside served low-income white residents; the News Leader's 301 units (April 15, 1943) | No dates given for Creighton or Hillside. |
+| HUD via ProPublica, VA007000001, 004, 005, 006, 007, 008 | Each court's address list, matched to OSM address points: Fairfield 27 of 29 and Whitcomb 15 of 18 matched addresses in D5; Mosby 22 of 24 in D5; Creighton 10 of 10 ungraded; Hillside 10 of 11 ungraded | The matching was run in the session; recorded in d5.md. |
+| Library of Virginia, "House to Highway" | Jackson Ward the center of Richmond's Black community; The JXN Project the partner; shown July 14, 2025, to February 28, 2026 | |
+| City of Richmond, "Jackson Ward" (rva.gov) | "Black Wall Street" and "Harlem of the South" | |
+| Black History Museum & Cultural Center of Virginia, https://blackhistorymuseum.org/ | The museum and its address, 122 West Leigh Street | |
+| Historic Jackson Ward Association, https://www.hjwa.org/ | The neighborhood association and its history pages | The page named in the dignity read (?p=4084) refused the request (406); the home page opened. |
+| The JXN Project, https://www.thejxnproject.org/ | Historic preservation nonprofit, founded 2021 | |
+| VCU News, Historic Fulton Oral History Project (2015) | Interviews 2011–2012; organizers; The Valentine holds the materials; VCU Libraries posted them | |
+| Virginia DHR, Washington Park marker (2024) | Emancipated African Americans settled the area; Oak Park and Washington Park developments | |
+| The Valentine, Oregon Hill self-guided tour (PDF) | The Oregon Hill Historic District's bounds; white, blue-collar by the mid-1900s | D8 overlap measured in measure.py `name_checks`. |
+| City of Richmond civic-group maps: Providence Park, Union Hill, Carver, Swansboro; Church Hill North Old & Historic District | D4, D6, D1 and D10's modern names | Washington Park and Fairmount maps were downloaded but not used on the page. |
+| LC Labs, Sanborn Maps data package README, https://data.labs.loc.gov/sanborn/README.html | The Library of Congress's online Sanborn collection is public domain, free to use and reuse | loc.gov itself refused automated requests. |
+| americanpanorama/HOLC_Area_Description_Data (raw files) | No LICENSE file; the README states no license | GitHub's API was not available to this session; checked by fetching the raw README and LICENSE paths. |
+| City of Richmond Year_of_Construction service (ArcGIS JSON) | No copyright text or terms in the service or layer description | |
+| National Archives scan, `ad_RichmondVA.pdf` (local copy, SHA-256 `e56e4432…`) | Read this session: C4 p. 26 (field 14), A5 p. 5, D1 to D11.5 pp. 37–48 (fields 5, 12, 14, 15); D6 and D8 field 12 at 300 dpi | Ten of twelve D forms record a Black population; "Infiltration of: Negroes" on D2, D5, D6, D7; field 12 from "None" (D7) to 60% (D1, D2, D4, D11), blank D3 and D9; informants J. D. Carneal (D1–D9) and A. L. Adamson (D10, D11, D11.5). |
+
+Licenses now named on the page: the city's parcel service states no terms; the Lab's
+transcription repository states no license (the forms themselves are public-domain federal
+records); the Library of Congress's online Sanborn collection is public domain.

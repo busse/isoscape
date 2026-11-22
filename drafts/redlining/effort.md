@@ -11,6 +11,7 @@ work, against what the work took. Unit: one agent run of about 30 to 45 minutes 
 | Working draft d1 | Nov. 22, 2026 | 9.25 runs (5–7 h) | about 15:00–16:30, about 90 min (2.0–2.5 runs) | 0 | this draft: see `outputs/stories/redlining/working/d1.md` |
 | Working draft d2 | Nov. 22, 2026 | 4.1 runs (2–3 h) | 16:44–17:15, about 30 min (0.75 run) | 0 | see `outputs/stories/redlining/working/d2.md` |
 | Fact check applied (d4) | Nov. 22, 2026 | not estimated | about 75 min (2 runs), builds and views in the background | 0 | see `outputs/stories/redlining/working/d4.md` |
+| Three reads applied, final draft (d5) | Nov. 22, 2026 | not estimated | about 2.5 h (4 runs), builds, views, the visual check and the browser checks in the background | 0 | see `outputs/stories/redlining/working/d5.md` |
 
 Tokens were not metered from inside the run.
 
@@ -75,3 +76,28 @@ citations added), but three needed new measurements (the D1 split, the frame and
 totals, Providence Park's share), and one, the D4 remark, needed a scan read that changed a name
 in five places. The rounding finding was a code fault, not a wording one, and is now guarded by
 a test.
+
+## The three reads (d5)
+
+Three independent reads of d4, made with Claude (a skeptical scholar's, a dignity-and-harm read,
+and a first-time reader's with publish readiness), asked for 20 must-fixes between them, about
+40 should-fixes and a few dozen notes. d5 applies every must-fix and all but a handful of the
+should-fixes (d5.md lists them, with reasons). Two owner messages arrived mid-round and changed
+the notice, the review wording, the Jackson Ward links and the "How we know" passage on the
+forms; both were applied.
+
+| Part | Approx. minutes |
+|---|---|
+| Reading the contract, decisions, d4 and the three reads | 15 |
+| Merging main; the explorer change (`images: link`), its test, the README | 15 |
+| The highway base rate in measure.py; name checks (Oregon Hill, Carver); two charts | 20 |
+| Sources opened (papers, local institutions, city maps, licenses) and the scan reread (C4, A5, all twelve D forms' fields 5, 12, 14, 15) | 35 |
+| Text: story.md rewritten, boxes.py, areas.py, timeline, views | 35 |
+| Two builds and every view (about 13 min in the background); the social image; looking at each | 15 |
+| Tests, browser checks from file:// (images, lightbox, sliders), screenshots, the visual check, four byte-identical builds against main | 20 |
+| claims.py, factcheck.csv, sources.md, d5.md, board, commit | 15 |
+
+What the reads cost: the base rate and the dispute section needed new measurement and new
+sources, which a fact check alone would not have asked for. The reads also caught a fault the
+fact check passed: d4's "Providence Park" share measured a park, not the neighborhood.
+

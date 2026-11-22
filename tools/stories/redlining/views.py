@@ -198,7 +198,7 @@ def area_box(label, margin=1.18, aspect=0.62, min_ground=1100):
 # Gilpin Court: 1000 St Paul Street (no 1000 in OSM; placed at the street's south end, below the
 # 1103 address point, so approximate). Mosby Court: 1909 Accommodation Street (between OSM's
 # 1907 and 1911). SVG points from `isoscape locate richmond-1937` (the same in 1937 and 2026).
-HOUSING = [('Gilpin Court (1943), approximate', 1227.1, -45.0), ('Mosby Court (1962)', 1881.4, 114.5)]
+HOUSING = [('Gilpin Court, public housing opened 1943 (approximate)', 1227.1, -45.0), ('Mosby Court, public housing opened 1962', 1881.4, 114.5)]
 # What the band under each view says of the marks; Gilpin's is approximate wherever it shows.
 NOTE = {'Gilpin Court': "Gilpin Court is marked approximately at the address in HUD's record (circle)",
         'Mosby Court': "Mosby Court is marked at the address in HUD's record (circle)"}
@@ -242,11 +242,13 @@ def relaid_caption(data, side):
     em = lambda fs, t: 0.46 * fs * len(t.decode())  # noqa: E731
     fs_k, fs_s = float(ktitle[2]), float(source[2])
     col = max(em(fs_k, l[4]) for l in labels) + fs_k * 2.4
-    # The source line, with its note on the grade names shortened (the full note is under every
-    # picture on the page): two lines at most.
-    text = source[4].decode().replace(KEY_SOURCE.replace("'", '&#39;'), "Quoted grade names: the HOLC's map of Atlanta (RG 195)").replace(KEY_SOURCE, "Quoted grade names: the HOLC's map of Atlanta (RG 195)")
+    # The source line, wrapped.
+    # The whole credit, as under every other picture: the grade names' note in full and the base
+    # credit (the reader's read, d5: these two travel alone from the lightbox).
+    text = source[4].decode() + '. ' + BASE_CREDIT + '.'
+
     words, rows, cur = text.split(' '), [], ''
-    room = vb[2] * 0.47
+    room = vb[2] * 0.56
     for w_ in words:
         t = (cur + ' ' + w_).strip()
         if em(fs_s, t.encode()) > room and cur:
@@ -261,7 +263,9 @@ def relaid_caption(data, side):
     y = float(year[1])
     out.append(b'<text x="%.1f" y="%.1f" font-size="%s"%s>%s</text>' % (float(year[0]) + dx, y, year[2], year[3], year[4]))
     out.append(b'<text x="%.1f" y="%.1f" font-size="%s"%s>%s</text>' % (float(sub[0]) + dx, y, sub[2], sub[3], sub[4]))
-    y = float(ktitle[1])
+    # The key rises into the room under the title, so the full credit (up to four lines) still
+    # ends above the map.
+    y = float(ktitle[1]) - fs_k * 1.7
     out.append(b'<text x="%.1f" y="%.1f" font-size="%s"%s>%s</text>' % (left, y, ktitle[2], ktitle[3], ktitle[4]))
     for i, (lab, fill) in enumerate(zip(labels, rects)):
         cx, cy = left + (i % 2) * col, y + fs_k * 1.25 * (1 + i // 2)
@@ -310,7 +314,7 @@ def main():
         box = box_at(-77.437, 37.548, 6200, aspect=0.5, lift=60)
         im, hit = marked(raster(b, box, 5600, tmp), box)
         save(keyed(im, 'Richmond today, with the 1937 grades under it: I-95, I-64 and the Downtown Expressway (black) across D1, D5 and D8',
-                   'Looking north. The Downtown Expressway crosses D8 at left; the Turnpike, now I-95 and I-64, crosses D1 at center and runs along D5 at right.' + (HOUSING_NOTE if hit else '')), 'built-close', a.full)
+                   'Looking north. The Downtown Expressway crosses D8 at left; I-95 and I-64 cross D1 at center; I-64 runs along D5 at right.' + (HOUSING_NOTE if hit else '')), 'built-close', a.full)
     # Side by side at one scale: A5 (Windsor Farms) and D1 (Jackson Ward and Gilpin), the same
     # ground width, 1937 and today.
     if want('pair'):
@@ -330,7 +334,7 @@ def main():
             for c, im in enumerate(row):
                 out.paste(im, (c * (im.width + gap), r * (im.height + gap)))
         save(keyed(out, f"An A area and a D area at the same scale: {area_title('A5')} and {area_title('D1')}, 1937 and today",
-                   'Each panel is 2.6 km of ground across, looking north.'), 'pair', a.full)
+                   'Each panel is 2.6 km of ground across, looking north. 1937: only buildings that still stand, plus Jackson Ward\'s Sanborn blocks; most others then standing are gone and not drawn.'), 'pair', a.full)
     # The worked example: A5 and D1 each whole, 1937 and today, in one box per area so each pair
     # makes a compare slider.
     for label in ('A5', 'D1'):
@@ -374,12 +378,43 @@ def main():
             note = ''
             if one is not None:
                 im, hit = marked(im, box, HOUSING[one:one + 1])
-                court = HOUSING[one][0].split(' (')[0]
+                court = HOUSING[one][0].split(',')[0]
                 note = f" {NOTE[court]}." if hit else ''
             save(keyed(im, f'{area_title(label)}: graded D in 1937, seen today',
                        f'About {ground / 1000:.1f} km of ground across, looking north. Interstates and the Downtown Expressway in black.' + note), name, a.full)
+    # The link preview (front matter `social:`): 1200 × 630, a band naming the year and whose
+    # grades these are, with the key, over the 1937 citywide view cropped to the D areas around
+    # downtown, so the picture reads at the size a preview shows.
+    if want('social'):
+        social(a.full)
     if os.path.exists(tmp):
         os.remove(tmp)
+
+
+def social(full):
+    src = Image.open(os.path.join(ROOT, 'pages', 'redlining-grades-1937-large.webp')).convert('RGB')
+    W, H, band = 1200, 630, 172
+    # The crop: the view's middle, where D1, D5, D6, D8 and the river sit (fractions of the image).
+    cw = round(src.width * 0.46)
+    ch = round(cw * (H - band) / W)
+    cx, cy = round(src.width * 0.60), round(src.height * 0.56)
+    crop = src.crop((cx - cw // 2, cy - ch // 2, cx + cw // 2, cy + ch // 2)).resize((W, H - band), Image.LANCZOS)
+    out = Image.new('RGB', (W, H), P['sky'])
+    out.paste(crop, (0, band))
+    d = ImageDraw.Draw(out)
+    d.text((24, 16), "Richmond, 1937: the federal HOLC's grades", fill=P['ink'], font=font(40, bold=True))
+    d.text((24, 66), 'drawn on the ground they graded', fill=P['ink'], font=font(26))
+    kf = font(20)
+    for i, (tone, label) in enumerate(zip(P['tint']['tones'], LEGEND)):
+        x, y = 24 + (i % 2) * 470, 108 + (i // 2) * 30
+        d.rectangle((x, y + 3, x + 26, y + 23), fill=tone, outline=P['ink'])
+        d.text((x + 34, y), label, fill=P['ink'], font=kf)
+    d.line((0, band - 1, W, band - 1), fill=P['ink'], width=2)
+    path = os.path.join(ROOT, 'pages', 'redlining-social.jpg')
+    out.save(path, quality=86)
+    if full:
+        out.save(os.path.join(full, 'redlining-social.png'))
+    print(f'redlining-social: {out.width}×{out.height}')
 
 
 if __name__ == '__main__':

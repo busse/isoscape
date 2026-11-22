@@ -20,18 +20,25 @@ def slug(label):
 HISTORIC = {'A5': 'Windsor Farms', 'D6': 'Church Hill', 'D7': 'Fulton', 'D9': 'Riverview', 'D11': 'South Richmond'}
 HEADING_PAGE = {'A5': 5, 'D6': 42, 'D7': 43, 'D9': 45, 'D11': 48}
 # The page's modern names, chosen to orient a reader today; None where the historic name serves.
+# d5 (the dignity read): names residents and the city use, checked on the City of Richmond's
+# civic-group maps (Providence Park, Union Hill, Church Hill North, Carver, Swansboro, Washington
+# Park, Fairmount) and Encyclopedia Virginia (Gilpin Court on cleared Apostle Town; Carver west of
+# Jackson Ward). Navy Hill is a historic name (VCU's campus covers most of it). D8 is Randolph
+# alone: about a third of D8 lies in the Oregon Hill Historic District as the Valentine bounds it,
+# a neighborhood the Valentine describes as white by the mid-1900s, which the D8 form (95% Black)
+# does not describe; the page says so in the D8 figure.
 MODERN = {
     'A5': None,
-    'D1': 'Jackson Ward, Apostle Town and Navy Hill',
+    'D1': 'Jackson Ward, Gilpin, Carver and Navy Hill',
     'D2': 'Washington Park, around Cheatwood Avenue',
     'D3': 'along Laburnum Avenue',
-    'D4': 'around Hunt and Hazelhurst Avenues',
+    'D4': 'Providence Park, around Hunt and Hazelhurst Avenues',
     'D5': 'Fairmount and the blocks around Mosby Court',
-    'D6': 'Union Hill and the slopes of Church Hill',
+    'D6': 'Church Hill North and Union Hill',
     'D7': None,
-    'D8': 'Randolph and Oregon Hill',
+    'D8': 'Randolph',
     'D9': 'between Maymont and the river',
-    'D10': 'south of the river, around Bainbridge and Perry Streets',
+    'D10': 'Swansboro, around Bainbridge and Perry Streets',
     'D11': 'Manchester, around Cowardin Avenue',
     'D11.5': 'Blackwell',
 }

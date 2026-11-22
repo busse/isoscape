@@ -22,6 +22,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 
 
+def anchor(text):
+    """GitHub's heading anchor (src/markdown.ts): lower case; letters, digits, spaces, hyphens and
+    underscores kept; spaces to hyphens."""
+    return re.sub(r'\s', '-', re.sub(r'[^\w\s-]', '', text.lower()).strip())
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--date', default=datetime.date.today().strftime('%B %-d, %Y'))
@@ -54,6 +60,30 @@ def main():
         t['cut_' + k.replace('.', '_')] = pct(v)
     t['hUn'] = f"{m['by_grade_km']['D'] - sum(n['motorway_in_d_by_area_km'].values()):.1f}"
     t['yB'] = pct(y['B']['share_by1937'])
+    # The highway's base rates (measure.py `base_rate`): densities to two places, distances to
+    # one, shares rounded once through pct.
+    br = n['motorway_base_rate']
+    for k, v in br['density'].items():
+        t[f'dens_{k}'] = f"{v['km_per_km2']:.2f}"
+    for k, v in br['density_near'].items():
+        t[f'near_{k}'] = f"{v['km_per_km2']:.2f}"
+    for k, v in br['median_distance_km'].items():
+        t[f'med_{k}'] = f"{v:.1f}"
+    loc = br['location_alone']
+    t['exp_D'] = pct(loc['expected_share']['D'])
+    t['exp_C'] = pct(loc['expected_share']['C'])
+    t['exp_D_km'] = f"{loc['expected_km']['D']:.1f}"
+    t['obs_D_km'] = f"{loc['observed_km']['D']:.1f}"
+    t['ring_km'] = f"{br['ring_m'] / 1000:g}"
+    t['near_km'] = f"{br['near_m'] / 1000:g}"
+    t['near_D_km2'] = f"{br['density_near']['D']['km2']:.1f}"
+    for s_, v in br['shift_D_share'].items():
+        t[f'shift{s_}_lo'], t[f'shift{s_}_hi'] = pct(v['min']), pct(v['max'])
+    t['edge_D_km'] = f"{br['D_km_within_25m_of_D_edge']:.1f}"
+    t['A5_mkm'] = f"{n['areas']['A5']['motorway_km']:.1f}"
+    oh = n['osm_checks']['D8_share_in_oregon_hill_district']
+    t['oh_lo'], t['oh_hi'] = sorted([pct(v) for v in oh.values()], key=int)
+    t['carver_D1'] = pct(n['osm_checks']['D1_share_west_of_belvidere_north_of_broad'])
     t['BOXES'] = boxes.page_grid(t)
     text = open(os.path.join(HERE, 'story.md')).read()
     # Notes to the drafters (<!-- … -->) stay in story.md only.
@@ -61,6 +91,17 @@ def main():
     for k, v in t.items():
         text = text.replace('{{' + k + '}}', str(v))
     assert '{{' not in text, 'an unfilled {{token}} is left in story.md'
+    # Each citation lands on its entry in Sources (an H4 there, so GitHub's anchor rule names it).
+    keys = re.findall(r'^#### (.+)$', text[text.index('\n## Sources'):], flags=re.M)
+    anchors = {k: anchor(k) for k in keys}
+
+    def cite(m):
+        k = m.group(1)
+        if k == 'sources':  # a link to the section itself
+            return m.group(0)
+        assert k in anchors, f'cited source "{k}" has no entry in Sources'
+        return f'[{k}](#{anchors[k]})'
+    text = re.sub(r'\[([^\[\]]+)\]\(#sources\)', cite, text)
     open(os.path.join(ROOT, 'pages/redlining.md'), 'w').write(text)
     print('wrote pages/redlining.md')
 

@@ -327,7 +327,8 @@ summary: One line, shown as the nav link's tooltip.
 
 Text, **emphasis**, `code`, lists, tables, fenced code and block quotes.
 Link a section of this page as [rapids](#rapids), another page as [About](about.md),
-or a section of it as [data](about.md#data). Images beside the page are inlined:
+or a section of it as [data](about.md#data). Images beside the page are inlined (unless the
+page sets `images: link`, below):
 ![The pipeline](pipeline.svg)
 ```
 
@@ -346,6 +347,9 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
 - `shop: false` shows no shop link while the page is open: the explorer hides its "Shop prints"
   link and the phone bar's button, and the page's static and share pages carry no shop link,
   shop button or print link. The story pages (`jackson-ward`, `redlining`) use it.
+- `images: link` links the page's images in the explorer as their copies in `p/` (which every
+  explorer build writes beside `index.html`), in place of inlining them, so a picture-heavy
+  page does not add its images to the `index.html` every visitor loads. The story pages use it.
 - `schema: FAQPage` gives the static page `FAQPage` JSON-LD in place of `Article`. Each heading
   that ends in a question mark is a question, and the text under it, up to the next heading, is
   its answer (`faqEntries` in `src/static-pages.ts`).
@@ -1080,7 +1084,9 @@ Its stages are:
 2. **outline**: Gate: Chris approves the outline.
 3. **fact check**: every claim is checked against a source that was opened, and listed.
 4. **outside review**: where the subject calls for it (slavery, redlining, displacement), by
-   people with standing in it: historians, and the communities it is about.
+   people with standing in it: historians, and the communities it is about. The owner may
+   publish a story without it; the board records that decision, and the page states how it
+   was made and never implies a review that did not happen.
 5. **published**: Gate: Chris approves publication.
 
 ### Site changes

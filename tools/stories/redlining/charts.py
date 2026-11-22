@@ -7,8 +7,9 @@
 Writes pages/redlining-<name>.webp (1600 px wide) and, with --full, a PNG of each for review:
 
 - `land`: graded land by grade, in square kilometers, with the number of areas.
-- `highways`: two bars split by grade, the graded land and the limited-access highway
-  (OSM motorway) inside it, so the reader sees the highway's share beside the land's.
+- `highways`: three bars split by grade: the graded land, the highway location alone would
+  give each grade, and the limited-access highway (OSM motorway) inside it.
+- `density`: km of highway per km² of land, by grade and ungraded, all land and near the center.
 
 Colors are the map's own grade tones and ink, read from src/palette.ts, never typed here. Each
 chart states its source, year and method under it. Drawn flat: thin marks, text in ink, no
@@ -84,14 +85,20 @@ def land(n, full):
 
 
 def highways(n, full):
-    m = n['motorway']
+    """Three bars split by grade: the graded land; the motorway that location alone would give
+    each grade (rings about the Capitol, measure.py `base_rate`); and the motorway inside each
+    grade today."""
+    m, br = n['motorway'], n['motorway_base_rate']
+    loc = br['location_alone']
+    ring_km = br['ring_m'] / 1000
     land_share = {k: n['graded_land'][k]['share'] for k in GRADES}
     rows = [('Graded land, 1937', land_share, f"{n['graded_km2_union']:.1f} km²"),
+            (f'Highway expected from\nlocation alone', loc['expected_share'], f"{ring_km:g} km rings about the Capitol"),
             ('Limited-access highway\ninside graded land, today', m['by_grade_share'], f"{m['km_in_graded']:.1f} km of carriageway")]
-    fig, ax = plt.subplots(figsize=(8, 4.2), facecolor=PAPER)
-    fig.subplots_adjust(left=0.27, right=0.97, top=0.66, bottom=0.34)
+    fig, ax = plt.subplots(figsize=(8, 5.0), facecolor=PAPER)
+    fig.subplots_adjust(left=0.27, right=0.97, top=0.70, bottom=0.30)
     ax.set_facecolor(PAPER)
-    for y, (label, share, total) in zip([1, 0], rows):
+    for y, (label, share, total) in zip([2, 1, 0], rows):
         x = 0.0
         for k in GRADES:
             w = share[k]
@@ -102,21 +109,55 @@ def highways(n, full):
                 ax.text(x + w / 2, y - 0.36, f'{k} {pct(w)}%', ha='center', va='top', fontsize=9.5)
             x += w
         ax.text(1.0, y + 0.42, total, ha='right', va='bottom', fontsize=9.5)
-    ax.set_yticks([1, 0], [r[0] for r in rows], fontsize=10.5)
+    ax.set_yticks([2, 1, 0], [r[0] for r in rows], fontsize=10.5)
     ax.set_xlim(0, 1)
-    ax.set_ylim(-0.5, 1.6)
+    ax.set_ylim(-0.5, 2.6)
     ax.set_xticks([])
-    for s in ('top', 'right', 'bottom', 'left'):
-        ax.spines[s].set_visible(False)
+    for s_ in ('top', 'right', 'bottom', 'left'):
+        ax.spines[s_].set_visible(False)
     ax.tick_params(length=0)
-    d_land, d_road = pct(land_share['D']), pct(m['by_grade_share']['D'])
     for i, k in enumerate(GRADES):
-        lx, ly = (0.02, 0.5)[i % 2], (0.80, 0.755)[i // 2]
-        fig.patches.append(matplotlib.patches.Rectangle((lx, ly), 0.018, 0.035, transform=fig.transFigure, facecolor=TONE[k], edgecolor=INK, linewidth=0.6))
+        lx, ly = (0.02, 0.5)[i % 2], (0.835, 0.795)[i // 2]
+        fig.patches.append(matplotlib.patches.Rectangle((lx, ly), 0.018, 0.03, transform=fig.transFigure, facecolor=TONE[k], edgecolor=INK, linewidth=0.6))
         fig.text(lx + 0.024, ly + 0.003, NAMES1[k], fontsize=9)
-    fig.suptitle(f'Where the highways run: D was {d_land}% of the graded land and holds\n{d_road}% of the limited-access highway inside it', x=0.02, ha='left', fontsize=13, fontweight='bold')
+    fig.suptitle('Where the highways run, by 1937 grade', x=0.02, ha='left', fontsize=13.5, fontweight='bold')
     finish(fig, 'highways', f"{SRC}. Highways: OpenStreetMap ways tagged motorway, fetched Nov. 16, 2026 (ODbL). {KEY_SOURCE}.\n"
-                            f"Each carriageway counted; ramps left out (with ramps, D holds {pct(n['motorway_and_links']['by_grade_share']['D'])}%). {m['km_in_graded']:.1f} km lie inside graded land, of {m['km_in_frame']:.0f} km in the drawn frame. The chart shows where the roads run. measure.py.", full)
+                            f"Each carriageway counted; ramps left out (with ramps, D holds {pct(n['motorway_and_links']['by_grade_share']['D'])}%). Location alone: in each {ring_km:g} km ring about the State Capitol, the ring's "
+                            f"highway inside graded land shared among the grades by their land in that ring. Where a road runs is not why it runs there. measure.py.", full)
+
+
+def density(n, full):
+    """km of motorway carriageway per km² of land, by grade and for the ungraded land inside the
+    drawn frame, over all land and within NEAR_M of the Capitol (measure.py `base_rate`)."""
+    br = n['motorway_base_rate']
+    near_km = br['near_m'] / 1000
+    keys = GRADES + ['ungraded']
+    label = {**{k: NAMES[k] for k in GRADES}, 'ungraded': 'Ungraded land\nin the frame'}
+    tone = {**TONE, 'ungraded': PAPER}
+    fig, ax = plt.subplots(figsize=(8, 5.8), facecolor=PAPER)
+    fig.subplots_adjust(left=0.27, right=0.95, top=0.82, bottom=0.35)
+    ax.set_facecolor(PAPER)
+    ys = list(range(len(keys)))[::-1]
+    h = 0.36
+    for y, k in zip(ys, keys):
+        a, b = br['density'][k], br['density_near'][k]
+        ax.barh(y + h / 2, a['km_per_km2'], height=h, color=tone[k], edgecolor=INK, linewidth=0.8, hatch='//' if k == 'ungraded' else None)
+        ax.text(a['km_per_km2'] + 0.02, y + h / 2, f"{a['km_per_km2']:.2f}  all of its land ({a['km2']:.1f} km²)", va='center', fontsize=9.5)
+        v = b['km_per_km2']
+        if b['km2'] >= 0.5 and v is not None:
+            ax.barh(y - h / 2, v, height=h, color=tone[k], edgecolor=INK, linewidth=0.8, alpha=0.55, hatch='//' if k == 'ungraded' else None)
+            ax.text(v + 0.02, y - h / 2, f"{v:.2f}  within {near_km:g} km of the Capitol ({b['km2']:.1f} km²)", va='center', fontsize=9.5)
+        else:
+            ax.text(0.02, y - h / 2, f"almost none within {near_km:g} km of the Capitol", va='center', fontsize=9.5, style='italic')
+    ax.set_yticks(ys, [label[k] for k in keys], fontsize=10)
+    ax.set_xlim(0, max(br['density_near']['D']['km_per_km2'], br['density']['D']['km_per_km2']) * 1.9)
+    ax.set_xlabel('km of limited-access carriageway per km² of land', fontsize=10)
+    for s_ in ('top', 'right'):
+        ax.spines[s_].set_visible(False)
+    ax.tick_params(length=0)
+    fig.suptitle('Highway per square kilometer, by 1937 grade:\nall land, and land near the center', x=0.02, ha='left', fontsize=13, fontweight='bold')
+    finish(fig, 'density', f"{SRC}. Highways: OpenStreetMap ways tagged motorway (ODbL), each carriageway counted. Ungraded land: the citywide pictures' frame less all graded land "
+                           f"(downtown, industry, rail, parks, the river, land outside the 1937 survey). Center: the Virginia State Capitol (OpenStreetMap). measure.py. {KEY_SOURCE}.", full)
 
 
 def survival(n, full):
@@ -152,6 +193,7 @@ def main():
     n = json.load(open(os.path.join(HERE, 'numbers.json')))
     land(n, a.full)
     highways(n, a.full)
+    density(n, a.full)
     survival(n, a.full)
 
 

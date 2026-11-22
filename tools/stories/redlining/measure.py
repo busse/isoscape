@@ -98,6 +98,147 @@ def terrain_by_grade(holc):
     return out
 
 
+CAPITOL_WAY = 45088494  # OSM's outline of the Virginia State Capitol; its centroid is the center
+RING_M = 1000           # ring width for the location-only expectation
+NEAR_M = 4000           # "near the center": within this distance of the Capitol
+SAMPLE_M = 50           # grid step for the distance medians
+SHIFTS_M = (12, 24)     # the fit's RMS error and its largest error at the map's edges
+
+
+def base_rate(osm, by, graded, frame, motorway):
+    """What the highway share in D should be compared with (the scholar's read, M2 and S10).
+
+    - Density: km of motorway carriageway per km² of each grade's land, and of the ungraded land
+      inside the drawn frame (the frame less all graded land: downtown, industry, rail yards,
+      parks, the river and land outside the 1937 survey), over all land and within NEAR_M of
+      the State Capitol.
+    - Distance: the median distance from the Capitol of each grade's land, read at every node of
+      a SAMPLE_M grid inside it.
+    - Location alone: rings RING_M wide about the Capitol. In each ring the motorway inside
+      graded land is shared among the grades in proportion to their land in that ring; summed
+      over the rings, D's part is what location alone would give D.
+    - Fit error: every outline shifted by each of SHIFTS_M in eight directions, D's share again.
+    """
+    import numpy as np
+    from shapely import affinity
+    cap = None
+    for e in osm['elements']:
+        if e['type'] == 'way' and e['id'] == CAPITOL_WAY:
+            cap = Polygon([xy(q['lon'], q['lat']) for q in e['geometry']]).centroid
+    assert cap is not None, 'the Capitol outline is not in the OSM cache'
+    near = cap.buffer(NEAR_M, quad_segs=64)
+    ungraded = frame.difference(graded)
+    lands = {**{g: by[g] for g in GRADES}, 'ungraded': ungraded}
+    pg = {k: prep(v) for k, v in lands.items()}
+
+    def km_in(geom):
+        return sum(ln.intersection(geom).length for ln in motorway) / 1000
+
+    density, density_near = {}, {}
+    for k, v in lands.items():
+        density[k] = {'km': km_in(v), 'km2': v.area / 1e6}
+        density[k]['km_per_km2'] = density[k]['km'] / density[k]['km2']
+        w = v.intersection(near)
+        density_near[k] = {'km': km_in(w), 'km2': w.area / 1e6}
+        density_near[k]['km_per_km2'] = density_near[k]['km'] / density_near[k]['km2'] if w.area else None
+
+    # Median distance from the Capitol, on a grid.
+    x0, y0, x1, y1 = frame.bounds
+    gx, gy = np.meshgrid(np.arange(x0, x1, SAMPLE_M), np.arange(y0, y1, SAMPLE_M))
+    from shapely import points, contains
+    pts = points(gx.ravel(), gy.ravel())
+    dist = np.hypot(gx.ravel() - cap.x, gy.ravel() - cap.y)
+    median_km = {}
+    for k in GRADES:
+        inside = contains(by[k], pts)
+        median_km[k] = float(np.median(dist[inside])) / 1000
+
+    # Location alone: rings about the Capitol.
+    reach = max(Point(cap.x, cap.y).distance(Point(x, y)) for x, y in [(graded.bounds[0], graded.bounds[1]), (graded.bounds[2], graded.bounds[3]), (graded.bounds[0], graded.bounds[3]), (graded.bounds[2], graded.bounds[1])])
+    rings = []
+    expected = {g: 0.0 for g in GRADES}
+    observed = {g: 0.0 for g in GRADES}
+    r = 0
+    while r < reach:
+        ring = cap.buffer(r + RING_M, quad_segs=64).difference(cap.buffer(r, quad_segs=64)) if r else cap.buffer(RING_M, quad_segs=64)
+        land = {g: by[g].intersection(ring) for g in GRADES}
+        tot = sum(v.area for v in land.values())
+        road = {g: km_in(land[g]) for g in GRADES}
+        allr = sum(road.values())
+        if tot > 0:
+            for g in GRADES:
+                expected[g] += allr * land[g].area / tot
+                observed[g] += road[g]
+        rings.append({'from_km': r / 1000, 'to_km': (r + RING_M) / 1000, 'graded_km2': tot / 1e6,
+                      'D_land_share': land['D'].area / tot if tot else None, 'motorway_km_in_graded': allr,
+                      'D_motorway_km': road['D']})
+        r += RING_M
+    total = sum(observed.values())
+    loc = {'expected_share': {g: expected[g] / total for g in GRADES}, 'observed_share': {g: observed[g] / total for g in GRADES},
+           'expected_km': expected, 'observed_km': observed, 'rings': rings}
+
+    # Fit error: shift every outline and measure D's share again.
+    shifts = {}
+    for s in SHIFTS_M:
+        vals = []
+        for a in range(8):
+            dx, dy = s * math.cos(a * math.pi / 4), s * math.sin(a * math.pi / 4)
+            sb = {g: affinity.translate(by[g], dx, dy) for g in GRADES}
+            sg = unary_union(list(sb.values()))
+            allg = km_in(sg)
+            vals.append(km_in(sb['D']) / allg)
+        shifts[str(s)] = {'min': min(vals), 'max': max(vals)}
+    edge = by['D'].boundary.buffer(25)
+    return {
+        'about': 'Base rates for the highway share in D (measure.py, base_rate): density, distance, location alone, fit error.',
+        'capitol': {'osm_way': CAPITOL_WAY, 'lonlat': [cap.x / KX - 77.46, cap.y / KY + LAT0]},
+        'ring_m': RING_M, 'near_m': NEAR_M, 'sample_m': SAMPLE_M,
+        'density': density, 'density_near': density_near, 'median_distance_km': median_km,
+        'location_alone': loc, 'shift_D_share': shifts,
+        'D_km_within_25m_of_D_edge': km_in(by['D'].intersection(edge)),
+    }
+
+
+def name_checks(osm, areas):
+    """Two overlaps the page's area names rest on (d5, the dignity read), sampled on a 20 m grid:
+    the share of D8 inside the Oregon Hill Historic District as the Valentine bounds it (West Cary
+    Street to the river, South Belvidere Street to Linden Street and Hollywood Cemetery), with
+    the west line at Linden Street or at the cemetery's east edge; and the share of D1 west of
+    North Belvidere Street and north of West Broad Street, in Carver as the City of Richmond's
+    civic-group map bounds it."""
+    import numpy as np
+
+    def pts(names):
+        return np.array([xy(q['lon'], q['lat']) for e in osm['elements'] if e['type'] == 'way' and e.get('tags', {}).get('name') in names
+                         and e.get('tags', {}).get('highway') and e.get('geometry') for q in e['geometry']])
+    cary, belv, lind = pts({'West Cary Street'}), pts({'South Belvidere Street', 'North Belvidere Street'}), pts({'South Linden Street'})
+    broad = pts({'West Broad Street'})
+    cem = [e for e in osm['elements'] if e['type'] == 'way' and e.get('tags', {}).get('name') == 'Hollywood Cemetery' and e.get('geometry')]
+    cem_east = max(xy(q['lon'], q['lat'])[0] for e in cem for q in e['geometry'])
+
+    def sample(g):
+        x0, y0, x1, y1 = g.bounds
+        from shapely import points, contains
+        gx, gy = np.meshgrid(np.arange(x0, x1, 20), np.arange(y0, y1, 20))
+        p = points(gx.ravel(), gy.ravel())
+        k = contains(g, p)
+        return gx.ravel()[k], gy.ravel()[k]
+
+    def near(arr, v, axis):
+        return arr[np.abs(arr[:, axis][None, :] - v[:, None]).argmin(axis=1)]
+
+    x, y = sample(areas['D8']['geom'])
+    south = y < near(cary, x, 0)[:, 1]
+    east_of_b = x < near(belv, y, 1)[:, 0]
+    low = south & east_of_b & (x > near(lind, y, 1)[:, 0])
+    high = south & east_of_b & (x > cem_east)
+    x1_, y1_ = sample(areas['D1']['geom'])
+    b = near(belv, y1_, 1)
+    carver = (x1_ < b[:, 0]) & (np.abs(b[:, 1] - y1_) < 330) & (y1_ > near(broad, x1_, 0)[:, 1])
+    return {'D8_share_in_oregon_hill_district': {'west_line_at_linden_street': float(low.mean()), 'west_line_at_cemetery_east_edge': float(high.mean())},
+            'D1_share_west_of_belvidere_north_of_broad': float(carver.mean())}
+
+
 def main():
     root = lambda p: os.path.join(ROOT, p)  # noqa: E731
     holc = load_outlines(ROOT)
@@ -198,6 +339,8 @@ def main():
         n6 += 1
         if any(k.startswith('historic') or k.startswith('heritage') for k in t):
             h6 += 1
+    checks['providence_park_osm_is'] = 'leisure=park (a park, not the neighborhood): not used on the page from d5'
+    checks.update(name_checks(osm, areas))
     checks['D6_buildings_osm'] = n6
     checks['D6_buildings_historic_or_heritage'] = h6
 
@@ -294,6 +437,7 @@ def main():
         'frame': {'share_of_grade_inside': in_frame, 'areas_cut_by_frame': cut, 'share_of_area_outside': cut_outside},
         'motorway': motor, 'motorway_and_links': with_links, 'motorway_in_d_by_road_km': road_d, 'motorway_in_d_by_area_km': d_crossed,
         'motorway_in_d1_km': d1_split, 'osm_checks': checks,
+        'motorway_base_rate': base_rate(osm, by, graded, frame, roads["motorway"]),
         'yearbuilt_by_grade': yb_counts, 'courts': courts,
         'courts_note': 'Empty when the OSM cache holds no outline named for the court (true of the November 16, 2026 cache): the brief\'s placements are not yet rechecked here.',
         'jackson_ward_1952_survival': jw,

@@ -879,12 +879,12 @@
   "epochs": [
     {
       "year": 1937,
-      "title": "The HOLC's grades",
+      "title": "Richmond: the HOLC's grades on the ground",
       "note": "Buildings standing today that the city dates to 1937 or before, and the series' curated features; the grades from the 1937 map (outlines.py names the outline set)."
     },
     {
       "year": 2026,
-      "title": "Today, over the 1937 grades",
+      "title": "Richmond today, over the HOLC's 1937 grades",
       "note": "Today's buildings and streets, with the 1937 grades under them."
     }
   ],

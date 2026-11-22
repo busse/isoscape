@@ -67,9 +67,9 @@ def main():
         'title': "Richmond in 1937, as the Home Owners' Loan Corporation graded it",
         'about': "In 1937 the federal Home Owners' Loan Corporation graded Richmond's residential areas from A to D. "
                  'The redlining story draws its grades on the ground, with the buildings standing then.',
-        'epochs': [{'year': 1937, 'title': "The HOLC's grades",
+        'epochs': [{'year': 1937, 'title': "Richmond: the HOLC's grades on the ground",
                     'note': "Buildings standing today that the city dates to 1937 or before, and the series' curated features; the grades from the 1937 map (outlines.py names the outline set)."},
-                   {'year': 2026, 'title': 'Today, over the 1937 grades',
+                   {'year': 2026, 'title': "Richmond today, over the HOLC's 1937 grades",
                     'note': "Today's buildings and streets, with the 1937 grades under them."}],
         'features': cars + labels,
         'switches': {

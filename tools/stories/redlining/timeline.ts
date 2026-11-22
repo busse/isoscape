@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * The redlining story's timeline, 1871 to 1977: Richmond's own lines, the 1937 map, and what was built and cleared on graded land after it, as a flat diagram
+ * The redlining story's timeline, 1871 to 1977: Richmond's own ordinances, the 1937 map, and what was built and cleared on graded land after it, as a flat diagram
  * in the FAQ's language (tools/diagrams/faq.ts): inked edges, a dot on every corner, colors from
  * src/palette.ts (paper, and night by prefers-color-scheme), text kept as text. Each date carries
  * its source and a mark for how sure it is: a solid disc where a source opened for the story
@@ -35,14 +35,14 @@ export const MOMENTS: readonly Moment[] = [
   { date: '1924 or 1929', what: 'Richmond passes a new ordinance tied to the state\'s Racial Integrity Act. A federal appeals court strikes it down in 1929.', source: 'Encyclopedia Virginia gives 1924; the Library of Virginia gives 1929', sure: 'disputed' },
   { date: '1933', what: 'Congress creates the Home Owners\' Loan Corporation (HOLC) to refinance the mortgages of home owners in distress.', source: 'Home Owners\' Loan Act, June 13, 1933 (Harriss, 1951); Federal Reserve Bank of Chicago, 2022', sure: 'opened' },
   { date: 'April 3, 1937', what: 'The HOLC\'s map of Richmond grades its residential areas A to D.', source: 'National Archives, RG 195, via FRASER', sure: 'opened' },
-  { date: '1943', what: 'Gilpin Court is dedicated on cleared Apostle Town land in D1.', source: 'Library of Virginia, Craig, 2025; Encyclopedia Virginia', sure: 'opened' },
+  { date: '1943', what: 'The Richmond Housing Authority dedicates Gilpin Court, public housing, on cleared Apostle Town land in D1.', source: 'Library of Virginia, Craig, 2025; Encyclopedia Virginia', sure: 'opened' },
   { date: '1946', what: 'Harland Bartholomew\'s master plan calls the older, largely Black neighborhoods downtown "slums".', source: 'Encyclopedia Virginia', sure: 'opened' },
   { date: '1948', what: 'In Shelley v. Kraemer the Supreme Court makes racial covenants unenforceable.', source: 'Library of Virginia', sure: 'opened' },
-  { date: 'July 1, 1958', what: 'The Richmond–Petersburg Turnpike, now I-95 and I-64, opens through D1. By 1957 the Richmond Times-Dispatch estimated about 1,900 Black families displaced.', source: 'VCU Libraries; Encyclopedia Virginia, citing the Richmond Times-Dispatch', sure: 'opened' },
-  { date: '1962', what: 'Mosby Court opens in D5. Many of the 1,300 people the 17th Street renewal displaced move there.', source: 'Encyclopedia Virginia', sure: 'opened' },
-  { date: '1967–1970', what: 'A study calls Fulton (D7) a slum; the 1970 plan would displace about 785 households.', source: 'Encyclopedia Virginia', sure: 'opened' },
+  { date: 'July 1, 1958', what: 'The Richmond–Petersburg Turnpike Authority\'s toll road, now I-95 and I-64, opens through D1. By 1957 the Richmond Times-Dispatch estimated about 1,900 Black families displaced.', source: 'VCU Libraries; Encyclopedia Virginia, citing the Richmond Times-Dispatch', sure: 'opened' },
+  { date: '1962', what: 'Mosby Court, public housing, opens in D5. Many of the 1,300 people the City\'s 17th Street Urban Renewal Project displaced move there.', source: 'Encyclopedia Virginia', sure: 'opened' },
+  { date: '1967–1970', what: 'A study sponsored by the Richmond Redevelopment and Housing Authority (RRHA) labels Fulton (D7) a "slum"; the 1970 plan would displace about 785 households.', source: 'Encyclopedia Virginia', sure: 'opened' },
   { date: '1970', what: 'Richmond annexes 23 square miles of Chesterfield County. Public housing, 464 scattered-site units, is built in Blackwell (D11.5).', source: 'Library of Virginia; Richmond Magazine, 2018', sure: 'opened' },
-  { date: '1973', what: 'HUD approves the Randolph project (D8), about 1,800 to be displaced, for slum clearance and the Downtown Expressway.', source: 'Encyclopedia Virginia', sure: 'opened' },
+  { date: '1973', what: 'HUD approves the Randolph project (D8), about 1,800 to be displaced, for what Encyclopedia Virginia calls "slum clearance" and the Downtown Expressway.', source: 'Encyclopedia Virginia', sure: 'opened' },
 ]
 
 const roles = (p: Palette, dark: boolean) => ({ bg: p.sky, ink: p.ink, dim: dark ? p.railSteel : p.railTie, card: dark ? p.land : p.road, accent: p.mark.line })
@@ -86,7 +86,9 @@ export const timeline = (): string => {
   const TW = W - TX - 30
   const parts: string[] = []
   let y = 30
-  parts.push(t(16, y, 'RICHMOND\'S LINES, 1871 TO 1977', 'h ink'))
+  parts.push(t(16, y, 'RICHMOND, 1871 TO 1977:', 'h ink'))
+  y += 18
+  parts.push(t(16, y, 'ITS LAWS, THE 1937 MAP, WHAT WAS BUILT', 'h ink'))
   y += 26
   const top = y
   for (const m of MOMENTS) {
@@ -110,7 +112,7 @@ export const timeline = (): string => {
   }
   const h = y + 6
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${n(h)}" width="${W}" height="${n(h)}" role="img" aria-labelledby="rl-tl-t rl-tl-d">
-<title id="rl-tl-t">Richmond's lines, 1871 to 1977: ordinances, the 1937 map, and what was built and cleared on graded land</title>
+<title id="rl-tl-t">Richmond, 1871 to 1977: the city's own ordinances, the HOLC's map, and what was built and cleared later</title>
 <desc id="rl-tl-d">${esc(MOMENTS.map((m) => `${m.date}: ${m.what} (${m.source})`).join(' '))}</desc>
 ${STYLE}
 <rect width="${W}" height="${n(h)}" class="bg"/>

@@ -108,8 +108,222 @@
  },
  "osm_checks": {
   "providence_park_share_in_D4": 0.4851338376972635,
+  "providence_park_osm_is": "leisure=park (a park, not the neighborhood): not used on the page from d5",
+  "D8_share_in_oregon_hill_district": {
+   "west_line_at_linden_street": 0.28713222261609356,
+   "west_line_at_cemetery_east_edge": 0.2403403048564339
+  },
+  "D1_share_west_of_belvidere_north_of_broad": 0.09530674355277911,
   "D6_buildings_osm": 3892,
   "D6_buildings_historic_or_heritage": 449
+ },
+ "motorway_base_rate": {
+  "about": "Base rates for the highway share in D (measure.py, base_rate): density, distance, location alone, fit error.",
+  "capitol": {
+   "osm_way": 45088494,
+   "lonlat": [
+    -77.43357430598051,
+    37.53879726646815
+   ]
+  },
+  "ring_m": 1000,
+  "near_m": 4000,
+  "sample_m": 50,
+  "density": {
+   "A": {
+    "km": 0.7615461311869534,
+    "km2": 7.634912457719177,
+    "km_per_km2": 0.0997452341993787
+   },
+   "B": {
+    "km": 1.860262944114307,
+    "km2": 12.490749401915641,
+    "km_per_km2": 0.14893125178133892
+   },
+   "C": {
+    "km": 4.564012557565125,
+    "km2": 13.49937107136299,
+    "km_per_km2": 0.33809075500169283
+   },
+   "D": {
+    "km": 13.074017004981748,
+    "km2": 14.537262150195339,
+    "km_per_km2": 0.8993452047506807
+   },
+   "ungraded": {
+    "km": 70.58148883441216,
+    "km2": 94.078772560413,
+    "km_per_km2": 0.7502381984106777
+   }
+  },
+  "density_near": {
+   "A": {
+    "km": 0.0,
+    "km2": 0.0022912152280938182,
+    "km_per_km2": 0.0
+   },
+   "B": {
+    "km": 0.0,
+    "km2": 1.369490657076099,
+    "km_per_km2": 0.0
+   },
+   "C": {
+    "km": 0.8941307855999298,
+    "km2": 5.687672769623557,
+    "km_per_km2": 0.1572050330277894
+   },
+   "D": {
+    "km": 13.074017004981748,
+    "km2": 12.812515272460441,
+    "km_per_km2": 1.0204098669902377
+   },
+   "ungraded": {
+    "km": 22.12806044315786,
+    "km2": 28.619818825102662,
+    "km_per_km2": 0.773172624829797
+   }
+  },
+  "median_distance_km": {
+   "A": 6.076284319272141,
+   "B": 5.722975517952747,
+   "C": 4.0920859005441566,
+   "D": 2.6156231965907617
+  },
+  "location_alone": {
+   "expected_share": {
+    "A": 0.07011586546599391,
+    "B": 0.12672678332846163,
+    "C": 0.24355915108124646,
+    "D": 0.5595982001242981
+   },
+   "observed_share": {
+    "A": 0.03758895343639518,
+    "B": 0.09182022509493648,
+    "C": 0.2252738849083886,
+    "D": 0.6453169365602797
+   },
+   "expected_km": {
+    "A": 1.420536120294105,
+    "B": 2.5674641813281758,
+    "C": 4.934469099677328,
+    "D": 11.337369236548525
+   },
+   "observed_km": {
+    "A": 0.7615461311869534,
+    "B": 1.8602629441143068,
+    "C": 4.564012557565125,
+    "D": 13.074017004981748
+   },
+   "rings": [
+    {
+     "from_km": 0.0,
+     "to_km": 1.0,
+     "graded_km2": 0.36611681870262885,
+     "D_land_share": 1.0,
+     "motorway_km_in_graded": 1.4778354140521364,
+     "D_motorway_km": 1.4778354140521364
+    },
+    {
+     "from_km": 1.0,
+     "to_km": 2.0,
+     "graded_km2": 3.2100669175789105,
+     "D_land_share": 0.977950200746773,
+     "motorway_km_in_graded": 4.265398086560076,
+     "D_motorway_km": 4.265398086560076
+    },
+    {
+     "from_km": 2.0,
+     "to_km": 3.0,
+     "graded_km2": 7.319026033689817,
+     "D_land_share": 0.8099060046118183,
+     "motorway_km_in_graded": 4.835580277099201,
+     "D_motorway_km": 4.835580277099201
+    },
+    {
+     "from_km": 3.0,
+     "to_km": 4.0,
+     "graded_km2": 8.976760144416835,
+     "D_land_share": 0.37645984523794784,
+     "motorway_km_in_graded": 3.3893340128702643,
+     "D_motorway_km": 2.4952032272703346
+    },
+    {
+     "from_km": 4.0,
+     "to_km": 5.0,
+     "graded_km2": 9.605427329394326,
+     "D_land_share": 0.04102455002277765,
+     "motorway_km_in_graded": 3.409379822561335,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 5.0,
+     "to_km": 6.0,
+     "graded_km2": 8.012697475754923,
+     "D_land_share": 0.14759245109506058,
+     "motorway_km_in_graded": 2.3694041950374225,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 6.0,
+     "to_km": 7.0,
+     "graded_km2": 4.455738187165513,
+     "D_land_share": 0.03323240217898114,
+     "motorway_km_in_graded": 0.1895379526990563,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 7.0,
+     "to_km": 8.0,
+     "graded_km2": 2.035324220156232,
+     "D_land_share": 0.0,
+     "motorway_km_in_graded": 0.32336887696864164,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 8.0,
+     "to_km": 9.0,
+     "graded_km2": 2.237492908862972,
+     "D_land_share": 0.0,
+     "motorway_km_in_graded": 0.0,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 9.0,
+     "to_km": 10.0,
+     "graded_km2": 1.2939333920894451,
+     "D_land_share": 0.0,
+     "motorway_km_in_graded": 0.0,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 10.0,
+     "to_km": 11.0,
+     "graded_km2": 0.6497116533815372,
+     "D_land_share": 0.0,
+     "motorway_km_in_graded": 0.0,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 11.0,
+     "to_km": 12.0,
+     "graded_km2": 0.0,
+     "D_land_share": null,
+     "motorway_km_in_graded": 0.0,
+     "D_motorway_km": 0.0
+    }
+   ]
+  },
+  "shift_D_share": {
+   "12": {
+    "min": 0.6385977759302418,
+    "max": 0.6513519899955957
+   },
+   "24": {
+    "min": 0.6332546923301876,
+    "max": 0.6534504880682934
+   }
+  },
+  "D_km_within_25m_of_D_edge": 2.067152630691168
  },
  "yearbuilt_by_grade": {
   "A": {
