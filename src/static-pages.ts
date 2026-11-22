@@ -22,6 +22,7 @@
  */
 
 import { execFile } from 'node:child_process'
+import { existsSync } from 'node:fs'
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { extname, resolve } from 'node:path'
 import { promisify } from 'node:util'
@@ -210,6 +211,8 @@ export const loadStaticPages = (slugs: readonly string[], dir: string = PAGES_DI
       images.add(name)
       return name
     },
+    // A page's PDFs sit beside it in p/ (tools/pdf/story_pdf.py --out <site>/p).
+    pdfHref: (name) => name,
   })
   return { pages, images }
 }
@@ -670,6 +673,8 @@ export const writeStatic = async (
         await writeFile(resolve(outDir, path), page.social.bytes)
         own = { path, ...size }
       }
+      // `pdf: true` links p/<slug>-phone.pdf and -large.pdf, which tools/pdf/story_pdf.py puts there.
+      if (page.pdf) for (const ed of ['phone', 'large']) if (!existsSync(resolve(outDir, 'p', `${page.slug}-${ed}.pdf`))) process.stderr.write(`warning: pages/${page.slug}.md has pdf: true but p/${page.slug}-${ed}.pdf is missing; make it with tools/pdf/story_pdf.py ${page.slug} --out ${resolve(outDir, 'p')}\n`)
       await put(e.path, renderContentPage(page, ctx, {
         ...(own === undefined ? {} : { own }),
         ...(flagPreview === undefined ? {} : { flagship: flagPreview }),

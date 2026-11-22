@@ -3344,6 +3344,31 @@
    "log": [
     "2026-11-22: rough draft -> research"
    ]
+  },
+  "story-pdfs": {
+   "title": "Story PDFs: phone and large-screen editions of each story page",
+   "plate": null,
+   "kind": "site",
+   "stage": "owner test",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "owner",
+   "decision": "The owner approved publishing both stories' PDFs with the Read this as a PDF line, after two fixes, now made on story-pdf: pictures are never cropped (title pages included), and the print build rewords instructions to a screen (wording.ts; every change listed by the tool). Publishing is for the planning session: merge, set pdf: true in both story.md files, rerun page.py, build the PDFs into the site's p/, rebuild the explorer, push gh-pages.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": "story-pdf",
+   "worktree": "/home/claude/wt-pdf",
+   "links": [],
+   "log": [
+    "2026-11-22: in work -> owner test",
+    "2026-11-22: owner approved publishing after two fixes (no cropped pictures; PDF wording for screen instructions); fixes made, back at owner test"
+   ]
   }
  }
 }
