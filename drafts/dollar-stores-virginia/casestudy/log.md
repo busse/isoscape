@@ -387,3 +387,21 @@ Folder: `2026-11-22-12-hartfield-and-snap/`.
   - Filings tie SNAP to sales, not siting.
   - The question to Chris is whether to run an ACS test of SNAP households near the stores
     (correlation only).
+
+## Step 13: SNAP households near the stores (November 22, 10:27-11:05)
+
+Folder: `2026-11-22-13-snap/`, holding hypotheses.md (written before any number), findings.md,
+snap_tests.csv, snap_by_period.csv and run.log.
+
+- **Chris (10:27).** "Set aside Hartfield for now. Continue with snap research. Also, is there
+  store level data before 2019?"
+- **Store-level data.** None was ever released.
+  - USDA refused the 2011 request.
+  - Congress barred disclosure in 2018.
+  - The Supreme Court held the data confidential in 2019.
+- **ACS test (B22010, block groups, 3 km area-weighted).**
+  - Edge Dollar Generals: 16.4% of nearby households get SNAP, against 16.4% at random roadside
+    spots on the same edges (cannot tell, within about 0.7 points).
+  - In town: the same.
+  - SNAP does not explain where in a town the store sits.
+- **Dead ends.** Two code errors and a memory stop (see run.log).
