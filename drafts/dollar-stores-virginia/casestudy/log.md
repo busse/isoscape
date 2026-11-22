@@ -373,3 +373,17 @@ Folder: `2026-11-22-11-poster-d1/`, with `notes.md`, five rounds and the rough d
 - **Rounds.** Five, all layout. Board: `viz-dollar-stores-virginia-poster` at working draft,
   `1.0.0-d1`.
 - **Proofs (08:52).** An 11x17 PDF of the PNG, then a four-page vector proof (whole poster, three bands at 69%) so the captions can be read.
+
+## Step 12: Hartfield tile and the SNAP question (November 22, 10:20)
+
+Folder: `2026-11-22-12-hartfield-and-snap/`.
+
+- **Hartfield.** A trial tile was drawn the grid's way. Hartfield has no Census place, so the rule
+  scores the store as "farther out" from Deltaville. On the tile it is a crossroads store
+  (VA 33 junction, 6,402 vehicles a day) with almost no town-density housing around it.
+- **SNAP.**
+  - Store-level redemptions are confidential (*FMI v. Argus Leader*, 2019).
+  - The 2009 adoption wave (Byrne et al. 2025) barely touches Dollar General's approval years.
+  - Filings tie SNAP to sales, not siting.
+  - The question to Chris is whether to run an ACS test of SNAP households near the stores
+    (correlation only).
