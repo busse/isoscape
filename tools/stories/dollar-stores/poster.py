@@ -1,5 +1,5 @@
 """Editorial poster (24 x 36 in): "Why does it always seem like there's a Dollar General on the edge
-of town?" Working draft d2.
+of town?" Release candidate 1.0.0-rc1.
 
 Usage: python3 poster.py <ds-dir> <tests.csv> <dg_classes.csv> <out-stem>
 
@@ -388,8 +388,8 @@ def main():
            "2025. Traffic: Federal Highway Administration, HPMS 2024. Homes and people: U.S. Census Bureau, 2020 "
            "blocks. Town limits, counties: Census TIGER/Line and cartographic boundaries, 2024. Paved land: USGS "
            "NLCD 2021. Roads: © OpenStreetMap contributors (ODbL). Regions: groups of Virginia's planning district "
-           "commissions. Made with Claude. Independent, and not affiliated with any company named. Working draft "
-           "d2, November 2026.")
+           "commissions. Made with Claude. Independent, and not affiliated with any company named. Chris Busse, "
+           "November 2026.")
     para(fig, 1.0, H - 1.05, src, 22, 9, color=MUTED, linespacing=1.4)
     fig.savefig(out + ".png", facecolor=SURFACE)
     fig.savefig(out + ".pdf", facecolor=SURFACE)

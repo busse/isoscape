@@ -3188,16 +3188,16 @@
    "title": "Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36)",
    "plate": null,
    "kind": "print",
-   "stage": "working draft",
+   "stage": "final draft",
    "status": "active",
-   "asset_version": "1.0.0-d2",
+   "asset_version": "1.0.0-rc1",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 2,
-   "waiting_on": "owner",
-   "decision": "Working draft d2 (r2) in _preview/dollar-stores/poster/: copy rewritten to remove AI-writing habits (paired headings, matching question set, tidy closing line); Martinsville captions name the side of town; locator numbers moved. Owner: approve the look, or say what to change.",
+   "rounds": 1,
+   "waiting_on": "agent",
+   "decision": "Owner (11:31): 'Continue forward to publication' (look approved). rc1 made; inspection under way.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3209,7 +3209,8 @@
     "drafts/dollar-stores-virginia/casestudy/2026-11-22-15-poster-d2/notes.md"
    ],
    "log": [
-    "2026-11-22: rough draft -> working draft"
+    "2026-11-22: rough draft -> working draft",
+    "2026-11-22: working draft -> final draft"
    ]
   }
  }
