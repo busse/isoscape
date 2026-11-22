@@ -15,6 +15,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 |---|---|
 | research | 1 |
 | final production | 46 |
+| in work | 4 |
 | live | 2 |
 | on hold | 55 |
 | blocked | 1 |
@@ -22,6 +23,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
+- **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
 ## Research
@@ -80,6 +82,15 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | STC·13 | The Fan, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·14 | Broad and Laurel, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·M | Richmond's Streetcars, 1925: The System Map | set map | 4.0.0 | yes, version 4 |
+
+## In work
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Explorer: information architecture pass (grouped page menu, builds out of the left column) | site | — | no |
+| — | Shop: default to the unframed print, curated collections and sort order, story and set links, menu | site | — | no |
+| — | Shop: product template, hero layouts for the four cutaways and four collections, Richmond descriptions, place-first titles | site | — | no |
+| — | Shop: from holiday shop to a continuing shop with a holiday promotion; Coming soon, The 2026 Annual; room for photography | site | — | no |
 
 ## Live
 

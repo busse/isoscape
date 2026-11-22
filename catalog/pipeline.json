@@ -3215,6 +3215,102 @@
    "log": [
     "2026-11-21: rough draft -> research"
    ]
+  },
+  "shop-curation-phase-1": {
+   "title": "Shop: default to the unframed print, curated collections and sort order, story and set links, menu",
+   "plate": null,
+   "kind": "site",
+   "stage": "in work",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "owner",
+   "decision": "Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-22: rough draft -> in work"
+   ]
+  },
+  "shop-positioning-annual": {
+   "title": "Shop: from holiday shop to a continuing shop with a holiday promotion; Coming soon, The 2026 Annual; room for photography",
+   "plate": null,
+   "kind": "site",
+   "stage": "in work",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "agent",
+   "decision": "Owner decisions 2026-11-22: the shop stays open after December 31 and will carry photography; the Annual says \"soon\"; Byrd Theatre explored as the December hero. Replaces the earlier rule to leave the holiday wording alone. Wording options come to the owner.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-22: rough draft -> in work"
+   ]
+  },
+  "shop-landing-pages": {
+   "title": "Shop: product template, hero layouts for the four cutaways and four collections, Richmond descriptions, place-first titles",
+   "plate": null,
+   "kind": "site",
+   "stage": "in work",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "agent",
+   "decision": "After phases 1 and 2. Cutaways-only Buildings in Their Time and place-first titles approved by the owner 2026-11-22.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-22: rough draft -> in work"
+   ]
+  },
+  "explorer-ia": {
+   "title": "Explorer: information architecture pass (grouped page menu, builds out of the left column)",
+   "plate": null,
+   "kind": "site",
+   "stage": "in work",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "agent",
+   "decision": "Owner 2026-11-22: the menu list at the upper left is getting long and the left column feels overloaded; the shop banner stays. Proposal in REVIEW.md; a clickable local preview comes before any build.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-22: rough draft -> in work"
+   ]
   }
  }
 }
