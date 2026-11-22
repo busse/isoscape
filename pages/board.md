@@ -22,7 +22,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
-- **The Byrd Theatre: Cutaway** (BYRD·01): released as edition 1 (BYRD-01, 1.0.0) up to go-live: product is a Shopify DRAFT; go-live (merge.py live) is the planning session's step
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
 ## Research
@@ -54,7 +53,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | BSS·15 | Broad Street Station, 1943: The Cutaway | cutaway | 1.0.0 | yes, version 1 |
 | BSS·16 | Scott's Addition, Broad Street Station 1943 | set box | 1.0.0 | yes, version 1 |
 | BSS·M | Broad Street Station, 1943: The Railroad Map | set map | 3.1.0 | yes, version 3 |
-| BYRD·01 | The Byrd Theatre: Cutaway | cutaway | 1.0.0 | no |
+| BYRD·01 | The Byrd Theatre: Cutaway | cutaway | 1.0.0 | yes, version 1 |
 | GWY·01 | Gwynn's Island | print | 4.0.0 | yes, version 4 |
 | MSS·01 | Main Street Station, about 1952: Cutaway | cutaway | 1.0.0 | yes, version 1 |
 | RVA·01 | Richmond, 1925 | print | 5.0.0 | yes, version 5 |

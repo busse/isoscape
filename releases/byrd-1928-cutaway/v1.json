@@ -4,11 +4,11 @@
  "version": 1,
  "asset_version": "1.0.0",
  "version_note": null,
- "recorded": "2026-11-22T13:45:44+00:00",
+ "recorded": "2026-11-22T13:52:36+00:00",
  "provenance": "recorded at release",
  "isoscape": {
-  "commit": "a7ed2fe5cf8746389bcac389f6891ceda3d25521",
-  "subject": "Board: the Byrd cutaway rc1 inspected, waiting on release approval",
+  "commit": "900cc46e8c5fbcf1800a9767ec2d75e66d9c0ede",
+  "subject": "Merge byrd-release: the Byrd Theatre cutaway (BYRD-01) released as edition 1 up to go-live",
   "dirty": false
  },
  "kind": "cutaway",
@@ -113,7 +113,7 @@
   }
  ],
  "inputs": {
-  "cutaways/byrd-1928.json": "74c4176e08fbc9a94269a146eb5627474d3fef9d9746e0db2b4690dccff151b6",
+  "cutaways/byrd-1928.json": "ab34712dba25f4ea2303cc7d4cf5f0de6651b830fafabcc868a1bd2003cd2618",
   "tools/cutaway/sheet.py": "c7fb4bc8f417118db36aa97138767746092a0d09b42601275d32a28122a9970b",
   "tools/print/titleblock.py": "bd2362c53e0a73a2d9ed9825ed4513e697f1a2094256b39a9a8ef5c79425d8a6",
   "tools/release/stamp.py": "a71068c515fe9f22382f53275c87f264db4a3dd004f9e35604e7b52bee4dcb88",
@@ -194,7 +194,7 @@
     "handle": "the-byrd-theatre-christmas-eve-1928-cutaway",
     "id": "gid://shopify/Product/9152101089398",
     "format": "all (merged)",
-    "status": "DRAFT",
+    "status": "ACTIVE",
     "variants": 4
    }
   ],
