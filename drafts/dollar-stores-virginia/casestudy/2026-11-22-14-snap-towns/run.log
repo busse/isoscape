@@ -1,0 +1,16 @@
+places: six states 1460 with a Dollar General 1042 | Virginia 186
+                     test  places  stores  rate_ratio_per_10pts    low   high  resamples      verdict
+0                      T1    1460    1615                 1.132  1.097  1.170       2000        holds
+1                      T2    1461    1615                 1.249  1.192  1.306       2000        holds
+2              T3 grocery    1460    1603                 1.169  1.118  1.223       2000        holds
+3          T3 convenience    1460    4087                 1.205  1.158  1.251       2000        holds
+4  Virginia (exploratory)     186     155                 1.119  1.007  1.235       2000  exploratory
+               places  snap_share_lo  snap_share_hi  households   dg  grocery  with_dg  dg_per_1000_hh  grocery_per_1000_hh
+third                                                                                                                      
+lowest third      487          0.000          0.136      561591  416      435    0.608           0.741                0.775
+middle third      486          0.136          0.243      588098  620      582    0.767           1.054                0.990
+highest third     487          0.244          0.833      484705  579      586    0.766           1.195                1.209
+
+real	0m58.428s
+user	0m55.659s
+sys	0m2.251s

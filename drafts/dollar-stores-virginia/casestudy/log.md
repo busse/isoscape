@@ -405,3 +405,15 @@ snap_tests.csv, snap_by_period.csv and run.log.
   - In town: the same.
   - SNAP does not explain where in a town the store sits.
 - **Dead ends.** Two code errors and a memory stop (see run.log).
+
+## Step 14: which towns get Dollar Generals (November 22, 10:45-11:00)
+
+Folder: `2026-11-22-14-snap-towns/`, holding hypotheses.md (before any number), findings.md,
+towns_tests.csv, towns_thirds.csv, towns.csv.gz and run.log.
+
+- **Chris (10:45).** "Yes".
+- **Result.** In 1,460 small places in six states, towns with more SNAP households have more
+  Dollar Generals per household (1.13x per 10 points, 1.10 to 1.17). They also have more
+  groceries (1.17x) and convenience stores (1.21x).
+- **So** the link is general to food stores, not special to Dollar General.
+- **Poster.** No change proposed.

@@ -1,0 +1,6 @@
+test,places,stores,rate_ratio_per_10pts,low,high,resamples,verdict
+T1,1460,1615,1.132,1.097,1.17,2000,holds
+T2,1461,1615,1.249,1.192,1.306,2000,holds
+T3 grocery,1460,1603,1.169,1.118,1.223,2000,holds
+T3 convenience,1460,4087,1.205,1.158,1.251,2000,holds
+Virginia (exploratory),186,155,1.119,1.007,1.235,2000,exploratory
