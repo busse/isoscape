@@ -186,6 +186,14 @@
   "asset_version": "3.1.0",
   "record": "v3.1.json"
  },
+ "byrd-1928-cutaway": {
+  "title": "The Byrd Theatre, Christmas Eve 1928: Cutaway",
+  "current": 1,
+  "kind": "cutaway",
+  "records": [
+   "v1.json"
+  ]
+ },
  "gwynns-island": {
   "title": "Gwynn's Island",
   "current": 4,

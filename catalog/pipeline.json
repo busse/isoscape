@@ -1,7 +1,7 @@
 {
  "about": "The production board: one entry per design or piece of work. The scheme is README \"Stages and the board\"; edit it with `tools/release/board.py set`; `board.py check` validates it.",
  "scheme": "README.md#stages-and-the-board",
- "updated": "2026-11-21",
+ "updated": "2026-11-22",
  "sources": "backfilled November 18, 2026 from catalog/plates.json, releases/ (latest record per design) and the storefront (https://chrisbusse.com/products.json: 39 products live). Orders are \"unknown\" until the store's orders.py has been run.",
  "items": {
   "broad-street-1943-01-ay-tower": {
@@ -2730,14 +2730,14 @@
   "byrd-1928-cutaway": {
    "plate": "BYRD-01",
    "status": "active",
-   "asset_version": "1.0.0-rc1",
-   "published_version": null,
+   "asset_version": "1.0.0",
+   "published_version": 1,
    "live_version": null,
    "on_sale": false,
-   "orders": null,
-   "rounds": 1,
+   "orders": 0,
+   "rounds": 0,
    "waiting_on": "owner",
-   "decision": "rc1 stamped as BYRD-01 and inspected once, independently, on 2026-11-21: no arm's-length faults, no fix round needed, 7 up-close faults accepted (outputs/cutaway/byrd/rc1/inspection.md). Waiting on the owner for release approval; plate collection and set still changeable until then.",
+   "decision": "released as edition 1 (BYRD-01, 1.0.0) up to go-live: product is a Shopify DRAFT; go-live (merge.py live) is the planning session's step",
    "accepted_faults": [
     {
      "what": "the West Cary Street label covers the foot of the front east corner and sits close to the drawing bottom edge"
@@ -2762,24 +2762,28 @@
     }
    ],
    "planned_edition": null,
-   "last_inspected": "2026-11-21",
-   "branch": "byrd-rc1-stamp",
-   "worktree": "/home/claude/wt-byrd-rc1",
+   "last_inspected": "a7ed2fe",
+   "branch": null,
+   "worktree": null,
    "links": [
-    "/mnt/user-data/outputs/cutaway/byrd/sheet.png",
-    "/mnt/user-data/outputs/cutaway/byrd/sources.md",
-    "/mnt/user-data/outputs/cutaway/holiday-cutaway.md",
-    "cutaways/byrd-1928.json (on the branch)"
+    "releases/byrd-1928-cutaway/v1.json",
+    "cutaways/byrd-1928.json",
+    "/mnt/user-data/outputs/cutaway/byrd/rc1/inspection.md",
+    "/mnt/user-data/outputs/cutaway/byrd/release/release.md",
+    "/mnt/user-data/outputs/cutaway/byrd/sources.md"
    ],
    "title": "The Byrd Theatre: Cutaway",
    "kind": "cutaway",
-   "stage": "final draft",
+   "stage": "final production",
    "notes": "open: a source for the segregation caption; the 78% figure is approximate; the notes block is long. Holiday piece.",
    "budget_note": null,
    "log": [
     "2026-11-21: working draft -> final draft",
-    "2026-11-21: plate BYRD-01 assigned; rc1 stamped as the release-candidate proof (blockFace inside the holly border); inspection not yet run"
-   ]
+    "2026-11-21: plate BYRD-01 assigned; rc1 stamped as the release-candidate proof (blockFace inside the holly border); inspection not yet run",
+    "2026-11-22: owner approved release (\"Yes, release it\"; plate BYRD-01 kept as assigned); final prints re-made at a7ed2fe, the same art as rc1 (sheet SVG 6a198a37, print files byte for byte the rc1 run)",
+    "2026-11-22: final draft -> final production"
+   ],
+   "released": "2026-11-22"
   },
   "main-street-1952-cutaway": {
    "plate": "MSS-01",
