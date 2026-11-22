@@ -3072,23 +3072,30 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "agent",
-   "decision": "d4: independent fact check applied (154 claims; 6 contradicted, 2 unsupported, 42 partly; all must-fix and should-fix corrected). Owner 2026-11-22: publish without outside review. In its place: three independent reads with Claude (scholar, dignity and harm, first-time reader and publish readiness), fixes, an honest notice on the page; then his approval of the final preview.",
+   "waiting_on": "owner",
+   "decision": "d5, the final draft: the three independent reads made with Claude are applied (scholar: 6 must-fix, 12 should-fix, 11 notes; dignity and harm: 7 must-fix, 13 should-fix; first-time reader and publish readiness: 7 must-fix and its should-fixes). All must-fixes are applied; the few should-fixes left are listed with reasons in working/d5.md. The owner chose publication without outside review (2026-11-22); the page states how it was made and claims no review. Waiting on the owner to approve the preview (working/preview-d5/) and remove unlisted.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
    "branch": "story-redlining",
    "worktree": null,
    "links": [
-    "/mnt/user-data/outputs/stories/redlining/brief.md"
+    "/mnt/user-data/outputs/stories/redlining/brief.md",
+    "/mnt/user-data/outputs/stories/redlining/working/d5.md"
    ],
    "title": "Redlining in Richmond, 1937 to today",
    "kind": "story",
-   "stage": "outline",
-   "notes": "Reader (owner, 2026-11-22): assume no prior knowledge; experts should still learn from the detail. Outlines: the owner chose the set redrawn from the public-domain scan (branch holc-redraw, redraw/compare.md): D land 30.2%, motorway share 64.5%. Open: five small pieces the map prints no number on.",
+   "stage": "fact check",
+   "notes": "Reader (owner, 2026-11-22): assume no prior knowledge of the HOLC, grading or redlining; a reader who knows the subject should still learn from the detail and the way it is drawn. Asset: final draft d5 (2026-11-22, branch story-redlining); no asset version is given to a story.",
    "private": true,
    "log": [
-    "2026-11-21: research -> outline"
+    "2026-11-21: research -> outline",
+    "2026-11-22: working draft d1 (outline approved; owner decisions applied)",
+    "2026-11-22: working draft d2 (owner decisions on d1 applied)",
+    "2026-11-22: outline -> fact check (owner approved the look of d2; d3 edits made)",
+    "2026-11-22: outline -> fact check",
+    "2026-11-22: working draft d4 (fact check applied)",
+    "2026-11-22: final draft d5 (three reads applied; owner chose publication without outside review)"
    ]
   },
   "story-slave-trade": {

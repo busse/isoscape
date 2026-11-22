@@ -1,0 +1,567 @@
+{
+ "about": "Computed by tools/stories/redlining/measure.py from the cached data; see its docstring for the method.",
+ "graded_land": {
+  "A": {
+   "areas": 7,
+   "km2": 7.63,
+   "share": 0.15852468087013002
+  },
+  "B": {
+   "areas": 15,
+   "km2": 12.49,
+   "share": 0.25934705521940843
+  },
+  "C": {
+   "areas": 14,
+   "km2": 13.5,
+   "share": 0.2802891981913534
+  },
+  "D": {
+   "areas": 12,
+   "km2": 14.54,
+   "share": 0.3018390657191082
+  }
+ },
+ "graded_km2_union": 48.16,
+ "overlap_km2": 0.001,
+ "ungraded_features": [],
+ "unnumbered_ha_by_grade": {
+  "A": 0.0,
+  "B": 11.3,
+  "C": 0.0,
+  "D": 22.3
+ },
+ "extent_km": [
+  13.5,
+  10.6
+ ],
+ "frame": {
+  "share_of_grade_inside": {
+   "A": 1.0,
+   "B": 0.9999999999999999,
+   "C": 0.9168139087389039,
+   "D": 0.9908867920682063
+  },
+  "areas_cut_by_frame": [
+   "C12",
+   "C13",
+   "C14",
+   "C6",
+   "D11.5"
+  ],
+  "share_of_area_outside": {
+   "C12": 0.027619352100479604,
+   "C13": 0.7280094354364678,
+   "C14": 0.9999999999999997,
+   "C6": 0.12020128753771013,
+   "D11.5": 0.09824774683409059
+  }
+ },
+ "motorway": {
+  "km_in_graded": 20.26,
+  "km_total_in_cache": 113.0,
+  "km_in_frame": 90.8,
+  "by_grade_km": {
+   "A": 0.76,
+   "B": 1.86,
+   "C": 4.56,
+   "D": 13.07
+  },
+  "by_grade_share": {
+   "A": 0.03758895343639518,
+   "B": 0.09182022509493648,
+   "C": 0.2252738849083886,
+   "D": 0.6453169365602798
+  }
+ },
+ "motorway_and_links": {
+  "km_in_graded": 32.12,
+  "km_total_in_cache": 176.1,
+  "km_in_frame": 143.5,
+  "by_grade_km": {
+   "A": 1.08,
+   "B": 2.42,
+   "C": 7.4,
+   "D": 21.23
+  },
+  "by_grade_share": {
+   "A": 0.03353498770884624,
+   "B": 0.07531811839905318,
+   "C": 0.2302721165240389,
+   "D": 0.6608747773680618
+  }
+ },
+ "motorway_in_d_by_road_km": {
+  "I 64": 5.15,
+  "VA 195": 3.85,
+  "I 64;I 95": 2.25,
+  "I 95": 1.82
+ },
+ "motorway_in_d_by_area_km": {
+  "D1": 5.92,
+  "D5": 3.3,
+  "D8": 3.26
+ },
+ "motorway_in_d1_km": {
+  "turnpike": 4.07,
+  "other": 1.85
+ },
+ "osm_checks": {
+  "providence_park_share_in_D4": 0.4851338376972635,
+  "providence_park_osm_is": "leisure=park (a park, not the neighborhood): not used on the page from d5",
+  "D8_share_in_oregon_hill_district": {
+   "west_line_at_linden_street": 0.28713222261609356,
+   "west_line_at_cemetery_east_edge": 0.2403403048564339
+  },
+  "D1_share_west_of_belvidere_north_of_broad": 0.09530674355277911,
+  "D6_buildings_osm": 3892,
+  "D6_buildings_historic_or_heritage": 449
+ },
+ "motorway_base_rate": {
+  "about": "Base rates for the highway share in D (measure.py, base_rate): density, distance, location alone, fit error.",
+  "capitol": {
+   "osm_way": 45088494,
+   "lonlat": [
+    -77.43357430598051,
+    37.53879726646815
+   ]
+  },
+  "ring_m": 1000,
+  "near_m": 4000,
+  "sample_m": 50,
+  "density": {
+   "A": {
+    "km": 0.7615461311869534,
+    "km2": 7.634912457719177,
+    "km_per_km2": 0.0997452341993787
+   },
+   "B": {
+    "km": 1.860262944114307,
+    "km2": 12.490749401915641,
+    "km_per_km2": 0.14893125178133892
+   },
+   "C": {
+    "km": 4.564012557565125,
+    "km2": 13.49937107136299,
+    "km_per_km2": 0.33809075500169283
+   },
+   "D": {
+    "km": 13.074017004981748,
+    "km2": 14.537262150195339,
+    "km_per_km2": 0.8993452047506807
+   },
+   "ungraded": {
+    "km": 70.58148883441216,
+    "km2": 94.078772560413,
+    "km_per_km2": 0.7502381984106777
+   }
+  },
+  "density_near": {
+   "A": {
+    "km": 0.0,
+    "km2": 0.0022912152280938182,
+    "km_per_km2": 0.0
+   },
+   "B": {
+    "km": 0.0,
+    "km2": 1.369490657076099,
+    "km_per_km2": 0.0
+   },
+   "C": {
+    "km": 0.8941307855999298,
+    "km2": 5.687672769623557,
+    "km_per_km2": 0.1572050330277894
+   },
+   "D": {
+    "km": 13.074017004981748,
+    "km2": 12.812515272460441,
+    "km_per_km2": 1.0204098669902377
+   },
+   "ungraded": {
+    "km": 22.12806044315786,
+    "km2": 28.619818825102662,
+    "km_per_km2": 0.773172624829797
+   }
+  },
+  "median_distance_km": {
+   "A": 6.076284319272141,
+   "B": 5.722975517952747,
+   "C": 4.0920859005441566,
+   "D": 2.6156231965907617
+  },
+  "location_alone": {
+   "expected_share": {
+    "A": 0.07011586546599391,
+    "B": 0.12672678332846163,
+    "C": 0.24355915108124646,
+    "D": 0.5595982001242981
+   },
+   "observed_share": {
+    "A": 0.03758895343639518,
+    "B": 0.09182022509493648,
+    "C": 0.2252738849083886,
+    "D": 0.6453169365602797
+   },
+   "expected_km": {
+    "A": 1.420536120294105,
+    "B": 2.5674641813281758,
+    "C": 4.934469099677328,
+    "D": 11.337369236548525
+   },
+   "observed_km": {
+    "A": 0.7615461311869534,
+    "B": 1.8602629441143068,
+    "C": 4.564012557565125,
+    "D": 13.074017004981748
+   },
+   "rings": [
+    {
+     "from_km": 0.0,
+     "to_km": 1.0,
+     "graded_km2": 0.36611681870262885,
+     "D_land_share": 1.0,
+     "motorway_km_in_graded": 1.4778354140521364,
+     "D_motorway_km": 1.4778354140521364
+    },
+    {
+     "from_km": 1.0,
+     "to_km": 2.0,
+     "graded_km2": 3.2100669175789105,
+     "D_land_share": 0.977950200746773,
+     "motorway_km_in_graded": 4.265398086560076,
+     "D_motorway_km": 4.265398086560076
+    },
+    {
+     "from_km": 2.0,
+     "to_km": 3.0,
+     "graded_km2": 7.319026033689817,
+     "D_land_share": 0.8099060046118183,
+     "motorway_km_in_graded": 4.835580277099201,
+     "D_motorway_km": 4.835580277099201
+    },
+    {
+     "from_km": 3.0,
+     "to_km": 4.0,
+     "graded_km2": 8.976760144416835,
+     "D_land_share": 0.37645984523794784,
+     "motorway_km_in_graded": 3.3893340128702643,
+     "D_motorway_km": 2.4952032272703346
+    },
+    {
+     "from_km": 4.0,
+     "to_km": 5.0,
+     "graded_km2": 9.605427329394326,
+     "D_land_share": 0.04102455002277765,
+     "motorway_km_in_graded": 3.409379822561335,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 5.0,
+     "to_km": 6.0,
+     "graded_km2": 8.012697475754923,
+     "D_land_share": 0.14759245109506058,
+     "motorway_km_in_graded": 2.3694041950374225,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 6.0,
+     "to_km": 7.0,
+     "graded_km2": 4.455738187165513,
+     "D_land_share": 0.03323240217898114,
+     "motorway_km_in_graded": 0.1895379526990563,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 7.0,
+     "to_km": 8.0,
+     "graded_km2": 2.035324220156232,
+     "D_land_share": 0.0,
+     "motorway_km_in_graded": 0.32336887696864164,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 8.0,
+     "to_km": 9.0,
+     "graded_km2": 2.237492908862972,
+     "D_land_share": 0.0,
+     "motorway_km_in_graded": 0.0,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 9.0,
+     "to_km": 10.0,
+     "graded_km2": 1.2939333920894451,
+     "D_land_share": 0.0,
+     "motorway_km_in_graded": 0.0,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 10.0,
+     "to_km": 11.0,
+     "graded_km2": 0.6497116533815372,
+     "D_land_share": 0.0,
+     "motorway_km_in_graded": 0.0,
+     "D_motorway_km": 0.0
+    },
+    {
+     "from_km": 11.0,
+     "to_km": 12.0,
+     "graded_km2": 0.0,
+     "D_land_share": null,
+     "motorway_km_in_graded": 0.0,
+     "D_motorway_km": 0.0
+    }
+   ]
+  },
+  "shift_D_share": {
+   "12": {
+    "min": 0.6385977759302418,
+    "max": 0.6513519899955957
+   },
+   "24": {
+    "min": 0.6332546923301876,
+    "max": 0.6534504880682934
+   }
+  },
+  "D_km_within_25m_of_D_edge": 2.067152630691168
+ },
+ "yearbuilt_by_grade": {
+  "A": {
+   "parcels": 3278,
+   "by1937": 1172,
+   "since2000": 56,
+   "share_by1937": 0.35753508236729714,
+   "share_2000_on": 0.017083587553386213
+  },
+  "B": {
+   "parcels": 8388,
+   "by1937": 4163,
+   "since2000": 196,
+   "share_by1937": 0.4963042441583214,
+   "share_2000_on": 0.023366714353838816
+  },
+  "C": {
+   "parcels": 13037,
+   "by1937": 9413,
+   "since2000": 296,
+   "share_by1937": 0.7220219375623226,
+   "share_2000_on": 0.022704609956278286
+  },
+  "D": {
+   "parcels": 10276,
+   "by1937": 5005,
+   "since2000": 1336,
+   "share_by1937": 0.48705722070844687,
+   "share_2000_on": 0.1300116776956014
+  }
+ },
+ "courts": {},
+ "courts_note": "Empty when the OSM cache holds no outline named for the court (true of the November 16, 2026 cache): the brief's placements are not yet rechecked here.",
+ "jackson_ward_1952_survival": {
+  "outlines_1952": 3158,
+  "gone_today": 2744,
+  "standing_today": 414,
+  "share_standing": 0.1310956301456618
+ },
+ "areas": {
+  "D1": {
+   "km2": 2.5,
+   "parcels": 1285,
+   "by1937": 725,
+   "y1938_1977": 222,
+   "since2000": 227,
+   "buildings_osm": 1744,
+   "motorway_km": 5.92,
+   "share_by1937": 0.5642023346303502,
+   "share_y1938_1977": 0.17276264591439688,
+   "share_since2000": 0.17665369649805449
+  },
+  "D2": {
+   "km2": 0.51,
+   "parcels": 302,
+   "by1937": 52,
+   "y1938_1977": 217,
+   "since2000": 8,
+   "buildings_osm": 579,
+   "motorway_km": 0.0,
+   "share_by1937": 0.17218543046357615,
+   "share_y1938_1977": 0.7185430463576159,
+   "share_since2000": 0.026490066225165563
+  },
+  "D3": {
+   "km2": 0.88,
+   "parcels": 27,
+   "by1937": 0,
+   "y1938_1977": 25,
+   "since2000": 1,
+   "buildings_osm": 700,
+   "motorway_km": 0.0,
+   "share_by1937": 0.0,
+   "share_y1938_1977": 0.9259259259259259,
+   "share_since2000": 0.037037037037037035
+  },
+  "D4": {
+   "km2": 0.27,
+   "parcels": 307,
+   "by1937": 139,
+   "y1938_1977": 149,
+   "since2000": 6,
+   "buildings_osm": 575,
+   "motorway_km": 0.0,
+   "share_by1937": 0.4527687296416938,
+   "share_y1938_1977": 0.48534201954397393,
+   "share_since2000": 0.019543973941368076
+  },
+  "D5": {
+   "km2": 3.29,
+   "parcels": 1561,
+   "by1937": 685,
+   "y1938_1977": 688,
+   "since2000": 108,
+   "buildings_osm": 3457,
+   "motorway_km": 3.3,
+   "share_by1937": 0.438821268417681,
+   "share_y1938_1977": 0.4407431133888533,
+   "share_since2000": 0.06918641896220372
+  },
+  "D6": {
+   "km2": 2.3,
+   "parcels": 2953,
+   "by1937": 2006,
+   "y1938_1977": 518,
+   "since2000": 275,
+   "buildings_osm": 3892,
+   "motorway_km": 0.0,
+   "share_by1937": 0.6793091771080257,
+   "share_y1938_1977": 0.1754148323738571,
+   "share_since2000": 0.093125634947511
+  },
+  "D7": {
+   "km2": 0.94,
+   "parcels": 387,
+   "by1937": 34,
+   "y1938_1977": 89,
+   "since2000": 105,
+   "buildings_osm": 665,
+   "motorway_km": 0.0,
+   "share_by1937": 0.08785529715762273,
+   "share_y1938_1977": 0.22997416020671835,
+   "share_since2000": 0.2713178294573643
+  },
+  "D8": {
+   "km2": 1.13,
+   "parcels": 1278,
+   "by1937": 534,
+   "y1938_1977": 134,
+   "since2000": 280,
+   "buildings_osm": 1392,
+   "motorway_km": 3.26,
+   "share_by1937": 0.41784037558685444,
+   "share_y1938_1977": 0.10485133020344288,
+   "share_since2000": 0.2190923317683881
+  },
+  "D9": {
+   "km2": 0.48,
+   "parcels": 384,
+   "by1937": 10,
+   "y1938_1977": 364,
+   "since2000": 7,
+   "buildings_osm": 575,
+   "motorway_km": 0.0,
+   "share_by1937": 0.026041666666666668,
+   "share_y1938_1977": 0.9479166666666666,
+   "share_since2000": 0.018229166666666668
+  },
+  "D10": {
+   "km2": 0.31,
+   "parcels": 232,
+   "by1937": 130,
+   "y1938_1977": 58,
+   "since2000": 17,
+   "buildings_osm": 423,
+   "motorway_km": 0.0,
+   "share_by1937": 0.5603448275862069,
+   "share_y1938_1977": 0.25,
+   "share_since2000": 0.07327586206896551
+  },
+  "D11": {
+   "km2": 0.34,
+   "parcels": 238,
+   "by1937": 129,
+   "y1938_1977": 14,
+   "since2000": 85,
+   "buildings_osm": 370,
+   "motorway_km": 0.0,
+   "share_by1937": 0.542016806722689,
+   "share_y1938_1977": 0.058823529411764705,
+   "share_since2000": 0.35714285714285715
+  },
+  "D11.5": {
+   "km2": 1.35,
+   "parcels": 1194,
+   "by1937": 482,
+   "y1938_1977": 493,
+   "since2000": 211,
+   "buildings_osm": 2019,
+   "motorway_km": 0.0,
+   "share_by1937": 0.4036850921273032,
+   "share_y1938_1977": 0.4128978224455611,
+   "share_since2000": 0.17671691792294808
+  },
+  "A5": {
+   "km2": 2.46,
+   "parcels": 561,
+   "by1937": 82,
+   "y1938_1977": 435,
+   "since2000": 10,
+   "buildings_osm": 730,
+   "motorway_km": 0.76,
+   "share_by1937": 0.14616755793226383,
+   "share_y1938_1977": 0.7754010695187166,
+   "share_since2000": 0.017825311942959002
+  }
+ },
+ "terrain_by_grade": {
+  "A": {
+   "nodes": 303844,
+   "elev_mean_m": 59.0,
+   "elev_median_m": 61.3,
+   "elev_p10_m": 31.1,
+   "elev_p90_m": 75.1,
+   "slope_mean_deg": 5.2,
+   "slope_median_deg": 2.4,
+   "share_steeper_10deg": 0.16225102355155935
+  },
+  "B": {
+   "nodes": 497090,
+   "elev_mean_m": 63.1,
+   "elev_median_m": 61.7,
+   "elev_p10_m": 50.3,
+   "elev_p90_m": 75.8,
+   "slope_mean_deg": 3.0,
+   "slope_median_deg": 1.9,
+   "share_steeper_10deg": 0.046160655012170836
+  },
+  "C": {
+   "nodes": 502312,
+   "elev_mean_m": 55.9,
+   "elev_median_m": 57.0,
+   "elev_p10_m": 40.5,
+   "elev_p90_m": 67.9,
+   "slope_mean_deg": 3.3,
+   "slope_median_deg": 1.9,
+   "share_steeper_10deg": 0.0653776935450477
+  },
+  "D": {
+   "nodes": 576007,
+   "elev_mean_m": 45.0,
+   "elev_median_m": 47.3,
+   "elev_p10_m": 26.7,
+   "elev_p90_m": 59.2,
+   "slope_mean_deg": 3.4,
+   "slope_median_deg": 1.9,
+   "share_steeper_10deg": 0.06376485007994695
+  }
+ },
+ "outlines": "history/holc/richmond-1937-redrawn.geojson"
+}

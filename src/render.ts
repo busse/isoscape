@@ -369,7 +369,9 @@ export const renderSvg = (scene: Scene): Rendered => {
   const pad = isle === undefined ? 24 : Math.max(24, (ix1 - ix0) * 0.04)
   // A dated scene carries its year as a caption above the plate, in room of its own.
   const capSize = scene.time === undefined ? 0 : Math.max(28, (x1 - x0) * 0.022)
-  const capRoom = scene.time === undefined ? 0 : capSize * (isle?.caption === undefined ? 2.4 : 3.4)
+  // A graded scene's key (`Tint.legend`) takes two more lines under the caption.
+  const key = scene.time === undefined ? undefined : scene.tintLegend
+  const capRoom = scene.time === undefined ? 0 : capSize * ((isle?.caption === undefined ? 2.4 : 3.4) + (key === undefined ? 0 : 1.9))
   const vb: [number, number, number, number] = [ix0 - pad, top - pad - capRoom, ix1 - ix0 + 2 * pad, bottom - top + 2 * pad + capRoom]
 
   const out: string[] = []
@@ -391,6 +393,9 @@ export const renderSvg = (scene: Scene): Rendered => {
     sealed('road', p.road), sealed('rail', scene.boldRail ? p.railTie : p.rail), sealed('tram', p.tram), sealed('weir', p.foam),
     // A story's pick-out (Highlight), only in a scene that has one.
     ...(scene.ribbons.some((rb) => rb.kind === 'mark') ? [sealed('mark', p.mark.line)] : []),
+    // Graded ground (`Tint`), only in a scene that has it.
+    ...(scene.tints === undefined ? [] : p.tint.tones.map((tone, k) => sealed(`tg${k}`, tone))),
+    ...(scene.ribbons.some((rb) => rb.kind === 'tintroad') ? [sealed('tintroad', p.tint.road)] : []),
     // At close scale (CLOSE_RAIL px per meter or more) a track shows its ties, each a
     // rectangle on the ground square to the track (TIE: 2 m by 0.25 m, every 0.67 m, painted in
     // the strips like the rest of the ground), and its two running rails, 1.44 m apart.
@@ -492,7 +497,12 @@ export const renderSvg = (scene: Scene): Rendered => {
   })
   // Cover on land paints under the water: with terrain, the water comes from the grid and is
   // painted first in each strip, so this cover goes in ahead of it (see paintStrip).
-  const underWater: Layer[] = coverLayers(false)
+  // Graded ground (`Tint`) goes last of the cover: over parks and woods, under water, roads and rail.
+  const tintLayers: Layer[] = scene.tints === undefined ? [] : p.tint.tones.map((_, k) => ({
+    cls: `tg${k}`,
+    entries: scene.tints!.filter((t) => t.tone === k).map((t) => entryOf(t.rings.slice())),
+  }))
+  const underWater: Layer[] = [...coverLayers(false), ...tintLayers]
   const overWater: Layer[] = coverLayers(true)
   const layers: Layer[] = [
     // OSM's water outline draws a flat scene's shore; with terrain the water grid does.
@@ -504,6 +514,7 @@ export const renderSvg = (scene: Scene): Rendered => {
     ribbonLayer('path'),
     ribbonLayer('racetrack'),
     ribbonLayer('road'),
+    ...(scene.ribbons.some((rb) => rb.kind === 'tintroad') ? [ribbonLayer('tintroad')] : []),
     ribbonLayer('rail'),
     // Close up, the ties lie on the ballast as ground polygons (opaque: two strips paint the
     // ground where they lap, and a see-through tie would come out darker there).
@@ -1343,6 +1354,22 @@ export const renderSvg = (scene: Scene): Rendered => {
     }
     out.push(`</g>`)
   }
+  /** The graded ground's key: a heading, then a swatch and label for each tone in one row, then the source. */
+  const tintKey = (k: NonNullable<Scene['tintLegend']>, x: number, y: number, size: number): string[] => {
+    const s = size * 0.4
+    const row = y + size * 0.95
+    const parts = [`<text x="${f(x)}" y="${f(y + size * 0.45)}" font-size="${f(s)}">${esc(k.title)}</text>`]
+    let at = x
+    k.labels.forEach((label, i) => {
+      const tone = p.tint.tones[i]
+      if (tone === undefined) return
+      parts.push(`<rect x="${f(at)}" y="${f(row - s * 0.85)}" width="${f(s * 1.6)}" height="${f(s)}" fill="${tone}" stroke="${p.ink}" stroke-width="${p.lineWidth}"/>`)
+      parts.push(`<text x="${f(at + s * 2)}" y="${f(row)}" font-size="${f(s)}">${esc(label)}</text>`)
+      at += s * 2.6 + label.length * s * 0.5
+    })
+    if (k.source !== undefined) parts.push(`<text x="${f(x)}" y="${f(row + size * 0.6)}" font-size="${f(s * 0.75)}" font-style="italic">${esc(k.source)}</text>`)
+    return parts
+  }
   if (scene.time !== undefined) {
     const tx = vb[0] + pad
     const ty = vb[1] + pad + capSize
@@ -1353,6 +1380,7 @@ export const renderSvg = (scene: Scene): Rendered => {
       // The island's line is pushed only when there is one, so a scene without it writes the
       // same bytes as before the island existed (released dated prints are pinned by hash).
       ...(isle?.caption === undefined ? [] : [`<text x="${f(tx)}" y="${f(ty + capSize * 1.05)}" font-size="${f(capSize * 0.42)}">${esc(isle.caption)}</text>`]),
+      ...(key === undefined ? [] : tintKey(key, tx, ty + capSize * (isle?.caption === undefined ? 1.0 : 2.0), capSize)),
       `</g>`,
     )
   }

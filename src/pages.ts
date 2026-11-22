@@ -22,7 +22,7 @@
  * Links are written as they would be for GitHub, so the files read well there too: `#rapids`
  * is a section of this page, `about.md` or `about.md#data` another page. Both are rewritten to
  * explorer routes. Images (`![alt](diagram.svg)`) name files beside the page and are inlined
- * as data: URIs; anything that is not a plain file name in `pages/` is dropped to its alt text.
+ * as data: URIs (or, with `images: link` in the front matter, linked as their copies in `p/`); anything that is not a plain file name in `pages/` is dropped to its alt text.
  * Raster images carry their width and height, so the page keeps its layout while they load and
  * a section link lands where it should.
  *
@@ -135,7 +135,9 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
       const hasLarge = readAsset(large) !== null
       const linked = (n: string) => (mode.imageHref !== undefined ? mode.imageHref(n) : mode.fileHref !== undefined ? mode.fileHref(n) : `p/${n}`)
       return {
-        src: mode.imageHref === undefined ? `data:${mime};base64,${bytes.toString('base64')}` : mode.imageHref(name),
+        // `images: link` in the front matter links the explorer's copy in p/ (as the larger copy
+        // is linked) instead of inlining it, so a picture-heavy page stays out of index.html.
+        src: mode.imageHref !== undefined ? mode.imageHref(name) : data.images === 'link' ? linked(name) : `data:${mime};base64,${bytes.toString('base64')}`,
         ...(size === undefined ? {} : size),
         full: linked(hasLarge ? large : name),
       }

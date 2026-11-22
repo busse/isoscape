@@ -1,0 +1,12 @@
+{
+ "about": "Tinted pieces of the 1937 Richmond map that the map prints no number on. The owner's decision (November 22, 2026): they keep their grade's tint and count in the citywide totals by grade, but belong to no numbered area, so every per-area figure, box and count leaves them out. Each is found in the redrawn outlines as the piece of the named feature that contains `at` ([lon, lat]); outlines.py splits it off when the story loads the outlines. history/holc/richmond-1937-redrawn.geojson itself is unchanged (it is the redraw's output, made by tools/holc/).",
+ "pieces": [
+  {"in": "B3", "grade": "B", "at": [-77.49477, 37.59413], "what": "Detached B block at Rodney, Wythe and Bethlehem Roads, about 11 ha (the redraw named it B3, Mapping Inequality B4)"},
+  {"in": "D1", "grade": "D", "at": [-77.44379, 37.53953], "what": "D block on Canal and Byrd Streets, about 10 ha (the redraw named it D1, Mapping Inequality D8)"},
+  {"in": "D1", "grade": "D", "at": [-77.44747, 37.54620], "what": "D block by Monroe Park, about 5 ha (the redraw named it D1, Mapping Inequality D8)"},
+  {"in": "D1", "grade": "D", "at": [-77.41736, 37.56505], "what": "Thin D strip along the east edge of C10, about 8 ha (the redraw named it D1, Mapping Inequality D5)"}
+ ],
+ "not_split": [
+  {"in": "C10", "grade": "C", "what": "A small C patch inside C11's line (under 1 ha where the two sets differ), which Mapping Inequality names C8. In the redraw it is joined to C10's single outline, so it cannot be split off as a piece without editing the geometry; it stays in C10. The story gives no per-area number for C8 or C10."}
+ ]
+}

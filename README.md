@@ -327,7 +327,8 @@ summary: One line, shown as the nav link's tooltip.
 
 Text, **emphasis**, `code`, lists, tables, fenced code and block quotes.
 Link a section of this page as [rapids](#rapids), another page as [About](about.md),
-or a section of it as [data](about.md#data). Images beside the page are inlined:
+or a section of it as [data](about.md#data). Images beside the page are inlined (unless the
+page sets `images: link`, below):
 ![The pipeline](pipeline.svg)
 ```
 
@@ -345,7 +346,10 @@ or a section of it as [data](about.md#data). Images beside the page are inlined:
   for a page someone has to read before it goes out, and delete the line to publish it.
 - `shop: false` shows no shop link while the page is open: the explorer hides its "Shop prints"
   link and the phone bar's button, and the page's static and share pages carry no shop link,
-  shop button or print link. The Jackson Ward story page uses it.
+  shop button or print link. The story pages (`jackson-ward`, `redlining`) use it.
+- `images: link` links the page's images in the explorer as their copies in `p/` (which every
+  explorer build writes beside `index.html`), in place of inlining them, so a picture-heavy
+  page does not add its images to the `index.html` every visitor loads. The story pages use it.
 - `schema: FAQPage` gives the static page `FAQPage` JSON-LD in place of `Article`. Each heading
   that ends in a question mark is a question, and the text under it, up to the next heading, is
   its answer (`faqEntries` in `src/static-pages.ts`).
@@ -678,6 +682,14 @@ buildings in the highway's footprint) and `streets` (the stretches of street it 
 today's bridges). A highlight can also take `ids`, a file of the traced ids a count counted in
 each polygon (`tools/sanborn/jw/count.py` writes one), and then roofs exactly those, so the
 picture and the count agree. Every other build is unchanged.
+
+**Graded ground.** A switch can carry a `tint` (`Tint` in `src/history.ts`): polygons from a
+GeoJSON file painted on the ground by one property's value (`values`, in the order of the
+palette's `tint.tones`), strip by strip with the other ground cover, under water, streets and
+rail. `legend` sets a key under the year caption; `roads` draws the listed OSM `highway` kinds in
+`tint.road`. The redlining story (`history/richmond-1937.json`, written by
+`tools/stories/redlining/history.py`) has `grades` and `built`. Its polygons are CC BY-NC and are
+kept in `data/holc/`, outside git (see `tools/stories/redlining/sources.md`).
 
 **Islands.** A switch can carry an `island` (`Island` in `src/history.ts`): the scene is cut
 to one polygon and drawn alone on blank paper. The ground is painted strip by strip as always,
@@ -1072,7 +1084,9 @@ Its stages are:
 2. **outline**: Gate: Chris approves the outline.
 3. **fact check**: every claim is checked against a source that was opened, and listed.
 4. **outside review**: where the subject calls for it (slavery, redlining, displacement), by
-   people with standing in it: historians, and the communities it is about.
+   people with standing in it: historians, and the communities it is about. The owner may
+   publish a story without it; the board records that decision, and the page states how it
+   was made and never implies a review that did not happen.
 5. **published**: Gate: Chris approves publication.
 
 ### Site changes

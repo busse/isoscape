@@ -1,0 +1,494 @@
+{
+ "_note": "Area labels as printed on the 1937 scan (NARA RG 195 via FRASER, rg195_holc_Richmond_VA.pdf, image 9832x7841 px). circle: index in circles.json (found by circles.py) and the label read in it. at: a point in scan pixels inside the area the label names: the circle's center when the circle sits in the area, else the tip of the printed leader line or arrow, read off the scan. leader_only: the circle stands outside its area and its leader could not be followed; the circle center is used only for nearness.",
+ "seeds": [
+  {
+   "label": "A1",
+   "circle": 8,
+   "at": [
+    5326,
+    1842
+   ]
+  },
+  {
+   "label": "A2",
+   "circle": 10,
+   "at": [
+    1238,
+    2002
+   ]
+  },
+  {
+   "label": "A3",
+   "circle": 20,
+   "at": [
+    2134,
+    2978
+   ]
+  },
+  {
+   "label": "A4",
+   "circle": 13,
+   "at": [
+    3502,
+    2266
+   ]
+  },
+  {
+   "label": "A4",
+   "circle": 16,
+   "at": [
+    3362,
+    2642
+   ]
+  },
+  {
+   "label": "A5",
+   "circle": 27,
+   "at": [
+    2722,
+    3842
+   ]
+  },
+  {
+   "label": "A6",
+   "circle": 41,
+   "at": [
+    3658,
+    5498
+   ]
+  },
+  {
+   "label": "A7",
+   "circle": 14,
+   "at": [
+    6030,
+    2022
+   ]
+  },
+  {
+   "label": "B1",
+   "circle": 7,
+   "at": [
+    1146,
+    1714
+   ]
+  },
+  {
+   "label": "B2",
+   "circle": 11,
+   "at": [
+    1922,
+    2130
+   ]
+  },
+  {
+   "label": "B3",
+   "circle": 1,
+   "at": [
+    2370,
+    1518
+   ]
+  },
+  {
+   "label": "B4",
+   "circle": 12,
+   "at": [
+    3058,
+    2034
+   ]
+  },
+  {
+   "label": "B5",
+   "circle": 21,
+   "at": [
+    3886,
+    3014
+   ]
+  },
+  {
+   "label": "B6",
+   "circle": 33,
+   "at": [
+    3500,
+    4450
+   ],
+   "leader": "from the circle's top to Bute Lane"
+  },
+  {
+   "label": "B7",
+   "circle": 35,
+   "at": [
+    4000,
+    4550
+   ],
+   "leader": "left and up to the strip along Spottswood and Berkeley"
+  },
+  {
+   "label": "B8",
+   "circle": 40,
+   "at": [
+    3054,
+    5522
+   ]
+  },
+  {
+   "label": "B9",
+   "circle": 46,
+   "at": [
+    3958,
+    6090
+   ]
+  },
+  {
+   "label": "B10",
+   "circle": 43,
+   "at": [
+    4918,
+    5954
+   ]
+  },
+  {
+   "label": "B11",
+   "circle": 2,
+   "at": [
+    4589,
+    1788
+   ],
+   "leader": "arrow into Maple Shade Lane to Westwood"
+  },
+  {
+   "label": "B12",
+   "circle": 3,
+   "at": [
+    4896,
+    1316
+   ],
+   "leader": "arrow at Claremont"
+  },
+  {
+   "label": "B12.5",
+   "circle": null,
+   "printed": "B12 1/2",
+   "at": [
+    4948,
+    872
+   ],
+   "leader": "arrow at Princeton and Pope"
+  },
+  {
+   "label": "B13",
+   "circle": 4,
+   "at": [
+    5842,
+    1582
+   ]
+  },
+  {
+   "label": "B14",
+   "circle": 17,
+   "at": [
+    5802,
+    2498
+   ]
+  },
+  {
+   "label": "C1",
+   "circle": null,
+   "at": [
+    1408,
+    1423
+   ]
+  },
+  {
+   "label": "C2",
+   "circle": 24,
+   "at": [
+    4450,
+    3474
+   ]
+  },
+  {
+   "label": "C3",
+   "circle": 28,
+   "at": [
+    3758,
+    3950
+   ]
+  },
+  {
+   "label": "C4",
+   "circle": 31,
+   "at": [
+    4438,
+    4234
+   ]
+  },
+  {
+   "label": "C5",
+   "circle": 42,
+   "at": [
+    3314,
+    5986
+   ]
+  },
+  {
+   "label": "C6",
+   "circle": 49,
+   "at": [
+    4638,
+    6702
+   ]
+  },
+  {
+   "label": "C6",
+   "circle": 51,
+   "at": [
+    4907,
+    7071
+   ],
+   "leader": "arrow into the strip along Stockton and Maury"
+  },
+  {
+   "label": "C7",
+   "circle": 5,
+   "at": [
+    5854,
+    1370
+   ]
+  },
+  {
+   "label": "C8",
+   "circle": 15,
+   "at": [
+    6438,
+    2106
+   ]
+  },
+  {
+   "label": "C9",
+   "circle": 18,
+   "at": [
+    6386,
+    2754
+   ]
+  },
+  {
+   "label": "C10",
+   "circle": 19,
+   "at": [
+    6726,
+    2526
+   ]
+  },
+  {
+   "label": "C11",
+   "circle": 9,
+   "at": [
+    7526,
+    1902
+   ]
+  },
+  {
+   "label": "C12",
+   "circle": 50,
+   "at": [
+    8322,
+    6738
+   ]
+  },
+  {
+   "label": "C13",
+   "circle": 48,
+   "at": [
+    8766,
+    6258
+   ]
+  },
+  {
+   "label": "C14",
+   "circle": 52,
+   "at": [
+    8965,
+    6673
+   ],
+   "leader": "arrow into Shirley and Brandon"
+  },
+  {
+   "label": "D1",
+   "circle": 22,
+   "at": [
+    5534,
+    2998
+   ]
+  },
+  {
+   "label": "D1",
+   "circle": 25,
+   "at": [
+    5626,
+    3546
+   ]
+  },
+  {
+   "label": "D1",
+   "circle": 26,
+   "at": [
+    6622,
+    3538
+   ],
+   "leader_only": true
+  },
+  {
+   "label": "D1",
+   "circle": 32,
+   "at": [
+    6594,
+    4106
+   ]
+  },
+  {
+   "label": "D2",
+   "circle": 0,
+   "at": [
+    6211,
+    960
+   ],
+   "leader": "arrow at Beechwood Ave"
+  },
+  {
+   "label": "D3",
+   "circle": 6,
+   "at": [
+    6822,
+    1350
+   ]
+  },
+  {
+   "label": "D4",
+   "circle": null,
+   "at": [
+    6700,
+    1881
+   ],
+   "leader": "arrow at Hunt and Patrick"
+  },
+  {
+   "label": "D5",
+   "circle": 29,
+   "at": [
+    7638,
+    3818
+   ]
+  },
+  {
+   "label": "D6",
+   "circle": 37,
+   "at": [
+    7314,
+    4870
+   ]
+  },
+  {
+   "label": "D6",
+   "circle": 38,
+   "at": [
+    7626,
+    5010
+   ]
+  },
+  {
+   "label": "D6",
+   "circle": 39,
+   "at": [
+    8146,
+    4858
+   ]
+  },
+  {
+   "label": "D7",
+   "circle": 47,
+   "at": [
+    7943,
+    6185
+   ],
+   "leader": "arrow up along Gilliam"
+  },
+  {
+   "label": "D7",
+   "circle": 47,
+   "at": [
+    7650,
+    6378
+   ],
+   "leader_only": true
+  },
+  {
+   "label": "D8",
+   "circle": 34,
+   "at": [
+    4986,
+    4426
+   ]
+  },
+  {
+   "label": "D9",
+   "circle": 36,
+   "at": [
+    4525,
+    5000
+   ],
+   "leader": "arrow at Pennsylvania Ave"
+  },
+  {
+   "label": "D10",
+   "circle": 44,
+   "at": [
+    5346,
+    5998
+   ],
+   "leader_only": true
+  },
+  {
+   "label": "D11",
+   "circle": 45,
+   "at": [
+    5674,
+    5986
+   ]
+  },
+  {
+   "label": "D11.5",
+   "circle": null,
+   "printed": "D11 1/2",
+   "at": [
+    5900,
+    6700
+   ],
+   "leader": "leader with arrowhead from the circle at (6225, 6360) to Dinwiddie Ave"
+  }
+ ],
+ "frame": [
+  440,
+  500,
+  9390,
+  7370
+ ],
+ "exclude": [
+  [
+   700,
+   4900,
+   1200,
+   5650
+  ]
+ ],
+ "assign": [
+  {
+   "at": [
+    8268,
+    4217
+   ],
+   "label": "D5",
+   "why": "D6's area description (form header) bounds Church Hill by Venable St., 9 Mile Road, Oakwood Cemetery, the Southern Ry. and 17th St.; this piece lies north of 9 Mile Road, so it is not D6; the nearest other D label is D5"
+  }
+ ]
+}

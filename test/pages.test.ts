@@ -123,3 +123,19 @@ test('a page\'s raster images carry their size, a figure links its larger copy, 
   assert.match(p.html, /<p><img src="data:image\/webp;base64,[^"]+" alt="C" width="320" height="136" loading="lazy"><\/p>/)
   assert.deepEqual(p.figures.map((f) => f.id), ['fig-1', 'fig-2'])
 })
+
+test('images: link makes the explorer link a page\'s images as their copies in p/, never inline them', async () => {
+  const webp = Buffer.alloc(30)
+  webp.write('RIFF', 0, 'ascii'); webp.write('WEBP', 8, 'ascii'); webp.write('VP8 ', 12, 'ascii')
+  webp.writeUInt16LE(320, 26); webp.writeUInt16LE(136, 28)
+  const files: Record<string, Buffer> = { 'a.webp': webp, 'a-large.webp': webp, 'b.webp': webp, 'd.svg': Buffer.from('<svg/>') }
+  const body = '# T\n\n::: figure\n![A](a.webp)\n:::\n\n![C](b.webp)\n\n![D](d.svg)\n'
+  const p = compilePage('---\nimages: link\n---\n' + body, 'f.md', (n) => files[n] ?? null)
+  assert.doesNotMatch(p.html, /data:/)
+  assert.match(p.html, /<a class="fig-open" href="p\/a-large\.webp"[^>]*><img src="p\/a\.webp" alt="A" width="320" height="136"/)
+  assert.match(p.html, /<img src="p\/b\.webp" alt="C" width="320" height="136" loading="lazy">/)
+  assert.match(p.html, /<img src="p\/d\.svg" alt="D"/)
+  // Without it, the explorer inlines as before; the static pages' own imageHref still wins.
+  assert.match(compilePage(body, 'f.md', (n) => files[n] ?? null).html, /src="data:image\/webp;base64,/)
+  assert.match(compilePage('---\nimages: link\n---\n' + body, 'f.md', (n) => files[n] ?? null, undefined, { imageHref: (n) => n }).html, /<img src="b\.webp"/)
+})

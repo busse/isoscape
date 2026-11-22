@@ -42,7 +42,7 @@ test('every picture on the Jackson Ward page is a numbered figure with a caption
 })
 
 test('each compare slider lays two pictures of one size over each other, and only the pages that ask for one have one', () => {
-  const withCompare = ['jackson-ward', 'explore-with-chat']
+  const withCompare = ['jackson-ward', 'explore-with-chat', 'redlining']
   for (const slug of withCompare) {
     const page = loadPages().find((p) => p.slug === slug)
     assert.ok(page, slug)

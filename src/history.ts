@@ -436,11 +436,51 @@ export interface History {
    * Settings a build's `--with` names switch on, by name: for corrections made after some years
    * of a series were published, so their scenes stay as sold until each is redrawn.
    */
-  readonly switches?: Readonly<Record<string, { readonly vergeReach?: number; readonly vergeShare?: number; readonly bridgeStreets?: boolean; readonly bridgesClearTraced?: boolean; readonly highlight?: Highlight; readonly island?: Island; readonly note?: string }>>
+  readonly switches?: Readonly<Record<string, { readonly vergeReach?: number; readonly vergeShare?: number; readonly bridgeStreets?: boolean; readonly bridgesClearTraced?: boolean; readonly highlight?: Highlight; readonly island?: Island; readonly tint?: Tint; readonly note?: string }>>
   /** A pick-out, set only by a switch (`switches.<name>.highlight`): see `Highlight`. */
   readonly highlight?: Highlight
+  /** Graded ground, set only by a switch (`switches.<name>.tint`): see `Tint`. */
+  readonly tint?: Tint
   /** A scene cut to one polygon and drawn alone, set only by a switch (`switches.<name>.island`): see `Island`. */
   readonly island?: Island
+}
+
+/**
+ * Ground tinted by a value of each polygon in a GeoJSON file (a 1937 map's grades): each
+ * polygon whose `property` is one of `values` is painted on the ground in the palette's
+ * `tint.tones` at that value's place, strip by strip like other ground cover (under water,
+ * roads and rail). With `roads`, streets whose `highway` tag is listed are drawn in
+ * `tint.road`, their bridge decks too. With `legend`, a key of the tones is set under the year
+ * caption. Off in every build that does not name the switch, so no other scene changes.
+ */
+export interface Tint {
+  /** A GeoJSON file of (multi)polygons, lon/lat. */
+  readonly file: string
+  /** The property read from each feature. */
+  readonly property: string
+  /** The values tinted, in `tint.tones` order; a feature with any other value is left out. */
+  readonly values: readonly string[]
+  /** OSM `highway` values drawn in `tint.road` (what was later built on the ground). */
+  readonly roads?: readonly string[]
+  /** A key under the year caption: a heading, one label per value, and a source line. */
+  readonly legend?: { readonly title: string; readonly labels: readonly string[]; readonly source?: string }
+  readonly note?: string
+  /** Each tinted polygon: its tone (index into `values`) and its rings, lon/lat, outer first. Read from `file` by `loadHistory`. */
+  readonly areas?: readonly { readonly tone: number; readonly polygons: readonly (readonly (readonly Vec2[])[])[] }[]
+}
+
+const tintAreas = async (h: Tint): Promise<Tint> => {
+  type Geom = { type: 'Polygon'; coordinates: number[][][] } | { type: 'MultiPolygon'; coordinates: number[][][][] }
+  const fc = JSON.parse(await readFile(h.file, 'utf8')) as { features: { properties: Record<string, unknown> | null; geometry: Geom | null }[] }
+  const areas: NonNullable<Tint['areas']>[number][] = []
+  for (const f of fc.features) {
+    const v = f.properties?.[h.property]
+    const tone = typeof v === 'string' ? h.values.indexOf(v) : -1
+    if (tone < 0 || f.geometry === null) continue
+    const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates
+    areas.push({ tone, polygons: polys.map((poly) => poly.map((ring) => ring.slice(0, -1).map(([x, y]) => [x, y] as Vec2))) })
+  }
+  return { ...h, areas }
 }
 
 /**
@@ -552,11 +592,12 @@ export const loadHistory = async (path: string): Promise<History> => {
   }
   // A switch's highlight polygons are read here, so a build that names it has them.
   let switches = raw.switches
-  if (switches !== undefined && Object.values(switches).some((v) => v.highlight !== undefined || v.island !== undefined)) {
+  if (switches !== undefined && Object.values(switches).some((v) => v.highlight !== undefined || v.island !== undefined || v.tint !== undefined)) {
     const out: Record<string, NonNullable<History['switches']>[string]> = {}
     for (const [name, v] of Object.entries(switches)) {
       let w = v.highlight === undefined ? v : { ...v, highlight: await highlightRings(v.highlight) }
       if (w.island !== undefined) w = { ...w, island: await islandRings(w.island) }
+      if (w.tint !== undefined) w = { ...w, tint: await tintAreas(w.tint) }
       out[name] = w
     }
     switches = out
@@ -687,7 +728,7 @@ export const switchedOn = (h: History, on: readonly string[]): History => {
   for (const name of on) {
     const set = h.switches?.[name]
     if (set === undefined) continue
-    out = { ...out, ...(set.vergeReach === undefined ? {} : { vergeReach: set.vergeReach }), ...(set.vergeShare === undefined ? {} : { vergeShare: set.vergeShare }), ...(set.bridgeStreets === undefined ? {} : { bridgeStreets: set.bridgeStreets }), ...(set.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: set.bridgesClearTraced }), ...(set.highlight === undefined ? {} : { highlight: set.highlight }), ...(set.island === undefined ? {} : { island: set.island }) }
+    out = { ...out, ...(set.vergeReach === undefined ? {} : { vergeReach: set.vergeReach }), ...(set.vergeShare === undefined ? {} : { vergeShare: set.vergeShare }), ...(set.bridgeStreets === undefined ? {} : { bridgeStreets: set.bridgeStreets }), ...(set.bridgesClearTraced === undefined ? {} : { bridgesClearTraced: set.bridgesClearTraced }), ...(set.highlight === undefined ? {} : { highlight: set.highlight }), ...(set.island === undefined ? {} : { island: set.island }), ...(set.tint === undefined ? {} : { tint: set.tint }) }
   }
   return out
 }
