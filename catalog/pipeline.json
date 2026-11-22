@@ -3071,8 +3071,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "agent",
-   "decision": "Owner answered the nine outline questions 2026-11-22 (outputs/stories/redlining/working/decisions.md): HOLC colors; title \"Redlining in Richmond: the 1937 federal mortgage map, drawn on the ground it graded\"; Windsor Farms and Jackson Ward pair; ends 1977 (an addendum may follow); twelve D boxes yes; the D11.5 slur quoted once, attributed, after a check against the scan; redraw the polygons from the scan and compare before the license decision; explorer story page, unlisted. Working draft in progress.",
+   "waiting_on": "owner",
+   "decision": "Working draft d1 ready for review (outputs/stories/redlining/working/d1.md; preview at working/preview/). Built from the redrawn outlines; unnumbered pieces in no area. Seven open questions in d1.md; the menu sheet needs a set.py layout option (not done).",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3084,10 +3084,11 @@
    "title": "Redlining in Richmond, 1937 to today",
    "kind": "story",
    "stage": "outline",
-   "notes": "Reader (owner, 2026-11-22): assume no prior knowledge of the HOLC, grading or redlining; a reader who knows the subject should still learn from the detail and the way it is drawn. See section 0 of rough/outline.md.",
+   "notes": "Reader (owner, 2026-11-22): assume no prior knowledge of the HOLC, grading or redlining; a reader who knows the subject should still learn from the detail and the way it is drawn. d1 drafted 2026-11-22 on story-redlining.",
    "private": true,
    "log": [
-    "2026-11-21: research -> outline"
+    "2026-11-21: research -> outline",
+    "2026-11-22: working draft d1 (outline approved; owner decisions applied)"
    ]
   },
   "story-slave-trade": {
