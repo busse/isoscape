@@ -198,8 +198,11 @@ def area_box(label, margin=1.18, aspect=0.62, min_ground=1100):
 # Gilpin Court: 1000 St Paul Street (no 1000 in OSM; placed at the street's south end, below the
 # 1103 address point, so approximate). Mosby Court: 1909 Accommodation Street (between OSM's
 # 1907 and 1911). SVG points from `isoscape locate richmond-1937` (the same in 1937 and 2026).
-HOUSING = [('Gilpin Court (1943)', 1227.1, -45.0), ('Mosby Court (1962)', 1881.4, 114.5)]
-HOUSING_NOTE = ' Gilpin Court and Mosby Court are marked at the addresses in HUD\'s records (circles).'
+HOUSING = [('Gilpin Court (1943), approximate', 1227.1, -45.0), ('Mosby Court (1962)', 1881.4, 114.5)]
+# What the band under each view says of the marks; Gilpin's is approximate wherever it shows.
+NOTE = {'Gilpin Court': "Gilpin Court is marked approximately at the address in HUD's record (circle)",
+        'Mosby Court': "Mosby Court is marked at the address in HUD's record (circle)"}
+HOUSING_NOTE = " Circles mark Mosby Court at the address in HUD's record and Gilpin Court approximately at its address."
 
 
 def marked(img, box, places=HOUSING):
@@ -349,7 +352,7 @@ def main():
             how = {'A5': ' 1937: buildings standing today that the city dates to 1937 or before. Today: OpenStreetMap; limited-access highways in black.',
                    'D1': ' 1937: buildings standing today that the city dates to 1937 or before, and those on the 1925 and 1952 Sanborn maps; most others then standing are gone and not drawn. Today: OpenStreetMap; highways in black.'}[label]
             if label == 'D1':
-                how += HOUSING_NOTE.replace('Gilpin Court and Mosby Court are marked', 'Today, Gilpin Court is marked').replace('addresses', 'address').replace(' (circles)', ' (circle)')
+                how += ' Today, ' + NOTE['Gilpin Court'] + '.'
             args = (f'{area_title(label)}, in 1937 and today: an area the HOLC graded {grade}', f'About {ground / 1000:.1f} km of ground across, looking north.' + how)
             made[year] = (im, args, keyed(im, *args))
         # The two years open in one compare slider, so their pictures must sit at the same height:
@@ -372,7 +375,7 @@ def main():
             if one is not None:
                 im, hit = marked(im, box, HOUSING[one:one + 1])
                 court = HOUSING[one][0].split(' (')[0]
-                note = f" {court} is marked at the address in HUD's record (circle)." if hit else ''
+                note = f" {NOTE[court]}." if hit else ''
             save(keyed(im, f'{area_title(label)}: graded D in 1937, seen today',
                        f'About {ground / 1000:.1f} km of ground across, looking north. Interstates and the Downtown Expressway in black.' + note), name, a.full)
     if os.path.exists(tmp):

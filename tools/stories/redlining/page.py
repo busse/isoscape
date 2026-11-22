@@ -16,13 +16,10 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import boxes  # noqa: E402
+from fmt import pct  # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
-
-
-def pct(x):
-    return str(round(x * 100))
 
 
 def main():
@@ -40,6 +37,7 @@ def main():
         t[f'y{k}'] = pct(y[k]['share_by1937'])
     t.update({
         'hkm': f"{m['km_in_graded']:.1f}", 'hkm_all': f"{m['km_total_in_cache']:.0f}",
+        'hkm_frame': f"{m['km_in_frame']:.0f}",
         'hD1': f"{n['motorway_in_d_by_area_km']['D1']:.1f}", 'hD5': f"{n['motorway_in_d_by_area_km']['D5']:.1f}", 'hD8': f"{n['motorway_in_d_by_area_km']['D8']:.1f}",
         'hlD': pct(n['motorway_and_links']['by_grade_share']['D']),
         'n2000D': pct(y['D']['share_2000_on']), 'n2000A': pct(y['A']['share_2000_on']),
@@ -52,6 +50,8 @@ def main():
         t[f't{k}_med'] = f"{v['elev_median_m']:.0f}"
         t[f't{k}_p10'] = f"{v['elev_p10_m']:.0f}"
         t[f't{k}_steep'] = pct(v['share_steeper_10deg'])
+    for k, v in n['frame']['share_of_area_outside'].items():
+        t['cut_' + k.replace('.', '_')] = pct(v)
     t['hUn'] = f"{m['by_grade_km']['D'] - sum(n['motorway_in_d_by_area_km'].values()):.1f}"
     t['yB'] = pct(y['B']['share_by1937'])
     t['BOXES'] = boxes.page_grid(t)

@@ -1,6 +1,6 @@
 ---
 title: Redlining in Richmond: the 1937 federal mortgage map, drawn on the ground it graded
-deck: In 1937 a federal agency graded every residential area of Richmond from A to D. This page draws that map on the ground it graded, with the buildings standing then, and follows what was built and cleared on the D land up to 1977.
+deck: In 1937 a federal agency graded Richmond's residential areas from A to D. This page draws that map on the ground it graded, with the buildings standing then, and follows what was built and cleared on the D land up to 1977.
 order: 61
 summary: Richmond's 1937 Home Owners' Loan Corporation map drawn on the ground, its twelve D areas one by one, and what was built on graded land up to 1977. A working draft for review.
 unlisted: true
@@ -9,15 +9,15 @@ shop: false
 
 # Redlining in Richmond: the 1937 federal mortgage map, drawn on the ground it graded
 
-> **Working draft (d3), in fact check.** This page is not listed on the site and asks search
+> **Working draft (d4), with the fact check's corrections applied.** This page is not listed on the site and asks search
 > engines not to index it. Nobody outside has reviewed it, and none of the people or
 > institutions whose work it rests on has been asked about it, so their names here imply no
 > endorsement. The numbers, pictures and wording may change. Drafted with Claude for Chris
 > Busse, November 22, 2026.
 
-In 1937 a federal agency, the Home Owners' Loan Corporation, graded every residential area of
+In 1937 a federal agency, the Home Owners' Loan Corporation, graded the residential areas of
 Richmond from A, its first grade, to D, its fourth, and colored them green, blue, yellow and red
-on a city map. Chris Busse has drawn that map with isoscape on the ground it graded: the grades tinted
+on a city map [[FRASER, Richmond](#sources)]. Chris Busse has drawn that map with isoscape on the ground it graded: the grades tinted
 on the city's terrain, the buildings that stood in 1937 at their true size, and the same ground
 today with the highways and housing projects built across it since. The page starts with what
 the map was, walks through one A area and one D area form by form, then shows the whole city,
@@ -35,18 +35,19 @@ and the institutions listed under [Whose work this rests on](#whose-work-this-re
 ### The Home Owners' Loan Corporation and why Congress made it
 
 In the Great Depression many families could not keep up their mortgage payments and were losing
-their homes. Congress created the Home Owners' Loan Corporation (the HOLC) in the Home Owners'
+their homes [[Rose 2022](#sources)]. Congress created the Home Owners' Loan Corporation (the HOLC) in the Home Owners'
 Loan Act, signed on June 13, 1933, to refinance the mortgages of home owners in distress
 [[Harriss 1951](#sources); [Rose 2022](#sources)]. Between August 1933 and June 1936 it made over
-one million refinancing loans, 1,017,821 in its own count, for $3.1 billion, and then made no new
-ones [[Harriss 1951](#sources)]. By an estimate from the Federal Reserve Bank of Chicago, it had already made 90% of its loans before
+one million refinancing loans, 1,017,821 in its own count, for $3.1 billion; it stopped taking
+applications in June 1935 and made its last loans the next year [[Harriss 1951](#sources)]. By an estimate from the Federal Reserve Bank of Chicago, it had already made 90% of its loans before
 its mapping project began in 1935 [[Rose 2022](#sources)].
 
 ### The city survey and its four grades
 
-From late 1935 to 1940 the HOLC surveyed the residential areas of 239 American cities and drew
-a color-coded map of each, its "residential security maps" [[FRED 2021](#sources);
-[NARA RG 195](#sources)]. Each area got one of four grades:
+From 1935 to 1940 the HOLC surveyed the residential areas of 239 American cities and drew a
+color-coded map of each [[FRED 2021](#sources); [NARA RG 195](#sources)]. Richmond's is titled
+"Residential Security Map" [[FRASER, Richmond](#sources)], and the Library of Virginia calls the
+maps "Residential Security Maps" [[LVA timeline](#sources)]. Each area got one of four grades:
 
 | Grade | On Richmond's map legend | The HOLC's name for it | Color on the map | What the grade was meant to say |
 |---|---|---|---|---|
@@ -57,12 +58,13 @@ a color-coded map of each, its "residential security maps" [[FRED 2021](#sources
 
 Richmond's map names its grades only by number: its legend reads "First Grade" to "Fourth Grade"
 [[FRASER, Richmond](#sources)]. The names in quotation marks are the HOLC's too: they are
-printed on the legend of its map of Atlanta, held in the same National Archives records
+handwritten on the legend of its map of Atlanta, held in the same National Archives records
 [[FRASER, Atlanta](#sources)], and the St. Louis Fed's summary uses them, with "Declining" for C
 [[FRED 2021](#sources)]. This page uses both, with the names always in quotation marks as the
 HOLC's words. The last column follows the St. Louis Fed's summary [[FRED 2021](#sources)].
-Richmond's map, titled "Residential Security Map" and "City of Richmond, Virginia and Environs",
-prepared by the HOLC's Division of Research & Statistics, is dated April 3, 1937, and is held by the National
+Richmond's map, prepared by the HOLC's Division of Research & Statistics, is dated April 3, 1937.
+The HOLC drew it on the city's own base map, "City of Richmond, Virginia and Environs", made by
+the Department of Public Works in 1923 and revised to August 1, 1936. It is held by the National
 Archives in the records of the Federal Home Loan Bank Board, Record Group 195
 [[FRASER, Richmond](#sources); [NARA RG 195](#sources)]. It grades 7 areas A, 15 B,
 14 C and 12 D [[numbers](#how-we-know)], the same count the University of Richmond's
@@ -72,15 +74,16 @@ these maps for the whole country [[Mapping Inequality](#sources)].
 ### The area descriptions: one printed form for each area
 
 For every area the surveyors filled in a printed form, an "area description". Its fields ask for
-the terrain, what made the area more or less desirable, the residents' occupations and family
-incomes, the share of foreign-born and of Black residents, house types, ages and repair, prices
-and rents, how many homes were lived in by their owners, and how much mortgage money lenders
-would advance [[HOLC area descriptions](#sources)]. Richmond's 48 forms are transcribed by the
-Digital Scholarship Lab. Economists who have studied the maps describe the forms as recording
+the terrain, what made the area more or less desirable, the residents' "type" (filled in with
+an occupation or a race), family incomes, the share of foreign-born and of Black residents, house types, ages and repair, prices
+and rents, how many homes were lived in by their owners, and how much mortgage money was available
+[[HOLC area descriptions](#sources)]. Richmond's 48 forms are transcribed by the Digital
+Scholarship Lab [[HOLC area descriptions](#sources)]. Economists who have studied the maps describe the forms as recording
 how local real estate professionals judged lending risk [[Fishback et al. 2023](#sources)].
 
 The forms record race throughout, and Richmond's use it to judge places and houses. The form for
-C7, on the north side, faults its area for lying too near D2. The form for D11.5 (Blackwell)
+C7, on the north side, faults its area for lying too near D2
+[[FRASER, Richmond area descriptions](#sources), p. 29]. The form for D11.5 (Blackwell)
 rated the condition of its houses by the race of the people who would live in them. Its repair
 field reads, in the form's own words: "Bad for whites; Fair for darkies"
 [[FRASER, Richmond area descriptions](#sources), p. 47, field 6d]. It is quoted here once, so the reader can see the
@@ -89,22 +92,22 @@ standard the forms applied; elsewhere this page paraphrases.
 ### Where the word "redlining" comes from
 
 The St. Louis Fed writes that the word comes from the red the maps used for the lowest grade,
-and that it also names discriminatory practices in lending [[FRED 2021](#sources)]. In Chicago
-from about 1969, John McKnight and colleagues at Northwestern University investigated the
-practice of banks systematically denying mortgages by neighborhood, work that helped lay the
-ground for the Home Mortgage Disclosure Act and the Community Reinvestment Act
+and that it also names discriminatory practices in lending [[FRED 2021](#sources)]. At
+Northwestern University, John McKnight and colleagues investigated banks' systematic denial of
+mortgages and other financial services to people in minority neighborhoods, work that laid the
+groundwork for the Home Mortgage Disclosure Act and the Community Reinvestment Act
 [[Northwestern IPR 2024](#sources)]. In this page "redlining" names the word's history.
 What the HOLC map did is the subject of [the dispute below](#did-the-1937-map-cause-what-followed-three-readings).
 
 ## Richmond's own racial lines before the map, 1871 to 1929
 
-Richmond drew its lines long before 1937. In 1871 the city's wards were redrawn to pack as many
-Black voters as possible into one ward, Jackson Ward [[LVA timeline](#sources)]. From 1888
-electric streetcars opened suburbs that covenants kept white [[LVA timeline](#sources)]. In April
+Richmond drew its lines long before 1937. In 1871 the city's wards were redrawn to create a single
+Black-majority ward, Jackson Ward [[LVA timeline](#sources)]. From 1888 electric streetcars
+opened suburbs, most of them kept white by deeds and covenants [[LVA timeline](#sources)]. In April
 1911 City Council adopted a residential segregation ordinance, which Encyclopedia Virginia
 describes as requiring "strict domiciliary segregation", and in 1912 the General Assembly let
 every Virginia city do the same [[LVA timeline](#sources); [Gray-Sparks](#sources)]. The Supreme
-Court struck such ordinances down in *Buchanan v. Warley* in 1917. Richmond then passed a new one
+Court struck such ordinances down in *Buchanan v. Warley* in 1917 [[LVA timeline](#sources)]. Richmond then passed a new one
 tied to the state's Racial Integrity Act: Encyclopedia Virginia dates it 1924 and the Library of
 Virginia 1929, and both say a federal appeals court struck it down, in 1929 by Encyclopedia
 Virginia's account [[Gray-Sparks](#sources); [LVA timeline](#sources)]. Racial covenants stayed
@@ -113,14 +116,14 @@ enforceable until *Shelley v. Kraemer* in 1948 [[LVA timeline](#sources)].
 ## One A area and one D area, form by form: A5, Windsor Farms, and D1 (Jackson Ward)
 
 Before the whole city, here are two areas the HOLC graded at opposite ends: A5, Windsor Farms,
-in the West End above the James, and D1 (Jackson Ward, Apostle Town and Navy Hill), north of
+in the West End beside the James, and D1 (Jackson Ward, Apostle Town and Navy Hill), north of
 downtown. Areas are named in one way throughout this page: the area's number, then the place
 name typed at the head of its 1937 form where the form has one, then, in parentheses, this
 page's modern name where it differs. Parentheses always mean the modern name.
 
 ### A5, Windsor Farms: what the form recorded, and the ground
 
-T. C. Williams, a tobacconist, founded Windsor Farms in 1926 on a 444-acre tract above the river,
+T. C. Williams, a tobacconist, founded Windsor Farms in 1926 on a 444-acre tract beside the river,
 laid out by the planner John Nolen as an English village around a green
 [[TCLF, Windsor Farms](#sources)]. Eleven years later the HOLC form for A5 recorded rolling
 ground, hilly toward the river; residents it described in its highest terms; family incomes of $7,500 and
@@ -132,7 +135,7 @@ favorable influences it wrote: "Most desirable area in or about Richmond"
 
 ::: compare wide
 ![A5, Windsor Farms, in 1937 seen from the south: the area tinted green on rolling ground above the James, its curving streets laid out with scattered houses](redlining-example-a5-1937.webp) 1937
-![A5, Windsor Farms, today seen from the same point: the same green area filled with houses along the curving streets, and the Powhite Parkway at its west edge](redlining-example-a5-today.webp) today
+![A5, Windsor Farms, today seen from the same point: the same green area filled with houses along the curving streets, and the Powhite Parkway at its east edge](redlining-example-a5-today.webp) today
 
 A5, Windsor Farms, graded A by the Home Owners' Loan Corporation (HOLC) in 1937, as it stood then
 (left of the divider) and today (right); drag the divider, or move it with the arrow keys. In
@@ -148,8 +151,9 @@ lidar, three times exaggerated. Working draft.
 D1 is drawn in several pieces north of downtown, from Jackson Ward through Apostle Town to Navy
 Hill. Its form recorded rolling ground; a population 95% Black;
 family incomes of $350 to $750 a year; one home in five lived in by its owner; single houses, 40%
-brick and 60% frame, forty years old and more, in poor to very poor repair; and mortgage money
-at 60% of appraisal. It wrote that the population was falling "because of demolition to save
+brick and 60% frame, forty years old and more, in poor to very poor repair; and mortgage money for buying a home
+at 60% of appraisal (the form's figure; read plainly, loans of up to 60% of a house's appraised
+value). It wrote that the population was falling "because of demolition to save
 taxes" [[HOLC area description D1](#sources)].
 
 ::: compare wide
@@ -157,9 +161,9 @@ taxes" [[HOLC area description D1](#sources)].
 ![The same ground today: the Richmond–Petersburg Turnpike, now I-95 and I-64, in black through the red-tinted blocks, with Gilpin Court's rows and the medical campus on Navy Hill](redlining-example-d1-today.webp) today
 
 D1 (Jackson Ward, Apostle Town and Navy Hill), graded D by the HOLC in 1937, as it stood then
-(left) and today (right). The Turnpike, now I-95 and I-64, runs 5.9 km of carriageway
-through D1 [[measured here](#how-we-know)]. Today, a circle marks Gilpin Court at the address in
-HUD's record, 1000 St Paul Street, placed approximately on that street's south end
+(left) and today (right). I-95 and I-64 run 5.9 km of carriageway through D1, 4.1 km
+of it the old Richmond–Petersburg Turnpike and the rest I-64 alone [[measured here](#how-we-know)]. Today, a circle marks Gilpin Court at the address in
+the record of the federal Department of Housing and Urban Development (HUD), 1000 St Paul Street, placed approximately on that street's south end
 [[HUD via ProPublica](#sources)]. In 1937 the blocks the Sanborn fire-insurance maps
 cover are dense; elsewhere only buildings that still stand are drawn, so D1 looks emptier than it
 was (see [How we know](#how-we-know)). *How this was made:* as the A5 figure, with Jackson Ward's
@@ -170,11 +174,11 @@ buildings from the 1925 and 1952 Sanborn maps and its ground before the Turnpike
 After 1937 the Richmond housing authority cleared Apostle Town and dedicated Gilpin Court there
 on April 28, 1943; a newspaper report of the day counted 301 units, Encyclopedia Virginia 300,
 and Encyclopedia Virginia says 250 Black families were displaced [[Craig 2025](#sources);
-[Gray-Sparks](#sources)]. From 1955 the Richmond–Petersburg Turnpike was cut through the ward
-[[Jackson Ward story](jackson-ward.md)];
+[Gray-Sparks](#sources)]. The Richmond–Petersburg Turnpike was built through the ward in the 1950s
+and opened on July 1, 1958 [[LVA timeline](#sources); [VCU Libraries](#sources)];
 by 1957 the *Richmond Times-Dispatch* estimated that about 1,900 Black families, about 10% of the
 city's Black population, had been displaced by it and related work [[Gray-Sparks](#sources)].
-VCU's medical campus now covers most of Navy Hill [[Gray-Sparks](#sources)]. The
+Virginia Commonwealth University's (VCU's) medical campus now covers most of Navy Hill [[Gray-Sparks](#sources)]. The
 [Jackson Ward story](jackson-ward.md) follows the Turnpike block by block.
 
 ::: figure wide
@@ -192,8 +196,9 @@ made:* as the two figures above. Working draft.
 ![Richmond in 1937 seen from the south, the James River across the lower half: the HOLC's grades tinted on the ground, green for A in the West End and Windsor Farms, blue for B, yellow for C in the Fan and the north side, and red for D north of downtown, on Church Hill, in Fulton, Randolph, Manchester and Blackwell, with the twelve D areas labeled](redlining-grades-1937.webp)
 
 Richmond in 1937, seen from the south, with the grades the Home Owners' Loan Corporation gave
-each residential area tinted on the ground; the twelve D areas are labeled. Untinted land was not
-graded: downtown, industry, rail yards, parks and land outside the surveyed city. *How this was
+Richmond's residential areas tinted on the ground; the twelve D areas are labeled. Untinted land was not
+graded: downtown, industry, rail yards, parks and land outside the surveyed city
+[[FRASER, Richmond](#sources)]. *How this was
 made:* the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know); buildings
 standing today that the city dates to 1937 or before, and in Jackson Ward those on the 1925 and
 1952 Sanborn maps; the ground from 2010s lidar, three times exaggerated. Most buildings of 1937
@@ -203,8 +208,8 @@ that are gone are missing, so the picture undercounts the densest and most clear
 
 Measured on the lidar, the D land lies lowest. Half of it is below 47 m above sea level,
 against 57 m for C, 61 m for A and 62 m for B, and a tenth of it is below
-27 m. It is no steeper than B or C land:
-about 6% of D, 6% of C and 5% of B is steeper than 10 degrees. The
+27 m. It is about as steep as C land and a little
+steeper than B: about 6% of D, 7% of C and 5% of B is steeper than 10 degrees. The
 steepest graded land is A: 16% of it is steeper than 10 degrees [[measured here](#how-we-know)]. One D area, D9,
 was vacant land the form expected to become a D area once built
 [[HOLC area description D9](#sources)].
@@ -229,56 +234,65 @@ today, OpenStreetMap's buildings and streets, with its roads tagged `motorway` a
 `motorway_link` in black. Working draft.
 :::
 
-In the decades after the map, public housing, highways and urban renewal went to graded land,
-and much of it to D land. The Library of Virginia writes that most of the city's federal public
-housing was built in neighborhoods the HOLC had graded D [[LVA timeline](#sources)]. Each project
+The Library of Virginia writes that, by and large, the city's public housing was built in
+neighborhoods the HOLC had graded D [[LVA timeline](#sources)]. The highways are measured
+against the grades further down [[measured here](#how-we-know)]. Each project
 below is placed by its sources; the D area is from this page's drawing.
 
 - **Gilpin Court, in D1 (Jackson Ward), 1943**, on cleared Apostle Town [[Craig 2025](#sources);
   [Gray-Sparks](#sources)].
-- **The Richmond–Petersburg Turnpike, through D1 (Jackson Ward), 1955 to 1958**, now I-95 and I-64; about 1,900 Black
-  families displaced by 1957 by the *Times-Dispatch*'s estimate [[Gray-Sparks](#sources)].
+- **The Richmond–Petersburg Turnpike, through D1 (Jackson Ward), built in the 1950s and opened
+  July 1, 1958**, now I-95 and I-64 [[LVA timeline](#sources); [VCU Libraries](#sources)]; about
+  1,900 Black families displaced by 1957 by the *Times-Dispatch*'s estimate [[Gray-Sparks](#sources)].
 - **Fairfield and Whitcomb Courts, 1958**, built partly for families the highway displaced
   [[Gray-Sparks](#sources)]. Neither is placed on the drawing in this draft.
 - **Mosby Court, in D5 (Fairmount and the blocks around Mosby Court), 1962**: the 17th Street renewal cleared 150 acres of Shockoe Valley and
-  displaced 1,300 mostly Black residents, many of whom moved to Mosby Court, in what Encyclopedia
-  Virginia calls "an isolated, previously redlined neighborhood" [[Gray-Sparks](#sources)]. HUD's
+  displaced 1,300 mostly Black residents, many of whom moved to Mosby Court, which opened in 1962 in
+  what Encyclopedia Virginia calls "an isolated, previously redlined neighborhood" [[Gray-Sparks](#sources)]. HUD's
   record gives its address as 1909 Accommodation Street [[HUD via ProPublica](#sources)], and the
   whole of Accommodation Street lies inside D5 [[measured here](#how-we-know)].
-- **D7, Fulton, 1967 to the late 1980s**: a 1967 study called Fulton Bottom, about 850 homes on
-  200 acres, a slum; the 1970 renewal plan would displace about 785 households, nearly 3,000
+- **D7, Fulton, 1967 to the late 1980s**: a 1967 study called Fulton Bottom, about 850 homes,
+  churches, schools and stores on 200 acres, a slum; the 1970 renewal plan would displace about 785 households, nearly 3,000
   people; the last homes on Denny Street came down in the late 1980s [[Gray-Sparks](#sources)].
-- **D11.5 (Blackwell), 1970**: the housing authority built 464 scattered-site public housing units
-  in the neighborhood [[Eshleman 2018](#sources)].
+- **D11.5 (Blackwell), 1970**: 464 scattered-site public housing units were built in the
+  neighborhood [[Eshleman 2018](#sources)].
 - **D8 (Randolph and Oregon Hill) and the Downtown Expressway, 1973**: HUD approved the 380-acre Randolph project;
-  its planning study expected about 1,800 families and individuals to be displaced
-  [[Gray-Sparks](#sources)]. The Library of Virginia writes that the expressway cut the Randolph
+  its planning study expected about 1,800 families and individuals to be displaced, and its
+  "primary objective", Encyclopedia Virginia writes, "was slum clearance as well as making way for
+  the six-lane Downtown Expressway" [[Gray-Sparks](#sources)]. The Library of Virginia writes that the expressway cut the Randolph
   and Oregon Hill neighborhoods in half [[LVA timeline](#sources)].
 
 ::: figure wide
 ![A closer view of today: I-95 and I-64 cross D1 north of downtown and run along D5, and the Downtown Expressway crosses D8 west of downtown, all drawn in black over the red of grade D](redlining-built-close.webp)
 
 D1, D5 and D8 today, with the interstates and the Downtown Expressway in black over the 1937
-grades. Circles mark Gilpin Court in D1 and Mosby Court in D5 at the addresses in HUD's records
-[[HUD via ProPublica](#sources)]; OpenStreetMap, as cached here, has no outline named for either,
+grades. Circles mark Mosby Court in D5 at the address in HUD's record and Gilpin Court in D1
+approximately at its address, on the south end of St Paul Street [[HUD via ProPublica](#sources)]; OpenStreetMap, as cached here, has no outline named for either,
 so they are marked as points. *How this was made:* as the "today" figure above, cropped. Working draft.
 :::
 
 ::: figure
-![Two bars split by grade: graded land is A 16%, B 26%, C 28%, D 30%; the limited-access highway inside graded land is A 4%, B 9%, C 22%, D 64%](redlining-highways.webp)
+![Two bars split by grade: graded land is A 16%, B 26%, C 28%, D 30%; the limited-access highway inside graded land is A 4%, B 9%, C 23%, D 65%](redlining-highways.webp)
 
-Of the 20.3 km of limited-access carriageway inside the 1937 graded areas, 64% lies in D
-areas, which were 30% of the graded land. *How this was made:* OpenStreetMap's roads tagged
+Of the 20.3 km of limited-access carriageway inside the 1937 graded areas, 65% lies in D
+areas, which were 30% of the graded land; 23% lies in C. *How this was made:* OpenStreetMap's roads tagged
 `motorway`, each carriageway counted, cut by each grade's outlines; see
 [How we know](#how-we-know).
 :::
 
-Inside D land the highway runs through three numbered areas, D1 (5.9 km), D8 (3.3 km)
-and D5 (3.3 km), and for 0.6 km through D pieces the map leaves unnumbered. Most of the region's limited-access mileage lies outside the 1937 graded areas
-altogether: 20.3 of the 113 km in the drawn area [[measured here](#how-we-know)]. The
-chart shows where the roads run. The routes were chosen by the Turnpike Authority, the city and
-the state, and the [Jackson Ward story](jackson-ward.md#how-the-route-was-chosen) follows how the
-Turnpike's was chosen.
+Inside D land the highway runs through three numbered areas, D1 (5.9 km, 4.1 km of it the
+old Turnpike), D8 (3.3 km, the Downtown Expressway) and D5 (3.3 km, I-64), and for 0.6
+km through D pieces the map leaves unnumbered. Most limited-access mileage lies outside the 1937
+graded areas altogether: of the 91 km inside the drawn frame, 20.3 km lie in graded
+land, and the cached OpenStreetMap data around the frame holds 113 km in all
+[[measured here](#how-we-know)]. The chart shows where the roads run. On why the Turnpike runs
+where it does, VCU Libraries writes that city planners and turnpike officials selected areas they
+considered "blighted", or with high concentrations of Black Richmonders, for its path
+[[VCU Libraries](#sources)]. The General Assembly created the Richmond–Petersburg Turnpike
+Authority, in 1954 by Encyclopedia Virginia's account and in 1955 by VCU Libraries'
+[[Gray-Sparks](#sources); [VCU Libraries](#sources)]. The
+[Jackson Ward story](jackson-ward.md#how-the-route-was-chosen) follows how the Turnpike's route
+was chosen.
 
 ::: figure
 ![A timeline from 1871 to 1977: the 1871 wards, streetcar suburbs, the 1911 ordinance, Buchanan v. Warley, the second ordinance, the HOLC's creation in 1933, the 1937 map, Gilpin Court, the 1946 plan, Shelley v. Kraemer, the Turnpike, Mosby Court, Fulton, the 1970 annexation and Blackwell, and the Randolph project](redlining-timeline.svg)
@@ -304,73 +318,73 @@ keys step from one area to the next, and **All figures** shows every figure on t
 ::: figure
 ![D1 (Jackson Ward, Apostle Town and Navy Hill), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d1.webp)
 
-**D1 (Jackson Ward, Apostle Town and Navy Hill).** *What the 1937 form recorded:* The form recorded a population 95% Black, family incomes of $350 to $750 a year, one home in five lived in by its owner, and single houses forty years old or more in poor to very poor repair. It wrote that the population was falling "because of demolition to save taxes." [[HOLC area descriptions](#sources)] *What stands there now:* The Richmond–Petersburg Turnpike, now I-95 and I-64, runs 5.9 km of carriageway through it. Gilpin Court was dedicated on cleared Apostle Town land in 1943, and VCU's medical campus now covers most of Navy Hill. The Jackson Ward story follows the Turnpike block by block. [[measured here](#how-we-know); [Craig 2025](#sources); [Gray-Sparks](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D1 (Jackson Ward, Apostle Town and Navy Hill).** *What the 1937 form recorded:* The form recorded a population 95% Black, family incomes of $350 to $750 a year, one home in five lived in by its owner, and single houses forty years old or more in poor to very poor repair. It wrote that the population was falling "because of demolition to save taxes." [[HOLC area descriptions](#sources)] *What stands there now:* I-95 and I-64 run 5.9 km of carriageway through it, 4.1 km of it the old Richmond–Petersburg Turnpike and the rest I-64 alone. Gilpin Court was dedicated on cleared Apostle Town land in 1943, and VCU's medical campus now covers most of Navy Hill. The Jackson Ward story follows the Turnpike block by block. [[measured here](#how-we-know); [Craig 2025](#sources); [Gray-Sparks](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 ::: figure
 ![D2 (Washington Park, around Cheatwood Avenue), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d2.webp)
 
-**D2 (Washington Park, around Cheatwood Avenue).** *What the 1937 form recorded:* The form recorded a population entirely Black, flat ground, frame single houses, family incomes of $350 to $750, and half the homes lived in by their owners. The form for C7, which borders it, faults C7 for lying too near D2. [[HOLC area descriptions](#sources)] *What stands there now:* Most of what stands is newer than the map: of the 302 parcels the city dates here, 72% were built between 1938 and 1977. First Baptist Church of Washington Park stands inside the outline. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D2 (Washington Park, around Cheatwood Avenue).** *What the 1937 form recorded:* The form recorded a population entirely Black, flat ground, frame single houses, family incomes of $350 to $750, and half the homes lived in by their owners. The form for C7, which borders it, faults C7 for lying too near D2. The form for D4 calls this area Oak Park; D2's own form has no heading. [[HOLC area descriptions](#sources)] *What stands there now:* Most of what stands is newer than the map: of the 302 parcels the city dates here, 72% were built between 1938 and 1977. First Baptist Church of Washington Park stands inside the outline, and so does Oak Park Avenue. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 ::: figure
-![D3 (Oak Park, along Laburnum Avenue), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d3.webp)
+![D3 (along Laburnum Avenue), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d3.webp)
 
-**D3 (Oak Park, along Laburnum Avenue).** *What the 1937 form recorded:* The form called the area "mostly woods and bushes," with practically no homes, and recorded the few families there as Black. [[HOLC area descriptions](#sources)] *What stands there now:* The woods are built over: OpenStreetMap maps 700 buildings inside the outline, with shops along Laburnum Avenue. The city's year-built parcels date only 27 of them, so when they were built is not measured here. [[OpenStreetMap](#sources); [City of Richmond parcels](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D3 (along Laburnum Avenue).** *What the 1937 form recorded:* The form called the area "Mostly woods and bushes", with practically no homes, and recorded the few families there as Black. [[HOLC area descriptions](#sources)] *What stands there now:* The woods are built over: OpenStreetMap maps 700 buildings inside the outline, with shops along Laburnum Avenue. The city's year-built parcels cover only 27 lots here, so when the buildings were built is not measured here. The pale green field to its northwest is Forest Lawn Cemetery, in the drawing's color for parks and cemeteries; most of it lies outside the 1937 grades, and none of it is A. [[OpenStreetMap](#sources); [City of Richmond parcels](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 ::: figure
 ![D4 (around Hunt and Hazelhurst Avenues), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d4.webp)
 
-**D4 (around Hunt and Hazelhurst Avenues).** *What the 1937 form recorded:* The form gave D4 the same description as Oak Park, D3, and recorded a population entirely Black, frame single houses, half the homes lived in by their owners, and mortgage money at 60% of appraisal. [[HOLC area descriptions](#sources)] *What stands there now:* Of the 307 parcels the city dates here, 45% were built by 1937 and 48% between 1938 and 1977. Providence Park lies inside the outline. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D4 (around Hunt and Hazelhurst Avenues).** *What the 1937 form recorded:* The form's only remark reads "Same as Oak Park, D2." It repeats D2's figures for values, rents, owners and mortgage money, and recorded a population entirely Black, frame single houses, half the homes lived in by their owners, and mortgage money at 60% of appraisal. [[HOLC area descriptions](#sources)] *What stands there now:* Of the 307 parcels the city dates here, 45% were built by 1937 and 49% between 1938 and 1977. Providence Park lies partly inside the outline, about 49% of it. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 ::: figure
 ![D5 (Fairmount and the blocks around Mosby Court), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d5.webp)
 
-**D5 (Fairmount and the blocks around Mosby Court).** *What the 1937 form recorded:* The form recorded a population 75% Black and growing, frame single houses about fifteen years old in fair repair, one home in three lived in by its owner, and mortgage money at 40% of appraisal. [[HOLC area descriptions](#sources)] *What stands there now:* Interstate 64 runs 3.3 km of carriageway through it. Mosby Court, which opened in 1962 for many of the 1,300 people the 17th Street renewal displaced, stands inside it, with the city jail beside it. [[measured here](#how-we-know); [Gray-Sparks](#sources); [HUD via ProPublica](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D5 (Fairmount and the blocks around Mosby Court).** *What the 1937 form recorded:* The form recorded a population 75% Black and growing, frame single houses about fifteen years old in fair repair, one home in three lived in by its owner, and mortgage money at 40% of appraisal. [[HOLC area descriptions](#sources)] *What stands there now:* Interstate 64 runs 3.3 km of carriageway through it. Mosby Court, which opened in 1962 and to which many of the 1,300 people the 17th Street renewal displaced moved, stands inside it, with the city jail beside it. [[measured here](#how-we-know); [Gray-Sparks](#sources); [HUD via ProPublica](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 ::: figure
 ![D6, Church Hill (Union Hill and the slopes of Church Hill), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d6.webp)
 
-**D6, Church Hill (Union Hill and the slopes of Church Hill).** *What the 1937 form recorded:* The form is headed Church Hill, bounded by Venable Street, Nine Mile Road, Oakwood Cemetery, the Southern Railway, the river and 17th Street. It recorded a population 80% Black "and increasing," flats and single frame houses about forty years old in fair repair, one home in three lived in by its owner, and mortgage money at 50% of appraisal. [[HOLC area descriptions](#sources)] *What stands there now:* More of 1937 stands here than in any other D area: 68% of the 2,953 parcels the city dates here were built by 1937. Many of the houses are marked in OpenStreetMap as historic. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D6, Church Hill (Union Hill and the slopes of Church Hill).** *What the 1937 form recorded:* The form is headed Church Hill, bounded by Venable Street, Nine Mile Road, Oakwood Cemetery, the Southern Railway, the river and 17th Street. It recorded a population 80% Black "and increasing", flats and single frame houses about forty years old in fair repair, one home in three lived in by its owner, and mortgage money at 50% of appraisal. [[HOLC area descriptions](#sources)] *What stands there now:* More of 1937 stands here than in any other D area: 68% of the 2,953 parcels the city dates here were built by 1937. OpenStreetMap marks 449 of the 3,892 building outlines inside the outline as historic or heritage. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 ::: figure
 ![D7, Fulton, graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d7.webp)
 
-**D7, Fulton.** *What the 1937 form recorded:* The form is headed Fulton, bounded by Nicholson Street, National Cemetery Road and Williamsburg Avenue. It recorded a population 80% Black, single frame houses about fifty years old in bad repair, one home in four lived in by its owner, and no mortgage money at all. [[HOLC area descriptions](#sources)] *What stands there now:* A 1967 study called Fulton Bottom, about 850 homes, a slum; the 1970 renewal plan would displace about 785 households, and the last homes on Denny Street came down in the late 1980s. Only 9% of the parcels the city dates here were built by 1937. Historic Fulton Memorial Park stands on the ground. [[Gray-Sparks](#sources); [City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D7, Fulton.** *What the 1937 form recorded:* The form is headed Fulton, bounded by Nicholson Street, National Cemetery Road and Williamsburg Avenue. It recorded a population 80% Black, single frame houses about fifty years old in bad repair, one home in four lived in by its owner, and no mortgage money at all. [[HOLC area descriptions](#sources)] *What stands there now:* A 1967 study called Fulton Bottom, about 850 homes, churches, schools and stores, a slum; the 1970 renewal plan would displace about 785 households, and the last homes on Denny Street came down in the late 1980s. Only 9% of the parcels the city dates here were built by 1937. Historic Fulton Memorial Park stands on the ground. [[Gray-Sparks](#sources); [City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 ::: figure
 ![D8 (Randolph and Oregon Hill), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d8.webp)
 
-**D8 (Randolph and Oregon Hill).** *What the 1937 form recorded:* The form recorded a population 95% Black, brick flats and frame single and double houses about 25 years old in fair repair, and one home in four lived in by its owner. It wrote that Black families pushed out of D1 were moving into D8's oldest houses, displacing white tenants. [[HOLC area descriptions](#sources)] *What stands there now:* HUD approved the 380-acre Randolph project in 1973; its planning study expected about 1,800 families and individuals to be displaced, for the Downtown Expressway. The Library of Virginia writes that the expressway cut Randolph and Oregon Hill in half. It runs 3.3 km of carriageway through D8. [[Gray-Sparks](#sources); [LVA timeline](#sources); [measured here](#how-we-know)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D8 (Randolph and Oregon Hill).** *What the 1937 form recorded:* The form recorded a population 95% Black, brick flats and frame single and double houses about 25 years old in fair repair, and one home in four lived in by its owner. It wrote that Black families pushed out of D1 were crowding white residents out of D8's "aged and obsolete structures". [[HOLC area descriptions](#sources)] *What stands there now:* HUD approved the 380-acre Randolph project in 1973; its planning study expected about 1,800 families and individuals to be displaced, for slum clearance and the Downtown Expressway. The Library of Virginia writes that the expressway cut Randolph and Oregon Hill in half. It runs 3.3 km of carriageway through D8. [[Gray-Sparks](#sources); [LVA timeline](#sources); [measured here](#how-we-know)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 ::: figure
 ![D9, Riverview (between Maymont and the river), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d9.webp)
 
-**D9, Riverview (between Maymont and the river).** *What the 1937 form recorded:* The form is headed Riverview. It recorded vacant land, "practically undeveloped and inaccessible," and expected it to become a D area once built. [[HOLC area descriptions](#sources)] *What stands there now:* It was built after the map: 95% of the 384 parcels the city dates here are from 1938 to 1977. Riverview Community Park lies inside the outline. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D9, Riverview (between Maymont and the river).** *What the 1937 form recorded:* The form is headed Riverview. It recorded vacant land, "Practically undeveloped and inaccessible", and expected it to become a D area once built. [[HOLC area descriptions](#sources)] *What stands there now:* It was built after the map: 95% of the 384 parcels the city dates here are from 1938 to 1977. Riverview Community Park lies inside the outline. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 ::: figure
 ![D10 (south of the river, around Bainbridge and Perry Streets), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d10.webp)
 
-**D10 (south of the river, around Bainbridge and Perry Streets).** *What the 1937 form recorded:* The form recorded a population 95% Black, family incomes of $500 to $750, frame single houses about 25 years old in poor repair, and two homes in five lived in by their owners. [[HOLC area descriptions](#sources)] *What stands there now:* Of the 232 parcels the city dates here, 56% were built by 1937. A Boys and Girls Club and the Fonticello Food Forest stand inside the outline. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D10 (south of the river, around Bainbridge and Perry Streets).** *What the 1937 form recorded:* The form recorded a population 95% Black, family incomes of $500 to $750, frame single houses 25 years old and older in poor repair, and two homes in five lived in by their owners. [[HOLC area descriptions](#sources)] *What stands there now:* Of the 232 parcels the city dates here, 56% were built by 1937. A Boys and Girls Club and the Fonticello Food Forest stand inside the outline. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 ::: figure
 ![D11, South Richmond (Manchester, around Cowardin Avenue), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d11.webp)
 
-**D11, South Richmond (Manchester, around Cowardin Avenue).** *What the 1937 form recorded:* The only D area recorded as white; the form is headed South Richmond. It gave its people as "Laboring Whites," with family incomes of $1,500 to $1,800, the highest recorded for any D area, frame and brick houses about twenty years old in fair repair, three homes in five lived in by their owners, and mortgage money at 60% of appraisal. [[HOLC area descriptions](#sources)] *What stands there now:* Of the 238 parcels the city dates here, 36% were built in 2000 or later, the largest share of any D area. Sacred Heart Catholic Church and the Hull Street post office stand inside the outline. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D11, South Richmond (Manchester, around Cowardin Avenue).** *What the 1937 form recorded:* The only D area recorded as white; the form is headed South Richmond. It gave its people as "Laboring Whites", with family incomes of $1,500 to $1,800, the highest recorded for any D area, frame and brick houses about twenty years old in fair repair, three homes in five lived in by their owners, and mortgage money at 60% of appraisal. [[HOLC area descriptions](#sources)] *What stands there now:* Of the 238 parcels the city dates here, 36% were built in 2000 or later, the largest share of any D area. Sacred Heart Catholic Church and the Hull Street post office stand inside the outline. [[City of Richmond parcels](#sources); [OpenStreetMap](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 ::: figure
 ![D11.5 (Blackwell), graded D in 1937, seen from the south today, with the 1937 grades tinted on the ground: the area itself in the red of grade D, its neighbors in the other grades' colors](redlining-d-d11-5.webp)
 
-**D11.5 (Blackwell).** *What the 1937 form recorded:* The form recorded a population 95% Black, family incomes of $500 to $750, frame single houses about 25 years old, about a third of the homes (35%) lived in by their owners, and mortgage money at 35 to 40% of appraisal. [[HOLC area descriptions](#sources)] *What stands there now:* In 1970 the housing authority built 464 scattered-site public housing units here; the neighborhood took its name from James Heyward Blackwell. Of the 1,194 parcels the city dates, 41% were built between 1938 and 1977. [[Eshleman 2018](#sources); [City of Richmond parcels](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
+**D11.5 (Blackwell).** *What the 1937 form recorded:* The form recorded a population 95% Black, family incomes of $500 to $750, frame single houses about 25 years old, about a third of the homes (35%) lived in by their owners, and mortgage money at 35 to 40% of appraisal. [[HOLC area descriptions](#sources)] *What stands there now:* In 1970, 464 scattered-site public housing units were built in the neighborhood; the neighborhood took its name from James Heyward Blackwell. Of the 1,194 parcels the city dates, 41% were built between 1938 and 1977. [[Eshleman 2018](#sources); [City of Richmond parcels](#sources)] *How this was made:* today's OpenStreetMap buildings and streets on 2010s lidar, with the grade outlines redrawn with Claude from the National Archives scan of the 1937 map and positioned with OpenStreetMap street corners (see How we know) tinted under them. Working draft.
 :::
 
 
@@ -394,21 +408,21 @@ out below in its authors' terms.
   attribute most of it to earlier decades of disadvantage and discrimination
   [[Fishback et al. 2023](#sources)].
 - **The other federal agency drew its own lines first.** Price Fishback, Jonathan Rose, Kenneth
-  Snowden and Thomas Storrs find that the Federal Housing Administration refused to insure
+  Snowden and Thomas Storrs find that the Federal Housing Administration (FHA), the federal agency
+  that insured private lenders' mortgages, did not insure
   mortgages in low-income urban neighborhoods from its start, before the HOLC maps, while the
   HOLC lent broadly in those neighborhoods and to Black homeowners; they conclude the HOLC maps
   had little effect on either agency's lending [[Fishback et al. 2022](#sources);
   [Rose 2022](#sources)].
-- **Richmond's own instruments.** The local histories record the city's own lines before and
-  after the map: the 1871 wards, the 1911 and later ordinances, covenants until 1948, Harland
-  Bartholomew's 1946 plan, which called the city's Black neighborhoods slums, the siting of
-  public housing, the Turnpike, renewal, and the 1970 annexation
-  [[LVA timeline](#sources); [Gray-Sparks](#sources)]. The Library of Virginia's timeline itself
-  reads the grades as leading to disinvestment in Black neighborhoods that persists today
-  [[LVA timeline](#sources)].
 
-The forms themselves record what lenders were advancing in 1937 in their mortgage-funds field: 60%
-of appraisal in D1 and D4, 40% in D5, 35 to 40% in D11.5, none in D7, and good in A5
+Whichever reading holds, Richmond's own record runs before and after the map. The local
+histories set out the city's own lines: the 1871 wards, the 1911 and later ordinances, covenants
+until 1948, Harland Bartholomew's 1946 plan, which called the older, largely Black
+neighborhoods downtown "slums", the siting of public housing, the Turnpike, renewal, and the 1970
+annexation [[LVA timeline](#sources); [Gray-Sparks](#sources)].
+
+In 1937 the forms' field for mortgage funds available for home purchase reads 60% of appraisal
+in D1 and D4, 40% in D5, 35 to 40% in D11.5, none in D7, and good in A5
 [[HOLC area descriptions](#sources)]. Whether the HOLC or the FHA lent in Richmond's own D areas
 after 1937 has not been measured for this page.
 
@@ -432,14 +446,21 @@ The method and its gaps are set out next.
 - **The grades.** The outlines were redrawn in code, with Claude, from the National Archives'
   public-domain scan of the 1937 map (Record Group 195, via FRASER): each tint on the scan was
   traced, each area named from its printed label, and the whole placed on today's city by 33
-  street corners that stood in 1937, matched to OpenStreetMap, with an affine fit whose error
-  is about 12 m in the middle of the map and up to about 24 m at its edges
+  street corners that stood in 1937, matched to OpenStreetMap, with an affine fit whose
+  root-mean-square error over the 33 corners is about 12 m: 3 to 5 m at the corners in the middle
+  of the map, up to about 24 m at its edges
   [[FRASER, Richmond](#sources); `tools/holc/`]. Compared with Mapping Inequality's
   digitization, the two sets agree closely: grade by grade their land overlaps by 92 to 94%, D
   is 30% of graded land in this set and 30% in theirs, and the highway share in D is the
-  same to within a point [[Mapping Inequality](#sources)]. The map numbers 48 areas and leaves a few
-  small tinted pieces unnumbered; here they keep their grade and belong to no numbered area, so
-  they count in the totals by grade and in no area's own figures (`unnumbered.json`). A5 and A3
+  same to within a point [[Mapping Inequality](#sources)]. The map numbers 48 areas and prints no
+  number on some small tinted pieces. Four of them (a B block at Rodney, Wythe and Bethlehem
+  Roads; two D blocks, on Canal and Byrd Streets and by Monroe Park; and a thin D strip along
+  C10) keep their grade and belong to no numbered area here, so they count in the totals by grade
+  and in no area's own figures (`unnumbered.json`). The redraw gave the other unnumbered pieces to
+  the nearest area of their grade: a D strip along Meadowbridge Road to D4, the D pieces around
+  D10's circle to D10, a D piece of about 24 ha east of D6 to D5, and a small C patch to C10. One
+  D speck of about 0.5 ha, 2.2 km from any D label, is left out of every total
+  ([the redraw's notes](#sources)). A5 and A3
   share one green field whose printed dividing line has gaps; the line between them here is the
   redraw's estimate and is approximate. The story is built from one set
   named in a single place (`tools/stories/redlining/outlines.py`) and can be rebuilt from either.
@@ -448,12 +469,16 @@ The method and its gaps are set out next.
   reads it: A5 Windsor Farms, D6 Church Hill, D7 Fulton, D9 Riverview and D11 South Richmond. The
   names in parentheses are this page's modern names, chosen to orient a reader today and placed
   from the streets, churches and parks inside each outline (OpenStreetMap); they appear only where
-  they differ from the heading, and alone where there is no heading. The D4 form names D3 as Oak
-  Park, which the modern name keeps.
+  they differ from the heading, and alone where there is no heading. D2's form has no heading, but
+  the D4 form reads "Same as Oak Park, D2." (scan p. 40, field 14), and Oak Park Avenue runs inside
+  D2 today. Because the name comes from another area's form, D2's title keeps its number and
+  modern name, and the D2 figure gives the Oak Park name in its text.
 - **The forms' words** were read on the National Archives scan (FRASER, `ad_RichmondVA.pdf`, one
   page per area in grade order). Every quotation on this page was checked there, on November 22,
-  2026. The scan corrected two of the Lab's transcribed figures used here: D2's family incomes
-  ($350 to $750) and D11.5's share of owner-occupied homes (35%).
+  2026, and is given with the scan's capitals and punctuation. The scan corrected three of the
+  Lab's transcriptions used here: D2's family incomes ($350 to $750), D11.5's share of
+  owner-occupied homes (35%), and D4's remark, which names D2 as Oak Park where the transcription
+  has D3. It also gives D10's houses as "25 years and older".
 - **Buildings of 1937.** A 1937 picture draws the buildings standing today that the city's
   assessor dates to 1937 or before, plus, in Jackson Ward, the buildings on the 1925 and 1952
   Sanborn maps. Buildings since lost elsewhere are missing. This survivorship undercount is
@@ -463,7 +488,7 @@ The method and its gaps are set out next.
 ::: figure
 ![A bar chart: the share of today's dated parcels built by 1937 is A 36%, B 50%, C 72%, D 49%; beside it, only 13% of Jackson Ward's 1952 Sanborn outlines still stand](redlining-survival.webp)
 
-What the 1937 pictures can draw, by grade: the share of today's dated buildings that stood by
+What the 1937 pictures can draw, by grade: the share of today's dated parcels built by
 1937, beside the traced check in Jackson Ward. *How this was made:* the city's year-built parcels,
 each counted in the grade its center falls in, by `measure.py`. The shares say nothing of how
 many buildings were lost, which is why the Jackson Ward bar is shown beside them.
@@ -474,12 +499,16 @@ many buildings were lost, which is why the Jackson Ward bar is shown beside them
   it.
 - **Areas and lengths** are measured by `tools/stories/redlining/measure.py` on a local plane.
   Each grade's land is its outlines merged. Highway length is OpenStreetMap's `motorway` ways,
-  each carriageway counted, ramps left out; with ramps, D holds 66%.
+  each carriageway counted, ramps left out; with ramps, D holds 66%. "Inside the drawn
+  frame" means the frame of the citywide pictures; "the cached data" is the whole OpenStreetMap
+  extract the pictures are drawn from, which reaches past the frame. Every percentage is rounded
+  once, from the unrounded measure.
 - **What stands now** in each D area comes from OpenStreetMap as fetched on November 16, 2026,
   and from the city's year-built parcels. In D3 the parcels date only a few of the buildings, so
   their years are not given there.
-- **The frame** holds all of A and B, 99% of D and 92% of C; the east ends of C13 and C14
-  and the south tip of D11.5 fall outside it.
+- **The frame** holds all of A and B, 99% of D and 92% of C. C14 lies wholly outside it
+  and 73% of C13; smaller parts of C6 (12%), D11.5 (10%) and C12
+  (3%) do too. Every area is measured whole, inside the frame or not.
 - **The ground** is 2010s lidar, three times exaggerated. In Jackson Ward the Turnpike's trench is
   filled for 1937 by the estimate the [Jackson Ward story](jackson-ward.md) made.
 - **The grade colors** are the HOLC's green, blue, yellow and red, softened; every picture carries
@@ -497,10 +526,11 @@ this draft.*
   mortgages in default.
 - **FHA**: the Federal Housing Administration, the federal agency that insured mortgages made by
   private lenders.
-- **Residential security map**: the HOLC's color-coded map of a city's residential areas, made
-  between 1935 and 1940.
+- **Residential security map**: the title on Richmond's HOLC map, "Residential Security Map",
+  and the Library of Virginia's name for the HOLC's color-coded maps, made from 1935 to 1940.
 - **Grade**: the HOLC's rating of an area, A to D: First to Fourth Grade on Richmond's map, and
-  "Best", "Still Desirable", "Definitely Declining" and "Hazardous" on the HOLC's map of Atlanta.
+  "Best", "Still Desirable", "Definitely Declining" and "Hazardous" handwritten on the legend of
+  the HOLC's map of Atlanta.
 - **Area description**: the printed form the surveyors filled in for each graded area.
 - **Redlining**: from the red of the D grade; the word for lenders' refusing credit by
   neighborhood.
@@ -541,8 +571,9 @@ Opened while drafting, on the date given.
   Archives RG 195, via FRASER, https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/ad_RichmondVA.pdf;
   every form quoted or paraphrased here read on the scan November 22, 2026 (A5 page 5, C7 page
   29, D1 to D11 pages 37 to 46 and 48, D11.5 page 47).
-- **FRASER, Richmond**: "City of Richmond, Virginia and Environs", Home Owners' Loan Corporation,
-  April 3, 1937, National Archives RG 195, via FRASER, Federal Reserve Bank of St. Louis,
+- **FRASER, Richmond**: "Residential Security Map", Home Owners' Loan Corporation, Division of
+  Research & Statistics, April 3, 1937, drawn on the city's base map "City of Richmond, Virginia
+  and Environs" (Department of Public Works, 1923, revised to August 1, 1936), National Archives RG 195, via FRASER, Federal Reserve Bank of St. Louis,
   https://fraser.stlouisfed.org/archival/6751/item/619201 (opened November 22, 2026); the scan the
   outlines were redrawn from, https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Richmond_VA.pdf
   (fetched November 22, 2026; public domain), whose legend was read the same day.
@@ -560,6 +591,12 @@ Opened while drafting, on the date given.
   St), https://projects.propublica.org/hud/properties/VA007000008, and Gilpin Court
   (VA007000001, 1000 St Paul St), https://projects.propublica.org/hud/properties/VA007000001, as
   published by ProPublica (opened November 22, 2026), for their addresses.
+- **VCU Libraries**: "Interstate Highways", in the exhibit *MCV Aerial Photography*, VCU Libraries
+  Gallery, https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/interstate-highways
+  (opened November 22, 2026).
+- **The redraw's notes**: "Richmond 1937 HOLC grades: redrawn from the public-domain scan,
+  compared with Mapping Inequality", drafted with Claude for Chris Busse, November 22, 2026, and
+  `tools/holc/README.md` in the isoscape repository; the fit's error and the unnumbered pieces.
 - **FRASER, Atlanta**: "Map of Greater Atlanta", the HOLC's residential security map of Atlanta,
   National Archives RG 195, via FRASER,
   https://fraser.stlouisfed.org/files/docs/historical/maps/redline_nara/rg195_holc_Atlanta_GA.pdf

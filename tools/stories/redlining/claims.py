@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """Every sentence of the redlining page, with what it cites, for the fact check.
 
-    python3 tools/stories/redlining/claims.py OUT.csv
+    python3 tools/stories/redlining/claims.py OUT.csv [--findings FINDINGS.csv]
+
+With --findings (the independent check's findings.csv, keyed by the earlier draft's row
+numbers), each finding is carried to the sentence of this page most like the one it was made on,
+with the checker's verdict, severity and correction, and what was done about it
+(factcheck_d4.json). A finding whose sentence was rewritten lands on the closest sentence and
+says so; none is dropped.
 
 Reads pages/redlining.md (written by page.py) and lists each sentence of its body, figure
 captions, alt texts, tables and list items, in page order, with its section, the sources it
@@ -11,6 +17,8 @@ ad_RichmondVA.pdf, one page per area). Sentences with no citation are listed too
 so a checker sees the whole page. The Sources section itself is not listed.
 """
 import csv
+import difflib
+import json
 import os
 import re
 import sys
@@ -50,8 +58,30 @@ def sentences(block):
     return [p.strip() for p in parts if re.search(r'[A-Za-z]{3}', p)]
 
 
+def carry(rows, findings_path):
+    """{new row index: [finding, ...]}: each finding placed on the most similar new sentence."""
+    record = json.load(open(os.path.join(HERE, 'factcheck_d4.json')))
+    acts, placed = record['actions'], record.get('placed', {})
+    out = {}
+    norm = lambda t: re.sub(r'\W+', ' ', t).lower()  # noqa: E731
+    new = [norm(r[2]) for r in rows]
+    for f in csv.DictReader(open(findings_path)):
+        if not f['verdict']:
+            continue
+        old = norm(f['sentence'])
+        pin = placed.get(f['row'])
+        cand = [i for i, r in enumerate(rows) if pin in r[2]] if pin else []
+        best = cand[0] if cand else max(range(len(new)), key=lambda i: difflib.SequenceMatcher(None, old, new[i], autojunk=False).ratio())
+        ratio = difflib.SequenceMatcher(None, old, new[best], autojunk=False).ratio()
+        f['match'] = 'rewritten; placed by a named phrase (factcheck_d4.json)' if cand else 'same sentence' if ratio > 0.97 else ('revised sentence' if ratio > 0.55 else f'rewritten; closest sentence ({ratio:.2f})')
+        f['action'] = acts.get(f['row'], '' if not f['severity'] else 'MISSING')
+        out.setdefault(best, []).append(f)
+    return out
+
+
 def main():
     out_path = sys.argv[1]
+    findings = sys.argv[sys.argv.index('--findings') + 1] if '--findings' in sys.argv else None
     text = open(os.path.join(ROOT, 'pages', 'redlining.md')).read()
     text = re.sub(r'<!--.*?-->', '', text, flags=re.S)
     src = sources(text)
@@ -91,9 +121,11 @@ def main():
         buf.append(st)
     flush()
 
+    placed = carry(rows, findings) if findings else {}
     with open(out_path, 'w', newline='') as fh:
         w = csv.writer(fh)
-        w.writerow(['n', 'section', 'kind', 'sentence', 'cites', 'source_urls', 'opened', 'scan_pages', 'note'])
+        w.writerow(['n', 'section', 'kind', 'sentence', 'cites', 'source_urls', 'opened', 'scan_pages', 'note',
+                    'd3_rows', 'check_verdict', 'check_severity', 'check_correction', 'match', 'd4_action'])
         for i, (sec, kind, s) in enumerate(rows, 1):
             keys = re.findall(r'\[([^\[\]]+)\]\(#(?:sources|how-we-know)\)', s)
             keys = [k for k in dict.fromkeys(keys)]
@@ -118,7 +150,10 @@ def main():
                 notes.append('no citation on the page (framing, method or description)')
             if kind == 'alt text':
                 notes.append('describes the picture')
-            w.writerow([i, sec, kind, s, '; '.join(keys), ' '.join(urls), ' | '.join(opened), pages, '; '.join(notes)])
+            fs = placed.get(i - 1, [])
+            j = lambda k: ' || '.join(f[k] for f in fs)  # noqa: E731
+            w.writerow([i, sec, kind, s, '; '.join(keys), ' '.join(urls), ' | '.join(opened), pages, '; '.join(notes),
+                        '; '.join(f['row'] for f in fs), j('verdict'), j('severity'), j('correction'), j('match'), j('action')])
     print(f'{len(rows)} sentences to {out_path}')
 
 

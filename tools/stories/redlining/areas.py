@@ -5,7 +5,9 @@ name (among the D areas: D6 Church Hill, D7 Fulton, D9 Riverview, D11 South Rich
 Windsor Farms). Titles follow the owner's format (November 22, 2026, `title`): the number, the
 heading where there is one, and in parentheses the page's modern name where it differs. The
 modern names are the story's, placed from the streets, churches and parks inside each outline
-today (OpenStreetMap, fetched November 16, 2026); D4's form calls D3 Oak Park.
+today (OpenStreetMap, fetched November 16, 2026). D4's form reads "Same as Oak Park, D2." (scan
+p. 40, field 14; the Lab's transcription has "D3"), so Oak Park is what another area's form calls
+D2: it is not D2's own heading, and D2's title keeps the number and modern name only.
 """
 D_AREAS = ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11', 'D11.5']
 
@@ -22,7 +24,7 @@ MODERN = {
     'A5': None,
     'D1': 'Jackson Ward, Apostle Town and Navy Hill',
     'D2': 'Washington Park, around Cheatwood Avenue',
-    'D3': 'Oak Park, along Laburnum Avenue',
+    'D3': 'along Laburnum Avenue',
     'D4': 'around Hunt and Hazelhurst Avenues',
     'D5': 'Fairmount and the blocks around Mosby Court',
     'D6': 'Union Hill and the slopes of Church Hill',
@@ -47,11 +49,11 @@ def title(label):
     return f'{label} ({m})'
 
 
-# The grades as the Richmond map's legend prints them, and the HOLC's names for them as printed on
-# the legend of its map of Atlanta (both National Archives, RG 195, via FRASER).
+# The grades as the Richmond map's legend prints them, and the HOLC's names for them as handwritten
+# on the legend of its map of Atlanta (both National Archives, RG 195, via FRASER).
 GRADE_LEGEND = {'A': 'First Grade', 'B': 'Second Grade', 'C': 'Third Grade', 'D': 'Fourth Grade'}
 GRADE_NAME = {'A': 'Best', 'B': 'Still Desirable', 'C': 'Definitely Declining', 'D': 'Hazardous'}
 KEY_LABELS = [f'{g} {GRADE_LEGEND[g]}, "{GRADE_NAME[g]}"' for g in 'ABCD']
 KEY_TITLE = "Grades on the Home Owners' Loan Corporation's (HOLC's) 1937 map"
 KEY_SOURCE = ("Grade names: the Richmond map's legend (First to Fourth Grade); the names in quotation marks "
-              "as printed on the legend of the HOLC's map of Atlanta (National Archives, RG 195, via FRASER)")
+              "as handwritten on the legend of the HOLC's map of Atlanta (National Archives, RG 195, via FRASER)")

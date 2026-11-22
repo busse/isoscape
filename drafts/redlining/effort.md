@@ -10,6 +10,7 @@ work, against what the work took. Unit: one agent run of about 30 to 45 minutes 
 | Outline and rough draft | Nov. 21, 2026 | 4.75 runs | 21:57–22:38, about 41 min (1.0 run) | 0 | outline, six rough figures, tint switch (see `outputs/stories/redlining/rough/effort.md`) |
 | Working draft d1 | Nov. 22, 2026 | 9.25 runs (5–7 h) | about 15:00–16:30, about 90 min (2.0–2.5 runs) | 0 | this draft: see `outputs/stories/redlining/working/d1.md` |
 | Working draft d2 | Nov. 22, 2026 | 4.1 runs (2–3 h) | 16:44–17:15, about 30 min (0.75 run) | 0 | see `outputs/stories/redlining/working/d2.md` |
+| Fact check applied (d4) | Nov. 22, 2026 | not estimated | about 75 min (2 runs), builds and views in the background | 0 | see `outputs/stories/redlining/working/d4.md` |
 
 Tokens were not metered from inside the run.
 
@@ -51,3 +52,26 @@ and checks running in the background while other parts went on. By weight of wor
 (48 pages tiled, 14 read closely) and the shop opt-out (four files and a test) took the most;
 the tones, sources, terrain measure and labels were each a few minutes. Reading the scan paid
 for itself: it corrected two figures and d1's note on the area names.
+
+## The fact-check round (d4)
+
+An independent check of d3 read 291 rows, of which 154 carry a checkable claim, and found 56
+things to change (6 must fix, 32 should fix, 18 notes). Of the 154 checkable claims, 50 had a
+should-fix or must-fix finding, about a third; of the whole page's 291 rows, about one in six.
+d4 corrected all 38 must- and should-fix findings and 15 of the 18 notes, and disputed none.
+
+| Part | Approx. minutes |
+|---|---|
+| Reading the contract, decisions, drafts and the check | 10 |
+| Scan rereads (D2, D3, D4, D6, D8, D9, D10, D11, map title block) and sources reopened (EV, LVA, VCU Libraries) | 12 |
+| measure.py: unrounded shares, frame and D1 splits, OSM checks; fmt.pct; the test | 10 |
+| Text: story.md, boxes.py, timeline, charts, views | 20 |
+| Two builds and every view rendered (background), looking at each changed figure | 10 of attention, about 15 of waiting |
+| claims.py with findings, factcheck_d4.json, preview, screenshots, looking | 10 |
+| d4.md, board, commit | 5 |
+
+What the check cost: most of the corrections were small (wording cut back to a source,
+citations added), but three needed new measurements (the D1 split, the frame and drawn-frame
+totals, Providence Park's share), and one, the D4 remark, needed a scan read that changed a name
+in five places. The rounding finding was a code fault, not a wording one, and is now guarded by
+a test.

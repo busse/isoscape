@@ -31,6 +31,7 @@ GRADES = ['A', 'B', 'C', 'D']
 import sys  # noqa: E402
 sys.path.insert(0, HERE)
 from outlines import OUTLINES  # noqa: E402  the one switch: outlines.py
+from fmt import pct  # noqa: E402
 SRC = f"Grades: the Home Owners' Loan Corporation's (HOLC's) 1937 Richmond map, {OUTLINES['short']} ({OUTLINES['license']})"
 from areas import KEY_LABELS, KEY_SOURCE  # noqa: E402
 from areas import GRADE_LEGEND, GRADE_NAME  # noqa: E402
@@ -70,7 +71,7 @@ def land(n, full):
     ys = list(range(len(GRADES)))[::-1]
     for y, k in zip(ys, GRADES):
         ax.barh(y, g[k]['km2'], height=0.62, color=TONE[k], edgecolor=INK, linewidth=0.8)
-        ax.text(g[k]['km2'] + 0.25, y, f"{g[k]['km2']:.1f} km²  ({round(g[k]['share'] * 100)}%, {g[k]['areas']} areas)", va='center', fontsize=10.5)
+        ax.text(g[k]['km2'] + 0.25, y, f"{g[k]['km2']:.1f} km²  ({pct(g[k]['share'])}%, {g[k]['areas']} areas)", va='center', fontsize=10.5)
     ax.set_yticks(ys, [NAMES[k] for k in GRADES], fontsize=10.5)
     ax.set_xlim(0, max(g[k]['km2'] for k in GRADES) * 1.55)
     ax.set_xlabel('square kilometers', fontsize=10)
@@ -96,9 +97,9 @@ def highways(n, full):
             w = share[k]
             ax.barh(y, w, left=x, height=0.58, color=TONE[k], edgecolor=PAPER, linewidth=2)
             if w >= 0.06:
-                ax.text(x + w / 2, y, f'{k}  {round(w * 100)}%', ha='center', va='center', fontsize=10.5, fontweight='bold' if k == 'D' else 'normal')
+                ax.text(x + w / 2, y, f'{k}  {pct(w)}%', ha='center', va='center', fontsize=10.5, fontweight='bold' if k == 'D' else 'normal')
             else:
-                ax.text(x + w / 2, y - 0.36, f'{k} {round(w * 100)}%', ha='center', va='top', fontsize=9.5)
+                ax.text(x + w / 2, y - 0.36, f'{k} {pct(w)}%', ha='center', va='top', fontsize=9.5)
             x += w
         ax.text(1.0, y + 0.42, total, ha='right', va='bottom', fontsize=9.5)
     ax.set_yticks([1, 0], [r[0] for r in rows], fontsize=10.5)
@@ -108,14 +109,14 @@ def highways(n, full):
     for s in ('top', 'right', 'bottom', 'left'):
         ax.spines[s].set_visible(False)
     ax.tick_params(length=0)
-    d_land, d_road = round(land_share['D'] * 100), round(m['by_grade_share']['D'] * 100)
+    d_land, d_road = pct(land_share['D']), pct(m['by_grade_share']['D'])
     for i, k in enumerate(GRADES):
         lx, ly = (0.02, 0.5)[i % 2], (0.80, 0.755)[i // 2]
         fig.patches.append(matplotlib.patches.Rectangle((lx, ly), 0.018, 0.035, transform=fig.transFigure, facecolor=TONE[k], edgecolor=INK, linewidth=0.6))
         fig.text(lx + 0.024, ly + 0.003, NAMES1[k], fontsize=9)
     fig.suptitle(f'Where the highways run: D was {d_land}% of the graded land and holds\n{d_road}% of the limited-access highway inside it', x=0.02, ha='left', fontsize=13, fontweight='bold')
     finish(fig, 'highways', f"{SRC}. Highways: OpenStreetMap ways tagged motorway, fetched Nov. 16, 2026 (ODbL). {KEY_SOURCE}.\n"
-                            f"Each carriageway counted; ramps left out (with ramps, D holds {round(n['motorway_and_links']['by_grade_share']['D'] * 100)}%). It shows where the roads run; why they run there is in \"How we know\". measure.py.", full)
+                            f"Each carriageway counted; ramps left out (with ramps, D holds {pct(n['motorway_and_links']['by_grade_share']['D'])}%). {m['km_in_graded']:.1f} km lie inside graded land, of {m['km_in_frame']:.0f} km in the drawn frame. The chart shows where the roads run. measure.py.", full)
 
 
 def survival(n, full):
@@ -131,17 +132,17 @@ def survival(n, full):
     ys = list(range(len(rows)))[::-1]
     for yy, (label, v, tone, txt) in zip(ys, rows):
         ax.barh(yy, v, height=0.6, color=tone, edgecolor=INK, linewidth=0.8, hatch='//' if tone == PAPER else None)
-        ax.text(v + 0.01, yy, f'{round(v * 100)}%  ({txt})', va='center', fontsize=10)
+        ax.text(v + 0.01, yy, f'{pct(v)}%  ({txt})', va='center', fontsize=10)
     ax.set_yticks(ys, [r[0] for r in rows], fontsize=10)
     ax.set_xlim(0, 1)
     ax.set_xticks([0, 0.25, 0.5, 0.75, 1], ['0', '25%', '50%', '75%', '100%'], fontsize=9)
     for sp in ('top', 'right'):
         ax.spines[sp].set_visible(False)
     ax.tick_params(length=0)
-    fig.suptitle("What the 1937 views can draw: the share of today's dated buildings\nthat stood by 1937, by HOLC grade", x=0.02, ha='left', fontsize=13, fontweight='bold')
+    fig.suptitle("What the 1937 views can draw: the share of today's dated parcels\nbuilt by 1937, by HOLC grade", x=0.02, ha='left', fontsize=13, fontweight='bold')
     finish(fig, 'survival', f"{SRC}. Year built: City of Richmond assessor parcels (cached Nov. 16, 2026), counted where a parcel's center falls in a grade. "
                             f"Buildings gone since 1937 have no parcel, so these shares cannot say how many were lost; where the 1952 Sanborn sheets were traced, only "
-                            f"{round(jw['share_standing'] * 100)}% of the outlines still stand. measure.py. {KEY_SOURCE}.", full)
+                            f"{pct(jw['share_standing'])}% of the outlines still stand. measure.py. {KEY_SOURCE}.", full)
 
 
 def main():

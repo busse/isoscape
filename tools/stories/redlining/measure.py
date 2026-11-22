@@ -94,7 +94,7 @@ def terrain_by_grade(holc):
         out[g] = {'nodes': int(ok.sum()), 'elev_mean_m': round(float(np.mean(e[ok])), 1), 'elev_median_m': round(float(np.median(e[ok])), 1),
                   'elev_p10_m': round(float(np.percentile(e[ok], 10)), 1), 'elev_p90_m': round(float(np.percentile(e[ok], 90)), 1),
                   'slope_mean_deg': round(float(np.mean(s[ok])), 1), 'slope_median_deg': round(float(np.median(s[ok])), 1),
-                  'share_steeper_10deg': round(float(np.mean(s[ok] > 10)), 3)}
+                  'share_steeper_10deg': float(np.mean(s[ok] > 10))}
     return out
 
 
@@ -113,7 +113,7 @@ def main():
     n = {g: sum(1 for a in areas.values() if a['grade'] == g and a['numbered']) for g in GRADES}
     total = sum(by[g].area for g in GRADES)
     overlap = total - graded.area
-    land = {g: {'areas': n[g], 'km2': round(by[g].area / 1e6, 2), 'share': round(by[g].area / total, 3)} for g in GRADES}
+    land = {g: {'areas': n[g], 'km2': round(by[g].area / 1e6, 2), 'share': by[g].area / total} for g in GRADES}
     ungraded = [k for k, a in areas.items() if a['grade'] not in GRADES]
     unnumbered = {g: round(sum(a['geom'].area for a in areas.values() if a['grade'] == g and not a['numbered']) / 1e4, 1) for g in GRADES}
 
@@ -125,8 +125,10 @@ def main():
     hw = reg['width'] / 2 * KX / kx_c
     hd = reg['depth'] / 2
     frame = Polygon([(cx - hw, cy - hd), (cx + hw, cy - hd), (cx + hw, cy + hd), (cx - hw, cy + hd)])
-    in_frame = {g: round(by[g].intersection(frame).area / by[g].area, 3) for g in GRADES}
+    in_frame = {g: by[g].intersection(frame).area / by[g].area for g in GRADES}
     cut = sorted(k for k, a in areas.items() if a['grade'] in GRADES and a['numbered'] and a['geom'].difference(frame).area > 0.02 * a['geom'].area)
+    # How much of each area cut by the frame lies outside it (share of the area's land).
+    cut_outside = {k: areas[k]['geom'].difference(frame).area / areas[k]['geom'].area for k in cut}
 
     # Highways from the OSM cache.
     osm = json.load(open(root('data/richmond-streetcars/osm.json')))
@@ -146,8 +148,10 @@ def main():
         allg = sum(ln.intersection(graded).length for ln in inside)
         per = {g: sum(ln.intersection(by[g]).length for ln in inside) for g in GRADES}
         return {'km_in_graded': round(allg / 1000, 2), 'km_total_in_cache': round(sum(ln.length for ln in lines) / 1000, 1),
+                # Inside the drawn frame (regions/richmond-1937.json), graded or not.
+                'km_in_frame': round(sum(ln.intersection(frame).length for ln in lines) / 1000, 1),
                 'by_grade_km': {g: round(v / 1000, 2) for g, v in per.items()},
-                'by_grade_share': {g: round(v / allg, 3) for g, v in per.items()}}
+                'by_grade_share': {g: v / allg for g, v in per.items()}}
     motor = lengths(roads['motorway'])
     with_links = lengths(roads['motorway'] + roads['motorway_link'])
     # By road, motorway only, inside D land.
@@ -166,6 +170,36 @@ def main():
         v = sum(ln.intersection(a['geom']).length for ln in roads['motorway'])
         if v > 0:
             d_crossed[k] = round(v / 1000, 2)
+
+    # D1's carriageway by road: OSM's "Richmond-Petersburg Turnpike" (I-95, and I-95 with I-64)
+    # and the rest (I-64 alone).
+    d1 = areas['D1']['geom']
+    d1_split = {'turnpike': 0.0, 'other': 0.0}
+    for ref, name, line in refs['motorway']:
+        d1_split['turnpike' if 'Turnpike' in name else 'other'] += line.intersection(d1).length
+    d1_split = {k: round(v / 1000, 2) for k, v in d1_split.items()}
+    # Two things the per-area text names: how much of OSM's Providence Park outline lies in D4,
+    # and how many of D6's building outlines carry a historic or heritage tag.
+    checks = {}
+    for e in osm['elements']:
+        t = e.get('tags', {})
+        if e['type'] == 'way' and t.get('name') == 'Providence Park' and e.get('geometry') and len(e['geometry']) > 3:
+            pp = Polygon([xy(q['lon'], q['lat']) for q in e['geometry']]).buffer(0)
+            checks['providence_park_share_in_D4'] = pp.intersection(areas['D4']['geom']).area / pp.area
+    pg6 = prep(areas['D6']['geom'])
+    n6 = h6 = 0
+    for e in osm['elements']:
+        t = e.get('tags', {})
+        if e['type'] != 'way' or 'building' not in t or not e.get('geometry'):
+            continue
+        pts = [xy(q['lon'], q['lat']) for q in e['geometry'] if q]
+        if len(pts) < 3 or not pg6.contains(Point(sum(p[0] for p in pts) / len(pts), sum(p[1] for p in pts) / len(pts))):
+            continue
+        n6 += 1
+        if any(k.startswith('historic') or k.startswith('heritage') for k in t):
+            h6 += 1
+    checks['D6_buildings_osm'] = n6
+    checks['D6_buildings_historic_or_heritage'] = h6
 
     # Buildings drawn for 1937: today's parcels the city dates to 1937 or before, by grade.
     yb = json.load(open(root('data/richmond-streetcars/yearbuilt.json')))
@@ -188,8 +222,8 @@ def main():
                 break
     for g in GRADES:
         c = yb_counts[g]
-        c['share_by1937'] = round(c['by1937'] / c['parcels'], 3) if c['parcels'] else None
-        c['share_2000_on'] = round(c['since2000'] / c['parcels'], 3) if c['parcels'] else None
+        c['share_by1937'] = c['by1937'] / c['parcels'] if c['parcels'] else None
+        c['share_2000_on'] = c['since2000'] / c['parcels'] if c['parcels'] else None
 
     # The public-housing courts the brief names: which area each OSM outline's center falls in,
     # and how far it lies from the nearest D land.
@@ -241,7 +275,7 @@ def main():
                 c['buildings_osm'] += 1
         c['motorway_km'] = round(sum(ln.intersection(g).length for ln in roads['motorway']) / 1000, 2)
         for key in ('by1937', 'y1938_1977', 'since2000'):
-            c['share_' + key] = round(c[key] / c['parcels'], 3) if c['parcels'] else None
+            c['share_' + key] = c[key] / c['parcels'] if c['parcels'] else None
         per_area[k] = c
 
     # A check on survival where the 1952 Sanborn sheets were traced (Jackson Ward).
@@ -249,7 +283,7 @@ def main():
     jwlost = json.load(open(root('history/sanborn/jackson-ward-lost.geojson')))
     traced = len(jw52['features'])
     lost = sum(1 for f in jwlost['features'] if f['properties'].get('from') == 1952)
-    jw = {'outlines_1952': traced, 'gone_today': lost, 'standing_today': traced - lost, 'share_standing': round((traced - lost) / traced, 3)}
+    jw = {'outlines_1952': traced, 'gone_today': lost, 'standing_today': traced - lost, 'share_standing': (traced - lost) / traced}
 
     out = {
         'about': 'Computed by tools/stories/redlining/measure.py from the cached data; see its docstring for the method.',
@@ -257,8 +291,9 @@ def main():
         'ungraded_features': ungraded,
         'unnumbered_ha_by_grade': unnumbered,
         'extent_km': [round((graded.bounds[2] - graded.bounds[0]) / 1000, 1), round((graded.bounds[3] - graded.bounds[1]) / 1000, 1)],
-        'frame': {'share_of_grade_inside': in_frame, 'areas_cut_by_frame': cut},
+        'frame': {'share_of_grade_inside': in_frame, 'areas_cut_by_frame': cut, 'share_of_area_outside': cut_outside},
         'motorway': motor, 'motorway_and_links': with_links, 'motorway_in_d_by_road_km': road_d, 'motorway_in_d_by_area_km': d_crossed,
+        'motorway_in_d1_km': d1_split, 'osm_checks': checks,
         'yearbuilt_by_grade': yb_counts, 'courts': courts,
         'courts_note': 'Empty when the OSM cache holds no outline named for the court (true of the November 16, 2026 cache): the brief\'s placements are not yet rechecked here.',
         'jackson_ward_1952_survival': jw,

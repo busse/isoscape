@@ -28,21 +28,21 @@ export interface Moment {
 
 /** The dates, each from a source opened for the story (see the story page's sources). */
 export const MOMENTS: readonly Moment[] = [
-  { date: '1871', what: 'The city\'s wards are redrawn to pack Black voters into one, Jackson Ward.', source: 'Library of Virginia, Mapping Inequality timeline', sure: 'opened' },
-  { date: '1888', what: 'Electric streetcars open suburbs that covenants keep white.', source: 'Library of Virginia', sure: 'opened' },
+  { date: '1871', what: 'The city\'s wards are redrawn to create a single Black-majority ward, Jackson Ward.', source: 'Library of Virginia, Mapping Inequality timeline', sure: 'opened' },
+  { date: '1888', what: 'Electric streetcars open suburbs, most of them kept white by deeds and covenants.', source: 'Library of Virginia', sure: 'opened' },
   { date: 'April 1911', what: 'City Council passes a residential segregation ordinance. In 1912 the General Assembly lets every Virginia city do the same.', source: 'Library of Virginia; Encyclopedia Virginia', sure: 'opened' },
   { date: '1917', what: 'In Buchanan v. Warley the Supreme Court strikes down segregation ordinances.', source: 'Library of Virginia', sure: 'opened' },
   { date: '1924 or 1929', what: 'Richmond passes a new ordinance tied to the state\'s Racial Integrity Act. A federal appeals court strikes it down in 1929.', source: 'Encyclopedia Virginia gives 1924; the Library of Virginia gives 1929', sure: 'disputed' },
   { date: '1933', what: 'Congress creates the Home Owners\' Loan Corporation (HOLC) to refinance the mortgages of home owners in distress.', source: 'Home Owners\' Loan Act, June 13, 1933 (Harriss, 1951); Federal Reserve Bank of Chicago, 2022', sure: 'opened' },
   { date: 'April 3, 1937', what: 'The HOLC\'s map of Richmond grades its residential areas A to D.', source: 'National Archives, RG 195, via FRASER', sure: 'opened' },
   { date: '1943', what: 'Gilpin Court is dedicated on cleared Apostle Town land in D1.', source: 'Library of Virginia, Craig, 2025; Encyclopedia Virginia', sure: 'opened' },
-  { date: '1946', what: 'Harland Bartholomew\'s master plan calls the city\'s Black neighborhoods slums.', source: 'Encyclopedia Virginia', sure: 'opened' },
+  { date: '1946', what: 'Harland Bartholomew\'s master plan calls the older, largely Black neighborhoods downtown "slums".', source: 'Encyclopedia Virginia', sure: 'opened' },
   { date: '1948', what: 'In Shelley v. Kraemer the Supreme Court makes racial covenants unenforceable.', source: 'Library of Virginia', sure: 'opened' },
-  { date: '1955–1958', what: 'The Richmond–Petersburg Turnpike, now I-95 and I-64, is cut through D1. By 1957 about 1,900 Black families had been displaced.', source: 'Encyclopedia Virginia, citing the Richmond Times-Dispatch; the Jackson Ward story', sure: 'opened' },
-  { date: '1962', what: 'Mosby Court opens in D5, home to many of the 1,300 people the 17th Street renewal displaced.', source: 'Encyclopedia Virginia', sure: 'opened' },
+  { date: 'July 1, 1958', what: 'The Richmond–Petersburg Turnpike, now I-95 and I-64, opens through D1. By 1957 the Richmond Times-Dispatch estimated about 1,900 Black families displaced.', source: 'VCU Libraries; Encyclopedia Virginia, citing the Richmond Times-Dispatch', sure: 'opened' },
+  { date: '1962', what: 'Mosby Court opens in D5. Many of the 1,300 people the 17th Street renewal displaced move there.', source: 'Encyclopedia Virginia', sure: 'opened' },
   { date: '1967–1970', what: 'A study calls Fulton (D7) a slum; the 1970 plan would displace about 785 households.', source: 'Encyclopedia Virginia', sure: 'opened' },
   { date: '1970', what: 'Richmond annexes 23 square miles of Chesterfield County. Public housing, 464 scattered-site units, is built in Blackwell (D11.5).', source: 'Library of Virginia; Richmond Magazine, 2018', sure: 'opened' },
-  { date: '1973', what: 'HUD approves the Randolph project (D8), about 1,800 to be displaced, for the Downtown Expressway.', source: 'Encyclopedia Virginia', sure: 'opened' },
+  { date: '1973', what: 'HUD approves the Randolph project (D8), about 1,800 to be displaced, for slum clearance and the Downtown Expressway.', source: 'Encyclopedia Virginia', sure: 'opened' },
 ]
 
 const roles = (p: Palette, dark: boolean) => ({ bg: p.sky, ink: p.ink, dim: dark ? p.railSteel : p.railTie, card: dark ? p.land : p.road, accent: p.mark.line })
