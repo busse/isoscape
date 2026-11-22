@@ -13,7 +13,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Stage | Entries |
 |---|---|
-| research | 1 |
+| research | 2 |
 | final production | 46 |
 | in work | 4 |
 | live | 2 |
@@ -30,6 +30,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
+| — | Our own transcription of Richmond's 48 HOLC area-description forms, from the public-domain scans | research | — | no |
 | — | Data visualization: why is there a Dollar General on the edge of town? (Virginia) | story | — | no |
 
 ## Final production

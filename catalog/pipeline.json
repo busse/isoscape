@@ -3311,6 +3311,30 @@
    "log": [
     "2026-11-22: rough draft -> in work"
    ]
+  },
+  "holc-richmond-transcription": {
+   "title": "Our own transcription of Richmond's 48 HOLC area-description forms, from the public-domain scans",
+   "plate": null,
+   "kind": "research",
+   "stage": "research",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "nothing",
+   "decision": "Follow-up, after the redlining and Jackson Ward stories are out (owner, 2026-11-22). A second independent keying of all 48 forms, compared field by field with the first reading on branch holc-audit (tools/holc/audit/); disagreements read a third time. Adds the typed area headings and the informant names. Published as open data with scan page and field for each value. Not started. The audit found 27 value differences from the lab's transcription, read once; no outreach to the lab unless the owner chooses (draft in outputs/stories/redlining/audit/note-to-the-lab.md). A national pilot (about 80 forms, 10 cities) is a separate project, not planned.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-22: rough draft -> research"
+   ]
   }
  }
 }
