@@ -102,5 +102,74 @@ class Redraw(unittest.TestCase):
         self.assertIn('stamp', check.STAMPED)
 
 
+class Editorial(unittest.TestCase):
+    """record.py --editorial and check.py --editorial: a released piece in no store."""
+    def spec(self, root):
+        os.makedirs(os.path.join(root, 'tools'))
+        open(os.path.join(root, 'tools', 'make.py'), 'w').write(
+            'import sys, os\nos.makedirs(os.path.dirname(sys.argv[2]) or ".", exist_ok=True)\n'
+            'open(sys.argv[2], "w").write(open(os.path.join(sys.argv[1], "in.txt")).read().upper())\n')
+        os.makedirs(os.path.join(root, 'art')); open(os.path.join(root, 'art', 'a.txt'), 'w').write('HELLO')
+        return {'design': 'ed', 'title': 'Ed', 'version': 1, 'asset_version': '1.0.0',
+                'recipe': {'tool': 'tools/make.py', 'run': ['python3 tools/make.py <ds> art/a.txt'],
+                           'steps': [{'name': 'art', 'run': [sys.executable, 'tools/make.py', '{ds}', '{out}/a.txt'],
+                                      'needs': {'ds': {'what': 'data', 'where': 'elsewhere', 'files': ['in.txt']}},
+                                      'makes': {'out/a.txt': 'art/a.txt'}}]},
+                'inputs': ['tools/make.py'], 'outputs': {'print': 'art/a.txt'}, 'shown': {'explorer': 'x#/ed'}}
+
+    def make(self, root):
+        import json
+        sp = os.path.join(root, 'spec.json'); json.dump(self.spec(root), open(sp, 'w'))
+        old = record.ISO
+        record.ISO = root
+        try: r = record.editorial(sp, True)
+        finally: record.ISO = old
+        return r
+
+    def test_the_record_has_no_store_and_pins_every_file(self):
+        with tempfile.TemporaryDirectory() as root:
+            r = self.make(root)
+        self.assertEqual((r['kind'], r['for_sale'], r['version'], r['asset_version']), ('editorial', False, 1, '1.0.0'))
+        self.assertNotIn('store', r)
+        self.assertEqual(set(r['inputs']), {'tools/make.py', 'spec.json'})
+        self.assertEqual(r['outputs']['print']['file'], 'art/a.txt')
+        self.assertEqual(r['outputs']['canvas'], [])
+        self.assertEqual(r['scenes'], [])
+
+    def test_a_draft_is_never_recorded(self):
+        with tempfile.TemporaryDirectory() as root:
+            import json
+            s = self.spec(root); s['asset_version'] = '1.0.0-rc2'
+            sp = os.path.join(root, 'spec.json'); json.dump(s, open(sp, 'w'))
+            with self.assertRaises(SystemExit): record.editorial(sp)
+
+    def test_check_finds_a_changed_file_and_rebuilds_from_the_recipe(self):
+        with tempfile.TemporaryDirectory() as root, tempfile.TemporaryDirectory() as ds:
+            r = self.make(root)
+            r['isoscape']['commit'] = '0' * 40
+            self.assertEqual([p[0] for p in check.editorial_problems(r, root)], ['commit not in repo'])
+            # no data here: the step is not run, and says exactly what it lacks
+            got = check.editorial_rebuild(r, {}, root)
+            self.assertEqual(got['art']['result'], 'not run')
+            self.assertIn('--data ds=<folder>', got['art']['missing'][0])
+            self.assertEqual(check.editorial_rebuild(r, {'ds': ds}, root)['art']['missing'], ['ds: in.txt'])
+            open(os.path.join(ds, 'in.txt'), 'w').write('hello')
+            got = check.editorial_rebuild(r, {'ds': ds}, root)['art']
+            self.assertEqual(got['result'], 'reproduced')
+            self.assertEqual(got['files']['art/a.txt'], {'same': True, 'how': 'identical bytes'})
+            self.assertIn('ds/in.txt', got['data_sha256'])
+            open(os.path.join(ds, 'in.txt'), 'w').write('other')
+            self.assertEqual(check.editorial_rebuild(r, {'ds': ds}, root)['art']['result'], 'differs')
+            open(os.path.join(root, 'art', 'a.txt'), 'w').write('changed')
+            self.assertIn(('output changed', 'art/a.txt'), check.editorial_problems(r, root))
+
+    def test_a_pdf_that_differs_only_in_its_creation_date_is_the_same(self):
+        with tempfile.TemporaryDirectory() as t:
+            a, b = os.path.join(t, 'a.pdf'), os.path.join(t, 'b.pdf')
+            open(a, 'wb').write(b"%PDF-1.4\n<< /Producer (x) /CreationDate (D:20261122114346-04'00') >>\n")
+            open(b, 'wb').write(b"%PDF-1.4\n<< /Producer (x) /CreationDate (D:20261122130610-04'00') >>\n")
+            self.assertEqual(check.compare(a, b), (True, 'identical but for the PDF creation date'))
+
+
 if __name__ == '__main__':
     unittest.main()

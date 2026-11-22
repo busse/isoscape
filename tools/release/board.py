@@ -111,6 +111,9 @@ def problems(b, plates=None, index=None):
         if r and pv != r['current']: say(f'published_version {pv}, latest release record v{r["current"]}')
         if not r and pv is not None: say(f'published_version {pv} but no release record')
         if lv is not None and lv != pv: say(f'live version {lv} is not the published version {pv}')
+        # An editorial record (record.py --editorial) is a release that is not for sale: a piece on
+        # sale needs a plate and a store record (README "Editorial pieces (not for sale)").
+        if r and r.get('kind') == 'editorial' and (e.get('on_sale') or lv is not None): say('on sale, but its release record is editorial (not for sale): give it a plate and a store record')
         a = e.get('asset_version')
         if a is None:
             if stage in ('working draft', 'final draft', 'final production') and kind in ('print', 'set box', 'set map', 'set menu', 'cutaway'):

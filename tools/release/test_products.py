@@ -37,6 +37,11 @@ class Products(unittest.TestCase):
         self.assertNotIn('lines:1943@1,2,6', run(merged=merged))
         self.assertNotIn('lines:1943@3,3,6', run())
 
+    def test_an_editorial_piece_is_never_a_product(self):
+        # released with an editorial record, not for sale and not in the store's catalog
+        board = dict(BOARD, **{'viz-poster': {'kind': 'print', 'on_sale': False, 'published_version': 1}})
+        self.assertEqual(run(board=board), run())
+
     def test_two_of_a_kind_at_one_view_is_refused(self):
         designs = dict(DESIGNS, **{'bss-03-new': {'explore': 'lines:1943@1,2,6'}})
         with self.assertRaises(SystemExit):

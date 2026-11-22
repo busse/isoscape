@@ -1066,6 +1066,8 @@ into the store.
   them again. If they matter, they are fixed in a planned edition.
 - **Final production:** `record.py --release` has written the record, `check.py --rebuild`
   passes, the store's files match the record, and the product is live.
+  A piece released but not for sale has an editorial record instead (see "Editorial pieces
+  (not for sale)").
 
 ### The final-draft inspection
 
@@ -1259,7 +1261,8 @@ Then write the Changes entry, run `board.py page`, and commit `releases/`,
 
 ## Release records
 
-Every design for sale has a record in `releases/<design>/v<N>.json`, so it can always be
+Every design for sale (and every piece released without a sale: see "Editorial pieces" below)
+has a record in `releases/<design>/v<N>.json`, so it can always be
 revisited, remade, or changed with confidence. A record pins the isoscape commit, the recipe
 (tool and arguments), every input by SHA-256 (regions, histories, traced Sanborn files, the set
 or print spec, and each cached data file, with a frozen copy in `data/_releases/` that `fetch`
@@ -1312,6 +1315,40 @@ prints and scenes are frozen as sold, the landmarks' framing is recovered as an 
 (`tools/print/lm_params.json`, by `tools/release/landmark_params.py`, checked by eye), and
 `check.py --rebuild` reports which of their scenes the current code still draws identically.
 Frozen data and scenes are large and stay out of git; keep them backed up with the print files.
+
+### Editorial pieces (not for sale)
+
+A piece can reach final production without going on sale: a poster made for a story page, say,
+with no plate, no title block and no store listing. It still gets a release record, so it can be
+revisited and remade like any other, but the record is made from a spec in the repo instead of
+the store's catalog: `releases/editorial/<design>.json` names the recipe (each step as a command,
+with the outside data, Python modules and programs it needs, and which recorded file each output
+should match), the inputs, the outputs, where the outside data lives, and where the piece is
+shown. The record, `releases/<design>/v<N>.json`, has kind `editorial`, `for_sale: false` and no
+`store` section. It pins the isoscape commit, every input and output by SHA-256 (the art, the same
+art in other files, and anything made from it, such as a story page's pictures), the inspection
+report, and the asset version. Data too large for git is named with where it is kept, and its
+downloads' checksums are in the piece's `sources.md`.
+
+```sh
+python3 tools/release/record.py --editorial releases/editorial/<design>.json --release
+python3 tools/release/check.py --editorial [<design>] [--rebuild] [--data ds=<folder>]
+```
+
+`check.py --editorial` reads no store: every pinned file must match its hash. With `--rebuild`, it
+runs each step of the recipe in a scratch folder that holds only the pinned inputs and compares
+what comes out with the record: identical bytes; for a PDF, identical but for its creation date,
+else the same pixels when both are rasterized; for an image, the same pixels. A step whose data,
+modules or programs are not here is not run: the check lists exactly what is missing and ends
+INCOMPLETE rather than passing. What it found goes in the record's `reproduced`, with the outside
+files' hashes once a step reproduces. A store check (`check.py <store>`) skips editorial records,
+and `products.py` never lists them. On the board the piece is at final production with
+`published_version` set, `on_sale` false and `live_version` null; `board.py check` refuses an
+editorial record behind a piece on sale.
+
+Putting the piece on sale later is the usual path: give it a plate, a store catalog entry and a
+title block, and record it from the store in the usual way. The editorial record stays as its
+history.
 
 ## Plates
 

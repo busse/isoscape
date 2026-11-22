@@ -1,0 +1,97 @@
+{
+ "design": "viz-dollar-stores-virginia-poster",
+ "title": "Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36)",
+ "version": 1,
+ "asset_version": "1.0.0",
+ "version_note": "First release, November 22, 2026. Editorial: no plate, no title block, not in the store. Whether it is ever sold is the owner's later decision; selling it means a plate and a store record (README \"Editorial pieces (not for sale)\").",
+ "recipe": {
+  "tool": "tools/stories/dollar-stores/poster.py",
+  "run": [
+   "python3 tools/stories/dollar-stores/poster.py <ds-dir> drafts/dollar-stores-virginia/casestudy/2026-11-21-09-replication/data/tests.csv drafts/dollar-stores-virginia/casestudy/2026-11-21-09-replication/data/dg_classes.csv <out>/dollar-stores-virginia-poster-1.0.0   # writes the .pdf (the art) and the .png (100 dpi)",
+   "python3 tools/stories/dollar-stores/figures.py drafts/dollar-stores-virginia/casestudy/2026-11-22-17-release/dollar-stores-virginia-poster-1.0.0.pdf   # the story page's pictures, into pages/",
+   "python3 tools/release/check.py --editorial viz-dollar-stores-virginia-poster --rebuild --data ds=<ds-dir>   # both of the above in a scratch folder, compared with this record"
+  ],
+  "made_with": "matplotlib 3.11.2 (the PDF's Producer and the PNG's Software tag); the Python, geopandas and Pillow versions were not logged at release",
+  "deterministic": "The PNG is: the released PNG is byte-identical to rc2's, rendered about 80 minutes earlier. The PDF differs from rc2's only in its /CreationDate, which matplotlib stamps at render time.",
+  "steps": [
+   {
+    "name": "poster",
+    "run": ["python3", "tools/stories/dollar-stores/poster.py", "{ds}",
+            "drafts/dollar-stores-virginia/casestudy/2026-11-21-09-replication/data/tests.csv",
+            "drafts/dollar-stores-virginia/casestudy/2026-11-21-09-replication/data/dg_classes.csv",
+            "{out}/dollar-stores-virginia-poster-1.0.0"],
+    "needs": {
+     "ds": {
+      "what": "the dollar stores working folder",
+      "where": "on the Mac, under ISO-TEST/isoscape-work/dollar-stores/ (raw downloads in its raw/); too large for git",
+      "files": ["stores_dedup.csv.gz", "hpms/va2024.gpkg", "counties/va_regions.gpkg",
+                "fonts/libre-baskerville-latin-400-normal.ttf", "fonts/libre-baskerville-latin-700-normal.ttf",
+                "fonts/libre-baskerville-latin-400-italic.ttf"],
+      "dirs": ["work_all", "work_cdp"]
+     }
+    },
+    "modules": ["geopandas", "matplotlib", "numpy", "pandas", "shapely", "PIL"],
+    "makes": {
+     "out/dollar-stores-virginia-poster-1.0.0.pdf": "drafts/dollar-stores-virginia/casestudy/2026-11-22-17-release/dollar-stores-virginia-poster-1.0.0.pdf",
+     "out/dollar-stores-virginia-poster-1.0.0.png": "drafts/dollar-stores-virginia/casestudy/2026-11-22-17-release/dollar-stores-virginia-poster-1.0.0.png"
+    }
+   },
+   {
+    "name": "page pictures",
+    "run": ["python3", "tools/stories/dollar-stores/figures.py",
+            "drafts/dollar-stores-virginia/casestudy/2026-11-22-17-release/dollar-stores-virginia-poster-1.0.0.pdf"],
+    "mkdirs": ["pages"],
+    "modules": ["pymupdf", "PIL"],
+    "makes": {
+     "pages/dollar-stores-poster.webp": "pages/dollar-stores-poster.webp",
+     "pages/dollar-stores-poster-large.webp": "pages/dollar-stores-poster-large.webp",
+     "pages/dollar-stores-tiles.webp": "pages/dollar-stores-tiles.webp",
+     "pages/dollar-stores-tiles-large.webp": "pages/dollar-stores-tiles-large.webp",
+     "pages/dollar-stores-charts.webp": "pages/dollar-stores-charts.webp",
+     "pages/dollar-stores-charts-large.webp": "pages/dollar-stores-charts-large.webp",
+     "pages/dollar-stores-social.jpg": "pages/dollar-stores-social.jpg"
+    }
+   }
+  ]
+ },
+ "inputs": [
+  "tools/stories/dollar-stores/poster.py",
+  "tools/stories/dollar-stores/figures.py",
+  "drafts/dollar-stores-virginia/casestudy/2026-11-21-09-replication/data/tests.csv",
+  "drafts/dollar-stores-virginia/casestudy/2026-11-21-09-replication/data/dg_classes.csv"
+ ],
+ "external": {
+  "ds": "The working folder the poster reads (<ds-dir>): stores_dedup.csv.gz (every store, de-duplicated, with its place, class and distances), hpms/va2024.gpkg (FHWA HPMS 2024 Virginia, with traffic counts), counties/va_regions.gpkg (Census 2024 counties tagged with the five regions of tools/stories/dollar-stores/regions.json), fonts/ (Libre Baskerville from tools/print/fonts, converted to TTF), and one place folder per grid store in work_all/<slug> or work_cdp/<geoid> (place.gpkg, builtup.gpkg, roads.gpkg, meta.json). It was made from the raw downloads by the scripts in tools/stories/dollar-stores/, as drafts/dollar-stores-virginia/casestudy/log.md tells (steps 2 to 9). Kept on the Mac under ISO-TEST/isoscape-work/dollar-stores/ (the exact folder was not logged at release; the first rebuild there should confirm it); not in git.",
+  "hashed": "These files were not hashed at release. When check.py --rebuild reproduces the poster from them, it writes their SHA-256 into reproduced.steps.poster.data_sha256.",
+  "sources": "drafts/dollar-stores-virginia/sources.md: every download with its URL, date, size, SHA-256 (or the checksum file on the Mac that holds it) and license. Raw files: ISO-TEST/isoscape-work/dollar-stores/raw/ on the Mac."
+ },
+ "outputs": {
+  "print": "drafts/dollar-stores-virginia/casestudy/2026-11-22-17-release/dollar-stores-virginia-poster-1.0.0.pdf",
+  "prints": ["drafts/dollar-stores-virginia/casestudy/2026-11-22-17-release/dollar-stores-virginia-poster-1.0.0.png"],
+  "derived": [
+   "pages/dollar-stores-poster.webp",
+   "pages/dollar-stores-poster-large.webp",
+   "pages/dollar-stores-tiles.webp",
+   "pages/dollar-stores-tiles-large.webp",
+   "pages/dollar-stores-charts.webp",
+   "pages/dollar-stores-charts-large.webp",
+   "pages/dollar-stores-social.jpg"
+  ]
+ },
+ "shown": {
+  "page": "https://busse.github.io/isoscape/p/dollar-stores.html",
+  "explorer": "https://busse.github.io/isoscape/#/dollar-stores",
+  "page_source": "pages/dollar-stores.md, written by tools/stories/dollar-stores/page.py from story.md and counts.json (counts.py writes counts.json from the committed results). Not pinned here: the page can be corrected without changing the poster.",
+  "pdfs": "p/dollar-stores-phone.pdf and p/dollar-stores-large.pdf on gh-pages (tools/pdf/story_pdf.py dollar-stores), published at gh-pages commit e88635a",
+  "story_board_entry": "viz-dollar-stores-virginia",
+  "shop": "none: the page has shop: false"
+ },
+ "inspection": "drafts/dollar-stores-virginia/casestudy/2026-11-22-16-poster-rc1/inspection/report.md",
+ "notes": [
+  "drafts/dollar-stores-virginia/casestudy/2026-11-22-17-release/notes.md",
+  "drafts/dollar-stores-virginia/casestudy/2026-11-22-16-poster-rc1/notes.md",
+  "drafts/dollar-stores-virginia/casestudy/log.md",
+  "drafts/dollar-stores-virginia/effort.md",
+  "drafts/dollar-stores-virginia/sources.md"
+ ]
+}
