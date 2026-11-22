@@ -3205,7 +3205,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "agent",
-   "decision": "Story page drafted (pages/dollar-stores.md, unlisted, built by tools/stories/dollar-stores/page.py from counts.json). Facts checked against results files and opened sources on Nov 22; the poster's independent inspection is running. Next: outside review (owner decides who), then publish by removing 'unlisted'.",
+   "decision": "Owner approved going live without outside review (Nov 22, 13:04). Page pages/dollar-stores.md is public on the branch (unlisted removed). Set to published when the planning session merges and pushes.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3232,8 +3232,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 2,
-   "waiting_on": "owner",
-   "decision": "rc1 inspected (independent Fable inspector, report in casestudy step 16): fix, 1 A + 5 C + 9 B. rc2 fixes all A and C and six B; three B (markers under arrows) accepted. Targeted recheck clean. Owner: approve release, then the planning session merges and pushes (poster is editorial, not for sale; no plate).",
+   "waiting_on": "agent",
+   "decision": "Owner approved release through live production (Nov 22, 13:04). Ready on branch viz/dollar-stores-virginia: released art 1.0.0 (pixel-identical to the inspected rc2) in casestudy step 17. Waiting on the planning session to merge and push, and to say how a not-for-sale editorial poster gets its release record (record.py and check.py only know store designs); then set final production 1.0.0, published_version 1.",
    "accepted_faults": [
     {
      "what": "Mineral: the town arrow is drawn over a nearby dollar store's square and a grocery diamond",

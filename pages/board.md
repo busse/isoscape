@@ -24,7 +24,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
-- **Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36)**: rc1 inspected (independent Fable inspector, report in casestudy step 16): fix, 1 A + 5 C + 9 B. rc2 fixes all A and C and six B; three B (markers under arrows) accepted. Targeted recheck clean. Owner: approve release, then the planning session merges and pushes (poster is editorial, not for sale; no plate).
 - **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 

@@ -449,3 +449,19 @@ proof, and `inspection/` with report.md and its crops.
   rc2.
 - **Chris (11:45).** Use Opus for subagents and inspection from here on. Fable only for its
   unique capabilities.
+
+## Step 17: release (November 22, 13:04-13:40)
+
+Folder: `2026-11-22-17-release/`.
+
+- **Chris (13:04).** "approved for release through to live production".
+- **On the branch.**
+  - Released art `1.0.0` (pixel-identical to rc2).
+  - The story page made public.
+  - `origin/main` merged in, with the board page regenerated.
+  - Board check, tests and typecheck all pass.
+- **Left for the planning session:**
+  - the merge to main and the push live;
+  - a release record for a not-for-sale editorial poster (the release tools only know store
+    designs);
+  - then final production and published on the board.
