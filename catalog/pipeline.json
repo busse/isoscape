@@ -3512,6 +3512,30 @@
    "log": [
     "2026-11-23: rough draft -> in work"
    ]
+  },
+  "series-richmond-floods": {
+   "title": "Richmond's floods over time: how much went under, before and after the floodwall",
+   "plate": null,
+   "kind": "research",
+   "stage": "research",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "owner",
+   "decision": "New series to plan (owner, 2026-11-23): floods before and after the floodwall, how much was submerged, the 2004 flood behind the wall, and a first step into weather. Planning notes given in chat the same day; waiting on the owner's answers on scope (which floods, map set or story or both, first test).",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-23: rough draft -> research"
+   ]
   }
  }
 }
