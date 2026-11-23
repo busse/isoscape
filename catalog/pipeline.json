@@ -1,7 +1,7 @@
 {
  "about": "The production board: one entry per design or piece of work. The scheme is README \"Stages and the board\"; edit it with `tools/release/board.py set`; `board.py check` validates it.",
  "scheme": "README.md#stages-and-the-board",
- "updated": "2026-11-22",
+ "updated": "2026-11-23",
  "sources": "backfilled November 18, 2026 from catalog/plates.json, releases/ (latest record per design) and the storefront (https://chrisbusse.com/products.json: 39 products live). Orders are \"unknown\" until the store's orders.py has been run.",
  "items": {
   "broad-street-1943-01-ay-tower": {
@@ -3440,6 +3440,31 @@
     "2026-11-22: owner approved publishing after two fixes (no cropped pictures; PDF wording for screen instructions); fixes made, back at owner test",
     "2026-11-22: owner test -> live"
    ]
+  },
+  "story-jackson-ward-guide": {
+   "title": "Seeing the change: a walking guide to Jackson Ward (pocket guide)",
+   "plate": null,
+   "kind": "story",
+   "stage": "research",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "owner",
+   "decision": "Brief approved by the owner on 2026-11-23 (ISOSCAPE-PROMO). Rough draft by the main isoscape session: brief checked against the story, street-named plan map (phone, two halves, letter), seven 1952-and-today pairs, unlisted draft page. Waits on the owner for the questions in rough.md; then the explorer session finishes the page and the PDFs.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": "guide/jackson-ward",
+   "worktree": "/home/claude/wt-jw-guide",
+   "links": [
+    "/mnt/user-data/outputs/guide/jackson-ward/rough.md"
+   ],
+   "private": true,
+   "notes": "editorial; no plate, no shop; facts only from the published Jackson Ward story. Image work (the map and pairs) is a rough draft; the story's stages allow research as the entry stage."
   }
  }
 }
