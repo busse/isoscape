@@ -17,6 +17,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | final production | 47 |
 | published | 1 |
 | in work | 4 |
+| owner test | 1 |
 | live | 3 |
 | on hold | 55 |
 | blocked | 1 |
@@ -24,6 +25,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
+- **Downtown Richmond through time: its own page in the explorer (year view, timeline, compare two years)**: Built on feature/through-time-page as a preview (2026-11-23); nothing pushed or published. Check from the local preview at 1280x711, 1440x900 and on an iPhone: the timeline drag, previous and next, Compare two years with the pickers, the divider by thumb and by mouse, a vertical swipe over the picture scrolling the page, Copy link, the jump links, the front page hero, and the viewer's link to the page. Touch was tested in Chrome's emulation only.
 - **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
@@ -100,6 +102,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | — | Shop: default to the unframed print, curated collections and sort order, story and set links, menu | site | — | no |
 | — | Shop: product template, hero layouts for the four cutaways and four collections, Richmond descriptions, place-first titles | site | — | no |
 | — | Shop: from holiday shop to a continuing shop with a holiday promotion; Coming soon, The 2026 Annual; room for photography | site | — | no |
+
+## Owner test
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Downtown Richmond through time: its own page in the explorer (year view, timeline, compare two years) | site | — | no |
 
 ## Live
 

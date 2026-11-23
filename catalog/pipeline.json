@@ -3464,6 +3464,30 @@
    "log": [
     "2026-11-23: rough draft -> research"
    ]
+  },
+  "explorer-through-time-page": {
+   "title": "Downtown Richmond through time: its own page in the explorer (year view, timeline, compare two years)",
+   "plate": null,
+   "kind": "site",
+   "stage": "owner test",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "owner",
+   "decision": "Built on feature/through-time-page as a preview (2026-11-23); nothing pushed or published. Check from the local preview at 1280x711, 1440x900 and on an iPhone: the timeline drag, previous and next, Compare two years with the pickers, the divider by thumb and by mouse, a vertical swipe over the picture scrolling the page, Copy link, the jump links, the front page hero, and the viewer's link to the page. Touch was tested in Chrome's emulation only.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": "feature/through-time-page",
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-23: rough draft -> owner test"
+   ]
   }
  }
 }

@@ -35,7 +35,7 @@ import { escapeHtml } from './markdown.ts'
 import { loadPages, PAGES_DIR, type Page } from './pages.ts'
 import {
   buildCard, clip, escAttr, firstParagraph, flagshipOf, pageDescription, imageSize, metaTags, pageShop, previewOf, printLinks, shopFor, siteHref, withCampaign, type ShareDoor,
-  SITE_NAME, statsLine, type HomeConfig, type Preview, type SiteConfig,
+  SITE_NAME, seriesShopLine, statsLine, type HomeConfig, type Preview, type SiteConfig,
 } from './social.ts'
 import { makeStory } from './story.ts'
 
@@ -261,6 +261,7 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 .cards small { color: var(--dim); font-size: 12px; }
 .more { font-size: 14px; }
 .more ul { columns: 2 220px; padding-left: 1.1em; margin: 0; }
+.tt-years-plain ul { columns: 2 220px; padding-left: 1.1em; }
 .more li { margin: 2px 0; }
 .more a { color: var(--accent); }
 .foot { max-width: 1040px; margin: 0 auto; padding: 14px 20px 48px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--dim); }
@@ -388,6 +389,29 @@ export const faqEntries = (html: string): { question: string; answer: string }[]
   return out
 }
 
+/**
+ * A series page (`series:` in its front matter) without script: its links to years
+ * (`#<year>` or `#<a>..<b>`, as `staticRoute` leaves a link to a state of its own view) open that
+ * view in the explorer, and a list of the series' years, each a link to its map page, stands where
+ * the explorer puts the view (before the first section). Without the series' builds, no list.
+ */
+export const seriesStatic = (page: Page, html: string, ctx: Ctx): string => {
+  if (page.series === undefined) return html
+  const u = up(ctx.depth)
+  const out = html.replace(/href="#(\d{3,4}(?:\.\.\d{3,4})?)"/g, (_, st: string) => `href="${u}index.html#/${page.slug}/${st}"`)
+  const series = ctx.plan.entries.find((e): e is SeriesEntry => e.kind === 'series' && e.region === page.series)
+  if (series === undefined) return out
+  const list = `<section class="tt-years-plain" aria-labelledby="the-years"><h2 id="the-years">The ${series.years.length} years</h2>
+` +
+    `<p>Each year has its own page, with its picture and how it was made. <a href="${escAttr(`${u}index.html#/${page.slug}`)}">In the explorer</a> you can step through them and compare any two.</p>
+<ul>` +
+    series.years.map((y) => `<li><a href="${escAttr(u + y.path)}">${y.year}${y.build.time?.title ? `: ${escapeHtml(y.build.time.title)}` : ''}</a></li>`).join('') + `</ul>
+</section>
+`
+  const at = out.search(/<h2\b/)
+  return at < 0 ? out + list : out.slice(0, at) + list + out.slice(at)
+}
+
 /** A content page as a plain HTML document: `p/<slug>.html`. */
 export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}, modified?: string): string => {
   const path = ctx.plan.forPage(page.slug) ?? `p/${page.slug}.html`
@@ -396,7 +420,9 @@ export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}
   const imageAlt = imgs.own === undefined ? imgs.flagshipAlt : page.summary ?? page.title
   // A page with `shop: false` (a story page) carries no shop link, button or print link.
   const shop = page.noShop ? undefined : pageShop(page.slug, mapRefs(page.html), ctx.config)
-  const html = page.noShop ? page.html : printLinks(page.html, ctx.config.shop?.products, '../index.html#', (u) => withCampaign(u, page.slug, ctx.config.shop?.url))
+  const tag = (u: string) => withCampaign(u, page.slug, ctx.config.shop?.url)
+  const html = seriesStatic(page, page.noShop ? page.html : printLinks(page.html, ctx.config.shop?.products, '../index.html#', tag), ctx) +
+    ((!page.noShop && page.series !== undefined && seriesShopLine(ctx.config, page.series, tag)) || '')
   const acts = `<p class="acts"><a class="btn ghost" href="../index.html#/${escAttr(page.slug)}">Open this in the explorer</a>${shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, page.slug, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`}</p>\n`
   const url = abs(path, ctx)
   const faq = page.schema === 'FAQPage' ? faqEntries(page.html) : []
@@ -513,6 +539,7 @@ export const renderMapPage = (e: MapEntry, ctx: Ctx, previews: ReadonlyMap<strin
   const story = sec?.page === undefined ? undefined : sec.page.startsWith('#/') ? ctx.plan.forPage(sec.page.slice(2).split('/')[0]) : undefined
   const more = siblings(e, ctx)
   const t = b.time
+  const front = e.series === undefined ? undefined : seriesFront(e.region, ctx)
   const body =
     `<main class="wrap wide">\n` +
     (series === undefined ? '' : `<p class="plain"><a href="${escAttr(u + series.path)}">${escapeHtml(mapTitle(series, home))}</a></p>\n`) +
@@ -522,7 +549,8 @@ export const renderMapPage = (e: MapEntry, ctx: Ctx, previews: ReadonlyMap<strin
     `<p class="acts"><a class="btn${shop ? ' ghost' : ''}" href="${escAttr(explore)}">Explore this map</a>` +
     (shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, e.region, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`) +
     (shop?.more ?? []).map((m) => ` <a class="btn" href="${escAttr(withCampaign(m.url, e.region, ctx.config.shop?.url))}">${escapeHtml(m.label)}</a>`).join('') +
-    (story === undefined ? '' : ` <a class="btn ghost" href="${escAttr(u + story)}">${escapeHtml(sec?.pageLabel ?? 'Read the story')}</a>`) + `</p>\n` +
+    (story === undefined ? '' : ` <a class="btn ghost" href="${escAttr(u + story)}">${escapeHtml(sec?.pageLabel ?? 'Read the story')}</a>`) +
+    (front === undefined ? '' : ` <a class="btn ghost" href="${escAttr(`${u}index.html#/${front.slug}${e.year === undefined ? '' : `/${e.year}`}`)}">Compare the years</a>`) + `</p>\n` +
     (series === undefined ? '' : `<nav aria-label="Years"><ul class="years">${series.years.map((y) => `<li>${y.year === e.year ? `<span aria-current="page">${y.year}</span>` : `<a href="${escAttr(u + y.path)}"${y.build.time?.title ? ` title="${escAttr(y.build.time.title)}"` : ''}>${y.year}</a>`}</li>`).join('')}</ul></nav>\n`) +
     drawnBy(ctx, series !== undefined) +
     `<section aria-labelledby="made"><h2 class="sub" id="made">How this view was made</h2>\n${storyFor(b, ctx)}\n</section>\n` +
@@ -531,6 +559,9 @@ export const renderMapPage = (e: MapEntry, ctx: Ctx, previews: ReadonlyMap<strin
   return head({ title: `${title} · ${SITE_NAME}`, description, path: e.path, type: 'article', ld: mapLd(e, title, description, image, ctx), ...(image === undefined ? {} : { image, imageAlt: alt }) }, ctx) +
     topBar(ctx, e.region) + body + footer(ctx) + '</body>\n</html>\n'
 }
+
+/** The page that is a series' front door (`series: <region>` in its front matter), if any. */
+const seriesFront = (region: string, ctx: Ctx): Page | undefined => ctx.pages.find((p) => p.series === region && !p.unlisted)
 
 /** A dated series with its years: `m/<region>.html`. */
 export const renderSeriesPage = (e: SeriesEntry, ctx: Ctx, previews: ReadonlyMap<string, Preview | undefined>): string => {
@@ -552,7 +583,8 @@ export const renderSeriesPage = (e: SeriesEntry, ctx: Ctx, previews: ReadonlyMap
     `<p class="lede">${escapeHtml(hero?.blurb ?? sec?.blurb ?? `${titleOf(e.build)}, drawn as it stood in each of ${e.years.length} years from ${first} to ${last}.`)}</p>\n` +
     (image === undefined ? '' : `<figure class="pic"><a href="${escAttr(explore)}"><img src="${escAttr(u + image.path)}" width="${image.width}" height="${image.height}" alt="${escAttr(alt)}"></a><figcaption>${escapeHtml(statsLine(e.build))}</figcaption></figure>\n`) +
     `<p class="acts"><a class="btn${shop ? ' ghost' : ''}" href="${escAttr(explore)}">Explore this map: step through ${e.years.length} years</a>` +
-    (shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, e.region, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`) + `</p>\n` +
+    (shop === undefined ? '' : ` <a class="btn" href="${escAttr(withCampaign(shop.url, e.region, ctx.config.shop?.url))}">${escapeHtml(shop.label)}</a>`) +
+    (seriesFront(e.region, ctx) === undefined ? '' : ` <a class="btn ghost" href="${escAttr(`${u}index.html#/${seriesFront(e.region, ctx)?.slug}`)}">Compare the years</a>`) + `</p>\n` +
     drawnBy(ctx, true) +
     `<h2 class="sub">The years</h2>\n<ul class="cards">${e.years.map((y) => {
       const p = y.build.files?.thumb ?? previews.get(y.build.id)?.path

@@ -71,6 +71,10 @@ export interface HomeHero {
   readonly blurb?: string
   /** The shop button's text for this view (default "Buy a print ↗"), shown while its region is in the shop's `onSale`. */
   readonly shopLabel?: string
+  /** A page that is this view's front door ('#/<slug>', a series page: through-time.ts): the card's picture, years and button go there instead of the viewer. */
+  readonly page?: string
+  /** The card's button text when `page` is set (default "Step through the years"). */
+  readonly pageLabel?: string
 }
 
 /** A group of regions, by name prefix, in the build list and on the front page. */
@@ -588,6 +592,21 @@ export const onSaleUrl = (onSale: OnSale | undefined, subject: string): string |
 /** The `onSale` key a subject is on sale under (see `onSaleUrl`), if any. */
 export const onSaleKey = (onSale: OnSale | undefined, subject: string): string | undefined =>
   onSale === undefined ? undefined : Object.keys(onSale).filter((k) => k !== '' && (k.includes(':') ? k === subject : subject.startsWith(k))).sort((a, b) => b.length - a.length)[0]
+
+/**
+ * The quiet line at the foot of a series page (through-time.ts): the shop's front page, when any
+ * year of the series (or the whole series) is on sale. Its URL is the shop's own (`shop.url`); the
+ * explorer tags it with the campaign when clicked, a static page through `href`.
+ */
+export const seriesShopLine = (config: Pick<SiteConfig, 'shop'>, region: string, href: (url: string) => string = (u) => u): string | undefined => {
+  const shop = config.shop
+  if (shop === undefined) return undefined
+  const keys = Object.keys(shop.onSale ?? {})
+  const any = onSaleKey(shop.onSale, region) !== undefined || keys.some((k) => k.startsWith(`${region}:`))
+  if (!any) return undefined
+  const esc = (x: string) => x.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c] as string)
+  return `<p class="tt-shop">Some of these years are sold as prints: <a href="${esc(href(shop.url))}" target="_blank" rel="noopener">${esc(shop.label)} ↗</a></p>`
+}
 
 /** True while anything at all is on sale. */
 export const anyOnSale = (config: Pick<SiteConfig, 'shop'>): boolean => Object.keys(config.shop?.onSale ?? {}).length > 0

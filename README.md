@@ -164,7 +164,9 @@ the URL with a `?v=2` on the end.
 
 The same file can give the explorer a front page. `"home"` has a `title`, an `intro`, `heroes`
 (featured views, each a `region`, optional `year` in a dated series, `title`, `blurb`, and
-optional `shopLabel`), `sections` (each a `title`, the region-name `prefixes` it holds, and optionally
+optional `shopLabel`; a hero with `page`, a series page's route such as `"#/downtown-through-time"`,
+sends its picture, year chips and button there, at the year, instead of into the viewer, its
+button reading `pageLabel` or "Step through the years"), `sections` (each a `title`, the region-name `prefixes` it holds, and optionally
 `homeTitle`, `blurb`, `order` (region names to show first), `collapsed` and `shopLabel`), and `links` shown at the bottom.
 An optional `stories` (`title`, `blurb`, and `pages`, a list of page slugs) shows those pages as cards
 under the featured views, each with its link-preview picture, title and summary; an unlisted page is left out.
@@ -244,7 +246,8 @@ also writes a plain HTML page for everything worth finding, beside `index.html`:
 
 - `p/<slug>.html`: every content page, its whole text in the document, with GitHub-style
   anchors, links between pages as files, its images copied into `p/`, and "Open this in the
-  explorer". Where the page is on sale (see `onSale` above), a shop button goes to it.
+  explorer". Where the page is on sale (see `onSale` above), a shop button goes to it. A series
+  page (`series:`) lists the series' years before its first section, each a link to its `m/` page.
 - `m/<region>.html`: every region's newest build, with its picture, "How this view was made"
   (the same text as the explorer's tab, from `src/story.ts`), "Explore this map" (the lasting
   route `#<region>` or `#<region>:<year>`) and, while it is on sale, "Buy a print". A dated
@@ -358,6 +361,24 @@ page sets `images: link`, below):
   which `tools/pdf/story_pdf.py` makes (see "Story PDFs"); `isoscape explorer` warns when a page
   asks for them and they are missing from `<out>/p/`. For a story, set it in
   `tools/stories/<story>/story.md` and rerun `page.py`.
+- `series: <region>` makes the page a dated series' own page (`src/through-time.ts`), the front
+  door for visitors that the build viewer is not. The explorer widens the page and puts the
+  series' view before its first `##` heading: one year at a time, from the builds' light
+  `preview.jpg` pictures (never the SVGs, so a year switches at once; the years either side are
+  fetched ahead), with the year large and its epoch's title and note from the build; previous
+  and next buttons named with their years; a timeline with every year spaced by the time between
+  them, to click or drag along; and "Compare two years", with "Earlier year" and "Later year"
+  pickers of the series' years only, the earlier always on the left and both sides and the
+  divider (`src/compare.ts`) labelled with their years. The + and − buttons, a double-click or
+  a pinch zoom it; zoomed in, a drag pans. The route holds the state, so a link can name it:
+  `#/<slug>/<year>` or `#/<slug>/<earlier>..<later>` (a heading id there still opens its
+  section), and "Copy link to this view" copies the page's share page with that fragment.
+  Links in the page written `[…](#/<slug>/1865..1870)` jump the view there. While any year of the
+  series is in the shop's `onSale`, a quiet line at the foot links the shop's front page. In
+  the viewer, a build of the series links to the page ("Compare years on the series page →",
+  in the info bar and after the year chips), and so do its `m/` pages ("Compare the years").
+  `p/<slug>.html` lists the series' years there instead, each a link to its `m/` page, and
+  sends its jump links into the explorer. `pages/downtown-through-time.md` is Richmond's.
 - `schema: FAQPage` gives the static page `FAQPage` JSON-LD in place of `Article`. Each heading
   that ends in a question mark is a question, and the text under it, up to the next heading, is
   its answer (`faqEntries` in `src/static-pages.ts`).
@@ -664,7 +685,8 @@ creek, the town plan), the era `rules` that date roads, rail and water, and cura
 for particular buildings. Every item cites its sources. `isoscape series richmond-downtown-time`
 builds all ten scenes from 1737 to today. In the explorer, a series reads in year order: the
 year chips above the picture and the `[` `]` keys step through it, and Compare defaults to the
-year before. The method and its limits are in the *How it's made* page, under "Time".
+year before. For visitors, a series gets its own page (`series:` in a page's front matter, under
+"Adding a page"): Richmond's is *Downtown Richmond, VA, through time*, `#/downtown-through-time`. The method and its limits are in the *How it's made* page, under "Time".
 
 **Traced buildings.** `tools/sanborn/` turns Sanborn fire-insurance map sheets into dated
 footprints of buildings since lost. It downloads the sheets from the Library of Congress,
