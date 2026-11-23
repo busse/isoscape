@@ -272,6 +272,7 @@
         "blurb": "The same blocks, from the Capitol to Tobacco Row, year by year. Buildings come from fire-insurance maps and other dated sources. Pick a year below, or press [ and ] in the viewer to step through them."
       }
     ],
+    "stories": { "title": "Stories", "blurb": "Longer pieces that work one question out with drawings, counts and sources.", "pages": ["jackson-ward", "redlining", "dollar-stores"] },
     "sections": [
       {
         "title": "Richmond",

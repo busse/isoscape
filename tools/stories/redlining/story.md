@@ -1,7 +1,7 @@
 ---
 title: Redlining in Richmond, VA: the 1937 federal mortgage map, drawn on the ground it graded
 deck: In 1937 a federal agency, the Home Owners' Loan Corporation, graded Richmond's residential areas from A to D to rate what it called the "security" of each for mortgage lending. This page draws that map on the ground it graded, with the buildings standing then, and follows what was built and cleared on the D land up to 1977.
-order: 61
+order: 21
 summary: In 1937 the federal Home Owners' Loan Corporation graded Richmond's neighborhoods from A to D and recorded ten of its twelve D areas as Black. This page draws that map on Richmond's ground, walks through the twelve D areas one by one, measures the highways and public housing built on them up to 1977, and sets out what researchers dispute about the map's effects.
 shop: false
 images: link

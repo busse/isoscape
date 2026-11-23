@@ -360,6 +360,10 @@ body.home main { grid-template-rows: 1fr; }
 .hm section.sec header p { margin: 0; color: var(--dim); }
 .hm section.sec header .btn { margin-left: auto; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; }
+.stories .cards { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.card.story img { aspect-ratio: 1200 / 630; object-fit: cover; }
+.card.story b { font-size: 15px; line-height: 1.3; }
+.card.story span { color: var(--dim); font-size: 13px; line-height: 1.45; }
 .card { display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 9px; padding: 8px; }
 .card:hover { border-color: var(--accent); }
 .card img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center 60%; border-radius: 5px; background: var(--stage); display: block; }
@@ -1087,6 +1091,10 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
         '<div class="acts"><a class="btn ghost" href="#' + esc(b.id) + '">' + (ser.length > 1 ? 'Step through ' + ser.length + ' years' : 'Explore the map') + '</a>' +
         (buy ? '<a class="btn" href="' + esc(buy.url) + '" target="_blank" rel="noopener">' + esc(buy.label) + '</a>' : '') + '</div></div></article>'
     }).join('') + '</div>')
+    // Story pages as cards, each with its link-preview picture, title and one-line summary.
+    const stories = home.stories ? home.stories.pages.map((slug) => pageBySlug.get(slug)).filter((p) => p && !p.unlisted) : []
+    if (stories.length > 0) out.push('<section class="sec stories"><header><h2>' + esc(home.stories.title) + '</h2>' + (home.stories.blurb ? '<p>' + esc(home.stories.blurb) + '</p>' : '') + '</header>' +
+      '<div class="cards">' + stories.map((p) => '<a class="card story" href="#/' + esc(p.slug) + '"><img loading="lazy" src="s/page-' + esc(p.slug) + '.jpg" alt=""><b>' + esc(p.title) + '</b>' + (p.summary ? '<span>' + esc(p.summary) + '</span>' : '') + '</a>').join('') + '</div></section>')
     const featured = new Set(home.heroes.map((h) => h.region))
     const regions = [...new Set(builds.map((b) => b.region))].filter((r) => !featured.has(r))
     home.sections.forEach((sec, i) => {

@@ -1,7 +1,7 @@
 ---
 title: Dollar General on the edge of town
 deck: Every Dollar General near a small town in six states, compared with random spots on the same roads, and every one at the edge of a small Virginia town on a map.
-order: 65
+order: 22
 summary: Why it always seems like there's a Dollar General on the edge of town, checked against public data, and how we know.
 shop: false
 images: link

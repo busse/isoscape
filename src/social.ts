@@ -96,6 +96,8 @@ export interface HomeConfig {
   readonly intro?: string
   readonly heroes: readonly HomeHero[]
   readonly sections: readonly HomeSection[]
+  /** Story pages shown as cards under the featured views: a heading, an optional line, and page slugs in order. */
+  readonly stories?: { readonly title: string; readonly blurb?: string; readonly pages: readonly string[] }
   /** Links under the sections: label and href (a page as '#/<slug>', or a URL). */
   readonly links?: readonly { readonly label: string; readonly href: string }[]
 }

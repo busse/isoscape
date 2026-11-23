@@ -1,7 +1,7 @@
 ---
 title: Jackson Ward, Richmond, VA, before I-95, block by block
 deck: Jackson Ward in Richmond, Virginia, drawn building by building from the Sanborn fire-insurance maps of 1925 and 1952, on an estimate of the ground before the highway, with the same blocks about a year after the Richmond–Petersburg Turnpike opened and today.
-order: 60
+order: 20
 summary: Jackson Ward in Richmond, Virginia, drawn from the Sanborn fire-insurance maps of 1925 and 1952 on an estimate of the ground before I-95, showing the blocks the Richmond–Petersburg Turnpike was built through in 1955–58, and how we know.
 shop: false
 images: link

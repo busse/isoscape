@@ -166,6 +166,8 @@ The same file can give the explorer a front page. `"home"` has a `title`, an `in
 (featured views, each a `region`, optional `year` in a dated series, `title`, `blurb`, and
 optional `shopLabel`), `sections` (each a `title`, the region-name `prefixes` it holds, and optionally
 `homeTitle`, `blurb`, `order` (region names to show first), `collapsed` and `shopLabel`), and `links` shown at the bottom.
+An optional `stories` (`title`, `blurb`, and `pages`, a list of page slugs) shows those pages as cards
+under the featured views, each with its link-preview picture, title and summary; an unlisted page is left out.
 The page then opens on the front page (`#home`). The build list is grouped by the same
 sections, with featured regions first and folded sections closed. See this repo's own
 `isoscape.config.json`.
