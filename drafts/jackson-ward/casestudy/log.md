@@ -4,7 +4,7 @@ Kept with Claude under Chris's case-study rule (November 21, 2026). The story's 
 in `../decisions.md`, `../effort.md` and `/mnt/user-data/outputs/stories/jackson-ward/`. Times are
 Eastern.
 
-## Step 1: the 1952 bridges (November 23, 2026, 09:20-10:45)
+## Step 1: the 1952 bridges (November 23, 2026, 09:20-10:10)
 
 Folder: `2026-11-23-01-fix-1952-bridges/`. Branch `fix/jackson-ward-1952-bridges`.
 
