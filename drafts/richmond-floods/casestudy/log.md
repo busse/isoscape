@@ -29,3 +29,19 @@ file. Board entry: `series-richmond-floods`. Times are Eastern.
   This log and folder started; every later step saves its renders, charts and source
   pictures-of-record here, each round to a new file.
 - No images yet at this step: nothing has been drawn.
+
+### 02. Research: river floods and the floodwall (18:16 to 18:48) · `2026-11-23-02-research-river-floods-and-the-wall/`
+
+- Opus 5.5 subagent, 32 minutes, 183 tool uses, about 350,000 tokens. Files: floods.md and
+  floods.json (24 floods), datums.md, floodwall.md, before-the-wall.md, open-data.md, SUMMARY.md.
+- **The finding that makes the series drawable:** below Mayo Bridge a flood is nearly level,
+  so one surveyed elevation per flood serves Shockoe, Manchester, Rocketts and Fulton. Agnes
+  is 35.5 ft NAVD88 by three independent routes.
+- **The finding that limits it:** above the bridge the surface climbs about 40 ft through the
+  falls and only three floods have surveyed profiles.
+- **The trap found:** the City Locks gauge has had three different zeros; its published
+  crests are not comparable without conversion.
+- Best single source: USGS Hydrologic Atlas HA-410 (Camille's mapped extent and profiles).
+- Dead ends: FEMA's servers, Overpass and the National Levee Database could not be reached.
+- No images at this step. Raw source copies (303 MB) are outside git; see SUMMARY.md.
+- Not yet done: a second reader checking the numbers against the sources.
