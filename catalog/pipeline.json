@@ -3478,7 +3478,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "Built on feature/through-time-page as a preview (2026-11-23); nothing pushed or published. Check from the local preview at 1280x711, 1440x900 and on an iPhone: the timeline drag, previous and next, Compare two years with the pickers, the divider by thumb and by mouse, a vertical swipe over the picture scrolling the page, Copy link, the jump links, the front page hero, and the viewer's link to the page. Touch was tested in Chrome's emulation only.",
+   "decision": "Merged and published 2026-11-23 (main cb7b545) on the owner's word to ship and review on production. Owner is reviewing the live page; not yet checked on a real phone (touch drag, pinch, iOS Safari).",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3487,6 +3487,30 @@
    "links": [],
    "log": [
     "2026-11-23: rough draft -> owner test"
+   ]
+  },
+  "series-richmond-downtown-time-rebuild": {
+   "title": "Rebuild the whole Downtown Richmond through time series once, so every pair of years compares like with like",
+   "plate": null,
+   "kind": "site",
+   "stage": "in work",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "nothing",
+   "decision": "Backlog (owner, 2026-11-23). The 26 years on the series page mix builds from November 14 (14 years) and November 16-17 (12 years), which draw the canal and basin, the Free Bridge and the frame height differently, so some pairs show changes in method beside the history (1860 against 1865 looks like this; not confirmed). One run of the series on the Mac, where the cached data is, then look at the pairs on the page's jump list. Also fixes the 1870 caption, which says Shockoe Creek runs open until 1877 where the history file now has 1890. Released editions (Richmond 1925, 1950 and others on sale) are frozen: the rebuild is for the explorer, and any sold year keeps its released build as the print's record.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-23: rough draft -> in work"
    ]
   }
  }
