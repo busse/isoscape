@@ -45,3 +45,14 @@ file. Board entry: `series-richmond-floods`. Times are Eastern.
 - Dead ends: FEMA's servers, Overpass and the National Levee Database could not be reached.
 - No images at this step. Raw source copies (303 MB) are outside git; see SUMMARY.md.
 - Not yet done: a second reader checking the numbers against the sources.
+
+- **18:50, Chris: "Yes 1-3"** to: (1) draw 1771 as a clearly labeled estimate; (2) make an
+  "Agnes against today's wall" plate; (3) download the City's flood insurance study from FEMA
+  on the Mac. Question 4 (asking the Corps for its depth grids and design record) not
+  answered; no request sent.
+- **18:54:** FEMA's Map Service Center reached from the Mac. Flood Insurance Study reports for
+  the City of Richmond (community 510129) downloaded: 510129V000C (effective July 8, 2025,
+  134 pages, 16 MB) and 510129V000 (July 20, 1998, 48 pages, 7 MB). Kept on the Mac in
+  `ISO-TEST/isoscape-work/richmond-floods/sources/fema-fis/` (over 5 MB, outside git).
+- **18:56:** a fourth Opus 5.5 subagent started: extract the flood profiles and the levee
+  text from both reports, and act as second reader on every number in step 02.
