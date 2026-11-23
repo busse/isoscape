@@ -1,0 +1,127 @@
+== 1925: 40 ways drawn that run 6 m or more through buildings traced for the year
+w6038253	residential	"West Hill Street"		len 369	inside 103	drawn 369		bldgs 13	at 101,472
+w175298373	secondary	"North 3rd Street"		len 143	inside 61	drawn 143		bldgs 11	at 181,-257
+w6038616	tertiary	"East Hill Street"		len 202	inside 60	drawn 202		bldgs 6	at 446,309
+w346922691	tertiary	"East Jackson Street"		len 112	inside 47	drawn 112		bldgs 3	at 322,-485
+w1215813972	footway	""		len 288	inside 43	drawn 170		bldgs 8	at -277,363
+w175298377	tertiary	"North 4th Street"		len 129	inside 41	drawn 129		bldgs 9	at 293,-288
+w188477720	primary	"East Leigh Street"		len 400	inside 39	drawn 286		bldgs 7	at 231,-567
+w323733140	service	""		len 99	inside 39	drawn 99		bldgs 4	at 114,-362
+w693393635	tertiary	"East Jackson Street"		len 81	inside 39	drawn 81		bldgs 2	at 391,-556
+w1210906685	footway	""		len 75	inside 38	drawn 62		bldgs 9	at 264,-305
+w175298376	secondary	"North 5th Street"		len 370	inside 37	drawn 370		bldgs 4	at 656,-39
+w323636835	residential	"West Coutts Street"		len 87	inside 37	drawn 87		bldgs 5	at 51,420
+w153958861	service	""		len 202	inside 36	drawn 202		bldgs 4	at -62,-181
+w175298378	secondary	"North 5th Street"		len 369	inside 34	drawn 369		bldgs 6	at 632,-74
+w6040791	secondary	"North 3rd Street"		len 103	inside 29	drawn 101		bldgs 7	at 150,-256
+w175298349	primary	"Brook Road"		len 214	inside 29	drawn 214		bldgs 6	at -280,380
+w692891943	secondary	"Brook Road"		len 166	inside 21	drawn 165		bldgs 5	at -275,391
+w175298379	secondary	"North 5th Street"		len 92	inside 20	drawn 92		bldgs 3	at 243,-252
+w153958852	service	""		len 123	inside 19	drawn 123		bldgs 2	at -36,-72
+w374649611	tertiary	"North 2nd Street"		len 113	inside 18	drawn 108		bldgs 2	at -360,-595
+w6037438	residential	"Maggie L Walker Place"		len 111	inside 17	drawn 111		bldgs 3	at 127,-143
+w174322624	service	""		len 154	inside 17	drawn 154		bldgs 2	at 346,143
+w153971160	service	""		len 157	inside 16	drawn 157		bldgs 4	at -145,-314
+w1468119902	secondary	"North 3rd Street"		len 92	inside 16	drawn 92		bldgs 3	at 316,-265
+w1210906687	footway	""		len 54	inside 15	drawn 45		bldgs 3	at 339,-267
+w930960349	residential	"West Charity Street"		len 254	inside 15	drawn 254		bldgs 2	at -182,300
+w6034114	residential	"East Duval Street"		len 68	inside 14	drawn 67		bldgs 2	at 445,-393
+w601098876	secondary	"North 5th Street"		len 54	inside 13	drawn 54		bldgs 2	at 327,-253
+w1484769655	footway	""		len 16	inside 12	drawn 9		bldgs 1	at 44,421
+w1121020599	secondary	"Brook Road"		len 173	inside 11	drawn 173		bldgs 3	at -453,588
+w153958856	service	""		len 182	inside 10	drawn 169		bldgs 1	at -210,-591
+w6038268	residential	"Saint Peter Street"		len 201	inside 10	drawn 201		bldgs 4	at -43,344
+w44888561	motorway	""	yes	len 57	inside 10	drawn 29		bldgs 2	at 528,-158
+w374649612	tertiary	"East Marshall Street"		len 100	inside 9	drawn 100		bldgs 1	at -213,-506
+w1121020600	secondary	"Brook Road"		len 152	inside 9	drawn 150		bldgs 1	at -463,589
+w1122210283	tertiary	"East Marshall Street"		len 95	inside 8	drawn 95		bldgs 1	at -339,-375
+w182380863	footway	""		len 36	inside 8	drawn 21		bldgs 1	at -158,355
+w175298374	secondary	"North 5th Street"	yes	len 64	inside 7	drawn 64		bldgs 2	at 422,-220
+w1112080078	footway	""		len 16	inside 7	drawn 9		bldgs 1	at -405,-638
+w692873595	tertiary	"North 2nd Street"		len 164	inside 7	drawn 163		bldgs 1	at 559,314
+bridge decks drawn: w154116217 w44888579 w44888581
+== 1952: 38 ways drawn that run 6 m or more through buildings traced for the year
+w175298373	secondary	"North 3rd Street"		len 143	inside 64	drawn 143		bldgs 11	at 181,-257
+w6038253	residential	"West Hill Street"		len 369	inside 64	drawn 369		bldgs 9	at 101,472
+w1223669992	footway	""		len 70	inside 62	drawn 62		bldgs 3	at -37,342
+w182380865	footway	""		len 70	inside 61	drawn 61		bldgs 3	at 65,348
+w1484769660	footway	""		len 71	inside 61	drawn 64		bldgs 3	at 83,364
+w182380858	footway	""		len 71	inside 60	drawn 62		bldgs 3	at 42,324
+w175298378	secondary	"North 5th Street"		len 369	inside 47	drawn 369		bldgs 6	at 632,-74
+w693393635	tertiary	"East Jackson Street"		len 81	inside 44	drawn 81		bldgs 2	at 391,-556
+w188477720	primary	"East Leigh Street"		len 400	inside 38	drawn 286		bldgs 4	at 231,-567
+w346922691	tertiary	"East Jackson Street"		len 112	inside 33	drawn 112		bldgs 4	at 322,-485
+w6038616	tertiary	"East Hill Street"		len 202	inside 32	drawn 202		bldgs 3	at 446,309
+w1210906685	footway	""		len 75	inside 26	drawn 62		bldgs 5	at 264,-305
+w175298376	secondary	"North 5th Street"		len 370	inside 25	drawn 370		bldgs 4	at 656,-39
+w6040791	secondary	"North 3rd Street"		len 103	inside 23	drawn 101		bldgs 5	at 150,-256
+w1215813972	footway	""		len 288	inside 22	drawn 170		bldgs 4	at -277,363
+w153958860	service	""		len 198	inside 20	drawn 198		bldgs 3	at -441,-354
+w153958861	service	""		len 202	inside 19	drawn 202		bldgs 1	at -62,-181
+w175298377	tertiary	"North 4th Street"		len 129	inside 18	drawn 129		bldgs 5	at 293,-288
+w323733140	service	""		len 99	inside 18	drawn 99		bldgs 2	at 114,-362
+w175298379	secondary	"North 5th Street"		len 92	inside 17	drawn 92		bldgs 3	at 243,-252
+w174322624	service	""		len 154	inside 17	drawn 154		bldgs 2	at 346,143
+w323636835	residential	"West Coutts Street"		len 87	inside 17	drawn 87		bldgs 1	at 51,420
+w153971160	service	""		len 157	inside 14	drawn 157		bldgs 3	at -145,-314
+w234802970	primary	"East Leigh Street"		len 399	inside 13	drawn 292		bldgs 1	at 230,-554
+w354923850	service	""		len 51	inside 13	drawn 51		bldgs 1	at -177,-217
+w6034114	residential	"East Duval Street"		len 68	inside 12	drawn 67		bldgs 2	at 445,-393
+w153958852	service	""		len 123	inside 12	drawn 123		bldgs 2	at -36,-72
+w601098876	secondary	"North 5th Street"		len 54	inside 12	drawn 54		bldgs 2	at 327,-253
+w54172720	tertiary	"East Duval Street"		len 102	inside 12	drawn 102		bldgs 1	at 124,-62
+w374649611	tertiary	"North 2nd Street"		len 113	inside 10	drawn 108		bldgs 1	at -360,-595
+w374649612	tertiary	"East Marshall Street"		len 100	inside 9	drawn 100		bldgs 1	at -213,-506
+w708552389	residential	"North Jefferson Street"		len 231	inside 9	drawn 231		bldgs 1	at -711,-386
+w6037438	residential	"Maggie L Walker Place"		len 111	inside 8	drawn 111		bldgs 1	at 127,-143
+w153971159	service	""		len 292	inside 8	drawn 292		bldgs 1	at -586,-374
+w44888561	motorway	""	yes	len 57	inside 8	drawn 29		bldgs 2	at 528,-158
+w1112080078	footway	""		len 16	inside 7	drawn 9		bldgs 1	at -405,-638
+w175298349	primary	"Brook Road"		len 214	inside 7	drawn 214		bldgs 2	at -280,380
+w692873595	tertiary	"North 2nd Street"		len 164	inside 7	drawn 163		bldgs 1	at 559,314
+bridge decks drawn: w154116217 w44888579 w44888581
+== 1959: 43 ways drawn that run 6 m or more through buildings traced for the year
+w175298373	secondary	"North 3rd Street"		len 143	inside 64	drawn 143		bldgs 11	at 181,-257
+w6038253	residential	"West Hill Street"		len 369	inside 64	drawn 369		bldgs 9	at 101,472
+w1223669992	footway	""		len 70	inside 62	drawn 62		bldgs 3	at -37,342
+w182380865	footway	""		len 70	inside 61	drawn 61		bldgs 3	at 65,348
+w1484769660	footway	""		len 71	inside 61	drawn 64		bldgs 3	at 83,364
+w182380858	footway	""		len 71	inside 60	drawn 62		bldgs 3	at 42,324
+w107789388	primary_link	""		len 226	inside 46	drawn 225		bldgs 7	at -484,491
+w693393635	tertiary	"East Jackson Street"		len 81	inside 44	drawn 81		bldgs 2	at 391,-556
+w601102858	motorway_link	""		len 101	inside 44	drawn 101		bldgs 7	at -247,239
+w175298378	secondary	"North 5th Street"		len 369	inside 41	drawn 369		bldgs 5	at 632,-74
+w188477720	primary	"East Leigh Street"		len 400	inside 38	drawn 286		bldgs 4	at 231,-567
+w346922691	tertiary	"East Jackson Street"		len 112	inside 33	drawn 112		bldgs 4	at 322,-485
+w6038616	tertiary	"East Hill Street"		len 202	inside 32	drawn 202		bldgs 3	at 446,309
+w1210906685	footway	""		len 75	inside 26	drawn 62		bldgs 5	at 264,-305
+w175298376	secondary	"North 5th Street"		len 370	inside 25	drawn 370		bldgs 4	at 656,-39
+w6040791	secondary	"North 3rd Street"		len 103	inside 23	drawn 100		bldgs 5	at 150,-256
+w1215813972	footway	""		len 288	inside 22	drawn 170		bldgs 4	at -277,363
+w153958860	service	""		len 198	inside 20	drawn 198		bldgs 3	at -441,-354
+w153958861	service	""		len 202	inside 19	drawn 202		bldgs 1	at -62,-181
+w683846421	primary	"North Belvidere Street"		len 101	inside 19	drawn 101		bldgs 2	at -570,293
+w175298377	tertiary	"North 4th Street"		len 129	inside 18	drawn 129		bldgs 5	at 293,-288
+w323733140	service	""		len 99	inside 18	drawn 99		bldgs 2	at 114,-362
+w175298379	secondary	"North 5th Street"		len 92	inside 17	drawn 91		bldgs 3	at 243,-252
+w174322624	service	""		len 154	inside 17	drawn 154		bldgs 2	at 346,143
+w323636835	residential	"West Coutts Street"		len 87	inside 17	drawn 87		bldgs 1	at 51,420
+w153971160	service	""		len 157	inside 14	drawn 157		bldgs 3	at -145,-314
+w135207687	primary	"North Belvidere Street"		len 100	inside 14	drawn 100		bldgs 1	at -582,304
+w234802970	primary	"East Leigh Street"		len 399	inside 13	drawn 292		bldgs 1	at 230,-554
+w354923850	service	""		len 51	inside 13	drawn 51		bldgs 1	at -177,-217
+w153958852	service	""		len 123	inside 12	drawn 123		bldgs 2	at -36,-72
+w601098876	secondary	"North 5th Street"		len 54	inside 12	drawn 53		bldgs 2	at 327,-253
+w54172720	tertiary	"East Duval Street"		len 102	inside 12	drawn 102		bldgs 1	at 124,-62
+w374649611	tertiary	"North 2nd Street"		len 113	inside 10	drawn 108		bldgs 1	at -360,-595
+w374649612	tertiary	"East Marshall Street"		len 100	inside 9	drawn 100		bldgs 1	at -213,-506
+w708552389	residential	"North Jefferson Street"		len 231	inside 9	drawn 231		bldgs 1	at -711,-386
+w692841315	primary	"Chamberlayne Avenue"		len 95	inside 9	drawn 95		bldgs 2	at -470,411
+w6034114	residential	"East Duval Street"		len 68	inside 8	drawn 67		bldgs 1	at 445,-393
+w6037438	residential	"Maggie L Walker Place"		len 111	inside 8	drawn 111		bldgs 1	at 127,-143
+w153971159	service	""		len 292	inside 8	drawn 292		bldgs 1	at -586,-374
+w44888561	motorway	""	yes	len 57	inside 8	drawn 29		bldgs 2	at 528,-158
+w1112080078	footway	""		len 16	inside 7	drawn 9		bldgs 1	at -405,-638
+w175298349	primary	"Brook Road"		len 214	inside 7	drawn 214		bldgs 2	at -280,380
+w692873595	tertiary	"North 2nd Street"		len 164	inside 7	drawn 163		bldgs 1	at 559,314
+bridge decks drawn: w1122219211 w120374941 w135207685 w135207689 w154116217 w175298374 w175298375 w38006094 w38006103 w44888565 w44888579 w44888581
