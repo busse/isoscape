@@ -1,0 +1,218 @@
+{
+ "about": "The guide's vantage points: numbered places to stand and look, in no required order, each on a\npublic sidewalk mapped in OpenStreetMap (the region's cache), written to vantage.json for the maps,\nthe pairs, the page and the folded sheet.\n\n    python3 tools/stories/jackson-ward-guide/vantage.py\n\nThe numbers run west to east and are only for finding the places. There is no route: readers go\nbetween them as they choose. Each point is placed on its named sidewalk (`way`) at the\nprojection of its target, and checked:\n\n  - it is not inside, or within 2 m of, the approximate Gilpin Court outline (gilpin.py);\n  - it can be reached from the ordinary streets around it without crossing a motorway, a trunk\n    road or their ramps, or a primary road, except at a crossing OpenStreetMap tags\n    crossing=traffic_signals: its sidewalk lies in the largest connected part of the graph of\n    OSM's sidewalks, footways and crossings with every other such crossing left out (`graph`,\n    the rules the guide's earlier walking route used). Crossings are judged against the road\n    they cross on the same level, so a bridge's sidewalk is not taken for a crossing of the\n    highway under it.\n\nEach point says where to stand (the corner and the side of the street), which way to look\n(`face`, degrees from north, drawn as a view cone on the maps), and what is in view today (plain\nmap facts). What the 1952 sheets show there, and the history, are in story.md with the story's\nsources. Points considered and dropped are listed in DROPPED with the reason.",
+ "osm_date": "November 16, 2026",
+ "points": [
+  {
+   "key": "belvidere-extension",
+   "title": "Chamberlayne Avenue's bridges from West Leigh Street",
+   "face": [
+    345
+   ],
+   "where": "on the north sidewalk of West Leigh Street just west of Brook Road",
+   "sees": "north and northwest to the two curved bridges that carry Chamberlayne Avenue over Brook Road and the railroad",
+   "lon": -77.443566,
+   "lat": 37.551211,
+   "xy": [
+    -535.4,
+    78.7
+   ],
+   "on_way": "w1121057677",
+   "snapped_m": 9.1,
+   "gilpin_m": 256.1,
+   "n": 1,
+   "square": "B2"
+  },
+  {
+   "key": "gilpin-edge",
+   "title": "Gilpin Court from Chamberlayne Avenue",
+   "face": [
+    70
+   ],
+   "where": "on the west sidewalk of Chamberlayne Avenue at West Charity Street",
+   "sees": "east across the avenue at Gilpin Court",
+   "lon": -77.441226,
+   "lat": 37.55263,
+   "xy": [
+    -328.8,
+    235.5
+   ],
+   "on_way": "w1215813972",
+   "snapped_m": 0.0,
+   "gilpin_m": 18.0,
+   "n": 2,
+   "square": "B2"
+  },
+  {
+   "key": "chamberlayne-bridge",
+   "title": "Chamberlayne Parkway bridge",
+   "face": [
+    110,
+    290
+   ],
+   "where": "on the west sidewalk of the Chamberlayne Parkway bridge, about halfway across",
+   "sees": "east along the highway in its trench toward the North 1st Street bridge, then west toward Belvidere Street",
+   "lon": -77.440856,
+   "lat": 37.55139,
+   "xy": [
+    -296.2,
+    98.4
+   ],
+   "on_way": "w1122219208",
+   "snapped_m": 0.0,
+   "gilpin_m": 67.1,
+   "n": 3,
+   "square": "C2"
+  },
+  {
+   "key": "sixth-mount-zion",
+   "title": "Sixth Mount Zion, and where Saint James Street ends",
+   "face": [
+    0,
+    60
+   ],
+   "where": "on the south sidewalk of West Duval Street, across from the church",
+   "sees": "north at Sixth Mount Zion Baptist Church with the highway behind it, then northeast to the corner of West Duval and Saint James Streets, about 60 m east, where Saint James Street ends at the trench",
+   "lon": -77.438362,
+   "lat": 37.550238,
+   "xy": [
+    -76.0,
+    -29.0
+   ],
+   "on_way": "w1483868750",
+   "snapped_m": 0.0,
+   "gilpin_m": 114.0,
+   "n": 4,
+   "square": "C3"
+  },
+  {
+   "key": "second-leigh",
+   "title": "Second Street at Leigh Street",
+   "face": [
+    215,
+    35
+   ],
+   "where": "on the northeast corner of North 2nd and East Leigh Streets, across Leigh Street from Eggleston Plaza",
+   "sees": "south down 2nd Street toward Clay and Broad Streets, then north up 2nd Street toward the highway",
+   "lon": -77.437268,
+   "lat": 37.5475,
+   "xy": [
+    20.5,
+    -331.7
+   ],
+   "on_way": "w1205384874",
+   "snapped_m": 0.0,
+   "gilpin_m": 419.2,
+   "n": 5,
+   "square": "D4"
+  },
+  {
+   "key": "first-bridge",
+   "title": "North 1st Street bridge",
+   "face": [
+    115,
+    295
+   ],
+   "where": "on the east sidewalk of the North 1st Street bridge, about halfway across",
+   "sees": "east along the trench toward where 2nd Street ends on each side, then west toward the Chamberlayne Parkway bridge",
+   "lon": -77.436077,
+   "lat": 37.55022,
+   "xy": [
+    125.6,
+    -31.0
+   ],
+   "on_way": "w1485475447",
+   "snapped_m": 0.0,
+   "gilpin_m": 164.6,
+   "n": 6,
+   "square": "D3"
+  },
+  {
+   "key": "second-trench",
+   "title": "Where Second Street ends, south of the trench",
+   "face": [
+    40
+   ],
+   "where": "on the west sidewalk of North 2nd Street at its north end, where it meets East Duval Street",
+   "sees": "north across the highway to where 2nd Street starts again",
+   "lon": -77.435684,
+   "lat": 37.54943,
+   "xy": [
+    160.3,
+    -118.3
+   ],
+   "on_way": "w1205384865",
+   "snapped_m": 0.0,
+   "gilpin_m": 256.0,
+   "n": 7,
+   "square": "D3"
+  },
+  {
+   "key": "coliseum",
+   "title": "The Coliseum site",
+   "face": [
+    200
+   ],
+   "where": "on the north sidewalk of East Leigh Street, across the street from the Coliseum",
+   "sees": "south across East Leigh Street at the Richmond Coliseum",
+   "lon": -77.433806,
+   "lat": 37.545438,
+   "xy": [
+    326.0,
+    -559.7
+   ],
+   "on_way": "w1125516638",
+   "snapped_m": 0.0,
+   "gilpin_m": 704.8,
+   "n": 8,
+   "square": "E5"
+  },
+  {
+   "key": "bates-street",
+   "title": "Bates Street, and where Second Street starts again",
+   "face": [
+    130,
+    220
+   ],
+   "where": "at the corner of North 2nd and East Bates Streets, on the east side of 2nd",
+   "sees": "southeast along Bates Street, then southwest down 2nd Street to where it ends at the trench",
+   "lon": -77.433766,
+   "lat": 37.55118,
+   "xy": [
+    329.6,
+    75.2
+   ],
+   "on_way": "w1306725612",
+   "snapped_m": 0.0,
+   "gilpin_m": 74.7,
+   "n": 9,
+   "square": "E2"
+  },
+  {
+   "key": "fifth-bridge",
+   "title": "North 5th Street bridge",
+   "face": [
+    115,
+    295
+   ],
+   "where": "on the west sidewalk of the North 5th Street bridge, about halfway across",
+   "sees": "east along the trench toward the North 7th Street bridge, then west toward the North 1st Street bridge",
+   "lon": -77.432886,
+   "lat": 37.548644,
+   "xy": [
+    407.2,
+    -205.2
+   ],
+   "on_way": "w1293548427",
+   "snapped_m": 0.3,
+   "gilpin_m": 353.0,
+   "n": 10,
+   "square": "E4"
+  }
+ ],
+ "dropped": {
+  "saint-james-north": "Where Saint James Street ends north of the trench: its only mapped sidewalk there is not joined to the streets around it by mapped sidewalks and crossings, and it is 59 m from the Gilpin Court outline.",
+  "saint-james-south": "Where Saint James Street ends south of the trench: 60 m from the Sixth Mount Zion point on the same street, so the two are one point, with both views.",
+  "second-north": "Where Second Street ends north of the trench: no mapped sidewalk within 40 m of its end; the Bates Street point, about 130 m north, looks down 2nd Street to it.",
+  "seventh-bridge": "The North 7th Street bridge: no mapped sidewalk where it crosses the trench is reachable by mapped sidewalks and crossings."
+ }
+}

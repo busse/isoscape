@@ -1,97 +1,812 @@
 {
+ "ward": {
+  "file": "jackson-ward-guide-ward.webp",
+  "named": {
+   "1952": [
+    "Axtel St.",
+    "Axtell St.",
+    "Brook Rd.",
+    "Calhoun St.",
+    "Cave Alley",
+    "Chamberlayne Ave.",
+    "Chamberlayne Pkwy.",
+    "Cottage Alley",
+    "E. Baker St.",
+    "E. Bates St.",
+    "E. Broad St.",
+    "E. Charity St.",
+    "E. Clay St.",
+    "E. Duval St.",
+    "E. Federal St.",
+    "E. Grace St.",
+    "E. Hill St.",
+    "E. Jackson St.",
+    "E. Leigh St.",
+    "E. Marshall St.",
+    "E. Preston St.",
+    "Gilbert Alley",
+    "Gilmer St.",
+    "Goshen St.",
+    "Hickory St.",
+    "Judah St.",
+    "Maggie Lena Walker Memorial Plaza",
+    "Miss Scotts Alley",
+    "Moore St.",
+    "Munford St.",
+    "N. 1st St.",
+    "N. 2nd St.",
+    "N. 3rd St.",
+    "N. 4th St.",
+    "N. 5th St.",
+    "N. 6th St.",
+    "N. 7th St.",
+    "N. Adams St.",
+    "N. Belvidere St.",
+    "N. Foushee St.",
+    "N. Henry St.",
+    "N. Jefferson St.",
+    "N. Madison St.",
+    "N. Monroe St.",
+    "Navy Hill Dr.",
+    "Oak St.",
+    "Paradise Alley",
+    "Prentis St.",
+    "Price St.",
+    "Pulliam St.",
+    "S. Jefferson St.",
+    "Shooks St.",
+    "Smith St.",
+    "St. James St.",
+    "St. John St.",
+    "St. Paul St.",
+    "St. Peter St.",
+    "Vance St.",
+    "W. Baker St.",
+    "W. Broad St.",
+    "W. Catherine St.",
+    "W. Charity St.",
+    "W. Clay St.",
+    "W. Duval St.",
+    "W. Federal St.",
+    "W. Franklin St.",
+    "W. Grace St.",
+    "W. Hill St.",
+    "W. Jackson St.",
+    "W. Leigh St.",
+    "W. Main St.",
+    "W. Marshall St."
+   ],
+   "2026": [
+    "Avenue A",
+    "Avenue B",
+    "Avenue C",
+    "Axtell St.",
+    "Brook Alley",
+    "Brook Rd.",
+    "Calhoun St.",
+    "Cameo St.",
+    "Chamberlayne Ave.",
+    "Chamberlayne Pkwy.",
+    "Duval St. Connection",
+    "E. Baker St.",
+    "E. Bates St.",
+    "E. Broad St.",
+    "E. Charity St.",
+    "E. Clay St.",
+    "E. Duval St.",
+    "E. Federal St.",
+    "E. Grace St.",
+    "E. Hill St.",
+    "E. Jackson St.",
+    "E. Leigh St.",
+    "E. Marshall St.",
+    "E. Preston St.",
+    "Gilmer St.",
+    "Goshen St.",
+    "Hickory St.",
+    "Hospital St.",
+    "Judah St.",
+    "Maggie L Walker Pl.",
+    "Maggie Lena Walker Memorial Plaza",
+    "Miss Scotts Alley",
+    "Munford St.",
+    "N. 1st St.",
+    "N. 2nd St.",
+    "N. 3rd St.",
+    "N. 4th St.",
+    "N. 5th St.",
+    "N. 7th St.",
+    "N. 8th St.",
+    "N. Adams St.",
+    "N. Belvidere St.",
+    "N. Foushee St.",
+    "N. Henry St.",
+    "N. Jefferson St.",
+    "N. Madison St.",
+    "N. Monroe St.",
+    "Navy Hill Dr.",
+    "Oak St.",
+    "Prentis St.",
+    "Price St.",
+    "Pulliam St.",
+    "Richmond Henrico Turnpike",
+    "S. Jefferson St.",
+    "Smith St.",
+    "St. James St.",
+    "St. John St.",
+    "St. Paul St.",
+    "St. Peter St.",
+    "Valley Rd.",
+    "W. Baker St.",
+    "W. Broad St.",
+    "W. Catherine St.",
+    "W. Charity St.",
+    "W. Clay St.",
+    "W. Coutts St.",
+    "W. Duval St.",
+    "W. Federal St.",
+    "W. Franklin St.",
+    "W. Grace St.",
+    "W. Hill St.",
+    "W. Jackson St.",
+    "W. Leigh St.",
+    "W. Main St.",
+    "W. Marshall St."
+   ]
+  },
+  "italic_1952": [
+   "Axtel St.",
+   "Brook Rd.",
+   "Calhoun St.",
+   "Cave Alley",
+   "Cottage Alley",
+   "E. Duval St.",
+   "Gilbert Alley",
+   "Gilmer St.",
+   "Moore St.",
+   "Munford St.",
+   "N. 3rd St.",
+   "N. 4th St.",
+   "N. 5th St.",
+   "N. 6th St.",
+   "Paradise Alley",
+   "Shooks St.",
+   "St. John St.",
+   "Vance St.",
+   "W. Baker St.",
+   "W. Charity St.",
+   "W. Duval St."
+  ],
+  "left_off": {
+   "1952": [
+    "Brook Alley",
+    "Cameo St.",
+    "(1952) St. Paul St."
+   ],
+   "2026": [
+    "Avenue D"
+   ]
+  }
+ },
+ "ward-sheet": {
+  "file": "jackson-ward-guide-ward-sheet.webp",
+  "named": {
+   "1952": [
+    "Axtell St.",
+    "Brook Rd.",
+    "Calhoun St.",
+    "Chamberlayne Ave.",
+    "Chamberlayne Pkwy.",
+    "E. Baker St.",
+    "E. Bates St.",
+    "E. Broad St.",
+    "E. Charity St.",
+    "E. Clay St.",
+    "E. Duval St.",
+    "E. Federal St.",
+    "E. Grace St.",
+    "E. Hill St.",
+    "E. Jackson St.",
+    "E. Leigh St.",
+    "E. Marshall St.",
+    "E. Preston St.",
+    "Gilbert Alley",
+    "Gilmer St.",
+    "Goshen St.",
+    "Hickory St.",
+    "Judah St.",
+    "Miss Scotts Alley",
+    "Moore St.",
+    "Munford St.",
+    "N. 1st St.",
+    "N. 2nd St.",
+    "N. 3rd St.",
+    "N. 4th St.",
+    "N. 5th St.",
+    "N. 6th St.",
+    "N. Adams St.",
+    "N. Belvidere St.",
+    "N. Foushee St.",
+    "N. Henry St.",
+    "N. Jefferson St.",
+    "N. Madison St.",
+    "N. Monroe St.",
+    "Navy Hill Dr.",
+    "Prentis St.",
+    "Price St.",
+    "Pulliam St.",
+    "S. Jefferson St.",
+    "Smith St.",
+    "St. James St.",
+    "St. John St.",
+    "St. Paul St.",
+    "St. Peter St.",
+    "Vance St.",
+    "W. Baker St.",
+    "W. Broad St.",
+    "W. Catherine St.",
+    "W. Charity St.",
+    "W. Clay St.",
+    "W. Duval St.",
+    "W. Franklin St.",
+    "W. Grace St.",
+    "W. Hill St.",
+    "W. Leigh St.",
+    "W. Main St.",
+    "W. Marshall St."
+   ],
+   "2026": [
+    "Avenue A",
+    "Avenue B",
+    "Avenue C",
+    "Axtell St.",
+    "Brook Alley",
+    "Brook Rd.",
+    "Calhoun St.",
+    "Cameo St.",
+    "Chamberlayne Ave.",
+    "Chamberlayne Pkwy.",
+    "Duval St. Connection",
+    "E. Baker St.",
+    "E. Bates St.",
+    "E. Broad St.",
+    "E. Charity St.",
+    "E. Clay St.",
+    "E. Duval St.",
+    "E. Federal St.",
+    "E. Grace St.",
+    "E. Hill St.",
+    "E. Jackson St.",
+    "E. Leigh St.",
+    "E. Marshall St.",
+    "Gilmer St.",
+    "Goshen St.",
+    "Hospital St.",
+    "Judah St.",
+    "Miss Scotts Alley",
+    "Munford St.",
+    "N. 1st St.",
+    "N. 2nd St.",
+    "N. 3rd St.",
+    "N. 4th St.",
+    "N. 5th St.",
+    "N. 7th St.",
+    "N. 8th St.",
+    "N. Adams St.",
+    "N. Belvidere St.",
+    "N. Foushee St.",
+    "N. Henry St.",
+    "N. Jefferson St.",
+    "N. Madison St.",
+    "N. Monroe St.",
+    "Navy Hill Dr.",
+    "Prentis St.",
+    "Pulliam St.",
+    "S. Jefferson St.",
+    "Smith St.",
+    "St. James St.",
+    "St. John St.",
+    "St. Paul St.",
+    "St. Peter St.",
+    "Valley Rd.",
+    "W. Baker St.",
+    "W. Broad St.",
+    "W. Catherine St.",
+    "W. Charity St.",
+    "W. Clay St.",
+    "W. Coutts St.",
+    "W. Duval St.",
+    "W. Federal St.",
+    "W. Franklin St.",
+    "W. Grace St.",
+    "W. Hill St.",
+    "W. Jackson St.",
+    "W. Leigh St.",
+    "W. Main St.",
+    "W. Marshall St."
+   ]
+  },
+  "italic_1952": [
+   "Calhoun St.",
+   "E. Duval St.",
+   "Gilbert Alley",
+   "Gilmer St.",
+   "Moore St.",
+   "N. 3rd St.",
+   "N. 4th St.",
+   "N. 6th St.",
+   "Vance St.",
+   "W. Baker St."
+  ],
+  "left_off": {
+   "1952": [
+    "W. Jackson St.",
+    "Brook Alley",
+    "W. Federal St.",
+    "Maggie Lena Walker Memorial Plaza",
+    "Cameo St.",
+    "Oak St.",
+    "(1952) W. Duval St.",
+    "(1952) Axtel St.",
+    "(1952) Brook Rd.",
+    "(1952) Brook Rd.",
+    "(1952) Munford St.",
+    "(1952) W. Baker St.",
+    "(1952) Shooks St.",
+    "(1952) W. Charity St.",
+    "(1952) St. Paul St.",
+    "(1952) St. John St.",
+    "(1952) Cave Alley",
+    "(1952) Paradise Alley",
+    "(1952) Cottage Alley",
+    "(1952) N. 5th St."
+   ],
+   "2026": [
+    "E. Preston St.",
+    "Avenue D",
+    "Price St.",
+    "Richmond Henrico Turnpike",
+    "Hickory St.",
+    "Maggie L Walker Pl.",
+    "Maggie Lena Walker Memorial Plaza",
+    "Oak St."
+   ]
+  }
+ },
  "1": {
   "file": "jackson-ward-guide-pair-1.webp",
-  "box_svg_units": [
-   1603.3,
-   895.7,
+  "box_svg": [
+   -1281.5,
+   -570.1,
    560,
    330
   ],
-  "stop_svg_units": [
-   1883.3,
-   1100.7
-  ]
+  "named": {
+   "1952": [
+    "W. Leigh St.",
+    "N. Belvidere St.",
+    "Brook Rd.",
+    "W. Catherine St.",
+    "W. Duval St.",
+    "N. Henry St.",
+    "Smith St.",
+    "Judah St.",
+    "Munford St.",
+    "N. Monroe St.",
+    "Vance St.",
+    "Axtel St.",
+    "Brook Rd.",
+    "Brook Rd.",
+    "Munford St.",
+    "W. Baker St.",
+    "Shooks St."
+   ],
+   "2026": [
+    "W. Leigh St.",
+    "N. Belvidere St.",
+    "Chamberlayne Ave.",
+    "Brook Rd.",
+    "W. Catherine St.",
+    "W. Duval St.",
+    "Brook Alley",
+    "N. Henry St.",
+    "Smith St.",
+    "Judah St.",
+    "Munford St.",
+    "N. Monroe St."
+   ]
+  },
+  "italic_1952": [
+   "Axtel St.",
+   "Brook Rd.",
+   "Munford St.",
+   "Shooks St.",
+   "Vance St.",
+   "W. Baker St."
+  ],
+  "left_off": {
+   "1952": [
+    "Chamberlayne Ave.",
+    "Brook Alley",
+    "W. Clay St.",
+    "(1952) W. Duval St.",
+    "(1952) W. Charity St."
+   ],
+   "2026": [
+    "W. Clay St."
+   ]
+  }
  },
  "2": {
   "file": "jackson-ward-guide-pair-2.webp",
-  "box_svg_units": [
-   1950.0,
-   624.0,
+  "box_svg": [
+   -822.2,
+   -677.5,
    560,
    330
   ],
-  "stop_svg_units": [
-   2230.0,
-   920.9
-  ]
+  "named": {
+   "1952": [
+    "Chamberlayne Ave.",
+    "Brook Rd.",
+    "Hickory St.",
+    "W. Charity St.",
+    "W. Baker St.",
+    "Calhoun St.",
+    "W. Duval St.",
+    "W. Baker St.",
+    "Shooks St.",
+    "W. Charity St."
+   ],
+   "2026": [
+    "Chamberlayne Ave.",
+    "Brook Rd.",
+    "Hickory St.",
+    "W. Charity St.",
+    "W. Baker St.",
+    "Calhoun St.",
+    "W. Duval St."
+   ]
+  },
+  "italic_1952": [
+   "Shooks St.",
+   "W. Baker St.",
+   "W. Charity St."
+  ],
+  "left_off": {
+   "1952": [],
+   "2026": []
+  }
  },
  "3": {
   "file": "jackson-ward-guide-pair-3.webp",
-  "box_svg_units": [
-   1910.5,
-   626.2,
+  "box_svg": [
+   -803.2,
+   -522.7,
    560,
    330
   ],
-  "stop_svg_units": [
-   2190.5,
-   831.2
-  ]
+  "named": {
+   "1952": [
+    "W. Duval St.",
+    "Chamberlayne Pkwy.",
+    "Chamberlayne Ave.",
+    "W. Baker St.",
+    "W. Charity St.",
+    "St. Peter St.",
+    "W. Jackson St.",
+    "Judah St.",
+    "Hickory St.",
+    "W. Leigh St.",
+    "Price St.",
+    "W. Baker St.",
+    "Shooks St.",
+    "St. Paul St."
+   ],
+   "2026": [
+    "W. Duval St.",
+    "Chamberlayne Pkwy.",
+    "Chamberlayne Ave.",
+    "W. Baker St.",
+    "W. Charity St.",
+    "St. Peter St.",
+    "W. Jackson St.",
+    "Judah St.",
+    "W. Leigh St.",
+    "Price St.",
+    "Brook Alley"
+   ]
+  },
+  "italic_1952": [
+   "Shooks St.",
+   "St. Paul St.",
+   "W. Baker St."
+  ],
+  "left_off": {
+   "1952": [
+    "Brook Rd.",
+    "Brook Alley"
+   ],
+   "2026": [
+    "Brook Rd.",
+    "Hickory St."
+   ]
+  }
  },
  "4": {
   "file": "jackson-ward-guide-pair-4.webp",
-  "box_svg_units": [
-   2348.2,
-   560.4,
+  "box_svg": [
+   -410.9,
+   -397.1,
    560,
    330
   ],
-  "stop_svg_units": [
-   2628.2,
-   765.4
-  ]
+  "named": {
+   "1952": [
+    "W. Baker St.",
+    "W. Duval St.",
+    "St. James St.",
+    "W. Jackson St.",
+    "W. Charity St.",
+    "St. John St.",
+    "Cameo St.",
+    "E. Duval St.",
+    "Price St.",
+    "N. 1st St.",
+    "E. Jackson St.",
+    "W. Baker St.",
+    "St. Paul St.",
+    "St. John St."
+   ],
+   "2026": [
+    "W. Baker St.",
+    "W. Duval St.",
+    "St. James St.",
+    "W. Jackson St.",
+    "W. Charity St.",
+    "St. John St.",
+    "Cameo St.",
+    "E. Duval St.",
+    "Price St.",
+    "N. 1st St.",
+    "E. Jackson St."
+   ]
+  },
+  "italic_1952": [
+   "St. John St.",
+   "St. Paul St.",
+   "W. Baker St."
+  ],
+  "left_off": {
+   "1952": [
+    "St. Paul St."
+   ],
+   "2026": [
+    "St. Paul St."
+   ]
+  }
  },
  "5": {
   "file": "jackson-ward-guide-pair-5.webp",
-  "box_svg_units": [
-   1513.1,
-   588.9,
+  "box_svg": [
+   -320.4,
+   -84.4,
    560,
    330
   ],
-  "stop_svg_units": [
-   1793.1,
-   793.9
-  ]
+  "named": {
+   "1952": [
+    "N. 2nd St.",
+    "E. Leigh St.",
+    "E. Jackson St.",
+    "N. 1st St.",
+    "N. 3rd St.",
+    "St. James St."
+   ],
+   "2026": [
+    "N. 2nd St.",
+    "E. Leigh St.",
+    "E. Jackson St.",
+    "N. 1st St.",
+    "N. 3rd St.",
+    "St. James St."
+   ]
+  },
+  "italic_1952": [],
+  "left_off": {
+   "1952": [],
+   "2026": []
+  }
  },
  "6": {
   "file": "jackson-ward-guide-pair-6.webp",
-  "box_svg_units": [
-   1120.9,
-   428.4,
+  "box_svg": [
+   -13.9,
+   -336.4,
    560,
    330
   ],
-  "stop_svg_units": [
-   1400.9,
-   633.4
-  ]
+  "named": {
+   "1952": [
+    "N. 1st St.",
+    "E. Baker St.",
+    "E. Duval St.",
+    "St. James St.",
+    "E. Charity St.",
+    "N. 2nd St.",
+    "W. Baker St.",
+    "W. Baker St.",
+    "Cave Alley",
+    "Paradise Alley"
+   ],
+   "2026": [
+    "N. 1st St.",
+    "E. Baker St.",
+    "E. Duval St.",
+    "St. James St.",
+    "E. Charity St.",
+    "N. 2nd St.",
+    "W. Baker St."
+   ]
+  },
+  "italic_1952": [
+   "Cave Alley",
+   "Paradise Alley",
+   "W. Baker St."
+  ],
+  "left_off": {
+   "1952": [
+    "W. Charity St.",
+    "St. John St."
+   ],
+   "2026": [
+    "W. Charity St.",
+    "St. John St."
+   ]
+  }
  },
  "7": {
   "file": "jackson-ward-guide-pair-7.webp",
-  "box_svg_units": [
-   1101.9,
-   291.4,
+  "box_svg": [
+   25.8,
+   -352.9,
    560,
    330
   ],
-  "stop_svg_units": [
-   1381.9,
-   496.4
-  ]
+  "named": {
+   "1952": [
+    "N. 1st St.",
+    "E. Baker St.",
+    "E. Duval St.",
+    "St. James St.",
+    "E. Charity St.",
+    "N. 2nd St.",
+    "W. Baker St.",
+    "St. John St.",
+    "W. Baker St.",
+    "Cave Alley",
+    "Paradise Alley"
+   ],
+   "2026": [
+    "N. 1st St.",
+    "E. Baker St.",
+    "E. Duval St.",
+    "St. James St.",
+    "E. Charity St.",
+    "N. 2nd St.",
+    "W. Baker St.",
+    "St. John St."
+   ]
+  },
+  "italic_1952": [
+   "Cave Alley",
+   "Paradise Alley",
+   "W. Baker St."
+  ],
+  "left_off": {
+   "1952": [
+    "W. Charity St.",
+    "E. Federal St."
+   ],
+   "2026": [
+    "W. Charity St.",
+    "E. Federal St."
+   ]
+  }
  },
  "8": {
   "file": null,
-  "why": "The Coliseum stands just past the near edge of the story's views, so their picture of today leaves it out (isoscape draws only buildings wholly inside the frame). A view framed further south was tried: the 1952 tracing stops partway across the Coliseum's site, and in Navy Hill the 1952 picture would draw today's streets, some laid out later, so this stop has no picture of 1952."
+  "why": "The Coliseum stands just past the near edge of the story's views, so their picture of today leaves it out (isoscape draws only buildings wholly inside the frame). A view framed further south was tried: the 1952 tracing stops partway across the Coliseum's site, and in Navy Hill the 1952 picture would draw today's streets, some laid out later, so this place has no picture of 1952."
+ },
+ "9": {
+  "file": "jackson-ward-guide-pair-9.webp",
+  "box_svg": [
+   423.6,
+   -427.3,
+   560,
+   330
+  ],
+  "named": {
+   "1952": [
+    "N. 2nd St.",
+    "N. 1st St.",
+    "E. Federal St.",
+    "E. Bates St.",
+    "E. Charity St.",
+    "E. Preston St.",
+    "St. James St.",
+    "N. 3rd St.",
+    "E. Baker St."
+   ],
+   "2026": [
+    "N. 2nd St.",
+    "N. 1st St.",
+    "E. Federal St.",
+    "E. Bates St.",
+    "Avenue A",
+    "Avenue D",
+    "E. Charity St.",
+    "E. Preston St.",
+    "St. James St.",
+    "Avenue B",
+    "N. 3rd St.",
+    "E. Baker St.",
+    "Avenue C"
+   ]
+  },
+  "italic_1952": [],
+  "left_off": {
+   "1952": [],
+   "2026": []
+  }
+ },
+ "10": {
+  "file": "jackson-ward-guide-pair-10.webp",
+  "box_svg": [
+   484.1,
+   -109.5,
+   560,
+   330
+  ],
+  "named": {
+   "1952": [
+    "N. 5th St.",
+    "N. 4th St.",
+    "N. 3rd St.",
+    "E. Preston St.",
+    "E. Baker St.",
+    "E. Duval St.",
+    "N. 3rd St.",
+    "N. 4th St.",
+    "Cottage Alley",
+    "E. Duval St.",
+    "N. 5th St.",
+    "N. 6th St."
+   ],
+   "2026": [
+    "N. 5th St.",
+    "N. 4th St.",
+    "N. 3rd St.",
+    "E. Preston St.",
+    "E. Baker St.",
+    "E. Duval St.",
+    "E. Bates St."
+   ]
+  },
+  "italic_1952": [
+   "Cottage Alley",
+   "E. Duval St.",
+   "N. 3rd St.",
+   "N. 4th St.",
+   "N. 5th St.",
+   "N. 6th St."
+  ],
+  "left_off": {
+   "1952": [
+    "E. Bates St.",
+    "(1952) Cave Alley"
+   ],
+   "2026": []
+  }
  }
 }

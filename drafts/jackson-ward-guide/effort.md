@@ -25,4 +25,6 @@ work, from the go-ahead to a delivered preview.
 
 | 2026-11-23 | final round for the owner's preview: the independent check applied (route rebuilt from OSM's sidewalks and crossings with safety rules, directions, stop 8, About, the should-fixes), maps r2-r17, pairs r5 and a Coliseum trial, page, phone and large PDFs (and the PDF tool's cut rule), the folded sheet (4 rounds), claim list, case-study record, board | 10:40-11:35 ET (about 55 min) | about 200 | `final/`: preview, three PDFs, contact sheets, `route.md`, `final.md` | the owner's look; publication with the story correction |
 
+| 2026-11-23 | the owner's redirect: orientation guide (no walk); orient.py, vantage.py, maps rewritten (overview, six tiles, sheet; 7 rounds), names on the drawings (labels.py; ward view and 9 pairs, 3 rounds), page, PDFs, sheet (3 rounds), claims | 11:40-12:45 ET (about 65 min) | about 110 | `final2/` | the owner's look |
+
 **Actual against the estimate:** one run, about 50 minutes, against an estimate of about 1½ agent-sessions. The map took most of the rounds (label placement at phone size).

@@ -6,23 +6,25 @@ and folded in thirds (a letter fold) to a 3.67 x 8.5 in pocket guide.
 
 The sheet lies landscape (11 x 8.5 in), in three panels of 3.67 in.
 
-  Outside (PDF page 1), as you look at it: the map across the left and middle panels (map.py's
-  `sheet` rendering, its names kept as text) and the cover on the right panel: the title, the
-  author line, the walk in brief, the live address, how to print and fold, and the credits.
-  Inside (PDF page 2): the eight stops in walking order across the three panels, each with the
-  directions to it, where to stand and what to look at (the page's own words, from route.json),
-  and its 1952-and-today pair (pairs.py), set at the top of the stop so it stays beside its title.
+  Inside (PDF page 1, seen whole when the sheet is opened out): the plan map across the sheet,
+  8.9 in wide, every street named at 8.5 pt or more, with the grid (map.py's `sheet` rendering,
+  its names kept as text), and in a strip at the right the key, the ten places to stand with
+  their grid squares, and the credits.
+  Outside (PDF page 2): the whole ward in 1952 and today with the streets named (pairs.py's
+  `ward-sheet`) across the left and middle panels, and the cover on the right panel: the title,
+  the author line, how to use it, the live address and how to print and fold.
 
-Print both sides, flipping on the short edge. Fold the inside's right panel in first, then its
-left panel over it: the cover is then on the front, the middle of the map on the back, and the
-first stops are the first thing inside. The fold lines fall in the gutters between the text
-columns, and short marks at the top and bottom edges show where they are.
+Print both sides, flipping on the short edge. With the map facing you, fold the right third in,
+then the left third over it: the cover is then on the front, the middle of the drawings on the
+back, and opening the sheet out shows the whole map. The street index is on the page, not the
+sheet: at 7.5 pt its 84 rows need more room than the sheet has beside the map.
 
-Type: body 8.5 pt and up, credits 7 pt and up (checked here on the PDF's own text). Fonts are
-Inter (SIL Open Font License, tools/pdf/fonts), embedded; the text is real text and each picture
-carries alt text. The map tells the walk, the 1952 streets, Gilpin Court and the highway apart by
-line style, outline and label as well as color, so it survives a black-and-white printer
-(--look writes a grayscale render to check, and a fold mock-up).
+Type: body 8.5 pt and up, credits 7 pt and up (checked here on the PDF's own text; the map's
+turned names in its SVG). Fonts are Inter (SIL Open Font License, tools/pdf/fonts), embedded; the
+text is real text and each picture carries alt text. The map tells today's streets, the 1952
+streets, Gilpin Court and the highway apart by line style, outline and label as well as color, so
+it survives a black-and-white printer (--look writes a grayscale render to check, and a fold
+mock-up).
 
 Chrome prints the HTML (headless, sandbox on, file:// only) as tools/pdf/story_pdf.py does, and
 pikepdf writes the document facts. Needs what story_pdf.py needs.
@@ -58,11 +60,12 @@ CONTACT = f'{story_pdf.SITE_URL}#/about/contact'
 E = html.escape
 
 
-def pair_jpeg(name, width=640):
-    im = Image.open(os.path.join(ROOT, 'pages', name)).convert('RGB')
-    im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+def image_uri(path, width=None, quality=88):
+    im = Image.open(path).convert('RGB')
+    if width and im.width > width:
+        im = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
     b = io.BytesIO()
-    im.save(b, 'JPEG', quality=86, subsampling=0)
+    im.save(b, 'JPEG', quality=quality, subsampling=0)
     return 'data:image/jpeg;base64,' + base64.b64encode(b.getvalue()).decode(), im.size
 
 
@@ -73,119 +76,130 @@ def map_svg():
     s = re.sub(r'<metadata>.*?</metadata>', '', s, flags=re.S)
     s = s.replace("font-family: 'Inter'", "font-family: 'Inter PDF'")
     s = re.sub(r'<svg ([^>]*?)width="[^"]+" height="[^"]+"', r'<svg \1class="map" role="img" aria-labelledby="map-title"', s, count=1)
-    s = s.replace('>', '><title id="map-title">The walk in Jackson Ward, north up: eight numbered stops along the route on mapped '
-                       'sidewalks, today\'s streets named upright, the 1952 streets the I-95 trench cut dashed and named in italic, the '
-                       'highway in its trench, and Gilpin Court as a bordered area, with a key and credits</title>', 1)
+    s = s.replace('>', '><title id="map-title">Plan of Jackson Ward, north up, with a grid of squares A to F and 1 to 6: every '
+                       'street named, today\'s upright and the 1952 streets the I-95 trench cut dashed and in italic, the bridges '
+                       'over the trench, where streets end at it, the highway\'s exits, landmarks, Gilpin Court as a bordered area, '
+                       'and ten numbered places to stand with a wedge showing which way to look</title>', 1)
     return s
+
+
+SWATCH = {
+    'street': '<span class="sw" style="border-top: 2.2pt solid {street}"></span>',
+    'bridge': '<span class="sw" style="border-top: 1pt solid {ink}; border-bottom: 1pt solid {ink}; height: 2.6pt; background: {street}"></span>',
+    'end': '<span class="sw" style="border-top: 2.2pt solid {street}; border-right: 1.8pt solid {ink}; height: 5pt; margin-top: -2pt"></span>',
+    'lost': '<span class="sw" style="border-top: 1.6pt dashed {lost}"></span>',
+    'highway': '<span class="sw box" style="background: {highway}; border: 0.5pt solid {hedge}"></span>',
+    'gilpin': '<span class="sw box" style="background: {plan}; border: 1.2pt solid {ink}"></span>',
+    'stop': '<span class="sw disc" style="background: {ink}; color: {sky}">1</span>',
+    'landmark': '<span class="sw box small" style="background: {fresh}; border: 0.5pt solid {ink}"></span>',
+    'grid': '<span class="sw tab" style="border: 0.5pt solid {ink}">C4</span>',
+}
 
 
 def document(date):
     P = palette()
-    route = load('route.json')
-    pairs = load('pairs.json')
-    legs = {l['to']: l for l in route['legs']}
-    t = route['total_m']
-    minutes = round(t / route['walk_m_per_min'] / 5) * 5
-    stops = []
-    for st in route['stops']:
-        n = st['n']
-        if n in legs:
-            l = legs[n]
-            get = (f"<b>From stop {l['frm']}</b>, about {int(round(l['m'], -1)):,} m ({l['minutes']} min). "
-                   + E(' '.join(l['directions'])))
-        else:
-            get = '<b>The walk starts here.</b>'
-        p = pairs[str(n)]
-        if p['file']:
-            src, (w, h) = pair_jpeg(p['file'])
-            fig = (f'<figure class="pair"><img src="{src}" width="{w}" height="{h}" alt="Stop {n}, {E(st["title"])}, drawn from the south: '
-                   f'the same blocks in 1952 (top) and today (bottom), with the stop\'s number where you stand">'
-                   '</figure>')
-        else:
-            fig = ''
-        note = '' if p['file'] else '<p class="note">No 1952 picture for this stop: the full guide says why.</p>'
-        stops.append(f'''<section class="stop" aria-label="Stop {n}">
-<h2><span class="n">{n}</span> {E(st["title"])}</h2>
-{fig}<p class="get">{get}</p>
-<p><b>Stand</b> {E(st["where"])}. <b>Look</b> {E(st["sees"])}.</p>{note}
-</section>''')
+    import map as M
+    V = load('vantage.json')
+    O = load('orient.json')
+    sys.path.insert(0, HERE)
+    import pairs as PR
+    colors = dict(street=_hex(M.C['street']), ink=P['ink'], lost=P['mark']['line'], highway=_hex(M.C['highway']),
+                  hedge=_hex(M.C['highway_edge']), plan=P['plan'], sky=P['sky'], fresh=P['fresh'])
+    key = ''.join(f'<li>{SWATCH[k].format(**colors)}<span>{E(t)}</span></li>' for k, t in M.KEY)
+    places = ''.join(f'<li><b>{v["n"]}</b> {v["square"]} {E(PR.PLACE.get(v["key"], v["title"]))}</li>' for v in V['points'])
+    ward, (ww, wh) = image_uri(os.path.join(ROOT, 'out/stories/jackson-ward-guide/jackson-ward-guide-ward-sheet.png'), 2400, 86)
     css = f'''
 {story_pdf.font_faces()}
 @page {{ size: 11in 8.5in; margin: 0 }}
 * {{ box-sizing: border-box }}
 html, body {{ margin: 0; padding: 0 }}
-body {{ font-family: 'Inter PDF', sans-serif; color: {P['ink']}; font-size: {BODY_PT}pt; line-height: 1.17; }}
+body {{ font-family: 'Inter PDF', sans-serif; color: {P['ink']}; font-size: {BODY_PT}pt; line-height: 1.2; }}
 .side {{ position: relative; width: 11in; height: 8.5in; overflow: hidden; break-after: page; background: {P['sky']} }}
 .side:last-child {{ break-after: auto }}
 .fold {{ position: absolute; width: 0; height: 0.16in; border-left: 0.5pt solid {P['ink']} }}
-.mapbox {{ position: absolute; left: 0.27in; top: 0.3in; width: 6.8in; height: 7.9in }}
-.mapbox svg {{ width: 6.8in; height: 7.9in; display: block }}
+.mapbox {{ position: absolute; left: 0.22in; top: 0.42in; width: 8.93in }}
+.mapbox svg {{ width: 8.93in; height: auto; display: block }}
+.maptitle {{ position: absolute; left: 0.25in; top: 0.16in; font-weight: 700; font-size: 10pt }}
+.strip {{ position: absolute; left: 9.3in; top: 0.3in; width: 1.5in; height: 7.95in; display: flex; flex-direction: column }}
+.strip h2 {{ font-size: 9pt; margin: 0 0 0.05in; font-weight: 700 }}
+.strip ul {{ list-style: none; margin: 0 0 0.12in; padding: 0 }}
+.strip li {{ margin: 0 0 0.045in; display: flex; gap: 0.05in; align-items: flex-start }}
+.places li {{ display: block; text-indent: -0.14in; padding-left: 0.14in }}
+.sw {{ flex: 0 0 0.3in; display: inline-block; height: 0; margin-top: 0.06in }}
+.sw.box {{ height: 0.1in; margin-top: 0.01in }}
+.sw.small {{ flex-basis: 0.12in; margin-right: 0.18in }}
+.sw.disc {{ flex: 0 0 0.15in; height: 0.15in; border-radius: 50%; text-align: center; font-size: 8.5pt; line-height: 0.15in;
+           font-weight: 700; margin: 0 0.15in 0 0 }}
+.sw.tab {{ flex: 0 0 auto; height: auto; font-size: 8.5pt; font-weight: 700; padding: 0 2pt; margin: 0 0.08in 0 0 }}
+.credits {{ margin-top: auto; font-size: {CREDIT_PT + 0.3}pt; line-height: 1.22 }}
+.credits p {{ margin: 0 0 0.04in }}
+.ward {{ position: absolute; left: 0.25in; top: 0.3in; width: 6.95in }}
+.ward img {{ width: 100%; height: auto; display: block }}
+.ward p {{ margin: 0.05in 0 0; font-size: {BODY_PT}pt }}
 .cover {{ position: absolute; left: {2 * PANEL + 0.3:.3f}in; top: 0.35in; width: {PANEL - 0.6:.3f}in; height: 7.8in;
           display: flex; flex-direction: column }}
-.cover h1 {{ font-size: 25pt; line-height: 1.05; margin: 0.25in 0 0.08in; font-weight: 700 }}
-.cover .sub {{ font-size: 13pt; line-height: 1.2; font-weight: 600; margin: 0 0 0.16in }}
-.cover .by {{ font-size: 10pt; margin: 0 0 0.22in }}
+.cover h1 {{ font-size: 25pt; line-height: 1.05; margin: 0.2in 0 0.08in; font-weight: 700 }}
+.cover .sub {{ font-size: 13pt; line-height: 1.2; font-weight: 600; margin: 0 0 0.14in }}
+.cover .by {{ font-size: 10pt; margin: 0 0 0.2in }}
 .cover p {{ margin: 0 0 0.09in }}
 .cover .url {{ font-weight: 600; word-break: break-all }}
-.cover .credits {{ margin-top: auto; font-size: {CREDIT_PT + 0.3}pt; line-height: 1.25; color: {P['ink']} }}
-.cover .credits p {{ margin: 0 0 0.05in }}
 .cover .rule {{ border-top: 0.75pt solid {P['ink']}; margin: 0.1in 0 0.12in }}
-.cols {{ position: absolute; left: 0.3in; top: 0.32in; width: {11 - 0.6:.3f}in; height: 7.9in;
-         column-count: 3; column-gap: 0.6in; column-fill: auto }}
-.stop {{ margin: 0 0 0.08in }}
-.stop h2 {{ font-size: 10.5pt; line-height: 1.15; margin: 0 0 0.04in; font-weight: 700; break-after: avoid }}
-.stop .n {{ display: inline-block; width: 1.45em; height: 1.45em; line-height: 1.45em; border-radius: 50%; text-align: center;
-           background: {P['ink']}; color: {P['sky']}; font-size: 9pt; margin-right: 0.05in; vertical-align: 0.05em }}
-.stop p {{ margin: 0 0 0.04in }}
-.stop .get {{ break-before: avoid }}
-.pair {{ float: right; clear: right; width: 1.2in; margin: 0.02in 0 0.04in 0.08in; break-inside: avoid }}
-.pair img {{ width: 100%; height: auto; display: block; border: 0.4pt solid {P['ink']} }}
-.pair figcaption {{ font-size: {BODY_PT}pt; line-height: 1.1; margin-top: 0.02in }}
-.note {{ font-style: italic }}
-.head {{ font-size: 9pt; font-weight: 700; margin: 0 0 0.08in }}
+.cover .credits {{ margin-top: auto }}
 '''
     folds = ''.join(f'<div class="fold" style="left:{x:.4f}in; top:0"></div><div class="fold" style="left:{x:.4f}in; bottom:0"></div>'
                     for x in (PANEL, 2 * PANEL))
-    cover = f'''<div class="cover">
+    n = len(V['points'])
+    return f'''<!DOCTYPE html>
+<html lang="en-US"><head><meta charset="utf-8"><title>Seeing the change: finding your place in Jackson Ward, 1952 and today (folded sheet)</title>
+<style>{css}</style></head><body>
+<main>
+<div class="side inside">{folds}
+<div class="maptitle">Jackson Ward, north up, every street named. Grid squares match the street index on the guide's page.</div>
+<div class="mapbox">{map_svg()}</div>
+<div class="strip">
+<h2>Key</h2>
+<ul class="key">{key}</ul>
+<h2>Places to stand</h2>
+<ul class="places">{places}</ul>
+<div class="credits">
+<p>© OpenStreetMap contributors (ODbL), {E(V['osm_date'])}. 1952 streets: Sanborn map, 1952, Library of Congress, and
+USGS map, 1933–34. Gilpin Court: City of Richmond parcels, approximate.</p>
+</div>
+</div>
+</div>
+<div class="side outside">{folds}
+<figure class="ward"><img src="{ward}" width="{ww}" height="{wh}" alt="Jackson Ward in Richmond seen from the south, 1952 above and today below, with the streets named in both: in 1952 the blocks built up where the I-95 trench runs today, with the streets it cut named in italic; today the highway in its trench, crossed by a few bridges">
+<p>Jackson Ward in 1952 and today, seen from the south. Today's street names are upright; in 1952 the streets the trench cut
+are in italic, and a street of today is named only where it ran on the same line then. Hatched: no 1952 building traced.</p>
+</figure>
+<div class="cover">
 <h1>Seeing the change</h1>
-<p class="sub">A walking guide to Jackson Ward, Richmond, Virginia</p>
+<p class="sub">Finding your place in Jackson Ward, Richmond, Virginia, 1952 and today</p>
 <p class="by">Chris Busse, a Richmond artist</p>
-<p>Eight stops on {t / 1000:.1f} km ({t / 1609.344:.1f} miles) of sidewalk, about {minutes} minutes on foot at about
-{route['walk_m_per_min']} m a minute. The walk starts at Second and Leigh Streets and ends across East Leigh Street from the
-Coliseum, {int(round(route['last_to_first_m'], -1))} m from where it began.</p>
-<p>The stops are inside, with directions and each place in 1952 and today where there is a picture. The full guide has the
-history of each stop and its sources:</p>
+<p>Open the sheet out for the map: every street is named, today's and 1952's, with a grid to find a place by.</p>
+<p>Beside the cover, the whole ward in 1952 and today, with the streets named on the drawings.</p>
+<p>{n} places to stand are on public sidewalks, numbered west to east only to find them. Go to any of them, in any order.</p>
+<p>The guide, with the street index, a 1952-and-today picture at each place and the history with its sources:</p>
 <p class="url">{E(LIVE.replace('https://', ''))}</p>
 <div class="rule"></div>
-<p><b>To print and fold:</b> print both sides of one US Letter sheet, flipping on the short edge. With the stops facing you,
+<p><b>To print and fold:</b> print both sides of one US Letter sheet, flipping on the short edge. With the map facing you,
 fold the right third in, then the left third over it.</p>
 <div class="credits">
 <p>Chris Busse made this guide with Claude. Its history comes from the published Jackson Ward story on the same site and that
-story's sources. The route, the directions and the distances were laid out in code from OpenStreetMap as it stood on
-{E(route['osm_date'])}; the directions say what OpenStreetMap shows at each crossing.</p>
-<p>Map © OpenStreetMap contributors (ODbL). 1952 streets: Sanborn Fire Insurance Map, Richmond, 1952, vol. 3, Library of
-Congress, with seven stretches joined across the trench as the U.S. Geological Survey's map of 1933–34 shows them. Gilpin
-Court: City of Richmond parcel records, approximate. The pictures are drawn by Chris Busse with isoscape from the story's
-views of 1952 and today.</p>
+story's sources. The pictures are drawn by Chris Busse with isoscape from the story's views of 1952 and today; the street
+names are placed on them in code.</p>
 <p>Corrections are welcome: {E(CONTACT.replace('https://', ''))}. This sheet: {E(date.strftime('%B %-d, %Y'))}.</p>
 </div>
-</div>'''
-    return f'''<!DOCTYPE html>
-<html lang="en-US"><head><meta charset="utf-8"><title>Seeing the change: a walking guide to Jackson Ward (folded sheet)</title>
-<style>{css}</style></head><body>
-<main>
-<div class="side outside">{folds}
-<div class="mapbox">{map_svg()}</div>
-{cover}
-</div>
-<div class="side inside">{folds}
-<div class="cols">
-<p class="head">The stops, in walking order. The map is on the other side.</p>
-{''.join(stops)}
 </div>
 </div>
 </main>
 </body></html>'''
+
+
+def _hex(c):
+    if isinstance(c, str):
+        return c
+    return '#' + ''.join(f'{round(v * 255):02x}' for v in c[:3])
 
 
 def print_pdf(doc, out):
@@ -200,12 +214,13 @@ def finish(pdf_path, date):
     pdf = pikepdf.open(pdf_path, allow_overwriting_input=True)
     iso = date.isoformat()
     with pdf.open_metadata(set_pikepdf_as_editor=False) as meta:
-        meta['dc:title'] = 'Seeing the change: a walking guide to Jackson Ward, Richmond, Virginia (folded sheet)'
+        meta['dc:title'] = 'Seeing the change: finding your place in Jackson Ward, 1952 and today (folded sheet)'
         meta['dc:creator'] = [story_pdf.AUTHOR]
-        meta['dc:description'] = ('A one-sheet walking guide to Jackson Ward in Richmond, Virginia, to print on both sides of US Letter '
-                                  'and fold in thirds: the map, eight stops with directions, and seven places in 1952 and today.')
+        meta['dc:description'] = ('A one-sheet pocket guide to Jackson Ward in Richmond, Virginia, to print on both sides of US Letter '
+                                  'and fold in thirds: a map with every street named, ten places to stand, and the ward in 1952 and '
+                                  'today with the streets named.')
         meta['dc:language'] = ['en-US']
-        meta['pdf:Keywords'] = 'isoscape, Richmond, Virginia, Jackson Ward, walking guide, maps, history'
+        meta['pdf:Keywords'] = 'isoscape, Richmond, Virginia, Jackson Ward, street names, maps, history'
         meta['pdf:Producer'] = 'Skia/PDF (Chrome), pikepdf'
         meta['xmp:CreatorTool'] = "isoscape's guide sheet tool (tools/stories/jackson-ward-guide/fold.py)"
         meta['xmp:CreateDate'] = iso
@@ -270,19 +285,19 @@ def look(pdf_path, out):
         subprocess.run(['pdftoppm', '-r', str(dpi), '-png', pdf_path, os.path.join(out, f'side-{tag}')], check=True)
         subprocess.run(['pdftoppm', '-r', str(dpi), '-gray', '-png', pdf_path, os.path.join(out, f'side-{tag}-gray')], check=True)
     sides = sorted(f for f in os.listdir(out) if f.startswith('side-100pct-') and 'gray' not in f)
-    outside, inside = (Image.open(os.path.join(out, f)).convert('RGB') for f in sides)
+    inside, outside = (Image.open(os.path.join(out, f)).convert('RGB') for f in sides)
     W, H = outside.size
     pw = W // 3
     panel = lambda im, k: im.crop((k * pw, 0, (k + 1) * pw, H))  # noqa: E731
-    # folded: front = outside's right panel; back = outside's middle; opening the cover shows the
-    # inside's left panel beside the flap's outside (the outside's left panel)
+    # folded with the map inside: front = outside's right panel; back = outside's middle; opening
+    # the cover shows the inside's left panel beside the flap (the outside's left panel)
     gap = 40
     mock = Image.new('RGB', (pw * 4 + gap * 5, H + 90), (255, 255, 255))
     from PIL import ImageDraw, ImageFont
     d = ImageDraw.Draw(mock)
     f = ImageFont.truetype(os.path.join(ROOT, 'tools/pdf/fonts/Inter-SemiBold.ttf'), 22)
     items = [('Front (cover)', panel(outside, 2)), ('Back', panel(outside, 1)),
-             ('Open the cover: left', panel(inside, 0)), ('Open the cover: right (the flap)', panel(outside, 0))]
+             ('Open the cover: left', panel(inside, 0)), ('Open the cover: the flap', panel(outside, 0))]
     for i, (label, im) in enumerate(items):
         x = gap + i * (pw + gap)
         d.text((x, 20), label, font=f, fill=(0, 0, 0))
@@ -291,13 +306,13 @@ def look(pdf_path, out):
     mock.save(os.path.join(out, 'fold-mockup.png'))
     # the whole sheet, opened, with the folds marked
     sheet = Image.new('RGB', (W, H * 2 + 60), (255, 255, 255))
-    sheet.paste(outside, (0, 0))
-    sheet.paste(inside, (0, H + 60))
+    sheet.paste(inside, (0, 0))
+    sheet.paste(outside, (0, H + 60))
     d = ImageDraw.Draw(sheet)
     for k in (1, 2):
         for y0 in (0, H + 60):
             d.line((k * W / 3, y0, k * W / 3, y0 + H), fill=(200, 0, 0), width=1)
-    d.text((10, H + 15), 'Above: outside (map and cover). Below: inside (the stops). Red: the folds.', font=f, fill=(0, 0, 0))
+    d.text((10, H + 15), 'Above: inside (the map, seen when the sheet is opened out). Below: outside (1952 and today, and the cover). Red: the folds.', font=f, fill=(0, 0, 0))
     sheet.save(os.path.join(out, 'sheet-opened.png'))
 
 

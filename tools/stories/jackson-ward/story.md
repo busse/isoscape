@@ -36,7 +36,7 @@ lived in a house or what the ward meant to them. That is for the ward's families
 institutions to tell; [Who keeps the ward's history](#who-keeps-the-wards-history) points to
 some of them.
 
-To see these places on foot, use the [walking guide to Jackson Ward](jackson-ward-guide.md).
+To find these places in 1952 and today, see the [pocket guide with the streets named](jackson-ward-guide.md).
 
 ## Where this is, and how to read the pictures
 

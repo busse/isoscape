@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """The guide's link-preview picture, pages/jackson-ward-guide-social.jpg (1200 x 630): the walk's
-overview map on the left and, on the right, what the page is and where, in the picture itself,
+overview map, with its grid, on the left and, on the right, what the page is and where, in the picture itself,
 so a shared link says it without its text. Colors from src/palette.ts (common.palette), type in
 Inter (tools/pdf/fonts, SIL Open Font License).
 
     python3 tools/stories/jackson-ward-guide/social.py
 
-Reads out/stories/jackson-ward-guide/jackson-ward-guide-map-phone.png (map.py) and route.json.
+Reads out/stories/jackson-ward-guide/jackson-ward-guide-map-overview.png (map.py).
 """
 import os
 import sys
@@ -38,13 +38,13 @@ def wrap(d, text, f, width):
 
 def main():
     P = palette()
-    route = load('route.json')
     im = Image.new('RGB', (W, H), P['sky'])
-    m = Image.open(os.path.join(ROOT, 'out/stories/jackson-ward-guide/jackson-ward-guide-map-phone.png')).convert('RGB')
-    # the map's own frame: below its title rows (map.py: head = 3.6 x 13.5 px), above its key; at 3x
+    m = Image.open(os.path.join(ROOT, 'out/stories/jackson-ward-guide/jackson-ward-guide-map-overview.png')).convert('RGB')
+    # the map's own frame: below its title rows (map.py: head = 3.4 x its type size), above its key; at 3x
     from map import RENDERS
-    (x0, x1, y0, y1), w_css = RENDERS['phone'][0], RENDERS['phone'][1]
-    top = round(13.5 * 3.6 * 3)
+    R = RENDERS['overview']
+    (x0, x1, y0, y1), w_css = R['bounds'], R['W']
+    top = round(R['px'] * 3.4 * 3)
     map_h = round((y1 - y0) / ((x1 - x0) / (w_css - 2)) * 3)
     crop = m.crop((0, top, m.width, top + map_h))
     mw = round(crop.width * H / crop.height)
@@ -53,9 +53,9 @@ def main():
     d.line((mw, 0, mw, H), fill=P['ink'], width=2)
     x, y, width = mw + 36, 64, W - mw - 66
     for text, f, gap in (('Seeing the change', font('Bold', 44), 18),
-                         ('A walking guide to Jackson Ward, Richmond, Virginia', font('SemiBold', 30), 30),
-                         (f'Eight stops on {route["total_m"] / 1609.344:.1f} miles of sidewalk. '
-                          'Seven of the places are shown as they were in 1952 and as they are today.', font('Regular', 24), 26),
+                         ('Finding your place in Jackson Ward, Richmond, Virginia, 1952 and today', font('SemiBold', 30), 30),
+                         ('A pocket guide with every street named on the maps and on the drawings of 1952 and today, '
+                          'and ten places to stand and look.', font('Regular', 24), 26),
                          ('By Chris Busse, a Richmond artist', font('Regular', 22), 0)):
         for line in wrap(d, text, f, width):
             d.text((x, y), line, font=f, fill=P['ink'])

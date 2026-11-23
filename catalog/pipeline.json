@@ -3477,9 +3477,9 @@
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 2,
+   "rounds": 3,
    "waiting_on": "owner",
-   "decision": "Final round for the owner's preview (2026-11-23). The independent check of d1 (163 rows: 52 of 52 story-fact sentences faithful; 3 must-fix, 14 should-fix) is applied: the route is rebuilt from OpenStreetMap's sidewalks and crossings only, with no unsignalled crossing of a motorway ramp or a primary road and 0 m inside the Gilpin Court outline (4.2 km, 8 stops, Coliseum last; stops reordered); written directions between stops; stop 8 corrected (the 1952 sheets were traced there) and kept text-only after a trial frame; stop 2's pair reframed; About this guide as plain facts; phone, large-screen and folded-sheet PDFs; the story page links the guide. Ships with the story correction (fix/jackson-ward-1952-bridges, merged here) as one change set. Waits on the owner's look; then the planning session removes unlisted: true and publishes both, rebuilding the story's PDFs.",
+   "decision": "Redirected by the owner after final/ (2026-11-23): an orientation guide, no walk. Every street named on the plan maps (overview plus six tiles; the sheet's map), with a grid A-F/1-6, bridges, street ends, exits and landmarks; a street index of 84 names; street names on the drawings of 1952 and today (a whole-ward pair and nine place pairs, labels.py from isoscape locate; no drawing code changed); ten places to stand in no order. Phone, large and folded-sheet PDFs. Ships with the story correction (fix/jackson-ward-1952-bridges, merged here) as one change set. Waits on the owner's look.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3488,7 +3488,8 @@
    "links": [
     "/mnt/user-data/outputs/guide/jackson-ward/rough.md",
     "/mnt/user-data/outputs/guide/jackson-ward/d1/d1.md",
-    "/mnt/user-data/outputs/guide/jackson-ward/final/final.md"
+    "/mnt/user-data/outputs/guide/jackson-ward/final/final.md",
+    "/mnt/user-data/outputs/guide/jackson-ward/final2/final2.md"
    ],
    "private": true,
    "notes": "editorial; no plate, no shop; facts only from the published Jackson Ward story. The guide ships with the Jackson Ward story correction as one change set; unlisted: true is the only line to remove at publication.",

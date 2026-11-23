@@ -242,3 +242,58 @@ Folder: `2026-11-23-09-folded-sheet/`.
 
 Folder: `2026-11-23-10-final/`: screenshots of the guide at 390 and 1440 px (static page and
 explorer), the story's new link, the final claim list (331 rows) and the route audit.
+
+## The owner's redirect (November 23, 2026, after final/)
+
+Folder: `2026-11-23-11-redirect/`. Chris looked at final/ and turned the guide back to the
+original ask: the reader who prompted it could not place herself because the drawings carry no
+street names, and the maps had only a few. The walk is dropped; the guide becomes a pocket guide
+to finding your place in 1952 and today, with every street named and vantage points in no order.
+
+## Step 12: orientation data and maps (11:40-12:20)
+
+Folder: `2026-11-23-12-orient-maps/`. Map rounds r1-r7 at reading size, kept as looked at.
+
+- `route.py` became `vantage.py`: the sidewalk graph and its crossing rules stay, used only to
+  prove each place can be reached from the streets around it without an unsafe crossing;
+  routing, legs and directions are gone, and `route.json` with them.
+- `orient.py`: the frame and grid (A-F, 1-6), the 84 names of the street index, bridges over the
+  trench, street ends at it, exits 76A, 76B and 190, landmarks.
+- Vantage points reconsidered for orientation (`orientation.md`): ten kept, four dropped (Saint
+  James's north end: its sidewalk is cut off from the streets around it and 59 m from Gilpin
+  Court; its south end merged with Sixth Mount Zion; 2nd Street's north end: no sidewalk, seen
+  from Bates Street; the 7th Street bridge: no reachable mapped sidewalk at the trench). Points 1
+  and 10 checked on an OSM plot and their sides corrected (`osm-point-1-checked.jpg`).
+- `map.py` rewritten: an overview, six tiles and the sheet's map. r1: labels pushed far from
+  their streets by crowding (Belvidere Street's in column C); r2: leader reach capped at 70 px,
+  overview simplified; r3: names owed only on a tile's own squares; r4: the scale bar and north
+  arrow moved out of the map (the lower-left corner south of Broad Street could not take its
+  names); r5: wedges under labels (they hid "E. Bates St."), arrow off the column tabs. Final:
+  every tile and the sheet name every street they owe; together the tiles name all 84.
+
+## Step 13: names on the drawings (12:00-12:35)
+
+Folder: `2026-11-23-13-labeled-drawings/`.
+
+- `labels.py` places names in the guide's own post-processing from `isoscape locate` (the
+  drawing tool's projection, terrain included); no drawing code changed.
+- Dead ends: `locate` read a negative longitude as an option (fixed with `--`); one call per
+  street took about 8 s each and the first full run was stopped; all points are now looked up in
+  one call per year. Clipping lines to the frame after the warm-up made new points; clipping
+  moved before it.
+- r1 (ward): names on the drawing's front slab, and only one 1952 stretch named; r2: lines kept
+  30 m inside the frame, a level label with a leader where a name will not fit along its line;
+  r3: today's names in 1952 kept 30 m clear of untraced blocks (Avenues A and B had been named in
+  1952 at their edge). The ward view names 72 names in 1952 and 75 today.
+
+## Step 14: page, PDFs, sheet (12:25-12:40)
+
+Folder: `2026-11-23-14-pdfs-sheet/`. Phone 73 pages, large 36. The sheet: the map inside across
+all three panels with a strip for the key and places; the ward in 1952 and today outside with the
+cover. Round 1 failed its type check (grid tabs 8.1 pt, a disc's "10" at 5.8 pt); round 2's strip
+credits ran off the page; round 3 passes. The index does not fit on the sheet at 7.5 pt.
+
+## Step 15: final2 (12:40-)
+
+Folder: `2026-11-23-15-final2/`: first screens, the story's link, claims (411 rows),
+orientation.md.
