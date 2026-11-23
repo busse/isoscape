@@ -25,7 +25,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
-- **Dollar General on the edge of town: every Virginia town (art poster)**: Rough draft r6 in _preview/dollar-stores/art/: one full grid (14 x 17) of all 227 towns and cities, no region breaks, as Chris asked. 227 is prime, so the last row has 3 squares and 11 empty slots. Owner: what goes in the open space, and is it worth pursuing?
+- **Dollar General on the edge of town: every Virginia town (art poster)**: Rough draft r8 in _preview/dollar-stores/art/: one full grid of the 227 places, the last row filled with key, locator, three counted facts and copy; sheet filled to the foot. Owner: worth pursuing?
 - **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 

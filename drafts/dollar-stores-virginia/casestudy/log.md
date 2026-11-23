@@ -518,3 +518,18 @@ Folder: `2026-11-23-20-art-full-grid/`.
   holds 3 squares and leaves 11 empty slots.
 - **Rounds.** Three layout passes (a line off the edge, then crowding, then clean), all within
   review round 2. The board counts review rounds; it briefly said 6 and was corrected.
+
+## Step 21: the art poster's last row filled (November 23, 09:27-10:05)
+
+Folder: `2026-11-23-21-art-panels/`.
+
+- **Chris (09:27).** Fill the open space with a key, copy and a small map, as elements of similar
+  size and density.
+- **Done.** Eleven square panels:
+  - a three-part key;
+  - a Virginia locator three squares wide;
+  - three counted facts (475 Dollar Generals in Virginia take SNAP; 158 of 227 places have one
+    in their square; 22 of the 184 stand outside the gray);
+  - two squares of copy and sources.
+- **Layout.** The rows are spread to the foot of the sheet.
+- **Rounds.** Two layout passes.

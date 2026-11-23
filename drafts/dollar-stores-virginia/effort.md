@@ -40,3 +40,4 @@ owner's go-ahead to a delivered preview.
 | 2026-11-22 | Merge, deploy, editorial release record (release tools learn not-for-sale pieces) | 18:11-18:45 | ~35 | record.py/check.py --editorial; v1 record; board at final production and published | poster rebuild on the Mac (--data ds=...) |
 | 2026-11-23 | Art poster rough draft (owed since the plan); board entry | 08:49-09:30 | ~40 | art.py; rough r1-r3 | owner: worth pursuing? |
 | 2026-11-23 | Art poster: one full grid (owner) | 09:09-09:40 | ~30 | rough r4-r6 | owner: the open space |
+| 2026-11-23 | Art poster: last row filled with key, locator, facts, copy (owner) | 09:27-10:05 | ~40 | rough r7-r8 | owner: worth pursuing? |
