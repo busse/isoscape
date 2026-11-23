@@ -56,3 +56,18 @@ file. Board entry: `series-richmond-floods`. Times are Eastern.
   `ISO-TEST/isoscape-work/richmond-floods/sources/fema-fis/` (over 5 MB, outside git).
 - **18:56:** a fourth Opus 5.5 subagent started: extract the flood profiles and the levee
   text from both reports, and act as second reader on every number in step 02.
+
+### 03. Research: Gaston and the weather data (18:16 to about 19:10) · `2026-11-23-03-research-gaston-and-the-weather/`
+
+- Opus 5.5 subagent. Files: gaston-timeline.md, gaston-mechanism.md, gaston-water.md,
+  rainfall-data.md, other-pluvial.md, sources.md, SUMMARY.md.
+- **The answer to Chris's question:** partly. The flood was rain, the James was low, and the
+  floodwall's gates were open the whole time. The Bottom is a bowl whose river side (Dock
+  Street, railroad embankments, the wall) is higher than its lowest streets, so water the
+  sewers could not take had to pond. Nothing measures the wall's own share of that.
+- **What this does to the drawing:** the spike's Gaston render (a crisp pool at one chosen
+  level) is the very thing the research warns against. Gaston should be depths at named
+  places and a soft pool, with the gates drawn open.
+- **A test we can run ourselves:** the lowest overland spill route from 17th and Main to the
+  river on the lidar, with and without the wall. Started as step 15.
+- No images at this step.
