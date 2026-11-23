@@ -492,3 +492,18 @@ Folder: `2026-11-22-18-merge-deploy-record/`, holding notes.md and the two check
     decision.
   - The story is published.
 - **Changes page.** Nothing goes on `pages/changes.md`: this is a first release.
+
+## Step 19: the art poster, rough draft (November 23, 08:49-09:30)
+
+Folder: `2026-11-23-19-art-rough/`. Branch `viz/dollar-stores-virginia-art`, off main
+(ecc8917).
+
+- **Chris (08:49 to 08:52).** He asked for the art version and asked how the handoff went out
+  without it.
+- **Answer.** It had no board entry, and the release steps and the handoff prompt covered only
+  the editorial poster.
+- **Fixed.**
+  - A board entry, `viz-dollar-stores-virginia-art`.
+  - A note to the planning session.
+  - The rough draft: all 227 towns and cities as 5 km squares, by region.
+- **Rounds.** Three. The first ran off the sheet and the second had names under 6 pt.

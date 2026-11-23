@@ -9,11 +9,12 @@ unlisted: true
 
 Every piece of work on isoscape, from a first look at a subject to a print for sale, moves through the same stages: rough draft, working draft, final draft and final production. A version number in a print's title block is given only at final production, and names an edition someone could own. Before that, work is counted in draft rounds (d1, d2) and release candidates (rc1, rc2). The rules are in [Changes](changes.md#how-versions-work-from-here) and [How it's made](how-its-made.md#stages-and-inspection).
 
-This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 22, 2026. The page and the board were set up with Claude.
+This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 23, 2026. The page and the board were set up with Claude.
 
 | Stage | Entries |
 |---|---|
 | research | 1 |
+| rough draft | 1 |
 | final production | 47 |
 | published | 1 |
 | in work | 4 |
@@ -24,6 +25,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
+- **Dollar General on the edge of town: every Virginia town (art poster)**: Rough draft r3 in _preview/dollar-stores/art/: all 227 Virginia towns and cities as 5 km squares (gray town, counted roads by traffic, yellow Dollar Generals), by region. Owed since the plan (Chris, Nov 21); it had no board entry until Nov 23. Owner: worth pursuing?
 - **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
@@ -32,6 +34,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Our own transcription of Richmond's 48 HOLC area-description forms, from the public-domain scans | research | — | no |
+
+## Rough draft
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Dollar General on the edge of town: every Virginia town (art poster) | print | — | no |
 
 ## Final production
 

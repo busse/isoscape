@@ -38,3 +38,4 @@ owner's go-ahead to a delivered preview.
 | 2026-11-22 | Final draft: rc1, independent inspection, fix round rc2, recheck; story page; record fixes | 11:31-12:05 | ~35 | rc2 poster and proof; inspection report; pages/dollar-stores.md with figures; sources and findings corrections | owner release approval |
 | 2026-11-22 | Release: 1.0.0 files, page public, main merged in, board ready for merge | 13:04-13:40 | ~35 | branch ready to merge | planning session merge and push; release record for an editorial piece |
 | 2026-11-22 | Merge, deploy, editorial release record (release tools learn not-for-sale pieces) | 18:11-18:45 | ~35 | record.py/check.py --editorial; v1 record; board at final production and published | poster rebuild on the Mac (--data ds=...) |
+| 2026-11-23 | Art poster rough draft (owed since the plan); board entry | 08:49-09:30 | ~40 | art.py; rough r1-r3 | owner: worth pursuing? |

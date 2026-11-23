@@ -1,7 +1,7 @@
 {
  "about": "The production board: one entry per design or piece of work. The scheme is README \"Stages and the board\"; edit it with `tools/release/board.py set`; `board.py check` validates it.",
  "scheme": "README.md#stages-and-the-board",
- "updated": "2026-11-22",
+ "updated": "2026-11-23",
  "sources": "backfilled November 18, 2026 from catalog/plates.json, releases/ (latest record per design) and the storefront (https://chrisbusse.com/products.json: 39 products live). Orders are \"unknown\" until the store's orders.py has been run.",
  "items": {
   "broad-street-1943-01-ay-tower": {
@@ -3439,6 +3439,29 @@
     "2026-11-22: in work -> owner test",
     "2026-11-22: owner approved publishing after two fixes (no cropped pictures; PDF wording for screen instructions); fixes made, back at owner test",
     "2026-11-22: owner test -> live"
+   ]
+  },
+  "viz-dollar-stores-virginia-art": {
+   "title": "Dollar General on the edge of town: every Virginia town (art poster)",
+   "plate": null,
+   "kind": "print",
+   "stage": "rough draft",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 3,
+   "waiting_on": "owner",
+   "decision": "Rough draft r3 in _preview/dollar-stores/art/: all 227 Virginia towns and cities as 5 km squares (gray town, counted roads by traffic, yellow Dollar Generals), by region. Owed since the plan (Chris, Nov 21); it had no board entry until Nov 23. Owner: worth pursuing?",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [
+    "drafts/dollar-stores-virginia/casestudy/2026-11-23-19-art-rough/notes.md"
    ]
   }
  }
