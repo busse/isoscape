@@ -3446,26 +3446,30 @@
    "title": "Seeing the change: a walking guide to Jackson Ward (pocket guide)",
    "plate": null,
    "kind": "story",
-   "stage": "research",
+   "stage": "outline",
    "status": "active",
    "asset_version": null,
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 0,
+   "rounds": 1,
    "waiting_on": "owner",
-   "decision": "Brief approved by the owner on 2026-11-23 (ISOSCAPE-PROMO). Rough draft by the main isoscape session: brief checked against the story, street-named plan map (phone, two halves, letter), seven 1952-and-today pairs, unlisted draft page. Waits on the owner for the questions in rough.md; then the explorer session finishes the page and the PDFs.",
+   "decision": "Working draft d1 (2026-11-23): the owner accepted all eight rough-draft recommendations (Coliseum text-only last stop; stop 5 on Chamberlayne Avenue at West Charity, history only, no position; Gilpin Court parcel outline labeled approximate as Gilpin Court (RRHA public housing); Vance, Axtel and West Charity named; no practical notes beyond the story; by Eggleston Plaza kept, no addresses; no 5th (now Maggie L. Walker Place)). d1: pairs cut from the corrected story scenes (fix/jackson-ward-1952-bridges merged), short in-image labels; overview plus west and east working maps sized for a phone; letter sheet on true US Letter; page restructured; claim list for the independent check. Waits on the owner for the look and on the independent fact check.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
    "branch": "guide/jackson-ward",
    "worktree": "/home/claude/wt-jw-guide",
    "links": [
-    "/mnt/user-data/outputs/guide/jackson-ward/rough.md"
+    "/mnt/user-data/outputs/guide/jackson-ward/rough.md",
+    "/mnt/user-data/outputs/guide/jackson-ward/d1/d1.md"
    ],
    "private": true,
-   "notes": "editorial; no plate, no shop; facts only from the published Jackson Ward story. Image work (the map and pairs) is a rough draft; the story's stages allow research as the entry stage."
+   "notes": "editorial; no plate, no shop; facts only from the published Jackson Ward story. On this board a story working draft sits at outline (the stage after the owner says take it forward, before the fact check); the map and pairs are working draft d1.",
+   "log": [
+    "2026-11-23: research -> outline"
+   ]
   }
  }
 }

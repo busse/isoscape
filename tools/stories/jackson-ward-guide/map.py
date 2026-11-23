@@ -8,11 +8,13 @@ Gilpin Court as a bordered area, the stops, the walk, a north arrow, a scale bar
 Writes pages/jackson-ward-guide-map-<name>.webp for the page (and, with --full, PNGs and the
 letter PDF for review). Renderings:
 
-  phone   the whole walk, tall (about 9:16), for a phone held upright; names that do not fit
-          at this size are left off, and the two halves carry them all
-  west    the west half (stops 3-5, and the cut streets toward Belvidere Street), names in full
-  east    the east half (stops 1, 2 and 6-8), names in full; the halves overlap by about 160 m
-  letter  the whole walk on a US Letter sheet, names in full
+  phone   the overview: the whole walk at 390 px, naming only the walk's main streets, the stops and
+          the places, with the west and east maps' frames dashed on it
+  west    the west working map (stops 3-5, and the cut streets toward Belvidere Street)
+  east    the east working map (stops 1, 2 and 6-8); the two overlap. On both, type is sized for
+          the image shown about 350 px wide on a phone: street names 14 px (none under 13.4 px),
+          1952 names 13.3 px (a second try at 12.6 px before one is left off)
+  letter  the whole walk on a US Letter sheet (8.5 x 11 in, half-inch margins), names in full
 
 Everything is drawn in CSS pixels of the reader's screen (the phone renderings at 390 px wide)
 and saved at three times that, so type sizes here are the sizes a reader sees. Labels are
@@ -195,7 +197,7 @@ class Labeler:
                      linespacing=1.1,
                      path_effects=[pe.withStroke(linewidth=px * 0.72 * 0.28, foreground=C['paper'])] if halo else None)
 
-    def along(self, line, s, px, color, italic=False, bold=False, every=None, z=20, step=None, bend=0.35):
+    def along(self, line, s, px, color, italic=False, bold=False, every=None, z=20, step=None, bend=0.35, toward=None):
         """Place s along a line at the first free spots, each run straight over the label's
         length; with `every` (meters) more than once. Returns how many were placed."""
         w = text_w(s, px, italic, bold) + 4
@@ -206,7 +208,8 @@ class Labeler:
         placed = []
         # start from the middle of the line and work outward
         n = int(line.length // step)
-        order = sorted(range(n + 1), key=lambda i: abs(i * step - line.length / 2))
+        mid = line.project(toward) if toward is not None else line.length / 2
+        order = sorted(range(n + 1), key=lambda i: abs(i * step - mid))
         for i in order:
             d = i * step
             if d - L_m / 2 < 0 or d + L_m / 2 > line.length:
@@ -277,7 +280,7 @@ def plot_lines(ax, pts, color, lw, z, ls='-', cap='round'):
     ax.plot(p[:, 0], p[:, 1], color=color, lw=lw, ls=ls, zorder=z, solid_capstyle=cap, dash_capstyle='butt', solid_joinstyle='round')
 
 
-def draw_map(ax, D, bounds, mpp, route, stops_in, full_labels, px_base):
+def draw_map(ax, D, bounds, mpp, route, stops_in, labels, px_base):
     """Everything inside the map frame. Line widths are in points at the figure's dpi of 100
     CSS px per inch, so 1 pt is 100/72 CSS px."""
     pt = 72 / 100   # CSS px -> points
@@ -340,10 +343,26 @@ def draw_map(ax, D, bounds, mpp, route, stops_in, full_labels, px_base):
         p = np.array(leg)
         ax.plot(p[:, 0], p[:, 1], color=C['route'], lw=3.4 * zoom * pt, zorder=7, alpha=0.9,
                 solid_capstyle='round', solid_joinstyle='round')
+    full_labels = labels == 'full'
+    overview = labels == 'overview'
     lab = Labeler(ax, mpp, bounds, inset=4)
+    if overview:
+        # the working maps' frames, dashed, each named in its corner
+        for tag, nm in HALVES.items():
+            hx0, hx1, hy0, hy1 = RENDERS[nm][0]
+            ax.plot([hx0, hx1, hx1, hx0, hx0], [hy0, hy0, hy1, hy1, hy0], color=C['ink'], lw=1.1 * pt, ls=(0, (4, 2.5)), zorder=8)
+            tx, ty = (hx0 + 4 * mpp, hy1 - 4 * mpp) if nm == 'west' else (hx1 - 4 * mpp, hy1 - 4 * mpp)
+            ha, va = ('left', 'top') if nm == 'west' else ('right', 'top')
+            ax.text(tx, ty, tag, ha=ha, va=va, fontsize=px_base * 0.95 * pt, fontweight=700, zorder=41,
+                    path_effects=[pe.withStroke(linewidth=3, foreground=C['paper'])])
+            w = text_w(tag, px_base * 0.95, bold=True) + 6
+            bx = tx if nm == 'west' else tx - w * mpp
+            by = ty - px_base * 1.4 * mpp
+            lab.reserve(sbox(bx, by, bx + w * mpp, by + px_base * 1.4 * mpp))
     # keep labels off the scale bar and the north arrow (drawn after, at these places)
     sx, sy = x0 + 12 * mpp, y0 + 34 * mpp
-    lab.reserve(sbox(sx - 8 * mpp, sy - 28 * mpp, sx + 200 + 64 * mpp, sy + 26 * mpp))
+    sw_m = max(200 * 1.0 + 60 * mpp, (text_w(f'200 m is about {200 / route["walk_m_per_min"]:.1f} minutes on foot', px_base * 0.85) + 14) * mpp)
+    lab.reserve(sbox(sx - 8 * mpp, sy - 28 * mpp, sx - 6 * mpp + sw_m + 4 * mpp, sy + 26 * mpp))
     lab.reserve(sbox(x1 - 40 * mpp, y1 - 44 * mpp, x1, y1))
     for poly in D['landmarks'].values():     # no street name across a landmark
         lab.reserve(poly)
@@ -372,9 +391,14 @@ def draw_map(ax, D, bounds, mpp, route, stops_in, full_labels, px_base):
 
     def name_street(name, segs):
         ok = 0
-        for size in ((px_base, px_base * 0.88) if name in ROUTE_STREETS else (px_base,)):
+        for size in ((px_base, max(px_base * 0.88, min(px_base, 13.4))) if name in ROUTE_STREETS else (px_base,)):
             for g in sorted(segs, key=lambda g: -g.length):
-                ok += lab.along(g, short(name), size, C['ink'], every=520 if full_labels else 900)
+                near = None
+                if full_labels and name in ROUTE_STREETS:
+                    pts = [Point(*st['xy']) for st in route['stops']]
+                    best = min(pts, key=lambda q: g.distance(q))
+                    near = best if g.distance(best) < 120 else None
+                ok += lab.along(g, short(name), size, C['ink'], every=520 if full_labels else 900, toward=near)
                 if ok and not full_labels:
                     break
             if ok:
@@ -382,7 +406,7 @@ def draw_map(ax, D, bounds, mpp, route, stops_in, full_labels, px_base):
         if not ok and name in ROUTE_STREETS:
             g = max(segs, key=lambda g: g.length)
             c = g.interpolate(0.5, normalized=True)
-            ok = lab.near(c.x, c.y, short(name), px_base * 0.92, C['ink'], reach=(10, 40))
+            ok = lab.near(c.x, c.y, short(name), max(px_base * 0.92, min(px_base, 13.4)), C['ink'], reach=(10, 40))
             if ok:
                 return
         if not ok:
@@ -390,7 +414,8 @@ def draw_map(ax, D, bounds, mpp, route, stops_in, full_labels, px_base):
     lm = D['landmarks']
     if 297832917 in lm:
         c = lm[297832917].centroid
-        lab.near(c.x, c.y, 'Sixth Mount Zion\nBaptist Church', px_base, C['ink'], bold=True, reach=(14, 130), leader=True, prefer=-math.pi / 2)
+        if not overview:
+            lab.near(c.x, c.y, 'Sixth Mount Zion\nBaptist Church', px_base, C['ink'], bold=True, reach=(14, 130), leader=True, prefer=-math.pi / 2)
     if 321367756 in lm and lm[321367756].centroid.within(sbox(x0, y0, x1, y1)):
         c = lm[321367756].centroid
         lab.near(c.x, c.y, 'Richmond Coliseum', px_base, C['ink'], bold=True, reach=(10, 80), prefer=math.pi, leader=True)
@@ -401,9 +426,6 @@ def draw_map(ax, D, bounds, mpp, route, stops_in, full_labels, px_base):
         # prefer the area's own middle, away from the stop at its west edge
         cx, cy = (gb.centroid.x, gb.centroid.y) if gb.contains(gb.centroid) else (p.x, p.y)
         lab.near(cx, cy, 'Gilpin Court\n(RRHA public housing)', px_base * 1.05, C['ink'], bold=True, reach=(0, 120))
-    for _, _, name, segs in names:
-        if name in ROUTE_STREETS:
-            name_street(name, segs)
     # JXN Haus: on Bates Street (the story); OSM does not map it, so it is named along the street
     bates = [L for L, k in D['named'].get('East Bates Street', [])]
     # the highway's name, in the trench
@@ -414,9 +436,12 @@ def draw_map(ax, D, bounds, mpp, route, stops_in, full_labels, px_base):
         if spine is not None:
             if not lab.along(spine, 'I-95 / I-64', px_base * 1.05, C['ink'], bold=True, every=650 if full_labels else None, bend=1.2):
                 lab.dropped.append('I-95 / I-64')
+    for _, _, name, segs in names:
+        if name in (OVERVIEW_STREETS if overview else ROUTE_STREETS):
+            name_street(name, segs)
     # the 1952 streets: their labels in italic dark red, along the stretch if it fits, or beside it
     for name, L, joined in sorted(D['lost'], key=lambda t: -t[1].length):
-        if joined:      # the seven stretches joining a street that survives: today's name stands for them
+        if joined or overview:      # the seven stretches joining a street that survives: today's name stands for them
             continue
         if not L.intersects(view):
             continue
@@ -424,12 +449,16 @@ def draw_map(ax, D, bounds, mpp, route, stops_in, full_labels, px_base):
         if lab.along(L, s, px_base * 0.95, C['lost'], italic=True, step=4):
             continue
         c = L.interpolate(0.5, normalized=True)
-        if not lab.near(c.x, c.y, s, px_base * 0.95, C['lost'], italic=True, reach=(8, 110 if full_labels else 30), leader=True):
+        if lab.near(c.x, c.y, s, px_base * 0.95, C['lost'], italic=True, reach=(8, 110 if full_labels else 30), leader=True):
+            continue
+        lab.dropped.pop()
+        # a second try, a little smaller and further off, with a leader, before leaving it off
+        if not lab.near(c.x, c.y, s, max(px_base * 0.88, min(px_base, 12.6)), C['lost'], italic=True, reach=(8, 160 if full_labels else 30), leader=True):
             lab.dropped[-1] = '(1952) ' + s
     for _, _, name, segs in names:
-        if name not in ROUTE_STREETS:
+        if name not in ROUTE_STREETS and not overview:
             name_street(name, segs)
-    if bates:
+    if bates and not overview:
         geo = linemerge(MultiLineString(bates))
         geo = max(getattr(geo, 'geoms', [geo]), key=lambda g: g.length)
         mid = geo.interpolate(0.5, normalized=True)
@@ -475,7 +504,7 @@ def scale_bar(ax, x, y, mpp, px_base, walk):
     m_len, ft_len = 200, 500
     ftm = ft_len * 0.3048
     tick = 4 * mpp
-    ax.add_patch(plt.Rectangle((x - 6 * mpp, y - 26 * mpp), (m_len + 16 * mpp) if False else max(m_len, ftm) + 60 * mpp, 50 * mpp,
+    ax.add_patch(plt.Rectangle((x - 6 * mpp, y - 26 * mpp), max(max(m_len, ftm) + 60 * mpp, (text_w(f'200 m is about {200 / walk:.1f} minutes on foot', px_base * 0.85) + 14) * mpp), 50 * mpp,
                                fc=C['paper'], ec='none', alpha=0.85, zorder=39))
     ax.plot([x, x + m_len], [y, y], color=C['ink'], lw=1.6 * pt * 1.4, zorder=40, solid_capstyle='butt')
     for t in (0, 100, 200):
@@ -501,7 +530,16 @@ def key_and_credits(fig, rect, px_base, route, which, dropped_note):
     fy = lambda px: px / Hh  # noqa: E731
     y = 1 - fy(6)
     row = px_base * 1.7
+    compact = which != 'letter'
     items = [
+        ('street', 'Streets today, named upright'),
+        ('bridge', 'A street on a bridge over the highway'),
+        ('lost', '1952 streets the trench cut, dashed, named in italic'),
+        ('highway', 'I-95 / I-64 today'),
+        ('gilpin', 'Gilpin Court (RRHA public housing), outline approximate'),
+        ('route', f'The walk: {route["total_m"] / 1000:.1f} km ({route["total_m"] / 1609.34:.1f} mi), about {round(route["total_m"] / route["walk_m_per_min"] / 5) * 5} min'),
+        ('stop', 'A stop: where to stand'),
+    ] if compact else [
         ('street', 'Streets today, named upright (OpenStreetMap)'),
         ('bridge', 'A street on a bridge over the highway today'),
         ('lost', '1952 streets the trench cut: dashed, named in italic (Sanborn maps, 1952, as traced for the story)'),
@@ -513,7 +551,7 @@ def key_and_credits(fig, rect, px_base, route, which, dropped_note):
     ]
     sw = fx(30)
     import textwrap
-    cols = 2 if W > 600 else 1
+    cols = 2 if W > 600 and not compact else 1
     colw = W / cols
     tchars = int((colw - 46) / (px_base * 0.92 * 0.53))
     ytop, ys = y, []
@@ -553,7 +591,10 @@ def key_and_credits(fig, rect, px_base, route, which, dropped_note):
     credit = ('Streets, bridges, highway, landmarks: © OpenStreetMap contributors (ODbL). 1952 streets: Sanborn Fire Insurance Map, Richmond, 1952, '
               'vol. 3, Library of Congress (public domain), read off the sheets for the Jackson Ward story; seven stretches joined across the trench as '
               'the USGS Richmond map of 1933–34 shows them. Gilpin Court outline: City of Richmond parcel records (RRHA multi-family parcels), approximate. '
-              f'Walking time at about {route["walk_m_per_min"]} m a minute. Drawn by Chris Busse with isoscape, built with Claude. Draft, November 2026.')
+              f'Walking time at about {route["walk_m_per_min"]} m a minute. Drawn by Chris Busse with isoscape, built with Claude.')
+    if compact:
+        credit = ('© OpenStreetMap contributors (ODbL). 1952 streets: Sanborn map, Richmond, 1952, vol. 3, Library of Congress, as traced for the '
+                  'Jackson Ward story. Gilpin Court: City of Richmond parcel records, approximate. Drawn by Chris Busse with isoscape, built with Claude.')
     if dropped_note:
         credit = dropped_note + ' ' + credit
     import textwrap
@@ -578,12 +619,19 @@ def key_and_credits(fig, rect, px_base, route, which, dropped_note):
 
 
 RENDERS = {
-    # name: (bounds x0, x1, y0, y1 in plan meters, width in CSS px, base type size px, full labels, title)
-    'phone': ((-780, 680, -745, 520), 390, 10.5, False, 'Seeing the change: a walk in Jackson Ward'),
-    'west': ((-780, 40, -150, 520), 390, 11, True, 'West half: stops 3 to 5, and the Belvidere end'),
-    'east': ((-120, 680, -745, 250), 390, 11, True, 'East half: stops 1, 2 and 6 to 8'),
-    'letter': ((-780, 680, -745, 520), 765, 8.6, True, 'Seeing the change: a walk in Jackson Ward, Richmond, Virginia'),
+    # name: (bounds x0, x1, y0, y1 in plan meters, width in CSS px, base type size px, labels, title)
+    # labels: 'overview' names only the walk's main streets, the stops and the places, and outlines
+    # the two working maps; 'full' names every street and every 1952 stretch.
+    'phone': ((-780, 680, -745, 520), 390, 13.5, 'overview', 'The whole walk'),
+    'west': ((-770, 10, -160, 470), 390, 14, 'full', 'West map: stops 3, 4 and 5'),
+    'east': ((-110, 640, -800, 250), 390, 14, 'full', 'East map: stops 1, 2, 6, 7 and 8'),
+    'letter': ((-780, 680, -745, 520), 850, 9.5, 'full', 'Seeing the change: a walk in Jackson Ward, Richmond, Virginia'),
 }
+# The working maps' frames, outlined on the overview so a reader knows which to open.
+HALVES = {'West map': 'west', 'East map': 'east'}
+# The overview names only these (the walk's spine), so it stays legible at 390 px.
+OVERVIEW_STREETS = ['North 2nd Street', 'East Leigh Street', 'Chamberlayne Parkway', 'North 1st Street', 'West Baker Street',
+                    'West Duval Street', 'Chamberlayne Avenue']
 
 
 def render(name, out_full, rnd):
@@ -594,10 +642,10 @@ def render(name, out_full, rnd):
     D = gather(bounds)
     route = load('route.json')
     head = px * 3.6
-    keyh = px * 1.7 * 8 + px * 1.25 * (5 if W < 500 else 0) + px * 0.8 * 1.3 * (10 if W < 500 else 5) + 30
+    keyh = px * 1.7 * 7 + px * 1.25 * 3 + px * 0.8 * 1.3 * 5 + 28
     if name == 'letter':
         H = W * 11 / 8.5
-        margin = 36
+        margin = 50     # half an inch at 100 CSS px to the inch: the sheet is 8.5 x 11 in
         key_need = px * 1.25 * 2 * 4 + px * 0.45 * 4 + px * 0.8 * 1.3 * 5 + 24
         avail = H - 2 * margin - head - key_need
         mpp = max((x1 - x0) / (W - 2 * margin), (y1 - y0) / avail)
@@ -623,9 +671,9 @@ def render(name, out_full, rnd):
     scale_bar(ax, sx, y0 + 34 * mpp, mpp, px, route['walk_m_per_min'])
     fig.text(title_x, title_y, title, fontsize=px * 1.35 * 0.72, fontweight=700, va='top', ha='left')
     sub = ('North is up. Numbers are the stops, in walking order.' if name in ('phone', 'letter') else
-           'North is up. The two halves overlap; together they name every street.')
+           'North is up. The west and east maps overlap.')
     fig.text(title_x, title_y - px * 1.75 / H, sub, fontsize=px * 0.92 * 0.72, va='top', ha='left', color=C['muted'])
-    note = 'Some names are left off at this size; the west and east halves name every street.' if name == 'phone' else ''
+    note = 'The dashed frames are the west and east maps, which name more streets.' if name == 'phone' else ''
     key_and_credits(fig, key_rect, px, route, name, note)
     base = f'jackson-ward-guide-map-{name}'
     os.makedirs(os.path.join(ROOT, 'out/stories/jackson-ward-guide'), exist_ok=True)

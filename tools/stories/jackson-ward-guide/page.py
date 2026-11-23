@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Write the Jackson Ward guide's page, pages/jackson-ward-guide.md, from its source here
-(story.md). A draft: the page is unlisted and goes in no menu.
+(story.md). The page is unlisted and goes in no menu.
 
     python3 tools/stories/jackson-ward-guide/page.py [--date "November 23, 2026"]
 
@@ -22,14 +22,14 @@ import re
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..'))
 
-# Caption notes a pair carries, by stop key, each from the story (its captions and "How we know").
+# Every pair's caption says where its 1952 ground is an estimate, as the story says it (its
+# captions and "The ground before the trench"); some add a note of their own, also from the story.
+GROUND = ("Where the trench is now, the 1952 ground is an estimate, about ±2 m in its middle and "
+          "3 to 4 m or more at its ends.")
 NOTES = {
-    'second-trench': 'Inside today\'s trench the 1952 ground is an estimate, about ±2 m in its middle.',
-    'sixth-mount-zion': 'Inside today\'s trench the 1952 ground is an estimate.',
-    'chamberlayne-bridge': 'Inside today\'s trench the 1952 ground is an estimate; at its ends the error may be 3 to 4 m or more.',
     'gilpin-edge': 'In 1952 Gilpin Court is drawn in the sheet\'s own colors, green and blue, though the sheet labels its buildings brick-faced.',
-    'bates-street': 'Hatched blocks are where no building was traced from the 1952 sheets; only buildings standing today are drawn there, and the picture should not be read as showing those blocks empty.',
-    'first-bridge': 'Inside today\'s trench the 1952 ground is an estimate. Hatched blocks are where no building was traced.',
+    'bates-street': 'Hatched blocks are where no building was traced from the 1952 sheets; only buildings standing today are drawn there, so the picture does not show those blocks as they were.',
+    'first-bridge': 'Hatched blocks are where no building was traced from the 1952 sheets.',
 }
 
 
@@ -56,7 +56,7 @@ def main():
             tokens[f'pair_{n}'] = (
                 '::: figure\n'
                 f'![Stop {n}, {st["title"]}, drawn from the south: the same blocks in 1952 (top) and today (bottom), with the stop\'s number where you stand]({p["file"]})\n\n'
-                f'Stop {n} in 1952 (top) and today (bottom), seen from the south. The number is where you stand. {note}'.rstrip() + '\n:::')
+                f'{st["title"]}, stop {n}: 1952 above, today below, seen from the south. The numbered disc is where you stand. {GROUND} {note}'.rstrip() + '\n:::')
         else:
             tokens[f'pair_{n}'] = f'*No 1952-and-today picture for this stop.* {p["why"]}'
     # the sources the guide cites, as the story lists them
@@ -79,6 +79,7 @@ def main():
     assert '{{' not in text, 'an unfilled {{token}} is left in story.md: ' + re.search(r'\{\{[^}]+\}\}', text).group(0)
     # the guide's own copy rules
     assert '—' not in text, 'an em dash'
+    assert not re.search(r'\bdraft\b', re.sub(r'a draft\s+agreement', '', text.split('## Sources')[0]), re.I), 'draft wording on the page'
     assert not re.search(r'\bby hand\b|hand-drawn', text, re.I)
     open(os.path.join(ROOT, 'pages/jackson-ward-guide.md'), 'w').write(text)
     print('wrote pages/jackson-ward-guide.md;', len(cited), 'sources cited')

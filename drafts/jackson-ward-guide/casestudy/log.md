@@ -75,3 +75,44 @@ Folder: `2026-11-23-04-page/`.
 - Round 1 screenshots (`page-390`, `page-1440`): pair labels unreadable on a phone; "1300.0 feet".
   Round 2: fixed. Round 3: the whole-walk map moved into the text column on desktop.
 - Questions for Chris: `rough-questions-for-chris.md` (his answers to be added here).
+
+## Chris's answers to the rough draft (November 23, 2026)
+
+All eight recommendations accepted: the Coliseum stays as the text-only last stop; stop 5 stays on
+the west sidewalk of Chamberlayne Avenue at West Charity Street, its text about the place's
+history and taking no position; Gilpin Court keeps the parcel outline, labeled approximate, as
+"Gilpin Court (RRHA public housing)"; Vance, Axtel and West Charity Streets are named as the trace
+has them; no practical notes the story does not support; "by Eggleston Plaza" stays as a place to
+stand, with no addresses; the guide leaves out "5th (now Maggie L. Walker Place)".
+
+## Step 5: working draft d1 (November 23, 2026, 10:10-10:30)
+
+Folder: `2026-11-23-05-d1/`. Every rendering kept there is one that was looked at.
+
+- First, the story's fault the rough draft found (today's Belvidere Street extension and its
+  bridges drawn in 1925 and 1952) was fixed on its own branch, `fix/jackson-ward-1952-bridges`
+  (see `drafts/jackson-ward/casestudy/`), and merged here, so the pairs are cut from the
+  corrected scenes. Stop 5's 1952 half no longer shows the bridges (`pairs-r4-stop-5.jpg`).
+- Pairs, round 4: each half labeled in a paper band with the stop's number, the year large and a
+  short place name ("1952 · Chamberlayne Ave. at Charity St."), sized for 350 px on a phone and
+  checked to fit; the full title and the ground-estimate note moved to the caption. Looked at
+  stop 5 and 2 full size and all seven at 350 px. Stop 2's 1952 half still shows a later street
+  line through houses (the Navy Hill realignments listed in the story fix); left for the
+  planning session.
+- Maps, rounds 14-24: the overview names only the walk's spine and frames the two working maps;
+  the working maps were made taller (the west map's south edge moved 90 m, the east map's
+  110 m, so the scale bar no longer covers Chamberlayne Parkway's name or the Coliseum) and their
+  type raised to 14 px for a 350 px display; 1952 names are placed after the walk's own streets,
+  with the walk's streets labeled near their stops so the Belvidere cluster keeps every 1952 name;
+  the scale bar's box is now kept free of labels. The letter sheet is now a true US Letter page
+  (8.5 x 11 in) with half-inch margins; before, the PDF was 7.65 x 9.9 in.
+- Dead end: placing every 1952 name before the walk's streets (round 20) lost Chamberlayne
+  Avenue at stop 5 and East and West Duval Streets; reverted to walk streets first, placed toward
+  their stops (round 21).
+- Page: overview and "How to use this guide" first; the east map before stop 1, the west map
+  before stop 3; each stop gives its map, its pair, where to stand and what to look at, then the
+  story's sentences. "Who keeps the ward's history" is quoted from the story as it stands. The
+  draft line is gone. Screenshots at 390 and 1440 px (headless Chrome, sandbox on, file:// only,
+  network names unresolvable).
+- Claim list: `claims.csv` (128 sentences, each with the story sentence it comes from and its
+  source, or marked as the guide's own wayfinding or picture notes) for the independent check.

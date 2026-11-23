@@ -31,7 +31,17 @@ from PIL import Image, ImageDraw  # noqa: E402
 BOX_W, BOX_H = 560, 330     # SVG units (2 per meter): about 280 m across
 AHEAD = 40                  # units: the box's center sits this far up the picture from the stop
 Z = 1200 / BOX_W            # raster zoom, so each half is 1200 px wide
-SCENES = (('s1952', '1952'), ('s2026', 'today'))
+SCENES = (('s1952', '1952'), ('s2026', 'Today'))
+# The short place name each half carries in its label; the stop's full title goes in the caption.
+PLACE = {
+    'second-leigh': 'Second St. at Leigh St.',
+    'second-trench': 'Second St. at Duval St.',
+    'sixth-mount-zion': 'Sixth Mount Zion',
+    'chamberlayne-bridge': 'Chamberlayne Pkwy. bridge',
+    'gilpin-edge': 'Chamberlayne Ave. at Charity St.',
+    'bates-street': 'Second St. at Bates St.',
+    'first-bridge': 'North 1st St. bridge',
+}
 UNTRACED = 'No buildings traced here:\nonly those standing today\nare drawn'
 # Stops with no pair, and why (said in route.json's stop and on the page).
 NO_PAIR = {
@@ -73,6 +83,33 @@ def marker(im, px, py, n, scale):
     d.text((px - tw / 2, py - th / 2 - round(2 * scale)), str(n), fill=views.PAPER, font=f)
 
 
+def label(im, n, year, place):
+    """The half's label, in a paper band across its top: the stop's number in a disc, the year
+    large, then the short place name. Sized for the pair shown about 350 px wide on a phone
+    (the image is 1200 px), so the year reads at about 25 px and the place at 15 px or more;
+    the place is made smaller only to fit, never under 13 px on the phone, and never cut."""
+    d = ImageDraw.Draw(im)
+    pad, yr = 18, 84
+    fy = views.font(yr)
+    r = 34
+    ps = 52
+    room = im.width - (pad + 2 * r + 16 + d.textlength(year, font=fy) + 22 + pad)
+    while ps > 44 and d.textlength(place, font=views.font(ps, bold=False)) > room:
+        ps -= 2
+    fp = views.font(ps, bold=False)
+    assert d.textlength(place, font=fp) <= room, f'label does not fit: {place}'
+    band = yr + 2 * pad - 6
+    d.rectangle((0, 0, im.width, band), fill=views.PAPER)
+    cx, cy = pad + r, band / 2
+    d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=views.INK)
+    d.text((cx, cy), str(n), fill=views.PAPER, font=views.font(44), anchor='mm')
+    x = pad + 2 * r + 16
+    d.text((x, cy), year, fill=views.INK, font=fy, anchor='lm')
+    x += d.textlength(year, font=fy) + 22
+    d.text((x, cy + 4), place, fill=views.INK, font=fp, anchor='lm')
+    return band
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--work', default='/tmp/jw-views')
@@ -93,7 +130,7 @@ def main():
             im = full(a.work, scene).crop(
                 (round((box[0] + off[0]) * Z), round((box[1] + off[1]) * Z), round((box[0] + off[0] + BOX_W) * Z), round((box[1] + off[1] + BOX_H) * Z)))
             marker(im, (sx - box[0]) * Z, (sy - box[1]) * Z, st['n'], im.width / 1200)
-            views.corner_label(im, f'{word}: {st["title"]}', scale=im.width / 1000)
+            label(im, st['n'], word, PLACE[st['key']])
             halves.append(im)
         gap = round(halves[0].width / 120)
         out = Image.new('RGB', (halves[0].width, sum(h.height for h in halves) + gap), views.PAPER)

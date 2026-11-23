@@ -1,6 +1,6 @@
 ---
 title: Seeing the change, a walking guide to Jackson Ward, Richmond, VA
-deck: A walk of about two miles in Jackson Ward, Richmond, Virginia, with eight stops on public sidewalks, a map with today's street names and the streets the I-95 trench cut, and each place in 1952 and today.
+deck: Eight stops on a walk of about two miles, each place in 1952 and today.
 order: 61
 summary: A pocket guide to Jackson Ward in Richmond, Virginia: a street-named map, eight stops on public sidewalks, and each place in 1952 and today, drawn from the published Jackson Ward story.
 unlisted: true
@@ -10,49 +10,46 @@ images: link
 
 # Seeing the change: a walking guide to Jackson Ward
 
+## How to use this guide
+
+The walk has eight stops and is {{km}} km ({{miles}} miles), about {{minutes}} minutes on foot at
+about {{pace}} m a minute, not counting time at the stops. Every stop is on a public sidewalk or
+street. It starts at Second and Leigh Streets and ends beside the Coliseum, {{back_m}} m
+({{back_ft}} feet) from where it began.
+
+::: figure
+![The whole walk, north up: eight numbered stops along a green line from Second and Leigh Streets to the Coliseum, the I-95 trench in gray, Gilpin Court as a bordered area, and two dashed frames marking the west and east maps](jackson-ward-guide-map-phone.webp)
+
+The whole walk, north up. The dashed frames are the west and east maps further down, which name
+more streets. *How this was made:* drawn in code from OpenStreetMap, the 1952 street lines the
+[story](jackson-ward.md#the-streets-the-highway-cut) read off the Sanborn sheets, and City of
+Richmond parcel records for Gilpin Court's outline, which is approximate.
+:::
+
+Each stop says which map it is on, where to stand and what you are looking at. Its picture shows
+the same few blocks in 1952 and today, seen from the south as if from a low airplane. The numbered
+disc in the picture is where you stand. On the maps, dashed streets named in italic are streets of
+1952 that the highway's trench cut.
+
 > **About this guide.** Chris Busse, a Richmond artist, made this guide with Claude. Every fact
 > in it comes from the page [Jackson Ward, Richmond, VA, before I-95, block by
 > block](jackson-ward.md), with that page's sources. The map is drawn from OpenStreetMap, the
 > Sanborn fire-insurance maps of 1952 at the Library of Congress, and City of Richmond parcel
 > records. Corrections are welcome through the [contact page](#/about/contact).
 
-**Draft, {{date}}. Not yet published.**
-
-## How to use this guide
-
-The walk is {{km}} km ({{miles}} miles) and takes about {{minutes}} minutes on foot at about {{pace}} m a
-minute, not counting time at the stops. Every stop is on a public sidewalk or street. It starts at Second and Leigh
-Streets and ends beside the Coliseum, {{back_m}} m ({{back_ft}} feet) from where it began.
-
-Each stop says where to stand and what you are looking at. Its picture shows the same few blocks
-in 1952 and today, seen from the south as if from a low airplane. The number on the picture is
-where you stand.
-
-The map's dashed streets, named in italic, are streets of 1952 that the highway's trench cut.
-The whole-walk map leaves some names off; the west and east halves name every street.
+Stops 1 and 2 are on the east map.
 
 ::: figure
-![A plan of Jackson Ward, north up, with the eight stops numbered in walking order along a green line from Second and Leigh Streets to the Coliseum; today's streets named in gray, the 1952 streets the I-95 trench cut dashed and named in dark red italic, the highway in gray, and Gilpin Court as a bordered area](jackson-ward-guide-map-phone.webp)
+![The east map, north up: stops 1, 2 and 6 to 8, Second Street, the North 1st Street bridge, Bates Street and the Coliseum, with Cave, Paradise, Cottage and Gilbert Alleys among the cut streets dashed in italic](jackson-ward-guide-map-east.webp)
 
-The whole walk, north up. Numbers are the stops, in walking order. *How this was made:* drawn in
-code from OpenStreetMap (today's streets, bridges, highway and landmarks), the 1952 street lines
-the [story](jackson-ward.md#the-streets-the-highway-cut) read off the Sanborn sheets, and City of
-Richmond parcel records for Gilpin Court's outline, which is approximate.
-:::
-
-::: figure
-![The west half of the map: stops 3 to 5, Chamberlayne Parkway, Gilpin Court, and the cut streets toward Belvidere Street, among them Moore, Gilmer, Munford, Shooks and Calhoun Streets](jackson-ward-guide-map-west.webp)
-
-The west half: stops 3 to 5, and the cut streets toward Belvidere Street.
-:::
-
-::: figure
-![The east half of the map: stops 1, 2 and 6 to 8, Second Street, the North 1st Street bridge, Bates Street and the Coliseum, with Cave, Paradise, Cottage and Gilbert Alleys among the cut streets](jackson-ward-guide-map-east.webp)
-
-The east half: stops 1, 2 and 6 to 8.
+The east map: stops 1, 2, 6, 7 and 8.
 :::
 
 ## 1. Second Street at Leigh Street
+
+*East map.*
+
+{{pair_1}}
 
 **Stand** {{where_1}}. **Look** {{sees_1}}.
 
@@ -64,9 +61,11 @@ The 1925 Sanborn sheet's Miller Hotel stood at the corner of 2nd and Leigh. Neve
 Sr. leased it in 1939, bought it in 1942 and renamed it the Hotel Eggleston; it was demolished in
 2009 after a partial collapse [[UVA, Green Book project](#sources)].
 
-{{pair_1}}
-
 ## 2. Where Second Street stops
+
+*East map.*
+
+{{pair_2}}
 
 **Stand** {{where_2}}. **Look** {{sees_2}}.
 
@@ -79,9 +78,19 @@ carries I-95 and, through the ward, I-64 as well [[Feasibility Study 2022](#sour
 Under the highway the U.S. Geological Survey's lidar shows the trench about 80–100 m wide and 3
 to 6.5 m deep under the old cross streets [[the story](jackson-ward.md#the-ground-before-the-trench)].
 
-{{pair_2}}
+Stops 3, 4 and 5 are on the west map.
+
+::: figure
+![The west map, north up: stops 3, 4 and 5, Chamberlayne Parkway, Gilpin Court, and the cut streets toward Belvidere Street dashed in italic, among them Moore, Gilmer, Munford, Vance, Axtel, Shooks and Calhoun Streets](jackson-ward-guide-map-west.webp)
+
+The west map: stops 3, 4 and 5.
+:::
 
 ## 3. Sixth Mount Zion Baptist Church
+
+*West map.*
+
+{{pair_3}}
 
 **Stand** {{where_3}}. **Look** {{sees_3}}.
 
@@ -94,9 +103,11 @@ Sr., with saving it, and notes that the interstate swings around it [[DHR 127-04
 Wikipedia, citing Benjamin Campbell, says the road was rerouted slightly [[Campbell
 2012](#sources), via Wikipedia].
 
-{{pair_3}}
-
 ## 4. Chamberlayne Parkway bridge
+
+*West map.*
+
+{{pair_4}}
 
 **Stand** {{where_4}}. **Look** {{sees_4}}.
 
@@ -104,15 +115,17 @@ The trench is up to about 8 m deep between Brook Road and Chamberlayne Parkway [
 story](jackson-ward.md#the-ground-before-the-trench)].
 
 A cap or lid over the highway is being studied. The 2022 feasibility study found it would be
-"technically possible" to build one in a study area from the Belvidere Street bridge to the North
+"technically possible" to build a bridge or lid in a study area from the Belvidere Street bridge to the North
 1st Street bridge, and found four of its six areas feasible, from Chamberlayne Parkway to North
 1st Street [[Feasibility Study 2022](#sources), §3.2.4; [Fact sheet 2023](#sources)]. People in
 and around the ward hold a range of views on the cap, as Elizabeth McGowan reported in July 2024
 [[VCIJ 2024](#sources)]. This guide takes no position on it.
 
-{{pair_4}}
-
 ## 5. Gilpin Court, where Apostle Town stood
+
+*West map.*
+
+{{pair_5}}
 
 **Stand** {{where_5}}. **Look** {{sees_5}}.
 
@@ -127,9 +140,13 @@ agreement between the city and the Richmond Redevelopment and Housing Authority 
 one-for-one replacement of all 781 units [[Gilpin Court MOU 2026](#sources)]. This guide takes no
 position on the plan.
 
-{{pair_5}}
+Stops 6, 7 and 8 are back on the [east map](#how-to-use-this-guide).
 
 ## 6. Bates Street and the JXN Haus
+
+*East map.*
+
+{{pair_6}}
 
 **Stand** {{where_6}}. **Look** {{sees_6}}.
 
@@ -142,9 +159,11 @@ as a reconstruction of the original. It opened on Bates Street in April 2026 wit
 the project's headquarters [[The Richmonder, April 2026](#sources); [Richmond Magazine, May
 2026](#sources)].
 
-{{pair_6}}
-
 ## 7. North 1st Street bridge
+
+*East map.*
+
+{{pair_7}}
 
 **Stand** {{where_7}}. **Look** {{sees_7}}.
 
@@ -158,9 +177,11 @@ East of about 3rd Street, north of Leigh, the corridor runs through Navy Hill [[
 story](jackson-ward.md#how-many-buildings-stood-in-the-highways-path)]. Published counts of what
 the road destroyed differ, and the story sets them side by side.
 
-{{pair_7}}
-
 ## 8. The Coliseum site
+
+*East map.*
+
+{{pair_8}}
 
 **Stand** {{where_8}}. **Look** {{sees_8}}.
 
@@ -170,17 +191,17 @@ photograph shows it under construction on December 30, 1968 [[WVTF 2016](#source
 19, 2026, it still stood, and the city was aiming to demolish it by the end of 2027 [[WWBT,
 November 2026](#sources)].
 
-{{pair_8}}
-
 ## Who keeps the ward's history
 
-The ward's history is kept by its own people and institutions, among them the
-[Historic Jackson Ward Association](https://www.hjwa.org/), the [Black History Museum & Cultural
-Center of Virginia](https://blackhistorymuseum.org/), the [JXN Project](https://www.thejxnproject.org/),
-the [Maggie L. Walker National Historic Site](https://www.nps.gov/mawa/), Sixth Mount Zion Baptist
-Church, Ebenezer Baptist Church, the Gilpin Court Tenant Council and Gilpin Informed Residents.
-The story this guide is drawn from does not draw on their collections, apart from Ebenezer's
-published church history; readers should go to them.
+As the [story](jackson-ward.md#who-keeps-the-wards-history) has it:
+
+> The ward's history is kept by its own people and institutions, among them the
+> [Historic Jackson Ward Association](https://www.hjwa.org/), the [Black History Museum & Cultural
+> Center of Virginia](https://blackhistorymuseum.org/), the [JXN Project](https://www.thejxnproject.org/),
+> the [Maggie L. Walker National Historic Site](https://www.nps.gov/mawa/), Sixth Mount Zion Baptist
+> Church, Ebenezer Baptist Church, the Gilpin Court Tenant Council and Gilpin Informed Residents.
+> This page does not draw on their collections, apart from Ebenezer's published church history;
+> readers should go to them.
 
 ## How the pictures were made
 
