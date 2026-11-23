@@ -422,7 +422,7 @@ Today: the same corridor, with the bridges that now carry the surviving streets 
 :::
 
 Seven streets that ran through at street level now end at the trench or cross it on a bridge:
-Chamberlayne Parkway, St. James, 1st, 2nd, Duval, 5th (now Maggie L. Walker Place) and 7th.
+Chamberlayne Parkway, St. James, 1st, 2nd, Duval, 5th and 7th.
 
 Inside the corridor the 1952 sheets print 24 more stretches of 22 streets and alleys, 2,275 m in
 all, where no street runs today [[LoC, Sanborn 1952 vol. 3](#sources)]. Among them are:
@@ -839,6 +839,7 @@ Opened while the page was drafted and checked, on the date given.
 - **Berkeley Union List**: University of California, Berkeley, Earth Sciences & Map Library, Union List of Sanborn & Other Fire Insurance Maps, Virginia (Richmond v. 3: 1925; 1943 revision). Opened November 22, 2026. [lib.berkeley.edu](https://www.lib.berkeley.edu/EART/sanbul_VA_P.html)
 - **Campbell 2012**: Benjamin Campbell, *Richmond's Unhealed History* (Brandylane, 2012), pp. 152, 154, as cited by Wikipedia, "Jackson Ward." The book has not been seen. [en.wikipedia.org/wiki/Jackson_Ward](https://en.wikipedia.org/wiki/Jackson_Ward)
 - **City of Richmond**: Reconnect Jackson Ward page. Opened November 18, 2026. [rva.gov](https://www.rva.gov/planning-development-review/reconnect-jackson-ward)
+- **City of Richmond, centerlines**: City of Richmond, street centerlines (GIS layer), the records for N 5th St and Maggie L Walker Pl. Opened November 23, 2026. [services1.arcgis.com](https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Centerlines/FeatureServer/32)
 - **Community Plan 2026**: City of Richmond, Jackson Ward Community Plan, edited July 2026. Opened November 18 and 22, 2026. [rva.gov (PDF)](https://rva.gov/sites/default/files/2026-07/20260716_Jackson%20Ward%20Community%20Plan_editedJuly2026.pdf)
 - **DHR 127-0237**: Virginia Department of Historic Resources, Jackson Ward Historic District. Opened November 18, 2026. [dhr.virginia.gov](https://www.dhr.virginia.gov/historic-registers/127-0237/)
 - **DHR 127-0472**: Virginia Department of Historic Resources, Sixth Mount Zion Baptist Church, register page and National Register nomination (1996). Opened November 22, 2026. [dhr.virginia.gov](https://www.dhr.virginia.gov/historic-registers/127-0472/); [nomination (PDF)](https://www.dhr.virginia.gov/wp-content/uploads/2018/04/127-0472_Sixth_Mount_Zion_Church_1996_Final_Nomination.pdf)
@@ -860,6 +861,7 @@ Opened while the page was drafted and checked, on the date given.
 - **LVA Document Bank**: Library of Virginia, "Urban Renewal in Virginia." Opened November 18, 2026. [lva.virginia.gov](https://www.lva.virginia.gov/collections/educator-resources/dbva/items/show/300)
 - **LVA, House to Highway**: Library of Virginia and the JXN Project, *House to Highway: Reclaiming a Community History*, on view July 14, 2025, to February 28, 2026. Opened November 18 and 22, 2026. [lva.virginia.gov](https://www.lva.virginia.gov/events/exhibitions/house-to-highway)
 - **Mapping Inequality, Richmond 1937**: University of Richmond, Digital Scholarship Lab, *Mapping Inequality: Redlining in New Deal America*, Richmond, Va., 1937 (the Home Owners' Loan Corporation's map, area D1). Opened November 22, 2026. [dsl.richmond.edu](https://dsl.richmond.edu/panorama/redlining/map/VA/Richmond/context)
+- **NBI, Belvidere Street**: National Bridge Inventory records, as published by BridgeLookup: Belvidere Street over Interstate-95 (structure 21392) and southbound Belvidere Street over Brook Road and the CSX railway (structure 21386), each built in 1958. Opened November 23, 2026. [bridgelookup.com (21392)](https://bridgelookup.com/bridge/582628), [bridgelookup.com (21386)](https://bridgelookup.com/bridge/582625)
 - **NPS, 212 East Clay Street**: National Park Service, "212 East Clay Street." Opened November 18, 2026. [nps.gov](https://www.nps.gov/places/212-east-clay-street.htm)
 - **NPS, Hippodrome**: National Park Service, "The Hippodrome Theater and W. L. Taylor Mansion." Opened November 18, 2026. [nps.gov](https://www.nps.gov/places/the-hippodrome-theater-and-w-l-taylor-mansion.htm)
 - **NPS, Black Wall Street**: National Park Service, "Jackson Ward and its Black Wall Street." Opened November 18 and 22, 2026. [nps.gov](https://www.nps.gov/articles/000/jackson-ward-and-its-black-wall-street.htm)
@@ -899,3 +901,13 @@ is for sale.
   polygon lies beyond the traced sheets. The 1952 volume is described as the 1925 survey corrected
   and reissued. The route section now gives what the 1954 act provides and attributes the choice
   of route to each source that names it. The island's east end is at about 7th Street, not 8th.
+- **November 23, 2026.** The 1925 and 1952 pictures no longer draw Chamberlayne Avenue's two
+  curved bridges over Brook Road and the railroad, or the avenue's run from Leigh Street to them
+  across the Turnpike's line. That road is the Belvidere Street extension, whose bridges the
+  National Bridge Inventory dates to 1958 [[NBI, Belvidere Street](#sources)]; the 1952 sheets
+  show houses and a coal yard where it runs [[LoC, Sanborn 1952 vol. 3](#sources)]. The
+  pictures corrected are the 1925 and 1952 views, the count and lost-streets pictures, the island
+  and the link preview. The list of streets the trench cut no longer says 5th Street is now
+  Maggie L. Walker Place. 5th Street keeps its name and crosses the trench on a bridge, and
+  Maggie L. Walker Place is a separate short street south of the trench
+  [[City of Richmond, centerlines](#sources)].

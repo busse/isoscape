@@ -1690,14 +1690,10 @@
     "w175298375",
     "w38006094",
     "w38006096",
-    "w38006103",
-    "w135207685",
     "w1122219210",
     "w1122219211",
     "w1293548427",
     "w1293548428",
-    "w1121057674",
-    "w1121057682",
     "w1122219208",
     "w1122219209",
     "w1485475446",
@@ -1878,9 +1874,38 @@
   {
    "where": {
     "id": [
-     "w120374941",
+     "w683846421",
+     "w135207687",
+     "w38006103",
+     "w135207685",
+     "w135207688",
+     "w692841315",
+     "w693428821",
+     "w135207686",
      "w135207689",
+     "w120374941",
      "w120375061",
+     "w107789388"
+    ]
+   },
+   "eras": [
+    [
+     1958,
+     null
+    ]
+   ],
+   "note": "The Belvidere Street extension: today's Chamberlayne Avenue (and North Belvidere Street) from West Leigh Street northeast over the Turnpike, Brook Road and the railroad, with its loop ramp (its sidewalks are not drawn before it either). The National Bridge Inventory dates its two bridges 1958 (Belvidere Street over I-95, structure 21392; southbound Belvidere Street over Brook Road and the CSX railway, structure 21386). The 1952 Sanborn sheets 304, 315 and 317 print houses, a coal yard and the railroad on its line, and the USGS sheet of 1933-34 does not show it; the USGS sheet of 1956 does, as US 1 through the Turnpike's interchange 13. Before 1958 not drawn.",
+   "sources": [
+    "https://bridgelookup.com/bridge/582628",
+    "https://bridgelookup.com/bridge/582625",
+    "https://www.loc.gov/item/sanborn09064_018/",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/GeoTIFF/VA/VA_Richmond_186501_1956_24000_geo.tif"
+   ]
+  },
+  {
+   "where": {
+    "id": [
      "w154116217"
     ]
    },
@@ -1890,11 +1915,12 @@
      null
     ]
    ],
-   "note": "Today's Chamberlayne bridge over the CSX railroad was built in 1992 (National Bridge Inventory). The USGS sheets of 1933-34 and 1956 show Chamberlayne Parkway crossing the railroad here; the earlier crossing's form was not found. Drawn in today's form (approximate).",
+   "note": "Chamberlayne Avenue's bridge over the CSX railroad on the avenue's old line, which the 1952 Sanborn sheet 317 prints as a concrete bridge carrying Chamberlayne Parkway over the Seaboard Air Line. Today's Chamberlayne bridge over the CSX railroad was built in 1992 (National Bridge Inventory). The USGS sheets of 1933-34 and 1956 show Chamberlayne Parkway crossing the railroad here; the earlier crossing's form was not found. Drawn in today's form (approximate). The two curved bridges beside it carry the Belvidere Street extension of 1958 and are dated with it (the rule above).",
    "sources": [
     "https://bridgelookup.com/bridge/583420",
     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
-    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/GeoTIFF/VA/VA_Richmond_186501_1956_24000_geo.tif"
+    "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/GeoTIFF/VA/VA_Richmond_186501_1956_24000_geo.tif",
+    "https://www.loc.gov/item/sanborn09064_018/"
    ]
   },
   {
