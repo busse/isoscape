@@ -210,7 +210,8 @@ body.noshop #nav a.shop, body.noshop #mbar .mshop { display: none; }
 .tag.feat { background: var(--warn); color: var(--panel); font-weight: 600; }
 #filter { margin: 0 12px 10px; padding: 6px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); font: inherit; outline: none; }
 #filter:focus { border-color: var(--accent); }
-#list { overflow-y: auto; flex: 1; padding: 0 8px 16px; }
+/* The menu of pages gives way before the build list does: on a short window the menu scrolls and the list keeps 180 px. */
+#list { overflow-y: auto; flex: 1 1 180px; min-height: 180px; padding: 0 8px 16px; }
 #list h2 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--dim); margin: 14px 8px 6px; }
 #list h2 small { display: block; text-transform: none; letter-spacing: 0; font-weight: 400; color: var(--faint); font-size: 11px; }
 .build { display: grid; grid-template-columns: 76px 1fr; gap: 10px; width: 100%; padding: 7px 8px; border: 1px solid transparent; border-radius: 7px; background: none; text-align: left; cursor: pointer; align-items: center; }
@@ -227,7 +228,7 @@ body.noshop #nav a.shop, body.noshop #mbar .mshop { display: none; }
 .tag.ab { background: var(--accent); color: var(--panel); font-weight: 600; }
 time { color: var(--dim); margin-left: auto; font-size: 11px; }
 .tag.yr { background: var(--accent-soft); color: var(--ink); font-weight: 600; }
-#timeline { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; pointer-events: none; }
+#timeline { position: absolute; top: 50px; left: 10px; right: 10px; display: flex; flex-wrap: wrap; gap: 4px; align-items: center; pointer-events: none; }
 #timeline[hidden] { display: none; }
 #timeline button { pointer-events: auto; font: 600 12px ui-sans-serif, system-ui, sans-serif; padding: 3px 8px; border-radius: 12px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer; }
 #timeline button:hover { border-color: var(--accent); }
@@ -278,7 +279,7 @@ pre { margin: 0; font: 11.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace
 .dirty { color: var(--bad); }
 
 /* ---- pages: nav ---------------------------------------------------------------- */
-#pages { padding: 0 8px 8px; }
+#pages { padding: 0 8px 8px; flex: 0 1 auto; min-height: 0; overflow-y: auto; }
 #pages a { display: flex; align-items: baseline; gap: 8px; padding: 5px 8px; border-radius: 6px; color: var(--ink); text-decoration: none; font-size: 13px; }
 #pages a:hover { background: var(--chip); }
 #pages a.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
@@ -571,7 +572,12 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     }
     $('list').innerHTML = html || '<p style="padding:12px;color:var(--dim)">No builds match.</p>'
     const cur = $('list').querySelector('.build.a')
-    if (cur) cur.scrollIntoView({ block: 'nearest' })
+    // Scroll the list alone. scrollIntoView would also scroll the page itself when the row lies below the window.
+    if (cur) {
+      const list = $('list'), r = cur.getBoundingClientRect(), lr = list.getBoundingClientRect()
+      if (r.top < lr.top) list.scrollTop -= lr.top - r.top
+      else if (r.bottom > lr.bottom) list.scrollTop += r.bottom - lr.bottom
+    }
   }
   $('list').addEventListener('click', (e) => {
     // Remember a section folded or unfolded by hand.
