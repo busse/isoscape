@@ -3442,6 +3442,30 @@
     "2026-11-22: owner test -> live"
    ]
   },
+  "jackson-ward-navy-hill-streets": {
+   "title": "Trace the 1952 streets of Navy Hill and Gilpin Court for the Jackson Ward views",
+   "plate": null,
+   "kind": "research",
+   "stage": "research",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "nothing",
+   "decision": "Follow-up (owner, 2026-11-23). In the story's 1925 and 1952 views several of today's streets run through houses the 1952 Sanborn sheets print: the curved approach to the 5th Street bridge, Maggie L. Walker Place, East Leigh and East Jackson Streets, alleys, possibly Hill Street. An era rule cannot remove them without leaving gaps, because the 1952 streets there were never read off the sheets. Also check the lost-north-5th-street join, which may draw 5th Street on two lines, and the unverified 1992 date on the old Chamberlayne bridge (BridgeLookup 583420). Found by the pocket guide work; see outputs/stories/jackson-ward/fix-1952-bridges/fix.md. Not started.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-23: rough draft -> research"
+   ]
+  },
   "story-jackson-ward-guide": {
    "title": "Seeing the change: a walking guide to Jackson Ward (pocket guide)",
    "plate": null,
