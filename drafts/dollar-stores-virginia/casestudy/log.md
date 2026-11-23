@@ -507,3 +507,14 @@ Folder: `2026-11-23-19-art-rough/`. Branch `viz/dollar-stores-virginia-art`, off
   - A note to the planning session.
   - The rough draft: all 227 towns and cities as 5 km squares, by region.
 - **Rounds.** Three. The first ran off the sheet and the second had names under 6 pt.
+
+## Step 20: the art poster as one full grid (November 23, 09:09-09:40)
+
+Folder: `2026-11-23-20-art-full-grid/`.
+
+- **Chris (09:09).** No hard breaks by region: one full grid, then decide what to do with the
+  unfilled end of the last row.
+- **Result.** 14 by 17, in the same order, with squares 1.47 in. 227 is prime, so the last row
+  holds 3 squares and leaves 11 empty slots.
+- **Rounds.** Three layout passes (a line off the edge, then crowding, then clean), all within
+  review round 2. The board counts review rounds; it briefly said 6 and was corrected.
