@@ -6,6 +6,8 @@
 
 Fills story.md's tokens from the guide's own data and the story's:
   {{where_N}}, {{sees_N}}   where to stand and what to look at, from route.json (route.py)
+  {{directions_N}}          how to walk there from the stop before, from route.json's legs
+  {{osm_date}} {{miles_words}}   the OpenStreetMap date the route was laid out from; the walk in words
   {{pair_N}}                the stop's 1952-and-today figure (pairs.json, pairs.py), or why it has none
   {{km}} {{miles}} {{minutes}} {{pace}} {{back_m}} {{back_ft}}   the walk, from route.json
   {{paved}} {{corridor}}    the count, from tools/sanborn/jw/counts.json, as the story's page.py does
@@ -29,8 +31,9 @@ GROUND = ("Where the trench is now, the 1952 ground is an estimate, about ±2 m 
 NOTES = {
     'gilpin-edge': 'In 1952 Gilpin Court is drawn in the sheet\'s own colors, green and blue, though the sheet labels its buildings brick-faced.',
     'bates-street': 'Hatched blocks are where no building was traced from the 1952 sheets; only buildings standing today are drawn there, so the picture does not show those blocks as they were.',
-    'first-bridge': 'Hatched blocks are where no building was traced from the 1952 sheets.',
 }
+HALVES = {0.5: 'half a mile', 1.0: 'a mile', 1.5: 'a mile and a half', 2.0: 'two miles', 2.5: 'two and a half miles',
+          3.0: 'three miles', 3.5: 'three and a half miles', 4.0: 'four miles'}
 
 
 def main():
@@ -44,18 +47,26 @@ def main():
     t = route['total_m']
     tokens = {'date': a.date, 'km': f'{t / 1000:.1f}', 'miles': f'{t / 1609.344:.1f}',
               'minutes': round(t / route['walk_m_per_min'] / 5) * 5, 'pace': route['walk_m_per_min'],
-              'back_m': int(round(route['last_to_first_m'], -1)), 'back_ft': int(round(route['last_to_first_m'] / 0.3048, -2)),
-              'paved': counts['paved']['buildings'], 'corridor': counts['corridor']['buildings']}
+              'back_m': int(round(route['last_to_first_m'], -1)), 'back_ft': f"{int(round(route['last_to_first_m'] / 0.3048, -2)):,}",
+              'paved': counts['paved']['buildings'], 'corridor': counts['corridor']['buildings'],
+              'osm_date': route['osm_date'], 'miles_words': HALVES[round(t / 1609.344 * 2) / 2]}
+    legs = {l['to']: l for l in route['legs']}
     for st in route['stops']:
         n = st['n']
         tokens[f'where_{n}'] = st['where']
         tokens[f'sees_{n}'] = st['sees']
+        if n in legs:
+            l = legs[n]
+            tokens[f'directions_{n}'] = (f"**Getting there** from stop {l['frm']}, about {int(round(l['m'], -1)):,} m ({l['minutes']} "
+                                         f"minute{'s' if l['minutes'] != 1 else ''}): " + ' '.join(l['directions']))
+        else:
+            tokens[f'directions_{n}'] = '**Getting there.** The walk starts here.'
         p = pairs[str(n)]
         if p['file']:
             note = NOTES.get(st['key'], '')
             tokens[f'pair_{n}'] = (
                 '::: figure\n'
-                f'![Stop {n}, {st["title"]}, drawn from the south: the same blocks in 1952 (top) and today (bottom), with the stop\'s number where you stand]({p["file"]})\n\n'
+                f'![Stop {n}, {st["title"]}, in Jackson Ward, drawn from the south: the same blocks in 1952 (top) and today (bottom), each labeled with its year, with the stop\'s number where you stand]({p["file"]})\n\n'
                 f'{st["title"]}, stop {n}: 1952 above, today below, seen from the south. The numbered disc is where you stand. {GROUND} {note}'.rstrip() + '\n:::')
         else:
             tokens[f'pair_{n}'] = f'*No 1952-and-today picture for this stop.* {p["why"]}'

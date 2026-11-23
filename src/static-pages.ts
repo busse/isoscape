@@ -675,6 +675,7 @@ export const writeStatic = async (
       }
       // `pdf: true` links p/<slug>-phone.pdf and -large.pdf, which tools/pdf/story_pdf.py puts there.
       if (page.pdf) for (const ed of ['phone', 'large']) if (!existsSync(resolve(outDir, 'p', `${page.slug}-${ed}.pdf`))) process.stderr.write(`warning: pages/${page.slug}.md has pdf: true but p/${page.slug}-${ed}.pdf is missing; make it with tools/pdf/story_pdf.py ${page.slug} --out ${resolve(outDir, 'p')}\n`)
+      for (const x of page.pdfExtra ?? []) if (!existsSync(resolve(outDir, 'p', x.name))) process.stderr.write(`warning: pages/${page.slug}.md lists pdf-extra ${x.name} but p/${x.name} is missing\n`)
       await put(e.path, renderContentPage(page, ctx, {
         ...(own === undefined ? {} : { own }),
         ...(flagPreview === undefined ? {} : { flagship: flagPreview }),

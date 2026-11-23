@@ -43,10 +43,18 @@ PLACE = {
     'first-bridge': 'North 1st St. bridge',
 }
 UNTRACED = 'No buildings traced here:\nonly those standing today\nare drawn'
+# Today's streets that a stop's 1952 half would draw through 1952 houses, because the 1952 streets
+# there were never read off the sheets (see the board's Navy Hill follow-up): the box is moved up
+# the picture until none of these ways is inside it, with MARGIN units to spare. Stop 2: Maggie L.
+# Walker Place (OSM w6037438), laid out later, just south of the stop.
+LATER = {'second-trench': [6037438]}
+MARGIN = 8
 # Stops with no pair, and why (said in route.json's stop and on the page).
 NO_PAIR = {
-    'coliseum': 'The Coliseum stands at the near edge of the story\'s views, so their picture of today leaves it out '
-                '(isoscape draws only buildings wholly inside the frame), and the 1952 sheets were not traced for its blocks.',
+    'coliseum': 'The Coliseum stands just past the near edge of the story\'s views, so their picture of today leaves it out '
+                '(isoscape draws only buildings wholly inside the frame). A view framed further south was tried: the 1952 '
+                'tracing stops partway across the Coliseum\'s site, and in Navy Hill the 1952 picture would draw today\'s '
+                'streets, some laid out later, so this stop has no picture of 1952.',
 }
 
 views.YEARS = tuple(s for s, _ in SCENES)   # the shared frame of just these two scenes
@@ -58,6 +66,26 @@ def place(work, lon, lat):
     x, y = views.to_m(lon, lat)
     p = np.array([float(x), float(y), 1.0]) @ A
     return float(p[0]), float(p[1])
+
+
+def later_top(work, ways, box):
+    """The highest point (smallest y, SVG units) inside the box's width of the given OSM ways
+    as drawn, or None if none is under the box's columns."""
+    A = views._fit(views.build(work, views.REF))
+    ys = []
+    for e in osm_ways(ways):
+        pts = [np.array([*views.to_m(q['lon'], q['lat']), 1.0]) @ A for q in e['geometry']]
+        for a, b in zip(pts[:-1], pts[1:]):
+            for t in np.linspace(0, 1, 20):
+                x, y = a + (b - a) * t
+                if box[0] <= x <= box[0] + box[2] and y >= box[1]:
+                    ys.append(y)
+    return min(ys) if ys else None
+
+
+def osm_ways(ids):
+    return [e for e in json.load(open(os.path.join(ROOT, 'data/richmond-streetcars/osm.json')))['elements']
+            if e['type'] == 'way' and e['id'] in ids]
 
 
 _FULL = {}
@@ -125,6 +153,12 @@ def main():
             continue
         sx, sy = place(a.work, st['lon'], st['lat'])
         box = (sx - BOX_W / 2, sy - BOX_H / 2 - AHEAD, BOX_W, BOX_H)
+        if st['key'] in LATER:
+            top = later_top(a.work, LATER[st['key']], box)
+            if top is not None and top < box[1] + BOX_H:
+                box = (box[0], top - MARGIN - BOX_H, BOX_W, BOX_H)
+            assert box[1] + 40 < sy < box[1] + BOX_H - 30, f"stop {st['n']}'s disc would leave its picture"
+            assert later_top(a.work, LATER[st['key']], box) is None or later_top(a.work, LATER[st['key']], box) >= box[1] + BOX_H
         halves = []
         for scene, word in SCENES:
             im = full(a.work, scene).crop(
@@ -141,7 +175,8 @@ def main():
         if a.full:
             os.makedirs(a.full, exist_ok=True)
             out.save(os.path.join(a.full, name + '.png'), optimize=True)
-        made[st['n']] = {'file': name + '.webp', 'box_svg_units': [round(v, 1) for v in box]}
+        made[st['n']] = {'file': name + '.webp', 'box_svg_units': [round(v, 1) for v in box],
+                         'stop_svg_units': [round(sx, 1), round(sy, 1)]}
         print('wrote', name, out.size)
     json.dump(made, open(os.path.join(HERE, 'pairs.json'), 'w'), indent=1)
 

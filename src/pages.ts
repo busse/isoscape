@@ -33,6 +33,8 @@
  * front matter is a one-sentence standfirst, set under the page's title. `pdf: true` adds a line
  * under the deck and another at the end linking the page's two PDF editions (tools/pdf/story_pdf.py
  * makes them; they sit beside the static page as `p/<slug>-phone.pdf` and `p/<slug>-large.pdf`).
+ * `pdf-extra: <slug>-<name>.pdf | label; …` adds more PDFs to that line, each by its label (a
+ * guide's folded sheet, made by its own tool), also from `p/`.
  */
 
 import { readdirSync, readFileSync } from 'node:fs'
@@ -64,6 +66,29 @@ export interface Page {
   readonly schema?: 'FAQPage'
   /** Offers the page as PDFs (`pdf: true`): `<slug>-phone.pdf` and `<slug>-large.pdf` in `p/` (tools/pdf). */
   readonly pdf?: boolean
+  /** More PDFs on the same line (`pdf-extra:`), each a file in `p/` and its label. */
+  readonly pdfExtra?: readonly PdfExtra[]
+}
+
+export interface PdfExtra {
+  readonly name: string
+  readonly label: string
+}
+
+/**
+ * `pdf-extra: a.pdf | label; b.pdf | label` → the files and their labels. Each file must be a
+ * plain name starting with the page's slug and ending in .pdf; a label is required.
+ */
+export const pdfExtras = (value: string | undefined, slug: string, fileName: string): PdfExtra[] => {
+  if (value === undefined || value.trim() === '') return []
+  return value.split(';').map((part) => {
+    const [name, ...rest] = part.split('|').map((t) => t.trim())
+    const label = rest.join('|').trim()
+    if (!new RegExp(`^${slug}-[a-z0-9-]+\\.pdf$`).test(name) || label === '') {
+      throw new Error(`pages/${fileName}: pdf-extra "${part.trim()}" must be "${slug}-<name>.pdf | label"`)
+    }
+    return { name, label }
+  })
 }
 
 export const PAGES_DIR = fileURLToPath(new URL('../pages/', import.meta.url))
@@ -117,9 +142,18 @@ export interface CompileMode {
   readonly pdfHref?: ((name: string) => string) | null
 }
 
-/** The line a page with `pdf: true` shows near its top and at its end, linking its two PDFs. */
-export const pdfLine = (slug: string, href: (name: string) => string): string =>
-  `<p class="pdf-links" style="font-size: .88em; color: var(--dim)">Read this as a PDF: <a href="${href(`${slug}-phone.pdf`)}" type="application/pdf">phone edition</a>, <a href="${href(`${slug}-large.pdf`)}" type="application/pdf">large-screen edition</a></p>`
+const escHtml = (s: string): string => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+/** The line a page with `pdf: true` shows near its top and at its end, linking its two PDFs (and any `pdf-extra:`). */
+export const pdfLine = (slug: string, href: (name: string) => string, extra: readonly PdfExtra[] = []): string => {
+  const links = [
+    `<a href="${href(`${slug}-phone.pdf`)}" type="application/pdf">phone edition</a>`,
+    `<a href="${href(`${slug}-large.pdf`)}" type="application/pdf">large-screen edition</a>`,
+    ...extra.map((x) => `<a href="${href(x.name)}" type="application/pdf">${escHtml(x.label)}</a>`),
+  ]
+  const list = links.length > 2 ? links.slice(0, -1).join(', ') + ' or ' + links[links.length - 1] : links.join(', ')
+  return `<p class="pdf-links" style="font-size: .88em; color: var(--dim)">Read this as a PDF: ${list}</p>`
+}
 
 /**
  * Compile one page. `readAsset` returns the bytes of a file beside the page, or null; it is
@@ -162,8 +196,9 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     html = end === -1 ? deck + '\n' + html : html.slice(0, end + 5) + '\n' + deck + html.slice(end + 5)
   }
   // `pdf: true`: a line linking the page's PDFs, under the deck (or the title) and at the end.
+  const extra = data.pdf === 'true' ? pdfExtras(data['pdf-extra'], slug, fileName) : []
   if (data.pdf === 'true' && mode.pdfHref !== null) {
-    const line = pdfLine(slug, mode.pdfHref ?? ((n) => `p/${n}`))
+    const line = pdfLine(slug, mode.pdfHref ?? ((n) => `p/${n}`), extra)
     const deckEnd = html.indexOf('<p class="deck">') === -1 ? -1 : html.indexOf('</p>', html.indexOf('<p class="deck">')) + 4
     const at = deckEnd > 3 ? deckEnd : html.indexOf('</h1>') === -1 ? 0 : html.indexOf('</h1>') + 5
     html = html.slice(0, at) + (at > 0 ? '\n' : '') + line + (at > 0 ? '' : '\n') + html.slice(at) + '\n' + line + '\n'
@@ -192,6 +227,7 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     ...(data.shop === 'false' ? { noShop: true } : {}),
     ...(data.schema === 'FAQPage' ? { schema: 'FAQPage' as const } : {}),
     ...(data.pdf === 'true' ? { pdf: true } : {}),
+    ...(extra.length > 0 ? { pdfExtra: extra } : {}),
   }
 }
 

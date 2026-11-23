@@ -117,6 +117,15 @@ test('the pdf: setting shows the PDF line only when set', () => {
   assert.doesNotMatch(print.html, /pdf-links/)
   const no = compilePage('---\npdf: false\n---\n# T', 'story.md', read)
   assert.doesNotMatch(no.html, /pdf-links/)
+  // pdf-extra: more PDFs on the same line, by label, from p/; checked for a plain name and a label
+  const extra = compilePage('---\npdf: true\npdf-extra: story-folded.pdf | folded sheet <to print>\n---\n# T\n\nBody.', 'story.md', read)
+  assert.deepEqual(extra.pdfExtra, [{ name: 'story-folded.pdf', label: 'folded sheet <to print>' }])
+  assert.equal((extra.html.match(/href="p\/story-folded\.pdf"/g) ?? []).length, 2, 'on both lines')
+  assert.match(extra.html, /large-screen edition<\/a> or <a href="p\/story-folded\.pdf" type="application\/pdf">folded sheet &lt;to print&gt;<\/a><\/p>/)
+  assert.doesNotMatch(on.html, / or <a/, 'two editions keep their line as it was')
+  assert.throws(() => compilePage('---\npdf: true\npdf-extra: ../x.pdf | x\n---\n# T', 'story.md', read), /pdf-extra/)
+  assert.throws(() => compilePage('---\npdf: true\npdf-extra: story-folded.pdf\n---\n# T', 'story.md', read), /pdf-extra/)
+  assert.equal(compilePage('---\npdf-extra: story-folded.pdf | x\n---\n# T', 'story.md', read).pdfExtra, undefined, 'only with pdf: true')
 })
 
 test('the PDF says what a reader can do with paper, and the web page keeps its own words', () => {

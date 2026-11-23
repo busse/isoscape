@@ -36,6 +36,8 @@ lived in a house or what the ward meant to them. That is for the ward's families
 institutions to tell; [Who keeps the ward's history](#who-keeps-the-wards-history) points to
 some of them.
 
+To see these places on foot, use the [walking guide to Jackson Ward](jackson-ward-guide.md).
+
 ## Where this is, and how to read the pictures
 
 The Sanborn Map Company drew American towns for fire insurers, building by building, on large

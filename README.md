@@ -356,6 +356,11 @@ page sets `images: link`, below):
   which `tools/pdf/story_pdf.py` makes (see "Story PDFs"); `isoscape explorer` warns when a page
   asks for them and they are missing from `<out>/p/`. For a story, set it in
   `tools/stories/<story>/story.md` and rerun `page.py`.
+- `pdf-extra: <slug>-<name>.pdf | label` (with `pdf: true`) adds more PDFs to that line, each
+  linked by its label from `p/`, as "Read this as a PDF: phone edition, large-screen edition or
+  folded sheet to print (US Letter)". Separate several with `;`. The page's own tools make these
+  files (the Jackson Ward guide's folded sheet: `tools/stories/jackson-ward-guide/fold.py`), and
+  `isoscape explorer` warns when one is missing from `<out>/p/`.
 - `schema: FAQPage` gives the static page `FAQPage` JSON-LD in place of `Article`. Each heading
   that ends in a question mark is a question, and the text under it, up to the next heading, is
   its answer (`faqEntries` in `src/static-pages.ts`).
