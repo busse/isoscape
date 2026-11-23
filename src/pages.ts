@@ -33,6 +33,8 @@
  * front matter is a one-sentence standfirst, set under the page's title. `pdf: true` adds a line
  * under the deck and another at the end linking the page's two PDF editions (tools/pdf/story_pdf.py
  * makes them; they sit beside the static page as `p/<slug>-phone.pdf` and `p/<slug>-large.pdf`).
+ * `series: <region>` makes the page a dated series' own page (through-time.ts): the explorer puts
+ * the series' view before the page's first `##` heading, and `p/<slug>.html` a list of its years.
  */
 
 import { readdirSync, readFileSync } from 'node:fs'
@@ -64,6 +66,8 @@ export interface Page {
   readonly schema?: 'FAQPage'
   /** Offers the page as PDFs (`pdf: true`): `<slug>-phone.pdf` and `<slug>-large.pdf` in `p/` (tools/pdf). */
   readonly pdf?: boolean
+  /** The dated series this page is the landing page of (`series: <region>`, through-time.ts). */
+  readonly series?: string
 }
 
 export const PAGES_DIR = fileURLToPath(new URL('../pages/', import.meta.url))
@@ -176,6 +180,7 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     if (bytes === null) throw new Error(`pages/${fileName}: social image "${name}" not found beside the page`)
     social = { name, bytes }
   }
+  if (data.series !== undefined && !/^[a-z0-9][a-z0-9-]*$/.test(data.series)) throw new Error(`pages/${fileName}: series "${data.series}" must be a region name`)
   if (data.schema !== undefined && data.schema !== 'FAQPage') throw new Error(`pages/${fileName}: schema "${data.schema}" is not one isoscape writes (FAQPage)`)
   return {
     slug,
@@ -192,6 +197,7 @@ export const compilePage = (src: string, fileName: string, readAsset: (name: str
     ...(data.shop === 'false' ? { noShop: true } : {}),
     ...(data.schema === 'FAQPage' ? { schema: 'FAQPage' as const } : {}),
     ...(data.pdf === 'true' ? { pdf: true } : {}),
+    ...(data.series ? { series: data.series } : {}),
   }
 }
 

@@ -91,8 +91,9 @@ export const compareSliders = (doc, split) => {
   // Keys on a focused divider. Capturing, so the explorer's own shortcuts never see them.
   doc.addEventListener('keydown', (e) => {
     const div = e.target.closest && e.target.closest('.cmp-div')
-    if (!div || e.metaKey || e.ctrlKey || e.altKey) return
-    const cmp = div.closest('.cmp')
+    // A divider outside a figure (a series page's, through-time.ts) handles its own keys.
+    const cmp = div && div.closest('.cmp')
+    if (!cmp || e.metaKey || e.ctrlKey || e.altKey) return
     const k = e.key
     const big = e.shiftKey ? 0.1 : 0.02
     const to = k === 'ArrowLeft' || k === 'ArrowDown' ? at(cmp) - big

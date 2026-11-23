@@ -269,7 +269,9 @@
         "region": "richmond-downtown-time",
         "year": 1925,
         "title": "Downtown Richmond through time, 1737–2026",
-        "blurb": "The same blocks, from the Capitol to Tobacco Row, year by year. Buildings come from fire-insurance maps and other dated sources. Pick a year below, or press [ and ] in the viewer to step through them."
+        "blurb": "The same blocks, from the Capitol to Tobacco Row, year by year. Buildings come from fire-insurance maps and other dated sources. Pick a year, or compare two side by side.",
+        "page": "#/downtown-through-time",
+        "pageLabel": "Step through the years"
       }
     ],
     "stories": { "title": "Stories", "blurb": "Longer pieces that work one question out with drawings, counts and sources.", "pages": ["jackson-ward", "redlining", "dollar-stores"] },

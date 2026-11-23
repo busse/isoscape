@@ -1381,6 +1381,17 @@ phone, a sideways drag moves it and a vertical swipe scrolls the page). Its
 expand button opens the same slider large in the lightbox. The Jackson Ward year views are drawn
 in one shared frame for this, so every year lines up with the others pixel for pixel.
 
+A dated series can have a page of its own for visitors, such as [Downtown Richmond, VA, through
+time](downtown-through-time.md). It shows one year at a time from each build's preview picture
+(about 3,700 pixels wide, a JPEG of 0.3 to 1.1 MB for Richmond's years), never the SVG, so a year switches at once, and
+the years either side are fetched ahead. The timeline spaces the years by the time between
+them, so the 51 years from 1737 to 1788 take far more room than the five from 1860 to 1865.
+Compare lays a later year over an earlier one with the same divider, the earlier always on the
+left. Each picture is placed by its build's viewBox in a frame shared by all the years, because
+builds of the same view made with different code can differ a little in height. Zoom stops at
+about 1.25 of a picture's pixels to a screen pixel (between 2 and 8 times the fitted size), so
+it never shows a blur.
+
 Beside it go plain pages that need no script, for search engines and link previews: each of
 these pages as `p/<slug>.html`, each map as `m/<region>.html` (and each year of a dated series
 as `m/<region>-<year>.html`) with its picture and this same "How this view was made" text, and a
@@ -1396,7 +1407,7 @@ pixels (1.91:1): a map cropped from its middle, saved as a JPEG at quality 86, a
 KB; a page with a sheet of its own, such as a set or a cutaway, uses its drawing alone, not the
 whole sheet.
 
-Code: `src/archive.ts`, `src/explorer.ts`, `src/pages.ts`, `src/story.ts`, `src/static-pages.ts`.
+Code: `src/archive.ts`, `src/explorer.ts`, `src/pages.ts`, `src/story.ts`, `src/static-pages.ts`, `src/through-time.ts`.
 
 ## Credits
 

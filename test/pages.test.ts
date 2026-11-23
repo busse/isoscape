@@ -64,7 +64,9 @@ test('the shipped pages load, and carry the sections the explorer links to', () 
   for (const p of pages) {
     for (const [, slug, section] of p.html.matchAll(/href="#\/([a-z0-9-]+)(?:\/([^"]+))?"/g)) {
       assert.ok(all.has(slug), `${p.file} links to a page "${slug}"`)
-      if (section) assert.ok(all.get(slug)!.has(section), `${p.file} links to ${slug}#${section}`)
+      // A series page's route can also name a year or two of its view (through-time.ts), checked in through-time.test.ts.
+      const series = pages.find((x) => x.slug === slug)?.series !== undefined && /^\d{4}(\.\.\d{4})?$/.test(section ?? '')
+      if (section && !series) assert.ok(all.get(slug)!.has(section), `${p.file} links to ${slug}#${section}`)
     }
   }
 })

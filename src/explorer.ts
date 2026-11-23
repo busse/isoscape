@@ -23,6 +23,8 @@
  * Routes (the URL hash): `#<id>` one build (or `#<region>`, its newest build, and `#<region>:<year>`
  * in a dated series: lasting links for outside pages), `#<idA>..<idB>` compare, either with `/made` for
  * the "How this view was made" tab; `#/<slug>` a page, `#/<slug>/<section>` a section of it.
+ * A series page (`series:` in its front matter, through-time.ts) also reads `#/<slug>/<year>` and
+ * `#/<slug>/<earlier>..<later>` as the year or two its view shows.
  *
  * A build route can also carry the window view, so a link reopens the same part of the picture:
  *
@@ -48,10 +50,11 @@
 import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
-import { buyLinks, escAttr, pageMapRefs, pageShop, printLinks, shopCta, siteTags, type SiteCard } from './social.ts'
+import { buyLinks, escAttr, pageMapRefs, pageShop, printLinks, seriesShopLine, shopCta, siteTags, type SiteCard } from './social.ts'
 import { FIGURE_CSS, LIGHTBOX_CSS, lightbox } from './lightbox.ts'
 import { COMPARE_CSS, compareSliders, splitAt, splitOf } from './compare.ts'
 import { makeStory } from './story.ts'
+import { seriesView, TT_CSS, ttFrame, ttNearest, ttPair, ttParse, ttPick, ttPos, ttRoute, ttStep, ttTicks } from './through-time.ts'
 
 /**
  * The address of this document with its fragment replaced by `hash`. The explorer routes with
@@ -234,6 +237,8 @@ time { color: var(--dim); margin-left: auto; font-size: 11px; }
 #timeline button:hover { border-color: var(--accent); }
 #timeline button.on { background: var(--accent); border-color: var(--accent); color: var(--panel); }
 #timeline .hint { pointer-events: none; font-size: 11px; color: var(--faint); margin-left: 6px; }
+#timeline a.ttgo { pointer-events: auto; font: 600 12px ui-sans-serif, system-ui, sans-serif; padding: 3px 10px; border-radius: 12px; background: var(--accent); color: var(--panel); text-decoration: none; white-space: nowrap; margin-left: 4px; }
+#timeline a.ttgo:hover { filter: brightness(1.08); }
 .story ul.sources { font-size: 12px; color: var(--dim); }
 #nav footer { padding: 10px 14px; border-top: 1px solid var(--line); color: var(--faint); font-size: 11px; line-height: 1.7; }
 #nav footer a { color: var(--dim); }
@@ -411,7 +416,7 @@ ${PROSE_CSS}${FIGURE_CSS}${LIGHTBOX_CSS}${COMPARE_CSS}/* Wide figures run past t
 #info .bar .tabs button.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
 #info.made { max-height: 52vh; }
 #info .body.stories { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 14px 24px 22px; }
-${STORY_CSS}.doc .back[hidden] { display: none; }
+${STORY_CSS}${TT_CSS}.doc .back[hidden] { display: none; }
 #page:focus { outline: none; }
 </style>
 </head>
@@ -456,7 +461,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
 <script type="application/json" id="site">${json({ siteUrl: site.siteUrl ?? null, shop: shopCard(site), home: homeCard(site), latestPages: site.latestPages !== false, shares: site.shares ?? null, buy: site.shop ? buyLinks(site, new Set(builds.flatMap((b) => (b.time ? [b.region, `${b.region}:${b.time.year}`] : [b.region])))) : null })}</script>
 <script type="application/json" id="builds">${json(builds)}</script>
 <script type="application/json" id="demSources">${json(Object.fromEntries(Object.values(DEM_SOURCES).map((d) => [d.id, { name: d.name, coverage: d.coverage, about: d.about, credit: d.credit, license: d.license, link: d.link }])))}</script>
-<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, ...(p.unlisted ? { unlisted: true } : {}), ...(p.noShop ? { noShop: true } : {}), html: p.noShop ? p.html : printLinks(p.html, site.shop?.products), headings: p.headings.filter((h) => h.level === 2), shop: (!p.noShop && site.shop && pageShop(p.slug, pageMapRefs(p.html), site)) || null })))}</script>
+<script type="application/json" id="pagesData">${json(pages.map((p) => ({ slug: p.slug, title: p.title, summary: p.summary ?? '', file: p.file, ...(p.unlisted ? { unlisted: true } : {}), ...(p.noShop ? { noShop: true } : {}), html: p.noShop ? p.html : printLinks(p.html, site.shop?.products), headings: p.headings.filter((h) => h.level === 2), shop: (!p.noShop && site.shop && pageShop(p.slug, pageMapRefs(p.html), site)) || null, ...(p.series ? { series: p.series, shopLine: (!p.noShop && seriesShopLine(site, p.series)) || '' } : {}) })))}</script>
 <script>
 (() => {
   const builds = JSON.parse(document.getElementById('builds').textContent)
@@ -671,7 +676,7 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   const spread = () => { const [p, q] = [...touches.values()]; return { d: Math.hypot(p.x - q.x, p.y - q.y), x: (p.x + q.x) / 2, y: (p.y + q.y) / 2 } }
   stage.addEventListener('pointerdown', (e) => {
     // Controls on the stage keep their clicks: capturing the pointer would take them.
-    if (e.target.closest('#toolbar, #timeline button')) return
+    if (e.target.closest('#toolbar, #timeline button, #timeline a')) return
     stage.setPointerCapture(e.pointerId)
     if (e.pointerType === 'touch') {
       touches.set(e.pointerId, { x: e.clientX, y: e.clientY })
@@ -748,7 +753,9 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     if (!a) { $('infoTitle').textContent = ''; $('infoBody').innerHTML = ''; $('links').innerHTML = ''; return }
     const b = state.compare ? byId.get(state.b) : null
     $('infoTitle').textContent = b ? a.title + '  ·  A vs B' : a.title
-    $('links').innerHTML = '<a href="' + esc(a.files.svg) + '" target="_blank"' + (phone() ? ' title="The full drawing: large, may not open on a phone"' : '') + '>' + (phone() ? 'Full drawing ↗' : 'Open A’s SVG ↗') + '</a>' +
+    const front = a.time ? seriesPageOf(a.region) : null
+    $('links').innerHTML = (front ? '<a href="#/' + esc(front.slug) + '/' + esc(a.time.year) + (b && b.time && b.region === a.region && b.time.year !== a.time.year ? '..' + esc(b.time.year) : '') + '" title="' + esc(front.title) + '">Compare years on the series page →</a>' : '') +
+      '<a href="' + esc(a.files.svg) + '" target="_blank"' + (phone() ? ' title="The full drawing: large, may not open on a phone"' : '') + '>' + (phone() ? 'Full drawing ↗' : 'Open A’s SVG ↗') + '</a>' +
       (b ? '<a href="' + esc(b.files.svg) + '" target="_blank">Open B’s SVG ↗</a>' : '') +
       (site.latestPages ? '<a href="' + esc(a.name) + '.html" target="_blank" title="The latest build of this region, with hover labels">Latest page ↗</a>' : '') +
       (buy ? '<a class="buy" href="' + esc(buy.url) + '" target="_blank" rel="noopener">' + esc(buy.label) + '</a>' +
@@ -800,6 +807,12 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
   ;(${lightbox.toString()})(document)
   // Compare figures on a page (compare.ts) share the viewer's divider: its moves and its look.
   ;(${compareSliders.toString()})(document, split)
+  // A dated series' own page (through-time.ts): its view goes into the page, before its first section.
+  const tt = { parse: (${ttParse.toString()}), route: (${ttRoute.toString()}), step: (${ttStep.toString()}), pair: (${ttPair.toString()}), pick: (${ttPick.toString()}), frame: (${ttFrame.toString()}), pos: (${ttPos.toString()}), nearest: (${ttNearest.toString()}), ticks: (${ttTicks.toString()}) }
+  const seriesView = (${seriesView.toString()})
+  let ttView = null
+  // The page that is a series' front door, if any (front matter \`series: <region>\`).
+  const seriesPageOf = (region) => pages.find((p) => p.series === region) || null
   const story = (${makeStory.toString()})({ esc, label, when, mb, fmt, demSources, pageHref: (slug, section) => (pageBySlug.has(slug) ? '#/' + slug + (section ? '/' + section : '') : null) })
   $('toggleInfo').addEventListener('click', () => toggleInfo())
   // Phones: the build list is a drawer behind the menu button; the info panel starts folded.
@@ -933,9 +946,10 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     const d = doorFor(hash)
     return d ? root + d.path + d.hash : root + hash
   }
-  const copyLink = () => {
+  const copyLink = (arg) => {
     writeHash()
-    const btn = state.page !== null ? $('pageLink') : $('link')
+    // A button passed in (the series view's own) shows "Copied"; else the page's or the viewer's.
+    const btn = arg && arg.nodeType === 1 ? arg : state.page !== null ? $('pageLink') : $('link')
     if (!btn.dataset.label) btn.dataset.label = btn.textContent
     const url = shareUrl()
     // A phone's share sheet, where there is one; else the clipboard.
@@ -1005,7 +1019,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     el.hidden = ser.length < 2
     if (el.hidden) return
     el.innerHTML = ser.map((x) => '<button data-id="' + esc(x.id) + '" class="' + (x.time.year === a.time.year ? 'on' : '') + '" title="' + esc(x.time.title || '') + '">' + esc(x.time.year) + '</button>').join('') +
-      '<span class="hint">[ ] to step</span>'
+      '<span class="hint">[ ] to step</span>' +
+      (seriesPageOf(a.region) ? '<a class="ttgo" href="#/' + esc(seriesPageOf(a.region).slug) + '/' + esc(a.time.year) + '" title="' + esc(seriesPageOf(a.region).title) + '">Compare years on the series page →</a>' : '')
     // On a phone the years scroll sideways: keep the one on show in view.
     const on = el.querySelector('button.on')
     if (on && el.scrollWidth > el.clientWidth) el.scrollLeft = on.offsetLeft - el.clientWidth / 2 + on.offsetWidth / 2
@@ -1091,10 +1106,12 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
       const buy = buyOf(b)
       // The link-preview image (from tools/print/thumbs.py) when there is one, else the thumbnail.
       const big = b.files.svg.replace(/[^/]*$/, 'social.png')
-      return '<article class="hero"><a class="pic" href="#' + esc(b.id) + '"><img src="' + esc(big) + '" data-fallback="' + esc(b.files.thumb || '') + '" alt="' + esc(h.title) + '"></a>' +
+      // A hero with a page (a series' own page) sends its picture, years and button there.
+      const go = (x) => (h.page ? h.page + (x && x.time ? '/' + x.time.year : '') : '#' + x.id)
+      return '<article class="hero"><a class="pic" href="' + esc(go(b)) + '"><img src="' + esc(big) + '" data-fallback="' + esc(b.files.thumb || '') + '" alt="' + esc(h.title) + '"></a>' +
         '<div class="tx"><h2>' + esc(h.title) + '</h2>' + (h.blurb ? '<p>' + esc(h.blurb) + '</p>' : '') +
-        (ser.length > 1 ? '<div class="years">' + ser.map((y) => '<a href="#' + esc(y.id) + '" title="' + esc(y.time.title || '') + '">' + esc(y.time.year) + '</a>').join('') + '</div>' : '') +
-        '<div class="acts"><a class="btn ghost" href="#' + esc(b.id) + '">' + (ser.length > 1 ? 'Step through ' + ser.length + ' years' : 'Explore the map') + '</a>' +
+        (ser.length > 1 ? '<div class="years">' + ser.map((y) => '<a href="' + esc(go(y)) + '" title="' + esc(y.time.title || '') + '">' + esc(y.time.year) + '</a>').join('') + '</div>' : '') +
+        '<div class="acts"><a class="btn ghost" href="' + esc(go(b)) + '">' + (h.page ? esc(h.pageLabel || 'Step through the years') : ser.length > 1 ? 'Step through ' + ser.length + ' years' : 'Explore the map') + '</a>' +
         (buy ? '<a class="btn" href="' + esc(buy.url) + '" target="_blank" rel="noopener">' + esc(buy.label) + '</a>' : '') + '</div></div></article>'
     }).join('') + '</div>')
     // Story pages as cards, each with its link-preview picture, title and one-line summary.
@@ -1135,10 +1152,42 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     renderPages()
   }
 
+  // Build a series page's view into the article, before its first section (through-time.ts).
+  const mountSeries = (p) => {
+    const latest = latestOf(p.series)
+    const ser = latest ? seriesOf(latest) : []
+    const host = document.createElement('section')
+    host.className = 'tt'
+    host.setAttribute('aria-label', 'The view, year by year')
+    const h2 = $('article').querySelector('h2')
+    if (h2) h2.parentNode.insertBefore(host, h2)
+    else $('article').insertBefore(host, $('article').querySelector('.source'))
+    if (ser.length === 0) {
+      host.innerHTML = '<p>No builds of this series are here yet: make them with <code>isoscape series ' + esc(p.series) + '</code>.</p>'
+      return { slug: p.slug, years: [], api: null }
+    }
+    const years = ser.map((b) => b.time.year)
+    const hero = home && home.heroes.find((x) => x.region === p.series)
+    const first = hero && hero.year !== undefined && years.includes(hero.year) ? hero.year : years[years.length - 1]
+    const items = ser.map((b) => ({
+      year: b.time.year, title: b.time.title || '', note: b.time.note || '', viewBox: b.viewBox,
+      // The light preview picture (about 3,700 px wide), never the SVG: years switch at once.
+      src: b.files.preview || b.files.svg,
+      alt: 'Isometric map of ' + titleOf(b) + ' as it stood in ' + b.time.year + (b.time.title ? ' (' + b.time.title + ')' : ''),
+    }))
+    const api = seriesView(host, {
+      items, start: { a: first, b: null },
+      onChange: (s) => { setAddress(tt.route(p.slug, s), false); routed = location.hash },
+      onLink: (btn) => copyLink(btn),
+      viewerHref: (s) => '#' + p.series + ':' + s.a + (s.b === null ? '' : '..' + p.series + ':' + s.b),
+    }, tt, split)
+    return { slug: p.slug, years, api, host }
+  }
   const openPage = (slug, section) => {
     const p = pageBySlug.get(slug) || listed[0]
     if (!p) return
     if (state.home) closeHome()
+    const wasOpen = state.page === p.slug
     state.page = p.slug
     document.body.classList.add('reading')
     document.body.classList.toggle('noshop', !!p.noShop)
@@ -1146,7 +1195,8 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
       $('article').dataset.slug = p.slug
       // The page's shop button above it and again at its foot, as on its static page.
       const buyp = p.shop ? '<p class="buyp"><a class="btn" href="' + esc(p.shop.url) + '" target="_blank" rel="noopener">' + esc(p.shop.label) + '</a></p>' : ''
-      $('article').innerHTML = buyp + p.html + buyp + '<p class="source">This page is <code>' + esc(p.file) + '</code>. Edit it there; the next build, or <code>isoscape explorer</code>, puts the change here.</p>'
+      $('article').innerHTML = buyp + p.html + (p.shopLine || '') + buyp + '<p class="source">This page is <code>' + esc(p.file) + '</code>. Edit it there; the next build, or <code>isoscape explorer</code>, puts the change here.</p>'
+      ttView = p.series ? mountSeries(p) : null
       $('toc').innerHTML = p.headings.length < 2 ? '' : '<h3>On this page</h3>' + p.headings.map((h) =>
         '<a href="#/' + esc(p.slug) + '/' + esc(h.id) + '" data-id="' + esc(h.id) + '">' + esc(h.text) + '</a>').join('')
     }
@@ -1157,14 +1207,24 @@ ${STORY_CSS}.doc .back[hidden] { display: none; }
     document.title = p.title + ' · isoscape explorer'
     renderPages()
     renderList()
-    const target = section ? document.getElementById('p-' + p.slug + '-' + section) : null
+    $('page').classList.toggle('tt-wide', !!p.series)
+    document.body.classList.toggle('ttpage', !!p.series)
+    // A series page's route can name a year or two (#/<slug>/1865..1870): the view shows them.
+    const ttState = p.series && ttView && ttView.api ? tt.parse(section, ttView.years) : null
+    if (ttState) ttView.api.set(ttState)
+    const target = section && !ttState ? document.getElementById('p-' + p.slug + '-' + section) : null
     if (target) target.scrollIntoView({ block: 'start' })
-    else $('page').scrollTop = 0
+    else if (ttState && wasOpen) {
+      // A jump link further down the page: bring the view back up into sight (the page's own box scrolls, never the window).
+      const top = ttView.host.getBoundingClientRect().top - $('page').getBoundingClientRect().top
+      if (top < 0 || top > $('page').clientHeight * 0.5) $('page').scrollTop += top - 12
+    } else $('page').scrollTop = 0
     $('page').focus({ preventScroll: true })
     markToc()
   }
   const closePage = () => {
     state.page = null
+    document.body.classList.remove('ttpage')
     document.body.classList.remove('reading')
     document.body.classList.remove('noshop')
     document.title = 'isoscape explorer'
