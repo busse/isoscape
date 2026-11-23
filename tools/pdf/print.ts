@@ -46,6 +46,8 @@ export interface Asset {
   readonly h: number
   /** Rows (as fractions of the height, 0–1) where the picture is blank across: places it may be cut. */
   readonly gaps?: readonly number[]
+  /** Each gap's height (a fraction of the picture's height), in the same order as `gaps`. */
+  readonly gapSizes?: readonly number[]
 }
 
 export interface PrintOptions {
@@ -135,14 +137,24 @@ const crop = (a: Asset, x: number, y: number, w: number, h: number, alt: string)
  * The pieces to cut a tall picture into so none is taller than `max` (in the picture's pixels), as
  * [top, bottom] pairs: at the lowest blank row in the lower half of each piece where there is one,
  * else at the limit, with the next piece starting a little above it so nothing is lost at the cut.
+ * Given the gaps' heights (`sizes`), the tallest blank band in that half is taken instead when it is
+ * at least WIDE_GAP times as tall as the lowest one and WIDE_GAP_MIN of the picture's height: a
+ * picture laid out in parts, such as a map above its key, is cut between its parts rather than
+ * inside one. (The timelines' bands, under 2% of their height, are cut as before.)
  */
-export const piecesFor = (h: number, max: number, gaps: readonly number[] = []): [number, number][] => {
+export const WIDE_GAP = 3
+export const WIDE_GAP_MIN = 0.03
+export const piecesFor = (h: number, max: number, gaps: readonly number[] = [], sizes: readonly number[] = []): [number, number][] => {
   const out: [number, number][] = []
   let from = 0
   while (h - from > max) {
-    const blank = gaps.map((g) => g * h).filter((y) => y > from + max * 0.5 && y <= from + max)
+    const ok = gaps.map((g, i) => ({ y: g * h, size: sizes[i] ?? 0 })).filter((g) => g.y > from + max * 0.5 && g.y <= from + max)
+    const blank = ok.map((g) => g.y)
     if (blank.length > 0) {
-      const at = Math.max(...blank)
+      let at = Math.max(...blank)
+      const low = ok.find((g) => g.y === at)?.size ?? 0
+      const tall = ok.reduce((b, g) => (g.size > b.size || (g.size === b.size && g.y > b.y) ? g : b), ok[0])
+      if (low > 0 && tall.size >= WIDE_GAP * low && tall.size >= WIDE_GAP_MIN) at = tall.y
       out.push([from, at])
       from = at
     } else {
@@ -166,7 +178,7 @@ const picture = (p: Pic, wide: boolean, ed: Edition, assets: PrintOptions['asset
   const aspect = a.w / a.h
   // Tall: page-high pieces, cut at blank rows.
   if (width / aspect > spec.maxPic) {
-    const pieces = piecesFor(a.h, (spec.maxPic / width) * a.w, a.gaps)
+    const pieces = piecesFor(a.h, (spec.maxPic / width) * a.w, a.gaps, a.gapSizes)
     return {
       html: pieces.map(([top, bottom], i) => {
         const label = i === 0 ? '' : `<p class="pic-label" aria-hidden="true">${esc(figLabel)}, continued</p>`

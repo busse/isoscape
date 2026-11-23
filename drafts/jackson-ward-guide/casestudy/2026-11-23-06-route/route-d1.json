@@ -1,0 +1,916 @@
+{
+ "about": "The guide's stops and walking route, from OpenStreetMap (the region's cache), written to\nroute.json for the map, the pairs and the page.\n\n    python3 tools/stories/jackson-ward-guide/route.py\n\nEach stop is given as a target near where a walker should stand; the target is moved to the\nnearest point of a mapped sidewalk (OSM footway=sidewalk) within 25 m, or else onto the nearest\nstreet, so every standing point is on a public way. The route between stops is the shortest\nwalk over OSM's streets, sidewalks and crossings (never the motorway or its ramps), with any\nstep inside the approximate Gilpin Court outline (gilpin.py) counted five times its length, so\nthe route keeps to the streets around it. Distances are along that walk.",
+ "walk_m_per_min": 80,
+ "stops": [
+  {
+   "n": 1,
+   "key": "second-leigh",
+   "title": "Second Street at Leigh Street",
+   "target": null,
+   "face": 225,
+   "where": "at the corner of North 2nd and East Leigh Streets, on the east side of 2nd, by Eggleston Plaza",
+   "sees": "south down 2nd Street toward Clay and Broad Streets",
+   "lon": -77.437268,
+   "lat": 37.5475,
+   "xy": [
+    20.5,
+    -331.7
+   ],
+   "on_way": "w1205384874",
+   "snapped_m": 3.6,
+   "node": 11171005412
+  },
+  {
+   "n": 2,
+   "key": "second-trench",
+   "title": "Where Second Street stops",
+   "target": null,
+   "face": 45,
+   "where": "at the north end of North 2nd Street, where it meets East Duval Street by the highway",
+   "sees": "north across I-95 to where 2nd Street starts again",
+   "lon": -77.435499,
+   "lat": 37.549375,
+   "xy": [
+    176.6,
+    -124.4
+   ],
+   "on_way": "w1210906690",
+   "snapped_m": 16.6,
+   "node": 11219226776
+  },
+  {
+   "n": 3,
+   "key": "sixth-mount-zion",
+   "title": "Sixth Mount Zion Baptist Church",
+   "target": null,
+   "face": 0,
+   "where": "on the south sidewalk of West Duval Street, across from the church",
+   "sees": "north at Sixth Mount Zion Baptist Church, with the highway behind it",
+   "lon": -77.438362,
+   "lat": 37.550238,
+   "xy": [
+    -76.0,
+    -29.0
+   ],
+   "on_way": "w1483868750",
+   "snapped_m": 0.5,
+   "node": 13605930341
+  },
+  {
+   "n": 4,
+   "key": "chamberlayne-bridge",
+   "title": "Chamberlayne Parkway bridge",
+   "target": null,
+   "face": 110,
+   "where": "on the east sidewalk of the Chamberlayne Parkway bridge, halfway across",
+   "sees": "east along the trench toward the North 1st Street bridge",
+   "lon": -77.440672,
+   "lat": 37.551388,
+   "xy": [
+    -279.9,
+    98.2
+   ],
+   "on_way": "w1122219209",
+   "snapped_m": 4.4,
+   "node": 10264281511
+  },
+  {
+   "n": 5,
+   "key": "gilpin-edge",
+   "title": "Gilpin Court, where Apostle Town stood",
+   "target": null,
+   "face": 70,
+   "where": "on the west sidewalk of Chamberlayne Avenue at West Charity Street",
+   "sees": "east across the avenue at Gilpin Court",
+   "lon": -77.441226,
+   "lat": 37.55263,
+   "xy": [
+    -328.8,
+    235.5
+   ],
+   "on_way": "w1215813972",
+   "snapped_m": 4.9,
+   "node": 7058758178
+  },
+  {
+   "n": 6,
+   "key": "bates-street",
+   "title": "Bates Street and the JXN Haus",
+   "target": null,
+   "face": 120,
+   "where": "at the corner of North 2nd and East Bates Streets",
+   "sees": "east along Bates Street",
+   "lon": -77.433766,
+   "lat": 37.55118,
+   "xy": [
+    329.6,
+    75.2
+   ],
+   "on_way": "w1306725612",
+   "snapped_m": 3.5,
+   "node": 12101788948
+  },
+  {
+   "n": 7,
+   "key": "first-bridge",
+   "title": "North 1st Street bridge",
+   "target": null,
+   "face": 115,
+   "where": "on the east sidewalk of the North 1st Street bridge, halfway across",
+   "sees": "east along the trench, toward the cut ends of 2nd Street and Navy Hill beyond",
+   "lon": -77.436077,
+   "lat": 37.55022,
+   "xy": [
+    125.6,
+    -31.0
+   ],
+   "on_way": "w1485475447",
+   "snapped_m": 7.4,
+   "node": 446391923
+  },
+  {
+   "n": 8,
+   "key": "coliseum",
+   "title": "The Coliseum site",
+   "target": null,
+   "face": 200,
+   "where": "on the sidewalk of East Leigh Street beside the Coliseum",
+   "sees": "south at the Richmond Coliseum",
+   "lon": -77.433807,
+   "lat": 37.545438,
+   "xy": [
+    326.0,
+    -559.7
+   ],
+   "on_way": "w1125516638",
+   "snapped_m": 22.6,
+   "node": 5512468300
+  }
+ ],
+ "legs": [
+  {
+   "frm": 1,
+   "to": 2,
+   "m": 285,
+   "minutes": 4,
+   "inside_gilpin_m": 0
+  },
+  {
+   "frm": 2,
+   "to": 3,
+   "m": 430,
+   "minutes": 5,
+   "inside_gilpin_m": 0
+  },
+  {
+   "frm": 3,
+   "to": 4,
+   "m": 275,
+   "minutes": 3,
+   "inside_gilpin_m": 0
+  },
+  {
+   "frm": 4,
+   "to": 5,
+   "m": 191,
+   "minutes": 2,
+   "inside_gilpin_m": 0
+  },
+  {
+   "frm": 5,
+   "to": 6,
+   "m": 796,
+   "minutes": 10,
+   "inside_gilpin_m": 0
+  },
+  {
+   "frm": 6,
+   "to": 7,
+   "m": 287,
+   "minutes": 4,
+   "inside_gilpin_m": 0
+  },
+  {
+   "frm": 7,
+   "to": 8,
+   "m": 870,
+   "minutes": 11,
+   "inside_gilpin_m": 0
+  }
+ ],
+ "path": [
+  [
+   [
+    20.5,
+    -331.7
+   ],
+   [
+    16.6,
+    -336.7
+   ],
+   [
+    11.2,
+    -332.2
+   ],
+   [
+    31.8,
+    -305.2
+   ],
+   [
+    38.6,
+    -295.8
+   ],
+   [
+    73.6,
+    -250.3
+   ],
+   [
+    76.8,
+    -246.1
+   ],
+   [
+    80.0,
+    -241.6
+   ],
+   [
+    97.9,
+    -217.3
+   ],
+   [
+    111.9,
+    -198.3
+   ],
+   [
+    136.5,
+    -165.6
+   ],
+   [
+    162.4,
+    -131.2
+   ],
+   [
+    170.1,
+    -121.0
+   ],
+   [
+    176.6,
+    -124.4
+   ],
+   [
+    176.6,
+    -124.4
+   ]
+  ],
+  [
+   [
+    176.6,
+    -124.4
+   ],
+   [
+    176.6,
+    -124.4
+   ],
+   [
+    170.1,
+    -121.0
+   ],
+   [
+    161.5,
+    -116.6
+   ],
+   [
+    123.4,
+    -95.6
+   ],
+   [
+    116.8,
+    -92.9
+   ],
+   [
+    87.5,
+    -80.7
+   ],
+   [
+    82.1,
+    -79.0
+   ],
+   [
+    81.4,
+    -73.4
+   ],
+   [
+    24.4,
+    -53.8
+   ],
+   [
+    16.9,
+    -51.2
+   ],
+   [
+    -13.9,
+    -40.8
+   ],
+   [
+    -52.0,
+    -27.7
+   ],
+   [
+    -66.1,
+    -22.9
+   ],
+   [
+    -106.7,
+    -8.8
+   ],
+   [
+    -141.9,
+    3.6
+   ],
+   [
+    -144.1,
+    -1.6
+   ],
+   [
+    -139.7,
+    -3.1
+   ],
+   [
+    -101.3,
+    -15.8
+   ],
+   [
+    -95.2,
+    -17.9
+   ],
+   [
+    -74.5,
+    -25.1
+   ],
+   [
+    -76.0,
+    -29.0
+   ]
+  ],
+  [
+   [
+    -76.0,
+    -29.0
+   ],
+   [
+    -74.5,
+    -25.1
+   ],
+   [
+    -95.2,
+    -17.9
+   ],
+   [
+    -101.3,
+    -15.8
+   ],
+   [
+    -139.7,
+    -3.1
+   ],
+   [
+    -144.1,
+    -1.6
+   ],
+   [
+    -141.9,
+    3.6
+   ],
+   [
+    -170.3,
+    13.6
+   ],
+   [
+    -260.4,
+    45.6
+   ],
+   [
+    -267.7,
+    48.3
+   ],
+   [
+    -278.4,
+    52.2
+   ],
+   [
+    -280.9,
+    64.0
+   ],
+   [
+    -283.9,
+    77.9
+   ],
+   [
+    -279.9,
+    98.2
+   ]
+  ],
+  [
+   [
+    -279.9,
+    98.2
+   ],
+   [
+    -283.9,
+    77.9
+   ],
+   [
+    -293.1,
+    121.5
+   ],
+   [
+    -294.6,
+    128.6
+   ],
+   [
+    -298.8,
+    148.5
+   ],
+   [
+    -303.1,
+    167.3
+   ],
+   [
+    -304.8,
+    174.0
+   ],
+   [
+    -317.7,
+    179.6
+   ],
+   [
+    -318.8,
+    180.6
+   ],
+   [
+    -318.0,
+    182.0
+   ],
+   [
+    -326.9,
+    225.8
+   ],
+   [
+    -328.6,
+    234.6
+   ],
+   [
+    -328.8,
+    235.5
+   ]
+  ],
+  [
+   [
+    -328.8,
+    235.5
+   ],
+   [
+    -328.6,
+    234.6
+   ],
+   [
+    -326.9,
+    225.8
+   ],
+   [
+    -318.0,
+    182.0
+   ],
+   [
+    -318.8,
+    180.6
+   ],
+   [
+    -317.7,
+    179.6
+   ],
+   [
+    -304.8,
+    174.0
+   ],
+   [
+    -295.2,
+    169.9
+   ],
+   [
+    -294.0,
+    170.2
+   ],
+   [
+    -293.0,
+    170.5
+   ],
+   [
+    -292.7,
+    169.2
+   ],
+   [
+    -270.8,
+    159.6
+   ],
+   [
+    -241.4,
+    147.3
+   ],
+   [
+    -217.7,
+    139.0
+   ],
+   [
+    -195.8,
+    131.4
+   ],
+   [
+    -169.1,
+    122.6
+   ],
+   [
+    -141.8,
+    113.6
+   ],
+   [
+    -140.2,
+    112.1
+   ],
+   [
+    -134.4,
+    110.1
+   ],
+   [
+    -126.5,
+    107.5
+   ],
+   [
+    -125.1,
+    108.0
+   ],
+   [
+    -124.4,
+    106.9
+   ],
+   [
+    -49.9,
+    80.9
+   ],
+   [
+    -47.9,
+    81.4
+   ],
+   [
+    -47.1,
+    80.1
+   ],
+   [
+    -40.0,
+    77.5
+   ],
+   [
+    -32.8,
+    74.8
+   ],
+   [
+    -30.9,
+    75.4
+   ],
+   [
+    -30.1,
+    74.0
+   ],
+   [
+    -28.0,
+    72.9
+   ],
+   [
+    -17.6,
+    69.3
+   ],
+   [
+    13.6,
+    58.5
+   ],
+   [
+    17.4,
+    57.1
+   ],
+   [
+    24.1,
+    54.7
+   ],
+   [
+    46.5,
+    47.2
+   ],
+   [
+    53.5,
+    44.8
+   ],
+   [
+    62.1,
+    41.8
+   ],
+   [
+    139.7,
+    15.2
+   ],
+   [
+    141.2,
+    14.5
+   ],
+   [
+    145.3,
+    13.2
+   ],
+   [
+    148.4,
+    12.1
+   ],
+   [
+    187.1,
+    63.0
+   ],
+   [
+    204.0,
+    85.2
+   ],
+   [
+    208.5,
+    83.6
+   ],
+   [
+    211.3,
+    86.4
+   ],
+   [
+    254.8,
+    70.5
+   ],
+   [
+    303.9,
+    53.6
+   ],
+   [
+    322.2,
+    78.2
+   ],
+   [
+    328.1,
+    73.8
+   ],
+   [
+    329.6,
+    75.2
+   ],
+   [
+    329.6,
+    75.2
+   ]
+  ],
+  [
+   [
+    329.6,
+    75.2
+   ],
+   [
+    329.6,
+    75.2
+   ],
+   [
+    328.1,
+    73.8
+   ],
+   [
+    322.2,
+    78.2
+   ],
+   [
+    303.9,
+    53.6
+   ],
+   [
+    293.1,
+    39.2
+   ],
+   [
+    243.2,
+    -26.5
+   ],
+   [
+    150.8,
+    4.6
+   ],
+   [
+    147.7,
+    1.4
+   ],
+   [
+    141.5,
+    3.3
+   ],
+   [
+    136.9,
+    -2.4
+   ],
+   [
+    125.6,
+    -31.0
+   ]
+  ],
+  [
+   [
+    125.6,
+    -31.0
+   ],
+   [
+    136.9,
+    -2.4
+   ],
+   [
+    88.9,
+    -66.8
+   ],
+   [
+    81.4,
+    -73.4
+   ],
+   [
+    82.1,
+    -79.0
+   ],
+   [
+    82.3,
+    -80.4
+   ],
+   [
+    4.4,
+    -181.8
+   ],
+   [
+    2.6,
+    -184.3
+   ],
+   [
+    -0.3,
+    -188.4
+   ],
+   [
+    -3.8,
+    -192.8
+   ],
+   [
+    -5.4,
+    -194.8
+   ],
+   [
+    -37.6,
+    -238.9
+   ],
+   [
+    -62.5,
+    -272.1
+   ],
+   [
+    -64.6,
+    -274.8
+   ],
+   [
+    -62.0,
+    -276.7
+   ],
+   [
+    4.0,
+    -326.3
+   ],
+   [
+    11.2,
+    -332.2
+   ],
+   [
+    16.6,
+    -336.7
+   ],
+   [
+    27.7,
+    -345.6
+   ],
+   [
+    41.6,
+    -357.3
+   ],
+   [
+    44.5,
+    -359.3
+   ],
+   [
+    40.3,
+    -365.1
+   ],
+   [
+    77.6,
+    -393.5
+   ],
+   [
+    85.9,
+    -399.7
+   ],
+   [
+    94.4,
+    -406.3
+   ],
+   [
+    115.3,
+    -422.6
+   ],
+   [
+    128.4,
+    -433.9
+   ],
+   [
+    135.5,
+    -440.3
+   ],
+   [
+    147.4,
+    -451.0
+   ],
+   [
+    149.3,
+    -452.6
+   ],
+   [
+    161.0,
+    -462.9
+   ],
+   [
+    168.1,
+    -464.1
+   ],
+   [
+    174.6,
+    -466.3
+   ],
+   [
+    188.1,
+    -476.5
+   ],
+   [
+    198.4,
+    -484.4
+   ],
+   [
+    207.4,
+    -491.2
+   ],
+   [
+    215.7,
+    -497.5
+   ],
+   [
+    224.5,
+    -503.8
+   ],
+   [
+    234.8,
+    -510.4
+   ],
+   [
+    253.9,
+    -521.6
+   ],
+   [
+    271.9,
+    -532.2
+   ],
+   [
+    284.8,
+    -539.8
+   ],
+   [
+    292.9,
+    -545.1
+   ],
+   [
+    302.3,
+    -551.3
+   ],
+   [
+    311.7,
+    -557.8
+   ],
+   [
+    321.7,
+    -564.9
+   ],
+   [
+    326.0,
+    -559.7
+   ]
+  ]
+ ],
+ "total_m": 3134,
+ "total_minutes": 39,
+ "last_to_first_m": 390
+}

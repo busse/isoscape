@@ -193,14 +193,19 @@ class Labeler:
 
     def draw(self, cx, cy, s, px, ang, color, italic=False, bold=False, halo=True, z=20, lines=1):
         deg = math.degrees(ang)
-        self.ax.text(cx, cy, s, fontsize=px * 0.72, rotation=deg, rotation_mode='anchor', ha='center', va='center',
-                     color=color, style='italic' if italic else 'normal', fontweight=600 if bold else 'normal', zorder=z,
-                     linespacing=1.1,
-                     path_effects=[pe.withStroke(linewidth=px * 0.72 * 0.28, foreground=C['paper'])] if halo else None)
+        kw = dict(fontsize=px * 0.72, rotation=deg, rotation_mode='anchor', ha='center', va='center',
+                  style='italic' if italic else 'normal', fontweight=600 if bold else 'normal', linespacing=1.1)
+        if halo:
+            # the halo on its own, under the text: matplotlib draws text with path effects as
+            # outlines, so the name itself is drawn plainly on top and stays text in an SVG or PDF
+            self.ax.text(cx, cy, s, color=C['paper'], zorder=z - 0.01,
+                         path_effects=[pe.withStroke(linewidth=px * 0.72 * 0.28, foreground=C['paper'])], **kw)
+        self.ax.text(cx, cy, s, color=color, zorder=z, **kw)
 
     def along(self, line, s, px, color, italic=False, bold=False, every=None, z=20, step=None, bend=0.35, toward=None):
         """Place s along a line at the first free spots, each run straight over the label's
         length; with `every` (meters) more than once. Returns how many were placed."""
+        px = max(px, CURRENT.get('min_px') or 0)
         w = text_w(s, px, italic, bold) + 4
         L_m = w * self.mpp
         if line.length < L_m * 0.9:
@@ -239,6 +244,7 @@ class Labeler:
 
     def near(self, x, y, s, px, color, italic=False, bold=False, reach=(0, 60), leader=False, z=21, prefer=None):
         """Place s horizontally at or near (x, y), trying rings of offsets out to reach[1] px."""
+        px = max(px, CURRENT.get('min_px') or 0)
         lines = s.split('\n')
         w = max(text_w(t, px, italic, bold) for t in lines) + 4
         h = px * 1.25 * len(lines)
@@ -338,9 +344,15 @@ def draw_map(ax, D, bounds, mpp, route, stops_in, labels, px_base):
         ax.fill(q[:, 0], q[:, 1], color=C['landmark'], zorder=5, lw=0, alpha=0.85)
         ax.plot(q[:, 0], q[:, 1], color=C['ink'], lw=LW * pt, zorder=5.1)
     # the walk
+    # a paper casing under the line sets the walk apart from the gray streets by more than its
+    # color, so it still reads on a black-and-white printer
     for leg in route['path']:
         p = np.array(leg)
-        ax.plot(p[:, 0], p[:, 1], color=C['route'], lw=3.4 * zoom * pt, zorder=7, alpha=0.9,
+        ax.plot(p[:, 0], p[:, 1], color=C['paper'], lw=(3.4 * zoom + 3.0) * pt, zorder=6.9,
+                solid_capstyle='round', solid_joinstyle='round')
+    for leg in route['path']:
+        p = np.array(leg)
+        ax.plot(p[:, 0], p[:, 1], color=C['route'], lw=3.4 * zoom * pt, zorder=7,
                 solid_capstyle='round', solid_joinstyle='round')
     full_labels = labels == 'full'
     overview = labels == 'overview'
@@ -359,11 +371,11 @@ def draw_map(ax, D, bounds, mpp, route, stops_in, labels, px_base):
             by = ty - px_base * 1.4 * mpp
             lab.reserve(sbox(bx, by, bx + w * mpp, by + px_base * 1.4 * mpp))
     # keep labels off the scale bar and the north arrow (drawn after, at these places)
-    sx, sy = x0 + 12 * mpp, y0 + 34 * mpp
+    sx, sy = x0 + 12 * mpp, y0 + 46 * mpp
     if CURRENT['name'] in SCALE_RIGHT:
         sx = x1 - 12 * mpp - max(200 + 60 * mpp, (text_w(f'200 m is about {200 / route["walk_m_per_min"]:.1f} minutes on foot', px_base * 0.85) + 14) * mpp)
-    sw_m = max(200 * 1.0 + 60 * mpp, (text_w(f'200 m is about {200 / route["walk_m_per_min"]:.1f} minutes on foot', px_base * 0.85) + 14) * mpp)
-    lab.reserve(sbox(sx - 8 * mpp, sy - 28 * mpp, sx - 6 * mpp + sw_m + 4 * mpp, sy + 26 * mpp))
+    sw_m = scale_w(mpp, CURRENT.get('scale_px') or px_base, route['walk_m_per_min'])
+    lab.reserve(sbox(sx - 8 * mpp, sy - 40 * mpp, sx - 6 * mpp + sw_m + 4 * mpp, sy + 26 * mpp))
     lab.reserve(sbox(x1 - 40 * mpp, y1 - 44 * mpp, x1, y1))
     for poly in D['landmarks'].values():     # no street name across a landmark
         lab.reserve(poly)
@@ -527,7 +539,7 @@ def scale_bar(ax, x, y, mpp, px_base, walk):
     m_len, ft_len = 200, 500
     ftm = ft_len * 0.3048
     tick = 4 * mpp
-    ax.add_patch(plt.Rectangle((x - 6 * mpp, y - 26 * mpp), max(max(m_len, ftm) + 60 * mpp, (text_w(f'200 m is about {200 / walk:.1f} minutes on foot', px_base * 0.85) + 14) * mpp), 50 * mpp,
+    ax.add_patch(plt.Rectangle((x - 6 * mpp, y - 38 * mpp), scale_w(mpp, px_base, walk), 62 * mpp,
                                fc=C['paper'], ec='none', alpha=0.85, zorder=39))
     ax.plot([x, x + m_len], [y, y], color=C['ink'], lw=1.6 * pt * 1.4, zorder=40, solid_capstyle='butt')
     for t in (0, 100, 200):
@@ -537,7 +549,13 @@ def scale_bar(ax, x, y, mpp, px_base, walk):
     for t in (0, 250, 500):
         ax.plot([x + t * 0.3048] * 2, [y - 2 * mpp, y - 2 * mpp - tick], color=C['ink'], lw=1.0 * pt * 1.4, zorder=40)
     ax.text(x + ftm + 4 * mpp, y - 3 * mpp, '500 ft', fontsize=px_base * 0.9 * pt, va='top', zorder=40)
-    ax.text(x, y - 16 * mpp, f'200 m is about {200 / walk:.1f} minutes on foot', fontsize=px_base * 0.85 * pt, va='top', color=C['ink'], zorder=40)
+    ax.text(x, y - 16 * mpp, f'200 m is about\n{200 / walk:.1f} minutes on foot', fontsize=px_base * 0.85 * pt, va='top', color=C['ink'], zorder=40,
+            linespacing=1.1)
+
+
+def scale_w(mpp, px_base, walk):
+    """The scale bar's panel width, in map meters."""
+    return max(200 + 60 * mpp, (text_w(f'{200 / walk:.1f} minutes on foot', px_base * 0.85) + 14) * mpp)
 
 
 def key_and_credits(fig, rect, px_base, route, which, dropped_note):
@@ -603,10 +621,11 @@ def key_and_credits(fig, rect, px_base, route, which, dropped_note):
             ax.add_patch(plt.Rectangle((xs[0], yy - fy(px_base * 0.45)), sw if kind != 'landmark' else fx(12), fy(px_base * 0.9), fc=fc, ec=ec,
                                        lw=(1.4 if kind == 'gilpin' else 0.6) * pt))
         elif kind == 'route':
+            ax.plot(xs, [yy, yy], color=C['paper'], lw=6.6 * pt, solid_capstyle='round')
             ax.plot(xs, [yy, yy], color=C['route'], lw=3.6 * pt, solid_capstyle='round')
         elif kind == 'stop':
             ax.add_patch(matplotlib.patches.Ellipse((xs[0] + fx(8), yy), fx(16), fy(16), color=C['ink']))
-            ax.text(xs[0] + fx(8), yy, '1', ha='center', va='center', color=C['paper'], fontsize=px_base * 0.9 * pt, fontweight=700)
+            ax.text(xs[0] + fx(8), yy, '1', ha='center', va='center', color=C['paper'], fontsize=px_base * 0.95 * pt, fontweight=700)
         style = 'italic' if kind == 'lost' else 'normal'
         ax.text(xs[1] + fx(8), yy, text, va='center', fontsize=px_base * 0.92 * pt, style=style,
                 color=C['lost'] if kind == 'lost' else C['ink'], linespacing=1.15)
@@ -622,6 +641,8 @@ def key_and_credits(fig, rect, px_base, route, which, dropped_note):
                   'parcel records, approximate. Drawn by Chris Busse with isoscape, built with Claude.')
     if dropped_note:
         credit = dropped_note + ' ' + credit
+    if which == 'sheet':
+        return      # the folded sheet carries the credits on its cover (fold.py)
     import textwrap
     chars = int(W / (px_base * 0.8 * 0.52))
     ax.text(fx(4), y - fy(4), '\n'.join(textwrap.wrap(credit, chars)), va='top', fontsize=px_base * 0.8 * pt, color=C['muted'], linespacing=1.3)
@@ -633,9 +654,9 @@ RENDERS = {
     # the two working maps; 'full' names every street and every 1952 stretch.
     'phone': ((-780, 680, -745, 520), 390, 13.5, 'overview', 'The whole walk'),
     'west': ((-770, 40, -270, 400), 390, 14, 'full', 'West map: stops 5, 6 and 7'),
-    'east': ((-110, 640, -800, 250), 390, 14, 'full', 'East map: stops 1 to 4 and 8'),
+    'east': ((-110, 640, -745, 200), 390, 14, 'full', 'East map: stops 1 to 4 and 8'),
     # the folded sheet's map: 7.0 in wide at 100 CSS px to the inch, names at 11.8 px (8.5 pt)
-    'sheet': ((-790, 560, -660, 400), 700, 11.8, 'full', 'The walk'),
+    'sheet': ((-790, 560, -720, 400), 680, 11.8, 'full', 'The walk'),
 }
 # Street names placed first near a stop, on a given rendering, and then nowhere else on it
 # (the west map's only other "Chamberlayne Avenue" is the Belvidere Street extension, across the
@@ -650,8 +671,9 @@ PIN = {
 # which is on West Duval.
 SKIP = {'west': {'East Duval Street'}}
 # the scale bar in the lower right, where the lower left holds the Coliseum
-SCALE_RIGHT = {'east'}
+SCALE_RIGHT = set()
 CURRENT = {'name': None}
+KEY_GAP = 22   # CSS px of clear paper between a map and its key
 # The working maps' frames, outlined on the overview so a reader knows which to open.
 HALVES = {'West map': 'west', 'East map': 'east'}
 # The overview names only these (the walk's spine), so it stays legible at 390 px.
@@ -662,24 +684,29 @@ OVERVIEW_STREETS = ['North 2nd Street', 'East Leigh Street', 'Chamberlayne Parkw
 def render(name, out_full, rnd):
     bounds, W, px, full, title = RENDERS[name]
     CURRENT['name'] = name
+    # on the printed sheet no text under 8.5 pt (11.8 CSS px at 100 to the inch) but the credits, 7 pt or more
+    CURRENT['scale_px'] = px / 0.85 if name == 'sheet' else None
+    CURRENT['min_px'] = px if name == 'sheet' else None
     x0, x1, y0, y1 = bounds
     mpp = (x1 - x0) / (W - 2)
     map_h = (y1 - y0) / mpp
     D = gather(bounds)
     route = load('route.json')
     head = px * 3.6
-    keyh = px * 1.7 * 8 + px * 1.25 * 3 + px * 0.8 * 1.3 * 7 + 28
+    keyh = px * 1.7 * 8 + px * 1.25 * 3 + px * 0.8 * 1.3 * 7 + 28 + KEY_GAP
     if name == 'sheet':
         # 7.0 x 8.0 in at 100 CSS px to the inch: two panels of the folded sheet less their margins
         head = px * 2.2
-        H = 800
+        H = 790
         keyh = H - head - map_h
         assert keyh >= px * 1.25 * 9 + px * 0.8 * 1.3 * 4, f'the sheet\'s key has {keyh:.0f} px'
     else:
         H = head + map_h + keyh
     fig = plt.figure(figsize=(W / 100, H / 100))
     ax = fig.add_axes([1 / W, (keyh) / H, (W - 2) / W, map_h / H])
-    key_rect = [6 / W, 2 / H, (W - 12) / W, (keyh - 8) / H]
+    # a clear band between the map and its key, wider than any between key rows, so a PDF that
+    # must cut the picture cuts it there (tools/pdf piecesFor, WIDE_GAP)
+    key_rect = [6 / W, 2 / H, (W - 12) / W, (keyh - 8 - KEY_GAP) / H]
     title_y = (H - 6) / H
     title_x = 8 / W
     fig.patch.set_facecolor(C['paper'])
@@ -688,7 +715,7 @@ def render(name, out_full, rnd):
     sx = x0 + 12 * mpp
     if name in SCALE_RIGHT:
         sx = x1 - 12 * mpp - max(200 + 60 * mpp, (text_w(f'200 m is about {200 / route["walk_m_per_min"]:.1f} minutes on foot', px * 0.85) + 14) * mpp)
-    scale_bar(ax, sx, y0 + 34 * mpp, mpp, px, route['walk_m_per_min'])
+    scale_bar(ax, sx, y0 + 46 * mpp, mpp, CURRENT.get('scale_px') or px, route['walk_m_per_min'])
     if name == 'sheet':
         fig.text(title_x, title_y, 'The walk, north up. Numbers are the stops, in walking order.', fontsize=px * 1.05 * 0.72,
                  fontweight=700, va='top', ha='left')
@@ -698,7 +725,7 @@ def render(name, out_full, rnd):
                'North is up. The west and east maps overlap.')
         fig.text(title_x, title_y - px * 1.75 / H, sub, fontsize=px * 0.92 * 0.72, va='top', ha='left', color=C['muted'])
     note = 'The dashed frames are the west and east maps, which name more streets.' if name == 'phone' else ''
-    key_and_credits(fig, key_rect, px, route, name, note)
+    key_and_credits(fig, key_rect, px / 0.92 if name == 'sheet' else px, route, name, note)
     base = f'jackson-ward-guide-map-{name}'
     od = os.path.join(ROOT, 'out/stories/jackson-ward-guide')
     os.makedirs(od, exist_ok=True)

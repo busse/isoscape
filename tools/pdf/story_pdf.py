@@ -97,6 +97,11 @@ def pictures(src: str) -> list:
 
 def blank_rows(img: Image.Image) -> list:
     """Rows (as fractions of the height) at the middle of each blank band at least 4 px high (at 400 px wide)."""
+    return [mid for mid, _ in blank_bands(img)]
+
+
+def blank_bands(img: Image.Image) -> list:
+    """Each blank band at least 4 px high (at 400 px wide): (its middle, its height), as fractions of the height."""
     g = img.convert('RGB').resize((400, max(1, round(img.height * 400 / img.width))))
     bg = g.getpixel((2, 2))
     w, h = g.size
@@ -110,7 +115,7 @@ def blank_rows(img: Image.Image) -> list:
             run = y
         elif not b and run is not None:
             if y - run >= 4:
-                out.append(round((run + y) / 2 / h, 5))
+                out.append((round((run + y) / 2 / h, 5), round((y - run) / h, 5)))
             run = None
     return out
 
@@ -153,7 +158,8 @@ def prepare(name: str, edition: str, work: str) -> dict:
         info = {'file': name, 'w': w, 'h': h}
         if h / w > 1.2:
             png = subprocess.run(['rsvg-convert', '-w', '400', path], capture_output=True, check=True).stdout
-            info['gaps'] = blank_rows(Image.open(io.BytesIO(png)))
+            bands = blank_bands(Image.open(io.BytesIO(png)))
+        info['gaps'], info['gapSizes'] = [m for m, _ in bands], [z for _, z in bands]
         return info
     large = os.path.join(PAGES, f'{stem}-large{ext}')
     img = Image.open(large if os.path.exists(large) else path)
@@ -170,7 +176,8 @@ def prepare(name: str, edition: str, work: str) -> dict:
     img.save(os.path.join(work, out), 'JPEG', quality=spec['quality'], subsampling=0, optimize=True, progressive=False)
     info = {'file': out, 'w': img.width, 'h': img.height}
     if img.height / img.width > 1.2:
-        info['gaps'] = blank_rows(img)
+        bands = blank_bands(img)
+        info['gaps'], info['gapSizes'] = [m for m, _ in bands], [z for _, z in bands]
     return info
 
 

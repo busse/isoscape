@@ -1,0 +1,34 @@
+{
+  "title": "Jackson Ward guide, stop 8: the Coliseum blocks (trial)",
+  "center": [
+    -77.43444,
+    37.54504
+  ],
+  "width": 760,
+  "depth": 520,
+  "bearing": -9.5,
+  "snap": false,
+  "scale": 2.0,
+  "squash": 0.5,
+  "exaggeration": 1.0,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "minBuildingArea": 12,
+  "dots": "all",
+  "data": "richmond-streetcars",
+  "terrain": {
+    "exaggeration": 2.5,
+    "cell": 5,
+    "contour": 2,
+    "majorEvery": 5,
+    "demResolution": 5
+  },
+  "time": {
+    "history": "history/jackson-ward.json",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  }
+}

@@ -877,7 +877,10 @@ What it does to a page, the same for every story, so a new one needs no layout w
   10%), each across the page at 1.8 times the size. A picture that comes back later (in a compare
   figure) is shown whole. Nothing is turned sideways.
 - **Tall pictures** (a timeline) are cut into pieces no taller than a page allows, at blank rows
-  of the picture where there are any, labeled "Fig. N, continued".
+  of the picture where there are any, labeled "Fig. N, continued". A picture laid out in parts,
+  such as a map above its key, is cut between them: where a blank band in the lower half of a
+  piece is at least three times as tall as the lowest one there and 3% of the picture's height,
+  the cut falls in it (`piecesFor`, `WIDE_GAP`); the guide's maps leave such a band above their key.
 - **Tables** of three or more columns on the phone become a stack: each row's first cell (with the
   second, when the first is only a number) in bold, then "Column: value" for the rest. In the
   large edition tables stay tables, their header repeated on each page.

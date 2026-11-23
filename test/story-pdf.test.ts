@@ -90,6 +90,13 @@ test('links in a PDF stay inside for this page and go to the live site for the r
 
 test('tall pictures are cut at blank rows, and wide tables stack on the phone', () => {
   assert.deepEqual(piecesFor(1000, 2000), [[0, 1000]])
+  // a blank band three times as tall as the lowest in the piece's lower half, and 3% of the picture, is the cut (a map above its key)
+  assert.deepEqual(piecesFor(1600, 1000, [0.45, 0.5, 0.6], [0.03, 0.006, 0.006]), [[0, 720], [720, 1600]])
+  // a taller band that is still thin (under 3% of the picture, as in a timeline) does not move the cut
+  assert.deepEqual(piecesFor(1600, 1000, [0.45, 0.5, 0.6], [0.018, 0.005, 0.005]), [[0, 960], [960, 1600]])
+  // bands of about one height: the lowest, as before
+  assert.deepEqual(piecesFor(1600, 1000, [0.45, 0.5, 0.6], [0.006, 0.008, 0.006]), [[0, 960], [960, 1600]])
+  assert.deepEqual(piecesFor(1600, 1000, [0.45, 0.5, 0.6]), [[0, 960], [960, 1600]], 'without sizes, as before')
   const cut = piecesFor(1800, 700, [0.2, 0.35, 0.6, 0.9])
   assert.deepEqual(cut.map(([a, b]) => [Math.round(a), Math.round(b)]), [[0, 630], [630, 1080], [1080, 1620], [1620, 1800]])
   for (const [a, b] of cut) assert.ok(b - a <= 700)

@@ -32,8 +32,9 @@ City of Richmond parcel records for Gilpin Court's outline, which is approximate
 
 Each stop starts with directions from the stop before it, then says where to stand and what you
 are looking at. The route keeps to mapped sidewalks and crossings, and the directions name each
-crossing with what is there: a signal, a marked crosswalk, or no marked crosswalk. The route and
-directions follow the sidewalks and crossings OpenStreetMap showed on {{osm_date}}.
+crossing with what OpenStreetMap shows there: a signal, a marked crosswalk, or no marked
+crosswalk. The route and directions follow the sidewalks and crossings OpenStreetMap showed on
+{{osm_date}}.
 
 Seven stops have a picture of the same few blocks in 1952 and today, seen from the south as if
 from a low airplane. The numbered disc in the picture is where you stand. On the maps, dashed

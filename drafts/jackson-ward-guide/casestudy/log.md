@@ -116,3 +116,129 @@ Folder: `2026-11-23-05-d1/`. Every rendering kept there is one that was looked a
   network names unresolvable).
 - Claim list: `claims.csv` (128 sentences, each with the story sentence it comes from and its
   source, or marked as the guide's own wayfinding or picture notes) for the independent check.
+
+## The independent check of d1, and the owner's decisions for the final round (November 23, 2026)
+
+An agent that had not drafted the guide checked d1 (163 rows; `2026-11-23-06-route/independent-check.md`
+and `independent-check-findings.csv`). Verdict: the story's facts are carried faithfully (52 of 52
+story-fact sentences); the problems are what the guide added. Must fix: stop 8 said the 1952 sheets
+were not traced for the Coliseum's blocks (34 traced outlines sit inside its footprint); the walk
+crossed the Turnpike's exit ramp at the north end of the Chamberlayne Parkway bridge at an
+uncontrolled crossing, unsaid; the drawn line ran 10.9 m inside the Gilpin Court outline (route.py
+tested only edge midpoints). Should fix: wrong sides of the street at stops 1 and 8, a hatch note
+with no hatch at the 1st Street bridge, a later street in stop 2's 1952 half, the USGS credit
+missing, an informal path, streets with no mapped sidewalk, about 1.95 km of the line on street
+center lines, no written directions, RRHA not spelled out, label placements on the west map, the
+JXN Haus leader, and gaps in claims.csv.
+
+The owner's decisions, from the planning session: the guide and the story correction ship as one
+change set, the guide driving; the route must be one a careful person would lay out for strangers
+(mapped sidewalks and crossings only; a motorway ramp only at a signal; never inside the Gilpin
+outline); directions between stops in plain words; stop 8 corrected and given a real pair if one
+can be made; "About this guide" as plain facts; the page, three PDFs (phone, large screen and a
+folded sheet) and the link from the story page finished in this round; earlier decisions stand
+(Coliseum last; stop at Chamberlayne Avenue across from Gilpin Court; the outline labeled
+approximate; Vance, Axtel and West Charity named; no practical notes; no addresses).
+
+## Step 6: the route, from the sidewalks (10:40-11:05)
+
+Folder: `2026-11-23-06-route/`. Plots of OSM's pedestrian network (sidewalks black, crossings by
+tag: green signals, blue marked, magenta uncontrolled, red unmarked; Gilpin outline pink; the d1
+line in cyan) were looked at for each area: `01`-`06`.
+
+- `route.py` rewritten: a graph of footways only (sidewalks, crossings, footways, pedestrian ways;
+  no road center lines, no `informal=yes`, nothing private). Crossings are judged against roads on
+  the same level, so a bridge sidewalk is not taken for a crossing of the highway under it (the
+  first try dropped both bridges' sidewalks as "motorway crossings").
+- Safety rules in the graph: a crossing of a motorway, a trunk road, their ramps or a primary road
+  is used only where OSM tags it `crossing=traffic_signals`. The only ramp crossing near the walk
+  (w1122219206, uncontrolled) is out. Chamberlayne Parkway has no mapped crossing between Leigh
+  Street and the bridge, so the only way to its west side is the Leigh/Adams junction: a signal
+  across West Leigh (w1122219166) and a zebra across North Adams that OSM tags uncontrolled
+  (w1122219201). The east leg of that junction across West Leigh (4 lanes, uncontrolled) is out;
+  the walk takes the signal across East Leigh at North 1st Street instead.
+- Gilpin Court: no step may touch the outline; a step within 8 m counts ten times its length, so
+  the walk takes the far sidewalk. First try with a 4 m exclusion cut Bates Street off entirely
+  (the only way onto 2nd Street north of the trench is a corner the outline comes within 2-3 m
+  of); the weighted rule takes the south sidewalk of East Federal and crosses at that corner.
+  The whole drawn line is tested: 0.0 m inside.
+- North of the trench the outline covers West Baker Street's only sidewalk, so the west stops
+  (Chamberlayne bridge, Gilpin Court) and the east ones (1st Street bridge, Bates Street) can be
+  joined only south of the trench. The order was chosen by trying every order with stop 1 first
+  and the Coliseum last: 1 Second and Leigh, 2 Where Second Street stops, 3 North 1st Street bridge,
+  4 Bates Street, 5 Sixth Mount Zion, 6 Chamberlayne Parkway bridge (now its west sidewalk),
+  7 Gilpin Court, 8 the Coliseum. 4,190 m, about 50 minutes. Ending elsewhere would save 370 m;
+  the Coliseum stays last, as decided.
+- Stop 1 kept on the northeast corner, now "across Leigh Street from Eggleston Plaza"; stop 2 moved
+  across 2nd Street to its west sidewalk, so leg 1-2 crosses 2nd at the Leigh Street signal and
+  never at the unsignalled Duval corner; stop 8 "on the north sidewalk of East Leigh Street, across
+  the street from the Coliseum".
+- Directions are written by `route.py` from the steps (sidewalk side by the nearest parallel named
+  road, crossings by their tags), smoothed over corner links under 20 m, consecutive crossings
+  merged. Four rounds of wording, read in full each time; the last cut them from 758 to 638 words.
+- `route.md` is the per-leg audit (every crossing with its OSM tags).
+
+## Step 7: maps and pairs (10:58-11:20)
+
+Folder: `2026-11-23-07-maps-pairs/`. Map rounds r2-r17 at reading size; pair rounds r4 (d1) and r5.
+
+- Maps follow the new route and numbering. The walk's streets from the directions are named first;
+  Chamberlayne Avenue, West Charity and Chamberlayne Parkway are pinned near stops 6 and 7, West
+  Duval near stop 5 (the west map's other "Chamberlayne Avenue" is the Belvidere extension, now not
+  named there); East Duval is left off the west map; the JXN Haus is named in Bates Street's own
+  label, "E. Bates St. (JXN Haus)", with no leader. The compact credits name the USGS map; the key
+  has the landmark row. The west map reaches the Leigh/Adams junction.
+- Dead ends: 1952 labels placed before the walk's streets (r8) lost West Jackson and Saint James;
+  reverted. The 1952 name of a 45 m stretch of St. John Street fits on the west map and the sheet
+  but not the east map.
+- The east map's scale bar first moved to the lower right (r5) and then collided with the Coliseum
+  when the map was made shorter for the PDF (r12); fixed with a two-line note, lower left (r13).
+- The walk's line now has a paper casing, so it reads in grayscale (seen on the sheet, step 9).
+- Labels are drawn plainly over a separate halo, so map names stay text in the sheet's SVG and PDF.
+- Pairs (r5) follow the new numbering. Stop 2 is reframed: the box is moved up the picture until
+  no point of Maggie L. Walker Place (w6037438) is in it; the 1952 half no longer shows it
+  (`pairs-r4-stop-2-before.jpg`, `pairs-r5-stop-2-reframed.jpg`).
+- Stop 8: a guide-only frame centered on the Coliseum was built as a trial (`coliseum-trial/`,
+  a temporary region file, not kept). Its 1952 half shows the tracing stopping partway across the
+  Coliseum's site (no traced 1952 building more than about 100 m south of its center) and draws
+  today's Navy Hill streets, some laid out later. Rejected; stop 8 stays text-only, with the reason
+  said as it is.
+
+## Step 8: the page and the PDFs (11:00-11:22)
+
+Folder: `2026-11-23-08-pdfs/`.
+
+- The page: directions before each stop, then where to stand, the pair and the story's sentences;
+  "About this guide" as plain facts after "Who keeps the ward's history"; the flagged sentence on
+  OpenStreetMap's date sits with the directions in "How to use this guide". `pdf: true` and a new
+  shared front-matter key, `pdf-extra:`, list the folded sheet on the PDF line (tested; README).
+  The story page links the guide under its introduction.
+- Phone PDF, round 1: the tall maps were cut inside their key (the tool cuts at the lowest blank
+  row). The tool now prefers a blank band three times as tall as the lowest and 3% of the picture
+  (`WIDE_GAP`, tested), and the maps leave such a band above their key. A first version (twice as
+  tall, no minimum) moved a cut in the published Jackson Ward timeline; caught by comparing the
+  three stories' PDFs text and layout before and after, and tightened until all six were
+  identical. Round 3: the east map's frame itself was taller than a phone page and was cut at its
+  scale bar; made 950 m tall so the map is whole on one page with its key on the next.
+
+## Step 9: the folded sheet (11:12-11:27)
+
+Folder: `2026-11-23-09-folded-sheet/`.
+
+- `fold.py`: US Letter, landscape, folded in thirds. Outside: the map over two panels (map.py's
+  `sheet` rendering, 6.8 x 7.9 in, names at 8.5 pt as text), the cover on the third. Inside: the
+  eight stops with directions, where to stand, and the pairs.
+- Round 1: type sizes 7.4-8.1 pt in the map's 1952 names and key; the map's own credits ran off its
+  box. Fixed: no map text under 8.5 pt on the sheet, the credits moved to the cover (7.3 pt).
+- Round 2: the stops ran past the third panel (stop 8's directions cut). Fixed: line height 1.17,
+  pairs 1.2 in wide, no caption under them (the year is in each picture).
+- Round 3: stop 2's pair floated left of stop 1's; stop 4's pair went to the next column away from
+  its title. Fixed: each pair set at the top of its stop and cleared to the right.
+- Round 4 in grayscale: the walk read like a major street; the cased line fixed it.
+- `fold-mockup.jpg` shows the panels as folded: cover in front, the map's middle on the back,
+  stops 1-4 beside the flap when the cover opens.
+
+## Step 10: the final preview (11:24-)
+
+Folder: `2026-11-23-10-final/`: screenshots of the guide at 390 and 1440 px (static page and
+explorer), the story's new link, the final claim list (331 rows) and the route audit.
