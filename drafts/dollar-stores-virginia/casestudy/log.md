@@ -533,3 +533,13 @@ Folder: `2026-11-23-21-art-panels/`.
   - two squares of copy and sources.
 - **Layout.** The rows are spread to the foot of the sheet.
 - **Rounds.** Two layout passes.
+
+## Step 22: LinkedIn carousel on the methods (November 23, 11:49-12:40)
+
+Folder: `2026-11-23-22-linkedin-carousel/`, holding carousel-r4.pdf, post.md, notes.md and every
+round's slides (r1 to r4).
+
+- **Chris.** A carousel of the case study focused on research and data-viz methods, without the
+  drafting rounds or the art poster.
+- **Made.** 9 slides from `carousel.py`, numbers from `counts.json`, plus a draft post.
+- **Rounds.** Four layout rounds.
