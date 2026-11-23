@@ -9,11 +9,11 @@ unlisted: true
 
 Every piece of work on isoscape, from a first look at a subject to a print for sale, moves through the same stages: rough draft, working draft, final draft and final production. A version number in a print's title block is given only at final production, and names an edition someone could own. Before that, work is counted in draft rounds (d1, d2) and release candidates (rc1, rc2). The rules are in [Changes](changes.md#how-versions-work-from-here) and [How it's made](how-its-made.md#stages-and-inspection).
 
-This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 22, 2026. The page and the board were set up with Claude.
+This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 23, 2026. The page and the board were set up with Claude.
 
 | Stage | Entries |
 |---|---|
-| research | 1 |
+| research | 2 |
 | final production | 47 |
 | published | 1 |
 | in work | 4 |
@@ -32,6 +32,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Our own transcription of Richmond's 48 HOLC area-description forms, from the public-domain scans | research | — | no |
+| — | Trace the 1952 streets of Navy Hill and Gilpin Court for the Jackson Ward views | research | — | no |
 
 ## Final production
 
