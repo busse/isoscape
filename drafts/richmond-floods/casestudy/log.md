@@ -110,3 +110,36 @@ file. Board entry: `series-richmond-floods`. Times are Eastern.
 - **20:10:** two Opus 5.5 subagents started: working draft d1 of the drawing (real levels,
   the city of each year, color and wall round two) on `feature/flood-surface`; and the
   radar rain map (steps numbered from 30).
+
+## 2026-11-24
+
+### Chris reviews d1 (08:39 to 10:04)
+
+The renders for each round are in the spike branch's step folders 27 to 34.
+
+- **08:39, Chris:** "show me what I need to make the d1 decision". A decision sheet made (step
+  27): the 1972 flood on the 1972 city as recorded, on today's city, and 1936 as a traced year.
+- **08:44, Chris, revision 1:** "Why does B say, 'The same river on today's city...' ...the
+  James River has been there always?" The planning session's wording was wrong: it said
+  "river" for "water level". Fixed on the sheet and in every plate title and caption.
+- **08:45, Chris, revision 2:** "The brown isn't showing enough contrast, doubly so the grey".
+  Measured: d1's shallow water was the same lightness as the ground (0.7 L* lighter). Six
+  candidates tried; blue-grey picked (24.5 L* darker than land at the edge); the grey range
+  band replaced by a hatch in the flood color.
+- **09:11, Chris:** "I like the dark blue." Locked as the series color. Then: "are we also
+  raising the level of the blue (water) 'up' the buildings to show the height of the water
+  against the buildings?" Honest answer: geometrically yes, visibly no.
+- Rounds three and four: see-through water (right close up, fails at plate view: greys the
+  blue, shows the 10 m paint bands); a tide mark (misleads, dropped); depth gauges with
+  figures at named places (kept); a pixel-aligned dry twin of the plate for a compare
+  divider (kept); submerged walls drawn over opaque water (kept: reads close up, not at
+  plate view, because 11 ft of water is about 6 px on a full plate).
+- **The conclusion from scale:** depth against buildings can only be read in close views. So
+  the series is planned as a set: a big map for how far the water went, with numbered
+  close-up boxes where the water on the walls reads.
+- **10:04, Chris:** "1. yes" (keep the submerged walls; plan the series as a set). "2. treat
+  Manchester view as its own. they are two distinctly separate areas of the city, especially
+  in this context". So: two areas, Shockoe (north wall) and Manchester (south wall), each
+  with its own big view and boxes.
+- Still open with Chris: the period city (trace the missing buildings for Agnes and Camille,
+  draw on today's city, or mix) and Gaston treatment A or B.

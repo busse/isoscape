@@ -1,7 +1,7 @@
 {
  "about": "The production board: one entry per design or piece of work. The scheme is README \"Stages and the board\"; edit it with `tools/release/board.py set`; `board.py check` validates it.",
  "scheme": "README.md#stages-and-the-board",
- "updated": "2026-11-23",
+ "updated": "2026-11-24",
  "sources": "backfilled November 18, 2026 from catalog/plates.json, releases/ (latest record per design) and the storefront (https://chrisbusse.com/products.json: 39 products live). Orders are \"unknown\" until the store's orders.py has been run.",
  "items": {
   "broad-street-1943-01-ay-tower": {
@@ -3526,7 +3526,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "nothing",
-   "decision": "Worth pursuing (owner, 2026-11-23 20:03), on Opus 5.5 subagents; no outside parties to be contacted, public sources only. Decided: each flood on the city of its own year; 1x terrain; Gaston as depths at named places with a soft pool and the gates open; one neutral sentence on the 2009 lawsuit; a radar rain map for the Shockoe valley; 1771 as a labeled estimate; an Agnes-against-today's-wall plate. Drawing levels (ft NAVD88 at the City Locks): 1771 38.0, Agnes 35.5, 1985 29.7, Camille 27.6, 1936 26.5, Fran 22.7, 2020 17.0. Unknown and staying so: the wall's top elevation and its openings' sills. In work: drawing d1 on branch feature/flood-surface; the rain map. Next gate: the owner approves the look. Record: drafts/richmond-floods/casestudy/.",
+   "decision": "Working draft, in review with the owner (2026-11-24). Locked: dark blue-grey flood color; range bands hatched; submerged walls drawn over opaque water; depth gauges at named places; a dry twin of each plate for a compare divider; the series as a set (big map plus close-up boxes); Shockoe and Manchester as two separate areas, each with its own view; 1x terrain; each flood on the city of its year; no outside parties. Levels (ft NAVD88 at the City Locks): 1771 38.0, Agnes 35.5, 1985 29.7, Camille 27.6, 1936 26.5, Fran 22.7, 2020 17.0. Open with the owner: how to fill the missing buildings of 1969 and 1972 (trace, today's city, or mix); Gaston treatment A or B. Branches feature/flood-surface and feature/flood-rain, unmerged. Record: drafts/richmond-floods/casestudy/.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
