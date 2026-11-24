@@ -143,3 +143,26 @@ The renders for each round are in the spike branch's step folders 27 to 34.
   with its own big view and boxes.
 - Still open with Chris: the period city (trace the missing buildings for Agnes and Camille,
   draw on today's city, or mix) and Gaston treatment A or B.
+
+### 05. Sources for the city of 1969 and 1972 (10:06 to 10:31) · `2026-11-24-05-sources-for-the-1969-72-city/`
+
+- Opus 5.5 subagent, 24 minutes. Files: sources.md, method.md, scripts, four of its twelve
+  sample images (the rest, 16 MB in all, are in the cloud workspace at
+  /home/claude/floods-research/period-city/samples/).
+- **Best public source, no login:** the 1974 USGS orthophoto map of the Richmond quadrangle
+  (public domain, about 1 m per pixel). Good enough to say whether a building stood; too
+  coarse to trace joined rows of buildings.
+- **Why the period plates look empty:** the lifespan rule ends any traced building last seen
+  on the 1950-52 maps in 1960 when nothing else dates its loss. In Shockoe Bottom the traced
+  buildings fall from 177 in 1936 to 16 in 1969 and 1972. 111 buildings that stood in 1952
+  are hidden in 1969; 80 of them are on ground below the 1972 water.
+- **Recommended method:** carry the 1950-52 traces forward and drop only those the 1974 photo
+  shows gone: one present/gone call per building, about 70 to 100 in Shockoe's flood area.
+  Caveat: the photo is two years after Agnes; a building missing from it may have stood in
+  1972 and been cleared after the flood.
+- **Manchester** has no traces at all; its public source is the 1952 South Richmond Sanborn
+  volume (Library of Congress, 87 sheets, 8 to 12 cover the flats).
+- Behind logins or orders, so not used: USGS EarthExplorer single frames (1968, 1974), the
+  Library of Virginia's Sanborn databases, USDA and NOAA film, Virginia DHR's survey system.
+- One web fetch (a Virginia DHR page) waited on a permission prompt that went unanswered;
+  the agent moved on without it.

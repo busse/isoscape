@@ -1,0 +1,45 @@
+{
+ "about": "Traced Sanborn buildings standing in 1952 and not drawn in 1969 (to <= 1969), from wt-floods history/sanborn/lost.geojson less clean.py drops; centroid ground from the 2 m cache vs Agnes 10.82 m NAVD88 (+0.4 m west of Mayo Bridge). Ground only: no connectivity test.",
+ "byArea": {
+  "north of Broad Street": {
+   "total": 317,
+   "assumed": 287,
+   "highway": 23,
+   "rebuilt": 7,
+   "map": 0,
+   "belowAgnes": 6,
+   "belowAgnesAssumed": 5,
+   "area_m2": 0
+  },
+  "Shockoe Slip and downtown": {
+   "total": 55,
+   "assumed": 55,
+   "highway": 0,
+   "rebuilt": 0,
+   "map": 0,
+   "belowAgnes": 30,
+   "belowAgnesAssumed": 30,
+   "area_m2": 0
+  },
+  "Shockoe Bottom": {
+   "total": 111,
+   "assumed": 97,
+   "highway": 14,
+   "rebuilt": 0,
+   "map": 0,
+   "belowAgnes": 80,
+   "belowAgnesAssumed": 68,
+   "area_m2": 0
+  },
+  "Church Hill foot and Rocketts": {
+   "total": 317,
+   "assumed": 314,
+   "highway": 0,
+   "rebuilt": 3,
+   "map": 0,
+   "belowAgnes": 8,
+   "belowAgnesAssumed": 8,
+   "area_m2": 0
+  }
+ }
+}
