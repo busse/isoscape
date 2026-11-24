@@ -1,0 +1,1993 @@
+{
+ "reports": {
+  "2025": {
+   "id": "510129V000C",
+   "effective": "2025-07-08",
+   "pages": 134,
+   "datum": "NAVD88",
+   "datum_source": "Section 6.1, PDF p.49 (printed 44): flood elevations in the report and on the FIRMs are referenced to NAVD88",
+   "conversion": {
+    "table": "Table 19 Countywide Vertical Datum Conversion, PDF p.49 (printed 44)",
+    "quad_corners_ft": {
+     "Richmond NE (37.625,-77.375)": -1.042,
+     "Drewrys Bluff NE (37.500,-77.375)": -1.059,
+     "Bon Air NE (37.625,-77.500)": -0.98,
+     "Chesterfield NE (37.500,-77.500)": -1.025,
+     "Midlothian NE (37.625,-77.625)": -0.969,
+     "Hallsboro NE (37.500,-77.625)": -0.933,
+     "Beach NE (37.375,-77.500)": -1.045,
+     "Chester NE (37.375,-77.375)": -1.083,
+     "Winterpock NE (37.375,-77.625)": -0.981
+    },
+    "average_ft": -1.013,
+    "interpolated_at_city_locks_ft": -1.041,
+    "interpolated_at_westham_ft": -0.983,
+    "note": "NAVD88 = NGVD29 + conversion; interpolation is bilinear between quad corners (this check)"
+   }
+  },
+  "1998": {
+   "id": "510129V000",
+   "revised": "1998-07-20",
+   "pages": 48,
+   "datum": "NGVD29",
+   "datum_source": "Section 3.2, PDF p.13 (printed 9): all elevations referenced to NGVD; profiles and Table 2 labeled FEET NGVD",
+   "conversion": "none stated in the report"
+  }
+ },
+ "james_profiles_2025": {
+  "source": "FEMA FIS 510129V000C, City of Richmond, effective July 8, 2025, Exhibit 1 Flood Profiles, James River panels 17P-23P, PDF pp.106-112",
+  "stationing": "feet above a point about 20,500 ft upstream of Roxbury Road (profile axis label)",
+  "method": "Profiles are vector drawings. Line positions were taken from the PDF geometry (pdftocairo SVG) and scaled from the major grid (20 ft and 1,000 ft per 72 pt). Lines were identified by order: 0.2% > 1%+ > 1% > 2% > 4% > 10% > stream bed. Reading precision 0.05 ft: the 1% reading matches all 15 Floodway Data values within 0.05 ft (see floodway_2025).",
+  "precision_ft": 0.05,
+  "evidence": "evidence/fis2025_p108_panel19P_downtown-108.png",
+  "landmarks": [
+   {
+    "landmark": "Downstream end of James profile (FIS downstream limit, about 2,100 ft upstream of Chippenham Parkway per Table 2)",
+    "station_ft": 132400,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 132400,
+      "panel": "17P",
+      "pdf_page": 106,
+      "wse_navd88_ft": {
+       "p0_2": 35.69,
+       "p1plus": 34.79,
+       "p1": 29.05,
+       "p2": 26.24,
+       "p4": 23.37,
+       "p10": 19.53,
+       "bed": -30.64
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "Confluence of Broad Rock Creek",
+    "station_ft": 151250,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 151250,
+      "panel": "18P",
+      "pdf_page": 107,
+      "wse_navd88_ft": {
+       "p0_2": 42.34,
+       "p1plus": 41.27,
+       "p1": 34.66,
+       "p2": 31.36,
+       "p4": 28.05,
+       "p10": 23.5,
+       "bed": -21.5
+      }
+     }
+    ],
+    "note": "label station read by eye, +/-100 ft"
+   },
+   {
+    "landmark": "Confluence of Gillies Creek",
+    "station_ft": 160195,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 160200,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 44.06,
+       "p1plus": 42.99,
+       "p1": 36.37,
+       "p2": 33.08,
+       "p4": 29.76,
+       "p10": 25.22,
+       "bed": -18.04
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "City Locks gauge USGS 02037705 (not labeled; station derived from OSM chainage)",
+    "station_ft": 161530,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 161550,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 44.52,
+       "p1plus": 43.46,
+       "p1": 36.9,
+       "p2": 33.63,
+       "p4": 30.32,
+       "p10": 25.77,
+       "bed": -13.4
+      }
+     }
+    ],
+    "note": "station +/-300 ft; surface slope here about 0.0002, so +/-0.1 ft"
+   },
+   {
+    "landmark": "I-95 (Richmond-Petersburg Turnpike) bridge",
+    "station_ft": 164010,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 163900,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 44.98,
+       "p1plus": 43.83,
+       "p1": 37.25,
+       "p2": 34.0,
+       "p4": 30.7,
+       "p10": 26.15,
+       "bed": -10.55
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 164150,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 45.01,
+       "p1plus": 43.87,
+       "p1": 37.3,
+       "p2": 34.07,
+       "p4": 30.77,
+       "p10": 26.23,
+       "bed": -10.71
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "Railroad bridge (OSM: CSX Bellwood Subdivision)",
+    "station_ft": 164725,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 164600,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 45.14,
+       "p1plus": 44.05,
+       "p1": 37.46,
+       "p2": 34.21,
+       "p4": 30.89,
+       "p10": 26.32,
+       "bed": -11.8
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 165200,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 45.58,
+       "p1plus": 44.5,
+       "p1": 37.95,
+       "p2": 34.73,
+       "p4": 31.3,
+       "p10": 26.55,
+       "bed": -12.53
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "US 360 / South 14th Street (Mayo Bridge)",
+    "station_ft": 165592,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 165500,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 45.66,
+       "p1plus": 44.58,
+       "p1": 38.03,
+       "p2": 34.81,
+       "p4": 31.41,
+       "p10": 26.62,
+       "bed": -12.81
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 165750,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 46.25,
+       "p1plus": 45.18,
+       "p1": 39.0,
+       "p2": 35.92,
+       "p4": 32.46,
+       "p10": 27.21,
+       "bed": -9.67
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "Railroad bridge (OSM: CSX Richmond District)",
+    "station_ft": 166551,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 166450,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 46.39,
+       "p1plus": 45.32,
+       "p1": 39.13,
+       "p2": 36.05,
+       "p4": 32.64,
+       "p10": 27.33,
+       "bed": -1.77
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 166650,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 46.86,
+       "p1plus": 45.79,
+       "p1": 39.72,
+       "p2": 36.77,
+       "p4": 33.29,
+       "p10": 27.51,
+       "bed": 0.44
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "US 60 / South 9th Street (Manchester Bridge)",
+    "station_ft": 168431,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 168150,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 46.97,
+       "p1plus": 45.9,
+       "p1": 39.8,
+       "p2": 36.83,
+       "p4": 33.37,
+       "p10": 28.38,
+       "bed": 16.47
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 168550,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 47.57,
+       "p1plus": 46.54,
+       "p1": 40.72,
+       "p2": 38.02,
+       "p4": 35.14,
+       "p10": 32.44,
+       "bed": 18.32
+      }
+     }
+    ],
+    "note": "profile ramps up through the 9th Street rapids between about 168,300 and 168,650"
+   },
+   {
+    "landmark": "T. Tyler Potterfield Memorial Bridge (spelled TAYLER on the profile)",
+    "station_ft": 169153,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 169050,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 47.79,
+       "p1plus": 46.79,
+       "p1": 41.13,
+       "p2": 38.55,
+       "p4": 35.95,
+       "p10": 33.52,
+       "bed": 21.32
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 169250,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 48.38,
+       "p1plus": 47.39,
+       "p1": 41.75,
+       "p2": 39.41,
+       "p4": 37.19,
+       "p10": 35.19,
+       "bed": 23.85
+      }
+     }
+    ],
+    "note": "sits on the old Brown's Island dam line; OSM VEPCO Flash Board Dam projects to about 169,200"
+   },
+   {
+    "landmark": "Agnes sign at Tredegar St and Browns Island Way (station of the nearest channel point, derived)",
+    "station_ft": 169640,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 169600,
+      "panel": "19P",
+      "pdf_page": 108,
+      "wse_navd88_ft": {
+       "p0_2": 50.13,
+       "p1plus": 49.17,
+       "p1": 44.03,
+       "p2": 41.99,
+       "p4": 40.42,
+       "p10": 38.43,
+       "bed": 23.61
+      }
+     }
+    ],
+    "note": "sign is about 270 m north of the river centerline, behind Brown's Island"
+   },
+   {
+    "landmark": "US 1/301 Robert E. Lee Bridge",
+    "station_ft": 170522,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 170400,
+      "panel": "20P",
+      "pdf_page": 109,
+      "wse_navd88_ft": {
+       "p0_2": 50.88,
+       "p1plus": 49.99,
+       "p1": 45.12,
+       "p2": 43.26,
+       "p4": 41.65,
+       "p10": 39.59,
+       "bed": 22.13
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 170650,
+      "panel": "20P",
+      "pdf_page": 109,
+      "wse_navd88_ft": {
+       "p0_2": 50.94,
+       "p1plus": 50.05,
+       "p1": 45.26,
+       "p2": 43.37,
+       "p4": 41.87,
+       "p10": 39.85,
+       "bed": 23.13
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "Hollywood Power Plant dam (not labeled; OSM weir projects to about 172,900-174,100)",
+    "station_ft": 173500,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 173450,
+      "panel": "20P",
+      "pdf_page": 109,
+      "wse_navd88_ft": {
+       "p0_2": 57.3,
+       "p1plus": 56.82,
+       "p1": 54.0,
+       "p2": 52.77,
+       "p4": 51.35,
+       "p10": 49.52,
+       "bed": 40.61
+      }
+     }
+    ],
+    "note": "no step in the FIS profile here; the dam is drowned at these flows"
+   },
+   {
+    "landmark": "Confluence of Reedy Creek",
+    "station_ft": 176113,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 176100,
+      "panel": "20P",
+      "pdf_page": 109,
+      "wse_navd88_ft": {
+       "p0_2": 70.98,
+       "p1plus": 70.59,
+       "p1": 68.17,
+       "p2": 66.99,
+       "p4": 65.64,
+       "p10": 63.92,
+       "bed": 50.65
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "SR 161 Westover Hills Blvd (Boulevard Bridge)",
+    "station_ft": 181453,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 181350,
+      "panel": "20P",
+      "pdf_page": 109,
+      "wse_navd88_ft": {
+       "p0_2": 86.61,
+       "p1plus": 86.1,
+       "p1": 82.9,
+       "p2": 81.4,
+       "p4": 79.84,
+       "p10": 77.79,
+       "bed": 61.2
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 181750,
+      "panel": "20P",
+      "pdf_page": 109,
+      "wse_navd88_ft": {
+       "p0_2": 90.45,
+       "p1plus": 89.89,
+       "p1": 86.36,
+       "p2": 84.66,
+       "p4": 82.94,
+       "p10": 80.71,
+       "bed": 62.75
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "Railroad bridge (OSM: CSX North End Subdivision)",
+    "station_ft": 184816,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 184700,
+      "panel": "21P",
+      "pdf_page": 110,
+      "wse_navd88_ft": {
+       "p0_2": 96.67,
+       "p1plus": 96.02,
+       "p1": 92.15,
+       "p2": 90.38,
+       "p4": 88.63,
+       "p10": 86.3,
+       "bed": 74.01
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 184950,
+      "panel": "21P",
+      "pdf_page": 110,
+      "wse_navd88_ft": {
+       "p0_2": 100.42,
+       "p1plus": 99.75,
+       "p1": 95.58,
+       "p2": 93.64,
+       "p4": 91.73,
+       "p10": 89.22,
+       "bed": 74.92
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "SR 76 Powhite Parkway",
+    "station_ft": 186073,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 185950,
+      "panel": "21P",
+      "pdf_page": 110,
+      "wse_navd88_ft": {
+       "p0_2": 101.96,
+       "p1plus": 101.28,
+       "p1": 97.12,
+       "p2": 95.17,
+       "p4": 93.33,
+       "p10": 90.82,
+       "bed": 76.67
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 186200,
+      "panel": "21P",
+      "pdf_page": 110,
+      "wse_navd88_ft": {
+       "p0_2": 102.37,
+       "p1plus": 101.7,
+       "p1": 97.57,
+       "p2": 95.65,
+       "p4": 93.78,
+       "p10": 91.37,
+       "bed": 78.78
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "Confluence of Powhite Creek",
+    "station_ft": 186397,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 186400,
+      "panel": "21P",
+      "pdf_page": 110,
+      "wse_navd88_ft": {
+       "p0_2": 103.07,
+       "p1plus": 102.4,
+       "p1": 98.33,
+       "p2": 96.42,
+       "p4": 94.66,
+       "p10": 92.26,
+       "bed": 79.01
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "WEIR, lower (likely a Williams Island dam; WDR 1986 names the Williams Island dams as the Westham gauge control)",
+    "station_ft": 196110,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 196000,
+      "panel": "21P",
+      "pdf_page": 110,
+      "wse_navd88_ft": {
+       "p0_2": 117.32,
+       "p1plus": 116.63,
+       "p1": 112.62,
+       "p2": 110.86,
+       "p4": 109.24,
+       "p10": 107.17,
+       "bed": 86.56
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 196150,
+      "panel": "22P",
+      "pdf_page": 111,
+      "wse_navd88_ft": {
+       "p0_2": 117.36,
+       "p1plus": 116.68,
+       "p1": 112.65,
+       "p2": 110.9,
+       "p4": 109.31,
+       "p10": 107.29,
+       "bed": 90.02
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "WEIR, upper (likely the other Williams Island dam)",
+    "station_ft": 197855,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 197800,
+      "panel": "22P",
+      "pdf_page": 111,
+      "wse_navd88_ft": {
+       "p0_2": 121.58,
+       "p1plus": 121.07,
+       "p1": 117.99,
+       "p2": 116.53,
+       "p4": 115.1,
+       "p10": 113.15,
+       "bed": 90.02
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 197900,
+      "panel": "22P",
+      "pdf_page": 111,
+      "wse_navd88_ft": {
+       "p0_2": 121.75,
+       "p1plus": 121.25,
+       "p1": 118.2,
+       "p2": 116.75,
+       "p4": 115.33,
+       "p10": 113.38,
+       "bed": 94.18
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "Confluence of Rattlesnake Creek",
+    "station_ft": 201604,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 201600,
+      "panel": "22P",
+      "pdf_page": 111,
+      "wse_navd88_ft": {
+       "p0_2": 126.02,
+       "p1plus": 125.44,
+       "p1": 121.89,
+       "p2": 120.18,
+       "p4": 118.51,
+       "p10": 116.22,
+       "bed": 95.16
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "SR 147 Huguenot Road (Huguenot Bridge)",
+    "station_ft": 203291,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 203150,
+      "panel": "22P",
+      "pdf_page": 111,
+      "wse_navd88_ft": {
+       "p0_2": 127.77,
+       "p1plus": 127.16,
+       "p1": 123.43,
+       "p2": 121.6,
+       "p4": 119.88,
+       "p10": 117.45,
+       "bed": 95.21
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 203400,
+      "panel": "22P",
+      "pdf_page": 111,
+      "wse_navd88_ft": {
+       "p0_2": 128.03,
+       "p1plus": 127.41,
+       "p1": 123.71,
+       "p2": 121.9,
+       "p4": 120.16,
+       "p10": 117.79,
+       "bed": 95.23
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "Westham gauge USGS 02037500 (not labeled; station derived from OSM chainage)",
+    "station_ft": 203720,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 203700,
+      "panel": "22P",
+      "pdf_page": 111,
+      "wse_navd88_ft": {
+       "p0_2": 128.31,
+       "p1plus": 127.7,
+       "p1": 124.0,
+       "p2": 122.16,
+       "p4": 120.43,
+       "p10": 118.02,
+       "bed": 95.28
+      }
+     }
+    ],
+    "note": "station +/-300 ft; slope about 0.0009, so +/-0.3 ft"
+   },
+   {
+    "landmark": "Confluence of Stony Point Creek",
+    "station_ft": 208586,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 208300,
+      "panel": "22P",
+      "pdf_page": 111,
+      "wse_navd88_ft": {
+       "p0_2": 132.58,
+       "p1plus": 131.93,
+       "p1": 128.1,
+       "p2": 126.2,
+       "p4": 124.34,
+       "p10": 121.83,
+       "bed": 96.53
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "US 150 Chippenham Highway",
+    "station_ft": 211895,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 211800,
+      "panel": "23P",
+      "pdf_page": 112,
+      "wse_navd88_ft": {
+       "p0_2": 134.92,
+       "p1plus": 134.29,
+       "p1": 130.48,
+       "p2": 128.58,
+       "p4": 126.72,
+       "p10": 124.23,
+       "bed": 97.0
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 212000,
+      "panel": "23P",
+      "pdf_page": 112,
+      "wse_navd88_ft": {
+       "p0_2": 135.23,
+       "p1plus": 134.58,
+       "p1": 130.75,
+       "p2": 128.89,
+       "p4": 127.01,
+       "p10": 124.52,
+       "bed": 96.87
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "WEIR at 213,211 (likely Bosher's Dam: 1.7 mi above the Westham gauge per OFR 70-51 and WDR 1986; the 1998 profile labels Boshers Dam)",
+    "station_ft": 213211,
+    "readings": [
+     {
+      "side": "downstream",
+      "read_at_station_ft": 213150,
+      "panel": "23P",
+      "pdf_page": 112,
+      "wse_navd88_ft": {
+       "p0_2": 135.43,
+       "p1plus": 134.79,
+       "p1": 130.87,
+       "p2": 128.96,
+       "p4": 127.09,
+       "p10": 124.58,
+       "bed": 96.87
+      }
+     },
+     {
+      "side": "upstream",
+      "read_at_station_ft": 213250,
+      "panel": "23P",
+      "pdf_page": 112,
+      "wse_navd88_ft": {
+       "p0_2": 135.43,
+       "p1plus": 134.8,
+       "p1": 130.87,
+       "p2": 128.96,
+       "p4": 127.09,
+       "p10": 124.58,
+       "bed": 102.94
+      }
+     }
+    ],
+    "note": "no step at these flows"
+   },
+   {
+    "landmark": "Confluence of Cherokee Creek",
+    "station_ft": 213710,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 213700,
+      "panel": "23P",
+      "pdf_page": 112,
+      "wse_navd88_ft": {
+       "p0_2": 135.44,
+       "p1plus": 134.8,
+       "p1": 130.88,
+       "p2": 128.96,
+       "p4": 127.09,
+       "p10": 124.59,
+       "bed": 102.94
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "Confluence of Pittaway Creek",
+    "station_ft": 218417,
+    "readings": [
+     {
+      "side": "upstream",
+      "read_at_station_ft": 218650,
+      "panel": "23P",
+      "pdf_page": 112,
+      "wse_navd88_ft": {
+       "p0_2": 139.77,
+       "p1plus": 139.1,
+       "p1": 135.13,
+       "p2": 133.2,
+       "p4": 131.23,
+       "p10": 128.58,
+       "bed": 102.22
+      }
+     }
+    ],
+    "note": ""
+   },
+   {
+    "landmark": "Upstream end of James profile",
+    "station_ft": 219150,
+    "readings": [
+     {
+      "side": "at",
+      "read_at_station_ft": 219150,
+      "panel": "23P",
+      "pdf_page": 112,
+      "wse_navd88_ft": {
+       "p0_2": 140.09,
+       "p1plus": 139.41,
+       "p1": 135.45,
+       "p2": 133.5,
+       "p4": 131.56,
+       "p10": 128.9,
+       "bed": 102.14
+      }
+     }
+    ],
+    "note": ""
+   }
+  ]
+ },
+ "floodway_2025": {
+  "source": "FEMA FIS 510129V000C, City of Richmond, effective July 8, 2025, Table 23 Floodway Data, James River, PDF p.62 (printed 57); distance in feet above a point about 20,500 ft upstream of Roxbury Road; widths total/within jurisdiction",
+  "rows": [
+   {
+    "xs": "A",
+    "distance_ft": 135943,
+    "width_ft": "1,012/549",
+    "area_sqft": 41041,
+    "velocity_fps": 6.9,
+    "regulatory": 30.6,
+    "without_floodway": 30.6,
+    "with_floodway": 31.1,
+    "increase": 0.5,
+    "profile_read_1pct": 30.63,
+    "profile_read_all": {
+     "p0_2": 37.62,
+     "p1plus": 36.63,
+     "p1": 30.63,
+     "p2": 27.68,
+     "p4": 24.66,
+     "p10": 20.52,
+     "bed": -26.98,
+     "used_station_ft": 135943
+    }
+   },
+   {
+    "xs": "B",
+    "distance_ft": 140508,
+    "width_ft": "1,055/418",
+    "area_sqft": 39390,
+    "velocity_fps": 7.2,
+    "regulatory": 32.2,
+    "without_floodway": 32.2,
+    "with_floodway": 32.4,
+    "increase": 0.2,
+    "profile_read_1pct": 32.24,
+    "profile_read_all": {
+     "p0_2": 39.7,
+     "p1plus": 38.66,
+     "p1": 32.24,
+     "p2": 29.08,
+     "p4": 25.87,
+     "p10": 21.47,
+     "bed": -24.55,
+     "used_station_ft": 140508
+    }
+   },
+   {
+    "xs": "C",
+    "distance_ft": 145016,
+    "width_ft": "1,481/1,291",
+    "area_sqft": 49404,
+    "velocity_fps": 5.8,
+    "regulatory": 33.2,
+    "without_floodway": 33.2,
+    "with_floodway": 33.8,
+    "increase": 0.6,
+    "profile_read_1pct": 33.16,
+    "profile_read_all": {
+     "p0_2": 40.72,
+     "p1plus": 39.65,
+     "p1": 33.16,
+     "p2": 29.98,
+     "p4": 26.75,
+     "p10": 22.32,
+     "bed": -23.02,
+     "used_station_ft": 145016
+    }
+   },
+   {
+    "xs": "D",
+    "distance_ft": 152727,
+    "width_ft": "2,195/1,707",
+    "area_sqft": 65313,
+    "velocity_fps": 4.4,
+    "regulatory": 34.9,
+    "without_floodway": 34.9,
+    "with_floodway": 35.5,
+    "increase": 0.6,
+    "profile_read_1pct": 34.86,
+    "profile_read_all": {
+     "p0_2": 42.57,
+     "p1plus": 41.5,
+     "p1": 34.86,
+     "p2": 31.54,
+     "p4": 28.22,
+     "p10": 23.67,
+     "bed": -21.13,
+     "used_station_ft": 152727
+    }
+   },
+   {
+    "xs": "E",
+    "distance_ft": 158169,
+    "width_ft": "2,624/2,478",
+    "area_sqft": 72137,
+    "velocity_fps": 3.9,
+    "regulatory": 36.0,
+    "without_floodway": 36.0,
+    "with_floodway": 36.8,
+    "increase": 0.8,
+    "profile_read_1pct": 36.05,
+    "profile_read_all": {
+     "p0_2": 43.73,
+     "p1plus": 42.66,
+     "p1": 36.05,
+     "p2": 32.75,
+     "p4": 29.41,
+     "p10": 24.8,
+     "bed": -21.48,
+     "used_station_ft": 158169
+    }
+   },
+   {
+    "xs": "F",
+    "distance_ft": 161592,
+    "width_ft": "2,620",
+    "area_sqft": 68362,
+    "velocity_fps": 4.1,
+    "regulatory": 36.9,
+    "without_floodway": 36.9,
+    "with_floodway": 37.6,
+    "increase": 0.7,
+    "profile_read_1pct": 36.91,
+    "profile_read_all": {
+     "p0_2": 44.54,
+     "p1plus": 43.47,
+     "p1": 36.91,
+     "p2": 33.65,
+     "p4": 30.36,
+     "p10": 25.79,
+     "bed": -13.21,
+     "used_station_ft": 161592
+    }
+   },
+   {
+    "xs": "G",
+    "distance_ft": 168223,
+    "width_ft": "1,592",
+    "area_sqft": 28358,
+    "velocity_fps": 10.0,
+    "regulatory": 39.8,
+    "without_floodway": 39.8,
+    "with_floodway": 40.3,
+    "increase": 0.5,
+    "profile_read_1pct": 39.81,
+    "profile_read_all": {
+     "p0_2": 46.97,
+     "p1plus": 45.9,
+     "p1": 39.81,
+     "p2": 36.88,
+     "p4": 33.49,
+     "p10": 29.05,
+     "bed": 17.11,
+     "used_station_ft": 168248
+    }
+   },
+   {
+    "xs": "H",
+    "distance_ft": 170220,
+    "width_ft": "2,662",
+    "area_sqft": 37032,
+    "velocity_fps": 7.6,
+    "regulatory": 44.8,
+    "without_floodway": 44.8,
+    "with_floodway": 45.4,
+    "increase": 0.6,
+    "profile_read_1pct": 44.85,
+    "profile_read_all": {
+     "p0_2": 50.71,
+     "p1plus": 49.8,
+     "p1": 44.85,
+     "p2": 42.88,
+     "p4": 41.34,
+     "p10": 39.33,
+     "bed": 22.13,
+     "used_station_ft": 170220
+    }
+   },
+   {
+    "xs": "I",
+    "distance_ft": 175499,
+    "width_ft": "2,003",
+    "area_sqft": 24313,
+    "velocity_fps": 11.6,
+    "regulatory": 66.0,
+    "without_floodway": 66.0,
+    "with_floodway": 66.2,
+    "increase": 0.2,
+    "profile_read_1pct": 65.72,
+    "profile_read_all": {
+     "p0_2": 68.59,
+     "p1plus": 68.25,
+     "p1": 65.72,
+     "p2": 64.82,
+     "p4": 63.29,
+     "p10": 61.53,
+     "bed": 49.29,
+     "used_station_ft": 175499
+    }
+   },
+   {
+    "xs": "J",
+    "distance_ft": 181150,
+    "width_ft": "1,414",
+    "area_sqft": 21565,
+    "velocity_fps": 13.1,
+    "regulatory": 82.0,
+    "without_floodway": 82.0,
+    "with_floodway": 82.5,
+    "increase": 0.5,
+    "profile_read_1pct": 81.86,
+    "profile_read_all": {
+     "p0_2": 85.46,
+     "p1plus": 84.96,
+     "p1": 81.86,
+     "p2": 80.36,
+     "p4": 78.88,
+     "p10": 76.91,
+     "bed": 61.1,
+     "used_station_ft": 181100
+    }
+   },
+   {
+    "xs": "K",
+    "distance_ft": 181608,
+    "width_ft": "1,448",
+    "area_sqft": 24079,
+    "velocity_fps": 11.7,
+    "regulatory": 85.9,
+    "without_floodway": 85.9,
+    "with_floodway": 86.2,
+    "increase": 0.3,
+    "profile_read_1pct": 86.36,
+    "profile_read_all": {
+     "p0_2": 90.45,
+     "p1plus": 89.89,
+     "p1": 86.36,
+     "p2": 84.66,
+     "p4": 82.94,
+     "p10": 80.71,
+     "bed": 62.75,
+     "used_station_ft": 181750
+    }
+   },
+   {
+    "xs": "L",
+    "distance_ft": 198423,
+    "width_ft": "2,088",
+    "area_sqft": 30769,
+    "velocity_fps": 9.2,
+    "regulatory": 118.2,
+    "without_floodway": 118.2,
+    "with_floodway": 118.2,
+    "increase": 0.0,
+    "profile_read_1pct": 118.2,
+    "profile_read_all": {
+     "p0_2": 121.75,
+     "p1plus": 121.25,
+     "p1": 118.2,
+     "p2": 116.75,
+     "p4": 115.34,
+     "p10": 113.38,
+     "bed": 94.18,
+     "used_station_ft": 198423
+    }
+   },
+   {
+    "xs": "M",
+    "distance_ft": 205600,
+    "width_ft": "2,157/15",
+    "area_sqft": 39888,
+    "velocity_fps": 7.1,
+    "regulatory": 125.5,
+    "without_floodway": 125.5,
+    "with_floodway": 125.9,
+    "increase": 0.4,
+    "profile_read_1pct": 125.52,
+    "profile_read_all": {
+     "p0_2": 130.0,
+     "p1plus": 129.37,
+     "p1": 125.52,
+     "p2": 123.62,
+     "p4": 121.77,
+     "p10": 119.24,
+     "bed": 95.8,
+     "used_station_ft": 205600
+    }
+   },
+   {
+    "xs": "N",
+    "distance_ft": 209736,
+    "width_ft": "2,265/247",
+    "area_sqft": 40734,
+    "velocity_fps": 6.9,
+    "regulatory": 128.8,
+    "without_floodway": 128.8,
+    "with_floodway": 129.4,
+    "increase": 0.6,
+    "profile_read_1pct": 128.78,
+    "profile_read_all": {
+     "p0_2": 133.2,
+     "p1plus": 132.58,
+     "p1": 128.78,
+     "p2": 126.95,
+     "p4": 125.17,
+     "p10": 122.74,
+     "bed": 96.93,
+     "used_station_ft": 209736
+    }
+   },
+   {
+    "xs": "O",
+    "distance_ft": 216099,
+    "width_ft": "2,110/32",
+    "area_sqft": 42334,
+    "velocity_fps": 6.6,
+    "regulatory": 132.9,
+    "without_floodway": 132.9,
+    "with_floodway": 133.8,
+    "increase": 0.9,
+    "profile_read_1pct": 132.95,
+    "profile_read_all": {
+     "p0_2": 137.58,
+     "p1plus": 136.94,
+     "p1": 132.95,
+     "p2": 131.02,
+     "p4": 129.09,
+     "p10": 126.51,
+     "bed": 102.58,
+     "used_station_ft": 216099
+    }
+   }
+  ]
+ },
+ "floodway_1998": {
+  "source": "FEMA FIS 510129V000, City of Richmond, revised July 20, 1998, Table 2 Floodway Data, James River, PDF p.16 (printed p.12), feet NGVD; footnotes: (1) feet above mouth, (2) miles above mouth on historical milepost stationing, (4) width extends to landside toe of levee/floodwall",
+  "evidence": "evidence/fis1998_p16_floodway_james.png",
+  "rows": [
+   {
+    "xs": "A",
+    "distance": "519,700 ft",
+    "width_ft": "850/810",
+    "area_sqft": 33330,
+    "velocity_fps": 8.7,
+    "regulatory": 26.8,
+    "without_floodway": 26.8,
+    "with_floodway": 27.5,
+    "increase": 0.7
+   },
+   {
+    "xs": "B",
+    "distance": "520,980 ft",
+    "width_ft": "1000/910",
+    "area_sqft": 40730,
+    "velocity_fps": 7.1,
+    "regulatory": 27.6,
+    "without_floodway": 27.6,
+    "with_floodway": 28.3,
+    "increase": 0.7
+   },
+   {
+    "xs": "C",
+    "distance": "522,420 ft",
+    "width_ft": "1000/785",
+    "area_sqft": 38510,
+    "velocity_fps": 7.5,
+    "regulatory": 27.7,
+    "without_floodway": 27.7,
+    "with_floodway": 28.4,
+    "increase": 0.7
+   },
+   {
+    "xs": "D",
+    "distance": "523,880 ft",
+    "width_ft": "1000/645",
+    "area_sqft": 34510,
+    "velocity_fps": 8.4,
+    "regulatory": 27.7,
+    "without_floodway": 27.7,
+    "with_floodway": 28.4,
+    "increase": 0.7
+   },
+   {
+    "xs": "E",
+    "distance": "525,040 ft",
+    "width_ft": "950/545",
+    "area_sqft": 33290,
+    "velocity_fps": 8.7,
+    "regulatory": 27.9,
+    "without_floodway": 27.9,
+    "with_floodway": 28.6,
+    "increase": 0.7
+   },
+   {
+    "xs": "F",
+    "distance": "527,840 ft",
+    "width_ft": "1000/605",
+    "area_sqft": 35450,
+    "velocity_fps": 8.2,
+    "regulatory": 29.0,
+    "without_floodway": 29.0,
+    "with_floodway": 29.4,
+    "increase": 0.4
+   },
+   {
+    "xs": "G",
+    "distance": "531,880 ft",
+    "width_ft": "1000/885",
+    "area_sqft": 34620,
+    "velocity_fps": 8.4,
+    "regulatory": 30.0,
+    "without_floodway": 30.0,
+    "with_floodway": 30.4,
+    "increase": 0.4
+   },
+   {
+    "xs": "H",
+    "distance": "533,540 ft",
+    "width_ft": "1100/580",
+    "area_sqft": 38870,
+    "velocity_fps": 7.5,
+    "regulatory": 31.0,
+    "without_floodway": 31.0,
+    "with_floodway": 31.1,
+    "increase": 0.1
+   },
+   {
+    "xs": "I",
+    "distance": "534,660 ft",
+    "width_ft": "1250/550",
+    "area_sqft": 40520,
+    "velocity_fps": 7.2,
+    "regulatory": 31.1,
+    "without_floodway": 31.1,
+    "with_floodway": 31.7,
+    "increase": 0.6
+   },
+   {
+    "xs": "J",
+    "distance": "535,880 ft",
+    "width_ft": "1450/595",
+    "area_sqft": 46930,
+    "velocity_fps": 6.2,
+    "regulatory": 31.6,
+    "without_floodway": 31.6,
+    "with_floodway": 32.3,
+    "increase": 0.7
+   },
+   {
+    "xs": "K",
+    "distance": "536,840 ft",
+    "width_ft": "1600/570",
+    "area_sqft": 48400,
+    "velocity_fps": 6.0,
+    "regulatory": 31.8,
+    "without_floodway": 31.8,
+    "with_floodway": 32.4,
+    "increase": 0.6
+   },
+   {
+    "xs": "L",
+    "distance": "538,180 ft",
+    "width_ft": "1800/915",
+    "area_sqft": 55435,
+    "velocity_fps": 5.2,
+    "regulatory": 32.0,
+    "without_floodway": 32.0,
+    "with_floodway": 32.7,
+    "increase": 0.7
+   },
+   {
+    "xs": "M",
+    "distance": "539,450 ft",
+    "width_ft": "2000/1590",
+    "area_sqft": 58295,
+    "velocity_fps": 5.0,
+    "regulatory": 32.0,
+    "without_floodway": 32.0,
+    "with_floodway": 32.7,
+    "increase": 0.7
+   },
+   {
+    "xs": "M1",
+    "distance": "541,570 ft",
+    "width_ft": "2250/2175",
+    "area_sqft": 64895,
+    "velocity_fps": 4.5,
+    "regulatory": 32.6,
+    "without_floodway": 32.6,
+    "with_floodway": 33.3,
+    "increase": 0.7
+   },
+   {
+    "xs": "M2",
+    "distance": "543,450 ft",
+    "width_ft": "2800/2730",
+    "area_sqft": 68840,
+    "velocity_fps": 4.2,
+    "regulatory": 32.8,
+    "without_floodway": 32.8,
+    "with_floodway": 33.6,
+    "increase": 0.8
+   },
+   {
+    "xs": "M3",
+    "distance": "544,710 ft",
+    "width_ft": "3150/3100 (to levee toe)",
+    "area_sqft": 67165,
+    "velocity_fps": 4.3,
+    "regulatory": 33.3,
+    "without_floodway": 33.3,
+    "with_floodway": 34.1,
+    "increase": 0.8
+   },
+   {
+    "xs": "M4",
+    "distance": "546,355 ft",
+    "width_ft": "3,520 (to levee toe)",
+    "area_sqft": 66345,
+    "velocity_fps": 4.4,
+    "regulatory": 33.5,
+    "without_floodway": 33.5,
+    "with_floodway": 34.2,
+    "increase": 0.7
+   },
+   {
+    "xs": "M5",
+    "distance": "548,155 ft",
+    "width_ft": "3,440 (to levee toe)",
+    "area_sqft": 61865,
+    "velocity_fps": 4.7,
+    "regulatory": 34.7,
+    "without_floodway": 34.7,
+    "with_floodway": 35.4,
+    "increase": 0.7
+   },
+   {
+    "xs": "M6",
+    "distance": "549,135 ft",
+    "width_ft": "2,785 (to levee toe)",
+    "area_sqft": 57930,
+    "velocity_fps": 5.0,
+    "regulatory": 34.8,
+    "without_floodway": 34.8,
+    "with_floodway": 35.5,
+    "increase": 0.7
+   },
+   {
+    "xs": "M7",
+    "distance": "553,920 ft",
+    "width_ft": "2,235 (to levee toe)",
+    "area_sqft": 54645,
+    "velocity_fps": 5.3,
+    "regulatory": 38.1,
+    "without_floodway": 38.1,
+    "with_floodway": 38.6,
+    "increase": 0.5
+   },
+   {
+    "xs": "M8",
+    "distance": "554,480 ft",
+    "width_ft": "1,875 (to levee toe)",
+    "area_sqft": 43640,
+    "velocity_fps": 6.6,
+    "regulatory": 38.5,
+    "without_floodway": 38.5,
+    "with_floodway": 39.0,
+    "increase": 0.5
+   },
+   {
+    "xs": "M9",
+    "distance": "554,610 ft",
+    "width_ft": "1,700 (to levee toe)",
+    "area_sqft": 35450,
+    "velocity_fps": 8.2,
+    "regulatory": 38.5,
+    "without_floodway": 38.5,
+    "with_floodway": 39.0,
+    "increase": 0.5
+   },
+   {
+    "xs": "M10",
+    "distance": "556,105 ft",
+    "width_ft": "1,800",
+    "area_sqft": 36800,
+    "velocity_fps": 7.9,
+    "regulatory": 46.6,
+    "without_floodway": 46.6,
+    "with_floodway": 47.3,
+    "increase": 0.7
+   },
+   {
+    "xs": "M11",
+    "distance": "558,930 ft",
+    "width_ft": "1,840",
+    "area_sqft": 31940,
+    "velocity_fps": 9.1,
+    "regulatory": 57.6,
+    "without_floodway": 57.6,
+    "with_floodway": 57.7,
+    "increase": 0.1
+   },
+   {
+    "xs": "N",
+    "distance": "106.39 mi",
+    "width_ft": "2,110",
+    "area_sqft": 20729,
+    "velocity_fps": 14.0,
+    "regulatory": 66.9,
+    "without_floodway": 66.9,
+    "with_floodway": 66.9,
+    "increase": 0.0
+   },
+   {
+    "xs": "O",
+    "distance": "106.83 mi",
+    "width_ft": "1,932",
+    "area_sqft": 33700,
+    "velocity_fps": 8.6,
+    "regulatory": 79.8,
+    "without_floodway": 79.8,
+    "with_floodway": 79.8,
+    "increase": 0.0
+   },
+   {
+    "xs": "P",
+    "distance": "108.58 mi",
+    "width_ft": "1,541",
+    "area_sqft": 26501,
+    "velocity_fps": 10.9,
+    "regulatory": 102.8,
+    "without_floodway": 102.8,
+    "with_floodway": 103.0,
+    "increase": 0.2
+   },
+   {
+    "xs": "Q",
+    "distance": "108.76 mi",
+    "width_ft": "2,313",
+    "area_sqft": 37678,
+    "velocity_fps": 7.7,
+    "regulatory": 105.9,
+    "without_floodway": 105.9,
+    "with_floodway": 106.0,
+    "increase": 0.1
+   },
+   {
+    "xs": "R",
+    "distance": "109.40 mi",
+    "width_ft": "2,336",
+    "area_sqft": 39447,
+    "velocity_fps": 7.4,
+    "regulatory": 109.5,
+    "without_floodway": 109.5,
+    "with_floodway": 109.6,
+    "increase": 0.1
+   },
+   {
+    "xs": "S",
+    "distance": "110.33 mi",
+    "width_ft": "2,566",
+    "area_sqft": 32971,
+    "velocity_fps": 8.8,
+    "regulatory": 114.7,
+    "without_floodway": 114.7,
+    "with_floodway": 114.9,
+    "increase": 0.2
+   },
+   {
+    "xs": "T",
+    "distance": "110.59 mi",
+    "width_ft": "2,049",
+    "area_sqft": 31328,
+    "velocity_fps": 5.5,
+    "regulatory": 119.6,
+    "without_floodway": 119.6,
+    "with_floodway": 119.7,
+    "increase": 0.1
+   },
+   {
+    "xs": "U",
+    "distance": "110.99 mi",
+    "width_ft": "1,635",
+    "area_sqft": 29792,
+    "velocity_fps": 9.7,
+    "regulatory": 121.4,
+    "without_floodway": 121.4,
+    "with_floodway": 121.6,
+    "increase": 0.2
+   },
+   {
+    "xs": "V",
+    "distance": "111.73 mi",
+    "width_ft": "2,320",
+    "area_sqft": 41877,
+    "velocity_fps": 6.9,
+    "regulatory": 126.4,
+    "without_floodway": 126.4,
+    "with_floodway": 127.4,
+    "increase": 1.0
+   },
+   {
+    "xs": "W",
+    "distance": "113.35 mi",
+    "width_ft": "2,200",
+    "area_sqft": 48212,
+    "velocity_fps": 6.4,
+    "regulatory": 135.0,
+    "without_floodway": 135.0,
+    "with_floodway": 135.9,
+    "increase": 0.9
+   }
+  ]
+ },
+ "james_profiles_1998_downtown": {
+  "source": "FEMA FIS 510129V000, City of Richmond, revised July 20, 1998, Exhibit 1, James River panel 03P, PDF p.29, feet NGVD29",
+  "method": "read from a 200 dpi render of the scan; grid calibrated at 198.2 px per 1,000 ft and 10.12 px per ft; profile lines found as dark runs of 4 px or more; precision about 0.3 ft",
+  "evidence": "evidence/fis1998_p29_panel03P-29.png",
+  "labels_ft_above_mouth": {
+   "Confluence of Gillies Creek": 547889,
+   "I-95 (Richmond-Petersburg Turnpike)": 551723,
+   "Seaboard Coastline Railroad": 552444,
+   "Mayo's Bridge": 553247,
+   "Southern Railway": 553953,
+   "9th Street / Manchester Street": 555945,
+   "second label read as 8th Street (UNCONFIRMED reading)": 556086,
+   "Browns Island Dam": 556667
+  },
+  "offset_note": "1998 station = 2025 station + about 387,700 ft in this reach (I-95, Gillies, Mayo agree within 60 ft)",
+  "internal_inconsistency": "The plotted 100-year line sits 0.6 to 0.9 ft below the 1998 Floodway Data values at M5 to M8 (e.g. M5 33.8 plotted vs 34.7 table); it matches at M4 (33.5). The table is the regulatory value.",
+  "rows": [
+   {
+    "place": "M4 (table 33.5)",
+    "station_ft_above_mouth": 546355,
+    "p10_ngvd29": 20.8,
+    "p2_ngvd29": 29.1,
+    "p1_ngvd29": 33.5,
+    "p0_2_ngvd29": 45.9
+   },
+   {
+    "place": "Confluence of Gillies Creek",
+    "station_ft_above_mouth": 547889,
+    "p10_ngvd29": 21.1,
+    "p2_ngvd29": 29.4,
+    "p1_ngvd29": 33.8,
+    "p0_2_ngvd29": 46.0
+   },
+   {
+    "place": "M5 (table 34.7)",
+    "station_ft_above_mouth": 548155,
+    "p10_ngvd29": 21.2,
+    "p2_ngvd29": 29.7,
+    "p1_ngvd29": 33.8,
+    "p0_2_ngvd29": 46.0
+   },
+   {
+    "place": "M6 (table 34.8)",
+    "station_ft_above_mouth": 549135,
+    "p10_ngvd29": 21.6,
+    "p2_ngvd29": 30.1,
+    "p1_ngvd29": 34.2,
+    "p0_2_ngvd29": 46.4
+   },
+   {
+    "place": "City Locks (derived station 549,230 +/-300)",
+    "station_ft_above_mouth": 549230,
+    "p10_ngvd29": 21.8,
+    "p2_ngvd29": 30.1,
+    "p1_ngvd29": 34.2,
+    "p0_2_ngvd29": 46.6
+   },
+   {
+    "place": "I-95, downstream",
+    "station_ft_above_mouth": 551550,
+    "p10_ngvd29": 22.0,
+    "p2_ngvd29": 30.6,
+    "p1_ngvd29": 35.0,
+    "p0_2_ngvd29": 46.8
+   },
+   {
+    "place": "I-95, upstream",
+    "station_ft_above_mouth": 551900,
+    "p10_ngvd29": 21.9,
+    "p2_ngvd29": 30.7,
+    "p1_ngvd29": 35.2,
+    "p0_2_ngvd29": 47.0
+   },
+   {
+    "place": "Seaboard Coastline RR, upstream",
+    "station_ft_above_mouth": 552600,
+    "p10_ngvd29": 22.3,
+    "p2_ngvd29": 31.3,
+    "p1_ngvd29": 36.0,
+    "p0_2_ngvd29": 47.6
+   },
+   {
+    "place": "Mayo's Bridge, downstream",
+    "station_ft_above_mouth": 553100,
+    "p10_ngvd29": 22.6,
+    "p2_ngvd29": 31.3,
+    "p1_ngvd29": 36.0,
+    "p0_2_ngvd29": 47.8
+   },
+   {
+    "place": "Mayo's Bridge, upstream",
+    "station_ft_above_mouth": 553400,
+    "p10_ngvd29": 22.7,
+    "p2_ngvd29": 32.1,
+    "p1_ngvd29": 37.0,
+    "p0_2_ngvd29": 48.3
+   },
+   {
+    "place": "M7 (table 38.1)",
+    "station_ft_above_mouth": 553920,
+    "p10_ngvd29": 22.9,
+    "p2_ngvd29": 32.1,
+    "p1_ngvd29": 37.2,
+    "p0_2_ngvd29": 48.3
+   },
+   {
+    "place": "Southern Railway, upstream",
+    "station_ft_above_mouth": 554100,
+    "p10_ngvd29": 23.0,
+    "p2_ngvd29": 32.8,
+    "p1_ngvd29": 37.8,
+    "p0_2_ngvd29": 49.2
+   },
+   {
+    "place": "M8 (table 38.5)",
+    "station_ft_above_mouth": 554480,
+    "p10_ngvd29": 23.4,
+    "p2_ngvd29": 33.1,
+    "p1_ngvd29": 37.9,
+    "p0_2_ngvd29": 49.3
+   }
+  ]
+ },
+ "james_profiles_1998_upper_labels_miles": {
+  "source": "FEMA FIS 510129V000, City of Richmond, revised July 20, 1998, panels 03P(b) and 03P(c), PDF pp.31-32",
+  "labels": {
+   "Hollywood Dam": 106.0,
+   "Confluence of Reedy Creek": 106.7,
+   "Boulevard Bridge": 107.5,
+   "Seaboard Coastline Railroad": 108.2,
+   "Powhite Freeway": 108.35,
+   "Confluence of Powhite Creek": 108.55,
+   "Williams Island Dam": 110.6,
+   "Corporate limits": 110.8,
+   "Confluence of Rattlesnake Creek": 111.2,
+   "Huguenot Bridge": 111.65,
+   "Confluence of Stony Point Creek": 112.5,
+   "Boshers Dam (section W)": 113.35,
+   "Confluence of Cherokee Creek": 113.4,
+   "Confluence of Pittaway Creek": 114.3,
+   "Corporate limits (upstream)": 114.5
+  },
+  "label_precision_mi": 0.05,
+  "boulevard_bridge_read_ngvd29": {
+   "p0_2": 93.7,
+   "p1": 88.0,
+   "p2": 86.1,
+   "p10": 81.8,
+   "precision_ft": 1.0,
+   "page": "PDF p.31, panel 03P(b)"
+  }
+ },
+ "discharges_2025": {
+  "source": "FEMA FIS 510129V000C, City of Richmond, effective July 8, 2025, Table 9 Summary of Discharges, PDF p.32 (printed 27)",
+  "units": "cfs",
+  "rows": [
+   {
+    "location": "about 2,000 ft upstream of Chippenham Parkway",
+    "da_sqmi": 6833,
+    "p10": 149248,
+    "p4": 198222,
+    "p2": 239404,
+    "p1": 284735,
+    "p0_2": 409193
+   },
+   {
+    "location": "upstream of confluence with Broad Rock Creek",
+    "da_sqmi": 6822,
+    "p10": 149009,
+    "p4": 197905,
+    "p2": 239021,
+    "p1": 284279,
+    "p0_2": 408538
+   },
+   {
+    "location": "upstream of confluence with Gillies Creek",
+    "da_sqmi": 6799,
+    "p10": 148511,
+    "p4": 197243,
+    "p2": 238222,
+    "p1": 283329,
+    "p0_2": 407172
+   },
+   {
+    "location": "upstream of confluence with Reedy Creek",
+    "da_sqmi": 6770,
+    "p10": 147884,
+    "p4": 196409,
+    "p2": 237215,
+    "p1": 282132,
+    "p0_2": 405452
+   },
+   {
+    "location": "at Powhite Parkway",
+    "da_sqmi": 6757,
+    "p10": 147600,
+    "p4": 196033,
+    "p2": 236761,
+    "p1": 281591,
+    "p0_2": 404675
+   },
+   {
+    "location": "at USGS gage 02037500",
+    "da_sqmi": 6753,
+    "p10": 147500,
+    "p4": 195900,
+    "p2": 236600,
+    "p1": 281400,
+    "p0_2": 404400
+   }
+  ],
+  "gage_record_used": "Table 11, PDF p.35 (printed 30): 02037500, 09/07/1935 to 02/25/2016",
+  "method": "Table 12, PDF p.39 (printed 34): gage analysis and regression; HEC-RAS 5.0.5; calibrated to gage rating; natural valley analyses conducted for the City of Richmond levee systems; analysis date 03/25/2020"
+ },
+ "discharges_1998": {
+  "source": "FEMA FIS 510129V000, City of Richmond, revised July 20, 1998, Table 1, PDF p.11 (printed 7)",
+  "rows": [
+   {
+    "location": "James River at downstream corporate limits",
+    "da_sqmi": 6758.0,
+    "p10": 131000,
+    "p2": 232000,
+    "p1": 290000,
+    "p0_2": 475000
+   }
+  ],
+  "method": "PDF p.10 (printed 6): log-Pearson Type III of Westham annual peaks, values supplied by the Virginia State Water Control Board; HEC-2 (PDF p.12, printed 8); James restudied by USACE Norfolk from the downstream corporate limits to the downstream side of Hollywood Dam (PDF p.6, printed 2; OCR reads \"Hollywood Drain\")"
+ },
+ "stillwater_tidal": {
+  "2025": "Table 10 (non-coastal stillwater) and all coastal sections: not applicable (PDF pp.35, 47-48)",
+  "1998": "none given"
+ },
+ "historic_floods": {
+  "2025_table6": {
+   "source": "FEMA FIS 510129V000C, City of Richmond, effective July 8, 2025, Table 6 Historic Flooding Elevations, PDF p.27 (printed 22)",
+   "rows": [
+    {
+     "location": "James River near Richmond, VA (USGS 02037500)",
+     "peak_navd88_ft": 126.4,
+     "date": "1972-06-23",
+     "recurrence_yr": "100 to 200"
+    }
+   ]
+  },
+  "2025_table5": "PDF p.27 (printed 22): 20-year flood floods a substantial part of the industrial and commercial section; Agnes June 1972 among the largest; navigation to City Locks interrupted at a 14 ft flood stage; Shockoe Creek levee overtopped in 1972 and pumping stopped for structural reasons in Camille 1969; Gaston Aug 30, 2004, up to 14 in of rain in the Shockoe basin (text cited to FEMA 2009)",
+  "1998_list": {
+   "source": "FEMA FIS 510129V000, City of Richmond, revised July 20, 1998, Section 2.3, PDF p.8 (printed 4)",
+   "rows": [
+    {
+     "date": "May 1771",
+     "cfs": null,
+     "recurrence": "50 to 100 years"
+    },
+    {
+     "date": "October 1870",
+     "cfs": null,
+     "recurrence": "20 to 50 years"
+    },
+    {
+     "date": "November 1877",
+     "cfs": null,
+     "recurrence": "20 to 50 years"
+    },
+    {
+     "date": "April 1937",
+     "cfs": 148000,
+     "recurrence": "10 to 20 years"
+    },
+    {
+     "date": "August 1940",
+     "cfs": 151000,
+     "recurrence": "10 to 20 years"
+    },
+    {
+     "date": "September 1944",
+     "cfs": 150000,
+     "recurrence": "10 to 20 years"
+    },
+    {
+     "date": "December 1948",
+     "cfs": 136000,
+     "recurrence": "10 to 20 years"
+    },
+    {
+     "date": "August 1969",
+     "cfs": 222000,
+     "recurrence": "20 to 50 years"
+    },
+    {
+     "date": "June 1972",
+     "cfs": 313000,
+     "recurrence": "100 to 200 years"
+    }
+   ],
+   "note": "no 1936 or 1985 entry; April 1937 flow given as 148,000 (USGS peak file: 152,000, a daily mean)"
+  }
+ },
+ "levees": {
+  "2025_table8": {
+   "source": "FEMA FIS 510129V000C, City of Richmond, effective July 8, 2025, Table 8 Levee Systems, PDF p.29 (printed 24)",
+   "rows": [
+    {
+     "nld_id": "4605000002",
+     "name": "Richmond, Virginia (North)",
+     "status": "Accredited",
+     "panels": [
+      "5101290041F",
+      "5101290043F"
+     ],
+     "owner": "City of Richmond"
+    },
+    {
+     "nld_id": "4605000003",
+     "name": "Richmond Filtration Plant",
+     "status": "Accredited",
+     "panels": [
+      "5101290017E",
+      "5101290036E"
+     ],
+     "owner": "City of Richmond"
+    },
+    {
+     "nld_id": "4605000007",
+     "name": "Richmond, Virginia (South)",
+     "status": "Accredited",
+     "panels": [
+      "5101290039F",
+      "5101290043F"
+     ],
+     "owner": "City of Richmond"
+    }
+   ]
+  },
+  "2025_text": "Section 4.4, PDF p.28 (printed 23): accreditation under 44 CFR 65.10; Notes to Users PDF p.8 and PDF p.13 (accredited and provisionally accredited notes; owner data due by Sept 28, 2022); legend PDF p.15: area shown as reduced flood hazard from the 1% or greater flood by an accredited or provisionally accredited levee, overtopping or failure possible. Table 12 (PDF p.39): natural valley analyses conducted for the City levee systems. No top-of-wall elevation, design flood, interior drainage analysis, or with/without-levee profile is printed.",
+  "1998_text": "PDF p.9 (printed 5): USACE levee/floodwall protects the Shockoe Creek area and low-lying southside Richmond; FEMA required 3 ft freeboard over the 100-year flood; the system meets that for the 100-year flood but does not protect against the 500-year flood. Floodway widths M3 to M9 extend to the landside toe of the levee/floodwall (Table 2 footnote 4)."
+ },
+ "tributaries": {
+  "Gillies Creek": {
+   "2025": "Table 23 PDF p.59 (printed 54): sections A-D (1,337 to 5,558 ft above the James) regulatory 1% = 36.3 NAVD88, set by James backwater; without backwater 23.5, 28.0, 29.2, 33.9; E 37.6, F 42.6, G 44.7, H 54.8, I 62.7. Profile panel 13P (PDF p.102). Discharge at mouth: 3,366 / 4,876 / 6,045 / 7,813 / 18,619 cfs (Table 9 PDF p.31).",
+   "1998": "detailed in 1978 FIS; profile panel 19P; parts approximate (PDF p.6); 100-year 7,100 cfs at Jennie Scher Road (Table 1 PDF p.12); no floodway table in 1998."
+  },
+  "Shockoe Creek": {
+   "2025": "SWMM 5.1.012 model of storm drains, combined sewers, storage and pumping stations (Table 12 PDF p.43); study from confluence with the Kanawha Canal to the CSX railroad, 3.0 mi, analysis 06/16/2021 (Table 2 PDF p.21). Table 23 PDF p.70: section A (262 ft above the Kanawha Canal) 1% = 19.4 NAVD88, B 20.5, C 21.2, D 25.3, E 25.3, F 32.2, G 33.8, H 35.2, J 39.3, L 46.1; this is interior flooding behind the wall, not river backwater. Profiles 37P-39P, split flow 40P.",
+   "1998": "not studied in detail; Shockoe Creek levee history only (PDF p.9)."
+  },
+  "Reedy Creek": {
+   "2025": "Table 23 PDF p.65: section A (1,871 ft above the James) regulatory 71.4 (James backwater), 66.3 without backwater; profiles 33P-36P.",
+   "1998": "approximate only (PDF p.6)."
+  },
+  "Goodes Creek": {
+   "2025": "joins Broad Rock Creek, not the James; Table 23 PDF p.60, A 45.2 regulatory (backwater from Broad Rock Creek).",
+   "1998": "Table 2 PDF p.20, A 42.2 NGVD."
+  },
+  "Cannon Creek Branch": {
+   "2025": "joins Bacons Quarter Branch (Shockoe system), SWMM; Table 23 PDF p.56, A 75.5."
+  },
+  "Almond Creek": "not named in either report (UNCONFIRMED whether mapped as Zone A or X)",
+  "Stony Run": {
+   "2025": "joins Gillies Creek",
+   "1998": "Table 2 PDF p.21, A 49.5 NGVD; Gillies backwater from the Henrico FIS (PDF p.13)."
+  }
+ },
+ "other_1998": {
+  "Gathright Dam": "reduces peak discharges at Richmond by about 1.5 percent of the average (PDF p.9, printed 5)",
+  "downstream channel improvement": "reduces major flood elevations in Richmond; the report says it shortened the channel by about 2 feet in the city (literal wording, PDF p.9)",
+  "navigation": "interrupted at a 14 ft flood stage at Richmond (PDF p.8)",
+  "map history": "FIS Dec 1978, FIRM June 15, 1979; revised July 20, 1998 (PDF p.2)"
+ },
+ "map_history_2025": "Table 27 PDF p.81 (printed 76): initial identification 12/06/1974; FHBM revised 09/19/1975; initial FIRM 06/15/1979; revisions 07/20/1998, 04/02/2009, 07/16/2014, 07/08/2025"
+}

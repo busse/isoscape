@@ -71,3 +71,27 @@ file. Board entry: `series-richmond-floods`. Times are Eastern.
 - **A test we can run ourselves:** the lowest overland spill route from 17th and Main to the
   river on the lidar, with and without the wall. Started as step 15.
 - No images at this step.
+
+### 04. The FEMA flood profiles and a second read of the river numbers (18:56 to about 20:05) · `2026-11-23-04-fema-profiles-and-second-read/`
+
+- Opus 5.5 subagent; the cloud workspace restarted partway and it resumed from its files.
+  Files: fis.md, fis.json, second-read.md, levels.json, the reading scripts, and `evidence/`
+  (eight rasterized pages from the two FEMA reports and USGS HA-410: the first images of
+  record for this series' sources).
+- **The drawing levels are settled** (ft NAVD88 at the City Locks): Agnes 35.5 ±0.3; November
+  1985 29.7 ±0.4; Camille 27.6 ±0.2; March 1936 26.5 ±0.4; Fran 1996 22.7 (+1.0, one-sided);
+  November 2020 17.0 ±0.1; 1771 38.0 ±3. The spike's placeholders (10.8, 9.0, 8.4 m) were
+  within 0.05 m of the checked values for Agnes, 1985 and Camille.
+- **A dead end worth knowing:** FEMA's 1% flood at the Locks (36.9 ft) is 1.4 ft above Agnes
+  although Agnes carried more water. The FEMA profiles cannot stand in for historic floods
+  downtown; they run 2 to 5 ft above observed floods on the tidal reach.
+- **Eight corrections to step 02**, the main ones: the City Locks datum for 2007 to 2010 is
+  resolved (NAVD88 from October 1, 2007); 1969 at the Boulevard Bridge is 83.8 ft NGVD29, not
+  84.9; the "$153 million" attaches to the protected property, not the wall, and its meaning
+  is unconfirmed. Everything else checked was confirmed.
+- **Still not found anywhere:** the wall's top elevation, its design flood with a datum, and
+  the positions and sills of its closures. Neither FEMA report prints them.
+- **A cross-check nobody planned:** FEMA's Shockoe Creek model puts the 1% level near Dock
+  Street at 19.4 ft NAVD88. Our lidar spill test (step 15) put the bowl's natural spill level
+  at 19.1 ft. Two unrelated methods, 0.3 ft apart.
+- The 3DEP terrain's vertical datum is confirmed as NAVD88.

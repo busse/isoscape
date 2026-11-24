@@ -1,0 +1,592 @@
+{
+ "generated": "2026-11-23",
+ "datum": "NAVD88 (feet and meters; m = ft x 0.3048006)",
+ "reach": "Tidal reach below the Mayo Bridge: draw level_navd88_ft from the Locks downstream (Rocketts, Fulton/Gillies mouth, Manchester flats) and ramp linearly to mayo_bridge_navd88_ft at the bridge",
+ "dem_note": "USGS 3DEP 1/3 arc-second DEM is referenced to NAVD88, horizontal NAD83 (data.gov catalog record for the 3DEP 1/3 arc-second DEM collection, read 2026-11-23). FIS 2025 mapping used the 2014 USGS VA NRCS lidar (Table 22, PDF p.51).",
+ "stations": "fis2025_station_ft is the FIS 2025 James profile stationing; HA-410 miles mapped to it through bridges (Locks 103.7, I-95 104.20, Mayo 104.59, 9th St 105.10, Lee 105.50, Boulevard 107.51, Westham 111.7). lonlat_on_centerline is the point on the OSM James centerline at that station (OSM data, ODbL; station-to-OSM offset 137,100 ft, +/-300 ft).",
+ "fis_context_at_city_locks_navd88_ft": {
+  "2025 FIS (station ~161,530)": {
+   "10%": 25.8,
+   "4%": 30.3,
+   "2%": 33.6,
+   "1%": 36.9,
+   "1%+": 43.5,
+   "0.2%": 44.5
+  },
+  "1998 FIS (converted -1.03)": {
+   "10%": 20.8,
+   "2%": 29.1,
+   "1% table M6": 33.8,
+   "0.2%": 45.4
+  }
+ },
+ "floods": [
+  {
+   "id": "1972-06",
+   "name": "Agnes",
+   "level_navd88_ft": 35.5,
+   "uncertainty_ft": 0.3,
+   "basis": "City Locks gauge 36.5 ft on its 1957 NGVD29 zero minus 1.03, and the Dock and Pear sign 35.5 NAVD88 agree; add about 1.3 ft by the Mayo Bridge",
+   "sources": [
+    "NOAA Agnes disaster survey report, Oct 1972 (govinfo CZIC-gb70-9-u55-1972)",
+    "USGS PP 924 Table A4, PDF p.406",
+    "NWS NWPS RICV2 crest list (raw/nwps_ricv2.json)",
+    "Agnes high-water sign, Dock and Pear streets (hmdb 133685)"
+   ],
+   "mayo_bridge_navd88_ft": 36.8,
+   "mayo_note": "Locks plus 1.3 ft, the 1969 Locks-to-Mayo rise; not measured in 1972. UNCONFIRMED, +/-1 ft",
+   "control_points": [
+    {
+     "place": "City Locks gauge",
+     "fis2025_station_ft": 161530,
+     "lonlat_on_centerline": [
+      -77.42171,
+      37.52409
+     ],
+     "elev_navd88_ft": 35.47,
+     "elev_navd88_m": 10.811,
+     "source": "NOAA Agnes disaster survey report, Oct 1972 (govinfo CZIC-gb70-9-u55-1972); USGS PP 924 Table A4, PDF p.406"
+    },
+    {
+     "place": "Tredegar St at Browns Island Way (pocket behind Brown's Island, NOT the main channel)",
+     "fis2025_station_ft": 169640,
+     "lonlat_on_centerline": [
+      -77.44673,
+      37.53212
+     ],
+     "elev_navd88_ft": 40.0,
+     "elev_navd88_m": 12.192,
+     "source": "Agnes high-water sign, Tredegar St at Browns Island Way (hmdb 124035)",
+     "note": "below the FIS 1% channel level there (44.0) and below the 1969 channel profile; consistent with water ponded behind Brown's Island at the level of the river below the Brown's Island dam step (FIS 1% 41.1 just below Potterfield bridge). Do not use as a channel point."
+    },
+    {
+     "place": "Westham gauge",
+     "fis2025_station_ft": 203720,
+     "lonlat_on_centerline": [
+      -77.54641,
+      37.56161
+     ],
+     "elev_navd88_ft": 126.66,
+     "elev_navd88_m": 38.606,
+     "source": "USGS annual peak file 02037500 (raw/peak_02037500.rdb); gauge zero 98.04 NAVD88",
+     "note": "FEMA (FIS 2025 Table 6) uses 126.4, i.e. the old 98.82 NGVD29 zero converted; difference 0.25 ft"
+    }
+   ],
+   "level_navd88_m": 10.82
+  },
+  {
+   "id": "1969-08",
+   "name": "Camille",
+   "level_navd88_ft": 27.6,
+   "uncertainty_ft": 0.2,
+   "basis": "City Locks 28.64 ft NGVD29 at 6 a.m. Aug 22 (OFR 70-51) minus 1.03; HA-410 marks agree",
+   "sources": [
+    "USGS OFR 70-51 (1970), station 02-0377.00, printed p.119 (PDF p.131); Table 2 printed p.20",
+    "USGS PP 924 Table A4, PDF p.406",
+    "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+   ],
+   "mayo_bridge_navd88_ft": 28.9,
+   "mayo_note": "HA-410 Table 1: 29.9 NGVD29 at mile 104.6; OFR 70-51 Table 2: 27.6 on the old scale +2.36 = 29.96",
+   "control_points": [
+    {
+     "place": "City Locks gauge",
+     "fis2025_station_ft": 161530,
+     "lonlat_on_centerline": [
+      -77.42171,
+      37.52409
+     ],
+     "elev_navd88_ft": 27.61,
+     "elev_navd88_m": 8.416,
+     "source": "USGS OFR 70-51 (1970), station 02-0377.00, printed p.119 (PDF p.131); Table 2 printed p.20"
+    },
+    {
+     "place": "I-95 bridge",
+     "ha410_river_mile": 104.2,
+     "fis2025_station_ft": 164010,
+     "lonlat_on_centerline": [
+      -77.42917,
+      37.52739
+     ],
+     "elev_navd88_ft": 27.67,
+     "elev_navd88_m": 8.434,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "Mayo's Bridge (mile 104.6)",
+     "ha410_river_mile": 104.59,
+     "fis2025_station_ft": 165592,
+     "lonlat_on_centerline": [
+      -77.43458,
+      37.5277
+     ],
+     "elev_navd88_ft": 28.87,
+     "elev_navd88_m": 8.8,
+     "source": "USGS HA-410 Table 1 (mile 104.6)"
+    },
+    {
+     "place": "just below 9th St bridge, foot of the drop",
+     "ha410_river_mile": 105.06,
+     "fis2025_station_ft": 168208,
+     "lonlat_on_centerline": [
+      -77.44255,
+      37.53018
+     ],
+     "elev_navd88_ft": 33.37,
+     "elev_navd88_m": 10.171,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "just below 9th St bridge, head of the drop",
+     "ha410_river_mile": 105.06,
+     "fis2025_station_ft": 168208,
+     "lonlat_on_centerline": [
+      -77.44255,
+      37.53018
+     ],
+     "elev_navd88_ft": 37.07,
+     "elev_navd88_m": 11.299,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks",
+     "note": "the two marks bracket a vertical drop at the 9th St bridge"
+    },
+    {
+     "place": "mile 105.21",
+     "ha410_river_mile": 105.21,
+     "fis2025_station_ft": 169006,
+     "lonlat_on_centerline": [
+      -77.44467,
+      37.53155
+     ],
+     "elev_navd88_ft": 39.47,
+     "elev_navd88_m": 12.03,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "mile 105.27",
+     "ha410_river_mile": 105.27,
+     "fis2025_station_ft": 169320,
+     "lonlat_on_centerline": [
+      -77.44569,
+      37.53183
+     ],
+     "elev_navd88_ft": 41.37,
+     "elev_navd88_m": 12.61,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "Robert E. Lee Bridge",
+     "ha410_river_mile": 105.5,
+     "fis2025_station_ft": 170522,
+     "lonlat_on_centerline": [
+      -77.44973,
+      37.53253
+     ],
+     "elev_navd88_ft": 42.87,
+     "elev_navd88_m": 13.067,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks",
+     "note": "between marks, +/-0.7 ft"
+    },
+    {
+     "place": "mile 106.1",
+     "ha410_river_mile": 106.1,
+     "fis2025_station_ft": 173785,
+     "lonlat_on_centerline": [
+      -77.45948,
+      37.52918
+     ],
+     "elev_navd88_ft": 64.97,
+     "elev_navd88_m": 19.803,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks",
+     "note": "HA-410 says the 1969 profile between miles 105 and 107 was built largely from the 1937 profile"
+    },
+    {
+     "place": "mile 106.5",
+     "ha410_river_mile": 106.5,
+     "fis2025_station_ft": 175960,
+     "lonlat_on_centerline": [
+      -77.4666,
+      37.52747
+     ],
+     "elev_navd88_ft": 69.77,
+     "elev_navd88_m": 21.266,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks",
+     "note": "as above"
+    },
+    {
+     "place": "mile 107.0",
+     "ha410_river_mile": 107.0,
+     "fis2025_station_ft": 178679,
+     "lonlat_on_centerline": [
+      -77.47592,
+      37.52837
+     ],
+     "elev_navd88_ft": 73.67,
+     "elev_navd88_m": 22.455,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks",
+     "note": "as above"
+    },
+    {
+     "place": "mile 107.28 (mark)",
+     "ha410_river_mile": 107.28,
+     "fis2025_station_ft": 180202,
+     "lonlat_on_centerline": [
+      -77.48057,
+      37.53017
+     ],
+     "elev_navd88_ft": 78.37,
+     "elev_navd88_m": 23.887,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "Boulevard Bridge",
+     "ha410_river_mile": 107.51,
+     "fis2025_station_ft": 181453,
+     "lonlat_on_centerline": [
+      -77.48428,
+      37.53194
+     ],
+     "elev_navd88_ft": 82.77,
+     "elev_navd88_m": 25.228,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks",
+     "note": "between marks, +/-0.7 ft; the earlier research read 84.9"
+    },
+    {
+     "place": "mile 107.59 (mark)",
+     "ha410_river_mile": 107.59,
+     "fis2025_station_ft": 181878,
+     "lonlat_on_centerline": [
+      -77.48556,
+      37.53251
+     ],
+     "elev_navd88_ft": 84.07,
+     "elev_navd88_m": 25.625,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "mile 108.19 (mark)",
+     "ha410_river_mile": 108.19,
+     "fis2025_station_ft": 185067,
+     "lonlat_on_centerline": [
+      -77.49389,
+      37.53762
+     ],
+     "elev_navd88_ft": 93.37,
+     "elev_navd88_m": 28.459,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "mile 108.72 (mark)",
+     "ha410_river_mile": 108.72,
+     "fis2025_station_ft": 187883,
+     "lonlat_on_centerline": [
+      -77.50128,
+      37.54252
+     ],
+     "elev_navd88_ft": 100.57,
+     "elev_navd88_m": 30.654,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "Westham gauge",
+     "fis2025_station_ft": 203720,
+     "lonlat_on_centerline": [
+      -77.54641,
+      37.56161
+     ],
+     "elev_navd88_ft": 122.99,
+     "elev_navd88_m": 37.487,
+     "source": "USGS annual peak file 02037500 (raw/peak_02037500.rdb)"
+    }
+   ],
+   "level_navd88_m": 8.412
+  },
+  {
+   "id": "1985-11",
+   "name": "Election Day flood (Juan)",
+   "level_navd88_ft": 29.7,
+   "uncertainty_ft": 0.4,
+   "basis": "NWS City Locks crest 30.76 ft, gauge era 1957-2007 (NGVD29 zero) minus 1.03; other accounts round to 30.7-31",
+   "sources": [
+    "NWS NWPS RICV2 crest list (raw/nwps_ricv2.json)",
+    "Friends of James River Park gauge marker (hmdb 61821): 30.7"
+   ],
+   "mayo_bridge_navd88_ft": 31.0,
+   "mayo_note": "Locks plus 1.3 ft assumed. UNCONFIRMED, +/-1 ft",
+   "control_points": [
+    {
+     "place": "City Locks gauge",
+     "fis2025_station_ft": 161530,
+     "lonlat_on_centerline": [
+      -77.42171,
+      37.52409
+     ],
+     "elev_navd88_ft": 29.73,
+     "elev_navd88_m": 9.062,
+     "source": "NWS NWPS RICV2 crest list (raw/nwps_ricv2.json)"
+    },
+    {
+     "place": "Westham gauge",
+     "fis2025_station_ft": 203720,
+     "lonlat_on_centerline": [
+      -77.54641,
+      37.56161
+     ],
+     "elev_navd88_ft": 122.81,
+     "elev_navd88_m": 37.433,
+     "source": "USGS annual peak file 02037500 (raw/peak_02037500.rdb); WDR 1986 PDF p.230"
+    }
+   ],
+   "level_navd88_m": 9.053
+  },
+  {
+   "id": "1936-03",
+   "name": "March 1936",
+   "level_navd88_ft": 26.5,
+   "uncertainty_ft": 0.4,
+   "basis": "PP 924 gives 27.5 ft msl at the City Locks; HA-410 marks near the Locks read 27.2 to 27.5 NGVD29; minus 1.03",
+   "sources": [
+    "USGS PP 924 Table A4, PDF p.406",
+    "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks",
+    "USGS HA-410 Table 1 (mile 104.6)"
+   ],
+   "mayo_bridge_navd88_ft": 27.8,
+   "mayo_note": "HA-410 Table 1: 28.8 NGVD29 at mile 104.6; old Weather Bureau gauge 26.5 + 2.36 = 28.86",
+   "control_points": [
+    {
+     "place": "mile 102.87 (mark)",
+     "ha410_river_mile": 102.87,
+     "fis2025_station_ft": 157413,
+     "lonlat_on_centerline": [
+      -77.41731,
+      37.51405
+     ],
+     "elev_navd88_ft": 25.77,
+     "elev_navd88_m": 7.855,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "mile 103.10 (mark)",
+     "ha410_river_mile": 103.1,
+     "fis2025_station_ft": 158554,
+     "lonlat_on_centerline": [
+      -77.41731,
+      37.5172
+     ],
+     "elev_navd88_ft": 26.27,
+     "elev_navd88_m": 8.007,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "City Locks",
+     "fis2025_station_ft": 161530,
+     "lonlat_on_centerline": [
+      -77.42171,
+      37.52409
+     ],
+     "elev_navd88_ft": 26.47,
+     "elev_navd88_m": 8.068,
+     "source": "USGS PP 924 Table A4, PDF p.406"
+    },
+    {
+     "place": "mile 103.99 (mark)",
+     "ha410_river_mile": 103.99,
+     "fis2025_station_ft": 162968,
+     "lonlat_on_centerline": [
+      -77.42586,
+      37.52627
+     ],
+     "elev_navd88_ft": 26.47,
+     "elev_navd88_m": 8.068,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "mile 104.40 (mark)",
+     "ha410_river_mile": 104.4,
+     "fis2025_station_ft": 164821,
+     "lonlat_on_centerline": [
+      -77.43191,
+      37.52765
+     ],
+     "elev_navd88_ft": 26.87,
+     "elev_navd88_m": 8.19,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "Mayo's Bridge (mile 104.6)",
+     "ha410_river_mile": 104.6,
+     "fis2025_station_ft": 165648,
+     "lonlat_on_centerline": [
+      -77.43477,
+      37.5277
+     ],
+     "elev_navd88_ft": 27.77,
+     "elev_navd88_m": 8.464,
+     "source": "USGS HA-410 Table 1 (mile 104.6)"
+    },
+    {
+     "place": "mile 104.79 (mark)",
+     "ha410_river_mile": 104.79,
+     "fis2025_station_ft": 166705,
+     "lonlat_on_centerline": [
+      -77.4384,
+      37.52797
+     ],
+     "elev_navd88_ft": 27.77,
+     "elev_navd88_m": 8.464,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "mile 105.59 (mark, just above Lee Bridge)",
+     "ha410_river_mile": 105.59,
+     "fis2025_station_ft": 171011,
+     "lonlat_on_centerline": [
+      -77.4513,
+      37.53255
+     ],
+     "elev_navd88_ft": 43.57,
+     "elev_navd88_m": 13.28,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "Boulevard Bridge (mark)",
+     "ha410_river_mile": 107.48,
+     "fis2025_station_ft": 181290,
+     "lonlat_on_centerline": [
+      -77.48379,
+      37.53172
+     ],
+     "elev_navd88_ft": 81.87,
+     "elev_navd88_m": 24.954,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "mile 108.93 (mark)",
+     "ha410_river_mile": 108.93,
+     "fis2025_station_ft": 188999,
+     "lonlat_on_centerline": [
+      -77.50372,
+      37.54491
+     ],
+     "elev_navd88_ft": 101.37,
+     "elev_navd88_m": 30.898,
+     "source": "USGS HA-410 (1969) Figure 1, read for this check at 300 dpi, +/-0.3 ft at marks, +/-0.7 ft between marks"
+    },
+    {
+     "place": "Westham gauge",
+     "fis2025_station_ft": 203720,
+     "lonlat_on_centerline": [
+      -77.54641,
+      37.56161
+     ],
+     "elev_navd88_ft": 121.46,
+     "elev_navd88_m": 37.021,
+     "source": "USGS annual peak file 02037500 (raw/peak_02037500.rdb)"
+    }
+   ],
+   "level_navd88_m": 8.077
+  },
+  {
+   "id": "1996-09",
+   "name": "Fran",
+   "level_navd88_ft": 22.7,
+   "uncertainty_ft": 1.0,
+   "basis": "NWS City Locks crest 23.75 ft; taken as the NGVD29-zero era (USGS NAVD88 series starts Oct 1 2007); if the 1996 value were already NAVD88 the level is 23.75, so the error is one-sided upward",
+   "sources": [
+    "NWS NWPS RICV2 crest list (raw/nwps_ricv2.json)",
+    "City floodwall FAQ (23.8, secondary)"
+   ],
+   "mayo_bridge_navd88_ft": 24.0,
+   "mayo_note": "Locks plus 1.3 ft assumed. UNCONFIRMED",
+   "control_points": [
+    {
+     "place": "City Locks gauge",
+     "fis2025_station_ft": 161530,
+     "lonlat_on_centerline": [
+      -77.42171,
+      37.52409
+     ],
+     "elev_navd88_ft": 22.72,
+     "elev_navd88_m": 6.925,
+     "source": "NWS NWPS RICV2 crest list (raw/nwps_ricv2.json)",
+     "note": "datum era UNCONFIRMED"
+    },
+    {
+     "place": "Westham gauge",
+     "fis2025_station_ft": 203720,
+     "lonlat_on_centerline": [
+      -77.54641,
+      37.56161
+     ],
+     "elev_navd88_ft": 119.27,
+     "elev_navd88_m": 36.354,
+     "source": "USGS annual peak file 02037500 (raw/peak_02037500.rdb)"
+    }
+   ],
+   "level_navd88_m": 6.919
+  },
+  {
+   "id": "2020-11",
+   "name": "November 2020",
+   "level_navd88_ft": 17.0,
+   "uncertainty_ft": 0.1,
+   "basis": "USGS approved NAVD88 series at City Locks peaks at 16.96 ft at 04:48-04:54 EST Nov 14 2020",
+   "sources": [
+    "USGS 02037705 parameter 62620 (NAVD88), approved instantaneous values, fetched 2026-11-23",
+    "NWS NWPS RICV2 crest list (raw/nwps_ricv2.json)"
+   ],
+   "mayo_bridge_navd88_ft": null,
+   "mayo_note": "no measurement; the 1969 rise of 1.3 ft does not scale to a flood this small (UNCONFIRMED); draw flat or use the NWS/USACE FIM layers",
+   "control_points": [
+    {
+     "place": "City Locks gauge",
+     "fis2025_station_ft": 161530,
+     "lonlat_on_centerline": [
+      -77.42171,
+      37.52409
+     ],
+     "elev_navd88_ft": 16.96,
+     "elev_navd88_m": 5.169,
+     "source": "USGS 02037705 parameter 62620 (NAVD88), approved instantaneous values, fetched 2026-11-23"
+    },
+    {
+     "place": "Westham gauge",
+     "fis2025_station_ft": 203720,
+     "lonlat_on_centerline": [
+      -77.54641,
+      37.56161
+     ],
+     "elev_navd88_ft": 116.37,
+     "elev_navd88_m": 35.47,
+     "source": "USGS annual peak file 02037500 (raw/peak_02037500.rdb)"
+    }
+   ],
+   "level_navd88_m": 5.182
+  },
+  {
+   "id": "1771-05",
+   "name": "Great Fresh of 1771",
+   "level_navd88_ft": 38.0,
+   "uncertainty_ft": 3.0,
+   "basis": "Corps figure 38 ft on the old Weather Bureau scale near Mayo's Bridge (from diaries) + 2.36 - 1.03 = 39.3 at Mayo; minus 1.3 to the Locks. Rests on diary accounts and on the 1876 gauge scale; UNCONFIRMED as an elevation",
+   "sources": [
+    "USGS OFR 70-51 (1970), station 02-0377.00, printed p.119 (PDF p.131); Table 2 printed p.20 (Table 2: c38, datum 2.36; station page: 38 ft May 27, 1771, from a Corps report)"
+   ],
+   "mayo_bridge_navd88_ft": 39.3,
+   "mayo_note": "derived; 1998 FIS lists May 1771 as a 50 to 100 year flood (PDF p.8)",
+   "control_points": [
+    {
+     "place": "Mayo's Bridge (old gauge site)",
+     "ha410_river_mile": 104.6,
+     "fis2025_station_ft": 165648,
+     "lonlat_on_centerline": [
+      -77.43477,
+      37.5277
+     ],
+     "elev_navd88_ft": 39.33,
+     "elev_navd88_m": 11.988,
+     "source": "USGS OFR 70-51 (1970), station 02-0377.00, printed p.119 (PDF p.131); Table 2 printed p.20"
+    }
+   ],
+   "level_navd88_m": 11.582
+  }
+ ]
+}
