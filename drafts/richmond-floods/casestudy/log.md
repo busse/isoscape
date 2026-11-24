@@ -180,3 +180,14 @@ The renders for each round are in the spike branch's step folders 27 to 34.
   views stay unchanged.
 - **10:48, Chris:** "Gaston, B": solid water where the reports agree, a hatched band for the
   range, pins at the five named places, the river low, the gates open.
+
+### Coverage reviewed; d3 started (12:18)
+
+- The evidence-based coverage came back (steps 40 to 47 on the branch): Shockoe 1972 goes
+  from 669 buildings drawn to 918 confirmed and 319 unconfirmed; buildings standing in the
+  1972 water from 87 to 144. Fourteen published views proved byte-identical.
+- Put to Chris: is the slate "unconfirmed" style right and strong enough; hide the far-off
+  Church Hill outbuildings; then assemble the clean working draft of both sets.
+- **12:18, Chris:** "Yes, to all proceed". Read as: slate accepted, with one more cue so it
+  holds at plate size; outbuildings away from the water hidden by a stated rule; working
+  draft d3 of both sets started (steps from 50) on the same Opus 5.5 subagent.
