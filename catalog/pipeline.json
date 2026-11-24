@@ -3516,8 +3516,8 @@
   "series-richmond-floods": {
    "title": "Richmond's floods over time: how much went under, before and after the floodwall",
    "plate": null,
-   "kind": "research",
-   "stage": "outline",
+   "kind": "batch",
+   "stage": "working draft",
    "status": "active",
    "asset_version": null,
    "published_version": null,
@@ -3535,7 +3535,8 @@
    "links": [],
    "log": [
     "2026-11-23: rough draft -> research",
-    "2026-11-23: research -> outline"
+    "2026-11-23: research -> outline",
+    "2026-11-23: outline -> working draft"
    ]
   }
  }
