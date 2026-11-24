@@ -3517,7 +3517,7 @@
    "title": "Richmond's floods over time: how much went under, before and after the floodwall",
    "plate": null,
    "kind": "research",
-   "stage": "research",
+   "stage": "outline",
    "status": "active",
    "asset_version": null,
    "published_version": null,
@@ -3526,7 +3526,7 @@
    "orders": null,
    "rounds": 0,
    "waiting_on": "nothing",
-   "decision": "Go hard (owner, 2026-11-23), on Opus 5.5 subagents. Decided: draw 1771 as a labeled estimate; make an Agnes-against-today's-wall plate; FEMA study downloaded on the Mac. Running: Gaston and weather research, the drawing spike (branch feature/flood-surface), and a second read of the river research with the FEMA profiles. Recommended floods: Agnes 1972, Camille 1969, Election Day 1985, March 1936, Fran 1996, November 2020, 1771, and Gaston 2004. Next gate: the owner's worth-pursuing call on the rough test. Record: drafts/richmond-floods/casestudy/.",
+   "decision": "Worth pursuing (owner, 2026-11-23 20:03), on Opus 5.5 subagents; no outside parties to be contacted, public sources only. Decided: each flood on the city of its own year; 1x terrain; Gaston as depths at named places with a soft pool and the gates open; one neutral sentence on the 2009 lawsuit; a radar rain map for the Shockoe valley; 1771 as a labeled estimate; an Agnes-against-today's-wall plate. Drawing levels (ft NAVD88 at the City Locks): 1771 38.0, Agnes 35.5, 1985 29.7, Camille 27.6, 1936 26.5, Fran 22.7, 2020 17.0. Unknown and staying so: the wall's top elevation and its openings' sills. In work: drawing d1 on branch feature/flood-surface; the rain map. Next gate: the owner approves the look. Record: drafts/richmond-floods/casestudy/.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3534,7 +3534,8 @@
    "worktree": null,
    "links": [],
    "log": [
-    "2026-11-23: rough draft -> research"
+    "2026-11-23: rough draft -> research",
+    "2026-11-23: research -> outline"
    ]
   }
  }

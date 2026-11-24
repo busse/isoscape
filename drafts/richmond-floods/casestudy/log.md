@@ -95,3 +95,18 @@ file. Board entry: `series-richmond-floods`. Times are Eastern.
   Street at 19.4 ft NAVD88. Our lidar spill test (step 15) put the bowl's natural spill level
   at 19.1 ft. Two unrelated methods, 0.3 ft apart.
 - The 3DEP terrain's vertical datum is confirmed as NAVD88.
+
+### The gate: worth pursuing (20:03)
+
+- **Chris:** "Yes worth it and your reccs. I will not be engaging 3rd parties offline for this
+  at this time". The series passes from rough draft to working draft.
+- Decided, on the planning session's recommendations: each flood is drawn on the city of its
+  own year; the flood series is drawn at 1x terrain; Gaston is drawn as depths at named
+  places with a soft pool, gates open, with no single surveyed-looking level; one neutral
+  sentence on the 2009 lawsuit; a radar-based rain map for the Shockoe valley.
+- **No outside requests:** nothing goes to the Corps, the city or the court. The wall's top
+  elevation, its openings' sills and the two city engineering studies stay unknown, and the
+  series says so where it matters. Public sources only.
+- **20:10:** two Opus 5.5 subagents started: working draft d1 of the drawing (real levels,
+  the city of each year, color and wall round two) on `feature/flood-surface`; and the
+  radar rain map (steps numbered from 30).
