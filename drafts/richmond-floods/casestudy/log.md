@@ -166,3 +166,17 @@ The renders for each round are in the spike branch's step folders 27 to 34.
   Library of Virginia's Sanborn databases, USDA and NOAA film, Virginia DHR's survey system.
 - One web fetch (a Virginia DHR page) waited on a permission prompt that went unanswered;
   the agent moved on without it.
+
+### Decisions, 10:33 to 10:48
+
+- **10:33, Chris:** on the period city, "we want as much coverage as we can ascertain"; on
+  Manchester, go with the recommendation (today's city for now; a traced period Manchester
+  deferred); on Gaston A or B, "unsure of what is being asked". The question had been put
+  without its picture; re-asked with the crop and a plain description of each.
+- **10:36:** an Opus 5.5 subagent started on evidence-based lifespans for every dated flood
+  plate (steps from 40): the 1950s traces carried forward and checked against the 1974
+  orthophoto and later public aerials; today's undated buildings checked backward; unclear
+  buildings drawn in an "unconfirmed" style; opt-in for the flood regions so published
+  views stay unchanged.
+- **10:48, Chris:** "Gaston, B": solid water where the reports agree, a hatched band for the
+  range, pins at the five named places, the river low, the gates open.
