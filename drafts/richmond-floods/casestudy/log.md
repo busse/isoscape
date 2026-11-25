@@ -246,3 +246,16 @@ Renders for this are in the branch's steps 55 to 58.
   (steps from 70), covering all thirteen wall-visible faults and ten fact findings. A
   targeted recheck by the independent inspector follows. Because Gaston's picture changes,
   its before and after go back to Chris.
+
+### rc2 built and rechecked (12:30 to about 16:20) · `2026-11-25-07-recheck-rc2/`
+
+- The fix round produced rc2 (steps 71 to 76 on the branch). The Manchester with-wall counts
+  fell from 254 acres and 48 buildings to 41.5 acres and 2 buildings, plus 212.8 acres "not
+  known". The Mayo Bridge is under the water in 1972 and 1985 and partly in 1936 and 1969.
+  Gaston is drawn solid to about 28 ft and hatched to 35.
+- The inspector's recheck: all thirteen rc1 faults fixed in substance; **not a clean pass.**
+  Three statements still say more than their sources (which 1996 flood shut the Dock Street
+  gate; the U-wall's place; the 1771 accounts), a figure split from its unit on four sheets,
+  and one drawing fault that fixing the river's color exposed: Gaston's rain pool drawn on
+  the river side of the wall.
+- A third round at this stage needs Chris's say-so. Put to him.
