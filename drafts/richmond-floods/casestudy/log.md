@@ -292,3 +292,19 @@ Renders for this are in the branch's steps 55 to 58.
   on the outline and first full draft of the story (branch `story/richmond-floods`, steps
   from 90), written for a reader new to all of it and for people who lived through these
   floods: plain respect, neutral on blame, nothing beyond the sources, unlisted.
+
+### The editorial, draft 1 (16:15 to about 17:00)
+
+- The two text edits landed on the Gaston sheet (step 84 on the flood branch): title
+  "Shockoe Bottom: Gaston's rain, August 30, 2004"; "about 4:30, flooding reported". A pixel
+  comparison shows only the title line and the rain panel changed.
+- An Opus 5.5 subagent wrote the outline and first full draft of the story on branch
+  `story/richmond-floods` (steps 90 to 93 there): about 4,100 words and 16 figures, 96 claims
+  each tied to a source, unlisted. It found one thing the plates do not draw: an older levee
+  at Shockoe Creek's mouth that FEMA's study says was overtopped in 1972; the page says so
+  under its limits.
+- The planning session read the opening and the phone screenshot, ran the copy-rule checks
+  (no em dashes; the naming of Gaston), and put the page on the Mac for Chris to read:
+  `ISO-TEST/_preview/richmond-floods-editorial/index.html#/richmond-floods`, with the plain
+  reading copy and the three titles beside it. The story PDF tool refused the draft because
+  three sentences tell the reader to drag a divider; a print wording for those is to be added.
