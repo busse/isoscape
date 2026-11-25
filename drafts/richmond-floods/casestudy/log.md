@@ -266,3 +266,15 @@ Renders for this are in the branch's steps 55 to 58.
 - rc3 started on the same Opus 5.5 subagent (steps from 80): the three statements, the split
   figure, Gaston's pool clipped to the city side of the wall, the empty quarter of the
   Gaston sheet (first choice: the rain chart from the rain-map branch), the wall label.
+
+### rc3 built and rechecked (15:05 to about 17:15) · `2026-11-25-08-recheck-rc3/`
+
+- rc3 (steps 80 to 83 on the branch): the three statements reworded; figures kept with their
+  units and the sheet tool made to refuse a split; Gaston's pool held to the city side of
+  the wall; a rain panel (inches per hour over the watershed, four timed events) in the
+  Gaston sheet's empty quarter; the wall label moved.
+- The inspector's verdict: **ready for the owner's release decision**, with one caveat: the
+  rain panel's "4:30 flooding under way" is more exact than its source (the time may be
+  5:30 p.m. EDT). To be reworded.
+- Put to Chris: look confirmation on the Gaston sheet, and its title (exact but long, or
+  plainer with the depression wording in the caption).
