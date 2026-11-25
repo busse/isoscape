@@ -8,8 +8,8 @@ and page.
 
 **Chris Busse's published maps.** The views on the isoscape site, in `docs/`, and the print files
 are © Chris Busse, licensed [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/): share
-and adapt them with credit, but not for sale. Prints of them are in the holiday shop at
-[chrisbusse.com](https://chrisbusse.com) through December 31, 2026.
+and adapt them with credit, but not for sale. Prints of them are in the shop at
+[chrisbusse.com](https://chrisbusse.com).
 
 **Data.**
 - Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, under the

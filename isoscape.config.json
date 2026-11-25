@@ -6,7 +6,7 @@
     "ga": "G-HNNYF0H75C"
   },
   "shop": {
-    "label": "Holiday shop, open through December 31, 2026",
+    "label": "Prints at chrisbusse.com",
     "url": "https://chrisbusse.com/",
     "cta": "Buy prints of these maps",
     "onSale": {
@@ -289,7 +289,7 @@
       ] }
     ],
     "title": "Richmond, drawn from open data",
-    "intro": "Small isometric maps of Richmond, Virginia: the James River through the city in one long view, and downtown block by block from 1737 to today. Pan and zoom any map, or compare two side by side. The tool that draws them is free and open source, and prints are in the holiday shop.",
+    "intro": "Small isometric maps of Richmond, Virginia: the James River through the city in one long view, and downtown block by block from 1737 to today. Pan and zoom any map, or compare two side by side. The tool that draws them is free and open source, and prints are in the shop.",
     "heroes": [
       {
         "region": "richmond-i195-rocketts",

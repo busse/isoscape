@@ -55,14 +55,14 @@ anywhere: USGS 3DEP in the US, IGN in France, swisstopo in Switzerland, GSI in J
 Copernicus's 30 m model for the rest of the world (see [Elevation sources](#elevation-sources)). Your map is yours to print and share; credit OpenStreetMap (see
 [LICENSE-maps.md](LICENSE-maps.md)).
 
-**How isoscape was made.** isoscape was built, and the holiday shop is run, in chats with
+**How isoscape was made.** isoscape was built, and the shop is run, in chats with
 Claude, Anthropic's AI, using Claude Opus 5.5, directed and reviewed by Chris Busse. Claude wrote
 the code, traced the historic buildings, laid out the prints, and set up the shop. Chris Busse
 draws the maps with isoscape, in code, from open data; nothing is drawn by hand. The historic
 years are machine-traced sketches.
 
-Prints of some of the designs on the isoscape site are sold in a holiday shop at
-[chrisbusse.com](https://chrisbusse.com), open through December 31, 2026; the site links to a
+Prints of some of the designs on the isoscape site are sold in the shop at
+[chrisbusse.com](https://chrisbusse.com), made to order; the site links to a
 design's print only while it is on sale (`shop.onSale`, below). The tool stays here for good.
 
 ## The explorer
@@ -181,7 +181,7 @@ what is for sale:
 
 ```json
 "shop": {
-  "label": "Holiday shop, open through December 31, 2026",
+  "label": "Prints at chrisbusse.com",
   "url": "https://chrisbusse.com/",
   "cta": "Buy prints of these maps",
   "onSale": { "broad-street-cutaway": "https://chrisbusse.com/products/…" }

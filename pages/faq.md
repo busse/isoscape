@@ -212,9 +212,8 @@ adapt them with credit, but you can't sell them. Every credit is in [About](abou
 ### What am I buying when I buy a print?
 
 A print of one of my maps, printed when you order it. The file it's printed from has a release
-record, so I can make it again exactly. Prints are in the holiday shop at
-[chrisbusse.com](https://chrisbusse.com/) through December 31, 2026, and buying one supports
-the project.
+record, so I can make it again exactly. Prints are in the shop at
+[chrisbusse.com](https://chrisbusse.com/), and buying one supports the project.
 
 ![From drawing to print, in seven steps: build the scenes, look at them at print size, compose the print, add the title block with the plate and version, write the release record, run the rebuild check, and print it when someone buys one. An arrow runs from the last step back to the first. If a fault turns up after release, the design is redrawn as the next version, the plate stays the same, and the Changes page says what changed.](faq-print.svg)
 
