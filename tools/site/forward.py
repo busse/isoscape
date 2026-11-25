@@ -14,7 +14,9 @@ new, old, url = os.path.abspath(sys.argv[1]), os.path.abspath(sys.argv[2]), sys.
 KEEP = re.compile(r'<title>.*?</title>|<meta\s+(?:name|property)="(?:description|og:[^"]*|twitter:[^"]*)"[^>]*>|<link\s+rel="canonical"[^>]*>', re.S | re.I)
 
 def stub(rel, src):
-    target = url + ('' if rel == 'index.html' else rel)
+    # The new host (Cloudflare Pages) serves x.html at x and index.html at its folder.
+    path = '' if rel == 'index.html' else re.sub(r'(^|/)index\.html$', r'\1', rel)
+    target = url + (path[:-5] if path.endswith('.html') else path)
     head = '\n'.join(KEEP.findall(src)) if src else f'<title>isoscape</title>\n<link rel="canonical" href="{html.escape(target)}">'
     if 'rel="canonical"' not in head: head += f'\n<link rel="canonical" href="{html.escape(target)}">'
     t = html.escape(target)
