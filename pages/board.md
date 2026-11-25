@@ -9,15 +9,16 @@ unlisted: true
 
 Every piece of work on isoscape, from a first look at a subject to a print for sale, moves through the same stages: rough draft, working draft, final draft and final production. A version number in a print's title block is given only at final production, and names an edition someone could own. Before that, work is counted in draft rounds (d1, d2) and release candidates (rc1, rc2). The rules are in [Changes](changes.md#how-versions-work-from-here) and [How it's made](how-its-made.md#stages-and-inspection).
 
-This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 23, 2026. The page and the board were set up with Claude.
+This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 25, 2026. The page and the board were set up with Claude.
 
 | Stage | Entries |
 |---|---|
 | research | 2 |
+| final draft | 1 |
 | final production | 47 |
 | published | 1 |
-| in work | 5 |
-| owner test | 1 |
+| in work | 6 |
+| owner test | 2 |
 | live | 3 |
 | on hold | 55 |
 | blocked | 1 |
@@ -26,6 +27,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 ## Waiting on a decision
 
 - **Downtown Richmond through time: its own page in the explorer (year view, timeline, compare two years)**: Merged and published 2026-11-23 (main cb7b545) on the owner's word to ship and review on production. Owner is reviewing the live page; not yet checked on a real phone (touch drag, pinch, iOS Safari).
+- **Tutorial: draw a neighborhood's history from old maps and open data with an AI chat, using Jackson Ward in Richmond**: Local preview at ISO-TEST/_preview/tutorial-2/ (open p/history-from-old-maps.html or index.html#/history-from-old-maps). Check the three callouts, the table and the figures. Then the explorer session publishes (cloudflare branch); note the preview's _routes.json was not built from a full checkout.
 - **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
@@ -35,6 +37,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 |---|---|---|---|---|
 | — | Our own transcription of Richmond's 48 HOLC area-description forms, from the public-domain scans | research | — | no |
 | — | Trace the 1952 streets of Navy Hill and Gilpin Court for the Jackson Ward views | research | — | no |
+
+## Final draft
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Richmond's floods over time: how much went under, before and after the floodwall | batch | — | no |
 
 ## Final production
 
@@ -98,6 +106,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
+| — | Stricter draw order for the whole catalog: interlocking buildings, late-painted bands, wall joints | site | — | no |
 | — | Explorer: information architecture pass (grouped page menu, builds out of the left column) | site | — | no |
 | — | Rebuild the whole Downtown Richmond through time series once, so every pair of years compares like with like | site | — | no |
 | — | Shop: default to the unframed print, curated collections and sort order, story and set links, menu | site | — | no |
@@ -109,6 +118,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Downtown Richmond through time: its own page in the explorer (year view, timeline, compare two years) | site | — | no |
+| — | Tutorial: draw a neighborhood's history from old maps and open data with an AI chat, using Jackson Ward in Richmond | site | — | no |
 
 ## Live
 

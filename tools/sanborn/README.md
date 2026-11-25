@@ -17,7 +17,12 @@ this folder. Scans are cached outside the repo (`~/work/sanborn`); the outputs g
 5. `python3 extract.py <edition> georef.json "<scan path with {sh:04d}>" ../../history/sanborn/<edition>.geojson <skip,sheets> keep<edition>.json`
 6. `node dates.ts` (from the repo root: `node tools/sanborn/dates.ts`), then
    `python3 lifespans.py ../../history/sanborn/lost.geojson ../../data/sanborn/buildings.json ../../data/sanborn/motorways.json ../../history/sanborn/<edition>.geojson…`
-   with the editions in order.
+   with the editions in order. Add `--respect-years` to count a building of today as the traced
+   one only when the assessor dates it to that edition or earlier (or not at all); without it, a
+   new building over an old footprint hides the old one. Add `--strict-link` to follow a building
+   into a later edition only when the two outlines overlap by half of the larger one; without
+   it, a big building can be followed into a small one that later stood inside it, and is drawn
+   with the small one's outline. The Broad and Belvidere tutorial uses both.
 
 The 1886 edition used a scale of 0.2014 m per pixel at 25%. Sheets 14, 25–27, 29 and 31 were
 left out: outside the frame, or (14) not yet fitted.

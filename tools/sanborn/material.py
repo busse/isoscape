@@ -22,8 +22,12 @@ def classify(im, fireproof=False):
     sat = im.max(2) - im.min(2)
     out = np.zeros(R.shape, np.uint8)
     out[(rg > 9) & (bg > 6) & ~ink] = 1                       # pink: brick
+    # Pale pink on a whiter paper estimate (pasted-over corrections in a reissue): strongly red,
+    # not yellow. Only reached by pixels nothing else claims (frame has bg well below 0).
+    pale = (rg > 20) & (bg > 0) & ~ink & (out == 0)
     out[(bg < -10) & (rg > -6) & (lum > -8) & ~ink] = 2       # yellow: frame
     out[(br > 22) & ~ink] = 3                                 # blue: stone or water
+    pale &= out == 0
     out[(sat < 14) & (lum < -22) & ~ink & (out == 0)] = 4     # gray: iron
     greenish = (G - (R + B) / 2 - (P[1] - (P[0] + P[2]) / 2) > 8) & ~ink
     # On aged paper the yellow wash reads green; true green specials lean blue.
@@ -34,4 +38,5 @@ def classify(im, fireproof=False):
         olive = (bg > -38) & (bg < -10) & (rg > 5) & (lum < -35) & ~ink
         out[olive] = 6
         out[(bg <= -38) & ~ink] = 2
+    out[pale & (out == 0)] = 1
     return out, ink, P

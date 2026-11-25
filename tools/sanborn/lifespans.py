@@ -26,7 +26,7 @@ def poly_m(ring):
     return Polygon(np.stack([x, y], 1)).buffer(0)
 
 
-def main(out, buildings_path, motorways_path, *editions):
+def main(out, buildings_path, motorways_path, *editions, respect_years=False, strict_link=False):
     today = json.load(open(buildings_path))
     tpolys, tyears = [], []
     for b in today:
@@ -51,7 +51,10 @@ def main(out, buildings_path, motorways_path, *editions):
         for f, p in zip(ed['feats'], ed['polys']):
             if f.get('_linked'):
                 continue
-            cover = sum(p.intersection(tpolys[i]).area for i in ttree.query(p)) / p.area
+            # With --respect-years, a building of today counts as this one only if it was built by
+            # this edition's year (or is undated): a 2016 museum on the lot is not the 1924 garage.
+            near = [i for i in ttree.query(p) if not respect_years or tyears[i] is None or tyears[i] <= ed['year']]
+            cover = sum(p.intersection(tpolys[i]).area for i in near) / p.area
             if cover >= 0.5:
                 continue
             ent = dict(first=ed['year'], last=ed['year'], f=f, p=p, to=None, evidence=None)
@@ -60,7 +63,9 @@ def main(out, buildings_path, motorways_path, *editions):
                 hit = None
                 for j in later['tree'].query(p):
                     q = later['polys'][j]
-                    if q.intersection(p).area >= 0.5 * min(p.area, q.area):
+                    # With --strict-link the two must overlap by half of the larger, so a big garage
+                    # is not followed into a small shed that later stood inside its outline.
+                    if q.intersection(p).area >= 0.5 * (max if strict_link else min)(p.area, q.area):
                         hit = j; break
                 if hit is not None:
                     later['feats'][hit]['_linked'] = True
@@ -94,4 +99,5 @@ def main(out, buildings_path, motorways_path, *editions):
 
 
 if __name__ == '__main__':
-    main(*sys.argv[1:])
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    main(*args, respect_years='--respect-years' in sys.argv, strict_link='--strict-link' in sys.argv)

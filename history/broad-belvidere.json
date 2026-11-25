@@ -1,0 +1,36 @@
+{
+ "extends": "history/richmond-downtown.json",
+ "title": "The four corners of Broad and Belvidere, Richmond, through time",
+ "about": "The four corners of West Broad and North Belvidere Streets in Richmond, Virginia, for the isoscape tutorial on drawing a neighborhood's history from old maps. Each scene draws the buildings standing today that had been built by its year (OSM start_date, else the City of Richmond assessor's year built), plus buildings traced from the Sanborn fire-insurance map of Richmond, volume 1, sheets 33 and 34, as printed in 1924 and as republished in 1952 (Library of Congress). Working draft.",
+ "epochs": [
+  {
+   "year": 1924,
+   "title": "Broad and Belvidere, Richmond, from the Sanborn fire-insurance map of 1924",
+   "note": "Buildings traced from the Sanborn map of Richmond, volume 1 (1924), sheets 33 and 34, fitted to today's street corners (mean miss 2.3 m on sheet 33, 0.7 m on sheet 34). An auto row: sales rooms, repair shops and filling stations. Buildings standing today are drawn where the assessor dates them 1924 or earlier. Working draft."
+  },
+  {
+   "year": 1952,
+   "title": "Broad and Belvidere, Richmond, from the Sanborn map as reissued in 1952",
+   "note": "Buildings traced from the same two sheets of the 1952 reissue, placed by matching them to the 1924 sheets. The 1952 volume is the 1924 survey corrected and reissued, so an outline it did not redraw may show the block as it stood earlier. Working draft."
+  }
+ ],
+ "sanborn": {
+  "lost": [
+   "history/sanborn/broad-belvidere-lost.geojson"
+  ],
+  "editions": [
+   1924,
+   1952
+  ],
+  "source": "https://www.loc.gov/item/sanborn09064_006/"
+ },
+ "dates": [
+  {
+   "id": "w1382863478",
+   "name": "CoStar Center for Arts and Innovation (VCU), under construction",
+   "year": 2025,
+   "source": "https://news.vcu.edu/article/2025/09/whats-being-built-a-roundup-of-campus-construction-projects-at-vcu",
+   "note": "Under construction on the southeast corner of Broad and Belvidere by September 2025 (VCU News); planned to open in spring 2028 (https://news.vcu.edu/article/whats-under-construction-at-vcu). OpenStreetMap maps it as building=construction. Dated 2025 here so the traced 1924 and 1952 buildings on its lot are not taken to stand today."
+  }
+ ]
+}

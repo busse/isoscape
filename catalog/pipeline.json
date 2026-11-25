@@ -3563,6 +3563,32 @@
    "log": [
     "2026-11-25: rough draft -> in work"
    ]
+  },
+  "tutorial-history-from-old-maps": {
+   "title": "Tutorial: draw a neighborhood's history from old maps and open data with an AI chat, using Jackson Ward in Richmond",
+   "plate": null,
+   "kind": "site",
+   "stage": "owner test",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "owner",
+   "decision": "Local preview at ISO-TEST/_preview/tutorial-2/ (open p/history-from-old-maps.html or index.html#/history-from-old-maps). Check the three callouts, the table and the figures. Then the explorer session publishes (cloudflare branch); note the preview's _routes.json was not built from a full checkout.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": "tutorial/history-from-old-maps",
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-25: rough draft -> in work",
+    "2026-11-25: in work -> owner test (local preview)",
+    "2026-11-25: in work -> owner test"
+   ]
   }
  }
 }

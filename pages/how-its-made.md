@@ -703,7 +703,11 @@ Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
    order of preference: a later edition that maps the spot without it; the year the building
    on its site today went up; the opening of an expressway through it. Failing all of those,
    it is *assumed* gone by 1960, when clearing for parking and highways began
-   (`lifespans.py`).
+   (`lifespans.py`). Two stricter readings can be asked for, and the Broad and Belvidere
+   tutorial uses both: a building of today counts as the traced one only if the assessor dates
+   it to that edition or earlier (so a 2016 museum on the lot does not hide a 1924 garage), and
+   a building is followed into a later edition only when the two outlines overlap by half of the
+   larger (so a big garage is not followed into a small shed inside its outline).
 4. **Clean.** A last pass drops slivers, any footprint more than 8 times longer than it is
    wide and under 12 m wide, or over 100 m long and under 8 m wide on average: on the sheets these are rail viaducts, track-side sheds and street
    edges, and extruded they would stand as walls. It then smooths each outline to within 1.5 m,

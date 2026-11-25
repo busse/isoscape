@@ -277,6 +277,7 @@
         { "page": "redlining", "label": "Redlining in Richmond, 1937" },
         { "page": "dollar-stores", "label": "Dollar General on the edge of town" },
         { "page": "explore-with-chat", "label": "Tutorial: map any place with a chat" },
+        { "page": "history-from-old-maps", "label": "Tutorial: a neighborhood's history from old maps, with an AI chat" },
         { "page": "world-landmarks", "label": "Landmarks around the world" }
       ] },
       { "title": "About the work", "pages": [
@@ -319,7 +320,8 @@
       {
         "title": "Tutorials",
         "prefixes": [
-          "rapa-nui"
+          "rapa-nui",
+          "broad-belvidere"
         ],
         "blurb": "How to explore a place with a chat: find open data, check it, and draw it with isoscape. The first works through Rapa Nui (Easter Island) from open data alone.",
         "page": "#/explore-with-chat",
@@ -328,7 +330,8 @@
           "rapa-nui",
           "rapa-nui-rano-kau",
           "rapa-nui-poike",
-          "rapa-nui-hanga-roa"
+          "rapa-nui-hanga-roa",
+          "broad-belvidere"
         ]
       },
       {

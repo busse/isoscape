@@ -1,0 +1,94 @@
+{
+ "33": {
+  "params": [
+   26542.154445579712,
+   3839.103324649108,
+   -0.6330885837192357,
+   9.766533087554842
+  ],
+  "m_per_px": 0.1024,
+  "corners": [
+   {
+    "label": "Broad & Gilmer",
+    "u": 1298,
+    "v": 1350,
+    "miss_m": 2.23
+   },
+   {
+    "label": "Broad & Munford",
+    "u": 2502,
+    "v": 1350,
+    "miss_m": 3.02
+   },
+   {
+    "label": "Broad & Pine",
+    "u": 1872,
+    "v": 1350,
+    "miss_m": 0.6
+   },
+   {
+    "label": "Broad & Belvidere",
+    "u": 2854,
+    "v": 1350,
+    "miss_m": 4.66
+   },
+   {
+    "label": "Grace & Laurel",
+    "u": 907,
+    "v": 2512,
+    "miss_m": 1.11
+   },
+   {
+    "label": "Grace & Pine",
+    "u": 1872,
+    "v": 2512,
+    "miss_m": 1.15
+   },
+   {
+    "label": "Grace & Belvidere",
+    "u": 2854,
+    "v": 2512,
+    "miss_m": 3.01
+   }
+  ],
+  "mean_m": 2.25,
+  "worst_m": 4.66
+ },
+ "34": {
+  "params": [
+   23760.488381507606,
+   3726.265186306785,
+   -0.6352292427879443,
+   9.725141512554577
+  ],
+  "m_per_px": 0.1028,
+  "corners": [
+   {
+    "label": "Broad & Henry",
+    "u": 1215,
+    "v": 1322,
+    "miss_m": 0.82
+   },
+   {
+    "label": "Broad & Monroe",
+    "u": 2119,
+    "v": 1322,
+    "miss_m": 0.99
+   },
+   {
+    "label": "Grace & Henry",
+    "u": 1204,
+    "v": 2495,
+    "miss_m": 0.39
+   },
+   {
+    "label": "Grace & Monroe",
+    "u": 2114,
+    "v": 2495,
+    "miss_m": 0.68
+   }
+  ],
+  "mean_m": 0.72,
+  "worst_m": 0.99
+ }
+}

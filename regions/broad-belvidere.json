@@ -1,0 +1,33 @@
+{
+  "title": "Broad and Belvidere, Richmond: the four corners",
+  "center": [
+    -77.4472,
+    37.5487
+  ],
+  "width": 560,
+  "depth": 420,
+  "bearing": 37,
+  "snap": false,
+  "scale": 4.0,
+  "squash": 0.5,
+  "exaggeration": 1.0,
+  "slab": 10,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "minBuildingArea": 8,
+  "dots": "all",
+  "terrain": {
+    "exaggeration": 2.5,
+    "cell": 5,
+    "contour": 1,
+    "majorEvery": 5,
+    "demResolution": 5
+  },
+  "time": {
+    "history": "history/broad-belvidere.json",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  }
+}
