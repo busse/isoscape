@@ -218,3 +218,19 @@ Renders for this are in the branch's steps 55 to 58.
   or more, on the flood plates; counts restated); "2 yes" (backlog: stricter draw order for
   the whole catalog); "3 approved": **the look of d3 is approved.** The series moves to
   final draft.
+
+### rc1 built and inspected (10:25 to about 13:40) · `2026-11-25-06-independent-inspection-rc1/`
+
+- A fresh Opus 5.5 subagent built rc1 (steps 60 to 65 on the branch): ten sheets at 300 dpi,
+  a source for every printed line (13 lines corrected while writing it), the footprint rule,
+  traced buildings now counted in the water (Agnes: 226 of 1,173, where d3 said 144 of 851),
+  submerged bands on piers. The agent that did the coverage and draw-order work could not be
+  resumed (transcript lost); nothing committed was lost.
+- An independent inspector then ran the fixed checklist, a critical read, and a fact check.
+  **Verdict: fix.** Thirteen wall-visible faults and ten fact findings. The three that need
+  Chris: the Manchester treatment plant drawn 20 ft under water with the wall up, where the
+  text says its protection is unknown; the Mayo Bridge deck drawn dry over a flood that is
+  recorded as covering it; Gaston's pins ("13 ft up the wall") beside water drawn 2 to 4 ft
+  deep. One fact was simply wrong (the dates of the Franklin Street row).
+- The planning session had caught two of the thirteen on its own look (the leaked "B" and
+  the dry boxes on the Gaston sheet) and missed the rest.
