@@ -1,0 +1,108 @@
+{
+  "name": "broad-belvidere-2026",
+  "region": "broad-belvidere",
+  "title": "Broad and Belvidere, Richmond: the four corners, 2026",
+  "palette": "paper",
+  "note": "Tutorial 2 (Broad and Belvidere): today",
+  "viewBox": [
+    -1144,
+    -615.7747084375194,
+    2288,
+    1094.4157245888969
+  ],
+  "bearing": 37,
+  "ms": 869,
+  "stats": {
+    "features": 1791,
+    "skywaysLeftOut": 3,
+    "ground": 24,
+    "elevationDatum": 48.8,
+    "elevationTop": 58.7,
+    "streetcarLines": 0,
+    "ribbons": 499,
+    "footprintsAdded": 0,
+    "footprintsDrawn": 0,
+    "datedFromParcels": 0,
+    "buildings": 238,
+    "streetcars": 0,
+    "heightFromTag": 3,
+    "heightFromModel": 0,
+    "heightFromLevels": 30,
+    "heightGuessed": 205,
+    "year": 2026,
+    "newSincePrevious": 0,
+    "datedCurated": 1,
+    "datedOsm": 1,
+    "datedParcel": 180,
+    "undatedToday": 56,
+    "landmarks": 0,
+    "traced": 0,
+    "tracedEndMap": 0,
+    "tracedEndRebuilt": 0,
+    "tracedEndHighway": 0,
+    "tracedEndAssumed": 0,
+    "curated": 0,
+    "bridgePieces": 0,
+    "contourSegments": 1061,
+    "rapidCells": 0,
+    "rapidsReach": 200,
+    "strips": 42
+  },
+  "credits": [
+    "Map data © OpenStreetMap contributors (ODbL)",
+    "Elevation: USGS 3DEP"
+  ],
+  "config": {
+    "bearing": 37,
+    "snap": false,
+    "title": "Broad and Belvidere, Richmond: the four corners",
+    "center": [
+      -77.4472,
+      37.5487
+    ],
+    "width": 560,
+    "depth": 420,
+    "scale": 4,
+    "squash": 0.5,
+    "exaggeration": 1,
+    "slab": 10,
+    "palette": "paper",
+    "bridgeDeck": 7,
+    "minBuildingArea": 8,
+    "dots": "all",
+    "terrain": {
+      "exaggeration": 2.5,
+      "cell": 5,
+      "contour": 1,
+      "majorEvery": 5,
+      "demResolution": 5
+    },
+    "time": {
+      "history": "history/broad-belvidere.json",
+      "yearBuilt": {
+        "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+        "field": "Year_Built"
+      }
+    },
+    "name": "broad-belvidere"
+  },
+  "sky": "#f4f1ea",
+  "time": {
+    "year": 2026,
+    "series": "broad-belvidere",
+    "curated": []
+  },
+  "id": "20261125-112817-broad-belvidere-2026",
+  "createdAt": "2026-11-25T16:28:17.209Z",
+  "bytes": 418236,
+  "git": {
+    "commit": "e7074e4",
+    "dirty": true,
+    "subject": "Floods series: draw-order fix reviewed, the look approved; backlog a catalog-wide strict order"
+  },
+  "files": {
+    "svg": "builds/20261125-112817-broad-belvidere-2026/image.svg",
+    "thumb": "builds/20261125-112817-broad-belvidere-2026/thumb.png",
+    "social": "builds/20261125-112817-broad-belvidere-2026/social.png"
+  }
+}

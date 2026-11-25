@@ -166,6 +166,11 @@
 .prose pre code { background: none; padding: 0; font-size: inherit; }
 .prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 4px solid var(--m-blue); background: var(--bg); border-radius: 0; }
 .prose blockquote p:last-child { margin-bottom: 0; }
+.prose .prompt { margin: 1.4em 4px 1.6em 0; border: 2px solid var(--accent); background: var(--panel); box-shadow: 4px 4px 0 var(--m-blue); }
+.prose .prompt-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: .5em .8em; background: var(--accent); color: var(--panel); font-weight: 700; font-size: 15px; }
+.prose .prompt-copy { font: inherit; font-size: 13px; font-weight: 700; padding: .3em .9em; border: 2px solid var(--panel); background: var(--panel); color: var(--ink); cursor: pointer; }
+.prose .prompt-copy:hover, .prose .prompt-copy:focus-visible { background: var(--m-accent); }
+.prose .prompt pre { margin: 0; padding: .9em 1em; background: none; border: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14.5px; line-height: 1.55; }
 .prose img { display: block; max-width: 100%; height: auto; margin: 1.4em auto; }
 .prose hr { border: none; border-top: 1px solid var(--line); margin: 2em 0; }
 .prose .table { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
@@ -346,8 +351,17 @@ source. You choose a frame on the world, and the data decides the rest. The
 ask questions in plain words. The chat finds the open data for the place, checks what it is
 and what it allows, draws the place, and looks at the result with you. You need no GIS
 software and no programming.</p>
-<p>The worked example is Rapa Nui (Easter Island), a place with no public lidar, drawn from open
-data alone:</p>
+<h2 id="start-here">Start here</h2>
+<p>Paste this into your chat, with your own place in the brackets:</p>
+<div class="prompt"><div class="prompt-head"><span>Copy this prompt into your chat</span><button type="button" class="prompt-copy">Copy</button></div><pre><code>Use isoscape, the free, open-source map tool at https://github.com/busse/isoscape, to explore [your place] and draw it as an isometric map.
+
+1. Find the open data that covers it: elevation (lidar if any is public, otherwise a 30 m world model) and OpenStreetMap. For each source, tell me who made it, what it covers, how detailed it is, and what its license allows.
+2. Fetch the data, measure it, and draw the whole place with isoscape. Show me the picture and tell me what looks wrong.
+3. Then suggest two or three closer views, and say where the data stops being detailed enough to be honest.
+
+Ask me your open questions as multiple choice.</code></pre></div>
+<p>The worked example below is Rapa Nui (Easter Island), a place with no public lidar, drawn from
+open data alone:</p>
 <figure class="fig wide" id="fig-1">
 <a class="fig-open" href="explore-with-chat-island-large.webp" aria-label="Fig. 1. Open larger"><img src="explore-with-chat-island.webp" alt="Rapa Nui seen from the south, with Rano Kau and Orongo at the lower left, Hanga Roa beside the airport, Terevaka at the top, and Rano Raraku, Ahu Tongariki and the Poike peninsula at the right" width="1400" height="515" loading="lazy"></a>
 <figcaption><p><span class="fig-n">Fig. 1.</span> The whole island, about 23 km across, drawn with isoscape from open data: OpenStreetMap for
@@ -475,8 +489,9 @@ Nui-led and Rapa Nui-partnered work behind the data and does not speak for any o
 views are for learning; none of them is for sale.</li></ul>
 <h2 id="make-your-own">Make your own</h2>
 <p>The code and the region files for every view on this page are on
-<a href="https://github.com/busse/isoscape" target="_blank" rel="noopener">GitHub</a>. To start your own map, open a chat that can run
-code and ask it to use the GitHub repo busse/isoscape to make an isometric map of your place.
+<a href="https://github.com/busse/isoscape" target="_blank" rel="noopener">GitHub</a>. To start your own map, paste the
+<a href="#start-here">Start here</a> prompt into a chat that can run code. Keep its first line: it names
+isoscape and links its repository, and without it the chat has no drawing tool to work with.
 <a href="how-its-made.html">How it&#39;s made</a> explains each step isoscape takes. Prints of
 the published maps are sold at <a href="https://chrisbusse.com/?utm_source=isoscape-explorer&amp;utm_medium=referral&amp;utm_campaign=explore-with-chat" target="_blank" rel="noopener">chrisbusse.com</a>, which supports the
 project.</p>
@@ -494,7 +509,7 @@ Survey. <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" r
 </main>
 <footer class="foot">
 <p>Maps by Chris Busse, drawn with isoscape, a free, open-source tool he built with Claude (see the <a href="../p/artist-statement.html">artist statement</a>), from OpenStreetMap and public elevation data. Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors (ODbL).</p>
-<p><a href="../index.html">Open the explorer</a> · <a href="../p/downtown-through-time.html">Downtown Richmond, VA, through time: the same blocks from 1737 to 2026</a> · <a href="../p/artist-statement.html">Artist statement</a> · <a href="../p/how-its-made.html">How it&#39;s made</a> · <a href="../p/explore-with-chat.html">Tutorial: map any place from open data with an AI chat, using Rapa Nui (Easter Island)</a> · <a href="../p/jackson-ward.html">Jackson Ward, Richmond, VA, before I-95, block by block</a> · <a href="../p/redlining.html">Redlining in Richmond, VA: the 1937 federal mortgage map, drawn on the ground it graded</a> · <a href="../p/dollar-stores.html">Dollar General on the edge of town</a> · <a href="../p/world-landmarks.html">Landmarks around the world</a> · <a href="../p/streetcars.html">Richmond&#39;s streetcars, 1925</a> · <a href="../p/broad-street.html">Broad Street Station, 1943</a> · <a href="../p/broad-street-cutaway.html">Broad Street Station, 1943: the cutaway</a> · <a href="../p/main-street-cutaway.html">Main Street Station, about 1952: the cutaway</a> · <a href="../p/pump-house-cutaway.html">The New Pump-House, Richmond, about 1885: the cutaway</a> · <a href="../p/byrd-cutaway.html">The Byrd Theatre, Christmas Eve 1928: the cutaway</a> · <a href="../p/about.html">About, credits and licenses</a> · <a href="../p/data.html">Data</a> · <a href="../p/faq.html">Questions and answers</a> · <a href="../p/changes.html">Changes</a> · <a href="https://github.com/busse/isoscape">isoscape on GitHub</a></p>
+<p><a href="../index.html">Open the explorer</a> · <a href="../p/downtown-through-time.html">Downtown Richmond, VA, through time: the same blocks from 1737 to 2026</a> · <a href="../p/artist-statement.html">Artist statement</a> · <a href="../p/how-its-made.html">How it&#39;s made</a> · <a href="../p/explore-with-chat.html">Tutorial: map any place from open data with an AI chat, using Rapa Nui (Easter Island)</a> · <a href="../p/history-from-old-maps.html">Tutorial: draw a neighborhood&#39;s history from old maps and open data with an AI chat, using Broad and Belvidere in Richmond</a> · <a href="../p/jackson-ward.html">Jackson Ward, Richmond, VA, before I-95, block by block</a> · <a href="../p/redlining.html">Redlining in Richmond, VA: the 1937 federal mortgage map, drawn on the ground it graded</a> · <a href="../p/dollar-stores.html">Dollar General on the edge of town</a> · <a href="../p/world-landmarks.html">Landmarks around the world</a> · <a href="../p/streetcars.html">Richmond&#39;s streetcars, 1925</a> · <a href="../p/broad-street.html">Broad Street Station, 1943</a> · <a href="../p/broad-street-cutaway.html">Broad Street Station, 1943: the cutaway</a> · <a href="../p/main-street-cutaway.html">Main Street Station, about 1952: the cutaway</a> · <a href="../p/pump-house-cutaway.html">The New Pump-House, Richmond, about 1885: the cutaway</a> · <a href="../p/byrd-cutaway.html">The Byrd Theatre, Christmas Eve 1928: the cutaway</a> · <a href="../p/about.html">About, credits and licenses</a> · <a href="../p/data.html">Data</a> · <a href="../p/faq.html">Questions and answers</a> · <a href="../p/changes.html">Changes</a> · <a href="https://github.com/busse/isoscape">isoscape on GitHub</a></p>
 </footer>
 <script>((doc) => {
   if (doc.getElementById('lb')) return
@@ -828,5 +843,23 @@ Survey. <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" r
   clip.style.clipPath = 'inset(0 0 0 ' + x + ')'
   divider.style.left = x
 }, of: (clientX, r) => Math.min(1, Math.max(0, (clientX - r.left) / r.width)) })</script>
+<script>((doc) => {
+  if (doc.__promptCopy) return
+  doc.__promptCopy = true
+  doc.addEventListener('click', (e) => {
+    const b = e.target.closest && e.target.closest('.prompt-copy')
+    if (!b) return
+    const code = b.closest('.prompt').querySelector('code')
+    const say = (t) => { b.textContent = t; setTimeout(() => { b.textContent = 'Copy' }, 2000) }
+    const select = () => {
+      const r = doc.createRange(); r.selectNodeContents(code)
+      const s = doc.defaultView.getSelection(); s.removeAllRanges(); s.addRange(r)
+      say('Selected')
+    }
+    const nav = doc.defaultView.navigator
+    if (nav.clipboard && nav.clipboard.writeText) nav.clipboard.writeText(code.textContent).then(() => say('Copied'), select)
+    else select()
+  })
+})(document)</script>
 </body>
 </html>

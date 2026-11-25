@@ -1,0 +1,129 @@
+{
+  "name": "broad-belvidere-1952",
+  "region": "broad-belvidere",
+  "title": "Broad and Belvidere, Richmond: the four corners, 1952",
+  "palette": "paper",
+  "note": "Tutorial 2 (Broad and Belvidere): working draft, Sanborn vol. 1 sheets 33-34",
+  "viewBox": [
+    -1144,
+    -614.038127736734,
+    2288,
+    1092.6791438881116
+  ],
+  "bearing": 37,
+  "ms": 945,
+  "stats": {
+    "features": 632,
+    "unbuiltStreets": 6,
+    "bridgesAtGrade": 1,
+    "ground": 0,
+    "elevationDatum": 48.8,
+    "elevationTop": 58.7,
+    "streetcarLines": 0,
+    "ribbons": 134,
+    "footprintsAdded": 0,
+    "footprintsDrawn": 0,
+    "datedFromParcels": 134,
+    "buildings": 135,
+    "streetcars": 0,
+    "heightFromTag": 0,
+    "heightFromModel": 0,
+    "heightFromLevels": 17,
+    "heightGuessed": 118,
+    "year": 1952,
+    "newSincePrevious": 0,
+    "datedCurated": 0,
+    "datedOsm": 1,
+    "datedParcel": 134,
+    "undatedToday": 0,
+    "landmarks": 0,
+    "traced": 118,
+    "tracedEndMap": 0,
+    "tracedEndRebuilt": 61,
+    "tracedEndHighway": 0,
+    "tracedEndAssumed": 57,
+    "curated": 1,
+    "bridgePieces": 0,
+    "contourSegments": 1061,
+    "rapidCells": 0,
+    "rapidsReach": 200,
+    "strips": 42
+  },
+  "credits": [
+    "Map data © OpenStreetMap contributors (ODbL)",
+    "Elevation: USGS 3DEP",
+    "Buildings dated from assessor records",
+    "Historic buildings traced from Sanborn Fire Insurance Maps, Library of Congress"
+  ],
+  "config": {
+    "bearing": 37,
+    "snap": false,
+    "title": "Broad and Belvidere, Richmond: the four corners",
+    "center": [
+      -77.4472,
+      37.5487
+    ],
+    "width": 560,
+    "depth": 420,
+    "scale": 4,
+    "squash": 0.5,
+    "exaggeration": 1,
+    "slab": 10,
+    "palette": "paper",
+    "bridgeDeck": 7,
+    "minBuildingArea": 8,
+    "dots": "all",
+    "terrain": {
+      "exaggeration": 2.5,
+      "cell": 5,
+      "contour": 1,
+      "majorEvery": 5,
+      "demResolution": 5
+    },
+    "time": {
+      "history": "history/broad-belvidere.json",
+      "yearBuilt": {
+        "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+        "field": "Year_Built"
+      }
+    },
+    "name": "broad-belvidere"
+  },
+  "sky": "#f4f1ea",
+  "time": {
+    "year": 1952,
+    "series": "broad-belvidere",
+    "title": "Broad and Belvidere, Richmond, from the Sanborn map as reissued in 1952",
+    "note": "Buildings traced from the same two sheets of the 1952 reissue, placed by matching them to the 1924 sheets. The 1952 volume is the 1924 survey corrected and reissued, so an outline it did not redraw may show the block as it stood earlier. Working draft.",
+    "curated": [
+      {
+        "id": "rp-byrd-street-approach",
+        "name": "Richmond and Petersburg (Atlantic Coast Line) approach to Byrd Street Station",
+        "kind": "rail",
+        "from": 1838,
+        "to": 1971,
+        "note": "The track from the north end of the Richmond and Petersburg bridge (OSM w710689016) across the Haxall Canal into Byrd Street Station at Seventh and Byrd Streets, the R&P's original Richmond station and later the Atlantic Coast Line's headquarters, closed in 1958. Today nothing of it is mapped north of the bridge. Approximate: one track along the middle of the station's throat, read by eye from the USGS 1:24,000 Richmond quadrangles of 1934 and 1956 (which show the line crossing the canal and fanning into the station yard between Seventh and Eighth Streets south of Byrd) and joined to the bridge's mapped end, about 20 m east of where the maps put it. Drawn with the bridge, from 1838 to 1970 (the R&P's depot stood at 8th and Byrd before Byrd Street Station, and the 1886 Sanborn map, volume 1, sheet 10, shows its tracks fanning in between 7th and 9th south of Canal); the years are the bridge's, not the track's.",
+        "sources": [
+          "https://en.wikipedia.org/wiki/Richmond_and_Petersburg_Railroad_Bridge",
+          "https://en.wikipedia.org/wiki/Byrd_Street_Station",
+          "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+          "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+          "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0010/full/pct:25/0/default.jpg"
+        ]
+      }
+    ]
+  },
+  "id": "20261125-112814-broad-belvidere-1952",
+  "createdAt": "2026-11-25T16:28:14.861Z",
+  "bytes": 519631,
+  "git": {
+    "commit": "e7074e4",
+    "dirty": true,
+    "subject": "Floods series: draw-order fix reviewed, the look approved; backlog a catalog-wide strict order"
+  },
+  "files": {
+    "svg": "builds/20261125-112814-broad-belvidere-1952/image.svg",
+    "thumb": "builds/20261125-112814-broad-belvidere-1952/thumb.png",
+    "social": "builds/20261125-112814-broad-belvidere-1952/social.png"
+  }
+}
