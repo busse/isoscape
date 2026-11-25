@@ -3526,7 +3526,7 @@
    "orders": null,
    "rounds": 1,
    "waiting_on": "owner",
-   "decision": "Final draft rc3 (the third round, approved by the owner) passed the independent recheck on 2026-11-25: ready for the owner's release decision, with one wording fix still to make (the rain panel's 4:30 event). Waiting on the owner: look confirmation on the redrawn Gaston sheet and its title; then the release decision, and what release means here (explorer and story pages; whether any of it is sold). Branches feature/flood-surface (head 7b4dcf04) and feature/flood-rain, unmerged. Record: drafts/richmond-floods/casestudy/.",
+   "decision": "Final draft rc3 passed the independent recheck (2026-11-25); the owner confirmed the redrawn Gaston sheet's look and chose the shorter title (16:09). Two text-only edits in work (title; the rain panel's 4:30 event). Waiting on the owner: the release decision and what release means here (explorer and story pages only; also sold; or hold). Branches feature/flood-surface and feature/flood-rain, unmerged. Record: drafts/richmond-floods/casestudy/.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,

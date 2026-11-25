@@ -278,3 +278,10 @@ Renders for this are in the branch's steps 55 to 58.
   5:30 p.m. EDT). To be reworded.
 - Put to Chris: look confirmation on the Gaston sheet, and its title (exact but long, or
   plainer with the depression wording in the caption).
+
+- **16:09, Chris:** "It looks good and use the shorter pragmatically descriptive title". The
+  redrawn Gaston sheet's look is confirmed. Title becomes "Shockoe Bottom: Gaston's rain,
+  August 30, 2004", with the storm's status in the caption. Two text-only edits started (the
+  title; "about 4:30, flooding reported"), the same art re-stamped as rc3.
+- Not yet answered: the release decision and what release means (explorer and story only,
+  also sold, or hold).
