@@ -18,8 +18,8 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | final production | 47 |
 | published | 1 |
 | in work | 6 |
-| owner test | 2 |
-| live | 3 |
+| owner test | 1 |
+| live | 4 |
 | on hold | 55 |
 | blocked | 1 |
 | backlog | 3 |
@@ -27,7 +27,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 ## Waiting on a decision
 
 - **Downtown Richmond through time: its own page in the explorer (year view, timeline, compare two years)**: Merged and published 2026-11-23 (main cb7b545) on the owner's word to ship and review on production. Owner is reviewing the live page; not yet checked on a real phone (touch drag, pinch, iOS Safari).
-- **Tutorial: draw a neighborhood's history from old maps and open data with an AI chat, using Jackson Ward in Richmond**: Local preview at ISO-TEST/_preview/tutorial-2/ (open p/history-from-old-maps.html or index.html#/history-from-old-maps). Check the three callouts, the table and the figures. Then the explorer session publishes (cloudflare branch); note the preview's _routes.json was not built from a full checkout.
 - **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
@@ -118,7 +117,6 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
 | — | Downtown Richmond through time: its own page in the explorer (year view, timeline, compare two years) | site | — | no |
-| — | Tutorial: draw a neighborhood's history from old maps and open data with an AI chat, using Jackson Ward in Richmond | site | — | no |
 
 ## Live
 
@@ -127,6 +125,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | — | Explorer on a phone: no sideways scroll; compare sliders by thumb | site | — | no |
 | — | Story PDFs: phone and large-screen editions of each story page | site | — | no |
 | — | Tutorial: exploring a place with a chat, with Rapa Nui (Easter Island) as the example | site | — | no |
+| — | Tutorial: draw a neighborhood's history from old maps and open data with an AI chat, using Jackson Ward in Richmond | site | — | no |
 
 ## On hold
 

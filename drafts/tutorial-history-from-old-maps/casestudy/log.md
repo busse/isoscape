@@ -90,3 +90,14 @@ Folder: `2026-11-25-04-make/`. Scans on the Mac in `ISO-TEST/isoscape-work/tutor
 - The page now opens with "Start here" and that card, with isoscape and its repository in the
   first line. Section 1 points back to it and explains why the line matters. "Make your own"
   repeats the same card.
+
+## Step 6: shipped (November 25, 11:49-12:10)
+
+- Chris: "yes and then ship it all" (a Start here card on Tutorial 1 too, then publish).
+- Tutorial 1 got the same prompt card. main fast-forwarded to b041bf2. The site was rebuilt
+  into a sparse checkout of `cloudflare` (no SVGs checked out). `cloudflare.py` was run for the
+  extensionless addresses, and `_routes.json` was restored from the branch, since a sparse
+  checkout can't see the R2 files. 0 deletions in the commit. Pushed `cloudflare` bd6ed04;
+  forwarding pages for the new addresses went to `gh-pages` 6b9c403. Live check: previews.py
+  361 pages OK, and the new page, its share image and the 1924 SVG all answer 200.
+- browser.mjs on the sparse copy failed only on SVGs absent from the sparse checkout (expected).

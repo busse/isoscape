@@ -3568,7 +3568,7 @@
    "title": "Tutorial: draw a neighborhood's history from old maps and open data with an AI chat, using Jackson Ward in Richmond",
    "plate": null,
    "kind": "site",
-   "stage": "owner test",
+   "stage": "live",
    "status": "active",
    "asset_version": null,
    "published_version": null,
@@ -3576,8 +3576,8 @@
    "on_sale": false,
    "orders": null,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "Local preview at ISO-TEST/_preview/tutorial-2/ (open p/history-from-old-maps.html or index.html#/history-from-old-maps). Check the three callouts, the table and the figures. Then the explorer session publishes (cloudflare branch); note the preview's _routes.json was not built from a full checkout.",
+   "waiting_on": "nothing",
+   "decision": "Live since 2026-11-25 at https://isoscape.chrisbusse.com/p/history-from-old-maps (cloudflare bd6ed04 from main b041bf2), on the owner's word to ship. The owner had not looked at the local preview first; check the page on a phone. Start here prompt cards (a new ```prompt page block) are on both tutorials.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3587,7 +3587,9 @@
    "log": [
     "2026-11-25: rough draft -> in work",
     "2026-11-25: in work -> owner test (local preview)",
-    "2026-11-25: in work -> owner test"
+    "2026-11-25: in work -> owner test",
+    "2026-11-25: owner test -> live (owner: ship it all)",
+    "2026-11-25: owner test -> live"
    ]
   }
  }
