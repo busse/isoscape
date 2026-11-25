@@ -1,0 +1,118 @@
+{
+ "name": "richmond-downtown-time-2026",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 2026",
+ "palette": "paper",
+ "note": "Sanborn clean: sprawls dropped, duplicates merged",
+ "viewBox": [
+  -3024,
+  -1675.6364183057992,
+  6048,
+  2730.813332842039
+ ],
+ "bearing": -8.7,
+ "ms": 1706,
+ "stats": {
+  "features": 47912,
+  "ground": 316,
+  "elevationDatum": -0.1,
+  "elevationTop": 57.2,
+  "ribbons": 5785,
+  "footprintsAdded": 0,
+  "buildings": 3778,
+  "heightFromTag": 101,
+  "heightFromModel": 0,
+  "heightFromLevels": 468,
+  "heightGuessed": 3209,
+  "year": 2026,
+  "newSincePrevious": 103,
+  "datedCurated": 9,
+  "datedOsm": 630,
+  "datedParcel": 1768,
+  "undatedToday": 1371,
+  "landmarks": 0,
+  "traced": 0,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 0,
+  "tracedEndHighway": 0,
+  "tracedEndAssumed": 0,
+  "curated": 0,
+  "bridgePieces": 1284,
+  "contourSegments": 49328,
+  "rapidCells": 4553,
+  "strips": 200
+ },
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 2026,
+  "series": "richmond-downtown-time",
+  "title": "Today",
+  "note": "The floodwall (1994) and the Canal Walk (1999) have brought the riverfront back; Tobacco Row is apartments.",
+  "previous": 2010,
+  "curated": []
+ },
+ "id": "20261114-042428-richmond-downtown-time-2026",
+ "createdAt": "2026-11-14T04:24:28.556Z",
+ "bytes": 10027125,
+ "git": {
+  "commit": "8a9f63c",
+  "dirty": false,
+  "subject": "Sanborn: drop sliver footprints and smooth outlines"
+ },
+ "files": {
+  "svg": "builds/20261114-042428-richmond-downtown-time-2026/image.svg",
+  "thumb": "builds/20261114-042428-richmond-downtown-time-2026/thumb.png",
+  "social": "builds/20261114-042428-richmond-downtown-time-2026/social.png",
+  "preview": "builds/20261114-042428-richmond-downtown-time-2026/preview.jpg"
+ }
+}

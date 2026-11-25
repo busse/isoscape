@@ -1,0 +1,161 @@
+{
+ "name": "richmond-downtown-time-1737",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1737",
+ "palette": "paper",
+ "note": "wave4: the canal and basin as water of their own, the river's bridges by year (Free Bridge), Seaboard and platforms dated, towers sourced; drawn --with next",
+ "flags": [
+  "--with",
+  "next"
+ ],
+ "viewBox": [
+  -3024,
+  -1587.0391647884912,
+  6048,
+  2642.2160793247313
+ ],
+ "bearing": -8.7,
+ "ms": 6957,
+ "stats": {
+  "features": 313,
+  "unbuiltStreets": 2892,
+  "vergesLater": 64,
+  "plantingsLater": 16,
+  "ground": 31,
+  "elevationDatum": -0.1,
+  "elevationTop": 56.8,
+  "streetcarLines": 0,
+  "ribbons": 60,
+  "footprintsAdded": 0,
+  "footprintsDrawn": 0,
+  "datedFromParcels": 0,
+  "buildings": 0,
+  "streetcars": 0,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 0,
+  "heightGuessed": 0,
+  "year": 1737,
+  "newSincePrevious": 0,
+  "datedCurated": 0,
+  "datedOsm": 0,
+  "datedParcel": 0,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 0,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 0,
+  "tracedEndHighway": 0,
+  "tracedEndAssumed": 0,
+  "curated": 2,
+  "bridgePieces": 0,
+  "contourSegments": 49275,
+  "rapidCells": 9125,
+  "rapidsReach": 200,
+  "strips": 200
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP"
+ ],
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "checkLevels": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1737,
+  "series": "richmond-downtown-time",
+  "title": "The town plan",
+  "note": "William Mayo lays out Richmond for William Byrd II: a grid of squares east of Shockoe Creek, sold by lottery. Almost nothing standing today is this old.",
+  "curated": [
+   {
+    "id": "plan-1737",
+    "name": "Byrd and Mayo's plan of Richmond, 1737",
+    "kind": "plan",
+    "from": 1737,
+    "to": 1769,
+    "note": "William Mayo laid out the town for William Byrd II in 1737: a grid of two-acre squares east of Shockoe Creek, bounded by the river, today's 15th Street, Broad Street and 25th Street. (Encyclopedia Virginia gives 17th to 25th Street for the original blocks.) In the 1737 scene only the streets inside it are drawn.",
+    "sources": [
+     "https://sah-archipedia.org/node/311",
+     "https://encyclopediavirginia.org/entries/richmond-during-the-colonial-period/",
+     "https://lva-virginia.libguides.com/richmond-maps/history",
+     "https://richmondmagazine.com/news/richmond-history/surveyor-william-mayo/"
+    ]
+   },
+   {
+    "id": "shockoe-creek",
+    "name": "Shockoe Creek (open stream)",
+    "kind": "creek",
+    "from": 1737,
+    "to": 1890,
+    "note": "The creek ran open between present-day 15th and 16th Streets, dividing the town. A culvert begun in 1877 enclosed part of it, but the 1886 Sanborn map (volume 1, key map and sheets 18 and 19) still draws it open from Broad Street to the Dock, so it is drawn to 1890 (the end approximate). Course approximated as midway between the two streets.",
+    "sources": [
+     "https://sah-archipedia.org/node/285",
+     "https://www.loc.gov/item/sanborn09064_001/"
+    ]
+   }
+  ]
+ },
+ "id": "20261117-093219-richmond-downtown-time-1737",
+ "createdAt": "2026-11-17T14:32:19.877Z",
+ "bytes": 9508663,
+ "git": {
+  "commit": "01a2cb8",
+  "dirty": false,
+  "subject": "Merge wave4-richmond-early: Richmond 1886, Then & Now and through time corrected (the canal and basin as water of their own, the river's bridges by year with the Free Bridge, the Seaboard and platforms dated, tall buildings sourced, print text); the published 1925 and 1950 scenes unchanged"
+ },
+ "files": {
+  "svg": "builds/20261117-093219-richmond-downtown-time-1737/image.svg",
+  "thumb": "builds/20261117-093219-richmond-downtown-time-1737/thumb.png",
+  "social": "builds/20261117-093219-richmond-downtown-time-1737/social.png",
+  "preview": "builds/20261117-093219-richmond-downtown-time-1737/preview.jpg"
+ }
+}

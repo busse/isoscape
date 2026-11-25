@@ -1,0 +1,89 @@
+{
+ "name": "lm-brooklyn-bridge",
+ "region": "lm-brooklyn-bridge",
+ "title": "Brooklyn Bridge \u2014 New York City",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2668.1919198774963,
+  6048,
+  4681.163063047796
+ ],
+ "bearing": -27.39847931161819,
+ "ms": 2189,
+ "stats": {
+  "features": 19571,
+  "coastWays": 12,
+  "ground": 1644,
+  "elevationDatum": -1.6,
+  "elevationTop": 27.7,
+  "ribbons": 4657,
+  "footprintsAdded": 0,
+  "buildings": 2074,
+  "heightFromTag": 2001,
+  "heightFromModel": 0,
+  "heightFromLevels": 42,
+  "heightGuessed": 31,
+  "bridgePieces": 1864,
+  "contourSegments": 18750,
+  "rapidCells": 0,
+  "strips": 208
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Brooklyn Bridge \u2014 New York City",
+  "center": [
+   -73.99628,
+   40.70575
+  ],
+  "width": 1600,
+  "depth": 2080,
+  "scale": 3.75,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Brooklyn Bridge",
+    "deck": 41,
+    "pierSpacing": 486
+   },
+   {
+    "match": "Manhattan Bridge",
+    "deck": 41,
+    "pierSpacing": 448
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-brooklyn-bridge"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-170931-lm-brooklyn-bridge",
+ "createdAt": "2026-11-14T17:09:31.213Z",
+ "bytes": 6859139,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-170931-lm-brooklyn-bridge/image.svg",
+  "thumb": "builds/20261114-170931-lm-brooklyn-bridge/thumb.png",
+  "social": "builds/20261114-170931-lm-brooklyn-bridge/social.png",
+  "preview": "builds/20261114-170931-lm-brooklyn-bridge/preview.jpg"
+ }
+}

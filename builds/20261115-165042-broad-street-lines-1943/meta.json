@@ -1,0 +1,1097 @@
+{
+ "name": "broad-street-lines-1943",
+ "region": "broad-street-lines",
+ "title": "The lines from Broad Street Station, 1943, 1943",
+ "palette": "paper",
+ "note": "Broad Street Station, 1943: first release",
+ "viewBox": [
+  -1844,
+  -1408.4110093529523,
+  3688,
+  2559.530752694852
+ ],
+ "bearing": 0,
+ "ms": 3867,
+ "stats": {
+  "features": 42422,
+  "unbuiltStreets": 8694,
+  "ground": 869,
+  "elevationDatum": -0.1,
+  "elevationTop": 78.7,
+  "streetcarLines": 13,
+  "ribbons": 6742,
+  "footprintsAdded": 0,
+  "buildings": 12406,
+  "streetcars": 37,
+  "streetcarScale": 1,
+  "heightFromTag": 51,
+  "heightFromModel": 0,
+  "heightFromLevels": 434,
+  "heightGuessed": 11921,
+  "year": 1943,
+  "newSincePrevious": 0,
+  "datedCurated": 0,
+  "datedOsm": 38,
+  "datedParcel": 12368,
+  "undatedToday": 0,
+  "landmarks": 1,
+  "parts": 27,
+  "canopyPieces": 104,
+  "trainPieces": 88,
+  "traced": 928,
+  "tracedEndMap": 287,
+  "tracedEndRebuilt": 43,
+  "tracedEndHighway": 84,
+  "tracedEndAssumed": 514,
+  "curated": 74,
+  "bridgePieces": 1088,
+  "labels": 8,
+  "contourSegments": 0,
+  "rapidCells": 1485,
+  "strips": 271
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "The lines from Broad Street Station, 1943",
+  "data": "richmond-streetcars",
+  "center": [
+   -77.4624,
+   37.554317
+  ],
+  "width": 7000,
+  "depth": 6500,
+  "scale": 0.52,
+  "squash": 0.66,
+  "exaggeration": 1,
+  "slab": 30,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "minBuildingArea": 20,
+  "dots": "none",
+  "terrain": {
+   "exaggeration": 3,
+   "cell": 12,
+   "contour": 0,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 5
+  },
+  "time": {
+   "history": "history/broad-street-lines.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "broad-street-lines"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1943,
+  "series": "broad-street-lines",
+  "title": "The lines from Broad Street Station",
+  "note": "The wartime peak: 57 trains a day, a record 33,324 passengers on April 22, 1943.",
+  "curated": [
+   {
+    "id": "bss-wing-w",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "West wing: the lunch room and the white waiting rooms. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396"
+    ]
+   },
+   {
+    "id": "bss-wing-e",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "East wing: the \"colored\" waiting room of the segregated station, and stores. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396",
+     "https://sah-archipedia.org/node/20518"
+    ]
+   },
+   {
+    "id": "bss-center",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The central pavilion, up to the attic with its clock, flanked by the figures Progress and Industry. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396",
+     "https://sah-archipedia.org/node/20518"
+    ]
+   },
+   {
+    "id": "bss-passages",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The enclosed concourse passages across the back of the head house. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396"
+    ]
+   },
+   {
+    "id": "bss-steps",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The porch, raised above the forecourt. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396"
+    ]
+   },
+   {
+    "id": "bss-column-1",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396",
+     "https://sah-archipedia.org/node/20518"
+    ]
+   },
+   {
+    "id": "bss-column-2",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396",
+     "https://sah-archipedia.org/node/20518"
+    ]
+   },
+   {
+    "id": "bss-column-3",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396",
+     "https://sah-archipedia.org/node/20518"
+    ]
+   },
+   {
+    "id": "bss-column-4",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396",
+     "https://sah-archipedia.org/node/20518"
+    ]
+   },
+   {
+    "id": "bss-column-5",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396",
+     "https://sah-archipedia.org/node/20518"
+    ]
+   },
+   {
+    "id": "bss-column-6",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the colonnade's six columns, modeled on the Doric of St. Peter's Square. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396",
+     "https://sah-archipedia.org/node/20518"
+    ]
+   },
+   {
+    "id": "bss-pier-1",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "A square end pier of the colonnade. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396"
+    ]
+   },
+   {
+    "id": "bss-pier-2",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "A square end pier of the colonnade. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396"
+    ]
+   },
+   {
+    "id": "bss-entablature",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The entablature over the colonnade. Indiana limestone. Plan from the OpenStreetMap outline and the 1919 first-floor plan; heights scaled from period postcards (approximate).",
+    "sources": [
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Richmond_Broad_Street_Station_floor_plan.png",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg",
+     "https://www.openstreetmap.org/way/252997396"
+    ]
+   },
+   {
+    "id": "bss-marquee-1",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "Cast-iron and glass marquee over the wing's doors (approximate).",
+    "sources": [
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg"
+    ]
+   },
+   {
+    "id": "bss-marquee-2",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "Cast-iron and glass marquee over the wing's doors (approximate).",
+    "sources": [
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg"
+    ]
+   },
+   {
+    "id": "bss-drum",
+    "name": "Broad Street Station (head house)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The polygonal drum, pierced by lunettes after those of Columbia's Low Library. Rotunda 100 ft high inside; heights approximate.",
+    "sources": [
+     "https://sah-archipedia.org/node/20518",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://www.styleweekly.com/?p=14331"
+    ]
+   },
+   {
+    "id": "bss-dome",
+    "name": "Broad Street Station dome",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The Roman dome, still in its original terra-cotta tile in 1943; it was recovered in copper in 1954\u201355 (the green of later photographs). The tile's gray-green is read from tinted postcards: approximate.",
+    "sources": [
+     "https://sah-archipedia.org/node/20518",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16649844960).jpg",
+     "https://commons.wikimedia.org/wiki/File:New_Union_Station,_Richmond,_Va._(16836070322).jpg"
+    ]
+   },
+   {
+    "id": "bss-concourse",
+    "name": "Broad Street Station concourse",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The long concourse, carried from the head house out over the station tracks at the level of the waiting room; ramps led down from it to each platform. It ends past the last platform on the 1925 Sanborn sheet; the block beyond it today is later. Outline from OSM; height approximate.",
+    "sources": [
+     "https://www.openstreetmap.org/way/252997396",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://www.loc.gov/resource/g3884rm.g3884rm_g09064192504/?sp=93"
+    ]
+   },
+   {
+    "id": "bss-track-1",
+    "name": "Broad Street Station passenger track",
+    "kind": "rail",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the seven passenger tracks of the station loop (7 passenger, 2 express, from the 1919 opening card). Trains ran in at one junction with the RF&P main and out at the other, so none had to back in. Placed from the OSM platforms at the station and the USGS quadrangles of 1934 and 1956 around the loop; the gathering of tracks onto the loop is drawn, not surveyed.",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://www.chicagorailfan.com/stbcric.html",
+     "https://scholarscompass.vcu.edu/postcard/190"
+    ]
+   },
+   {
+    "id": "bss-track-2",
+    "name": "Broad Street Station passenger track",
+    "kind": "rail",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the seven passenger tracks of the station loop (7 passenger, 2 express, from the 1919 opening card). Trains ran in at one junction with the RF&P main and out at the other, so none had to back in. Placed from the OSM platforms at the station and the USGS quadrangles of 1934 and 1956 around the loop; the gathering of tracks onto the loop is drawn, not surveyed. A train stands here: a steam engine and heavyweight cars in Pullman green (the consist is illustrative).",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://www.chicagorailfan.com/stbcric.html",
+     "https://scholarscompass.vcu.edu/postcard/190",
+     "https://www.hmdb.org/m.asp?m=9209"
+    ]
+   },
+   {
+    "id": "bss-track-3",
+    "name": "Broad Street Station passenger track",
+    "kind": "rail",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the seven passenger tracks of the station loop (7 passenger, 2 express, from the 1919 opening card). Trains ran in at one junction with the RF&P main and out at the other, so none had to back in. Placed from the OSM platforms at the station and the USGS quadrangles of 1934 and 1956 around the loop; the gathering of tracks onto the loop is drawn, not surveyed.",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://www.chicagorailfan.com/stbcric.html",
+     "https://scholarscompass.vcu.edu/postcard/190"
+    ]
+   },
+   {
+    "id": "bss-track-4",
+    "name": "Broad Street Station passenger track",
+    "kind": "rail",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the seven passenger tracks of the station loop (7 passenger, 2 express, from the 1919 opening card). Trains ran in at one junction with the RF&P main and out at the other, so none had to back in. Placed from the OSM platforms at the station and the USGS quadrangles of 1934 and 1956 around the loop; the gathering of tracks onto the loop is drawn, not surveyed. A train stands here: a steam engine and heavyweight cars in Pullman green (the consist is illustrative).",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://www.chicagorailfan.com/stbcric.html",
+     "https://scholarscompass.vcu.edu/postcard/190",
+     "https://www.hmdb.org/m.asp?m=9209"
+    ]
+   },
+   {
+    "id": "bss-track-5",
+    "name": "Broad Street Station passenger track",
+    "kind": "rail",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the seven passenger tracks of the station loop (7 passenger, 2 express, from the 1919 opening card). Trains ran in at one junction with the RF&P main and out at the other, so none had to back in. Placed from the OSM platforms at the station and the USGS quadrangles of 1934 and 1956 around the loop; the gathering of tracks onto the loop is drawn, not surveyed. A train stands here: a steam engine and heavyweight cars in Pullman green (the consist is illustrative).",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://www.chicagorailfan.com/stbcric.html",
+     "https://scholarscompass.vcu.edu/postcard/190",
+     "https://www.hmdb.org/m.asp?m=9209"
+    ]
+   },
+   {
+    "id": "bss-track-6",
+    "name": "Broad Street Station passenger track",
+    "kind": "rail",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the seven passenger tracks of the station loop (7 passenger, 2 express, from the 1919 opening card). Trains ran in at one junction with the RF&P main and out at the other, so none had to back in. Placed from the OSM platforms at the station and the USGS quadrangles of 1934 and 1956 around the loop; the gathering of tracks onto the loop is drawn, not surveyed.",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://www.chicagorailfan.com/stbcric.html",
+     "https://scholarscompass.vcu.edu/postcard/190"
+    ]
+   },
+   {
+    "id": "bss-track-7",
+    "name": "Broad Street Station passenger track",
+    "kind": "rail",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the seven passenger tracks of the station loop (7 passenger, 2 express, from the 1919 opening card). Trains ran in at one junction with the RF&P main and out at the other, so none had to back in. Placed from the OSM platforms at the station and the USGS quadrangles of 1934 and 1956 around the loop; the gathering of tracks onto the loop is drawn, not surveyed. A train stands here: a steam engine and heavyweight cars in Pullman green (the consist is illustrative).",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://www.chicagorailfan.com/stbcric.html",
+     "https://scholarscompass.vcu.edu/postcard/190",
+     "https://www.hmdb.org/m.asp?m=9209"
+    ]
+   },
+   {
+    "id": "bss-track-8",
+    "name": "Broad Street Station express track",
+    "kind": "rail",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the two express tracks of the station loop (7 passenger, 2 express, from the 1919 opening card). Trains ran in at one junction with the RF&P main and out at the other, so none had to back in. Placed from the OSM platforms at the station and the USGS quadrangles of 1934 and 1956 around the loop; the gathering of tracks onto the loop is drawn, not surveyed. A train stands here: a steam engine and heavyweight cars in Pullman green (the consist is illustrative).",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://www.chicagorailfan.com/stbcric.html",
+     "https://scholarscompass.vcu.edu/postcard/190",
+     "https://www.hmdb.org/m.asp?m=9209"
+    ]
+   },
+   {
+    "id": "bss-track-9",
+    "name": "Broad Street Station express track",
+    "kind": "rail",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the two express tracks of the station loop (7 passenger, 2 express, from the 1919 opening card). Trains ran in at one junction with the RF&P main and out at the other, so none had to back in. Placed from the OSM platforms at the station and the USGS quadrangles of 1934 and 1956 around the loop; the gathering of tracks onto the loop is drawn, not surveyed.",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://www.chicagorailfan.com/stbcric.html",
+     "https://scholarscompass.vcu.edu/postcard/190"
+    ]
+   },
+   {
+    "id": "bss-platform-1",
+    "name": "Broad Street Station platform",
+    "kind": "platform",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the four platforms, from its surviving outline (OSM), extended to the 1,200-ft train shed of the opening card.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg",
+     "https://scholarscompass.vcu.edu/postcard/190"
+    ]
+   },
+   {
+    "id": "bss-canopy-1-south",
+    "name": "Broad Street Station platform canopy",
+    "kind": "canopy",
+    "from": 1919,
+    "to": 1976,
+    "note": "A cast-iron and steel butterfly canopy on a single row of cast-iron columns, roofed in red-brown; several survive at the Science Museum. Width and height approximate.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-canopy-1-north",
+    "name": "Broad Street Station platform canopy",
+    "kind": "canopy",
+    "from": 1919,
+    "to": 1976,
+    "note": "A cast-iron and steel butterfly canopy on a single row of cast-iron columns, roofed in red-brown; several survive at the Science Museum. Width and height approximate.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-ramp-1-south",
+    "name": "Broad Street Station ramp house",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The housing of a ramp from the concourse down to the platform. Placed from the 1969 photograph; approximate.",
+    "sources": [
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-ramp-1-north",
+    "name": "Broad Street Station ramp house",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The housing of a ramp from the concourse down to the platform. Placed from the 1969 photograph; approximate.",
+    "sources": [
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-platform-2",
+    "name": "Broad Street Station platform",
+    "kind": "platform",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the four platforms, from its surviving outline (OSM), extended to the 1,200-ft train shed of the opening card.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg",
+     "https://scholarscompass.vcu.edu/postcard/190"
+    ]
+   },
+   {
+    "id": "bss-canopy-2-south",
+    "name": "Broad Street Station platform canopy",
+    "kind": "canopy",
+    "from": 1919,
+    "to": 1976,
+    "note": "A cast-iron and steel butterfly canopy on a single row of cast-iron columns, roofed in red-brown; several survive at the Science Museum. Width and height approximate.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-canopy-2-north",
+    "name": "Broad Street Station platform canopy",
+    "kind": "canopy",
+    "from": 1919,
+    "to": 1976,
+    "note": "A cast-iron and steel butterfly canopy on a single row of cast-iron columns, roofed in red-brown; several survive at the Science Museum. Width and height approximate.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-ramp-2-south",
+    "name": "Broad Street Station ramp house",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The housing of a ramp from the concourse down to the platform. Placed from the 1969 photograph; approximate.",
+    "sources": [
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-ramp-2-north",
+    "name": "Broad Street Station ramp house",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The housing of a ramp from the concourse down to the platform. Placed from the 1969 photograph; approximate.",
+    "sources": [
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-platform-3",
+    "name": "Broad Street Station platform",
+    "kind": "platform",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the four platforms, from its surviving outline (OSM), extended to the 1,200-ft train shed of the opening card.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg",
+     "https://scholarscompass.vcu.edu/postcard/190"
+    ]
+   },
+   {
+    "id": "bss-canopy-3-south",
+    "name": "Broad Street Station platform canopy",
+    "kind": "canopy",
+    "from": 1919,
+    "to": 1976,
+    "note": "A cast-iron and steel butterfly canopy on a single row of cast-iron columns, roofed in red-brown; several survive at the Science Museum. Width and height approximate.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-canopy-3-north",
+    "name": "Broad Street Station platform canopy",
+    "kind": "canopy",
+    "from": 1919,
+    "to": 1976,
+    "note": "A cast-iron and steel butterfly canopy on a single row of cast-iron columns, roofed in red-brown; several survive at the Science Museum. Width and height approximate.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-ramp-3-south",
+    "name": "Broad Street Station ramp house",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The housing of a ramp from the concourse down to the platform. Placed from the 1969 photograph; approximate.",
+    "sources": [
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-ramp-3-north",
+    "name": "Broad Street Station ramp house",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The housing of a ramp from the concourse down to the platform. Placed from the 1969 photograph; approximate.",
+    "sources": [
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-platform-4",
+    "name": "Broad Street Station platform",
+    "kind": "platform",
+    "from": 1919,
+    "to": 1976,
+    "note": "One of the four platforms, from its surviving outline (OSM), extended to the 1,200-ft train shed of the opening card.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg",
+     "https://scholarscompass.vcu.edu/postcard/190"
+    ]
+   },
+   {
+    "id": "bss-canopy-4-south",
+    "name": "Broad Street Station platform canopy",
+    "kind": "canopy",
+    "from": 1919,
+    "to": 1976,
+    "note": "A cast-iron and steel butterfly canopy on a single row of cast-iron columns, roofed in red-brown; several survive at the Science Museum. Width and height approximate.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-canopy-4-north",
+    "name": "Broad Street Station platform canopy",
+    "kind": "canopy",
+    "from": 1919,
+    "to": 1976,
+    "note": "A cast-iron and steel butterfly canopy on a single row of cast-iron columns, roofed in red-brown; several survive at the Science Museum. Width and height approximate.",
+    "sources": [
+     "https://www.openstreetmap.org/way/1493273526",
+     "https://www.dhr.virginia.gov/historic-registers/127-0226/",
+     "https://commons.wikimedia.org/wiki/File:Platforms_of_the_former_Broad_Street_Station,_Richmond.jpg",
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-ramp-4-south",
+    "name": "Broad Street Station ramp house",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The housing of a ramp from the concourse down to the platform. Placed from the 1969 photograph; approximate.",
+    "sources": [
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-ramp-4-north",
+    "name": "Broad Street Station ramp house",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "The housing of a ramp from the concourse down to the platform. Placed from the 1969 photograph; approximate.",
+    "sources": [
+     "https://commons.wikimedia.org/wiki/File:RF%26P_1013_with_Trains_34,_The_Silver_Comet,_and_Train_22,_The_Silver_Star_at_left_at_Broad_Street_Station,_Richmond,_VA_on_March_9._1969_(25031006304).jpg"
+    ]
+   },
+   {
+    "id": "bss-grounds",
+    "name": "Broad Street Station loop",
+    "kind": "site",
+    "from": 1919,
+    "to": 1976,
+    "note": "The station loop and the hill inside it, closed along the RF&P main: railroad land, so today's streets and lots there are not drawn.",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186500_1934_24000_geo.pdf",
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf",
+     "https://www.chicagorailfan.com/stbcric.html",
+     "https://scholarscompass.vcu.edu/postcard/190"
+    ]
+   },
+   {
+    "id": "bss-woods-1",
+    "name": "Woods by the station loop",
+    "kind": "wood",
+    "from": 1919,
+    "to": 1976,
+    "note": "Woodland as the 1956 USGS quadrangle tints it; outline traced from that sheet, approximate.",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+    ]
+   },
+   {
+    "id": "bss-woods-2",
+    "name": "Woods by the station loop",
+    "kind": "wood",
+    "from": 1919,
+    "to": 1976,
+    "note": "Woodland as the 1956 USGS quadrangle tints it; outline traced from that sheet, approximate.",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+    ]
+   },
+   {
+    "id": "bss-express",
+    "name": "Express building (Railway Express Agency)",
+    "kind": "landmark",
+    "from": 1919,
+    "to": 1976,
+    "note": "A long building beside the express tracks on the 1956 USGS quadrangle, taken here to be the express house; use and height are assumptions.",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+    ]
+   },
+   {
+    "id": "bss-acl-connection",
+    "name": "RF&P connection south (toward the Atlantic Coast Line)",
+    "kind": "rail",
+    "from": 1919,
+    "to": 1976,
+    "note": "The line south from the loop's east junction, toward the Atlantic Coast Line, traced from the 1956 USGS quadrangle (approximate).",
+    "sources": [
+     "https://prd-tnm.s3.amazonaws.com/StagedProducts/Maps/HistoricalTopo/PDF/VA/24000/VA_Richmond_186501_1956_24000_geo.pdf"
+    ]
+   },
+   {
+    "id": "car-westhampton",
+    "name": "Westhampton line",
+    "kind": "streetcar",
+    "from": 1901,
+    "to": 1947,
+    "note": "West on Floyd Avenue from Robinson Street to the belt line railroad, under it in a tunnel, then a little north to Grove Avenue; out Grove to Three Chopt Road; then on its own right-of-way beside Three Chopt to Towana Road, and on (the line of today's Campus Drive) to Westhampton Park, which became the University of Richmond's campus in 1914. The right-of-way beside Three Chopt is drawn along the road itself.",
+    "sources": [
+     "https://dhr.virginia.gov/VLR_to_transfer/PDFNoms/127-6064_Three_Chopt_Road_HD_2012_NR_FINAL.pdf",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-belmont",
+    "name": "Belmont line",
+    "kind": "streetcar",
+    "from": 1895,
+    "to": 1949,
+    "note": "The Broad Street line's extension west from Robinson Street to Sheppard, south to Cary, later carried on eleven blocks to Garrett Street. Which street carried the last stretch is read from the 1925 plate's 'Belmont' label.",
+    "sources": [
+     "https://museumdistrict.org/history",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-broad",
+    "name": "Broad Street line",
+    "kind": "streetcar",
+    "from": 1888,
+    "to": 1949,
+    "note": "Broad Street, the spine of the system, from the Belmont line's turn at Sheppard Street east to Church Hill. The east end is approximate.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://museumdistrict.org/history"
+    ]
+   },
+   {
+    "id": "car-main",
+    "name": "Main Street line",
+    "kind": "streetcar",
+    "from": 1888,
+    "to": 1949,
+    "note": "West Main Street, which the line turned into a commercial street through the Fan, east to Shockoe. The west end is approximate.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://dhr.virginia.gov/?p=16894"
+    ]
+   },
+   {
+    "id": "car-harrison",
+    "name": "Harrison Street line",
+    "kind": "streetcar",
+    "from": 1890,
+    "to": 1949,
+    "note": "A crosstown link on Harrison Street between the Main, Floyd and Broad lines, as the 1925 plate shows it.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-byrd-park",
+    "name": "Reservoir (Byrd) Park line",
+    "kind": "streetcar",
+    "from": 1895,
+    "to": 1949,
+    "note": "Down Robinson Street to Reservoir Park (Byrd Park), one of the trolley's favorite destinations, along Lakeview Avenue as the 1925 plate labels it. The far end is approximate.",
+    "sources": [
+     "https://museumdistrict.org/history",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"
+    ]
+   },
+   {
+    "id": "car-clay",
+    "name": "Clay Street line",
+    "kind": "streetcar",
+    "from": 1888,
+    "to": 1949,
+    "note": "Sprague's first line of 1888 ran from Church Hill to Clay and Hancock Streets; the 1925 plate still shows Clay Street. The ends are approximate.",
+    "sources": [
+     "https://magazine.vcu.edu/2025-winter/a-streetcar-undesired/",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-lakeside",
+    "name": "Brookland and Lakeside line",
+    "kind": "streetcar",
+    "from": 1891,
+    "to": 1949,
+    "note": "Over the First Street viaduct (1891) into Barton Heights, then west along Brookland Park Boulevard, north up the median of Chamberlayne Avenue, west on Laburnum and north on Hermitage Road to Lakeside Park and Lewis Ginter's Lakeside Wheel Club. The run beyond Hermitage Road along Lakeside Avenue is approximate.",
+    "sources": [
+     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://lewisginter.org/?p=11566"
+    ]
+   },
+   {
+    "id": "car-highland-park",
+    "name": "Highland Park line",
+    "kind": "streetcar",
+    "from": 1893,
+    "to": 1949,
+    "note": "North on Fifth Street over the Northside Viaduct (1892) to Chestnut Hill and Highland Park, and after 1908 round a loop by Meadowbridge Road, Milton Street and Highland Street (the cross street joining them, Second Avenue here, is approximate). The Hull Street\u2013Highland Park line was Richmond's last: the last car ran on 25 November 1949.",
+    "sources": [
+     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text",
+     "https://rvanews.com/?p=20453",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-marshall",
+    "name": "Marshall Street line (Fulton)",
+    "kind": "streetcar",
+    "from": 1911,
+    "to": 1949,
+    "note": "Across Shockoe Valley on the Marshall Street Viaduct (1911, since demolished: drawn straight) from College Street to 21st Street at Jefferson Park, out Marshall Street, and down to Fulton along Williamsburg Avenue. The route from Marshall Street down to Fulton is approximate.",
+    "sources": [
+     "https://gallery.library.vcu.edu/exhibits/show/mcv-aerial-photography/shockoe-valley-viaducts",
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10"
+    ]
+   },
+   {
+    "id": "car-venable",
+    "name": "Venable Street line",
+    "kind": "streetcar",
+    "from": 1888,
+    "to": 1949,
+    "note": "North on 17th Street, east along Venable Street through Union Hill, and up 25th Street to Nine Mile Road, the road the Seven Pines line took out of the city (chartered along 25th to 29th Streets and Nine Mile Road). The federal government bought the Seven Pines line in 1918 for a wartime plant; how far cars ran out Nine Mile Road in 1925 is not certain.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://henrico.us/locations/nine-mile-road/",
+     "https://modelingjimcrow.virginia.edu/node/91936"
+    ]
+   },
+   {
+    "id": "car-jefferson",
+    "name": "Jefferson Avenue line",
+    "kind": "streetcar",
+    "from": 1890,
+    "to": 1949,
+    "note": "Up 21st Street and out Jefferson Avenue past Jefferson Park, one of the trolley's pleasure grounds, as the 1925 plate shows it.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://npgallery.nps.gov/NRHP/GetAsset/NRHP/64500796_text"
+    ]
+   },
+   {
+    "id": "car-hull",
+    "name": "Hull Street line",
+    "kind": "streetcar",
+    "from": 1888,
+    "to": 1949,
+    "note": "Over the Mayo Bridge into Manchester and out Hull Street. Its last car, No. 408 on the Hull Street\u2013Highland Park run, ended Richmond's streetcars on 25 November 1949. The outer end is approximate.",
+    "sources": [
+     "https://www.lva.virginia.gov/events/exhibitions/online/oe/items/show/10",
+     "https://richmondmagazine.com/news/richmond-history/richmond-trolley-system/"
+    ]
+   },
+   {
+    "id": "lines-label-1",
+    "name": "To Washington",
+    "kind": "label",
+    "from": 1919,
+    "to": 1976,
+    "note": "Where the line went in 1943. Main Street Station served the Seaboard Air Line and the C&O, Hull Street station the Southern; AY Tower, about a mile northwest of Broad Street, was the wye of the RF&P main and the ACL; Seaboard Junction, just north of the station, was where the SAL left the RF&P.",
+    "sources": [
+     "https://chicagorailfan.com/stbrric.html",
+     "https://www.richmondrailroadmuseum.com/railroad-history"
+    ]
+   },
+   {
+    "id": "lines-label-2",
+    "name": "AY Tower",
+    "kind": "label",
+    "from": 1919,
+    "to": 1976,
+    "note": "Where the line went in 1943. Main Street Station served the Seaboard Air Line and the C&O, Hull Street station the Southern; AY Tower, about a mile northwest of Broad Street, was the wye of the RF&P main and the ACL; Seaboard Junction, just north of the station, was where the SAL left the RF&P.",
+    "sources": [
+     "https://chicagorailfan.com/stbrric.html",
+     "https://www.richmondrailroadmuseum.com/railroad-history"
+    ]
+   },
+   {
+    "id": "lines-label-3",
+    "name": "Seaboard Junction",
+    "kind": "label",
+    "from": 1919,
+    "to": 1976,
+    "note": "Where the line went in 1943. Main Street Station served the Seaboard Air Line and the C&O, Hull Street station the Southern; AY Tower, about a mile northwest of Broad Street, was the wye of the RF&P main and the ACL; Seaboard Junction, just north of the station, was where the SAL left the RF&P.",
+    "sources": [
+     "https://chicagorailfan.com/stbrric.html",
+     "https://www.richmondrailroadmuseum.com/railroad-history"
+    ]
+   },
+   {
+    "id": "lines-label-4",
+    "name": "Broad Street Station",
+    "kind": "label",
+    "from": 1919,
+    "to": 1976,
+    "note": "Where the line went in 1943. Main Street Station served the Seaboard Air Line and the C&O, Hull Street station the Southern; AY Tower, about a mile northwest of Broad Street, was the wye of the RF&P main and the ACL; Seaboard Junction, just north of the station, was where the SAL left the RF&P.",
+    "sources": [
+     "https://chicagorailfan.com/stbrric.html",
+     "https://www.richmondrailroadmuseum.com/railroad-history"
+    ]
+   },
+   {
+    "id": "lines-label-5",
+    "name": "To Petersburg and Florida",
+    "kind": "label",
+    "from": 1919,
+    "to": 1976,
+    "note": "Where the line went in 1943. Main Street Station served the Seaboard Air Line and the C&O, Hull Street station the Southern; AY Tower, about a mile northwest of Broad Street, was the wye of the RF&P main and the ACL; Seaboard Junction, just north of the station, was where the SAL left the RF&P.",
+    "sources": [
+     "https://chicagorailfan.com/stbrric.html",
+     "https://www.richmondrailroadmuseum.com/railroad-history"
+    ]
+   },
+   {
+    "id": "lines-label-6",
+    "name": "Main Street Station",
+    "kind": "label",
+    "from": 1919,
+    "to": 1976,
+    "note": "Where the line went in 1943. Main Street Station served the Seaboard Air Line and the C&O, Hull Street station the Southern; AY Tower, about a mile northwest of Broad Street, was the wye of the RF&P main and the ACL; Seaboard Junction, just north of the station, was where the SAL left the RF&P.",
+    "sources": [
+     "https://chicagorailfan.com/stbrric.html",
+     "https://www.richmondrailroadmuseum.com/railroad-history"
+    ]
+   },
+   {
+    "id": "lines-label-7",
+    "name": "C&O James River line",
+    "kind": "label",
+    "from": 1919,
+    "to": 1976,
+    "note": "Where the line went in 1943. Main Street Station served the Seaboard Air Line and the C&O, Hull Street station the Southern; AY Tower, about a mile northwest of Broad Street, was the wye of the RF&P main and the ACL; Seaboard Junction, just north of the station, was where the SAL left the RF&P.",
+    "sources": [
+     "https://chicagorailfan.com/stbrric.html",
+     "https://www.richmondrailroadmuseum.com/railroad-history"
+    ]
+   },
+   {
+    "id": "lines-label-8",
+    "name": "Southern Railway",
+    "kind": "label",
+    "from": 1919,
+    "to": 1976,
+    "note": "Where the line went in 1943. Main Street Station served the Seaboard Air Line and the C&O, Hull Street station the Southern; AY Tower, about a mile northwest of Broad Street, was the wye of the RF&P main and the ACL; Seaboard Junction, just north of the station, was where the SAL left the RF&P.",
+    "sources": [
+     "https://chicagorailfan.com/stbrric.html",
+     "https://www.richmondrailroadmuseum.com/railroad-history"
+    ]
+   }
+  ]
+ },
+ "id": "20261115-165042-broad-street-lines-1943",
+ "createdAt": "2026-11-15T16:50:42.970Z",
+ "bytes": 13385436,
+ "git": {
+  "commit": "159b302",
+  "dirty": false,
+  "subject": "Explorer: the per-build story of a building modeled close up; how-its-made sections for it and for sets"
+ },
+ "files": {
+  "svg": "builds/20261115-165042-broad-street-lines-1943/image.svg",
+  "thumb": "builds/20261115-165042-broad-street-lines-1943/thumb.png",
+  "preview": "builds/20261115-165042-broad-street-lines-1943/preview.jpg"
+ }
+}

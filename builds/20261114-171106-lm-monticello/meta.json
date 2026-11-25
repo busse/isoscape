@@ -1,0 +1,77 @@
+{
+ "name": "lm-monticello",
+ "region": "lm-monticello",
+ "title": "Monticello \u2014 Charlottesville, Virginia",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2271.992607333556,
+  6048,
+  4287.5618267152095
+ ],
+ "bearing": 20.538670552768366,
+ "ms": 1047,
+ "stats": {
+  "features": 656,
+  "ground": 44,
+  "elevationDatum": 85.4,
+  "elevationTop": 385.7,
+  "ribbons": 170,
+  "footprintsAdded": 0,
+  "buildings": 42,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 11,
+  "heightGuessed": 31,
+  "bridgePieces": 75,
+  "contourSegments": 97089,
+  "rapidCells": 0,
+  "strips": 195
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Monticello \u2014 Charlottesville, Virginia",
+  "center": [
+   -78.4532,
+   38.0086
+  ],
+  "width": 1500,
+  "depth": 1950,
+  "scale": 4,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-monticello"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171106-lm-monticello",
+ "createdAt": "2026-11-14T17:11:06.595Z",
+ "bytes": 5710067,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171106-lm-monticello/image.svg",
+  "thumb": "builds/20261114-171106-lm-monticello/thumb.png",
+  "social": "builds/20261114-171106-lm-monticello/social.png",
+  "preview": "builds/20261114-171106-lm-monticello/preview.jpg"
+ }
+}

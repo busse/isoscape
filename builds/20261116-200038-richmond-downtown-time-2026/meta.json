@@ -1,0 +1,130 @@
+{
+ "name": "richmond-downtown-time-2026",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 2026",
+ "palette": "paper",
+ "note": "Wave 2 redraw: Capitol with its wings, St. John's, misdated towers, f08 seated, traced buildings left out under viaducts and in water (RVA prints, next version)",
+ "viewBox": [
+  -3024,
+  -1671.8840019012491,
+  6048,
+  2727.060916437489
+ ],
+ "bearing": -8.7,
+ "ms": 7251,
+ "stats": {
+  "features": 47912,
+  "skywaysLeftOut": 13,
+  "groundUnderBridgesLowered": 299,
+  "ground": 316,
+  "elevationDatum": -0.1,
+  "elevationTop": 56.8,
+  "streetcarLines": 0,
+  "ribbons": 5785,
+  "footprintsAdded": 0,
+  "outlinesUnderParts": 25,
+  "footprintsDrawn": 0,
+  "datedFromParcels": 0,
+  "buildings": 3782,
+  "streetcars": 0,
+  "heightFromTag": 102,
+  "heightFromModel": 0,
+  "heightFromLevels": 472,
+  "heightGuessed": 3208,
+  "year": 2026,
+  "newSincePrevious": 0,
+  "datedCurated": 26,
+  "datedOsm": 630,
+  "datedParcel": 1756,
+  "undatedToday": 1370,
+  "landmarks": 0,
+  "traced": 0,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 0,
+  "tracedEndHighway": 0,
+  "tracedEndAssumed": 0,
+  "curated": 0,
+  "bridgePieces": 1269,
+  "contourSegments": 48570,
+  "rapidCells": 9125,
+  "rapidsReach": 200,
+  "strips": 200
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP"
+ ],
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "checkLevels": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 2026,
+  "series": "richmond-downtown-time",
+  "title": "Today",
+  "note": "The floodwall (1994) and the Canal Walk (1999) have brought the riverfront back; Tobacco Row is apartments.",
+  "curated": []
+ },
+ "id": "20261116-200038-richmond-downtown-time-2026",
+ "createdAt": "2026-11-17T01:00:38.821Z",
+ "bytes": 15957273,
+ "git": {
+  "commit": "942ca88",
+  "dirty": false,
+  "subject": "Merge wave2-era2: Richmond through time corrected for RVA-01, -04, -05, -08 (Capitol, St. John's, misdated towers, f08, traced buildings left out under viaducts and in water)"
+ },
+ "files": {
+  "svg": "builds/20261116-200038-richmond-downtown-time-2026/image.svg",
+  "thumb": "builds/20261116-200038-richmond-downtown-time-2026/thumb.png",
+  "social": "builds/20261116-200038-richmond-downtown-time-2026/social.png",
+  "preview": "builds/20261116-200038-richmond-downtown-time-2026/preview.jpg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "name": "lm-philadelphia-museum-of-art",
+ "region": "lm-philadelphia-museum-of-art",
+ "title": "Philadelphia Museum of Art \u2014 Philadelphia",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.25,
+  -2306.9057443274196,
+  6048.5,
+  4337.758267259149
+ ],
+ "bearing": -38.73176379976039,
+ "ms": 1460,
+ "stats": {
+  "features": 9606,
+  "ground": 119,
+  "elevationDatum": 0.5,
+  "elevationTop": 32.5,
+  "ribbons": 1557,
+  "footprintsAdded": 0,
+  "buildings": 1779,
+  "heightFromTag": 1730,
+  "heightFromModel": 0,
+  "heightFromLevels": 9,
+  "heightGuessed": 40,
+  "bridgePieces": 334,
+  "contourSegments": 13853,
+  "rapidCells": 0,
+  "strips": 143
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Philadelphia Museum of Art \u2014 Philadelphia",
+  "center": [
+   -75.18152,
+   39.96557
+  ],
+  "width": 1100,
+  "depth": 1430,
+  "scale": 5.455,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-philadelphia-museum-of-art"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171141-lm-philadelphia-museum-of-art",
+ "createdAt": "2026-11-14T17:11:41.349Z",
+ "bytes": 4743938,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171141-lm-philadelphia-museum-of-art/image.svg",
+  "thumb": "builds/20261114-171141-lm-philadelphia-museum-of-art/thumb.png",
+  "social": "builds/20261114-171141-lm-philadelphia-museum-of-art/social.png",
+  "preview": "builds/20261114-171141-lm-philadelphia-museum-of-art/preview.jpg"
+ }
+}

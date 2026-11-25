@@ -1,0 +1,83 @@
+{
+ "name": "lm-mount-st-helens",
+ "region": "lm-mount-st-helens",
+ "title": "Mount St. Helens \u2014 Washington",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3025.5,
+  -2374.109831090146,
+  6051,
+  4383.7431677496
+ ],
+ "bearing": 0,
+ "ms": 6781,
+ "stats": {
+  "features": 277,
+  "ground": 72,
+  "elevationDatum": 582.9,
+  "elevationTop": 2522.2,
+  "ribbons": 198,
+  "footprintsAdded": 0,
+  "buildings": 1,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 0,
+  "heightGuessed": 1,
+  "bridgePieces": 2,
+  "contourSegments": 65715,
+  "rapidCells": 0,
+  "strips": 325
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Mount St. Helens \u2014 Washington",
+  "center": [
+   -122.19553,
+   46.19139
+  ],
+  "width": 9000,
+  "depth": 11700,
+  "scale": 0.667,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 60,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "roof",
+  "fetchTile": 8000,
+  "terrain": {
+   "exaggeration": 1,
+   "cell": 18,
+   "contour": 40,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 9
+  },
+  "sources": {
+   "buildings": [
+    "osm"
+   ],
+   "landcover": "nlcd"
+  },
+  "name": "lm-mount-st-helens"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171120-lm-mount-st-helens",
+ "createdAt": "2026-11-14T17:11:20.206Z",
+ "bytes": 13726334,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171120-lm-mount-st-helens/image.svg",
+  "thumb": "builds/20261114-171120-lm-mount-st-helens/thumb.png",
+  "social": "builds/20261114-171120-lm-mount-st-helens/social.png",
+  "preview": "builds/20261114-171120-lm-mount-st-helens/preview.jpg"
+ }
+}

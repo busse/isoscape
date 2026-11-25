@@ -1,0 +1,83 @@
+{
+ "name": "lm-delicate-arch",
+ "region": "lm-delicate-arch",
+ "title": "Delicate Arch \u2014 Arches National Park, Utah",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3023.7,
+  -2437.893115333374,
+  6047.4,
+  4447.122884475177
+ ],
+ "bearing": 0,
+ "ms": 4626,
+ "stats": {
+  "features": 31,
+  "ground": 8,
+  "elevationDatum": 1310.6,
+  "elevationTop": 1507.2,
+  "ribbons": 18,
+  "footprintsAdded": 0,
+  "buildings": 4,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 0,
+  "heightGuessed": 4,
+  "bridgePieces": 0,
+  "contourSegments": 85162,
+  "rapidCells": 0,
+  "strips": 286
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Delicate Arch \u2014 Arches National Park, Utah",
+  "center": [
+   -109.4993,
+   38.7436
+  ],
+  "width": 2200,
+  "depth": 2860,
+  "scale": 2.727,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 15,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 1,
+   "cell": 5,
+   "contour": 5,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "sources": {
+   "buildings": [
+    "osm"
+   ],
+   "landcover": "nlcd"
+  },
+  "name": "lm-delicate-arch"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-170956-lm-delicate-arch",
+ "createdAt": "2026-11-14T17:09:56.196Z",
+ "bytes": 8522312,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-170956-lm-delicate-arch/image.svg",
+  "thumb": "builds/20261114-170956-lm-delicate-arch/thumb.png",
+  "social": "builds/20261114-170956-lm-delicate-arch/social.png",
+  "preview": "builds/20261114-170956-lm-delicate-arch/preview.jpg"
+ }
+}

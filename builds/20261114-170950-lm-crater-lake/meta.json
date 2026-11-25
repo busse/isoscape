@@ -1,0 +1,83 @@
+{
+ "name": "lm-crater-lake",
+ "region": "lm-crater-lake",
+ "title": "Crater Lake \u2014 Oregon",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3021.5,
+  -2136.5804382136967,
+  6043,
+  4143.410258903261
+ ],
+ "bearing": 0,
+ "ms": 5512,
+ "stats": {
+  "features": 334,
+  "ground": 56,
+  "elevationDatum": 1656.4,
+  "elevationTop": 2465.6,
+  "ribbons": 207,
+  "footprintsAdded": 0,
+  "buildings": 56,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 3,
+  "heightGuessed": 53,
+  "bridgePieces": 1,
+  "contourSegments": 32532,
+  "rapidCells": 0,
+  "strips": 325
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Crater Lake \u2014 Oregon",
+  "center": [
+   -122.108,
+   42.944
+  ],
+  "width": 11000,
+  "depth": 14300,
+  "scale": 0.545,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 73,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "roof",
+  "fetchTile": 8000,
+  "terrain": {
+   "exaggeration": 1,
+   "cell": 22,
+   "contour": 40,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 11
+  },
+  "sources": {
+   "buildings": [
+    "osm"
+   ],
+   "landcover": "nlcd"
+  },
+  "name": "lm-crater-lake"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-170950-lm-crater-lake",
+ "createdAt": "2026-11-14T17:09:50.673Z",
+ "bytes": 8790362,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-170950-lm-crater-lake/image.svg",
+  "thumb": "builds/20261114-170950-lm-crater-lake/thumb.png",
+  "social": "builds/20261114-170950-lm-crater-lake/social.png",
+  "preview": "builds/20261114-170950-lm-crater-lake/preview.jpg"
+ }
+}

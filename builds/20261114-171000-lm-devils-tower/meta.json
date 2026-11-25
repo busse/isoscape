@@ -1,0 +1,83 @@
+{
+ "name": "lm-devils-tower",
+ "region": "lm-devils-tower",
+ "title": "Devils Tower \u2014 Crook County, Wyoming",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2432.2248479311043,
+  6048,
+  4440.324598205117
+ ],
+ "bearing": 0,
+ "ms": 2938,
+ "stats": {
+  "features": 126,
+  "ground": 10,
+  "elevationDatum": 1165.6,
+  "elevationTop": 1557,
+  "ribbons": 91,
+  "footprintsAdded": 0,
+  "buildings": 13,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 0,
+  "heightGuessed": 13,
+  "bridgePieces": 7,
+  "contourSegments": 132210,
+  "rapidCells": 0,
+  "strips": 347
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Devils Tower \u2014 Crook County, Wyoming",
+  "center": [
+   -104.7151,
+   44.59061
+  ],
+  "width": 3200,
+  "depth": 4160,
+  "scale": 1.875,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 21,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "roof",
+  "fetchTile": 4000,
+  "terrain": {
+   "exaggeration": 1,
+   "cell": 6,
+   "contour": 5,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 3
+  },
+  "sources": {
+   "buildings": [
+    "osm"
+   ],
+   "landcover": "nlcd"
+  },
+  "name": "lm-devils-tower"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171000-lm-devils-tower",
+ "createdAt": "2026-11-14T17:10:00.700Z",
+ "bytes": 14602567,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171000-lm-devils-tower/image.svg",
+  "thumb": "builds/20261114-171000-lm-devils-tower/thumb.png",
+  "social": "builds/20261114-171000-lm-devils-tower/social.png",
+  "preview": "builds/20261114-171000-lm-devils-tower/preview.jpg"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "name": "lm-independence-hall",
+ "region": "lm-independence-hall",
+ "title": "Independence Hall \u2014 Philadelphia",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.15,
+  -2301.986714962927,
+  6048.3,
+  4345.369711367297
+ ],
+ "bearing": -35.632950841656424,
+ "ms": 680,
+ "stats": {
+  "features": 7501,
+  "ground": 212,
+  "elevationDatum": -2.8,
+  "elevationTop": 16.6,
+  "ribbons": 1176,
+  "footprintsAdded": 0,
+  "buildings": 1225,
+  "heightFromTag": 467,
+  "heightFromModel": 0,
+  "heightFromLevels": 391,
+  "heightGuessed": 367,
+  "bridgePieces": 3,
+  "contourSegments": 4109,
+  "rapidCells": 0,
+  "strips": 117
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Independence Hall \u2014 Philadelphia",
+  "center": [
+   -75.15003,
+   39.94889
+  ],
+  "width": 900,
+  "depth": 1170,
+  "scale": 6.667,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-independence-hall"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171053-lm-independence-hall",
+ "createdAt": "2026-11-14T17:10:53.647Z",
+ "bytes": 2188925,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171053-lm-independence-hall/image.svg",
+  "thumb": "builds/20261114-171053-lm-independence-hall/thumb.png",
+  "social": "builds/20261114-171053-lm-independence-hall/social.png",
+  "preview": "builds/20261114-171053-lm-independence-hall/preview.jpg"
+ }
+}

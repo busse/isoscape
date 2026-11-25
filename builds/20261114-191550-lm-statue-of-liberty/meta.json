@@ -1,0 +1,68 @@
+{
+ "name": "lm-statue-of-liberty",
+ "region": "lm-statue-of-liberty",
+ "title": "Statue of Liberty \u2014 New York Harbor",
+ "palette": "paper",
+ "note": "landmark: reframed with the shore, flat",
+ "viewBox": [
+  -3024.6,
+  -1794.4938104968035,
+  6049.2,
+  3353.441754851411
+ ],
+ "bearing": -34,
+ "ms": 1992,
+ "stats": {
+  "features": 26643,
+  "coastWays": 37,
+  "ground": 1473,
+  "ribbons": 3343,
+  "footprintsAdded": 0,
+  "buildings": 1083,
+  "heightFromTag": 524,
+  "heightFromModel": 0,
+  "heightFromLevels": 45,
+  "heightGuessed": 514,
+  "bridgePieces": 265,
+  "contourSegments": 0,
+  "rapidCells": 0,
+  "strips": 360
+ },
+ "config": {
+  "bearing": -34,
+  "snap": false,
+  "title": "Statue of Liberty \u2014 New York Harbor",
+  "center": [
+   -74.034,
+   40.702
+  ],
+  "width": 3600,
+  "depth": 3600,
+  "scale": 1.667,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 24,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "roof",
+  "fetchTile": 4000,
+  "name": "lm-statue-of-liberty"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-191550-lm-statue-of-liberty",
+ "createdAt": "2026-11-14T19:15:50.234Z",
+ "bytes": 2534532,
+ "git": {
+  "commit": "69023cd",
+  "dirty": true,
+  "subject": "Front page: the James view links to Richmond prints (it is not itself in the shop)"
+ },
+ "files": {
+  "svg": "builds/20261114-191550-lm-statue-of-liberty/image.svg",
+  "thumb": "builds/20261114-191550-lm-statue-of-liberty/thumb.png",
+  "social": "builds/20261114-191550-lm-statue-of-liberty/social.png",
+  "preview": "builds/20261114-191550-lm-statue-of-liberty/preview.jpg"
+ }
+}

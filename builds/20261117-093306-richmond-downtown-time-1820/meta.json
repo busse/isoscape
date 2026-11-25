@@ -1,0 +1,179 @@
+{
+ "name": "richmond-downtown-time-1820",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1820",
+ "palette": "paper",
+ "note": "wave4: the canal and basin as water of their own, the river's bridges by year (Free Bridge), Seaboard and platforms dated, towers sourced; drawn --with next",
+ "flags": [
+  "--with",
+  "next"
+ ],
+ "viewBox": [
+  -3024,
+  -1587.0391647884912,
+  6048,
+  2642.2160793247313
+ ],
+ "bearing": -8.7,
+ "ms": 8063,
+ "stats": {
+  "features": 548,
+  "unbuiltStreets": 2709,
+  "bridgesAtGrade": 1,
+  "vergesLater": 63,
+  "plantingsLater": 17,
+  "ground": 33,
+  "elevationDatum": -0.1,
+  "elevationTop": 56.8,
+  "streetcarLines": 0,
+  "ribbons": 204,
+  "footprintsAdded": 0,
+  "footprintsDrawn": 0,
+  "datedFromParcels": 12,
+  "buildings": 33,
+  "streetcars": 0,
+  "heightFromTag": 2,
+  "heightFromModel": 0,
+  "heightFromLevels": 10,
+  "heightGuessed": 21,
+  "year": 1820,
+  "newSincePrevious": 0,
+  "datedCurated": 8,
+  "datedOsm": 13,
+  "datedParcel": 12,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 0,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 0,
+  "tracedEndHighway": 0,
+  "tracedEndAssumed": 0,
+  "curated": 3,
+  "bridgePieces": 21,
+  "contourSegments": 48689,
+  "rapidCells": 9125,
+  "rapidsReach": 200,
+  "strips": 200
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP",
+  "Buildings dated from assessor records"
+ ],
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "checkLevels": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1820,
+  "series": "richmond-downtown-time",
+  "title": "The Federal town",
+  "note": "The Wickham House (1812), the Governor's Mansion (1813) and Monumental Church (1814) stand on the hill.",
+  "curated": [
+   {
+    "id": "great-basin",
+    "name": "Great Turning Basin, James River & Kanawha Canal",
+    "kind": "water",
+    "from": 1800,
+    "to": 1880,
+    "note": "The canal's Great Basin covered three blocks between Cary and Canal Streets, from 8th to 12th Street. Completed about 1800; railroad yards covered about half of it in the 1880s and all of it by the 1920s (the Kanawha Plaza marker). Drawn whole until 1880 (that year approximate); for what was left of it in 1886 see the next entries. Drawn as still water at its own level, with a smooth bank, on today's ground (see How it's made). The James Center stands on the site.",
+    "sources": [
+     "https://www.hmdb.org/m.asp?m=286691",
+     "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf",
+     "https://en.wikipedia.org/wiki/James_Center",
+     "https://www.loc.gov/item/sanborn09064_001/",
+     "https://www.hmdb.org/m.asp?m=286692"
+    ]
+   },
+   {
+    "id": "kanawha-canal-west",
+    "name": "James River and Kanawha Canal, from Tredegar to the Great Basin",
+    "kind": "creek",
+    "from": 1800,
+    "to": 1895,
+    "note": "The canal's last mile into the Great Basin. Its middle stretch, between 6th and 7th Streets, is read from the 1886 Sanborn map (volume 1, sheet 10, \"Old James River & Kanawha Canal (Mill Canal)\"), placed by the corners of 6th and Byrd, 7th and Byrd and 7th and Canal. West of it the line runs straight to the east end of the canal's dry bed by Tredegar mapped in OpenStreetMap (w307593380), and east of it straight to the basin's west corner, as the 1886 key map shows it: those two runs are approximate. Drawn about 10 m wide (sheet 10 draws it about 8 m) from 1800, the basin's year, to 1895, the end of the basin entries; the railroad laid on its towpath from 1880 is not drawn.",
+    "sources": [
+     "https://www.loc.gov/item/sanborn09064_001/",
+     "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0010/full/pct:25/0/default.jpg",
+     "https://tile.loc.gov/image-services/iiif/service:gmd:gmd388m:g3884m:g3884rm:g3884rm_g090641886:09064_1886-0000/full/pct:50/0/default.jpg",
+     "https://www.openstreetmap.org/way/307593380",
+     "https://www.hmdb.org/m.asp?m=286692"
+    ]
+   },
+   {
+    "id": "shockoe-creek",
+    "name": "Shockoe Creek (open stream)",
+    "kind": "creek",
+    "from": 1737,
+    "to": 1890,
+    "note": "The creek ran open between present-day 15th and 16th Streets, dividing the town. A culvert begun in 1877 enclosed part of it, but the 1886 Sanborn map (volume 1, key map and sheets 18 and 19) still draws it open from Broad Street to the Dock, so it is drawn to 1890 (the end approximate). Course approximated as midway between the two streets.",
+    "sources": [
+     "https://sah-archipedia.org/node/285",
+     "https://www.loc.gov/item/sanborn09064_001/"
+    ]
+   }
+  ]
+ },
+ "id": "20261117-093306-richmond-downtown-time-1820",
+ "createdAt": "2026-11-17T14:33:06.669Z",
+ "bytes": 9897671,
+ "git": {
+  "commit": "01a2cb8",
+  "dirty": false,
+  "subject": "Merge wave4-richmond-early: Richmond 1886, Then & Now and through time corrected (the canal and basin as water of their own, the river's bridges by year with the Free Bridge, the Seaboard and platforms dated, tall buildings sourced, print text); the published 1925 and 1950 scenes unchanged"
+ },
+ "files": {
+  "svg": "builds/20261117-093306-richmond-downtown-time-1820/image.svg",
+  "thumb": "builds/20261117-093306-richmond-downtown-time-1820/thumb.png",
+  "social": "builds/20261117-093306-richmond-downtown-time-1820/social.png",
+  "preview": "builds/20261117-093306-richmond-downtown-time-1820/preview.jpg"
+ }
+}

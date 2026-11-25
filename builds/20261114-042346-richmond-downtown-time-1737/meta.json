@@ -1,0 +1,143 @@
+{
+ "name": "richmond-downtown-time-1737",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1737",
+ "palette": "paper",
+ "note": "Sanborn clean: sprawls dropped, duplicates merged",
+ "viewBox": [
+  -3024,
+  -1587.9971168542847,
+  6048,
+  2643.1740313905248
+ ],
+ "bearing": -8.7,
+ "ms": 1448,
+ "stats": {
+  "features": 6744,
+  "ground": 216,
+  "elevationDatum": -0.1,
+  "elevationTop": 57.2,
+  "ribbons": 203,
+  "footprintsAdded": 0,
+  "buildings": 0,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 0,
+  "heightGuessed": 0,
+  "year": 1737,
+  "newSincePrevious": 0,
+  "datedCurated": 0,
+  "datedOsm": 0,
+  "datedParcel": 0,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 0,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 0,
+  "tracedEndHighway": 0,
+  "tracedEndAssumed": 0,
+  "curated": 2,
+  "bridgePieces": 0,
+  "contourSegments": 50085,
+  "rapidCells": 4553,
+  "strips": 200
+ },
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1737,
+  "series": "richmond-downtown-time",
+  "title": "The town plan",
+  "note": "William Mayo lays out Richmond for William Byrd II: a grid of squares east of Shockoe Creek, sold by lottery. Almost nothing standing today is this old.",
+  "curated": [
+   {
+    "id": "plan-1737",
+    "name": "Byrd and Mayo's plan of Richmond, 1737",
+    "kind": "plan",
+    "from": 1737,
+    "to": 1769,
+    "note": "William Mayo laid out the town for William Byrd II in 1737: a grid of two-acre squares east of Shockoe Creek, bounded by the river, today's 15th Street, Broad Street and 25th Street. (Encyclopedia Virginia gives 17th to 25th Street for the original blocks.) In the 1737 scene only the streets inside it are drawn.",
+    "sources": [
+     "https://sah-archipedia.org/node/311",
+     "https://encyclopediavirginia.org/entries/richmond-during-the-colonial-period/",
+     "https://lva-virginia.libguides.com/richmond-maps/history",
+     "https://richmondmagazine.com/news/richmond-history/surveyor-william-mayo/"
+    ]
+   },
+   {
+    "id": "shockoe-creek",
+    "name": "Shockoe Creek (open stream)",
+    "kind": "creek",
+    "from": 1737,
+    "to": 1877,
+    "note": "The creek ran open between present-day 15th and 16th Streets, dividing the town, until it was enclosed in a culvert in 1877. Course approximated as midway between the two streets.",
+    "sources": [
+     "https://sah-archipedia.org/node/285"
+    ]
+   }
+  ]
+ },
+ "id": "20261114-042346-richmond-downtown-time-1737",
+ "createdAt": "2026-11-14T04:23:46.894Z",
+ "bytes": 5081032,
+ "git": {
+  "commit": "8a9f63c",
+  "dirty": false,
+  "subject": "Sanborn: drop sliver footprints and smooth outlines"
+ },
+ "files": {
+  "svg": "builds/20261114-042346-richmond-downtown-time-1737/image.svg",
+  "thumb": "builds/20261114-042346-richmond-downtown-time-1737/thumb.png",
+  "social": "builds/20261114-042346-richmond-downtown-time-1737/social.png",
+  "preview": "builds/20261114-042346-richmond-downtown-time-1737/preview.jpg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "name": "lm-coit-tower",
+ "region": "lm-coit-tower",
+ "title": "Coit Tower \u2014 San Francisco",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.25,
+  -1974.344347033746,
+  6048.5,
+  4005.1968699654753
+ ],
+ "bearing": 35.8212367352527,
+ "ms": 1022,
+ "stats": {
+  "features": 8699,
+  "coastWays": 2,
+  "ground": 104,
+  "elevationDatum": -1.1,
+  "elevationTop": 95,
+  "ribbons": 1856,
+  "footprintsAdded": 0,
+  "buildings": 2178,
+  "heightFromTag": 1529,
+  "heightFromModel": 0,
+  "heightFromLevels": 32,
+  "heightGuessed": 617,
+  "bridgePieces": 3,
+  "contourSegments": 23863,
+  "rapidCells": 0,
+  "strips": 143
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Coit Tower \u2014 San Francisco",
+  "center": [
+   -122.40583,
+   37.80238
+  ],
+  "width": 1100,
+  "depth": 1430,
+  "scale": 5.455,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-coit-tower"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-170944-lm-coit-tower",
+ "createdAt": "2026-11-14T17:09:44.435Z",
+ "bytes": 4980318,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-170944-lm-coit-tower/image.svg",
+  "thumb": "builds/20261114-170944-lm-coit-tower/thumb.png",
+  "social": "builds/20261114-170944-lm-coit-tower/social.png",
+  "preview": "builds/20261114-170944-lm-coit-tower/preview.jpg"
+ }
+}

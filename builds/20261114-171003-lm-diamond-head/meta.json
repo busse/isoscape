@@ -1,0 +1,68 @@
+{
+ "name": "lm-diamond-head",
+ "region": "lm-diamond-head",
+ "title": "Waikiki and Diamond Head \u2014 Honolulu, Hawaii",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.6,
+  -2110.6299393614686,
+  6049.2,
+  4119.667883716076
+ ],
+ "bearing": -6.611301907866135,
+ "ms": 1524,
+ "stats": {
+  "features": 12430,
+  "coastWays": 16,
+  "ground": 293,
+  "ribbons": 1793,
+  "footprintsAdded": 0,
+  "buildings": 1996,
+  "heightFromTag": 216,
+  "heightFromModel": 0,
+  "heightFromLevels": 280,
+  "heightGuessed": 1500,
+  "bridgePieces": 33,
+  "contourSegments": 0,
+  "rapidCells": 0,
+  "strips": 468
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Waikiki and Diamond Head \u2014 Honolulu, Hawaii",
+  "center": [
+   -157.8215,
+   21.264
+  ],
+  "width": 3600,
+  "depth": 4680,
+  "scale": 1.667,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 24,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "roof",
+  "fetchTile": 4000,
+  "name": "lm-diamond-head"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171003-lm-diamond-head",
+ "createdAt": "2026-11-14T17:10:03.841Z",
+ "bytes": 2475300,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171003-lm-diamond-head/image.svg",
+  "thumb": "builds/20261114-171003-lm-diamond-head/thumb.png",
+  "social": "builds/20261114-171003-lm-diamond-head/social.png",
+  "preview": "builds/20261114-171003-lm-diamond-head/preview.jpg"
+ }
+}

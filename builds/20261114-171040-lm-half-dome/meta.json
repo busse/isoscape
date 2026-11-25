@@ -1,0 +1,83 @@
+{
+ "name": "lm-half-dome",
+ "region": "lm-half-dome",
+ "title": "Half Dome and Yosemite Valley \u2014 Yosemite National Park",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2886.02814042487,
+  6048,
+  4894.452650225301
+ ],
+ "bearing": 0,
+ "ms": 7136,
+ "stats": {
+  "features": 2682,
+  "ground": 591,
+  "elevationDatum": 1203.5,
+  "elevationTop": 2686,
+  "ribbons": 738,
+  "footprintsAdded": 0,
+  "buildings": 1003,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 39,
+  "heightGuessed": 964,
+  "bridgePieces": 155,
+  "contourSegments": 86804,
+  "rapidCells": 0,
+  "strips": 325
+ },
+ "config": {
+  "bearing": 0,
+  "snap": false,
+  "title": "Half Dome and Yosemite Valley \u2014 Yosemite National Park",
+  "center": [
+   -119.565,
+   37.738
+  ],
+  "width": 8000,
+  "depth": 10400,
+  "scale": 0.75,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 53,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "roof",
+  "fetchTile": 8000,
+  "terrain": {
+   "exaggeration": 1,
+   "cell": 16,
+   "contour": 40,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 8
+  },
+  "sources": {
+   "buildings": [
+    "osm"
+   ],
+   "landcover": "nlcd"
+  },
+  "name": "lm-half-dome"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171040-lm-half-dome",
+ "createdAt": "2026-11-14T17:10:40.064Z",
+ "bytes": 16648413,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171040-lm-half-dome/image.svg",
+  "thumb": "builds/20261114-171040-lm-half-dome/thumb.png",
+  "social": "builds/20261114-171040-lm-half-dome/social.png",
+  "preview": "builds/20261114-171040-lm-half-dome/preview.jpg"
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "name": "richmond-i195-rocketts",
+ "region": "richmond-i195-rocketts",
+ "title": "Richmond, VA \u2014 the James from I-195 to Rocketts Landing",
+ "palette": "paper",
+ "note": "Version 4 redraw: ground shapes cut to a strip as one polygon, no green ladder lines across clearings (fix-ladder, 791ce72)",
+ "viewBox": [
+  -9444,
+  -1732.4687798092061,
+  18888,
+  3152.194921129025
+ ],
+ "bearing": 10,
+ "ms": 13770,
+ "stats": {
+  "features": 47912,
+  "skywaysLeftOut": 13,
+  "groundUnderBridgesLowered": 465,
+  "ground": 450,
+  "elevationDatum": -0.1,
+  "elevationTop": 70.7,
+  "streetcarLines": 0,
+  "ribbons": 7354,
+  "footprintsAdded": 0,
+  "outlinesUnderParts": 26,
+  "footprintsDrawn": 0,
+  "buildings": 6759,
+  "streetcars": 0,
+  "heightFromTag": 49,
+  "heightFromModel": 0,
+  "heightFromLevels": 460,
+  "heightGuessed": 6250,
+  "bridgePieces": 1957,
+  "contourSegments": 164202,
+  "rapidCells": 24606,
+  "rapidsReach": 200,
+  "strips": 225
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP"
+ ],
+ "config": {
+  "bearing": 10,
+  "snap": false,
+  "title": "Richmond, VA \u2014 the James from I-195 to Rocketts Landing",
+  "center": [
+   -77.45512,
+   37.52948
+  ],
+  "width": 7850,
+  "depth": 2250,
+  "scale": 2.4,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 22,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Lee",
+    "deck": 28
+   },
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Boulevard",
+    "deck": 22
+   },
+   {
+    "match": "Belle Isle",
+    "deck": 14
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "demResolution": 2
+  },
+  "name": "richmond-i195-rocketts"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261116-212351-richmond-i195-rocketts",
+ "createdAt": "2026-11-17T02:23:51.859Z",
+ "bytes": 46061478,
+ "git": {
+  "commit": "4e4b7bb",
+  "dirty": false,
+  "subject": "Visual check: new baseline for downtown Richmond and Richmond 1925 (ladder lines removed)"
+ },
+ "files": {
+  "svg": "builds/20261116-212351-richmond-i195-rocketts/image.svg",
+  "thumb": "builds/20261116-212351-richmond-i195-rocketts/thumb.png",
+  "social": "builds/20261116-212351-richmond-i195-rocketts/social.png",
+  "preview": "builds/20261116-212351-richmond-i195-rocketts/preview.jpg"
+ }
+}

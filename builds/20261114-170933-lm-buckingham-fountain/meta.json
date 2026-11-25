@@ -1,0 +1,77 @@
+{
+ "name": "lm-buckingham-fountain",
+ "region": "lm-buckingham-fountain",
+ "title": "Buckingham Fountain \u2014 Chicago",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3023.75,
+  -2366.0995883421883,
+  6047.5,
+  4387.89757520377
+ ],
+ "bearing": 43.8664062754612,
+ "ms": 891,
+ "stats": {
+  "features": 8964,
+  "ground": 756,
+  "elevationDatum": 174.1,
+  "elevationTop": 194.4,
+  "ribbons": 1910,
+  "footprintsAdded": 0,
+  "buildings": 189,
+  "heightFromTag": 7,
+  "heightFromModel": 0,
+  "heightFromLevels": 98,
+  "heightGuessed": 84,
+  "bridgePieces": 412,
+  "contourSegments": 9287,
+  "rapidCells": 0,
+  "strips": 169
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Buckingham Fountain \u2014 Chicago",
+  "center": [
+   -87.61897,
+   41.8758
+  ],
+  "width": 1300,
+  "depth": 1690,
+  "scale": 4.615,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-buckingham-fountain"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-170933-lm-buckingham-fountain",
+ "createdAt": "2026-11-14T17:09:33.112Z",
+ "bytes": 3037195,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-170933-lm-buckingham-fountain/image.svg",
+  "thumb": "builds/20261114-170933-lm-buckingham-fountain/thumb.png",
+  "social": "builds/20261114-170933-lm-buckingham-fountain/social.png",
+  "preview": "builds/20261114-170933-lm-buckingham-fountain/preview.jpg"
+ }
+}

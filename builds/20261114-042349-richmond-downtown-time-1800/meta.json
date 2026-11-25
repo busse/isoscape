@@ -1,0 +1,144 @@
+{
+ "name": "richmond-downtown-time-1800",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1800",
+ "palette": "paper",
+ "note": "Sanborn clean: sprawls dropped, duplicates merged",
+ "viewBox": [
+  -3024,
+  -1587.9971168542847,
+  6048,
+  2643.1740313905248
+ ],
+ "bearing": -8.7,
+ "ms": 1024,
+ "stats": {
+  "features": 6771,
+  "ground": 208,
+  "elevationDatum": -0.1,
+  "elevationTop": 57.2,
+  "ribbons": 1513,
+  "footprintsAdded": 0,
+  "buildings": 8,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 1,
+  "heightGuessed": 7,
+  "year": 1800,
+  "newSincePrevious": 2,
+  "datedCurated": 4,
+  "datedOsm": 0,
+  "datedParcel": 4,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 0,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 0,
+  "tracedEndHighway": 0,
+  "tracedEndAssumed": 0,
+  "curated": 2,
+  "bridgePieces": 21,
+  "contourSegments": 48942,
+  "rapidCells": 4553,
+  "strips": 200
+ },
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1800,
+  "series": "richmond-downtown-time",
+  "title": "The Great Basin",
+  "note": "The canal's Great Basin is finished below Shockoe Hill, about 1800; Mayo's toll bridge crosses the James.",
+  "previous": 1788,
+  "curated": [
+   {
+    "id": "great-basin",
+    "name": "Great Turning Basin, James River & Kanawha Canal",
+    "kind": "water",
+    "from": 1800,
+    "to": 1895,
+    "note": "The canal's Great Basin covered three blocks between Cary and Canal Streets, from 8th to 12th Street. Completed about 1800, and still drawn on the 1886 Sanborn map; later filled and used as a rail yard after the railroad took over the canal (the end date here is approximate). The James Center stands on the site.",
+    "sources": [
+     "https://www.hmdb.org/m.asp?m=286691",
+     "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf",
+     "https://en.wikipedia.org/wiki/James_Center",
+     "https://www.loc.gov/item/sanborn09064_001/"
+    ]
+   },
+   {
+    "id": "shockoe-creek",
+    "name": "Shockoe Creek (open stream)",
+    "kind": "creek",
+    "from": 1737,
+    "to": 1877,
+    "note": "The creek ran open between present-day 15th and 16th Streets, dividing the town, until it was enclosed in a culvert in 1877. Course approximated as midway between the two streets.",
+    "sources": [
+     "https://sah-archipedia.org/node/285"
+    ]
+   }
+  ]
+ },
+ "id": "20261114-042349-richmond-downtown-time-1800",
+ "createdAt": "2026-11-14T04:23:49.982Z",
+ "bytes": 5854247,
+ "git": {
+  "commit": "8a9f63c",
+  "dirty": false,
+  "subject": "Sanborn: drop sliver footprints and smooth outlines"
+ },
+ "files": {
+  "svg": "builds/20261114-042349-richmond-downtown-time-1800/image.svg",
+  "thumb": "builds/20261114-042349-richmond-downtown-time-1800/thumb.png",
+  "social": "builds/20261114-042349-richmond-downtown-time-1800/social.png",
+  "preview": "builds/20261114-042349-richmond-downtown-time-1800/preview.jpg"
+ }
+}

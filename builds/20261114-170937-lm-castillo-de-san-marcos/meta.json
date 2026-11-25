@@ -1,0 +1,77 @@
+{
+ "name": "lm-castillo-de-san-marcos",
+ "region": "lm-castillo-de-san-marcos",
+ "title": "Castillo de San Marcos \u2014 St. Augustine, Florida",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024.25,
+  -1997.188066452614,
+  6048.5,
+  4028.0405893843435
+ ],
+ "bearing": 38.495831626954384,
+ "ms": 593,
+ "stats": {
+  "features": 3339,
+  "ground": 143,
+  "elevationDatum": -1.1,
+  "elevationTop": 3.8,
+  "ribbons": 720,
+  "footprintsAdded": 0,
+  "buildings": 667,
+  "heightFromTag": 78,
+  "heightFromModel": 0,
+  "heightFromLevels": 69,
+  "heightGuessed": 520,
+  "bridgePieces": 27,
+  "contourSegments": 5299,
+  "rapidCells": 0,
+  "strips": 143
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Castillo de San Marcos \u2014 St. Augustine, Florida",
+  "center": [
+   -81.31174,
+   29.8979
+  ],
+  "width": 1100,
+  "depth": 1430,
+  "scale": 5.455,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-castillo-de-san-marcos"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-170937-lm-castillo-de-san-marcos",
+ "createdAt": "2026-11-14T17:09:37.789Z",
+ "bytes": 1725946,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-170937-lm-castillo-de-san-marcos/image.svg",
+  "thumb": "builds/20261114-170937-lm-castillo-de-san-marcos/thumb.png",
+  "social": "builds/20261114-170937-lm-castillo-de-san-marcos/social.png",
+  "preview": "builds/20261114-170937-lm-castillo-de-san-marcos/preview.jpg"
+ }
+}

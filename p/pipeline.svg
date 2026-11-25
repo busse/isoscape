@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 878" width="400" height="878" role="img" aria-labelledby="pipe-t pipe-d">
+<title id="pipe-t">From data to drawing: the isoscape pipeline</title>
+<desc id="pipe-d">fetch uses the network. It reads the region file (regions/&lt;name&gt;.json) and downloads OpenStreetMap (osm.ts) and elevation (dem.ts) into a local cache (data/&lt;name&gt;/). build runs offline, from the cache, in eight steps: read the map data (osm.ts), what each tag means (classify.ts), the year for a dated map (history.ts), the camera (view.ts), ground, water and rapids (terrain.ts), buildings and bridges (scene.ts), what hides what (order.ts), and ink, color and dots (render.ts). The camera step has a red dashed outline. It is the projection, and view.ts is about 90 lines out of some 14,000 in src/. The SVG lands in out/&lt;name&gt;.svg and the explorer in out/index.html.</desc>
+<style>
+text{font-family:ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif}
+.h{font:600 12px ui-sans-serif, -apple-system, 'Segoe UI', system-ui, sans-serif;letter-spacing:.08em}
+.n{font:700 16px 'Libre Baskerville', Baskerville, Georgia, serif}
+.b{font-size:13.5px}
+.bb{font-size:13.5px;font-weight:600}
+.m{font:12.5px ui-monospace, SFMono-Regular, Menlo, monospace}
+.s{font-size:12.5px}
+.si{font-size:12.5px;font-style:italic}
+.bg{fill:#f4f1ea}.ink{fill:#2c2b33}.dim{fill:#6e6656}.card{fill:#faf7ef}.artist{fill:#f2c879}.agent{fill:#c3d3e2}.code{fill:#d3dfb9}.cache{fill:#a8cad8}.acc{fill:#b5392f}.edge{fill:none;stroke:#2c2b33;stroke-width:1.2}.thin{fill:none;stroke:#2c2b33;stroke-width:0.72}.edge.card{fill:#faf7ef}.edge.cache{fill:#a8cad8}.edge.artist{fill:#f2c879}.edge.agent{fill:#c3d3e2}.edge.code{fill:#d3dfb9}.mark{fill:#f4f1ea;stroke:#2c2b33;stroke-width:1.2}.mark.solid{fill:#2c2b33}.mark.dash{stroke-dasharray:2.6 1.7}.hl{fill:none;stroke:#b5392f;stroke-width:1.68;stroke-dasharray:6 4}
+@media (prefers-color-scheme: dark){.bg{fill:#14161d}.ink{fill:#c9d1e6}.dim{fill:#8a90a2}.card{fill:#1d2029}.artist{fill:#8a6f3c}.agent{fill:#34465a}.code{fill:#22302a}.cache{fill:#1b2e3b}.acc{fill:#e0614f}.edge{fill:none;stroke:#c9d1e6;stroke-width:1.2}.thin{fill:none;stroke:#c9d1e6;stroke-width:0.72}.edge.card{fill:#1d2029}.edge.cache{fill:#1b2e3b}.edge.artist{fill:#8a6f3c}.edge.agent{fill:#34465a}.edge.code{fill:#22302a}.mark{fill:#14161d;stroke:#c9d1e6;stroke-width:1.2}.mark.solid{fill:#c9d1e6}.mark.dash{stroke-dasharray:2.6 1.7}.hl{fill:none;stroke:#e0614f;stroke-width:1.68;stroke-dasharray:6 4}}
+</style>
+<rect width="400" height="878" class="bg"/>
+<text x="16" y="26" class="h dim">FROM DATA TO DRAWING</text>
+<text x="16" y="48" class="si dim">fetch uses the network</text>
+<rect x="16" y="60" width="368" height="38" class="edge card"/><circle cx="16" cy="60" r="2.9" class="ink"/><circle cx="384" cy="60" r="2.9" class="ink"/><circle cx="16" cy="98" r="2.9" class="ink"/><circle cx="384" cy="98" r="2.9" class="ink"/>
+<text x="28" y="84" class="bb ink">Region file</text>
+<text x="372" y="84" class="m ink" text-anchor="end">regions/&lt;name&gt;.json</text>
+<path d="M200 103L200 111" class="edge"/><path d="M200 119L195.8 111L204.2 111Z" class="ink"/><circle cx="200" cy="103" r="2.3" class="ink"/>
+<rect x="16" y="124" width="178" height="52" class="edge card"/><circle cx="16" cy="124" r="2.9" class="ink"/><circle cx="194" cy="124" r="2.9" class="ink"/><circle cx="16" cy="176" r="2.9" class="ink"/><circle cx="194" cy="176" r="2.9" class="ink"/>
+<text x="28" y="146" class="bb ink">OpenStreetMap</text>
+<text x="28" y="165" class="m ink">osm.ts</text>
+<rect x="206" y="124" width="178" height="52" class="edge card"/><circle cx="206" cy="124" r="2.9" class="ink"/><circle cx="384" cy="124" r="2.9" class="ink"/><circle cx="206" cy="176" r="2.9" class="ink"/><circle cx="384" cy="176" r="2.9" class="ink"/>
+<text x="218" y="146" class="bb ink">Elevation</text>
+<text x="218" y="165" class="m ink">dem.ts</text>
+<path d="M105 181L105 189" class="edge"/><path d="M105 197L100.8 189L109.2 189Z" class="ink"/><circle cx="105" cy="181" r="2.3" class="ink"/>
+<path d="M295 181L295 189" class="edge"/><path d="M295 197L290.8 189L299.2 189Z" class="ink"/><circle cx="295" cy="181" r="2.3" class="ink"/>
+<rect x="16" y="202" width="368" height="38" class="edge cache"/><circle cx="16" cy="202" r="2.9" class="ink"/><circle cx="384" cy="202" r="2.9" class="ink"/><circle cx="16" cy="240" r="2.9" class="ink"/><circle cx="384" cy="240" r="2.9" class="ink"/>
+<text x="28" y="226" class="bb ink">Local cache</text>
+<text x="372" y="226" class="m ink" text-anchor="end">data/&lt;name&gt;/</text>
+<text x="16" y="270" class="si dim">build runs offline, from the cache</text>
+<rect x="16" y="282" width="368" height="36" class="edge card"/><circle cx="16" cy="282" r="2.9" class="ink"/><circle cx="384" cy="282" r="2.9" class="ink"/><circle cx="16" cy="318" r="2.9" class="ink"/><circle cx="384" cy="318" r="2.9" class="ink"/>
+<text x="28" y="305" class="bb ink">Read the map data</text>
+<text x="372" y="305" class="m ink" text-anchor="end">osm.ts</text>
+<path d="M200 323L200 329" class="edge"/><path d="M200 337L195.8 329L204.2 329Z" class="ink"/><circle cx="200" cy="323" r="2.3" class="ink"/>
+<rect x="16" y="342" width="368" height="36" class="edge card"/><circle cx="16" cy="342" r="2.9" class="ink"/><circle cx="384" cy="342" r="2.9" class="ink"/><circle cx="16" cy="378" r="2.9" class="ink"/><circle cx="384" cy="378" r="2.9" class="ink"/>
+<text x="28" y="365" class="bb ink">What each tag means</text>
+<text x="372" y="365" class="m ink" text-anchor="end">classify.ts</text>
+<path d="M200 383L200 389" class="edge"/><path d="M200 397L195.8 389L204.2 389Z" class="ink"/><circle cx="200" cy="383" r="2.3" class="ink"/>
+<rect x="16" y="402" width="368" height="36" class="edge card"/><circle cx="16" cy="402" r="2.9" class="ink"/><circle cx="384" cy="402" r="2.9" class="ink"/><circle cx="16" cy="438" r="2.9" class="ink"/><circle cx="384" cy="438" r="2.9" class="ink"/>
+<text x="28" y="425" class="bb ink">The year, for a dated map</text>
+<text x="372" y="425" class="m ink" text-anchor="end">history.ts</text>
+<path d="M200 443L200 449" class="edge"/><path d="M200 457L195.8 449L204.2 449Z" class="ink"/><circle cx="200" cy="443" r="2.3" class="ink"/>
+<rect x="16" y="462" width="368" height="36" class="edge card"/><circle cx="16" cy="462" r="2.9" class="ink"/><circle cx="384" cy="462" r="2.9" class="ink"/><circle cx="16" cy="498" r="2.9" class="ink"/><circle cx="384" cy="498" r="2.9" class="ink"/>
+<text x="28" y="485" class="bb ink">Camera</text>
+<text x="372" y="485" class="m ink" text-anchor="end">view.ts</text>
+<rect x="10" y="456" width="380" height="48" class="hl"/>
+<text x="16" y="520" class="si acc">This step is the projection. view.ts is</text>
+<text x="16" y="537" class="si acc">about 90 lines out of some 14,000 in src/.</text>
+<path d="M200 547L200 553" class="edge"/><path d="M200 561L195.8 553L204.2 553Z" class="ink"/><circle cx="200" cy="547" r="2.3" class="ink"/>
+<rect x="16" y="566" width="368" height="36" class="edge card"/><circle cx="16" cy="566" r="2.9" class="ink"/><circle cx="384" cy="566" r="2.9" class="ink"/><circle cx="16" cy="602" r="2.9" class="ink"/><circle cx="384" cy="602" r="2.9" class="ink"/>
+<text x="28" y="589" class="bb ink">Ground, water, rapids</text>
+<text x="372" y="589" class="m ink" text-anchor="end">terrain.ts</text>
+<path d="M200 607L200 613" class="edge"/><path d="M200 621L195.8 613L204.2 613Z" class="ink"/><circle cx="200" cy="607" r="2.3" class="ink"/>
+<rect x="16" y="626" width="368" height="36" class="edge card"/><circle cx="16" cy="626" r="2.9" class="ink"/><circle cx="384" cy="626" r="2.9" class="ink"/><circle cx="16" cy="662" r="2.9" class="ink"/><circle cx="384" cy="662" r="2.9" class="ink"/>
+<text x="28" y="649" class="bb ink">Buildings and bridges</text>
+<text x="372" y="649" class="m ink" text-anchor="end">scene.ts</text>
+<path d="M200 667L200 673" class="edge"/><path d="M200 681L195.8 673L204.2 673Z" class="ink"/><circle cx="200" cy="667" r="2.3" class="ink"/>
+<rect x="16" y="686" width="368" height="36" class="edge card"/><circle cx="16" cy="686" r="2.9" class="ink"/><circle cx="384" cy="686" r="2.9" class="ink"/><circle cx="16" cy="722" r="2.9" class="ink"/><circle cx="384" cy="722" r="2.9" class="ink"/>
+<text x="28" y="709" class="bb ink">What hides what</text>
+<text x="372" y="709" class="m ink" text-anchor="end">order.ts</text>
+<path d="M200 727L200 733" class="edge"/><path d="M200 741L195.8 733L204.2 733Z" class="ink"/><circle cx="200" cy="727" r="2.3" class="ink"/>
+<rect x="16" y="746" width="368" height="36" class="edge card"/><circle cx="16" cy="746" r="2.9" class="ink"/><circle cx="384" cy="746" r="2.9" class="ink"/><circle cx="16" cy="782" r="2.9" class="ink"/><circle cx="384" cy="782" r="2.9" class="ink"/>
+<text x="28" y="769" class="bb ink">Ink, color, dots</text>
+<text x="372" y="769" class="m ink" text-anchor="end">render.ts</text>
+<path d="M200 787L200 793" class="edge"/><path d="M200 801L195.8 793L204.2 793Z" class="ink"/><circle cx="200" cy="787" r="2.3" class="ink"/>
+<rect x="16" y="806" width="368" height="56" class="edge cache"/><circle cx="16" cy="806" r="2.9" class="ink"/><circle cx="384" cy="806" r="2.9" class="ink"/><circle cx="16" cy="862" r="2.9" class="ink"/><circle cx="384" cy="862" r="2.9" class="ink"/>
+<text x="28" y="828" class="bb ink">The SVG and the explorer</text>
+<text x="28" y="848" class="m ink">out/&lt;name&gt;.svg  out/index.html</text>
+</svg>

@@ -1,0 +1,144 @@
+{
+ "name": "richmond-downtown-time-1886",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1886",
+ "palette": "paper",
+ "note": "Sanborn clean: sprawls dropped, duplicates merged",
+ "viewBox": [
+  -3024,
+  -1598.078189284056,
+  6048,
+  2653.255103820296
+ ],
+ "bearing": -8.7,
+ "ms": 1011,
+ "stats": {
+  "features": 7479,
+  "ground": 208,
+  "elevationDatum": -0.1,
+  "elevationTop": 57.2,
+  "ribbons": 1564,
+  "footprintsAdded": 0,
+  "buildings": 420,
+  "heightFromTag": 5,
+  "heightFromModel": 0,
+  "heightFromLevels": 74,
+  "heightGuessed": 341,
+  "year": 1886,
+  "newSincePrevious": 160,
+  "datedCurated": 10,
+  "datedOsm": 207,
+  "datedParcel": 203,
+  "undatedToday": 0,
+  "landmarks": 1,
+  "traced": 471,
+  "tracedEndMap": 397,
+  "tracedEndRebuilt": 14,
+  "tracedEndHighway": 14,
+  "tracedEndAssumed": 46,
+  "curated": 2,
+  "bridgePieces": 21,
+  "contourSegments": 48942,
+  "rapidCells": 4553,
+  "strips": 200
+ },
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1886,
+  "series": "richmond-downtown-time",
+  "title": "The first Sanborn map",
+  "note": "The earliest fire-insurance map of the city. Its buildings now gone are traced here in the map's own colors.",
+  "previous": 1870,
+  "curated": [
+   {
+    "id": "great-basin",
+    "name": "Great Turning Basin, James River & Kanawha Canal",
+    "kind": "water",
+    "from": 1800,
+    "to": 1895,
+    "note": "The canal's Great Basin covered three blocks between Cary and Canal Streets, from 8th to 12th Street. Completed about 1800, and still drawn on the 1886 Sanborn map; later filled and used as a rail yard after the railroad took over the canal (the end date here is approximate). The James Center stands on the site.",
+    "sources": [
+     "https://www.hmdb.org/m.asp?m=286691",
+     "https://rva.gov/sites/default/files/Planning/PDFDocuments/MasterPlan/RiverfrontPlan/Plan/6_Reynolds_North_Canal_Walk.pdf",
+     "https://en.wikipedia.org/wiki/James_Center",
+     "https://www.loc.gov/item/sanborn09064_001/"
+    ]
+   },
+   {
+    "id": "libby-prison",
+    "name": "Libby Prison (warehouses, 1845\u201352; prison 1862\u201365)",
+    "kind": "landmark",
+    "from": 1845,
+    "to": 1889,
+    "note": "Three brick warehouses, each 110 \u00d7 44 ft and four stories, on the east side of 20th Street between Cary and Dock. Used as a Confederate prison 1862\u201365; dismantled in 1889 and re-erected in Chicago. Footprint from the published dimensions, placed at the corner; not surveyed.",
+    "sources": [
+     "https://www.hmdb.org/m.asp?m=35933"
+    ]
+   }
+  ]
+ },
+ "id": "20261114-042400-richmond-downtown-time-1886",
+ "createdAt": "2026-11-14T04:24:00.435Z",
+ "bytes": 6647176,
+ "git": {
+  "commit": "8a9f63c",
+  "dirty": false,
+  "subject": "Sanborn: drop sliver footprints and smooth outlines"
+ },
+ "files": {
+  "svg": "builds/20261114-042400-richmond-downtown-time-1886/image.svg",
+  "thumb": "builds/20261114-042400-richmond-downtown-time-1886/thumb.png",
+  "social": "builds/20261114-042400-richmond-downtown-time-1886/social.png",
+  "preview": "builds/20261114-042400-richmond-downtown-time-1886/preview.jpg"
+ }
+}

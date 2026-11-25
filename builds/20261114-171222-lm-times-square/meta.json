@@ -1,0 +1,77 @@
+{
+ "name": "lm-times-square",
+ "region": "lm-times-square",
+ "title": "Times Square \u2014 New York City",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -3202.5148735152825,
+  6048,
+  5238.8687025877625
+ ],
+ "bearing": -16.198146384717376,
+ "ms": 1338,
+ "stats": {
+  "features": 10074,
+  "ground": 147,
+  "elevationDatum": 4.8,
+  "elevationTop": 25.3,
+  "ribbons": 1384,
+  "footprintsAdded": 0,
+  "buildings": 1972,
+  "heightFromTag": 1950,
+  "heightFromModel": 0,
+  "heightFromLevels": 3,
+  "heightGuessed": 19,
+  "bridgePieces": 0,
+  "contourSegments": 5934,
+  "rapidCells": 0,
+  "strips": 130
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Times Square \u2014 New York City",
+  "center": [
+   -73.98597,
+   40.75701
+  ],
+  "width": 1000,
+  "depth": 1300,
+  "scale": 6,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-times-square"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171222-lm-times-square",
+ "createdAt": "2026-11-14T17:12:22.645Z",
+ "bytes": 2760332,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171222-lm-times-square/image.svg",
+  "thumb": "builds/20261114-171222-lm-times-square/thumb.png",
+  "social": "builds/20261114-171222-lm-times-square/social.png",
+  "preview": "builds/20261114-171222-lm-times-square/preview.jpg"
+ }
+}

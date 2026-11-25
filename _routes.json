@@ -1,0 +1,13 @@
+{
+ "version": 1,
+ "include": [
+  "/builds/20261114-003001-gwynns-island/image.svg",
+  "/builds/20261115-062547-richmond-streetcars-1925/image.svg",
+  "/builds/20261115-165054-richmond-streetcars-1925/image.svg",
+  "/builds/20261116-172522-gwynns-island/image.svg",
+  "/builds/20261116-172559-richmond-i195-rocketts/image.svg",
+  "/builds/20261116-212313-gwynns-island/image.svg",
+  "/builds/20261116-212351-richmond-i195-rocketts/image.svg"
+ ],
+ "exclude": []
+}

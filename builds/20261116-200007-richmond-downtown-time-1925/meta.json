@@ -1,0 +1,136 @@
+{
+ "name": "richmond-downtown-time-1925",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1925",
+ "palette": "paper",
+ "note": "Wave 2 redraw: Capitol with its wings, St. John's, misdated towers, f08 seated, traced buildings left out under viaducts and in water (RVA prints, next version)",
+ "viewBox": [
+  -3024,
+  -1592.3837474304996,
+  6048,
+  2647.5606619667396
+ ],
+ "bearing": -8.7,
+ "ms": 5860,
+ "stats": {
+  "features": 4574,
+  "unbuiltStreets": 3181,
+  "bridgesAtGrade": 31,
+  "vergesLater": 37,
+  "groundUnderBridgesLowered": 13,
+  "ground": 59,
+  "elevationDatum": -0.1,
+  "elevationTop": 56.8,
+  "streetcarLines": 0,
+  "ribbons": 1184,
+  "footprintsAdded": 0,
+  "outlinesUnderParts": 2,
+  "footprintsDrawn": 0,
+  "datedFromParcels": 1153,
+  "buildings": 1774,
+  "streetcars": 0,
+  "heightFromTag": 34,
+  "heightFromModel": 0,
+  "heightFromLevels": 284,
+  "heightGuessed": 1456,
+  "year": 1925,
+  "newSincePrevious": 0,
+  "datedCurated": 17,
+  "datedOsm": 604,
+  "datedParcel": 1153,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 999,
+  "tracedOnWater": 20,
+  "tracedUnderViaduct": 21,
+  "tracedEndMap": 303,
+  "tracedEndRebuilt": 48,
+  "tracedEndHighway": 75,
+  "tracedEndAssumed": 573,
+  "curated": 0,
+  "bridgePieces": 447,
+  "contourSegments": 48839,
+  "rapidCells": 9125,
+  "rapidsReach": 200,
+  "strips": 200
+ },
+ "credits": [
+  "Map data \u00a9 OpenStreetMap contributors (ODbL)",
+  "Elevation: USGS 3DEP",
+  "Buildings dated from assessor records",
+  "Historic buildings traced from Sanborn Fire Insurance Maps, Library of Congress"
+ ],
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "checkLevels": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1925,
+  "series": "richmond-downtown-time",
+  "title": "The 1924\u201325 Sanborn map",
+  "note": "Downtown at the height of the tobacco and rail city, as the fire-insurance maps drew it.",
+  "curated": []
+ },
+ "id": "20261116-200007-richmond-downtown-time-1925",
+ "createdAt": "2026-11-17T01:00:07.615Z",
+ "bytes": 13597607,
+ "git": {
+  "commit": "942ca88",
+  "dirty": false,
+  "subject": "Merge wave2-era2: Richmond through time corrected for RVA-01, -04, -05, -08 (Capitol, St. John's, misdated towers, f08, traced buildings left out under viaducts and in water)"
+ },
+ "files": {
+  "svg": "builds/20261116-200007-richmond-downtown-time-1925/image.svg",
+  "thumb": "builds/20261116-200007-richmond-downtown-time-1925/thumb.png",
+  "social": "builds/20261116-200007-richmond-downtown-time-1925/social.png",
+  "preview": "builds/20261116-200007-richmond-downtown-time-1925/preview.jpg"
+ }
+}

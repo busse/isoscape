@@ -1,0 +1,118 @@
+{
+ "name": "richmond-downtown-time-1950",
+ "region": "richmond-downtown-time",
+ "title": "Downtown Richmond, from the Capitol to Tobacco Row, 1950",
+ "palette": "paper",
+ "note": "Sanborn clean: sprawls dropped, duplicates merged",
+ "viewBox": [
+  -3024,
+  -1675.6364183057992,
+  6048,
+  2730.813332842039
+ ],
+ "bearing": -8.7,
+ "ms": 1147,
+ "stats": {
+  "features": 10020,
+  "ground": 309,
+  "elevationDatum": -0.1,
+  "elevationTop": 57.2,
+  "ribbons": 1561,
+  "footprintsAdded": 0,
+  "buildings": 1890,
+  "heightFromTag": 38,
+  "heightFromModel": 0,
+  "heightFromLevels": 313,
+  "heightGuessed": 1539,
+  "year": 1950,
+  "newSincePrevious": 37,
+  "datedCurated": 11,
+  "datedOsm": 608,
+  "datedParcel": 1271,
+  "undatedToday": 0,
+  "landmarks": 0,
+  "traced": 878,
+  "tracedEndMap": 0,
+  "tracedEndRebuilt": 51,
+  "tracedEndHighway": 85,
+  "tracedEndAssumed": 742,
+  "curated": 0,
+  "bridgePieces": 496,
+  "contourSegments": 49756,
+  "rapidCells": 4553,
+  "strips": 200
+ },
+ "config": {
+  "bearing": -8.7,
+  "snap": false,
+  "title": "Downtown Richmond, from the Capitol to Tobacco Row",
+  "center": [
+   -77.4268,
+   37.534
+  ],
+  "width": 3000,
+  "depth": 2000,
+  "scale": 2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+   {
+    "match": "Manchester",
+    "deck": 24
+   },
+   {
+    "match": "Mayo",
+    "deck": 6
+   },
+   {
+    "match": "Potterfield",
+    "deck": 3
+   }
+  ],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+   "exaggeration": 2.5,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0.035,
+   "demResolution": 2
+  },
+  "time": {
+   "history": "history/richmond-downtown.json",
+   "yearBuilt": {
+    "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+    "field": "Year_Built"
+   }
+  },
+  "name": "richmond-downtown-time"
+ },
+ "sky": "#f4f1ea",
+ "time": {
+  "year": 1950,
+  "series": "richmond-downtown-time",
+  "title": "Mid-century",
+  "note": "The last scene before the turnpike.",
+  "previous": 1940,
+  "curated": []
+ },
+ "id": "20261114-042415-richmond-downtown-time-1950",
+ "createdAt": "2026-11-14T04:24:15.170Z",
+ "bytes": 8212152,
+ "git": {
+  "commit": "8a9f63c",
+  "dirty": false,
+  "subject": "Sanborn: drop sliver footprints and smooth outlines"
+ },
+ "files": {
+  "svg": "builds/20261114-042415-richmond-downtown-time-1950/image.svg",
+  "thumb": "builds/20261114-042415-richmond-downtown-time-1950/thumb.png",
+  "social": "builds/20261114-042415-richmond-downtown-time-1950/social.png",
+  "preview": "builds/20261114-042415-richmond-downtown-time-1950/preview.jpg"
+ }
+}

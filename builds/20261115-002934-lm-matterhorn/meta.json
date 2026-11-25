@@ -1,0 +1,79 @@
+{
+ "name": "lm-matterhorn",
+ "region": "lm-matterhorn",
+ "title": "Matterhorn and Zermatt \u2014 Switzerland",
+ "palette": "paper",
+ "note": "Landmarks around the world: swisstopo elevation, Copernicus fill",
+ "viewBox": [
+  -3024,
+  -5515.62806571478,
+  6048,
+  8084.569597343772
+ ],
+ "bearing": 235,
+ "ms": 4435,
+ "stats": {
+  "features": 4492,
+  "ground": 280,
+  "elevationDatum": 1603.4,
+  "elevationTop": 4465.4,
+  "ribbons": 963,
+  "footprintsAdded": 0,
+  "buildings": 1301,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 19,
+  "heightGuessed": 1282,
+  "bridgePieces": 99,
+  "contourSegments": 161280,
+  "rapidCells": 0,
+  "strips": 525
+ },
+ "config": {
+  "bearing": 235,
+  "snap": false,
+  "title": "Matterhorn and Zermatt \u2014 Switzerland",
+  "center": [
+   7.7035,
+   45.9982
+  ],
+  "width": 5000,
+  "depth": 8400,
+  "scale": 1.2,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 24,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "roof",
+  "fetchTile": 3000,
+  "terrain": {
+   "source": "swisstopo",
+   "fillFrom": "copernicus",
+   "exaggeration": 1,
+   "cell": 8,
+   "contour": 25,
+   "majorEvery": 4,
+   "rapids": 0,
+   "demResolution": 4
+  },
+  "name": "lm-matterhorn"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261115-002934-lm-matterhorn",
+ "createdAt": "2026-11-15T00:29:34.911Z",
+ "bytes": 25125475,
+ "git": {
+  "commit": "d0c0484",
+  "dirty": false,
+  "subject": "Landmark prints: portrait layout for tall scenes (the Matterhorn)"
+ },
+ "files": {
+  "svg": "builds/20261115-002934-lm-matterhorn/image.svg",
+  "thumb": "builds/20261115-002934-lm-matterhorn/thumb.png",
+  "social": "builds/20261115-002934-lm-matterhorn/social.png",
+  "preview": "builds/20261115-002934-lm-matterhorn/preview.jpg"
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "name": "lm-wright-brothers",
+ "region": "lm-wright-brothers",
+ "title": "Wright Brothers National Memorial \u2014 Kill Devil Hills, North Carolina",
+ "palette": "paper",
+ "note": "landmark",
+ "viewBox": [
+  -3024,
+  -2024.043526044833,
+  6048,
+  4037.014669215133
+ ],
+ "bearing": 20.790897589576588,
+ "ms": 916,
+ "stats": {
+  "features": 2597,
+  "coastWays": 2,
+  "ground": 134,
+  "elevationDatum": 0,
+  "elevationTop": 28.3,
+  "ribbons": 291,
+  "footprintsAdded": 0,
+  "buildings": 622,
+  "heightFromTag": 0,
+  "heightFromModel": 0,
+  "heightFromLevels": 132,
+  "heightGuessed": 490,
+  "bridgePieces": 0,
+  "contourSegments": 11298,
+  "rapidCells": 0,
+  "strips": 208
+ },
+ "config": {
+  "bearing": 0,
+  "snap": true,
+  "title": "Wright Brothers National Memorial \u2014 Kill Devil Hills, North Carolina",
+  "center": [
+   -75.67029,
+   36.01595
+  ],
+  "width": 1600,
+  "depth": 2080,
+  "scale": 3.75,
+  "squash": 0.5,
+  "exaggeration": 1,
+  "slab": 12,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [],
+  "minBuildingArea": 12,
+  "dots": "all",
+  "fetchTile": 1600,
+  "terrain": {
+   "exaggeration": 2,
+   "cell": 5,
+   "contour": 2,
+   "majorEvery": 5,
+   "rapids": 0,
+   "demResolution": 2
+  },
+  "name": "lm-wright-brothers"
+ },
+ "sky": "#f4f1ea",
+ "id": "20261114-171232-lm-wright-brothers",
+ "createdAt": "2026-11-14T17:12:32.887Z",
+ "bytes": 2410591,
+ "git": {
+  "commit": "f768bb1",
+  "dirty": false,
+  "subject": "Launch prep: MIT license, map licenses, 'Make your own' README, shop links in the explorer"
+ },
+ "files": {
+  "svg": "builds/20261114-171232-lm-wright-brothers/image.svg",
+  "thumb": "builds/20261114-171232-lm-wright-brothers/thumb.png",
+  "social": "builds/20261114-171232-lm-wright-brothers/social.png",
+  "preview": "builds/20261114-171232-lm-wright-brothers/preview.jpg"
+ }
+}
