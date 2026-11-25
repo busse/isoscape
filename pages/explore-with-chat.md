@@ -12,7 +12,7 @@ social: explore-with-chat-social.jpg
 **isoscape** draws isometric maps of real places from open data: buildings and roads from
 OpenStreetMap, and the shape of the ground from public elevation models. It is free and open
 source. You choose a frame on the world, and the data decides the rest. The
-[reference site](https://busse.github.io/isoscape/) has every published map.
+[reference site](https://isoscape.chrisbusse.com/) has every published map.
 
 This tutorial teaches a way to use isoscape with an AI chat to explore any place on Earth. You
 ask questions in plain words. The chat finds the open data for the place, checks what it is
@@ -27,7 +27,7 @@ data alone:
 
 The whole island, about 23 km across, drawn with isoscape from open data: OpenStreetMap for
 roads, buildings and land cover, and the Copernicus 30 m elevation model for the ground,
-raised 2× so its relief shows at this size. [Open it in the viewer](https://busse.github.io/isoscape/#rapa-nui:2026).
+raised 2× so its relief shows at this size. [Open it in the viewer](https://isoscape.chrisbusse.com/#rapa-nui:2026).
 Working draft.
 :::
 
@@ -146,7 +146,7 @@ views, then the quarry model if its files and license allowed.
 
 Rano Kau and Orongo, about 3.8 km across, at true height. The crater reads well; the sea
 cliffs on the near side come out as soft, shaded slopes because 30 m cells round them off.
-[Open it](https://busse.github.io/isoscape/#rapa-nui-rano-kau:2026).
+[Open it](https://isoscape.chrisbusse.com/#rapa-nui-rano-kau:2026).
 :::
 
 ::: figure wide
@@ -154,7 +154,7 @@ cliffs on the near side come out as soft, shaded slopes because 30 m cells round
 
 Poike, Ahu Tongariki and Rano Raraku, about 6.6 km across. The peninsula's shape is clear;
 its cliffs and the small cones on its summit are softened.
-[Open it](https://busse.github.io/isoscape/#rapa-nui-poike:2026).
+[Open it](https://isoscape.chrisbusse.com/#rapa-nui-poike:2026).
 :::
 
 ::: figure wide
@@ -162,7 +162,7 @@ its cliffs and the small cones on its summit are softened.
 
 Hanga Roa and Ahu Tahai, about 3 km across. Here the buildings carry the picture: OpenStreetMap
 gives most of them a number of floors. The ground under them is nearly flat at this scale.
-[Open it](https://busse.github.io/isoscape/#rapa-nui-hanga-roa:2026).
+[Open it](https://isoscape.chrisbusse.com/#rapa-nui-hanga-roa:2026).
 :::
 
 At this size a 30 m cell is several millimeters on a print, and that is the limit. A view of

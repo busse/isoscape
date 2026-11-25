@@ -3,7 +3,7 @@
 Pages serves no file over 25 MiB. Each such file (the biggest map drawings) must be in the R2
 bucket misfit-isoscape-maps under the same path (builds/<id>/image.svg); this script lists them,
 writes _routes.json so that only those paths reach the Pages Function that reads R2
-(cloudflare/functions/builds/[[path]].js, copied in as functions/), writes _headers, and prints
+(cloudflare/functions/builds/[[path]].js, copied in as functions/), writes _headers and robots.txt (naming the sitemap), and prints
 what to upload. It changes nothing else. The caller then commits the site without those files.
 Prints the oversized paths, one per line, after "R2:". --also names oversized paths that are not
 on disk (a sparse checkout of the site branch)."""
@@ -25,4 +25,8 @@ dst = os.path.join(site, 'functions')
 if os.path.exists(dst): shutil.rmtree(dst)
 shutil.copytree(os.path.join(repo, 'cloudflare', 'functions'), dst)
 open(os.path.join(site, '_headers'), 'w').write('/builds/*\n  Cache-Control: public, max-age=31536000, immutable\n/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n')
+# The site owns its host's root on Cloudflare, so it can name its sitemap in robots.txt.
+site_url = json.load(open(os.path.join(repo, 'isoscape.config.json'))).get('siteUrl', '').rstrip('/') + '/'
+if os.path.exists(os.path.join(site, 'sitemap.xml')) and site_url != '/':
+    open(os.path.join(site, 'robots.txt'), 'w').write(f'User-agent: *\nAllow: /\n\nSitemap: {site_url}sitemap.xml\n')
 print('R2:'); [print(b) for b in big]

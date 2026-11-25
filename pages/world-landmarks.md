@@ -18,17 +18,17 @@ after the download is the same code that draws Richmond and the fifty American l
 
 | Landmark | Elevation data | Who publishes it | Ground detail |
 |---|---|---|---|
-| [Eiffel Tower, Paris](https://busse.github.io/isoscape/#lm-eiffel-tower) | RGE ALTI® | IGN, France's national mapping institute | 1 m, lidar-derived |
-| [Matterhorn and Zermatt](https://busse.github.io/isoscape/#lm-matterhorn) | swissALTI3D, with Copernicus over the border | swisstopo, Switzerland's federal mapping office | 2 m, lidar |
-| [Himeji Castle, Japan](https://busse.github.io/isoscape/#lm-himeji-castle) | Elevation tiles (標高タイル) | GSI, Japan's national survey | 5 m, lidar |
-| [Machu Picchu, Peru](https://busse.github.io/isoscape/#lm-machu-picchu) | Copernicus DEM GLO-30 | European Space Agency / EU Copernicus | 30 m, radar from orbit |
-| [Sydney Opera House and Harbour Bridge](https://busse.github.io/isoscape/#lm-sydney-opera-house) | Terrain Tiles | Mapzen/Tilezen on AWS Open Data | 30 m here (SRTM) |
+| [Eiffel Tower, Paris](https://isoscape.chrisbusse.com/#lm-eiffel-tower) | RGE ALTI® | IGN, France's national mapping institute | 1 m, lidar-derived |
+| [Matterhorn and Zermatt](https://isoscape.chrisbusse.com/#lm-matterhorn) | swissALTI3D, with Copernicus over the border | swisstopo, Switzerland's federal mapping office | 2 m, lidar |
+| [Himeji Castle, Japan](https://isoscape.chrisbusse.com/#lm-himeji-castle) | Elevation tiles (標高タイル) | GSI, Japan's national survey | 5 m, lidar |
+| [Machu Picchu, Peru](https://isoscape.chrisbusse.com/#lm-machu-picchu) | Copernicus DEM GLO-30 | European Space Agency / EU Copernicus | 30 m, radar from orbit |
+| [Sydney Opera House and Harbour Bridge](https://isoscape.chrisbusse.com/#lm-sydney-opera-house) | Terrain Tiles | Mapzen/Tilezen on AWS Open Data | 30 m here (SRTM) |
 
 Click a landmark's name to open its map, then drag to pan and scroll to zoom.
 
 ## Eiffel Tower, Paris
 
-**[Open the map of the Eiffel Tower in the explorer →](https://busse.github.io/isoscape/#lm-eiffel-tower)**
+**[Open the map of the Eiffel Tower in the explorer →](https://isoscape.chrisbusse.com/#lm-eiffel-tower)**
 
 ![The Eiffel Tower and the Champ de Mars, with the Seine and the Trocadéro behind](world-eiffel-tower.jpg)
 
@@ -47,7 +47,7 @@ License: Licence Ouverte 2.0 (Etalab). Credit: *RGE ALTI® © IGN*.
 
 ## Matterhorn and Zermatt, Switzerland
 
-**[Open the map of the Matterhorn and Zermatt in the explorer →](https://busse.github.io/isoscape/#lm-matterhorn)**
+**[Open the map of the Matterhorn and Zermatt in the explorer →](https://isoscape.chrisbusse.com/#lm-matterhorn)**
 
 ![Zermatt in the valley, with the Matterhorn rising behind it](world-matterhorn.jpg)
 
@@ -66,7 +66,7 @@ License: swisstopo's terms for free geodata (OGD), commercial use included. Cred
 
 ## Himeji Castle, Japan
 
-**[Open the map of Himeji Castle in the explorer →](https://busse.github.io/isoscape/#lm-himeji-castle)**
+**[Open the map of Himeji Castle in the explorer →](https://isoscape.chrisbusse.com/#lm-himeji-castle)**
 
 ![Himeji Castle on its hill, inside its moats, with the city around it](world-himeji-castle.jpg)
 
@@ -83,7 +83,7 @@ processed* (地理院タイル（標高タイル）を加工して作成).
 
 ## Machu Picchu, Peru
 
-**[Open the map of Machu Picchu in the explorer →](https://busse.github.io/isoscape/#lm-machu-picchu)**
+**[Open the map of Machu Picchu in the explorer →](https://isoscape.chrisbusse.com/#lm-machu-picchu)**
 
 ![Aguas Calientes on the left, Huayna Picchu in front, and the citadel above the switchback road on the right](world-machu-picchu.jpg)
 
@@ -103,7 +103,7 @@ COPERNICUS by the European Union and ESA; all rights reserved*.
 
 ## Sydney Opera House and Harbour Bridge, Australia
 
-**[Open the map of Sydney in the explorer →](https://busse.github.io/isoscape/#lm-sydney-opera-house)**
+**[Open the map of Sydney in the explorer →](https://isoscape.chrisbusse.com/#lm-sydney-opera-house)**
 
 ![Sydney's CBD towers with the Opera House on Bennelong Point and the Harbour Bridge behind](world-sydney-opera-house.jpg)
 

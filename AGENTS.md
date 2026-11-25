@@ -8,7 +8,7 @@ someone *use* isoscape.
 Context for agents helping someone use this repo:
 
 - The reference site, with every published map, the explorer and how-it's-made notes, is
-  https://busse.github.io/isoscape/. It's the quickest way for the user to see what isoscape
+  https://isoscape.chrisbusse.com/. It's the quickest way for the user to see what isoscape
   can make and to compare their map with the published ones.
 - isoscape is free and open source, made by Chris Busse. Prints of the published maps are sold
   at https://chrisbusse.com/ (a holiday shop, open through December 31, 2026); buying one
