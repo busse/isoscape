@@ -3526,7 +3526,7 @@
    "orders": null,
    "rounds": 1,
    "waiting_on": "owner",
-   "decision": "Final draft rc3 passed the independent recheck (2026-11-25); the owner confirmed the redrawn Gaston sheet's look and chose the shorter title (16:09). Two text-only edits in work (title; the rain panel's 4:30 event). Waiting on the owner: the release decision and what release means here (explorer and story pages only; also sold; or hold). Branches feature/flood-surface and feature/flood-rain, unmerged. Record: drafts/richmond-floods/casestudy/.",
+   "decision": "Final draft rc3 passed the independent recheck (2026-11-25); the owner confirmed the Gaston sheet's look and the shorter title. The release decision is deferred by the owner until he has read the editorial (story-richmond-floods). Branches feature/flood-surface and feature/flood-rain, unmerged. Record: drafts/richmond-floods/casestudy/.",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": null,
@@ -3591,6 +3591,30 @@
     "2026-11-25: in work -> owner test",
     "2026-11-25: owner test -> live (owner: ship it all)",
     "2026-11-25: owner test -> live"
+   ]
+  },
+  "story-richmond-floods": {
+   "title": "Richmond's floods, drawn on the ground they covered: the editorial for the floods series",
+   "plate": null,
+   "kind": "story",
+   "stage": "outline",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "nothing",
+   "decision": "The owner (2026-11-25 16:12): move the content forward; the publication shape is deferred until he has read the editorial; it may interest people in the affected areas. Outline and first draft in work on branch story/richmond-floods (unlisted). Then: his read, an independent fact check, and the publication decision for story and sheets together. No outside parties contacted.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-25: rough draft -> outline"
    ]
   }
  }

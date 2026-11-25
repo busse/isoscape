@@ -285,3 +285,10 @@ Renders for this are in the branch's steps 55 to 58.
   title; "about 4:30, flooding reported"), the same art re-stamped as rc3.
 - Not yet answered: the release decision and what release means (explorer and story only,
   also sold, or hold).
+
+- **16:12, Chris:** "Move the content work forward and let me defer the publication shape
+  until I read the editorial. This one may be of interest artistically to those in the
+  impacted areas". The release decision waits on the editorial. An Opus 5.5 subagent started
+  on the outline and first full draft of the story (branch `story/richmond-floods`, steps
+  from 90), written for a reader new to all of it and for people who lived through these
+  floods: plain respect, neutral on blame, nothing beyond the sources, unlisted.
