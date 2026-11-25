@@ -47,6 +47,7 @@
  * address previews too; analytics still report this file's own path.
  */
 
+import { readFileSync } from 'node:fs'
 import type { BuildMeta } from './archive.ts'
 import type { Page } from './pages.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
@@ -69,45 +70,62 @@ export const MARK = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 12
   '<path d="M60 18 L100 41 L60 64 L20 41 Z" fill="#f2c879"/><path d="M20 41 L60 64 L60 104 L20 81 Z" fill="#ece7dc"/><path d="M100 41 L60 64 L60 104 L100 81 Z" fill="#c3bbac"/></g>' +
   '<g fill="#2c2b33"><circle cx="60" cy="18" r="4"/><circle cx="100" cy="41" r="4"/><circle cx="20" cy="41" r="4"/><circle cx="60" cy="64" r="4"/><circle cx="20" cy="81" r="4"/><circle cx="100" cy="81" r="4"/><circle cx="60" cy="104" r="4"/></g></svg>'
 
-/** The explorer's colors and type, light and dark; the static pages (static-pages.ts) use the same. */
-export const THEME_CSS = `:root {
-  --bg: #f4f2ed; --panel: #fbfaf7; --line: #e2ded5; --ink: #26252b; --dim: #77737a; --faint: #a7a2a6;
-  --accent: #2f6f8f; --accent-soft: #dcebf2; --stage: #e7e4dc; --chip: #efece5; --good: #3c7a4a; --bad: #a3473a; --warn: #b8860b;
-  font: 13px/1.45 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+/**
+ * The misfit design language (design/misfit/: the working-out-loud sites' tokens, shared with
+ * chrisbusse.com's palette). Read once, when this module loads; the explorer and the static pages
+ * both start from it, so one file sets every color, size and font.
+ */
+export const MISFIT_TOKENS = readFileSync(new URL('../design/misfit/tokens.css', import.meta.url), 'utf8')
+
+/** IBM Plex Sans and Plex Mono, the misfit type, for every page's head. */
+export const FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
+  '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">\n'
+
+/** The explorer's colors and type, light and dark, mapped onto the misfit tokens; the static pages (static-pages.ts) use the same. */
+export const THEME_CSS = `${MISFIT_TOKENS}
+:root {
+  --bg: var(--m-sheet); --panel: var(--m-paper); --line: var(--m-rule); --ink: var(--m-ink); --dim: var(--m-muted); --faint: var(--m-faint);
+  --accent: var(--m-link); --accent-soft: var(--m-accent); --stage: var(--m-sheet); --chip: var(--tan-200); --good: var(--sig-live); --bad: var(--sig-stop); --warn: var(--sig-draft);
+  --mono: var(--m-font-mono);
+  font: 13px/1.45 var(--m-font-sans);
   color-scheme: light dark;
 }
-@media (prefers-color-scheme: dark) {
-  :root { --bg: #15161b; --panel: #1b1d23; --line: #2b2e37; --ink: #e5e6ec; --dim: #9497a3; --faint: #646875;
-    --accent: #7fb6d4; --accent-soft: #22323d; --stage: #101115; --chip: #252831; --good: #7fc28f; --bad: #e08c7e; --warn: #f2c94c; }
-}
+@media (prefers-color-scheme: dark) { :root { --chip: #272b2e; } }
+/* The misfit components every page shares (design/misfit/README.md): labels, stamps, buttons, the sheet's grid, the link underlay. */
+.label { font: 500 var(--m-size-xs)/1.3 var(--m-font-mono); letter-spacing: var(--m-track-label); text-transform: uppercase; color: var(--m-muted); }
+.stamp { display: inline-block; font: 500 var(--m-size-2xs)/1.5 var(--m-font-mono); letter-spacing: .08em; text-transform: uppercase; padding: 0 5px; border: 1px solid currentColor; border-radius: var(--m-radius); color: var(--m-muted); white-space: nowrap; }
+.stamp.live { color: var(--sig-live); } .stamp.draft { color: var(--sig-draft); } .stamp.stop { color: var(--sig-stop); } .stamp.blue { color: var(--m-link); }
+.sheet { background-color: var(--m-sheet); background-image: linear-gradient(var(--m-grid-major) 1px, transparent 1px), linear-gradient(90deg, var(--m-grid-major) 1px, transparent 1px), linear-gradient(var(--m-grid) 1px, transparent 1px), linear-gradient(90deg, var(--m-grid) 1px, transparent 1px); background-size: calc(5 * var(--m-grid-step)) calc(5 * var(--m-grid-step)), calc(5 * var(--m-grid-step)) calc(5 * var(--m-grid-step)), var(--m-grid-step) var(--m-grid-step), var(--m-grid-step) var(--m-grid-step); }
+:focus-visible { outline: 2px solid var(--m-focus); outline-offset: 2px; }
 `
 
 /** The reading view's typography, shared with the static content pages. */
 export const PROSE_CSS = `.prose { font-size: 15.5px; line-height: 1.65; color: var(--ink); min-width: 0; overflow-wrap: anywhere; }
 /* A long URL, word or code span wraps inside the column instead of widening it (on a phone that made the page scroll sideways). Tables keep whole words and scroll in their own wrapper; code blocks scroll in their own box. */
-.prose h1 { font-size: 30px; line-height: 1.15; letter-spacing: -.02em; margin: 0 0 18px; font-weight: 650; }
-.prose h2 { font-size: 20px; letter-spacing: -.01em; margin: 2.2em 0 .5em; padding-top: .6em; border-top: 1px solid var(--line); font-weight: 650; }
+.prose h1 { font-size: var(--m-size-2xl); line-height: 1.12; letter-spacing: -.02em; margin: 0 0 18px; font-weight: 600; text-wrap: balance; }
+.prose h2 { font-size: var(--m-size-xl); line-height: 1.2; letter-spacing: -.01em; margin: 2.2em 0 .5em; padding: .5em 0 .35em; border-top: 1px solid var(--line); box-shadow: inset 0 -4px 0 -2px transparent; font-weight: 600; text-wrap: balance; }
+.prose h2::after { content: ''; display: block; width: 48px; height: 4px; background: var(--m-blue); margin-top: .45em; }
 .prose h3 { font-size: 16px; margin: 1.6em 0 .4em; }
-.prose h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--dim); margin: 1.5em 0 .3em; }
+.prose h4 { font: 500 var(--m-size-xs)/1.3 var(--m-font-mono); text-transform: uppercase; letter-spacing: var(--m-track-label); color: var(--dim); margin: 1.6em 0 .4em; }
 .prose h2, .prose h3 { scroll-margin-top: 16px; }
 .prose p, .prose ul, .prose ol, .prose blockquote, .prose .table, .prose pre { margin: 0 0 1em; }
 .prose ul, .prose ol { padding-left: 1.3em; }
 .prose li { margin: .25em 0; }
 .prose li::marker { color: var(--faint); }
-.prose a { color: var(--accent); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); text-underline-offset: 2px; }
-.prose a:hover { text-decoration-color: var(--accent); }
+.prose a { color: var(--m-link); text-decoration: none; background: linear-gradient(var(--m-underlay), var(--m-underlay)) no-repeat 0 100% / 100% 2px; transition: background-size .2s cubic-bezier(.2, 0, .1, 1); }
+.prose a:hover { color: var(--m-link-hover); background-size: 100% 100%; }
 .prose a.buy { font-weight: 600; white-space: nowrap; }
-.prose code { font: .86em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--chip); padding: .05em .25em; border-radius: 4px; }
+.prose code { font: .86em var(--m-font-mono); background: var(--chip); padding: .05em .25em; border-radius: var(--m-radius); }
 .prose pre { max-height: none; font-size: 12.5px; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
 .prose pre code { background: none; padding: 0; font-size: inherit; }
-.prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 3px solid var(--accent); background: var(--bg); border-radius: 0 6px 6px 0; }
+.prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 4px solid var(--m-blue); background: var(--bg); border-radius: 0; }
 .prose blockquote p:last-child { margin-bottom: 0; }
 .prose img { display: block; max-width: 100%; height: auto; margin: 1.4em auto; }
 .prose hr { border: none; border-top: 1px solid var(--line); margin: 2em 0; }
 .prose .table { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
 .prose table { font-size: 13.5px; font-variant-numeric: normal; overflow-wrap: normal; }
 .prose th, .prose td { text-align: left; white-space: normal; vertical-align: top; padding: 6px 10px 6px 0; color: var(--ink); }
-.prose th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--dim); border-bottom: 1.5px solid var(--line); }
+.prose th { font: 500 var(--m-size-2xs)/1.4 var(--m-font-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--dim); border-bottom: 2px solid var(--m-rule-ink); }
 .prose td:first-child { color: var(--ink); font-weight: 500; }
 .prose .source { margin-top: 3em; padding-top: 1em; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--faint); }
 `
@@ -177,7 +195,7 @@ export const renderExplorer = (builds: readonly BuildMeta[], pages: readonly Pag
 ${site.analytics ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${escAttr(site.analytics.ga)}"></script>
 <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments)} gtag('js', new Date()); gtag('config', '${escAttr(site.analytics.ga)}', { send_page_view: false })</script>
 ` : ''}<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(MARK)}">
-${siteTags(site, builds.length)}${site.sitemap ? '<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">\n' : ''}${site.plain?.length ? `<noscript><style>#stage, #info, #page, #filter, #list, #mbar, #mwarn { display: none !important; } #home { display: block !important; } main { grid-template-rows: 1fr !important; } #plain > summary { color: var(--ink); }</style></noscript>
+${FONTS}${siteTags(site, builds.length)}${site.sitemap ? '<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">\n' : ''}${site.plain?.length ? `<noscript><style>#stage, #info, #page, #filter, #list, #mbar, #mwarn { display: none !important; } #home { display: block !important; } main { grid-template-rows: 1fr !important; } #plain > summary { color: var(--ink); }</style></noscript>
 ` : ''}<style>
 ${THEME_CSS}* { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); }
@@ -418,17 +436,150 @@ ${PROSE_CSS}${FIGURE_CSS}${LIGHTBOX_CSS}${COMPARE_CSS}/* Wide figures run past t
 #info .body.stories { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 14px 24px 22px; }
 ${STORY_CSS}${TT_CSS}.doc .back[hidden] { display: none; }
 #page:focus { outline: none; }
+
+/* ==== misfit register (design/misfit/README.md) ============================================ */
+/* Shape: square corners, hairlines, one filled action per screen. */
+#nav a.shop, #filter, .build, .thumb, .swatch, .tag, .yrb, #toolbar button, #toolbar select, #toolbar .zoom, #loading, #info .bar a.buy,
+.hm .banner, .hm .btn, #article .buyp .btn, .hero, .card, .card img, .doc .back, #timeline button, #timeline a.ttgo, #info .bar .tabs button, pre, kbd { border-radius: var(--m-radius) !important; }
+.thumb, .swatch, .card img { border-radius: 0 !important; }
+time, .build .sub, #toolbar .zoom, #loading, td, .tag, .yrb, #timeline button, kbd, .mono, .story code, #nav footer, .hm .more, #info h3 { font-family: var(--m-font-mono); }
+.tag { font-size: 10px; letter-spacing: .06em; text-transform: uppercase; padding: 0 5px; background: none; border: 1px solid var(--line); color: var(--dim); }
+.tag.yr { background: none; border-color: var(--m-blue); color: var(--ink); }
+.tag.feat { background: none; border-color: var(--warn); color: var(--warn); }
+.tag.ab { background: var(--m-ink); border-color: var(--m-ink); color: var(--m-paper); }
+#info h3, #toc h3 { font: 500 var(--m-size-xs)/1.3 var(--m-font-mono); letter-spacing: var(--m-track-label); text-transform: uppercase; color: var(--dim); }
+#list h2 { font: 600 12.5px/1.3 var(--m-font-sans); letter-spacing: 0; text-transform: none; color: var(--ink); }
+#list h2 small { font: 10.5px/1.4 var(--m-font-mono); }
+dd { font-variant-numeric: tabular-nums; }
+#mwarn:not([hidden]) { background: var(--m-paper) !important; color: var(--ink) !important; border-left: 4px solid var(--sig-draft); border-bottom: 1px solid var(--line); }
+
+/* The map sits on the drafting sheet. */
+#stage { background-color: var(--m-sheet); background-image: linear-gradient(var(--m-grid-major) 1px, transparent 1px), linear-gradient(90deg, var(--m-grid-major) 1px, transparent 1px), linear-gradient(var(--m-grid) 1px, transparent 1px), linear-gradient(90deg, var(--m-grid) 1px, transparent 1px); background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px; }
+#toolbar button, #toolbar select, #toolbar .zoom { background: var(--m-paper); border-color: var(--line); font-size: 12px; }
+#toolbar button.on { background: var(--m-ink); border-color: var(--m-ink); color: var(--m-paper); }
+#timeline button.on, .yrb.a, #info .bar .tabs button.on { background: var(--m-ink); border-color: var(--m-ink); color: var(--m-paper); }
+#info .bar .tabs button.on { font-weight: 500; }
+#info .bar a.buy, #timeline a.ttgo { background: var(--m-ink); color: var(--m-paper); }
+#info .bar a { color: var(--m-link); }
+.build.a { background: var(--m-accent); border-color: var(--m-blue); }
+.build.b { border-color: var(--m-blue); }
+
+/* ---- the column: masthead, the page groups, the map archive, a short footer ---------------- */
+#nav { background: var(--m-paper); }
+#nav header.mast { display: flex; align-items: center; gap: 9px; padding: 14px 16px 12px; border-bottom: 1px solid var(--line); }
+#nav header.mast a.brand { display: flex; align-items: center; gap: 9px; color: inherit; text-decoration: none; }
+#nav header.mast .mk { width: 26px; height: 26px; flex: none; }
+#nav header.mast .mk svg { width: 100%; height: 100%; display: block; }
+#nav header.mast b { font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+#nav header.mast .stamp { margin-left: auto; }
+#nav a.shop { margin: 12px 12px 4px; padding: 8px 11px; background: var(--m-paper); color: var(--ink); border: 1px solid var(--m-rule-ink); }
+#nav a.shop b { font-size: 12.5px; font-weight: 600; }
+#nav a.shop span { font: 10.5px/1.4 var(--m-font-mono); color: var(--dim); opacity: 1; }
+#nav a.shop:hover { background: var(--m-accent); filter: none; }
+#pages { padding: 6px 8px 10px; flex: 0 1 auto; }
+#pages a.home { margin: 4px 0 2px; }
+#pages details { border-top: 1px solid var(--line); }
+#pages details:first-of-type { border-top: none; }
+#pages summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 9px 8px 5px; font: 500 var(--m-size-2xs)/1.3 var(--m-font-mono); letter-spacing: var(--m-track-label); text-transform: uppercase; color: var(--dim); }
+#pages summary::-webkit-details-marker { display: none; }
+#pages summary::before { content: "+"; width: 10px; color: var(--faint); }
+#pages details[open] > summary::before { content: "−"; }
+#pages summary:hover { color: var(--ink); }
+#pages summary small { margin-left: auto; color: var(--faint); letter-spacing: 0; }
+#pages a { padding: 4px 8px 4px 24px; border-radius: 0; font-size: 13px; line-height: 1.35; border-left: 2px solid transparent; }
+#pages a::before { content: none; }
+#pages a.home { padding-left: 8px; font-weight: 500; }
+#pages a:hover { background: var(--chip); }
+#pages a.on { background: var(--m-accent); color: var(--ink); font-weight: 500; border-left-color: var(--m-link); }
+#archive { display: flex; flex-direction: column; min-height: 0; flex: 0 0 auto; border-top: 1px solid var(--m-rule-ink); }
+#archive.open { flex: 1 1 200px; }
+#archToggle { display: flex; align-items: center; gap: 8px; width: 100%; padding: 10px 16px; border: none; background: none; cursor: pointer; text-align: left; }
+#archToggle::before { content: "+"; width: 10px; color: var(--faint); font: 13px var(--m-font-mono); }
+#archive.open #archToggle::before { content: "−"; }
+#archToggle:hover .label { color: var(--ink); }
+#archToggle .count { margin-left: auto; font: 11px var(--m-font-mono); color: var(--faint); }
+#archBody { display: flex; flex-direction: column; min-height: 0; flex: 1; }
+#archBody[hidden] { display: none; }
+#archBody .note { margin: 0 16px 8px; font-size: 11.5px; color: var(--dim); line-height: 1.4; }
+#filter { margin: 0 12px 8px; background: var(--m-paper); font: 12px var(--m-font-mono); }
+#list { flex: 1 1 auto; min-height: 120px; }
+#list summary { font: 500 var(--m-size-2xs)/1.3 var(--m-font-mono); letter-spacing: var(--m-track-label); text-transform: uppercase; color: var(--dim); }
+.hist { display: block; width: calc(100% - 16px); margin: 0 8px 8px; padding: 3px 8px; border: 1px dashed var(--line); background: none; text-align: left; cursor: pointer; font: 11px var(--m-font-mono); color: var(--dim); }
+.hist:hover { border-color: var(--m-blue); color: var(--ink); }
+#nav footer { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 11px; line-height: 1.5; }
+#nav footer button { border: 1px solid var(--line); background: none; cursor: pointer; padding: 0 6px; font: 11px var(--m-font-mono); color: var(--dim); }
+#nav footer button:hover { border-color: var(--m-blue); color: var(--ink); }
+#nav footer .keys { display: none; }
+
+/* ---- keyboard help: a panel, not a footer ------------------------------------------------ */
+#help { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; background: rgba(22, 24, 26, .35); padding: 20px; }
+#help[hidden] { display: none; }
+#help .panel { width: min(460px, 100%); background: var(--m-paper); border: 1px solid var(--m-rule-ink); padding: 18px 22px 20px; }
+#help header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 4px solid var(--m-blue); }
+#help header b { font-size: 16px; font-weight: 600; }
+#help header button { margin-left: auto; border: none; background: none; font-size: 20px; line-height: 1; cursor: pointer; color: var(--dim); }
+#help dl { grid-template-columns: max-content 1fr; gap: 6px 16px; font-size: 13px; }
+#help dt { color: var(--ink); white-space: nowrap; }
+#help dd { color: var(--dim); font-family: inherit; }
+#help p { margin: 14px 0 0; font-size: 12px; color: var(--dim); }
+
+/* ---- the front page ---------------------------------------------------------------------- */
+#home { background: var(--m-sheet); }
+.hm { padding-top: 26px; }
+.hm .banner { background: var(--m-paper); border: 1px solid var(--line); border-left: 4px solid var(--m-blue); }
+.hm .btn { background: var(--m-paper); color: var(--ink); border: 1px solid var(--m-rule-ink); font-weight: 500; }
+.hm .btn:hover { background: var(--m-accent); filter: none; }
+.hm .btn.ghost { background: none; color: var(--m-link); border-color: var(--line); }
+.hm .banner .btn, .hero .acts .btn:first-child { background: var(--m-ink); color: var(--m-paper); border-color: var(--m-ink); }
+#article .buyp .btn { background: var(--m-ink); color: var(--m-paper); font-weight: 500; }
+.hm .eyebrow { margin: 0 0 8px; }
+.hm h1 { font-size: 36px; font-weight: 600; letter-spacing: -.025em; text-wrap: balance; }
+.hm .intro { font-size: 16.5px; color: var(--m-ink-2); }
+.hero { border-color: var(--line); }
+.hero > a.pic { background: var(--m-sheet); }
+.hero > a.pic img { transition: none; }
+.hero > a.pic:hover img { transform: none; }
+.hero h2 { font-size: 21px; font-weight: 600; }
+.hero .years a { font-family: var(--m-font-mono); font-weight: 400; border-radius: 0; }
+.hm section.sec header { border-bottom: none; padding-bottom: 6px; margin-bottom: 16px; box-shadow: 0 4px 0 0 var(--m-blue); }
+.hm section.sec h2 { font-size: 19px; font-weight: 600; }
+.card { border-color: var(--line); padding: 0 0 10px; gap: 8px; }
+.card img { aspect-ratio: 16 / 9; }
+.card b, .card span { padding: 0 10px; }
+.card:hover { border-color: var(--m-link); }
+.hm .more { border-top: 2px solid var(--m-rule-ink); }
+.hm .more a { color: var(--m-link); }
+
+/* ---- reading view and phones --------------------------------------------------------------- */
+.doc .back { background: var(--m-paper); color: var(--m-link); border-color: var(--line); font: 11.5px var(--m-font-mono); }
+#toc a.on { border-left-color: var(--m-link); color: var(--ink); }
+@media (max-width: 760px) {
+  #mbar { background: var(--m-paper); }
+  #mbar button { border-radius: var(--m-radius); background: var(--m-paper); }
+  #mbar .mshop { background: var(--m-paper); color: var(--ink); border: 1px solid var(--m-rule-ink); border-radius: var(--m-radius); font-weight: 500; }
+  #archive.open { flex: 1 1 auto; }
+  .hm h1 { font-size: 28px; }
+}
 </style>
 </head>
 <body>
 <nav id="nav">
-  <header>${site.home ? '<a class="brand" href="#home" title="Front page">' : ''}<b>isoscape</b><span>explorer</span>${site.home ? '</a>' : ''}<span class="count" id="count"></span></header>${site.shop ? `
+  <header class="mast"><a class="brand" href="${site.home ? '#home' : '#'}" title="Front page"><span class="mk">${MARK}</span><b>isoscape</b></a><span class="stamp blue" title="One of Chris Busse's working-out-loud sites: the drafts, the changes and the numbers are all here">Working out loud</span></header>${site.shop ? `
   <a class="shop" href="${escAttr(site.shop.url)}" target="_blank" rel="noopener"><b>${escHtml(shopCta(site) ?? 'Shop prints')} ↗</b><span>${escHtml(site.shop.label)}</span></a>` : ''}
   <div id="pages"></div>
-  <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false">
-  <div id="list"></div>
-  <footer><span class="keys">Click to view · <kbd>⌥</kbd>-click to compare<br><kbd>↑</kbd><kbd>↓</kbd> builds · <kbd>F</kbd> fit · <kbd>1</kbd> 1:1 · <kbd>C</kbd> compare · <kbd>L</kbd> copy link<br><kbd>I</kbd> info · <kbd>M</kbd> how it was made · <kbd>Esc</kbd> back<br><kbd>[</kbd><kbd>]</kbd> step through a dated series<br></span>By Chris Busse · <a href="#/about/contact">Contact</a> · <a href="#/changes">Changes</a></footer>
+  <div id="archive"><button id="archToggle" aria-expanded="false" aria-controls="archBody" title="Every map and every build of it (/ to filter)"><span class="label">Map archive</span><span class="count" id="count"></span></button>
+    <div id="archBody" hidden><p class="note">Every map, newest build first. Older builds of the same view are under History.</p>
+    <input id="filter" placeholder="Filter by region, palette, note, commit…" spellcheck="false" aria-label="Filter the map archive">
+    <div id="list"></div></div></div>
+  <footer>By Chris Busse · <a href="#/about/contact">Contact</a> · <a href="#/changes">Changes</a><button id="helpBtn" title="Keyboard shortcuts (?)">? keys</button></footer>
 </nav>
+<div id="help" hidden role="dialog" aria-modal="true" aria-labelledby="helpTitle"><div class="panel">
+  <header><b id="helpTitle">Keyboard</b><span class="label">in the map viewer</span><button id="helpClose" aria-label="Close">×</button></header>
+  <dl><dt><kbd>↑</kbd> <kbd>↓</kbd></dt><dd>Step through the builds</dd><dt><kbd>[</kbd> <kbd>]</kbd></dt><dd>Step through the years of a dated series</dd>
+  <dt><kbd>F</kbd> · <kbd>1</kbd></dt><dd>Fit the map · actual size</dd><dt><kbd>C</kbd> · <kbd>⌥</kbd>-click</dt><dd>Compare two builds</dd>
+  <dt><kbd>I</kbd> · <kbd>M</kbd></dt><dd>Details · how this view was made</dd><dt><kbd>L</kbd></dt><dd>Copy a link to this view</dd>
+  <dt><kbd>/</kbd></dt><dd>Filter the map archive</dd><dt><kbd>Esc</kbd></dt><dd>Back</dd><dt><kbd>?</kbd></dt><dd>This panel</dd></dl>
+  <p>Drag to pan, scroll to zoom, double-click to fit.</p></div></div>
 <div id="scrim"></div>
 <main>
   <div id="mbar"><button id="menu" title="Maps and pages" aria-label="Maps and pages">☰</button><a class="brand" href="${site.home ? '#home' : '#'}"><b>isoscape</b></a>${site.shop ? `<a class="mshop" href="${escAttr(site.shop.url)}" target="_blank" rel="noopener">Shop prints ↗</a>` : ''}</div>
@@ -522,9 +673,11 @@ ${STORY_CSS}${TT_CSS}.doc .back[hidden] { display: none; }
   // when the page was written (buyLinks in social.ts); nothing when its region (or, for a dated
   // build, its region and year) is not on sale.
   const buyOf = (b) => (b && site.buy && ((b.time && site.buy.regions[b.region + ':' + b.time.year]) || site.buy.regions[b.region])) || null
+  state.hist = {}
   const renderList = () => {
+    syncArchive()
     const list = visible()
-    $('count').textContent = builds.length + (builds.length === 1 ? ' build' : ' builds')
+    $('count').textContent = new Set(builds.map((b) => b.region + (b.time ? ':' + b.time.year : ''))).size + ' views · ' + builds.length + (builds.length === 1 ? ' build' : ' builds')
     const groups = new Map()
     for (const b of list) {
       if (!groups.has(b.region)) groups.set(b.region, [])
@@ -556,7 +709,13 @@ ${STORY_CSS}${TT_CSS}.doc .back[hidden] { display: none; }
         return '<h2>' + (heroIndex(region) >= 0 ? '<span class="tag feat">featured</span> ' : '') + esc(titleOf(items[0])) + '<small>' + esc(region) + ' · ' + items.length + ' years</small></h2>' + row(pick, false) +
           '<div class="yrs">' + items.map((b) => '<button class="yrb' + (state.a === b.id ? ' a' : '') + (state.compare && state.b === b.id ? ' b' : '') + '" data-id="' + esc(b.id) + '" title="' + esc(label(b)) + '">' + esc(b.time.year) + '</button>').join('') + '</div>'
       }
-      return (solo ? '' : '<h2>' + (heroIndex(region) >= 0 ? '<span class="tag feat">featured</span> ' : '') + esc(titleOf(items[0])) + '<small>' + esc(region) + '</small></h2>') + items.map((b) => row(b, solo)).join('')
+      // One build per view: the newest (or the one on show), the rest under History unless a filter is typed.
+      const head = solo ? '' : '<h2>' + (heroIndex(region) >= 0 ? '<span class="tag feat">featured</span> ' : '') + esc(titleOf(items[0])) + '<small>' + esc(region) + '</small></h2>'
+      if (items[0].time || state.filter.trim() !== '' || state.hist[region]) return head + items.map((b) => row(b, solo)).join('')
+      const sorted = [...items].sort((x, y) => y.createdAt.localeCompare(x.createdAt))
+      const lead = sorted.find((b) => b.id === state.a || (state.compare && b.id === state.b)) || sorted[0]
+      const older = sorted.length - 1
+      return head + row(lead, true) + (older ? '<button class="hist" data-region="' + esc(region) + '">History · ' + older + ' older build' + (older === 1 ? '' : 's') + '</button>' : '')
     }
     let html = ''
     if (!home) for (const [region, items] of groups) html += group(region, items)
@@ -588,6 +747,8 @@ ${STORY_CSS}${TT_CSS}.doc .back[hidden] { display: none; }
     // Remember a section folded or unfolded by hand.
     const sum = e.target.closest('summary')
     if (sum) { const d = sum.parentElement; state.secOpen[d.dataset.i] = !d.open; return }
+    const h = e.target.closest('.hist')
+    if (h) { state.hist[h.dataset.region] = true; renderList(); return }
     const el = e.target.closest('.build, .yrb')
     if (!el) return
     closeDrawer()
@@ -817,6 +978,22 @@ ${STORY_CSS}${TT_CSS}.doc .back[hidden] { display: none; }
   $('toggleInfo').addEventListener('click', () => toggleInfo())
   // Phones: the build list is a drawer behind the menu button; the info panel starts folded.
   const closeDrawer = () => document.body.classList.remove('navopen')
+  // The map archive (every build, for working): folded on the front page and the reading pages,
+  // open while a map is on show, unless the reader has opened or folded it by hand.
+  state.archUser = null
+  const syncArchive = () => {
+    const open = state.archUser ?? (!state.home && state.page === null)
+    $('archive').classList.toggle('open', open)
+    $('archBody').hidden = !open
+    $('archToggle').setAttribute('aria-expanded', String(open))
+  }
+  $('archToggle').addEventListener('click', () => { state.archUser = !$('archive').classList.contains('open'); syncArchive() })
+  const openArchive = () => { state.archUser = true; syncArchive() }
+  // Keyboard help, as a panel.
+  const help = (on) => { $('help').hidden = !on; if (on) $('helpClose').focus() }
+  $('helpBtn').addEventListener('click', () => help(true))
+  $('helpClose').addEventListener('click', () => help(false))
+  $('help').addEventListener('click', (e) => { if (e.target === $('help')) help(false) })
   $('menu').addEventListener('click', () => document.body.classList.toggle('navopen'))
   $('scrim').addEventListener('click', closeDrawer)
   if (window.matchMedia('(max-width: 760px)').matches) { $('info').classList.add('closed'); $('toggleInfo').textContent = '▸' }
@@ -1069,11 +1246,36 @@ ${STORY_CSS}${TT_CSS}.doc .back[hidden] { display: none; }
   // ---- pages and routing ----------------------------------------------------------------------
   // #/<slug> and #/<slug>/<section> open a page; anything else is a build selection.
   let routed = null
+  // The pages in the column: in the groups the config names (home.nav: a title and its pages, each
+  // with a short label), only the group holding the open page unfolded; a listed page no group
+  // names goes under "More". Without home.nav, one flat list as before.
+  state.navOpen = {}
+  const pageLink = (p, text) => '<a href="#/' + esc(p.slug) + '"' + (state.page === p.slug ? ' class="on"' : '') +
+    (p.summary ? ' title="' + esc(p.summary) + '"' : '') + '>' + esc(text || p.title) + '</a>'
   const renderPages = () => {
     $('pages').hidden = listed.length === 0 && !home
-    $('pages').innerHTML = (home ? '<a class="home' + (state.home ? ' on' : '') + '" href="#home">Front page</a>' : '') + listed.map((p) => '<a href="#/' + esc(p.slug) + '"' + (state.page === p.slug ? ' class="on"' : '') +
-      (p.summary ? ' title="' + esc(p.summary) + '"' : '') + '>' + esc(p.title) + '</a>').join('')
+    const front = home ? '<a class="home' + (state.home ? ' on' : '') + '" href="#home">Front page</a>' : ''
+    const nav = home && home.nav
+    if (!nav) { $('pages').innerHTML = front + listed.map((p) => pageLink(p)).join(''); return }
+    const named = new Set()
+    const groups = nav.map((g) => {
+      const items = (g.pages || []).map((it) => ({ p: pageBySlug.get(it.page), label: it.label })).filter((x) => x.p && !x.p.unlisted)
+      for (const x of items) named.add(x.p.slug)
+      return { title: g.title, items }
+    })
+    const rest = listed.filter((p) => !named.has(p.slug)).map((p) => ({ p, label: '' }))
+    if (rest.length) groups.push({ title: 'More', items: rest })
+    $('pages').innerHTML = front + groups.filter((g) => g.items.length).map((g, i) => {
+      const holds = g.items.some((x) => x.p.slug === state.page)
+      const open = holds || (state.navOpen[g.title] ?? false)
+      return '<details data-g="' + esc(g.title) + '"' + (open ? ' open' : '') + '><summary>' + esc(g.title) + '<small>' + g.items.length + '</small></summary>' +
+        g.items.map((x) => pageLink(x.p, x.label)).join('') + '</details>'
+    }).join('')
   }
+  $('pages').addEventListener('click', (e) => {
+    const sum = e.target.closest('summary')
+    if (sum) { const d = sum.parentElement; state.navOpen[d.dataset.g] = !d.open }
+  })
   const markToc = () => {
     const page = $('page')
     let current = null
@@ -1331,6 +1533,9 @@ ${STORY_CSS}${TT_CSS}.doc .back[hidden] { display: none; }
   document.addEventListener('keydown', (e) => {
     if (e.target === $('filter')) { if (e.key === 'Escape') e.target.blur(); return }
     if (e.metaKey || e.ctrlKey || e.altKey) return
+    if (!$('help').hidden) { if (e.key === 'Escape' || e.key === '?') { help(false); e.preventDefault() } return }
+    if (e.key === '?') { help(true); e.preventDefault(); return }
+    if (e.key === '/') openArchive()
     if (state.home) {
       if (e.key === '/') { $('filter').focus(); e.preventDefault() }
       return

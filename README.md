@@ -2,7 +2,7 @@
 
 Isometric dot-and-line views of real places, built from open map data.
 
-See the maps at [busse.github.io/isoscape](https://busse.github.io/isoscape/) · The shop,
+See the maps at [isoscape.chrisbusse.com](https://isoscape.chrisbusse.com/) · The shop,
 which supports the work: [chrisbusse.com](https://chrisbusse.com/).
 
 A sibling of [dotscene](https://github.com/busse/dotscene): the same visual language (inked
@@ -138,7 +138,7 @@ To check every page's preview tags, in an output directory or on the live site:
 
 ```sh
 python3 tools/check/previews.py out/
-python3 tools/check/previews.py https://busse.github.io/isoscape/
+python3 tools/check/previews.py https://isoscape.chrisbusse.com/
 ```
 
 It lists each page with a missing tag, a relative URL, an image that is not served (or not in
@@ -269,51 +269,66 @@ page as canonical, and link to it. `index.html` lists every static page in a fol
 "Every map and page as a plain web page" at the foot of the front page, and without script shows
 only that. Pages of regions or content pages that are gone are removed from `m/` and `p/`.
 
-**Submitting the sitemap.** A GitHub Pages project site lives under a path
-(`https://busse.github.io/isoscape/`) and cannot serve the host's root `robots.txt`, so no
-`robots.txt` can point to the sitemap. Every page names it in its head
-(`<link rel="sitemap" href="sitemap.xml">`), but search engines do not rely on that: the site's
-owner must submit `https://busse.github.io/isoscape/sitemap.xml` once in
-[Google Search Console](https://search.google.com/search-console) (add the URL-prefix property
-`https://busse.github.io/isoscape/`, verify it with the HTML-file or meta-tag method, then
-Sitemaps → Add), and in Bing Webmaster Tools if wanted. After that, each publish updates it.
+**Submitting the sitemap.** The site has its host to itself, so `robots.txt` at
+https://isoscape.chrisbusse.com/robots.txt names the sitemap, and every page names it in its head
+(`<link rel="sitemap" href="sitemap.xml">`). Search engines find it from there, but submitting
+`https://isoscape.chrisbusse.com/sitemap.xml` once in
+[Google Search Console](https://search.google.com/search-console) gets it read sooner (add the
+domain or URL-prefix property `https://isoscape.chrisbusse.com/`, verify it, then Sitemaps → Add),
+and in Bing Webmaster Tools if wanted. After that, each publish updates it.
 
 ### Publishing the site
 
-The live site, https://busse.github.io/isoscape/, is GitHub Pages serving the root of this
-repo's `gh-pages` branch (Settings → Pages: branch `gh-pages`, folder `/`). A push to
-`gh-pages` deploys it in a minute or two. Nothing else publishes it: there is no Actions
-workflow and no `docs/` site.
+The live site, https://isoscape.chrisbusse.com/, is a Cloudflare Pages project, `isoscape`, in
+Chris's Cloudflare account. Pages builds nothing: it serves the root of this repo's `cloudflare`
+branch, and deploys each push to it in a minute or two. A push to `cf-preview` deploys a preview at
+`https://cf-preview.isoscape.pages.dev/` first. The DNS record is a CNAME, `isoscape` →
+`isoscape.pages.dev`, at Network Solutions, where chrisbusse.com's DNS lives.
 
-`gh-pages` is a history of the built site, one commit per publish ("Explorer: …"): `index.html`,
-`p/`, `m/`, `s/`, `sitemap.xml`, `.nojekyll`, and `builds/`, the build folders the pages show
-(SVG, thumbnail, preview images, `meta.json`). Older builds of a view stay there, so share links
-to them keep working. The builds are not in `main`: `out/` is ignored, and each machine's
-`out/builds/` holds only what was built there. The site's own `builds/` is the record of what
-is live.
+`cloudflare` is the built site: `index.html`, `p/`, `m/`, `s/`, `sitemap.xml`, `robots.txt`, and
+`builds/`, the build folders the pages show (SVG, thumbnail, preview images, `meta.json`). Older
+builds of a view stay, so share links to them keep working. The builds are not in `main`: `out/`
+is ignored, and each machine's `out/builds/` holds only what was built there. The site's own
+`builds/` is the record of what is live.
 
-To publish, from an up-to-date `main` (`git pull`), with an up-to-date checkout of `gh-pages`
-beside it (here `../isoscape-site`, made with `git worktree add ../isoscape-site gh-pages` or
-a clone of that branch):
+**Files over 25 MiB.** Pages serves nothing bigger, and the largest drawings are (Gwynn's Island
+is 58 MB). Each such file lives in the R2 bucket `misfit-isoscape-maps` under the same path
+(`builds/<id>/image.svg`), and is left out of the branch. The Pages Function in
+`cloudflare/functions/` serves it from R2 (the project binds the bucket as `MAPS`), and
+`_routes.json` sends only those paths to the function, so every other file stays a plain static
+file. `tools/site/cloudflare.py <site>` writes `_routes.json`, `_headers`, `robots.txt` and the
+function into a built site, and prints the paths that must be in R2. Upload a new one in the
+Cloudflare dashboard (R2 → misfit-isoscape-maps → drag the `builds` folder holding it).
+
+To publish, from an up-to-date `main` (`git pull`), with an up-to-date checkout of `cloudflare`
+beside it (here `../isoscape-site`):
 
 1. Copy any new build folders the change needs from `out/builds/` into
    `../isoscape-site/builds/`. A change to pages or `isoscape.config.json` needs none.
 2. `node bin/isoscape.js explorer --out ../isoscape-site`. It lists the builds in the site's
    own `builds/`, and rewrites `index.html`, `p/`, `m/`, `s/` and `sitemap.xml` from this
    checkout's pages and config.
-3. Check it: `python3 tools/check/previews.py ../isoscape-site/` and
+3. `python3 tools/site/cloudflare.py ../isoscape-site`. Put any file it lists that is not yet in
+   R2 there, and keep it out of the commit (`git rm --cached` it).
+4. Check it: `python3 tools/check/previews.py ../isoscape-site/` and
    `PLAYWRIGHT_CORE=<dir> node tools/check/browser.mjs ../isoscape-site/`, and look at what
-   changed in a browser, desktop and phone-sized.
-4. In `../isoscape-site`, `git status` should show only what the change meant to touch.
-   Commit ("Explorer: <what changed>") and push `gh-pages`. Then run
-   `python3 tools/check/previews.py https://busse.github.io/isoscape/` once it is live.
+   changed in a browser, desktop and phone-sized. For a bigger change, push to `cf-preview`
+   first and look there.
+5. In `../isoscape-site`, `git status` should show only what the change meant to touch.
+   Commit ("Explorer: <what changed>") and push `cloudflare`. Then run
+   `python3 tools/check/previews.py https://isoscape.chrisbusse.com/` once it is live.
+
+**The old address.** Until November 25, 2026 the site was GitHub Pages at
+https://busse.github.io/isoscape/ (the `gh-pages` branch). That branch now holds forwarding
+pages, written by `tools/site/forward.py`: each sends its visitor to the same path on the new
+domain, keeping the `#route`, and keeps its link-preview tags so links shared before the move
+still show their card. Its pictures and build files stay where they were, for the same reason.
+Rerun `forward.py` after a publish that adds pages, so a new page's old address forwards too.
 
 `tools/site.py <dest>` assembles a site from scratch: it copies the newest build of every view
 from `out/builds/` and moves every other build in `<dest>/builds/` out to
 `<dest>/../_site_trash_<id>`. Run it only on a machine whose `out/builds/` holds every build
 now live. Otherwise it drops views and old share links from the site, or rolls back a redraw.
-(On November 18, 2026 the copy of this repo in Chris's `ISO-TEST` folder lacked 28 of the 113
-live builds, among them the current Richmond 1925 and 1950.)
 
 ### Adding a page
 

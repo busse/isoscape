@@ -104,6 +104,8 @@ export interface HomeConfig {
   readonly stories?: { readonly title: string; readonly blurb?: string; readonly pages: readonly string[] }
   /** Links under the sections: label and href (a page as '#/<slug>', or a URL). */
   readonly links?: readonly { readonly label: string; readonly href: string }[]
+  /** The explorer's column: groups of pages, each a title and its pages (slug and a short label), in order. */
+  readonly nav?: readonly { readonly title: string; readonly pages: readonly { readonly page: string; readonly label?: string }[] }[]
 }
 
 /** A site URL as given, made to end in '/'; undefined when empty. Throws if not http(s). */

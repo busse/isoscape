@@ -12,7 +12,7 @@ const build = (id: string, year?: number): BuildMeta => ({
 test('the explorer offers a link to the current view, and its script parses', () => {
   const html = renderExplorer([build('a', 1900), build('b', 1901)])
   assert.match(html, /<button id="link"[^>]*>Link<\/button>/)
-  assert.match(html, /<kbd>L<\/kbd> copy link/)
+  assert.match(html, /<kbd>L<\/kbd><\/dt><dd>Copy a link to this view/)
   const script = html.match(/<script>\n([\s\S]*?)<\/script>/)
   assert.ok(script)
   assert.doesNotThrow(() => new Function(script[1]))
