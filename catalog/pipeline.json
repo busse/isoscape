@@ -3524,7 +3524,7 @@
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 0,
+   "rounds": 1,
    "waiting_on": "owner",
    "decision": "Final draft rc1 built and independently inspected (2026-11-25): verdict fix. One fix round allowed. Waiting on the owner for three calls before it starts: how to show the Manchester treatment plant (protection unknown), whether the Mayo Bridge deck goes under the water on the big floods, and how to draw Gaston so the pins and the water agree; plus the box layout on the Shockoe sheets. Findings: drafts/richmond-floods/casestudy/2026-11-25-06-independent-inspection-rc1/findings.md. Branches feature/flood-surface (head dff3a04) and feature/flood-rain, unmerged. Not decided: whether any of it is sold.",
    "accepted_faults": [],
