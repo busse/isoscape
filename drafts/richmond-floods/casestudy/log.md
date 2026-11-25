@@ -234,3 +234,15 @@ Renders for this are in the branch's steps 55 to 58.
   deep. One fact was simply wrong (the dates of the Franklin Street row).
 - The planning session had caught two of the thirteen on its own look (the leaked "B" and
   the dry boxes on the Gaston sheet) and missed the rest.
+
+### The fix round starts (12:27)
+
+- Four questions put to Chris with the inspector's crops: draw the Manchester plant's ground
+  as "unknown" with no depth; draw bridge decks under the water where the flood is above
+  them; redraw Gaston's water at about 28 ft with the hatch to 35 ft so the pins and the
+  picture agree; untangle the boxes and give Gaston its own box list.
+- **12:27, Chris:** "yes to all, with an eye toward great quality".
+- The one fix round the process allows began on the Opus 5.5 subagent that built rc1: rc2
+  (steps from 70), covering all thirteen wall-visible faults and ten fact findings. A
+  targeted recheck by the independent inspector follows. Because Gaston's picture changes,
+  its before and after go back to Chris.
