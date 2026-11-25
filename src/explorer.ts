@@ -54,6 +54,7 @@ import { DEM_SOURCES } from './dem-sources.ts'
 import { buyLinks, escAttr, pageMapRefs, pageShop, printLinks, seriesShopLine, shopCta, siteTags, type SiteCard } from './social.ts'
 import { FIGURE_CSS, LIGHTBOX_CSS, lightbox } from './lightbox.ts'
 import { COMPARE_CSS, compareSliders, splitAt, splitOf } from './compare.ts'
+import { promptCopy } from './prompt.ts'
 import { makeStory } from './story.ts'
 import { seriesView, TT_CSS, ttFrame, ttNearest, ttPair, ttParse, ttPick, ttPos, ttRoute, ttStep, ttTicks } from './through-time.ts'
 
@@ -120,6 +121,11 @@ export const PROSE_CSS = `.prose { font-size: 15.5px; line-height: 1.65; color: 
 .prose pre code { background: none; padding: 0; font-size: inherit; }
 .prose blockquote { margin-left: 0; padding: .5em 1em; border-left: 4px solid var(--m-blue); background: var(--bg); border-radius: 0; }
 .prose blockquote p:last-child { margin-bottom: 0; }
+.prose .prompt { margin: 1.4em 4px 1.6em 0; border: 2px solid var(--accent); background: var(--panel); box-shadow: 4px 4px 0 var(--m-blue); }
+.prose .prompt-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: .5em .8em; background: var(--accent); color: var(--panel); font-weight: 700; font-size: 15px; }
+.prose .prompt-copy { font: inherit; font-size: 13px; font-weight: 700; padding: .3em .9em; border: 2px solid var(--panel); background: var(--panel); color: var(--ink); cursor: pointer; }
+.prose .prompt-copy:hover, .prose .prompt-copy:focus-visible { background: var(--m-accent); }
+.prose .prompt pre { margin: 0; padding: .9em 1em; background: none; border: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14.5px; line-height: 1.55; }
 .prose img { display: block; max-width: 100%; height: auto; margin: 1.4em auto; }
 .prose hr { border: none; border-top: 1px solid var(--line); margin: 2em 0; }
 .prose .table { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
@@ -968,6 +974,8 @@ dd { font-variant-numeric: tabular-nums; }
   ;(${lightbox.toString()})(document)
   // Compare figures on a page (compare.ts) share the viewer's divider: its moves and its look.
   ;(${compareSliders.toString()})(document, split)
+  // A prompt card's Copy button (prompt.ts).
+  ;(${promptCopy.toString()})(document)
   // A dated series' own page (through-time.ts): its view goes into the page, before its first section.
   const tt = { parse: (${ttParse.toString()}), route: (${ttRoute.toString()}), step: (${ttStep.toString()}), pair: (${ttPair.toString()}), pick: (${ttPick.toString()}), frame: (${ttFrame.toString()}), pos: (${ttPos.toString()}), nearest: (${ttNearest.toString()}), ticks: (${ttTicks.toString()}) }
   const seriesView = (${seriesView.toString()})

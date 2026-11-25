@@ -77,3 +77,16 @@ Folder: `2026-11-25-04-make/`. Scans on the Mac in `ISO-TEST/isoscape-work/tutor
   Nav entry under "Stories and tutorials", region in the Tutorials section. Tests 266/266 and
   typecheck pass; previews.py 364 pages OK; desktop and 390 px phone have no sideways scroll.
 - Local preview unpacked to `ISO-TEST/_preview/tutorial-2/`.
+
+## Step 5: the Start here prompt (November 25, 11:43-11:50)
+
+- Chris: "I want a very noticable, they can't miss it, copy and paste prompt to get them going
+  specifically with isoscape. This section will fail if they don't mention isoscape."
+- Added a prompt card to the page format: a fenced block with the language `prompt` renders as a
+  bordered card headed "Copy this prompt into your chat" with a Copy button (`src/markdown.ts`,
+  CSS in `PROSE_CSS`, `src/prompt.ts` for the button in the explorer and the static pages; a
+  markdown test). Checked in a browser: Copy puts the 830-character prompt on the clipboard from
+  both the explorer and the static page.
+- The page now opens with "Start here" and that card, with isoscape and its repository in the
+  first line. Section 1 points back to it and explains why the line matters. "Make your own"
+  repeats the same card.

@@ -336,6 +336,12 @@ const blocks = (lines: readonly string[], ctx: Ctx): string => {
       i++
       while (i < lines.length && !close.test(lines[i])) body.push(lines[i++])
       i++
+      if (fence[2] === 'prompt') {
+        // A prompt for the reader to paste into their chat: a card that can't be missed, with a Copy button.
+        out.push('<div class="prompt"><div class="prompt-head"><span>Copy this prompt into your chat</span>' +
+          '<button type="button" class="prompt-copy">Copy</button></div><pre><code>' + escapeHtml(body.join('\n')) + '</code></pre></div>')
+        continue
+      }
       const lang = fence[2] ? ' class="language-' + escapeHtml(fence[2]) + '"' : ''
       out.push('<pre><code' + lang + '>' + escapeHtml(body.join('\n')) + '</code></pre>')
       continue

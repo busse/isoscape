@@ -31,6 +31,7 @@ import { DEM_SOURCES } from './dem-sources.ts'
 import { FONTS, MARK, PROSE_CSS, STORY_CSS, THEME_CSS } from './explorer.ts'
 import { FIGURE_CSS, LIGHTBOX_CSS, lightbox } from './lightbox.ts'
 import { COMPARE_CSS, compareSliders, splitAt, splitOf } from './compare.ts'
+import { promptCopy } from './prompt.ts'
 import { escapeHtml } from './markdown.ts'
 import { loadPages, PAGES_DIR, type Page } from './pages.ts'
 import {
@@ -469,7 +470,8 @@ export const renderContentPage = (page: Page, ctx: Ctx, imgs: ContentImages = {}
     topBar(ctx, page.slug, page.noShop) +
     `<main class="wrap">\n${acts}<article class="prose">\n${html}</article>\n${acts}</main>\n` +
     footer(ctx) + (page.figures.length > 0 ? `<script>(${lightbox.toString()})(document)</script>\n` : '') +
-    (page.figures.some((f) => f.compare) ? `<script>(${compareSliders.toString()})(document, { at: ${splitAt.toString()}, of: ${splitOf.toString()} })</script>\n` : '') + '</body>\n</html>\n'
+    (page.figures.some((f) => f.compare) ? `<script>(${compareSliders.toString()})(document, { at: ${splitAt.toString()}, of: ${splitOf.toString()} })</script>\n` : '') +
+    (html.includes('class="prompt"') ? `<script>(${promptCopy.toString()})(document)</script>\n` : '') + '</body>\n</html>\n'
 }
 
 // ---- map pages ----------------------------------------------------------------------------------

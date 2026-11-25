@@ -21,6 +21,21 @@ the old maps that cover them, fit those maps to today's streets, trace the build
 every claim against the records. The worked example is one intersection in Richmond, Virginia,
 the four corners of West Broad and North Belvidere Streets, in 1924, 1952 and today.
 
+## Start here
+
+Paste this into your chat, with your own streets and town in the brackets:
+
+```prompt
+Use isoscape, the free, open-source map tool at https://github.com/busse/isoscape, to draw how [the corner of your two streets] in [your town] has changed over time.
+
+1. Find the Sanborn fire-insurance map sheets at the Library of Congress that cover that corner in two different years. Read each volume's key map to find the sheets instead of guessing.
+2. Fit each sheet to today's street corners, and tell me how far each corner misses.
+3. Trace the buildings with isoscape's Sanborn tools (tools/sanborn), and draw each trace over its scan so I can check it.
+4. Build isoscape views of the corner in each year and today, and show me every picture.
+
+Check every source you use: who made it, what it covers, and what its license allows. Keep a list of anywhere the sources disagree. Ask me your open questions as multiple choice.
+```
+
 ::: compare wide
 ![The four corners of Broad and Belvidere in 1924: two- and three-story brick buildings on every corner, an auto row of sales rooms, repair shops and filling stations](old-maps-corners-1924.webp) 1924
 ![The same four corners today: VCU's Institute for Contemporary Art on the southwest corner, a parking deck and student apartments to the northwest, a drugstore to the northeast, and the CoStar Center under construction to the southeast](old-maps-corners-2026.webp) Today
@@ -61,7 +76,13 @@ intersection, small enough to finish in a morning, and the corners are in the ne
 Commonwealth University (VCU) built its Institute for Contemporary Art on one of them and is
 building an arts center on another.
 
-The request that started it, and the one that chose the place:
+Put your question into the [Start here](#start-here) prompt
+above. Keep the first line, which names isoscape and links its repository: without it,
+the chat has no drawing tool to work with and will describe the place to you instead of
+drawing it.
+
+This example was made in a chat already working inside the isoscape repository, so its
+requests could be short. The one that started it, and the one that chose the place:
 
 > Plan a tutorial for how to make something like the two Jackson Ward stories.
 
@@ -297,16 +318,21 @@ it, which VCU's growth also changed, deserves its own telling and is not summari
 
 ## 10. Make your own
 
-Start with one Sanborn sheet, two editions and one block in your own town. A first request
-could be:
+Start with one Sanborn sheet, two editions and one block in your own town, with the same
+prompt as at the top of this page:
 
-> Find the Sanborn fire-insurance map sheets at the Library of Congress that cover the corner
-> of [your streets] in [your town], in two different years. Read the key map to find them, fit
-> each sheet to today's street corners and tell me how far each corner misses, then trace the
-> buildings and draw them over the scan so I can check them.
+```prompt
+Use isoscape, the free, open-source map tool at https://github.com/busse/isoscape, to draw how [the corner of your two streets] in [your town] has changed over time.
 
-Then ask it to draw the block with isoscape in each year, and look at every picture before you
-trust a number. This example took one long session of a few hours; Jackson Ward took many.
+1. Find the Sanborn fire-insurance map sheets at the Library of Congress that cover that corner in two different years. Read each volume's key map to find the sheets instead of guessing.
+2. Fit each sheet to today's street corners, and tell me how far each corner misses.
+3. Trace the buildings with isoscape's Sanborn tools (tools/sanborn), and draw each trace over its scan so I can check it.
+4. Build isoscape views of the corner in each year and today, and show me every picture.
+
+Check every source you use: who made it, what it covers, and what its license allows. Keep a list of anywhere the sources disagree. Ask me your open questions as multiple choice.
+```
+
+Look at every picture before you trust a number. This example took one long session of a few hours; Jackson Ward took many.
 
 The code, the region and the traces for this example are on
 [GitHub](https://github.com/busse/isoscape) (`regions/broad-belvidere.json`,

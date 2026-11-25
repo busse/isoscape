@@ -124,3 +124,10 @@ test('without a figure block, images render as before (plus their size when know
   assert.equal(markdown('![d](d.webp)', { image: (s) => ({ src: s, width: 4, height: 3, full: 'x' }) }).html, '<p><img src="d.webp" alt="d" width="4" height="3" loading="lazy"></p>')
   assert.deepEqual(markdown('![d](d.svg)').figures, [])
 })
+
+test('a prompt fence becomes a prompt card with a Copy button, its text escaped', () => {
+  const html = md('```prompt\nUse the GitHub repo busse/isoscape <now>\n```\n')
+  assert.ok(html.includes('<div class="prompt">'))
+  assert.ok(html.includes('<button type="button" class="prompt-copy">Copy</button>'))
+  assert.ok(html.includes('busse/isoscape &lt;now&gt;'))
+})
