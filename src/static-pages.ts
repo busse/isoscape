@@ -28,7 +28,7 @@ import { extname, resolve } from 'node:path'
 import { promisify } from 'node:util'
 import type { BuildMeta } from './archive.ts'
 import { DEM_SOURCES } from './dem-sources.ts'
-import { MARK, PROSE_CSS, STORY_CSS, THEME_CSS } from './explorer.ts'
+import { FONTS, MARK, PROSE_CSS, STORY_CSS, THEME_CSS } from './explorer.ts'
 import { FIGURE_CSS, LIGHTBOX_CSS, lightbox } from './lightbox.ts'
 import { COMPARE_CSS, compareSliders, splitAt, splitOf } from './compare.ts'
 import { escapeHtml } from './markdown.ts'
@@ -270,6 +270,32 @@ h2.sub { font-size: 20px; letter-spacing: -.01em; margin: 34px 0 12px; padding-t
 /* Wide figures run past the text column, as far as the window allows. */
 .wrap .prose figure.fig.wide { --w: max(100%, min(1120px, 100vw - 56px)); width: var(--w); margin-left: calc((100% - var(--w)) / 2); }
 @media (max-width: 600px) { h1.title, .prose h1 { font-size: 25px; } .wrap { padding-top: 18px; overflow-x: clip; } .top nav { margin-left: 0; } }
+/* misfit register (design/misfit/README.md) */
+html, body { background: var(--m-sheet); }
+.wrap { background: var(--m-paper); border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+.top { align-items: center; background: var(--m-paper); }
+.top a.brand { align-items: center; }
+.top a.brand .mk { width: 24px; height: 24px; flex: none; }
+.top a.brand .mk svg { width: 100%; height: 100%; display: block; }
+.top a.brand b { font-size: 16px; font-weight: 600; }
+.top a.brand span:not(.mk) { font: 11px var(--m-font-mono); color: var(--dim); }
+.top nav a { color: var(--m-link); }
+.btn { border-radius: var(--m-radius); background: var(--m-paper); color: var(--ink); border: 1px solid var(--m-rule-ink); font-weight: 500; }
+.acts .btn:first-child { background: var(--m-ink); color: var(--m-paper); border-color: var(--m-ink); }
+.btn.ghost { color: var(--m-link); border-color: var(--line); }
+.btn:hover { filter: none; background: var(--m-accent); color: var(--ink); }
+h1.title { font-size: var(--m-size-2xl); font-weight: 600; text-wrap: balance; }
+h2.sub { font-weight: 600; border-top: 1px solid var(--line); }
+h2.sub::after { content: ''; display: block; width: 48px; height: 4px; background: var(--m-blue); margin-top: 8px; }
+figure.pic img { border-radius: 0; }
+figure.pic figcaption { font-family: var(--m-font-mono); font-size: 11.5px; }
+.years a, .years span { font-family: var(--m-font-mono); font-weight: 400; border-radius: var(--m-radius); }
+.years span { background: var(--m-ink); border-color: var(--m-ink); color: var(--m-paper); }
+.cards a { border-radius: 0; background: var(--m-paper); }
+.cards img { border-radius: 0; }
+.plain a, .more a, .foot a { color: var(--m-link); }
+.foot { border-top: 2px solid var(--m-rule-ink); }
+@media (max-width: 760px) { .wrap { border: none; } }
 `
 
 interface Head {
@@ -304,7 +330,7 @@ const head = (h: Head, ctx: Ctx): string => `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(h.title)}</title>
 ${h.noindex ? '<meta name="robots" content="noindex">\n' : ''}${analytics(ctx.config.analytics?.ga)}<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(MARK)}">
-${ctx.config.siteUrl === undefined ? '' : `<link rel="sitemap" type="application/xml" title="Sitemap" href="${up(ctx.depth)}sitemap.xml">\n`}${metaTags({
+${FONTS}${ctx.config.siteUrl === undefined ? '' : `<link rel="sitemap" type="application/xml" title="Sitemap" href="${up(ctx.depth)}sitemap.xml">\n`}${metaTags({
   title: h.title,
   description: h.description,
   type: h.type,
@@ -330,7 +356,7 @@ const topBar = (ctx: Ctx, campaign: string, noShop = false): string => {
     if (p !== undefined && path !== undefined) nav.push(`<a href="${escAttr(u + path)}">${escapeHtml(p.title)}</a>`)
   }
   if (ctx.config.shop && !noShop) nav.push(`<a href="${escAttr(withCampaign(ctx.config.shop.url, campaign, ctx.config.shop.url))}">Shop prints ↗</a>`)
-  return `<header class="top"><a class="brand" href="${u}index.html" title="Open the isoscape explorer"><b>${SITE_NAME}</b><span>isometric maps of real places</span></a>${nav.length ? `<nav aria-label="Site">${nav.join('')}</nav>` : ''}</header>\n`
+  return `<header class="top"><a class="brand" href="${u}index.html" title="Open the isoscape explorer"><span class="mk">${MARK}</span><b>${SITE_NAME}</b><span>isometric maps of real places</span></a><span class="stamp blue">Working out loud</span>${nav.length ? `<nav aria-label="Site">${nav.join('')}</nav>` : ''}</header>\n`
 }
 
 /** The footer: who draws the maps and how, the credits, every content page. */

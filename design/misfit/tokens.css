@@ -1,0 +1,101 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MISFIT: the design language of Chris Busse's working-out-loud sites
+   (misfit-*: the isoscape explorer first). Tokens only; README.md says how to
+   use them. The palette is Chris's personal site's (busse/cbdot, _sass/_tokens.scss),
+   value for value, so the sites read as one family. The register differs: a
+   drafting sheet, not a magazine. See README.md, "Same family, other register".
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Palette: paper (warm) */
+  --tan-050: #fbfaf7;  /* paper: reading surfaces */
+  --tan-100: #f2f1ec;  /* sheet: the ground under everything */
+  --tan-200: #e6e4dd;
+  --tan-300: #dbd9d2;  /* hairline rule */
+  --tan-400: #b4b2ab;
+  --tan-600: #746c5c;  /* warm text, 4.98:1 on paper */
+
+  /* Palette: ink (cool) */
+  --gray-000: #ffffff;
+  --gray-500: #878e91; /* non-text only */
+  --gray-600: #656c6f; /* muted text, 5.12:1 */
+  --gray-700: #3b4042; /* secondary ink, 10.07:1 */
+  --gray-900: #1d2021; /* INK, 15.71:1 */
+  --gray-950: #16181a;
+
+  /* Palette: non-photo blue. Blue is STRUCTURE (rules, grid, marks, underlays);
+     --npb-300 is 1.42:1 on paper and is never text on a light ground. */
+  --npb-050: #f1fafd;
+  --npb-100: #dcf2f9;
+  --npb-200: #c2e8f3;
+  --npb-300: #a4dded;  /* true non-photo blue */
+  --npb-400: #6fc2dc;
+  --npb-600: #1b7f9f;  /* focus ring */
+  --npb-700: #0b6580;  /* link, 6.31:1 */
+  --npb-800: #075166;  /* link hover, 8.46:1 */
+
+  /* Signal (stamps only, never decoration) */
+  --sig-live:  #2f6b3d;  /* LIVE, a check that passed */
+  --sig-draft: #8a5a00;  /* DRAFT, WORKING, a caution */
+  --sig-stop:  #9b3a2e;  /* a failure, a withdrawn piece */
+
+  /* Semantic */
+  --m-sheet:   var(--tan-100);
+  --m-paper:   var(--tan-050);
+  --m-raised:  var(--gray-000);
+  --m-accent:  var(--npb-100);
+  --m-ink:     var(--gray-900);
+  --m-ink-2:   var(--gray-700);
+  --m-muted:   var(--gray-600);
+  --m-faint:   var(--gray-500);
+  --m-rule:    var(--tan-300);
+  --m-rule-ink: var(--gray-900);
+  --m-blue:    var(--npb-300);
+  --m-grid:    rgba(164, 221, 237, .38);   /* graph-paper lines */
+  --m-grid-major: rgba(111, 194, 220, .32);
+  --m-link:    var(--npb-700);
+  --m-link-hover: var(--npb-800);
+  --m-underlay: var(--npb-300);
+  --m-focus:   var(--npb-600);
+
+  /* Type: one superfamily. Sans for reading, mono for everything measured. */
+  --m-font-sans: "IBM Plex Sans", ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
+  --m-font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --m-size-2xs: 10.5px;  /* stamp */
+  --m-size-xs:  11.5px;  /* label, meta */
+  --m-size-sm:  13px;    /* UI, nav */
+  --m-size-md:  15.5px;  /* reading */
+  --m-size-lg:  18px;    /* lead */
+  --m-size-xl:  22px;    /* h2 */
+  --m-size-2xl: 32px;    /* h1 */
+  --m-track-label: .12em;
+
+  /* Space and lines */
+  --m-grid-step: 24px;
+  --m-radius: 2px;
+  --m-rule-1: 1px;
+  --m-rule-2: 2px;
+  --m-rule-3: 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --m-sheet:  #16181a;
+    --m-paper:  #1e2124;
+    --m-raised: #212427;
+    --m-accent: #103240;
+    --m-ink:    #edebe6;
+    --m-ink-2:  #c3c6c8;
+    --m-muted:  #a3a9ac;
+    --m-faint:  #6d7477;
+    --m-rule:   #33383b;
+    --m-rule-ink: #edebe6;
+    --m-blue:   var(--npb-700);
+    --m-grid:   rgba(11, 101, 128, .28);
+    --m-grid-major: rgba(27, 127, 159, .32);
+    --m-link:   var(--npb-300);
+    --m-link-hover: var(--npb-200);
+    --m-underlay: var(--npb-700);
+    --m-focus:  var(--npb-400);
+    --sig-live: #7fc28f; --sig-draft: #e0b553; --sig-stop: #e08c7e;
+  }
+}

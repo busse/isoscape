@@ -257,6 +257,36 @@
     }
   },
   "home": {
+    "nav": [
+      { "title": "Start", "pages": [
+        { "page": "artist-statement", "label": "Artist statement" }
+      ] },
+      { "title": "Places through time", "pages": [
+        { "page": "downtown-through-time", "label": "Downtown Richmond, 1737–2026" },
+        { "page": "streetcars", "label": "Richmond's streetcars, 1925" }
+      ] },
+      { "title": "Buildings in their time", "pages": [
+        { "page": "broad-street", "label": "Broad Street Station, 1943" },
+        { "page": "broad-street-cutaway", "label": "Broad Street Station: the cutaway" },
+        { "page": "main-street-cutaway", "label": "Main Street Station: the cutaway" },
+        { "page": "pump-house-cutaway", "label": "The New Pump-House: the cutaway" },
+        { "page": "byrd-cutaway", "label": "The Byrd Theatre: the cutaway" }
+      ] },
+      { "title": "Stories and tutorials", "pages": [
+        { "page": "jackson-ward", "label": "Jackson Ward before I-95" },
+        { "page": "redlining", "label": "Redlining in Richmond, 1937" },
+        { "page": "dollar-stores", "label": "Dollar General on the edge of town" },
+        { "page": "explore-with-chat", "label": "Tutorial: map any place with a chat" },
+        { "page": "world-landmarks", "label": "Landmarks around the world" }
+      ] },
+      { "title": "About the work", "pages": [
+        { "page": "how-its-made", "label": "How it's made" },
+        { "page": "data", "label": "Data" },
+        { "page": "faq", "label": "Questions and answers" },
+        { "page": "changes", "label": "Changes" },
+        { "page": "about", "label": "About, credits and licenses" }
+      ] }
+    ],
     "title": "Richmond, drawn from open data",
     "intro": "Small isometric maps of Richmond, Virginia: the James River through the city in one long view, and downtown block by block from 1737 to today. Pan and zoom any map, or compare two side by side. The tool that draws them is free and open source, and prints are in the holiday shop.",
     "heroes": [
