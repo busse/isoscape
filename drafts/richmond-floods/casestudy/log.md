@@ -259,3 +259,10 @@ Renders for this are in the branch's steps 55 to 58.
   and one drawing fault that fixing the river's color exposed: Gaston's rain pool drawn on
   the river side of the wall.
 - A third round at this stage needs Chris's say-so. Put to him.
+
+- **15:00, Chris:** "Approved on both": a third, short fix round (rc3), and the redrawn
+  Gaston sheet comes back to him for a look confirmation after it. The say-so a third round
+  needs under the stage rules is recorded here and on the board.
+- rc3 started on the same Opus 5.5 subagent (steps from 80): the three statements, the split
+  figure, Gaston's pool clipped to the city side of the wall, the empty quarter of the
+  Gaston sheet (first choice: the rain chart from the rain-map branch), the wall label.

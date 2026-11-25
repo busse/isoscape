@@ -3538,7 +3538,8 @@
     "2026-11-23: research -> outline",
     "2026-11-23: outline -> working draft",
     "2026-11-25: working draft -> final draft"
-   ]
+   ],
+   "budget_note": "Third fix round approved by the owner, 2026-11-25 15:00 (rc3: three statements, a split figure, Gaston's pool clipped to the city side of the wall, layout)."
   },
   "catalog-strict-draw-order": {
    "title": "Stricter draw order for the whole catalog: interlocking buildings, late-painted bands, wall joints",
