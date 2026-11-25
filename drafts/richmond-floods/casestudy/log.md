@@ -191,3 +191,30 @@ The renders for each round are in the spike branch's step folders 27 to 34.
 - **12:18, Chris:** "Yes, to all proceed". Read as: slate accepted, with one more cue so it
   holds at plate size; outbuildings away from the water hidden by a stated rule; working
   draft d3 of both sets started (steps from 50) on the same Opus 5.5 subagent.
+
+## 2026-11-25
+
+### Chris finds a draw-order error; the look is approved (08:56 to 10:22)
+
+Renders for this are in the branch's steps 55 to 58.
+
+- **08:56, Chris:** "Manchester, second (middle) row, fourth from the left (two L shaped
+  buildings): visually inspect the overlap of buildings and walls. Find error. Fix and fix
+  elsewhere if root cause is some level of endemic".
+- The planning session's first reading at sheet size got one of the two faults (a farther
+  wall's submerged band painted over a nearer roof) and missed the main one. At 8x the agent
+  found it: the garage of South Falls I painted over the nearer arm of its tower. The wall
+  crossing the garage's foot, which the planning session had suspected, was correct.
+- **Root causes, all endemic:** whole buildings ordered by simplified outlines, which fails
+  for interlocking concave footprints; submerged bands painted late, over nearer items;
+  floodwall pieces overlapping at bends. The 12 overlaps accepted in d3 as harmless wall
+  joins were real faults; accepting them unseen was a mistake by both agent and planner.
+- A check for "painted over a nearer item" now runs on every plate: Manchester 7 to 22
+  faults and 80 to 104 wall joints per plate before, none after; Shockoe 36 to 82 before,
+  3 to 12 after, every remaining case shown.
+- The fix is on for the flood regions only; fourteen published views proved byte-identical.
+  So the published catalog still has the interlocking-building fault where it occurs.
+- **10:22, Chris:** "1 yes" (hide a traced footprint that a same-year building covers by half
+  or more, on the flood plates; counts restated); "2 yes" (backlog: stricter draw order for
+  the whole catalog); "3 approved": **the look of d3 is approved.** The series moves to
+  final draft.
