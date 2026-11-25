@@ -19,8 +19,22 @@ ask questions in plain words. The chat finds the open data for the place, checks
 and what it allows, draws the place, and looks at the result with you. You need no GIS
 software and no programming.
 
-The worked example is Rapa Nui (Easter Island), a place with no public lidar, drawn from open
-data alone:
+## Start here
+
+Paste this into your chat, with your own place in the brackets:
+
+```prompt
+Use isoscape, the free, open-source map tool at https://github.com/busse/isoscape, to explore [your place] and draw it as an isometric map.
+
+1. Find the open data that covers it: elevation (lidar if any is public, otherwise a 30 m world model) and OpenStreetMap. For each source, tell me who made it, what it covers, how detailed it is, and what its license allows.
+2. Fetch the data, measure it, and draw the whole place with isoscape. Show me the picture and tell me what looks wrong.
+3. Then suggest two or three closer views, and say where the data stops being detailed enough to be honest.
+
+Ask me your open questions as multiple choice.
+```
+
+The worked example below is Rapa Nui (Easter Island), a place with no public lidar, drawn from
+open data alone:
 
 ::: figure wide
 ![Rapa Nui seen from the south, with Rano Kau and Orongo at the lower left, Hanga Roa beside the airport, Terevaka at the top, and Rano Raraku, Ahu Tongariki and the Poike peninsula at the right](explore-with-chat-island.webp)
@@ -206,8 +220,9 @@ project of its own.
 ## Make your own
 
 The code and the region files for every view on this page are on
-[GitHub](https://github.com/busse/isoscape). To start your own map, open a chat that can run
-code and ask it to use the GitHub repo busse/isoscape to make an isometric map of your place.
+[GitHub](https://github.com/busse/isoscape). To start your own map, paste the
+[Start here](#start-here) prompt into a chat that can run code. Keep its first line: it names
+isoscape and links its repository, and without it the chat has no drawing tool to work with.
 [How it's made](how-its-made.md) explains each step isoscape takes. Prints of
 the published maps are sold at [chrisbusse.com](https://chrisbusse.com/), which supports the
 project.
