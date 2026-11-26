@@ -1239,3 +1239,31 @@ The owner: "let's get this wrapped up with quality, but quickly". An independent
   - Board: published_version 1, orders 0, branch; stage left at outline for the coordinator.
   - 311 tests, typecheck clean, check:visual within tolerance, `unchanged.sh` against main: 12 views
     the same, the d1 region skipped (not on main).
+
+## 2026-11-26
+
+### Published (09:59 to about 11:05)
+
+- **09:59, Chris:** "Just ship it." **10:00:** "I mean let's get this wrapped up with quality,
+  but quickly." So: an independent fact check of the editorial first (a separate Opus 5.5
+  subagent, read only): nothing blocking, 14 wording and citation fixes, all applied
+  (`2026-11-26-94-fact-check-fixes/`). Title shortened by the planning session to "Richmond,
+  VA, under water: the James River floods of 1771 to 2020 and Gaston's rain of 2004".
+- **10:08, Chris** asked to rethink large media now that the site is on Cloudflare, and to
+  separate the open-source tool from his work made with it. **10:09:** yes to keeping this
+  series' images out of git and to a planned split (board: `studio-tool-split`); whether the
+  studio repository is private or public is deferred. The 760 images went to the Mac; see
+  `IMAGES.md`.
+- The floods work went to main as one squashed commit (d0e23a2e), so the images are not in
+  the repository's history either. The story PDF tool printed the old site address; fixed
+  for every story.
+- Built into the `cloudflare` branch, pushed to the preview address, looked at on desktop
+  and phone sizes from the cloud workspace (the owner's connection was unreliable in a
+  storm), then pushed live. One catch on the way: the site tool rewrote the routes file for
+  drawings over 25 MB as empty, because this checkout does not hold those files; the live
+  routes file was kept.
+- **Live:** https://isoscape.chrisbusse.com/#/richmond-floods with phone and large PDFs;
+  first in the front page's Stories and in the left menu. The site check passes on the live
+  address. Editorial release record: `releases/story-richmond-floods/v1.json`.
+- Not done: the forwarding page for this story at the old github.io address; any decision
+  about selling the sheets.

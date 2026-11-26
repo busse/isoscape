@@ -3526,7 +3526,7 @@
    "orders": null,
    "rounds": 3,
    "waiting_on": "owner",
-   "decision": "Final draft rc3 passed the independent recheck (2026-11-25); the owner confirmed the Gaston sheet's look and the shorter title. The release decision is deferred by the owner until he has read the editorial (story-richmond-floods). Branches feature/flood-surface and feature/flood-rain, unmerged. Record: drafts/richmond-floods/casestudy/.",
+   "decision": "The series' drawings are published inside the story page (2026-11-26). The ten print sheets stay at final draft 1.0.0-rc3, passed by the independent recheck, not for sale: whether any are sold is the owner's decision, not yet made. Full-resolution sheets and the case study's images are on the Mac under ISO-TEST/isoscape-work/richmond-floods/.",
    "accepted_faults": [
     {
      "what": "12 painted-over slivers on the Shockoe plates, under about 1.5 mm at print size (the same 12 as rc1)",
@@ -3656,7 +3656,7 @@
    "title": "Richmond's floods, drawn on the ground they covered: the editorial for the floods series",
    "plate": null,
    "kind": "story",
-   "stage": "outline",
+   "stage": "published",
    "status": "active",
    "asset_version": null,
    "published_version": 1,
@@ -3664,8 +3664,8 @@
    "on_sale": false,
    "orders": 0,
    "rounds": 0,
-   "waiting_on": "owner",
-   "decision": "Ready to publish (owner, 2026-11-26: ship). The 14 fact-check fixes applied; title shortened; listed (pdf: true, nav and front page); editorial release record v1 (releases/story-richmond-floods/v1.json; rebuild check reproduced both steps). The coordinator merges, publishes and sets the stage to published once live. No outside parties contacted.",
+   "waiting_on": "nothing",
+   "decision": "Published 2026-11-26 on the owner's word (ship it, with quality, quickly): https://isoscape.chrisbusse.com/#/richmond-floods, with phone and large PDFs. Independent fact check the same day: nothing blocking, 14 fixes applied. Editorial release record releases/story-richmond-floods/v1.json. No outside review; none claimed. Open: a forwarding page at the old address; the older Shockoe Creek levee's line and height (stated as a limit on the page).",
    "accepted_faults": [],
    "planned_edition": null,
    "last_inspected": "2026-11-26 (independent fact check of draft 1: nothing blocking, 14 fixes, all applied)",
@@ -3673,7 +3673,8 @@
    "worktree": null,
    "links": [],
    "log": [
-    "2026-11-25: rough draft -> outline"
+    "2026-11-25: rough draft -> outline",
+    "2026-11-26: outline -> published"
    ]
   },
   "studio-tool-split": {
