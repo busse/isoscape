@@ -1,0 +1,14 @@
+{
+  "extends": "history/richmond-downtown.json",
+  "about": "The floods series' period city: the downtown history (history/richmond-downtown.json), with an evidence layer. Traced Sanborn buildings whose end was assumed (1960) get their end from dated photographs, and today's undated buildings get the year the photographs or the traced maps first show them. Buildings standing on an earlier source but not ascertained for a scene's year are drawn as unconfirmed. The calls, their scores and the look-over are in history/evidence/richmond-floods.json; the method and the images in tools/floods/period/ and pages/how-its-made.md (Floods). Every sighting cites its image. Only the flood regions use this file: every other view of the series is drawn from richmond-downtown.json as before.",
+  "evidence": "history/evidence/richmond-floods.json",
+  "dates": [
+    {
+      "id": "w365155749",
+      "name": "James Monroe Building",
+      "year": 1981,
+      "source": "https://www.skyscrapercenter.com/building/james-monroe-building/9611",
+      "note": "Completed 1981 (CTBUH). The assessor gives no year, and no public photograph between 1974 and 1999 was found, so the evidence layer alone drew it only from 1994."
+    }
+  ]
+}

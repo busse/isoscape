@@ -1,0 +1,28 @@
+# panels 01-02 and 01-03
+200=U
+# panels 02-01 and 02-02
+76=P 73=U 197=U 198=U 199=U white blob, a light roof or open 222=U white strip with crisp edges
+# panels 02-03 and 02-04: tank farm; light circles are tanks with light roofs
+216=P 219=P 217=P 218=P 215=P 209=P
+# panels 03-00 and 03-01
+81=P 140=U 72=P 194=P 134=P 172=P
+# panels 03-02 and 03-03
+32=U 34=U white rectangle with crisp edges, a light roof or open 55=P 224=U 231=U 202=P 203=P 208=P tank rims and shadows 206=U
+# panels 03-04 and 03-06
+211=U 210=U 213=U a white patch, no tank rims 290=U a long light rectangle
+# panels 03-08 and 04-00: a residential grid; light house roofs and yards cannot be told apart, so the machine's gone calls are made unclear
+87=U 84=U 138=U 101=U 103=U 129=U 120=U 111=U 185=U 108=U 110=U 139=U
+# panels 04-01 and 04-02: houses and light roofs; the machine's gone calls made unclear
+166=U 181=U 176=U 178=U 150=U 183=U 148=U 182=U 118=U 114=U 113=U 89=U 93=U 92=U 125=U 123=U 169=U 159=U 149=U 175=U 173=U 151=U 63=U 64=U 41=U 262=U 42=U 52=U 237=U 240=U 201=U
+# panels 04-03 and 04-04
+245=U 259=U 261=U 235=U 233=U 236=U 317=U 319=U 263=P light rectangle with a dark edge matching the outline 265=U
+# panels 04-05 and 04-06: the treatment plant; its circular tanks read as dark rings
+305=P 291=P 306=P 267=P light roof with crisp edges 289=U 271=U 301=U 279=U 266=U 278=U
+# panels 04-07 and 05-02
+2=U 83=P
+# panels 05-03 and 05-04: long light roofs with a shadow along one side
+10=P 12=P 13=P 15=P 16=P 4=U 321=U 6=U 23=U
+# panels 05-05 and 05-06
+277=P light roof with shadow on its north end
+# panels 05-07 and 06-06: left as proposed
+24=U

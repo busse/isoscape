@@ -13,15 +13,16 @@ import { renderExplorer } from './explorer.ts'
 import { TRAVELER_HEIGHT, travelerShapes } from './traveler.ts'
 import { fetchOsm, overpassQuery, parseOsm } from './osm.ts'
 import { loadPages } from './pages.ts'
-import { palette } from './palette.ts'
+import { palette, withFloodStyles } from './palette.ts'
 import { fetchBounds, loadRegion, type Region } from './region.ts'
 import { renderPage, renderSvg } from './render.ts'
 import { buildScene, type TimeContext } from './scene.ts'
 import { anchorOf, renderSection, sectionRegion } from './section.ts'
 import { loadSiteConfig, writeSocial } from './social.ts'
 import { pageDates, planStatic, plainLinks, shareDoors, writeStatic } from './static-pages.ts'
-import { dateBuildings, dateGrounds, fetchYearBuilt, loadHistory, loadYearBuilt, switchedOn, yearBuiltDirs, type History, type Parcel } from './history.ts'
+import { applyEvidence, dateBuildings, dateGrounds, fetchYearBuilt, loadHistory, loadYearBuilt, switchedOn, yearBuiltDirs, type History, type Parcel } from './history.ts'
 import type { PolygonFeature } from './osm.ts'
+import { parseFlood } from './flood.ts'
 
 const run = promisify(execFile)
 
@@ -54,6 +55,9 @@ const HELP = `isoscape — isometric dot-and-line views of real places
                      (else the history's own streetcarScale)
   --with <names>     draw the curated features switched on by these names (comma-separated)
   --rail-scale <n>   draw railroad track at n times its width (else the history's railScale)
+  --flood <name>     draw one of the region's floods (experimental; see "Floods" in the README),
+                     as <region>-flood-<name>
+  --flood-style <names>  flood looks to try (silt, ripple, murk, wall-bold; comma-separated)
   --no-archive       do not keep this build in out/builds/
   --out <dir>        output directory (default: out)
   --site-url <url>   the public address of out/, for absolute link-preview URLs
@@ -102,7 +106,8 @@ const loadInputs = async (name: string) => {
     }
     const dated = dateBuildings(features.filter((f): f is PolygonFeature => f.type === 'polygon'), parcels, history.dates, 4, 8, history.parkingFrom)
     if (history.groundsByParcel === true) for (const [id, d] of dateGrounds(features, parcels, history.dates)) if (!dated.has(id)) dated.set(id, d)
-    dates = dated
+    // An evidence layer dates today's undated buildings it has seen (see `applyEvidence`).
+    dates = history.evidence === undefined ? dated : applyEvidence(dated, history.evidence)
   }
   return { region, features, elevation, extra, history, dates }
 }
@@ -115,9 +120,13 @@ let streetcarScale: number | undefined
 let railScale: number | undefined
 /** `--with`: curated features switched on by name (see `HistoryFeature.switch`). */
 let switches: string[] = []
+/** `--flood`: one of the region's floods (experimental; see flood.ts). */
+let floodName: string | undefined
+/** `--flood-style`: flood looks to try (palette.ts FLOOD_STYLES), comma-separated. */
+let floodStyles: string[] = []
 
 const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: number, section = false) => {
-  const extra: Parameters<typeof buildScene>[4] = { ...inp.extra, ...(section ? { section: true } : {}) }
+  const extra: Parameters<typeof buildScene>[4] = { ...inp.extra, ...(section ? { section: true } : {}), ...(floodName === undefined ? {} : { flood: parseFlood(inp.region, floodName) }) }
   if (inp.history !== null) {
     const y = year ?? inp.history.present
     const epoch = inp.history.epochs.find((e) => e.year === y)
@@ -127,7 +136,10 @@ const sceneOf = (inp: Inputs, paletteName?: string, year?: number, previous?: nu
       ...(epoch === undefined ? {} : { title: epoch.title }),
     }
   } else if (year !== undefined) throw new Error(`"${inp.region.name}" has no "time" section; --year needs one`)
-  return buildScene(inp.region, inp.features, palette(paletteName ?? inp.region.palette), inp.elevation, extra)
+  const pal = palette(paletteName ?? inp.region.palette)
+  // A flood build takes the region's own flood looks unless --flood-style names others.
+  const styles = floodStyles.length > 0 ? floodStyles : floodName === undefined ? [] : (inp.region.floodStyles ?? [])
+  return buildScene(inp.region, inp.features, styles.length === 0 ? pal : withFloodStyles(pal, styles), inp.elevation, extra)
 }
 
 const loadScene = async (name: string, paletteName?: string, year?: number) => sceneOf(await loadInputs(name), paletteName, year)
@@ -152,11 +164,15 @@ export const main = async (argv: string[]): Promise<void> => {
       'streetcar-scale': { type: 'string' },
       'rail-scale': { type: 'string' },
       with: { type: 'string' },
+      flood: { type: 'string' },
+      'flood-style': { type: 'string' },
       'site-url': { type: 'string' },
     },
   })
   if (values['streetcar-scale'] !== undefined) streetcarScale = Number(values['streetcar-scale'])
   if (values['rail-scale'] !== undefined) railScale = Number(values['rail-scale'])
+  if (values.flood !== undefined) floodName = values.flood
+  if (values['flood-style'] !== undefined) floodStyles = values['flood-style'].split(',').map((w) => w.trim()).filter((w) => w.length > 0)
   if (values.with !== undefined) switches = values.with.split(',').map((w) => w.trim()).filter((w) => w.length > 0).sort()
   const [command, name] = positionals
   if (command === undefined || values.help) {
@@ -291,7 +307,7 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
   const outDir = resolve(values.out ?? 'out')
   await mkdir(outDir, { recursive: true })
   const dated = scene.time === undefined || year === undefined ? '' : `-${scene.time.year}`
-  const suffix = `${dated}${values.palette !== undefined ? `-${values.palette}` : ''}`
+  const suffix = `${dated}${floodName === undefined ? '' : `-flood-${floodName}`}${floodStyles.length === 0 ? '' : `-${floodStyles.join('-')}`}${values.palette !== undefined ? `-${values.palette}` : ''}`
   const base = resolve(outDir, `${name}${suffix}`)
   await writeFile(`${base}.svg`, rendered.svg)
   await writeFile(`${base}.html`, renderPage(scene, rendered))
@@ -326,7 +342,7 @@ const buildOne = async (inp: Inputs, name: string, values: Values, year?: number
     title: scene.time === undefined ? scene.region.title : `${scene.region.title}, ${scene.time.year}`,
     palette: paletteName,
     ...(values.note === undefined ? {} : { note: values.note }),
-    ...(switches.length === 0 ? {} : { flags: ['--with', switches.join(',')] }),
+    ...(switches.length === 0 && floodName === undefined ? {} : { flags: [...(switches.length === 0 ? [] : ['--with', switches.join(',')]), ...(floodName === undefined ? [] : ['--flood', floodName])] }),
     viewBox: rendered.viewBox,
     bearing: scene.view.bearing,
     ms: Math.round(performance.now() - t0),

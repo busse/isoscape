@@ -1,0 +1,257 @@
+{
+ "note": "Everything else the Gaston rain map reads, listed 2026-11-23. md5 is of the file as received here; null where the server builds the answer on request (sizes may then differ by a few bytes).",
+ "files": [
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083013.01h.grib",
+   "bytes": 1172646,
+   "md5": "6360d62ee3d2aa7afe3604da6cc9057b",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083014.01h.grib",
+   "bytes": 1172646,
+   "md5": "07b4699a0d854358ca8a39f94ca4574b",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083015.01h.grib",
+   "bytes": 1170296,
+   "md5": "ee3f0e8c20b6d56b05bcc7d1c57be13d",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083016.01h.grib",
+   "bytes": 1172646,
+   "md5": "9fe2a1f282884373703523b6e38913ce",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083017.01h.grib",
+   "bytes": 1172646,
+   "md5": "c4876b25a270520b0932245ee8ad44b2",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083018.01h.grib",
+   "bytes": 1253346,
+   "md5": "bad15cc02d1b12b822aae9ac8750e22d",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083018.06h.grib",
+   "bytes": 1375092,
+   "md5": "8d4b9d79e220016adfc0ee2f4fd74c98",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083019.01h.grib",
+   "bytes": 1253346,
+   "md5": "530e7efef82ad964848cb4009291bd3d",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083020.01h.grib",
+   "bytes": 1172470,
+   "md5": "4d4ba4219ea18e1181ce7e74d8d1ac79",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083021.01h.grib",
+   "bytes": 1172646,
+   "md5": "4e598a8eb5c953b2517e105cd257663f",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083022.01h.grib",
+   "bytes": 1172646,
+   "md5": "1edfd2ce09f2ea6e22bd3e78e1d099eb",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/30/stage4/ST4.2004083023.01h.grib",
+   "bytes": 1254860,
+   "md5": "50d107a7da1899e44fe3beab2f3b6f14",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/31/stage4/ST4.2004083100.01h.grib",
+   "bytes": 1254860,
+   "md5": "bb2856f75f66332b482d39e3804a60af",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/31/stage4/ST4.2004083100.06h.grib",
+   "bytes": 1464490,
+   "md5": "ccbad88a7bc0d1bc7392d1f424578412",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/31/stage4/ST4.2004083101.01h.grib",
+   "bytes": 1174050,
+   "md5": "0ab062a7fecf9894dc9521bba894bcf4",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/31/stage4/ST4.2004083102.01h.grib",
+   "bytes": 1174050,
+   "md5": "3e9c83e8337b8a6457ba06a3bf06ebc7",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/31/stage4/ST4.2004083103.01h.grib",
+   "bytes": 1174050,
+   "md5": "abb602d6a42f913661726fec78e577b9",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/31/stage4/ST4.2004083104.01h.grib",
+   "bytes": 1174050,
+   "md5": "362091dead1b8d5395f5c62d356df047",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/31/stage4/ST4.2004083105.01h.grib",
+   "bytes": 1174050,
+   "md5": "ba02b4df7fe8a533f2b28d11689176f5",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/31/stage4/ST4.2004083106.01h.grib",
+   "bytes": 1335668,
+   "md5": "b526d9a9309174788d279fe352f6324d",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/31/stage4/ST4.2004083106.06h.grib",
+   "bytes": 1375092,
+   "md5": "eddfa576413ac5ac29c7d4383415921a",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://mesonet.agron.iastate.edu/archive/data/2004/08/31/stage4/ST4.2004083112.24h.grib",
+   "bytes": 1196300,
+   "md5": "435d30d6f897f4676eb926297b93a34a",
+   "kind": "stage4-grib1 (Iowa Environmental Mesonet archive)"
+  },
+  {
+   "url": "https://noaa-global-hourly-pds.s3.amazonaws.com/2004/72401013740.csv",
+   "bytes": 9205616,
+   "md5": "d28f9c4842be265ae23b92c6cf0908c8",
+   "kind": "ncei-global-hourly RIC"
+  },
+  {
+   "url": "https://hdsc.nws.noaa.gov/cgi-bin/new/cgi_readH5.py?lat=37.5115&lon=-77.3234&type=pf&data=depth&units=english&series=pds",
+   "bytes": 5081,
+   "md5": null,
+   "kind": "noaa-atlas14-pfds"
+  },
+  {
+   "url": "https://hdsc.nws.noaa.gov/cgi-bin/new/cgi_readH5.py?lat=37.5350&lon=-77.4300&type=pf&data=depth&units=english&series=pds",
+   "bytes": 5079,
+   "md5": null,
+   "kind": "noaa-atlas14-pfds"
+  },
+  {
+   "url": "https://hdsc.nws.noaa.gov/cgi-bin/new/cgi_readH5.py?lat=37.5550&lon=-77.4400&type=pf&data=depth&units=english&series=pds",
+   "bytes": 5080,
+   "md5": null,
+   "kind": "noaa-atlas14-pfds"
+  },
+  {
+   "url": "https://www.ncei.noaa.gov/access/services/data/v1?dataset=daily-summaries&dataTypes=PRCP&stations=USC00440327,USC00444101,USC00445833,USC00447541,USC00449213,USW00013740,USW00093775&startDate=2004-08-29&endDate=2004-09-01&units=standard&format=csv&includeStationLocation=1&includeStationName=1",
+   "bytes": 2541,
+   "md5": null,
+   "kind": "ncei-ghcn-daily"
+  },
+  {
+   "url": "https://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2025-092326.txt",
+   "bytes": 7071568,
+   "md5": null,
+   "kind": "hurdat2"
+  },
+  {
+   "url": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/exportImage?bbox=-77.5200000,37.5150000,-77.3700000,37.6600000&bboxSR=4326&imageSR=4326&size=1500,1450&format=tiff&pixelType=F32&noData=-9999&noDataInterpretation=esriNoDataMatchAny&interpolation=RSP_BilinearInterpolation&compression=None&f=image",
+   "bytes": 9439160,
+   "md5": null,
+   "kind": "3dep-exportImage (TIFF, float32, 1500 x 1450)"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_county_500k.zip",
+   "bytes": 11630077,
+   "md5": "81d0b3b19d460b342c7354226ba4d567",
+   "kind": "census-cb-counties"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51036_areawater.zip",
+   "bytes": 80089,
+   "md5": "a7d20e26279e91c45503e19934a28c61",
+   "kind": "census-tiger-areawater"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51041_areawater.zip",
+   "bytes": 364827,
+   "md5": "a4c176ee8bce72591d0f617c7865c2bc",
+   "kind": "census-tiger-areawater"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51075_areawater.zip",
+   "bytes": 1505833,
+   "md5": "622a937d86286a3cbb34fa5f2fc8be55",
+   "kind": "census-tiger-areawater"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51085_areawater.zip",
+   "bytes": 556467,
+   "md5": "48b555c077dce8c02925a01a0065423f",
+   "kind": "census-tiger-areawater"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51087_areawater.zip",
+   "bytes": 1715987,
+   "md5": "b5365d1503ecfda748f39c0aa9d94bab",
+   "kind": "census-tiger-areawater"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51127_areawater.zip",
+   "bytes": 263381,
+   "md5": "6e71dd28c122e357cbcb25597349f34d",
+   "kind": "census-tiger-areawater"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51145_areawater.zip",
+   "bytes": 181359,
+   "md5": "d8ca9574f251e1c28be0940582a33ba7",
+   "kind": "census-tiger-areawater"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51149_areawater.zip",
+   "bytes": 70791,
+   "md5": "bcdba84ef4adf32a6936f126d3c351d9",
+   "kind": "census-tiger-areawater"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51570_areawater.zip",
+   "bytes": 25808,
+   "md5": "4e7977f3d924dc65a7e03a19019ecd66",
+   "kind": "census-tiger-areawater"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51670_areawater.zip",
+   "bytes": 17943,
+   "md5": "4bca8e66fa089d629da096e4f8b90840",
+   "kind": "census-tiger-areawater"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51730_areawater.zip",
+   "bytes": 29754,
+   "md5": "93521435b41b764b4890d3a194b52c91",
+   "kind": "census-tiger-areawater"
+  },
+  {
+   "url": "https://www2.census.gov/geo/tiger/TIGER2023/AREAWATER/tl_2023_51760_areawater.zip",
+   "bytes": 73659,
+   "md5": "f3d2f6e660d31923ec48086bd56ebaa1",
+   "kind": "census-tiger-areawater"
+  }
+ ]
+}

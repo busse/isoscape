@@ -1,0 +1,125 @@
+{
+ "note": "AORC v1.1 1 km, 2004 Zarr store: metadata plus the one APCP_surface chunk (time 40 = hours 5760-5903 of 2004; latitude 16; longitude 24) that holds metro Richmond on Aug. 30-31. Chunk keys are '.'-separated (Zarr v2). Listed 2026-11-23.",
+ "files": [
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/.zmetadata",
+   "bytes": 10795,
+   "md5": "a136baa701be0bcaa30d97cd832f748c",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/.zgroup",
+   "bytes": 24,
+   "md5": "e20297935e73dd0154104d4ea53040ab",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/APCP_surface/.zarray",
+   "bytes": 301,
+   "md5": "c1d94ca74301e48f391fd3994f27fd6e",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/APCP_surface/.zattrs",
+   "bytes": 377,
+   "md5": "4d93bd9eaa7ac2d411739ba3a9c4fa45",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/APCP_surface/40.16.24",
+   "bytes": 248226,
+   "md5": "a563232a174d01f28bb9efbbb2a78546",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/latitude/0",
+   "bytes": 27311,
+   "md5": "dc85f6bf0ed5b3ecb279f49dc31cb3bd",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/longitude/0",
+   "bytes": 61284,
+   "md5": "62d915a99a75d7df6ff8020c6f26656a",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/.zarray",
+   "bytes": 249,
+   "md5": "adf5b73835b904ce4aa0ade01a6a216e",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/0",
+   "bytes": 1548,
+   "md5": "8e47a965174f72675303b77a1a55f292",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/1",
+   "bytes": 1564,
+   "md5": "1f14c62dd4365fa8136424d79d523985",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/2",
+   "bytes": 1564,
+   "md5": "59fa6539770d9efcb401586d41cb4998",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/3",
+   "bytes": 1564,
+   "md5": "81f29a82648a7f1a983835e2ea6c4247",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/4",
+   "bytes": 1564,
+   "md5": "03e9461085b1c54bcb96974be7e0ec05",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/5",
+   "bytes": 1566,
+   "md5": "21efbb6fc01a268045e84196da98f2f3",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/6",
+   "bytes": 1564,
+   "md5": "734b7ff5cebd9b8b33cd67835048a262",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/7",
+   "bytes": 1564,
+   "md5": "db7d0ef7f457b5a8f9add157dc6bbd37",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/8",
+   "bytes": 1564,
+   "md5": "728b5663c104e7d58ba47bd8a06abf98",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/9",
+   "bytes": 1564,
+   "md5": "76357d3047e791025250b666ca202211",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/10",
+   "bytes": 1564,
+   "md5": "fdc86cc9728d5cc0b42df90ad1e4de8d",
+   "kind": "aorc-zarr"
+  },
+  {
+   "url": "https://noaa-nws-aorc-v1-1-1km.s3.amazonaws.com/2004.zarr/time/11",
+   "bytes": 1278,
+   "md5": "1d66a7278f846876f2dac5d7c8d1ee29",
+   "kind": "aorc-zarr"
+  }
+ ]
+}

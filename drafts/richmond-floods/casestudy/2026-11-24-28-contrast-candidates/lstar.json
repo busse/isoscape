@@ -1,0 +1,56 @@
+{
+ "pale-silt (d1)": {
+  "edge_vs_land_dL": -0.7,
+  "edge_vs_land_dE": 0.8,
+  "edge_chroma": 8.5,
+  "land_chroma": 8.0,
+  "deep_vs_river_dL": 17.5,
+  "channel_vs_deep_dL": 9.1,
+  "hatch_vs_land_dL": null
+ },
+ "umber": {
+  "edge_vs_land_dL": 28.4,
+  "edge_vs_land_dE": 30.4,
+  "edge_chroma": 18.6,
+  "land_chroma": 8.0,
+  "deep_vs_river_dL": 51.5,
+  "channel_vs_deep_dL": 44.7,
+  "hatch_vs_land_dL": 38.8
+ },
+ "green-brown": {
+  "edge_vs_land_dL": 25.8,
+  "edge_vs_land_dE": 28.9,
+  "edge_chroma": 20.9,
+  "land_chroma": 8.0,
+  "deep_vs_river_dL": 44.7,
+  "channel_vs_deep_dL": 37.9,
+  "hatch_vs_land_dL": 36.1
+ },
+ "blue-grey": {
+  "edge_vs_land_dL": 24.5,
+  "edge_vs_land_dE": 31.0,
+  "edge_chroma": 11.4,
+  "land_chroma": 8.0,
+  "deep_vs_river_dL": 44.8,
+  "channel_vs_deep_dL": 50.3,
+  "hatch_vs_land_dL": 36.1
+ },
+ "ochre": {
+  "edge_vs_land_dL": 22.3,
+  "edge_vs_land_dE": 41.5,
+  "edge_chroma": 42.9,
+  "land_chroma": 8.0,
+  "deep_vs_river_dL": 40.1,
+  "channel_vs_deep_dL": 33.3,
+  "hatch_vs_land_dL": 30.8
+ },
+ "knockback": {
+  "edge_vs_land_dL": 24.8,
+  "edge_vs_land_dE": 30.2,
+  "edge_chroma": 19.2,
+  "land_chroma": 2.1,
+  "deep_vs_river_dL": 40.0,
+  "channel_vs_deep_dL": 33.2,
+  "hatch_vs_land_dL": 35.9
+ }
+}

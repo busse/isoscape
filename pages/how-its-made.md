@@ -576,6 +576,258 @@ for the Byrd Theatre cutaway).
 
 Code: `src/render.ts`, `src/palette.ts`.
 
+## Floods
+
+A build can draw a flood over today's city: `isoscape build <region> --flood <name>`, one of
+the floods the region file lists. This is a **bathtub fill**, not a model of a river in flood.
+It was built for the series Richmond's floods over time, published as the story
+[Richmond, VA, under water](richmond-floods.md) in November 2026, and so far it has been used only
+for that series. The series' levels come from checked gauge records and surveyed marks, each with
+its range.
+
+A flood names the water's surface, as an elevation in the elevation model's own datum (for
+USGS 3DEP in the continental US, the vertical datum USGS documents for the model is NAVD88;
+isoscape does not record or check it). The surface is level, or falls along the river through
+control points (`profile`: each grid node takes the elevation at its nearest point on the
+line through them, interpolated by distance along it and held at the end values). Every node
+of the 5 m height grid that lies below the surface and can be reached from the river through
+other such nodes, moving to the four neighbors, is under water. The river is the largest body
+of open water that is connected without crossing a wall, so a canal or a pond behind a wall
+does not feed it. A hollow behind higher ground stays dry. Depth is the surface minus the
+grid's elevation: true meters, from bare-earth lidar blurred onto a 5 m grid.
+
+**Floodwalls** are lines with a top elevation: OSM's `wall=flood_wall` ways, chained end to
+end across gaps of up to 60 m (gates shut in a flood), or a line given in the region file.
+An end within 5 m of another wall is joined to it. The water may not cross a link between two
+grid nodes that a wall crosses while the water there (the mean of the two nodes' surface) is
+at or below the wall's top. A wall that ends in low ground is outflanked, as a real one would
+be. A wall is drawn as a thin prism 1.5 m thick (2 m in the series' look), from the ground to its
+top; a look can add a pale casing and an ink or brick-red line along its top, and a label.
+
+**In a dated view** the flood is drawn on the city of its year (see [Time](#time)), and a wall
+given a year (`from`) is not there before it. A wall's openings, the gaps between OSM's
+pieces, are shut in a river flood, so the wall runs across them; with the gates open (Gaston,
+2004) they let water through and are drawn as a dashed line across the gap. The wall's top is
+an elevation the region gives; for Richmond it is the stage at which the weather service says
+the wall is overtopped (41 ft at the City Locks), not a surveyed top.
+
+**The range of an estimate** (`uncertainty`, meters): the ground between the waterline at the
+level and the waterline at the level plus the range is laid on the ground as a band, hatched in
+the flood's hue in the series' look, with a dashed outer edge, so it reads as land that may have
+been under water, not as water. With
+`band: "range"` the water itself is drawn at the low end, and the band runs to the high end.
+
+**Ponds** are the second mode: water at one level inside a polygon, connected to the river or
+not, for rain that could not drain out behind a wall. A pond given a low point (`from`) is only
+the ground below its level connected to that point (4-connected on the grid, inside the
+polygon, from the lowest node within 10 m of the point), as a pool rising in a bowl would be.
+A pond held on the city side (`citySide`) does not spread across a floodwall or across the line
+of its openings, whatever the gates: Gaston's pool (2004) is drawn only behind the wall. With
+the gates open and the James far below flood, water that reached the openings ran out to the
+river (the Bottom spills to it at about 19 ft on the lidar); it could not stand there at 28 ft.
+
+**A soft pool** (`soft`) is drawn without an inked waterline, its tones fading in from nearly
+the land's own color over its first 0.3 m of depth (bands at 0.15, 0.3, 0.5, 0.8, 1.2, 2 and
+3 m), for water known from reports at places rather than from a surveyed level. Numbered
+markers set places on the map, keyed in the caption.
+
+**Staff gauges** (`gauges`) stand at named places under water: a post at true height from the
+ground to the surface, ticked every 5 ft, with the depth in feet set above
+it. The water is drawn on the 5 m grid, but a gauge's figure is the flood's level less the
+elevation model itself at the place (the 2 m lidar in Richmond), as is a set's box figure; a box
+that holds a gauge gives its depth at the gauge's place, named. A look with see-through water (`aquarium`, an opacity) draws walls in water down to the
+ground, tinted below the surface with a waterline; tried, not used: its strips meet edge to edge
+and show faint seams. A tide mark (`tideMark`) is a convention, also tried and not used.
+
+**X-ray walls** (the series' look, `xray`): the water stays opaque, and for each building
+standing in it the part of each wall that faces the camera under the surface, from the ground at
+its corners up to the water, is drawn over the water as a band in the wall's tone taken half
+way to the flood's middle tone, with the waterline in the flood's dark edge color (2.4 units in
+the series' look) along its top and a light line at its foot. It is painted once the strips
+nearer than the building by the depth times cos(tilt)/squash plus 1 m are painted, so it lies
+over the water in front of the wall; a building nearer than that, painted earlier, can be
+crossed by it. At plate scale the band of 11 ft is about 6 px. A building traced from an old map
+stands in the water as today's do: its walls start at the surface, with the same band, and it is
+counted. A bridge pier standing in the water (not on a roof) gets the same band, in the pier's
+tone, from the ground, or the river's own surface, up to the water.
+
+**Drawing.** The flood is painted in each strip after everything on the ground, on its own
+surface rather than draped: cell row by cell row, like the river, with the same laps. Over
+land it is drawn by depth, in three muddy tones by default (under 1 m, 1 to 3 m, 3 m and
+more), or in a look's own tones and bands (the series' draft uses nine blue-grey tones at 0,
+0.3, 0.6, 1, 1.5, 2, 3, 4 and 6 m, its shallowest 24.5 L* darker than the paper ground, with a
+dark waterline and the streets laid faintly on the water); over the river's own channel it
+is a light blue, so the river and where the river went read apart. On a flood plate the river,
+canal and basins at their own level are drawn in that same blue, whether or not the flood's level
+stands above them, and no waterline is drawn across the river's own water: where a flood's level
+falls below the river's surface (November 2020, in the falls above the Mayo Bridge, where the
+river climbs) the river is drawn at its own surface, with no line where the flood ends: no depth
+tone is laid on the river's own water, and no waterline is drawn in a grid cell where some of
+the river's water stands above the flood, or where the dry side of the line is mapped water. The layers are cut so they do not overlap: stacked, each one's
+antialiased edge let the one under it show as a pale line along every strip. The waterline is
+inked where the ground meets the surface. Where the front edge of the plate is under water,
+the slab shows the water in section. A building standing in the water keeps its roof, and its
+walls start at the water's surface, so the part under water is hidden; one the water tops is
+left out and counted. A bridge deck piece whose deck, at its middle, lies below the water's surface
+is drawn under the water: the opaque water covers it, and its outline is laid on the surface in
+the streets-under-water tone, so the bridge's line still shows; deck pieces above the water are
+drawn as decks, their piers starting at the water. Deck heights are the region's rules over the
+ground or the river (the Mayo Bridge's is 6 m), not surveys, and the key says they are
+estimates; decks under the water are counted.
+
+**Ground whose protection is not known** (`unknown`: lines, in a flood with walls). Where a
+levee is not in the map data, a fill with the walls standing runs round the walls' end into
+ground the levee may protect. The flood gives lines that close every course the missing levee
+might take; land the fill reaches with the walls, but would not reach were the lines walls too,
+is taken out of the flood (no water, no depth, no gauge) and drawn with a cross-hatch over a
+light tint, its edge traced from the field smoothed twice over 3 by 3 nodes. Standing water in it
+(the plant's basins) is drawn at its own level; the river stays under the flood. Its area and
+the buildings on it are counted apart (`floodUnknownAcres`, `floodUnknownBuildings`). In
+Richmond it is the Manchester treatment plant's ground east of I-95: the earthen levee from I-95
+to Goodes Street is not in OSM, the 1986 law says the project shall protect the plant, and the
+lines close both of the levee's possible courses (along I-95, and along the river's south edge). The
+hatch's edges follow those assumed lines, and the key says so ("the edges assume where it runs");
+the captions give the buildings on that ground (54 at the 1972 height, 22 at Fran's, 15 at the
+November 2020 height) beside the acres.
+
+**Exaggeration.** The water stands at its elevation on the drawn terrain, which is exaggerated
+(2.5 times in the Richmond views), while buildings and bridge clearances are drawn true. At
+2.5 times, 5 m of water hides 12.5 m of a building's wall and drowns most bridges. A flood
+view should be drawn with the terrain at its true height (`"exaggeration": 1`) for the water
+on the walls to be right.
+
+**Counts.** `isoscape info <region> --flood <name>` and the build's measures give the
+flooded area off the river's own channel (hectares and acres), the area of the channel, how
+many buildings stand in water (any corner or the center under the surface), how many it
+tops, the deepest and median depth at them (the deepest point of each footprint, true
+meters), how many deck spans are awash, and how many grid links the walls held or the water
+went over. Today's buildings are counted apart (`floodBuildingsInWater`), and every building the
+plate draws, traced ones included, together (`floodShown`, `floodShownInWater`,
+`floodShownDepthMedianFt`): the series' captions give the second.
+
+**What it cannot do.** It has no flow, no time and no volume: a real flood rises and falls,
+is steeper through the falls, backs up behind bridges, and fills low ground through drains
+and culverts that the grid cannot see. A surface given for one gauge is carried along the
+whole channel only as far as the control points say. Ground cut off by a ridge that a real
+flood reached through a culvert or a street underpass stays dry, and ground below the surface
+that a real flood did not reach in time is drawn wet. The 5 m grid and its light blur lose
+walls, curbs and embankments narrower than about 10 m unless they are given as walls.
+
+Code: `src/flood.ts` (the fill), `src/scene.ts` (buildings, bridges, walls), `src/render.ts`
+(the drawing), `src/palette.ts` (`flood`).
+
+**The city of the flood's year, from evidence.** A dated flood plate draws the buildings
+standing today by year built and the lost buildings traced from the fire-insurance maps. Two
+gaps leave it thin: a traced building last mapped in 1950-52 with nothing else to date its loss
+was ended in 1960 by assumption, and a building standing today with no year built (no assessor
+year, no OSM date) was drawn only in today's scene. In Shockoe Bottom that left 16 traced
+buildings in 1969 against 177 in 1936. The floods series replaces both with an evidence layer
+(`history/richmond-floods.json`, used by the flood regions only; every other view is drawn as
+before):
+
+- **Images.** The USGS 1:24,000 orthophoto map of the Richmond quadrangle (1974 photography,
+  rendered from its GeoPDF at 600 dpi, about 1 m a pixel, a printed halftone); the City of
+  Richmond's 1999 orthophotos; and the Virginia Base Mapping Program's orthophotos of spring
+  2002, 2017 and spring 2021 (0.8 m Web Mercator pixels, about 0.63 m on the ground). All are
+  public and need no login (`tools/floods/period/fetch.py`; raw files are deleted after
+  cropping). Nothing public and login-free was found for the 1980s: the 1985 plate falls
+  between 1974 and 1999.
+- **Registration.** The 1974 map's own georeferencing is about 14 m off. A shift that grows
+  linearly across the crop is fitted to control windows (360 m squares every 300 m with at
+  least 400 m of today's streets), each placing today's street center lines on the print's
+  light pavement by a search of ±36 m; a translation only where fewer than 12 windows have a
+  clear peak. Shockoe: 21 of 44 windows used, shift at the center 2.9 m west and 12.2 m south,
+  residuals 3.75 m RMS, 6.4 m at most. Manchester: 7 windows, a translation of 1.9 m west and
+  15.6 m south, 3.35 m RMS. The later photographs are used as published (checked by eye
+  against today's streets).
+- **A call per building per image.** On the 1974 halftone a building is scored by the share of
+  its footprint, shrunk 2 m, darker than 0.8 of the photo's median, and by its contrast with a
+  ring 3 to 9 m outside it: present at 55% dark and 8 levels darker than the ring, gone at 25%
+  dark and no darker than the ring, unclear otherwise. On the later photos the footprint's
+  patch (with 3 m around it) is correlated with the next photo's, best over shifts of 3 pixels,
+  and the next photo's call is carried back where the correlation is 0.35 or more; today's
+  state comes from the map. Every call was then looked at: the 1974 calls on block panels
+  (300 m squares, every footprint numbered over the photo), the later ones on contact sheets
+  (every building, one tile per photo); the look confirmed or changed each call. A footprint
+  inside one dark roofed mass counts as present. Unclear stays unclear.
+- **Checks.** A traced Sanborn footprint matching an undated building of today (overlap of
+  half the smaller, the larger at most 3 times the smaller) is a sighting of it in that
+  edition; no match is not taken as absence. The 1980 survey of the 1983 National Register
+  nomination of the Shockoe Valley and Tobacco Row district dates, by address, 29 of today's
+  undated buildings; where it dates one before a sighting that found the spot empty, the
+  survey wins.
+- **Lifespans.** A traced building is drawn through the last year it is seen standing (its last
+  map, or a photograph); its end falls at the first image that shows the spot empty after that.
+  Between the two it is drawn as *unconfirmed* (`END_BOUND`, `later`; `earlier` would end it
+  after its last sighting). An undated building of today is drawn from the first source that
+  shows it, and as unconfirmed for the 5 years before (`UNSEEN_BEFORE`), never back to a source
+  that shows the spot empty (`START_BOUND`, `seen`). So a building on the 1950-52 map and gone
+  on the 1974 photograph, or seen first on the 1974 photograph, is "not ascertained" for 1969
+  and 1972, not absent: the photograph is two years after Agnes and five after Camille.
+- **Unconfirmed buildings** are drawn in the region's look for them (`unconfirmed-slate-both`:
+  every face taken 60% of the way to a slate grey and the roof 75% of the way to a darker slate,
+  with the finer ink and a pale dashed line round the roof, so they read apart from the cream
+  buildings and from the blue-grey water at plate size, and as darker roofs at 600 px), and the
+  caption says how many.
+- **Outbuildings far from the water** are left out of a flood plate: an unconfirmed traced
+  footprint under 60 m² (`OUTBUILDING_AREA`), with no part within 12 m of a street's center line
+  (`OUTBUILDING_STREET`: it does not front a street, so it stood at the back of a lot, as the
+  Sanborn sheets draw sheds, privies, stables and kitchens), and dry with 60 m to spare
+  (`OUTBUILDING_WATER`: no water under it or at any point 30 or 60 m around it). The Sanborn
+  traces carry no class of their own, so size and frontage stand in for one. A confirmed building,
+  or anything in or near the water, is always drawn; the caption counts what is left out (Agnes
+  1972 in Shockoe: 40). A dry twin (`twinOf` a flood) tests the same reach as its flood, so the two
+  draw the same buildings, and sets its floodwall's label where its flood sets it, so the two
+  align.
+- **A traced footprint under a building of the year** is left out (`tracedCovered` in the region:
+  0.5 in the flood regions, off elsewhere) when half or more of its area, sampled every 0.5 m
+  (`COVERED_STEP`), lies under today's buildings drawn that year, their courtyards not counted.
+  It is the same building twice (a trace the 1950s match missed) or one the later building
+  replaced. It is left out whole, never trimmed, before the outbuilding rule, and counted in the
+  caption (Agnes 1972 in Shockoe: 23). A footprint covered by less than half is drawn; where it
+  lies under a taller building of today the two cannot be ordered, and some show (the series'
+  accepted faults list them).
+
+**Drawing nothing over a nearer thing.** The flood regions are drawn with `occlusion: "strict"`
+(the owner found a garage drawn over the nearer arm of the tower that wraps round it, on Hull
+Street, and the tower's x-ray band drawn over the garage's roof). Four rules, off in every other
+view:
+
+- A concave building (an L, a U) is drawn as convex pieces, cut by ear clipping and merged back
+  while the pieces stay convex, each ordered on its own; the seams between pieces get no wall and
+  no roof ink. Ordered whole, two buildings that wrap round each other were ordered by their
+  centers' depth, which is wrong at one end.
+- An x-ray band waits to be painted until the water in front of its building is down, so items
+  painted in between could be covered by it. Each band is now masked by the shapes of every item
+  painted in between (and every band painted before it) that stands nearer than the band's own
+  face where they meet. A pier's band is masked by every nearer item painted before it, since
+  piers are ordered among bridge decks less strictly than buildings are.
+- Two buildings whose outlines overlap by less than 0.5 m (`TOUCH`: neighbors sharing a wall, one
+  outline simplified to 0.45 m across it) are ordered as apart. Two that overlap more (a traced
+  footprint lying on today's building) are left unordered, so they cannot close a cycle that would
+  force a wrong order on their neighbors.
+- Floodwall pieces stop at the outline of a building their line runs through, are mitred at bends, the casing and the red line are bands cut square to the
+  screen at each piece's ends (so no piece's casing pokes into the next), and a wall piece is
+  ordered with room for its casing (its line width × 0.95 screen units).
+
+A floodwall stops at the outline of any building its line runs through: the building wins
+inside its footprint, where OSM's wall line follows the building's own wall (sampled every
+0.25 m; on the 2020 Shockoe plate two buildings on Dock Street near 15th Street and the Edgeworth
+Building are crossed this way; `floodWallCutAtBuildings` counts the pieces cut). Where a wall stands in front of a building, as on Hull
+Street in Manchester, where the wall stands 9.5 m in front of the Paper Company's garage and
+6.6 m above the ground behind it, it hides the garage's foot, as it should. `tools/floods/d3/occlusion.ts` checks every plate: each pair of things painted one
+over the other is tested at points 0.5 SVG units apart, by the nearest surface of each on that
+line of sight (a prism from its footprint, an x-ray band its wall face); a pair counts when the
+earlier stands more than 0.75 m nearer over 2 square units or more. Pairs whose footprints overlap
+on the ground (over 5% of the smaller, or 1 m²) and sloped bridge decks against each other are
+listed apart: the first is the data, the second outside the prism model.
+
+The calls, scores and looks, with each image's source and registration, are in
+`history/evidence/richmond-floods.json`; the method in `tools/floods/period/`. What it cannot
+do: a halftone cannot split a row of joined roofs, a light roof can read as an empty lot, trees
+hide small buildings, and nothing dates a loss between two images more closely than the images.
+
+
 ## Time
 
 A region with a `time` section is drawn as a **series**: one scene for each year (epoch) in its
@@ -707,7 +959,9 @@ Congress has Richmond editions from 1886 to 1925 online. isoscape traces them:
    tutorial uses both: a building of today counts as the traced one only if the assessor dates
    it to that edition or earlier (so a 2016 museum on the lot does not hide a 1924 garage), and
    a building is followed into a later edition only when the two outlines overlap by half of the
-   larger (so a big garage is not followed into a small shed inside its outline).
+   larger (so a big garage is not followed into a small shed inside its outline). The floods series dates the
+   assumed ends from aerial photographs instead (see Floods, "The city of the flood's year, from
+   evidence").
 4. **Clean.** A last pass drops slivers, any footprint more than 8 times longer than it is
    wide and under 12 m wide, or over 100 m long and under 8 m wide on average: on the sheets these are rail viaducts, track-side sheds and street
    edges, and extruded they would stand as walls. It then smooths each outline to within 1.5 m,

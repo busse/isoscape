@@ -1,0 +1,187 @@
+{
+ "line_length_m": 1200.7,
+ "openings": [
+  {
+   "mid_lonlat": [
+    -77.4284,
+    37.53161
+   ],
+   "width_m": 10.6,
+   "sill_m": 6.27
+  },
+  {
+   "mid_lonlat": [
+    -77.43565,
+    37.53356
+   ],
+   "width_m": 9.3,
+   "sill_m": 9.27
+  },
+  {
+   "mid_lonlat": [
+    -77.43309,
+    37.53215
+   ],
+   "width_m": 16.9,
+   "sill_m": 9.14
+  },
+  {
+   "mid_lonlat": [
+    -77.43387,
+    37.53241
+   ],
+   "width_m": 10.6,
+   "sill_m": 8.76
+  }
+ ],
+ "rows": [
+  {
+   "level_m": 5.5,
+   "level_ft": 18.0,
+   "Q_wall_removed_m3s": 0.0,
+   "Q_openings_only_m3s": 0.0
+  },
+  {
+   "level_m": 5.75,
+   "level_ft": 18.9,
+   "Q_wall_removed_m3s": 0.0,
+   "Q_openings_only_m3s": 0.0
+  },
+  {
+   "level_m": 6.0,
+   "level_ft": 19.7,
+   "Q_wall_removed_m3s": 0.3,
+   "Q_openings_only_m3s": 0.0
+  },
+  {
+   "level_m": 6.25,
+   "level_ft": 20.5,
+   "Q_wall_removed_m3s": 12.2,
+   "Q_openings_only_m3s": 0.0
+  },
+  {
+   "level_m": 6.5,
+   "level_ft": 21.3,
+   "Q_wall_removed_m3s": 43.6,
+   "Q_openings_only_m3s": 2.0
+  },
+  {
+   "level_m": 6.75,
+   "level_ft": 22.1,
+   "Q_wall_removed_m3s": 99.7,
+   "Q_openings_only_m3s": 6.0
+  },
+  {
+   "level_m": 7.0,
+   "level_ft": 23.0,
+   "Q_wall_removed_m3s": 200.5,
+   "Q_openings_only_m3s": 11.2
+  },
+  {
+   "level_m": 7.25,
+   "level_ft": 23.8,
+   "Q_wall_removed_m3s": 356.5,
+   "Q_openings_only_m3s": 17.4
+  },
+  {
+   "level_m": 7.5,
+   "level_ft": 24.6,
+   "Q_wall_removed_m3s": 569.2,
+   "Q_openings_only_m3s": 24.5
+  },
+  {
+   "level_m": 7.75,
+   "level_ft": 25.4,
+   "Q_wall_removed_m3s": 836.0,
+   "Q_openings_only_m3s": 32.4
+  },
+  {
+   "level_m": 8.0,
+   "level_ft": 26.2,
+   "Q_wall_removed_m3s": 1154.2,
+   "Q_openings_only_m3s": 40.9
+  },
+  {
+   "level_m": 8.25,
+   "level_ft": 27.1,
+   "Q_wall_removed_m3s": 1532.0,
+   "Q_openings_only_m3s": 50.1
+  },
+  {
+   "level_m": 8.5,
+   "level_ft": 27.9,
+   "Q_wall_removed_m3s": 1981.7,
+   "Q_openings_only_m3s": 59.9
+  },
+  {
+   "level_m": 8.75,
+   "level_ft": 28.7,
+   "Q_wall_removed_m3s": 2505.9,
+   "Q_openings_only_m3s": 70.3
+  },
+  {
+   "level_m": 9.0,
+   "level_ft": 29.5,
+   "Q_wall_removed_m3s": 3123.8,
+   "Q_openings_only_m3s": 83.3
+  },
+  {
+   "level_m": 9.25,
+   "level_ft": 30.3,
+   "Q_wall_removed_m3s": 3844.4,
+   "Q_openings_only_m3s": 99.8
+  },
+  {
+   "level_m": 9.5,
+   "level_ft": 31.2,
+   "Q_wall_removed_m3s": 4662.9,
+   "Q_openings_only_m3s": 123.9
+  },
+  {
+   "level_m": 9.75,
+   "level_ft": 32.0,
+   "Q_wall_removed_m3s": 5563.3,
+   "Q_openings_only_m3s": 153.5
+  },
+  {
+   "level_m": 10.0,
+   "level_ft": 32.8,
+   "Q_wall_removed_m3s": 6538.2,
+   "Q_openings_only_m3s": 187.3
+  },
+  {
+   "level_m": 10.25,
+   "level_ft": 33.6,
+   "Q_wall_removed_m3s": 7584.4,
+   "Q_openings_only_m3s": 224.6
+  },
+  {
+   "level_m": 10.5,
+   "level_ft": 34.4,
+   "Q_wall_removed_m3s": 8697.1,
+   "Q_openings_only_m3s": 265.0
+  },
+  {
+   "level_m": 10.75,
+   "level_ft": 35.3,
+   "Q_wall_removed_m3s": 9872.6,
+   "Q_openings_only_m3s": 308.4
+  },
+  {
+   "level_m": 11.0,
+   "level_ft": 36.1,
+   "Q_wall_removed_m3s": 11108.3,
+   "Q_openings_only_m3s": 354.4
+  }
+ ],
+ "level_to_pass": {
+  "170_m3s": {
+   "wall_removed_m": 6.94,
+   "openings_only_m": 9.88
+  },
+  "310_m3s": {
+   "wall_removed_m": 7.18,
+   "openings_only_m": 10.76
+  }
+ }
+}

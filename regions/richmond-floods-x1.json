@@ -1,0 +1,260 @@
+{
+  "title": "Richmond, VA \u2014 Shockoe Bottom and the James, from the Capitol to Rocketts (terrain not exaggerated)",
+  "center": [
+    -77.4275,
+    37.531
+  ],
+  "width": 3000,
+  "depth": 2200,
+  "bearing": -8.7,
+  "snap": false,
+  "scale": 2.0,
+  "squash": 0.5,
+  "exaggeration": 1.0,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+    {
+      "match": "Manchester",
+      "deck": 24
+    },
+    {
+      "match": "Mayo",
+      "deck": 6
+    },
+    {
+      "match": "Potterfield",
+      "deck": 3
+    }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 5,
+    "contour": 2,
+    "majorEvery": 5,
+    "demResolution": 2
+  },
+  "floodwalls": [
+    {
+      "name": "Richmond floodwall",
+      "osm": "flood_wall",
+      "top": 12.5,
+      "maxGap": 60,
+      "note": "Line from OSM (wall=flood_wall, 11 ways, chained across gaps up to 60 m). Top 12.5 m is a PLACEHOLDER, not a researched value."
+    },
+    {
+      "name": "APPROXIMATE tie-in, north wall west end",
+      "line": [
+        [
+          -77.436079,
+          37.534206
+        ],
+        [
+          -77.436221,
+          37.534646
+        ],
+        [
+          -77.436392,
+          37.534946
+        ]
+      ],
+      "top": 12.5,
+      "note": "APPROXIMATE: not from any source. A short line from the end of OSM's mapped wall to ground above the placeholder top (read off the 5 m grid), added only so the spike can show a wall holding. The real tie-ins (levees, gates, the railroad embankment) must come from research."
+    },
+    {
+      "name": "APPROXIMATE tie-in, north wall east end",
+      "line": [
+        [
+          -77.425782,
+          37.530409
+        ],
+        [
+          -77.425197,
+          37.530641
+        ],
+        [
+          -77.424531,
+          37.530905
+        ]
+      ],
+      "top": 12.5,
+      "note": "APPROXIMATE: not from any source. A short line from the end of OSM's mapped wall to ground above the placeholder top (read off the 5 m grid), added only so the spike can show a wall holding. The real tie-ins (levees, gates, the railroad embankment) must come from research."
+    },
+    {
+      "name": "APPROXIMATE tie-in, south wall west end (past the frame)",
+      "line": [
+        [
+          -77.444308,
+          37.529907
+        ],
+        [
+          -77.445113,
+          37.529923
+        ]
+      ],
+      "top": 12.5,
+      "note": "APPROXIMATE: not from any source. A short line from the end of OSM's mapped wall to ground above the placeholder top (read off the 5 m grid), added only so the spike can show a wall holding. The real tie-ins (levees, gates, the railroad embankment) must come from research."
+    },
+    {
+      "name": "APPROXIMATE tie-in, south wall east end (along the rail embankment to past the frame)",
+      "line": [
+        [
+          -77.428734,
+          37.524582
+        ],
+        [
+          -77.428377,
+          37.523619
+        ],
+        [
+          -77.427722,
+          37.520497
+        ]
+      ],
+      "top": 12.5,
+      "note": "APPROXIMATE: not from any source. A short line from the end of OSM's mapped wall to ground above the placeholder top (read off the 5 m grid), added only so the spike can show a wall holding. The real tie-ins (levees, gates, the railroad embankment) must come from research."
+    }
+  ],
+  "floods": {
+    "agnes-1972": {
+      "title": "Hurricane Agnes, June 1972 (no floodwall)",
+      "caption": "ROUGH TEST, placeholder levels: not researched, not for publication (level 10.8 m)",
+      "level": 10.8,
+      "walls": false
+    },
+    "agnes-1972-wall": {
+      "title": "An Agnes-level river with today's floodwall",
+      "caption": "ROUGH TEST, placeholder levels: not researched, not for publication (level 10.8 m, wall top 12.5 m)",
+      "level": 10.8,
+      "walls": true
+    },
+    "agnes-1972-sloped": {
+      "title": "Hurricane Agnes, June 1972, sloped surface (no floodwall)",
+      "caption": "ROUGH TEST, placeholder levels: not researched, not for publication (11.6 m falling to 10.6 m)",
+      "profile": [
+        [
+          -77.447,
+          37.53,
+          11.6
+        ],
+        [
+          -77.434,
+          37.5275,
+          11.0
+        ],
+        [
+          -77.423,
+          37.5245,
+          10.8
+        ],
+        [
+          -77.412,
+          37.519,
+          10.6
+        ]
+      ],
+      "walls": false
+    },
+    "juan-1985": {
+      "title": "Hurricane Juan, November 1985 (no floodwall)",
+      "caption": "ROUGH TEST, placeholder levels: not researched, not for publication (level 9.0 m)",
+      "level": 9.0,
+      "walls": false
+    },
+    "camille-1969": {
+      "title": "Hurricane Camille, August 1969 (no floodwall)",
+      "caption": "ROUGH TEST, placeholder levels: not researched, not for publication (level 8.4 m)",
+      "level": 8.4,
+      "walls": false
+    },
+    "gaston-2004": {
+      "title": "Tropical Storm Gaston, August 2004: rain behind the wall",
+      "caption": "ROUGH TEST, placeholder levels: not researched, not for publication (pond at 8.9 m in Shockoe Bottom)",
+      "walls": true,
+      "ponds": [
+        {
+          "level": 8.9,
+          "ring": [
+            [
+              -77.4355,
+              37.5345
+            ],
+            [
+              -77.43,
+              37.5322
+            ],
+            [
+              -77.4262,
+              37.531
+            ],
+            [
+              -77.4255,
+              37.5345
+            ],
+            [
+              -77.427,
+              37.5385
+            ],
+            [
+              -77.431,
+              37.541
+            ],
+            [
+              -77.435,
+              37.539
+            ]
+          ]
+        }
+      ]
+    },
+    "spill-test": {
+      "title": "Shockoe Bottom: a pool at the terrain's spill level",
+      "caption": "ROUGH TEST: the pool at the terrain's spill level, not an observed flood (5.81 m NAVD88 on the cached lidar as is; the floodwall is not drawn)",
+      "walls": false,
+      "ponds": [
+        {
+          "level": 5.81,
+          "from": [
+            -77.4293,
+            37.53337
+          ],
+          "ring": [
+            [
+              -77.4362,
+              37.5343
+            ],
+            [
+              -77.4305,
+              37.5318
+            ],
+            [
+              -77.4258,
+              37.5305
+            ],
+            [
+              -77.424,
+              37.533
+            ],
+            [
+              -77.427,
+              37.542
+            ],
+            [
+              -77.433,
+              37.542
+            ],
+            [
+              -77.4362,
+              37.5343
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

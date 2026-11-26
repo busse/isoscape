@@ -49,7 +49,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 PAGES = os.path.join(ROOT, 'pages')
 AUTHOR = 'Chris Busse'
-SITE_URL = 'https://busse.github.io/isoscape/'
+SITE_URL = 'https://isoscape.chrisbusse.com/'
 
 # Per edition: the widest picture kept, JPEG quality, the page size in points.
 EDITION = {

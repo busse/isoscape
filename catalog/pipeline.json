@@ -3519,18 +3519,77 @@
    "kind": "batch",
    "stage": "final draft",
    "status": "active",
-   "asset_version": "1.0.0-rc1",
+   "asset_version": "1.0.0-rc3",
    "published_version": null,
    "live_version": null,
    "on_sale": false,
    "orders": null,
-   "rounds": 1,
+   "rounds": 3,
    "waiting_on": "owner",
    "decision": "Final draft rc3 passed the independent recheck (2026-11-25); the owner confirmed the Gaston sheet's look and the shorter title. The release decision is deferred by the owner until he has read the editorial (story-richmond-floods). Branches feature/flood-surface and feature/flood-rain, unmerged. Record: drafts/richmond-floods/casestudy/.",
-   "accepted_faults": [],
+   "accepted_faults": [
+    {
+     "what": "12 painted-over slivers on the Shockoe plates, under about 1.5 mm at print size (the same 12 as rc1)",
+     "on": "plates; drafts/richmond-floods/accepted-faults.md item 1"
+    },
+    {
+     "what": "floodwall joints lap 1.5 to 2.5 m at sharp bends",
+     "box": [
+      4961,
+      2251,
+      5261,
+      2431
+     ],
+     "on": "shockoe-2020 sheet 32x24"
+    },
+    {
+     "what": "traced footprints under less than half of today's buildings are drawn (sanborn-1924-2219 the largest)",
+     "box": [
+      4644,
+      1807,
+      4884,
+      2047
+     ],
+     "on": "shockoe-1972 sheet 32x24"
+    },
+    {
+     "what": "buildings the water tops are left out of the plate but drawn on its dry twin",
+     "on": "1972 plate and twin"
+    },
+    {
+     "what": "a short shore hook where the not-known ground meets a creek mouth",
+     "box": [
+      4850,
+      1650,
+      5150,
+      1800
+     ],
+     "on": "manchester-1996-2020 sheet 32x10"
+    },
+    {
+     "what": "short ink hooks at two small islands in the falls",
+     "box": [
+      755,
+      2847,
+      1449,
+      3309
+     ],
+     "on": "shockoe-2020 sheet 32x24"
+    },
+    {
+     "what": "the Gaston band's dashed edge up to one grid cell beyond the wall's foot",
+     "box": [
+      4339,
+      2084,
+      5611,
+      2569
+     ],
+     "on": "shockoe-2004 sheet 32x24"
+    }
+   ],
    "planned_edition": null,
-   "last_inspected": null,
-   "branch": null,
+   "last_inspected": "2026-11-25 (rc1 independent; rc2 targeted recheck); rc3 looked at tile by tile in the fix round",
+   "branch": "feature/flood-surface",
    "worktree": null,
    "links": [],
    "log": [
@@ -3600,17 +3659,17 @@
    "stage": "outline",
    "status": "active",
    "asset_version": null,
-   "published_version": null,
+   "published_version": 1,
    "live_version": null,
    "on_sale": false,
-   "orders": null,
+   "orders": 0,
    "rounds": 0,
    "waiting_on": "owner",
-   "decision": "Draft 1 of the editorial is with the owner to read (2026-11-25): ISO-TEST/_preview/richmond-floods-editorial/ on the Mac; branch story/richmond-floods (head db87bf2e), unlisted, about 4,100 words, 96 sourced claims. After his read: revisions, an independent fact check, and the publication decision for story and sheets together. No outside parties contacted.",
+   "decision": "Ready to publish (owner, 2026-11-26: ship). The 14 fact-check fixes applied; title shortened; listed (pdf: true, nav and front page); editorial release record v1 (releases/story-richmond-floods/v1.json; rebuild check reproduced both steps). The coordinator merges, publishes and sets the stage to published once live. No outside parties contacted.",
    "accepted_faults": [],
    "planned_edition": null,
-   "last_inspected": null,
-   "branch": null,
+   "last_inspected": "2026-11-26 (independent fact check of draft 1: nothing blocking, 14 fixes, all applied)",
+   "branch": "story/richmond-floods",
    "worktree": null,
    "links": [],
    "log": [

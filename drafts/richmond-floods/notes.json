@@ -1,0 +1,1274 @@
+{
+ "about": "Floods series, FINAL DRAFT rc3 (1.0.0-rc3): every word the sheets print, with its sources. Written by tools/floods/rc1/notes.py; read by tools/floods/rc1/sheet.py. `checked` says how far a source carries a line. Written with Claude for Chris Busse.",
+ "stage": "FINAL DRAFT rc3",
+ "version": "1.0.0-rc3",
+ "sources": {
+  "nws-ricv2": "NWS National Water Prediction Service, City Locks gauge RICV2: historic crests and impact stages (41 ft \"Flood wall is overtopped\"; 27 ft 21st and Cary closed; 24 ft Mayo Bridge closed), https://api.water.noaa.gov/nwps/v1/gauges/ricv2 (copy: floods-research/river/raw/nwps_ricv2.json); summarized in drafts/richmond-floods/casestudy/2026-11-23-02-research-river-floods-and-the-wall/floods.md, \"NWS impact stages\"",
+  "noaa-agnes": "NOAA, Final Report of the Disaster Survey Team on the Events of Agnes, Oct. 1972, https://www.govinfo.gov/content/pkg/CZIC-gb70-9-u55-1972/html/CZIC-gb70-9-u55-1972.htm",
+  "pp924": "USGS Professional Paper 924, Table A4, PDF p. 406, https://pubs.usgs.gov/pp/0924/report.pdf",
+  "agnes-sign": "Agnes high-water sign, Dock and Pear streets, 17 ft above ground, 35.5 ft NAVD88, https://www.hmdb.org/m.asp?m=133685",
+  "ofr70-51": "USGS Open-File Report 70-51, station 02-0377.00, printed p. 119 (PDF p. 131) and Table 2, printed p. 20, https://pubs.usgs.gov/of/1970/0051/report.pdf",
+  "ha410": "USGS Hydrologic Atlas HA-410 (1969), Table 1 and Figure 1, and its mapped extent of the 1969 flood, https://pubs.usgs.gov/ha/410/plate-1.pdf",
+  "levels": "drafts/richmond-floods/casestudy/2026-11-23-04-fema-profiles-and-second-read/levels.json (the checked drawing levels) and second-read.md",
+  "datums": "drafts/richmond-floods/casestudy/2026-11-23-02-research-river-floods-and-the-wall/datums.md; NGVD29 to NAVD88 -1.03 ft at the Locks (second-read.md, \"Datums\")",
+  "usgs-iv": "USGS 02037705 (James River at City Locks), parameter 62620 (NAVD88), approved instantaneous values: 16.96 ft, Nov. 14, 2020 (second-read.md)",
+  "marker": "Corps of Engineers and City of Richmond, \"Richmond Local Flood Protection\" marker, Dock and 17th streets (dedicated Oct. 21, 1994; 750 acres, 150 Shockoe and 600 Manchester; closures), https://www.hmdb.org/m.asp?m=23953; drafts/richmond-floods/casestudy/2026-11-23-02-research-river-floods-and-the-wall/floodwall.md",
+  "city-faq": "City of Richmond DPU, \"Floodwall FAQs\" (the gravity U-wall west of the Mayo Bridge, 43 ft from top to river's edge), https://www.rva.gov/public-utilities/news/floodwall-faqs; drafts/richmond-floods/casestudy/2026-11-23-02-research-river-floods-and-the-wall/floodwall.md, \"Heights above ground\"",
+  "wrda1986": "Water Resources Development Act of 1986, sec. 401(a), 100 Stat. 4126: \"Such project shall include flood protection for the Richmond municipal wastewater treatment facility\" (copy: floods-research/river/raw/pdf/wrda1986.txt, line 2885), https://www.govinfo.gov/content/pkg/STATUTE-100/pdf/STATUTE-100-Pg4082.pdf; drafts/richmond-floods/casestudy/2026-11-23-02-research-river-floods-and-the-wall/floodwall.md",
+  "osm-levee": "drafts/richmond-floods/casestudy/2026-11-23-02-research-river-floods-and-the-wall/floodwall.md, \"Coordinates from OpenStreetMap\": the earthen levee from I-95 to Goodes Street is missing from OSM in the cache",
+  "post2004": "Washington Post, \"Bottom's Up,\" Nov. 30, 2004 (most water converged on 17th and Main; Havana '59, 13 ft up the dining-room wall; Main Street Station \"escaped damage\"), https://www.washingtonpost.com/wp-dyn/articles/A23727-2004Nov30.html; drafts/richmond-floods/casestudy/2026-11-23-03-research-gaston-and-the-weather/sources.md S28",
+  "nbc12-2022": "NBC12, \"Remembering the destruction of Hurricane Gaston 18 years later,\" Aug. 30, 2022 (Bottoms Up: 6 ft 2 in inside, above a 3 ft step), https://www.12onyourside.com/2022/08/30/remembering-destruction-hurricane-gaston-18-years-later/; sources.md S31",
+  "wtvr2024": "WTVR, \"Richmond Remembers: How Gaston flooded Shockoe Bottom,\" Aug. 30, 2024 (\"rapids\" at 15th and Main), https://wtvr.com/news/local-news/richmond-remembers-tropical-storm-gaston-aug-30-2024; sources.md S33",
+  "ap2004": "AP via Insurance Journal and Fox News, Aug. 31 to Sept. 20, 2004 (\"up to 10 feet\"; the gates open), sources.md S22 to S27",
+  "gaston-open": "The floodwall's openings stayed open in Gaston: AP (Insurance Journal, Sept. 20, 2004, S22); NBC12, Sept. 1, 2017 (S29) and Sept. 11, 2018 (S30); drafts/richmond-floods/casestudy/2026-11-23-03-research-gaston-and-the-weather/gaston-mechanism.md",
+  "gaston-river": "USGS 02037500 (Westham) discharge, Aug. 30, 2004: peak 14,800 cfs at 9:15 p.m., against 42,000 cfs for minor flooding (NWS RMDV2); drafts/richmond-floods/casestudy/2026-11-23-03-research-gaston-and-the-weather/gaston-timeline.md, S10 and S12",
+  "gaston-rain": "Six to more than twelve inches in about eight hours: NHC Tropical Cyclone Report AL072004, Table 3 p. 8, https://www.nhc.noaa.gov/data/tcr/AL072004_Gaston.pdf; RIC airport hourly record (S8); drafts/richmond-floods/casestudy/2026-11-23-03-research-gaston-and-the-weather/gaston-timeline.md",
+  "gaston-depths": "drafts/richmond-floods/casestudy/2026-11-23-03-research-gaston-and-the-weather/gaston-water.md, sections 2 and 4: the reports imply a surface between about 24 and 35 ft NAVD88; \"up to 10 ft\" at the low point gives 27 to 28 ft",
+  "spill": "drafts/richmond-floods/casestudy/2026-11-23-15-spill-path/ (spill.json; the low point, 4.07 m NAVD88, a pit beside the 17th Street Market) and step 20 (17th and Main corrected)",
+  "creek": "The Richmonder, Sept. 24, 2024 (Shockoe Creek runs buried to 17th and Dock), https://www.richmonder.org/helene-and-the-hidden-creek-2/; drafts/richmond-floods/casestudy/2026-11-23-03-research-gaston-and-the-weather/sources.md S35",
+  "closure-dock": "drafts/richmond-floods/casestudy/2026-11-23-02-research-river-floods-and-the-wall/floodwall.md, \"Closures\": the 17th Street closure on Dock Street (DPU thread; WTVR, Nov. 12, 2020)",
+  "nr1980": "National Register nomination, Shockoe Valley and Tobacco Row Historic District, 1980 survey, https://npgallery.nps.gov/GetAsset/2f9dd6b2-9d0e-4544-89d4-7071fc6d0063; drafts/richmond-floods/casestudy/2026-11-24-05-sources-for-the-1969-72-city/sources.md; check in drafts/richmond-floods/casestudy/2026-11-24-44-national-register-1980-check/",
+  "osm": "OpenStreetMap contributors (ODbL), in the cache data/richmond-i195-rocketts/osm.json (fetched November 14, 2026)",
+  "retention": "The Shockoe retention basin on Chapel Island, built 1983 (virginiaplaces.org, a secondary source; floodwall.md, \"Shockoe drainage\")",
+  "rvanews2011": "RVANews, May 12, 2011, https://rvanews.com/?p=41409 (some gates, including Dock Street, closed in the 1996 floods; floodwall.md)",
+  "wtvr2020": "WTVR, Nov. 12, 2020, https://www.wtvr.com/news/local-news/richmond-closes-floodwall-james-river-to-crest-friday (Dock Street closure at noon; floodwall.md)",
+  "counts": "drafts/richmond-floods/counts.json, \"rc3\" (tools/floods/d3/boxcounts.ts: depth at a box's center on the 2 m lidar; buildings in water)",
+  "lidar": "USGS 3DEP lidar, 2 m, NAVD88, in the cache data/richmond-i195-rocketts/dem.bin.gz",
+  "rain-radar": "Rain over the Shockoe Creek watershed, by hour: NEXRAD Level II, KAKQ Wakefield (NOAA, via the Unidata bucket on AWS), tropical Z = 250 R^1.2, corrected to gauges (NCEI GHCN-Daily and Global Hourly; NWS Wakefield and NHC reports); the watershed (31 square km, 12 sq mi) computed from USGS 3DEP. Computed for this series with Claude on branch feature/flood-rain: tools/floods/rain/data/rain.json (\"basin_hourly\", \"basin_total\"); method in tools/floods/rain/radar.py and watershed.py",
+  "rain-events": "drafts/richmond-floods/casestudy/2026-11-23-03-research-gaston-and-the-weather/sources.md: S20 (Style Weekly, quoting the weather service: the first flash-flood warning, 3:58 p.m.), S5 (NCEI Storm Events: flash flooding begins 4:30; the file labels its times EST, and whether that means standard time, so 5:30 p.m. EDT, is not confirmed; hence \"about 4:30, flooding reported\"), S18 (the 2009 lawsuit alleges flooding by 4:30), S23 (AP via Insurance Journal: a car afloat in the Bottom about 6:30), S10 and S12 (USGS 02037500 Westham: peak 14,800 cfs at 9:15 p.m.); Storm Events times are labeled EST in the file, so they may be an hour late (tools/floods/rain/figures.py on feature/flood-rain)",
+  "spill-cityside": "drafts/richmond-floods/casestudy/2026-11-23-15-spill-path/: the Bottom spills to the river at about 19 ft (5.8 m NAVD88) on the lidar; with the gates open (gaston-open) and the James far below flood (gaston-river), water reaching the openings ran out to the river and could not stand there at 28 ft",
+  "nhc-gaston": "NHC Tropical Cyclone Report AL072004 (Gaston), Table 1: a tropical depression over North Carolina and Virginia on Aug. 30, 2004, https://www.nhc.noaa.gov/data/tcr/AL072004_Gaston.pdf; drafts/richmond-floods/casestudy/2026-11-23-03-research-gaston-and-the-weather/gaston-timeline.md, section 1",
+  "evidence": "history/evidence/richmond-floods.json and drafts/richmond-floods/casestudy/2026-11-24-40 to -47 (the period city: Sanborn traces, the 1974 USGS orthophoto, City of Richmond 1999 and VGIN 2002, 2017, 2021 orthophotos)",
+  "town1788": "history/richmond-floods.json and history/sanborn (the town of about 1788 as recorded and traced); 1771 level: ofr70-51 (diaries, via the Corps), levels.json"
+ },
+ "sheets": [
+  {
+   "id": "shockoe-1972",
+   "area": "shockoe",
+   "plate": "1972:1972",
+   "title": "Shockoe Bottom in flood: Hurricane Agnes, June 1972",
+   "sources": [
+    "agnes-sign",
+    "levels",
+    "noaa-agnes",
+    "nws-ricv2",
+    "pp924"
+   ]
+  },
+  {
+   "id": "shockoe-1936",
+   "area": "shockoe",
+   "plate": "1936:1936",
+   "title": "Shockoe Bottom in flood: March 1936",
+   "sources": [
+    "datums",
+    "ha410",
+    "levels",
+    "pp924"
+   ]
+  },
+  {
+   "id": "shockoe-1969",
+   "area": "shockoe",
+   "plate": "1969:1969",
+   "title": "Shockoe Bottom in flood: Hurricane Camille, August 1969",
+   "sources": [
+    "ha410",
+    "levels",
+    "ofr70-51",
+    "pp924"
+   ]
+  },
+  {
+   "id": "shockoe-1985",
+   "area": "shockoe",
+   "plate": "1985:1985",
+   "title": "Shockoe Bottom in flood: the Election Day flood, November 1985",
+   "sources": [
+    "datums",
+    "levels",
+    "nws-ricv2"
+   ]
+  },
+  {
+   "id": "shockoe-1996",
+   "area": "shockoe",
+   "plate": "1996:1996",
+   "title": "Shockoe Bottom: Hurricane Fran, September 1996, against the new floodwall",
+   "sources": [
+    "levels",
+    "marker",
+    "nws-ricv2"
+   ]
+  },
+  {
+   "id": "shockoe-2004",
+   "area": "shockoe",
+   "plate": "gaston-b:2004",
+   "title": "Shockoe Bottom: Gaston's rain, August 30, 2004",
+   "sources": [
+    "ap2004",
+    "gaston-depths",
+    "gaston-open",
+    "gaston-rain",
+    "gaston-river",
+    "nbc12-2022",
+    "post2004",
+    "wtvr2024"
+   ]
+  },
+  {
+   "id": "shockoe-2020",
+   "area": "shockoe",
+   "plate": "2020:2020",
+   "title": "Shockoe Bottom: November 2020, against the floodwall",
+   "sources": [
+    "levels",
+    "marker",
+    "nws-ricv2",
+    "usgs-iv"
+   ]
+  },
+  {
+   "id": "shockoe-1771",
+   "area": "shockoe",
+   "plate": "1771:1788",
+   "title": "The flood of 1771, an estimate, on the town of about 1788",
+   "sources": [
+    "datums",
+    "levels",
+    "ofr70-51"
+   ]
+  },
+  {
+   "id": "manchester-1972-height",
+   "area": "manchester",
+   "plate": "agnes-today:2026",
+   "second": "agnes-today-nowall:2026",
+   "title": "Manchester: the 1972 flood's height, with today's wall and without it",
+   "sources": [
+    "levels",
+    "marker",
+    "nws-ricv2"
+   ]
+  },
+  {
+   "id": "manchester-1996-2020",
+   "area": "manchester",
+   "plate": "1996:2026",
+   "second": "2020:2026",
+   "title": "Manchester: Fran's height (1996) and the November 2020 height against today's wall",
+   "sources": [
+    "levels",
+    "marker",
+    "nws-ricv2",
+    "usgs-iv"
+   ]
+  }
+ ],
+ "captions": {
+  "shockoe:1771:1788": {
+   "title": "The flood of 1771, an estimate, on the town of about 1788",
+   "lines": [
+    "Water at about 38 ft above sea level (NAVD88) at the City Locks, derived from a 1771 stage of 38 ft on the old gauge near Mayo's Bridge (the Corps, from diaries); other accounts give 30 ft and 45 ft on unstated bases; ±3 ft is our judgment. Hatched: up to 41 ft.",
+    "231.5 acres under water off the channel; buildings in the water: 1 of the 6 shown (3.7 ft median, 3.7 ft deepest).",
+    "Bathtub fill, not a flood model, on today's ground; the town of 1788 as the downtown history draws it: few of its buildings are known. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "ofr70-51",
+    "levels",
+    "datums",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:1936:1936": {
+   "title": "The flood of March 1936",
+   "lines": [
+    "Water at 26.5 ft above sea level (NAVD88) at the City Locks (±0.4 ft), 27.8 ft at the Mayo Bridge. USGS high-water marks.",
+    "159.1 acres under water off the channel; buildings in the water: 144 of the 1,172 shown (6.1 ft median, 24.2 ft deepest).",
+    "Bathtub fill, not a flood model. The city of 1936 from maps, records and air photos; grey, dashed roof edge: 52 not ascertained; left out: 3 far-off outbuildings, 30 footprints under a 1936 building. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "pp924",
+    "ha410",
+    "levels",
+    "datums",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:1969:1969": {
+   "title": "Hurricane Camille, August 1969",
+   "lines": [
+    "Water at 27.6 ft above sea level (NAVD88) at the City Locks (±0.2 ft), 28.9 ft at the Mayo Bridge. USGS records and marks.",
+    "174.2 acres under water off the channel; buildings in the water: 141 of the 1,171 shown (6.3 ft median, 27.4 ft deepest).",
+    "Bathtub fill, not a flood model. The city of 1969 from maps, records and air photos; grey, dashed roof edge: 270 not ascertained; left out: 45 far-off outbuildings, 23 footprints under a 1969 building. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "ofr70-51",
+    "ha410",
+    "pp924",
+    "levels",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:1972:1972": {
+   "title": "Hurricane Agnes, June 1972",
+   "lines": [
+    "Water at 35.5 ft above sea level (NAVD88) at the City Locks (±0.3 ft; NOAA, USGS, the Dock Street sign), perhaps 1 ft higher at the Mayo Bridge (assumed from 1969).",
+    "220.4 acres under water off the channel; buildings in the water: 226 of the 1,173 shown (10.2 ft median, 33.2 ft deepest).",
+    "Bathtub fill, not a flood model. The city of 1972 from maps, records and air photos; grey, dashed roof edge: 273 not ascertained; left out: 40 far-off outbuildings, 23 footprints under a 1972 building. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "noaa-agnes",
+    "pp924",
+    "nws-ricv2",
+    "agnes-sign",
+    "levels",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:1972-dry:1972": {
+   "title": "Hurricane Agnes, June 1972",
+   "lines": [
+    "Water at 35.5 ft above sea level (NAVD88) at the City Locks (±0.3 ft; NOAA, USGS, the Dock Street sign), perhaps 1 ft higher at the Mayo Bridge (assumed from 1969).",
+    "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+    "Bathtub fill, not a flood model. The city of 1972 from maps, records and air photos; grey, dashed roof edge: 275 not ascertained; left out: 40 far-off outbuildings, 23 footprints under a 1972 building. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "noaa-agnes",
+    "pp924",
+    "nws-ricv2",
+    "agnes-sign",
+    "levels",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:1985:1985": {
+   "title": "The Election Day flood, November 1985",
+   "lines": [
+    "Water at 29.7 ft above sea level (NAVD88) at the City Locks (±0.4 ft; weather service crest record), perhaps 1 ft higher at the Mayo Bridge (assumed from 1969).",
+    "192.5 acres under water off the channel; buildings in the water: 148 of the 1,111 shown (6.5 ft median, 27.4 ft deepest).",
+    "Bathtub fill, not a flood model. The city of 1985 from maps, records and air photos; grey, dashed roof edge: 180 not ascertained; left out: 43 far-off outbuildings, 23 footprints under a 1985 building. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "nws-ricv2",
+    "levels",
+    "datums",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:1996:1996": {
+   "title": "Hurricane Fran, September 1996, against the new floodwall",
+   "lines": [
+    "Water at 22.7 ft above sea level (NAVD88) at the City Locks (weather service crest record), perhaps 1 ft more (hatched); perhaps 1 ft higher at the Mayo Bridge (assumed from 1969).",
+    "89.5 acres under water off the channel, plus 11.4 acres not known; buildings in the water: 10 of the 1,174 shown (3.9 ft median, 20.4 ft deepest).",
+    "Bathtub fill, not a flood model. Grey, dashed: 221 not ascertained for 1996; left out: 54 far-off outbuildings, 23 footprints under a 1996 building. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "nws-ricv2",
+    "levels",
+    "marker",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:2020:2020": {
+   "title": "November 2020, against the floodwall",
+   "lines": [
+    "Water at 17.0 ft above sea level (NAVD88) at the City Locks (±0.1 ft; USGS gauge record), held level upstream; in the falls above the Mayo Bridge, where the river's own surface stands higher, the river is drawn at its own surface.",
+    "36.8 acres under water off the channel, plus 7.9 acres not known; buildings in the water: 3 of the 1,105 shown (12.4 ft median, 13.4 ft deepest).",
+    "Bathtub fill, not a flood model. Grey, dashed: 11 not ascertained for 2020. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "usgs-iv",
+    "nws-ricv2",
+    "levels",
+    "marker",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:gaston-b:2004": {
+   "title": "Gaston's rain, August 30, 2004, in Shockoe Bottom",
+   "lines": [
+    "Solid: water to about 28 ft above sea level (NAVD88), a middle figure of the reports; hatched to 35 ft: they imply 24 to 35 ft (AP, Washington Post, NBC12, WTVR).",
+    "Lettered pins: places named in reports (the boxes below); B and C are placed at the businesses' usual addresses.",
+    "Rain, not the James: the river stayed low and the wall's gates stood open; depths are reports, not surveys. Grey, dashed: 59 not ascertained for 2004; left out: 25 far-off outbuildings, 3 footprints under a 2004 building. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "post2004",
+    "nbc12-2022",
+    "wtvr2024",
+    "ap2004",
+    "gaston-open",
+    "gaston-river",
+    "gaston-rain",
+    "gaston-depths",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:1771-dry:1788": {
+   "title": "The flood of 1771, an estimate, on the town of about 1788",
+   "lines": [
+    "Water at about 38 ft above sea level (NAVD88) at the City Locks, derived from a 1771 stage of 38 ft on the old gauge near Mayo's Bridge (the Corps, from diaries); other accounts give 30 ft and 45 ft on unstated bases; ±3 ft is our judgment. Hatched: up to 41 ft.",
+    "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+    "Bathtub fill, not a flood model, on today's ground; the town of 1788 as the downtown history draws it: few of its buildings are known. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "ofr70-51",
+    "levels",
+    "datums",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:1936-dry:1936": {
+   "title": "The flood of March 1936",
+   "lines": [
+    "Water at 26.5 ft above sea level (NAVD88) at the City Locks (±0.4 ft), 27.8 ft at the Mayo Bridge. USGS high-water marks.",
+    "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+    "Bathtub fill, not a flood model. The city of 1936 from maps, records and air photos; grey, dashed roof edge: 52 not ascertained; left out: 3 far-off outbuildings, 30 footprints under a 1936 building. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "pp924",
+    "ha410",
+    "levels",
+    "datums",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:1969-dry:1969": {
+   "title": "Hurricane Camille, August 1969",
+   "lines": [
+    "Water at 27.6 ft above sea level (NAVD88) at the City Locks (±0.2 ft), 28.9 ft at the Mayo Bridge. USGS records and marks.",
+    "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+    "Bathtub fill, not a flood model. The city of 1969 from maps, records and air photos; grey, dashed roof edge: 270 not ascertained; left out: 45 far-off outbuildings, 23 footprints under a 1969 building. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "ofr70-51",
+    "ha410",
+    "pp924",
+    "levels",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:1985-dry:1985": {
+   "title": "The Election Day flood, November 1985",
+   "lines": [
+    "Water at 29.7 ft above sea level (NAVD88) at the City Locks (±0.4 ft; weather service crest record), perhaps 1 ft higher at the Mayo Bridge (assumed from 1969).",
+    "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+    "Bathtub fill, not a flood model. The city of 1985 from maps, records and air photos; grey, dashed roof edge: 180 not ascertained; left out: 43 far-off outbuildings, 23 footprints under a 1985 building. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "nws-ricv2",
+    "levels",
+    "datums",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:1996-dry:1996": {
+   "title": "Hurricane Fran, September 1996, against the new floodwall",
+   "lines": [
+    "Water at 22.7 ft above sea level (NAVD88) at the City Locks (weather service crest record), perhaps 1 ft more (hatched); perhaps 1 ft higher at the Mayo Bridge (assumed from 1969).",
+    "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+    "Bathtub fill, not a flood model. Grey, dashed: 221 not ascertained for 1996; left out: 54 far-off outbuildings, 23 footprints under a 1996 building. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "nws-ricv2",
+    "levels",
+    "marker",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:gaston-b-dry:2004": {
+   "title": "Gaston's rain, August 30, 2004, in Shockoe Bottom",
+   "lines": [
+    "Solid: water to about 28 ft above sea level (NAVD88), a middle figure of the reports; hatched to 35 ft: they imply 24 to 35 ft (AP, Washington Post, NBC12, WTVR).",
+    "Lettered pins: places named in reports (the boxes below); B and C are placed at the businesses' usual addresses.",
+    "Rain, not the James: the river stayed low and the wall's gates stood open; depths are reports, not surveys. Grey, dashed: 59 not ascertained for 2004; left out: 25 far-off outbuildings, 3 footprints under a 2004 building. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "post2004",
+    "nbc12-2022",
+    "wtvr2024",
+    "ap2004",
+    "gaston-open",
+    "gaston-river",
+    "gaston-rain",
+    "gaston-depths",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "shockoe:2020-dry:2020": {
+   "title": "November 2020, against the floodwall",
+   "lines": [
+    "Water at 17.0 ft above sea level (NAVD88) at the City Locks (±0.1 ft; USGS gauge record), held level upstream; in the falls above the Mayo Bridge, where the river's own surface stands higher, the river is drawn at its own surface.",
+    "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+    "Bathtub fill, not a flood model. Grey, dashed: 11 not ascertained for 2020. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "usgs-iv",
+    "nws-ricv2",
+    "levels",
+    "marker",
+    "counts",
+    "evidence"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "manchester:1996:2026": {
+   "title": "Hurricane Fran's height (September 1996) against today's wall",
+   "lines": [
+    "Water at 22.7 ft above sea level (NAVD88) at the City Locks (weather service crest record), perhaps 1 ft more (hatched); perhaps 1 ft higher at the Mayo Bridge (assumed from 1969).",
+    "27.2 acres under water off the channel, plus 132.2 acres not known (22 buildings on it); buildings in the water: 2 of the 421 shown (12.1 ft median, 13.4 ft deepest).",
+    "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "nws-ricv2",
+    "levels",
+    "marker",
+    "counts"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "manchester:2020:2026": {
+   "title": "The November 2020 height against today's wall",
+   "lines": [
+    "Water at 17.0 ft above sea level (NAVD88) at the City Locks (±0.1 ft; USGS gauge record), held level, with no rise assumed toward the Mayo Bridge. The weather service puts the treatment plant's access road, Maury to Brander Street, under water at 18.5 ft.",
+    "21.3 acres under water off the channel, plus 97.4 acres not known (15 buildings on it); buildings in the water: 2 of the 421 shown (6.4 ft median, 7.7 ft deepest).",
+    "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "usgs-iv",
+    "nws-ricv2",
+    "levels",
+    "marker",
+    "counts"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "manchester:agnes-today:2026": {
+   "title": "What if: the 1972 flood's height against today's floodwall",
+   "lines": [
+    "Not a flood that happened: water at the height the 1972 flood reached, 35.5 ft at the City Locks, against today's city and wall, gates shut.",
+    "41.5 acres under water off the channel, plus 212.8 acres not known (54 buildings on it); buildings in the water: 2 of the 421 shown (24.9 ft median, 26.2 ft deepest).",
+    "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "levels",
+    "nws-ricv2",
+    "marker",
+    "counts"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "manchester:agnes-today-nowall:2026": {
+   "title": "What if: the 1972 flood's height against today's floodwall",
+   "lines": [
+    "Not a flood that happened: water at the height the 1972 flood reached, 35.5 ft at the City Locks, on today's city with no floodwall.",
+    "527.1 acres under water off the channel; buildings in the water: 246 of the 412 shown (13 ft median, 29.1 ft deepest).",
+    "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "levels",
+    "counts"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "manchester:agnes-today-dry:2026": {
+   "title": "What if: the 1972 flood's height against today's floodwall",
+   "lines": [
+    "Not a flood that happened: water at the height the 1972 flood reached, 35.5 ft at the City Locks, against today's city and wall, gates shut.",
+    "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+    "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "levels",
+    "nws-ricv2",
+    "marker",
+    "counts"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "manchester:agnes-today-nowall-dry:2026": {
+   "title": "What if: the 1972 flood's height against today's floodwall",
+   "lines": [
+    "Not a flood that happened: water at the height the 1972 flood reached, 35.5 ft at the City Locks, on today's city with no floodwall.",
+    "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+    "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "levels",
+    "counts"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "manchester:1996-dry:2026": {
+   "title": "Hurricane Fran's height (September 1996) against today's wall",
+   "lines": [
+    "Water at 22.7 ft above sea level (NAVD88) at the City Locks (weather service crest record), perhaps 1 ft more (hatched); perhaps 1 ft higher at the Mayo Bridge (assumed from 1969).",
+    "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+    "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "nws-ricv2",
+    "levels",
+    "marker",
+    "counts"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  },
+  "manchester:2020-dry:2026": {
+   "title": "The November 2020 height against today's wall",
+   "lines": [
+    "Water at 17.0 ft above sea level (NAVD88) at the City Locks (±0.1 ft; USGS gauge record), held level, with no rise assumed toward the Mayo Bridge. The weather service puts the treatment plant's access road, Maury to Brander Street, under water at 18.5 ft.",
+    "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+    "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+   ],
+   "sources": [
+    "usgs-iv",
+    "nws-ricv2",
+    "levels",
+    "marker",
+    "counts"
+   ],
+   "checked": "Level and its range from levels.json; counts from the build (scene stats); \"not ascertained\" and \"left out\" from the evidence layer and the stated rules (how-its-made, Floods)."
+  }
+ },
+ "boxes": {
+  "shockoe": {
+   "market": {
+    "title": "17th Street Market",
+    "note": "Beside it lies the Bottom's lowest point on the lidar, a pit at 13.4 ft; water stood here in every river flood drawn before the wall.",
+    "sources": [
+     "spill",
+     "counts"
+    ],
+    "checked": "rc2 (fact 5): \"the lowest ground of the Bottom\" was too strong (box 3's center is lower); the pit is step 15's low point (4.07 m, 13.4 ft), beside the market. \"Every river flood drawn before the wall\": 1936, 1969, 1972, 1985 in this drawing (counts.json rc2)."
+   },
+   "station": {
+    "title": "Main Street Station and its train shed",
+    "note": "Camille's mapped water (USGS) reached about this far up the valley.",
+    "sources": [
+     "ha410"
+    ],
+    "checked": "HA-410 as read in floods.md (\"up to about Main Street Station\")."
+   },
+   "dock": {
+    "title": "17th and Dock, the canal's end",
+    "note": "Buried Shockoe Creek runs south under the valley to 17th and Dock; today the wall's 17th Street closure crosses Dock Street here.",
+    "sources": [
+     "creek",
+     "closure-dock",
+     "marker"
+    ],
+    "checked": "rc2 (fact 10): the source says the creek \"runs south from north of I-64 to 17th and Dock\" (S35); \"reaches the James\" was an inference."
+   },
+   "slip": {
+    "title": "Shockoe Slip, 14th and Cary",
+    "note": "Where the water's edge meets the rise to downtown.",
+    "sources": [
+     "lidar",
+     "counts"
+    ],
+    "checked": "A statement about the drawing, true on 1969, 1972 and 1985 (the water's edge crosses the box: 0.5, 3.7 and 1.3 acres wet, counts.json rc3); 1936 has its own note."
+   },
+   "canal": {
+    "title": "The canal at Virginia and Byrd streets",
+    "note": "The canal's riverfront: in the water in every river flood drawn before the wall; behind its west end (12th and Byrd) since.",
+    "sources": [
+     "counts",
+     "city-faq",
+     "osm"
+    ],
+    "checked": "Wet in 1936, 1969, 1972 and 1985 and dry behind the wall in 1996, 2020 and at the 1972 height today, in this drawing (counts.json rc2); the wall runs from 12th and Byrd to 21st and East Cary (City FAQ, floodwall.md). Names from OSM."
+   },
+   "cary18": {
+    "title": "18th and Cary streets",
+    "note": "Warehouses between Cary and Dock streets, in the water in every river flood drawn here before the wall.",
+    "sources": [
+     "counts",
+     "osm"
+    ],
+    "checked": "rc2 (fact 8): \"Tobacco Row's west end\" had no source and is dropped. A count of this drawing."
+   },
+   "franklin": {
+    "title": "East Franklin and Grace, 17th to 19th",
+    "note": "The 1980 National Register survey dates the Franklin Street row, 1703 to 1721, from about 1842 (the Anson Richards houses) to about 1950.",
+    "sources": [
+     "nr1980"
+    ],
+    "checked": "rc2 (fact 1): rc1 said \"from 1842 to 1913\"; the survey extract has 1705 at about 1930 and 1718 at about 1950 (step 44)."
+   },
+   "g-market": {
+    "title": "17th Street Market and Havana '59 (pins A, B)",
+    "note": "A: most of the water came together at 17th and Main (Washington Post). B: Havana '59, at its usual address: water 13 ft up the dining-room wall, by the owner's account; on the lidar's 18 ft ground that is about 31 ft, in the hatch.",
+    "sources": [
+     "post2004",
+     "gaston-depths",
+     "lidar"
+    ],
+    "checked": "Ground at the pin from the 2 m lidar: 18.4 ft; 18.4 + 13 = 31.4 ft. The address is the business's usual one, not stated in the source (gaston-water.md, section 2)."
+   },
+   "g-dock": {
+    "title": "Bottoms Up, 17th and Dock (pin C)",
+    "note": "C: Bottoms Up, at its usual address: \"6 ft 2 in inside, above a 3 ft step\" (the owner, NBC12), about 9 ft over the street; on the lidar's 18 ft ground that is about 27 ft, as drawn.",
+    "sources": [
+     "nbc12-2022",
+     "gaston-depths",
+     "lidar"
+    ],
+    "checked": "The source's own words; ground at the pin 18.2 ft (2 m lidar); 18.2 + 9.2 = 27.4 ft."
+   },
+   "g-station": {
+    "title": "15th and Main, Main Street Station (pins D, E)",
+    "note": "D: \"rapids\" at 15th and Main (a developer, WTVR). E: Main Street Station escaped damage (Washington Post), though still water at 28 ft would stand about 3 ft at its door: the water ran through here and did not stand at one level.",
+    "sources": [
+     "wtvr2024",
+     "post2004",
+     "lidar"
+    ],
+    "checked": "Ground at pin E 25.2 ft (2 m lidar), so 2.8 ft under a 28 ft level; the reports and a level surface do not agree here, and the note says so."
+   },
+   "g-valley": {
+    "title": "The valley above: 17th Street to Franklin",
+    "note": "Runoff from Church Hill and the Capitol slope ran into the Bottom (AP); here the hatch reaches the reports' upper figure, 35 ft.",
+    "sources": [
+     "ap2004",
+     "gaston-depths"
+    ],
+    "checked": "S22 (Insurance Journal, AP, Sept. 20, 2004): runoff off Church Hill and the Capitol slope into the Bottom."
+   },
+   "w-market": {
+    "title": "17th Street Market, behind the wall",
+    "note": "",
+    "sources": [
+     "counts"
+    ],
+    "checked": ""
+   },
+   "w-dock": {
+    "title": "17th and Dock, the wall's Dock Street closure",
+    "note": "",
+    "sources": [
+     "closure-dock"
+    ],
+    "checked": ""
+   },
+   "w-canal": {
+    "title": "The canal at Virginia and Byrd, the wall's west end",
+    "note": "The north wall begins at 12th and Byrd; west of its end the canal's riverfront is open to the river.",
+    "sources": [
+     "city-faq",
+     "osm"
+    ],
+    "checked": "City FAQ via floodwall.md (12th and Byrd to 21st and East Cary)."
+   },
+   "w-chapel": {
+    "title": "Chapel Island, outside the wall",
+    "note": "",
+    "sources": [
+     "counts"
+    ],
+    "checked": ""
+   },
+   "w-shiplock": {
+    "title": "Great Shiplock Park, past the wall's east end",
+    "note": "The north wall ends at 21st and East Cary; past it the park and the canal's lock lie open to the river.",
+    "sources": [
+     "city-faq",
+     "osm"
+    ],
+    "checked": "City FAQ via floodwall.md; names from OSM."
+   }
+  },
+  "manchester": {
+   "hull": {
+    "title": "Hull Street at the Mayo Bridge",
+    "note": "The bridge's south foot, inside the wall: dry with it at the 1972 height, deep without.",
+    "sources": [
+     "counts",
+     "marker"
+    ],
+    "checked": "A count of this drawing."
+   },
+   "flats": {
+    "title": "The flats at 5th and Stockton",
+    "note": "Warehouses and shops on the flats; USGS mapped Camille's water across them to about Commerce Road.",
+    "sources": [
+     "ha410"
+    ],
+    "checked": "HA-410 as read in floods.md, \"What flooded\"."
+   },
+   "tanks": {
+    "title": "The tank farm",
+    "note": "Fuel storage tanks on the flats (as OSM tags them), behind the wall.",
+    "sources": [
+     "osm"
+    ],
+    "checked": "OSM: man_made=storage_tank, content=fuel (7 tanks)."
+   },
+   "wall": {
+    "title": "On the wall",
+    "note": "Just west of the Mayo Bridge the wall is a gravity U-wall, 43 ft from its top to the river's edge (City FAQ).",
+    "sources": [
+     "city-faq"
+    ],
+    "checked": "rc2 (fact 6): \"its tallest part\" dropped; rc3 (F2): \"Just west\", the FAQ's place."
+   },
+   "plant": {
+    "title": "The treatment plant grounds",
+    "note": "The 1986 law says the project \"shall include flood protection for the Richmond municipal wastewater treatment facility\"; our map data cannot show the levee, so with the wall this ground is drawn as not known.",
+    "sources": [
+     "wrda1986",
+     "osm-levee"
+    ],
+    "checked": "WRDA 1986, 100 Stat. 4126 (floods-research/river/raw/pdf/wrda1986.txt, line 2885)."
+   }
+  }
+ },
+ "key": [
+  {
+   "label": "Water, by depth (ft)",
+   "means": "palette.ts flood tones; depth = the flood's level less the 5 m ground grid (the gauges and the boxes' figures read the 2 m lidar at their place)",
+   "sources": [
+    "lidar",
+    "levels"
+   ]
+  },
+  {
+   "label": "The river, canal and basins at their own level",
+   "means": "the lidar's water surface, in the flood look's channel color on every flood sheet",
+   "sources": [
+    "lidar"
+   ]
+  },
+  {
+   "label": "Hatched: the range of an estimate",
+   "means": "the flood's level to the top of its stated range (1771 ±3 ft; Fran +1 ft; Gaston 28 to 35 ft)",
+   "sources": [
+    "levels",
+    "gaston-depths"
+   ]
+  },
+  {
+   "label": "Cross-hatched: not known; the earthen levee is not mapped (the edges assume where it runs)",
+   "means": "land the with-wall fill reaches only because the levee is not in our data (flood.ts `unknown`); no water and no depth are drawn there; its edges follow the two lines assumed for the levee's course (floods.py UNKNOWN)",
+   "sources": [
+    "osm-levee",
+    "wrda1986"
+   ]
+  },
+  {
+   "label": "A building of the year",
+   "means": "standing that year by year built, traced maps or air photos",
+   "sources": [
+    "evidence"
+   ]
+  },
+  {
+   "label": "A building standing in 1788 (by its year built)",
+   "means": "today's buildings dated before 1788, and curated ones, as the downtown history draws them",
+   "sources": [
+    "town1788"
+   ]
+  },
+  {
+   "label": "Grey, dashed roof edge: on an earlier map or photo, not ascertained for the year",
+   "means": "evidence calls",
+   "sources": [
+    "evidence"
+   ]
+  },
+  {
+   "label": "The floodwall (1994), where it stands",
+   "means": "dedicated October 21, 1994; its top drawn at the 41 ft stage at which the weather service says the wall is overtopped, not a surveyed top",
+   "sources": [
+    "marker",
+    "nws-ricv2"
+   ]
+  },
+  {
+   "label": "A bridge deck under the water (deck heights are estimates)",
+   "means": "a deck piece whose deck, at its middle, lies below the water: drawn faintly on the surface. Deck heights are the region's rules over the ground or river, not surveys",
+   "sources": [
+    "nws-ricv2"
+   ]
+  },
+  {
+   "label": "A depth gauge, the figure in feet",
+   "means": "the flood's level less the 2 m lidar at the place",
+   "sources": [
+    "lidar",
+    "levels"
+   ]
+  },
+  {
+   "label": "Lettered pins: places named in reports",
+   "means": "pins at 17th and Main, 16 N. 17th St., 1700 Dock St., 15th and Main and the station; the two addresses are the businesses' usual ones, not stated in the sources (gaston-water.md, section 2)",
+   "sources": [
+    "post2004",
+    "nbc12-2022",
+    "wtvr2024"
+   ]
+  },
+  {
+   "label": "Dry twin: the same city with no flood",
+   "means": "every plate has a pixel-aligned twin with the water taken away",
+   "sources": []
+  }
+ ],
+ "credits": {
+  "shockoe": {
+   "text": "Water levels: USGS (high-water marks, PP 924, HA-410), NOAA and the National Weather Service. Ground: USGS 3DEP lidar. Buildings: © OpenStreetMap contributors (ODbL); City of Richmond assessor; Sanborn maps, Library of Congress; air photos: USGS 1974 orthophoto, City of Richmond 1999 and VGIN 2002, 2017 and 2021 orthophotos. Drawn with isoscape by Chris Busse; made in code with Claude.",
+   "sources": [
+    "levels",
+    "lidar",
+    "osm",
+    "evidence"
+   ]
+  },
+  "shockoe-2004": {
+   "text": "Water: news reports (AP, Washington Post, NBC12, WTVR) set on the USGS 3DEP lidar; the river's flow, USGS. Buildings: © OpenStreetMap contributors (ODbL); City of Richmond assessor; Sanborn maps, Library of Congress; air photos: USGS 1974 orthophoto, City of Richmond 1999 and VGIN 2002, 2017 and 2021 orthophotos. Drawn with isoscape by Chris Busse; made in code with Claude.",
+   "sources": [
+    "ap2004",
+    "post2004",
+    "nbc12-2022",
+    "wtvr2024",
+    "gaston-river",
+    "lidar",
+    "osm",
+    "evidence"
+   ]
+  },
+  "manchester": {
+   "text": "Water levels: USGS (high-water marks, PP 924, HA-410), NOAA and the National Weather Service. Ground: USGS 3DEP lidar. Buildings: © OpenStreetMap contributors (ODbL); City of Richmond assessor. Drawn with isoscape by Chris Busse; made in code with Claude.",
+   "sources": [
+    "levels",
+    "lidar",
+    "osm"
+   ]
+  },
+  "shockoe-1771": {
+   "text": "Water level: USGS Open-File Report 70-51 (the Corps of Engineers' 38 ft near Mayo's Bridge, from diaries). Ground: USGS 3DEP lidar, today's. Town: isoscape's downtown history (the 1737 plan; buildings dated before 1788 by OpenStreetMap, © its contributors (ODbL), and the City of Richmond assessor; curated features with their sources). Drawn with isoscape by Chris Busse; made in code with Claude.",
+   "sources": [
+    "ofr70-51",
+    "lidar",
+    "town1788"
+   ]
+  }
+ },
+ "byline": "Drawn with isoscape by Chris Busse; made in code with Claude.",
+ "changed": [
+  {
+   "what": "Gaston pin 5 and its caption line",
+   "was": "\"Main Street Station, dry\"",
+   "now": "\"Main Street Station, which escaped damage\"",
+   "why": "The Washington Post (S28) says the depot \"escaped damage\"; no source says it stayed dry (gaston-water.md, section 1)."
+  },
+  {
+   "what": "Gaston pins",
+   "was": "numbered 1 to 5",
+   "now": "lettered A to E",
+   "why": "On the sheet the numbers read as the numbered boxes; pin 1 sat on box 1's frame."
+  },
+  {
+   "what": "Gaston pin 1",
+   "was": "\"17th Street Market, where the water met\"",
+   "now": "\"17th Street Market, where most water converged\"",
+   "why": "The Post says most water converged on 17th and Main; the market was swamped (gaston-timeline.md, section 4)."
+  },
+  {
+   "what": "Box 2 note (Main Street Station)",
+   "was": "\"The station of 1901 and its long shed, standing in the water.\"",
+   "now": "Camille's mapped extent and Gaston's report",
+   "why": "No research file gives the station's date; the note now says what HA-410 and the Post support."
+  },
+  {
+   "what": "Box 3 note (17th and Dock)",
+   "was": "\"Where the Bottom meets the river; the wall's Dock Street opening today.\"",
+   "now": "the buried creek and the 17th Street closure",
+   "why": "Supported as rewritten (S35; floodwall.md closures)."
+  },
+  {
+   "what": "Box 5 (Mayo Island)",
+   "was": "\"The island under the river, its buildings in it.\"",
+   "now": "replaced by the canal at Virginia and Byrd streets",
+   "why": "\"Under the river\" said \"the river\" for the water's level, which the series never does; the box was also sparse (two buildings)."
+  },
+  {
+   "what": "Box 6 note (18th and Cary)",
+   "was": "\"wet in every flood here\"",
+   "now": "\"in the water in every flood drawn here before the wall\"",
+   "why": "Behind the wall (1996, 2020) the box is dry in this drawing (counts.json rc1)."
+  },
+  {
+   "what": "Box 7 note (East Franklin)",
+   "was": "\"Rows of shops and houses from 1842 to 1913, most of them still standing.\"",
+   "now": "the 1980 survey's dates for 1703 to 1721",
+   "why": "The 1842 to 1913 dates are for the Franklin Street face, 1703 to 1721 (step 44); \"most still standing\" was not checked."
+  },
+  {
+   "what": "Manchester box 3 (tank farm)",
+   "was": "\"Storage tanks\"",
+   "now": "\"Fuel storage tanks (as OSM tags them)\"",
+   "why": "Said with its source."
+  },
+  {
+   "what": "Manchester box 4 (on the wall)",
+   "was": "\"water on the river side, dry ground behind\"",
+   "now": "the gravity U-wall, 43 ft (City FAQ)",
+   "why": "Now a sourced fact rather than a description of the drawing."
+  },
+  {
+   "what": "Manchester box 5 (the plant)",
+   "was": "\"whether the plant is inside it is not in our data\"",
+   "now": "adds that the 1986 authorization included the wastewater plant",
+   "why": "WRDA 1986 sec. 401(a); the levee's line is still not in the data, so where the plant lies is still not known here."
+  },
+  {
+   "what": "1771 method line",
+   "was": "\"An estimate from diaries: the town of about 1788, buildings as recorded and traced.\"",
+   "now": "\"...the town of 1788 as the downtown history draws it: few of its buildings are known.\"",
+   "why": "The 1788 scene draws the 1737 plan, the buildings standing today dated before 1788 and a few curated features (history/richmond-downtown.json); nothing of 1788 is traced, and six buildings stand in the frame."
+  },
+  {
+   "what": "rc2 A1, fact 2: Manchester plant with the wall",
+   "was": "drawn 20 to 22 ft under water with a gauge",
+   "now": "cross-hatched \"not known\", no depth, no gauge; acres and buildings counted apart",
+   "why": "Chris, 12:27; WRDA 1986 sec. 401; the levee is not in our data."
+  },
+  {
+   "what": "rc2 A2: bridge decks",
+   "was": "always drawn above the water",
+   "now": "a deck piece below the water is drawn under it, faintly; deck heights said to be estimates in the key",
+   "why": "Chris, 12:27."
+  },
+  {
+   "what": "rc2 A3, A4, fact 3: Gaston caption",
+   "was": "\"B: the range, not a level: water to 25 ft ..., hatched to 31 ft\"",
+   "now": "\"Solid: water to about 28 ft ..., a middle figure of the reports; hatched to 35 ft: they imply 24 to 35 ft\"",
+   "why": "gaston-water.md section 4; the leaked working name \"B:\" removed."
+  },
+  {
+   "what": "rc2 fact 3: Gaston pin C",
+   "was": "\"about 9 ft\"",
+   "now": "\"6 ft 2 in inside, above a 3 ft step\" (the source's words)",
+   "why": "NBC12 (S31)."
+  },
+  {
+   "what": "rc2 fact 9: Gaston title",
+   "was": "\"Tropical Storm Gaston\"",
+   "now": "\"the rain of Gaston's remnants\"",
+   "why": "Gaston was a tropical depression over Richmond while the rain fell (gaston-timeline.md, section 1)."
+  },
+  {
+   "what": "rc2 fact 3: Gaston credit",
+   "was": "no WTVR",
+   "now": "WTVR added",
+   "why": "S33."
+  },
+  {
+   "what": "rc2 fact 4: Mayo Bridge levels (1972, 1985, 1996)",
+   "was": "\"about 36.8 / 31.0 / 24.0 ft at the Mayo Bridge\"",
+   "now": "\"perhaps 1 ft higher at the Mayo Bridge (assumed from 1969)\"",
+   "why": "levels.json: the Locks plus 1.3 ft assumed from 1969, UNCONFIRMED; no longer credited to the crest record."
+  },
+  {
+   "what": "rc2 fact 7: 1771",
+   "was": "\"about 38.0 ft ..., ±3 ft, the May 1771 Great Fresh\"",
+   "now": "where 38 ft is measured, accounts from 30 to 45 ft, ±3 ft our judgment; \"Great Fresh\" dropped",
+   "why": "floods.md, \"Disagreements\"; OFR 70-51 does not use the name."
+  },
+  {
+   "what": "rc2 A11: counts",
+   "was": "\"1 of the 6 buildings shown stand in it\"",
+   "now": "\"buildings in the water: 1 of the 6 shown\"",
+   "why": "Grammar, every plate."
+  },
+  {
+   "what": "rc2 fact 10: 2004 and 2020 method lines",
+   "was": "2004 without \"left out\"; 2020 \"left out: 0 ...\"",
+   "now": "2004 restored; 2020 dropped",
+   "why": ""
+  },
+  {
+   "what": "rc2 fact 10: depths",
+   "was": "the key said 2 m lidar, how-its-made 5 m grid",
+   "now": "both say: water drawn on the 5 m grid; gauge and box figures from the 2 m lidar at their place",
+   "why": "scene.ts gauges read the elevation model; boxcounts.ts likewise."
+  },
+  {
+   "what": "rc2 A9: box depth figures",
+   "was": "at the box's center, beside gauges with other figures",
+   "now": "boxes 1 to 3 give the depth at their gauge's place, named; others say \"at the box's center\"",
+   "why": ""
+  },
+  {
+   "what": "rc2 A13: key",
+   "was": "\"The river's own channel\" for basins and canal too",
+   "now": "\"The river, canal and basins at their own level\"",
+   "why": ""
+  },
+  {
+   "what": "rc3 F1: 1996 box 2",
+   "was": "\"in 1996 some of the wall's gates were shut, Dock Street among them\"",
+   "now": "\"In January 1996 some gates were shut, Dock Street among them; in Fran, some gates.\"",
+   "why": "RVANews names Dock Street for January 1996 only."
+  },
+  {
+   "what": "rc3 F2: Manchester box 4",
+   "was": "\"West of the Mayo Bridge\"",
+   "now": "\"Just west of the Mayo Bridge\"",
+   "why": "City FAQ."
+  },
+  {
+   "what": "rc3 F3: 1771 caption",
+   "was": "\"accounts run from 30 to 45 ft ... Hatched: the top of that range.\"",
+   "now": "\"other accounts give 30 ft and 45 ft on unstated bases; ±3 ft is our judgment. Hatched: up to 41 ft.\"",
+   "why": "The 30 and 45 ft accounts are on no stated datum; the hatch is drawn to 12.50 m NAVD88 (11.582 + 0.914), 41.0 ft, at the City Locks."
+  },
+  {
+   "what": "rc3: Gaston title",
+   "was": "\"the rain of Gaston's remnants\"",
+   "now": "\"the rain of Gaston, then a tropical depression\"",
+   "why": "NHC TCR AL072004, Table 1 (nhc-gaston)."
+  },
+  {
+   "what": "rc3: Gaston box 3",
+   "was": "\"the water moved, and kept no one level\"",
+   "now": "\"the water ran through here and did not stand at one level\"",
+   "why": "Plain wording."
+  },
+  {
+   "what": "rc3 N1: Gaston pool",
+   "was": "drawn on the river side of the wall too",
+   "now": "held on the city side of the wall and its openings",
+   "why": "spill-cityside; gaston-open; gaston-river."
+  },
+  {
+   "what": "rc3: not known",
+   "was": "acres only",
+   "now": "acres and the buildings on that ground; the key says the edges assume where the levee runs",
+   "why": "Scene stats floodUnknownBuildings."
+  },
+  {
+   "what": "rc3: 18th and Cary title",
+   "was": "\"18th and Cary, between Cary and Dock streets\"",
+   "now": "\"18th and Cary streets\"",
+   "why": "Plain."
+  },
+  {
+   "what": "rc3 A10: 1936 box (Shockoe Slip)",
+   "was": "\"Where the water's edge meets the rise to downtown.\"",
+   "now": "a 1936 note: the water only touched the edge of the box",
+   "why": "counts.json rc3: no water in the box in 1936."
+  },
+  {
+   "what": "rc3: Chapel Island box",
+   "was": "a note about the retention basin, which the box cannot show",
+   "now": "what the box shows: the island under the water outside the wall",
+   "why": "counts.json rc3."
+  },
+  {
+   "what": "rc3 re-stamp: Gaston title",
+   "was": "\"Shockoe Bottom: the rain of Gaston, then a tropical depression, August 30, 2004\"",
+   "now": "\"Shockoe Bottom: Gaston's rain, August 30, 2004\"; the storm's status moved to the rain panel's caption",
+   "why": "The owner asked for the shorter title; NHC TCR Table 1 for the status."
+  },
+  {
+   "what": "rc3 re-stamp R1: rain panel event",
+   "was": "\"4:30 flooding under way\"",
+   "now": "\"about 4:30, flooding reported\"",
+   "why": "NCEI Storm Events times are labeled EST and may be an hour later in local time; the lawsuit is an allegation."
+  },
+  {
+   "what": "rc3 re-stamp R2: 3:58 warning",
+   "was": "credited to the weather service",
+   "now": "Style Weekly quoting the weather service (notes.json only)",
+   "why": "S20."
+  },
+  {
+   "what": "Plate counts",
+   "was": "\"N of the M buildings shown\" counted today's buildings only",
+   "now": "every building of the year, traced ones included",
+   "why": "The d3 captions left traced buildings out of both numbers (scene stats `floodBuildingsInWater`, `buildings`); rc1 counts `floodShown…`."
+  }
+ ],
+ "sheetNotes": {
+  "shockoe-1996": {
+   "w-market": {
+    "note": "Behind the wall: dry at Fran's height. Before the wall, in 1972, the water stood 15 ft at 17th and Main.",
+    "sources": [
+     "counts"
+    ],
+    "checked": "Depths from counts.json rc2 (the 1972 gauge at 17th and Main)."
+   },
+   "w-dock": {
+    "note": "In January 1996 some gates were shut, Dock Street among them; in Fran, some gates.",
+    "sources": [
+     "closure-dock",
+     "rvanews2011"
+    ],
+    "checked": "rc3 (F1): RVANews, May 12, 2011 names Dock Street for January 1996 and only \"some gates\" for Fran (floodwall.md, \"Every closure\")."
+   },
+   "w-chapel": {
+    "note": "Outside the wall, between it and the river: at Fran's height the island lay under about 10 ft of water.",
+    "sources": [
+     "counts",
+     "levels"
+    ],
+    "checked": "rc3: the box shows water only, so the note says what it shows; 9.7 ft at the box's center (counts.json rc3)."
+   }
+  },
+  "shockoe-1936": {
+   "slip": {
+    "note": "Where the rise to downtown begins: in 1936 the water only touched the edge of this box; in 1969, 1972 and 1985 it reached into it.",
+    "sources": [
+     "counts"
+    ],
+    "checked": "rc3 (A10): 1936 has under 0.05 acres wet in the box and 1 building touching the water; 1969 0.5, 1972 3.7, 1985 1.3 acres (counts.json rc3)."
+   }
+  },
+  "shockoe-2020": {
+   "w-market": {
+    "note": "Behind the wall: dry at the November 2020 height. Before the wall, in 1972, the water stood 15 ft at 17th and Main.",
+    "sources": [
+     "counts"
+    ],
+    "checked": "Depths from counts.json rc2."
+   },
+   "w-dock": {
+    "note": "The 17th Street closure on Dock Street was shut at noon on November 12, 2020.",
+    "sources": [
+     "closure-dock",
+     "wtvr2020"
+    ],
+    "checked": "WTVR, Nov. 12, 2020 (floodwall.md, \"Every closure\")."
+   },
+   "w-chapel": {
+    "note": "Outside the wall, between it and the river: at the November 2020 height shallow water covered most of the island.",
+    "sources": [
+     "counts",
+     "levels"
+    ],
+    "checked": "rc3: 3.8 ft at the box's center, 3.5 of its 3.8 acres wet (counts.json rc3)."
+   }
+  },
+  "manchester-1996-2020": {
+   "plant": {
+    "note": "With the wall this ground is drawn as not known; the weather service puts the plant's main access, Maury to Brander Street, under water at 18.5 ft, above the 2020 level.",
+    "sources": [
+     "nws-ricv2",
+     "wrda1986"
+    ],
+    "checked": "NWS RICV2 impacts: 18.5 ft, \"The main access into the waste water treatment plant is flooded from Maury Street into Brander Street.\""
+   }
+  }
+ },
+ "rain": {
+  "title": "The rain over the land that drains to the Bottom, by hour",
+  "hours": [
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22
+  ],
+  "inches": [
+   0.094,
+   1.444,
+   1.641,
+   1.535,
+   2.216,
+   1.308,
+   1.679,
+   0.344,
+   0.056,
+   0.005
+  ],
+  "low": [
+   0.078,
+   1.195,
+   1.359,
+   1.271,
+   1.834,
+   1.082,
+   1.389,
+   0.285,
+   0.046,
+   0.004
+  ],
+  "high": [
+   0.105,
+   1.619,
+   1.84,
+   1.721,
+   2.484,
+   1.466,
+   1.882,
+   0.386,
+   0.062,
+   0.005
+  ],
+  "events": [
+   [
+    15.966666666666667,
+    "3:58 first flash-flood warning"
+   ],
+   [
+    16.5,
+    "about 4:30, flooding reported"
+   ],
+   [
+    18.5,
+    "about 6:30 a car afloat in the Bottom"
+   ],
+   [
+    21.25,
+    "9:15 the James peaks, far below flood"
+   ]
+  ],
+  "caption": "About 10 inches of rain (8.6 to 11.6 by the estimates) fell on the 12 square miles that drain to Shockoe Bottom, most of it between 2 and 9 p.m., while the James stayed far below flood. Gaston was a tropical depression over Richmond while the rain fell (National Hurricane Center). Bars: the hourly average over the watershed; whiskers: the range of estimates.",
+  "source": "Rain: NEXRAD radar (NOAA, Wakefield) corrected to rain gauges (NCEI), averaged over the watershed from USGS 3DEP; computed for this series with Claude. Times: the weather service warning, NCEI Storm Events, AP, USGS (Westham gauge).",
+  "sources": [
+   "rain-radar",
+   "rain-events",
+   "gaston-river",
+   "nhc-gaston"
+  ],
+  "checked": "Numbers copied from tools/floods/rain/data/rain.json on feature/flood-rain (basin_hourly radar_corrected, low, high; basin_total 10.34, low 8.56, high 11.6; watershed 31.49 sq km). Event times as the rain branch's hyetograph gives them (figures.py EVENTS)."
+ }
+}

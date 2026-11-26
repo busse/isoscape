@@ -35,7 +35,7 @@ import { compilePage, PAGES_DIR, type Page } from '../../src/pages.ts'
 import { deadInstructions, SHARED, substitute, type Change, type Substitution } from './wording.ts'
 
 export const AUTHOR = 'Chris Busse'
-export const SITE_URL = 'https://busse.github.io/isoscape/'
+export const SITE_URL = 'https://isoscape.chrisbusse.com/'
 
 export type Edition = 'phone' | 'large'
 

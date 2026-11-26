@@ -1,0 +1,1106 @@
+{
+  "title": "Richmond, VA: Manchester and the south floodwall, the James in flood",
+  "center": [
+    -77.43,
+    37.5212
+  ],
+  "width": 2200,
+  "depth": 1400,
+  "bearing": 200,
+  "snap": false,
+  "scale": 2.0,
+  "squash": 0.5,
+  "exaggeration": 1.0,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+    {
+      "match": "Manchester",
+      "deck": 24
+    },
+    {
+      "match": "Mayo",
+      "deck": 6
+    },
+    {
+      "match": "Potterfield",
+      "deck": 3
+    }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "occlusion": "strict",
+  "tracedCovered": 0.5,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "floodStyles": [
+    "blue-grey",
+    "wall-cased-red",
+    "xray-heavy",
+    "unconfirmed-slate-both"
+  ],
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 5,
+    "contour": 2,
+    "majorEvery": 5,
+    "demResolution": 2
+  },
+  "time": {
+    "history": "history/richmond-floods.json",
+    "yearBuiltFrom": "richmond-downtown-time",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  },
+  "floodwalls": [
+    {
+      "name": "Richmond floodwall",
+      "osm": "flood_wall",
+      "top": 12.497,
+      "maxGap": 60,
+      "from": 1994,
+      "sources": [
+        "https://www.hmdb.org/m.asp?m=23953"
+      ],
+      "label": "Floodwall (1994)",
+      "note": "Line from OSM (wall=flood_wall, chained across gaps up to 60 m: the openings). Top: the stage at which the weather service says the wall is overtopped (41 ft at the City Locks), not the wall's surveyed top. Dedicated 21 October 1994."
+    },
+    {
+      "name": "APPROXIMATE tie-in, north wall west end",
+      "line": [
+        [
+          -77.436079,
+          37.534206
+        ],
+        [
+          -77.436221,
+          37.534646
+        ],
+        [
+          -77.436392,
+          37.534946
+        ]
+      ],
+      "top": 12.497,
+      "from": 1994,
+      "note": "APPROXIMATE: not from any source; a short line from the end of the mapped wall to higher ground, so the fill does not run round an end the map leaves open."
+    },
+    {
+      "name": "APPROXIMATE tie-in, north wall east end",
+      "line": [
+        [
+          -77.425782,
+          37.530409
+        ],
+        [
+          -77.425197,
+          37.530641
+        ],
+        [
+          -77.424531,
+          37.530905
+        ]
+      ],
+      "top": 12.497,
+      "from": 1994,
+      "note": "APPROXIMATE: not from any source; a short line from the end of the mapped wall to higher ground, so the fill does not run round an end the map leaves open."
+    },
+    {
+      "name": "APPROXIMATE tie-in, south wall west end",
+      "line": [
+        [
+          -77.444308,
+          37.529907
+        ],
+        [
+          -77.445113,
+          37.529923
+        ]
+      ],
+      "top": 12.497,
+      "from": 1994,
+      "note": "APPROXIMATE: not from any source; a short line from the end of the mapped wall to higher ground, so the fill does not run round an end the map leaves open."
+    },
+    {
+      "name": "APPROXIMATE tie-in, south wall east end",
+      "line": [
+        [
+          -77.428734,
+          37.524582
+        ],
+        [
+          -77.428377,
+          37.523619
+        ],
+        [
+          -77.427722,
+          37.520497
+        ]
+      ],
+      "top": 12.497,
+      "from": 1994,
+      "note": "APPROXIMATE: not from any source; a short line from the end of the mapped wall to higher ground, so the fill does not run round an end the map leaves open."
+    }
+  ],
+  "floods": {
+    "1771": {
+      "title": "The flood of 1771, an estimate, on the town of about 1788",
+      "caption": "Water at about 38.0 ft above sea level (NAVD88), \u00b13 ft, the May 1771 \"Great Fresh\" (diaries, via the Army Corps). Hatched: the top of the range.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          11.582
+        ],
+        [
+          -77.42171,
+          37.52409,
+          11.582
+        ],
+        [
+          -77.43458,
+          37.5277,
+          11.979
+        ],
+        [
+          -77.44255,
+          37.53018,
+          11.979
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel; {floodBuildingsInWater} of the {buildings} buildings shown stand in it ({floodDepthAtBuildingsMedianFt} ft median, {floodDepthAtBuildingsMaxFt} ft deepest).",
+        "A bathtub fill on today's ground, not a flood model. Buildings: those standing today by year built, plus traced ones; lost, untraced buildings are missing. ROUGH DRAFT."
+      ],
+      "uncertainty": 0.914,
+      "band": "beyond"
+    },
+    "1771-range": {
+      "title": "The flood of 1771, an estimate, on the town of about 1788",
+      "caption": "Water at about 38.0 ft above sea level (NAVD88), \u00b13 ft, the May 1771 \"Great Fresh\" (diaries, via the Army Corps). Water: the bottom of the range; hatched: the rest of it.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          11.582
+        ],
+        [
+          -77.42171,
+          37.52409,
+          11.582
+        ],
+        [
+          -77.43458,
+          37.5277,
+          11.979
+        ],
+        [
+          -77.44255,
+          37.53018,
+          11.979
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel; {floodBuildingsInWater} of the {buildings} buildings shown stand in it ({floodDepthAtBuildingsMedianFt} ft median, {floodDepthAtBuildingsMaxFt} ft deepest).",
+        "A bathtub fill on today's ground, not a flood model. Buildings: those standing today by year built, plus traced ones; lost, untraced buildings are missing. ROUGH DRAFT."
+      ],
+      "uncertainty": 0.914,
+      "band": "range"
+    },
+    "1936": {
+      "title": "The flood of March 1936",
+      "caption": "Water at 26.5 ft above sea level (NAVD88) at the City Locks (\u00b10.4 ft), 27.8 ft at the Mayo Bridge. USGS high-water marks.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          8.077
+        ],
+        [
+          -77.42171,
+          37.52409,
+          8.077
+        ],
+        [
+          -77.43458,
+          37.5277,
+          8.473
+        ],
+        [
+          -77.4384,
+          37.52797,
+          8.464
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel; {floodBuildingsInWater} of the {buildings} buildings shown stand in it ({floodDepthAtBuildingsMedianFt} ft median, {floodDepthAtBuildingsMaxFt} ft deepest).",
+        "A bathtub fill on today's ground, not a flood model. Buildings: standing today by year built, or seen on aerial photographs of 1974, 1999, 2002, 2017 and 2021 (the flats' fire-insurance maps are not traced yet). Grey, dashed roof edge: {periodUnconfirmed} buildings on an earlier map or photograph but not ascertained for this year. WORKING DRAFT d3."
+      ]
+    },
+    "1969": {
+      "title": "Hurricane Camille, August 1969",
+      "caption": "Water at 27.6 ft above sea level (NAVD88) at the City Locks (\u00b10.2 ft), 28.9 ft at the Mayo Bridge. USGS records and marks.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          8.412
+        ],
+        [
+          -77.42171,
+          37.52409,
+          8.412
+        ],
+        [
+          -77.43458,
+          37.5277,
+          8.809
+        ],
+        [
+          -77.44255,
+          37.53018,
+          10.171
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel; {floodBuildingsInWater} of the {buildings} buildings shown stand in it ({floodDepthAtBuildingsMedianFt} ft median, {floodDepthAtBuildingsMaxFt} ft deepest).",
+        "A bathtub fill on today's ground, not a flood model. Buildings: standing today by year built, or seen on aerial photographs of 1974, 1999, 2002, 2017 and 2021 (the flats' fire-insurance maps are not traced yet). Grey, dashed roof edge: {periodUnconfirmed} buildings on an earlier map or photograph but not ascertained for this year (for 1969 and 1972 that includes every building seen first on the 1974 photograph, or last on the 1952 maps). WORKING DRAFT d3."
+      ]
+    },
+    "1972": {
+      "title": "Hurricane Agnes, June 1972",
+      "caption": "Water at 35.5 ft above sea level (NAVD88) at the City Locks (\u00b10.3 ft), about 36.8 ft at the Mayo Bridge. NOAA, USGS, the Dock Street sign.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          10.82
+        ],
+        [
+          -77.42171,
+          37.52409,
+          10.82
+        ],
+        [
+          -77.43458,
+          37.5277,
+          11.217
+        ],
+        [
+          -77.44255,
+          37.53018,
+          11.217
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel; {floodBuildingsInWater} of the {buildings} buildings shown stand in it ({floodDepthAtBuildingsMedianFt} ft median, {floodDepthAtBuildingsMaxFt} ft deepest).",
+        "A bathtub fill on today's ground, not a flood model. Buildings: standing today by year built, or seen on aerial photographs of 1974, 1999, 2002, 2017 and 2021 (the flats' fire-insurance maps are not traced yet). Grey, dashed roof edge: {periodUnconfirmed} buildings on an earlier map or photograph but not ascertained for this year (for 1969 and 1972 that includes every building seen first on the 1974 photograph, or last on the 1952 maps). WORKING DRAFT d3."
+      ],
+      "gauges": [
+        {
+          "at": [
+            -77.436818,
+            37.522792
+          ],
+          "name": "5th and Stockton"
+        },
+        {
+          "at": [
+            -77.437703,
+            37.519511
+          ],
+          "name": "Commerce and Maury"
+        },
+        {
+          "at": [
+            -77.4235,
+            37.517
+          ],
+          "name": "treatment plant grounds"
+        }
+      ]
+    },
+    "1972-dry": {
+      "title": "Hurricane Agnes, June 1972",
+      "caption": "Water at 35.5 ft above sea level (NAVD88) at the City Locks (\u00b10.3 ft), about 36.8 ft at the Mayo Bridge. NOAA, USGS, the Dock Street sign.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          -20.0
+        ],
+        [
+          -77.42171,
+          37.52409,
+          -20.0
+        ],
+        [
+          -77.43458,
+          37.5277,
+          -20.0
+        ],
+        [
+          -77.44255,
+          37.53018,
+          -20.0
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel; {floodBuildingsInWater} of the {buildings} buildings shown stand in it ({floodDepthAtBuildingsMedianFt} ft median, {floodDepthAtBuildingsMaxFt} ft deepest).",
+        "A bathtub fill on today's ground, not a flood model. Buildings: standing today by year built, or seen on aerial photographs of 1974, 1999, 2002, 2017 and 2021 (the flats' fire-insurance maps are not traced yet). Grey, dashed roof edge: {periodUnconfirmed} buildings on an earlier map or photograph but not ascertained for this year (for 1969 and 1972 that includes every building seen first on the 1974 photograph, or last on the 1952 maps). WORKING DRAFT d3."
+      ],
+      "gauges": []
+    },
+    "1985": {
+      "title": "The Election Day flood, November 1985",
+      "caption": "Water at 29.7 ft above sea level (NAVD88) at the City Locks (\u00b10.4 ft), about 31.0 ft at the Mayo Bridge. Weather service crest record.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          9.053
+        ],
+        [
+          -77.42171,
+          37.52409,
+          9.053
+        ],
+        [
+          -77.43458,
+          37.5277,
+          9.449
+        ],
+        [
+          -77.44255,
+          37.53018,
+          9.449
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel; {floodBuildingsInWater} of the {buildings} buildings shown stand in it ({floodDepthAtBuildingsMedianFt} ft median, {floodDepthAtBuildingsMaxFt} ft deepest).",
+        "A bathtub fill on today's ground, not a flood model. Buildings: standing today by year built, or seen on aerial photographs of 1974, 1999, 2002, 2017 and 2021 (the flats' fire-insurance maps are not traced yet). Grey, dashed roof edge: {periodUnconfirmed} buildings on an earlier map or photograph but not ascertained for this year. WORKING DRAFT d3."
+      ]
+    },
+    "1996": {
+      "title": "Hurricane Fran's height (September 1996) against today's wall",
+      "caption": "Water at 22.7 ft above sea level (NAVD88) at the City Locks (weather service crest record), perhaps 1 ft more (hatched); perhaps 1 ft higher at the Mayo Bridge (assumed from 1969).",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          6.919
+        ],
+        [
+          -77.42171,
+          37.52409,
+          6.919
+        ],
+        [
+          -77.43458,
+          37.5277,
+          7.315
+        ],
+        [
+          -77.44255,
+          37.53018,
+          7.315
+        ]
+      ],
+      "walls": true,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel, plus {floodUnknownAcres} acres not known ({floodUnknownBuildings} buildings on it); buildings in the water: {floodShownInWater} of the {floodShown} shown ({floodShownDepthMedianFt} ft median, {floodShownDepthMaxFt} ft deepest).",
+        "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+      ],
+      "uncertainty": 0.305,
+      "band": "beyond",
+      "unknown": {
+        "lines": [
+          [
+            [
+              -77.427722,
+              37.520497
+            ],
+            [
+              -77.4269,
+              37.5165
+            ],
+            [
+              -77.4262,
+              37.5127
+            ],
+            [
+              -77.4255,
+              37.505
+            ]
+          ],
+          [
+            [
+              -77.428734,
+              37.524582
+            ],
+            [
+              -77.4284,
+              37.5258
+            ],
+            [
+              -77.4265,
+              37.5258
+            ],
+            [
+              -77.425,
+              37.525
+            ],
+            [
+              -77.4235,
+              37.524
+            ],
+            [
+              -77.422,
+              37.5235
+            ],
+            [
+              -77.4205,
+              37.5229
+            ],
+            [
+              -77.419,
+              37.522
+            ],
+            [
+              -77.4175,
+              37.52
+            ],
+            [
+              -77.416,
+              37.517
+            ],
+            [
+              -77.415,
+              37.505
+            ]
+          ]
+        ],
+        "note": "Not known: the earthen levee is not mapped",
+        "about": "rc2 (Chris, November 25, 2026, 12:27): land the with-wall fill reaches only because the levee is not in our data. The first line continues the south wall's east tie-in south along the lidar ridge by I-95 past the frame; the second runs from the wall's east end along the river's south edge, just off the shore, past the frame (the levee could stand anywhere between I-95 and the bank). Land flooded with the wall but dry with both lines as walls is drawn as not known. The levee's course is given as along the west side of I-95, then south and west to Goodes Street (City FloodKit; floodwall.md), and WRDA 1986 sec. 401 says the project shall include flood protection for the wastewater plant; neither puts it on our map, so both courses are closed."
+      },
+      "gauges": []
+    },
+    "1996-nowall": {
+      "title": "Hurricane Fran, September 1996, against the new floodwall",
+      "caption": "Water at 22.7 ft above sea level (NAVD88) at the City Locks, perhaps 1 ft more (hatched), about 24.0 ft at the Mayo Bridge. Weather service crest record.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          6.919
+        ],
+        [
+          -77.42171,
+          37.52409,
+          6.919
+        ],
+        [
+          -77.43458,
+          37.5277,
+          7.315
+        ],
+        [
+          -77.44255,
+          37.53018,
+          7.315
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel; {floodBuildingsInWater} of the {buildings} buildings shown stand in it ({floodDepthAtBuildingsMedianFt} ft median, {floodDepthAtBuildingsMaxFt} ft deepest).",
+        "A bathtub fill on today's ground, not a flood model. Buildings: standing today by year built, or seen on aerial photographs of 1974, 1999, 2002, 2017 and 2021 (the flats' fire-insurance maps are not traced yet). Grey, dashed roof edge: {periodUnconfirmed} buildings on an earlier map or photograph but not ascertained for this year. WORKING DRAFT d3."
+      ],
+      "uncertainty": 0.305,
+      "band": "beyond"
+    },
+    "2020": {
+      "title": "The November 2020 height against today's wall",
+      "caption": "Water at 17.0 ft above sea level (NAVD88) at the City Locks (\u00b10.1 ft; USGS gauge record), held level, with no rise assumed toward the Mayo Bridge. The weather service puts the treatment plant's access road, Maury to Brander Street, under water at 18.5 ft.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          5.182
+        ],
+        [
+          -77.42171,
+          37.52409,
+          5.182
+        ],
+        [
+          -77.43458,
+          37.5277,
+          5.182
+        ],
+        [
+          -77.44255,
+          37.53018,
+          5.182
+        ]
+      ],
+      "walls": true,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel, plus {floodUnknownAcres} acres not known ({floodUnknownBuildings} buildings on it); buildings in the water: {floodShownInWater} of the {floodShown} shown ({floodShownDepthMedianFt} ft median, {floodShownDepthMaxFt} ft deepest).",
+        "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+      ],
+      "unknown": {
+        "lines": [
+          [
+            [
+              -77.427722,
+              37.520497
+            ],
+            [
+              -77.4269,
+              37.5165
+            ],
+            [
+              -77.4262,
+              37.5127
+            ],
+            [
+              -77.4255,
+              37.505
+            ]
+          ],
+          [
+            [
+              -77.428734,
+              37.524582
+            ],
+            [
+              -77.4284,
+              37.5258
+            ],
+            [
+              -77.4265,
+              37.5258
+            ],
+            [
+              -77.425,
+              37.525
+            ],
+            [
+              -77.4235,
+              37.524
+            ],
+            [
+              -77.422,
+              37.5235
+            ],
+            [
+              -77.4205,
+              37.5229
+            ],
+            [
+              -77.419,
+              37.522
+            ],
+            [
+              -77.4175,
+              37.52
+            ],
+            [
+              -77.416,
+              37.517
+            ],
+            [
+              -77.415,
+              37.505
+            ]
+          ]
+        ],
+        "note": "Not known: the earthen levee is not mapped",
+        "about": "rc2 (Chris, November 25, 2026, 12:27): land the with-wall fill reaches only because the levee is not in our data. The first line continues the south wall's east tie-in south along the lidar ridge by I-95 past the frame; the second runs from the wall's east end along the river's south edge, just off the shore, past the frame (the levee could stand anywhere between I-95 and the bank). Land flooded with the wall but dry with both lines as walls is drawn as not known. The levee's course is given as along the west side of I-95, then south and west to Goodes Street (City FloodKit; floodwall.md), and WRDA 1986 sec. 401 says the project shall include flood protection for the wastewater plant; neither puts it on our map, so both courses are closed."
+      },
+      "gauges": []
+    },
+    "2020-nowall": {
+      "title": "November 2020, against the floodwall",
+      "caption": "Water at 17.0 ft above sea level (NAVD88) at the City Locks (\u00b10.1 ft), held to the Mayo Bridge. USGS gauge record.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          5.182
+        ],
+        [
+          -77.42171,
+          37.52409,
+          5.182
+        ],
+        [
+          -77.43458,
+          37.5277,
+          5.182
+        ],
+        [
+          -77.44255,
+          37.53018,
+          5.182
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel; {floodBuildingsInWater} of the {buildings} buildings shown stand in it ({floodDepthAtBuildingsMedianFt} ft median, {floodDepthAtBuildingsMaxFt} ft deepest).",
+        "A bathtub fill on today's ground, not a flood model. Buildings: standing today by year built, or seen on aerial photographs of 1974, 1999, 2002, 2017 and 2021 (the flats' fire-insurance maps are not traced yet). Grey, dashed roof edge: {periodUnconfirmed} buildings on an earlier map or photograph but not ascertained for this year. WORKING DRAFT d3."
+      ]
+    },
+    "agnes-today": {
+      "title": "What if: the 1972 flood's height against today's floodwall",
+      "caption": "Not a flood that happened: water at the height the 1972 flood reached, 35.5 ft at the City Locks, against today's city and wall, gates shut.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          10.82
+        ],
+        [
+          -77.42171,
+          37.52409,
+          10.82
+        ],
+        [
+          -77.43458,
+          37.5277,
+          11.217
+        ],
+        [
+          -77.44255,
+          37.53018,
+          11.217
+        ]
+      ],
+      "walls": true,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel, plus {floodUnknownAcres} acres not known ({floodUnknownBuildings} buildings on it); buildings in the water: {floodShownInWater} of the {floodShown} shown ({floodShownDepthMedianFt} ft median, {floodShownDepthMaxFt} ft deepest).",
+        "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+      ],
+      "gauges": [
+        {
+          "at": [
+            -77.436818,
+            37.522792
+          ],
+          "name": "5th and Stockton"
+        },
+        {
+          "at": [
+            -77.437703,
+            37.519511
+          ],
+          "name": "Commerce and Maury"
+        }
+      ],
+      "unknown": {
+        "lines": [
+          [
+            [
+              -77.427722,
+              37.520497
+            ],
+            [
+              -77.4269,
+              37.5165
+            ],
+            [
+              -77.4262,
+              37.5127
+            ],
+            [
+              -77.4255,
+              37.505
+            ]
+          ],
+          [
+            [
+              -77.428734,
+              37.524582
+            ],
+            [
+              -77.4284,
+              37.5258
+            ],
+            [
+              -77.4265,
+              37.5258
+            ],
+            [
+              -77.425,
+              37.525
+            ],
+            [
+              -77.4235,
+              37.524
+            ],
+            [
+              -77.422,
+              37.5235
+            ],
+            [
+              -77.4205,
+              37.5229
+            ],
+            [
+              -77.419,
+              37.522
+            ],
+            [
+              -77.4175,
+              37.52
+            ],
+            [
+              -77.416,
+              37.517
+            ],
+            [
+              -77.415,
+              37.505
+            ]
+          ]
+        ],
+        "note": "Not known: the earthen levee is not mapped",
+        "about": "rc2 (Chris, November 25, 2026, 12:27): land the with-wall fill reaches only because the levee is not in our data. The first line continues the south wall's east tie-in south along the lidar ridge by I-95 past the frame; the second runs from the wall's east end along the river's south edge, just off the shore, past the frame (the levee could stand anywhere between I-95 and the bank). Land flooded with the wall but dry with both lines as walls is drawn as not known. The levee's course is given as along the west side of I-95, then south and west to Goodes Street (City FloodKit; floodwall.md), and WRDA 1986 sec. 401 says the project shall include flood protection for the wastewater plant; neither puts it on our map, so both courses are closed."
+      }
+    },
+    "agnes-today-nowall": {
+      "title": "What if: the 1972 flood's height against today's floodwall",
+      "caption": "Not a flood that happened: water at the height the 1972 flood reached, 35.5 ft at the City Locks, on today's city with no floodwall.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          10.82
+        ],
+        [
+          -77.42171,
+          37.52409,
+          10.82
+        ],
+        [
+          -77.43458,
+          37.5277,
+          11.217
+        ],
+        [
+          -77.44255,
+          37.53018,
+          11.217
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "{floodAcres} acres under water off the channel; buildings in the water: {floodShownInWater} of the {floodShown} shown ({floodShownDepthMedianFt} ft median, {floodShownDepthMaxFt} ft deepest).",
+        "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. FINAL DRAFT rc3."
+      ]
+    },
+    "gaston-a": {
+      "walls": true,
+      "gates": "open",
+      "soft": true,
+      "markers": [
+        {
+          "n": "1",
+          "anchor": "start",
+          "at": [
+            -77.42826,
+            37.53399
+          ],
+          "key": "1  17th Street Market: where most of the water came together (Washington Post)."
+        },
+        {
+          "n": "2",
+          "anchor": "end",
+          "at": [
+            -77.42835,
+            37.5342
+          ],
+          "key": "2  Havana '59, 16 N. 17th St.: water 13 ft up the dining-room wall, by the owner's account (Washington Post)."
+        },
+        {
+          "n": "3",
+          "at": [
+            -77.42934,
+            37.5323
+          ],
+          "key": "3  Bottoms Up Pizza, 1700 Dock St.: 6 ft 2 in inside, over a 3 ft step, about 9 ft above the street (owner, NBC12)."
+        },
+        {
+          "n": "4",
+          "at": [
+            -77.430374,
+            37.534548
+          ],
+          "key": "4  15th and Main: \"rapids\" in the street (a witness)."
+        },
+        {
+          "n": "5",
+          "at": [
+            -77.42916,
+            37.5346
+          ],
+          "key": "5  Main Street Station: escaped damage (Washington Post)."
+        }
+      ],
+      "notes": [
+        "Rain, not the James: 6 to 12 in in eight hours; the river stayed low and the wall's gates stood open. Depths are reports, not surveys; the edge is an estimate.",
+        "1 17th Street Market, where most water converged \u00b7 2 Havana '59, 13 ft up the wall \u00b7 3 Bottoms Up, about 9 ft \u00b7 4 15th and Main, \"rapids\" \u00b7 5 Main Street Station, which escaped damage.",
+        "The ground lets still water out at 19 to 22 ft; it stood higher because it came faster than it could leave. Buildings: standing today by year built, or seen on aerial photographs of 1974, 1999, 2002, 2017 and 2021 (the flats' fire-insurance maps are not traced yet). Grey, dashed roof edge: {periodUnconfirmed} buildings on an earlier map or photograph but not ascertained for this year. WORKING DRAFT d3."
+      ],
+      "title": "Tropical Storm Gaston, August 30, 2004: rain in Shockoe Bottom",
+      "caption": "A: a soft pool to about 28 ft above sea level (NAVD88), \u00b13 ft, in the blocks the reports name (AP, Washington Post, NBC12).",
+      "ponds": [
+        {
+          "level": 8.534,
+          "from": [
+            -77.4293,
+            37.53337
+          ],
+          "ring": [
+            [
+              -77.432744,
+              37.533343
+            ],
+            [
+              -77.431228,
+              37.536184
+            ],
+            [
+              -77.426033,
+              37.536055
+            ],
+            [
+              -77.422424,
+              37.533857
+            ],
+            [
+              -77.426074,
+              37.530051
+            ],
+            [
+              -77.432744,
+              37.533343
+            ]
+          ]
+        }
+      ]
+    },
+    "gaston-b": {
+      "walls": true,
+      "gates": "open",
+      "soft": true,
+      "markers": [
+        {
+          "n": "1",
+          "anchor": "start",
+          "at": [
+            -77.42826,
+            37.53399
+          ],
+          "key": "1  17th Street Market: where most of the water came together (Washington Post)."
+        },
+        {
+          "n": "2",
+          "anchor": "end",
+          "at": [
+            -77.42835,
+            37.5342
+          ],
+          "key": "2  Havana '59, 16 N. 17th St.: water 13 ft up the dining-room wall, by the owner's account (Washington Post)."
+        },
+        {
+          "n": "3",
+          "at": [
+            -77.42934,
+            37.5323
+          ],
+          "key": "3  Bottoms Up Pizza, 1700 Dock St.: 6 ft 2 in inside, over a 3 ft step, about 9 ft above the street (owner, NBC12)."
+        },
+        {
+          "n": "4",
+          "at": [
+            -77.430374,
+            37.534548
+          ],
+          "key": "4  15th and Main: \"rapids\" in the street (a witness)."
+        },
+        {
+          "n": "5",
+          "at": [
+            -77.42916,
+            37.5346
+          ],
+          "key": "5  Main Street Station: escaped damage (Washington Post)."
+        }
+      ],
+      "notes": [
+        "Rain, not the James: 6 to 12 in in eight hours; the river stayed low and the wall's gates stood open. Depths are reports, not surveys; the edge is an estimate.",
+        "1 17th Street Market, where most water converged \u00b7 2 Havana '59, 13 ft up the wall \u00b7 3 Bottoms Up, about 9 ft \u00b7 4 15th and Main, \"rapids\" \u00b7 5 Main Street Station, which escaped damage.",
+        "The ground lets still water out at 19 to 22 ft; it stood higher because it came faster than it could leave. Buildings: standing today by year built, or seen on aerial photographs of 1974, 1999, 2002, 2017 and 2021 (the flats' fire-insurance maps are not traced yet). Grey, dashed roof edge: {periodUnconfirmed} buildings on an earlier map or photograph but not ascertained for this year. WORKING DRAFT d3."
+      ],
+      "title": "Tropical Storm Gaston, August 30, 2004: rain in Shockoe Bottom",
+      "caption": "B: the range, not a level: water to 25 ft above sea level (NAVD88), hatched to 31 ft, in the blocks the reports name (AP, Washington Post, NBC12).",
+      "ponds": [
+        {
+          "level": 8.534,
+          "from": [
+            -77.4293,
+            37.53337
+          ],
+          "ring": [
+            [
+              -77.432744,
+              37.533343
+            ],
+            [
+              -77.431228,
+              37.536184
+            ],
+            [
+              -77.426033,
+              37.536055
+            ],
+            [
+              -77.422424,
+              37.533857
+            ],
+            [
+              -77.426074,
+              37.530051
+            ],
+            [
+              -77.432744,
+              37.533343
+            ]
+          ]
+        }
+      ],
+      "uncertainty": 0.914,
+      "band": "range"
+    },
+    "agnes-today-dry": {
+      "title": "What if: the 1972 flood's height against today's floodwall",
+      "caption": "Not a flood that happened: water at the height the 1972 flood reached, 35.5 ft at the City Locks, against today's city and wall, gates shut.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          -20.0
+        ],
+        [
+          -77.44255,
+          37.53018,
+          -20.0
+        ]
+      ],
+      "walls": true,
+      "gates": "closed",
+      "notes": [
+        "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+        "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+      ],
+      "gauges": [],
+      "twinOf": "agnes-today"
+    },
+    "agnes-today-nowall-dry": {
+      "title": "What if: the 1972 flood's height against today's floodwall",
+      "caption": "Not a flood that happened: water at the height the 1972 flood reached, 35.5 ft at the City Locks, on today's city with no floodwall.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          -20.0
+        ],
+        [
+          -77.44255,
+          37.53018,
+          -20.0
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+        "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. FINAL DRAFT rc3."
+      ],
+      "gauges": [],
+      "twinOf": "agnes-today-nowall"
+    },
+    "1996-dry": {
+      "title": "Hurricane Fran's height (September 1996) against today's wall",
+      "caption": "Water at 22.7 ft above sea level (NAVD88) at the City Locks (weather service crest record), perhaps 1 ft more (hatched); perhaps 1 ft higher at the Mayo Bridge (assumed from 1969).",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          -20.0
+        ],
+        [
+          -77.44255,
+          37.53018,
+          -20.0
+        ]
+      ],
+      "walls": true,
+      "gates": "closed",
+      "notes": [
+        "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+        "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+      ],
+      "gauges": [],
+      "twinOf": "1996"
+    },
+    "2020-dry": {
+      "title": "The November 2020 height against today's wall",
+      "caption": "Water at 17.0 ft above sea level (NAVD88) at the City Locks (\u00b10.1 ft; USGS gauge record), held level, with no rise assumed toward the Mayo Bridge. The weather service puts the treatment plant's access road, Maury to Brander Street, under water at 18.5 ft.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          -20.0
+        ],
+        [
+          -77.44255,
+          37.53018,
+          -20.0
+        ]
+      ],
+      "walls": true,
+      "gates": "closed",
+      "notes": [
+        "Its dry twin: the same city with no flood, the same ground, wall and buildings, to compare.",
+        "Bathtub fill, not a flood model. Today's city; the flats' earthen levee is not mapped. Wall top: the 41 ft stage at which the weather service says the wall is overtopped, not surveyed. FINAL DRAFT rc3."
+      ],
+      "gauges": [],
+      "twinOf": "2020"
+    }
+  }
+}

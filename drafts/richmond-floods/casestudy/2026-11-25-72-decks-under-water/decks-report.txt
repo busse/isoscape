@@ -1,0 +1,45 @@
+1936:1936 datum -0.08981923758983612
+   Peninsula Subdivision L1                 90 under 0 deck z 12.5 - 16.6 water z 8.5
+   Rivanna Subdivision L2                   90 under 0 deck z 20.1 - 24.5 water z 8.6
+   Bellwood Subdivision L1                  73 under 0 deck z 14.7 - 18.1 water z 8.5
+   Rivanna Subdivision L1                   41 under 0 deck z 14.7 - 20.0 water z 8.5
+   rail L1                                  38 under 0 deck z 12.8 - 14.8 water z 8.4
+   Richmond District L1                     26 under 3 deck z 6.0 - 13.3 water z 8.6
+   Mayo Bridge L1                           18 under 8 deck z 6.4 - 9.1 water z 8.6
+1969:1969 datum -0.08981923758983612
+   Richmond-Petersburg Turnpike L3          128 under 0 deck z 21.4 - 32.0 water z 8.9
+   Peninsula Subdivision L1                 90 under 0 deck z 12.5 - 16.6 water z 8.8
+   Rivanna Subdivision L2                   90 under 0 deck z 20.1 - 24.5 water z 10.2
+   Bellwood Subdivision L1                  73 under 0 deck z 14.7 - 18.1 water z 8.9
+   motorway_link L3                         60 under 1 deck z 8.0 - 31.5 water z 8.9
+   Rivanna Subdivision L1                   41 under 0 deck z 14.7 - 20.0 water z 8.8
+   rail L1                                  38 under 0 deck z 12.8 - 14.8 water z 8.7
+   Richmond District L1                     26 under 4 deck z 6.0 - 13.3 water z 9.4
+   motorway_link L2                         19 under 1 deck z 8.8 - 27.2 water z 8.9
+   Mayo Bridge L1                           18 under 14 deck z 6.4 - 9.1 water z 9.0
+   motorway_link L1                         9 under 0 deck z 19.3 - 24.7 water z -Infinity
+1972:1972 datum -0.08981923758983612
+   Richmond-Petersburg Turnpike L3          128 under 0 deck z 21.4 - 32.0 water z 11.3
+   Peninsula Subdivision L1                 90 under 0 deck z 12.5 - 16.6 water z 11.2
+   Rivanna Subdivision L2                   90 under 0 deck z 20.1 - 24.5 water z 11.3
+   Bellwood Subdivision L1                  73 under 0 deck z 14.7 - 18.1 water z 11.3
+   motorway_link L3                         60 under 2 deck z 8.0 - 31.5 water z 11.3
+   Rivanna Subdivision L1                   41 under 0 deck z 14.7 - 20.0 water z 11.2
+   rail L1                                  38 under 0 deck z 12.8 - 14.8 water z 11.1
+   Richmond District L1                     26 under 5 deck z 6.0 - 13.3 water z 11.3
+   motorway_link L2                         19 under 1 deck z 8.8 - 27.2 water z 11.3
+   Mayo Bridge L1                           18 under 18 deck z 6.4 - 9.1 water z 11.3
+   motorway_link L1                         9 under 0 deck z 19.3 - 24.7 water z -Infinity
+1985:1985 datum -0.08981923758983612
+   Richmond-Petersburg Turnpike L3          96 under 0 deck z 20.2 - 31.2 water z 9.5
+   Peninsula Subdivision L1                 90 under 0 deck z 12.5 - 16.6 water z 9.5
+   Rivanna Subdivision L2                   90 under 0 deck z 20.1 - 24.5 water z 9.5
+   Bellwood Subdivision L1                  73 under 0 deck z 14.7 - 18.1 water z 9.5
+   motorway_link L3                         51 under 1 deck z 8.0 - 39.9 water z 9.5
+   Rivanna Subdivision L1                   41 under 0 deck z 14.7 - 20.0 water z 9.5
+   rail L1                                  38 under 0 deck z 12.8 - 14.8 water z 9.4
+   motorway_link L2                         29 under 0 deck z 20.8 - 27.3 water z 9.5
+   Richmond District L1                     26 under 4 deck z 6.0 - 13.3 water z 9.5
+   Mayo Bridge L1                           18 under 18 deck z 6.4 - 9.1 water z 9.5
+   motorway_link L1                         9 under 0 deck z 19.3 - 24.7 water z -Infinity
+   Manchester Bridge L3                     1 under 0 deck z 28.0 - 28.0 water z -Infinity

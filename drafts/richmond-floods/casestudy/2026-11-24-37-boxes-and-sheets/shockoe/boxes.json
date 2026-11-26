@@ -1,0 +1,107 @@
+[
+ {
+  "n": 1,
+  "title": "17th Street Market",
+  "at": [
+   -77.42826,
+   37.53399
+  ],
+  "svg_xy": [
+   -48.9,
+   -217.2
+  ],
+  "why": "The lowest blocks of Shockoe Bottom; the market where most of Gaston's water met, too.",
+  "ground_m": 5.83,
+  "depth_ft": 17.0
+ },
+ {
+  "n": 2,
+  "title": "Main Street Station",
+  "at": [
+   -77.42916,
+   37.5346
+  ],
+  "svg_xy": [
+   -249.9,
+   -248.1
+  ],
+  "why": "The station and its train shed standing in the water.",
+  "ground_m": 7.69,
+  "depth_ft": 11.0
+ },
+ {
+  "n": 3,
+  "title": "17th and Dock, the canal's end",
+  "at": [
+   -77.42965,
+   37.53228
+  ],
+  "svg_xy": [
+   -111.5,
+   6.8
+  ],
+  "why": "Where the Bottom spills to the river today (step 15); the wall's V and its Dock Street opening.",
+  "ground_m": 5.21,
+  "depth_ft": 19.2
+ },
+ {
+  "n": 4,
+  "title": "Shockoe Slip, 14th and Cary",
+  "at": [
+   -77.43244,
+   37.53453
+  ],
+  "svg_xy": [
+   -768.2,
+   -123.4
+  ],
+  "why": "The edge of the water at the foot of downtown.",
+  "ground_m": 10.45,
+  "depth_ft": 2.3
+ },
+ {
+  "n": 5,
+  "title": "Mayo Island",
+  "at": [
+   -77.4326,
+   37.5292
+  ],
+  "svg_xy": [
+   -295.7,
+   420.3
+  ],
+  "why": "The island under the river, its buildings standing in it.",
+  "ground_m": 8.38,
+  "depth_ft": 9.1
+ },
+ {
+  "n": 6,
+  "title": "Tobacco Row and the Dock",
+  "at": [
+   -77.4228,
+   37.529
+  ],
+  "svg_xy": [
+   1291.2,
+   62.9
+  ],
+  "why": "The warehouses along Dock Street, the Dock between them and the river.",
+  "ground_m": 15.24,
+  "depth_ft": -14.4
+ },
+ {
+  "n": 7,
+  "title": "Great Shiplock Park",
+  "at": [
+   -77.42161,
+   37.52586
+  ],
+  "svg_xy": [
+   1775,
+   353.5
+  ],
+  "why": "The canal's lock to the tidal river, at Rocketts.",
+  "ground_m": 3.01,
+  "depth_ft": 25.6
+ }
+]

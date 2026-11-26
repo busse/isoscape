@@ -1,0 +1,12 @@
+
+> isoscape@0.1.0 check:visual
+> python3 tools/check/visual.py check
+
+richmond-i195-rocketts: within tolerance; worst fall-line-hills: 0.000% changed, mean 0.02 (84 s)
+richmond-downtown: identical (2 s)
+richmond-downtown-time-1925: identical (16 s)
+richmond-downtown-time-2026: within tolerance; worst rowhouses-terrain: 0.000% changed, mean 0.00 (23 s)
+gwynns-island: within tolerance; worst bridge: 0.000% changed, mean 0.00 (73 s)
+broad-street-station-front-1943: skipped: no cached data
+lm-eiffel-tower: skipped: no cached data
+report: out/check/index.html (198 s)

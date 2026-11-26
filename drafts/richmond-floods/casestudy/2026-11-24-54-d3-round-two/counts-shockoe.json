@@ -1,0 +1,732 @@
+{
+ "1972:1972": {
+  "plate": {
+   "acres": 220.4,
+   "outbuildingsHidden": 42,
+   "shown": 1195,
+   "shownUnconfirmed": 277,
+   "inWater": 234,
+   "inWaterUnconfirmed": 77
+  },
+  "market": {
+   "depthFt": 15.4,
+   "groundM": 6.4,
+   "acresWet": 6.9,
+   "shown": 58,
+   "shownUnconfirmed": 18,
+   "inWater": 58,
+   "inWaterUnconfirmed": 18
+  },
+  "station": {
+   "depthFt": 8.6,
+   "groundM": 8.56,
+   "acresWet": 6.2,
+   "shown": 5,
+   "shownUnconfirmed": 2,
+   "inWater": 5,
+   "inWaterUnconfirmed": 2
+  },
+  "dock": {
+   "depthFt": 19.5,
+   "groundM": 5.21,
+   "acresWet": 6.9,
+   "shown": 10,
+   "shownUnconfirmed": 1,
+   "inWater": 10,
+   "inWaterUnconfirmed": 1
+  },
+  "slip": {
+   "depthFt": 2.5,
+   "groundM": 10.45,
+   "acresWet": 4.5,
+   "shown": 15,
+   "shownUnconfirmed": 1,
+   "inWater": 13,
+   "inWaterUnconfirmed": 1
+  },
+  "mayo": {
+   "depthFt": 9.2,
+   "groundM": 8.38,
+   "acresWet": 6,
+   "shown": 2,
+   "shownUnconfirmed": 0,
+   "inWater": 2,
+   "inWaterUnconfirmed": 0
+  },
+  "cary18": {
+   "depthFt": 7.7,
+   "groundM": 8.7,
+   "acresWet": 5.9,
+   "shown": 12,
+   "shownUnconfirmed": 8,
+   "inWater": 10,
+   "inWaterUnconfirmed": 7
+  },
+  "franklin": {
+   "depthFt": 1.8,
+   "groundM": 10.52,
+   "acresWet": 4,
+   "shown": 38,
+   "shownUnconfirmed": 17,
+   "inWater": 29,
+   "inWaterUnconfirmed": 15
+  }
+ },
+ "1972-dry:1972": {
+  "plate": {
+   "acres": 0,
+   "outbuildingsHidden": 42,
+   "shown": 1197,
+   "shownUnconfirmed": 278,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "market": {
+   "depthFt": 0,
+   "groundM": 6.4,
+   "acresWet": 0,
+   "shown": 60,
+   "shownUnconfirmed": 19,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "station": {
+   "depthFt": 0,
+   "groundM": 8.56,
+   "acresWet": 0,
+   "shown": 5,
+   "shownUnconfirmed": 2,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "dock": {
+   "depthFt": 0,
+   "groundM": 5.21,
+   "acresWet": 0,
+   "shown": 10,
+   "shownUnconfirmed": 1,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "slip": {
+   "depthFt": 0,
+   "groundM": 10.45,
+   "acresWet": 0,
+   "shown": 15,
+   "shownUnconfirmed": 1,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "mayo": {
+   "depthFt": 0,
+   "groundM": 8.38,
+   "acresWet": 0,
+   "shown": 2,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "cary18": {
+   "depthFt": 0,
+   "groundM": 8.7,
+   "acresWet": 0,
+   "shown": 12,
+   "shownUnconfirmed": 8,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "franklin": {
+   "depthFt": 0,
+   "groundM": 10.52,
+   "acresWet": 0,
+   "shown": 38,
+   "shownUnconfirmed": 17,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  }
+ },
+ "1936:1936": {
+  "plate": {
+   "acres": 159.1,
+   "outbuildingsHidden": 3,
+   "shown": 1202,
+   "shownUnconfirmed": 52,
+   "inWater": 151,
+   "inWaterUnconfirmed": 5
+  },
+  "market": {
+   "depthFt": 6.4,
+   "groundM": 6.4,
+   "acresWet": 5.5,
+   "shown": 45,
+   "shownUnconfirmed": 0,
+   "inWater": 34,
+   "inWaterUnconfirmed": 0
+  },
+  "station": {
+   "depthFt": 0,
+   "groundM": 8.56,
+   "acresWet": 3,
+   "shown": 7,
+   "shownUnconfirmed": 0,
+   "inWater": 5,
+   "inWaterUnconfirmed": 0
+  },
+  "dock": {
+   "depthFt": 10.5,
+   "groundM": 5.21,
+   "acresWet": 6.9,
+   "shown": 16,
+   "shownUnconfirmed": 0,
+   "inWater": 16,
+   "inWaterUnconfirmed": 0
+  },
+  "slip": {
+   "depthFt": 0,
+   "groundM": 10.45,
+   "acresWet": 0.1,
+   "shown": 21,
+   "shownUnconfirmed": 0,
+   "inWater": 3,
+   "inWaterUnconfirmed": 0
+  },
+  "mayo": {
+   "depthFt": 0.2,
+   "groundM": 8.38,
+   "acresWet": 4.8,
+   "shown": 0,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "cary18": {
+   "depthFt": 0,
+   "groundM": 8.7,
+   "acresWet": 3.5,
+   "shown": 11,
+   "shownUnconfirmed": 1,
+   "inWater": 7,
+   "inWaterUnconfirmed": 1
+  },
+  "franklin": {
+   "depthFt": 0,
+   "groundM": 10.52,
+   "acresWet": 1.1,
+   "shown": 41,
+   "shownUnconfirmed": 0,
+   "inWater": 7,
+   "inWaterUnconfirmed": 0
+  }
+ },
+ "1969:1969": {
+  "plate": {
+   "acres": 174.2,
+   "outbuildingsHidden": 47,
+   "shown": 1192,
+   "shownUnconfirmed": 273,
+   "inWater": 150,
+   "inWaterUnconfirmed": 45
+  },
+  "market": {
+   "depthFt": 7.5,
+   "groundM": 6.4,
+   "acresWet": 5.8,
+   "shown": 60,
+   "shownUnconfirmed": 19,
+   "inWater": 53,
+   "inWaterUnconfirmed": 17
+  },
+  "station": {
+   "depthFt": 0.7,
+   "groundM": 8.56,
+   "acresWet": 3.8,
+   "shown": 5,
+   "shownUnconfirmed": 2,
+   "inWater": 5,
+   "inWaterUnconfirmed": 2
+  },
+  "dock": {
+   "depthFt": 11.6,
+   "groundM": 5.21,
+   "acresWet": 6.9,
+   "shown": 10,
+   "shownUnconfirmed": 1,
+   "inWater": 10,
+   "inWaterUnconfirmed": 1
+  },
+  "slip": {
+   "depthFt": 0,
+   "groundM": 10.45,
+   "acresWet": 1,
+   "shown": 15,
+   "shownUnconfirmed": 1,
+   "inWater": 4,
+   "inWaterUnconfirmed": 1
+  },
+  "mayo": {
+   "depthFt": 1.3,
+   "groundM": 8.38,
+   "acresWet": 6,
+   "shown": 2,
+   "shownUnconfirmed": 0,
+   "inWater": 2,
+   "inWaterUnconfirmed": 0
+  },
+  "cary18": {
+   "depthFt": 0,
+   "groundM": 8.7,
+   "acresWet": 3.9,
+   "shown": 12,
+   "shownUnconfirmed": 8,
+   "inWater": 7,
+   "inWaterUnconfirmed": 5
+  },
+  "franklin": {
+   "depthFt": 0,
+   "groundM": 10.52,
+   "acresWet": 1.2,
+   "shown": 38,
+   "shownUnconfirmed": 17,
+   "inWater": 10,
+   "inWaterUnconfirmed": 5
+  }
+ },
+ "1985:1985": {
+  "plate": {
+   "acres": 192.5,
+   "outbuildingsHidden": 44,
+   "shown": 1133,
+   "shownUnconfirmed": 200,
+   "inWater": 158,
+   "inWaterUnconfirmed": 36
+  },
+  "market": {
+   "depthFt": 9.6,
+   "groundM": 6.4,
+   "acresWet": 6.7,
+   "shown": 57,
+   "shownUnconfirmed": 6,
+   "inWater": 54,
+   "inWaterUnconfirmed": 6
+  },
+  "station": {
+   "depthFt": 2.8,
+   "groundM": 8.56,
+   "acresWet": 5.3,
+   "shown": 5,
+   "shownUnconfirmed": 0,
+   "inWater": 5,
+   "inWaterUnconfirmed": 0
+  },
+  "dock": {
+   "depthFt": 13.7,
+   "groundM": 5.21,
+   "acresWet": 6.9,
+   "shown": 10,
+   "shownUnconfirmed": 3,
+   "inWater": 10,
+   "inWaterUnconfirmed": 3
+  },
+  "slip": {
+   "depthFt": 0,
+   "groundM": 10.45,
+   "acresWet": 1.8,
+   "shown": 13,
+   "shownUnconfirmed": 0,
+   "inWater": 6,
+   "inWaterUnconfirmed": 0
+  },
+  "mayo": {
+   "depthFt": 3.4,
+   "groundM": 8.38,
+   "acresWet": 6,
+   "shown": 2,
+   "shownUnconfirmed": 0,
+   "inWater": 2,
+   "inWaterUnconfirmed": 0
+  },
+  "cary18": {
+   "depthFt": 1.9,
+   "groundM": 8.7,
+   "acresWet": 4.7,
+   "shown": 10,
+   "shownUnconfirmed": 5,
+   "inWater": 7,
+   "inWaterUnconfirmed": 3
+  },
+  "franklin": {
+   "depthFt": 0,
+   "groundM": 10.52,
+   "acresWet": 1.8,
+   "shown": 33,
+   "shownUnconfirmed": 15,
+   "inWater": 11,
+   "inWaterUnconfirmed": 6
+  }
+ },
+ "gaston-b:2004": {
+  "plate": {
+   "acres": 27.7,
+   "outbuildingsHidden": 25,
+   "shown": 1062,
+   "shownUnconfirmed": 62,
+   "inWater": 73,
+   "inWaterUnconfirmed": 1
+  },
+  "market": {
+   "depthFt": 4,
+   "groundM": 6.4,
+   "acresWet": 4.7,
+   "shown": 56,
+   "shownUnconfirmed": 0,
+   "inWater": 35,
+   "inWaterUnconfirmed": 0
+  },
+  "station": {
+   "depthFt": 0,
+   "groundM": 8.56,
+   "acresWet": 1.8,
+   "shown": 6,
+   "shownUnconfirmed": 0,
+   "inWater": 4,
+   "inWaterUnconfirmed": 0
+  },
+  "dock": {
+   "depthFt": 7.9,
+   "groundM": 5.21,
+   "acresWet": 5.3,
+   "shown": 8,
+   "shownUnconfirmed": 0,
+   "inWater": 8,
+   "inWaterUnconfirmed": 0
+  },
+  "slip": {
+   "depthFt": 0,
+   "groundM": 10.45,
+   "acresWet": 0,
+   "shown": 15,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "mayo": {
+   "depthFt": 0,
+   "groundM": 8.38,
+   "acresWet": 0,
+   "shown": 2,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "cary18": {
+   "depthFt": 0,
+   "groundM": 8.7,
+   "acresWet": 1.7,
+   "shown": 5,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "franklin": {
+   "depthFt": 0,
+   "groundM": 10.52,
+   "acresWet": 0.6,
+   "shown": 21,
+   "shownUnconfirmed": 1,
+   "inWater": 5,
+   "inWaterUnconfirmed": 0
+  }
+ },
+ "1996:1996": {
+  "plate": {
+   "acres": 100.8,
+   "outbuildingsHidden": 55,
+   "shown": 1196,
+   "shownUnconfirmed": 241,
+   "inWater": 10,
+   "inWaterUnconfirmed": 9
+  },
+  "market": {
+   "depthFt": 0,
+   "groundM": 6.4,
+   "acresWet": 0,
+   "shown": 59,
+   "shownUnconfirmed": 6,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "station": {
+   "depthFt": 0,
+   "groundM": 8.56,
+   "acresWet": 0,
+   "shown": 6,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "dock": {
+   "depthFt": 0,
+   "groundM": 5.21,
+   "acresWet": 1.6,
+   "shown": 10,
+   "shownUnconfirmed": 2,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "slip": {
+   "depthFt": 0,
+   "groundM": 10.45,
+   "acresWet": 0,
+   "shown": 15,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "mayo": {
+   "depthFt": 0,
+   "groundM": 8.38,
+   "acresWet": 1.5,
+   "shown": 2,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "cary18": {
+   "depthFt": 0,
+   "groundM": 8.7,
+   "acresWet": 2.7,
+   "shown": 9,
+   "shownUnconfirmed": 4,
+   "inWater": 1,
+   "inWaterUnconfirmed": 1
+  },
+  "franklin": {
+   "depthFt": 0,
+   "groundM": 10.52,
+   "acresWet": 0,
+   "shown": 33,
+   "shownUnconfirmed": 13,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  }
+ },
+ "2020:2020": {
+  "plate": {
+   "acres": 44.5,
+   "outbuildingsHidden": 0,
+   "shown": 1105,
+   "shownUnconfirmed": 11,
+   "inWater": 3,
+   "inWaterUnconfirmed": 0
+  },
+  "market": {
+   "depthFt": 0,
+   "groundM": 6.4,
+   "acresWet": 0,
+   "shown": 56,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "station": {
+   "depthFt": 0,
+   "groundM": 8.56,
+   "acresWet": 0,
+   "shown": 6,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "dock": {
+   "depthFt": 0,
+   "groundM": 5.21,
+   "acresWet": 0,
+   "shown": 8,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "slip": {
+   "depthFt": 0,
+   "groundM": 10.45,
+   "acresWet": 0,
+   "shown": 15,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "mayo": {
+   "depthFt": 0,
+   "groundM": 8.38,
+   "acresWet": 0.9,
+   "shown": 2,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "cary18": {
+   "depthFt": 0,
+   "groundM": 8.7,
+   "acresWet": 0.1,
+   "shown": 5,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "franklin": {
+   "depthFt": 0,
+   "groundM": 10.52,
+   "acresWet": 0,
+   "shown": 21,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  }
+ },
+ "agnes-today:2026": {
+  "plate": {
+   "acres": 122.3,
+   "outbuildingsHidden": 0,
+   "shown": 1101,
+   "shownUnconfirmed": 0,
+   "inWater": 22,
+   "inWaterUnconfirmed": 0
+  },
+  "market": {
+   "depthFt": 0,
+   "groundM": 6.4,
+   "acresWet": 0,
+   "shown": 56,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "station": {
+   "depthFt": 0,
+   "groundM": 8.56,
+   "acresWet": 0,
+   "shown": 6,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "dock": {
+   "depthFt": 0,
+   "groundM": 5.21,
+   "acresWet": 1.4,
+   "shown": 8,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "slip": {
+   "depthFt": 0,
+   "groundM": 10.45,
+   "acresWet": 0,
+   "shown": 15,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "mayo": {
+   "depthFt": 9.2,
+   "groundM": 8.38,
+   "acresWet": 6,
+   "shown": 2,
+   "shownUnconfirmed": 0,
+   "inWater": 2,
+   "inWaterUnconfirmed": 0
+  },
+  "cary18": {
+   "depthFt": 0,
+   "groundM": 8.7,
+   "acresWet": 1.8,
+   "shown": 5,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "franklin": {
+   "depthFt": 0,
+   "groundM": 10.52,
+   "acresWet": 0,
+   "shown": 21,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  }
+ },
+ "1771:1788": {
+  "plate": {
+   "acres": 231.5,
+   "outbuildingsHidden": 0,
+   "shown": 6,
+   "shownUnconfirmed": 0,
+   "inWater": 1,
+   "inWaterUnconfirmed": 0
+  },
+  "market": {
+   "depthFt": 17.9,
+   "groundM": 6.4,
+   "acresWet": 6.9,
+   "shown": 0,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "station": {
+   "depthFt": 11.1,
+   "groundM": 8.56,
+   "acresWet": 6.5,
+   "shown": 0,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "dock": {
+   "depthFt": 22,
+   "groundM": 5.21,
+   "acresWet": 6.9,
+   "shown": 0,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "slip": {
+   "depthFt": 5,
+   "groundM": 10.45,
+   "acresWet": 5.3,
+   "shown": 0,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "mayo": {
+   "depthFt": 11.7,
+   "groundM": 8.38,
+   "acresWet": 6,
+   "shown": 0,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "cary18": {
+   "depthFt": 10.2,
+   "groundM": 8.7,
+   "acresWet": 6.2,
+   "shown": 0,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "franklin": {
+   "depthFt": 4.3,
+   "groundM": 10.52,
+   "acresWet": 5.1,
+   "shown": 0,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  }
+ }
+}

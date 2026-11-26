@@ -1,0 +1,5074 @@
+{
+ "agnes-today:2026": {
+  "classes": {
+   "order": 9,
+   "joint": 104,
+   "overlap": 30,
+   "decks": 2
+  },
+  "counts": {
+   "building over building": 7,
+   "band over building": 1,
+   "band over band": 1
+  },
+  "cases": [
+   {
+    "over": "w426146867",
+    "under": "w426146868",
+    "area": 11.25,
+    "at": [
+     58.32205300440933,
+     -525.8501876171606
+    ],
+    "by": 5.12,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426146861",
+    "under": "w426146860",
+    "area": 4.75,
+    "at": [
+     172.41405318840194,
+     -355.0971907115625
+    ],
+    "by": 8.88,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426141457",
+    "under": "w426141456",
+    "area": 142.25,
+    "at": [
+     1248.305709639627,
+     7.79882674918985
+    ],
+    "by": 18.03,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w1078391654",
+    "under": "w1421013530",
+    "area": 452.75,
+    "at": [
+     1571.103477506085,
+     91.58304137459226
+    ],
+    "by": 29.91,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0.3,
+    "kind": "order"
+   },
+   {
+    "over": "w598212127",
+    "under": "w598212122",
+    "area": 109,
+    "at": [
+     1980.4129076054867,
+     160.00261627165844
+    ],
+    "by": 27.61,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w762180673",
+    "under": "w762180680",
+    "area": 148,
+    "at": [
+     -1376.3338180330006,
+     140.02863834000175
+    ],
+    "by": 10.99,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w762180673",
+    "under": "w762180680",
+    "area": 71.75,
+    "at": [
+     -1380.0338180330007,
+     140.09374742116066
+    ],
+    "by": 13.81,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w762180673",
+    "under": "band:w762180680",
+    "area": 5,
+    "at": [
+     -1369.5338180330007,
+     147.9703638990729
+    ],
+    "by": 3.97,
+    "kinds": "band over band",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w601107595.0.0",
+    "under": "w693428824.20.3",
+    "area": 8.75,
+    "at": [
+     -34.96872606248755,
+     380.3583641564513
+    ],
+    "by": 14.09,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.1",
+    "under": "w693428824.20.2",
+    "area": 10.5,
+    "at": [
+     -15.023050301284107,
+     388.44875560292
+    ],
+    "by": 13.23,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 15,
+    "kind": "overlap"
+   },
+   {
+    "over": "w943656807",
+    "under": "w943656806",
+    "area": 333.25,
+    "at": [
+     1542.1387794028958,
+     371.469243624642
+    ],
+    "by": 25.33,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w601107595.0.2",
+    "under": "w693428824.20.1",
+    "area": 12,
+    "at": [
+     4.922625459919327,
+     397.0391470493889
+    ],
+    "by": 12.1,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 22.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.3",
+    "under": "w693428824.20.0",
+    "area": 50,
+    "at": [
+     24.868301221122767,
+     407.84459280352905
+    ],
+    "by": 15.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 29.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.20.0",
+    "area": 5,
+    "at": [
+     43.86830122112276,
+     420.38351285328775
+    ],
+    "by": 2.68,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 6.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.19.18",
+    "area": 66.75,
+    "at": [
+     44.81738347703224,
+     420.88351285328775
+    ],
+    "by": 21.18,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 37.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.5",
+    "under": "w693428824.19.18",
+    "area": 6,
+    "at": [
+     68.31738347703224,
+     438.40034932546024
+    ],
+    "by": 3.19,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 7.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.17",
+    "under": "w601107595.0.5",
+    "area": 7.5,
+    "at": [
+     69.82012822075374,
+     438.90034932546024
+    ],
+    "by": 21.27,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w1204470635.2.1",
+    "under": "w37957180.1.2",
+    "area": 2,
+    "at": [
+     1254.022977176449,
+     509.9024548437444
+    ],
+    "by": 16.88,
+    "kinds": "bridge over bridge",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "decks"
+   },
+   {
+    "over": "w693428824.19.16",
+    "under": "w601107595.0.6",
+    "area": 7.5,
+    "at": [
+     93.82287296447527,
+     456.9171857976327
+    ],
+    "by": 21.16,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.15",
+    "under": "w601107595.0.7",
+    "area": 7,
+    "at": [
+     117.82561770819675,
+     474.93402226980527
+    ],
+    "by": 21.06,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w38232584.0.4.pier6",
+    "under": "floodwall:0.76.0",
+    "area": 21.25,
+    "at": [
+     644.7939532765876,
+     477.27180034467847
+    ],
+    "by": 2.62,
+    "kinds": "bridge over wall",
+    "overlap": 0.47,
+    "overlapM2": 0.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.14",
+    "under": "w601107595.0.8",
+    "area": 6.75,
+    "at": [
+     142.32836245191828,
+     493.4508587419777
+    ],
+    "by": 20.29,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.13",
+    "under": "w601107595.1.0",
+    "area": 6.75,
+    "at": [
+     165.83110719563973,
+     511.473071672038
+    ],
+    "by": 18.79,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 37,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.3",
+    "under": "w1204470635.2.0",
+    "area": 3,
+    "at": [
+     1256.6322316551978,
+     527.7982700068579
+    ],
+    "by": 5.86,
+    "kinds": "bridge over bridge",
+    "overlap": 0.01,
+    "overlapM2": 0.6,
+    "kind": "decks"
+   },
+   {
+    "over": "w37957180.1.4",
+    "under": "w1204470635.1.2",
+    "area": 3.5,
+    "at": [
+     1258.7414861339466,
+     547.1940851699715
+    ],
+    "by": 7.32,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 1.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.5",
+    "under": "w1204470635.1.1",
+    "area": 3.25,
+    "at": [
+     1260.8507406126953,
+     567.5899003330849
+    ],
+    "by": 7.77,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 1.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.1.1",
+    "under": "w693428824.19.13",
+    "area": 16,
+    "at": [
+     185.83110719563973,
+     527.415424406357
+    ],
+    "by": 3.45,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 14.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.1",
+    "area": 5.75,
+    "at": [
+     190.33385193936124,
+     529.915424406357
+    ],
+    "by": 16.54,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.2",
+    "area": 2,
+    "at": [
+     208.83385193936124,
+     543.8577771406761
+    ],
+    "by": 20.83,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 18.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.6",
+    "under": "w1204470635.1.0",
+    "area": 4.25,
+    "at": [
+     1263.4599950914442,
+     588.9857154961984
+    ],
+    "by": 7.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 2.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.7",
+    "under": "w1204470635.0.4",
+    "area": 2.75,
+    "at": [
+     1265.5692495701928,
+     608.8815306593119
+    ],
+    "by": 5.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 2.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.2",
+    "area": 5,
+    "at": [
+     214.33659668308272,
+     547.8577771406761
+    ],
+    "by": 14.95,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.3",
+    "area": 3,
+    "at": [
+     230.83659668308272,
+     560.8001298749952
+    ],
+    "by": 20.9,
+    "kinds": "bridge over bridge",
+    "overlap": 0.07,
+    "overlapM2": 21.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.3",
+    "area": 4,
+    "at": [
+     238.33934142680428,
+     566.3001298749952
+    ],
+    "by": 12.87,
+    "kinds": "bridge over bridge",
+    "overlap": 0.09,
+    "overlapM2": 27.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.4",
+    "area": 3.25,
+    "at": [
+     253.33934142680428,
+     577.7424826093143
+    ],
+    "by": 20.81,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 26,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.4",
+    "area": 4,
+    "at": [
+     262.34208617052576,
+     584.2424826093143
+    ],
+    "by": 11.28,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 24.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.5",
+    "area": 4,
+    "at": [
+     275.84208617052576,
+     594.6848353436333
+    ],
+    "by": 20.72,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.5",
+    "area": 3.25,
+    "at": [
+     286.34483091424727,
+     602.6848353436333
+    ],
+    "by": 9.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 20.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.6",
+    "area": 4.5,
+    "at": [
+     298.34483091424727,
+     611.6271880779524
+    ],
+    "by": 20.63,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.6",
+    "area": 2.75,
+    "at": [
+     310.3475756579688,
+     620.6339912024224
+    ],
+    "by": 7.61,
+    "kinds": "bridge over bridge",
+    "overlap": 0.05,
+    "overlapM2": 17.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.7",
+    "area": 5.25,
+    "at": [
+     320.3475756579688,
+     628.5695408122714
+    ],
+    "by": 20.71,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.2,
+    "kind": "overlap"
+   }
+  ],
+  "nearWall": [
+   {
+    "id": "w252837458",
+    "name": "Southern States Silo",
+    "m": 14.7,
+    "at": [
+     1034.3,
+     444.4
+    ],
+    "lonlat": [
+     -77.433742,
+     37.526666
+    ]
+   },
+   {
+    "id": "w943656807",
+    "m": 9.5,
+    "at": [
+     1601.1,
+     392.5
+    ],
+    "lonlat": [
+     -77.43697,
+     37.527076
+    ]
+   }
+  ]
+ },
+ "agnes-today-dry:2026": {
+  "classes": {
+   "order": 7,
+   "joint": 80,
+   "overlap": 33,
+   "decks": 2
+  },
+  "counts": {
+   "building over building": 7
+  },
+  "cases": [
+   {
+    "over": "w426146867",
+    "under": "w426146868",
+    "area": 11.25,
+    "at": [
+     58.32205300440933,
+     -525.8501876171606
+    ],
+    "by": 5.12,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426146861",
+    "under": "w426146860",
+    "area": 4.75,
+    "at": [
+     172.41405318840194,
+     -355.0971907115625
+    ],
+    "by": 8.88,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426141457",
+    "under": "w426141456",
+    "area": 142.25,
+    "at": [
+     1248.305709639627,
+     7.79882674918985
+    ],
+    "by": 18.03,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w1078391654",
+    "under": "w1421013530",
+    "area": 452.75,
+    "at": [
+     1571.103477506085,
+     91.58304137459226
+    ],
+    "by": 29.91,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0.3,
+    "kind": "order"
+   },
+   {
+    "over": "w598212127",
+    "under": "w598212122",
+    "area": 109,
+    "at": [
+     1980.4129076054867,
+     160.00261627165844
+    ],
+    "by": 27.61,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w762180673",
+    "under": "w762180680",
+    "area": 205.25,
+    "at": [
+     -1380.3338180330006,
+     140.52863834000175
+    ],
+    "by": 14.47,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "floodwall:0.27.0",
+    "area": 30,
+    "at": [
+     1975.4536105398524,
+     310.6536868532274
+    ],
+    "by": 6.49,
+    "kinds": "bridge over wall",
+    "overlap": 1.01,
+    "overlapM2": 12.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "w114143919.2.0.pier5",
+    "area": 11.25,
+    "at": [
+     1984.5202856645924,
+     313.1536868532274
+    ],
+    "by": 2.88,
+    "kinds": "bridge over bridge",
+    "overlap": 1.04,
+    "overlapM2": 2.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "floodwall:0.27.1",
+    "area": 22.25,
+    "at": [
+     1975.656640056073,
+     310.6536868532274
+    ],
+    "by": 2.97,
+    "kinds": "bridge over wall",
+    "overlap": 1.01,
+    "overlapM2": 12.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.0",
+    "under": "w693428824.20.3",
+    "area": 8.75,
+    "at": [
+     -34.96872606248755,
+     380.3583641564513
+    ],
+    "by": 14.09,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.1",
+    "under": "w693428824.20.2",
+    "area": 10.5,
+    "at": [
+     -15.023050301284107,
+     388.44875560292
+    ],
+    "by": 13.23,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 15,
+    "kind": "overlap"
+   },
+   {
+    "over": "w943656807",
+    "under": "w943656806",
+    "area": 333.25,
+    "at": [
+     1542.1387794028958,
+     371.469243624642
+    ],
+    "by": 25.33,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w601107595.0.2",
+    "under": "w693428824.20.1",
+    "area": 12,
+    "at": [
+     4.922625459919327,
+     397.0391470493889
+    ],
+    "by": 12.1,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 22.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.3",
+    "under": "w693428824.20.0",
+    "area": 50,
+    "at": [
+     24.868301221122767,
+     407.84459280352905
+    ],
+    "by": 15.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 29.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.20.0",
+    "area": 5,
+    "at": [
+     43.86830122112276,
+     420.38351285328775
+    ],
+    "by": 2.68,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 6.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.19.18",
+    "area": 66.75,
+    "at": [
+     44.81738347703224,
+     420.88351285328775
+    ],
+    "by": 21.18,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 37.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.5",
+    "under": "w693428824.19.18",
+    "area": 6,
+    "at": [
+     68.31738347703224,
+     438.40034932546024
+    ],
+    "by": 3.19,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 7.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.17",
+    "under": "w601107595.0.5",
+    "area": 7.5,
+    "at": [
+     69.82012822075374,
+     438.90034932546024
+    ],
+    "by": 21.27,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w1204470635.2.1",
+    "under": "w37957180.1.2",
+    "area": 2,
+    "at": [
+     1254.022977176449,
+     509.9024548437444
+    ],
+    "by": 16.88,
+    "kinds": "bridge over bridge",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "decks"
+   },
+   {
+    "over": "w693428824.19.16",
+    "under": "w601107595.0.6",
+    "area": 7.5,
+    "at": [
+     93.82287296447527,
+     456.9171857976327
+    ],
+    "by": 21.16,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.15",
+    "under": "w601107595.0.7",
+    "area": 7,
+    "at": [
+     117.82561770819675,
+     474.93402226980527
+    ],
+    "by": 21.06,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w38232584.0.4.pier6",
+    "under": "floodwall:0.76.0",
+    "area": 49.25,
+    "at": [
+     644.7939532765876,
+     477.27180034467847
+    ],
+    "by": 2.62,
+    "kinds": "bridge over wall",
+    "overlap": 0.47,
+    "overlapM2": 0.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.14",
+    "under": "w601107595.0.8",
+    "area": 6.75,
+    "at": [
+     142.32836245191828,
+     493.4508587419777
+    ],
+    "by": 20.29,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.13",
+    "under": "w601107595.1.0",
+    "area": 6.75,
+    "at": [
+     165.83110719563973,
+     511.473071672038
+    ],
+    "by": 18.79,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 37,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.3",
+    "under": "w1204470635.2.0",
+    "area": 3,
+    "at": [
+     1256.6322316551978,
+     527.7982700068579
+    ],
+    "by": 5.86,
+    "kinds": "bridge over bridge",
+    "overlap": 0.01,
+    "overlapM2": 0.6,
+    "kind": "decks"
+   },
+   {
+    "over": "w37957180.1.4",
+    "under": "w1204470635.1.2",
+    "area": 3.5,
+    "at": [
+     1258.7414861339466,
+     547.1940851699715
+    ],
+    "by": 7.32,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 1.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.5",
+    "under": "w1204470635.1.1",
+    "area": 3.25,
+    "at": [
+     1260.8507406126953,
+     567.5899003330849
+    ],
+    "by": 7.77,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 1.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.1.1",
+    "under": "w693428824.19.13",
+    "area": 16,
+    "at": [
+     185.83110719563973,
+     527.415424406357
+    ],
+    "by": 3.45,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 14.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.1",
+    "area": 5.75,
+    "at": [
+     190.33385193936124,
+     529.915424406357
+    ],
+    "by": 16.54,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.2",
+    "area": 2,
+    "at": [
+     208.83385193936124,
+     543.8577771406761
+    ],
+    "by": 20.83,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 18.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.6",
+    "under": "w1204470635.1.0",
+    "area": 4.25,
+    "at": [
+     1263.4599950914442,
+     588.9857154961984
+    ],
+    "by": 7.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 2.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.7",
+    "under": "w1204470635.0.4",
+    "area": 2.75,
+    "at": [
+     1265.5692495701928,
+     608.8815306593119
+    ],
+    "by": 5.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 2.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.2",
+    "area": 5,
+    "at": [
+     214.33659668308272,
+     547.8577771406761
+    ],
+    "by": 14.95,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.3",
+    "area": 3,
+    "at": [
+     230.83659668308272,
+     560.8001298749952
+    ],
+    "by": 20.9,
+    "kinds": "bridge over bridge",
+    "overlap": 0.07,
+    "overlapM2": 21.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.3",
+    "area": 4,
+    "at": [
+     238.33934142680428,
+     566.3001298749952
+    ],
+    "by": 12.87,
+    "kinds": "bridge over bridge",
+    "overlap": 0.09,
+    "overlapM2": 27.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.4",
+    "area": 3.25,
+    "at": [
+     253.33934142680428,
+     577.7424826093143
+    ],
+    "by": 20.81,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 26,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.4",
+    "area": 4,
+    "at": [
+     262.34208617052576,
+     584.2424826093143
+    ],
+    "by": 11.28,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 24.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.5",
+    "area": 4,
+    "at": [
+     275.84208617052576,
+     594.6848353436333
+    ],
+    "by": 20.72,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.5",
+    "area": 3.25,
+    "at": [
+     286.34483091424727,
+     602.6848353436333
+    ],
+    "by": 9.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 20.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.6",
+    "area": 4.5,
+    "at": [
+     298.34483091424727,
+     611.6271880779524
+    ],
+    "by": 20.63,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.6",
+    "area": 2.75,
+    "at": [
+     310.3475756579688,
+     620.6339912024224
+    ],
+    "by": 7.61,
+    "kinds": "bridge over bridge",
+    "overlap": 0.05,
+    "overlapM2": 17.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.7",
+    "area": 5.25,
+    "at": [
+     320.3475756579688,
+     628.5695408122714
+    ],
+    "by": 20.71,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.2,
+    "kind": "overlap"
+   }
+  ],
+  "nearWall": [
+   {
+    "id": "w252837458",
+    "name": "Southern States Silo",
+    "m": 14.7,
+    "at": [
+     1034.3,
+     444.4
+    ],
+    "lonlat": [
+     -77.433742,
+     37.526666
+    ]
+   },
+   {
+    "id": "w943656807",
+    "m": 9.5,
+    "at": [
+     1601.1,
+     392.5
+    ],
+    "lonlat": [
+     -77.43697,
+     37.527076
+    ]
+   }
+  ]
+ },
+ "agnes-today-nowall:2026": {
+  "classes": {
+   "order": 22,
+   "overlap": 29,
+   "decks": 2
+  },
+  "counts": {
+   "building over building": 6,
+   "band over building": 11,
+   "band over band": 5
+  },
+  "cases": [
+   {
+    "over": "w426146867",
+    "under": "w426146868",
+    "area": 11.25,
+    "at": [
+     58.32205300440933,
+     -525.8501876171606
+    ],
+    "by": 5.12,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w426146866",
+    "under": "w426146865",
+    "area": 206.5,
+    "at": [
+     256.9825215120287,
+     -427.0530477351445
+    ],
+    "by": 14.45,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0.2,
+    "kind": "order"
+   },
+   {
+    "over": "band:w426146866",
+    "under": "band:w426146865",
+    "area": 21.25,
+    "at": [
+     249.28252151202872,
+     -420.9167919280029
+    ],
+    "by": 7.24,
+    "kinds": "band over band",
+    "overlap": 0,
+    "overlapM2": 0.2,
+    "kind": "order"
+   },
+   {
+    "over": "band:w426146865",
+    "under": "w426146864",
+    "area": 199.25,
+    "at": [
+     286.03958157707973,
+     -420.9167919280029
+    ],
+    "by": 14.26,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w426146865",
+    "under": "band:w426146864",
+    "area": 21.75,
+    "at": [
+     278.33958157707974,
+     -414.64856181450807
+    ],
+    "by": 7.51,
+    "kinds": "band over band",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w426146861",
+    "under": "w426146860",
+    "area": 4.5,
+    "at": [
+     172.41405318840194,
+     -354.48707012986523
+    ],
+    "by": 8.88,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w426146861",
+    "under": "band:w426146860",
+    "area": 3.75,
+    "at": [
+     172.71405318840195,
+     -354.48707012986523
+    ],
+    "by": 9.23,
+    "kinds": "band over band",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426141457",
+    "under": "w426141456",
+    "area": 142.25,
+    "at": [
+     1248.305709639627,
+     7.79882674918985
+    ],
+    "by": 18.03,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w426141486",
+    "under": "w1131852681",
+    "area": 192.25,
+    "at": [
+     957.3896923060901,
+     2.1796904482943376
+    ],
+    "by": 13.31,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w1078391654",
+    "under": "w1421013530",
+    "area": 434.75,
+    "at": [
+     1568.103477506085,
+     90.08304137459226
+    ],
+    "by": 29.31,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0.3,
+    "kind": "order"
+   },
+   {
+    "over": "band:w1078391654",
+    "under": "w1421013530",
+    "area": 75,
+    "at": [
+     1571.903477506085,
+     92.46683078327374
+    ],
+    "by": 30.56,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0.3,
+    "kind": "order"
+   },
+   {
+    "over": "w598212127",
+    "under": "w598212122",
+    "area": 109,
+    "at": [
+     1980.4129076054867,
+     160.00261627165844
+    ],
+    "by": 27.61,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w426141473",
+    "under": "w426141471",
+    "area": 352.75,
+    "at": [
+     1284.1639330503417,
+     195.9269147267315
+    ],
+    "by": 28.29,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w426141473",
+    "under": "w426141470",
+    "area": 147.25,
+    "at": [
+     1304.56618966515,
+     177.84105340426098
+    ],
+    "by": 26.53,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w762180673",
+    "under": "w762180680",
+    "area": 148,
+    "at": [
+     -1376.3338180330006,
+     140.02863834000175
+    ],
+    "by": 10.99,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w762180673",
+    "under": "w762180680",
+    "area": 71.75,
+    "at": [
+     -1380.0338180330007,
+     140.09374742116066
+    ],
+    "by": 13.81,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w762180673",
+    "under": "band:w762180680",
+    "area": 5,
+    "at": [
+     -1369.5338180330007,
+     147.9703638990729
+    ],
+    "by": 3.97,
+    "kinds": "band over band",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:r21542843",
+    "under": "w426141524",
+    "area": 27.75,
+    "at": [
+     1514.4477685416014,
+     229.56782231398816
+    ],
+    "by": 13.56,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w943656807",
+    "under": "w943656806",
+    "area": 252.5,
+    "at": [
+     1542.1387794028958,
+     371.469243624642
+    ],
+    "by": 25.33,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w943656807",
+    "under": "w943656806",
+    "area": 77.5,
+    "at": [
+     1540.4387794028958,
+     380.31085284734706
+    ],
+    "by": 24.99,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w943656806",
+    "under": "w943656807",
+    "area": 971,
+    "at": [
+     1584.6387794028958,
+     384.55878319275047
+    ],
+    "by": 19.26,
+    "kinds": "band over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "band:w943656806",
+    "under": "band:w943656807",
+    "area": 30,
+    "at": [
+     1635.9387794028958,
+     366.55878319275047
+    ],
+    "by": 19.49,
+    "kinds": "band over band",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w601107595.0.0",
+    "under": "w693428824.20.3",
+    "area": 8.75,
+    "at": [
+     -34.96872606248755,
+     380.3583641564513
+    ],
+    "by": 14.09,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.1",
+    "under": "w693428824.20.2",
+    "area": 10.5,
+    "at": [
+     -15.023050301284107,
+     388.44875560292
+    ],
+    "by": 13.23,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 15,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.2",
+    "under": "w693428824.20.1",
+    "area": 12,
+    "at": [
+     4.922625459919327,
+     397.0391470493889
+    ],
+    "by": 12.1,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 22.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.3",
+    "under": "w693428824.20.0",
+    "area": 50,
+    "at": [
+     24.868301221122767,
+     407.84459280352905
+    ],
+    "by": 15.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 29.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.20.0",
+    "area": 5,
+    "at": [
+     43.86830122112276,
+     420.38351285328775
+    ],
+    "by": 2.68,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 6.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.19.18",
+    "area": 66.75,
+    "at": [
+     44.81738347703224,
+     420.88351285328775
+    ],
+    "by": 21.18,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 37.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.5",
+    "under": "w693428824.19.18",
+    "area": 6,
+    "at": [
+     68.31738347703224,
+     438.40034932546024
+    ],
+    "by": 3.19,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 7.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w1204470635.2.1",
+    "under": "w37957180.1.2",
+    "area": 2,
+    "at": [
+     1254.022977176449,
+     509.9024548437444
+    ],
+    "by": 16.88,
+    "kinds": "bridge over bridge",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "decks"
+   },
+   {
+    "over": "w693428824.19.17",
+    "under": "w601107595.0.5",
+    "area": 7.5,
+    "at": [
+     69.82012822075374,
+     438.90034932546024
+    ],
+    "by": 21.27,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.16",
+    "under": "w601107595.0.6",
+    "area": 7.5,
+    "at": [
+     93.82287296447527,
+     456.9171857976327
+    ],
+    "by": 21.16,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.15",
+    "under": "w601107595.0.7",
+    "area": 7,
+    "at": [
+     117.82561770819675,
+     474.93402226980527
+    ],
+    "by": 21.06,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.14",
+    "under": "w601107595.0.8",
+    "area": 6.75,
+    "at": [
+     142.32836245191828,
+     493.4508587419777
+    ],
+    "by": 20.29,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.13",
+    "under": "w601107595.1.0",
+    "area": 6.75,
+    "at": [
+     165.83110719563973,
+     511.473071672038
+    ],
+    "by": 18.79,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 37,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.3",
+    "under": "w1204470635.2.0",
+    "area": 3,
+    "at": [
+     1256.6322316551978,
+     527.7982700068579
+    ],
+    "by": 5.86,
+    "kinds": "bridge over bridge",
+    "overlap": 0.01,
+    "overlapM2": 0.6,
+    "kind": "decks"
+   },
+   {
+    "over": "w37957180.1.4",
+    "under": "w1204470635.1.2",
+    "area": 3.5,
+    "at": [
+     1258.7414861339466,
+     547.1940851699715
+    ],
+    "by": 7.32,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 1.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.5",
+    "under": "w1204470635.1.1",
+    "area": 3.25,
+    "at": [
+     1260.8507406126953,
+     567.5899003330849
+    ],
+    "by": 7.77,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 1.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.1.1",
+    "under": "w693428824.19.13",
+    "area": 16,
+    "at": [
+     185.83110719563973,
+     527.415424406357
+    ],
+    "by": 3.45,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 14.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.1",
+    "area": 5.75,
+    "at": [
+     190.33385193936124,
+     529.915424406357
+    ],
+    "by": 16.54,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.2",
+    "area": 2,
+    "at": [
+     208.83385193936124,
+     543.8577771406761
+    ],
+    "by": 20.83,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 18.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.6",
+    "under": "w1204470635.1.0",
+    "area": 4.25,
+    "at": [
+     1263.4599950914442,
+     588.9857154961984
+    ],
+    "by": 7.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 2.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.7",
+    "under": "w1204470635.0.4",
+    "area": 2.75,
+    "at": [
+     1265.5692495701928,
+     608.8815306593119
+    ],
+    "by": 5.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 2.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.2",
+    "area": 5,
+    "at": [
+     214.33659668308272,
+     547.8577771406761
+    ],
+    "by": 14.95,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.3",
+    "area": 3,
+    "at": [
+     230.83659668308272,
+     560.8001298749952
+    ],
+    "by": 20.9,
+    "kinds": "bridge over bridge",
+    "overlap": 0.07,
+    "overlapM2": 21.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.3",
+    "area": 4,
+    "at": [
+     238.33934142680428,
+     566.3001298749952
+    ],
+    "by": 12.87,
+    "kinds": "bridge over bridge",
+    "overlap": 0.09,
+    "overlapM2": 27.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.4",
+    "area": 3.25,
+    "at": [
+     253.33934142680428,
+     577.7424826093143
+    ],
+    "by": 20.81,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 26,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.4",
+    "area": 4,
+    "at": [
+     262.34208617052576,
+     584.2424826093143
+    ],
+    "by": 11.28,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 24.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.5",
+    "area": 4,
+    "at": [
+     275.84208617052576,
+     594.6848353436333
+    ],
+    "by": 20.72,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.5",
+    "area": 3.25,
+    "at": [
+     286.34483091424727,
+     602.6848353436333
+    ],
+    "by": 9.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 20.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.6",
+    "area": 4.5,
+    "at": [
+     298.34483091424727,
+     611.6271880779524
+    ],
+    "by": 20.63,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.6",
+    "area": 2.75,
+    "at": [
+     310.3475756579688,
+     620.6339912024224
+    ],
+    "by": 7.61,
+    "kinds": "bridge over bridge",
+    "overlap": 0.05,
+    "overlapM2": 17.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.7",
+    "area": 5.25,
+    "at": [
+     320.3475756579688,
+     628.5695408122714
+    ],
+    "by": 20.71,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.2,
+    "kind": "overlap"
+   }
+  ],
+  "nearWall": []
+ },
+ "agnes-today-nowall-dry:2026": {
+  "classes": {
+   "order": 7,
+   "overlap": 30,
+   "decks": 2
+  },
+  "counts": {
+   "building over building": 7
+  },
+  "cases": [
+   {
+    "over": "w426146867",
+    "under": "w426146868",
+    "area": 11.25,
+    "at": [
+     58.32205300440933,
+     -525.8501876171606
+    ],
+    "by": 5.12,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426146861",
+    "under": "w426146860",
+    "area": 4.75,
+    "at": [
+     172.41405318840194,
+     -355.0971907115625
+    ],
+    "by": 8.88,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426141457",
+    "under": "w426141456",
+    "area": 142.25,
+    "at": [
+     1248.305709639627,
+     7.79882674918985
+    ],
+    "by": 18.03,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w1078391654",
+    "under": "w1421013530",
+    "area": 452.75,
+    "at": [
+     1571.103477506085,
+     91.58304137459226
+    ],
+    "by": 29.91,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0.3,
+    "kind": "order"
+   },
+   {
+    "over": "w598212127",
+    "under": "w598212122",
+    "area": 109,
+    "at": [
+     1980.4129076054867,
+     160.00261627165844
+    ],
+    "by": 27.61,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w762180673",
+    "under": "w762180680",
+    "area": 205.25,
+    "at": [
+     -1380.3338180330006,
+     140.52863834000175
+    ],
+    "by": 14.47,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "w114143919.2.0.pier5",
+    "area": 11.25,
+    "at": [
+     1984.5202856645924,
+     313.1536868532274
+    ],
+    "by": 2.88,
+    "kinds": "bridge over bridge",
+    "overlap": 1.04,
+    "overlapM2": 2.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w943656807",
+    "under": "w943656806",
+    "area": 333.25,
+    "at": [
+     1542.1387794028958,
+     371.469243624642
+    ],
+    "by": 25.33,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w601107595.0.0",
+    "under": "w693428824.20.3",
+    "area": 8.75,
+    "at": [
+     -34.96872606248755,
+     380.3583641564513
+    ],
+    "by": 14.09,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.1",
+    "under": "w693428824.20.2",
+    "area": 10.5,
+    "at": [
+     -15.023050301284107,
+     388.44875560292
+    ],
+    "by": 13.23,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 15,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.2",
+    "under": "w693428824.20.1",
+    "area": 12,
+    "at": [
+     4.922625459919327,
+     397.0391470493889
+    ],
+    "by": 12.1,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 22.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.3",
+    "under": "w693428824.20.0",
+    "area": 50,
+    "at": [
+     24.868301221122767,
+     407.84459280352905
+    ],
+    "by": 15.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 29.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.20.0",
+    "area": 5,
+    "at": [
+     43.86830122112276,
+     420.38351285328775
+    ],
+    "by": 2.68,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 6.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.19.18",
+    "area": 66.75,
+    "at": [
+     44.81738347703224,
+     420.88351285328775
+    ],
+    "by": 21.18,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 37.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.5",
+    "under": "w693428824.19.18",
+    "area": 6,
+    "at": [
+     68.31738347703224,
+     438.40034932546024
+    ],
+    "by": 3.19,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 7.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w1204470635.2.1",
+    "under": "w37957180.1.2",
+    "area": 2,
+    "at": [
+     1254.022977176449,
+     509.9024548437444
+    ],
+    "by": 16.88,
+    "kinds": "bridge over bridge",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "decks"
+   },
+   {
+    "over": "w693428824.19.17",
+    "under": "w601107595.0.5",
+    "area": 7.5,
+    "at": [
+     69.82012822075374,
+     438.90034932546024
+    ],
+    "by": 21.27,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.16",
+    "under": "w601107595.0.6",
+    "area": 7.5,
+    "at": [
+     93.82287296447527,
+     456.9171857976327
+    ],
+    "by": 21.16,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.15",
+    "under": "w601107595.0.7",
+    "area": 7,
+    "at": [
+     117.82561770819675,
+     474.93402226980527
+    ],
+    "by": 21.06,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.14",
+    "under": "w601107595.0.8",
+    "area": 6.75,
+    "at": [
+     142.32836245191828,
+     493.4508587419777
+    ],
+    "by": 20.29,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.13",
+    "under": "w601107595.1.0",
+    "area": 6.75,
+    "at": [
+     165.83110719563973,
+     511.473071672038
+    ],
+    "by": 18.79,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 37,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.3",
+    "under": "w1204470635.2.0",
+    "area": 3,
+    "at": [
+     1256.6322316551978,
+     527.7982700068579
+    ],
+    "by": 5.86,
+    "kinds": "bridge over bridge",
+    "overlap": 0.01,
+    "overlapM2": 0.6,
+    "kind": "decks"
+   },
+   {
+    "over": "w37957180.1.4",
+    "under": "w1204470635.1.2",
+    "area": 3.5,
+    "at": [
+     1258.7414861339466,
+     547.1940851699715
+    ],
+    "by": 7.32,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 1.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.5",
+    "under": "w1204470635.1.1",
+    "area": 3.25,
+    "at": [
+     1260.8507406126953,
+     567.5899003330849
+    ],
+    "by": 7.77,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 1.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.1.1",
+    "under": "w693428824.19.13",
+    "area": 16,
+    "at": [
+     185.83110719563973,
+     527.415424406357
+    ],
+    "by": 3.45,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 14.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.1",
+    "area": 5.75,
+    "at": [
+     190.33385193936124,
+     529.915424406357
+    ],
+    "by": 16.54,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.2",
+    "area": 2,
+    "at": [
+     208.83385193936124,
+     543.8577771406761
+    ],
+    "by": 20.83,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 18.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.6",
+    "under": "w1204470635.1.0",
+    "area": 4.25,
+    "at": [
+     1263.4599950914442,
+     588.9857154961984
+    ],
+    "by": 7.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 2.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.7",
+    "under": "w1204470635.0.4",
+    "area": 2.75,
+    "at": [
+     1265.5692495701928,
+     608.8815306593119
+    ],
+    "by": 5.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 2.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.2",
+    "area": 5,
+    "at": [
+     214.33659668308272,
+     547.8577771406761
+    ],
+    "by": 14.95,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.3",
+    "area": 3,
+    "at": [
+     230.83659668308272,
+     560.8001298749952
+    ],
+    "by": 20.9,
+    "kinds": "bridge over bridge",
+    "overlap": 0.07,
+    "overlapM2": 21.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.3",
+    "area": 4,
+    "at": [
+     238.33934142680428,
+     566.3001298749952
+    ],
+    "by": 12.87,
+    "kinds": "bridge over bridge",
+    "overlap": 0.09,
+    "overlapM2": 27.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.4",
+    "area": 3.25,
+    "at": [
+     253.33934142680428,
+     577.7424826093143
+    ],
+    "by": 20.81,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 26,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.4",
+    "area": 4,
+    "at": [
+     262.34208617052576,
+     584.2424826093143
+    ],
+    "by": 11.28,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 24.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.5",
+    "area": 4,
+    "at": [
+     275.84208617052576,
+     594.6848353436333
+    ],
+    "by": 20.72,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.5",
+    "area": 3.25,
+    "at": [
+     286.34483091424727,
+     602.6848353436333
+    ],
+    "by": 9.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 20.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.6",
+    "area": 4.5,
+    "at": [
+     298.34483091424727,
+     611.6271880779524
+    ],
+    "by": 20.63,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.6",
+    "area": 2.75,
+    "at": [
+     310.3475756579688,
+     620.6339912024224
+    ],
+    "by": 7.61,
+    "kinds": "bridge over bridge",
+    "overlap": 0.05,
+    "overlapM2": 17.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.7",
+    "area": 5.25,
+    "at": [
+     320.3475756579688,
+     628.5695408122714
+    ],
+    "by": 20.71,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.2,
+    "kind": "overlap"
+   }
+  ],
+  "nearWall": []
+ },
+ "1996:2026": {
+  "classes": {
+   "order": 7,
+   "joint": 84,
+   "overlap": 33,
+   "decks": 2
+  },
+  "counts": {
+   "building over building": 7
+  },
+  "cases": [
+   {
+    "over": "w426146867",
+    "under": "w426146868",
+    "area": 11.25,
+    "at": [
+     58.32205300440933,
+     -525.8501876171606
+    ],
+    "by": 5.12,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426146861",
+    "under": "w426146860",
+    "area": 4.75,
+    "at": [
+     172.41405318840194,
+     -355.0971907115625
+    ],
+    "by": 8.88,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426141457",
+    "under": "w426141456",
+    "area": 142.25,
+    "at": [
+     1248.305709639627,
+     7.79882674918985
+    ],
+    "by": 18.03,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w1078391654",
+    "under": "w1421013530",
+    "area": 452.75,
+    "at": [
+     1571.103477506085,
+     91.58304137459226
+    ],
+    "by": 29.91,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0.3,
+    "kind": "order"
+   },
+   {
+    "over": "w598212127",
+    "under": "w598212122",
+    "area": 109,
+    "at": [
+     1980.4129076054867,
+     160.00261627165844
+    ],
+    "by": 27.61,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w762180673",
+    "under": "w762180680",
+    "area": 205.25,
+    "at": [
+     -1380.3338180330006,
+     140.52863834000175
+    ],
+    "by": 14.47,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "floodwall:0.27.0",
+    "area": 30,
+    "at": [
+     1975.4536105398524,
+     310.6536868532274
+    ],
+    "by": 6.49,
+    "kinds": "bridge over wall",
+    "overlap": 1.01,
+    "overlapM2": 12.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "w114143919.2.0.pier5",
+    "area": 11.25,
+    "at": [
+     1984.5202856645924,
+     313.1536868532274
+    ],
+    "by": 2.88,
+    "kinds": "bridge over bridge",
+    "overlap": 1.04,
+    "overlapM2": 2.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "floodwall:0.27.1",
+    "area": 22.25,
+    "at": [
+     1975.656640056073,
+     310.6536868532274
+    ],
+    "by": 2.97,
+    "kinds": "bridge over wall",
+    "overlap": 1.01,
+    "overlapM2": 12.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.0",
+    "under": "w693428824.20.3",
+    "area": 8.75,
+    "at": [
+     -34.96872606248755,
+     380.3583641564513
+    ],
+    "by": 14.09,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.1",
+    "under": "w693428824.20.2",
+    "area": 10.5,
+    "at": [
+     -15.023050301284107,
+     388.44875560292
+    ],
+    "by": 13.23,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 15,
+    "kind": "overlap"
+   },
+   {
+    "over": "w943656807",
+    "under": "w943656806",
+    "area": 333.25,
+    "at": [
+     1542.1387794028958,
+     371.469243624642
+    ],
+    "by": 25.33,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w601107595.0.2",
+    "under": "w693428824.20.1",
+    "area": 12,
+    "at": [
+     4.922625459919327,
+     397.0391470493889
+    ],
+    "by": 12.1,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 22.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.3",
+    "under": "w693428824.20.0",
+    "area": 50,
+    "at": [
+     24.868301221122767,
+     407.84459280352905
+    ],
+    "by": 15.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 29.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.20.0",
+    "area": 5,
+    "at": [
+     43.86830122112276,
+     420.38351285328775
+    ],
+    "by": 2.68,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 6.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.19.18",
+    "area": 66.75,
+    "at": [
+     44.81738347703224,
+     420.88351285328775
+    ],
+    "by": 21.18,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 37.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.5",
+    "under": "w693428824.19.18",
+    "area": 6,
+    "at": [
+     68.31738347703224,
+     438.40034932546024
+    ],
+    "by": 3.19,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 7.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.17",
+    "under": "w601107595.0.5",
+    "area": 7.5,
+    "at": [
+     69.82012822075374,
+     438.90034932546024
+    ],
+    "by": 21.27,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w1204470635.2.1",
+    "under": "w37957180.1.2",
+    "area": 2,
+    "at": [
+     1254.022977176449,
+     509.9024548437444
+    ],
+    "by": 16.88,
+    "kinds": "bridge over bridge",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "decks"
+   },
+   {
+    "over": "w693428824.19.16",
+    "under": "w601107595.0.6",
+    "area": 7.5,
+    "at": [
+     93.82287296447527,
+     456.9171857976327
+    ],
+    "by": 21.16,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.15",
+    "under": "w601107595.0.7",
+    "area": 7,
+    "at": [
+     117.82561770819675,
+     474.93402226980527
+    ],
+    "by": 21.06,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w38232584.0.4.pier6",
+    "under": "floodwall:0.76.0",
+    "area": 49.25,
+    "at": [
+     644.7939532765876,
+     477.27180034467847
+    ],
+    "by": 2.62,
+    "kinds": "bridge over wall",
+    "overlap": 0.47,
+    "overlapM2": 0.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.14",
+    "under": "w601107595.0.8",
+    "area": 6.75,
+    "at": [
+     142.32836245191828,
+     493.4508587419777
+    ],
+    "by": 20.29,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.13",
+    "under": "w601107595.1.0",
+    "area": 6.75,
+    "at": [
+     165.83110719563973,
+     511.473071672038
+    ],
+    "by": 18.79,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 37,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.3",
+    "under": "w1204470635.2.0",
+    "area": 3,
+    "at": [
+     1256.6322316551978,
+     527.7982700068579
+    ],
+    "by": 5.86,
+    "kinds": "bridge over bridge",
+    "overlap": 0.01,
+    "overlapM2": 0.6,
+    "kind": "decks"
+   },
+   {
+    "over": "w37957180.1.4",
+    "under": "w1204470635.1.2",
+    "area": 3.5,
+    "at": [
+     1258.7414861339466,
+     547.1940851699715
+    ],
+    "by": 7.32,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 1.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.5",
+    "under": "w1204470635.1.1",
+    "area": 3.25,
+    "at": [
+     1260.8507406126953,
+     567.5899003330849
+    ],
+    "by": 7.77,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 1.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.1.1",
+    "under": "w693428824.19.13",
+    "area": 16,
+    "at": [
+     185.83110719563973,
+     527.415424406357
+    ],
+    "by": 3.45,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 14.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.1",
+    "area": 5.75,
+    "at": [
+     190.33385193936124,
+     529.915424406357
+    ],
+    "by": 16.54,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.2",
+    "area": 2,
+    "at": [
+     208.83385193936124,
+     543.8577771406761
+    ],
+    "by": 20.83,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 18.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.6",
+    "under": "w1204470635.1.0",
+    "area": 4.25,
+    "at": [
+     1263.4599950914442,
+     588.9857154961984
+    ],
+    "by": 7.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 2.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.7",
+    "under": "w1204470635.0.4",
+    "area": 2.75,
+    "at": [
+     1265.5692495701928,
+     608.8815306593119
+    ],
+    "by": 5.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 2.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.2",
+    "area": 5,
+    "at": [
+     214.33659668308272,
+     547.8577771406761
+    ],
+    "by": 14.95,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.3",
+    "area": 3,
+    "at": [
+     230.83659668308272,
+     560.8001298749952
+    ],
+    "by": 20.9,
+    "kinds": "bridge over bridge",
+    "overlap": 0.07,
+    "overlapM2": 21.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.3",
+    "area": 4,
+    "at": [
+     238.33934142680428,
+     566.3001298749952
+    ],
+    "by": 12.87,
+    "kinds": "bridge over bridge",
+    "overlap": 0.09,
+    "overlapM2": 27.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.4",
+    "area": 3.25,
+    "at": [
+     253.33934142680428,
+     577.7424826093143
+    ],
+    "by": 20.81,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 26,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.4",
+    "area": 4,
+    "at": [
+     262.34208617052576,
+     584.2424826093143
+    ],
+    "by": 11.28,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 24.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.5",
+    "area": 4,
+    "at": [
+     275.84208617052576,
+     594.6848353436333
+    ],
+    "by": 20.72,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.5",
+    "area": 3.25,
+    "at": [
+     286.34483091424727,
+     602.6848353436333
+    ],
+    "by": 9.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 20.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.6",
+    "area": 4.5,
+    "at": [
+     298.34483091424727,
+     611.6271880779524
+    ],
+    "by": 20.63,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.6",
+    "area": 2.75,
+    "at": [
+     310.3475756579688,
+     620.6339912024224
+    ],
+    "by": 7.61,
+    "kinds": "bridge over bridge",
+    "overlap": 0.05,
+    "overlapM2": 17.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.7",
+    "area": 5.25,
+    "at": [
+     320.3475756579688,
+     628.5695408122714
+    ],
+    "by": 20.71,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.2,
+    "kind": "overlap"
+   }
+  ],
+  "nearWall": [
+   {
+    "id": "w252837458",
+    "name": "Southern States Silo",
+    "m": 14.7,
+    "at": [
+     1034.3,
+     444.4
+    ],
+    "lonlat": [
+     -77.433742,
+     37.526666
+    ]
+   },
+   {
+    "id": "w943656807",
+    "m": 9.5,
+    "at": [
+     1601.1,
+     392.5
+    ],
+    "lonlat": [
+     -77.43697,
+     37.527076
+    ]
+   }
+  ]
+ },
+ "1996-dry:2026": {
+  "classes": {
+   "order": 7,
+   "joint": 80,
+   "overlap": 33,
+   "decks": 2
+  },
+  "counts": {
+   "building over building": 7
+  },
+  "cases": [
+   {
+    "over": "w426146867",
+    "under": "w426146868",
+    "area": 11.25,
+    "at": [
+     58.32205300440933,
+     -525.8501876171606
+    ],
+    "by": 5.12,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426146861",
+    "under": "w426146860",
+    "area": 4.75,
+    "at": [
+     172.41405318840194,
+     -355.0971907115625
+    ],
+    "by": 8.88,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426141457",
+    "under": "w426141456",
+    "area": 142.25,
+    "at": [
+     1248.305709639627,
+     7.79882674918985
+    ],
+    "by": 18.03,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w1078391654",
+    "under": "w1421013530",
+    "area": 452.75,
+    "at": [
+     1571.103477506085,
+     91.58304137459226
+    ],
+    "by": 29.91,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0.3,
+    "kind": "order"
+   },
+   {
+    "over": "w598212127",
+    "under": "w598212122",
+    "area": 109,
+    "at": [
+     1980.4129076054867,
+     160.00261627165844
+    ],
+    "by": 27.61,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w762180673",
+    "under": "w762180680",
+    "area": 205.25,
+    "at": [
+     -1380.3338180330006,
+     140.52863834000175
+    ],
+    "by": 14.47,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "floodwall:0.27.0",
+    "area": 30,
+    "at": [
+     1975.4536105398524,
+     310.6536868532274
+    ],
+    "by": 6.49,
+    "kinds": "bridge over wall",
+    "overlap": 1.01,
+    "overlapM2": 12.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "w114143919.2.0.pier5",
+    "area": 11.25,
+    "at": [
+     1984.5202856645924,
+     313.1536868532274
+    ],
+    "by": 2.88,
+    "kinds": "bridge over bridge",
+    "overlap": 1.04,
+    "overlapM2": 2.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "floodwall:0.27.1",
+    "area": 22.25,
+    "at": [
+     1975.656640056073,
+     310.6536868532274
+    ],
+    "by": 2.97,
+    "kinds": "bridge over wall",
+    "overlap": 1.01,
+    "overlapM2": 12.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.0",
+    "under": "w693428824.20.3",
+    "area": 8.75,
+    "at": [
+     -34.96872606248755,
+     380.3583641564513
+    ],
+    "by": 14.09,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.1",
+    "under": "w693428824.20.2",
+    "area": 10.5,
+    "at": [
+     -15.023050301284107,
+     388.44875560292
+    ],
+    "by": 13.23,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 15,
+    "kind": "overlap"
+   },
+   {
+    "over": "w943656807",
+    "under": "w943656806",
+    "area": 333.25,
+    "at": [
+     1542.1387794028958,
+     371.469243624642
+    ],
+    "by": 25.33,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w601107595.0.2",
+    "under": "w693428824.20.1",
+    "area": 12,
+    "at": [
+     4.922625459919327,
+     397.0391470493889
+    ],
+    "by": 12.1,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 22.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.3",
+    "under": "w693428824.20.0",
+    "area": 50,
+    "at": [
+     24.868301221122767,
+     407.84459280352905
+    ],
+    "by": 15.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 29.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.20.0",
+    "area": 5,
+    "at": [
+     43.86830122112276,
+     420.38351285328775
+    ],
+    "by": 2.68,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 6.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.19.18",
+    "area": 66.75,
+    "at": [
+     44.81738347703224,
+     420.88351285328775
+    ],
+    "by": 21.18,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 37.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.5",
+    "under": "w693428824.19.18",
+    "area": 6,
+    "at": [
+     68.31738347703224,
+     438.40034932546024
+    ],
+    "by": 3.19,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 7.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.17",
+    "under": "w601107595.0.5",
+    "area": 7.5,
+    "at": [
+     69.82012822075374,
+     438.90034932546024
+    ],
+    "by": 21.27,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w1204470635.2.1",
+    "under": "w37957180.1.2",
+    "area": 2,
+    "at": [
+     1254.022977176449,
+     509.9024548437444
+    ],
+    "by": 16.88,
+    "kinds": "bridge over bridge",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "decks"
+   },
+   {
+    "over": "w693428824.19.16",
+    "under": "w601107595.0.6",
+    "area": 7.5,
+    "at": [
+     93.82287296447527,
+     456.9171857976327
+    ],
+    "by": 21.16,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.15",
+    "under": "w601107595.0.7",
+    "area": 7,
+    "at": [
+     117.82561770819675,
+     474.93402226980527
+    ],
+    "by": 21.06,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w38232584.0.4.pier6",
+    "under": "floodwall:0.76.0",
+    "area": 49.25,
+    "at": [
+     644.7939532765876,
+     477.27180034467847
+    ],
+    "by": 2.62,
+    "kinds": "bridge over wall",
+    "overlap": 0.47,
+    "overlapM2": 0.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.14",
+    "under": "w601107595.0.8",
+    "area": 6.75,
+    "at": [
+     142.32836245191828,
+     493.4508587419777
+    ],
+    "by": 20.29,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.13",
+    "under": "w601107595.1.0",
+    "area": 6.75,
+    "at": [
+     165.83110719563973,
+     511.473071672038
+    ],
+    "by": 18.79,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 37,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.3",
+    "under": "w1204470635.2.0",
+    "area": 3,
+    "at": [
+     1256.6322316551978,
+     527.7982700068579
+    ],
+    "by": 5.86,
+    "kinds": "bridge over bridge",
+    "overlap": 0.01,
+    "overlapM2": 0.6,
+    "kind": "decks"
+   },
+   {
+    "over": "w37957180.1.4",
+    "under": "w1204470635.1.2",
+    "area": 3.5,
+    "at": [
+     1258.7414861339466,
+     547.1940851699715
+    ],
+    "by": 7.32,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 1.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.5",
+    "under": "w1204470635.1.1",
+    "area": 3.25,
+    "at": [
+     1260.8507406126953,
+     567.5899003330849
+    ],
+    "by": 7.77,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 1.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.1.1",
+    "under": "w693428824.19.13",
+    "area": 16,
+    "at": [
+     185.83110719563973,
+     527.415424406357
+    ],
+    "by": 3.45,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 14.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.1",
+    "area": 5.75,
+    "at": [
+     190.33385193936124,
+     529.915424406357
+    ],
+    "by": 16.54,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.2",
+    "area": 2,
+    "at": [
+     208.83385193936124,
+     543.8577771406761
+    ],
+    "by": 20.83,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 18.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.6",
+    "under": "w1204470635.1.0",
+    "area": 4.25,
+    "at": [
+     1263.4599950914442,
+     588.9857154961984
+    ],
+    "by": 7.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 2.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.7",
+    "under": "w1204470635.0.4",
+    "area": 2.75,
+    "at": [
+     1265.5692495701928,
+     608.8815306593119
+    ],
+    "by": 5.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 2.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.2",
+    "area": 5,
+    "at": [
+     214.33659668308272,
+     547.8577771406761
+    ],
+    "by": 14.95,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.3",
+    "area": 3,
+    "at": [
+     230.83659668308272,
+     560.8001298749952
+    ],
+    "by": 20.9,
+    "kinds": "bridge over bridge",
+    "overlap": 0.07,
+    "overlapM2": 21.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.3",
+    "area": 4,
+    "at": [
+     238.33934142680428,
+     566.3001298749952
+    ],
+    "by": 12.87,
+    "kinds": "bridge over bridge",
+    "overlap": 0.09,
+    "overlapM2": 27.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.4",
+    "area": 3.25,
+    "at": [
+     253.33934142680428,
+     577.7424826093143
+    ],
+    "by": 20.81,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 26,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.4",
+    "area": 4,
+    "at": [
+     262.34208617052576,
+     584.2424826093143
+    ],
+    "by": 11.28,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 24.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.5",
+    "area": 4,
+    "at": [
+     275.84208617052576,
+     594.6848353436333
+    ],
+    "by": 20.72,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.5",
+    "area": 3.25,
+    "at": [
+     286.34483091424727,
+     602.6848353436333
+    ],
+    "by": 9.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 20.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.6",
+    "area": 4.5,
+    "at": [
+     298.34483091424727,
+     611.6271880779524
+    ],
+    "by": 20.63,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.6",
+    "area": 2.75,
+    "at": [
+     310.3475756579688,
+     620.6339912024224
+    ],
+    "by": 7.61,
+    "kinds": "bridge over bridge",
+    "overlap": 0.05,
+    "overlapM2": 17.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.7",
+    "area": 5.25,
+    "at": [
+     320.3475756579688,
+     628.5695408122714
+    ],
+    "by": 20.71,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.2,
+    "kind": "overlap"
+   }
+  ],
+  "nearWall": [
+   {
+    "id": "w252837458",
+    "name": "Southern States Silo",
+    "m": 14.7,
+    "at": [
+     1034.3,
+     444.4
+    ],
+    "lonlat": [
+     -77.433742,
+     37.526666
+    ]
+   },
+   {
+    "id": "w943656807",
+    "m": 9.5,
+    "at": [
+     1601.1,
+     392.5
+    ],
+    "lonlat": [
+     -77.43697,
+     37.527076
+    ]
+   }
+  ]
+ },
+ "2020:2026": {
+  "classes": {
+   "order": 7,
+   "joint": 81,
+   "overlap": 33,
+   "decks": 2
+  },
+  "counts": {
+   "building over building": 7
+  },
+  "cases": [
+   {
+    "over": "w426146867",
+    "under": "w426146868",
+    "area": 11.25,
+    "at": [
+     58.32205300440933,
+     -525.8501876171606
+    ],
+    "by": 5.12,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426146861",
+    "under": "w426146860",
+    "area": 4.75,
+    "at": [
+     172.41405318840194,
+     -355.0971907115625
+    ],
+    "by": 8.88,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426141457",
+    "under": "w426141456",
+    "area": 142.25,
+    "at": [
+     1248.305709639627,
+     7.79882674918985
+    ],
+    "by": 18.03,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w1078391654",
+    "under": "w1421013530",
+    "area": 452.75,
+    "at": [
+     1571.103477506085,
+     91.58304137459226
+    ],
+    "by": 29.91,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0.3,
+    "kind": "order"
+   },
+   {
+    "over": "w598212127",
+    "under": "w598212122",
+    "area": 109,
+    "at": [
+     1980.4129076054867,
+     160.00261627165844
+    ],
+    "by": 27.61,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w762180673",
+    "under": "w762180680",
+    "area": 205.25,
+    "at": [
+     -1380.3338180330006,
+     140.52863834000175
+    ],
+    "by": 14.47,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "floodwall:0.27.0",
+    "area": 30,
+    "at": [
+     1975.4536105398524,
+     310.6536868532274
+    ],
+    "by": 6.49,
+    "kinds": "bridge over wall",
+    "overlap": 1.01,
+    "overlapM2": 12.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "w114143919.2.0.pier5",
+    "area": 11.25,
+    "at": [
+     1984.5202856645924,
+     313.1536868532274
+    ],
+    "by": 2.88,
+    "kinds": "bridge over bridge",
+    "overlap": 1.04,
+    "overlapM2": 2.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "floodwall:0.27.1",
+    "area": 22.25,
+    "at": [
+     1975.656640056073,
+     310.6536868532274
+    ],
+    "by": 2.97,
+    "kinds": "bridge over wall",
+    "overlap": 1.01,
+    "overlapM2": 12.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.0",
+    "under": "w693428824.20.3",
+    "area": 8.75,
+    "at": [
+     -34.96872606248755,
+     380.3583641564513
+    ],
+    "by": 14.09,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.1",
+    "under": "w693428824.20.2",
+    "area": 10.5,
+    "at": [
+     -15.023050301284107,
+     388.44875560292
+    ],
+    "by": 13.23,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 15,
+    "kind": "overlap"
+   },
+   {
+    "over": "w943656807",
+    "under": "w943656806",
+    "area": 333.25,
+    "at": [
+     1542.1387794028958,
+     371.469243624642
+    ],
+    "by": 25.33,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w601107595.0.2",
+    "under": "w693428824.20.1",
+    "area": 12,
+    "at": [
+     4.922625459919327,
+     397.0391470493889
+    ],
+    "by": 12.1,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 22.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.3",
+    "under": "w693428824.20.0",
+    "area": 50,
+    "at": [
+     24.868301221122767,
+     407.84459280352905
+    ],
+    "by": 15.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 29.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.20.0",
+    "area": 5,
+    "at": [
+     43.86830122112276,
+     420.38351285328775
+    ],
+    "by": 2.68,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 6.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.19.18",
+    "area": 66.75,
+    "at": [
+     44.81738347703224,
+     420.88351285328775
+    ],
+    "by": 21.18,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 37.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.5",
+    "under": "w693428824.19.18",
+    "area": 6,
+    "at": [
+     68.31738347703224,
+     438.40034932546024
+    ],
+    "by": 3.19,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 7.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.17",
+    "under": "w601107595.0.5",
+    "area": 7.5,
+    "at": [
+     69.82012822075374,
+     438.90034932546024
+    ],
+    "by": 21.27,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w1204470635.2.1",
+    "under": "w37957180.1.2",
+    "area": 2,
+    "at": [
+     1254.022977176449,
+     509.9024548437444
+    ],
+    "by": 16.88,
+    "kinds": "bridge over bridge",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "decks"
+   },
+   {
+    "over": "w693428824.19.16",
+    "under": "w601107595.0.6",
+    "area": 7.5,
+    "at": [
+     93.82287296447527,
+     456.9171857976327
+    ],
+    "by": 21.16,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.15",
+    "under": "w601107595.0.7",
+    "area": 7,
+    "at": [
+     117.82561770819675,
+     474.93402226980527
+    ],
+    "by": 21.06,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w38232584.0.4.pier6",
+    "under": "floodwall:0.76.0",
+    "area": 49.25,
+    "at": [
+     644.7939532765876,
+     477.27180034467847
+    ],
+    "by": 2.62,
+    "kinds": "bridge over wall",
+    "overlap": 0.47,
+    "overlapM2": 0.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.14",
+    "under": "w601107595.0.8",
+    "area": 6.75,
+    "at": [
+     142.32836245191828,
+     493.4508587419777
+    ],
+    "by": 20.29,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.13",
+    "under": "w601107595.1.0",
+    "area": 6.75,
+    "at": [
+     165.83110719563973,
+     511.473071672038
+    ],
+    "by": 18.79,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 37,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.3",
+    "under": "w1204470635.2.0",
+    "area": 3,
+    "at": [
+     1256.6322316551978,
+     527.7982700068579
+    ],
+    "by": 5.86,
+    "kinds": "bridge over bridge",
+    "overlap": 0.01,
+    "overlapM2": 0.6,
+    "kind": "decks"
+   },
+   {
+    "over": "w37957180.1.4",
+    "under": "w1204470635.1.2",
+    "area": 3.5,
+    "at": [
+     1258.7414861339466,
+     547.1940851699715
+    ],
+    "by": 7.32,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 1.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.5",
+    "under": "w1204470635.1.1",
+    "area": 3.25,
+    "at": [
+     1260.8507406126953,
+     567.5899003330849
+    ],
+    "by": 7.77,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 1.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.1.1",
+    "under": "w693428824.19.13",
+    "area": 16,
+    "at": [
+     185.83110719563973,
+     527.415424406357
+    ],
+    "by": 3.45,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 14.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.1",
+    "area": 5.75,
+    "at": [
+     190.33385193936124,
+     529.915424406357
+    ],
+    "by": 16.54,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.2",
+    "area": 2,
+    "at": [
+     208.83385193936124,
+     543.8577771406761
+    ],
+    "by": 20.83,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 18.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.6",
+    "under": "w1204470635.1.0",
+    "area": 4.25,
+    "at": [
+     1263.4599950914442,
+     588.9857154961984
+    ],
+    "by": 7.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 2.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.7",
+    "under": "w1204470635.0.4",
+    "area": 2.75,
+    "at": [
+     1265.5692495701928,
+     608.8815306593119
+    ],
+    "by": 5.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 2.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.2",
+    "area": 5,
+    "at": [
+     214.33659668308272,
+     547.8577771406761
+    ],
+    "by": 14.95,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.3",
+    "area": 3,
+    "at": [
+     230.83659668308272,
+     560.8001298749952
+    ],
+    "by": 20.9,
+    "kinds": "bridge over bridge",
+    "overlap": 0.07,
+    "overlapM2": 21.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.3",
+    "area": 4,
+    "at": [
+     238.33934142680428,
+     566.3001298749952
+    ],
+    "by": 12.87,
+    "kinds": "bridge over bridge",
+    "overlap": 0.09,
+    "overlapM2": 27.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.4",
+    "area": 3.25,
+    "at": [
+     253.33934142680428,
+     577.7424826093143
+    ],
+    "by": 20.81,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 26,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.4",
+    "area": 4,
+    "at": [
+     262.34208617052576,
+     584.2424826093143
+    ],
+    "by": 11.28,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 24.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.5",
+    "area": 4,
+    "at": [
+     275.84208617052576,
+     594.6848353436333
+    ],
+    "by": 20.72,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.5",
+    "area": 3.25,
+    "at": [
+     286.34483091424727,
+     602.6848353436333
+    ],
+    "by": 9.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 20.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.6",
+    "area": 4.5,
+    "at": [
+     298.34483091424727,
+     611.6271880779524
+    ],
+    "by": 20.63,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.6",
+    "area": 2.75,
+    "at": [
+     310.3475756579688,
+     620.6339912024224
+    ],
+    "by": 7.61,
+    "kinds": "bridge over bridge",
+    "overlap": 0.05,
+    "overlapM2": 17.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.7",
+    "area": 5.25,
+    "at": [
+     320.3475756579688,
+     628.5695408122714
+    ],
+    "by": 20.71,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.2,
+    "kind": "overlap"
+   }
+  ],
+  "nearWall": [
+   {
+    "id": "w252837458",
+    "name": "Southern States Silo",
+    "m": 14.7,
+    "at": [
+     1034.3,
+     444.4
+    ],
+    "lonlat": [
+     -77.433742,
+     37.526666
+    ]
+   },
+   {
+    "id": "w943656807",
+    "m": 9.5,
+    "at": [
+     1601.1,
+     392.5
+    ],
+    "lonlat": [
+     -77.43697,
+     37.527076
+    ]
+   }
+  ]
+ },
+ "2020-dry:2026": {
+  "classes": {
+   "order": 7,
+   "joint": 80,
+   "overlap": 33,
+   "decks": 2
+  },
+  "counts": {
+   "building over building": 7
+  },
+  "cases": [
+   {
+    "over": "w426146867",
+    "under": "w426146868",
+    "area": 11.25,
+    "at": [
+     58.32205300440933,
+     -525.8501876171606
+    ],
+    "by": 5.12,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426146861",
+    "under": "w426146860",
+    "area": 4.75,
+    "at": [
+     172.41405318840194,
+     -355.0971907115625
+    ],
+    "by": 8.88,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w426141457",
+    "under": "w426141456",
+    "area": 142.25,
+    "at": [
+     1248.305709639627,
+     7.79882674918985
+    ],
+    "by": 18.03,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w1078391654",
+    "under": "w1421013530",
+    "area": 452.75,
+    "at": [
+     1571.103477506085,
+     91.58304137459226
+    ],
+    "by": 29.91,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0.3,
+    "kind": "order"
+   },
+   {
+    "over": "w598212127",
+    "under": "w598212122",
+    "area": 109,
+    "at": [
+     1980.4129076054867,
+     160.00261627165844
+    ],
+    "by": 27.61,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w762180673",
+    "under": "w762180680",
+    "area": 205.25,
+    "at": [
+     -1380.3338180330006,
+     140.52863834000175
+    ],
+    "by": 14.47,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "floodwall:0.27.0",
+    "area": 30,
+    "at": [
+     1975.4536105398524,
+     310.6536868532274
+    ],
+    "by": 6.49,
+    "kinds": "bridge over wall",
+    "overlap": 1.01,
+    "overlapM2": 12.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "w114143919.2.0.pier5",
+    "area": 11.25,
+    "at": [
+     1984.5202856645924,
+     313.1536868532274
+    ],
+    "by": 2.88,
+    "kinds": "bridge over bridge",
+    "overlap": 1.04,
+    "overlapM2": 2.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w167824984.0.0",
+    "under": "floodwall:0.27.1",
+    "area": 22.25,
+    "at": [
+     1975.656640056073,
+     310.6536868532274
+    ],
+    "by": 2.97,
+    "kinds": "bridge over wall",
+    "overlap": 1.01,
+    "overlapM2": 12.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.0",
+    "under": "w693428824.20.3",
+    "area": 8.75,
+    "at": [
+     -34.96872606248755,
+     380.3583641564513
+    ],
+    "by": 14.09,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.1",
+    "under": "w693428824.20.2",
+    "area": 10.5,
+    "at": [
+     -15.023050301284107,
+     388.44875560292
+    ],
+    "by": 13.23,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 15,
+    "kind": "overlap"
+   },
+   {
+    "over": "w943656807",
+    "under": "w943656806",
+    "area": 333.25,
+    "at": [
+     1542.1387794028958,
+     371.469243624642
+    ],
+    "by": 25.33,
+    "kinds": "building over building",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "order"
+   },
+   {
+    "over": "w601107595.0.2",
+    "under": "w693428824.20.1",
+    "area": 12,
+    "at": [
+     4.922625459919327,
+     397.0391470493889
+    ],
+    "by": 12.1,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 22.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.3",
+    "under": "w693428824.20.0",
+    "area": 50,
+    "at": [
+     24.868301221122767,
+     407.84459280352905
+    ],
+    "by": 15.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 29.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.20.0",
+    "area": 5,
+    "at": [
+     43.86830122112276,
+     420.38351285328775
+    ],
+    "by": 2.68,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 6.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.4",
+    "under": "w693428824.19.18",
+    "area": 66.75,
+    "at": [
+     44.81738347703224,
+     420.88351285328775
+    ],
+    "by": 21.18,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 37.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.0.5",
+    "under": "w693428824.19.18",
+    "area": 6,
+    "at": [
+     68.31738347703224,
+     438.40034932546024
+    ],
+    "by": 3.19,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 7.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.17",
+    "under": "w601107595.0.5",
+    "area": 7.5,
+    "at": [
+     69.82012822075374,
+     438.90034932546024
+    ],
+    "by": 21.27,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w1204470635.2.1",
+    "under": "w37957180.1.2",
+    "area": 2,
+    "at": [
+     1254.022977176449,
+     509.9024548437444
+    ],
+    "by": 16.88,
+    "kinds": "bridge over bridge",
+    "overlap": 0,
+    "overlapM2": 0,
+    "kind": "decks"
+   },
+   {
+    "over": "w693428824.19.16",
+    "under": "w601107595.0.6",
+    "area": 7.5,
+    "at": [
+     93.82287296447527,
+     456.9171857976327
+    ],
+    "by": 21.16,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 38.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.15",
+    "under": "w601107595.0.7",
+    "area": 7,
+    "at": [
+     117.82561770819675,
+     474.93402226980527
+    ],
+    "by": 21.06,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w38232584.0.4.pier6",
+    "under": "floodwall:0.76.0",
+    "area": 49.25,
+    "at": [
+     644.7939532765876,
+     477.27180034467847
+    ],
+    "by": 2.62,
+    "kinds": "bridge over wall",
+    "overlap": 0.47,
+    "overlapM2": 0.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.14",
+    "under": "w601107595.0.8",
+    "area": 6.75,
+    "at": [
+     142.32836245191828,
+     493.4508587419777
+    ],
+    "by": 20.29,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.7,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.13",
+    "under": "w601107595.1.0",
+    "area": 6.75,
+    "at": [
+     165.83110719563973,
+     511.473071672038
+    ],
+    "by": 18.79,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 37,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.3",
+    "under": "w1204470635.2.0",
+    "area": 3,
+    "at": [
+     1256.6322316551978,
+     527.7982700068579
+    ],
+    "by": 5.86,
+    "kinds": "bridge over bridge",
+    "overlap": 0.01,
+    "overlapM2": 0.6,
+    "kind": "decks"
+   },
+   {
+    "over": "w37957180.1.4",
+    "under": "w1204470635.1.2",
+    "area": 3.5,
+    "at": [
+     1258.7414861339466,
+     547.1940851699715
+    ],
+    "by": 7.32,
+    "kinds": "bridge over bridge",
+    "overlap": 0.02,
+    "overlapM2": 1.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.5",
+    "under": "w1204470635.1.1",
+    "area": 3.25,
+    "at": [
+     1260.8507406126953,
+     567.5899003330849
+    ],
+    "by": 7.77,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 1.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w601107595.1.1",
+    "under": "w693428824.19.13",
+    "area": 16,
+    "at": [
+     185.83110719563973,
+     527.415424406357
+    ],
+    "by": 3.45,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 14.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.1",
+    "area": 5.75,
+    "at": [
+     190.33385193936124,
+     529.915424406357
+    ],
+    "by": 16.54,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.12",
+    "under": "w601107595.1.2",
+    "area": 2,
+    "at": [
+     208.83385193936124,
+     543.8577771406761
+    ],
+    "by": 20.83,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 18.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.6",
+    "under": "w1204470635.1.0",
+    "area": 4.25,
+    "at": [
+     1263.4599950914442,
+     588.9857154961984
+    ],
+    "by": 7.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.03,
+    "overlapM2": 2.4,
+    "kind": "overlap"
+   },
+   {
+    "over": "w37957180.1.7",
+    "under": "w1204470635.0.4",
+    "area": 2.75,
+    "at": [
+     1265.5692495701928,
+     608.8815306593119
+    ],
+    "by": 5.98,
+    "kinds": "bridge over bridge",
+    "overlap": 0.04,
+    "overlapM2": 2.1,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.2",
+    "area": 5,
+    "at": [
+     214.33659668308272,
+     547.8577771406761
+    ],
+    "by": 14.95,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.11",
+    "under": "w601107595.1.3",
+    "area": 3,
+    "at": [
+     230.83659668308272,
+     560.8001298749952
+    ],
+    "by": 20.9,
+    "kinds": "bridge over bridge",
+    "overlap": 0.07,
+    "overlapM2": 21.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.3",
+    "area": 4,
+    "at": [
+     238.33934142680428,
+     566.3001298749952
+    ],
+    "by": 12.87,
+    "kinds": "bridge over bridge",
+    "overlap": 0.09,
+    "overlapM2": 27.8,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.10",
+    "under": "w601107595.1.4",
+    "area": 3.25,
+    "at": [
+     253.33934142680428,
+     577.7424826093143
+    ],
+    "by": 20.81,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 26,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.4",
+    "area": 4,
+    "at": [
+     262.34208617052576,
+     584.2424826093143
+    ],
+    "by": 11.28,
+    "kinds": "bridge over bridge",
+    "overlap": 0.08,
+    "overlapM2": 24.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.9",
+    "under": "w601107595.1.5",
+    "area": 4,
+    "at": [
+     275.84208617052576,
+     594.6848353436333
+    ],
+    "by": 20.72,
+    "kinds": "bridge over bridge",
+    "overlap": 0.1,
+    "overlapM2": 30.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.5",
+    "area": 3.25,
+    "at": [
+     286.34483091424727,
+     602.6848353436333
+    ],
+    "by": 9.2,
+    "kinds": "bridge over bridge",
+    "overlap": 0.06,
+    "overlapM2": 20.9,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.8",
+    "under": "w601107595.1.6",
+    "area": 4.5,
+    "at": [
+     298.34483091424727,
+     611.6271880779524
+    ],
+    "by": 20.63,
+    "kinds": "bridge over bridge",
+    "overlap": 0.11,
+    "overlapM2": 34.6,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.6",
+    "area": 2.75,
+    "at": [
+     310.3475756579688,
+     620.6339912024224
+    ],
+    "by": 7.61,
+    "kinds": "bridge over bridge",
+    "overlap": 0.05,
+    "overlapM2": 17.3,
+    "kind": "overlap"
+   },
+   {
+    "over": "w693428824.19.7",
+    "under": "w601107595.1.7",
+    "area": 5.25,
+    "at": [
+     320.3475756579688,
+     628.5695408122714
+    ],
+    "by": 20.71,
+    "kinds": "bridge over bridge",
+    "overlap": 0.12,
+    "overlapM2": 39.2,
+    "kind": "overlap"
+   }
+  ],
+  "nearWall": [
+   {
+    "id": "w252837458",
+    "name": "Southern States Silo",
+    "m": 14.7,
+    "at": [
+     1034.3,
+     444.4
+    ],
+    "lonlat": [
+     -77.433742,
+     37.526666
+    ]
+   },
+   {
+    "id": "w943656807",
+    "m": 9.5,
+    "at": [
+     1601.1,
+     392.5
+    ],
+    "lonlat": [
+     -77.43697,
+     37.527076
+    ]
+   }
+  ]
+ }
+}

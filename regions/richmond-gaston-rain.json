@@ -1,0 +1,56 @@
+{
+  "title": "Richmond, Aug. 30, 2004: Tropical Storm Gaston's rain on the Shockoe Creek watershed (working draft)",
+  "center": [
+    -77.444,
+    37.5555
+  ],
+  "width": 8600,
+  "depth": 6400,
+  "bearing": 0,
+  "snap": false,
+  "scale": 0.5,
+  "squash": 0.65,
+  "exaggeration": 1.0,
+  "slab": 40,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+    {
+      "match": "Mayo",
+      "deck": 6
+    },
+    {
+      "match": "Boulevard Bridge",
+      "deck": 20
+    },
+    {
+      "match": "Free Bridge (Ninth Street)",
+      "deck": 4
+    },
+    {
+      "match": "Marshall Street Viaduct",
+      "deck": 7,
+      "pierSpacing": 75,
+      "abutment": 30
+    }
+  ],
+  "minBuildingArea": 20,
+  "dots": "none",
+  "data": "richmond-streetcars",
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 12,
+    "contour": 0,
+    "majorEvery": 5,
+    "demResolution": 5
+  },
+  "time": {
+    "history": "history/gaston-2004.json",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  },
+  "railPiersOverWater": true,
+  "groupRailDecks": true
+}

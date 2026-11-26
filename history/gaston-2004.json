@@ -1,0 +1,51 @@
+{
+  "extends": "history/richmond-streetcars.json",
+  "title": "Richmond, Aug. 30, 2004: where Gaston's rain fell",
+  "about": "Working draft for the floods series (Opus 5.5 subagent, Nov. 23, 2026): the storm-total rain of Tropical Storm Gaston, from the KAKQ radar corrected to gauges, painted on the ground of the city as it stood in 2004. Made in code with Claude; see tools/floods/rain/.",
+  "epochs": [
+    {
+      "year": 2004,
+      "title": "Richmond, Aug. 30, 2004: Gaston's rain",
+      "note": "Buildings the city dates to 2004 or before, and the storm's total rain on the ground."
+    }
+  ],
+  "switches": {
+    "rain": {
+      "tint": {
+        "file": "tools/floods/rain/data/iso-drape.geojson",
+        "property": "label",
+        "values": [
+          "0-7 in",
+          "7-8 in",
+          "8-9 in",
+          "9-10 in",
+          "10-11 in",
+          "11-12 in",
+          "12+ in",
+          "outline"
+        ],
+        "tones": "rain",
+        "legend": {
+          "title": "Tropical Storm Gaston's rain, 8 a.m. Aug. 30 to 2 a.m. Aug. 31, 2004 (inches)",
+          "labels": [
+            "under 7 inches",
+            "7-8 inches",
+            "8-9 inches",
+            "9-10 inches",
+            "10-11 inches",
+            "11-12 inches",
+            "12+ inches",
+            "Shockoe Creek watershed (land surface, computed from USGS 3DEP)"
+          ],
+          "source": "Rain: NEXRAD Level II from KAKQ Wakefield (NOAA), tropical Z-R, corrected to gauges (NCEI, NWS, NHC); computed with Claude in tools/floods/rain/"
+        }
+      },
+      "note": "Gaston's storm-total rain as graded ground (tools/floods/rain/data/bands.geojson)."
+    }
+  },
+  "sources": [
+    "https://unidata-nexrad-level2.s3.amazonaws.com/",
+    "https://www.ncei.noaa.gov/access/services/data/v1",
+    "https://www.weather.gov/akq/Gaston"
+  ]
+}

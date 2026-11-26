@@ -1,0 +1,558 @@
+{
+  "title": "Richmond, VA: the James in flood, Shockoe Bottom to Rocketts and Manchester",
+  "center": [
+    -77.4258,
+    37.5305
+  ],
+  "width": 2200,
+  "depth": 1700,
+  "bearing": 25,
+  "snap": false,
+  "scale": 2.0,
+  "squash": 0.5,
+  "exaggeration": 1.0,
+  "slab": 18,
+  "palette": "paper",
+  "bridgeDeck": 7,
+  "bridges": [
+    {
+      "match": "Manchester",
+      "deck": 24
+    },
+    {
+      "match": "Mayo",
+      "deck": 6
+    },
+    {
+      "match": "Potterfield",
+      "deck": 3
+    }
+  ],
+  "minBuildingArea": 12,
+  "seatOnBanks": true,
+  "dots": "all",
+  "data": "richmond-i195-rocketts",
+  "terrain": {
+    "exaggeration": 1.0,
+    "cell": 5,
+    "contour": 2,
+    "majorEvery": 5,
+    "demResolution": 2
+  },
+  "time": {
+    "history": "history/richmond-downtown.json",
+    "yearBuiltFrom": "richmond-downtown-time",
+    "yearBuilt": {
+      "url": "https://services1.arcgis.com/k3vhq11XkBNeeOfM/ArcGIS/rest/services/Year_of_Construction/FeatureServer/0",
+      "field": "Year_Built"
+    }
+  },
+  "floodwalls": [
+    {
+      "name": "Richmond floodwall",
+      "osm": "flood_wall",
+      "top": 12.497,
+      "maxGap": 60,
+      "from": 1994,
+      "sources": [
+        "https://www.hmdb.org/m.asp?m=23953"
+      ],
+      "label": "Floodwall (1994)",
+      "note": "Line from OSM (wall=flood_wall, chained across gaps up to 60 m: the openings). Top: the stage at which the weather service says the wall is overtopped (41 ft at the City Locks), not the wall's surveyed top. Dedicated 21 October 1994."
+    },
+    {
+      "name": "APPROXIMATE tie-in, north wall west end",
+      "line": [
+        [
+          -77.436079,
+          37.534206
+        ],
+        [
+          -77.436221,
+          37.534646
+        ],
+        [
+          -77.436392,
+          37.534946
+        ]
+      ],
+      "top": 12.497,
+      "from": 1994,
+      "note": "APPROXIMATE: not from any source; a short line from the end of the mapped wall to higher ground, so the fill does not run round an end the map leaves open."
+    },
+    {
+      "name": "APPROXIMATE tie-in, north wall east end",
+      "line": [
+        [
+          -77.425782,
+          37.530409
+        ],
+        [
+          -77.425197,
+          37.530641
+        ],
+        [
+          -77.424531,
+          37.530905
+        ]
+      ],
+      "top": 12.497,
+      "from": 1994,
+      "note": "APPROXIMATE: not from any source; a short line from the end of the mapped wall to higher ground, so the fill does not run round an end the map leaves open."
+    },
+    {
+      "name": "APPROXIMATE tie-in, south wall west end",
+      "line": [
+        [
+          -77.444308,
+          37.529907
+        ],
+        [
+          -77.445113,
+          37.529923
+        ]
+      ],
+      "top": 12.497,
+      "from": 1994,
+      "note": "APPROXIMATE: not from any source; a short line from the end of the mapped wall to higher ground, so the fill does not run round an end the map leaves open."
+    },
+    {
+      "name": "APPROXIMATE tie-in, south wall east end",
+      "line": [
+        [
+          -77.428734,
+          37.524582
+        ],
+        [
+          -77.428377,
+          37.523619
+        ],
+        [
+          -77.427722,
+          37.520497
+        ]
+      ],
+      "top": 12.497,
+      "from": 1994,
+      "note": "APPROXIMATE: not from any source; a short line from the end of the mapped wall to higher ground, so the fill does not run round an end the map leaves open."
+    }
+  ],
+  "floods": {
+    "1771": {
+      "title": "The flood of 1771, an estimate, on the town of about 1788",
+      "caption": "The \"Great Fresh\" of May 1771: about 38.0 ft above sea level (NAVD88) at the City Locks, give or take 3 ft, from diaries via an Army Corps figure. Dark: water at the level; pale band: ground under water at the top of the range.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          11.582
+        ],
+        [
+          -77.42171,
+          37.52409,
+          11.582
+        ],
+        [
+          -77.43458,
+          37.5277,
+          11.979
+        ],
+        [
+          -77.44255,
+          37.53018,
+          11.979
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "The city as it stood in 1788 as far as the record shows: buildings standing today by their year built, plus those traced from fire-insurance maps; what was lost and not traced is missing. The ground is today's lidar.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ],
+      "uncertainty": 0.914,
+      "band": "beyond"
+    },
+    "1771-range": {
+      "title": "The flood of 1771, an estimate, on the town of about 1788",
+      "caption": "The \"Great Fresh\" of May 1771: about 38.0 ft above sea level (NAVD88) at the City Locks, give or take 3 ft, from diaries via an Army Corps figure. Dark: water at the bottom of the range; pale band: the ground the range adds, to its top.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          11.582
+        ],
+        [
+          -77.42171,
+          37.52409,
+          11.582
+        ],
+        [
+          -77.43458,
+          37.5277,
+          11.979
+        ],
+        [
+          -77.44255,
+          37.53018,
+          11.979
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "The city as it stood in 1788 as far as the record shows: buildings standing today by their year built, plus those traced from fire-insurance maps; what was lost and not traced is missing. The ground is today's lidar.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ],
+      "uncertainty": 0.914,
+      "band": "range"
+    },
+    "1936": {
+      "title": "The flood of March 1936",
+      "caption": "The river at 26.5 ft above sea level (NAVD88) at the City Locks, give or take 0.4 ft, 27.8 ft at the Mayo Bridge; USGS high-water marks (HA-410, PP 924).",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          8.077
+        ],
+        [
+          -77.42171,
+          37.52409,
+          8.077
+        ],
+        [
+          -77.43458,
+          37.5277,
+          8.473
+        ],
+        [
+          -77.4384,
+          37.52797,
+          8.464
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "The city as it stood in 1936 as far as the record shows: buildings standing today by their year built, plus those traced from fire-insurance maps; what was lost and not traced is missing. The ground is today's lidar.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ]
+    },
+    "1969": {
+      "title": "Hurricane Camille, August 1969",
+      "caption": "The river at 27.6 ft above sea level (NAVD88) at the City Locks, give or take 0.2 ft, 28.9 ft at the Mayo Bridge; USGS records and high-water marks (OFR 70-51, HA-410).",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          8.412
+        ],
+        [
+          -77.42171,
+          37.52409,
+          8.412
+        ],
+        [
+          -77.43458,
+          37.5277,
+          8.809
+        ],
+        [
+          -77.44255,
+          37.53018,
+          10.171
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "The city as it stood in 1969 as far as the record shows: buildings standing today by their year built, plus those traced from fire-insurance maps; what was lost and not traced is missing. The ground is today's lidar.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ]
+    },
+    "1972": {
+      "title": "Hurricane Agnes, June 1972",
+      "caption": "The river at 35.5 ft above sea level (NAVD88) at the City Locks, give or take 0.3 ft, about 36.8 ft at the Mayo Bridge; NOAA's 1972 survey, USGS, the Dock Street high-water sign.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          10.82
+        ],
+        [
+          -77.42171,
+          37.52409,
+          10.82
+        ],
+        [
+          -77.43458,
+          37.5277,
+          11.217
+        ],
+        [
+          -77.44255,
+          37.53018,
+          11.217
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "The city as it stood in 1972 as far as the record shows: buildings standing today by their year built, plus those traced from fire-insurance maps; what was lost and not traced is missing. The ground is today's lidar.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ]
+    },
+    "1985": {
+      "title": "The Election Day flood, November 1985",
+      "caption": "The river at 29.7 ft above sea level (NAVD88) at the City Locks, give or take 0.4 ft, about 31.0 ft at the Mayo Bridge; the weather service's crest record.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          9.053
+        ],
+        [
+          -77.42171,
+          37.52409,
+          9.053
+        ],
+        [
+          -77.43458,
+          37.5277,
+          9.449
+        ],
+        [
+          -77.44255,
+          37.53018,
+          9.449
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "The city as it stood in 1985 as far as the record shows: buildings standing today by their year built, plus those traced from fire-insurance maps; what was lost and not traced is missing. The ground is today's lidar.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ]
+    },
+    "1996": {
+      "title": "Hurricane Fran, September 1996, against the new floodwall",
+      "caption": "The river at 22.7 ft above sea level (NAVD88) at the City Locks, perhaps 1 ft more (the gauge's datum then is not certain), about 24.0 ft at the Mayo Bridge; the weather service's crest record. Pale band: ground under water at the top of that range.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          6.919
+        ],
+        [
+          -77.42171,
+          37.52409,
+          6.919
+        ],
+        [
+          -77.43458,
+          37.5277,
+          7.315
+        ],
+        [
+          -77.44255,
+          37.53018,
+          7.315
+        ]
+      ],
+      "walls": true,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "The city as it stood in 1996 as far as the record shows: buildings standing today by their year built, plus those traced from fire-insurance maps; what was lost and not traced is missing. The ground is today's lidar.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood. The wall stands to the stage at which the weather service says the wall is overtopped (41 ft at the City Locks), not the wall's surveyed top.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ],
+      "uncertainty": 0.305,
+      "band": "beyond"
+    },
+    "1996-nowall": {
+      "title": "Hurricane Fran, September 1996, against the new floodwall",
+      "caption": "The river at 22.7 ft above sea level (NAVD88) at the City Locks, perhaps 1 ft more (the gauge's datum then is not certain), about 24.0 ft at the Mayo Bridge; the weather service's crest record. Pale band: ground under water at the top of that range.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          6.919
+        ],
+        [
+          -77.42171,
+          37.52409,
+          6.919
+        ],
+        [
+          -77.43458,
+          37.5277,
+          7.315
+        ],
+        [
+          -77.44255,
+          37.53018,
+          7.315
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "The city as it stood in 1996 as far as the record shows: buildings standing today by their year built, plus those traced from fire-insurance maps; what was lost and not traced is missing. The ground is today's lidar.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood. The wall stands to the stage at which the weather service says the wall is overtopped (41 ft at the City Locks), not the wall's surveyed top.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ],
+      "uncertainty": 0.305,
+      "band": "beyond"
+    },
+    "2020": {
+      "title": "November 2020, against the floodwall",
+      "caption": "The river at 17.0 ft above sea level (NAVD88) at the City Locks, give or take 0.1 ft; USGS gauge record. Held at that level up to the Mayo Bridge (no value there).",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          5.182
+        ],
+        [
+          -77.42171,
+          37.52409,
+          5.182
+        ],
+        [
+          -77.43458,
+          37.5277,
+          5.182
+        ],
+        [
+          -77.44255,
+          37.53018,
+          5.182
+        ]
+      ],
+      "walls": true,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "The city as it stood in 2020 as far as the record shows: buildings standing today by their year built, plus those traced from fire-insurance maps; what was lost and not traced is missing. The ground is today's lidar.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood. The wall stands to the stage at which the weather service says the wall is overtopped (41 ft at the City Locks), not the wall's surveyed top.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ]
+    },
+    "2020-nowall": {
+      "title": "November 2020, against the floodwall",
+      "caption": "The river at 17.0 ft above sea level (NAVD88) at the City Locks, give or take 0.1 ft; USGS gauge record. Held at that level up to the Mayo Bridge (no value there).",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          5.182
+        ],
+        [
+          -77.42171,
+          37.52409,
+          5.182
+        ],
+        [
+          -77.43458,
+          37.5277,
+          5.182
+        ],
+        [
+          -77.44255,
+          37.53018,
+          5.182
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "The city as it stood in 2020 as far as the record shows: buildings standing today by their year built, plus those traced from fire-insurance maps; what was lost and not traced is missing. The ground is today's lidar.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood. The wall stands to the stage at which the weather service says the wall is overtopped (41 ft at the City Locks), not the wall's surveyed top.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ]
+    },
+    "agnes-today": {
+      "title": "What if: Agnes's river against today's floodwall",
+      "caption": "Not a flood that happened: the 1972 river, 35.5 ft at the City Locks and about 36.8 ft at the Mayo Bridge, drawn against today's city and wall, gates shut.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          10.82
+        ],
+        [
+          -77.42171,
+          37.52409,
+          10.82
+        ],
+        [
+          -77.43458,
+          37.5277,
+          11.217
+        ],
+        [
+          -77.44255,
+          37.53018,
+          11.217
+        ]
+      ],
+      "walls": true,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "Today's city and ground.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood. The wall stands to the stage at which the weather service says the wall is overtopped (41 ft at the City Locks), not the wall's surveyed top.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ]
+    },
+    "agnes-today-nowall": {
+      "title": "What if: Agnes's river against today's floodwall",
+      "caption": "Not a flood that happened: the 1972 river, 35.5 ft at the City Locks and about 36.8 ft at the Mayo Bridge, drawn against today's city and wall, gates shut.",
+      "profile": [
+        [
+          -77.4085,
+          37.515,
+          10.82
+        ],
+        [
+          -77.42171,
+          37.52409,
+          10.82
+        ],
+        [
+          -77.43458,
+          37.5277,
+          11.217
+        ],
+        [
+          -77.44255,
+          37.53018,
+          11.217
+        ]
+      ],
+      "walls": false,
+      "gates": "closed",
+      "notes": [
+        "Off the river's channel, {floodAcres} acres under water. Of the {buildings} buildings this view shows, {floodBuildingsInWater} stand in water, {floodDepthAtBuildingsMedianFt} ft deep at the median, {floodDepthAtBuildingsMaxFt} ft at the deepest.",
+        "Today's city and ground.",
+        "A bathtub fill: water at the level wherever it connects to the river, not a model of the flood. The wall stands to the stage at which the weather service says the wall is overtopped (41 ft at the City Locks), not the wall's surveyed top.",
+        "Drawn with isoscape (ROUGH DRAFT d1). Levels: USGS and NOAA records, checked; see the series notes."
+      ]
+    }
+  }
+}

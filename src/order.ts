@@ -29,7 +29,8 @@ const screenBox = (item: Item): Box => {
       if (y > maxY) maxY = y
     }
   }
-  return { minX, minY, maxX, maxY }
+  const pad = item.inkPad ?? 0
+  return pad === 0 ? { minX, minY, maxX, maxY } : { minX: minX - pad, minY: minY - pad, maxX: maxX + pad, maxY: maxY + pad }
 }
 
 /**
@@ -42,7 +43,7 @@ const screenBox = (item: Item): Box => {
  * pair cannot close a cycle with the orders that matter. Cutaways, which stack many such
  * parts, use it; other views keep the plain rule.
  */
-export const compare = (a: Item, b: Item, stacked = false): number => {
+export const compare = (a: Item, b: Item, stacked = false, touch = 0): number => {
   // A part standing over a roof's shell (a dormer on it, a tower's upper stages rising through
   // it) is in front of every piece of that shell, apart or not: a piece's box reaches up to the
   // ridge, so beside a tower it would otherwise stand in front of stages far above the roof.
@@ -57,7 +58,10 @@ export const compare = (a: Item, b: Item, stacked = false): number => {
   if (a.over !== undefined && a.over === b.within) return 1
   if (b.over !== undefined && b.over === a.within) return -1
   // Modeled parts that abut may overlap by the centimeter their corners were rounded to.
-  const axis: Vec2 | null = separatingAxis(a.hull, b.hull, stacked ? STACK_TOLERANCE : 1e-6)
+  // With `touch` (occlusion "strict"), two buildings whose outlines overlap by less than that
+  // (neighbors sharing a wall, one outline simplified across it) still count as apart.
+  const eps = Math.max(stacked ? STACK_TOLERANCE : 1e-6, a.kind === 'building' && b.kind === 'building' ? touch : 0)
+  const axis: Vec2 | null = separatingAxis(a.hull, b.hull, eps)
   if (axis !== null) {
     // `axis` points from b to a. The camera sits toward −N', so a is nearer when the axis
     // has a negative N' component.
@@ -68,6 +72,10 @@ export const compare = (a: Item, b: Item, stacked = false): number => {
   }
   if (a.zMin >= b.zMax - 0.05) return 1
   if (b.zMin >= a.zMax - 0.05) return -1
+  // With `touch` (occlusion "strict"): two buildings mapped over one another at the same heights
+  // (a traced footprint on today's, or bad data) have no true order; left unordered, they cannot
+  // close a cycle that would force a wrong order on their neighbors.
+  if (touch > 0 && a.kind === 'building' && b.kind === 'building') return 0
   // A pier under a deck, its own or another's, stands behind it.
   if (a.kind === 'bridge' && b.kind === 'bridge' && a.pier !== b.pier) return a.pier === true ? -1 : 1
   // Overlapping footprints at overlapping heights: a bridge over a low building, or bad data.
@@ -133,7 +141,7 @@ export const STACK_TOLERANCE = 0.03
  * of those left that lie in a cycle (a strongly connected group of more than one item). A
  * region's `cutaway.order` asks for it; others keep the plain rule.
  */
-export const paintOrder = (items: readonly Item[], cell = 96, stacked = false, components = false): Item[] => {
+export const paintOrder = (items: readonly Item[], cell = 96, stacked = false, components = false, touch = 0): Item[] => {
   const n = items.length
   const boxes = items.map(screenBox)
   // Spatial hash on screen boxes, so only near neighbors are compared.
@@ -162,7 +170,7 @@ export const paintOrder = (items: readonly Item[], cell = 96, stacked = false, c
         const bi = boxes[i]
         const bj = boxes[j]
         if (bi.maxX <= bj.minX || bj.maxX <= bi.minX || bi.maxY <= bj.minY || bj.maxY <= bi.minY) continue
-        const c = compare(items[i], items[j], stacked)
+        const c = compare(items[i], items[j], stacked, touch)
         if (c > 0) { after[j].push(i); indegree[i]++ }
         else if (c < 0) { after[i].push(j); indegree[j]++ }
       }

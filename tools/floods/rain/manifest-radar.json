@@ -1,0 +1,1613 @@
+{
+ "note": "KAKQ Level II volumes, 2004-08-30 11:30 UTC to 2004-08-31 06:30 UTC. md5 is the S3 ETag (single-part uploads). Listed from https://unidata-nexrad-level2.s3.amazonaws.com/?list-type=2&prefix=2004/08/30/KAKQ/ and .../2004/08/31/KAKQ/ on 2026-11-23.",
+ "files": [
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_113346.gz",
+   "bytes": 1078530,
+   "md5": "d4fbe3af1ed0198484869d5201056f43",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_113800.gz",
+   "bytes": 1087023,
+   "md5": "cc730ef0fdbb16c324cd830f36b622f8",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_114214.gz",
+   "bytes": 986984,
+   "md5": "ca84de338ad57dc61306f1ea939ae9c4",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_114628.gz",
+   "bytes": 1113282,
+   "md5": "79e2f3b14d6a35b0be5f6d020c2f6c12",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_115043.gz",
+   "bytes": 1037989,
+   "md5": "76bc0cc215c3a3769ba8fb5ffb2789a2",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_115458.gz",
+   "bytes": 1011751,
+   "md5": "b7a9d1f874a13926b051ba32985e4e4e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_115913.gz",
+   "bytes": 1183304,
+   "md5": "f4e9d9cac6423822f972ac4eb4167be9",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_120327.gz",
+   "bytes": 1029372,
+   "md5": "c121cc6e459a97b6eb2f64237d4bef23",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_120741.gz",
+   "bytes": 1067935,
+   "md5": "b77683f404368223df239f4d17c16d46",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_121155.gz",
+   "bytes": 1194132,
+   "md5": "0e6be8e4048ddc93ed74764ca69fc542",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_121609.gz",
+   "bytes": 1038706,
+   "md5": "0bee76412735da1c8e099a07d94fb87c",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_122024.gz",
+   "bytes": 1117095,
+   "md5": "1344c84956c4569f7f05a0194b15d30e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_122438.gz",
+   "bytes": 1199084,
+   "md5": "e9e8a5d8c9ccf63d613464495d567ffa",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_122852.gz",
+   "bytes": 1059633,
+   "md5": "91b684333db83269ce5a436db34964d3",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_123307.gz",
+   "bytes": 1177949,
+   "md5": "74983e8310a76867cc42f22e3862ef99",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_123721.gz",
+   "bytes": 1120485,
+   "md5": "e339aab0f1fde13e4679fb4e532a3e6d",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_124135.gz",
+   "bytes": 1090185,
+   "md5": "321170f2883076ca9da75c5744ad7f38",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_124549.gz",
+   "bytes": 1245906,
+   "md5": "edeb578f5b3931688cc6579766c22db6",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_125003.gz",
+   "bytes": 1138081,
+   "md5": "855659e0bac051543a29964bbb746b9a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_125417.gz",
+   "bytes": 1130329,
+   "md5": "15ac6b27e3152c53ab8617b9824fb8c0",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_125833.gz",
+   "bytes": 1255065,
+   "md5": "6dce2c860c1d072a5d7b72b7948a7071",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_130247.gz",
+   "bytes": 1145358,
+   "md5": "1fa0aa18dcfac1611004df23f1095acb",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_130701.gz",
+   "bytes": 1218620,
+   "md5": "1bf070e4c5b7736d0611cb4749cae55a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_131117.gz",
+   "bytes": 1194322,
+   "md5": "f1533ecf000d12fb85bfbffea0ac4510",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_131531.gz",
+   "bytes": 1189019,
+   "md5": "96fca0df346a3cb0087db0137847ba2e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_131945.gz",
+   "bytes": 1322046,
+   "md5": "f81e56603d5109570426569ebdcbf34c",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_132400.gz",
+   "bytes": 1252249,
+   "md5": "b6d25b2c46e76d054604fe35306ed2dd",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_132814.gz",
+   "bytes": 1310993,
+   "md5": "03e887dc06266e0ed324aaa23335c6c5",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_133229.gz",
+   "bytes": 1359872,
+   "md5": "c8360cbef47f6ccb6c1acebe64c3ac0b",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_133642.gz",
+   "bytes": 1320467,
+   "md5": "0e633afb130847ac6a7d36df5505fe7e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_134057.gz",
+   "bytes": 1387636,
+   "md5": "3f589e484531c3801a8d083e300bfdaa",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_134511.gz",
+   "bytes": 1419084,
+   "md5": "8496653947f1474cde4be3567fb5c164",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_134925.gz",
+   "bytes": 1422147,
+   "md5": "45f52ed45f19e040495bc889cfc27b1e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_135340.gz",
+   "bytes": 1511400,
+   "md5": "acacc53dd0e18aa38975baccc738d181",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_135754.gz",
+   "bytes": 1472964,
+   "md5": "cd47dc53d42ebc5daa383a0edb7cf0bd",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_140208.gz",
+   "bytes": 1496833,
+   "md5": "d00509784b00b42503ae815c52376c7f",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_140622.gz",
+   "bytes": 1615164,
+   "md5": "d333e0d20350372184d94ddd5a638f0c",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_141036.gz",
+   "bytes": 1610035,
+   "md5": "aa7a71b9ae501054634883084e862d2c",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_141450.gz",
+   "bytes": 1619049,
+   "md5": "44b401c94de2ffcf41f0c532b9098b96",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_141904.gz",
+   "bytes": 1754558,
+   "md5": "5d01ef5d581ab820aabbf9410f53b4a9",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_142318.gz",
+   "bytes": 1766249,
+   "md5": "50640917b5629f21e4af39a43c9d39fa",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_142733.gz",
+   "bytes": 1777777,
+   "md5": "0db2002a6be0fb12d9130bdf3bffb477",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_143149.gz",
+   "bytes": 1765104,
+   "md5": "7c42e985b76d38c754478403b7c7d59a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_143602.gz",
+   "bytes": 1794339,
+   "md5": "faafdd08d97dc9edc0b636d934097b42",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_144017.gz",
+   "bytes": 1884805,
+   "md5": "d5e3526d4ca06df9f6b82cfd15a311d9",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_144431.gz",
+   "bytes": 1846049,
+   "md5": "8126fe7f758d1a5abf533e613265ebcc",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_144846.gz",
+   "bytes": 1872660,
+   "md5": "e1bcec03f003724c44fa3108bb3c30c1",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_145301.gz",
+   "bytes": 1918131,
+   "md5": "e911cadd60946f968868903665e06c29",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_145715.gz",
+   "bytes": 1934186,
+   "md5": "3fabe2eb1efa500b91a66e6038738999",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_150129.gz",
+   "bytes": 1934005,
+   "md5": "82fc9213120270d307b7a2d3d30c16c8",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_150543.gz",
+   "bytes": 1936995,
+   "md5": "cbb2c66556548932c247120058abc0c0",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_150957.gz",
+   "bytes": 1967699,
+   "md5": "0b8025fcae131b4bf1752fd5a84f1a01",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_151411.gz",
+   "bytes": 1989935,
+   "md5": "98a376e3673248acc2e25117291ea0ac",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_151825.gz",
+   "bytes": 1995728,
+   "md5": "fa5fc80bb8c7cccccee8b3e0c2848135",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_152240.gz",
+   "bytes": 2032495,
+   "md5": "85a83708fd961c1e27c93dd70d697ee0",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_152654.gz",
+   "bytes": 2065006,
+   "md5": "27b46c84336b944a7523374ef7359787",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_153108.gz",
+   "bytes": 2038553,
+   "md5": "ccda1c55c43faca30aac82278e932c31",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_153522.gz",
+   "bytes": 2049172,
+   "md5": "e632ca4c3f396998e132eb54be6a2168",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_153937.gz",
+   "bytes": 2116382,
+   "md5": "bd5314ebaf95d0aefc4bdb22b81a1035",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_154351.gz",
+   "bytes": 2086048,
+   "md5": "0b1e38f4872e25d10f23731728269dc7",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_154805.gz",
+   "bytes": 2121268,
+   "md5": "d2a9e6214c7f52f254f5890bf2314cb3",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_155220.gz",
+   "bytes": 2099298,
+   "md5": "f0089a01906b1cad570a343a65f6a740",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_155635.gz",
+   "bytes": 2117987,
+   "md5": "5d350f283eab7dc9880d2502d569599f",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_160049.gz",
+   "bytes": 2107682,
+   "md5": "338a09bf74cac0cab4c8b06cdb13bb26",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_160503.gz",
+   "bytes": 2072668,
+   "md5": "197f01e62e0936f0d297d32a76973c0d",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_161021.gz",
+   "bytes": 2111042,
+   "md5": "2ed74816d29313c7f30f0f4bfaf2b9b1",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_161437.gz",
+   "bytes": 2084689,
+   "md5": "f90ccd31900937b644a36abe8df626bd",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_161851.gz",
+   "bytes": 2079319,
+   "md5": "55e8c4a186f67beb18943ca21fcd404e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_162305.gz",
+   "bytes": 2138593,
+   "md5": "94712190c42f02a04c1eaecddd3f5217",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_162720.gz",
+   "bytes": 2056427,
+   "md5": "2111adc7ef312f2fccb213fa5a52ca1e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_163136.gz",
+   "bytes": 2160187,
+   "md5": "ecbfe186ed52071c1c82bdc4ab882597",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_163550.gz",
+   "bytes": 2224141,
+   "md5": "600e9ddb188ba974229cfe81b563db2c",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_164004.gz",
+   "bytes": 2116905,
+   "md5": "d16e99e40ebc6f142fdefad39f0de018",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_164418.gz",
+   "bytes": 2265155,
+   "md5": "e77740d3f5a5816b231c72d2b725faae",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_164833.gz",
+   "bytes": 2247575,
+   "md5": "3221fe739f20bc9db5f219cfa9e03efc",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_165247.gz",
+   "bytes": 2189032,
+   "md5": "12d6d87f49d43297f684ffe6c65cf7da",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_165701.gz",
+   "bytes": 2320284,
+   "md5": "72504b14f0e0cfd971382fc9b96c7cdb",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_170115.gz",
+   "bytes": 2302101,
+   "md5": "0bde7a1cf86ca0563a535ab8ed48220f",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_170529.gz",
+   "bytes": 2256306,
+   "md5": "71f9f58c54996914175eb7e1ec9562dd",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_170943.gz",
+   "bytes": 2388088,
+   "md5": "92de139806fff8dcdd6d56971acb03f6",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_171358.gz",
+   "bytes": 2334286,
+   "md5": "08f000d29c7af4d3883f16bb89c6d2db",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_171812.gz",
+   "bytes": 2357822,
+   "md5": "1affd555a66793608c952cc0723bbcfd",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_172226.gz",
+   "bytes": 2484177,
+   "md5": "b92d18bc23529517ae47d54a4498f057",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_172640.gz",
+   "bytes": 2370301,
+   "md5": "3f956c137ff99c9e3ed1ed749f24b816",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_173054.gz",
+   "bytes": 2387845,
+   "md5": "ef113e9454ff361cda97c04ec08c6666",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_173508.gz",
+   "bytes": 2540293,
+   "md5": "caa987097567d0b100748b7c193c6eba",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_173924.gz",
+   "bytes": 2421763,
+   "md5": "3cc404210bd430fd60829aaa668bd900",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_174338.gz",
+   "bytes": 2490506,
+   "md5": "3a973e2751786ccacead95086978654a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_174752.gz",
+   "bytes": 2563999,
+   "md5": "ea8dcde2ab3a0121655ddaf2d08be8d8",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_175207.gz",
+   "bytes": 2449283,
+   "md5": "49d4dad47322247bb62c6d42eccadcf7",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_175621.gz",
+   "bytes": 2584656,
+   "md5": "cb871c7e66be9364ae5360b077d0702d",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_180036.gz",
+   "bytes": 2628480,
+   "md5": "cde20fac6608bc0fa9c347257dcff288",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_180450.gz",
+   "bytes": 2519067,
+   "md5": "2b0036c81cecfa2fa75ec1fae44dd6d7",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_180904.gz",
+   "bytes": 2697158,
+   "md5": "fbc8ac96d68c68096c0cc7039d894187",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_181318.gz",
+   "bytes": 2650120,
+   "md5": "c585e1ab192f620ff008a1c2442a0454",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_181734.gz",
+   "bytes": 2606171,
+   "md5": "5eba2874653b3ed764f5d5b0824e8ce2",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_182148.gz",
+   "bytes": 2790557,
+   "md5": "5b59230793cf22c684babbdb145a66c7",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_182602.gz",
+   "bytes": 2679575,
+   "md5": "6d03378ae6213a3fb4bd043436719751",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_183017.gz",
+   "bytes": 2705089,
+   "md5": "918cf028e65643327df16c47c505651b",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_183431.gz",
+   "bytes": 2898445,
+   "md5": "d7b528a0a6d00f5efba9e05bc8e3932e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_183846.gz",
+   "bytes": 2770191,
+   "md5": "2be10a46d67b2953ae0c7f8cd60d7b8c",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_184300.gz",
+   "bytes": 2819507,
+   "md5": "c58f927ca4877d557b8f0c0005940a67",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_184714.gz",
+   "bytes": 2951674,
+   "md5": "b023b55c2f8f8ab096971d0cba9d1a44",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_185128.gz",
+   "bytes": 2832821,
+   "md5": "f6c9578e4b26f2f51536a42a4d2aad43",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_185543.gz",
+   "bytes": 2895629,
+   "md5": "abda920ba6216bb77a207fb89a139d42",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_185957.gz",
+   "bytes": 2970049,
+   "md5": "d9bbef910ae061dab526b4beb6504238",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_190411.gz",
+   "bytes": 2846562,
+   "md5": "3e2f4a76d7022cb60b57af602bb05019",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_190825.gz",
+   "bytes": 2938865,
+   "md5": "02f9a2ade647e7344f51605c0cfa5765",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_191240.gz",
+   "bytes": 2991907,
+   "md5": "d286f12c373d0481d1b77f02e7ac4212",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_191654.gz",
+   "bytes": 2877137,
+   "md5": "3c620703a754c6240a913aee3d19721c",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_192109.gz",
+   "bytes": 3014786,
+   "md5": "9731a9c7b9b6e20df4c7dc405f6059c9",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_192523.gz",
+   "bytes": 2949359,
+   "md5": "b765f73a50a1114303a168234f5c1887",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_192938.gz",
+   "bytes": 2878136,
+   "md5": "0e3e1eb96a6b65e31fc92399b428e963",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_193352.gz",
+   "bytes": 3049835,
+   "md5": "0950e2542f5440b5e18d51feed4f1ed2",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_193806.gz",
+   "bytes": 2973182,
+   "md5": "57741d54da702f004a1a0457727bfcb4",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_194220.gz",
+   "bytes": 2901950,
+   "md5": "582377ae354478b2b0c21dae9759fa64",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_194635.gz",
+   "bytes": 3069197,
+   "md5": "4a9658e1153950e6cbb67df6464959c3",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_195049.gz",
+   "bytes": 2976241,
+   "md5": "6023034cf043eda0e7f19aace052c804",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_195504.gz",
+   "bytes": 2947259,
+   "md5": "1d1b0f2f4197b11a4d74866f7fcd02a3",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_195919.gz",
+   "bytes": 3037306,
+   "md5": "54887fc0a4b6c7350192bd211a3277de",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_200333.gz",
+   "bytes": 2932136,
+   "md5": "139d6d03f5f9095a5d288a96bb4c5916",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_200748.gz",
+   "bytes": 3024264,
+   "md5": "9d9b819bbb78dc3f0b21522b0b39a116",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_201203.gz",
+   "bytes": 3014276,
+   "md5": "d592b2fa422764af08e1587445ce759b",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_201617.gz",
+   "bytes": 2901633,
+   "md5": "52052e0c54c1cb79981d0044557e7c36",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_202031.gz",
+   "bytes": 3034558,
+   "md5": "247d0eed300f4e9d512505abf1b666c2",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_202446.gz",
+   "bytes": 2973835,
+   "md5": "e10bef450254a9fce77cd5e6b79f2076",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_202900.gz",
+   "bytes": 2856548,
+   "md5": "133e2da7a148ba3b2d5b889f22c64a99",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_203314.gz",
+   "bytes": 2999129,
+   "md5": "d7bea24c83bd84663522545bb85db433",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_203730.gz",
+   "bytes": 2886531,
+   "md5": "8eeb1d198a73618d5f18bd09e6e92dcc",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_204144.gz",
+   "bytes": 2893394,
+   "md5": "d9eb26a93856d0af934dbefab38022c0",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_204558.gz",
+   "bytes": 2952317,
+   "md5": "a5b00efdb10d8f6692a95a368dfdb2b8",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_205014.gz",
+   "bytes": 2833815,
+   "md5": "6c87165de15514066ea5b9a07b066670",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_205428.gz",
+   "bytes": 2944843,
+   "md5": "d7980b84958d3422000c7585ec9f1f5f",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_205843.gz",
+   "bytes": 2841367,
+   "md5": "fdf0788eba56cac40ba5a8c6ec862bfb",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_210259.gz",
+   "bytes": 2832837,
+   "md5": "5034a0a28dee6c0222e390fc7c8edcab",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_210713.gz",
+   "bytes": 2902378,
+   "md5": "60271d3120f4bc00f984463d26de5c33",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_211127.gz",
+   "bytes": 2839350,
+   "md5": "65c8f84baf1402fb296aac1a757449b4",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_211541.gz",
+   "bytes": 2848711,
+   "md5": "2e86261de20ec9b2a2c58e2fff88c1ec",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_211955.gz",
+   "bytes": 2876231,
+   "md5": "746be471fcb0a33b2282e8a67a5adea7",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_212410.gz",
+   "bytes": 2814095,
+   "md5": "a71d35cf1e6b88e81c5495ddc01b00a4",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_212824.gz",
+   "bytes": 2853702,
+   "md5": "dd18d2d3c9d874bfc22e9e5a3be77e78",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_213238.gz",
+   "bytes": 2846357,
+   "md5": "814f67e3c632d788ff913fe9b1cfb098",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_213652.gz",
+   "bytes": 2795292,
+   "md5": "b5f148dceb799dc28021adee012905fb",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_214107.gz",
+   "bytes": 2855209,
+   "md5": "d9af17e0705bae6e1046ab2996c5957b",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_214522.gz",
+   "bytes": 2772340,
+   "md5": "205d973c5a292290c59751a9f4638411",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_214936.gz",
+   "bytes": 2770893,
+   "md5": "545aa8a7c700bb74a65560911be86edd",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_215351.gz",
+   "bytes": 2842244,
+   "md5": "2b80074b91bc28eaa024d6395d3e3333",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_215805.gz",
+   "bytes": 2795005,
+   "md5": "0eb0c32115af76c7c87e60c46d3483a4",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_220220.gz",
+   "bytes": 2817952,
+   "md5": "d016788005c7fda5731175732f514717",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_220635.gz",
+   "bytes": 2815316,
+   "md5": "ad9518eab043a48b05803252df838592",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_221049.gz",
+   "bytes": 2812979,
+   "md5": "4b92f1de7888c5b4f377cc47113f5317",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_221503.gz",
+   "bytes": 2836427,
+   "md5": "92d8c0a13347aed958dd5f6db9716803",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_221917.gz",
+   "bytes": 2803170,
+   "md5": "4fa1dd70246b1ed729148ee68359bba8",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_222331.gz",
+   "bytes": 2808850,
+   "md5": "2b6f60ed33a4492a88eba021c72109b4",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_222746.gz",
+   "bytes": 2831182,
+   "md5": "f79b15c350d29fb97ae33a3e0c3474d8",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_223200.gz",
+   "bytes": 2771562,
+   "md5": "45688c454908c824e88df5e2f7f906fc",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_223614.gz",
+   "bytes": 2802042,
+   "md5": "2d34d8384c70995adef2e32c76917407",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_224028.gz",
+   "bytes": 2822765,
+   "md5": "14750c11e59043ca01409d5deb3c143b",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_224443.gz",
+   "bytes": 2767835,
+   "md5": "d86e7a7b06789ec456937ae9f68b8723",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_224857.gz",
+   "bytes": 2822157,
+   "md5": "757a6323acef0a084f94d56353276659",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_225311.gz",
+   "bytes": 2835443,
+   "md5": "2f8c8e89ed16e05cd86938512169d69a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_225727.gz",
+   "bytes": 2836572,
+   "md5": "6872f4f78dca1a3a50093abd2b34f702",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_230142.gz",
+   "bytes": 2752284,
+   "md5": "2d6a5920a88b0125584d04fc98383c3b",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_230556.gz",
+   "bytes": 2721795,
+   "md5": "24d7fe8eb0162be74f516970dd665c7f",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_231010.gz",
+   "bytes": 2729706,
+   "md5": "e7958a6c0c2a66a422b8b1e80ceef86d",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_231425.gz",
+   "bytes": 2669905,
+   "md5": "7a5b33ba3c9b3a52e811330cb2798c44",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_231839.gz",
+   "bytes": 2636331,
+   "md5": "328a64cb88836174605b3d53f1272ba0",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_232253.gz",
+   "bytes": 2632568,
+   "md5": "d860535d38a2157fa98b68830079546e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_232707.gz",
+   "bytes": 2600984,
+   "md5": "c91112b68963df51cacad35bab47ff91",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_233122.gz",
+   "bytes": 2537226,
+   "md5": "355766b757e95c8805ec6380a45a3948",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_233536.gz",
+   "bytes": 2498445,
+   "md5": "7d6e7c547eab18a70dc8b598d25eeea1",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_233951.gz",
+   "bytes": 2478865,
+   "md5": "09e189457f3e7c24cbdd310905004a79",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_234405.gz",
+   "bytes": 2480582,
+   "md5": "91b04c43a82b50d904549fd2113cdad4",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_234819.gz",
+   "bytes": 2370812,
+   "md5": "1da9bf42f8f4c74ef00a3034bc2b6776",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_235234.gz",
+   "bytes": 2425568,
+   "md5": "737dcf444c93d659e2421ef5e5abdf63",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/30/KAKQ/KAKQ20040830_235649.gz",
+   "bytes": 2422082,
+   "md5": "0892a30b03acd9f78f7d33e15e916222",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_000205.gz",
+   "bytes": 2367762,
+   "md5": "79246a6842b8141f65de756f7c5fd11a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_000619.gz",
+   "bytes": 2398198,
+   "md5": "a9f49740eec07435318d62d9a4c531df",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_001033.gz",
+   "bytes": 2411221,
+   "md5": "341aac4924816de5fee3aa6ba2258176",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_001447.gz",
+   "bytes": 2390171,
+   "md5": "e376ea09a81fbfb839cdb19bb998c657",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_001902.gz",
+   "bytes": 2416743,
+   "md5": "67716f56605b5acf1025af6561f038ce",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_002316.gz",
+   "bytes": 2366670,
+   "md5": "95e3a20c16872b5fd21199940df9442d",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_002730.gz",
+   "bytes": 2460203,
+   "md5": "1e553c1673eaab343f799f7077598447",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_003145.gz",
+   "bytes": 2464577,
+   "md5": "366e643c0a7096e3b7beb4a00760d453",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_003600.gz",
+   "bytes": 2472693,
+   "md5": "0ee1b138e2ff3cc262c5e630475c1f32",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_004014.gz",
+   "bytes": 2525984,
+   "md5": "e420b370dc9c777de04443dcc0258057",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_004428.gz",
+   "bytes": 2441573,
+   "md5": "46925335bed4a0e382a78b979ca75a33",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_004842.gz",
+   "bytes": 2526815,
+   "md5": "328aa74d71cccd7ccd97b022a68a8fce",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_005256.gz",
+   "bytes": 2491159,
+   "md5": "ed2301f9f0121ffd700ed9d102094c9e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_005711.gz",
+   "bytes": 2442863,
+   "md5": "1efd35474054cbedec2e3c0c6b840266",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_010125.gz",
+   "bytes": 2578338,
+   "md5": "e7392882232267a73d654eee64ed151c",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_010539.gz",
+   "bytes": 2504897,
+   "md5": "a274058980c6ba52922768e43a8f9991",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_010953.gz",
+   "bytes": 2451242,
+   "md5": "bcb37573c189b5caa96d8e1edb3b1fca",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_011407.gz",
+   "bytes": 2608816,
+   "md5": "a1ffaf8565eb2a5b2ff4e0fe6fbeeb8a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_011821.gz",
+   "bytes": 2513356,
+   "md5": "15e830c8ba66f93b84c65e7204497301",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_012235.gz",
+   "bytes": 2484321,
+   "md5": "b27c956938ffe1efdca49b3d1073c21c",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_012649.gz",
+   "bytes": 2633152,
+   "md5": "309a012013b31e6321d47e24ccd749d8",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_013103.gz",
+   "bytes": 2516224,
+   "md5": "d95678a24012d990e17a3867b96cb96b",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_013517.gz",
+   "bytes": 2530324,
+   "md5": "4c11e8ffe5a4e42461facf38674c525e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_013931.gz",
+   "bytes": 2624319,
+   "md5": "1bcab607c7a5526baf26ebb5146bcf8f",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_014347.gz",
+   "bytes": 2458009,
+   "md5": "5ccd1316ca97421225f4a3e9d7a92a1a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_014801.gz",
+   "bytes": 2638898,
+   "md5": "11c36c8743de99c43e704316e320bf0c",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_015215.gz",
+   "bytes": 2565123,
+   "md5": "68aeaf3873125df8df125a15bb465ee8",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_015629.gz",
+   "bytes": 2494326,
+   "md5": "dbb9000ab695bec14bfb2a1ba4e1394f",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_020043.gz",
+   "bytes": 2690129,
+   "md5": "1b2598a1010be5dfe8629d5d14d24df0",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_020458.gz",
+   "bytes": 2537403,
+   "md5": "d06e01d2f1dc302bfe1ef3a236434584",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_020912.gz",
+   "bytes": 2541224,
+   "md5": "7993f9c89fe0e68cf12416d8b03de973",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_021326.gz",
+   "bytes": 2717603,
+   "md5": "47e774c27938376fe103741d6019fd80",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_021740.gz",
+   "bytes": 2549363,
+   "md5": "3847fb510b0384804161ba65af6a0bf8",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_022154.gz",
+   "bytes": 2597921,
+   "md5": "ee48b35fa624c5faf7628db6b70005cf",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_022608.gz",
+   "bytes": 2734992,
+   "md5": "d7c918dbd1173b937f269c6ca5290578",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_023022.gz",
+   "bytes": 2557687,
+   "md5": "e10acb62472b2bae4991f7432671f968",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_023436.gz",
+   "bytes": 2652526,
+   "md5": "8c458abf1d233e8f5b7d487fcf658802",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_023850.gz",
+   "bytes": 2713063,
+   "md5": "a6696b6fc1d309b79612f6fa12003c56",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_024304.gz",
+   "bytes": 2560723,
+   "md5": "c29aa8e4a953c30d87a4cebfabe39ce4",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_024718.gz",
+   "bytes": 2699404,
+   "md5": "bd24090aa7a9ec06bf9b7f55408d296a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_025132.gz",
+   "bytes": 2730738,
+   "md5": "cd36c82944f39df0d024a9f5e1029212",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_025546.gz",
+   "bytes": 2592401,
+   "md5": "7afdec9c7bd6404ea6dd069a48bb7b9b",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_030001.gz",
+   "bytes": 2772839,
+   "md5": "4a91dc7491aa6df40c24f2a32890c9b2",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_030415.gz",
+   "bytes": 2730515,
+   "md5": "26b5159d71150caaab19378790515ffb",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_030830.gz",
+   "bytes": 2628561,
+   "md5": "5771b9b5d561b99ab5082f8289120dfc",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_031244.gz",
+   "bytes": 2850571,
+   "md5": "4e6a6477ed44953806dcbad773ff1a36",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_031658.gz",
+   "bytes": 2690796,
+   "md5": "6120be222facdb46803b23880274c5bc",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_032112.gz",
+   "bytes": 2675784,
+   "md5": "a5cb584613efe7d6c75d2e8861be3f77",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_032526.gz",
+   "bytes": 2845158,
+   "md5": "c36fa0ba62984d8db25ea0a297212317",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_032940.gz",
+   "bytes": 2641238,
+   "md5": "c15b5893384c8a95fe5cc9aa322ba49f",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_033354.gz",
+   "bytes": 2716251,
+   "md5": "28a29c522f9f7ec887788f97500d039d",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_033808.gz",
+   "bytes": 2815407,
+   "md5": "58af54b55cf906e7358724bec74f2f5b",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_034222.gz",
+   "bytes": 2639045,
+   "md5": "51e74fd27bc0640fa394a04c2c0c71e0",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_034636.gz",
+   "bytes": 2728780,
+   "md5": "28560cb131aa361ee41b6d4efeeae1a7",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_035050.gz",
+   "bytes": 2757643,
+   "md5": "adf5c35a92f87705ce7bbab2a77fa8e7",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_035504.gz",
+   "bytes": 2607720,
+   "md5": "823cd427ccffa7be090b9a4943776112",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_035919.gz",
+   "bytes": 2808157,
+   "md5": "03d993c9281d604a120017603e6bbe41",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_040333.gz",
+   "bytes": 2679623,
+   "md5": "4ef19d794b65a6efabcbcd95b814b721",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_040747.gz",
+   "bytes": 2592351,
+   "md5": "03cc748e96d08c29e99d645325f64c37",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_041202.gz",
+   "bytes": 2782799,
+   "md5": "e2319c989e06bd4ad7c34c176a30b015",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_041616.gz",
+   "bytes": 2628529,
+   "md5": "4aa0be5759b6e4f93c4bfcf193a6fcaa",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_042030.gz",
+   "bytes": 2562499,
+   "md5": "5fd0733a2da9d9d74784b8638ee6a141",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_042444.gz",
+   "bytes": 2749217,
+   "md5": "07a64976512aa4ac0f1d4837cd5fdbee",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_042858.gz",
+   "bytes": 2571273,
+   "md5": "591d552867d46f6efa3f2421885594c9",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_043312.gz",
+   "bytes": 2528331,
+   "md5": "c07996606520b4d7e61eebdd86053e16",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_043726.gz",
+   "bytes": 2659354,
+   "md5": "2c5a45ddb4d972f865de21b9290f36b2",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_044140.gz",
+   "bytes": 2510210,
+   "md5": "abd9c29c84ca72691679799b4e8116c1",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_044554.gz",
+   "bytes": 2485523,
+   "md5": "3021b02ddeb484994051320a44a1ae34",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_045009.gz",
+   "bytes": 2563329,
+   "md5": "b202849fc8bccf83646d5089640ad27a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_045423.gz",
+   "bytes": 2407210,
+   "md5": "8f3995c556905d397e8202cbe8cf5dfd",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_045837.gz",
+   "bytes": 2413356,
+   "md5": "607655f88e9acbbd8893ec0b8c439fb6",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_050251.gz",
+   "bytes": 2490963,
+   "md5": "846e57c617a224a6ea3c22d0df52083b",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_050705.gz",
+   "bytes": 2365913,
+   "md5": "3d530f0b2028f392376b5fcd8e8c3443",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_051120.gz",
+   "bytes": 2439057,
+   "md5": "ab554254e35b360bf6b94de056b68f5a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_051535.gz",
+   "bytes": 2381682,
+   "md5": "b91c8a161dd0af3534acfc0eb5edac5c",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_051949.gz",
+   "bytes": 2277732,
+   "md5": "99effcd25447bda25ceee258b0e48571",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_052403.gz",
+   "bytes": 2381376,
+   "md5": "cd3ac11744b38929ffc27dea35a793fc",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_052817.gz",
+   "bytes": 2307087,
+   "md5": "dcc8c287814265af7972043b4158342e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_053231.gz",
+   "bytes": 2265007,
+   "md5": "a11c4f9bd290366eb2b6b16ecb2a884d",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_053646.gz",
+   "bytes": 2372920,
+   "md5": "5a54253d0d07deb9ab62e26f3c536d93",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_054100.gz",
+   "bytes": 2273258,
+   "md5": "1cd412b2a4cab5256caf264444131267",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_054514.gz",
+   "bytes": 2227651,
+   "md5": "bcb50d7c0c6c703bf532b9e2d2e0bfde",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_054928.gz",
+   "bytes": 2339155,
+   "md5": "d33d2add6c51ab8f1c944d1062b45d9e",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_055343.gz",
+   "bytes": 2215668,
+   "md5": "cca5a453fb08560f6b05c2198e13aab5",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_055757.gz",
+   "bytes": 2240280,
+   "md5": "093fa5f771660bdfbbd01bfaf1c00e91",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_060212.gz",
+   "bytes": 2297859,
+   "md5": "25c8e18de7438258ae46a669d0135e9a",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_060627.gz",
+   "bytes": 2198766,
+   "md5": "45fbec5129c05a5df05f91d144c9d439",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_061042.gz",
+   "bytes": 2270136,
+   "md5": "c14a21def0778982a0a5151ce585d091",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_061456.gz",
+   "bytes": 2199188,
+   "md5": "2b3139056d519ebcd12d9afd0d101ea7",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_061910.gz",
+   "bytes": 2184277,
+   "md5": "37dac59c9e53774cca03e50812a12857",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_062325.gz",
+   "bytes": 2265132,
+   "md5": "4f8fc9c1b72146dce0e53796a3742e63",
+   "kind": "nexrad-level2-KAKQ"
+  },
+  {
+   "url": "https://unidata-nexrad-level2.s3.amazonaws.com/2004/08/31/KAKQ/KAKQ20040831_062739.gz",
+   "bytes": 2195319,
+   "md5": "c9488b0344e983deaf01aee1aec726ed",
+   "kind": "nexrad-level2-KAKQ"
+  }
+ ]
+}

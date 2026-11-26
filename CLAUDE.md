@@ -101,6 +101,13 @@ the previous one (`C`) before judging. Use `--no-archive` for throwaway checks.
 | plate numbers, the taxonomy, the printed title block | `catalog/plates.json`, `tools/release/plates.py`, `tools/print/titleblock.py`, `tools/release/stamp.py`; "Plates" in the README |
 | a published piece corrected or redrawn | `pages/changes.md` (and the store's `changes_page.py`): every change, dated, with the piece's version |
 | the visual check: watched views, crops, tolerance, its report | `tools/check/views.json`, `tools/check/visual.py`; baseline in `tools/check/baseline/` |
+| a flood (experimental): the fill, floodwalls, ponds, counts; its drawing and colors | `src/flood.ts`; `floods`, `floodwalls` in `regions/<name>.json`; buildings, bridges, walls in `scene.ts`; the flood layers in `paintStrip` in `render.ts`; `flood` and `FLOOD_STYLES` in `palette.ts`; the spill-path analysis, the d1 region, plates and counts in `tools/floods/` (→ `regions/richmond-floods-d1.json`, `drafts/richmond-floods/counts.json`); "Floods" in the README |
+| strict occlusion (convex pieces, x-ray band masks, the painted-over check) | `occlusion` in `regions/<name>.json`; `convexPieces` in `geom.ts`; `src/occlusion.ts`; `flushUnder` in `render.ts`; `compare` in `order.ts`; `tools/floods/d3/occlusion.ts` |
+| ground a missing levee may protect (`unknown`), bridge decks under a flood, the river's color on a flood plate | `unknown` in a flood in `regions/<name>.json`; the unknown field in `scene.ts` (flood setup) and `paintStrip` in `render.ts`; deck pieces under water in `scene.ts` (`underFlood`); the water color at the top of `renderSvg` |
+| traced footprints under a building of the year (`tracedCovered`), traced buildings and piers in a flood | `tracedCovered` in `regions/<name>.json`; `coveredShare` and the traced loop in `scene.ts`; pier bands in `bridgePieces` in `scene.ts`; `tools/floods/rc1/covered.ts` |
+| a flood series' sheets at print size and every word on them, with sources (the Gaston rain panel: `rain` in `notes.py`) | `tools/floods/rc1/notes.py` → `drafts/richmond-floods/notes.json`; `tools/floods/rc1/sheet.py`; `tools/floods/d3/boxes.json` |
+| a rain pool held behind a wall (`citySide`) | `citySide` in a pond in `regions/<name>.json`; `PondSpec`, `fillFlood` in `src/flood.ts`; pond setup in `scene.ts` |
+| a flood series' period city: presence calls from dated photographs, lifespans from them, the unconfirmed look | `tools/floods/period/` → `history/evidence/richmond-floods.json`; `evidenceEnd`, `evidenceStart`, `applyEvidence` in `history.ts`; `paleItem` in `scene.ts`; `unconfirmed-*` in `FLOOD_STYLES`; "Floods" in the README |
 | placing streetcar lines from named corners | `tools/streetcars/build.py` (routes in `tools/streetcars/routes.json`) |
 
 ## Stages
@@ -172,7 +179,8 @@ board" in the README.
 - Outside the US, terrain is only as fine as its source: Copernicus is a 30 m *surface* model
   (trees and roofs included), and Terrain Tiles is 30 m SRTM in much of the world. Every source
   must carry its credit and license in `dem-sources.ts`; the maps, explorer and prints use them.
-- Concave footprints that interlock can form an ordering cycle, which is broken by depth.
+- Concave footprints that interlock can form an ordering cycle, which is broken by depth (a
+  region with `occlusion: "strict"` draws them as convex pieces instead; see `src/occlusion.ts`).
 - With terrain, water mapped as an area narrower than a grid cell, with no grid node inside it,
   is not drawn; where the lidar finds mapped water more than 1.5 m above the river, or a bar
   in midstream, the shore there follows the 5 m grid (smoothed) rather than the outline.

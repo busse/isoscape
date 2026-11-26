@@ -1,0 +1,327 @@
+{
+ "about": "Floods series d3: the close-up boxes of the two sets. `at` is the box's center (lon, lat); each area's boxes are `size` SVG units (Shockoe 340 by 165, 170 m across at the plate's scale of 2; Manchester 320 by 320), shaped to the sheet's cells. Shockoe boxes are drawn for Agnes 1972 beside its dry twin; Manchester boxes for the 1972 height against today's wall beside the same without the wall. Notes are one line each, from the series' research (drafts/richmond-floods/casestudy/2026-11-23-02-research-river-floods-and-the-wall/) and the floods log. rc1: the station's box moved 120 m to show its south end and shed beside I-95 (in d3 the viaduct filled it); Mayo Island (two buildings and a parking lot) replaced by the canal at Virginia and Byrd streets, where the riverfront meets the north wall's west end (Tobacco Row at 22nd and 23rd was tried: dry at its center in every flood but 1972); the across-floods strips take every Shockoe flood, Fran and 2020 with the wall. Notes and their sources are in drafts/richmond-floods/notes.json. rc1 fix round: the canal box moved 30 m west, clear of the wall's label; the market box 20 m east, so Gaston's pin A falls inside it. rc2: Shockoe boxes are 300 by 149 units (150 m across), untangled: box 2 moved 28 m west so no frame or badge falls in another; boxes 1 to 3 give their depth at the named gauge place inside them (`depthAt`, `depthName`), so one place has one number. `lists`: the Gaston sheet's own boxes (places with water or a named report) and the with-wall sheets' (1996, 2020), 300 by 111 (a three-column layout). rc2 fix: box 1 moved 33 m nearer so the 17th and Main gauge sits inside it; Gaston's boxes 260 units across, box 3 centered between pins D and E.",
+ "shockoe": {
+  "region": "richmond-floods-shockoe",
+  "pair": [
+   [
+    "1972",
+    1972
+   ],
+   [
+    "1972-dry",
+    1972
+   ]
+  ],
+  "across": [
+   [
+    "1936",
+    1936
+   ],
+   [
+    "1969",
+    1969
+   ],
+   [
+    "1972",
+    1972
+   ],
+   [
+    "1985",
+    1985
+   ],
+   [
+    "1996",
+    1996
+   ],
+   [
+    "gaston-b",
+    2004
+   ],
+   [
+    "2020",
+    2020
+   ]
+  ],
+  "boxes": [
+   {
+    "n": 1,
+    "id": "market",
+    "title": "17th Street Market",
+    "at": [
+     -77.42771,
+     37.53339
+    ],
+    "note": "The lowest blocks of the Bottom, where the water stands in nearly every flood.",
+    "depthAt": [
+     -77.428532,
+     37.533434
+    ],
+    "depthName": "17th and Main"
+   },
+   {
+    "n": 2,
+    "id": "station",
+    "title": "Main Street Station and its train shed",
+    "at": [
+     -77.42923,
+     37.53465
+    ],
+    "note": "The station of 1901 and its long shed, standing in the water.",
+    "depthAt": [
+     -77.42916,
+     37.5346
+    ],
+    "depthName": "Main Street Station"
+   },
+   {
+    "n": 3,
+    "id": "dock",
+    "title": "17th and Dock, the canal's end",
+    "at": [
+     -77.42965,
+     37.53228
+    ],
+    "note": "Where the Bottom meets the river; the wall's Dock Street opening today.",
+    "depthAt": [
+     -77.429647,
+     37.532275
+    ],
+    "depthName": "17th and Dock"
+   },
+   {
+    "n": 4,
+    "id": "slip",
+    "title": "Shockoe Slip, 14th and Cary",
+    "at": [
+     -77.43244,
+     37.53453
+    ],
+    "note": "The water's edge at the foot of downtown."
+   },
+   {
+    "n": 5,
+    "id": "canal",
+    "title": "The canal at Virginia and Byrd streets",
+    "at": [
+     -77.43449,
+     37.53296
+    ],
+    "note": "The island under the river, its buildings in it."
+   },
+   {
+    "n": 6,
+    "id": "cary18",
+    "title": "18th and Cary, between Cary and Dock streets",
+    "at": [
+     -77.4268,
+     37.531
+    ],
+    "note": "Warehouses between Cary and Dock streets, wet in every flood here."
+   },
+   {
+    "n": 7,
+    "id": "franklin",
+    "title": "East Franklin and Grace, 17th to 19th",
+    "at": [
+     -77.4264,
+     37.5348
+    ],
+    "note": "Rows of shops and houses from 1842 to 1913, most of them still standing."
+   }
+  ],
+  "size": [
+   300,
+   142
+  ],
+  "lists": {
+   "gaston": {
+    "size": [
+     260,
+     112
+    ],
+    "sheets": [
+     "shockoe-2004"
+    ],
+    "boxes": [
+     {
+      "n": 1,
+      "id": "g-market",
+      "title": "17th Street Market and Havana '59 (pins A, B)",
+      "at": [
+       -77.428122,
+       37.534022
+      ],
+      "depthAt": [
+       -77.42826,
+       37.53399
+      ],
+      "depthName": "the market (pin A)"
+     },
+     {
+      "n": 2,
+      "id": "g-dock",
+      "title": "Bottoms Up, 17th and Dock (pin C)",
+      "at": [
+       -77.429339,
+       37.532301
+      ],
+      "depthAt": [
+       -77.42934,
+       37.5323
+      ],
+      "depthName": "Bottoms Up (pin C)"
+     },
+     {
+      "n": 3,
+      "id": "g-station",
+      "title": "15th and Main, Main Street Station (pins D, E)",
+      "at": [
+       -77.429768,
+       37.534713
+      ],
+      "depthAt": [
+       -77.430374,
+       37.534548
+      ],
+      "depthName": "15th and Main (pin D)"
+     },
+     {
+      "n": 4,
+      "id": "g-valley",
+      "title": "The valley above: 17th Street to Franklin",
+      "at": [
+       -77.427979,
+       37.535735
+      ]
+     }
+    ]
+   },
+   "wall": {
+    "size": [
+     300,
+     106
+    ],
+    "sheets": [
+     "shockoe-1996",
+     "shockoe-2020"
+    ],
+    "boxes": [
+     {
+      "n": 1,
+      "id": "w-market",
+      "title": "17th Street Market, behind the wall",
+      "at": [
+       -77.4277,
+       37.53372
+      ]
+     },
+     {
+      "n": 2,
+      "id": "w-dock",
+      "title": "17th and Dock, the wall's Dock Street closure",
+      "at": [
+       -77.42965,
+       37.53228
+      ]
+     },
+     {
+      "n": 3,
+      "id": "w-canal",
+      "title": "The canal at Virginia and Byrd, the wall's west end",
+      "at": [
+       -77.43449,
+       37.53296
+      ]
+     },
+     {
+      "n": 4,
+      "id": "w-chapel",
+      "title": "Chapel Island, on the river side",
+      "at": [
+       -77.4235,
+       37.5268
+      ]
+     },
+     {
+      "n": 5,
+      "id": "w-shiplock",
+      "title": "Great Shiplock Park, past the wall's east end",
+      "at": [
+       -77.42125,
+       37.52621
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "manchester": {
+  "region": "richmond-floods-manchester",
+  "pair": [
+   [
+    "agnes-today",
+    2026
+   ],
+   [
+    "agnes-today-nowall",
+    2026
+   ]
+  ],
+  "boxes": [
+   {
+    "n": 1,
+    "id": "hull",
+    "title": "Hull Street at the Mayo Bridge",
+    "at": [
+     -77.4352,
+     37.5257
+    ],
+    "note": "The bridge foot, inside the wall: dry with it, deep without."
+   },
+   {
+    "n": 2,
+    "id": "flats",
+    "title": "The flats at 5th and Stockton",
+    "at": [
+     -77.436818,
+     37.522792
+    ],
+    "note": "Warehouses and shops on the old floodplain the wall now guards."
+   },
+   {
+    "n": 3,
+    "id": "tanks",
+    "title": "The tank farm",
+    "at": [
+     -77.4322,
+     37.5213
+    ],
+    "note": "Storage tanks on the flats, behind the wall."
+   },
+   {
+    "n": 4,
+    "id": "wall",
+    "title": "On the wall",
+    "at": [
+     -77.4372,
+     37.5266
+    ],
+    "note": "The south wall west of the Mayo Bridge: water on the river side, dry ground behind."
+   },
+   {
+    "n": 5,
+    "id": "plant",
+    "title": "The treatment plant grounds",
+    "at": [
+     -77.4235,
+     37.5175
+    ],
+    "note": "The earthen levee is not mapped; the lidar's ridge along I-95 may be it; whether the plant is inside it is not in our data."
+   }
+  ],
+  "size": [
+   320,
+   320
+  ]
+ }
+}

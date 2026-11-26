@@ -9,13 +9,14 @@ unlisted: true
 
 Every piece of work on isoscape, from a first look at a subject to a print for sale, moves through the same stages: rough draft, working draft, final draft and final production. A version number in a print's title block is given only at final production, and names an edition someone could own. Before that, work is counted in draft rounds (d1, d2) and release candidates (rc1, rc2). The rules are in [Changes](changes.md#how-versions-work-from-here) and [How it's made](how-its-made.md#stages-and-inspection).
 
-This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 25, 2026. The page and the board were set up with Claude.
+This page is generated from the project's board (`catalog/pipeline.json`) by `tools/release/board.py page`. It was last updated on November 26, 2026. The page and the board were set up with Claude.
 
 | Stage | Entries |
 |---|---|
 | research | 2 |
 | final draft | 1 |
 | final production | 47 |
+| outline | 1 |
 | published | 1 |
 | in work | 6 |
 | owner test | 1 |
@@ -26,7 +27,9 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 ## Waiting on a decision
 
+- **Richmond's floods over time: how much went under, before and after the floodwall**: Final draft rc3 passed the independent recheck (2026-11-25); the owner confirmed the Gaston sheet's look and the shorter title. The release decision is deferred by the owner until he has read the editorial (story-richmond-floods). Branches feature/flood-surface and feature/flood-rain, unmerged. Record: drafts/richmond-floods/casestudy/.
 - **Downtown Richmond through time: its own page in the explorer (year view, timeline, compare two years)**: Merged and published 2026-11-23 (main cb7b545) on the owner's word to ship and review on production. Owner is reviewing the live page; not yet checked on a real phone (touch drag, pinch, iOS Safari).
+- **Richmond's floods, drawn on the ground they covered: the editorial for the floods series**: Ready to publish (owner, 2026-11-26: ship). The 14 fact-check fixes applied; title shortened; listed (pdf: true, nav and front page); editorial release record v1 (releases/story-richmond-floods/v1.json; rebuild check reproduced both steps). The coordinator merges, publishes and sets the stage to published once live. No outside parties contacted.
 - **Shop: default to the unframed print, curated collections and sort order, story and set links, menu**: Reviewed 2026-11-22 (ISO-TEST/handoff/shop-review/REVIEW.md). Handed to the Opus 5.5 explorer session, which shows a change sheet first; nothing applied to the live store until the owner says yes.
 - **Explorer on a phone: no sideways scroll; compare sliders by thumb**: approved for production by the owner on 2026-11-21; merged and published. Tested in Chrome's phone emulation only: the owner's check on an iPhone is still worth doing (no sideways scroll; slider drag, tap and swipe; lightbox buttons).
 
@@ -41,7 +44,7 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 
 | Plate | Title | Kind | Version | On sale |
 |---|---|---|---|---|
-| — | Richmond's floods over time: how much went under, before and after the floodwall | batch | — | no |
+| — | Richmond's floods over time: how much went under, before and after the floodwall | batch | 1.0.0-rc3 | no |
 
 ## Final production
 
@@ -94,6 +97,12 @@ This page is generated from the project's board (`catalog/pipeline.json`) by `to
 | STC·14 | Broad and Laurel, Richmond Streetcars 1925 | set box | 3.0.0 | yes, version 3 |
 | STC·M | Richmond's Streetcars, 1925: The System Map | set map | 4.0.0 | yes, version 4 |
 | — | Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36) | print | 1.0.0 | no |
+
+## Outline
+
+| Plate | Title | Kind | Version | On sale |
+|---|---|---|---|---|
+| — | Richmond's floods, drawn on the ground they covered: the editorial for the floods series | story | — | no |
 
 ## Published
 
@@ -167,4 +176,5 @@ Small faults seen only up close are listed here, so they are known and not repor
 - **Church Hill and Jefferson Park, Richmond Streetcars 1925** (STC·07): a spur runs through a low building.
 - **Manchester, Richmond Streetcars 1925** (STC·09): the Forest Hill line takes a tight hairpin; the line bends sharply at the Mayo Bridge landing.
 - **Richmond's Streetcars, 1925: The System Map** (STC·M): the Fulton line touches the corner of the Armitage building; a stray rock mark in the river.
+- **Richmond's floods over time: how much went under, before and after the floodwall**: 12 painted-over slivers on the Shockoe plates, under about 1.5 mm at print size (the same 12 as rc1); floodwall joints lap 1.5 to 2.5 m at sharp bends; traced footprints under less than half of today's buildings are drawn (sanborn-1924-2219 the largest); buildings the water tops are left out of the plate but drawn on its dry twin; a short shore hook where the not-known ground meets a creek mouth; short ink hooks at two small islands in the falls; the Gaston band's dashed edge up to one grid cell beyond the wall's foot.
 - **Why does it always seem like there's a Dollar General on the edge of town? (editorial poster, 24x36)**: Mineral: the town arrow is drawn over a nearby dollar store's square and a grocery diamond; Lake of the Woods: a grocery diamond is hidden under the store square; Honaker: the town arrow touches a nearby dollar store's square.

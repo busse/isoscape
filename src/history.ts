@@ -21,6 +21,7 @@ import { join } from 'node:path'
 import { centroid, pointInRing, type Vec2 } from './geom.ts'
 import type { Feature, PolygonFeature, Tags } from './osm.ts'
 import { fetchBounds, type Region } from './region.ts'
+import type { TintToneSet } from './tint-tones.ts'
 
 export interface Epoch {
   readonly year: number
@@ -226,8 +227,19 @@ export interface TracedBuilding {
   readonly from: number
   /** First year it is known (or assumed) to be gone. */
   readonly to: number
-  /** How `to` was found: a later map without it, a building on its site, a highway, or assumed. */
-  readonly end: 'map' | 'rebuilt' | 'highway' | 'assumed'
+  /**
+   * How `to` was found: a later map without it, a building on its site, a highway, or assumed;
+   * or, in a series with an evidence layer (`History.evidence`), photographs (`evidence`).
+   */
+  readonly end: 'map' | 'rebuilt' | 'highway' | 'assumed' | 'evidence'
+  /** The last edition it is mapped on. */
+  readonly lastSeen?: number
+  /**
+   * With an evidence layer: the last year it is seen standing. After it, until `to`, it is drawn
+   * as unconfirmed (`unconfirmed`); `source` says what dates it.
+   */
+  readonly seen?: number
+  readonly source?: string
   readonly material: 'brick' | 'frame' | 'stone' | 'iron' | 'special' | 'fireproof'
   readonly storeys: number
   readonly edition: number
@@ -297,6 +309,13 @@ export interface History {
   readonly traced: readonly TracedBuilding[]
   /** Ground rebuilt as it stood before later works, for earlier years (see `GroundRestoration`). */
   readonly ground?: readonly GroundRestoration[]
+  /**
+   * An evidence layer (the floods series' period city): presence calls for buildings from dated
+   * photographs and maps. Traced buildings it lists get their end from it, and today's undated
+   * buildings it lists get a year (see `evidenceEnd`, `evidenceStart`, `applyEvidence`). A series
+   * without one is drawn exactly as before.
+   */
+  readonly evidence?: Evidence
   /**
    * Minor streets (tertiary, residential, service, unclassified, living streets and paths) drawn only
    * where a building of the year stands within this many meters: a street with no house on it
@@ -464,6 +483,8 @@ export interface Tint {
   readonly roads?: readonly string[]
   /** A key under the year caption: a heading, one label per value, and a source line. */
   readonly legend?: { readonly title: string; readonly labels: readonly string[]; readonly source?: string }
+  /** Paint the values in one hue, light to deep (`rain`, see tint-tones.ts), not the palette's four tones. */
+  readonly tones?: TintToneSet
   readonly note?: string
   /** Each tinted polygon: its tone (index into `values`) and its rings, lon/lat, outer first. Read from `file` by `loadHistory`. */
   readonly areas?: readonly { readonly tone: number; readonly polygons: readonly (readonly (readonly Vec2[])[])[] }[]
@@ -615,7 +636,12 @@ export const loadHistory = async (path: string): Promise<History> => {
       return later === b.from ? b : { ...b, from: later }
     })
   }
+  // An evidence layer (named by path) gives traced buildings with an assumed end their end.
+  const evPath = (raw as { evidence?: unknown }).evidence
+  const evidence = typeof evPath === 'string' ? await loadEvidence(evPath) : undefined
+  if (evidence !== undefined) traced = tracedWithEvidence(traced, evidence)
   return {
+    ...(evidence === undefined ? {} : { evidence }),
     epochs: raw.epochs ?? [], features: raw.features ?? [], rules: raw.rules ?? [], present: raw.present ?? new Date().getFullYear(),
     dates: raw.dates ?? [], ...(raw.sanborn === undefined ? {} : { sanborn: raw.sanborn }), traced,
     ...(raw.ground === undefined ? {} : { ground: raw.ground }),
@@ -660,6 +686,128 @@ export const loadHistory = async (path: string): Promise<History> => {
 
 export const alive = (from: number | null | undefined, to: number | null | undefined, year: number): boolean =>
   (from === null || from === undefined || from <= year) && (to === null || to === undefined || year < to)
+
+// ---- evidence: presence from dated photographs (the floods series' period city) --------------
+
+/** One look at a building in one dated source: a photograph, or a traced map edition. */
+export interface Sighting {
+  readonly date: number
+  readonly call: 'present' | 'gone' | 'unclear'
+  readonly source: string
+  /** The automatic call, before any look at the contact sheets. */
+  readonly machine?: string
+  /** Whether a look confirmed the automatic call or changed it ("changed from gone"), or "on sheet". */
+  readonly look?: string
+  readonly score?: Readonly<Record<string, number>>
+}
+
+/** An evidence layer as read from its file (`evidence` in a history file names it). */
+export interface Evidence {
+  readonly file: string
+  /** Traced buildings, by id: sightings after the last map that shows them. */
+  readonly traced: Readonly<Record<string, readonly Sighting[]>>
+  /** Today's undated buildings, by OSM id: sightings from the oldest source to today. */
+  readonly today: Readonly<Record<string, readonly Sighting[]>>
+}
+
+/**
+ * Which end of an uncertain span is drawn. A building last seen standing at P and first seen gone
+ * at G may have gone any time between: `later` (the default) draws it until G, as unconfirmed
+ * after P; `earlier` ends it after P.
+ */
+export const END_BOUND: 'later' | 'earlier' = 'later'
+
+/**
+ * Where an undated building of today starts. `seen` (the default): drawn from the first source
+ * that shows it, and as unconfirmed for the `UNSEEN_BEFORE` years before that (never at or before
+ * a source that shows the spot without it). `earlier`: as unconfirmed all the way back to the
+ * last source that shows the spot without it.
+ */
+export const START_BOUND: 'seen' | 'earlier' = 'seen'
+
+/**
+ * Years before its first sighting that a building is still drawn, as unconfirmed: the photograph
+ * of 1974 postdates Agnes (1972) by two years and Camille (1969) by five, so a building on it but
+ * on no earlier source is "not ascertained" for both, not absent.
+ */
+export const UNSEEN_BEFORE = 5
+
+/**
+ * A traced building's end from its sightings: `seen` the last year it is seen standing (the
+ * later of its last map and any photograph that shows it), `to` the first year it is seen gone
+ * after that (by `bound`). Unclear sightings say nothing. Null when no sighting finds it gone
+ * (the caller keeps its old end).
+ */
+export const evidenceEnd = (
+  lastSeen: number, sightings: readonly Sighting[], bound: 'later' | 'earlier' = END_BOUND,
+): { seen: number; to: number; gone: number; source: string } | null => {
+  const sorted = [...sightings].sort((a, b) => a.date - b.date)
+  let seen = lastSeen
+  let seenBy = 'the map'
+  for (const s of sorted) if (s.call === 'present' && s.date > seen) { seen = s.date; seenBy = s.source }
+  const gone = sorted.find((s) => s.call === 'gone' && s.date > seen)
+  if (gone === undefined) return null
+  const to = bound === 'later' ? gone.date : seen + 1
+  const source = seen === lastSeen
+    ? `last mapped ${lastSeen}; ${gone.source}: gone`
+    : `${seenBy}: standing; ${gone.source}: gone`
+  return { seen, to, gone: gone.date, source }
+}
+
+/**
+ * An undated building's start from its sightings: `seen` the first year it is seen standing with
+ * no later sighting of the spot empty (a building seen, then gone, then seen again was rebuilt:
+ * the later one counts), `from` the first year it is drawn, as unconfirmed until `seen`. Null when
+ * no sighting shows it (it stays undated: today's scene only).
+ */
+export const evidenceStart = (
+  sightings: readonly Sighting[], bound: 'seen' | 'earlier' = START_BOUND, before = UNSEEN_BEFORE,
+): { from: number; seen: number; source: string } | null => {
+  const sorted = [...sightings].sort((a, b) => a.date - b.date)
+  let lastGone = -Infinity
+  for (const s of sorted) if (s.call === 'gone') lastGone = s.date
+  const first = sorted.find((s) => s.call === 'present' && s.date > lastGone)
+  if (first === undefined) return null
+  const floor = Number.isFinite(lastGone) ? lastGone + 1 : -Infinity
+  const from = bound === 'earlier' ? (Number.isFinite(floor) ? floor : first.date - before) : Math.max(floor, first.date - before)
+  return { from: Math.min(from, first.date), seen: first.date, source: `${first.source}: standing` }
+}
+
+/** Read an evidence file (see tools/floods/period/evidence.py). */
+export const loadEvidence = async (file: string): Promise<Evidence> => {
+  const raw = JSON.parse(await readFile(file, 'utf8')) as { traced?: Evidence['traced']; today?: Evidence['today'] }
+  return { file, traced: raw.traced ?? {}, today: raw.today ?? {} }
+}
+
+/** Traced buildings with an assumed end, given their end by the evidence where it has one. */
+export const tracedWithEvidence = (traced: readonly TracedBuilding[], ev: Evidence, bound: 'later' | 'earlier' = END_BOUND): TracedBuilding[] =>
+  traced.map((b) => {
+    const s = b.end === 'assumed' ? ev.traced[b.id] : undefined
+    if (s === undefined) return b
+    const e = evidenceEnd(b.lastSeen ?? b.edition, s, bound)
+    if (e === null) return b
+    return { ...b, to: e.to, end: 'evidence', seen: e.seen, source: e.source }
+  })
+
+/**
+ * Today's undated buildings dated from the evidence: each the evidence lists, and that has no
+ * date of its own, gets `{ year: from, seen, source: 'evidence' }`. Dated buildings are left as
+ * they are.
+ */
+export const applyEvidence = (dates: ReadonlyMap<string, Dated>, ev: Evidence, bound: 'seen' | 'earlier' = START_BOUND): Map<string, Dated> => {
+  const out = new Map(dates)
+  for (const [id, s] of Object.entries(ev.today)) {
+    if (out.has(id)) continue
+    const st = evidenceStart(s, bound)
+    if (st === null) continue
+    out.set(id, { year: st.from, seen: st.seen, source: 'evidence', note: st.source })
+  }
+  return out
+}
+
+/** Whether a building drawn in `year` is drawn as unconfirmed: outside the span its evidence confirms. */
+export const unconfirmedTraced = (b: Pick<TracedBuilding, 'seen'>, year: number): boolean => b.seen !== undefined && year > b.seen
+export const unconfirmedDated = (d: Pick<Dated, 'seen'> | undefined, year: number): boolean => d?.seen !== undefined && year < d.seen
 
 /**
  * A year from an OSM date: "1885", "1885-04-01", "c. 1890", "~1850", "1890s" (taken as 1890),
@@ -857,7 +1005,13 @@ export interface Dated {
    * (the Capitol's central block before its wings), whose full outline is dated from then.
    */
   readonly until?: number
-  readonly source: 'curated' | 'osm' | 'parcel'
+  readonly source: 'curated' | 'osm' | 'parcel' | 'evidence'
+  /**
+   * Evidence only (`History.evidence`): the year it is first seen standing (a photograph or a
+   * traced map). Drawn from `year`; before `seen` it is drawn as unconfirmed. `note` cites it.
+   */
+  readonly seen?: number
+  readonly note?: string
 }
 
 /** A parking structure: what `parkingFrom` holds to a later year when only its parcel dates it. */
@@ -979,8 +1133,8 @@ export interface YearBuiltSource {
  * Where a dated region's year-built parcels may be: its own data folder first (where `fetch`
  * writes them), then the shared folder it borrows OSM and elevation from (`"data"`).
  */
-export const yearBuiltDirs = (r: Pick<Region, 'name' | 'data'>, root = 'data'): string[] =>
-  [...new Set([join(root, r.name), join(root, r.data ?? r.name)])]
+export const yearBuiltDirs = (r: Pick<Region, 'name' | 'data' | 'time'>, root = 'data'): string[] =>
+  [...new Set([join(root, r.name), join(root, r.data ?? r.name), ...(r.time?.yearBuiltFrom === undefined ? [] : [join(root, r.time.yearBuiltFrom)])])]
 
 /**
  * Read the year-built parcels from the first of `dirs` that holds them. A dated series without

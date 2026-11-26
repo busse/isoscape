@@ -802,6 +802,15 @@
    "v3.json"
   ]
  },
+ "story-richmond-floods": {
+  "title": "Richmond, VA, under water: the James River floods of 1771 to 2020 and Gaston's rain of 2004 (story page)",
+  "current": 1,
+  "kind": "editorial",
+  "for_sale": false,
+  "records": [
+   "v1.json"
+  ]
+ },
  "streetcars-1925-01-westhampton": {
   "title": "Westhampton Park, Richmond Streetcars 1925",
   "current": 3,

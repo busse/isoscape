@@ -500,7 +500,7 @@ types itself. `--png` shells out to `rsvg-convert` (`brew install librsvg`).
 | `isoscape fetch <region>` | download OSM data (`osm.json`) and elevation (`dem.bin.gz`) into `data/<region>/`; `--osm-only`, `--dem-only` |
 | `isoscape info <region>` | the chosen bearing, feature counts, and where building heights came from |
 | `isoscape locate <region> <lon,lat>...` | where places fall in the built picture, in SVG units (`--year` for a dated scene); the print tools use it to place markers and crops |
-| `isoscape build <region>` | write `out/<region>.svg` and `out/<region>.html`, archive the build, refresh the explorer; `--year <yyyy>` for one scene of a dated region |
+| `isoscape build <region>` | write `out/<region>.svg` and `out/<region>.html`, archive the build, refresh the explorer; `--year <yyyy>` for one scene of a dated region; `--flood <name>` for one of its floods (see Floods) |
 | `isoscape series <region>` | build every year of a dated region, each as `<region>-<year>` |
 | `isoscape explorer` | rewrite `out/index.html` from the archive |
 | `isoscape backfill <commit> <region>` | build a region with an earlier commit's code and archive it |
@@ -749,6 +749,134 @@ what the Turnpike took, inside today's footprint (a stand-in for the 1958 right-
 and elevation and keeps only its year-built parcels in its own `data/` folder. A build looks for
 `yearbuilt.json` in the region's own folder first, then in the shared one, and stops with an
 error if neither has it: without it nearly every building would be undated.
+
+## Floods
+
+A region can list floods and floodwalls, and `build --flood <name>` draws one over today's
+city as `<region>-flood-<name>` (also `info --flood <name>` for its counts). It is a bathtub
+fill on the 5 m height grid, not hydraulics, made for the series Richmond's floods over time,
+published as the story page `pages/richmond-floods.md` (written by `tools/stories/richmond-floods/`). In a dated region, `build --year <yyyy> --flood <name>` draws the
+flood on the city of that year, and the year heads the flood's caption.
+
+```jsonc
+"floodwalls": [
+  { "name": "Richmond floodwall", "osm": "flood_wall", "top": 12.5, "maxGap": 60,   // OSM wall=flood_wall ways, chained
+    "from": 1994, "sources": ["…"], "label": "Floodwall (1994)" },                  // absent before its year; labeled on the map
+  { "name": "tie-in", "line": [[-77.4361, 37.5342], [-77.4364, 37.5349]], "top": 12.5 }
+],
+"floods": {
+  "agnes": { "title": "…", "caption": "…", "level": 10.8, "walls": false },
+  "sloped": { "profile": [[lon, lat, 11.6], [lon, lat, 10.6]] },     // falls along the river
+  "rain": { "walls": true, "ponds": [{ "level": 8.9, "ring": [[lon, lat], …] }] },
+  "bowl": { "ponds": [{ "level": 5.81, "from": [lon, lat], "ring": [[lon, lat], …] }] },  // only the pool connected to a low point
+  "estimate": { "level": 11.6, "uncertainty": 0.9, "band": "beyond" },  // the range drawn as a pale band ("range": water at its low end)
+  "gauged": { "level": 10.8, "gauges": [{ "at": [lon, lat], "name": "17th and Main" }] },  // staff gauges with the depth in feet
+  "reports": { "soft": true, "gates": "open", "markers": [{ "n": "1", "at": [lon, lat], "key": "1  …" }],
+               "notes": ["{floodAcres} acres …"] }   // a soft pool, numbered places, more caption lines
+}
+```
+
+`gates` says whether a wall's openings (the gaps between OSM's pieces) are shut, so the wall
+runs across them (the default, a river flood), or open: drawn as a dashed line and letting
+water through. `{measure}` in a caption line becomes the build's own number for it (any of
+`info`'s measures). A region's `floodStyles` picks its flood looks (below), and
+`time.yearBuiltFrom` names another region whose data folder holds the year-built parcels.
+
+Levels are meters in the elevation model's datum. `within` (a ring) limits the river's
+flood; `walls` is true, false or a list of wall names. A region without `floods`, or a build
+without `--flood`, is drawn exactly as before. `regions/richmond-floods.json` (and
+`richmond-floods-x1.json`, the same with the terrain not exaggerated) hold the test floods,
+all at placeholder levels. The method, the drawing, the counts and what a bathtub fill gets
+wrong are in *How it's made*, under "Floods". `--flood-style <names>` tries the looks in
+`FLOOD_STYLES` (`palette.ts`: `silt`, `ripple`, `murk`, `pale-silt`, `silt-sheen`, `blue-silt`,
+`grey-tan`, `ochre-wash`, `umber`, `green-brown`, `blue-grey`, `ochre`, `knockback` for the water;
+`aquarium-50`, `aquarium-70`, `aquarium-85` (see-through water), `tide-mark`, and `xray`, `xray-fade`, `xray-heavy` (the wall under the water drawn over it); `wall-bold`, `wall-strong`, `wall-cased`,
+`wall-cased-red` for the wall) without changing any palette.
+
+**The series' first draft** (d1) is `regions/richmond-floods-d1.json`, written by
+`tools/floods/make_region.py` from the checked levels (`levels.json` of the research), with one
+flood per plate; `tools/floods/plates.sh` builds the plates, `tools/floods/counts.py` writes
+`drafts/richmond-floods/counts.json` (each plate's level, range, city year and counts, and the
+same level without the wall for a plate with it), and `tools/floods/coverage.ts` says where a
+dated view's buildings come from, by area.
+
+**The period city from evidence** (d2). The two area regions (`regions/richmond-floods-shockoe.json`,
+`-manchester.json`) read `history/richmond-floods.json`, which extends the downtown history and
+names an evidence layer, `history/evidence/richmond-floods.json`: presence calls (present, gone,
+unclear) for every traced building whose end was assumed and every building of today with no
+year built, from the 1974 USGS orthophoto map and the 1999, 2002, 2017 and 2021 orthophotos,
+with Sanborn matches and the 1980 National Register survey as checks. `loadHistory` gives the
+traced buildings their end from it (`evidenceEnd`, `END_BOUND`), the build dates today's
+undated buildings from it (`applyEvidence`, `evidenceStart`, `START_BOUND`, `UNSEEN_BEFORE`),
+and a building outside the span its evidence confirms is drawn in the region's unconfirmed look
+(`unconfirmed-slate-both`, a flood style; `{periodUnconfirmed}` in a caption counts them). On a
+flood plate, unconfirmed traced outbuildings far from the water are left out (`isOutbuilding`;
+`{outbuildingsHidden}`), and a flood's dry twin names it with `twinOf` so both draw the same
+buildings. A history
+without `evidence` is drawn exactly as before. `tools/floods/period/` makes the layer: `fetch.py`
+(the images, with URLs and checksums, cropped to `data/floods-period/`, outside git),
+`register.py`, `inventory.ts`, `score.py`, `sanborn.py`, `sheets.py` and `panels.py` (the contact
+sheets and block panels for the look), `looks.py` (the look's notes into calls), `nr1980.py`,
+`evidence.py`; then `plates.sh`, `crops.py`, `coverage.ts --history`, `choices.ts` and `counts.py`
+for the plates and their counts, and `unchanged.sh` to prove other views unchanged. Adopting it
+series-wide would mean calls for the rest of downtown's assumed ends (839 assumed in `lost.geojson`, 405 of them in the Shockoe frame and called here; the rest
+outside these frames) and a new edition of anything sold that shows a year after 1924 (the evidence also turns buildings last mapped in 1924 to unconfirmed).
+
+**Strict occlusion.** A region with `"occlusion": "strict"` (the two flood areas) draws concave
+buildings as convex pieces, masks each x-ray band against nearer items painted before it, orders
+buildings overlapping by under 0.5 m as apart and leaves heavier overlaps unordered, and mitres the
+floodwall's pieces with casings cut square to the screen (see *How it's made*, Floods).
+`src/occlusion.ts` holds the geometry; `tools/floods/d3/occlusion.ts` lists every place a plate
+paints something over a nearer item, and every building within 15 m of a wall (`STRICT=0` for the
+same plate drawn without it).
+
+**The working draft d3** of the two sets is made by `tools/floods/d3/`: `floods.py` writes the
+plates' three caption lines and their dry twins into the area regions; `plates.sh` builds every
+plate and twin; `boxes.json` lists the boxes (center, size, one-line note); `boxcounts.ts` counts
+each box on each plate (depth at its center from the 2 m lidar, acres under water, buildings
+shown and in water, confirmed and unconfirmed); `render_boxes.py` cuts the box pairs and the
+across-floods strips from the plates' SVGs; `sheet.py` composes the 4:3 sheet of each area (a
+composed layout built from `tools/sets/set.py`'s pieces, since the set menu frames boxes in a
+ring and keys by names only); `pairs.py` makes the plate-and-twin pairs and the contact sheets.
+
+**The final draft rc1** (`1.0.0-rc1`) adds, in the area regions, `"tracedCovered": 0.5`: a traced
+footprint half or more under a building of the year is left out (`coveredShare` in `scene.ts`;
+`{tracedCovered}` in a caption counts them). On every flood plate traced buildings now stand in
+the water as today's do (walls from the surface, x-ray bands) and are counted with them
+(`{floodShown}`, `{floodShownInWater}`, `{floodShownDepthMedianFt}`, `{floodShownDepthMaxFt}`);
+piers standing in water get x-ray bands; a dry twin's wall label sits where its flood's does.
+`tools/floods/rc1/`: `notes.py` writes `drafts/richmond-floods/notes.json`, every word the sheets
+print with its sources (URL, or research file and page) and what an earlier draft said that the
+research did not support; `sheet.py` composes one sheet per flood at print size (32 by 24 in at
+300 dpi by default; `--no-boxes` for the 1771 estimate) from those notes, with the stage mark and
+version, and prints the least type size in points; `covered.ts` lists the traced footprints
+still partly under today's buildings; `which.ts` names what paints a point of a plate.
+`tools/floods/d3/floods.py` takes the stage mark as an argument (`"FINAL DRAFT rc1"` by default).
+
+**rc2** (`1.0.0-rc2`, after the independent inspection) adds three drawing rules, all inside a
+flood build: a flood's `unknown` lines (`"unknown": { "lines": [[[lon, lat], …], …], "note": "…" }`)
+make land the with-wall fill reaches only round a missing levee a cross-hatch, out of the flood and
+its counts (`{floodUnknownAcres}`); a bridge deck piece below the water is drawn under it, faintly on
+the surface; and the river, canal and basins are drawn in the flood look's channel color, with no
+waterline across the river's own water. `tools/floods/d3/boxes.json` gains `lists`, a sheet's own
+boxes (Gaston's; the with-wall sheets'), and `depthAt`/`depthName`, the named place a box's depth is
+read at; `notes.json` gains `sheetNotes`, notes that differ by sheet. `tools/floods/d3/floods.py`
+writes every plate's title and first caption line as well as its notes.
+
+**rc3** (`1.0.0-rc3`, the third fix round, approved by the owner) adds a pond's `citySide`
+(`"ponds": [{ …, "citySide": true }]`): the pool does not spread across a floodwall or the line of
+its openings, so Gaston's rain pool stands only behind the wall. The sheet tool
+(`tools/floods/rc1/sheet.py`) keeps a figure on the line of its unit and refuses a sheet where one
+is split ("13.4 / ft"), records every laid-out line in the sheet's `.maps.json` (`lines`), moves a
+wall label that would sit on the map's bottom edge clear of it, and draws the Gaston sheet's rain
+panel (`rain` in `notes.json`: the hourly rain over the Shockoe Creek watershed from the rain
+branch's `rain.json`, with the timed events).
+
+`tools/floods/` holds dev tools for the series' analysis, not used by `build`: `export-dem.ts`
+writes a window of the cached elevation as isoscape reads it, and `spill.py`, `sections.py`,
+`outlet.py` and `charts.py` (numpy, scipy, matplotlib) run the spill-path test for Shockoe
+Bottom on it (where a pool rising from the low point first reaches the James, under several
+assumptions about the floodwall), with its cross-sections and charts.
 
 ## Cutaways
 

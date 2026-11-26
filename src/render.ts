@@ -12,12 +12,17 @@
 import { clipPolygonToRect, clipRingToRect, distToSegment, pointInPolygon, clipSegmentToRect, hash, type Rect, type Ring, type Vec2 } from './geom.ts'
 import { GROUND_ORDER } from './classify.ts'
 import { paintOrder } from './order.ts'
+
+/** With occlusion "strict": how far (meters) two buildings' outlines may overlap and still be ordered as apart (simplifyRing's 0.45 m, and a little). */
+export const TOUCH = 0.5
+import { nearerThanBand, shapesOf, type Painted } from './occlusion.ts'
 import type { Item, Scene, Shape } from './scene.ts'
 import { contours, FALL_REACH, nodeShade, polygonMask, RAPIDS, riverFall, type ContourSegment } from './terrain.ts'
 import { isoBand, type BandPoint } from './isoband.ts'
 import { coverFields as coverFieldsOf, type CoverGroup } from './landcover.ts'
 import { mix } from './palette.ts'
 import { sceneCredits } from './credits.ts'
+import { FLOOD_BANDS, levelAt } from './flood.ts'
 
 const f = (n: number) => (Math.round(n * 10) / 10).toString()
 
@@ -321,7 +326,12 @@ const entryOf = (rings: Ring[]): Entry => {
 }
 
 export const renderSvg = (scene: Scene): Rendered => {
-  const { view, palette: p, region, terrain: T } = scene
+  const { view, region, terrain: T } = scene
+  // On a flood plate the river, canal and basins at their own level are drawn in the flood look's
+  // channel color, the color its key gives them, whether or not the flood's level stands above
+  // them: so a flood that ends partway up the river (2020, above the Mayo Bridge) shows no line
+  // where it ends, and a flood of rain (Gaston) shows its river as the key does.
+  const p = scene.flood !== undefined && scene.palette.flood.channel !== undefined ? { ...scene.palette, water: scene.palette.flood.channel } : scene.palette
   const fr = view.frame
   const slab = region.slab ?? 14
   const opts = region.terrain ?? {}
@@ -332,7 +342,7 @@ export const renderSvg = (scene: Scene): Rendered => {
   /** Water lies on the river's surface, wherever its outline reaches. */
   const drapeWater = (pt: Vec2) => P(pt, T.waterZ(pt))
 
-  const items = paintOrder(scene.items, 96, scene.cut !== undefined, region.cutaway?.order === 'components')
+  const items = paintOrder(scene.items, 96, scene.cut !== undefined, region.cutaway?.order === 'components', region.occlusion === 'strict' ? TOUCH : 0)
   const close = view.scale >= CLOSE_RAIL
 
   // ---- the frame on screen -------------------------------------------------------------------
@@ -368,12 +378,32 @@ export const renderSvg = (scene: Scene): Rendered => {
   }
   const pad = isle === undefined ? 24 : Math.max(24, (ix1 - ix0) * 0.04)
   // A dated scene carries its year as a caption above the plate, in room of its own.
-  const capSize = scene.time === undefined ? 0 : Math.max(28, (x1 - x0) * 0.022)
+  // A flood (experimental) prints its title and caption there too, when it is not dated.
+  // In a dated scene its block takes the year's place, the year set before its title.
+  const floodCap = scene.flood !== undefined && (scene.flood.title !== undefined || scene.flood.caption !== undefined)
+  /** `{measure}` in a flood's caption becomes the build's own number for it. */
+  const fill = (t: string) => t.replace(/\{(\w+)\}/g, (m, k: string) => (scene.stats[k] === undefined ? m : scene.stats[k].toLocaleString('en-US')))
+  const capSize = scene.time === undefined && !floodCap ? 0 : Math.max(28, (x1 - x0) * 0.022)
+  // Wrapped to the plate's width, at about 0.43 em a character (the serif's average).
+  const wrapAt = Math.max(40, Math.floor((x1 - x0) / (capSize * 0.46 * 0.43)))
+  const wrap = (t: string): string[] => {
+    const lines: string[] = []
+    let cur = ''
+    for (const w of t.split(' ')) {
+      if (cur !== '' && cur.length + 1 + w.length > wrapAt) { lines.push(cur); cur = w } else cur = cur === '' ? w : `${cur} ${w}`
+    }
+    if (cur !== '') lines.push(cur)
+    return lines
+  }
+  const floodLines = !floodCap ? [] : [...(scene.flood!.caption === undefined ? [] : [scene.flood!.caption]), ...(scene.flood!.notes ?? [])].map(fill).flatMap(wrap)
   // A graded scene's key (`Tint.legend`) takes two more lines under the caption.
   const key = scene.time === undefined ? undefined : scene.tintLegend
-  const capRoom = scene.time === undefined ? 0 : capSize * ((isle?.caption === undefined ? 2.4 : 3.4) + (key === undefined ? 0 : 1.9))
+  const capRoom = floodCap ? capSize * (1.6 + 0.62 * floodLines.length) : scene.time === undefined ? 0 : capSize * ((isle?.caption === undefined ? 2.4 : 3.4) + (key === undefined ? 0 : 1.9))
   const vb: [number, number, number, number] = [ix0 - pad, top - pad - capRoom, ix1 - ix0 + 2 * pad, bottom - top + 2 * pad + capRoom]
 
+  // A soft pool (`soft`) takes the palette's soft tones and bands, fading in from the land.
+  const softPool = scene.flood?.soft === true && p.flood.softTones !== undefined
+  const floodTones = softPool ? p.flood.softTones! : p.flood.tones
   const out: string[] = []
   // A square plate (no slab: a cutaway) keeps the credit line it was sold with: sentences, and
   // no data-credits attribute (its sheet writes its own credit line, not compose.py), so a sold
@@ -396,6 +426,27 @@ export const renderSvg = (scene: Scene): Rendered => {
     // Graded ground (`Tint`), only in a scene that has it.
     ...(scene.tints === undefined ? [] : p.tint.tones.map((tone, k) => sealed(`tg${k}`, tone))),
     ...(scene.ribbons.some((rb) => rb.kind === 'tintroad') ? [sealed('tintroad', p.tint.road)] : []),
+    // A flood (experimental): its depth bands, the river's channel on its surface, its waterline.
+    ...(scene.flood === undefined ? [] : [
+      // See-through water (`aquarium`): unsealed, at the look's opacity (a sealing stroke would
+      // darken every edge where two pieces meet).
+      ...(p.flood.aquarium === undefined
+        ? [...floodTones.map((tone, k) => sealed(`fl${k}`, tone)), sealed('flc', p.flood.channel)]
+        : [...floodTones.map((tone, k) => `.fl${k}{fill:${tone};fill-opacity:${p.flood.aquarium}}`), `.flc{fill:${p.flood.channel};fill-opacity:${p.flood.aquarium}}`]),
+      `.fle{fill:none;stroke:${p.flood.edge};stroke-width:${f(p.lineWidth * (p.flood.edgeWidth ?? 1.2))};stroke-linejoin:round;stroke-linecap:round}`,
+      ...(scene.flood.signedHigh === undefined ? [] : [
+        p.flood.bandHatch === undefined ? sealed('flb', p.flood.band ?? p.flood.tones[0])
+          : `.flb{fill:url(#flbh);stroke:none}`,
+        `.flbe{fill:none;stroke:${p.flood.bandEdge ?? p.flood.edge};stroke-width:${f(p.lineWidth)};stroke-dasharray:2 2;stroke-linecap:round}`,
+      ]),
+      ...(scene.flood.unknown === undefined ? [] : [
+        `.flu0{fill:${p.flood.unknown ?? p.land};fill-opacity:.45;stroke:none}`,
+        `.flu{fill:url(#fluh);stroke:none}`,
+        `.flue{fill:none;stroke:${p.flood.unknownHatch ?? p.ink};stroke-width:${f(p.lineWidth)};stroke-dasharray:3 2;stroke-linecap:round}`,
+      ]),
+      ...(p.flood.streets === undefined ? [] : [`.flst{fill:${p.flood.streets};fill-opacity:.55}`]),
+      ...(p.flood.ripple === undefined ? [] : [`.flr{fill:none;stroke:${p.flood.ripple};stroke-width:${f(p.lineWidth * 0.9)};stroke-linecap:round}`]),
+    ]),
     // At close scale (CLOSE_RAIL px per meter or more) a track shows its ties, each a
     // rectangle on the ground square to the track (TIE: 2 m by 0.25 m, every 0.67 m, painted in
     // the strips like the rest of the ground), and its two running rails, 1.44 m apart.
@@ -419,6 +470,15 @@ export const renderSvg = (scene: Scene): Rendered => {
     `</style>`,
     `<rect x="${f(vb[0])}" y="${f(vb[1])}" width="${f(vb[2])}" height="${f(vb[3])}" fill="${p.sky}"/>`,
   )
+  // Ground whose protection is not known: a cross-hatch, apart from the range band's.
+  if (scene.flood?.unknown !== undefined) {
+    out.push(`<defs><pattern id="fluh" patternUnits="userSpaceOnUse" width="9" height="9" patternTransform="rotate(45)"><path d="M0 0v9M0 0h9" stroke="${p.flood.unknownHatch ?? p.ink}" stroke-width="1.3"/></pattern></defs>`)
+  }
+  // The range band's hatch (a flood look's `bandHatch`): diagonal strokes in the flood's hue over
+  // a light tint, so the band reads as "maybe under water", not as water.
+  if (scene.flood?.signedHigh !== undefined && p.flood.bandHatch !== undefined) {
+    out.push(`<defs><pattern id="flbh" patternUnits="userSpaceOnUse" width="5" height="5" patternTransform="rotate(45)"><rect width="5" height="5" fill="${p.flood.band ?? p.land}"/><path d="M0 0v5" stroke="${p.flood.bandHatch}" stroke-width="1.8"/></pattern></defs>`)
+  }
 
   // ---- the slab: a cut through the ground along the front edge -------------------------------
   if (slab > 0 && isle === undefined) {
@@ -450,6 +510,24 @@ export const renderSvg = (scene: Scene): Rendered => {
         out.push(`<path fill="${p.slabWater}" d="${pathOf([...pts, [pts[pts.length - 1][0], yBase], [pts[0][0], yBase]])}"/>`)
       }
       k = m + 1
+    }
+    // A flood's water in the cut: from the ground up to its surface, wherever the front edge is
+    // under it, so the slab shows the water's depth in section.
+    const F = scene.flood
+    if (F !== undefined) {
+      const lv = xs.map((e) => levelAt(T, F.level, [e, fr.minY]))
+      const zs = xs.map((e, k) => (Number.isNaN(lv[k]) || lv[k] <= T.elevation([e, fr.minY]) ? NaN : (lv[k] - T.datum) * T.exaggeration))
+      let a = 0
+      while (a < xs.length) {
+        if (Number.isNaN(zs[a])) { a++; continue }
+        let b = a
+        while (b + 1 < xs.length && !Number.isNaN(zs[b + 1])) b++
+        if (b > a) {
+          const surface = xs.slice(a, b + 1).map((e, k) => P([e, fr.minY], zs[a + k]))
+          out.push(`<path fill="${p.flood.tones[p.flood.tones.length - 1]}" d="${pathOf([...surface, ...front.slice(a, b + 1).reverse()])}"/>`)
+        }
+        a = b + 1
+      }
     }
   }
 
@@ -967,6 +1045,52 @@ export const renderSvg = (scene: Scene): Rendered => {
     return out && dry !== '' ? `<g clip-path="url(#${dry})">${out}</g>` : out
   }
 
+  // A flood (experimental; flood.ts): one field per depth band, each at one half where the depth
+  // reaches the band (so `traceCell` cuts it where the ground meets that depth), the river's
+  // channel where the flood covers it, and the surface the water is drawn on.
+  const FL = scene.flood
+  // Each node's signed depth and whether it is the river's own channel (the traced shoreline's
+  // field, where the flood covers it).
+  // The river's own water, flooded or not: where a flood's level falls below the river's surface
+  // (the falls) no depth tone is laid on the river's water between the two edges.
+  const channelField = FL === undefined ? new Float32Array(0) : T.shore
+  /**
+   * The flood's layers, each a test on a point carrying [E′, N′, signed depth, channel]: the
+   * depth bands (each from its own depth up to the next band's, off the channel) and the channel.
+   * They are exclusive, so each piece of the surface is painted once per strip: stacked, each
+   * layer's antialiased far edge let the one beneath show through as a pale line along every
+   * strip's edge.
+   */
+  type FV = [number, number, number, number]
+  const floodBands = softPool ? (p.flood.softBands ?? FLOOD_BANDS) : (p.flood.bands ?? FLOOD_BANDS)
+  const floodLayers: { cls: string; tests: ((v: FV) => number)[] }[] = FL === undefined ? [] : [
+    ...floodBands.map((t, k) => ({
+      cls: `fl${k}`,
+      tests: [(v: FV) => v[2] - t, ...(k + 1 < floodBands.length ? [(v: FV) => floodBands[k + 1] - v[2] - 1e-6] : []), (v: FV) => 0.5 - v[3] - 1e-6],
+    })),
+    { cls: 'flc', tests: [(v: FV) => v[2], (v: FV) => v[3] - 0.5] },
+  ]
+  /** The part of a polygon where `test` is at least zero, its values taken as linear along each edge. */
+  const keepWhere = (poly: readonly FV[], test: (v: FV) => number): FV[] => {
+    const out: FV[] = []
+    for (let k = 0; k < poly.length; k++) {
+      const va = poly[k]
+      const vb = poly[(k + 1) % poly.length]
+      const fa = test(va)
+      const fb = test(vb)
+      if (fa >= 0) out.push(va)
+      if ((fa >= 0) !== (fb >= 0)) {
+        const u = fa / (fa - fb)
+        out.push([0, 1, 2, 3].map((m) => va[m] + (vb[m] - va[m]) * u) as FV)
+      }
+    }
+    return out
+  }
+  const roadEntries = FL === undefined || p.flood.streets === undefined ? [] : ribbonLayer('road').entries
+  const floodLift = (pt: Vec2): Vec2 => {
+    const lv = FL === undefined ? NaN : levelAt(T, FL.level, pt)
+    return P(pt, Number.isNaN(lv) ? T.z(pt) : (lv - T.datum) * T.exaggeration)
+  }
   const paintStrip = (s: Strip) => {
     // Strips overlap their neighbors so no background shows between them, and no two edges
     // may coincide: where two anti-aliased edges land on the same pixel row, a browser
@@ -1260,6 +1384,203 @@ export const renderSvg = (scene: Scene): Rendered => {
       if (froth) parts.push(froth)
       if (foam) parts.push(`<path class="foam" d="${foam}"/>`)
     }
+    // A flood lies over everything on the ground: drawn on its own surface, not draped, cell row
+    // by cell row like the water base (laps and all), each depth band over the one before, then
+    // the river's channel on it, then the waterline where it meets the ground.
+    if (FL !== undefined) {
+      const sd = FL.signed
+      // The range of an estimate (`uncertainty`): the ground between the waterline at the level
+      // drawn and the waterline at the high end, laid on the ground in a pale band, with a dashed
+      // line at its outer edge. Cell row by cell row like the water, exclusive of it.
+      const hi = FL.signedHigh
+      if (hi !== undefined) {
+        let d = ''
+        let line = ''
+        for (const r of rows) {
+          const yHi = r.top ? s.n1 : r.hi
+          const lo = Math.max(lapTo, r.lo)
+          for (let i = iMin; i < iMax; i++) {
+            const k = r.j * T.nx + i
+            const vals: [number, number][] = [[sd[k], hi[k]], [sd[k + 1], hi[k + 1]], [sd[k + T.nx + 1], hi[k + T.nx + 1]], [sd[k + T.nx], hi[k + T.nx]]]
+            if (vals.every(([, h]) => h < 0) || vals.every(([w]) => w >= 0)) continue
+            const y0 = T.y0 + r.j * c
+            const cell: FV[] = [[nodeX(i), y0, vals[0][0], vals[0][1]], [nodeX(i + 1), y0, vals[1][0], vals[1][1]], [nodeX(i + 1), y0 + c, vals[2][0], vals[2][1]], [nodeX(i), y0 + c, vals[3][0], vals[3][1]]]
+            let poly = keepWhere(keepWhere(cell, (v) => v[3]), (v) => -v[2] - 1e-6)
+            if (lo > r.lo || yHi < r.hi) poly = keepWhere(keepWhere(poly, (v) => v[1] - lo), (v) => yHi - v[1])
+            if (poly.length >= 3) d += groundPath(poly.map((v) => drape([v[0], v[1]])))
+            // Its outer edge, in the strip's own rows only.
+            if (r.j < s.j0 || r.j >= s.j1) continue
+            const cuts: Vec2[] = []
+            for (let m = 0; m < 4; m++) {
+              const a = cell[m]
+              const b = cell[(m + 1) % 4]
+              if ((a[3] >= 0) === (b[3] >= 0)) continue
+              const u = a[3] / (a[3] - b[3])
+              cuts.push([a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u])
+            }
+            for (let m = 0; m + 1 < cuts.length; m += 2) line += pathOf([drape(cuts[m]), drape(cuts[m + 1])], false)
+          }
+        }
+        if (d) parts.push(`<path class="flb" d="${d}"/>`)
+        if (line) parts.push(`<path class="flbe" d="${line}"/>`)
+      }
+      // Ground whose protection is not known (`unknown`): laid on the ground like the band, with a
+      // dashed edge, where the field is at least zero.
+      const un = FL.unknown
+      if (un !== undefined) {
+        let d = ''
+        let line = ''
+        for (const r of rows) {
+          const yHi = r.top ? s.n1 : r.hi
+          const lo = Math.max(lapTo, r.lo)
+          for (let i = iMin; i < iMax; i++) {
+            const k = r.j * T.nx + i
+            const vals = [un[k], un[k + 1], un[k + T.nx + 1], un[k + T.nx]]
+            if (vals.every((v) => v < 0)) continue
+            const y0 = T.y0 + r.j * c
+            const cell: FV[] = [[nodeX(i), y0, 0, vals[0]], [nodeX(i + 1), y0, 0, vals[1]], [nodeX(i + 1), y0 + c, 0, vals[2]], [nodeX(i), y0 + c, 0, vals[3]]]
+            let poly = keepWhere(cell, (v) => v[3])
+            if (lo > r.lo || yHi < r.hi) poly = keepWhere(keepWhere(poly, (v) => v[1] - lo), (v) => yHi - v[1])
+            if (poly.length >= 3) d += groundPath(poly.map((v) => drape([v[0], v[1]])))
+            if (r.j < s.j0 || r.j >= s.j1) continue
+            const cuts: Vec2[] = []
+            for (let m = 0; m < 4; m++) {
+              const a = cell[m], b = cell[(m + 1) % 4]
+              if ((a[3] >= 0) === (b[3] >= 0)) continue
+              const u = a[3] / (a[3] - b[3])
+              cuts.push([a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u])
+            }
+            for (let m = 0; m + 1 < cuts.length; m += 2) line += pathOf([drape(cuts[m]), drape(cuts[m + 1])], false)
+          }
+        }
+        if (d) parts.push(`<path class="flu0" d="${d}"/><path class="flu" d="${d}"/>`)
+        // (flu0 is a light tint at part strength, so the streets and ground still read through.)
+        if (line) parts.push(`<path class="flue" d="${line}"/>`)
+      }
+      const cellPoly = (i: number, j: number): FV[] => {
+        const k = j * T.nx + i
+        const y0 = T.y0 + j * c
+        const y1 = y0 + c
+        return [
+          [nodeX(i), y0, sd[k], channelField[k]], [nodeX(i + 1), y0, sd[k + 1], channelField[k + 1]],
+          [nodeX(i + 1), y1, sd[k + T.nx + 1], channelField[k + T.nx + 1]], [nodeX(i), y1, sd[k + T.nx], channelField[k + T.nx]],
+        ]
+      }
+      let floodD = ''
+      for (const layer of floodLayers) {
+        let d = ''
+        for (const r of rows) {
+          // See-through water is painted once: no lap toward the camera, where the next strip's
+          // own water would lie over it and darken a band along every strip.
+          if (p.flood.aquarium !== undefined && r.hi <= s.n0 + 1e-6) continue
+          const yHi = r.top ? s.n1 : r.hi
+          let runStart = -1
+          const flushRun = (iEnd: number) => {
+            if (runStart < 0) return
+            const top: Vec2[] = []
+            const bottom: Vec2[] = []
+            for (let k = runStart; k <= iEnd; k++) {
+              top.push(floodLift([nodeX(k), yHi]))
+              // Rows overlap a little (rowLap) to hide seams; see-through water may not.
+              bottom.push(floodLift([nodeX(k), p.flood.aquarium !== undefined ? Math.max(r.lo, s.n0) : r.yLo]))
+            }
+            d += groundPath([...bottom, ...top.reverse()])
+            runStart = -1
+          }
+          for (let i = iMin; i < iMax; i++) {
+            const cell = cellPoly(i, r.j)
+            if (cell.every((v) => layer.tests.every((t) => t(v) >= 0))) {
+              if (runStart < 0) runStart = i
+              continue
+            }
+            flushRun(i)
+            if (cell.every((v) => v[2] < 0)) continue
+            let poly = cell
+            for (const t of layer.tests) poly = keepWhere(poly, t)
+            if (poly.length < 3) continue
+            const lo = Math.max(p.flood.aquarium !== undefined ? s.n0 : lapTo, r.lo)
+            if (lo > r.lo || yHi < r.hi) poly = keepWhere(keepWhere(poly, (v) => v[1] - lo), (v) => yHi - v[1])
+            if (poly.length >= 3) d += groundPath(poly.map((v) => floodLift([v[0], v[1]])))
+          }
+          flushRun(iMax)
+        }
+        if (d) parts.push(`<path class="${layer.cls}" d="${d}"/>`)
+        if (layer.cls !== 'flc') floodD += d
+      }
+      // Streets under the water (a look's `streets`): the road ribbons laid on the water's
+      // surface in a tone a little lighter than it, cut to the strip's flood, so the street grid
+      // still reads where the water covers it.
+      if (p.flood.streets !== undefined && floodD !== '') {
+        let rd = ''
+        for (const e of roadEntries) {
+          if (e.maxN < band.minY || e.minN > band.maxY) continue
+          for (const clipped of clipPolygonToRect(e.rings, band)) rd += groundPath(densify(clipped, c).map(floodLift))
+        }
+        if (rd) {
+          const id = `fls${strips.indexOf(s)}`
+          parts.push(`<clipPath id="${id}"><path d="${floodD}"/></clipPath><g clip-path="url(#${id})"><path class="flst" d="${rd}"/></g>`)
+        }
+      }
+      // Ripples (a look tried, `ripple`): in the strip's own rows, a short stroke across the frame
+      // in some cells under water off the channel, more where it is deeper.
+      if (p.flood.ripple !== undefined) {
+        let rip = ''
+        for (let j = s.j0; j < s.j1; j++) {
+          for (let i = iMin; i < iMax; i++) {
+            const k = j * T.nx + i
+            if (sd[k] < 0 || sd[k + 1] < 0 || sd[k + T.nx] < 0 || sd[k + T.nx + 1] < 0) continue
+            if (channelField[k] >= 0.5 || channelField[k + T.nx + 1] >= 0.5) continue
+            const hsh = hash(`fr${i},${j}`)
+            const depth = (sd[k] + sd[k + T.nx + 1]) / 2
+            if ((hsh % 1000) / 1000 > 0.18 + 0.32 * Math.min(1, depth / 3)) continue
+            const cx = T.x0 + (i + 0.2 + 0.6 * (((hsh >>> 10) % 100) / 100)) * c
+            const cy = T.y0 + (j + 0.2 + 0.6 * (((hsh >>> 17) % 100) / 100)) * c
+            const len = c * (0.25 + 0.3 * (((hsh >>> 24) % 64) / 64))
+            rip += pathOf([floodLift([cx - len, cy]), floodLift([cx + len, cy])], false)
+          }
+        }
+        if (rip) parts.push(`<path class="flr" d="${rip}"/>`)
+      }
+      // The waterline: where the signed depth crosses zero, cell by cell, over the same stretch
+      // as the contours (the next strip's flood laps back over this one's near edge).
+      const lineBand: Rect = { ...band, minY: s.n0 > fr.minY ? s.n0 + shadeLap : s.n0, maxY: s.n1 < fr.maxY ? s.n1 + shadeLap : s.n1 }
+      let edge = ''
+      for (let j = Math.max(0, s.j0 - 1); j <= s.j1 && j + 1 < T.ny; j++) {
+        for (let i = iMin; i < iMax; i++) {
+          const k = j * T.nx + i
+          // No waterline across the river's own water, where the flood's level gives way to the
+          // river's own surface (the falls): both sides are drawn in the channel's color.
+          if (T.shore[k] >= 0.5 && T.shore[k + 1] >= 0.5 && T.shore[k + T.nx] >= 0.5 && T.shore[k + T.nx + 1] >= 0.5) continue
+          const corners: [Vec2, number][] = [
+            [[nodeX(i), T.y0 + j * c], sd[k]], [[nodeX(i + 1), T.y0 + j * c], sd[k + 1]],
+            [[nodeX(i + 1), T.y0 + (j + 1) * c], sd[k + T.nx + 1]], [[nodeX(i), T.y0 + (j + 1) * c], sd[k + T.nx]],
+          ]
+          const cornerK = [k, k + 1, k + T.nx + 1, k + T.nx]
+          // Nor in a cell where some of the river's water stands above the flood (sd < 0): the
+          // shore there is the river's own, drawn with the river.
+          if (cornerK.some((q) => (T.shore[q] >= 0.5 || T.water[q] !== 0) && sd[q] < 0)) continue
+          const cuts: Vec2[] = []
+          const inRiver: boolean[] = []
+          for (let m = 0; m < 4; m++) {
+            const [pa, va] = corners[m]
+            const [pb, vb] = corners[(m + 1) % 4]
+            if ((va >= 0) === (vb >= 0)) continue
+            const u = va / (va - vb)
+            cuts.push([pa[0] + (pb[0] - pa[0]) * u, pa[1] + (pb[1] - pa[1]) * u])
+            // A crossing whose dry end is the river's own water is where the flood gives way to
+            // the river's surface, not a shore: no line there.
+            const dryK = cornerK[va >= 0 ? (m + 1) % 4 : m]
+            inRiver.push(T.shore[dryK] >= 0.5 || T.water[dryK] !== 0)
+          }
+          for (let m = 0; m + 1 < cuts.length; m += 2) {
+            if (inRiver[m] || inRiver[m + 1]) continue
+            const seg = clipSegmentToRect(cuts[m], cuts[m + 1], lineBand)
+            if (seg !== null) edge += pathOf([floodLift(seg[0]), floodLift(seg[1])], false)
+          }
+        }
+      }
+      if (edge && !(FL.soft === true)) parts.push(`<path class="fle" d="${edge}"/>`)
+    }
     // A square plate's ground is cut on its straight lines, strip by strip; a slab's ground is
     // cut along the front ground line with everything else, below.
     if (isle === undefined) {
@@ -1328,15 +1649,76 @@ export const renderSvg = (scene: Scene): Rendered => {
     out.push(`<g clip-path="url(#above)">`)
   }
   let next = 0
+  // X-ray walls (`Item.under`) wait until the water nearer than their building is painted.
+  const pendingUnder: { at: number; svg: string; box: [number, number, number, number]; nearN: number; id: string; item?: Item; from: number }[] = []
+  // A check on the order: a building or wall nearer than a band's own, painted before the band,
+  // whose screen box meets the band's, may be crossed by it (counted in stats.xrayOverlaps).
+  let xrayOverlaps = 0
+  const boxOf = (shapes: readonly Shape[]): [number, number, number, number] => {
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity
+    for (const sh of shapes) for (const [x, y] of sh.pts) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y) }
+    return [x0, y0, x1, y1]
+  }
+  // With `occlusion: "strict"`, a band is kept off every item painted between its own building
+  // and the band (and every band flushed before it) that stands nearer than the band where they
+  // meet: those items' shapes cut out of it by a mask.
+  const strict = scene.region.occlusion === 'strict'
+  const paintedSince: Painted[] = []
+  let masks = 0
+  const flushUnder = () => {
+    const done = next === 0 ? Infinity : strips[next - 1].n0
+    for (let k = pendingUnder.length - 1; k >= 0; k--) {
+      if (pendingUnder[k].at >= done - 1e-6 || next >= strips.length) {
+        const u = pendingUnder[k]
+        let svg = u.svg
+        if (strict && u.item !== undefined) {
+          const band: Painted = { item: u.item, band: true }
+          // A pier's band is kept off every nearer item painted before it, not only those painted
+          // since its pier: piers are ordered among the decks less strictly than buildings are.
+          const cut = nearerThanBand(scene.view, paintedSince.slice(u.item.pier === true ? 0 : u.from), band)
+          if (cut.length > 0) {
+            const m = `xm${masks++}`
+            const [x0, y0, x1, y1] = u.box
+            const black = cut.flatMap((c) => shapesOf(c)).map((sh) => sh.line === true || sh.fill === 'none'
+              ? `<path fill="none" stroke="black" stroke-width="${f((sh.stroke?.width ?? 0.6) + 0.4)}" d="${pathOf(sh.pts, false)}"/>`
+              : `<path fill="black" stroke="black" stroke-width="0.4" d="${pathOf(sh.pts)}"/>`).join('')
+            svg = `<mask id="${m}" maskUnits="userSpaceOnUse" x="${f(x0 - 2)}" y="${f(y0 - 2)}" width="${f(x1 - x0 + 4)}" height="${f(y1 - y0 + 4)}"><rect x="${f(x0 - 2)}" y="${f(y0 - 2)}" width="${f(x1 - x0 + 4)}" height="${f(y1 - y0 + 4)}" fill="white"/>${black}</mask><g mask="url(#${m})" data-cut="${cut.map((c) => (c.band === true ? 'band:' : '') + c.item.id).join(' ')}">${svg}</g>`
+          }
+          paintedSince.push(band)
+        }
+        out.push(svg)
+        pendingUnder.splice(k, 1)
+      }
+    }
+  }
   const flushTo = (nearN: number) => {
-    while (next < strips.length && strips[next].n1 > nearN + 1e-6) paintStrip(strips[next++])
+    while (next < strips.length && strips[next].n1 > nearN + 1e-6) {
+      paintStrip(strips[next++])
+      if (pendingUnder.length > 0) flushUnder()
+    }
   }
   for (const it of items) {
     const nearN = Math.min(...it.hull.map((pt) => pt[1]))
     flushTo(nearN)
     out.push(square ? `<g clip-path="url(#above)">${paintItem(it)}</g>` : paintItem(it))
+    if (strict) paintedSince.push({ item: it })
+    if (pendingUnder.length > 0 && it.kind === 'building') {
+      const b = boxOf(it.shapes)
+      for (const u of pendingUnder) {
+        if (nearN < u.nearN - 0.5 && b[0] < u.box[2] && b[2] > u.box[0] && b[1] < u.box[3] && b[3] > u.box[1]) {
+          xrayOverlaps++
+          // A dev aid: ISOSCAPE_XRAY_DEBUG=1 lists each pair, to look at.
+          if (process.env.ISOSCAPE_XRAY_DEBUG === '1') console.error(`xray overlap: ${it.id} over the band of ${u.id} at ${b.map((v) => v.toFixed(0)).join(',')}`)
+        }
+      }
+    }
+    if (it.under !== undefined) {
+      pendingUnder.push({ at: nearN - it.under.reach, svg: `<g data-under="${it.id}">${it.under.shapes.map(paint).join('')}</g>`, box: boxOf(it.under.shapes), nearN, id: it.id, item: it, from: paintedSince.length })
+      flushUnder()
+    }
   }
   flushTo(-Infinity)
+  flushUnder()
   if (!square && isle === undefined) {
     out.push(`</g>`)
     out.push(`<path fill="${p.sky}" d="${pathOf([[vb[0], vb[1]], [x0, vb[1]], [x0, fx0[1]], [vb[0], fx0[1]]])}${pathOf([[x1, vb[1]], [vb[0] + vb[2], vb[1]], [vb[0] + vb[2], fx1[1]], [x1, fx1[1]]])}"/>`)
@@ -1345,10 +1727,13 @@ export const renderSvg = (scene: Scene): Rendered => {
   }
   // Labels over everything, haloed in the land color so they read across lines and roofs.
   if (scene.labels !== undefined) {
-    const size = Math.max(14, capSize * 0.42)
-    out.push(`<g class="labels" font-family="Georgia, 'Times New Roman', serif" fill="${p.ink}" stroke="${p.land}" stroke-width="${f(size * (scene.region.labelHalo ?? 0.22))}" stroke-linejoin="round" paint-order="stroke">`)
+    const size0 = Math.max(14, capSize * 0.42)
+    out.push(`<g class="labels" font-family="Georgia, 'Times New Roman', serif" fill="${p.ink}" stroke="${p.land}" stroke-width="${f(size0 * (scene.region.labelHalo ?? 0.22))}" stroke-linejoin="round" paint-order="stroke">`)
     for (const l of scene.labels) {
-      const [sx, sy] = P(l.at, l.z)
+      const [sx0, sy] = P(l.at, l.z)
+      const size = l.size === undefined ? size0 : size0 * l.size
+      // A smaller label (a gauge's) sits a little to the side of its post.
+      const sx = l.size === undefined ? sx0 : sx0 + size * 0.4
       out.push(`<text x="${f(sx)}" y="${f(sy)}" font-size="${f(size)}" text-anchor="${l.anchor}" font-weight="bold">${esc(l.text)}</text>`)
       if (l.caption !== undefined) out.push(`<text x="${f(sx)}" y="${f(sy + size * 1.05)}" font-size="${f(size * 0.72)}" text-anchor="${l.anchor}" font-style="italic">${esc(l.caption)}</text>`)
     }
@@ -1370,7 +1755,19 @@ export const renderSvg = (scene: Scene): Rendered => {
     if (k.source !== undefined) parts.push(`<text x="${f(x)}" y="${f(row + size * 0.6)}" font-size="${f(s * 0.75)}" font-style="italic">${esc(k.source)}</text>`)
     return parts
   }
-  if (scene.time !== undefined) {
+  if (floodCap && scene.flood !== undefined) {
+    const tx = vb[0] + pad
+    const ty = vb[1] + pad + capSize
+    const dx = scene.time === undefined ? 0 : capSize * 2.6
+    out.push(
+      `<g class="caption" font-family="Georgia, 'Times New Roman', serif" fill="${p.ink}">`,
+      scene.time === undefined ? '' : `<text x="${f(tx)}" y="${f(ty)}" font-size="${f(capSize)}" font-weight="bold">${scene.time.year}</text>`,
+      scene.flood.title === undefined ? '' : `<text x="${f(tx + dx)}" y="${f(ty)}" font-size="${f(capSize * 0.8)}" font-weight="bold">${esc(scene.flood.title)}</text>`,
+      ...floodLines.map((line, k) => `<text x="${f(tx)}" y="${f(ty + capSize * (0.95 + 0.62 * k))}" font-size="${f(capSize * 0.46)}"${k === 0 ? ' font-style="italic"' : ''}>${esc(line)}</text>`),
+      `</g>`,
+    )
+  }
+  if (scene.time !== undefined && !floodCap) {
     const tx = vb[0] + pad
     const ty = vb[1] + pad + capSize
     out.push(
@@ -1388,6 +1785,8 @@ export const renderSvg = (scene: Scene): Rendered => {
   stats.rapidCells = rapidCells
   if (!T.flat) stats.rapidsReach = FALL_REACH
   stats.strips = strips.length
+  if (scene.flood !== undefined && p.flood.xray !== undefined) stats.xrayOverlaps = xrayOverlaps
+  if (masks > 0) stats.xrayMasked = masks
   return { svg: out.join('\n'), viewBox: vb, stats }
 }
 

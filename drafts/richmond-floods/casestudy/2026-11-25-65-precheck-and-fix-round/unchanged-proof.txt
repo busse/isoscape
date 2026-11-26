@@ -1,0 +1,25 @@
+unchanged.sh against origin/main (e7074e4, exported to /tmp/rc1/base-main), after all rc1 code (fa3c3b5 and the fix round), November 25, 2026
+same  richmond-downtown-time 1925  (12886056 bytes, sha256 202fa2fced008d7c)
+same  richmond-downtown-time 1950  (12819466 bytes, sha256 084c116f0f648ee7)
+same  richmond-downtown-time 1960  (12855058 bytes, sha256 c8a87b94460db00f)
+same  richmond-downtown-time 1970  (12888338 bytes, sha256 3ba1d3784635b450)
+same  richmond-downtown-time 2026  (15953051 bytes, sha256 1084d01685559cde)
+skip  richmond-floods-d1 1972 (no such region in the base)
+same  jackson-ward 1925  (5857898 bytes, sha256 f6c119b707f850c9)
+same  jackson-ward 1952  (5253332 bytes, sha256 a9f8ca4c63883aa1)
+same  jackson-ward 1959  (5630090 bytes, sha256 e9f4f5b7e25c4554)
+same  jackson-ward 2026  (5317037 bytes, sha256 a78e5dbf0af37a95)
+same  jackson-ward 1952 --with count (5341854 bytes, sha256 59224335f63a78ce)
+same  richmond-1937 1937  (35363312 bytes, sha256 9a0a88aabf92178b)
+same  richmond-streetcars 1925  (41704587 bytes, sha256 dee87ccb41bfd046)
+(the seven views listed DIFF in the first pass had no SVG on the base side: its data folder lacked the streetcars cache; linked, they were rerun above)
+
+check:visual:
+richmond-i195-rocketts: within tolerance; worst fall-line-hills: 0.000% changed, mean 0.02 (89 s)
+richmond-downtown: identical (2 s)
+richmond-downtown-time-1925: identical (18 s)
+richmond-downtown-time-2026: within tolerance; worst rowhouses-terrain: 0.000% changed, mean 0.00 (25 s)
+gwynns-island: within tolerance; worst bridge: 0.000% changed, mean 0.00 (61 s)
+broad-street-station-front-1943: skipped: no cached data
+lm-eiffel-tower: skipped: no cached data
+report: out/check/index.html (195 s)

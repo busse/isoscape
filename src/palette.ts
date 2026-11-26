@@ -77,6 +77,13 @@ export interface Palette {
    * and the area labels on every picture, never by color alone.
    */
   readonly tint: { readonly tones: readonly string[]; readonly road: string }
+  /**
+   * A flood (experimental; flood.ts): the water over land by depth band (`FLOOD_BANDS`: under
+   * 1 m, 1 to 3 m, 3 m and more), muddy and darker with depth so it reads apart from the river's
+   * blue; the river's own channel on the flood's surface (`channel`); the waterline (`edge`); and
+   * a floodwall's face and top.
+   */
+  readonly flood: FloodTones
   /** Roofs of buildings traced from fire-insurance maps, in the maps' own color code. */
   readonly traced: Readonly<Record<'brick' | 'frame' | 'stone' | 'iron' | 'special' | 'fireproof', string>>
   /** Streetcar lines on the ground, and the cars on them: side lit, side in shade, roof. */
@@ -189,6 +196,7 @@ const paper: Palette = {
   racetrack: '#b39a6c',
   mark: { pick: '#c4553b', near: '#e8a88f', quiet: '#ebe6db', line: '#8f2a22' },
   tint: { tones: ['#accf9c', '#71b1e1', '#dbc57e', '#db8981'], road: '#2c2b33' },
+  flood: { tones: ['#c9b48c', '#ad9264', '#8a6f45'], channel: '#93b9cb', edge: '#5e4a2e', wall: '#a39c8f', wallTop: '#dcd6ca' },
   traced: { brick: '#e9c2b8', frame: '#efe0a6', stone: '#c3d3e2', iron: '#cfcdc8', special: '#c5dcc0', fireproof: '#cfc6a4' },
   tram: '#b8362c',
   tramCar: ['#c9473a', '#8f2a22', '#e8d9b0'],
@@ -320,6 +328,7 @@ const night: Palette = {
   racetrack: '#4a3f30',
   mark: { pick: '#e0614f', near: '#8a4a3e', quiet: '#2f3340', line: '#f07a5f' },
   tint: { tones: ['#445e32', '#005186', '#72642b', '#7a292f'], road: '#e8e4da' },
+  flood: { tones: ['#5a4c36', '#4a3d2a', '#3a2f20'], channel: '#2c4a5c', edge: '#c9b48c', wall: '#6a6e7a', wallTop: '#8a8e98' },
   traced: { brick: '#5a3c3a', frame: '#5a5236', stone: '#34465a', iron: '#45454a', special: '#3a4f3c', fireproof: '#4f4a36' },
   tram: '#e0614f',
   tramCar: ['#f07a5f', '#b04a3a', '#f2e2b8'],
@@ -437,6 +446,170 @@ const winter: Palette = {
 }
 
 export const PALETTES: Readonly<Record<string, Palette>> = { paper, night, winter }
+
+/** A flood's colors (experimental; see `Palette.flood`), and the optional looks tried on them. */
+export interface FloodTones {
+  readonly tones: readonly string[]
+  readonly channel: string
+  readonly edge: string
+  readonly wall: string
+  readonly wallTop: string
+  /** Depth bands, true meters, one per tone (default `FLOOD_BANDS` in flood.ts). */
+  readonly bands?: readonly number[]
+  /** Short strokes on the water's surface, thicker where it is deeper. */
+  readonly ripple?: string
+  /** A line along a floodwall's top, and its width in pixels. */
+  readonly wallLine?: string
+  readonly wallLineWidth?: number
+  /** Half the floodwall's drawn thickness, meters (default `WALL_HALF` in scene.ts). */
+  readonly wallHalf?: number
+  /** A pale casing under the wall's top line, 1.9 times as wide as its line. */
+  readonly wallCasing?: string
+  /** The wall's openings: a shut closure's face, and an open one's dashed line. */
+  readonly gate?: string
+  /** The waterline's width, as a share of the ink line (default 1.2). */
+  readonly edgeWidth?: number
+  /** A soft pool (`soft`): its tones and depth bands, fading from the land into the water. */
+  readonly softTones?: readonly string[]
+  readonly softBands?: readonly number[]
+  /** The range of an estimate (`uncertainty`): its band on the ground, and the band's outer line. */
+  readonly band?: string
+  readonly bandEdge?: string
+  /** The range band hatched in this color over `band`, rather than flat. */
+  readonly bandHatch?: string
+  /**
+   * Ground whose protection is not known (a flood's `unknown`): a cross-hatch of `unknownHatch`
+   * over `unknown`, apart from the range band's single hatch in the flood's hue.
+   */
+  readonly unknown?: string
+  readonly unknownHatch?: string
+  /** See-through water: the flood's opacity (0 to 1); walls in it reach the ground, tinted below the surface. */
+  readonly aquarium?: number
+  /** X-ray walls: the part of a wall under the water drawn over it ("band", or "fade" toward its foot); `xrayLine` the waterline's width. */
+  readonly xray?: 'band' | 'fade'
+  readonly xrayLine?: number
+  /** A tide mark: on a wall standing in water, a band as tall as the depth above the surface (a convention). */
+  readonly tideMark?: boolean
+  /** Streets under the water, drawn on its surface in this color at about half strength. */
+  readonly streets?: string
+  /** In a flood build, dry ground drawn in this color instead of the palette's `land` (knocked back). */
+  readonly land?: string
+  /**
+   * Buildings drawn as unconfirmed (a series' evidence layer: standing on an earlier source, not
+   * ascertained for the scene's year): every face and roof taken `share` of the way toward
+   * `tone`, inked with the finer line. Default `UNCONFIRMED`.
+   */
+  readonly unconfirmed?: UnconfirmedLook
+}
+
+/**
+ * How a building drawn as unconfirmed looks: every face and roof taken `share` of the way to
+ * `tone`; optionally the roof taken further (`roofShare` toward `roofTone`), and a dashed line
+ * around the roof (`outline`, pixels at the build's scale).
+ */
+export interface UnconfirmedLook {
+  readonly tone: string
+  readonly share: number
+  readonly roofTone?: string
+  readonly roofShare?: number
+  readonly outline?: { readonly color: string; readonly width: number; readonly dash: readonly [number, number] }
+}
+
+/** The unconfirmed look when a palette's flood looks set none: pale, toward the paper. */
+export const UNCONFIRMED: UnconfirmedLook = { tone: '#f6f1e6', share: 0.6 }
+
+/**
+ * Looks tried for a flood (`--flood-style`, experimental), laid over a palette's own flood
+ * colors. Rough looks for the owner to choose from (November 23, 2026); none is the default.
+ */
+/** Depth bands for the fine looks, true meters. */
+export const FINE_BANDS: readonly number[] = [0, 0.3, 0.6, 1, 1.5, 2, 3, 4, 6]
+
+/** `n` tones from `a` to `b`, eased so the shallow end changes fastest. */
+function ramp(a: string, b: string, n: number): string[] {
+  const rgb = (h: string) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16))
+  const [x, y] = [rgb(a), rgb(b)]
+  return Array.from({ length: n }, (_, k) => {
+    const t = Math.sqrt(k / (n - 1))
+    return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join('')
+  })
+}
+
+export const FLOOD_STYLES: Readonly<Record<string, Partial<FloodTones>>> = {
+  // Lighter silt, five bands, so depth reads as a gradient.
+  silt: { tones: ['#e4d8ba', '#d4c29d', '#c1ab7f', '#aa9164', '#8f764b'], bands: [0, 0.5, 1, 2, 3] },
+  // The present muddy tones with ripple strokes on the surface.
+  ripple: { ripple: '#efe5cf' },
+  // A tinted blue-brown, nearer water than mud, still apart from the river's blue.
+  murk: { tones: ['#bcc3ad', '#9ba893', '#7b8b77'], channel: '#8fb6c9', edge: '#4c5a4a' },
+  // The floodwall as a subject: dark face, a pale top and an ink line along it, thicker.
+  'wall-bold': { wall: '#525866', wallTop: '#f3eee2', wallLine: '#2c2b33', wallLineWidth: 1.4, wallHalf: 1.25 },
+  // Round two (d1): lighter, siltier water, depth carried by nine fine bands (FINE_BANDS) from a
+  // pale edge to a darker deep, a pale clean waterline, and the river's channel kept apart.
+  'pale-silt': {
+    tones: ramp('#ede7d7', '#a4937a', 9), bands: FINE_BANDS, channel: '#8db3c6', edge: '#fbf8f0', edgeWidth: 2.2,
+    // A soft pool fades in from nearly the land's own color; the range of an estimate is a pale
+    // grey-blue on the ground with a dashed edge.
+    softTones: ramp('#e6dfcc', '#a4937a', 8), softBands: [0, 0.15, 0.3, 0.5, 0.8, 1.2, 2, 3],
+    band: '#dcdcd2', bandEdge: '#7d7564',
+  },
+  // The same with pale glints on the surface, as floodwater looks from above.
+  'silt-sheen': { tones: ramp('#ede7d7', '#a4937a', 9), bands: FINE_BANDS, channel: '#8db3c6', edge: '#fbf8f0', edgeWidth: 2.2, ripple: '#fcfaf3' },
+  // Blue for depth under a silt tint: pale silt at the edge to a grey-blue deep; the channel a deeper blue.
+  'blue-silt': { tones: ramp('#e8e4d4', '#6f8a99', 9), bands: FINE_BANDS, channel: '#56798d', edge: '#fbf8f0', edgeWidth: 2.2 },
+  // Neutral grey-tan, cooler than mud.
+  'grey-tan': { tones: ramp('#e9e6dc', '#958e7e', 9), bands: FINE_BANDS, channel: '#8db3c6', edge: '#fbf8f0', edgeWidth: 2.2 },
+  // A warm ochre wash, the old muddy look made light.
+  'ochre-wash': { tones: ramp('#f0e5c8', '#a68a58', 9), bands: FINE_BANDS, channel: '#8db3c6', edge: '#fbf8f0', edgeWidth: 2.2 },
+  // The wall, round two: a casing (pale halo under a dark line) along its top, a darker face,
+  // and its openings marked (a shut closure in a rust tone; an open one dashed).
+  'wall-cased': { wall: '#7d8290', wallTop: '#f3eee2', wallCasing: '#fbf8f0', wallLine: '#2c2b33', wallLineWidth: 1.6, wallHalf: 1.0, gate: '#a5533f' },
+  // The casing with the brick-red line: reads at full view and still says "wall", not "border".
+  'wall-cased-red': { wall: '#7d8290', wallTop: '#f3eee2', wallCasing: '#fbf8f0', wallLine: '#9b3a2c', wallLineWidth: 3.6, wallHalf: 1.0, gate: '#2c2b33' },
+  // Round three (d1r2, the owner: "not enough contrast"): each at least 20 L* darker than the
+  // ground at its edge, with a dark inked waterline and the range hatched in the flood's hue.
+  umber: { tones: ramp('#a89577', '#4f3f2c', 9), bands: FINE_BANDS, channel: '#8fb8cc', edge: '#2c2418', edgeWidth: 1.6, softTones: ramp('#c8b89a', '#4f3f2c', 8), band: '#efe7d4', bandHatch: '#8d7a5c', bandEdge: '#2c2418' },
+  'green-brown': { tones: ramp('#a3a07a', '#55532f', 9), bands: FINE_BANDS, channel: '#8fb8cc', edge: '#2b2a17', edgeWidth: 1.6, softTones: ramp('#c4c19d', '#55532f', 8), band: '#ecebd6', bandHatch: '#88855f', bandEdge: '#2b2a17' },
+  'blue-grey': { streets: '#c9d6de', tones: ramp('#8ea5b4', '#3c5466', 9), bands: FINE_BANDS, channel: '#a6dcf2', edge: '#1f2d38', edgeWidth: 1.6, softTones: ramp('#b4c4ce', '#3c5466', 8), band: '#e6ecee', bandHatch: '#6f8796', bandEdge: '#1f2d38', unknown: '#ebe4d6', unknownHatch: '#8c7a62' },
+  ochre: { tones: ramp('#c9a25a', '#7d5420', 9), bands: FINE_BANDS, channel: '#8fb8cc', edge: '#3d2a10', edgeWidth: 1.8, softTones: ramp('#dcc28c', '#7d5420', 8), band: '#f3e6c6', bandHatch: '#b58a45', bandEdge: '#3d2a10' },
+  // The same water against dry ground knocked back a step paler and cooler.
+  knockback: { tones: ramp('#bfae8d', '#6b5a43', 9), bands: FINE_BANDS, channel: '#8fb8cc', edge: '#3a2f20', edgeWidth: 1.6, land: '#f6f5f1', softTones: ramp('#d5c8ad', '#6b5a43', 8), band: '#f3eee2', bandHatch: '#a29070', bandEdge: '#3a2f20' },
+  // Round four (d1r3): showing the water's height on the buildings. See-through water at two
+  // opacities (walls reach the ground, tinted below the surface), and a tide mark (a convention).
+  'aquarium-70': { aquarium: 0.7, streets: undefined },
+  'aquarium-50': { aquarium: 0.5, streets: undefined },
+  // The pick: nearly as dark as the opaque water the owner chose, still seen through at the walls.
+  'aquarium-85': { aquarium: 0.85, streets: undefined },
+  'tide-mark': { tideMark: true },
+  // Round five (d1r4): x-ray walls over opaque water.
+  xray: { xray: 'band' },
+  'xray-fade': { xray: 'fade' },
+  'xray-heavy': { xray: 'band', xrayLine: 2.4 },
+  // The period city (d2): unconfirmed buildings, tried at four strengths; `unconfirmed-slate` is the pick (the pale ones do not part from the cream walls).
+  'unconfirmed-pale': { unconfirmed: { tone: '#f6f1e6', share: 0.6 } },
+  'unconfirmed-ghost': { unconfirmed: { tone: '#f6f1e6', share: 0.78 } },
+  // Cool grey, apart from the paper and from every roof tone: reads as "not this year's" at plate view.
+  'unconfirmed-grey': { unconfirmed: { tone: '#c3c9cf', share: 0.72 } },
+  'unconfirmed-slate': { unconfirmed: { tone: '#9fa9b3', share: 0.6 } },
+  // d3 (the owner, 12:18: slate kept, with one more cue that holds at plate size): the slate
+  // with a dashed ink line round the roof, with a darker slate roof, or with both.
+  'unconfirmed-slate-dash': { unconfirmed: { tone: '#9fa9b3', share: 0.6, outline: { color: '#2c2b33', width: 1.1, dash: [2.2, 1.6] } } },
+  'unconfirmed-slate-roof': { unconfirmed: { tone: '#9fa9b3', share: 0.6, roofTone: '#6b7480', roofShare: 0.75 } },
+  'unconfirmed-slate-both': { unconfirmed: { tone: '#9fa9b3', share: 0.6, roofTone: '#6b7480', roofShare: 0.75, outline: { color: '#f6f1e6', width: 1.1, dash: [2.2, 1.6] } } },
+  // Stronger still: a distinct brick-red line along the top, wide enough to carry the full view.
+  'wall-strong': { wall: '#525866', wallTop: '#f3eee2', wallLine: '#9b3a2c', wallLineWidth: 4, wallHalf: 1.25 },
+}
+
+/** A palette with flood looks laid over its flood colors, in order. */
+export const withFloodStyles = (p: Palette, names: readonly string[]): Palette => {
+  let flood: FloodTones = p.flood
+  for (const n of names) {
+    const s = FLOOD_STYLES[n]
+    if (s === undefined) throw new Error(`no flood style "${n}" (have: ${Object.keys(FLOOD_STYLES).join(', ')})`)
+    flood = { ...flood, ...s }
+  }
+  return { ...p, flood, ...(flood.land === undefined ? {} : { land: flood.land }) }
+}
 
 /**
  * Accents for a cutaway sheet's margins (tools/cutaway/sheet.py, a spec's `theme`), never for

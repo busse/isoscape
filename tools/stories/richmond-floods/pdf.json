@@ -1,0 +1,17 @@
+{
+  "substitutions": [
+    {
+      "pattern": "so a\\s+divider can pass between the two, as in the picture at the top of this page\\.",
+      "replace": "so the two can be set side by side, as in the first two pictures of this page.",
+      "scope": "all",
+      "note": "How to read: the dry twin; the PDF prints both sides of each compare figure"
+    },
+    {
+      "pattern": "The divider below\\s+puts water",
+      "replace": "The two pictures below put water",
+      "scope": "all",
+      "note": "Manchester: the compare figure is printed as two pictures"
+    }
+  ],
+  "allow": []
+}

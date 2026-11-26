@@ -10,12 +10,14 @@
 import {
   centroid, clipRingToRect, clipSegmentToRect, convexHull, hash, insideRect, orient, pointInPolygon,
   despike, pointInRing, signedArea, simplifyLine, simplifyRing, type Ring, type Vec2,
+  convexPieces,
 } from './geom.ts'
 import {
   buildingClass, buildingHeights, groundKind, isBridge, isPath, isRail, roadWidth, waterFlows, waterwayWidth, type GroundKind,
 } from './classify.ts'
 import type { Feature, LineFeature, PolygonFeature } from './osm.ts'
-import { mix, type Palette } from './palette.ts'
+import { mix, UNCONFIRMED, type Palette, type UnconfirmedLook } from './palette.ts'
+import { tintPalette } from './tint-tones.ts'
 import type { Region } from './region.ts'
 import { dominantGridAngle, makeView, snapBearing, type View } from './view.ts'
 import { localMetres } from './region.ts'
@@ -25,7 +27,8 @@ import { mergeFootprints, type Footprint } from './footprints.ts'
 import { boxItem, canopyBoxes, dome, partLevels, toned, trainBoxes, type Box } from './parts.ts'
 import { cutawayItems, partSolids, partTones, routeItems, shedItems, travelerItem, type PlacedPart } from './cutaway-scene.ts'
 import { offsetConvex, solidItem, type CutPlane } from './cutaway.ts'
-import { WORKS, alive, bridgeFeature, bridgesAtGrade, streetFeature, dropApproaches, mendStreets, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, type Dated, type History, type HistoryFeature } from './history.ts'
+import { barriersOf, fillFlood, largestGroup, openPieces, levelAt, median, nodesInside, parseWalls, profileSurface, signedDepth, type Barrier, type FloodSpec } from './flood.ts'
+import { WORKS, alive, bridgeFeature, bridgesAtGrade, streetFeature, dropApproaches, mendStreets, dropOrphanBridges, dropUnbuiltStreets, featureAlive, featureHistoric, laterWorkLines, laterWorks, pastGround, unconfirmedDated, unconfirmedTraced, type Dated, type History, type HistoryFeature } from './history.ts'
 
 /** A scene drawn as of a year: which year, the one before it in the series, and the evidence. */
 export interface TimeContext {
@@ -83,8 +86,15 @@ export interface Item {
   readonly within?: string
   /** The shell (its part's id) this item stands on, outside it (a dormer): it paints after its sides. */
   readonly over?: string
+  /**
+   * A flood's "x-ray walls": the part of each visible wall under the water, drawn over the water
+   * nearer the camera (it paints once the strips `reach` meters nearer than the item are painted).
+   */
+  readonly under?: { readonly shapes: readonly Shape[]; readonly reach: number; readonly edges?: readonly (readonly [Vec2, Vec2])[] }
   /** A bridge pier, standing under a deck. */
   readonly pier?: boolean
+  /** Screen units its strokes reach past its outline (a floodwall's casing): ordered with that much room (`occlusion: "strict"`). */
+  readonly inkPad?: number
 }
 
 export interface GroundPolygon {
@@ -133,8 +143,29 @@ export interface Scene {
    */
   readonly tints?: readonly { readonly tone: number; readonly rings: readonly Ring[] }[]
   readonly tintLegend?: { readonly title: string; readonly labels: readonly string[]; readonly source?: string }
-  /** Traced buildings of the year left out, and why: on water, on a viaduct or track, or buried. */
-  readonly tracedLeftOut?: readonly { readonly id: string; readonly why: 'water' | 'viaduct' | 'track' | 'buried' }[]
+  /**
+   * A flood (experimental; see flood.ts): which nodes are under water, the water's surface
+   * elevation there, the signed depth field its waterline is traced from, and its caption.
+   */
+  readonly flood?: {
+    readonly name: string
+    readonly title?: string
+    readonly caption?: string
+    readonly flooded: Uint8Array
+    readonly level: Float32Array
+    readonly signed: Float32Array
+    /** The signed depth at the high end of the estimate's range (`uncertainty`). */
+    readonly signedHigh?: Float32Array
+    /** A soft-edged pool: no inked waterline. */
+    readonly soft?: boolean
+    readonly notes?: readonly string[]
+    /** Ground whose protection is not known (`FloodSpec.unknown`), smoothed for drawing: above zero on it. */
+    readonly unknown?: Float32Array
+    /** The same, unsmoothed: +1 at its nodes, −1 elsewhere (for counts). */
+    readonly unknownNodes?: Float32Array
+  }
+  /** Traced buildings of the year left out, and why: on water, on a viaduct or track, buried, or under a building of the year (`tracedCovered`). */
+  readonly tracedLeftOut?: readonly { readonly id: string; readonly why: 'water' | 'viaduct' | 'track' | 'buried' | 'covered' }[]
 }
 
 export interface MapLabel {
@@ -143,6 +174,8 @@ export interface MapLabel {
   readonly at: Vec2
   readonly z: number
   readonly anchor: 'start' | 'middle' | 'end'
+  /** Its size as a share of the usual (a flood gauge's figure is set smaller). */
+  readonly size?: number
 }
 
 const toViewRing = (view: View, ring: readonly Vec2[]): Ring => ring.map(([lon, lat]) => view.toView(lon, lat))
@@ -167,7 +200,7 @@ export const buildScene = (
   features: readonly Feature[],
   pal: Palette,
   elevation: ((lon: number, lat: number) => number) | null = null,
-  extra: { footprints?: readonly Footprint[]; cover?: (lon: number, lat: number) => number; time?: TimeContext; section?: boolean } = {},
+  extra: { footprints?: readonly Footprint[]; cover?: (lon: number, lat: number) => number; time?: TimeContext; section?: boolean; flood?: FloodSpec } = {},
 ): Scene => {
   const time = extra.time
   const curated = time === undefined ? [] : time.history.features.filter((h) => alive(h.from, h.to, time.year))
@@ -178,7 +211,7 @@ export const buildScene = (
   let later = { atGrade: 0, verges: 0 }
   const extraStats: Record<string, number> = {}
   // Traced buildings left out, and why (for `info` and checks; not drawn).
-  let leftOut: { id: string; why: 'water' | 'viaduct' | 'track' | 'buried' }[] | undefined
+  let leftOut: { id: string; why: 'water' | 'viaduct' | 'track' | 'buried' | 'covered' }[] | undefined
   // Every feature mapped today, before a dated scene keeps those of its year.
   const extraAll: readonly Feature[] | undefined = time === undefined ? undefined : features
   if (time !== undefined) {
@@ -490,6 +523,250 @@ export const buildScene = (
     for (const v of terrain.elev) hi = Math.max(hi, v)
     stats.elevationTop = Number(hi.toFixed(1))
   }
+
+  // ---- a flood (experimental; see flood.ts) ------------------------------------------------
+  // Only a build that asks for one (`--flood`) has it; every other scene is untouched.
+  let floodOut: Scene['flood']
+  let barriers: Barrier[] = []
+  const floodLabels: MapLabel[] = []
+  const gaugeItems: Item[] = []
+  /** The flood's water over a footprint: its scene z and deepest true depth, or null if dry. */
+  let floodUnder: (pts: readonly Vec2[]) => { z: number; depth: number } | null = () => null
+  /** The flood's surface (scene z) at a point, −Infinity where it is dry. */
+  let floodZ: (p: Vec2) => number = () => -Infinity
+  /** Whether any of the points is under the flood (or, for a dry twin, its wet flood). */
+  let reachUnder: (pts: readonly Vec2[]) => boolean = () => false
+  /** The water a floodwall's label keeps off: the flood's own, or for a dry twin its wet flood's. */
+  let labelWater: Uint8Array | undefined
+  if (extra.flood !== undefined) {
+    if (terrain.flat) throw new Error(`a flood needs terrain: "${region.name}" has no elevation`)
+    const spec = extra.flood
+    const n = terrain.nx * terrain.ny
+    // The river is where the water comes from: flowing water, or any water if none flows.
+    const flowing = terrain.flowing.some((v, k) => v === 1 && terrain.water[k] === 1)
+    const seeds = Uint8Array.from(terrain.water, (v, k) => (v === 1 && (!flowing || terrain.flowing[k] === 1) ? 1 : 0))
+    /** A flood's fill, every level raised by `dz` meters, and the walls it was held by. */
+    const fillOf = (sp: FloodSpec) => {
+      const surface = sp.profile !== undefined
+        ? profileSurface(terrain, sp.profile.map(([lon, lat]) => view.toView(lon, lat)), sp.profile.map((p) => p[2]))
+        : sp.level !== undefined ? new Float32Array(n).fill(sp.level) : undefined
+      const walls = barriersOf(parseWalls(region, sp, time?.year), features, (lon, lat) => view.toView(lon, lat))
+      // With the gates open the water passes the openings; shut (a river flood), the wall runs on.
+      const holding = sp.gates === 'open' ? walls.flatMap(openPieces) : walls
+      const within = sp.within === undefined ? undefined : nodesInside(terrain, [orient(toViewRing(view, sp.within as Vec2[]), true)])
+      const ponds = (sp.ponds ?? []).map((p) => {
+        const mask = nodesInside(terrain, [orient(toViewRing(view, p.ring as Vec2[]), true)])
+        if (p.from === undefined) return { level: p.level, mask }
+        // Held on the city side: the whole wall line, its openings closed.
+        const held = p.citySide === true ? { barriers: walls } : {}
+        // The pool starts at the lowest node within 10 m of the low point given.
+        const [e, nn] = view.toView(p.from[0], p.from[1])
+        let seed = -1
+        for (let j = Math.floor((nn - 10 - terrain.y0) / terrain.cell); j <= Math.ceil((nn + 10 - terrain.y0) / terrain.cell); j++) {
+          for (let i = Math.floor((e - 10 - terrain.x0) / terrain.cell); i <= Math.ceil((e + 10 - terrain.x0) / terrain.cell); i++) {
+            if (i < 0 || j < 0 || i >= terrain.nx || j >= terrain.ny) continue
+            const k = j * terrain.nx + i
+            if (seed < 0 || terrain.elev[k] < terrain.elev[seed]) seed = k
+          }
+        }
+        return { level: p.level, mask, ...(seed < 0 ? {} : { seed }), ...held }
+      })
+      return {
+        walls,
+        fill: (dz: number) => fillFlood(terrain, {
+          ...(surface === undefined ? {} : { surface: dz === 0 ? surface : surface.map((v) => v + dz), seeds }),
+          ...(within === undefined ? {} : { within }),
+          barriers: holding,
+          ponds: ponds.map((p) => ({ ...p, level: p.level + dz })),
+        }),
+      }
+    }
+    const own = fillOf(spec)
+    barriers = own.walls
+    const fill = own.fill
+    // An estimate's range (`uncertainty`): the water at the level (or its low end, `band:
+    // "range"`), and the ground up to the waterline at the high end as a band.
+    const u = spec.uncertainty ?? 0
+    const field0 = fill(spec.band === 'range' ? -u : 0)
+    // Ground whose protection is not known (`unknown`): flooded with the walls, dry with the lines
+    // that close the missing levee's courses as walls too. It is taken out of the flood (no water,
+    // no depth, no counts) and kept as its own field, drawn as a hatch.
+    let unknownField: Float32Array | undefined
+    let unknownRaw: Float32Array | undefined
+    let closedAt: ((dz: number) => ReturnType<typeof fillFlood>) | undefined
+    let riverBody: Uint8Array = new Uint8Array(0)
+    let field = field0
+    if (spec.unknown !== undefined && own.walls.length > 0) {
+      const top = own.walls[0].top
+      const extra = spec.unknown.lines.map((l, k) => ({ name: `unknown ${k}`, pts: l.map(([lon, lat]) => view.toView(lon, lat)), top }))
+      const holding = spec.gates === 'open' ? own.walls.flatMap(openPieces) : own.walls
+      const surface = spec.profile !== undefined
+        ? profileSurface(terrain, spec.profile.map(([lon, lat]) => view.toView(lon, lat)), spec.profile.map((p) => p[2]))
+        : spec.level !== undefined ? new Float32Array(n).fill(spec.level) : undefined
+      closedAt = (dz: number) => fillFlood(terrain, { ...(surface === undefined ? {} : { surface: dz === 0 ? surface : surface.map((v) => v + dz), seeds }), barriers: [...holding, ...extra] })
+      const closed = closedAt(spec.band === 'range' ? -u : 0)
+      unknownField = new Float32Array(n).fill(-1)
+      riverBody = largestGroup(terrain.water, terrain.nx, terrain.ny)
+      const flooded = Uint8Array.from(field0.flooded)
+      const level = Float32Array.from(field0.level)
+      const depth = Float32Array.from(field0.depth)
+      let unk = 0
+      for (let k = 0; k < n; k++) {
+        if (field0.flooded[k] === 0 || closed.flooded[k] !== 0) continue
+        // The river itself stays under the flood (the lines may run just off its shore).
+        if (riverBody[k] === 1) continue
+        // Standing water there (the plant's basins) is left at its own level, not hatched.
+        flooded[k] = 0; level[k] = NaN; depth[k] = NaN
+        if (terrain.water[k] === 1) continue
+        unknownField[k] = 1
+        unk++
+      }
+      field = { ...field0, flooded, level, depth }
+      stats.floodUnknownNodes = unk
+      // Its outline is traced from the field smoothed twice over 3 by 3 nodes, so the hatch's edge
+      // runs smooth rather than in grid steps (the counts use the nodes themselves).
+      unknownRaw = unknownField
+      unknownField = smooth3(smooth3(unknownField, terrain.nx, terrain.ny), terrain.nx, terrain.ny)
+      // Standing water keeps its own look: the hatch's edge runs round it, not over it.
+      for (let k = 0; k < n; k++) if (terrain.water[k] === 1 && riverBody[k] !== 1) unknownField[k] = -1
+    }
+    const high0 = u > 0 ? fill(u) : undefined
+    // The range's high end stops short of unknown ground too.
+    let high = high0
+    if (high0 !== undefined && closedAt !== undefined) {
+      const ch = closedAt(u)
+      const flooded = Uint8Array.from(high0.flooded)
+      for (let k = 0; k < n; k++) if (flooded[k] !== 0 && ch.flooded[k] === 0 && riverBody[k] !== 1) flooded[k] = 0
+      high = { ...high0, flooded }
+    }
+    if (high !== undefined) {
+      let band = 0
+      for (let k = 0; k < high.flooded.length; k++) if (high.flooded[k] !== 0 && field.flooded[k] === 0) band++
+      stats.floodBandHectares = Number(((band * terrain.cell * terrain.cell) / 1e4).toFixed(1))
+    }
+    // Where the flood meets ground whose protection is not known, its edge is the hatch's own edge
+    // (the zero line of the smoothed field), not the grid's steps.
+    const signed = signedDepth(terrain, field)
+    if (unknownField !== undefined) {
+      for (let k = 0; k < n; k++) {
+        if (unknownField[k] <= -1 + 1e-6) continue
+        if (field.flooded[k] !== 0 || (unknownRaw?.[k] ?? -1) > 0) signed[k] = Math.min(signed[k], -unknownField[k] * 2)
+      }
+    }
+    floodOut = {
+      name: spec.name, flooded: field.flooded, level: field.level, signed,
+      ...(high === undefined ? {} : { signedHigh: signedDepth(terrain, high) }),
+      ...(spec.soft === true ? { soft: true } : {}),
+      ...(spec.title === undefined ? {} : { title: spec.title }), ...(spec.caption === undefined ? {} : { caption: spec.caption }),
+      ...(spec.notes === undefined ? {} : { notes: spec.notes }),
+      ...(unknownField === undefined ? {} : { unknown: unknownField, unknownNodes: unknownRaw }),
+    }
+    const zOf = (lv: number) => (lv - terrain.datum) * terrain.exaggeration
+    floodZ = (p) => {
+      const lv = levelAt(terrain, field.level, p)
+      return Number.isNaN(lv) || lv <= terrain.elevation(p) ? -Infinity : zOf(lv)
+    }
+    floodUnder = (pts) => {
+      let z = -Infinity
+      let depth = 0
+      for (const p of pts) {
+        const lv = levelAt(terrain, field.level, p)
+        if (Number.isNaN(lv)) continue
+        const d = lv - terrain.elevation(p)
+        if (d <= 0) continue
+        z = Math.max(z, zOf(lv))
+        depth = Math.max(depth, d)
+      }
+      return z === -Infinity ? null : { z, depth }
+    }
+    // A dry twin's outbuildings are tested against its wet flood's reach (`FloodSpec.reach`), at
+    // the high end of its range where it has one.
+    // Its wall labels are set where its wet flood sets them (`labelWater`), so the two align.
+    if (spec.reach !== undefined) {
+      const r = spec.reach
+      const wet = fillOf(r)
+      const f = wet.fill(r.uncertainty ?? 0)
+      reachUnder = (pts) => pts.some((p) => { const lv = levelAt(terrain, f.level, p); return !Number.isNaN(lv) && lv > terrain.elevation(p) })
+      labelWater = wet.fill(r.band === 'range' ? -(r.uncertainty ?? 0) : 0).flooded
+    } else {
+      reachUnder = (pts) => floodUnder(pts) !== null
+      labelWater = field.flooded
+    }
+    for (const m of spec.markers ?? []) {
+      const at = view.toView(m.at[0], m.at[1])
+      floodLabels.push({ text: m.n, at, z: Math.max(terrain.z(at), floodZ(at)), anchor: m.anchor ?? 'middle' })
+    }
+    // Staff gauges: a post standing in the water at true height, ticked every 5 ft from the
+    // ground, and the depth in feet set above it (the number carries what the post, a few pixels
+    // tall at plate scale, cannot).
+    for (const [g, gauge] of (spec.gauges ?? []).entries()) {
+      const at = view.toView(gauge.at[0], gauge.at[1])
+      const lv = levelAt(terrain, field.level, at)
+      // The depth from the elevation model itself (2 m in Richmond's cache), not the blurred 5 m grid.
+      const raw = elevation === null ? NaN : elevation(gauge.at[0], gauge.at[1])
+      const ground = Number.isFinite(raw) ? raw : terrain.elevation(at)
+      if (Number.isNaN(lv) || lv <= ground) continue
+      const z0 = terrain.z(at)
+      const zw = (lv - terrain.datum) * terrain.exaggeration
+      const shapes: Shape[] = [{ pts: [view.toScreen(at, z0), view.toScreen(at, zw + 1.5)], fill: 'none', line: true, stroke: { color: pal.ink, width: 1.6 } }]
+      const tick = 5 * 0.3048
+      for (let h = tick; z0 + h < zw; h += tick) {
+        const q = view.toScreen(at, z0 + h)
+        shapes.push({ pts: [[q[0] - 2.5, q[1]], [q[0] + 2.5, q[1]]], fill: 'none', line: true, stroke: { color: pal.ink, width: 1 } })
+      }
+      const w = view.toScreen(at, zw)
+      shapes.push({ pts: [[w[0] - 5, w[1]], [w[0] + 5, w[1]]], fill: 'none', line: true, stroke: { color: pal.flood.edge, width: 2.2 } })
+      gaugeItems.push({ id: `floodgauge:${g}`, kind: 'building', hull: convexHull([[at[0] - 0.5, at[1] - 0.5], [at[0] + 0.5, at[1] - 0.5], [at[0] + 0.5, at[1] + 0.5], [at[0] - 0.5, at[1] + 0.5]]), zMin: z0, zMax: zw + 1.5, key: at[1], shapes, dots: [] })
+      const ft = Math.round((lv - ground) / 0.3048)
+      floodLabels.push({ text: `${ft} ft`, ...(gauge.name === undefined ? {} : { caption: gauge.name }), at, z: zw + 2, anchor: 'start', size: 0.7 })
+    }
+    // Counts, over the nodes inside the frame: each node stands for one cell of ground.
+    let wet = 0, river = 0, ponded = 0, unknownIn = 0
+    let lo = Infinity, hi = -Infinity, deepest = 0
+    for (let j = 0; j < terrain.ny; j++) {
+      const y = terrain.y0 + j * terrain.cell
+      if (y < frame.minY || y > frame.maxY) continue
+      for (let i = 0; i < terrain.nx; i++) {
+        const x = terrain.x0 + i * terrain.cell
+        if (x < frame.minX || x > frame.maxX) continue
+        const k = j * terrain.nx + i
+        if (unknownRaw !== undefined && unknownRaw[k] > 0) unknownIn++
+        if (field.flooded[k] === 0) continue
+        lo = Math.min(lo, field.level[k]); hi = Math.max(hi, field.level[k])
+        if (terrain.shore[k] >= 0.5) { river++; continue }
+        wet++
+        if (field.flooded[k] === 2) ponded++
+        deepest = Math.max(deepest, field.depth[k])
+      }
+    }
+    const ha = (nodes: number) => Number(((nodes * terrain.cell * terrain.cell) / 1e4).toFixed(1))
+    stats.floodHectares = ha(wet)
+    stats.floodAcres = Number((ha(wet) * 2.47105).toFixed(1))
+    if (ponded > 0) stats.floodPondHectares = ha(ponded)
+    if (unknownRaw !== undefined) {
+      delete stats.floodUnknownNodes
+      stats.floodUnknownAcres = Number((ha(unknownIn) * 2.47105).toFixed(1))
+    }
+    stats.floodRiverHectares = ha(river)
+    stats.floodDeepestOnLand = Number(deepest.toFixed(2))
+    if (Number.isFinite(lo)) { stats.floodLevelLow = Number(lo.toFixed(2)); stats.floodLevelHigh = Number(hi.toFixed(2)) }
+    stats.floodWalls = barriers.length
+    stats.floodLinksHeld = field.held
+    stats.floodLinksOvertopped = field.overtopped
+  }
+  const floodDepths: number[] = []
+  /** Whether any of the points lies on ground whose protection is not known (its nearest node). */
+  const onUnknown = (pts: readonly Vec2[]): boolean => pts.some((p) => {
+    const i = Math.round((p[0] - terrain.x0) / terrain.cell), j = Math.round((p[1] - terrain.y0) / terrain.cell)
+    return i >= 0 && j >= 0 && i < terrain.nx && j < terrain.ny && (floodOut?.unknownNodes?.[j * terrain.nx + i] ?? -1) > 0
+  })
+  let floodUnknownBuildings = 0
+  /** Each flooded building's drawn height (scene meters, true at 1x), for the counts. */
+  const floodHeights: number[] = []
+  /** Walls in water, by building id: where a wall's tint changes, and its waterline (see `extrude`). */
+  const wetWall = new Map<string, { split: number; line: number; above?: boolean }>()
+  const xrayWalls = new Map<string, { water: number; ground: (p: Vec2) => number }>()
+  let floodSubmerged = 0
 
   // ---- ribbons -----------------------------------------------------------------------------
   const ribbons: Ribbon[] = []
@@ -875,7 +1152,12 @@ export const buildScene = (
   let heightSources = { height: 0, model: 0, levels: 0, guess: 0 }
   let fresh = 0
   let undated = 0
-  const datedBy = { curated: 0, osm: 0, parcel: 0 }
+  const datedBy = { curated: 0, osm: 0, parcel: 0, evidence: 0 }
+  // Buildings an evidence layer draws (History.evidence): confirmed for the year, and drawn as
+  // unconfirmed (standing on an earlier source, not ascertained for this year).
+  let byEvidence = 0
+  let unconfirmed = 0
+  const unconfirmedLook = pal.flood.unconfirmed ?? UNCONFIRMED
   // A curated site (a station's grounds, a fairground) was laid out otherwise while it stood:
   // today's buildings on it are not drawn.
   const sites = curated.filter((h) => h.kind === 'site' && h.ring !== undefined).map((h) => toViewRing(view, h.ring ?? []))
@@ -884,13 +1166,27 @@ export const buildScene = (
   // cut was painted over by the nearer ground along a strip's straight edge. Today's scene keeps
   // its walls to the lowest corner.
   const pastScene = time !== undefined && time.year < time.history.present
+  // With `occlusion: "strict"`, a concave footprint is drawn as convex pieces (ids `<id>#<k>`),
+  // each ordered on its own, with no wall and no roof ink along the seams between them.
+  const strictOcclusion = region.occlusion === 'strict'
+  const piecesOf = (outer: Ring, inners: Ring[], id: string): { ring: Ring; holes: Ring[]; id: string; idx: number[]; seams: ReadonlySet<number> | undefined }[] => {
+    const parts = strictOcclusion && inners.length === 0 ? convexPieces(outer) : [outer.map((_, i) => i)]
+    if (parts.length === 1) return [{ ring: outer, holes: inners, id, idx: outer.map((_, i) => i), seams: undefined }]
+    return parts.map((idx, k) => {
+      const seams = new Set<number>()
+      idx.forEach((v, j) => { if (idx[(j + 1) % idx.length] !== (v + 1) % outer.length) seams.add(j) })
+      return { ring: idx.map((i) => outer[i]), holes: [], id: `${id}#${k}`, idx, seams }
+    })
+  }
   // Prisms wait in `entries` until every one is placed, so that none is left standing on air.
-  const entries: (Item | { prism: Prism; make: (p: Prism) => Item })[] = []
+  const entries: (Item | { prism: Prism; make: (p: Prism) => Item | Item[] })[] = []
   // A footprint from a model (Microsoft's) whose center is on water is a boat, a pier head
   // or a boathouse the model cannot tell from a house; drawn, it is a house standing in the
   // water. Buildings mapped in OSM on water (boathouses, piers) stay.
   const sc = { ground } as unknown as Scene
   let modelOnWater = 0
+  /** Today's buildings drawn, for `tracedCovered`: their outlines, holes and boxes (view meters). */
+  const drawnRings: { outer: Ring; inners: Ring[]; box: readonly [number, number, number, number] }[] = []
   let footprintsDrawn = 0
   let datedFromParcels = 0
   // A cutaway lifts away whole any building its `lift` names (OSM ids, such as w236026091): a
@@ -938,8 +1234,33 @@ export const buildScene = (
       if (!o.outer.some((p) => Math.hypot(p[0] - c[0], p[1] - c[1]) < TOWER_REACH)) return false
       return heightsOf(o, Math.abs(signedArea(o.outer))).base < h.base
     })
-    const base = h.base > 0 && !footed ? level + h.base : gMin
+    let base = h.base > 0 && !footed ? level + h.base : gMin
     const top = Math.max(level + h.top, base + 2.5)
+    // A building standing in a flood keeps standing: its walls start at the water's surface, so
+    // the part below is hidden, and one the water tops is not drawn (but counted).
+    if (floodOut?.unknown !== undefined && onUnknown([...outer, centroid(outer)])) floodUnknownBuildings++
+    if (floodOut !== undefined && !(h.base > 0 && !footed)) {
+      const w = floodUnder([...outer, centroid(outer)])
+      if (w !== null) {
+        floodDepths.push(w.depth)
+        floodHeights.push(top - base)
+        if (w.z >= top - 0.05) {
+          floodSubmerged++
+          // See-through water (`aquarium`): a building under the surface still stands, seen through it.
+          if (pal.flood.aquarium === undefined) continue
+        }
+        // See-through water: the wall goes down to the ground, its part under the surface tinted
+        // and a waterline drawn at the surface. A tide mark (`tideMark`): the wall starts at the
+        // water, and a band as tall as the depth is marked on it above the surface (a convention).
+        if (pal.flood.aquarium !== undefined) wetWall.set(s.id, { split: Math.min(w.z, top), line: Math.min(w.z, top) })
+        else {
+          base = Math.max(base, w.z)
+          if (pal.flood.tideMark === true) wetWall.set(s.id, { split: Math.min(top, w.z + (w.z - gMin)), line: w.z, above: true })
+          if (pal.flood.xray !== undefined) xrayWalls.set(s.id, { water: w.z, ground: (p: Vec2) => terrain.z(p) })
+        }
+      }
+    }
+    drawnRings.push({ outer, inners, box: ringBox(outer) })
     const cls = buildingClass(s.tags)
     const roofs = pal.roofs[cls]
     let roof = roofs[hash(s.id) % roofs.length]
@@ -967,7 +1288,14 @@ export const buildScene = (
     } else {
       const span = s.tags.building === 'bridge' || s.tags['building:part'] === 'bridge' || s.tags.man_made === 'bridge' || isBridge(s.tags)
       const prism: Prism = { outer, base, top, foot: gMin, raised: h.base > 0 && !footed, span }
-      entries.push({ prism, make: (p) => extrude(view, pal, s.id, outer, inners, p.base, p.top, roof, dotsMode, s.tags.name, pastScene && !p.raised && p.base <= gMin ? grounds : undefined) })
+      const pale = time !== undefined && unconfirmedDated(dated, time.year)
+      if (dated?.source === 'evidence') byEvidence++
+      if (pale) unconfirmed++
+      entries.push({ prism, make: (p) => piecesOf(outer, inners, s.id).map(({ ring, holes, id, idx, seams }) => {
+        const feet = pastScene && !p.raised && p.base <= gMin ? idx.map((i) => grounds[i]) : undefined
+        const it = xrayUnder(view, pal, ring, extrude(view, pal, id, ring, holes, p.base, p.top, roof, dotsMode, s.tags.name, feet, wetWall.get(s.id), seams), xrayWalls.get(s.id), seams)
+        return pale ? paleItem(it, unconfirmedLook, ring.map((q) => view.toScreen(q, p.top)), seams) : it
+      }) })
     }
     if (isBridgeTower(s.tags)) towerParts.push({ at: centroid(outer), top })
   }
@@ -978,8 +1306,26 @@ export const buildScene = (
   const prisms = entries.flatMap((e) => ('prism' in e ? [e.prism] : []))
   const settled = settlePrisms(prisms)
   if (settled > 0) stats.partsSettled = settled
-  for (const e of entries) items.push('prism' in e ? e.make(e.prism) : e)
-  stats.buildings = items.length
+  for (const e of entries) { if ('prism' in e) { const made = e.make(e.prism); if (Array.isArray(made)) items.push(...made); else items.push(made) } else items.push(e) }
+  // A building drawn in pieces counts once.
+  stats.buildings = new Set(items.map((it) => it.id.split('#')[0])).size
+  if (byEvidence > 0) {
+    stats.buildingsByEvidence = byEvidence
+    stats.buildingsUnconfirmed = unconfirmed
+  }
+  if (floodOut?.unknown !== undefined) stats.floodUnknownBuildings = floodUnknownBuildings
+  if (floodOut !== undefined) {
+    stats.floodBuildingsInWater = floodDepths.length
+    stats.floodBuildingsSubmerged = floodSubmerged
+    if (floodDepths.length > 0) {
+      stats.floodDepthAtBuildingsMax = Number(Math.max(...floodDepths).toFixed(2))
+      stats.floodDepthAtBuildingsMedian = Number(median(floodDepths).toFixed(2))
+      stats.floodDepthAtBuildingsMaxFt = Number((Math.max(...floodDepths) / 0.3048).toFixed(1))
+      stats.floodDepthAtBuildingsMedianFt = Number((median(floodDepths) / 0.3048).toFixed(1))
+      stats.floodBuildingHeightMedianFt = Number((median(floodHeights) / 0.3048).toFixed(1))
+      stats.floodBuildingsUnder20Ft = floodHeights.filter((x) => x < 20 * 0.3048).length
+    }
+  }
   // Streetcars on their lines: a car every `TRAM_SPACING` meters along each run, 14 m long and
   // 3.6 m tall (a 1920s double-truck car) but 5.4 m wide, about twice a real car's width so its
   // pale roof reads against the line, all times the history's `streetcarScale`; set on the
@@ -1032,6 +1378,7 @@ export const buildScene = (
     stats.datedCurated = datedBy.curated
     stats.datedOsm = datedBy.osm
     stats.datedParcel = datedBy.parcel
+    if (datedBy.evidence > 0) stats.datedEvidence = datedBy.evidence
     stats.undatedToday = undated
     // Curated landmarks: lost buildings, from published dimensions, in their own tone.
     let landmarks = 0
@@ -1197,7 +1544,8 @@ export const buildScene = (
     // - buried: today's ground anywhere under it more than TRACED_BURIED meters above
     //   its floor (the level it is seated at), where a later cut or fill (the interstate's)
     //   would bury its walls (`tracedBuried`).
-    const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0 }
+    const ends = { map: 0, rebuilt: 0, highway: 0, assumed: 0, evidence: 0 }
+    let tracedUnconfirmed = 0
     leftOut = []
     let tracedOnWater = 0
     let tracedUnderViaduct = 0
@@ -1230,7 +1578,7 @@ export const buildScene = (
     // the line's width, and not from its center line.
     const clearOfCarDecks = clear === undefined || carDeckLines.length === 0 ? null : lineIndex(carDeckLines, (carDeckWidth ?? 0) / 2 + clear)
     const streetClear = time.history.tracedClearOfStreets
-    const CARRIAGEWAYS = new Set(['trunk', 'primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'living_street'])
+    const CARRIAGEWAYS = CARRIAGEWAY_KINDS
     // Each street keeps clear its carriageway: half its drawn width less a meter, at least
     // `tracedClearOfStreets`; the car lines that much either side of their center.
     const byReach = new Map<number, Vec2[][]>()
@@ -1246,6 +1594,15 @@ export const buildScene = (
     const clearOfStreets = streetClear === undefined ? null : (ring: Ring) => streetTests.some((t) => t(ring))
     let tracedInStreet = 0
     let tracedRagged = 0
+    let tracedCovered = 0
+    const tracedFloodDepths: number[] = []
+    let tracedFloodSubmerged = 0
+    // A flood plate with an evidence layer leaves out unconfirmed outbuildings far from the water
+    // (`isOutbuilding`): small, off the street, dry with OUTBUILDING_WATER meters to spare.
+    let outbuildingsHidden = 0
+    const pruneOutbuildings = floodOut !== undefined && time.history.evidence !== undefined
+    const offStreet = !pruneOutbuildings ? null : lineIndex(features.filter((f): f is LineFeature => f.type === 'line' && CARRIAGEWAYS.has(f.tags.highway ?? '') && !isBridge(f.tags))
+      .map((f) => f.points.map(([lon, lat]) => view.toView(lon, lat))), OUTBUILDING_STREET)
     for (const b of time.history.traced) {
       if (!alive(b.from, b.to, time.year)) continue
       // A series can smooth its traced outlines further (tracedSmooth, meters): simplified to that
@@ -1301,12 +1658,68 @@ export const buildScene = (
         continue
       }
       const grounds = outer.map((p) => terrain.z(p))
-      const base = Math.min(...grounds)
+      let base = Math.min(...grounds)
       const top = Math.max(seatLevel(grounds, terrain.exaggeration) + b.storeys * 3.6, base + 2.5)
-      items.push(extrude(view, pal, `traced:${b.id}`, outer, [], base, top, markRoof(outer, b.id) ?? pal.traced[b.material], dotsMode, undefined, grounds))
+      // A region can leave out a traced footprint that a building of today's map, drawn this
+      // year, covers by `tracedCovered` or more (the same building twice, or its replacement).
+      if (region.tracedCovered !== undefined && coveredShare(outer, drawnRings) >= region.tracedCovered) {
+        tracedCovered++
+        leftOut.push({ id: b.id, why: 'covered' })
+        continue
+      }
+      if (pruneOutbuildings && unconfirmedTraced(b, time.year) && isOutbuilding(outer, offStreet!, reachUnder)) {
+        outbuildingsHidden++
+        continue
+      }
+      // A traced building standing in a flood is drawn as today's are: its walls start at the
+      // water, with their x-ray band; one the water tops is not drawn. Both are counted.
+      let xray: { water: number; ground: (p: Vec2) => number } | undefined
+      if (floodOut !== undefined) {
+        const w = floodUnder([...outer, centroid(outer)])
+        if (w !== null) {
+          tracedFloodDepths.push(w.depth)
+          if (w.z >= top - 0.05) {
+            tracedFloodSubmerged++
+            continue
+          }
+          base = Math.max(base, w.z)
+          if (pal.flood.xray !== undefined) xray = { water: w.z, ground: (p: Vec2) => terrain.z(p) }
+        }
+      }
+      const tracedPale = unconfirmedTraced(b, time.year)
+      if (tracedPale) tracedUnconfirmed++
+      for (const { ring, id, idx, seams } of piecesOf(outer, [], `traced:${b.id}`)) {
+        const it = xrayUnder(view, pal, ring, extrude(view, pal, id, ring, [], base, top, markRoof(outer, b.id) ?? pal.traced[b.material], dotsMode, undefined, xray === undefined ? idx.map((i) => grounds[i]) : undefined, undefined, seams), xray, seams)
+        items.push(tracedPale ? paleItem(it, pal.flood.unconfirmed ?? UNCONFIRMED, ring.map((q) => view.toScreen(q, top)), seams) : it)
+      }
       ends[b.end]++
     }
-    stats.traced = ends.map + ends.rebuilt + ends.highway + ends.assumed
+    stats.traced = ends.map + ends.rebuilt + ends.highway + ends.assumed + ends.evidence
+    if (pruneOutbuildings) stats.outbuildingsHidden = outbuildingsHidden
+    if (region.tracedCovered !== undefined) stats.tracedCovered = tracedCovered
+    // A flood's counts over the whole city of its year, traced buildings too: every building
+    // shown, how many stand in the water, and their depths (`floodShown…`).
+    if (floodOut !== undefined) {
+      const all = [...floodDepths, ...tracedFloodDepths]
+      stats.floodShown = (stats.buildings ?? 0) + stats.traced
+      stats.floodShownInWater = all.length
+      stats.floodShownSubmerged = floodSubmerged + tracedFloodSubmerged
+      if (all.length > 0) {
+        stats.floodShownDepthMedianFt = Number((median(all) / 0.3048).toFixed(1))
+        stats.floodShownDepthMaxFt = Number((Math.max(...all) / 0.3048).toFixed(1))
+      }
+    }
+    if (ends.evidence > 0) {
+      stats.tracedEndEvidence = ends.evidence
+      stats.tracedUnconfirmed = tracedUnconfirmed
+    }
+    // With an evidence layer, the whole period city: today's buildings and traced ones shown,
+    // and how many of them are drawn as unconfirmed (for a caption's `{periodUnconfirmed}`).
+    if (time.history.evidence !== undefined) {
+      stats.periodShown = (stats.buildings ?? 0) + stats.traced
+      stats.periodUnconfirmed = (stats.buildingsUnconfirmed ?? 0) + tracedUnconfirmed
+      stats.periodConfirmed = stats.periodShown - stats.periodUnconfirmed
+    }
     if (tracedOnWater > 0) stats.tracedOnWater = tracedOnWater
     if (tracedUnderViaduct > 0) stats.tracedUnderViaduct = tracedUnderViaduct
     if (tracedInStreet > 0) stats.tracedInStreet = tracedInStreet
@@ -1353,16 +1766,149 @@ export const buildScene = (
     return false
   }
   let mergedPieces = 0
+  let decksUnder = 0
+  const underFlood = (p: Item): boolean => {
+    const m: Vec2 = [(p.span!.a[0] + p.span!.b[0]) / 2, (p.span!.a[1] + p.span!.b[1]) / 2]
+    if (p.span!.z >= floodZ(m)) return false
+    decksUnder++
+    return true
+  }
   for (let c = 0; c < chains.length; c++) {
     const onLineDeck = deckOnLine.size > 0 && deckOnLine.has(chains[c].line.id)
-    const all = bridgePieces(view, mark?.bridges?.includes(chains[c].line.id) === true ? { ...pal, deck: pal.mark.line } : tintRoads?.includes(chains[c].line.tags.highway ?? '') === true ? { ...pal, deck: pal.tint.road } : pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }), ...(onLineDeck ? { onLine: true } : {}) } : undefined)
-    const pieces = all.filter((p) => !merged(c, p))
+    const all = bridgePieces(view, mark?.bridges?.includes(chains[c].line.id) === true ? { ...pal, deck: pal.mark.line } : tintRoads?.includes(chains[c].line.tags.highway ?? '') === true ? { ...pal, deck: pal.tint.road } : pal, region, terrain, chains[c], lines[c], roofs, towers.get(c), tramRuns.length > 0 ? { runs: tramRuns.map((r) => r.pts), width: tramWidth, ...(carDeckWidth === undefined ? {} : { deck: carDeckWidth }), ...(onLineDeck ? { onLine: true } : {}) } : undefined, floodOut === undefined ? undefined : floodZ)
+    let pieces = all.filter((p) => !merged(c, p))
     mergedPieces += all.length - pieces.length
     spans += pieces.filter((p) => p.pier !== true).length
+    // In a flood, a deck piece whose deck (at its middle) lies below the water's surface is drawn
+    // under the water: the opaque water covers it, and its outline is laid faintly on the surface
+    // in the streets-under-water tone, so the reader still sees where the bridge runs. Deck heights
+    // are estimates (the region's rules over the ground or the river), so this is a statement about
+    // the drawing; the captions say so. Counted (`floodDeckSpansAwash`).
+    if (floodOut !== undefined) {
+      pieces = pieces.map((p) => {
+        if (p.span === undefined || p.pier === true || !underFlood(p)) return p
+        const m: Vec2 = [(p.span.a[0] + p.span.b[0]) / 2, (p.span.a[1] + p.span.b[1]) / 2]
+        const wz = floodZ(m)
+        const tone = pal.flood.streets === undefined ? pal.flood.tones[Math.floor(pal.flood.tones.length / 2)] : mix(pal.flood.tones[pal.flood.tones.length - 1], pal.flood.streets, 0.55)
+        return { ...p, id: `${p.id}.under`, zMin: wz, zMax: wz + 0.1, shapes: [{ pts: p.hull.map((q) => view.toScreen(q, wz + 0.05)), fill: tone, seal: true }], dots: [] }
+      })
+    }
     items.push(...pieces)
   }
   if (mergedPieces > 0) stats.railDeckPiecesMerged = mergedPieces
   stats.bridgePieces = spans
+  if (floodOut !== undefined) stats.floodDeckSpansAwash = decksUnder
+  // Floodwalls standing in this flood: a thin wall on the ground up to its top (drawn at the
+  // terrain's exaggeration, like the water it holds), in pieces of at most 8 m so each takes its
+  // place in the paint order. Where the water stands against it, the wall starts at the water;
+  // where the ground is higher than its top, nothing shows.
+  let wallPieces = 0
+  let openings = 0
+  const gatesOpen = extra.flood?.gates === 'open'
+  // The footprints a wall stops at (`occlusion: "strict"`): the buildings drawn.
+  const blockerItems = strictOcclusion ? items.filter((it) => it.kind === 'building' && it.footprint !== undefined) : []
+  const wallBlockers = blockerItems.map((it) => it.footprint!)
+  let wallTrimmed = 0
+  for (const [b, bar] of barriers.entries()) {
+    const topZ = (bar.top - terrain.datum) * terrain.exaggeration
+    for (let s = 0; s + 1 < bar.pts.length; s++) {
+      const a = bar.pts[s], c = bar.pts[s + 1]
+      const gap = bar.gaps?.[s] === true
+      if (gap) openings++
+      // An opening with its gates open: a dashed line across it on the ground, no wall.
+      if (gap && gatesOpen) {
+        if (!insideRect(a, frame) || !insideRect(c, frame) || pal.flood.gate === undefined) continue
+        const run = [0, 0.25, 0.5, 0.75, 1].map((t): Vec2 => [a[0] + (c[0] - a[0]) * t, a[1] + (c[1] - a[1]) * t])
+        items.push({
+          id: `floodgate:${b}.${s}`, kind: 'building', hull: convexHull(segmentQuad(a, c, 0.5, 0.5) ?? [a, c, a]),
+          zMin: Math.min(...run.map((p) => terrain.z(p))), zMax: Math.max(...run.map((p) => Math.max(terrain.z(p), floodZ(p)))) + 0.3, key: (a[1] + c[1]) / 2,
+          // On the water where the opening is under it, so the flood does not paint over it.
+          shapes: [{ pts: run.map((p) => view.toScreen(p, Math.max(terrain.z(p), floodZ(p)) + 0.2)), fill: 'none', line: true, stroke: { color: pal.flood.gate, width: (pal.flood.wallLineWidth ?? 1.2) * 0.8, dash: [3, 2.5] } }],
+          dots: [],
+        })
+        continue
+      }
+      const len = Math.hypot(c[0] - a[0], c[1] - a[1])
+      const m = Math.max(1, Math.ceil(len / 8))
+      for (let k = 0; k < m; k++) {
+        const k0: Vec2 = [a[0] + ((c[0] - a[0]) * k) / m, a[1] + ((c[1] - a[1]) * k) / m]
+        const k1: Vec2 = [a[0] + ((c[0] - a[0]) * (k + 1)) / m, a[1] + ((c[1] - a[1]) * (k + 1)) / m]
+        if (!insideRect(k0, frame) || !insideRect(k1, frame)) continue
+        // With `occlusion: "strict"`, a wall that runs through a building stops at its outline:
+        // the building wins inside its footprint (OSM's wall line follows the building's own wall
+        // there). The piece is drawn over each run of it outside every footprint.
+        const runs: [number, number][] = strictOcclusion ? outsideRuns(k0, k1, wallBlockers) : [[0, 1]]
+        if (strictOcclusion && (runs.length !== 1 || runs[0][0] > 0 || runs[0][1] < 1)) {
+          wallTrimmed++
+          if (process.env.ISOSCAPE_WALL_DEBUG === '1') console.error('wall cut', b, s, k, JSON.stringify(runs), blockerItems.filter((it) => [0.1, 0.5, 0.9].some((t) => pointInRing([k0[0] + (k1[0] - k0[0]) * t, k0[1] + (k1[1] - k0[1]) * t], it.footprint!))).map((it) => it.id))
+        }
+        for (const [r, run] of runs.entries()) {
+        const trimmed0 = run[0] > 0, trimmed1 = run[1] < 1
+        const p0: Vec2 = [k0[0] + (k1[0] - k0[0]) * run[0], k0[1] + (k1[1] - k0[1]) * run[0]]
+        const p1: Vec2 = [k0[0] + (k1[0] - k0[0]) * run[1], k0[1] + (k1[1] - k0[1]) * run[1]]
+        if (Math.hypot(p1[0] - p0[0], p1[1] - p0[1]) < 0.5) continue
+        const half = pal.flood.wallHalf ?? WALL_HALF
+        // With `occlusion: "strict"`, the pieces at a bend are mitred (cut on the bend's bisector),
+        // so neighbors meet edge to edge instead of overlapping on the outside of the bend.
+        const quad = strictOcclusion
+          ? mitredQuad(p0, p1, k === 0 && s > 0 && !trimmed0 ? bar.pts[s - 1] : undefined, k === m - 1 && s + 2 < bar.pts.length && !trimmed1 ? bar.pts[s + 2] : undefined, half)
+          : segmentQuad(p0, p1, half, half)
+        if (quad === null) continue
+        const outer = orient(quad, true)
+        let base = Math.min(...outer.map((p) => terrain.z(p)))
+        const w = floodUnder(outer)
+        if (w !== null) base = Math.max(base, w.z)
+        if (topZ - base < 0.3) continue
+        // A shut opening (a closure across a road or track) in the gate color, where the palette has one.
+        const face = gap && pal.flood.gate !== undefined ? pal.flood.gate : pal.flood.wall
+        const wall = extrude(view, { ...pal, wallLit: face, wallShade: mix(face, pal.ink, 0.25) }, `floodwall:${b}.${s}.${k}${r === 0 ? '' : `-${r}`}`, outer, [], base, topZ, pal.flood.wallTop, 'none', bar.name)
+        // A look tried: a pale casing, then an ink line, along the wall's top, so it reads from afar.
+        // Square ends: each piece's casing stops where its line does, and covers no neighbor's line.
+        const top: Vec2[] = [view.toScreen(p0, topZ), view.toScreen(p1, topZ)]
+        // With `occlusion: "strict"`, each band is a parallelogram cut square to the screen at the
+        // piece's ends (`topBand`), so it lies over no neighbor: a stroke's square-to-the-line ends
+        // poke into the next piece's face where the wall runs aslant.
+        const band = (width: number, color: string): Shape => strictOcclusion
+          ? { pts: topBand(top[0], top[1], width), fill: color, seal: true }
+          : { pts: top, fill: 'none', line: true, stroke: { color, width } }
+        if (pal.flood.wallCasing !== undefined) wall.shapes.push(band((pal.flood.wallLineWidth ?? 1) * 1.9, pal.flood.wallCasing))
+        if (pal.flood.wallLine !== undefined) wall.shapes.push(band(pal.flood.wallLineWidth ?? 1, pal.flood.wallLine))
+        // X-ray walls: the wall's face under the water, drawn over it, as for a building.
+        const padded = strictOcclusion && pal.flood.wallCasing !== undefined ? { ...wall, inkPad: (pal.flood.wallLineWidth ?? 1) * 0.95 } : wall
+        items.push(w !== null ? xrayUnder(view, pal, outer, padded, { water: w.z, ground: (p: Vec2) => terrain.z(p) }) : padded)
+        wallPieces++
+        }
+      }
+    }
+  }
+  // A wall's label, at the middle of each of its lines that runs 300 m or more inside the frame.
+  for (const bar of barriers) {
+    if (bar.label === undefined) continue
+    const inside = bar.pts.filter((p) => insideRect(p, frame))
+    let len = 0
+    for (let k = 0; k + 1 < inside.length; k++) len += Math.hypot(inside[k + 1][0] - inside[k][0], inside[k + 1][1] - inside[k][1])
+    if (len < 300) continue
+    // Set on the line where the least water lies within 40 m, nearest its middle: kept off water.
+    const wetNear = (p: Vec2): number => {
+      if (labelWater === undefined) return 0
+      let n = 0
+      for (let dj = -8; dj <= 8; dj++) for (let di = -8; di <= 8; di++) {
+        const i = Math.round((p[0] - terrain.x0) / terrain.cell) + di
+        const j = Math.round((p[1] - terrain.y0) / terrain.cell) + dj
+        if (i >= 0 && j >= 0 && i < terrain.nx && j < terrain.ny && (labelWater[j * terrain.nx + i] !== 0 || terrain.water[j * terrain.nx + i] === 1)) n++
+      }
+      return n
+    }
+    const mid = Math.floor(inside.length / 2)
+    let at = inside[mid]
+    let best = Infinity
+    inside.forEach((p, k) => { const score = wetNear(p) * 100 + Math.abs(k - mid); if (score < best) { best = score; at = p } })
+    floodLabels.push({ text: bar.label, at, z: (bar.top - terrain.datum) * terrain.exaggeration + 2, anchor: 'middle' })
+  }
+  if (floodOut !== undefined && openings > 0) stats.floodWallOpenings = openings
+  items.push(...gaugeItems)
+  if (floodOut !== undefined) stats.floodWallPieces = wallPieces
+  if (floodOut !== undefined && strictOcclusion) stats.floodWallCutAtBuildings = wallTrimmed
 
   // Graded ground (a switch's `tint`): each polygon in view meters, cut to a margin round the
   // frame, outers counter-clockwise and holes clockwise.
@@ -1385,6 +1931,8 @@ export const buildScene = (
     if (!insideRect(at, frame)) continue
     labels.push({ text: h.name, ...(h.caption === undefined ? {} : { caption: h.caption }), at, z: terrain.z(at), anchor: h.anchor ?? 'middle' })
   }
+  // A flood's numbered places (its markers), and the floodwalls' labels.
+  labels.push(...floodLabels)
   if (labels.length > 0) stats.labels = labels.length
 
   // An island (a switch's `island`): keep only what stands inside its polygon.
@@ -1417,7 +1965,7 @@ export const buildScene = (
   }
 
   return {
-    region, view, palette: pal, terrain, ground, ribbons, items: kept, stats,
+    region, view, palette: tintPalette(pal, tint), terrain, ground, ribbons, items: kept, stats,
     ...(islandOut === undefined ? {} : { island: islandOut }),
     ...(time === undefined ? {} : { time: { year: time.year, ...(time.title === undefined ? {} : { title: time.title }), curated, ...(time.history.tieClear === undefined ? {} : { tieClear: time.history.tieClear }), ...(time.history.carLineSeal === true ? { carLineSeal: true } : {}), ...(time.history.carDecks === true ? { carDecks: true } : {}) } }),
     ...(labels.length === 0 ? {} : { labels }),
@@ -1426,6 +1974,7 @@ export const buildScene = (
     ...(sectionsOut === undefined ? {} : { sections: sectionsOut }),
     ...(leftOut === undefined ? {} : { tracedLeftOut: leftOut }),
     ...(tints.length === 0 ? {} : { tints }),
+    ...(floodOut === undefined ? {} : { flood: floodOut }),
     ...(tint?.legend === undefined ? {} : { tintLegend: tint.legend }),
   }
 }
@@ -1676,6 +2225,137 @@ export const lineIndex = (lines: readonly (readonly Vec2[])[], reach: number): (
 }
 
 /** The rectangle either side of a segment, as a ring: left offset `l`, right offset `r`. */
+/**
+ * X-ray walls (a flood look's `xray`): under each wall of a building standing in water that
+ * faces the camera, the wall's true part under the surface, from the ground at each corner up to
+ * the water, as a band in the wall's tone drawn toward the flood's, with the waterline dark
+ * along its top and a light line at its foot. With `xray: "fade"`, the band's lower half goes
+ * further toward the water, so it fades toward the foot.
+ */
+export const xrayUnder = (view: View, pal: Palette, outer: Ring, item: Item, wet?: { water: number; ground: (p: Vec2) => number }, seams?: ReadonlySet<number>): Item => {
+  if (wet === undefined || pal.flood.xray === undefined) return item
+  const shapes: Shape[] = []
+  const mid = pal.flood.tones[Math.floor(pal.flood.tones.length / 2)]
+  let deepest = 0
+  const walls: { key: number; shapes: Shape[]; edge: readonly [Vec2, Vec2] }[] = []
+  for (let i = 0; i < outer.length; i++) {
+    const a = outer[i]
+    const b = outer[(i + 1) % outer.length]
+    const dx = b[0] - a[0]
+    const dy = b[1] - a[1]
+    const len = Math.hypot(dx, dy)
+    if (len < 1e-6 || -dx / len >= -1e-6) continue
+    if (seams?.has(i) === true) continue
+    const nE = dy / len
+    const tone = mix(pal.wallLit, pal.wallShade, (nE + 1) / 2)
+    const ga = Math.min(wet.ground(a), wet.water)
+    const gb = Math.min(wet.ground(b), wet.water)
+    deepest = Math.max(deepest, wet.water - ga, wet.water - gb)
+    if (wet.water - Math.min(ga, gb) < 0.05) continue
+    const top: Vec2[] = [view.toScreen(a, wet.water), view.toScreen(b, wet.water)]
+    const foot: Vec2[] = [view.toScreen(a, ga), view.toScreen(b, gb)]
+    const own: Shape[] = []
+    if (pal.flood.xray === 'fade') {
+      const ma: Vec2 = [(top[0][0] + foot[0][0]) / 2, (top[0][1] + foot[0][1]) / 2]
+      const mb: Vec2 = [(top[1][0] + foot[1][0]) / 2, (top[1][1] + foot[1][1]) / 2]
+      own.push({ pts: [top[0], top[1], mb, ma], fill: mix(tone, mid, 0.5) })
+      own.push({ pts: [ma, mb, foot[1], foot[0]], fill: mix(tone, mid, 0.8) })
+    } else {
+      own.push({ pts: [top[0], top[1], foot[1], foot[0]], fill: mix(tone, mid, 0.55) })
+      own.push({ pts: foot, fill: 'none', line: true, stroke: { color: pal.flood.tones[1], width: 0.8 } })
+    }
+    own.push({ pts: [top[0], foot[0]], fill: 'none', line: true, stroke: { color: mix(tone, mid, 0.7), width: 0.6 } })
+    own.push({ pts: [top[1], foot[1]], fill: 'none', line: true, stroke: { color: mix(tone, mid, 0.7), width: 0.6 } })
+    own.push({ pts: top, fill: 'none', line: true, stroke: { color: pal.flood.edge, width: pal.flood.xrayLine ?? 1.4 } })
+    walls.push({ key: (a[1] + b[1]) / 2, shapes: own, edge: [a, b] as const })
+  }
+  walls.sort((x, y) => y.key - x.key)
+  for (const w of walls) shapes.push(...w.shapes)
+  if (shapes.length === 0) return item
+  // The water nearer the camera that lies over the band on screen is within this many meters:
+  // a fall of `deepest` scene meters shows as far as the ground recedes over cos(tilt)/squash.
+  const reach = deepest * Math.sqrt(1 - view.squash * view.squash) / view.squash + 1
+  return { ...item, under: { shapes, reach, edges: walls.map((w) => w.edge) } }
+}
+
+/** Half a floodwall's drawn thickness, meters (thicker than life, so it reads from afar). */
+export const WALL_HALF = 0.75
+
+/**
+ * The runs of segment p0→p1, as [t0, t1] (0 to 1), whose sample points every 0.25 m lie outside
+ * every ring of `blockers`: [[0, 1]] when it crosses none, [] when it lies wholly inside one.
+ */
+export const outsideRuns = (p0: Vec2, p1: Vec2, blockers: readonly Ring[]): [number, number][] => {
+  const len = Math.hypot(p1[0] - p0[0], p1[1] - p0[1])
+  const near = blockers.filter((r) => {
+    const xs = r.map((p) => p[0]), ys = r.map((p) => p[1])
+    return Math.max(...xs) >= Math.min(p0[0], p1[0]) - 0.5 && Math.min(...xs) <= Math.max(p0[0], p1[0]) + 0.5 && Math.max(...ys) >= Math.min(p0[1], p1[1]) - 0.5 && Math.min(...ys) <= Math.max(p0[1], p1[1]) + 0.5
+  })
+  if (near.length === 0) return [[0, 1]]
+  const n = Math.max(2, Math.ceil(len / 0.25))
+  const out = Array.from({ length: n + 1 }, (_, k) => {
+    const t = k / n
+    const p: Vec2 = [p0[0] + (p1[0] - p0[0]) * t, p0[1] + (p1[1] - p0[1]) * t]
+    return !near.some((r) => pointInRing(p, r))
+  })
+  const runs: [number, number][] = []
+  let start = -1
+  for (let k = 0; k <= n + 1; k++) {
+    if (k <= n && out[k]) { if (start < 0) start = k; continue }
+    if (start >= 0) {
+      if (k - 1 > start) runs.push([start / n, (k - 1) / n])
+      start = -1
+    }
+  }
+  return runs
+}
+
+/**
+ * A band `width` screen units wide along the screen segment a→b, its ends cut vertical (or, for
+ * a steep line, level) on screen, so the bands of a run of pieces meet end to end without
+ * overlapping.
+ */
+export const topBand = (a: Vec2, b: Vec2, width: number): Vec2[] => {
+  const dx = b[0] - a[0], dy = b[1] - a[1]
+  const len = Math.hypot(dx, dy)
+  if (len < 1e-9) return [a, b, b, a]
+  // Half the width, measured along the cut: the band keeps its width across the line. A line
+  // nearer level is cut vertical, a steeper one level, so the cut never runs along the line.
+  if (Math.abs(dx) >= Math.abs(dy)) {
+    const h = (width / 2) * (len / Math.abs(dx))
+    return [[a[0], a[1] - h], [b[0], b[1] - h], [b[0], b[1] + h], [a[0], a[1] + h]]
+  }
+  const h = (width / 2) * (len / Math.abs(dy))
+  return [[a[0] - h, a[1]], [b[0] - h, b[1]], [b[0] + h, b[1]], [a[0] + h, a[1]]]
+}
+
+/**
+ * A wall piece from p0 to p1, `half` meters either side of its line, its ends cut square or, where
+ * the line bends (the point before p0, `prev`, or after p1, `next`), on the bend's bisector.
+ */
+export const mitredQuad = (p0: Vec2, p1: Vec2, prev: Vec2 | undefined, next: Vec2 | undefined, half: number): Vec2[] | null => {
+  const unit = (a: Vec2, b: Vec2): Vec2 | null => { const l = Math.hypot(b[0] - a[0], b[1] - a[1]); return l < 1e-9 ? null : [(b[0] - a[0]) / l, (b[1] - a[1]) / l] }
+  const d = unit(p0, p1)
+  if (d === null) return null
+  const n: Vec2 = [-d[1], d[0]]
+  const end = (p: Vec2, other: Vec2 | undefined, before: boolean): [Vec2, Vec2] => {
+    const e = other === undefined ? null : before ? unit(other, p) : unit(p, other)
+    let m: Vec2 = n
+    if (e !== null) {
+      const ne: Vec2 = [-e[1], e[0]]
+      const sum: Vec2 = [n[0] + ne[0], n[1] + ne[1]]
+      const l = Math.hypot(sum[0], sum[1])
+      const cos = l / 2
+      // Sharp bends (over about 120 degrees) keep a square end rather than a long spike.
+      if (l > 1e-6 && cos > 0.5) m = [sum[0] / l / cos, sum[1] / l / cos]
+    }
+    return [[p[0] + m[0] * half, p[1] + m[1] * half], [p[0] - m[0] * half, p[1] - m[1] * half]]
+  }
+  const [a0, b0] = end(p0, prev, true)
+  const [a1, b1] = end(p1, next, false)
+  return [a0, a1, b1, b0]
+}
+
 const segmentQuad = (a: Vec2, b: Vec2, l: number, r: number, extend = 0): Vec2[] | null => {
   const dx = b[0] - a[0]
   const dy = b[1] - a[1]
@@ -1704,6 +2384,8 @@ const segmentQuad = (a: Vec2, b: Vec2, l: number, r: number, extend = 0): Vec2[]
 export const extrude = (
   view: View, pal: Palette, id: string, outer: Ring, inners: Ring[], base: number, top: number,
   roof: string, dots: 'all' | 'roof' | 'none', name?: string, feet?: readonly number[],
+  wet?: { readonly split: number; readonly line: number; readonly above?: boolean },
+  seams?: ReadonlySet<number>,
 ): Item => {
   const walls: { key: number; shape: Shape }[] = []
   for (const [r, ring] of [outer, ...inners].entries()) {
@@ -1718,12 +2400,28 @@ export const extrude = (
       const dy = b[1] - a[1]
       const len = Math.hypot(dx, dy)
       if (len < 1e-6) continue
+      // A seam between pieces of one building (`convexPieces`) has no wall.
+      if (r === 0 && seams?.has(i) === true) continue
       const nE = dy / len
       const nN = -dx / len
       // The camera looks along +N', so a wall faces it when its normal points to −N'.
       if (nN >= -1e-6) continue
       // Light from the left: faces turned left are lit, faces turned right are in shade.
       const tone = mix(pal.wallLit, pal.wallShade, (nE + 1) / 2)
+      // In water (`wet`): the wall in two parts, the lower tinted with the flood's deep tone
+      // (seen through the water, or the tide mark's band), and a waterline across it.
+      if (wet !== undefined && wet.split > base + 0.05 && wet.split < top) {
+        const foot = wallFoot(i, (i + 1) % ring.length)
+        const deep = pal.flood.tones[pal.flood.tones.length - 1]
+        const lo = wet.above === true ? wet.line : foot
+        const tinted = mix(tone, deep, wet.above === true ? 0.45 : 0.55)
+        const key = (a[1] + b[1]) / 2
+        if (lo > foot) walls.push({ key, shape: { pts: [view.toScreen(a, foot), view.toScreen(b, foot), view.toScreen(b, lo), view.toScreen(a, lo)], fill: tone, ink: true } })
+        walls.push({ key, shape: { pts: [view.toScreen(a, lo), view.toScreen(b, lo), view.toScreen(b, wet.split), view.toScreen(a, wet.split)], fill: tinted, ink: true } })
+        walls.push({ key, shape: { pts: [view.toScreen(a, wet.split), view.toScreen(b, wet.split), view.toScreen(b, top), view.toScreen(a, top)], fill: tone, ink: true } })
+        walls.push({ key, shape: { pts: [view.toScreen(a, wet.line), view.toScreen(b, wet.line)], fill: 'none', line: true, stroke: { color: pal.flood.edge, width: 1.4 } } })
+        continue
+      }
       walls.push({
         key: (a[1] + b[1]) / 2,
         shape: {
@@ -1739,6 +2437,13 @@ export const extrude = (
   walls.sort((x, y) => y.key - x.key)
   const shapes: Shape[] = walls.map((w) => w.shape)
   for (const ring of [outer, ...inners]) {
+    if (ring === outer && seams !== undefined && seams.size > 0) {
+      // A piece's roof: sealed, with ink on its outline's own edges only (not across the seams).
+      const pts = ring.map((p) => view.toScreen(p, top))
+      shapes.push({ pts, fill: roof, seal: true })
+      for (let i = 0; i < pts.length; i++) if (!seams.has(i)) shapes.push({ pts: [pts[i], pts[(i + 1) % pts.length]], fill: 'none', line: true })
+      continue
+    }
     shapes.push({ pts: ring.map((p) => view.toScreen(p, top)), fill: roof, ink: true })
   }
   const roofDots = dots === 'none' ? [] : [...outer, ...inners.flat()].map((p) => view.toScreen(p, top))
@@ -1754,6 +2459,26 @@ export const extrude = (
     ...(name === undefined ? {} : { name }),
     footprint: outer,
   }
+}
+
+/**
+ * A building drawn as unconfirmed (an evidence layer: standing on an earlier source, not
+ * ascertained for the scene's year): every filled face and roof taken `share` of the way toward
+ * `tone`, inked with the finer line; with `roof` (its roof outline in screen px), the look's roof
+ * tone and dashed outline too (see `UnconfirmedLook`). Lines and strokes stay as they are.
+ */
+export const paleItem = (it: Item, look: UnconfirmedLook, roof?: readonly Vec2[], seams?: ReadonlySet<number>): Item => {
+  const isRoof = (sh: Shape) => roof !== undefined && sh.pts.length === roof.length && sh.pts[0][0] === roof[0][0] && sh.pts[0][1] === roof[0][1]
+  const shapes: Shape[] = it.shapes.map((sh) => {
+    if (sh.line === true || sh.fill === 'none') return sh
+    const fill = look.roofTone !== undefined && isRoof(sh) ? mix(sh.fill, look.roofTone, look.roofShare ?? look.share) : mix(sh.fill, look.tone, look.share)
+    return { ...sh, fill, ...(sh.ink === true ? { fine: true } : {}) }
+  })
+  if (look.outline !== undefined && roof !== undefined && roof.length >= 3) {
+    if (seams === undefined || seams.size === 0) shapes.push({ pts: [...roof, roof[0]], fill: 'none', line: true, stroke: { color: look.outline.color, width: look.outline.width, dash: look.outline.dash } })
+    else for (let i = 0; i < roof.length; i++) if (!seams.has(i)) shapes.push({ pts: [roof[i], roof[(i + 1) % roof.length]], fill: 'none', line: true, stroke: { color: look.outline.color, width: look.outline.width, dash: look.outline.dash } })
+  }
+  return { ...it, shapes }
 }
 
 /**
@@ -1789,6 +2514,71 @@ export const segmentsCross = (a: Vec2, b: Vec2, c: Vec2, d: Vec2): boolean => {
 
 /** How far apart a traced building's footprint is read for water, meters. */
 export const TRACED_STEP = 1
+
+/** Streets with a carriageway: a building fronts one when it is within OUTBUILDING_STREET of its center line. */
+const CARRIAGEWAY_KINDS: ReadonlySet<string> = new Set(['trunk', 'primary', 'secondary', 'tertiary', 'residential', 'unclassified', 'living_street'])
+
+/**
+ * An outbuilding, for a flood plate's period city: a traced footprint under OUTBUILDING_AREA m²
+ * (a shed, privy, stable or kitchen at the back of a lot: on the Sanborn sheets these are the
+ * small frame and brick blocks behind the houses), with no part within OUTBUILDING_STREET m of a
+ * street's center line (so not fronting a street), and dry with OUTBUILDING_WATER m to spare
+ * (no water under it or at any point that far around it). Only unconfirmed traced buildings are
+ * tested; a confirmed one, or anything in or near the water, is always drawn.
+ */
+export const OUTBUILDING_AREA = 60
+/** A field averaged over each node's 3 by 3 neighborhood (edges clamped). */
+const smooth3 = (f: Float32Array, nx: number, ny: number): Float32Array => {
+  const out = new Float32Array(f.length)
+  for (let j = 0; j < ny; j++) for (let i = 0; i < nx; i++) {
+    let sum = 0, w = 0
+    for (let dj = -1; dj <= 1; dj++) for (let di = -1; di <= 1; di++) {
+      const ii = Math.min(nx - 1, Math.max(0, i + di)), jj = Math.min(ny - 1, Math.max(0, j + dj))
+      sum += f[jj * nx + ii]; w++
+    }
+    out[j * nx + i] = sum / w
+  }
+  return out
+}
+
+/** The sampling step (m) of `coveredShare`. */
+export const COVERED_STEP = 0.5
+
+const ringBox = (r: readonly Vec2[]): readonly [number, number, number, number] =>
+  [Math.min(...r.map((p) => p[0])), Math.min(...r.map((p) => p[1])), Math.max(...r.map((p) => p[0])), Math.max(...r.map((p) => p[1]))]
+
+/**
+ * The share of `ring`'s area (view meters) that lies inside any of `polys` (outer less holes),
+ * sampled every `step` m: for `tracedCovered`, a traced footprint under today's buildings.
+ */
+export const coveredShare = (ring: readonly Vec2[], polys: readonly { outer: readonly Vec2[]; inners?: readonly (readonly Vec2[])[]; box?: readonly [number, number, number, number] }[], step = COVERED_STEP): number => {
+  const [x0, y0, x1, y1] = ringBox(ring)
+  const near = polys.map((p) => ({ ...p, box: p.box ?? ringBox(p.outer) })).filter(({ box }) => box[0] <= x1 && box[2] >= x0 && box[1] <= y1 && box[3] >= y0)
+  let all = 0
+  let under = 0
+  for (let y = y0 + step / 2; y < y1; y += step) {
+    for (let x = x0 + step / 2; x < x1; x += step) {
+      const p: Vec2 = [x, y]
+      if (!pointInRing(p, ring)) continue
+      all++
+      if (near.some(({ outer, inners, box }) => x >= box[0] && x <= box[2] && y >= box[1] && y <= box[3] && pointInPolygon(p, [outer, ...(inners ?? [])]))) under++
+    }
+  }
+  return all === 0 ? 0 : under / all
+}
+
+export const OUTBUILDING_STREET = 12
+export const OUTBUILDING_WATER = 60
+export const isOutbuilding = (outer: Ring, nearStreet: (ring: Ring) => boolean, wet: (pts: readonly Vec2[]) => boolean): boolean => {
+  if (Math.abs(signedArea(outer)) >= OUTBUILDING_AREA || nearStreet(outer)) return false
+  const c = centroid(outer)
+  const around: Vec2[] = [...outer, c]
+  for (let k = 0; k < 16; k++) {
+    const a = (k / 16) * 2 * Math.PI
+    for (const r of [OUTBUILDING_WATER / 2, OUTBUILDING_WATER]) around.push([c[0] + r * Math.cos(a), c[1] + r * Math.sin(a)])
+  }
+  return !wet(around)
+}
 /**
  * A traced building with any part this near a rail viaduct's center line, meters, is left out:
  * the viaducts were cut through built blocks, a sheet's fit is good to a few meters, and the deck
@@ -2982,6 +3772,7 @@ const bridgePieces = (
   view: View, pal: Palette, region: Region, terrain: Terrain, chain: BridgeChain,
   dl: DeckLine, roofs: readonly Roof[] = [], towers?: readonly Tower[],
   trams?: { readonly runs: readonly (readonly Vec2[])[]; readonly width: number; readonly deck?: number; readonly onLine?: boolean },
+  floodZ?: (p: Vec2) => number,
 ): Item[] => {
   const spacing = pierSpacing(region, chain)
   const line = chain.line
@@ -3029,7 +3820,7 @@ const bridgePieces = (
         const c0: Vec2 = [p0[0] + (p1[0] - p0[0]) * u, p0[1] + (p1[1] - p0[1]) * u]
         // A pier over a building stands on its roof, not down through it.
         const below = buildingAt(roofs, c0)
-        const footZ = Math.max(terrain.z(c0), below !== null && below.base < pz ? below.top : -Infinity)
+        const footZ = Math.max(terrain.z(c0), below !== null && below.base < pz ? below.top : -Infinity, floodZ?.(c0) ?? -Infinity)
         // A set's rail bridge stands on its piers over water however low it runs (railPiersOverWater).
         const wetFoot = rail && region.railPiersOverWater === true && below === null && drawnWet(terrain, c0) === true
         if (pz - footZ > (wetFoot ? 0.5 : 3)) {
@@ -3043,7 +3834,7 @@ const bridgePieces = (
           // the camera even where the deck above passes over that building's edge.
           const foot = segmentQuad(l, r, 0.4, 0.4)
           if (foot !== null) {
-            items.push({
+            const pier: Item = {
               id: `${line.id}.${i}.${k}.pier${items.length}`,
               kind: 'bridge',
               hull: convexHull(foot),
@@ -3053,7 +3844,14 @@ const bridgePieces = (
               shapes: [{ pts: [view.toScreen(l, footZ), view.toScreen(r, footZ), view.toScreen(r, pz - FASCIA), view.toScreen(l, pz - FASCIA)], fill: pal.pier, ink: true }],
               dots: [],
               pier: true,
-            })
+            }
+            // A pier standing in a flood (not on a roof) gets the x-ray band of a building's wall:
+            // its face under the water, from the ground (or the river's surface) up to the water.
+            const water = floodZ?.(c0) ?? -Infinity
+            const pierFoot = orient(foot, true)
+            items.push(below === null && water > terrain.z(c0) && pal.flood.xray !== undefined
+              ? xrayUnder(view, { ...pal, wallLit: pal.pier, wallShade: mix(pal.pier, pal.ink, 0.25) }, pierFoot, pier, { water, ground: (q: Vec2) => terrain.z(q) })
+              : pier)
           }
         }
         nextPier += spacing

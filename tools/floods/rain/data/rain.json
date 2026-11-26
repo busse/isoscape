@@ -1,0 +1,1154 @@
+{
+ "about": "Every number used in the Gaston rain captions, with its source. 'computed' means computed in tools/floods/rain/ (method in each script's docstring). Times EDT = UTC - 4.",
+ "window_utc": [
+  "2004-08-30T12:00",
+  "2004-08-31T06:00"
+ ],
+ "watershed": {
+  "area_km2": 31.49,
+  "area_acres": 7782,
+  "source": "computed: tools/floods/rain/watershed.py on 3DEP (see dem_url)",
+  "compare": "City of Richmond, Shockoe Small Area Plan (Aug. 2023), p42: about 8,000-acre watershed (sewershed); https://rva.gov/sites/default/files/2023-08/082023_ShockoePlanFinal_0.pdf, read 2026-11-23",
+  "center": [
+   37.5595,
+   -77.4366
+  ],
+  "dem_url": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/exportImage?bbox=-77.5200000,37.5150000,-77.3700000,37.6600000&bboxSR=4326&imageSR=4326&size=1500,1450&format=tiff&pixelType=F32&noData=-9999&noDataInterpretation=esriNoDataMatchAny&interpolation=RSP_BilinearInterpolation&compression=None&f=image",
+  "alternative_5m": {
+   "area_km2": 28.75,
+   "area_acres": 7104,
+   "dem": "isoscape cache data/richmond-streetcars/dem.bin.gz (3DEP, 5 m), east edge -77.3928 (touches the divide)",
+   "basin_total_in": 10.31
+  }
+ },
+ "radar": {
+  "site": "KAKQ Wakefield VA, 36.98405 N 77.007361 W (NCEI HOMR nexrad-stations.txt, read 2026-11-23)",
+  "data": "NEXRAD Level II, 268 volumes 11:30 UTC Aug. 30 to 06:30 UTC Aug. 31, https://unidata-nexrad-level2.s3.amazonaws.com/ (manifest-radar.json)",
+  "zr": {
+   "tropical": "Z = 250 R^1.2",
+   "standard": "Z = 300 R^1.4"
+  },
+  "dbz_floor_cap": [
+   10,
+   53
+  ],
+  "raw_max_total_in": {
+   "tropical": 11.29,
+   "standard": 5.4,
+   "tropical_0p9": 10.04
+  },
+  "corrected_max_total_in": 18.48,
+  "corrected_max_in_basin_in": 11.55,
+  "corrected_max_at": [
+   37.745,
+   -77.31875
+  ]
+ },
+ "bias": {
+  "central": "local correction: radar x exp(inverse-distance-weighted mean of log(gauge / raw radar)), weight 1 / (d^2 + L^2) with L = 5 km, unofficial gauges at half weight, every located gauge over 1 inch",
+  "mean_field": {
+   "method": "ratio of the sum of gauge totals to the sum of raw tropical radar at the same points (3 x 3 cells), official gauges whose period covers the window",
+   "gauges_used": [
+    "Richmond Intl. Airport (RIC)",
+    "Ashland, Hanover Co. airport (ASOS)",
+    "Sandston (coop)",
+    "Winterpock (coop)",
+    "Hopewell (coop)"
+   ],
+   "tropical": 1.434,
+   "standard": 2.616,
+   "tropical_0p9": 1.434,
+   "leave_one_out": [
+    1.439,
+    1.215,
+    1.387,
+    1.515,
+    1.627
+   ],
+   "basin_total_in": 13.12
+  },
+  "local_factor_at_basin_center": {
+   "L=3 km": 1.049,
+   "L=5 km": 1.118,
+   "L=10 km": 1.208,
+   "L=20 km": 1.267
+  },
+  "leave_one_out_rms_log_error": {
+   "raw": 0.399,
+   "mean_field": 0.423,
+   "local_L5": 0.362
+  },
+  "leave_one_out_note": "RMS of ln(estimate / gauge) when each located gauge is predicted from the others; 0.36 is about a factor of 1.4 either way",
+  "basin_total_candidates_in": {
+   "radar, no correction": 9.15,
+   "radar, local correction L=3 km": 9.85,
+   "radar, local correction L=5 km": 10.34,
+   "radar, local correction L=10 km": 11.08,
+   "radar, local correction L=20 km": 11.6,
+   "AORC v1.1": 8.56,
+   "Stage IV, sum of hourly": 9.07,
+   "Stage IV, 24 h analysis to 12 UTC Aug. 31": 10.79
+  }
+ },
+ "gauges": [
+  {
+   "name": "Richmond Intl. Airport (RIC)",
+   "short": "Airport",
+   "inches": 6.68,
+   "period": "calendar day Aug. 30 (rain 11:24 a.m. to 10:54 p.m. EDT)",
+   "kind": "official",
+   "source": "S1 p8; S8; S9",
+   "lat": 37.51154,
+   "lon": -77.32338,
+   "loc": "GHCN",
+   "bias": true,
+   "radar_tropical": 4.74,
+   "radar_standard": 2.64,
+   "radar_tropical_0p9": 4.66,
+   "radar_corrected": 6.62,
+   "ratio_gauge_to_raw_radar": 1.41
+  },
+  {
+   "name": "Ashland, Hanover Co. airport (ASOS)",
+   "short": "Ashland",
+   "inches": 10.61,
+   "period": "calendar day Aug. 30",
+   "kind": "official",
+   "source": "S1 p8; S9",
+   "lat": 37.70926,
+   "lon": -77.43484,
+   "loc": "GHCN",
+   "bias": true,
+   "radar_tropical": 4.26,
+   "radar_standard": 2.4,
+   "radar_tropical_0p9": 4.29,
+   "radar_corrected": 8.67,
+   "ratio_gauge_to_raw_radar": 2.49
+  },
+  {
+   "name": "Sandston (coop)",
+   "short": "Sandston",
+   "inches": 8.1,
+   "period": "24 h to morning of Aug. 31",
+   "kind": "official",
+   "source": "S1 p8; S9",
+   "lat": 37.54417,
+   "lon": -77.27583,
+   "loc": "GHCN",
+   "bias": true,
+   "radar_tropical": 5.01,
+   "radar_standard": 2.77,
+   "radar_tropical_0p9": 4.33,
+   "radar_corrected": 7.38,
+   "ratio_gauge_to_raw_radar": 1.62
+  },
+  {
+   "name": "Winterpock (coop)",
+   "short": "Winterpock",
+   "inches": 5.69,
+   "period": "24 h to morning of Aug. 31",
+   "kind": "official",
+   "source": "S2; S9",
+   "lat": 37.32459,
+   "lon": -77.64364,
+   "loc": "GHCN",
+   "bias": true,
+   "radar_tropical": 5.09,
+   "radar_standard": 2.78,
+   "radar_tropical_0p9": 5.38,
+   "radar_corrected": 5.84,
+   "ratio_gauge_to_raw_radar": 1.12
+  },
+  {
+   "name": "Hopewell (coop)",
+   "short": "Hopewell",
+   "inches": 4.63,
+   "period": "24 h to morning of Aug. 31 (2.32 more the day before, outside the window)",
+   "kind": "official",
+   "source": "S9",
+   "lat": 37.2992,
+   "lon": -77.2775,
+   "loc": "GHCN",
+   "bias": true,
+   "radar_tropical": 5.81,
+   "radar_standard": 3.06,
+   "radar_tropical_0p9": 6.24,
+   "radar_corrected": 5.1,
+   "ratio_gauge_to_raw_radar": 0.8
+  },
+  {
+   "name": "Montpelier (coop)",
+   "short": "Montpelier",
+   "inches": 0.72,
+   "period": "24 h to morning of Aug. 31",
+   "kind": "official",
+   "source": "S9",
+   "lat": 37.8644,
+   "lon": -77.6383,
+   "loc": "GHCN",
+   "bias": false,
+   "note": "light total; left out of the ratio, where a small value would only add noise",
+   "radar_tropical": 0.44,
+   "radar_standard": 0.36,
+   "radar_tropical_0p9": 0.5,
+   "radar_corrected": 0.64,
+   "ratio_gauge_to_raw_radar": 1.64
+  },
+  {
+   "name": "Richmond (West End)",
+   "short": "West End",
+   "inches": 12.6,
+   "period": "storm",
+   "kind": "unofficial",
+   "source": "S1 p8; S2",
+   "lat": null,
+   "lon": null,
+   "loc": "unknown: the reports say only 'West End' (UNCONFIRMED)",
+   "bias": false
+  },
+  {
+   "name": "Richmond (Math & Science Center)",
+   "short": "Math & Sci. Ctr.",
+   "inches": 12.3,
+   "period": "storm",
+   "kind": "unofficial",
+   "source": "S1 p8; S2",
+   "lat": 37.547,
+   "lon": -77.383,
+   "loc": "approximate: Mathematics and Science Center, eastern Henrico (UNCONFIRMED)",
+   "bias": false,
+   "radar_tropical": 7.49,
+   "radar_standard": 3.94,
+   "radar_tropical_0p9": 7.02,
+   "radar_corrected": 10.03,
+   "ratio_gauge_to_raw_radar": 1.64
+  },
+  {
+   "name": "Mechanicsville",
+   "short": "Mechanicsville",
+   "inches": 10.7,
+   "period": "storm",
+   "kind": "unofficial",
+   "source": "S1 p8; S2",
+   "lat": 37.609,
+   "lon": -77.373,
+   "loc": "approximate: the community's center",
+   "bias": false,
+   "radar_tropical": 9.35,
+   "radar_standard": 4.76,
+   "radar_tropical_0p9": 8.72,
+   "radar_corrected": 12.2,
+   "ratio_gauge_to_raw_radar": 1.14
+  },
+  {
+   "name": "Science Museum of Virginia",
+   "short": "Science Museum",
+   "inches": 6.56,
+   "period": "storm",
+   "kind": "unofficial",
+   "source": "S1 p8; S2",
+   "lat": 37.5613,
+   "lon": -77.4675,
+   "loc": "approximate: 2500 W. Broad St.",
+   "bias": false,
+   "radar_tropical": 9.61,
+   "radar_standard": 4.9,
+   "radar_tropical_0p9": 8.88,
+   "radar_corrected": 9.85,
+   "ratio_gauge_to_raw_radar": 0.68
+  },
+  {
+   "name": "St. Christopher's School",
+   "short": "St. Christopher's",
+   "inches": 6.4,
+   "period": "storm",
+   "kind": "unofficial",
+   "source": "S1 p8; S2",
+   "lat": 37.578,
+   "lon": -77.519,
+   "loc": "approximate: the school's campus",
+   "bias": false,
+   "radar_tropical": 5.63,
+   "radar_standard": 3.07,
+   "radar_tropical_0p9": 5.62,
+   "radar_corrected": 6.11,
+   "ratio_gauge_to_raw_radar": 1.14
+  },
+  {
+   "name": "Chester",
+   "short": "Chester",
+   "inches": 6.2,
+   "period": "storm",
+   "kind": "unofficial",
+   "source": "S2",
+   "lat": 37.356,
+   "lon": -77.441,
+   "loc": "approximate: the community's center",
+   "bias": false,
+   "radar_tropical": 4.51,
+   "radar_standard": 2.54,
+   "radar_tropical_0p9": 4.3,
+   "radar_corrected": 5.63,
+   "ratio_gauge_to_raw_radar": 1.37
+  },
+  {
+   "name": "St. Mary's School",
+   "short": "St. Mary's",
+   "inches": 5.8,
+   "period": "storm",
+   "kind": "unofficial",
+   "source": "S2",
+   "lat": null,
+   "lon": null,
+   "loc": "unknown: which St. Mary's is not said",
+   "bias": false
+  },
+  {
+   "name": "WWBT TV-12",
+   "short": "WWBT",
+   "inches": 4.8,
+   "period": "storm",
+   "kind": "unofficial",
+   "source": "S2",
+   "lat": 37.5115,
+   "lon": -77.504,
+   "loc": "approximate: the station on Midlothian Turnpike",
+   "bias": false,
+   "radar_tropical": 6.78,
+   "radar_standard": 3.61,
+   "radar_tropical_0p9": 5.79,
+   "radar_corrected": 6.62,
+   "ratio_gauge_to_raw_radar": 0.71
+  },
+  {
+   "name": "Midlothian",
+   "short": "Midlothian",
+   "inches": 4.3,
+   "period": "storm",
+   "kind": "unofficial",
+   "source": "S2",
+   "lat": 37.506,
+   "lon": -77.649,
+   "loc": "approximate: the community's center",
+   "bias": false,
+   "radar_tropical": 3.18,
+   "radar_standard": 1.9,
+   "radar_tropical_0p9": 3.15,
+   "radar_corrected": 3.98,
+   "ratio_gauge_to_raw_radar": 1.35
+  },
+  {
+   "name": "Clover Hill H.S.",
+   "short": "Clover Hill",
+   "inches": 4.3,
+   "period": "storm",
+   "kind": "unofficial",
+   "source": "S2",
+   "lat": 37.413,
+   "lon": -77.642,
+   "loc": "approximate: the school's 2004 site on Hull Street Road (UNCONFIRMED)",
+   "bias": false,
+   "radar_tropical": 3.22,
+   "radar_standard": 1.92,
+   "radar_tropical_0p9": 3.0,
+   "radar_corrected": 4.0,
+   "ratio_gauge_to_raw_radar": 1.34
+  }
+ ],
+ "basin_hourly": {
+  "hour_start_edt": [
+   "2004-08-30T08:00",
+   "2004-08-30T09:00",
+   "2004-08-30T10:00",
+   "2004-08-30T11:00",
+   "2004-08-30T12:00",
+   "2004-08-30T13:00",
+   "2004-08-30T14:00",
+   "2004-08-30T15:00",
+   "2004-08-30T16:00",
+   "2004-08-30T17:00",
+   "2004-08-30T18:00",
+   "2004-08-30T19:00",
+   "2004-08-30T20:00",
+   "2004-08-30T21:00",
+   "2004-08-30T22:00",
+   "2004-08-30T23:00",
+   "2004-08-31T00:00",
+   "2004-08-31T01:00"
+  ],
+  "radar_tropical_raw": [
+   0.0,
+   0.0,
+   0.0,
+   0.003,
+   0.0,
+   0.083,
+   1.283,
+   1.459,
+   1.356,
+   1.971,
+   1.154,
+   1.472,
+   0.302,
+   0.049,
+   0.004,
+   0.006,
+   0.005,
+   0.005
+  ],
+  "radar_standard_raw": [
+   0.0,
+   0.0,
+   0.0,
+   0.003,
+   0.0,
+   0.06,
+   0.635,
+   0.738,
+   0.692,
+   0.961,
+   0.611,
+   0.751,
+   0.185,
+   0.039,
+   0.005,
+   0.007,
+   0.006,
+   0.006
+  ],
+  "radar_tropical_0p9_raw": [
+   0.0,
+   0.0,
+   0.0,
+   0.003,
+   0.0,
+   0.128,
+   1.349,
+   1.501,
+   1.209,
+   1.764,
+   0.985,
+   1.309,
+   0.272,
+   0.043,
+   0.002,
+   0.001,
+   0.001,
+   0.002
+  ],
+  "radar_corrected": [
+   0.0,
+   0.0,
+   0.0,
+   0.003,
+   0.0,
+   0.094,
+   1.444,
+   1.641,
+   1.535,
+   2.216,
+   1.308,
+   1.679,
+   0.344,
+   0.056,
+   0.005,
+   0.006,
+   0.006,
+   0.006
+  ],
+  "radar_corrected_low": [
+   0.0,
+   0.0,
+   0.0,
+   0.003,
+   0.0,
+   0.078,
+   1.195,
+   1.359,
+   1.271,
+   1.834,
+   1.082,
+   1.389,
+   0.285,
+   0.046,
+   0.004,
+   0.005,
+   0.005,
+   0.005
+  ],
+  "radar_corrected_high": [
+   0.0,
+   0.0,
+   0.0,
+   0.004,
+   0.0,
+   0.105,
+   1.619,
+   1.84,
+   1.721,
+   2.484,
+   1.466,
+   1.882,
+   0.386,
+   0.062,
+   0.005,
+   0.007,
+   0.006,
+   0.007
+  ],
+  "radar_mean_field": [
+   0.0,
+   0.0,
+   0.0,
+   0.004,
+   0.0,
+   0.12,
+   1.839,
+   2.092,
+   1.944,
+   2.826,
+   1.655,
+   2.11,
+   0.433,
+   0.07,
+   0.006,
+   0.008,
+   0.007,
+   0.007
+  ],
+  "aorc": [
+   0.0,
+   0.0,
+   0.0,
+   0.002,
+   0.0,
+   0.076,
+   0.663,
+   1.362,
+   1.305,
+   1.777,
+   1.154,
+   1.605,
+   0.484,
+   0.13,
+   0.004,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "stage4": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.089,
+   0.654,
+   1.584,
+   1.54,
+   2.065,
+   1.112,
+   1.516,
+   0.401,
+   0.1,
+   0.005,
+   0.0,
+   0.0,
+   0.004
+  ]
+ },
+ "basin_total_in": {
+  "radar_corrected": 10.34,
+  "low": 8.56,
+  "high": 11.6,
+  "radar_tropical_raw": 9.15,
+  "radar_standard_raw": 4.7,
+  "radar_tropical_0p9_raw": 8.57,
+  "aorc": 8.56,
+  "stage4_hourly_sum": 9.07,
+  "stage4_6h_and_24h_files": {
+   "ST4.2004083018.06h.grib": 0.17,
+   "ST4.2004083100.06h.grib": 10.19,
+   "ST4.2004083106.06h.grib": 0.44,
+   "ST4.2004083112.24h.grib": 10.79
+  }
+ },
+ "basin_peak_hour": {
+  "start_edt": "2004-08-30T17:00",
+  "inches": 2.22,
+  "low": 1.83,
+  "high": 2.48
+ },
+ "basin_volume": {
+  "m3": 8270000.0,
+  "low_m3": 6850000.0,
+  "high_m3": 9270000.0,
+  "million_gallons": 2185,
+  "range_million_gallons": [
+   1809,
+   2450
+  ],
+  "method": "computed: basin-average depth x watershed area"
+ },
+ "basin_max_n_hour": {
+  "1": {
+   "inches": 2.22,
+   "low": 1.84,
+   "high": 2.49,
+   "start_edt": "2004-08-30T16:54"
+  },
+  "2": {
+   "inches": 3.78,
+   "low": 3.13,
+   "high": 4.24,
+   "start_edt": "2004-08-30T16:05"
+  },
+  "3": {
+   "inches": 5.49,
+   "low": 4.55,
+   "high": 6.16,
+   "start_edt": "2004-08-30T14:51"
+  },
+  "6": {
+   "inches": 9.97,
+   "low": 8.25,
+   "high": 11.18,
+   "start_edt": "2004-08-30T14:23"
+  },
+  "12": {
+   "inches": 10.33,
+   "low": 8.55,
+   "high": 11.59,
+   "start_edt": "2004-08-30T13:11"
+  },
+  "18": {
+   "inches": 10.34,
+   "low": 8.56,
+   "high": 11.6,
+   "start_edt": "2004-08-30T08:00"
+  }
+ },
+ "aorc_basin_max_n_hour": {
+  "1": 1.78,
+  "2": 3.08,
+  "3": 4.54,
+  "6": 7.86,
+  "12": 8.56,
+  "18": 8.56
+ },
+ "stage4_basin_max_n_hour": {
+  "1": 2.06,
+  "2": 3.6,
+  "3": 5.19,
+  "6": 8.47,
+  "12": 9.06,
+  "18": 9.07
+ },
+ "worst_point_max_n_hour": {
+  "1": {
+   "inches": 3.7,
+   "start_edt": "2004-08-30T14:21",
+   "lat": 37.535,
+   "lon": -77.41875
+  },
+  "2": {
+   "inches": 5.48,
+   "start_edt": "2004-08-30T14:19",
+   "lat": 37.535,
+   "lon": -77.43125
+  },
+  "3": {
+   "inches": 6.99,
+   "start_edt": "2004-08-30T16:16",
+   "lat": 37.58,
+   "lon": -77.40625
+  },
+  "6": {
+   "inches": 11.16,
+   "start_edt": "2004-08-30T14:23",
+   "lat": 37.565,
+   "lon": -77.44375
+  },
+  "12": {
+   "inches": 11.54,
+   "start_edt": "2004-08-30T13:09",
+   "lat": 37.535,
+   "lon": -77.43125
+  },
+  "18": {
+   "inches": 11.55,
+   "start_edt": "2004-08-30T08:00",
+   "lat": 37.535,
+   "lon": -77.43125
+  }
+ },
+ "return_periods": {
+  "1h": {
+   "basin": {
+    "inches": 2.22,
+    "ari_years": 10,
+    "flag": "",
+    "ari_90pct": [
+     "6",
+     "18"
+    ]
+   },
+   "basin_low": {
+    "inches": 1.84,
+    "ari_years": 4,
+    "flag": "",
+    "ari_90pct": [
+     "3",
+     "7"
+    ]
+   },
+   "basin_high": {
+    "inches": 2.49,
+    "ari_years": 19,
+    "flag": "",
+    "ari_90pct": [
+     "11",
+     "38"
+    ]
+   },
+   "worst_point": {
+    "inches": 3.7,
+    "ari_years": 320,
+    "flag": "",
+    "ari_90pct": [
+     "144",
+     ">1000"
+    ]
+   },
+   "aorc_basin": {
+    "inches": 1.78,
+    "ari_years": 4,
+    "flag": "",
+    "ari_90pct": [
+     "2",
+     "6"
+    ]
+   },
+   "stage4_basin": {
+    "inches": 2.06,
+    "ari_years": 7,
+    "flag": "",
+    "ari_90pct": [
+     "5",
+     "12"
+    ]
+   }
+  },
+  "2h": {
+   "basin": {
+    "inches": 3.78,
+    "ari_years": 63,
+    "flag": "",
+    "ari_90pct": [
+     "35",
+     "141"
+    ]
+   },
+   "basin_low": {
+    "inches": 3.13,
+    "ari_years": 22,
+    "flag": "",
+    "ari_90pct": [
+     "13",
+     "42"
+    ]
+   },
+   "basin_high": {
+    "inches": 4.24,
+    "ari_years": 129,
+    "flag": "",
+    "ari_90pct": [
+     "68",
+     "339"
+    ]
+   },
+   "worst_point": {
+    "inches": 5.48,
+    "ari_years": 803,
+    "flag": "",
+    "ari_90pct": [
+     "386",
+     ">1000"
+    ]
+   },
+   "aorc_basin": {
+    "inches": 3.08,
+    "ari_years": 20,
+    "flag": "",
+    "ari_90pct": [
+     "12",
+     "38"
+    ]
+   },
+   "stage4_basin": {
+    "inches": 3.6,
+    "ari_years": 47,
+    "flag": "",
+    "ari_90pct": [
+     "27",
+     "100"
+    ]
+   }
+  },
+  "3h": {
+   "basin": {
+    "inches": 5.49,
+    "ari_years": 423,
+    "flag": "",
+    "ari_90pct": [
+     "205",
+     ">1000"
+    ]
+   },
+   "basin_low": {
+    "inches": 4.55,
+    "ari_years": 117,
+    "flag": "",
+    "ari_90pct": [
+     "62",
+     "310"
+    ]
+   },
+   "basin_high": {
+    "inches": 6.16,
+    "ari_years": 977,
+    "flag": "",
+    "ari_90pct": [
+     "462",
+     ">1000"
+    ]
+   },
+   "worst_point": {
+    "inches": 6.99,
+    "ari_years": 1000,
+    "flag": ">",
+    "ari_90pct": [
+     ">1000",
+     ">1000"
+    ]
+   },
+   "aorc_basin": {
+    "inches": 4.54,
+    "ari_years": 116,
+    "flag": "",
+    "ari_90pct": [
+     "61",
+     "305"
+    ]
+   },
+   "stage4_basin": {
+    "inches": 5.19,
+    "ari_years": 284,
+    "flag": "",
+    "ari_90pct": [
+     "142",
+     "883"
+    ]
+   }
+  },
+  "6h": {
+   "basin": {
+    "inches": 9.97,
+    "ari_years": 1000,
+    "flag": ">",
+    "ari_90pct": [
+     ">1000",
+     ">1000"
+    ]
+   },
+   "basin_low": {
+    "inches": 8.25,
+    "ari_years": 1000,
+    "flag": ">",
+    "ari_90pct": [
+     "594",
+     ">1000"
+    ]
+   },
+   "basin_high": {
+    "inches": 11.18,
+    "ari_years": 1000,
+    "flag": ">",
+    "ari_90pct": [
+     ">1000",
+     ">1000"
+    ]
+   },
+   "worst_point": {
+    "inches": 11.16,
+    "ari_years": 1000,
+    "flag": ">",
+    "ari_90pct": [
+     ">1000",
+     ">1000"
+    ]
+   },
+   "aorc_basin": {
+    "inches": 7.86,
+    "ari_years": 866,
+    "flag": "",
+    "ari_90pct": [
+     "437",
+     ">1000"
+    ]
+   },
+   "stage4_basin": {
+    "inches": 8.47,
+    "ari_years": 1000,
+    "flag": ">",
+    "ari_90pct": [
+     "703",
+     ">1000"
+    ]
+   }
+  },
+  "12h": {
+   "basin": {
+    "inches": 10.33,
+    "ari_years": 870,
+    "flag": "",
+    "ari_90pct": [
+     "482",
+     ">1000"
+    ]
+   },
+   "basin_low": {
+    "inches": 8.55,
+    "ari_years": 308,
+    "flag": "",
+    "ari_90pct": [
+     "171",
+     "884"
+    ]
+   },
+   "basin_high": {
+    "inches": 11.59,
+    "ari_years": 1000,
+    "flag": ">",
+    "ari_90pct": [
+     "946",
+     ">1000"
+    ]
+   },
+   "worst_point": {
+    "inches": 11.54,
+    "ari_years": 1000,
+    "flag": ">",
+    "ari_90pct": [
+     "922",
+     ">1000"
+    ]
+   },
+   "aorc_basin": {
+    "inches": 8.56,
+    "ari_years": 310,
+    "flag": "",
+    "ari_90pct": [
+     "172",
+     "890"
+    ]
+   },
+   "stage4_basin": {
+    "inches": 9.06,
+    "ari_years": 426,
+    "flag": "",
+    "ari_90pct": [
+     "235",
+     ">1000"
+    ]
+   }
+  }
+ },
+ "atlas14": {
+  "source": "NOAA Atlas 14 Vol. 2 v3, PFDS partial-duration depths at 37.5550, -77.4400, https://hdsc.nws.noaa.gov/cgi-bin/new/cgi_readH5.py?lat=37.5550&lon=-77.4400&type=pf&data=depth&units=english&series=pds, read 2026-11-23",
+  "inches": {
+   "60-min": {
+    "1": 1.28,
+    "2": 1.54,
+    "5": 1.91,
+    "10": 2.22,
+    "25": 2.6,
+    "50": 2.9,
+    "100": 3.21,
+    "200": 3.5,
+    "500": 3.9,
+    "1000": 4.21
+   },
+   "2-hr": {
+    "1": 1.52,
+    "2": 1.84,
+    "5": 2.3,
+    "10": 2.7,
+    "25": 3.22,
+    "50": 3.64,
+    "100": 4.08,
+    "200": 4.53,
+    "500": 5.15,
+    "1000": 5.64
+   },
+   "3-hr": {
+    "1": 1.64,
+    "2": 1.99,
+    "5": 2.49,
+    "10": 2.92,
+    "25": 3.49,
+    "50": 3.96,
+    "100": 4.44,
+    "200": 4.94,
+    "500": 5.62,
+    "1000": 6.18
+   },
+   "6-hr": {
+    "1": 1.99,
+    "2": 2.39,
+    "5": 3.0,
+    "10": 3.53,
+    "25": 4.26,
+    "50": 4.88,
+    "100": 5.53,
+    "200": 6.22,
+    "500": 7.21,
+    "1000": 8.04
+   },
+   "12-hr": {
+    "1": 2.38,
+    "2": 2.86,
+    "5": 3.61,
+    "10": 4.28,
+    "25": 5.23,
+    "50": 6.06,
+    "100": 6.95,
+    "200": 7.92,
+    "500": 9.32,
+    "1000": 10.6
+   },
+   "24-hr": {
+    "1": 2.76,
+    "2": 3.34,
+    "5": 4.28,
+    "10": 5.07,
+    "25": 6.26,
+    "50": 7.28,
+    "100": 8.41,
+    "200": 9.66,
+    "500": 11.5,
+    "1000": 13.1
+   }
+  }
+ },
+ "ric_hourly": [
+  {
+   "hour_ending_utc": "2004-08-30T12:54:00",
+   "hour_ending_edt": "2004-08-30T08:54:00",
+   "inches": 0.0,
+   "radar_raw_tropical": 0.0
+  },
+  {
+   "hour_ending_utc": "2004-08-30T13:54:00",
+   "hour_ending_edt": "2004-08-30T09:54:00",
+   "inches": 0.0,
+   "radar_raw_tropical": 0.0
+  },
+  {
+   "hour_ending_utc": "2004-08-30T14:54:00",
+   "hour_ending_edt": "2004-08-30T10:54:00",
+   "inches": 0.0,
+   "radar_raw_tropical": 0.0
+  },
+  {
+   "hour_ending_utc": "2004-08-30T15:54:00",
+   "hour_ending_edt": "2004-08-30T11:54:00",
+   "inches": 0.0,
+   "radar_raw_tropical": 0.04
+  },
+  {
+   "hour_ending_utc": "2004-08-30T16:54:00",
+   "hour_ending_edt": "2004-08-30T12:54:00",
+   "inches": 0.0,
+   "radar_raw_tropical": 0.0
+  },
+  {
+   "hour_ending_utc": "2004-08-30T17:54:00",
+   "hour_ending_edt": "2004-08-30T13:54:00",
+   "inches": 0.11,
+   "radar_raw_tropical": 0.12
+  },
+  {
+   "hour_ending_utc": "2004-08-30T18:54:00",
+   "hour_ending_edt": "2004-08-30T14:54:00",
+   "inches": 1.27,
+   "radar_raw_tropical": 1.39
+  },
+  {
+   "hour_ending_utc": "2004-08-30T19:54:00",
+   "hour_ending_edt": "2004-08-30T15:54:00",
+   "inches": 2.1,
+   "radar_raw_tropical": 1.21
+  },
+  {
+   "hour_ending_utc": "2004-08-30T20:54:00",
+   "hour_ending_edt": "2004-08-30T16:54:00",
+   "inches": 0.58,
+   "radar_raw_tropical": 0.35
+  },
+  {
+   "hour_ending_utc": "2004-08-30T21:54:00",
+   "hour_ending_edt": "2004-08-30T17:54:00",
+   "inches": 0.44,
+   "radar_raw_tropical": 0.25
+  },
+  {
+   "hour_ending_utc": "2004-08-30T22:54:00",
+   "hour_ending_edt": "2004-08-30T18:54:00",
+   "inches": 0.62,
+   "radar_raw_tropical": 0.4
+  },
+  {
+   "hour_ending_utc": "2004-08-31T00:00:00",
+   "hour_ending_edt": "2004-08-30T20:00:00",
+   "inches": 0.52,
+   "radar_raw_tropical": 0.35
+  },
+  {
+   "hour_ending_utc": "2004-08-31T00:54:00",
+   "hour_ending_edt": "2004-08-30T20:54:00",
+   "inches": 0.7,
+   "radar_raw_tropical": 0.36
+  },
+  {
+   "hour_ending_utc": "2004-08-31T01:54:00",
+   "hour_ending_edt": "2004-08-30T21:54:00",
+   "inches": 0.3,
+   "radar_raw_tropical": 0.14
+  },
+  {
+   "hour_ending_utc": "2004-08-31T02:54:00",
+   "hour_ending_edt": "2004-08-30T22:54:00",
+   "inches": 0.0,
+   "radar_raw_tropical": 0.04
+  },
+  {
+   "hour_ending_utc": "2004-08-31T03:54:00",
+   "hour_ending_edt": "2004-08-30T23:54:00",
+   "inches": 0.0,
+   "radar_raw_tropical": 0.01
+  },
+  {
+   "hour_ending_utc": "2004-08-31T04:54:00",
+   "hour_ending_edt": "2004-08-31T00:54:00",
+   "inches": 0.0,
+   "radar_raw_tropical": 0.01
+  },
+  {
+   "hour_ending_utc": "2004-08-31T06:54:00",
+   "hour_ending_edt": "2004-08-31T02:54:00",
+   "inches": 0.0,
+   "radar_raw_tropical": 0.0
+  }
+ ]
+}

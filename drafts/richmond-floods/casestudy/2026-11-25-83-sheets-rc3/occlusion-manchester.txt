@@ -1,0 +1,4 @@
+agnes-today:2026 {"overlap":32} {} buildings within 15 m of a wall 3
+agnes-today-nowall:2026 {"overlap":27} {} buildings within 15 m of a wall 0
+1996:2026 {"overlap":33,"decks":2} {} buildings within 15 m of a wall 3
+2020:2026 {"overlap":33,"decks":2} {} buildings within 15 m of a wall 3

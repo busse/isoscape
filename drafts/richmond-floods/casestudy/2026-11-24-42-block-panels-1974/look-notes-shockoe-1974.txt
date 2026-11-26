@@ -1,0 +1,56 @@
+# panel 02-04
+12=U 55=G 187=P 178=P 176=G 353=G 354=P 506=P 509=P 551=P light roof, the long train shed
+# panel 03-04
+177=G 16=G 492=P 491=P 616=P 486=P 497=P 498=P 494=P 495=P 499=P 503=P roofed mass
+541=P 542=P 9=P 510=P 368=U 475=P 543=P 544=P 482=P 220=U 366=G
+# panel 02-05
+186=G 193=G 357=G 255=G 50=G 53=G 52=G 34=P 539=P 37=G 197=U 473=P 38=P 215=P 572=P 569=U 570=P 571=P 256=P 385=P
+# panel 03-05
+54=P 56=P 214=U 261=P 259=P 260=P 386=P 258=U 262=P 263=P 21=P 555=P 218=P 615=P 65=P 226=U
+# panel 03-03
+528=U light rectangle may be a light roof 531=P
+# panel 04-04
+199=G 422=G 203=G 209=G
+# panel 04-05
+22=U 223=U 26=G 361=G 411=P 410=P 413=P light roof inside a dark outline 418=P 414=P light roof 113=G 406=P 407=P
+# panel 03-06 Church Hill: small outbuildings under tree canopy; dark here is trees, not roofs: all left unclear
+# panel 02-03
+552=U light, may be a light roof 554=U 345=G 522=P
+# panel 04-06
+45=U 240=G 242=G 424=P 370=U 244=U 378=G
+# panel 04-03
+94=U
+# panel 01-04
+100=G 105=G 106=G 107=G rail yard ground 161=G
+# panel 01-03
+5=P 568=P 463=P light roof framed by a dark edge 550=P 621=P 124=P 632=G 635=G 634=G 633=G 123=G 332=P 331=P 620=P 467=P 468=P 125=P 134=G 147=G
+# panel 02-02
+532=U white with crisp edges, a light roof or a lot 631=P 4=U 92=P 73=P 75=P
+# panel 01-02
+451=P 629=P 623=P
+# panel 03-07 Church Hill, trees: left as proposed
+# panel 04-07 Church Hill, trees: left as proposed
+# panel 03-02
+49=P white roof matching the traced outline 173=G 79=G
+# panel 04-02
+87=U
+# panel 03-01
+93=U on the canal's edge
+# panel 05-05
+210=G
+# panel 05-06
+29=U 211=U 28=U
+# panel 02-06 north Church Hill, trees: left as proposed except
+610=U white crisp rectangle
+# panel 01-05 left as proposed
+# panel 02-01
+84=G 83=G 82=G 88=G 86=G 2=P
+# panel 02-00
+81=G
+# panel 03-00
+77=G 78=G on the bridge approach
+# panel 01-01
+453=P 454=P 455=P 456=P 457=P 458=P roofed mass
+# panel 00-02
+101=G 325=P
+# panels 00-03, 02-07, 03-08, 05-07, 06-06: Church Hill and the north edge, trees or nothing called: left as proposed

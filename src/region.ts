@@ -96,6 +96,21 @@ export interface Region {
    */
   readonly seatOnBanks?: boolean
   /**
+   * `"strict"`: draw so nothing is painted over a nearer item (src/occlusion.ts). A concave
+   * building is drawn as convex pieces (`convexPieces`), so one that wraps round a neighbor is
+   * ordered piece by piece; an x-ray band is kept off every nearer item painted before it; a
+   * floodwall piece is ordered against what its casing reaches. Off unless set, so other views
+   * draw exactly as before.
+   */
+  readonly occlusion?: 'strict'
+  /**
+   * In a dated scene, leave out a traced footprint (a fire-insurance map's building) when this
+   * share or more of it lies under a building of today's map drawn in the same year
+   * (`coveredShare`, sampled every `COVERED_STEP` m). The floods series sets 0.5: such a footprint
+   * is the same building traced twice, or one the later building replaced. Off unless set.
+   */
+  readonly tracedCovered?: number
+  /**
    * Draw a building of ordinary floors by its levels when its tagged height is more than
    * `MAX_LEVEL_HEIGHT` a level (classify.ts). Off unless set, like `seatOnBanks`.
    */
@@ -110,7 +125,11 @@ export interface Region {
     readonly history: string
     /** `credit`: how prints and pages credit the year-built records, when any date comes from them. */
     readonly yearBuilt?: { readonly url: string; readonly field: string; readonly credit?: string }
+    /** Another region whose data folder holds the year-built parcels (a third place to look). */
+    readonly yearBuiltFrom?: string
   }
+  /** A flood build's looks (palette.ts FLOOD_STYLES), unless `--flood-style` names others. Experimental. */
+  readonly floodStyles?: readonly string[]
   /** Draw the ground with relief from data/<region>/dem.bin.gz. Omit for a flat plate. */
   readonly terrain?: TerrainOptions
   /** Open a modeled building along a vertical plane: see `Cutaway`. */

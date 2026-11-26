@@ -1,0 +1,217 @@
+{
+ "design": "story-richmond-floods",
+ "title": "Richmond, VA, under water: the James River floods of 1771 to 2020 and Gaston's rain of 2004 (story page)",
+ "version": 1,
+ "asset_version": "1.0.0",
+ "version_note": "First release, November 26, 2026: the story page and its pictures. Editorial: no plate, no store. The pictures are crops and compositions of the floods series' final-draft (1.0.0-rc3) drawings; the series' sheets are a separate piece (series-richmond-floods) with their own release decision.",
+ "recipe": {
+  "tool": "tools/stories/richmond-floods/",
+  "run": [
+   "bash tools/floods/d3/plates.sh   # the rc3 plate SVGs (needs data/richmond-i195-rocketts and the period evidence); the release used the round's own build in /tmp/rc2/plates",
+   "python3 tools/stories/richmond-floods/figures.py --plates <plates> --sheets <rc3 sheets> --rain <rain figures>   # the page's pictures, into pages/",
+   "python3 tools/stories/richmond-floods/page.py   # pages/richmond-floods.md from story.md, counts.json and rain.json",
+   "python3 tools/pdf/story_pdf.py richmond-floods --edition both --out <site>/p   # the two PDFs",
+   "python3 tools/release/check.py --editorial story-richmond-floods --rebuild --data plates=<dir> --data sheets=<dir> --data rain=<dir> --data iso=<checkout>"
+  ],
+  "made_with": "rsvg-convert (librsvg) and Pillow (WebP) for the pictures; Python 3 for the page",
+  "deterministic": "page.py is: the same inputs give the same bytes. figures.py renders with rsvg-convert and encodes WebP with Pillow; compared by pixels.",
+  "steps": [
+   {
+    "name": "page",
+    "run": [
+     "python3",
+     "tools/stories/richmond-floods/page.py"
+    ],
+    "mkdirs": [
+     "pages"
+    ],
+    "modules": [
+     "json"
+    ],
+    "makes": {
+     "pages/richmond-floods.md": "pages/richmond-floods.md"
+    }
+   },
+   {
+    "name": "pictures",
+    "run": [
+     "python3",
+     "tools/stories/richmond-floods/figures.py",
+     "--plates",
+     "{plates}",
+     "--sheets",
+     "{sheets}",
+     "--rain",
+     "{rain}",
+     "--isoscape",
+     "{iso}"
+    ],
+    "mkdirs": [
+     "pages"
+    ],
+    "modules": [
+     "PIL"
+    ],
+    "programs": [
+     "rsvg-convert",
+     "node"
+    ],
+    "needs": {
+     "plates": {
+      "what": "the rc3 plate SVGs of the floods series",
+      "where": "built by tools/floods/d3/plates.sh at rc3 (cloud workspace /tmp/rc2/plates at release; to be copied to the Mac's ISO-TEST/isoscape-work/richmond-floods/casestudy/); not in git",
+      "files": [
+       "richmond-floods-shockoe-1972-flood-1972.svg",
+       "richmond-floods-shockoe-1972-flood-1972-dry.svg",
+       "richmond-floods-shockoe-1788-flood-1771.svg",
+       "richmond-floods-shockoe-1936-flood-1936.svg",
+       "richmond-floods-shockoe-1969-flood-1969.svg",
+       "richmond-floods-shockoe-1985-flood-1985.svg",
+       "richmond-floods-shockoe-1996-flood-1996.svg",
+       "richmond-floods-shockoe-2020-flood-2020.svg",
+       "richmond-floods-shockoe-2004-flood-gaston-b.svg",
+       "richmond-floods-shockoe-2026-flood-agnes-today.svg",
+       "richmond-floods-manchester-2026-flood-agnes-today.svg",
+       "richmond-floods-manchester-2026-flood-agnes-today-nowall.svg"
+      ]
+     },
+     "sheets": {
+      "what": "the rc3 sheets at 300 dpi",
+      "where": "cloud workspace /mnt/user-data/outputs/floods/rc3/full/ at release; over 5 MB each, for the Mac's ISO-TEST/isoscape-work/richmond-floods/casestudy/",
+      "files": [
+       "richmond-floods-shockoe-2004-1.0.0-rc3.jpg"
+      ]
+     },
+     "rain": {
+      "what": "the rain branch's figures",
+      "where": "cloud workspace /mnt/user-data/outputs/floods/rain/ (made by tools/floods/rain/figures.py and iso.py)",
+      "files": [
+       "a-plan-map.png",
+       "e-explainer.png"
+      ]
+     },
+     "iso": {
+      "what": "an isoscape checkout with the richmond-i195-rocketts cache (for isoscape locate)",
+      "where": "any checkout with data/richmond-i195-rocketts",
+      "files": [
+       "bin/isoscape.js",
+       "data/richmond-i195-rocketts/osm.json",
+       "data/richmond-i195-rocketts/dem.bin.gz"
+      ]
+     }
+    },
+    "makes": {
+     "pages/richmond-floods-1771-large.webp": "pages/richmond-floods-1771-large.webp",
+     "pages/richmond-floods-1771.webp": "pages/richmond-floods-1771.webp",
+     "pages/richmond-floods-1936-large.webp": "pages/richmond-floods-1936-large.webp",
+     "pages/richmond-floods-1936.webp": "pages/richmond-floods-1936.webp",
+     "pages/richmond-floods-1969-large.webp": "pages/richmond-floods-1969-large.webp",
+     "pages/richmond-floods-1969.webp": "pages/richmond-floods-1969.webp",
+     "pages/richmond-floods-1972-large.webp": "pages/richmond-floods-1972-large.webp",
+     "pages/richmond-floods-1972.webp": "pages/richmond-floods-1972.webp",
+     "pages/richmond-floods-1985-large.webp": "pages/richmond-floods-1985-large.webp",
+     "pages/richmond-floods-1985.webp": "pages/richmond-floods-1985.webp",
+     "pages/richmond-floods-1996-large.webp": "pages/richmond-floods-1996-large.webp",
+     "pages/richmond-floods-1996.webp": "pages/richmond-floods-1996.webp",
+     "pages/richmond-floods-2020-large.webp": "pages/richmond-floods-2020-large.webp",
+     "pages/richmond-floods-2020.webp": "pages/richmond-floods-2020.webp",
+     "pages/richmond-floods-bowl.webp": "pages/richmond-floods-bowl.webp",
+     "pages/richmond-floods-dock-1972-dry.webp": "pages/richmond-floods-dock-1972-dry.webp",
+     "pages/richmond-floods-dock-1972.webp": "pages/richmond-floods-dock-1972.webp",
+     "pages/richmond-floods-gaston-large.webp": "pages/richmond-floods-gaston-large.webp",
+     "pages/richmond-floods-gaston-market.webp": "pages/richmond-floods-gaston-market.webp",
+     "pages/richmond-floods-gaston.webp": "pages/richmond-floods-gaston.webp",
+     "pages/richmond-floods-hero-1972-dry-large.webp": "pages/richmond-floods-hero-1972-dry-large.webp",
+     "pages/richmond-floods-hero-1972-dry.webp": "pages/richmond-floods-hero-1972-dry.webp",
+     "pages/richmond-floods-hero-1972-large.webp": "pages/richmond-floods-hero-1972-large.webp",
+     "pages/richmond-floods-hero-1972.webp": "pages/richmond-floods-hero-1972.webp",
+     "pages/richmond-floods-manchester-nowall-large.webp": "pages/richmond-floods-manchester-nowall-large.webp",
+     "pages/richmond-floods-manchester-nowall.webp": "pages/richmond-floods-manchester-nowall.webp",
+     "pages/richmond-floods-manchester-wall-large.webp": "pages/richmond-floods-manchester-wall-large.webp",
+     "pages/richmond-floods-manchester-wall.webp": "pages/richmond-floods-manchester-wall.webp",
+     "pages/richmond-floods-rain-hours.webp": "pages/richmond-floods-rain-hours.webp",
+     "pages/richmond-floods-rain-map.webp": "pages/richmond-floods-rain-map.webp",
+     "pages/richmond-floods-read.webp": "pages/richmond-floods-read.webp",
+     "pages/richmond-floods-social.jpg": "pages/richmond-floods-social.jpg",
+     "pages/richmond-floods-strip-large.webp": "pages/richmond-floods-strip-large.webp",
+     "pages/richmond-floods-strip.webp": "pages/richmond-floods-strip.webp",
+     "pages/richmond-floods-today-wall-large.webp": "pages/richmond-floods-today-wall-large.webp",
+     "pages/richmond-floods-today-wall.webp": "pages/richmond-floods-today-wall.webp"
+    }
+   }
+  ]
+ },
+ "inputs": [
+  "tools/stories/richmond-floods/story.md",
+  "tools/stories/richmond-floods/page.py",
+  "tools/stories/richmond-floods/figures.py",
+  "tools/stories/richmond-floods/pdf.json",
+  "tools/stories/richmond-floods/claims.json",
+  "drafts/richmond-floods/counts.json",
+  "tools/floods/rain/data/rain.json",
+  "tools/floods/d3/boxes.json"
+ ],
+ "external": {
+  "plates": "The rc3 plate SVGs: tools/floods/d3/plates.sh builds them from regions/richmond-floods-shockoe.json and -manchester.json, history/richmond-floods.json and its evidence layer, on the data/richmond-i195-rocketts cache.",
+  "sheets": "The rc3 Gaston sheet (its rain panel is cropped): tools/floods/rc1/sheet.py.",
+  "rain": "tools/floods/rain/README.md says how the rain figures are made and from what.",
+  "hashed": "figures.json beside the tools pins every outside input of the pictures by SHA-256 as rendered at release."
+ },
+ "outputs": {
+  "print": "pages/richmond-floods.md",
+  "prints": [],
+  "derived": [
+   "pages/richmond-floods-1771-large.webp",
+   "pages/richmond-floods-1771.webp",
+   "pages/richmond-floods-1936-large.webp",
+   "pages/richmond-floods-1936.webp",
+   "pages/richmond-floods-1969-large.webp",
+   "pages/richmond-floods-1969.webp",
+   "pages/richmond-floods-1972-large.webp",
+   "pages/richmond-floods-1972.webp",
+   "pages/richmond-floods-1985-large.webp",
+   "pages/richmond-floods-1985.webp",
+   "pages/richmond-floods-1996-large.webp",
+   "pages/richmond-floods-1996.webp",
+   "pages/richmond-floods-2020-large.webp",
+   "pages/richmond-floods-2020.webp",
+   "pages/richmond-floods-bowl.webp",
+   "pages/richmond-floods-dock-1972-dry.webp",
+   "pages/richmond-floods-dock-1972.webp",
+   "pages/richmond-floods-gaston-large.webp",
+   "pages/richmond-floods-gaston-market.webp",
+   "pages/richmond-floods-gaston.webp",
+   "pages/richmond-floods-hero-1972-dry-large.webp",
+   "pages/richmond-floods-hero-1972-dry.webp",
+   "pages/richmond-floods-hero-1972-large.webp",
+   "pages/richmond-floods-hero-1972.webp",
+   "pages/richmond-floods-manchester-nowall-large.webp",
+   "pages/richmond-floods-manchester-nowall.webp",
+   "pages/richmond-floods-manchester-wall-large.webp",
+   "pages/richmond-floods-manchester-wall.webp",
+   "pages/richmond-floods-rain-hours.webp",
+   "pages/richmond-floods-rain-map.webp",
+   "pages/richmond-floods-read.webp",
+   "pages/richmond-floods-social.jpg",
+   "pages/richmond-floods-strip-large.webp",
+   "pages/richmond-floods-strip.webp",
+   "pages/richmond-floods-today-wall-large.webp",
+   "pages/richmond-floods-today-wall.webp"
+  ]
+ },
+ "shown": {
+  "page": "https://isoscape.chrisbusse.com/p/richmond-floods.html",
+  "explorer": "https://isoscape.chrisbusse.com/#/richmond-floods",
+  "page_source": "pages/richmond-floods.md, written by tools/stories/richmond-floods/page.py from story.md",
+  "pdfs": "p/richmond-floods-phone.pdf and p/richmond-floods-large.pdf (tools/pdf/story_pdf.py richmond-floods)",
+  "story_board_entry": "story-richmond-floods",
+  "shop": "none"
+ },
+ "inspection": "drafts/richmond-floods/casestudy/2026-11-26-94-fact-check-fixes/fact-check.md",
+ "notes": [
+  "drafts/richmond-floods/casestudy/log.md",
+  "drafts/richmond-floods/effort.md",
+  "tools/stories/richmond-floods/outline.md",
+  "tools/stories/richmond-floods/claims.json"
+ ]
+}

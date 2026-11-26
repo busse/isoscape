@@ -1,0 +1,44 @@
+{
+ "source": "NHC HURDAT2 hurdat2-1851-2025-092326.txt, AL072004 (Gaston), lines 45488-45491; https://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2025-092326.txt read 2026-11-23",
+ "points": [
+  {
+   "time": "2004-08-30T12:00Z",
+   "lat": 35.6,
+   "lon": -78.7,
+   "wind_kt": 25,
+   "pressure_mb": 1000,
+   "status": "TD"
+  },
+  {
+   "time": "2004-08-30T18:00Z",
+   "lat": 36.4,
+   "lon": -77.8,
+   "wind_kt": 30,
+   "pressure_mb": 1002,
+   "status": "TD"
+  },
+  {
+   "time": "2004-08-31T00:00Z",
+   "lat": 37.2,
+   "lon": -76.6,
+   "wind_kt": 35,
+   "pressure_mb": 1001,
+   "status": "TS"
+  },
+  {
+   "time": "2004-08-31T06:00Z",
+   "lat": 38.1,
+   "lon": -74.8,
+   "wind_kt": 35,
+   "pressure_mb": 1001,
+   "status": "TS"
+  }
+ ],
+ "closest_to_shockoe_km": 75.3,
+ "closest_time_utc": "2004-08-30T22:35Z",
+ "closest_point": [
+  37.012,
+  -76.882
+ ],
+ "note": "computed: straight line between the 18 and 00 UTC best-track points; the best track gives positions every six hours only"
+}

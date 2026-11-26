@@ -1,0 +1,1199 @@
+{
+ "about": "Every factual sentence of pages/richmond-floods.md (draft 1), grouped by section, with the sources it rests on. \"read\" is the date the source was opened: by the series research on Nov. 23, 2026 unless noted; only Watson was reopened for this draft. Sources marked computed are the series' own work. A fact checker should open each URL and confirm the claim; \"via\" names the research note that quotes it with its page.",
+ "page": "pages/richmond-floods.md",
+ "story": "tools/stories/richmond-floods/story.md",
+ "sources": {
+  "NWS City Locks": {
+   "where": "https://api.water.noaa.gov/nwps/v1/gauges/ricv2 (flood.crests.historic; flood.impacts)",
+   "via": "research: /home/claude/floods-research/river/floods.md \"NWS impact stages\"; raw copy river/raw/nwps_ricv2.json",
+   "read": "2026-11-23"
+  },
+  "NWS Westham": {
+   "where": "https://api.water.noaa.gov/nwps/v1/gauges/RMDV2 (flood categories)",
+   "via": "research: /home/claude/floods-research/gaston/sources.md S12",
+   "read": "2026-11-23"
+  },
+  "USGS Westham": {
+   "where": "https://nwis.waterdata.usgs.gov/nwis/peak?site_no=02037500&agency_cd=USGS&format=rdb ; https://nwis.waterservices.usgs.gov/nwis/iv/?format=rdb&sites=02037500&startDT=2004-08-30&endDT=2004-08-31",
+   "via": "research: /home/claude/floods-research/river/floods.md table; river/before-the-wall.md \"Upstream context\" (6,753 sq mi, site file); gaston/gaston-timeline.md S10",
+   "read": "2026-11-23"
+  },
+  "USGS City Locks": {
+   "where": "https://waterservices.usgs.gov/nwis/site/?format=rdb&sites=02037705&seriesCatalogOutput=true ; parameter 62620 instantaneous values",
+   "via": "research: /home/claude/floods-research/check/second-read.md \"Crests and peaks\", November 2020 row",
+   "read": "2026-11-23"
+  },
+  "USGS OFR 70-51": {
+   "where": "https://pubs.usgs.gov/of/1970/0051/report.pdf, printed p. 119 (PDF p. 131), Table 2 printed p. 20, text printed p. 22",
+   "via": "research: /home/claude/floods-research/river/floods.md; check/second-read.md",
+   "read": "2026-11-23"
+  },
+  "USGS HA-410": {
+   "where": "https://pubs.usgs.gov/ha/410/plate-1.pdf, Table 1, Figure 1, mapped extent",
+   "via": "research: /home/claude/floods-research/river/before-the-wall.md \"What went under\"; river/datums.md (d); check/second-read.md \"HA-410 surface profile\"",
+   "read": "2026-11-23"
+  },
+  "USGS PP 924": {
+   "where": "https://pubs.usgs.gov/pp/0924/report.pdf, Table A4 PDF p. 406",
+   "via": "research: /home/claude/floods-research/river/floods.md; check/second-read.md",
+   "read": "2026-11-23"
+  },
+  "NOAA Agnes report": {
+   "where": "https://www.govinfo.gov/content/pkg/CZIC-gb70-9-u55-1972/html/CZIC-gb70-9-u55-1972.htm",
+   "via": "research: /home/claude/floods-research/river/floods.md \"What flooded, by event\", 1972 Agnes",
+   "read": "2026-11-23"
+  },
+  "Agnes sign": {
+   "where": "https://www.hmdb.org/m.asp?m=133685",
+   "via": "research: /home/claude/floods-research/river/datums.md (c); river/floods.md 1972 Agnes",
+   "read": "2026-11-23"
+  },
+  "Floodwall marker": {
+   "where": "https://www.hmdb.org/m.asp?m=23953",
+   "via": "research: /home/claude/floods-research/river/floodwall.md; check/second-read.md \"Floodwall\"",
+   "read": "2026-11-23"
+  },
+  "City floodwall FAQ": {
+   "where": "https://www.rva.gov/public-utilities/news/floodwall-faqs",
+   "via": "research: /home/claude/floods-research/river/floodwall.md \"Alignment\", \"Heights above ground\", \"Every closure\"",
+   "read": "2026-11-23"
+  },
+  "City FloodKit 2026": {
+   "where": "https://rva.gov/sites/default/files/2026-03/FloodKit-20260225.pdf, PDF p. 5",
+   "via": "research: /home/claude/floods-research/check/second-read.md \"Floodwall\", Design row",
+   "read": "2026-11-23"
+  },
+  "City utilities 2020": {
+   "where": "https://threadreaderapp.com/thread/1326952085598986241.html",
+   "via": "research: /home/claude/floods-research/river/floodwall.md \"Cost\", \"Why\", \"Closures\"; check/second-read.md",
+   "read": "2026-11-23"
+  },
+  "WRDA 1986": {
+   "where": "https://www.govinfo.gov/content/pkg/STATUTE-100/pdf/STATUTE-100-Pg4082.pdf, 100 Stat. 4126 (PDF p. 45)",
+   "via": "research: /home/claude/floods-research/river/floodwall.md \"History\"; raw copy river/raw/pdf/wrda1986.txt line 2885",
+   "read": "2026-11-23"
+  },
+  "Public Law 103-135": {
+   "where": "https://www.congress.gov/103/statute/STATUTE-107/STATUTE-107-Pg1375.pdf",
+   "via": "research: /home/claude/floods-research/river/floodwall.md \"History\"",
+   "read": "2026-11-23"
+  },
+  "Virginia HD 64": {
+   "where": "https://rga.lis.virginia.gov/Published/1989/HD64/PDF",
+   "via": "research: /home/claude/floods-research/river/floodwall.md \"History\" (not reread by the second reader)",
+   "read": "2026-11-23"
+  },
+  "FEMA Richmond 1998": {
+   "where": "FEMA FIS City of Richmond 510129V000 (July 20, 1998), PDF p. 9; https://msc.fema.gov",
+   "via": "research: /home/claude/floods-research/check/fis.md \"1998 levee treatment\"; check/second-read.md (Gathright 1.5%)",
+   "read": "2026-11-23"
+  },
+  "FEMA Richmond 2025": {
+   "where": "FEMA FIS City of Richmond 510129V000C (effective July 8, 2025), Table 5 PDF p. 27; Floodway Data PDF p. 70; panel 37P PDF p. 126; https://msc.fema.gov",
+   "via": "research: /home/claude/floods-research/check/fis.md \"1998 levee treatment\", \"Interior drainage and Shockoe Bottom ponding\"",
+   "read": "2026-11-23"
+  },
+  "RVANews 2011": {
+   "where": "https://rvanews.com/?p=41409",
+   "via": "research: /home/claude/floods-research/river/floodwall.md \"Every closure\"; check/second-read.md",
+   "read": "2026-11-23"
+  },
+  "WTVR 2020": {
+   "where": "https://www.wtvr.com/news/local-news/richmond-closes-floodwall-james-river-to-crest-friday",
+   "via": "research: /home/claude/floods-research/river/floodwall.md \"Every closure\"",
+   "read": "2026-11-23"
+  },
+  "The Richmonder 2025": {
+   "where": "https://www.richmonder.org/richmond-floodwall-to-close-for-the-first-time-since-2020/",
+   "via": "research: /home/claude/floods-research/river/floodwall.md \"Every closure\"",
+   "read": "2026-11-23"
+  },
+  "Henrico County": {
+   "where": "https://henrico.gov/locations/flood/",
+   "via": "research: /home/claude/floods-research/river/floods.md \"Disagreements\" (1771), \"What flooded\" 1771",
+   "read": "2026-11-23"
+  },
+  "Richmond Family Magazine 2019": {
+   "where": "https://richmondfamilymagazine.com/community/history/water-water-everywhere/",
+   "via": "research: /home/claude/floods-research/river/floods.md \"Disagreements\" (1771: 30 ft)",
+   "read": "2026-11-23"
+  },
+  "Watson, Virginia Floods": {
+   "where": "https://corpora.tika.apache.org/base/docs/govdocs1/204/204582.html (Barbara McNaught Watson, \"Virginia Floods\")",
+   "via": "opened for this draft (WebFetch): 1936 industrial and business sections; 1985 several blocks of commercial and industrial buildings",
+   "read": "2026-11-25"
+  },
+  "NHC Gaston report": {
+   "where": "https://www.nhc.noaa.gov/data/tcr/AL072004_Gaston.pdf, Table 1 pp. 4-5, p. 3, Table 3 p. 8",
+   "via": "research: /home/claude/floods-research/gaston/gaston-timeline.md sections 1 and 5",
+   "read": "2026-11-23"
+  },
+  "NWS Gaston paper": {
+   "where": "https://www.glenallenweather.com/historylinks/2004/GastonFlood31aug2004.pdf, pp. 1, 4",
+   "via": "research: /home/claude/floods-research/gaston/gaston-timeline.md sections 1 and 2 [S3]",
+   "read": "2026-11-23"
+  },
+  "Storm Events 2004": {
+   "where": "https://www.ncei.noaa.gov/pub/data/swdi/stormevents/csvfiles/ (2004 details and fatalities; events 5421490-5421493, 5421547)",
+   "via": "research: /home/claude/floods-research/gaston/gaston-timeline.md sections 3, 5, 6 [S5, S6]",
+   "read": "2026-11-23"
+  },
+  "NOAA Atlas 14": {
+   "where": "https://hdsc.nws.noaa.gov/pfds/ (Vol. 2 v3, watershed center)",
+   "via": "tools/floods/rain/README.md \"The numbers\"; tools/floods/rain/data/rain.json",
+   "read": "2026-11-23"
+  },
+  "Style Weekly 2004": {
+   "where": "https://m.styleweekly.com/richmond/duping-the-dopplers/Content?oid=1378080",
+   "via": "research: /home/claude/floods-research/gaston/gaston-timeline.md section 3 [S20]; inspection rc3 R2 (Style Weekly quoting the weather service)",
+   "read": "2026-11-23"
+  },
+  "AP, Aug. 31, 2004": {
+   "where": "https://www.foxnews.com/story/gaston-kills-5-parts-of-richmond-condemned.amp",
+   "via": "research: /home/claude/floods-research/gaston/gaston-water.md section 2 [S25]; gaston-timeline.md [S25]",
+   "read": "2026-11-23"
+  },
+  "AP, Sept. 1, 2004": {
+   "where": "https://www.foxnews.com/story/gaston-flooding-devastates-richmond",
+   "via": "research: /home/claude/floods-research/gaston/gaston-timeline.md sections 4, 5 [S24]",
+   "read": "2026-11-23"
+  },
+  "AP, Sept. 20, 2004": {
+   "where": "https://www.insurancejournal.com/magazines/mag-features/2004/09/20/46665.htm",
+   "via": "research: /home/claude/floods-research/gaston/gaston-water.md [S22]; gaston-mechanism.md section 8; gaston-timeline.md section 7",
+   "read": "2026-11-23"
+  },
+  "Washington Post 2004": {
+   "where": "https://www.washingtonpost.com/wp-dyn/articles/A23727-2004Nov30.html",
+   "via": "research: /home/claude/floods-research/gaston/gaston-timeline.md section 4 [S28]",
+   "read": "2026-11-23"
+  },
+  "NBC12 2018": {
+   "where": "https://www.12onyourside.com/2018/09/11/richmond-best-position-since-gaston-withstand-florence-floodwalls-likely-wont-close/",
+   "via": "research: /home/claude/floods-research/gaston/gaston-mechanism.md sections 8, 11, 12 [S30]",
+   "read": "2026-11-23"
+  },
+  "NBC12 2022": {
+   "where": "https://www.12onyourside.com/2022/08/30/remembering-destruction-hurricane-gaston-18-years-later/",
+   "via": "research: /home/claude/floods-research/gaston/gaston-timeline.md sections 3, 4 [S31]",
+   "read": "2026-11-23"
+  },
+  "WTVR 2024": {
+   "where": "https://wtvr.com/news/local-news/richmond-remembers-tropical-storm-gaston-aug-30-2024",
+   "via": "research: /home/claude/floods-research/gaston/gaston-timeline.md section 4, 7 [S33]",
+   "read": "2026-11-23"
+  },
+  "BizSense 2009": {
+   "where": "https://richmondbizsense.com/2009/08/28/shockoe-businesses-sue-city-for-31-million/",
+   "via": "research: /home/claude/floods-research/gaston/gaston-mechanism.md section 10 [S18] (outcome not found)",
+   "read": "2026-11-23"
+  },
+  "The Richmonder 2024": {
+   "where": "https://www.richmonder.org/helene-and-the-hidden-creek-2/",
+   "via": "research: /home/claude/floods-research/gaston/gaston-mechanism.md section 2 [S35]",
+   "read": "2026-11-23"
+  },
+  "Richmond magazine 2013": {
+   "where": "https://richmondmagazine.com/news/shockoe-creek-history/",
+   "via": "research: /home/claude/floods-research/gaston/gaston-mechanism.md section 3 [S36]",
+   "read": "2026-11-23"
+  },
+  "Rain analysis": {
+   "where": "tools/floods/rain/README.md; tools/floods/rain/data/rain.json (computed)",
+   "via": "rain branch, steps 30 to 36 of the case study",
+   "read": "2026-11-23"
+  },
+  "Spill test": {
+   "where": "drafts/richmond-floods/casestudy/2026-11-23-15-spill-path/spill.json, outlet.json; step 20 (17th and Main corrected)",
+   "via": "log.md steps 15 and 20 (computed)",
+   "read": "2026-11-23"
+  },
+  "Levels": {
+   "where": "drafts/richmond-floods/casestudy/2026-11-23-04-fema-profiles-and-second-read/levels.json",
+   "via": "research: /home/claude/floods-research/check/levels.json",
+   "read": "2026-11-23"
+  },
+  "Second read": {
+   "where": "research: /home/claude/floods-research/check/second-read.md",
+   "via": "\"Crests and peaks\", \"HA-410 surface profile\", disagreement 10 (Fran datum)",
+   "read": "2026-11-23"
+  },
+  "River datums": {
+   "where": "research: /home/claude/floods-research/river/datums.md",
+   "via": "\"Answer first\": NAVD88 = NGVD29 - 1.03 ft (NGS NCAT https://geodesy.noaa.gov/api/ncat/llh)",
+   "read": "2026-11-23"
+  },
+  "River floods research": {
+   "where": "research: /home/claude/floods-research/river/floods.md",
+   "via": "\"The table\": rank by City Locks crest",
+   "read": "2026-11-23"
+  },
+  "Floodwall research": {
+   "where": "research: /home/claude/floods-research/river/floodwall.md",
+   "via": "\"Coordinates from OpenStreetMap\": the 7,170 ft earthen levee is missing from OSM",
+   "read": "2026-11-23"
+  },
+  "Gaston depths": {
+   "where": "research: /home/claude/floods-research/gaston/gaston-water.md",
+   "via": "sections 2, 4, 5",
+   "read": "2026-11-23"
+  },
+  "Gaston mechanism": {
+   "where": "research: /home/claude/floods-research/gaston/gaston-mechanism.md",
+   "via": "\"In what sense the trapped account is partly right\"; section 12",
+   "read": "2026-11-23"
+  },
+  "Counts": {
+   "where": "drafts/richmond-floods/counts.json, key \"rc3\" (plates; boxes)",
+   "via": "computed by each plate build and tools/floods/d3/boxcounts.ts",
+   "read": "2026-11-25"
+  },
+  "How it's made, Floods": {
+   "where": "pages/how-its-made.md#floods",
+   "via": "the method as the code does it",
+   "read": "2026-11-25"
+  },
+  "Case-study log": {
+   "where": "drafts/richmond-floods/casestudy/log.md, d2 step 35 \"The levee\"",
+   "via": "lidar ridge 13.0 to 13.7 m NAVD88 along I-95",
+   "read": "2026-11-24"
+  },
+  "figures": {
+   "where": "tools/stories/richmond-floods/figures.json",
+   "via": "the pictures and the renders they come from",
+   "read": "2026-11-25"
+  }
+ },
+ "claims": [
+  {
+   "id": 1,
+   "section": "lede",
+   "claim": "Each great flood drawn here, 1771 to 1985, put water into Shockoe Bottom, the river streets below downtown and over Mayo Island; the mapped 1969 flood also covered the Manchester flats.",
+   "sources": [
+    "Counts",
+    "USGS HA-410"
+   ],
+   "note": "the plates show it; HA-410 maps 1969"
+  },
+  {
+   "id": 2,
+   "section": "lede",
+   "claim": "Since 1994 a floodwall built by the Corps with the city has kept the river out of Shockoe Bottom and most of the Manchester flats.",
+   "sources": [
+    "Floodwall marker",
+    "City floodwall FAQ",
+    "RVANews 2011"
+   ],
+   "note": "\"most\": the earthen levee east of I-95 is not in our data"
+  },
+  {
+   "id": 3,
+   "section": "lede",
+   "claim": "The highest water since stood about 18 ft below the overtopping stage (41 - 22.7).",
+   "sources": [
+    "NWS City Locks",
+    "Levels"
+   ],
+   "note": "computed in page.py"
+  },
+  {
+   "id": 4,
+   "section": "lede",
+   "claim": "Aug. 30, 2004: about 10 in of rain on the land draining to the Bottom; the James far below flood stage.",
+   "sources": [
+    "Rain analysis",
+    "USGS Westham",
+    "NWS Westham"
+   ],
+   "note": ""
+  },
+  {
+   "id": 5,
+   "section": "lede",
+   "claim": "Water drawn level at the City Locks height, at the foot of Pear Street, on today's lidar, with the buildings of the year.",
+   "sources": [
+    "How it's made, Floods",
+    "River datums"
+   ],
+   "note": "Locks at foot of Pear Street: OFR 70-51 via datums.md"
+  },
+  {
+   "id": 6,
+   "section": "read",
+   "claim": "Fig. 2 gauge 15 ft at 17th and Main (level less lidar ground).",
+   "sources": [
+    "Counts",
+    "How it's made, Floods"
+   ],
+   "note": "counts rc3 boxes shockoe 1972 market depthFt"
+  },
+  {
+   "id": 7,
+   "section": "read",
+   "claim": "Depth tones to 20 ft and more; everyday water light blue; x-ray band; 11 ft is about 6 px on a whole plate.",
+   "sources": [
+    "How it's made, Floods"
+   ],
+   "note": ""
+  },
+  {
+   "id": 8,
+   "section": "read",
+   "claim": "Cream = shown standing by sources; grey dashed = earlier map or photo, not ascertained for the year.",
+   "sources": [
+    "How it's made, Floods"
+   ],
+   "note": ""
+  },
+  {
+   "id": 9,
+   "section": "read",
+   "claim": "Hatch = range of an estimate; cross-hatch = ground whose protection the data cannot show; dry twin aligned pixel for pixel.",
+   "sources": [
+    "How it's made, Floods",
+    "figures"
+   ],
+   "note": ""
+  },
+  {
+   "id": 10,
+   "section": "read",
+   "claim": "Older datum converted about 1.03 ft lower at Richmond.",
+   "sources": [
+    "River datums"
+   ],
+   "note": ""
+  },
+  {
+   "id": 11,
+   "section": "ground",
+   "claim": "Shockoe Creek runs south from north of I-64 to the James near 17th and Dock.",
+   "sources": [
+    "The Richmonder 2024"
+   ],
+   "note": ""
+  },
+  {
+   "id": 12,
+   "section": "ground",
+   "claim": "The creek's lower course was put into conduits in the 1920s (1923-1928 project).",
+   "sources": [
+    "Richmond magazine 2013"
+   ],
+   "note": "lawsuit dates the Arch to 1926-27 (BizSense); both within the 1920s"
+  },
+  {
+   "id": 13,
+   "section": "ground",
+   "claim": "Lowest point a pit beside the 17th Street Market at 13.4 ft; 17th and Main 21.6 ft.",
+   "sources": [
+    "Spill test"
+   ],
+   "note": "4.07 m and 6.58 m"
+  },
+  {
+   "id": 14,
+   "section": "ground",
+   "claim": "Manchester flats run from the riverbank to about Commerce Road.",
+   "sources": [
+    "USGS HA-410"
+   ],
+   "note": "research reading of the 1969 extent"
+  },
+  {
+   "id": 15,
+   "section": "ground",
+   "claim": "James above Westham drains 6,753 sq mi; no dam on the river stores floods before Richmond.",
+   "sources": [
+    "USGS Westham"
+   ],
+   "note": "before-the-wall.md: dams above Richmond are run-of-river (WDR 1986)"
+  },
+  {
+   "id": 16,
+   "section": "ground",
+   "claim": "Gathright Dam lowers Richmond flood peaks by about 1.5 percent (FEMA).",
+   "sources": [
+    "FEMA Richmond 1998"
+   ],
+   "note": "FIS 1998 PDF p. 9 via second-read.md"
+  },
+  {
+   "id": 17,
+   "section": "ground",
+   "claim": "In 1969 the water rose about 1.3 ft from the Locks to the Mayo Bridge, then more than 50 ft through the falls to the Boulevard Bridge.",
+   "sources": [
+    "USGS HA-410",
+    "Second read"
+   ],
+   "note": "Mayo 30.0, Boulevard 83.8 NGVD29 (second read)"
+  },
+  {
+   "id": 18,
+   "section": "ground",
+   "claim": "Table: levels and ranges; acres; buildings in water of those shown.",
+   "sources": [
+    "Levels",
+    "Counts",
+    "Gaston depths"
+   ],
+   "note": "counts rc3 plates"
+  },
+  {
+   "id": 19,
+   "section": "ground",
+   "claim": "Fig. 3 strip depths at 17th and Main per flood.",
+   "sources": [
+    "Counts",
+    "figures"
+   ],
+   "note": ""
+  },
+  {
+   "id": 20,
+   "section": "1771",
+   "claim": "USGS OFR 70-51 gives 38 ft for May 27, 1771, from a Corps report, on the old Weather Bureau scale near the Mayo Bridge; early stages set from authenticated diary accounts.",
+   "sources": [
+    "USGS OFR 70-51"
+   ],
+   "note": ""
+  },
+  {
+   "id": 21,
+   "section": "1771",
+   "claim": "About 38 ft at the Locks, about 2.5 ft above Agnes.",
+   "sources": [
+    "Levels"
+   ],
+   "note": ""
+  },
+  {
+   "id": 22,
+   "section": "1771",
+   "claim": "Other accounts give 30 ft and 45 ft on unstated bases.",
+   "sources": [
+    "Henrico County",
+    "Richmond Family Magazine 2019"
+   ],
+   "note": "wording as corrected in rc3 (F3)"
+  },
+  {
+   "id": 23,
+   "section": "1771",
+   "claim": "Henrico County: buildings and boats destroyed in Richmond; about 150 died along the river.",
+   "sources": [
+    "Henrico County"
+   ],
+   "note": "source also names animals"
+  },
+  {
+   "id": 24,
+   "section": "1771",
+   "claim": "Fig. 4: hatch to 41 ft; six buildings and the 1737 street plan in the frame.",
+   "sources": [
+    "Levels",
+    "Counts",
+    "Case-study log"
+   ],
+   "note": "log step 62: the 1788 scene is the 1737 plan plus buildings dated before 1788, six in the frame"
+  },
+  {
+   "id": 25,
+   "section": "1936",
+   "claim": "Crest about 26.5 ft at the Locks.",
+   "sources": [
+    "USGS PP 924",
+    "Levels"
+   ],
+   "note": ""
+  },
+  {
+   "id": 26,
+   "section": "1936",
+   "claim": "USGS plotted about a dozen 1936 high-water marks.",
+   "sources": [
+    "USGS HA-410"
+   ],
+   "note": "datums.md (c): about 12 points"
+  },
+  {
+   "id": 27,
+   "section": "1936",
+   "claim": "NWS history: serious flooding of industrial and business sections.",
+   "sources": [
+    "Watson, Virginia Floods"
+   ],
+   "note": ""
+  },
+  {
+   "id": 28,
+   "section": "1936",
+   "claim": "Fig. 5 counts.",
+   "sources": [
+    "Counts"
+   ],
+   "note": ""
+  },
+  {
+   "id": 29,
+   "section": "1969",
+   "claim": "Camille remnants; 28.64 ft at 6 a.m. Aug. 22, 1969; 27.6 ft today.",
+   "sources": [
+    "USGS OFR 70-51",
+    "Levels"
+   ],
+   "note": ""
+  },
+  {
+   "id": 30,
+   "section": "1969",
+   "claim": "Advance warning limited losses; serious flooding in the lower elevations.",
+   "sources": [
+    "USGS OFR 70-51"
+   ],
+   "note": "printed p. 22"
+  },
+  {
+   "id": 31,
+   "section": "1969",
+   "claim": "HA-410 extent: valley floor to about Main Street Station, all of Mayo Island, Manchester flats to about Commerce Road with the sewage plant, Gillies Creek valley through Fulton.",
+   "sources": [
+    "USGS HA-410"
+   ],
+   "note": "the research's reading of the plate"
+  },
+  {
+   "id": 32,
+   "section": "1969",
+   "claim": "The levee then at Shockoe Creek's mouth had to stop pumping during Camille for structural reasons.",
+   "sources": [
+    "FEMA Richmond 2025"
+   ],
+   "note": "FIS 1998 p. 9 and 2025 Table 5 p. 27, via fis.md"
+  },
+  {
+   "id": 33,
+   "section": "1969",
+   "claim": "Fig. 6 counts; HA-410 water reached about as far up the valley.",
+   "sources": [
+    "Counts",
+    "USGS HA-410"
+   ],
+   "note": "sheet box 2 note (rc3)"
+  },
+  {
+   "id": 34,
+   "section": "1972",
+   "claim": "36.5 ft on the gauge datum of the time at 4 p.m. June 23, 1972; 35.5 ft today; sign at Dock and Pear marks 35.5, 17 ft above ground.",
+   "sources": [
+    "NOAA Agnes report",
+    "USGS PP 924",
+    "Agnes sign",
+    "Levels"
+   ],
+   "note": ""
+  },
+  {
+   "id": 35,
+   "section": "1972",
+   "claim": "Westham 313,000 cfs, still the record.",
+   "sources": [
+    "USGS Westham"
+   ],
+   "note": ""
+  },
+  {
+   "id": 36,
+   "section": "1972",
+   "claim": "Evacuations from June 22 morning; by June 23 downtown lost power and drinking water; purification plant flooded; 4 of 5 bridges closed; National Guard cordoned parts of the city.",
+   "sources": [
+    "NOAA Agnes report"
+   ],
+   "note": "NOAA also: communications lost"
+  },
+  {
+   "id": 37,
+   "section": "1972",
+   "claim": "The older creek-mouth levee was overtopped in 1972.",
+   "sources": [
+    "FEMA Richmond 2025"
+   ],
+   "note": ""
+  },
+  {
+   "id": 38,
+   "section": "1972",
+   "claim": "Sign: 13 local deaths, over $140 million local damage; NOAA: 5 deaths along the James.",
+   "sources": [
+    "Agnes sign",
+    "NOAA Agnes report"
+   ],
+   "note": "river/floods.md 1972"
+  },
+  {
+   "id": 39,
+   "section": "1972",
+   "claim": "Drawing: 220.4 acres; 226 of 1,173; median 10.2 ft; deepest 33.2 ft; gauges 15, 11, 19 ft.",
+   "sources": [
+    "Counts"
+   ],
+   "note": ""
+  },
+  {
+   "id": 40,
+   "section": "1972",
+   "claim": "What \"shown\" includes: dating, Sanborn traces with the 1974 photo; 273 grey; 40 outbuildings and 23 footprints left out; 1974 photo two years after.",
+   "sources": [
+    "How it's made, Floods",
+    "Counts"
+   ],
+   "note": "notes.json shockoe:1972 caption line 3"
+  },
+  {
+   "id": 41,
+   "section": "1972",
+   "claim": "Fig. 7: 17th and Dock 19 ft; the Dock and Pear sign a few hundred feet east.",
+   "sources": [
+    "Counts",
+    "Agnes sign"
+   ],
+   "note": "datums.md: sign \"a few hundred feet\" from the gauge"
+  },
+  {
+   "id": 42,
+   "section": "1985",
+   "claim": "30.76 ft on Nov. 7, 1985 (old datum), about 29.7 today; second-highest crest since gauges began, after Agnes.",
+   "sources": [
+    "NWS City Locks",
+    "Levels",
+    "River floods research"
+   ],
+   "note": ""
+  },
+  {
+   "id": 43,
+   "section": "1985",
+   "claim": "NWS history: several blocks of commercial and industrial buildings flooded.",
+   "sources": [
+    "Watson, Virginia Floods"
+   ],
+   "note": ""
+  },
+  {
+   "id": 44,
+   "section": "1985",
+   "claim": "Congress authorized the wall the next year (Nov. 17, 1986).",
+   "sources": [
+    "WRDA 1986"
+   ],
+   "note": ""
+  },
+  {
+   "id": 45,
+   "section": "1985",
+   "claim": "No public air photo of the 1980s found; 180 grey.",
+   "sources": [
+    "How it's made, Floods",
+    "Counts"
+   ],
+   "note": "notes.json shockoe:1985"
+  },
+  {
+   "id": 46,
+   "section": "wall",
+   "claim": "District report Sept. 1980; Chief of Engineers Nov. 16, 1981; WRDA 1986 signed Nov. 17, 1986; $91.8 million; must include protection for the wastewater plant (quoted, 12 words).",
+   "sources": [
+    "WRDA 1986"
+   ],
+   "note": ""
+  },
+  {
+   "id": 47,
+   "section": "wall",
+   "claim": "City utilities: approval followed the 1985 flood.",
+   "sources": [
+    "City utilities 2020"
+   ],
+   "note": "it misdates the flood to 1986"
+  },
+  {
+   "id": 48,
+   "section": "wall",
+   "claim": "Construction began Nov. 5, 1988.",
+   "sources": [
+    "Virginia HD 64"
+   ],
+   "note": "not reread by the second reader"
+  },
+  {
+   "id": 49,
+   "section": "wall",
+   "claim": "1993 ceiling $134 million; dedicated Oct. 21, 1994; final cost $143 million (one source).",
+   "sources": [
+    "Public Law 103-135",
+    "Floodwall marker",
+    "City utilities 2020"
+   ],
+   "note": ""
+  },
+  {
+   "id": 50,
+   "section": "wall",
+   "claim": "North wall about 4,277 ft, 12th and Byrd to 21st and East Cary, across the valley mouth; 4 to 30 ft above ground.",
+   "sources": [
+    "City floodwall FAQ",
+    "Floodwall marker"
+   ],
+   "note": ""
+  },
+  {
+   "id": 51,
+   "section": "wall",
+   "claim": "South line about 13,046 ft of concrete wall and earthen levee with bin wall; west of the Manchester Bridge to I-95, then south and west across the railroad to high ground near Goodes Street.",
+   "sources": [
+    "Floodwall marker",
+    "City floodwall FAQ"
+   ],
+   "note": "marker prints 13,2046, a typo"
+  },
+  {
+   "id": 52,
+   "section": "wall",
+   "claim": "Just west of the Mayo Bridge a gravity U-wall, 43 ft from top to river's edge.",
+   "sources": [
+    "City floodwall FAQ"
+   ],
+   "note": "wording as corrected in rc3 (F2)"
+  },
+  {
+   "id": 53,
+   "section": "wall",
+   "claim": "About 750 acres: 150 Shockoe, 600 Manchester.",
+   "sources": [
+    "Floodwall marker"
+   ],
+   "note": ""
+  },
+  {
+   "id": 54,
+   "section": "wall",
+   "claim": "19 openings closed with gates.",
+   "sources": [
+    "City utilities 2020"
+   ],
+   "note": ""
+  },
+  {
+   "id": 55,
+   "section": "wall",
+   "claim": "No surveyed top found; NWS: overtopped at 41 ft; about 5.5 ft above Agnes.",
+   "sources": [
+    "NWS City Locks",
+    "FEMA Richmond 2025"
+   ],
+   "note": "fis.md: neither FIS prints a top"
+  },
+  {
+   "id": 56,
+   "section": "wall",
+   "claim": "City: northern wall built for an average recurrence of about 280 years; FEMA 1998: 3 ft above the 100-year, does not protect against the 500-year.",
+   "sources": [
+    "City FloodKit 2026",
+    "FEMA Richmond 1998"
+   ],
+   "note": ""
+  },
+  {
+   "id": 57,
+   "section": "wall",
+   "claim": "Fig. 9: with today's wall, 111.0 acres outside the wall; 22 of 1,101 buildings.",
+   "sources": [
+    "Counts"
+   ],
+   "note": ""
+  },
+  {
+   "id": 58,
+   "section": "tests",
+   "claim": "Fran remnants; 23.75 ft Sept. 8, 1996; about 22.7 today, perhaps 1 ft more (datum era unknown); about 18 ft below the overtopping stage.",
+   "sources": [
+    "NWS City Locks",
+    "Second read",
+    "Levels"
+   ],
+   "note": ""
+  },
+  {
+   "id": 59,
+   "section": "tests",
+   "claim": "January 1996 some gates shut, Dock Street among them; in Fran some gates.",
+   "sources": [
+    "RVANews 2011"
+   ],
+   "note": "wording as corrected in rc3 (F1)"
+  },
+  {
+   "id": 60,
+   "section": "tests",
+   "claim": "Nov. 2020 crest 16.96 ft early Nov. 14 (04:48 to 04:54 EST).",
+   "sources": [
+    "USGS City Locks"
+   ],
+   "note": ""
+  },
+  {
+   "id": 61,
+   "section": "tests",
+   "claim": "17th Street closure on Dock Street shut at noon Nov. 12; Brander Street gate that evening.",
+   "sources": [
+    "WTVR 2020",
+    "City utilities 2020"
+   ],
+   "note": ""
+  },
+  {
+   "id": 62,
+   "section": "tests",
+   "claim": "Dock Street closure shut again Feb. 2025, first since 2020.",
+   "sources": [
+    "The Richmonder 2025"
+   ],
+   "note": ""
+  },
+  {
+   "id": 63,
+   "section": "tests",
+   "claim": "As of 2011 the James had never forced closing all gates.",
+   "sources": [
+    "RVANews 2011"
+   ],
+   "note": ""
+  },
+  {
+   "id": 64,
+   "section": "tests",
+   "claim": "Fig. 10 acres outside the wall.",
+   "sources": [
+    "Counts"
+   ],
+   "note": ""
+  },
+  {
+   "id": 65,
+   "section": "manchester",
+   "claim": "At the 1972 height: no wall 527.1 acres, 246 of 412, deepest 29.1 ft; Hull Street at the Mayo Bridge about 14 ft; with the wall flats dry, 41.5 acres outside; 212.8 acres and 54 buildings not known.",
+   "sources": [
+    "Counts"
+   ],
+   "note": ""
+  },
+  {
+   "id": 66,
+   "section": "manchester",
+   "claim": "Concrete parts in OSM; the 7,170 ft earthen levee is not.",
+   "sources": [
+    "Floodwall research"
+   ],
+   "note": ""
+  },
+  {
+   "id": 67,
+   "section": "manchester",
+   "claim": "Lidar ridge along I-95 at about 43 to 45 ft; cannot tell levee from highway fill.",
+   "sources": [
+    "Case-study log"
+   ],
+   "note": "13.0 to 13.7 m"
+  },
+  {
+   "id": 68,
+   "section": "manchester",
+   "claim": "1986 law required protecting the wastewater plant; the plant stands east of I-95.",
+   "sources": [
+    "WRDA 1986",
+    "Case-study log"
+   ],
+   "note": "log step 35"
+  },
+  {
+   "id": 69,
+   "section": "manchester",
+   "claim": "The drawing cross-hatches that ground with no depth, out of the counts; edges follow the levee's possible courses.",
+   "sources": [
+    "How it's made, Floods"
+   ],
+   "note": ""
+  },
+  {
+   "id": 70,
+   "section": "2004",
+   "claim": "Gaston ashore in S.C. morning of Aug. 29; a tropical depression when its center crossed into Virginia Aug. 30; passed well southeast of Richmond.",
+   "sources": [
+    "NHC Gaston report"
+   ],
+   "note": "Table 1; HURDAT2 via gaston-timeline.md"
+  },
+  {
+   "id": 71,
+   "section": "2004",
+   "claim": "Storms formed along a boundary from Hampton Roads to Richmond, drifted northwest and stalled over the city from early afternoon into the evening.",
+   "sources": [
+    "NWS Gaston paper"
+   ],
+   "note": "p. 4; timeline \"In one paragraph\""
+  },
+  {
+   "id": 72,
+   "section": "2004",
+   "claim": "Forecasts called for an inch or two that day.",
+   "sources": [
+    "NWS Gaston paper"
+   ],
+   "note": "p. 1: NAM and GFS 1 to 2 in"
+  },
+  {
+   "id": 73,
+   "section": "2004",
+   "claim": "Fig. 13: solid to about 28 ft, hatch to 35; openings dashed (open); pool held on the city side.",
+   "sources": [
+    "Gaston depths",
+    "Counts",
+    "How it's made, Floods",
+    "AP, Sept. 20, 2004"
+   ],
+   "note": ""
+  },
+  {
+   "id": 74,
+   "section": "2004",
+   "claim": "Watershed about 12 sq mi (7,780 acres); average about 10 in, range 8.6 to 11.6; about 2.2 billion gallons; most between 2 and 9 p.m.; 1.3 to 2.2 in each hour 2 to 8 p.m.",
+   "sources": [
+    "Rain analysis"
+   ],
+   "note": "rain.json basin_total_in, basin_volume, basin_hourly"
+  },
+  {
+   "id": 75,
+   "section": "2004",
+   "claim": "Wettest hour about 2.2 in, 5 to 6 p.m., about a 10-year one-hour rain at a point.",
+   "sources": [
+    "Rain analysis",
+    "NOAA Atlas 14"
+   ],
+   "note": "README table: 1 h, 10-year (4 to 20)"
+  },
+  {
+   "id": 76,
+   "section": "2004",
+   "claim": "About 10 in in six hours reaches or passes Atlas 14's 1,000-year six-hour point amount, 8.04 in, by every estimate but one (AORC 7.9).",
+   "sources": [
+    "Rain analysis",
+    "NOAA Atlas 14"
+   ],
+   "note": ""
+  },
+  {
+   "id": 77,
+   "section": "2004",
+   "claim": "First flash-flood warning 3:58 p.m.",
+   "sources": [
+    "Style Weekly 2004"
+   ],
+   "note": "Style Weekly quoting the weather service"
+  },
+  {
+   "id": 78,
+   "section": "2004",
+   "claim": "Storm Events starts the flash flooding at 4:30 in a time it labels EST, perhaps 5:30 EDT.",
+   "sources": [
+    "Storm Events 2004"
+   ],
+   "note": "inspection rc3 R1: not stated as exact"
+  },
+  {
+   "id": 79,
+   "section": "2004",
+   "claim": "The Bottom is a bowl whose lowest streets lie below the riverfront strip of Dock Street, rail embankments and the wall.",
+   "sources": [
+    "Gaston mechanism",
+    "Spill test"
+   ],
+   "note": ""
+  },
+  {
+   "id": 80,
+   "section": "2004",
+   "claim": "Runoff off Church Hill and the Capitol slope into the Bottom; most water came together at 17th and Main.",
+   "sources": [
+    "AP, Sept. 20, 2004",
+    "Washington Post 2004"
+   ],
+   "note": ""
+  },
+  {
+   "id": 81,
+   "section": "2004",
+   "claim": "Gates stood open; the city closes them for river forecasts; the James peaked 14,800 cfs at 9:15 p.m., about a third of the 42,000 cfs minor-flood flow.",
+   "sources": [
+    "AP, Sept. 20, 2004",
+    "NBC12 2018",
+    "USGS Westham",
+    "NWS Westham"
+   ],
+   "note": ""
+  },
+  {
+   "id": 82,
+   "section": "2004",
+   "claim": "Spill test: pool first reaches the James at about 19.1 ft at 17th and Dock; with openings open at street level about 21.7 ft via the Dock Street opening near 18th.",
+   "sources": [
+    "Spill test"
+   ],
+   "note": ""
+  },
+  {
+   "id": 83,
+   "section": "2004",
+   "claim": "FEMA Shockoe Creek model: 1% level near Dock Street 19.4 ft.",
+   "sources": [
+    "FEMA Richmond 2025"
+   ],
+   "note": "Floodway Data section A, PDF p. 70; panel 37P"
+  },
+  {
+   "id": 84,
+   "section": "2004",
+   "claim": "Reported depths imply water above both; a rough weir calculation puts the reports between an open riverfront and the openings alone; a question for a hydraulic model; the wall's effect is not known.",
+   "sources": [
+    "Spill test",
+    "Gaston mechanism"
+   ],
+   "note": "outlet.json: 23 to 24 ft open line, 32 to 35 ft openings only"
+  },
+  {
+   "id": 85,
+   "section": "2004",
+   "claim": "No surveyed high-water marks found; up to 10 ft; Havana '59 13 ft up the dining-room wall (owner); Bottoms Up 6 ft 2 in above a 3-ft step; law office 7 ft; rapids at 15th and Main (a developer); Main Street Station escaped damage.",
+   "sources": [
+    "Gaston depths",
+    "AP, Aug. 31, 2004",
+    "Storm Events 2004",
+    "Washington Post 2004",
+    "NBC12 2022",
+    "AP, Sept. 20, 2004",
+    "WTVR 2024"
+   ],
+   "note": ""
+  },
+  {
+   "id": 86,
+   "section": "2004",
+   "claim": "Depths imply 24 to 35 ft; drawing at about 28 (\"up to 10 feet\" at the lowest blocks); about 9 ft at the market; 31.4 acres; 99 of 1,059.",
+   "sources": [
+    "Gaston depths",
+    "Counts"
+   ],
+   "note": ""
+  },
+  {
+   "id": 87,
+   "section": "2004",
+   "claim": "Fig. 16: pin A where most water came together; pin B at Havana '59's usual address.",
+   "sources": [
+    "Washington Post 2004",
+    "Gaston depths"
+   ],
+   "note": "usual address: notes.json, not stated in the source"
+  },
+  {
+   "id": 88,
+   "section": "2004",
+   "claim": "Eight died in flash floods in and around Richmond, three in the city; two in Gillies Creek about a mile east of the Bottom; no source places a death in the Bottom.",
+   "sources": [
+    "Storm Events 2004",
+    "NHC Gaston report",
+    "AP, Sept. 1, 2004",
+    "Washington Post 2004"
+   ],
+   "note": ""
+  },
+  {
+   "id": 89,
+   "section": "2004",
+   "claim": "Fire crews took people out by raft and boat; about two dozen waited on the Bottoms Up second-floor deck.",
+   "sources": [
+    "NBC12 2022"
+   ],
+   "note": "gaston-timeline.md section 3 [S31, S33]"
+  },
+  {
+   "id": 90,
+   "section": "2004",
+   "claim": "About 20 blocks roped off and condemned until inspected; $20 million property damage in the city.",
+   "sources": [
+    "Storm Events 2004",
+    "AP, Aug. 31, 2004"
+   ],
+   "note": ""
+  },
+  {
+   "id": 91,
+   "section": "2004",
+   "claim": "Almost no one carried flood insurance: the wall took the Bottom out of the mapped flood zone; lenders had stopped requiring it.",
+   "sources": [
+    "AP, Sept. 20, 2004",
+    "WTVR 2024"
+   ],
+   "note": ""
+  },
+  {
+   "id": 92,
+   "section": "2004",
+   "claim": "Aug. 2009 lawsuit alleging the city's handling of sewer gates and a pumping station made flooding worse; no outcome found.",
+   "sources": [
+    "BizSense 2009"
+   ],
+   "note": "research searched for a ruling or settlement and found none"
+  },
+  {
+   "id": 93,
+   "section": "2004",
+   "claim": "About 100 inlets moved and added; flap gates into the canal; about $20 million over a decade; 2018: more than three times the capacity of 2004.",
+   "sources": [
+    "NBC12 2018"
+   ],
+   "note": ""
+  },
+  {
+   "id": 94,
+   "section": "2004",
+   "claim": "No rain since has matched Gaston's over the watershed (AORC); officials said one could flood the Bottom again.",
+   "sources": [
+    "Gaston mechanism",
+    "NBC12 2018"
+   ],
+   "note": ""
+  },
+  {
+   "id": 95,
+   "section": "limits",
+   "claim": "The limits as listed: bathtub fill; one height; Mayo rise assumed from 1969; held level west of the bridge; today's ground on a 5 m grid; wall top; levee; old creek-mouth levee not drawn; grey buildings; estimated heights; topped buildings left off; Gaston depths; rain 40 percent at a point.",
+   "sources": [
+    "How it's made, Floods",
+    "Levels",
+    "FEMA Richmond 2025",
+    "Rain analysis"
+   ],
+   "note": ""
+  },
+  {
+   "id": 96,
+   "section": "made",
+   "claim": "Drawn with isoscape; levels, city, counts and rain in code with Claude; sheets independently inspected and fact checked in three rounds in Nov. 2026 by a Claude agent that had not made them; corrected wording followed.",
+   "sources": [
+    "Case-study log"
+   ],
+   "note": "log: rc1 inspection, rc2 and rc3 rechecks"
+  }
+ ]
+}

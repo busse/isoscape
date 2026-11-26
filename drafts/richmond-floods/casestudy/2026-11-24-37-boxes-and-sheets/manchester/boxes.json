@@ -1,0 +1,92 @@
+[
+ {
+  "n": 1,
+  "title": "Hull Street at the Mayo Bridge",
+  "at": [
+   -77.4352,
+   37.5257
+  ],
+  "svg_xy": [
+   1203.2,
+   298.7
+  ],
+  "why": "The bridge foot, inside the wall: dry with it, deep without.",
+  "ground_m": 6.9,
+  "depth_ft": 14.2
+ },
+ {
+  "n": 2,
+  "title": "The flats: 5th and Stockton",
+  "at": [
+   -77.436818,
+   37.522792
+  ],
+  "svg_xy": [
+   1251.7,
+   -56
+  ],
+  "why": "Warehouses and shops on the old floodplain the wall now guards.",
+  "ground_m": 8.95,
+  "depth_ft": 7.4
+ },
+ {
+  "n": 3,
+  "title": "Commerce Road and Maury",
+  "at": [
+   -77.437703,
+   37.519511
+  ],
+  "svg_xy": [
+   1150.4,
+   -427.9
+  ],
+  "why": "Industrial Manchester at the foot of the bluff.",
+  "ground_m": 11.33,
+  "depth_ft": -0.4
+ },
+ {
+  "n": 4,
+  "title": "The tank farm",
+  "at": [
+   -77.4335,
+   37.5215
+  ],
+  "svg_xy": [
+   603.5,
+   -84.7
+  ],
+  "why": "Storage tanks on the flats, behind the wall.",
+  "ground_m": 6.14,
+  "depth_ft": 16.6
+ },
+ {
+  "n": 5,
+  "title": "On the wall",
+  "at": [
+   -77.439,
+   37.5272
+  ],
+  "svg_xy": [
+   1947.2,
+   334.1
+  ],
+  "why": "The south wall: the 1972 height on the river side, dry ground behind.",
+  "ground_m": 10.25,
+  "depth_ft": 3.2
+ },
+ {
+  "n": 6,
+  "title": "The treatment plant grounds",
+  "at": [
+   -77.4235,
+   37.5175
+  ],
+  "svg_xy": [
+   -1358.4,
+   -195.7
+  ],
+  "why": "Tanks and basins east of the I-95 ridge: open to the river in this fill.",
+  "ground_m": 4.2,
+  "depth_ft": 21.9
+ }
+]

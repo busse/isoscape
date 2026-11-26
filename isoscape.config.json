@@ -276,6 +276,7 @@
         { "page": "jackson-ward", "label": "Jackson Ward before I-95" },
         { "page": "redlining", "label": "Redlining in Richmond, 1937" },
         { "page": "dollar-stores", "label": "Dollar General on the edge of town" },
+        { "page": "richmond-floods", "label": "Richmond's floods, 1771 to 2020" },
         { "page": "explore-with-chat", "label": "Tutorial: map any place with a chat" },
         { "page": "history-from-old-maps", "label": "Tutorial: a neighborhood's history from old maps, with an AI chat" },
         { "page": "world-landmarks", "label": "Landmarks around the world" }
@@ -305,7 +306,7 @@
         "pageLabel": "Step through the years"
       }
     ],
-    "stories": { "title": "Stories", "blurb": "Longer pieces that work one question out with drawings, counts and sources.", "pages": ["jackson-ward", "redlining", "dollar-stores"] },
+    "stories": { "title": "Stories", "blurb": "Longer pieces that work one question out with drawings, counts and sources.", "pages": ["richmond-floods", "jackson-ward", "redlining", "dollar-stores"] },
     "sections": [
       {
         "title": "Richmond",

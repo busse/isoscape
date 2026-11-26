@@ -1,0 +1,409 @@
+{
+ "traced:sanborn-1924-2239 | traced:sanborn-1895-680": {
+  "plates": [
+   "1936",
+   "1936-dry"
+  ],
+  "case": {
+   "over": "traced:sanborn-1924-2239#0",
+   "under": "traced:sanborn-1895-680#0",
+   "area": 2,
+   "at": [
+    50.58770646600932,
+    -476.4090057003135
+   ],
+   "by": 18.34,
+   "kinds": "traced over traced",
+   "overlap": 0,
+   "overlapM2": 0,
+   "kind": "order"
+  }
+ },
+ "w38232584.13.0 | w113030476": {
+  "plates": [
+   "1936",
+   "1936-dry",
+   "1969",
+   "1969-dry",
+   "1972",
+   "1972-dry",
+   "1985",
+   "1985-dry",
+   "1996",
+   "1996-dry",
+   "2020",
+   "2020-dry",
+   "agnes-today",
+   "agnes-today-dry",
+   "gaston-b",
+   "gaston-b-dry"
+  ],
+  "case": {
+   "over": "w38232584.13.0",
+   "under": "w113030476#4",
+   "area": 152.25,
+   "at": [
+    -233.4492894603781,
+    -419.36245450436815
+   ],
+   "by": 118.69,
+   "kinds": "bridge over building",
+   "overlap": 0.01,
+   "overlapM2": 0.4,
+   "kind": "order"
+  }
+ },
+ "traced:sanborn-1924-2495 | w751156385": {
+  "plates": [
+   "1936",
+   "1936-dry",
+   "1969",
+   "1969-dry",
+   "1972",
+   "1972-dry",
+   "1985",
+   "1985-dry",
+   "1996",
+   "1996-dry",
+   "gaston-b",
+   "gaston-b-dry"
+  ],
+  "case": {
+   "over": "traced:sanborn-1924-2495#25",
+   "under": "w751156385",
+   "area": 35,
+   "at": [
+    1812.0446262884848,
+    -473.0664247684103
+   ],
+   "by": 2.98,
+   "kinds": "traced over building",
+   "overlap": 0.01,
+   "overlapM2": 0.3,
+   "kind": "order"
+  }
+ },
+ "traced:sanborn-1924-2212 | w207703634": {
+  "plates": [
+   "1936",
+   "1936-dry",
+   "1969",
+   "1969-dry",
+   "1972",
+   "1972-dry",
+   "1985",
+   "1985-dry",
+   "1996",
+   "1996-dry"
+  ],
+  "case": {
+   "over": "traced:sanborn-1924-2212#4",
+   "under": "w207703634#2",
+   "area": 2,
+   "at": [
+    -91.76543040813276,
+    -270.6253762895867
+   ],
+   "by": 2.62,
+   "kinds": "traced over building",
+   "overlap": 0.01,
+   "overlapM2": 0.9,
+   "kind": "order"
+  }
+ },
+ "traced:sanborn-1895-842 | w207703631": {
+  "plates": [
+   "1936",
+   "1936-dry",
+   "1969",
+   "1969-dry",
+   "1972",
+   "1972-dry",
+   "1985",
+   "1985-dry",
+   "1996",
+   "1996-dry"
+  ],
+  "case": {
+   "over": "traced:sanborn-1895-842#8",
+   "under": "w207703631",
+   "area": 54.5,
+   "at": [
+    79.54471072664168,
+    -169.2350124350523
+   ],
+   "by": 7.54,
+   "kinds": "traced over building",
+   "overlap": 0.04,
+   "overlapM2": 0.2,
+   "kind": "order"
+  }
+ },
+ "traced:sanborn-1895-877 | traced:sanborn-1895-874": {
+  "plates": [
+   "1936",
+   "1936-dry"
+  ],
+  "case": {
+   "over": "traced:sanborn-1895-877#7",
+   "under": "traced:sanborn-1895-874#15",
+   "area": 113.25,
+   "at": [
+    367.55944887668073,
+    -59.262871875270676
+   ],
+   "by": 3.58,
+   "kinds": "traced over traced",
+   "overlap": 0.04,
+   "overlapM2": 0.7,
+   "kind": "order"
+  }
+ },
+ "traced:sanborn-1886-498 | w266955726": {
+  "plates": [
+   "1936",
+   "1936-dry"
+  ],
+  "case": {
+   "over": "traced:sanborn-1886-498#2",
+   "under": "w266955726#1",
+   "area": 10,
+   "at": [
+    1108.1193128447978,
+    -148.02394076117977
+   ],
+   "by": 2.32,
+   "kinds": "traced over building",
+   "overlap": 0,
+   "overlapM2": 0.3,
+   "kind": "order"
+  }
+ },
+ "w753715530 | traced:sanborn-1924-2470": {
+  "plates": [
+   "1969",
+   "1969-dry",
+   "1972",
+   "1972-dry",
+   "1985",
+   "1985-dry",
+   "1996",
+   "1996-dry",
+   "gaston-b",
+   "gaston-b-dry"
+  ],
+  "case": {
+   "over": "w753715530#2",
+   "under": "traced:sanborn-1924-2470#0",
+   "area": 7.25,
+   "at": [
+    1849.7505849245829,
+    -557.9985700633027
+   ],
+   "by": 0.95,
+   "kinds": "building over traced",
+   "overlap": 0.01,
+   "overlapM2": 0.7,
+   "kind": "order"
+  }
+ },
+ "w751156366 | traced:sanborn-1924-2495": {
+  "plates": [
+   "1969",
+   "1969-dry",
+   "1972",
+   "1972-dry",
+   "1985",
+   "1985-dry",
+   "1996",
+   "1996-dry",
+   "gaston-b",
+   "gaston-b-dry"
+  ],
+  "case": {
+   "over": "w751156366#0",
+   "under": "traced:sanborn-1924-2495#26",
+   "area": 3,
+   "at": [
+    1848.0345131441761,
+    -433.593152116692
+   ],
+   "by": 3.25,
+   "kinds": "building over traced",
+   "overlap": 0.02,
+   "overlapM2": 0.9,
+   "kind": "order"
+  }
+ },
+ "traced:sanborn-1895-842 | band:w207703631": {
+  "plates": [
+   "1972"
+  ],
+  "case": {
+   "over": "traced:sanborn-1895-842#8",
+   "under": "band:w207703631",
+   "area": 3,
+   "at": [
+    77.84471072664168,
+    -162.7350124350523
+   ],
+   "by": 6.6,
+   "kinds": "traced over band",
+   "overlap": 0.04,
+   "overlapM2": 0.2,
+   "kind": "order"
+  }
+ },
+ "traced:sanborn-1895-842 | w207703626": {
+  "plates": [
+   "1985",
+   "1985-dry",
+   "1996",
+   "1996-dry"
+  ],
+  "case": {
+   "over": "traced:sanborn-1895-842#9",
+   "under": "w207703626",
+   "area": 6,
+   "at": [
+    110.50216715136224,
+    -173.372231457125
+   ],
+   "by": 0.83,
+   "kinds": "traced over building",
+   "overlap": 0.02,
+   "overlapM2": 0.1,
+   "kind": "order"
+  }
+ },
+ "w1456058032 | r19918536": {
+  "plates": [
+   "1996",
+   "1996-dry",
+   "2020",
+   "2020-dry",
+   "agnes-today",
+   "agnes-today-dry",
+   "gaston-b",
+   "gaston-b-dry"
+  ],
+  "case": {
+   "over": "w1456058032",
+   "under": "r19918536",
+   "area": 257,
+   "at": [
+    -1770.8603661523507,
+    -630.4734205109152
+   ],
+   "by": 23.23,
+   "kinds": "building over building",
+   "overlap": 0,
+   "overlapM2": 0,
+   "kind": "order"
+  }
+ },
+ "r20688391 | r20688390": {
+  "plates": [
+   "1996",
+   "1996-dry"
+  ],
+  "case": {
+   "over": "r20688391#7",
+   "under": "r20688390#6",
+   "area": 2,
+   "at": [
+    -960.367972378819,
+    -636.6077009477467
+   ],
+   "by": 7.22,
+   "kinds": "building over building",
+   "overlap": 0,
+   "overlapM2": 0,
+   "kind": "order"
+  }
+ },
+ "w751156457 | traced:sanborn-1924-2495": {
+  "plates": [
+   "1996",
+   "1996-dry",
+   "gaston-b",
+   "gaston-b-dry"
+  ],
+  "case": {
+   "over": "w751156457",
+   "under": "traced:sanborn-1924-2495#5",
+   "area": 74.5,
+   "at": [
+    1841.4059833570416,
+    -436.032807631941
+   ],
+   "by": 18.51,
+   "kinds": "building over traced",
+   "overlap": 0,
+   "overlapM2": 0.2,
+   "kind": "order"
+  }
+ },
+ "w751156414 | w751156314": {
+  "plates": [
+   "gaston-b",
+   "gaston-b-dry"
+  ],
+  "case": {
+   "over": "w751156414#2",
+   "under": "w751156314",
+   "area": 13.25,
+   "at": [
+    1854.7170470518163,
+    -444.3045665309942
+   ],
+   "by": 2.94,
+   "kinds": "building over building",
+   "overlap": 0,
+   "overlapM2": 0,
+   "kind": "order"
+  }
+ },
+ "w266954827 | r11269673": {
+  "plates": [
+   "2020",
+   "2020-dry",
+   "agnes-today",
+   "agnes-today-dry"
+  ],
+  "case": {
+   "over": "w266954827#0",
+   "under": "r11269673",
+   "area": 127.75,
+   "at": [
+    519.2988909005446,
+    -276.986249839638
+   ],
+   "by": 33.81,
+   "kinds": "building over building",
+   "overlap": 0,
+   "overlapM2": 0,
+   "kind": "order"
+  }
+ },
+ "w113038428.6.2 | w113038399": {
+  "plates": [
+   "agnes-today",
+   "agnes-today-dry"
+  ],
+  "case": {
+   "over": "w113038428.6.2",
+   "under": "w113038399",
+   "area": 26.75,
+   "at": [
+    -617.0624271105635,
+    -456.7984701308645
+   ],
+   "by": 17.15,
+   "kinds": "bridge over building",
+   "overlap": 0,
+   "overlapM2": 0,
+   "kind": "order"
+  }
+ }
+}

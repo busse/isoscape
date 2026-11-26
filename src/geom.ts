@@ -400,3 +400,63 @@ export const despike = (ring: Ring, minDeg = 40, maxLen = 8): Ring => {
   }
   return r
 }
+
+/**
+ * A simple polygon (counter-clockwise, no repeated closing point) cut into convex pieces: ear
+ * clipping into triangles, then neighbors merged while the union stays convex (Hertel and
+ * Mehlhorn), so an L comes out as two pieces. Each piece is a list of indices into `ring`, counter-
+ * clockwise. A convex ring comes back whole; a ring that will not triangulate (self-touching) too.
+ */
+export const convexPieces = (ring: readonly Vec2[]): number[][] => {
+  const n = ring.length
+  if (n < 4) return [ring.map((_, i) => i)]
+  const cross = (o: Vec2, a: Vec2, b: Vec2) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+  const convex = (idx: readonly number[]) => idx.every((v, k) => cross(ring[idx[(k + idx.length - 1) % idx.length]], ring[v], ring[idx[(k + 1) % idx.length]]) >= -1e-9)
+  const all = ring.map((_, i) => i)
+  if (convex(all)) return [all]
+  // Ear clipping.
+  const tris: number[][] = []
+  const left = [...all]
+  let guard = 0
+  while (left.length > 3 && guard++ < 10 * n) {
+    let cut = false
+    for (let k = 0; k < left.length; k++) {
+      const a = left[(k + left.length - 1) % left.length], b = left[k], c = left[(k + 1) % left.length]
+      if (cross(ring[a], ring[b], ring[c]) <= 1e-9) continue
+      const inside = left.some((v) => v !== a && v !== b && v !== c && cross(ring[a], ring[b], ring[v]) >= -1e-9 && cross(ring[b], ring[c], ring[v]) >= -1e-9 && cross(ring[c], ring[a], ring[v]) >= -1e-9)
+      if (inside) continue
+      tris.push([a, b, c])
+      left.splice(k, 1)
+      cut = true
+      break
+    }
+    if (!cut) return [all]
+  }
+  if (left.length === 3) tris.push([...left])
+  // Merge across shared diagonals while the result stays convex.
+  const pieces = tris.map((t) => [...t])
+  let merged = true
+  while (merged) {
+    merged = false
+    outer: for (let i = 0; i < pieces.length; i++) for (let j = i + 1; j < pieces.length; j++) {
+      const P = pieces[i], Q = pieces[j]
+      for (let a = 0; a < P.length; a++) {
+        const u = P[a], v = P[(a + 1) % P.length]
+        const b = Q.findIndex((w, k) => w === v && Q[(k + 1) % Q.length] === u)
+        if (b < 0) continue
+        // P runs ... u v ..., Q runs ... v u ...: join them along u-v.
+        const joined = [...P.slice(a + 1), ...P.slice(0, a + 1)] // starts at v, ends at u
+        const rest: number[] = []
+        for (let k = 2; k < Q.length; k++) rest.push(Q[(b + k) % Q.length]) // after u, before v
+        const cand = [...joined, ...rest]
+        if (convex(cand)) {
+          pieces[i] = cand
+          pieces.splice(j, 1)
+          merged = true
+          break outer
+        }
+      }
+    }
+  }
+  return pieces
+}

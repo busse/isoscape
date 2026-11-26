@@ -1,0 +1,332 @@
+{
+ "agnes-today:2026": {
+  "plate": {
+   "acres": 253.8,
+   "outbuildingsHidden": 0,
+   "shown": 413,
+   "shownUnconfirmed": 0,
+   "inWater": 48,
+   "inWaterUnconfirmed": 0
+  },
+  "hull": {
+   "depthFt": 0,
+   "groundM": 6.9,
+   "acresWet": 0.8,
+   "shown": 10,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "flats": {
+   "depthFt": 0,
+   "groundM": 8.95,
+   "acresWet": 0,
+   "shown": 16,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "tanks": {
+   "depthFt": 0,
+   "groundM": 3.75,
+   "acresWet": 0,
+   "shown": 12,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "wall": {
+   "depthFt": 0,
+   "groundM": 7.2,
+   "acresWet": 0.7,
+   "shown": 9,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "plant": {
+   "depthFt": 21.7,
+   "groundM": 4.2,
+   "acresWet": 11.2,
+   "shown": 4,
+   "shownUnconfirmed": 0,
+   "inWater": 4,
+   "inWaterUnconfirmed": 0
+  }
+ },
+ "agnes-today-nowall:2026": {
+  "plate": {
+   "acres": 527.1,
+   "outbuildingsHidden": 0,
+   "shown": 412,
+   "shownUnconfirmed": 0,
+   "inWater": 240,
+   "inWaterUnconfirmed": 0
+  },
+  "hull": {
+   "depthFt": 14.2,
+   "groundM": 6.9,
+   "acresWet": 12.4,
+   "shown": 10,
+   "shownUnconfirmed": 0,
+   "inWater": 10,
+   "inWaterUnconfirmed": 0
+  },
+  "flats": {
+   "depthFt": 7.4,
+   "groundM": 8.95,
+   "acresWet": 11.9,
+   "shown": 16,
+   "shownUnconfirmed": 0,
+   "inWater": 16,
+   "inWaterUnconfirmed": 0
+  },
+  "tanks": {
+   "depthFt": 24,
+   "groundM": 3.75,
+   "acresWet": 12.2,
+   "shown": 12,
+   "shownUnconfirmed": 0,
+   "inWater": 12,
+   "inWaterUnconfirmed": 0
+  },
+  "wall": {
+   "depthFt": 13.2,
+   "groundM": 7.2,
+   "acresWet": 10.5,
+   "shown": 9,
+   "shownUnconfirmed": 0,
+   "inWater": 9,
+   "inWaterUnconfirmed": 0
+  },
+  "plant": {
+   "depthFt": 21.7,
+   "groundM": 4.2,
+   "acresWet": 11.2,
+   "shown": 4,
+   "shownUnconfirmed": 0,
+   "inWater": 4,
+   "inWaterUnconfirmed": 0
+  }
+ },
+ "1996:2026": {
+  "plate": {
+   "acres": 158.9,
+   "outbuildingsHidden": 0,
+   "shown": 420,
+   "shownUnconfirmed": 0,
+   "inWater": 24,
+   "inWaterUnconfirmed": 0
+  },
+  "hull": {
+   "depthFt": 0,
+   "groundM": 6.9,
+   "acresWet": 0.5,
+   "shown": 10,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "flats": {
+   "depthFt": 0,
+   "groundM": 8.95,
+   "acresWet": 0,
+   "shown": 16,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "tanks": {
+   "depthFt": 0,
+   "groundM": 3.75,
+   "acresWet": 0,
+   "shown": 12,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "wall": {
+   "depthFt": 0,
+   "groundM": 7.2,
+   "acresWet": 0.7,
+   "shown": 9,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "plant": {
+   "depthFt": 8.9,
+   "groundM": 4.2,
+   "acresWet": 9.3,
+   "shown": 4,
+   "shownUnconfirmed": 0,
+   "inWater": 1,
+   "inWaterUnconfirmed": 0
+  }
+ },
+ "1996-nowall:2026": {
+  "plate": {
+   "acres": 270.6,
+   "outbuildingsHidden": 0,
+   "shown": 420,
+   "shownUnconfirmed": 0,
+   "inWater": 112,
+   "inWaterUnconfirmed": 0
+  },
+  "hull": {
+   "depthFt": 1.3,
+   "groundM": 6.9,
+   "acresWet": 9,
+   "shown": 10,
+   "shownUnconfirmed": 0,
+   "inWater": 9,
+   "inWaterUnconfirmed": 0
+  },
+  "flats": {
+   "depthFt": 0,
+   "groundM": 8.95,
+   "acresWet": 0.2,
+   "shown": 16,
+   "shownUnconfirmed": 0,
+   "inWater": 1,
+   "inWaterUnconfirmed": 0
+  },
+  "tanks": {
+   "depthFt": 11.2,
+   "groundM": 3.75,
+   "acresWet": 10.6,
+   "shown": 12,
+   "shownUnconfirmed": 0,
+   "inWater": 12,
+   "inWaterUnconfirmed": 0
+  },
+  "wall": {
+   "depthFt": 0,
+   "groundM": 7.2,
+   "acresWet": 2.7,
+   "shown": 9,
+   "shownUnconfirmed": 0,
+   "inWater": 3,
+   "inWaterUnconfirmed": 0
+  },
+  "plant": {
+   "depthFt": 8.9,
+   "groundM": 4.2,
+   "acresWet": 9.3,
+   "shown": 4,
+   "shownUnconfirmed": 0,
+   "inWater": 1,
+   "inWaterUnconfirmed": 0
+  }
+ },
+ "2020:2026": {
+  "plate": {
+   "acres": 118.6,
+   "outbuildingsHidden": 0,
+   "shown": 421,
+   "shownUnconfirmed": 0,
+   "inWater": 18,
+   "inWaterUnconfirmed": 0
+  },
+  "hull": {
+   "depthFt": 0,
+   "groundM": 6.9,
+   "acresWet": 0.3,
+   "shown": 10,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "flats": {
+   "depthFt": 0,
+   "groundM": 8.95,
+   "acresWet": 0,
+   "shown": 16,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "tanks": {
+   "depthFt": 0,
+   "groundM": 3.75,
+   "acresWet": 0,
+   "shown": 12,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "wall": {
+   "depthFt": 0,
+   "groundM": 7.2,
+   "acresWet": 0.5,
+   "shown": 9,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "plant": {
+   "depthFt": 3.2,
+   "groundM": 4.2,
+   "acresWet": 5.8,
+   "shown": 4,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  }
+ },
+ "2020-nowall:2026": {
+  "plate": {
+   "acres": 119.6,
+   "outbuildingsHidden": 0,
+   "shown": 421,
+   "shownUnconfirmed": 0,
+   "inWater": 20,
+   "inWaterUnconfirmed": 0
+  },
+  "hull": {
+   "depthFt": 0,
+   "groundM": 6.9,
+   "acresWet": 0.3,
+   "shown": 10,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "flats": {
+   "depthFt": 0,
+   "groundM": 8.95,
+   "acresWet": 0,
+   "shown": 16,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "tanks": {
+   "depthFt": 0,
+   "groundM": 3.75,
+   "acresWet": 0,
+   "shown": 12,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  },
+  "wall": {
+   "depthFt": 0,
+   "groundM": 7.2,
+   "acresWet": 1.4,
+   "shown": 9,
+   "shownUnconfirmed": 0,
+   "inWater": 2,
+   "inWaterUnconfirmed": 0
+  },
+  "plant": {
+   "depthFt": 3.2,
+   "groundM": 4.2,
+   "acresWet": 5.8,
+   "shown": 4,
+   "shownUnconfirmed": 0,
+   "inWater": 0,
+   "inWaterUnconfirmed": 0
+  }
+ }
+}

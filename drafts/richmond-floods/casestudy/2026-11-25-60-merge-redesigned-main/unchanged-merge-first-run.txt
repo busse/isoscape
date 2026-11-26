@@ -1,0 +1,13 @@
+same  richmond-downtown-time 1925  (12886056 bytes, sha256 202fa2fced008d7c)
+same  richmond-downtown-time 1950  (12819466 bytes, sha256 084c116f0f648ee7)
+same  richmond-downtown-time 1960  (12855058 bytes, sha256 c8a87b94460db00f)
+same  richmond-downtown-time 1970  (12888338 bytes, sha256 3ba1d3784635b450)
+same  richmond-downtown-time 2026  (15953051 bytes, sha256 1084d01685559cde)
+DIFF  jackson-ward 1925  [] []
+DIFF  jackson-ward 1952  [] []
+DIFF  jackson-ward 1959  [] []
+DIFF  jackson-ward 2026  [] []
+DIFF  jackson-ward 1952 --with count [] []
+DIFF  richmond-1937 1937  [] []
+DIFF  richmond-streetcars 1925  [] []
+skip  richmond-floods-d1 1972 (no such region in the base)
