@@ -55,7 +55,7 @@ test('the print build holds every section, figure and picture of each story', ()
       assert.match(doc.html, /<p class="byline">Chris Busse<\/p>/)
       assert.ok(doc.html.includes(`https://isoscape.chrisbusse.com/p/${slug}.html`))
       assert.match(doc.html, /Made from the web page with isoscape's PDF tool, drafted with Claude\./)
-      assert.doesNotMatch(doc.html, /pdf-links|hand-drawn|by hand|chrisbusse\.com|Buy a print|Shop prints/i)
+      assert.doesNotMatch(doc.html, /pdf-links|hand-drawn|by hand|(?<!isoscape\.)chrisbusse\.com|Buy a print|Shop prints/i)
       assert.doesNotMatch(doc.html, /—/, 'no em dashes')
       // no lightbox links, no explorer routes left
       assert.doesNotMatch(doc.html, /class="fig-open"|href="#\//)
