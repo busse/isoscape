@@ -1,7 +1,7 @@
 {
  "about": "The production board: one entry per design or piece of work. The scheme is README \"Stages and the board\"; edit it with `tools/release/board.py set`; `board.py check` validates it.",
  "scheme": "README.md#stages-and-the-board",
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "sources": "backfilled November 18, 2026 from catalog/plates.json, releases/ (latest record per design) and the storefront (https://chrisbusse.com/products.json: 39 products live). Orders are \"unknown\" until the store's orders.py has been run.",
  "items": {
   "broad-street-1943-01-ay-tower": {
@@ -3615,6 +3615,30 @@
    "links": [],
    "log": [
     "2026-11-25: rough draft -> outline"
+   ]
+  },
+  "studio-tool-split": {
+   "title": "Separate isoscape the open-source tool from Chris Busse's work made with it, and move heavy media to Cloudflare R2",
+   "plate": null,
+   "kind": "site",
+   "stage": "in work",
+   "status": "active",
+   "asset_version": null,
+   "published_version": null,
+   "live_version": null,
+   "on_sale": false,
+   "orders": null,
+   "rounds": 0,
+   "waiting_on": "nothing",
+   "decision": "Planned project for after the 2026 Annual (owner, 2026-11-26). Today one repository holds the tool, the studio's work (regions, history, stories, sets, catalog, board, release records, case studies, shop tooling) and, on a branch, the built site with its media. Proposed: isoscape keeps the tool only; a studio repository (private or public: deferred by the owner) holds the work and uses isoscape as a dependency; R2 holds every heavy file (site builds, print files, case-study images, source scans); Pages serves text and small images. Needs: an R2 API token on the Mac for scripted uploads; release records repointed and re-verified; the explorer session's agreement. No history rewrite without the owner's explicit say-so. First step taken 2026-11-26: the floods case-study images are kept out of git, on the Mac under ISO-TEST/isoscape-work/richmond-floods/casestudy/.",
+   "accepted_faults": [],
+   "planned_edition": null,
+   "last_inspected": null,
+   "branch": null,
+   "worktree": null,
+   "links": [],
+   "log": [
+    "2026-11-26: rough draft -> in work"
    ]
   }
  }
